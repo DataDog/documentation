@@ -5,8 +5,7 @@ title: Troubleshooting Serverless Monitoring for AWS Step Functions
 ## I cannot see any traces
 
 ### Verify that your Step Function is configured to send all logs
-
-- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true` on the Lambda function in your AWS console.
+- Ensure that the `DD_TRACE_ENABLED` tag is set to `true` on the Step Function in your AWS console.
 - In your AWS console, open your Step Function's logging tab. Ensure that _Log level_ is set to `ALL`, and that _Include execution data_ is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
@@ -29,6 +28,14 @@ Choose a name, set the index filter to `Source:stepfunction`, leave everything e
 If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
 
 **Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][6] for more information.
+
+### Verify that your Step Function is using the latest version
+- AWS may release updates to the Step Function API or introduce newer versions of the Step Function definitions. Older versions may result in unexpected log formatting or behavior.
+- It's also recommended that you are using the latest version of the Datadog Lambda Forwarder to avoid discrepancies in how logs are forwarded.
+
+### Caution when using custom log pipelines
+- Custom log pipelines can offer flexibility in processing logs, but altering the log format too much can lead to issues downstream, such as logs not being parsed or recognized.
+- Avoid making significant changes to the Step Function log structure that change the JSON format.
 
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
@@ -57,8 +64,6 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 
 
 #### Notes
-Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
-
 If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
 
 [1]: https://app.datadoghq.com/logs

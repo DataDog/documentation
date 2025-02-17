@@ -44,6 +44,8 @@ title: ウィジェット
         img="dashboards/widgets/icons/timeseries_light_large.png">}} 時系列{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list"
         img="dashboards/widgets/icons/top-list_light_large.png">}} トップリスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/wildcard"
+img="/dashboards/widgets/icons/wildcard_light_large.svg">}} ワイルドカード{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### グループ

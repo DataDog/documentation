@@ -126,27 +126,13 @@ The following configuration variables are available for both automatic and custo
 
 #### Traces
 
-`DD_TRACE_AGENT_URL`
-: **TracerSettings property**: `Exporter.AgentUri`<br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
-It can contain a Unix Domain Socket (UDS) path by prefixing the path with `unix://`. <br>
-Note that UDS is only supported on .NET Core 3.1 and above.<br>
-**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
-
-`DD_AGENT_HOST`
-: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
-**Default**: `localhost`
-
-`DD_TRACE_AGENT_PORT`
-: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
-**Default**: `8126`
-
 `DD_TRACE_SAMPLE_RATE`
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][11].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
+For more information, see [Ingestion Mechanisms][11].<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Software Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
@@ -167,9 +153,12 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][1].<br>
 **Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
-`DD_TRACE_DEBUG`
-: Enables or disables debug logging. Valid values are `true` or `false`.<br>
-**Default**: `false`
+`DD_TAGS`
+: **TracerSettings property**: `GlobalTags`<br>
+If specified, adds all of the specified tags to all generated spans. <br>
+**Example**: `layer:api, team:intake, key:value` <br>
+**Note**: The delimiter is a comma and a space: `, `. <br>
+Added in version 1.17.0. <br>
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
@@ -181,7 +170,7 @@ If the **Request** has a header `User-ID`, its value is applied as tag `http.req
 If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
 Added in version 1.18.3.<br>
 Response header support and entries without tag names added in version 1.26.0.<br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Software Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -193,15 +182,6 @@ Added in version `2.19.0`.<br>
 Added in version `2.19.0`.<br>
 **Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, the first from the list to parse correctly will be used.<br>
 
-`DD_TAGS`
-: **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake, key:value` <br>
-**Note**: The delimiter is a comma and a space: `, `. <br>
-Added in version 1.17.0. <br>
-
-#### Agent
-
 `DD_TRACE_SERVICE_MAPPING`
 : Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
@@ -212,17 +192,62 @@ The `from-key` value is specific to the integration type, and should exclude the
 **Default**: `true`
 
 `DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
-: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, the max size of the querystring to report is set, before obfuscation. Set 0 for no limit in size<br>
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, sets the max size of the querystring to report, before obfuscation. Set 0 for no limit in size<br>
 **Default**: `5000`
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 
+#### Agent
+
+`DD_TRACE_AGENT_URL`
+: **TracerSettings property**: `Exporter.AgentUri`<br>
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
+It can contain a Unix Domain Socket (UDS) path by prefixing the path with `unix://`. <br>
+Note that UDS is only supported on .NET Core 3.1 and above.<br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, `unix:///var/run/datadog/apm.socket` if the file exists, or `http://localhost:8126`.
+
+`DD_AGENT_HOST`
+: Sets the host where the Agent is listening for connections. Can be a hostname or an IP address. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. <br>
+**Default**: `localhost`
+
+`DD_TRACE_AGENT_PORT`
+: Sets the TCP port where the Agent is listening for connections. Use `DD_TRACE_AGENT_URL`, which has precedence over this parameter. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.<br>
+**Default**: `8126`
+
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+#### Trace context propagation
+
+For information about valid values and using the following configuration options, see [Trace Context Propagation][21].
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Default**: `datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configuration settings take priority when present.<br>
+Available since version `2.20.0`
+
+`DD_TRACE_PROPAGATION_EXTRACT_FIRST`
+: **Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.<br>
+Available since version `2.42.0`
+
 #### Diagnostic logs
+
+`DD_TRACE_DEBUG`
+: Enables or disables debug logging. Valid values are `true` or `false`.<br>
+**Default**: `false`
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
@@ -252,7 +277,6 @@ The following configuration variables are available **only** when using automati
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all instrumentation. Valid values are: `true` or `false`.<br>
 **Default**: `true`
-**Note**: Setting the environment variable to `false` completely disables the client library, and it cannot be enabled through other configuration methods. If it is set to `false` through another configuration method (not an environment variable), the client library is still loaded, but traces will not be generated.
 
 `DD_TRACE_EXPAND_ROUTE_TEMPLATES_ENABLED`
 : Expands all route parameters in the application for ASP.NET/ASP.NET Core (except ID parameters)<br>
@@ -302,7 +326,7 @@ Added in version 1.23.0.
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
+Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Software Catalog][17] UI.
 
 ### Automatic instrumentation integration configuration
 
@@ -357,3 +381,4 @@ The following configuration variables are for features that are available for us
 [18]: /tracing/trace_collection/otel_instrumentation/dotnet/
 [19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations
 [20]: /opentelemetry/interoperability/environment_variable_support
+[21]: /tracing/trace_collection/trace_context_propagation/

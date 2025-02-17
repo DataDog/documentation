@@ -49,6 +49,8 @@ Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] an
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
 
+**Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the `Edit` button for a metric in Metrics Summary.
+
 ### Configure multiple metrics at a time
 
 Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
@@ -87,8 +89,6 @@ Learn more about [Custom Metrics Billing][8].
 2. Configure your unqueried metrics with empty tag configurations.
 
    As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
-
-   Ask your Customer Success Manager for an unqueried metrics report.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 

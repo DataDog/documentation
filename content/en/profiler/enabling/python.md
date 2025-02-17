@@ -39,13 +39,13 @@ The installation requires pip version 18 or above.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
 
-| Feature                  | Required `dd-trace-py` version |
-|--------------------------|--------------------------------|
-| [Code Hotspots][12]      | 0.44.0+                        |
-| [Endpoint Profiling][13] | 0.54.0+                        |
-| [Timeline][15]           | 2.12.0+, 2.11.4+, or 2.10.7+   |
+| Feature                              | Required `dd-trace-py` version |
+|--------------------------------------|--------------------------------|
+| [Trace to Profiling integration][12] | 2.12.0+, 2.11.4+, or 2.10.7+ |
+| [Endpoint Profiling][13]             | 0.54.0+                        |
+| [Timeline][15]                       | 2.12.0+, 2.11.4+, or 2.10.7+   |
 
-Continuous Profiler is in beta support for some serverless platforms, such as [AWS Lambda][16].
+Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][16].
 
 ## Installation
 
@@ -123,6 +123,28 @@ The Python profiler supports code provenance reporting, which provides
 insight into the library that is running the code. While this is
 disabled by default, you can turn it on by setting
 `DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
+
+
+### Stack V2
+
+Stack V2 is the new stack sampler implementation for CPython 3.8+ on x86_64 Linux.
+It enhances the performance, accuracy, and reliability of Python CPU profiling.
+The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
+using the most recent release of the library to benefit from latest improvements
+and bug fixes. This feature activates our new stack sampling, collection and
+export system.
+
+The following are known issues and missing features from Stack V2:
+
+- `gunicorn` and Stack V2 results in performance degradation of services
+- `gevent` support is lacking
+- Exception sampling is missing
+
+If you find these as a blocker for enabling Stack V2 for your services, you can
+turn it off via setting `DD_PROFILING_STACK_V2_ENABLED=0`. If you find any other
+issue, then please proceed to escalate using appropriate support channels or
+file an issue on the [GitHub repository](https://github.com/DataDog/dd-trace-py).
+
 
 ## Not sure what to do next?
 

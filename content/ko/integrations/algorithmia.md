@@ -18,7 +18,7 @@ assets:
     source_type_id: 10128
     source_type_name: Algorithmia
   monitors:
-    Algorithmia: assets/monitors/algorithm_duration.json
+    Algorithm is taking too long to execute: assets/monitors/algorithm_duration.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Algorithmia
@@ -27,6 +27,7 @@ author:
 categories:
 - 메트릭
 - ai/ml
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: algorithmia
 public_title: Algorithmia
@@ -49,6 +49,7 @@ tile:
   - Category::Metrics
   - Category::AI/ML
   - Supported OS::Linux
+  - 제공::통합
   configuration: README.md#Setup
   description: 프로덕션에서 기계 학습 메트릭 모니터링
   media: []
@@ -113,13 +114,13 @@ Algorithmia Insights는 Algorithmia Enterprise 기능으로, 기계 학습 모�
  메트릭에
  접두사 `algorithmia.`를 추가합니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "algorithmia" >}}
 
 
-### 서비스 검사
+### 서비스 점검
 
 Algorithmia 점검에는 서비스 점검이 포함되지 않습니다.
 

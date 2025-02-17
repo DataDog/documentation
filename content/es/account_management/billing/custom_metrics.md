@@ -4,14 +4,23 @@ algolia:
   - facturación de métricas personalizadas
 aliases:
 - /es/integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+- link: /metrics/custom_metrics/
+  tag: Documentación
+  text: Más información sobre métricas personalizadas
+- link: /metrics/guide/custom_metrics_governance/
+  tag: Guía
+  text: Prácticas recomendadas para la gestión de métricas personalizadas
 title: Facturación de métricas personalizadas
 ---
 
-Si una métrica no se envía desde una de las [más de {{< translate key="integration_count" >}} integraciones de Datadog][1], se considera una [métrica personalizada][2]<sup>[(1)](#standard-integrations)</sup>.
+## Información general
 
-**Una métrica personalizada se identifica de manera exclusiva mediante un nombre de métrica y valores de etiqueta (incluido la etiqueta de host)**. En términos generales, cualquier métrica que envías mediante [DogStatsD][3] o un [check personalizado del Agent][4] es una métrica personalizada.
+Si una métrica no se envía desde una de las [más de {{< translate key="integration_count" >}} integraciones de Datadog][1], se la considera una [métrica personalizada][2]. Ciertas integraciones estándar también pueden potencialmente emitir métricas personalizadas. Para obtener más información, consulta [Métricas personalizadas e integraciones estándar][14].
 
-El conteo facturable mensual de las métricas personalizadas (que se indica en la página de uso) se calcula en función del total de métricas personalizadas diferentes para cada hora de un mes concreto, que se divide entre el número de horas de ese mes para sacar el promedio.
+**Una métrica personalizada se identifica de manera exclusiva mediante un nombre de métrica y valores de etiqueta (tag) (incluido la etiqueta de host)**. En términos generales, cualquier métrica que envías mediante [DogStatsD][3] o un [check personalizado del Agent][4] es una métrica personalizada.
+
+Tu uso mensual facturable de métricas personalizadas (reflejado en la página Uso) se calcula tomando el total de todas las distintas métricas personalizadas (también conocidas como series de tiempo) por cada hora de un mes determinado y dividiéndolo por el número de horas del mes, para calcular un valor medio mensual. Tu uso facturable no se ve afectado por la frecuencia de envío de puntos de datos, ni por el número de consultas que ejecutas en tus métricas.
 
 Los usuarios de Metrics without LimitsTM ven volúmenes facturables mensuales para las métricas personalizadas _ingeridas_ e _indexadas_ en su página de uso. Más información sobre las métricas personalizadas ingeridas e indexadas y [Metrics without LimitsTM][5]. 
 
@@ -51,7 +60,7 @@ Añadir etiquetas **puede no** aumentar la cantidad de métricas personalizadas,
 | `temperature` | `country:USA`, `region: Northeast` |
 | `temperature` | `country:USA`, `region: Southeast` |
 
-Supongamos que quisieras añadir la etiqueta `city`, que tiene tres valores: `NYC`, `Miami` y `Orlando`. Añadir esta etiqueta aumenta la cantidad de métricas personalizadas porque aporta más detalle y granularidad a tu conjunto de datos como se indica a continuación:
+Supongamos que quieres añadir la etiqueta `city`, que tiene tres valores: `NYC`, `Miami` y `Orlando`. Añadir esta etiqueta aumenta la cantidad de métricas personalizadas porque aporta más detalle y granularidad a tu conjunto de datos como se indica a continuación:
 
 | Nombre de la métrica   | Valores de etiqueta                                          |
 |---------------|-----------------------------------------------------|
@@ -168,7 +177,7 @@ Configurar etiquetas y agregaciones con [Metrics without LimitsTM][4] puede infl
 **Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no se ha configurado con Metrics without LimitsTM, solo se te factura por su volumen de métricas personalizadas indexadas.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas frente a las indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without LimitsTM para configurar las métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función de la cantidad promedio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -250,7 +259,7 @@ Configurar etiquetas y agregaciones con [Metrics without LimitsTM][2] puede infl
 **Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no se ha configurado con Metrics without LimitsTM, solo se te factura por su volumen de métricas personalizadas indexadas.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas frente a las indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without LimitsTM para configurar las métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función de la cantidad promedio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -300,20 +309,9 @@ Estas asignaciones se calculan para el conjunto completo de tu infraestructura. 
 
 La cantidad facturable de métricas personalizadas indexadas se basa en la cantidad promedio de métricas personalizadas (de todos los hosts de pago) por hora durante un mes determinado. La cantidad facturable de métricas personalizadas ingeridas solo aumenta si has utilizado Metrics without LimitsTM para configurar tu métrica. Ponte en contacto con [Ventas][11] o con tu [asesor de clientes][12] para hablar sobre las métricas personalizadas de tu cuenta o comprar un paquete de métricas adicional.
 
-## Integraciones estándar
-
-Las siguientes integraciones estándar podrían generar métricas personalizadas.
-
-| Tipo de integraciones                           | Integraciones                                                                       |
-|------------------------------------------------|------------------------------------------------------------------------------------|
-| Límite predeterminado de 350 métricas personalizadas.      | [ActiveMQ XML][13] / [Go-Expvar][14] / [Java-JMX][15]                              |
-| Sin límite predeterminado para la recopilación de métricas personalizadas. | [Nagios][16] /[Check de PDH][17] /[OpenMetrics][18] /[Contadores de rendimiento de Windows][19] /[WMI][20] /[Prometheus][21] |
-| Se puede configurar para recopilar métricas personalizadas.   | [MySQL][22] /[Oracle][23] /[Postgres][24] /[SQL Server][25]                        |
-| Las métricas personalizadas se envían desde integraciones en la nube.    | [AWS][26]                                                                          |
-
 ## Solucionar problemas
 
-Si tienes alguna pregunta técnica, ponte en contacto con el [equipo de asistencia de Datadog][27].
+Si tienes preguntas técnicas, ponte en contacto con el [servicio de asistencia de Datadog][13].
 
 Si tienes alguna pregunta sobre la facturación, ponte en contacto con tu [asesor de clientes][12].
 
@@ -329,18 +327,5 @@ Si tienes alguna pregunta sobre la facturación, ponte en contacto con tu [aseso
 [10]: https://app.datadoghq.com/metric/summary
 [11]: mailto:sales@datadoghq.com
 [12]: mailto:success@datadoghq.com
-[13]: /es/integrations/activemq/#activemq-xml-integration
-[14]: /es/integrations/go_expvar/
-[15]: /es/integrations/java/
-[16]: /es/integrations/nagios/
-[17]: /es/integrations/pdh_check/
-[18]: /es/integrations/openmetrics/
-[19]: /es/integrations/windows_performance_counters/
-[20]: /es/integrations/wmi_check/
-[21]: /es/integrations/prometheus
-[22]: /es/integrations/mysql/
-[23]: /es/integrations/oracle/
-[24]: /es/integrations/postgres/
-[25]: /es/integrations/sqlserver/
-[26]: /es/integrations/amazon_web_services/
-[27]: /es/help/
+[13]: /es/help/
+[14]: /es/metrics/custom_metrics/#standard-integrations

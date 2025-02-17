@@ -17,16 +17,30 @@ Use Observability Pipelines to route ingested logs to a cloud storage solution (
 
 Select a source to get started:
 
+<!-- - [Amazon Data Firehose][12] -->
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
-- [HTTP Client][3]
-- [Splunk HTTP Event Collector (HEC)][4]
-- [Splunk Heavy and Universal Forwarders (TCP)][5]
-- [Sumo Logic Hosted Collector][6]
+- [Google Pub/Sub][3]
+- [HTTP Client][4]
+- [HTTP Server][5]
+- [Kafka][13]
+- [Logstash][6]
+- [Splunk HTTP Event Collector (HEC)][7]
+- [Splunk Heavy or Universal Forwarders (TCP)][8]
+- [Sumo Logic Hosted Collector][9]
+- [rsylsog or syslog-ng][10]
 
 [1]: /observability_pipelines/archive_logs/datadog_agent
 [2]: /observability_pipelines/archive_logs/fluent
-[3]: /observability_pipelines/archive_logs/http_client
-[4]: /observability_pipelines/archive_logs/splunk_hec
-[5]: /observability_pipelines/archive_logs/splunk_tcp
-[6]: /observability_pipelines/archive_logs/sumo_logic_hosted_collector
+[3]: /observability_pipelines/set_up_pipelines/archive_logs/google_pubsub
+[4]: /observability_pipelines/archive_logs/http_client
+[5]: /observability_pipelines/set_up_pipelines/archive_logs/http_server
+[6]: /observability_pipelines/set_up_pipelines/archive_logs/logstash
+[7]: /observability_pipelines/archive_logs/splunk_hec
+[8]: /observability_pipelines/archive_logs/splunk_tcp
+[9]: /observability_pipelines/archive_logs/sumo_logic_hosted_collector
+[10]: /observability_pipelines/archive_logs/syslog
+[11]: /observability_pipelines/set_up_pipelines/archive_logs/amazon_s3
+[12]: /observability_pipelines/set_up_pipelines/archive_logs/amazon_data_firehose
+[13]: /observability_pipelines/set_up_pipelines/archive_logs/kafka

@@ -1,5 +1,5 @@
 ---
-title: Node.js Custom Instrumentation using Datadog API
+title: Node.js Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/nodejs
     - /tracing/manual_instrumentation/nodejs

@@ -23,16 +23,16 @@ assets:
     source_type_id: 10258
     source_type_name: FoundationDB
   monitors:
-    FoundationDB Errors Logged: assets/monitors/errors_logged.json
-    FoundationDB High Durability Lag: assets/monitors/high_durability_lag.json
-    FoundationDB High Level Of Conflicted Transactions: assets/monitors/conflicts.json
-    FoundationDB High Level Of Rejected Transactions: assets/monitors/rejections.json
-    FoundationDB Log Queue Reaching Spill Threshold: assets/monitors/log_queue_spill.json
-    FoundationDB Low Disk Space: assets/monitors/low_disk_space.json
-    FoundationDB Read Latency Probe: assets/monitors/read_latency_probe.json
+    Disk space is low: assets/monitors/low_disk_space.json
     FoundationDB Status Check: assets/monitors/service_check.json
-    FoundationDB Transaction Commit Latency Probe: assets/monitors/transaction_commit_latency.json
-    FoundationDB Transaction Start Latency Probe: assets/monitors/transaction_start_latency.json
+    High durability lag is detected: assets/monitors/high_durability_lag.json
+    High severity errors logs are found: assets/monitors/errors_logged.json
+    Log queue is approaching the limit: assets/monitors/log_queue_spill.json
+    Read operation took a long time: assets/monitors/read_latency_probe.json
+    Transaction commit latency is high: assets/monitors/transaction_commit_latency.json
+    Transaction start latency is high: assets/monitors/transaction_start_latency.json
+    Transactions are conflicting: assets/monitors/conflicts.json
+    Transactions are rejected: assets/monitors/rejections.json
   saved_views:
     all: assets/saved_views/all.json
     errors: assets/saved_views/errors.json
@@ -45,7 +45,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md
 display_on_public_website: true
@@ -53,7 +53,7 @@ draft: false
 git_integration_title: foundationdb
 integration_id: foundationdb
 integration_title: FoundationDB
-integration_version: 1.4.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: foundationdb

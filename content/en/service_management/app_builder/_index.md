@@ -2,7 +2,7 @@
 title: App Builder
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/actions_catalog/"
+- link: "/actions/actions_catalog/"
   tag: "Documentation"
   text: "Actions Catalog"
 - link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate apps built using Datadog App Builder"
+- link: "https://www.datadoghq.com/blog/ai-assistant-workflows-apps/"
+  tag: "Blog"
+  text: "Build Datadog workflows and apps in minutes with our AI assistant"
 ---
 
 {{< site-region region="gov" >}}
@@ -19,13 +22,13 @@ further_reading:
 
 Datadog App Builder is a low-code application building platform. It streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder integrates with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context that enables you to take preventive actions or respond to ongoing incidents, all from within the same view that you use for troubleshooting.
 
-{{< img src="/service_management/app_builder/app-builder.png" alt="An app in App Builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-app.png" alt="An app in App Builder" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
 Datadog App Builder provides an [Action Catalog][1] of hundreds of actions across multiple integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, you can use generic actions such as the HTTP requests and JavaScript functions to perform any task that your app requires.
 
-{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-action-catalog.png" alt="Datadog App Builder provides an Action Catalog of hundreds of actions across multiple integrations." style="width:100%;" >}}
 
 ## Start with blueprints
 
@@ -39,7 +42,7 @@ Below are a few examples of what App Builder apps can do:
 - Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
-{{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="App blueprints" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-blueprints-2.png" alt="App blueprints" style="width:100%;" >}}
 
 ## Take action directly from dashboards
 
@@ -59,6 +62,12 @@ To use the app with your data, click **+ Connect Data**, then either create a ne
 
 You can change the selected connection by clicking **Change Connection** in the app.
 
+## App Builder Overview dashboard
+
+The App Builder Overview dashboard provides a high-level overview of your Datadog apps. To find the dashboard, go to your [Dashboard list][8] and search for `App Builder Overview`.
+
+{{< img src="service_management/app_builder/app-builder-overview-dashboard.png" alt="The App Builder Overview dashboard" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -72,3 +81,4 @@ You can change the selected connection by clicking **Change Connection** in the 
 [5]: /service_management/app_builder/build/#build-an-app-from-a-blueprint
 [6]: /service_management/app_builder/embedded_apps/#add-apps-to-your-dashboard
 [7]: https://app.datadoghq.com/dash/integration/60
+[8]: https://app.datadoghq.com/dashboard/lists

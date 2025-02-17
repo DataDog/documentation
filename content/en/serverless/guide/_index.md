@@ -21,7 +21,8 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service and Container Apps" >}}
-    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumenting Linux containers on Azure App Service using Azure Sidecar{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_containers_serverless_init" >}}Instrument Azure App Service with serverless-init - Linux Containers{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/aca_serverless_init" >}}Instrument Azure Container Apps with serverless-init{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Install using the Datadog Forwarder

@@ -33,7 +33,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
   <tr>
     <td>from 22 and upward</td>
     <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
-    <td><a href="#levels-of-support">Beta</a></td>
+    <td><a href="#levels-of-support">Preview</a></td>
   </tr>
   <tr>
     <td>from 18 to 21</td>
@@ -47,7 +47,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK,
   </tr>
   <tr>
     <td>Linux (arm64)<br>Mac (arm64)</td>
-    <td><a href="#levels-of-support">Beta</a></td>
+    <td><a href="#levels-of-support">Preview</a></td>
   </tr>
 </table>
 
@@ -65,14 +65,14 @@ Datadog does not officially support any early-access versions of Java.
 | **Level**                                              | **Support provided**                                                                                                                                |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
 | <span id="support-unsupported">Unsupported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                              |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features and bug and security fixes are provided on a best-effort basis. |
+| <span id="support-beta">Preview</span>                 |  Initial implementation. May not yet contain all features. Support for new features and bug and security fixes are provided on a best-effort basis. |
 | <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features and bug and security fixes.                                                     |
 | <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                  |
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                        |
 
 ## Integrations
 
-Beta integrations are disabled by default but can be enabled individually:
+Integrations in Preview are disabled by default but can be enabled individually:
 
 - System Property: `-Ddd.integration.<INTEGRATION_NAME>.enabled=true`
 - Environment Variable: `DD_INTEGRATION_<INTEGRATION_NAME>_ENABLED=true`
@@ -88,28 +88,28 @@ Beta integrations are disabled by default but can be enabled individually:
 - error and stacktrace capturing
 - linking work created within a web request and Distributed Tracing
 
-| Server                  | Versions   | Support Type                                        | Instrumentation Names (used for configuration)           |
-|-------------------------|------------|-----------------------------------------------------|----------------------------------------------------------|
-| Akka-Http Server        | 10.0+      | Fully Supported                                     | `akka-http`, `akka-http-server`                          |
-| Finatra Web             | 2.9+       | Fully Supported                                     | `finatra`                                                |
-| Grizzly                 | 2.0+       | Fully Supported                                     | `grizzly`                                                |
-| Grizzly-HTTP            | 2.3.20+    | Fully Supported                                     | `grizzly-filterchain`                                    |
-| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported                                     | `servlet`, `servlet-2`, `servlet-3`                      |
-| Jax-RS Annotations      | JSR311-API | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-12.x   | Fully Supported                                     | `jetty`                                                  |
-| Micronaut HTTP Server   | 2.x        | Fully Supported                                     | `micronaut`                                              |
-| Mulesoft                | 4          | Fully Supported                                     | `mule`                                                   |
-| Netty HTTP Server       | 3.8+       | Fully Supported                                     | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
-| Play                    | 2.3-2.8    | Fully Supported                                     | `play`, `play-action`                                    |
-| Ratpack                 | 1.5+       | Fully Supported                                     | `ratpack`                                                |
-| Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                     | `restlet-http`.                                          |
-| Spark Java              | 2.3+       | [Beta](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5+       | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
-| Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
-| Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
-| Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |
-| Undertow                | 2.0+       | Fully Supported                                     | `undertow`                                               |
-| Vert.x                  | 3.4+       | Fully Supported                                     | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
+| Server                  | Versions   | Support Type                                           | Instrumentation Names (used for configuration)           |
+|-------------------------|------------|--------------------------------------------------------|----------------------------------------------------------|
+| Akka-Http Server        | 10.0+      | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
+| Finatra Web             | 2.9+       | Fully Supported                                        | `finatra`                                                |
+| Grizzly                 | 2.0+       | Fully Supported                                        | `grizzly`                                                |
+| Grizzly-HTTP            | 2.3.20+    | Fully Supported                                        | `grizzly-filterchain`                                    |
+| Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported                                        | `servlet`, `servlet-2`, `servlet-3`                      |
+| Jax-RS Annotations      | JSR311-API | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
+| Jetty                   | 7.0-12.x   | Fully Supported                                        | `jetty`                                                  |
+| Micronaut HTTP Server   | 2.x        | Fully Supported                                        | `micronaut`                                              |
+| Mulesoft                | 4.5.0+     | Fully Supported                                        | `mule`                                                   |
+| Netty HTTP Server       | 3.8+       | Fully Supported                                        | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1`           |
+| Play                    | 2.3-2.8    | Fully Supported                                        | `play`, `play-action`                                    |
+| Ratpack                 | 1.5+       | Fully Supported                                        | `ratpack`                                                |
+| Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                        | `restlet-http`.                                          |
+| Spark Java              | 2.3+       | [Preview](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
+| Spring Boot             | 1.5+       | Fully Supported                                        | `spring-web` or `spring-webflux`                         |
+| Spring Web (MVC)        | 4.0+       | Fully Supported                                        | `spring-web`                                             |
+| Spring WebFlux          | 5.0+       | Fully Supported                                        | `spring-webflux`                                         |
+| Tomcat                  | 5.5+       | Fully Supported                                        | `tomcat`                                                 |
+| Undertow                | 2.0+       | Fully Supported                                        | `undertow`                                               |
+| Vert.x                  | 3.4+       | Fully Supported                                        | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -118,16 +118,22 @@ Also, frameworks like Spring Boot (version 3) inherently work because they usual
 
 The following instrumentations are disabled by default and can be enabled with the following settings:
 
-| Instrumentation     | To Enable 									                                                                                                              |
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                                                    |
-| Mulesoft                     | `-Ddd.integration.mule.enabled=true`, `-Ddd.integration.grizzly-client.enabled=true`, `-Ddd.integration.grizzly-filterchain.enabled=true` |
-| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                                                            |
-| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
-| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                                                      |
-| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
-| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                          |
-| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                                                     |
+| Instrumentation              | To Enable 									                                                                              |
+|------------------------------|----------------------------------------------------------------------------------------------------------|
+| Grizzly                      | `-Ddd.integration.grizzly-client.enabled=true`                                                           |
+| Grizzly-HTTP                 | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                      |
+| Hazelcast (client side only) | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`         |
+| Ignite                       | `-Ddd.integration.ignite.enabled=true`                                                                   |
+| JAX-WS                       | `-Ddd.integration.jax-ws.enabled=true`                                                                   |
+| JDBC Datasource              | `-Ddd.integration.jdbc-datasource.enabled=true`                                                          |
+| Kotlin Coroutines            | `-Ddd.integration.kotlin_coroutine.experimental.enabled=true`                                            |
+| Mulesoft                     | `-Ddd.integration.mule.enabled=true`                                                                     |
+| Netty Promise                | `-Ddd.integration.netty-promise.enabled=true`                                                            |
+| Ning                         | `-Ddd.integration.ning.enabled=true`                                                                     |
+| Spark Java                   | `-Ddd.integration.sparkjava.enabled=true`                                                                |
+| TIBCO BusinessWorks          | `-Ddd.integration.tibco.enabled=true`                                                                    |
+| URL Connection               | `-Ddd.integration.urlconnection.enabled=true` </br> `-Ddd.integration.httpurlconnection.enabled=true`    |
+| ZIO                          | `-Ddd.integration.zio.experimental.enabled=true`                                                         |
 
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
@@ -145,31 +151,31 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 - error and stacktrace capturing
 - distributed tracing
 
-| Framework                          | Versions    | Support Type                                        | Instrumentation Names (used for configuration)          |
-|------------------------------------|-------------|-----------------------------------------------------|---------------------------------------------------------|
-| Apache HTTP Client                 | 4.0+        | Fully Supported                                     | `httpclient`, `apache-httpclient`, `apache-http-client` |
-| Apache HTTP Async Client           | 4.0+        | Fully Supported                                     | `httpasyncclient`, `apache-httpasyncclient`             |
-| AWS Java SDK                       | 1.11+, 2.2+ | Fully Supported                                     | `aws-sdk`                                               |
-| Camel-OpenTelemetry                | 3.12.0+     | Beta                                                | [opentelemetry-1][5]                                    |
-| Commons HTTP Client                | 2.0+        | Fully Supported                                     | `commons-http-client`                                   |
-| Google HTTP Client                 | 1.19.0+     | Fully Supported                                     | `google-http-client`                                    |
-| Google Pub/Sub                     | 1.116.0+    | Fully Supported                                     | `google-pubsub`                                         |
-| Grizzly HTTP Client                | 1.9+        | [Beta](#framework-integrations-disabled-by-default) | `grizzly-client`                                        |
-| gRPC                               | 1.5+        | Fully Supported                                     | `grpc`, `grpc-client`, `grpc-server`                    |
-| HttpURLConnection                  | all         | Fully Supported                                     | `httpurlconnection`, `urlconnection`                    |
-| Kafka-Clients                      | 0.11+       | Fully Supported                                     | `kafka`                                                 |
-| Kafka-Streams                      | 0.11+       | Fully Supported                                     | `kafka`, `kafka-streams`                                |
-| Java RMI                           | all         | Distributed Tracing Not Supported                   | `rmi`, `rmi-client`, `rmi-server`                       |
-| Jax RS Clients                     | 2.0+        | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
-| Jersey Client                      | 1.9-2.29    | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
-| JMS / Jakarta JMS                  | 1-3.0+      | Fully Supported                                     | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
-| Netty HTTP Client                  | 4.0+        | Fully Supported                                     | `netty`, `netty-4.0`, `netty-4.1`                       |
-| Ning HTTP Client                   | 1.9.0+      | [Beta](#framework-integrations-disabled-by-default) | `ning`                                                  |
-| OkHTTP                             | 2.2+        | Fully Supported                                     | `okhttp`, `okhttp-2`,`okhttp-3`                         |
-| Play WSClient                      | 1.0+        | Fully Supported                                     | `play-ws`                                               |
-| Rabbit AMQP                        | 2.7+        | Fully Supported                                     | `amqp`, `rabbitmq`                                      |
-| Spring SessionAwareMessageListener | 3.1+        | Fully Supported                                     | `spring-jms-3.1`                                        |
-| Spring WebClient                   | 5.0+        | Fully Supported                                     | `spring-webflux`, `spring-webflux-client`               |
+| Framework                          | Versions    | Support Type                                           | Instrumentation Names (used for configuration)          |
+|------------------------------------|-------------|--------------------------------------------------------|---------------------------------------------------------|
+| Apache HTTP Client                 | 4.0+        | Fully Supported                                        | `httpclient`, `apache-httpclient`, `apache-http-client` |
+| Apache HTTP Async Client           | 4.0+        | Fully Supported                                        | `httpasyncclient`, `apache-httpasyncclient`             |
+| AWS Java SDK                       | 1.11+, 2.2+ | Fully Supported                                        | `aws-sdk`                                               |
+| Camel-OpenTelemetry                | 3.12.0+     | Preview                                                | [opentelemetry-1][5]                                    |
+| Commons HTTP Client                | 2.0+        | Fully Supported                                        | `commons-http-client`                                   |
+| Google HTTP Client                 | 1.19.0+     | Fully Supported                                        | `google-http-client`                                    |
+| Google Pub/Sub                     | 1.116.0+    | Fully Supported                                        | `google-pubsub`                                         |
+| Grizzly HTTP Client                | 1.9+        | [Preview](#framework-integrations-disabled-by-default) | `grizzly-client`                                        |
+| gRPC                               | 1.5+        | Fully Supported                                        | `grpc`, `grpc-client`, `grpc-server`                    |
+| HttpURLConnection                  | all         | Fully Supported                                        | `httpurlconnection`, `urlconnection`                    |
+| Kafka-Clients                      | 0.11+       | Fully Supported                                        | `kafka`                                                 |
+| Kafka-Streams                      | 0.11+       | Fully Supported                                        | `kafka`, `kafka-streams`                                |
+| Java RMI                           | all         | Distributed Tracing Not Supported                      | `rmi`, `rmi-client`, `rmi-server`                       |
+| Jax RS Clients                     | 2.0+        | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
+| Jersey Client                      | 1.9-2.29    | Fully Supported                                        | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
+| JMS / Jakarta JMS                  | 1-3.0+      | Fully Supported                                        | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
+| Netty HTTP Client                  | 4.0+        | Fully Supported                                        | `netty`, `netty-4.0`, `netty-4.1`                       |
+| Ning HTTP Client                   | 1.9.0+      | [Preview](#framework-integrations-disabled-by-default) | `ning`                                                  |
+| OkHTTP                             | 2.2+        | Fully Supported                                        | `okhttp`, `okhttp-2`,`okhttp-3`                         |
+| Play WSClient                      | 1.0+        | Fully Supported                                        | `play-ws`                                               |
+| Rabbit AMQP                        | 2.7+        | Fully Supported                                        | `amqp`, `rabbitmq`                                      |
+| Spring SessionAwareMessageListener | 3.1+        | Fully Supported                                        | `spring-jms-3.1`                                        |
+| Spring WebClient                   | 5.0+        | Fully Supported                                        | `spring-webflux`, `spring-webflux-client`               |
 
 **Kafka Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
@@ -196,6 +202,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Cassandra               | 3.0+     | Fully Supported | `cassandra`                                                                                |
 | Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6,7}` (pick one) |
 | Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-{5,6,7}` (pick one)             |
+| Ignite                  | 2.0-3.0  | [Preview](#framework-integrations-disabled-by-default) | `ignite`                                            |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                  |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                           |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
@@ -237,24 +244,24 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
-| Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
-|-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
-| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                                    | `cxf`                                          |
-| Datanucleus JDO     | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
-| Dropwizard Views    | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
-| GraphQL             | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
-| Hazelcast (client)  | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
-| Hibernate           | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
-| Hystrix             | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
-| JSP Rendering       | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit               | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
-| Project Reactor     | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
-| Quartz              | 2.x        | Fully Supported                                                  | `quartz`                                       |
-| RxJava              | 2.x        | Fully Supported                                                  | `rxjava`                                       |
-| Spring Data         | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
-| Spring Scheduling   | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
-| TIBCO BusinessWorks | 5.14.0+    | [Beta](#framework-integrations-disabled-by-default)              | `tibco`, `tibco_bw`                            |
-| Twilio SDK          | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
+| Framework           | Versions   | Support Type                                           | Instrumentation Names (used for configuration) |
+|---------------------|------------|--------------------------------------------------------|------------------------------------------------|
+| Apache CXF (Jax-WS) | 3.0+       | [OpenTelemetry Extension][10]                          | `cxf`                                          |
+| Datanucleus JDO     | 4.0+       | Fully Supported                                        | `datanucleus`                                  |
+| Dropwizard Views    | 0.7+       | Fully Supported                                        | `dropwizard`, `dropwizard-view`                |
+| GraphQL             | 14.0+      | Fully Supported                                        | `graphql-java`                                 |
+| Hazelcast (client)  | 3.6+       | [Preview](#framework-integrations-disabled-by-default) | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate           | 3.5+       | Fully Supported                                        | `hibernate`, `hibernate-core`                  |
+| Hystrix             | 1.4+       | Fully Supported                                        | `hystrix`                                      |
+| JSP Rendering       | 2.3+       | Fully Supported                                        | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit               | 4.1+, 5.3+ | Fully Supported                                        | `junit`, `junit-4`, `junit-5`                  |
+| Project Reactor     | 3.1+       | Fully Supported                                        | `reactor-core`                                 |
+| Quartz              | 2.x        | Fully Supported                                        | `quartz`                                       |
+| RxJava              | 2.x        | Fully Supported                                        | `rxjava`                                       |
+| Spring Data         | 1.8+       | Fully Supported                                        | `spring-data`                                  |
+| Spring Scheduling   | 3.1+       | Fully Supported                                        | `spring-scheduling`                            |
+| TIBCO BusinessWorks | 5.14.0+    | [Preview](#framework-integrations-disabled-by-default) | `tibco`, `tibco_bw`                            |
+| Twilio SDK          | < 8.0      | Fully Supported                                        | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 
@@ -306,7 +313,7 @@ To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
    native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -321,7 +328,7 @@ To set up the Datadog Java tracer with Quarkus Native, follow these steps:
    ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
    ```
 3. (Optional) Enable the profiler integration by adding the following argument:
-`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+`-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -354,7 +361,7 @@ To set up the Datadog Java tracer with Spring Native, follow these steps:
      </build>
      ```
    - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
-3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true -–enable-monitoring=jfr’`.
    - For tracer versions before `1.39.1`, when executing the generated native executable, ensure that `DD_PROFILING_START_FORCE_FIRST=true` is set as an environment variable.
 
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
@@ -408,6 +415,19 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Problem activating Datadog tracer
+
+You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
+
+```text
+dd.trace 2024-12-30 08:34:43:306 +0000] [main] WARN datadog.trace.agent.tooling.nativeimage.TracerActivation - Problem activating datadog tracer
+java.lang.NoClassDefFoundError: Could not initialize class jnr.unixsocket.UnixSocketChannel
+```
+
+The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode).
+
+For more information, see [Configure APM and DogstatsD communication mode][11]. For setups that don't rely on the Admission Controller, see documentation for [DD_TRACE_AGENT_URL][12].
+
 {{% /collapse-content %}}
 
 ## Further Reading
@@ -422,3 +442,5 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
+[12]: /tracing/trace_collection/library_config/#agent

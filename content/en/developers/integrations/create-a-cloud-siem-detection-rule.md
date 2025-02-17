@@ -4,7 +4,7 @@ description: Learn how to create a Cloud SIEM detection rule for your integratio
 aliases:
 - /developers/integrations/create-an-integration-detection-rule
 further_reading:
-- link: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
+- link: https://docs.datadoghq.com/security/cloud_siem/detection_rules
   tag: Documentation
   text: Log Detection Rules
 ---
@@ -37,7 +37,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 2. Open a pull request (PR) to update the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. The PR should include your detection rule JSON file, along with any new integration files.
 
-3. Datadog approves and merges the PR, and your integration-recommended monitor is pushed to production.
+3. Datadog approves and merges the PR, and your integration-monitor template is pushed to production.
 
 ## Verify your detection rule in production
 
@@ -146,4 +146,4 @@ Reach out to Datadog to address the issue.
 [4]: https://app.datadoghq.com/security/rules/new?product=siem
 [5]: https://github.com/DataDog/integrations-extras 
 [6]: https://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
+[7]: https://docs.datadoghq.com/security/cloud_siem/detection_rules

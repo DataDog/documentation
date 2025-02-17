@@ -28,7 +28,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
 display_on_public_website: true
@@ -36,7 +36,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 2.2.2
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: aerospike
@@ -131,7 +131,7 @@ Aerospike チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 #### コンテナ化
 
-For containerized environments, see [Configure integrations with Autodiscovery on Kubernetes][1] or [Configure integrations with Autodiscovery on Docker][2] for guidance on applying the parameters below. See the [sample aerospike.d/conf.yaml][3] for all available configuration options.
+コンテナ化環境の場合は、以下のパラメーターを適用する手順について、[Kubernetes でのオートディスカバリーとのインテグレーションの構成][1]または [Docker でのオートディスカバリーとのインテグレーションの構成][2]を参照してください。利用可能なすべての構成オプションについては、[サンプル aerospike.d/conf.yaml][3] を参照してください。
 
 ##### メトリクスの収集
 
@@ -143,16 +143,16 @@ For containerized environments, see [Configure integrations with Autodiscovery o
 
 **例**
 
-Apply the following annotation to your pod, where `<CONTAINER_IDENTIFIER>` is the Aerospike container image name or a [custom identifier][4]:
+ポッドに以下のアノテーションを適用します。ここで、`<CONTAINER_NAME>` は Aerospike コンテナ名または[カスタム識別子][4]です。
 
 ```
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
   {
     "aerospike": {
       "init_config": {},
       "instances": [{"openmetrics_endpoint": "http://%%host%%:9145/metrics"}]
     }
-  }
+  } 
 ```
 
 
@@ -168,16 +168,16 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 **例**
 
-Apply the following annotation to your pod, where `<CONTAINER_IDENTIFIER>` is the Aerospike container image name or a [custom identifier][4]:
+ポッドに以下のアノテーションを適用します。ここで、`<CONTAINER_NAME>` は Aerospike コンテナ名または[カスタム識別子][4]です。
 
 ```
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
+ad.datadoghq.com/<CONTAINER_NAME>.logs: |
   [
     {
       "type": "file",
       "path": "/var/log/aerospike/aerospike.log",
       "source": "aerospike"
-    }
+    } 
   ]
 ```
 [1]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/

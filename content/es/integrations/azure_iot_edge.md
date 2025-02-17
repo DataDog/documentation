@@ -19,10 +19,10 @@ assets:
     source_type_id: 10125
     source_type_name: Azure IoT Edge
   monitors:
-    Disk usage: assets/monitors/disk_usage.json
-    Edge Hub retries: assets/monitors/edgehub_retries.json
-    IoT Hub syncs: assets/monitors/iothub_syncs.json
-    Memory usage: assets/monitors/memory_usage.json
+    Device is running out of disk space: assets/monitors/disk_usage.json
+    Device is running out of memory: assets/monitors/memory_usage.json
+    Edge Hub operation retries is higher than usual: assets/monitors/edgehub_retries.json
+    Unsuccessful syncs are high: assets/monitors/iothub_syncs.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -41,13 +41,13 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 4.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: azure_iot_edge
 public_title: Azure IoT Edge
 short_description: Monitoriza el estado y el rendimiento de un dispositivo y módulos
-  Azure IoT Edge.
+  de Azure IoT Edge.
 supported_os:
 - Linux
 - Windows
@@ -64,8 +64,8 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: Monitoriza el estado y el rendimiento de un dispositivo y módulos Azure
-    IoT Edge.
+  description: Monitoriza el estado y el rendimiento de un dispositivo y módulos de
+    Azure IoT Edge.
   media: []
   overview: README.md#Overview
   resources:
@@ -114,7 +114,7 @@ Sigue los pasos que se indican a continuación para configurar el dispositivo de
         }
         ```
 
-2. Configura el módulo del tiempo de ejecución **Edge Hub** de la siguiente manera:
+2. Configura el módulo del tiempo de ejecución de **Edge Hub** de la siguiente manera:
     - La versión de la imagen debe ser `1.0.10` o superior.
 
 3. Instala y configura el Datadog Agent como **módulo personalizado**:
@@ -144,7 +144,7 @@ Sigue los pasos que se indican a continuación para configurar el dispositivo de
             }
             ```
 
-    - Guarda el módulo personalizado del Datadog Agent .
+    - Guarda el módulo personalizado del Datadog Agent.
 
 4. Guarda e implementa los cambios en la configuración de tu dispositivo.
 
@@ -196,7 +196,7 @@ Azure IoT Edge no incluye ningún evento.
 
 ## Referencias adicionales
 
-- [Monitor Azure IoT Edge con Datadog][11]
+- [Monitoriza Azure IoT Edge con Datadog][11]
 
 [1]: https://azure.microsoft.com/en-us/services/iot-edge/
 [2]: https://app.datadoghq.com/account/settings/agent/latest

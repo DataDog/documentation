@@ -1,3 +1,0 @@
----
-title: Cloud Workload Security
----

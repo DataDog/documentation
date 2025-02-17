@@ -68,7 +68,7 @@ Agent のインストールログは、`dd-aix-install.log` ファイルに記�
 
 ## 構成
 
-The configuration files and folders for the Agent are located in `/etc/datadog-agent/datadog.yaml`
+Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
 
 コンフィギュレーションファイルのサンプルが `/etc/datadog-agent/datadog.yaml.example` にあります。
 
@@ -100,7 +100,7 @@ Unix Agent は、次のシステムメトリクスを収集します。
 
 提供されているコンフィギュレーションファイルサンプルをコピーして編集し、上記のインテグレーションを有効にします。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML コンフィギュレーションファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、そのコンフィギュレーションを設定します。コンフィギュレーションファイルの例は、`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example` にあります。
 
-**注**: 使用可能なメトリクスの一部は、Unix Agent のインテグレーションと、Linux、Windows、MacOS のインテグレーションとで異なります。Unix Agent を使用してプロセスとネットワークメトリクスを監視することは可能ですが、ライブプロセスモニタリングとネットワークパフォーマンスモニタリング機能は利用できません。また、ログ管理は、Unix Agent では利用できません。
+**注**: 使用可能なメトリクスの一部は、Unix Agent のインテグレーションと、Linux、Windows、MacOS のインテグレーションとで異なります。Unix Agent を使用してプロセスとネットワークメトリクスを監視することは可能ですが、ライブプロセスモニタリングと Cloud Network Monitoring 機能は利用できません。また、ログ管理は、Unix Agent では利用できません。
 
 <div class="alert alert-info">Unix Agent には trace-agent コンポーネントがないため、APM のトレースやプロファイリングはサポートされていません。</div>
 
@@ -124,21 +124,21 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
-## Monitor Agent uptime
+## Agent の稼働時間を監視する
 
-You can use the metric `datadog.agent.running` to monitor the uptime of an Agent. The metric emits a value of `1` if the Agent is reporting to Datadog.
+Agent の稼働時間を監視するには、メトリクス `datadog.agent.running` を使用できます。このメトリクスは、Agent が Datadog にレポートを送信している場合に `1` を出力します。
 
-## Uninstall the Agent
+## Agent のアンインストール
 
-To remove an installed Agent, run the following `installp` command:
+インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
 
 {{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
-Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
+注: Agent のアンインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、アンインストールコマンドの `-e` パラメーターを削除します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

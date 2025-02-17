@@ -8,7 +8,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to set up APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -43,12 +43,13 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
+| [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
 
 ## Services
 
-After [instrumenting your application][3], the [Service Catalog][4] is your main landing page for APM data.
+After [instrumenting your application][3], the [Software Catalog][4] is your main landing page for APM data.
 
-{{< img src="tracing/visualization/service_catalog.png" alt="Service Catalog" >}}
+{{< img src="tracing/visualization/software_catalog.png" alt="Software Catalog" >}}
 
 Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of scaling instances. Some examples:
 
@@ -60,7 +61,7 @@ The screenshot below is a microservice distributed system for an e-commerce site
 
 {{< img src="tracing/visualization/service_map.png" alt="service map" >}}
 
-All services can be found in the [Service Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
+All services can be found in the [Software Catalog][4] and visually represented on the [Service Map][5]. Each service has its own [Service page][6] where [trace metrics](#trace-metrics) like throughput, latency, and error rates can be viewed and inspected. Use these metrics to create dashboard widgets, create monitors, and see the performance of every resource such as a web endpoint or database query belonging to the service.
 
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
@@ -106,13 +107,19 @@ You can use custom instrumentation by embedding tracing code directly into your 
 
 To learn more, read [Application Instrumentation][26].
 
+## Baggage
+
+Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
+
+To learn more, read supported [propagation formats][28] for your application's language.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /developers/guide/data-collection-resolution-retention/
 [3]: /tracing/setup/
-[4]: /tracing/service_catalog/
+[4]: /tracing/software_catalog/
 [5]: /tracing/services/services_map/
 [6]: /tracing/services/service_page/
 [7]: /tracing/services/resource_page/
@@ -136,3 +143,4 @@ To learn more, read [Application Instrumentation][26].
 [25]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [26]: /tracing/trace_collection/
 [27]: /tracing/trace_collection/trace_context_propagation
+[28]: /tracing/trace_collection/trace_context_propagation/#supported-formats

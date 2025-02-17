@@ -18,8 +18,8 @@ assets:
     source_type_id: 262
     source_type_name: Google 클라우드 API
   monitors:
-    '[GCP] Number of instances per VPC network is approaching quota limit for {{network_id.name}} in {{project_id.name}}': assets/monitors/compute_instance_vpc_quota.json
-    '[GCP] Service Quota utilization is high for {{quota_metric.name}} in {{project_id.name}}': assets/monitors/serviceruntime_rate_quota.json
+    Instances per VPC approaching limit: assets/monitors/compute_instance_vpc_quota.json
+    Service Quota utilization is high: assets/monitors/serviceruntime_rate_quota.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog

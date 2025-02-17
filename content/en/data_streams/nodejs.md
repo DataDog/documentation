@@ -4,23 +4,24 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
 ---
-
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
-
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Node.js libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Node.js Tracer][2]
-  * Kafka: v2.39.0, v3.26.0, v4.5.0, or later
-  * Amazon SQS: v4.21.0 or later
-  * RabbitMQ: v3.48.0, v4.27.0, v5.3.0 or later
+
+### Supported libraries
+
+| Technology     | Library                                                                   | Minimal tracer version    | Recommended tracer version |
+|----------------|---------------------------------------------------------------------------|---------------------------|----------------------------|
+| Kafka          | [kafkajs](https://www.npmjs.com/package/kafkajs)                          | 2.39.0 or 3.26.0 or 4.5.0 | 5.25.0 or later            |
+| RabbitMQ       | [amqplib](https://www.npmjs.com/package/amqplib)                          | 3.48.0 or 4.27.0 or 5.3.0 | 5.3.0 or later             |
+| Amazon SQS     | [client-sqs](https://www.npmjs.com/package/@aws-sdk/client-sqs)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Amazon Kinesis | [client-kinesis](https://www.npmjs.com/package/@aws-sdk/client-kinesis)   | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Amazon SNS     | [client-sns](https://www.npmjs.com/package/@aws-sdk/client-sns)           | 3.47.0 or 4.26.0 or 5.2.0 | 5.18.0 or later            |
+| Google Pub/Sub | [google-cloud/pubsub](https://www.npmjs.com/package/@google-cloud/pubsub) | 5.25.0 or 4.49.0          | 5.25.0 or later            |
 
 ### Installation
 
@@ -32,11 +33,17 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Supported libraries
-Data Streams Monitoring supports the [confluent-kafka library][3], [amqplib package][5], and [rhea package][6].
-
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+
+### Monitoring SNS-to-SQS pipelines
+To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][8].
+
+### Monitoring Kinesis pipelines
+There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
+
+### Manual instrumentation
+Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][7].
 
 ## Further Reading
 
@@ -48,3 +55,5 @@ Data Streams Monitoring uses one [message attribute][4] to track a message's pat
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
 [5]: https://www.npmjs.com/package/amqplib
 [6]: https://www.npmjs.com/package/rhea
+[7]: /data_streams/manual_instrumentation/?tab=nodejs
+[8]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

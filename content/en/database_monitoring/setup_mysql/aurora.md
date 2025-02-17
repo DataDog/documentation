@@ -41,18 +41,6 @@ Data security considerations
 Configure the following in the [DB cluster parameter group][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Required. Enables monitoring of currently running queries. |
-| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -61,8 +49,19 @@ Configure the following in the [DB cluster parameter group][3] and then **restar
 | <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 | <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">performance_schema_max_digest_length</code> | `4096` | Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters are not collected. |
 | <code style="word-break:break-all;">performance_schema_max_sql_text_length</code> | `4096` | Must match <code style="word-break:break-all;">performance_schema_max_digest_length</code>. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_current</code> | `1` | Required. Enables monitoring of currently running queries. |
+| <code style="word-break:break-all;">performance-schema-consumer-events-waits-current</code> | `ON` | Required. Enables the collection of wait events. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history</code> | `1` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| <code style="word-break:break-all;">performance_schema_consumer_events_statements_history_long</code> | `1` | Optional. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -77,18 +76,6 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
@@ -97,6 +84,18 @@ Create the `datadog` user and grant basic permissions:
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -355,7 +354,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section, or see the [Databases][7] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
@@ -374,7 +373,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /database_monitoring/data_collected/#sensitive-information
+[2]: /containers/cluster_agent/clusterchecks/?tab=datadogoperator
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest

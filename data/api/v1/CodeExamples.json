@@ -58,6 +58,11 @@
   "CreateDashboard": [
     {
       "group": "dashboards",
+      "suffix": "_1433408735",
+      "description": "Clients deserialize a dashboard with a empty time object"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1442588603",
       "description": "Create a distribution widget using a histogram request containing a formulas and functions APM Stats query"
     },
@@ -120,6 +125,11 @@
       "group": "dashboards",
       "suffix": "_2563642929",
       "description": "Create a new dashboard with a toplist widget sorted by group"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1413226400",
+      "description": "Create a new dashboard with a toplist widget with stacked type and no legend specified"
     },
     {
       "group": "dashboards",
@@ -240,6 +250,11 @@
       "group": "dashboards",
       "suffix": "_2361531620",
       "description": "Create a new dashboard with list_stream widget with a valid sort parameter DESC"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3298564989",
+      "description": "Create a new dashboard with llm_observability_stream list_stream widget"
     },
     {
       "group": "dashboards",
@@ -599,6 +614,11 @@
   "CreateMonitor": [
     {
       "group": "monitors",
+      "suffix": "_1303514967",
+      "description": "Create a Cost Monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3883669300",
       "description": "Create a RUM formula and functions monitor returns \"OK\" response"
     },
@@ -783,6 +803,13 @@
       "description": "Create a browser test with advanced scheduling options returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "CreateSyntheticsMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Create a mobile test returns \"OK - Returns the created test details.\" response"
+    }
+  ],
   "CreateSyntheticsAPITest": [
     {
       "group": "synthetics",
@@ -842,11 +869,25 @@
       "description": "Create a private location returns \"OK\" response"
     }
   ],
+  "UpdateMobileTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Edit a Mobile test returns \"OK\" response"
+    }
+  ],
   "UpdateAPITest": [
     {
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "FetchUptimes": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Fetch uptime for multiple tests returns \"OK.\" response"
     }
   ],
   "PatchTest": [

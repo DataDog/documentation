@@ -9,12 +9,15 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/actions/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
+- link: "/service_management/workflows/variables"
+  tag: "Documentation"
+  text: "Variables and Parameters"
 ---
 
 {{< site-region region="gov" >}}
@@ -68,11 +71,23 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
 1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
 1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
+
+#### Shortcuts and canvas tools
+
+To see keyboard and mouse shortcuts for the workflow builder canvas, type `?` (shift+`/`) or click the **Keyboard** {{< img src="service_management/workflows/keyboard-icon.png" inline="true" style="width:40px;">}} button. A list of shortcuts appears.
+
+The **Zoom out** {{< img src="service_management/workflows/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, **Zoom in** {{< img src="service_management/workflows/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}, and **Reset viewport** {{< img src="service_management/workflows/reset-viewport-icon.png" inline="true" style="width:34px;">}} buttons control how the viewport is displayed.
+
+The **Auto layout** {{< img src="service_management/workflows/auto-layout-icon.png" inline="true" style="width:80px;">}} button aligns and distributes your workflow steps.
+
+The **Add annotation** {{< img src="service_management/workflows/add-annotation-icon.png" inline="true" style="width:30px;">}} button allows you to add annotation notes to your workflow. These notes offer a formatting bar to add various text formatting such as bold and italics, links, and lists. You can also enter your annotations in Markdown.
+
+{{< img src="service_management/workflows/workflow-annotation-with-bar.png" alt="An empty annotation, with the formatting bar displayed above it" style="width:70%;" >}}
 
 ## Test a step
 
@@ -84,65 +99,9 @@ Scheduled and triggered workflows don't trigger automatically until you've publi
 
 Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
-## Context variables
+## Variables and parameters
 
-Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
-
-- **Workflow variables** give you information about the current workflow:
-    - `WorkflowName`: The name of the workflow.
-    - `WorkflowId`: The ID of the workflow.
-    - `InstanceId`: The ID of the execution instance of the workflow.
-- Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
-- **Trigger variables** are passed into the workflow by the triggering event.
-- **Source object variables** are passed into the workflow by the triggering event.
-
-The **Context Variables** tab for each step provides a map of all context variables available to that step.
-
-{{< img src="service_management/workflows/context-variables5.png" alt="The Context Variables tab" >}}
-
-Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
-
-### Step output variables
-
-Some steps create outputs that are available to subsequent steps in a workflow. Access a step variable with the syntax: `Steps.<step_name>.<variable>`. For example, to retrieve the pull request status variable (`state`) from the GitHub pull request status step (`Get_pull_request_status`), you'd use the following context variable:
-
-```
-{{ Steps.Get_pull_request_status.state }}
-```
-
-If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
-
-{{< img src="service_management/workflows/step-outputs2.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
-
-### Input parameters
-
-Input parameters are immutable key-value pairs that you can use to pass data into a workflow. You can use input parameters in workflows that:
-- are triggered manually, such as from a Dashboard.
-- use mention triggers, such as Monitors and Security Signal Notification Rules.
-
-To add an input parameter:
-1. Click on the workflow canvas.
-1. Click the **+** icon next to **Input Parameters**.
-1. Add a parameter name, data type, and description for the parameter. The display name is generated automatically from the parameter name. Check the **Use custom display name** box to customize it. The display name is a human readable name for the parameter, while the parameter name is used to reference the parameter in your workflow steps.
-1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
-
-To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
-
-The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
-
-{{< img src="service_management/workflows/input-parameter3.png" alt="Hover over a counter to see which steps are using the parameter." style="width:60%;">}}
-
-You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
-
-If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
-
-### Source object variables
-
-Source object variables are properties of the triggering event that are resolved at execution. The variables available in the workflow depend on the type of trigger that initiated the workflow instance. For example, if the workflow instance is triggered by a monitor, the monitor ID variable is available using `{{Source.monitor.id}}`. If the workflow is triggered by a security signal detection or notification rule, the signal ID is available using `{{Source.securitySignal.id}}`.
-
-All the variables of the Source object are visible in the Context Variables tab.
-
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="The Source object variables in the Context Variables tab" style="width:60%;">}}
+For information on using variables and parameters in your workflows, see [Variables and parameters][12].
 
 ## Workflow notifications
 
@@ -207,6 +166,10 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 - **Format JSON**: Beautify your JSON.
 - **Export JSON**: Download the workflow.
 
+## Interact with workflows using the API
+
+To perform tasks using the API, see the [Workflow Automation API documentation][13].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -218,9 +181,12 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[6]: /service_management/workflows/actions/#testing-expressions-and-functions
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
+[12]: /service_management/workflows/variables/
+[13]: /api/latest/workflow-automation/
+[14]: /service_management/workflows/variables/#context-variables

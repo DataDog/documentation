@@ -8,8 +8,9 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/?tab=sqlserver"
   tag: "Documentation"
   text: "Troubleshoot Common Issues"
-
-
+- link: "/database_monitoring/guide/sql_deadlock/"
+  tag: "Documentation"
+  text: "Configure Deadlock Monitoring"
 ---
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -110,7 +111,7 @@ GRANT SELECT to datadog;
 
 **Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
 
-[3]: /database_monitoring/guide/managed_authentication
+[1]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "SQL Server on Windows Azure VM" %}}
@@ -321,7 +322,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
             username: datadog
             password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
-            driver: 'ODBC Driver 18 for SQL Server'
+            driver: '{ODBC Driver 18 for SQL Server}'
             include_ao_metrics: true  # Optional: For AlwaysOn users
             tags:  # Optional
               - 'service:<CUSTOM_SERVICE>'
@@ -356,7 +357,7 @@ instances:
     username: datadog
     password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
-    driver: "ODBC Driver 18 for SQL Server"
+    driver: '{ODBC Driver 18 for SQL Server}'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'

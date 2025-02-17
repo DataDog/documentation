@@ -190,11 +190,69 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect custom resources and CustomResourceDefinitions
+
+The [Orchestrator Explorer][3] collects CustomResourceDefinitions by default. These definitions appear in Datadog without any user configuration required.
+
+To collect custom resources, you need to configure the Datadog Agent and set up indexing.
+
+1. Configure the Datadog Agent:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   Add the following configuration to `datadog-values.yaml`:
+
+   ```
+   orchestratorExplorer:
+       customResources:
+           - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   The Datadog Operator needs permission to allow the Agent to collect custom resources. Install the Operator with an option that grants this permission:
+
+   ```
+   helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+   ```
+
+   Then, add the following configuration to your `DatadogAgent` manifest, `datadogagent.yaml`:
+
+   ```
+   features:
+     orchestratorExplorer:
+       customResources:
+         - <CUSTOM_RESOURCE_NAME>
+   ```
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+1. In Datadog, open [Orchestrator Explorer][3].
+  {{< img src="infrastructure/crd_explorer_view.png" alt="Datadog's Orchestrator Explorer. In the left panel, Kubernetes > Custom Resources > Resource Definitions is selected. Custom resource definitions are displayed in a table. The third column is titled Indexing. Each of these column values is a clickable 'Enabled' or 'Disabled'." style="width:100%;" >}}
+1. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
+1. Locate the custom resource definition that corresponds to the resource you want to visualize in the explorer. Use the **Indexing** column to toggle indexing.
+1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
+   {{< img src="infrastructure/indexing_resources.png" alt="A modal over the Orchestrator Explorer page, titled 'Collecting and Indexing monitoring.googleapis.com/v1/clusternodemonitorings'. Displays an 'Agent Setup' step with instructions for configuring the Datadog Agent, followed by an 'Indexing Configuration' step under which fields can be selected with checkboxes." style="width:100%;" >}}
+     
+   Select **Enable Indexing** to save.
+
+   **Note**: You can select a maximum of 50 fields for each resource.
+
+After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
-
+[3]: https://app.datadoghq.com/orchestration/explorer/pod
+[4]: https://app.datadoghq.com/orchestration/explorer/crd
 

@@ -14,16 +14,16 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/dotnet"
+    - link: "/tests/test_impact_analysis/dotnet"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Compatibility
@@ -86,7 +86,7 @@ To instrument your test suite, prefix your test command with `dd-trace ci run`, 
 By using <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
+dd-trace ci run --dd-service=my-dotnet-app -- dotnet test
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -96,7 +96,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 By using <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a>:
 
 {{< code-block lang="shell" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
+dd-trace ci run --dd-service=my-dotnet-app -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -161,6 +161,12 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
+`test_session.name` (only available as an environment variable)
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
+
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][6]. All other [Datadog Tracer configuration][7] options can also be used.
 
 ### Adding custom tags to tests
@@ -207,7 +213,7 @@ When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports i
 
 If you are using [Coverlet][10] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
-**Note**: When using Intelligent Test Runner, the tracer's built-in code coverage is enabled by default.
+**Note**: When using Test Impact Analysis, the tracer's built-in code coverage is enabled by default.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
@@ -280,7 +286,7 @@ For more information about how to add spans and tags for custom instrumentation,
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
-If you use XUnit, NUnit, or MSTest with your .NET projects, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use XUnit, NUnit, or MSTest with your .NET projects, Test Optimization automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
 The API is based around three concepts: test module, test suites, and tests.
 
@@ -360,6 +366,34 @@ await module.CloseAsync();
 {{< /code-block >}}
 
 Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
+
+## Best practices
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+
+- `DD_TEST_SESSION_NAME=integration-tests dotnet test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
 
 ## Further reading
 

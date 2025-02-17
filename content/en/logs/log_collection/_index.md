@@ -109,7 +109,7 @@ Datadog integrations and log collection are tied together. You can use an integr
 
 ## Reduce data transfer fees
 
-Use Datadog's [Network Performance Monitoring][7] to identify your organization’s highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
 
 For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
 
@@ -119,7 +119,7 @@ For more information, see [How to send logs to Datadog while reducing data trans
 [4]: /agent/kubernetes/log/#autodiscovery
 [5]: /agent/docker/log/#log-integrations
 [6]: /integrations/#cat-log-collection
-[7]: /network_monitoring/performance/
+[7]: /network_monitoring/cloud_network_monitoring/
 [8]: /cloud_cost_management/
 [9]: /logs/guide/reduce_data_transfer_fees/
  
@@ -208,7 +208,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
@@ -266,6 +266,7 @@ Your payload, or `Log sent directly using TLS` as written in the example, can be
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /account_management/api-app-keys/#api-keys
 

@@ -95,7 +95,7 @@ This is a break down of the query with the following conditions:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration/#evaluation-window
-[2]: /monitors/manage/status/#investigate-a-monitor-in-a-notebook
+[2]: /monitors/status/#investigate-a-monitor-in-a-notebook
 [3]: /dashboards/functions/timeshift/
 [7]: /monitors/notify/
 [8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

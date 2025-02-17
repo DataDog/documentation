@@ -17,7 +17,7 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription or Resource Group level. Pay as you go (PAYG) and CSP accounts are not supported.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. To determine your account type, see the [Azure documentation][10]. **Note**: If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
@@ -39,16 +39,15 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
+1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*. The Azure portal screens look different from the images below if the "Improved exports (Preview)" is enabled for your account, or if you are accessing the Azure portal through the `https://preview.portal.azure.com` address.
+
+   {{< tabs >}}
+   {{% tab "Regular exports" %}}
+
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Add**.
 
    {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" style="width:100%" >}}
-
-   The [improved exports experience][8] is in Preview and may not be available for all customers.
-
-   {{< tabs >}}
-   {{% tab "Regular exports" %}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
@@ -66,8 +65,15 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{% tab "Improved exports (Preview)" %}}
 
-4. Select the following Export details:
-    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
+2. In the left hand navigation panel, select **Cost Management**, then **Reporting + analytics**.
+3. Select the export scope. **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
+4. Click **Create**.
+
+   {{< img src="cloud_cost/improved_exports_scope.png" alt="The Azure portal, with the Exports option highlighted in navigation and the export scope defined" style="width:100%" >}}
+
+5. Select "Cost and usage (actual + amortized)".
+6. Enter an "Export prefix" for the new exports. For example, enter "datadog" to avoid conflicts with existing exports.
+7. Click "Edit" on each export and confirm the following details:
     - Frequency: **Daily export of month-to-date costs**
     - Dataset version:
       - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
@@ -75,17 +81,20 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
 
-5. In the destination tab, select the following details:
+8. In the destination tab, select the following details:
+    - Choose **Azure blob storage** as the storage type.
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - File partitioning: `Checked`
-    - Overwrite Data: `Unchecked`
-        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously `Checked`, make sure to clean the files in the directory or move them to another one.
+    - Choose **CSV** as the format. **Parquet is not supported.**
+    - Choose **Gzip** as the compression type. **None** is also supported.
+    - Ensure that **File partitioning** is checked.
+    - Ensure that **Overwrite data** is not checked.
+        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
 
-   {{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+   {{< img src="cloud_cost/improved_export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-6. Click **Next** and **Review + Create**.
+9. Click **Next**, then **Review + Create**.
 
    {{% /tab %}}
    {{< /tabs >}}
@@ -107,7 +116,7 @@ For faster processing, generate the first exports manually by clicking **Run Now
 5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
-    - Click **Select members**, pick the name of the App Registration, and click **Select**.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**. **Note:** If you do not see your App Registration listed, start typing in the name for the UI to update and show it, if it is available.
     - Select *review + assign*.
 
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
@@ -137,6 +146,8 @@ If your exports are in different storage containers, repeat steps one to seven f
 5. Assign these permissions to the app registration.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
+
+**Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
 [1]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 
@@ -235,12 +246,14 @@ You can create historical data in your storage account using the [Microsoft API]
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
-[3]: https://app.datadoghq.com/cost/setup?cloud=azure
-[4]: https://app.datadoghq.com/integrations/azure
-[5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
-[7]: https://support.microsoft.com
-[8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
-[9]: https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
+[1]:  https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]:  https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
+[3]:  https://app.datadoghq.com/cost/setup?cloud=azure
+[4]:  https://app.datadoghq.com/integrations/azure
+[5]:  https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[6]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
+[7]:  https://support.microsoft.com
+[8]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
+[9]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
+[10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
+[11]: /help/

@@ -39,11 +39,11 @@ Follow the data from failing synthetic tests directly through to the root causes
 
 ## Correlate profiles and traces
 
-Performance data for application code that has both tracing and profiling enabled is automatically correlated, letting you move between the two types of analysis to troubleshoot and problem solve. You can move directly from span information to profiling data on the Code Hotspots tab, and find specific lines of code related to performance issues. Similarly, you can debug slow and resource-consuming endpoints directly in the Profiling UI. 
+Performance data for application code that has both tracing and profiling enabled is automatically correlated, letting you move between the two types of analysis to troubleshoot and problem solve. You can move directly from span information to profiling data on the **Profiles** tab, and find specific lines of code related to performance issues. Similarly, you can debug slow and resource-consuming endpoints directly in the Profiling UI. 
 
 Read [Investigate Slow Traces or Endpoints][5] for more information.
 
-{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/profiles_tab.png" alt="Profiles tab shows profiling information for a APM trace span" >}}
 
 ## Further Reading
 

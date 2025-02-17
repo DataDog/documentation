@@ -18,7 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,16 +31,26 @@ manifest_version: 2.0.0
 name: salesforce_commerce_cloud
 public_title: Salesforce Commerce Cloud
 short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
-supported_os: []
+supported_os:
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
   - Offering::Integration
+  - Submitted Data Type::Logs
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Salesforce Commerce Cloud のログを Datadog にインポートする
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/salesforce_commerce_cloud/
   support: README.md#Support
   title: Salesforce Commerce Cloud
 ---
@@ -66,14 +76,14 @@ Datadog がログデータをインポートするためのアクセスを Sales
 3. Business Manager インターフェイスの **Administration > Organization > WebDAV Client Permissions** の下に、以下の JSON を追加します。適切な場所にクライアント ID を挿入していることを確認してください。
 
 ```json
-{
-   "clients":[
-      {
+{  
+   "clients":[  
+      {  
          "client_id":"<your-client-id-here>",
-         "permissions":[
-            {
+         "permissions":[  
+            {  
                "path":"/logs",
-               "operations":[
+               "operations":[  
                   "read"
                ]
             }
@@ -101,7 +111,7 @@ SFCC Log Center は、Datadog とは異なるログデータを表現します�
 
 Salesforce Commerce Cloud インテグレーションには、メトリクスは含まれません。
 
-### Logs
+### ログ
 
 Salesforce Commerce Cloud インテグレーションは、Commerce Cloud インスタンスへの webdav 接続を介してログを収集します。
 

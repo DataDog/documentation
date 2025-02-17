@@ -6,13 +6,13 @@ aliases:
     - /monitors/create/types/outlier/
 description: "Alert on members of a group behaving differently than the others"
 further_reading:
+- link: "https://www.datadoghq.com/blog/outlier-detection-algorithms-at-datadog"
+  tag: "Blog"
+  text: "Outlier detection in Datadog: A look at the algorithms"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "/watchdog/insights/"
@@ -37,7 +37,7 @@ The outlier monitor requires a metric with a group (hosts, availability zones, p
 ### Set alert conditions
 
 * Trigger a separate alert for each outlier `<GROUP>`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 24 hours.
+* during the last `5 minutes`, `15 minutes`, `1 hour`, and so on, or use `custom` to set a value between 1 minute and 1 year.
 * Using algorithm `MAD`, `DBSCAN`, `scaledMAD`, or `scaledDBSCAN`
 * tolerance: `0.33`, `1.0`, `3.0`, etc.
 * %: `10`, `20`, `30`, etc. (only for `MAD` algorithms)
@@ -122,4 +122,4 @@ The outlier algorithms are set up to identify groups that are behaving different
 [3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: /api/v1/monitors/#create-a-monitor
-[6]: /monitors/manage/status/#settings
+[6]: /monitors/status/#settings

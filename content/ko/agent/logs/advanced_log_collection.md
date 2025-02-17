@@ -4,6 +4,9 @@ algolia:
   - advanced log filter
 description: Datadog 에이전트를 사용하여 로그를 수집하고 Datadog로 전송하기
 further_reading:
+- link: /logs/guide/getting-started-lwl/
+  tag: 설명서
+  text: Logging without LimitsTM 시작하기
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: 설명서
   text: Datadog 에이전트를 로그 수집용으로만 사용하기
@@ -19,9 +22,6 @@ further_reading:
 - link: /logs/explorer/
   tag: 설명서
   text: 로그 탐색 방법 알아보기
-- link: /logs/logging_without_limits/
-  tag: 설명서
-  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 용어
   text: '"tail"에 대한 용어 항목'
@@ -98,7 +98,7 @@ Docker 환경에서 **필터링할 로그를 보내는 컨테이너**의 레이�
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-자동 탐지는 지정된 컨테이너에 특정한 설정을 적용하기 위해 이미지가 아닌 이름으로 컨테이너를 식별합니다.  `<CONTAINER_IDENTIFIER>`를 `.spec.containers[0].image.`가 아닌 `.spec.containers[0].name`과 연결시키고자 합니다. 포드 내 해당 `<CONTAINER_IDENTIFIER>`에서 자동 탐지를 사용하도록 구성하려면, 주석 `log_processing_rules`를 포드에 추가하세요.
+자동탐지를 구성해 포드 내 특정 컨테이너(이름 `CONTAINER_NAME`)에서 컨테이너 로그를 수집하려면 다음 주석을 포드의 `log_processing_rules`에 추가합니다.
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +111,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -126,7 +126,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -231,7 +231,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -246,7 +246,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -258,10 +258,6 @@ spec:
 {{< /tabs >}}
 
 ## 로그에서 민감한 데이터 스크러빙하기
-
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  에이전트에서 민감한 데이터 스캐너를 사용하는 것이 프라이빗 베타 서비스 중입니다. 자세한 내용은 <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">블로그 포스트</a>와 <a href="https://docs.datadoghq.com/sensitive_data_scanner/">설명서</a>를 참고하세요. 액세스를 요청하려면 다음 양식을 작성하세요.
-{{< /callout >}}
 
 로그에 삭제가 필요한 민감한 정보가 포함되어 있는 경우 설정 파일의 `log_processing_rules` 파라미터를 `mask_sequences` 유형과 함께 사용하여 민감한 시퀀스를 스크러빙하도록 Datadog 에이전트를 설정합니다.
 
@@ -326,7 +322,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -342,7 +338,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -428,7 +424,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -443,7 +439,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
@@ -454,7 +450,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>중요!</strong>다중 줄 로그의 정규식 패턴은 로그의<em>시작 부분</em>에서 시작해야 합니다. 패턴은 중간 줄과 일치할 수 없습니다. <em>전혀 일치하지 않는 패턴은 로그 줄 손실을 일으킬 수 있습니다.</em></div>
+<div class="alert alert-warning"><strong>중요!</strong>다중 줄 로그의 정규식 패턴은 로그의<em>시작 부분</em>에서 시작해야 합니다. 패턴은 중간 줄과 일치할 수 없습니다. <em>전혀 일치하지 않는 패턴은 로그 줄 손실을 일으킬 수 있습니다.</em><br><br>로그 수집은 밀리초 단위의 정확도로 작동합니다. 더 높은 정확도의 로그는 패턴과 일치하더라도 전송되지 않습니다.</div>
 
 더 많은 예시:
 
@@ -467,8 +463,12 @@ spec:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### 자동 다중 줄 집계
-에이전트 7.37+에서 `auto_multi_line_detection`을 사용할 수 있습니다. 이를 통해 에이전트에서 [일반적인 다중 줄 패턴][2]을 자동으로 탐지할 수 있습니다.
+### Global automatic multi-line aggregation
+With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up. 
+
+
+{{< tabs >}}
+{{% tab "구성 파일" %}}
 
 `datadog.yaml` 파일에서 `auto_multi_line_detection`을 전역적으로 활성화하세요.
 
@@ -477,12 +477,53 @@ logs_config:
   auto_multi_line_detection: true
 ```
 
-컨테이너화된 배포의 경우 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true`환경 변수를 사용하여 `auto_multi_line_detection`을 활성화할 수 있습니다.
+{{% /tab %}}
+{{% tab "Docker" %}}
 
-로그 구성별로 활성화하거나 비활성화할 수 있습니다(전역 구성 재정의).
+Use the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` in the Datadog Agent container to configure a global automatic multi-line aggregation rule. For example:
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+#### 연산자
+Use the `spec.override.nodeAgent.env` parameter in your Datadog Operator manifest to set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION` environment variable to configure a global automatic multi-line aggregation rule. For example:
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+          value: "true"
+```
+
+#### Helm
+Use the `datadog.logs.autoMultiLineDetection` option in the Helm chart to configure a global automatic multi-line aggregation rule. For example:
+
+```yaml
+datadog:
+  logs:
+    enabled: true
+    autoMultiLineDetection: true
+```
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Enable multi-line aggregation per integration
+Alternatively, you can enable or disable multi-line aggregation for an individual integration's log collection. Changing the multi-line aggregation for an integration overrides the global configuration.
 
 {{< tabs >}}
 {{% tab "구성 파일" %}}
+
+In a host environment, enable `auto_multi_line_detection` with the [Custom log collection][1] method. For example:
+
+[1]: https://docs.datadoghq.com/ko/agent/logs/?tab=tailfiles#custom-log-collection
 
 ```yaml
 logs:
@@ -492,9 +533,60 @@ logs:
     source: java
     auto_multi_line_detection: true
 ```
+{{% /tab %}}
+{{% tab "Docker" %}}
 
-자동 다중 줄 탐지는 일반적인 정규식 목록을 사용하여 로그 일치를 시도합니다. 기본 제공 목록이 충분하지 않은 경우 `datadog.yaml` 파일에 커스텀 패턴을 추가할 수도 있습니다.
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the log configuration. For example:
 
+```yaml
+ labels:
+    com.datadoghq.ad.logs: >-
+      [{
+        "source": "java",
+        "service": "testApp",
+        "auto_multi_line_detection": true
+      }]
+```
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+In a Kubernetes environment, use the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` on your pod to specify the log configuration. For example:
+
+```yaml
+apiVersion: apps/v1
+metadata:
+  name: testApp
+spec:
+  selector:
+    matchLabels:
+      app: testApp
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
+          [{
+            "source": "java",
+            "service": "testApp",
+            "auto_multi_line_detection": true
+          }]
+      labels:
+        app: testApp
+      name: testApp
+    spec:
+      containers:
+        - name: '<CONTAINER_NAME>'
+          image: testApp:latest
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+### Customize multi-line aggregation configuration
+Automatic multi-line detection uses a list of [common regular expressions][1] to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns and thresholds for detection.
+
+[1]:https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+In a configuration file, add the `auto_multi_line_extra_patterns` to your `datadog.yaml`:
 ```yaml
 logs_config:
   auto_multi_line_detection: true
@@ -503,7 +595,9 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
-줄 일치 임계값에 맞는 패턴이 없을 경우 `auto_multi_line_default_match_threshold` 파라미터 값을 낮게 지정해 추가하세요. 이는 자동 다중 줄 집계를 적용할 때 로그가 일치해야 하는 빈도의 임계값을 구성합니다. 현재 임계값을 보려면 [에이전트 `status` 명령[1]을 실행하세요.
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 ```yaml
 logs_config:
@@ -517,63 +611,90 @@ logs_config:
 [1]: https://docs.datadoghq.com/ko/agent/configuration/agent-commands/#agent-information
 {{% /tab %}}
 {{% tab "Docker" %}}
-
-Docker 환경인 경우, 컨테이너에서 `com.datadoghq.ad.logs` 라벨을 사용하여 `log_processing_rules`를 다음과 같이 지정합니다:
+In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
 
 ```yaml
- labels:
-    com.datadoghq.ad.logs: >-
-      [{
-        "source": "java",
-        "service": "testApp",
-        "auto_multi_line_detection": true
-      }]
+    environment:
+      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
+      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
 ```
-자동 다중 줄 탐지는 일반적인 정규식 목록을 사용하여 로그 일치를 시도합니다. 기본 제공 목록이 충분하지 않은 경우 `datadog.yaml` 파일에 환경 변수 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`와 함께 커스텀 패턴을 추가할 수도 있습니다.
+**Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 
-줄 일치 임계값에 맞는 패턴이 없을 경우 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 환경 변수 값을 낮게 지정해 추가하세요. 이는 자동 다중 줄 집계를 적용할 때 로그가 일치해야 하는 빈도의 임계값을 구성합니다. 현재 임계값을 보려면 [에이전트 `status` 명령[1]을 실행하세요.
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
+
+```yaml
+    environment:
+      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
+      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS=\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+      - DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD=0.1
+```
 
 [1]: https://docs.datadoghq.com/ko/agent/configuration/agent-commands/#agent-information
-
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+In Kubernetes, add the environment variable `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`:
+
+#### 연산자
 
 ```yaml
-apiVersion: apps/v1
-metadata:
-  name: testApp
 spec:
-  selector:
-    matchLabels:
-      app: testApp
-  template:
-    metadata:
-      annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
-          [{
-            "source": "java",
-            "service": "testApp",
-            "auto_multi_line_detection": true
-          }]
-      labels:
-        app: testApp
-      name: testApp
-    spec:
-      containers:
-        - name: '<CONTAINER_IDENTIFIER>'
-          image: testApp:latest
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+          value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
 ```
 
-자동 다중 줄 탐지는 일반적인 정규식 목록을 사용하여 로그 일치를 시도합니다. 기본 제공 목록이 충분하지 않은 경우 `datadog.yaml` 파일에 환경 변수 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`와 함께 커스텀 패턴을 추가할 수도 있습니다.
+#### Helm
 
-줄 일치 임계값에 맞는 패턴이 없을 경우 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 환경 변수 값을 낮게 지정해 추가하세요. 이는 자동 다중 줄 집계를 적용할 때 로그가 일치해야 하는 빈도의 임계값을 구성합니다. 현재 임계값을 보려면 [에이전트 `status` 명령[1]을 실행하세요.
+```yaml
+datadog:
+  env: 
+    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+      value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+```
+**Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
+
+
+The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
+
+If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/ko/agent/configuration/agent-commands/#agent-information
+
+#### 연산자
+
+```yaml
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+          value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+        - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD
+          value: "0.1"
+```
+
+#### Helm
+
+```yaml
+datadog:
+  env: 
+    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
+      value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
+    - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD
+      value: "0.1"
+```
+
 
 {{% /tab %}}
 {{< /tabs >}}
 
-이 기능을 활성화하면 새 로그 파일을 열  때 에이전트가 패턴을 탐지합니다. 이 과정에서 로그가 단일 줄로 전송됩니다. 탐지 임계값을 충족하면 향후 해당 소스에서 수신하는 모든 로그가 탐지 패턴으로 집계되거나 패턴을 찾을 수 없는 경우에는 단일 줄로 집계됩니다. 탐지에는 최대 30초 또는 최초 로그 500개 정도가 소요됩니다(먼저 실행되는 것).
+With multi-line aggregation enabled, the Agent first tries to detect a pattern in each new log file. This detection process takes at most 30 seconds or the first 500 logs, whichever comes first. During the initial detection process, the logs are sent as single lines.
+
+After the detection threshold is met, all future logs for that source are aggregated with the best matching pattern, or as single lines if no pattern is found.
 
 **참고**: 회전된 로그의 이름 지정 패턴을 제어할 수 있는 경우 회전된 파일 이름이 이전 활성 파일과 같은 이름으로 변경되도록 하세요. 에이전트에서는 이전에 탐지된 패턴을 새 회전 파일에 재사용해 탐지를 재실행하는 것을 방지합니다.
 
@@ -692,7 +813,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 ```
 
 {{% /tab %}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Datadog 연산자" %}}
 
 Datadog Operator 매니페스트에 있는 `spec.override.[key].env` 파라미터를 사용해 `DD_LOGS_CONFIG_PROCESSING_RULES` 환경 변수를 전역 처리 규칙으로 설정하세요. `[key]` 값에 `nodeAgent`, `clusterAgent`, 또는 `clusterChecksRunner`가 올 수 있습니다. 다음 예를 참고하세요.
 
@@ -732,7 +853,7 @@ Datadog 에이전트에서 수집하는 모든 로그는 전역 처리 규칙의
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*제한없는 로그 수집(Logging without Limits™)은 Datadog, Inc.의 상표입니다.
+*Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/agent/logs/
 [2]: https://golang.org/pkg/regexp/syntax/

@@ -24,8 +24,8 @@ assets:
     source_type_name: RapDev Validator
   logs: {}
   monitors:
-    Host has non-compliant value for tag key: assets/monitors/host_non_compliant_value.json
-    Host is missing required tag key: assets/monitors/host_missing_tag_key.json
+    Host has a non-compliant value for their tag key: assets/monitors/host_non_compliant_value.json
+    Host is missing their required tag key: assets/monitors/host_missing_tag_key.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -36,7 +36,7 @@ categories:
 - コンプライアンス
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -112,4 +112,4 @@ RapDev Validator は、Datadog 環境でのタグモニタリングと Agent の
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -1,9 +1,9 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
 further_reading:
-- link: "/service_catalog/"
+- link: "/software_catalog/"
   tag: "Documentation"
-  text: "Service Catalog"
+  text: "Software Catalog"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -47,6 +47,7 @@ You can deploy the demo using Docker or Kubernetes (with Helm). Choose your pref
 
 - Kubernetes 1.24+
 - Helm 3.9+
+- An active Kubernetes cluster with kubectl configured to connect to it
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -63,7 +64,7 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 ### Configuring the OpenTelemetry Collector
 
-To send the demo's telemetry data to Datadog you need to add three components to the the OpenTelemetry Collector configuration:
+To send the demo's telemetry data to Datadog you need to add three components to the OpenTelemetry Collector configuration:
 
 - `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
@@ -74,14 +75,14 @@ Complete the following steps to configure these three components.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder. 
+1. Open the demo repository. Create a file called `docker-compose.override.yml` in the root folder.
 
 2. Open the created file. Paste the following content and set the [Datadog site][7] and [Datadog API key][8] environment variables:
 
     ```yaml
-    services: 
+    services:
       otelcol:
-        command: 
+        command:
           - "--config=/etc/otelcol-config.yml"
           - "--config=/etc/otelcol-config-extras.yml"
           - "--feature-gates=exporter.datadogexporter.UseLogsAgentExporter"
@@ -225,7 +226,7 @@ If you have make installed, you can use the following command to start the demo:
 make start
 ```
 
-If you don't have `make` installed, you can use the the `docker compose` command directly:
+If you don't have `make` installed, you can use the `docker compose` command directly:
 
 ```shell
 docker compose up --force-recreate --remove-orphans --detach
@@ -281,21 +282,21 @@ documentation in the [language feature reference table][10].
 When the OTel Demo is running, the built-in load generator simulates traffic in the application.
 After a couple of seconds you can see data arriving in Datadog.
 
-### Service Catalog
+### Software Catalog
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Service Catalog**][11].
+1. Go to [**APM** > **Software Catalog**][11].
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Software Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
 2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
 3. Select the **List** view, then select a service to view a performance summary in the side panel.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
 ### Trace Explorer
 
@@ -329,9 +330,9 @@ The OTel Demo sends `user.id` as span tags, so you can use this to filter all tr
 
 ### Error Tracking
 
-The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for simulating error scenarios.
+The OpenTelemetry Demo includes a feature flag engine for simulating error scenarios.
 
-1. Open the `src/flagd/demo.flagd.json` file and set the `defaultVariant` to `on` for one of the cases. See the [OpenTelemetry Demo documentation][6] for available cases.
+1. Navigate to [http://localhost:8080/feature][12] to manage the available scenarios. See the [OpenTelemetry Demo documentation][5] for more details.
 2. After the demo starts producing errors, you can visualize and track down the affected services in Datadog.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/error_tracking.png" alt="Error tracking view showing error PaymentService Fail Feature Flag Enabled" style="width:90%;" >}}
@@ -343,7 +344,7 @@ The OpenTelemetry Demo includes [flagd][5], a feature flag evaluation engine for
 [1]: https://github.com/open-telemetry/opentelemetry-demo
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: https://app.datadoghq.com/organization-settings/api-keys/
-[5]: https://flagd.dev/
-[6]: https://opentelemetry.io/docs/demo/feature-flags/
+[5]: https://opentelemetry.io/docs/demo/feature-flags/
 [10]: https://opentelemetry.io/docs/demo/#language-feature-reference
 [11]: https://app.datadoghq.com/services
+[12]: http://localhost:8080/feature

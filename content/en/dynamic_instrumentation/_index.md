@@ -18,7 +18,7 @@ further_reading:
 - link: "/getting_started/tagging/unified_service_tagging/"
   tag: "Documentation"
   text: "Unified Service Tagging"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/metrics"
@@ -33,7 +33,7 @@ further_reading:
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
-If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search public beta][17].
+If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [autocomplete and search Preview][17].
 
 ## Getting started
 
@@ -46,8 +46,10 @@ Dynamic Instrumentation requires the following:
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
+- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.35.0 or higher.
+- (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended, [autocomplete and search (open beta)][17] is enabled.
+- Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
@@ -77,7 +79,8 @@ For more detailed instructions, select your runtime below:
 ### Limitations
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
-- Support is limited to applications built with Python, Java, and .NET.
+- Full support is available only for applications built with Python, Java, .NET.
+- Limited previews are ongoing for applications built with Node.js and Ruby.
 
 ## Explore Dynamic Instrumentation
 
@@ -98,7 +101,7 @@ All probe types require the same initial setup:
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
 1. If they are not prefilled, choose service, runtime, environment, and version.
-1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search public beta][17], autocomplete shows suggestions for selecting a class or method.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
 
 See the individual probe types below for specific creation steps for each probe type.
 
@@ -223,3 +226,5 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /dynamic_instrumentation/symdb/
+[18]: https://github.com/DataDog/dd-trace-js
+[19]: https://github.com/DataDog/dd-trace-rb

@@ -36,9 +36,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
-  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2024/"
     tag: "Blog"
-    text: "Key learnings from the State of Cloud Security study"
+    text: "Key learnings from the 2024 State of Cloud Security study"
   - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
     tag: "Blog"
     text: "Detect malware in your containers with Datadog Cloud Security Management"
@@ -48,8 +48,11 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
     tag: "Blog"
     text: "How Datadog Security Inbox prioritizes security risks"
+  - link: "https://www.datadoghq.com/blog/datadog-detection-as-code/"
+    tag: "Blog"
+    text: "How we use Datadog for detection as code"
 algolia:
-  tags: ['inbox']
+  tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
         subcategory: Cloud Security Management
@@ -59,14 +62,16 @@ cascade:
   Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+Datadog Cloud Security Management (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
-CSM leverages the Datadog Agent and platform-wide cloud integrations and includes:
+Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
+
+CSM leverages both the Datadog Agent and Agentless, and includes:
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
-- [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+- [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
 {{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
@@ -92,7 +97,7 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in beta.</div>
+<div class="alert alert-info">Resource Catalog is in Preview.</div>
 
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
 

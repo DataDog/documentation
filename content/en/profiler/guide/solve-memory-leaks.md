@@ -13,9 +13,9 @@ further_reading:
 
 Profiling has several datasets to help solve memory leaks, such as the Live Heap profile type, which is [available for multiple languages][1].
 
-To help you get started, Datadog provides an end-to-end, guided walkthrough for Go services:
+To help you get started, Datadog provides an end-to-end, guided walkthrough for Go or Java services:
 
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-walkthrough.mp4" alt="Walk through the memory leak walkthrough" video=true >}}
+{{< img src="profiler/guide-memory-leak/service-page-memory-leak.png" alt="Memory Leak walkthrough entrypoint in the Service Page" style="width:100%;" >}}
 
 ## What to expect
 
@@ -29,25 +29,24 @@ The walkthrough guides you through several steps to:
 
 ## Requirements
 
-<div class="alert alert-warning">The walkthrough is in public beta and prone to change. More languages and infrastructure will be supported over time</div>
-
 To use this walkthrough, you need:
-* A Go service running on Kubernetes.
+* A Go or Java service running on Kubernetes with the Datadog Kubernetes integration installed.
 * [Continuous Profiler enabled][3].
 
 ## Get started
 
 To investigate a memory leak using the guided walkthrough:
 
-1. Go to **APM > Service Page** on the service you want to investigate.
-2. Click the **Memory Leaks** tab:
-{{< img src="profiler/guide-memory-leak/service-page-memory-leak-entrypoint.png" alt="Memory Leak walkthrough entrypoint in the Service Page" style="width:100%;" >}}
-3. Follow the guided steps to complete your investigation.
+1. Go to **[APM > Software Catalog][4]**.
+1. Hover over the service you want to investigate and click **Service Page**.
+1. Click the **Memory Leaks** tab.
+1. Follow the guided steps to complete your investigation.
 
 
 [1]: /profiler/enabling/supported_versions/#profile-types
 [2]: /profiler/compare_profiles
 [3]: /profiler/enabling
+[4]: https://app.datadoghq.com/services
 
 ## Further reading
 

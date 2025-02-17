@@ -6,13 +6,16 @@ aliases:
     - /monitors/create/types/composite/
 description: "Alert on an expression combining multiple monitors"
 further_reading:
+- link: "/monitors/guide/composite_use_cases"
+  tag: "Documentation"
+  text: "Composite Monitor Use Cases"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---

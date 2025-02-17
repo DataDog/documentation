@@ -26,7 +26,7 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Metric: See the [Querying documentation][1] to configure a metric query.
     * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See the [Log search documentation][3] to configure a log event query.
-2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
+2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe. Percentile values like `p75` or `p90` can also be used where supported.
 3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
 4. Optionally, configure a conditional format depending on the value displayed. See [Visual Formatting Rules](#visual-formatting-rules) for more examples.
 5. Optionally, overlay a timeseries background:
@@ -40,7 +40,7 @@ The widget can display the latest value reported, or an aggregate computed from 
 
 <div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
 
-Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, you can either upload an image from your local computer or reference images from the public internet. Internal servers must be updated to support cross origin requests to reference internal images.
 
 {{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
 
@@ -58,6 +58,9 @@ This widget can be used with the **[Dashboards API][5]**. See the following tabl
 
 {{< dashboards-widgets-api >}}
 
+### Troubleshooting
+ - If your query is using a percentile value to aggregate underlying data points, you may find that the value returned on the widget remains the same across different time ranges. This behavior can be expected with a large sample size of underlying data points. Changes in values like this can typically be more easily found across narrower time ranges. For more information on this concept, see the [Law of large numbers][7].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -68,3 +71,4 @@ This widget can be used with the **[Dashboards API][5]**. See the following tabl
 [4]: /dashboards/guide/context-links/
 [5]: /api/latest/dashboards/
 [6]: /dashboards/graphing_json/widget_json/
+[7]: https://en.wikipedia.org/wiki/Law_of_large_numbers

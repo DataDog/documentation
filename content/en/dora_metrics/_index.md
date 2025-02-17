@@ -20,16 +20,16 @@ further_reading:
 - link: "/monitors/types/metric"
   tag: "Documentation"
   text: "Learn about Metric Monitors"
-- link: "/service_catalog"
+- link: "/software_catalog"
   tag: "Documentation"
-  text: "Learn about the Service Catalog"
+  text: "Learn about the Software Catalog"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">DORA Metrics is in public beta.</div>
+<div class="alert alert-warning">DORA Metrics is in Preview.</div>
 
 ## Overview
 

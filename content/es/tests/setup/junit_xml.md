@@ -119,7 +119,7 @@ DD_ENV=ci DATADOG_API_KEY=&lt;api_key&gt; DATADOG_SITE={{< region-param key="dd_
 
 {{< tabs >}}
 
-{{% tab "GitHub Actions" (Acciones de GitHub%}}
+{{% tab "Acciones de GitHub"%}}
 Utiliza las [funciones de checks de estado][1]:
 
 {{< code-block lang="yaml" >}}
@@ -415,7 +415,7 @@ Ejemplos:
 
 {{< tabs >}}
 
-{{% tab ""Test suite from @classname" (Conjunto de tests de @classname) %}}
+{{% tab "Conjunto de tests de @classname" %}}
 Por defecto, la etiqueta `test.suite` de los tests se lee de `<testsuite name="suite name">`. Sin embargo, algunos complementos podrían informar de un mejor valor en `<testcase classname="TestSuite">`.
 
 Para cambiar las etiquetas `test.suite` de `value 1`, `value 2` a `SomeTestSuiteClass`, `OtherTestSuiteClass`:
@@ -439,7 +439,7 @@ datadog-ci junit upload --service service_name \
 
 {{% /tab %}}
 
-{{% tab "Tag from attribute" (Etiqueta de atributo) %}}
+{{% tab "Etiqueta de atributo" %}}
 Para añadir una `custom_tag` a cada test con los valores `value 1`, `value 2`:
 
 {{< code-block lang="xml" >}}
@@ -459,7 +459,7 @@ datadog-ci junit upload --service service_name \
 
 {{% /tab %}}
 
-{{% tab "Tag from test suite property" (Etiqueta de la propiedad del conjunto de tests) %}}
+{{% tab "Etiqueta de la propiedad del conjunto de tests" %}}
 Para añadir una `custom_tag` a cada test con los valores `value 1`, `value 2`:
 
 {{< code-block lang="xml" >}}

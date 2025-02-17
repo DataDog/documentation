@@ -46,6 +46,7 @@ title: 동적 계측
 - Java 애플리케이션의 경우 추적 라이브러리 [`dd-trace-java`][3] 1.34.0 또는 이상.
 - Python 애플리케이션의 경우 추적 라이브러리 [`dd-trace-py`][4] 2.2.0 이상.
 - .NET 애플리케이션의 경우 추적 라이브러리 [`dd-trace-dotnet`][5] 2.54.0 또는 이상.
+- PHP 애플리케이션의 경우 추적 라이브러리 [`dd-trace-php`][18] 1.4.0 이상이 필요합니다.
 - [통합 서비스 태깅][6] 태그 `service`, `env` 및 `version`가 배포에 적용됩니다.
 - (권장 사항) [자동 완성 및 검색(오픈 베타)][17]이 활성화됩니다.
 - (권장 사항) [소스코드 통합][7]이 서비스에 설정되어 있습니다.
@@ -77,7 +78,7 @@ title: 동적 계측
 ### 한계
 
 - 동적 계측은 아직 Azure App Services 또는 서버리스 환경과 호환되지 않습니다.
-- Python, Java 및 .NET으로 구축된 애플리케이션만 지원이 가능합니다.
+- 지원은 파이썬(Python), 자바(Java), .NET 및 PHP로 빌드된 애플리케이션으로 제한됩니다.
 
 ## 동적 계측 살펴보기
 
@@ -142,10 +143,10 @@ title: 동적 계측
 
 이 설정이 활성화된 프로브는 초당 1회 적중으로 속도가 제한됩니다.
 
-<div class="alert alert-warning"><p><strong>경고: 캡처된 데이터에는 개인 데이터, 암호, AWS 키와 같은 비밀을 포함한 민감한 정보가 포함될 수 있습니다.</strong></p><p>이 정보가 올바르게 삭제되었는지 확인하려면 다음을 따르세요.<ul>
-<li>Datadog 동적 계측은 민감한 정보를 삭제하기 위해 여러 기술을 사용합니다. 기본 메커니즘이나 필요에 맞게 확장하는 방법에 대해 자세히 알아보려면 <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">민감한 데이터 스크러빙</a>을 참고하세요.</li>
-<li><strong>Capture method parameters and local variables</strong> 옵션을 비활성화하고 로그 메시지 템플릿에 포함하려는 변수를 명시적으로 선택합니다. 이렇게 하면 로그 프로브에 특별히 식별한 변수와 관련된 데이터만 포함되어 의도하지 않은 민감한 데이터 유출 위험이 줄어듭니다. </li>
-<li>귀하가 Datadog 계정의 관리자이고 다른 사용자가 <strong>Capture method parameters and local variables</strong> 옵션을 사용하는 것을 방지하려면 Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) 권한을 취소할 수 있습니다. </li></ul></p><p>또는 데이터를 기록하면서 Datadog 제품에서 해당 데이터에 액세스할 수 있는 것과 관련된 위험을 줄이려면 <code>source:dd_debugger</code>에서 <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">제한 쿼리</a>를 설정하여 캡처된 데이터를 볼 수 있는 조직의 사용자를 제한할 수 있습니다.</p></div>
+<div class="alert alert-info"><p><strong>경고: 캡처된 데이터에는 개인 데이터, 비밀번호, AWS 키 등 민감한 정보가 포함될 수 있습니다.</strong></p><p>이러한 정보가 적절하게 삭제되었는지 확인하세요.<ul>
+<li>Datadog 동적 계측은 민감한 정보를 삭제하기 위해 여러 가지 기술을 사용합니다. 기본 메커니즘 또는 필요에 맞게 확장하는 방법에 대해 자세히 알아보려면 <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">민감한 데이터 스크러빙을</a> 참조하세요.</li>
+<li><strong>캡처 방법 파라미터 및 로컬 변수</strong> 옵션을 끄고 로그 메시지 템플릿에 포함할 변수를 명시적으로 선택합니다. 이렇게 하면 로그 프로브에 구체적으로 식별한 변수와 관련된 데이터만 포함되므로 의도하지 않은 민감한 데이터 유출의 위험을 줄일 수 있습니다. </li>
+<li>Datadog 계정의 관리자로서 다른 사용자가 <strong>캡처 방법 파라미터 및 로컬 변수</strong> 옵션을 사용하지 못하도록 하려면 동적 계측 변수 캡처<code>(debugger_capture_variables</code>) 권한을 취소할 수 있습니다. </li></ul></p><p>또는 로그을 남겨야 하지만 Datadog 제품에서 이 데이터에 액세스할 수 있는 위험을 완화하려는 경우 <code>source:dd_debugger에</code> <a href="/로그/guide/로그-rbac/?탭=ui#restrict-access-to-로그">제한 쿼리</a> 을 설정하여 조직에서 캡처된 데이터를 볼 수 있는 사용자를 제한할 수 있습니다.</p></div>
 
 ### 메트릭 프로브 생성하기
 
@@ -223,3 +224,4 @@ title: 동적 계측
 [15]: /ko/dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /ko/dynamic_instrumentation/symdb/
+[18]: https://github.com/DataDog/dd-trace-php

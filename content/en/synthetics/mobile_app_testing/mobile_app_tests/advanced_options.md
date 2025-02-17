@@ -69,6 +69,12 @@ You can prevent a step screenshot from being captured at test execution by click
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
 
+## Exit on success
+
+Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
+
+{{< img src="mobile_app_testing/exit_on_success.png" alt="Stop the test and mark it as passed" style="width:50%" >}}
+
 ## Subtests
 
 The advanced options for [subtests][3] allow you to set the behavior of your mobile app test if the subtest fails.

@@ -13,7 +13,7 @@ Cloud Security Management Threats (CSM Threats) は、環境全体のファイ�
 
 ## 本番ワークロードへの脅威をリアルタイムで検出する
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+カーネルレベルでファイルやプロセスのアクティビティを監視し、Amazon EC2 インスタンス、Docker コンテナ、Kubernetes クラスターなどのインフラストラクチャーへの脅威を検出します。CSM Threats を[ネットワークパフォーマンスモニタリング][9]と組み合わせ、ワークロードが侵害される前にネットワークレベルで疑わしいアクティビティを検出します。
 
 CSM Threats では、Datadog Agent を使用して環境を監視しています。まだ Datadog Agent をセットアップしていない場合は、[サポートされている OS][1] 上で [Agent のセットアップから始めてください][2]。Datadog Agent が CSM Threats に使用する監視は 4 種類あります。
 
@@ -22,17 +22,17 @@ CSM Threats では、Datadog Agent を使用して環境を監視しています
 3. **DNS アクティビティ監視**により、ホストやコンテナ上の悪意あるアクティビティをネットワークトラフィックでリアルタイムに監視します。
 4. **カーネルアクティビティ監視**により、プロセスのハイジャックやコンテナのブレイクアウトなど、カーネル層への攻撃をリアルタイムに監視します。
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management 概要の Security Inbox には、優先的に修復すべきセキュリティ問題のリストが表示されます" width="100%">}}
 
 ## Active Protection で脅威を積極的にブロック
 
 デフォルトでは、Agent のすぐに使える暗号マイニングの脅威検出ルールがすべて有効になっており、脅威を積極的に監視しています。
 
-[Active Protection][10] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+[Active Protection][10] を使用すると、Datadog Agent の脅威検出ルールによって特定された暗号マイニングの脅威を積極的にブロックし、終了させることができます。
 
-## Manage out-of-the-box and custom detection rules
+## すぐに使える検出ルールとカスタム検出ルールの管理
 
-CSM Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
+CSM Threats には、セキュリティ専門家チームによって維持されている、すぐに使える 50 以上の検出ルールが用意されています。このルールは、最も重要なリスクを顕在化させるので、すぐに修正するための措置を取ることができます。Agent 表現ルールは、分析のために収集するワークロードのアクティビティを定義し、バックエンド検出ルールはアクティビティを分析し、攻撃者のテクニックやその他の危険な行動パターンを特定します。
 
 [リモート構成][7]を使用して、新規および更新されたルールを Agent に自動的にデプロイします。各ルールがプロセス、ネットワーク、ファイルのアクティビティをどのように監視するかを定義することで[ルールをカスタマイズ][5]し、[カスタムルールを作成][6]し、新しいシグナルに対する[リアルタイム通知を設定](#set-up-realtime-notifications)することができます。
 
@@ -46,13 +46,13 @@ CSM Threats comes with more than 50 out-of-the-box detection rules that are main
 
 ## セキュリティシグナルの調査と修復
 
-Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+[シグナルエクスプローラー][8]で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
 
-{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer ページ" width="100%">}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
 
-Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
+Datadog は、お客様の環境で検出された暗号の脅威に自動的に対処する Active Protection という新機能を導入します。Active Protection は非公開ベータ版です。フォームに記入してアクセスをリクエストしてください。
 {{< /callout >}}
 
 ## 詳細はこちら

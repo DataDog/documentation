@@ -17,6 +17,9 @@ further_reading:
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
   text: "Learn about Saved Views"
+- link: "/logs/explorer/calculated_fields/expression_language"
+  tag: "Documentation"
+  text: "Learn more about Calculated Fields Expression Language"
 ---
 
 ## Overview
@@ -46,32 +49,24 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 ### Single term example
 
-| Search syntax | Search type | Description                                           |
-| ------------- | ----------- | ----------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
-| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
+| Search syntax | Search type | Description                                               |
+| ------------- | ----------- | --------------------------------------------------------- |
+| `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`. |
+| `hello`       | Free text   | Searches only the log message for the exact string `hello`.       |
 
 ### Search term with wildcard example
 
-| Search syntax | Search type | Description                                                                                  |
-| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
-| `*:hello*`| Full-text   | Searches all log attributes for strings that starts with `hello`. For example, `hello_world`.|
+| Search syntax | Search type | Description                                                                                 |
+| ------------- | ----------- | ------------------------------------------------------------------------------------------- |
+| `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`.                                   |
+| `*:hello*`    | Full-text   | Searches all log attributes for strings starting with `hello`. For example, `hello_world`.  |
 
 ### Multiple terms with exact match example
 
-| Search syntax       | Search type | Description                                            |
-| ------------------- | ----------- |------------------------------------------------------- |
-| `*:"hello world"` | Full-text   | Searches all log attributes for the term `hello world`. |
-| `hello world`       | Free text   | Searches only the log message for the term `hello`.     |
-
-### Multiple terms without exact match example
-
-The full-text search syntax `*:hello world` is equivalent to `*:hello *:world`. It searches all log attributes for the terms `hello` and `world`.
-
-### Multiple terms with a white space example
-
-The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"hello world" *:"i am here"`. It searches all log attributes for the terms `hello world` and `i am here`.
+| Search syntax       | Search type | Description                                                                                        |
+| ------------------- | ----------- |--------------------------------------------------------------------------------------------------- |
+| `*:"hello world"`   | Full-text   | Searches all log attributes for the exact string `hello world`.                                    |
+| `hello world`       | Free text   | Searches only the log message for `hello` and `world` words. For example `hello beautiful world`.  |
 
 ## Escape special characters and spaces
 
@@ -203,6 +198,12 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
 <p> </p>
+
+## Calculated fields
+
+Calculated fields function like log attributes and can be used for search, aggregation, visualization, and defining other calculated fields. Use the `#` prefix to reference calculated field names.
+
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="A calculated field called request_duration used to filter results in the Log Explorer" style="width:100%;" >}}
 
 ## Saved searches
 

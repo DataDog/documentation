@@ -29,7 +29,7 @@ See [compatibility requirements][4] for information about what ASM features are 
 
 Configuring ASM for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Software Catalog][1].
 2. Setting up ASM instrumentation by using the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
@@ -342,7 +342,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 ## Google Cloud Run
 
-<div class="alert alert-info">ASM support for Google Cloud Run is in beta.</a></div>
+<div class="alert alert-info">ASM support for Google Cloud Run is in Preview.</a></div>
 
 ### How `serverless-init` works
 
@@ -353,7 +353,7 @@ To get full instrumentation, ensure you are calling `datadog-init` as the first 
 ### Get started
 
 {{< tabs >}}
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile

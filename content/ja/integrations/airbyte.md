@@ -24,7 +24,7 @@ assets:
     source_type_id: 10386
     source_type_name: Airbyte
   monitors:
-    long_running_jobs: assets/monitors/long_running_jobs.json
+    Sync Jobs are taking a longer time than usual: assets/monitors/long_running_jobs.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -33,7 +33,7 @@ author:
 categories:
 - ai/ml
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md
 display_on_public_website: true

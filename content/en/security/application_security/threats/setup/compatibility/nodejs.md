@@ -9,7 +9,7 @@ code_lang_weight: 50
 
 The following application security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| Application Security capability                         | Minimum NodeJS tracer version                      |
+| Application Security capability        | Minimum Node.js tracer version                     |
 |----------------------------------------|----------------------------------------------------|
 | Threat Detection                       | 4.0.0                                              |
 | Threat Protection                      | 4.0.0                                              |
@@ -32,7 +32,7 @@ The minimum tracer version to get all supported application security capabilitie
 | Kubernetes  | {{< X >}}                | {{< X >}}                     |
 | Amazon ECS  | {{< X >}}                | {{< X >}}                     |
 | AWS Fargate | {{< X >}}                | {{< X >}}                     |
-| AWS Lambda  | {{< X >}}                | beta                          |
+| AWS Lambda  | {{< X >}}                | {{< X >}}                     |
 
 ## Language and framework compatibility
 
@@ -75,7 +75,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 - If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
-
+- Although Threat Protection is available for express >= 4 versions, the blocking of payloads on the body is only supported for applications using `body-parser` library.
 
 | Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
 |-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|

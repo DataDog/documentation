@@ -29,14 +29,16 @@ Select the scope to be alerted on with the following optional configurations (wi
 **1. Predefined selectors**
 * Environment. These values are derived from the `env` tag.
 * Alert Category. Scope the monitor to a subset of Watchdog alerts.
-* Team. These values are derived from the Service Catalog.
+* Team. These values are derived from the Software Catalog.
 
 **2. Additional scoping**
 * Filter on any additional tag available on the Watchdog event.
 * Group By the dimensions you want to [group notifications by][3].
 {{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-2.png" alt="Configuring a Watchdog Monitor with advanced settings" style="width:90%;">}}
 
-After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame.
+After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over the selected time frame. 
+
+Log anomalies are found based on the `service`, `source`, and `env` tags. If your query includes any of these tags, only log anomalies matching them are shown. If other tags, such as `host`, are included in the query, Watchdog uses those tags to show only relevant combinations of `service`, `source`, or `env`.
 
 ### Notifications
 

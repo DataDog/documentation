@@ -37,10 +37,11 @@ title: 에이전트 가이드
     {{< nextlink href="agent/guide/integration-management" >}}통합 관리{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="에이전트 버전 관리 가이드:" >}}
+{{< whatsnext desc="Agent versioning guides:" >}}
+    {{< nextlink href="agent/guide/upgrade" >}}에이전트 7으로 업그레이드{{< /nextlink >}}
     {{< nextlink href="agent/guide/version_differences" >}}에이전트 버전 차이{{< /nextlink >}}
-    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog 에이전트 부버전 업그레이드{{< /nextlink >}}
-    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python 버전 관리: Datadog 에이전트 v6과 Python 3 함께 사용{{< /nextlink >}}
+    {{< nextlink href="agent/guide/upgrade_between_minor_versions" >}}Datadog 에이전트의 부버전 간 업그레이드{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-v6-python-3" >}}Python 버전 관리: Datadog 에이전트 v6와 Python 3 함께 사용하기{{< /nextlink >}}
     {{< nextlink href="agent/guide/python-3" >}}Python 2에서 Python 3으로 커스텀 점검 마이그레이션{{< /nextlink >}}
 {{< /whatsnext >}}
 

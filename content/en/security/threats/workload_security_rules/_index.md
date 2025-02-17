@@ -31,8 +31,8 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 CSM Threats rules consist of two different components: Agent rules and threat detection rules.
 
 - **Agent rules:** [Agent rules][9] are evaluated on the Agent host. CSM Threats first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog's [Security Language (SECL)][2].<br><br>
-  
-  For example, here is the *Agent rule* expression `cryptominer_args`: 
+
+  For example, here is the *Agent rule* expression `cryptominer_args`:
 
   ```text
   exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
@@ -48,11 +48,11 @@ CSM Threats rules consist of two different components: Agent rules and threat de
   ]
   ```
 - **Threat detection rules:** [Threat detection rules][3] are evaluated on the Datadog backend. Threat detection rules are composed of existing Agent rules and additional expression parameters.<br><br>
-  
+
   Here is the *threat detection rule* `Process arguments match cryptocurrency miner`. It uses the Agent rules, `cryptominer_args` and `windows_cryptominer_process`, identified by `@agent.rule_id`, with additional expression parameters:
 
   ```text
-  @agent.rule_id:(cryptominer_args || windows_cryptominer_process) 
+  @agent.rule_id:(cryptominer_args || windows_cryptominer_process)
   -@process.executable.path:"/usr/bin/grep"
   ```
 
@@ -68,13 +68,13 @@ CSM Threats uses the following pipeline when evaluating events:
 
 The following diagram illustrates this pipeline:
 
-{{< img src="security/cws/threat_detection_pipeline_2.png" alt="CMS Threats detection pipeline" style="width:100%;" >}}
+{{< img src="security/cws/threat_detection_pipeline_2.png" alt="CSM Threats detection pipeline" style="width:100%;" >}}
 
 ### Saving resources by design
 
-CSM Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there. 
+CSM Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
 
-Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the threat detection rules on the Datadog backend. 
+Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the threat detection rules on the Datadog backend.
 
 Only when the Agent observes an event that matches its rules does it send a detection to the Datadog backend. The Datadog backend then evaluates the detection to determine if it meets its threat detection rule expressions. Only if there is a match does the Datadog backend create a signal.
 
@@ -87,7 +87,7 @@ There are two use cases:
 - **Create a threat detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
 - **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
-For a detailed explanation, see [CSM Threats Detection Rules][11]. 
+For a detailed explanation, see [CSM Threats Detection Rules][11].
 
 ## Agent rules summary
 
@@ -95,7 +95,7 @@ Agent rules contain [Agent expressions](#agent-expressions) that determine which
 
 With [Remote Configuration][7] enabled, you automatically receive new and updated CSM Threats Agent rules when they're released. These bundled Agent rules are used in the [default detection rules][1].
 
-<div class="alert alert-info">Remote Configuration for CSM Threats is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-info">Remote Configuration for CSM Threats is in Preview. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
 
 ### Agent expressions
 

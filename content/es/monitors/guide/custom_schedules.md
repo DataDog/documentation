@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/configuration/?tab=thresholdalert#evaluation-window
   tag: Documentación
   text: Intervalos continuos
-kind: Guía
 title: Personalizar las frecuencias de evaluación del monitor
 ---
 

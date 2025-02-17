@@ -30,7 +30,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics][27]
-- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
+- [Collect Profiling data](#collect-profiling-data)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -46,7 +46,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 ## Enable Threat Detection to observe attack attempts
 
-Get alerted on attackers targeting your serverless applications and respond quickly. 
+Get alerted on attackers targeting your serverless applications and respond quickly.
 
 To get started, first ensure that you have [tracing enabled][43] for your functions.
 
@@ -350,7 +350,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 ## Select sampling rates for ingesting APM spans
 
-To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+
+**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
 Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
@@ -370,7 +372,7 @@ To scrub trace attributes for data security, see [Configure the Datadog Agent or
 
 ## Enable/disable trace collection
 
-Trace collection through the Datadog Lambda extension is enabled by default. 
+Trace collection through the Datadog Lambda extension is enabled by default.
 
 If you want to start collecting traces from your Lambda functions, apply the configurations below:
 
@@ -501,15 +503,15 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories. 
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories.
 
 For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 
 [101]: /integrations/guide/source-code-integration/?tab=go#serverless
 
-## Collect Profiling data (public beta)
+## Collect profiling data
 
-Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+Datadog's [Continuous Profiler][42] is available in Preview for Python tracer version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 

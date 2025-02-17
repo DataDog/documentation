@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -842,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -858,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1036,7 +1034,7 @@ components:
       example: {}
       properties:
         ok:
-          description: An array of of Monitor IDs that can be safely deleted.
+          description: An array of Monitor IDs that can be safely deleted.
           items:
             description: ID of a monitor that can be safely deleted.
             format: int64
@@ -1059,7 +1057,7 @@ components:
       description: An array of service level objective objects.
       properties:
         ok:
-          description: An array of of SLO IDs that can be safely deleted.
+          description: An array of SLO IDs that can be safely deleted.
           items:
             description: An SLO ID.
             type: string
@@ -1211,13 +1209,8 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          deprecated: true
-          description: 'A list of role identifiers. Only the author and users associated
+          description: A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
-
-
-            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
-            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -3147,6 +3140,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3151,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
@@ -3419,6 +3416,12 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          example: true
+          type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
           example: true
           type: boolean
         is_security_command_center_enabled:
@@ -4280,6 +4283,7 @@ components:
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
       - cloud_siem_usage
+      - code_security_host_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
@@ -4288,16 +4292,16 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
+      - data_jobs_monitoring_usage
+      - data_stream_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
-      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
-      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4353,6 +4357,7 @@ components:
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
       - CLOUD_SIEM_USAGE
+      - CODE_SECURITY_HOST_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
@@ -4361,16 +4366,16 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
+      - DATA_JOBS_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -4828,6 +4833,11 @@ components:
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        clustering_pattern_field_path:
+          description: Specifies the field for logs pattern clustering. Usable only
+            with logs_pattern_stream.
+          example: message
+          type: string
         compute:
           description: Compute configuration for the List Stream Widget. Compute can
             be used only with the logs_transaction_stream (from 1 to 5 items) list
@@ -4893,6 +4903,7 @@ components:
       - logs_transaction_stream
       - event_stream
       - rum_stream
+      - llm_observability_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4908,6 +4919,7 @@ components:
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
       - RUM_STREAM
+      - LLM_OBSERVABILITY_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -6021,6 +6033,9 @@ components:
 
         Make sure to use an application key created by an admin.'
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: '#/components/schemas/LogsFilter'
         id:
@@ -6043,6 +6058,12 @@ components:
           items:
             $ref: '#/components/schemas/LogsProcessor'
           type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
         type:
           description: Type of pipeline.
           example: pipeline
@@ -6052,7 +6073,7 @@ components:
       - name
       type: object
     LogsPipelineList:
-      description: Array of pipeline ID strings.
+      description: Array of all log pipeline objects configured for the organization.
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
@@ -6879,6 +6900,62 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionCostAggregator:
+      description: Aggregation methods for metric queries.
+      enum:
+      - avg
+      - sum
+      - max
+      - min
+      - last
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - SUM
+      - MAX
+      - MIN
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionCostQueryDefinition:
+      description: A formula and functions cost query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The monitor query.
+          example: sum:all.cost{*}.rollup(sum, 86400)
+          type: string
+      required:
+      - name
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7029,6 +7106,7 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7850,6 +7928,7 @@ components:
       - error-tracking alert
       - database-monitoring alert
       - network-performance alert
+      - cost alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7871,6 +7950,7 @@ components:
       - ERROR_TRACKING_ALERT
       - DATABASE_MONITORING_ALERT
       - NETWORK_PERFORMANCE_ALERT
+      - COST_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7925,9 +8005,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -8026,6 +8107,8 @@ components:
       - ci_visibility_itr_percentage
       - cloud_siem_usage
       - cloud_siem_percentage
+      - code_security_host_usage
+      - code_security_host_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -8040,18 +8123,20 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
+      - data_jobs_monitoring_usage
+      - data_jobs_monitoring_percentage
+      - data_stream_monitoring_usage
+      - data_stream_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -8090,8 +8175,6 @@ components:
       - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
-      - estimated_rum_sessions_usage
-      - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
@@ -8167,6 +8250,8 @@ components:
       - CI_VISIBILITY_ITR_PERCENTAGE
       - CLOUD_SIEM_USAGE
       - CLOUD_SIEM_PERCENTAGE
+      - CODE_SECURITY_HOST_USAGE
+      - CODE_SECURITY_HOST_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -8181,18 +8266,20 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
+      - DATA_JOBS_MONITORING_USAGE
+      - DATA_JOBS_MONITORING_PERCENTAGE
+      - DATA_STREAM_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -8231,8 +8318,6 @@ components:
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
-      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -8394,6 +8479,14 @@ components:
             tag(s).
           format: double
           type: number
+        code_security_host_percentage:
+          description: The percentage of Code Security host usage by tags.
+          format: double
+          type: number
+        code_security_host_usage:
+          description: The Code Security host usage by tags.
+          format: double
+          type: number
         container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
@@ -8462,12 +8555,29 @@ components:
           description: The Cloud Workload Security container usage by tag(s).
           format: double
           type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
+          format: double
+          type: number
         cws_hosts_percentage:
           description: The percentage of Cloud Workload Security host usage by tag(s).
           format: double
           type: number
         cws_hosts_usage:
           description: The Cloud Workload Security host usage by tag(s).
+          format: double
+          type: number
+        data_jobs_monitoring_usage:
+          description: The Data Jobs Monitoring usage by tag(s).
+          format: double
+          type: number
+        data_stream_monitoring_usage:
+          description: The Data Stream Monitoring usage by tag(s).
           format: double
           type: number
         dbm_hosts_percentage:
@@ -8494,14 +8604,6 @@ components:
           description: The error tracking events usage by tag(s).
           format: double
           type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
           format: double
@@ -8510,28 +8612,12 @@ components:
           description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_usage:
           description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -10290,6 +10376,19 @@ components:
       - lookup_enrichment_table
       - type
       type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -10524,7 +10623,7 @@ components:
       description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects.
+          description: The list of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -10934,7 +11033,7 @@ components:
             Periods of no data are counted either as uptime or downtime depending
             on monitor settings.
 
-            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+            See [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
 
             for detailed information.'
           example:
@@ -13245,6 +13344,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -13252,6 +13353,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -13956,6 +14059,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
         extractedValues:
           description: Array of values to parse and save as variables from the response.
           items:
@@ -14668,7 +14774,7 @@ components:
             $ref: '#/components/schemas/SyntheticsBatchResult'
           type: array
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
       type: object
     SyntheticsBatchResult:
       description: Object with the results of a Synthetic batch.
@@ -14692,7 +14798,7 @@ components:
           format: double
           type: number
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
         test_name:
           description: Name of the test.
           type: string
@@ -14702,6 +14808,17 @@ components:
         test_type:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
+    SyntheticsBatchStatus:
+      description: Determines whether the batch has passed, failed, or is in progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - SKIPPED
+      - FAILED
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -15108,7 +15225,6 @@ components:
       - element
       - email
       - global
-      - javascript
       - text
       example: text
       type: string
@@ -15116,7 +15232,6 @@ components:
       - ELEMENT
       - EMAIL
       - GLOBAL
-      - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
       description: Metadata for the Synthetic tests run.
@@ -15288,11 +15403,13 @@ components:
       enum:
       - global
       - text
+      - email
       example: text
       type: string
       x-enum-varnames:
       - GLOBAL
       - TEXT
+      - EMAIL
     SyntheticsCoreWebVitals:
       description: Core Web Vitals attached to a browser test step.
       properties:
@@ -15391,34 +15508,34 @@ components:
       type: object
     SyntheticsDeviceID:
       description: The device ID.
-      enum:
-      - laptop_large
-      - tablet
-      - mobile_small
-      - chrome.laptop_large
-      - chrome.tablet
-      - chrome.mobile_small
-      - firefox.laptop_large
-      - firefox.tablet
-      - firefox.mobile_small
-      - edge.laptop_large
-      - edge.tablet
-      - edge.mobile_small
       example: chrome.laptop_large
       type: string
-      x-enum-varnames:
-      - LAPTOP_LARGE
-      - TABLET
-      - MOBILE_SMALL
-      - CHROME_LAPTOP_LARGE
-      - CHROME_TABLET
-      - CHROME_MOBILE_SMALL
-      - FIREFOX_LAPTOP_LARGE
-      - FIREFOX_TABLET
-      - FIREFOX_MOBILE_SMALL
-      - EDGE_LAPTOP_LARGE
-      - EDGE_TABLET
-      - EDGE_MOBILE_SMALL
+    SyntheticsFetchUptimesPayload:
+      description: Object containing IDs of Synthetic tests and a timeframe.
+      properties:
+        from_ts:
+          description: Timestamp in seconds (Unix epoch) for the start of uptime.
+          example: 0
+          format: int64
+          type: integer
+        public_ids:
+          description: An array of Synthetic test IDs you want uptimes for.
+          example: []
+          items:
+            description: A Synthetic test ID.
+            example: abc-def-123
+            type: string
+          type: array
+        to_ts:
+          description: Timestamp in seconds (Unix epoch) for the end of uptime.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - from_ts
+      - to_ts
+      - public_ids
+      type: object
     SyntheticsGetAPITestLatestResultsResponse:
       description: Object with the latest Synthetic API test run.
       properties:
@@ -15695,6 +15812,462 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
+    SyntheticsMobileStep:
+      description: The steps used in a Synthetic mobile test.
+      properties:
+        allowFailure:
+          description: A boolean set to allow this step to fail.
+          type: boolean
+        hasNewStepElement:
+          description: A boolean set to determine if the step has a new step element.
+          type: boolean
+        isCritical:
+          description: A boolean to use in addition to `allowFailure` to determine
+            if the test should be marked as failed when the step fails.
+          type: boolean
+        name:
+          description: The name of the step.
+          example: ''
+          maxLength: 1500
+          type: string
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
+        params:
+          $ref: '#/components/schemas/SyntheticsMobileStepParams'
+        publicId:
+          description: The public ID of the step.
+          example: pub-lic-id0
+          type: string
+        timeout:
+          description: The time before declaring a step failed.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepType'
+      required:
+      - name
+      - params
+      - type
+      type: object
+    SyntheticsMobileStepParams:
+      description: The parameters of a mobile step.
+      properties:
+        check:
+          $ref: '#/components/schemas/SyntheticsCheckType'
+        delay:
+          description: Number of milliseconds to wait between inputs in a `typeText`
+            step type.
+          format: int64
+          maximum: 5000
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
+        element:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
+        enabled:
+          description: Boolean to change the state of the wifi for a `toggleWiFi`
+            step type.
+          type: boolean
+        maxScrolls:
+          description: Maximum number of scrolls to do for a `scrollToElement` step
+            type.
+          format: int64
+          type: integer
+        positions:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsPositions'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          type: string
+        value:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsValue'
+        variable:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
+        withEnter:
+          description: Boolean to indicate if `Enter` should be pressed at the end
+            of the `typeText` step type.
+          type: boolean
+        x:
+          description: Amount to scroll by on the `x` axis for a `scroll` step type.
+          format: double
+          type: number
+        y:
+          description: Amount to scroll by on the `y` axis for a `scroll` step type.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsDirection:
+      description: The direction of the scroll for a `scrollToElement` step type.
+      enum:
+      - up
+      - down
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - LEFT
+      - RIGHT
+    SyntheticsMobileStepParamsElement:
+      description: Information about the element used for a step.
+      properties:
+        context:
+          description: Context of the element.
+          type: string
+        contextType:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementContextType'
+        elementDescription:
+          description: Description of the element.
+          type: string
+        multiLocator:
+          description: Multi-locator to find the element.
+          type: object
+        relativePosition:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementRelativePosition'
+        textContent:
+          description: Text content of the element.
+          type: string
+        userLocator:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocator'
+        viewName:
+          description: Name of the view of the element.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementContextType:
+      description: Type of the context that the element is in.
+      enum:
+      - native
+      - web
+      type: string
+      x-enum-varnames:
+      - NATIVE
+      - WEB
+    SyntheticsMobileStepParamsElementRelativePosition:
+      description: Position of the action relative to the element.
+      properties:
+        x:
+          description: The `relativePosition` on the `x` axis for the element.
+          format: double
+          type: number
+        y:
+          description: The `relativePosition` on the `y` axis for the element.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsElementUserLocator:
+      description: User locator to find the element.
+      properties:
+        failTestOnCannotLocate:
+          description: Whether if the test should fail if the element cannot be found.
+          type: boolean
+        values:
+          description: Values of the user locator.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItems:
+      description: A single user locator object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItemsType'
+        value:
+          description: Value of a user locator.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItemsType:
+      description: Type of a user locator.
+      enum:
+      - accessibility-id
+      - id
+      - ios-predicate-string
+      - ios-class-chain
+      - xpath
+      type: string
+      x-enum-varnames:
+      - ACCESSIBILITY_ID
+      - ID
+      - IOS_PREDICATE_STRING
+      - IOS_CLASS_CHAIN
+      - XPATH
+    SyntheticsMobileStepParamsPositions:
+      description: List of positions for the `flick` step type. The maximum is 10
+        flicks per step
+      items:
+        $ref: '#/components/schemas/SyntheticsMobileStepParamsPositionsItems'
+      type: array
+    SyntheticsMobileStepParamsPositionsItems:
+      description: A description of a single position for a `flick` step type.
+      properties:
+        x:
+          description: The `x` position for the flick.
+          format: double
+          type: number
+        y:
+          description: The `y` position for the flick.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsValue:
+      description: Values used in the step for in multiple step types.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueString'
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueNumber'
+    SyntheticsMobileStepParamsValueNumber:
+      description: Value used in the step for in multiple step types.
+      format: int64
+      type: integer
+    SyntheticsMobileStepParamsValueString:
+      description: Value used in the step for in multiple step types.
+      type: string
+    SyntheticsMobileStepParamsVariable:
+      description: Variable object for `extractVariable` step type.
+      properties:
+        example:
+          description: An example for the variable.
+          example: ''
+          type: string
+        name:
+          description: The variable name.
+          example: VAR_NAME
+          type: string
+      required:
+      - name
+      - example
+      type: object
+    SyntheticsMobileStepType:
+      description: Step type used in your mobile Synthetic test.
+      enum:
+      - assertElementContent
+      - assertScreenContains
+      - assertScreenLacks
+      - doubleTap
+      - extractVariable
+      - flick
+      - openDeeplink
+      - playSubTest
+      - pressBack
+      - restartApplication
+      - rotate
+      - scroll
+      - scrollToElement
+      - tap
+      - toggleWiFi
+      - typeText
+      - wait
+      example: assertElementContent
+      type: string
+      x-enum-varnames:
+      - ASSERTELEMENTCONTENT
+      - ASSERTSCREENCONTAINS
+      - ASSERTSCREENLACKS
+      - DOUBLETAP
+      - EXTRACTVARIABLE
+      - FLICK
+      - OPENDEEPLINK
+      - PLAYSUBTEST
+      - PRESSBACK
+      - RESTARTAPPLICATION
+      - ROTATE
+      - SCROLL
+      - SCROLLTOELEMENT
+      - TAP
+      - TOGGLEWIFI
+      - TYPETEXT
+      - WAIT
+    SyntheticsMobileTest:
+      description: Object containing details about a Synthetic mobile test.
+      properties:
+        config:
+          $ref: '#/components/schemas/SyntheticsMobileTestConfig'
+        device_ids:
+          description: Array with the different device IDs used to run the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsDeviceID'
+          type: array
+        message:
+          description: Notification message associated with the test.
+          example: Notification message
+          type: string
+        monitor_id:
+          description: The associated monitor ID.
+          example: 12345678
+          format: int64
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the test.
+          example: Example test name
+          type: string
+        options:
+          $ref: '#/components/schemas/SyntheticsMobileTestOptions'
+        public_id:
+          description: The public ID of the test.
+          example: 123-abc-456
+          readOnly: true
+          type: string
+        status:
+          $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+        steps:
+          description: Array of steps for the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStep'
+          type: array
+        tags:
+          description: Array of tags attached to the test.
+          example:
+          - env:production
+          items:
+            description: A tag attached to the test.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileTestType'
+      required:
+      - config
+      - name
+      - options
+      - type
+      type: object
+    SyntheticsMobileTestConfig:
+      description: Configuration object for a Synthetic mobile test.
+      properties:
+        initialApplicationArguments:
+          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArguments'
+        variables:
+          description: Array of variables used for the test steps.
+          items:
+            $ref: '#/components/schemas/SyntheticsConfigVariable'
+          type: array
+      type: object
+    SyntheticsMobileTestInitialApplicationArguments:
+      additionalProperties:
+        description: A single application argument.
+        type: string
+      description: Initial application arguments for a mobile test.
+      type: object
+    SyntheticsMobileTestOptions:
+      description: Object describing the extra options for a Synthetic test.
+      properties:
+        allowApplicationCrash:
+          description: A boolean to set if an application crash would mark the test
+            as failed.
+          type: boolean
+        bindings:
+          description: Array of bindings used for the mobile test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBinding'
+          type: array
+        ci:
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
+        defaultStepTimeout:
+          description: The default timeout for steps in the test (in seconds).
+          format: int32
+          maximum: 300
+          minimum: 1
+          type: integer
+        device_ids:
+          description: For mobile test, array with the different device IDs used to
+            run the test.
+          example:
+          - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
+          items:
+            $ref: '#/components/schemas/SyntheticsDeviceID'
+          type: array
+        disableAutoAcceptAlert:
+          description: A boolean to disable auto accepting alerts.
+          type: boolean
+        min_failure_duration:
+          description: Minimum amount of time in failure required to trigger an alert.
+          format: int64
+          maximum: 7200
+          minimum: 0
+          type: integer
+        mobileApplication:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplication'
+        monitor_name:
+          description: The monitor name is used for the alert title as well as for
+            all monitor dashboard widgets and SLOs.
+          type: string
+        monitor_options:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptions'
+        monitor_priority:
+          description: Integer from 1 (high) to 5 (low) indicating alert severity.
+          format: int32
+          maximum: 5
+          minimum: 1
+          type: integer
+        noScreenshot:
+          description: A boolean set to not take a screenshot for the step.
+          type: boolean
+        restricted_roles:
+          $ref: '#/components/schemas/SyntheticsRestrictedRoles'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        scheduling:
+          $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
+        tick_every:
+          description: The frequency at which to run the Synthetic test (in seconds).
+          example: 300
+          format: int64
+          maximum: 604800
+          minimum: 300
+          type: integer
+        verbosity:
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
+          format: int32
+          maximum: 5
+          minimum: 0
+          type: integer
+      required:
+      - device_ids
+      - tick_every
+      - mobileApplication
+      type: object
+    SyntheticsMobileTestType:
+      default: mobile
+      description: Type of the Synthetic test, `mobile`.
+      enum:
+      - mobile
+      example: mobile
+      type: string
+      x-enum-varnames:
+      - MOBILE
+    SyntheticsMobileTestsMobileApplication:
+      description: Mobile application for mobile synthetics test.
+      properties:
+        applicationId:
+          description: Application ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaaa
+          maxLength: 1500
+          type: string
+        referenceId:
+          description: Reference ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaab
+          maxLength: 1500
+          type: string
+        referenceType:
+          $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      required:
+      - applicationId
+      - referenceId
+      - referenceType
+      type: object
+    SyntheticsMobileTestsMobileApplicationReferenceType:
+      description: Reference type for the mobile application for a mobile synthetics
+        test.
+      enum:
+      - latest
+      - version
+      example: latest
+      type: string
+      x-enum-varnames:
+      - LATEST
+      - VERSION
     SyntheticsParsingOptions:
       description: Parsing options for variables to extract.
       example: {}
@@ -15973,23 +16546,18 @@ components:
           description: Subject Alternative Name associated with the certificate.
           type: string
       type: object
-    SyntheticsStatus:
-      description: Determines whether or not the batch has passed, failed, or is in
-        progress.
-      enum:
-      - passed
-      - skipped
-      - failed
-      type: string
-      x-enum-varnames:
-      - PASSED
-      - skipped
-      - failed
     SyntheticsStep:
       description: The steps used in a Synthetic browser test.
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: A boolean set to exit the test if the step succeeds.
           type: boolean
         isCritical:
           description: A boolean to use in addition to `allowFailure` to determine
@@ -15999,11 +16567,14 @@ components:
           description: The name of the step.
           type: string
         noScreenshot:
-          description: A boolean set to not take a screenshot for the step.
+          description: A boolean set to skip taking a screenshot for the step.
           type: boolean
         params:
           description: The parameters of the step.
           type: object
+        public_id:
+          description: The public ID of the step.
+          type: string
         timeout:
           description: The time before declaring a step failed.
           format: int64
@@ -16014,6 +16585,9 @@ components:
     SyntheticsStepDetail:
       description: Object describing a step for a Synthetic test.
       properties:
+        allowFailure:
+          description: Whether or not the step was allowed to fail.
+          type: boolean
         browserErrors:
           description: Array of errors collected for a browser test.
           items:
@@ -16031,6 +16605,8 @@ components:
         error:
           description: Error returned by the test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
         screenshotBucketKey:
@@ -16159,6 +16735,8 @@ components:
       properties:
         executionRule:
           $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
       type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
@@ -16265,16 +16843,19 @@ components:
       enum:
       - api
       - browser
+      - mobile
       type: string
       x-enum-varnames:
       - API
       - BROWSER
+      - MOBILE
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
       - blocking
       - non_blocking
       - skipped
+      example: blocking
       type: string
       x-enum-varnames:
       - BLOCKING
@@ -16417,6 +16998,11 @@ components:
 
         (for example, renotification).'
       properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptionsNotificationPresetName'
         renotify_interval:
           description: 'Time interval before renotifying if the test is still failing
 
@@ -16424,7 +17010,24 @@ components:
           format: int64
           minimum: 0
           type: integer
+        renotify_occurrences:
+          description: The number of times to renotify if the test is still failing.
+          format: int64
+          type: integer
       type: object
+    SyntheticsTestOptionsMonitorOptionsNotificationPresetName:
+      description: The name of the preset for the notification for the monitor.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -16463,6 +17066,9 @@ components:
           description: Timezone in which the timeframe is based.
           example: America/New_York
           type: string
+      required:
+      - timeframes
+      - timezone
       type: object
     SyntheticsTestOptionsSchedulingTimeframe:
       description: Object describing a timeframe.
@@ -16482,6 +17088,10 @@ components:
           description: The hour of the day on which scheduling ends.
           example: '16:00'
           type: string
+      required:
+      - day
+      - from
+      - to
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)
@@ -16718,6 +17328,48 @@ components:
       description: String Port number to use when performing the test. Supports templated
         variables.
       type: string
+    SyntheticsTestRestrictionPolicyBinding:
+      description: Objects describing the binding used for a mobile test.
+      properties:
+        principals:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        relation:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
+      type: object
+    SyntheticsTestRestrictionPolicyBindingPrincipals:
+      description: List of principals for a mobile test binding.
+      items:
+        description: A principal for a mobile test binding.
+        maxLength: 1500
+        type: string
+      type: array
+    SyntheticsTestRestrictionPolicyBindingRelation:
+      description: The type of relation for the binding.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
+    SyntheticsTestUptime:
+      description: Object containing the uptime for a Synthetic test ID.
+      properties:
+        from_ts:
+          description: Timestamp in seconds for the start of uptime.
+          format: int64
+          type: integer
+        overall:
+          $ref: '#/components/schemas/SyntheticsUptime'
+        public_id:
+          description: A Synthetic test ID.
+          example: abc-def-123
+          type: string
+        to_ts:
+          description: Timestamp in seconds for the end of uptime.
+          format: int64
+          type: integer
+      type: object
     SyntheticsTiming:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
@@ -16840,6 +17492,62 @@ components:
       properties:
         new_status:
           $ref: '#/components/schemas/SyntheticsTestPauseStatus'
+      type: object
+    SyntheticsUptime:
+      description: Object containing the uptime information.
+      properties:
+        errors:
+          description: An array of error objects returned while querying the history
+            data for the service level objective.
+          items:
+            $ref: '#/components/schemas/SLOHistoryResponseErrorWithType'
+          nullable: true
+          type: array
+        group:
+          description: The location name
+          example: name
+          type: string
+        history:
+          description: 'The state transition history for the monitor, represented
+            as an array of
+
+            pairs. Each pair is an array where the first element is the transition
+            timestamp
+
+            in Unix epoch format (integer) and the second element is the state (integer).
+
+            For the state, an integer value of `0` indicates uptime, `1` indicates
+            downtime,
+
+            and `2` indicates no data.'
+          example:
+          - - 1579212382
+            - 0
+          items:
+            description: An array of transitions
+            example:
+            - 1579212382
+            - 0
+            items:
+              description: A timeseries data point which is a tuple of (timestamp,
+                value).
+              format: double
+              type: number
+            maxItems: 2
+            minItems: 2
+            type: array
+          type: array
+        span_precision:
+          description: The number of decimal places to which the SLI value is accurate
+            for the given from-to timestamps.
+          example: 2.0
+          format: double
+          type: number
+        uptime:
+          description: The overall uptime.
+          example: 99.99
+          format: double
+          type: number
       type: object
     SyntheticsVariableParser:
       description: Details of the parser to use for the global variable.
@@ -17523,7 +18231,6 @@ components:
           $ref: '#/components/schemas/ToplistWidgetStackedType'
       required:
       - type
-      - legend
       type: object
     ToplistWidgetStackedType:
       default: stacked
@@ -19300,7 +20007,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
@@ -19395,6 +20103,21 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -19515,9 +20238,19 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         date:
@@ -19534,9 +20267,96 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -19703,13 +20523,24 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -19741,7 +20572,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            within the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -19830,8 +20661,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current date for all organizations (To be introduced
+            all hours within the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -20025,7 +20871,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for the given org.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20120,6 +20967,21 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20250,9 +21112,19 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        data_jobs_monitoring_host_hr_sum:
+          description: Shows the sum of all Data Jobs Monitoring hosts over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         dbm_host_top99p_sum:
@@ -20265,9 +21137,96 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20437,13 +21396,24 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for the given org.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for the given org.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_sum:
+          description: Shows the sum of all Oracle Cloud Infrastructure hosts over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
+        oci_host_top99p:
+          description: Shows the 99th percentile of all Oracle Cloud Infrastructure
+            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         online_archive_events_count_sum:
@@ -20470,7 +21440,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for the given org.
+            within the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -20567,6 +21537,21 @@ components:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -20754,8 +21739,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
-          description: Shows the average of all profiled Fargate tasks over all hours
-            in the current month for all organizations.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
@@ -20858,6 +21843,21 @@ components:
             events over all hours in the current month for all organizations.
           format: int64
           type: integer
+        code_analysis_sa_committers_hwm_sum:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm_sum:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_security_host_top99p_sum:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current month for all organizations.
@@ -20949,9 +21949,8 @@ components:
           format: int64
           type: integer
         cspm_container_hwm_sum:
-          description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current month for all
-            organizations.
+          description: Shows the sum of the high-water marks of Cloud Security Management
+            Pro containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
@@ -20979,14 +21978,24 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        data_jobs_monitoring_host_hr_agg_sum:
+          description: Shows the sum of Data Jobs Monitoring hosts over all hours
+            in the current months for all organizations
           format: int64
           type: integer
         dbm_host_top99p_sum:
@@ -21003,9 +22012,96 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        eph_infra_host_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_aws_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_azure_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_ent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_agg_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_agg_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_pro_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg_sum:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg_sum:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -21075,8 +22171,8 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current month for all organizations.
+          description: Shows sum of the high-water marks of incident management monthly
+            active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -21107,8 +22203,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
+          description: Shows the most recent hour in the current month for all organizations
+            for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
@@ -21194,13 +22290,24 @@ components:
           format: int64
           type: integer
         npm_host_top99p_sum:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_agg_sum:
           description: Sum of all observability pipelines bytes processed over all
             hours in the current month for all organizations.
+          format: int64
+          type: integer
+        oci_host_agg_sum:
+          description: Shows the sum of Oracle Cloud Infrastructure hosts over all
+            hours in the current months for all organizations
+          format: int64
+          type: integer
+        oci_host_top99p_sum:
+          description: Shows the 99th percentile of Oracle Cloud Infrastructure hosts
+            over all hours in the current months for all organizations
           format: int64
           type: integer
         online_archive_events_count_agg_sum:
@@ -21334,8 +22441,23 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current month for all organizations (To be introduced
+            all hours within the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_replay_session_count_agg_sum:
@@ -21726,6 +22848,7 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
     WebhooksIntegration:
@@ -22823,12 +23946,18 @@ components:
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
+            dashboards_embed_share: Create, modify, and delete shared dashboards with
+              share type 'embed'.
+            dashboards_invite_share: Create, modify, and delete shared dashboards
+              with share type 'invite'.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
+            embeddable_graphs_share: Generate public links to share embeddable graphs
+              externally.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -22847,9 +23976,15 @@ components:
               configuring allowed login methods, creating child orgs, subscribing
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
+            security_comments_read: Read comments of vulnerabilities.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -22877,6 +24012,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_optimization_read: View Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -22914,6 +24050,10 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -22996,6 +24136,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     post:
@@ -23033,6 +24177,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         operationId: DeleteAPIKey
         parameters:
@@ -23081,6 +24229,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_delete
       x-undo:
         type: idempotent
     get:
@@ -23118,6 +24270,10 @@ paths:
       tags:
       - Key Management
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_read
       x-undo:
         type: safe
     put:
@@ -23168,6 +24324,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - api_keys_write
       x-undo:
         type: idempotent
   /api/v1/application_key:
@@ -23193,6 +24353,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     post:
@@ -23236,6 +24401,10 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - user_app_keys
       x-undo:
         operationId: DeleteApplicationKey
         parameters:
@@ -23278,6 +24447,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
     get:
@@ -23315,6 +24489,11 @@ paths:
       tags:
       - Key Management
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_read
+        - user_app_keys
       x-undo:
         type: safe
     put:
@@ -23371,6 +24550,11 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - org_app_keys_write
+        - user_app_keys
       x-undo:
         type: idempotent
   /api/v1/check_run:
@@ -23494,6 +24678,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 41
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/daily_custom_reports/{report_id}:
@@ -23542,6 +24730,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 42
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/dashboard:
@@ -23597,6 +24789,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23667,6 +24863,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: dashboards
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     patch:
@@ -23721,6 +24921,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     post:
@@ -23780,6 +24984,10 @@ paths:
             name: body
           step: there is a valid "screenboard_dashboard" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboard
         parameters:
@@ -23814,6 +25022,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     post:
@@ -23863,6 +25075,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\"\n}"
           step: there is a valid "dashboard_list" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         operationId: DeleteDashboardList
         parameters:
@@ -23911,6 +25127,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -23954,6 +25174,10 @@ paths:
       tags:
       - Dashboard Lists
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24011,6 +25235,10 @@ paths:
       - Dashboard Lists
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/dashboard/public:
@@ -24077,6 +25305,10 @@ paths:
               \   \"live_span\": \"1h\"\n  }\n}"
           step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboard
         parameters:
@@ -24125,6 +25357,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -24169,6 +25405,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24241,6 +25481,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
   /api/v1/dashboard/public/{token}/invitation:
@@ -24296,6 +25540,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: idempotent
     get:
@@ -24353,6 +25601,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         type: safe
     post:
@@ -24427,6 +25679,10 @@ paths:
               \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
           step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_public_share
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
@@ -24483,6 +25739,10 @@ paths:
             source: dashboard.id
           step: the "dashboard" was deleted
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
     get:
@@ -24525,6 +25785,10 @@ paths:
       tags:
       - Dashboards
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_read
       x-undo:
         type: safe
     put:
@@ -24581,6 +25845,10 @@ paths:
       - Dashboards
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - dashboards_write
       x-undo:
         type: idempotent
   /api/v1/distribution_points:
@@ -24696,6 +25964,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
@@ -24761,6 +26033,10 @@ paths:
               [\"canceled\"]\n}"
           step: there is a valid "downtime" for a "monitor" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         operationId: CancelDowntime
         parameters:
@@ -24819,6 +26095,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
@@ -24862,6 +26142,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
     get:
@@ -24908,6 +26192,10 @@ paths:
       tags:
       - Downtimes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -24969,6 +26257,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_downtime
       x-undo:
         type: idempotent
   /api/v1/events:
@@ -25082,6 +26374,10 @@ paths:
       tags:
       - Events
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
     post:
@@ -25164,6 +26460,10 @@ paths:
       tags:
       - Events
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - events_read
       x-undo:
         type: safe
   /api/v1/graph/embed:
@@ -25189,6 +26489,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 5
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -25237,6 +26540,10 @@ paths:
       - Embeddable Graphs
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -25277,6 +26584,9 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 3
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/enable:
@@ -25315,6 +26625,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -25353,6 +26667,10 @@ paths:
       tags:
       - Embeddable Graphs
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -25451,6 +26769,9 @@ paths:
       tags:
       - Snapshots
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/host/{host_name}/mute:
@@ -25636,6 +26957,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/hosts/totals:
@@ -25685,6 +27010,10 @@ paths:
       tags:
       - Hosts
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - hosts_read
       x-undo:
         type: safe
   /api/v1/integration/aws:
@@ -25731,6 +27060,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -25780,6 +27113,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -25842,6 +27179,10 @@ paths:
               \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configurations_manage
       x-undo:
         operationId: DeleteAWSAccount
         parameters:
@@ -25915,6 +27256,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/aws/available_namespace_rules:
@@ -25947,6 +27292,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/event_bridge:
@@ -25987,6 +27336,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -26018,6 +27371,9 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 10
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
     post:
@@ -26057,6 +27413,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteAWSEventBridgeSource
         parameters: []
@@ -26100,6 +27460,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -26137,6 +27501,10 @@ paths:
       tags:
       - AWS Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26180,6 +27548,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSTagFilter
         parameters: []
@@ -26226,6 +27598,10 @@ paths:
       - AWS Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/aws/logs:
@@ -26266,6 +27642,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         type: idempotent
     get:
@@ -26309,6 +27689,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26348,6 +27732,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: DeleteAWSLambdaARN
         parameters: []
@@ -26405,6 +27793,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/aws/logs/services:
@@ -26447,6 +27839,10 @@ paths:
       tags:
       - AWS Logs Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
     post:
@@ -26486,6 +27882,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_edit
       x-undo:
         operationId: TODO
         type: unsafe
@@ -26532,6 +27932,10 @@ paths:
       - AWS Logs Integration
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - aws_configuration_read
       x-undo:
         type: safe
   /api/v1/integration/azure:
@@ -26572,6 +27976,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26603,6 +28011,10 @@ paths:
       tags:
       - Azure Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_read
       x-undo:
         type: safe
     post:
@@ -26664,12 +28076,19 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configurations_manage
       x-undo:
         operationId: DeleteAzureIntegration
         parameters:
@@ -26722,6 +28141,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/azure/host_filters:
@@ -26763,6 +28186,10 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - azure_configuration_edit
       x-undo:
         type: safe
   /api/v1/integration/gcp:
@@ -26805,6 +28232,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         type: idempotent
     get:
@@ -26837,6 +28268,10 @@ paths:
       tags:
       - GCP Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_read
       x-undo:
         type: safe
     post:
@@ -26887,13 +28322,17 @@ paths:
               \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
               }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
               \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
-              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
-              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"is_resource_change_collection_enabled\":
+              true,\n  \"private_key\": \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
               \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
               true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
               \ \"type\": \"service_account\"\n}"
           step: there is a valid "gcp_account" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configurations_manage
       x-undo:
         operationId: DeleteGCPIntegration
         parameters:
@@ -26944,6 +28383,10 @@ paths:
       - GCP Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - gcp_configuration_edit
       x-undo:
         type: idempotent
   /api/v1/integration/pagerduty/configuration/services:
@@ -26983,6 +28426,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeletePagerDutyIntegrationService
         parameters:
@@ -27021,6 +28468,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27058,6 +28509,10 @@ paths:
       tags:
       - PagerDuty Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27105,6 +28560,10 @@ paths:
       - PagerDuty Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/slack:
@@ -27288,6 +28747,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     post:
@@ -27334,6 +28797,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: unsafe
   /api/v1/integration/slack/configuration/accounts/{account_name}/channels/{channel_name}:
@@ -27370,6 +28837,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27409,6 +28880,10 @@ paths:
       tags:
       - Slack Integration
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     patch:
@@ -27456,6 +28931,10 @@ paths:
       - Slack Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
   /api/v1/integration/webhooks/configuration/custom-variables:
@@ -27502,6 +28981,10 @@ paths:
               \ \"is_secret\": false\n}"
           step: there is a valid "webhook_custom_variable" in the system
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         operationId: DeleteWebhooksIntegrationCustomVariable
         parameters:
@@ -27540,6 +29023,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27588,6 +29075,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27639,6 +29130,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/integration/webhooks/configuration/webhooks:
@@ -27689,6 +29184,10 @@ paths:
             value: "{\n  \"name\": \"{{ unique }}\",\n  \"url\": \"http://example.com/webhook\"\n}"
           step: there is a valid "webhook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - create_webhooks
       x-undo:
         operationId: DeleteWebhooksIntegration
         parameters:
@@ -27727,6 +29226,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: idempotent
     get:
@@ -27770,6 +29273,10 @@ paths:
       tags:
       - Webhooks Integration
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - integrations_read
       x-undo:
         type: safe
     put:
@@ -27821,6 +29328,10 @@ paths:
       - Webhooks Integration
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - manage_integrations
       x-undo:
         type: safe
   /api/v1/logs-queries/list:
@@ -27874,6 +29385,10 @@ paths:
       - Logs
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_data
       x-undo:
         type: safe
   /api/v1/logs/config/index-order:
@@ -27900,6 +29415,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -27941,6 +29460,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         type: idempotent
   /api/v1/logs/config/indexes:
@@ -27972,6 +29495,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -28011,6 +29538,10 @@ paths:
       - Logs Indexes
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
       x-undo:
         operationId: TODO
         parameters: []
@@ -28052,6 +29583,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -28131,6 +29666,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -28185,6 +29724,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/logs/config/pipelines:
@@ -28212,6 +29755,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -28250,6 +29797,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         operationId: DeleteLogsPipeline
         parameters:
@@ -28290,6 +29841,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
     get:
@@ -28329,6 +29884,10 @@ paths:
       tags:
       - Logs Pipelines
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -28377,6 +29936,10 @@ paths:
       - Logs Pipelines
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_write_pipelines
       x-undo:
         type: idempotent
   /api/v1/metrics:
@@ -28440,6 +30003,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
   /api/v1/metrics/{metric_name}:
@@ -28483,6 +30050,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_read
       x-undo:
         type: safe
     put:
@@ -28535,17 +30106,21 @@ paths:
       - Metrics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - metrics_metadata_write
       x-undo:
         type: idempotent
   /api/v1/monitor:
     get:
-      description: Get details about the specified monitor from your organization.
+      description: Get all monitors from your organization.
       operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
           states.
 
-          Choose one or more from `all`, `alert`, `warn`, and `no data`.'
+          Choose one or more from `all`, `alert`, `warn`, and `no data` (`no%20data`).'
         in: query
         name: group_states
         required: false
@@ -28622,6 +30197,7 @@ paths:
           content:
             application/json:
               schema:
+                description: An array of monitor objects.
                 items:
                   $ref: '#/components/schemas/Monitor'
                 type: array
@@ -28645,401 +30221,164 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all monitor details
+      summary: Get all monitors
       tags:
       - Monitors
       x-menu-order: 2
       x-pagination:
         limitParam: page_size
         pageParam: page
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     post:
-      description: 'Create a monitor using the specified options.
-
-
-        #### Monitor Types
-
-
-        The type of monitor chosen from:
-
-
-        - anomaly: `query alert`
-
-        - APM: `query alert` or `trace-analytics alert`
-
-        - composite: `composite`
-
-        - custom: `service check`
-
-        - forecast: `query alert`
-
-        - host: `service check`
-
-        - integration: `query alert` or `service check`
-
-        - live process: `process alert`
-
-        - logs: `log alert`
-
-        - metric: `query alert`
-
-        - network: `service check`
-
-        - outlier: `query alert`
-
-        - process: `service check`
-
-        - rum: `rum alert`
-
-        - SLO: `slo alert`
-
-        - watchdog: `event-v2 alert`
-
-        - event-v2: `event-v2 alert`
-
-        - audit: `audit alert`
-
-        - error-tracking: `error-tracking alert`
-
-        - database-monitoring: `database-monitoring alert`
-
-        - network-performance: `network-performance alert`
-
-
-        **Notes**:
-
-        - Synthetic monitors are created through the Synthetics API. See the [Synthetics
-        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
-        more information.
-
-        - Log monitors require an unscoped App Key.
-
-
-        #### Query Types
-
-
-        ##### Metric Alert Query
-
-
-        Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator
-        #`
-
-
-        - `time_aggr`: avg, sum, max, min, change, or pct_change
-
-        - `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the
-        monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor
-        type) or `last_1d`, or `last_1w`
-
-        - `space_aggr`: avg, sum, min, or max
-
-        - `tags`: one or more tags (comma-separated), or *
-
-        - `key`: a ''key'' in key:value tag syntax; defines a separate alert for each
-        tag in the group (multi-alert)
-
-        - `operator`: <, <=, >, >=, ==, or !=
-
-        - `#`: an integer or decimal number used to set the threshold
-
-
-        If you are using the `_change_` or `_pct_change_` time aggregator, instead
-        use `change_aggr(time_aggr(time_window),
-
-        timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
-
-
-        - `change_aggr` change, pct_change
-
-        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
-
-        - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
-        last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
-        2)
-
-        - `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
-
-
-        Use this to create an outlier monitor using the following query:
-
-        `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host},
-        ''dbscan'', 7) > 0`
-
-
-        ##### Service Check Query
-
-
-        Example: `"check".over(tags).last(count).by(group).count_by_status()`
-
-
-        - `check` name of the check, for example `datadog.agent.up`
-
-        - `tags` one or more quoted tags (comma-separated), or "*". for example: `.over("env:prod",
-        "role:db")`; `over` cannot be blank.
-
-        - `count` must be at greater than or equal to your max threshold (defined
-        in the `options`). It is limited to 100.
-
-        For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
-        statuses, `count` should be at least 3.
-
-        - `group` must be specified for check monitors. Per-check grouping is already
-        explicitly known for some service checks.
-
-        For example, Postgres integration monitors are tagged by `db`, `host`, and
-        `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
-        Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation
-        for more information.
-
-
-        ##### Event Alert Query
-
-
-        **Note:** The Event Alert Query has been replaced by the Event V2 Alert Query.
-        For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
-
-
-        ##### Event V2 Alert Query
-
-
-        Example: `events(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Process Alert Query
-
-
-        Example: `processes(search).over(tags).rollup(''count'').last(timeframe) operator
-        #`
-
-
-        - `search` free text search string for querying processes.
-
-        Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
-        page.
-
-        - `tags` one or more tags (comma-separated)
-
-        - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported
-        timeframes: s, m, h and d
-
-        - `operator` <, <=, >, >=, ==, or !=
-
-        - `#` an integer or decimal number used to set the threshold
-
-
-        ##### Logs Alert Query
-
-
-        Example: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `index_name` For multi-index organizations, the log index in which the request
-        is performed.
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Composite Query
-
-
-        Example: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite
-        monitors
-
-
-        * `name` [*required*, *default* = **dynamic, based on query**]: The name of
-        the alert.
-
-        * `message` [*required*, *default* = **dynamic, based on query**]: A message
-        to include with notifications for this monitor.
-
-        Email notifications can be sent to specific users by using the same ''@username''
-        notation as events.
-
-        * `tags` [*optional*, *default* = **empty list**]: A list of tags to associate
-        with your monitor.
-
-        When getting all monitor details via the API, use the `monitor_tags` argument
-        to filter results by these tags.
-
-        It is only available via the API and isn''t visible or editable in the Datadog
-        UI.
-
-
-        ##### SLO Alert Query
-
-
-        Example: `error_budget("slo_id").over("time_window") operator #`
-
-
-        - `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert
-        for.
-
-        - `time_window`: The time window of the SLO target you wish to alert on. Valid
-        options: `7d`, `30d`, `90d`.
-
-        - `operator`: `>=` or `>`
-
-
-        ##### Audit Alert Query
-
-
-        Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### CI Pipelines Alert Query
-
-
-        Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### CI Tests Alert Query
-
-
-        Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Error Tracking Alert Query
-
-
-        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
-        measure]).last(time_window) operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **Database Monitoring Alert Query**
-
-
-        Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **Network Performance Alert Query**
-
-
-        Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.'
+      description: "Create a monitor using the specified options.\n\n#### Monitor
+        Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM:
+        `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom:
+        `service check`\n- forecast: `query alert`\n- host: `service check`\n- integration:
+        `query alert` or `service check`\n- live process: `process alert`\n- logs:
+        `log alert`\n- metric: `query alert`\n- network: `service check`\n- outlier:
+        `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo
+        alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
+        `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
+        `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
+        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
+        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
+        documentation for more information.\n- Log monitors require an unscoped App
+        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
+        `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
+        type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
+        or `last_1d`, or `last_1w`\n- `space_aggr`: avg, sum, min, or max\n- `tags`:
+        one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag
+        syntax; defines a separate alert for each tag in the group (multi-alert)\n-
+        `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used
+        to set the threshold\n\nIf you are using the `_change_` or `_pct_change_`
+        time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags}
+        [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr`
+        avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n-
+        `time_window` last\\_#m (between 1 and 2880 depending on the monitor type),
+        last\\_#h (between 1 and 48 depending on the monitor type), or last_#d (1
+        or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse
+        this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data}
+        by {host}, 'dbscan', 7) > 0`\n\n##### Service Check Query\n\nExample: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n-
+        `check` name of the check, for example `datadog.agent.up`\n- `tags` one or
+        more quoted tags (comma-separated), or \"*\". for example: `.over(\"env:prod\",
+        \"role:db\")`; `over` cannot be blank.\n- `count` must be at greater than
+        or equal to your max threshold (defined in the `options`). It is limited to
+        100.\nFor example, if you've specified to notify on 1 critical, 3 ok, and
+        2 warn statuses, `count` should be at least 3.\n- `group` must be specified
+        for check monitors. Per-check grouping is already explicitly known for some
+        service checks.\nFor example, Postgres integration monitors are tagged by
+        `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and
+        `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks/)
+        documentation for more information.\n\n##### Event Alert Query\n\n**Note:**
+        The Event Alert Query has been replaced by the Event V2 Alert Query. For more
+        information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).\n\n#####
+        Event V2 Alert Query\n\nExample: `events(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### Process
+        Alert Query\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe)
+        operator #`\n\n- `search` free text search string for querying processes.\nMatching
+        processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
+        page.\n- `tags` one or more tags (comma-separated)\n- `timeframe` the timeframe
+        to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and
+        d\n- `operator` <, <=, >, >=, ==, or !=\n- `#` an integer or decimal number
+        used to set the threshold\n\n##### Logs Alert Query\n\nExample: `logs(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` For multi-index organizations, the log index in which the request
+        is performed.\n- `rollup_method` The stats roll-up method - supports `count`,
+        `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method`
+        - specify the measure or the facet name you want to use.\n- `time_window`
+        #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`,
+        `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n#####
+        Composite Query\n\nExample: `12345 && 67890`, where `12345` and `67890` are
+        the IDs of non-composite monitors\n\n* `name` [*required*, *default* = **dynamic,
+        based on query**]: The name of the alert.\n* `message` [*required*, *default*
+        = **dynamic, based on query**]: A message to include with notifications for
+        this monitor.\nEmail notifications can be sent to specific users by using
+        the same '@username' notation as events.\n* `tags` [*optional*, *default*
+        = **empty list**]: A list of tags to associate with your monitor.\nWhen getting
+        all monitor details via the API, use the `monitor_tags` argument to filter
+        results by these tags.\nIt is only available via the API and isn't visible
+        or editable in the Datadog UI.\n\n##### SLO Alert Query\n\nExample: `error_budget(\"slo_id\").over(\"time_window\")
+        operator #`\n\n- `slo_id`: The alphanumeric SLO ID of the SLO you are configuring
+        the alert for.\n- `time_window`: The time window of the SLO target you wish
+        to alert on. Valid options: `7d`, `30d`, `90d`.\n- `operator`: `>=` or `>`\n\n#####
+        Audit Alert Query\n\nExample: `audits(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### CI Pipelines
+        Alert Query\n\nExample: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### CI Tests
+        Alert Query\n\nExample: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### Error
+        Tracking Alert Query\n\n\"New issue\" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`\n\"High impact issue\"
+        example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`\n\n- `query` The search
+        query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `issue_source` The issue source - supports `all`, `browser`, `mobile` and
+        `backend` and defaults to `all` if omitted.\n- `rollup_method` The stats roll-up
+        method - supports `count`, `avg`, and `cardinality` and defaults to `count`
+        if omitted.\n- `measure` For `avg` and cardinality `rollup_method` - specify
+        the measure or the facet name you want to use.\n- `group by` Comma-separated
+        list of attributes to group by - should contain at least `issue.id`.\n- `time_window`
+        #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`,
+        `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**Database
+        Monitoring Alert Query**\n\nExample: `database-monitoring(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n**Network Performance
+        Alert Query**\n\nExample: `network-performance(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:
@@ -29098,6 +30437,10 @@ paths:
             name: body
           step: there is a valid "monitor" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         operationId: DeleteMonitor
         parameters:
@@ -29157,6 +30500,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/groups/search:
@@ -29244,6 +30591,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/search:
@@ -29333,6 +30684,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/validate:
@@ -29381,6 +30736,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}:
@@ -29446,6 +30805,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
     get:
@@ -29510,6 +30873,10 @@ paths:
       tags:
       - Monitors
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
     put:
@@ -29574,6 +30941,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
@@ -29623,6 +30994,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_read
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/mute:
@@ -29688,6 +31063,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/unmute:
@@ -29753,6 +31132,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: safe
   /api/v1/monitor/{monitor_id}/validate:
@@ -29807,6 +31190,10 @@ paths:
       - Monitors
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - monitors_write
       x-undo:
         type: idempotent
   /api/v1/monthly_custom_reports:
@@ -29870,6 +31257,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 43
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/monthly_custom_reports/{report_id}:
@@ -29924,6 +31315,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 44
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/notebooks:
@@ -30054,6 +31449,10 @@ paths:
         limitParam: count
         pageOffsetParam: start
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     post:
@@ -30135,6 +31534,10 @@ paths:
             name: body
           step: there is a valid "notebook" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         operationId: DeleteNotebook
         parameters:
@@ -30180,6 +31583,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
     get:
@@ -30224,6 +31631,10 @@ paths:
       tags:
       - Notebooks
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_read
       x-undo:
         type: safe
     put:
@@ -30320,6 +31731,10 @@ paths:
       - Notebooks
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - notebooks_write
       x-undo:
         type: idempotent
   /api/v1/org:
@@ -30345,6 +31760,10 @@ paths:
       tags:
       - Organizations
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         type: safe
     post:
@@ -30399,6 +31818,10 @@ paths:
       - Organizations
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - org_management
       x-undo:
         operationId: TODO
         parameters: []
@@ -30644,6 +32067,10 @@ paths:
       tags:
       - Metrics
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - timeseries_query
       x-undo:
         type: safe
   /api/v1/search:
@@ -30687,6 +32114,9 @@ paths:
       tags:
       - Metrics
       x-menu-order: 4
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/security_analytics/signals/{signal_id}/add_to_incident:
@@ -30736,6 +32166,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -30783,6 +32217,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -30830,6 +32268,10 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_signals_write
       x-undo:
         type: idempotent
   /api/v1/series:
@@ -31155,6 +32597,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -31208,6 +32654,10 @@ paths:
               \ }\n}"
           step: there is a valid "slo" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         operationId: DeleteSLO
         parameters:
@@ -31265,6 +32715,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/can_delete:
@@ -31318,6 +32772,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/correction:
@@ -31369,6 +32827,10 @@ paths:
         limitParam: limit
         pageOffsetParam: offset
         resultsPath: data
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     post:
@@ -31428,6 +32890,10 @@ paths:
               \"correction\"\n  }\n}"
           step: there is a valid "correction" for "slo"
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_corrections
       x-undo:
         operationId: DeleteSLOCorrection
         parameters:
@@ -31622,6 +33088,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}:
@@ -31683,6 +33153,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
     get:
@@ -31732,6 +33206,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
     put:
@@ -31788,6 +33266,10 @@ paths:
       - Service Level Objectives
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_write
       x-undo:
         type: idempotent
   /api/v1/slo/{slo_id}/corrections:
@@ -31837,6 +33319,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/slo/{slo_id}/history:
@@ -31926,6 +33412,10 @@ paths:
       tags:
       - Service Level Objectives
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - slos_read
       x-undo:
         type: safe
   /api/v1/synthetics/ci/batch/{batch_id}:
@@ -31963,6 +33453,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -31989,6 +33483,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -32033,6 +33531,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -32072,6 +33574,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
     get:
@@ -32110,6 +33616,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_read
       x-undo:
         type: safe
     put:
@@ -32156,6 +33666,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_private_location_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/settings/default_locations:
@@ -32175,6 +33689,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 29
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_default_settings_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests:
@@ -32232,6 +33750,10 @@ paths:
         limitParam: page_size
         pageParam: page_number
         resultsPath: tests
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     post:
@@ -32286,6 +33808,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: TODO
         parameters: []
@@ -32475,6 +34001,10 @@ paths:
             name: body
           step: there is a "synthetics_api_test_with_wrong_dns" in the system
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32526,6 +34056,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32588,6 +34122,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser:
@@ -32640,6 +34178,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -32691,6 +34233,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -32753,6 +34299,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
@@ -32824,6 +34374,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -32877,6 +34431,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -32934,6 +34492,193 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/mobile:
+    post:
+      description: Create a Synthetic mobile test.
+      operationId: CreateSyntheticsMobileTest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: Details of the test to create.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK - Returns the created test details.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Creation failed'
+        '402':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Test quota is reached
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Create a mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-given:
+        synthetics_mobile_test:
+          parameters:
+          - file: synthetics_mobile_test_payload.json
+            name: body
+          step: there is a valid "synthetics_mobile_test" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+      x-undo:
+        operationId: DeleteTests
+        parameters:
+        - name: body
+          template: '{"public_ids": ["{{ public_id }}"]}'
+        type: unsafe
+  /api/v1/synthetics/tests/mobile/{public_id}:
+    get:
+      description: 'Get the detailed configuration associated with
+
+        a Synthetic Mobile test.'
+      operationId: GetMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Get a Mobile test
+      tags:
+      - Synthetics
+      x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
+      x-undo:
+        type: safe
+    put:
+      description: Edit the configuration of a Synthetic Mobile test.
+      operationId: UpdateMobileTest
+      parameters:
+      - description: The public ID of the test to get details from.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsMobileTest'
+        description: New test details to be saved.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsMobileTest'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Edit a Mobile test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -32979,6 +34724,10 @@ paths:
               }}"}]}'
           step: the "synthetics_api_test_with_wrong_dns" is triggered
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -33017,6 +34766,60 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
+      x-undo:
+        type: idempotent
+  /api/v1/synthetics/tests/uptimes:
+    post:
+      description: Fetch uptime for multiple Synthetic tests by ID.
+      operationId: FetchUptimes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsFetchUptimesPayload'
+        description: Public ID list of the Synthetic tests and timeframe.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/SyntheticsTestUptime'
+                type: array
+          description: OK.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_read
+      summary: Fetch uptime for multiple tests
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -33062,6 +34865,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     patch:
@@ -33124,6 +34931,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
     put:
@@ -33188,6 +34999,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -33257,6 +35072,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -33308,6 +35127,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -33367,6 +35190,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -33397,6 +35224,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_read
       x-undo:
         type: safe
     post:
@@ -33452,6 +35283,10 @@ paths:
             name: body
           step: there is a valid "synthetics_global_variable" in the system
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -33501,6 +35336,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
     get:
@@ -33593,6 +35432,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_global_variable_write
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:
@@ -33636,6 +35479,9 @@ paths:
       tags:
       - Tags
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /api/v1/tags/hosts/{host_name}:
@@ -33909,6 +35755,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 23
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/audit_logs:
@@ -33971,6 +35821,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 40
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -34034,6 +35888,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 19
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/billable-summary:
@@ -34095,6 +35953,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ci-app:
@@ -34160,6 +36022,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 35
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cspm:
@@ -34225,6 +36091,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 28
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/cws:
@@ -34290,6 +36160,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/dbm:
@@ -34355,6 +36229,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 31
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/fargate:
@@ -34418,6 +36296,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 18
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hosts:
@@ -34481,6 +36363,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/hourly-attribution:
@@ -34572,6 +36458,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/incident-management:
@@ -34637,6 +36527,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 26
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/indexed-spans:
@@ -34700,6 +36594,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 14
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/ingested-spans:
@@ -34765,6 +36663,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 25
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/iot:
@@ -34830,6 +36732,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 27
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs:
@@ -34893,6 +36799,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 12
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs-by-retention:
@@ -34958,6 +36868,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 10
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/logs_by_index:
@@ -35023,6 +36937,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/monthly-attribution:
@@ -35135,6 +37053,10 @@ paths:
             value: '"infra_host_usage"'
           step: there is a valid "monthly_usage_attribution" response
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_flows:
@@ -35200,6 +37122,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 22
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/network_hosts:
@@ -35263,6 +37189,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 21
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/online-archive:
@@ -35328,6 +37258,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 36
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/profiling:
@@ -35393,6 +37327,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 34
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum:
@@ -35457,6 +37395,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 33
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/rum_sessions:
@@ -35527,6 +37469,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 20
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/sds:
@@ -35592,6 +37538,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 32
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/snmp:
@@ -35657,6 +37607,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 24
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/summary:
@@ -35734,6 +37688,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 8
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics:
@@ -35797,6 +37755,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 15
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_api:
@@ -35860,6 +37822,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 16
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/synthetics_browser:
@@ -35923,6 +37889,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 17
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/timeseries:
@@ -35986,6 +37956,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 13
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/usage/top_avg_metrics:
@@ -36072,6 +38046,10 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - usage_read
       x-undo:
         type: safe
   /api/v1/user:
@@ -36102,6 +38080,10 @@ paths:
       tags:
       - Users
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_read
       x-undo:
         type: safe
     post:
@@ -36151,6 +38133,10 @@ paths:
       - Users
       x-codegen-request-body-name: body
       x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+        - user_access_invite
       x-undo:
         operationId: DisableUser
         parameters:
@@ -36326,6 +38312,9 @@ paths:
       tags:
       - Authentication
       x-menu-order: 1
+      x-permission:
+        operator: OPEN
+        permissions: []
       x-undo:
         type: safe
   /v1/input:
@@ -36654,10 +38643,17 @@ tags:
     for more information.
   name: Embeddable Graphs
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -36686,9 +38682,7 @@ tags:
 - description: Search your logs and send them to your Datadog platform over HTTP.
     See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
-- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
-
-    You need an API and application key with Admin rights to interact with this endpoint.'
+- description: Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -36698,13 +38692,12 @@ tags:
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
-    endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
-    data to be configured before using in a request.**\nFor example, if you are using
-    the data returned from a\nrequest for another request body, and have a parsing
-    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
-    all escaped spaces as `%{space}` to use\nin the body data."
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\n**Grok
+    parsing rules may effect JSON output and require\nreturned data to be configured
+    before using in a request.**\nFor example, if you are using the data returned
+    from a\nrequest for another request body, and have a parsing rule\nthat uses a
+    regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces
+    as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration

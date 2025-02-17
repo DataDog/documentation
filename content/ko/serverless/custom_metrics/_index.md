@@ -129,18 +129,34 @@ import com.timgroup.statsd.StatsDClient;
 
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
 
-    // statsd 클라이언트의 인스턴스 만들기
+    // statsd 클라이언트 시작
     private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
     @Override
     public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
 
-        // 분포 메트릭 제출
+        // 분배 메트릭 제출
         Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
 
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // 종료 전에 모든 메트릭을 비웠는지 확인
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```

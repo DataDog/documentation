@@ -11,41 +11,30 @@ title: Cómo funciona Datadog Application Security
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitioDatadog </a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Application Security Management no es compatible con el <a href="/getting_started/site">sitio de Datadog</a> seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Información general
+## Resumen
 
-Datadog Application Security proporciona una capacidad de observación de los ataques a nivel de aplicación, que tienen como objetivo explotar vulnerabilidades a nivel de código o abusar de la lógica empresarial de tu aplicación, y de cualquier actor malintencionado que tenga como objetivo tus sistemas.
+Datadog Application Security ofrece una capacidad de observación de los ataques a la aplicación que tienen como objetivo explotar las vulnerabilidades del código o abusar de la lógica de negocio de tu aplicación, y de cualquier actor malintencionado que tenga como objetivo tus sistemas. Proporciona:
 
-El siguiente es un resumen rápido:
+- **Observabilidad de los ataques**: brinda información sobre los ataques a la aplicación dirigidos a las vulnerabilidades del código o a la lógica empresarial.
+- **Monitorización basada en trazas**: utiliza las mismas bibliotecas de rastreo que Datadog APM para monitorar el tráfico y detectar amenazas a la seguridad.
+- **Señales de seguridad**: genera automáticamente señales de seguridad cuando se detectan ataques o abusos de la lógica empresarial, centrándose en amenazas significativas en lugar de en intentos individuales.
+- **Opciones de notificación**: ofrece notificaciones a través de Slack, correo electrónico o PagerDuty en función de la configuración de las señales de seguridad.
+- **Seguridad integrada**: integrada dentro de la aplicación, proporciona una mejor identificación y clasificación de amenazas mediante el acceso a los datos de rastreo.
+- **Funcionalidad WAF mejorada**: funciones como un cortafuegos de aplicaciones web (WAF), pero con contexto de aplicación adicional, lo que mejora la precisión y reduce los falsos positivos.
 
-- **Observabilidad de los ataques**: Proporciona información sobre ataques a nivel de aplicación dirigidos a vulnerabilidades de código o lógica empresarial.
-- **Detección de riesgos**: Identifica riesgos en las aplicaciones, como bibliotecas y dependencias vulnerables.
-- **Monitorización basada en trazas (traces)**: Utiliza las mismas bibliotecas de rastreo que Datadog APM para monitorizar el tráfico y detectar amenazas a la seguridad.
-- **Señales de seguridad**: Genera automáticamente señales de seguridad cuando se detectan ataques o abusos de la lógica empresarial, centrándose en amenazas significativas, en lugar de intentos individuales.
-- **Opciones de notificación**: Ofrecen notificaciones a través de Slack, correo electrónico o PagerDuty en función de la configuración de las señales de seguridad.
-- **Seguridad integrada**: Integrada dentro de la aplicación, proporciona una mejor identificación y clasificación de amenazas mediante el acceso a los datos de rastreo.
-- **Funcionalidad WAF mejorada**: Funciones como Web Application Firewall (WAF), pero con contexto de aplicación adicional, lo que mejora la precisión y reduce los falsos positivos.
+### Identificación de servicios expuestos a ataques de aplicaciones.
 
-### Identificar servicios expuestos a ataques de aplicaciones
+[Threat Management][1] de Datadog Application Security utiliza la información que APM ya está recopilando para marcar trazas (traces) que contienen intentos de ataque. Aunque APM recopila una muestra del tráfico de tus aplicaciones, es necesario habilitar Application Security en la biblioteca de rastreo para monitorizar y proteger eficazmente tus servicios.
 
-Datadog Application Security [Gestión de las amenazas][1] utiliza la información que APM ya está recopilando para marcar trazas (traces) que contienen intentos de ataque. Aunque APM recopila una muestra del tráfico de tu aplicación, es necesario habilitar Application Security en la biblioteca de rastreo para monitorizar y proteger eficazmente tus servicios.
+Los servicios expuestos a ataques de aplicaciones se resaltan directamente en las vistas de seguridad integradas en el ([Catálogo de servicios][2] de APM, la [Página de servicios][3] y [Trazas][4]).
 
-Los servicios expuestos a ataques de aplicaciones se destacan directamente en las vistas de seguridad incorporadas en el ([Catálogo de servicios][2], la [Página de servicios][3] y las [trazas][4]) de APM.
-
-Las funciones de monitorización y detección de amenazas de Datadog identifican a los actores malintencionados recopilando las direcciones IP de los clientes y las etiquetas (tags) de usuario añadidas manualmente en todas las solicitudes.
+Datadog Threat Monitoring and Detection identifica a los atacantes recopilando las direcciones IP de los clientes, la información de la cuenta de inicio de sesión (por ejemplo, cuenta de usuario/ID) y las etiquetas (tags) de usuario añadidas manualmente en todas las solicitudes.
 
 <div class="alert alert-info"><strong>Habilitación con 1 clic</strong><br>
-Si tu servicio se está ejecutando en <a href="/agent/remote_config/#enabling-remote-configuration">un Agent con configuración remota habilitada y una versión de biblioteca de rastreo compatible</a>, puedes <a href="https://app.datadoghq.com/security/configuration/asm/setup">habilitar Application Security</a> desde la interfaz de usuario Datadog sin ninguna configuración adicional del Agent o de las bibliotecas de rastreo.</div>
-
-### Identificar vulnerabilidades en las bibliotecas de código abierto utilizadas por servicios
-
-El [Análisis de la composición del software][5] de Datadog utiliza varias fuentes de datos de vulnerabilidades conocidas relacionadas con bibliotecas de software de código abierto, además de información proporcionada por el equipo de investigación de seguridad de Datadog, para emparejar las bibliotecas de las que depende tu aplicación en tiempo de ejecución con tus vulnerabilidades potenciales, y recomendar correcciones.
-
-### Identificar vulnerabilidades a nivel de código en servicios
-
-Datadog [Code Security][28] identifica las vulnerabilidades a nivel de código en servicios y proporciona información práctica y correcciones recomendadas. Utiliza un enfoque de Tests interactivos de seguridad de aplicaciones (IAST) para encontrar vulnerabilidades en el código de las aplicaciones. IAST utiliza la instrumentación incrustada en el código, de forma similar a Application Performance Monitoring (APM), lo que permite a Datadog identificar vulnerabilidades utilizando el tráfico legítimo de la aplicación en lugar de depender de tests externos que pueden requerir configuración adicional o una programación periódica. Datadog Code Security proporciona automáticamente la información que los equipos necesitan para localizar una vulnerabilidad en una aplicación, desde el nombre del archivo afectado hasta el método y el número de línea exactos.
+Si tu servicio se está ejecutando con <a href="/agent/remote_config/#enabling-remote-configuration">un Agent con la Configuración remota habilitada y una versión de biblioteca de rastreo compatible</a>, puedes <a href="https://app.datadoghq.com/security/configuration/asm/setup">habilitar Application Security</a> desde la interfaz de usuarios de Datadog sin una configuración adicional del Agent o las bibliotecas de rastreo.</div>
 
 ## Compatibilidad
 
@@ -95,7 +84,7 @@ Para configurar la información que Application Security oculta, consulta la [co
 
 Datadog utiliza varias fuentes de patrones, incluido el [Conjunto de reglas básicas de OWASP ModSecurity][12] para detectar amenazas y vulnerabilidades conocidas en solicitudes HTTP. Cuando una solicitud HTTP coincide con una de [las reglas de detección predefinidas][13], se genera una señal de seguridad en Datadog.
 
-**Actualizaciones automáticas de patrones de amenazas:** Si tu servicio se ejecuta con [un Agent con la configuración remota habilitada y una versión de biblioteca de rastreo compatible][26], los patrones de amenazas que se utilizan para monitorizar tu servicio se actualizan automáticamente cada vez que Datadog publica actualizaciones.
+**Actualizaciones automáticas de patrones de amenazas**: Si tu servicio se ejecuta con [un Agent con la configuración remota habilitada y una versión de biblioteca de rastreo compatible][26], los patrones de amenazas que se utilizan para monitorizar tu servicio se actualizan automáticamente cada vez que Datadog publica actualizaciones.
 
 Las señales de seguridad se crean automáticamente cuando Datadog detecta ataques significativos dirigidos a tus servicios de producción. Te proporcionan una visibilidad de los atacantes y de los servicios comprometidos. Puedes establecer reglas de detección personalizadas con umbrales para determinar de qué ataques quieres recibir notificaciones.
 
@@ -107,7 +96,7 @@ Las señales de seguridad se crean automáticamente cuando Datadog detecta ataqu
 ## Clasificación del intento de ataque
 
 Mediante la utilización de la información del rastreo distribuido, los intentos de ataque se clasifican como seguros, desconocidos o dañinos.
-* Los intentos de ataque clasificados como seguros no pueden vulnerar tu aplicación, por ejemplo, cuando un ataque de inserción PHP apunta a un servicio escrito en Java.
+* Los intentos de ataque clasificados como seguros no pueden vulnerar tu aplicación, por ejemplo, cuando un ataque de inyección PHP se dirige a un servicio escrito en Java.
 * La clasificación de desconocido se asigna cuando no hay suficiente información para emitir un juicio definitivo sobre la probabilidad de éxito del ataque.
 * Se muestra una clasificación de dañino cuando hay pruebas de que el atacante ha encontrado alguna vulnerabilidad a nivel del código.
 
@@ -125,17 +114,11 @@ Datadog Application Security incluye más de 100 firmas de ataque que te ayudan 
 * Cross-Site Scripting (XSS)
 * Falsificación de solicitudes del lado del servidor (SSRF)
 
-## Detección de vulnerabilidades integrada
-
-Datadog Application Security ofrece funciones de detección integradas que te avisan de las vulnerabilidades detectadas en el código de tu aplicación y en las dependencias de código abierto. Los detalles de esa información se muestran en el [Explorador de vulnerabilidades][15], identificando la gravedad, los servicios afectados, la  infraestructura potencialmente vulnerable y las instrucciones de corrección para solucionar los riesgos surgidos.
-
-Para más información, consulta [Seguridad del código][28] y [Análisis de la composición del software][5].
-
 ## Seguridad de la API
 
-<div class="alert alert-info">La seguridad de la API está en fase beta privada.</div>
+<div class="alert alert-info">La seguridad de la API está en Vista previa.</div>
 
-Datadog Application Security proporciona visibilidad de las amenazas dirigidas a tus API. Utiliza el [Catálogo de API][27] para monitorizar el mantenimiento y las métricas de rendimiento de las API, donde puedes ver los ataques dirigidos a tus API. Esta vista incluye la IP y la información de autenticación del atacante, así como los encabezados de la solicitud que muestran detalles sobre cómo se formó el ataque. Utilizando Application Security y la gestión de las API, puedes tener una visión completa de la superficie de ataque a tu API y responder para mitigar las amenazas.
+Datadog Application Security proporciona visibilidad de las amenazas dirigidas a tus API. Utiliza la [lista de endpoints][27] en el Catálogo de servicios para monitorizar el estado de la API y las métricas de rendimiento, donde puedes ver los ataques dirigidos a tus API. Esta vista incluye la IP del atacante y la información de autenticación, así como los encabezados de solicitud que muestran detalles sobre cómo se formó el ataque. Utilizando tanto Application Security como la gestión de API, puedes mantener una visión completa de la superficie de ataque de tu API y responder para mitigar las amenazas.
 
 ## Cómo protege Datadog Application Security contra Log4Shell
 
@@ -149,7 +132,7 @@ Datadog Application Security identifica las cargas útiles de ataque Log4j Log4S
 [2]: /es/tracing/service_catalog/#security-view
 [3]: /es/tracing/services/service_page/#security
 [4]: /es/tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /es/security/application_security/software_composition_analysis/
+[5]: /es/security/code_security/software_composition_analysis/
 [6]: /es/tracing/trace_collection/
 [8]: /es/security/application_security/serverless/
 [9]: /es/tracing/trace_pipeline/trace_retention/
@@ -158,10 +141,11 @@ Datadog Application Security identifica las cargas útiles de ataque Log4j Log4S
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /es/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
-[15]: https://app.datadoghq.com/security/appsec/vm
+[15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /es/security/cloud_siem/
 [17]: /es/security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /es/security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /es/agent/remote_config/#enabling-remote-configuration
-[27]: /es/tracing/api_catalog/
-[28]: /es/security/application_security/code_security/
+[27]: /es/service_catalog/endpoints/
+[28]: /es/security/code_security/iast/
+[29]: https://docs.datadoghq.com/es/security/code_security/

@@ -8,15 +8,15 @@ aliases:
   - /continuous_integration/tests/swift
   - /continuous_integration/tests/setup/swift
 further_reading:
-    - link: "/continuous_integration/tests"
+    - link: "/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/intelligent_test_runner/swift"
+    - link: "/tests/test_impact_analysis/swift"
       tag: "Documentation"
-      text: "Speed up your test jobs with Intelligent Test Runner"
-    - link: "/continuous_integration/troubleshooting/"
+      text: "Speed up your test jobs with Test Impact Analysis"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,10 +29,11 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
 
 Supported languages:
 
-| Language | Version | Notes |
-|---|---|---|
-| Swift | >= 5.2 | If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks. |
-| Objective-C | >= 2.0 | |
+| Language | Version |
+|---|---|
+| Swift | >= 5.7 |
+| Objective-C | >= 2.0 |
+| Xcode | >= 14.3 |
 
 Supported platforms:
 
@@ -60,14 +61,14 @@ There are three ways you can install the testing framework:
 
 {{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
 
-3. If you run UITests, also link the app running the tests with this library.
+3. If you run UI Tests and don't use RUM, also add the dependency to your applications running the tests.
 
 ### Using Swift Package Project
 
 1. Add `dd-sdk-swift-testing` to your package dependencies array, for example:
 
 {{< code-block lang="swift" >}}
-.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
+.package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.5.3")
 {{< /code-block >}}
 
 2. To add the testing framework to your testing targets' dependencies, add the following line to your test targets dependencies array:
@@ -75,7 +76,7 @@ There are three ways you can install the testing framework:
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. If you run UITests, also add the dependency to your applications running the tests.
+3. If you run UI Tests and don't use RUM, also add the dependency to your applications running the tests.
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
@@ -95,7 +96,7 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. If you run UITests, also add the dependency to the app running the tests.
+2. If you run UI Tests and don't use RUM, also add the dependency to the app running the tests.
 
 {{% /tab %}}
 {{% tab "Framework linking" %}}
@@ -106,24 +107,16 @@ end
 
 {{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
 
-3. If you run UITests, also link the app running the tests with this library.
+3. If you run UI Tests and don't use RUM, also link the app running the tests with this library.
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
-
-If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
-
-Compared to other methods, such as Cocoapods and Framework linking, the Swift test action option may be less flexible to configure and run, but requires no code changes.
-
-[1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
 {{< /tabs >}}
 <div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
 ## Instrumenting your tests
 
-### Configuring Datadog
+### Configuring SDK
 
 #### Using Xcode Project
 
@@ -133,7 +126,7 @@ To enable testing instrumentation, add the following environment variables to yo
 
 <div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
-For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
+For UI Tests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
 #### Using Swift Package Project
 
@@ -141,11 +134,11 @@ To enable testing instrumentation, you must set the following environment variab
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD swift test ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD swift test ...
 
 or
 
-DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_KEY> DD_SITE=us1 SRCROOT=$PWD xcodebuild test -scheme ...
+DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> SRCROOT=$PWD xcodebuild test -scheme ...
 </code>
 </pre>
 
@@ -161,9 +154,11 @@ Set all these variables in your test target:
 : The [Datadog API key][2] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-`DD_APPLICATION_KEY`
-: The [Datadog Application key][5] used to upload the test results.<br/>
-**Default**: `(empty)`
+`DD_TEST_SESSION_NAME`
+: Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `DD_SERVICE`
 : Name of the service or library under test.<br/>
@@ -201,22 +196,27 @@ After installation, run your tests as you normally do, for example using the `xc
 
 <pre>
 <code>
-DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
+DD_TEST_RUNNER=1 DD_SITE={{< region-param key="dd_site" >}} xcodebuild \
   -project "MyProject.xcodeproj" \
   -scheme "MyScheme" \
-  -destination "platform=macOS,arch=x86_64" \
+  -destination "platform=macOS,arch=arm64" \
   test
 </code>
 </pre>
 
 ### UI tests
 
-For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
-
 ### RUM Integration
 
 If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
 
+Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
+
+### Test Optimisation SDK
+
+If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-intrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
+
+Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
 ## Additional optional configuration
 
@@ -303,6 +303,17 @@ FOO = BAR
 DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 {{< /code-block >}}
 
+### Inside a test method
+
+You can add custom tags inside your test methods. The static property `DDTest.current` will return the current test instance if called inside the test method scope.
+
+{{< code-block lang="swift" >}}
+// Somewhere inside the test method
+DDTest.current?.setTag(key: "key1", value: "value1")
+// test continues normally
+// ...
+{{< /code-block >}}
+
 ### OpenTelemetry
 
 **Note**: Using OpenTelemetry is only supported for Swift.
@@ -325,7 +336,7 @@ The test target needs to link explicitly with `opentelemetry-swift`.
 
 When code coverage is available, the Datadog SDK (v2.2.7+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-In Xcode, you can enable the reporting of code coverage in your Test Scheme.
+In Xcode, you can enable gathering of code coverage in your Test Plan or Test Scheme, depending on your project configuration.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
@@ -596,142 +607,9 @@ Additional Git configuration for physical device testing:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Manual testing API
-
-If you use XCTests with your Swift projects, the `DatadogSDKTesting` framework automatically instruments them and sends the results to the Datadog backend. If you don't use XCTest, you can instead use the Swift/Objective-C manual testing API, which also reports test results to the backend.
-
-The API is based around three concepts: *test module*, *test suites*, and *tests*.
-
-### Test module
-
-A test module represents the load of a library or bundle that includes the tests.
-
-To start a test module, call `DDTestModule.start()` and pass the name of the module or bundle to test.
-
-When all your tests have finished, call `module.end()`, which forces the library to send all remaining test results to the backend.
-
-### Test Suites
-
-A test suite comprises a set of tests that share common functionality. They can share a common initialization and teardown, and can also share some variables.
-
-Create test suites in the test module by calling `module.suiteStart()` and passing the name of the test suite.
-
-Call `suite.end()` when all the related tests in the suite have finished their execution.
-
-### Tests
-
-Each test runs inside a suite and must end in one of these three statuses: `pass`, `fail`, or `skip`. A test can optionally have additional information like attributes or error information.
-
-Create tests in a suite by calling `suite.testStart()` and passing the name of the test. When a test ends, one of the predefined statuses must be set.
-
-### API interface
-
-{{< code-block lang="swift" >}}
-class DDTestModule {
-    // Starts the module.
-    // - Parameters:
-    //   - bundleName: Name of the module or bundle to test.
-    //   - startTime: Optional. The time the module started.
-    static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
-    //
-    // Ends the module.
-    // - Parameters:
-    //   - endTime: Optional. The time the module ended.
-    func end(endTime: Date? = nil)
-    // Adds a tag/attribute to the test module. Any number of tags can be added.
-    // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists,
-    //     its value will be replaced by the new value.
-    //   - value: The value of the tag. Can be a number or a string.
-    func setTag(key: String, value: Any)
-    //
-    // Starts a suite in this module.
-    // - Parameters:
-    //   - name: Name of the suite.
-    //   - startTime: Optional. The time the suite started.
-    func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
-}
-    //
-public class DDTestSuite : NSObject {
-    // Ends the test suite.
-    // - Parameters:
-    //   - endTime: Optional. The time the suite ended.
-    func end(endTime: Date? = nil)
-    // Adds a tag/attribute to the test suite. Any number of tags can be added.
-    // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists,
-    //     its value will be replaced by the new value.
-    //   - value: The value of the tag. Can be a number or a string.
-    func setTag(key: String, value: Any)
-    //
-    // Starts a test in this suite.
-    // - Parameters:
-    //   - name: Name of the test.
-    //   - startTime: Optional. The time the test started.
-    func testStart(name: String, startTime: Date? = nil) -> DDTest
-}
-    //
-public class DDTest : NSObject {
-    // Adds a tag/attribute to the test. Any number of tags can be added.
-    // - Parameters:
-    //   - key: The name of the tag. If a tag with the same name already exists,
-    //     its value will be replaced by the new value.
-    //   - value: The value of the tag. Can be a number or a string.
-    func setTag(key: String, value: Any)
-    //
-    // Adds error information to the test. Only one errorInfo can be reported by a test.
-    // - Parameters:
-    //   - type: The type of error to be reported.
-    //   - message: The message associated with the error.
-    //   - callstack: Optional. The callstack associated with the error.
-    func setErrorInfo(type: String, message: String, callstack: String? = nil)
-    //
-    // Ends the test.
-    // - Parameters:
-    //   - status: The status reported for this test.
-    //   - endTime: Optional. The time the test ended.
-    func end(status: DDTestStatus, endTime: Date? = nil)
-}
-    //
-// Possible statuses reported by a test:
-enum DDTestStatus {
-  // The test passed.
-  case pass
-  //
-  //The test failed.
-  case fail
-  //
-  //The test was skipped.
-  case skip
-}
-{{< /code-block >}}
-
-### Code example
-
-The following code represents a simple usage of the API:
-
-{{< code-block lang="swift" >}}
-import DatadogSDKTesting
-let module = DDTestModule.start(bundleName: "ManualModule")
-let suite1 = module.suiteStart(name: "ManualSuite 1")
-let test1 = suite1.testStart(name: "Test 1")
-test1.setTag(key: "key", value: "value")
-test1.end(status: .pass)
-let test2 = suite1.testStart(name: "Test 2")
-test2.SetErrorInfo(type: "Error Type", message: "Error message", callstack: "Optional callstack")
-test2.end(test: test2, status: .fail)
-suite1.end()
-let suite2 = module.suiteStart(name: "ManualSuite 2")
-..
-..
-module.end()
-{{< /code-block >}}
-
-Always call `module.end()` at the end so that all the test info is flushed to Datadog.
-
 ## Best practices
 
-Follow these practices to take full advantage of the testing framework and CI Visibility.
+Follow these practices to take full advantage of the testing framework and Test Optimization.
 
 ### Generate symbols file when building
 
@@ -750,6 +628,32 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
  <false/>
 {{< /code-block >}}
 
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
+
+- CI job name
+- Command used to run the tests (such as `swift test`)
+
+The test session name needs to be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+
+- `swift test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -757,8 +661,8 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 [1]: /continuous_integration/tests/#test-suite-level-visibility
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: /getting_started/site/
-[4]: /continuous_integration/guides/rum_swift_integration
+[4]: /tests/swift_tests/
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /continuous_integration/intelligent_test_runner/
+[7]: /tests/test_impact_analysis/
 [8]: /getting_started/tagging/unified_service_tagging

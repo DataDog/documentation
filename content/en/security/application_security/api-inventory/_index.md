@@ -30,9 +30,9 @@ Using the API Security Inventory you can:
 
 ## Configuration
 
-The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+To use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
-|Technology|Minimum version| Support for sensitive data scanning |
+|Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
 |Java      | v1.31.0  | Requests only |
@@ -42,6 +42,8 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Ruby      | v1.15.0  | Requests only |
 |Golang    | v1.59.0  | Requests only |
 |Node.js   | v3.51.0, v4.30.0 or v5.6.0 | Requests and responses |
+
+**Note**: On .NET Core and .NET Fx tracers, you need to set the environment variable `DD_API_SECURITY_ENABLED=true` for API Security features to work properly.
 
 ## How it works
 
@@ -127,8 +129,8 @@ Counts the [Code Security][8] vulnerabilities on the endpoint , in addition to t
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/
-[3]: /security/application_security/software_composition_analysis/
+[3]: /security/code_security/software_composition_analysis/
 [4]: /agent/remote_config/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [7]: https://app.datadoghq.com/security/appsec/inventory/apis
-[8]: /security/application_security/code_security/
+[8]: /security/code_security/iast/

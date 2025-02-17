@@ -35,7 +35,7 @@ The table below lists a few examples of Datadog products:
         <td><p><strong>Development</strong></p></td>
         <td>
         <ul>
-        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/security/code_security/">Code Security</a>.</li>
         <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
@@ -113,7 +113,7 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< whatsnext desc="Product:">}}
 {{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Learn how to use Agent Autodiscovery and the Datadog operator.{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Learn how to collect metrics, logs, and traces from your serverless infrastructure.{{< /nextlink >}}
-{{< nextlink href="/getting_started/service_catalog" >}}<u>Service Catalog</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
+{{< nextlink href="/getting_started/software_catalog" >}}<u>Software Catalog</u>: Manage service ownership, reliability, and performance at scale in Software Catalog. {{< /nextlink >}}
 {{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Set up the Agent to trace a small application.{{< /nextlink >}}
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
@@ -125,9 +125,9 @@ For the fastest introduction to navigating Datadog, try the [Quick Start course]
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Send your first logs and use log processing to enrich them.{{< /nextlink >}}
 {{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Collect CI pipeline data by setting up integrations with your CI providers.{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_visibility" >}}<u>Test Visibility</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/intelligent_test_runner" >}}<u>Intelligent Test Runner</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
-{{< nextlink href="/getting_started/code_analysis" >}}<u>Code Analysis</u>: Analyze your repositories for quality and security issues.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Collect CI test data by setting up test services in Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimize your test suite and reduce CI costs by only running tests that are relevant to your code changes.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analyze your first-party code and open source libraries in your applications from development to runtime.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

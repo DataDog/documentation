@@ -76,7 +76,7 @@ The configuration can be set by environment variables or directly in the code:
 {{% tab "Java" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
 
 Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
 
@@ -145,7 +145,7 @@ Read more about sampling controls in the [Ruby tracing library documentation][1]
 {{% tab "Go" %}}
 **Remote configuration**
 
-<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/private-beta/resource-based-sampling-adaptive-sampling/">link</a>.</div>
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">link</a>.</div>
 
 Read more about how to remotely configure sampling rates by service and resource in this [article][3].
 
@@ -196,13 +196,23 @@ Read more about sampling controls in the [Node.js tracing library documentation]
 [1]: /tracing/trace_collection/dd_libraries/nodejs
 {{% /tab %}}
 {{% tab "PHP" %}}
+**Remote configuration**
+
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Preview</strong>. Starting from version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/1.4.0">1.4.0</a>, for PHP applications, set by-service and by-resource sampling rates from the <a href="https://app.datadoghq.com/apm/traces/ingestion-control">Ingestion Control Page</a>. Use <a href="https://www.datadoghq.com/product-preview/resource-based-sampling-adaptive-sampling/">this form</a> to request access today.</div>
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely-set configuration takes precedence over local configuration.
+
+**Local configuration**
+
 For PHP applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+For example, to send 50% of the traces for the service named `my-service`, 20% of other endpoints' traces, and 10% for the rest of the traces, set:
 
 ```
 export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Read more about sampling controls in the [PHP tracing library documentation][1].
@@ -237,7 +247,7 @@ export DD_TRACE_SAMPLE_RATE=0.1
 export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
 ```
 
-<div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
+<div class="alert alert-info">Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set a per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/software_catalog">Software Catalog</a> UI.</div>
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
@@ -280,8 +290,6 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 #### Datadog Agent 7.42.0 and higher
 
-<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
-
 The error sampling is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
@@ -302,8 +310,6 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 **Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
 
 #### Datadog Agent 7.42.0 and higher
-
-<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
 The rare sampling rate is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
@@ -452,8 +458,10 @@ package main
 import (
     "log"
     "net/http"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -477,8 +485,10 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

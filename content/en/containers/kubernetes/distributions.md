@@ -68,7 +68,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
   override:
     clusterAgent:
       image:
@@ -77,21 +76,6 @@ spec:
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
 
 {{% /tab %}}
 
@@ -116,11 +100,10 @@ spec:
     admissionController:
       enabled: true
   global:
+    site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    kubelet:
-      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -130,6 +113,9 @@ spec:
               value: "true"
 ```
 
+Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
+
+[1]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -139,9 +125,6 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
-  kubelet:
-    tlsVerify: false
 
 providers:
   aks:
@@ -153,14 +136,6 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 
 {{< /tabs >}}
-
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
-
-### AKS Kubelet certificate
-
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
-
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -243,6 +218,8 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
+**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
+
 {{< tabs >}}
 {{% tab "Helm" %}}
 
@@ -292,30 +269,11 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Spot pods and instances
+### Spot pods and compute classes
 
-Using Spot Pods in GKE Autopilot clusters introduces taints to these GKE nodes. To use Spot Pods, additional configuration is required to provide the Datadog Agent with tolerations.
+Using [Spot Pods][10] in GKE Autopilot clusters introduces [taints][9] to the corresponding Spot GKE nodes. When using Spot Pods, additional configuration is required to provide the Agent DaemonSet with a matching toleration.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    nodeAgent:
-      tolerations:
-        - effect: NoSchedule
-          key: cloud.google.com/gke-spot
-          operator: Equal
-          value: "true"
-```
-{{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
 agents:
@@ -330,7 +288,23 @@ agents:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
+Similarly when using [GKE Autopilot Compute classes][11] to run workloads that have specific hardware requirements, take note of the [taints][9] that GKE Autopilot is applying to these specific nodes and add matching tolerations to the Agent DaemonSet. You can match the tolerations on your corresponding pods. For example for the `Scale-Out` compute class use a toleration like:
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+```yaml
+agents:
+  #(...)
+  # agents.tolerations -- Allow the DaemonSet to schedule on tainted nodes (requires Kubernetes >= 1.6)
+  tolerations:
+  - effect: NoSchedule
+    key: cloud.google.com/compute-class
+    operator: Equal
+    value: Scale-Out
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Red Hat OpenShift {#Openshift}
 
@@ -611,3 +585,6 @@ agents:
 [6]: /agent/guide/operator-eks-addon
 [7]: /containers/kubernetes/apm/?tab=tcp
 [8]: /tracing/guide/setting_up_apm_with_kubernetes_service
+[9]: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+[10]: https://cloud.google.com/kubernetes-engine/docs/how-to/autopilot-spot-pods
+[11]: https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-compute-classes

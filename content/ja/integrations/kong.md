@@ -35,7 +35,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 3.2.2
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kong

@@ -15,25 +15,25 @@ type: multi-code-lang
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM para Roku no está disponible en el sitio US1-FED de Datadog.</div>
+<div class="alert alert-warning">RUM para Roku no está disponible en el sitio US1-FED Datadog.</div>
 {{< /site-region >}}
 
 ## Información general
 
 El SDK de RUM Roku genera eventos que tienen métricas y atributos asociados. Las métricas son valores cuantificables que pueden utilizarse para mediciones relacionadas con el evento. Los atributos son valores no cuantificables que se utilizan para dividir los datos de métricas (agrupar por) en el análisis.
 
-Cada evento de RUM tiene todos los [atributos establecidos por defecto](#default-attributes), por ejemplo, el tipo de dispositivo (`device.type`) e información del usuario como su nombre (`usr.name`) y su país (`geo.country`).
+Cada evento de RUM tiene todos los [atributos por defecto](#default-attributes), por ejemplo, el tipo de dispositivo (`device.type`) e información del usuario como su nombre (`usr.name`) y su país (`geo.country`).
 
-Existen [métricas y atributos adicionales que son específicos de un determinado tipo de evento](#event-specific-metrics-and-attributes). Por ejemplo, la métrica `view.time_spent` está asociada a los eventos "vista" y el atributo `resource.method` a los eventos "recurso".
+Existen [métricas y atributos adicionales que son específicos de un determinado tipo de evento](#event-specific-metrics-and-attributes). Por ejemplo, la métrica `view.time_spent` está asociada a eventos de "vista" y el atributo `resource.method` está asociado a eventos de "recurso".
 
-| Tipo de evento | Retención | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Tipo de evento | Conservación | Descripción                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sesión    | 30 días   | Una sesión representa un recorrido real del usuario en tu canal de Roku. Comienza cuando el usuario inicia el canal y permanece abierta mientras el usuario permanezca activo. Durante el recorrido del usuario, todos los eventos de RUM generados como parte de la sesión compartirán el mismo atributo `session.id`. **Nota:** La sesión se reinicia tras 15 minutos de inactividad. Si el canal falla o lo rompe el sistema operativo de Roku, puedes restablecer la sesión. |
-| Vista       | 30 días   | Una vista representa una pantalla única (o segmento de pantalla) en tu canal de Roku. Una vista comienza cuando llamas a la función `startView` y se detiene cuando se inicia una nueva vista. Cada ocurrencia es clasificada como una vista distinta. Mientras un usuario permanece en una vista, los atributos del evento de RUM (Errores, Recursos y Acciones) se adjuntan a la vista con un `view.id` único.                                                                               |
-| Recurso   | 15 días   | Un recurso representa solicitudes de red a hosts primarios, APIs y proveedores de terceros en tu canal de Roku. Todas las solicitudes generadas durante una sesión de usuario se adjuntan a la vista con un único `resource.id`.                                                                                                                                                                                                                        |
-| Error      | 30 días   | Un error representa una excepción o fallo emitido por el canal de Roku adjunto a la vista en la que se genera.                                                                                                                                                                                                                                                                                                                               |
-| Acción     | 30 días   | Una acción representa la actividad del usuario en tu canal de Roku (como un clic remoto). Cada acción está asociada a un único `action.id` asociado a la vista en la que se genera.                                                                                                                                                                                                                                                               |
-| Tarea larga  | 15 días   | Se genera un evento de tarea larga para cualquier tarea de la aplicación que bloquee el hilo principal durante más tiempo del umbral de duración especificado.                                                                                                                                                                                                                                                                                                   |
+| Sesión    | 30 días   | Una sesión representa un recorrido real del usuario en tu canal de Roku. Comienza cuando el usuario inicia el canal y permanece abierta mientras el usuario permanezca activo. Durante el recorrido del usuario, todos los eventos de RUM generados como parte de la sesión compartirán el mismo atributo `session.id`. **Nota:** La sesión se reinicia tras 15 minutos de inactividad. Si el canal falla o lo rompe el sistema operativo de Roku, puedes restablecer la sesión. |
+| Vista       | 30 días   | Una vista representa una pantalla única (o segmento de pantalla) en tu canal de Roku. Una vista comienza cuando llamas a la función `startView` y se detiene cuando se inicia una nueva vista. Cada ocurrencia es clasificada como una vista distinta. Mientras un usuario permanece en una vista, los atributos del evento de RUM (Errores, Recursos y Acciones) se adjuntan a la vista con un `view.id` único.                                                                               |
+| Recurso   | 15 días   | Un recurso representa solicitudes de red a hosts primarios, APIs y proveedores de terceros en tu canal de Roku. Todas las solicitudes generadas durante una sesión de usuario se adjuntan a la vista con un único `resource.id`.                                                                                                                                                                                                                        |
+| Error      | 30 días   | Un error representa una excepción o fallo emitido por el canal de Roku adjunto a la vista en la que se genera.                                                                                                                                                                                                                                                                                                                               |
+| Acción     | 30 días   | Una acción representa la actividad del usuario en tu canal de Roku (como un clic remoto). Cada acción está asociada a un único `action.id` asociado a la vista en la que se genera.                                                                                                                                                                                                                                                               |
+| Tarea prolongada  | 15 días   | Se genera un evento de tarea larga para cualquier tarea de la aplicación que bloquee el subprocesp principal durante más tiempo que el umbral de duración especificado.                                                                                                                                                                                                                                                                                                   |
 
 El siguiente diagrama ilustra la jerarquía de eventos de RUM:
 
@@ -47,10 +47,10 @@ RUM recopila atributos comunes para todos los eventos y para los atributos espec
 
 | Nombre del atributo   | Tipo    | Descripción                                                                         |
 | ---------------- | ------- | ----------------------------------------------------------------------------------- |
-| `date`           | entero | Inicio del evento en milisegundos desde la época.                                      |
+| `date`           | entero | Inicio del evento en milisegundos desde epoch.                                      |
 | `type`           | cadena  | El tipo de evento (por ejemplo, `view` o `resource`).                          |
 | `service`        | cadena  | El [nombre del servicio unificado][4] de esta aplicación utilizado para correlacionar las sesiones del usuario. |
-| `application.id` | cadena  | El ID de la aplicación Datadog.                                                         |
+| `application.id` | cadena  | El ID de la aplicación de Datadog.                                                         |
 
 ### Dispositivo
 
@@ -58,10 +58,10 @@ Los siguientes atributos relacionados con dispositivos se adjuntan automáticame
 
 | Nombre del atributo                       | Tipo   | Descripción                                                                                             |
 | ------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------- |
-| `device.type`                        | cadena | El tipo de dispositivo notificado por el dispositivo (System User-Agent).                                          |
-| `device.brand`                       | cadena | La marca del dispositivo notificada por el dispositivo (System User-Agent).                                         |
-| `device.model`                       | cadena | El modelo del dispositivo notificado por el dispositivo (System User-Agent).                                         |
-| `device.name`                        | cadena | El nombre del dispositivo notificado por el dispositivo (System User-Agent).                                          |
+| `device.type`                        | cadena | El tipo de dispositivo informado por el dispositivo (Sistema de usuario-agente).                                          |
+| `device.brand`                       | cadena | La marca del dispositivo informada por el dispositivo (Sistema de usuario-agente).                                         |
+| `device.model`                       | cadena | El modelo del dispositivo informado por el dispositivo (Sistema usuario-agente).                                         |
+| `device.name`                        | cadena | El nombre del dispositivo informado por el dispositivo (Sistema usuario-agente).                                          |
 
 
 ### Sistema operativo
@@ -70,9 +70,9 @@ Los siguientes atributos relacionados con el sistema operativo se asocian autom�
 
 | Nombre del atributo     | Tipo   | Descripción                                                         |
 | ------------------ | ------ | ------------------------------------------------------------------- |
-| `os.name`          | cadena | El nombre del sistema operativo notificado por el dispositivo (System User-Agent).          |
-| `os.version`       | cadena | La versión del sistema operativo notificada por el dispositivo (System User-Agent).       |
-| `os.version_major` | cadena | La versión principal del sistema operativo notificada por el dispositivo (System User-Agent). |
+| `os.name`          | cadena | El nombre del sistema operativo informado por el dispositivo (Sistema usuario-agente).          |
+| `os.version`       | cadena | La versión del sistema operativo informada por el dispositivo (Sistema usuario-agente).       |
+| `os.version_major` | cadena | La versión principal del sistema operativo informada por el dispositivo (Sistema usuario-agente). |
 
 
 ### Geolocalización
@@ -81,7 +81,7 @@ Los siguientes atributos están relacionados con la geolocalización de las dire
 
 **Nota:** Si quieres dejar de recopilar atributos de geolocalización, cambia la configuración en [detalles de la aplicación][9].
 
-| Nombre completo                  | Tipo   | Descripción                                                                                                                               |
+| Nombre del atributo            | Tipo   | Descripción                                                                                                                               |
 | :------------------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
 | `geo.country`             | cadena | Nombre del país.                                                                                                                      |
 | `geo.country_iso_code`    | cadena | Código ISO del país (por ejemplo, `US` para Estados Unidos o `FR` para Francia).                                                     |
@@ -106,7 +106,7 @@ Puedes activar el  [rastreo de la información de usuario][5] globalmente para r
 
 Las métricas son valores cuantificables que pueden utilizarse para realizar mediciones relacionadas con el evento. Los atributos son valores no cuantificables que se utilizan para segmentar los datos de las métricas (agrupar por) en los análisis.
 
-### Métricas de sesión
+### Métricas de la sesión
 
 | Métrica                    | Tipo        | Descripción                                         |
 | ------------------------- | ----------- | --------------------------------------------------- |
@@ -129,7 +129,7 @@ Las métricas son valores cuantificables que pueden utilizarse para realizar med
 | `session.last_view.url`     | cadena  | URL de la última vista de la sesión.                                                                                                                                                                          |
 | `session.last_view.name`    | cadena  | Nombre de la última vista de la sesión.                                                                                                                                                                         |
 | `session.ip`                | cadena  | Dirección IP de la sesión extraída de la conexión TCP de la ingesta. Si deseas dejar de recopilar este atributo, cambia la configuración en [detalles de la aplicación][8].                                |
-| `session.useragent`         | cadena  | Información del agent de usuario del sistema para interpretar la información del dispositivo.                                                                                                                                                              |
+| `session.useragent`         | cadena  | Información del Agent de usuario del sistema para interpretar la información del dispositivo.                                                                                                                                                              |
 
 ### Ver métricas
 
@@ -158,10 +158,10 @@ Los eventos de acción, error, recurso y tarea larga de RUM contienen informaci�
 
 | Métrica                         | Tipo           | Descripción                                                                                                                                |
 | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `duration`                     | número (ns)    | Tiempo total empleado en cargar el recurso.                                                                                                    |
+| `resource.duration`            | número (ns)    | Tiempo total empleado en cargar el recurso.                                                                                                    |
 | `resource.size`                | número (bytes) | Tamaño del recurso.                                                                                                                             |
 | `resource.connect.duration`    | número (ns)    | Tiempo empleado en establecer una conexión con el servidor (connectEnd - connectStart).                                                            |
-| `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es sobre HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |
+| `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es en HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |
 | `resource.dns.duration`        | número (ns)    | Tiempo empleado en resolver el nombre DNS de la última solicitud (domainLookupEnd - domainLookupStart).                                               |
 | `resource.redirect.duration`   | número (ns)    | Tiempo empleado en las siguientes solicitudes HTTP (redirectEnd - redirectStart).                                                                      |
 | `resource.first_byte.duration` | número (ns)    | Tiempo de espera empleado para recibir el primer byte de respuesta (responseStart - RequestStart).                                           |
@@ -176,33 +176,33 @@ Los eventos de acción, error, recurso y tarea larga de RUM contienen informaci�
 | `resource.method`          | cadena | El método HTTP (por ejemplo, `POST`, `GET`, `PATCH` o `DELETE`).                         |
 | `resource.status_code`     | número | El código de estado de la respuesta.                                                                   |
 | `resource.url`             | cadena | La URL del recurso.                                                                           |
-| `resource.provider.name`   | cadena | El nombre del proveedor de recursos. De forma predeterminada es `unknown`.                                           |
+| `resource.provider.name`   | cadena | El nombre del proveedor de recursos. Por defecto es `unknown`.                                           |
 | `resource.provider.domain` | cadena | El dominio del proveedor del recurso.                                                               |
 | `resource.provider.type`   | cadena | El tipo de proveedor del recurso (por ejemplo, `first-party`, `cdn`, `ad` o `analytics`).       |
 
-### Atributos de error
+### Atributos de errores
 
-Los errores de front-end se recopilan con Real User Monitoring (RUM). El mensaje de error y el stack trace se incluyen cuando están disponibles.
+Los errores de frontend se recopilan con Real User Monitoring (RUM). El mensaje de error y el stack trace se incluyen cuando están disponibles.
 
 | Atributo        | Tipo   | Descripción                                                                       |
 | ---------------- | ------ | --------------------------------------------------------------------------------- |
 | `error.source`   | cadena | Procedencia del error (por ejemplo, `webview`, `logger` o `network`). |
 | `error.type`     | cadena | El tipo de error (o código de error en algunos casos).                                     |
 | `error.message`  | cadena | Un mensaje conciso y legible de una línea que explica el evento.                  |
-| `error.stack`    | cadena | La stack trace o información complementaria sobre el error.                     |
-| `error.issue_id` | cadena | La stack trace o información complementaria sobre el error.                     |
+| `error.stack`    | cadena | El stack trace o información complementaria sobre el error.                     |
+| `error.issue_id` | cadena | El stack trace o información complementaria sobre el error.                     |
 
 
 ### Errores de red
 
-Los errores de red incluyen información sobre solicitudes HTTP fallidas. También se recogen las siguientes facetas:
+Los errores de red incluyen información sobre solicitudes HTTP fallidas. También se recopilan las siguientes facetas:
 
 | Atributo                        | Tipo   | Descripción                                                                           |
 | -------------------------------- | ------ | ------------------------------------------------------------------------------------- |
 | `error.resource.status_code`     | número | El código de estado de la respuesta.                                                             |
 | `error.resource.method`          | cadena | El método HTTP (por ejemplo, `POST` o `GET`).                                       |
 | `error.resource.url`             | cadena | La URL del recurso.                                                                     |
-| `error.resource.provider.name`   | cadena | El nombre del proveedor de recursos. De forma predeterminada es `unknown`.                                     |
+| `error.resource.provider.name`   | cadena | El nombre del proveedor de recursos. Por defecto es `unknown`.                                     |
 | `error.resource.provider.domain` | cadena | El dominio del proveedor del recurso.                                                         |
 | `error.resource.provider.type`   | cadena | El tipo de proveedor del recurso (por ejemplo, `first-party`, `cdn`, `ad` o `analytics`). |
 
@@ -211,11 +211,11 @@ Los errores de red incluyen información sobre solicitudes HTTP fallidas. Tambi�
 | Métrica                   | Tipo        | Descripción                                        |
 | ------------------------ | ----------- | -------------------------------------------------- |
 | `action.loading_time`    | número (ns) | El tiempo de carga de la acción.                    |
-| `action.long_task.count` | número      | Total de tareas largas recopiladas para esta acción. |
-| `action.resource.count`  | número      | Total de recursos recopilados para esta acción.  |
-| `action.error.count`     | número      | Total de errores recopilados para esta acción.     |
+| `action.long_task.count` | número      | Número de tareas largas recopiladas para esta acción. |
+| `action.resource.count`  | número      | Número de recursos recopilados para esta acción.  |
+| `action.error.count`     | número      | Número de errores recopilados para esta acción.     |
 
-### Atributos de la acción
+### Atributos de las acciones
 
 | Atributo            | Tipo   | Descripción                                                                      |
 | -------------------- | ------ | -------------------------------------------------------------------------------- |
@@ -228,7 +228,7 @@ Los errores de red incluyen información sobre solicitudes HTTP fallidas. Tambi�
 
 Antes de que los datos se carguen en Datadog, son almacenados en texto claro en el [directorio de cache][6] de tu canal, lo que significa que estos datos no pueden ser leídos por otras aplicaciones. Ten en cuenta que el sistema operativo puede desalojar los datos en cualquier momento, lo que podría causar pérdida de datos en algunos casos poco frecuentes.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

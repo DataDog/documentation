@@ -8,7 +8,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon ElasicCache のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
@@ -112,11 +112,16 @@ instances:
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
+**注**: ElastiCache Serverless デプロイメントのメトリクスは、同じ `aws.elasticache` ネームスペースで報告されます。これらのメトリクスはタグで区別することができます。
+
+   - 独自設計のキャッシュ用の既存の ElastiCache メトリクスでは、個々のキャッシュを識別するためにタグ `cacheclusterid` が使用されます。
+   - Serverless キャッシュのメトリクスでは、個々のキャッシュを識別するためにタグ `clusterid` が使用されます。
+
 ### イベント
 
 Amazon ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon ElastiCache Events" >}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon ElastiCache イベント" >}}
 
 ### サービスチェック
 

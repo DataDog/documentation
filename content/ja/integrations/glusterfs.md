@@ -22,7 +22,7 @@ assets:
     source_type_id: 10145
     source_type_name: GlusterFS
   monitors:
-    brick status: assets/monitors/brick_status.json
+    Number of offline bricks is high: assets/monitors/brick_status.json
   saved_views:
     glusterfs_processes: assets/saved_views/glusterfs_processes.json
 author:
@@ -33,7 +33,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: glusterfs
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
-integration_version: 1.7.0
+integration_version: 3.0.1
 is_public: true
 manifest_version: 2.0.0
 name: glusterfs
@@ -114,7 +114,7 @@ GlusterFS チェックは [Datadog Agent][3] パッケージに含まれてい�
     dd-agent ALL=(ALL) NOPASSWD:/path/to/your/gstatus
    ```
 
-   If your GlusterFS environment does not require root, set `use_sudo` configuration option to `false`.
+   GlusterFS 環境が root を必要としない場合は、`use_sudo` コンフィギュレーションオプションを `false` に設定します。
 
 2. [Agent を再起動します][6]。
 

@@ -110,7 +110,7 @@ Dataflow パイプラインワーカーのデフォルトの動作は、プロ�
     | [Pub/Sub Publisher][16] | `roles/pubsub.publisher` | このサービスアカウントが別のサブスクリプションに失敗したメッセージを公開することを許可します。これにより、ログの解析や再送信が可能になります
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | このサービスアカウントが Secret Manager で Datadog API キーにアクセスすることを許可します
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | このサービスアカウントがファイルのステージング用に指定された Cloud Storage バケットに対する読み取りと書き込みを行うことを許可します |
-7. 続行します。
+7. **Continue** をクリックします。
 8. **Done** をクリックします。
 
 ## Pub/Sub にログを公開するためのログシンクを作成する

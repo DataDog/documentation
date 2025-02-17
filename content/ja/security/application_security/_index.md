@@ -1,9 +1,14 @@
 ---
+algolia:
+  tags:
+  - asm
+  - アプリケーションセキュリティ
 aliases:
 - /ja/security_platform/application_security
 - /ja/security/application_security/enabling/single_step
 - /ja/security/application_security/enabling/compatibility
 - /ja/security/application_security/enabling
+- /ja/security/application_security/getting_started
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
 further_reading:
 - link: /security/application_security/how-appsec-works/
@@ -85,6 +90,14 @@ ASM を使用して脅威を検出し保護するために環境を構成し始�
 
 [Code Security][9] は、サービス内のコードレベルの脆弱性を特定し、実用的な洞察と修正の提案を提供します。アプリケーションコード内の脆弱性を検出するために、インタラクティブ・アプリケーション・セキュリティ・テスト (IAST) のアプローチを採用しています。IAST は、アプリケーションパフォーマンスモニタリング (APM) と同様にコード内に埋め込まれたインスツルメンテーションを利用して、追加の構成や定期的なスケジューリングを必要とする外部テストに依存することなく、Datadog が正規のアプリケーショントラフィックを使用して脆弱性を特定することを可能にします。
 
+## ASM を無効化する
+
+ASM またはその機能を無効化する方法については、以下を参照してください。
+
+- [脅威管理と保護の無効化][10]
+- [Software Composition Analysis の無効化][11]
+- [コードセキュリティの無効化][12]
+
 ## 次のステップ
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -97,3 +110,6 @@ ASM を使用して脅威を検出し保護するために環境を構成し始�
 [7]: https://dashcon.io/appsec
 [8]: /ja/security/application_security/software_composition_analysis/
 [9]: /ja/security/application_security/code_security/
+[10]: /ja/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /ja/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /ja/security/application_security/troubleshooting/#disabling-code-security

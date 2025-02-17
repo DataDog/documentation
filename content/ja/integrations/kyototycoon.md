@@ -30,7 +30,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ draft: false
 git_integration_title: kyototycoon
 integration_id: kyoto-tycoon
 integration_title: Kyoto Tycoon
-integration_version: 2.5.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: kyototycoon
