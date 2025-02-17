@@ -69,6 +69,15 @@ This behavior can be fine-tuned with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to 0 or false to explicitly disable retries even if the remote setting is enabled (default: true).
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: 5).
 
+### Failed Test Replay
+
+In addition to automatically retrying failed tests, Failed Test Replay allows seeing local variable data in the topmost frame of the test error's stack trace. Enable this feature by activating the "Failed Test Replay" toggle.
+
+After it's enabled, look at local variable state on failed tests:
+
+{{< img src="continuous_integration/failed_test_replay_local_variables.png" alt="Failed Test Replay." style="width:100%" >}}
+
+
 #### Known limitations
 
 [jest-image-snapshot][2] is incompatible with `jest.retryTimes` unless `customSnapshotIdentifier` is passed (see [jest-image-snapshot docs][3]) to `toMatchImageSnapshot`. Therefore, auto test retries do not work unless `customSnapshotIdentifier` is used.
