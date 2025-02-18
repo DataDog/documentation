@@ -135,7 +135,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
    </project>
    ```
 2. Add `dd-java-agent.jar` to your Dockerfile.
-   
+
    **Example `Dockerfile`**:
    ```dockerfile
    FROM openjdk:17-jdk
@@ -167,8 +167,8 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
      --region REGION
    ```
    - Replace `REGION` with the region where you want to deploy the function.
-   - Replace `FUNCTION_TARGET` with
-   - Replace `FUNCTION_NAME` with
+   - Replace `FUNCTION_TARGET` with Function entry point. For example, `gcfv2.HelloworldApplication`.
+   - Replace `FUNCTION_NAME` with name of your cloud run function.
    - Ensure that you set [--clear-base-image][5] to deploy your Cloud Function with the Dockerfile
 
 4. When you set up your [containers](#containers), ensure that you use the same container image as what you deployed in the previous steps.
@@ -246,6 +246,7 @@ If you are deploying a new Cloud Run function for the first time through the con
    - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
    - `DD_API_KEY`: Your [Datadog API key][4].
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
+   - `FUNCTION_TARGET`: The entry point of your function. For example, `gcfv2.HelloworldApplication`.
 
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
@@ -259,18 +260,20 @@ If you are deploying a new Cloud Run function for the first time through the con
 
 ## Environment variables
 
-| Variable | Description                                                                                                                                                                      |
-| -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`DD_API_KEY`| [Datadog API key][4] - **Required**                                                                                                                                              |
-| `DD_SITE` | [Datadog site][5] - **Required**                                                                                                                                                 |
-| `DD_SERVICE`      | See [Unified Service Tagging][13] - **Required**                                                                                                                                 |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
-| `DD_VERSION`      | See [Unified Service Tagging][13].                                                                                                                                               |
-| `DD_ENV`          | See [Unified Service Tagging][13].                                                                                                                                               |
-| `DD_SOURCE`       | See [Unified Service Tagging][13].                                                                                                                                               |
-| `DD_TAGS`         | See [Unified Service Tagging][13].                                                                                                                                               |
+| Variable         | Description                                                                                                                                                                 |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_API_KEY`     | [Datadog API key][4] - **Required**                                                                                                                                         |
+| `DD_SITE`        | [Datadog site][5] - **Required**                                                                                                                                            |
+| `FUNCTION_TARGET`   | The entry point of your function - **Required**                                                                                                                             |
+| `DD_SERVICE`     | See [Unified Service Tagging][13] - **Required**                                                                                                                            |
+| `DD_LOGS_INJECTION` | When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
+| `DD_VERSION`     | See [Unified Service Tagging][13].                                                                                                                                          |
+| `DD_ENV`         | See [Unified Service Tagging][13].                                                                                                                                          |
+| `DD_SOURCE`      | See [Unified Service Tagging][13].                                                                                                                                          |
+| `DD_TAGS`        | See [Unified Service Tagging][13].                                                                                                                                          |
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
+`FUNCTION_TARGET` can also be found on the source tab inside Google console: `Function entry point`.
 
 ## Example application
 
