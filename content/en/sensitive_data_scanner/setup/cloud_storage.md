@@ -69,7 +69,7 @@ There are two methods for deploying scanners to your environment:
 
 ### Automatically deploy scanners using CloudFormation {#automatically-deploy-scanners-using-cloudformation}
 
-When you deploy Agentless scanners using CloudFormation, a single scanner is created per account and scans across all of its regions. You set the region that the scanner is deployed on.
+When you deploy Agentless scanners using CloudFormation, a single scanner is created per account and scans across all of the account's regions. You set the region that the scanner is deployed on.
 
 You can add a scanner to a new AWS account or an existing AWS account.
 
@@ -82,7 +82,7 @@ You can add a scanner to a new AWS account or an existing AWS account.
 1. Select the AWS region in the dropdown menu.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
 1. If you want to send AWS logs to Datadog, leave **Yes** selected.
-1. Optionally, select **Yes** if you want to use Datadog Cloud Security Management.
+1. Select **Yes** if you want to use Datadog Cloud Security Management.
 1. **Enable Sensitive Data Scanner** is automatically selected by default. This tells CloudFormation to add the AWS Managed SecurityAudit policy to your Datadog AWS Integration role and enable Agentless Scanning to start scanning your cloud data stores.
 1. Click **Launch CloudFormation Template**.
 
@@ -122,9 +122,9 @@ You can deploy Agentless scanners using the [Terraform Module Datadog Agentless 
 
 {{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
 
-## Add scanning groups
+## Scanning groups
 
-In the [Cloud Storage][6] settings page, the **Scanning Groups** section is read-only. All SDS library rules are applied within the scanning group.
+In the [Cloud Storage][6] settings page, the **Scanning Groups** section is read-only. All [library rules][2] are applied within the scanning group.
 
 ## Cloud service provider cost
 
