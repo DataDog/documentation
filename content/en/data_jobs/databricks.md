@@ -54,7 +54,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
 1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs. 
 1. Click **Save Databricks Workspace**.
-   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new-2.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
 
 #### When adding the init script to a Databricks workspace already integrated with Datadog
 
