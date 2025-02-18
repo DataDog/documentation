@@ -18514,6 +18514,29 @@ components:
 
             Defaults to false.'
           type: boolean
+        include_actively_queried_tags_window:
+          description: 'When provided, all tags that have been actively queried are
+
+            configured (and, therefore, remain queryable) for each metric that
+
+            matches the given prefix.  Minimum value is 1 second, and maximum
+
+            value is 7,776,000 seconds (90 days).'
+          format: double
+          maximum: 7776000
+          minimum: 1
+          type: number
+        override_existing_configurations:
+          description: 'When set to true, the configuration overrides any existing
+
+            configurations for the given metric with the new set of tags in this
+
+            configuration request. If false, old configurations are kept and
+
+            are merged with the set of tags in this configuration request.
+
+            Defaults to true.'
+          type: boolean
         tags:
           $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
       type: object
