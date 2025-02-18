@@ -42,9 +42,12 @@ To add or remove a pipeline associated with your service:
 
    - Manually add a pipeline fingerprint to the service metadata. To find a pipeline's fingerprint, go to the [Pipelines][5] page, click on the pipeline, and select the gear icon.
 
+
       {{< img src="tracing/software_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
-For more details on CI status and static analysis violations, click on a service to review the status of each pipeline and rule violation.
+For more details on CI status and static analysis violations for a particular service, click on the service and navigate to the Delivery tab to review the status of each pipeline and rule violation.
+
+{{< img src="tracing/software_catalog/delivery_tab.png" alt="The Delivery tab for a service, showing pipeline information like success rate and date of last execution" style="width:100%;" >}}
 
 ## Further reading
 
