@@ -160,6 +160,14 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/ApplicationKeysSort'
+    ApplicationSecurityExclusionFilterID:
+      description: The identifier of the exclusion filter.
+      example: 3b5-v82-ns6
+      in: path
+      name: exclusion_filter_id
+      required: true
+      schema:
+        type: string
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -2230,6 +2238,170 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    ApplicationSecurityExclusionFilterAttributes:
+      description: Attributes describing an Application Security exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Exclude false positives on a path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: true
+          type: boolean
+        event_query:
+          description: The event query matched by the legacy exclusion filter.
+          readOnly: true
+          type: string
+        ip_list:
+          description: The client IP addresses matched by the exclusion filter (CIDR
+            notation is supported).
+          items:
+            example: 198.51.100.72
+            type: string
+          type: array
+        on_match:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterOnMatch'
+        parameters:
+          description: A list of parameters matched by the exclusion filter in the
+            HTTP query string and HTTP request body. Nested parameters can be matched
+            by joining fields with a dot character.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The HTTP path glob expression matched by the exclusion filter.
+          example: /accounts/*
+          type: string
+        rules_target:
+          description: The WAF rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The services where the exclusion filter is deployed.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      type: object
+    ApplicationSecurityExclusionFilterID:
+      description: The identifier of the exclusion filter.
+      example: 3dd-0uc-h1s
+      readOnly: true
+      type: string
+    ApplicationSecurityExclusionFilterMetadata:
+      description: Extra information about the exclusion filter.
+      properties:
+        added_at:
+          description: The creation date of the exclusion filter.
+          format: date-time
+          type: string
+        added_by:
+          description: The handle of the user who created the exclusion filter.
+          type: string
+        modified_at:
+          description: The last modification date of the exclusion filter.
+          format: date-time
+          type: string
+        modified_by:
+          description: The handle of the user who last modified the exclusion filter.
+          type: string
+      readOnly: true
+      type: object
+    ApplicationSecurityExclusionFilterOnMatch:
+      description: The action taken when the exclusion filter matches. When set to
+        `monitor`, security traces are emitted but the requests are not blocked. By
+        default, security traces are not emitted and the requests are not blocked.
+      enum:
+      - monitor
+      type: string
+      x-enum-varnames:
+      - MONITOR
+    ApplicationSecurityExclusionFilterRequest:
+      description: Request object for a single Application Security exclusion filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResource'
+      required:
+      - data
+      type: object
+    ApplicationSecurityExclusionFilterResource:
+      description: A JSON:API resource for an Application Security exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterAttributes'
+        id:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterID'
+        meta:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterMetadata'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterType'
+      required:
+      - type
+      - attributes
+      type: object
+    ApplicationSecurityExclusionFilterResponse:
+      description: Response object for a single Application Security exclusion filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResource'
+      type: object
+    ApplicationSecurityExclusionFilterRulesTarget:
+      description: Target WAF rules based either on an identifier or tags.
+      properties:
+        rule_id:
+          description: Target a single WAF rule based on its identifier.
+          example: dog-913-009
+          type: string
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRulesTargetTags'
+      type: object
+    ApplicationSecurityExclusionFilterRulesTargetTags:
+      description: Target multiple WAF rules based on their tags.
+      properties:
+        category:
+          description: The category of the targeted WAF rules.
+          example: attack_attempt
+          type: string
+        type:
+          description: The type of the targeted WAF rules.
+          example: lfi
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterScope:
+      description: Deploy on services based on their environment and/or service name.
+      properties:
+        env:
+          description: Deploy on this environment.
+          example: www
+          type: string
+        service:
+          description: Deploy on this service.
+          example: prod
+          type: string
+      type: object
+    ApplicationSecurityExclusionFilterType:
+      default: exclusion_filter
+      description: Type of the resource. The value should always be `exclusion_filter`.
+      enum:
+      - exclusion_filter
+      example: exclusion_filter
+      type: string
+      x-enum-varnames:
+      - EXCLUSION_FILTER
+    ApplicationSecurityExclusionFiltersResponse:
+      description: Response object for multiple Application Security exclusion filters.
+      properties:
+        data:
+          description: A list of Application Security exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResource'
+          type: array
+      type: object
     AppsSortField:
       description: The field and direction to sort apps by
       enum:
@@ -45606,6 +45778,193 @@ paths:
         - timeseries_query
       x-undo:
         type: idempotent
+  /api/v2/remote_config/products/asm/waf/exclusion_filters:
+    get:
+      description: Retrieve a list of Application Security exclusion filters.
+      operationId: ListApplicationSecurityExclusionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all Application Security exclusion filters
+      tags:
+      - Application Security
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_read
+      x-terraform-resource: appsec_exclusion_filter
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new Application Security exclusion filter with the given
+        parameters.
+
+
+        A request matched by an exclusion filter will be ignored by the Application
+        Security product.
+
+        Go to https://app.datadoghq.com/security/appsec/passlist to review existing
+        exclusion filters (also called passlist entries).'
+      operationId: CreateApplicationSecurityExclusionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRequest'
+        description: The definition of the new exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an Application Security exclusion filter
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-given:
+        exclusion_filter:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"exclusion_filter\",\n    \"attributes\":
+              {\n      \"description\": \"My Exclusion Filter\",\n      \"enabled\":
+              true,\n      \"path_glob\": \"*\",\n      \"parameters\": [\n        \"list.search.query\"\n
+              \     ],\n      \"rules_target\": [\n        {\n          \"tags\":
+              {\n            \"category\":\"attack_attempt\",\n            \"type\":\"xss\"\n
+              \         }\n        }\n      ],\n      \"scope\": [\n        {\n          \"env\":
+              \"staging\",\n          \"service\": \"event-query\"\n        }\n      ]\n
+              \   }\n  }\n}"
+          step: there is a valid "exclusion_filter" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_exclusion_filter
+      x-undo:
+        operationId: DeleteApplicationSecurityExclusionFilter
+        parameters:
+        - name: exclusion_filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/exclusion_filters/{exclusion_filter_id}:
+    delete:
+      description: Delete a specific Application Security exclusion filter using its
+        identifier.
+      operationId: DeleteApplicationSecurityExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an Application Security exclusion filter
+      tags:
+      - Application Security
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_exclusion_filter
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a specific Application Security exclusion filter using
+        its identifier.
+      operationId: GetApplicationSecurityExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an Application Security exclusion filter
+      tags:
+      - Application Security
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_read
+      x-terraform-resource: appsec_exclusion_filter
+      x-undo:
+        type: safe
+    put:
+      description: 'Update a specific Application Security exclusion filter using
+        its identifier.
+
+        Returns the exclusion filter object when the request is successful.'
+      operationId: UpdateApplicationSecurityExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityExclusionFilterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityExclusionFilterRequest'
+        description: The exclusion filter to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an Application Security exclusion filter
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_exclusion_filter
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
       description: Get the list of Cloud Security Management Threats Agent rules.
@@ -55263,6 +55622,22 @@ tags:
     are built to accelerate remediation at scale. These API endpoints allow you to
     create, read, update, delete, and publish apps.
   name: App Builder
+- description: '[Datadog Application Security](https://docs.datadoghq.com/security/application_security/)
+    provides protection against
+
+    application-level attacks that aim to exploit code-level vulnerabilities,
+
+    such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and
+
+    Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps
+
+    hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for
+
+    supported languages) AWS Fargate.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/security/application_security/
+  name: Application Security
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)

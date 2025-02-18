@@ -27,6 +27,10 @@
     "name": "App Builder",
     "description": "Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps."
   },
+  "application-security": {
+    "name": "Application Security",
+    "description": "[Datadog Application Security](https://docs.datadoghq.com/security/application_security/) provides protection against\napplication-level attacks that aim to exploit code-level vulnerabilities,\nsuch as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and\nReflected Cross-Site-Scripting (XSS). You can monitor and protect apps\nhosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for\nsupported languages) AWS Fargate."
+  },
   "audit": {
     "name": "Audit",
     "description": "Search your Audit Logs events over HTTP."

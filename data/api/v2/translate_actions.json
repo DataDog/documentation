@@ -1289,6 +1289,30 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "ListApplicationSecurityExclusionFilters": {
+    "description": "Retrieve a list of Application Security exclusion filters.",
+    "summary": "List all Application Security exclusion filters"
+  },
+  "CreateApplicationSecurityExclusionFilter": {
+    "description": "Create a new Application Security exclusion filter with the given parameters.\n\nA request matched by an exclusion filter will be ignored by the Application Security product.\nGo to https://app.datadoghq.com/security/appsec/passlist to review existing exclusion filters (also called passlist entries).",
+    "summary": "Create an Application Security exclusion filter",
+    "request_description": "The definition of the new exclusion filter.",
+    "request_schema_description": "Request object for a single Application Security exclusion filter."
+  },
+  "DeleteApplicationSecurityExclusionFilter": {
+    "description": "Delete a specific Application Security exclusion filter using its identifier.",
+    "summary": "Delete an Application Security exclusion filter"
+  },
+  "GetApplicationSecurityExclusionFilter": {
+    "description": "Retrieve a specific Application Security exclusion filter using its identifier.",
+    "summary": "Get an Application Security exclusion filter"
+  },
+  "UpdateApplicationSecurityExclusionFilter": {
+    "description": "Update a specific Application Security exclusion filter using its identifier.\nReturns the exclusion filter object when the request is successful.",
+    "summary": "Update an Application Security exclusion filter",
+    "request_description": "The exclusion filter to update.",
+    "request_schema_description": "Request object for a single Application Security exclusion filter."
+  },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Cloud Security Management Threats Agent rules.",
     "summary": "Get all CSM Threats Agent rules"
