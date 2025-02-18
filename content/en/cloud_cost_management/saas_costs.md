@@ -78,7 +78,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
 5. Click **Save**.
 
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Confluent Cloud cost data can be available in Cloud Cost Management 24 hours after integration setup. This data will automatically include 12 months of history, the maximum provided by the Confluent billing API. Over time, this will expand to 15 months, reaching full availability after three additional months. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
 
