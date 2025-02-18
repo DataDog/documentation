@@ -31,7 +31,7 @@ This document walks you through:
 
 To use Sensitive Data Scanner in your AWS environments, you need to:
 
-1. Enable Remote Configuration. Remote Configuration allows Datadog to send information to scanners, such as which cloud storage resources should be scanned. See [Enabling Remote Configuration][4] for instructions on how to set up Remote Configuration.
+1. Enable Remote Configuration. Remote Configuration allows Datadog to send information to scanners, such as which cloud storage resources should be scanned. See the [Remote Configuration setup instructions][4].
 1. Use Remote-Configuration-enabled Datadog API keys for AWS accounts with scanners deployed to them. You need to manually enable Remote Configuration for the API keys you want to use for Agentless Scanning. See [Enable Remote Configuration on the API key][5] for instructions.
 
 **Notes**:
