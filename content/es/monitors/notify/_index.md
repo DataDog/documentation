@@ -118,12 +118,6 @@ Las opciones son:
 
 **Nota**: Según la integración, es posible que algunos contenidos no se muestren por defecto.
 
-### Metadatos
-
-Añade metadatos (prioridad, etiquetas, equipo de Datadog) a tu monitor. La prioridad del monitor te permite establecer la importancia de tu monitor a través del nivel P (P1 a P5). Las etiquetas de monitor, que son diferentes de las etiquetas de métrica, se utilizan en la interfaz de usuario para agrupar y buscar monitores. Si se configuran las políticas de etiqueta, es necesario añadir los valores de etiqueta y las etiquetas necesarias. Para obtener más información, consulta [Políticas de etiqueta][10]. Los equipos de Datadog te permiten establecer un nivel de propiedad a este monitor y ver todos los monitores vinculados a tu equipo. Para obtener más información, consulta [Equipos de Datadog][11].
-
-{{< img src="monitors/notifications/notifications_metadata.png" alt="Ver una configuración de etiqueta de política. En 'Policy tags' (Etiquetas de política) hay tres ejemplos de etiquetas: cost_center, product_id y env, al lado del menú desplegable 'Select value' (Seleccionar valor)." style="width:100%;" >}}
-
 ### Renotificación
 
 Activa la renotificación (opcional) para recordar a tu equipo que un problema no está resuelto.
@@ -151,6 +145,20 @@ Si utilizas el bloque `{{#is_renotify}}`, el mensaje original de notificación t
 
 Descubre cómo configurar monitores para esos casos de uso en la [sección de ejemplos][12].
 
+### Metadatos
+
+Añade metadatos (prioridad, etiquetas, equipo de Datadog) a tu monitor. La prioridad del monitor te permite establecer la importancia de tu monitor a través del nivel P (P1 a P5). Las etiquetas de monitor, que son diferentes de las etiquetas de métrica, se utilizan en la interfaz de usuario para agrupar y buscar monitores. Si se configuran las políticas de etiqueta, es necesario añadir los valores de etiqueta y las etiquetas necesarias. Para obtener más información, consulta [Políticas de etiqueta][10]. Los equipos de Datadog te permiten establecer un nivel de propiedad a este monitor y ver todos los monitores vinculados a tu equipo. Para obtener más información, consulta [Equipos de Datadog][11].
+
+{{< img src="monitors/notifications/notifications_metadata.png" alt="Ver una configuración de etiqueta de política. En 'Policy tags' (Etiquetas de política) hay tres ejemplos de etiquetas: cost_center, product_id y env, al lado del menú desplegable 'Select value' (Seleccionar valor)." style="width:100%;" >}}
+
+### Agregación
+
+Si la consulta del monitor está agrupada, puedes eliminar una o más de las dimensiones de la agrupación de notificaciones, o eliminarlas todas y notificar como una Alerta simple.
+
+{{< img src="monitors/notifications/notifications_aggregation.png" alt="Vista de configuración agregada establecida en multialerta." style="width:100%;" >}}
+
+Encontrarás más información sobre esta función en [Configurar monitores][18]
+
 
 ## Notificaciones de auditoría
 
@@ -176,7 +184,7 @@ Las notificaciones de test producen eventos que se pueden buscar en el Event Exp
 
 Las variables de etiqueta solo se rellenan en el texto de eventos secundarios de Datadog. El evento principal solo muestra un resumen de agregación.
 
-### Variables {#variables-test-notificación}
+### Variables {#variables-test-notification}
 
 Las variables de mensaje se rellenan automáticamente con un grupo seleccionado aleatoriamente según la definición de contexto de tu monitor, por ejemplo:
 
@@ -206,3 +214,4 @@ Las variables de mensaje se rellenan automáticamente con un grupo seleccionado 
 [15]: /es/monitors/configuration/
 [16]: /es/monitors/guide/recovery-thresholds/
 [17]: /es/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[18]: /es/monitors/configuration/#set-alert-aggregation

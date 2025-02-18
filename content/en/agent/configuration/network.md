@@ -371,6 +371,18 @@ The metrics are stored in the folder defined by the `forwarder_storage_path` set
 
 To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 80 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
 
+## Installing the Datadog Operator
+
+If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your location:
+
+- `gcr.io/datadoghq` (GCR US)
+- `eu.gcr.io/datadoghq` (GCR Europe)
+- `asia.gcr.io/datadoghq` (GCR Asia)
+- `datadoghq.azurecr.io` (Azure)
+- `public.ecr.aws/datadog` (AWS)
+- `docker.io/datadog` (DockerHub)
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

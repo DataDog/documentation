@@ -6,88 +6,96 @@ further_reading:
 - link: /continuous_integration/explorer
   tag: ドキュメント
   text: パイプライン実行を検索およびフィルターする
+- link: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+  tag: ドキュメント
+  text: パイプラインの実行時間を短縮するためにクリティカルパス上の CI ジョブを特定する
 title: CI パイプラインの検索と管理
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">現在、選択されたサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility をご利用いただけません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-The [Pipelines page][1] is useful for developers who want to keep an eye on the build pipeline for their service.
+[Pipelines ページ][1]は、サービスのビルドパイプラインを常に監視したい開発者にとって役立ちます。
 
-{{< img src="/continuous_integration/pipelines.png" text="CI Pipelines page" style="width:100%" >}}
+{{< img src="/continuous_integration/pipelines.png" text="CI Pipelines ページ" style="width:100%" >}}
 
-This page answers the following questions:
+このページでは、次のような疑問に答えます。
 
-- Is the pipeline for your service performant and reliable, especially on the default branch?
-- If not, what's the root cause?
+- 特にデフォルトブランチにおいて、サービスのパイプラインはパフォーマンス面と信頼性の面で問題なく稼働しているか？
+- もし問題がある場合、その根本原因は何か？
 
-You can access high-level accumulation and trends, including:
+このページでは、以下のような高レベルの集計データやトレンドにアクセスできます。
 
-- An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches.
-- A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production.
-- How each pipeline has run, over time, and with what results and trends.
-- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it makes the biggest difference.
+- パイプラインの実行やブランチに関する集計データをもとにした、ビルドシステム全体のヘルスの概要。
+- 本番環境にデプロイするパイプラインが失敗するなど、緊急度の高い問題をすばやく発見して修正するためのビュー。
+- 時間の経過とともに各パイプラインがどのように実行され、どのような結果やトレンドがあったか。
+- 各ビルドステージでどこに時間が費やされているかの内訳を時系列で確認し、最も効果的に改善できるポイントに注力できる。
 
-## Search for pipelines
+## パイプラインの検索
 
-To see your pipelines, navigate to [**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1].
+パイプラインを確認するには、[**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1] に移動します。
 
-The [Pipelines page][1] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
+[Pipelines ページ][1]では、選択した期間における各パイプラインのデフォルトブランチの集計データと、最新のパイプライン実行状況を表示します。このページを使って、すべてのパイプラインを一覧し、それらのヘルスを素早く確認できます。通常 `main` や `prod` と呼ばれるデフォルトブランチに紐づいた Git 情報を持つパイプライン、および Git 情報を持たないパイプラインのみがこのページに表示されます。
 
-The metrics shown include build frequency, failure rate, median duration, and change in median duration on both an absolute and relative basis. This information reveals which pipelines are high-usage and potentially high-resource consumers, or are experiencing regressions. The last build result, duration, and last runtime shows you the effect of the last commit.
+表示されるメトリクスには、ビルド頻度、失敗率、中央値の実行時間、中央値の実行時間の絶対値・相対値両方での変化率が含まれます。これらの情報から、どのパイプラインが利用頻度が高くリソース消費が大きいか、あるいは回帰が発生しているかを把握できます。最後のビルド結果、実行時間、直近の実行開始時刻を見れば、直前のコミットが与えた影響を確認できます。
 
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][6], you can filter for specific pipelines associated to your team using [custom tags][7] that match team handles.
+ページをパイプライン名でフィルタリングすれば、気になるパイプラインにフォーカスできます。遅延がある、または失敗しているパイプラインをクリックすると、どのコミットによってパフォーマンスの低下やビルドエラーが発生したかを詳細に調査できます。[Datadog Teams][6] を使用している場合、チームハンドルに対応した[カスタムタグ][7]を用いて、自分のチームに関連する特定のパイプラインをフィルタリングできます。
 
-## Pipeline details and executions
+## パイプラインの詳細と実行
 
-Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
+特定のパイプラインをクリックすると、選択したパイプラインのデータを特定の期間で表示する _Pipeline Details_ ページに移動します。
 
-{{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="単一パイプラインの Pipeline Details ページ" style="width:100%;">}}
 
-Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
+選択したパイプラインに関して、合計および失敗した実行回数の推移、ビルド時間のパーセンタイル、エラー率、ステージごとの処理時間の内訳などを確認できます。ステージやジョブのサマリーテーブルもあり、実行時間や総実行時間に占める割合、失敗率などで簡単に並べ替えできます。
 
-The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
+パイプラインの実行リストには、選択したブランチおよび期間において実行された、パイプライン (またはそのステージやジョブ) のすべての実行が表示されます。左側のファセットを使って、特定のパイプライン、ステージ、ジョブに絞り込むことができます。
 
-### View unified pipeline trace
+### 統合パイプライントレースを表示する
 
-To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
+統合パイプライントレースを表示するには、パイプライン実行ページの `View unified trace` チェックボックスをクリックします。
 
-The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
+統合パイプライントレースでは、パイプラインの部分的なリトライが行われた際に生成された複数のトレースを、単一のトレースとしてまとめて表示します。パイプライン実行に部分的なリトライがない場合は、単一のパイプライン実行トレースのみが表示されます。
 
-### Highlight critical path
+### クリティカルパスをハイライトする
 
-To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
+トレース上でクリティカルパスをハイライト表示するには、パイプライン実行ページの `Critical path` チェックボックスをクリックします。
 
-The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
+クリティカルパスは、パイプラインの全体的な実行時間を短縮したい場合に、どのスパンを高速化する必要があるかを示します。CI ジョブがクリティカルパス上にある場合、そのジョブは実行時間の観点で最も長い経路の一部を形成していることを意味します。パイプラインを高速化するには、クリティカルパス上の CI ジョブを高速化することが必須となります。
 
-### Explore connections to services, resources, and network events
+[こちらのガイド][11]を参照することで、クリティカルパスにある CI ジョブを特定し、パイプライン全体の実行時間を短縮するためにどのジョブを優先的に最適化するべきかを判断できます。
 
-Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
+### サービス、リソース、およびネットワークイベントとの関連付けを調査する
 
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
+いずれかの実行をクリックすると、パイプラインとそのステージに関するフレームグラフやスパンリストを表示するパイプライン実行ビューが開きます。左側の _Executions (n)_ リストから、同じコミットに対するパイプラインのリトライごとのデータに素早くアクセスできます。
 
-{{< img src="ci/ci-pipeline-execution.png" alt="Pipeline execution view with trace info and flamegraph display" style="width:100%;">}}
+CI プロバイダーのリンク (下記例では `gitlab-ci gitlab.pipeline > documentation`) をクリックすると、そのパイプラインやステージ、ジョブに関するリソースページ、サービスページ、または Analytics ページを調査できます。さらに、完全なタグ情報やネットワーク監視イベントへのリンクも確認できます。
 
-### Explore connections to logs
+{{< img src="ci/ci-pipeline-execution.png" alt="トレース情報とフレームグラフを表示したパイプライン実行ビュー" style="width:100%;">}}
 
-If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+### ログとの関連付けを調査する
 
-Job log collection is supported for the following providers:
+CI プロバイダーがログ収集をサポートしており有効化されている場合、関連するログイベントはパイプライン実行ビューの _Logs_ タブで確認できます。
 
+ジョブログの収集がサポートされているプロバイダーは以下の通りです。
+
+- [AWS CodePipeline][8]
+- [Azure][9]
+- [CircleCI][10]
 - [GitHub Actions][3]
 - [GitLab][4]
 - [Jenkins][5]
 
-#### AI-generated log summaries
+#### AI によるログサマリー
 
-<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+<div class="alert alert-info">AI によるログサマリーはプレビュー版です。アクセスをご希望の場合は、<a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">こちらのフォーム</a>にご記入ください。</div>
 
-Pipeline Visibility は、CI ジョブログに基づいて、AI が生成するパイプラインエラーの説明を提供します。これらの説明は、各パイプラインの実行に対して **Failed Jobs** タブで確認できます。これらの要約を利用して、CI のエラーが開発者によって書かれたコードに関連しているのか、それとも CI パイプライン自体に関連しているのかを判断し、さらに実行失敗のトラブルシューティングも行うことができます。
+Pipeline Visibility では、CI ジョブログに基づき AI が生成したパイプラインエラーの説明を提供します。これらの説明は、各パイプライン実行の **Failed Jobs** タブで確認できます。これらのサマリーを活用することで、CI におけるエラーが開発者が記述したコードに起因するのか、あるいは CI パイプラインそのものに起因するのかを判断し、実行の失敗をトラブルシュートできます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -97,3 +105,7 @@ Pipeline Visibility は、CI ジョブログに基づいて、AI が生成する
 [5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /ja/account_management/teams/ 
 [7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[8]: /ja/continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[9]: /ja/continuous_integration/pipelines/azure/#enable-job-log-collection
+[10]: /ja/continuous_integration/pipelines/circleci/#enable-log-collection
+[11]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

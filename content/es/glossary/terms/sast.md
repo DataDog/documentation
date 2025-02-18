@@ -4,7 +4,7 @@ core_product:
 - seguridad de las aplicaciones
 synonyms:
 - análisis estático
-- análisis de código
+- Seguridad del código
 title: pruebas estáticas de seguridad de las aplicaciones (SAST)
 ---
 

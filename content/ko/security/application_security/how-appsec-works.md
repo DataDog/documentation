@@ -11,41 +11,30 @@ title: Datadog Application Security 작동 방법
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트 </a>({{< region-param key="dd_site_name" >}})에서는 Application Security를 지원하지 않습니다.</div>
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## 개요
+## Overview
 
-Datadog Application Security는 코드 수준 취약성이나 애플리케이션 비즈니스 로직을 남용하고 시스템에 해를 끼치는 애플리케이션 수준 공격에 관측성을 제공합니다.
+Datadog Application Security provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems. It provides:
 
-다음 간단 개요를 참고하세요.
+- **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
+- **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
+- **Security signals**: Automatically generates security signals when attacks or business logic abuses are detected, focusing on meaningful threats rather than individual attempts.
+- **Notification Options**: Offers notifications through Slack, email, or PagerDuty based on security signal settings.
+- **Embedded security**: Integrated within the application, providing better threat identification and classification by accessing trace data.
+- **Enhanced WAF functionality**: Functions like a Web Application Firewall (WAF) but with additional application context, improving accuracy and reducing false positives.
 
-- **공격 관측성 제공**: 코드 취약성이나 비즈니스 로직을 대상으로 공격하는 애플리케이션 수준 공격에 인사이트를 제공합니다.
-- **위험 감지**: 취약 라이브러리와 종속성 같은 애플리케이션에서 위험을 파악합니다.
-- **트레이스 기반 모니터링**: Datadog APM과 같은 추적 라이브러리를 사용해 트래픽을 모니터링하고 보안 위협을 감지합니다.
-- **보안 신호**: 공격이나 비즈니스 로직 남용이 감지되면 자동으로 보안 신호를 생성하며, 개별적 시도보다는 의미 있는 위협에 집중합니다.
-- **알림 옵션**: 보안 신호 설정에 따라 Slack, 이메일, 또는 PagerDuty으로 알림을 보냅니다.
-- **임베디드 보안**: 애플리케이션 내에 통합되어 트레이스 데이터에 접근하여 위협 파악과 분류를 더욱 효과적으로 할 수 있습니다.
-- **향상된 WAF 기능**: WAF(Web Application Firewall)과 같은 기능이 추가 애플리케이션 컨텍스트와 제공되어 정확성과 거짓 긍정이 줄어듭니다.
+### Identify services exposed to application attacks
 
-### 애플리케이션 공격에 노출된 서비스 파악
+Datadog Application Security [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling Application Security in the tracing library is necessary to effectively monitor and protect your services.
 
-Datadog Application Security [위협 관리][1]에서는 APM에서 수집한 정보를 이용해 공격 시도가 포함된 트레이스를 플래그합니다. APM에서 애플리케이션 트래픽을 샘플링하고 추적 라이브러리에서 활성화된 Application Security가 효과적으로 서비스를 모니터링하고 보호합니다.
+Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
 
-애플리케이션 공격에 노출된 서비스는 APM ([서비스 카탈로그][2], [서비스 페이지][3], [트레이스][4])에 포함된 보안 보기에 강조 표시됩니다. 
+Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
-Datadog 위협 모니터링 및 감지 서비스에서는 클라이언트 IP 주소, 로그인 계정 정보(예: 사용자 계정/ID), 요청 전체에서 수동으로 추가된 사용자 태그와 같은 데이터를 수집해 유해 행위자를 파악합니다.
-
-<div class="alert alert-info"><strong>원클릭 활성화</strong><br>
-<a href="/agent/remote_config/#enabling-remote-configuration">원격 구현이 활성화되어 있고 이를 지원할 수 있는 추적 라이브러리</a>로 서비스를 실행하는 경우, Datadog UI에서 추가 에이전트나 추적 라이브러리 구성 없이 <a href="https://app.datadoghq.com/security/configuration/asm/setup">Application Security</a>를 활성화하세요.</div>
-
-### 서비스에서 이용 중인 오픈 소스 라이브러리 취약성 파악
-
-Datadog [소프트웨어 구성 분석][5]은 오픈 소스 소프트웨어 라이브러리와 관련된 다양한 알려진 취약성 데이터 소스와 Datadog 보안 연구팀이 제공하는 정보를 사용하여 애플리케이션이 런타임에서 의존하는 라이브러리와 잠재적 취약성을 확인하고 권장 수정 사항을 제시합니다.
-
-### 서비스의 코드 수준 취약성 파악
-
-[Code Security][28]는 서비스의 코드 수준 취약점을 파악하고 실행 가능한 인사이트와 수정 사항을 제공합니다. IAST(대화형 애플리케이션 보안 테스트) 접근 방식을 사용하여 애플리케이션 코드 내의 취약점을 찾습니다. IAST는 APM(애플리케이션 성능 모니터링)과 같이 코드에 내장된 계측을 사용하기 때문에 Datadog에서 추가 구성이나 정기적으로 해야 하는 외부 테스트에 의존할 필요 없이 정상적인 애플리케이션 트래픽을 사용하여 취약점을 파악할 수 있습니다. Datadog Code Security에서는 영향을 받은 파일 이름, 정확한 방법, 줄 번호까지, 정보 팀에 필요한 정보를 자동으로 제공합니다.
+<div class="alert alert-info"><strong>1-Click Enablement</strong><br>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ## 호환성
 
@@ -125,17 +114,11 @@ Datadog Application Security에는 다음 범주를 포함하되 이에 국한�
 * 사이트 간 스크립팅(XSS)
 * 서버 측 요청 위조(SSRF)
 
-## 기본 제공 취약점 탐지
-
-Datadog Application Security는 애플리케이션 코드와 오픈 소스 종속성에서 탐지된 취약성에 관해 경고하는 기본 제공 탐지 기능을 제공합니다. 해당 정보의 자세한 내용은 [취약성 탐색기][15]에 표시되며, 심각도, 영향을 받는 서비스, 잠재적으로 취약한 인프라스트럭처, 표면화된 위험을 해결하기 위한 치료 지침을 확인할 수 있습니다.
-
-자세한 정보는 [코드 보안][28]과 [소프트웨어 구성 분석][5]을 참고하세요.
-
 ## API 보안
 
-<div class="alert alert-info">API 보안은 비공개 베타 버전입니다.</div>
+<div class="alert alert-info">API 보안은 평가판입니다.</div>
 
-Datadog Application Security에서는 API와 관련된 위협에 가시성을 제공합니다. [API 카탈로그][27]를 사용해 API 상태 및 성능 지표를 모니터링하고 API를 대상으로 하는 공격을 볼 수 있습니다. 이 보기에는 공격자의 IP 및 인증 정보는 물론, 공격이 어떻게 형성되었는지에 관한 세부 정보 포함한 요청 헤더가 있습니다. Application Security와 API 관리를 함게 사용하면 API 공격 경로에 관한 포괄적인 보기를 관리하고 위협을 완화할 수 있습니다.
+Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Service Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ##  Datadog Application Security로 Log4Shell 방어하는 방법
 
@@ -149,7 +132,7 @@ Application Security에서는 Log4j Log4Shell 공격 페이로드를 파악하�
 [2]: /ko/tracing/service_catalog/#security-view
 [3]: /ko/tracing/services/service_page/#security
 [4]: /ko/tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /ko/security/application_security/software_composition_analysis/
+[5]: /ko/security/code_security/software_composition_analysis/
 [6]: /ko/tracing/trace_collection/
 [8]: /ko/security/application_security/serverless/
 [9]: /ko/tracing/trace_pipeline/trace_retention/
@@ -158,10 +141,11 @@ Application Security에서는 Log4j Log4Shell 공격 페이로드를 파악하�
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /ko/security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
-[15]: https://app.datadoghq.com/security/appsec/vm
+[15]: https://app.datadoghq.com/security/appsec/vm/library
 [16]: /ko/security/cloud_siem/
 [17]: /ko/security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /ko/security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /ko/agent/remote_config/#enabling-remote-configuration
-[27]: /ko/tracing/api_catalog/
-[28]: /ko/security/application_security/code_security/
+[27]: /ko/service_catalog/endpoints/
+[28]: /ko/security/code_security/iast/
+[29]: https://docs.datadoghq.com/ko/security/code_security/

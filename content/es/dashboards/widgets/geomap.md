@@ -71,13 +71,17 @@ El widget geomap visualiza datos geográficos con regiones o puntos sombreados. 
 
 Los [enlaces contextuales][7] se encuentran habilitados de manera predeterminada y se pueden activar o desactivar. Los enlaces contextuales conectan los widgets del dashboard con otras páginas (en Datadog, o de terceros).
 
+#### Reglas de formato visual
+
+Personaliza el color de la capa de región de tu widget Geomap con reglas condicionales.
+
 ## API
 
-Este widget se puede usar con la **[API de dashboards][8]**. Consulta la siguiente tabla para obtener la [definición del esquema JSON del widget][9]:
+Este widget puede utilizarse con la **[API de dashboards][8]**. Consulta la siguiente tabla para ver la [definición de widget del esquema JSON][9]:
 
 {{< dashboards-widgets-api >}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

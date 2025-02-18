@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 태깅
 aliases:
 - /ko/getting_started/getting_started_with_tags
 - /ko/guides/getting_started/tagging/
@@ -88,7 +91,7 @@ Datadog의 태깅 요건은 다음과 같습니다.
 
 Datadog에서는 태그를 할당할 때 통합 서비스 태깅을 사용하시길 모범 사례로 권장합니다. 통합 서비스 태깅은 표준 태그 3가지(`env`, `service`, `version`)를 사용하여 Datadog 원격 측정 데이터와 결합합니다. 사용자의 환경에서 통합형 태깅을 설정하는 방법을 자세히 알아보려면 [통합 서비스 태깅][8] 가이드를 참조하세요.
 
-## 사용량
+## 사용법
 
 호스트와 [통합][9] 수준에서 [태그를 할당][7]한 후에는 이를 활용하여 메트릭, 트레이스, 로그를 필터링하고 그룹으로 묶을 수 있습니다. 태그는 Datadog 플랫폼의 다음 영역에서 사용됩니다.
 

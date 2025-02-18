@@ -25,7 +25,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - contenedores
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/crio/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: crio
@@ -70,7 +70,7 @@ Este check monitoriza [CRI-O][1].
 
 ### Instalación
 
-La integración se basa en la opción `--enable-metrics` de CRI-O desactivada por defecto, cuando se exponen métricas activadas en`127.0.0.1:9090/métricas`.
+La integración se basa en la opción `--enable-metrics` de CRI-O desactivada por defecto, cuando se exponen métricas activadas en`127.0.0.1:9090/metrics`.
 
 ### Configuración
 
@@ -80,7 +80,7 @@ La integración se basa en la opción `--enable-metrics` de CRI-O desactivada po
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][4] y busca  en la sección **Checks**.
+[Ejecuta el subcomando de estado del Agent][4] y busca `crio` en la sección **Checks**.
 
 ## Datos recopilados
 

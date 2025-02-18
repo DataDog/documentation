@@ -19,10 +19,6 @@ title: Métricas de tiempo de ejecución de Node.js
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-Esta función está en fase beta pública.
-</div>
-
 ## Configuración automática
 
 La recopilación de métricas de tiempo de ejecución puede activarse con un parámetro de configuración en el cliente de rastreo, ya sea a través de la opción del rastreador: `tracer.init({ runtimeMetrics: true })` o a través de la variable de entorno: `DD_RUNTIME_METRICS_ENABLED=true`
@@ -39,7 +35,7 @@ export DD_VERSION=1.0.3
 ```
 
 {{% /tab %}}
-{{% tab "In code" %}}
+{{% tab "En código" %}}
 
 ```js
 const tracer = require('dd-trace').init({
@@ -69,7 +65,7 @@ Las siguientes métricas se recopilan por defecto después de activar las métri
 
 Además de mostrar estas métricas en tu Página de servicios de APM, Datadog proporciona un [dashboard de tiempo de ejecución de Node predeterminado][6].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

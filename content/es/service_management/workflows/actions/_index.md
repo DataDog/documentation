@@ -27,8 +27,8 @@ Datadog proporciona un conjunto de acciones de flujos de trabajo que no están a
 - Realizar solicitudes HTTP personalizadas.
 
 {{< whatsnext desc="Obtener más información sobre acciones genéricas:" >}}
- {{< nextlink href="/service_management/workflows/actions/flow_control" >}}Utiliza acciones lógicas para añadir un intervalo de espera, una ramificación en una condición, utilizar la iteración y mucho más.{{< /nextlink >}}
- {{< nextlink href="/service_management/workflows/actions/data_transformation" >}}Realiza transformaciones de datos personalizadas dentro de tus flujos de trabajo utilizando JavaScript.{{< /nextlink >}}
+{{< nextlink href="/service_management/workflows/actions/flow_control" >}}Utiliza acciones lógicas para añadir un intervalo de espera, una ramificación en una condición, utilizar la iteración y mucho más.{{< /nextlink >}}
+ {{< nextlink href="/service_management/workflows/expressions" >}}Realiza transformaciones de datos personalizadas dentro de tus flujos de trabajo utilizando JavaScript.{{< /nextlink >}}
  {{< nextlink href="/service_management/workflows/actions/http" >}}Utiliza la acción HTTP para realizar una solicitud a un endpoint personalizado.{{< /nextlink >}}
     {{< nextlink href="/service_management/workflows/actions/saved_actions" >}}Utiliza la función <i>Saved Actions</i> (Acciones guardadas) para almacenar y reutilizar una acción y sus parámetros.{{< /nextlink >}}
 {{< /whatsnext >}}

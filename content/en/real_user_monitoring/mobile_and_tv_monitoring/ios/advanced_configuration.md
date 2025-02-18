@@ -72,13 +72,13 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, filter the [relevant file on GitHub][4] for the `DDRUMMonitor` class.
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
 
 For example:
 
@@ -109,9 +109,9 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Resources
 
@@ -161,11 +161,14 @@ rum.stopResource(
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Errors
 
-To track specific errors, notify `RUMMonitor` when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][5].
+To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
+
+- `.addError(message:)`
+- `.addError(error:)`
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -181,7 +184,7 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, refer to the code documentation comments in the [`DDRUMMonitor` class][4].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
 
 ## Track custom global attributes
 
@@ -196,6 +199,8 @@ To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:v
 * To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
 * To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
 * To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
+
+For better performance in bulk operations (modifying multiple attributes at once), use `.addAttributes(_:)` and `.removeAttributes(forKeys:)`.
 
 **Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
@@ -217,13 +222,15 @@ The following attributes are **optional**, you should provide **at least one** o
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  
 
-To identify user sessions, use the `setUserInfo(id:name:email:)` API.
+To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
 
 For example:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
@@ -772,16 +779,12 @@ For example, if the current tracking consent is `.pending`:
 
 ## Add user properties
 
-You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
+You can use the `Datadog.addUserExtraInfo(_:)` API to append extra user properties to previously set properties.
 
 ```swift
-   public static func addUserExtraInfo(
-       _ extraInfo: [AttributeKey: AttributeValue?],
-       in core: DatadogCoreProtocol = CoreRegistry.default
-   ) {
-       let core = core as? DatadogCore
-       core?.addUserExtraInfo(extraInfo)
-   }
+import DatadogCore
+
+Datadog.addUserExtraInfo(["company": "Foo"])
 ```
 
 ## Data management
@@ -790,51 +793,25 @@ The iOS SDK first stores events locally and only uploads events when the [intake
 
 ### Clear all data
 
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+You have the option of deleting all unsent data stored by the SDK with the `Datadog.clearAllData()` API.
 
 ```swift
-   public static func clearAllData(in core: DatadogCoreProtocol = CoreRegistry.default) {
-       let core = core as? DatadogCore
-       core?.clearAllData()
-   }
+import DatadogCore
+
+Datadog.clearAllData()
 ```
 
 ### Stop data collection
 
-You can use the `StopInstance` API to stop a named SDK instance (or the default instance if the name is null) from collecting and uploading data further.
+You can use the `Datadog.stopInstance()` API to stop a named SDK instance (or the default instance if the name is `nil`) from collecting and uploading data further.
 
 ```swift
-   public static func stopInstance(named instanceName: String = CoreRegistry.defaultInstanceName) {
-       let core = CoreRegistry.unregisterInstance(named: instanceName) as? DatadogCore
-       core?.stop()
-   }
+import DatadogCore
+
+Datadog.stopInstance()
 ```
 
-### Set remote log threshold
-
-You can define the minimum log level (priority) at which to send events to Datadog in a logger instance. If the log's priority is below the one you set in this threshold, the log does not get sent. The default value is `debug` (send all logs).
-
-```swift
-public init(
-    service: String? = nil,
-    name: String? = nil,
-    networkInfoEnabled: Bool = false,
-    bundleWithRumEnabled: Bool = true,
-    bundleWithTraceEnabled: Bool = true,
-    remoteSampleRate: Float = 100,
-    remoteLogThreshold: LogLevel = .debug,
-    consoleLogFormat: ConsoleLogFormat? = nil
-) {
-    self.service = service
-    self.name = name
-    self.networkInfoEnabled = networkInfoEnabled
-    self.bundleWithRumEnabled = bundleWithRumEnabled
-    self.bundleWithTraceEnabled = bundleWithTraceEnabled
-    self.remoteSampleRate = remoteSampleRate
-    self.remoteLogThreshold = remoteLogThreshold
-    self.consoleLogFormat = consoleLogFormat
-}
-```
+Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
 
 ## Further Reading
 
@@ -843,7 +820,7 @@ public init(
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[4]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
+[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
