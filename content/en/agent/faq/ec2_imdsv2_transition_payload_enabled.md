@@ -35,3 +35,4 @@ The following is an example of a host metadata payload that includes the new `le
   "legacy-resolution-hostname": "ip-172-31-15-47",
   // ...
 }
+```
