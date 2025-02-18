@@ -4,15 +4,17 @@ further_reading:
 
   - link: 'https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions'
     tag: 'Blog'
-    text: 'Collect traces, logs, and custom metrics from Cloud Run Functions'
+    text: 'Cloud Functions is now Cloud Run functions — event-driven programming in one unified serverless platform'
 
 ---
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions (formerly Cloud Functions) through the [Google Cloud integration][1].
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions ([formerly Cloud Functions][1]) through the [Google Cloud integration][1].
 
 <div class="alert alert-info">Datadog Serverless Monitoring is supported for Cloud Run functions (2nd gen). If you want to monitor 1st gen functions, contact your technical account manager.</div>
+
+[1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
 
 ## Setup
 
@@ -63,6 +65,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Tracing
+If you are deploying a Java Cloud Run Function through the console wait for Cloud Run to create the service using a placeholder revision to add the sidecar container, and the follow the steps below including the shared volume mount:
 
 In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java Applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
 
@@ -146,7 +149,7 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
    - **Select health check type**: Startup check
    - **Select probe type**: TCP
    - **Port**: Enter a port number. Make note of this, as it is used in the next step.
-1. Go to **Variables & Secrets** and add the following environment variables as name-value pairs:
+1. Go to **Variables & Secrets** and add the following Required environment variables as name-value pairs:
    - `DD_SERVICE`: A name for your service. For example, `gcr-sidecar-test`.
    - `DD_ENV`: A name for your environment. For example, `dev`.
    - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
@@ -167,27 +170,50 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 {{% /tab %}}
 {{% tab "Java" %}}
 
-If you are using Java, you must use the [gcloud CLI][1] to deploy your function.
+If you are using Java, you must use the [gcloud CLI][1] to deploy your function. If you are deploying a Java Cloud Run Function
+through the console wait for Cloud Run to create the service using a placeholder revision to add the sidecar container, and the steps above including the shared volume mount:
 
-<!-- more here -->
-
+1. In your main application, add the `dd-java-agent` jar to your pom.xml. Follow the instructions in [Tracing Java Applications][2] or use the following example Dockerfile and Pom.xml to add and start the tracing library with automatic instrumentation:
+2. Run `mvn clean package` to update the `target` directory with the new jar utilized inside the dockerfile
+   - Cloud Run functions uses Artifact Registry to store the images built from your function source code if you do not want to utliized the provided Dockerfile:
+     - You can build a container image and deploy it to Cloud Run using the [Google Cloud Build][3]
+     - Alternatively you can build the container image and deploy it to Cloud Run using the [Google Cloud Buildpacks][4]
+       ```shell
+       gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME
+       ```
+3. Deploy the Java function by running the following command in the top level directory that contains the Java pom.xml and dockerfile:
+    ```shell
+      gcloud beta run deploy FUNCTION_NAME \
+      --source . \
+      --function FUNCTION_TARGET \
+      --clear-base-image \
+      --region REGION
+    ```
+   ***Note***: Replace `REGION`, `FUNCTION_TARGET`, and `FUNCTION_NAME` with the region where you want to deploy the function.
+You need to set the [--clear-base-image][5] to deploy your cloud function with the dockerfile
+4. Follow the steps above to set up the sidecar container.
 
 [1]: https://cloud.google.com/sdk/gcloud/reference/beta/functions/deploy
+[2]:https://cloud.google.com/run/docs/quickstarts/functions/deploy-functions-gcloud#java
+[3]:https://cloud.google.com/functions/docs/building
+[4]:https://cloud.google.com/docs/buildpacks/build-function#java_4
+[5]:https://cloud.google.com/sdk/gcloud/reference/beta/run/deploy#--clear-base-image
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Environment variables
 
-| Variable | Description |
-| -------- | ----------- |
-|`DD_API_KEY`| [Datadog API key][4] - **Required**|
-| `DD_SITE` | [Datadog site][5] - **Required** |
+| Variable | Description                                                                                                                                                                        |
+| -------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`DD_API_KEY`| [Datadog API key][4] - **Required**                                                                                                                                                |
+| `DD_SITE` | [Datadog site][5] - **Required**                                                                                                                                                   |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
-| `DD_SERVICE`      | See [Unified Service Tagging][13].                                  |
-| `DD_VERSION`      | See [Unified Service Tagging][13].                                  |
-| `DD_ENV`          | See [Unified Service Tagging][13].                                  |
-| `DD_SOURCE`       | See [Unified Service Tagging][13].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][13]. |
+| `DD_SERVICE`      | See [Unified Service Tagging][13] - **Required**                                                                                                                                               |
+| `DD_VERSION`      | See [Unified Service Tagging][13].                                                                                                                                                 |
+| `DD_ENV`          | See [Unified Service Tagging][13].                                                                                                                                                 |
+| `DD_SOURCE`       | See [Unified Service Tagging][13].                                                                                                                                                 |
+| `DD_TAGS`         | See [Unified Service Tagging][13].                                                                                                                                                 |
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
 
@@ -234,8 +260,8 @@ const logger = createLogger({
 
 function handler(req, res) {
   logger.log('info', 'Hello simple log!');
-  tracer.dogstatsd.increment('self.monitoring.run.func.sent', 1, { environment: 'serverless', runtime: 'nodejs' });
-  return res.send('Welcome to Datadog Self Monitoring 💜!');
+  tracer.dogstatsd.increment('test.run.func.sent', 1, { environment: 'test', runtime: 'nodejs' });
+  return res.send('Welcome to Datadog 💜!');
 }
 
 const handlerWithTrace = tracer.wrap('example-span', handler)
@@ -269,7 +295,7 @@ initialize(**{'statsd_port': 8125})
 @functions_framework.http
 def hello_http(request):
   log = request.args.get("log")
-  statsd.increment("self.monitoring.run.func.sent", tags=["runtime:python"])
+  statsd.increment("test.run.func.sent", tags=["runtime:python"])
   if log != None:
     with ddtrace.tracer.trace('sending-test-logs') as span:
       span.set_tag('logs', 'TEST')
@@ -321,7 +347,7 @@ public class HelloworldApplication implements HttpFunction {
 
   public void service(final HttpRequest request, final HttpResponse response) throws Exception {
     createLogFile();
-    Statsd.incrementCounter("nina.run.v1");
+    Statsd.incrementCounter("test.run.func.v2");
     System.out.println("Current Directory: " + System.getProperty("user.dir"));
     final BufferedWriter writer = response.getWriter();
     logger4.info("Hello GCP!");
@@ -330,7 +356,72 @@ public class HelloworldApplication implements HttpFunction {
   }
 }
 ```
+### Pom.xml
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
+  <groupId>com.example.functions</groupId>
+  <artifactId>functions-hello-world</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+  </properties>
+
+  <dependencies>
+    <!-- Required for Function primitives -->
+    <dependency>
+      <groupId>com.google.cloud.functions</groupId>
+      <artifactId>functions-framework-api</artifactId>
+      <version>1.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <!--
+          Google Cloud Functions Framework Maven plugin
+
+          This plugin allows you to run Cloud Functions Java code
+          locally. Use the following terminal command to run a
+          given function locally:
+
+          mvn function:run -Drun.functionTarget=your.package.yourFunction
+        -->
+        <groupId>com.google.cloud.functions</groupId>
+        <artifactId>function-maven-plugin</artifactId>
+        <version>0.11.0</version>
+        <configuration>
+          <functionTarget>functions.HelloWorld</functionTarget>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <configuration>
+              <tasks>
+                <get src="https://dtdg.co/latest-java-tracer" dest="dd-java-agent.jar" />
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+````
 ### Dockerfile
 ```dockerfile
 FROM openjdk:17-jdk
@@ -426,7 +517,7 @@ func init() {
 func helloHTTP(w http.ResponseWriter, r *http.Request) {
   span := tracer.StartSpan("maincontainer", tracer.ResourceName("/helloHTTP"))
   logrus.Printf("Yay!! Main container works %v", span)
-  err := dogstatsdClient.Incr("self.monitoring.run.func.sent", []string{"runtime:go"}, 1)
+  err := dogstatsdClient.Incr("test.run.func.sent", []string{"runtime:go"}, 1)
   if err != nil {
     logrus.Error("Error incrementing counter:", err)
   }
@@ -510,9 +601,9 @@ public class Function : IHttpFunction
 
    public async Task HandleAsync(HttpContext context)
    {
-       using (var scope = Tracer.Instance.StartActive("self-monitoring-agent-function-dotnet"))
+       using (var scope = Tracer.Instance.StartActive("test-function-dotnet"))
        {
-           _dsd.Increment("self.monitoring.run.func.sent", tags: new[] {"runtime:dotnet"});
+           _dsd.Increment("test.run.func.sent", tags: new[] {"runtime:dotnet"});
            Log.Information("Hello Datadog Cloud Run Functions! 💜");
            await context.Response.WriteAsync("Hello Datadog Cloud Run Functions! 💜");
        }
