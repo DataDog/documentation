@@ -3,13 +3,13 @@ title: Evaluate Production Readiness
 further_reading:
   - link: "/infrastructure/"
     tag: "Documentation"
-    text: "Learn about Datadog Infrastructure Monitoring"
+    text: "Infrastructure Monitoring"
   - link: "/software_catalog/scorecards/"
     tag: "Documentation"
-    text: "Learn about Software Catalog Scorecards"
+    text: "Scorecards"
   - link: "/cloud_cost_management/"
     tag: "Documentation"
-    text: "Learn about Datadog Cloud Cost Management"
+    text: "Cloud Cost Management"
 ---
 
 With Software Catalog, you can ensure your services are production-ready by evaluating monitoring coverage, enforcing governance best practices, and identifying security and cost optimization opportunities.

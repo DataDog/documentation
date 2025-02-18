@@ -9,10 +9,10 @@ aliases:
 further_reading:
   - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
-    text: "Learn about Datadog Static Analysis"
+    text: "Static Analysis"
   - link: "/dora_metrics/"
     tag: "Documentation"
-    text: "Learn about DORA Metrics"
+    text: "DORA Metrics"
 ---
 
 

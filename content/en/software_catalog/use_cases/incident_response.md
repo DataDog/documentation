@@ -9,10 +9,10 @@ aliases:
 further_reading:
   - link: "/service_management/incident_management/"
     tag: "Documentation"
-    text: "Learn about Datadog Incident Management"
+    text: "Incident Management"
   - link: "/integrations/pagerduty/"
     tag: "Documentation"
-    text: "Learn about the PagerDuty integration"
+    text: "PagerDuty integration"
 ---
 
 
@@ -24,7 +24,7 @@ Software Catalog enhances incident response by:
 
 Software Catalog also integrates with [Datadog Incident Management][1] and [PagerDuty][2], allowing you to view related incidents in the Reliability tab on the Service Details page.
 
-**Note**: Datadog Incidents automatically link to Software Catalog; apply appropriate `SERVICE` tags to an incident to ensure that a service's incident data are accurate. The PagerDuty integration must be manually set up to integrate with incident information in Software Catalog. 
+**Note**: Datadog Incidents automatically link to Software Catalog, but you should apply `SERVICE` tags to incidents to ensure each service's incident data are accurate. The PagerDuty integration must be manually set up to integrate with incident information in Software Catalog. 
 
 {{< img src="tracing/software_catalog/incident-mgmt-reliability.png" alt="The Reliability tab for a service, showing incident and error metrics for the service overall and by version" style="width:100%;" >}}
 
