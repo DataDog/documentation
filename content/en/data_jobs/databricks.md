@@ -130,7 +130,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
    bash djm-install-script || true
    ```
 
-   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][17].
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][17].
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
