@@ -27,17 +27,19 @@ By default, your service is linked to CI pipelines through its repository URL. T
 
 To add or remove a pipeline associated with your service:
 
-1. Click Edit Metadata in your service page, and go to Software Delivery. **Note**: This is only available for [Software Catalog schema v2.2][3].
+1. Click on your service in [Software Catalog][4] to open the service side panel, and select one of the edit options for Entity Metadata. . 
+
+   **Note**: This is only available for [Software Catalog schema v2.2][3].
 
    {{< img src="tracing/software_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Software Catalog" style="width:100%;" >}}
 
 2. Then, you can either:
 
-   1. Search for and select the pipelines you want to associate.
+   - Find the Software Delivery section, then search for and select the pipelines you want to associate.
 
       {{< img src="tracing/software_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 
-   2. Manually add a pipeline fingerprint to the service metadata. To find a pipeline’s fingerprint, go to the Pipelines page, click on the pipeline, and select the gear icon.
+   - Manually add a pipeline fingerprint to the service metadata. To find a pipeline's fingerprint, go to the [Pipelines][5] page, click on the pipeline, and select the gear icon.
 
       {{< img src="tracing/software_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
@@ -50,3 +52,5 @@ For more details on CI status and static analysis violations, click on a service
 [1]: /security/code_security/static_analysis/
 [2]: /dora_metrics/
 [3]: /software_catalog/service_definitions/v2-2/
+[4]: https://app.datadoghq.com/software
+[5]: https://app.datadoghq.com/ci/pipelines

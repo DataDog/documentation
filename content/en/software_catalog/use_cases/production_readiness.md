@@ -39,17 +39,19 @@ Open the Setup Guidance tab for a given service to check whether you've complete
 
 Use the Security tab in Software Catalog to identify and remediate vulnerabilities in service dependencies. This view also reveals which services are most targeted by attacks and exposed to severe threats.
 
-To access additional details about these vulnerabilities and signals, click on the service row to open a detailed side panel, or open the Service Page to its Security tab. 
+To explore security details for a particular service, click on a service in Software Catalog to open the service side panel, and find the Security tab. 
 
 {{< img src="tracing/software_catalog/production-readiness-security.png" alt="The security tab for a service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
+
+You can also explore the Security tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
 
 ### Use the Costs tab to optimize spending
 
 In the Costs tab, powered by [Cloud Cost Management][2], you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
 
-For more information on a service’s cost changes, click on the service row to open a detailed side panel, or go to the Cloud Costs page by clicking “View in Analytics.”
-
 {{< img src="tracing/software_catalog/production-readiness-cost-changes.png" alt="Your image description" style="width:100%;" >}}
+
+To explore cost details for a specific service, click on a service in Software Catalog to open the service side panel, and find the Costs tab. You can also explore the Costs tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
 
 
 ## Further reading
