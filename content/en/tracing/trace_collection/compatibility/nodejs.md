@@ -73,7 +73,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `4.x`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [express][7]           | `>=4`     | Fully supported | Supports Sails, Loopback, and [more][8]    |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
