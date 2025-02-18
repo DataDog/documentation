@@ -4857,6 +4857,70 @@ menu:
         unstable:
           - v2
         order: 3
+    - name: Application Security
+      url: /api/latest/application-security/
+      identifier: application-security
+      generated: true
+    - name: Update an Application Security exclusion filter
+      url: '#update-an-application-security-exclusion-filter'
+      identifier: application-security-update-an-application-security-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityExclusionFilter
+        unstable: []
+        order: 5
+    - name: Get an Application Security exclusion filter
+      url: '#get-an-application-security-exclusion-filter'
+      identifier: application-security-get-an-application-security-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityExclusionFilter
+        unstable: []
+        order: 1
+    - name: Delete an Application Security exclusion filter
+      url: '#delete-an-application-security-exclusion-filter'
+      identifier: application-security-delete-an-application-security-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityExclusionFilter
+        unstable: []
+        order: 6
+    - name: Create an Application Security exclusion filter
+      url: '#create-an-application-security-exclusion-filter'
+      identifier: application-security-create-an-application-security-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityExclusionFilter
+        unstable: []
+        order: 2
+    - name: List all Application Security exclusion filters
+      url: '#list-all-application-security-exclusion-filters'
+      identifier: application-security-list-all-application-security-exclusion-filters
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityExclusionFilters
+        unstable: []
+        order: 3
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
