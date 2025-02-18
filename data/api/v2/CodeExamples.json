@@ -1334,11 +1334,25 @@
       "description": "Update a user returns \"OK\" response"
     }
   ],
+  "CreateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Create a Workflow returns \"Successfully created a workflow.\" response"
+    }
+  ],
   "CreateWorkflowInstance": [
     {
       "group": "workflow_automation",
       "suffix": "",
       "description": "Execute a workflow returns \"Created\" response"
+    }
+  ],
+  "UpdateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Update an existing Workflow returns \"Successfully updated a workflow.\" response"
     }
   ]
 }

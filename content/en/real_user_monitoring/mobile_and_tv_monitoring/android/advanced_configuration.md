@@ -458,7 +458,7 @@ To get timing information in resources (such as third-party providers, network r
     }
     ```
 
-2. Add add the [EventListener][12] factory:
+2. Add the [EventListener][12] factory:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}

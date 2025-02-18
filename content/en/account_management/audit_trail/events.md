@@ -130,7 +130,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
 | [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 | [Repository default branch][33] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
-| [Test service settings][34]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
 | [GitHub account settings][35]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
 
 ### Cloud Security Platform events
@@ -277,6 +276,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Teams Management][95] | A user created, deleted, or modified a team or team association. | `@evt.name:"Teams Management" @action:(created OR deleted OR modified)` |
+
+### Test Optimization events
+| Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Test Optimization settings][34]     | A user modified or deleted the settings of a repository.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
 
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |

@@ -37,7 +37,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
          authKey: myAuthKey
          authProtocol: "SHA"
          privKey: myPrivKey
-         privProtocol: "AES" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+         privProtocol: "AES" 
        - user: "user"
          authKey: myAuthKey
          authProtocol: "MD5"
@@ -45,7 +45,7 @@ Datadog Agent v7.37+ supports listening for SNMP Traps, enabling you to set up [
          privProtocol: "DES"
        - user: "user2"
          authKey: myAuthKey2
-         authProtocol: "SHA"
+         authProtocol: "SHA" # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
          privKey: myPrivKey2
          privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
    ```
