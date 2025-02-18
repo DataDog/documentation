@@ -15,7 +15,7 @@ further_reading:
 title: Surveillance des performances de ressources
 ---
 
-Le SDK RUM Browser recueille les ressources de chaque vue RUM (chargement de page) : [XMLHttpRequest][1] (XHR), requêtes Fetch, mais également les images, les fichiers CSS, les ressources JavaScript et les fichiers de police. Un événement de ressource RUM est généré pour chaque ressource, avec des métadonnées et des durées précises.
+LE SDK RUM Browser recueille les ressources de chaque vue RUM (chargement de page) : [XMLHttpRequest][1] (XHR), requêtes Fetch, mais également les images, les fichiers CSS, les ressources JavaScript et les fichiers de police. Un événement de ressource RUM est généré pour chaque ressource, avec des métadonnées et des durées précises.
 
 Les ressources RUM héritent de tout le contexte lié à la vue RUM active au moment de la collecte.
 
@@ -35,7 +35,7 @@ Consultez la section [Associer RUM à vos traces][2] pour en savoir plus sur la 
 
 Les méthodes natives Fetch et XHR pour navigateur, ainsi que l'[API Performance Resource Timing][3], recueillent des données réseau temporelles détaillées.
 
-| Attribut                              | Type           | Description                                                                                                                               |
+| Attribut                              | Type           | Rôle                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `resource.duration`            | nombre         | Durée totale de chargement de la ressource.                                                                                                   |
 | `resource.size`                | nombre (octets) | Taille de la ressource.                                                                                                                            |
@@ -50,7 +50,7 @@ Les méthodes natives Fetch et XHR pour navigateur, ainsi que l'[API Performance
 
 ## Attributs des ressources
 
-| Attribut                      | Type   | Description                                                                             |
+| Attribut                      | Type   | Rôle                                                                             |
 |--------------------------------|--------|-----------------------------------------------------------------------------------------|
 | `resource.type`                | chaîne | Le type de ressource à recueillir (par exemple, `css`, `javascript`, `media`, `XHR` ou `image`).           |
 | `resource.method`                | chaîne | La méthode HTTP (par exemple, `POST` ou `GET`).           |

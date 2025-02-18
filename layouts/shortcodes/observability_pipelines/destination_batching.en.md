@@ -7,8 +7,10 @@
 | Elasticsearch                              | None           | 10,000,000      | 1                   |
 | Google Chronicle                           | None           | 1,000,000       | 15                  |
 | Google Cloud Storage (Datadog Log Archives)| None           | 100,000,000     | 900                 |
+| Microsoft Sentinel                         | None           | 10,000,000      | 1                   |
 | New Relic                                  | 100            | 1,000,000       | 1                   |
 | OpenSearch                                 | None           | 10,000,000      | 1                   |
+| SentinelOne                                | None           | 1,000,000       | 1                   |
 | Splunk HTTP Event Collector (HEC)          | None           | 1,000,000       | 1                   |
 | Sumo Logic Hosted Collecter                | None           | 10,000,000      | 1                   |
 

@@ -821,12 +821,12 @@ The test session name should be unique within a repository to help you distingui
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-If your tests are run with commands that include a dynamic string, such as:
+There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Then the default value for the test session name constantly changes. Datadog recommends using `DD_TEST_SESSION_NAME` in this case.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands varies between executions.
 
 ## Further reading
 

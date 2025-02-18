@@ -4,9 +4,9 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
     - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
       tag: 'Blog'
       text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
@@ -52,7 +52,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 ### One-Click Installation
 To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
 
-{{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
+{{< img src="data_streams/enable_dsm_software_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
 ### Monitoring connectors
 
