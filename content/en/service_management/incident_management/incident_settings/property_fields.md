@@ -34,13 +34,16 @@ You can add more property fields to your settings by selecting one of your exist
 
 ### Field types
 
-In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are four kinds of custom fields you can create:
+In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are five kinds of custom fields you can create:
 
 **Single-Select**
 : A dropdown field that can only have one value assigned at a time per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
 
 **Multi-Select**
 : A dropdown field that can have multiple values assigned per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
+
+**Text Array**
+: A free-form field that can have multiple values assigned per incident. Values are not predefined and can be assigned at any point during incident response.
 
 **Text Area**
 : A free-form text box. Values are entered by a responder on a per-incident basis.
