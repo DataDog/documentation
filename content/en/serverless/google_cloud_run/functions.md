@@ -137,6 +137,7 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 ### Containers
 {{< tabs >}}
 {{% tab "GCR UI - Node.js, Python, Go, .NET" %}}
+If you are deploying a New Cloud Run Function for the first time through the console wait for Cloud Run to create the service and update the placeholder revision image to add the sidecar container, and the follow the steps below including the shared volume mount:
 
 #### Sidecar container
 
@@ -178,8 +179,8 @@ through the console wait for Cloud Run to create the service using a placeholder
    - Use the example Dockerfile and Pom.xml to add and start the tracing library with automatic instrumentation.
 2. Run `mvn clean package` to update the `target` directory with the new jar utilized inside the dockerfile
    - Cloud Run functions uses Artifact Registry to store the images built from your function source code if you do not want to utliized the provided Dockerfile:
-     - You can build a container image and deploy it to Cloud Run using the [Google Cloud Build][3]
-     - Alternatively you can build the container image and deploy it to Cloud Run using the [Google Cloud Buildpacks][4]
+     - Build a container image and deploy image to Artifact Registry to use inside Cloud Run using [Google Cloud Build][3]
+     - Build the container image and deploy Cloud Run Function using [Google Cloud Buildpacks][4]
        ```shell
        gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME
        ```
@@ -193,7 +194,8 @@ through the console wait for Cloud Run to create the service using a placeholder
     ```
    ***Note***: Replace `REGION`, `FUNCTION_TARGET`, and `FUNCTION_NAME` with the region where you want to deploy the function.
 You need to set the [--clear-base-image][5] to deploy your cloud function with the dockerfile
-4. Follow the steps below to **finish the setup inside the console** make sure your container image is the same as what you just deployed.
+
+4. Follow the steps below to **finish the setup inside the console**. Make sure your container image is the same as what you just deployed.
 #### Sidecar container
 
 1. In Cloud Run, select **Edit & Deploy New Revision**.
@@ -233,16 +235,16 @@ You need to set the [--clear-base-image][5] to deploy your cloud function with t
 
 ## Environment variables
 
-| Variable | Description                                                                                                                                                                        |
-| -------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|`DD_API_KEY`| [Datadog API key][4] - **Required**                                                                                                                                                |
-| `DD_SITE` | [Datadog site][5] - **Required**                                                                                                                                                   |
+| Variable | Description                                                                                                                                                                      |
+| -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|`DD_API_KEY`| [Datadog API key][4] - **Required**                                                                                                                                              |
+| `DD_SITE` | [Datadog site][5] - **Required**                                                                                                                                                 |
+| `DD_SERVICE`      | See [Unified Service Tagging][13] - **Required**                                                                                                                                 |
 | `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][6], [Node][7], [.NET][8], and [PHP][9]. See additional docs for [Python][10], [Go][11], and [Ruby][12]. |
-| `DD_SERVICE`      | See [Unified Service Tagging][13] - **Required**                                                                                                                                               |
-| `DD_VERSION`      | See [Unified Service Tagging][13].                                                                                                                                                 |
-| `DD_ENV`          | See [Unified Service Tagging][13].                                                                                                                                                 |
-| `DD_SOURCE`       | See [Unified Service Tagging][13].                                                                                                                                                 |
-| `DD_TAGS`         | See [Unified Service Tagging][13].                                                                                                                                                 |
+| `DD_VERSION`      | See [Unified Service Tagging][13].                                                                                                                                               |
+| `DD_ENV`          | See [Unified Service Tagging][13].                                                                                                                                               |
+| `DD_SOURCE`       | See [Unified Service Tagging][13].                                                                                                                                               |
+| `DD_TAGS`         | See [Unified Service Tagging][13].                                                                                                                                               |
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
 
@@ -299,7 +301,27 @@ functions.http('httpexample',  handlerWithTrace)
 module.exports = handlerWithTrace
 module.exports = logger;
 ```
-
+#### package.json
+```json
+{
+  "name": "updater",
+  "version": "1.0.0",
+  "description": "test nodejs function",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.2",
+    "dd-trace": "^5.19.0",
+    "winston": "^3.13.1",
+    "express": "^4.17.1"
+  }
+}
+```
 {{% /tab %}}
 {{% tab "Python" %}}
 ```python
@@ -332,9 +354,16 @@ def hello_http(request):
       ddlogs.append(log)
   return "Welcome to Datadog!💜"
 ```
+#### requirements.txt
+```txt
+Flask
+functions-framework
+ddtrace
+datadog
+```
 {{% /tab %}}
 {{% tab "Java" %}}
-### HelloworldApplication.java
+#### HelloworldApplication.java
 ```java
 package gcfv2;
 
@@ -385,15 +414,15 @@ public class HelloworldApplication implements HttpFunction {
   }
 }
 ```
-### Pom.xml
+#### Pom.xml
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example.functions</groupId>
-  <artifactId>functions-hello-world</artifactId>
+  <groupId>gcfv2</groupId>
+  <artifactId>helloworld</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <properties>
     <maven.compiler.target>11</maven.compiler.target>
@@ -451,7 +480,7 @@ public class HelloworldApplication implements HttpFunction {
   </build>
 </project>
 ````
-### Dockerfile
+#### Dockerfile
 ```dockerfile
 FROM openjdk:17-jdk
 
@@ -578,6 +607,17 @@ func writeLogsToFile(log_msg string, context ddtrace.SpanContext) {
   }
 }
 ```
+#### go.mod
+```go
+module example.com/gcf
+
+require (
+	github.com/DataDog/datadog-go/v5 v5.5.0
+	github.com/GoogleCloudPlatform/functions-framework-go v1.9.0
+	github.com/sirupsen/logrus v1.9.3
+	gopkg.in/DataDog/dd-trace-go.v1 v1.68.0
+)
+```
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -639,6 +679,25 @@ public class Function : IHttpFunction
    }
 }
 
+```
+#### HelloHttp.csproj
+```csproj
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup>
+   <OutputType>Exe</OutputType>
+   <TargetFramework>net8.0</TargetFramework>
+ </PropertyGroup>
+
+ <ItemGroup>
+   <PackageReference Include="Google.Cloud.Functions.Hosting" Version="2.0.0" />
+   <PackageReference Include="Datadog.Trace.Bundle" Version="2.56.0" />
+   <PackageReference Include="StatsdClient" Version="2.0.68" />
+   <PackageReference Include="DogStatsD-CSharp-Client" Version="8.0.0" />
+    <PackageReference Include="Serilog" Version="4.1.0" />
+    <PackageReference Include="Serilog.Formatting.Compact" Version="3.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+ </ItemGroup>
+</Project>
 ```
 {{% /tab %}}
 {{< /tabs >}}
