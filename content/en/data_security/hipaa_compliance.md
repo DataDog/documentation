@@ -16,7 +16,7 @@ The Health Insurance Portability and Accountability Act (HIPAA) is a set of rule
 
 Organizations use cloud-based solutions to manage patient data, which requires adherence to HIPAA regulations. Datadog provides HIPAA compliant observability and ensures compliance with regulatory requirements.
 
-## HIPAA-compliant
+## HIPAA-compliant services
 
 {{% hipaa-customers %}}
 
