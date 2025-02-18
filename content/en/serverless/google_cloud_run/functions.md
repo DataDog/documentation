@@ -173,7 +173,9 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 If you are using Java, you must use the [gcloud CLI][1] to deploy your function. If you are deploying a Java Cloud Run Function
 through the console wait for Cloud Run to create the service using a placeholder revision to add the sidecar container, and the steps above including the shared volume mount:
 
-1. In your main application, add the `dd-java-agent` jar to your pom.xml. Follow the instructions in [Tracing Java Applications][2] or use the following example Dockerfile and Pom.xml to add and start the tracing library with automatic instrumentation:
+#### Locally inside Source Code Directory
+1. Add the `dd-java-agent` jar and other dependencies like `java-dogstatsd-client` to your pom.xml.
+   - Use the example Dockerfile and Pom.xml to add and start the tracing library with automatic instrumentation.
 2. Run `mvn clean package` to update the `target` directory with the new jar utilized inside the dockerfile
    - Cloud Run functions uses Artifact Registry to store the images built from your function source code if you do not want to utliized the provided Dockerfile:
      - You can build a container image and deploy it to Cloud Run using the [Google Cloud Build][3]
@@ -191,7 +193,34 @@ through the console wait for Cloud Run to create the service using a placeholder
     ```
    ***Note***: Replace `REGION`, `FUNCTION_TARGET`, and `FUNCTION_NAME` with the region where you want to deploy the function.
 You need to set the [--clear-base-image][5] to deploy your cloud function with the dockerfile
-4. Follow the steps above to set up the sidecar container.
+4. Follow the steps below to **finish the setup inside the console** make sure your container image is the same as what you just deployed.
+#### Sidecar container
+
+1. In Cloud Run, select **Edit & Deploy New Revision**.
+1. At the bottom of the page, select **Add Container**.
+1. For **Container image URL**, select `gcr.io/datadoghq/serverless-init:latest`.
+1. Go to **Volume Mounts** and set up a volume mount for logs. Ensure that the mount path matches your application's write location. For example:
+   {{< img src="serverless/gcr/volume_mount.png" width="80%" alt="Volume Mounts tab. Under Mounted volumes, Volume Mount 1. For Name 1, 'shared-logs (In-Memory)' is selected. For Mount path 1, '/shared-volume' is selected.">}}
+1. Go to **Settings** and add a startup check.
+  - **Select health check type**: Startup check
+  - **Select probe type**: TCP
+  - **Port**: Enter a port number. Make note of this, as it is used in the next step.
+1. Go to **Variables & Secrets** and add the following Required environment variables as name-value pairs:
+  - `DD_SERVICE`: A name for your service. For example, `gcrfx-sidecar-test`.
+  - `DD_ENV`: A name for your environment. For example, `dev`.
+  - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
+  - `DD_API_KEY`: Your [Datadog API key][1].
+  - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step. For example, `12345`.
+
+   For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
+
+#### Main container
+
+1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
+   **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
+1. Go to **Variables & Secrets** and add the same `DD_SERVICE` environment variable that you set for the sidecar container.
+1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
+1. Deploy your main application.
 
 [1]: https://cloud.google.com/sdk/gcloud/reference/beta/functions/deploy
 [2]:https://cloud.google.com/run/docs/quickstarts/functions/deploy-functions-gcloud#java
