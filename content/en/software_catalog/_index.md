@@ -42,6 +42,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
   tag: "Blog"
   text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
+- link: "https://www.datadoghq.com/blog/software-catalog/"
+  tag: "Blog"
+  text: "Improve developer experience and collaboration with Software Catalog"
 algolia:
   tags: ['software catalog']
 ---
