@@ -38,7 +38,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 ### Configuration
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -61,7 +61,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -71,9 +71,9 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Failed Test Replay
 
-In addition to automatically retrying failed tests, Failed Test Replay allows seeing local variable data in the topmost frame of the test error's stack trace. Enable this feature by activating the "Failed Test Replay" toggle.
+In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
 
-After it's enabled, look at local variable state on failed tests:
+After you enable this feature, you can see local variable data in failed tests:
 
 {{< img src="continuous_integration/failed_test_replay_local_variables.png" alt="Failed Test Replay." style="width:100%" >}}
 
@@ -97,7 +97,7 @@ After it's enabled, look at local variable state on failed tests:
 
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
@@ -120,7 +120,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
 By default, the feature retries any failing test case up to 5 times.
 Customize the Auto Test Retries with the following environment variables:
@@ -143,7 +143,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 After you set up Test Visibility, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries enabled in Test Service Settings." style="width:100%" >}}
 
 By default, the feature retries each failing test case up to 5 times.
 Customize the Auto Test Retries with the following environment variables:
@@ -168,7 +168,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to five times. Tests that originally fail either the original setup, teardown, or fixtures in Pytest, are not retried.
 
@@ -192,7 +192,7 @@ You can fine tune this behavior with the following environment variables:
 
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
-{{< img src="continuous_integration/auto_test_retries_test_settings.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
+{{< img src="continuous_integration/auto_test_retries_test_settings-2.png" alt="Auto Test Retries in Test Service Settings." style="width:100%" >}}
 
 The default behavior of the feature is to retry any failing test case up to 5 times.
 This behavior can be fine-tuned with the following environment variables:
