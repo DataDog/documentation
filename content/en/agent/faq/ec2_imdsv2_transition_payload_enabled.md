@@ -8,7 +8,7 @@ aliases:
 
 Agent v7.64.0 enables IMDSv2 by default for enhanced security and improved metadata handling. The host metadata payload contains a field, `legacy-resolution-hostname`, that captures the AWS instance hostname using legacy resolution logic (when IMDSv2 was disabled) and is only included when needed.
 
-The hostname displayed by the Agent **can** change if the Agent previously did not show the instance ID as the hostname. However, the Agent continues to use the original hostname to tag the different metrics sent by the Agent.
+The hostname displayed in Datadog **can** change to show the instance ID as the hostname. Datadog continues to use the original hostname to tag the different metrics sent by the Agent.
 
 ## Field inclusion criteria
 
