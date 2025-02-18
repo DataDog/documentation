@@ -6795,6 +6795,11 @@ components:
     Monitor:
       description: Object describing a monitor.
       properties:
+        classification:
+          description: The classification of the monitor.
+          example: log
+          readOnly: true
+          type: string
         created:
           description: Timestamp of the monitor creation.
           format: date-time
