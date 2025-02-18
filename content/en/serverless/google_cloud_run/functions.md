@@ -291,7 +291,7 @@ const logger = createLogger({
 
 function handler(req, res) {
   logger.log('info', 'Hello simple log!');
-  tracer.dogstatsd.increment('test.run.func.sent', 1, { environment: 'test', runtime: 'nodejs' });
+  tracer.dogstatsd.increment('ninja.run.func.sent', 1, { environment: 'test', runtime: 'nodejs' });
   return res.send('Welcome to Datadog 💜!');
 }
 
@@ -306,7 +306,7 @@ module.exports = logger;
 {
   "name": "updater",
   "version": "1.0.0",
-  "description": "test nodejs function",
+  "description": "test nodejs run function",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -346,7 +346,7 @@ initialize(**{'statsd_port': 8125})
 @functions_framework.http
 def hello_http(request):
   log = request.args.get("log")
-  statsd.increment("test.run.func.sent", tags=["runtime:python"])
+  statsd.increment("ninja.run.func.sent", tags=["runtime:python"])
   if log != None:
     with ddtrace.tracer.trace('sending-test-logs') as span:
       span.set_tag('logs', 'TEST')
@@ -387,17 +387,14 @@ public class HelloworldApplication implements HttpFunction {
     File directory = new File("shared-volume/logs");
     if (!directory.exists()) {
       directory.mkdirs(); // Create directory if it doesn't exist
-      System.out.println("Working Directory =: " + directory.getAbsolutePath() +"\n"+ directory.list());
     }
     else {
       try {
         File logFile = new File("shared-volume/logs/app.log");
         if (!logFile.exists()){
           logFile.createNewFile();
-          System.out.println("File didn't exists: " + System.getProperty("user.dir"));
         }
       } catch (IOException e) {
-        System.out.println("Failed to write to file: " + System.getProperty("user.dir"));
         e.printStackTrace();
       }
     }
@@ -405,11 +402,9 @@ public class HelloworldApplication implements HttpFunction {
 
   public void service(final HttpRequest request, final HttpResponse response) throws Exception {
     createLogFile();
-    Statsd.incrementCounter("test.run.func.v2");
-    System.out.println("Current Directory: " + System.getProperty("user.dir"));
+    Statsd.incrementCounter("ninja.run.func.sent");
     final BufferedWriter writer = response.getWriter();
     logger4.info("Hello GCP!");
-    logging.info("HeLLLLPPPPPPP");
     writer.write("Hello Datadog!!");
   }
 }
@@ -575,7 +570,7 @@ func init() {
 func helloHTTP(w http.ResponseWriter, r *http.Request) {
   span := tracer.StartSpan("maincontainer", tracer.ResourceName("/helloHTTP"))
   logrus.Printf("Yay!! Main container works %v", span)
-  err := dogstatsdClient.Incr("test.run.func.sent", []string{"runtime:go"}, 1)
+  err := dogstatsdClient.Incr("ninja.run.func.sent", []string{"runtime:go"}, 1)
   if err != nil {
     logrus.Error("Error incrementing counter:", err)
   }
@@ -672,7 +667,7 @@ public class Function : IHttpFunction
    {
        using (var scope = Tracer.Instance.StartActive("test-function-dotnet"))
        {
-           _dsd.Increment("test.run.func.sent", tags: new[] {"runtime:dotnet"});
+           _dsd.Increment("ninja.run.func.sent", tags: new[] {"runtime:dotnet"});
            Log.Information("Hello Datadog Cloud Run Functions! 💜");
            await context.Response.WriteAsync("Hello Datadog Cloud Run Functions! 💜");
        }
