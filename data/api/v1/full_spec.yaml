@@ -1034,7 +1034,7 @@ components:
       example: {}
       properties:
         ok:
-          description: An array of of Monitor IDs that can be safely deleted.
+          description: An array of Monitor IDs that can be safely deleted.
           items:
             description: ID of a monitor that can be safely deleted.
             format: int64
@@ -1057,7 +1057,7 @@ components:
       description: An array of service level objective objects.
       properties:
         ok:
-          description: An array of of SLO IDs that can be safely deleted.
+          description: An array of SLO IDs that can be safely deleted.
           items:
             description: An SLO ID.
             type: string
@@ -10623,7 +10623,7 @@ components:
       description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects.
+          description: The list of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -15225,7 +15225,6 @@ components:
       - element
       - email
       - global
-      - javascript
       - text
       example: text
       type: string
@@ -15233,7 +15232,6 @@ components:
       - ELEMENT
       - EMAIL
       - GLOBAL
-      - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
       description: Metadata for the Synthetic tests run.
@@ -15963,8 +15961,7 @@ components:
       description: User locator to find the element.
       properties:
         failTestOnCannotLocate:
-          description: Whether if the the test should fail if the element cannot be
-            found.
+          description: Whether if the test should fail if the element cannot be found.
           type: boolean
         values:
           description: Values of the user locator.
@@ -21952,9 +21949,8 @@ components:
           format: int64
           type: integer
         cspm_container_hwm_sum:
-          description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current month for all
-            organizations.
+          description: Shows the sum of the high-water marks of Cloud Security Management
+            Pro containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
@@ -22175,8 +22171,8 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current month for all organizations.
+          description: Shows sum of the high-water marks of incident management monthly
+            active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -22207,8 +22203,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
+          description: Shows the most recent hour in the current month for all organizations
+            for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
@@ -30124,7 +30120,7 @@ paths:
       - description: 'When specified, shows additional information about the group
           states.
 
-          Choose one or more from `all`, `alert`, `warn`, and `no data`.'
+          Choose one or more from `all`, `alert`, `warn`, and `no data` (`no%20data`).'
         in: query
         name: group_states
         required: false
@@ -30367,19 +30363,22 @@ paths:
         or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
         #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
         `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
-        Query**\n\nExample: `formula(query).last(time_window).function(parameter)
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
         operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
-        `time_window` - supports daily roll-up e.g. `7d`\n- `function` - [optional,
-        defaults to `threshold` monitor if omitted] supports `change`, `anomaly`,
-        `forecast`\n- `parameter` Specify the parameter of the type\n    - for `change`:\n
-        \       - supports `relative`, `absolute`\n        - [optional] supports `#`,
-        where `#` is an integer or decimal number used to set the threshold\n    -
-        for `anomaly`:\n        - supports `direction=both`, `direction=above`, `direction=below`\n
-        \       - [optional] supports `threshold=#`, where `#` is an integer or decimal
-        number used to set the threshold\n- `operator`\n    - for `threshold` supports
-        `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    - for `change` supports `>`, `<`\n
-        \   - for `anomaly` supports `>=`\n    - for `forecast` supports `>`\n- `#`
-        an integer or decimal number used to set the threshold."
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:

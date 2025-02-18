@@ -20,9 +20,9 @@ further_reading:
 - link: '/real_user_monitoring/session_replay'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
-- link: '/api_catalog'
+- link: '/software_catalog/endpoints/'
   tag: 'Documentation'
-  text: 'Learn about the API Catalog'
+  text: 'Learn about the Endpoints list'
 ---
 
 ## Overview
@@ -100,7 +100,7 @@ Add the most popular sections of your application to a new or existing browser t
 {{% /tab %}}
 {{% tab "API Endpoints" %}}
 
-The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [API endpoints][2]. It uses [data collected from the API Catalog][2] and [spans from APM][3].
+The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [API endpoints][2]. It uses [data collected from the Software Catalog][2] and [spans from APM][3].
 
 {{< img src="synthetics/test_coverage/api_endpoints.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 

@@ -214,7 +214,7 @@ Datadog 사이트에서 지원되는 엔드포인트를 보려면 페이지 오�
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | 커스텀 포워더가 HTTPS를 통해 JSON 또는 일반 텍스트 형식으로 로그를 보내는 데 사용됩니다. [Logs HTTP API 문서][1]를 참조하세요. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Lambda 함수가 HTTPS를 통해 원시값, Syslog 또는 JSON 형식으로 로그를 전송하는 데 사용됩니다.                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Agent가 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다. [Host Agent Log 수집 문서][2]를 참조하세요.          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK에서 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다.                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK에서 HTTPS를 통해 JSON 형식으로 로그를 보내는 데 사용됩니다.                                                          |
 
 [1]: /ko/api/latest/logs/#send-logs
 [2]: /ko/agent/logs/#send-logs-over-https

@@ -41,7 +41,7 @@ For an Ubuntu host:
 
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/service_catalog/
+[5]: /tracing/software_catalog/
 [7]: https://github.com/DataDog/dd-trace-java/releases
 [8]: https://github.com/DataDog/dd-trace-js/releases
 [9]: https://github.com/DataDog/dd-trace-py/releases
@@ -78,7 +78,7 @@ For a Docker Linux container:
 4. [Explore the performance observability of your services in Datadog][6].
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /tracing/service_catalog/
+[6]: /tracing/software_catalog/
 
 {{% /tab %}}
 
@@ -201,7 +201,7 @@ To enable Single Step Instrumentation with Helm:
 {{% /tab %}}
 {{< /tabs >}}
 
-After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Service Catalog][3].
+After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Software Catalog][3].
 
 ## Advanced options
 
@@ -228,6 +228,7 @@ Available versions are listed in source repositories for each language:
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+- [PHP][13] (`php`)
 
 
 [2]: /agent/remote_config
@@ -237,6 +238,7 @@ Available versions are listed in source repositories for each language:
 [10]: https://github.com/DataDog/dd-trace-py/releases
 [11]: https://github.com/DataDog/dd-trace-dotnet/releases
 [12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
 
 {{% /tab %}}
 
@@ -609,7 +611,7 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/metrics/runtime_metrics/
-[3]: /tracing/service_catalog/
+[3]: /tracing/software_catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility

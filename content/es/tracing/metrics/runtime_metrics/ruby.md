@@ -19,10 +19,6 @@ title: Métricas de tiempo de ejecución de Ruby
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-Esta función está en fase beta pública.
-</div>
-
 ## Configuración automática
 
 La recopilación de métricas de tiempo de ejecución utiliza el gem [`dogstatsd-ruby`][1] para enviar métricas a través de DogStatsD al Agent. Para recopilar métricas de tiempo de ejecución, debes añadir este gem a tu aplicación Ruby y asegurarte de que [DogStatsD está habilitado para el Agent][2].
@@ -35,13 +31,13 @@ require 'datadog/statsd'
 require 'datadog' # Use 'ddtrace' if you're using v1.x
 
 Datadog.configure do |c|
-  # Para activar la recopilación de métricas de tiempo de ejecución, establece en `true`. Por defecto es `false`
-  # También puedes establecer DD_RUNTIME_METRICS_ENABLED=true para configurarlo.
+  # To enable runtime metrics collection, set `true`. Defaults to `false`
+  # You can also set DD_RUNTIME_METRICS_ENABLED=true to configure this.
   c.runtime_metrics.enabled = true
 
-  # Opcionalmente, puedes configurar la instancia de DogStatsD utilizada para enviar las métricas de tiempo de ejecución.
-  # DogStatsD se configura automáticamente con la configuración automática si `dogstatsd-ruby` está disponible.
-  # Puedes configurar con el host y puerto del Datadog agent; por defecto 'localhost:8125'.
+  # Optionally, you can configure the DogStatsD instance used for sending runtime metrics.
+  # DogStatsD is automatically configured with default settings if `dogstatsd-ruby` is available.
+  # You can configure with host and port of Datadog agent; defaults to 'localhost:8125'.
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
@@ -62,7 +58,7 @@ Las siguientes métricas se recopilan por defecto después de activar las métri
 
 Además de mostrar estas métricas en tu Página de servicios de APM, Datadog proporciona un [dashboard de tiempo de ejecución de Ruby predeterminado][7].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

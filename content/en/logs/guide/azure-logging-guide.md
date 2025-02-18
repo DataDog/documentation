@@ -12,6 +12,9 @@ further_reading:
   text: "Terraform Azure Datadog Log Forwarder"
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Automated Log Forwarding for Azure (in Preview)">}}
+Automatically set up log forwarding across your Azure environment—no manual configuration required! This feature automatically manages and scales log forwarding services.{{< /callout >}}
+
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
@@ -21,6 +24,11 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 Follow these steps to send Azure logs to any Datadog site.
 
 **US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
+
+<div class="alert alert-info">
+Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatibility, first update your forwarder code, then upgrade to the latest Azure LTS version of Node.js (20).
+If you previously deployed with an ARM template, you can update using the template with the same parameters.
+</div>
 
 ## Setup
 

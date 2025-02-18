@@ -256,10 +256,10 @@ Once the integration is configured, Datadog begins running a continuous series o
 
 When critical errors are encountered, the Azure integration generates events in the Datadog Events Explorer, and republishes them every five minutes. You can configure an Event Monitor to trigger when these events are detected and notify the appropriate team.
 
-Datadog provides a recommended monitor you can use as a template to get started. To use the recommended monitor:
+Datadog provides a monitor template to help you get started. To use the monitor template:
 
 1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][8] tab.
-2. Select the recommended monitor titled `[Azure] Integration Errors`.
+2. Select the monitor template titled `[Azure] Integration Errors`.
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.

@@ -7,6 +7,9 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: 설명서
   text: 일반적인 이슈 트러블슈팅
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: 설명서
+  text: 교착 모니터링 구성
 - link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
   tag: 블로그
   text: Datadog를 사용해 전략적으로 SQL 워크로드를 Azure로 마이그레이션하기

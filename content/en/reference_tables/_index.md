@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
+Reference Tables allow you to combine custom metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata.
 
 {{< img src="reference_tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
@@ -70,6 +70,8 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 			"Effect": "Allow",
 			"Action": [
 				"s3:GetObject",
+				// Grant KMS decrypt permissions if uploading KMS-encrypted object
+				// "kms:Decrypt",
 				"s3:ListBucket"
 			],
 			"Resource": [
@@ -100,14 +102,14 @@ Click **New Reference Table +**, then add a name, select Amazon S3, fill out all
 3. Within your storage account, navigate to **Access Control (IAM)** and select **Add** > **Add Role Assignment**.
 4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
 5. In the **Members** tab, click **+ Select members**. Select the app registration you created in Step 1.
-   
+
    {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
 After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
 
 {{< img src="reference_tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
 
-For more information, see the [Azure integration documentation][4]. 
+For more information, see the [Azure integration documentation][4].
 
 **Note**: The upload from cloud object storage supports files up to 200MB.
 
@@ -155,8 +157,8 @@ The selected CSV is upserted into the table, meaning that:
 * All existing rows with the same primary key are updated
 * All new rows are added
 * All old rows that are not in the new file are deleted
- 
-Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete. 
+
+Once the table is saved, the upserted rows are processed asynchronously and updated in the preview. It may take up to 10 minutes for the update to complete.
 
 ## Delete a Reference Table
 
@@ -171,21 +173,31 @@ You can monitor reference table activity with [Audit Trail][2] or [Change Events
 
 ### Audit Trail
 
-Use the audit trail for reference tables to track user-triggered actions. Audit trail events are sent when a user initially uploads or imports a CSV file, or when a user creates, modifies, or deletes a reference table. 
+Use the audit trail for reference tables to track user-triggered actions. Audit trail events are sent when a user initially uploads or imports a CSV file, or when a user creates, modifies, or deletes a reference table.
 
 The `reference_table_file` Asset Type displays import/upload events and the `reference_table` Asset Type displays reference table events. The audit trail provides observability into the content of a reference table.
 
 ### Change Events
 
-Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file. 
+Use change events for reference tables to track automated or user-triggered actions. They are sent when a cloud file is imported from a user or automatic refresh. While events can track user-triggered actions, they are mainly used to track triggered imports when a reference table automatically pulls a new CSV file.
 
 Events contain information about the success status, path, and table name of the import. If an error occurs, information about the error type is provided.
 
 ### Alerting
 
-To be alerted on errors encountered during imports, use [Event Monitors][4] for reference table change events. Reference table change events are sent from the `reference_tables` source. 
+To be alerted on errors encountered during imports, use [Event Monitors][4] for reference table change events. Reference table change events are sent from the `reference_tables` source.
 
 You can create monitors from the **Monitors** tab, or click on the Settings icon next to **New Reference Table +** to generate a pre-filled monitor.
+
+## Reference Table limits
+- A reference table can have up to 50 columns
+- The size of a reference table file uploaded through the UI can be up to 4 MB
+- The size of a reference table file uploaded through a cloud bucket file can be up to 200 MB
+- The size of a reference table file uploaded through an integration can be up to 200 MB
+- You can have up to 100 reference tables per organization
+
+Reach out to [support][5] if you have a use case that exceeds these limits.
+
 
 ## Further Reading
 
@@ -195,3 +207,4 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 [2]: /account_management/audit_trail/
 [3]: /events/
 [4]: /monitors/types/event/
+[5]: /help/

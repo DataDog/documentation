@@ -22,7 +22,7 @@ further_reading:
 ---
 ## Overview
 
-If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or refer to the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup).
+If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup). For additional manual instrumentation functions, such as automatic view tracking, see [Flutter Libraries for RUM][3].
 
 ## Initialization parameters
 You can specify the following parameters in your configuration when intializing the SDK.
@@ -74,7 +74,7 @@ Defines the maximum number of batches processed sequentially without a delay, wi
 `version`
 : Optional<br/>
 **Type**: String<br/>
-The application's version number. Because `version` is a Datadog tag, it must comply with the rules in [Defining Tags][20].
+The application's version number. Because `version` is a Datadog tag, it must comply with the rules in [Defining Tags][4].
 
 `flavor`
 : Optional<br/>
@@ -101,10 +101,10 @@ A map of first party hosts and the types of tracing headers Datadog automaticall
   );
   ```
   The `TracingHeaderType` enum has the following values:
-  - `datadog`: Datadog's [`x-datadog-*` header][21]
-  - `b3`: OpenTelemetry B3 [single header][22]
-  - `b3multi`: OpenTelemetry B3 [multiple headers][23]
-  - `tracecontext`: W3C [trace context header][24]
+  - `datadog`: Datadog's [`x-datadog-*` header][5]
+  - `b3`: OpenTelemetry B3 [single header][6]
+  - `b3multi`: OpenTelemetry B3 [multiple headers][7]
+  - `tracecontext`: W3C [trace context header][8]
 
 `rumConfiguration`
 : Optional<br/>
@@ -154,7 +154,7 @@ The amount of elapsed time that distinguishes a _long task_, in seconds. If the 
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `true`<br/>
-Enables [automatic collection of user frustrations][19].
+Enables [automatic collection of user frustrations][9].
 
 `vitalUpdateFrequency`
 : Optional<br/>
@@ -181,7 +181,7 @@ The sampling rate for telemetry data, such as errors and debug logs.
 
 ## Automatically track resources
 
-Use the [Datadog Tracking HTTP Client][12] package to enable automatic tracking of resources and HTTP calls from your views.
+Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
@@ -192,9 +192,9 @@ final configuration = DatadogConfiguration(
 )..enableHttpTracking()
 ```
 
-**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][27]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][28]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
+**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][11]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][12]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][29], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
+In order to enable Datadog [Distributed Tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
@@ -202,7 +202,7 @@ In order to enable Datadog [Distributed Tracing][29], you must set the `DatadogC
 
 ## Enrich user sessions
 
-Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
+Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][14] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
 ### Notify the SDK that your view finished loading
 
@@ -233,7 +233,7 @@ void _onHeroImageLoaded() {
 
 Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
 
-To create visualizations in your dashboards, [create a measure][4] first.
+To create visualizations in your dashboards, [create a measure][15] first.
 
 ### Track user actions
 
@@ -256,7 +256,7 @@ When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be
 
 ### Track custom resources
 
-In addition to tracking resources automatically using the [Datadog Tracking HTTP Client][5], you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][6]:
+In addition to tracking resources automatically using the [Datadog Tracking HTTP Client][16], you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][17]:
 
 - `DdRum.startResource`
 - `DdRum.stopResource`
@@ -295,7 +295,7 @@ DatadogSdk.instance.rum?.addError("This is an error message.");
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][3] captured by the Datadog Flutter SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
+In addition to the [default RUM attributes][14] captured by the Datadog Flutter SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
@@ -419,11 +419,11 @@ final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
 
 ## Flutter-specific performance metrics
 
-To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][17].
+To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][18].
 
 ## OpenTelemetry setup
 
-The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
+The [Datadog Tracking HTTP Client][10] package and [gRPC Interceptor][19] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
 ### Datadog header generation
 
@@ -468,30 +468,20 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected
-[4]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
-[5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
-[6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
-[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogNavigationObserver-class.html
-[8]: https://pub.dev/packages?q=go_router
-[9]: https://pub.dev/packages/auto_route
-[10]: https://pub.dev/packages/beamer
-[11]: https://github.com/flutter/flutter/issues/112196
-[12]: https://pub.dev/packages/datadog_tracking_http_client
-[13]: https://pub.dev/packages/datadog_grpc_interceptor
-[14]: https://github.com/openzipkin/b3-propagation#single-headers
-[15]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[16]: https://www.w3.org/TR/trace-context/#tracestate-header
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
-[18]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries
-[19]: /real_user_monitoring/browser/frustration_signals/
-[20]: /getting_started/tagging/#defining-tags
-[21]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
-[22]: https://github.com/openzipkin/b3-propagation#single-headers
-[23]: https://github.com/openzipkin/b3-propagation#multiple-headers
-[24]: https://www.w3.org/TR/trace-context/#tracestate-header
-[25]: https://pub.dev/packages/go_router
-[26]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
-[27]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
-[28]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
-[29]: /serverless/aws_lambda/distributed_tracing/
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries/
+[4]: /getting_started/tagging/#defining-tags
+[5]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
+[6]: https://github.com/openzipkin/b3-propagation#single-headers
+[7]: https://github.com/openzipkin/b3-propagation#multiple-headers
+[8]: https://www.w3.org/TR/trace-context/#tracestate-header
+[9]: /real_user_monitoring/browser/frustration_signals/
+[10]: https://pub.dev/packages/datadog_tracking_http_client
+[11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
+[13]: /serverless/aws_lambda/distributed_tracing/
+[14]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected
+[15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
+[17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
+[18]: /real_user_monitoring/mobile_and_tv_monitoring/mobile_vitals/?tab=flutter
+[19]: https://pub.dev/packages/datadog_grpc_interceptor

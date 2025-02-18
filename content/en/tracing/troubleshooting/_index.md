@@ -30,9 +30,9 @@ further_reading:
 - link: '/integrations/'
   tag: 'Documentation'
   text: "Datadog's full list of integrations"
-- link: '/tracing/guide/inferred-service-opt-in/'
+- link: '/tracing/services/inferred_services'
   tag: 'Documentation'
-  text: 'Inferred Service dependencies (Preview)'
+  text: 'Inferred Service dependencies'
 ---
 
 If you experience unexpected behavior while using Datadog APM, read the information on this page to help resolve the issue. Datadog recommends regularly updating to the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes. If you continue to experience issues, reach out to [Datadog support][1].
@@ -195,7 +195,7 @@ If you encounter any of the following issues, you may be exceeding [Datadog's vo
 
 - Your trace metrics are not reporting as you would expect in the Datadog platform.
 - You are missing some of your resources that you expected to see in the Datadog platform.
-- You are seeing traces from your service but are not able to find this service on the [Service Catalog page][32].
+- You are seeing traces from your service but are not able to find this service on the [Software Catalog page][32].
 
 {{% collapse-content title="Data volume guidelines" level="h4" %}}
 
@@ -236,9 +236,9 @@ By default, the environment (`env`) is the primary tag for [Datadog APM][17].
 
 {{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-3.png" alt="Environment is the default primary tag" style="width:100%;" >}}
 
-A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Service Catalog allows you to scope the data in the **Performance** tab to a specific environment.
+A service is typically deployed in multiple environments, such as `prod`, `staging`, and `dev`. Performance metrics like request counts, latency, and error rate differ across various environments. The environment dropdown in the Software Catalog allows you to scope the data in the **Performance** tab to a specific environment.
 
-{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Service Catalog" style="width:100%;" >}}
+{{< img src="/tracing/troubleshooting/troubleshooting-service-naming-convention-issues-2.png" alt="Choose a specific environment using the `env` dropdown in the Software Catalog" style="width:100%;" >}}
 
 One pattern that often leads to issues with an overwhelming number of services is including the environment value in service names. For example, you might have two unique services instead of one since they are operating in two separate environments: `prod-web-store` and `dev-web-store`.
 
@@ -372,7 +372,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [27]: /tracing/trace_collection/library_config/
 [28]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
 [29]: /tracing/troubleshooting/#data-volume-guidelines
-[30]: /tracing/guide/inferred-service-opt-in/?tab=java
+[30]: /tracing/services/inferred_services
 [31]: /tracing/trace_pipeline/metrics/#apm-traces-estimated-usage-dashboard
 [32]: https://app.datadoghq.com/services
 

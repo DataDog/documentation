@@ -18,10 +18,6 @@ title: Node.js 런타임 메트릭
 type: multi-code-lang
 ---
 
-<div class="alert alert-warning">
-이 기능은 공용 베타 단계입니다.
-</div>
-
 ## 자동 설정
 
 추적 옵션 `tracer.init({ runtimeMetrics: true })`나 환경 변수 `DD_RUNTIME_METRICS_ENABLED=true`를 통해 추적 클라이언트의 구성 파라미터로 런타임 메트릭 수집을 활성화할 수 있습니다.
@@ -60,7 +56,7 @@ Node 서비스와 연결해 런타임 메트릭을 볼 수 있습니다. Datadog
 
 또는 에이전트는 UDP 전송의 대안으로 유닉스 도메인 소켓(UDS)을 사용하여 메트릭을 수집할 수 있습니다. 자세한 내용은 [DogStatsD 를 통한 Unix 도메인 소켓][7]을 참조하세요.
 
-## 수집된 데이터
+## 수집한 데이터
 
 런타임 메트릭을 활성화하면 기본적으로 다음 메트릭을 수집할 수 있습니다.
 

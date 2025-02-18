@@ -7,6 +7,8 @@ algolia:
   - software composition analysis
   - SAST
   - SCA
+aliases:
+- /ja/code_analysis/faq
 description: Datadog Code Analysis を使用して、開発中の保守性の問題、バグ、セキュリティ脆弱性に対処し、顧客への影響を防ぐ方法を学びます。
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
@@ -24,31 +26,30 @@ further_reading:
 - link: /security/application_security/software_composition_analysis
   tag: ドキュメント
   text: Software Composition Analysis について
-is_beta: true
+is_beta: false
 title: コード分析
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Code Analysis は {{< region-param key="dd_site_name" >}} サイトでは利用できません。
-</div>
-{{% /site-region %}}
-
-{{< callout url="#" btn_hidden="true" header="ベータ版をお試しください！" >}}
-Code Analysis は公開ベータ版です。
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Code Analysis is in Preview.
 {{< /callout >}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger"> Code Analysis は {{< region-param key="dd_site_name" >}} サイトでは使用できません。 </div>
+{{% /site-region %}}
 
 ## 概要
 
-Code Analysis は、リポジトリ内の [Static Analysis][1] および [Software Composition Analysis (SCA)][2] のスキャンで検出された違反結果を表示します。
+<div class="alert alert-info"> Datadog Software Composition Analysis は、ソフトウェア開発ライフサイクル (SDLC) 全体を通じて脆弱性を含むライブラリを検出できます。Code Analysisはリポジトリを直接スキャンして得られた結果を要約します。リポジトリや実行時に検出されたすべての脆弱性を一括で確認するには、詳細について <a href="/security/application_security/software_composition_analysis" target="_blank">Application Security</a> を参照してください。 </div> 
+
+Code Analysis はリポジトリをスキャンし、セキュリティ脆弱性とコード品質の問題を検出します。これは、独自のコードを対象とした [Static Analysis][1] と、コードベースに含まれるオープンソース依存関係を対象とした [Software Composition Analysis (SCA)][2] の 2 つの機能で構成されています。
 
 Static Analysis
-: 開発ライフサイクルの早期段階で、保守性の問題、バグ、パフォーマンスの問題、セキュリティ脆弱性がないか、オーダーメイドのコードをスキャンし、問題が本番環境に到達するのを防ぎます。また、可能であれば修正案を提供し、エンジニアリングチームがユーザーへの影響を防ぐよう支援します。
+: 保守性の問題、バグ、パフォーマンスの問題、セキュリティの脆弱性について、開発ライフサイクルの早い段階で特注コードをスキャンし、問題が本番環境に到達するのを未然に防ぐとともに、可能な場合は、ユーザーに影響が及ぶ前にエンジニアリングチームがこれらの問題に対処できるよう、修正案を提供します。
 
-Software Composition Analysis 
-: リポジトリにインポートされたオープンソースライブラリに既知の脆弱性がないかをスキャンします。
+Software Composition Analysis
+: リポジトリにインポートされているオープンソースライブラリをスキャンし、既知のセキュリティ脆弱性、ライセンスリスク、サポート終了 (EOL) ライブラリを検出します。 
 
-<div class="alert alert-info">Datadog Software Composition Analysis は、ソフトウェア開発ライフサイクル (SDLC) 全体にわたって脆弱なライブラリを特定できます。Code Analysis では、リポジトリを直接スキャンして得られた結果を要約します。リポジトリおよびランタイムで検出されたすべての脆弱性を統合して表示するには、<a href="/security/application_security/software_composition_analysis" target="_blank">アプリケーションセキュリティ</a>をご覧ください。</div>
 
 ## リポジトリに Code Analysis をセットアップする
 
@@ -58,6 +59,10 @@ Software Composition Analysis
 {{% tab "Datadog" %}}
 
 <div class="alert alert-warning">Datadog がホストするスキャンは、Software Composition Analysis (SCA) と GitHub リポジトリでのみサポートされます。Static Analysis を有効にする、または別の CI プロバイダーを使用する場合は、CI パイプラインでスキャンを実行してください。</div>
+
+With Datadog-hosted scans, your code is scanned within Datadog's infrastructure as opposed to within your CI pipeline. Datadog reads your code, runs the static analyzer to perform Static Analysis and/or Software Composition Analysis, and uploads the results.
+
+Using Datadog-hosted scans eliminates the need for you to configure a CI pipeline so you can use Code Analysis.
 
 GitHub リポジトリで [Software Composition Analysis][101] を有効にするには、対象の GitHub アカウントで **Select Repositories** をクリックし、`Enable Software Composition Analysis (SCA)` のトグルをクリックしてすべてのリポジトリで有効にします。GitHub アカウントが一覧に表示されない場合は、まず[新しい GitHub アプリを作成][102]します。
 
@@ -112,11 +117,11 @@ Static Analysis を使用すると、[VS Code][3] や [IntelliJ & PyCharm][4] �
 
 ## リポジトリの検索と管理
 
-Code Analysis を構成した後、[Code Analysis ページ][9]で構成した各リポジトリの Static Analysis と SCA のスキャン結果の要約を見ることができます。要約された結果は常に各リポジトリのデフォルトブランチの最新のスキャンされたコミットに基づくものであり、これにより、トリアージして修正したい各リポジトリの既存の問題がすべて表示されていることを確認できます。
+Code Analysis を構成した後、[Code Analysis ページ][9]で各リポジトリの Static Analysis と SCA のスキャン結果の要約を見ることができます。デフォルトで、要約された結果はリポジトリのデフォルトブランチの最新のスキャンされたコミットに対して示され、これにより、トリアージして修正したい各リポジトリの既存の問題がすべて表示されていることを確認できます。
 
 {{< img src="code_analysis/repositories.png" alt="Code Analysis ページに表示される、コードとライブラリのスキャン結果を含むリポジトリ一覧" style="width:100%;">}}
 
-リストからリポジトリを選択すると、その特定のリポジトリの違反を検索・管理できます。デフォルトでは、結果はリポジトリのデフォルトブランチの最新のスキャンされたコミットにフィルタリングされますが、ページ上部でブランチやコミットを変更できます。
+リストからリポジトリを選択すると、そのリポジトリで検出された違反を検索し、管理することができます。デフォルトでは、リポジトリのデフォルトブランチ上で最新にスキャンされたコミットに対する結果が表示されますが、ページ上部でブランチやコミットを変更することが可能です。また、結果はサービスやチームのファセットでフィルタリングできます。Datadog のサービスやチームにどのように結果が関連付けられているかの詳細は、[Code Analysis の概要][12]を参照してください。
 
 選択したブランチやコミットにかかわらず、すべての結果は以下のビューに整理されます。
 
@@ -142,11 +147,11 @@ Code Analysis を構成した後、[Code Analysis ページ][9]で構成した�
 **Library Vulnerabilities** ビューで、SCA によって検出された脆弱なオープンソースライブラリを特定し、対処します。
 
 {{% /tab %}}
-{{% tab "Library List" %}}
+{{% tab "Library Catalog" %}}
 
 {{< img src="code_analysis/shopist_lib_list.png" alt="Datadog Shopist サービスとリポジトリの Code Analysis ページにあるライブラリのリスト" style="width:100%;">}}
 
-**Library List** ビューで、コードベースにインポートされた SCA によって検出されたライブラリの完全なリストを管理します。
+**Library Catalog** ビューで、コードベースにインポートされた SCA によって検出されたライブラリの完全なリストを管理します。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -166,3 +171,4 @@ Code Analysis を構成した後、[Code Analysis ページ][9]で構成した�
 [9]: https://app.datadoghq.com/ci/code-analysis
 [10]: /ja/integrations/guide/source-code-integration/?tab=codeanalysis
 [11]: /ja/code_analysis/ide_plugins/
+[12]: /ja/getting_started/code_analysis/?tab=incipipelines#linking-services-to-code-violations-and-libraries

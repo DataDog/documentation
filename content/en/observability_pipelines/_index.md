@@ -35,6 +35,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-stream-logs-in-ocsf-format/"
   tag: "blog"
   text: "Stream logs in the OCSF format to your preferred security vendors or data lakes with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/"
+  tag: "blog"
+  text: "Simplify your SIEM migration to Microsoft Sentinel with Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}

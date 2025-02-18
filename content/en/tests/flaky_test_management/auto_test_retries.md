@@ -33,6 +33,8 @@ Ensure [Test Optimization][1] is configured for your test runs.
 
 `dd-trace-java >= 1.34.0`
 
+The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Scala Weaver`.
+
 ### Configuration
 After you have set up Test Optimization, you can configure Auto Test Retries from the [Test Service Settings page][1].
 
@@ -46,6 +48,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: /tests/flaky_test_management/
+[3]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
 {{% tab "Javascript" %}}
@@ -122,8 +125,6 @@ Customize the Auto Test Retries with the following environment variables:
 {{% /tab %}}
 
 {{% tab "Go" %}}
-
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 ### Compatibility
 

@@ -80,7 +80,7 @@ Para recibir alertas de Catchpoint en tu flujo de eventosinicia sesión en el po
 
 1. En la API de alertas, selecciona Activar.
 
-   {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="evento de Catchpoint" popup="true">}}
+   ![catchpoint evento][1]
 
 2. Introduce la URL del endpoint de la API de Datadog.
 
@@ -88,7 +88,7 @@ Para recibir alertas de Catchpoint en tu flujo de eventosinicia sesión en el po
     https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-   Puedes elegir una clave existente de la API de Datadog o crear una clave de la API en la [pestaña **Configurar** del ícono de integración][1].
+    Puede elegir una clave API existente de Datadog, o crear una clave API en el [**Configurar** pestaña del integración cuadro ][2].
 
 3. Configura el estado en Activo.
 4. Selecciona Plantilla para Formato.
@@ -109,9 +109,9 @@ Para recibir alertas de Catchpoint en tu flujo de eventosinicia sesión en el po
    }
    ```
 
-Catchpoint envía alertas directamente al [Explorador de eventos][2] en Datadog.
+Catchpoint envía alertas directamente al [eventos Explorer][3] en Datadog.
 
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="evento de Catchpoint" popup="true">}}
+![catchpoint evento][4]
 
 ### Recopilación de métricas
 
@@ -832,7 +832,7 @@ Para recibir métricas de Catchpoint en Datadog, crea un Webhook de datos de tes
 
 ### Eventos
 
-Los eventos de Catchpoint aparecen en el widget del flujo de eventos en el [dashboard de Catchpoint][4].
+eventos de Catchpoint aparecen en el Flujo de eventos widget en la página [Catchpoint dashboard][6].
 
 ### Checks de servicio
 
@@ -840,10 +840,12 @@ La integración de Catchpoint no incluye ningún check de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][7].
 
-[1]: https://app.datadoghq.com/integrations/catchpoint
-[2]: https://docs.datadoghq.com/es/service_management/events/
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
-[4]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
-[5]: https://docs.datadoghq.com/es/help/
+[1]: images/configuration.png
+[2]: https://app.datadoghq.com/integrations/catchpoint
+[3]: https://docs.datadoghq.com/es/service_management/events/
+[4]: images/screenshot.png
+[5]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
+[6]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
+[7]: https://docs.datadoghq.com/es/help/

@@ -66,6 +66,8 @@ tile:
   resources:
   - resource_type: 블로그
     url: https://www.datadoghq.com/blog/confluent-cloud-monitoring-datadog/
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
   support: README.md#Support
   title: Confluent Cloud
 ---
