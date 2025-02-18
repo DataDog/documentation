@@ -38,12 +38,11 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 ### Datadog Configuration
 
 1. Enter your [Datadog API key][2] value.
-2. Enter your [Datadog App key][3] value.
-3. Select your [Datadog Site][4].
+2. Select your [Datadog Site][4].
 
-{{< img src="logs/guide/azure-automated-log-forwarding/deployment_datadog_configuration.png" alt="The Datadog Configuration page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
+{{< img src="logs/guide/azure-automated-log-forwarding/deployment_datadog_configuration_2025-02-18.png" alt="The Datadog Configuration page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 
-4. Click **Next**.
+3. Click **Next**.
 
 ### Deployment
 
@@ -61,5 +60,4 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 [1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
 [4]: /getting_started/site/
