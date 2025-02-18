@@ -148,12 +148,22 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
+**Snowflake CCM object tags**
+
+Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
+
+All object tag configuration is done within [Snowflake][105].
+
+Notes:
+- **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
+
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
 [102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
+[105]: https://docs.snowflake.com/en/user-guide/object-tagging
 
 {{% /tab %}}
 
@@ -227,7 +237,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Costs Explorer** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -372,7 +382,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 [1]: /cloud_cost_management/custom
 [2]: /cloud_cost_management
-[3]: https://app.datadoghq.com/cost/analytics
+[3]: https://app.datadoghq.com/cost/explorer
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
 [5]: /dashboards
 [6]: /notebooks

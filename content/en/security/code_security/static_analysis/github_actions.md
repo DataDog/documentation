@@ -2,17 +2,17 @@
 aliases:
 - /continuous_integration/static_analysis/github_actions
 - /static_analysis/github_actions
-description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
-title: Static Analysis and GitHub Actions
+description: Use Datadog and GitHub to run Static Code Analysis jobs in a CI pipeline.
+title: Static Code Analysis and GitHub Actions
 ---
 ## Overview
 
-Run a [Datadog Static Analysis][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
+Run a [Datadog Static Code Analysis][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
 invokes it against your codebase, and uploads the results to Datadog.
 
 ## Workflow
 
-Create a file in `.github/workflows` to run a Datadog Static Analysis job.
+Create a file in `.github/workflows` to run a Datadog Static Code Analysis job.
 
 The following is a sample workflow file.
 
@@ -43,7 +43,7 @@ Make sure to replace `dd_site` with the Datadog site you are using[3].
 
 ## Inputs
 
-You can set the following parameters for Static Analysis.
+You can set the following parameters for Static Code Analysis.
 
 | Name         | Description                                                                                                                                             | Required | Default         |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------|

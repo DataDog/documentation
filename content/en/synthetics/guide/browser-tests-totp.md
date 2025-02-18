@@ -27,9 +27,10 @@ Create a global variable where you enter a secret key or upload a QR code from y
 2. In **Define variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
 3. Enter a **Description** for your variable (optional).
 4. Select **Tags** to associate with your variable (optional).
-5. Enter the **Secret Key** to your variable or upload a QR code image.
-6. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
-7. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
+5. Follow your authenticator app's documentation for instructions on creating a secret key or adding a new QR code.
+6. Enter the **Secret Key** to your variable or upload a QR code image.
+7. Click **+ Generate** to create a TOTP. You can copy the generated TOTP with the **Copy** icon.
+8. In **Permissions settings**, restrict access to your variable based on roles in your org. For more information about roles, see the [RBAC documentation][1].
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 

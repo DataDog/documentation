@@ -153,6 +153,28 @@ It is likely that the [test case configuration][13] is unstable because one or m
 
 The best way to fix this is to make sure that the test parameters are the same between test runs.
 
+## Session history, performance or code coverage tab only show a single execution
+
+This is likely caused by an unstable test session fingerprint. There's a set of parameters that the product checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. Some examples of unstable test commands are:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `mvn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `bundle exec rspec --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `dotnet test --results-directory /var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+This can be solved by using the `DD_TEST_SESSION_NAME` environment variable. Use `DD_TEST_SESSION_NAME` to identify a group of tests. Example values for this tag include:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+## Test Impact Analysis does not show any time saved
+
+This is also caused by an unstable test session fingerprint. See the [Session history, performance or code coverage tab only show a single execution](#session-history-performance-or-code-coverage-tab-only-show-a-single-execution) section for more information.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

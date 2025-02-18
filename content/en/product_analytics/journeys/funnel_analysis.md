@@ -78,7 +78,7 @@ You can analyze conversion by **session count** or **users**, which means you ca
 You can measure conversion by the following attributes:
 
 - **Conversion count** - A count of users who went through the funnel you've defined.
-- **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of the total number of users that visited your site or application and converted.
+- **Conversion rate** - A conversion refers to the moment when a user responds to a call to action. This rate is the percentage of users who have entered the funnel and converted.
 
   **Note**: Only completed RUM sessions contribute to conversion rates.
 

@@ -19,10 +19,6 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Early Flake Detection is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Early Flake Detection is Datadog's test flakiness solution that enhances code quality by identifying [flaky tests][1] early in the development cycle. For more information about flaky tests, see [Flaky Test Management][2].
@@ -79,6 +75,9 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 `dd-trace-java>=1.34.0`
 
+The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
+
+[2]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -102,8 +101,6 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 {{% /tab %}}
 
 {{% tab "Go" %}}
-
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
 
 `orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
 

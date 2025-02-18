@@ -72,8 +72,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \* [CommandType.StoredProcedure][25] not supported
 
 \*\* Full mode SQL Server for Java/.NET:
+
+<div class="alert alert-warning">If your application uses <code>context_info</code> for instrumentation, the APM tracer overwrites it.</div>
+
   - The instrumentation executes a `SET context_info` command when the client issues a query, which makes an additional round-trip to the database.
-  - If your applications uses `context_info` to instrument the application, it is overwritten by the APM tracer.
   - Prerequisites:
     - Agent version 7.55.0 or greater
     - Java tracer version 1.39.0 or greater
@@ -90,6 +92,12 @@ For the best user experience, ensure the following environment variables are set
 DD_SERVICE=(application name)
 DD_ENV=(application environment)
 DD_VERSION=(application version)
+```
+
+Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for Agent versions `7.63` and higher. Add the following parameter in the `apm_config` section of your APM Agent configuration file:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
 {{< tabs >}}
@@ -429,7 +437,7 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Service Catalog][26] to open a details panel, then click **View Service Page** in the panel.
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Software Catalog][26] to open a details panel, then click **View Service Page** in the panel.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
