@@ -65,23 +65,113 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 {{% /tab %}}
 {{% tab "Java" %}}
 #### Tracing
-If you are deploying a Java Cloud Run Function through the console wait for Cloud Run to create the service using a placeholder revision to add the sidecar container, and the follow the steps below including the shared volume mount:
 
-In your main application, add the `dd-trace-java` library. Follow the instructions in [Tracing Java Applications][1] or use the following example Dockerfile to add and start the tracing library with automatic instrumentation:
+1. Add `dd-java-agent.jar` and other dependencies like `java-dogstatsd-client` to your `pom.xml`.
 
-{{< code-block lang="dockerfile" filename="Dockerfile"  collapsible="true" >}}
-FROM openjdk:17-jdk
+   **Example `pom.xml`**:
+   ```xml
+   <project xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
 
-# Set the working directory in the container
-WORKDIR /
-ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+     <groupId>gcfv2</groupId>
+     <artifactId>helloworld</artifactId>
+     <version>1.0.0-SNAPSHOT</version>
+     <properties>
+       <maven.compiler.target>11</maven.compiler.target>
+       <maven.compiler.source>11</maven.compiler.source>
+     </properties>
 
-# Copy the JAR file into the container
-COPY target/helloworld-0.0.1-SNAPSHOT.jar helloworld.jar
-ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
+     <dependencies>
+       <!-- Required for Function primitives -->
+       <dependency>
+         <groupId>com.google.cloud.functions</groupId>
+         <artifactId>functions-framework-api</artifactId>
+         <version>1.1.0</version>
+         <scope>provided</scope>
+       </dependency>
+     </dependencies>
 
-CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "helloworld.jar"]
-{{< /code-block >}}
+     <build>
+       <plugins>
+         <plugin>
+           <!--
+             Google Cloud Functions Framework Maven plugin
+
+             This plugin allows you to run Cloud Functions Java code
+             locally. Use the following terminal command to run a
+             given function locally:
+
+             mvn function:run -Drun.functionTarget=your.package.yourFunction
+           -->
+           <groupId>com.google.cloud.functions</groupId>
+           <artifactId>function-maven-plugin</artifactId>
+           <version>0.11.0</version>
+           <configuration>
+             <functionTarget>functions.HelloWorld</functionTarget>
+           </configuration>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-antrun-plugin</artifactId>
+           <version>1.8</version>
+           <executions>
+             <execution>
+               <phase>package</phase>
+               <configuration>
+                 <tasks>
+                   <get src="https://dtdg.co/latest-java-tracer" dest="dd-java-agent.jar" />
+                 </tasks>
+               </configuration>
+               <goals>
+                 <goal>run</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+       </plugins>
+     </build>
+   </project>
+   ```
+2. Add `dd-java-agent.jar` to your Dockerfile.
+   
+   **Example `Dockerfile`**:
+   ```dockerfile
+   FROM openjdk:17-jdk
+
+   # Set the working directory in the container
+   WORKDIR /
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+
+   # Copy the JAR file into the container
+   COPY target/helloworld-0.0.1-SNAPSHOT.jar helloworld.jar
+   ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
+
+   CMD ["java", "-javaagent:dd-java-agent.jar", "-jar", "helloworld.jar"]
+   ```
+
+2. Run `mvn clean package` to update the `target` directory with the new `.jar` used in your Dockerfile.
+
+   <div class="alert alert-info">
+   As an alternative to the provided Dockerfile, you can also use Artifact Registry to store the images built from your function source code. You can use <a href="#">Google Cloud Build</a> or <a href="#">Buildpacks</a> to build and deploy your image.<br/>
+   For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME</code>
+   </div>
+
+3. Deploy the Java function by running the following command in the top level directory that contains your `pom.xml` and `Dockerfile`:
+   ```shell
+     gcloud beta run deploy FUNCTION_NAME \
+     --source . \
+     --function FUNCTION_TARGET \
+     --clear-base-image \
+     --region REGION
+   ```
+   - Replace `REGION` with the region where you want to deploy the function.
+   - Replace `FUNCTION_TARGET` with
+   - Replace `FUNCTION_NAME` with
+   - Ensure that you set [--clear-base-image][5] to deploy your Cloud Function with the Dockerfile
+
+4. When you set up your [containers](#containers), ensure that you use the same container image as what you deployed in the previous steps.
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
@@ -95,6 +185,7 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 [2]: /developers/dogstatsd/?tab=hostagent&code-lang=java#install-the-dogstatsd-client
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
+[5]: https://cloud.google.com/sdk/gcloud/reference/beta/run/deploy#--clear-base-image
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -135,9 +226,8 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 {{< /tabs >}}
 
 ### Containers
-{{< tabs >}}
-{{% tab "GCR UI - Node.js, Python, Go, .NET" %}}
-If you are deploying a New Cloud Run Function for the first time through the console wait for Cloud Run to create the service and update the placeholder revision image to add the sidecar container, and the follow the steps below including the shared volume mount:
+
+If you are deploying a new Cloud Run function for the first time through the console, wait for Cloud Run to create the service and update the placeholder revision image. Then, follow the steps below to add the sidecar container, shared volume mount, startup check, and environment variables.
 
 #### Sidecar container
 
@@ -154,7 +244,7 @@ If you are deploying a New Cloud Run Function for the first time through the con
    - `DD_SERVICE`: A name for your service. For example, `gcr-sidecar-test`.
    - `DD_ENV`: A name for your environment. For example, `dev`.
    - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
-   - `DD_API_KEY`: Your [Datadog API key][1].
+   - `DD_API_KEY`: Your [Datadog API key][4].
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
 
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
@@ -166,72 +256,6 @@ If you are deploying a New Cloud Run Function for the first time through the con
 1. Go to **Variables & Secrets** and add the same `DD_SERVICE` environment variable that you set for the sidecar container.
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Java" %}}
-
-If you are using Java, you must use the [gcloud CLI][1] to deploy your function. If you are deploying a Java Cloud Run Function
-through the console wait for Cloud Run to create the service using a placeholder revision to add the sidecar container, and the steps above including the shared volume mount:
-
-#### Locally inside Source Code Directory
-1. Add the `dd-java-agent` jar and other dependencies like `java-dogstatsd-client` to your pom.xml.
-   - Use the example Dockerfile and Pom.xml to add and start the tracing library with automatic instrumentation.
-2. Run `mvn clean package` to update the `target` directory with the new jar utilized inside the dockerfile
-   - Cloud Run functions uses Artifact Registry to store the images built from your function source code if you do not want to utliized the provided Dockerfile:
-     - Build a container image and deploy image to Artifact Registry to use inside Cloud Run using [Google Cloud Build][3]
-     - Build the container image and deploy Cloud Run Function using [Google Cloud Buildpacks][4]
-       ```shell
-       gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME
-       ```
-3. Deploy the Java function by running the following command in the top level directory that contains the Java pom.xml and dockerfile:
-    ```shell
-      gcloud beta run deploy FUNCTION_NAME \
-      --source . \
-      --function FUNCTION_TARGET \
-      --clear-base-image \
-      --region REGION
-    ```
-   ***Note***: Replace `REGION`, `FUNCTION_TARGET`, and `FUNCTION_NAME` with the region where you want to deploy the function.
-You need to set the [--clear-base-image][5] to deploy your cloud function with the dockerfile
-
-4. Follow the steps below to **finish the setup inside the console**. Make sure your container image is the same as what you just deployed.
-#### Sidecar container
-
-1. In Cloud Run, select **Edit & Deploy New Revision**.
-1. At the bottom of the page, select **Add Container**.
-1. For **Container image URL**, select `gcr.io/datadoghq/serverless-init:latest`.
-1. Go to **Volume Mounts** and set up a volume mount for logs. Ensure that the mount path matches your application's write location. For example:
-   {{< img src="serverless/gcr/volume_mount.png" width="80%" alt="Volume Mounts tab. Under Mounted volumes, Volume Mount 1. For Name 1, 'shared-logs (In-Memory)' is selected. For Mount path 1, '/shared-volume' is selected.">}}
-1. Go to **Settings** and add a startup check.
-  - **Select health check type**: Startup check
-  - **Select probe type**: TCP
-  - **Port**: Enter a port number. Make note of this, as it is used in the next step.
-1. Go to **Variables & Secrets** and add the following Required environment variables as name-value pairs:
-  - `DD_SERVICE`: A name for your service. For example, `gcrfx-sidecar-test`.
-  - `DD_ENV`: A name for your environment. For example, `dev`.
-  - `DD_SERVERLESS_LOG_PATH`: Your log path. For example, `/shared-volume/logs/*.log`.
-  - `DD_API_KEY`: Your [Datadog API key][1].
-  - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step. For example, `12345`.
-
-   For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
-
-#### Main container
-
-1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
-   **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
-1. Go to **Variables & Secrets** and add the same `DD_SERVICE` environment variable that you set for the sidecar container.
-1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
-1. Deploy your main application.
-
-[1]: https://cloud.google.com/sdk/gcloud/reference/beta/functions/deploy
-[2]:https://cloud.google.com/run/docs/quickstarts/functions/deploy-functions-gcloud#java
-[3]:https://cloud.google.com/functions/docs/building
-[4]:https://cloud.google.com/docs/buildpacks/build-function#java_4
-[5]:https://cloud.google.com/sdk/gcloud/reference/beta/run/deploy#--clear-base-image
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Environment variables
 
@@ -409,6 +433,7 @@ public class HelloworldApplication implements HttpFunction {
   }
 }
 ```
+
 #### Pom.xml
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -475,7 +500,9 @@ public class HelloworldApplication implements HttpFunction {
   </build>
 </project>
 ````
+
 #### Dockerfile
+
 ```dockerfile
 FROM openjdk:17-jdk
 
