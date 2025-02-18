@@ -13,19 +13,19 @@ further_reading:
 ## Overview
 
 {{< callout url="https://www.datadoghq.com/product-preview/data-security/" >}}
-Limited Availability Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click Request Access.
+Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click Request Access.
 {{< /callout >}}
 
 Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment and use [Remote Configuration][1] to retrieve a list of S3 buckets and RDS instances, as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets and tables in your RDS instances.
 
-When an Agentless scanner finds a match with any of the [SDS library rules][2], the rule type and location of the match is sent to Datadog by the scanning instance. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
+When an Agentless scanner finds a match with any of the [SDS library rules][2], the scanning instance sends the rule type and location of the match to Datadog. **Note**: Cloud storage resources and their files are only read in your environment - no sensitive data that was scanned is sent back to Datadog.
 
-In the Sensitive Data Scanner [Summary page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched it.
+In the Sensitive Data Scanner [Summary page][3], you can see what cloud storage resources have been scanned and any matches found, including the rules that matched them.
 
 This document walks you through:
 - [Enabling Remote Configuration](#enable-remote-configuration) to use Sensitive Data Scanner for Cloud Storage
 - [Security considerations](#security-considerations) to take into account when using Sensitive Data Scanner for Cloud Storage
-- Deploying scanners to your environment using [Terraform](#manually-deploy-scanners-using-terraform) or [CloudFormation](#automatically-deploy-scanners-using-cloudformation)
+- Deploying scanners to your environment using [CloudFormation](#automatically-deploy-scanners-using-cloudformation) or [Terraform](#manually-deploy-scanners-using-terraform)
 
 ## Enable Remote Configuration {#enable-remote-configuration}
 
@@ -76,8 +76,8 @@ You can add a scanner to a new AWS account or an existing AWS account.
 {{< tabs >}}
 {{% tab "New AWS account" %}}
 
-1. Navigate to [Sensitive Data Scanner][1] settings page.
-1. In the **Cloud Settings** section within **Storage**, click **Add AWS accounts by following these steps**.
+1. Navigate to the [Sensitive Data Scanner][1] settings page.
+1. On the **Storage** tab, in the **Cloud Settings** section, click **Add AWS accounts by following these steps**.
 1. Leave **Automatically using CloudFormation** enabled.
 1. Select the AWS region in the dropdown menu.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
@@ -91,18 +91,18 @@ You can add a scanner to a new AWS account or an existing AWS account.
 {{% /tab %}}
 {{% tab "Existing AWS account" %}}
 
-1. Navigate to [Sensitive Data Scanner][1] settings page.
-1. In the AWS section within **Storage**:
+1. Navigate to the [Sensitive Data Scanner][1] settings page.
+1. On the **Storage** tab, in the **AWS** section:
     - If you have Agentless scanning already enabled in an account:
       1. Click the pencil icon for the account.
-      1. Toggle the **Enable Sensitive Data Scanning** to add the scanner to the account.
+      1. Toggle **Enable Sensitive Data Scanning** on to add the scanner to the account.
       1. Click **Save**.
     - If you don't have Agentless scanning enabled in an account:
-      1. Click on the plus icon for the account you want to enable sensitive data scanning.
+      1. Click on the plus icon for the account you want to enable sensitive data scanning for.
       1. Select that you want to add the scanner using CloudFormation.
-      1. Select the AWS region in the dropdown menu,
+      1. Select the AWS region in the dropdown menu.
       1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-      1. Toggle the **Enable Sensitive Data Scanning** to add the scanner to the account.
+      1. Toggle **Enable Sensitive Data Scanning** on to add the scanner to the account.
       1. Click **Launch CloudFormation Template**.
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/data-security
@@ -112,7 +112,7 @@ You can add a scanner to a new AWS account or an existing AWS account.
 
 ### Manually deploy scanners using Terraform {#manually-deploy-scanners-using-terraform}
 
-You can deploy Agentless scanners using the Terraform Module Datadog Agentless Scanner Module. See [Datadog Agentless Scanner Module][7] for more information. Datadog recommends that you choose one of these two setup options if you manually deploy scanners.
+You can deploy Agentless scanners using the [Terraform Module Datadog Agentless Scanner][7]. Datadog recommends that you choose one of these two setup options if you manually deploy scanners:
 
 - Create an AWS account dedicated to Agentless scanners. Deploy a scanner for every region that has cloud resources you want to scan.
 
@@ -134,7 +134,7 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 
 ## Disable Agentless scanning
 
-1. Navigate to [Sensitive Data Scanner][6] settings page.
+1. Navigate to the [Sensitive Data Scanner][6] settings page.
 1. Click the pencil icon next to the account for which you want to disable Agentless scanning.
 1. Toggle **Enable Sensitive Data Scanning** to off.
 
