@@ -55,7 +55,10 @@ In general, use the following rules:
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
+### Notes
+
+- If a property is defined in both the global configuration file (`datadog.yaml`) and as an environment variable, the environment variable takes precedence.
+- Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
 
 ### Exceptions
 
