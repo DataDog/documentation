@@ -239,7 +239,7 @@ To update your RUM Application:
 
 {{% /tab %}}
 
-{{% tab "httpd" %}}
+{{% tab "Apache HTTP Server" %}}
 
 To update your RUM Application:
 
