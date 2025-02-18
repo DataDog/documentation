@@ -20,7 +20,7 @@ further_reading:
     text: "Datadog Real User Monitoring"
 ---
 
-Datadog’s Software Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
+Datadog's Software Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
 
 ## Automatic dependency mapping and entity discovery
 
