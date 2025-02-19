@@ -17,8 +17,8 @@ import CdocsMarkdoc, {
 } from 'cdocs-markdoc';
 import { MinifiedClientFunction, minifyClientFunction } from './pageConfigMinification';
 import { transformConfig } from '../markdocCustomization/parserConfig';
-import { HugoFunctions } from '../hugoUtils/HugoFunctions';
 import { FiltersManifest } from 'cdocs-data';
+import { anchorize } from '../hugoUtils';
 
 /**
  * Collect the top-level client functions inside the renderable tree,
@@ -144,8 +144,7 @@ function addHeaderAnchorstoTree(node: RenderableTreeNodes): void {
       node.children !== null &&
       typeof node.children[0] === 'string'
     ) {
-      node.attributes.id =
-        node.attributes.id || HugoFunctions.anchorize(node.children[0]);
+      node.attributes.id = node.attributes.id || anchorize(node.children[0]);
     }
   }
 

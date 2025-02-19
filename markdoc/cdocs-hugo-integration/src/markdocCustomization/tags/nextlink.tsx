@@ -1,8 +1,8 @@
 import { renderToString } from 'react-dom/server';
-import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { CustomHtmlComponent } from '../renderer';
 import { HugoConfig } from '../../schemas/config/hugo';
 import { ImgTemplate } from './shared/img';
+import { absLangUrl } from '../../hugoUtils';
 
 export const nextlinkDefinition = {
   render: 'Nextlink',
@@ -46,7 +46,7 @@ export function NextlinkTemplate(props: {
   // If the href is not an absolute URL,
   // make it an absolute URL with a language prefix
   if (!link.startsWith('http')) {
-    link = HugoFunctions.absLangUrl({
+    link = absLangUrl({
       hugoConfig: props.hugoConfig,
       url: link,
       defaultLang: 'en'

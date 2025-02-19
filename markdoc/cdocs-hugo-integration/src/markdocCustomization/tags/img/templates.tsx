@@ -1,6 +1,6 @@
 import { HugoConfig } from '../../../schemas/config/hugo';
-import { HugoFunctions } from '../../../hugoUtils/HugoFunctions';
 import { cssStringToObject } from '../utils';
+import { getFingerprintedPermalink, relUrl } from '../../../hugoUtils';
 
 /**
  * All of the possible attributes an author can define in the img tag.
@@ -94,9 +94,7 @@ function InlineImage(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const { attrs, hugoConfig } = props;
 
   const imgProps: Record<string, any> = {
-    srcSet:
-      HugoFunctions.getFingerprintedPermalink({ src: attrs.src, hugoConfig }) +
-      '?auto=format'
+    srcSet: getFingerprintedPermalink({ src: attrs.src, hugoConfig }) + '?auto=format'
   };
 
   if (attrs.style) {
@@ -124,9 +122,7 @@ function Picture(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
   const pictureProps: Record<string, any> = {};
 
   const imgProps: Record<string, any> = {
-    srcSet:
-      HugoFunctions.getFingerprintedPermalink({ src: attrs.src, hugoConfig }) +
-      '?auto=format',
+    srcSet: getFingerprintedPermalink({ src: attrs.src, hugoConfig }) + '?auto=format',
     className: 'img-fluid'
   };
 
@@ -164,7 +160,7 @@ function Gif(props: { attrs: ImgTagAttrs; hugoConfig: HugoConfig }) {
 
   const imgProps: Record<string, any> = {
     className: 'img-fluid',
-    src: HugoFunctions.getFingerprintedPermalink({ src: props.attrs.src, hugoConfig })
+    src: getFingerprintedPermalink({ src: props.attrs.src, hugoConfig })
   };
 
   if (attrs.style) {
@@ -229,10 +225,10 @@ function PopUpLink(props: {
   const popParam = attrs.pop_param || (isGif ? '?fit=max' : '?fit=max&auto=format');
 
   // TODO, make this a relative URL: {{ print $img_resource $pop_param | relURL }}
-  const href = HugoFunctions.relUrl({
+  const href = relUrl({
     hugoConfig,
     url:
-      HugoFunctions.getFingerprintedPermalink({
+      getFingerprintedPermalink({
         src: attrs.src,
         hugoConfig: props.hugoConfig
       }) + popParam

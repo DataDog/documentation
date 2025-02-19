@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { HugoFunctions } from '../../src/hugoUtils/HugoFunctions';
+import { getFileContentsHash, anchorize, absLangUrl, relUrl } from '../../src/hugoUtils';
 import { mockHugoConfig } from '../config/mocks/valid/hugoConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
@@ -8,7 +8,7 @@ describe('HugoFunctions', () => {
     test('returns the correct hash for an image file', () => {
       const expectedHash = '60abd3d42408607da509794034239f28';
       const testImagePath = VALID_SITE_DIR + '/static/images/api-key.png';
-      const actualHash = HugoFunctions.getFileContentsHash(testImagePath);
+      const actualHash = getFileContentsHash(testImagePath);
 
       expect(actualHash).toEqual(expectedHash);
     });
@@ -24,10 +24,7 @@ describe('HugoFunctions', () => {
     };
 
     const actualOutputByInput = Object.fromEntries(
-      Object.entries(expectedOutputByInput).map(([input]) => [
-        input,
-        HugoFunctions.anchorize(input)
-      ])
+      Object.entries(expectedOutputByInput).map(([input]) => [input, anchorize(input)])
     );
 
     expect(actualOutputByInput).toEqual(expectedOutputByInput);
@@ -54,7 +51,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([url]) => [
           url,
-          HugoFunctions.absLangUrl({
+          absLangUrl({
             hugoConfig: hugoConfigDup,
             url
           })
@@ -84,7 +81,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([input]) => [
           input,
-          HugoFunctions.absLangUrl({
+          absLangUrl({
             hugoConfig: hugoConfigDup,
             url: input
           })
@@ -113,7 +110,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([url]) => [
           url,
-          HugoFunctions.relUrl({
+          relUrl({
             hugoConfig: hugoConfigDup,
             url
           })
@@ -140,7 +137,7 @@ describe('HugoFunctions', () => {
       const actualOutputByInput = Object.fromEntries(
         Object.entries(expectedOutputByInput).map(([input]) => [
           input,
-          HugoFunctions.relUrl({
+          relUrl({
             hugoConfig: hugoConfigDup,
             url: input
           })

@@ -1,7 +1,7 @@
 import { CustomHtmlComponent } from '../renderer';
 import { HugoConfig } from '../../schemas/config/hugo';
-import { HugoFunctions } from '../../hugoUtils/HugoFunctions';
 import { renderToString } from 'react-dom/server';
+import { i18n } from '../../hugoUtils';
 
 export const whatsnextDefinition = {
   render: 'Whatsnext',
@@ -30,8 +30,7 @@ export function WhatsnextTemplate(props: {
   contents: string;
 }) {
   const desc =
-    props.desc ||
-    HugoFunctions.i18n({ hugoConfig: props.hugoConfig, key: 'additional_sentence' });
+    props.desc || i18n({ hugoConfig: props.hugoConfig, key: 'additional_sentence' });
 
   return (
     <>
