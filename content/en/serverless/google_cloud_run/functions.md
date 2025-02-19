@@ -167,9 +167,9 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
      --region REGION
    ```
    - Replace `REGION` with the region where you want to deploy the function.
-   - Replace `FUNCTION_TARGET` with Function entry point. For example, `gcfv2.HelloworldApplication`.
-   - Replace `FUNCTION_NAME` with name of your cloud run function.
-   - Ensure that you set [--clear-base-image][5] to deploy your Cloud Function with the Dockerfile
+   - Replace `FUNCTION_TARGET` with your function entry point. For example, `gcfv2.HelloworldApplication`.
+   - Replace `FUNCTION_NAME` with the name of your Cloud Run function.
+   - Ensure that you set [--clear-base-image][5] to deploy your Cloud Function with the Dockerfile.
 
 4. When you set up your [containers](#containers), ensure that you use the same container image as what you deployed in the previous steps.
 
