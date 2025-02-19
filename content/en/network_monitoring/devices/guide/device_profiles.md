@@ -81,11 +81,11 @@ Use profile inheritance to adopt configurations such as metadata, metrics, and t
 
   {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
-**Note**: Changes to parent profiles will be propagated to the child profiles.
+**Note**: Changes to parent profiles are propagated to the child profiles.
 
 ### Select reference devices
 
-Use reference devices to select which devices you want to gather OIDs for your chosen device models. This field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#profile-details).
+Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#profile-details).
 
 **Note**: A single reference device is sufficient to perform a device scan, however, you have the option to add more devices or change the current selection.
 
@@ -93,31 +93,26 @@ Use reference devices to select which devices you want to gather OIDs for your c
 
 ### Scan reference devices
 
-Scan additional reference devices to discover their available metrics. This runs an SNMP walk with Remote Configuration. 
+Scan additional reference devices to discover their available metrics. This scan performs an SNMP walk on your devices with [Datadog Remote Configuration][14]. The **Scanned Devices** tab will show which devices were scanned with Remote Configuration or manually.
 
-Troubleshooting
-If device is unscanned 
-If remote config is not enabled (direct them to Fleet Automation) - add screenshot of error state  
-Direct them to enabled RC 
-Option to do manual scan 
+Why would a device not be scanned?
+If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
+ - Direct them to enabled RC 
+ - Option to do manual scan 
 
   {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
 
 ### Define metadata
 
-DD has sensible defaults for the majority of devices from our DD created OOTB profiles if they're using an inherited profile
-Even if they don't inherit from any profile, device name, device description will be defined
-Option to override 
-Metadata functionality
-Shown in the NDM page view (screenshot as example)
+Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices using inherited profiles will have predefined settings, including device name and description, even without inheritance. You have the option to override these defaults in the **Define Metadata** section. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets.
+
+  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metadata section." style="width:80%;">}}
 
 ### Define metrics
 
-Click add metrics, which will pull up modal 
-See list of all possible metrics for that device 
-See units, description on hover to make selection easy
-Add the metrics either from a device scan or manually creating a new metric to the profile
+To add additional metrics in to your devices, click **Add Metrics**. This opens a modal displaying all available metrics for the device. Hover over metrics to see units and descriptions for easier selection. Metrics can be added either from a device scan or by manually creating a new metric for the profile.
 
+ {{< img src="/network_device_monitoring/profile_onboarding/add_metrics.png" alt="The Network Device profile creation page showing the define metrics section." style="width:80%;">}}
 
 ### Global Tags
 
@@ -220,3 +215,5 @@ The advanced options for scalar and tabular metrics are the same:
 [11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
 [12]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#scale_factor
 [13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[14]: /agent/remote_config
+[15]: https://app.datadoghq.com/devices
