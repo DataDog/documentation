@@ -41,7 +41,7 @@ draft: falso
 git_integration_title: squid
 integration_id: squid
 integration_title: Squid
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: verdadero
 manifest_version: 2.0.0
 name: squid
@@ -168,8 +168,7 @@ La recopilación de logs se encuentra deshabilitada de manera predeterminada en 
 
 [1]: https://docs.datadoghq.com/es/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/es/agent/kubernetes/log/?tab=containerinstallation#setup
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
 ### Validación
 

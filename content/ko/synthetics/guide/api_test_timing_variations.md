@@ -114,7 +114,7 @@ DNS 확인 시간이 늘어날 경우 권한 있는 서버에서 대기 시간�
 ### 다운로드 시간
 응답 크기 변화로 인해 다운로드 시간 변형이 생길 수 있습니다. 테스트 결과와 `synthetics.http.response.size` 메트릭에서 다운로드한 본문 크기를 확인할 수 있습니다.
 
-네트워크 로드로 인한 변형이 발생할 경우 [네트워크 성능 모니터링][6]과 [신서틱 ICMP 테스트][7]를 사용해 잠재적인 병목 현상을 파악할 수 있습니다.
+네트워크 로드로 인한 변형이 발생할 경우 [클라우드 네트워크 모니터링][6]과 [신서틱 ICMP 테스트][7]를 사용해 잠재적인 병목 현상을 파악할 수 있습니다.
 
 서버 로드로 인해 변형이 발생할 경우 [Datadog Agent][8]와 [통합][9]을 사용해 잠재적인 시간 지연을 파악할 수 있습니다.
 
@@ -128,7 +128,7 @@ DNS 확인 시간이 늘어날 경우 권한 있는 서버에서 대기 시간�
 [3]: /ko/synthetics/private_locations/configuration#dns-configuration
 [4]: /ko/synthetics/api_tests/dns_tests#define-request
 [5]: /ko/synthetics/private_locations/?tab=docker#overview
-[6]: /ko/network_monitoring/performance/#overview
+[6]: /ko/network_monitoring/cloud_network_monitoring/#overview
 [7]: /ko/synthetics/api_tests/icmp_tests/#overview
 [8]: /ko/getting_started/agent/#overview
 [9]: /ko/integrations/

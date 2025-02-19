@@ -157,9 +157,9 @@ The workflow also creates a Slack message to notify your team of the Jira issue 
 [5]: https://app.datadoghq.com/workflow
 [6]: /workflows/build/#context-variables
 [7]: https://app.datadoghq.com/monitors/manage
-[8]: /service_management/workflows/actions_catalog/
+[8]: /actions/actions_catalog/
 [9]: /workflows/build
-[10]: /service_management/workflows/actions_catalog/generic_actions/#http
-[11]: /service_management/workflows/actions_catalog/generic_actions/#data-transformation
+[10]: /service_management/workflows/actions/#http
+[11]: /service_management/workflows/actions/#data-transformation
 
 

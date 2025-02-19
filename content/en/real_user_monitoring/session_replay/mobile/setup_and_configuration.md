@@ -133,8 +133,8 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 4. In case you need Material support on Android, call the `SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())` method, available in the Android source set.
 
 [1]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
-[2]: /real_user_monitoring/kotlin-multiplatform/
-[3]: /real_user_monitoring/kotlin-multiplatform/#add-native-dependencies-for-ios
+[2]: /real_user_monitoring/kotlin_multiplatform/
+[3]: /real_user_monitoring/kotlin_multiplatform/#add-native-dependencies-for-ios
 
 {{% /tab %}}
 

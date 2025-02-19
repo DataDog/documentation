@@ -30,6 +30,9 @@ environment:
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
+### Monitoring SNS-to-SQS pipelines
+To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][9].
+
 
 [1]: /agent
 [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
@@ -39,3 +42,4 @@ Data Streams Monitoring uses one [message attribute][2] to track a message's pat
 [6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
 [7]: https://www.nuget.org/packages/IBMMQDotnetClient
 [8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

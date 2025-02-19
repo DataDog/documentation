@@ -12,5 +12,5 @@
 {{.Inner}}
 </div>
 {{ else }}
-<div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | markdownify -}}</p></div>
+<div class="d-none site-region-container" data-region="{{ $region }}"><p>{{- .Inner | .Page.RenderString -}}</p></div>
 {{ end }}

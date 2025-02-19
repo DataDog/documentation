@@ -20,7 +20,7 @@ title: サーバーレスモニタリングガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure App Service と Container Apps" >}}
-    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Azure Sidecar を使用した Azure App Service 上の Linux コンテナのインスツルメンテーション{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_containers_serverless_init" >}}serverless-init を使って Azure App Service をインスツルメントする - Linux コンテナ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール
