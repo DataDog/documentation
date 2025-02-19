@@ -1,38 +1,42 @@
 ---
-title: IMDSv2 Enablement By Default
+title: IMDSv2 Enablement by Default
 aliases:
   - /ec2_imdsv2_transition_payload_enabled
 ---
 
-# Defaulting to v2 IMDS metadata collection
+# IMDSv2 Enablement by Default – What You Need to Know
 
-Agent v7.64.0 enables IMDSv2 by default for enhanced security and improved metadata handling. The host metadata payload contains a field, `legacy-resolution-hostname`, that captures the AWS instance hostname using legacy resolution logic (when IMDSv2 was disabled) and is only included when needed.
+With the release of Agent v7.64.0, Datadog now defaults to using IMDSv2 for enhanced security and consistency in retrieving AWS metadata. This update may result in a change to how hostnames appear in the Datadog UI. Thus your metrics and alerts continue to work as before.
 
-The hostname displayed in Datadog **can** change to show the instance ID as the hostname. Datadog continues to use the original hostname to tag the different metrics sent by the Agent.
+## What’s Changing?
 
-## Field inclusion criteria
+- **Improved Security:**
+  The Agent now uses IMDSv2 by default, which strengthens how metadata are accessed on AWS.
 
-The `legacy-resolution-hostname` field appears in the host metadata payload only when **both** of the following conditions are met:
+- **Hostname Display in the UI:**
+  You might notice that in some areas (such as Fleet Automation or the Infrastructure list) the hostname now appears as the AWS instance ID instead of the previous format.
+  **Note:** This change is only in display. Internally, the Agent still tags metrics with your original hostname, so your dashboards and alerts remain unaffected.
 
-- The configuration flag `ec2_imdsv2_transition_payload_enabled` is set to `true`.
-- The legacy hostname retrieved is different from the hostname retrieved with IMDSv2.
+## Who May See a Change?
 
-## Impact on hostname reporting
+- **Upgrading Customers:**
+  If you upgrade to Agent v7.64.0 without any custom configuration changes, you may see your host’s display name change to the instance ID.
 
-The addition of the `legacy-resolution-hostname` field **does not** alter the hostname that is used to tag the metrics sent by the Agent. If the Agent previously did not use the instance ID as the hostname, it continues to use the original hostname for metric tagging. This ensures continuity and avoids any disruption in monitoring or alerting setups.
+## What to Look Out For:
 
-The displayed hostname **can** switch to the instance ID in Fleet Automation and the Infrastructure List. However, you can still locate your host using the original hostname.
+- **Visual Changes:**
+  After the upgrade, if you struggle to find your host on Fleet Automation or on the Infrastructure list, try to look at their instance ID.
 
-## Example metadata payload
+- **No Impact on Metrics:**
+  Although the displayed hostname might change, the underlying metric tagging still uses your original hostname. This ensures that your monitoring, alerting, and dashboards continue to work **seamlessly**.
 
-The following is an example of a host metadata payload that includes the new `legacy-resolution-hostname` field:
+## Example Scenarios
 
-```json
-{
-  // ...
-  "instance_id": "i-0123456789abcdef0",
-  "hostname-resolution-version": 1,
-  "legacy-resolution-hostname": "ip-172-31-15-47",
-  // ...
-}
-```
+- **Scenario 1:**
+  *You upgrade to v7.64.0 without any custom flags.*
+  **Result:** The hostname in the Datadog UI may switch to the instance ID, but your metric tagging remains unchanged.
+
+- **Scenario 2:**
+  *You already had the `ec2_imdsv2_transition_payload_enabled` flag enabled.*
+  **Result:** Your host has been reporting using the new display format already, so you won’t notice any further change.
+
