@@ -2651,12 +2651,18 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 202
+    - name: Cloudcraft
+      url: datadog_cloudcraft/
+      pre: cloudcraft
+      identifier: datadog_cloudcraft
+      parent: infrastructure_heading
+      weight: 10000
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
       parent: infrastructure_heading
-      weight: 10000
+      weight: 20000
     - name: Setup
       url: universal_service_monitoring/setup/
       parent: usm_parent
@@ -2671,7 +2677,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 20000
+      weight: 30000
       pre: container
     - name: Docker and other runtimes
       url: containers/docker/
@@ -2873,7 +2879,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 30000
+      weight: 40000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3019,7 +3025,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
@@ -3160,7 +3166,7 @@ menu:
       identifier: cloud_cost
       pre: cloud-cost-management
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
     - name: AWS
       url: cloud_cost_management/aws
       parent: cloud_cost
