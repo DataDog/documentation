@@ -29,14 +29,3 @@ With the release of Agent v7.64.0, Datadog now defaults to using IMDSv2 for enha
 
 - **No Impact on Metrics:**
   Although the displayed hostname might change, the underlying metric tagging still uses your original hostname. This ensures that your monitoring, alerting, and dashboards continue to work **seamlessly**.
-
-## Example Scenarios
-
-- **Scenario 1:**
-  *You upgrade to v7.64.0 without any custom flags.*
-  **Result:** The hostname in the Datadog UI may switch to the instance ID, but your metric tagging remains unchanged.
-
-- **Scenario 2:**
-  *You already had the `ec2_imdsv2_transition_payload_enabled` flag enabled.*
-  **Result:** Your host has been reporting using the new display format already, so you won’t notice any further change.
-
