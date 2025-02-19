@@ -68,7 +68,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [postgres][10]         | {{< X >}} |           |                     |                     |                      |
 |                                          | [mysql][13]            |           | {{< X >}} |                     |                     |                      |
 |                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |                      |
-|                                          | [mongodb][33]          |           |           |                     |                     | {{< X >}}            |
+|                                          | [mongodb][33]          |           |           |                     |                     | {{< X >}} ****       |
 
 \* [CommandType.StoredProcedure][25] not supported
 
@@ -85,6 +85,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 \*\*\* Full mode Oracle for Java:
   - The instrumentation overwrites `V$SESSION.ACTION`.
   - Prerequisite: Java tracer 1.45 or greater
+
+\*\*\*\* Service/Full mode MongoDB for Node.js:
+  - Prerequisite:
+    - Node.js tracer 5.37.0 or greater
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
