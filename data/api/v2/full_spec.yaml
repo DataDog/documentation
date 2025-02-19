@@ -1557,6 +1557,7 @@ components:
           type: array
       required:
       - exclude_only
+      type: object
     AWSNamespaceFiltersIncludeOnly:
       description: Include only these namespaces.
       properties:
@@ -1570,6 +1571,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     AWSNamespaceTagFilter:
       description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
 
@@ -1703,6 +1705,7 @@ components:
           type: boolean
       required:
       - include_all
+      type: object
     AWSRegionsIncludeOnly:
       description: Include only these regions.
       properties:
@@ -1716,6 +1719,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     AWSResourcesConfig:
       description: AWS Resources Collection config.
       properties:
@@ -10808,6 +10812,7 @@ components:
         definition:
           description: The API definition.
           type: object
+      type: object
     EntityV3APISpecInterfaceFileRef:
       additionalProperties: false
       description: The definition of `EntityV3APISpecInterfaceFileRef` object.
@@ -10815,6 +10820,7 @@ components:
         fileRef:
           description: The reference to the API definition file.
           type: string
+      type: object
     EntityV3APIVersion:
       description: The schema version of entity type. The field is known as schema-version
         in the previous version.
@@ -11082,6 +11088,7 @@ components:
           type: string
       required:
       - name
+      type: object
     EntityV3MetadataContactsItems:
       additionalProperties: false
       description: The definition of Entity V3 Metadata Contacts Items object.
@@ -20627,6 +20634,7 @@ components:
           $ref: '#/components/schemas/OktaAccountUpdateRequestAttributes'
         type:
           $ref: '#/components/schemas/OktaAccountType'
+      type: object
     OktaAccountsResponse:
       description: The expected response schema when getting Okta accounts.
       properties:
@@ -26595,6 +26603,7 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+      type: object
     SecurityMonitoringSignalRuleResponseQuery:
       description: Query for matching rule on signals.
       properties:
@@ -27131,6 +27140,7 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+      type: object
     SecurityMonitoringStandardRuleTestPayload:
       description: The payload of a rule to test
       properties:
@@ -32946,6 +32956,7 @@ components:
           type: boolean
       required:
       - include_all
+      type: object
     XRayServicesIncludeOnly:
       description: Include only these services. Defaults to `[]`.
       nullable: true
@@ -32960,6 +32971,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     XRayServicesList:
       description: AWS X-Ray services to collect traces from. Defaults to `include_only`.
       oneOf:
