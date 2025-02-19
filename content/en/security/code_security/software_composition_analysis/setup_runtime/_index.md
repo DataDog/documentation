@@ -25,7 +25,7 @@ Before setting up runtime deteciton, ensure the following prerequisites are met:
    5. Select **Enable for Selected Services**.
 
 ### Settings page for in-app service enablement
-### Datadog tracing library configuration 
+
 Alternatively, you can enable Software Composition Analysis through the [Settings][3] page.
 
 1. Navigate to the [Settings][3] page and select **Get Started** in **Software Composition Analysis (SCA)**.

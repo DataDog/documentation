@@ -114,7 +114,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
+3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Software Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:
@@ -141,8 +141,8 @@ For information on disabling Software Composition Analysis, see [Disabling Softw
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
-[7]: /tracing/service_catalog/#security-view
-[8]: /tracing/service_catalog/#investigate-a-service
+[7]: /tracing/software_catalog/#security-view
+[8]: /tracing/software_catalog/#investigate-a-service
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/

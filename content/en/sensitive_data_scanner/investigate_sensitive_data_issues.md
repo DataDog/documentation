@@ -39,7 +39,7 @@ Click **View All Events** to see in Events Explorer all events matching the quer
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/issues_panel_02_01_2024.png" alt="The issues panel showing a critical visa card scanner issue" style="width:50%;">}}
 4. In the **Blast Radius** section:  
     a. View the Top 10 services, hosts, and environments impacted by this sensitive data issue.  
-    b. Click on a service to see more information about the service in the **Service Catalog**.  
+    b. Click on a service to see more information about the service in the **Software Catalog**.  
     c. Click on a host to see more information about the host in the Infrastructure List page.
 {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/blast_radius_02_01_2024.png" alt="The issues panel showing the top 10 impacted services" style="width:50%;">}}
 If you want to modify the Scanning Rule that was used to detect the sensitive data issue, click **Modify Rule** at the top of the panel.

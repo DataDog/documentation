@@ -58,7 +58,7 @@ Para ejecutar el OpenTelemetry Collector como una imagen de Docker y recibir tra
 
 [1]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
 {{% /tab %}}
-{{% tab "Otros contenedores" %}}
+{{% tab "Other containers" %}}
 
 Para ejecutar el OpenTelemetry Collector como una imagen de Docker y recibir trazas de otros contenedores:
 
