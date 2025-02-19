@@ -106,19 +106,23 @@ If remote config is not enabled (direct them to Fleet Automation) - need screens
 
 Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices using inherited profiles will have predefined settings, including device name and description, even without inheritance. You have the option to override these defaults in the **Define Metadata** section. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets.
 
-  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metadata section." style="width:80%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metadata section." style="width:100%;">}}
 
 ### Define metrics
 
 To add additional metrics in to your devices, click **Add Metrics**. This opens a modal displaying all available metrics for the device. Hover over metrics to see units and descriptions for easier selection. Metrics can be added either from a device scan or by manually creating a new metric for the profile.
 
- {{< img src="/network_device_monitoring/profile_onboarding/add_metrics.png" alt="The Network Device profile creation page showing the define metrics section." style="width:80%;">}}
+ {{< img src="/network_device_monitoring/profile_onboarding/add_metrics.png" alt="The Network Device profile creation page showing the define metrics section." style="width:100%;">}}
 
 ### Global Tags
 
-Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric.
+Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric. The `Inherited` tag displays next to any global tags that are inherited from this profile.
 
-{{< img src="/network_device_monitoring/profile_onboarding/Add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags dropdown" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags section" style="width:100%;">}}
+
+### Save and sync Agents
+
+After applying your configuration options to your device profile, click **Save and Sync Agents** to apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
 
 #### Advanced Options
 
@@ -185,7 +189,6 @@ The advanced options for scalar and tabular metrics are the same:
 2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
 3. Restart the Datadog Agent.
 4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
-
 
 {{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
