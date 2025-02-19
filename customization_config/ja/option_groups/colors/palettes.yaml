@@ -1,0 +1,17 @@
+traffic_light_color_options:
+  - label: Red (ja)
+    id: red
+  - label: Yellow (ja)
+    id: yellow
+  - label: Green (ja)
+    id: green
+    default: true
+
+primary_color_options:
+  - label: Red (ja)
+    id: red
+  - label: Yellow (ja)
+    id: yellow
+  - label: Blue (ja)
+    id: blue
+    default: true
