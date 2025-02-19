@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "description": "A precompiler that converts customizable Markdoc content into static Hugo content",
     "scripts": {
-        "provide-compiled-scripts-to-vitest": "cp -r ./dist/compiledScripts ./src",
-        "posttest": "rimraf ./src/compiledScripts",
+        "provide-compiled-scripts-to-vitest": "cp -r ./dist/bundledScripts ./src",
+        "posttest": "rimraf ./src/bundledScripts",
         "test": "yarn build; yarn provide-compiled-scripts-to-vitest; vitest run --coverage --reporter=verbose; yarn posttest",
         "test:watch": "yarn build; vitest",
         "build-markdoc-integration": "rimraf ./dist && npx tsc; yarn copy-styles",
-        "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/compiledScripts/clientFiltersManager.min.js'",
-        "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/compiledScripts/clientFiltersManager.js'",
+        "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/bundledScripts/clientFiltersManager.min.js'",
+        "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/bundledScripts/clientFiltersManager.js'",
         "build": "yarn build-markdoc-integration && yarn build-dev-renderer && yarn build-prod-renderer && yarn copy-styles",
         "copy-styles": "cp ./src/siteAssetBuilding/styles.css ./dist/siteAssetBuilding"
     },

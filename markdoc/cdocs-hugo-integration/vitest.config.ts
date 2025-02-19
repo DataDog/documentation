@@ -10,7 +10,7 @@ export default defineConfig({
         '**/ClientFiltersManager.ts',
         '**/reresolver.ts',
         '**/debugBookmarklet.js',
-        '**/compiledScripts/**',
+        '**/bundledScripts/**',
         '**/scripts/**',
         '**/test/**'
       ]

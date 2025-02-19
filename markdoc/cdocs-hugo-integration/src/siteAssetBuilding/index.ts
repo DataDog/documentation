@@ -6,7 +6,7 @@ import { HugoGlobalConfig } from '../schemas/config/hugo';
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'styles.css'), 'utf8');
 
 const clientFiltersManagerScriptStr = fs.readFileSync(
-  path.resolve(__dirname, '../compiledScripts/clientFiltersManager.min.js'),
+  path.resolve(__dirname, '../bundledScripts/clientFiltersManager.min.js'),
   'utf8'
 );
 

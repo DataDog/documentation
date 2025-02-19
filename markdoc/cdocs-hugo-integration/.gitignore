@@ -6,7 +6,7 @@ vitest.config.js
 
 # Dist files that are temporarily copied to src so Vitest can access them,
 # these are usually cleaned up by the test process
-src/compiledScripts
+src/bundledScripts
 
 .yarn/*
 !.yarn/releases
