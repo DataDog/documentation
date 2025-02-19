@@ -11,9 +11,9 @@ title: テストバッチを検索する
 
 ## 概要
 
-After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Testing Results Explorer][1] の **CI Batches** イベントタイプをクリックすると、CI ジョブのバッチを検索することができます。
 
-{{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="Synthetic Monitoring & Testing Results Explorer での CI バッチ" style="width:100%;" >}}
 
 ファセットを使用すると、以下のアクションを実行できます。
 

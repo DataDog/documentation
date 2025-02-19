@@ -27,7 +27,7 @@ title: Investigator
 - ユーザーがリソースに対して行うすべてのアクションは何か？
 - どのようなユーザーがこのリソースと交流しているのか？
 
-For example, suppose you receive a security signal that someone changed the configuration of an Amazon S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
+例えば、誰かが Amazon S3 バケットの構成を変更し、誰でもアクセスできるようにしたが、そのアクションは引き受けられたロール (assumed role) によって行われたというセキュリティシグナルを受け取ったとします。調査するには、誰がアクションを起こしたか、そして彼らが最近行った他のアクティビティを調べます。それは侵害された資格情報を示す可能性があるからです。
 
 Cloud SIEM Investigator は、影響を受けるエンティティから別のエンティティにピボットするためのグラフィカルインターフェイスを提供し、ユーザーの行動とそれが環境に与える影響を確認することができます。
 

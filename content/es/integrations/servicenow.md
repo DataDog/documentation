@@ -4,9 +4,10 @@ categories:
 - incidents
 - issue tracking
 - notifications
-custom_kind: integration
+custom_kind: integración
 dependencies: []
-description: Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques.
+description: Haz que tus alertas de Datadog generen y actualicen automáticamente los
+  tiques.
 doc_link: https://docs.datadoghq.com/integrations/servicenow/
 draft: false
 further_reading:
@@ -18,16 +19,17 @@ further_reading:
   text: Gestiona tu infraestructura con ServiceNow CMDB y Datadog
 git_integration_title: servicenow
 has_logo: true
-integration_id: 
+integration_id: ''
 integration_title: ServiceNow
-integration_version: 
+integration_version: ''
 is_public: true
-manifest_version: 1.0
+manifest_version: '1.0'
 name: servicenow
 public_title: Integración de Datadog y ServiceNow
-short_description: Haz que tus alertas de Datadog generen y actualicen automáticamente los tiques.
+short_description: Haz que tus alertas de Datadog generen y actualicen automáticamente
+  los tiques.
 team: integraciones web
-version: 1.0
+version: '1.0'
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
@@ -403,6 +405,159 @@ Si ves actualizaciones de la Gestión de casos de Datadog en ServiceNow, pero no
 
 ### Campos de tabla del ITXM de monitores predefinidos y mapas de transformación
 
+`action`
+: **Tipo**: string<br>
+La acción que se está llevando a cabo en el monitor: `create`, `update`, `acknowledge` o `resolve`
+
+`additional_information`
+: **Tipo**: string<br>
+**Transformación ITOM**: `additional_info`<br>
+Cadena formateada que contiene todos los detalles de evento 
+
+`aggreg_key`
+: **Tipo**: string<br>
+Clave de agregación que representa un hash del ID del monitor de alerta
+
+`alert_cycle_key`
+: **Tipo**: string<br>
+Clave que representa un hash de un ciclo de alerta de monitor único (rastrea Alerta → Advertencia → Resolución).
+
+`alert_id`
+: **Tipo**: string<br>
+ID de monitor de alerta
+
+`alert_metric`
+: **Tipo**: string<br>
+**Transformación ITOM**: `metric_name`<br>
+Métrica que activó la alerta
+
+`alert_query`
+: **Tipo**: string<br>
+Consulta que activó la alerta
+
+`alert_scope`
+: **Tipo**: string<br>
+Contexto que activó la alerta
+
+`alert_status`
+: **Tipo**: string<br>
+Estado actual de la alerta
+
+`alert_title`
+: **Tipo**: string<br>
+Nombre de la alerta
+
+`alert_transition`
+: **Tipo**: string<br>
+**Transformación ITSM**: (script) -> estado<br>
+Estado de transición de la alerta: `Triggered`, `Warn` o `Recovered`
+
+`assignment_group_sys_id`
+: **Tipo**: reference<br>
+**Transformación ITSM**: `assignment_group`<br>
+**Tabla de referencia**: grupo<br>
+ServiceNow sys_id para el grupo de asignación del identificador predefinido
+
+`business_service_sys_id`
+: **Tipo**: reference<br>
+**Transformación ITSM**: `business_service`<br>
+**Tabla de referencia**: servicio<br>
+ServiceNow sys_id para el servicio empresarial del identificador predefinido
+
+`custom_fields`
+: **Tipo**: string<br>
+Campos clave-valor configurados por el usuario formateados como cadena convertible a JSON
+
+`datadog_tags`
+: **Tipo**: string<br>
+Etiquetas (tags) de Datadog en el monitor de alerta
+
+`description`
+: **Tipo**: string<br>
+**Transformación ITSM**: `description`<br>
+**Transformación ITOM**: `description`<br>
+Descripción resumida del monitor de alerta
+
+`event_details`
+: **Tipo**: string<br>
+**Transformación ITSM**: `work_notes`<br>
+Detalles del evento con enlaces formateados y clicables a Datadog
+
+`event_id`
+: **Tipo**: string<br>
+ID de Datadog del evento
+
+`event_link`
+: **Tipo**: string<br>
+Enlace al evento creado a partir de la alerta del monitor 
+
+`event_msg`
+: **Tipo**: string<br>
+Mensaje del evento
+
+`event_title`
+: **Tipo**: string<br>
+**Transformación ITSM**: `short_description`<br>
+Título del evento
+
+`event_type`
+: **Tipo**: string<br>
+**Transformación ITOM**: `type`<br>
+Tipo de evento
+
+`hostname`
+: **Tipo**: string<br>
+**Transformación ITSM**: `cmdb_ci`<br>
+**Transformación ITOM**: `node`<br>
+Host del monitor afectado
+
+`impact`
+: **Tipo Entero<br>
+**Transformación ITSM**: `impact`<br>
+Valor de impacto basado en la asignación definida por el usuario de la prioridad del monitor 
+
+`logs_sample`
+: **Tipo**: string<br>
+Muestra de los logs relevantes
+
+`monitor_priority`
+: **Tipo**: integer<br>
+**Transformación ITOM**: `severity`<br>
+Prioridad del monitor de alerta como un entero
+
+`org_name`
+: **Tipo**: string<br>
+Nombre de la organización del monitor de alerta
+
+`sys_created_by`
+: **Tipo**: string<br>
+**Transformación ITSM**: `caller_id`<br>
+Creador del registro (normalmente la cuenta de API de ServiceNow configurada).
+
+`ticket_state`
+: **Tipo**: string<br>
+**Transformación ITSM**: (script) -> state, (script) -> close_code, (script) -> resolution_notes<br>
+**ITOM Transform**: (script) -> resolution_notas<br>
+Estado del registro de ServiceNow: `new` o `resolved`
+
+`u_correlation_id`
+: **Tipo**: string<br>
+**Transformación ITSM**: `correlation_id`<br>
+**Transformación ITOM**: `message_key`<br>
+Combinación de alert_cycle_key y aggreg_key utilizada para agrupar los registros en la misma incidencia de destino
+
+`urgency`
+: **Tipo**: integer<br>
+**Transformación ITSM**: `urgency`<br>
+Urgencia establecida a partir de la asignación definida por el usuario en el cuadro de integración basado en la prioridad definida del monitor 
+
+`user_sys_id`
+: **Tipo**: reference<br>
+**Transformación ITSM**: `assigned_to`<br>
+**Tabla de referencia**: usuario <br>
+sys_id del identificador predefinido pasado por el usuario.
+
+
 ### Regla de descarga automática de importación de host de Datadog
 
 Para evitar que la tabla de conjuntos de importación `x_datad_datadog_import_host` acumule demasiadas filas, se ha añadido una regla de descarga automática a la herramienta Table Cleaner para conservar sólo las últimas 24 horas de datos. Esta configuración puede modificarse según sea necesario accediendo a `sys_auto_flush_list.do` en el navegador de filtros y entrando en la regla de la tabla `x_datad_datadog_import_host`. El campo `Age in seconds` puede actualizarse en consecuencia.
@@ -494,24 +649,22 @@ Para validar que la integración está configurada correctamente, añade `@servi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://www.servicenow.com/community/now-platform-articles/servicenow-versions-release/ta-p/2312014
 [2]: https://app.datadoghq.com/integrations/servicenow
 [3]: https://store.servicenow.com/sn_appstore_store.do#!/store/application/c877cb86687e0050f8774bfad236c950/1.2.1
 [4]: https://store.servicenow.com/
 [5]: https://docs.servicenow.com/bundle/xanadu-servicenow-platform/page/product/configuration-management/concept/cmdb-query-builder-landing-page.html
 [6]: https://app.datadoghq.com/event/explorer
-[7]: https://docs.datadoghq.com/tracing/service_catalog/
-[8]: https://docs.datadoghq.com/tracing/service_catalog/adding_metadata/
-[9]: https://docs.datadoghq.com/network_monitoring/devices/
-[10]: https://docs.datadoghq.com/network_monitoring/devices/snmp_metrics/
+[7]: https://docs.datadoghq.com/es/tracing/service_catalog/
+[8]: https://docs.datadoghq.com/es/tracing/service_catalog/adding_metadata/
+[9]: https://docs.datadoghq.com/es/network_monitoring/devices/
+[10]: https://docs.datadoghq.com/es/network_monitoring/devices/snmp_metrics/
 [11]: https://app.datadoghq.com/reference-tables
 [12]: https://docs.servicenow.com/bundle/rome-servicenow-platform/page/product/configuration-management/task/use-cmdb-query-builder.html
 [13]: https://app.datadoghq.com/event/pipelines
 [14]: https://docs.datadoghq.com/resources/xml/Datadog-Snow_Update_Set_v2.6.1.xml
 [15]: https://app.datadoghq.com/cases
-[16]: https://docs.datadoghq.com/service_management/case_management/settings#servicenow
+[16]: https://docs.datadoghq.com/es/service_management/case_management/settings#servicenow
 [17]: https://app.datadoghq.com/incidents/settings#Integrations
-[18]: https://docs.datadoghq.com/help/
+[18]: https://docs.datadoghq.com/es/help/
 [19]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
-

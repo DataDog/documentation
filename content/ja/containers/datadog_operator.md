@@ -12,6 +12,9 @@ further_reading:
 - link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
   tag: ソースコード
   text: 'Datadog Operator: 構成'
+- link: https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/
+  tag: Architecture Center
+  text: Datadog Operator と Admission Controller を使用してアプリケーションをインスツルメントする
 title: Datadog Operator
 ---
 
