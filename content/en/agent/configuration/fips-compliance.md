@@ -17,7 +17,7 @@ algolia:
 ---
 
 {{< callout url="" btn_hidden="true" header="Try the FIPS Agent Preview!">}}
-A FIPS flavor of the Datadog Agent is in preview. For more information, see <a href="/agent/guide/fips-agent">FIPS Agent</a>.
+A FIPS flavor of the Datadog Agent is in Preview. For more information, see <a href="/agent/guide/fips-agent">FIPS Agent</a>.
 {{< /callout >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}

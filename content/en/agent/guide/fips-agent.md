@@ -19,7 +19,7 @@ The FIPS Agent is in Preview.
 
 The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal Information Processing Standards (FIPS) compliance. The FIPS Agent replaces the [FIPS proxy][2] and includes limited support for integrations that need to collect observability data that is external to the host.
 
-**The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads. For production workloads, see [Datadog FIPS Compliance][2].**
+**The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads. For production workloads, see [Datadog FIPS Compliance][2].**
 
 ## Requirements
 
@@ -42,7 +42,7 @@ In addition to the Operating System (OS) requirements above:
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
+The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
 
 1. Remove any `fips-proxy` installations on the host by uninstalling the `datadog-fips-proxy` package with your OS package manager. For example:
 
