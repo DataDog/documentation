@@ -9,7 +9,7 @@ import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { parseMdocFile } from './fileParsing';
 import { renderFile } from './fileRendering';
-import { getStylesStr, getClientFiltersManagerScriptStr } from './assetBuilding';
+import { getStylesStr, getClientFiltersManagerScriptStr } from './siteAssetBuilding';
 import {
   CompilationError,
   ParsedFile,

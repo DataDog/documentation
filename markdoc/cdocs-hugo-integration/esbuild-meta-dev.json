@@ -57,7 +57,7 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/browser/ClientFiltersManager.js": {
+    "dist/siteAssetBuilding/ClientFiltersManager.js": {
       "bytes": 17923,
       "imports": [
         {
@@ -98,11 +98,11 @@
       ],
       "format": "cjs"
     },
-    "dist/browser/entryPoint.js": {
+    "dist/siteAssetBuilding/browserEntryPoint.js": {
       "bytes": 510,
       "imports": [
         {
-          "path": "dist/browser/ClientFiltersManager.js",
+          "path": "dist/siteAssetBuilding/ClientFiltersManager.js",
           "kind": "require-call",
           "original": "./ClientFiltersManager"
         }
@@ -114,7 +114,7 @@
     "dist/compiledScripts/clientFiltersManager.js": {
       "imports": [],
       "exports": [],
-      "entryPoint": "dist/browser/entryPoint.js",
+      "entryPoint": "dist/siteAssetBuilding/browserEntryPoint.js",
       "inputs": {
         "dist/fileRendering/customizationMenu.js": {
           "bytesInOutput": 3931
@@ -143,14 +143,14 @@
         "dist/fileRendering/pageConfigMinification.js": {
           "bytesInOutput": 3099
         },
-        "dist/browser/ClientFiltersManager.js": {
-          "bytesInOutput": 16662
+        "dist/siteAssetBuilding/ClientFiltersManager.js": {
+          "bytesInOutput": 16672
         },
-        "dist/browser/entryPoint.js": {
-          "bytesInOutput": 322
+        "dist/siteAssetBuilding/browserEntryPoint.js": {
+          "bytesInOutput": 346
         }
       },
-      "bytes": 543796
+      "bytes": 543864
     }
   }
 }
