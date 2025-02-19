@@ -4,7 +4,7 @@ aliases:
   - /ec2_imdsv2_transition_payload_enabled
 ---
 
-# IMDSv2 Default Behavior and Host Metadata Enhancement
+# Defaulting to v2 IMDS metadata collection
 
 Agent v7.64.0 enables IMDSv2 by default for enhanced security and improved metadata handling. The host metadata payload contains a field, `legacy-resolution-hostname`, that captures the AWS instance hostname using legacy resolution logic (when IMDSv2 was disabled) and is only included when needed.
 
