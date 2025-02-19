@@ -1989,8 +1989,7 @@ menu:
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305
-    - name: Production Readiness
+      weight: 305- name: Production Readiness
       url: software_catalog/use_cases/production_readiness
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_production_readiness
@@ -6447,6 +6446,11 @@ menu:
       url: /security/code_security/guides/
       parent: code_security
       weight: 7
+    - name: Security Controls
+      identifier: sec_code_security_controls
+      url: /security/code_security/security_controls/
+      parent: code_security
+      weight: 8
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
