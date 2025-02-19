@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Limited Availability!"  >}}
 Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click Request Access.
 {{< /callout >}}
 
