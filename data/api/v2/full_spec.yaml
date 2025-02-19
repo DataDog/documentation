@@ -1557,6 +1557,7 @@ components:
           type: array
       required:
       - exclude_only
+      type: object
     AWSNamespaceFiltersIncludeOnly:
       description: Include only these namespaces.
       properties:
@@ -1570,6 +1571,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     AWSNamespaceTagFilter:
       description: 'AWS Metrics Collection tag filters list. Defaults to `[]`.
 
@@ -1703,6 +1705,7 @@ components:
           type: boolean
       required:
       - include_all
+      type: object
     AWSRegionsIncludeOnly:
       description: Include only these regions.
       properties:
@@ -1716,6 +1719,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     AWSResourcesConfig:
       description: AWS Resources Collection config.
       properties:
@@ -10808,6 +10812,7 @@ components:
         definition:
           description: The API definition.
           type: object
+      type: object
     EntityV3APISpecInterfaceFileRef:
       additionalProperties: false
       description: The definition of `EntityV3APISpecInterfaceFileRef` object.
@@ -10815,6 +10820,7 @@ components:
         fileRef:
           description: The reference to the API definition file.
           type: string
+      type: object
     EntityV3APIVersion:
       description: The schema version of entity type. The field is known as schema-version
         in the previous version.
@@ -11082,6 +11088,7 @@ components:
           type: string
       required:
       - name
+      type: object
     EntityV3MetadataContactsItems:
       additionalProperties: false
       description: The definition of Entity V3 Metadata Contacts Items object.
@@ -18514,6 +18521,29 @@ components:
 
             Defaults to false.'
           type: boolean
+        include_actively_queried_tags_window:
+          description: 'When provided, all tags that have been actively queried are
+
+            configured (and, therefore, remain queryable) for each metric that
+
+            matches the given prefix.  Minimum value is 1 second, and maximum
+
+            value is 7,776,000 seconds (90 days).'
+          format: double
+          maximum: 7776000
+          minimum: 1
+          type: number
+        override_existing_configurations:
+          description: 'When set to true, the configuration overrides any existing
+
+            configurations for the given metric with the new set of tags in this
+
+            configuration request. If false, old configurations are kept and
+
+            are merged with the set of tags in this configuration request.
+
+            Defaults to true.'
+          type: boolean
         tags:
           $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
       type: object
@@ -20604,6 +20634,7 @@ components:
           $ref: '#/components/schemas/OktaAccountUpdateRequestAttributes'
         type:
           $ref: '#/components/schemas/OktaAccountType'
+      type: object
     OktaAccountsResponse:
       description: The expected response schema when getting Okta accounts.
       properties:
@@ -26572,6 +26603,7 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+      type: object
     SecurityMonitoringSignalRuleResponseQuery:
       description: Query for matching rule on signals.
       properties:
@@ -27108,6 +27140,7 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+      type: object
     SecurityMonitoringStandardRuleTestPayload:
       description: The payload of a rule to test
       properties:
@@ -32923,6 +32956,7 @@ components:
           type: boolean
       required:
       - include_all
+      type: object
     XRayServicesIncludeOnly:
       description: Include only these services. Defaults to `[]`.
       nullable: true
@@ -32937,6 +32971,7 @@ components:
           type: array
       required:
       - include_only
+      type: object
     XRayServicesList:
       description: AWS X-Ray services to collect traces from. Defaults to `include_only`.
       oneOf:
@@ -33505,6 +33540,7 @@ paths:
       patch: true
   /api/v2/apicatalog/api:
     get:
+      deprecated: true
       description: List APIs and their IDs.
       operationId: ListAPIs
       parameters:
@@ -33569,11 +33605,10 @@ paths:
         - apm_api_catalog_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/api/{id}:
     delete:
+      deprecated: true
       description: Delete a specific API by ID.
       operationId: DeleteOpenAPI
       parameters:
@@ -33621,11 +33656,10 @@ paths:
         - apm_api_catalog_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/api/{id}/openapi:
     get:
+      deprecated: true
       description: Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html)
         format file.
       operationId: GetOpenAPI
@@ -33679,10 +33713,9 @@ paths:
         - apm_api_catalog_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     put:
+      deprecated: true
       description: 'Update information about a specific API. The given content will
         replace all API content of the given ID.
 
@@ -33746,11 +33779,10 @@ paths:
         - apm_api_catalog_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/openapi:
     post:
+      deprecated: true
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
@@ -33815,9 +33847,7 @@ paths:
         - name: id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apm/config/metrics:
     get:
       description: Get the list of configured span-based metrics with their definitions.
