@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { MdocFileParser } from '../../src/MdocFileParser';
+import { parseMdocFile } from '../../src/fileParsing';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
@@ -17,7 +17,7 @@ describe('treeManagement', () => {
   });
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
-  const parsedFile = MdocFileParser.parseMdocFile({
+  const parsedFile = parseMdocFile({
     file: testFilePath,
     partialsDir: VALID_PARTIALS_DIR
   });

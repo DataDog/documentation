@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { MdocFileParser } from '../../../src/MdocFileParser';
+import { parseMdocFile } from '../../../src/fileParsing';
 import { PageBuilder } from '../../../src/fileRendering/PageBuilder';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 import {
@@ -22,7 +22,7 @@ describe('PageBuilder.build', () => {
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
 
-  const parsedFile = MdocFileParser.parseMdocFile({
+  const parsedFile = parseMdocFile({
     file: testFilePath,
     partialsDir: VALID_PARTIALS_DIR
   });

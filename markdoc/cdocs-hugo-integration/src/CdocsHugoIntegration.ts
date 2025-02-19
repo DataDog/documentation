@@ -7,7 +7,7 @@ import {
 } from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
-import { MdocFileParser } from './MdocFileParser';
+import { parseMdocFile } from './fileParsing';
 import { PageBuilder } from './fileRendering/PageBuilder';
 import {
   CompilationError,
@@ -80,7 +80,7 @@ export class CdocsHugoIntegration {
    * of data structures, such as the AST and the frontmatter.
    */
   #parseMdocFile(markdocFilepath: string): ParsedFile | null {
-    const parsedFile = MdocFileParser.parseMdocFile({
+    const parsedFile = parseMdocFile({
       file: markdocFilepath,
       partialsDir: this.hugoGlobalConfig.dirs.partials
     });
