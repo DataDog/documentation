@@ -1,8 +1,6 @@
 import { ParsedFile } from '../schemas/compilationResults';
 import { RenderableTreeNode } from 'cdocs-markdoc';
 import prettier from 'prettier';
-import fs from 'fs';
-import path from 'path';
 import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from './treeManagement';
 import { customComponents } from '../markdocCustomization/parserConfig';
@@ -14,6 +12,7 @@ import { render } from '../markdocCustomization/renderer';
 import { FurtherReadingTemplate } from '../markdocCustomization/tags/furtherReading';
 import { CompilationError } from '../schemas/compilationResults';
 import { Frontmatter } from '../schemas/frontmatter';
+import { removeLineBreaks } from '../utils';
 
 /**
  * Build the .md output (HTML with frontmatter on top)
@@ -79,13 +78,6 @@ export function renderFile(p: {
   });
 
   return { html: pageHtml, errors };
-}
-
-/**
- * Remove the line breaks from a string.
- */
-function removeLineBreaks(str: string): string {
-  return str.replace(/(\r\n|\n|\r)/gm, '');
 }
 
 /**

@@ -1,11 +1,11 @@
 import { CdocsHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, INVALID_SITE_DIR } from '../config/constants';
-import { FileSearcher } from '../../src/FileSearcher';
+import { findInDir } from '../../src/utils';
 
 const siteDir = INVALID_SITE_DIR;
 const contentDir = siteDir + '/content';
-const markupFiles = FileSearcher.findInDir(contentDir, /\.mdoc.md$/);
+const markupFiles = findInDir(contentDir, /\.mdoc.md$/);
 
 describe('CdocsHugoIntegration', async () => {
   const integration = new CdocsHugoIntegration({

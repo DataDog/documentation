@@ -15,7 +15,7 @@ import {
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
-import { FileSearcher } from './FileSearcher';
+import { findInDir } from './utils';
 import { HugoGlobalConfigBuilder } from './hugoUtils/HugoGlobalConfigBuilder';
 
 /**
@@ -122,10 +122,7 @@ export class CdocsHugoIntegration {
     this.#resetErrors();
     this.compiledFilePaths = [];
 
-    const markdocFilepaths = FileSearcher.findInDir(
-      this.hugoGlobalConfig.dirs.content,
-      /\.mdoc.md$/
-    );
+    const markdocFilepaths = findInDir(this.hugoGlobalConfig.dirs.content, /\.mdoc.md$/);
 
     for (const markdocFilepath of markdocFilepaths) {
       const parsedFile = this.#parseMdocFile(markdocFilepath);

@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { removeLineBreaks } from '../utils';
 
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'styles.css'), 'utf8');
 
@@ -22,11 +23,4 @@ export function getStylesStr() {
  */
 export function getClientFiltersManagerScriptStr() {
   return clientFiltersManagerScriptStr;
-}
-
-/**
- * Remove the line breaks from a string.
- */
-function removeLineBreaks(str: string): string {
-  return str.replace(/(\r\n|\n|\r)/gm, '');
 }
