@@ -23,26 +23,68 @@ The definition of **Security Controls** shall be placed in the configuration var
 To configure a list of security controls, follow the format and field specifications below.
 This format uses specific separators to structure each security control entry.
 
-## Field Specifications
-- **Security Control Type** → Defines the type of control.
-  - **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.
-- **Secure Marks** → List of vulnerability types to apply.
-  - Possible values are defined in **vulnerability_schema**.
-  - Optionally, use `*` to indicate applicability to all types.
-- **Class/File** → Fully qualified class or file implementing the security control.
-- **Method** → Name of the method implementing the security control.
-- **Parameters (Optional)** → Fully qualified class parameters.
-  - Used to **distinguish between overloaded methods**.
-  - If omitted and overloading exists, the security control will apply to **all overloaded methods**.
-- **Parameters to Validate (Optional)** → Zero-based list of parameter positions to validate.
-  - The first parameter is position **0**.
-  - This field applies **only** to `INPUT_VALIDATOR` types.
-  - Used when **not all parameters require validation**.
+### Format
 
-## Separators
+`<TYPE>:<SECURE_MARKS>:<CLASS/FILE>:<METHOD>:<PARAMETERS (Optional)>:<PARAMETERS TO VALIDATE (Optional)>`
+
+### Field Specifications
+| **Field**                   | **Description**                                                                                                                                                                                         |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Type**                    | Defines the type of control. **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.                                                                                                                     |
+| **Secure Marks**            | List of vulnerability types to apply. Possible values are defined in [Secure marks](#secure-marks). Optionally, use `*` to indicate applicability to all types.                                         |
+| **Class/File**              | Fully qualified class or file implementing the security control.                                                                                                                                        |
+| **Method**                  | Name of the method implementing the security control.                                                                                                                                                   |
+| **Parameters (Optional)**   | Fully qualified class parameters. Used to **distinguish between overloaded methods**. If omitted and overloading exists, the security control will apply to **all overloaded methods**.                 |
+| **Parameters to Validate (Optional)** | Zero-based list of parameter positions to validate. The first parameter is position **0**. This field applies **only** to `INPUT_VALIDATOR` types. Used when **not all parameters require validation**. |
+
+
+### Separators
 - **`;` (Semicolon)** → Separates each security control.
 - **`:` (Colon)** → Separates each field within a security control.
 - **`,` (Comma)** → Separates items within a field that accepts a list.
+
+### Secure marks
+
+| **Type** | **Java** | **Node** | **.NET** | **Python** |
+|----------|---------|--------|------|--------|
+| ADMIN_CONSOLE_ACTIVE |  |  |  |  |
+| CODE_INJECTION |  |  |  |  |
+| COMMAND_INJECTION | ✔️ |  |  |  |
+| DEFAULT_APP_DEPLOYED |  |  |  |  |
+| DEFAULT_HTML_ESCAPE_INVALID |  |  |  |  |
+| DIRECTORY_LISTING_LEAK |  |  |  |  |
+| EMAIL_HTML_INJECTION | ✔️ |  |  |  |
+| HARDCODED_PASSWORD |  |  |  |  |
+| HARDCODED_SECRET |  |  |  |  |
+| HEADER_INJECTION | ✔️ |  |  |  |
+| HSTS_HEADER_MISSING |  |  |  |  |
+| INSECURE_AUTH_PROTOCOL |  |  |  |  |
+| INSECURE_COOKIE |  |  |  |  |
+| INSECURE_JSP_LAYOUT |  |  |  |  |
+| LDAP_INJECTION | ✔️ |  |  |  |
+| NOSQL_MONGODB_INJECTION |  |  |  |  |
+| NO_HTTPONLY_COOKIE |  |  |  |  |
+| NO_SAMESITE_COOKIE |  |  |  |  |
+| PATH_TRAVERSAL | ✔️ |  |  |  |
+| REFLECTION_INJECTION | ✔️ |  |  |  |
+| SSRF | ✔️ |  |  |  |
+| SESSION_REWRITING |  |  |  |  |
+| SESSION_TIMEOUT |  |  |  |  |
+| SQL_INJECTION | ✔️ |  |  |  |
+| STACKTRACE_LEAK |  |  |  |  |
+| TEMPLATE_INJECTION |  |  |  |  |
+| TRUST_BOUNDARY_VIOLATION | ✔️ |  |  |  |
+| UNTRUSTED_DESERIALIZATION | ✔️ |  |  |  |
+| UNVALIDATED_REDIRECT | ✔️ |  |  |  |
+| VERB_TAMPERING |  |  |  |  |
+| WEAK_CIPHER |  |  |  |  |
+| WEAK_HASH |  |  |  |  |
+| WEAK_RANDOMNESS |  |  |  |  |
+| XCONTENTTYPE_HEADER_MISSING |  |  |  |  |
+| XXSSPROTECTION_HEADER_DISABLED |  |  |  |  |
+| XPATH_INJECTION | ✔️ |  |  |  |
+| XSS | ✔️ |  |  |  |
+
 
 ## Examples
 
