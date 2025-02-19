@@ -237,7 +237,7 @@ Or check out the libraries directly:
 
 {{< partial name="api/sdk-languages.html" >}}
 </br>
-Trying to get started with the application instead? Check out Datadogs general [Getting Started docs][7].
+Trying to get started with the application instead? Check out Datadog's general [Getting Started docs][7].
 
 ## Further Reading
 
