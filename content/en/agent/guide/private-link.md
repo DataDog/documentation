@@ -61,7 +61,7 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
 | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
-| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code> 
+| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code> |
 
 4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
 5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
