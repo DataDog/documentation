@@ -11,3 +11,6 @@ src/compiledScripts
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+
+esbuild-meta-dev.json
+esbuild-meta-prod.json
