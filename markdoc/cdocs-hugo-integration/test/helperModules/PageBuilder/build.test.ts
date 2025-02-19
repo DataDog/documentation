@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { parseMdocFile } from '../../../src/fileParsing';
-import { PageBuilder } from '../../../src/fileRendering/PageBuilder';
+import { renderFile } from '../../../src/fileRendering';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 import {
   VALID_CONTENT_DIR,
@@ -13,7 +13,7 @@ import {
   mockPageConfig
 } from '../../config/mocks/valid/hugoConfig';
 
-describe('PageBuilder.build', () => {
+describe('renderFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
   const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
@@ -32,7 +32,7 @@ describe('PageBuilder.build', () => {
     customizationConfig: customizationConfigByLang['en']
   });
 
-  const { html } = PageBuilder.build({
+  const { html } = renderFile({
     parsedFile,
     hugoConfig: { global: mockHugoGlobalConfig, page: mockPageConfig },
     filtersManifest: filtersManifest

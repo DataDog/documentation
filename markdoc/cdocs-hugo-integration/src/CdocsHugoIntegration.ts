@@ -8,7 +8,8 @@ import {
 import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { parseMdocFile } from './fileParsing';
-import { PageBuilder } from './fileRendering/PageBuilder';
+import { renderFile } from './fileRendering';
+import { getStylesStr, getClientFiltersManagerScriptStr } from './assetBuilding';
 import {
   CompilationError,
   ParsedFile,
@@ -52,7 +53,7 @@ export class CdocsHugoIntegration {
    * those are inline in the compiled files.
    */
   buildAssetsPartial() {
-    let stylesStr = PageBuilder.getStylesStr();
+    let stylesStr = getStylesStr();
     if (this.hugoGlobalConfig.env === 'development') {
       // Add focus ring styles in development mode
       stylesStr += `
@@ -62,7 +63,7 @@ export class CdocsHugoIntegration {
       }`;
     }
     return `<style>${stylesStr}</style>
-<script>${PageBuilder.getClientFiltersManagerScriptStr()}</script>`;
+<script>${getClientFiltersManagerScriptStr()}</script>`;
   }
 
   #getFileLanguage(markdocFilepath: string): string {
@@ -227,7 +228,7 @@ export class CdocsHugoIntegration {
 
     // build the HTML and write it to an .md file
     try {
-      const { html, errors } = PageBuilder.build({
+      const { html, errors } = renderFile({
         parsedFile: p.parsedFile,
         filtersManifest: filtersManifest,
         hugoConfig: {
