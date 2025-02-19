@@ -23,6 +23,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
 {{< whatsnext desc="Select a destination for more information:" >}}
     {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/amazon_security_lake" >}}Amazon Security Lake{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Logs{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
