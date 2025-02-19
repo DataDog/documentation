@@ -354,7 +354,7 @@ To manage the [APM traced invocation sampling rate][17] for serverless functions
 
 **Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
+**Note** overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.  
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
