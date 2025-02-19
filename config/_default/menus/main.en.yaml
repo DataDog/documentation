@@ -458,7 +458,7 @@ menu:
       weight: 606
     - name: FIPS Compliance
       identifier: agent_configuration_fips_compliance
-      url: agent/configuration/agent-fips-proxy/
+      url: agent/configuration/fips-compliance/
       parent: agent_configuration
       weight: 607
     - name: Dual Shipping
