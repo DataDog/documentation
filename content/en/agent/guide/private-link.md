@@ -108,11 +108,6 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 [5]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 
-{{% tab "Connect cross-region from a region that supports private links" %}}
-
-
-{{% /tab %}}
-
 {{% tab "Connect from another region using VPC Peering" %}}
 
 ### Amazon VPC peering
@@ -258,6 +253,51 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+{{% /tab %}}
+
+{{% tab "Connect from another region using cross-region AWS PrivateLink" %}}
+
+1. Connect the AWS Management Console to the region of your choice.
+1. From the VPC Dashboard, under **PrivateLink and Lattice**, select **Endpoints**.
+1. Click **Create Endpoint**:
+   {{< img src="agent/guide/private-link-vpc.png" alt="The endpoints page on the VPC dashboard" style="width:90%;" >}}
+1. Configure the VPC interface endpoint settings
+   1. Optionally, fill in the **Name tag**.
+   1. Under **Type**, select **PrivateLink Ready partner services**.
+1. Discover and configure the interface endpoint with cross-region support:
+   1. Under **Service name**, fill in the service name with a valid PrivateLink service name from the [table](#privatelink-service-names) below.
+   1. Under **Service region**, click **Enable Cross Region endpoint** and select **{{< region-param key="aws_private_link_cross_region" >}}**.
+   1. Click **Verify service** and wait for a _Service name verified_ notification.
+      **Note:** If you aren't able to verify the service after completing the steps above, reach out to [Datadog Support][1].
+1. Under **Network Settings**, select a VPC to deploy the VPC Interface endpoint with.
+1. Ensure the option to **Enable DNS name** is checked.
+1. Under **Subnets**, select one or more subnets in your VPC for the interface endpoint.
+1. Under **Security Groups**, select a security group to control what can send traffic to the VPC endpoint. 
+   
+   **Note**: The security group must accept inbound traffic on TCP port 443.
+1. Optionally, provide a **Name tag** and click **Create endpoint**.
+1. Allow a few minutes for the endpoint status to update from **Pending** to **Available**. This may take up to 10 minutes. If it is taking longer than expected, reach out to [Datadog Support][1].
+
+After the endpoint status is updated to **Available**, you can use this endpoint to send telemetry to Datadog using the cross-region AWS PrivateLink endpoint.
+
+## PrivateLink service names
+
+  | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+  |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
+  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
+  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                |
+  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
+  | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
+  | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
+
+[1]: /help/
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
