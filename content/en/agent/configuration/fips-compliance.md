@@ -3,6 +3,7 @@ title: Datadog FIPS Compliance
 disable_toc: false
 alias:
 - /agent/guide/agent-fips-proxy
+- /configuration/agent-fips-proxy
 further_reading:
 - link: "agent/configuration/proxy"
   tag: "Documentation"
@@ -14,6 +15,10 @@ algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
 ---
+
+{{< callout url="" btn_hidden="true" header="Try the FIPS Agent Preview!">}}
+A FIPS flavor of the Datadog Agent is in preview. For more information, see <a href="/agent/guide/fips-agent">FIPS Agent</a>.
+{{< /callout >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
