@@ -433,7 +433,7 @@ Cloud Cost Recommendations is in Preview with support for AWS, and is automatica
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
 - For **all resources**, [cloud cost metrics][6] are also pulled for that resource
-- For all **AWS resources** besides Kubernetes and EC2, AWS metrics are also pulled from [AWS CloudWatch][6]
+- For all **AWS resources** besides Kubernetes and EC2, AWS metrics are also pulled from [AWS CloudWatch][7]
 
 {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}}
 
@@ -464,7 +464,7 @@ For each cloud account that you would like to receive recommendations for:
 
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
 1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
-1. Install the '[Datadog Agent][5]' (required for over-provisioned resource recommendations).
+1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
 ## Recommendation and resource descriptions
 
@@ -479,4 +479,5 @@ For each cloud account that you would like to receive recommendations for:
 [3]: /integrations/amazon_web_services/#resource-collection
 [4]: https://app.datadoghq.com/integrations/aws
 [5]: /agent/
-[6]: /integrations/amazon_s3_storage_lens/
+[6]: /cloud_cost_management/container_cost_allocation/?tab=aws#cost-metrics
+[7]: /integrations/amazon_s3_storage_lens/
