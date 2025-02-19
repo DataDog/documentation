@@ -1741,6 +1741,10 @@
     "request_description": "",
     "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
   },
+  "GetRuleVersionHistory": {
+    "description": "Get a rule's version history.",
+    "summary": "Get a rule's version history"
+  },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
     "summary": "Get a quick list of security signals"
@@ -2152,6 +2156,26 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "CreateWorkflow": {
+    "description": "Create a new workflow, returning the workflow ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Create a Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for creating a new workflow."
+  },
+  "DeleteWorkflow": {
+    "description": "Delete a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Delete an existing Workflow"
+  },
+  "GetWorkflow": {
+    "description": "Get a workflow by ID.  This API requires an application key scoped with the `workflows_read` permission.",
+    "summary": "Get an existing Workflow"
+  },
+  "UpdateWorkflow": {
+    "description": "Update a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Update an existing Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for updating an existing workflow."
   },
   "ListWorkflowInstances": {
     "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",

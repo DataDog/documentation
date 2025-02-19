@@ -537,7 +537,7 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Service Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 

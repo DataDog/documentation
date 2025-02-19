@@ -64,15 +64,14 @@ Watchdog monitors the status of the following external providers' APIs:
 | Zendesk | *.zendesk.com |
 
 The following AWS services are monitored (.*amazonaws.com):
+- CloudWatch
 - DynamoDB
 - ELB
 - ES
-- Events
 - Firehose
 - Kinesis
 - KMS
 - Lambda
-- Monitoring
 - RDS
 - S3
 - SNS
