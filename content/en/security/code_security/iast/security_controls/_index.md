@@ -45,6 +45,8 @@ This format uses specific separators to structure each security control entry.
 
 ### Secure marks
 
+The following table lists the supported vulnerability types as secure marks for each language:
+
 | **Type** | **Java** | **Node** | **.NET** | **Python** |
 |----------|---------|--------|------|--------|
 | ADMIN_CONSOLE_ACTIVE |  |  |  |  |
@@ -94,94 +96,114 @@ This format uses specific separators to structure each security control entry.
 
 #### Method that validates all input parameters to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input1, String input2)`
+**Method**
+`bar.foo.CustomInputValidator#validate(String input1, String input2)`
 
-Config: INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate`
 
 #### Method that validates one input parameter to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input1, String inputToValidate)`
+**Method**
+ `bar.foo.CustomInputValidator#validate(String input1, String inputToValidate)`
 
-Config: INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1`
 
 #### Method that validates two input parameters to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input1, String firstInputToValidate, String secondInputToValidate, Object anotherInput)`
+**Method**
+ `bar.foo.CustomInputValidator#validate(String input1, String firstInputToValidate, String secondInputToValidate, Object anotherInput)`
 
-Config: INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1,2
-
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1,2
+`
 #### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input)`
+**Method**
+ `bar.foo.CustomInputValidator#validate(String input)`
 
-Config: INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomInputValidator:validate
-
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomInputValidator:validate
+`
 #### Method that validates the input parameter to avoid any vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input)`
+**Method**
+ `bar.foo.CustomInputValidator#validate(String input)`
 
-Config: INPUT_VALIDATOR:*:bar.foo.CustomInputValidator:validate
-
+**Config**
+`INPUT_VALIDATOR:*:bar.foo.CustomInputValidator:validate
+`
 #### Overloaded method that validates the input parameter to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input)`
+**Methods**
+ `bar.foo.CustomInputValidator#validate(String input)`
+ `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
-Method: `bar.foo.CustomInputValidator#validate(String input, String input2)`
-
-Config: INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:java.lang.String
-
-NOTE: Applies for the first method.
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:java.lang.String
+`
+**NOTE**: Applies for the first method.
 
 
 #### Overloaded methods that validate the input parameter to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomInputValidator#validate(String input)`
+**Methods**
+ `bar.foo.CustomInputValidator#validate(String input)`
+ `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
-Method: `bar.foo.CustomInputValidator#validate(String input, String input2)`
-
-Config: INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate
-
-NOTE: Applies for both methods.
+**Config**
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate
+`
+**NOTE**: Applies for both methods.
 
 ### Sanitizer
 
 #### Sanitizer to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input)`
+**Method**
+ `bar.foo.CustomSanitizer#sanitize(String input)`
 
-Config: SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
-
+**Config**
+`SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
+`
 #### Sanitizer to avoid command injection  and code injection vulnerabilities
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input)`
+**Method**
+ `bar.foo.CustomSanitizer#sanitize(String input)`
 
-Config: SANITIZER:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomSanitizer:sanitize
-
+**Config**
+`SANITIZER:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomSanitizer:sanitize
+`
 #### Sanitizer to avoid any vulnerabilities
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input)`
+**Method**
+ `bar.foo.CustomSanitizer#sanitize(String input)`
 
-Config: SANITIZER:*:bar.foo.CustomSanitizer:sanitize
-
+**Config**
+`SANITIZER:*:bar.foo.CustomSanitizer:sanitize
+`
 #### Overloaded sanitizer to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input)`
+**Methods**
+ `bar.foo.CustomSanitizer#sanitize(String input)`
+ `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
-
-Config: SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize:java.lang.String
-
-NOTE: applies for the first method
+**Config**
+`SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize:java.lang.String
+`
+**NOTE**: applies for the first method
 
 #### Overloaded sanitizers to avoid command injection vulnerabilities
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input)`
+**Methods**
+ `bar.foo.CustomSanitizer#sanitize(String input)`
+ `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
-Method: `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
-
-Config: SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
-
-NOTE: applies for both methods
+**Config**
+`SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
+`
+**NOTE**: applies for both methods
 
 {{% /collapse-content %}}
 
