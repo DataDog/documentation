@@ -37,7 +37,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigator**][1] tab.
+1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigate**][1] tab.
 
 2. Select an entity type in the **In** field dropdown menu.
 
@@ -51,7 +51,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "GCP" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigator** tab, and then the [**GCP**][1] tab.
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**GCP**][1] tab.
 
 2. Select an entity type in the **In** field dropdown menu.
 
@@ -64,7 +64,7 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 
 {{% tab "Azure" %}}
 
-1. Navigate to **Security** > **Cloud SIEM** and click the **Investigator** tab, and then the [**Azure**][1] tab.
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**Azure**][1] tab.
 
 2. Select an entity type in the **In** field dropdown menu.
 
@@ -73,6 +73,19 @@ The Cloud SIEM Investigator provides a graphical interface for you to pivot from
 4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/investigator/azure
+{{% /tab %}}
+
+{{% tab "Datadog" %}}
+
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigate** tab, and then the [**Datadog Investigator**][1] tab.
+
+2. Select an entity type in the **In** field dropdown menu.
+
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+
+4. Click on a node and select **View related Audit Trail** to see the related audit trails.
+
+[1]: https://app.datadoghq.com/security/investigator/datadog
 {{% /tab %}}
 
 {{< /tabs >}}
