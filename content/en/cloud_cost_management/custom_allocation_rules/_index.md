@@ -11,7 +11,7 @@ further_reading:
 
 Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. After you have set up allocation rules, you can report on which costs were allocated by a rule. 
 
-Custom cost allocation follows Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
+Custom cost allocation runs after Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
 
 ## Rule creation
 
@@ -34,6 +34,8 @@ Costs are allocated based on the proportional spend of destination values. Apply
 {{< img src="cloud_cost/custom_allocation_rules/proportional_diagram.png" alt="Diagram illustrating the proportional split strategy" style="width:60%;" >}}
 
 {{< img src="cloud_cost/custom_allocation_rules/proportional_ui.png" alt="The proportional split strategy as seen in Datadog" style="width:60%;" >}}
+
+### Partitioning
 
 You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
 
@@ -65,7 +67,7 @@ With the custom percentage strategy, you can define static custom percentages fo
 | Step | Required | Examples |
 | ---- | ---- | ---- |
 | Select the cost provider | Yes | AWS, Google Cloud, Azure |
-| Define the costs to split (source) | Yes | `aws_product` is `support` `allocated_spend_type` is untagged |
+| Define the costs to split (source) | Yes | `aws_product` contains `support`, `allocated_spend_type` is untagged |
 | Define the destination | Yes | `team` is `teamA`, `teamB`, `teamC` |
 | Filter by | Only applicable for Proportional and Even strategies, optional | `aws_product` is `ec2` |
 | Partition costs by | Only applicable for Proportional and Even strategies, optional | `environment` is all values |
