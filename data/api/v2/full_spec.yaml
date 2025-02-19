@@ -3200,7 +3200,7 @@ components:
           type: integer
         scope:
           description: The scope of your observed subscription.
-          example: subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
+          example: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
           type: string
         status:
           description: The status of the Azure config.
@@ -3366,7 +3366,7 @@ components:
           type: boolean
         scope:
           description: The scope of your observed subscription.
-          example: subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
+          example: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
           type: string
       required:
       - account_id
