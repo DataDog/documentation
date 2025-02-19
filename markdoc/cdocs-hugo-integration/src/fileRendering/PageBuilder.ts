@@ -18,7 +18,7 @@ import { Frontmatter } from '../schemas/frontmatter';
 const stylesStr = fs.readFileSync(path.resolve(__dirname, 'assets/styles.css'), 'utf8');
 
 const clientFiltersManagerScriptStr = fs.readFileSync(
-  path.resolve(__dirname, 'compiledScripts/markdoc-client-filters-manager.min.js'),
+  path.resolve(__dirname, '../compiledScripts/clientFiltersManager.min.js'),
   'utf8'
 );
 

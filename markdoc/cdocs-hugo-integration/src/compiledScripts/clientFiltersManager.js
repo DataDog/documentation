@@ -5,9 +5,9 @@
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
 
-  // dist/helperModules/PageBuilder/customizationMenu.js
+  // dist/fileRendering/customizationMenu.js
   var require_customizationMenu = __commonJS({
-    "dist/helperModules/PageBuilder/customizationMenu.js"(exports) {
+    "dist/fileRendering/customizationMenu.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.buildCustomizationMenuUi = void 0;
@@ -12995,9 +12995,9 @@
     }
   });
 
-  // dist/helperModules/markdocCustomization/renderer/reresolver.js
+  // dist/markdocCustomization/renderer/reresolver.js
   var require_reresolver = __commonJS({
-    "dist/helperModules/markdocCustomization/renderer/reresolver.js"(exports) {
+    "dist/markdocCustomization/renderer/reresolver.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.reresolveFunctionNode = reresolveFunctionNode;
@@ -13044,9 +13044,9 @@
     }
   });
 
-  // dist/helperModules/PageBuilder/pageConfigMinification.js
+  // dist/fileRendering/pageConfigMinification.js
   var require_pageConfigMinification = __commonJS({
-    "dist/helperModules/PageBuilder/pageConfigMinification.js"(exports) {
+    "dist/fileRendering/pageConfigMinification.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", { value: true });
       exports.expandClientFunction = exports.minifyClientFunction = exports.minifyClientVariable = exports.expandClientVariable = exports.CLIENT_FUNCTION_MINIFY_MAP = exports.CLIENT_FUNCTION_EXPAND_MAP = void 0;
@@ -13127,9 +13127,9 @@
     }
   });
 
-  // dist/helperModules/ClientFiltersManager.js
+  // dist/browser/ClientFiltersManager.js
   var require_ClientFiltersManager = __commonJS({
-    "dist/helperModules/ClientFiltersManager.js"(exports) {
+    "dist/browser/ClientFiltersManager.js"(exports) {
       "use strict";
       var __classPrivateFieldGet = exports && exports.__classPrivateFieldGet || function(receiver, state, kind, f) {
         if (kind === "a" && !f)
@@ -13519,13 +13519,13 @@
     }
   });
 
-  // dist/markdoc-client-filters-manager.js
-  var require_markdoc_client_filters_manager = __commonJS({
-    "dist/markdoc-client-filters-manager.js"(exports) {
+  // dist/browser/entryPoint.js
+  var require_entryPoint = __commonJS({
+    "dist/browser/entryPoint.js"(exports) {
       Object.defineProperty(exports, "__esModule", { value: true });
       var ClientFiltersManager_1 = require_ClientFiltersManager();
       window.clientFiltersManager = ClientFiltersManager_1.ClientFiltersManager.instance;
     }
   });
-  require_markdoc_client_filters_manager();
+  require_entryPoint();
 })();

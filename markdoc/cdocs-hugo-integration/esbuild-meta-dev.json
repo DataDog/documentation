@@ -1,6 +1,6 @@
 {
   "inputs": {
-    "dist/helperModules/PageBuilder/customizationMenu.js": {
+    "dist/fileRendering/customizationMenu.js": {
       "bytes": 4355,
       "imports": [],
       "format": "cjs"
@@ -41,7 +41,7 @@
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/markdocCustomization/renderer/reresolver.js": {
+    "dist/markdocCustomization/renderer/reresolver.js": {
       "bytes": 1799,
       "imports": [
         {
@@ -52,18 +52,18 @@
       ],
       "format": "cjs"
     },
-    "dist/helperModules/PageBuilder/pageConfigMinification.js": {
+    "dist/fileRendering/pageConfigMinification.js": {
       "bytes": 3293,
       "imports": [],
       "format": "cjs"
     },
-    "dist/helperModules/ClientFiltersManager.js": {
-      "bytes": 17916,
+    "dist/browser/ClientFiltersManager.js": {
+      "bytes": 17923,
       "imports": [
         {
-          "path": "dist/helperModules/PageBuilder/customizationMenu.js",
+          "path": "dist/fileRendering/customizationMenu.js",
           "kind": "require-call",
-          "original": "./PageBuilder/customizationMenu"
+          "original": "../fileRendering/customizationMenu"
         },
         {
           "path": "node_modules/cdocs-data/dist/api/shared/resolveFilters.js",
@@ -86,38 +86,38 @@
           "original": "cdocs-data/dist/api/browser/CdocsClientStorage"
         },
         {
-          "path": "dist/helperModules/markdocCustomization/renderer/reresolver.js",
+          "path": "dist/markdocCustomization/renderer/reresolver.js",
           "kind": "require-call",
-          "original": "./markdocCustomization/renderer/reresolver"
+          "original": "../markdocCustomization/renderer/reresolver"
         },
         {
-          "path": "dist/helperModules/PageBuilder/pageConfigMinification.js",
+          "path": "dist/fileRendering/pageConfigMinification.js",
           "kind": "require-call",
-          "original": "./PageBuilder/pageConfigMinification"
+          "original": "../fileRendering/pageConfigMinification"
         }
       ],
       "format": "cjs"
     },
-    "dist/markdoc-client-filters-manager.js": {
-      "bytes": 524,
+    "dist/browser/entryPoint.js": {
+      "bytes": 510,
       "imports": [
         {
-          "path": "dist/helperModules/ClientFiltersManager.js",
+          "path": "dist/browser/ClientFiltersManager.js",
           "kind": "require-call",
-          "original": "./helperModules/ClientFiltersManager"
+          "original": "./ClientFiltersManager"
         }
       ],
       "format": "cjs"
     }
   },
   "outputs": {
-    "dist/helperModules/PageBuilder/compiledScripts/markdoc-client-filters-manager.js": {
+    "dist/compiledScripts/clientFiltersManager.js": {
       "imports": [],
       "exports": [],
-      "entryPoint": "dist/markdoc-client-filters-manager.js",
+      "entryPoint": "dist/browser/entryPoint.js",
       "inputs": {
-        "dist/helperModules/PageBuilder/customizationMenu.js": {
-          "bytesInOutput": 3943
+        "dist/fileRendering/customizationMenu.js": {
+          "bytesInOutput": 3931
         },
         "node_modules/cdocs-data/dist/schemas/regexes.js": {
           "bytesInOutput": 621
@@ -137,20 +137,20 @@
         "node_modules/cdocs-markdoc/dist/index.js": {
           "bytesInOutput": 509082
         },
-        "dist/helperModules/markdocCustomization/renderer/reresolver.js": {
-          "bytesInOutput": 1952
+        "dist/markdocCustomization/renderer/reresolver.js": {
+          "bytesInOutput": 1938
         },
-        "dist/helperModules/PageBuilder/pageConfigMinification.js": {
-          "bytesInOutput": 3111
+        "dist/fileRendering/pageConfigMinification.js": {
+          "bytesInOutput": 3099
         },
-        "dist/helperModules/ClientFiltersManager.js": {
-          "bytesInOutput": 16668
+        "dist/browser/ClientFiltersManager.js": {
+          "bytesInOutput": 16662
         },
-        "dist/markdoc-client-filters-manager.js": {
-          "bytesInOutput": 354
+        "dist/browser/entryPoint.js": {
+          "bytesInOutput": 322
         }
       },
-      "bytes": 543948
+      "bytes": 543796
     }
   }
 }

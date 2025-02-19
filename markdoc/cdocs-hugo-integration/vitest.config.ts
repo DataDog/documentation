@@ -5,8 +5,8 @@ export default defineConfig({
     coverage: {
       exclude: [
         ...configDefaults.exclude,
-        '**/markdoc-client-filters-manager.js',
-        '**/markdoc-client-filters-manager.ts',
+        '**/clientFiltersManager.js',
+        '**/browser/entryPoint.ts',
         '**/ClientFiltersManager.ts',
         '**/reresolver.ts',
         '**/debugBookmarklet.js',
