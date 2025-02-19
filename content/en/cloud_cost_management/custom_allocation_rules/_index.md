@@ -63,7 +63,7 @@ With the custom percentage strategy, you can define static custom percentages fo
 {{% /tab %}}
 {{< /tabs >}}
 
-### Specify what costs are included in the allocation
+## Specify what costs are included in the allocation
 | Step | Required | Examples |
 | ---- | ---- | ---- |
 | Select the cost provider | Yes | AWS, Google Cloud, Azure |
