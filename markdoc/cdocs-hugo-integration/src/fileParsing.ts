@@ -31,6 +31,8 @@ export function parseMdocFile(p: {
   };
 }
 
+// PRIVATE HELPERS ----------------------------------------------------------
+
 /**
  * Recursively build the ASTs of all partials required by the given AST.
  *

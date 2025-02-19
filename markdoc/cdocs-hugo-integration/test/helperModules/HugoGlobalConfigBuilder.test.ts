@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import { HugoGlobalConfigSchema } from '../../src/schemas/config/hugo';
 import { VALID_SITE_DIR, SNAPSHOTS_DIR } from '../config/constants';
 import { IntegrationConfig } from '../../src/schemas/config/integration';
-import { HugoGlobalConfigBuilder } from '../../src/hugoUtils/HugoGlobalConfigBuilder';
+import { buildHugoGlobalConfig } from '../../src/hugoUtils';
 
 describe('HugoFunctions', () => {
   const integrationConfig: IntegrationConfig = {
@@ -10,7 +10,7 @@ describe('HugoFunctions', () => {
     env: 'development'
   };
 
-  const hugoConfig = HugoGlobalConfigBuilder.build(integrationConfig);
+  const hugoConfig = buildHugoGlobalConfig(integrationConfig);
 
   test('builds a valid HugoGlobalConfig object', () => {
     expect(() => {

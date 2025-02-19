@@ -9,14 +9,14 @@ import { IntegrationConfig } from './schemas/config/integration';
 import { HugoGlobalConfig } from './schemas/config/hugo';
 import { parseMdocFile } from './fileParsing';
 import { renderFile } from './fileRendering';
-import { getStylesStr, getClientFiltersManagerScriptStr } from './siteAssetBuilding';
+import { buildSiteAssets } from './siteAssetBuilding';
 import {
   CompilationError,
   ParsedFile,
   CompilationResult
 } from './schemas/compilationResults';
 import { findInDir } from './utils';
-import { HugoGlobalConfigBuilder } from './hugoUtils/HugoGlobalConfigBuilder';
+import { buildHugoGlobalConfig } from './hugoUtils';
 
 /**
  * The external interface of the integration.
@@ -36,7 +36,7 @@ export class CdocsHugoIntegration {
    * Load the configuration objects from YAML
    */
   constructor(args: { config: IntegrationConfig }) {
-    this.hugoGlobalConfig = HugoGlobalConfigBuilder.build(args.config);
+    this.hugoGlobalConfig = buildHugoGlobalConfig(args.config);
 
     const { customizationConfigByLang } = loadCustomizationConfig({
       configDir: this.hugoGlobalConfig.dirs.customizationConfig,
@@ -44,74 +44,6 @@ export class CdocsHugoIntegration {
     });
 
     this.customizationConfigByLang = customizationConfigByLang;
-  }
-
-  /**
-   * Provide a string that includes the shared styles and scripts
-   * required to display and re-render any page.
-   * Any page-specific content or scripts are not included;
-   * those are inline in the compiled files.
-   */
-  buildAssetsPartial() {
-    let stylesStr = getStylesStr();
-    if (this.hugoGlobalConfig.env === 'development') {
-      // Add focus ring styles in development mode
-      stylesStr += `
-      html head *:focus,
-      html body *:focus {
-          outline: 4px auto -webkit-focus-ring-color !important;
-      }`;
-    }
-    return `<style>${stylesStr}</style>
-<script>${getClientFiltersManagerScriptStr()}</script>`;
-  }
-
-  #getFileLanguage(markdocFilepath: string): string {
-    const lang = markdocFilepath
-      .replace(this.hugoGlobalConfig.dirs.content, '')
-      .split('/')[1];
-    if (!lang) {
-      throw new Error(`No language detected in file path: ${markdocFilepath}`);
-    }
-    return lang;
-  }
-
-  /**
-   * Parse a single Markdoc file into a collection
-   * of data structures, such as the AST and the frontmatter.
-   */
-  #parseMdocFile(markdocFilepath: string): ParsedFile | null {
-    const parsedFile = parseMdocFile({
-      file: markdocFilepath,
-      partialsDir: this.hugoGlobalConfig.dirs.partials
-    });
-
-    // if the file has errors, log the errors for later output
-    // and continue to the next file
-    if (parsedFile.errors.length > 0) {
-      this.#addFileErrors({
-        filePath: markdocFilepath,
-        errors: parsedFile.errors
-      });
-      return null;
-    }
-
-    return parsedFile;
-  }
-
-  #addFileError(p: { filePath: string; error: CompilationError }) {
-    if (!this.errorsByFilePath[p.filePath]) {
-      this.errorsByFilePath[p.filePath] = [];
-    }
-    this.errorsByFilePath[p.filePath].push({ ...p.error });
-  }
-
-  #addFileErrors(p: { filePath: string; errors: CompilationError[] }) {
-    if (!this.errorsByFilePath[p.filePath]) {
-      this.errorsByFilePath[p.filePath] = [...p.errors];
-    } else {
-      this.errorsByFilePath[p.filePath].concat([...p.errors]);
-    }
   }
 
   /**
@@ -181,6 +113,62 @@ export class CdocsHugoIntegration {
           console.error(`  - ${JSON.stringify(error, null, 2)}`);
         });
       }
+    }
+  }
+
+  buildAssetsPartial(): string {
+    return buildSiteAssets({
+      hugoGlobalConfig: this.hugoGlobalConfig
+    });
+  }
+
+  // PRIVATE HELPERS ----------------------------------------------------------
+
+  #getFileLanguage(markdocFilepath: string): string {
+    const lang = markdocFilepath
+      .replace(this.hugoGlobalConfig.dirs.content, '')
+      .split('/')[1];
+    if (!lang) {
+      throw new Error(`No language detected in file path: ${markdocFilepath}`);
+    }
+    return lang;
+  }
+
+  /**
+   * Parse a single Markdoc file into a collection
+   * of data structures, such as the AST and the frontmatter.
+   */
+  #parseMdocFile(markdocFilepath: string): ParsedFile | null {
+    const parsedFile = parseMdocFile({
+      file: markdocFilepath,
+      partialsDir: this.hugoGlobalConfig.dirs.partials
+    });
+
+    // if the file has errors, log the errors for later output
+    // and continue to the next file
+    if (parsedFile.errors.length > 0) {
+      this.#addFileErrors({
+        filePath: markdocFilepath,
+        errors: parsedFile.errors
+      });
+      return null;
+    }
+
+    return parsedFile;
+  }
+
+  #addFileError(p: { filePath: string; error: CompilationError }) {
+    if (!this.errorsByFilePath[p.filePath]) {
+      this.errorsByFilePath[p.filePath] = [];
+    }
+    this.errorsByFilePath[p.filePath].push({ ...p.error });
+  }
+
+  #addFileErrors(p: { filePath: string; errors: CompilationError[] }) {
+    if (!this.errorsByFilePath[p.filePath]) {
+      this.errorsByFilePath[p.filePath] = [...p.errors];
+    } else {
+      this.errorsByFilePath[p.filePath].concat([...p.errors]);
     }
   }
 

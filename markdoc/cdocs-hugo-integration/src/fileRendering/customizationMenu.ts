@@ -4,7 +4,7 @@ import { ResolvedFilters, ResolvedFilter } from 'cdocs-data';
  * Given a resolved page filters object, build the UI for the filter selector
  * that goes at the top of the page.
  *
- * This runs at compile time, but also client-side on filter selection change,
+ * This runs at compile time, but also runs client-side on filter selection change,
  * so JSX templating is not available.
  */
 export const buildCustomizationMenuUi = (

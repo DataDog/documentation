@@ -1,7 +1,7 @@
 {
   "inputs": {
     "dist/fileRendering/customizationMenu.js": {
-      "bytes": 4355,
+      "bytes": 4360,
       "imports": [],
       "format": "cjs"
     },

@@ -1,13 +1,29 @@
-import md5 from 'md5';
-import { HugoConfig } from './schemas/config/hugo';
-import fs from 'fs';
-
 /**
  * The Markdoc-Hugo integration's tag templates (shortcode templates)
  * don't have access to the same functions available
  * in Hugo's shortcode templates. This file provides the operations required
  * to implement the most common shortcodes on the Markdoc site.
  */
+
+import md5 from 'md5';
+import { HugoConfig } from './schemas/config/hugo';
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import {
+  HugoGlobalConfig,
+  HugoGlobalConfigSchema,
+  HugoLanguagesConfig,
+  HugoLanguagesConfigSchema,
+  HugoSiteConfig,
+  HugoSiteConfigSchema,
+  HugoSiteParams,
+  HugoSiteParamsSchema,
+  HugoSubdirsByType,
+  i18nConfig,
+  i18nConfigSchema
+} from './schemas/config/hugo';
+import { IntegrationConfig } from './schemas/config/integration';
 
 /**
  * Create a URL-friendly version of a string.
@@ -176,4 +192,87 @@ export function relUrl(p: { hugoConfig: HugoConfig; url: string }): string {
   }
 
   return resultUrl;
+}
+
+export function buildHugoGlobalConfig(p: IntegrationConfig): HugoGlobalConfig {
+  const config: HugoGlobalConfig = {
+    siteParams: loadSiteParams(p),
+    siteConfig: loadSiteConfig(p),
+    languages: loadLanguages(p),
+    env: p.env,
+    siteDir: p.baseSiteDir,
+    i18n: loadI18n(p),
+    dirs: getSubdirsByType(p)
+  };
+
+  HugoGlobalConfigSchema.parse(config);
+  return config;
+}
+
+// PRIVATE HELPERS -----------------------------------------------------------
+
+function getSubdirsByType(p: IntegrationConfig): HugoSubdirsByType {
+  return {
+    content: p.baseSiteDir + '/content',
+    customizationConfig: p.baseSiteDir + '/customization_config',
+    partials: p.baseSiteDir + '/layouts/partials',
+    images: p.baseSiteDir + '/static/images',
+    static: p.baseSiteDir + '/static'
+  };
+}
+
+function loadSiteParams(p: IntegrationConfig): HugoSiteParams {
+  const defaultSiteParamsFile = p.baseSiteDir + '/config/_default/params.yaml';
+  const defaultSiteParams = yaml.load(fs.readFileSync(defaultSiteParamsFile, 'utf8'));
+
+  const envSiteParamsFile = p.baseSiteDir + `/config/${p.env}/params.yaml`;
+  const envSiteParams = yaml.load(fs.readFileSync(envSiteParamsFile, 'utf8'));
+
+  const siteParams = Object.assign(
+    {},
+    defaultSiteParams,
+    envSiteParams
+  ) as HugoSiteParams;
+  HugoSiteParamsSchema.parse(siteParams);
+
+  return siteParams;
+}
+
+function loadSiteConfig(p: IntegrationConfig): HugoSiteConfig {
+  const defaultSiteConfigFile = p.baseSiteDir + '/config/_default/config.yaml';
+  const defaultSiteConfig = yaml.load(fs.readFileSync(defaultSiteConfigFile, 'utf8'));
+
+  const envSiteConfigFile = p.baseSiteDir + `/config/${p.env}/config.yaml`;
+  const envSiteConfig = yaml.load(fs.readFileSync(envSiteConfigFile, 'utf8'));
+
+  const siteConfig = Object.assign(
+    {},
+    defaultSiteConfig,
+    envSiteConfig
+  ) as HugoSiteConfig;
+  HugoSiteConfigSchema.parse(siteConfig);
+
+  return siteConfig;
+}
+
+function loadLanguages(p: IntegrationConfig): HugoLanguagesConfig {
+  const languagesFile = p.baseSiteDir + '/config/_default/languages.yaml';
+  const languagesConfig = yaml.load(fs.readFileSync(languagesFile, 'utf8'));
+  // @ts-ignore, data is validated by the schema on the next line
+  const languages = Object.keys(languagesConfig);
+  HugoLanguagesConfigSchema.parse(languages);
+  return languages;
+}
+
+function loadI18n(p: IntegrationConfig): i18nConfig {
+  const i18n = {};
+  const i18nDir = p.baseSiteDir + '/i18n';
+  const files = fs.readdirSync(i18nDir);
+  files.forEach((file) => {
+    const lang = file.replace('.json', '');
+    // @ts-ignore, data is validated by the schema on the next line
+    i18n[lang] = yaml.load(fs.readFileSync(path.resolve(i18nDir, file), 'utf8'));
+  });
+  i18nConfigSchema.parse(i18n);
+  return i18n;
 }
