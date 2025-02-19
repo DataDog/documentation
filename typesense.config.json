@@ -87,6 +87,10 @@
                       }
                   }
               ]
+        },
+        {
+            "name": "docs_partners_v1",
+            "file_path": "./dist/partners.json"
         }
     ]
 }
