@@ -22,7 +22,7 @@ Use [Logic actions][1] to add control logic to your workflow. For example, you c
 
 ## If condition
 
-You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, a **If condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
+You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an **If condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
 
 {{< img src="service_management/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
 
