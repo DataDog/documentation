@@ -79,7 +79,7 @@ System
 System in Datadog has the same meaning as in Backstage's [System Model][15]. 
 
 Component
-: In Software Catlaog, a component represents the smallest unit of building blocks of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, or an API. 
+: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, or an API. 
 
 
 ## Getting started
