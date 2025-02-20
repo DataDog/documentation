@@ -138,6 +138,7 @@ The following table lists the supported vulnerability types as secure marks for 
 
 ##### Methods
  `bar.foo.CustomInputValidator#validate(String input)`
+
  `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
 ##### Config
@@ -151,6 +152,7 @@ Applies for the first method.
 
 ##### Methods
  `bar.foo.CustomInputValidator#validate(String input)`
+
  `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
 ##### Config
@@ -189,6 +191,7 @@ Applies for both methods.
 
 ##### Methods
  `bar.foo.CustomSanitizer#sanitize(String input)`
+
  `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
 ##### Config
@@ -200,8 +203,9 @@ applies for the first method
 #### Overloaded sanitizers to avoid command injection vulnerabilities
 
 ##### Methods
- `bar.foo.CustomSanitizer#sanitize(String input)`
- `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
+` bar.foo.CustomSanitizer#sanitize(String input)`
+
+`bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
 ##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
