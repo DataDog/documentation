@@ -65,8 +65,8 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 Service
 : In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be one of the following:
 
-* A group of URL endpoints may be grouped together under an API service.
-* A group of DB queries that are grouped together within one database service.
+* URL endpoints grouped together under an API service.
+* DB queries grouped together within one database service.
 * A group of periodic jobs configured in the crond service.
 
 Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
