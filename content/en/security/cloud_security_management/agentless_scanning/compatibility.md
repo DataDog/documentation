@@ -38,6 +38,10 @@ The following application languages and libraries are supported for vulnerabilit
 | PHP      | composer                  | composer.lock                                                        |
 | Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package |
 
+## Container image registries
+
+The following container image registries are supported for container image scans:
+
 ## Container runtimes
 
 The following container runtimes are supported:
