@@ -21,7 +21,7 @@ Antes de configurar Agentless Scanning, asegúrate de que se cumplen los siguien
 
 - **Configuración remota**: La [configuración remota][3] es necesaria para permitir que Datadog envíe información a los analizadores Agentless, como qué recursos de la nube analizar.
 - Permisos en la nube**: La instancia de Agentless Scanning requiere permisos específicos para analizar funciones de hosts. Estos permisos se aplican automáticamente como parte del proceso de instalación.<br><br>
-  {{< collapse-content title="<tx-placeholder class="glossary-highlight" title="AWS (hacer clic para copiar)" data-copy-glossary="AWS">Permisos de análisis de hosts y contenedores AWS" level="h5" >}}
+  {{< collapse-content title="Permisos de análisis de hosts y contenedores AWS" level="h5" >}}
   <ul>
     <li><code>ec2:DescribeVolumes</code></li>
     <li><code>ec2:CreateTags</code></li>
@@ -35,11 +35,11 @@ Antes de configurar Agentless Scanning, asegúrate de que se cumplen los siguien
   </ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="<tx-placeholder class="glossary-highlight" title="AWS (hacer clic para copiar)" data-copy-glossary="AWS">Permisos de análisis de AWS Lambda" level="h5" >}}
+  {{< collapse-content title="Permisos de análisis de AWS Lambda" level="h5" >}}
   <ul><li><code>lambda:GetFunction</code></li></ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title="Azure <tx-placeholder class="glossary-highlight" title="host (hacer clic para copiar)" data-copy-glossary="host">Permisos de análisis de hosts" level="h5" >}}
+  {{< collapse-content title=Permisos de análisis de hosts" level="h5" >}}
   <ul>
     <li><code>Microsoft.Compute/virtualMachines/read</code></li>
     <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
