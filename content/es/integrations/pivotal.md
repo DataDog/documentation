@@ -5,7 +5,7 @@
   "integration":
     "auto_install": falso
     "events":
-      "creates_events": verdadero
+      "creates_events": true
     "service_checks":
       "metadata_path": "assets/service_checks.json"
     "source_type_id": !!int "9"
@@ -18,15 +18,15 @@
 "categories":
 - "collaboration"
 - "issue tracking"
-"custom_kind": "integración"
+"custom_kind": "integration"
 "dependencies": []
-"display_on_public_website": verdadero
-"draft": falso
+"display_on_public_website": true
+"draft": false
 "git_integration_title": "pivotal"
 "integration_id": "pivotal"
 "integration_title": "Pivotal"
 "integration_version": ""
-"is_public": verdadero
+"is_public": true
 "manifest_version": "2.0.0"
 "name": "pivotal"
 "public_title": "Pivotal"
@@ -41,7 +41,7 @@
   - "Category::Collaboration"
   - "Category::Issue Tracking"
   - "Offering::Integration"
-  - "Submitted Data Type::Eventos"
+  - "Submitted Data Type::Events"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
