@@ -26,7 +26,7 @@ You can branch the execution path of your workflow based on the evaluation of on
 
 {{< img src="service_management/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
 
-## Switch Statement
+## Switch statement
 
 Use the Switch statement action to handle multiple branching paths in a single step. Specify a switch expression and compare it against one or more case values. If no case matches, a default branch runs instead. In the example below, a Switch statement routes the workflow based on whether the status code from a previous HTTP request is `200`, `403`, `404`, `500`, or another value.
 
