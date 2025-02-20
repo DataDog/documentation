@@ -33,7 +33,9 @@ This format uses specific separators to structure each security control entry.
 | **Type**                    | Defines the type of control. **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.                                                                                                                     |
 | **Secure Marks**            | List of vulnerability types to apply. Possible values are defined in [Secure marks](#secure-marks). Optionally, use `*` to indicate applicability to all types.                                         |
 | **Class/File**              | Fully qualified class or file implementing the security control.                                                                                                                                        |
-| **Method**                  | Name of the method implementing the security control.                                                                                                                                                   |
+| ##### Method
+
+                  | Name of the method implementing the security control.                                                                                                                                                   |
 | **Parameters (Optional)**   | Fully qualified class parameters. Used to **distinguish between overloaded methods**. If omitted and overloading exists, the security control will apply to **all overloaded methods**.                 |
 | **Parameters to Validate (Optional)** | Zero-based list of parameter positions to validate. The first parameter is position **0**. This field applies **only** to `INPUT_VALIDATOR` types. Used when **not all parameters require validation**. |
 
@@ -96,114 +98,118 @@ The following table lists the supported vulnerability types as secure marks for 
 
 #### Method that validates all input parameters to avoid command injection vulnerabilities
 
-**Method**
+##### Method
 `bar.foo.CustomInputValidator#validate(String input1, String input2)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate`
 
 #### Method that validates one input parameter to avoid command injection vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomInputValidator#validate(String input1, String inputToValidate)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1`
 
 #### Method that validates two input parameters to avoid command injection vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomInputValidator#validate(String input1, String firstInputToValidate, String secondInputToValidate, Object anotherInput)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:1,2
 `
 #### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomInputValidator#validate(String input)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomInputValidator:validate
 `
 #### Method that validates the input parameter to avoid any vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomInputValidator#validate(String input)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:*:bar.foo.CustomInputValidator:validate
 `
 #### Overloaded method that validates the input parameter to avoid command injection vulnerabilities
 
-**Methods**
+##### Methods
  `bar.foo.CustomInputValidator#validate(String input)`
  `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:java.lang.String
 `
-**NOTE**: Applies for the first method.
+##### NOTE
+Applies for the first method.
 
 
 #### Overloaded methods that validate the input parameter to avoid command injection vulnerabilities
 
-**Methods**
+##### Methods
  `bar.foo.CustomInputValidator#validate(String input)`
  `bar.foo.CustomInputValidator#validate(String input, String input2)`
 
-**Config**
+##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate
 `
-**NOTE**: Applies for both methods.
+##### NOTE
+Applies for both methods.
 
 ### Sanitizer
 
 #### Sanitizer to avoid command injection vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomSanitizer#sanitize(String input)`
 
-**Config**
+##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
 `
 #### Sanitizer to avoid command injection  and code injection vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomSanitizer#sanitize(String input)`
 
-**Config**
+##### Config
 `SANITIZER:COMMAND_INJECTION,CODE_INJECTION:bar.foo.CustomSanitizer:sanitize
 `
 #### Sanitizer to avoid any vulnerabilities
 
-**Method**
+##### Method
  `bar.foo.CustomSanitizer#sanitize(String input)`
 
-**Config**
+##### Config
 `SANITIZER:*:bar.foo.CustomSanitizer:sanitize
 `
 #### Overloaded sanitizer to avoid command injection vulnerabilities
 
-**Methods**
+##### Methods
  `bar.foo.CustomSanitizer#sanitize(String input)`
  `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
-**Config**
+##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize:java.lang.String
 `
-**NOTE**: applies for the first method
+##### NOTE
+applies for the first method
 
 #### Overloaded sanitizers to avoid command injection vulnerabilities
 
-**Methods**
+##### Methods
  `bar.foo.CustomSanitizer#sanitize(String input)`
  `bar.foo.CustomSanitizer#sanitize(String input, String input2)`
 
-**Config**
+##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
 `
-**NOTE**: applies for both methods
+##### NOTE
+applies for both methods
 
 {{% /collapse-content %}}
 
