@@ -123,7 +123,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | LaunchDarkly Feature Flag Events (service tag must be defined on event)           | Third Party Datadog Integrations ([LaunchDarkly only][5])                                      |
 | Custom Feature Flag Events                                                        | [Event Management API][6]                                                                      |
 | Custom Configuration Change Events                                                | [Event Management API][6]                                                                      |
-| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
+| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
 | CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
 | PostgreSQL Database Table Change                                                  | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
 | PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
