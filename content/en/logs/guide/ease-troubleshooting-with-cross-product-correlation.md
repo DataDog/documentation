@@ -8,7 +8,7 @@ further_reading:
 - link: '/tracing/other_telemetry/connect_logs_and_traces'
   tag: 'Documentation'
   text: 'Connect Logs and Traces'
-- link: '/real_user_monitoring/platform/connect_rum_and_traces/'
+- link: '/real_user_monitoring/correlate_with_other_telemetry/apm/'
   tag: 'Documentation'
   text: 'Connect RUM & Session Replay and Traces'
 - link: '/synthetics/apm/'

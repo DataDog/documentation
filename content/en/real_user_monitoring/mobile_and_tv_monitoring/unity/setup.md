@@ -213,7 +213,7 @@ This means that even if users open your application while offline, no data is lo
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens
-[3]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[3]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
 [4]: https://github.com/googlesamples/unity-jar-resolver
 [5]: https://openupm.com/packages/com.google.external-dependency-manager/
 [6]: https://github.com/DataDog/unity-package
