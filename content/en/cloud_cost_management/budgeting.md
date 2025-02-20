@@ -45,12 +45,12 @@ Note: You can not view budget vs actuals before 15 months, since cost metrics ha
 </div>
 
 {{< img src="cloud_cost/budgeting/budget-status-month.png" alt="Budget Status View: view current month">}}
-{{< img src="cloud_cost/budgeting/budget-status-year.png" alt="Budget Status View: view total budget">}}
+{{< img src="cloud_cost/budgeting/budget-status-all.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
 Filter budgets using the "Filter to" at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
 Click on "Copy Link" to send the budget to others to help understand why budgets are going over.
-Or, share budgets with finance so that they can understand how you’re tracking against budgets.
+Or, share budgets with finance so that they can understand how you're tracking against budgets.
 
 ## Delete budget
 Click the trash icon on the Budgets page, or within an individual budget, to delete the budget.
