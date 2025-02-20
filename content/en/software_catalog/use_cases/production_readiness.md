@@ -41,17 +41,21 @@ In [Software Catalog][3], click on a service to open a detailed side panel, and 
 
 Use the Security tab in Software Catalog to identify and remediate vulnerabilities in service dependencies. This view also reveals which services are most targeted by attacks and exposed to severe threats.
 
-To explore security details for a particular service, click on a service in Software Catalog to open the service side panel, and find the Security tab. 
+{{< img src="tracing/software_catalog/security-tab.png" alt="The Security tab view of Software Catalog, showing vulnerability risk and attack exposure for each service" style="width:100%;" >}}
 
-{{< img src="tracing/software_catalog/production-readiness-security.png" alt="The security tab for a service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
+To explore security details for a particular service, you can do one of the following:
 
-You can also explore the Security tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
+- Click on a service in Software Catalog to open the service side panel, and find the Security tab. 
+
+  {{< img src="tracing/software_catalog/production-readiness-security.png" alt="The Security tab for a single service, showing details about vulnerability risk and attack exposure" style="width:100%;" >}}
+
+- Explore the Security tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
 
 ### Use the Costs tab to optimize spending
 
 In the Costs tab, powered by [Cloud Cost Management][2], you can identify inefficiencies, cost-saving opportunities, and trends over time. With cost data and service metrics in one place, you can understand how engineering changes impact overall cloud spend.
 
-{{< img src="tracing/software_catalog/production-readiness-cost-changes.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/production-readiness-cost-changes.png" alt="The Costs view of Software Catalog, showing total cost per service and change over time" style="width:100%;" >}}
 
 To explore cost details for a specific service, you can do one of the following:
 
