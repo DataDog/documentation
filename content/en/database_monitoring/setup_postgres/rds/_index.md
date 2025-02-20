@@ -17,8 +17,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
-<div class="alert alert-info">Interested in a more streamlined setup where Datadog automatically deploys the Agent to monitor your RDS? <a href="https://forms.gle/1dyK11ubXdmKuriH7">Fill out this form</a> to share your interest.</div>
-<p></p>
+<div class="alert alert-info">
+<a href="/database_monitoring/setup_postgres/rds/quick_install">RDS Quick Install</a> is our recommended installation method for smaller environments (for example 20 database hosts) or those new to DBM and want to try it out quickly. For those managing large fleets of databases where deploying the agent via UI doesn't scale as well we recommend the standard installation, to manually manage the agent yourself or integrate with your automation practices.
+</div>
 
 ## Before you begin
 

@@ -614,6 +614,11 @@
   "CreateMonitor": [
     {
       "group": "monitors",
+      "suffix": "_1303514967",
+      "description": "Create a Cost Monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3883669300",
       "description": "Create a RUM formula and functions monitor returns \"OK\" response"
     },

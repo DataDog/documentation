@@ -53,8 +53,6 @@ jobs:
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
-          dd_service: "my-service"
-          dd_env: "ci"
 ```
 
 Datadog API キーとアプリケーションキーを GitHub リポジトリにシークレットとして設定する必要があります。詳しくは、[API とアプリケーションキー][1]を参照してください。

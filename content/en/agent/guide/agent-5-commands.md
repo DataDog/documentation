@@ -1,6 +1,7 @@
 ---
 title: Agent 5 Commands
 disable_toc: false
+private: true
 ---
 
 ## Overview

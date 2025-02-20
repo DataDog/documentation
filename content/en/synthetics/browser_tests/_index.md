@@ -33,25 +33,38 @@ Browser tests are scenarios executed by Datadog on your web applications. They r
 
 ## Test configuration
 
-Define the configuration of your browser test.
+You may create a test using one of the following options:
 
-1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+- **Create a test from a template**:
 
- <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
-2. Add a **name**: The name of your browser test.
-3. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-4. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
-   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
-   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
-   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
-5. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
+- **Build a test from scratch**:
+    
+    1. Click the **+** template to start a new Browser Test from scratch.
+    1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+    1. Add a **name**: The name of your browser test.
+    1. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 
-   {{% managed-locations %}}
+       <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-   You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
+   1. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
 
-6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+      - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
+      - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+      - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+
+   1. Select **managed and private locations**: Select from a list of locations around the world that are managed by Datadog, or create [private locations][1] to run your browser test from custom locations or inside private networks.<br /><br>
+
+      {{% managed-locations %}}
+
+      You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.<br /><br>
+
+   6. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+   7. Click **Save & Edit Recording** to submit your Browser Test.
 
 ### Snippets
 
@@ -62,7 +75,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * **Tablet**
    * **Mobile**
 
-* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA). 
+* **Multi-region check**: Automatically test your website against a location in each of the three primary geographic regions (AMER, APAC and EMEA).
 </br><br>
 
   {{< img src="synthetics/browser_tests/browser_snippets_2.png" alt="Screenshot of the left hand side of a browser test creation, showing the snippets examples" width="70%" >}}
@@ -122,7 +135,7 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    {{% /tab %}}
 
    {{% tab "Time & Language" %}}
-   
+
   By default, timezone is set to UTC, and language is set to English (en). To define a language, use the corresponding 2 or 3 digit [ISO code][1].
 
 [1]: https://www.loc.gov/standards/iso639-2/php/code_list.php
@@ -208,11 +221,24 @@ If you are using the [custom role feature][15], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][16] on their accounts.
+Use [granular access control][17] to limit who has access to your test based on roles, teams, or individual users:
 
-You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
+1. Open the permissions section of the form.
+2. Click **Edit Access**.
+  {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
+3. Click **Restrict Access**.
+4. Select teams, roles, or users.
+5. Click **Add**.
+6. Select the level of access you want to associate with each of them.
+7. Click **Done**.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+
+| Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
+| ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
+| No access    |                         |                         |                   |           |                |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 ## Further Reading
 
@@ -234,5 +260,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [14]: /synthetics/browser_tests/actions/
 [15]: /account_management/rbac#custom-roles
 [16]: /account_management/rbac/#create-a-custom-role
-
-
+[17]: /account_management/rbac/granular_access

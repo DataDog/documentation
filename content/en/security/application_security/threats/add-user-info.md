@@ -116,12 +116,16 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
+The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1] (or [v2 documentation][2]).
 
 This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
 
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec // 2.x
+)
+
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // The user must be blocked by aborting the request handler asap.
@@ -132,6 +136,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
+[2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -475,7 +480,10 @@ The following examples show how to track login events or custom events (using si
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := make(map[string]string) /* optional extra event metadata */
@@ -494,7 +502,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 {{% tab "Login failure" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
@@ -509,7 +520,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{% tab "Custom business logic" %}}
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/appsec" // 1.x
+  // "github.com/DataDog/dd-trace-go/v2/appsec" // 2.x
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}
@@ -781,7 +795,7 @@ The following modes are deprecated:
 
 ## Disabling user activity event tracking 
 
-To disable automated user activity detection through your [ASM service catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+To disable automated user activity detection through your [ASM Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 

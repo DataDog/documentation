@@ -7,7 +7,6 @@ dependencies:
 - https://github.com/DataDog/datadog-serverless-functions/blob/master/aws/logs_monitoring/README.md
 title: Datadog Forwarder
 ---
-
 ## Información general
 
 El Datadog Forwarder es una función AWS Lambda que envía logs desde AWS a Datadog, concretamente:
@@ -64,7 +63,7 @@ Al separar las configuraciones de la clave de API y del Forwarder, no es necesar
 #### Ejemplo de configuración
 
 ```tf
-# Almacenar la clave de API de Datadog en AWS Secrets Manager
+
 variable "dd_api_key" {
   type        = string
   description = "Datadog API key"
@@ -113,7 +112,7 @@ resource "aws_cloudformation_stack" "datadog_forwarder" {
 
 Si no puedes instalar el Forwarder utilizando la plantilla de CloudFormation proporcionada, puedes instalarlo manualmente siguiendo los pasos que se indican a continuación. No dudes en abrir una incidencia o en crear una solicitud de extracción para hacernos saber si hay algo que podríamos mejorar para que la plantilla funcione.
 
-1. Crea una función Lambda Python 3.10 utilizando `aws-dd-forwarder-<VERSION>.zip` de las últimas [versiones][101].
+1. Crea una función de Lambda de Python 3.11 con `aws-dd-forwarder-<VERSION>.zip` de las últimas [versiones][101].
 2. Guarda tu [clave de API de Datadog][102] en AWS Secrets Manager, configura la variable de entorno `DD_API_KEY_SECRET_ARN` con el ARN de secretos en la función Lambda y añade el permiso `secretsmanager:GetSecretValue` al rol de ejecución Lambda.
 3. Si necesitas reenviar logs desde buckets S3, añade el permiso `s3:GetObject` al rol de ejecución Lambda.
 4. Configura la variable de entorno `DD_ENHANCED_METRICS` como `false` en el Forwarder. Esto evita que el Forwarder genere métricas mejoradas por sí mismo, aunque seguirá reenviando métricas personalizadas desde otras funciones Lambda.
@@ -148,8 +147,8 @@ A partir de la versión, 3.107.0 se ha añadido una nueva característica para p
 
 ### Actualizar una versión anterior a la v3.106.0 o superior
 
-A partir de la versión 3.106.0, la función Lambda se ha actualizado para añadir un prefijo a los nombres de archivos de caché almacenados en el bucket S3 configurado en `DD_S3_BUCKET_NAME`. Esto permite utilizar el mismo bucket para almacenar archivos de caché de varias funciones. 
-Además, a partir de esta versión, el Forwarder adjuntará por defecto etiquetas del bucket S3 personalizadas a todos los logs exportados a S3. Por ejemplo, si un servicio está configurado para enviar logs a un bucket S3 de destino, el Forwarder añadirá las etiquetas del bucket a los logs mientras los extrae y los reenvía.
+A partir de la versión 3.106.0, la función de Lambda se ha actualizado para añadir un prefijo a los nombres de archivo de caché almacenados en el bucket de S3 configurado en `DD_S3_BUCKET_NAME`. Esto permite usar el mismo bucket para almacenar archivos de caché de varias funciones. 
+Además, a partir de esta versión, el Forwarder adjuntará etiquetas (tags) del bucket de S3 personalizadas de manera predeterminada a todos los logs exportados a S3. Por ejemplo, si un servicio se ha configurado para enviar logs a un bucket de S3 de destino, el Forwarder añadirá las etiquetas del bucket a los logs mientras los extrae y los reenvía.
 
 ### Actualizar una versión anterior a la v3.99.0 o superior
 
@@ -388,15 +387,6 @@ conexión TCP cifrada SSL, configura este parámetro como true (verdadero).
 `DdForwardLog`
 : Configúralo como false (falso) para deshabilitar el reenvío de logs, mientras se siguen reenviando otros datos de observabilidad, como métricas y trazas de funciones Lambda.
 
-`DdFetchLambdaTags`
-: Permite que el Forwarder recupere etiquetas de Lambda mediante llamadas a la API de GetResources y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución Lambda.
-
-`DdFetchLogGroupTags`
-: Permite que el Forwarder recupere etiquetas de grupos de logs mediante ListTagsLogGroup y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `logs:ListTagsLogGroup` se añadirá automáticamente al rol IAM de ejecución Lambda.
-
-`DdFetchStepFunctionsTags`
-: Permite que Forwarder recupere tags de funciones Step mediante llamadas a la API GetResources y las aplique a logs y trazas (si está habilitado el rastreo de funciones Step). Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución de Lambda.
-
 ### Limpieza de logs (opcional)
 
 `redactIp`
@@ -432,6 +422,18 @@ Los siguientes son algunos ejemplos de expresiones regulares que pueden utilizar
 Para probar diferentes patrones en tus logs, activa la [limpieza de logs](#troubleshooting).
 
 ### Avanzado (opcional)
+
+`DdFetchLambdaTags`
+: Permite que el Forwarder recupere etiquetas de Lambda mediante llamadas a la API de GetResources y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución Lambda.
+
+`DdFetchLogGroupTags`
+: Permite que el Forwarder recupere etiquetas de grupos de logs mediante ListTagsLogGroup y las aplique a logs, métricas y trazas. Si se configura como true (verdadero), el permiso `logs:ListTagsLogGroup` se añadirá automáticamente al rol IAM de ejecución Lambda.
+
+`DdFetchStepFunctionsTags`
+: Permite que Forwarder recupere tags de funciones Step mediante llamadas a la API GetResources y las aplique a logs y trazas (si está habilitado el rastreo de funciones Step). Si se configura como true (verdadero), el permiso `tag:GetResources` se añadirá automáticamente al rol IAM de ejecución de Lambda.
+
+`DdStepFunctionTraceEnabled`
+: Establécelo como verdadero para habilitar el seguimiento de todas las etiquetas de Step Functions.
 
 `SourceZipUrl`
 : No lo cambies a menos que sepas lo que estás haciendo. Sustituye la localización predeterminada del código fuente de la función.
@@ -552,19 +554,18 @@ La pila de CloudFormation crea los siguientes roles IAM:
     "Resource": "*"
   },
   {
-    "Action": ["s3:PutObject", "s3:DeleteObject"],
-    "Resource": "<S3Bucket to Store the Forwarder Zip>",
-    "Effect": "Allow"
-  },
-  {
-    "Action": ["s3:ListBucket"],
+    "Action": [
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:DeleteObject"
+    ],
     "Resource": "<S3Bucket to Store the Forwarder Zip>",
     "Effect": "Allow"
   }
 ]
 ```
 
-## Leer más
+## Referencias adicionales
 
 Más enlaces, artículos y documentación útiles:
 

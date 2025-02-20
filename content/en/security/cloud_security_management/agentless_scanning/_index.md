@@ -26,26 +26,27 @@ further_reading:
 
 ## Overview
 
-Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
+Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
 ## Availability
 
-The following table provides a summary of Agentless scanning technologies in relation to their corresponding components:
+The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
 
-| Component                   | Supported technology                                        |
-|-----------------------------|-------------------------------------------------------------|
-| Cloud Provider              | AWS                                                         |
-| Operating System            | Linux                                                       |
-| Host Filesystem             | Btrfs, Ext2, Ext3, Ext4, xfs                                |
-| Package Manager             | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine) |
-| Encryption                  | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
-| Container runtime           | Docker, containerd </br> **Note**: CRI-O is **not** supported                                         |
-| Serverless                  | AWS, AWS Lambda                                             |
-| Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
+| Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Operating System                                | Linux                                                                                                                                     | Linux                                                                                                                                                                             |
+| Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      |
+| Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
+| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
+| Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
+| Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][12]                                                                                                                                                         |
+| Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
+
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your EC2 instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
+After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
 
 The following diagram illustrates how Agentless Scanning works:
 
@@ -56,14 +57,14 @@ The following diagram illustrates how Agentless Scanning works:
     **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security Management enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
 2. For Lambda functions, the scanners fetch the function's code.
-3. The scanner creates snapshots of EBS volumes used by EC2 instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, the list of packages and information related to collected hosts (hostnames/EC2 instances) are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
+3. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
+4. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
 5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
-- The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
+- The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
 - The scanner securely collects a list of packages from your hosts without transmitting any confidential or private personal information outside your infrastructure.
-- The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and uses exponential backoff if needed.
+- The scanner limits its use of the cloud provider API to prevent reaching any rate limit, and uses exponential backoff if needed.
 
 ## What data is sent to Datadog
 The Agentless scanner uses the OWASP [cycloneDX][3] format to transmit a list of packages to Datadog. No confidential or private personal information is ever transmitted outside of your infrastructure.
@@ -76,7 +77,7 @@ Datadog does **not** send:
 
 ## Security considerations
 
-Because the scanner instances grant [permissions][4] to create and copy EBS snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
+Because the scanner instances grant [permissions][4] to create and copy snapshots, and describe volumes, Datadog advises restricting access to these instances solely to administrative users.
 
 To further mitigate this risk, Datadog implements the following security measures:
 
@@ -85,7 +86,7 @@ To further mitigate this risk, Datadog implements the following security measure
 - The Datadog scanner operates under the principle of least privilege. This means that it is granted only the minimum permissions necessary to perform its intended functions effectively.
 - Datadog carefully reviews and limits the permissions granted to the scanner to ensure that it can conduct scans without unnecessary access to sensitive data or resources.
 - Unattended security updates are enabled on Datadog's scanner instances. This feature automates the process of installing critical security patches and updates without requiring manual intervention.
-- The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu Amazon Machine Images (AMIs).
+- The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu images.
 - Access to the scanner instances is tightly controlled through the use of security groups. No inbound access to the scanner is allowed, restricting possibility to compromise the instance.
 - No confidential or private personal information is ever transmitted outside of your infrastructure.
 
@@ -132,3 +133,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/library_rules/
+[12]: /help

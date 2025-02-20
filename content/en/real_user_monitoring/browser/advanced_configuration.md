@@ -35,7 +35,7 @@ There are various ways you can modify the [data and context collected][1] by RUM
 
 ## Override default RUM view names
 
-The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically. For example, `/dashboard/1234` becomes `/dashboard/?`.
+The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
 
 Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
 
@@ -477,10 +477,7 @@ window.DD_RUM &&
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
 
-The RUM Browser SDK ignores:
-
-- Attributes added outside of `event.context`
-- Modifications made to a RUM view event context
+The RUM Browser SDK ignores attributes added outside of `event.context`
 
 ### Enrich RUM events with feature flags
 
@@ -536,19 +533,21 @@ window.DD_RUM &&
 
 You can update the following event properties:
 
-|   Attribute           |   Type    |   Description                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   String  |   The URL of the active web page.                            |
-|   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
-|   `view.name`           |   String  |   The name of the current view.                            |
-|   `service`             |   String  |   The service name for your application.                                                            |
-|   `version`             |   String  |   The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
-|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
-|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
-|   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
-|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
-|   `resource.url`        |   String  |   The resource URL.                                                                                 |
-|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**).                                                                                 |
+| Attribute                      | Type   | Description                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | String | The URL of the active web page.                                                                                                                                                           |
+| `view.referrer`                | String | The URL of the previous web page from which a link to the currently requested page was followed.                                                                                          |
+| `view.name`                    | String | The name of the current view.                                                                                                                                                             |
+| `service`                      | String | The service name for your application.                                                                                                                                                    |
+| `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
+| `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
+| `error.message`                | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
+| `error.stack `                 | String | The stack trace or complementary information about the error.                                                                                                                             |
+| `error.resource.url`           | String | The resource URL that triggered the error.                                                                                                                                                |
+| `resource.url`                 | String | The resource URL.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | String | The script resource url                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | String | A meaningful name indicating how the script was called                                                                                                                                    |
+| `context`                      | Object | Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
@@ -611,14 +610,15 @@ window.DD_RUM &&
 
 ## User session
 
-Adding user information to your RUM sessions can help you:
+Adding user information to your RUM sessions helps you:
+
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The following attributes are optional but Datadog recommends providing at least one of them:
+The below attributes are optional but Datadog strongly recommends providing at least one of them. For example, you should set the user ID on your sessions to see relevant data on some default RUM dashboards, which rely on `usr.id` as part of the query.
 
 | Attribute  | Type | Description                                                                                              |
 |------------|------|----------------------------------------------------------------------------------------------------|

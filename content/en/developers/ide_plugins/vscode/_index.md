@@ -5,9 +5,6 @@ is_beta: true
 aliases:
 - '/developers/ide_integrations/vscode/'
 further_reading:
-- link: "/getting_started/synthetics/"
-  tag: "Documentation"
-  text: "Getting Started with Synthetic Monitoring"
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing"
@@ -21,6 +18,12 @@ further_reading:
   tag: "Blog"
   text: "Simplify production debugging with Datadog Exception Replay"
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    The Datadog extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 
@@ -36,9 +39,6 @@ It packs several features, including:
   - Reports by [Application Vulnerability Management][11]
   - [Flaky tests][12] detected by CI Visibility
 
-- [**Synthetic Tests**](#synthetic-tests) to provide quality assurance during development by allowing you to run existing Synthetic Tests against local servers.
-
-
 - [**View in VS Code**](#view-in-vs-code) to directly go from your file references on the Datadog platform to your source files.
 
 - [**Logs Navigation**](#logs-navigation) to allow you to search for logs from your code.
@@ -51,13 +51,13 @@ It packs several features, including:
 
 ## Requirements
 
-- **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][1] to learn more about Datadog's observability tools and sign up for a free trial.
 
 - **VS Code Git**: The extension works better when VS Code Git integration is enabled. You can ensure that the integration is enabled by checking the `git.enabled` setting.
 
 ## Setup
 
-Install the [Datadog Extension][6] from the Visual Studio Marketplace.
+Install the [Datadog Extension][2] from the Visual Studio Marketplace.
 
 ## Code Insights
 
@@ -72,31 +72,6 @@ Code Insights include a detailed description for each issue, and links to:
 
 You can dismiss individual Code Insights and set filters to view the ones you are most interested in.
 
-## Synthetic Tests
-
-The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in VS Code. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
-
-<div class="alert alert-info">We support <a href="https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions">HTTP API tests</a> and <a href=" https://docs.datadoghq.com/synthetics/browser_tests/?tab=requestoptions">Browser tests</a>.</div>
-
-
-{{< img src="developers/ide_plugins/vscode/vscode-extension-demo.png" alt="The Datadog Extension in VS Code" style="width:100%;" >}}
-
-### Run Synthetic tests locally
-
-1. Select a Synthetic test to execute. You can search for specific tests by clicking the **Search** icon.
-2. Change the test's configuration to convert the start URL and specify a `localhost` URL on the **Settings** page.
-3. Run the test.
-
-{{< img src="developers/ide_plugins/vscode/test_configuration_modified_starturl.png" alt="The Test Configuration panel and Settings page where you can specify the start URL of a Synthetics test to a localhost URL" style="width:100%;" >}}
-
-If you haven't set up Synthetic tests already, [create a test in Datadog][3]. For more information about running tests on a local environment, see [Getting Started with API Tests][4], [Getting Started with Browser Tests][5], and the [Continuous Testing documentation][1].
-
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][7] can create, edit, and delete Synthetic HTTP and browser tests. To get create, edit, and delete access to Synthetic HTTP and browser tests, upgrade your user to one of those two [default roles][7].
-
-If you are using the [custom role feature][8], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
-
 ## View in VS Code
 
 The **View in VS Code** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][10]):
@@ -107,7 +82,7 @@ The **View in VS Code** feature provides a link from Datadog directly to your so
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][28] on the [Datadog platform][2] directly from your source code files.
+You can navigate to the [Log Explorer][28] on the [Datadog platform][1] directly from your source code files.
 
 If you're using a supported logging library, the extension is able to show you code lenses on the lines where it has detected log patterns that match the Datadog platform records:
 
@@ -185,13 +160,13 @@ Please read this [End-User License Agreement][23] carefully before downloading o
 
 Datadog anonymously collects information about your usage of this IDE, including how you interact with it, whether errors occurred while using it, and what caused those errors, in accordance with the [Datadog Privacy Policy][24] and Datadog's [VS Code extension EULA][23].
 
-If you don't wish to send this data to [Datadog][2], you can opt out at any time in the VS Code extension settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
+If you don't wish to send this data to [Datadog][1], you can opt out at any time in the VS Code extension settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
 <div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> telemetry setting.</div>
 
 ## Help and feedback
 
-To share your feedback, email [team-ide-integration@datadoghq.com][9] or create an issue in the extension's [public repository][26].
+To share your feedback, email [team-ide-integration@datadoghq.com][3] or create an issue in the extension's [public repository][26].
 
 Check out the [issues][27] section to discover known issues.
 
@@ -199,15 +174,9 @@ Check out the [issues][27] section to discover known issues.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_testing/
-[2]: https://www.datadoghq.com/
-[3]: https://app.datadoghq.com/synthetics/create
-[4]: /getting_started/synthetics/api_test
-[5]: /getting_started/synthetics/browser_test
-[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
-[7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[8]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[9]: mailto:team-ide-integration@datadoghq.com
+[1]: https://www.datadoghq.com/
+[2]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
+[3]: mailto:team-ide-integration@datadoghq.com
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/

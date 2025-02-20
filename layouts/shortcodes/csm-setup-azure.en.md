@@ -6,21 +6,11 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 ### Enable CSM for your Azure subscriptions
 
-Use one of the following methods to enable CSM for your Azure subscriptions:
-
-#### CSM Setup page
-
 1. On the [**Cloud Security Management Setup**][2] page, click **Cloud Integrations**.
 2. Expand the **Azure** section.
 3. To enable resource scanning for a subscription, switch the **Resource Scanning** toggle to the on position.
 4. To create a filter that excludes certain resources from being evaluated by CSM, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].
 5. Click **Done**.
-
-#### Azure integration page
-
-1. On the [**Azure Integration**][3] page, select an Azure app registration.
-2. Under **Resource Collection**, select **Enable Cloud Security Management**.
-3. Click **Submit Changes**.
 
 [1]: https://docs.datadoghq.com/integrations/azure
 [2]: https://app.datadoghq.com/security/configuration/csm/setup

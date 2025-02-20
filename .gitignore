@@ -115,12 +115,17 @@ content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 content/en/continuous_testing/cicd_integrations/bitrise_upload.md
 content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
-# Code Analysis
+
+# Old code_analysis locations
 content/en/code_analysis/static_analysis/github_actions.md
 content/en/code_analysis/software_composition_analysis/github_actions.md
 content/en/code_analysis/static_analysis/circleci_orbs.md
 content/en/code_analysis/static_analysis_rules/*
-!content/en/code_analysis/static_analysis_rules/_index.md
+content/en/code_analysis/static_analysis_rules/_index.md
+
+# New code_security locations
+content/en/security/code_security/static_analysis/static_analysis_rules/*
+!content/en/security/code_security/static_analysis/static_analysis_rules/_index.md
 
 # Let's keep these so we don't accidentally re-add them to repo
 content/en/continuous_integration/static_analysis/github_actions.md

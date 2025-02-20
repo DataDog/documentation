@@ -227,4 +227,4 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [2]: /security/application_security
 [3]: /security/cloud_security_management/
 [4]: /tracing
-[10]: /security/application_security/software_composition_analysis/
+[10]: /security/code_security/software_composition_analysis/

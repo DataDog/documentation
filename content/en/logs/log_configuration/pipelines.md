@@ -204,6 +204,8 @@ See the ELB logs example below:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" style="width:70%;">}}
 
+**Note**: Integration pipelines cannot be deleted, only disabled.
+
 ### Integration pipeline library
 
 To see the full list of integration pipelines that Datadog offers, browse the [integration pipeline library][7]. The pipeline library shows how Datadog processes different log formats by default.

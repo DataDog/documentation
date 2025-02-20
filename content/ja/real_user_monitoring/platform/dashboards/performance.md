@@ -18,7 +18,7 @@ title: RUM パフォーマンス概要ダッシュボード
 
 Web アプリパフォーマンスダッシュボードでは、RUM Web アプリケーションを俯瞰して見ることができます。以下が表示されます。
 
-- **Core web vitals**:
+- **Core web vitals**: 
   すべてのビューで、3 つのブラウザパフォーマンスメトリクス (Largest Contentful Paint、First Input Delay、Cumulative Layout Shift) がハイライトされます。Load Time などの他のパフォーマンスメトリクスも利用可能です。
 - **XHR and Fetch requests and resources**:
   すべてのビューで、アプリケーションのロード時にボトルネックを特定します。
@@ -66,9 +66,9 @@ RUM リソースダッシュボードは、アプリケーションに最も大�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/data_collected/
+[1]: /ja/real_user_monitoring/browser/data_collected/
 [2]: /ja/real_user_monitoring/ios/data_collected/
 [3]: /ja/real_user_monitoring/android/data_collected/
 [4]: /ja/real_user_monitoring/reactnative/data_collected/
-[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [6]: /ja/data_security/real_user_monitoring/

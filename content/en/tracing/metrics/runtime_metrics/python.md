@@ -18,10 +18,6 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
-
 ## Automatic configuration
 
 Runtime metrics collection can be enabled with the `DD_RUNTIME_METRICS_ENABLED=true` environment parameter when running with `ddtrace-run`.
@@ -33,7 +29,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-Runtime metrics can be viewed in correlation with your Python services. See the [Service Catalog][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Python services. See the [Software Catalog][1] in Datadog.
 
 **Note**: For the runtime UI, `ddtrace` >= [`0.24.0`][2] is supported.
 
