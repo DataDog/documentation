@@ -443,7 +443,7 @@ You also need to update the environment variables of the Datadog Agent's contain
    "family": "datadog-agent-task"
 }
 ```
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
+[1]: https://docs.datadoghq.com/agent/configuration/fips-compliance/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
 ## Troubleshooting
