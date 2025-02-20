@@ -31,7 +31,7 @@ Antes de crear un check del Agent personalizado, instala el [Datadog Agent][1].
 init_config:
 instances:
   [{}]
-{{< /bloque de código >}}
+{{< /code-block >}}
 4. Crea un archivo de check en el directorio `checks.d`. Nombra el archivo `custom_checkvalue.py`.
 
    <div class="alert alert-info">
