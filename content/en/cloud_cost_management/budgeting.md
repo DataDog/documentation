@@ -58,5 +58,6 @@ Click the trash icon on the Budgets page, or within an individual budget, to del
 {{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
 
 ## Further Reading
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/plan/budgeting

@@ -1973,7 +1973,7 @@ menu:
       url: service_catalog/use_cases/dependency_management
       parent: service_catalog_use_cases
       identifier: service_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305
     - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
@@ -3265,6 +3265,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_monitors
       weight: 12
+    - name: Budgeting
+      url: /cloud_cost_management/budgeting
+      parent: cloud_cost
+      identifier: cloud_cost_budgeting
+      weight: 13
     - name: APM
       url: tracing/
       pre: apm
@@ -6262,7 +6267,7 @@ menu:
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6      
+      weight: 6
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
