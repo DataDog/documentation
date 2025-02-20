@@ -7,6 +7,10 @@ aliases:
   - /tracing/service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /service_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
   - /tracing/service_catalog/use_cases/pipeline_visibility
+  - /tracing/software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /software_catalog/guides/streamlining-development-lifecycle-with-ci-visibility
+  - /service_catalog/use_cases/ci_visibility
+  - /software_catalog/use_cases/ci_visibility
 further_reading:
   - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
@@ -28,7 +32,7 @@ By default, your service is linked to CI pipelines through its repository URL. T
 
 To add or remove a pipeline associated with your service:
 
-1. Click on your service in [Software Catalog][4] to open the service side panel, and select one of the edit options for Entity Metadata. . 
+1. Click on your service in [Software Catalog][4] to open the service side panel, click on the Ownership tab, and select one of the edit options for Entity Metadata.
 
    **Note**: This is only available for [Software Catalog schema v2.2][3].
 
@@ -36,7 +40,7 @@ To add or remove a pipeline associated with your service:
 
 2. Then, you can either:
 
-   - Find the Software Delivery section, then search for and select the pipelines you want to associate.
+   - Find the Software Delivery section, then search for and select the pipelines you want to associate with the service.
 
       {{< img src="tracing/software_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 
@@ -45,7 +49,7 @@ To add or remove a pipeline associated with your service:
 
       {{< img src="tracing/software_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
-For more details on CI status and static analysis violations for a particular service, click on the service and navigate to the Delivery tab to review the status of each pipeline and rule violation.
+For more details on CI status and static analysis violations, click on the service and navigate to the **Delivery** tab to review the status of each pipeline and rule violation.
 
 {{< img src="tracing/software_catalog/delivery_tab.png" alt="The Delivery tab for a service, showing pipeline information like success rate and date of last execution" style="width:100%;" >}}
 
