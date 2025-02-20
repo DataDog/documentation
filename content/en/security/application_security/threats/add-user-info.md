@@ -795,7 +795,7 @@ The following modes are deprecated:
 
 ## Disabling user activity event tracking 
 
-To disable automated user activity detection through your [ASM service catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+To disable automated user activity detection through your [ASM Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 

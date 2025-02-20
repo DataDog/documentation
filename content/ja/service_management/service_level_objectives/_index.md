@@ -20,12 +20,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/slo-key-questions/
   tag: ブログ
   text: SLO を設定する際のキーとなる質問
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: 効果的なモニターと SLO の作成に関するインタラクティブなセッションに参加できます
+- link: https://www.datadoghq.com/blog/define-and-manage-slos/
+  tag: ブログ
+  text: Datadog で SLO を管理するためのベストプラクティス
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective
   tag: 外部サイト
   text: Terraform で SLO を作成・管理する
+- link: https://www.datadoghq.com/blog/burn-rate-is-better-error-rate/
+  tag: ブログ
+  text: Burn Rate は、より優れたエラーレート指標です
 title: サービスレベル目標（SLO）
 ---
 
@@ -33,13 +36,15 @@ title: サービスレベル目標（SLO）
 
 <br />
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=SLOs&tags.topics-1=Monitors">}}
-  Explore and register for Foundation Enablement sessions. Learn how you can prioritize and address the issues that matter most to your business with native SLO and SLA tracking.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=SLOs&tags.topics-1=Monitors">}}
+Foundation Enablement セッションを確認・登録しましょう。ネイティブな SLO と SLA トラッキングを活用し、ビジネスにとって最も重要な問題を優先して対処する方法を学べます。
 {{< /learning-center-callout >}}
 
 ## 概要
 
 サービスレベル目標 (SLO) は、サイト信頼性エンジニアリングツールキットの重要な要素です。SLO を使用し、アプリケーションのパフォーマンスに明確なターゲットを定義するためのフレームワークを整えることで、一貫したカスタマーエクスペリエンスを提供したり、プラットフォームの安定性を保ちつつ機能を開発したり、内部および外部ユーザーとのコミュニケーションを改善するために役立てることができます。
+
+**ヒント**: Datadog のグローバル検索から Service Level Objectives を開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`slo` を検索してください。
 
 ## 重要な用語
 
@@ -55,27 +60,27 @@ title: サービスレベル目標（SLO）
 エラーバジェット
 : SLO のターゲット割合 (100% - ターゲット割合) から算出される許容範囲内の不確実性。これは製品開発における投資として見なされます。
 
-## SLO タイプ
+## SLO の種類
 
-SLO を作成する際、以下のタイプから選択できます。
-- **メトリクスベースの SLO**: SLI をカウントベースで計算したい場合に使用でき、SLI は優良イベントの合計を全イベントの合計で割った値として計算されます。
-- **モニターベースの SLO**: SLI を時間ベースで計算したい場合に使用でき、SLI はモニターのアップタイムを基にしています。モニターベースの SLO は新規または既存の Datadog モニターに基づく必要があり、調整はそのモニターに対して行う必要があります (SLO の作成時にはできません)。
-- **タイムスライス SLO**: SLI を時間ベースで計算したい場合に使用でき、SLI はカスタムアップタイム定義 (システムが正常な動作を示した時間を合計時間で割ったもの) に基づきます。タイムスライス SLO は、Datadog モニターを必要とせず、さまざまなメトリクスフィルターとしきい値を試して、SLO 作成中にダウンタイムを即座に調査することができます。
+SLO を作成する際は、以下の種類から選択できます。
+- **Metric-based SLO**: カウントベースで SLI を算出したい場合に使用します。SLI は、良好 (good) なイベントの合計を全イベントの合計で割った値として計算されます。
+- **Monitor-based SLO**: 時間ベースで SLI を算出したい場合に使用します。SLI はモニターの稼働時間 (uptime) に基づきます。Monitor-based SLO を作成するには、新規または既存の Datadog モニターが必要です。調整が必要な場合は、SLO の作成画面ではなく、元となるモニター側で変更を行う必要があります。
+- **Time Slice SLO**: 時間ベースで SLI を算出したい場合に使用します。SLI は独自に定義した稼働時間 (システムが正常に動作している合計時間 ÷ 全体の時間) に基づきます。Time Slice SLO を作成するのに Datadog モニターは不要です。SLO 作成時にさまざまなメトリクスフィルターやしきい値を試し、ダウンタイムを即座に調査することができます。
 
-全体的な比較については、[SLO タイプ比較][1]チャートをご覧ください。
+詳細な比較については、[SLO Type Comparison][1] チャートを参照してください。
 
 ## セットアップ
 
-Datadog の[サービスレベル目標ステータスページ][2]を利用して、新規 SLO の作成や既存のすべての SLO の表示・管理を行います。
+Datadog の [Service Level Objectives ステータスページ][2]を使用して、SLO の新規作成や既存 SLO の閲覧・管理が行えます。
 
 ### 構成
 
-1. [SLO ステータスページ][2]で **New SLO +** を選択します。
-2. SLO タイプを選択します。[メトリクスベース][3]、[モニターベース][4]、または[タイムスライス][5]のいずれかのタイプで SLO を作成できます。
+1. [Service Level Objectives ステータスページ][2]で **New SLO +** を選択します。
+2. SLO の種類を選択します。[Metric-based][3]、[Monitor-based][4]、または [Time Slices][5] のいずれかを選択して SLO を作成できます。
 3. SLO のターゲットとローリング期間 (7 日、30 日、90 日経過後) を設定します。Datadog では、SLO のターゲットを SLA で指定した値より厳し目に設定することを推奨しています。期間を複数設定する場合は、プライマリに設定する期間を 1 つ選択します。この期間が SLO 一覧に表示されます。デフォルトでは、最も短い期間が選択されます。
 4. 最後に、SLO にタイトルを付け詳細を入力するか、説明にリンクを足しタグを追加して保存します。
 
-SLO を設定したら、[サービスレベル目標リストビュー][2]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータス比率と残りのエラーバジェット、そして SLI の履歴を示すステータスバー (モニターベースの SLO 用) または棒グラフ (メトリクスベースの SLO 用) が表示されます。1 つの[マルチアラートモニター][6]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][7]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
+SLO を設定した後、[Service Level Objectives リストビュー][2]からその SLO を選択すると、詳細サイドパネルが開きます。サイドパネルには、SLO の各ターゲットごとの全体ステータスのパーセンテージや残りのエラーバジェット (error budget) のほか、SLI の履歴を示すステータスバー (Monitor-based SLO の場合) または棒グラフ (Metric-based SLO の場合) が表示されます。また、1 つの[マルチアラートモニター][6]を使用して作成したグループ化された Monitor-based SLO、または [`sum by` 句][7]を使用して作成したグループ化された Metric-based SLO の場合は、全体のステータスや残りのエラーバジェットに加えて、各グループごとのステータスパーセンテージと残りのエラーバジェットも表示されます。
 
 **例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
 
@@ -91,9 +96,9 @@ $$\text"エラーバジェットの残り" = 100 * {\text"現在のステータ�
 
 **注:** SLO で指定できる小数の桁数は、SLO の種類と選択するタイムウィンドウに応じて異なります。それぞれの SLO の種類について、詳しくは次のリンクを参照してください。
 
-[モニターベースの SLO][8]: 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで。
+[Monitor-based SLO][8]: 7日および 30日のターゲットに対しては小数点以下 2 桁まで、90日のターゲットに対しては小数点以下 3 桁まで指定できます。
 
-[メトリクスベースの SLO][9]: すべての目標について小数第 3 位まで。
+[Metric-based SLO][9]: すべてのターゲットに対して小数点以下 3 桁まで指定できます。
 
 ## SLO の変更
 
@@ -103,13 +108,13 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 ### ロールベースのアクセス
 
-すべてのユーザーは、関連付けられた[ロール][10]に関係なく、SLO と [SLO ステータス修正](#slo-status-corrections)を閲覧できます。SLO の作成、編集、削除は、`slos_write` 権限を持つロールにアタッチされたユーザーのみが行えます。
+すべてのユーザーは、関連付けられている[ロール][10]に関係なく、SLO と [SLO status corrections](#slo-status-corrections) を閲覧できます。ただし、`slos_write` 権限を持つロールに属しているユーザーだけが、SLO の作成・編集・削除を行えます。
 
-ステータス修正を作成、編集、および削除するには、ユーザーは `slos_corrections` 権限を必要とします。この権限を持つユーザーは、それらの SLO を編集する権限を持っていなくても、ステータスの修正を行うことができます。権限の完全なリストについては、[RBAC ドキュメント][11]を参照してください。
+ステータス修正 (status corrections) の作成・編集・削除を行うには、`slos_corrections` 権限が必要です。この権限を持つユーザーであれば、対象の SLO を編集する権限がない場合でもステータス修正を行うことができます。権限の一覧については、[RBAC ドキュメント][11]をご覧ください。
 
 ### きめ細かなアクセス制御
 
-編集を許可する[ロール][10]のリストを指定することで、個々の SLO へのアクセスを制限します。
+また、個別の SLO へアクセス制限を設けたい場合は、編集を許可する[ロール][10]のリストを指定して管理できます。
 
 {{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="歯車メニューの SLO 権限オプション">}}
 
@@ -118,18 +123,18 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
 1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、SLO を編集できる 1 つまたは複数のロール、チーム、ユーザーを選択します。
+1. ドロップダウンを使用して、SLO を編集できるロール、チーム、またはユーザーを 1 つ以上選択します。
 1. **Add** をクリックします。
 1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
 1. **Save** をクリックします。
 
 SLO への編集アクセス権を維持するために、システムは保存する前に、自分がメンバーであるロールを少なくとも 1 つ含めることを要求します。アクセス制御リストのユーザーは、ロールを追加することができ、自分以外のロールを削除することのみが可能です。
 
-**注**: ユーザーは、モニターへの書き込み権限がなくても、任意のモニターに SLO を作成することができます。同様に、ユーザーは SLO への書き込み権限がなくても、SLO アラートを作成することができます。モニターの RBAC 権限の詳細については、[RBAC ドキュメント][12]または[モニターの RBAC の設定方法に関するガイド][13]を参照してください。
+**注**: ユーザーは、モニターへの書き込み権限を持っていない場合でも任意のモニターに対して SLO を作成できます。同様に、SLO への書き込み権限がなくても SLO アラートを作成できます。モニターに関する RBAC の権限詳細は、[RBAC ドキュメント][12]や[モニター向け RBAC セットアップ手順のガイド][13]を参照してください。
 
 ## SLO の検索
 
-[サービスレベル目標ステータスページ][2]では、すべての SLO に対し高度な検索を実行して、検索結果から SLO を検索、表示、編集、複製、削除できます。
+[Service Level Objectives ステータスページ][2]では、すべての SLO を対象とした高度な検索を実行し、検索結果から SLO を見つけて表示、編集、クローン作成、または削除できます。
 
 高度な検索を使用し、SLO の属性をどれでも組み合わせて SLO をクエリできます。
 
@@ -149,7 +154,7 @@ SLO を*任意*のタグでグループ化すると、データのサマリー�
 
 ステータス*とエラー予算*の列で SLO を並べ替え、注意が必要な SLO に優先順位をつけることができます。SLO リストには、[構成](#configuration)で選択した主要なタイムウィンドウの SLO の詳細が表示されます。その他の構成タイムウィンドウはすべて、個別のサイドパネルで表示できます。それぞれのテーブル行をクリックして、SLO 詳細サイドパネルを開きます。
 
-**注**: [Apple App Store][15] および [Google Play Store][16] で入手できる [Datadog モバイルアプリ][14]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
+**注**: [Datadog Mobile App][14] ([Apple App Store][15] および [Google Play Store][16] で入手可能) をダウンロードすると、モバイルデバイスのホーム画面から SLO を閲覧できます。
 
 {{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
 
@@ -248,14 +253,14 @@ SLO 詳細の "Audit History" タブを使用して、個々の SLO のすべて
 
 ## SLO ウィジェット
 
-{{< learning-center-callout header="ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/dashboards-slos" >}}
+{{< learning-center-callout header="ラーニングセンターでダッシュボードと SLO を使用してビジネスクリティカルなインサイトを作成してみる" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
 実際のクラウドコンピューティング容量と Datadog トライアルアカウントで、コストをかけずに学ぶことができます。今すぐ登録して、SLO を追跡するダッシュボード構築の詳細をご覧ください。
 {{< /learning-center-callout >}}
 
 SLO を作成した後は、ダッシュボードやウィジェットを使ってデータを可視化することができます。
   - SLO ウィジェットを使用して単一の SLO のステータスを可視化する
   - SLO List ウィジェットを使用して、SLO のセットを可視化します
-  - [SLO データソース][20]を使用して、15 か月分のメトリクスベースの SLO データを時系列とスカラー (クエリ値、トップリスト、テーブル、変化) の両方のウィジェットでグラフ化します。
+  - [SLO データソース][20]を使用すると、メトリックベースの SLO データ (過去 15 か月分) をタイムシリーズウィジェットやスカラーウィジェット (query value、top list、table、change) で可視化できます。
 
 SLO ウィジェットの詳細については、[SLO ウィジェット][21]および [SLO リストウィジェット][22]のページを参照してください。SLO データソースの詳細については、[ダッシュボードで過去の SLO データをグラフ化する][20]方法のガイドを参照してください。
 
@@ -269,9 +274,9 @@ SLO ウィジェットの詳細については、[SLO ウィジェット][21]お
 修正を適用すると、指定した期間が SLO の計算から外れます。
 - モニターベースの SLO の場合、修正時間ウィンドウはカウントされません。
 - メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
-- タイムスライス SLO の場合、補正タイムウィンドウはアップタイムとして扱われます。
+- Time Slice SLO の場合、ステータス修正 (correction) の適用期間はアップタイムとして扱われます。
 
-臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][24]に基づいています。サポートされているルールは `FREQ`、`INTERVAL`、`COUNT` および `UNTIL` です。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
+一時的に修正を行うための one-time correction と、定期的に発生する修正に対応する recurring correction を設定できます。one-time correction では開始時刻と終了時刻が必要で、recurring correction では開始時刻、継続時間、実行間隔が必要です。recurring correction は [iCalendar RFC 5545 の RRULE 仕様][24]に基づいており、サポートされるルールは `FREQ`、`INTERVAL`、`COUNT`、`UNTIL` です。定期的に修正を無期限で繰り返したい場合は、終了日を指定しなくてもかまいません。
 
 どちらのタイプの修正でも、修正を行う理由を示す修正カテゴリーを選択する必要があります。選択可能なカテゴリーは、`Scheduled Maintenance` (定期メンテナンス)、`Outside Business Hours` (営業時間外)、`Deployment` (デプロイ)、`Other`(その他)です。必要であれば、説明文を追加することができます。
 
@@ -288,9 +293,7 @@ SLO ごとの 90 日制限は、以下の通りです。
 | 毎週繰り返し  | 3             |
 | 毎月繰り返し | 5             |
 
-SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][25] または [Terraform リソース][26]を使用して、UI からステータス修正を構成することができます。
-
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO 補正 UI" style="width:80%;">}}
+ステータス修正は、SLO のサイドパネルで `Correct Status` を選択するか、[SLO status corrections API][25]、または [Terraform リソース][26]を使用して設定できます。
 
 #### UI でのアクセス
 
@@ -304,18 +307,26 @@ UI で SLO ステータス修正にアクセスするには
 6. オプションで **Notes** を追加します。
 7. **Apply Correction** をクリックします。
 
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO 補正 UI" style="width:80%;">}}
+
 既存のステータス修正を表示、編集、削除するには、SLO の詳細サイドパネルビューの上部にある **Corrections** タブをクリックします。
+
+#### ステータス修正の可視化
+
+Metric-based SLO と Time Slice SLO にステータス修正を適用している場合、SLO 詳細ビューの切り替えトグルを使用して、UI 上で修正を有効・無効にできます。このトグルは、SLO 詳細ビューの「History」セクションに表示されるグラフやデータを切り替えます。**注**: 全体の SLO ステータスやエラーバジェットには、常にステータス修正が考慮されます。
+
+{{< img src="service_management/service_level_objectives/correction-toggle.png" alt="SLO 修正 UI" style="width:100%;">}}
 
 ## SLO カレンダービュー
 
-SLO カレンダービューは、[SLO ステータスページ][2]で利用できます。右上隅で、"Primary" ビューから "Weekly" または "Monthly" ビューに切り替えると、12 か月分の SLO ステータスの履歴データが表示されます。カレンダービューは、メトリクスベースの SLO およびタイムスライス SLO に対応しています。
+[SLO ステータスページ][2]にある SLO Calendar View では、「Primary」ビューから「Daily」「Weekly」「Monthly」ビューに切り替えて、最大 12 か月分の SLO の履歴ステータスを確認できます。カレンダービューは Metric-based SLO と Time Slice SLO に対応しています。
 
-{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO カレンダービュー" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-2.png" alt="SLO カレンダービュー" >}}
 
 ## SLO CSV エクスポート
 
-{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="SLO の CSV エクスポート機能をお試しください">}}
-CSV エクスポート機能は非公開ベータ版です。フォームに記入してアクセスをリクエストしてください。
+{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="SLO CSV エクスポート機能を試してみましょう">}}
+CSV エクスポート機能はプレビュー版です。アクセス権をリクエストするには、フォームに入力してください。
 {{< /callout >}}
 
 SLO CSV エクスポート機能は、「週間」または「月間」カレンダービューに切り替えると、[SLO ステータスページ][2]で利用できます。これらのビューでは、新しい「CSV にエクスポート」オプションにアクセスして、以下の情報を含む過去の SLO データの CSV をダウンロードできます。

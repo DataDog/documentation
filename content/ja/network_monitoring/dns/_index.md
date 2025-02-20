@@ -16,6 +16,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
   tag: ブログ
   text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: ブログ
+  text: ネットワークとセキュリティ分析のための DNS ログの監視
 title: DNS モニタリング
 ---
 
