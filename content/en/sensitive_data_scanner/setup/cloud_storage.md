@@ -36,7 +36,7 @@ To use Sensitive Data Scanner in your AWS environments, you need to:
 
 **Notes**:
 - Only AWS accounts that have scanners deployed to them need Remote-Configuration-enabled Datadog API keys.
-- Only admins have permissions to enable Remote Configuration for individual API keys.
+- Only admins with `org_management` permissions can enable Remote Configuration for your organization. After Remote Configuration has been enabled, only users with `api_keys_write` permission can enable Remote Configuration for individual API keys.
 
 ## Security considerations {#security-considerations}
 
@@ -46,8 +46,7 @@ To further mitigate this risk, Datadog implements the following security measure
 
 - The Datadog scanner operates within your infrastructure, ensuring that all data, including sensitive data results, remain isolated and secure.
 - All data transmission between the scanner and Datadog is encrypted using industry standard protocols (such as HTTPS) to ensure data confidentiality and integrity.
-- The Datadog scanner operates under the principle of least privilege. This means that it is granted only the minimum permissions necessary to perform its intended functions effectively.
-- Datadog carefully reviews and limits the permissions needed by the scanner to ensure that it can conduct scans without unnecessary access.
+- Datadog carefully reviews and limits the permissions needed by the scanner to ensure that it can conduct scans without unnecessary access. This means the scanner operates under the principle of least privilege and is granted only the minimum permissions necessary to perform effectively.
 - Unattended security updates are enabled on Datadog's scanner instances. This feature automates the process of installing critical security patches and updates without requiring manual intervention.
 - The Datadog scanner instances are automatically rotated every 24 hours. This rotation ensures that the scanner instances are continually updated with the latest Ubuntu images.
 - Access to the scanner instances is tightly controlled through the use of security groups. No inbound access to the scanner is allowed, further reducing the risk of compromising the instance.
