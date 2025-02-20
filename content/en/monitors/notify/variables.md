@@ -252,7 +252,9 @@ Attributes
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert. 
+
+**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
@@ -302,7 +304,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section.
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section. For examples, see the following:
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
