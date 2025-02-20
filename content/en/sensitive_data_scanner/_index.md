@@ -8,7 +8,6 @@ further_reading:
     - link: "/sensitive_data_scanner/setup/cloud_storage"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner for Cloud Storage"
-      text: "Regular expression syntax for custom scanning rules"
     - link: "coterm"
       tag: "Documentation"
       text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
