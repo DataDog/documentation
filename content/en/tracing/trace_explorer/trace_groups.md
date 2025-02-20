@@ -13,37 +13,46 @@ further_reading:
 
 ## Overview
 
-Trace Groups allow you to define custom grouping keys for their trace data, enabling you to discover request count trends, performance bottlenecks, and error hotspots by looking at aggregated data instead of viewing individual spans and traces. 
-From the trace explorer query editor, group your results by any span tag or attribute to observe request counts, error rates, and latency distributions within each group, defined by the distinct values of the grouping key.
+Trace groups allow you to define custom grouping keys for your trace data, enabling you to discover request count trends, performance bottlenecks, and error hotspots by looking at aggregated data instead of individual spans and traces. 
+
+From the Trace Explorer query editor, you can group your results by any span tag or attribute to observe:
+
+- Request counts
+- Error rates
+- Latency distributions
+
+These metrics are organized within each group based on the distinct values of your chosen grouping keys.
 
 ## Query editor
 
-First specify your query from the [trace explorer][1] query bar, then select up to 4 dimensions in the `Group by` clause, using any span tag or attribute.
+1. Navigate to the [Trace Explorer][1].
+1. Enter your query in the search bar.
+1. Select up to four dimensions in the **Group by** clause, using any span tag or attribute.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_by_clause.png" alt="Group by clause" style="width:90%;" >}}
 
 
-Optionally, after selecting a dimension to group by, select the target span to use to define the group by within: 
-- **span**: Simple group by clause, using the dimension of the queried span.
-- **parent of span**: Group by the specified dimension from the parent span of the queried span. For instance, to visualise how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
-- **root span**: Group by the specified dimension from the root span of the trace. For instance, to analyse request rates patterns on a backend server based on the frontend application pages requests originate from, group by `@view.name` from `root`.
+After selecting a dimension to group by, you can specify where to get the dimension's values from using the **from** dropdown: 
+- **Span**: Group by the dimension of the queried span (default). For example, `a`.
+- **Parent of span**: Group by the specified dimension from the parent span of spans matching the query. For example, to visualize how an API endpoint performs based on the service calling it, group by `service` from `parent(a)`.
+- **Root span**: Group by the specified dimension from the root span of the trace. For example, to analyze backend request patterns based on the frontend pages requests originate from, group by `@view.name` from `root`.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_by_root.png" alt="Group by from root" style="width:90%;" >}}
 
-## Group list
+## View trace groups in the group list
 
 Trace groups are displayed as unique values of the selected dimension. Each group is shown with three key metrics:
-- **Requests**: Count of spans within the group.
-- **Errors**: Error rate and count of errors.
-- **p95 Latency**: p95 latency of spans.
+- **REQUESTS**: Count of spans within the group.
+- **ERRORS**: Error rate and count of errors.
+- **P95 Latency**: p95 latency of spans.
 
-To view metrics (requests, errors, and p95 latency) aggregated over the parent or root span instead of the span identified by the query, select `parent(a)` or `root` in the `Show metrics from` statement.
+To view these metrics aggregated over the parent or root span instead of the queried span, select `parent(a)` or `root` in the **Show metrics from** statement.
 
 Additionally, the `Latency Breakdown` surfaces how time is spent between different services within requests from each group, allowing you to visually spot latency bottlenecks for given groups.
 
 {{< img src="/tracing/trace_explorer/trace_groups/group_list.png" alt="Group list" style="width:90%;" >}}
 
-Click on any group to drill down from aggregated metrics to individual span events for deeper analysis.
+For deeper analysis, click any group to examine the individual span events that make up the aggregated metrics.
 
 ## Further Reading
 
