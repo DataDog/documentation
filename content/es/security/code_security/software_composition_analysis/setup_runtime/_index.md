@@ -88,8 +88,8 @@ Este tema explica cómo configurar SCA utilizando un ejemplo de Java.
 
    **Nota:** Los sistemas de archivos de sólo lectura no son compatibles en este momento. La aplicación debe tener acceso a un directorio `/tmp` en el que se pueda escribir.
 
-   {{< tabs >}}
-{{% tab "CLI Docker" %}}
+{{< tabs >}}
+{{% tab "Docker CLI" %}}
 
 Actualiza tu contenedor de configuración para APM añadiendo el siguiente argumento en tu comando `docker run`:
 
