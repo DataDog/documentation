@@ -140,7 +140,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 {{% tab "React Native" %}}
 
-<div class="alert alert-warning">You need at least the Datadog <a href="https://github.com/DataDog/dd-sdk-reactnative">React Native SDK</a> version `2.0.4` for Session Replay to work, as well as to use the version of the Session Replay SDK that matches the one you're using for the React Native SDK.</div>
+<div class="alert alert-warning">You need at least the Datadog <a href="https://github.com/DataDog/dd-sdk-reactnative">React Native SDK</a> version <code>2.0.4</code> for Session Replay to work, as well as to use the version of the Session Replay SDK that matches the one you're using for the React Native SDK.</div>
 
 All Session Replay SDK versions can be found in the [npmjs repository][1].
 
@@ -158,7 +158,47 @@ To set up Mobile Session Replay for React Native:
    npm install @datadog/mobile-react-native-session-replay@2.4.4-alpha.0
    ```
 
-2. Enable Session Replay in your app, after initializing the Datadog SDK:
+2. Once the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+
+   - If you use the `DatadogProvider` component:
+
+     ```java
+     import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
+     import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+     const configuration = new DatadogProviderConfiguration(/* ... */)
+
+     // Add this function as onInitialization prop to DatadogProvider
+     const onSDKInitialized = () => {
+       SessionReplay.enable();
+     };
+
+     const App = () => {
+       const navigationRef = React.useRef(null);
+       return (
+         <DatadogProvider configuration={configuration} onInitialization={onSDKInitialized}>
+           {/* App */}
+         </DatadogProvider>
+       );
+     };
+
+     export default App;
+     ```
+
+   - If you use the `DdSdkReactNative.initialize` method:
+
+     ```java
+     import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
+     import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+     const configuration = new DdSdkReactNativeConfiguration(/* ... */)
+
+     DdSdkReactNative.initialize(configuration).then(() => {
+       SessionReplay.enable();
+     })
+     ```
+
+Enable Session Replay in your app, after initializing the Datadog SDK:
    {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
