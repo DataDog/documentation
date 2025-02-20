@@ -69,7 +69,7 @@ Service
 * A group of DB queries that are grouped together within one database service.
 * A group of periodic jobs configured in the crond service.
 
-Through custom instrumentation in APM, you may create an arbitrary `service`. In pratice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
+Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
 
 In Software Catalog, you can collect non-instrumented servicse by declaring them through [metadata][12] or import additional services through external sources like [Backstage][13] or [ServiceNow][14]. 
 
