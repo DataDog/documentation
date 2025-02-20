@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Datadog RUM Auto-Instrumentation (Server-side) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy.
+Datadog RUM Auto-Instrumentation (server-side) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy.
 
 RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
 
