@@ -3,7 +3,7 @@
 "app_uuid": "c28e887f-43e0-4b99-aa2b-3f02d4f10763"
 "assets":
   "integration":
-    "auto_install": falso
+    "auto_install": false
     "events":
       "creates_events": true
     "service_checks":
