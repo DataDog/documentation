@@ -30,7 +30,7 @@
 "manifest_version": "2.0.0"
 "name": "pivotal"
 "public_title": "Pivotal"
-"short_description": "Pivotal Tracker es un software como servicio (SaaS) de colaboración y gestión de proyectos ágiles".
+"short_description": "Pivotal Tracker es un software como servicio (SaaS) de colaboración y gestión de proyectos ágiles"
 "supported_os":
 - "linux"
 - "windows"
@@ -46,7 +46,7 @@
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Pivotal Tracker es un software como servicio (SaaS) de colaboración y gestión de proyectos ágiles".
+  "description": "Pivotal Tracker es un software como servicio (SaaS) de colaboración y gestión de proyectos ágiles"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
