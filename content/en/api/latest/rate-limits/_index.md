@@ -52,7 +52,7 @@ All Datadog APIs have a usage limit for a given period of time. APIs can have un
   <tr>
     <td rowspan="2"><strong>Org</strong></td>
     <td><code>datadog.apis.usage.per_org</code></td>
-    <td>Number of API requests made to a specific API endpoint that is an organization wide rate limit.</td>
+    <td>The organization-wide rate limit of the number of API requests made to a specific endpoint</td>
     <td>
     <ul>
       <li><code>app_key_id</code></li>
