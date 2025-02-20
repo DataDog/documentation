@@ -39,7 +39,7 @@ Antes de configurar Agentless Scanning, asegúrate de que se cumplen los siguien
   <ul><li><code>lambda:GetFunction</code></li></ul>
   {{< /collapse-content >}}
 
-  {{< collapse-content title=Permisos de análisis de hosts" level="h5" >}}
+  {{< collapse-content title="Permisos de análisis de hosts" level="h5" >}}
   <ul>
     <li><code>Microsoft.Compute/virtualMachines/read</code></li>
     <li><code>Microsoft.Compute/virtualMachines/instanceView/read</code></li>
