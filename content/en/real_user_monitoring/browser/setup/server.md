@@ -120,7 +120,7 @@ To automatically instrument your RUM application:
 {{% /tab %}}
 {{% tab "Apache HTTP Server" %}}
 
-The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM SDK into the response body for responses
+The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install the module manually.
 
 [1]: https://httpd.apache.org/modules/
@@ -151,14 +151,14 @@ To automatically instrument your RUM application:
 
 [1]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
 
-### Update Apache HTTP Server configuration
+### Update Apache HTTP server configuration
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
    ```javascript
    LoadModule datadog_module <RUM_MODULE_PATH>
    ```
 
-2. Then in the appropriate **root or location** section, add the following:
+2. Within the appropriate **root or location** section, add the following:
 
    ```javascript
    # APM Tracing is enabled by default. The following line disables APM Tracing
