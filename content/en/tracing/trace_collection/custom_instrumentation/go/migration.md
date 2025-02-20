@@ -36,8 +36,9 @@ The migration tool automatically updates your tracing code when upgrading from `
 Run these commands to use the migration tool:
 
 ```shell
-go get github.com/DataDog/dd-trace-go/v2/tools/v2check
-go run github.com/DataDog/dd-trace-go/v2/tools/v2check/main.go
+go install github.com/DataDog/dd-trace-go/tools/v2check
+# In your repository's directory
+v2check .
 ```
 
 For more information about the migration, see the [godoc page for dd-trace-go v2][1].

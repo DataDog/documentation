@@ -8,6 +8,9 @@ further_reading:
 - link: "data_security/logs"
   tag: "Documentation"
   text: "Data Security for Log Management"
+- link: "coterm"
+  tag: "Documentation"
+  text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
 ---
 
 ## Overview

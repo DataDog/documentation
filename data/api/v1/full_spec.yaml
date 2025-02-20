@@ -9834,6 +9834,62 @@ components:
       items:
         $ref: '#/components/schemas/NotifyEndType'
       type: array
+    NumberFormatUnit:
+      description: Number format unit.
+      oneOf:
+      - $ref: '#/components/schemas/NumberFormatUnitCanonical'
+      - $ref: '#/components/schemas/NumberFormatUnitCustom'
+    NumberFormatUnitCanonical:
+      description: Canonical unit.
+      properties:
+        per_unit_name:
+          description: The name of the unit per item.
+          example: bytes
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitCustom:
+      description: Custom unit.
+      properties:
+        label:
+          description: The label for the custom unit.
+          maxLength: 12
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitCustomType'
+      type: object
+    NumberFormatUnitCustomType:
+      description: The type of custom unit.
+      enum:
+      - custom_unit_label
+      type: string
+      x-enum-varnames:
+      - CUSTOM_UNIT_LABEL
+    NumberFormatUnitScale:
+      description: The definition of `NumberFormatUnitScale` object.
+      nullable: true
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitScaleType:
+      description: The type of unit scale.
+      enum:
+      - canonical_unit
+      example: canonical_unit
+      type: string
+      x-enum-varnames:
+      - CANONICAL_UNIT
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -23281,6 +23337,8 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        number_format:
+          $ref: '#/components/schemas/WidgetNumberFormat'
         style:
           $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
@@ -23700,6 +23758,14 @@ components:
       x-enum-varnames:
       - HOST
       - CONTAINER
+    WidgetNumberFormat:
+      description: Number format options for the widget.
+      properties:
+        unit:
+          $ref: '#/components/schemas/NumberFormatUnit'
+        unit_scale:
+          $ref: '#/components/schemas/NumberFormatUnitScale'
+      type: object
     WidgetOrderBy:
       description: What to order by.
       enum:
