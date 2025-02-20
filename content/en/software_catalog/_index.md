@@ -76,7 +76,7 @@ In the Software Catalog, you can collect non-instrumented services by declaring 
 System
 : In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
 
-System in Datadog has the same meaning as in Backstage's [System Model][15]. 
+**Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
 
 Component
 : In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, or an API. 
