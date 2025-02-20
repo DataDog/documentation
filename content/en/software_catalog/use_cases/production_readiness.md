@@ -23,7 +23,7 @@ With Software Catalog, you can:
 - Detect gaps such as missing SLOs or monitors, or unowned services.
 - Enforce tagging best practices and verify configurations for enabling cross-telemetry insights.
 
-Open the Setup Guidance tab for a given service to check whether you've completed the necessary setup to leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
+In [Software Catalog][3], click on a service to open a detailed side panel, and find the Setup Guidance tab. In this section, you can check whether your service has the necessary setup to leverage Datadog features like Monitors, SLOs, and Error Tracking. You can also check if your service is properly configured to collect key telemetry data, like tracing and logs.
 
 {{< img src="tracing/software_catalog/production-readiness-setup-guidance.png" alt="The Setup Guidance tab for a service, which shows the configuration completeness of that service and recommended setup steps " style="width:100%;" >}}
 
@@ -53,7 +53,10 @@ In the Costs tab, powered by [Cloud Cost Management][2], you can identify ineffi
 
 {{< img src="tracing/software_catalog/production-readiness-cost-changes.png" alt="Your image description" style="width:100%;" >}}
 
-To explore cost details for a specific service, click on a service in Software Catalog to open the service side panel, and find the Costs tab. You can also explore the Costs tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
+To explore cost details for a specific service, you can do one of the following:
+
+- Click on a service in Software Catalog to open the service side panel, and find the Costs tab.
+- Explore the Costs tab on the Service Page, which can be found by hovering over a service name and selecting **Service Page**, or using the **Service Page** button in the top right corner of the side panel.
 
 
 ## Further reading
@@ -62,3 +65,4 @@ To explore cost details for a specific service, click on a service in Software C
 
 [1]: /software_catalog/scorecards/
 [2]: /cloud_cost_management/
+[3]: https://app.datadoghq.com/software
