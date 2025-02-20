@@ -21,7 +21,11 @@ further_reading:
 ---
 
 
-The Software Delivery tab in Software Catalog helps you assess and optimize your service's pre-production status by providing insights into CI pipelines and static analysis violations. You can:
+The Software Delivery tab in Software Catalog helps you assess and optimize your service's pre-production status by providing insights into CI pipelines and static analysis violations. 
+
+{{< img src="tracing/software_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Software Catalog" style="width:100%;" >}}
+
+With Software Delivery, you can:
 
 - Monitor the performance of CI pipelines related to your services.
 - Identify security and code quality issues from [Static Analysis][1].
@@ -32,19 +36,19 @@ By default, your service is linked to CI pipelines through its repository URL. T
 
 To add or remove a pipeline associated with your service:
 
-1. Click on your service in [Software Catalog][4] to open the service side panel, click on the Ownership tab, and select one of the edit options for Entity Metadata.
+1. Click on your service in [Software Catalog][4] to open the service side panel, click on the Ownership tab, and find the edit options for Entity Metadata.
 
    **Note**: This is only available for [Software Catalog schema v2.2][3].
 
-   {{< img src="tracing/software_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Software Catalog" style="width:100%;" >}}
+   {{< img src="tracing/software_catalog/edit-metadata.png" alt="The detailed side panel view for a service, highlighting metadata editing options" style="width:100%;" >}}
 
-2. Then, you can either:
+2. Edit the service metadata to add or remove a pipeline:
 
-   - Find the Software Delivery section, then search for and select the pipelines you want to associate with the service.
+   - **Edit in UI**: Find the Software Delivery section in the pop-up window, then search for and select the pipelines you want to associate with the service.
 
       {{< img src="tracing/software_catalog/pipeline-visibility-update-metadata.png" alt="The configuration page for updating service metadata, featuring the Software Delivery field for adding and removing related pipelines" style="width:100%;" >}}
 
-   - Manually add a pipeline fingerprint to the service metadata. To find a pipeline's fingerprint, go to the [Pipelines][5] page, click on the pipeline, and select the gear icon.
+   - **Edit in GitHub**: Manually add a pipeline fingerprint under `ci-pipeline-fingerprints` in the service metadata YAML file (see [this example][6]). To find a pipeline's fingerprint, go to the [Pipelines][5] page, click on the pipeline, and select the gear icon. 
 
       {{< img src="tracing/software_catalog/pipeline-visibility-pipeline-fingerprint.png" alt="An example of a pipeline fingerprint" style="width:100%;" >}}
 
@@ -61,3 +65,4 @@ For more details on CI status and static analysis violations, click on the servi
 [3]: /software_catalog/service_definitions/v2-2/
 [4]: https://app.datadoghq.com/software
 [5]: https://app.datadoghq.com/ci/pipelines
+[6]: /software_catalog/service_definitions/v2-2/#example-yaml
