@@ -28,15 +28,13 @@ This format uses specific separators to structure each security control entry.
 `<TYPE>:<SECURE_MARKS>:<CLASS/FILE>:<METHOD>:<PARAMETERS (Optional)>:<PARAMETERS TO VALIDATE (Optional)>`
 
 ### Field Specifications
-| **Field**                   | **Description**                                                                                                                                                                                         |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Type**                    | Defines the type of control. **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.                                                                                                                     |
-| **Secure Marks**            | List of vulnerability types to apply. Possible values are defined in [Secure marks](#secure-marks). Optionally, use `*` to indicate applicability to all types.                                         |
-| **Class/File**              | Fully qualified class or file implementing the security control.                                                                                                                                        |
-| ##### Method
-
-                  | Name of the method implementing the security control.                                                                                                                                                   |
-| **Parameters (Optional)**   | Fully qualified class parameters. Used to **distinguish between overloaded methods**. If omitted and overloading exists, the security control will apply to **all overloaded methods**.                 |
+| **Field**                             | **Description**                                                                                                                                                                                         |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Type**                              | Defines the type of control. **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.                                                                                                                     |
+| **Secure Marks**                      | List of vulnerability types to apply. Possible values are defined in [Secure marks](#secure-marks). Optionally, use `*` to indicate applicability to all types.                                         |
+| **Class/File**                        | Fully qualified class or file implementing the security control.                                                                                                                                        |
+| **Method**                            | Name of the method implementing the security control.                                                                                                                                                   |
+| **Parameters (Optional)**             | Fully qualified class parameters. Used to **distinguish between overloaded methods**. If omitted and overloading exists, the security control will apply to **all overloaded methods**.                 |
 | **Parameters to Validate (Optional)** | Zero-based list of parameter positions to validate. The first parameter is position **0**. This field applies **only** to `INPUT_VALIDATOR` types. Used when **not all parameters require validation**. |
 
 
