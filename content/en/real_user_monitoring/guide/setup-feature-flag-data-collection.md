@@ -42,7 +42,7 @@ If you are using a version previous to 5.17.0, initialize the RUM SDK and config
     ...
 });
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN async" level="h4" %}}
 ```javascript
@@ -54,7 +54,7 @@ window.DD_RUM.onReady(function() {
     })
 })
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="CDN sync" level="h4" %}}
 ```javascript

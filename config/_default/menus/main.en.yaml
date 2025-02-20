@@ -458,7 +458,7 @@ menu:
       weight: 606
     - name: FIPS Compliance
       identifier: agent_configuration_fips_compliance
-      url: agent/configuration/agent-fips-proxy/
+      url: agent/configuration/fips-compliance/
       parent: agent_configuration
       weight: 607
     - name: Dual Shipping
@@ -1016,6 +1016,12 @@ menu:
       identifier: coscreen_troubleshooting
       parent: coscreen
       weight: 1
+    - name: CoTerm
+      url: coterm/
+      pre: coscreen
+      identifier: coterm
+      parent: essentials_heading
+      weight: 120000
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
@@ -2998,6 +3004,10 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
+    - name: Functions
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 701
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -3401,6 +3411,31 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_proxies
       weight: 208
+    - name: Envoy
+      url: tracing/trace_collection/proxy_setup/envoy
+      parent: tracing_proxies
+      identifier: tracing_proxies_envoy
+      weight: 2081
+    - name: NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
+      parent: tracing_proxies
+      identifier: tracing_proxies_nginx
+      weight: 2082
+    - name: Istio
+      url: tracing/trace_collection/proxy_setup/istio
+      parent: tracing_proxies
+      identifier: tracing_proxies_istio
+      weight: 2083
+    - name: Kong
+      url: tracing/trace_collection/proxy_setup/kong
+      parent: tracing_proxies
+      identifier: tracing_proxies_kong
+      weight: 2084
+    - name: Apache HTTP Server
+      url: tracing/trace_collection/proxy_setup/httpd
+      parent: tracing_proxies
+      identifier: tracing_proxies_httpd
+      weight: 2085
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
@@ -6312,7 +6347,7 @@ menu:
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6      
+      weight: 6
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
