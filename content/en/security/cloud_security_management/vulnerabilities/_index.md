@@ -51,7 +51,7 @@ Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
 
 Detect vulnerabilities continuously
-: Scan recent updates and newly published CVEs, across running container images, hosts, host images, and serverless, and identify vulnerable container image layers.
+: Scan recent updates and newly published CVEs, across running container images from hosts and registries, host, host images, and serverless, and identify vulnerable container image layers.
 
 Prioritize exploitable vulnerabilities, using runtime observability
 : Leverage Datadog's security scoring, which is based on CVSS, by incorporating intel from CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and privileged access.
@@ -89,7 +89,7 @@ Use these tables to decide which solution to start with:
 | Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux                                         | Linux, Windows                 |
 | Serverless                                | AWS Lambda                                    | Not applicable                 |
-| Container registries                      | [Amazon ECR (Preview)][16]                    | Not applicable                 |
+| Container registries                      | [Amazon ECR][16]                              | Not applicable                 |
 
 For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
