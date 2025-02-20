@@ -37,7 +37,7 @@ The timeseries visualization allows you to display the evolution of one or more 
 
 ## Display options
 
-Graphs can be displayed as lines, areas, and bars. Datadog graphs aggregate data over intervals such as sum every hour. By default, the last time interval in a timeseries graph with incomplete data is shaded and labeled it as "partial data".
+Graphs can be displayed as lines, areas, and bars. Datadog graphs aggregate data over [intervals][15] such as sum every hour. By default, the last incomplete time interval in a timeseries graph is shaded and labeled as "partial data"."
 
 Line graphs contain additional parameters:
 
@@ -163,3 +163,4 @@ This widget can be used with the **[Dashboards API][13]**. See the following tab
 [12]: https://www.datadoghq.com/blog/full-screen-graphs
 [13]: /api/latest/dashboards/
 [14]: /dashboards/graphing_json/widget_json/
+[15]: /dashboards/functions/rollup/
