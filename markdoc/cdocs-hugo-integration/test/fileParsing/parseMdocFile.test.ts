@@ -1,12 +1,12 @@
 import { describe, test, expect } from 'vitest';
-import { parseMdocFile } from '../../../src/fileParsing';
+import { parseMdocFile } from '../../src/fileParsing';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   SNAPSHOTS_DIR
-} from '../../config/constants';
+} from '../config/constants';
 
-describe('FileParse.parseMdocFile', () => {
+describe('parseMdocFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');

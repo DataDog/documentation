@@ -4,7 +4,7 @@ import { VALID_SITE_DIR, SNAPSHOTS_DIR } from '../config/constants';
 import { IntegrationConfig } from '../../src/schemas/config/integration';
 import { buildHugoGlobalConfig } from '../../src/hugoUtils';
 
-describe('HugoFunctions', () => {
+describe('buildHugoGlobalConfig', () => {
   const integrationConfig: IntegrationConfig = {
     baseSiteDir: VALID_SITE_DIR,
     env: 'development'

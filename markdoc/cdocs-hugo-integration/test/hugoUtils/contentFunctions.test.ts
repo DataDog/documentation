@@ -3,7 +3,7 @@ import { getFileContentsHash, anchorize, absLangUrl, relUrl } from '../../src/hu
 import { mockHugoConfig } from '../config/mocks/valid/hugoConfig';
 import { VALID_SITE_DIR } from '../config/constants';
 
-describe('HugoFunctions', () => {
+describe('Hugo content functions', () => {
   describe('getFileContentsHash', () => {
     test('returns the correct hash for an image file', () => {
       const expectedHash = '60abd3d42408607da509794034239f28';

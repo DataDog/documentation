@@ -1,49 +1,12 @@
-import MarkdocStaticCompiler, { Tag, Config } from 'cdocs-markdoc';
+import MarkdocStaticCompiler from 'cdocs-markdoc';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
 import prettier from 'prettier';
-import { SNAPSHOTS_DIR } from '../../../config/constants';
-import {
-  render,
-  CustomHtmlComponent
-} from '../../../../src/markdocCustomization/renderer';
-import {
-  mockHugoGlobalConfig,
-  mockPageConfig
-} from '../../../config/mocks/valid/hugoConfig';
-import { HugoConfig } from '../../../../src/schemas/config/hugo';
+import { SNAPSHOTS_DIR } from '../../config/constants';
+import { render } from '../../../src/markdocCustomization/renderer';
+import { mockHugoGlobalConfig } from '../../config/mocks/valid/hugoConfig';
 
-const alert = {
-  render: 'Alert',
-  children: ['paragraph'],
-  attributes: {
-    level: {
-      type: String,
-      default: 'info',
-      matches: ['info', 'warning']
-    }
-  }
-};
-
-class Alert extends CustomHtmlComponent {
-  level = 'info';
-
-  constructor(p: {
-    tag: Tag;
-    markdocConfig: Config;
-    hugoConfig: HugoConfig;
-    components?: Record<string, CustomHtmlComponent>;
-  }) {
-    super(p);
-    this.level = p.tag.attributes.level || 'info';
-  }
-
-  render() {
-    return `<div class="alert ${this.level}">${this.contents}</div>`;
-  }
-}
-
-describe('custom components', () => {
+describe('rendering stages', () => {
   // retrieve test input file
   const inputPath = __dirname + '/input.mdoc.md';
   const inputString = fs.readFileSync(inputPath, 'utf-8');
@@ -57,9 +20,6 @@ describe('custom components', () => {
       test_string: 'Datadog',
       always_false: false,
       always_true: true
-    },
-    tags: {
-      alert
     }
   });
 
@@ -71,17 +31,11 @@ describe('custom components', () => {
         test_string: 'Datadog',
         always_false: false,
         always_true: true
-      },
-      tags: {
-        alert
       }
     },
     hugoConfig: {
       global: mockHugoGlobalConfig,
-      page: mockPageConfig
-    },
-    components: {
-      Alert
+      page: { path: '/path/to/page', lang: 'en' }
     }
   });
 
@@ -102,14 +56,6 @@ describe('custom components', () => {
     .cdoc__hidden code {
       color: pink;
     }
-
-    div.info {
-      border: 1px solid blue;
-    }
-
-    div.warning {
-      border: 1px solid red;
-    }
   </style>
   ${html}
   `;
@@ -121,19 +67,19 @@ describe('custom components', () => {
 
   test('ast', async () => {
     await expect(JSON.stringify(ast, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/ast.snap.json`
+      `${SNAPSHOTS_DIR}/markdocCustomization/renderer/renderingStages/ast.snap.json`
     );
   });
 
   test('renderableTree', async () => {
     await expect(JSON.stringify(renderableTree, null, 2)).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/renderableTree.snap.json`
+      `${SNAPSHOTS_DIR}/markdocCustomization/renderer/renderingStages/renderableTree.snap.json`
     );
   });
 
   test('renderedHtml', async () => {
     await expect(formattedHtml).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/renderer/customComponents/renderedHtml.snap.html`
+      `${SNAPSHOTS_DIR}/markdocCustomization/renderer/renderingStages/renderedHtml.snap.html`
     );
   });
 });

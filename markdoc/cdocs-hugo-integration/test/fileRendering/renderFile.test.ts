@@ -1,17 +1,14 @@
 import { describe, test, expect } from 'vitest';
-import { parseMdocFile } from '../../../src/fileParsing';
-import { renderFile } from '../../../src/fileRendering';
+import { parseMdocFile } from '../../src/fileParsing';
+import { renderFile } from '../../src/fileRendering';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 import {
   VALID_CONTENT_DIR,
   VALID_PARTIALS_DIR,
   VALID_FILTERS_CONFIG_DIR,
   SNAPSHOTS_DIR
-} from '../../config/constants';
-import {
-  mockHugoGlobalConfig,
-  mockPageConfig
-} from '../../config/mocks/valid/hugoConfig';
+} from '../config/constants';
+import { mockHugoGlobalConfig, mockPageConfig } from '../config/mocks/valid/hugoConfig';
 
 describe('renderFile', () => {
   const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
@@ -40,7 +37,7 @@ describe('renderFile', () => {
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
     await expect(html).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/helperModules/PageBuilder/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
+      `${SNAPSHOTS_DIR}/fileRendering/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
     );
   });
 });
