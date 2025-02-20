@@ -7,11 +7,11 @@ cascade:
   algolia:
     rank: 40
   disable_sidebar: true
-  type: catálogo de acciones
+  type: actioncatalog
 disable_sidebar: false
 disable_toc: true
 title: Catálogo de acciones
-type: catálogo de acciones
+type: actioncatalog
 ---
 
 {{< site-region region="gov" >}}
