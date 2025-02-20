@@ -1856,17 +1856,17 @@ menu:
       url: metrics/composite_metrics_queries
       parent: metrics_nested_queries
       identifier: composite_metrics_queries
-      weight: 1001
+      weight: 11
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 11
+      weight: 12
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 12
+      weight: 13
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
