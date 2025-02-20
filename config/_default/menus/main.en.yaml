@@ -1853,7 +1853,7 @@ menu:
       identifier: metrics_nested_queries
       weight: 10
     - name: Composite Metrics Queries
-      url: metrics/nested_queries/composite_metrics_queries
+      url: metrics/composite_metrics_queries
       parent: metrics_nested_queries
       identifier: composite_metrics_queries
       weight: 1001
