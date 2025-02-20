@@ -126,8 +126,6 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{% tab "Go" %}}
 
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
-
 ### Compatibility
 
 `orchestrion >= 0.9.4` + `dd-trace-go >= 1.69.1`

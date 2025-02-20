@@ -10,6 +10,9 @@ further_reading:
     - link: "/sensitive_data_scanner/regular_expression_syntax"
       tag: "Documentation"
       text: "Regular expression syntax for custom scanning rules"
+    - link: "coterm"
+      tag: "Documentation"
+      text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
     - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
       tag: "Documentation"
       text: "Best practices for creating custom rules"
@@ -28,6 +31,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/"
       tag: "Blog"
       text: "How companies subject to HIPAA requirements manage sensitive data with Datadog"
+    - link: "https://www.datadoghq.com/blog/sds-for-insurance-companies/"
+      tag: "Blog"
+      text: "How insurance companies discover, classify, and act on sensitive data risks with Datadog"
 ---
 
 ## Overview

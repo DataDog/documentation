@@ -125,11 +125,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     For example, if you set the `traceSampleRate` to 20% in the Browser SDK:
     - When `traceContextInjection` is set to `all`, **20%** of backend traces are kept and **80%** of backend traces are dropped.
 
-  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-3.png" alt="traceContextInjection set to all" style="width:90%;">}}
+  {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_all-2.png" alt="traceContextInjection set to all" style="width:90%;">}}
 
   - When `traceContextInjection` is set to `sampled`, **20%** of backend traces are kept. For the remaining **80%**, the browser SDK **does not inject** a sampling decision. The decision is made on the server side and is based on the tracing library head-based sampling [configuration][2]. In the example below, the backend sample rate is set to 40%, and therefore 32% of the remaining backend traces are kept.
 
-    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-2.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
+    {{< img src="real_user_monitoring/connect_rum_and_traces/traceContextInjection_sampled-3.png" alt="traceContextInjection set to sampled" style="width:90%;">}}
 
 <div class="alert alert-info">End-to-end tracing is available for requests fired after the Browser SDK is initialized. End-to-end tracing of the initial HTML document and early browser requests is not supported.</div>
 
@@ -330,7 +330,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }
@@ -338,7 +338,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
     By default, all subdomains of listed hosts are traced. For instance, if you add `example.com`, you also enable tracing for `api.example.com` and `foo.example.com`.
 
-4. _(Optional)_ Set the `traceSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+4. _(Optional)_ Set the `traceSampleRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
      To keep 100% of backend traces:
     ```kotlin
@@ -349,13 +349,13 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }
     ```
 
-    **Note**: `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+    **Note**: `traceSampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
@@ -598,7 +598,7 @@ The default injection style is `tracecontext`, `Datadog`.
                     "example.com" to setOf(TracingHeaderType.DATADOG),
                     "example.eu" to setOf(TracingHeaderType.DATADOG)
                 ),
-                traceSamplingRate = 100f
+                traceSampleRate = 100f
             )
         )
     }

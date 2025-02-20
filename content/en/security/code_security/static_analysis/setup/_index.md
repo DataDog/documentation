@@ -1,5 +1,5 @@
 ---
-title: Static Code Analysis Setup
+title: Set up Static Code Analysis (SAST)
 description: Learn about Datadog Static Code Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -16,16 +16,20 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog Static Code Analysis, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SCA in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
 
 ### Scan with Datadog-hosted scanning
 
-You can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
+For GitHub repositories, you can run Datadog Static Code Analysis scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
 ### Scan in CI pipelines
-Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8]. Configure your [Datadog API and application keys (requires the `code_analysis_read` scope)][3] and run Static Code Analysis in the respective CI provider.
+Datadog Static Code Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
+
+First, configure your Datadog API and application keys. Add `DD_APP_KEY` and `DD_API_KEY` as secrets. Please ensure your Datadog application key has the `code_analysis_read` scope.
+
+Next, run Static Code Analysis by following instructions for your chosen CI provider below.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
     {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
@@ -217,30 +221,64 @@ my_foo = 1
 myBar = 2
 ```
 
-## Upload third-party static analysis results to Datadog
+## Link results to Datadog services and teams
+### Link results to services
+Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-<div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
-</div>
+1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
+2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
+3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 
-You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
+If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
 
-To upload a SARIF report:
+#### Identifying the code location in the Software Catalog
 
-1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
-3. Install the `datadog-ci` utility:
+The [schema version `v3`][14] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
-   ```bash
-   npm install -g @datadog/datadog-ci
-   ```
+The `paths` attribute is a list of globs that should match paths in the repository.
 
-4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
-5. Upload the results to Datadog:
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: my-service
+datadog:
+  codeLocations:
+    - repositoryURL: https://github.com/myorganization/myrepo.git
+      paths:
+        - path/to/service/code/**
+{{< /code-block >}}
 
-   ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION
-   ```
+
+#### Detecting file usage patterns
+
+Datadog detects file usage in additional products such as Error Tracking and associate
+files with the runtime service. For example, if a service called `foo` has
+a log entry or a stack trace containing a file with a path `/modules/foo/bar.py`,
+it associates files `/modules/foo/bar.py` to service `foo`.
+
+#### Detecting service name in paths and repository names
+
+Datadog detects service names in paths and repository names, and associates the file with the service if a match is found.
+
+For a repository match, if there is a service called `myservice` and
+the repository URL is `https://github.com/myorganization/myservice.git`, then,
+it associates `myservice` to all files in the repository.
+
+If no repository match is found, Datadog attempts to find a match in the
+`path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
+in the path, the service name closest to the filename is selected.
+
+
+### Link results to teams
+
+Datadog automatically associates the team attached to a service when a violation or vulnerability is detected. For example, if the file `domains/ecommerce/apps/myservice/foo.py`
+is associated with `myservice`, then the team `myservice` will be associated to any violation
+detected in this file.
+
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+
+**Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
 ## Diff-aware scanning
 
@@ -259,6 +297,31 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
+## Upload third-party static analysis results to Datadog
+
+<div class="alert alert-info">
+  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
+</div>
+
+You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
+
+To upload a SARIF report:
+
+1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
+2. Optionally, set a [`DD_SITE` variable][7] (this defaults to `datadoghq.com`).
+3. Install the `datadog-ci` utility:
+
+   ```bash
+   npm install -g @datadog/datadog-ci
+   ```
+
+4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
+5. Upload the results to Datadog:
+
+   ```bash
+   datadog-ci sarif upload $OUTPUT_LOCATION
+   ```
+
 <!-- ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}} -->
@@ -274,3 +337,5 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [10]: /integrations/guide/source-code-integration
 [11]: /security/code_security/dev_tool_int/github_pull_requests
 [12]: /security/code_security/dev_tool_int/github_pull_requests#fixing-a-vulnerability-directly-from-datadog
+[13]: https://docs.github.com/en/actions/security-for-github-actions/security-guides
+[14]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
