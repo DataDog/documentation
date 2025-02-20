@@ -116,7 +116,7 @@ To add additional metrics in to your devices, click **Add Metrics**. This opens 
 
 ### Global Tags
 
-Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric. The `Inherited` tag displays next to any global tags that are inherited from this profile.
+Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric. Additionally, the `Inherited` tag displays next to any global tags that are inherited from this profile.
 
 {{< img src="/network_device_monitoring/profile_onboarding/add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags section" style="width:100%;">}}
 
