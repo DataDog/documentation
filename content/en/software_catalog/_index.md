@@ -71,7 +71,7 @@ Service
 
 Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
 
-In Software Catalog, you can collect non-instrumented servicse by declaring them through [metadata][12] or import additional services through external sources like [Backstage][13] or [ServiceNow][14]. 
+In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12], or import additional services through external sources like [Backstage][13] or [ServiceNow][14]. 
 
 System
 : In Software Catalog, a system is a group of components that cooperate to perform a broader piece of function. For example, you may group multiple instrumented APM services into a system because they are operated by the same team. You may also use `system` to represent a full microservice-based piece of architecture and include other components like APIs, datastores, queues, and other common building blocks.
