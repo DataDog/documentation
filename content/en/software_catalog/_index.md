@@ -63,7 +63,7 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 ## Key terminology
 
 Service
-: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be:
+: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be one of the following:
 
 * A group of URL endpoints may be grouped together under an API service.
 * A group of DB queries that are grouped together within one database service.
