@@ -16,7 +16,7 @@ further_reading:
 ---
 
 ## Automate provisioning infrastructure or scaffolding new microservices
-Create standardized Software Templates to help developers spin up new microservices or infrastructure from your best practices. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Orchestrate software template workflows using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
+Create standardized Software Templates to help developers spin up microservices and infrastructure that align with your best practices. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Orchestrate software template workflows using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
