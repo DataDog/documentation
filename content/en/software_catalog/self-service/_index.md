@@ -14,6 +14,8 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
+Self-Service provides a central hub for developers to take actions directly from Datadog. You can build and share out actions to help developers across the software development lifecycle (SDLC): build new microservices or infrastructure with the proper configurations, sping up new development environments, manage deployments to higher environments, and actively monitor and optimize running services.
+
 ## Automate developer workflows
 Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
 
@@ -24,7 +26,7 @@ Explore [App Builder Blueprints][9] and [Workflow Automation Blueprints][15] for
 
 For example, you can use these blueprints to do the following:
 
-#### Create software templates
+#### Software Templates
 Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, Github), and generate a new repository or PR for a developer. Read the [Software Templates documentation][16] to learn more.
 
 #### Remediaton
