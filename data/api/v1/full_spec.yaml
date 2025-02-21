@@ -17633,11 +17633,13 @@ components:
       enum:
       - number
       - bar
+      - trend
       example: number
       type: string
       x-enum-varnames:
       - NUMBER
       - BAR
+      - TREND
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
@@ -23326,6 +23328,8 @@ components:
           type: string
         cell_display_mode:
           $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        cell_display_mode_options:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptions'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -23344,6 +23348,37 @@ components:
       required:
       - formula
       type: object
+    WidgetFormulaCellDisplayModeOptions:
+      description: Cell display mode options for the widget formula. (only if `cell_display_mode`
+        is set to `trend`).
+      properties:
+        trend_type:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsTrendType'
+        y_scale:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsYScale'
+      type: object
+    WidgetFormulaCellDisplayModeOptionsTrendType:
+      description: Trend type for the cell display mode options.
+      enum:
+      - area
+      - line
+      - bars
+      example: area
+      type: string
+      x-enum-varnames:
+      - AREA
+      - LINE
+      - BARS
+    WidgetFormulaCellDisplayModeOptionsYScale:
+      description: Y scale for the cell display mode options.
+      enum:
+      - shared
+      - independent
+      example: shared
+      type: string
+      x-enum-varnames:
+      - SHARED
+      - INDEPENDENT
     WidgetFormulaLimit:
       description: Options for limiting results returned.
       properties:
