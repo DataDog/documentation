@@ -38,7 +38,7 @@ Manage deployments, feature flag changes, and more. Initiate changes directly fr
 #### Provision infrastructure
 Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 
-#### Developer Environments
+#### Provision developer environments
 Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
 
 ### Start from scratch
