@@ -90,7 +90,16 @@
         },
         {
             "name": "docs_partners_v1",
-            "file_path": "./public/partners.json"
+            "file_path": "./public/partners.json",
+            "presets": [
+                {
+                    "name": "docs_partners_view",
+                    "search_parameters": {
+                        "sort_by": "_text_match:desc",
+                        "query_by": "content,title"
+                    }
+                }
+            ]
         }
     ]
 }
