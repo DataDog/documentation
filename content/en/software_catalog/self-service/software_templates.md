@@ -80,7 +80,7 @@ When you have finished setting up and testing up your Template, you can publish 
 
   {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
-### Available Templating Actions
+### Available templating actions
 
 Below is a list of actions available for Software Catalog in Datadog App Builder and Workflow Automation. You can see a full list of in the [Action Catalog][7].
 
