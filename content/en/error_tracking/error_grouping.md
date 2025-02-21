@@ -340,4 +340,3 @@ final configuration = DatadogConfiguration(
 [2]: /logs/log_collection/
 [3]: /real_user_monitoring/browser/
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/#get-started
-[5]: /error_tracking/default_grouping
