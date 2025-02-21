@@ -1,7 +1,6 @@
 ---
 title: Data intake
 description: "How data can be fed into Datadog and which prerequisites need to be met in your or your clients' environments."
-type: partners
 aliases:
   - /partners/data-intake/
 ---

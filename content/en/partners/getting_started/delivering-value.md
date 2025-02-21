@@ -1,7 +1,6 @@
 ---
 title: Delivering value
 description: "Recommended steps after you have data flowing into Datadog."
-type: partners
 aliases:
   - /partners/delivering-value/
 ---

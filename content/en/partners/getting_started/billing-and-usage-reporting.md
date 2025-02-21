@@ -1,7 +1,6 @@
 ---
 title: Billing and usage reporting
 description: "Monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups."
-type: partners
 aliases:
   - /partners/billing-and-usage-reporting/
 ---

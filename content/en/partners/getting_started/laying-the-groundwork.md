@@ -1,7 +1,6 @@
 ---
 title: Laying the groundwork
 description: "How to get started and which key decisions you should make at the very beginning."
-type: partners
 aliases:
   - /partners/laying-the-groundwork/
 ---
