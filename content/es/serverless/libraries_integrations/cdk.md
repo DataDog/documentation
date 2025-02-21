@@ -15,15 +15,15 @@ Esta biblioteca CDK configura automáticamente la ingesta de métricas, trazas (
 
 - Instalación y configuración de las capas Lambda de Datadog para tus funciones Lambda de [.NET][19], [Java][15], [Node.js][2] y [Python][1].
 - Activación de la recopilación de trazas y métricas personalizadas de tus funciones Lambda.
-- Administración de suscripciones desde Datadog Forwarder a tus grupos de logs Lambda y no Lambda.
+- Administración de suscripciones de Datadog Forwarder a tus grupos de logs Lambda y no Lambda.
 
 ## AWS CDK v1 frente a AWS CDK v2
 
-**ADVERTENCIA**: `AWS CDK v1` ha llegado al final de su soporte técnico y `datadog-cdk-constructs` ya no recibirá actualizaciones. Se recomienda encarecidamente actualizar a `AWS CDK v2` ([guía oficial de migración ](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html)) y cambiar para utilizar `datadog-cdk-constructs-v2`.
+**ADVERTENCIA**: `AWS CDK v1` ha llegado al final de su compatibilidad y `datadog-cdk-constructs` ya no recibirá actualizaciones. Se recomienda encarecidamente actualizar a `AWS CDK v2` ([guía oficial de migración ](https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html)) y cambiar para utilizar `datadog-cdk-constructs-v2`.
 
 Existen dos versiones distintas de Datadog CDK Constructs; `datadog-cdk-constructs` y `datadog-cdk-constructs-v2`. Están diseñadas para funcionar con `AWS CDK v1` y `AWS CDK v2`, respectivamente.
 
-- `datadog-cdk-constructs-v2` requiere Node >= 14, mientras que `datadog-cdk-constructs` admite Node >= 12.
+- `datadog-cdk-constructs-v2` requiere Node >= 14, mientras que `datadog-cdk-constructs` es compatible con Node >= 12.
 - `datadog-cdk-constructs-v2` contiene más funciones.
 - Por lo demás, el uso de los dos paquetes es idéntico.
 
@@ -31,33 +31,33 @@ Existen dos versiones distintas de Datadog CDK Constructs; `datadog-cdk-construc
 
 Para uso con AWS CDK v2:
 ```
-yarn añadir --dev datadog-cdk-constructs-v2
-# o
-npm instalar datadog-cdk-constructs-v2 --save-dev
+yarn add --dev datadog-cdk-constructs-v2
+# or
+npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
 Para uso con AWS CDK v1:
 ```
-yarn añadir --dev datadog-cdk-constructs
-# o
-npm instalar datadog-cdk-constructs --save-dev
+yarn add --dev datadog-cdk-constructs
+# or
+npm install datadog-cdk-constructs --save-dev
 ```
 
 ## Instalación del paquete de PyPI:
 
 Para uso con AWS CDK v2:
 ```
-pip instalar datadog-cdk-constructs-v2
+pip install datadog-cdk-constructs-v2
 ```
 
 Para uso con AWS CDK v1:
 ```
-pip instalar datadog-cdk-constructs
+pip install datadog-cdk-constructs
 ```
 
 ### Nota:
 
-Presta atención a la salida de su administrador de paquete, ya que `Datadog CDK Construct Library` tiene dependencias de mismo nivel.
+Presta atención a la salida de tu administrador de paquete, ya que `Datadog CDK Construct Library` tiene dependencias de mismo nivel.
 
 ## Uso
 
@@ -69,9 +69,9 @@ Presta atención a la salida de su administrador de paquete, ya que `Datadog CDK
 Añade esto a tu stack de CDK:
 
 ```typescript
-importa { Datadog } desde "datadog-cdk-constructs-v2";
+import { Datadog } from "datadog-cdk-constructs-v2";
 
-const datadog = nuevo Datadog(this, "Datadog", {
+const datadog = new Datadog(this, "Datadog", {
   nodeLayerVersion: <LAYER_VERSION>,
   pythonLayerVersion: <LAYER_VERSION>,
   javaLayerVersion: <LAYER_VERSION>,
@@ -81,20 +81,20 @@ const datadog = nuevo Datadog(this, "Datadog", {
   forwarderArn: "<FORWARDER_ARN>",
   createForwarderPermissions: <BOOLEAN>,
   flushMetricsToLogs: <BOOLEAN>,
-  sitio: "<SITE>",
+  site: "<SITE>",
   apiKey: "{Datadog_API_Key}",
   apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
-  apiKeySecret: <AWS_CDK_ISECRET>, // Está disponible solo en datadog-cdk-constructs-v2
+  apiKeySecret: <AWS_CDK_ISECRET>, // Only available in datadog-cdk-constructs-v2
   apiKmsKey: "{Encrypted_Datadog_API_Key}",
   enableDatadogTracing: <BOOLEAN>,
   enableMergeXrayTraces: <BOOLEAN>,
   enableDatadogLogs: <BOOLEAN>,
   injectLogContext: <BOOLEAN>,
   logLevel: <STRING>,
-  variable de entorno: <STRING>, //Opcional
-  servicio: <STRING>, //Opcional
-  versión: <STRING>, //Opcional
-  etiquetas (tags): <STRING>, //Opcional
+  env: <STRING>, //Optional
+  service: <STRING>, //Optional
+  version: <STRING>, //Optional
+  tags: <STRING>, //Optional
 });
 datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
 datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
@@ -109,9 +109,9 @@ datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
   - `datadog-cdk-constructs` >= 0.8.5
 
 ### Métodos alternativos para activar la integración del código fuente
-Si la aplicación automática no funciona en tu caso, sigue una de las dos guías siguientes. 
+Si la implementación automática no funciona en tu caso, sigue una de las dos guías siguientes. 
 
-**Nota: estas otras guías solo funcionan para Typescript.**
+**Nota: estas otras guías solo funcionan para Typescript**.
 <details>
  <summary>Datadog-cdk versión satisfecha, pero integración de Datadog Github NO instalada</summary>
 
@@ -119,42 +119,42 @@ Si la aplicación automática no funciona en tu caso, sigue una de las dos guía
   Te recomendamos que hagas esto cuando se inicialice tu CDK Stack.
 
   ```typescript
-  const app = nueva cdk.App();
+  const app = new cdk.App();
 
-  // Asegúrate de añadir @datadog/datadog-ci a través de tu administrador de paquete 
+  // Make sure to add @datadog/datadog-ci via your package manager 
   const datadogCi = require("@Datadog/Datadog-ci");
-  // Cargar manualmente los metadatos de Git a Datadog.
+  // Manually uploading Git metadata to Datadog.
   datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
-  const app = nueva cdk.App();
-  nuevo ExampleStack(app, "ExampleStack", {});
+  const app = new cdk.App();
+  new ExampleStack(app, "ExampleStack", {});
 
   app.synth();
   ```
 </details>
 <details>
- <summary>Datadog-cdk version NOT satisfied</summary>
+ <summary>datadog-cdk version NOT satisfied</summary>
 
-  Cambia tu función de inicialización de la siguiente manera (nota: estamos cambiando esto para pasar solo el valor `gitHash` al CDK):
+  Cambia tu función de inicialización de la siguiente manera (nota: estamos cambiando esto para pasar solo el valor de`gitHash` al CDK):
 
   ``typescript
-  async función main() {
-    // Asegúrate de añadir @datadog/datadog-ci a través de tu administrador de paquete 
+  async function main() {
+    // Make sure to add @datadog/datadog-ci via your package manager 
     const datadogCi = require("@datadog/datadog-ci");
     const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
-    const app = nueva cdk.App();
-    // Pasa el hash al constructor ExampleStack
+    const app = new cdk.App();
+    // Pass in the hash to the ExampleStack constructor
     new ExampleStack(app, "ExampleStack", {}, gitHash);
   }
   ```
-  Asegúrate de llamar a este función para inicializar tu stack.
+  Asegúrate de llamar a esta función para inicializar tu stack.
 
   En tu constructor de stack, cambia para añadir un parámetro opcional `gitHash` y llama a `addGitCommitMetadata()`:
 
   ``typescript
-  exporta clase ExampleStack extends cdk.Stack {
-    constructor(contexto: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
+  export class ExampleStack extends cdk.Stack {
+    constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
       ...
       ...
      datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
@@ -172,7 +172,7 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 | Parámetro de paquete de npm  | Parámetro de paquete de PyPI  | Descripción |
 | --- | --- | --- |
 | `addLayers` | `add_layers` | Si se añaden las Lambda Layers o se espera que el usuario traiga las suyas propias. Por defecto es `true`. Cuando es `true`, también se requieren las variables de la versión de la biblioteca Lambda. Cuando es `false`, debes incluir la biblioteca Datadog Lambda en los paquetes de despliegue de tus funciones. |
-| `pythonLayerVersion` | `python_layer_version` | Versión de la capa Lambda Python que se va a instalar, como `83`. Es necesario si estás desplegando al menos una función Lambda escrita en Python y `addLayers` es `true`. Encuentra el número de la última versión [aquí][5]. |
+| `pythonLayerVersion` | `python_layer_version` | Versión de la capa Lambda de Python que se va a instalar, como `83`. Es necesario si estás desplegando al menos una función Lambda escrita en Python y `addLayers` es `true`. Encuentra el número de la última versión [aquí][5]. |
 | `nodeLayerVersion` | `node_layer_version` | Versión de la capa Lambda de Node.js que se va a instalar, como `100`. Es necesario si estás desplegando al menos una función Lambda escrita en Node.js y `addLayers` es `true`. Encuentra el número de la última versión en [aquí][6]. |
 | `javaLayerVersion` | `java_layer_version` | Versión de la capa de Java que se va a instalar, como `8`. Es necesario si estás desplegando al menos una función Lambda escrita en Java y `addLayers` es `true`. Encuentra el número de la última versión en la [Documentación de instalación de Serverless Java][15]. **Nota**: `extensionLayerVersion >= 25` y `javaLayerVersion >= 5` son necesarios para que la construcción de Datadog para instrumentar tus funciones de Java correctamente. |
 | `dotnetLayerVersion` | `dotnet_layer_version` | Versión de la capa de .NET que se va a instalar, como `13`. Es necesario si estás desplegando al menos una función Lambda escrita en .NET y `addLayers` es `true`. Busca el número de la última versión en [aquí][18]. |
@@ -190,11 +190,11 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 | `enableDatadogLogs` | `enable_datadog_logs` | Envía los logs de las funciones Lambda a Datadog a través de la extensión Datadog Lambda. El valor por defecto es `true`. Nota: Esta configuración no tiene ningún efecto en los logs enviados a través de Datadog Forwarder . |
 | `enableSourceCodeIntegration` | `enable_source_code_integration` | Activa la integración del código fuente de Datadog, conectando tu telemetría con el código de la aplicación en tus repositorios Git. Esto necesita la integración de Datadog Github para funcionar, de otro modo, sigue el [método alternativo](#alternative-methods-to-enable-source-code-integration). Más información [aquí](https://docs.datadoghq.com/integrations/guide/source-code-integrations/). Por defecto es `true`. |
 | `injectLogContext` | `inject_log_context` | Cuando se configura, la capa Lambda aplica un parche automáticamente a console.log con los identificadores de rastreo de Datadog. Por defecto es `true`. |
-| `logLevel` | `log_level` | Cuando se configura en `debug`, la biblioteca y la extensión Datadog Lambda registra información adicional para ayudar a solucionar problemas. |
+| `logLevel` | `log_level` | Cuando se configura en `debug`, la biblioteca y la extensión Datadog Lambda registran información adicional para ayudar a solucionar problemas. |
 | `env` | `env` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_ENV` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta (tag) `env` a todas las funciones Lambda con el valor proporcionado. |
 | `service` | `service` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_SERVICE` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta `service` a todas las funciones Lambda con el valor proporcionado. |
 | `version` | `version` | Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_VERSION` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, se añade una etiqueta `version` a todas las funciones Lambda con el valor proporcionado. |
-| `tags` | `tags` | Una lista separada por comas lista de pares clave:valor como una sola cadena. Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_TAGS` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, el cdk analiza la cadena y configura cada par clave:valor como una etiqueta en todas las funciones Lambda. |
+| `tags` | `tags` | Una lista separada por comas de pares clave:valor como una sola cadena. Cuando se configura junto con `extensionLayerVersion`, se añade una variable de entorno `DD_TAGS` a todas las funciones Lambda con el valor proporcionado. Cuando se configura junto con `forwarderArn`, el cdk analiza la cadena y configura cada par clave:valor como una etiqueta en todas las funciones Lambda. |
 | `enableColdStartTracing`      | `enable_cold_start_tracing` | Configúralo en `false` para desactivar el rastreo de inicio en frío. Se utiliza en Node.js y Python. Por defecto es `true`. |
 | `coldStartTraceMinDuration`   | `min_cold_start_trace_duration` | Configura la duración mínima (en milisegundos) de un evento de carga de un módulo que se va a rastrear a través del rastreo de inicio en frío. Número. Por defecto es `3`. |
 | `coldStartTraceSkipLibs`      | `cold_start_trace_skip_libs`| Opcionalmente, omite la creación de tramos (spans) de inicio en frío para una lista separada por comas de bibliotecas. Es útil para limitar la profundidad u omitir bibliotecas conocidas. El valor por defecto depende del tiempo de ejecución. |
@@ -202,7 +202,7 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 | `encodeAuthorizerContext`     |`encode_authorizer_context` | Cuando se configura en `true` para autorizadores Lambda, el contexto de rastreo se codificará en la respuesta para la propagación. Es compatible con Node.js y Python. Por defecto es `true`. |
 | `decodeAuthorizerContext`     |`decode_authorizer_context` | Cuando se configura en `true` para Lambdas que están autorizadas a través de autorizadores Lambda, analizará y utilizará el contexto de rastreo codificado (si se encuentra). Es compatible con Node.js y Python. Por defecto es `true`.                         |
 | `apmFlushDeadline` | `apm_flush_deadline` | Se utiliza para determinar cuándo enviar tramos antes de que se agote el tiempo, en milisegundos. Cuando el tiempo restante en una invocación de AWS lambda es inferior al valor configurado, el rastreador intenta enviar tramos activos actuales y todos los tramos finalizados. Es compatible con Node.js y Python. El valor por defecto es `100` milisegundos. |
-| `redirectHandler` | `redirect_handler` | Cuando se configura en `false`, omite la redirección del controlador al controlador de la biblioteca Datadog Lambda. Es útil cuando sólo se instrumenta con la extensión Datadog Lambda. Por defecto es `true`. |
+| `redirectHandler` | `redirect_handler` | Cuando se configura en `false`, omite la redirección del controlador al controlador de la biblioteca Datadog Lambda. Es útil cuando solo se instrumenta con la extensión Datadog Lambda. Por defecto es `true`. |
 
 **Nota**: El uso de los parámetros anteriores puede sustituir las variables de entorno `DD_XXX` del nivel de función correspondiente.
 ### Rastreo
@@ -210,13 +210,13 @@ _Nota_: En las descripciones, se utilizan los parámetros de paquetes de npm, pe
 Activa el rastreo X-Ray en tus funciones Lambda. Para más información, consulta la [documentación de CDK][9].
 
 ```typescript
-importar * como lambda en "aws-cdk-lib/aws-lambda";
+import * as lambda from "aws-cdk-lib/aws-lambda";
 
-const lambda_function = nueva lambda.Function(this, "HelloHandler", {
-  tiempo de ejecución: lambda.Runtime.NODEJS_14_X,
-  código: lambda.Code.fromAsset("lambda"),
-  controlador: "hello.handler",
-  rastreo: lambda.Tracing.ACTIVE,
+const lambda_function = new lambda.Function(this, "HelloHandler", {
+  runtime: lambda.Runtime.NODEJS_14_X,
+  code: lambda.Code.fromAsset("lambda"),
+  handler: "hello.handler",
+  tracing: lambda.Tracing.ACTIVE,
 });
 ```
 
@@ -225,16 +225,16 @@ const lambda_function = nueva lambda.Function(this, "HelloHandler", {
 Añade la construcción de Datadog CDK a cada stack que desees instrumentar con Datadog. En el ejemplo siguiente, inicializamos la construcción de Datadog CDK y llamamos a `addLambdaFunctions()` tanto en `RootStack` como en `NestedStack`.
 
 ```typescript
-importar { Datadog } de "datadog-cdk-constructs-v2";
-importar * como cdk de "aws-cdk-lib";
-importar { Construcción } de "constructs";
+import { Datadog } from "datadog-cdk-constructs-v2";
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
 
-clase RootStack extiende cdk.Stack {
-  constructor(contexto: cdk.App, id: string, props?: cdk.StackProps) {
-    super(contexto, id, props);
-    nuevo NestedStack(this, "NestedStack");
+class RootStack extends cdk.Stack {
+  constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+    new NestedStack(this, "NestedStack");
 
-    const datadog = nuevo Datadog(this, "Datadog", {
+    const datadog = new Datadog(this, "Datadog", {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
@@ -242,7 +242,7 @@ clase RootStack extiende cdk.Stack {
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
-      sitio: "<SITE>",
+      site: "<SITE>",
       apiKey: "{Datadog_API_Key}",
       apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
       apiKmsKey: "{Encrypted_Datadog_API_Key}",
@@ -256,11 +256,11 @@ clase RootStack extiende cdk.Stack {
   }
 }
 
-clase NestedStack extiende cdk.NestedStack {
-  constructor(contexto: Construct, id: string, props?: cdk.NestedStackProps) {
-    super(contexto, id, props);
+class NestedStack extends cdk.NestedStack {
+  constructor(scope: Construct, id: string, props?: cdk.NestedStackProps) {
+    super(scope, id, props);
 
-    const datadog = nuevo Datadog(this, "Datadog", {
+    const datadog = new Datadog(this, "Datadog", {
       nodeLayerVersion: <LAYER_VERSION>,
       pythonLayerVersion: <LAYER_VERSION>,
       javaLayerVersion: <LAYER_VERSION>,
@@ -268,7 +268,7 @@ clase NestedStack extiende cdk.NestedStack {
       addLayers: <BOOLEAN>,
       forwarderArn: "<FORWARDER_ARN>",
       flushMetricsToLogs: <BOOLEAN>,
-      sitio: "<SITE>",
+      site: "<SITE>",
       apiKey: "{Datadog_API_Key}",
       apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
       apiKmsKey: "{Encrypted_Datadog_API_Key}",
@@ -285,38 +285,38 @@ clase NestedStack extiende cdk.NestedStack {
 
 ### Etiquetas
 
-Añade etiquetas a tus construcciones. Recomendamos configurar una etiqueta de `env` y `service` para unir la telemetría Datadog. Para más información consulta la [documentación oficial de AWS ][10] y la [documentación del CDK][11].
+Añade etiquetas a tus construcciones. Recomendamos configurar una etiqueta de `env` y `service` para unir la telemetría de Datadog. Para más información consulta la [documentación oficial de AWS ][10] y la [documentación del CDK][11].
 
 ## Concede automáticamente a AWS acceso de lectura a secretos al rol de ejecución de Lambda.
-**Sólo está disponible en datadog-cdk-constructs-v2**
+**Solo está disponible en datadog-cdk-constructs-v2**
 
 Para conceder automáticamente a los roles de ejecución de Lambda acceso de lectura a un secreto determinado, introduce `apiKeySecret` en lugar de `apiKeySecretArn` al inicializar la construcción de Datadog.
 
 ```typescript
-const { Secreto } = require('aws-cdk-lib/aws-secretsmanager');
+const { Secret } = require('aws-cdk-lib/aws-secretsmanager');
 
-const secreto = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret', 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
+const secret = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret', 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
 
-const datadog = nuevo Datadog(this, 'Datadog', {
+const datadog = new Datadog(this, 'Datadog', {
   ...
-  apiKeySecret: secreto
+  apiKeySecret: secret
   ...
 });
 ```
 
-Cuando se llama a `addLambdaFunctions`, la construcción  Datadog CDK concede a tus roles de ejecución Lambda acceso de lectura al secreto AWS dado. Esto se hace a través de la [función grantRead de AWS ISecret][17].
+Cuando se llama a `addLambdaFunctions`, la construcción de Datadog CDK concede a tus roles de ejecución Lambda acceso de lectura al secreto AWS dado. Esto se hace a través de la [función grantRead de AWS ISecret][17].
 
 ## Cómo funciona
 
 La construcción de Datadog CDK toma una lista de funciones lambda e instala la biblioteca Datadog Lambda adjuntando las Lambda Layers para [.NET][19], [Java][15], [Node.js][2] y [Python][1] a tus funciones. Redirige a un controlador de sustitución que inicializa la biblioteca Lambda sin necesidad de ningún cambio de código. Las configuraciones adicionales añadidas a la construcción de Datadog CDK también se traducirán en sus respectivas variables de entorno en cada función lambda (si es aplicable/necesario).
 
-Los grupos de logs basados en funciones Lambda están se controlan en forma automática mediante el método de `addLambdaFunctions`, mientras que la construcción tiene un función `addForwarderToNonLambdaLogGroups` adicional que suscribe el Forwarder a cualquier grupo de logs adicional de tu elección.
+Los grupos de logs basados en funciones Lambda se controlan en forma automática mediante el método de `addLambdaFunctions`, mientras que la construcción tiene una función `addForwarderToNonLambdaLogGroups` adicional que suscribe el Forwarder a cualquier grupo de logs adicional de tu elección.
 
 
 ## Recursos para aprender sobre CDK
 
 - [Taller de CDK TypeScript](https://cdkworkshop.com/20-typescript.html)
-- [Vídeo de presentación del CDK por AWS con demostración](https://youtu.be/ZWCvNFUN-sU)
+- [Vídeo de presentación de CDK por AWS con demostración](https://youtu.be/ZWCvNFUN-sU)
 - [Conceptos de CDK](https://youtu.be/9As_ZIjUGmY)
 
 ## Utilizar Projen
@@ -344,7 +344,7 @@ Si contribuyes a este paquete puedes ejecutar los tests utilizando `yarn test`. 
 3. Ve a `src/sample`, aquí puedes editar `index.ts` para hacer un test de tus contribuciones en forma manual.
 4. En el directorio raíz, ejecuta `npx cdk --app lib/sample/index.js <CDK Command>`, sustituyendo `<CDK Command>` por comandos CDK frecuentes como `synth`, `diff` o `deploy`.
 
-- Nota, si recibes "... no estás autorizado a realizar: ..." puede que también necesites autorizar los comandos con tus credenciales de AWS.
+- Nota, si recibes "... no estás autorizado a realizar:...", puede que también necesites autorizar los comandos con tus credenciales de AWS.
 
 ### Depurar logs
 
@@ -359,7 +359,7 @@ DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
 
 ## Comunidad
 
-Si tienes preguntas o comentarios sobre el producto, únete al canal `#serverless` en la [ comunidad Datadog en Slack](https://chat.datadoghq.com/).
+Si tienes preguntas o comentarios sobre el producto, únete al canal `#serverless` en la [comunidad Datadog en Slack](https://chat.datadoghq.com/).
 
 ## Licencia
 

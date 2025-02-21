@@ -36,7 +36,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 4.0.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: aerospike

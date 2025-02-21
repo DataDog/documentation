@@ -15,11 +15,14 @@ Use the Observability Pipelines Worker to identify, tag, and optionally redact o
 
 Select a log source to get started:
 
+<!-- - [Amazon Data Firehose][12] -->
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [Google Pub/Sub][3]
 - [HTTP Client][4]
 - [HTTP Server][5]
+- [Kafka][13]
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
@@ -36,3 +39,6 @@ Select a log source to get started:
 [8]: /observability_pipelines/sensitive_data_redaction/splunk_tcp
 [9]: /observability_pipelines/sensitive_data_redaction/sumo_logic_hosted_collector
 [10]: /observability_pipelines/sensitive_data_redaction/syslog
+[11]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_s3
+[12]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/amazon_data_firehose
+[13]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/kafka

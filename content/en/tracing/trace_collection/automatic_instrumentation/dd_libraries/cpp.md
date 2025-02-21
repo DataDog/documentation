@@ -83,7 +83,7 @@ int main() {
 ````CMake
 # In a CMakeLists.txt
 
-CPMAddPackage("gh:DataDog/dd-trace-cpp#0.2.1")
+CPMAddPackage("gh:DataDog/dd-trace-cpp#1.0.0")
 
 # Add `tracer_example` target
 add_executable(tracer_example tracer_example.cpp)
@@ -96,7 +96,7 @@ target_link_libraries(tracer_example dd_trace::static)
 Build the example using the following commands:
 
 ```bash
-cmake -B build .
+cmake -B build -DCMAKE_BUILD_TYPE=Release .
 cmake --build build --target tracer_example -j
 
 ./build/tracer_example
@@ -114,7 +114,7 @@ include(FetchContent)
 FetchContent_Declare(
   dd-trace-cpp
   GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
-  GIT_TAG        v0.2.0
+  GIT_TAG        v1.0.0
   GIT_SHALLOW    ON
   GIT_PROGRESS   ON
 )
@@ -132,7 +132,7 @@ target_link_libraries(tracer_example dd_trace::static)
 Build the example using the following commands:
 
 ```bash
-cmake -B build .
+cmake -B build -DCMAKE_BUILD_TYPE=Release .
 cmake --build build --target tracer_example -j
 
 ./build/tracer_example
@@ -182,7 +182,7 @@ Link against `libdd_trace_cpp.so`, making sure the shared library is in `LD_LIBR
 
 ````bash
 clang -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
-./tracer_example
+LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
 ````
 

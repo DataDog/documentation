@@ -42,7 +42,7 @@ Follow the instructions for setting up the [Datadog Azure integration][1].
 
 1. On the [Cloud Security Management Setup][3] page, click **Cloud Integrations** > **Azure**.
 1. Locate your subscription's tenant, expand the list of subscriptions, and identify the subscription for which you want to disable Agentless Scanning.
-1. Click the **Edit** button {{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}} and toggle **Vulnerability Scanning** to the off position.
+1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and toggle **Vulnerability Scanning** to the off position.
 1. Click **Done**.
 
 ## Uninstall with Azure Resource Manager

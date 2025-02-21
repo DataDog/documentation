@@ -17,9 +17,10 @@ further_reading:
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.
 
-**Note**: When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, as this also avoids cross-region networking. 
 
 To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager][1].
+
+The scanner cost is under $1 per scanned host per year for accounts following the [recommended configuration](#recommended-configuration).
 
 {{< tabs >}}
 {{% tab "Cross-account scanning" %}}
@@ -47,6 +48,15 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{% /tab %}}
 {{< /tabs >}}
 
+## Recommended configuration
+Agentless Scanning incurs additional costs for running scanners in your cloud environments. To manage costs while ensuring reliable scans every 12 hours, Datadog recommends setting up Agentless Scanning with Terraform as the default template, which also prevents cross-region networking.
+To improve the scanner's efficacy, ensure your setup follows those guidelines:
+
+- Deploy scanners within a single AWS account
+- Deploy a scanner in each region that has more than 250 hosts
+- Deploy a scanner in any region containing a data store if using [Cloud Storage Scanning][2]
+
+Datadog automatically schedules scans to the right region to minimize the cross region costs.
 
 **Note**: The actual scanned data remains in your infrastructure, and only the collected list of packages, as well as information related to collected hosts (hostnames/EC2 Instances), are reported back to Datadog.
 
@@ -55,3 +65,4 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: mailto:success@datadoghq.com
+[2]: /security/cloud_security_management/agentless_scanning#cloud-storage-scanning

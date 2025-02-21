@@ -427,9 +427,9 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [15]: /security/application_security/threats/setup/threat_detection/python?tab=awsfargate
 [16]: /security/application_security/
 [17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /security/application_security/code_security/setup/java/
-[19]: /security/application_security/code_security/setup/dotnet/
-[20]: /security/application_security/code_security/setup/nodejs/
+[18]: /security/code_security/iast/setup/java/
+[19]: /security/code_security/iast/setup/dotnet/
+[20]: /security/code_security/iast/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
-[22]: /security/application_security/software_composition_analysis/
-[23]: /security/application_security/software_composition_analysis/setup/
+[22]: /security/code_security/software_composition_analysis/
+[23]: /security/code_security/software_composition_analysis/

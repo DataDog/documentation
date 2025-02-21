@@ -388,6 +388,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3520534424",
+      "description": "Create a new dashboard with timeseries widget with custom_unit"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1213075383",
       "description": "Create a new dashboard with toplist widget"
     },
@@ -612,6 +617,11 @@
     }
   ],
   "CreateMonitor": [
+    {
+      "group": "monitors",
+      "suffix": "_1303514967",
+      "description": "Create a Cost Monitor returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "_3883669300",

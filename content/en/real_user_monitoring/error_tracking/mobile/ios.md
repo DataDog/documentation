@@ -443,12 +443,8 @@ For more information, see [dSYMs commands][11].
 
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-dSYM files are limited to **500** MB.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-dSYM files are limited to **500** MB.
-{{< /site-region >}}
+dSYM files are limited in size to **2 GB** each.
+
 
 ## Test your implementation
 
