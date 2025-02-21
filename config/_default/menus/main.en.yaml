@@ -2758,16 +2758,21 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
       weight: 209
+    - name: Autoscaling
+      url: containers/kubernetes/autoscaling
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_autoscaling
+      weight: 210
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 210
+      weight: 211
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 211
+      weight: 212
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
