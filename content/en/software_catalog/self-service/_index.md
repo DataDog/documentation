@@ -20,7 +20,9 @@ Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs fr
 {{< img src="tracing/service_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
 ### Start from an example
-Navigate to [App Builder Blueprints][9] or [Workflow Automation Blueprints][15]. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with other tools, and configuring permissions. See some examples below:
+Explore [App Builder Blueprints][9] and [Workflow Automation Blueprints][15] for examples of how to configure an App or Workflow, respectively. You can configure inputs, set up integrations with other tools, configure permissions, and make other adjustments to the blueprints to satisfy your needs. 
+
+For example, you can use these blueprints to do the following:
 
 #### Software Templating
 Configure an form to collect inputs from a developer, integrate with a template in source code management (e.g. Github), and generate a new repository or PR for a developer. Learn more in our [documentation][16] on Software Templates.
