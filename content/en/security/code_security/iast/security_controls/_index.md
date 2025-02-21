@@ -7,9 +7,9 @@ aliases:
 
 ## Overview
 
-Security Controls is a feature that allows users to configure escaping and sanitization functions to prevent the reporting of false positives in vulnerability detection. By defining these security functions, users can fine-tune how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
+Security Controls is a feature that allows users to configure escaping and sanitization functions to prevent the reporting of false positives in vulnerability detection. By defining these security functions, users can refine how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
 
-## Understanding Input Validators vs. Sanitizers
+## Understanding input validators vs. sanitizers
 
 Security Controls differentiate between **Input Validators** and **Sanitizers**, depending on how a function is used in security validation:
 
@@ -17,7 +17,7 @@ Security Controls differentiate between **Input Validators** and **Sanitizers**,
 
 **Sanitizers** → Used when the function validates or modifies the return value before it is used further in the application. These help clean data to ensure it does not contain potentially harmful content.
 
-## Configuring Security Controls
+## Configuring security controls
 
 The definition of **Security Controls** shall be placed in the configuration variable **`DD_IAST_SECURITY_CONTROLS_CONFIGURATION`**.
 To configure a list of security controls, follow the format and field specifications below.
@@ -27,7 +27,7 @@ This format uses specific separators to structure each security control entry.
 
 `<TYPE>:<SECURE_MARKS>:<CLASS/FILE>:<METHOD>:<PARAMETERS (Optional)>:<PARAMETERS TO VALIDATE (Optional)>`
 
-### Field Specifications
+### Field specifications
 | **Field**                             | **Description**                                                                                                                                                                                         |
 |---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Type**                              | Defines the type of control. **Accepted values:** `INPUT_VALIDATOR` or `SANITIZER`.                                                                                                                     |
@@ -144,7 +144,7 @@ The following table lists the supported vulnerability types as secure marks for 
 ##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate:java.lang.String
 `
-##### NOTE
+##### Note
 Applies for the first method.
 
 
@@ -158,7 +158,7 @@ Applies for the first method.
 ##### Config
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar.foo.CustomInputValidator:validate
 `
-##### NOTE
+##### Note
 Applies for both methods.
 
 ### Sanitizer
@@ -171,7 +171,7 @@ Applies for both methods.
 ##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
 `
-#### Sanitizer to avoid command injection  and code injection vulnerabilities
+#### Sanitizer to avoid command injection and code injection vulnerabilities
 
 ##### Method
  `bar.foo.CustomSanitizer#sanitize(String input)`
@@ -197,7 +197,7 @@ Applies for both methods.
 ##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize:java.lang.String
 `
-##### NOTE
+##### Note
 applies for the first method
 
 #### Overloaded sanitizers to avoid command injection vulnerabilities
@@ -210,7 +210,7 @@ applies for the first method
 ##### Config
 `SANITIZER:COMMAND_INJECTION:bar.foo.CustomSanitizer:sanitize
 `
-##### NOTE
+##### Note
 applies for both methods
 
 {{% /collapse-content %}}
