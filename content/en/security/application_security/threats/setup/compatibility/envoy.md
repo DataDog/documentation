@@ -5,10 +5,7 @@ type: multi-code-lang
 code_lang_weight: 40
 ---
 
-## Application Security capabilities support
-
-The following application security capabilities are supported in the Envoy integration, for the
-specified tracer version:
+The following table lists the support for application security capabilities in the Envoy integration according to the specified tracer version:
 
 | Application Security capability        | Minimum Envoy image version  |
 |----------------------------------------|------------------------------|
@@ -24,7 +21,7 @@ Please review Envoy integration version 1.71.0 [limitations][1].
 
 ## Envoy support
 
-The usage of the Envoy integration is in Preview.
+Envoy integration is in Preview.
 
 Only the Linux version and both the arm64 and arm64 architectures are supported.
 
