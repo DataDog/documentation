@@ -22,28 +22,28 @@ Metrics without Limits™ provides you with the ability to configure tags on all
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
-### Configuration of tags
+### Configuration of tags for a single metric
 
 #### Allowlist of tags 
+
 1. Click any metric name to open its details side panel. 
-2. Click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
+2. Click **Manage Tags**, then **Include tags** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
 3. Define your allowlist of tags. 
-By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a graph line icon. 
+By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a line graph icon. 
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
-{{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
-
-You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
+{{< img src="metrics/mwl_example_include_tags.png" alt="The Manage Tags view of a single metric with Include tags selected" style="width:80%" >}}
 
 #### Blocklist of tags 
-1. Click on any metric name to open its details side panel.
-2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
-3. Define your blocklist of tags. Tags defined in the blocklist are **not** queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days are distinguished with a graph line icon.
-5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
-6. Click **Save**.
 
-{{< img src="metrics/mwl-example-tag-exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
+1. Click on any metric name to open its details side panel.
+2. Click **Manage Tags**, then **Exclude Tags**. 
+3. Define your blocklist of tags. Tags defined in the blocklist are **not** queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days are distinguished with a line graph icon.
+4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
+5. Click **Save**.
+
+{{< img src="metrics/mwl_example_exclude_tags.png" alt="The Manage Tags view of a single metric with Exclude tags selected" style="width:80%" >}}
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
@@ -51,18 +51,50 @@ When configuring tags for counts, rates, and gauges, the most frequently queried
 
 **Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the `Edit` button for a metric in Metrics Summary.
 
+#### Use the API
+
+You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
+
 ### Configure multiple metrics at a time
 
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
+Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify the metrics to be configured, click **Configure Metrics**, then **Manage Tags*** on the Metrics Summary page. Select the metric or metric namespace you want to configure, then choose to do either of the following:
+   - [Allow all tags](#allow-all-tags) to override any previous tag configurations and make all tags queryable.
+   - [Include or exclude tags](#include-or-exclude-tags) to define queryable and non-queryable tags, respectively.
 
-You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API.
+#### Allow all tags
+
+{{< img src="metrics/bulk_allow_all_tags.png" alt="The Manage Tags option with Allow all tags selected in the Configure tags section" style="width:100%" >}}
+
+This option is selected by default, and overrides previously set tag configurations to make all tags queryable.
+
+#### Include or exclude tags
+
+When selecting tags to include or exclude, choose to either [override existing tag configurations](#override-existing-tag-configurations) or [keep existing tag configurations](#keep-existing-tag-configurations).
+
+##### Override existing tag configurations
+
+{{< img src="metrics/bulk_include_tags.png" alt="The Manage Tags option with Include tags and Override selected in the Configure tags section. The options to include tags actively queried on dashboards and monitors from the past 90 days and Specific tags are selected" video=true style="width:100%" >}}
+
+All existing tag configurations for the selected metrics are overrided, and you define a new tag configuration. If you are choosing to **include tags**, you can select to include either or both of the following:
+   - Only tags actively queried in Datadog from the past 30, 60, or 90 days.
+   - A specific set of tags that you define.
+
+##### Keep existing tag configurations
+
+{{< img src="metrics/bulk_exclude_tags.png" alt="The Manage Tags option with Exclude tags and Keep selected in the Configure tags section" video=true style="width:100%" >}}
+
+Existing tag configurations are retained, and you define new tags to be added to the configuration.
+
+#### Use the API
+
+You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API call.
 
 ### Refine and optimize your aggregations
 
 You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
 
-- Configured counts and rates are queryable in time/space with SUM
-- Configured gauges are queryable in time/space with AVG
+- Configured counts and rates are queryable in time/space with SUM.
+- Configured gauges are queryable in time/space with AVG.
 
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
@@ -73,7 +105,7 @@ The tag configuration modal pre-populates with an allowlist of aggregations that
 Configuring your tags and aggregations gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
 - **Ingested Custom Metrics**: The original volume of custom metrics based on all ingested tags.
-- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
+- **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations).
 
 **Note: Only configured metrics contribute to your Ingested custom metrics volume.** If a metric is not configured with Metrics without Limits™, you're only charged for its indexed custom metrics volume.
 
@@ -102,7 +134,7 @@ Learn more about [Custom Metrics Billing][8].
 
 - [Role based access control][11] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
 
-- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and "queryable tag configuration" or "percentile aggregations" on your [Events Stream][12]
+- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and "queryable tag configuration" or "percentile aggregations" on your [Events Stream][12].
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
 
