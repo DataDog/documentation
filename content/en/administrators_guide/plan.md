@@ -362,7 +362,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [46]: /infrastructure/resource_catalog/
 [47]: https://www.datadoghq.com/blog/engineering/introducing-husky/
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
-[49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
+[49]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
 [51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
@@ -389,4 +389,3 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/
-

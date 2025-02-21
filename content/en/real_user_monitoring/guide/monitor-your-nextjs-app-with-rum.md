@@ -233,6 +233,6 @@ To start backend monitoring of your Next.js applications:
 [3]: /real_user_monitoring/browser/data_collected/
 [4]: /real_user_monitoring/platform/dashboards/
 [5]: https://nextjs.org/docs/messages/next-script-for-ga#using-analyticsjs-legacy
-[6]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#setup-rum
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
+[6]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#setup-rum
+[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/?tab=browserrum#opentelemetry-support
 [8]: https://vercel.com
