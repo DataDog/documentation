@@ -681,7 +681,7 @@ Añade un sondeo de ejecución o preparación para que tu orquestador pueda gara
 
 Para los sondeos de preparación, debes habilitar sondeos de estado de localización privada en el puerto `8080` en tu implementación de localización privada. Para obtener más información, consulta [Configuración de localizaciones privadas][5].
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Docker Compose" %}}
 
@@ -803,7 +803,7 @@ El archivo `/tmp/liveness.date` de contenedores de localización privada se actu
 
 Utiliza la siguiente configuración para configurar checks de estado en tus contenedores con el `livenessProbe`:
 
-{{< pestañas >}}
+{{< tabs >}}
 
 {{% tab "Docker Compose" %}}
 

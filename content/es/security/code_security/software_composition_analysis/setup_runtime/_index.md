@@ -153,7 +153,7 @@ java -javaagent:dd-java-agent.jar \
 
 {{% /tab %}}
 
-{{< tabs >}}
+{{< /tabs >}}
 
 
 [1]: /es/security/code_security/software_composition_analysis/setup_runtime/compatibility/java

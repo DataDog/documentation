@@ -50,7 +50,7 @@ Puedes crear un test utilizando una de las siguientes opciones:
     1. Introduce la cadena que quieres enviar en tu test.
     1. Añade **Opciones avanzadas** (opcional) a tu test:<br /><br>
 
-   {{< pestañas >}}
+   {{< tabs >}}
 
    {{% tab "Opciones de solicitud" %}}
    * **Tiempo de espera**: Especifica la cantidad de tiempo en segundos antes de que se inicie un tiempo de espera en el test.
