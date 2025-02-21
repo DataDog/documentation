@@ -30,12 +30,33 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
-- Helm (v3+)
+- [Helm (v3+)][54]
 - [Docker][50]
 - [kubectl][5]
 
 ## Install the Datadog Agent with OpenTelemetry Collector
 
+### Select installation method
+
+Choose one of the following installation methods:
+
+- [Datadog Operator][55]: a [Kubernetes-native][56] that approach that automatically reconciles and maintains your Datadog setup. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+- [Helm chart][4]: quick and simple way to deploy Datadog Agent. It provides versioning, rollback, and templating capabilities, making deployments consistent, and easier to replicate.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+### Install the Datadog Operator
+
+You can install the Datadog Operator in your cluster using the [Datadog Operator Helm chart][57]:
+
+```shell
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm install datadog-operator datadog/datadog-operator
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 ### Add the Datadog Helm Repository
 
 To add the Datadog repository to your Helm repositories:
@@ -44,6 +65,9 @@ To add the Datadog repository to your Helm repositories:
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Set up Datadog API and application keys
 
@@ -58,6 +82,131 @@ helm repo update
 
 ### Configure the Datadog Agent
 
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent, Cluster Agent and Cluster Checks Runners (if used) in your Kubernetes cluster. The Datadog Agent will be deployed as a DaemonSet, running a pod on every node of your cluster.
+
+1. Use a YAML file to specify your `DatadogAgent` deployment configuration.
+   {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: otel-agent
+spec:
+  global:
+    clusterName: <CLUSTER-NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+   {{< /code-block >}}
+1. Switch the Datadog Agent image to use builds with embedded OpenTelemetry Collector:
+   {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  ...
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        pullPolicy: Always
+   ...
+   {{< /code-block >}}
+   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+
+   By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][53].
+1. Enable the OpenTelemetry Collector and configure the essential ports:
+   {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+   {{< /code-block >}}
+   <div class="alert alert-warning">Setting ports 4317 or 4318 manually is only supported if the name matches the default (<code>otel-grpc</code> or <code>otel-http</code>). Otherwise, it will result in a port conflict.</div>
+1. (Optional) Enable additional Datadog features:
+   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+   {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  # Enable Features
+  features:
+  ...
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+   {{< /code-block >}}
+
+{{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
+Your `datadog-agent.yaml` file should look something like this:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: otel-agent
+spec:
+  global:
+    clusterName: krlv-opw
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        pullPolicy: Always
+
+  # Enable Features
+  features:
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+{{< /code-block >}}
+{{% /collapse-content %}}
+{{% /tab %}}
+{{% tab "Helm" %}}
 Use a YAML file to specify the Helm chart parameters for the [Datadog Agent chart][4].
 
 1. Create an empty `datadog-values.yaml` file:
@@ -181,9 +330,386 @@ datadog:
    {{< /code-block >}}
 
 {{% /collapse-content %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configure the OpenTelemetry Collector
 
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+The Datadog Operator provides a sample OpenTelemetry Collector configuration that you can use as a starting point. If you need to modify this configuration, the Datadog Operator supports two ways of providing a custom Collector configuration:
+
+- **Inline configuration**: Add your custom collector configuration directly in the `features.otelCollector.conf.configData` field.
+- **ConfigMap-based configuration**: Store your collector configuration in a ConfigMap and reference it in the `features.otelCollector.conf.configMap` field. This approach allows you to keep Collector configuration decoupled from the `DatadogAgent` resource.
+
+####  Inline Collector Configuration
+
+In the snippet below, the Collector configuration is placed directly under the `features.otelCollector.conf.configData` parameter:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configData: |-
+          receivers:
+            prometheus:
+              config:
+                scrape_configs:
+                  - job_name: "otelcol"
+                    scrape_interval: 10s
+                    static_configs:
+                      - targets:
+                          - 0.0.0.0:8888
+            otlp:
+              protocols:
+                grpc:
+                  endpoint: 0.0.0.0:4317
+                http:
+                  endpoint: 0.0.0.0:4318
+          exporters:
+            debug:
+              verbosity: detailed
+            datadog:
+              api:
+                key: ${env:DD_API_KEY}
+                site: ${env:DD_SITE}
+          processors:
+            infraattributes:
+              cardinality: 2
+            batch:
+              timeout: 10s
+          connectors:
+            datadog/connector:
+              traces:
+                compute_top_level_by_span_kind: true
+                peer_tags_aggregation: true
+                compute_stats_by_span_kind: true
+          service:
+            pipelines:
+              traces:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog, datadog/connector]
+              metrics:
+                receivers: [otlp, datadog/connector, prometheus]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+              logs:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+{{< /code-block >}}
+
+When you apply the `datadog-agent.yaml` file containing this `DatadogAgent` resource, the Operator automatically mounts the Collector configuration into the Agent DaemonSet.
+
+{{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
+Completed `datadog-agent.yaml` with inline Collector configuration should look something like this:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: otel-agent
+spec:
+  global:
+    clusterName: krlv-opw
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        pullPolicy: Always
+
+  # Enable Features
+  features:
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configData: |-
+          receivers:
+            prometheus:
+              config:
+                scrape_configs:
+                  - job_name: "datadog-agent"
+                    scrape_interval: 10s
+                    static_configs:
+                      - targets:
+                          - 0.0.0.0:8888
+            otlp:
+              protocols:
+                grpc:
+                  endpoint: 0.0.0.0:4317
+                http:
+                  endpoint: 0.0.0.0:4318
+          exporters:
+            debug:
+              verbosity: detailed
+            datadog:
+              api:
+                key: ${env:DD_API_KEY}
+                site: ${env:DD_SITE}
+          processors:
+            infraattributes:
+              cardinality: 2
+            batch:
+              timeout: 10s
+          connectors:
+            datadog/connector:
+              traces:
+                compute_top_level_by_span_kind: true
+                peer_tags_aggregation: true
+                compute_stats_by_span_kind: true
+          service:
+            pipelines:
+              traces:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog, datadog/connector]
+              metrics:
+                receivers: [otlp, datadog/connector, prometheus]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+              logs:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+#### ConfigMap-based Collector Configuration
+
+For more complex or frequently updated configurations, storing Collector configuration in a ConfigMap can simplify version control.
+
+1. Create a ConfigMap that contains your Collector configuration:
+   {{< code-block lang="yaml" filename="configmap.yaml" collapsible="false" >}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-agent-config-map
+  namespace: system
+data:
+  # must be named otel-config.yaml
+  otel-config.yaml: |-
+    receivers:
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: "datadog-agent"
+              scrape_interval: 10s
+              static_configs:
+                - targets:
+                    - 0.0.0.0:8888
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    exporters:
+      debug:
+        verbosity: detailed
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+    processors:
+      infraattributes:
+        cardinality: 2
+      batch:
+        timeout: 10s
+    connectors:
+      datadog/connector:
+        traces:
+          compute_top_level_by_span_kind: true
+          peer_tags_aggregation: true
+          compute_stats_by_span_kind: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog, datadog/connector]
+        metrics:
+          receivers: [otlp, datadog/connector, prometheus]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+        logs:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+   {{< /code-block >}}
+   <div class="alert alert-warning">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
+1. Reference the `otel-agent-config-map` ConfigMap in your `DatadogAgent` resource using `features.otelCollector.conf.configMap` parameter:
+   {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configMap:
+          name: otel-agent-config-map
+   {{< /code-block >}}
+
+The Operator automatically mounts `otel-config.yaml` from the ConfigMap into the Agent with OpenTelemetry Collector DaemonSet.
+
+{{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
+Completed `datadog-agent.yaml` with Collector configuration defined as ConfigMap should look something like this:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: otel-agent
+spec:
+  global:
+    clusterName: krlv-opw
+    site: datadoghq.com
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        pullPolicy: Always
+
+  # Enable Features
+  features:
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configMap:
+          name: otel-agent-config-map
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-agent-config-map
+  namespace: system
+data:
+  # must be named otel-config.yaml
+  otel-config.yaml: |-
+    receivers:
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: "datadog-agent"
+              scrape_interval: 10s
+              static_configs:
+                - targets:
+                    - 0.0.0.0:8888
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    exporters:
+      debug:
+        verbosity: detailed
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+    processors:
+      infraattributes:
+        cardinality: 2
+      batch:
+        timeout: 10s
+    connectors:
+      datadog/connector:
+        traces:
+          compute_top_level_by_span_kind: true
+          peer_tags_aggregation: true
+          compute_stats_by_span_kind: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog, datadog/connector]
+        metrics:
+          receivers: [otlp, datadog/connector, prometheus]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+        logs:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+{{< /code-block >}}
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
 The Datadog Helm chart provides a sample OpenTelemetry Collector configuration that you can use as a starting point. This section walks you through the predefined pipelines and included OpenTelemetry components.
 
 This is the full OpenTelemetry Collector configuration in `otel-config.yaml`:
@@ -209,7 +735,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
-      site: datadoghq.com
+      site: ${env:DD_SITE}
 processors:
   infraattributes:
     cardinality: 2
@@ -237,6 +763,9 @@ service:
       exporters: [datadog]
 
 {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Key components
 
@@ -290,6 +819,17 @@ For more information, see the [Collector Health Metrics][8] documentation.
 
 ### Deploy the Agent with the OpenTelemetry Collector
 
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Deploy the Datadog Agent with the above configuration file:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+```
+
+After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is running on the same host as your application, following the [Agent deployment pattern][58]. The [Gateway deployment pattern][59] is not supported.
+{{% /tab %}}
+{{% tab "Helm" %}}
 To install or upgrade the Datadog Agent with OpenTelemetry Collector in your Kubernetes environment, use one of the following Helm commands:
 
 - For default OpenTelemetry Collector configuration:
@@ -309,7 +849,9 @@ Replace `<RELEASE_NAME>` with the Helm release name you are using.
 
 <div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
-This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the Agent deployment pattern. The Gateway deployment pattern is not supported.
+This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][58]. The [Gateway deployment pattern][59] is not supported.
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% collapse-content title="Deployment diagram" level="p" %}}
 {{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
@@ -603,3 +1145,9 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [51]: https://github.com/DataDog/datadog-agent/blob/main/comp/otelcol/collector-contrib/impl/manifest.yaml#L7
 [52]: /getting_started/site/
 [53]: /containers/guide/changing_container_registry/
+[54]: https://helm.sh
+[55]: /containers/datadog_operator
+[56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+[57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: https://opentelemetry.io/docs/collector/deployment/agent/
+[59]: https://opentelemetry.io/docs/collector/deployment/gateway/
