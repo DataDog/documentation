@@ -32,6 +32,6 @@ This page describes essential terms and concepts for OpenTelemetry and Datadog. 
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/
 [3]: /opentelemetry/collector_exporter/otlp_receiver/
-[4]: /opentelemetry/interoperability/
+[4]: /opentelemetry/reference/trace_context_propagation/
 [5]: /opentelemetry/schema_semantics/semantic_mapping/
 [6]: https://opentelemetry.io/docs/concepts/glossary/

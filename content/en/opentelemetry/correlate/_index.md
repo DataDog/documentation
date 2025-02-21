@@ -13,8 +13,8 @@ further_reading:
 Link your telemetry data for full-stack observability:
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/correlate/correlate_logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/correlate/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/correlate/logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/correlate/rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
