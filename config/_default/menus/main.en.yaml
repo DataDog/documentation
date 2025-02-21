@@ -4092,21 +4092,26 @@ menu:
       parent: dbm
       identifier: dbm_query_samples
       weight: 13
+    - name: Exploring Database Schemas
+      url: database_monitoring/schema_explorer
+      parent: dbm
+      identifier: dbm_schema_explorer
+      weight: 14
     - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
-      weight: 14
+      weight: 15
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 15
+      weight: 16
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 16
+      weight: 17
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
