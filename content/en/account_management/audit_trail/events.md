@@ -44,7 +44,7 @@ further_reading:
 - [Synthetic Monitoring](#synthetic-monitoring-events)
 - [Reference Tables](#reference-table-events)
 - [Workflows](#workflow-events)
-- [App Datastore](#app-datastore)
+- [Apps Datastore](#apps-datastore)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -293,7 +293,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Custom Connection][99] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
 | [Step completed][110] | A step was completed. | `@evt.name:Workflows @action:completed @asset.type:step`|
 
-### App Datastore
+### Apps Datastore
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Datastore][116] | A user created, deleted, queried, or listed datastores. | `@evt.name:"Apps Datastore" @asset.type:(datastore OR datastore_list) @action:(queried OR created OR deleted)` |
