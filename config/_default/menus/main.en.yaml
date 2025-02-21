@@ -1854,7 +1854,7 @@ menu:
       weight: 10
     - name: Composite Metrics Queries
       url: metrics/composite_metrics_queries
-      parent: metrics_nested_queries
+      parent: metrics_top_level
       identifier: composite_metrics_queries
       weight: 11
     - name: Metrics Without Limits™
