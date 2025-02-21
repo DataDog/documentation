@@ -35,8 +35,8 @@ Consolidate data from cloud infrastructure or Kubernetes and enable developers t
 #### Manage code changes and deployments
 Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
 
-#### Provisioning Infrastructure
-Enable developers to spin up new infrastructure (e.g. S3 bucket) with a few inputs and one click. Collect approvals from an SRE/platform engineering team through source control or Approval actions within Workflow Automation.
+#### Provision infrastructure
+Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 
 #### Developer Environments
 Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
