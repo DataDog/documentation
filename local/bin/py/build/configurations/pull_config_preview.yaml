@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: joepeeples/github-int-redesign
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
