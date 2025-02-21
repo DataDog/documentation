@@ -119,7 +119,7 @@ Datadog [Case Management][6] offers a centralized place to triage, track, and re
 4. Enter a title and optional description.
 5. Click **Create Case**.
 
-When you click **Create case** you are directed the Case Management and the project you selected.
+When you click **Create Case**, you are directed to Case Management and the project you selected.
 
 ## Saved views
 
