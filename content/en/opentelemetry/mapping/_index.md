@@ -1,7 +1,7 @@
 ---
 title: Semantic Mapping
 further_reading:
-- link: "/opentelemetry/explore/"
+- link: "/opentelemetry/correlate/"
   tag: "Documentation"
   text: "Explore Data in Datadog"
 ---

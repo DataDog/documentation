@@ -1,5 +1,7 @@
 ---
 title: Correlate Data
+aliases:
+  - /opentelemetry/otel_logs/
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -11,8 +13,8 @@ further_reading:
 Link your telemetry data for full-stack observability:
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/explore/correlate_logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/explore/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/correlate/correlate_logs_and_traces/" >}}Connect Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/correlate/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

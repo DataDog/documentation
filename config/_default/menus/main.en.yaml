@@ -775,7 +775,7 @@ menu:
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
       weight: 9
-    - name: Guides
+    - name: Guides and Resources
       url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
@@ -789,7 +789,7 @@ menu:
       parent: otel_guides
       weight: 1002
     - name: Visualize Histograms as Heatmaps
-      url: /opentelemetry/explore/otlp_histogram_heatmaps
+      url: /opentelemetry/guide/otlp_histogram_heatmaps
       parent: otel_guides
       weight: 1003
     - name: Migration Guides
