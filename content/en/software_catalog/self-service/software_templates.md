@@ -1,7 +1,8 @@
 ---
-title: Self-Service
+title: Software Templates
 aliases:
   - /service_catalog/software_templates
+  - /software_catalog/software_templates
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
@@ -14,16 +15,14 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-## Automate developer workflows
-Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. Orchestrate end-to-end processes of multiple actions using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
-
-{{< img src="tracing/service_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
+## Automate infrastructure provisioning and microservice scaffolding
+Create standardized Software Templates to help developers spin up microservices and infrastructure that align with your best practices. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Orchestrate software template workflows using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
 {{< /callout >}} 
 
-### Create software template workflows
+### Create software templates
 To use software templates in Datadog, create a Git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
 
 #### Start from an example
@@ -46,7 +45,7 @@ The [Provision EKS Cluster blueprint][12] shows an example of how to generate Te
 
 ##### Provision RDS instance
 
-The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance through direct integration with AWS.
+The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance in AWS through an API call.
 
 
 #### Start from scratch
@@ -77,11 +76,11 @@ Navigate to the [Workflow Automation][3] page to configure the template in Datad
    - Track the success of the workflow templating process in [Workflow Automation][3].
 
 ### Publishing your App 
-When you have finished setting up and testing up your App, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
+When you have finished setting up and testing up your Template, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
 
   {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
-### Available Software Catalog Actions
+### Available templating actions
 
 Below is a list of actions available for Software Catalog in Datadog App Builder and Workflow Automation. You can see a full list of in the [Action Catalog][7].
 
@@ -93,13 +92,22 @@ Below is a list of actions available for Software Catalog in Datadog App Builder
   - "Trigger GitHub Actions workflow run" to initiate a GitHub Action
   - "Search repositories" to return a list of repositories
   - "Create pull request" to open a pull request
+- **Gitlab**
+  - "Create file" to create new files
+  - "Create project" to create new projects
+- **Azure DevOps**
+  - "Run pipeline" to trigger a pipeline run
 - **Retrieve Service Information**
-  - "Get service definition" for a single service
-  - "List service definitions" to get all definitions from Datadog Software Catalog
+  - "List entity definitions" to get all definitions from Datadog Software Catalog (v3.0 and prior)
   - "Get service dependencies" to get a service's immediate upstream and downstream services
-- **Incident Triage**
-  - "Get service PagerDuty on call"
-  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks).
+- **Approvals**
+  - "Make a decision" with Slack or MS Teams to solicit an approval through a message
+  - Use integrations with ServiceNow, Jira, or HTTP calls if you have an existing change management process.
+- **HTTP**
+  - Call any external API, regardless of whether or not Datadog has a pre-defined action
+- **Transform Data**
+  - Call "Function" or "Expression" to perform data transformations with Javascript
+  - Bits AI can help with writing any custom Javascript code
 - **Private Actions**
   - To interact with private resources, use the [Private Action Runner][12].
     
