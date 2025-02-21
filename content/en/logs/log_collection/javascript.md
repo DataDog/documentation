@@ -587,7 +587,12 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
+The `beforeSend` callback function takes two arguments and gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property:
+
+- function beforeSend(log,context)
+- log - Log collected by the Browser SDK may contain the following properties:
+  - `isAborted` (for network log events)
+  - `handlingStack` (for network, console, and logger events - tells where the log event was handled, which is useful for micro-frontends)
 
 To redact email addresses from your web application URLs:
 
