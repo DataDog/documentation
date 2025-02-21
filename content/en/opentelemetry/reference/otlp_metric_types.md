@@ -1,5 +1,7 @@
 ---
 title: OTLP Metrics Types
+aliases:
+  - /opentelemetry/otlp_metrics
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'

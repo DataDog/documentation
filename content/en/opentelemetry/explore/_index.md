@@ -19,14 +19,6 @@ Link your telemetry data for full-stack observability:
     {{< nextlink href="/opentelemetry/explore/connect_rum_and_traces/" >}}Connect RUM and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Visualize your data
-
-Visualize your OpenTelemetry data:
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Histogram Heatmaps{{< /nextlink >}}
-{{< /whatsnext >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

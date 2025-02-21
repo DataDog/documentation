@@ -1,5 +1,5 @@
 ---
-title: Set Up the OTel Collector
+title: Set Up the OpenTelemetry Collector
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
