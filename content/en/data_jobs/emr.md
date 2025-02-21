@@ -105,8 +105,8 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    SECRET_NAME=datadog/dd_api_key
    export DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
-   # Optional: turn on to send spark driver and worker logs to Datadog
-   export DD_EMR_LOGS_ENABLED=true
+   # Optional: uncomment to send spark driver and worker logs to Datadog
+   # export DD_EMR_LOGS_ENABLED=true
 
    # Download and run the latest init script
    curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true

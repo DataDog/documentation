@@ -17,7 +17,7 @@ title: Configurar Data Streams Monitoring para Java
 
 | Tecnología     | Biblioteca                                                                                         | Versión mínima del rastreador | Versión de rastreador recomendada |
 |----------------|-------------------------------------------------------------------------------------------------|------------------------|-----------------------------
-| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients)              | 1.9.0                  | 1.43.0 o posterior            |
+| Kafka          | [kafka-clients](https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients) (v3.7 no es totalmente compatible)              | 1.9.0                  | 1.43.0 o posterior            |
 | RabbitMQ       | [amqp-client](https://mvnrepository.com/artifact/com.rabbitmq/amqp-client)                      | 1.9.0                  | 1.42.2 o posterior            |
 | Amazon SQS     | [aws-java-sdk-sqs (v1)](https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-sqs)      | 1.27.0                 | 1.42.2 o posterior            |
 | Amazon SQS     | [sqs (v2)](https://mvnrepository.com/artifact/software.amazon.awssdk/sqs)                       | 1.27.0                 | 1.42.2 o posterior            |
@@ -53,6 +53,34 @@ Para configurar Data Streams Monitoring desde la interfaz de usuario Datadog sin
 
 ### Monitorización de pipelines de SQS
 Data Streams Monitoring utiliza un [atributo de mensaje][3] para rastrear la ruta de un mensaje a través de una cola SQS. Como Amazon SQS tiene un límite máximo de 10 atributos de mensaje permitidos por mensaje, todos los mensajes transmitidos a través de los pipelines de datos deben tener 9 o menos atributos de mensaje definidos, lo que permite que el atributo restante sea para Data Streams Monitoring.
+
+### Monitorización de pipelines SNS a SQS
+Para monitorizar un pipeline de datos en el que Amazon SNS habla directamente con Amazon SQS, debes realizar los siguientes pasos adicionales de configuración:
+
+{{< tabs >}}
+{{% tab "SQS v1" %}}
+- Establece la variable de entorno `DD_TRACE_SQS_BODY_PROPAGATION_ENABLED` en `true`.
+
+   Por ejemplo:
+   ```yaml
+   environment:
+     - DD_DATA_STREAMS_ENABLED: "true"
+     - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
+     - DD_TRACE_SQS_BODY_PROPAGATION_ENABLED: "true"
+   ```
+- Asegúrate de que estás utilizando la [versión 1.44.0o posterior del rastreador de Java][1].
+
+[1]: https://github.com/DataDog/dd-trace-java/releases
+{{% /tab %}}
+{{% tab "SQS v2" %}}
+Habilita la [entrega de mensajes sin formato de Amazon SNS][1].
+
+[1]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
+{{% /tab %}}
+{{< /tabs >}}
+
+### Monitorización de pipelines de Kinesis
+No existen atributos de mensaje en Kinesis para propagar el contexto y seguir la ruta completa de un mensaje a través de un flujo (stream) de Kinesis. Como resultado, las métricas de latencia de extremo a extremo de Data Streams Monitoring se aproximan sumando la latencia en segmentos de la ruta de un mensaje, desde el servicio productor, a través del flujo de Kinesis, hasta un servicio consumidor. Las métricas de rendimiento se basan en segmentos desde el servicio productor, a través de un flujo de Kinesis, hasta el servicio consumidor. La topología completa de los flujos de datos puede seguir visualizándose a través de los servicios de instrumentación.
 
 ### Instrumentación manual
 Data Streams Monitoring propaga el contexto a través de las cabeceras de los mensajes. Si utilizas una tecnología de cola de mensajes no compatible con DSM, una tecnología sin cabeceras (como Kinesis) o Lambda, utiliza la [instrumentación manual para configurar DSM][5].
