@@ -1979,7 +1979,22 @@ menu:
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305   
+    - name: Production Readiness
+      url: software_catalog/use_cases/production_readiness
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_production_readiness
+      weight: 306  
+    - name: Incident Response
+      url: software_catalog/use_cases/incident_response
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_incident_response
+      weight: 307    
+    - name: CI Pipeline Visibility
+      url: software_catalog/use_cases/pipeline_visibility
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_pipeline_visibility
+      weight: 308  
     - name: Manage a Component
       url: software_catalog/manage
       parent: software_catalog
