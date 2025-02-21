@@ -17,9 +17,13 @@ further_reading:
 
 Continuous Testing allows you to apply the same scenario from scheduled tests against the production environment to development and staging environments. Continuous Testing uses Synthetic tests throughout the development cycle to ensure regressions are caught as soon as possible.
 
-When triggering a CI test, you can overwrite the starting URL of a [browser][1] or [API test][2] to reroute the Synthetic Worker to the appropriate environment.
+When triggering a CI test, you can overwrite the starting URL of a [browser][1] or [API test][2] to reroute the Synthetic Worker to the appropriate environment. This allows you to use the same test scheduled on your production environment, and in CI on your staging environment.
 
-## Overriding the starting URL
+For [browser test][1], you can also redirect only a subset of the resource URL during the test execution with `resourceUrlSubstitutionRegexes`. This allows you to test frontend assets from your current branch against the production backend. Similarly, it could reroute a subset of API calls matching a domain, or a path, to a staging environment containing the changes to test, while the rest of the requests are served by the production environment.
+
+## Using a production test on a staging environment
+
+### Overriding the starting URL
 
 A Synthetic browser test starts the test scenario by navigating to a starting URL. Similarly, an API HTTP test sends a request to a specific URL. When triggering a CI test, you can overwrite this starting URL to point to another environment where your application is deployed in.
 
@@ -34,7 +38,7 @@ datadog-ci synthetics run-tests --public-id <public-id> --override startUrl="htt
 
 This option allows you to reuse the same test scenario on both the production environment and other development environments (such as staging) as long as they are publicly available. To learn how to test against [private environments][4], see [Testing While Using Proxies, Firewalls, or VPNs][3].
 
-## Partially modifying the starting URL
+### Partially modifying the starting URL
 
 If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may unintentionally remove the path or certain search query parameters from the URL that the scenario is expected to test.
 
@@ -60,6 +64,36 @@ The sed syntax is often used with a slash <code>/</code> separator, for example:
 </div>
 
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
+
+## Introducing a change in an existing environment
+
+### Modifying resource URLs
+
+In addition to modifying the starting URL, you can also modify the URLs of all subsequent resource requests using the `resourceUrlSubstitutionRegexes` override. This option substitutes parts of the resource URLs based on the provided regular expressions.
+
+This allows you to test some parts of your application independently from the main environment. The main page is still being served by the environment from the `startUrl`, but each request matching the first regex from `resourceUrlSubstitutionRegexes` can be redirected to another environment hosting only the changes from the branch triggering the CI pipeline.
+
+For example, given the frontend javascript assets are located under the path `https://prod.my-app.com/resources/chunks/*`, this would allow to redirect all the javascript assets requests to `https://staging.my-app.com/resources/chunks` hosting the ones to test, while keeping the main page and all API calls being served by `prod.my-app.com`. Similarly, if you want to test the service behind the endpoints `https://prod.my-app.com/api/my-service`, you can redirect these API calls to `https://staging.my-app.com/api/my-service` to test this service in isolation with the production frontend.
+
+This field expects an array of strings, each containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL. The second is the expression to rewrite the URL.
+
+A simple example looks like the following:
+
+```
+https://prod.my-app.com/assets/(.*)|https://staging.my-app.com/assets/$1
+```
+
+The regular expression uses a capture group to capture the path of the resource URL. The rewriting rule produces a similar looking URL pointing to `staging.my-app.com`, and appending the captured group using `$1`. Given the URL `https://prod.my-app.com/assets/js/chunk-123.js`, it would rewrite it to `https://staging.my-app.com/assets/js/chunk-123.js`.
+
+A more complex substitution regex could look like the following: `(https?://)([^/]*)|$1<deployment-prefix>.$2`. With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix>.my-app.com/some/path`. Notice that the URL path is not affected by the rewrite, because it's not part of the substitution regex.
+
+<div class="alert alert-info">
+The <code>resourceUrlSubstitutionRegexes</code> will also be applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
+</div>
+
+<div class="alert alert-info">
+Apart from the pipe <code>|</code> syntax presented above, <code>resourceUrlSubstitutionRegexes</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewriting rule&gt;|&lt;modifiers&gt;</code>.</br></br> The sed syntax is often used with a slash <code>/</code> separator, for example: <code>s/&lt;regex&gt;/&lt;rewriting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
+</div>
 
 ## Further reading
 
