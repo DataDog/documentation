@@ -37,7 +37,7 @@ To enable users to register and sign in securely, an **App Protection Policy** m
 
 1. In the [admin center][1], go to the **Apps** tab and select **App Protection Policies**.
 2. Create a policy for the appropriate platform (iOS and Android require separate policies).
-3. Add **Datadog Intune** to the policy (by clicking "Select custom apps", if nothing appears please follow step 1).
+3. Add **Datadog Intune** to the policy (by clicking "Select custom apps", if nothing appears please follow _step 1_).
 4. Configure your **security settings** and assign the policy to targeted users or groups.
 5. Click **Save**.
 
@@ -66,6 +66,8 @@ Permissions are automatically added when configuring the application:
 | Microsoft Mobile Application Management | `DeviceManagementManagedApps.ReadWrite`  | Read and Write the User's App Management device | Delegated |
 
 **Note:** Only those two permissions are used by the mobile-app. When granting consent you may see more permissions, this is due to the mobile-app sharing the same Microsoft Entra application than our web-app and the [Microsoft Teams Integration](https://docs.datadoghq.com/integrations/microsoft_teams). If you're not using it you can revoke those permissions from the **Permissions** tab on the page detailed in _step 3_.
+
+**Note 2:** While `DeviceManagementManagedApps.Read` exists, this is an MS Graph API permission and the mobile-app requires a MAM permission. `DeviceManagementManagedApps.ReadWrite` is the only MAM one available but **mobile-app doesn't write anything** and only use read in that case.
 
 ## Deploying Datadog Intune to mobile devices
 When deploying to Android devices, users need to install the following:
