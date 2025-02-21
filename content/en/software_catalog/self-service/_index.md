@@ -32,7 +32,7 @@ Configure a form to collect inputs from a developer, integrate with a template i
 #### Remediaton
 Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
 
-#### Change Management
+#### Manage code changes and deployments
 Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
 
 #### Provisioning Infrastructure
