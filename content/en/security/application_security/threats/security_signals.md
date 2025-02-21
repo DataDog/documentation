@@ -26,7 +26,7 @@ Severity
 : There are five severity states: **Info**, **Low**, **Medium**, **High**, and **Critical**. **High** and **Critical** indicate a major impact to service availability or active compromise.
 
 Title
-: The name of the signal. Titles might update when new data correlates and changes the impact of the attack.
+: The name of the signal. Titles might update when new data is correlated, altering the assessed impact of the attack.
 
 Service/Env
 : The service and environment identified in the attack. Hover over the service name to link to the service page and code repo, and to see who is on-call for the service.
@@ -66,7 +66,7 @@ Declare an incident if:
 - An issue is or might be impacting customers.
 - You believe an issue (even if it's internal) needs to be addressed as an emergency.
  
-If you don't know whether you should call an incident, notify other users and increase severity appropriately.
+If you don't know whether you should declare an incident, notify other users and increase severity appropriately.
 
 1. On the [Signals Explorer][2] page, select a security signal to open its details panel.
 2. On the signal panel, click **Declare Incident** or select the dropdown arrow and select **Add to an existing incident**.
@@ -89,7 +89,7 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 ## Review and remediate
 
 1. On the [Signals Explorer][2] page, open a security signal.
-2. In the signal details, view each of the sections, such as **What Happened**, **Activity Summary**, and **Rule Details**.
+2. In the signal details, view each of the sections, such as **What Happened**, **Activity Summary**, and **Detection Rule**.
 3. Review the **Next Steps** and take action:
     -  Click **Block all Attacking IPs** (by specific duration or permanently).
     -  Click **Automated Attacker Blocking** (based on [detection][10] rules). This setting requires the Application Security Management **Protect Write** permission.
@@ -125,7 +125,7 @@ When you click **Create case** you are directed the Case Management and the proj
 
 You can save different configurations of the Signals Explorer as views. For example, you could filter the explorer to show all unassigned signals and then save that as a view.
 
-When a configuration is saved as a view, you and your teammates can reuse it later.
+When a configuration is saved as a view, you and your teammates can use it later.
 
 A view contains the explorer's current selections for:
 
