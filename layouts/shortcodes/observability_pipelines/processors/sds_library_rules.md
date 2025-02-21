@@ -9,7 +9,7 @@
     - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
 1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
-1. Optionally, add a description for the rule
+1. Optionally, add a description for the rule.
 1. Click **Save**.
 
 ##### Path notation example {#path-notation-example-lib}
