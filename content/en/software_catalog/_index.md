@@ -42,6 +42,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
   tag: "Blog"
   text: "Investigate memory leaks and OOMs with Datadog's guided workflow"
+- link: "https://www.datadoghq.com/blog/software-catalog/"
+  tag: "Blog"
+  text: "Improve developer experience and collaboration with Software Catalog"
 algolia:
   tags: ['software catalog']
 ---
@@ -57,22 +60,26 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 {{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for our Internal Developer Portal!" >}}
 {{< /callout >}}
 
-### Use cases
+## Key terminology
 
-#### Governance and optimization
-- Providing engineering leadership with a high-level view of best practices across teams and services through [Service Scorecards][9].
-- Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
-- Understanding trends and identifying inefficiencies in the costs related to your services.
+Service
+: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be one of the following:
 
-#### Evaluate monitoring coverage  
-- Detecting which services aren’t reporting observability data or having that data monitored.
-- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
-- Spotting issues like missing SLOs, monitors, or services without ownership.
+* URL endpoints grouped together under an API service.
+* DB queries grouped together within one database service.
+* A group of periodic jobs configured in the crond service.
 
-#### Streamline collaboration during incidents
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
-- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
-- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
+Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
+
+In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12], or import additional services through external sources like [Backstage][13] or [ServiceNow][14]. 
+
+System
+: In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
+
+**Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
+
+Component
+: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, or an API. 
 
 
 ## Getting started
@@ -158,3 +165,10 @@ The services and resources statistics, and span summaries on the **Service List*
 [7]: /tracing/other_telemetry/
 [8]: /software_catalog/add_metadata#metadata-schema-v30-beta
 [9]: /software_catalog/scorecards/
+[10]: /glossary/#service
+[11]: /opentelemetry/integrations/trace_metrics/
+[12]: /software_catalog/customize/create_entries
+[13]: /software_catalog/customize/import_entries_backstage
+[14]: /software_catalog/customize/import_entries_servicenow
+[15]: https://backstage.io/docs/features/software-catalog/system-model/
+[16]: /tracing/services/inferred_services/?tab=agentv7551#naming-inferred-entities
