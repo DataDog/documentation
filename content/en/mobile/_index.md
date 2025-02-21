@@ -90,17 +90,6 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 2. Click the "+" button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
-### Receive push notifications for incidents
-
-1. Navigate to **Account**.
-2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
-5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
-6. Select your mobile device and click **Save**.
-
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
-
 ## Widgets
 
 ### Open Incidents widget
@@ -426,6 +415,29 @@ On the Traces page, you can view and search all of the traces that you have acce
 
 For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
 
+## Notifications
+
+The mobile app is able to send out regular as well as critical notifications. As a reminder, critical notifications can circumvent your Do Not Disturb (DnD) mode. This is however only possible if you **explicitly** grant us permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
+
+### Push Notifications for On-Call
+To properly set up your mobile device for On-Call, please follow [this guide][25]. Once set up, make sure you visit your [On-Call profile][26] and select your mobile device in your notification preferences.
+
+### Push Notifications for Incidents
+To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications via [Incident Notification Rules][13]. Here's a step-by-step guide on how to set that up:
+
+1. Navigate to **Account**.
+2. Click **Notifications**.
+3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
+4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
+5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
+6. Select your mobile device and click **Save**.
+
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
+
+### Push Notifications from Workflows
+It is also possible to trigger push notifications directly from Workflows via the [Send mobile push notification message action][27]. All you need to provide is the target user and the body of the push notification and you're good to go. Note, the target user must have already logged into the Datadog Mobile application and allowed the Datadog mobile application to receive push notifications.
+
+
 ## Quick actions
 
 {{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
@@ -502,3 +514,7 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [23]: /tracing/trace_explorer/query_syntax/
+[24]: /service_management/on-call
+[25]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[26]: https://app.datadoghq.com/on-call/profile
+[27]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.push_notification/com.datadoghq.dd.push_notification.sendPushNotification
