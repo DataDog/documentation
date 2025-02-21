@@ -721,17 +721,17 @@ menu:
       parent: opentelemetry_top_level
       weight: 6
     - name: Correlate Data
-      url: opentelemetry/explore/
+      url: opentelemetry/correlate/
       identifier: otel_explore
       parent: opentelemetry_top_level
       weight: 7
     - name: Correlate Logs and Traces
-      url: /opentelemetry/explore/correlate_logs_and_traces/
+      url: /opentelemetry/correlate/logs_and_traces/
       identifier: otel_logs
       parent: otel_explore
       weight: 701
     - name: Correlate RUM and Traces
-      url: /opentelemetry/explore/connect_rum_and_traces/
+      url: /opentelemetry/correlate/rum_and_traces/
       identifier: otel_rum
       parent: otel_explore
       weight: 702
@@ -793,7 +793,7 @@ menu:
       parent: otel_guides
       weight: 1003
     - name: Migration Guides
-      url: /opentelemetry/guide/migrate
+      url: /opentelemetry/guide/migrate/
       identifier: otel_guides_migration
       parent: otel_guides
       weight: 1004
@@ -801,8 +801,8 @@ menu:
       url: /opentelemetry/guide/migrate/collector_0_95_0
       parent: otel_guides_migration
       weight: 10041
-    - name: Migrate to OTel Collector v0.95.0+
-      url: /opentelemetry/guide/migrate_operation_names/
+    - name: New Operation Name Mappings
+      url: /opentelemetry/guide/migrate/migrate_operation_names/
       parent: otel_guides_migration
       weight: 10042
     - name: Reference

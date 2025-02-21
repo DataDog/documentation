@@ -1,5 +1,5 @@
 ---
-title: Correlating OpenTelemetry Traces and Logs
+title: Correlate OpenTelemetry Traces and Logs
 further_reading:
 - link: "/opentelemetry/otel_tracing/"
   tag: "Documentation"
