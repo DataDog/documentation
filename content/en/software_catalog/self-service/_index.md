@@ -57,7 +57,7 @@ Spin up ephemeral environments for developers on-demand. Use Workflow Automation
    - Track the success of the workflow templating process in [Workflow Automation][3].
 
 ### Publishing your App 
-When you have finished setting up and testing up your App, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
+When you have finished setting up and testing your App, publish it for your team members to use. The publishing flow prompts you to define permissions and allows you to add your App to a Dashboard or the Self-Service portal. 
 
   {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     
