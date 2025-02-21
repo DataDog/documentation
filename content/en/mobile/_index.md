@@ -427,7 +427,7 @@ To stay up to date on new and ongoing incidents, Incident Management allows you 
 
 1. Navigate to **Account**.
 2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
+3. Select the toggle for **Enable Notifications**.
 4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
 5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
 6. Select your mobile device and click **Save**.
