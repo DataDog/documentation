@@ -54,7 +54,7 @@ import DatadogRUM
 
 URLSessionInstrumentation.enable(with: .init(delegateClass: SDWebImageDownloader.self as! URLSessionDataDelegate.Type))
 ```
-For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, refer to [Advanced Configuration > Automatically track network requests][4].
+For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
 
 [1]: https://github.com/Alamofire/Alamofire
 [2]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/ios/setup
