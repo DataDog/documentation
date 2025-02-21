@@ -26,10 +26,10 @@ Explore [App Builder Blueprints][9] and [Workflow Automation Blueprints][15] for
 
 For example, you can use these blueprints to do the following:
 
-#### Software Templates
+#### Scaffold new services from templates
 Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, Github), and generate a new repository or PR for a developer. Read the [Software Templates documentation][16] to learn more.
 
-#### Remediaton
+#### Remediate issues
 Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
 
 #### Manage code changes and deployments
