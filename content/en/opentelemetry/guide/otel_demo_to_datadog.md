@@ -1,9 +1,9 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
 further_reading:
-- link: "/service_catalog/"
+- link: "/software_catalog/"
   tag: "Documentation"
-  text: "Service Catalog"
+  text: "Software Catalog"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -282,21 +282,21 @@ documentation in the [language feature reference table][10].
 When the OTel Demo is running, the built-in load generator simulates traffic in the application.
 After a couple of seconds you can see data arriving in Datadog.
 
-### Service Catalog
+### Software Catalog
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Service Catalog**][11].
+1. Go to [**APM** > **Software Catalog**][11].
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog.png" alt="View Service Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Software Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
 2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
 3. Select the **List** view, then select a service to view a performance summary in the side panel.
 
-{{< img src="/getting_started/opentelemetry/otel_demo/service_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
+{{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
 ### Trace Explorer
 

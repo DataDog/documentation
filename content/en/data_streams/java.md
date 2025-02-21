@@ -4,9 +4,9 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
 ---
 
 ### Prerequisites
@@ -49,7 +49,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.t
 ### One-Click Installation
 To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
 
-{{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
+{{< img src="data_streams/enable_dsm_software_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.

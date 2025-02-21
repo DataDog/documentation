@@ -29,7 +29,7 @@ Datadog Application Security provides observability into application-level attac
 
 Datadog Application Security [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling Application Security in the tracing library is necessary to effectively monitor and protect your services.
 
-Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
+Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Software Catalog][2], [Service Page][3], [Traces][4]).
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
@@ -118,7 +118,7 @@ Datadog Application Security includes over 100 attack signatures that help prote
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Service Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog Application Security provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Software Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ## How Datadog Application Security protects against Log4Shell
 
@@ -129,7 +129,7 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/threats/
-[2]: /tracing/service_catalog/#security-view
+[2]: /tracing/software_catalog/#security-view
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
 [5]: /security/code_security/software_composition_analysis/
@@ -146,6 +146,6 @@ Datadog Application Security identifies Log4j Log4Shell attack payloads and prov
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [26]: /agent/remote_config/#enabling-remote-configuration
-[27]: /service_catalog/endpoints/
+[27]: /software_catalog/endpoints/
 [28]: /security/code_security/iast/
 [29]: https://docs.datadoghq.com/security/code_security/
