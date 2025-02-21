@@ -432,7 +432,7 @@ To install the .NET Profiler per-webapp:
 
 {{% tab "Azure App Service" %}}
 
-2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED=1` to enable the profiler.
 
 [1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
 [2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup

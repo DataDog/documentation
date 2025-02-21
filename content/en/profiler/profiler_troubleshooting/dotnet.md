@@ -265,6 +265,6 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet
