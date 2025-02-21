@@ -598,6 +598,34 @@ menu:
       identifier: otel-api-dd-sdk
       parent: otel-instrumentation
       weight: 301
+    - name: Java
+      url: /opentelemetry/instrument/api_support/java
+      parent: otel-api-dd-sdk
+      weight: 3011
+    - name: Python
+      url: /opentelemetry/instrument/api_support/python
+      parent: otel-api-dd-sdk
+      weight: 3012
+    - name: Ruby
+      url: /opentelemetry/instrument/api_support/ruby
+      parent: otel-api-dd-sdk
+      weight: 3013
+    - name: Go
+      url: /opentelemetry/instrument/api_support/go
+      parent: otel-api-dd-sdk
+      weight: 3014
+    - name: Node.js
+      url: /opentelemetry/instrument/api_support/nodejs
+      parent: otel-api-dd-sdk
+      weight: 3015
+    - name: PHP
+      url: /opentelemetry/instrument/api_support/php
+      parent: otel-api-dd-sdk
+      weight: 3016
+    - name: .NET
+      url: /opentelemetry/instrument/api_support/dotnet
+      parent: otel-api-dd-sdk
+      weight: 3017
     - name: OTel Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
@@ -658,32 +686,32 @@ menu:
       parent: otel-setup-intake-endpoint
       weight: 301
     - name: Semantic Mapping
-      url: opentelemetry/filter_transform/
+      url: opentelemetry/mapping/
       identifier: otel_schema
       parent: opentelemetry_top_level
       weight: 5
     - name: Resource Attribute Mapping
-      url: opentelemetry/filter_transform/semantic_mapping/
+      url: opentelemetry/mapping/semantic_mapping/
       identifier: otel_semantic_mapping
       parent: otel_schema
       weight: 501
     - name: Metrics Mapping
-      url: opentelemetry/filter_transform/metrics_mapping/
+      url: opentelemetry/mapping/metrics_mapping/
       identifier: otel_metrics_mapping
       parent: otel_schema
       weight: 502
     - name: Infrastructure Host Mapping
-      url: opentelemetry/filter_transform/host_metadata/
+      url: opentelemetry/mapping/host_metadata/
       identifier: otel_host_metadata
       parent: otel_schema
       weight: 503
     - name: Hostname Mapping
-      url: opentelemetry/filter_transform/hostname/
+      url: opentelemetry/mapping/hostname/
       identifier: otel_hostname
       parent: otel_schema
       weight: 504
     - name: Service-entry Spans Mapping
-      url: opentelemetry/filter_transform/service_entry_spans/
+      url: opentelemetry/mapping/service_entry_spans/
       identifier: otel_service_entry_spans
       parent: otel_schema
       weight: 505
@@ -754,7 +782,6 @@ menu:
       weight: 10
     - name: Produce Delta Temporality Metrics
       url: /opentelemetry/guide/otlp_delta_temporality
-      identifier: otel_guides_delta_temporality
       parent: otel_guides
       weight: 1001
     - name: Send Data from the OTel Demo
@@ -763,7 +790,6 @@ menu:
       weight: 1002
     - name: Visualize Histograms as Heatmaps
       url: /opentelemetry/explore/otlp_histogram_heatmaps
-      identifier: otel_histogram_heatmaps
       parent: otel_guides
       weight: 1003
     - name: Migration Guides

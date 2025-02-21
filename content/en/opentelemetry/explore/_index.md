@@ -1,5 +1,5 @@
 ---
-title: Explore Data in Datadog
+title: Correlate Data
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -7,10 +7,6 @@ further_reading:
 ---
 
 ## Overview
-
-Visualize and analyze your OpenTelemetry data using Datadog's observability features:
-
-### Correlate your data
 
 Link your telemetry data for full-stack observability:
 

@@ -22,6 +22,8 @@ algolia:
 
 Datadog tracing libraries provide an implementation of the [OpenTelemetry API][1] for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. 
 
+{{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry SDK sends data via OTLP protocol to a Collector with Datadog Exporter, which forwards to Datadog's platform." style="width:100%;" >}}
+
 By [instrumenting your code with OpenTelemetry API][2]:
 
 - Your code remains free of vendor-specific API calls.
