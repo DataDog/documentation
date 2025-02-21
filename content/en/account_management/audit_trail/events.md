@@ -45,6 +45,7 @@ further_reading:
 - [Reference Tables](#reference-table-events)
 - [Workflows](#workflow-events)
 - [App Datastore](#app-datastore)
+- [Event Management](#event-management)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -299,6 +300,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Datastore][116] | A user created, deleted, queried, or listed datastores. | `@evt.name:"Apps Datastore" @asset.type:(datastore OR datastore_list) @action:(queried OR created OR deleted)` |
 | [Datastore item][117] | A user created, modified, deleted, or queried datastore items. | `@evt.name:"Apps Datastore" @asset.type:(item OR item_query) @action:(created OR deleted OR modified OR queried)` |
 
+### Event Management
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Correlation pattern][118] | A user created a correlation pattern. | `@evt.name:"Event Management" @asset.type:event_correlation` |
+| [Custom metrics][119] | A user created modified or deleted a custom metric. | `@evt.name:"Event Management" @asset.type:custom_metrics` |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -420,3 +427,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [115]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Aip_allowlist%20%40action%3Amodified
 [116]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Apps%20Datastore%22%20%40asset.type%3A%28datastore%20OR%20datastore_list%29%20%40action%3A%28queried%20OR%20created%20OR%20deleted%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=stream&x_missing=true&from_ts=1740047181634&to_ts=1740048081634&live=true
 [117]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Apps%20Datastore%22%20%40asset.type%3A%28item%20OR%20item_query%29%20%40action%3A%28created%20OR%20deleted%20OR%20modified%20OR%20queried%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=stream&x_missing=true&from_ts=1740047539454&to_ts=1740048439454&live=true
+[118]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Event%20Management%22%20%40asset.type%3Aevent_correlation&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name
+[119]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Event%20Management%22%20%40asset.type%3Acustom_metrics&agg_m=count&agg_m_source=base&agg_q=%40evt.name
