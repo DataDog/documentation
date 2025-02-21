@@ -1742,6 +1742,33 @@ components:
         xray_services:
           $ref: '#/components/schemas/XRayServicesList'
       type: object
+    AccountFilteringConfig:
+      description: The account filtering configuration.
+      properties:
+        excluded_accounts:
+          description: The AWS account IDs to be excluded from your billing dataset.
+            This field is used when `include_new_accounts` is `true`.
+          example:
+          - '123456789123'
+          - '123456789143'
+          items:
+            type: string
+          type: array
+        include_new_accounts:
+          description: Whether or not to automatically include new member accounts
+            by default in your billing dataset.
+          example: true
+          type: boolean
+        included_accounts:
+          description: The AWS account IDs to be included in your billing dataset.
+            This field is used when `include_new_accounts` is `false`.
+          example:
+          - '123456789123'
+          - '123456789143'
+          items:
+            type: string
+          type: array
+      type: object
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -2911,6 +2938,8 @@ components:
     AwsCURConfigAttributes:
       description: Attributes for An AWS CUR config.
       properties:
+        account_filters:
+          $ref: '#/components/schemas/AccountFilteringConfig'
         account_id:
           description: The AWS account ID.
           example: '123456789123'
@@ -2998,12 +3027,12 @@ components:
     AwsCURConfigPatchRequestAttributes:
       description: Attributes for AWS CUR config Patch Request.
       properties:
+        account_filters:
+          $ref: '#/components/schemas/AccountFilteringConfig'
         is_enabled:
           description: Whether or not the Cloud Cost Management account is enabled.
           example: true
           type: boolean
-      required:
-      - is_enabled
       type: object
     AwsCURConfigPatchRequestType:
       default: aws_cur_config_patch_request
@@ -3036,6 +3065,8 @@ components:
     AwsCURConfigPostRequestAttributes:
       description: Attributes for AWS CUR config Post Request.
       properties:
+        account_filters:
+          $ref: '#/components/schemas/AccountFilteringConfig'
         account_id:
           description: The AWS account ID.
           example: '123456789123'
@@ -3200,7 +3231,7 @@ components:
           type: integer
         scope:
           description: The scope of your observed subscription.
-          example: subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
+          example: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
           type: string
         status:
           description: The status of the Azure config.
@@ -3366,7 +3397,7 @@ components:
           type: boolean
         scope:
           description: The scope of your observed subscription.
-          example: subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
+          example: /subscriptions/1234abcd-1234-abcd-1234-1234abcd1234
           type: string
       required:
       - account_id
@@ -25746,6 +25777,10 @@ components:
       - 1800
       - 3600
       - 7200
+      - 10800
+      - 21600
+      - 43200
+      - 86400
       format: int32
       type: integer
       x-enum-varnames:
@@ -25757,6 +25792,10 @@ components:
       - THIRTY_MINUTES
       - ONE_HOUR
       - TWO_HOURS
+      - THREE_HOURS
+      - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
     SecurityMonitoringRuleHardcodedEvaluatorType:
       description: Hardcoded evaluator type.
       enum:
@@ -25793,6 +25832,8 @@ components:
       - 7200
       - 10800
       - 21600
+      - 43200
+      - 86400
       format: int32
       type: integer
       x-enum-varnames:
@@ -25806,6 +25847,8 @@ components:
       - TWO_HOURS
       - THREE_HOURS
       - SIX_HOURS
+      - TWELVE_HOURS
+      - ONE_DAY
     SecurityMonitoringRuleMaxSignalDuration:
       description: "A signal will \u201Cclose\u201D regardless of the query being
         matched once the time exceeds the maximum duration.\nThis time is calculated
@@ -33540,6 +33583,7 @@ paths:
       patch: true
   /api/v2/apicatalog/api:
     get:
+      deprecated: true
       description: List APIs and their IDs.
       operationId: ListAPIs
       parameters:
@@ -33604,11 +33648,10 @@ paths:
         - apm_api_catalog_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/api/{id}:
     delete:
+      deprecated: true
       description: Delete a specific API by ID.
       operationId: DeleteOpenAPI
       parameters:
@@ -33656,11 +33699,10 @@ paths:
         - apm_api_catalog_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/api/{id}/openapi:
     get:
+      deprecated: true
       description: Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html)
         format file.
       operationId: GetOpenAPI
@@ -33714,10 +33756,9 @@ paths:
         - apm_api_catalog_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
     put:
+      deprecated: true
       description: 'Update information about a specific API. The given content will
         replace all API content of the given ID.
 
@@ -33781,11 +33822,10 @@ paths:
         - apm_api_catalog_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apicatalog/openapi:
     post:
+      deprecated: true
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
@@ -33850,9 +33890,7 @@ paths:
         - name: id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated.'
   /api/v2/apm/config/metrics:
     get:
       description: Get the list of configured span-based metrics with their definitions.
@@ -36719,7 +36757,8 @@ paths:
       x-undo:
         type: idempotent
     patch:
-      description: Update the status of an AWS CUR config (active/archived).
+      description: Update the status (active/archived) and/or account filtering configuration
+        of an AWS CUR config.
       operationId: UpdateCostAWSCURConfig
       parameters:
       - $ref: '#/components/parameters/CloudAccountID'

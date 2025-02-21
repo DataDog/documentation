@@ -25,7 +25,7 @@ With [DDSQL Editor][1], you can get deeper visibility into your infrastructure b
 
 ## Query in natural language
 
-Type your question into the search box, and Datadog builds the SQL query for you. You must have [BitsAI][4] enabled to be able to use this. 
+Type your question into the search box, and Datadog builds the SQL query for you. If you haven't already, [reach out to support][5] to enable this feature.
 
 {{< img src="ddsql_editor/natural-language-query-2.png" alt="A query inputted into the natural language search box" style="width:90%;" >}}
 
@@ -80,3 +80,4 @@ To access the DDSQL Editor app, users need the `ddsql_editor_read` permission. T
 [2]: /dashboards/ddsql_editor/reference/tags
 [3]: /account_management/rbac/
 [4]: /bits_ai
+[5]: /help/
