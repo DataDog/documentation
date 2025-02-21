@@ -6156,6 +6156,7 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
+      - $ref: '#/components/schemas/LogsSpanRemapper'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6267,6 +6268,43 @@ components:
       x-enum-varnames:
       - TIME_ASCENDING
       - TIME_DESCENDING
+    LogsSpanRemapper:
+      description: "There are two ways to define correlation between application spans
+        and logs:\n\n  1. Follow the documentation on [how to inject a span ID in
+        the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces).\n
+        \ Log integrations automatically handle all remaining setup steps by default.\n\n
+        \ 2. Use the span remapper processor to define a log attribute as its associated
+        span ID."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - dd.span_id
+          description: Array of source attributes.
+          items:
+            description: Attribute to extract the span ID from.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsSpanRemapperType'
+      required:
+      - type
+      type: object
+    LogsSpanRemapperType:
+      default: span-id-remapper
+      description: Type of logs span remapper.
+      enum:
+      - span-id-remapper
+      example: span-id-remapper
+      type: string
+      x-enum-varnames:
+      - SPAN_ID_REMAPPER
     LogsStatusRemapper:
       description: "Use this Processor if you want to assign some attributes as the
         official status.\n\nEach incoming status value is mapped as follows.\n\n  -
@@ -6382,7 +6420,7 @@ components:
           - dd.trace_id
           description: Array of source attributes.
           items:
-            description: Attribute to extract the Trace ID from.
+            description: Attribute to extract the trace ID from.
             type: string
           type: array
         type:
