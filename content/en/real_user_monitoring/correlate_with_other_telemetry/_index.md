@@ -14,7 +14,7 @@ Correlating data by various Datadog products gives context to help estimate the 
 
 ## Correlate RUM and Logs
 
-Inject session and view id into logs to find the exact logs associated with a specific session and view. See [Connect Logs and RUM][1] to set it up.
+Correlate data collected from user sessions and view events with logs to gain deeper insights into application behavior and streamline troubleshooting. See [Connect Logs and RUM][1] to set it up.
 
 {{< img src="real_user_monitoring/correlate_rum_and_logs/rum_browser_logs.png" alt="Browser logs in a RUM action" style="width:100%;" >}}
 

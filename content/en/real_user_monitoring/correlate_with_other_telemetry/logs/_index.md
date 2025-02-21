@@ -21,20 +21,24 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 To start sending RUM events to Datadog, see [Real User Monitoring][1].
 
-## How are RUM is correlated with Logs?
+## How is RUM correlated with Logs?
 
 Logs and RUM events are automatically correlated. Correlating your logs with RUM also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `session_id` and `view.id`.
 
 For more information, see [RUM & Session Replay Billing][2]. 
-For Browser Logs you must [match configurations between the RUM Browser SDK and Logs SDK][3].
+To ensure proper correlation for **Browser Logs**, you must [match configurations between the RUM Browser SDK and Logs SDK][3].
 
-## Setup
+## Setup Instructions
 
-Access the Logs Setup pages:
+To access the Logs Setup pages, follow the links below based on your platform:
 
-- **Android**: [Integration setup for Android](LINK)
-- **iOS**: [Integration setup for iOS](LINK)
-
+- **Browser**: [Integration setup for Browser][5]
+- **Android**: [Integration setup for Android][6]
+- **iOS**: [Integration setup for iOS][7]
+- **Flutter**: [Integration setup for Flutter][8]
+- **React Native**: [Integration setup for React Native][9]
+- **Roku**: [Integration setup for Roku][10]
+- **Kotlin Multiplatform**: [Integration setup for Kotlin Multiplatform][11]
 
 ## Further Reading
 
@@ -42,5 +46,12 @@ Access the Logs Setup pages:
 
 [1]: /real_user_monitoring/
 [2]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-
+[3]: /real_user_monitoring/browser/setup/#initialization-parameters
 [4]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#correlate-frontend-products
+[5]: /logs/log_collection/javascript/
+[6]: /logs/log_collection/android/
+[7]: /logs/log_collection/ios/
+[8]: /logs/log_collection/flutter/
+[9]: /logs/log_collection/reactnative/
+[10]: /logs/log_collection/roku/
+[11]: /logs/log_collection/kotlin_multiplatform/
