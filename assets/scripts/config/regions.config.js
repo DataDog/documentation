@@ -190,6 +190,14 @@ export default {
       ap1: 'ap-northeast-1',
       gov: 'N/A'
     },
+    aws_private_link_cross_region: {
+      us: 'US East (N.Virginia) (us-east-1)',
+      us3: 'N/A',
+      us5: 'N/A',
+      eu: 'N/A',
+      ap1: 'TODO',
+      gov: 'N/A'
+    },
     aws_private_link_api_service_name: {
       us: 'com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77',
       us3: 'The private link service for US3 is not supported.',
@@ -270,6 +278,11 @@ export default {
       ap1: 'com.amazonaws.vpce.ap-northeast-1.vpce-svc-00e15ab206f23b98c',
       gov: 'The private link service for GOV is not supported.'
     },
+    cross_region_support: {
+      us: 'us-east-1\nus-west-2',
+      ap1: 'ap-northeast-1\nap-southeast-1\nap-southeast-2',
+      eu: 'eu-central-1\neu-west-1\nsa-east-1',
+  },
     ip_ranges_url: {
       us: 'http://ip-ranges.datadoghq.com',
       us3: 'http://ip-ranges.us3.datadoghq.com',
