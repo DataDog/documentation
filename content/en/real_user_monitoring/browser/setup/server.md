@@ -19,24 +19,22 @@ further_reading:
 
 Datadog RUM Server-Side Instrumentation (Auto-Instrumentation) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy.
 
-RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served.
 
 After your applications have been instrumented, you can configure your RUM application in Datadog.
 
 ## Limitations
 
-The available functionality has the following important limitations:
+Keep in mind the following limitations when using this setup:
 
-- If proxying compressed traffic, the Auto-Instrumentation method is not able to inject the JS scriptlet into the HTML traffic.
-- This instrumentation method does not support any [advanced RUM configurations][3]. However, `allowedTracingUrls` and `excludedActivityUrls` are supported.
-- If the web server is acting as a proxy and the upstream server has end-to-end encryption (like TLS) or content compression (like gzip, zstd, or Brotli) enabled, the module may not inject the RUM Browser SDK. Ensure the following for successful instrumentation:
-  - Content compression is disabled on the upstream server.
-  - The web server is set up for TLS origination.
-- (Windows IIS only) Configuration for Auto-Instrumentation is only available per Windows IIS site.
+- This instrumentation method **does not support [advanced RUM configurations][3]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
+- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
+  - **Disable content compression** on the upstream server.
+  - **Enable TLS origination** on the web server.
 
 ## Prerequisites
 
-The automatic installation method requires that you have the [Datadog Agent][2] installed.
+The [Datadog Agent][2] is required. Make sure you already have installed and configured the Agent.
 
 ## Set up your RUM application
 
@@ -46,7 +44,9 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 {{% tab "NGINX" %}}
 
 The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
-identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install NGINX manually.
+identified as HTML.
+
+For more granular control over instrumented RUM application, you can also manually install and configure the module.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 
@@ -91,7 +91,7 @@ To automatically instrument your RUM application:
    # APM Tracing is enabled by default. The following line disables APM Tracing.
    datadog_disable;
    datadog_rum on;
-   datadog_rum_config "v5" {
+   datadog_rum_config "v6" {
      "applicationId" "<DATADOG_APPLICATION_ID>";
      "clientToken" "<DATADOG_CLIENT_TOKEN>";
      "site" "<DATADOG_SITE>";
@@ -118,10 +118,12 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Apache HTTP Server" %}}
+{{% tab "Apache HTTP Server / IBM HTTP Server" %}}
 
 The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
-identified as HTML. For more granular control over how configuration files or permissions are handled, you can also install the module manually.
+identified as HTML.
+
+For more granular control over instrumented RUM application, you can also manually install and configure the module.
 
 [1]: https://httpd.apache.org/modules/
 
@@ -164,7 +166,7 @@ To automatically instrument your RUM application:
    # APM Tracing is enabled by default. The following line disables APM Tracing
    DatadogTracing Off
    DatadogRum On
-   <DatadogRumSettings>
+   <DatadogRumSettings "v6">
        DatadogRumOption "applicationId" "<DATADOG_APPLICATION_ID>"
        DatadogRumOption "clientToken" "<DATADOG_CLIENT_TOKEN>"
        DatadogRumOption "site" "<DATADOG_SITE>"
@@ -239,7 +241,7 @@ To update your RUM Application:
 
 {{% /tab %}}
 
-{{% tab "Apache HTTP Server" %}}
+{{% tab "Apache HTTP Server / IBM HTTP Server" %}}
 
 To update your RUM Application:
 
@@ -278,7 +280,7 @@ Since the module is in Preview, it's possible NGINX may stop serving requests, p
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Upstream server has end-to-end encryption or content compression**: See [Limitations][41].
+- **Upstream server has end-to-end encryption or content compression**: See [Limitations][51].
 
 ## Reference
 
@@ -303,7 +305,12 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 | 1.26.0 | [ngx_http_datadog-amd64-1.26.0][33] | [ngx_http_datadog-arm64-1.26.0][34] |
 | 1.26.1 | [ngx_http_datadog-amd64-1.26.1][35] | [ngx_http_datadog-arm64-1.26.1][36] |
 | 1.26.2 | [ngx_http_datadog-amd64-1.26.2][37] | [ngx_http_datadog-arm64-1.26.2][38] |
+| 1.26.3 | [ngx_http_datadog-amd64-1.26.3][41] | [ngx_http_datadog-arm64-1.26.2][42] |
 | 1.27.0 | [ngx_http_datadog-amd64-1.27.0][39] | [ngx_http_datadog-arm64-1.27.0][40] |
+| 1.27.1 | [ngx_http_datadog-amd64-1.27.1][43] | [ngx_http_datadog-arm64-1.27.1][44] |
+| 1.27.2 | [ngx_http_datadog-amd64-1.27.2][45] | [ngx_http_datadog-arm64-1.27.2][46] |
+| 1.27.3 | [ngx_http_datadog-amd64-1.27.3][47] | [ngx_http_datadog-arm64-1.27.3][48] |
+| 1.27.4 | [ngx_http_datadog-amd64-1.27.4][49] | [ngx_http_datadog-arm64-1.27.4][50] |
 
 ## Further reading
 
@@ -349,4 +356,14 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [38]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
 [39]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
 [40]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
-[41]: /real_user_monitoring/browser/setup/server/#limitations
+[41]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.26.3.so.tgz
+[42]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.3.so.tgz
+[43]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.1.so.tgz
+[44]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.1.so.tgz
+[45]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.2.so.tgz
+[46]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.2.so.tgz
+[47]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.3.so.tgz
+[48]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
+[49]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
+[50]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
+[51]: /real_user_monitoring/browser/setup/server/#limitations
