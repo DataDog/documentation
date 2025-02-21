@@ -1,0 +1,3 @@
+environment: preview
+img_url: "https://datadog-docs-staging.imgix.net/"
+static_url: "https://docs-staging.datadoghq.com/"
