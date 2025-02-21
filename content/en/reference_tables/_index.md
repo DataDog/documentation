@@ -34,7 +34,7 @@ Reference Table names and column headers are validated using the following namin
 
 | Rule     | Normalization |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Names and headers can not be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
+| Names and headers cannot be duplicated.											| Duplicated names are enumerated. For example, if `fileid` is used twice as a name, the first instance becomes `fileid1` and the second instance becomes `fileid2`. If a name or header is enumerated and it exceeds the 56 characters, it is rejected and needs to be renamed. |
 | Names and headers cannot contain uppercase letters. 								| Names with uppercase letters are converted to lowercase. This conversion may result in duplicate names, which are then enumerated. For example, `Fileid` and `FileID` both become `fileid` and are enumerated to `fileid1` and `fileid2` respectively. |
 | Names and headers cannot contain spaces. 											| Spaces other than leading and trailing spaces are replaced with underscore `_` characters. Leading and trailing spaces are removed. For example, `customer names` is replaced with `customer_names`. |
 | Names and headers must start with a lowercase letter. 							| Uppercase characters are converted to lowercase. Non-letter leading characters are removed. For example, `23Two_three` becomes `two_three`.	|
