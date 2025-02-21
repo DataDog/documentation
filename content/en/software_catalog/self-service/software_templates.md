@@ -45,7 +45,7 @@ The [Provision EKS Cluster blueprint][12] shows an example of how to generate Te
 
 ##### Provision RDS instance
 
-The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance through direct integration with AWS. In this example, the RDS instance is directly created in AWS via an API call.
+The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance in AWS through an API call.
 
 
 #### Start from scratch
