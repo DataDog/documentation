@@ -32,7 +32,7 @@ Service/Env
 : The service and environment identified in the attack. Hover over the service name to link to the service page and code repo, and to see who is on-call for the service.
 
 Entities
-: The attackers and the victims of an attack. Attackers are indentified by IP addresses. Victims are identified as authenticated users. Hover over the IP list and then click an IP to see details such as **Threat Intelligence** and **Security Activity**.
+: The attackers and the victims of an attack. Attackers are identified by IP addresses. Victims are identified as authenticated users. Hover over the IP list and then click an IP to see details such as **Threat Intelligence** and **Security Activity**.
 
 Triage State
 : You can assign a responder and set a triage state for the signal. Available states are **Open**, **Under Review**, and **Archived**. 
@@ -64,12 +64,12 @@ Use [Incident Management][4] to create an incident for a security signal.
 Declare an incident if:
 
 - An issue is or might be impacting customers.
-- You believe an issue (including an internal one) needs to be addressed as an emergency.
+- You believe an issue (even if it's internal) needs to be addressed as an emergency.
  
 If you don't know whether you should call an incident, notify other users and increase severity appropriately.
 
 1. On the [Signals Explorer][2] page, select a security signal to open its details panel.
-2. On the signal panel, click **Declare Indident** or select the dropdown arrow and select **Add to an existing incident**.
+2. On the signal panel, click **Declare Incident** or select the dropdown arrow and select **Add to an existing incident**.
 3. When you declare a new incident, in the **Declare Incident** settings, configure the incident by specifying details such as the severity level and incident commander.
    1. Estimate impact. Severity levels go from SEV-1 (critical) to SEV-5 (minor impact). When in doubt, always choose the higher severity.
 4. Click **Declare Incident**.
@@ -81,10 +81,10 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 1. Make sure the workflow you want to run has a security trigger.
 2. On the [Signals Explorer][2] page, open a security signal.
 3. In the **Respond** section, click **Run Workflow**.
-5. In **Run a workflow**, select the workflow you want to run or click **New Workflow**. 
+4. In **Run a workflow**, select the workflow you want to run or click **New Workflow**. 
    - Depending on the workflow you select, you might be required to enter additional input parameters.
    - If you selected **New Workflow**, Run a Security Workflow opens. To learn more about workflows, see [Workflow Automation][5]. 
-6. Click **Run**.
+5. Click **Run**.
 
 ## Review and remediate
 
@@ -101,7 +101,7 @@ When you select one or more signals, you can use **Bulk Actions** to perform the
 
 ### Set state
 
-Set the signal(s) state to **Open**, **Under Review**, or **Archived**.
+Set the triage state to **Open**, **Under Review**, or **Archived**.
 
 ### Assign the signal to users
 
