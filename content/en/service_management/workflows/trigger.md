@@ -171,6 +171,20 @@ You can trigger a workflow from GitHub using the following steps.
 1. Click **Save** on your workflow.
 1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
+## Slack triggers
+
+<div class="alert alert-info"><strong>Note</strong>: You must install the Datadog App in your Slack workspace to use this feature.</div>
+
+You can trigger a workflow from Slack using the following steps.
+
+1. Add a Slack trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Slack**.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Security**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow.
+
 ## API triggers
 
 Triggering a workflow using an API call requires an [API key][8] and an [application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].
