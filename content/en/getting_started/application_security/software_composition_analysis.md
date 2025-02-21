@@ -137,7 +137,7 @@ For information on disabling Software Composition Analysis, see [Disabling Softw
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/vulnerability_management/
+[1]: /security/code_security/software_composition_analysis/
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
