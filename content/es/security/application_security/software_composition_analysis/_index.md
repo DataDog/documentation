@@ -7,8 +7,8 @@ algolia:
   - AVM
   - GuardDog
 aliases:
-- /security/application_security/risk_management/
-- /security/application_security/vulnerability_management/
+- /es/security/application_security/risk_management/
+- /es/security/application_security/vulnerability_management/
 further_reading:
 - link: /getting_started/application_security/software_composition_analysis
   tag: Guía
