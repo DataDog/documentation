@@ -150,6 +150,27 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
+**Snowflake Query Tags**
+
+[Snowflake's query tags][9] are powerful metadata strings that can be associated with queries. The Snowflake Cost Management integration will ingest [JSON parsable][10] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+
+For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
+```
+ALTER SESSION SET QUERY_TAG = '{"team": "devops", "application": "CI_job_executor"}';
+```
+{{< img src="cloud_cost/saas_costs/snowflake_query_tags_example.png" alt="Group costs by team and application query tags." style="width:100%" >}}
+
+As a result, the costs of all queries executed with the `team` and `application` query tags will be attributable to those concepts.
+
+In order to leverage query tags within cost management, you must ensure that the following rules are adhered to.
+
+First, the query_tag string must be JSON parsable. Specifically, this means that the string is processable by the native PARSE_JSON function.
+
+Secondly, an allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON formatted query_tag field. This allowlist will appear in the form of a comma-separated list of strings, e.g. tag_1,tag_2,tag_3. Please ensure that strings are only alphanumeric characters, or underscores, hyphens, and periods. This information can be entered into the Snowflake tile, under “Resources Collected -> Cloud Cost Management -> Collected Query Tags”
+
+Notes:
+- **Optimizing tags**: Although a powerful concept, query tags should be selected with data magnitude in mind. Appropriate query tags are ones that have low to medium group cardinality (e.g. team, user, service). As the number of unique values increases, bottlenecking issues for both data ingestion and frontend rendering can manifest. An example of a suboptimal query tag is the unique UUID associated with job executions.
+
 **Snowflake CCM object tags**
 
 Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
@@ -397,3 +418,5 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
+[9]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[10]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
