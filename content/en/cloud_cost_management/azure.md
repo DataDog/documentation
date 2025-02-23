@@ -24,7 +24,7 @@ Datadog provides cost visibility on a Subscription, Resource Group, and Billing 
 
 {{% site-region region="us3" %}}
 **Notes**:
-- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2], which is in addition to setting up the Datadog Azure Native integration. Both will be needed, the Azure Native integration method will provide the main integration benefits and the App Registration will only be needed for CCM to be setup.
 - Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
 - Pay-as-you-go accounts are not supported.
 
