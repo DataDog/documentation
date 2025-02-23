@@ -49,13 +49,13 @@ There are two types of alerting conditions you can configure your Error Tracking
 High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
 
 1. Build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+2. Choose the metric you want to monitor. There are three suggested options to access the most frequently used facets:
 
-    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+    - **Error Occurrences**: Triggers when the error count for an issue is `above` or `above or equal to`.
+    - **Unique Impacted Users**: Triggers when the number of impacted user emails for an issue is `above` or `above or equal to`.
+    - **Unique Impacted Sessions**: Triggers when the number of impacted session IDs for an issue is `above` or `above or equal to`.
 
-    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
+    If you select **All** or **Backend** from the dropdown menu, only the **Error Occurrences** suggested option is available.
 
     You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above` or `above or equal to`.
 
@@ -76,26 +76,26 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 New monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors. 
 
 
-1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+1. Build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+2. Optionally, choose the metric and alert conditions. 
 
-    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+    By default, new issue monitors will alert on the first error occurrence for a new issue in the past day. However, you can "Define an alert metric" to adjust the alerting thresholds to reduce noise. 
 
-    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
+    **Choose metric**: There are three suggested options to access the most frequently used facets.
 
-    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts over the count of unique value of the facet.
+    - **Error Occurrences**: Triggers when the error count for an issue is `above` or `above or equal to`.
+    - **Unique Impacted Users**: Triggers when the number of impacted user emails for an issue is `above` or `above or equal to`.
+    - **Unique Impacted Sessions**: Triggers when the number of impacted session IDs for an issue is `above` or `above or equal to`.
+
+    If you select **All** or **Backend** from the dropdown menu, only the **Error Occurrences** suggested option is available.
+
+    **Set alert conditions**: The monitor triggers when the number of errors is `above` or `above or equal to`.
+
+    - Set a timespan between 5 minutes and 48 hours (such as `5 minutes`, `15 minutes`. `1 hour`, or `custom`) over which the monitor metric is evaluated.
+    - Set the alerting threshold > `<NUMBER>`.
 
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][3].
 
-### Set alert conditions
-
-The monitor triggers when the number of errors is `above` or `above or equal to`.
-
-- Set a timespan between 5 minutes and 48 hours (such as `5 minutes`, `15 minutes`. `1 hour`, or `custom`) over which the monitor metric is evaluated.
-- Set the alerting threshold > `<NUMBER>`.
-- Set the warning threshold > `<NUMBER>`.
 
 [1]: /error_tracking/issue_states
 [2]: /error_tracking/explorer
