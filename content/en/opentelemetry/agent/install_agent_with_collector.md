@@ -88,7 +88,8 @@ helm repo update
 After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent, Cluster Agent and Cluster Checks Runners (if used) in your Kubernetes cluster. The Datadog Agent will be deployed as a DaemonSet, running a pod on every node of your cluster.
 
 1. Use datadog-agent.yaml file to specify your `DatadogAgent` deployment configuration.
-   ```yaml
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
    apiVersion: datadoghq.com/v2alpha1
    kind: DatadogAgent
    metadata:
@@ -104,59 +105,67 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
          appSecret:
            secretName: datadog-secret
            keyName: app-key
-   ```
-      - Replace `<CLUSTER_NAME>` with a name for your cluster.
-      - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
-1. Switch the Datadog Agent image to use builds with embedded OpenTelemetry Collector:
-   ```yaml
-     ...
-     override:
-       # Node Agent configuration
-       nodeAgent:
-         image:
-           name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
-           pullPolicy: Always
-   ```
+{{< /code-block >}}
 
-   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+- Replace `<CLUSTER_NAME>` with a name for your cluster.
+- Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
-   By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
-1. Enable the OpenTelemetry Collector and configure the essential ports:
-   ```yaml
-     ...
-     # Enable Features
-     features:
-       otelCollector:
-         enabled: true
-         ports:
-           - containerPort: 4317
-             hostPort: 4317
-             name: otel-grpc
-           - containerPort: 4318
-             hostPort: 4318
-             name: otel-http
-   ```
-   <div class="alert alert-warning">Setting ports 4317 or 4318 manually is only supported if the name matches the default <code>otel-grpc</code> or <code>otel-http</code>. Otherwise, it will result in a port conflict.</div>
-1. (Optional) Enable additional Datadog features:
-   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+2. Switch the Datadog Agent image to use builds with embedded OpenTelemetry Collector:
 
-   ```yaml
-     # Enable Features
-     features:
-     ...
-       apm:
-         enabled: true
-       orchestratorExplorer:
-         enabled: true
-       processDiscovery:
-         enabled: true
-       liveProcessCollection:
-         enabled: true
-       usm:
-         enabled: true
-       clusterChecks:
-         enabled: true
-   ```
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  ...
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        pullPolicy: Always
+{{< /code-block >}}
+
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+
+By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
+
+3. Enable the OpenTelemetry Collector and configure the essential ports:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+{{< /code-block >}}
+
+<div class="alert alert-warning">Setting ports 4317 or 4318 manually is only supported if the name matches the default <code>otel-grpc</code> or <code>otel-http</code>. Otherwise, it will result in a port conflict.</div>
+
+4. (Optional) Enable additional Datadog features:
+
+<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  # Enable Features
+  features:
+  ...
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+{{< /code-block >}}
 
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Your `datadog-agent.yaml` file should look something like this:
@@ -217,52 +226,64 @@ spec:
 Use a YAML file to specify the Helm chart parameters for the [Datadog Agent chart][1].
 
 1. Create an empty `datadog-values.yaml` file:
-   ```shell
-   touch datadog-values.yaml
-   ```
-   <div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
-1. Configure the Datadog API and application key secrets:
-   ```yaml
-   datadog:
-     site: <DATADOG_SITE>
-     apiKeyExistingSecret: datadog-secret
-     appKeyExistingSecret: datadog-secret
-     logLevel: info
-   ```
-   Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-   <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
-1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry Collector:
-   ```yaml
-   agents:
-     image:
-       repository: gcr.io/datadoghq/agent
-       tag: 7.62.2-ot-beta-jmx
-       doNotCheckTag: true
-   ...
-   ```
-   <div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
-   By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
-1. Enable the OpenTelemetry Collector and configure the essential ports:
-   ```yaml
-   datadog:
-     ...
-     otelCollector:
-       enabled: true
-       ports:
-         - containerPort: "4317" # default port for OpenTelemetry gRPC receiver.
-           hostPort: "4317"
-           name: otel-grpc
-         - containerPort: "4318" # default port for OpenTelemetry HTTP receiver
-           hostPort: "4318"
-           name: otel-http
-   ```
-   It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
+```shell
+touch datadog-values.yaml
+```
 
-   If you don't want to expose the port, you can use the Agent service instead:
-   1. Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
-   1. In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
-      ```sh
+<div class="alert alert-info">Unspecified parameters use defaults from <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml">values.yaml</a>.</div>
+
+2. Configure the Datadog API and application key secrets:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  site: <DATADOG_SITE>
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  logLevel: info
+{{< /code-block >}}
+
+Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+
+<div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
+
+3. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry Collector:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+agents:
+  image:
+    repository: gcr.io/datadoghq/agent
+    tag: 7.62.2-ot-beta-jmx
+    doNotCheckTag: true
+...
+{{< /code-block >}}
+
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+
+By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
+
+4. Enable the OpenTelemetry Collector and configure the essential ports:
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  otelCollector:
+    enabled: true
+    ports:
+      - containerPort: "4317" # default port for OpenTelemetry gRPC receiver.
+        hostPort: "4317"
+        name: otel-grpc
+      - containerPort: "4318" # default port for OpenTelemetry HTTP receiver
+        hostPort: "4318"
+        name: otel-http
+{{< /code-block >}}
+
+It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
+
+If you don't want to expose the port, you can use the Agent service instead:
+   - Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
+   - In your application's deployment file (`deployment.yaml`), configure the OTLP exporter to use the Agent service:
+      ```yaml
       env:
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: 'http://<SERVICE_NAME>.<SERVICE_NAMESPACE>.svc.cluster.local'
@@ -270,33 +291,36 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
           value: 'grpc'
       ```
 
-1. (Optional) Enable additional Datadog features:
-   <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
+5. (Optional) Enable additional Datadog features:
 
-   ```yaml
-   datadog:
-     ...
-     apm:
-       portEnabled: true
-       peer_tags_aggregation: true
-       compute_stats_by_span_kind: true
-       peer_service_aggregation: true
-     orchestratorExplorer:
-       enabled: true
-     processAgent:
-       enabled: true
-       processCollection: true
-   ```
-1. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
-   <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+<div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
 
-   ```yaml
-   datadog:
-     ...
-     podLabelsAsTags:
-       app: kube_app
-       release: helm_release
-   ```
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  apm:
+    portEnabled: true
+    peer_tags_aggregation: true
+    compute_stats_by_span_kind: true
+    peer_service_aggregation: true
+  orchestratorExplorer:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+{{< /code-block >}}
+
+6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
+
+<div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
+datadog:
+  ...
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+{{< /code-block >}}
 
 {{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
 Your `datadog-values.yaml` file should look something like this:
@@ -531,84 +555,85 @@ spec:
 For more complex or frequently updated configurations, storing Collector configuration in a ConfigMap can simplify version control.
 
 1. Create a ConfigMap that contains your Collector configuration:
-   ```yaml
-   apiVersion: v1
-   kind: ConfigMap
-   metadata:
-     name: otel-agent-config-map
-     namespace: system
-   data:
-     # must be named otel-config.yaml
-     otel-config.yaml: |-
-       receivers:
-         prometheus:
-           config:
-             scrape_configs:
-               - job_name: "datadog-agent"
-                 scrape_interval: 10s
-                 static_configs:
-                   - targets:
-                       - 0.0.0.0:8888
-         otlp:
-           protocols:
-             grpc:
-               endpoint: 0.0.0.0:4317
-             http:
-               endpoint: 0.0.0.0:4318
-       exporters:
-         debug:
-           verbosity: detailed
-         datadog:
-           api:
-             key: ${env:DD_API_KEY}
-             site: ${env:DD_SITE}
-       processors:
-         infraattributes:
-           cardinality: 2
-         batch:
-           timeout: 10s
-       connectors:
-         datadog/connector:
-           traces:
-             compute_top_level_by_span_kind: true
-             peer_tags_aggregation: true
-             compute_stats_by_span_kind: true
-       service:
-         pipelines:
-           traces:
-             receivers: [otlp]
-             processors: [infraattributes, batch]
-             exporters: [debug, datadog, datadog/connector]
-           metrics:
-             receivers: [otlp, datadog/connector, prometheus]
-             processors: [infraattributes, batch]
-             exporters: [debug, datadog]
-           logs:
-             receivers: [otlp]
-             processors: [infraattributes, batch]
-             exporters: [debug, datadog]   
 
-   ```
+{{< code-block lang="yaml" filename="configmap.yaml" collapsible="false" >}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-agent-config-map
+  namespace: system
+data:
+  # must be named otel-config.yaml
+  otel-config.yaml: |-
+    receivers:
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: "datadog-agent"
+              scrape_interval: 10s
+              static_configs:
+                - targets:
+                    - 0.0.0.0:8888
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    exporters:
+      debug:
+        verbosity: detailed
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+    processors:
+      infraattributes:
+        cardinality: 2
+      batch:
+        timeout: 10s
+    connectors:
+      datadog/connector:
+        traces:
+          compute_top_level_by_span_kind: true
+          peer_tags_aggregation: true
+          compute_stats_by_span_kind: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog, datadog/connector]
+        metrics:
+          receivers: [otlp, datadog/connector, prometheus]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+        logs:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+{{< /code-block >}}
 
-   <div class="alert alert-warning">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
-1. Reference the `otel-agent-config-map` ConfigMap in your `DatadogAgent` resource using `features.otelCollector.conf.configMap` parameter:
-   ```yaml
-     ...
-     # Enable Features
-     features:
-       otelCollector:
-         enabled: true
-         ports:
-           - containerPort: 4317
-             hostPort: 4317
-             name: otel-grpc
-           - containerPort: 4318
-             hostPort: 4318
-             name: otel-http
-         conf:
-           configMap:
-             name: otel-agent-config-map
-   ```
+<div class="alert alert-warning">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
+
+2. Reference the `otel-agent-config-map` ConfigMap in your `DatadogAgent` resource using `features.otelCollector.conf.configMap` parameter:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configMap:
+          name: otel-agent-config-map
+{{< /code-block >}}
 
 The Operator automatically mounts `otel-config.yaml` from the ConfigMap into the Agent with OpenTelemetry Collector DaemonSet.
 
