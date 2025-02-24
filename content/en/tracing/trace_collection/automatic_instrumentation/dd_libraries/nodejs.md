@@ -68,7 +68,9 @@ When using a transpiler such as TypeScript, Webpack, Babel, or others, import an
 const tracer = require('dd-trace').init();
 ```
 
-**Note**: `DD_TRACE_ENABLED` is true by default, thus some minimal instrumentation will happen by default **at import time, before initialization**. If you want to fully disable all instrumentation, you may make the import conditional, or you may explicitly set `DD_TRACE_ENABLED=false` (for example if conditional imports are impossible because using static / top-level ESM imports).
+**Note**: `DD_TRACE_ENABLED` is true by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
+- import the module conditionally 
+- set `DD_TRACE_ENABLED=false` (if, for example, static or top-level ESM imports prevent conditional loading)
 
 ##### TypeScript and bundlers
 
