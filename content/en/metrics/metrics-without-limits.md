@@ -3,6 +3,7 @@ title: Metrics without Limits™
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
+  - /metrics/faq/why-is-my-save-button-disabled/
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
