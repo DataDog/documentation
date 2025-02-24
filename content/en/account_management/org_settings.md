@@ -152,8 +152,6 @@ The session duration can be configured within the following limits:
 
 {{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
 
-**Note**: This setting applies only to web sessions. Sessions from the Datadog mobile application are not impacted.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
