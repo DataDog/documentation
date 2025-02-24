@@ -36,7 +36,7 @@ Datadog Cluster Agent には次のコマンドがあります。
 ## Cluster Agent 環境変数
 
 {{< tabs >}}
-{{% tab “Datadog Operator” %}}
+{{% tab "Datadog Operator" %}}
 `override.clusterAgent.env` の下で Cluster Agent の環境変数を設定します。
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
