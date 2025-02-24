@@ -35,7 +35,7 @@ Start URL
 : Can be blank, or use the **Single Sign On Login URL** listed on the [SAML setup page][2].
 
 Signed Response
-: Leave unchecked
+: Check
 
 Name ID
 : Select **Basic Information** and **Primary Email**

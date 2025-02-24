@@ -5,6 +5,7 @@ aliases:
 - /security/application_security/software_composition_analysis/setup/
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
+- /security/application_security/vulnerability_management/
 ---
 ## Overview
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
@@ -62,7 +63,7 @@ The Libraries [Inventory][8] helps you understand the list of libraries and its 
 
 
 ### Library vulnerability context in APM
-SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Service Catalog][10].
+SCA enriches the information Application Performance Monitoring (APM) is already collecting by flagging libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Software Catalog][10].
 - Whether it is reaching end of life
 - Whether it is a malicious package
 - The health of this library version based on its OpenSSF scorecard breakdown 

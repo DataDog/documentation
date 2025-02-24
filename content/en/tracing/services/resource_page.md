@@ -9,7 +9,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -139,7 +139,7 @@ An endpoint is an HTTP resource exposed by a service at a specific URL path.
 
 If a resource represents an endpoint, a new **Definition** section is added to the resource page.
 
-{{< img src="tracing/service_catalog/definition-section.png" alt="Resource side panel showing endpoint Definition section." style="width:100%;" >}}
+{{< img src="tracing/software_catalog/definition-section.png" alt="Resource side panel showing endpoint Definition section." style="width:100%;" >}}
 
 ## Further Reading
 

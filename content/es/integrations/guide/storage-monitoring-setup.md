@@ -9,9 +9,7 @@ title: Monitorización del almacenamiento para Amazon S3
 
 Monitorización del almacenamiento para Amazon S3 proporciona análisis detallados a nivel de prefijo para que puedas comprender exactamente cómo se utiliza el almacenamiento, detectar posibles problemas antes de que afecten a las operaciones y tomar decisiones basadas en datos sobre la optimización del almacenamiento. Utiliza esta información para ayudar a controlar el crecimiento del almacenamiento, investigar los patrones de acceso y optimizar los costes.
 
-Esta guía explica cómo configurar la Monitorización de almacenamiento en Datadog para tus buckets de S3. Puedes configurar esto manualmente o utilizando las plantillas de CloudFormation proporcionadas. Accede a tus datos de Monitorización del almacenamiento navegando a **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets** (Infraestructura -> Catálogo de recursos -> Monitorización -> Buckets S3).
-
-Para obtener más información sobre el Catálogo de recursos, consulta la documentación [Catálogo de recursos][2].
+Esta guía explica cómo Configurar Storage Monitorización en Datadog para sus buckets S3. Puede configurar esto manualmente o utilizando las plantillas CloudFormation proporcionadas. Accede a tus datos de Storage Monitorización navegando a **infraestructura -> Storage Monitorización**.
 
 ## Configuración
 
@@ -38,10 +36,10 @@ Esta plantilla configura tu bucket de S3 existente para generar informes de inve
 6. Completa los parámetros necesarios:
    - **DestinationBucketName**: el bucket para almacenar los archivos de inventario. **Nota**: Sólo debes utilizar un bucket de destino para todos los archivos de inventario generados en una cuenta de AWS.
    - **DestinationBucketName**: el bucket que deseas monitorizar y para el que deseas empezar a generar archivos de inventario.
-   - **DestinationBucketPrefix**: ruta específica dentro del bucket de destino. Asegúrate de que esta ruta no incluya barras finales (`/`).
 
    Parámetros opcionales:
    - **SourceBucketPrefix**: (opcional) limita la monitorización a una ruta específica en el bucket de origen.
+   - **DestinationBucketPrefix**: ruta específica dentro del bucket de destino. Asegúrate de que esta ruta no incluya barras finales (`/`).
 
 {{< img src="integrations/guide/storage_monitoring/specify_stack_details.png" alt="Especificar detalles de stack tecnológico" responsive="true" style="width:90%;" >}}
 
@@ -65,10 +63,11 @@ Esta plantilla crea dos políticas de IAM:
    - **DatadogIntegrationRole**: tu nombre de rol de la integración de Datadog y AWS
    - **DestinationBucketName**: el nombre del bucket que recibe los archivos de inventario. **Nota**: Sólo debes utilizar un bucket de destino para todos los archivos de inventario generados en una cuenta de AWS.
    - **SourceBucketName**: el nombre del bucket para el que quieres empezar a generar archivos de inventario
-   - **DestinationBucketPrefix**: si deseas reutilizar un bucket existente como destino, este parámetro permite que los archivos de inventario se envíen a un prefijo específico de ese bucket. Asegúrate de que los prefijos no incluyan barras finales (`/`).
 
    Parámetros opcionales:
    - **SourceBucketPrefix**: este parámetro limita la generación de inventario a un prefijo específico en el bucket de origen
+   - **DestinationBucketPrefix**: si deseas reutilizar un bucket existente como destino, este parámetro permite que los archivos de inventario se envíen a un prefijo específico de ese bucket. Asegúrate de que los prefijos no incluyan barras finales (`/`).
+
 
 {{< img src="integrations/guide/storage_monitoring/bucket_policy_stack_details.png" alt="Parámetros de stack tecnológico para la política de bucket" responsive="true" style="width:90%;" >}}
 
@@ -78,7 +77,7 @@ Esta plantilla crea dos políticas de IAM:
 
 Después de completar la configuración de CloudFormation, rellena el [formulario posterior a la configuración][105] con la siguiente información necesaria:
 1. Nombre del bucket de destino que contiene los archivos de inventario.
-2. Prefijo donde se almacenan los archivos en el bucket de destino.
+2. Prefijo donde se almacenan los archivos en el bucket de destino (si existe).
 3. Nombre del bucket de origen que deseas monitorizar (el bucket que produce los archivos de inventario).
 4. Región de AWS del bucket de destino que contiene los archivos de inventario.
 5. ID de la cuenta de AWS que contiene los buckets.
@@ -98,7 +97,7 @@ Para configurar manualmente el [Inventario de Amazon S3][206] necesario y la con
 #### Paso 1: Crear un bucket de destino
 
 1. [Crea un bucket S3][201] para almacenar tus archivos de inventario. Este bucket funciona como la localización central para los informes de inventario. **Nota**: Solo debes utilizar un bucket de destino para todos los archivos de inventario generados en una cuenta de AWS.
-2. Crea un prefijo dentro del bucket de destino (obligatorio).
+2. Cree un prefijo dentro del cubo de destino (opcional).
 
 #### Paso 2: Configurar el bucket y las políticas de rol de la integración
 
@@ -134,7 +133,7 @@ Para cada bucket que desees monitorizar:
 Después de completar estos pasos, rellena el [formulario posterior a la configuración][205] con la siguiente información necesaria:
 
 1. Nombre del bucket de destino donde se almacenan los inventarios.
-2. Prefijo donde se almacenan los archivos en el bucket de destino.
+2. Prefijo donde se almacenan los archivos en el bucket de destino (opcional).
 3. Región del bucket de destino.
 4. ID de la cuenta de AWS que contiene el bucket.
 5. Nombre del rol de Datadog que tiene los permisos para leer objetos en el bucket de destino.
@@ -146,7 +145,8 @@ Después de completar estos pasos, rellena el [formulario posterior a la configu
 [204]: https://aws.amazon.com/s3/pricing/
 [205]: https://forms.gle/L97Ndxr2XLen1GBs7
 [206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
-{{% /tab %}}{{< /tabs >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Validación
 
@@ -154,13 +154,13 @@ Para verificar tu configuración:
    - Espera a que se genere el primer informe de inventario (hasta 24 horas para inventarios diarios)
    - Comprueba el bucket de destino para los archivos de inventario
    - Confirma que la integración de Datadog puede acceder a los archivos:
-       - Navega a **Infrastructure -> Resource Catalog -> Monitoring -> S3 Buckets -> Installation Recommendations** (Infraestructura -> Catálogo de recursos -> Monitorización -> Buckets de S3 -> Recomendaciones de instalación) para ver si el bucket que configuraste se muestra en la lista
+       - Navegue a **infraestructura -> Almacenamiento Monitorización -> Recomendaciones de instalación** para ver si el cubo que configuró se muestra en el lista
 
 
 ### Resolución de problemas
 Si tienes algún problema o necesitas ayuda:
+- Asegúrese de utilizar un único bucket de destino para todos los archivos de inventario por cuenta AWS 
 - Verifica que todos los permisos están correctamente configurados
 - Si sigues teniendo problemas, [ponte en contacto][1] con los datos de tu bucket, el ID de cuenta de AWS y el ID de organización de Datadog.
 
 [1]: mailto:storage-monitoring@datadoghq.com
-[2]: /es/infrastructure/resource_catalog/

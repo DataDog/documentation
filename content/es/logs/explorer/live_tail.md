@@ -18,21 +18,19 @@ title: Live Tail
 
 ## Información general
 
-Con Live Tail, accede a todos tus eventos de log casi en tiempo real desde cualquier lugar de tu infraestructura. La vista de Live Tail proporciona visibilidad tanto de los flujos indexados como de los no indexados de logs a Datadog; consulta también [Filtros de exclusión][1] en los índices de logs. Los logs que fluyen a través de Live Tail están todos estructurados, procesados y mejorados desde [pipelines de log][2].
+Con Live Tail, accede a todos tus eventos de logs casi en tiempo real desde cualquier lugar de tu infraestructura. La vista Live Tail proporciona visibilidad tanto de los flujos de logs indexados como no indexados que se envían a Datadog. Consulta también [Filtros de exclusión][1] en índices de logs. Los logs que fluyen a través de Live Tail están todos estructurados, procesados y enriquecidos desde [pipelines de logs][2].
 
 Por ejemplo, Live Tail es especialmente útil para comprobar si un proceso se ha iniciado correctamente o si un nuevo despliegue se ha realizado sin problemas.
 
 ## Vista de Live Tail
 
-En el [Log Explorer][3], elige la opción Live Tail en el intervalo de tiempo para consultar logs a medida que fluyen hacia Datadog. Consulta [Sintaxis de búsqueda de log][4] para obtener más información sobre las consultas.
+En el [Explorador de logs][3], elige la opción Live Tail en el intervalo de tiempo para consultar los logs a medida que fluyen hacia Datadog. Para obtener más información sobre las consultas, consulta [Sintaxis de búsqueda de logs][4].
 
-{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Live Tail de log" video=true style="width:100%;" >}}
+{{< img src="logs/explorer/live_tail/livetail.mp4" alt="Log de Live Tail" video=true style="width:100%;" >}}
 
-A diferencia de las consultas sobre logs indexados que se realizan en [Log Explorer][3], las consultas en Live Tail *no* requieren que se [declare una faceta][5] de antemano. 
+**Nota**: Para facilitar la lectura, los resultados de Live Tail se muestrean cuando ingresan demasiados logs que coinciden con la consulta. El muestreo aplicado es uniformemente aleatorio para que tus logs de Live Tail sean estadísticamente representativos del rendimiento real de tus logs. Si necesitas ver cada log que ingresa, delimita tu consulta con filtros de búsqueda adicionales.
 
-**Nota**: A favor de la legibilidad, la salida de Live Tail se muestrea cuando entran demasiados logs que coinciden con la consulta. El muestreo aplicado es uniformemente aleatorio, de modo que tus logs de Live Tail son estadísticamente representativos del rendimiento real del log. Reduce tu consulta con filtros de búsqueda adicionales si necesitas visibilidad de cada log presente.
-
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

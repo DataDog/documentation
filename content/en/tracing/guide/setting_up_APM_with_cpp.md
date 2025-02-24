@@ -132,7 +132,7 @@ On the Trace Agent tab, you will see something similar to:
 2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:0.2.0] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
 ```
 
-The service then shows up in the Service Catalog in Datadog.
+The service then shows up in the Software Catalog in Datadog.
 
 {{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" >}}
 
