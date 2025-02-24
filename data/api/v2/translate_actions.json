@@ -358,7 +358,7 @@
     "summary": "Delete Cloud Cost Management AWS CUR config"
   },
   "UpdateCostAWSCURConfig": {
-    "description": "Update the status of an AWS CUR config (active/archived).",
+    "description": "Update the status (active/archived) and/or account filtering configuration of an AWS CUR config.",
     "summary": "Update Cloud Cost Management AWS CUR config",
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."
