@@ -191,7 +191,7 @@ For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PRO
 3. Add `dd-java-agent.jar` and `java-function-invoker.jar` to your Dockerfile.
    Cloud Run Function code runs with a classpath that includes the function code itself and its dependencies.
    The Maven plugin automatically computes the classpath based on the dependencies expressed in pom.xml.
-   When invoking the Functions Framework directly, you must update your dockerfile ENTRYPOINT to use `--classpath` and `--target` to indicate how to find the code and its dependencies.
+   When [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath), you must update your dockerfile ENTRYPOINT to use `--classpath` and `--target` to indicate how to find the code and its dependencies.
    ```shell
     java -jar java-function-invoker-1.3.2 \
     --classpath 'FUNCTION_JAR' \
