@@ -36,6 +36,6 @@ Follow the data from synthetic tests directly through to the root causes by digg
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/correlation_with_other_telemetry/logs/
+[1]: /real_user_monitoring/correlate_with_other_telemetry/logs/
 [2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [3]: /synthetics/guide/explore-rum-through-synthetics/
