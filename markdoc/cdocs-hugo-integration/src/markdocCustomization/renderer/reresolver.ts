@@ -1,4 +1,4 @@
-import { Tag, ClientVariable, ClientFunction, functions, Config } from 'cdocs-markdoc';
+import { ClientVariable, ClientFunction, functions, Config } from 'cdocs-markdoc';
 
 export function reresolveFunctionNode(
   functionNode: ClientFunction,

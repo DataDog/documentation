@@ -14,7 +14,6 @@ describe('CdocsHugoIntegration (optimized Markdown output)', async () => {
   const { compiledFilePaths, hasErrors } = compiler.compileMdocFiles();
   // TODO: Prerender most of the author console once,
   // so this step runs fast enough to include in tests
-  // await compiler.injectAuthorConsole();
 
   if (hasErrors) {
     compiler.logErrorsToConsole();

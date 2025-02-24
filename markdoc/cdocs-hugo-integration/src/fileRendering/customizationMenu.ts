@@ -1,48 +1,60 @@
+/**
+ * The customization menu appears at the top of each documentation page,
+ * and allows users to update their selections for each filter's value.
+ * Because this menu must be built both at compile time and at runtime,
+ * it uses simple string templating. JSX is not available at runtime in Hugo.
+ */
+
 import { ResolvedFilters, ResolvedFilter } from 'cdocs-data';
 
 /**
- * Given a resolved page filters object, build the UI for the filter selector
- * that goes at the top of the page.
- *
- * This runs at compile time, but also runs client-side on filter selection change,
- * so JSX templating is not available.
+ * Given a resolved page filters object, build the customization menu UI.
  */
 export const buildCustomizationMenuUi = (
   resolvedPageFilters: ResolvedFilters
 ): string => {
   let menuHtml = '<div id="cdoc-filters-menu">';
   // Build the displayed pills menu
-  menuHtml += buildFilterSelectorPillsMenu({ filters: resolvedPageFilters });
+  menuHtml += buildPillsMenu({ filters: resolvedPageFilters });
   // Build a hidden dropdown menu in case the pills don't fit on the client
-  menuHtml += buildFilterSelectorDropdownsMenu({ filters: resolvedPageFilters });
+  menuHtml += buildDropdownsMenu({ filters: resolvedPageFilters });
   menuHtml += '</div>';
   menuHtml += '<hr />';
   return menuHtml;
 };
 
-function buildFilterSelectorPillsMenu(p: { filters: ResolvedFilters }) {
+// PILLS MENU TEMPLATING FUNCTIONS ----------------------------------
+
+/**
+ * Build a menu that displays a pill for each filter option.
+ */
+function buildPillsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml = '<div class="filter-selector-menu" id="cdoc-filters-pill-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
-    menuHtml += buildFilterSelectorPills({ filter: resolvedFilter });
+    menuHtml += buildPillsForFilter({ filter: resolvedFilter });
   });
   menuHtml += '</div>';
   return menuHtml;
 }
 
-function buildFilterSelectorPills(p: { filter: ResolvedFilter }) {
+/**
+ * Build the set of pills for a single filter
+ * (one pill per option, with one pill selected).
+ */
+function buildPillsForFilter(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
 
   // Open the top-level container
   let selectorHtml = '<div class="cdoc-pills-container">';
 
-  // Render the label
+  // Render the label for the set of pills
   selectorHtml += `<p 
     id="cdoc-${p.filter.id}-pills-label" 
     class="cdoc-filter-label"
   >${p.filter.label}</p>`;
 
-  // Render each option
+  // Render each option pill
   p.filter.options.forEach((option) => {
     const isSelected = option.id === currentValue;
     selectorHtml += `<button
@@ -60,18 +72,23 @@ function buildFilterSelectorPills(p: { filter: ResolvedFilter }) {
   return selectorHtml;
 }
 
-function buildFilterSelectorDropdownsMenu(p: { filters: ResolvedFilters }) {
+// DROPDOWNS MENU TEMPLATING FUNCTIONS ------------------------------
+
+function buildDropdownsMenu(p: { filters: ResolvedFilters }) {
   let menuHtml =
     '<div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu">';
   Object.keys(p.filters).forEach((filterId) => {
     const resolvedFilter = p.filters[filterId];
-    menuHtml += buildFilterSelectorDropdown({ filter: resolvedFilter });
+    menuHtml += buildDropdownForFilter({ filter: resolvedFilter });
   });
   menuHtml += '</div>';
   return menuHtml;
 }
 
-function buildFilterSelectorDropdown(p: { filter: ResolvedFilter }) {
+/**
+ * Build the dropdown for a single filter.
+ */
+function buildDropdownForFilter(p: { filter: ResolvedFilter }) {
   const currentValue = p.filter.currentValue || p.filter.defaultValue;
   const filterLabelElementId = `cdoc-${p.filter.id}-dropdown-label`;
 
