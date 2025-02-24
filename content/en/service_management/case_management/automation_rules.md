@@ -18,7 +18,7 @@ To configure automation rules:
 1. Select **Automation**.
 1. Click **New Rule**.
 
-{{< img src="/service_management/case_management/automation_rules/create_case_automation_rule.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="/service_management/case_management/automation_rules/create_case_automation_rule.png" alt="Screenshot of the "Create Automation Rule" dialog in a case management project. The dialog includes steps to set when to evaluate the rule, specify workflow for rule match, name the rule, and set its status. There are options for "Case Creation", "Status Transition", and "Attribute Change". A "Triage Assistant" workflow is selected. The rule can be enabled with a checkbox. There are "Cancel" and "Save" buttons." style="width:100%;" >}}
 
 Add the following to your configuration:
 
@@ -26,7 +26,7 @@ Add the following to your configuration:
     1. Upon case creation
     1. When a case's status changes
     1. When a case attribute is added or deleted
-1. **Select a workflow** - Leverage Workflow Automation to automate actions such as:
+1. **Select a workflow** - Leverage [Workflow Automation][2] to automate actions such as:
     1. Assigning the case to a team member
     1. Adding comments
     1. Closing a resolved case
@@ -38,3 +38,4 @@ Add the following to your configuration:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases/settings
+[2]: /service_management/workflows/
