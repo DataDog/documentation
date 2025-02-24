@@ -59,7 +59,7 @@ After you have completed setup, if you are not receiving complete traces, includ
 
 When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
-**Note**: `DD_TRACE_ENABLED` is true by default, thus some minimal instrumentation will happen by default **at import time, before initialization**. If you want to fully disable all instrumentation, you may make the import conditional, or (e.g. if impossible because using static / top-level ESM imports) you may explicitly set `DD_TRACE_ENABLED=false`.
+**Note**: `DD_TRACE_ENABLED` is true by default, thus some minimal instrumentation will happen by default **at import time, before initialization**. If you want to fully disable all instrumentation, you may make the import conditional, or you may explicitly set `DD_TRACE_ENABLED=false` (for example if conditional imports are impossible because using static / top-level ESM imports).
 
 #### Option 1: Add the tracer in code
 
