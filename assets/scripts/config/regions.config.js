@@ -195,7 +195,7 @@ export default {
       us3: 'N/A',
       us5: 'N/A',
       eu: 'N/A',
-      ap1: 'TODO',
+      ap1: 'Asia Pacific (Tokyo) (ap-northeast-1)',
       gov: 'N/A'
     },
     aws_private_link_api_service_name: {
