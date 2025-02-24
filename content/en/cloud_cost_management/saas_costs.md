@@ -152,7 +152,7 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 
 **Snowflake Query Tags**
 
-[Snowflake's query tags][9] are powerful metadata strings that can be associated with queries. The Snowflake Cost Management integration will ingest [JSON parsable][10] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+[Snowflake's query tags][106] are powerful metadata strings that can be associated with queries. The Snowflake Cost Management integration will ingest [JSON parsable][107] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
 
 For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
 ```
@@ -187,6 +187,8 @@ Notes:
 [103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 [105]: https://docs.snowflake.com/en/user-guide/object-tagging
+[106]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[107]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
 
 {{% /tab %}}
 
@@ -418,5 +420,3 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 [6]: /notebooks
 [7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
-[9]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
-[10]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
