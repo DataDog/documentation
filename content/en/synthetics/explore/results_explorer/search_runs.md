@@ -13,7 +13,7 @@ further_reading:
 
 After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
-{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/explorer_test_runs_2.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
 You can use facets to accomplish the following actions:
 
@@ -22,11 +22,11 @@ You can use facets to accomplish the following actions:
 
 ## Explore facets
 
+<div class="alert alert-info">The list of available facets below may differ depending on your site and region.</a></div>
+
 The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with **Common**.
 
 ### Common test run attributes
-
-**Common** facets allow you to filter on your test runs' attributes.
 
 | Facet                              | Description                                                                                             |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|
