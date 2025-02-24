@@ -37,7 +37,7 @@ Then, to send your Step Functions logs to Datadog:
 2. Ensure you have deployed the [Datadog Lambda Forwarder][6], and that you are using v3.130.0+. You might need to [update your Forwarder][6]. As an alternative, you may also use [Amazon Data Firehose][16], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. However, it requires that the Step Functions log group name begins with "/aws/vendedlogs/states/".
 
 3. Subscribe CloudWatch logs to the Datadog Lambda Forwarder. If the log group name for your Step Functions begins with "/aws/vendedlogs/states/", you can also use the [Serverless Framework or the Datadog CLI to configure the subscription][11].
-   ### Automatic
+   ### Automatic custom installation
    1. Ensure that you have set up the [Datadog-AWS integration][1].
    2. In Datadog, open the [AWS integration tile][2], and view the *Configuration* tab.
    3. On the left, select the AWS account where your Step Function is running. Open the *Log Collection* tab.
@@ -47,7 +47,7 @@ Then, to send your Step Functions logs to Datadog:
    **Note**: Log Autosubscription requires your Lambda Forwarder and Step Function to be in the same region.
 
    
-   ### Manual
+   ### Manual custom installation
    1. Open your AWS console and go to your Datadog Lambda Forwarder. In the *Function overview* section, click on *Add trigger*.
    2. Under *Add trigger*, in the *Trigger configuration* section, use the *Select a source* dropdown to select `CloudWatch Logs`.
    3. Under *Log group*, select the log group for your state machine. For example, `/aws/vendedlogs/states/my-state-machine`.
@@ -70,13 +70,13 @@ Then, to send your Step Functions logs to Datadog:
 [2]: https://app.datadoghq.com/integrations/aws
 {{% /tab %}}
 {{% tab "Datadog CI" %}}
-1. If you have not already, install the [Datadog CLI][1] v2.18.0+.
+1. If you haven't already, install the [Datadog CLI][1] v2.18.0+.
 
    ```shell
    npm install -g @datadog/datadog-ci
    ```
 
-1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2]. As an alternative, you may also use [Amazon Data Firehose][3], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
+1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2]. As an alternative, you can also use [Amazon Data Firehose][3], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
    ```
    /aws/vendedlogs/states/<STEP_FUNCTION_NAME>-Logs
    ```
@@ -97,7 +97,7 @@ Then, to send your Step Functions logs to Datadog:
    ```
 
    - Replace `<STEP_FUNCTION_ARN>` with the ARN of your Step Function. Repeat the `--step-function` flag for each Step Function you wish to instrument.
-    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder.
+   - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder.
    - Replace `<ENVIRONMENT>` with the environment tag you would like to apply to your Step Functions.
 
     For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][4].
@@ -111,13 +111,13 @@ Then, to send your Step Functions logs to Datadog:
 {{% /tab %}}
 {{% tab "Serverless Plugin" %}}
 
-1. If you have not already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
+1. If you haven't already, install the [Datadog Serverless Framework Plugin][1] v5.40.0+:
 
     ```shell
     serverless plugin install --name serverless-plugin-datadog
     ```
 
-1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2]. As an alternative, you may also use [Amazon Data Firehose][3], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
+1. Ensure you have deployed the [Datadog Lambda Forwarder][2], and that you are using v3.130.0+. You might need to [update your Forwarder][2]. As an alternative, you can also use [Amazon Data Firehose][3], which can subscribe to Amazon CloudWatch log groups across multiple AWS regions. Your Step Functions log group name should use this format: 
    ```
    /aws/vendedlogs/states/<STEP_FUNCTION_NAME>-Logs-<STAGE>
    ```
@@ -135,7 +135,7 @@ Then, to send your Step Functions logs to Datadog:
        mergeStepFunctionAndLambdaTraces: true
    ```
 
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct DATADOG SITE is selected on the right of this docs page).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
     - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder. 
 
@@ -176,7 +176,7 @@ datadog_sfn = DatadogStepFunctions(
 datadog_sfn.add_state_machines([child_state_machine, parent_state_machine])
 ```
 
-For example stacks and additional code examples in TypeScript and Go, see [CDK Examples for Instrumenting AWS Step Functions][4].
+For sample stacks and additional code examples, see [CDK Examples for Instrumenting AWS Step Functions][4].
 
 **Note**: The Datadog Step Functions CDK construct automatically enables tracing.
 
