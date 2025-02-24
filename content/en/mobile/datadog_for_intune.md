@@ -67,7 +67,6 @@ Permissions are automatically added when configuring the application:
 
 **Notes:**
 - The mobile app only uses these two permissions. When granting consent you may see more permissions, because the mobile app shares the same Microsoft Entra application as the web app and the [Microsoft Teams Integration](https://docs.datadoghq.com/integrations/microsoft_teams). If you're not using it, you can revoke those permissions from the **Permissions** tab on the page in [step 3](#step-3-grant-admin-consent-for-your-organization).
-```suggestion
 - While `DeviceManagementManagedApps.Read` exists, it is an MS Graph API permission, and the mobile app requires a MAM permission. `DeviceManagementManagedApps.ReadWrite` is the only MAM permission available, but the mobile app only read and doesn't write anything.
 
 ## Deploying Datadog Intune to mobile devices
