@@ -107,7 +107,6 @@ For faster processing, generate the first exports manually by clicking **Run Now
 
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
-
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
