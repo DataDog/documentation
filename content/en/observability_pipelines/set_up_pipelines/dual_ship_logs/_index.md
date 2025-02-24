@@ -13,11 +13,14 @@ As your infrastructure and your organization scales, so does your log volume, th
 
 Select a source to get started:
 
+<!-- - [Amazon Data Firehose][12] -->
+- [Amazon S3][11]
 - [Datadog Agent][1]
 - [Fluentd or Fluent Bit][2]
 - [Google Pub/Sub][3]
 - [HTTP Client][4]
 - [HTTP Server][5]
+- [Kafka][13]
 - [Logstash][6]
 - [Splunk HTTP Event Collector (HEC)][7]
 - [Splunk Heavy or Universal Forwarders (TCP)][8]
@@ -34,3 +37,6 @@ Select a source to get started:
 [8]: /observability_pipelines/dual_ship_logs/splunk_tcp
 [9]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
 [10]: /observability_pipelines/dual_ship_logs/syslog
+[11]: /observability_pipelines/set_up_pipelines/dual_ship_logs/amazon_s3
+[12]: /observability_pipelines/set_up_pipelines/dual_ship_logs/amazon_data_firehose
+[13]: /observability_pipelines/set_up_pipelines/dual_ship_logs/kafka

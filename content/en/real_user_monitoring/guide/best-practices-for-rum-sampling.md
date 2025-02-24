@@ -57,10 +57,10 @@ RUM ensures availability of data when user devices are offline. In low-network a
 
 [1]: /real_user_monitoring/guide/sampling-browser-plans/#overview
 [2]: /real_user_monitoring/guide/sampling-browser-plans/#overview
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#initialization-parameters
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
 [4]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
 [5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#sample-rum-sessions
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/#initialize-the-library
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/advanced_configuration/#sample-rum-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/#initialize-the-library
 [8]: /help
 [9]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions

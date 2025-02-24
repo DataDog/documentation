@@ -7,12 +7,15 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: ドキュメント
+  text: デッドロックモニタリングの構成
 title: Azure SQL Server のデータベースモニタリングの設定
 ---
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+データベースで Database Monitoring を有効にするには、以下の手順を実行します。
 
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 2. [Agent のインストールと構成](#install-and-configure-the-agent)
@@ -90,7 +93,7 @@ Datadog Agent のインストールと構成の詳細については、[Agent �
 
 {{% tab "Azure SQL Managed Instance" %}}
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+サーバーに接続するために読み取り専用ログインを作成し、必要な権限を付与します。
 
 #### SQL Server バージョン 2014+ の場合
 
@@ -347,7 +350,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true

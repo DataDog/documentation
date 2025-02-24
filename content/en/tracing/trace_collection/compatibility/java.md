@@ -91,6 +91,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Server                  | Versions   | Support Type                                           | Instrumentation Names (used for configuration)           |
 |-------------------------|------------|--------------------------------------------------------|----------------------------------------------------------|
 | Akka-Http Server        | 10.0+      | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
+| Apache Pekko            | 1.0+       | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
 | Finatra Web             | 2.9+       | Fully Supported                                        | `finatra`                                                |
 | Grizzly                 | 2.0+       | Fully Supported                                        | `grizzly`                                                |
 | Grizzly-HTTP            | 2.3.20+    | Fully Supported                                        | `grizzly-filterchain`                                    |
@@ -202,6 +203,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Cassandra               | 3.0+     | Fully Supported | `cassandra`                                                                                |
 | Elasticsearch Transport | 2.0+     | Fully Supported | `elasticsearch`, `elasticsearch-transport`, `elasticsearch-transport-{2,5,6,7}` (pick one) |
 | Elasticsearch Rest      | 5.0+     | Fully Supported | `elasticsearch`, `elasticsearch-rest`, `elasticsearch-rest-{5,6,7}` (pick one)             |
+| Ignite                  | 2.0-3.0  | [Preview](#framework-integrations-disabled-by-default) | `ignite`                                            |
 | JDBC                    | N/A      | Fully Supported | `jdbc`, `jdbc-datasource`                                                                  |
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                           |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
@@ -414,6 +416,19 @@ paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
 
 The solution to this issue is to upgrade to version 4.6.0 or later.
 
+##### Problem activating Datadog tracer
+
+You might encounter initialization errors if your tracer configuration relies on Unix Domain Sockets (UDS), which are not supported in native images:
+
+```text
+dd.trace 2024-12-30 08:34:43:306 +0000] [main] WARN datadog.trace.agent.tooling.nativeimage.TracerActivation - Problem activating datadog tracer
+java.lang.NoClassDefFoundError: Could not initialize class jnr.unixsocket.UnixSocketChannel
+```
+
+The solution is to configure the Java tracer to use host-based communication (`hostip` or `service` mode), rather than socket-based communication (`socket` mode).
+
+For more information, see [Configure APM and DogstatsD communication mode][11]. For setups that don't rely on the Admission Controller, see documentation for [DD_TRACE_AGENT_URL][12].
+
 {{% /collapse-content %}}
 
 ## Further Reading
@@ -428,3 +443,5 @@ The solution to this issue is to upgrade to version 4.6.0 or later.
 [7]: https://www.graalvm.org/downloads/
 [9]: /tracing/trace_explorer/
 [10]: /opentelemetry/interoperability/instrumentation_libraries/?tab=java
+[11]: /containers/cluster_agent/admission_controller/?tab=datadogoperator#configure-apm-and-dogstatsd-communication-mode
+[12]: /tracing/trace_collection/library_config/#agent

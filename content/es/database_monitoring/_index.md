@@ -129,13 +129,13 @@ La página [Recomendaciones][6] destaca los problemas y las oportunidades de opt
 {{< img src="database_monitoring/recommendations-page.png" alt="Página Recomendaciones en Datadog" style="width:90%;" >}}
 
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
 {{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
   El Centro de aprendizaje de Datadog está lleno de cursos prácticos para ayudarte a aprender sobre este tema. Inscríbete sin coste para identificar ineficiencias y optimizar tu base de datos de Postgres.
 {{< /learning-center-callout >}}
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/databases
 [2]: /es/database_monitoring/query_metrics/

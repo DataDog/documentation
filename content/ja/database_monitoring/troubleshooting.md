@@ -11,6 +11,7 @@ title: データベースモニタリングのトラブルシューティング
 * [Oracle セットアップのトラブルシューティング][8]
 * [Postgres セットアップのトラブルシューティング][3]
 * [SQL Server セットアップのトラブルシューティング][4]
+* [MongoDB セットアップのトラブルシューティング][9]
 
 ## 一般的な問題の診断
 ### クエリのバインドパラメータが表示されない
@@ -69,3 +70,4 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 [5]: /ja/help/
 [7]: /ja/agent/configuration/proxy/?tab=linux
 [8]: /ja/database_monitoring/setup_oracle/troubleshooting/
+[9]: /ja/database_monitoring/setup_mongodb/troubleshooting/

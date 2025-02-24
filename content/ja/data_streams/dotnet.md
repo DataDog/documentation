@@ -2,17 +2,20 @@
 title: Data Streams Monitoring for .NET のセットアップ
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring は、AP1 リージョンではサポートされていません。</a></div>
-{{< /site-region >}}
-
 ### 前提条件
 
-Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブラリの最新バージョンが必要です。
 * [Datadog Agent v7.34.0 以降][1]
-* .NET Tracer ([.NET Core][2]、[.NET Framework][3])
-  * Kafka および RabbitMQ: v2.28.0 以降
-  * Amazon SQS: v2.48.0
+
+### サポートされるライブラリ
+
+| IT業界        | ライブラリ                         | Minimal tracer version | Recommended tracer version |
+|-------------------|---------------------------------|------------------------|----------------------------|
+| Kafka             | [Confluent.Kafka][3]            | 2.28.0                 | 2.41.0 以降            |
+| RabbitMQ          | [RabbitMQ.Client][4]            | 2.28.0                 | 2.37.0 以降            |
+| Amazon SQS        | [Amazon SQS SDK][5]             | 2.48.0                 | 2.48.0 以降            |
+| Amazon SNS        | [Amazon SNS SDK][6]             | 3.6.0                  | 3.6.0 以降             |
+| IBM MQ            | [IBMMQDotnetClient][7]          | 2.49.0                 | 2.49.0 以降            |
+| Azure service bus | [Azure.Messaging.ServiceBus][8] | 2.38.0                 | 2.38.0 以降            |
 
 ### インストール
 
@@ -23,15 +26,20 @@ Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブ
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-### サポートされるライブラリ
-Data Streams Monitoring は、[confluent-kafka ライブラリ][4]をサポートしています。
 
 ### SQS パイプラインの監視
-Data Streams Monitoring は、1 つの[メッセージ属性][5]を使用して、SQS キューを通過するメッセージの経路を追跡します。Amazon SQS は、メッセージごとに許可されるメッセージ属性の上限が 10 個であるため、データパイプラインを通じてストリーミングされるすべてのメッセージには、9 個以下のメッセージ属性が設定されている必要があり、残りの属性は Data Streams Monitoring に使用できます。
+Data Streams Monitoring は[メッセージ属性][2]を 1 つ使用して、SQSキューを通るメッセージ経路を追跡します。Amazon SQS では 1 メッセージあたり最大 10 個のメッセージ属性が許可されているため、データパイプライン経由でストリーミングされるすべてのメッセージは、Data Streams Monitoring 用に 1 つ分を確保できるよう、9 個以下のメッセージ属性に制限する必要があります。
+
+### SNS-to-SQSパイプラインの監視
+Amazon SNS が Amazon SQS と直接やり取りするデータパイプラインを監視するには、[Amazon SNS の生メッセージ配信 (raw message delivery)][9] を有効にする必要があります。
 
 
 [1]: /ja/agent
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
-[4]: https://pypi.org/project/confluent-kafka/
-[5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[3]: https://www.nuget.org/packages/Confluent.Kafka
+[4]: https://www.nuget.org/packages/RabbitMQ.Client
+[5]: https://www.nuget.org/packages/AWSSDK.SQS
+[6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
+[7]: https://www.nuget.org/packages/IBMMQDotnetClient
+[8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

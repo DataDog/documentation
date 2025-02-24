@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: ブログ
   text: Datadog を使った継続的テストのベストプラクティス
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: ブログ
+  text: Best practices for monitoring progressive web applications
 title: Continuous Testing
 ---
 
@@ -58,7 +61,7 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 </br>
 
-You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
+[Datadog Terraform プロバイダー][10]を使って、テストの作成と状態管理をコントロールすることができます。Synthetic テストをステージング、プリプロダクト、カナリアデプロイメントの[インテグレーションおよびエンドツーエンドテスト][11]として活用したり、[CI パイプライン][11]で直接実行することができます。
 
 ## トラブルシューティングの高速化
 

@@ -24,7 +24,7 @@ To install the Datadog Browser SDK to support Electron apps:
 
 1. Set up and install [RUM Browser Monitoring][2] inside **every renderer process**, following the steps for CDN sync, CDN async, or npm.
 
-2. Set the `allowFallbackToLocalStorage` parameter to `true` in the RUM initialization configuration of each renderer process, as shown below. 
+2. Set the `sessionPersistence` parameter to `"local-storage"` in the RUM initialization configuration of each renderer process, as shown below. 
 
    **Note**: This setting allows Datadog to collect RUM data without relying on browser cookies.
    
@@ -37,7 +37,7 @@ To install the Datadog Browser SDK to support Electron apps:
      clientToken: '<DATADOG_CLIENT_TOKEN>',
      site: '<DATADOG_SITE>',
      ...
-     allowFallbackToLocalStorage: true
+     sessionPersistence: "local-storage"
      });
    ```
  

@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "/security/application_security/how-appsec-works/"
@@ -41,9 +41,9 @@ Discover the ways Datadog ASM Threat Management helps common use cases:
 
 ## Security signals
 
-Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
+Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Software Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
 
-{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Service Catalog with services showing threat signals" style="width:100%;" >}}
+{{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Software Catalog with services showing threat signals" style="width:100%;" >}}
 
 For additional information about how Threat Management works, read [How ASM Works][4].
 
@@ -65,6 +65,10 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 
 {{% asm-protect %}}
 
+## Disable threat management and protection
+
+For information on disabling threat management and protection, see [Disabling threat management and protection][12].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,3 +83,4 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 [9]: /security/application_security/threats/exploit-prevention/
 [10]: /security/default_rules/?category=cat-application-security
 [11]: /security/account_takeover_protection/
+[12]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection

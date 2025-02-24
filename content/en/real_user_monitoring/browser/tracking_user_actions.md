@@ -41,6 +41,8 @@ The RUM Browser SDK automatically tracks clicks. A click action is created if **
 * The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
 * A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
 
+**Note**: When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][5].
+
 ## Action timing metrics
 
 For information about the default attributes for all RUM event types, see [RUM Browser Data Collected][3].

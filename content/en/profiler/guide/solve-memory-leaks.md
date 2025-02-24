@@ -37,7 +37,7 @@ To use this walkthrough, you need:
 
 To investigate a memory leak using the guided walkthrough:
 
-1. Go to **[APM > Service Catalog][4]**.
+1. Go to **[APM > Software Catalog][4]**.
 1. Hover over the service you want to investigate and click **Service Page**.
 1. Click the **Memory Leaks** tab.
 1. Follow the guided steps to complete your investigation.

@@ -39,7 +39,7 @@ Datadog APM を始めるには、次の重要なステップに従う必要が�
 
 最小限の手動ステップでアプリケーションの {{< tooltip glossary="span" >}} を作成します。自動的にアプリケーションをインスツルメントするには、次のいずれかのオプションを使用できます。
 
-- [Single Step Instrumentation (ベータ版)][7]: 1 行のインストールコマンドを実行して Datadog Agent をインストールし、APM を有効化し、Linux ホスト、VM、またはコンテナ上のすべてのサービスをインスツルメントします。
+- [Single Step Instrumentation (プレビュー版)][7]: 1 行のインストールコマンドを実行して Datadog Agent をインストールし、APM を有効化し、Linux ホスト、VM、またはコンテナ上のすべてのサービスをインスツルメントします。
 - [Datadog ライブラリ][8]: アプリケーションに Datadog トレーシング ライブラリを追加します。
 
 詳細は[自動インスツルメンテーション][5]を参照してください。
@@ -52,6 +52,11 @@ Datadog APM を始めるには、次の重要なステップに従う必要が�
 - [OpenTelemetry API][10]: Datadog ライブラリでの OpenTelemetry API サポートを使用して、ベンダーに依存しないコードのインスツルメンテーションを行います。
 
 詳細は[カスタムインスツルメンテーション][6]を参照してください。
+
+{{< callout url="https://www.datadoghq.com/product-preview/service-discovery/" btn_hidden="false" header="サービスディスカバリーは現在プレビュー版として提供されています">}}
+サービスディスカバリーは、アプリケーション監視の現状を完全に可視化し、システム内の重大なギャップや途切れたトレースを明らかにします。
+{{< /callout >}}
+
 
 ## APM セットアップチュートリアル
 

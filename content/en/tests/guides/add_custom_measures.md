@@ -6,7 +6,7 @@ aliases:
 - /continuous_integration/guides/add_custom_metrics/
 - /tests/guides/add_custom_metrics/
 further_reading:
-- link: "/continuous_integration/tests"
+- link: "/tests"
   tag: "Documentation"
   text: "Learn about Test Optimization"
 - link: "/monitors/types/ci"
@@ -107,6 +107,19 @@ Datadog::CI.active_test&.set_tag('test.memory.usage', 1e8)
 
 {{% /tab %}}
 
+{{% tab "Swift" %}}
+
+```swift
+import DatadogSDKTesting
+
+// inside your test
+DDTest.current?.setTag(key: "test.memory.usage", value: 1e8)
+// test continues normally
+// ...
+```
+
+{{% /tab %}}
+
 {{% tab "JUnit Report Uploads" %}}
 
 For `datadog-ci`, use the `DD_MEASURES` environment variable or `--measures` CLI argument:
@@ -157,7 +170,7 @@ For example, you can use this type of alert to inform you about the memory usage
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/
+[1]: /tests/
 [2]: https://app.datadoghq.com/ci/test-runs
 [3]: /dashboards
 [4]: /notebooks

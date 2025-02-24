@@ -24,15 +24,15 @@ Datadog RUM 브라우저 SDK를 통해 또한 다음을 수행할 수 있습니�
 - 불편한 신호를 보이는 사용자 감지
 - 코드 라인으로 오류 원인을 추적하여 해결
 
-{{< img src="real_user_monitoring/browser/rum-browser-overview.png" alt="RUM 성능 요약 대시보드" style="width:100%;">}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM 성능 요약 대시보드" style="width:100%;">}}
 
 사용자 데이터를 안전하게 유지하는 책임은 Datadog과 RUM SDK를 활용하는 개발자 간에 공유됩니다. [책임 공유][1]에 대해 자세히 알아보세요.
 
 ## 시작하기
 
 {{< whatsnext desc="To get started with the RUM 브라우저 SDK를 시작하려면 다음 단계와 애플리케이션 제공 방식에 따라  RUM 애플리케이션을 생성하세요." >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/client" >}}<u>클라이언트 측:</u> 브라우저 기반 웹 애플리케이션 각각을 계측하고, 애플레이케션을 배포한 다음 추적하려는 초기화 파라미터를 설정하고 고급 설정을 사용하여 RUM이 수집하는 데이터와 컨텍스트를 추가로 관리합니다.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/browser/setup/server" >}}서버 측<u>(자동 계측)</u>: 웹 서버 또는 프록시를 통해 제공되는 웹 애플리케이션의 HTML 응답에 RUM SDK 자바스크립트(Javascript) 스크립트를 삽입합니다.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/browser/setup/client">}}<u>클라이언트 측:</u> 브라우저 기반 웹 애플리케이션 각각을 계측하고, 애플레이케션을 배포한 다음 추적하려는 초기화 파라미터를 설정하고 고급 설정을 사용하여 RUM이 수집하는 데이터와 컨텍스트를 추가로 관리합니다.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/browser/setup/server">}}서버 측<u>(자동 계측</u>): 웹 서버 또는 프록시를 통해 제공되는 웹 애플리케이션의 HTML 응답에 RUM SDK 자바스크립트(Javascript) 스크립트를 삽입합니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 여기에서 RUM 브라우저 SDK가 수집하는 [데이터 및 컨텍스트]를 수정하여 구체적인 요구 사항을 지원할 수 있습니다. [고급 설정][3]에서 기본 설정을 재정의하는 방법을 알아보세요.

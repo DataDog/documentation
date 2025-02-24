@@ -4,7 +4,7 @@ title: "Azure Table Component"
 
 ## Overview
 
-You can use theAzure Table component to represent and visualize NoSQL key-value stores from your Azure environment.
+You can use the Azure Table component to represent and visualize NoSQL key-value stores from your Azure environment.
 
 {{< img src="cloudcraft/components-azure/azure-table/component-azure-table-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:60%;">}}
 

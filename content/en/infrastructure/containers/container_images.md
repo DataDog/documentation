@@ -7,9 +7,9 @@ further_reading:
 - link: "/security/cloud_security_management/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Management Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
+- link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Setting up container image vulnerabilities"
+  text: "Enable SBOM collection in CSM Vulnerabilities"
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities/"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
@@ -103,7 +103,9 @@ container_image:
 
 The following instructions turn on [Software Bill of Materials][5] (SBOM) collection for CSM Vulnerabilities. SBOM collection enables automatic detection of container image vulnerabilities. Vulnerabilities are evaluated and scanned against your containers every hour. Vulnerability management for container images is included in [CSM Pro and Enterprise plans][10].
 
-**Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
+**Notes**:
+- The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
+- SBOM collection is not compatible with the image streaming feature in Google Kubernetes Engine (GKE). To disable it, see the [Disable Image streaming][11] section of the GKE docs.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Operator)" %}}
@@ -230,3 +232,4 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [8]: /security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
 [10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products
+[11]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
