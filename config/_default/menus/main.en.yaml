@@ -3503,7 +3503,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/correlation_with_other_telemetry/apm/
+      url: /real_user_monitoring/correlate_with_other_telemetry/apm/
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
