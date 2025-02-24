@@ -1858,16 +1858,21 @@ menu:
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 10
+    - name: Composite Metrics Queries
+      url: metrics/composite_metrics_queries
+      parent: metrics_top_level
+      identifier: composite_metrics_queries
+      weight: 11
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 11
+      weight: 12
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 12
+      weight: 13
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -1985,7 +1990,22 @@ menu:
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305   
+    - name: Production Readiness
+      url: software_catalog/use_cases/production_readiness
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_production_readiness
+      weight: 306  
+    - name: Incident Response
+      url: software_catalog/use_cases/incident_response
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_incident_response
+      weight: 307    
+    - name: CI Pipeline Visibility
+      url: software_catalog/use_cases/pipeline_visibility
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_pipeline_visibility
+      weight: 308  
     - name: Manage a Component
       url: software_catalog/manage
       parent: software_catalog
@@ -4196,16 +4216,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_submit_evaluations
       weight: 5
+    - name: Ragas Evaluations
+      url: llm_observability/ragas_evaluations/
+      parent: llm_obs
+      identifier: llm_obs_ragas_evaluation
+      weight: 6
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 6
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 7
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -7680,26 +7705,41 @@ menu:
       identifier: sensitive_data_scanner
       parent: administration_heading
       weight: 30000
-    - name: Library Rules
-      url: sensitive_data_scanner/library_rules/
-      identifier: sds_library_rules
+    - name: Setup
+      url: sensitive_data_scanner/setup/
+      identifier: sds_setup
       parent: sensitive_data_scanner
       weight: 1
-    - name: Investigate Sensitive Data Issues
-      url: sensitive_data_scanner/investigate_sensitive_data_issues/
-      identifier: sds_investigate_sensitive_data_issues
+    - name: Telemetry Data
+      url: sensitive_data_scanner/setup/telemetry_data/
+      identifier: sds_telemetry
+      parent: sds_setup
+      weight: 101
+    - name: Cloud Storage
+      url: sensitive_data_scanner/setup/cloud_storage/
+      identifier: sds_cloud_storage
+      parent: sds_setup
+      weight: 102
+    - name: Scanning Rules
+      url: sensitive_data_scanner/scanning_rules/
+      identifier: sds_scanning_rules
       parent: sensitive_data_scanner
       weight: 2
-    - name: Regular Expression Syntax
-      url: sensitive_data_scanner/regular_expression_syntax/
-      identifier: sds_regular_expression_syntax
-      parent: sensitive_data_scanner
-      weight: 3
+    - name: Library Rules
+      url: sensitive_data_scanner/scanning_rules/library_rules/
+      identifier: sds_library_rules
+      parent: sds_scanning_rules
+      weight: 201
+    - name: Custom Rules
+      url: sensitive_data_scanner/scanning_rules/custom_rules/
+      identifier: sds_custom_rules
+      parent: sds_scanning_rules
+      weight: 202
     - name: Guides
       url: sensitive_data_scanner/guide/
       identifier: sds_guides
       parent: sensitive_data_scanner
-      weight: 4
+      weight: 3
     - name: Help
       url: help/
       pre: info-fill
