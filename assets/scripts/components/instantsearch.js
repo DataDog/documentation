@@ -102,6 +102,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     const filtersDocs = `language: ${pageLanguage}`;
     const homepage = document.querySelector('.kind-home');
     const apiPage = document.querySelector('body.api');
+    const partnersPage = document.querySelector('body.partners');
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
@@ -126,6 +127,17 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             ...{
                 additionalSearchParameters: {
                     preset: 'docs_alias_api_view'
+                }
+            }
+        });
+    }
+
+    if (partnersPage) {
+        typesenseInstantSearchAdapter.updateConfiguration({
+            ...adapterOptions,
+            ...{
+                additionalSearchParameters: {
+                    preset: 'docs_partners_view'
                 }
             }
         });
