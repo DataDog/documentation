@@ -3,6 +3,7 @@ title: Datadog Data Collection, Resolution
 disable_sidebar: true
 aliases:
   - /developers/faq/data-collection-resolution-retention/
+  - /developers/guide/data-collection-resolution-retention
 further_reading:
   - link: "/data_security/data_retention_periods"
     tag: "Documentation"
