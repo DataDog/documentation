@@ -76,111 +76,100 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 1. Add `functions-framework-api` and other dependencies like `java-dogstatsd-client` to your `pom.xml`.
 
    **Example `pom.xml`**:
-   ```xml
-  <?xml version="1.0" encoding="UTF-8"?>
-  <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-      <groupId>functions</groupId>
-      <artifactId>functions-hello-world</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
+  <groupId>functions</groupId>
+  <artifactId>functions-hello-world</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 
-      <dependencyManagement>
-          <dependencies>
-              <dependency>
-                  <artifactId>libraries-bom</artifactId>
-                  <groupId>com.google.cloud</groupId>
-                  <scope>import</scope>
-                  <type>pom</type>
-                  <version>26.32.0</version>
-              </dependency>
-          </dependencies>
-      </dependencyManagement>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>libraries-bom</artifactId>
+        <groupId>com.google.cloud</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>26.32.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-      <properties>
-          <maven.compiler.target>17</maven.compiler.target>
-          <maven.compiler.source>17</maven.compiler.source>
-      </properties>
+  <properties>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+  </properties>
 
-      <dependencies>
-          <!-- Required for Function primitives -->
-          <dependency>
-              <groupId>com.google.cloud.functions</groupId>
-              <artifactId>functions-framework-api</artifactId>
-              <version>1.1.4</version>
-          </dependency>
-          <dependency>
-              <groupId>com.google.cloud.functions.invoker</groupId>
-              <artifactId>java-function-invoker</artifactId>
-              <version>1.4.0</version>
-          </dependency>
-          <dependency>
-              <groupId>com.datadoghq</groupId>
-              <artifactId>java-dogstatsd-client</artifactId>
-              <version>4.4.3</version>
-          </dependency>
-          <dependency>
-              <groupId>org.apache.logging.log4j</groupId>
-              <artifactId>log4j-api</artifactId>
-              <version>2.19.0</version>
-          </dependency>
-          <dependency>
-              <groupId>org.apache.logging.log4j</groupId>
-              <artifactId>log4j-core</artifactId>
-              <version>2.19.0</version>
-          </dependency>
-      </dependencies>
+  <dependencies>
+    <!-- Required for Function primitives -->
+    <dependency>
+      <groupId>com.google.cloud.functions</groupId>
+      <artifactId>functions-framework-api</artifactId>
+      <version>1.1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.cloud.functions.invoker</groupId>
+      <artifactId>java-function-invoker</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.datadoghq</groupId>
+      <artifactId>java-dogstatsd-client</artifactId>
+      <version>4.4.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.19.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.19.0</version>
+    </dependency>
+  </dependencies>
 
-      <build>
-          <plugins>
-              <plugin>
-                  <!--
-                    Google Cloud Functions Framework Maven plugin
+  <build>
+    <plugins>
+      <plugin>
+        <!--
+          Google Cloud Functions Framework Maven plugin
 
-                    This plugin allows you to run Cloud Functions Java code
-                    locally. Use the following terminal command to run a
-                    given function locally:
+          This plugin allows you to run Cloud Functions Java code
+          locally. Use the following terminal command to run a
+          given function locally:
 
-                    mvn function:run -Drun.functionTarget=your.package.yourFunction
-                  -->
-                  <groupId>com.google.cloud.functions</groupId>
-                  <artifactId>function-maven-plugin</artifactId>
-                  <version>0.11.0</version>
-                  <configuration>
-                      <functionTarget>functions.HelloWorld</functionTarget>
-                  </configuration>
-              </plugin>
-              <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-jar-plugin</artifactId>
-                  <version>3.2.0</version>
-                  <configuration>
-                      <archive>
-                          <manifest>
-                              <mainClass>functions.HelloWorld</mainClass>
-                          </manifest>
-                      </archive>
-                  </configuration>
-              </plugin>
-              <plugin>
-                  <groupId>org.apache.maven.plugins</groupId>
-                  <artifactId>maven-shade-plugin</artifactId>
-                  <version>3.2.4</version>
-                  <executions>
-                      <execution>
-                          <phase>package</phase>
-                          <goals>
-                              <goal>shade</goal>
-                          </goals>
-                      </execution>
-                  </executions>
-              </plugin>
-          </plugins>
-      </build>
-  </project>
-   ```
+          mvn function:run -Drun.functionTarget=your.package.yourFunction
+        -->
+        <groupId>com.google.cloud.functions</groupId>
+        <artifactId>function-maven-plugin</artifactId>
+        <version>0.11.0</version>
+        <configuration>
+          <functionTarget>functions.HelloWorld</functionTarget>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+````
+
 2. Run `mvn clean package` to update the `target` directory with the new `.jar` used in your Dockerfile.
 
 <div class="alert alert-info">
@@ -189,11 +178,12 @@ For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PRO
 </div>
 
 3. Add `dd-java-agent.jar` and `java-function-invoker.jar` to your Dockerfile.
+
    Cloud Run Function code runs with a classpath that includes the function code itself and its dependencies.
    The Maven plugin automatically computes the classpath based on the dependencies expressed in pom.xml.
-   When [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath), you must update your dockerfile ENTRYPOINT to use `--classpath` and `--target` to indicate how to find the code and its dependencies.
+   When [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath)with the datadog agent, you must update your dockerfile ENTRYPOINT to use `--classpath` and `--target` to indicate how to find the code and add the java option fo the datadog agent `-javaagent:dd-java-agent.jar`.
    ```shell
-    java -jar java-function-invoker-1.3.2 \
+    java -javaagent:dd-java-agent.jar -jar java-function-invoker-1.3.2 \
     --classpath 'FUNCTION_JAR' \
     --target 'FUNCTION_TARGET'
    ```
@@ -599,18 +589,6 @@ public class HelloworldApplication implements HttpFunction {
         <version>0.11.0</version>
         <configuration>
           <functionTarget>functions.HelloWorld</functionTarget>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>functions.HelloWorld</mainClass>
-            </manifest>
-          </archive>
         </configuration>
       </plugin>
       <plugin>
