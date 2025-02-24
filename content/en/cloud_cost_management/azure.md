@@ -107,7 +107,6 @@ For faster processing, generate the first exports manually by clicking **Run Now
 
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
-**Note**: For Microsoft Customer Agreement, set up at the subscription level.
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
