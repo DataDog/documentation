@@ -138,7 +138,7 @@ The setting applies to **all** Monitor alert notifications, as it's an org-wide 
 
 #### Max session duration configuration
 
-Users with the `Org Management` permission can set a maximum session duration for their organization. All **new sessions created after this update** follow the configured duration, which applies to **all users**, regardless of their role in the organization. 
+Users with the `Org Management` permission can set a maximum session duration for their organization. The duration applies to all new web sessions created after you change it, for all users, regardless of their role in the organization. It doesn't apply to Datadog mobile application sessions.
 
 The session duration can be configured within the following limits:
 {{% site-region region="gov" %}}
