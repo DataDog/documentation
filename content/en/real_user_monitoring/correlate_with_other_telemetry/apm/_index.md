@@ -374,7 +374,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 2. In your browser's developer tools, go to the **Network** tab.
 3. Check the request headers for a resource request that you expect to be correlated contains the [correlation headers from Datadog][1].
 
-[1]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum#how-are-rum-resources-linked-to-traces
+[1]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -385,7 +385,7 @@ To verify you've configured the APM integration with RUM, follow the steps below
 4. Check the request headers for a RUM resource and verify that the [required headers are set by the SDK][2].
 
 [1]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview
-[2]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=androidrum#how-are-rum-resources-linked-to-traces
+[2]: https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=androidrum#how-are-rum-resources-linked-to-traces
 
 {{% /tab %}}
 {{% tab "iOS" %}}

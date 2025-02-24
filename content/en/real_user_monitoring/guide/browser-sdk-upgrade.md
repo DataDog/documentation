@@ -404,7 +404,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/browser/
-[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support
+[25]: /real_user_monitoring/correlate_with_other_telemetry/apm#opentelemetry-support
 [27]: /real_user_monitoring/guide/proxy-rum-data
 [28]: /real_user_monitoring/browser/setup/#initialization-parameters
 [29]: /real_user_monitoring/correlate_with_other_telemetry/apm/tab=browserrum#:~:text=configure%20the%20traceContextInjection
