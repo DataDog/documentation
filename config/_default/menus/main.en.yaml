@@ -2492,11 +2492,16 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Case Automation Rules
+      url: service_management/case_management/automation_rules
+      parent: case_management
+      identifier: case_management_automation_rules
+      weight: 3
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 3
+      weight: 4
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
