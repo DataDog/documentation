@@ -1,5 +1,5 @@
 ---
-title: Cost Anomalies
+title: Anomalies Page
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
