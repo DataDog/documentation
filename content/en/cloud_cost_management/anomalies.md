@@ -29,11 +29,15 @@ On this page, you will find a comprehensive list of cost anomalies that have bee
 
 These cards provide a clear overview of each anomaly, enabling you to quickly assess and address the cost irregularities within your system.
 
+<!-- SCREENSHOT -->
+
 ## Take action on anomalies
 
 When you click on an anomaly in the list, a side panel will open, providing you with detailed information related to that anomaly. This includes insights such as the associated service, team, and environment, offering a clearer context of the issue.
 
 Inside the side panel, you'll find a section titled **Next Steps**, guiding you on actionable measures to address and further investigate the anomaly.
+
+<!-- SCREENSHOT -->
 
 ## Resolve anomalies
 
@@ -42,6 +46,8 @@ During the anomaly resolution process, you have the opportunity to assess whethe
 Once you've made your assessment, you can proceed to "Resolve" the anomaly. This action will guide you to a dedicated section where you can provide a detailed explanation of your decision and the reasons behind the resolution.
 
 Your insights will assist colleagues within your organization in understanding the rationale behind your resolution decision, fostering a shared comprehension and more efficient management of anomalies.
+
+<!-- SCREENSHOT -->
 
 ### Investigate
 
@@ -55,6 +61,7 @@ To effectively investigate cost anomalies, consider taking the following actions
 
 - **Share**: Easily share the URL with colleagues to facilitate collaborative investigation, ensuring all relevant team members have access to the necessary information for effective analysis.
 
+<!-- SCREENSHOT -->
 
 ## How anomalies are defined
 
