@@ -24,10 +24,6 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 {{< img src="datadog_cloudcraft/cloudcraft_datadog.mp4" alt="Cloudcraft in Datadog video" video=true >}}
 
-## Getting started 
-
-To get started with Cloudcraft, users must add one or more AWS account integrations with sufficient permissions, and enable resource collection for them.
-
 <div class="alert alert-info">Cloudcraft in Datadog is currently only available for AWS accounts.</a></div>
 
 ### Prerequisites
@@ -38,13 +34,21 @@ To get started with Cloudcraft, users must add one or more AWS account integrati
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the user-interface(UI).
 
-## Saved views
+## Getting started
 
-Saved views offer a convenient way to apply predefined sets of group-bys and filters, allowing you to view your resources from different perspectives. This feature simplifies the process of applying groupings and filters to your diagrams, allowing you to focus on specific aspects of your architecture.
+To get started using Cloudcraft, select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
 
-Cloudcraft provides three built-in saved views: [Infrastructure](#infrastructure-diagram), [Network](#network-diagram), and [Security](#security-diagram). These views are designed to address different operational needs.
+{{< img src="datadog_cloudcraft/getting_started.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
-{{< img src="datadog_cloudcraft/saved_views_2.png" alt="Screenshot of the three available saved views in Cloudcraft" style="width:80%;" >}}
+**Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
+
+## Presets
+
+Presets offer a convenient way to apply predefined sets of group-bys and filters, allowing you to view your resources from different perspectives. This feature simplifies the process of applying groupings and filters to your diagrams, allowing you to focus on specific aspects of your architecture.
+
+Cloudcraft provides three built-in presets: [Infrastructure](#infrastructure-diagram), [Network](#network-diagram), and [Security](#security-diagram). These views are designed to address different operational needs.
+
+{{< img src="datadog_cloudcraft/presets.png" alt="Screenshot of the three available presets in Cloudcraft" style="width:80%;" >}}
 
 ### Infrastructure diagram
 
@@ -68,30 +72,70 @@ The security view focuses on potential security exposures, grouping resources by
 
 This diagram excludes EBS, NAT Gateway, and other components that might clutter the security view. 
 
-**Note**: By default, when you select the Security diagram view, the [Overlay]() feature defaults to **Security Findings**.
+**Note**: By default, when you select the Security diagram view, the [Overlay](#overlays) feature defaults to **Security Findings**.
 
 {{< img src="datadog_cloudcraft/cloudcraft_security_diagram.png" alt="Screenshot of the Security diagram in Cloudcraft" style="width:100%;" >}}
 
-### Apply a saved view
+### Saved views 
 
 To apply a saved view to your diagram:
 
-- Navigate to [Infrastructure > Cloudcraft][7]. Select one or more accounts, regions, and resources.
+- Navigate to [Infrastructure > Cloudcraft][7]. Select one or more accounts, regions, and resources. Apply any filtering you want to be on your saved view, click **+Save as new view**.
 - Select the desired saved view from the menu at the top of the diagram view. The diagram automatically updates to reflect the chosen view.
 
-**Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
-
-{{< img src="datadog_cloudcraft/aws_integration.png" alt="Screenshot of the AWS integration, highlighting the account name tag" style="width:100%;" >}}
+{{< img src="datadog_cloudcraft/saved_views.png" alt="Screenshot of the saved views" style="width:50%;" >}}
 
 ## Explore resources
 
-In any of the Cloudcraft saved views, you utilize the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource reveals a hover panel with basic information. Clicking on a resource opens a side panel that displays its Datadog observability, cost information, and security data, with cross-links to other Datadog products where relevant.
+In any of the Cloudcraft presets, you utilize the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource reveals a hover panel with basic information. Clicking on a resource opens a side panel that displays its Datadog observability, cost information, and security data, with cross-links to other Datadog products where relevant.
 
 {{< img src="datadog_cloudcraft/zoom_feature_hover.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
 ## Group by
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
+
+Enable the **Show All Controls** toggle to display the available **Group By** options. You can also remove specific groupings by unchecking options like VPC and Region. To view the current nesting structure and add the Network ACL (Network Access Control List) layer, click the **More** dropdown.
+
+{{< img src="datadog_cloudcraft/cloudcraft_group_by_2.mp4" alt="Video showing the Group by feature in Cloudcraft" video=true >}}
+
+## Filtering and search
+
+Diagrams can be filtered by tags, such as team, application, or service, allowing you to concentrate on relevant resources while maintaining context through connected resources. Additionally, Cloudcraft provides a powerful search and highlight feature, enabling ease of location of specific resources or groups of resources.
+
+Click the **\+Filter** menu to quickly filter your resources by commonly used tags such as service, team, region, and more. Additionally, click the **More Filters** option to filter by AWS tags, custom tags, and terraform tags
+
+{{< img src="datadog_cloudcraft/cloudcraft_filter.mp4" alt="Video showing the Filter feature in Cloudcraft" video=true >}}
+
+### Search and highlight
+
+Use the search bar to find resources on the diagram by name, ID or by tag. This feature is highly effective for locating a specific resource within your cloud architecture.
+
+{{< img src="datadog_cloudcraft/search_highlight.mp4" alt="Video showing the search and highlight feature in Cloudcraft" video=true >}}
+
+## Overlays
+
+Cloudcraft supports overlays that integrate various data sources and display them on top of the infrastructure diagram.
+
+{{< img src="datadog_cloudcraft/overlays.png" alt="Screenshot of the overlay section in Cloudcraft" width="50%" >}}
+
+### Security findings
+
+The security findings overlay in Cloudcraft provides an overlay from CSM misconfigurations, allowing you to quickly identify CSM findings. This allows you to:
+
+- Identify security issues in infrastructure diagrams.  
+- View misconfigurations in context to analyze their impact and prioritize remediation  
+- Assess security posture before deploying applications.
+
+By default, the security overlay shows Critical and High misconfigurations, but can be configured by hovering over **Misconfigurations** at the bottom of the screen:
+
+{{< img src="datadog_cloudcraft/csm_misconfigurations.png" alt="Screenshot of the CSM Misconfigurations hover in the Cloudcraft overlay section" width="50%" >}}
+
+### Agent Overlay
+
+The Agent overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not.
+
+{{< img src="datadog_cloudcraft/agent_overlay.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="50%" >}}
 
 
 [1]: /cloudcraft
