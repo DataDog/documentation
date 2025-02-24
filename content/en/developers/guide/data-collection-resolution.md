@@ -1,5 +1,5 @@
 ---
-title: Datadog Data Collection, Resolution
+title: Datadog Data Collection and Resolution
 disable_sidebar: true
 aliases:
   - /developers/faq/data-collection-resolution-retention/
