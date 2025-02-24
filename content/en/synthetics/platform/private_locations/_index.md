@@ -54,7 +54,9 @@ Private locations are Docker containers that you can install anywhere inside you
 
 {{< site-region region="gov" >}}
 
-Customers who require FIPS support should use the [FIPS compliant image][26] on Docker hub.
+If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
+
+[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
 
 {{< /site-region >}}
 
@@ -1016,5 +1018,4 @@ Use [granular access control][24] to limit who has access to your test based on 
 [23]: /continuous_testing/cicd_integrations/configuration
 [24]: /account_management/rbac/granular_access
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
-[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
 
