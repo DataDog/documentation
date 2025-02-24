@@ -1,6 +1,7 @@
 ---
 title: Trace Groups
 description: "Trace Groups"
+private: true
 aliases:
 further_reading:
 - link: 'tracing/trace_explorer'
@@ -10,6 +11,10 @@ further_reading:
   tag: 'Documentation'
   text: 'Span Query Syntax'
 ---
+
+{{< callout url="https://www.datadoghq.com/support/" header="Request access to the Preview!" >}}
+Trace Groups are in Preview. To request access, contact Datadog support.
+{{< /callout >}}
 
 ## Overview
 
