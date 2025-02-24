@@ -64,6 +64,23 @@ With the `mask_sensitive_inputs` setting enabled, all text and inputs are shown 
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        TextAndInputPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS,
+    }
+
+    SessionReplay.enable(config)
+
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Mask all inputs
@@ -93,6 +110,23 @@ With the `mask_all_inputs` setting enabled, all inputs fields are masked in the 
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        TextAndInputPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL_INPUTS,
+    }
+
+    SessionReplay.enable(config)
+
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Mask all
@@ -119,6 +153,23 @@ With the `mask_all` setting enabled, all text and input fields are masked in the
         touchPrivacyLevel: touchPrivacyLevel
     )
     SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        TextAndInputPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_ALL,
+    }
+
+    SessionReplay.enable(config)
 
 {{< /code-block >}}
 {{% /tab %}}
@@ -154,6 +205,23 @@ With the `mask_all` setting enabled, all images are replaced by placeholders lab
         touchPrivacyLevel: touchPrivacyLevel
     )
     SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        ImagePrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_ALL,
+    }
+
+    SessionReplay.enable(config)
 
 {{< /code-block >}}
 {{% /tab %}}
@@ -202,6 +270,23 @@ On Android, users can select the `mask_large_only` setting, which replaces image
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        ImagePrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_NON_BUNDLED_ONLY,
+    }
+
+    SessionReplay.enable(config)
+
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Show all images
@@ -228,6 +313,23 @@ With the `mask_none` setting enabled, all images are shown in the replay.
         touchPrivacyLevel: touchPrivacyLevel
     )
     SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        ImagePrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE,
+    }
+
+    SessionReplay.enable(config)
 
 {{< /code-block >}}
 {{% /tab %}}
@@ -263,6 +365,23 @@ With the `hide` setting enabled, all touches that occur during the replay are hi
 
 {{< /code-block >}}
 {{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        TouchPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        touchPrivacyLevel: TouchPrivacyLevel.HIDE,
+    }
+
+    SessionReplay.enable(config)
+
+{{< /code-block >}}
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Show all touches
@@ -289,6 +408,23 @@ With the `show` setting enabled, all touches that occur during the replay are sh
         touchPrivacyLevel: .show
     )
     SessionReplay.enable(with: sessionReplayConfig)
+
+{{< /code-block >}}
+{{% /tab %}}
+{{% tab "React Native" %}}
+{{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+    import {
+        SessionReplay,
+        SessionReplayConfiguration,
+        TouchPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+    const config: SessionReplayConfiguration = {
+        replaySampleRate: sampleRate, 
+        touchPrivacyLevel: TouchPrivacyLevel.SHOW,
+    }
+
+    SessionReplay.enable(config)
 
 {{< /code-block >}}
 {{% /tab %}}

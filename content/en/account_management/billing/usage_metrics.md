@@ -68,6 +68,10 @@ Estimated usage metrics are generally available for the following usage types:
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
+## Dashboards
+
+Out-of-the-box estimated usage dashboards are available, offering useful queries with these metrics. You can clone these dashboards to help you get started with usage metrics. To find these dashboards, navigate to [Dashboards preset lists][5] and search for "Estimated Usage."
+
 ## Multi-Org usage
 
 For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
@@ -84,3 +88,4 @@ For billing questions, contact your [Customer Success][2] Manager.
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage

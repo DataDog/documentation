@@ -19,10 +19,6 @@ further_reading:
 <div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Early Flake Detection is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Early Flake Detection is Datadog's test flakiness solution that enhances code quality by identifying [flaky tests][1] early in the development cycle. For more information about flaky tests, see [Flaky Test Management][2].
@@ -50,7 +46,7 @@ Before implementing Early Flake Detection, you must configure [Test Optimization
 
 ### Configuration
 
-After you have set up your Datadog library for Test Optimization, you can configure Early Flake Detection from the [Test Service Settings page][7].
+After you have set up your Datadog library for Test Optimization, you can configure Early Flake Detection from the [Test Optimization Settings page][7].
 
 {{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Early flake Detection in Test Service Settings." style="width:100%" >}}
 
@@ -79,11 +75,22 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 `dd-trace-java>=1.34.0`
 
+The test framework compatibility is the same as [Test Optimization Compatibility][2], with the exception of `Scala Weaver`.
+
+[2]: /tests/setup/java/#compatibility
 {{% /tab %}}
 
 {{% tab ".NET" %}}
 
 `dd-trace-dotnet>=2.51.0`
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+<div class="alert alert-info">Early Flake Detection is available using the beta of the new pytest plugin. Set the <code>DD_PYTEST_USE_NEW_PLUGIN_BETA</code> environment variable to <code>true</code> to enable it.</div>
+
+`dd-trace-py>=2.18.0` (`pytest>=7.2.0`)
 
 {{% /tab %}}
 
@@ -95,9 +102,13 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 {{% tab "Go" %}}
 
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
-
 `orchestrion >= 0.9.4 + dd-trace-go >= 1.69.1`
+
+{{% /tab %}}
+
+{{% tab "Swift" %}}
+
+`dd-sdk-swift-testing>=2.5.2`
 
 {{% /tab %}}
 
@@ -106,7 +117,7 @@ The test framework compatibility is the same as [Test Optimization Compatibility
 
 ## Manage Excluded Branches
 
-Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
+Excluded Branches do not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection. You can manage the list of excluded branches on the [Test Optimization Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
 
 ## Explore results in the Test Optimization Explorer
 
@@ -117,7 +128,7 @@ You can use the following facets to query sessions that run Early Flake Detectio
 
 ## Troubleshooting
 
-If you suspect there are issues with Early Flake Detection, navigate to the [Test Service Settings page][7], look for your test service, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+If you suspect there are issues with Early Flake Detection, navigate to the [Test Optimization Settings page][7], look for your repository, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
 
 ### A new test is not being retried
 
@@ -140,6 +151,6 @@ If the Datadog library can't fetch the full list of known tests, the Datadog lib
 [4]: /quality_gates/
 [5]: /quality_gates/setup
 [6]: /tests
-[7]: https://app.datadoghq.com/ci/settings/test-service
+[7]: https://app.datadoghq.com/ci/settings/test-optimization
 [8]: /tests/explorer/
 [9]: /help/

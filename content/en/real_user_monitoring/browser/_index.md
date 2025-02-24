@@ -24,7 +24,7 @@ With the Datadog RUM Browser SDK, you can also:
 - Surface user pain points with frustration signals
 - Pinpoint the cause of an error down to the line of code to resolve it
 
-{{< img src="real_user_monitoring/browser/rum-browser-overview.png" alt="RUM performance summary dashboard" style="width:100%;">}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM performance summary dashboard" style="width:100%;">}}
 
 The responsibility of keeping user data secure is shared between Datadog and developers who leverage the RUM SDKs. Learn more about [Shared responsibility][1].
 

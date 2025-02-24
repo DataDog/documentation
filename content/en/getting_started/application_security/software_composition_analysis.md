@@ -6,10 +6,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
   tag: "Blog"
   text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis"
-- link: "/code_analysis/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Read more about Software Composition Analysis in source code"
-- link: "/security/application_security/software_composition_analysis"
+- link: "/security/code_security/software_composition_analysis"
   tag: "Documentation"
   text: "Read more about Software Composition Analysis in ASM libraries"
 - link: "/security/application_security/how-appsec-works"
@@ -42,7 +42,7 @@ First, see the [Library Compatibility][12] requirements page to verify if the Da
 4. Click **Enable for Selected Service(s)** to complete the activation of Software Composition Analysis (SCA) for the chosen service(s).
    
    
-   {{< img src="/security/application_security/software_composition_analysis/APM_SCA-enablement-quick-start-guide.mp4" alt="quick start guide in the Datadog UI" video="true">}}
+   {{< img src="/code_security/software_composition_analysis/APM_SCA-enablement-quick-start-guide.mp4" alt="quick start guide in the Datadog UI" video="true">}}
 
 ### Enable SCA on your repositories and services using the Settings page
 
@@ -54,11 +54,11 @@ First, see the [Library Compatibility][12] requirements page to verify if the Da
 
 1. Click **Select Repositories** on your desired GitHub account and toggle **Enable Software Composition Analysis (SCA)** to enable for all repositories. If you do not see any GitHub accounts listed, [create a new GitHub App][14] to get started.
    
-{{< img src="/security/application_security/software_composition_analysis/SCA-github-all-repositories.png" alt="enable SCA for all repositories">}}
+{{< img src="/code_security/software_composition_analysis/SCA-github-all-repositories.png" alt="enable SCA for all repositories">}}
    
 Optionally, you can select specific GitHub repositories to enable SCA by clicking the toggle for each repository.
    
-{{< img src="/security/application_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
+{{< img src="/code_security/software_composition_analysis/SCA-github-enabled-repositories.png" alt="enable SCA for all repositories" style="width:100%;" >}}
 
 #### Enable SCA on services
 
@@ -68,14 +68,14 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 <br>      
 
 
-{{< img src="/security/application_security/software_composition_analysis/SCA-enablement-settings-services.mp4" alt="SCA enablement in the Datadog UI" video="true">}}
+{{< img src="/code_security/software_composition_analysis/SCA-enablement-settings-services.mp4" alt="SCA enablement in the Datadog UI" video="true">}}
 
 ## Phase 2: Identify
 1. **Identify Vulnerabilities**: Navigate to [Vulnerabilities][5].  
    - Sort by `Status`, `Vulnerability Source`, and `Severity`.
    - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
-   {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
+   {{< img src="/code_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
    Each vulnerability has its own status to help prioritize and manage findings:
 
@@ -114,7 +114,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
+3. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click [View in Software Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:
@@ -129,21 +129,25 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
    {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management recommended remediation steps of the vulnerability." style="width:100%;" >}}
 
+## Disable SCA
+
+For information on disabling Software Composition Analysis, see [Disabling Software Composition Analysis][16].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/vulnerability_management/
+[1]: /security/code_security/software_composition_analysis/
 [4]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [5]: https://app.datadoghq.com/security/appsec/vm
 [6]: https://app.datadoghq.com/services
-[7]: /tracing/service_catalog/#security-view
-[8]: /tracing/service_catalog/#investigate-a-service
+[7]: /tracing/software_catalog/#security-view
+[8]: /tracing/software_catalog/#investigate-a-service
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [13]: https://app.datadoghq.com/security/configuration/asm/setup
 [14]: https://docs.datadoghq.com/integrations/github/
-[15]: /security/application_security/software_composition_analysis/setup/compatibility/
+[15]: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
+[16]: /security/application_security/troubleshooting/#disabling-software-composition-analysis

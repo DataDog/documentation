@@ -46,31 +46,20 @@ With this information, developers get instant feedback about their tests results
 
 <div class="alert alert-info">This integration is only available for test services hosted on `github.com`.</div>
 
-### Enable test summaries
+## Enable test summaries
 
 You can enable test summaries in pull requests with the following steps:
 
 1. Install the [GitHub integration][4]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][6] and click **+ Create GitHub App**.
-   2. Give the application read and write permissions for pull requests.
-2. Enable test summaries for one or more test services. You can do this from the [Test Service Settings page][3] or from the commit/branch page.
+   1. Give the application read and write permissions for pull requests.
+1. Navigate to the [Test Optimization Settings page][3].
+1. Select the repository where you want to enable test summaries.
+1. Toggle **GitHub Comments**.
 
-### Test service settings page
+{{< img src="ci/enable-settings-github-comments.png" alt="The Test Optimization Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
 
-1. Navigate to the [Test Service Settings page][3] and search for the test service you want to enable. You can also search by repository.
-2. For the desired service, enable the toggle under the **GitHub Comments** column.
-
-{{< img src="ci/enable-settings-github-comments.png" alt="The Test Service Settings tab in Datadog with GitHub comments enabled for one test service" style="width:100%;">}}
-
-### Commit or branch page
-
-1. Go to the test service commit or branch page where you want to enable GitHub comments.
-2. Click on the **Settings** icon and click **View Test Service Settings**.
-3. Select **Enable GitHub Comments** so that comments display on new pull requests. This change may take a few minutes.
-
-{{< img src="ci/enable-github-comments.png" alt="Enable GitHub comments dropdown" style="width:100%;">}}
-
-Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled test service.
+Comments only appear on pull requests that were opened before the test run and that have run at least one test for an enabled repository.
 
 ## Create and open GitHub issues
 
@@ -182,7 +171,7 @@ IDE plugins and extensions are required to view your test in your IDE.
 
 [1]: /continuous_integration/guides/pull_request_comments/
 [2]: https://plugins.jetbrains.com/plugin/19495-datadog/versions
-[3]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com/ci/settings/test-optimization
 [4]: /integrations/github/
 [5]: /continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
@@ -190,3 +179,4 @@ IDE plugins and extensions are required to view your test in your IDE.
 [8]: /service_management/case_management/view_and_manage#take-action
 [9]: https://app.datadoghq.com/cases
 [10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[11]: https://app.datadoghq.com/ci/test-repositories

@@ -28,6 +28,13 @@ docker run --rm datadog/synthetics-private-location-worker --help
 synthetics-pl-worker.exe --help
 ```
 {{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Refer to the example in the [Datadog Helm repository][1].
+	
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+ 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Customize your private location
