@@ -41,7 +41,7 @@ Data security considerations
 
 ## Configure the AWS integration
 
-Enable **Remote Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
+Enable **Resource Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][3].
 
 ## Configure Postgres settings
 
