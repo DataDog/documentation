@@ -223,7 +223,7 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [4]: https://plugins.jetbrains.com/plugin/19495-datadog
 [5]: /logs/explorer/
 [6]: /tracing/error_tracking/
-[8]: /security/application_security/vulnerability_management/
+[8]: /security/code_security/software_composition_analysis/
 [9]: /continuous_integration/guides/flaky_test_management/
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
