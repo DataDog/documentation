@@ -24,7 +24,7 @@ requests:
     link: "/infrastructure/process"
     image: "int_processes.png"
   - name: "Files and Directories"
-    description: The Directory check measures the age of files, the number of files in a directory, or the size of a directory."
+    description: The Directory check measures the age of files, the number of files in a directory, or the size of a directory.
     link: "/integrations/directory"
     image: "int_files.png"
   - name: "Endpoint"
