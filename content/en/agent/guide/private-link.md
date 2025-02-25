@@ -1,6 +1,9 @@
 ---
 title: Connect to Datadog over AWS PrivateLink
 further_reading:
+    - link: 'https://www.datadoghq.com/architecture/using-cross-region-aws-privatelink-to-send-telemetry-to-datadog/'
+      tag: "Architecture Center"
+      text: 'Using Cross-Region AWS PrivateLink to Send Telemetry to Datadog'
     - link: '/agent/logs'
       tag: 'Documentation'
       text: 'Enable log collection with the Agent'
