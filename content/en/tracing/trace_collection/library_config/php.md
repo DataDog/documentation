@@ -34,7 +34,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ## Apache
 
-For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with PHP-FPM, use the `env[]` directive in your `www.conf` configuration file to configure the PHP tracer. For example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -47,7 +47,9 @@ env[DD_SERVICE] = my-app
 php_value datadog.service my-app
 ```
 
-Alternatively, you can use [`SetEnv`][2] from the server config, virtual host, directory, or `.htaccess` file.
+**Note:** By default, PHP-FPM does not inherit environment variables from the host system when `clear_env=yes` is set in `www.conf`. If you need to use environment variables set on the host, you must explicitly define them using the `env[]` directive.
+
+For Apache without PHP-FPM (mod_php setups), you can set environment variables directly in the server config, virtual host, directory, or `.htaccess` file using [`SetEnv`][2]:
 
 ```text
 # In a virtual host configuration as an environment variable

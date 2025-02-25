@@ -23,10 +23,7 @@ Datadog provides cost visibility on a Subscription, Resource Group, and Billing 
 
 
 {{% site-region region="us3" %}}
-**Notes**:
-- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
-- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
-- Pay-as-you-go accounts are not supported.
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -107,7 +104,6 @@ For faster processing, generate the first exports manually by clicking **Run Now
 
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
-**Note**: For Microsoft Customer Agreement, set up at the subscription level.
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
