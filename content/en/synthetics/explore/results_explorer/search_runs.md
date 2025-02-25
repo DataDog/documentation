@@ -22,19 +22,29 @@ You can use facets to accomplish the following actions:
 
 ## Explore facets
 
-<div class="alert alert-info">The list of available facets below may vary depending on your site and region.</a></div>
-
 The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with **Common**.
+
+<div class="alert alert-info">The list of available facets below may vary depending on your site and region.</a></div>
 
 ### Common test run attributes
 
+{{< tabs >}}
+{{% tab "v0" %}}
+
+| Facet                            | Description                                                                                                    |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `Batch ID`                       | The batch ID associated with the test run.                                                                     |
+| <code>Execution&nbsp;Rule</code> | The execution rule associated with the test result of the CI batch: `Blocking`, `Non Blocking`, and `Skipped`. |
+| `Location`                       | The location associated with the test result of the batch.                                                     |
+| `Passed`                         | The overall status of the test run.                                                                            |
+| `Run Type`                       | The run type of the test run. It can be scheduled, CI, or manually triggered.                                  |
+
+{{% /tab %}}
+
+{{% tab "v1" %}}
+
 | Facet                              | Description                                                                                             |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|
-| `Batch ID`                         | The batch ID associated with the test run.                                                              |
-| <code>Execution&nbsp;Rule</code>   | The execution rule associated with the test result of the CI batch: `Blocking`, `Non Blocking`, and `Skipped`. |
-| `Location`                         | The location associated with the test result of the batch.                                              |
-| `Passed`                           | The overall status of the test run.                                                                     |
-| `Run Type`                         | The run type of the test run. It can be scheduled, CI, or manually triggered.                           |
 | `Failure Code`                     | Code indicating reason for test failure.                                                                  |
 | `Test Type`                        | Type of test being executed.                                                                               |
 | `Test Subtype`                     | Specific subtype of the test.                                                                             |
@@ -50,6 +60,9 @@ The facets panel on the left lists several facets you can use to search through 
 | `Trace ID`                         | Trace identifier for tracking.                                                                          |
 | `Open Telemetry ID`                | Open Telemetry identifier.                                                                              |
 | `Variable Name`                    | Name of a variable used in the test.                                                                    |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Timings attributes
 
@@ -101,6 +114,10 @@ The facets panel on the left lists several facets you can use to search through 
 
 **Devices** facets are related to the devices used during test runs.
 
+
+{{< tabs >}}
+{{% tab "v1" %}}
+
 | Facet                    | Description                                                  |
 |--------------------------|--------------------------------------------------------------|
 | `Device Name`            | Name of the device used for testing.                         |
@@ -108,19 +125,30 @@ The facets panel on the left lists several facets you can use to search through 
 | `Device Resolution Height`| Height of the device resolution.                            |
 | `Device Type`            | Type of the device used for testing.                         |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Browser attributes
 
 **Browser** facets are related to browser tests.
 
+{{< tabs >}}
+{{% tab "v1" %}}
 | Facet                  | Description                                                     |
 |------------------------|-----------------------------------------------------------------|
 | `Browser Type`         | Browser type used in the test.                                  |
 | `Browser Version`      | Version of the browser used in the test.                        |
 | `Browser User Agent`   | User agent of the browser used.                                 |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### API attributes
 
 **API** facets are related to API test runs.
+
+{{< tabs >}}
+{{% tab "v1" %}}
 
 | Facet                         | Description                                                 |
 |-------------------------------|-------------------------------------------------------------|
@@ -151,20 +179,30 @@ The facets panel on the left lists several facets you can use to search through 
 | `Handshake Response Headers`  | Headers during handshake response.                          |
 | `Handshake Response Status Code` | Status code during handshake response.                   |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Mobile attributes
 
 **Mobile** facets are related to mobile tests.
 
+{{< tabs >}}
+{{% tab "v1" %}}
 | Facet                     | Description                                                 |
 |---------------------------|-------------------------------------------------------------|
 | `Mobile Platform`         | Platform name of the mobile device.                         |
 | `Mobile Application`      | Version ID of the mobile application.                       |
 | `Mobile Platform Version` | Version of mobile platform.                                 |
 | `Device Resolution Pixel Ratio` | Pixel ratio of the device display.                            |
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Continuous Testing attributes
 
 **Continuous Testing** facets are related to continuous testing.
+
+{{< tabs >}}
+{{% tab "v1" %}}
 
 | Facet                    | Description                                                                   |
 |--------------------------|-------------------------------------------------------------------------------|
@@ -183,15 +221,24 @@ The facets panel on the left lists several facets you can use to search through 
 | `CI Stage Name`          | Name of the stage in the CI process.                                          |
 | `CI Workspace Path`      | Workspace path in CI process.                                                 |
 
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Step attributes
 
 **Step** facets are related to test steps.
+
+{{< tabs >}}
+{{% tab "v1" %}}
 
 | Facet         | Description                    |
 |---------------|--------------------------------|
 | `Step ID`     | Identifier for test steps.     |
 | `Step Name`   | Name of the test steps.        |
 | `Step Status` | Status of the test steps.      |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 To filter on test runs that are retries, create a search query using `@result.isFastRetry:true`. You can also retrieve the last run for a test with retries using the `@result.isLastRetry:true` field.
 
