@@ -1408,7 +1408,7 @@ menu:
       weight: 1
     - name: DDSQL Editor
       url: ddsql_editor/
-      pre: inventories
+      pre: ddsql
       identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
@@ -1852,16 +1852,21 @@ menu:
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 10
+    - name: Composite Metrics Queries
+      url: metrics/composite_metrics_queries
+      parent: metrics_top_level
+      identifier: composite_metrics_queries
+      weight: 11
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 11
+      weight: 12
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 12
+      weight: 13
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -2507,11 +2512,16 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Case Automation Rules
+      url: service_management/case_management/automation_rules
+      parent: case_management
+      identifier: case_management_automation_rules
+      weight: 3
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 3
+      weight: 4
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
