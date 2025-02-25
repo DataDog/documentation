@@ -40,8 +40,8 @@ Install and set up the following on your machine:
 
 Choose one of the following installation methods:
 
-- [Datadog Operator][55]: a [Kubernetes-native][56] that approach that automatically reconciles and maintains your Datadog setup. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
-- [Helm chart][4]: quick and simple way to deploy Datadog Agent. It provides versioning, rollback, and templating capabilities, making deployments consistent, and easier to replicate.
+- [Datadog Operator][55]: A [Kubernetes-native][56] approach that automatically reconciles and maintains your Datadog setup. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+- [Helm chart][4]: A straightforward way to deploy Datadog Agent. It provides versioning, rollback, and templating capabilities, making deployments consistent and easier to replicate.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -85,9 +85,9 @@ helm repo update
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent, Cluster Agent and Cluster Checks Runners (if used) in your Kubernetes cluster. The Datadog Agent will be deployed as a DaemonSet, running a pod on every node of your cluster.
+After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent, Cluster Agent and Cluster Checks Runners (if used) in your Kubernetes cluster. The Datadog Agent deploys as a DaemonSet, running a pod on every node of your cluster.
 
-1. Use datadog-agent.yaml file to specify your `DatadogAgent` deployment configuration.
+1. Use the `datadog-agent.yaml` file to specify your `DatadogAgent` deployment configuration.
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
    apiVersion: datadoghq.com/v2alpha1
@@ -107,8 +107,8 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
            keyName: app-key
 {{< /code-block >}}
 
-- Replace `<CLUSTER_NAME>` with a name for your cluster.
-- Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+  - Replace `<CLUSTER_NAME>` with a name for your cluster.
+  - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
 2. Switch the Datadog Agent image to use builds with embedded OpenTelemetry Collector:
 
@@ -143,7 +143,7 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
           name: otel-http
 {{< /code-block >}}
 
-<div class="alert alert-warning">Setting ports 4317 or 4318 manually is only supported if the name matches the default <code>otel-grpc</code> or <code>otel-http</code>. Otherwise, it will result in a port conflict.</div>
+<div class="alert alert-warning">When configuring ports <code>4317</code> and <code>4318</code>, you must use the default names <code>otel-grpc</code> and <code>otel-http</code> respectively to avoid port conflicts.</div>
 
 4. (Optional) Enable additional Datadog features:
 
@@ -247,7 +247,7 @@ Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datad
 
 <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
 
-3. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry Collector:
+3. Switch the Datadog Agent image tag to use builds with the embedded OpenTelemetry Collector:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -278,7 +278,7 @@ datadog:
         name: otel-http
 {{< /code-block >}}
 
-It is required to set the `hostPort` in order for the container port to be exposed to the external network. This enables configuring the OTLP exporter to point to the IP address of the node to which the Datadog Agent is assigned.
+Set the `hostPort` to expose the container port to the external network. This enables configuring the OTLP exporter to point to the IP address of the node where the Datadog Agent is assigned.
 
 If you don't want to expose the port, you can use the Agent service instead:
    - Remove the <code>hostPort</code> entries from your <code>datadog-values.yaml</code> file.
@@ -376,10 +376,10 @@ datadog:
 {{% tab "Datadog Operator" %}}
 The Datadog Operator provides a sample OpenTelemetry Collector configuration that you can use as a starting point. If you need to modify this configuration, the Datadog Operator supports two ways of providing a custom Collector configuration:
 
-- **Inline configuration**: Add your custom collector configuration directly in the `features.otelCollector.conf.configData` field.
-- **ConfigMap-based configuration**: Store your collector configuration in a ConfigMap and reference it in the `features.otelCollector.conf.configMap` field. This approach allows you to keep Collector configuration decoupled from the `DatadogAgent` resource.
+- **Inline configuration**: Add your custom Collector configuration directly in the `features.otelCollector.conf.configData` field.
+- **ConfigMap-based configuration**: Store your Collector configuration in a ConfigMap and reference it in the `features.otelCollector.conf.configMap` field. This approach allows you to keep Collector configuration decoupled from the `DatadogAgent` resource.
 
-####  Inline Collector Configuration
+####  Inline Collector configuration
 
 In the snippet below, the Collector configuration is placed directly under the `features.otelCollector.conf.configData` parameter:
 
@@ -635,7 +635,7 @@ data:
           name: otel-agent-config-map
 {{< /code-block >}}
 
-The Operator automatically mounts `otel-config.yaml` from the ConfigMap into the Agent with OpenTelemetry Collector DaemonSet.
+The Operator automatically mounts `otel-config.yaml` from the ConfigMap into the Agent's OpenTelemetry Collector DaemonSet.
 
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Completed `datadog-agent.yaml` with Collector configuration defined as ConfigMap should look something like this:
@@ -861,13 +861,13 @@ For more information, see the [Collector Health Metrics][8] documentation.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Deploy the Datadog Agent with the above configuration file:
+Deploy the Datadog Agent with the configuration file:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
 ```
 
-After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the deployment of the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is running on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This deploys the Datadog Agent as a DaemonSet with the embedded OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
