@@ -267,7 +267,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
+1. Enter the listener address, which is the address and port the Observability Pipelines Worker listens on for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
