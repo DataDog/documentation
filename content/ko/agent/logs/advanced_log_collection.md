@@ -858,6 +858,6 @@ Datadog 에이전트에서 수집하는 모든 로그는 전역 처리 규칙의
 [1]: /ko/agent/logs/
 [2]: https://golang.org/pkg/regexp/syntax/
 [3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[4]: /ko/agent/faq/commonly-used-log-processing-rules
+[4]: /ko/logs/guide/commonly-used-log-processing-rules
 [5]: /ko/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [6]: /ko/agent/configuration/agent-commands/#agent-information
