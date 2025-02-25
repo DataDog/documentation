@@ -135,84 +135,7 @@ end
 
 ## Data Collected
 
-{{< tabs >}}
-
-{{% tab "Java" %}}
-
-The following metrics are collected by default per JVM process after enabling JVM metrics.
-
-{{< get-metrics-from-git "java" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default JVM Runtime Dashboard][7].
-
-Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][8] for further details on configuration.
-
-[7]: https://app.datadoghq.com/dash/integration/256/jvm-runtime-metrics
-[8]: /integrations/java/#configuration
-
-{{% /tab %}}
-
-{{% tab "Python" %}}
-
-The following metrics are collected by default after enabling runtime metrics:
-
-{{< get-metrics-from-git "python" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Python Runtime Metrics Dashboard][7].
-
-[7]: https://app.datadoghq.com/dash/integration/30267/python-runtime-metrics
-
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
-
-The following metrics are collected by default after enabling Runtime metrics.
-
-{{< get-metrics-from-git "ruby" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7].
-
-[7]: https://app.datadoghq.com/dash/integration/30268/ruby-runtime-metrics
-
-{{% /tab %}}
-
-{{% tab "Go" %}}
-
-The following metrics are collected by default after enabling Go metrics.
-
-{{< get-metrics-from-git "go" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Go Runtime Dashboard][7].
-
-[7]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics
-
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-
-The following metrics are collected by default after enabling runtime metrics.
-
-{{< get-metrics-from-git "node" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Node Runtime Dashboard][6].
-
-[6]: https://app.datadoghq.com/dash/integration/30269/node-runtime-metrics
-
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-
-The following metrics are collected by default after enabling .NET metrics.
-
-{{< get-metrics-from-git "dotnet" >}}
-
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default .NET Runtime Dashboard][6].
-
-[6]: https://app.datadoghq.com/dash/integration/30412/net-runtime-metrics
-
-{{% /tab %}}
-
-{{< /tabs >}}
+See [Runtime Metrics Data Collected][4] for the full list of collected runtime metrics.
 
 ## Additional permissions for IIS
 
@@ -228,7 +151,7 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 
 ## View runtime metric dashboards
 
-After setup is complete, see your runtime metrics in the instrumented service's details page (see Java example below), the flame graph metrics tab, and in [default runtime dashboards][7].
+After setup is complete, see your runtime metrics in the instrumented service's details page (see Java example below), the flame graph metrics tab, and in default runtime dashboards.
 
 {{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
@@ -236,8 +159,13 @@ After setup is complete, see your runtime metrics in the instrumented service's 
 - To associate runtime metrics within flame graphs, ensure the `env` tag (case-sensitive) is set and matching across your environment.
 - For runtime metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and that the configured `env` tag matches the `env` of the instrumented service.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
+[4]: /tracing/metrics/runtime_metrics/data_collected
 [7]: /developers/dogstatsd/unix_socket/
 [8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
