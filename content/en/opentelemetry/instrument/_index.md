@@ -17,15 +17,15 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
 Use the OpenTelemetry API with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/" >}}Use the Datadog SDK with OpenTelemetry API{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/api_support" >}}Use the Datadog SDK with OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure the Datadog SDK with OpenTelemetry SDK environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### OpenTelemetry instrumentation libraries
 
-Use existing OpenTelemetry auto-instrumentation libraries with Datadog's backend.
+Extend your observability with OpenTelemetry [instrumentation libraries][2] alongside Datadog's SDK.
 
-Datadog supports OpenTelemetry-compatible instrumentations which provides observability for libraries not covered by Datadog SDKs, without changing SDKs. You can extend Datadog's tracing capabilities to these frameworks.
+Datadog supports OpenTelemetry-compatible instrumentation libraries which provide observability for frameworks and technologies not covered by Datadog's native SDKs. This allows you to instrument additional components while still sending data to Datadog's backend.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/instrument/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
@@ -33,12 +33,10 @@ Datadog supports OpenTelemetry-compatible instrumentations which provides observ
 
 ### OpenTelemetry SDK
 
-The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. When configured with the Datadog Exporter and Datadog Connector, you can send your traces, logs, and metrics to Datadog without the Datadog Agent.
-
-<div class="alert alert-info">If you instrument your applications fully with OTel, some Datadog features are not supported. For more information, see the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table.</div>
+{{% opentelemetry/otel-sdks %}}
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://opentelemetry.io/docs/languages/" >}}Use OpenTelemetry SDK{{< /nextlink >}}
+    {{< nextlink href="https://opentelemetry.io/docs/languages/" >}}Use OpenTelemetry SDKs{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
@@ -46,3 +44,4 @@ The OpenTelemetry Collector enables you to collect, process, and export telemetr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/setup/collector_exporter/
+[2]: https://opentelemetry.io/docs/specs/otel/overview/#instrumentation-libraries

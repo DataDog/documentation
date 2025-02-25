@@ -1,0 +1,3 @@
+The OpenTelemetry Collector enables you to collect, process, and export telemetry data from your applications in a vendor-neutral way. When configured with the Datadog Exporter and Datadog Connector, you can send your traces, logs, and metrics to Datadog without the Datadog Agent.
+
+<div class="alert alert-info">If you instrument your applications fully with OTel, some Datadog features are not supported. For more information, see the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table.</div>

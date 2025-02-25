@@ -24,7 +24,7 @@ Datadog tracing libraries provide an implementation of the [OpenTelemetry API][1
 
 {{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry SDK sends data via OTLP protocol to a Collector with Datadog Exporter, which forwards to Datadog's platform." style="width:100%;" >}}
 
-By [instrumenting your code with OpenTelemetry API][2]:
+By [instrumenting your code with OpenTelemetry APIs][2]:
 
 - Your code remains free of vendor-specific API calls.
 - Your code does not depend on Datadog tracing libraries at compile time (only runtime).
@@ -32,13 +32,17 @@ By [instrumenting your code with OpenTelemetry API][2]:
 
 Replace the OpenTelemetry SDK with the Datadog tracing library in the instrumented application, and the traces produced by your running code can be processed, analyzed, and monitored alongside Datadog traces and in Datadog proprietary products such as [Continuous Profiler][3], [Data Streams Monitoring][4], [Application Security Management][5], and [Live Processes][6].
 
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel API with Datadog SDK and Agent</b>.</div>
+
 
 To learn more, follow the link for your language:
 
 {{< partial name="apm/otel-instrumentation.html" >}}
 
 <br>
+
+<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel API with Datadog SDK and Agent</b>.</div>
+
+
 
 ## Further reading
 
