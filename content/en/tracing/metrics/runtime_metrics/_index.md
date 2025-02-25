@@ -25,22 +25,56 @@ further_reading:
 
 Runtime metrics are application metrics about memory usage, garbage collection, or parallelization. Datadog tracing libraries can automatically collect these metrics for supported environments and send them to the Datadog agent.
 
-This behavior is enabled by default for the Java tracing library.
-
 ## Tracing requirements
 
-| Language | Library Version       |
-|----------|-----------------------|
-| Java     | 0.29.0+               |
-| Python   | 0.30.0+               |
-| Ruby     | 0.44.0+               |
-| Go       | 1.18.0+               |
-| Node.js  | 3.0.0+                |
-| .NET     | 1.23.0+               |
+| Language | Library Version       | Enabled By Default | Generates runtime-id granularity |
+|----------|-----------------------|--------------------|----------------------------------|
+| Python   | 0.30.0+               | No                 | No                               |
+| Java     | 0.29.0+               | Yes                | Yes                              |
+| Node.js  | 3.0.0+                | No                 | No                               |
+| Go       | 1.18.0+               | No                 | Yes                              |
+| Ruby     | 0.44.0+               | No                 | No                               |
+| .NET     | 1.23.0+               | No                 | Yes                              |
+| PHP      | Not supported         |                    |                                  |
+| C++      | Not supported         |                    |                                  |
 
-Caveats:
-- **For Ruby applications**, you must add the [`dogstatsd-ruby`][1] gem to your Ruby application.
-- **For .NET applications**, runtime metrics are only supported on .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
+### Caveats
+
+{{< tabs >}}
+
+{{% tab "Java" %}}
+
+#### Supported runtimes
+Runtime metrics are only supported on Java 8.
+
+{{% /tab %}}
+
+{{% tab "Ruby" %}}
+
+You must add the [`dogstatsd-ruby`][1] gem to your Ruby application.
+
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+
+#### Supported runtimes
+Runtime metrics are only supported on .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
+
+#### Additional permissions for IIS
+
+On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
+
+IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for `IIS APPPOOL\<name of the pool>`. For instance, the user for the DefaultAppPool would be `IIS APPPOOL\DefaultAppPool`.
+
+This can be done either from the "Computer Management" UI, or from an administrator command prompt:
+
+```
+net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Getting started
 
@@ -79,9 +113,17 @@ For containerized environments, follow the links below to enable DogStatsD metri
 : **Default**: `8125` <br>
 **Description**: Sets the port for the tracing library's metric submission.
 
-#### Additional In-Code configuration
+#### Additional configuration
 
 {{< tabs >}}
+
+{{% tab "Java" %}}
+
+Runtime metrics cannot be enabled in code.
+
+Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][8] for further details on configuration.
+
+{{% /tab %}}
 
 {{% tab "Python" %}}
 
@@ -96,13 +138,11 @@ RuntimeMetrics.enable()
 
 {{% tab "Node.js" %}}
 
-Runtime metrics collection can also be enabled with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
+Runtime metrics collection can also be enabled in code with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
 
 ```js
 const tracer = require('dd-trace').init({
-  env: 'prod',
-  service: 'my-web-app',
-  version: '1.0.3',
+  // ...
   runtimeMetrics: true
 })
 ```
@@ -111,7 +151,7 @@ const tracer = require('dd-trace').init({
 
 {{% tab "Go" %}}
 
-Runtime metrics collection can also be enabled by starting the tracer with the `WithRuntimeMetrics` option:
+Runtime metrics collection can also be enabled in code by starting the tracer with the `WithRuntimeMetrics` option:
 
 ```go
 tracer.Start(tracer.WithRuntimeMetrics())
@@ -126,7 +166,7 @@ If your Datadog Agent DogStatsD address differs from the default `localhost:8125
 
 {{% tab "Ruby" %}}
 
-Runtime metrics collection can also be enabled by setting the following configuration in your Ruby application:
+Runtime metrics collection can also be enabled in code by setting the following configuration in your Ruby application:
 
 ```ruby
 # config/initializers/datadog.rb
@@ -134,8 +174,6 @@ require 'datadog/statsd'
 require 'datadog' # Use 'ddtrace' if you're using v1.x
 
 Datadog.configure do |c|
-  # To enable runtime metrics collection, set `true`. Defaults to `false`
-  # You can also set DD_RUNTIME_METRICS_ENABLED=true to configure this.
   c.runtime_metrics.enabled = true
 
   # Optionally, you can configure the DogStatsD instance used for sending runtime metrics.
@@ -147,19 +185,13 @@ end
 
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+Runtime metrics cannot be enabled in code.
+
+{{% /tab %}}
+
 {{< /tabs >}}
-
-## Additional permissions for IIS
-
-On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
-
-IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for `IIS APPPOOL\<name of the pool>`. For instance, the user for the DefaultAppPool would be `IIS APPPOOL\DefaultAppPool`.
-
-This can be done either from the "Computer Management" UI, or from an administrator command prompt:
-
-```
-net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
-```
 
 ## Data Collected
 
