@@ -30,6 +30,7 @@ On this page, you will find a comprehensive list of cost anomalies that have bee
 These cards provide a clear overview of each anomaly, enabling you to quickly assess and address the cost irregularities within your system.
 
 <!-- SCREENSHOT -->
+{{< img src="cloud_cost/anomalies/cost anomalies - list.png" alt="List of cost anomalies automatically detected" style="width:100%;" >}}
 
 ## Take action on anomalies
 
@@ -38,6 +39,7 @@ When you click on an anomaly in the list, a side panel will open, providing you 
 Inside the side panel, you'll find a section titled **Next Steps**, guiding you on actionable measures to address and further investigate the anomaly.
 
 <!-- SCREENSHOT -->
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel" alt="In the side panel you can take action on your cost anomaly, we are display detailed information related to it" style="width:100%;" >}}
 
 ## Resolve anomalies
 
@@ -48,6 +50,9 @@ Once you've made your assessment, you can proceed to "Resolve" the anomaly. This
 Your insights will assist colleagues within your organization in understanding the rationale behind your resolution decision, fostering a shared comprehension and more efficient management of anomalies.
 
 <!-- SCREENSHOT -->
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel - is significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:100%;" >}}
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - is significant.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it should be an anomaly  and then resolve it" style="width:100%;" >}}
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - not an anomaly.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it's not an anomaly and then resolve it" style="width:100%;" >}}
 
 ### Investigate
 
@@ -62,6 +67,8 @@ To effectively investigate cost anomalies, consider taking the following actions
 - **Share**: Easily share the URL with colleagues to facilitate collaborative investigation, ensuring all relevant team members have access to the necessary information for effective analysis.
 
 <!-- SCREENSHOT -->
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel - next steps.png" alt="The next steps section will help you investigate your cost anomaly" style="width:100%;" >}}
+
 
 ## How anomalies are defined
 
@@ -71,5 +78,5 @@ For example:
 Many business spin down a part of their infrastructure over the weekend and spin back up on Mondays, that's a cost increase but it shouldn't be flag as an anomaly.
 
 We are using the anomaly detection function to compute those anomalies. Here a link on [how it works][1].
-
+g
 [1]: /dashboards/functions/algorithms/#anomalies
