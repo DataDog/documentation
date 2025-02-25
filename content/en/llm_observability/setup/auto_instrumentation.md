@@ -266,7 +266,7 @@ The LangChain integration provides automatic tracing for the [LangChain Node.js 
 
 ### ESM support
 
-Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following node option:
+Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following Node option:
 
 ```bash
 --import dd-trace/register.js
@@ -298,7 +298,7 @@ register('import-in-the-middle/hook.mjs', import.meta.url, {
 });
 ```
 
-To use this custom loader, run your application with the following node option:
+To use this custom loader, run your application with the following Node option:
 
 ```bash
 --import ./hook.mjs
