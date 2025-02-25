@@ -210,6 +210,50 @@ Agent `v7.61+` is required.
 
 For network traffic paths on Windows environments, only detected TCP connections are shown.
 
+**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
+
+Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
+
+<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
+
+1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
+
+   ```
+   traceroute:
+     enabled: true
+   ```
+
+2. Enable `network_path` to monitor CNM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
+
+    ```yaml
+    network_path:
+      connections_monitoring:
+        enabled: true
+      # collector:
+        # workers: <NUMBER OF WORKERS> # default 4
+    ```
+
+    For full configuration details, reference the [example config][3], or use the following:
+
+    ```yaml
+    network_path:
+      connections_monitoring:
+        ## @param enabled - bool - required - default:false
+        ## Enable network path collection
+        #
+        enabled: true
+      collector:
+        ## @param workers - int - optional - default:4
+        ## Number of workers that can collect paths in parallel
+        ## Recommendation: leave at default
+        #
+        # workers: <NUMBER OF WORKERS> # default 4
+    ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1697
+
 {{% /tab %}}
 {{< /tabs >}}
 
