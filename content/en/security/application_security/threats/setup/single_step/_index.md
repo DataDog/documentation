@@ -83,7 +83,7 @@ DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENA
 [2]: /agent/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /service_catalog/
+[5]: /software_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -165,7 +165,7 @@ docker run -d --name dd-agent \
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /service_catalog/
+[6]: /software_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 
