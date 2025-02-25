@@ -1817,29 +1817,29 @@ menu:
       parent: metrics_top_level
       identifier: metrics_distributions
       weight: 4
+    - name: Overview
+      identifier: metrics_overview
+      url: metrics/overview/
+      parent: metrics_top_level
+      weight: 5
     - name: Explorer
       url: metrics/explorer/
       parent: metrics_top_level
       identifier: metrics_explorer
-      weight: 5
+      weight: 6
     - name: Metrics Units
       identifier: metrics_units
       url: metrics/units/
       parent: metrics_explorer
-      weight: 501
+      weight: 601
     - name: Summary
       identifier: metrics_summary
       url: metrics/summary/
       parent: metrics_top_level
-      weight: 6
+      weight: 7
     - name: Volume
       identifier: metrics_volume
       url: metrics/volume/
-      parent: metrics_top_level
-      weight: 7
-    - name: Overview
-      identifier: metrics_overview
-      url: metrics/overview/
       parent: metrics_top_level
       weight: 8
     - name: Advanced Filtering
