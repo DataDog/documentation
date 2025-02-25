@@ -6,7 +6,7 @@ title: Componente Block Blob
 
 Puedes utilizar el componente Block Blob para representar y visualizar blobs de bloques de tu entorno de Azure.
 
-{{< img src="cloudcraft/components-azure/block-blob/component-block-blob-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft en el cual se muestran componentes interconectados de Azure". responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-azure/block-blob/component-block-blob-diagram.png" alt="Captura de pantalla de un diagrama isométrico de Cloudcraft en el cual se muestran componentes interconectados de Azure" responsive="true" style="width:60%;">}}
 
 ## Barra de herramientas
 

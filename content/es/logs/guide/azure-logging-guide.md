@@ -273,7 +273,7 @@ Para obtener más información, consulta [Parámetros de diagnóstico en Azure M
 
 {{% /tab %}}
 
-{{% tab "Blob Storage" (Almacenamiento de blobs)%}}
+{{% tab "Blob Storage (Almacenamiento de blobs)" %}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
 <div class="alert alert-warning">

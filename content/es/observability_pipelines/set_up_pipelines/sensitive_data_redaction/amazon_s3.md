@@ -141,8 +141,8 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 
 {{% observability_pipelines/processors/dedupe %}}
 
-{{% /pestaña %}}
-{{% pestaña "Editar campos" %}}
+{{< /tab >}}
+{{% tab "Editar campos" %}}
 
 {{% observability_pipelines/processors/remap %}}
 
@@ -218,7 +218,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 1. Selecciona tu plataforma en el menú desplegable **Choose your installation platform** (Elige tu plataforma de instalación).
 1. En el campo **AWS S3 SQS URL**, introduce la URL de la cola SQS a la que el bucket S3 envía eventos de notificación.
 1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
-{{< pestañas >}}
+{{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
@@ -297,7 +297,7 @@ Para el destino de archivos de Datadog, sigue las instrucciones del proveedor de
 {{% /tab %}}
 {{< /tabs >}}
 1. Sigue las instrucciones de tu entorno para instalar el worker.
-{{< pestañas >}}
+{{< tabs >}}
 {{% tab "Docker" %}}
 
 {{% observability_pipelines/install_worker/docker %}}
