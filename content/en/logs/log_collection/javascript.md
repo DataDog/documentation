@@ -590,7 +590,7 @@ If your Browser logs contain sensitive information that needs redacting, configu
 The `beforeSend` callback function takes two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
 
 ```javascript
-function beforeSend(log,context)
+function beforeSend(log, context)
 ```
 
 The potential `context` values are:
