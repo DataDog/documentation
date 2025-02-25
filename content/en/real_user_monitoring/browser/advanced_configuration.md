@@ -986,9 +986,9 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-## View context
+## Error context
 
-### Attaching Local Error Context with `dd_context`
+### Attaching local error context with dd_context
 
 When capturing errors, additional context may be needed at the time an error is created. Instead of passing extra context through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event.
 
