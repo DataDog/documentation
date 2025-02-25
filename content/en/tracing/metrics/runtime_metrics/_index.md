@@ -149,10 +149,6 @@ end
 
 {{< /tabs >}}
 
-## Data Collected
-
-See [Runtime Metrics Data Collected][4] for the full list of collected runtime metrics.
-
 ## Additional permissions for IIS
 
 On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
@@ -164,6 +160,10 @@ This can be done either from the "Computer Management" UI, or from an administra
 ```
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
+
+## Data Collected
+
+See [Runtime Metrics Data Collected][4] for the full list of collected runtime metrics.
 
 ## View runtime metric dashboards
 
