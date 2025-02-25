@@ -44,6 +44,8 @@ further_reading:
 - [Synthetic Monitoring](#synthetic-monitoring-events)
 - [Reference Tables](#reference-table-events)
 - [Workflows](#workflow-events)
+- [App Datastore](#app-datastore)
+- [Event Management](#event-management)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -130,7 +132,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
 | [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 | [Repository default branch][33] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
-| [Test service settings][34]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
 | [GitHub account settings][35]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
 
 ### Cloud Security Platform events
@@ -278,6 +279,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Teams Management][95] | A user created, deleted, or modified a team or team association. | `@evt.name:"Teams Management" @action:(created OR deleted OR modified)` |
 
+### Test Optimization events
+| Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| [Test Optimization settings][34]     | A user modified or deleted the settings of a repository.   | `@evt.name:"Test Optimization" @asset.type:test_optimization_settings (@action:modified OR @action:deleted)`            |
+
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -287,6 +293,18 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Notifications][111] | A notification configuration was created, modified, or deleted for a workflow.| `@evt.name:Workflows @action:(created OR modified OR deleted) @asset.type:workflow_notifications` |
 | [Custom Connection][99] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
 | [Step completed][110] | A step was completed. | `@evt.name:Workflows @action:completed @asset.type:step`|
+
+### App Datastore
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Datastore][116] | A user created, deleted, queried, or listed datastores. | `@evt.name:"Apps Datastore" @asset.type:(datastore OR datastore_list) @action:(queried OR created OR deleted)` |
+| [Datastore item][117] | A user created, modified, deleted, or queried datastore items. | `@evt.name:"Apps Datastore" @asset.type:(item OR item_query) @action:(created OR deleted OR modified OR queried)` |
+
+### Event Management
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Correlation pattern][118] | A user created a correlation pattern. | `@evt.name:"Event Management" @asset.type:event_correlation` |
+| [Custom metrics][119] | A user created modified or deleted a custom metric. | `@evt.name:"Event Management" @asset.type:custom_metrics` |
 
 ## Further Reading
 
@@ -407,3 +425,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [113]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40action%3A%28created%20OR%20modified%20OR%20deleted%29%20%40asset.type%3Acustom_metrics%20
 [114]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Sensitive%20Data%20Scanner%22%20%40action%3Amodified%20%40asset.type%3Asensitive_data_scanner_scanning_group_list%20
 [115]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Aip_allowlist%20%40action%3Amodified
+[116]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Apps%20Datastore%22%20%40asset.type%3A%28datastore%20OR%20datastore_list%29%20%40action%3A%28queried%20OR%20created%20OR%20deleted%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=stream&x_missing=true&from_ts=1740047181634&to_ts=1740048081634&live=true
+[117]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Apps%20Datastore%22%20%40asset.type%3A%28item%20OR%20item_query%29%20%40action%3A%28created%20OR%20deleted%20OR%20modified%20OR%20queried%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name&fromUser=true&messageDisplay=expanded-md&refresh_mode=sliding&stream_sort=desc&top_n=10&top_o=top&viz=stream&x_missing=true&from_ts=1740047539454&to_ts=1740048439454&live=true
+[118]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Event%20Management%22%20%40asset.type%3Aevent_correlation&agg_m=count&agg_m_source=base&agg_q=%40evt.name&agg_q_source=base&agg_t=count&cols=log_usr.id%2Clog_action%2Clog_evt.name
+[119]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Event%20Management%22%20%40asset.type%3Acustom_metrics&agg_m=count&agg_m_source=base&agg_q=%40evt.name

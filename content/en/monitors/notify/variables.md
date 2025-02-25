@@ -252,7 +252,9 @@ Attributes
 
 ### Multi alert variables
 
-Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
+Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert. 
+
+**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
 
 {{< tabs >}}
 {{% tab "Group by tag" %}}
@@ -302,7 +304,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section.
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section. See the following examples:
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
@@ -351,7 +353,7 @@ The following table contains all available attributes:
 
 {{% collapse-content title="Query group by service" level="h5" %}}
 
-If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Service Catalog][10].
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Software Catalog][10].
 
 Service metadata variables:
 
@@ -681,7 +683,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
@@ -700,5 +702,5 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
-[10]: /service_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/service_catalog/service_definitions/v2-2/#example-yaml
+[10]: /software_catalog/service_definitions/
+[11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml

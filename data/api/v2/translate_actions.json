@@ -358,7 +358,7 @@
     "summary": "Delete Cloud Cost Management AWS CUR config"
   },
   "UpdateCostAWSCURConfig": {
-    "description": "Update the status of an AWS CUR config (active/archived).",
+    "description": "Update the status (active/archived) and/or account filtering configuration of an AWS CUR config.",
     "summary": "Update Cloud Cost Management AWS CUR config",
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."
@@ -1740,6 +1740,10 @@
     "summary": "Test an existing rule",
     "request_description": "",
     "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
+  },
+  "GetRuleVersionHistory": {
+    "description": "Get a rule's version history.",
+    "summary": "Get a rule's version history"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
