@@ -26,7 +26,7 @@ Azure 인스턴스에서 Datadog 에이전트 확장을 실행하려면 환경�
 {{% tab "Windows" %}}
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 Azure 인스턴스 확장을 설정하는 구문에 대한 자세한 내용은 [Azure 확장 Set-AzVMExtension 설명][1]에서 확인할 수 있습니다.
