@@ -57,7 +57,7 @@ Datadog 윈도우즈 에이전트 Azure 확장은 `agentConfiguration` URI가 `.
 Datataog 에이전트 설정은 `%PROGRAMDATA%\Datadog` 폴더에서 생성해야 합니다.
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 **참고**: Datadog 에이전트가 설치되면 설정은 최신 버전으로 업그레이드할 때만 변경할 수 있습니다.
@@ -68,7 +68,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 **참고**: 다운그레이드는 지원되지 *않으므로* 현재 대상 머신에 설치된 Datadog 에이전트 버전보다 *하위* 버전을 설치할 수 없습니다. Datadog 에이전트 하위 버전을 설치하려면, 먼저 대상 머신에서 Datadog 윈도우즈 에이전트 Azure 확장을 삭제하여 이전 버전을 삭제합니다. Datadog 윈도우즈 에이전트 Azure 확장을 삭제해도 Datadog 에이전트 설정은 삭제되지 않습니다.
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
