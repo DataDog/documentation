@@ -116,7 +116,7 @@ Para transferir logs de actividades y de recursos, ejecuta el primer script incl
 
 {{% /tab %}}
 
-{{% tab "Manual installation" (Instalación manual) %}}
+{{% tab "Manual installation (Instalación manual)" %}}
 
 Esta sección describe el proceso de configuración manual para el reenvío de logs de Azure a Datadog:
 
