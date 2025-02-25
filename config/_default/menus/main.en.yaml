@@ -3510,6 +3510,11 @@ menu:
       parent: tracing_metrics
       identifier: tracing_runtime_metrics
       weight: 302
+    - name: Data collected
+      url: tracing/metrics/runtime_metrics/data_collected/
+      parent: tracing_runtime_metrics
+      identifier: tracing_runtime_metrics_data_collected
+      weight: 303
     - name: Trace Pipeline Configuration
       url: tracing/trace_pipeline/
       parent: tracing
