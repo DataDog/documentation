@@ -4,7 +4,23 @@ type: multi-code-lang
 aliases:
   - /tracing/advanced/runtime_metrics/
   - /tracing/runtime_metrics/
+  - /tracing/runtime_metrics/dotnet
+  - /tracing/runtime_metrics/go
+  - /tracing/runtime_metrics/java
+  - /tracing/runtime_metrics/nodejs
+  - /tracing/runtime_metrics/python
+  - /tracing/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
+further_reading:
+    - link: 'tracing/other_telemetry/connect_logs_and_traces'
+      tag: 'Documentation'
+      text: 'Connect your Logs and Traces together'
+    - link: 'tracing/trace_collection/custom_instrumentation'
+      tag: 'Documentation'
+      text: 'Manually instrument your application to create traces.'
+    - link: 'tracing/glossary/'
+      tag: 'Documentation'
+      text: 'Explore your services, resources, and traces'
 ---
 
 Runtime metrics are application metrics about memory usage, garbage collection, or parallelization. Datadog tracing libraries can automatically collect these metrics for supported environments and send them to the Datadog agent.
