@@ -253,7 +253,7 @@ The OpenAI integration instruments the following methods, including streamed cal
 
 The LangChain integration provides automatic tracing for the [LangChain Node.js SDK's][9] LLM, chat model, chain, and OpenAI embeddings calls.
 
-- [LLMs][10]: 
+- [LLMs][10]:
   - `llm.invoke()`
 - [Chat models][11]
   - `chat_model.invoke()`
@@ -280,7 +280,7 @@ For [command-line setup][14], use the following option instead:
 --loader dd-trace/initialize.mjs
 ```
 
-If there are errors launching your application when using this option, it is likely a module incompatibility with Import In the Middle. You can create your own hook file with the module and file in question excluded, and pass that along with the `--import` flag instead:
+If there are errors launching your application when using this option, it is likely a module incompatibility. You can create your own hook file with the module and file in question excluded:
 
 ```javascript
 // hook.mjs
@@ -290,15 +290,15 @@ import { register } from 'node:module';
 register('import-in-the-middle/hook.mjs', import.meta.url, {
   parentURL: import.meta.url,
   data: { exclude: [
-    /langsmith/, 
-    /openai\/_shims/, 
+    /langsmith/,
+    /openai\/_shims/,
     /openai\/resources\/chat\/completions\/messages/,
-    // Add any other modules you want to exclude  
+    // Add any other modules you want to exclude
   ]}
 });
 ```
 
-Usage:
+To use this custom loader, run your application with the following node option:
 
 ```bash
 --import ./hook.mjs
