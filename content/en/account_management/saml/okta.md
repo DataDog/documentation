@@ -96,7 +96,7 @@ Return to Okta for the next set of configuration steps.
 1. Select the **Sign on** tab.
 1. Click **Edit**.
 1. Scroll down to the **Advanced Sign-on Settings** section.
-1. Paste your company ID into the **Company ID** field. The correct format is /id/XXXXXX-XXXX-XXX-XXXX-XXXXXXX
+1. Paste your company ID into the **Company ID** field (`/id/XXXXXX-XXXX-XXX-XXXX-XXXXXXX`).
 1. Click **Save**.
 
 ## Service Provider (SP) initiated login
