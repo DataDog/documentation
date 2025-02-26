@@ -46,13 +46,13 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                     |
 
-### Error Cause
+### Error cause
 
-Using the `error.cause` attribute allows you to chain errors more clearly. With this property, each error in the chain is displayed separately, ensuring that error messages and stack traces remain distinct with a better formating.
+Use the `error.cause` attribute to chain errors clearly. This property displays each error in the chain separately, ensuring that error messages and stack traces remain distinct with improved formatting.
 
 | Attribute      | Type  | Description                                                                                          |
 |----------------|-------|------------------------------------------------------------------------------------------------------|
-| `error.cause`  | Error | An optional nested error providing additional context. Using this attribute displays errors separately and enhances formatting. |
+| `error.cause`  | Error | An optional nested error providing additional context. Use this attribute to display errors separately and enhance formatting. |
 
 ## Collect errors manually
 
