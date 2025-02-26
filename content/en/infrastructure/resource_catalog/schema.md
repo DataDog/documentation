@@ -18,8 +18,8 @@ CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 
-The following resource types are available within [Resource catalog][2] for filtering.
-See [custom rules in CSM Misconfigurations][1] for more information.
+This page documents the list of resources supported in the Datadog Platform. All of these resource types can be queried via [DDSQL Editor][3]. Key resource types are also supported in the [Resource catalog][2] and the [custom rules in CSM Misconfigurations][1].
 
 [1]: /security/cloud_security_management/misconfigurations/custom_rules/
 [2]: /infrastructure/resource_catalog
+[3]: /ddsql/editor
