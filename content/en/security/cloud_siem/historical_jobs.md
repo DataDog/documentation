@@ -59,7 +59,7 @@ A calculated field can be used like any log attribute for job analysis, searchin
 1. Click **Add**.
 1. Select **Calculated Fields** from the options.
 
-{{< img src="security/security_monitoring/detection_rules/create-calculated-field.png" alt="The calculated fields option in the detection rule editor" style="width:90%;" >}}
+{{< img src="security/security_monitoring/detection_rules/create-calculated-field.png" alt="The create a calculated fields modal with fields to define the name and formula" style="width:90%;" >}}
 
 See [Calculated Fields Expression Language][5] for the available functions and operators.
 
