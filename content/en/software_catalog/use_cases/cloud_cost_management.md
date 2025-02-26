@@ -3,10 +3,8 @@ title: Manage and Optimize Cloud Costs
 aliases:
   - /tracing/software_catalog/guides/cloud_cost_management
   - /software_catalog/guides/cloud_cost_management
-  - /software_catalog/use_cases/cloud_cost_management
   - /tracing/service_catalog/guides/cloud_cost_management
   - /service_catalog/guides/cloud_cost_management
-  - /service_catalog/use_cases/cloud_cost_management
   - /service_catalog/use_cases/cloud_cost_management
 further_reading:
   - link: "/tracing/software_catalog/"
@@ -23,7 +21,7 @@ further_reading:
     text: "Best practices for monitoring cloud costs with Scorecards"
 ---
 
-Datadog’s [Software Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
+Datadog's [Software Catalog][4], [Scorecards][2], and [Workflow Automation][5] enable organizations to monitor and optimize cloud costs with team-level granularity, ensuring appropriate cost allocation and protocol compliance.
 
 ## Proactively monitor cost spikes
 

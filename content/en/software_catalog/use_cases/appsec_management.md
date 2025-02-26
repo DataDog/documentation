@@ -3,14 +3,12 @@ title: Manage Application Security Posture Across Development Teams
 aliases:
   - /tracing/software_catalog/guides/appsec_management
   - /software_catalog/guides/appsec_management
-  - /software_catalog/use_cases/appsec_management 
   - /tracing/software_catalog/use_cases/appsec_management  
   - /tracing/service_catalog/guides/appsec_management
   - /service_catalog/guides/appsec_management
   - /service_catalog/use_cases/appsec_management 
   - /tracing/service_catalog/use_cases/appsec_management  
   - /service_catalog/use_cases/application_security
-  - /service_catalog/use_cases/application-security
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"

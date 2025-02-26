@@ -458,7 +458,7 @@ menu:
       weight: 606
     - name: FIPS Compliance
       identifier: agent_configuration_fips_compliance
-      url: agent/configuration/agent-fips-proxy/
+      url: agent/configuration/fips-compliance/
       parent: agent_configuration
       weight: 607
     - name: Dual Shipping
@@ -1016,6 +1016,12 @@ menu:
       identifier: coscreen_troubleshooting
       parent: coscreen
       weight: 1
+    - name: CoTerm
+      url: coterm/
+      pre: coscreen
+      identifier: coterm
+      parent: essentials_heading
+      weight: 120000
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
@@ -1402,7 +1408,7 @@ menu:
       weight: 1
     - name: DDSQL Editor
       url: ddsql_editor/
-      pre: inventories
+      pre: ddsql
       identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
@@ -1811,29 +1817,29 @@ menu:
       parent: metrics_top_level
       identifier: metrics_distributions
       weight: 4
+    - name: Overview
+      identifier: metrics_overview
+      url: metrics/overview/
+      parent: metrics_top_level
+      weight: 5
     - name: Explorer
       url: metrics/explorer/
       parent: metrics_top_level
       identifier: metrics_explorer
-      weight: 5
+      weight: 6
     - name: Metrics Units
       identifier: metrics_units
       url: metrics/units/
       parent: metrics_explorer
-      weight: 501
+      weight: 601
     - name: Summary
       identifier: metrics_summary
       url: metrics/summary/
       parent: metrics_top_level
-      weight: 6
+      weight: 7
     - name: Volume
       identifier: metrics_volume
       url: metrics/volume/
-      parent: metrics_top_level
-      weight: 7
-    - name: Overview
-      identifier: metrics_overview
-      url: metrics/overview/
       parent: metrics_top_level
       weight: 8
     - name: Advanced Filtering
@@ -1846,16 +1852,21 @@ menu:
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 10
+    - name: Composite Metrics Queries
+      url: metrics/composite_metrics_queries
+      parent: metrics_top_level
+      identifier: composite_metrics_queries
+      weight: 11
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 11
+      weight: 12
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 12
+      weight: 13
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -1910,7 +1921,7 @@ menu:
       weight: 3
     - name: Software Catalog
       url: software_catalog/
-      pre: software-catalog
+      pre: service-catalog
       parent: platform_heading
       identifier: software_catalog
       weight: 110000
@@ -1973,7 +1984,22 @@ menu:
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305   
+    - name: Production Readiness
+      url: software_catalog/use_cases/production_readiness
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_production_readiness
+      weight: 306  
+    - name: Incident Response
+      url: software_catalog/use_cases/incident_response
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_incident_response
+      weight: 307    
+    - name: CI Pipeline Visibility
+      url: software_catalog/use_cases/pipeline_visibility
+      parent: software_catalog_use_cases
+      identifier: software_catalog_use_cases_pipeline_visibility
+      weight: 308  
     - name: Manage a Component
       url: software_catalog/manage
       parent: software_catalog
@@ -2486,11 +2512,16 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Case Automation Rules
+      url: service_management/case_management/automation_rules
+      parent: case_management
+      identifier: case_management_automation_rules
+      weight: 3
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 3
+      weight: 4
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
@@ -2527,11 +2558,6 @@ menu:
       parent: workflows_actions
       identifier: workflows_flow_control
       weight: 502
-    - name: Data Transformation
-      url: service_management/workflows/actions/data_transformation/
-      parent: workflows_actions
-      identifier: workflows_data_transformation
-      weight: 503
     - name: Save and Reuse Actions
       url: service_management/workflows/saved_actions/
       parent: workflows
@@ -2542,16 +2568,21 @@ menu:
       parent: workflows
       identifier: workflows_test_and_debug
       weight: 8
+    - name: JavaScript Expressions
+      url: service_management/workflows/expressions/
+      parent: workflows
+      identifier: workflows_expressions
+      weight: 9
     - name: Track Workflows
       url: service_management/workflows/track
       parent: workflows
       identifier: workflows_track
-      weight: 9
+      weight: 10
     - name: Limits
       url: service_management/workflows/limits/
       parent: workflows
       identifier: workflows_limits
-      weight: 10
+      weight: 11
     - name: App Builder
       url: service_management/app_builder/
       pre: app-builder
@@ -2827,6 +2858,21 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 6
+    - name: DatadogDashboard CRD
+      url: containers/datadog_operator/crd_dashboard
+      identifier: containers_datadog_operator_crd_dashboard
+      parent: containers_datadog_operator
+      weight: 601
+    - name: DatadogMonitor CRD
+      url: containers/datadog_operator/crd_monitor
+      identifier: containers_datadog_operator_crd_monitor
+      parent: containers_datadog_operator
+      weight: 602
+    - name: DatadogSLO CRD
+      url: containers/datadog_operator/crd_slo
+      identifier: containers_datadog_operator_crd_slo
+      parent: containers_datadog_operator
+      weight: 603
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -2998,6 +3044,10 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
+    - name: Functions
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 701
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -3401,6 +3451,31 @@ menu:
       parent: tracing_trace_collection
       identifier: tracing_proxies
       weight: 208
+    - name: Envoy
+      url: tracing/trace_collection/proxy_setup/envoy
+      parent: tracing_proxies
+      identifier: tracing_proxies_envoy
+      weight: 2081
+    - name: NGINX
+      url: tracing/trace_collection/proxy_setup/nginx
+      parent: tracing_proxies
+      identifier: tracing_proxies_nginx
+      weight: 2082
+    - name: Istio
+      url: tracing/trace_collection/proxy_setup/istio
+      parent: tracing_proxies
+      identifier: tracing_proxies_istio
+      weight: 2083
+    - name: Kong
+      url: tracing/trace_collection/proxy_setup/kong
+      parent: tracing_proxies
+      identifier: tracing_proxies_kong
+      weight: 2084
+    - name: Apache HTTP Server
+      url: tracing/trace_collection/proxy_setup/httpd
+      parent: tracing_proxies
+      identifier: tracing_proxies_httpd
+      weight: 2085
     - name: Span Tag Semantics
       url: tracing/trace_collection/tracing_naming_convention
       parent: tracing_trace_collection
@@ -4155,16 +4230,21 @@ menu:
       parent: llm_obs
       identifier: llm_obs_submit_evaluations
       weight: 5
+    - name: Ragas Evaluations
+      url: llm_observability/ragas_evaluations/
+      parent: llm_obs
+      identifier: llm_obs_ragas_evaluation
+      weight: 6
     - name: Cluster Map
       url: llm_observability/cluster_map/
       parent: llm_obs
       identifier: llm_obs_cluster_map
-      weight: 6
+      weight: 7
     - name: Guides
       url: llm_observability/guide/
       parent: llm_obs
       identifier: llm_obs_guide
-      weight: 7
+      weight: 8
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
@@ -5765,10 +5845,10 @@ menu:
       parent: cloud_siem_detection_rules
       identifier: cloud_siem_signal_correlation_rules
       weight: 20500
-    - name: ATT&CK Map
-      url: security/cloud_siem/detection_rules/attack_map
+    - name: MITRE ATT&CK Map
+      url: security/cloud_siem/detection_rules/mitre_attack_map
       parent: cloud_siem_detection_rules
-      identifier: cloud_siem_attack_map
+      identifier: cloud_siem_mitre_attack_map
       weight: 20510
     - name: OOTB Rules
       url: /security/default_rules/#cat-cloud-siem-log-detection
@@ -6272,7 +6352,7 @@ menu:
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6      
+      weight: 6
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
@@ -7639,26 +7719,41 @@ menu:
       identifier: sensitive_data_scanner
       parent: administration_heading
       weight: 30000
-    - name: Library Rules
-      url: sensitive_data_scanner/library_rules/
-      identifier: sds_library_rules
+    - name: Setup
+      url: sensitive_data_scanner/setup/
+      identifier: sds_setup
       parent: sensitive_data_scanner
       weight: 1
-    - name: Investigate Sensitive Data Issues
-      url: sensitive_data_scanner/investigate_sensitive_data_issues/
-      identifier: sds_investigate_sensitive_data_issues
+    - name: Telemetry Data
+      url: sensitive_data_scanner/setup/telemetry_data/
+      identifier: sds_telemetry
+      parent: sds_setup
+      weight: 101
+    - name: Cloud Storage
+      url: sensitive_data_scanner/setup/cloud_storage/
+      identifier: sds_cloud_storage
+      parent: sds_setup
+      weight: 102
+    - name: Scanning Rules
+      url: sensitive_data_scanner/scanning_rules/
+      identifier: sds_scanning_rules
       parent: sensitive_data_scanner
       weight: 2
-    - name: Regular Expression Syntax
-      url: sensitive_data_scanner/regular_expression_syntax/
-      identifier: sds_regular_expression_syntax
-      parent: sensitive_data_scanner
-      weight: 3
+    - name: Library Rules
+      url: sensitive_data_scanner/scanning_rules/library_rules/
+      identifier: sds_library_rules
+      parent: sds_scanning_rules
+      weight: 201
+    - name: Custom Rules
+      url: sensitive_data_scanner/scanning_rules/custom_rules/
+      identifier: sds_custom_rules
+      parent: sds_scanning_rules
+      weight: 202
     - name: Guides
       url: sensitive_data_scanner/guide/
       identifier: sds_guides
       parent: sensitive_data_scanner
-      weight: 4
+      weight: 3
     - name: Help
       url: help/
       pre: info-fill
