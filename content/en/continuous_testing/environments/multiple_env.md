@@ -43,17 +43,23 @@ This option allows you to reuse the same test scenario on both the production en
 
 If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may unintentionally remove the path or certain search query parameters from the URL that the scenario is expected to test.
 
-In addition to `startUrl`, the `startUrlSubstitutionRegex` field allows you to modify the starting URL without overwriting it entirely. This option allows you to substitute parts of the default starting URL based on the provided regular expression.
+The `startUrlSubstitutionRegex` field allows you to modify the starting URL without overwriting it entirely. This option allows you to substitute parts of the default starting URL based on the provided regular expression.
 
 ```shell
 datadog-ci synthetics run-tests \
   --public-id <public-id> \
-  --override startUrlSubstitutionRegex="<regex>|<rewriting rule>"
+  --override startUrlSubstitutionRegex="<regex>|<rewriting-rule>"
 ```
 
-This field expects a string containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regular expression (regex) to apply to the default starting URL. The second is the expression to rewrite the URL.
+This field expects a string containing two parts, separated by a pipe character `|`: 
+
+`<regex>|<rewriting-rule>`
+- `<regex>`: Regular expression (regex) to apply to the default starting URL
+- `<rewriting-rule>`: Expression to rewrite the URL
 
 #### Example 1
+
+Consider the following `<regex>|<rewriting-rule>` string:
 
 ```shell
 https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
@@ -62,6 +68,8 @@ https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
 The regular expression uses a capture group to capture the path of the URL. The rewriting rule produces a similar looking URL pointing to `staging.my-app.com`, and appending the captured group using `$1`. Given the URL `https://prod.my-app.com/product-page?productId=id`, it would rewrite it to `https://staging.my-app.com/product-page?productId=id`.
 
 #### Example 2
+
+Consider the following `<regex>|<rewriting-rule>` string:
 
 ```
 (https?://)([^/]*)|$1<deployment-prefix>.$2
@@ -87,11 +95,22 @@ This allows you to test some parts of your application independently from the ma
 
 For example: if your frontend JavaScript assets are located under the path `https://prod.my-app.com/resources/chunks/*`, you can use `resourceUrlSubstitutionRegexes` to redirect all JavaScript assets requests to `https://staging.my-app.com/resources/chunks`—while main page and all API calls continue to be served by `prod.my-app.com`. Similarly, if you want to test the service behind the endpoints `https://prod.my-app.com/api/my-service`, you can redirect these API calls to `https://staging.my-app.com/api/my-service` to test this service in isolation with the production frontend.
 
-<!-- TODO: an example -->
+```shell
+datadog-ci synthetics run-tests \
+  --public-id <public-id> \
+  --override resourceUrlSubstitutionRegexes="<regex1>|<rewriting-rule1>" \
+  --override resourceUrlSubstitutionRegexes="<regex2>|<rewriting-rule2>"
+```
 
-The `resourceUrlSubstitutionRegexes` field expects an array of strings, each containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL. The second is the expression to rewrite the URL.
+The `resourceUrlSubstitutionRegexes` field expects strings, each containing two parts, separated by a pipe character `|`: 
+
+`<regex>|<rewriting-rule>`
+- `<regex>`: Regular expression (regex) to apply to the resource URL
+- `<rewriting-rule>`: Expression to rewrite the URL
 
 #### Example 1
+
+Consider the following `<regex>|<rewriting-rule>` string:
 
 ```
 https://prod.my-app.com/assets/(.*)|https://staging.my-app.com/assets/$1
@@ -104,6 +123,8 @@ The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-l
 As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritten as `https://staging.my-app.com/assets/js/chunk-123.js`.
 
 #### Example 2
+
+Consider the following `<regex>|<rewriting-rule>` string:
 
 ```
 `(https?://)([^/]*)|$1<deployment-prefix>.$2`
