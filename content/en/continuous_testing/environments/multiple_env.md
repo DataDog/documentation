@@ -17,9 +17,9 @@ further_reading:
 
 Continuous Testing allows you to apply the same scenario from scheduled tests against the production environment to development and staging environments. Continuous Testing uses Synthetic tests throughout the development cycle to ensure regressions are caught as soon as possible.
 
-When triggering a CI test, you can overwrite the starting URL of a [browser][1] or [API test][2] to reroute the Synthetic Worker to the appropriate environment. This allows you to use the same test scheduled on your production environment, and in CI on your staging environment.
+When triggering a CI test, you can overwrite the starting URL of a [browser][1] or [API test][2] to reroute the Synthetic Worker to the appropriate environment. This allows you to use the same test on both your production and staging environments.
 
-For [browser test][1], you can also redirect only a subset of the resource URL during the test execution with `resourceUrlSubstitutionRegexes`. This allows you to test frontend assets from your current branch against the production backend. Similarly, it could reroute a subset of API calls matching a domain, or a path, to a staging environment containing the changes to test, while the rest of the requests are served by the production environment.
+For [browser tests][1], you can also redirect a subset of the resource URLs during the test execution with `resourceUrlSubstitutionRegexes`. This allows you to test frontend assets from your current branch against the production backend. This also allows you to reroute a subset of API calls (matching a domain or path) to a staging environment containing the changes to test, while the rest of the requests are served by the production environment.
 
 ## Using a production test on a staging environment
 
@@ -73,17 +73,17 @@ In addition to modifying the starting URL, you can also modify the URLs of all s
 
 This allows you to test some parts of your application independently from the main environment. The main page is still being served by the environment from the `startUrl`, but each request matching the first regex from `resourceUrlSubstitutionRegexes` can be redirected to another environment hosting only the changes from the branch triggering the CI pipeline.
 
-For example, given the frontend javascript assets are located under the path `https://prod.my-app.com/resources/chunks/*`, this would allow to redirect all the javascript assets requests to `https://staging.my-app.com/resources/chunks` hosting the ones to test, while keeping the main page and all API calls being served by `prod.my-app.com`. Similarly, if you want to test the service behind the endpoints `https://prod.my-app.com/api/my-service`, you can redirect these API calls to `https://staging.my-app.com/api/my-service` to test this service in isolation with the production frontend.
+For example: if your frontend JavaScript assets are located under the path `https://prod.my-app.com/resources/chunks/*`, you can use `resourceUrlSubstitutionRegexes` to redirect all JavaScript assets requests to `https://staging.my-app.com/resources/chunks`—while main page and all API calls continue to be served by `prod.my-app.com`. Similarly, if you want to test the service behind the endpoints `https://prod.my-app.com/api/my-service`, you can redirect these API calls to `https://staging.my-app.com/api/my-service` to test this service in isolation with the production frontend.
 
-This field expects an array of strings, each containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL. The second is the expression to rewrite the URL.
+The `resourceUrlSubstitutionRegexes` field expects an array of strings, each containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL. The second is the expression to rewrite the URL.
 
-A simple example looks like the following:
+**Example 1**:
 
 ```
 https://prod.my-app.com/assets/(.*)|https://staging.my-app.com/assets/$1
 ```
 
-The regular expression uses a capture group to capture the path of the resource URL. The rewriting rule produces a similar looking URL pointing to `staging.my-app.com`, and appending the captured group using `$1`. Given the URL `https://prod.my-app.com/assets/js/chunk-123.js`, it would rewrite it to `https://staging.my-app.com/assets/js/chunk-123.js`.
+The regex, `https://prod.my-app.com/assets/(.*)`, uses a capture group to capture the path of the resource URL. The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-looking URL that points to `staging.my-app.com` and appends the captured group using `$1`. As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritten as `https://staging.my-app.com/assets/js/chunk-123.js`.
 
 A more complex substitution regex could look like the following: `(https?://)([^/]*)|$1<deployment-prefix>.$2`. With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix>.my-app.com/some/path`. Notice that the URL path is not affected by the rewrite, because it's not part of the substitution regex.
 
