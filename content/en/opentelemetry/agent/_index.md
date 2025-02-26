@@ -11,6 +11,10 @@ further_reading:
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}} 
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger"><strong>The Datadog Agent with embedded OpenTelemetry Collector is not FedRAMP or FIPS compliant.</strong><br> FedRAMP customers should not use the embedded OpenTelemetry Collector and should continue using standard Agent deployments.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source solution that combines the flexibility of OpenTelemetry with the comprehensive observability capabilities of Datadog. This integrated solution includes:
