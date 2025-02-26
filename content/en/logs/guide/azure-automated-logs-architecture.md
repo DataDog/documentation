@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Datadog's automated log forwarding setup for the Azure integration offers several benefits:
+Datadog's automated log forwarding setup for the Azure integration offers several benefits over other setup methods:
 
 - **Simplified setup** of the required Azure infrastructure across all of your subscriptions and regions, allowing you to start forwarding logs from across your Azure environment in minutes. New resources added to your environment in the future are automatically set up to forward logs to Datadog.
 
