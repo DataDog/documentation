@@ -115,9 +115,7 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 
 ## Post installation
 
-If you are using integrations, please refer to the [FIPS Verified Agent Integrations][1] for further guidance.
-
-[1]: /integrations/guide/fips-integrations
+For more information FIPS compliant services on Datadog integrations, see [FIPS Verified Agent Integrations][1].
 
 ## Further reading
 
@@ -125,3 +123,5 @@ If you are using integrations, please refer to the [FIPS Verified Agent Integrat
 
 [1]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 [2]: /agent/configuration/fips-compliance/
+[3]: /integrations/guide/fips-integrations
+
