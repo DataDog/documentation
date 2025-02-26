@@ -97,7 +97,7 @@ Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region"
 
 12. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][17].
 
-13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
+13. [Restart your Agent][13] to send data to Datadog through AWS PrivateLink.
 
 ## Connect from other regions
 
