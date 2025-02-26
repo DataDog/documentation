@@ -26,7 +26,7 @@ further_reading:
 
 {{< callout header="false" btn_hidden="true">}}
   The Datadog OTLP metrics intake endpoint is in Preview.
-{{< /callout >}} 
+{{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
 <div class="alert alert-warning">Datadog OTLP metrics intake endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -90,7 +90,7 @@ If you are using manual instrumentation with OpenTelemetry SDKs, configure the O
 The JavaScript exporter is [`@opentelemetry/exporter-metrics-otlp-proto`][100]. To configure the exporter, use the following code snippet:
 
 ```javascript
-const { OTLPMetricExporter } = require('@opentelemetry/exporter-metrics-otlp-proto'); 
+const { OTLPMetricExporter } = require('@opentelemetry/exporter-metrics-otlp-proto');
 
 const exporter = new OTLPMetricExporter({
   url: 'https://api.datadoghq.com/api/intake/otlp/v1/metrics',
@@ -233,7 +233,7 @@ For example, your `config.yaml` file would look like this:
 ...
 exporters:
   otlphttp:
-    endpoint: https://api.datadoghq.com/api/intake/otlp/v1/metrics
+    metrics_endpoint: {{< region-param key="otlp_metrics_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: "{resource_attributes_as_tags: true}"
@@ -255,13 +255,13 @@ service:
 
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
 
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.  
+- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.
    **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP metrics intake endpoint.
-   
-- The `dd-otlp-source` header is missing or has an incorrect value.  
+
+- The `dd-otlp-source` header is missing or has an incorrect value.
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 
-- The endpoint URL is incorrect for your organization.  
+- The endpoint URL is incorrect for your organization.
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
