@@ -16,7 +16,7 @@ further_reading:
 
 [Self-Service][17] is a centralized interface where developers can take action directly within Datadog. Platform teams can define and share golden paths to streamline tasks across the software development lifecycle. For example, you can:
 
-— build microservices and infrastructure with the proper configurations
+- build microservices and infrastructure with the proper configurations
 - initialize development environments
 - manage deployments across environments
 - actively monitor and optimize running services
