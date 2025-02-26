@@ -15,6 +15,7 @@ further_reading:
 ---
 
 [Self-Service][17] is a centralized interface where developers can take action directly within Datadog. Platform teams can define and share golden paths to streamline tasks across the software development lifecycle. For example, you can:
+
 — build microservices and infrastructure with the proper configurations
 - initialize development environments
 - manage deployments across environments
@@ -40,9 +41,9 @@ To get started quickly, explore [App Builder Blueprints][9] and [Workflow Automa
 For example, you can use Blueprints to:
 
 - **Scaffold new services from templates:** Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, Github), and generate a new repository or PR for a developer. Read the [Software Templates documentation][16] to learn more.
+- **Provision infrastructure:** Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 - **Remediate issues:** Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
 - **Manage code changes and deployments:** Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
-- **Provision infrastructure:** Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 - **Provision developer environments:** Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
 
 ### Start from scratch
