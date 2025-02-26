@@ -990,7 +990,7 @@ window.DD_RUM &&
 
 ### Attaching local error context with dd_context
 
-When capturing errors, additional context may be needed at the time an error is created. Instead of passing extra context through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event.
+When capturing errors, additional context may be needed at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event.
 
 {{< code-block lang="javascript" >}}
 const error = new Error('Something went wrong')
