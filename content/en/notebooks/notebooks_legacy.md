@@ -160,7 +160,7 @@ Notebooks can be grouped into types, giving you quick access to relevant informa
 
 ### Graph snapshots
 
-<div class="alert alert-info">Snapshots are not supported for every widget type as you suspected. Supported widgets will display a yellow SNAPSHOTS label and render the static image. Unsupported widgets will render a live widget just like in the live view.</div>
+<div class="alert alert-info">Snapshots are not supported for every widget type as you suspected. Supported widgets will display a yellow `SNAPSHOTS` label and render the static image. Unsupported widgets will render a live widget just like in the live view.</div>
 
 Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
