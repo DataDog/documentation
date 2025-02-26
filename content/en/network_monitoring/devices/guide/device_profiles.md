@@ -54,7 +54,7 @@ The minimum Agent version required is `7.64` or higher.
 
 Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. 
 
-1. Keep the Datadog `_base.yaml` profile, and optionally, select one or more profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics or metadata:
+1. Keep the Datadog `_base.yaml` profile, and optionally, select one or more profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics, tags, or metadata:
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
@@ -64,9 +64,10 @@ Use profile inheritance to adopt configurations such as metadata, metrics, and t
 
 ### Step 3: Select reference devices
 
-Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#profile-details).
+Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#step-1-profile-details).
 
 1. Keep the current reference device selection to perform a device scan. Additionally, you can add more devices or change the current selection.
+
 2. Optionally, click **Proceed Manually** to proceed without performing a scan.
 
   {{< img src="/network_device_monitoring/profile_onboarding/reference_devices.png" alt="The Network Device profile creation page showing the Reference device section." style="width:100%;">}}
@@ -99,16 +100,92 @@ Datadog provides reasonable defaults for most devices through out-of-the-box (OO
 
 ### Step 6: Define metrics
 
-To add additional metrics in to your devices, click **Add Metrics**. This opens a modal displaying all available metrics for the device. Hover over metrics to see units and descriptions for easier selection. Metrics can be added either from a device scan or by manually creating a new metric for the profile.
+Metrics can be added either from a device scan or by manually creating a new metric for the profile. Inherited metrics are highlighted in purple with the `Inherited` tag.
 
-Get video of selecting then the modal. Add more copy showing what will be populated with manual flow (can copy from old docs) 
-Once you press Add goes back to main form page - purple is inherited
+{{< tabs >}}
+{{% tab "Device scan" %}}
+
+1. To define a metric using the **Device Scan** option, click **Add Metrics**. This opens a modal displaying all available metrics for the device.
+2. Hover over metrics to see units and descriptions for easier selection.
+3. Select the metrics you wish to add, then click **Add Metric**.
+4. This returns you to the define metrics screen where you can see the new metric that was added.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/define_metrics_2.mp4" alt="Video showing the add metrics modal, adding a new metric and returning to define metrics step." video=true >}}
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+1. To define a metric using the **Manual** option, click **Add Metrics**. This opens a modal displaying all available metrics for the device.
+2. Click **Create New Metric** at the top of the modal.
+3. Specify the OID (Scalar, or Tabular).
+4. Click the dropdown in the search field to add the OID name.
+5. Select the metric type, scale factor, and extract value (Regex pattern) See [advanced options](?tab=manual#advanced-options-for-scalar-and-tabular-metrics).
+6. Click **Create** to save the metric.
+7. This returns you to the define metrics screen where you can see the new metric that was added.
+
+   < insert video later, getting validation error in staging>
+
+#### Advanced options for scalar and tabular metrics:
+
+[Metric Type][11]
+: One of `gauge`, `rate`, `monotonic_count`, or `monotonic_count_and_rate`. 
+
+[Scale Factor][12]
+: Before being transmitted to Datadog, the extracted value is multiplied by this factor.
+
+[Extract Value][7]
+: This is the same as the [advanced options](?tab=manual#global-tags-advanced-options) for global tags.
+
+[7]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#extract_value
+[11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
+[12]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#scale_factor
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Step 7: Global Tags
 
-Add global tags for more advanced and granular options, which allows you to assign a weight to a specific metric. Additionally, the `Inherited` tag displays next to any global tags that are inherited from this profile.
+Add global tags to ensure the metadata, metrics, and global tags are applied to all matching devices. Global tags can be added either from a device scan or by manually creating a new tag for the profile. Additionally, the `Inherited` tag will appear next to any global tags inherited from this profile. 
 
-{{< img src="/network_device_monitoring/profile_onboarding/add_global_tags.png" alt="The Network Device profile creation page showing the Add Global Tags section" style="width:100%;">}}
+{{< tabs >}}
+{{% tab "Device scan" %}}
+
+1. To define a global tag using the **Device Scan** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
+2. Select one or more tags you wish to add to the device profile, then click **Add Tag**.
+3. This returns you to the define global tags screen where you can see the new tag that was added.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/add_global_tag.mp4" alt="Video showing the add global tags modal, adding a new tag and returning to global tags step." video=true >}}
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+1. To define a global tag the **Manual** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
+2. Click **Create New Tag** at the top of the modal.
+3. Select the dropdown in the search field to add the OID name.
+4. Click the **Modification** dropdown to add a [modification](?tab=manual#global-tags-advanced-options).
+5. Click **Create** to save the new tag.
+6. This returns you to the define global tags screen where you can see the new tag that was added.
+
+   {{< img src="/network_device_monitoring/profile_onboarding/add_global_tags_manual.mp4" alt="Video showing the add global tags modal, adding a new tag with the manual method, and returning to global tags step." video=true >}}
+
+#### Global tags advanced options:
+
+| Modification    | Description                                                                                         |
+|-----------------|-----------------------------------------------------------------------------------------------------|
+| No Modification | The device's returned value will be used directly as the tag value.                                 |
+| Format          | This can be [mac_address][5] or [ip_address][6].                                                    |
+| Extract Value   | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
+| Mapping         | This is described [here][8].   
+
+[5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-mac_address
+[6]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-ip_address
+[7]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#extract_value
+[8]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#mapping-index-to-tag-string-value
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Step 8: Save and sync Agents
 
@@ -141,26 +218,28 @@ Once a profile is applied, you cannot bring it back to draft status.
 - **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.<br></br>
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:40%;">}}
+                                                    
+### Apply a profile to created devices
 
+1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
+2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
+3. Restart the Datadog Agent.
+4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
+{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
-#### Advanced Options
+## Troubleshooting
 
-| Modification    | Description                                                                                         |
-|-----------------|-----------------------------------------------------------------------------------------------------|
-| No Modification | The device's returned value will be used directly as the tag value.                                 |
-| Format          | This can be [mac_address][5] or [ip_address][6].                                                    |
-| Extract Value   | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
-| Mapping         | This is described [here][8].                                                                        |
-
-
-### Scalar metrics
-
-See [Metrics Advanced Options](#metrics-advanced-options).
-
-### Tabular metrics
-
-See [Metrics Advanced Options](#metrics-advanced-options).
+- What is a profile?
+- What is a device scan?
+- Why do I see no matching devices? 
+- What happens if I don't have remote configuration enabled on my collectors?
+- Inherited data (metrics, global tags) cannot be overridden from the children 
+- Why would a device not be scanned?
+If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
+ - Direct them to enabled RC 
+ - Option to do manual scan 
+(RC is not enabled on Agent , upgrade to most recent Agent 7.64) OR RUN scan manually
 
 ### Add Tabular Tags
 
@@ -189,43 +268,6 @@ Adding tags to tabular metrics is similar to adding global tags, with two additi
 
     </details>
 
-
-### Metrics Advanced Options
-
-The advanced options for scalar and tabular metrics are the same:
-
-[Metric Type][11]
-: One of `gauge`, `rate`, `monotonic_count`, or `monotonic_count_and_rate`. 
-
-[Scale Factor][12]
-: Before being transmitted to Datadog, the extracted value is multiplied by this factor.
-
-[Extract Value][7]
-: This is the same as the [advanced options](#advanced-options) for global tags.
-
-### Apply a profile to created devices
-
-1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
-2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
-3. Restart the Datadog Agent.
-4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
-
-{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
-
-## Troubleshooting
-
-- What is a profile?
-- What is a device scan?
-- Why do I see no matching devices? 
-- What happens if I don't have remote configuration enabled on my collectors?
-- Inherited data (metrics, global tags) cannot be overridden from the children 
-- Why would a device not be scanned?
-If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
- - Direct them to enabled RC 
- - Option to do manual scan 
-(RC is not enabled on Agent , upgrade to most recent Agent 7.64) OR RUN scan manually
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -234,14 +276,8 @@ If remote config is not enabled (direct them to Fleet Automation) - need screens
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles
-[5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-mac_address
-[6]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-ip_address
-[7]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#extract_value
-[8]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#mapping-index-to-tag-string-value
 [9]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-an-index
 [10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
-[11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
-[12]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#scale_factor
 [13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
