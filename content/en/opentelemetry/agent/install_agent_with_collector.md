@@ -126,7 +126,19 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
 
-3. Enable the OpenTelemetry Collector and configure the essential ports:
+3. Enable the OpenTelemetry Collector:
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
+  ...
+  # Enable Features
+  features:
+    otelCollector:
+      enabled: true
+{{< /code-block >}}
+
+The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
+
+To explicitly override the default ports, use `features.otelCollector.ports` parameter:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   ...
