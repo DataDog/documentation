@@ -45,7 +45,7 @@ Source errors include code-level information about the error. More information a
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.type`    | string | The error type (or error code in some cases).
+| `error.type`    | string | The error type (or error code in some cases).                     |
 
 ## Collect errors manually
 
