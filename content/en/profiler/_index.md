@@ -13,7 +13,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: '/developers/guide/data-collection-resolution-retention/'
+    - link: '/developers/guide/data-collection-resolution/'
       tag: 'Documentation'
       text: 'Data collection, resolution, and retention'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
