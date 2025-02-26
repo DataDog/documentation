@@ -32,9 +32,10 @@ A Synthetic browser test starts the test scenario by navigating to a starting UR
 When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetic Monitoring configuration files (`*.synthetics.json`), or the command line flag `--override startUrl=<STARTURL>`.
 
 ```shell
-datadog-ci synthetics run-tests --public-id <public-id> --override startUrl="https://staging.my-app.com"
+datadog-ci synthetics run-tests \
+  --public-id <public-id> \
+  --override startUrl="https://staging.my-app.com"
 ```
-
 
 This option allows you to reuse the same test scenario on both the production environment and other development environments (such as staging) as long as they are publicly available. To learn how to test against [private environments][4], see [Testing While Using Proxies, Firewalls, or VPNs][3].
 
@@ -44,9 +45,15 @@ If some of your tests start at the homepage, or a similarly simple URL, the prev
 
 In addition to `startUrl`, the `startUrlSubstitutionRegex` field allows you to modify the starting URL without overwriting it entirely. This option allows you to substitute parts of the default starting URL based on the provided regular expression.
 
-This field expects a string containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the default starting URL. The second is the expression to rewrite the URL.
+```shell
+datadog-ci synthetics run-tests \
+  --public-id <public-id> \
+  --override startUrlSubstitutionRegex="<regex>|<rewriting rule>"
+```
 
-A simple example looks like the following:
+This field expects a string containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regular expression (regex) to apply to the default starting URL. The second is the expression to rewrite the URL.
+
+#### Example 1
 
 ```shell
 https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
@@ -54,9 +61,14 @@ https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
 
 The regular expression uses a capture group to capture the path of the URL. The rewriting rule produces a similar looking URL pointing to `staging.my-app.com`, and appending the captured group using `$1`. Given the URL `https://prod.my-app.com/product-page?productId=id`, it would rewrite it to `https://staging.my-app.com/product-page?productId=id`.
 
-A more complex substitution regex could look like the following: `(https?://)([^/]*)|$1<deployment-prefix>.$2`.
-With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix>.my-app.com/some/path`.
-Notice that the URL path is not affected by the rewrite, because it's not part of the substitution regex.
+#### Example 2
+
+```
+(https?://)([^/]*)|$1<deployment-prefix>.$2
+```
+
+With this override, the URL `https://my-app.com/some/path` gets rewritten as `https://<deployment-prefix>.my-app.com/some/path`.
+Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
 
 <div class="alert alert-info">
 Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewritting rule&gt;|&lt;modifiers&gt;</code>.</br></br>
@@ -75,20 +87,32 @@ This allows you to test some parts of your application independently from the ma
 
 For example: if your frontend JavaScript assets are located under the path `https://prod.my-app.com/resources/chunks/*`, you can use `resourceUrlSubstitutionRegexes` to redirect all JavaScript assets requests to `https://staging.my-app.com/resources/chunks`—while main page and all API calls continue to be served by `prod.my-app.com`. Similarly, if you want to test the service behind the endpoints `https://prod.my-app.com/api/my-service`, you can redirect these API calls to `https://staging.my-app.com/api/my-service` to test this service in isolation with the production frontend.
 
+<!-- TODO: an example -->
+
 The `resourceUrlSubstitutionRegexes` field expects an array of strings, each containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL. The second is the expression to rewrite the URL.
 
-**Example 1**:
+#### Example 1
 
 ```
 https://prod.my-app.com/assets/(.*)|https://staging.my-app.com/assets/$1
 ```
 
-The regex, `https://prod.my-app.com/assets/(.*)`, uses a capture group to capture the path of the resource URL. The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-looking URL that points to `staging.my-app.com` and appends the captured group using `$1`. As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritten as `https://staging.my-app.com/assets/js/chunk-123.js`.
+The regex, `https://prod.my-app.com/assets/(.*)`, uses a capture group to capture the path of the resource URL. 
 
-A more complex substitution regex could look like the following: `(https?://)([^/]*)|$1<deployment-prefix>.$2`. With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix>.my-app.com/some/path`. Notice that the URL path is not affected by the rewrite, because it's not part of the substitution regex.
+The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-looking URL that points to `staging.my-app.com` and appends the captured group using `$1`. 
+
+As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritten as `https://staging.my-app.com/assets/js/chunk-123.js`.
+
+#### Example 2
+
+```
+`(https?://)([^/]*)|$1<deployment-prefix>.$2`
+```
+
+With this override, the URL `https://my-app.com/some/path` gets rewritten as `https://<deployment-prefix>.my-app.com/some/path`. Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
 
 <div class="alert alert-info">
-The <code>resourceUrlSubstitutionRegexes</code> will also be applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
+The <code>resourceUrlSubstitutionRegexes</code> is also applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
 </div>
 
 <div class="alert alert-info">

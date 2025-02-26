@@ -101,15 +101,13 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 The testing tunnel can be configured to work with multiple environments, including `localhost`, by using the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. These fields allow you to substitute parts of the starting URL and resource URLs based on the provided regular expressions, enabling you to redirect requests to different environments during test execution.
 
-For example, you can reuse the test scheduled in production to run on your development environment with `startUrl` and `startUrlSubstitutionRegex`
-
-For example, you can redirect requests for frontend assets to a local development environment while keeping the main page and API calls served by the production environment. This is useful for testing changes in isolation without needing to deploy the entire application.
+For example, you can reuse the test scheduled in production to run on your development environment with `startUrl` and `startUrlSubstitutionRegex`. You can also redirect requests for frontend assets to a local development environment while keeping the main page and API calls served by the production environment. This is useful for testing changes in isolation without needing to deploy the entire application.
 
 To use these options, specify the appropriate values in the `startUrl`, `startUrlSubstitutionRegex`, and `resourceUrlSubstitutionRegexes` fields. The `startUrl` and `startUrlSubstitutionRegex` fields allow you to modify the starting URL, while the `resourceUrlSubstitutionRegexes` field allows you to modify the URLs of all subsequent resource requests.
 
 For `resourceUrlSubstitutionRegexes`, specify an array of strings, each containing two parts separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the resource URL, and the second is the expression to rewrite the URL.
 
-A simple example looks like the following:
+For example:
 
 ```
 https://prod.my-app.com/assets/(.*)|http://localhost:3000/assets/$1
@@ -119,7 +117,7 @@ This regular expression captures the path of the resource URL and rewrites it to
 
 This feature allows you to test specific parts of your application in different environments, including `localhost`, ensuring that changes are properly validated before being deployed to production.
 
-You can learn more about these options in the [Testing Multiple Environment page][4].
+You can learn more about these options in [Testing Multiple Environments][4].
 
 ## Further reading
 
