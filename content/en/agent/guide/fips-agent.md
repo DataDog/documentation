@@ -66,7 +66,7 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
       ```
    1. If you're installing with a package, [follow the instructions][4] to install the latest `datadog-fips-agent` package available for your platform.
    1. Add `GOFIPS=1` to your Datadog environment variables, reload all service units, and restart the Datadog Agent service (`datadog-agent.service`). For example, if your host is using systemd:
-   
+
       ```sh
       echo "GOFIPS=1" | sudo tee -a /etc/datadog-agent/environment
       systemctl daemon-reload
@@ -113,9 +113,15 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 {{% /tab %}}
 {{< /tabs >}}
 
+## Post installation
+
+For more information FIPS compliant services on Datadog integrations, see [FIPS Verified Agent Integrations][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/en-us/windows/security/security-foundations/certification/fips-140-validation
 [2]: /agent/configuration/fips-compliance/
+[3]: /integrations/guide/fips-integrations
+
