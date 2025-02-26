@@ -104,6 +104,8 @@ connectors:
 
 ## Build and push the Agent image
 
+The custom Agent image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
+
 Build your custom Datadog Agent image and push it to a container registry.
 
 1. Build the image with Docker:
