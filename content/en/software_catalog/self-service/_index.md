@@ -47,15 +47,16 @@ For example, you can use Blueprints to:
 
 ### Start from scratch
 
-If you prefer to build an app from the ground up:
+If you prefer to build an App from the ground up:
 
-1. Create a form for the developer-facing frontend using App Builder.
+1. Create a form using App Builder.
 
-    1. Navigate to **Actions** > **App Builder** and select **New App**.
-    1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
-       - You can leverage the `Form` component or build a custom UI.
-    1. Select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters. You can also explore the available integrations in the [Actions Catalog][7] or leverage the `HTTP` action to interact with any integrations not provided out of the box.
-    1. Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
+    1. Navigate to **Actions** > **App Builder** from the left-hand menu, and select **New App**.
+    1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters.
+       - You can use the `Form` component or build a custom UI.
+    1. Select **New Query**, and use the **Trigger workflow** action to call your workflow and pass in parameters. 
+       - Explore [Actions Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
+    1. Create a **Button** to submit the form and triggers your workflow.
     1. Save and publish the app.
 
 1. Pair your App with [Actions][7] or a [Workflow][6] to automate processes.
@@ -64,8 +65,8 @@ If you prefer to build an app from the ground up:
 
 1. Test your App and Workflow.
    
-   1. Click **View App** to view the app on a standalone page in a preview.
-   1. Track the success of the workflow templating process in [Workflow Automation][3].
+   1. Click **View App** to preview the app on a standalone page.
+   1. Monitor workflow execution in [Workflow Automation][3].
 
 ### Publish your App 
 
