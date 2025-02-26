@@ -3320,6 +3320,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_monitors
       weight: 12
+    - name: Budgeting
+      url: /cloud_cost_management/budgeting
+      parent: cloud_cost
+      identifier: cloud_cost_budgeting
+      weight: 13
     - name: APM
       url: tracing/
       pre: apm
