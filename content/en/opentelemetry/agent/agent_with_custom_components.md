@@ -207,6 +207,8 @@ You can now use this new image to install the Agent. This enables Datadog monito
 
 For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
 
+<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
+
 ## Troubleshooting
 
 This section discusses some common issues you might encounter while building and running your custom Datadog Agent, along with their solutions:
