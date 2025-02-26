@@ -46,6 +46,14 @@ Source errors include code-level information about the error. More information a
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                     |
 
+### Error Cause
+
+Using the `error.cause` attribute allows you to chain errors more clearly. With this property, each error in the chain is displayed separately, ensuring that error messages and stack traces remain distinct with a better formating.
+
+| Attribute      | Type  | Description                                                                                          |
+|----------------|-------|------------------------------------------------------------------------------------------------------|
+| `error.cause`  | Error | An optional nested error providing additional context. Using this attribute displays errors separately and enhances formatting. |
+
 ## Collect errors manually
 
 Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
