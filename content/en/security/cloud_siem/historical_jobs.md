@@ -45,9 +45,9 @@ You can create [Calculated Fields][4] directly within a Historical Job query to 
 
 Use calculated fields to transform and enrich your query with formulas to:
 
-1. Manipulate text
-1. Perform arithmetic
-1. Evaluate conditional logic
+- Manipulate text
+- Perform arithmetic
+- Evaluate conditional logic
 
 Once defined, a calculated field can be used like any log attribute for analysis of the job, search across job results, and even defining other calculated fields.
 
