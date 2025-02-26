@@ -94,6 +94,7 @@ By default, public dashboards are accessible for one year before they expire and
 ## Embedded shared dashboards
 
 You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+This feature is currently not supported on Safari web browsers.
 
 The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
 
