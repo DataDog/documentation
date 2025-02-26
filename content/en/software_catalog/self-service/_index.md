@@ -49,28 +49,31 @@ For example, you can use Blueprints to:
 
 If you prefer to build an App from the ground up:
 
-1. Create a form using App Builder.
+1. Create a form using App Builder:
 
     1. Navigate to **Actions** > **App Builder** from the left-hand menu, and select **New App**.
     1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters.
        - You can use the `Form` component or build a custom UI.
     1. Select **New Query**, and use the **Trigger workflow** action to call your workflow and pass in parameters. 
        - Explore [Actions Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
-    1. Create a **Button** to submit the form and triggers your workflow.
+    1. Create a **Button** that submits the form and triggers your workflow.
     1. Save and publish the app.
 
 1. Pair your App with [Actions][7] or a [Workflow][6] to automate processes.
 
    {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
-1. Test your App and Workflow.
+1. Test your App and Workflow:
    
    1. Click **View App** to preview the app on a standalone page.
    1. Monitor workflow execution in [Workflow Automation][3].
 
 ### Publish your App 
 
-When you have finished setting up and testing your App, publish it for your team members to use. The publishing flow prompts you to define permissions and allows you to add your App to a Dashboard or the Self-Service portal. 
+Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
+
+- Define permissions to control access.
+- Add the App to a Dashboard or the Self-Service portal for easy discovery.
 
   {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     

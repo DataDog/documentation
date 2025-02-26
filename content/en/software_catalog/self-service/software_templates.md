@@ -15,99 +15,107 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-## Automate infrastructure provisioning and microservice scaffolding
-Create standardized Software Templates to help developers spin up microservices and infrastructure that align with your best practices. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers. Orchestrate software template workflows using [Workflow Automation][1]. Integrate them with Datadog's Software Catalog to enable dynamic and self-service workflows.
+Use Software Templates within Self-Service Apps to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
 {{< /callout >}} 
 
-### Create software templates
-To use software templates in Datadog, create a Git repository with the desired template. You can start from scratch or use our quickstart blueprints to learn from an example.
+## Create a Software Template
 
-#### Start from an example
-Navigate to [App Builder Blueprints][9] and select one of the following blueprints. These are examples of how to configure an App or Workflow to help you get started. You can make updates to the examples to fit your needs, such as configuring inputs, setting up integrations with source code management or cloud providers, and configuring permissions.
+A Software Template is stored in a Git repository and serves as a reusable framework. Developers interact with templates through Self-Service Apps, which collect inputs and pass them into the template repository to generate customized configurations.
 
-##### Scaffold New Service
+To create a Software Template, you can:
+- Start from an example using pre-built blueprints.
+- Start from scratch by defining your own template and workflows.
 
-The [Scaffold New Service blueprint][11] shows an example of scaffolding a new lambda function from a template. The form captures inputs from a developer that will be passed into the corresponding Git repo.
+### Start from an example
 
-1. From the app, customize the form to include the parameters you want to capture from your developers.
-2. Click **Save as New App** to save the app. This will also create a corresponding templating workflow.
+Use [App Builder Blueprints][9] to quickly configure an app or workflow. These blueprints provide working examples that you can customize by modifying inputs, integrating with source control or cloud providers, and adjusting permissions.
 
-##### Create S3 bucket with Terraform
+Example blueprints:
 
-The [Create S3 Bucket blueprint][10] shows an example of how to generate Terraform code for an S3 bucket using a form in GitHub.
+- **[Scaffold New Service blueprint][11]**: Create a form that collects developer inputs, integrates with GitHub, and generates a new repository or pull request.
+- **[Create S3 Bucket blueprint][10]**: Generate Terraform code for an S3 bucket using a form in GitHub.
+- **[Provision EKS Cluster blueprint][12]**: Generate Terraform code for a Kubernetes cluster in GitHub.
+- **[Provision RDS Instance blueprint][13]**: Provision an RDS instance in AWS through an API call.
 
-##### Provision Kubernetes cluster
+To use a blueprint:
 
-The [Provision EKS Cluster blueprint][12] shows an example of how to generate Terraform code for a Kubernetes cluster in GitHub.
+1. Select a blueprint in [**App Builder Blueprints**][9].
+1. Customize the form fields to capture the required inputs.
+1. Click **Save as New App** to create an App linked to a templating workflow.
 
-##### Provision RDS instance
+### Start from scratch
 
-The [Provision RDS Instance blueprint][13] shows an example of how to provision an RDS instance in AWS through an API call.
+To build a Software Template from scratch:
 
+1. Create a form using App Builder:
 
-#### Start from scratch
-Navigate to the [Workflow Automation][3] page to configure the template in Datadog.
-
-1. Create a form for the developer-facing frontend using App Builder:
-   - Navigate to **Actions** > **App Builder** and select **New App**.
-   - Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters for your template.
-   - You can leverage the `Form` component or build a custom UI.
-   - After your UI is done, select **New Query**, and use the **Trigger workflow** action to call your templating workflow and pass in the relevant parameters. You can also explore the available integrations in the [Actions Catalog][7] or leverage the `HTTP` action to interact with any integrations not provided out of the box.
-   - Create a **Button** that submits the form, triggers your workflow, and passes in the parameters for the template.
-   - Save and publish the app.
+    1. Navigate to **Actions** > **App Builder** from the left-hand menu, and select **New App**.
+    1. Enter a name and description, and use the drag-and-drop editor to create a form that collects the required parameters.
+       - You can use the `Form` component or build a custom UI.
+    1. Select **New Query**, and use the **Trigger workflow** action to call your workflow and pass in parameters. 
+       - Explore [Actions Catalog][7] for built-in integrations, or use the `HTTP` action to interact with any integrations not available.
+    1. Create a **Button** that submits the form and triggers your workflow.
+    1. Save and publish the app.
 
 2. [Create a workflow][6] for your template:
-   - From the [Workflow Automation][3] page, click **New Workflow**. 
-   - Enter a name, add relevant tags, and define the input parameters you want to collect from users.
+   
+   1. Navigate to [Workflow Automation][3] and click **New Workflow**. 
+   1. Enter a name, add relevant tags, and define the input parameters you want to collect from users.
   
 3. Configure the templating workflow:
-   - Use GitHub, Gitlab, or HTTP [actions][7] to retrieve your template files.
-   - Use the Apply Template [action][7] to manipulate your template repository and pass in your input parameters.
-   - Use GitHub, Gitlab, or HTTP [actions][7] to upload the project files to the repository.
-   - Save the workflow.
 
-  {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
+   1. Use GitHub, Gitlab, or HTTP [actions][7] to retrieve your template files.
+   1. Use the Apply Template [action][7] to manipulate your template repository and pass in your input parameters.
+   1. Use GitHub, Gitlab, or HTTP [actions][7] to upload the project files to the repository.
+   1. Save the workflow.
+
+  {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building Software Template automations" style="width:100%;" >}}
 
 4. Test your App and Workflow:
-   - Click **View App** to view the app on a standalone page in a preview.
-   - Track the success of the workflow templating process in [Workflow Automation][3].
 
-### Publishing your App 
-When you have finished setting up and testing up your Template, you can publish it for your team members to use. The publishing flow prompts you to define permissions and then allows you to add your App to a Dashboard or to the Self-Service portal. 
+   1. Click **View App** to preview the app as a standalone page.
+   1. Monitor the templating process in [Workflow Automation][3].
 
-  {{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
+## Publish your App 
 
-### Available templating actions
+Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
-Below is a list of actions available for Software Catalog in Datadog App Builder and Workflow Automation. You can see a full list of in the [Action Catalog][7].
+- Define permissions to control access.
+- Add the App to a Dashboard or the Self-Service portal for easy discovery.
+
+{{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
+
+## Available templating actions
+
+The following actions are available for Software Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
 
 - **Templating**
-  - "Apply template" to pass in parameters to a set of files
-- **Github**
-  - "Create or update file" to create new files
-  - "Edit configuration file" to manipulate YAML or JSON files
-  - "Trigger GitHub Actions workflow run" to initiate a GitHub Action
-  - "Search repositories" to return a list of repositories
-  - "Create pull request" to open a pull request
-- **Gitlab**
-  - "Create file" to create new files
-  - "Create project" to create new projects
+  - **Apply template**: Pass input parameters into a set of files.
+- **GitHub**
+  - **Create or update file**: Create or modify files in a GitHub repository.
+  - **Edit configuration file**: Modify YAML or JSON configuration files.
+  - **Trigger GitHub Actions workflow**: Initiate a GitHub Action.
+  - **Search repositories**: Retrieve a list of repositories.
+  - **Create pull request**: Open a pull request.
+- **GitLab**
+  - **Create file**: Create a file in a GitLab repository.
+  - **Create project**: Create a GitLab project.
 - **Azure DevOps**
-  - "Run pipeline" to trigger a pipeline run
+  - **Run pipeline**: Trigger a pipeline run in Azure DevOps.
 - **Retrieve Service Information**
-  - "List entity definitions" to get all definitions from Datadog Software Catalog (v3.0 and prior)
-  - "Get service dependencies" to get a service's immediate upstream and downstream services
+  - **List entity definitions**: Retrieve all service definitions from Datadog Software Catalog (v3.0 and prior).
+  - **Get service dependencies**: Retrieve a service's upstream and downstream dependencies.
 - **Approvals**
-  - "Make a decision" with Slack or MS Teams to solicit an approval through a message
-  - Use integrations with ServiceNow, Jira, or HTTP calls if you have an existing change management process.
+  - **Make a decision**: Use Slack or Microsoft Teams to solicit an approval.
+    - Use integrations with ServiceNow, Jira, or HTTP calls if you have an existing change management process.
 - **HTTP**
-  - Call any external API, regardless of whether or not Datadog has a pre-defined action
-- **Transform Data**
-  - Call "Function" or "Expression" to perform data transformations with Javascript
-  - Bits AI can help with writing any custom Javascript code
+  - **Make request**: Make an HTTP request to interact with any external API.
+- **Data Transformation**
+  - **Expression**, **Function**: Perform data transformations with JavaScript.
+    - Use Bits AI to assist with writing custom JavaScript code.
 - **Private Actions**
   - To interact with private resources, use the [Private Action Runner][12].
     
