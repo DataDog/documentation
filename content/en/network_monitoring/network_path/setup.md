@@ -154,20 +154,20 @@ instances:
 
 ### Network traffic paths (experimental)
 
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-Agent `v7.59+` is required.
-
 **Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
 
 Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
 
 <div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
 
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+Agent `v7.59+` is required.
+
 1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
 
-   ```
+   ```yaml
    traceroute:
      enabled: true
    ```
@@ -201,29 +201,21 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1697
+[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
 Agent `v7.61+` is required.
 
-For network traffic paths on Windows environments, only detected TCP connections are shown.
+1. Enable the `system-probe` traceroute module in `%ProgramData%\Datadog\system-probe.yaml` by adding the following:
 
-**Note**: Network traffic paths is experimental and is not yet stable. Do not deploy network traffic paths widely in a production environment.
-
-Configure network traffic paths to allow the Agent to automatically discover and monitor network paths based on actual network traffic, without requiring you to specify endpoints manually.
-
-<div class="alert alert-warning"> Enabling Network Path to automatically detect paths can generate a significant number of logs, particularly when monitoring network paths across a large number of hosts. </div>
-
-1. Enable the `system-probe` traceroute module in `/etc/datadog-agent/system-probe.yaml` by adding the following:
-
-   ```
+   ```yaml
    traceroute:
      enabled: true
    ```
 
-2. Enable `network_path` to monitor CNM connections by creating or editing the `/etc/datadog-agent/datadog.yaml` file:
+2. Enable `network_path` to monitor CNM connections by creating or editing the `%ProgramData%\Datadog\datadog.yaml` file:
 
     ```yaml
     network_path:
@@ -252,7 +244,7 @@ Configure network traffic paths to allow the Agent to automatically discover and
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L1697
+[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
 {{% /tab %}}
 {{< /tabs >}}
