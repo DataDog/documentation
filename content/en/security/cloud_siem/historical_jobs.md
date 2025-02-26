@@ -52,7 +52,7 @@ Use calculated fields to transform and enrich your query with formulas to:
 Once defined, a calculated field can be used like any log attribute for analysis of the job, search across job results, and even defining other calculated fields.
 
 From the Add menu:
-1. Navigate to [Define Search Queries][6].
+1. Find the [Define Search Queries][6] section.
 1. Click the Add button next to the search bar.
 1. Select Calculated field.
 
