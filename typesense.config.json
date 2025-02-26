@@ -87,6 +87,27 @@
                       }
                   }
               ]
+        },
+        {
+            "name": "docs_partners_v1",
+            "file_path": "./public/partners.json",
+            "presets": [
+                {
+                    "name": "docs_partners_view",
+                    "search_parameters": [
+                      {
+                          "collection": "docs_partners_v1",
+                          "sort_by": "_text_match:desc",
+                          "query_by": "title,content"
+                      },
+                      {
+                          "collection": "docs_alias",
+                          "sort_by": "_text_match:desc",
+                          "query_by": "title,content"
+                      }
+                    ]
+                }
+            ]
         }
     ]
 }
