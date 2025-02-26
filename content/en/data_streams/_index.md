@@ -28,7 +28,7 @@ cascade:
 ---
 
 
-{{% site-region region="gov,ap1" %}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
