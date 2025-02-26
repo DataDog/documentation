@@ -24,7 +24,7 @@ You can use facets to accomplish the following actions:
 
 The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with **Common**.
 
-<div class="alert alert-info">The list of available facets below may vary depending on your site and region.</a></div>
+<div class="alert alert-info">The following list of available facets may vary depending on your site and region.</a></div>
 
 ### Common test run attributes
 
