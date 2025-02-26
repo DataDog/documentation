@@ -217,7 +217,7 @@ Sigue las instrucciones del proveedor de nube que usas para archivar tus logs.
 1. Selecciona tu plataforma en el menú desplegable **Choose your installation platform** (Elige tu plataforma de instalación).
 1. Ingresa la dirección de Amazon Data Firehose. El worker de Observability Pipelines escucha esta dirección y este puerto para recibir logs desde Amazon Data Firehose.
 1. Proporciona las variables de entorno para cada uno de los destinos seleccionados. Para obtener más información, consulta [Requisitos previos](#prerequisites).
-{{< tab >}}
+{{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
 
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
