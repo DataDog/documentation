@@ -5,3 +5,4 @@ To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#res
 **Notes**:
    - Warning messages appear on the AWS integration tile in Datadog if you enable resource collection, but do not have the AWS Security Audit Policy attached to your Datadog IAM role.
    - To enable Datadog to collect account management resources from `account.GetAlternateContact` and `account.GetContactInformation`, you need to <a href="https://docs.aws.amazon.com/accounts/latest/reference/using-orgs-trusted-access.html">enable trusted access for AWS account management</a>.
+   - AWS Govcloud and AWS China accounts are not currently supported.
