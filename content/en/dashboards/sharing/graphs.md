@@ -19,6 +19,16 @@ further_reading:
   text: "Discover Widgets for your Dashboard"
 ---
 
+## Share states
+
+Shared graphs can be in one of two share states:
+
+**Active**
+: The shared graph is assigned a specific URL and is available to anyone on the internet with a link.
+
+**Disabled**
+: Viewers cannot access the shared graph. This is configured by an organization admin in [**Organization Settings > Public Sharing**][10], and previous access is restored if the shared graphs feature is re-enabled.
+
 To share a graph:
 
 1. From the graph you want to share, click the pencil icon in the upper right corner.
@@ -68,3 +78,4 @@ Datadog has a [dedicated API][4] allowing you to interact with your shared graph
 [7]: /api/latest/embeddable-graphs/#get-specific-embed
 [8]: /api/latest/embeddable-graphs/#enable-embed
 [9]: /api/latest/embeddable-graphs/#revoke-embed
+[10]: https://app.datadoghq.com/organization-settings/public-sharing

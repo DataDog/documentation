@@ -29,13 +29,16 @@ Shared dashboards refresh approximately every 60 seconds, and this [refresh rate
 
 ## Share states
 
-Shared dashboards can be in one of two share states:
+Shared dashboards can be in one of three share states:
 
 **Active**
 : The shared dashboard is assigned a specific URL and is available to viewers who are configured to access the dashboard.
 
 **Paused**
 : Viewers cannot access the shared dashboard, even if invited. However, the shared dashboard URL remains linked to the dashboard, and previous access is restored if the dashboard is reset to **Active**.
+
+**Disabled**
+: Viewers cannot access the shared dashboard, even if invited. This is configured by an organization admin in [**Organization Settings > Public Sharing**][3], and previous access is restored if the shared dashboard feature is re-enabled.
 
 **Unsharing** a dashboard removes its share URL and deletes all shared configuration settings, making all links invalid. When you reshare the dashboard, it does not retain the previous share URL or settings.
 
@@ -53,6 +56,8 @@ To share a dashboard with one or more email addresses:
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
 
 **Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
+
+The maximum valid duration of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3], it defaults to no maximum.
 
 ### Access an invite-only shared dashboard
 
@@ -162,3 +167,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
+[3]: https://app.datadoghq.com/organization-settings/public-sharing
