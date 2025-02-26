@@ -65,6 +65,6 @@ See [Calculated Fields Expression Language][5] for the available functions and o
 [1]: https://app.datadoghq.com/security/rules
 [2]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem
 [3]: https://app.datadoghq.com/security/detections/historical-jobs
-[4]: https://docs.datadoghq.com/logs/explorer/calculated_fields/
-[5]: https://docs.datadoghq.com/logs/explorer/calculated_fields/expression_language/
+[4]: /logs/explorer/calculated_fields/
+[5]: /logs/explorer/calculated_fields/expression_language/
 [6]: https://app.datadoghq.com/security/configuration/siem/rules/new-job?product=siem#rule-editor-define-queries
