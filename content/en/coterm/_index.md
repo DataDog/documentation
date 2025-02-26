@@ -1,8 +1,12 @@
 ---
-title: Record terminal sessions and processes with CoTerm
+title: Datadog CoTerm
+further_reading:
+- link: "https://www.datadoghq.com/blog/introducing-coterm/"
+  tag: "Blog"
+  text: "Livestream, record, and log terminal sessions with Datadog CoTerm"
 ---
 
-CoTerm enables you to record terminal sessions and analyze these recordings in Datadog. Investigating terminal sessions provides context about how system and security incidents were caused and remediated.
+Datadog CoTerm enables you to record terminal sessions and analyze these recordings in Datadog. Investigating terminal sessions provides context about how system and security incidents were caused and remediated.
 
 For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfuscate sensitive data, such as passwords and API keys.
 

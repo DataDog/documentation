@@ -1022,6 +1022,21 @@ menu:
       identifier: coterm
       parent: essentials_heading
       weight: 120000
+    - name: Installation
+      url: coterm/install
+      identifier: coterm_install
+      parent: coterm
+      weight: 1
+    - name: Usage
+      url: coterm/usage
+      identifier: coterm_usage
+      parent: coterm
+      weight: 2
+    - name: Lints & Rules
+      url: coterm/rules
+      identifier: coterm_rules
+      parent: coterm
+      weight: 3
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
