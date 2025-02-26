@@ -2,7 +2,6 @@
 title: Datadog OTLP Metrics Intake Endpoint
 aliases:
   - "/opentelemetry/otlp_metrics"
-private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"
     tag: "External Site"

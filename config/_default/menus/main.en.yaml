@@ -690,6 +690,10 @@ menu:
       url: /opentelemetry/setup/intake_endpoint/otlp_logs
       parent: otel-setup-intake-endpoint
       weight: 301
+    - name: Metrics Endpoint
+      url: /opentelemetry/setup/intake_endpoint/otlp_metrics
+      parent: otel-setup-intake-endpoint
+      weight: 302
     - name: Semantic Mapping
       url: opentelemetry/mapping/
       identifier: otel_schema
