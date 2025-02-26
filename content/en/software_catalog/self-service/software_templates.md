@@ -93,28 +93,28 @@ Once your Software Template is configured and tested, publish it so your team ca
 The following actions are available for Software Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
 
 - **Templating**
-  - **Apply template**: Pass input parameters into a set of files.
+  - "Apply template": Pass input parameters into a set of files.
 - **GitHub**
-  - **Create or update file**: Create or modify files in a GitHub repository.
-  - **Edit configuration file**: Modify YAML or JSON configuration files.
-  - **Trigger GitHub Actions workflow**: Initiate a GitHub Action.
-  - **Search repositories**: Retrieve a list of repositories.
-  - **Create pull request**: Open a pull request.
+  - "Create or update file": Create or modify files in a GitHub repository.
+  - "Edit configuration file": Modify YAML or JSON configuration files.
+  - "Trigger GitHub Actions workflow": Initiate a GitHub Action.
+  - "Search repositories": Retrieve a list of repositories.
+  - "Create pull request": Open a pull request.
 - **GitLab**
-  - **Create file**: Create a file in a GitLab repository.
-  - **Create project**: Create a GitLab project.
+  - "Create file": Create a file in a GitLab repository.
+  - "Create project": Create a GitLab project.
 - **Azure DevOps**
-  - **Run pipeline**: Trigger a pipeline run in Azure DevOps.
+  - "Run pipeline": Trigger a pipeline run in Azure DevOps.
 - **Retrieve Service Information**
-  - **List entity definitions**: Retrieve all service definitions from Datadog Software Catalog (v3.0 and prior).
-  - **Get service dependencies**: Retrieve a service's upstream and downstream dependencies.
+  - "List entity definitions": Retrieve all service definitions from Datadog Software Catalog (v3.0 and prior).
+  - "Get service dependencies": Retrieve a service's upstream and downstream dependencies.
 - **Approvals**
-  - **Make a decision**: Use Slack or Microsoft Teams to solicit an approval.
+  - "Make a decision": Use Slack or Microsoft Teams to solicit an approval.
     - Use integrations with ServiceNow, Jira, or HTTP calls if you have an existing change management process.
 - **HTTP**
-  - **Make request**: Make an HTTP request to interact with any external API.
+  - "Make request": Make an HTTP request to interact with any external API.
 - **Data Transformation**
-  - **Expression**, **Function**: Perform data transformations with JavaScript.
+  - "Expression", "Function": Perform data transformations with JavaScript.
     - Use Bits AI to assist with writing custom JavaScript code.
 - **Private Actions**
   - To interact with private resources, use the [Private Action Runner][12].
