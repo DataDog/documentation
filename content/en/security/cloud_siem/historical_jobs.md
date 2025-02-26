@@ -49,7 +49,7 @@ Use calculated fields to transform and enrich your query with formulas to:
 - Perform arithmetic
 - Evaluate conditional logic
 
-Once defined, a calculated field can be used like any log attribute for analysis of the job, search across job results, and even defining other calculated fields.
+A calculated field can be used like any log attribute for job analysis, searching job results, and defining other calculated fields.
 
 From the Add menu:
 1. Find the [Define Search Queries][6] section.
