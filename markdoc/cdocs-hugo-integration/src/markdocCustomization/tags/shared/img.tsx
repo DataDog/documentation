@@ -1,5 +1,5 @@
 import { HugoConfig } from '../../../schemas/config/hugo';
-import { cssStringToObject } from '../utils';
+import { cssStringToObject } from '../../../utils';
 
 /**
  * The JS equivalent to the `img` partial.

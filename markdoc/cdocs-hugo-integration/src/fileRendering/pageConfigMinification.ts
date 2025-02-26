@@ -5,9 +5,11 @@
 
 import { ClientFunction, ClientVariable } from 'cdocs-markdoc/src/types';
 
+// TYPES ------------------------------------------------------------
+
 /**
  * The minified version of a ClientVariable,
- * which can be reresolved on the client side
+ * which can be re-resolved on the client side
  * to contain a different value than it was originally
  * resolved with on the server side.
  *
@@ -97,6 +99,8 @@ export const CLIENT_FUNCTION_EXPAND_MAP = {
   deb: 'debug'
 };
 
+// CONSTANTS --------------------------------------------------------
+
 /**
  * The mapping of expanded client function names
  * to their minified versions.
@@ -110,6 +114,8 @@ export const CLIENT_FUNCTION_MINIFY_MAP = {
   default: 'def',
   debug: 'deb'
 };
+
+// FUNCTIONS --------------------------------------------------------
 
 /**
  * Expand a minified client variable.

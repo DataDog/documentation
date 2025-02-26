@@ -1,5 +1,5 @@
 import { HugoConfig } from '../../../schemas/config/hugo';
-import { cssStringToObject } from '../utils';
+import { cssStringToObject } from '../../../utils';
 import { getFingerprintedPermalink, relUrl } from '../../../hugoUtils';
 
 /**

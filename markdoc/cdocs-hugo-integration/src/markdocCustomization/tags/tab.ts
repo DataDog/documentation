@@ -1,4 +1,4 @@
-import { Config, Node } from 'cdocs-markdoc';
+import { Config, Node, MaybePromise, RenderableTreeNodes } from 'cdocs-markdoc';
 import { CustomHtmlComponent } from '../renderer';
 import { anchorize } from '../../hugoUtils';
 
@@ -10,7 +10,7 @@ export const tabDefinition = {
       required: true
     }
   },
-  transform(node: Node, config: Config) {
+  transform(node: Node, config: Config): MaybePromise<RenderableTreeNodes> {
     return {
       $$mdtype: 'Tag',
       name: 'Tab',

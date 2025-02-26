@@ -6,7 +6,7 @@ import {
   CustomizationConfig
 } from 'cdocs-data';
 import { IntegrationConfig } from './schemas/config/integration';
-import { HugoGlobalConfig } from './schemas/config/hugo';
+import { HugoConfigSchema, HugoGlobalConfig } from './schemas/config/hugo';
 import { parseMdocFile } from './fileParsing';
 import { renderFile } from './fileRendering';
 import { buildSiteAssets } from './siteAssetBuilding';
@@ -212,17 +212,21 @@ export class CdocsHugoIntegration {
     }
 
     // build the HTML and write it to an .md file
+    const hugoConfig = {
+      global: this.hugoGlobalConfig,
+      page: {
+        path: p.markdocFilepath,
+        lang
+      }
+    };
+
     try {
+      HugoConfigSchema.parse(hugoConfig);
+
       const { html, errors } = renderFile({
         parsedFile: p.parsedFile,
         filtersManifest: filtersManifest,
-        hugoConfig: {
-          global: this.hugoGlobalConfig,
-          page: {
-            path: p.markdocFilepath,
-            lang
-          }
-        }
+        hugoConfig
       });
 
       errors.forEach((error) => {

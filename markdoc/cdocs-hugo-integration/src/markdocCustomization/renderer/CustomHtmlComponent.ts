@@ -1,8 +1,6 @@
 import { render } from '.';
 import { Tag, Config } from 'cdocs-markdoc';
 import { HugoConfig, HugoConfigSchema } from '../../schemas/config/hugo';
-import MarkdownIt from 'markdown-it';
-const { escapeHtml, unescapeAll } = MarkdownIt().utils;
 
 /**
  * The base class for all custom HTML components
@@ -19,8 +17,7 @@ export abstract class CustomHtmlComponent {
   tag: Tag;
   markdocConfig: Config | undefined;
   hugoConfig: HugoConfig;
-  // TODO: What kind of type should be used for components?
-  components: Record<string, any> | undefined;
+  components: Record<string, CustomHtmlComponent> | undefined;
 
   constructor(p: {
     tag: Tag;
@@ -30,9 +27,6 @@ export abstract class CustomHtmlComponent {
   }) {
     this.markdocConfig = p.markdocConfig;
     this.hugoConfig = p.hugoConfig;
-
-    // TODO: Do this once up front instead of every time a component is created
-    HugoConfigSchema.parse(this.hugoConfig);
 
     this.components = p.components;
     this.tag = p.tag;

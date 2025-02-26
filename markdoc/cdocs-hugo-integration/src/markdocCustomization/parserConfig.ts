@@ -1,9 +1,8 @@
 /**
- * All custom tag definitions required to build
- * the configuration object that is expected by Markdoc
- * in order for it to parse our file content correctly,
- * and expected by our own custom render function as a source
- * of custom JSX templates and other rendering logic.
+ * Markdoc takes a configuration object that should contain
+ * definitions for any custom tags. This file combines all
+ * of our custom tags (such as alert) into
+ * that configuration object and exports it.
  *
  * You can read more about the Markdoc config object here:
  * https://markdoc.dev/docs/config

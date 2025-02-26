@@ -1,5 +1,15 @@
 import { ClientVariable, ClientFunction, functions, Config } from 'cdocs-markdoc';
 
+/**
+ * Given a ClientFunction node, re-evaluate it to see
+ * if its return value has changed. This logic is run anytime
+ * a user updates their filter preference for a page.
+ *
+ * For example, for the Markdoc tag `{% if equals($color, 'blue') %}`,
+ * the ClientFunction will represent the `equals` function,
+ * and the ClientFunction's parameters are
+ * the variables and values that the function is comparing.
+ */
 export function reresolveFunctionNode(
   functionNode: ClientFunction,
   config: Config
@@ -24,6 +34,14 @@ export function reresolveFunctionNode(
   return functionNode;
 }
 
+/**
+ * Given a ClientVariable node, re-evaluate it to see if its value has changed.
+ * This logic is run anytime a user updates their filter preference for a page.
+ *
+ * For example, for the Markdoc tag `{% if equals($color, 'blue') %}`,
+ * a ClientVariable will represents the `$color` variable,
+ * and its value will evaluate to the current value of the `color` trait.
+ */
 export function reresolveVariableNode(
   variableNode: ClientVariable,
   config: Config
@@ -34,6 +52,7 @@ export function reresolveVariableNode(
       path: variableNode.path,
       value: undefined
     };
+
   if (config.variables instanceof Function) {
     return {
       $$mdtype: 'Variable',
@@ -41,6 +60,7 @@ export function reresolveVariableNode(
       value: config.variables(variableNode.path)
     };
   }
+
   let value: any;
   for (const key of variableNode.path) {
     value = value ? value[key] : config.variables[key];

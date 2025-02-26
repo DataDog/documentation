@@ -28,17 +28,13 @@ const voidElements = new Set([
  * A custom rendering function that takes a tree of nodes
  * and renders them into a string of HTML.
  *
- * Markdoc includes a HTML renderer and React renderer OOTB,
- * but we require a custom renderer because our version of the
- * rendering tree contains extra information about when
- * to display certain nodes, and we render this extra information
+ * Out of the box, Markdoc provides an HTML renderer and
+ * a React renderer, but also allows custom renderers.
+ * We require a custom renderer because the cdocs-markdoc version
+ * of the rendering tree contains extra information about when
+ * to display certain nodes. We render this extra information
  * into the HTML as proprietary HTML attributes, so these conditions
  * can be re-evaluated as needed on the client side.
- *
- * In OOTB Markdoc, this idea of conditionality
- * does not exist at the rendering step -- the conditionality is
- * resolved earlier and the rendering tree only contains the nodes
- * that should be displayed.
  *
  * Read more about Markdoc's rendering step:
  * https://markdoc.dev/docs/render#render
@@ -114,7 +110,7 @@ function render(p: {
   }
 
   // If this tag is an `if` tag, it should function as
-  // a conditional display wrapper. Render it as a div
+  // a conditional display wrapper. Render it as a div or span
   // with a display class that can be toggled off and on
   // by the client side JavaScript.
   if ('if' in p.node && p.node.if) {
@@ -141,8 +137,8 @@ function render(p: {
     });
   }
 
-  // If this is a standard HTML tag, convert it HTML markup
-  // and return that
+  // If this is a standard HTML tag such as `a`,
+  // convert it HTML markup and return that
   let output = `<${name}`;
   for (const [k, v] of Object.entries(attributes ?? {}))
     output += ` ${k.toLowerCase()}="${escapeHtml(String(v))}"`;

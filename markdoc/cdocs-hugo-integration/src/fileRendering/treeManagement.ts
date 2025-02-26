@@ -1,11 +1,18 @@
 /**
  * A set of functions for working with Markdoc's renderable tree.
  * For example, we collect conditions from the renderable tree
- * so we can attach them to their corresponding elements
- * using event listeners.
+ * so we can continually evaluate those conditions in the browser
+ * and use the result to toggle the visibility of any relevant elements.
  *
- * The renderable tree is used to render HTML output at compile time.
- * Read more about Markdoc's phases: https://markdoc.dev/docs/render
+ * The renderable tree is used to render HTML output at compile time,
+ * but is not used for re-renders when the user changes a filter setting.
+ *
+ * Renderable trees are created by the cdocs-markdoc package:
+ * https://github.com/DataDog/corp-node-packages/blob/master/packages/cdocs-markdoc/README.md
+ *
+ * Example renderable tree:
+ * https://github.com/DataDog/corp-node-packages/blob/master/packages/cdocs-markdoc/test/__snapshots__/functionsAndConditions/renderableTree.snap.json
+ *
  */
 
 import { CompilationError, ParsedFile } from '../schemas/compilationResults';
@@ -13,7 +20,8 @@ import CdocsMarkdoc, {
   RenderableTreeNodes,
   RenderableTreeNode,
   ClientFunctionSchema,
-  Tag
+  Tag,
+  Config
 } from 'cdocs-markdoc';
 import { MinifiedClientFunction, minifyClientFunction } from './pageConfigMinification';
 import { transformConfig } from '../markdocCustomization/parserConfig';

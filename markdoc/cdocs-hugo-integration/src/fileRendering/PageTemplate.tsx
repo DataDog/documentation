@@ -3,10 +3,7 @@ import { buildCustomizationMenuUi } from './customizationMenu';
 
 /**
  * A JSX template for the main content area of a page,
- * including the filter selector if one should be present.
- *
- * JSX templates should not hold state, as they are
- * only rendered once, at compile time.
+ * including the customization menu if one should be present.
  */
 export const PageTemplate = (props: {
   valsByTraitId: Record<string, string>;
