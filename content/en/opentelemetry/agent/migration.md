@@ -375,6 +375,8 @@ After configuring your application, verify that data is flowing correctly to Dat
    kubectl apply -f deployment.yaml
    ```
 1. Confirm that telemetry data is being received in your Datadog account. Check logs, traces and metrics to ensure correct data collection and correlation.
+1. Review your dashboards and monitors to ensure they reference the correct metric names, as some metric names may change when migrating from a standalone OpenTelemetry Collector to the Datadog Agent with embedded Collector.
+
 
 ## Uninstall standalone Collector
 
