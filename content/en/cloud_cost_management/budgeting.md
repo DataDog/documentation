@@ -6,10 +6,6 @@ further_reading:
   text: "Cloud Cost Management"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-Budgeting is in Preview. To request access, contact your CSM.
-{{< /callout >}}
-
 ## Overview
 After you start ingesting your costs in Cloud Cost Management, set up budgets and easily visualize how you're tracking against budgets.
 
@@ -19,7 +15,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    1. **Budget Name**
    2. **Start Date** - This can be a past month. Budgets are set at the month level.
    3. **End Date** - The end date can be in the future. Note: If both the start and end dates are in the past, you can not view that budget's status at this time.
-   4. **Provider(s)** - Budget on any combination of AWS, Azure, Google Cloud, any SaaS, Custom Costs, and even Datadog costs.
+   4. **Provider(s)** - Budget on any combination of AWS, Azure, Google Cloud,g any SaaS, Custom Costs, and even Datadog costs.
    5. **Dimension to budget by** - Specify a dimension to track the budget, along with the corresponding values. For example, if you have team budgets, for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
 {{< img src="cloud_cost/budgeting/budget-creation-view.png" alt="Budget Creation View: fill in budget details">}}
