@@ -27,7 +27,7 @@ The Device profiles template provides a guided, GUI-based experience to:
 - Seamlessly create and manage device profiles.
 - Specify tags and metrics to be collected from your network devices. 
 - Verify the matching devices to each profile.
-- Review a snapshot of the device profiles you created on the [Inventory page](#inventory-page)
+- Review a snapshot of the device profiles you created on the [Inventory page](#inventory-page).
 
 For more information on advanced profile details, review the [Profile Format Reference][3] page.
 
@@ -40,7 +40,7 @@ The minimum Agent version required is `7.64` or higher.
 ### Step 1: Profile details
 
   1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
-  2. Click on Device Onboarding > **+ Create New Profile**. This brings you to the profile creation page shown below.
+  2. Click on **Device Onboarding > + Create New Profile**. This brings you to the profile creation page shown below.
      {{< img src="/network_device_monitoring/profile_onboarding/create_profile_3.png" alt="The Network Device profile creation page" style="width:100%;">}}
 
   3. Provide your device profile a name and description (optional).
@@ -48,44 +48,61 @@ The minimum Agent version required is `7.64` or higher.
 
      {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field_2.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:60%;">}}
 
+  5. Click **Next** to proceed to Step 2.
+
 ### Step 2: Profile inheritance 
 
-Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. After you select a profile to inherit, the fields are populated on the right side of the screen under **Inherited Profiles**, with an `Inherited` tag next to any metrics or metadata inherited from this profile: (Need new screen shots as currently isn't showing Inherited tags for Scalar metrics)
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. 
 
-  {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
+1. Keep the Datadog `_base.yaml` profile, and optionally, select one or more profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics or metadata:
 
-**Note**: Changes to parent profiles are propagated to the child profiles.
+   {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
+
+    **Note**: Changes to parent profiles are propagated to the child profiles.
+
+2. Click **Next** to proceed to Step 3.
 
 ### Step 3: Select reference devices
 
 Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#profile-details).
 
-**Note**: A single reference device is sufficient to perform a device scan, however, you have the option to add more devices or change the current selection.
+1. Keep the current reference device selection to perform a device scan. Additionally, you can add more devices or change the current selection.
+2. Optionally, click **Proceed Manually** to proceed without performing a scan.
 
   {{< img src="/network_device_monitoring/profile_onboarding/reference_devices.png" alt="The Network Device profile creation page showing the Reference device section." style="width:100%;">}}
 
+2. Click **Scan Devices** to proceed to Step 4.
+
 ### Step 4: Scan reference devices
 
-Scan additional reference devices to discover their available metrics. This scan performs an SNMP walk on your devices with [Datadog Remote Configuration][14]. The **Scanned Devices** tab will show which devices were scanned with Remote Configuration or manually.
+This step scans your devices to discover their available metrics. Running a scan allows you to view all available metrics for your device, making it easier to fill in metrics, metadata, and tags. The scan performs an SNMP walk on your devices using [Datadog Remote Configuration][14]. 
 
-Why would a device not be scanned?
-If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
- - Direct them to enabled RC 
- - Option to do manual scan 
+The **Scanned Devices** tab will show which devices were scanned with Remote Configuration or manually.
 
   {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
 
+Click **Next** to proceed to Step 5.
+
 ### Step 5: Define metadata
 
-Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices using inherited profiles will have predefined settings, including device name and description, even without inheritance. You have the option to override these defaults in the **Define Metadata** section. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets.
+Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices with inherited profiles contain predefined settings such as device name and description. Additionally, devices using the `_base.yaml` profile include predefined configurations. You have the option to override these defaults in the **Define Metadata** section.
 
-  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metadata section." style="width:100%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metrics section." style="width:80%;">}}
+
+  1. Click the pencil icon to edit and modify any of the default metadata fields.
+  
+  2. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets, and on the side panel of a selected device:
+
+     {{< img src="/network_device_monitoring/profile_onboarding/device_metadata.png" alt="The NDM side panel page profile, highlighting the metadata sections." style="width:100%;">}}
+
+  3. Click **Next** to proceed to Step 6.
 
 ### Step 6: Define metrics
 
 To add additional metrics in to your devices, click **Add Metrics**. This opens a modal displaying all available metrics for the device. Hover over metrics to see units and descriptions for easier selection. Metrics can be added either from a device scan or by manually creating a new metric for the profile.
 
- {{< img src="/network_device_monitoring/profile_onboarding/add_metrics.png" alt="The Network Device profile creation page showing the define metrics section." style="width:100%;">}}
+Get video of selecting then the modal. Add more copy showing what will be populated with manual flow (can copy from old docs) 
+Once you press Add goes back to main form page - purple is inherited
 
 ### Step 7: Global Tags
 
@@ -202,6 +219,11 @@ The advanced options for scalar and tabular metrics are the same:
 - Why do I see no matching devices? 
 - What happens if I don't have remote configuration enabled on my collectors?
 - Inherited data (metrics, global tags) cannot be overridden from the children 
+- Why would a device not be scanned?
+If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
+ - Direct them to enabled RC 
+ - Option to do manual scan 
+(RC is not enabled on Agent , upgrade to most recent Agent 7.64) OR RUN scan manually
 
 
 ## Further Reading
