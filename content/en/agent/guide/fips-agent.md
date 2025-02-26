@@ -66,7 +66,7 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
       ```
    1. If you're installing with a package, [follow the instructions][4] to install the latest `datadog-fips-agent` package available for your platform.
    1. Add `GOFIPS=1` to your Datadog environment variables, reload all service units, and restart the Datadog Agent service (`datadog-agent.service`). For example, if your host is using systemd:
-   
+
       ```sh
       echo "GOFIPS=1" | sudo tee -a /etc/datadog-agent/environment
       systemctl daemon-reload
@@ -112,6 +112,12 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Post installation
+
+If you are using integrations, please refer to the [FIPS Verified Agent Integrations][1] for further guidance.
+
+[1]: /integrations/guide/fips-integrations
 
 ## Further reading
 
