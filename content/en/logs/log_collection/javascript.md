@@ -587,7 +587,7 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function takes two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
+The `beforeSend` callback function is invoked with two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
 
 ```javascript
 function beforeSend(log, context)
