@@ -2,6 +2,7 @@
 |--------------------------------------------|----------------|-----------------|---------------------|
 | Amazon OpenSearch                          | None           | 10,000,000      | 1                   |
 | Amazon S3 (Datadog Log Archives)           | None           | 100,000,000     | 900                 |
+| Amazon Security Lake                       | None           | 256,000,000     | 300                 |
 | Azure Storage (Datadog Log Archives)       | None           | 100,000,000     | 900                 |
 | Datadog Logs                               | 1,000          | 4,250,000       | 5                   |
 | Elasticsearch                              | None           | 10,000,000      | 1                   |
