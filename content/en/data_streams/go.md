@@ -1,5 +1,9 @@
 ---
 title: Setup Data Streams Monitoring for Go
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+      tag: 'Blog'
+      text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 The following instrumentation types are available:
@@ -115,6 +119,16 @@ if ok {
 ```go
 	ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
+
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /agent/
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
