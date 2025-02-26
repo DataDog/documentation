@@ -1,94 +1,59 @@
 ---
 title: Exploring Database Schemas
-description: Explore and dig into your database host health and configuration
-
+description: Explore and analyze database schemas, including tables, columns, and indexes.
 ---
 
-{{< img src="database_monitoring/databases-list-2.png" alt="The Databases page in Datadog" style="width:90%;" >}}
+The [Schemas][1] page allows you to explore and analyze database structures directly in Datadog, removing the need to manually access a database to view table details.
 
-On the [Databases page][1], you can assess the health and activity of your database hosts. Sort and filter the list to prioritize hosts with triggered alerts, high query volume, and other criteria. Click on any host in the list to open a details panel:
+The **Schemas** page in Datadog Database Monitoring allows you to efficiently explore and analyze database structures. It replaces the need to manually access a database for schema exploration and provides detailed visibility into your databases.
 
-{{< img src="database_monitoring/db-list-details-panel-cropped-2.png" alt="The details panel for a single database host on the Databases page" style="width:90%;" >}}
+The Schemas feature allows you to:
 
-In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
+- View all databases within an instance.
+- Explore available schemas within each database.
+- Examine a complete list of tables within a schema.
+- Analyze table columns, including **data types, default values, null constraints, indexes, and index usage**.
 
-|                                                 | Postgres  | SQL Server | MySQL     | Oracle    |
-|-------------------------------------------------|-----------|------------|-----------|-----------|
-| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |
-| [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
-| [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
-| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           | {{< X >}} |
-| [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
-| [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
+## Data Type and Index Insights
 
-## Top queries
+Within the **Schemas** tab, users can inspect:
 
-On the **Top Queries** tab of the host details panel, you can sort the most common queries by maximum duration, average latency, and more.
+- Table structures, including **column names and data types**.
+- Index details, such as **index types and index usage statistics**.
+- Metadata directly from the Datadog interface for enhanced analysis.
 
-{{< img src="database_monitoring/db-list-top-queries.png" alt="The Top Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+<div class="alert alert-info">The Schemas feature is available for PostgreSQL and SQL Server.</div>
 
-Click on any query statement to open a details panel that includes:
-- query insights
-- graphs for average latency and other key metrics
-- explain plans
-- blocking activity
-- hosts that have run the query
-- calling services
+PLACEHOLDER FOR IMAGE
 
-{{< img src="database_monitoring/db-list-query-details.png" alt="The details panel for an individual top query" style="width:90%;" >}}
+## Configuration
 
-### Stored procedures
+To enable the schemas feature, ensure that your Database Monitoring configuration includes the following parameter:
 
-Where supported, the **Top Queries** tab includes a **Stored Procedures** section that lists each stored procedure by name, along with its average duration, logical reads count, logical writes count, and more. Expand a stored procedure to view its individual SQL queries, and click on a query to view its details panel.
+```yaml
+collect_schemas: true
+```
 
-{{< img src="database_monitoring/stored-procedures.png" alt="A list of stored procedures, with one expanded to show its SQL query" style="width:90%;" >}}
+## Exploring schemas
 
-## Metrics
+You can view the schemas for a database from the Schemas page or the database host side panel.
 
-On the **Metrics** tab of the host details panel, you can view and filter metrics for system health, query activity, blocking operations, function performance, and other key areas.
+### Schemas page
 
-{{< img src="database_monitoring/db-list-metrics.png" alt="The Metrics tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+On the Schemas page, select a table to open the table details panel. This panel allows you to examine:
 
-## Active connections
+- **Columns**: Review each column's name, data type, and default values, including constraints such as **NOT NULL**.
+- **Indexes**: View details about index types and their usage metrics.
+- **Foreign Keys**: If applicable, explore existing foreign key associations for the table.
 
-The **Active Connections** tab of the host details panel displays the live queries being executed on the host. Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
+### Database host side panel
 
-{{< img src="database_monitoring/db-list-active-connections-2.png" alt="The Active Connections tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
+On the **Schema** tab, select a database to view its associated schemas.
 
-## Schema
+From the **Schemas** tab, select a database to view its associated schemas. The interface organizes schemas hierarchically, displaying:
 
-Use the **Schema** tab to explore database structures, tables, columns, data types, existing foreign keys, and indexing strategies for every database on a host.
+- **Schemas within the database**
+- **Tables within each schema**
+- **Column-level details for each table**
 
-{{< img src="database_monitoring/db-list-schema-tab.png" alt="The Schema tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
-
-## Blocking queries
-
-On the **Blocking Queries** tab of host details panel, you can view visualizations for:
-
-- blocking query durations
-- blocking query executions
-- the number of waiting queries
-
-You can search and filter the queries or samples. Click any individual query row to view details.
-
-{{< img src="database_monitoring/db-list-blocking-queries.png" alt="The Blocking Queries tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
-
-## Calling services
-
-On the **Calling Services** tab of the host details panel, you can view the list of services that have called the host. The displayed service information includes when the service was deployed, the number of requests made to the host per second, how many database queries were executed, and more.
-
-{{< img src="database_monitoring/db-list-calling-services.png" alt="The Calling Services tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
-
-Click any service row to view its APM dashboard.
-
-## Configuration details
-
-<div class="alert alert-info">The host must have <code>collect_settings</code> enabled in its <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L397">instance configuration</a> for this feature to work properly.</div>
-
-The **Configuration** tab of the host details panel provides a direct view into the host's configuration parameters without compromising database security. Use it to identify misconfigured database parameters and adjust settings to optimize database performance.
-
-{{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
-
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/schemas
