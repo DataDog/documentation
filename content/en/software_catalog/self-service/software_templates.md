@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-Use Software Templates within Self-Service Apps to help developers quickly provision infrastructure and create microservices that align with your best practices. 
+Use Software Templates within Self-Service to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
@@ -23,7 +23,7 @@ Use Software Templates within Self-Service Apps to help developers quickly provi
 
 ## Create a Software Template
 
-A Software Template is stored in a Git repository and serves as a reusable framework. Developers interact with templates through Self-Service Apps, which collect inputs and pass them into the template repository to generate customized configurations.
+A Software Template is stored in a Git repository and serves as a reusable framework. Developers interact with templates through Self-Service, which collect inputs and pass them into the template repository to generate customized configurations.
 
 To create a Software Template, you can:
 - Start from an example using pre-built blueprints.
