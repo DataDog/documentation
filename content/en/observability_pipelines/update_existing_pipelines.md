@@ -105,6 +105,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
