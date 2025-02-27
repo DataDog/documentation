@@ -2,7 +2,6 @@ import { CdocsHugoIntegration } from '../../src';
 import { describe, test, expect } from 'vitest';
 import { SNAPSHOTS_DIR, VALID_SITE_DIR } from '../config/constants';
 import fs from 'fs';
-import e from 'stringcase';
 
 describe('CdocsHugoIntegration (optimized Markdown output)', async () => {
   const hugoIntegration = new CdocsHugoIntegration({
