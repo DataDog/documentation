@@ -25895,39 +25895,23 @@ components:
       type: object
     SecurityMonitoringRuleNewValueOptionsForgetAfter:
       description: The duration in days after which a learned value is forgotten.
-      enum:
-      - 1
-      - 2
-      - 7
-      - 14
-      - 21
-      - 28
       format: int32
+      maximum: 30
+      minimum: 1
       type: integer
-      x-enum-varnames:
-      - ONE_DAY
-      - TWO_DAYS
-      - ONE_WEEK
-      - TWO_WEEKS
-      - THREE_WEEKS
-      - FOUR_WEEKS
     SecurityMonitoringRuleNewValueOptionsLearningDuration:
       default: 0
       description: 'The duration in days during which values are learned, and after
         which signals will be generated for values that
 
         weren''t learned. If set to 0, a signal will be generated for all new values
-        after the first value is learned.'
-      enum:
-      - 0
-      - 1
-      - 7
+        after the first value is learned.
+
+        The value must be between 0 and 30 (inclusive).'
       format: int32
+      maximum: 30
+      minimum: 0
       type: integer
-      x-enum-varnames:
-      - ZERO_DAYS
-      - ONE_DAY
-      - SEVEN_DAYS
     SecurityMonitoringRuleNewValueOptionsLearningMethod:
       default: duration
       description: The learning method used to determine when signals should be generated
