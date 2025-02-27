@@ -101,7 +101,7 @@ Low Disk Space
 
 {{% /tab %}}
 
-{{% tab "Mongo" %}}
+{{% tab "MongoDB" %}}
 
 Unused Index
 : The index has not been used in any execution plans recently.
