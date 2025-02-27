@@ -37,7 +37,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 2. Open a pull request (PR) to update the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. The PR should include your detection rule JSON file, along with any new integration files.
 
-3. Datadog approves and merges the PR, and your integration-recommended monitor is pushed to production.
+3. Datadog approves and merges the PR, and your integration-monitor template is pushed to production.
 
 ## Verify your detection rule in production
 

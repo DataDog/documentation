@@ -18,7 +18,7 @@ algolia:
 
 ## Overview
 
-If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform.
+If you don't use CircleCI Orbs or GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
 
 Prerequisites:
 
@@ -109,3 +109,4 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 [1]: /account_management/api-app-keys/#api-keys
 [2]: /account_management/api-app-keys/#application-keys
 [3]: /getting_started/site/
+[4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sarif

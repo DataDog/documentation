@@ -215,17 +215,19 @@ Web servers are almost always inter-connected with other services through a netw
 
 ## Platform services
 
-Datadog infrastructure monitoring comes with  additional products that you can use to maximize observability of your environments.
+Datadog infrastructure monitoring comes with additional products that you can use to maximize observability of your environments.
 
-### Service Catalog
+### Software Catalog
 
-[Service catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
+[Software Catalog][30] provides an overview of services, showing which were recently deployed, which haven't been deployed for a while, which services report the most errors, and those with on-going incidents, and much more.
 
-Service Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
+Software Catalog also helps you evaluate the coverage of your observability setup. As you continue your roll out, you can check in on the Setup Guidance tab of each of your services, to ensure that they have the expected configurations:
 
-{{< img src="/administrators_guide/service_catalog_2.png" alt="Service Catalog home screen" style="width:90%;">}}
+{{< img src="/administrators_guide/software_catalog_2.png" alt="Software Catalog home screen" style="width:90%;">}}
 
-You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.  
+You can add components that you aren't planning on monitoring immediately, such as cron jobs or libraries, to create a comprehensive view of your system, and to mark team members who are responsible for these components ahead of the next phase of your Datadog rollout.
+
+Refer to the [Endpoints list][33] to categorize, monitor performance and reliability, and manage ownership of your API endpoints.
 
 ### Resource Catalog
 
@@ -237,10 +239,6 @@ You can use Resource Catalog in a variety of contexts, including:
 - Planning upgrades of resources that are running deprecated versions.
 - Accessing configuration information and other metadata to speed up incident response.
 - Maintaining your security posture by finding and resolving misconfigurations and vulnerabilities.
-
-### API Catalog 
-
-Use [API Catalog][33] for resource endpoint-specific categorization, performance, reliability, and ownership of all your API endpoints in one place.
 
 ### Event Management 
 
@@ -345,10 +343,10 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [27]: /infrastructure/process/?tab=linuxwindows\#installation
 [28]: /integrations/network/
 [29]: /network_monitoring/cloud_network_monitoring/
-[30]: /service_catalog/
+[30]: /software_catalog/
 [31]: /service_management/events/
 [32]: /error_tracking/
-[33]: /api_catalog/
+[33]: /software_catalog/endpoints/
 [34]: /agent/fleet_automation/
 [35]: /agent/remote_config/
 [36]: /agent/remote_config/?tab=configurationyamlfile\#supported-products-and-feature-capabilities
@@ -366,7 +364,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [48]: https://www.datadoghq.com/blog/engineering/husky-deep-dive/
 [49]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum
 [50]: /integrations/tcp_check/?tab=host#data-collected
-[51]: /tracing/guide/inferred-service-opt-in/?tab=java
+[51]: /tracing/services/inferred_services
 [52]: /integrations/amazon_web_services/
 [53]: /integrations/google_cloud_platform/
 [54]: /integrations/azure/
@@ -387,7 +385,7 @@ Create a detailed roll-out methodology in the [build][41] phase by focusing on t
 [69]: /integrations/process/
 [70]: /developers/custom_checks/#should-you-write-a-custom-agent-check-or-an-integration
 [71]: /synthetics/api_tests/ssl_tests/
-[72]: /service_catalog/service_definitions/
+[72]: /software_catalog/service_definitions/
 [73]: https://learn.datadoghq.com/courses/dd-101-sre
 [74]: /logs/log_configuration/flex_logs/#configure-storage-tiers
 [75]: /tracing/trace_collection/

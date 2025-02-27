@@ -83,9 +83,9 @@ If an integration version is bumped, ensure that you add an entry to the `CHANGE
    * Bug fix
    ```
 
-If editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+If editing or adding new README content, manifest information, or assets such as dashboards and monitor templates, a version bump is not needed. 
 
-Updates to assets such as dashboards and recommended monitors are available to customers after the corresponding pull requests are merged and the assets are published. Updates to `README.md`, `manifest.json`, or any other non-code files are also immediately available to customers after publishing. 
+Updates to assets such as dashboards and monitor templates are available to customers after the corresponding pull requests are merged and the assets are published. Updates to `README.md`, `manifest.json`, or any other non-code files are also immediately available to customers after publishing. 
 
 
 ## Further reading

@@ -1034,7 +1034,7 @@ components:
       example: {}
       properties:
         ok:
-          description: An array of of Monitor IDs that can be safely deleted.
+          description: An array of Monitor IDs that can be safely deleted.
           items:
             description: ID of a monitor that can be safely deleted.
             format: int64
@@ -1057,7 +1057,7 @@ components:
       description: An array of service level objective objects.
       properties:
         ok:
-          description: An array of of SLO IDs that can be safely deleted.
+          description: An array of SLO IDs that can be safely deleted.
           items:
             description: An SLO ID.
             type: string
@@ -1451,11 +1451,13 @@ components:
       enum:
       - open
       - invite
+      - embed
       nullable: true
       type: string
       x-enum-varnames:
       - OPEN
       - INVITE
+      - EMBED
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -6156,6 +6158,7 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
+      - $ref: '#/components/schemas/LogsSpanRemapper'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6267,6 +6270,43 @@ components:
       x-enum-varnames:
       - TIME_ASCENDING
       - TIME_DESCENDING
+    LogsSpanRemapper:
+      description: "There are two ways to define correlation between application spans
+        and logs:\n\n  1. Follow the documentation on [how to inject a span ID in
+        the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces).\n
+        \ Log integrations automatically handle all remaining setup steps by default.\n\n
+        \ 2. Use the span remapper processor to define a log attribute as its associated
+        span ID."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - dd.span_id
+          description: Array of source attributes.
+          items:
+            description: Attribute to extract the span ID from.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsSpanRemapperType'
+      required:
+      - type
+      type: object
+    LogsSpanRemapperType:
+      default: span-id-remapper
+      description: Type of logs span remapper.
+      enum:
+      - span-id-remapper
+      example: span-id-remapper
+      type: string
+      x-enum-varnames:
+      - SPAN_ID_REMAPPER
     LogsStatusRemapper:
       description: "Use this Processor if you want to assign some attributes as the
         official status.\n\nEach incoming status value is mapped as follows.\n\n  -
@@ -6382,7 +6422,7 @@ components:
           - dd.trace_id
           description: Array of source attributes.
           items:
-            description: Attribute to extract the Trace ID from.
+            description: Attribute to extract the trace ID from.
             type: string
           type: array
         type:
@@ -9834,6 +9874,62 @@ components:
       items:
         $ref: '#/components/schemas/NotifyEndType'
       type: array
+    NumberFormatUnit:
+      description: Number format unit.
+      oneOf:
+      - $ref: '#/components/schemas/NumberFormatUnitCanonical'
+      - $ref: '#/components/schemas/NumberFormatUnitCustom'
+    NumberFormatUnitCanonical:
+      description: Canonical unit.
+      properties:
+        per_unit_name:
+          description: The name of the unit per item.
+          example: bytes
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitCustom:
+      description: Custom unit.
+      properties:
+        label:
+          description: The label for the custom unit.
+          maxLength: 12
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitCustomType'
+      type: object
+    NumberFormatUnitCustomType:
+      description: The type of custom unit.
+      enum:
+      - custom_unit_label
+      type: string
+      x-enum-varnames:
+      - CUSTOM_UNIT_LABEL
+    NumberFormatUnitScale:
+      description: The definition of `NumberFormatUnitScale` object.
+      nullable: true
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitScaleType:
+      description: The type of unit scale.
+      enum:
+      - canonical_unit
+      example: canonical_unit
+      type: string
+      x-enum-varnames:
+      - CANONICAL_UNIT
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -10623,7 +10719,7 @@ components:
       description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects.
+          description: The list of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -13091,7 +13187,7 @@ components:
       properties:
         author:
           $ref: '#/components/schemas/SharedDashboardAuthor'
-        created_at:
+        created:
           description: Date the dashboard was shared.
           format: date-time
           readOnly: true
@@ -13102,6 +13198,20 @@ components:
           type: string
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
@@ -13109,6 +13219,23 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
+        last_accessed:
+          description: The last time the shared dashboard was accessed. Null if never
+            accessed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         public_url:
           description: URL of the shared dashboard.
           readOnly: true
@@ -13128,6 +13255,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can receive an invitation to access
             to the shared dashboard.
           example:
@@ -13141,10 +13269,17 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
         token:
           description: A unique token assigned to the shared dashboard.
           readOnly: true
           type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       required:
       - dashboard_id
       - dashboard_type
@@ -13163,6 +13298,27 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      type: object
+    SharedDashboardInviteesItems:
+      description: The allowlisted invitees for an INVITE-only shared dashboard.
+      properties:
+        access_expiration:
+          description: Time of the invitee expiration. Null means the invite will
+            not expire.
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: Time that the invitee was created.
+          format: date-time
+          readOnly: true
+          type: string
+        email:
+          description: Email of the invitee.
+          example: test@datadoghq.com
+          type: string
+      required:
+      - email
       type: object
     SharedDashboardInvites:
       description: Invitations data and metadata that exists for a shared dashboard
@@ -13280,6 +13436,17 @@ components:
           format: int64
           type: integer
       type: object
+    SharedDashboardStatus:
+      description: Active means the dashboard is publicly available. Paused means
+        the dashboard is not publicly available.
+      enum:
+      - active
+      - paused
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - PAUSED
     SharedDashboardUpdateRequest:
       description: Update a shared dashboard's settings.
       example:
@@ -13290,6 +13457,20 @@ components:
         - test2@datadoghq.com
         share_type: invite
       properties:
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/SharedDashboardUpdateRequestGlobalTime'
         global_time_selectable_enabled:
@@ -13297,6 +13478,16 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
         selectable_template_vars:
           description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
@@ -13312,6 +13503,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can be given access to the shared
             dashboard.
           example:
@@ -13325,8 +13517,13 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
-      required:
-      - global_time
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       type: object
     SharedDashboardUpdateRequestGlobalTime:
       description: Timeframe setting for the shared dashboard.
@@ -14067,6 +14264,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -15225,7 +15425,6 @@ components:
       - element
       - email
       - global
-      - javascript
       - text
       example: text
       type: string
@@ -15233,7 +15432,6 @@ components:
       - ELEMENT
       - EMAIL
       - GLOBAL
-      - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
       description: Metadata for the Synthetic tests run.
@@ -15335,7 +15533,7 @@ components:
       description: Object describing the synthetics tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: List of Synthetic tests with overrides.
           items:
             $ref: '#/components/schemas/SyntheticsCITest'
           type: array
@@ -15963,8 +16161,7 @@ components:
       description: User locator to find the element.
       properties:
         failTestOnCannotLocate:
-          description: Whether if the the test should fail if the element cannot be
-            found.
+          description: Whether if the test should fail if the element cannot be found.
           type: boolean
         values:
           description: Values of the user locator.
@@ -17420,7 +17617,7 @@ components:
       description: Object describing the Synthetic tests to trigger.
       properties:
         tests:
-          description: Individual Synthetic test.
+          description: List of Synthetic tests.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerTest'
           type: array
@@ -17580,11 +17777,13 @@ components:
       enum:
       - number
       - bar
+      - trend
       example: number
       type: string
       x-enum-varnames:
       - NUMBER
       - BAR
+      - TREND
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
@@ -21952,9 +22151,8 @@ components:
           format: int64
           type: integer
         cspm_container_hwm_sum:
-          description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current month for all
-            organizations.
+          description: Shows the sum of the high-water marks of Cloud Security Management
+            Pro containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
@@ -22175,8 +22373,8 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current month for all organizations.
+          description: Shows sum of the high-water marks of incident management monthly
+            active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -22207,8 +22405,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
+          description: Shows the most recent hour in the current month for all organizations
+            for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
@@ -22855,6 +23053,28 @@ components:
       example: 0
       format: int64
       type: integer
+    ViewingPreferences:
+      description: The viewing preferences for a shared dashboard.
+      properties:
+        high_density:
+          description: Whether the widgets on the shared dashboard should be displayed
+            with high density.
+          type: boolean
+        theme:
+          $ref: '#/components/schemas/ViewingPreferencesTheme'
+      type: object
+    ViewingPreferencesTheme:
+      description: The theme of the shared dashboard view. "system" follows your system's
+        default viewing theme.
+      enum:
+      - system
+      - light
+      - dark
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+      - LIGHT
+      - DARK
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
@@ -23274,6 +23494,8 @@ components:
           type: string
         cell_display_mode:
           $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        cell_display_mode_options:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptions'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -23285,11 +23507,44 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        number_format:
+          $ref: '#/components/schemas/WidgetNumberFormat'
         style:
           $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
+    WidgetFormulaCellDisplayModeOptions:
+      description: Cell display mode options for the widget formula. (only if `cell_display_mode`
+        is set to `trend`).
+      properties:
+        trend_type:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsTrendType'
+        y_scale:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsYScale'
+      type: object
+    WidgetFormulaCellDisplayModeOptionsTrendType:
+      description: Trend type for the cell display mode options.
+      enum:
+      - area
+      - line
+      - bars
+      example: area
+      type: string
+      x-enum-varnames:
+      - AREA
+      - LINE
+      - BARS
+    WidgetFormulaCellDisplayModeOptionsYScale:
+      description: Y scale for the cell display mode options.
+      enum:
+      - shared
+      - independent
+      example: shared
+      type: string
+      x-enum-varnames:
+      - SHARED
+      - INDEPENDENT
     WidgetFormulaLimit:
       description: Options for limiting results returned.
       properties:
@@ -23704,6 +23959,14 @@ components:
       x-enum-varnames:
       - HOST
       - CONTAINER
+    WidgetNumberFormat:
+      description: Number format options for the widget.
+      properties:
+        unit:
+          $ref: '#/components/schemas/NumberFormatUnit'
+        unit_scale:
+          $ref: '#/components/schemas/NumberFormatUnitScale'
+      type: object
     WidgetOrderBy:
       description: What to order by.
       enum:
@@ -26547,7 +26810,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26632,7 +26895,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26674,7 +26937,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -30124,7 +30387,7 @@ paths:
       - description: 'When specified, shows additional information about the group
           states.
 
-          Choose one or more from `all`, `alert`, `warn`, and `no data`.'
+          Choose one or more from `all`, `alert`, `warn`, and `no data` (`no%20data`).'
         in: query
         name: group_states
         required: false
@@ -30367,19 +30630,22 @@ paths:
         or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
         #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
         `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
-        Query**\n\nExample: `formula(query).last(time_window).function(parameter)
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
         operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
-        `time_window` - supports daily roll-up e.g. `7d`\n- `function` - [optional,
-        defaults to `threshold` monitor if omitted] supports `change`, `anomaly`,
-        `forecast`\n- `parameter` Specify the parameter of the type\n    - for `change`:\n
-        \       - supports `relative`, `absolute`\n        - [optional] supports `#`,
-        where `#` is an integer or decimal number used to set the threshold\n    -
-        for `anomaly`:\n        - supports `direction=both`, `direction=above`, `direction=below`\n
-        \       - [optional] supports `threshold=#`, where `#` is an integer or decimal
-        number used to set the threshold\n- `operator`\n    - for `threshold` supports
-        `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    - for `change` supports `>`, `<`\n
-        \   - for `anomaly` supports `>=`\n    - for `forecast` supports `>`\n- `#`
-        an integer or decimal number used to set the threshold."
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:

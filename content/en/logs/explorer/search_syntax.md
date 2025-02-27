@@ -49,32 +49,24 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 ### Single term example
 
-| Search syntax | Search type | Description                                           |
-| ------------- | ----------- | ----------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the term `hello`.     |
-| `hello`       | Free text   | Searches only the log message for the term `hello`.   |
+| Search syntax | Search type | Description                                               |
+| ------------- | ----------- | --------------------------------------------------------- |
+| `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`. |
+| `hello`       | Free text   | Searches only the log message for the exact string `hello`.       |
 
 ### Search term with wildcard example
 
-| Search syntax | Search type | Description                                                                                  |
-| ------------- | ----------- | -------------------------------------------------------------------------------------------- |
-| `*:hello` | Full-text   | Searches all log attributes for the exact string `hello`.                                    |
-| `*:hello*`| Full-text   | Searches all log attributes for strings with `hello`. For example, `hello_world`.|
+| Search syntax | Search type | Description                                                                                 |
+| ------------- | ----------- | ------------------------------------------------------------------------------------------- |
+| `*:hello`     | Full-text   | Searches all log attributes for the exact string `hello`.                                   |
+| `*:hello*`    | Full-text   | Searches all log attributes for strings starting with `hello`. For example, `hello_world`.  |
 
 ### Multiple terms with exact match example
 
-| Search syntax       | Search type | Description                                            |
-| ------------------- | ----------- |------------------------------------------------------- |
-| `*:"hello world"` | Full-text   | Searches all log attributes for the term `hello world`. |
-| `hello world`       | Free text   | Searches only the log message for the term `hello`.     |
-
-### Multiple terms without exact match example
-
-The full-text search syntax `*:hello world` is equivalent to `*:hello *:world`. It searches all log attributes for the terms `hello` and `world`.
-
-### Multiple terms with a white space example
-
-The full-text search syntax `*:"hello world" "i am here"` is equivalent to `*:"hello world" *:"i am here"`. It searches all log attributes for the terms `hello world` and `i am here`.
+| Search syntax       | Search type | Description                                                                                        |
+| ------------------- | ----------- |--------------------------------------------------------------------------------------------------- |
+| `*:"hello world"`   | Full-text   | Searches all log attributes for the exact string `hello world`.                                    |
+| `hello world`       | Free text   | Searches only the log message for `hello` and `world` words. For example `hello beautiful world`.  |
 
 ## Escape special characters and spaces
 

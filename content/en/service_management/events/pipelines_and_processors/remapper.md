@@ -20,4 +20,4 @@ Define the remapper processor on the [**Pipelines** page][1]. For example, remap
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="Attribute remapper processor" style="width:80%;" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/event/settings/pipelines

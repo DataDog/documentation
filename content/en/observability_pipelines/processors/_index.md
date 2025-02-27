@@ -38,6 +38,7 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
     {{< nextlink href="observability_pipelines/processors/quota" >}}Quota{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/reduce" >}}Reduce{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/remap_ocsf" >}}Remap to OCSF{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
 {{< /whatsnext >}}
 

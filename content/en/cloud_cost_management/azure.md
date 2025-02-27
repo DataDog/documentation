@@ -17,16 +17,13 @@ further_reading:
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) and CSP accounts are not supported.
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can be set up at all three scopes. Pay as you go (PAYG) accounts are in Preview. Contact [Datadog support][11] if you encounter any issues with setup. To determine your account type, see the [Azure documentation][10]. **Note**: If your account type is listed as "Microsoft Online Services Program", then your account is PAYG.
 
 ## Setup
 
 
 {{% site-region region="us3" %}}
-**Notes**:
-- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
-- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
-- Pay-as-you-go accounts are not supported.
+**Note**: If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -92,7 +89,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Ensure that **Overwrite data** is not checked.
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
 
-   {{< img src="cloud_cost/improved_export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
 9. Click **Next**, then **Review + Create**.
 
@@ -107,7 +104,6 @@ For faster processing, generate the first exports manually by clicking **Run Now
 
 {{< tabs >}}
 {{% tab "Billing Accounts" %}}
-**Note**: For Microsoft Customer Agreement, set up at the subscription level.
 
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
@@ -246,12 +242,14 @@ You can create historical data in your storage account using the [Microsoft API]
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
-[3]: https://app.datadoghq.com/cost/setup?cloud=azure
-[4]: https://app.datadoghq.com/integrations/azure
-[5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
-[7]: https://support.microsoft.com
-[8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
-[9]: https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
+[1]:  https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]:  https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
+[3]:  https://app.datadoghq.com/cost/setup?cloud=azure
+[4]:  https://app.datadoghq.com/integrations/azure
+[5]:  https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[6]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
+[7]:  https://support.microsoft.com
+[8]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
+[9]:  https://learn.microsoft.com/en-us/azure/cost-management-billing/understand/download-azure-daily-usage
+[10]: https://docs.azure.cn/en-us/cost-management-billing/manage/resolve-past-due-balance#check-the-type-of-your-account
+[11]: /help/
