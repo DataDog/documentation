@@ -1,5 +1,6 @@
 ---
 title: Tabs
+private: true
 content_filters:
   - label: "Color"
     trait_id: color
@@ -17,7 +18,7 @@ Usually there's a bit of text here to introduce the tabs, so this paragraph is j
 
 {% tabs %}
 {% tab label="Tab 1" %}
-{% alert label="info" %}
+{% alert level="info" %}
 Here's an info alert.
 {% /alert %}
 
@@ -42,18 +43,37 @@ The selected color is **red**.
 
 Tabs can include partials, such as these two:
 
-{% partial file="datadog_link.mdoc.md" /%}
+{% partial file="markdoc_testing/datadog_link.mdoc" /%}
 
-{% partial file="google_link.mdoc.md" /%}
+{% partial file="markdoc_testing/google_link.mdoc" /%}
+
+### Code block
+
+This is a test code block.
+
+```javascript
+console.log('The DD site is {% region-param key="dd_site" code=true /%}');
+```
+
+Here's a code block in a list:
+
+1. Item 1 includes some code:
+    ```python {% filename="example.py" %}
+    # Function to compute the product of p1 and p2
+    print("The DD site is {% region-param key="dd_site" code=true /%}")
+    ```
+2. This is Item 2. It has no code.
 
 ### Links
 
 Links in Markdoc tabs behave the same as any other link on the page. There's no need to keep separate lists of links inside each tab. Example link: [Markdoc docs][1]. Tab 2 contains the second example link.
+
 {% /tab %}
 {% tab label="Tab 2" %}
 This is the content for Tab 2.
 
-Example link: [TypeScript docs][2].
+Here's the second example link: [TypeScript docs][2].
+
 {% /tab %}
 {% /tabs %}
 

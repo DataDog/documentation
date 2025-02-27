@@ -1,50 +1,119 @@
-  options:
-  # Colors
-  - id: red
-    label: Red
-  - id: blue
-    label: Blue
-  - id: yellow
-    label: Yellow
-  - id: green
-    label: Green
+# The list of allowed option IDs for content preference selections.
+# This is to enforce consistency between various selections 
+# the user can make, ensuring that the selection 
+# will reliably be applied to all relevant pages.
+#
+# For example, if the user chooses "linux_apt" as their operating system
+# on one page, we want to ensure that other pages are scanning
+# for that same exact selection ID, rather than a slightly different
+# selection such as "linuxapt" or "apt_linux".
+#
+# To add a new option, add a new item to the list 
+# and give it a unique ID.
 
-  # Blue items
-  - label: Ocean
-    id: ocean
-  - label: Sky
-    id: sky
-  - label: Jeans
-    id: jeans
-  - label: Blueberry
-    id: blueberry
+options:
+# Languages
+- label: Python
+  id: python
+- label: Ruby
+  id: ruby
+- label: Go
+  id: go
+- label: JavaScript
+  id: javascript
+- label: Java
+  id: java
 
-  # Green items
-  - label: Grass
-    id: grass
-  - label: Emerald
-    id: emerald
-  - label: Lime
-    id: lime
-  - label: Frog
-    id: frog
+# Operating systems
+- label: Linux
+  id: linux
+- label: Windows
+  id: windows
+- label: macOS
+  id: mac_os
 
-  # Red items
-  - id: ruby
-    label: Ruby
-  - id: apple
-    label: Apple
-  - id: firetruck
-    label: Firetruck
-  - id: stop_sign
-    label: Stop sign
+# Hosting
+- label: Self-hosted
+  id: self_hosted
+- label: Kubernetes
+  id: kubernetes
+- label: Docker
+  id: docker
+- label: AWS
+  id: aws
 
-  # Yellow items
-  - id: banana
-    label: Banana
-  - id: sunflower
-    label: Sunflower
-  - id: lemon
-    label: Lemon
-  - id: school_bus
-    label: School bus
+# Databases
+- label: MySQL
+  id: mysql
+- label: Postgres
+  id: postgres
+- label: MongoDB
+  id: mongodb
+- label: SQL Server
+  id: sql_server
+
+# Colors
+- label: Red
+  id: red
+- label: Yellow
+  id: yellow
+- label: Green
+  id: green
+- label: Blue
+  id: blue
+
+# Blue items
+- label: Ocean
+  id: ocean
+- label: Sky
+  id: sky
+- label: Jeans
+  id: jeans
+- label: Blueberry
+  id: blueberry
+
+# Green items
+- label: Grass
+  id: grass
+- label: Emerald
+  id: emerald
+- label: Lime
+  id: lime
+- label: Frog
+  id: frog
+
+# Red items
+- label: Apple
+  id: apple
+- label: Firetruck
+  id: firetruck
+- label: Stop sign
+  id: stop_sign
+
+# Yellow items
+- label: Banana
+  id: banana
+- label: Sunflower
+  id: sunflower
+- label: Lemon
+  id: lemon
+- label: School bus
+  id: school_bus
+
+# Agent versions
+- id: 7_x_x
+  label: "7"
+- id: 6_x_x
+  label: "6"
+- id: 5_x_x
+  label: "5"
+
+# Postgres integration host options
+- id: ecs
+  label: "ECS"
+
+# Postgres integration version options
+- label: "10+"
+  id: gte_10_x_x
+- label: "9.6 and below"
+  id: lte_9_6_x

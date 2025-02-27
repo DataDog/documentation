@@ -1,5 +1,6 @@
 ---
 title: Further reading
+private: true
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"

@@ -1,5 +1,6 @@
 ---
 title: Whatsnext
+private: true
 ---
 
 ## Simple example

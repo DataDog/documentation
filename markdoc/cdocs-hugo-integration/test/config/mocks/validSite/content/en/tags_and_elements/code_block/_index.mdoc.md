@@ -1,15 +1,13 @@
 ---
 title: Code Block
-content_filters:
-  - label: "Color"
-    trait_id: color
-    option_group_id: primary_color_options
+private: true
 ---
 
 ## Usage
 
-- Markdown tags are **not** supported in code blocks. Use only plaintext code within code blocks.
 - The default language for code blocks is `text`.
+- Supported Markdoc tags within code blocks:
+  - `region-param`
 
 ## Simple example
 
@@ -29,10 +27,20 @@ curl -L -X GET 'https://api.{% region-param key="dd_site" code="true" /%}/api/v2
 --header 'DD-APPLICATION-KEY: <DATADOG_APP_KEY>'
 ```
 
+## Example with filename
+
+`collapsible` is set to `false` and `disable_copy` is set to `true`.
+
+```javascript {% filename="example.js" collapsible=false disable_copy=true %}
+console.log('Hello, World!');
+```
+
 ## Indented code blocks
 
+The first one has `collapsible` explicitly set to `false`.
+
 1. Item 1 includes some code:
-    ```python
+    ```python {% collapsible=false %}
     # Function to compute the product of p1 and p2
     def myFunction(p1, p2):
         return p1 * p2

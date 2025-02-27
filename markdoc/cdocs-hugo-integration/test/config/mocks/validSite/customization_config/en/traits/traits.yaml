@@ -1,5 +1,58 @@
+# The list of allowed IDs for content filters.
+# This is used to prevent unnecessary bloat in naming,
+# and to tightly focus the filters on 
+# their most useful task, which is to build 
+# a page-agnostic profile of the user's needs.
+#
+# A new filter ID should only be added here if it
+# represents a general user characteristic, 
+# such as their operating system or programming language.
+
 traits:
-- id: color
-  label: Color
-- id: item
-  label: Item
+  # for the Markdoc test pages
+  - id: color
+    label: "Color"
+    internal_notes: DO NOT USE, testing purposes only.
+
+  - id: item
+    label: "Item"
+    internal_notes: DO NOT USE, testing purposes only.
+
+  - id: postgres_version
+    label: "Postgres version"
+    internal_notes: Any Postgres version regardless of its granularity, such as 15, 9.1.2, or ~10.0.0.
+
+  - id: agent_version
+    label: "Agent version"
+    internal_notes: Any Agent version regardless of its granularity, such as 7, 6.32.1, or ~7.0.0.
+
+  - id: agent_host
+    label: "Agent host"
+
+  # general examples
+  - id: host
+    label: "Host"
+    internal_notes: Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes.
+
+  - id: host_type
+    label: "Host type"
+    internal_notes: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
+
+  - id: prog_lang
+    label: "Language"
+    internal_notes: Programming language, such as Python.
+
+  - id: os
+    label: "OS"
+    internal_notes: Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.
+
+  - id: database
+    label: "Database"
+
+  - id: mobile_os
+    label: "OS"
+    internal_notes: Mobile operating system, such as Android.
+    
+  - id: pkg_mgr
+    label: "Package manager"
+    internal_notes: Software package manager, such as npm.

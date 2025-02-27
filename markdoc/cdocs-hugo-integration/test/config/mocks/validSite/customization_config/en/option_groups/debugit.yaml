@@ -1,0 +1,19 @@
+debugit_programming_lang_options:
+  - id: python
+    default: true
+  - id: go
+  - id: javascript
+  - id: ruby
+  - id: java
+
+debugit_os_options:
+  - id: linux
+    default: true
+  - id: windows
+  - id: mac_os
+
+debugit_database_options:
+  - id: postgres
+    default: true
+  - id: mysql
+  - id: sql_server
