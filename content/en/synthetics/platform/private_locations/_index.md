@@ -52,6 +52,14 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Docker hub. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
 
+{{< site-region region="gov" >}}
+
+If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
+
+[26]: https://hub.docker.com/repository/docker/datadog/synthetics-private-location-worker-fips/general
+
+{{< /site-region >}}
+
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][103].**
 
 [101]: https://hub.docker.com/r/datadog/synthetics-private-location-worker

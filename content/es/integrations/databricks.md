@@ -85,9 +85,9 @@ tile:
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-core -->
 
 
-<div class="alert alert-warning">
-<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> te ayuda a observar, solucionar problemas y optimizar los costos de tus trabajos y clústeres de Databricks.<br/><br/>
-Esta página se limita a la documentación para la ingesta de las métricas y logs de utilización de clústeres de Databricks.
+<div class="alert alert-info">
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> te ayuda a observar, solucionar problemas y optimizar los costes de tus trabajos y clústeres de Databricks.<br/><br/>
+Esta página se limita a la documentación sobre la ingesta de métricas que sirven a modelos y de datos de uso de clústeres de Databricks.
 </div>
 
 ![Dashboard predeterminado de Databricks][1]
@@ -108,11 +108,27 @@ Las métricas de servicio de modelos brindan información sobre el rendimiento d
 ## Configuración
 
 ### Instalación
+Obtén información sobre el estado de tu infraestructura que sirve a modelos siguiendo las instrucciones de [configuración que sirve a modelos](#model-serving-configuration).
 
-Monitoriza las aplicaciones de Databricks con Spark con la [integración de Datadog con Spark][6]. Instala el [Datadog Agent][7] en tus clústeres con las instrucciones de [configuración](#configuration) para el clúster correspondiente. Luego, instala la [integración de Spark][6] en Datadog para instalar de manera automática el dashboard de información general de Databricks.
+Monitoriza aplicaciones Databricks Spark con la [integración Datadog Spark][6]. Instala el [Datadog Agent][7] en tus clústeres siguiendo las instrucciones de [configuración](#spark-configuration)) de tu clúster correspondiente. Consulta las instrucciones de [configuración de Spark](#spark-configuration).
 
 ### Configuración
+#### Configuración que sirve al modelo
+1. En tu espacio de trabajo de Databricks, haz clic en tu perfil en la esquina superior derecha y ve a **Configuración**. Selecciona **Desarrollador** en la barra lateral izquierda. Junto a **Tokens de acceso**, haz clic en **Manage** (Gestionar).
+2. Haz clic en **Generate new token** (Generar nuevo token), introduce "Datadog Integration" en el campo **Comentario**, elimina el valor predeterminado en **Vida útil (días)** y haz clic en **Generate** (Generar). Toma nota de tu token.
 
+   **Importante:**
+   * Asegúrate de borrar el valor por defecto en **Vida útil (días)** para que el token no caduque y no se rompa la integración.
+   * Asegúrate de que la cuenta que genera el token tiene [acceso de VISTA][8] para los trabajos y clústeres de Databricks que quieres monitorizar.
+
+   También puedes seguir la [documentación oficial de Databricks][9] para generar un token de acceso para un [elemento principal de servicio][9].
+
+3. En Datadog, abre el cuadro de la integración Databricks.
+4. En la pestaña **Configurar**, haz clic en **Add Databricks Workspace** (Añadir espacio de trabajo de Databricks).
+5. Introduce un nombre de espacio de trabajo, la URL de tu espacio de trabajo de Databricks y el token de Databricks que generaste.
+6. En la sección **Seleccionar recursos para configurar la colección**, asegúrate de que **Métricas - Al servicio del modelo** está **Habilitado**.
+
+#### Configuración de Spark
 Configura la integración de Spark para monitorizar tu clúster de Apache Spark en Databricks y recopilar el sistema y las métricas de Spark.
 
 Cada script descrito a continuación puede modificarse para adaptarlo a tus necesidades. Por ejemplo, puedes:
@@ -149,7 +165,7 @@ Utiliza la interfaz de usuario de Databricks para editar los scripts de inicio g
 6. Haz clic en el conmutador **Habilitado** para activarlo.
 7. Haz clic en el botón **Añadir**.
 
-Después de estos pasos, cualquier clúster nuevo usa el script de manera automática. Puedes encontrar más información sobre los scripts de inicio globales en la [documentación oficial de Databricks][8].
+Luego de estos pasos, cualquier clúster nuevo utiliza el script de manera automática. Puedes encontrar más información sobre los scripts de inicio globales en la [documentación oficial de Databricks][10].
 
 <div class="alert alert-info">Puedes definir varios scripts de inicio y especificar su orden en la interfaz de usuario.</div>
 
@@ -358,7 +374,7 @@ Si guardaste tu `datadog_init_script.sh` directamente en un área de trabajo del
 
 Si guardaste tu `datadog_init_script.sh` directamente en un `Unity Catalog Volume`, puedes acceder al archivo en la siguiente ruta: `/Volumes/$VOLUME_PATH/datadog_init_script.sh`.
 
-Puedes encontrar más información sobre los scripts de inicio del clúster en la [documentación oficial de Databricks][8].
+Puedes encontrar más información sobre los scripts de inicio del clúster en la [documentación oficial de Databricks][10].
 
 {{< tabs >}}
 {{% tab "Solo controlador" %}}
@@ -537,12 +553,14 @@ chmod a+x /tmp/start_datadog.sh
 ## Datos recopilados
 
 ### Métricas
+{{< get-metrics-from-git "databricks" >}}
 
-Consulta la [documentación de la integración de Spark][9] para obtener una lista de las métricas recopiladas.
+#### Métricas de Spark
+Consulta la [documentación de la integración de Spark][11] para obtener una lista de las métricas recopiladas.
 
 ### Checks de servicio
 
-Consulta la [documentación de la integración de Spark][10] para obtener la lista de los checks de servicio recopilados.
+Consulta la [documentación de la integración de Spark][12] para obtener la lista de los checks de servicios recopilados.
 
 ### Eventos
 
@@ -550,15 +568,15 @@ La integración de Databricks no incluye ningún evento.
 
 ## Resolución de problemas
 
-Puedes solucionar los problemas por tu cuenta al habilitar el [terminal web de Databricks][11] o mediante un [notebook de Databricks][12]. Consulta la documentación de [Solucionar problemas del Agent][13] a fin de obtener información sobre los pasos útiles para solucionar problemas. 
+Puedes solucionar los problemas por tu cuenta al habilitar el [terminal web de Databricks][13] o mediante un [notebook de Databricks][14]. Para obtener información sobre los pasos útiles para solucionar problemas, consulta la documentación [Solucionar problemas del Agent][15]. 
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
+¿Necesitas ayuda? Ponte en contacto con [el soporte de Datadog][16].
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
 Más enlaces, artículos y documentación útiles:
 
-- [Cargar un script en el Unity Catalog Volume][15]
+- [Cargar un Script en el volumen de Catálogo de Unity][17]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/databricks/images/databricks_dashboard.png
@@ -568,11 +586,13 @@ Más enlaces, artículos y documentación útiles:
 [5]: https://docs.datadoghq.com/es/integrations/databricks/?tab=driveronly
 [6]: https://app.datadoghq.com/integrations/spark
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
-[9]: https://docs.datadoghq.com/es/integrations/spark/#metrics
-[10]: https://docs.datadoghq.com/es/integrations/spark/#service-checks
-[11]: https://docs.databricks.com/en/clusters/web-terminal.html
-[12]: https://docs.databricks.com/en/notebooks/index.html
-[13]: https://docs.datadoghq.com/es/agent/troubleshooting/
-[14]: https://docs.datadoghq.com/es/help/
-[15]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume
+[8]: https://docs.databricks.com/en/security/auth-authz/access-control/index.html#job-acls
+[9]: https://docs.databricks.com/en/admin/users-groups/service-principals.html#what-is-a-service-principal
+[10]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
+[11]: https://docs.datadoghq.com/es/integrations/spark/#metrics
+[12]: https://docs.datadoghq.com/es/integrations/spark/#service-checks
+[13]: https://docs.databricks.com/en/clusters/web-terminal.html
+[14]: https://docs.databricks.com/en/notebooks/index.html
+[15]: https://docs.datadoghq.com/es/agent/troubleshooting/
+[16]: https://docs.datadoghq.com/es/help/
+[17]: https://docs.databricks.com/en/ingestion/add-data/upload-to-volume.html#upload-files-to-a-unity-catalog-volume

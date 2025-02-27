@@ -33,7 +33,7 @@ title: 모니터링 지침
 {{< /whatsnext >}}
 
 {{< whatsnext desc="일반 가이드:" >}}
-    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}모니터 모범 사례{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_best_practices" >}}모니터 모범 사례{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}모니터를 위한 RBAC 설정 방법{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}신서틱 테스트에서 모니터 생성 방법{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}비고정 임계값 모니터 방법{{< /nextlink >}}
@@ -47,6 +47,7 @@ title: 모니터링 지침
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}사용 가능한 디스크 공간 모니터링{{< /nextlink >}}
 {{< nextlink href="monitors/guide/on_missing_data" >}}누락된 데이터 구성으로 마이그레이션하기{{< /nextlink >}}
 {{< nextlink href="monitors/guide/composite_use_cases" >}}복합 모니터 사용 사례{{< /nextlink >}}
+  {{< nextlink href="monitors/guide/notification-message-best-practices" >}}알림 메시지 모범 사례{{< /nextlink>}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="쿼리:" >}}
