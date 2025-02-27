@@ -25,7 +25,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
 
 4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
-   {{< img src="cloud_cost/budgeting/budget-create-table.png" alt="Budget Creation View: fill in all budgets" style="width:60%;">}}
+   {{< img src="cloud_cost/budgeting/budget-create-table.png" alt="Budget Creation View: fill in all budgets">}}
 
 5. Click **Save** in the bottom right
 
@@ -44,9 +44,11 @@ You cannot view budget versus actuals before 15 months, since cost metrics have 
 </div>
 
 - You can view the budget status for the **current month**:
+
    {{< img src="cloud_cost/budgeting/budget-status-month.png" alt="Budget Status View: view current month">}}
 
 - Or can view the budget status for the **entire duration**:
+
    {{< img src="cloud_cost/budgeting/budget-status-all.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
