@@ -6,7 +6,7 @@ export default defineConfig({
       exclude: [
         ...configDefaults.exclude,
         '**/clientFiltersManager.js',
-        '**/browser/entryPoint.ts',
+        '**/browserEntryPoint.ts',
         '**/ClientFiltersManager.ts',
         '**/reresolver.ts',
         '**/debugBookmarklet.js',

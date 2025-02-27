@@ -33,9 +33,14 @@ export function removeLineBreaks(str: string): string {
   return str.replace(/(\r\n|\n|\r)/gm, '');
 }
 
+/**
+ * Given the contents of a CSS string (such as the value
+ * of the `style` attribute), convert it to an object
+ * that can be used in JSX.
+ */
 export function cssStringToObject(css: string) {
   const regex = /(?<=^|;)\s*([^:]+)\s*:\s*([^;]+)\s*/g;
   const result: Record<string, string> = {};
-  css.replace(regex, (match, prop, val) => (result[prop] = val));
+  css.replace(regex, (_match, prop, val) => (result[prop] = val));
   return result;
 }
