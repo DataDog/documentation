@@ -587,7 +587,7 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function is invoked with two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you update any property.
+The `beforeSend` callback function that you can provide and can be invoked with two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties.
 
 ```javascript
 function beforeSend(log, context)
@@ -595,10 +595,10 @@ function beforeSend(log, context)
 
 The potential `context` values are:
 
-| Value | Use Case |
-|-------|---------|
-| `isAborted` | For network log events. |
-| `handlingStack` | For network, console, and logger events - this value shows where the log event was handled, which is useful for micro-frontends. |
+| Value | Data Type | Use Case |
+|-------|---------|------------|
+| `isAborted` | Boolean | For network log events, whether the failing request was aborted by the application. |
+| `handlingStack` | String | Where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
 
 To redact email addresses from your web application URLs:
 
@@ -1279,3 +1279,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
 [16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management
+[17]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
