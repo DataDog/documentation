@@ -39,7 +39,7 @@ This launches CoTerm and runs the `kubectl` process. When the process completes,
 You can configure CoTerm to automatically record certain commands with `shim`. For example:
 
 ```shell
-ddcoterm shim kubectl
+ddcoterm shim create kubectl
 ```
 
 After you run this command, CoTerm records all future invocations of `kubectl`.
