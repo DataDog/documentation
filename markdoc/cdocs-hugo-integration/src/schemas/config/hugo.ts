@@ -104,6 +104,10 @@ export const HugoGlobalConfigSchema = z
  * Hugo's `config` directory, but can also include
  * other site-wide configuration data, such as the
  * i18n translation data.
+ *
+ * This type is not derived from the Zod schema
+ * because the schema uses refine(), which would cause
+ * the type to be inferred as `any`.
  */
 export type HugoGlobalConfig = {
   siteParams: HugoSiteParams;
