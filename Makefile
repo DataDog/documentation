@@ -67,7 +67,7 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-start: compile-markdoc
+start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
@@ -106,7 +106,7 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
 
 # All the requirements for a full build
-dependencies: clean source-dd-source
+dependencies: clean source-dd-source compile-marcdoc
 	make hugpython all-examples update_pre_build node_modules placeholders
 
 integrations_data/extracted/vector:
