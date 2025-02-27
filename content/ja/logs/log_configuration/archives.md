@@ -182,7 +182,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。 
+1. Datadog Google Cloud サービスアカウントに、アーカイブをバケットに書き込むための権限を付与します。
 2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
 3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
@@ -226,7 +226,7 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 最大スキャンサイズが定義されているアーカイブの場合、すべてのユーザーは、リハイドレートを開始する前にスキャンサイズを推定する必要があります。推定されたスキャンサイズがそのアーカイブで許可されているものより大きい場合、ユーザーはリハイドレートを要求する時間範囲を狭めなければなりません。時間範囲を減らすと、スキャンサイズが小さくなり、ユーザーがリハイドレートを開始できるようになります。
 
 {{< site-region region="us3" >}}
-#### ファイアウォールルール 
+#### ファイアウォールルール
 
 {{< tabs >}}
 {{% tab "Azure ストレージ" %}}
@@ -346,7 +346,7 @@ S3 バケットが SSE-S3 で暗号化されていることを確認するには
 
 3. S3 バケットの **Properties** タブに移動し、**Default Encryption** を選択します。"AWS-KMS" オプション、CMK ARN の順に選択して保存します。
 
-既存の KSM キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
+既存の KMS キーに変更を加える場合は、[Datadog サポート][3]にお問い合わせください。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
