@@ -136,12 +136,21 @@ export class CdocsHugoIntegration {
     });
   }
 
+  /**
+   * Build the author console, which is a standalone HTML page
+   * that displays the errors in the most recent build.
+   *
+   * The author console is a planned feature, and its HTML
+   * is currently just a stub used to verify that the build
+   * process is working correctly.
+   */
   buildAuthorConsole() {
     // Write the HTML file to the author console directory
     fs.writeFileSync(`${this.authorConsoleDir}/index.html`, AUTHOR_CONSOLE_TEMPLATE);
 
     // Write the data file to the author console directory
     const authorConsoleData = {
+      timestamp: Date.now(),
       errorsByFilePath: this.errorsByFilePath,
       customizationConfig: this.customizationConfigByLang[this.defaultLang]
     };
