@@ -65,7 +65,7 @@ The XML is converted to:
 
 ```json
 {
-    "recipe: {
+    "recipe": {
         "type": "pasta",
         "value": "Carbonara"
         }
@@ -87,7 +87,7 @@ The XML is converted to:
 
 ```json
 {
-    "recipe: {
+    "recipe": {
         "type": "pasta",
         "text": "Carbonara"
         }
