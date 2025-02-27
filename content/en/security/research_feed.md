@@ -15,7 +15,7 @@ The Datadog Security Research Feed provides continuously updated security-relate
 The Security Research and Detection Engineering teams continuously monitor the threat landscape and publish updates as soon as new threats emerge. This ensures security professionals have access to:
 
 - Expert analysis on the latest security trends.
-- Contextual information to assess vulnerability impact.
+- Contextual information to assess the impact of a vulnerability or threat.
 - Guidance on implementing effective detection and response strategies.
 
 ## Criteria for emerging vulnerabilities
@@ -24,4 +24,12 @@ An emerging vulnerability is a security weakness in a technology that significan
 
 - **Widespread impact**: The vulnerability affects a large number of systems or organizations, creating a broad attack surface.
 - **High severity**: Its exploitability and potential damage make it an immediate security concern.
+- **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
+
+## Criteria for emerging threats
+
+An emerging threat is a new or evolving attack campaign or supply-chain compromise that significantly threatens business operations and is defined by one or more of the following criteria:
+
+- **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks or highly targeted campaigns.
+- **Imminent threat**:The threat is actively spreading or is expected to escalate, posing an immediate risk to many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
