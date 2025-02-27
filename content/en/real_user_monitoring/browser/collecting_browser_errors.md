@@ -37,7 +37,7 @@ For information about the default attributes for all event types, see [Data Coll
 | `error.type`    | string | The error type (or error code in some cases).                     |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
-| `error.causes`  | [Array][12] | An optional nested error providing additional context. Use this attribute to display errors separately and enhance formatting. [More info from the MDN documentation.][13]   |
+| `error.causes` | [Array][12] | An optional list of errors providing additional context. This attribute is used to display errors separately and enhance formatting. For more information, see the [MDN documentation][13]. |
 
 ### Source errors
 
