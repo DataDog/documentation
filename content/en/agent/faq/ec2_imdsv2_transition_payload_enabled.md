@@ -4,7 +4,6 @@ aliases:
   - /ec2_imdsv2_transition_payload_enabled
 ---
 
-# IMDSv2 Enablement by Default – What You Need to Know
 
 With the release of Agent v7.64.0, Datadog now defaults to using IMDSv2 for enhanced security and consistency in retrieving AWS metadata. This update may result in a change to how hostnames appear in the Datadog UI. Thus your metrics and alerts continue to work as before.
 
