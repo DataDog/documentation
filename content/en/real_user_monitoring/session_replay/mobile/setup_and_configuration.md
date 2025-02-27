@@ -148,7 +148,7 @@ To set up Mobile Session Replay for React Native:
 
 1. Make sure you've [setup and initialized the Datadog React Native SDK][2] with views instrumentation enabled.
 
-2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][4] or [npm][5].
+2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][3] or [npm][4].
 
    ```shell
    yarn add @datadog/mobile-react-native-session-replay@2.4.4-alpha.0
@@ -162,7 +162,8 @@ To set up Mobile Session Replay for React Native:
 
    - If you use the `DatadogProvider` component:
 
-     ```java
+     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
      import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
      import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
@@ -183,11 +184,12 @@ To set up Mobile Session Replay for React Native:
      };
 
      export default App;
-     ```
+    {{< /code-block >}}
 
    - If you use the `DdSdkReactNative.initialize` method:
 
-     ```java
+     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
      import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
      import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
@@ -196,17 +198,42 @@ To set up Mobile Session Replay for React Native:
      DdSdkReactNative.initialize(configuration).then(() => {
        SessionReplay.enable();
      })
-     ```
+    {{< /code-block >}}
 
-Enable Session Replay in your app, after initializing the Datadog SDK:
+3. Enable Session Replay in your app, after initializing the Datadog SDK:
    {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
    SessionReplay.enable();
+
    {{< /code-block >}}
+
+4. Define the configuration for Session Replay:
+
+   {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
+      SessionReplay.enable({
+        replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
+      });
+
+   {{< /code-block >}}
+
+   During this step, you can also configure multiple [privacy levels][5] that apply to replays.
+
+5. (iOS only) Update your iOS pods.
+   ```shell
+      cd ios && pod install
+   ```
+6. Rebuild your iOS and Android apps.
 
 [1]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions\
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+[3]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
+[4]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
+[5]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
+
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -266,7 +293,6 @@ To instrument your consolidated web and native Session Replay views for React Na
 1. Enable [webview tracking][1] for your React Native application.
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
-
 
 **Note**: This feature is not compatible with React Native's [New Architecture][3] for Android.
 
@@ -424,8 +450,6 @@ config.verbosity = SdkVerbosity.DEBUG;
 
 See [Privacy Options][2].
 
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -433,5 +457,3 @@ See [Privacy Options][2].
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/web_view_tracking
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
-[4]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
-[5]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
