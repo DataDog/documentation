@@ -5,6 +5,7 @@ aliases:
 - /security/application_security/software_composition_analysis/setup/
 - /security/application_security/software_composition_analysis/
 - /code_analysis/software_composition_analysis/
+- /security/application_security/vulnerability_management/
 ---
 ## Overview
 Software Composition Analysis (SCA) detects open source libraries in both your repositories and running services, providing end-to-end visibility of library vulnerabilities and license management from development to production.
