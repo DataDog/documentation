@@ -1,5 +1,5 @@
 ---
-title: Budgeting
+title: Budgets
 description: After starting to ingest costs in Cloud Cost Management, set up budgets and visualize how you're tracking against them.
 further_reading:
 - link: "/cloud_cost_management/"
@@ -21,21 +21,21 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-   {{< img src="cloud_cost/budgeting/budget-creation-view.png" alt="Budget Creation View: fill in budget details">}}
+   {{< img src="cloud_cost/budgets/budget-creation-view.png" alt="Budget Creation View: fill in budget details">}}
 
 4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
-   {{< img src="cloud_cost/budgeting/budget-create-table.png" alt="Budget Creation View: fill in all budgets">}}
+   {{< img src="cloud_cost/budgets/budget-create-table.png" alt="Budget Creation View: fill in all budgets">}}
 
 5. Click **Save** in the bottom right
 
-   {{< img src="cloud_cost/budgeting/budget-create-save.png" alt="Budget Creation View: click save">}}
+   {{< img src="cloud_cost/budgets/budget-create-save.png" alt="Budget Creation View: click save">}}
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
 and other relevant details. Click on **View Performance** to investigate the budget, and understand what might be causing you to go over budget.
 
-   {{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgets/budget-list.png" alt="List all budgets">}}
 
 From the **View Performance** page, you can toggle the view option from the top left:
 
@@ -45,11 +45,11 @@ You cannot view budget versus actuals before 15 months, since cost metrics have 
 
 - You can view the budget status for the **current month**:
 
-   {{< img src="cloud_cost/budgeting/budget-status-month.png" alt="Budget Status View: view current month">}}
+   {{< img src="cloud_cost/budgets/budget-status-month.png" alt="Budget Status View: view current month">}}
 
 - Or can view the budget status for the **entire duration**:
 
-   {{< img src="cloud_cost/budgeting/budget-status-all.png" alt="Budget Status View: view total budget">}}
+   {{< img src="cloud_cost/budgets/budget-status-all.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
 To investigate budgets:
@@ -59,9 +59,9 @@ To investigate budgets:
 ## Delete budget
 To delete a budget, click the trash icon on the Budgets page or within an individual budget.
 
-   {{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgets/budget-list.png" alt="List all budgets">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cost/plan/budgeting
+[1]: https://app.datadoghq.com/cost/plan/budgets
