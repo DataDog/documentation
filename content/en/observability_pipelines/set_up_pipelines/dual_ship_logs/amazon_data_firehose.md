@@ -55,6 +55,11 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -253,6 +258,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
