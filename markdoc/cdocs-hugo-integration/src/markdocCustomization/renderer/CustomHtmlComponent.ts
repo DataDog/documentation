@@ -1,6 +1,6 @@
 import { render } from '.';
 import { Tag, Config } from 'cdocs-markdoc';
-import { HugoConfig, HugoConfigSchema } from '../../schemas/config/hugo';
+import { HugoConfig } from '../../schemas/config/hugo';
 
 /**
  * The base class for all custom HTML components
