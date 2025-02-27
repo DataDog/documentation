@@ -86,6 +86,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
+| disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | ASM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |
