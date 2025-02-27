@@ -89,7 +89,7 @@ Necesitas generar exportaciones para dos tipos de datos: **actual** y **amortiza
     - Asegúrate de que **Overwrite data** (Sobrescribir datos) no está marcado.
         - **Nota:** Datadog no es compatible con el ajuste Sobrescribir datos. Si el ajuste estaba marcado anteriormente, asegúrate de limpiar los archivos del directorio o moverlos a otro.
 
-   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Destino de exportación con los ajustes de Partición de archivos y Sobrescribir datos" >}}
 
 9. Haz clic en **Next** (Siguiente) y, a continuación, en **Review + Create** (Revisar + Crear).
 
@@ -100,7 +100,7 @@ Para procesar más rápido, genera las primeras exportaciones manualmente hacien
 
 {{< img src="cloud_cost/run_now.png" alt="Haz clic en el botón Ejecutar ahora en el panel lateral de exportación para generar exportaciones" style="width:50%" >}}
 
-### Proporcionar acceso a tus exportaciones en Datadog 
+### Proporcionar acceso a tus exportaciones en Datadog
 
 {{< tabs >}}
 {{% tab "Facturación Cuentas" %}}
