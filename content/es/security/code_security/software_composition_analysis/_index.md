@@ -3,6 +3,7 @@ aliases:
 - /es/security/application_security/software_composition_analysis/setup/
 - /es/security/application_security/software_composition_analysis/
 - /es/code_analysis/software_composition_analysis/
+- /es/security/application_security/vulnerability_management/
 disable_toc: false
 title: Software Composition Analysis
 ---
@@ -32,12 +33,12 @@ El explorador de [vulnerabilidades][11] proporciona una vista centrada en las vu
 ### Puntuación de la gravedad de Datadog
 Cada vulnerabilidad tiene una puntuación de la gravedad base definida. Para ayudar a priorizar las medidas correctivas, Datadog transforma la puntuación CVSS básica en la puntuación de la gravedad de Datadog teniendo en cuenta las pruebas de solicitudes o ataques sospechosos, la sensibilidad empresarial o la exposición a Internet del entorno, y el riesgo de exploits exitosos.
 
-A una puntuación base se le pueden aplicar cuatro modificadores de puntuación. Dos son proporcionados por el contexto de ejecución:
+A una puntuación base se le pueden aplicar cuatro modificadores de la puntuación. Dos de ellos son proporcionados por el contexto de ejecución:
  - La vulnerabilidad está en producción
  - El servicio afectado por la vulnerabilidad está siendo atacado
 
-Dos de ellos proceden del contexto del CVE:
- - Si se dispone de un exploit
+Dos de ellos proceden del contexto de CVE:
+ - Si hay un exploit disponible
  - La probabilidad de explotación
 
 Datadog muestra cómo se ajusta la puntuación CVSS base a la puntuación de la gravedad de Datadog en función de los factores anteriores.

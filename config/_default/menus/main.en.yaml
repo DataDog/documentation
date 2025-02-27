@@ -1408,7 +1408,7 @@ menu:
       weight: 1
     - name: DDSQL Editor
       url: ddsql_editor/
-      pre: inventories
+      pre: ddsql
       identifier: ddsql_editor
       parent: platform_heading
       weight: 30000
@@ -1817,29 +1817,29 @@ menu:
       parent: metrics_top_level
       identifier: metrics_distributions
       weight: 4
+    - name: Overview
+      identifier: metrics_overview
+      url: metrics/overview/
+      parent: metrics_top_level
+      weight: 5
     - name: Explorer
       url: metrics/explorer/
       parent: metrics_top_level
       identifier: metrics_explorer
-      weight: 5
+      weight: 6
     - name: Metrics Units
       identifier: metrics_units
       url: metrics/units/
       parent: metrics_explorer
-      weight: 501
+      weight: 601
     - name: Summary
       identifier: metrics_summary
       url: metrics/summary/
       parent: metrics_top_level
-      weight: 6
+      weight: 7
     - name: Volume
       identifier: metrics_volume
       url: metrics/volume/
-      parent: metrics_top_level
-      weight: 7
-    - name: Overview
-      identifier: metrics_overview
-      url: metrics/overview/
       parent: metrics_top_level
       weight: 8
     - name: Advanced Filtering
@@ -1852,16 +1852,21 @@ menu:
       parent: metrics_top_level
       identifier: metrics_nested_queries
       weight: 10
+    - name: Composite Metrics Queries
+      url: metrics/composite_metrics_queries
+      parent: metrics_top_level
+      identifier: composite_metrics_queries
+      weight: 11
     - name: Metrics Without Limits™
       identifier: metrics_without_limits
       url: metrics/metrics-without-limits/
       parent: metrics_top_level
-      weight: 11
+      weight: 12
     - name: Guides
       url: metrics/guide
       parent: metrics_top_level
       identifier: metrics_guide
-      weight: 12
+      weight: 13
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
@@ -2507,11 +2512,16 @@ menu:
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: Case Automation Rules
+      url: service_management/case_management/automation_rules
+      parent: case_management
+      identifier: case_management_automation_rules
+      weight: 3
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 3
+      weight: 4
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
@@ -2848,6 +2858,21 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 6
+    - name: DatadogDashboard CRD
+      url: containers/datadog_operator/crd_dashboard
+      identifier: containers_datadog_operator_crd_dashboard
+      parent: containers_datadog_operator
+      weight: 601
+    - name: DatadogMonitor CRD
+      url: containers/datadog_operator/crd_monitor
+      identifier: containers_datadog_operator_crd_monitor
+      parent: containers_datadog_operator
+      weight: 602
+    - name: DatadogSLO CRD
+      url: containers/datadog_operator/crd_slo
+      identifier: containers_datadog_operator_crd_slo
+      parent: containers_datadog_operator
+      weight: 603
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
