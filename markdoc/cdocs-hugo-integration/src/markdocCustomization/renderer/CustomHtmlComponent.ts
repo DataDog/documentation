@@ -30,6 +30,10 @@ export abstract class CustomHtmlComponent {
 
     this.components = p.components;
     this.tag = p.tag;
+
+    // Render any child tags up front, in case
+    // this is needed for this tag's rendering logic
+    // (such as syntax highlighting).
     if (p.tag.children.length > 0) {
       this.contents = render({
         node: p.tag.children,

@@ -8,7 +8,9 @@ import { HugoEnvSchema } from './hugo';
  */
 export const IntegrationConfigSchema = z.object({
   baseSiteDir: z.string().min(1),
-  env: HugoEnvSchema
+  env: HugoEnvSchema,
+  publishAuthorConsoleInDir: z.string().min(1).optional(),
+  defaultLang: z.string().min(1).optional()
 });
 
 /**

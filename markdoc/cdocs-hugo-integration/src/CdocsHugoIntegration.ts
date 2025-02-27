@@ -18,6 +18,11 @@ import {
 import { findInDir } from './utils';
 import { buildHugoGlobalConfig } from './hugoUtils';
 
+const AUTHOR_CONSOLE_TEMPLATE = fs.readFileSync(
+  `${__dirname}/authorConsole/index.html`,
+  'utf8'
+);
+
 /**
  * The external interface of the integration.
  * This class is instantiated by the docs site build code,
@@ -28,6 +33,8 @@ import { buildHugoGlobalConfig } from './hugoUtils';
 export class CdocsHugoIntegration {
   hugoGlobalConfig: HugoGlobalConfig;
   private compiledFilePaths: string[] = [];
+  authorConsoleDir: string | undefined;
+  defaultLang: string;
 
   customizationConfigByLang: CustomizationConfigByLang;
   errorsByFilePath: Record<string, CompilationError[]> = {};
@@ -37,10 +44,13 @@ export class CdocsHugoIntegration {
    */
   constructor(args: { config: IntegrationConfig }) {
     this.hugoGlobalConfig = buildHugoGlobalConfig(args.config);
+    this.authorConsoleDir = args.config.publishAuthorConsoleInDir;
+    this.defaultLang = args.config.defaultLang || 'en';
 
     const { customizationConfigByLang } = loadCustomizationConfig({
       configDir: this.hugoGlobalConfig.dirs.customizationConfig,
-      langs: this.hugoGlobalConfig.languages
+      langs: this.hugoGlobalConfig.languages,
+      defaultLang: this.defaultLang
     });
 
     this.customizationConfigByLang = customizationConfigByLang;
@@ -86,6 +96,10 @@ export class CdocsHugoIntegration {
       this.logErrorsToConsole();
     }
 
+    if (this.authorConsoleDir && this.hugoGlobalConfig.env !== 'development') {
+      this.buildAuthorConsole();
+    }
+
     return {
       hasErrors: this.#hasErrors(),
       errorsByFilePath: this.errorsByFilePath,
@@ -120,6 +134,22 @@ export class CdocsHugoIntegration {
     return buildSiteAssets({
       hugoGlobalConfig: this.hugoGlobalConfig
     });
+  }
+
+  buildAuthorConsole() {
+    // Write the HTML file to the author console directory
+    fs.writeFileSync(`${this.authorConsoleDir}/index.html`, AUTHOR_CONSOLE_TEMPLATE);
+
+    // Write the data file to the author console directory
+    const authorConsoleData = {
+      errorsByFilePath: this.errorsByFilePath,
+      customizationConfig: this.customizationConfigByLang[this.defaultLang]
+    };
+
+    fs.writeFileSync(
+      `${this.authorConsoleDir}/data.json`,
+      JSON.stringify(authorConsoleData, null, 2)
+    );
   }
 
   // PRIVATE HELPERS ----------------------------------------------------------
