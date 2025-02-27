@@ -7,13 +7,12 @@ describe('CdocsHugoIntegration (optimized Markdown output)', async () => {
   const hugoIntegration = new CdocsHugoIntegration({
     config: {
       baseSiteDir: VALID_SITE_DIR,
-      env: 'development'
+      env: 'development',
+      publishAuthorConsoleInDir: VALID_SITE_DIR + '/static/markdoc/console'
     }
   });
 
   const { compiledFilePaths, hasErrors } = hugoIntegration.compileMdocFiles();
-  // TODO: Prerender most of the author console once,
-  // so this step runs fast enough to include in tests
 
   if (hasErrors) {
     hugoIntegration.logErrorsToConsole();

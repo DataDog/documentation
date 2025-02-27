@@ -96,7 +96,7 @@ export class CdocsHugoIntegration {
       this.logErrorsToConsole();
     }
 
-    if (this.authorConsoleDir && this.hugoGlobalConfig.env !== 'development') {
+    if (this.authorConsoleDir && this.hugoGlobalConfig.env === 'development') {
       this.buildAuthorConsole();
     }
 
@@ -145,6 +145,16 @@ export class CdocsHugoIntegration {
    * process is working correctly.
    */
   buildAuthorConsole() {
+    if (!this.authorConsoleDir) {
+      throw new Error(
+        `The author console directory is not set, but buildAuthorConsole() was called.`
+      );
+    }
+
+    // If the author console directory does not exist, create it
+    if (!fs.existsSync(this.authorConsoleDir)) {
+      fs.mkdirSync(this.authorConsoleDir, { recursive: true });
+    }
     // Write the HTML file to the author console directory
     fs.writeFileSync(`${this.authorConsoleDir}/index.html`, AUTHOR_CONSOLE_TEMPLATE);
 
