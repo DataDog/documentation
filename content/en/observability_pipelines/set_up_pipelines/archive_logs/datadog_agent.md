@@ -234,6 +234,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -268,6 +273,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
 {{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
 {{< /tabs >}}
