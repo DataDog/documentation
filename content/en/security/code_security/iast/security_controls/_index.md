@@ -194,5 +194,5 @@ applies for both methods
 {{% /collapse-content %}}
 
 
-[1]: /security/code_security/iast/_index.md#overview
+[1]: /security/code_security/iast/#overview
 
