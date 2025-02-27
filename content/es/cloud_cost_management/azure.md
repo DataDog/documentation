@@ -23,10 +23,7 @@ Datadog proporciona visibilidad de costes a nivel de suscripción, grupo de recu
 
 
 {{% site-region region="us3" %}}
-**Notas**:
-- Si estás utilizando el sitio **US3** de Datadog, es posible que hayas configurado la integración de Datadog Azure Native utilizando el [método de recurso de Datadog][1] recomendado a través del Portal de Azure. Para admitir Cloud Cost Management, necesitas [crear un Registro de aplicación][2].
-- Las exportaciones del Contrato de cliente de Microsoft deben configurarse en el nivel de suscripción. Si tienes un plan Enterprise, puedes configurar tus cuentas de facturación para integrar todas las suscripciones.
-- No se admiten cuentas de pago por uso.
+**Nota**: Si está utilizando el sitio **US3** de Datadog, es posible que haya configurado la integración Datadog Azure Native utilizando el [método de recursos de Datadog][1] recomendado a través del Portal Azure. Para Cloud Cost Management, necesita [crear un registro de aplicaciones][2].
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /es/integrations/azure/?tab=azurecliv20#setup
@@ -67,7 +64,7 @@ Necesitas generar exportaciones para dos tipos de datos: **actual** y **amortiza
 
 2. En el panel de navegación de la izquierda, selecciona **Cost Management** (Gestión de costes) y, a continuación, **Reporting + analytics** (Informes y análisis).
 3. Selecciona el contexto de exportación. **Nota:** El contexto debe ser *cuenta de facturación*, *suscripción* o *grupo de recursos*.
-4. Haz clic en **Crear**.
+4. Haz clic en **Create** (Crear).
 
    {{< img src="cloud_cost/improved_exports_scope.png" alt="El portal de Azure, con la opción de Exportaciones resaltada en la navegación y el contexto de exportación definido" style="width:100%" >}}
 
@@ -92,7 +89,7 @@ Necesitas generar exportaciones para dos tipos de datos: **actual** y **amortiza
     - Asegúrate de que **Overwrite data** (Sobrescribir datos) no está marcado.
         - **Nota:** Datadog no es compatible con el ajuste Sobrescribir datos. Si el ajuste estaba marcado anteriormente, asegúrate de limpiar los archivos del directorio o moverlos a otro.
 
-   {{< img src="cloud_cost/improved_export_destination.png" alt="Destino de exportación con los ajustes de Partición de archivos y Sobrescribir datos" >}}
+   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
 9. Haz clic en **Next** (Siguiente) y, a continuación, en **Review + Create** (Revisar + Crear).
 
@@ -105,9 +102,8 @@ Para procesar más rápido, genera las primeras exportaciones manualmente hacien
 
 ### Proporcionar acceso a tus exportaciones en Datadog 
 
-{{< tabs >}}
-{{% tab "Cuentas de facturación" %}}
-**Nota**: Para el Contrato de cliente de Microsoft, configura en el nivel de suscripción.
+{{< pestañas >}}
+{{% pestaña "Facturación Cuentas" %}}
 
 1. En la pestaña Exportaciones, haz clic en la Cuenta de almacenamiento de la exportación para navegar hasta ella.
 2. Haz clic en la pestaña Containers (Contenedores).
