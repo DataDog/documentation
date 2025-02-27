@@ -597,7 +597,7 @@ The potential `context` values are:
 
 | Value | Data Type | Use Case |
 |-------|---------|------------|
-| `isAborted` | Boolean | For network log events, this property tells you whether the failing request was aborted by the application, in which case you might not want to send this event because it might be intentionally aborted. |
+| `isAborted` | Boolean | For network log events, this property tells you whether the failing request was aborted by the application, in which case you might not want to send this event because it may be intentionally aborted. |
 | `handlingStack` | String | A stack trace of where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
 
 To redact email addresses from your web application URLs:
