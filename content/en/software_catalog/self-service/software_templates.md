@@ -23,7 +23,7 @@ Use Software Templates within Self-Service to help developers quickly provision 
 
 ## Create a Software Template
 
-A Software Template is stored in a Git repository and serves as a reusable framework. Developers interact with templates through Self-Service, which collect inputs and pass them into the template repository to generate customized configurations.
+A Software Template is stored in a Git repository and serves as a reusable framework. [Build apps][2] to collect inputs and pass them into the template repository to generate customized configurations.
 
 To create a Software Template, you can:
 - Start from an example using pre-built blueprints.
@@ -37,14 +37,14 @@ Example blueprints:
 
 - **[Scaffold New Service blueprint][11]**: Create a form that collects developer inputs, integrates with GitHub, and generates a new repository or pull request.
 - **[Create S3 Bucket blueprint][10]**: Generate Terraform code for an S3 bucket using a form in GitHub.
-- **[Provision EKS Cluster blueprint][12]**: Generate Terraform code for a Kubernetes cluster in GitHub.
-- **[Provision RDS Instance blueprint][13]**: Provision an RDS instance in AWS through an API call.
+- **[Provision EKS Cluster blueprint][13]**: Generate Terraform code for a Kubernetes cluster in GitHub.
+- **[Provision RDS Instance blueprint][14]**: Provision an RDS instance in AWS through an API call.
 
 To use a blueprint:
 
 1. Select a blueprint in [**App Builder Blueprints**][9].
-1. Customize the form fields to capture the required inputs.
-1. Click **Save as New App** to create an App linked to a templating workflow.
+1. Customize the form fields to capture required inputs.
+1. Click **Save as New App** to create an app linked to a templating workflow.
 
 ### Start from scratch
 
@@ -74,17 +74,17 @@ To build a Software Template from scratch:
 
   {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building Software Template automations" style="width:100%;" >}}
 
-4. Test your App and Workflow:
+4. Test your app and workflow:
 
    1. Click **View App** to preview the app as a standalone page.
    1. Monitor the templating process in [Workflow Automation][3].
 
-## Publish your App 
+## Publish your app 
 
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the App to a Dashboard or the Self-Service portal for easy discovery.
+- Add the app to a Dashboard or the Self-Service portal for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 

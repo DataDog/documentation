@@ -14,41 +14,41 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-[Self-Service][17] is a centralized interface where developers can take action directly within Datadog. Platform teams can define and share golden paths to streamline tasks across the software development lifecycle. For example, you can:
+[Self-Service][17] is a centralized interface where developers can take action directly within Datadog. Platform teams can define and share golden paths to streamline tasks across the software development lifecycle. For example, you can use Self-Service to:
 
-- build microservices and infrastructure with the proper configurations
+- build microservices and infrastructure with proper configurations
 - initialize development environments
 - manage deployments across environments
 - actively monitor and optimize running services
 
-Each tile in Self-Service represents an App, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Actions Catalog][7] and [Workflow Automation][1], and surfaced in Self-Service to streamline developer workflows.
+Each tile in Self-Service represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Actions Catalog][7] and [Workflow Automation][1], and surfaced in Self-Service to streamline developer workflows.
 
 ## Automate developer workflows
 
-To create a new App in Self-Service, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
+To create a new app in Self-Service, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
 
 1. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers.
-1. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or data transformations. 
-1. Use [Workflow Automation][1] to orchestrate end-to-end processes of multiple actions.
+1. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or transform data. 
+1. Use [Workflow Automation][1] to orchestrate end-to-end processes with multiple actions.
 1. Integrate your app with Datadog's Software Catalog to enable dynamic and self-service workflows.
 
 {{< img src="tracing/software_catalog/self-service-ui.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
 ### Start from an example
 
-To get started quickly, explore [App Builder Blueprints][9] and [Workflow Automation Blueprints][15] for examples of how to configure an App or Workflow, respectively. You can configure inputs, set up integrations with other tools, configure permissions, and make other adjustments to the blueprints to satisfy your needs. 
+To get started quickly, explore [App Builder Blueprints][9] and [Workflow Automation Blueprints][15] for examples of how to configure apps and workflows, respectively. You can configure inputs, set up integrations, configure permissions, and make other adjustments to the blueprints to satisfy your needs. 
 
-For example, you can use Blueprints to:
+For example, you can use App Builder Blueprints to:
 
 - **Scaffold new services from templates:** Configure a form to collect inputs from a developer, integrate with a template in source code management (for example, Github), and generate a new repository or PR for a developer. Read the [Software Templates documentation][16] to learn more.
 - **Provision infrastructure:** Enable developers to spin up new infrastructure (for example, an S3 bucket) with a few inputs and one click. Collect approvals from an SRE or platform engineering team through source control or Approval actions within Workflow Automation.
 - **Remediate issues:** Consolidate data from cloud infrastructure or Kubernetes and enable developers to take simple, safe remediation actions. Trigger actions manually, in response to a monitor, or from an external API call.
-- **Manage code changes and deployments:** Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog or track the current status and approval.
+- **Manage code changes and deployments:** Manage deployments, feature flag changes, and more. Initiate changes directly from Datadog and track their status and approvals.
 - **Provision developer environments:** Spin up ephemeral environments for developers on-demand. Use Workflow Automation to automatically deprovision any unused infrastructure to control costs.
 
 ### Start from scratch
 
-If you prefer to build an App from the ground up:
+If you prefer to build an app from the ground up:
 
 1. Create a form using App Builder:
 
@@ -60,23 +60,23 @@ If you prefer to build an App from the ground up:
     1. Create a **Button** that submits the form and triggers your workflow.
     1. Save and publish the app.
 
-1. Pair your App with [Actions][7] or a [Workflow][6] to automate processes.
+1. Pair your app with [Actions][7] or a [Workflow][6] to automate processes.
 
    {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
-1. Test your App and Workflow:
+1. Test your app and workflow:
    
    1. Click **View App** to preview the app on a standalone page.
    1. Monitor workflow execution in [Workflow Automation][3].
 
-### Publish your App 
+### Publish your app 
 
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the App to a Dashboard or the Self-Service portal for easy discovery.
+- Add the app to a Dashboard or the Self-Service portal for easy discovery.
 
-  {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     
 
 ## Further reading
