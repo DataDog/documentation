@@ -91,6 +91,7 @@ Integrations in Preview are disabled by default but can be enabled individually:
 | Server                  | Versions   | Support Type                                           | Instrumentation Names (used for configuration)           |
 |-------------------------|------------|--------------------------------------------------------|----------------------------------------------------------|
 | Akka-Http Server        | 10.0+      | Fully Supported                                        | `akka-http`, `akka-http-server`                          |
+| Apache Pekko            | 1.0+       | Fully Supported                                        | `pekko-http`, `pekko-http-server`                        |
 | Finatra Web             | 2.9+       | Fully Supported                                        | `finatra`                                                |
 | Grizzly                 | 2.0+       | Fully Supported                                        | `grizzly`                                                |
 | Grizzly-HTTP            | 2.3.20+    | Fully Supported                                        | `grizzly-filterchain`                                    |
@@ -296,9 +297,9 @@ GraalVM Native Image is a technology that allows you to compile Java application
 
 ### Requirements
 
-Use the latest versions of:
+Use:
 
-- [GraalVM][7]
+- [GraalVM JDK 21][7]
 - [Datadog Java tracer][1]
 
 ### Setup

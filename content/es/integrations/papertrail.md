@@ -18,7 +18,7 @@ author:
 categories:
 - event management
 - notifications
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,8 +48,8 @@ tile:
   title: Papertrail
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/papertrail/papertrailexample.png" alt="Papertrail example" popup="true">}}
+<!--  EXTRAIDO DE https://github.com/DataDog/integrations-internal-core -->
+![Ejemplo de Papertrail][1]
 
 ## Información general
 
@@ -64,16 +64,16 @@ Utiliza Papertrail y Datadog para:
 
 Para capturar métricas de Papertrail:
 
-1. En el [visor de eventos][1] de Papertrail, guarda una búsqueda de los eventos de logs que deben ser graficados.
-2. Introduce el nombre de la búsqueda y haz clic en el botón **Guardar y configurar una alerta**.
+1. En el [visor de eventos][2] de Papertrail, guarda una búsqueda de los eventos de logs que deben ser graficados.
+2. Ingresa el nombre de la búsqueda y haz clic en el botón **Save & Setup an Alert** (Guardar y configurar una alerta).
 3. En Gráficas y métricas, elige Datadog.
-    {{< img src="integrations/papertrail/papertrailnotify.png" style="max-width:500px;" alt="Notificaciones de Papertrail" popup="true">}}
+    ![Notificaciones de Papertrail][3]
 
 4. Elige la frecuencia de tus alertas y otros detalles.
 5. Proporciona tu clave de API Datadog, introduce el nombre elegido para tu métrica y, opcionalmente, introduce algunas etiquetas (tags) para asociar a la métrica.
-    {{< img src="integrations/papertrail/papertraildetails.png" style="max-width:500px;" alt="Notificaciones de Papertrail" popup="true">}}
+    ![Notificaciones de Papertrail][4]
 
-6. Haz clic en el botón **Crear alerta**.
+6. Haz clic en el botón **Create Alert** (Crear alerta).
 
 Papertrail actualiza Datadog según el intervalo elegido.
 
@@ -97,7 +97,10 @@ La integración de Papertrail no incluye checks de servicio.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][2].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-[1]: https://papertrailapp.com/events
-[2]: https://docs.datadoghq.com/es/help/
+[1]: images/papertrailexample.png
+[2]: https://papertrailapp.com/events
+[3]: images/papertrailnotify.png
+[4]: images/papertraildetails.png
+[5]: https://docs.datadoghq.com/es/help/

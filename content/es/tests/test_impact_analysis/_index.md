@@ -63,7 +63,7 @@ Antes de configurar Test Impact Analysis, debes configurar [Test Optimization][4
 
 ## Configuración
 
-Una vez que hayas configurado tu biblioteca de Datadog para Test Impact Analysis, configúralo desde la página de [configuración de servicio de test][5]. Para activar Test Impact Analysis se requiere el permiso `Intelligent Test Runner Activation Write`.
+Una vez que hayas configurado tu biblioteca de Datadog para Test Impact Analysis, configúralo desde la página de [configuración de servicio de test][5]. Para activar Test Impact Analysis se requiere el permiso `Test Optimization Settings Write`.
 
 {{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-Configuración.png" alt="Enable Test Impact Analysis for a test servicio on the Test Optimization Settings page" style="width:80%" >}}
 
