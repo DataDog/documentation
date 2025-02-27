@@ -13,9 +13,9 @@ further_reading:
   tag: ソースコード
   text: 'Datadog Operator: 構成'
 - link: https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/
-  tag: Architecture Center
+  tag: アーキテクチャセンター
   text: Datadog Operator と Admission Controller を使用してアプリケーションをインスツルメントする
-title: Datadog Operator
+title: Datadog オペレーター
 ---
 
 [Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。
@@ -41,7 +41,7 @@ Kubernetes に Datadog Agent をインストールするために、Helm チャ�
 
 Datadog は、DaemonSet を使用して Agent をデプロイすることを完全にサポートしていますが、手動で DaemonSet を構成すると、エラーが発生する可能性が高くなります。そのため、DaemonSet の使用はあまり推奨されません。
 
-## 使用方法
+## 使用状況
 
 Operator を使用して Datadog Agent をデプロイする方法については、[Datadog Operator の概要][6]のガイドを参照してください。
 
