@@ -1,5 +1,6 @@
 ---
 title: Budgeting
+description: After starting to ingest costs in Cloud Cost Management, set up budgets and visualize how you're tracking against them.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -7,51 +8,56 @@ further_reading:
 ---
 
 ## Overview
-After you start ingesting your costs in Cloud Cost Management, set up budgets and easily visualize how you're tracking against budgets.
+After you start ingesting your costs in Cloud Cost Management, set up budgets and visualize how you are tracking against budgets.
 
 ## Create a budget
 
-1. Enter the following details:
-   1. **Budget Name**
-   2. **Start Date** - This can be a past month. Budgets are set at the month level.
-   3. **End Date** - The end date can be in the future. Note: If both the start and end dates are in the past, you can not view that budget's status at this time.
-   4. **Provider(s)** - Budget on any combination of AWS, Azure, Google Cloud,g any SaaS, Custom Costs, and even Datadog costs.
-   5. **Dimension to budget by** - Specify a dimension to track the budget, along with the corresponding values. For example, if you have team budgets, for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
+1. Navigate to [**Infrastructure > Cloud Cost > Plan > Budgets**][1].
+2. Click the **Create a New Budget** button.
+3. Enter the following details:
+   - **Budget Name**: Enter a name for your budget.
+   - **Start Date**: Enter a start date for the budget (this can be a past month). Budgets are set at the month level.
+   - **End Date**: Set an end date for the budget (can be in the future).
+   - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
+   - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-{{< img src="cloud_cost/budgeting/budget-creation-view.png" alt="Budget Creation View: fill in budget details">}}
+   {{< img src="cloud_cost/budgeting/budget-creation-view.png" alt="Budget Creation View: fill in budget details">}}
 
-2. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
+4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
-{{< img src="cloud_cost/budgeting/budget-create-table.png" alt="Budget Creation View: fill in all budgets">}}
+   {{< img src="cloud_cost/budgeting/budget-create-table.png" alt="Budget Creation View: fill in all budgets" style="width:60%;">}}
 
-3. Click **Save** in the bottom right
+5. Click **Save** in the bottom right
 
-{{< img src="cloud_cost/budgeting/budget-create-save.png" alt="Budget Creation View: click save">}}
+   {{< img src="cloud_cost/budgeting/budget-create-save.png" alt="Budget Creation View: click save">}}
 
 ## View budget status
-The Budgets Page[1] lists all of your organization's budgets, highlighting budgets that are over budget, who created the budget,
-and more details. Click on **View Performance** to investigate the budget, and understand what might be causing you to go over budget.
+The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
+and other relevant details. Click on **View Performance** to investigate the budget, and understand what might be causing you to go over budget.
 
-{{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
 
-You can view the budget status in the current month or the full duration of the budget.
+From the **View Performance** page, you can toggle the view option from the top left:
 
 <div class="alert alert-info">
-Note: You can not view budget vs actuals before 15 months, since cost metrics have 15 month retention at this time.
+You cannot view budget versus actuals before 15 months, since cost metrics have 15 month retention at this time.
 </div>
 
-{{< img src="cloud_cost/budgeting/budget-status-month.png" alt="Budget Status View: view current month">}}
-{{< img src="cloud_cost/budgeting/budget-status-all.png" alt="Budget Status View: view total budget">}}
+- You can view the budget status for the **current month**:
+   {{< img src="cloud_cost/budgeting/budget-status-month.png" alt="Budget Status View: view current month">}}
+
+- Or can view the budget status for the **entire duration**:
+   {{< img src="cloud_cost/budgeting/budget-status-all.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
-Filter budgets using the "Filter to" at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
-Click on "Copy Link" to send the budget to others to help understand why budgets are going over.
-Or, share budgets with finance so that they can understand how you're tracking against budgets.
+To investigate budgets:
+1. From the **Budgets** page, filter budgets using the "Filter to" at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
+2. Click **Copy Link** to share the budget with others to help understand why budgets are going over. Or, share budgets with finance so that they can understand how you're tracking against budgets.
 
 ## Delete budget
-Click the trash icon on the Budgets page, or within an individual budget, to delete the budget.
+To delete a budget, click the trash icon on the Budgets page or within an individual budget.
 
-{{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
+   {{< img src="cloud_cost/budgeting/budget-list.png" alt="List all budgets">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
