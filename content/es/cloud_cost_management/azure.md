@@ -102,8 +102,8 @@ Para procesar más rápido, genera las primeras exportaciones manualmente hacien
 
 ### Proporcionar acceso a tus exportaciones en Datadog 
 
-{{< pestañas >}}
-{{% pestaña "Facturación Cuentas" %}}
+{{< tabs >}}
+{{% tab "Facturación Cuentas" %}}
 
 1. En la pestaña Exportaciones, haz clic en la Cuenta de almacenamiento de la exportación para navegar hasta ella.
 2. Haz clic en la pestaña Containers (Contenedores).
