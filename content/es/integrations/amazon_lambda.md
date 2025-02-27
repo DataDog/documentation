@@ -9,7 +9,7 @@
 - "tracing"
 "custom_kind": "integración"
 "dependencies": []
-"description": "Seguimiento de tiempos de ejecución, errores, recuentos de invocaciones de Lambda y más".
+"description": "Seguimiento de tiempos de ejecución, errores, recuentos de invocaciones de Lambda y más."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_lambda/"
 "draft": false
 "further_reading":
@@ -31,7 +31,7 @@
 "manifest_version": "1.0"
 "name": "amazon_lambda"
 "public_title": "Integración AWS Lambda en Datadog"
-"short_description": "Seguimiento de tiempos de ejecución, errores, recuentos de invocaciones de Lambda y más".
+"short_description": "Seguimiento de tiempos de ejecución, errores, recuentos de invocaciones de Lambda y más."
 "version": "1.0"
 ---
 
