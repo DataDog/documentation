@@ -10,8 +10,9 @@
         "build-markdoc-integration": "rimraf ./dist && npx tsc; yarn copy-styles",
         "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/bundledScripts/clientFiltersManager.min.js'",
         "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/bundledScripts/clientFiltersManager.js'",
-        "build": "yarn build-markdoc-integration && yarn build-dev-renderer && yarn build-prod-renderer && yarn copy-styles",
-        "copy-styles": "cp ./src/siteAssetBuilding/styles.css ./dist/siteAssetBuilding"
+        "build": "yarn build-markdoc-integration && yarn build-dev-renderer && yarn build-prod-renderer && yarn copy-styles && yarn copy-html",
+        "copy-styles": "cp ./src/siteAssetBuilding/styles.css ./dist/siteAssetBuilding",
+        "copy-html": "mkdir ./dist/authorConsole && cp ./src/authorConsole/index.html ./dist/authorConsole"
     },
     "engines": {
         "node": ">= 20.11.0"
