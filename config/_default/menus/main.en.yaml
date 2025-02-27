@@ -1963,7 +1963,7 @@ menu:
       url: service_catalog/use_cases/dependency_management
       parent: service_catalog_use_cases
       identifier: service_catalog_use_cases_dependency_management
-      weight: 305     
+      weight: 305
     - name: Manage a Component
       url: service_catalog/manage
       parent: service_catalog
@@ -6119,6 +6119,16 @@ menu:
       url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis
       weight: 5
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Tutorial
+      identifier: sec_static_analysis_custom_rules_tutorial
+      url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
     - name: Software Composition Analysis
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
@@ -6178,7 +6188,7 @@ menu:
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6      
+      weight: 6
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
