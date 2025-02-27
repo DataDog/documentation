@@ -5,26 +5,8 @@ aliases:
 ---
 
 
-With the release of Agent v7.64.0, Datadog now defaults to using IMDSv2 for enhanced security and consistency in retrieving AWS metadata. This update may result in a change to how hostnames appear in the Datadog UI. Thus your metrics and alerts continue to work as before.
+With the release of Agent v7.64.0, Datadog defaults to using IMDSv2 for enhanced security and consistency in retrieving AWS metadata. 
 
-## What’s Changing?
+If you upgrade to Agent v7.64.0 without any custom configuration changes, you may see a change to how hostnames appear in Datadog. After this update, Datadog displays hostnames as instance IDs in Fleet Automation and on the Infrastructure list. 
 
-- **Improved Security:**
-  The Agent now uses IMDSv2 by default, which strengthens how metadata are accessed on AWS.
-
-- **Hostname Display in the UI:**
-  You might notice that in some areas (such as Fleet Automation or the Infrastructure list) the hostname now appears as the AWS instance ID instead of the previous format.
-  **Note:** This change is only in display. Internally, the Agent still tags metrics with your original hostname, so your dashboards and alerts remain unaffected.
-
-## Who May See a Change?
-
-- **Upgrading Customers:**
-  If you upgrade to Agent v7.64.0 without any custom configuration changes, you may see your host’s display name change to the instance ID.
-
-## What to Look Out For:
-
-- **Visual Changes:**
-  After the upgrade, if you struggle to find your host on Fleet Automation or on the Infrastructure list, try to look at their instance ID.
-
-- **No Impact on Metrics:**
-  Although the displayed hostname might change, the underlying metric tagging still uses your original hostname. This ensures that your monitoring, alerting, and dashboards continue to work **seamlessly**.
+This change only impacts how hostnames are displayed. Metric tagging continues to use your original hostnames. Monitoring, alerting, and dashboards are not affected.
