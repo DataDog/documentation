@@ -55,6 +55,9 @@ High Impact Blocker
 High Row Count
 : The query returns a large number of rows in its result set.
 
+Unused Index
+: The index has not been used in any execution plans recently.
+
 Long Running Query
 : The query has durations that have exceeded a threshold of 30 seconds.
 
@@ -95,6 +98,13 @@ Low Disk Space
 : The database instance is running low on disk space.
 
 **Note**: The Low Disk Space recommendation is only available for instances hosted on AWS RDS.
+
+{{% /tab %}}
+
+{{% tab "Mongo" %}}
+
+Unused Index
+: The index has not been used in any execution plans recently.
 
 {{% /tab %}}
 
