@@ -5863,11 +5863,16 @@ menu:
       parent: security_platform
       identifier: security_ato_protection
       weight: 9
+    - name: Research Feed
+      url: security/research_feed
+      parent: security_platform
+      identifier: security_research_feed
+      weight: 10
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 10
+      weight: 11
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
