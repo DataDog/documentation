@@ -12,10 +12,6 @@ further_reading:
 
 ## Overview
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in Preview.
-{{< /beta-callout >}}
-
 Send logs to Datadog from your Android or iOS applications with [Datadog's `dd-sdk-kotlin-multiplatform-logs` client-side logging library][1] and use the following features:
 
 * Log to Datadog in JSON format natively.
