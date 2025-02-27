@@ -14264,6 +14264,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
