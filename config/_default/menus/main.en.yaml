@@ -5380,9 +5380,9 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 804
-    - name: CrowdStrike
-      identifier: observability_pipelines_crowdstrike
-      url: observability_pipelines/destinations/crowdstrike/
+    - name: CrowdStrike NG-SIEM
+      identifier: observability_pipelines_crowdstrike_ng_siem
+      url: observability_pipelines/destinations/crowdstrike_ng_siem/
       parent: observability_pipelines_destinations
       weight: 805
     - name: Datadog Logs

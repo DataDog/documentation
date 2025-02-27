@@ -1,21 +1,21 @@
 ---
-title: CrowdStrike Destination
+title: CrowdStrike NextGen-SIEM Destination
 disable_toc: false
 ---
 
-Use Observability Pipelines' CrowdStrike destination to send logs to CrowdStrike.
+Use Observability Pipelines' CrowdStrike NextGen-SIEM destination to send logs to CrowdStrike NextGen-SIEM.
 
 ## Setup
 
-Set up the CrowdStrike destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the CrowdStrike NG-SIEM destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/crowdstrike %}}
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 ### Set the environment variables
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 ## How the destination works
 

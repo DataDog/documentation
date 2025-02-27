@@ -55,9 +55,9 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
-{{% tab "CrowdStrike" %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
 
-{{% observability_pipelines/destination_settings/crowdstrike %}}
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -261,9 +261,9 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
-{{% tab "CrowdStrike" %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
 
-{{% observability_pipelines/destination_env_vars/crowdstrike %}}
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
