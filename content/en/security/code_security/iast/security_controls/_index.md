@@ -45,47 +45,25 @@ This format uses specific separators to structure each security control entry.
 
 ### Secure marks
 
-The following table lists the supported vulnerability types as secure marks for each language:
+The available secure marks correspond to the codes associated with each injection-related vulnerability. These codes and their availability for each language can be found in [supported vulnerabilities][1].
 
-| **Type** | **Java** | **Node** | **.NET** | **Python** |
-|----------|---------|--------|------|--------|
-| ADMIN_CONSOLE_ACTIVE |  |  |  |  |
-| CODE_INJECTION |  |  |  |  |
-| COMMAND_INJECTION | ✔️ |  |  |  |
-| DEFAULT_APP_DEPLOYED |  |  |  |  |
-| DEFAULT_HTML_ESCAPE_INVALID |  |  |  |  |
-| DIRECTORY_LISTING_LEAK |  |  |  |  |
-| EMAIL_HTML_INJECTION | ✔️ |  |  |  |
-| HARDCODED_PASSWORD |  |  |  |  |
-| HARDCODED_SECRET |  |  |  |  |
-| HEADER_INJECTION | ✔️ |  |  |  |
-| HSTS_HEADER_MISSING |  |  |  |  |
-| INSECURE_AUTH_PROTOCOL |  |  |  |  |
-| INSECURE_COOKIE |  |  |  |  |
-| INSECURE_JSP_LAYOUT |  |  |  |  |
-| LDAP_INJECTION | ✔️ |  |  |  |
-| NOSQL_MONGODB_INJECTION |  |  |  |  |
-| NO_HTTPONLY_COOKIE |  |  |  |  |
-| NO_SAMESITE_COOKIE |  |  |  |  |
-| PATH_TRAVERSAL | ✔️ |  |  |  |
-| REFLECTION_INJECTION | ✔️ |  |  |  |
-| SSRF | ✔️ |  |  |  |
-| SESSION_REWRITING |  |  |  |  |
-| SESSION_TIMEOUT |  |  |  |  |
-| SQL_INJECTION | ✔️ |  |  |  |
-| STACKTRACE_LEAK |  |  |  |  |
-| TEMPLATE_INJECTION |  |  |  |  |
-| TRUST_BOUNDARY_VIOLATION | ✔️ |  |  |  |
-| UNTRUSTED_DESERIALIZATION | ✔️ |  |  |  |
-| UNVALIDATED_REDIRECT | ✔️ |  |  |  |
-| VERB_TAMPERING |  |  |  |  |
-| WEAK_CIPHER |  |  |  |  |
-| WEAK_HASH |  |  |  |  |
-| WEAK_RANDOMNESS |  |  |  |  |
-| XCONTENTTYPE_HEADER_MISSING |  |  |  |  |
-| XXSSPROTECTION_HEADER_DISABLED |  |  |  |  |
-| XPATH_INJECTION | ✔️ |  |  |  |
-| XSS | ✔️ |  |  |  |
+The injection-related vulnerabilities are as follows:
+
+* Code Injection
+* Command Injection
+* Email HTML Injection
+* Header Injection
+* LDAP Injection
+* NoSQL Injection
+* Path Traversal
+* Reflection Injection
+* Server-Side Request Forgery (SSRF)
+* SQL Injection
+* Trust Boundary Violation
+* Untrusted Deserialization
+* Unvalidated Redirect
+* XPath Injection
+* Cross-Site Scripting (XSS)
 
 
 ## Examples
@@ -214,4 +192,7 @@ applies for the first method
 applies for both methods
 
 {{% /collapse-content %}}
+
+
+[1]: /security/code_security/iast/_index.md#overview
 
