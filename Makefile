@@ -106,7 +106,7 @@ source-dd-source:
 	$(call source_repo,dd-source,https://github.com/DataDog/dd-source.git,main,true,domains/workflow/actionplatform/documentation/stable_bundles.json)
 
 # All the requirements for a full build
-dependencies: clean source-dd-source compile-marcdoc
+dependencies: clean source-dd-source compile-markdoc
 	make hugpython all-examples update_pre_build node_modules placeholders
 
 integrations_data/extracted/vector:
