@@ -26,23 +26,23 @@ Run `ddcoterm` to manually launch CoTerm and record the entirety of your termina
 
 To record the output of an individual command, use `ddcoterm -- <COMMAND>`.
 
-For example, to record the output of `kubectl`, use:
+For example, to record the output of `datadog-agent status`, use:
 
 ```shell
-ddcoterm -- kubectl
+ddcoterm -- datadog-agent status
 ```
 
-This launches CoTerm and runs the `kubectl` process. When the process completes, CoTerm stops recording and sends the captured process data to Datadog.
+This launches CoTerm and runs the `datadog-agent status` process. When the process completes, CoTerm stops recording and sends the captured process data to Datadog.
 
 ### Make CoTerm part of your workflow
 
 You can configure CoTerm to automatically record certain commands with `shim`. For example:
 
 ```shell
-ddcoterm shim create kubectl
+ddcoterm shim create datadog-agent
 ```
 
-After you run this command, CoTerm records all future invocations of `kubectl`.
+After you run this command, CoTerm records all future invocations of `datadog-agent`.
 
 ### Review terminal sessions in Datadog
 
