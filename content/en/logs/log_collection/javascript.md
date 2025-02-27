@@ -587,7 +587,7 @@ The placeholders in the examples above are described below:
 
 If your Browser logs contain sensitive information that needs redacting, configure the Browser SDK to scrub sensitive sequences by using the `beforeSend` callback when you initialize the Browser Log Collector.
 
-The `beforeSend` callback function that you can provide and can be invoked with two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties.
+The `beforeSend` callback function that you can provide and can be invoked with two arguments: the `log` event and `context`. The function gives you access to each log collected by the Browser SDK before it is sent to Datadog, and lets you use the context to adjust any log properties. The context contains additional information related to the event, but not necessarily included in the event. You can typically use this information to [enrich][18] your event or [discard][19] them.
 
 ```javascript
 function beforeSend(log, context)
@@ -597,8 +597,8 @@ The potential `context` values are:
 
 | Value | Data Type | Use Case |
 |-------|---------|------------|
-| `isAborted` | Boolean | For network log events, whether the failing request was aborted by the application. |
-| `handlingStack` | String | Where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
+| `isAborted` | Boolean | For network log events, this property tells you whether the failing request was aborted by the application, in which case you might not want to send this event because it might be intentionally. |
+| `handlingStack` | String | A stack trace of where the log event was handled. This can be used to identify which [micro-frontend][17] the log was sent from. |
 
 To redact email addresses from your web application URLs:
 
@@ -1280,3 +1280,5 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [15]: #user-tracking-consent
 [16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management
 [17]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#micro-frontend
+[18]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[19]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#discard-a-rum-event
