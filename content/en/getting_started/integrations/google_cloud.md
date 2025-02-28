@@ -43,8 +43,9 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
 {{% /site-region %}}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● Ensure that any projects being monitored are not configured as [scoping projects][19] that pull in metrics from multiple other projects.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● The Google Cloud integration requires the below APIs to be enabled for the folder or organization you want to monitor:
+
+<div class="alert alert-warning">Ensure that any projects being monitored are not configured as <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">scoping projects</a> that pull in metrics from multiple other projects.</div>
 
 [Cloud Monitoring API][3] 
 : Allows Datadog to query your Google Cloud metric data.
@@ -299,7 +300,6 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [16]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#log-collection
 [17]: https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/
 [18]: /integrations/google_cloud_platform/#resource-changes-collection
-[19]: https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.
 [20]: https://www.datadoghq.com/blog/network-attacks-google-cloud-armor/
 [21]: https://www.datadoghq.com/blog/track-bigquery-costs-performance/
 [22]: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
