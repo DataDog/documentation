@@ -151,11 +151,11 @@ To set up Mobile Session Replay for React Native:
 2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][3] or [npm][4].
 
    ```shell
-   yarn add @datadog/mobile-react-native-session-replay@2.4.4-alpha.0
+   yarn add @datadog/mobile-react-native-session-replay
    ```
 
    ```shell
-   npm install @datadog/mobile-react-native-session-replay@2.4.4-alpha.0
+   npm install @datadog/mobile-react-native-session-replay
    ```
 
 2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
