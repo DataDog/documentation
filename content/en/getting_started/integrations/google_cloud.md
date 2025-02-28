@@ -140,7 +140,7 @@ To view your metrics, use the left menu to navigate to **Metrics** > **Summary**
 
 ### Google Cloud integrations
 
-The Google Cloud integration collects all available [Google Cloud metrics][12] from your projects through the Google Cloud Monitoring API. Integrations are installed automatically when Datadog recognizes data being ingested in from your Google Cloud account. <EXAMPLE?>
+The Google Cloud integration collects all available [Google Cloud metrics][12] from your projects through the Google Cloud Monitoring API. Integrations are installed automatically when Datadog recognizes data being ingested from your Google Cloud account, such as BigQuery.
 
 {{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h5" %}}
 {{% google-cloud-integrations %}}
