@@ -7,7 +7,8 @@ describe('Hugo content functions', () => {
   describe('getFileContentsHash', () => {
     test('returns the correct hash for an image file', () => {
       const expectedHash = '60abd3d42408607da509794034239f28';
-      const testImagePath = VALID_SITE_DIR + '/static/images/api-key.png';
+      const testImagePath =
+        VALID_SITE_DIR + '/static/images/account_management/api-key.png';
       const actualHash = getFileContentsHash(testImagePath);
 
       expect(actualHash).toEqual(expectedHash);

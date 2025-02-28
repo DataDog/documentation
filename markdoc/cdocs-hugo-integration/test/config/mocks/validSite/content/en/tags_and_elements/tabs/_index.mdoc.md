@@ -43,9 +43,9 @@ The selected color is **red**.
 
 Tabs can include partials, such as these two:
 
-{% partial file="markdoc_testing/datadog_link.mdoc" /%}
+{% partial file="datadog_link.mdoc.md" /%}
 
-{% partial file="markdoc_testing/google_link.mdoc" /%}
+{% partial file="google_link.mdoc.md" /%}
 
 ### Code block
 

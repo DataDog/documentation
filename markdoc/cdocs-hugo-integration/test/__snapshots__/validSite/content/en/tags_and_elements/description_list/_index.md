@@ -1,8 +1,14 @@
 ---
 title: Description List
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <h2 id="example">Example</h2>
+  <p>
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  </p>
   <dl>
     <dt>Service</dt>
     <dd>
@@ -28,6 +34,10 @@ title: Description List
       <code>datadoghq.com</code>.
     </dd>
   </dl>
+  <p>
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur.
+  </p>
 </article>
 </div>
 <div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {},    filtersManifest: {"filtersByTraitId":{},"defaultValsByTraitId":{},"optionGroupsById":{}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

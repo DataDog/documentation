@@ -1,5 +1,6 @@
 ---
 title: region-param
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <h2 id="body-copy">Body copy</h2>

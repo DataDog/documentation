@@ -1,5 +1,6 @@
 ---
 title: Table
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <h2 id="markdown-table--commonmark-table">

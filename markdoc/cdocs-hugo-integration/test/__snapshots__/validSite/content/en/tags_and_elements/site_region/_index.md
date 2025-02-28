@@ -1,5 +1,6 @@
 ---
 title: site-region
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <div class="d-none site-region-container" data-region="us">

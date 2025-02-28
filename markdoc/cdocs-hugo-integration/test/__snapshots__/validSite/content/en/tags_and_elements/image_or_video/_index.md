@@ -1,5 +1,6 @@
 ---
 title: Image/Video
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <h2 id="image">Image</h2>
@@ -9,7 +10,7 @@ title: Image/Video
   </p>
   <p>Ex totam temporibus eum illo amet est libero voluptatibus?</p>
   <a
-    href="/images/api-key.60abd3d42408607da509794034239f28.png?fit=max&amp;auto=format"
+    href="/images/account_management/api-key.60abd3d42408607da509794034239f28.png?fit=max&amp;auto=format"
     class="pop"
     data-bs-toggle="modal"
     data-bs-target="#popupImageModal"
@@ -18,7 +19,7 @@ title: Image/Video
         <picture style="width: 80%"
           ><img
             srcset="
-              http://localhost:1313/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+              http://localhost:1313/images/account_management/api-key.60abd3d42408607da509794034239f28.png?auto=format
             "
             class="img-fluid"
             style="width: 80%"
@@ -38,7 +39,7 @@ title: Image/Video
         <picture style="width: 80%"
           ><img
             srcset="
-              http://localhost:1313/images/api-key.60abd3d42408607da509794034239f28.png?auto=format
+              http://localhost:1313/images/account_management/api-key.60abd3d42408607da509794034239f28.png?auto=format
             "
             class="img-fluid"
             style="width: 80%"
@@ -64,7 +65,7 @@ title: Image/Video
         controls=""
       >
         <source
-          src="http://localhost:1313/images/share-with-team.mp4"
+          src="http://localhost:1313/images/cloudcraft/advanced/find-id-using-api/share-with-team.mp4"
           type="video/mp4"
           media="(min-width: 0px)"
         />

@@ -64,11 +64,11 @@ Blueberries are also popular in smoothies and jams. The vibrant blue color of bl
 <!-- yellow -->
 {% if equals($color, "yellow") %}
 ## Yellow
-{% partial file="markdoc_testing/yellow.mdoc" /%}
+{% partial file="yellow.mdoc.md" /%}
 {% /if %}
 
 <!-- red -->
 {% if equals($color, "red") %}
 ## Red
-{% partial file="markdoc_testing/red.mdoc" /%}
+{% partial file="red.mdoc.md" /%}
 {% /if %}

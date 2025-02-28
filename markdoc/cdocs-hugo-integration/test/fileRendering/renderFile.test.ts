@@ -11,7 +11,7 @@ import {
 import { mockHugoGlobalConfig, mockPageConfig } from '../config/mocks/valid/hugoConfig';
 
 describe('renderFile', () => {
-  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
+  const testFilePath = VALID_CONTENT_DIR + '/en/demos/colors/primary.mdoc.md';
   const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
     langs: ['en']

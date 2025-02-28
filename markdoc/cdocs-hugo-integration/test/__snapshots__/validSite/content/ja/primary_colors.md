@@ -28,16 +28,16 @@ aliases:
     id="cdoc-item-pills-label" 
     class="cdoc-filter-label"
   >Item</p><button
-      class="cdoc-filter__option cdoc-pill " 
-      data-filter-id="item" 
-      data-option-id="ocean"
-      aria-selected="false"
-      tabIndex="0"
-    >Ocean</button><button
       class="cdoc-filter__option cdoc-pill selected" 
       data-filter-id="item" 
-      data-option-id="sky"
+      data-option-id="ocean"
       aria-selected="true"
+      tabIndex="0"
+    >Ocean</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="sky"
+      aria-selected="false"
       tabIndex="0"
     >Sky</button><button
       class="cdoc-filter__option cdoc-pill " 
@@ -112,26 +112,26 @@ aliases:
       <span 
         id="cdoc-dropdown-item-label" 
         class="cdoc-btn-label"
-      >Sky</span>
+      >Ocean</span>
       <div class="cdoc-chevron"></div>
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
     aria-labelledby="cdoc-item-dropdown-label"><a 
       class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+      cdoc-filter__option selected" 
       data-filter-id="item" 
       data-option-id="ocean"
       role="option" 
-      aria-selected="false"
+      aria-selected="true"
       tabIndex="0"
     >Ocean</a><a 
       class="cdoc-dropdown-option 
-      cdoc-filter__option selected" 
+      cdoc-filter__option " 
       data-filter-id="item" 
       data-option-id="sky"
       role="option" 
-      aria-selected="true"
+      aria-selected="false"
       tabIndex="0"
     >Sky</a><a 
       class="cdoc-dropdown-option 
@@ -159,13 +159,13 @@ aliases:
     contrived and odd, that's only because test pages are often both of those
     things.
   </p>
-  <div class="cdoc__toggleable" data-if="37">
+  <div class="cdoc__toggleable" data-if="86">
     <h2 id="blue-header-id-override">Blue</h2>
     <p>
       Blue is a calming and serene color that is often associated with
       tranquility, stability, and trust.
     </p>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="33">
+    <div class="cdoc__toggleable" data-if="82">
       <h3 id="ocean">Ocean</h3>
       <p>
         The ocean is a vast and expansive body of saltwater that covers
@@ -181,7 +181,7 @@ aliases:
         reflection.
       </p>
     </div>
-    <div class="cdoc__toggleable" data-if="34">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="83">
       <h3 id="sky">Sky</h3>
       <p>
         The sky is the expanse of atmosphere that we see when we look up from
@@ -197,7 +197,7 @@ aliases:
         ever-changing nature inspire a sense of wonder and curiosity.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="35">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="84">
       <h3 id="jeans">Jeans</h3>
       <p>
         Jeans are a type of durable clothing typically made from denim fabric.
@@ -212,7 +212,7 @@ aliases:
         appeal of jeans have made them a beloved garment for people of all ages.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="36">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="85">
       <h3 id="blueberry">Blueberry</h3>
       <p>
         Blueberries are small, round fruits that are known for their sweet and
@@ -228,51 +228,51 @@ aliases:
       </p>
     </div>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="38">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="87">
     <h2 id="yellow">Yellow</h2>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="40">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="89">
       <p>
         Bananas are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="41">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="90">
       <p>
         Sunflowers are a type of flower. They're known for their large, yellow
         petals.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="42">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="91">
       <p>
         Lemons are a type of citrus fruit. They're often used in drinks and
         cooking.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="43">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="92">
       <p>
         School buses are a type of vehicle. They're often used to transport
         students to and from school.
       </p>
     </div>
   </div>
-  <div class="cdoc__toggleable cdoc__hidden" data-if="39">
+  <div class="cdoc__toggleable cdoc__hidden" data-if="88">
     <h2 id="red">Red</h2>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="44">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="93">
       <p>
         Rubies are a type of gemstone. They're known for their deep red color.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="45">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="94">
       <p>
         Apples are a type of fruit. They're often eaten raw or used in baking.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="46">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="95">
       <p>
         Firetrucks are a type of vehicle. They're often used to transport
         firefighters and equipment to emergency situations.
       </p>
     </div>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="47">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="96">
       <p>
         Stop signs are a type of traffic sign. They're used to indicate that
         drivers should stop their vehicles.
@@ -281,4 +281,4 @@ aliases:
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"33":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ocean"},"v":false,"r":"33"},"34":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sky"},"v":true,"r":"34"},"35":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"jeans"},"v":false,"r":"35"},"36":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"blueberry"},"v":false,"r":"36"},"37":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"37"},"38":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"38"},"39":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"39"},"40":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"banana"},"v":false,"r":"40"},"41":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sunflower"},"v":false,"r":"41"},"42":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"lemon"},"v":false,"r":"42"},"43":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"school_bus"},"v":false,"r":"43"},"44":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ruby"},"v":false,"r":"44"},"45":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"apple"},"v":false,"r":"45"},"46":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"firetruck"},"v":false,"r":"46"},"47":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"stop_sign"},"v":false,"r":"47"}},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"primary_color_options"},"defaultValsByOptionGroupId":{"primary_color_options":"blue"}},"item":{"config":{"label":"Item","trait_id":"item","option_group_id":"<COLOR>_item_options"},"defaultValsByOptionGroupId":{"red_item_options":"apple","yellow_item_options":"banana","blue_item_options":"sky"}}},"defaultValsByTraitId":{"color":"blue","item":"sky"},"optionGroupsById":{"primary_color_options":[{"id":"red","label":"Red (ja)"},{"id":"yellow","label":"Yellow (ja)"},{"default":true,"id":"blue","label":"Blue (ja)"}],"red_item_options":[{"id":"ruby","label":"Ruby"},{"default":true,"id":"apple","label":"Apple (ja)"},{"id":"firetruck","label":"Ja firetruck"},{"id":"stop_sign","label":"Stop sign (ja)"}],"yellow_item_options":[{"default":true,"id":"banana","label":"Banana"},{"id":"sunflower","label":"Sunflower"},{"id":"lemon","label":"Lemon"},{"id":"school_bus","label":"School bus"}],"blue_item_options":[{"id":"ocean","label":"Ocean"},{"default":true,"id":"sky","label":"Sky"},{"id":"jeans","label":"Jeans"},{"id":"blueberry","label":"Blueberry"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"82":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"ocean"},"v":true,"r":"82"},"83":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"sky"},"v":false,"r":"83"},"84":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"jeans"},"v":false,"r":"84"},"85":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"blueberry"},"v":false,"r":"85"},"86":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"86"},"87":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"87"},"88":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"88"},"89":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"banana"},"v":false,"r":"89"},"90":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"sunflower"},"v":false,"r":"90"},"91":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"lemon"},"v":false,"r":"91"},"92":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"school_bus"},"v":false,"r":"92"},"93":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"ruby"},"v":false,"r":"93"},"94":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"apple"},"v":false,"r":"94"},"95":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"firetruck"},"v":false,"r":"95"},"96":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"stop_sign"},"v":false,"r":"96"}},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"primary_color_options"},"defaultValsByOptionGroupId":{"primary_color_options":"blue"}},"item":{"config":{"label":"Item","trait_id":"item","option_group_id":"<COLOR>_item_options"},"defaultValsByOptionGroupId":{"red_item_options":"apple","yellow_item_options":"banana","blue_item_options":"ocean"}}},"defaultValsByTraitId":{"color":"blue","item":"ocean"},"optionGroupsById":{"primary_color_options":[{"id":"red","label":"Red (ja)"},{"id":"yellow","label":"Yellow (ja)"},{"default":true,"id":"blue","label":"Blue (ja)"}],"red_item_options":[{"id":"ruby","label":"Ruby"},{"default":true,"id":"apple","label":"Apple (ja)"},{"id":"firetruck","label":"Ja firetruck"},{"id":"stop_sign","label":"Stop sign (ja)"}],"yellow_item_options":[{"default":true,"id":"banana","label":"Banana"},{"id":"sunflower","label":"Sunflower"},{"id":"lemon","label":"Lemon"},{"id":"school_bus","label":"School bus"}],"blue_item_options":[{"default":true,"id":"ocean","label":"Ocean"},{"id":"sky","label":"Sky"},{"id":"jeans","label":"Jeans"},{"id":"blueberry","label":"Blueberry"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

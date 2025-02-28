@@ -7,7 +7,7 @@ import {
 } from '../config/constants';
 
 describe('parseMdocFile', () => {
-  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
+  const testFilePath = VALID_CONTENT_DIR + '/en/demos/colors/primary.mdoc.md';
 
   const sanitizedMarkdocFilename = testFilePath.replace(VALID_CONTENT_DIR, '');
   const { ast, frontmatter, partials, errors } = parseMdocFile({

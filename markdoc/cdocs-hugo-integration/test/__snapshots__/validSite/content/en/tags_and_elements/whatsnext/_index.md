@@ -1,5 +1,6 @@
 ---
 title: Whatsnext
+private: true
 ---
 <div id="cdoc-content" class="customizable"><article>
   <h2 id="simple-example">Simple example</h2>

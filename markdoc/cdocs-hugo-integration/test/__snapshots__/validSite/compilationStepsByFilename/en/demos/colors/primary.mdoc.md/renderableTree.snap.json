@@ -5,23 +5,6 @@
   "children": [
     {
       "$$mdtype": "Tag",
-      "name": "Alert",
-      "attributes": {
-        "level": "warning"
-      },
-      "children": [
-        {
-          "$$mdtype": "Tag",
-          "name": "p",
-          "attributes": {},
-          "children": [
-            "Warning: This is just a test page. It's not real."
-          ]
-        }
-      ]
-    },
-    {
-      "$$mdtype": "Tag",
       "name": "p",
       "attributes": {},
       "children": [
@@ -55,10 +38,10 @@
           "$$mdtype": "Tag",
           "name": "h2",
           "attributes": {
-            "id": "blue-header-id-override"
+            "id": "blue"
           },
           "children": [
-            "Blue "
+            "Blue"
           ]
         },
         {
@@ -75,21 +58,21 @@
           "if": {
             "$$mdtype": "Function",
             "name": "equals",
-            "value": false,
+            "value": true,
             "parameters": {
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "ocean"
             },
             "ref": "0"
           },
           "attributes": {
-            "display": "false"
+            "display": "true"
           },
           "children": [
             {
@@ -126,21 +109,21 @@
           "if": {
             "$$mdtype": "Function",
             "name": "equals",
-            "value": true,
+            "value": false,
             "parameters": {
               "0": {
                 "$$mdtype": "Variable",
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "sky"
             },
             "ref": "1"
           },
           "attributes": {
-            "display": "true"
+            "display": "false"
           },
           "children": [
             {
@@ -184,7 +167,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "jeans"
             },
@@ -235,7 +218,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "blueberry"
             },
@@ -321,7 +304,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "banana"
             },
@@ -354,7 +337,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "sunflower"
             },
@@ -387,7 +370,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "lemon"
             },
@@ -420,7 +403,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "school_bus"
             },
@@ -488,7 +471,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "ruby"
             },
@@ -521,7 +504,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "apple"
             },
@@ -554,7 +537,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "firetruck"
             },
@@ -587,7 +570,7 @@
                 "path": [
                   "item"
                 ],
-                "value": "sky"
+                "value": "ocean"
               },
               "1": "stop_sign"
             },

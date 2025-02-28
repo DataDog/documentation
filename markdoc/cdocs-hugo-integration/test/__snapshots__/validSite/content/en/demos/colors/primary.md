@@ -1,5 +1,6 @@
 ---
 title: Primary Colors
+private: true
 aliases:
   - /primary_colors_alias/
 ---
@@ -28,16 +29,16 @@ aliases:
     id="cdoc-item-pills-label" 
     class="cdoc-filter-label"
   >Item</p><button
-      class="cdoc-filter__option cdoc-pill " 
-      data-filter-id="item" 
-      data-option-id="ocean"
-      aria-selected="false"
-      tabIndex="0"
-    >Ocean</button><button
       class="cdoc-filter__option cdoc-pill selected" 
       data-filter-id="item" 
-      data-option-id="sky"
+      data-option-id="ocean"
       aria-selected="true"
+      tabIndex="0"
+    >Ocean</button><button
+      class="cdoc-filter__option cdoc-pill " 
+      data-filter-id="item" 
+      data-option-id="sky"
+      aria-selected="false"
       tabIndex="0"
     >Sky</button><button
       class="cdoc-filter__option cdoc-pill " 
@@ -112,26 +113,26 @@ aliases:
       <span 
         id="cdoc-dropdown-item-label" 
         class="cdoc-btn-label"
-      >Sky</span>
+      >Ocean</span>
       <div class="cdoc-chevron"></div>
     </button><div 
     class="cdoc-dropdown-options-list" 
     role="listbox" 
     aria-labelledby="cdoc-item-dropdown-label"><a 
       class="cdoc-dropdown-option 
-      cdoc-filter__option " 
+      cdoc-filter__option selected" 
       data-filter-id="item" 
       data-option-id="ocean"
       role="option" 
-      aria-selected="false"
+      aria-selected="true"
       tabIndex="0"
     >Ocean</a><a 
       class="cdoc-dropdown-option 
-      cdoc-filter__option selected" 
+      cdoc-filter__option " 
       data-filter-id="item" 
       data-option-id="sky"
       role="option" 
-      aria-selected="true"
+      aria-selected="false"
       tabIndex="0"
     >Sky</a><a 
       class="cdoc-dropdown-option 
@@ -150,9 +151,6 @@ aliases:
       aria-selected="false"
       tabIndex="0"
     >Blueberry</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
-  <div class="alert alert-warning">
-    <p>Warning: This is just a test page. It's not real.</p>
-  </div>
   <p>
     This test page explores everyday items that are blue, yellow, or red --
     which also happen to be the primary colors of the color wheel. If this seems
@@ -160,12 +158,12 @@ aliases:
     things.
   </p>
   <div class="cdoc__toggleable" data-if="4">
-    <h2 id="blue-header-id-override">Blue</h2>
+    <h2 id="blue">Blue</h2>
     <p>
       Blue is a calming and serene color that is often associated with
       tranquility, stability, and trust.
     </p>
-    <div class="cdoc__toggleable cdoc__hidden" data-if="0">
+    <div class="cdoc__toggleable" data-if="0">
       <h3 id="ocean">Ocean</h3>
       <p>
         The ocean is a vast and expansive body of saltwater that covers
@@ -181,7 +179,7 @@ aliases:
         reflection.
       </p>
     </div>
-    <div class="cdoc__toggleable" data-if="1">
+    <div class="cdoc__toggleable cdoc__hidden" data-if="1">
       <h3 id="sky">Sky</h3>
       <p>
         The sky is the expanse of atmosphere that we see when we look up from
@@ -281,4 +279,4 @@ aliases:
   </div>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ocean"},"v":false,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sky"},"v":true,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"jeans"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"blueberry"},"v":false,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"banana"},"v":false,"r":"7"},"8":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"sunflower"},"v":false,"r":"8"},"9":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"lemon"},"v":false,"r":"9"},"10":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"school_bus"},"v":false,"r":"10"},"11":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"ruby"},"v":false,"r":"11"},"12":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"apple"},"v":false,"r":"12"},"13":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"firetruck"},"v":false,"r":"13"},"14":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"sky"},"1":"stop_sign"},"v":false,"r":"14"}},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"primary_color_options"},"defaultValsByOptionGroupId":{"primary_color_options":"blue"}},"item":{"config":{"label":"Item","trait_id":"item","option_group_id":"<COLOR>_item_options"},"defaultValsByOptionGroupId":{"red_item_options":"stop_sign","yellow_item_options":"banana","blue_item_options":"sky"}}},"defaultValsByTraitId":{"color":"blue","item":"sky"},"optionGroupsById":{"primary_color_options":[{"id":"red","label":"Red"},{"id":"yellow","label":"Yellow"},{"default":true,"id":"blue","label":"Blue"}],"red_item_options":[{"id":"ruby","label":"Ruby"},{"id":"apple","label":"Apple"},{"id":"firetruck","label":"Firetruck"},{"default":true,"id":"stop_sign","label":"Stop sign"}],"yellow_item_options":[{"default":true,"id":"banana","label":"Banana"},{"id":"sunflower","label":"Sunflower"},{"id":"lemon","label":"Lemon"},{"id":"school_bus","label":"School bus"}],"blue_item_options":[{"id":"ocean","label":"Ocean"},{"default":true,"id":"sky","label":"Sky"},{"id":"jeans","label":"Jeans"},{"id":"blueberry","label":"Blueberry"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {"0":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"ocean"},"v":true,"r":"0"},"1":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"sky"},"v":false,"r":"1"},"2":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"jeans"},"v":false,"r":"2"},"3":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"blueberry"},"v":false,"r":"3"},"4":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"blue"},"v":true,"r":"4"},"5":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"yellow"},"v":false,"r":"5"},"6":{"m":"F","n":"e","p":{"0":{"m":"V","p":["color"],"v":"blue"},"1":"red"},"v":false,"r":"6"},"7":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"banana"},"v":false,"r":"7"},"8":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"sunflower"},"v":false,"r":"8"},"9":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"lemon"},"v":false,"r":"9"},"10":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"school_bus"},"v":false,"r":"10"},"11":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"ruby"},"v":false,"r":"11"},"12":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"apple"},"v":false,"r":"12"},"13":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"firetruck"},"v":false,"r":"13"},"14":{"m":"F","n":"e","p":{"0":{"m":"V","p":["item"],"v":"ocean"},"1":"stop_sign"},"v":false,"r":"14"}},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"primary_color_options"},"defaultValsByOptionGroupId":{"primary_color_options":"blue"}},"item":{"config":{"label":"Item","trait_id":"item","option_group_id":"<COLOR>_item_options"},"defaultValsByOptionGroupId":{"red_item_options":"ruby","yellow_item_options":"banana","blue_item_options":"ocean"}}},"defaultValsByTraitId":{"color":"blue","item":"ocean"},"optionGroupsById":{"primary_color_options":[{"id":"red","label":"Red"},{"id":"yellow","label":"Yellow"},{"default":true,"id":"blue","label":"Blue"}],"red_item_options":[{"default":true,"id":"ruby","label":"Ruby"},{"id":"apple","label":"Apple"},{"id":"firetruck","label":"Firetruck"},{"id":"stop_sign","label":"Stop sign"}],"yellow_item_options":[{"default":true,"id":"banana","label":"Banana"},{"id":"sunflower","label":"Sunflower"},{"id":"lemon","label":"Lemon"},{"id":"school_bus","label":"School bus"}],"blue_item_options":[{"default":true,"id":"ocean","label":"Ocean"},{"id":"sky","label":"Sky"},{"id":"jeans","label":"Jeans"},{"id":"blueberry","label":"Blueberry"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>

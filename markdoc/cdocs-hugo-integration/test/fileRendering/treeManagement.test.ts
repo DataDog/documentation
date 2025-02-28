@@ -10,7 +10,7 @@ import { buildRenderableTree } from '../../src/fileRendering/treeManagement';
 import { buildFiltersManifest, loadCustomizationConfig } from 'cdocs-data';
 
 describe('treeManagement', () => {
-  const testFilePath = VALID_CONTENT_DIR + '/en/primary_colors.mdoc.md';
+  const testFilePath = VALID_CONTENT_DIR + '/en/demos/colors/primary.mdoc.md';
   const { customizationConfigByLang } = loadCustomizationConfig({
     configDir: VALID_FILTERS_CONFIG_DIR,
     langs: ['en']

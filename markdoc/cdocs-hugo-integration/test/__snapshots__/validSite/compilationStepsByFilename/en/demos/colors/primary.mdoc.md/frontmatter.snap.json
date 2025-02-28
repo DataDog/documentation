@@ -1,5 +1,6 @@
 {
   "title": "Primary Colors",
+  "private": true,
   "content_filters": [
     {
       "label": "Color",

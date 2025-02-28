@@ -1,80 +1,17 @@
 ---
 title: Code Block
+private: true
 ---
-<div id="cdoc-selector"><div id="cdoc-filters-menu"><div class="filter-selector-menu" id="cdoc-filters-pill-menu"><div class="cdoc-pills-container"><p 
-    id="cdoc-color-pills-label" 
-    class="cdoc-filter-label"
-  >Color</p><button
-      class="cdoc-filter__option cdoc-pill " 
-      data-filter-id="color" 
-      data-option-id="red"
-      aria-selected="false"
-      tabIndex="0"
-    >Red</button><button
-      class="cdoc-filter__option cdoc-pill " 
-      data-filter-id="color" 
-      data-option-id="yellow"
-      aria-selected="false"
-      tabIndex="0"
-    >Yellow</button><button
-      class="cdoc-filter__option cdoc-pill selected" 
-      data-filter-id="color" 
-      data-option-id="blue"
-      aria-selected="true"
-      tabIndex="0"
-    >Blue</button></div></div><div class="filter-selector-menu cdoc-offscreen" id="cdoc-filters-dropdown-menu"><div class="cdoc-dropdown-container"><p 
-    id="cdoc-color-dropdown-label" 
-    class="cdoc-filter-label"
-  >Color</p><div 
-    id="cdoc-dropdown-color" 
-    class="cdoc-dropdown">
-    <button
-      class="cdoc-dropdown-btn" 
-      type="button"
-      tabIndex="0"
-      aria-haspopup="listbox"
-      aria-expanded="false" 
-      aria-labelledby="cdoc-color-dropdown-label">
-      <span 
-        id="cdoc-dropdown-color-label" 
-        class="cdoc-btn-label"
-      >Blue</span>
-      <div class="cdoc-chevron"></div>
-    </button><div 
-    class="cdoc-dropdown-options-list" 
-    role="listbox" 
-    aria-labelledby="cdoc-color-dropdown-label"><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
-      data-filter-id="color" 
-      data-option-id="red"
-      role="option" 
-      aria-selected="false"
-      tabIndex="0"
-    >Red</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option " 
-      data-filter-id="color" 
-      data-option-id="yellow"
-      role="option" 
-      aria-selected="false"
-      tabIndex="0"
-    >Yellow</a><a 
-      class="cdoc-dropdown-option 
-      cdoc-filter__option selected" 
-      data-filter-id="color" 
-      data-option-id="blue"
-      role="option" 
-      aria-selected="true"
-      tabIndex="0"
-    >Blue</a></div></div></div></div></div><hr /></div><div id="cdoc-content" class="customizable"><article>
+<div id="cdoc-content" class="customizable"><article>
   <h2 id="usage">Usage</h2>
   <ul>
-    <li>
-      Markdown tags are <strong>not</strong> supported in code blocks. Use only
-      plaintext code within code blocks.
-    </li>
     <li>The default language for code blocks is <code>text</code>.</li>
+    <li>
+      Supported Markdoc tags within code blocks:
+      <ul>
+        <li><code>region-param</code></li>
+      </ul>
+    </li>
   </ul>
   <h2 id="simple-example">Simple example</h2>
   <div class="code-snippet-wrapper">
@@ -114,7 +51,30 @@ title: Code Block
       </div>
     </div>
   </div>
+  <h2 id="example-with-filename">Example with filename</h2>
+  <p>
+    <code>collapsible</code> is set to <code>false</code> and
+    <code>disable_copy</code> is set to <code>true</code>.
+  </p>
+  <div class="code-snippet-wrapper">
+    <div class="code-filename-wrapper d-flex justify-content-between">
+      <p class="code-filename my-0">example.js</p>
+    </div>
+    <div class="code-snippet">
+      <div class="cdoc-code-snippet cdoc-language-javascript">
+        <pre
+          tabindex="0"
+          class="chroma"
+        ><code><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello, World!&#39;</span><span class="p">);</span>
+</span></span></code></pre>
+      </div>
+    </div>
+  </div>
   <h2 id="indented-code-blocks">Indented code blocks</h2>
+  <p>
+    The first one has <code>collapsible</code> explicitly set to
+    <code>false</code>.
+  </p>
   <ol>
     <li>
       Item 1 includes some code:
@@ -169,4 +129,4 @@ title: Code Block
   </ol>
 </article>
 </div>
-<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {},    filtersManifest: {"filtersByTraitId":{"color":{"config":{"label":"Color","trait_id":"color","option_group_id":"primary_color_options"},"defaultValsByOptionGroupId":{"primary_color_options":"blue"}}},"defaultValsByTraitId":{"color":"blue"},"optionGroupsById":{"primary_color_options":[{"id":"red","label":"Red"},{"id":"yellow","label":"Yellow"},{"default":true,"id":"blue","label":"Blue"}]}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
+<div x-init='const initPage = () => { clientFiltersManager.initialize({    ifFunctionsByRef: {},    filtersManifest: {"filtersByTraitId":{},"defaultValsByTraitId":{},"optionGroupsById":{}}  });}; if (document.readyState === "complete" || document.readyState === "interactive") {  setTimeout(initPage, 1);} else {  document.addEventListener("DOMContentLoaded", initPage);}'></div>
