@@ -429,7 +429,7 @@ You can create rule definitions to add manual tags to processes based on the com
 3. Use standard grok syntax to define the match criteria for your tag
 4. If validation passes, create a new rule.
 
-Once defined, tags are available for all process command line values that match the rule criteria. These tags will be available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
+After a rule is created, tags are available for all process command line values that match the rule criteria. These tags are be available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
 
 ## Scatter plot
 
