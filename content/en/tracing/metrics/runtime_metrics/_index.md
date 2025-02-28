@@ -27,16 +27,16 @@ Runtime metrics are application metrics about memory usage, garbage collection, 
 
 ## Tracing requirements
 
-| Language | Library Version       | Enabled By Default | Generates runtime-id granularity |
-|----------|-----------------------|--------------------|----------------------------------|
-| Python   | 0.30.0+               | No                 | No                               |
-| Java     | 0.29.0+               | Yes                | Yes                              |
-| Node.js  | 3.0.0+                | No                 | No                               |
-| Go       | 1.18.0+               | No                 | Yes                              |
-| Ruby     | 0.44.0+               | No                 | No                               |
-| .NET     | 1.23.0+               | No                 | Yes                              |
-| PHP      | Not supported         |                    |                                  |
-| C++      | Not supported         |                    |                                  |
+| Language | Library Version       | Support Level | Enabled By Default | Generates runtime-id granularity |
+|----------|-----------------------|---------------|--------------------|----------------------------------|
+| Java     | 0.29.0+               | GA            | Yes                | Yes                              |
+| Go       | 1.18.0+               | GA            | No                 | Yes                              |
+| .NET     | 1.23.0+               | GA            | No                 | Yes                              |
+| Node.js  | 3.0.0+                | GA            | No                 | No                               |
+| Ruby     | 0.44.0+               | GA            | No                 | No                               |
+| Python   | 0.30.0+               | Preview       | No                 | No                               |
+| PHP      | Not supported         |               |                    |                                  |
+| C++      | Not supported         |               |                    |                                  |
 
 ### Caveats
 
