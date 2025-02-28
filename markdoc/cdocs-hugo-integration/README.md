@@ -17,10 +17,13 @@ The compiled "Markdown" files are actually just HTML with frontmatter added at t
 
 As shown in the example build script below, the integration just needs to know
 
-- the current `env` (`development`, `preview`, or `live`)
-- the directory of your root site folder
+- the current `env` (`development`, `preview`, or `live`).
+- the directory of your root site folder.
 
-Optionally, you can also declare a default language that should be used to backfill any missing data in the other languages. This parameter defaults to `en`.
+Optionally, you can also provide 
+
+- a default language that should be used to backfill any missing data in the other languages. This parameter defaults to `en`.
+- the directory where you want to publish the author console. If the `env` is not `development`, this parameter is ignored.
 
 ### Outputs
 
@@ -45,10 +48,10 @@ const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 const baseSiteDir = '<YOUR_ROOT_SITE_FOLDER_PATH>';
 
 const markdocIntegration = new CdocsHugoIntegration({
-    config: {
-        baseSiteDir,
-        env
-    }
+    baseSiteDir,
+    env,
+    defaultLang: 'en' // optional, lang already defaults to 'en'
+    publishAuthorConsoleInDir: '<PATH_TO_DIR>' // ignored outside of development env
 });
 
 // Build the global assets partial, and write it to a file

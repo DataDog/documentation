@@ -42,10 +42,10 @@ export class CdocsHugoIntegration {
   /**
    * Load the configuration objects from YAML
    */
-  constructor(args: { config: IntegrationConfig }) {
-    this.hugoGlobalConfig = buildHugoGlobalConfig(args.config);
-    this.authorConsoleDir = args.config.publishAuthorConsoleInDir;
-    this.defaultLang = args.config.defaultLang || 'en';
+  constructor(config: IntegrationConfig) {
+    this.hugoGlobalConfig = buildHugoGlobalConfig(config);
+    this.authorConsoleDir = config.publishAuthorConsoleInDir;
+    this.defaultLang = config.defaultLang || 'en';
 
     const { customizationConfigByLang } = loadCustomizationConfig({
       configDir: this.hugoGlobalConfig.dirs.customizationConfig,

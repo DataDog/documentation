@@ -9,10 +9,8 @@ const markupFiles = findInDir(contentDir, /\.mdoc.md$/);
 
 describe('CdocsHugoIntegration', async () => {
   const integration = new CdocsHugoIntegration({
-    config: {
-      baseSiteDir: siteDir,
-      env: 'development'
-    }
+    baseSiteDir: siteDir,
+    env: 'development'
   });
 
   // compile the bad files

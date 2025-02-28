@@ -5,11 +5,9 @@ import fs from 'fs';
 
 describe('CdocsHugoIntegration (optimized Markdown output)', async () => {
   const hugoIntegration = new CdocsHugoIntegration({
-    config: {
-      baseSiteDir: VALID_SITE_DIR,
-      env: 'development',
-      publishAuthorConsoleInDir: VALID_SITE_DIR + '/static/markdoc/console'
-    }
+    baseSiteDir: VALID_SITE_DIR,
+    env: 'development',
+    publishAuthorConsoleInDir: VALID_SITE_DIR + '/static/markdoc/console'
   });
 
   const { compiledFilePaths, hasErrors } = hugoIntegration.compileMdocFiles();
