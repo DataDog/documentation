@@ -420,6 +420,17 @@ If you have configuration for [Unified Service Tagging][4] in place, `env`, `ser
 Having these tags available lets you tie together APM, logs, metrics, and process data.
 **Note**: This setup applies to containerized environments only.
 
+#### Defining rules to create process tags
+
+You can create rule definitions to add manual tags to processes based on the command line.
+
+1. On the "Manage Process Tags" tab, select _New Process Tag Rule_ button
+2. Select a process to use as a reference
+3. Use standard grok syntax to define the match criteria for your tag
+4. If validation passes, create a new rule.
+
+Once defined, tags are available for all process command line values that match the rule criteria. These tags will be available in search and can be used in the definition of [Live Process Monitors][6] and [Custom Metrics][13].
+
 ## Scatter plot
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
@@ -519,4 +530,5 @@ Processes are normally collected at 10s resolution. While actively working with 
 [10]: /tracing/
 [11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
+[13]: /metrics/custom_metrics/
 
