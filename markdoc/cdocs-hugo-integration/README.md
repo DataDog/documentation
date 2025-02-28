@@ -4,7 +4,12 @@ This package enables customizable docs (the ability to filter irrelevant informa
 
 It compiles [Markdoc][1] files (`.mdoc.md`) into `.md` files that Hugo is able to process, functioning as a Hugo-specific wrapper for the [`cdocs-data`][5] and [`cdocs-markdoc`][6] packages. For an overview of the key concepts around content filters, see [the `cdocs-data` README][5].
 
-The compiled "Markdown" files are actually just HTML with frontmatter added at the top. For example, this [input `.mdoc.md` file][3] becomes [this output `.md` file][4].
+The compiled "Markdown" files are actually just HTML with frontmatter added at the top. 
+
+For example:
+
+  - This [input `.mdoc.md` file][3] becomes [this output `.md` file][4].
+  - This [mock site][9] is compiled in [a test][10] that generates [many data snapshots][11] you can explore.
 
 ## Build process
 
@@ -84,6 +89,20 @@ if (hasErrors) {
 }
 ```
 
+## Setup and usage
+
+### Use the integration in a Hugo site
+
+- Install this package in your Hugo site according to the `corp-node-packages` instructions.
+- Choose a filepath for the global assets partial, and make sure that asset is included in your Hugo layout.
+- Add a `.js` file similar to the provided [example script](#example-build-script), and run it as part of your build **before** Hugo processes any files.
+
+### Experiment with the integration
+
+- In the package folder, run `yarn install && yarn build`.
+- Create a branch and make edits to the [`validSite` folder][9], which is configured according to the guidelines in the [`cdocs-data` README][5].
+- Run `yarn test` to see how your edits impacted the resulting data snapshots.
+
 ## Code conventions
 
 This package follows the `cdocs-data` [conventions][8] where applicable.
@@ -100,3 +119,6 @@ JSX is used for the templating of some components because it's a commonly known 
 [6]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-markdoc#readme
 [7]: https://github.com/DataDog/documentation
 [8]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-data#code-conventions
+[9]: ./test/config/mocks/validSite/
+[10]: ./test/MarkdocHugoIntegration/validSite.test.ts
+[11]: ./test/__snapshots__/validSite/
