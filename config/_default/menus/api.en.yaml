@@ -2658,7 +2658,8 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
@@ -2743,7 +2744,8 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
