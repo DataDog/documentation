@@ -27,7 +27,8 @@ Starting from version [7.60.0][1] of the Datadog Agent, these configurations are
 {{% tab "Agent v7.55.1+" %}}
 
 For Datadog Agent versions [7.55.1][2] or later, add the following to your `datadog.yaml` configuration file:
-If you use 7.57.x, please update to 7.58.x or above. 7.57.x contains the bug that was resolved by https://github.com/DataDog/datadog-agent/pull/28370.
+
+**Note**: Update to 7.58.x or later to avoid [a bug with the `apm_config.compute_stats_by_span_kind` setting][4].
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -80,6 +81,7 @@ If you are using Helm, include these environment variables in your `values.yaml`
 [1]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [2]: https://github.com/DataDog/datadog-agent/releases/tag/7.54.1
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[4]: https://github.com/DataDog/datadog-agent/pull/28370
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
