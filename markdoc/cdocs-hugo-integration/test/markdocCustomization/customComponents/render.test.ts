@@ -130,7 +130,7 @@ describe('custom components', () => {
 
   test('renderedHtml', async () => {
     await expect(formattedHtml).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/markdocCustomization/customComponents/renderedHtml.snap.html`
+      `${SNAPSHOTS_DIR}/markdocCustomization/customComponents/renderedHtml.snap.md`
     );
   });
 });
