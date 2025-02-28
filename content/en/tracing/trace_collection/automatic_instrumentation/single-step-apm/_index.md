@@ -136,8 +136,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
              dotnet: "3"
              python: "2"
              js: "5"
+           injector: 
+             imageTag: "0.25.0"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
 4. Run the following command:
