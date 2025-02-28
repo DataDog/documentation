@@ -79,7 +79,7 @@ describe('rendering stages', () => {
 
   test('renderedHtml', async () => {
     await expect(formattedHtml).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/markdocCustomization/renderer/renderingStages/renderedHtml.snap.html`
+      `${SNAPSHOTS_DIR}/markdocCustomization/renderer/renderingStages/renderedHtml.snap.md`
     );
   });
 });

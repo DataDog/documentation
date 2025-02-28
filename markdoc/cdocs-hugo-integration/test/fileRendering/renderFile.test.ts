@@ -37,7 +37,7 @@ describe('renderFile', () => {
 
   test(`builds a Markdown string for ${sanitizedMarkdocFilename} that matches the snapshot`, async () => {
     await expect(html).toMatchFileSnapshot(
-      `${SNAPSHOTS_DIR}/fileRendering/${sanitizedMarkdocFilename}/compiledHtml.snap.html`
+      `${SNAPSHOTS_DIR}/fileRendering/${sanitizedMarkdocFilename}/compiledHtml.snap.md`
     );
   });
 });
