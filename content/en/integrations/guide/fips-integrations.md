@@ -19,7 +19,7 @@ A FIPS flavor of the Datadog Agent is in Preview. For more information, see <a h
 <div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
 ## Overview
-As part of the FedRAMP High effort, a number of integrations have been verified for **FIPS 140-2** compliance. Integrations that are not mentioned below may function in compliance with FIPS 140-2 but have not been tested internally. 
+As part of the FedRAMP High effort, a number of integrations have been verified for **FIPS 140-2** compliance. Integrations that are not mentioned below may function in compliance with FIPS 140-2 but have not been tested internally.
 
 This guide is for customers that require FIPS compliant services and use Datadog integrations.
 
@@ -40,7 +40,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Envoy                   | OOTB                                                                                                                                                  |
 | Haproxy                 | OOTB                                                                                                                                                  |
 | Istio                   | OOTB                                                                                                                                                  |
-| Kafka                   | To enable TLS make sure to follow this guide.                                                                                                         |
+| Kafka                   | To enable TLS make sure to follow [this guide][1].                                                                                                         |
 | MongoDB                 | The `tls` option must be set to `true` through the integration configuration.                                                                                  |
 | MySQL                   | The `ssl` option must be set through the integration configuration.                                                                                          |
 | Nginx                   | OOTB                                                                                                                                                  |
@@ -50,7 +50,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Redis                   | The `ssl` option must be enabled through the integration configuration.                                                                                      |
 | SSH                     | OOTB                                                                                                                                                  |
 | TLS                     | OOTB                                                                                                                                                  |
-| Tomcat                  | To enable TLS make sure to follow this guide.                                                                                                         |
+| Tomcat                  | To enable TLS make sure to follow [this guide][1].                                                                                                         |
 | Vault                   | OOTB                                                                                                                                                  |
 | vSphere                 | Both `ssl_verify` and `rest_api_options > tls_verify` need to be set to `true` if using the vSphere REST API to get tags (`collect_tags: true`).        |
 | Windows Service         | OOTB                                                                                                                                                  |
@@ -61,6 +61,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 Configuring the <strong>IIS integration<strong> to query remote systems is discouraged. It relies on a Windows API for cryptography, which Datadog cannot control.
 </div>
 
+[1]: /integrations/guide/jmxfetch-fips
 
 ## Further reading
 

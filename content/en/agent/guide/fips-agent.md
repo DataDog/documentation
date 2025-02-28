@@ -4,6 +4,9 @@ further_reading:
 - link: "/agent/configuration/fips-compliance"
   tag: "Documentation"
   text: "Datadog FIPS Compliance"
+- link: "integrations/guide/fips-integrations"
+  tag: "Documentation"
+  text: "FIPS Verified Agent Integrations"
 algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
@@ -112,10 +115,6 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Post installation
-
-For more information FIPS compliant services on Datadog integrations, see [FIPS Verified Agent Integrations][1].
 
 ## Further reading
 
