@@ -30,6 +30,6 @@ An emerging vulnerability is a security weakness in a technology that significan
 
 An emerging threat is a new or evolving attack campaign or supply-chain attack that has disrupted or poses a significant threat to business operations. It is defined by one or more of the following criteria:
 
-- **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks or highly targeted campaigns.
+- **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks, or targeted campaigns.
 - **Imminent threat**: The threat has already caused impact or is expected to escalate, with near-term attacks likely to affect many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
