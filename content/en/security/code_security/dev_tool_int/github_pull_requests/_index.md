@@ -70,23 +70,21 @@ To configure PR comments for all repositories:
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
 1. In **Repository Settings**, click **Global PR Comment Configuration**. 
-    - Toggle the switches for your preferred settings:
-        - **Enable PR comments for all scan types and severities** 
-        - **Enable for Static Analysis (SAST)** and specify a minimum severity threshold.
-          - **Exclude PR comments if violations are detected in test files**: Select this option to avoid generating comments in pull requests for issues found in test files.
-        - **Enable for Infrastructure-as-Code (IaC)** and specify a minimum severity threshold.
+1. Configure the settings:
+    - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
+    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
 1. Click **Save**.
 
 To configure PR comments for a single repository:
 
 1. In Datadog, navigate to [**Security** > **Code Security** > **Settings**][7].
 1. In **Repository Settings**, select a repository from the list.
-    - Toggle the switches for your preferred settings:
-        - **Enable PR comments for all scan types and severities** 
-        - **Enable for Static Analysis (SAST)** and specify a minimum severity threshold.
-          - **Exclude PR comments if violations are detected in test files**: Select this option to avoid generating comments in pull requests for issues found in test files.
-        - **Enable for Infrastructure-as-Code (IaC)** and specify a minimum severity threshold.
-        - **Block all comments in this repository**
+1. Configure the settings:
+    - **Enable PR comments for all scan types and severities**: Enable this to apply PR comments across all types and severities.
+    - **Enable for Static Analysis (SAST)**: Toggle this option to enable PR comments for SAST. If enabled, specify a minimum severity threshold. Additionally, select **Exclude PR comments if violations are detected in test files** to prevent comments on issues found in test files.
+    - **Enable for Infrastructure-as-Code (IaC)**: Toggle this option to enable PR comments for IaC. If enabled, specify a minimum severity threshold.
+    - **Block all comments in this repository**: Enable this to disable all comments for this repository, overriding global settings.
 1. Click **Save Configuration**.
 
 ### Fix a vulnerability directly from Datadog
