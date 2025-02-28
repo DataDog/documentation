@@ -8,11 +8,19 @@ The compiled "Markdown" files are actually just HTML with frontmatter added at t
 
 ## Build process
 
-### Prerequisites
+### Requirements
 
 - The cdocs build must run **before** Hugo has processed any files.
+- The integration assumes the same directory structure as the [Datadoc documentation site][7], which uses the same patterns found in most Hugo sites. For example, your content folder must be located at `<SITE_DIR>/content`.
 
-The integration assumes the same directory structure as the [Datadoc documentation site][7], which uses the same patterns found in most Hugo sites. For example, your content folder must be located at `<SITE_DIR>/content`.
+### Inputs
+
+As shown in the example build script below, the integration just needs to know
+
+- the current `env` (`development`, `preview`, or `live`)
+- the directory of your root site folder
+
+Optionally, you can also declare a default language that should be used to backfill any missing data in the other languages. This parameter defaults to `en`.
 
 ### Outputs
 
