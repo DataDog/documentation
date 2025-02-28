@@ -52,44 +52,85 @@ If you are using another source code management provider, configure Static Code 
 You **must** run an analysis of your repository on the default branch before results can begin appearing on the **Code Security** page.
 
 ## Customize your configuration
-By default, Datadog Static Code Analysis scans your repositories with [Datadog's rulesets][6] for your programming language(s). To customize which rulesets you want to apply and where, add a `static-analysis.datadog.yml` file to your repository's **root directory**.
 
-You can include the following **global** options in the `static-analysis.datadog.yml` file:
+By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s).  You can customize which rulesets or rules you want to run or ignore along with other parameters locally in your repository or within the Datadog App.
 
-| Name               | Description                                                                                | Required | Default |
-|--------------------|--------------------------------------------------------------------------------------------|----------|---------|
-| `rulesets`         | A list of ruleset names and configurations. [View all available rulesets][6].              | `true`   |         |
-| `ignore`           | A list of path prefixes and glob patterns to ignore. Matching files will not be analyzed.  | `false`  |         |
-| `only`             | A list of path prefixes and glob patterns to analyze. Only matching files will be analyzed.| `false`  |         |
-| `ignore-gitignore` | Do not use paths listed in the `.gitignore` file to skip analysis on certain files.        | `false`  | `false` |
-| `max-file-size-kb` | Ignore files larger than the specified size (in kB units).                                    | `false`  | `200`   |
+### Configuration Locations
 
-You can include the following **ruleset** options in the `static-analysis.datadog.yml` file:
+Datadog Static Code Analysis can be configured within Datadog and/or by using a file within your repository's **root directory**.
 
-| Name               | Description                                                                                                          | Required |
-|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|
-| `rules`            | A list of rule configurations for rules belonging to ruleset.                                                        | `false`  |
-| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific ruleset. Matching files will not be analyzed.  | `false`  |
-| `only`             | A list of path prefixes and glob patterns to analyze for this specific ruleset. Only matching files will be analyzed.| `false`  |
+There are three levels of configuration:
 
-You can include the following **rule** options in the `static-analysis.datadog.yml` file:
+* Org Level Configuration (Datadog)
+* Repo Level Configuration (Datadog)
+* Repo Level Configuration (Repo File)
 
-| Name               | Description                                                                                                          | Required |
-|--------------------|----------------------------------------------------------------------------------------------------------------------|----------|
-| `ignore`           | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.     | `false`  |
-| `only`             | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed.   | `false`  |
-| `arguments`        | A map of values for rules that support customizable arguments.                                                       | `false`  |
-
-The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
-
-* To set a value for the whole repository, you can specify it as a string.
-* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
-
-The full structure of the `static-analysis.datadog.yml` file is as follows:
+All three locations use the same YAML format for configuration. These configurations are merged **in order** using an overlay/patch merge method. For example, lets look at these two sample YAML files:
 
 ```yaml
 rulesets:
-  - ruleset-name
+ - A
+   rules:
+      foo:
+        ignore: ["**"]
+        args: ["my_arg1", "my_arg2"]
+```
+
+```yaml
+rulesets:
+ - A
+    rules:
+        foo:
+            ignore: ["my_ignored_file.file"]
+        bar:
+            only: ["the_only_file.file"]
+ - B
+   
+```
+
+The merge of these YAML files with a overlay/patch method would be the following, if we merged in order, first file with the second
+
+```yaml
+rulesets:
+ - A
+    rules:
+        foo:
+            ignore: ["my_ignored_file.file"]
+            args: ["my_arg1", "my_arg2"]
+        bar:
+            only: ["the_only_file.file"]
+ - B
+   
+
+```
+
+As you can see, the `ignore: ["**"]` from the first file has been overlayed with the `ignore: ["my_ignored_file.file"]` since the second file's value takes precedence in the event of a conflict due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
+
+#### Org-Wide Configuration
+
+{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+
+Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
+
+#### Repository Level Configuration
+
+{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+
+Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
+
+#### Repository Level Configuration (File)
+
+In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository Level Configuration defined in Datadog. Repository level file configurations are useful as method to quickly change rule configs and iterate on setup and testing.
+
+### Configuration Format
+
+The following configuration format applies to all configuration locations: Org-Wide, Repository Level, and Repository Level (file).
+
+The full structure of a configuration is as follows:
+
+```yaml
+rulesets:
+  - ruleset-name # A Ruleset we want to run with default configurations
   - ruleset-name:
     # Only apply this ruleset to the following paths/files
     only:
@@ -131,7 +172,79 @@ ignore:
   - "**/*.file"
 ```
 
-Example configuration file:
+
+
+
+The YAML configuration file supports the following top-level keys:
+
+| **Property** | **Type** | **Description**                                                                                                              | **Default** |
+| ------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| `rulesets`       | Array          | A list of rulesets to analyze. Each element can be either a simple ruleset name (string) or an object with detailed configuration. | *Required*      |
+| `only`           | Array          | A list of file paths or glob patterns. If provided, only matching files will be analyzed across all rulesets.                      | None              |
+| `ignore`         | Array          | A list of file paths or glob patterns to exclude from analysis across all rulesets.                                                | None              |
+
+*Note:* The `only` and `ignore` keys here act as file filters that apply to the entire configuration file.
+
+---
+
+## Ruleset Configuration
+
+Each entry in the `rulesets` array can be defined in one of two ways:
+
+1. **Simple Ruleset Declaration:**A plain string (e.g., `ruleset-name`) indicates that the ruleset should run with its default settings.
+2. **Detailed Ruleset Object:**
+   An object where the key is the ruleset name and the value is an object containing additional configuration. The available properties for a detailed ruleset are:
+
+| **Property** | **Type** | **Description**                                                                               | **Default** |
+| ------------------ | -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
+| `only`           | Array          | File paths or glob patterns. Only files matching these patterns will be processed for this ruleset. | None              |
+| `ignore`         | Array          | File paths or glob patterns to exclude from analysis for this ruleset.                              | None              |
+| `rules`          | Object         | A mapping of individual rule names to their configuration objects.                                  | None              |
+
+---
+
+## Rule Configuration
+
+Within a ruleset’s `rules` property, each rule is defined by its name and configuration. The properties available for each rule are:
+
+| **Property** | **Type** | **Description**                                                                              | **Default** |
+| ------------------ | -------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
+| `only`           | Array          | File paths or glob patterns. The rule will only be applied to files matching these patterns.       | None              |
+| `ignore`         | Array          | File paths or glob patterns to exclude from the rule’s application.                               | None              |
+| `arguments`      | Object         | Parameters and values for the rule. Values can be simple scalars or specified on a per-path basis. | None              |
+
+---
+
+## Argument Configuration
+
+Rule arguments can be defined in one of two formats:
+
+1. **Static Value:**Directly assign a value to an argument.
+
+   ```yaml
+   arguments:
+     argument-name: value
+   ```
+2. **Path-Specific Mapping:**
+   Define different values based on file paths. Use the special key `/` to denote the default value (applicable at the repository root).
+
+   ```yaml
+   arguments:
+     argument-name:
+       /: value_default
+       path/example: value_specific
+   ```
+
+| **Key**     | **Type** | **Description**                                                     | **Default** |
+| ----------------- | -------------- | ------------------------------------------------------------------------- | ----------------- |
+| `/`             | Any            | The default argument value when no specific path is matched.              | None              |
+| `specific path` | Any            | The argument value for files matching the specified path or glob pattern. | None              |
+
+---
+
+
+
+Example configuration:
 
 ```yaml
 rulesets:
@@ -176,7 +289,38 @@ ignore:
   - "**/*.pb.py"
 ```
 
+
+| Name                 | Description                                                                                 | Required  | Default   |
+| -------------------- | ------------------------------------------------------------------------------------------- | --------- | --------- |
+| `rulesets`         | A list of ruleset names and configurations.[View all available rulesets][6].                | `true`  |           |
+| `ignore`           | A list of path prefixes and glob patterns to ignore. Matching files will not be analyzed.   | `false` |           |
+| `only`             | A list of path prefixes and glob patterns to analyze. Only matching files will be analyzed. | `false` |           |
+| `ignore-gitignore` | Do not use paths listed in the `.gitignore` file to skip analysis on certain files.       | `false` | `false` |
+| `max-file-size-kb` | Ignore files larger than the specified size (in kB units).                                  | `false` | `200`   |
+
+You can include the following **ruleset** options in the `static-analysis.datadog.yml` file:
+
+| Name       | Description                                                                                                           | Required  |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- | --------- |
+| `rules`  | A list of rule configurations for rules belonging to ruleset.                                                         | `false` |
+| `ignore` | A list of path prefixes and glob patterns to ignore for this specific ruleset. Matching files will not be analyzed.   | `false` |
+| `only`   | A list of path prefixes and glob patterns to analyze for this specific ruleset. Only matching files will be analyzed. | `false` |
+
+You can include the following **rule** options in the `static-analysis.datadog.yml` file:
+
+| Name          | Description                                                                                                        | Required  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------ | --------- |
+| `ignore`    | A list of path prefixes and glob patterns to ignore for this specific rule. Matching files will not be analyzed.   | `false` |
+| `only`      | A list of path prefixes and glob patterns to analyze for this specific rule. Only matching files will be analyzed. | `false` |
+| `arguments` | A map of values for rules that support customizable arguments.                                                     | `false` |
+
+The map in the `arguments` field uses an argument's name as its key, and the values are either strings or maps:
+
+* To set a value for the whole repository, you can specify it as a string.
+* To set different values for different subtrees in the repository, you can specify them as a map from a subtree prefix to the value that the argument will have within that subtree.
+
 ### Ignoring violations
+
 #### Ignore for a repository
 Add an ignore rule in your `static-analysis.datadog.yml` file. The example below ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
@@ -249,7 +393,6 @@ datadog:
         - path/to/service/code/**
 {{< /code-block >}}
 
-
 #### Detecting file usage patterns
 
 Datadog detects file usage in additional products such as Error Tracking and associate
@@ -268,7 +411,6 @@ it associates `myservice` to all files in the repository.
 If no repository match is found, Datadog attempts to find a match in the
 `path` of the file. If there is a service named `myservice`, and the path is `/path/to/myservice/foo.py`, the file is associated with `myservice` because the service name is part of the path. If two services are present
 in the path, the service name closest to the filename is selected.
-
 
 ### Link results to teams
 
