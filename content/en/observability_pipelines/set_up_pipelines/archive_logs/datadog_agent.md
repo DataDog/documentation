@@ -91,6 +91,17 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+##### Prerequisites
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -267,7 +278,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
+1. Enter the listener address, which is the address and port the Observability Pipelines Worker listens on for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -275,6 +286,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}

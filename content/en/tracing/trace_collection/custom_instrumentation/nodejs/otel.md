@@ -71,7 +71,7 @@ Add custom attributes to your spans to provide additional context:
 
 {{< highlight js "hl_lines=6" >}}
 function processData(i, param1, param2) {
-  return tracer.startActiveSpan(`processData:${i}`, (span) => {
+  return otelTracer.startActiveSpan(`processData:${i}`, (span) => {
     const result = someOperation(param1, param2);
 
     // Add an attribute to the span
@@ -89,7 +89,7 @@ To create a new span and properly close it, use the `startActiveSpan` method:
 {{< highlight js "hl_lines=3 9" >}}
 function performTask(iterations, param1, param2) {
   // Create a span. A span must be closed.
-  return tracer.startActiveSpan('performTask', (span) => {
+  return otelTracer.startActiveSpan('performTask', (span) => {
     const results = [];
     for (let i = 0; i < iterations; i++) {
       results.push(processData(i, param1, param2));

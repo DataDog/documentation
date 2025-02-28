@@ -37,6 +37,7 @@ For information about the default attributes for all event types, see [Data Coll
 | `error.type`    | string | The error type (or error code in some cases).                     |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
+| `error.causes` | [Array][12] | An optional list of errors providing additional context. This attribute is used to display errors separately and enhance formatting. For more information, see the [MDN documentation][13]. |
 
 ### Source errors
 
@@ -256,3 +257,5 @@ Get visibility into cross-origin scripts by following these two steps:
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

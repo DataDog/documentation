@@ -47,6 +47,7 @@ further_reading:
 - [App Datastore](#app-datastore)
 - [Event Management](#event-management)
 - [Private Action Runners](#private-action-runners)
+- [Observability Pipelines](#observability-pipelines)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -314,6 +315,27 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Query intent][121] | A user successfully created a query intent, or a runner successfully validated a query intent. | `@evt.name:"Private Action Runners" @asset.type:query_intent @action:(validated OR created)` |
 | [Runner enrollment token][122] | A user successfully created a runner enrollment token, or a runner successfully completed enrollment. | `@evt.name:"Private Action Runners" @asset.type:runner_enrollment @action:(completed OR created)` |
 
+### Observability Pipelines
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Create draft pipeline][123] | A user created a draft pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_draft @action:created` |
+| [Modify draft pipeline][124] | A user modified a draft pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_draft @action:modified` |
+| [Access Pipeline configuration][125] | A user accessed the pipeline configuration for a specific pipeline by ID. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_configuration @action:accessed` |
+| [Modify Pipeline ][126] | A user modified an existing pipeline configuration. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_configuration @action:modified` |
+| [Create pipeline][127] | A user created a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_configuration @action:created` |
+| [Delete pipeline][128] |  A user deleted a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_configuration @action:deleted` |
+| [Access pipeline configuration list][129] | A user accessed the pipeline configuration list. | `@evt.name:"Observability Pipelines" @asset.type:pipelines_configuration_list @action:accessed` |
+| [Access pipeline][130] | A user accessed a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:obs_pipelines @action:accessed` |
+| [Access worker version list][131] | A user accessed the worker versions list. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"worker versions list"` |
+| [Access configuration count][132] | A user accessed the configuration count for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"configuration count"` |
+| [Access pipeline list][133] | A user accessed the pipeline list. | `evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"pipeline list"` |
+| [Access pipeline by ID][134] | A user accessed a specific pipeline by ID. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"pipeline"` |
+| [Validate worker configuration component][135] | A user successfully validated the worker configuration component. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"worker configuration component"` |
+| [Access version hash list][136] | A user accessed the version hash list for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"version hash list"` |
+| [Access worker component list][137] | A user accessed the worker component list for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:pipeline @action:accessed @asset.name:"worker component list"` |
+| [Access deployment list][138] | A user accessed the deployment list for a pipeline. | `@evt.name:"Observability Pipelines" @asset.type:deployment` |
+| [Access pipeline draft][139] | A user accessed a draft pipeline.  | `@evt.name:"Observability Pipelines" @asset.type:draft` |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -439,4 +461,21 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [119]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Event%20Management%22%20%40asset.type%3Acustom_metrics&agg_m=count&agg_m_source=base&agg_q=%40evt.name
 [120]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Private%20Action%20Runners%22%20%40asset.type%3Aprivate_action_runner%20%40action%3A%28accessed%20OR%20created%20OR%20deleted%20OR%20modified%20OR%20attached%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name
 [121]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Private%20Action%20Runners%22%20%40asset.type%3Aquery_intent%20%40action%3A%28validated%20OR%20created%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name
-[122]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Private%20Action%20Runners%22%20%40asset.type%3Arunner_enrollment%20%40action%3A%28completed%20OR%20created%29&agg_m=count&agg_m_source=base&agg_q=%40evt.name
+[122]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Private%20Action%20Runners%22%20%40asset.type%3Arunner_enrollment%20%40action%3A%28completed%20OR%20created%29
+[123]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_draft%20%40action%3Acreated
+[124]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_draft%20%40action%3Amodified
+[125]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_configuration%20%40action%3Aaccessed
+[126]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_configuration%20%40action%3Amodified
+[127]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_configuration%20%40action%3Acreated
+[128]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_configuration%20%40action%3Adeleted
+[129]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipelines_configuration_list%20%40action%3Aaccessed
+[130]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Aobs_pipelines%20%40action%3Aaccessed
+[131]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22worker%20versions%20list%22
+[132]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22configuration%20count%22
+[133]:https://app.datadoghq.com/audit-trail?query=evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22pipeline%20list%22
+[134]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22pipeline%22
+[135]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22worker%20configuration%20component%22
+[136]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22version%20hash%20list%22
+[137]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Apipeline%20%40action%3Aaccessed%20%40asset.name%3A%22worker%20component%20list%22
+[138]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Adeployment&agg_m=count
+[139]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Observability%20Pipelines%22%20%40asset.type%3Adraft&agg_m=count&agg_m_source=base
