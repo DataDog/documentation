@@ -1,0 +1,9 @@
+# Core versions
+agent_version: "7.62.2"          # Base agent version
+agent_branch: "7.62.x"           # Branch version
+otel_version: "0.115.0"          # OTel components version
+
+# Derived tags
+agent_tag: "7.62.2-ot-beta"      # Standard image tag
+agent_tag_jmx: "7.62.2-ot-beta-jmx"  # JMX-enabled image tag
+agent_tag_nightly: "nightly-ot-beta-main"  # Nightly build reference
