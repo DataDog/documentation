@@ -119,7 +119,7 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 {{< /tabs >}}
 
 <div class="alert alert-info">
-You can download the current version of the Datadog On-Call contact card <a href="https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf">here</a>. <b>Note</b>: the contact card is subject to change at any time.
+<a href="https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf">Download the current version of the Datadog On-Call contact card</a>. <strong>Note</strong>: The contact card is subject to change at any time.
 </div>
 
 [1]: /service_management/mobile/?tab=ios
