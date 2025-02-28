@@ -21,15 +21,11 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-    {{< img src="cloud_cost/budgets/budget-create-define.png" alt="Budget Creation View: fill in budget details." style="width:70%;" >}}
+    {{< img src="cloud_cost/budgets/budget-create-define-1.png" alt="Budget Creation View: fill in budget details." style="width:100%;" >}}
 
-4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
+4. Fill in all budgets in the table. You can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
-   {{< img src="cloud_cost/budgets/budget-create-table.png" alt="Budget Creation View: fill in all budgets">}}
-
-5. Click **Save** in the bottom right
-
-   {{< img src="cloud_cost/budgets/budget-create-table-filled.png" alt="Budget Creation View: click save">}}
+5. Click **Save** in the bottom right.
 
 ## View budget status
 The [Budgets page][1] lists all of your organization's budgets, highlighting the budget creator, any budgets that have gone over,
@@ -53,7 +49,7 @@ You cannot view budget versus actuals before 15 months, since cost metrics are r
 
 ## Investigate budgets
 
-   {{< img src="cloud_cost/budgets/budget-investigate.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
+   {{< img src="cloud_cost/budgets/budget-investigate-1.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
 
 To investigate budgets:
 1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
