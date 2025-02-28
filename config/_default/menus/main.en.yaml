@@ -6362,14 +6362,14 @@ menu:
       url: /security/code_security/secret_scanning/
       parent: code_security
       weight: 1
-    - name: Setup
-      identifier: sec_secret_scanning_setup
-      url: /security/code_security/secret_scanning/setup/
-      parent: sec_secret_scanning
-      weight: 1
     - name: GitHub Actions
       identifier: sec_secret_scanning_github_actions
       url: /security/code_security/secret_scanning/github_actions/
+      parent: sec_secret_scanning
+      weight: 1
+    - name: Generic CI Providers
+      identifier: sec_secret_scanning_generic_ci_providers
+      url: /security/code_security/secret_scanning/generic_ci_providers/
       parent: sec_secret_scanning
       weight: 2
     - name: Runtime Code Analysis (IAST)
