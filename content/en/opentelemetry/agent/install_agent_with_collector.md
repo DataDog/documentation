@@ -672,7 +672,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}a"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
