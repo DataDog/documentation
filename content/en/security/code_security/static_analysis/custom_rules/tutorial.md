@@ -4,10 +4,9 @@ title: Static Code Analysis Custom Rule Tutorial
 ---
 
 
-In this tutorial, we learn how to write a custom rule to check your code. We will proceed with a very simple
-rule that checks if we have a Python function call to a function `foo` with an argument called `bar`.
+This tutorial shows how to write a custom rule to check code. The tutorial uses a very simple rule that checks if we have a Python function call to a function `foo` with an argument called `bar`.
 
-There is the sample code we want to detect.
+Here is the sample code we want to detect:
 
 ```python
 foo(bar)
@@ -16,18 +15,18 @@ foo(bar)
 
 ## Step 1: Create a ruleset
 
-Navigate to the [custom rulesets][1] and create a new ruleset called `tutorial`.
+Navigate to [custom rulesets][1] and create a new ruleset named `tutorial`.
 
 {{< img src="/security/code_security/custom_rule_tutorial_ruleset.png" alt="Ruleset created" style="width:100%;" >}}
 
 ## Step 2: Create a rule
 
-First, create a rule named `tutorial-rule` and make sure you select the `Python` language.
+Create a rule named `tutorial-rule`. Ensure you select the `Python` language.
 
-### Step 2.1: Add an example
+### Step 2.1: Test the rule with an example
 
-Add a code example to test the rule. At each modification or update of the rule, tree-sitter capture
-or test code, Datadog will execute the rule against the code to have early feedback.
+Add a code example to test the rule. At each modification or update of the rule (tree-sitter capture
+or test code), Datadog will execute the rule against the code and provide feedback.
 
 Enter the filename `test.py` and add the code below.
 
@@ -38,13 +37,13 @@ foo(baz)
 
 ### Step 2.2: Write a tree-sitter query
 
-We then write a [tree-sitter query][2] that defines the nodes to capture in the code. In our case,
-we want to capture a function call where the function name is `foo` and any argument is `bar`.
+Write a [tree-sitter query][2] that defines the nodes to capture in the code. In the current example,
+the goal is to capture a function call where the function name is `foo` and any argument is `bar`.
 
-The tree-sitter query to do so is shown below, it has three captures:
- - `funcName` to capture the name of the function and run a predicate to check its name
- - `arg` to capture the name of the arguments
- - `func` to capture the function call with all arguments. This is used to report the violation in code.
+The tree-sitter query is shown below. It has three captures:
+ - `funcName` captures the name of the function and runs a predicate to check its name.
+ - `arg` captures the name of the arguments.
+ - `func` captures the function call with all arguments. This is used to report the violation in code.
 
 ```
 (call
@@ -59,8 +58,7 @@ The tree-sitter query to do so is shown below, it has three captures:
 
 ### Step 2.3: Write JavaScript rule code
 
-Finally, we write the JavaScript code to report the violation. First, we fetch the captures (`func` and `funcName`).
-Then, we check if the name of the function is different from `foo` and return otherwise. Finally, we report a violation.
+Write the JavaScript code to report the violation. The code first fetch the captures (`func` and `funcName`), and then checks if the name of the function is different from `foo` and returns if true. Lastly, it reports a violation.
 
 Note that the `buildError` function 6th and 7th arguments are the severity and category.
 We support the following severity: `ERROR`, `WARNING`, `NOTICE` and `INFO`.
@@ -100,9 +98,9 @@ function visit(query, filename, code) {
 
 ## Step 3: Use the rule
 
-To use the rule, either:
- - create a `static-analysis.datadog.yaml` file at the root of your repository with the ruleset
- - add the rule in [your settings][3], either for the org-wide or repo-level configuration.
+To use the rule, do one of the following:
+ - Create a `static-analysis.datadog.yaml` file at the root of your repository with the ruleset.
+ - Add the rule in [your settings][3], either for the org-wide or repo-level configuration.
 
 A valid configuration for using this ruleset (and no other ruleset) look like this:
 
