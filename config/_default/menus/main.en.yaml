@@ -759,6 +759,21 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 802
+    - name: Java
+      url: opentelemetry/integrations/runtime_metrics/java
+      identifier: otel_runtime_metrics_java
+      parent: otel_runtime_metrics
+      weight: 8021
+    - name: .NET
+      url: opentelemetry/integrations/runtime_metrics/dotnet
+      identifier: otel_runtime_metrics_dotnet
+      parent: otel_runtime_metrics
+      weight: 8022
+    - name: Go
+      url: opentelemetry/integrations/runtime_metrics/go
+      identifier: otel_runtime_metrics_go
+      parent: otel_runtime_metrics
+      weight: 8023
     - name: Collector Health Metrics
       url: opentelemetry/integrations/collector_health_metrics/
       identifier: otel_health_metrics
