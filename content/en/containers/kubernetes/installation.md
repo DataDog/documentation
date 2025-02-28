@@ -200,7 +200,7 @@ datadog:
         - <GROUP_ID>
 {{< /highlight >}}
 
-- Replace `<USER_ID>` with the UID to run the Datadog Agent. See 
+- Replace `<USER_ID>` with the UID to run the Datadog Agent.
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
 Then, deploy the Agent:
