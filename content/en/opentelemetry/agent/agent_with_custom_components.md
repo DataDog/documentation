@@ -79,7 +79,7 @@ exporters:
 
 processors:
 # adding metrics transform processor to modify metrics
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.115.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v{{< version key="collector_version" >}}
 
 receivers:
   - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
