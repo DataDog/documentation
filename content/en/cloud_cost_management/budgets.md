@@ -21,7 +21,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-   {{< img src="cloud_cost/budgets/budget-create-define.png" alt="Budget Creation View: fill in budget details">}}
+    {{< img src="cloud_cost/budgets/budget-create-define.png" alt="Budget Creation View: fill in budget details." style="width:70%;" >}}
 
 4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
@@ -37,7 +37,7 @@ and other relevant details. Click on **View Performance** to investigate the bud
 
    {{< img src="cloud_cost/budgets/budget-list.png" alt="List all budgets">}}
 
-From a **View Performance** page of n individual budget, you can toggle the view option from the top left:
+From a **View Performance** page of an individual budget, you can toggle the view option from the top left:
 
 <div class="alert alert-info">
 You cannot view budget versus actuals before 15 months, since cost metrics are retained for 15 months.
@@ -52,8 +52,11 @@ You cannot view budget versus actuals before 15 months, since cost metrics are r
    {{< img src="cloud_cost/budgets/budget-status-all.png" alt="Budget Status View: view total budget">}}
 
 ## Investigate budgets
+
+   {{< img src="cloud_cost/budgets/budget-investigate.png" alt="Use the dropdown filter or Apply Filter option in the table to investigate over-budget dimensions. ">}}
+
 To investigate budgets:
-1. From the **Budgets** page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
+1. From the individual budget page, filter budgets using the dropdown at the top, or "Apply filter" in the table to investigate dimensions that are over budget.
 2. Click **Copy Link** to share the budget with others to help understand why budgets are going over. Or, share budgets with finance so that they can understand how you're tracking against budgets.
 
 ## Delete budget
