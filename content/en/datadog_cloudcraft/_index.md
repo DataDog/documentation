@@ -140,6 +140,7 @@ The Agent overlay indicates whether the Agent is installed on your EC2 hosts usi
 ## FAQ 
 
 Why are there two Cloudcraft's and which one is right for me ?
+Add Copy here
 
 
 [1]: /cloudcraft
