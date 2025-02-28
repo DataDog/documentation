@@ -1,5 +1,15 @@
 ---
 title: Install Datadog CoTerm
+further_reading:
+- link: "/coterm"
+  tag: "documentation"
+  text: "Datadog CoTerm"
+- link: "/coterm/usage"
+  tag: "documentation"
+  text: "Using CoTerm"
+- link: "/coterm/rules"
+  tag: "documentation"
+  text: "CoTerm Configuration Rules"
 ---
 
 1. Install Datadog CoTerm by running:
@@ -8,9 +18,7 @@ title: Install Datadog CoTerm
    curl --tlsv1.2 --proto '=https' -sSf 'https://update.coscreen.org/install-ddcoterm.sh' | bash
    ```
 
-   This command downloads the latest version of CoTerm to `~/.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc`.
-
-2. Restart your terminal or source your profile. (For example, run `source ~/.bashrc`.) If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually.
+   This command downloads the latest version of CoTerm to `~/.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually. 
 
 3. Initialize your configuration file by running:
 
@@ -18,26 +26,60 @@ title: Install Datadog CoTerm
    ddcoterm init
    ```
 
-4. Select one of the following ways to authorize CoTerm to access your Datadog account:
-   - **OAuth**: Opens a browser for you to log in with OAuth
-   - **API Key + App Key**: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
-   - **API Key Only**: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
+   Select your settings. You can change these settings [in the `~/.ddcoterm/config.yaml` file](#configure).
 
-   <div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot give <a href="/coterm/usage#approvals">approvals</a>.</div>
+## Authorize CoTerm to connect to Datadog
 
-After you complete these steps, you are ready to [use CoTerm][3].
+During initialization, you can choose one of the following ways to authorize CoTerm to access your Datadog Account.
+- **OAuth**: Opens a browser for you to log in with OAuth
+- **API Key + App Key**: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
+- **API Key Only**: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
 
-## Configure
+<div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot require approvals with Change Management.</div>
 
-The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations. Edit this file to enable/disable telemetry or change your authentication method, or... This file also contains...
+## Configure your CoTerm settings
 
-<!-- tk -->
-<!-- for non-us1, do you have to set that here? -->
+The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
+
+`process_config`
+: Configure CoTerm to act as a linter and take certain actions when it intercepts a command that matches a rule. See [CoTerm Configuration Rules][4].
+
+`enable_telemetry`
+: Enable or disable sending telemetry to Datadog.
+
+`enable_ptrace`
+: Enable or disable `ptrace`-based process monitoring.
+
+`connection_config`
+: 
+  `host`
+  : Host for connecting to Datadog. Defaults to `https://app.datadoghq.com`.
+
+  `port`
+  : Port for connecting to Datadog. Defaults to `443`.
+
+  `api_key`
+  : If you are not using OAuth, your [Datadog API key][5]. 
+
+  `app_key`
+  : If you are not using OAuth, your [Datadog application key][5]. <br/>**Note**: To require approvals with Change Management, you must use OAuth _or_ specify both your API key and application key in this file.
+
+## Uninstall
+
+To uninstall CoTerm, delete the `~/.ddcoterm` folder.
 
 ## Next steps
 
-<!-- tk -->
+- Run `ddcoterm` to start a recorded terminal session.
+- Learn more about [using CoTerm][3].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/application-keys
 [3]: /coterm/usage
+[4]: /coterm/rules
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: https://app.datadoghq.com/organization-settings/application-keys

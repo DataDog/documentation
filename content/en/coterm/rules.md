@@ -1,3 +1,127 @@
 ---
-title: CoTerm Rules
+title: CoTerm Configuration Rules
+further_reading:
+- link: "/coterm"
+  tag: "documentation"
+  text: "Datadog CoTerm"
+- link: "/coterm/install"
+  tag: "documentation"
+  text: "Install Datadog CoTerm"
+- link: "/coterm/usage"
+  tag: "documentation"
+  text: "Using CoTerm"
 ---
+
+You can configure CoTerm to take specific actions when it intercepts certain commands by adding lints and rules to your `.ddcoterm/config.yaml` file under `process_config`. 
+
+These lints and rules are written in [Lua][1]. For syntax and further details, see [Lua's documentation][2].
+
+## Lints
+
+{{< highlight yaml "hl_lines=5-8" >}}
+process_config:
+  commands:
+    - command: "kubectl"
+      lints:
+        - |
+          if has_arg("scale") and flags.context == nil then
+            return string.format("No kubectl context specified (effective context: '%s'). It is recommended to always explicitly specify the context when running `kubectl scale`.", k8s_context)
+          end
+{{< / highlight >}}
+
+Each item under `lints` is a Lua snippet that can return a string. Lints are evaluated in order. If a lint returns a string, that string is shown to the user as a warning prompt:
+
+{{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm.No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
+
+The user then has the option to continue or abort.
+
+## Rules
+
+{{< highlight yaml "hl_lines=5-18" >}}
+process_config:
+  commands:
+    - command: "kubectl"
+      rules:
+        # Record and require approval for all executions of `kubectl scale` in a production context
+        - rule: |
+            local k8s_context = flags.context or k8s_current_context or "unknown"
+            local matches = has_arg("scale") and k8s_context:match("prod")
+            local user_message = "Proceed with caution. This command may disrupt your kubernetes cluster setup."
+            local approver_message = "Ensure that the user has documented a rollback plan before approving."
+            return matches, user_message, approver_message
+          actions: ["record", "logs", "process_info", "approval"]
+        # Record all other executions of kubectl scale, but don't require approval and don't bother with messages for users+approvers
+        - rule: has_arg("scale")
+          actions: ["record", "logs", "process_info"]
+        # For all other kubectl commands, just run the command with ~zero overhead; no recording, no requiring approval
+        - rule: true
+          actions: []
+{{< / highlight >}}
+
+Rules are more powerful than lints. For each item under `rules`, set `rule`, a Lua snippet that returns 1-3 values; and `actions`, a list of actions for CoTerm to take.
+
+### Rule return values
+
+Each `rule` returns 1-3 values: `boolean, [string], [string]`.
+
+1. (required) A Boolean, whether the rule matches
+2. (optional) A string, containing a message for the user. This string provides context to the user. It is only displayed if the first return value is `true`.
+3. (optional) A string, containing a message for the approver. If the first return value is `true` and the corresponding `actions` field contains `approval`, this string is displayed in the approval request in Datadog.
+
+### Actions
+
+CoTerm can take the following actions when `rule` returns `true`:
+
+- `record`: Record the terminal session and send it to Datadog
+- `logs`: Generate Datadog logs, containing searchable snapshots of terminal output
+- `process_info`: Record all processes launched inside the terminal session and generate an event for each process
+- `approval`: Require approval before running the command
+- `incidents`: Associate the recording with the [Datadog Incident][6] that the user is responding to, if any. If the user is responding to more than one incident, they are prompted to pick one.
+
+To take no action when `rule` returns `true`, set `actions: []`.
+
+### Rule evaluation
+
+Rules are evaluated in order. CoTerm runs the actions specified for the first rule that evaluates to `true`.
+
+## Action hierarchy
+
+CoTerm takes actions according to the following hierarchy:
+1. If CLI flags (such as `--save-level`, `--approval`) are set, actions specified through these CLI flags 
+2. If any Lua rule evaluates to `true`, the actions associated with that rule
+3. Actions set in `process_config.default_actions`, if any
+4. Default actions: `["record", "logs", "process_info"]`
+
+## Lua environment and helper functions
+
+All Lua snippets are executed inside a sandboxed [Luau][3] runtime. CoTerm injects the following variables and functions into the runtime:
+
+### Global variables
+
+`executable` - string
+: The executable in your command. <br/>For `kubectl foo bar`, `executable` is `kubectl`.
+
+`args` - array&lt;string&gt;
+: The arguments in your command. <br/>For `kubectl foo bar`, `args` is `["foo", "bar"]`.
+
+`flags` - table
+: A [table][4] of CLI options and arguments in your command. <br/>For `command --key value` or `command --key=value`, `flags.key` is `value`.
+
+`k8s_current_context` - string
+: The `current-context` value from `~./kube/config`. If this value is not found, `k8s_current_context` is [nil][5].
+
+### Helper functions
+
+`has_arg(<string>)`
+: Returns `true` if argument is present. <br/>For `kubectl foo bar`, `has_arg("bar")` returns `true`.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://en.wikipedia.org/wiki/Lua_(programming_language)
+[2]: https://lua.org/docs.html
+[3]: https://luau.org/
+[4]: https://www.lua.org/pil/2.5.html
+[5]: https://www.lua.org/pil/2.1.html
+[6]: /service_management/incident_management/
