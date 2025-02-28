@@ -21,7 +21,7 @@ After you start ingesting your costs in Cloud Cost Management, set up budgets an
    - **Provider(s)**: Budget on any combination of AWS, Azure, Google Cloud, or other SaaS (including Datadog or custom costs).
    - **Dimension to budget by**: Specify a dimension to track the budget, along with its corresponding values. For example, if you wanted to create budgets for the top 4 teams, you would select "team" in the first dropdown, and the specific teams in the second dropdown.
 
-   {{< img src="cloud_cost/budgets/budget-creation-define.png" alt="Budget Creation View: fill in budget details">}}
+   {{< img src="cloud_cost/budgets/budget-create-define.png" alt="Budget Creation View: fill in budget details">}}
 
 4. Fill in all budgets in the table - you can automatically copy values from the first month to the rest of the months by clicking the copy button.
 
