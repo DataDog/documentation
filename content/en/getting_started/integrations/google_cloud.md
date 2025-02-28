@@ -66,13 +66,9 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
-### Best practices
+### Best practices for monitoring multiple projects
 
-1. Request "Service Usage Consumer" request here? The basic gist of it is that this allows us to attribute API calls to the appropriate project being queried.
-
-Note: this requires us to allowlist the customers for this access at present (will be self-service configurable later this year)
-
-
+By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
 
 ### Organization-level metric collection
 
