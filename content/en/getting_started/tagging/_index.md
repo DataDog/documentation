@@ -32,9 +32,9 @@ Tags are a way of adding dimensions to Datadog telemetries so they can be filter
 Tags are `key:value` pairs containing two parts:
 
 - The tag key is the identifier. The tag key can only exist once on each resource and is case sensitive.
-- The tag value is the specific data or information associated with the key. Tag values are not unique per resources and can be used across many resources in a `key-value` pair.
+- The tag value is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key-value` pair.
 
-Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
+Tagging binds different data types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
 
 | Tag Key   | Allows for                                                            |
 | --------- | --------------------------------------------------------------------- |
