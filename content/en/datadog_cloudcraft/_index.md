@@ -1,9 +1,9 @@
 ---
 title: Cloudcraft in Datadog
 further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
+- link: "https://www.datadoghq.com/blog/cloud-architecture-diagrams-cost-compliance-cloudcraft-datadog/"
+  tag: "Blog"
+  text: "Plan new architectures and track your cloud footprint with Cloudcraft (Standalone)"
 ---
 
 {{< site-region region="gov" >}}
@@ -133,9 +133,13 @@ By default, the security overlay shows Critical and High misconfigurations, but 
 
 ### Agent Overlay
 
-The Agent overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not.
+The Agent overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not installed on that resource
 
-{{< img src="datadog_cloudcraft/agent_overlay.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="50%" >}}
+{{< img src="datadog_cloudcraft/agent_overlay.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
+
+## FAQ 
+
+Why are there two Cloudcraft's and which one is right for me ?
 
 
 [1]: /cloudcraft
@@ -145,3 +149,8 @@ The Agent overlay indicates whether the Agent is installed on your EC2 hosts usi
 [5]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html
 [6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
 [7]: https://app.datadoghq.com/cloud-maps
+
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
