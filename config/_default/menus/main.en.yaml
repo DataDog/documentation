@@ -6358,19 +6358,19 @@ menu:
       parent: sca_setup_runtime
       weight: 1
     - name: Secrets Scanning
-      identifier: sec_secrets_scanning
-      url: /security/code_security/secrets_scanning/
+      identifier: sec_secret_scanning
+      url: /security/code_security/secret_scanning/
       parent: code_security
       weight: 1
     - name: Setup
-      identifier: sec_secrets_scanning_setup
-      url: /security/code_security/secrets_scanning/setup/
-      parent: sec_secrets_scanning
+      identifier: sec_secret_scanning_setup
+      url: /security/code_security/secret_scanning/setup/
+      parent: sec_secret_scanning
       weight: 1
     - name: GitHub Actions
-      identifier: sec_secrets_scanning_github_actions
-      url: /security/code_security/static_analysis/github_actions/
-      parent: sec_secrets_scanning
+      identifier: sec_secret_scanning_github_actions
+      url: /security/code_security/secret_scanning/github_actions/
+      parent: sec_secret_scanning
       weight: 2
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
