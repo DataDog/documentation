@@ -118,5 +118,8 @@ For reliability, Datadog uses a rotating set of phone numbers to contact you. To
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info">
+You can also download the current version of the Datadog On-Call contact [here](https://datadog-on-call.s3.amazonaws.com/datadog-on-call.vcf). Note that the contact card is subject to change.
+</div>
 
 [1]: /service_management/mobile/?tab=ios
