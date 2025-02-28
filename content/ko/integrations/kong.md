@@ -13,7 +13,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: kong.total_requests
+      check:
+      - kong.total_requests
+      - kong.nginx.requests.total
       metadata_path: metadata.csv
       prefix: kong.
     process_signatures:
@@ -57,7 +59,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
-  - Supported OS::Linux
+  - Supported OS:Linux
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
@@ -66,7 +68,7 @@ tile:
   media: []
   overview: README.md#Overview
   resources:
-  - resource_type: 블로그
+  - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-kong-datadog
   support: README.md#Support
   title: Kong
@@ -87,14 +89,14 @@ Agent의 Kong 점검은 총 요청, 응답 코드, 클라이언트 연결 등을
 
 Kong 점검은 [Datadog Agent][2] 패키지에 포함되어 있으므로 Kong 서버에 추가 설치할 필요가 없습니다.
 
-### 구성
+### 설정
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
 #### 호스트
 
-호스트에서 실행 중인 에이전트에 대해 이 점검을 구성하려면:
+호스트에서 실행 중인 에이전트에 이 점검을 구성하는 방법:
 
 ##### 메트릭 수집
 
@@ -112,17 +114,17 @@ Kong 점검은 [Datadog Agent][2] 패키지에 포함되어 있으므로 Kong �
      - openmetrics_endpoint: http://localhost:8001/metrics
    ```
 
-2. [Agent를 재시작합니다][4].
+2. [에이전트를 재시작합니다][4].
 
 **참고**: 점검의 현재 버전(1.17.0+)은  메트릭 수집을 위해 [OpenMetrics][5]를 사용하며 Python 3이 필요합니다. 호스트가 Python 3을 사용할 수 없거나 이 점검의 레거시 버전을 사용하려면 다음 [config][6]을 참조하세요.
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 Kong 액세스 로그는 NGINX에서 생성되므로 기본 위치는 NGINX 파일과 동일합니다.
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
+1. 로그 수집은 Datadog 에이전트에서 기본적으로 비활성화되어 있습니다. `datadog.yaml` 파일에서 활성화합니다.
 
    ```yaml
    logs_enabled: true
@@ -145,7 +147,7 @@ Kong 액세스 로그는 NGINX에서 생성되므로 기본 위치는 NGINX 파�
 
    `path` 및 `service` 파라미터 값을 변경하고 환경에 맞춰 설정합니다. 사용 가능한 모든 설정 옵션은 [샘플kong.d/conf.yaml][3]을 참조하세요.
 
-3. [Agent를 재시작합니다][4].
+3. [에이전트를 재시작합니다][4].
 
 [1]: https://docs.konghq.com/hub/kong-inc/prometheus/
 [2]: https://docs.datadoghq.com/ko/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -154,9 +156,9 @@ Kong 액세스 로그는 NGINX에서 생성되므로 기본 위치는 NGINX 파�
 [5]: https://docs.datadoghq.com/ko/integrations/openmetrics/
 [6]: https://github.com/DataDog/integrations-core/blob/7.27.x/kong/datadog_checks/kong/data/conf.yaml.example
 {{% /tab %}}
-{{% tab "컨테이너화" %}}
+{{% tab "Containerized" %}}
 
-#### 컨테이너화
+#### 컨테이너화된 환경
 
 [Prometheus 플러그인 활성화][1]를 통해 OpenMetrics 메트릭이 Kong 서비스에 노출되는지 확인합니다. Agent 가 Kong 메트릭을 수집하기 전에 이를 먼저 구성해야 합니다.
 컨테이너화된 환경의 경우 아래 파라미터 적용에 대한 지침은 [자동탐지 통합 템플릿][2]을 참조하세요.
@@ -171,7 +173,7 @@ Kong 액세스 로그는 NGINX에서 생성되므로 기본 위치는 NGINX 파�
 
 ##### 로그 수집
 
-_Agent 버전 6.0 이상에서 사용 가능_
+_에이전트 버전 > 6.0에서 사용 가능_
 
 Datadog Agent에서는 로그 수집이 기본적으로 비활성화되어 있습니다. 활성화하려면 [Kubernetes 로그 수집 문서][3]를 참조하세요.
 
@@ -205,7 +207,7 @@ Kong 점검은 이벤트를 포함하지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원 팀][6]에 문의하세요.
+도움이 필요하신가요? [Datadog 지원팀][6]에 문의하세요.
 
 ## 참고 자료
 
