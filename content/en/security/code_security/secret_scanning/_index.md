@@ -1,6 +1,6 @@
 ---
 title: Secrets Scanning
-description: Learn about Datadog Secrets Scanning to find secrets in source code.
+description: Use Datadog Secrets Scanning to find secrets exposed in source code.
 is_beta: true
 algolia:
   tags: ['secrets scanning', 'datadog static analysis', 'SAST']
@@ -13,20 +13,16 @@ algolia:
 {{% /site-region %}}
 
 
-## Overview
 
-Datadog Secrets Scanning scans code and finds secrets. When possible, Datadog attempts to validate secrets and
-surface their status (valid, invalid) so that you can prioritize secrets remediation.
+Datadog Secrets Scanning scans code to find exposed secrets. Datadog also attempts to validate secrets and surface their status (valid, invalid) to help you prioritize secrets remediation.
 
-## Set up Static Code Analysis
+## Set up secrets scanning
 
-Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
-To get started, go to the [**Code Security** setup page][1] or learn how to set-up secrets scanning
-using [GitHub actions][5] or with [other CI providers][6].
+Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only). To get started, go to the [**Code Security Setup**][1] and click **Enable scanning for your repositories** or learn how to set up secrets scanning using [GitHub actions][5] or with [other CI providers][6].
 
-## Rules
+## Secrets scanning rules
 
-Datadog Secrets Scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all rules in the
+Datadog secrets scanning is powered by [Sensitive Data Scanner (SDS)][3] and includes all of the rules in the
 [Secrets and credentials category of SDS][4].
 
 

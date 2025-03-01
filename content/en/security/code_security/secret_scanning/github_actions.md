@@ -1,16 +1,14 @@
 ---
-description: Use Datadog and GitHub to detect Secrets in code in a CI pipeline.
+description: Use Datadog and GitHub to detect secrets exposed in code in a CI pipeline.
 is_beta: true
 title: Secrets Scanning and GitHub Actions
 ---
-## Overview
 
-Run a [Datadog Secrets Scanning][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8],
-that scans for secrets, invokes it against your codebase, and uploads the results to Datadog.
+Run a [Datadog secrets scanning][1] job in your GitHub Action workflows. This action wraps the [Datadog Static Analyzer][8] (that scans for secrets), invokes it against your codebase, and uploads the results to Datadog.
 
 ## Workflow
 
-Create a file in `.github/workflows` to run a Datadog Static Code Analysis job.
+Create a file in `.github/workflows` to run a Datadog secrets scanning job.
 
 The following is a sample workflow file.
 
@@ -37,9 +35,9 @@ jobs:
           secrets_enabled: true
 ```
 
-You **must** set your Datadog API and application keys as [secrets in your GitHub repository][4] whether at the organization or repository level. Ensure that you add the `code_analysis_read` scope to your Datadog application key. For more information, see [API and Application Keys][2].
+You **must** set your Datadog API and application keys as [secrets in your GitHub repository][4], at either the organization or repository level. Ensure that you add the `code_analysis_read` scope to your Datadog application key. For more information, see [API and Application Keys][2].
 
-Make sure to replace `dd_site` with the Datadog site you are using[3].
+Make sure to replace `dd_site` with the Datadog site you are using.
 
 ## Inputs
 

@@ -1,6 +1,6 @@
 ---
 title: Secrets Scanning with Generic CI Providers
-description: Learn about Datadog Static Secrets Scanning to scan code for quality issues and security vulnerabilities before your code reaches production.
+description: Use Datadog Static Secrets Scanning to scan pre-prod code for quality issues and security vulnerabilities.
 is_beta: true
 algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
@@ -12,9 +12,8 @@ algolia:
 </div>
 {{% /site-region %}}
 
-## Overview
 
-If you don't use GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
+If you don't use [GitHub Actions][5] to set up secrets scanning, you can run the [Datadog CI][4] CLI directly in your CI pipeline platform and upload Static Analysis Results Interchange Format (SARIF) reports to Datadog.
 
 Prerequisites:
 
@@ -26,7 +25,7 @@ Configure the following environment variables:
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key, created by your [Datadog organization][2], should include the `code_analysis_read` scope and be stored as a secret.  | Yes      |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2], should include the `code_analysis_read` scope, and be stored as a secret.  | Yes      |                 |
 | `DD_SITE`    | The [Datadog site][3] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
 
 
@@ -66,16 +65,14 @@ datadog-ci sarif upload /tmp/report.sarif
 ```
 
 <div class="alert alert-info">
-  This example uses the x86_64 Linux version of Datadog's static analyzer for secrets scanning. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
+  This example uses the x86_64 Linux version of Datadog's static analyzer for secrets scanning. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
 **Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
 
-<!-- ## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}} -->
 
 [1]: /account_management/api-app-keys/#api-keys
 [2]: /account_management/api-app-keys/#application-keys
 [3]: /getting_started/site/
 [4]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sarif
+[5]: /security/code_security/secret_scanning/github_actions/
