@@ -334,4 +334,4 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [23]: https://app.datadoghq.com/orchestration/resource/pod
 [24]: /infrastructure/containers/orchestrator_explorer
 [25]: /infrastructure/containers/kubernetes_resource_utilization
-[26]: /data_security/kubernetes/#running-container-as-root-user
+[26]: /data_security/kubernetes
