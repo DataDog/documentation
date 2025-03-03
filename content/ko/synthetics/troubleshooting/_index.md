@@ -225,7 +225,7 @@ Synthetics Private Location Worker가 충돌하는 경우 Windows에서 PowerShe
 
 프라이빗 위치 사용자(`dog`)는 다양한 이유로 `sudo`를 요구합니다. 일반적으로 이 사용자는 컨테이너의 프라이빗 위치를 시작하는 과정에서 `sudo` 액세스를 할 수 있는 특정 권한을 보유하고 있습니다. `dog` 사용자의 `sudo` 사용 가능성을 제한하는 정책이 있거나 컨테이너가 `dog` 사용자로 시작하지 못하도록 하는 정책(UID 501)이 있는지 확인하세요.
 
-또한 Private Location 버전 `>v1.27`에서는 Datadog이 `clone3` 시스템 호출 사용에 따라 달라집니다. 일부 이전 버전의 컨테이너 런타임 환경(예: Docker 버전 <20.10.10)에서는 기본 `seccomp` 정책에서 `clone3`이 지원되지 않습니다. 컨테이너 런타임 환경의 `seccomp` 정책에 `clone3`이 포함되어 있는지 확인하세요. 사용 중인 런타임 버전을 업데이트하거나, `seccomp` 정책에 `clone3`을 수동으로 추가하거나, `unconfined` seccomp 정책을 사용하여 이를 수행할 수 있습니다. 자세한 내용은 [Docker `seccomp` 설명서][13]를 참조하세요.
+또한 Private Location 버전 `>v1.27`에서는 Datadog이 `clone3` 시스템 호출 사용에 따라 달라집니다. 일부 이전 버전의 컨테이너 런타임 환경(예: Docker 버전 <20.10.10)에서는 `clone3`이 기본 `seccomp` 정책에서 지원되지 않습니다. 따라서 컨테이너 런타임 환경의 `seccomp` 정책에 `clone3`이 포함되어 있는지 확인해야 합니다. 사용 중인 런타임 버전을 업데이트하거나, `seccomp` 정책에 `clone3`을 수동으로 추가하거나, `unconfined` seccomp 정책을 사용하여 이를 수행할 수 있습니다. 자세한 내용은 [Docker의 `seccomp` 설명서][13]를 참조하세요.
 
 ## 참고 자료
 
