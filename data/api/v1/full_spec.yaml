@@ -1451,11 +1451,13 @@ components:
       enum:
       - open
       - invite
+      - embed
       nullable: true
       type: string
       x-enum-varnames:
       - OPEN
       - INVITE
+      - EMBED
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -7544,7 +7546,7 @@ components:
       properties:
         day_starts:
           description: The time of the day at which a one day cumulative evaluation
-            window starts. Must be defined in UTC time in `HH:mm` format.
+            window starts.
           example: 04:00
           type: string
         hour_starts:
@@ -7563,6 +7565,11 @@ components:
           maximum: 1
           minimum: 1
           type: integer
+        timezone:
+          description: The timezone of the time of the day of the cumulative evaluation
+            window start.
+          example: Europe/Paris
+          type: string
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -13185,7 +13192,7 @@ components:
       properties:
         author:
           $ref: '#/components/schemas/SharedDashboardAuthor'
-        created_at:
+        created:
           description: Date the dashboard was shared.
           format: date-time
           readOnly: true
@@ -13196,6 +13203,20 @@ components:
           type: string
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
@@ -13203,6 +13224,23 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
+        last_accessed:
+          description: The last time the shared dashboard was accessed. Null if never
+            accessed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         public_url:
           description: URL of the shared dashboard.
           readOnly: true
@@ -13222,6 +13260,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can receive an invitation to access
             to the shared dashboard.
           example:
@@ -13235,10 +13274,17 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
         token:
           description: A unique token assigned to the shared dashboard.
           readOnly: true
           type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       required:
       - dashboard_id
       - dashboard_type
@@ -13257,6 +13303,27 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      type: object
+    SharedDashboardInviteesItems:
+      description: The allowlisted invitees for an INVITE-only shared dashboard.
+      properties:
+        access_expiration:
+          description: Time of the invitee expiration. Null means the invite will
+            not expire.
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: Time that the invitee was created.
+          format: date-time
+          readOnly: true
+          type: string
+        email:
+          description: Email of the invitee.
+          example: test@datadoghq.com
+          type: string
+      required:
+      - email
       type: object
     SharedDashboardInvites:
       description: Invitations data and metadata that exists for a shared dashboard
@@ -13374,6 +13441,17 @@ components:
           format: int64
           type: integer
       type: object
+    SharedDashboardStatus:
+      description: Active means the dashboard is publicly available. Paused means
+        the dashboard is not publicly available.
+      enum:
+      - active
+      - paused
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - PAUSED
     SharedDashboardUpdateRequest:
       description: Update a shared dashboard's settings.
       example:
@@ -13384,6 +13462,20 @@ components:
         - test2@datadoghq.com
         share_type: invite
       properties:
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/SharedDashboardUpdateRequestGlobalTime'
         global_time_selectable_enabled:
@@ -13391,6 +13483,16 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
         selectable_template_vars:
           description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
@@ -13406,6 +13508,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can be given access to the shared
             dashboard.
           example:
@@ -13419,8 +13522,13 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
-      required:
-      - global_time
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       type: object
     SharedDashboardUpdateRequestGlobalTime:
       description: Timeframe setting for the shared dashboard.
@@ -14161,6 +14269,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -15427,7 +15538,7 @@ components:
       description: Object describing the synthetics tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: List of Synthetic tests with overrides.
           items:
             $ref: '#/components/schemas/SyntheticsCITest'
           type: array
@@ -17511,7 +17622,7 @@ components:
       description: Object describing the Synthetic tests to trigger.
       properties:
         tests:
-          description: Individual Synthetic test.
+          description: List of Synthetic tests.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerTest'
           type: array
@@ -22947,6 +23058,28 @@ components:
       example: 0
       format: int64
       type: integer
+    ViewingPreferences:
+      description: The viewing preferences for a shared dashboard.
+      properties:
+        high_density:
+          description: Whether the widgets on the shared dashboard should be displayed
+            with high density.
+          type: boolean
+        theme:
+          $ref: '#/components/schemas/ViewingPreferencesTheme'
+      type: object
+    ViewingPreferencesTheme:
+      description: The theme of the shared dashboard view. "system" follows your system's
+        default viewing theme.
+      enum:
+      - system
+      - light
+      - dark
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+      - LIGHT
+      - DARK
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
