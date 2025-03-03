@@ -45,10 +45,10 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
 : Configure CoTerm to act as a linter and take certain actions when it intercepts a command that matches a rule. See [CoTerm Configuration Rules][4].
 
 `enable_telemetry`
-: Enable or disable sending telemetry to Datadog.
+: Enable or disable sending telemetry to Datadog. Defaults to `false`.
 
 `enable_ptrace`
-: Enable or disable experimental `ptrace`-based process monitoring on Linux (off by default).
+: Enable or disable experimental `ptrace`-based process monitoring on Linux. Defaults to `false`.
 
 `connection_config`
 : 
