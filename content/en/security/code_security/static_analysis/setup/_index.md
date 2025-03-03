@@ -55,7 +55,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
 
-### Configuration Locations
+### Configuration locations
 
 Datadog Static Code Analysis can be configured within Datadog and/or by using a file within your repository's **root directory**.
 
@@ -120,7 +120,7 @@ Configurations at the repository level apply only to the repository selected. Th
 
 #### Repository level configuration (file)
 
-In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository level configuration defined in Datadog. Repository level file configurations are a useful method to quickly change rule configs and iterate on setup and testing.
+In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository level configuration defined in Datadog. Repository level file configurations are a useful method to change rule configs and iterate on setup and testing.
 
 ### Configuration format
 
@@ -202,7 +202,7 @@ Each entry in the `rulesets` array can be defined in one of two ways:
 
 ---
 
-## Rule Configuration
+## Rule configuration
 
 Within a ruleset's `rules` property, each rule is defined by its name and configuration. The properties available for each rule are:
 
@@ -210,7 +210,7 @@ Within a ruleset's `rules` property, each rule is defined by its name and config
 | ------------------ | -------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
 | `only`           | Array          | File paths or glob patterns. The rule will only be applied to files matching these patterns.       | None              |
 | `ignore`         | Array          | File paths or glob patterns to exclude from the rule's application.                               | None              |
-| `arguments`      | Object         | Parameters and values for the rule. Values can be simple scalars or specified on a per-path basis. | None              |
+| `arguments`      | Object         | Parameters and values for the rule. Values can be scalars or specified on a per-path basis. | None              |
 
 ---
 
@@ -417,7 +417,7 @@ Datadog automatically associates the team attached to a service when a violation
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 
