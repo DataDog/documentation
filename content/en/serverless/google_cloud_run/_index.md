@@ -1,7 +1,9 @@
 ---
 title: Google Cloud Run
 further_reading:
-
+- link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
+  tag: 'Blog'
+  text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
   tag: 'Blog'
   text: 'Collect traces, logs, and custom metrics from Cloud Run services'
