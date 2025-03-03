@@ -111,6 +111,11 @@ The following parameters can be used to configure a default proxy to use for Syn
 **Default**: `none`<br>
 Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
 
+`proxyTestRequestsBypassList`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Hosts for which the proxy defined with `proxyTestRequests` will not be used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
+
 ### Advanced configuration
 
 `concurrency`
@@ -202,6 +207,11 @@ Path to the JSON configuration file.
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
+
+`proxyTestRequestsBypassList`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Hosts for which the proxy defined with `proxyTestRequests` will not be used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 `--proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
