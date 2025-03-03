@@ -4801,8 +4801,7 @@ menu:
           - v2
         operationids:
           - PublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Unpublish App
       url: '#unpublish-app'
@@ -4814,8 +4813,7 @@ menu:
           - v2
         operationids:
           - UnpublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: Update App
       url: '#update-app'
@@ -4827,8 +4825,7 @@ menu:
           - v2
         operationids:
           - UpdateApp
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get App
       url: '#get-app'
@@ -4840,8 +4837,7 @@ menu:
           - v2
         operationids:
           - GetApp
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete App
       url: '#delete-app'
@@ -4853,8 +4849,7 @@ menu:
           - v2
         operationids:
           - DeleteApp
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Create App
       url: '#create-app'
@@ -4866,8 +4861,7 @@ menu:
           - v2
         operationids:
           - CreateApp
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List Apps
       url: '#list-apps'
@@ -4879,8 +4873,7 @@ menu:
           - v2
         operationids:
           - ListApps
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Delete Multiple Apps
       url: '#delete-multiple-apps'
@@ -4892,8 +4885,7 @@ menu:
           - v2
         operationids:
           - DeleteApps
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Audit
       url: /api/latest/audit/
