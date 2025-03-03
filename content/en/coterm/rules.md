@@ -105,7 +105,7 @@ All Lua snippets are executed inside a sandboxed [Luau][3] runtime. CoTerm injec
 : The arguments in your command. <br/>For `kubectl foo --bar=baz`, `args` is `["foo", "--bar=baz"]`.
 
 `flags` - table
-: A [table][4] of any `--` key-value flags in your command. <br/>For `command foo --bar baz` or `command foo --bar=baz`, `flags.bar = baz`.
+: A [table][4] of any `--` key-value flags in your command. <br/>For `command foo --bar baz` or `command foo --bar=baz`, `flags` has one entry where `key` is `bar` and `value` is `baz`. That is, `flags.bar = baz`.
 
 `k8s_current_context` - string
 : The `current-context` value from `~./kube/config`. If this value is not found, `k8s_current_context` is [nil][5].
