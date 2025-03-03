@@ -179,7 +179,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 
 3. Add `dd-java-agent.jar` and `java-function-invoker.jar` to your Dockerfile.
    Cloud Run Function code runs with a classpath that includes the function code and its dependencies. The Maven plugin automatically determines the classpath based on the dependencies in `pom.xml`.
-   If [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update your Dockerfile `ENTRYPOINT` to include the `--classpath` and `--target` options, along with the Java agent flag:
+   If [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update your Dockerfile `ENTRYPOINT` to include the `--classpath` and `--target` options, along with the Java agent flag `-javaagent:dd-java-agent.jar`:
 
    ```shell
     java -javaagent:dd-java-agent.jar -jar java-function-invoker-1.3.2 \
