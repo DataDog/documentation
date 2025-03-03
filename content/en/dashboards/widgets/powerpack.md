@@ -47,7 +47,7 @@ To make changes to the look or layout of a Powerpack:
 1. Make any desired changes to the Powerpack layout or any individual widget and select **Confirm Changes**.
 1. If this Powerpack is used in multiple dashboards, a prompt opens up to verify the instances of the Powerpack that are affected by this update.
 
-{{< img src="dashboards/widgets/powerpack/powerpack_actions_menu.png" alt="Action menu options to update a Powerpack and the Powerpack instance accessed through kebab on Powerpack header" style="width:80%;" >}}
+{{< img src="dashboards/widgets/powerpack/powerpack_actions_menu.png" alt="Action menu options to update a Powerpack and the Powerpack instance accessed through kebab on Powerpack header" style="width:60%;" >}}
 
 To make changes to the Powerpack Details:
 1. Hover over the header and click the kebab menu.
