@@ -158,7 +158,7 @@ ENTRYPOINT ["dotnet", "dotnet.dll"]
 ```
 #### Profiling
 The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
-The Dockerfile above also has the environment variables for the profiler.
+The previous Dockerfile example also has the environment variables for the profiler.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].

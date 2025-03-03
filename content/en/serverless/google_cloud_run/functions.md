@@ -29,7 +29,7 @@ In your main application, add the `dd-trace-js` library. See [Tracing Node.js ap
 Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-trace/init` module is required when the Node.js process starts.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Node.js Profiler][5] to add the environment variables.
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Node.js Profiler][5] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -51,7 +51,7 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 In your main application, add the `dd-trace-py` library. See [Tracing Python Applications][1] for instructions. You can also use [Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers][5].
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Python Profiler][7] to add the environment variables.
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Python Profiler][7] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -76,152 +76,151 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 1. Add `functions-framework-api` and other dependencies like `java-dogstatsd-client` to your `pom.xml`.
 
    **Example `pom.xml`**:
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>functions</groupId>
-  <artifactId>functions-hello-world</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>libraries-bom</artifactId>
-        <groupId>com.google.cloud</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>26.32.0</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
-  <properties>
-    <maven.compiler.target>17</maven.compiler.target>
-    <maven.compiler.source>17</maven.compiler.source>
-  </properties>
-
-  <dependencies>
-    <!-- Required for Function primitives -->
-    <dependency>
-      <groupId>com.google.cloud.functions</groupId>
-      <artifactId>functions-framework-api</artifactId>
-      <version>1.1.4</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.cloud.functions.invoker</groupId>
-      <artifactId>java-function-invoker</artifactId>
-      <version>1.4.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.datadoghq</groupId>
-      <artifactId>java-dogstatsd-client</artifactId>
-      <version>4.4.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.19.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.19.0</version>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <!--
-          Google Cloud Functions Framework Maven plugin
-
-          This plugin allows you to run Cloud Functions Java code
-          locally. Use the following terminal command to run a
-          given function locally:
-
-          mvn function:run -Drun.functionTarget=your.package.yourFunction
-        -->
-        <groupId>com.google.cloud.functions</groupId>
-        <artifactId>function-maven-plugin</artifactId>
-        <version>0.11.0</version>
-        <configuration>
-          <functionTarget>functions.HelloWorld</functionTarget>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
-</project>
-````
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <project xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     <modelVersion>4.0.0</modelVersion>
+   
+     <groupId>functions</groupId>
+     <artifactId>functions-hello-world</artifactId>
+     <version>1.0.0-SNAPSHOT</version>
+   
+     <dependencyManagement>
+       <dependencies>
+         <dependency>
+           <artifactId>libraries-bom</artifactId>
+           <groupId>com.google.cloud</groupId>
+           <scope>import</scope>
+           <type>pom</type>
+           <version>26.32.0</version>
+         </dependency>
+       </dependencies>
+     </dependencyManagement>
+   
+     <properties>
+       <maven.compiler.target>17</maven.compiler.target>
+       <maven.compiler.source>17</maven.compiler.source>
+     </properties>
+   
+     <dependencies>
+       <!-- Required for Function primitives -->
+       <dependency>
+         <groupId>com.google.cloud.functions</groupId>
+         <artifactId>functions-framework-api</artifactId>
+         <version>1.1.4</version>
+       </dependency>
+       <dependency>
+         <groupId>com.google.cloud.functions.invoker</groupId>
+         <artifactId>java-function-invoker</artifactId>
+         <version>1.4.0</version>
+       </dependency>
+       <dependency>
+         <groupId>com.datadoghq</groupId>
+         <artifactId>java-dogstatsd-client</artifactId>
+         <version>4.4.3</version>
+       </dependency>
+       <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-api</artifactId>
+         <version>2.19.0</version>
+       </dependency>
+       <dependency>
+         <groupId>org.apache.logging.log4j</groupId>
+         <artifactId>log4j-core</artifactId>
+         <version>2.19.0</version>
+       </dependency>
+     </dependencies>
+   
+     <build>
+       <plugins>
+         <plugin>
+           <!--
+             Google Cloud Functions Framework Maven plugin
+   
+             This plugin allows you to run Cloud Functions Java code
+             locally. Use the following terminal command to run a
+             given function locally:
+   
+             mvn function:run -Drun.functionTarget=your.package.yourFunction
+           -->
+           <groupId>com.google.cloud.functions</groupId>
+           <artifactId>function-maven-plugin</artifactId>
+           <version>0.11.0</version>
+           <configuration>
+             <functionTarget>functions.HelloWorld</functionTarget>
+           </configuration>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-shade-plugin</artifactId>
+           <version>3.2.4</version>
+           <executions>
+             <execution>
+               <phase>package</phase>
+               <goals>
+                 <goal>shade</goal>
+               </goals>
+             </execution>
+           </executions>
+         </plugin>
+       </plugins>
+     </build>
+   </project>
+   ````
 
 2. Run `mvn clean package` to update the `target` directory with the new `.jar` used in your Dockerfile.
 
-<div class="alert alert-info">
-As an alternative to the provided Dockerfile, you can also use Artifact Registry to store the images built from your function source code. You can use <a href="#">Google Cloud Build</a> or <a href="#">Buildpacks</a> to build and deploy your image.<br/>
-For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME</code>
-</div>
+   <div class="alert alert-info">
+   As an alternative to the provided Dockerfile, you can use Artifact Registry to store the images built from your function source code. You can use <a href="https://cloud.google.com/docs/buildpacks/build-function#java_4">Google Cloud Build</a> or <a href="https://cloud.google.com/docs/buildpacks/build-function">Buildpacks</a> to build and deploy your image.<br/>
+   For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME</code>
+   </div>
 
 3. Add `dd-java-agent.jar` and `java-function-invoker.jar` to your Dockerfile.
+   Cloud Run Function code runs with a classpath that includes the function code and its dependencies. The Maven plugin automatically determines the classpath based on the dependencies in `pom.xml`.
+   If [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath) with the Datadog Agent, update your Dockerfile `ENTRYPOINT` to include the `--classpath` and `--target` options, along with the Java agent flag:
 
-   Cloud Run Function code runs with a classpath that includes the function code itself and its dependencies.
-   The Maven plugin automatically computes the classpath based on the dependencies expressed in pom.xml.
-   When [invoking the Functions Framework directly](https://github.com/GoogleCloudPlatform/functions-framework-java?tab=readme-ov-file#function-classpath)with the datadog agent, you must update your dockerfile ENTRYPOINT to use `--classpath` and `--target` to indicate how to find the code and add the java option fo the datadog agent `-javaagent:dd-java-agent.jar`.
    ```shell
     java -javaagent:dd-java-agent.jar -jar java-function-invoker-1.3.2 \
     --classpath 'FUNCTION_JAR' \
     --target 'FUNCTION_TARGET'
    ```
-  - Replace `FUNCTION_JAR` with the target jar generated from the mvn step above with all dependencies.
-  - Replace `FUNCTION_TARGET` with Function entry point. For example, `gcfv2.HelloworldApplication`.
+   - Replace `FUNCTION_JAR`  with the target JAR generated from the Maven build, including all dependencies.
+   - Replace `FUNCTION_TARGET`  with the function's entry point (for example, `gcfv2.HelloworldApplication`).
 
-   **Example `Dockerfile`**:
-   ```dockerfile
-    # Download datadog java agent
-    FROM maven:3.8.3-openjdk-17 AS build
+     **Example `Dockerfile`**:
+     ```dockerfile
+     # Download Datadog Java Agent
+     FROM maven:3.8.3-openjdk-17 AS build
 
-    # Set working directory
-    WORKDIR /
+     # Set working directory
+     WORKDIR /
 
-    # Download the required Maven dependency
-    RUN mvn dependency:get -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 \
-    && mvn dependency:copy -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 -DoutputDirectory=/
+     # Download the required Maven dependency
+     RUN mvn dependency:get -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 \
+     && mvn dependency:copy -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 -DoutputDirectory=/
 
-    FROM openjdk:17-jdk
+     FROM openjdk:17-jdk
 
-    # Set the working directory in the container
-    WORKDIR /
-    ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-    COPY --from=build java-function-invoker-1.4.0.jar java-function-invoker.jar
+     # Set the working directory in the container
+     WORKDIR /
+     ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+     COPY --from=build java-function-invoker-1.4.0.jar java-function-invoker.jar
 
-    # Copy the JAR file into the container
-    COPY target/functions-hello-world-1.0.0-SNAPSHOT.jar helloworld.jar
-    ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
+     # Copy the JAR file into the container
+     COPY target/functions-hello-world-1.0.0-SNAPSHOT.jar helloworld.jar
+     ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
 
-    # Expose the port (Cloud Run automatically assigns the actual port via $PORT)
-    ENV PORT=8080
-    EXPOSE 8080 8125/udp
+     # Expose the port (Cloud Run automatically assigns the actual port via $PORT)
+     ENV PORT=8080
+     EXPOSE 8080 8125/udp
 
-    ENTRYPOINT ["java","-javaagent:/dd-java-agent.jar", "-jar", "/java-function-invoker.jar","--classpath", "/helloworld.jar","--target", "functions.HelloWorld"]
+     ENTRYPOINT ["java","-javaagent:/dd-java-agent.jar", "-jar", "/java-function-invoker.jar","--classpath", "/helloworld.jar","--target", "functions.HelloWorld"]
 
-   ```
+     ```
 
-4. Deploy the Java function by running the following command in the top level directory that contains your `pom.xml` and `Dockerfile`:
+4. To deploy the Java function, run the following command from the top-level directory containing your `pom.xml` and `Dockerfile`:
    ```shell
      gcloud beta run deploy FUNCTION_NAME \
      --source . \
@@ -234,10 +233,10 @@ For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PRO
    - Replace `FUNCTION_NAME` with the name of your Cloud Run function.
    - Ensure that you set [--clear-base-image][5] to deploy your Cloud Function with the Dockerfile.
 
-5. When you set up your [containers](#containers), ensure that you use the same container image as what you deployed in the previous steps.
+5. When setting up your [containers](#containers), use the same container image deployed in the previous steps.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Java Profiler][6] to add the environment variables.
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Java Profiler][6] to add the environment variables.
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
@@ -261,7 +260,7 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 In your main application, add the `dd-trace-go` library. See [Tracing Go Applications][1] for instructions.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Go Profiler][5] to add the environment variables.
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the Go Profiler][5] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -284,7 +283,7 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 In your main application, add the .NET tracing library. See [Tracing .NET Applications][1] for instructions.
 
 #### Profiling
-The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and proceed to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -612,7 +611,7 @@ public class HelloworldApplication implements HttpFunction {
 #### Dockerfile
 
 ```dockerfile
-# Download datadog java agent
+# Download Datadog Java Agent
 FROM maven:3.8.3-openjdk-17 AS build
 
 # Set working directory
