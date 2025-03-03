@@ -77,7 +77,7 @@ To search Powerpacks by tag in the widget tray, use `tag:search_string` syntax.
 
 Powerpacks are most useful when they can be customized by each team into their relevant context. Set configuration variables to allow this.
 
-The Powerpack creation modal suggests variables to add to your pack based on common filters that appear in queries. Hover over any suggested variable to see which graphs it affects. To add a variable that is not suggested, modify your graphs directly in the dashboard to use the desired variable as a filter or as a template variable. Modify the names of variables to clarify how others should use them.
+The Powerpack creation modal suggests variables to add to your pack based on common filters that appear in queries. Hover over any suggested variable to see which graphs it affects. To add a variable that is not suggested, modify your graphs directly in the dashboard to use the desired variable as a filter or template variable. Modify the names of variables to clarify how others should use them.
 
 Configuration variables serve two purposes. They can:
 1. Help a team scope a Powerpack to their context once, before the pack gets added to their dashboard (such as selecting a `service` to ensure a security Powerpack is relevant to the correct service).
@@ -89,7 +89,7 @@ Each Powerpack user decides whether to save a variable to their dashboard to all
 
 ### Updating a Powerpack
 
-Simplify the process of updating duplicate content across several dashboards by. Changes made to an existing custom Powerpack are reflected across all instances of the same Powerpack.
+Changes to an existing custom Powerpack are applied to all instances of that Powerpack, simplifying updates across multiple dashboards. Click **Edit Powerpack Layout** to modify synced Powerpack instances.
 
 ### Permissions
 By default, edit permissions for Powerpacks are restricted to the author. Editing permission can be modified at any time through the kebab menu in the widget tray or in the header of a Powerpack instance.

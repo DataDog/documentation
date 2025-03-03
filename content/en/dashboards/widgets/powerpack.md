@@ -81,12 +81,12 @@ Changes to a Powerpack instance **do not** apply to other Powerpack instances in
 
 To customize Powerpack instances displayed on your dashboard:
 1. Click the kebab menu on the instance header.
-1. Select an option from the **Powerpack Actions** menu. 
+1. Select an option from the **Powerpack Actions** menu:
     1. Edit Display Options: Customize the group header style, display colors, and name.
     1. Detach Instance: Unlink the instance from the original Powerpack.
     1. Remove from Dashboard: Remove the instance from the dashboard.
     1. Edit Powerpack Layout: Customize the layout of the widgets in the instance.
-    1. Edit Powerpack Details: Customize the title, description and associated tags.
+    1. Edit Powerpack Details: Customize the title, description, and associated tags.
 1. Choose new styling options for the header, update the group title, or configure the filters used by your Powerpack.
 1. Configure the tag values of your Powerpack instance. 
 
