@@ -48,8 +48,6 @@ The minimum Agent version required is `7.64` or higher.
 
      {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field_2.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:60%;">}}
 
-  5. Click **Next** to proceed to Step 2.
-
 ### Step 2: Profile inheritance 
 
 Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. 
@@ -58,9 +56,7 @@ Use profile inheritance to adopt configurations such as metadata, metrics, and t
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
-    **Note**: Changes to parent profiles are propagated to the child profiles.
-
-2. Click **Next** to proceed to Step 3.
+    **Note**: Changes to parent profiles are propagated to the child profiles, conversely, inherited data such as metrics and global tags cannot be overridden _from_ the child profiles.
 
 ### Step 3: Select reference devices
 
@@ -82,8 +78,6 @@ The **Scanned Devices** tab will show which devices were scanned with Remote Con
 
   {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
 
-Click **Next** to proceed to Step 5.
-
 ### Step 5: Define metadata
 
 Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices with inherited profiles contain predefined settings such as device name and description. Additionally, devices using the `_base.yaml` profile include predefined configurations. You have the option to override these defaults in the **Define Metadata** section.
@@ -95,8 +89,6 @@ Datadog provides reasonable defaults for most devices through out-of-the-box (OO
   2. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets, and on the side panel of a selected device:
 
      {{< img src="/network_device_monitoring/profile_onboarding/device_metadata.png" alt="The NDM side panel page profile, highlighting the metadata sections." style="width:100%;">}}
-
-  3. Click **Next** to proceed to Step 6.
 
 ### Step 6: Define metrics
 
@@ -118,15 +110,16 @@ Metrics can be added either from a device scan or by manually creating a new met
 
 1. To define a metric using the **Manual** option, click **Add Metrics**. This opens a modal displaying all available metrics for the device.
 2. Click **Create New Metric** at the top of the modal.
-3. Specify the OID (Scalar, or Tabular).
+3. Specify the OID (Scalar, or Tabular). 
 4. Click the dropdown in the search field to add the OID name.
-5. Select the metric type, scale factor, and extract value (Regex pattern) See [advanced options](?tab=manual#advanced-options-for-scalar-and-tabular-metrics).
+5. Select the metric type, scale factor, and extract value (Regex pattern). 
+See [advanced options for scalar metrics](?tab=manual#advanced-options-for-scalar-metrics) and [advanced options for tabular metrics](#advanced-options-for-tabular-metrics) for more information.
 6. Click **Create** to save the metric.
 7. This returns you to the define metrics screen where you can see the new metric that was added.
 
-   < insert video later, getting validation error in staging>
+   **insert video later, getting validation error in staging**
 
-#### Advanced options for scalar and tabular metrics:
+#### Advanced options for scalar metrics:
 
 [Metric Type][11]
 : One of `gauge`, `rate`, `monotonic_count`, or `monotonic_count_and_rate`. 
@@ -161,7 +154,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 
 {{% tab "Manual" %}}
 
-1. To define a global tag the **Manual** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
+1. To define a global tag using the **Manual** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
 2. Click **Create New Tag** at the top of the modal.
 3. Select the dropdown in the search field to add the OID name.
 4. Click the **Modification** dropdown to add a [modification](?tab=manual#global-tags-advanced-options).
@@ -187,9 +180,33 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 8: Save and sync Agents
+### Apply a profile to created devices
 
-After applying your configuration options to your device profile, click **Save and Sync Agents** to apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
+{{< tabs >}}
+{{% tab "Automatic" %}}
+
+After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
+
+{{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
+
+[14]: /agent/remote_config
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
+
+1. After you save a profile as a draft, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
+2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
+3. Restart the Datadog Agent.
+4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
+
+{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
+
+[4]: https://app.datadoghq.com/devices/profiles
+[13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Inventory page
 
@@ -218,30 +235,17 @@ Once a profile is applied, you cannot bring it back to draft status.
 - **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.<br></br>
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:40%;">}}
-                                                    
-### Apply a profile to created devices
-
-1. After you save a profile, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
-2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
-3. Restart the Datadog Agent.
-4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
-
-{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
-
+                                                  
 ## Troubleshooting
 
 - What is a profile?
 - What is a device scan?
 - Why do I see no matching devices? 
-- What happens if I don't have remote configuration enabled on my collectors?
-- Inherited data (metrics, global tags) cannot be overridden from the children 
+- What happens if I don't have remote configuration enabled on my collectors? need screenshot of error state that directs them to Fleet automation to upgrade to the most recent Datadog Agent or run scan manually.
 - Why would a device not be scanned?
-If remote config is not enabled (direct them to Fleet Automation) - need screenshot of error state  
- - Direct them to enabled RC 
- - Option to do manual scan 
-(RC is not enabled on Agent , upgrade to most recent Agent 7.64) OR RUN scan manually
 
-### Add Tabular Tags
+
+### Advanced options for tabular metrics
 
 Adding tags to tabular metrics is similar to adding global tags, with two additional options:
 
@@ -278,6 +282,5 @@ Adding tags to tabular metrics is similar to adding global tags, with two additi
 [4]: https://app.datadoghq.com/devices/profiles
 [9]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-an-index
 [10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
-[13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
