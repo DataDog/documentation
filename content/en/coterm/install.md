@@ -48,7 +48,7 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
 : Enable or disable sending telemetry to Datadog.
 
 `enable_ptrace`
-: Enable or disable `ptrace`-based process monitoring.
+: Enable or disable experimental `ptrace`-based process monitoring on Linux (off by default).
 
 `connection_config`
 : 

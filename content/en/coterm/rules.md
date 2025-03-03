@@ -78,7 +78,7 @@ CoTerm can take the following actions when `rule` returns `true`:
 - `approval`: Require approval before running the command
 - `incidents`: Associate the recording with the [Datadog Incident][6] that the user is responding to, if any. If the user is responding to more than one incident, they are prompted to pick one.
 
-To take no action when `rule` returns `true`, set `actions: []`.
+To take no action (other than running the command) when `rule` returns `true`, set `actions: []`.
 
 ### Rule evaluation
 
@@ -102,10 +102,10 @@ All Lua snippets are executed inside a sandboxed [Luau][3] runtime. CoTerm injec
 : The executable in your command. <br/>For `kubectl foo bar`, `executable` is `kubectl`.
 
 `args` - array&lt;string&gt;
-: The arguments in your command. <br/>For `kubectl foo bar`, `args` is `["foo", "bar"]`.
+: The arguments in your command. <br/>For `kubectl foo --bar=baz`, `args` is `["foo", "--bar=baz"]`.
 
 `flags` - table
-: A [table][4] of CLI options and arguments in your command. <br/>For `command --key value` or `command --key=value`, `flags.key` is `value`.
+: A [table][4] of any `--` key-value flags in your command. <br/>For `command foo --bar baz` or `command foo --bar=baz`, `flags` will contain 1 entry with `key`=`bar` and `value`=`baz`.
 
 `k8s_current_context` - string
 : The `current-context` value from `~./kube/config`. If this value is not found, `k8s_current_context` is [nil][5].
