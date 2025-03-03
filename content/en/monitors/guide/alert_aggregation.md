@@ -1,5 +1,5 @@
 ---
-title: Alert Aggregation 
+title: Alert aggregation 
 further_reading:
 - link: "/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations"
   tag: "Documentation"
