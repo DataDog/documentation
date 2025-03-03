@@ -30,7 +30,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 - [Resource collection][2] must be enabled for your AWS accounts.
 - For the best experience, Datadog strongly recommends to use the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy. If you have advanced security requirements, it is possible to create a [custom IAM role with more limited permissions][4], however, this may not be compatible with other Datadog products.
-- To view security misconfigurations, [CSM][3] must be enabled.
+- To view security misconfigurations on the [Security findings overlay](#security-findings), [CSM][3] must be enabled.
 
 **Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the user-interface(UI).
 
@@ -80,7 +80,7 @@ This diagram excludes EBS, NAT Gateway, and other components that might clutter 
 
 To apply a saved view to your diagram:
 
-- Navigate to [Infrastructure > Cloudcraft][7]. Select one or more accounts, regions, and resources. Apply any filtering you want to be on your saved view, click **+Save as new view**.
+- Navigate to [Infrastructure > Cloudcraft][7]. Select one or more accounts, regions, and resources. Apply any desired filters to your saved view, then click **+Save as new view**.
 - Select the desired saved view from the menu at the top of the diagram view. The diagram automatically updates to reflect the chosen view.
 
 {{< img src="datadog_cloudcraft/saved_views.png" alt="Screenshot of the saved views" style="width:50%;" >}}
