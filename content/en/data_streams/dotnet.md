@@ -15,7 +15,7 @@ title: Setup Data Streams Monitoring for .NET
 | Amazon SQS        | [Amazon SQS SDK][5]             | 2.48.0                 | 2.48.0 or later            |
 | Amazon SNS        | [Amazon SNS SDK][6]             | 3.6.0                  | 3.6.0 or later             |
 | IBM MQ            | [IBMMQDotnetClient][7]          | 2.49.0                 | 2.49.0 or later            |
-| Azure Service Bus <br><br> (Requires enabling support for [OpenTelemetry Instrumentation Libraries][8]) | [Azure.Messaging.ServiceBus][9] | 2.53.0                 | 2.53.0 or later            |
+| Azure Service Bus <br><br> (requires enabling support for [OpenTelemetry Instrumentation Libraries][8]) | [Azure.Messaging.ServiceBus][9] | 2.53.0                 | 2.53.0 or later            |
 
 ### Installation
 
