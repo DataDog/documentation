@@ -46,7 +46,7 @@ By default, users with the Datadog Admin role have access to view and set up sca
 
 ### Add a scanning group
 
-A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][3] documentation to learn more about query filters.
+A scanning group determines what data to scan. It consists of a query filter, a set of buttons to enable scanning for logs, APM, RUM, and events, and the option to set sampling rates between 10% to 99% for each product. See the [Log Search Syntax][3] documentation to learn more about query filters.
 
 For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
@@ -56,7 +56,9 @@ To set up a scanning group, perform the following steps:
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
-1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
+1. Click the option buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
+1. Optionally, set a sampling rate between 10% to 99% for the products you want.
+1. If you set or modify a sampling rate, click the box to confirm that you understand how it can affect your settings.
 1. Click **Create**.
 
 By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
