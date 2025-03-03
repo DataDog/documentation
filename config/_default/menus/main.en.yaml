@@ -3324,6 +3324,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_monitors
       weight: 12
+    - name: Budgets
+      url: /cloud_cost_management/budgets
+      parent: cloud_cost
+      identifier: cloud_cost_budgets
+      weight: 13
     - name: APM
       url: tracing/
       pre: apm
@@ -5878,11 +5883,16 @@ menu:
       parent: security_platform
       identifier: security_ato_protection
       weight: 9
+    - name: Research Feed
+      url: security/research_feed
+      parent: security_platform
+      identifier: security_research_feed
+      weight: 10
     - name: Guides
       url: security/guide
       parent: security_platform
       identifier: security_guides
-      weight: 10
+      weight: 11
     - name: Cloud SIEM
       url: security/cloud_siem/
       pre: siem
