@@ -192,6 +192,17 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 
+{{% tab "GitLab" %}}
+Datadog's GitLab integration is currently in closed preview. To request access for your organization, please reach out to [Datadog Support][1].
+
+Once your organization has access, follow the [GitLab installation guide][2].
+
+**Note**: The scope of the service account's personal access token needs to be at least **read_api**.
+
+[1]: https://www.datadoghq.com/support/
+[2]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -252,7 +263,8 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 ### Limitations
 
-- Change lead time stage breakdown metrics are only available for GitHub.
+- Change lead time stage breakdown metrics are only available for GitHub and GitLab.
+  - The GitLab integration is currently in closed preview. Access can be requested [here][8].
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
@@ -275,3 +287,4 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 [5]: /tracing/software_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
 [7]: /dora_metrics/data_collected
+[8]: https://www.datadoghq.com/support/
