@@ -189,36 +189,36 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
    - Replace `FUNCTION_JAR`  with the target JAR generated from the Maven build, including all dependencies.
    - Replace `FUNCTION_TARGET`  with the function's entry point (for example, `gcfv2.HelloworldApplication`).
 
-     **Example `Dockerfile`**:
-     ```dockerfile
-     # Download Datadog Java Agent
-     FROM maven:3.8.3-openjdk-17 AS build
+   **Example `Dockerfile`**:
+   ```dockerfile
+   # Download Datadog Java Agent
+   FROM maven:3.8.3-openjdk-17 AS build
+   
+   # Set working directory
+   WORKDIR /
+   
+   # Download the required Maven dependency
+   RUN mvn dependency:get -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 \
+   && mvn dependency:copy -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 -DoutputDirectory=/
+   
+   FROM openjdk:17-jdk
+   
+   # Set the working directory in the container
+   WORKDIR /
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   COPY --from=build java-function-invoker-1.4.0.jar java-function-invoker.jar
+   
+   # Copy the JAR file into the container
+   COPY target/functions-hello-world-1.0.0-SNAPSHOT.jar helloworld.jar
+   ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
+   
+   # Expose the port (Cloud Run automatically assigns the actual port via $PORT)
+   ENV PORT=8080
+   EXPOSE 8080 8125/udp
+   
+   ENTRYPOINT ["java","-javaagent:/dd-java-agent.jar", "-jar", "/java-function-invoker.jar","--classpath", "/helloworld.jar","--target", "functions.HelloWorld"]
 
-     # Set working directory
-     WORKDIR /
-
-     # Download the required Maven dependency
-     RUN mvn dependency:get -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 \
-     && mvn dependency:copy -Dartifact=com.google.cloud.functions.invoker:java-function-invoker:1.4.0 -DoutputDirectory=/
-
-     FROM openjdk:17-jdk
-
-     # Set the working directory in the container
-     WORKDIR /
-     ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
-     COPY --from=build java-function-invoker-1.4.0.jar java-function-invoker.jar
-
-     # Copy the JAR file into the container
-     COPY target/functions-hello-world-1.0.0-SNAPSHOT.jar helloworld.jar
-     ENV JAVA_OPTS=-javaagent:dd-java-agent.jar
-
-     # Expose the port (Cloud Run automatically assigns the actual port via $PORT)
-     ENV PORT=8080
-     EXPOSE 8080 8125/udp
-
-     ENTRYPOINT ["java","-javaagent:/dd-java-agent.jar", "-jar", "/java-function-invoker.jar","--classpath", "/helloworld.jar","--target", "functions.HelloWorld"]
-
-     ```
+   ```
 
 4. To deploy the Java function, run the following command from the top-level directory containing your `pom.xml` and `Dockerfile`:
    ```shell
