@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs10247/oci-table-updates
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
