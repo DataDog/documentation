@@ -121,7 +121,16 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const { widgetParams, hits } = renderOptions;
-    const { container, basePathName } = widgetParams;
+    const { partnersPage, container, basePathName } = widgetParams;
+
+    if (partnersPage) {
+        const partnersHitsArray = hits.filter((hit) => hit.type === 'partners');
+        const partnersListItemsHTML = generateJoinedHits(partnersHitsArray, 'Partners');
+        container.innerHTML = partnersListItemsHTML;
+        return;
+    }
+
+    if (container.id === "hits-partners") return;
 
     const gettingStartedHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'getting started');
     const docsHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'documentation' || hit.category === null);

@@ -11,7 +11,7 @@ export function getHitData(hit, searchQuery = '') {
     const regexQry = new RegExp(`(${joinedMatchingWordsFromSearch})`, 'gi');
     const highlightTitle = (hit._highlightResult.title.value || title);
     const highlightContent = (hit._highlightResult.content.value || '');
-    const highlightSectionHeader = (hit._highlightResult.section_header.value || '');
+    const highlightSectionHeader = (hit._highlightResult.section_header?.value || '');
 
     return {
         relpermalink: cleanRelPermalink,
