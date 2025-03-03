@@ -19,11 +19,11 @@
  */
 
 import { buildCustomizationMenuUi } from '../fileRendering/customizationMenu';
-import { resolveFilters } from 'cdocs-data/dist/api/shared/resolveFilters';
-import { ClientSideFiltersManifest } from 'cdocs-data/dist/schemas/pageFilters';
-import { getTraitValsFromUrl } from 'cdocs-data/dist/api/browser/getTraitValsFromUrl';
-import { writeTraitValsToUrl } from 'cdocs-data/dist/api/browser/writeTraitValsToUrl';
-import { CdocsClientStorage } from 'cdocs-data/dist/api/browser/CdocsClientStorage';
+import { ClientSideFiltersManifest } from 'cdocs-data/ClientSideFiltersManifest';
+import { getTraitValsFromUrl } from 'cdocs-data/getTraitValsFromUrl';
+import { writeTraitValsToUrl } from 'cdocs-data/writeTraitValsToUrl';
+import { CdocsClientStorage } from 'cdocs-data/CdocsClientStorage';
+import { resolveFilters } from 'cdocs-data/resolveFilters';
 import { ClientFunction } from 'cdocs-markdoc/src/types';
 import { reresolveFunctionNode } from '../markdocCustomization/renderer/reresolver';
 import {
