@@ -93,7 +93,7 @@ if (hasErrors) {
 
 ### Use the integration in a Hugo site
 
-- Install this package in your Hugo site according to the `corp-node-packages` instructions.
+- Install this package in your Hugo site according to [the `corp-node-packages` instructions][12].
 - Choose a filepath for the global assets partial, and make sure that asset is included in your Hugo layout.
 - Add a `.js` file similar to the provided [example script](#example-build-script), and run it as part of your build **before** Hugo processes any files.
 
@@ -122,3 +122,4 @@ JSX is used for the templating of some components because it's a commonly known 
 [9]: ./test/config/mocks/validSite/
 [10]: ./test/MarkdocHugoIntegration/validSite.test.ts
 [11]: ./test/__snapshots__/validSite/
+[12]: https://github.com/datadog/corp-node-packages?tab=readme-ov-file#how-do-i-install-the-package-in-a-consumer
