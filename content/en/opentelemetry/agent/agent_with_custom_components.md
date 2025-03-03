@@ -12,7 +12,7 @@ further_reading:
 {{< /callout >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-danger"><strong>The Datadog Agent with embedded OpenTelemetry Collector is not FedRAMP or FIPS compliant.</strong><br> FedRAMP customers should not use the embedded OpenTelemetry Collector and should continue using standard Agent deployments.</div>
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
 {{< /site-region >}}
 
 This guide explains how to build a Datadog Agent image with additional OpenTelemetry components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
@@ -206,8 +206,6 @@ Create a sample configuration file and run your custom Agent to ensure everythin
 You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
 
 For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
-
-<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
 
 ## Troubleshooting
 
