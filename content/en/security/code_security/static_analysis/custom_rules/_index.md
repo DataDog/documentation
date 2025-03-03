@@ -1,5 +1,5 @@
 ---
-title: Static Analysis Custom Rules
+title: Static Code Analysis (SAST) Custom Rules
 description: Write Static Analysis Custom Rules to check the security and quality of your code.
 is_beta: false
 algolia:
@@ -17,9 +17,9 @@ algolia:
 
 [Datadog Static Code Analysis][1] lets you define static analysis rules as custom rules. You can share these custom rules within your organization.
 
-## Rules organization
+## Rule organization
 
-Static analysis rules are organized within rulesets. A ruleset is a collection of rules. There are no constraints
+SAST rules are organized within rulesets. A ruleset is a collection of rules. There are no constraints
 on how rules are organized within a ruleset. For example, some users might want to have rulesets for a specific language and others for a category.
 
 A ruleset must have a unique name with only letters, numbers, and hyphens (`-`). Examples of valid
@@ -74,7 +74,7 @@ The analyzer includes a few helper functions to help you write rules:
 
 ### Rule examples
 
-All Datadog default rules are available in [Code Security][4]. You can easily analyze and copy them to create your custom rule.
+All Datadog default rules are available in [Code Security][4]. You can easily analyze and copy them to create your own custom rules.
 
 
 [1]: https://app.datadoghq.com/ci/code-analysis
