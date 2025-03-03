@@ -53,7 +53,7 @@ You **must** run an analysis of your repository on the default branch before res
 
 ## Customize your configuration
 
-By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s).  You can customize which rulesets or rules you want to run or ignore along with other parameters locally in your repository or within the Datadog App.
+By default, Datadog Static Code Analysis scans your repositories with [Datadog's default rulesets][6] for your programming language(s). You can customize which rulesets or rules to run or ignore, in addition to other parameters. You can customize these settings locally in your repository or within the Datadog App.
 
 ### Configuration Locations
 
@@ -88,7 +88,7 @@ rulesets:
    
 ```
 
-The merge of these YAML files with a overlay/patch method would be the following, if we merged in order, first file with the second
+If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
 
 ```yaml
 rulesets:
@@ -104,33 +104,33 @@ rulesets:
 
 ```
 
-As you can see, the `ignore: ["**"]` from the first file has been overlayed with the `ignore: ["my_ignored_file.file"]` since the second file's value takes precedence in the event of a conflict due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
+As you can see, the `ignore: ["**"]` from the first file was overlayed with the `ignore: ["my_ignored_file.file"]`. This happened because there was a conflict and the second file's value took precedence due to merge order. The `args` field from the first file is retained because there is no conflicting value in the second file.
 
-#### Org-Wide Configuration
+#### Org level configuration
 
 {{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
 
-#### Repository Level Configuration
+#### Repository level configuration
 
 {{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
 
-#### Repository Level Configuration (File)
+#### Repository level configuration (file)
 
-In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository Level Configuration defined in Datadog. Repository level file configurations are useful as method to quickly change rule configs and iterate on setup and testing.
+In addition to the configurations provided for the Org and Repository level, you can also define a configuration at the root of your repo in the form of ``static-analysis.datadog.yml``. This file takes precedence over the Repository level configuration defined in Datadog. Repository level file configurations are a useful method to quickly change rule configs and iterate on setup and testing.
 
-### Configuration Format
+### Configuration format
 
-The following configuration format applies to all configuration locations: Org-Wide, Repository Level, and Repository Level (file).
+The following configuration format applies to all configuration locations: Org level, Repository level, and Repository level (file).
 
 The full structure of a configuration is as follows:
 
 ```yaml
 rulesets:
-  - ruleset-name # A Ruleset we want to run with default configurations
+  - ruleset-name # A ruleset we want to run with default configurations
   - ruleset-name:
     # Only apply this ruleset to the following paths/files
     only:
@@ -179,21 +179,20 @@ The YAML configuration file supports the following top-level keys:
 
 | **Property** | **Type** | **Description**                                                                                                              | **Default** |
 | ------------------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| `rulesets`       | Array          | A list of rulesets to analyze. Each element can be either a simple ruleset name (string) or an object with detailed configuration. | *Required*      |
-| `only`           | Array          | A list of file paths or glob patterns. If provided, only matching files will be analyzed across all rulesets.                      | None              |
+| `rulesets`       | Array          | A list of rulesets to analyze. Each element can be either a ruleset name (string) or an object with detailed configuration. | *Required*      |
+| `only`           | Array          | A list of file paths or glob patterns. If provided, only matching files are analyzed across all rulesets.                      | None              |
 | `ignore`         | Array          | A list of file paths or glob patterns to exclude from analysis across all rulesets.                                                | None              |
 
 *Note:* The `only` and `ignore` keys here act as file filters that apply to the entire configuration file.
 
 ---
 
-## Ruleset Configuration
+## Ruleset configuration
 
 Each entry in the `rulesets` array can be defined in one of two ways:
 
-1. **Simple Ruleset Declaration:**A plain string (e.g., `ruleset-name`) indicates that the ruleset should run with its default settings.
-2. **Detailed Ruleset Object:**
-   An object where the key is the ruleset name and the value is an object containing additional configuration. The available properties for a detailed ruleset are:
+1. **Simple Ruleset Declaration:** A plain string (for example, `ruleset-name`) indicates that the ruleset should run with its default settings.
+2. **Detailed Ruleset Object:** An object where the key is the ruleset name and the value is an object containing additional configuration. The available properties for a detailed ruleset are:
 
 | **Property** | **Type** | **Description**                                                                               | **Default** |
 | ------------------ | -------------- | --------------------------------------------------------------------------------------------------- | ----------------- |
@@ -205,21 +204,21 @@ Each entry in the `rulesets` array can be defined in one of two ways:
 
 ## Rule Configuration
 
-Within a ruleset’s `rules` property, each rule is defined by its name and configuration. The properties available for each rule are:
+Within a ruleset's `rules` property, each rule is defined by its name and configuration. The properties available for each rule are:
 
 | **Property** | **Type** | **Description**                                                                              | **Default** |
 | ------------------ | -------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
 | `only`           | Array          | File paths or glob patterns. The rule will only be applied to files matching these patterns.       | None              |
-| `ignore`         | Array          | File paths or glob patterns to exclude from the rule’s application.                               | None              |
+| `ignore`         | Array          | File paths or glob patterns to exclude from the rule's application.                               | None              |
 | `arguments`      | Object         | Parameters and values for the rule. Values can be simple scalars or specified on a per-path basis. | None              |
 
 ---
 
-## Argument Configuration
+## Argument configuration
 
 Rule arguments can be defined in one of two formats:
 
-1. **Static Value:**Directly assign a value to an argument.
+1. **Static Value:** Directly assign a value to an argument.
 
    ```yaml
    arguments:
