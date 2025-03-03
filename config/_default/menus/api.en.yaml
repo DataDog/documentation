@@ -2658,7 +2658,8 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
@@ -2743,7 +2744,8 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
@@ -4737,6 +4739,42 @@ menu:
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
       generated: true
+    - name: Patch AWS Scan Options
+      url: '#patch-aws-scan-options'
+      identifier: agentless-scanning-patch-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAwsScanOptions
+        unstable: []
+        order: 3
+    - name: Delete AWS Scan Options
+      url: '#delete-aws-scan-options'
+      identifier: agentless-scanning-delete-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAwsScanOptions
+        unstable: []
+        order: 4
+    - name: Post AWS Scan Options
+      url: '#post-aws-scan-options'
+      identifier: agentless-scanning-post-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsScanOptions
+        unstable: []
+        order: 2
     - name: Get AWS Scan Options
       url: '#get-aws-scan-options'
       identifier: agentless-scanning-get-aws-scan-options
@@ -4748,7 +4786,7 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
-        order: 3
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder

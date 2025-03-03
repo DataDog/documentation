@@ -174,6 +174,14 @@ components:
       required: true
       schema:
         type: string
+    AwsAccountId:
+      description: The ID of an AWS account.
+      example: '123456789012'
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     CaseIDPathParameter:
       description: Case's UUID or key
       example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
@@ -1769,6 +1777,10 @@ components:
             type: string
           type: array
       type: object
+    AccountId:
+      description: The ID of the AWS account.
+      example: '184366314700'
+      type: string
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -2918,6 +2930,10 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    AwsAccountId:
+      description: The ID of an AWS account.
+      example: '123456789012'
+      type: string
     AwsCURConfig:
       description: AWS CUR config.
       properties:
@@ -3155,6 +3171,28 @@ components:
           example: true
           type: boolean
       type: object
+    AwsScanOptionsCreateData:
+      description: Object for the scan options of a single AWS account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsScanOptionsAttributes'
+        id:
+          $ref: '#/components/schemas/AwsAccountId'
+        type:
+          $ref: '#/components/schemas/AwsScanOptionsType'
+      required:
+      - id
+      - attributes
+      - type
+      type: object
+    AwsScanOptionsCreateRequest:
+      description: Request object that includes the scan options to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsCreateData'
+      required:
+      - data
+      type: object
     AwsScanOptionsData:
       description: Single AWS Scan Options entry.
       properties:
@@ -3167,7 +3205,7 @@ components:
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       type: object
-    AwsScanOptionsResponse:
+    AwsScanOptionsListResponse:
       description: Response object that includes a list of AWS scan options.
       properties:
         data:
@@ -3175,6 +3213,12 @@ components:
           items:
             $ref: '#/components/schemas/AwsScanOptionsData'
           type: array
+      type: object
+    AwsScanOptionsResponse:
+      description: Response object that includes the scan options of an AWS account.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsData'
       type: object
     AwsScanOptionsType:
       default: aws_scan_options
@@ -3185,6 +3229,48 @@ components:
       type: string
       x-enum-varnames:
       - AWS_SCAN_OPTIONS
+    AwsScanOptionsUpdateAttributes:
+      description: Attributes for the AWS scan options to update.
+      properties:
+        lambda:
+          description: Indicates if scanning of Lambda functions is enabled.
+          example: true
+          type: boolean
+        sensitive_data:
+          description: Indicates if scanning for sensitive data is enabled.
+          example: false
+          type: boolean
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          example: true
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          example: true
+          type: boolean
+      type: object
+    AwsScanOptionsUpdateData:
+      description: Object for the scan options of a single AWS account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsScanOptionsUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/AccountId'
+        type:
+          $ref: '#/components/schemas/AwsScanOptionsType'
+      required:
+      - attributes
+      - type
+      type: object
+    AwsScanOptionsUpdateRequest:
+      description: Request object that includes the scan options to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsUpdateData'
+      required:
+      - data
+      type: object
     AzureUCConfig:
       description: Azure config.
       properties:
@@ -33033,6 +33119,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
+              This does not restrict API or inventory SQL access to the vulnerability
+              data source.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -33343,7 +33432,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AwsScanOptionsResponse'
+                $ref: '#/components/schemas/AwsScanOptionsListResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -33352,9 +33441,98 @@ paths:
       summary: Get AWS Scan Options
       tags:
       - Agentless Scanning
-      x-menu-order: 3
+      x-menu-order: 1
       x-undo:
         type: safe
+    post:
+      description: Activate Agentless scan options for an AWS account.
+      operationId: CreateAwsScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsScanOptionsCreateRequest'
+        description: The definition of the new scan options.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsScanOptionsResponse'
+          description: Agentless scan options enabled successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Post AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteAwsScanOptions
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/aws/{account_id}:
+    delete:
+      description: Delete Agentless scan options for an AWS account.
+      operationId: DeleteAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the Agentless scan options for an activated account.
+      operationId: UpdateAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsScanOptionsUpdateRequest'
+        description: New definition of the scan options.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/api_keys:
     get:
       description: List all API keys available for your account.
@@ -48376,12 +48554,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: List vulnerable assets
       tags:
       - Security Monitoring
       x-menu-order: 26
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -48474,6 +48657,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: Get SBOM
       tags:
       - Security Monitoring
@@ -48482,7 +48667,7 @@ paths:
         type: safe
       x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/signals/notification_rules:
     get:
       description: Returns the list of notification rules for security signals.
@@ -49068,12 +49253,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: List vulnerabilities
       tags:
       - Security Monitoring
       x-menu-order: 25
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
@@ -55330,7 +55520,7 @@ tags:
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
     teams to install Agents on every host or where Agents cannot be installed.\nGo
-    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
+    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
   name: Agentless Scanning
 - description: Datadog App Builder provides a low-code solution to rapidly develop
     and integrate secure, customized applications into your monitoring stack that

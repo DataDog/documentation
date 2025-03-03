@@ -23,6 +23,22 @@
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "Get AWS Scan Options"
   },
+  "CreateAwsScanOptions": {
+    "description": "Activate Agentless scan options for an AWS account.",
+    "summary": "Post AWS Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Request object that includes the scan options to create."
+  },
+  "DeleteAwsScanOptions": {
+    "description": "Delete Agentless scan options for an AWS account.",
+    "summary": "Delete AWS Scan Options"
+  },
+  "UpdateAwsScanOptions": {
+    "description": "Update the Agentless scan options for an activated account.",
+    "summary": "Patch AWS Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object that includes the scan options to update."
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
