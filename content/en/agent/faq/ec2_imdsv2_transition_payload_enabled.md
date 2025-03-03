@@ -13,4 +13,4 @@ Furthermore, hosts updated from a version preceding 7.64.0 to a later release ma
 
 If your host has already configured the `ec2_prefer_imdsv2` flag to `true`, you won't notice any changes because IMDSv2 is already enabled.
 
-Should any issues arise after updating a host, please revert to the previous behavior by setting `ec2_imdsv2_transition_payload_enabled` to `false` in your host configuration, and **contact Support** via the Contact support page in the application.
+If any issues arise after updating a host, you can revert to the previous behavior by setting `ec2_imdsv2_transition_payload_enabled` to `false` in your host configuration. You can also [contact Support](/help).
