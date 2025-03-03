@@ -58,7 +58,7 @@ To set up a scanning group, perform the following steps:
 1. Enter a name and description for the group.
 1. Click the option buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Optionally, set a sampling rate between 10% to 99% for the products you want. When you set a sampling rate, rules that obfuscate data are not able to obfuscate all sensitive data within the scanning group because only sampled data is obfuscated.
-    - If you set or modify a sampling rate, hover over **x rules that have an action on match** to see the affected rules. Click the box to confirm that you understand how sampling can affect what sensitive data is obfuscated.
+    - If you set or modify a sampling rate, hover over **x rules that have an action on match** to see the affected rules. Check the box to confirm that you understand how sampling can affect what sensitive data is obfuscated.
 1. Click **Create**.
 
 By default, a newly-created scanning group is disabled. To enable a scanning group, click the corresponding toggle on the right side.
