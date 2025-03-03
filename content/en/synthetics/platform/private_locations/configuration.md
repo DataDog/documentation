@@ -114,7 +114,7 @@ Proxy URL used by the private location to send test requests to the endpoint. PA
 `proxyTestRequestsBypassList`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Hosts for which the proxy defined with `proxyTestRequests` will not be used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
+Hosts for which the proxy defined with `proxyTestRequests` is not used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 ### Advanced configuration
 
@@ -211,7 +211,7 @@ Proxy URL used by the private location to send test requests to the endpoint. PA
 `proxyTestRequestsBypassList`
 : **Type**: Array of Strings <br>
 **Default**: `none`<br>
-Hosts for which the proxy defined with `proxyTestRequests` will not be used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
+Hosts for which the proxy defined with `proxyTestRequests` is not used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 `--proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
