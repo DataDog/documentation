@@ -193,7 +193,9 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-Datadog's GitLab integration is in closed preview. To request access for your organization, reach out to [Datadog Support][1].
+<div class="alert alert-warning">Datadog's GitLab integration is in closed preview.</div>
+
+To request access to Datadog's GitLab integration for your organization, reach out to [Datadog Support][1].
 
 After your organization has access, follow the [GitLab installation guide][2].
 
