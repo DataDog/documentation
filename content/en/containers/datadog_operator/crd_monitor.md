@@ -80,7 +80,7 @@ To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonito
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /containers/kubernetes/installation?tab=datadogoperator#installation
 [4]: /monitors/types/metric/?tab=threshold
-[5]: api/latest/monitors/#create-a-monitor
+[5]: /api/latest/monitors/#create-a-monitor
 [6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-crashloopbackoff.yaml
 [7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-deployment-replicas.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-imagepullbackoff.yaml
