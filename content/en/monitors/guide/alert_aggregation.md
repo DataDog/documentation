@@ -26,7 +26,7 @@ Let's take this example:
 
 {{< img src="/monitors/guide/alert_aggregation/monitor_query_multi_alert.png" alt="Example monitor query grouped by topic and partition" style="width:100%;" >}}
 
-### Simple Alert
+### Simple alert
 
 A Simple Alert monitor is a monitor that will aggregate your alerts into a single unique alert.
 {{< img src="monitors/guide/alert_aggregation/simple_alert_notification.png" alt="Notification configuration for a simple alert monitor" style="width:100%;" >}}
