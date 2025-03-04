@@ -1,2 +1,2 @@
-1. Enter the Crowdstrike HEC ingestion URL.
-1. Enter the Crowdstrike HEC API token.
+1. Enter the CrowdStrike HEC ingestion URL.
+1. Enter the CrowdStrike HEC API key.
