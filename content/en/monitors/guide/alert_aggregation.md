@@ -63,7 +63,7 @@ Multi Alerts are great when a service is owned by multiple teams (e.g. each team
 You're running an e-commerce order processing system, and messages are sent to the "order-events" topic.  
   
 #### Benefits of aggregation
-If multiple partitions lag (e.g., partition 1 and partition 3), you need separate alerts because different partitions might correspond to different types of orders (e.g., domestic vs. international).  
+If multiple partitions lag (for example, partition 1 and partition 3), you need separate alerts because different partitions might correspond to different types of orders (such as domestic vs. international).  
 
 This level of detail helps engineers respond quickly and with precision.
 
