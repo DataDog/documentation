@@ -6,13 +6,15 @@ algolia:
   tags: ['secrets scanning', 'datadog static analysis', 'SAST']
 ---
 
+{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+Secrets Scanning is in Preview. Contact your Customer Success team to get access.
+{{< /callout >}}
+
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Secrets Scanning is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
-
-
 
 Datadog Secrets Scanning scans code to find exposed secrets. Datadog also attempts to validate secrets and surface their status (valid, invalid) to help you prioritize secrets remediation.
 
