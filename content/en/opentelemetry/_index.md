@@ -2,7 +2,6 @@
 title: OpenTelemetry in Datadog
 aliases:
 - /tracing/setup_overview/open_standards/
-- /opentelemetry/otel_terms
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
@@ -51,10 +50,10 @@ cascade:
 
 Datadog provides advanced observability for all your application telemetry, regardless of its source. By supporting OpenTelemetry, Datadog offers:
 
-- **Flexibility and Choice**: Use standardized instrumentation while maintaining freedom to adapt as your technology needs evolve
-- **Comprehensive Language Support**: Consistently monitor applications across your entire tech stack
-- **Unified Instrumentation**: Maintain a single approach to instrumentation across your systems
-- **Powerful Analytics**: Combine OpenTelemetry's standardization with Datadog's robust analysis, visualization, and alerting capabilities
+- **Flexibility and choice**: Use standardized instrumentation while maintaining freedom to adapt as your technology needs evolve.
+- **Comprehensive language support**: Consistently monitor applications across your entire tech stack.
+- **Unified instrumentation**: Maintain a single approach to instrumentation across your systems.
+- **Powerful analytics**: Combine OpenTelemetry's standardization with Datadog's robust analysis, visualization, and alerting capabilities.
 
 Whether you're already using OpenTelemetry or considering adoption, Datadog provides flexible options to meet your needs.
 
@@ -67,13 +66,15 @@ There are two key decisions to make when using OpenTelemetry with Datadog:
 
 The features available to you depend on these choices. For example, using the OpenTelemetry API with the Datadog SDK provides access to more Datadog features than using the OpenTelemetry SDK alone.
 
+For more information, read [Feature Compatibility][9].
+
 ## Instrument your applications
 
 There are several ways to instrument your applications with OpenTelemetry and Datadog. Each approach provides different features and levels of vendor neutrality.
 
-- **OpenTelemetry API**: Use the OpenTelemetry API with Datadog's SDK implementation
-- **OpenTelemetry Instrumentation Libraries**: Extend Datadog's observability to additional frameworks and technologies
-- **Full OpenTelemetry**: Use the OpenTelemetry SDK and API for a vendor-neutral setup
+- **OpenTelemetry API**: Use the OpenTelemetry API with Datadog's SDK implementation.
+- **OpenTelemetry instrumentation libraries**: Extend Datadog's observability to additional frameworks and technologies.
+- **Full OpenTelemetry**: Use the OpenTelemetry SDK and API for a vendor-neutral setup.
 
 For more information, see [Instrument Your Applications][8]. 
 
@@ -122,3 +123,4 @@ For other setup options, including direct OTLP intake, see [Send Data to Datadog
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [7]: /opentelemetry/setup
 [8]: /opentelemetry/instrument/
+[9]: /opentelemetry/compatibility/

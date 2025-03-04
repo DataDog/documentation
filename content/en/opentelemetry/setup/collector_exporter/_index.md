@@ -120,7 +120,7 @@ service:
 
 This basic configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5].
 
-For a complete list of configuration options for the Datadog Exporter, see the [fully documented example configuration file][8]. Additional options like `api::site` and `host_metadata` settings may be relevant depending on your deployment.
+For a complete list of configuration options for the Datadog Exporter, see the [fully documented example configuration file][8]. Additional options like `api.site` and `host_metadata` settings may be relevant depending on your deployment.
 
 #### Batch processor configuration
 

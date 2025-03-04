@@ -844,11 +844,16 @@ menu:
       identifier: otel_propagation
       parent: otel_reference
       weight: 1102
+    - name: Trace IDs
+      url: /opentelemetry/reference/trace_ids
+      identifier: otel_trace_ids
+      parent: otel_reference
+      weight: 1103
     - name: OTLP Metric Types
       url: /opentelemetry/reference/otlp_metric_types
       identifier: otel_otlp_metric_types
       parent: otel_reference
-      weight: 1103
+      weight: 1104
     - name: Developers
       url: developers/
       pre: dev-code
