@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Ensuring the health and performance of systems requires timely and actionable notifications. However, the effectiveness of alerts isn't just about when they are triggered but also about how many alerts are created. This is where alert aggregation becomes critical. 
+Ensuring system health and performance of requires timely and actionable notifications. However, effective alerts depend not only on timing, but also on the number of alerts generated. Alert aggregation is critical in managing this balance.
 
 Let's say you're responsible for an e-commerce website. When an issue arises, do you want a single alert summarizing the problem or multiple but specific alerts pin-pointing every aspect of the failure?   
 The answer will depend on your system's architecture, the nature of the issue, and your team's workflow but knowing how to aggregate the alerts will help ensure teams are alerted to issues while not receiving more notification than necessary. 
