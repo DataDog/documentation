@@ -193,9 +193,9 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-Datadog's GitLab integration is currently in closed preview. To request access for your organization, please reach out to [Datadog Support][1].
+Datadog's GitLab integration is currently in closed preview. To request access for your organization, reach out to [Datadog Support][1].
 
-Once your organization has access, follow the [GitLab installation guide][2].
+After your organization has access, follow the [GitLab installation guide][2].
 
 **Note**: The scope of the service account's personal access token needs to be at least **read_api**.
 
