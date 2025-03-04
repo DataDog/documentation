@@ -62,8 +62,8 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 [IAM API][7]
 : Allows Datadog to authenticate with Google Cloud.
 
-[Google Cloud Billing API][8] 
-: Allows developers to manage billing for their Google Cloud Platform projects programmatically. See the [Cloud Cost Management (CCM)](#cloud-cost-management-ccm)
+[Cloud Billing API][8] 
+: Allows developers to manage billing for their Google Cloud Platform projects programmatically. See the [Cloud Cost Management (CCM)](#cloud-cost-management-ccm) section for more information.
 
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
@@ -270,7 +270,7 @@ Datadog's [Google Cloud Cost Management][45] provides insights for engineering a
 Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
 To use this feature, see [Getting Started with Cloud SIEM][46].
 
-To view security findings from [Google Cloud Security Command Center][47] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab & follow the setup instructions on the [Google Cloud Security Command Center guide][48].
+To view security findings from [Google Cloud Security Command Center][47] in Cloud SIEM, toggle the **Enable collection of security findings** option under the **Security Findings** tab and follow the setup instructions on the [Google Cloud Security Command Center guide][48].
 
 {{< img src="integrations/google_cloud_platform/security_findings.png" alt="The security findings tab in the Google Cloud integration tile" style="width:90%;" >}}
 
