@@ -1,4 +1,5 @@
-import { ClientVariable, ClientFunction, functions, Config } from 'cdocs-markdoc';
+import { ClientVariable, ClientFunction, Config } from 'cdocs-markdoc/src/types';
+import functions from 'cdocs-markdoc/src/functions';
 
 /**
  * Given a ClientFunction node, re-evaluate it to see
