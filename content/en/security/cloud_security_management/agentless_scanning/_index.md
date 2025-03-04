@@ -58,13 +58,13 @@ The following diagram illustrates how Agentless Scanning works:
     **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security Management enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
 2. For Lambda functions, the scanners fetch the function's code.
-3. For Container Images from registries, the scanners will scan images from all running tasks, by pulling the layers from the registries using standard OCI APIs.
+3. For Container Images from registries, the scanners scan images from all running tasks, by pulling the layers from the registries using standard OCI APIs.
 
     **Note**: The last 1000 published images in the accessible private registries are also selected for scanning.
 
 4. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
 5. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
-6. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
+6. Using the collected package list, along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.

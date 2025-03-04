@@ -45,7 +45,7 @@ The following container image registries are supported for container image scans
 - AWS ECR public
 - AWS ECR private
 
-**Note**: container image scanning from registry is only supported if you have installed agentless with:
+**Note**: Container image scanning from registry is only supported if you have installed Agentless with:
   - Cloudformation Integrations >= v2.0.8
   - Terraform Agentless Module >= v0.11.7
 
