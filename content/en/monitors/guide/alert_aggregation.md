@@ -57,7 +57,7 @@ However, if multiple partitions are lagging, you might not see every single affe
 {{% /collapse-content %}}
 
 {{% collapse-content title="Multi Alert" level="h4" expanded=false %}}
-Multi Alerts are great when a service is owned by multiple teams (e.g. each team is responsible for a dedicated component). Depending on which component is causing an issue, a different team should be notified.
+Multi alerts are great for when a service is owned by multiple teams (each team is responsible for a dedicated component). Depending on which component is causing an issue, a different team should be notified.
 
 #### Scenario
 You're running an e-commerce order processing system, and messages are sent to the "order-events" topic.  
