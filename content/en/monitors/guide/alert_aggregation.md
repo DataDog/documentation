@@ -31,7 +31,7 @@ Let's take this example:
 A simple alert monitor aggregates your alerts into a single unique alert.
 {{< img src="monitors/guide/alert_aggregation/simple_alert_notification.png" alt="Notification configuration for a simple alert monitor" style="width:100%;" >}}
 
-Using the example, no matter which topic or partition breaches the threshold the monitor will alert. All notifications are aggregated into one single alert.
+Using the example, no matter which topic or partition breaches the threshold, the monitor sends a single alert. All notifications are aggregated into one alert.
 
 For more information, see [Configure Monitors - Simple alert][1].
 
