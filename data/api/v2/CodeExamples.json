@@ -53,6 +53,13 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "UpdateAwsScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Patch AWS Scan Options returns \"No Content\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",

@@ -32,6 +32,7 @@ further_reading:
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
+- [Quality Gates](#quality-gates)
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
@@ -132,9 +133,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
-| [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 | [Repository default branch][33] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
 | [GitHub account settings][35]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
+
+### Quality Gates events
+| Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|                              |
+| [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"Quality Gates" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
 ### Cloud Security Platform events
 
@@ -376,7 +381,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [34]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_test_service_settings%20%28%40action%3Acreated%20OR%20%40action%3Amodified%29
 [35]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Agithub_opt_ins%20%28%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [36]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters%20%40action%3Amodified
-[37]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
+[37]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Quality%20Gates%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [38]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ADashboard%20%40asset.type%3Adashboard%20%40action%3Acreated
 [39]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ADashboard%20%40asset.type%3Adashboard%20%40action%3Adeleted
 [40]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3ADashboard%20%40asset.type%3Aembed%20%40action%3Aaccessed

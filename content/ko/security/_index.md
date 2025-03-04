@@ -70,28 +70,27 @@ further_reading:
   text: 클라우드 환경이 공격에 취약하게 되는 비밀 파악
 - link: https://www.datadoghq.com/blog/cloud-security-roundup-infrastructure-identity/
   tag: 블로그
-  text: 'Cloud security research and guide roundup: Infrastructure and access'
+  text: '클라우드 보안 연구 및 가이드 정리: 인프라스트럭처 및 액세스'
 - link: https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/
   tag: 블로그
-  text: 'Cloud security research and guide roundup: DevSecOps, threat detection, and
-    AI'
+  text: '클라우드 보안 연구 및 가이드 정리: DevSecOps, 위협 탐지 및 AI'
 title: Datadog 보안
 ---
 
 ## 개요
 
-Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organization's shared goals.
+프로덕션 보안 운영을 더 확장하고 신속하게 수행하세요. Datadog Security는 애플리케이션, 호스트, 컨테이너 및 클라우드 인프라스트럭처 전반에 걸쳐 실시간 위협 탐지 및 지속적인 구성 감사를 제공합니다. 뛰어난 성능의 Datadog 옵저버빌리티 플랫폼과 결합된 Datadog Security는 조직의 목표에 맞춰 보안과 운영 간에 효율적인 통합을 제공합니다.
 
-Datadog Security includes [Application Security](#application-security), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
+Datadog Security에는 [Application Security](#application-security), [Cloud SIEM](#cloud-siem), [Cloud Security Management](#cloud-security-management)가 포함됩니다. 자세한 내용은 [30초 제품 둘러보기][14]에서 확인하세요.
 
 ## 애플리케이션 보안
 
 Datdog [애플리케이션 보안][1]은 SSRF(Server-Side-Request-Forgery), SQL 삽입, Log4Shell, XSS(Reflected Cross-Site-Scripting) 등 코드 수준 취약성을 악용하려는 애플리케이션 수준 공격에 관측성을 제공합니다. ASM에서는 [Datadog APM][2], [Datadog 에이전트][3] 및 인앱 감지 규칙을 활용해 애플리케이션 환경에서 위협을 감지합니다. 제품 [둘러보기](https://www.datadoghq.com/guided-tour/security/application-security-management/)를 확인해 자세히 알아보세요.
 
-In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
-- [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
-- [Software Composition Analysis (SCA)][22] for identifying open source dependencies in both your repositories and your services
-- [Runtime Code Analysis (IAST)][23] for code-level vulnerabilities in your services
+위협 탐지 외에도 Datadog은 다음 기능을 포함하는 [Code Security][20]을 통해 개발부터 생산까지 엔드투엔드 코드 및 라이브러리 취약점 탐지를 제공합니다.
+- 자사 코드의 보안 및 품질 문제를 식별하기 위한 [Static Code Analysis (SAST)][21] 
+- 리포지토리와 서비스 모두에서 오픈 소스 종속성을 식별하기 위한 [Software Composition Analysis (SCA)][22] 
+- 서비스의 코드 수준 취약점에 대한 [Runtime Code Analysis (IAST)][23] 
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="공격 흐름과 화염 그래프를 표시하는 Datadog 보안 신호 패널" width="75%">}}
 

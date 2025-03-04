@@ -309,7 +309,7 @@ Datadog Agent는 널리 사용되는 다양한 운영 체제 및 플랫폼에서
 
 {{% tab "Cloud and containers" %}}
 
-## 64-BIT X86 지원 
+## 64-BIT X86 지원
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
@@ -341,6 +341,7 @@ Agent 6 및 7은 다음 [AIX][1] 버전을 지원합니다.
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
+- 7.3 TL3 SP0
 
 
 [1]: /ko/agent/basic_agent_usage/aix/

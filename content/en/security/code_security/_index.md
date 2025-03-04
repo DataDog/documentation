@@ -9,7 +9,7 @@ Code Security scans your first-party code and open source libraries used in your
 
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
-- [Runtime Code Analysis (IAST)][3] for code-level vulnerabilities in your services
+- [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.

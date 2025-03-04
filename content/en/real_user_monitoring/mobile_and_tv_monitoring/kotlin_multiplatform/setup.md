@@ -1,7 +1,5 @@
 ---
 title: Kotlin Multiplatform Monitoring Setup
-is_beta: true
-private: true
 description: Collect RUM and Error Tracking data from your Kotlin Multiplatform projects.
 aliases:
     - /real_user_monitoring/kotlin-multiplatform/
@@ -20,10 +18,6 @@ further_reading:
 
 ---
 ## Overview
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in Preview.
-{{< /beta-callout >}}
 
 This page describes how to instrument your applications for both [Real User Monitoring (RUM)][1] and [Error Tracking][2] with the Kotlin Multiplatform SDK. You can follow the steps below to instrument your applications for RUM (includes Error Tracking) or Error Tracking if you have purchased it as a standalone product.
 
@@ -74,6 +68,7 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 | 0.0.3                                    | 2.17.0                  |
 | 0.4.0                                    | 2.20.0                  |
 | 0.5.0                                    | 2.22.1                  |
+| 1.0.0                                    | 2.23.0                  |
 
 #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -89,12 +84,12 @@ cocoapods {
 
    pod("DatadogObjc") {
      linkOnly = true
-     version = 2.17.0
+     version = 2.23.0
    }
 
    pod("DatadogCrashReporting") {
      linkOnly = true
-     version = 2.17.0
+     version = 2.23.0
    }
 }
 ```

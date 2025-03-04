@@ -7,7 +7,7 @@ aliases:
 
 The following capabilities are supported relative to each language's tracing library:
 
-| Code SecurityCapability                        | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
+| Code Security Capability                        | Java    | .NET     | Node.js                                          | Python        | Go              | Ruby          | PHP           |
 |------------------------------------------------|---------|----------|--------------------------------------------------|---------------|-----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)    | 1.1.4   | 2.16.0   | 4.0.0                                            | 1.5.0         | 1.49.0          | 1.11.0        | 0.90.0        |
 

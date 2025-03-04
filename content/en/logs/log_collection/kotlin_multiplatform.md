@@ -12,10 +12,6 @@ further_reading:
 
 ## Overview
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Kotlin Multiplatform Monitoring is in Preview.
-{{< /beta-callout >}}
-
 Send logs to Datadog from your Android or iOS applications with [Datadog's `dd-sdk-kotlin-multiplatform-logs` client-side logging library][1] and use the following features:
 
 * Log to Datadog in JSON format natively.
@@ -56,6 +52,8 @@ kotlin {
     | 0.0.2                                    | 2.17.0                  |
     | 0.0.3                                    | 2.17.0                  |
     | 0.4.0                                    | 2.20.0                  |
+    | 0.5.0                                    | 2.22.1                  |
+    | 1.0.0                                    | 2.23.0                  |
 
     #### Adding native iOS dependencies using the CocoaPods plugin
 
@@ -71,12 +69,12 @@ kotlin {
 
         pod("DatadogObjc") {
             linkOnly = true
-            version = 2.17.0
+            version = 2.23.0
         }
 
         pod("DatadogCrashReporting") {
             linkOnly = true
-            version = 2.17.0
+            version = 2.23.0
         }
     }
     ```

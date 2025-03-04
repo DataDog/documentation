@@ -278,8 +278,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## Collect traces from non-Lambda resources
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
-
 Datadog can infer APM spans based on the incoming Lambda events for the AWS managed resources that trigger the Lambda function. This can be help visualize the relationship between AWS managed resources and identify performance issues in your serverless applications. See [additional product details][12].
 
 The following resources are currently supported:

@@ -219,15 +219,17 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    Package the Datadog Lambda and tracing libraries within the image:
 
     ```sh
     npm install datadog-lambda-js dd-trace
     ```
 
     Note that the minor version of the `datadog-lambda-js` package always matches the layer version. For example, `datadog-lambda-js v0.5.0` matches the content of layer version 5.
+   
+    You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
-2. Install the Datadog Lambda Extension
+3. Install the Datadog Lambda Extension
 
     Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
@@ -237,7 +239,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
-3. Redirect the handler function
+4. Redirect the handler function
 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -249,7 +251,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
-4. Configure the Datadog site and API key
+5. Configure the Datadog site and API key
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
@@ -381,7 +383,7 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If using the Datadog Lambda Layer (recommended), do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
+<div class="alert alert-warning">Do not install the Datadog Lambda Library as a layer <i>and</i> as a JavaScript package. If you installed the Datadog Lambda Library as a layer, do not include <code>datadog-lambda-js</code> in your <code>package.json</code>, or install it as a dev dependency and run <code>npm install --production</code> before deploying.</div>
 
 ## Minimize cold start duration
 Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.

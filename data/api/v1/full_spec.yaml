@@ -7546,7 +7546,7 @@ components:
       properties:
         day_starts:
           description: The time of the day at which a one day cumulative evaluation
-            window starts. Must be defined in UTC time in `HH:mm` format.
+            window starts.
           example: 04:00
           type: string
         hour_starts:
@@ -7565,6 +7565,11 @@ components:
           maximum: 1
           minimum: 1
           type: integer
+        timezone:
+          description: The timezone of the time of the day of the cumulative evaluation
+            window start.
+          example: Europe/Paris
+          type: string
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.

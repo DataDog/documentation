@@ -67,7 +67,7 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
-* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
+* You must define your parsing rule to match the entire log entry, as each rule applies from the beginning to the end of the log.
 * Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
 ### Matcher and filter

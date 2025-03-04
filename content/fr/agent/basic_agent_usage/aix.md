@@ -23,6 +23,7 @@ Cette page décrit les processus d'installation et de configuration de l'Agent D
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
+* AIX 7.3 TL3 SP0+
 
 ## Configurer l'Agent Datadog pour l'APM
 
