@@ -43,7 +43,7 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● If your organization restricts identities by domain, you must add Datadog's customer identity `C0147pk0i` as an allowed value in your policy.
 {{% /site-region %}}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● The Google Cloud integration requires the below APIs to be enabled for the folder or organization you want to monitor:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● The Google Cloud integration requires the below APIs to be enabled **for each of the projects** you want to monitor:
 
 <div class="alert alert-warning">Ensure that any projects being monitored are not configured as <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">scoping projects</a> that pull in metrics from multiple other projects.</div>
 
@@ -63,13 +63,17 @@ Use this guide to get started monitoring your Google Cloud environment. This app
 : Allows Datadog to authenticate with Google Cloud.
 
 [Google Cloud Billing API][8] 
-: Allows developers to manage billing for their Google Cloud Platform projects programmatically.
+: Allows developers to manage billing for their Google Cloud Platform projects programmatically. See the [Cloud Cost Management (CCM)](#cloud-cost-management-ccm)
 
 <div class="alert alert-info">You can confirm if these APIs are enabled by going to <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
 ### Best practices for monitoring multiple projects
 
-By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
+#### Enable per-project cost and API quota attribution
+
+By default, Google Cloud attributes the cost of monitoring API calls, as well as API quota usage, to the project containing the service account for this integration. As a best practice for Google Cloud environments with multiple projects, enable per-project cost attribution of monitoring API calls and API quota usage. With this enabled, costs and quota usage are attributed to the project being *queried*, rather than the project containing the service account. This provides visibility into the monitoring costs incurred by each project, and also helps to prevent reaching API rate limits.
+
+Reach out to [Datadog support][19] to enable this feature.
 
 ### Organization-level metric collection
 
@@ -95,6 +99,7 @@ Org-level (or folder-level) monitoring is recommended for comprehensive coverage
 - [Monitoring Viewer][53] provides **read-only** access to the monitoring data availabile in your Google Cloud environment
 - [Cloud Asset Viewer][54] provides **read-only** access to cloud assets metadata
 - [Browser][55] provides **read-only** access to browse the hierarchy of a project
+- [Service Usage Consumer][63] (**optional**, for multi-project environments) enables [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution)
 6. Click **Save**.
 
 **Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
@@ -300,6 +305,7 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [16]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#log-collection
 [17]: https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/
 [18]: /integrations/google_cloud_platform/#resource-changes-collection
+[19]: /support/
 [20]: https://www.datadoghq.com/blog/network-attacks-google-cloud-armor/
 [21]: https://www.datadoghq.com/blog/track-bigquery-costs-performance/
 [22]: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
@@ -343,3 +349,4 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [60]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#google-services
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
+[63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
