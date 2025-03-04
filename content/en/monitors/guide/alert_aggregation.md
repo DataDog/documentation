@@ -22,7 +22,7 @@ This guide explores various alert aggregation capabilities and strategies for di
 
 By default, Datadog sends an alert for each monitored group. However, you can choose to receive a single notification, regardless of how many monitored groups breach the threshold.
 
-Let's take this example:
+Consider this example, you have a monitor query grouped by multiple attributes, in this case the query is grouped by `topic` and `partition`.
 
 {{< img src="/monitors/guide/alert_aggregation/monitor_query_multi_alert.png" alt="Example monitor query grouped by topic and partition" style="width:100%;" >}}
 
