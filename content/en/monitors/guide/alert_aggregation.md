@@ -40,7 +40,7 @@ For more information, see [Configure Monitors - Simple alert][1].
 A multi alert monitor sends a notification for each unique combination of groups.  
 {{< img src="/monitors/guide/alert_aggregation/multi_alert_notification.png" alt="Notification configuration for a multi alert monitor" style="width:100%;" >}}
 Using the example, the monitor sends a notification each time a combination of `topic` and `partition` breaches the threshold.  
-When using Multi Alert, using [Variables][2] become very useful to get more granularity in your notifications. They help you get a specific message depending on the group that triggers the alert.
+With multi alert monitors, use [variables][2] to get more granularity in your notification. They help customize messages based on the specific group that triggers the alert.
 
 For more information, see [Configure Monitors - Multi alert][3].
 
