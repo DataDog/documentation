@@ -1,4 +1,20 @@
-Extensible Markup Language (XML) is a log format used to store and transport structured data. It is organized in a tree-like structure to represent nested information and uses attributes to define the data. See [XML examples](#xml-examples). This processor parses XML so the data can be processed and sent to different destinations.
+This processor parses Extensible Markup Language (XML) so the data can be processed and sent to different destinations. XML is a log format used to store and transport structured data. It is organized in a tree-like structure to represent nested information and uses tags and attributes to define the data. For example, this is XML data using only tags (`<recipe>`,`<type>`, and `<name>`) and no attributes:
+
+```xml
+<recipe>
+    <type>pasta</type>
+    <name>Carbonara</name>
+</recipe>
+```
+
+This is an XML example where the tag `recipe` has the attribute `type`:
+
+```xml
+<recipe>
+    <recipe type="pasta">
+    <name>Carbonara</name>
+</recipe>
+```
 
 To set up this processor:
 
@@ -28,26 +44,6 @@ For the following message structure, use `outer_key.inner_key.double_inner_key` 
     },
     "d": "d value"
 }
-```
-
-##### XML examples
-
-This is an XML example with no attributes:
-
-```xml
-<recipe>
-    <type>pasta</type>
-    <name>Carbonara</name>
-</recipe>
-```
-
-This is an XML example with the attribute `type`:
-
-```xml
-<recipe>
-    <recipe type="pasta">
-    <name>Carbonara</name>
-</recipe>
 ```
 
 ##### Always use text key example
