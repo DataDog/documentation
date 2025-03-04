@@ -39,7 +39,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 | `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
 | `DD_TAGS`                                        | String        | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
-## Source Map support
+## Source map support
 
 If the source code of your Node.js application is transpiled or bundled,
 you need to generate and publish the source maps along with the code - either inline or as separate files.
