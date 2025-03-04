@@ -394,9 +394,9 @@ Datadog automatically generates a `command` tag, so that you can filter for:
 - Container management software, for example:  `command:docker`, `command:kubelet`)
 - Common workloads, for example:  `command:ssh`, `command:CRON`)
 
-### Aggregating processes
+In addition to all existing host-level tags, processes are tagged by `user`.
 
-[Tagging][3] enhances navigation. In addition to all existing host-level tags, processes are tagged by `user`.
+#### Containerized environments tags
 
 Furthermore, processes in ECS containers are also tagged by:
 
@@ -420,7 +420,7 @@ If you have configuration for [Unified Service Tagging][4] in place, `env`, `ser
 Having these tags available lets you tie together APM, logs, metrics, and process data.
 **Note**: This setup applies to containerized environments only.
 
-#### Defining rules to create process tags
+#### Rules to create custom tags
 
 You can create rule definitions to add manual tags to processes based on the command line.
 
