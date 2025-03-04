@@ -747,6 +747,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prettier/sync@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "@prettier/sync@npm:0.5.2"
+  dependencies:
+    make-synchronized: ^0.2.8
+  peerDependencies:
+    prettier: "*"
+  checksum: 172cdc62f4103b022f8e8d0a63839350d97bc51468ea476594bce651c2cda311e4810417f16a3c967941a8493a68468a5df27beea4c85eaeaa37e84be3acf399
+  languageName: node
+  linkType: hard
+
 "@rollup/rollup-android-arm-eabi@npm:4.34.9":
   version: 4.34.9
   resolution: "@rollup/rollup-android-arm-eabi@npm:4.34.9"
@@ -1595,6 +1606,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cdocs-hugo-integration@workspace:."
   dependencies:
+    "@prettier/sync": ^0.5.2
     "@types/js-yaml": ^4.0.9
     "@types/lodash": ^4.17.7
     "@types/markdown-it": ^14.1.2
@@ -2742,6 +2754,13 @@ __metadata:
     promise-retry: ^2.0.1
     ssri: ^12.0.0
   checksum: 6fb2fee6da3d98f1953b03d315826b5c5a4ea1f908481afc113782d8027e19f080c85ae998454de4e5f27a681d3ec58d57278f0868d4e0b736f51d396b661691
+  languageName: node
+  linkType: hard
+
+"make-synchronized@npm:^0.2.8":
+  version: 0.2.9
+  resolution: "make-synchronized@npm:0.2.9"
+  checksum: 11d8af618a860c5e5f3b9b5edea4b18e39d5065743900c7c47871eb39e4dc50aba39a03c4e53045778d6a1a6461d1a51719e30640511a7600a77d606820c70a6
   languageName: node
   linkType: hard
 

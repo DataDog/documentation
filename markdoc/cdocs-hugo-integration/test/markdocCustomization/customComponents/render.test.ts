@@ -1,7 +1,7 @@
 import MarkdocStaticCompiler, { Tag, Config } from 'cdocs-markdoc';
 import fs from 'fs';
 import { describe, test, expect } from 'vitest';
-import prettier from 'prettier';
+import synchronousPrettier from '@prettier/sync';
 import { SNAPSHOTS_DIR } from '../../config/constants';
 import { render, CustomHtmlComponent } from '../../../src/markdocCustomization/renderer';
 import {
@@ -112,7 +112,7 @@ describe('custom components', () => {
   `;
 
   // format the HTML with prettier
-  const formattedHtml = prettier.format(htmlWithStyles, {
+  const formattedHtml = synchronousPrettier.format(htmlWithStyles, {
     parser: 'html'
   });
 

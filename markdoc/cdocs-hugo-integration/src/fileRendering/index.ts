@@ -1,6 +1,6 @@
 import { ParsedFile } from '../schemas/compilationResults';
 import { RenderableTreeNode } from 'cdocs-markdoc';
-import prettier from 'prettier';
+import synchronousPrettier from '@prettier/sync';
 import { FiltersManifest, pruneManifestForClient } from 'cdocs-data';
 import { buildRenderableTree, getMinifiedIfFunctionsByRef } from './treeManagement';
 import { customComponents } from '../markdocCustomization/parserConfig';
@@ -52,7 +52,7 @@ export function renderFile(p: {
     components: customComponents
   });
 
-  articleHtml = prettier.format(articleHtml, { parser: 'html' });
+  articleHtml = synchronousPrettier.format(articleHtml, { parser: 'html' });
 
   if (p.parsedFile.frontmatter.further_reading) {
     const jsx = FurtherReadingTemplate({

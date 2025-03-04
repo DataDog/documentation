@@ -19,6 +19,7 @@
         "node": ">= 20.11.0"
     },
     "dependencies": {
+        "@prettier/sync": "^0.5.2",
         "@types/markdown-it": "^14.1.2",
         "@vitejs/plugin-react": "^4.3.3",
         "cdocs-data": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz",
