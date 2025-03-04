@@ -13,7 +13,6 @@ further_reading:
 
 ## Overview
 
-asdasdasd
 
 Datadog Agent v6 contains many changes compared to previous Agent versions. The changes and deprecations are detailed in the sections below.
 
