@@ -42,15 +42,16 @@ The following limitations apply to the limited preview:
 ### Supported features
 
 - Dynamic Logs, Metrics, Spans, and Span Tags
+- [Dynamic Logs][8] attached to a function/method
 - Local variable capture for Dynamic Logs
 - Dynamic Log conditions
 - Expression evaluation in Dynamic Log templates
-- Instrumenting third-party libraries
 - [PII redaction][8] based on variable/property names
 - [Source code integration][9]
 
 ### Unsupported features
 
+- Dynamic Logs attached to a specific file/line
 - PII redaction based on specific classes or types
 - Source code symbol autocomplete and search
 
