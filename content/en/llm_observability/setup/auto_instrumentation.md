@@ -10,6 +10,9 @@ further_reading:
     - link: '/llm_observability/setup/sdk/nodejs'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Node.js'
+    - link: '/llm_observability/setup/sdk/java'
+      tag: 'Documentation'
+      text: 'Learn about the LLM Observability SDK for Java'
 ---
 
 <div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the LLM Observability offering.</div>
