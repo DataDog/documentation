@@ -7,7 +7,7 @@ algolia:
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Secrets Scanning is in Preview. Contact your Customer Success team to get access.
+Secrets Scanning is in Preview. Contact your Customer Success Manager to get access.
 {{< /callout >}}
 
 {{% site-region region="gov" %}}
