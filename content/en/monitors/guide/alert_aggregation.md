@@ -16,7 +16,7 @@ Ensuring system health and performance of requires timely and actionable notific
 For example, if you manage an an e-commerce site and issues arise, do you want one summarized alert or multiple specific alerts detailing each aspect of the failure?   
 The answer depends on your system's architecture, the nature of the issue, and your team's workflow. Understanding alert aggregations can help ensure teams are informed of issues without excess notifications. 
 
-This guide explores the different alert aggregation capabilities and patterns to use in a variety of circumstances.
+This guide explores various alert aggregation capabilities and strategies for different scenarios.
 
 ## Types of Alert Aggregation 
 
