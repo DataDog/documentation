@@ -99,7 +99,7 @@ Org-level (or folder-level) monitoring is recommended for comprehensive coverage
 - [Monitoring Viewer][53] provides **read-only** access to the monitoring data availabile in your Google Cloud environment
 - [Cloud Asset Viewer][54] provides **read-only** access to cloud assets metadata
 - [Browser][55] provides **read-only** access to browse the hierarchy of a project
-- [Service Usage Consumer][63] (**optional**, for multi-project environments) enables [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution)
+- [Service Usage Consumer][63] (**optional**, for multi-project environments) provides [per-project cost and API quota attribution](#enable-per-project-cost-and-api-quota-attribution) after this feature has been enabled by Datadog support
 6. Click **Save**.
 
 **Note**: The `Browser` role is only required in the default project of the service account. Other projects require only the other listed roles.
@@ -305,7 +305,7 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [16]: /integrations/google_cloud_platform/?tab=dataflowmethodrecommended#log-collection
 [17]: https://www.datadoghq.com/blog/stream-logs-datadog-dataflow-template/
 [18]: /integrations/google_cloud_platform/#resource-changes-collection
-[19]: /support/
+[19]: /help/
 [20]: https://www.datadoghq.com/blog/network-attacks-google-cloud-armor/
 [21]: https://www.datadoghq.com/blog/track-bigquery-costs-performance/
 [22]: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
