@@ -39,6 +39,18 @@ Configure Dynamic Instrumentation using the following environment variables:
 | `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
 | `DD_TAGS`                                        | String        | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 
+## Source Map support
+
+If the source code of your Node.js application is transpiled or bundled,
+you need to generate and publish the source maps along with the code - either inline or as separate files.
+
+* **TypeScript**: Set either [`inlineSourceMap`][10] or [`sourceMap`][11] to `true` in the TypeScript config file.
+* **Babel**: Configure the [`sourceMaps`][12] option in the Babel config file (see also the special `--source-maps` CLI option, used to generate separate source map files).
+* **Webpack**: Configure the [`devtools`][13] option in the Webpack config file.
+* **CoffeeScript**: Use either `--inline-map` or `--map` as arguments to the [`coffee`][14] CLI.
+
+**Note:** For better runtime performance, it's recommended *not* to include the original source code in the source maps.
+
 ## What to do next
 
 See [Dynamic Instrumentation][4] for information about adding instrumentations and browsing and indexing the data.
@@ -75,3 +87,8 @@ The following limitations apply to the limited preview:
 [7]: /dynamic_instrumentation/#creating-log-probes
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=nodejs#embed-git-information-in-your-build-artifacts
+[10]: https://www.typescriptlang.org/tsconfig/#inlineSourceMap
+[11]: https://www.typescriptlang.org/tsconfig/#sourceMap
+[12]: https://babeljs.io/docs/options#sourcemaps
+[13]: https://webpack.js.org/configuration/devtool/
+[14]: https://coffeescript.org/#usage
