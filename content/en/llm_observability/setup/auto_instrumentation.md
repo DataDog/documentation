@@ -10,6 +10,9 @@ further_reading:
     - link: '/llm_observability/setup/sdk/nodejs'
       tag: 'Documentation'
       text: 'Learn about the LLM Observability SDK for Node.js'
+    - link: '/llm_observability/setup/sdk/java'
+      tag: 'Documentation'
+      text: 'Learn about the LLM Observability SDK for Java'
 ---
 
 {{< site-region region="gov" >}}
