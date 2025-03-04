@@ -79,7 +79,7 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
 
-#### Reverse DNS private IP enrichment
+### Reverse DNS private IP enrichment
 
 Enable Reverse DNS private IP enrichment to perform DNS lookups and find the domain name associated with any NetFlow source or destination IP address. When enabled, the Agent conducts reverse DNS lookups on source and/or destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
