@@ -72,7 +72,7 @@ This level of detail helps engineers respond quickly and with precision.
 
 ## How to do this with the API
 
-If you are managing your monitors via the API, you want to use the variable "notify\_by" to make your monitor a Simple Alert or a Multi Alert.  
+If you are managing your monitors with the API, you want to use the variable `notify_by` to make your monitor a simple alert or a multi alert.  
 
 To make the monitor a Simple Alert, you want to have "notify_by": [*].
 To make the monitor a Multi Alert, you want "notify_by": [<group>], for example: "notify_by": ["topic"].
