@@ -538,6 +538,7 @@ You can update the following event properties:
 | `view.url`                     | String | The URL of the active web page.                                                                                                                                                           |
 | `view.referrer`                | String | The URL of the previous web page from which a link to the currently requested page was followed.                                                                                          |
 | `view.name`                    | String | The name of the current view.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | String |   The resource URL for the Largest Contentful Paint.                                                                                                                                 |
 | `service`                      | String | The service name for your application.                                                                                                                                                    |
 | `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
 | `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
@@ -984,6 +985,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Error context
+
+### Attaching local error context with dd_context
+
+When capturing errors, additional context may be provided at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event context.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Global context
 
 ### Add global context property

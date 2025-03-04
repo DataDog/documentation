@@ -2658,7 +2658,8 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
@@ -2743,7 +2744,8 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
@@ -4737,6 +4739,42 @@ menu:
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
       generated: true
+    - name: Patch AWS Scan Options
+      url: '#patch-aws-scan-options'
+      identifier: agentless-scanning-patch-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAwsScanOptions
+        unstable: []
+        order: 3
+    - name: Delete AWS Scan Options
+      url: '#delete-aws-scan-options'
+      identifier: agentless-scanning-delete-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAwsScanOptions
+        unstable: []
+        order: 4
+    - name: Post AWS Scan Options
+      url: '#post-aws-scan-options'
+      identifier: agentless-scanning-post-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsScanOptions
+        unstable: []
+        order: 2
     - name: Get AWS Scan Options
       url: '#get-aws-scan-options'
       identifier: agentless-scanning-get-aws-scan-options
@@ -4748,7 +4786,7 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
-        order: 3
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -4763,8 +4801,7 @@ menu:
           - v2
         operationids:
           - PublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Unpublish App
       url: '#unpublish-app'
@@ -4776,8 +4813,7 @@ menu:
           - v2
         operationids:
           - UnpublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: Update App
       url: '#update-app'
@@ -4789,8 +4825,7 @@ menu:
           - v2
         operationids:
           - UpdateApp
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get App
       url: '#get-app'
@@ -4802,8 +4837,7 @@ menu:
           - v2
         operationids:
           - GetApp
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete App
       url: '#delete-app'
@@ -4815,8 +4849,7 @@ menu:
           - v2
         operationids:
           - DeleteApp
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Create App
       url: '#create-app'
@@ -4828,8 +4861,7 @@ menu:
           - v2
         operationids:
           - CreateApp
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List Apps
       url: '#list-apps'
@@ -4841,8 +4873,7 @@ menu:
           - v2
         operationids:
           - ListApps
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Delete Multiple Apps
       url: '#delete-multiple-apps'
@@ -4854,8 +4885,7 @@ menu:
           - v2
         operationids:
           - DeleteApps
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Audit
       url: /api/latest/audit/

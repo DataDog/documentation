@@ -174,6 +174,14 @@ components:
       required: true
       schema:
         type: string
+    AwsAccountId:
+      description: The ID of an AWS account.
+      example: '123456789012'
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     CaseIDPathParameter:
       description: Case's UUID or key
       example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
@@ -1769,6 +1777,10 @@ components:
             type: string
           type: array
       type: object
+    AccountId:
+      description: The ID of the AWS account.
+      example: '184366314700'
+      type: string
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -1836,6 +1848,207 @@ components:
       oneOf:
       - $ref: '#/components/schemas/AWSIntegrationUpdate'
       - $ref: '#/components/schemas/HTTPIntegrationUpdate'
+    ActionQuery:
+      description: An action query. This query type is used to trigger an action,
+        such as sending a HTTP request.
+      properties:
+        events:
+          description: Events to listen for downstream of the action query.
+          items:
+            $ref: '#/components/schemas/AppBuilderEvent'
+          type: array
+        id:
+          description: The ID of the action query.
+          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
+          format: uuid
+          type: string
+        name:
+          description: A unique identifier for this action query. This name is also
+            used to access the query's result throughout the app.
+          example: fetchPendingOrders
+          type: string
+        properties:
+          $ref: '#/components/schemas/ActionQueryProperties'
+        type:
+          $ref: '#/components/schemas/ActionQueryType'
+      required:
+      - id
+      - name
+      - type
+      - properties
+      type: object
+    ActionQueryCondition:
+      description: Whether to run this query. If specified, the query will only run
+        if this condition evaluates to `true` in JavaScript and all other conditions
+        are also met.
+      oneOf:
+      - type: boolean
+      - example: ${true}
+        type: string
+    ActionQueryDebounceInMs:
+      description: The minimum time in milliseconds that must pass before the query
+        can be triggered again. This is useful for preventing accidental double-clicks
+        from triggering the query multiple times.
+      oneOf:
+      - example: 310.5
+        format: double
+        type: number
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a number.
+        example: ${1000}
+        type: string
+    ActionQueryMockedOutputs:
+      description: The mocked outputs of the action query. This is useful for testing
+        the app without actually running the action.
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/ActionQueryMockedOutputsObject'
+    ActionQueryMockedOutputsEnabled:
+      description: Whether to enable the mocked outputs for testing.
+      oneOf:
+      - type: boolean
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a boolean.
+        example: ${true}
+        type: string
+    ActionQueryMockedOutputsObject:
+      description: The mocked outputs of the action query.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/ActionQueryMockedOutputsEnabled'
+        outputs:
+          description: The mocked outputs of the action query, serialized as JSON.
+          example: '{"status": "success"}'
+          type: string
+      required:
+      - enabled
+      type: object
+    ActionQueryOnlyTriggerManually:
+      description: Determines when this query is executed. If set to `false`, the
+        query will run when the app loads and whenever any query arguments change.
+        If set to `true`, the query will only run when manually triggered from elsewhere
+        in the app.
+      oneOf:
+      - type: boolean
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a boolean.
+        example: ${true}
+        type: string
+    ActionQueryPollingIntervalInMs:
+      description: If specified, the app will poll the query at the specified interval
+        in milliseconds. The minimum polling interval is 15 seconds. The query will
+        only poll when the app's browser tab is active.
+      oneOf:
+      - example: 30000.0
+        format: double
+        minimum: 15000.0
+        type: number
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a number.
+        example: ${15000}
+        type: string
+    ActionQueryProperties:
+      description: The properties of the action query.
+      properties:
+        condition:
+          $ref: '#/components/schemas/ActionQueryCondition'
+        debounceInMs:
+          $ref: '#/components/schemas/ActionQueryDebounceInMs'
+        mockedOutputs:
+          $ref: '#/components/schemas/ActionQueryMockedOutputs'
+        onlyTriggerManually:
+          $ref: '#/components/schemas/ActionQueryOnlyTriggerManually'
+        outputs:
+          description: The post-query transformation function, which is a JavaScript
+            function that changes the query's `.outputs` property after the query's
+            execution.
+          example: ${((outputs) => {return outputs.body.data})(self.rawOutputs)}
+          type: string
+        pollingIntervalInMs:
+          $ref: '#/components/schemas/ActionQueryPollingIntervalInMs'
+        requiresConfirmation:
+          $ref: '#/components/schemas/ActionQueryRequiresConfirmation'
+        showToastOnError:
+          $ref: '#/components/schemas/ActionQueryShowToastOnError'
+        spec:
+          $ref: '#/components/schemas/ActionQuerySpec'
+      required:
+      - spec
+      type: object
+    ActionQueryRequiresConfirmation:
+      description: Whether to prompt the user to confirm this query before it runs.
+      oneOf:
+      - type: boolean
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a boolean.
+        example: ${true}
+        type: string
+    ActionQueryShowToastOnError:
+      description: Whether to display a toast to the user when the query returns an
+        error.
+      oneOf:
+      - type: boolean
+      - description: If this is a string, it must be a valid JavaScript expression
+          that evaluates to a boolean.
+        example: ${true}
+        type: string
+    ActionQuerySpec:
+      description: The definition of the action query.
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/ActionQuerySpecObject'
+    ActionQuerySpecConnectionGroup:
+      description: The connection group to use for an action query.
+      properties:
+        id:
+          description: The ID of the connection group.
+          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
+          format: uuid
+          type: string
+        tags:
+          description: The tags of the connection group.
+          items:
+            type: string
+          type: array
+      type: object
+    ActionQuerySpecInput:
+      additionalProperties: {}
+      description: The inputs to the action query. See the [Actions Catalog](https://docs.datadoghq.com/actions/actions_catalog/)
+        for more detail on each action and its inputs.
+      type: object
+    ActionQuerySpecInputs:
+      description: The inputs to the action query. These are the values that are passed
+        to the action when it is triggered.
+      oneOf:
+      - type: string
+      - $ref: '#/components/schemas/ActionQuerySpecInput'
+    ActionQuerySpecObject:
+      description: The action query spec object.
+      properties:
+        connectionGroup:
+          $ref: '#/components/schemas/ActionQuerySpecConnectionGroup'
+        connectionId:
+          description: The ID of the custom connection to use for this action query.
+          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
+          type: string
+        fqn:
+          description: The fully qualified name of the action type.
+          example: com.datadoghq.http.request
+          type: string
+        inputs:
+          $ref: '#/components/schemas/ActionQuerySpecInputs'
+      required:
+      - fqn
+      type: object
+    ActionQueryType:
+      default: action
+      description: The action query type.
+      enum:
+      - action
+      example: action
+      type: string
+      x-enum-varnames:
+      - ACTION
     ActiveBillingDimensionsAttributes:
       description: List of active billing dimensions.
       properties:
@@ -2918,6 +3131,10 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    AwsAccountId:
+      description: The ID of an AWS account.
+      example: '123456789012'
+      type: string
     AwsCURConfig:
       description: AWS CUR config.
       properties:
@@ -3155,6 +3372,28 @@ components:
           example: true
           type: boolean
       type: object
+    AwsScanOptionsCreateData:
+      description: Object for the scan options of a single AWS account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsScanOptionsAttributes'
+        id:
+          $ref: '#/components/schemas/AwsAccountId'
+        type:
+          $ref: '#/components/schemas/AwsScanOptionsType'
+      required:
+      - id
+      - attributes
+      - type
+      type: object
+    AwsScanOptionsCreateRequest:
+      description: Request object that includes the scan options to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsCreateData'
+      required:
+      - data
+      type: object
     AwsScanOptionsData:
       description: Single AWS Scan Options entry.
       properties:
@@ -3167,7 +3406,7 @@ components:
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       type: object
-    AwsScanOptionsResponse:
+    AwsScanOptionsListResponse:
       description: Response object that includes a list of AWS scan options.
       properties:
         data:
@@ -3175,6 +3414,12 @@ components:
           items:
             $ref: '#/components/schemas/AwsScanOptionsData'
           type: array
+      type: object
+    AwsScanOptionsResponse:
+      description: Response object that includes the scan options of an AWS account.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsData'
       type: object
     AwsScanOptionsType:
       default: aws_scan_options
@@ -3185,6 +3430,48 @@ components:
       type: string
       x-enum-varnames:
       - AWS_SCAN_OPTIONS
+    AwsScanOptionsUpdateAttributes:
+      description: Attributes for the AWS scan options to update.
+      properties:
+        lambda:
+          description: Indicates if scanning of Lambda functions is enabled.
+          example: true
+          type: boolean
+        sensitive_data:
+          description: Indicates if scanning for sensitive data is enabled.
+          example: false
+          type: boolean
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          example: true
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          example: true
+          type: boolean
+      type: object
+    AwsScanOptionsUpdateData:
+      description: Object for the scan options of a single AWS account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsScanOptionsUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/AccountId'
+        type:
+          $ref: '#/components/schemas/AwsScanOptionsType'
+      required:
+      - attributes
+      - type
+      type: object
+    AwsScanOptionsUpdateRequest:
+      description: Request object that includes the scan options to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsScanOptionsUpdateData'
+      required:
+      - data
+      type: object
     AzureUCConfig:
       description: Azure config.
       properties:
@@ -9427,6 +9714,48 @@ components:
             type: number
           type: array
       type: object
+    DataTransform:
+      description: A data transformer, which is custom JavaScript code that executes
+        and transforms data when its inputs change.
+      properties:
+        id:
+          description: The ID of the data transformer.
+          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
+          format: uuid
+          type: string
+        name:
+          description: A unique identifier for this data transformer. This name is
+            also used to access the transformer's result throughout the app.
+          example: combineTwoOrders
+          type: string
+        properties:
+          $ref: '#/components/schemas/DataTransformProperties'
+        type:
+          $ref: '#/components/schemas/DataTransformType'
+      required:
+      - id
+      - name
+      - type
+      - properties
+      type: object
+    DataTransformProperties:
+      description: The properties of the data transformer.
+      properties:
+        outputs:
+          description: A JavaScript function that returns the transformed data.
+          example: "${(() => {return {\n    allItems: [...fetchOrder1.outputs.items,
+            ...fetchOrder2.outputs.items],\n}})()}"
+          type: string
+      type: object
+    DataTransformType:
+      default: dataTransform
+      description: The data transform type.
+      enum:
+      - dataTransform
+      example: dataTransform
+      type: string
+      x-enum-varnames:
+      - DATATRANSFORM
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -22134,34 +22463,12 @@ components:
           $ref: '#/components/schemas/Deployment'
       type: object
     Query:
-      description: A query used by an app. This can take the form of an external action,
-        a data transformation, or a state variable change.
-      properties:
-        events:
-          description: Events to listen for downstream of the query.
-          items:
-            $ref: '#/components/schemas/AppBuilderEvent'
-          type: array
-        id:
-          description: The ID of the query.
-          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
-          format: uuid
-          type: string
-        name:
-          description: The name of the query. The name must be unique within the app
-            and is visible in the app editor.
-          example: ''
-          type: string
-        properties:
-          description: The properties of the query. The properties vary depending
-            on the query type.
-        type:
-          $ref: '#/components/schemas/QueryType'
-      required:
-      - id
-      - name
-      - type
-      type: object
+      description: A data query used by an app. This can take the form of an external
+        action, a data transformation, or a state variable.
+      oneOf:
+      - $ref: '#/components/schemas/ActionQuery'
+      - $ref: '#/components/schemas/DataTransform'
+      - $ref: '#/components/schemas/StateVariable'
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -22185,18 +22492,6 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
-    QueryType:
-      description: The query type.
-      enum:
-      - action
-      - stateVariable
-      - dataTransform
-      example: action
-      type: string
-      x-enum-varnames:
-      - ACTION
-      - STATEVARIABLE
-      - DATATRANSFORM
     RUMAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -30394,6 +30689,46 @@ components:
       - PASS
       - FAIL
       - SKIP
+    StateVariable:
+      description: A variable, which can be set and read by other components in the
+        app.
+      properties:
+        id:
+          description: The ID of the state variable.
+          example: 65bb1f25-52e1-4510-9f8d-22d1516ed693
+          format: uuid
+          type: string
+        name:
+          description: A unique identifier for this state variable. This name is also
+            used to access the variable's value throughout the app.
+          example: ordersToSubmit
+          type: string
+        properties:
+          $ref: '#/components/schemas/StateVariableProperties'
+        type:
+          $ref: '#/components/schemas/StateVariableType'
+      required:
+      - id
+      - name
+      - type
+      - properties
+      type: object
+    StateVariableProperties:
+      description: The properties of the state variable.
+      properties:
+        defaultValue:
+          description: The default value of the state variable.
+          example: ${['order_3145', 'order_4920']}
+      type: object
+    StateVariableType:
+      default: stateVariable
+      description: The state variable type.
+      enum:
+      - stateVariable
+      example: stateVariable
+      type: string
+      x-enum-varnames:
+      - STATEVARIABLE
     Step:
       description: A Step is a sub-component of a workflow. Each Step performs an
         action.
@@ -33033,6 +33368,9 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            appsec_vm_read: View infrastructure, application code, and library vulnerabilities.
+              This does not restrict API or inventory SQL access to the vulnerability
+              data source.
             cases_read: View Cases.
             cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
@@ -33343,7 +33681,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AwsScanOptionsResponse'
+                $ref: '#/components/schemas/AwsScanOptionsListResponse'
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -33352,9 +33690,98 @@ paths:
       summary: Get AWS Scan Options
       tags:
       - Agentless Scanning
-      x-menu-order: 3
+      x-menu-order: 1
       x-undo:
         type: safe
+    post:
+      description: Activate Agentless scan options for an AWS account.
+      operationId: CreateAwsScanOptions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsScanOptionsCreateRequest'
+        description: The definition of the new scan options.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsScanOptionsResponse'
+          description: Agentless scan options enabled successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Post AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteAwsScanOptions
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/agentless_scanning/accounts/aws/{account_id}:
+    delete:
+      description: Delete Agentless scan options for an AWS account.
+      operationId: DeleteAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update the Agentless scan options for an activated account.
+      operationId: UpdateAwsScanOptions
+      parameters:
+      - $ref: '#/components/parameters/AwsAccountId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsScanOptionsUpdateRequest'
+        description: New definition of the scan options.
+        required: true
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch AWS Scan Options
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/api_keys:
     get:
       description: List all API keys available for your account.
@@ -34330,8 +34757,6 @@ paths:
         - apps_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
     get:
       description: List all apps, with optional filters and sorting. This endpoint
         is paginated. Only basic app information such as the app ID, name, and description
@@ -34443,8 +34868,6 @@ paths:
         - apps_run
       x-undo:
         type: safe
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
     post:
       description: Create a new app, returning the app ID.
       operationId: CreateApp
@@ -34482,16 +34905,18 @@ paths:
         app:
           parameters:
           - name: body
-            value: '{"data": {"attributes": {"components": [{"events": [], "name":
-              "grid0", "properties": {"children": [{"events": [], "name": "gridCell0",
-              "properties": {"children": [{"events": [], "name": "calloutValue0",
-              "properties": {"isDisabled": false, "isLoading": false, "isVisible":
-              true, "label": "CPU Usage", "size": "sm", "style": "vivid_yellow", "unit":
-              "kB", "value": "42"}, "type": "calloutValue"}], "isVisible": "true",
-              "layout": {"default": {"height": 8, "width": 2, "x": 0, "y": 0}}}, "type":
-              "gridCell"}]}, "type": "grid"}], "description": "This is a simple example
-              app", "queries": [], "name": "Example App", "rootInstanceName": "grid0"},
-              "type": "appDefinitions"}}'
+            value: '{"data":{"type":"appDefinitions","attributes":{"rootInstanceName":"grid0","components":[{"name":"grid0","type":"grid","properties":{"children":[{"type":"gridCell","name":"gridCell0","properties":{"children":[{"name":"text0","type":"text","properties":{"content":"#
+              Cat Facts","contentType":"markdown","textAlign":"left","verticalAlign":"top","isVisible":true},"events":[]}],"isVisible":"true","layout":{"default":{"x":0,"y":0,"width":4,"height":5}}},"events":[]},{"type":"gridCell","name":"gridCell2","properties":{"children":[{"name":"table0","type":"table","properties":{"data":"${fetchFacts?.outputs?.body?.data}","columns":[{"dataPath":"fact","header":"fact","isHidden":false,"id":"0ae2ae9e-0280-4389-83c6-1c5949f7e674"},{"dataPath":"length","header":"length","isHidden":true,"id":"c9048611-0196-4a00-9366-1ef9e3ec0408"},{"id":"8fa9284b-7a58-4f13-9959-57b7d8a7fe8f","dataPath":"Due
+              Date","header":"Unused Old Column","disableSortBy":false,"formatter":{"type":"formatted_time","format":"LARGE_WITHOUT_TIME"},"isDeleted":true}],"summary":true,"pageSize":"${pageSize?.value}","paginationType":"server_side","isLoading":"${fetchFacts?.isLoading}","rowButtons":[],"isWrappable":false,"isScrollable":"vertical","isSubRowsEnabled":false,"globalFilter":false,"isVisible":true,"totalCount":"${fetchFacts?.outputs?.body?.total}"},"events":[]}],"isVisible":"true","layout":{"default":{"x":0,"y":5,"width":12,"height":96}}},"events":[]},{"type":"gridCell","name":"gridCell1","properties":{"children":[{"name":"text1","type":"text","properties":{"content":"##
+              Random Fact\n\n${randomFact?.outputs?.fact}","contentType":"markdown","textAlign":"left","verticalAlign":"top","isVisible":true},"events":[]}],"isVisible":"true","layout":{"default":{"x":0,"y":101,"width":12,"height":16}}},"events":[]},{"type":"gridCell","name":"gridCell3","properties":{"children":[{"name":"button0","type":"button","properties":{"label":"Increase
+              Page Size","level":"default","isPrimary":true,"isBorderless":false,"isLoading":false,"isDisabled":false,"isVisible":true,"iconLeft":"angleUp","iconRight":""},"events":[{"variableName":"pageSize","value":"${pageSize?.value
+              + 1}","name":"click","type":"setStateVariableValue"}]}],"isVisible":"true","layout":{"default":{"x":10,"y":134,"width":2,"height":4}}},"events":[]},{"type":"gridCell","name":"gridCell4","properties":{"children":[{"name":"button1","type":"button","properties":{"label":"Decrease
+              Page Size","level":"default","isPrimary":true,"isBorderless":false,"isLoading":false,"isDisabled":false,"isVisible":true,"iconLeft":"angleDown","iconRight":""},"events":[{"variableName":"pageSize","value":"${pageSize?.value
+              - 1}","name":"click","type":"setStateVariableValue"}]}],"isVisible":"true","layout":{"default":{"x":10,"y":138,"width":2,"height":4}}},"events":[]}],"backgroundColor":"default"},"events":[]}],"queries":[{"id":"92ff0bb8-553b-4f31-87c7-ef5bd16d47d5","type":"action","name":"fetchFacts","events":[],"properties":{"spec":{"fqn":"com.datadoghq.http.request","connectionId":"5e63f4a8-4ce6-47de-ba11-f6617c1d54f3","inputs":{"verb":"GET","url":"https://catfact.ninja/facts","urlParams":[{"key":"limit","value":"${pageSize.value.toString()}"},{"key":"page","value":"${(table0.pageIndex
+              + 1).toString()}"}]}}}},{"type":"stateVariable","name":"pageSize","properties":{"defaultValue":"${20}"},"id":"afd03c81-4075-4432-8618-ba09d52d2f2d"},{"type":"dataTransform","name":"randomFact","properties":{"outputs":"${(()
+              => {const facts = fetchFacts.outputs.body.data\nreturn facts[Math.floor(Math.random()*facts.length)]\n})()}"},"id":"0fb22859-47dc-4137-9e41-7b67d04c525c"}],"name":"Example
+              Cat Facts Viewer","description":"This is a slightly complicated example
+              app that fetches and displays cat facts"}}}'
           step: there is a valid "app" in the system
       x-menu-order: 2
       x-permission:
@@ -34506,8 +34931,6 @@ paths:
         - name: app_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
   /api/v2/app-builder/apps/{app_id}:
     delete:
       description: Delete a single app.
@@ -34564,8 +34987,6 @@ paths:
         - apps_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
     get:
       description: Get the full definition of an app.
       operationId: GetApp
@@ -34612,6 +35033,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: Not Found
+        '410':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Gone
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       summary: Get App
@@ -34625,8 +35052,6 @@ paths:
         - connections_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
     patch:
       description: Update an existing app. This creates a new version of the app.
       operationId: UpdateApp
@@ -34678,8 +35103,6 @@ paths:
         - workflows_run
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
   /api/v2/app-builder/apps/{app_id}/deployment:
     delete:
       description: Unpublish an app, removing the live version of the app. Unpublishing
@@ -34733,8 +35156,6 @@ paths:
         - apps_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
     post:
       description: Publish an app for use by other users. To ensure the app is accessible
         to the correct users, you also need to set a [Restriction Policy](https://docs.datadoghq.com/api/latest/restriction-policies/)
@@ -34786,8 +35207,6 @@ paths:
         - apps_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: App Builder API endpoints are still under active development
-        and might change at any time.'
   /api/v2/application_keys:
     get:
       description: List all application keys available for your org
@@ -48376,12 +48795,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: List vulnerable assets
       tags:
       - Security Monitoring
       x-menu-order: 26
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -48474,6 +48898,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: Get SBOM
       tags:
       - Security Monitoring
@@ -48482,7 +48908,7 @@ paths:
         type: safe
       x-unstable: '**Note**: This endpoint is a private preview.
 
-        If you are interested in accessing this API, please [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/signals/notification_rules:
     get:
       description: Returns the list of notification rules for security signals.
@@ -49068,12 +49494,17 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
+      - AuthZ:
+        - appsec_vm_read
       summary: List vulnerabilities
       tags:
       - Security Monitoring
       x-menu-order: 25
       x-undo:
         type: safe
+      x-unstable: '**Note**: This endpoint is a private preview.
+
+        If you are interested in accessing this API, [fill out this form](https://forms.gle/kMYC1sDr6WDUBDsx9).'
   /api/v2/security/vulnerabilities/notification_rules:
     get:
       description: Returns the list of notification rules for security vulnerabilities.
@@ -55330,7 +55761,7 @@ tags:
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
     teams to install Agents on every host or where Agents cannot be installed.\nGo
-    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
+    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
   name: Agentless Scanning
 - description: Datadog App Builder provides a low-code solution to rapidly develop
     and integrate secure, customized applications into your monitoring stack that
