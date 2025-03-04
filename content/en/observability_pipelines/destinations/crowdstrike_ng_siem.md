@@ -1,9 +1,9 @@
 ---
-title: CrowdStrike NextGen-SIEM Destination
+title: CrowdStrike Next-Gen SIEM Destination
 disable_toc: false
 ---
 
-Use Observability Pipelines' CrowdStrike NextGen-SIEM destination to send logs to CrowdStrike NextGen-SIEM.
+Use Observability Pipelines' CrowdStrike Next-Gen SIEM destination to send logs to CrowdStrike Next-Gen SIEM.
 
 ## Setup
 
