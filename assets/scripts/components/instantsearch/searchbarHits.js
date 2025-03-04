@@ -56,17 +56,17 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     const handleNRender = (containerDiv, allJoinedListItemsArray, numHits) => {
         // On non-first renders, add organized hits to applicable divs
-        const addHitsToEmptyElements = () => {
+        const addHitsToEmptyElements = (container) => {
             allJoinedListItemsArray.forEach((joinedList, index) => {
                 if (joinedList) {
-                    const target = containerDiv.querySelector(`#ais-Hits-category-${index} .ais-Hits-list`);
+                    const target = container.querySelector(`#ais-Hits-category-${index} .ais-Hits-list`);
                     if (target) target.innerHTML = joinedList;
                 }
             });
         };
 
-        const hideOrShowElements = () => {
-            const finalHitsLists = document.querySelectorAll('.ais-Hits-list');
+        const hideOrShowElements = (container) => {
+            const finalHitsLists = container.querySelectorAll('.ais-Hits-list');
 
             finalHitsLists.forEach((list) => {
                 if (list.childElementCount) {
@@ -76,13 +76,11 @@ const renderHits = (renderOptions, isFirstRender) => {
                 }
             });
 
-            numHits === 0
-                ? document.querySelector('#hits').classList.add('no-hits')
-                : document.querySelector('#hits').classList.remove('no-hits');
+            numHits === 0 ? container.classList.add('no-hits') : container.classList.remove('no-hits');
         };
 
-        addHitsToEmptyElements();
-        hideOrShowElements();
+        addHitsToEmptyElements(containerDiv);
+        hideOrShowElements(containerDiv);
     };
 
     // Returns a bunch of <li>s
@@ -128,8 +126,6 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     const { widgetParams, hits } = renderOptions;
     const { partnersPage, container, basePathName } = widgetParams;
-
-    console.log('hits', hits);
 
     if (partnersPage && container.id === 'hits-partners') {
         const partnersHitsArray = hits.filter((hit) => hit.type === 'partners');

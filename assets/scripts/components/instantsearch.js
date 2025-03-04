@@ -135,8 +135,15 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         typesenseInstantSearchAdapter.updateConfiguration({
             ...adapterOptions,
             ...{
-                additionalSearchParameters: {
-                    preset: 'docs_alias_api_view'
+                collectionSpecificSearchParameters: {
+                    [docsIndex]: {
+                        preset: 'docs_alias_api_view',
+                        collection: docsIndex
+                    },
+                    [partnersIndex]: {
+                        preset: 'docs_partners_view',
+                        collection: partnersIndex
+                    }
                 }
             }
         });
