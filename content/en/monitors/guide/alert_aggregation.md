@@ -20,7 +20,7 @@ This guide explores various alert aggregation capabilities and strategies for di
 
 ## Types of alert aggregation 
 
-By default, Datadog will send an alert per monitored group. You can however change that to a single notification sent no matter how many monitored groups breaches the threshold.
+By default, Datadog sends an alert for each monitored group. However, you can choose to receive a single notification, regardless of how many monitored groups breach the threshold.
 
 Let's take this example:
 
