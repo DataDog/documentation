@@ -12,6 +12,9 @@ further_reading:
 title: Enviar logs de Azure a Datadog
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Reenvío automatizado de logs para Azure (en Vista previa)">}}
+Configura el reenvío de logs automáticamente en tu entorno Azure (no es necesaria ninguna configuración manual). Esta función gestiona y escala automáticamente los servicios de reenvío de logs.{{< /callout >}}
+
 ## Información general
 
 Utiliza esta guía para configurar la gestión de logs de tus suscripciones Azure en Datadog.
@@ -27,7 +30,7 @@ A partir del 30 de abril de 2025, Azure ya no es compatible con Node.js v18. Par
 Si anteriormente desplegaste con una plantilla ARM, puedes actualizar utilizando la plantilla con los mismos parámetros.
 </div>
 
-## Configuración 
+## Configuración
 
 {{< tabs >}}
 
@@ -273,7 +276,7 @@ Para obtener más información, consulta [Parámetros de diagnóstico en Azure M
 
 {{% /tab %}}
 
-{{% tab "Blob Storage (Almacenamiento de blobs)" %}}
+{{% tab "Blob Storage" (Almacenamiento de blobs)%}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
 <div class="alert alert-warning">
