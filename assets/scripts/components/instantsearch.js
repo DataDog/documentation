@@ -47,11 +47,11 @@ const adapterOptions = {
         },
         [partnersIndex]: {
             preset: 'docs_partners_view',
-            sort_by: '_text_match:desc',
             collection: partnersIndex
         }
     }
 };
+
 const typesenseInstantSearchAdapter = new TypesenseInstantSearchAdapter(adapterOptions);
 
 const searchClient = typesenseInstantSearchAdapter.searchClient;
@@ -116,7 +116,6 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
-    let numPartnersHits = 0;
     let hitComponent = searchbarHits;
 
     // If asyncLoad is true, we're not on the search page anymore
@@ -146,11 +145,6 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     if (searchResultsPage) {
         numHits = 10;
         hitComponent = searchpageHits;
-    }
-
-    if (partnersPage) {
-        numPartnersHits = 5;
-        numHits = 0;
     }
 
     // No searchBoxContainer means no instantSearch
@@ -214,9 +208,8 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 showSubmit: true,
                 templates: {
                     submit({ cssClasses }, { html }) {
-                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span>
-
-                            <i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
+                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span
+                            ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
                     }
                 }
             }),
@@ -239,7 +232,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 indexName: partnersIndex
             }).addWidgets([
                 configure({
-                    hitsPerPage: numPartnersHits,
+                    hitsPerPage: numHits,
                     distinct: 1
                 }),
 
