@@ -70,7 +70,7 @@ This level of detail helps engineers respond quickly and with precision.
 {{% /collapse-content %}}
 
 
-## How to do this via API
+## How to do this with the API
 
 If you are managing your monitors via the API, you want to use the variable "notify\_by" to make your monitor a Simple Alert or a Multi Alert.  
 
