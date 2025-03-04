@@ -20,6 +20,15 @@ further_reading:
 
    This command downloads the latest version of CoTerm to `~/.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually. 
 
+2. Set your [Datadog site][6] in `~/.ddcoterm/config.yaml` under `connection_config.host`:
+   ```yaml
+   ...
+   connection_config:
+     host: {{< region-param key=dd_full_site code="true" >}}
+   ...
+   ```
+   **Note**: This defaults to `https://app.datadoghq.com`.
+  
 3. Initialize your configuration file by running:
 
    ```shell
@@ -35,7 +44,7 @@ During initialization, you can choose one of the following ways to authorize CoT
 - **API Key + App Key**: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
 - **API Key Only**: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
 
-<div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot require approvals with Change Management.</div>
+<div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot <a href="/coterm/usage/#require-approval-for-commands">require approvals with Case Management</a>.</div>
 
 ## Configure your CoTerm settings
 
@@ -59,10 +68,10 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
   : Port for connecting to Datadog. Defaults to `443`.
 
   `api_key`
-  : If you are not using OAuth, your [Datadog API key][5]. 
+  : If you are not using OAuth, your [Datadog API key][1]. If you have enabled OAuth, CoTerm defaults to using OAuth.
 
   `app_key`
-  : If you are not using OAuth, your [Datadog application key][5]. <br/>**Note**: To require approvals with Change Management, you must use OAuth _or_ specify both your API key and application key in this file.
+  : If you are not using OAuth, your [Datadog application key][2]. <br/>**Note**: To [require approvals with Case Management][5], you must use OAuth _or_ specify both your API key and application key in this file.
 
 ## Uninstall
 
@@ -81,5 +90,5 @@ To uninstall CoTerm, delete the `~/.ddcoterm` folder.
 [2]: https://app.datadoghq.com/organization-settings/application-keys
 [3]: /coterm/usage
 [4]: /coterm/rules
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: /coterm/usage/#require-approval-for-commands
+[6]: /getting_started/site/

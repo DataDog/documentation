@@ -56,7 +56,7 @@ All future invocations of `kubectl` are automatically recorded.
 
 ## Protect against dangerous terminal commands
 
-To prevent the accidental execution of designated terminal commands, you can configure CoTerm to act as a linter. For more control, you can use CoTerm with Datadog Change Management to require approval for designated commands.
+To prevent the accidental execution of designated terminal commands, you can configure CoTerm to act as a linter. For more control, you can use CoTerm with [Datadog Case Management][3] to require approval for designated commands.
 
 ### Lint a command
 
@@ -83,11 +83,11 @@ With this configuration, CoTerm intercepts any `kubectl scale` command without a
 
 ### Require approval for commands
 
-For even more dangerous commands, CoTerm can require explicit approval by another team member (through Change Management) before running the command.
+For even more dangerous commands, CoTerm can require explicit approval by another team member (through Case Management) before running the command.
 
 1. Create a shim for your command: `ddcoterm shim create kubectl`
 
-1. Configure requiring approval in your `.ddcoterm/config.yaml` file. For details, see [CoTerm Configuration Rules][4].
+2. Configure requiring approval in your `.ddcoterm/config.yaml` file. For details, see [CoTerm Configuration Rules][4].
 
 {{< code-block lang="yaml" filename=".ddcoterm/config.yaml" disable_copy="true" collapsible="true" >}}
 process_config:
@@ -103,9 +103,25 @@ process_config:
           actions: ["record", "logs", "process_info", "approval"]
 {{< /code-block >}}
 
-With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in Change Management. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes.
+With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes.
 
-<!-- video -->
+#### Manually require approval
+
+To create an approval request manually, run:
+
+```shell
+ddcoterm approve 
+```
+
+#### Bypass approval
+
+To bypass approval and run your command, set the `COTERM_BREAK_GLASS` environment variable.
+
+For example:
+
+```shell
+COTERM_BREAK_GLASS=true kubectl delete foo
+```
 
 ## Further reading
 
@@ -113,6 +129,7 @@ With this configuration, when you run a `kubectl scale --context prod` command, 
 
 [1]: /sensitive_data_scanner/
 [2]: /service_management/events/
+[3]: /service_management/case_management/
 [4]: /coterm/rules
 [5]: /service_management/incident_management/
 [6]: /coterm/install
