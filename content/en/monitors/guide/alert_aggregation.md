@@ -13,7 +13,7 @@ further_reading:
 
 Ensuring system health and performance of requires timely and actionable notifications. However, effective alerts depend not only on timing, but also on the number of alerts generated. Alert aggregation is critical in managing this balance.
 
-Let's say you're responsible for an e-commerce website. When an issue arises, do you want a single alert summarizing the problem or multiple but specific alerts pin-pointing every aspect of the failure?   
+For example, if you manage an an e-commerce site and issues arise, do you want one summarized alert or multiple specific alerts detailing each aspect of the failure?   
 The answer will depend on your system's architecture, the nature of the issue, and your team's workflow but knowing how to aggregate the alerts will help ensure teams are alerted to issues while not receiving more notification than necessary. 
 
 This guide explores the different alert aggregation capabilities and patterns to use in a variety of circumstances.
