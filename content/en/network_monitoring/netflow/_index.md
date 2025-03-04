@@ -79,6 +79,23 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
 
+#### Reverse DNS private IP enrichment
+
+Enable Reverse DNS private IP enrichment to perform DNS lookups and find the domain name associated with any NetFlow source or destination IP address. When enabled, the Agent conducts reverse DNS lookups on source and/or destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
+
+Add the following to your `datadog.yaml` file to enable Reverse DNS IP enrichment (disabled by [default][7]):
+
+```yaml
+## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records.
+   reverse_dns_enrichment_enabled: true
+```
+
+Search for **DNS** in the Flow section of the facets section to locate flows associated with reverse DNS IP enrichment: 
+
+{{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
+
+**Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, reference the [full configuration file][8].
+
 ## Visualization
 
 You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
@@ -159,6 +176,7 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Destination Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the destination IP. |
 | Destination Subdivision Name | The name of the subdivision (such as state or province) associated with the destination IP. |
 | Destination Timezone | The timezone associated with the destination IP. |
+| Destination Reverse DNS Hostname | The DNS hostname associated with the destination IP. |
 
 ### NetFlow Source IP facets
 
@@ -187,6 +205,7 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
+| Source Reverse DNS Hostname | The DNS hostname associated with the source IP. |
 
 By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
 
@@ -265,3 +284,5 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/devices/netflow
 [6]: /monitors/types/netflow/
+[7]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4201
+[8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
