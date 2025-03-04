@@ -42,7 +42,7 @@ The following limitations apply to the limited preview:
 ### Supported features
 
 - Dynamic Logs, Metrics, Spans, and Span Tags
-- [Dynamic Logs][8] attached to a function/method
+- Dynamic Logs attached to a function/method
 - Local variable capture for Dynamic Logs
 - Dynamic Log conditions
 - Expression evaluation in Dynamic Log templates
@@ -65,3 +65,6 @@ The following limitations apply to the limited preview:
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
+[9]: /integrations/guide/source-code-integration/?tab=php
+
