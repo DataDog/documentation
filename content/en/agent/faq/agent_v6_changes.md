@@ -16,6 +16,8 @@ further_reading:
 
 Datadog Agent v6 contains many changes compared to previous Agent versions. The changes and deprecations are detailed in the sections below.
 
+Test
+
 ## Features
 
 The following Agent v5 features are **not available** in Agent v6:
