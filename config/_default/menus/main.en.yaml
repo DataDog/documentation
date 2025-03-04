@@ -1984,22 +1984,22 @@ menu:
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305   
+      weight: 305
     - name: Production Readiness
       url: software_catalog/use_cases/production_readiness
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_production_readiness
-      weight: 306  
+      weight: 306
     - name: Incident Response
       url: software_catalog/use_cases/incident_response
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_incident_response
-      weight: 307    
+      weight: 307
     - name: CI Pipeline Visibility
       url: software_catalog/use_cases/pipeline_visibility
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_pipeline_visibility
-      weight: 308  
+      weight: 308
     - name: Manage a Component
       url: software_catalog/manage
       parent: software_catalog
@@ -6352,6 +6352,16 @@ menu:
       url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis
       weight: 5
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Tutorial
+      identifier: sec_static_analysis_custom_rules_tutorial
+      url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
     - name: Software Composition Analysis (SCA)
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
@@ -6372,11 +6382,26 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
+    - name: Secrets Scanning
+      identifier: sec_secret_scanning
+      url: /security/code_security/secret_scanning/
+      parent: code_security
+      weight: 3
+    - name: GitHub Actions
+      identifier: sec_secret_scanning_github_actions
+      url: /security/code_security/secret_scanning/github_actions/
+      parent: sec_secret_scanning
+      weight: 1
+    - name: Generic CI Providers
+      identifier: sec_secret_scanning_generic_ci_providers
+      url: /security/code_security/secret_scanning/generic_ci_providers/
+      parent: sec_secret_scanning
+      weight: 2
     - name: Runtime Code Analysis (IAST)
       identifier: sec_iast
       url: /security/code_security/iast/
       parent: code_security
-      weight: 3
+      weight: 4
     - name: Setup
       identifier: sec_iast_setup
       url: /security/code_security/iast/setup/
@@ -6386,7 +6411,7 @@ menu:
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 4
+      weight: 5
     - name: GitHub Pull Requests
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/github_pull_requests/
@@ -6406,12 +6431,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 5
+      weight: 6
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
