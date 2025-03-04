@@ -5,8 +5,9 @@
     "scripts": {
         "provide-browser-bundle-to-vitest": "cp -r ./dist/clientBundle ./src",
         "posttest": "rimraf ./src/clientBundle",
-        "test": "yarn build; yarn provide-browser-bundle-to-vitest; vitest run --coverage --reporter=verbose",
-        "test:watch": "yarn build; vitest",
+        "pretest": "yarn build; yarn provide-browser-bundle-to-vitest",
+        "test": "yarn pretest; vitest run --coverage --reporter=verbose",
+        "test:watch": "yarn pretest; vitest",
         "build-markdoc-integration": "rimraf ./dist && npx tsc; yarn copy-styles",
         "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/clientBundle/clientFiltersManager.min.js'",
         "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/clientBundle/clientFiltersManager.js'",
