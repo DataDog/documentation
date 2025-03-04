@@ -16,7 +16,10 @@ ELB, RDS 및 DynamoDB와 같은 기타 AWS 리소스는 월별 인프라스트�
 
 ## AWS 리소스 제외
 
-일부 서비스에 대해 수집된 AWS 메트릭을 특정 리소스로 제한할 수 있습니다. [Datadog-AWS 통합 페이지][3]에서 AWS 계정을 선택하고 **Metric Collection** 탭을 클릭합니다. **Limit Metric Collection to Specific Resources**에서 EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS 및 CloudWatch 커스텀 메트릭 중 하나 이상에 대한 메트릭을 제외할 수 있습니다.
+일부 서비스에 대해 수집된 AWS 메트릭을 특정 리소스로 제한할 수 있습니다. [Datadog-AWS 통합 페이지][3]에서 AWS 계정을 선택하고 **Metric Collection** 탭을 클릭합니다. **Limit Metric Collection to Specific Resources**에서 EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Function, CloudWatch 커스텀 메트릭 중 하나 이상의 메트릭을 제한할 수 있습니다.
+이 섹션에 추가되는 태그는 AWS의 해당 리소스에 할당되어야 합니다.
+
+**참고**: 제외 주석(`!`)을 사용하는 경우, 지정된 태그가 없어야 합니다.
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="Datadog AWS 통합 페이지에 있는 AWS 계정의 메트릭 수집 탭에는 AWS 서비스를 선택할 수 있는 드롭다운 메뉴와 키:값 형식으로 태그를 추가할 수 있는 필드가 포함되어 메트릭 수집을 특정 리소스로 제한하는 옵션이 표시되어 있습니다." >}}
 

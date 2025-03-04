@@ -1,5 +1,5 @@
 ---
-title: Android Monitoring App Performance
+title: iOS Monitoring App Performance
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: "Source Code"
