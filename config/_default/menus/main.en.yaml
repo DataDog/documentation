@@ -6353,6 +6353,16 @@ menu:
       url: /security/code_security/static_analysis/static_analysis_rules/
       parent: sec_static_analysis
       weight: 5
+    - name: SAST Custom Rules
+      identifier: sec_static_analysis_custom_rules
+      url: /security/code_security/static_analysis/custom_rules/
+      parent: sec_static_analysis
+      weight: 5
+    - name: SAST Custom Rules Tutorial
+      identifier: sec_static_analysis_custom_rules_tutorial
+      url: /security/code_security/static_analysis/custom_rules/tutorial/
+      parent: sec_static_analysis
+      weight: 5
     - name: Software Composition Analysis (SCA)
       identifier: software_composition_analysis
       url: /security/code_security/software_composition_analysis/
@@ -6377,7 +6387,7 @@ menu:
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
       parent: code_security
-      weight: 1
+      weight: 3
     - name: GitHub Actions
       identifier: sec_secret_scanning_github_actions
       url: /security/code_security/secret_scanning/github_actions/
@@ -6392,7 +6402,7 @@ menu:
       identifier: sec_iast
       url: /security/code_security/iast/
       parent: code_security
-      weight: 3
+      weight: 4
     - name: Setup
       identifier: sec_iast_setup
       url: /security/code_security/iast/setup/
@@ -6402,7 +6412,7 @@ menu:
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
       parent: code_security
-      weight: 4
+      weight: 5
     - name: GitHub Pull Requests
       identifier: dev_tool_int_github_pull_requests
       url: /security/code_security/dev_tool_int/github_pull_requests/
@@ -6422,12 +6432,12 @@ menu:
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
       parent: code_security
-      weight: 5
+      weight: 6
     - name: Guides
       identifier: code_security_guides
       url: /security/code_security/guides/
       parent: code_security
-      weight: 6
+      weight: 7
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
