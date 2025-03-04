@@ -37,22 +37,22 @@ When you end the session, CoTerm stops recording and sends the captured process 
 To run an individual command and record its output:
 
 ```shell
-ddcoterm -- kubectl describe pods
+ddcoterm -- datadog-agent status
 ```
 
-This launches CoTerm and runs `kubectl describe pods`. When the process completes, CoTerm stops recording and sends the captured process data to Datadog.
+This launches CoTerm and runs `datadog-agent status`. When the process completes, CoTerm stops recording and sends the captured process data to Datadog.
 
 ## Automatically record a command
 
 To configure CoTerm to automatically record a particular command, create a shim:
 
 ```shell
-ddcoterm shim create kubectl
+ddcoterm shim create datadog-agent
 ```
 
 After you create a shim, restart your terminal or source your profile. (For example, run `source ~/.bashrc`.) If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/overrides` to your PATH manually.
 
-All future invocations of `kubectl` are automatically recorded.
+All future invocations of `datadog-agent` are automatically recorded.
 
 ## Protect against dangerous terminal commands
 
