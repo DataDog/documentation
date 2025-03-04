@@ -35,9 +35,9 @@ Using the example, no matter which topic or partition breaches the threshold, th
 
 For more information, see [Configure Monitors - Simple alert][1].
 
-### Multi Alert
+### Multi alert
 
-A Multi Alert monitor is a monitor that triggers for each unique combination of groups.  
+A multi alert monitor sends a notification for each unique combination of groups.  
 {{< img src="/monitors/guide/alert_aggregation/multi_alert_notification.png" alt="Notification configuration for a multi alert monitor" style="width:100%;" >}}
 In our case, the monitor will send a notification each time a combination of topic and partition breaches the threshold.  
 When using Multi Alert, using [Variables][2] become very useful to get more granularity in your notifications. They help you get a specific message depending on the group that triggers the alert.
