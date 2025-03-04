@@ -23,7 +23,7 @@ The OpenTelemetry Collector enables you to collect, process, and export telemetr
 - **Datadog Exporter**: Forwards trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent)
 - **Datadog Connector**: Calculates Trace Metrics from collected span data
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data via OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
 <div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>Full OTel</b>.</div>
 
@@ -38,7 +38,7 @@ Download the latest release of the OpenTelemetry Collector Contrib distribution,
 To use the Datadog Exporter and Datadog Connector, configure them in your [OpenTelemetry Collector configuration][4]:
 
 1. Create a configuration file named `collector.yaml`.
-1. Use the following basic example file to get started.
+1. Use the following example file to get started.
 1. Set your Datadog API key as the `DD_API_KEY` environment variable.
 
 {{% otel-endpoint-note %}}
@@ -124,7 +124,7 @@ For a complete list of configuration options for the Datadog Exporter, see the [
 
 #### Batch processor configuration
 
-The batch processor is required for any non-development environments. The exact configuration depends on your specific workload and signal types.
+The batch processor is required for non-development environments. The exact configuration depends on your specific workload and signal types.
 
 Configure the batch processor based on Datadog's intake limits:
 

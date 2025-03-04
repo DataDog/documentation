@@ -12,7 +12,7 @@ further_reading:
   text: "Datadog's partnership with OpenTelemetry"
 - link: '/logs/guide/ease-troubleshooting-with-cross-product-correlation/'
   tag: 'Guide'
-  text: 'Ease troubleshooting with cross product correlation.'
+  text: 'Ease troubleshooting with cross-product correlation.'
 ---
 
 {{< include-markdown "/tracing/other_telemetry/connect_logs_and_traces/opentelemetry" >}}

@@ -56,7 +56,7 @@ Datadog provides advanced observability for all your application telemetry, rega
 - **Unified Instrumentation**: Maintain a single approach to instrumentation across your systems
 - **Powerful Analytics**: Combine OpenTelemetry's standardization with Datadog's robust analysis, visualization, and alerting capabilities
 
-Whether you're already using OpenTelemetry or considering adoption, Datadog provides flexible options to meet your specific needs.
+Whether you're already using OpenTelemetry or considering adoption, Datadog provides flexible options to meet your needs.
 
 ### Key decisions
 
@@ -85,7 +85,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 1: Use the OpenTelemetry Collector
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data via OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
 
 **Best for**: New or existing OTel users wanting a completely vendor-neutral setup.
 
@@ -98,7 +98,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the Datadog Agent
 
-{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data via OTLP protocol directly to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol directly to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
 
 **Best for**: Existing Datadog users or teams requiring Agent-based features.
 
