@@ -14,7 +14,7 @@ To set up this processor:
 
 ##### Path notation example {#path-notation-example-parse-xml}
 
- For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 
 ```json
 {
@@ -96,7 +96,7 @@ The XML is converted to:
 
 ##### Attribute prefix example
 
-If you enable **Include XML attributes, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
+If you enable **Include XML attributes**, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
 
 ```xml
 <recipe type="pasta">Carbonara</recipe>

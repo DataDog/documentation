@@ -30,7 +30,7 @@ See the [split array example](#split-array-example) for a more detailed example.
 
 To set up this processor:
 
-Click **Manage arrays to split** to add an Array to Split or edit an existing Array to Split. This opens a side panel.
+Click **Manage arrays to split** to add an array to split or edit an existing array to split. This opens a side panel.
 
 - If you have not created any arrays yet, enter the array parameters as described in the [Add a new array](#add-a-new-array) section below.
 - If you have already created arrays, click on the array's row in the table to edit or delete it. Use the search bar to find a specific array, and then select the array to edit or delete it. Click **Add Array to Split** to add a new array.
@@ -127,7 +127,7 @@ If the processor is splitting the arrays `"message.myfield.firstarray"` and `"se
 
 ##### Path notation example {#path-notation-example-split-array}
 
- For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+For the following message structure, use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
 ```json
 {
     "outer_key": {
