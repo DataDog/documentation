@@ -1575,9 +1575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-data@file:/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-data/cdocs-data-v1.0.3.tgz::locator=cdocs-hugo-integration%40workspace%3A.":
-  version: 1.0.3
-  resolution: "cdocs-data@file:/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-data/cdocs-data-v1.0.3.tgz::locator=cdocs-hugo-integration%40workspace%3A."
+"cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz":
+  version: 1.0.2
+  resolution: "cdocs-data@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz"
   dependencies:
     js-yaml: ^4.1.0
     jsdom: ^26.0.0
@@ -1587,7 +1587,7 @@ __metadata:
     typedoc-plugin-zod: ^1.3.1
     uuid: ^11.0.5
     zod: ^3.22.4
-  checksum: d79f0348d5234c00bb707f69738f61adbb1a3847db8e8465d26cdea0819ce2326712c0e54062b13097464c67294d1959e0fe7d5d3afed554d723ba86ed0cf276
+  checksum: 69058b63360bcce5274879bd4da2b4b20e253f3ce6a8a4d9fdff15b94118ca8e8fad21601be9cce58a849cf963f1adb8bac094c708f06041b15c9940fa76b4e1
   languageName: node
   linkType: hard
 
@@ -1605,7 +1605,7 @@ __metadata:
     "@types/uuid": ^10.0.0
     "@vitejs/plugin-react": ^4.3.3
     "@vitest/coverage-v8": ^2.0.2
-    cdocs-data: "file:/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-data/cdocs-data-v1.0.3.tgz"
+    cdocs-data: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz"
     cdocs-markdoc: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz"
     chroma-highlight: ^2.4.2
     esbuild: 0.20.2

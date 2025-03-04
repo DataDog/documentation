@@ -2,7 +2,7 @@
 
 This package enables customizable docs (the ability to filter irrelevant information from a docs page) in Hugo. 
 
-It compiles [Markdoc][1] files (`.mdoc.md`) into `.md` files that Hugo is able to process, functioning as a Hugo-specific wrapper for the [`cdocs-data`][5] and [`cdocs-markdoc`][6] packages. For an overview of the key concepts around content filters, see [the `cdocs-data` README][5].
+It compiles [Markdoc][1] files (`.mdoc.md`) into `.md` files that Hugo is able to process, functioning as a Hugo-specific wrapper for the [`cdocs-data`][5] and [`cdocs-markdoc`][2] packages. For an overview of the key concepts around content filters, see [the `cdocs-data` README][5].
 
 The compiled "Markdown" files are actually just HTML with frontmatter added at the top. 
 
@@ -95,7 +95,7 @@ if (hasErrors) {
 
 - Install this package in your Hugo site according to [the `corp-node-packages` instructions][12].
 - Choose a filepath for the global assets partial, and make sure that asset is included in your Hugo layout.
-- Add a `.js` file similar to the provided [example script](#example-build-script), and run it as part of your build **before** Hugo processes any files.
+- Create a script similar to the provided [example script](#example-build-script), and run it as part of your build **before** Hugo processes any files.
 
 ### Experiment with the integration
 
@@ -109,14 +109,13 @@ This package follows the `cdocs-data` [conventions][8] where applicable.
 
 ### JSX templates should not hold state
 
-JSX is used for the templating of some components because it's a commonly known templating language. But React is not available client-side, so the templates should not hold state or use attributes such as `onClick`.
+JSX is used for the templating of some components because it's a commonly known templating language with native TypeScript support, and can be easier to work with than plain strings. But React is not available client-side, so the templates should not hold state or use attributes such as `onClick`.
 
 [1]: https://markdoc.dev/docs/syntax
-[2]: ../cdocs-markdoc/README.md
+[2]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-markdoc#readme
 [3]: ./test/config/mocks/validSite/content/en/demos/colors/primary.mdoc.md
 [4]: ./test/__snapshots__/fileRendering/en/demos/colors/primary.mdoc.md/compiledHtml.snap.md
 [5]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-data#readme
-[6]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-markdoc#readme
 [7]: https://github.com/DataDog/documentation
 [8]: https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-data#code-conventions
 [9]: ./test/config/mocks/validSite/

@@ -9,8 +9,7 @@ export default defineConfig({
         '**/browserEntryPoint.ts',
         '**/ClientFiltersManager.ts',
         '**/reresolver.ts',
-        '**/debugBookmarklet.js',
-        '**/bundledScripts/**',
+        '**/clientBundle/**',
         '**/scripts/**',
         '**/test/**'
       ]

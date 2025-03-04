@@ -1,15 +1,15 @@
 {
     "name": "cdocs-hugo-integration",
     "version": "1.0.0",
-    "description": "A precompiler that converts customizable Markdoc content into static Hugo content",
+    "description": "A preprocessor that converts dynamic Markdoc content into static (but customizable) Hugo content",
     "scripts": {
-        "provide-browser-bundle-to-vitest": "cp -r ./dist/bundledScripts ./src",
-        "posttest": "rimraf ./src/bundledScripts",
+        "provide-browser-bundle-to-vitest": "cp -r ./dist/clientBundle ./src",
+        "posttest": "rimraf ./src/clientBundle",
         "test": "yarn build; yarn provide-browser-bundle-to-vitest; vitest run --coverage --reporter=verbose",
         "test:watch": "yarn build; vitest",
         "build-markdoc-integration": "rimraf ./dist && npx tsc; yarn copy-styles",
-        "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/bundledScripts/clientFiltersManager.min.js'",
-        "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/bundledScripts/clientFiltersManager.js'",
+        "build-prod-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-prod.json --tree-shaking=true --bundle --minify --outfile='./dist/clientBundle/clientFiltersManager.min.js'",
+        "build-dev-renderer": "yarn esbuild ./dist/siteAssetBuilding/browserEntryPoint.js --metafile=esbuild-meta-dev.json --tree-shaking=true --bundle --outfile='./dist/clientBundle/clientFiltersManager.js'",
         "build": "yarn build-markdoc-integration && yarn build-dev-renderer && yarn build-prod-renderer && yarn copy-styles && yarn copy-html",
         "copy-styles": "cp ./src/siteAssetBuilding/styles.css ./dist/siteAssetBuilding",
         "copy-html": "mkdir ./dist/authorConsole && cp ./src/authorConsole/index.html ./dist/authorConsole"
@@ -20,7 +20,7 @@
     "dependencies": {
         "@types/markdown-it": "^14.1.2",
         "@vitejs/plugin-react": "^4.3.3",
-        "cdocs-data": "file:/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-data/cdocs-data-v1.0.3.tgz",
+        "cdocs-data": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz",
         "cdocs-markdoc": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-markdoc-v1.0.1.tgz",
         "chroma-highlight": "^2.4.2",
         "interweave": "^13.1.0",
