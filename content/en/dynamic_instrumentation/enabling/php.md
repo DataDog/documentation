@@ -9,6 +9,12 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
+{{< beta-callout-private url="https://www.datadoghq.com/product-preview/dynamic-instrumentation-for-php/" >}}
+    Dynamic Instrumentation for PHP is in limited preview, and is not available to all customers.
+    Request access to join the waiting list.
+    Note that <a href="#limitations">some limitations</a> apply to the preview.
+{{< /beta-callout-private >}}
+
 Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Installation
@@ -35,6 +41,19 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
+## Limitations
+
+The following limitations apply to the limited preview:
+
+### Supported features
+
+- [Dynamic Logs][8] attached to a function/method
+
+### Unsupported features
+
+- Dynamic Logs attached to a specific file/line
+- Dynamic Metrics, Spans, and Span Tags
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -45,3 +64,4 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: /dynamic_instrumentation/
 [7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /dynamic_instrumentation/#creating-log-probes
