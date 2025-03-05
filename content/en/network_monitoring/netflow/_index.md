@@ -87,7 +87,7 @@ Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames as
 
 By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
-Search for **DNS** in the Flow grouping of the facets section to locate flows associated with reverse DNS IP enrichment: 
+Search for **DNS** in the Flow grouping of the facets section to locate flows associated with Reverse DNS IP enrichment: 
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
 
