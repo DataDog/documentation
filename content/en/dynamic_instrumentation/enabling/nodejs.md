@@ -42,7 +42,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 ## Source map support
 
 If the source code of your Node.js application is transpiled or bundled,
-you need to generate and publish the source maps along with the code - either inline or as separate files.
+you need to generate and publish the source maps along with the code, either inline or as separate files.
 
 * **TypeScript**: Set either [`inlineSourceMap`][10] or [`sourceMap`][11] to `true` in the TypeScript config file.
 * **Babel**: Configure the [`sourceMaps`][12] option in the Babel config file (see also the special `--source-maps` CLI option, used to generate separate source map files).
