@@ -29,27 +29,36 @@ further_reading:
 
 ### Installation
 
-Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka, SQS or RabbitMQ.
+To enable Data Streams Monitoring, set the following environment variables to `true` on services that are sending or consuming messages:
 
-Also, set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` variable to `true` so that `DD_SERVICE` is used as the service name in traces.
+- `DD_DATA_STREAMS_ENABLED`
+- `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
 
-For example:
+{{< tabs >}}
+{{% tab "Environment variables" %}}
+
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
   - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
-As an alternative, you can set the `-Ddd.data.streams.enabled=true` system property by running the following when you start your Java application:
+{{% /tab %}}
+{{% tab "Command line" %}}
 
-```bash
+Run the following when you start your Java application:
+
+```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration-service-names.enabled=true -jar path/to/your/app.jar
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### One-Click Installation
 To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.
 
-{{< img src="data_streams/enable_dsm_software_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
+{{< img src="data_streams/enable_dsm_service_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][3] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
