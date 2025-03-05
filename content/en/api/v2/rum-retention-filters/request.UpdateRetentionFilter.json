@@ -1,0 +1,13 @@
+{
+  "data": {
+    "id": "4b95d361-f65d-4515-9824-c9aaeba5ac2a",
+    "type": "retention_filters",
+    "attributes": {
+      "name": "Test updating retention filter",
+      "event_type": "view",
+      "query": "view_query",
+      "sample_rate": 100,
+      "enabled": true
+    }
+  }
+}
