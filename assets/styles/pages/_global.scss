@@ -693,10 +693,8 @@ h5 {
     }
     .tab-content {
         display: grid;
-        max-width: min-content;
-        border: green solid 3px;
         grid-template-rows: 1fr;
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(329px,auto);
         padding-top: 12px;
         h2 > a,
         h3 > a,
@@ -711,12 +709,11 @@ h5 {
         }
         .tab-pane {
             display: initial;
-            max-width: inherit;
-            border: red solid 3px;            
             grid-row: 1;
-            grid-column: 1/-1;
+            grid-column: 1;
             &:not(.active) {
                 opacity: 0;
+                z-index: -1;
             }
         }
         .text-center img {
