@@ -70,6 +70,8 @@ There are two methods for deploying scanners to your environment:
 
 When you deploy Agentless scanners using CloudFormation, a single scanner is created per account and scans across all of the account's regions. You set the region that the scanner is deployed on.
 
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram showing a scanner in each account scanning across regions within that account" style="width:100%;" >}}
+
 You can add a scanner to a new AWS account or an existing AWS account.
 
 {{< tabs >}}
@@ -115,11 +117,11 @@ You can deploy Agentless scanners using the [Terraform Module Datadog Agentless 
 
 - Create an AWS account dedicated to Agentless scanners. Deploy a scanner for every region that has cloud resources you want to scan.
 
-{{< img src="/security/agentless_scanning/agentless_advanced_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
+  {{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagram showing a central scanner for a region and the scanner scanning across different accounts" style="width:100%;" >}}
 
 - Deploy a scanner for every region that has cloud resources that you want to scan.
 
-{{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
+  {{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-region.png" alt="Diagram showing a scanner in each region that scans accounts within that region" style="width:100%;" >}}
 
 ## Scanning groups
 
