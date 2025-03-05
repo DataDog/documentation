@@ -22,7 +22,6 @@ The following AWS services are supported:
 - Amazon Kinesis
 - Amazon S3
 - Amazon EventBridge
-- Amazon DynamoDB
 
 The following tracer versions and AWS SDK packages are supported:
 
@@ -134,6 +133,7 @@ The following services are supported:
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 <div class="alert alert-info">To request support for additional services, open a feature request with the <a href="/help/">Datadog Support</a> team.</div>
 
