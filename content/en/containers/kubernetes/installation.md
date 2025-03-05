@@ -177,8 +177,10 @@ agent:
         - <GROUP_ID>
 {{< /highlight >}}
 
-- Replace `<USER_ID>` with the UID to run the Datadog Agent. [Datadog recommends setting this value to 100 since Datadog Agent v7.48+][26].
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: https://docs.datadoghq.com/data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
@@ -334,4 +336,3 @@ The [Kubernetes][21] section features an overview of all your Kubernetes resourc
 [23]: https://app.datadoghq.com/orchestration/resource/pod
 [24]: /infrastructure/containers/orchestrator_explorer
 [25]: /infrastructure/containers/kubernetes_resource_utilization
-[26]: /data_security/kubernetes
