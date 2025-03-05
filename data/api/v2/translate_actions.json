@@ -39,6 +39,20 @@
     "request_description": "New definition of the scan options.",
     "request_schema_description": "Request object that includes the scan options to update."
   },
+  "ListAwsOnDemandTasks": {
+    "description": "Fetches the most recent 1000 AWS on demand tasks.",
+    "summary": "Get AWS On Demand tasks"
+  },
+  "CreateAwsOnDemandTask": {
+    "description": "Trigger the scan of an AWS resource with a high priority.",
+    "summary": "Post an AWS on demand task",
+    "request_description": "The definition of the on demand task.",
+    "request_schema_description": "Request object that includes the on demand task to submit."
+  },
+  "RetrieveAwsOnDemandTask": {
+    "description": "Fetch the data of a specific on demand task.",
+    "summary": "Get AWS On Demand task by id"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"

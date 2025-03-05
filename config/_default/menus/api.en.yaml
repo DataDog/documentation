@@ -4739,6 +4739,42 @@ menu:
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
       generated: true
+    - name: Get AWS On Demand task by id
+      url: '#get-aws-on-demand-task-by-id'
+      identifier: agentless-scanning-get-aws-on-demand-task-by-id
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RetrieveAwsOnDemandTask
+        unstable: []
+        order: 6
+    - name: Post an AWS on demand task
+      url: '#post-an-aws-on-demand-task'
+      identifier: agentless-scanning-post-an-aws-on-demand-task
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsOnDemandTask
+        unstable: []
+        order: 7
+    - name: Get AWS On Demand tasks
+      url: '#get-aws-on-demand-tasks'
+      identifier: agentless-scanning-get-aws-on-demand-tasks
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAwsOnDemandTasks
+        unstable: []
+        order: 5
     - name: Patch AWS Scan Options
       url: '#patch-aws-scan-options'
       identifier: agentless-scanning-patch-aws-scan-options

@@ -566,6 +566,14 @@ components:
       required: false
       schema:
         type: string
+    OnDemandTaskId:
+      description: The UUID of the task.
+      example: 6d09294c-9ad9-42fd-a759-a0c1599b4828
+      in: path
+      name: task_id
+      required: true
+      schema:
+        type: string
     OpsgenieServiceIDPathParameter:
       description: The UUID of the service.
       in: path
@@ -1777,10 +1785,6 @@ components:
             type: string
           type: array
       type: object
-    AccountId:
-      description: The ID of the AWS account.
-      example: '184366314700'
-      type: string
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -3132,7 +3136,7 @@ components:
       x-enum-varnames:
       - AUTHN_MAPPINGS
     AwsAccountId:
-      description: The ID of an AWS account.
+      description: The ID of the AWS account.
       example: '123456789012'
       type: string
     AwsCURConfig:
@@ -3351,8 +3355,123 @@ components:
             $ref: '#/components/schemas/AwsCURConfig'
           type: array
       type: object
+    AwsOnDemandAttributes:
+      description: Attributes for the AWS on demand task.
+      properties:
+        arn:
+          description: The arn of the resource to scan.
+          example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
+          type: string
+        assigned_at:
+          description: Specifies the assignment timestamp if the task has been already
+            assigned to a scanner.
+          example: '2025-02-11T18:25:04.550564Z'
+          type: string
+        created_at:
+          description: The task submission timestamp.
+          example: '2025-02-11T18:13:24.576915Z'
+          type: string
+        status:
+          description: 'Indicates the status of the task.
+
+            QUEUED: the task has been submitted successfully and the resource has
+            not been assigned to a scanner yet.
+
+            ASSIGNED: the task has been assigned.
+
+            ABORTED: the scan has been aborted after a period of time due to technical
+            reasons, such as resource not found, insufficient permissions, or the
+            absence of a configured scanner.'
+          example: QUEUED
+          type: string
+      type: object
+    AwsOnDemandCreateAttributes:
+      description: Attributes for the AWS on demand task.
+      properties:
+        arn:
+          description: The arn of the resource to scan. Agentless supports the scan
+            of EC2 instances, lambda functions, AMI, ECR, RDS and S3 buckets.
+          example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
+          type: string
+      type: object
+    AwsOnDemandCreateData:
+      description: Object for a single AWS on demand task.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsOnDemandCreateAttributes'
+        type:
+          $ref: '#/components/schemas/AwsOnDemandType'
+      required:
+      - type
+      - attributes
+      type: object
+    AwsOnDemandCreateRequest:
+      description: Request object that includes the on demand task to submit.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsOnDemandCreateData'
+      required:
+      - data
+      type: object
+    AwsOnDemandData:
+      description: Single AWS on demand task.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsOnDemandAttributes'
+        id:
+          description: The UUID of the task.
+          example: 6d09294c-9ad9-42fd-a759-a0c1599b4828
+          type: string
+        type:
+          $ref: '#/components/schemas/AwsOnDemandType'
+      type: object
+    AwsOnDemandListResponse:
+      description: Response object that includes a list of AWS on demand tasks.
+      properties:
+        data:
+          description: A list of on demand tasks.
+          items:
+            $ref: '#/components/schemas/AwsOnDemandData'
+          type: array
+      type: object
+    AwsOnDemandResponse:
+      description: Response object that includes an AWS on demand task.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsOnDemandData'
+      type: object
+    AwsOnDemandType:
+      default: aws_resource
+      description: The type of the on demand task. The value should always be `aws_resource`.
+      enum:
+      - aws_resource
+      example: aws_resource
+      type: string
+      x-enum-varnames:
+      - AWS_RESOURCE
     AwsScanOptionsAttributes:
       description: Attributes for the AWS scan options.
+      properties:
+        lambda:
+          description: Indicates if scanning of Lambda functions is enabled.
+          example: true
+          type: boolean
+        sensitive_data:
+          description: Indicates if scanning for sensitive data is enabled.
+          example: false
+          type: boolean
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          example: true
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          example: true
+          type: boolean
+      type: object
+    AwsScanOptionsCreateAttributes:
+      description: Attributes for the AWS scan options to create.
       properties:
         lambda:
           description: Indicates if scanning of Lambda functions is enabled.
@@ -3376,15 +3495,15 @@ components:
       description: Object for the scan options of a single AWS account.
       properties:
         attributes:
-          $ref: '#/components/schemas/AwsScanOptionsAttributes'
+          $ref: '#/components/schemas/AwsScanOptionsCreateAttributes'
         id:
           $ref: '#/components/schemas/AwsAccountId'
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       required:
       - id
-      - attributes
       - type
+      - attributes
       type: object
     AwsScanOptionsCreateRequest:
       description: Request object that includes the scan options to create.
@@ -3457,12 +3576,13 @@ components:
         attributes:
           $ref: '#/components/schemas/AwsScanOptionsUpdateAttributes'
         id:
-          $ref: '#/components/schemas/AccountId'
+          $ref: '#/components/schemas/AwsAccountId'
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       required:
-      - attributes
+      - id
       - type
+      - attributes
       type: object
     AwsScanOptionsUpdateRequest:
       description: Request object that includes the scan options to update.
@@ -33782,6 +33902,96 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/agentless_scanning/ondemand/aws:
+    get:
+      description: Fetches the most recent 1000 AWS on demand tasks.
+      operationId: ListAwsOnDemandTasks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS On Demand tasks
+      tags:
+      - Agentless Scanning
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+      x-undo:
+        type: safe
+    post:
+      description: Trigger the scan of an AWS resource with a high priority.
+      operationId: CreateAwsOnDemandTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsOnDemandCreateRequest'
+        description: The definition of the on demand task.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandResponse'
+          description: AWS on demand task created successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Post an AWS on demand task
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+      x-undo:
+        type: idempotent
+  /api/v2/agentless_scanning/ondemand/aws/{task_id}:
+    get:
+      description: Fetch the data of a specific on demand task.
+      operationId: RetrieveAwsOnDemandTask
+      parameters:
+      - $ref: '#/components/parameters/OnDemandTaskId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandResponse'
+          description: OK.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS On Demand task by id
+      tags:
+      - Agentless Scanning
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+      x-undo:
+        type: safe
   /api/v2/api_keys:
     get:
       description: List all API keys available for your account.
