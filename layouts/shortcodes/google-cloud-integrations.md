@@ -37,7 +37,7 @@
 
 
 [1001]: https://docs.datadoghq.com/integrations/google_app_engine/
-[1002]: https://docs.datadoghq.com/integrations/google_bigquery/
+[1002]: https://docs.datadoghq.com/integrations/google_cloud_bigquery/
 [1003]: https://docs.datadoghq.com/integrations/google_cloud_bigtable/
 [1004]: https://docs.datadoghq.com/integrations/google_cloudsql/
 [1005]: https://docs.datadoghq.com/integrations/google_cloud_apis/
