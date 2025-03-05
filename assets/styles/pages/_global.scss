@@ -692,6 +692,11 @@ h5 {
         padding-left: 0 !important;
     }
     .tab-content {
+        display: grid;
+        max-width: min-content;
+        border: green solid 3px;
+        grid-template-rows: 1fr;
+        grid-template-columns: 1fr;
         padding-top: 12px;
         h2 > a,
         h3 > a,
@@ -702,6 +707,16 @@ h5 {
             &:hover {
                 color: #000;
                 border-bottom: 1px solid #000;
+            }
+        }
+        .tab-pane {
+            display: initial;
+            max-width: inherit;
+            border: red solid 3px;            
+            grid-row: 1;
+            grid-column: 1/-1;
+            &:not(.active) {
+                opacity: 0;
             }
         }
         .text-center img {
