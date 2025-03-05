@@ -193,13 +193,11 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 {{% /tab %}}
 
 {{% tab "GitLab" %}}
-<div class="alert alert-warning">Datadog's GitLab integration is in closed preview.</div>
-
-To request access to Datadog's GitLab integration for your organization, reach out to [Datadog Support][1].
+<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to [Datadog Support][1].</div>
 
 After your organization has access, follow the [GitLab installation guide][2].
 
-**Note**: The scope of the service account's personal access token needs to be at least **read_api**.
+**Note**: The scope of the service account's personal access token needs to be at least `read_api`.
 
 [1]: https://www.datadoghq.com/support/
 [2]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
@@ -266,7 +264,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 ### Limitations
 
 - Change lead time stage breakdown metrics are only available for GitHub and GitLab.
-  - The GitLab integration is in closed preview. Access can be requested [here][8].
+  - The GitLab integration is in Preview. Contact [Datadog support][8] to request access.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
