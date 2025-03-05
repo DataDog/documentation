@@ -63,6 +63,11 @@ To upload a SARIF report, follow the steps below:
    datadog-ci sarif upload $OUTPUT_LOCATION
    ```
 
+If reports are missing in Datadog, please define the following environment variables before invoking datadog-ci:
+- `DD_GIT_REPOSITORY_URL`
+- `DD_GIT_BRANCH`
+- `DD_GIT_COMMIT_SHA`
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
