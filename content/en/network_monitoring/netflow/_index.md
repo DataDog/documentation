@@ -45,8 +45,8 @@ network_devices:
         port: 4739
       - flow_type: sflow5
         port: 6343
-  reverse_dns_enrichment: 
-    enabled: false ## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records.
+    reverse_dns_enrichment: 
+      enabled: false ## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records.
 ```
 
 After saving your changes, [restart the Agent][4].
