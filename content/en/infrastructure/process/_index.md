@@ -422,7 +422,7 @@ Having these tags available lets you tie together APM, logs, metrics, and proces
 
 You can create rule definitions to add manual tags to processes based on the command line.
 
-1. On the "Manage Process Tags" tab, select _New Process Tag Rule_ button
+1. On the **Manage Process Tags** tab, select _New Process Tag Rule_ button
 2. Select a process to use as a reference
 3. Define the parsing and match criteria for your tag
 4. If validation passes, create a new rule
