@@ -1,0 +1,46 @@
+options:
+# Colors
+- id: red
+  label: Red
+- id: yellow
+  label: Yellow
+- id: blue
+  label: Blue
+- id: orange
+  label: Orange
+- id: green
+  label: Green
+- id: indigo
+  label: Indigo
+- id: violet
+  label: Violet
+
+# Blue items
+- id: ocean
+  label: Ocean
+- id: sky
+  label: Sky
+- id: jeans
+  label: Jeans
+- id: blueberry
+  label: Blueberry
+
+# Red items
+- id: ruby
+  label: Ruby
+- id: apple
+  label: Apple
+- id: firetruck
+  label: Firetruck
+- id: stop_sign
+  label: Stop Sign
+
+# Yellow items
+- id: banana
+  label: Banana
+- id: sunflower
+  label: Sunflower
+- id: lemon
+  label: Lemon
+- id: school_bus
+  label: School Bus
