@@ -140,23 +140,110 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 {{% tab "React Native" %}}
 
+<div class="alert alert-warning">To enable Session Replay, you must use at least version <code>2.0.4</code> of the Datadog <a href="https://github.com/DataDog/dd-sdk-reactnative">React Native SDK</a>, and ensure that the Session Replay SDK version matches the React Native SDK version you are using.</div>
+
 All Session Replay SDK versions can be found in the [npmjs repository][1].
 
 To set up Mobile Session Replay for React Native:
 
 1. Make sure you've [setup and initialized the Datadog React Native SDK][2] with views instrumentation enabled.
 
-2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version.
+2. Add the `@datadog/mobile-react-native-session-replay` dependency, and make sure it matches the `@datadog/mobile-react-native` version, either through [yarn][3] or [npm][4].
 
-2. Enable Session Replay in your app, after initializing the Datadog SDK:
+   ```shell
+   yarn add @datadog/mobile-react-native-session-replay
+   ```
+
+   ```shell
+   npm install @datadog/mobile-react-native-session-replay
+   ```
+
+2. After the Datadog React Native SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+
+   - If you use the `DatadogProvider` component:
+
+     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
+     import { DatadogProvider, DatadogProviderConfiguration } from "@datadog/mobile-react-native";
+    import {
+      ImagePrivacyLevel,
+      SessionReplay,
+      TextAndInputPrivacyLevel,
+      TouchPrivacyLevel,
+    } from "@datadog/mobile-react-native-session-replay";
+
+     const configuration = new DatadogProviderConfiguration(/* ... */)
+
+     // Add this function as onInitialization prop to DatadogProvider
+     const onSDKInitialized = async () => {
+         await SessionReplay.enable({
+            replaySampleRate: 100,
+            textAndInputPrivacyLevel: TextAndInputPrivacyLevel.MASK_SENSITIVE_INPUTS, 
+            imagePrivacyLevel: ImagePrivacyLevel.MASK_NONE, 
+            touchPrivacyLevel: TouchPrivacyLevel.SHOW, 
+         });
+     };
+
+     const App = () => {
+       const navigationRef = React.useRef(null);
+       return (
+         <DatadogProvider configuration={configuration} onInitialization={onSDKInitialized}>
+           {/* App */}
+         </DatadogProvider>
+       );
+     };
+
+     export default App;
+    {{< /code-block >}}
+
+   - If you use the `DdSdkReactNative.initialize` method:
+
+     {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
+     import { DdSdkReactNative, DdSdkReactNativeConfiguration } from "@datadog/mobile-react-native";
+     import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
+
+     const configuration = new DdSdkReactNativeConfiguration(/* ... */)
+
+DdSdkReactNative.initialize(configuration)
+  .then(() => SessionReplay.enable())
+  .catch((error) => { /* handle error */ });
+    {{< /code-block >}}
+
+3. Enable Session Replay in your app, after initializing the Datadog SDK:
    {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
    import { SessionReplay } from "@datadog/mobile-react-native-session-replay";
 
    SessionReplay.enable();
+
    {{< /code-block >}}
+
+4. Define the configuration for Session Replay:
+
+   {{< code-block lang="typescript" filename="App.tsx" disable_copy="false" collapsible="true" >}}
+
+      SessionReplay.enable({
+        replaySampleRate: 100, // Session Replay will be available for all sessions already captured by the SDK
+      });
+
+   {{< /code-block >}}
+
+   During this step, you can also configure multiple [privacy levels][5] that apply to Session Replays.
+
+5. (iOS only) Update your iOS pods.
+   ```shell
+      cd ios && pod install
+   ```
+6. Rebuild your iOS and Android apps.
 
 [1]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions\
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/
+[3]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
+[4]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
+[5]: /real_user_monitoring/session_replay/mobile/privacy_options/?tab=reactnative
+
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -216,7 +303,6 @@ To instrument your consolidated web and native Session Replay views for React Na
 1. Enable [webview tracking][1] for your React Native application.
 2. Enable [Session Replay][2] for your web application.
 3. Enable Session Replay for your mobile application (see setup instructions above).
-
 
 **Note**: This feature is not compatible with React Native's [New Architecture][3] for Android.
 
@@ -373,8 +459,6 @@ config.verbosity = SdkVerbosity.DEBUG;
 ### Privacy options
 
 See [Privacy Options][2].
-
-
 
 ## Further reading
 

@@ -43,7 +43,7 @@ A metric is **unqueried** if it has not been accessed in monitors, SLOs, execute
 
 A metric is considered **used** as long as it exists on an asset, regardless if it has been actively queried.
 
-{{< img src="metrics/summary/facet_panel.png" alt="Metrics Facet Panel" style="width:75%;">}}
+{{< img src="metrics/summary/facet_panel_2025-02-26.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
 

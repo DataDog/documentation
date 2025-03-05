@@ -89,7 +89,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Ensure that **Overwrite data** is not checked.
         - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
 
-   {{< img src="cloud_cost/improved_export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
 9. Click **Next**, then **Review + Create**.
 

@@ -1,6 +1,10 @@
 ---
 title: Recommendations
 description: View recommendations to proactively address issues in your system
+further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-index-recommendations/"
+  tag: "blog"
+  text: "A deep dive into Database Monitoring index recommendations"
 ---
 
 Database Monitoring (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.
@@ -55,6 +59,9 @@ High Impact Blocker
 High Row Count
 : The query returns a large number of rows in its result set.
 
+Unused Index
+: The index has not been used in any execution plans recently.
+
 Long Running Query
 : The query has durations that have exceeded a threshold of 30 seconds.
 
@@ -98,4 +105,15 @@ Low Disk Space
 
 {{% /tab %}}
 
+{{% tab "MongoDB" %}}
+
+Unused Index
+: The index has not been used in any execution plans recently.
+
+{{% /tab %}}
+
 {{< /tabs>}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
