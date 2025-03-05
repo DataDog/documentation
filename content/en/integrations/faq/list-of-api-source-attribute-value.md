@@ -11,7 +11,7 @@ Post events for specific integrations using the [Events API][1] and the `source_
 
 Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 
-**Note**: This list includes sources from core Datadog integrations only. Additional sources may come from [community][2] and [Marketplace][3] integrations. 
+**Note**: This list includes sources from core Datadog integrations only. Additional sources may come from [community][2] and [Marketplace][3] integrations.
 
 
 ## Parameters
@@ -313,6 +313,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Salesforce Incidents          | salesforce incidents          | salesforceincidents        |
 | Segment                       | segment                       | segment                    |
 | Sendgrid                      | sendgrid                      | sendgrid                   |
+| SentinelOne                   | sentinelone                   | sentinelone                |
 | Sentry                        | sentry                        | sentry                     |
 | Servicenow                    | servicenow                    | servicenow                 |
 | Slack                         | slack                         | slack                      |

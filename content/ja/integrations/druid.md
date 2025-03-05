@@ -27,7 +27,7 @@ categories:
 - キャッシュ
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/druid/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: druid
 integration_id: druid
 integration_title: Druid
-integration_version: 2.5.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: druid

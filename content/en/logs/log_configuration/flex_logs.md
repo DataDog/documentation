@@ -42,7 +42,7 @@ Datadog Log Management provides the following solutions:
 - Flex Logs for logs that need to be retained long-term, but sometimes need to be queried urgently, such as security, transaction, and network logs.
 - Archiving for logs that are infrequently queried and need to be stored long-term, such as audit and configuration logs.
 
-Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-the-flex-logs) for more information.
+Use the spectrum of log types shown in the image below to determine when to use the Flex Logs tier. Any high volume, infrequent access, or long term retention log sources are good candidates. You can also retain logs in Standard Indexing first and then extend them using Flex Logs; this is a perfect solution for application logs that you need to retain for longer. See [Potential sources for sending directly to the Flex Logs tier](#potential-sources-for-sending-directly-to-flex-logs) for more information.
 
 {{< img src="logs/log_configuration/flex_logging/logs-spectrum.png" alt="Logs indexing and access frequency spectrum graph" style="width:100%;" >}}
 
@@ -212,7 +212,7 @@ Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) 
 
 ### When the compute limit is reached
 
-When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
+When your organization reaches the compute limit in terms of concurrent queries, you may experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
 ## Further reading
 

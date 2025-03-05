@@ -51,6 +51,9 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: 설명서
   text: 수집된 RUM 브라우저 데이터
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: 블로그
+  text: 점진적 웹 애플리케이션 모범 사례
 title: RUM & 세션 재생
 ---
 
@@ -61,7 +64,7 @@ title: RUM & 세션 재생
 
 ## 실제 사용자 모니터링이란?
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM 대시보드" >}}
 
 Datadog의 *RUM(실제 사용자 모니터링)*은 개별 사용자의 실시간 활동과 경험에 대한 엔드투엔드 가시성을 제공합니다. RUM은 웹 및 모바일 애플리케이션 모니터링을 위한 네 가지 유형의 사용 사례를 해결합니다:
 
@@ -93,9 +96,9 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 
 다음 표는 각 플랫폼에서 지원되는 RUM 기능을 보여줍니다:
 
-| 기능                               | 브라우저 | 안드로이드 | iOS |   Flutter   | React Native | Roku | 참고 |
+| 기능                               | 브라우저 | Android | iOS |   Flutter   | React Native | Roku | 참고 |
 | ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
-| Datadog에 로그 보내기  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Datadog로 로그 전송  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | 네트워크 요청에 대한 분산 추적 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | **Datadog Roku SDK**는 일부 유형의 HTTP 요청만 추적할 수 있습니다. |
 | 보기 및 액션 추적 (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - **Flutter Web**에서 추적되는 모든 액션은 `custom`<br> 으로 기록됩니다 - **Roku**는 수동 액션 추적만 지원합니다. |
 | 기능 플래그 추적 및 릴리스 추적 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
@@ -106,7 +109,7 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 | 플랫폼별 바이탈 모니터링 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | 로그의 글로벌 컨텍스트/속성 추적  | {{< X >}} |  |  |  |  |  |  |
 | 클라이언트 쪽 추적 |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| 세션 재생 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay는 기본 모바일 앱용 공개 베타 버전입니다. |
+| 세션 리플레이 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay는 네이티브 모바일 앱용 체험판입니다. |
 | 장애물 신호 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | 모든 **모바일** 및 **Roku** 기기에 대해 부분적으로만 지원됨 |
 
 ## SDK 도메인에 대해 지원되는 엔드포인트
@@ -125,6 +128,28 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 ## Datadog RUM 탐색
 
 [**디지털 경험 > 성과 요약**][1]으로 이동하여 RUM에 액세스합니다.
+
+상단 탐색기에서 애플리케이션을 선택하거나 [브라우저][15] 또는 모바일[16]의 설정 지침을 따라 첫 번째 애플리케이션을 추가합니다.
+
+{{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="RUM 애플리케이션 선택" >}}
+
+**Tip**: Datadog 전역 검색에서 RUM을 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 누르고 `real user monitoring`를 검색하세요.
+
+## 성능 모니터링 요약
+
+| 브라우저 성능 요약 | 모바일 성능 요약 |
+|---------|---------|
+| {{< img src="real_user_monitoring/performance-summary-browser.png" alt="브라우저 애플리케이션용 RUM 성능 모니터링 요약 페이지" >}} | {{< img src="real_user_monitoring/performance-summary-mobile-2.png" alt="모바일 애플리케이션용 RUM 성능 모니터링 요약 페이지" >}} | 
+
+[RUM 성능 모니터링 요약][1] 페이지는 웹과 모바일 애플리케이션과 관련된 실행 가능한 인사이트를 제공합니다. 각 플랫폼에서 내게 맞는 맞춤형 경험을 제공합니다. 
+
+- 플랫폼별 **핵심 데이터 포인트에 초점**을 맞춥니다(예: 웹 또는 모바일 충돌 시 UI 지연 시간 등).
+- 익숙한 KPI로 **애플리케이션 상태를 모니터링**하여(예: 웹 앱 Core Web Vitals 또는 iOS 응답 지연률) 신뢰도를 평가합니다.
+- 페이지를 벗어날 필요 없이 대화형 위젯에서 **바로 조사를 할 수 있습니다**.
+
+**웹 앱**의 경우, 검색창을 사용해 데이터를 필터링하고, 느린 페이지를 파악하며, UI를 따라 [RUM 최적화 조사][17] 페이지로 이동할 수 있습니다.
+
+**모바일 앱**의 경우, 페이지 하단에서 최근 충돌을 모두 검토하고 [오류 추적][6] 측면 패널을 사용해 트러블슈팅할 수 있습니다.
 
 ### 기본 제공 대시보드
 
@@ -189,3 +214,6 @@ RUM 성능 데이터와 결합된 세션 재생은 오류 식별, 재생 및 해
 [12]: /ko/real_user_monitoring/session_replay/browser/
 [13]: /ko/real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /ko/real_user_monitoring/session_replay/browser/developer_tools/
+[15]: /ko/real_user_monitoring/browser/setup/
+[16]: /ko/real_user_monitoring/mobile_and_tv_monitoring/
+[17]: https://app.datadoghq.com/rum/optimization/inspect

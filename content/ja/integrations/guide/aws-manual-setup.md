@@ -60,8 +60,8 @@ AWS インテグレーションを手動で設定するには、AWS アカウン
 ### 外部 ID を生成する
 
 1. [AWS インテグレーション構成ページ][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 2. ご利用の AWS アカウントが属するパーティションを選択してください。パーティションには、商用リージョン用の `aws`、中国*向けの `aws-cn`、または GovCloud 向けの `aws-us-gov` があります。詳しくは、AWS ドキュメントの [Partitions][9] を参照してください。
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 3. アクセス種別として `Role Delegation` を選択してください。ロール委譲は、AWS の商用リージョンに属するアカウントでのみサポートされます。
 {{< /site-region >}}
 {{< site-region region="gov" >}}

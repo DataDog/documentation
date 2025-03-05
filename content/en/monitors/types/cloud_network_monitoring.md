@@ -15,9 +15,9 @@ further_reading:
 - link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "/monitors/recommended/"
+- link: "/monitors/templates/"
   tag: "Documentation"
-  text: "Recommended CNM Monitors"
+  text: "Monitor Templates"
 ---
 
 ## Overview
