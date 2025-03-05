@@ -64,9 +64,9 @@ To upload a SARIF report, follow the steps below:
    ```
 
 If reports are missing in Datadog, please define the following environment variables before invoking datadog-ci:
-- `DD_GIT_REPOSITORY_URL`
-- `DD_GIT_BRANCH`
-- `DD_GIT_COMMIT_SHA`
+- `DD_GIT_REPOSITORY_URL`: URL of the repository 
+- `DD_GIT_BRANCH`: branch being committed to
+- `DD_GIT_COMMIT_SHA`: commit sha
 
 ### `GLIBC_X.YY not found` error message
 
