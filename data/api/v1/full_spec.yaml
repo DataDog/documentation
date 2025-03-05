@@ -7658,6 +7658,9 @@ components:
           - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
+          quality_issues:
+          - broken_at_handle
+          - noisy_monitor
           scopes:
           - '!availability-zone:us-east-1c'
           - name:cassandra
@@ -7757,6 +7760,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        quality_issues:
+          description: Quality issues detected with the monitor.
+          items:
+            description: A quality issue detected with the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
         query:
           description: The monitor query.
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
