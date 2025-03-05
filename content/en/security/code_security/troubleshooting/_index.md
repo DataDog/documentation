@@ -163,7 +163,11 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 
 SCA can be enabled using two methods: the UI or manually using an environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. For example, if you enabled SCA manually, you cannot disable it using the UI. You must disable it manually. 
 
-Typically, SCA is enabled and disabled on a service using the UI. To disable SCA via the UI:
+Typically, SCA is enabled and disabled on a service using the UI. To disable SCA via the UI, you can:
+
+* Go to the [Code Security Setup page][17] and select **Activate runtime detection of library vulnerabilities"**. In this table, you can disable services that were previously activated.
+
+or
 
 * Go to [Services][15], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
@@ -188,3 +192,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [12]: https://app.datadoghq.com/security/appsec/vm/library
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
+[17]: https://app.datadoghq.com/security/configuration/code-security/setup
