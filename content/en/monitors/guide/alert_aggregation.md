@@ -51,7 +51,7 @@ For more information, see [Configure Monitors - Multi alert][3].
 You're monitoring a Kafka-based logging system grouped by `error-logs` and `user-events`. If any partition gets a message lag of more than 500, you want to know about it, but you don't need multiple alerts if multiple partitions are lagging.  
 
 #### Benefits of aggregation
-This is useful for teams that don't want excessive notifications but still need to act when issues arise.  
+A simple alert is useful for teams that don't want excessive notifications but still need to act when issues arise.  
 However, if multiple partitions are lagging, you might not see every single affected partition in a single notification.
 
 {{% /collapse-content %}}
