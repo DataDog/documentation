@@ -1,5 +1,7 @@
 ---
 title: Semantic Mapping
+aliases:
+ - /opentelemetry/schema_semantics/
 further_reading:
 - link: "/opentelemetry/correlate/"
   tag: "Documentation"
