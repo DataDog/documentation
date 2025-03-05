@@ -12,7 +12,7 @@ This change only impacts how hostnames are displayed. Metric tagging continues t
 
 ### Canonical hostname
 
-The hostname chosen to associate tags with metrics is named the _canonical hostname_. This hostname is the unique ID used to identify your host. Even if your hostname changes after upgrading to v7.64.0+, the `canonical hostname` of your host does not change, and you can continue to refer to the previous hostname.
+The hostname chosen to associate tags with metrics is named the _canonical hostname_. This hostname is the unique ID used to identify your host. Even if your hostname changes after upgrading to v7.64.0+, the canonical hostname of your host does not change, and you can continue to refer to the previous hostname.
 
 ### Known issues
 
