@@ -28,9 +28,9 @@ Account takeover occurs when an attacker gains access to a user's account creden
 
 The following tables lists the *attacker motivation by business*:
 
-| Monetary Theft                           | Reselling Accounts              |
-|------------------------------------------|---------------------------------|
-| Consumer banking apps                    | SaaS Platforms                  |
+| Monetary Theft                                 | Reselling Accounts                        |
+| ---------------------------------------------- | ----------------------------------------- |
+| Consumer banking apps                          | SaaS Platforms                            |
 | Financial service apps that issue credit cards | Consumer platforms with stored gift cards |
 
 ## Attacker strategies
@@ -68,11 +68,11 @@ Effective ATO detection and prevention requires the following:
 
 The following user activity events are used for ATO tracking.
 
-| Enrichment              | Auto-instrumented | Use case                                     |
-|-------------------------|-------------------|----------------------------------------------|
-| `users.login.success`     | True              | Account takeover detection rule requirement       |
-| `users.login.failure`     | True              | Account takeover detection rule requirement       |
-| `users.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
+| Enrichment             | Auto-instrumented | Use case                                                                       |
+| ---------------------- | ----------------- | ------------------------------------------------------------------------------ |
+| `users.login.success`  | True              | Account takeover detection rule requirement                                    |
+| `users.login.failure`  | True              | Account takeover detection rule requirement                                    |
+| `users.password_reset` | False             | Detection rule requirement to identify user enumeration through password reset |
 
 Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
 
@@ -125,7 +125,7 @@ Review the following sections to help you develop an incident response plan.
 
 #### Do you use authenticated scanners?
 
-Identify trusted IPs, preventing them from being automatically blocked. This step is useful for the following: 
+Identify trusted IPs, preventing them from being automatically blocked. This step is useful for the following:
 
 - Approved scanning sources that attempt to log in.
 - Corporate sites with large numbers of users behind single IP addresses.
@@ -143,9 +143,9 @@ Review the networks your customers authenticate from, such as:
 - Residential IPs
 - Data centers
 
-Understanding authentication sources can inform your blocking strategy. 
+Understanding authentication sources can inform your blocking strategy.
 
-For example, you might *not* expect customers to authenticate with your consumer application from data centers. Consequently, you might have more freedom to block the IPs associated with that data center. 
+For example, you might *not* expect customers to authenticate with your consumer application from data centers. Consequently, you might have more freedom to block the IPs associated with that data center.
 
 Nevertheless, if your customers source entirely from Mobile ISPs, you might have an impact to legitimate traffic if you block those ISPs.
 
@@ -162,7 +162,7 @@ Understanding your customers' account name structure helps you determine if atta
 
 ### Distributed attacks
 
-Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users. 
+Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users.
 
 Here are three critical components for success in mitigating these attacks:
 
@@ -213,7 +213,7 @@ Two types of proxies are frequently seen in distributed account takeovers:
 
 Datadog uses third parties such as IPinfo and Spur to determine if an IP is a Mobile ISP.
 
-Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and frequently have large numbers of phones behind each IP address. 
+Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and frequently have large numbers of phones behind each IP address.
 
 #### Attacker attributes
 
@@ -228,7 +228,7 @@ Review the following best practices for protection.
 
 #### Automated protection
 
-Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies. 
+Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies.
 
 If you do not have a policy, review your existing detections and start with the suggested responses in **Signals**. Build your policy based on the most relevant actions taken over time.
 
@@ -248,6 +248,16 @@ Attack motivation can influence post-compromise activity. Attackers wanting to r
 Attackers attempting to access stored funds will use accounts immediately after compromise.
 
 Consider blocking compromised users in addition to blocking the attacker.
+
+You can export the list of compromised or targeted users from a signal by enabling the "notify on update" feature in the notification section of a detection rule condition.
+
+insert screenshot here
+
+The notification targets defined on the detection rule condition will receive a notification message every time new user ids are seen for that condition. Notification profiles looking for those signals won't be notified on new user id values.
+
+You can set-up a webhook through Datadog webhook integration to receive the notification payload. Make sure you add the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the payload of the webhook integration. The user ids values will be stored under the "notify_on_update" path of the json payload.
+
+insert another screenshot here.
 
 ## Further reading
 
