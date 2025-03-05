@@ -7,7 +7,7 @@ aliases:
 With the release of Agent v7.64.0, the Datadog Agent defaults to using IMDSv2 for enhanced security and consistency in retrieving AWS metadata.
 If your host has already configured the `ec2_prefer_imdsv2` flag to `true`, you should not notice any changes as IMDSv2 is already enabled.
 
-If you upgrade to Agent v7.64.0 without any custom configuration changes, you may see a change to how hostnames appear in Datadog. In particular, Datadog ensures that displayed hostnames refer to instance IDs rather than other detected hostnames in Fleet Automation and on the Infrastructure list.
+If you upgrade to Agent v7.64.0 without any custom configuration changes, you may see a change to how hostnames appear in Datadog. In particular, Datadog ensures that displayed hostnames refer to instance IDs.
 This change only impacts how hostnames are displayed. Metric tagging continues to use your original hostnames. Monitoring, alerting, and dashboards should not be affected.
 
 ### Canonical hostname
