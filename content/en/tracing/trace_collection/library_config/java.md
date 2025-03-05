@@ -96,6 +96,10 @@ The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` 
 **Default**: `10`<br>
 Timeout in seconds for network interactions with the Datadog Agent.
 
+`dd.trace.client-ip.enabled`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans. Automatically enabled when `dd.appsec.enabled=true'.
+
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
 **Default**: `null`<br>
@@ -288,6 +292,13 @@ When set to `true` db spans get assigned the instance name as the service name
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
+
+## ASM
+
+`dd.appsec.enabled`
+: **Environment Variable**: `DD_APPSEC_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).
 
 ### Errors
 
