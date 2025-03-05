@@ -22,6 +22,7 @@ The following AWS services are supported:
 - Amazon Kinesis
 - Amazon S3
 - Amazon EventBridge
+- Amazon DynamoDB
 
 The following tracer versions and AWS SDK packages are supported:
 
