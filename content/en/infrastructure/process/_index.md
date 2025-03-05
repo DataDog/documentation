@@ -394,8 +394,6 @@ Datadog automatically generates a `command` tag, so that you can filter for:
 - Container management software, for example:  `command:docker`, `command:kubelet`)
 - Common workloads, for example:  `command:ssh`, `command:CRON`)
 
-In addition to all existing host-level tags, processes are tagged by `user`.
-
 #### Containerized environment tags
 
 Furthermore, processes in ECS containers are also tagged by:
