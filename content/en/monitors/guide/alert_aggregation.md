@@ -72,7 +72,7 @@ This level of detail helps engineers respond quickly and with precision.
 
 ## How to do this with the API
 
-If you are managing your monitors with the API, you want to use the variable `notify_by` to make your monitor a simple alert or a multi alert.  
+If you are managing your monitors with the API, use the variable `notify_by` to make your monitor a simple alert or a multi alert.  
 
 | Type of Alert     | Configuration Example                  |
 |-------------------|----------------------------------------|
