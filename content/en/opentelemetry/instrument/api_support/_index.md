@@ -22,17 +22,16 @@ algolia:
 
 Datadog tracing libraries provide an implementation of the [OpenTelemetry API][1] for instrumenting your code. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products. 
 
-{{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol to a Collector with Datadog Exporter, which forwards to Datadog's platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry API with DD tracing libraries sends data through OTLP protocol to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
+
+**Note:** You can also send your OpenTelemetry API instrumented traces to Datadog using the [OTel Collector][7].
 
 By [instrumenting your code with OpenTelemetry APIs][2], your code:
 
 - Remains free of vendor-specific API calls.
 - Does not depend on Datadog tracing libraries at compile time (only runtime).
-- Does not use the deprecated OpenTracing API.
 
 Replace the OpenTelemetry SDK with the Datadog tracing library in the instrumented application, and the traces produced by your running code can be processed, analyzed, and monitored alongside Datadog traces and in Datadog proprietary products such as [Continuous Profiler][3], [Data Streams Monitoring][4], [Application Security Management][5], and [Live Processes][6].
-
-
 
 To learn more, follow the link for your language:
 
@@ -54,3 +53,4 @@ To learn more, follow the link for your language:
 [4]: /data_streams/
 [5]: /security/application_security/
 [6]: /infrastructure/process
+[7]: /opentelemetry/setup/collector_exporter/
