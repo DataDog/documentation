@@ -537,6 +537,10 @@
     "request_description": "Object containing the new index.",
     "request_schema_description": "Object describing a Datadog Log index."
   },
+  "DeleteLogsIndex": {
+    "description": "Delete an existing index from your organization. Index deletions are permanent and cannot be reverted.\nYou cannot recreate an index with the same name as deleted ones.",
+    "summary": "Delete an index"
+  },
   "GetLogsIndex": {
     "description": "Get one log index from your organization. This endpoint takes no JSON arguments.",
     "summary": "Get an index"
