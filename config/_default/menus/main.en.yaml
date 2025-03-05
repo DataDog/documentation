@@ -2868,7 +2868,7 @@ menu:
       parent: containers
       weight: 6
     - name: Advanced Install
-      url: containers/datadog_operator/installation
+      url: containers/datadog_operator/advanced_install
       identifier: containers_datadog_operator_installation
       parent: containers_datadog_operator
       weight: 601
