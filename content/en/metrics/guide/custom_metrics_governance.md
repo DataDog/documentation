@@ -114,7 +114,7 @@ Datadog's [Metrics without Limits™][4] is a first in industry cost management 
 
 Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_2025-02-21.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
@@ -146,14 +146,16 @@ Identify your organization's entire list of unqueried metrics over the past 30, 
 3. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 4. (Optional) To export this list, click **Export as CSV** above the metric table.
 
-   After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and reduce the costs of these unused metrics with Metrics without Limits™. 
+   After you identify the metrics that your developers don't need, you can safely reduce the custom metrics volumes and associated costs of these unused metrics with Metrics without Limits™. 
 
 {{< img src="metrics/guide/custom_metrics_governance/manage_tags_fm_metrics_summary_2025-01-27.png" alt="The Configure Metrics drop menu with the Manage tags selection highlighted" style="width:90%;" >}}
 
 5. At the top of the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
 6. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
 7. Specify the metric namespace prefix of the metrics you'd like to configure.
-8. Select **Include tags...** and leave the allowlist of tags empty.
+8. Select **Include tags**.
+9. Uncheck the option to include tags actively queried on dashboards and monitors.
+10. Click **Save**.
 
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
@@ -224,5 +226,5 @@ After you've received an alert, use the Metrics Volume Management page to inspec
 [11]: /account_management/audit_trail/
 [12]: https://app.datadoghq.com/event/explorer
 [13]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
-[14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags
+[14]: https://docs.datadoghq.com/metrics/metrics-without-limits/#configuration-of-tags-for-a-single-metric
 [15]: /metrics/summary/#metrics-related-assets
