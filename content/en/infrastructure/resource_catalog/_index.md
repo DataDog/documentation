@@ -150,6 +150,124 @@ To collect resource configuration changes, enable **Resource Collection** for yo
 
 See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
 
+## Supported Resource types
+
+The Resource Catalog supports 100+ key resource types as listed below. For a full list of resource types supported in the Datadog platform see [here][15].
+
+- host
+- aws_acm
+- aws_ami
+- aws_cloudfront_distribution
+- aws_cloudtrail_trail
+- aws_docdb_cluster
+- aws_dynamodb
+- aws_ebs_snapshot
+- aws_ebs_volume
+- aws_ec2_instance
+- aws_ec2_vpcendpoint_service
+- aws_ecs_cluster
+- aws_eks_cluster
+- aws_elasticache
+- aws_elasticsearch_domain
+- aws_elb_load_balancer
+- aws_elbv2_load_balancer
+- aws_eni
+- aws_iam_account
+- aws_iam_policy
+- aws_iam_role
+- aws_iam_server_certificate
+- aws_iam_user
+- aws_kms
+- aws_lambda_function
+- aws_mq_broker
+- aws_network_acl
+- aws_rds_db_snapshot
+- aws_rds_instance
+- aws_redshift_cluster
+- aws_s3_account_public_access_block
+- aws_s3_bucket
+- aws_security_group
+- aws_sns_topic
+- aws_sqs_queue
+- aws_vpc
+- aws_vpc_endpoint
+- aws_vpc_nat_gateway
+- aws_vpc_peering_connection
+- azure_activity_log_alert
+- azure_aks_cluster
+- azure_app_service
+- azure_automation_account
+- azure_container_apps
+- azure_container_registry
+- azure_diagnostic_setting
+- azure_function
+- azure_key_vault
+- azure_key_vault_key
+- azure_key_vault_secret
+- azure_load_balancer
+- azure_load_balancer_probe
+- azure_log_analytics_storage_insight
+- azure_log_analytics_workspace
+- azure_managed_disk
+- azure_mysql_server
+- azure_network_application_gateway
+- azure_network_interface
+- azure_network_public_ip_address
+- azure_network_subnet
+- azure_network_vnet
+- azure_network_vnet_peering
+- azure_network_watcher
+- azure_policy_assignment
+- azure_postgresql_firewall_rule
+- azure_postgresql_server
+- azure_role_assignment
+- azure_role_definition
+- azure_security_center_auto_provisioning
+- azure_security_contact
+- azure_security_group
+- azure_sql_firewall_rule
+- azure_sql_server
+- azure_sql_server_database
+- azure_storage_account
+- azure_storage_blob_container
+- azure_subscription
+- azure_virtual_machine_instance
+- gcp_bigquery_dataset
+- gcp_bigquery_table
+- gcp_cloudfunctions_function
+- gcp_compute_disk
+- gcp_compute_external_vpn_gateway
+- gcp_compute_firewall
+- gcp_compute_instance
+- gcp_compute_network
+- gcp_compute_project
+- gcp_compute_route
+- gcp_compute_router
+- gcp_compute_ssl_policy
+- gcp_compute_subnetwork
+- gcp_compute_target_http_proxy
+- gcp_compute_target_https_proxy
+- gcp_compute_target_ssl_proxy
+- gcp_compute_target_vpn_gateway
+- gcp_compute_vpn_gateway
+- gcp_compute_vpn_tunnel
+- gcp_dataproc_cluster
+- gcp_dns_managed_zone
+- gcp_dns_policy
+- gcp_folder
+- gcp_iam_policy
+- gcp_iam_service_account
+- gcp_iam_service_account_key
+- gcp_kms_crypto_key
+- gcp_logging_log_bucket
+- gcp_logging_log_metric
+- gcp_logging_log_sink
+- gcp_monitoring_alert_policy
+- gcp_organization
+- gcp_project
+- gcp_sql_database_instance
+- gcp_storage_bucket
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -168,3 +286,4 @@ See the [Resource changes collection][8] section of the Google Cloud Platform in
 [12]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks/
 [13]: https://docs.datadoghq.com/security/cloud_security_management/vulnerabilities/
 [14]: https://app.datadoghq.com/integrations/azure
+[15]: https://docs.datadoghq.com/infrastructure/resource_catalog/schema/
