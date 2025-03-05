@@ -45,6 +45,8 @@ network_devices:
         port: 4739
       - flow_type: sflow5
         port: 6343
+  reverse_dns_enrichment: 
+    enabled: false ## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records.
 ```
 
 After saving your changes, [restart the Agent][4].
@@ -81,16 +83,11 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 ### Reverse DNS private IP enrichment
 
-Enable Reverse DNS private IP enrichment to perform DNS lookups and find the domain name associated with any NetFlow source or destination IP address. When enabled, the Agent conducts reverse DNS lookups on source and/or destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
+Enable Reverse DNS private IP enrichment to perform DNS lookups to find the hostname name associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and/or destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
-Add the following to your `datadog.yaml` file to enable Reverse DNS IP enrichment (disabled by [default][7]):
+Reference the [configuration](#configuration) file above to enable Reverse DNS IP enrichment in your `datadog.yaml` file (disabled by [default][7]):
 
-```yaml
-## Set to true to enable reverse DNS enrichment of private source and destination IP addresses in NetFlow records.
-   reverse_dns_enrichment_enabled: true
-```
-
-Search for **DNS** in the Flow section of the facets section to locate flows associated with reverse DNS IP enrichment: 
+Search for **DNS** in the Flow grouping of the facets section to locate flows associated with reverse DNS IP enrichment: 
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
 
@@ -173,10 +170,10 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Destination MAC | The Media Access Control (MAC) address associated with the destination IP. |
 | Destination Mask | The subnet mask associated with the destination IP. |
 | Destination Port | The destination port number. |
+| Destination Reverse DNS Hostname | The DNS hostname associated with the destination IP. |
 | Destination Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the destination IP. |
 | Destination Subdivision Name | The name of the subdivision (such as state or province) associated with the destination IP. |
 | Destination Timezone | The timezone associated with the destination IP. |
-| Destination Reverse DNS Hostname | The DNS hostname associated with the destination IP. |
 
 ### NetFlow Source IP facets
 
@@ -202,10 +199,10 @@ In addition to fields, you can also use out-of-the-box facets to start analyzing
 | Source MAC | The Media Access Control (MAC) address associated with the source IP. |
 | Source Mask | The subnet mask associated with the source IP. |
 | Source Port | The source port number. |
+| Source Reverse DNS Hostname | The DNS hostname associated with the source IP. |
 | Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
 | Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
 | Source Timezone | The timezone associated with the source IP. |
-| Source Reverse DNS Hostname | The DNS hostname associated with the source IP. |
 
 By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
 
