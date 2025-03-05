@@ -35,9 +35,8 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
-## Limitations
 
-The following limitations apply to the limited preview:
+<div class="alert alert-info">The following features are supported in the Limited Preview</div>
 
 ### Supported features
 
@@ -45,13 +44,12 @@ The following limitations apply to the limited preview:
 - Local variable capture for Dynamic Logs
 - Dynamic Log conditions
 - Expression evaluation in Dynamic Log templates
-- [PII redaction][8] based on variable/property names
+- [PII redaction][8] based on variable/property names and classes
 - [Source code integration][9]
 
 ### Unsupported features
 
 - Instrumentation attached to a specific file/line
-- PII redaction based on specific classes or types
 
 ## Further reading
 
