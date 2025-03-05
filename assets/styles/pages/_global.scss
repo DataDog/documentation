@@ -708,7 +708,7 @@ h5 {
             }
         }
         .tab-pane {
-            display: initial;
+            display: initial; // overrides bootstrap display
             grid-row: 1;
             grid-column: 1;
             &:not(.active) {
