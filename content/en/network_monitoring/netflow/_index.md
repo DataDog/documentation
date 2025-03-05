@@ -83,15 +83,15 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 ### Reverse DNS private IP enrichment
 
-Enable Reverse DNS private IP enrichment to perform DNS lookups to find the hostname name associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and/or destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
+Enable Reverse DNS private IP enrichment to perform DNS lookups for hostnames associated with source or destination IP addresses. When enabled, the Agent conducts reverse DNS lookups on source and destination IPs within private address ranges, enriching NetFlow records with the corresponding hostnames.
 
-Reference the [configuration](#configuration) file above to enable Reverse DNS IP enrichment in your `datadog.yaml` file (disabled by [default][7]):
+By [default][7], the Reverse DNS IP enrichment in your `datadog.yaml` file is disabled. To enable, see the [Configuration](#configuration) section of this page.
 
 Search for **DNS** in the Flow grouping of the facets section to locate flows associated with reverse DNS IP enrichment: 
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichment.png" alt="Screenshot of the reverse DNS destination and source facets" width="100%" >}}
 
-**Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, reference the [full configuration file][8].
+**Note**: Reverse DNS entries are cached and subject to rate limiting to minimize DNS queries and reduce the load on DNS servers. For more configuration options, including modifying default caching and rate limiting, see the [full configuration file][8].
 
 ## Visualization
 
