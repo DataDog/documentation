@@ -4748,7 +4748,7 @@ menu:
         versions:
           - v2
         operationids:
-          - RetrieveAwsOnDemandTask
+          - GetAwsOnDemandTask
         unstable: []
         order: 6
     - name: Post an AWS on demand task
