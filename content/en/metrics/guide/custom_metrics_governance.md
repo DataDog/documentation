@@ -68,7 +68,7 @@ Custom Metrics Tags Cardinality Explorer is in Preview. Use this form to request
 
 Once you've identified which metric names are driving up your account's monthly usage and costs, you can navigate to the metric's details side panel to view the Custom Metrics Tags Cardinality Explorer. This shows you which tag keys are driving a particular metric's cardinality to spike. Any spammy or unbounded tag keys with large increases in the number of unique tag values are the likely cause. Exclude them using Metrics without Limits™ to achieve immediate cost savings.
 
-*Note: The "Change in Unique Tag Values" column compares unique tag values from the past 5 hours to past 1 hour.*
+**Note**: The "Change in Unique Tag Values" column compares unique tag values from the past 5 hours to the past 1 hour.
 
 ### Team-level visibility and attribution
 
