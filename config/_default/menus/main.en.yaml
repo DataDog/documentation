@@ -5980,26 +5980,6 @@ menu:
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 101
-    - name: Quick Start
-      url: security/cloud_security_management/setup/agentless_scanning/quick_start
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_quick_start
-      weight: 10000
-    - name: CloudFormation
-      url: security/cloud_security_management/setup/agentless_scanning/cloudformation
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_cloudformation
-      weight: 10001
-    - name: Terraform
-      url: security/cloud_security_management/setup/agentless_scanning/terraform
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_terraform
-      weight: 10002
-    - name: Azure Resource Manager
-      url: security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_azure_resource_manager
-      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup

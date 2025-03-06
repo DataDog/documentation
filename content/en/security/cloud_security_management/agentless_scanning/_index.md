@@ -2,16 +2,13 @@
 title: Cloud Security Management Agentless Scanning
 aliases:
   - /security/agentless_scanning
+  - /security/cloud_security_management/setup/agentless_scanning/quick_start
+  - /security/cloud_security_management/setup/agentless_scanning/cloudformation
+  - /security/cloud_security_management/setup/agentless_scanning/terraform
+  - /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
+  - /security/cloud_security_management/guide/agentless_aws_integration
+  - /security/cloud_security_management/guide/agentless_terraform
 further_reading:
-  - link: "/security/cloud_security_management/setup/agentless_scanning/quick_start"
-    tag: "Documentation"
-    text: "Agentless Scanning Quick Start for Cloud Security Management"
-  - link: "/security/cloud_security_management/setup/agentless_scanning/terraform"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning using Terraform"
-  - link: "/security/cloud_security_management/setup/agentless_scanning/cloudformation"
-    tag: "Documentation"
-    text: "Setting up Agentless Scanning with the AWS Integration"
   - link: "https://www.datadoghq.com/blog/agentless-scanning/"
     tag: "Blog"
     text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
@@ -27,22 +24,6 @@ further_reading:
 ## Overview
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
-
-## Availability
-
-The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
-
-| Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             |
-|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Operating System                                | Linux                                                                                                                                     | Linux                                                                                                                                                                             |
-| Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      |
-| Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
-| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
-| Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
-| Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][12]                                                                                                                                                         |
-| Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
-
-**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## How it works
 
@@ -125,16 +106,15 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning/quick_start
+[1]: /security/cloud_security_management/setup/agentless_scanning#setup
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/quick_start#prerequisites
+[4]: /security/cloud_security_management/setup/agentless_scanning/#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: /security/cloud_security_management/setup/agentless_scanning/terraform
+[6]: #terraform
 [7]: mailto:success@datadoghq.com
 [8]: /sensitive_data_scanner
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/scanning_rules/library_rules/
-[12]: /help
 [13]: /security/cloud_security_management/agentless_scanning/deployment_methods#recommended-configuration
