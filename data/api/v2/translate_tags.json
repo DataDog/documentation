@@ -203,6 +203,10 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "rum-retention-filters": {
+    "name": "Rum Retention Filters",
+    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) for your organization."
+  },
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
