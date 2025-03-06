@@ -12,7 +12,7 @@ The cdocs-hugo-integration package isn't published yet, so you have to build the
 2. Check out the `jen.gilbert/cdocs-build-testing` branch. Changes to this branch will not go live, if you would like to make experimental edits.
 3. From the `cdocs-hugo-integration` folder, run `yarn install && yarn test` to verify that everything is healthy in the package.
 4. Run `yarn pack`, and copy the full tarball path provided in the output (e.g., `/Users/jen.gilbert/go/src/github.com/DataDog/corp-node-packages/packages/cdocs-hugo-integration/cdocs-hugo-integration-v1.0.0.tgz`).
-5. In the documentation repo, `yarn add <ABSOLUTE_TARBALL_PATH>`.
+5. In the documentation repo, run `yarn add <ABSOLUTE_TARBALL_PATH>`.
 
 ### Warning
 
