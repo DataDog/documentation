@@ -116,7 +116,12 @@ export function buildTOCMap() {
 export function onScroll() {
     const windowTopPosition = scrollTop(window);
     const windowHeight = window.innerHeight;
-    const localOffset = 65;
+    let localOffset = 65;
+
+    const isCustomizableDoc = document.getElementById('cdoc-selector') ? true : false;
+    if (isCustomizableDoc) {
+        localOffset += 65;
+    }
 
     const body = document.body;
     const html = document.documentElement;
@@ -153,7 +158,7 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        const header = document.getElementById(`${(decodeURI(id))}`);
+                        const header = document.getElementById(`${decodeURI(id)}`);
                         if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
@@ -240,5 +245,15 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-DOMReady(handleAPIPage);
+// Expose the necessary functions to the Markdoc-Hugo integration
+if (!window.markdocBeforeRevealHooks) {
+    window.markdocBeforeRevealHooks = [];
+}
+markdocBeforeRevealHooks.push(buildTOCMap);
+if (!window.markdocAfterRerenderHooks) {
+    window.markdocAfterRerenderHooks = [];
+}
+markdocAfterRerenderHooks.push(buildTOCMap);
+markdocAfterRerenderHooks.push(onScroll);
 
+DOMReady(handleAPIPage);

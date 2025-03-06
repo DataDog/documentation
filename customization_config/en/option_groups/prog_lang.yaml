@@ -1,0 +1,5 @@
+prog_lang_options:
+  - id: python
+    default: true
+  - id: go
+  - id: javascript
