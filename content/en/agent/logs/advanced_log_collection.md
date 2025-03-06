@@ -463,7 +463,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up. 
+With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up.
 
 
 {{< tabs >}}
@@ -620,7 +620,7 @@ In a containerized Agent, add the environment variable `DD_LOGS_CONFIG_AUTO_MULT
 **Note**: The Datadog Agent interprets spaces in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable as separators between multiple patterns. In the following example, the two regex patterns are divided by a space, and `\s` in the second regex pattern matches spaces.
 
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
-	
+
 If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 ```yaml
@@ -650,7 +650,7 @@ spec:
 
 ```yaml
 datadog:
-  env: 
+  env:
     - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
       value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
 ```
@@ -658,7 +658,7 @@ datadog:
 
 
 The `auto_multi_line_default_match_threshold` parameter determines how closely logs have to match the patterns in order for the auto multi-line aggregation to work.
-	
+
 If your multi-line logs aren't getting aggregated as you like, you can change the sensitivity of the matching by setting the `auto_multi_line_default_match_threshold` parameter. Add the `auto_multi_line_default_match_threshold` parameter to your configuration file with a value lower (to increase matches) or higher (to decrease matches) than the current threshold value. To find the current threshold value, run the [Agent `status` command][1].
 
 [1]: https://docs.datadoghq.com/agent/configuration/agent-commands/#agent-information
@@ -680,7 +680,7 @@ spec:
 
 ```yaml
 datadog:
-  env: 
+  env:
     - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS
       value: \d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01]) [A-Za-z_]+\s\d+,\s\d+\s\d+:\d+:\d+\s(AM|PM)
     - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD
@@ -746,15 +746,17 @@ logs:
 The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
 
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
-**Note2**: The path and exclude_paths values are case sensitive.
 
-## Tail most recently modified files first
+**Note**: The path and exclude_paths values are case sensitive.
 
-When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+### Tail most recently modified files first
 
-This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+The Agent limits the number of files it can tail simultaneously, as defined by `logs_config.open_files_limit` parameter.
+By default, when more files match the wildcard pattern than this limit, the Agent prioritizes them by sorting filenames in reverse lexicographic order . This works well for log files named with timestamps or sequential numbering, ensuring that the most recent logs are tailed first.
 
-To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+However, if log filenames do not follow such patterns, this behavior may not be ideal. To prioritize files based on their modification time, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent continuously sorts files by their modification time, always tailing the most recently modified files first while stopping tailing the least recently modified ones.
+
+To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
 
 This feature requires Agent version 7.40.0 or above.
 
