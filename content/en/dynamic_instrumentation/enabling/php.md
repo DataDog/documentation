@@ -3,9 +3,6 @@ title: Enable Dynamic Instrumentation for PHP
 aliases:
     - /tracing/dynamic_instrumentation/enabling/php/
 private: true
-code_lang: php
-type: multi-code-lang
-code_lang_weight: 30
 further_reading:
     - link: 'agent'
       tag: 'Documentation'

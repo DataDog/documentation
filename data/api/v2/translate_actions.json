@@ -23,6 +23,36 @@
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "Get AWS Scan Options"
   },
+  "CreateAwsScanOptions": {
+    "description": "Activate Agentless scan options for an AWS account.",
+    "summary": "Post AWS Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Request object that includes the scan options to create."
+  },
+  "DeleteAwsScanOptions": {
+    "description": "Delete Agentless scan options for an AWS account.",
+    "summary": "Delete AWS Scan Options"
+  },
+  "UpdateAwsScanOptions": {
+    "description": "Update the Agentless scan options for an activated account.",
+    "summary": "Patch AWS Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object that includes the scan options to update."
+  },
+  "ListAwsOnDemandTasks": {
+    "description": "Fetches the most recent 1000 AWS on demand tasks.",
+    "summary": "Get AWS On Demand tasks"
+  },
+  "CreateAwsOnDemandTask": {
+    "description": "Trigger the scan of an AWS resource with a high priority.",
+    "summary": "Post an AWS on demand task",
+    "request_description": "The definition of the on demand task.",
+    "request_schema_description": "Request object that includes the on demand task to submit."
+  },
+  "RetrieveAwsOnDemandTask": {
+    "description": "Fetch the data of a specific on demand task.",
+    "summary": "Get AWS On Demand task by id"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -358,7 +388,7 @@
     "summary": "Delete Cloud Cost Management AWS CUR config"
   },
   "UpdateCostAWSCURConfig": {
-    "description": "Update the status of an AWS CUR config (active/archived).",
+    "description": "Update the status (active/archived) and/or account filtering configuration of an AWS CUR config.",
     "summary": "Update Cloud Cost Management AWS CUR config",
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."

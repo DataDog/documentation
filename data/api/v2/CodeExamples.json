@@ -53,6 +53,20 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "UpdateAwsScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Patch AWS Scan Options returns \"No Content\" response"
+    }
+  ],
+  "CreateAwsOnDemandTask": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",

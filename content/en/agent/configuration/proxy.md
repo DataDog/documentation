@@ -13,7 +13,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
-- link: "/agent/configuration/agent-fips-proxy"
+- link: "/agent/configuration/fips-compliance"
   tag: "Documentation"
   text: "Datadog FIPS Compliance"
 algolia:
@@ -1217,7 +1217,7 @@ When sending logs over TCP, see [TCP Proxy for Logs][9].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/configuration/agent-fips-proxy
+[1]: /agent/configuration/fips-compliance
 [2]: /agent/configuration/agent-commands/
 [3]: http://www.squid-cache.org/
 [4]: https://app.datadoghq.com/infrastructure
