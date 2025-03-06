@@ -281,7 +281,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your signal message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your signal message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}

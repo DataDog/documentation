@@ -12,7 +12,7 @@ further_reading:
   text: Prevent alerts from monitors that were in downtime
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
-  text: Enable preconfigured alerts with recommended monitors
+  text: Enable preconfigured alerts with monitor templates
 - link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
   tag: "Blog"
   text: Monitor alerts and events with OpsGenie and Datadog

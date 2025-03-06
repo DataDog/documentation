@@ -31,7 +31,7 @@ Static Code Analysis supports scanning for security vulnerabilities and poor cod
 
 {{< partial name="code_security/languages-getting-started.html" >}}
 
-</br> 
+<!-- </br>  -->
 Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only).
 To get started, go to the [**Code Security** setup page][12] or see the [Setup documentation][9].
 
@@ -69,7 +69,13 @@ The content of the violation is shown in tabs:
 - **Remediation**: One or more code fixes that can resolve the violation, with options for remediation.
 - **Event**: JSON metadata regarding the violation.
 
-## Using suggested fixes
+## Customize your configuration
+To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
+
+## Link results to Datadog services and teams
+
+
+### Apply suggested fixes
 <!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}} -->
 
 In Datadog Static Code Analysis, there are two types of suggested fixes:
@@ -81,13 +87,13 @@ In Datadog Static Code Analysis, there are two types of suggested fixes:
 
 {{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="Visual indicator of an AI static analysis suggested fix" style="width:60%;">}} -->
 
-### Fixing a vulnerability or quality issue directly from Datadog
+### Fix a vulnerability or quality issue directly from Datadog
 
 <!-- {{< img src="ci/sast_one_click_light.png" alt="Example of one-click remediation for Code Security" style="width:90%;" >}} -->
 
 You can push a code change to fix an issue found by Static Code Analysis directly from a result in Datadog in two ways.
 
-#### Opening a pull request
+#### Open a pull request
  
 If your GitHub app's **Pull Requests** permission is set to **Read & Write**, one-click remediation is enabled for all Static Code Analysis findings with an available suggested fix. For more information about setting up the GitHub integration, see [GitHub Pull Requests][10]. 
 
@@ -98,7 +104,7 @@ Follow these steps to fix a vulnerability and open a pull request:
 4. Enter a pull request title and commit message.
 5. Click **Create PR**.
 
-#### Committing directly to the current branch
+#### Commit directly to the current branch
 You can also fix a vulnerability by committing directly to the branch the result was found on. 
 
 To commit a suggested fix:
@@ -107,10 +113,7 @@ To commit a suggested fix:
 2. Click **Fix Violation** in the side panel of the result.
 3. Click **Commit to current branch**.
 
-## Customizing your configuration
-To customize which Static Code Analysis rules are configured in your repositories or across your organization, see the [Setup documentation][8].
-
-## Reporting false positives
+## Report false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
 <!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Code Analysis violation as a false positive" style="width:60%;">}} -->

@@ -53,6 +53,20 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "UpdateAwsScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Patch AWS Scan Options returns \"No Content\" response"
+    }
+  ],
+  "CreateAwsOnDemandTask": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -746,11 +760,25 @@
       "description": "Create api handle returns \"CREATED\" response"
     }
   ],
+  "CreateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_1716851881",
+      "description": "Create workflow webhook handle returns \"CREATED\" response"
+    }
+  ],
   "UpdateTenantBasedHandle": [
     {
       "group": "microsoft_teams_integration",
       "suffix": "_419892746",
       "description": "Update api handle returns \"OK\" response"
+    }
+  ],
+  "UpdateWorkflowsWebhookHandle": [
+    {
+      "group": "microsoft_teams_integration",
+      "suffix": "_163189594",
+      "description": "Update workflow webhook handle returns \"OK\" response"
     }
   ],
   "CreateMonitorConfigPolicy": [
@@ -958,6 +986,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_1965169892",
+      "description": "Create a detection rule with type 'application_security 'returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -976,14 +1009,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new signal-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new signal-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Create a new vulnerability-based rule returns \"Successfully created the notification rule.\" response"
+      "description": "Create a new vulnerability-based notification rule returns \"Successfully created the notification rule.\" response"
     }
   ],
   "CreateSecurityFilter": [
@@ -1030,14 +1063,14 @@
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a signal-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a signal-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "PatchVulnerabilityNotificationRule": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Patch a vulnerability-based rule returns \"Notification rule successfully patched.\" response"
+      "description": "Patch a vulnerability-based notification rule returns \"Notification rule successfully patched.\" response"
     }
   ],
   "RunHistoricalJob": [
@@ -1315,11 +1348,25 @@
       "description": "Update a user returns \"OK\" response"
     }
   ],
+  "CreateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Create a Workflow returns \"Successfully created a workflow.\" response"
+    }
+  ],
   "CreateWorkflowInstance": [
     {
       "group": "workflow_automation",
       "suffix": "",
       "description": "Execute a workflow returns \"Created\" response"
+    }
+  ],
+  "UpdateWorkflow": [
+    {
+      "group": "workflow_automation",
+      "suffix": "",
+      "description": "Update an existing Workflow returns \"Successfully updated a workflow.\" response"
     }
   ]
 }
