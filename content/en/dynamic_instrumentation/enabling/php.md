@@ -36,7 +36,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 See [Dynamic Instrumentation][5] for information about adding instrumentations and browsing and indexing the data.
 
 
-<div class="alert alert-info">The following features are supported in the Limited Preview</div>
+## Limitations
 
 ### Supported features
 
