@@ -1,0 +1,10 @@
+yellow_item_options:
+  - label: Banana
+    id: banana
+    default: true
+  - label: Sunflower
+    id: sunflower
+  - label: Lemon
+    id: lemon
+  - label: School bus
+    id: school_bus
