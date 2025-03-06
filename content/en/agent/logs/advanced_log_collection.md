@@ -754,7 +754,7 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 The Agent limits the number of files it can tail simultaneously, as defined by `logs_config.open_files_limit` parameter.
 By default, when more files match the wildcard pattern than this limit, the Agent prioritizes them by sorting filenames in reverse lexicographic order . This works well for log files named with timestamps or sequential numbering, ensuring that the most recent logs are tailed first.
 
-However, if log filenames do not follow such patterns, this behavior may not be ideal. To prioritize files based on their modification time, set `logs_config.file_wildcard_selection_mode` to `by_modification_time`. With this setting, the Agent continuously sorts files by their modification time, always tailing the most recently modified files first while stopping tailing the least recently modified ones.
+However, if log filenames do not follow such patterns, the default behavior may not be ideal. To prioritize files by modification time, set logs_config.file_wildcard_selection_mode to by_modification_time. With this setting, the Agent continuously sorts files by their modification time. It always tails the most recently modified files first and stops tailing the least recently modified ones.
 
 To restore default behavior, remove the `logs_config.file_wildcard_selection_mode` entry or explicitly set it to `by_name`.
 
