@@ -14,34 +14,17 @@ By aligning expectations with the nature of rollup results and employing clear q
 
 ## Understanding cardinality in timeseries
 
-Consider a scenario where you track distinct users visiting a website. Each day for seven days, you observe 100 unique users, so you might assume you had a total of 700 users. However, the actual number of distinct users over the entire week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, which inflates the sum when compared to a single, longer rollup time frame.
+Consider a scenario where you track distinct users visiting a website. Each day for seven days, you observe 100 unique users, leading you to assume a total of 700 users. However, the actual number of distinct users over the week might be 400, as many users visit the site on multiple days. This discrepancy arises because each time frame (such as each day) independently counts unique users, inflating the total when compared to a single, longer rollup timeframe.
 
-This counterintuitive result is due to cardinality, or how the unique elements in a dataset are counted.
+This counterintuitive result is due to cardinality, which refers to how unique elements in a dataset are counted. The cardinality for each time bucket can be complex. When analyzing unique users, consider the question: "How many unique users were there each day this week?" If a user visits on two separate days, they count as unique for each day.
 
-## Rollup functionality and unexpected results
-
-When aggregating data using the rollup function, the results can be counterintuitive. For example, the sum of hourly distinct user counts can exceed the count of distinct users over a full day. This is because users appearing in multiple hourly buckets are counted once per bucket but only once across the entire day.
+However, when dealing with unique counts across buckets, the implications become more nuanced. If the approach is to get a list of all views within a given time bucket (such as 4 hours), the next step is to count the distinct sessions associated with those views. By this logic, any session that has at least one view in the time bucket will be counted. For instance, if a session records a view at 7:59:50 and another at 8:00:10, four-hour rollups would count that session in both the 4-8 bucket and the 8-12 bucket, resulting in the session being counted twice.
 
 ### Implications for visualizations
 
-Visualizations by default show the sum of rollup values across intervals, which can lead to discrepancies between the sum and a scalar value representing the entire time frame. For instance, a graph might display a sum of 125 for hourly rollups, while a direct query shows 121 for the same period. This is due to sessions or users being counted multiple times across hourly buckets but only once in the daily rollup.
-
-## Rollups with averages and cardinality
-
-Averages involving cardinality can be complex.
-
-For example, hourly averages may show a high percentage of distinct users without errors—reaching 99.5%. The weekly average, however, can reveal a lower percentage, dropping to 97.5% due to the longer duration.
-
-This disparity arises from some users visiting your website multiple times over a week, leading to a higher likelihood of encountering errors over that period. See the following illustrative example for more context on this disparity.
-
-### Error rate variation and user interactions case study
-
-Consider a scenario where 2,000 users experience 6,000 errors in a week, while 22,000 users face no errors. Daily error rates fluctuate, with hourly figures ranging from 11 to 35 users facing errors. Additionally, on an hourly basis, there are around 1,000 distinct users encountering errors weekly, reflecting an error rate of 0.11% to 0.35%.
-
-In contrast, over the week, 2,000 out of 24,000 users encounter errors, accounting for an 8.3% error rate—much higher than the hourly observation.
-
-This disparity highlights the many ways you might see errors when examining weekly error rates against hourly averages.
+Visualizations usually display the sum of values over different intervals, which can create confusion when comparing this total to a single value that represents the entire time period. For example, a graph might show a total of 125 for hourly increments, while a query to retrieve data might show a total of 121 for the same timeframe. This difference occurs because in the visualization, users or sessions can be counted multiple times in the hourly totals but only once in the overall daily total.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
