@@ -20,7 +20,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - orchestration
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/terraform/README.md
 display_on_public_website: true
@@ -92,13 +92,16 @@ Datadog Terraform プロバイダーは [Terraform レジストリ][1]を介し�
 
    **注**: Datadog US1 サイトを使用していない場合は、`api_url` [オプションパラメーター][3]を [Datadog サイト][4]に設定する必要があります。ページの右側にあるドキュメントサイトセレクタが正しい Datadog サイトに設定されていることを確認してから、`api_url` パラメーターの値として以下の URL を使用してください。
 
+
     ```
     https://api.{{< region-param key="dd_site" code="true" >}}/
     ```
+
+
 4. `terraform init` を実行します。これにより、Terraform での利用のためにディレクトリが初期化され、Datadog プロバイダーがプルされます。
 5. `terraform_config/` ディレクトリ内に任意の `.tf` ファイルを作成し、Datadog リソースの作成を開始します。
 
-## モニターを作成
+## モニターの作成
 
 この例では、[ライブプロセスモニター][5]を作成する `monitor.tf` ファイルを示します。
 

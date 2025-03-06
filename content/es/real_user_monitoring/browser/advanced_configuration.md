@@ -349,6 +349,45 @@ Para sustituir los nombres por defecto de las vistas de RUM de forma que se ajus
    {{% /tab %}}
    {{< /tabs >}}
 
+### Definir el nombre de la vista
+
+Utiliza `setViewName(name: string)` para actualizar el nombre de la vista actual. Esto te permite cambiar el nombre de la vista mientras está activa sin iniciar una nueva.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.setViewName('<VIEW_NAME>');
+
+// Ejemplo de código
+datadogRum.setViewName('Checkout');
+```
+{{% /tab %}}
+{{% tab "CDN asíncrono" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('<VIEW_NAME>');
+})
+
+// Ejemplo de código
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setViewName('Checkout');
+})
+```
+{{% /tab %}}
+{{% tab "CDN síncrono" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.setViewName('<VIEW_NAME>');
+
+// Ejemplo de código
+window.DD_RUM && window.DD_RUM.setViewName('Checkout');
+```
+{{% /tab%}}
+{{< /tabs>}}
+
+**Nota**: Cambiar el nombre de la vista afecta a la vista y a sus eventos secundarios desde el momento en que se llama al método.
+
 ## Enriquecer y controlar los datos de RUM
 
 El SDK del RUM Browser captura los eventos de RUM y rellena sus atributos principales. La función de devolución de llamada `beforeSend` te da acceso a cada evento recopilado por el SDK del RUM Browser antes de enviarlo a Datadog.
@@ -433,8 +472,8 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Si un usuario pertenece a varios equipos, añade pares clave-valor adicionales en tus llamadas a la API de Global Context.
 
@@ -492,8 +531,8 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Puedes actualizar las siguientes propiedades de eventos:
 
@@ -506,7 +545,7 @@ Puedes actualizar las siguientes propiedades de eventos:
 |   `version`             |   Cadena  |   La versión de la aplicación, por ejemplo: 1.2.3, 6c44da20 y 2020.02.13.                          |
 |   `action.target.name`  |   Cadena  |   El elemento con el que ha interactuado el usuario. Solo para acciones recopiladas automáticamente.              |
 |   `error.message`       |   Cadena  |   Un mensaje conciso, legible, de una línea, en el cual se explica el error.                                 |
-|   `error.stack `        |   Cadena  |   La stack trace o la información complementaria sobre el error.                                     |
+|   `error.stack `        |   Cadena  |   La traza (trace) de stack tecnológico o la información adicional sobre el error.                                     |
 |   `error.resource.url`  |   Cadena  |   La URL del recurso que provocó el error.                                                        |
 |   `resource.url`        |   Cadena  |   La URL del recurso.                                                                                 |
 |   `context`        |   Objeto  |   Atributos añadidos con la [Global Context API](#global-context), la [View Context API](#view-context) o al generar eventos manualmente (por ejemplo, `addError` y **`addAction`**).                                                                                 |
@@ -565,8 +604,8 @@ window.DD_RUM &&
         ...
     });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 **Nota**: Los eventos de vistas no se pueden descartar.
 
@@ -633,8 +672,8 @@ window.DD_RUM && window.DD_RUM.setUser({
 })
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Acceder a la sesión del usuario
 
@@ -658,8 +697,8 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.getUser()
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Añadir/sustituir la propiedad de la sesión del usuario
 
@@ -683,8 +722,8 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Eliminar la propiedad de la sesión del usuario
 
@@ -707,8 +746,8 @@ window.DD_RUM.onReady(function() {
 ```javascript
 window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Borrar la propiedad de la sesión del usuario
 
@@ -775,8 +814,8 @@ window.DD_RUM &&
         sessionSampleRate: 90,
     });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Para una sesión muestreada, no se recopilan todas las páginas de vistas ni la telemetría asociada a esa sesión.
 
@@ -840,8 +879,8 @@ acceptCookieBannerButton.addEventListener('click', () => {
     window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
 });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ## Ver contexto
 
@@ -894,8 +933,8 @@ window.DD_RUM && window.DD_RUM.setViewContextProperty('activity', {
     amount: 23.42
 });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 
 ### Sustituir el contexto de la vista
@@ -990,8 +1029,8 @@ window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
     amount: 23.42
 });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Eliminar la propiedad de contexto global
 
@@ -1032,8 +1071,8 @@ window.DD_RUM &&
     window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 
 ### Sustituir el contexto global
@@ -1081,8 +1120,8 @@ window.DD_RUM &&
     });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Borrar un contexto global
 
@@ -1111,8 +1150,8 @@ window.DD_RUM.onReady(function() {
 window.DD_RUM && window.DD_RUM.clearGlobalContext();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ### Leer el contexto global
 
@@ -1141,8 +1180,8 @@ window.DD_RUM.onReady(function() {
 const context = window.DD_RUM && window.DD_RUM.getGlobalContext();
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 ## Ciclo de vida de los contextos
 
@@ -1166,7 +1205,7 @@ Sin embargo, esta función tiene algunas **limitaciones**:
 
 ## Micro frontend
 
-A partir de la versión 5.22, el RUM Browser SDK soporta arquitecturas micro frontend. El mecanismo se basa en stacktrace. Para utilizarlo, debes ser capaz de extraer servicio y las propiedades de versión de las rutas y nombres de archivo de tu aplicación.
+A partir de la versión 5.22, el SDK del navegador RUM admite arquitecturas micro frontend. El mecanismo se basa en trazas del stack tecnológico. Para utilizarlo, debes poder extraer servicios y propiedades de versiones de las rutas y nombres de archivo de tu aplicación.
 
 ### Cómo utilizarlo
 
@@ -1236,8 +1275,8 @@ window.DD_RUM && window.DD_RUM.init({
     },
 });
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
 
 Cualquier consulta realizada en el Explorador RUM puede utilizar el atributo servicio para filtrar eventos.
 
@@ -1245,18 +1284,19 @@ Cualquier consulta realizada en el Explorador RUM puede utilizar el atributo ser
 
 Algunos eventos no pueden atribuirse a un origen, por lo que no tienen una pila de manipulación asociada. Esto incluye:
 - Acción eventos recogida automáticamente
-- Ressource eventos distintos de XHR y Fetch.
-- Ver eventos (pero en su lugar puede [anular los nombres predeterminados de las vistas de ron][21])
+- Eventos de recursos distintos de XHR y Fetch.
+- Ver eventos (pero en su lugar puedes [sobrescribir los nombres de vistas de RUM predeterminados][21])
 - Violaciones de CORS y CSP
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: /es/real_user_monitoring/browser/data_collected/
 [2]: /es/real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /es/real_user_monitoring/browser/setup
+[4]: /es/real_user_monitoring/browser/setup/
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event

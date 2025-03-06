@@ -65,8 +65,14 @@ Estimated usage metrics are generally available for the following usage types:
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
 | Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
+| Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
+
+## Dashboards
+
+Out-of-the-box estimated usage dashboards are available, offering useful queries with these metrics. You can clone these dashboards to help you get started with usage metrics. To find these dashboards, navigate to [Dashboards preset lists][5] and search for "Estimated Usage."
 
 ## Multi-Org usage
 
@@ -84,3 +90,4 @@ For billing questions, contact your [Customer Success][2] Manager.
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage

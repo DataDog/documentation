@@ -6,6 +6,8 @@ aliases:
   - /real_user_monitoring/flutter/web_view_tracking
   - /real_user_monitoring/reactnative/web_view_tracking
   - /real_user_monitoring/kotlin-multiplatform/web_view_tracking
+  - /real_user_monitoring/kotlin_multiplatform/web_view_tracking
+  - /real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
     tag: "Source Code"
@@ -93,7 +95,7 @@ In your project, link the following libraries:
 DatadogCore
 DatadogWebViewTracking
 ```
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="Carthage" level="h4" %}}
 
@@ -108,7 +110,7 @@ DatadogWebViewTracking.xcframework
 ```
 
 [1]: https://github.com/Carthage/Carthage
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 [1]: /real_user_monitoring/browser/setup/#npm
 [2]: /real_user_monitoring/ios/
@@ -129,11 +131,14 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 [1]: /real_user_monitoring/browser/setup/#npm
 
 {{% /tab %}}
+{{% tab "Kotlin Multiplatform" %}}
+
+Add `DatadogWebViewTracking` library to your application by following the guide [here][1].
+
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
+
+{{% /tab %}}
 {{< /tabs >}}
-
-#### Kotlin Multiplatform
-
-Add `DatadogWebViewTracking` library to your application by following the guide [here][5].
 
 ### Instrument your web views
 
@@ -193,13 +198,17 @@ WebViewTracking.disable(webView: webView)
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-The RUM Flutter SDK provides APIs for you to control web view tracking when using the [`webview_flutter`][1] package. To add Web View Tracking, call the `trackDatadogEvents` extension method on `WebViewController`, providing the list of allowed hosts.
+The RUM Flutter SDK provides APIs for you to control web view tracking when the [`webview_flutter`][1] or the [`flutter_inappwebview`][2] package.
 
-Add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][2] plugin:
+#### Web view Flutter package
+
+To add Web View Tracking when using `webview_flutter`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][3] plugin:
 ```yaml
 dependencies:
   datadog_webview_tracking: ^x.x.x
 ```
+
+Then, call the `trackDatadogEvents` extension method on `WebViewController`, providing the list of allowed hosts.
 
 For example:
 
@@ -218,9 +227,63 @@ webViewController = WebViewController()
 Note that `JavaScriptMode.unrestricted` is required for tracking to work on Android.
 `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
+#### Flutter InAppWebView package
+
+To add Web View Tracking when using `flutter_inappwebview`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_inappwebview_tracking`][4] plugin:
+```yaml
+dependencies:
+  datadog_webview_tracking: ^x.x.x
+```
+
+To instrument an `InAppWebView`, add the `DatadogInAppWebViewUserScript` to your `initialUserScripts`, and call the `trackDatadogEvents` extension method during the `onWebViewCreated` callback:
+
+```dart
+InAppWebView(
+  // Other settings...
+  initialUserScripts: UnmodifiableListView([
+    DatadogInAppWebViewUserScript(
+      datadog: DatadogSdk.instance,
+      allowedHosts: {'shopist.io'},
+    ),
+  ]),
+  onWebViewCreated: (controller) async {
+    controller.trackDatadogEvents(DatadogSdk.instance);
+  },
+)
+```
+
+To instrument an `InAppBrowser`, add an override for `onBrowserCreated` and call the `trackDatadogEvents` extension method on `webViewController`, then add a `DatadogInAppWebViewUserScript` to the `initialUserScripts` when creating your custom `InAppBrowser`:
+
+```dart
+class MyInAppBrowser extends InAppBrowser {
+  MyInAppBrowser({super.windowId, super.initialUserScripts});
+
+  @override
+  void onBrowserCreated() {
+    webViewController?.trackDatadogEvents(DatadogSdk.instance);
+    super.onBrowserCreated();
+  }
+}
+
+// Browser creation
+_browser = MyInAppBrowser(
+  initialUserScripts: UnmodifiableListView(
+    [
+      DatadogInAppWebViewUserScript(
+        datadog: DatadogSdk.instance,
+        allowedHosts: {'shopist.io'},
+      ),
+    ],
+  ),
+);
+```
+
+The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the given hosts and their subdomain. No regular expression is allowed.
 
 [1]: https://pub.dev/packages/webview_flutter
-[2]: https://pub.dev/packages/datadog_webview_tracking
+[2]: https://pub.dev/packages/flutter_inappwebview
+[3]: https://pub.dev/packages/datadog_webview_tracking
+[4]: https://pub.dev/packages/datadog_inappwebview_tracking
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -285,16 +348,16 @@ Note that `JavaScriptMode.unrestricted` is required for tracking to work on Andr
 `allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-rum
-[2]: /real_user_monitoring/kotlin-multiplatform/#setup
+[2]: /real_user_monitoring/kotlin_multiplatform/#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-logs
-[4]: /logs/log_collection/kotlin-multiplatform/#setup
+[4]: /logs/log_collection/kotlin_multiplatform/#setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Access your web views
 
-Your web views appear in the [RUM Explorer][6] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
+Your web views appear in the [RUM Explorer][5] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
 
 To access your web views:
 
@@ -303,6 +366,8 @@ To access your web views:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
    - The platform using `source`
+
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they may belong to the Browser SDK version. In that case, you can filter out the Browser platform session. For example, `source: react-native`.
 3. Click a session. A side panel with a list of events in the session appears.
 
    {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}
@@ -313,7 +378,7 @@ From here, you can hover over a session event and click **Open View waterfall** 
 
 ## Billing implications
 
-See [RUM & Session Replay Billing][7] for details on how web views in mobile applications impact session recordings and billing.
+See [RUM & Session Replay Billing][6] for details on how web views in mobile applications impact session recordings and billing.
 
 ## Further Reading
 
@@ -321,8 +386,7 @@ See [RUM & Session Replay Billing][7] for details on how web views in mobile app
 
 [1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/browser/setup/#npm
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
-[6]: https://app.datadoghq.com/rum/explorer
-[7]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[5]: https://app.datadoghq.com/rum/explorer
+[6]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

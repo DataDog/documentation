@@ -28,10 +28,12 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
-    {{< nextlink href="monitors/guide/monitor_api_options" >}}API オプションの監視{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_api_options" >}}モニター API オプション{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}On Missing Data 構成への移行{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="一般ガイド:" >}}
+    {{< nextlink href="/monitors/guide/monitor_best_practices" >}}モニターのベストプラクティス{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/non_static_thresholds" >}}非静的しきい値の監視方法{{< /nextlink >}}
@@ -41,8 +43,9 @@ title: モニターガイド
     {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}モニター履歴と評価グラフ{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}モニターと Statuspage のインテグレーション{{< /nextlink >}}
-{{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
+{{< nextlink href="monitors/guide/github_gating" >}}Datadog モニターで GitHub Actions のデプロイを制御する{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}利用可能なディスク容量を監視する{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/on_missing_data" >}}On Missing Data 構成への移行{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="クエリ:" >}}

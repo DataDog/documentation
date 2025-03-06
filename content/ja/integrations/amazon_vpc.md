@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/vpc-security-flowlogs/
   tag: GitHub
   text: Datadog でフローログを監視し、VPC のセキュリティを確保する
+- link: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink-using-aws-vpc-peering/
+  tag: アーキテクチャセンター
+  text: AWS VPC ピアリングを使用して AWS PrivateLink 経由で Datadog に接続する
 git_integration_title: amazon_vpc
 has_logo: false
 integration_id: ''

@@ -265,7 +265,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     },
     ```
 
-2. Add the [`PidMode` parameter][10] in the task definition and set it to `task` as follows:
+2. Add the [PidMode parameter][2] in the task definition and set it to `task` as follows:
 
     ```json
     "pidMode": "task"
@@ -281,6 +281,7 @@ When running inside a container, DogStatsD needs to run in the host's PID namesp
     ```
 
 [1]: /getting_started/tagging/assigning_tags/#environment-variables
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -390,4 +391,3 @@ For guidelines on creating additional implementation options, see the [datadog-a
 [7]: https://github.com/DataDog/php-datadogstatsd
 [8]: https://github.com/DataDog/dogstatsd-csharp-client#unix-domain-socket-support
 [9]: https://github.com/DataDog/datadog-agent/wiki/Unix-Domain-Sockets-support
-[10]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params

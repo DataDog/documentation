@@ -98,6 +98,14 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    - Set `DD_LOGS_ENABLED` to true.
    - Set `DD_OTLP_CONFIG_LOGS_ENABLED` to true.
 
+<div class="alert alert-warning">
+<strong>Known Issue</strong>: Agent versions 7.61.0 through 7.63.0 have an issue where OTLP ingestion pipelines may fail to start in Docker environments, showing the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br>
+If you are using an affected version, you can use one of these workarounds:<br>
+1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
+2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br>
+These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
+
 [1]: /agent/docker/
 {{% /tab %}}
 {{% tab "Kubernetes (Daemonset)" %}}
@@ -200,6 +208,35 @@ This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` 
    For HTTP:
    ```
    --set "datadog.otlp.receiver.protocols.http.enabled=true"
+   ```
+
+This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).
+
+[1]: /agent/kubernetes/?tab=helm
+{{% /tab %}}
+{{% tab "Kubernetes (Operator)" %}}
+
+1. Follow the [Kubernetes Agent setup][1].
+
+2. Enable the preferred protocol in your Operator's manifest:
+
+   For gRPC:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           grpc:
+             enabled: true
+   ```
+   For HTTP:
+   ```yaml
+   features:
+     otlp:
+       receiver:
+         protocols:
+           http:
+             enabled: true
    ```
 
 This enables each protocol in the default port (`4317` for OTLP/gRPC and `4318` for OTLP/HTTP).

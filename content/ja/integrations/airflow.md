@@ -41,7 +41,7 @@ draft: false
 git_integration_title: airflow
 integration_id: airflow
 integration_title: Airflow
-integration_version: 6.1.0
+integration_version: 6.3.0
 is_public: true
 manifest_version: 2.0.0
 name: airflow
@@ -197,7 +197,6 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
            tags:
              dag_id: "$1"
              task_id: "$2"
-         - match: "airflow.pool.open_slots.*"
          - match: "airflow.dagrun.*.first_task_scheduling_delay"
            name: "airflow.dagrun.first_task_scheduling_delay"
            tags:
@@ -463,7 +462,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
 [6]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
 [7]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=kubernetes#setup
-[8]: /ja/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
+[8]: https://docs.datadoghq.com/ja/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
 [9]: http://docs.datadoghq.com/resources/json/airflow_ust.json
 [10]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}

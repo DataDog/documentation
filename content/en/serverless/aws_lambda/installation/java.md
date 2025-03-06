@@ -27,6 +27,8 @@ If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Dat
 
 ## Installation
 
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/java">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}

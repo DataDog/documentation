@@ -28,6 +28,13 @@ docker run --rm datadog/synthetics-private-location-worker --help
 synthetics-pl-worker.exe --help
 ```
 {{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+Refer to the example in the [Datadog Helm repository][1].
+	
+[1]: https://github.com/DataDog/helm-charts/tree/main/charts/synthetics-private-location
+ 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Customize your private location
@@ -103,6 +110,11 @@ The following parameters can be used to configure a default proxy to use for Syn
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
+
+`proxyTestRequestsBypassList`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Hosts for which the proxy defined with `proxyTestRequests` is not used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 ### Advanced configuration
 
@@ -195,6 +207,11 @@ Path to the JSON configuration file.
 : **Type**: String <br>
 **Default**: `none`<br>
 Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
+
+`proxyTestRequestsBypassList`
+: **Type**: Array of Strings <br>
+**Default**: `none`<br>
+Hosts for which the proxy defined with `proxyTestRequests` is not used, for example: `--proxyTestRequestsBypassList="example.org" --proxyTestRequestsBypassList="*.com"`.
 
 `--proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>

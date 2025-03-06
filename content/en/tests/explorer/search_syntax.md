@@ -2,9 +2,6 @@
 title: Test Optimization Explorer Search Syntax
 description: Learn how to search for all of your test runs in the Test Optimization Explorer.
 further_reading:
-- link: "/tests/search"
-  tag: "Documentation"
-  text: "Filter and group tests"
 - link: "/tests/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"

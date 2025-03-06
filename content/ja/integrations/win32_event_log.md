@@ -24,7 +24,8 @@ author:
 categories:
 - os & system
 - log collection
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md
 display_on_public_website: true
@@ -32,7 +33,7 @@ draft: false
 git_integration_title: win32_event_log
 integration_id: event-viewer
 integration_title: Windows Event Log
-integration_version: 3.3.0
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: win32_event_log
@@ -46,6 +47,7 @@ tile:
   - Supported OS::Windows
   - Category::OS とシステム
   - Category::ログの収集
+  - Category::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Windows のイベントを Datadog イベントストリームへ送信。
@@ -62,6 +64,8 @@ tile:
     url: https://www.datadoghq.com/blog/windows-server-monitoring
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/datadog-cloud-siem-windows-event-logs/
   support: README.md#Support
   title: Windows Event Log
 ---
@@ -126,7 +130,7 @@ Get-WinEvent -ListLog * | sort RecordCount -Descending
 応答例
 
 ```text
-LogMode  MaximumSizeInBytes RecordCount LogName
+LogMode  MaximumSizeInBytes RecordCount LogName 
 Circular          134217728      249896 Security
 Circular            5242880        2932 <CHANNEL_2>
 ```
@@ -184,12 +188,12 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
   ```yaml
   init_config:
   instances:
-    - # Event Log API
+    - # Event Log API 
       path: Security
       legacy_mode: false
       filters: {}
 
-    - path: "<CHANNEL_2>"
+    - path: "<CHANNEL_2>" 
       legacy_mode: false
       filters: {}
   ```
@@ -266,13 +270,13 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows
+    service: Windows       
     query: '*[System[(Level=1 or Level=2 or Level=3)]]'
 
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows
+    service: Windows       
     query: |
       <QueryList>
         <Query Id="0" Path="Application">
@@ -291,7 +295,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows
+    service: Windows       
     log_processing_rules:
     - type: include_at_match
       name: relevant_security_events
@@ -300,7 +304,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Security
     source: windows.events
-    service: Windows
+    service: Windows       
     log_processing_rules:
     - type: exclude_at_match
       name: relevant_security_events
@@ -309,7 +313,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: System
     source: windows.events
-    service: Windows
+    service: Windows       
     log_processing_rules:
     - type: include_at_match
       name: system_errors_and_warnings
@@ -318,7 +322,7 @@ Datadog は、Event Viewer に表示されるイベントが Agent に収集さ�
   - type: windows_event
     channel_path: Application
     source: windows.events
-    service: Windows
+    service: Windows       
     log_processing_rules:
     - type: include_at_match
       name: application_errors_and_warnings
@@ -602,7 +606,7 @@ Windows Event Log チェックには、サービスのチェック機能は含�
     - type: windows_event
       channel_path: System
       source: windows.events
-      service: Windows
+      service: Windows       
       log_processing_rules:
       - type: include_at_match
         name: system_errors_and_warnings
@@ -623,6 +627,7 @@ Windows Event Log チェックには、サービスのチェック機能は含�
 - [Windows Server 2012 メトリクスの収集方法][18]
 - [Datadog を使用した Windows Server 2012 の監視][19]
 - [Datadog を使用した Windows イベントログの監視][20]
+- [Datadog Cloud SIEM で Windows イベントログを監視する][21]
 
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
@@ -645,3 +650,4 @@ Windows Event Log チェックには、サービスのチェック機能は含�
 [18]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [19]: https://www.datadoghq.com/blog/windows-server-monitoring
 [20]: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/
+[21]: https://www.datadoghq.com/blog/datadog-cloud-siem-windows-event-logs/

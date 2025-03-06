@@ -23,7 +23,7 @@ categories:
 - インシデント
 - notifications
 - オーケストレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/blink/README.md
 display_on_public_website: true
@@ -100,7 +100,7 @@ Datadog のワークスペースと Blink の接続方法については、[弊�
 
 インテグレーションをアンインストールする場合は、Blink ワークスペースで対応する Datadog 接続を削除するだけです。
 
-Once deleted, any previous authorizations or access tokens are revoked.
+削除されると、以前の承認やアクセストークンはすべて失効します。
 
 ## 収集データ
 
@@ -118,7 +118,7 @@ Blink にはメトリクスは含まれていませんが、Blink のオート�
 
 ## トラブルシューティング
 
-Need help? Contact [Blink support][5].
+ヘルプが必要ですか？ [Blink サポート][5]にお問い合わせください。
 
 [1]: https://www.blinkops.com/
 [2]: https://library.blinkops.com/automations?vendors=Datadog

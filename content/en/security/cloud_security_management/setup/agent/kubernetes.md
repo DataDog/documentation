@@ -15,7 +15,9 @@ Use the following instructions to enable Misconfigurations, Threat Detection, an
 
 ## Prerequisites
 
-- Datadog Agent version `7.46` or later.
+- Latest Datadog Agent version. For installation instructions, see [Getting Started with the Agent][5] or install the Agent from the [Datadog UI][6].
+
+**Note**: SBOM collection is not compatible with the image streaming feature in Google Kubernetes Engine (GKE). To disable it, see the [Disable Image streaming][7] section of the GKE docs.
 
 ## Installation
 
@@ -147,3 +149,6 @@ Add the following settings to the `env` section of `security-agent` and `system-
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
 [4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[5]: /getting_started/agent
+[6]: https://app.datadoghq.com/account/settings/agent/latest
+[7]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

@@ -214,7 +214,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 	- Agent versions <= 6.11: `"C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe"`
 	- Agent versions >= 6.12: `"C:\Program Files\Datadog\Datadog Agent\bin\agent.exe"`
 * The configuration GUI is a browser-based configuration application (for Windows 64-bit only).
-* Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
+* Commands can be run from the **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Command-line options are below:
 
 | Command         | Description                                                                      |

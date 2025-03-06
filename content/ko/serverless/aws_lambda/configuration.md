@@ -30,7 +30,7 @@ title: AWS Lambda용 서버리스 모니터링 구성
 - [로그와 트레이스 연결](#connect-logs-and-traces)
 - [오류를 소스 코드에 연결](#link-errors-to-your-source-code)
 - [커스텀 메트릭 제출][27]
-- [프로파일링 데이터 수집 (퍼블릭 베타)](#collect-profiling-data-public-beta)
+- [프로파일링 데이터 수집][#collect-profiling-data)
 - [PrivateLink나 프록시를 통해 텔레메트리 전송](#send-telemetry-over-privatelink-or-proxy)
 - [다중 Datadog 조직에 텔레메트리 전송](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS 리소스를 통한 트레이스 컨텍스트 전파](#propagate-trace-context-over-aws-resources)
@@ -46,7 +46,7 @@ title: AWS Lambda용 서버리스 모니터링 구성
 
 ## 위협 탐지를 활성화하여 공격 시도를 주시하세요
 
-서버리스 애플리케이션을 공격하려는 시도에 대한 알림을 받고 신속하게 대응하세요.
+서버리스 애플리케이션 공격 발생 시 알림을 받고 신속하게 대응하세요.
 
 시작하려면 먼저 함수가 [추적 활성화][43]되어 있는지 확인하세요.
 
@@ -278,8 +278,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## 논람다 리소스에서 트레이스 수집
 
-<div class="alert alert-info">본 기능은 현재 파이썬(Python), Node.js, 자바(Java), .NET에서 지원됩니다.</div>
-
 Datadog은 Lambda 함수를 트리거하는 AWS 관리 리소스로 들어오는 Lambda 이벤트를 기반으로 APM 스팬을 추론할 수 있습니다. 이를 통해 AWS 관리 리소스 간의 관계를 시각화하고 서버리스 애플리케이션의 성능 문제를 식별할 수 있도록 도와드립니다. 자세한 내용은 [추가 제품 세부 정보][12]를 참조하세요.
 
 현재 지원되는 리소스는 다음과 같습니다.
@@ -350,9 +348,11 @@ Datadog APM 클라이언트가 자동으로 계측하는 라이브러리 및 프
 
 ## APM 스팬 수집용 샘플링 속도 선택
 
-서버리스 함수용  [APM 호출 트레이스 샘플링 속도][17]를 관리하려면 함수의 `DD_TRACE_SAMPLE_RATE` 환경 변수를 0.000(Lambda 함수 호출 트레이스 없음)에서 1.000(모든 Lambda 함수 호출 트레이스) 사이의 값으로 설정합니다.
+서버리스 함수에 대한 [APM 추적 호출 샘플링 속도][17]를 관리하려면 함수의 `DD_TRACE_SAMPLING_RULES` 환경 변수를 0.000(Lambda 함수 호출 추적 없음)에서 1.000(모든 Lambda 함수 호출 추적) 사이의 값으로 설정합니다.
 
-메트릭은 애플리케이션 트래픽의 100%를 기준으로 산출되며, 샘플링 구성에 관계없이 정확성을 유지합니다.
+**참고**: 
+   - `DD_TRACE_SAMPLE_RATE`는 더 이상 사용되지 않습니다. 대신 `DD_TRACE_SAMPLING_RULES`를 사용하세요. 예를 들어, 이미 `DD_TRACE_SAMPLE_RATE`를 `0.1`로 설정한 경우 `DD_TRACE_SAMPLING_RULES`를 `[{"sample_rate":0.1}]`로 설정합니다.
+   - `trace.<OPERATION_NAME>.hits`와 같은 전체 트래픽 메트릭은 *Lambda에서만* 샘플링된 호출을 기반으로 계산됩니다.
 
 처리량이 많은 서비스의 경우, 트레이싱 데이터가 고빈도로 반복되기 때문에 대개 모든 요청을 수집할 필요가 없습니다. 상당히 중요한 문제의 경우 항상 여러 트레이스에서 그 증상을 나타냅니다. 이러한 [수집 관리][18]는 예산 범위 내에서 문제를 해결하는 데 필요한 가시성을 확보하도록 도와드립니다.
 
@@ -370,7 +370,7 @@ Datadog이 스팬을 수집한 후, Datadog Intelligent Retention 필터는 애�
 
 ## 트레이스 수집 활성화/비활성화
 
-Datadog Lambda 확장 프로그램을 사용한 트레이스 수집은 기본으로 활성화되어 있습니다.
+Datadog Lambda 확장을 통한 트레이스 수집은 기본적으로 활성화됩니다.
 
 Lambda  함수에서 트레이스 수집을 시작하려면 다음과 같은 설정을 적용하세요:
 
@@ -501,15 +501,15 @@ Lambda 함수에서 환경 변수 `DD_TRACE_ENABLED`를 `false`로 설정합니�
 
 ## 소스 코드에 오류 연결
 
-[Datadog 소스 코드 통합][26]을 사용하면 내 텔레메트리(스택 트레이스 등)를 Git 리포지토리에 있는 Lambda 함수의 소스 코드에 연결할 수 있습니다.
+[Datadog 소스 코드 통합][26]을 사용하면 원격 측정(예: 스택 트레이스)을 Git 리포지토리에 있는 Lambda 함수의 소스 코드에 연결할 수 있습니다.
 
 서버리스 애플리케이션에 소스 코드 통합을 설정하는 방법에 관한 지침은 [빌드 아티팩트 섹션의 Embed Git 정보][101]를 참고하세요.
 
 [101]: /ko/integrations/guide/source-code-integration/?tab=go#serverless
 
-## 프로파일링 데이터 수집(공개 베타)
+## 프로파일링 데이터 수집
 
-Datadog의 [연속 프로파일러][42]는 파이썬(Python) 버전 4.62.0 및 레이어 버전 62 이하에서 베타 버전으로 사용할 수 있습니다. 해당 옵션 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하여 활성화합니다.
+Datadog의 [Continuous Profiler][42]는 Python 트레이서 버전 4.62.0 및 계층 버전 62 이하의 Preview에서 사용할 수 있습니다. 이 기능(선택 사항)을 활성화하려면 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하세요.
 
 연속 프로파일러는 실행 중인 모든 파이썬(Python) 코드의 CPU 및 힙의 스냅샷을 주기적으로 생성하는 스레드를 생성하는 방식으로 동작합니다. 여기에는 프로파일러 자체가 포함될 수 있습니다. 프로파일러 자체를 무시하려면 `DD_PROFILING_IGNORE_PROFILER`을 `true`으로 설정합니다.
 

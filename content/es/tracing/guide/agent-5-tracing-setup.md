@@ -33,15 +33,15 @@ Para obtener más información, consulta [la página de Docker][7].
 
 ### Instrumentar solicitudes
 
-{{< whatsnext desc="Selecciona uno de los siguientes lenguajes admitidos:">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}Instrumentación en lenguaje Java.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}Instrumentación en lenguaje C++.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}Instrumentación en lenguaje Python.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Instrumentación en lenguaje Ruby.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Instrumentación en lenguaje Go.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Instrumentación en lenguaje Node.js.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}Instrumentación en lenguaje .NET.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}Instrumentación en lenguaje PHP.{{< /nextlink >}}
+{{< whatsnext desc="Select one of the following supported languages:">}}
+    {{< nextlink href="tracing/setup/java" tag="Java" >}}Instrumentación del lenguaje Java{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}Instrumentación del lenguaje C++{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/python" tag="Python" >}}Instrumentación del lenguaje Python{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Instrumentación del lenguaje Ruby{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/go" tag="Go" >}}Instrumentación del lenguaje Go{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Instrumentación del lenguaje Node.js{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}Instrumentación del lenguaje .NET{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/php" tag="PHP" >}}Instrumentación del lenguaje PHP{{< /nextlink >}}
 {{< /whatsnext >}}
 
 Para Instrumentar una aplicación escrita en un lenguaje que todavía no es compatible con una biblioteca oficial, consulta la [API de rastreo][8].
