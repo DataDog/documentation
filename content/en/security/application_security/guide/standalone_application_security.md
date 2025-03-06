@@ -18,12 +18,12 @@ Standalone Application Security is currently supported for the following tracing
 
 | Language | Version |
 | -------- | ------- |
-| .NET     | N/A     |
+| .NET     | 3.12.0  |
 | Go       | N/A     |
-| Java     | 1.36.0  |
-| Node.js  | N/A     |
+| Java     | 1.47.0  |
+| Node.js  | 5.40.0  |
 | PHP      | N/A     |
-| Python   | N/A     |
+| Python   | 2.19.0  |
 | Ruby     | N/A     |
 
 ## Setup
@@ -32,13 +32,13 @@ Standalone Application Security is currently supported for the following tracing
 
 The DataDog Agent should be setup like you would normally do for APM or Application Security.
 
-However, when setting up the Tracing Library, you should add the `DD_EXPERIMENTAL_APPSEC_STANDALONE_ENABLED=true` environment variable to the service that runs the Tracing Library.
+However, when setting up the Tracing Library, you should add the `DD_APM_TRACING_ENABLED=true` environment variable to the service that runs the Tracing Library.
 
 This environment variable will reduce the amount of APM data sent to Datadog to a minimum required by Application Security products. It can then be combined with environment variables to enable Application Threat Management or Code Security.
 
-For Application Threat Management, add the `DD_EXPERIMENTAL_APPSEC_STANDALONE_ENABLED=true DD_APPSEC_ENABLED=true` environment variables.
+For Application Threat Management, add the `DD_APM_TRACING_ENABLED=true DD_APPSEC_ENABLED=true` environment variables.
 
-For Code Security, add the `DD_EXPERIMENTAL_APPSEC_STANDALONE_ENABLED=true DD_IAST_ENABLED=true` environment variables.
+For Code Security, add the `DD_APM_TRACING_ENABLED=true DD_IAST_ENABLED=true` environment variables.
 
 ## Further reading
 
