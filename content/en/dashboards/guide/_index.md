@@ -41,6 +41,7 @@ cascade:
 
 {{< whatsnext desc="Functions:" >}}
     {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/rollup-cardinality-vizualizations" >}}Understanding rollup function and cardinality in visualizations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
