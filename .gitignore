@@ -23,10 +23,6 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
-# Developers/ui_extensions
-content/en/developers/ui_extensions.md
-content/en/developers/faq/ui_extensions.md
-
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
 content/en/agent/basic_agent_usage/chef.md
