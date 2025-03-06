@@ -44,12 +44,12 @@
     "summary": "Get AWS On Demand tasks"
   },
   "CreateAwsOnDemandTask": {
-    "description": "Trigger the scan of an AWS resource with a high priority.",
+    "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
     "summary": "Post an AWS on demand task",
     "request_description": "The definition of the on demand task.",
     "request_schema_description": "Request object that includes the on demand task to submit."
   },
-  "RetrieveAwsOnDemandTask": {
+  "GetAwsOnDemandTask": {
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS On Demand task by id"
   },
