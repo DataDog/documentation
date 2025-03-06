@@ -16,6 +16,9 @@ cascade:
     {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}Monitor History and Evaluation Graph{{< /nextlink >}}
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/alert_aggregation" >}}Alert aggregation{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification message Best Practice{{< /nextlink >}}
+
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Tutorial:" >}}

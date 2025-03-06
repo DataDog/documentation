@@ -7546,7 +7546,7 @@ components:
       properties:
         day_starts:
           description: The time of the day at which a one day cumulative evaluation
-            window starts. Must be defined in UTC time in `HH:mm` format.
+            window starts.
           example: 04:00
           type: string
         hour_starts:
@@ -7565,6 +7565,11 @@ components:
           maximum: 1
           minimum: 1
           type: integer
+        timezone:
+          description: The timezone of the time of the day of the cumulative evaluation
+            window start.
+          example: Europe/Paris
+          type: string
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7653,6 +7658,9 @@ components:
           - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
+          quality_issues:
+          - broken_at_handle
+          - noisy_monitor
           scopes:
           - '!availability-zone:us-east-1c'
           - name:cassandra
@@ -7752,6 +7760,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        quality_issues:
+          description: Quality issues detected with the monitor.
+          items:
+            description: A quality issue detected with the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
         query:
           description: The monitor query.
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
@@ -14264,6 +14280,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -29811,6 +29830,50 @@ paths:
         parameters: []
         type: unsafe
   /api/v1/logs/config/indexes/{name}:
+    delete:
+      description: 'Delete an existing index from your organization. Index deletions
+        are permanent and cannot be reverted.
+
+        You cannot recreate an index with the same name as deleted ones.'
+      operationId: DeleteLogsIndex
+      parameters:
+      - description: Name of the log index.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsIndex'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an index
+      tags:
+      - Logs Indexes
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
+      x-undo:
+        type: idempotent
     get:
       description: Get one log index from your organization. This endpoint takes no
         JSON arguments.
