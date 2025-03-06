@@ -1,15 +1,14 @@
 ---
 title: Runtime Metrics
-type: multi-code-lang
 aliases:
   - /tracing/advanced/runtime_metrics/
-  - /tracing/runtime_metrics/
-  - /tracing/runtime_metrics/dotnet
-  - /tracing/runtime_metrics/go
-  - /tracing/runtime_metrics/java
-  - /tracing/runtime_metrics/nodejs
-  - /tracing/runtime_metrics/python
-  - /tracing/runtime_metrics/ruby
+  - /tracing//metrics/runtime_metrics/
+  - /tracing//metrics/runtime_metrics/dotnet
+  - /tracing//metrics/runtime_metrics/go
+  - /tracing//metrics/runtime_metrics/java
+  - /tracing//metrics/runtime_metrics/nodejs
+  - /tracing//metrics/runtime_metrics/python
+  - /tracing//metrics/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
@@ -40,23 +39,19 @@ Runtime metrics are application metrics about memory usage, garbage collection, 
 
 ### Caveats
 
-{{< tabs >}}
-
-{{% tab "Java" %}}
-
+{{< programming-lang-wrapper langs="java,ruby,dotnet" >}}
+{{< programming-lang lang="java" >}}
 #### Supported runtimes
 Runtime metrics are only supported on Java 8.
+{{< /programming-lang >}}
 
-{{% /tab %}}
+{{< programming-lang lang="ruby" >}}
+You must add the [`dogstatsd-ruby`][100] gem to your Ruby application.
 
-{{% tab "Ruby" %}}
+[100]: https://rubygems.org/gems/dogstatsd-ruby
+{{< /programming-lang >}}
 
-You must add the [`dogstatsd-ruby`][1] gem to your Ruby application.
-
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-
+{{< programming-lang lang="dotnet" >}}
 #### Supported runtimes
 Runtime metrics are only supported on .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
@@ -71,10 +66,8 @@ This can be done either from the "Computer Management" UI, or from an administra
 ```
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
-
-{{% /tab %}}
-
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Getting started
 
@@ -115,29 +108,25 @@ For containerized environments, follow the links below to enable DogStatsD metri
 
 #### Additional configuration
 
-{{< tabs >}}
-
-{{% tab "Java" %}}
-
+{{< programming-lang-wrapper langs="java,python,nodejs,go,ruby,dotnet" >}}
+{{< programming-lang lang="java" >}}
 Runtime metrics cannot be enabled in code.
 
-Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][8] for further details on configuration.
+Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][100] for further details on configuration.
 
-{{% /tab %}}
+[100]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+{{< /programming-lang >}}
 
-{{% tab "Python" %}}
-
+{{< programming-lang lang="python" >}}
 If you are not using `ddtrace-run`, you can enable runtime metrics collection in code:
 
 ```python
 from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-
-{{% tab "Node.js" %}}
-
+{{< programming-lang lang="nodejs" >}}
 Runtime metrics collection can also be enabled in code with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
 
 ```js
@@ -146,11 +135,9 @@ const tracer = require('dd-trace').init({
   runtimeMetrics: true
 })
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-
-{{% tab "Go" %}}
-
+{{< programming-lang lang="go" >}}
 Runtime metrics collection can also be enabled in code by starting the tracer with the `WithRuntimeMetrics` option:
 
 ```go
@@ -161,11 +148,9 @@ If your Datadog Agent DogStatsD address differs from the default `localhost:8125
 
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
+{{< /programming-lang >}}
 
-{{% /tab %}}
-
-{{% tab "Ruby" %}}
-
+{{< programming-lang lang="ruby" >}}
 Runtime metrics collection can also be enabled in code by setting the following configuration in your Ruby application:
 
 ```ruby
@@ -182,16 +167,12 @@ Datadog.configure do |c|
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
+{{< /programming-lang >}}
 
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-
+{{< programming-lang lang="dotnet" >}}
 Runtime metrics cannot be enabled in code.
-
-{{% /tab %}}
-
-{{< /tabs >}}
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## Data Collected
 
@@ -211,9 +192,7 @@ After setup is complete, see your runtime metrics in the instrumented service's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://rubygems.org/gems/dogstatsd-ruby
 [2]: /developers/dogstatsd/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /tracing/metrics/runtime_metrics/data_collected
 [7]: /developers/dogstatsd/unix_socket/
-[8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
