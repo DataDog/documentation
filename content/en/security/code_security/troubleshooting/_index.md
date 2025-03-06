@@ -73,8 +73,8 @@ If reports are missing in Datadog, please define the following environment varia
 We are filtering SARIF files that are too large. If your code is not being scanned because your SARIF file
 is too large, consider the following options:
 
- - update your configuration to scan only specific directories
- - configure the analyzer to run only the rulesets necessary for your codebase
+ - Update your configuration to scan only specific directories.
+ - Configure the analyzer to run only the rulesets necessary for your codebase.
 
 Updating the configuration is done either in the Datadog application or using the `static-analysis.datadog.yml` file.
 
@@ -147,7 +147,7 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
 ### Confirming runtime detection is enabled
 
@@ -185,7 +185,11 @@ To disable scanning Static Code Analysis (SAST) or static Software Composition A
 
 ### Disabling runtime SCA on your services
 
-SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA.
+SCA can be enabled on your running services using one of the following two methods: 
+- The Datadog UI. 
+- Manually, using the `DD_APPSEC_SCA_ENABLED` environment variable.
+
+To disable SCA, you must use the *same method* you used to enable SCA.
 
 **Note**: If you enabled SCA manually, you must disable it manually. You cannot disable it using the UI.
 
