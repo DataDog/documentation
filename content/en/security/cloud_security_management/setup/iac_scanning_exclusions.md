@@ -12,7 +12,7 @@ further_reading:
       text: "CSM Identity Risks"
 ---
 
-<div class="alert alert-info">IaC Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
+<div class="alert alert-info">IaC Scanning exclusions is in Preview.</div>
 
 Infrastructure as Code (IaC) Scanning detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
@@ -221,8 +221,8 @@ To exclude specific findings, add a comment that starts with `# dd-iac-scan`, fo
 
 ### Supported commands
 
-| **Command**                        | **Description**                 |
-|------------------------------------|---------------------------------|
+| **Command**                      | **Description**                 |
+|----------------------------------|---------------------------------|
 | `dd-iac-scan ignore`             | Ignores the entire file.        |
 | `dd-iac-scan disable=<query_id>` | Ignores specific queries.       |
 | `dd-iac-scan enable=<query_id>`  | Includes only specific queries. |
