@@ -24,6 +24,57 @@ Datadog Event Management Inbox helps correlate events from any source into actio
 
 Event Management provides a centralized inbox that helps teams efficiently triage, investigate, and resolve incidents. Users can quickly preview related events, identify root causes, and take appropriate actions. Filtering and sorting options allow teams to focus on the most critical cases, while collaboration features like tagging and case merging ensure seamless teamwork. By providing a structured workflow, Event Management enhances incident response and resolution, reducing downtime and improving overall system reliability.
 
+# Key Features
+
+## Case Triage and Investigation
+
+- **Inbox for Centralized Triage:** View and manage all incoming cases in a single location.  
+- **Related Events and Metrics**: Gain insights into correlated logs, metrics, and alerts.  
+- **Root Cause Identification:** Preview linked cases to quickly diagnose incidents.  
+- **Bulk Actions:** Apply updates to  (e.g., change priority, assign cases, escalate) across multiple cases.
+
+# Getting Started
+
+1. Navigate to **Service Management** → **Event Management** → **Inbox**.  
+2. Click **Show Control** to display current case statuses such as **Open**, **In Progress**, **Closed**, **Archived**. To minimize the left-hand case status panel, click **Collapse.**  
+3. Choose between a **structured table layout** or a **split view** to see contextual details alongside case information.  
+4. Use the **sort toggle** to organize your inbox to focus on high-urgency cases or specific statuses such as **P1/P2** **cases**, **Status**, **Created at**.  
+5. Apply bulk actions to update multiple cases at once. You can change priority, assign cases, or escalate issues while triaging.   
+6. Take action by claiming the case, merging similar cases, or splitting unrelated alerts to keep investigations organized.
+7. Share the case with your team for collaboration and visibility.  
+8. View related events and metrics relative to the current case.
+9. Click to Declare an Incident, Create a Jira Issue or Create a Service Now Incident, or run a Workflow.
+10. Once the issue is resolved, the system will automatically close the case, or you can manually mark it as resolved.
+  
+With Datadog Event Management, teams can improve operations efficiency by reducing time spent on even correlations and triage, ensuring faster and more effective incident resolution.
+
+## View and Navigation
+
+- **Configurable Views:** Filter inbox to show high-urgency cases or specific statuses (e.g., only P1/P2 cases, Status, Created at).  
+- **Table and Split Views:** Choose between a structured table layout or a split view for contextual details.  
+- **Sorting and Filtering:** Organize cases by priority, severity, or custom attributes.  
+- **Collapsible Panel**: Maximize screen space for better efficient case management.  
+- **Keyboard Shortcuts:** Navigate quickly with shortcuts.
+
+## Collaboration and Insights
+
+- **Tagging and Comments:** Collaborate with teammates by tagging users and assigning cases.  
+- **Related Case Previews:** Quickly access linked cases for comprehensive investigations.  
+- **Historical Context:** Review past events and resolutions to improve future responses.
+
+## Merging & Splitting Cases
+
+- **Merging Cases:** Combine duplicate or related cases for more efficient tracking.  
+- **Splitting Cases:** Separate cases when multiple unrelated alerts are grouped together.
+
+## Case Closure & Resolution
+
+- **Auto-Closure:** Cases automatically resolve when all related alerts recover.  
+- **Manual Closure:** Users can manually mark a case as resolved if remediation has been applied.  
+- **Case sharing:**  
+  - Copy cases links to share in Slack, Teams, or incident threads.  
+  - Open cases in a new tab for side-by-side investigations.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
