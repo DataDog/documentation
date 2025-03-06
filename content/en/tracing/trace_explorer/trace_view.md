@@ -197,7 +197,7 @@ See associated tags, as well as critical host/container metrics graphs including
 
 See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [Log Explorer search][1].
 
-{{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Logs in Traces" style="width:100%;">}}
 
 
 [1]: /logs/explorer/search/
