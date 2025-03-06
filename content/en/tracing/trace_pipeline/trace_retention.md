@@ -95,9 +95,9 @@ This sampling mechanism is uniform, and it is proportionally representative of t
 
 ### Create your own retention filter
 
-Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained. 
+Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained.
 
-When a span is retained, you can see and query it in [Trace Explorer][7], dashboards, monitors, and so on for 15 days. When viewing a retained span, you can see the complete trace visualization it belongs to, for example in a flame graph. However, note that other spans in that visualization might not be independently searchable unless they were also retained by filters.
+When a span is retained, you can see and query it in [Trace Explorer][7], dashboards, and monitors for 15 days. When viewing a retained span, you can see the complete trace visualization it belongs to, for example in a flame graph. However, note that other spans in that visualization might not be independently searchable unless they were also retained by filters.
 
 **Note:** In order for you to search by tag in the Trace Explorer, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
