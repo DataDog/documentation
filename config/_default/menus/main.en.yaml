@@ -7746,6 +7746,10 @@ menu:
       url: account_management/billing/product_allotments
       parent: account_management_billing
       weight: 5
+    - name: Containers
+      url: account_management/billing/containers
+      parent: account_management_billing
+      weight: 6
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
