@@ -43,15 +43,13 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 ## Setup
 
+Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
+
 For installation instructions and lists of supported technologies, choose your language:
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
 <br/>
-
-### Compatibility
-
-Data Streams Monitoring instruments Kafka _clients_ (consumers/producers), not Kafka brokers. If you can instrument your client infrastructure, you can use Data Streams Monitoring.
 
 ## Explore Data Streams Monitoring
 
