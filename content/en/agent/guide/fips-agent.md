@@ -94,7 +94,7 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
    **Note:** FIPS support is only available on Agent versions 7.63.0 and above:
 
    ```powershell
-   Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-fips-agent-7.63.0-rc.7-fips-preview.msi" APIKEY="MY_API_KEY" SITE="ddog-gov.com"'
+   Start-Process -Wait msiexec -ArgumentList '/qn /i "https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-fips-agent-7.63.0-rc.7-fips-preview-2.msi" APIKEY="MY_API_KEY" SITE="ddog-gov.com"'
    ```
 
    To install a different preview version of the FIPS Agent, search the [list of stable Agent versions][2] for `datadog-fips-agent` and replace the MSI in the command above with your desired version.
