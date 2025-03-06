@@ -12,6 +12,8 @@ further_reading:
       text: "CSM Identity Risks"
 ---
 
+<div class="alert alert-info">IaC Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
+
 Infrastructure as Code (IaC) Scanning detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
 ## Exclusion methods
@@ -33,7 +35,12 @@ You can configure exclusions using:
 
 Use `exclude-severities` to exclude findings based on severity level. This option can be used multiple times or as a string representation of a list.
 
-**Possible values:** `critical`, `high`, `medium`, `low`, `info`  
+**Possible values:** 
+- `critical`
+- `high`
+- `medium`
+- `low`
+- `info`  
 
 {{< tabs >}}
 {{% tab "YAML" %}}
