@@ -182,8 +182,6 @@ agent:
 
 [1]: /data_security/kubernetes/#running-container-as-root-user
 
-[1]: https://docs.datadoghq.com/data_security/kubernetes/#running-container-as-root-user
-
 Then, deploy the Agent:
 
 ```shell
