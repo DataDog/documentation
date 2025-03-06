@@ -223,13 +223,13 @@ To exclude specific findings, add a comment that starts with `# dd-iac-scan`, fo
 
 | **Command**                        | **Description**                 |
 |------------------------------------|---------------------------------|
-| `# dd-iac-scan ignore`             | Ignores the entire file.        |
-| `# dd-iac-scan disable=<query_id>` | Ignores specific queries.       |
-| `# dd-iac-scan enable=<query_id>`  | Includes only specific queries. |
-| `# dd-iac-scan ignore-line`        | Ignores a single line.          |
-| `# dd-iac-scan ignore-block`       | Ignores a block of code.        |
+| `dd-iac-scan ignore`             | Ignores the entire file.        |
+| `dd-iac-scan disable=<query_id>` | Ignores specific queries.       |
+| `dd-iac-scan enable=<query_id>`  | Includes only specific queries. |
+| `dd-iac-scan ignore-line`        | Ignores a single line.          |
+| `dd-iac-scan ignore-block`       | Ignores a block of code.        |
 
-#### `# dd-iac-scan ignore`
+#### `dd-iac-scan ignore`
 
 Excludes the entire file from IaC scanning. This comment must be placed at the beginning of the file to take effect.
 
@@ -243,7 +243,7 @@ resource "aws_s3_bucket" "example" {
 ...
 ```
 
-#### `# dd-iac-scan disable=<query_id>`
+#### `dd-iac-scan disable=<query_id>`
 
 Limits scan results in this file to only the specified queries. This comment must be placed at the beginning of the file to take effect.
 
@@ -259,7 +259,7 @@ resource "aws_s3_bucket" "example" {
 
 Only findings from the specified queries are included in the scan results for this file.
 
-#### `# dd-iac-scan enable=<query_id>`
+#### `dd-iac-scan enable=<query_id>`
 
 Excludes findings from the specified queries in this file. This comment must be placed at the beginning of the file to take effect.
 
@@ -275,7 +275,7 @@ resource "aws_s3_bucket" "example" {
 
 Findings from the specified queries are ignored for this file.
 
-#### `# dd-iac-scan ignore-line`
+#### `dd-iac-scan ignore-line`
 
 Prevents scan results from flagging the line immediately after this comment. This comment can be placed anywhere in the file.
 
@@ -290,7 +290,7 @@ Prevents scan results from flagging the line immediately after this comment. Thi
 
 Findings related to the next line (line 3 in this example) are ignored.
 
-#### `# dd-iac-scan ignore-block`
+#### `dd-iac-scan ignore-block`
 
 Prevents scan results from flagging an entire resource block and all its key-value pairs. This comment can be placed anywhere in the file.
 
