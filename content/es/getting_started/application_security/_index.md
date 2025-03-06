@@ -1,7 +1,7 @@
 ---
 title: Empezando con la gestión de la seguridad de las aplicaciones
 aliases:
-- /security/security_monitoring/getting_started/
+- /es/security/security_monitoring/getting_started/
 further_reading:
 - link: /security/application_security/terms
   tag: Documentación
@@ -12,13 +12,14 @@ further_reading:
 - link: /security/application_security/enabling/
   tag: Documentación
   text: Activación de ASM
-- link: "https://dtdg.co/fe"
+- link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
-  text: Participa en una sesión interactiva para mejorar tu seguridad y la detección de amenazas.
+  text: Participa en una sesión interactiva para mejorar tu seguridad y la detección
+    de amenazas.
 - link: /getting_started/application_security/software_composition_analysis
   tag: Guía
   text: Empezando con el análisis de composición de software
-- link: "https://securitylabs.datadoghq.com/"
+- link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
   text: Investigación sobre seguridad, informes, consejos y vídeos de Datadog
 ---
@@ -129,5 +130,3 @@ Una vez activado, ASM identifica inmediatamente las vulnerabilidades de las apli
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
 [22]: https://app.datadoghq.com/security/configuration/reports
 [23]: https://app.datadoghq.com/security/configuration/notification-rules
-
-
