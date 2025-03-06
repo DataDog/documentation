@@ -50,13 +50,13 @@ The minimum Agent version required is `7.64` or higher.
 
 ### Step 2: Profile inheritance 
 
-Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. 
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. Reference the [Supported Device Profiles][16] for the full list of inherited profiles.
 
 1. Keep the Datadog `_base.yaml` profile, and optionally, select one or more profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics, tags, or metadata:
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
-    **Note**: Changes to parent profiles are propagated to the child profiles, conversely, inherited data such as metrics and global tags cannot be overridden _from_ the child profiles.
+    **Note**: Changes to parent profiles are propagated to the child profiles. However, changes made to inherited data on a child profile (such as tags and metrics), only affect that specific child profile.
 
 ### Step 3: Select reference devices
 
@@ -68,7 +68,7 @@ Use reference devices to select which devices you want to gather OIDs for your c
 
   {{< img src="/network_device_monitoring/profile_onboarding/reference_devices.png" alt="The Network Device profile creation page showing the Reference device section." style="width:100%;">}}
 
-2. Click **Scan Devices** to proceed to Step 4.
+2. Click **Scan Devices** to proceed to Step 4, which initiates the scan.
 
 ### Step 4: Scan reference devices
 
@@ -88,14 +88,14 @@ Datadog provides reasonable defaults for most devices through out-of-the-box (OO
   
   2. Metadata functionality is available and displayed on the [Network Device Monitoring (NDM)][15] page as searchable facets, and on the side panel of a selected device:
 
-     {{< img src="/network_device_monitoring/profile_onboarding/device_metadata.png" alt="The NDM side panel page profile, highlighting the metadata sections." style="width:100%;">}}
+     {{< img src="/network_device_monitoring/profile_onboarding/device_metadata_2.png" alt="The NDM side panel page profile, highlighting the metadata sections." style="width:100%;">}}
 
 ### Step 6: Define metrics
 
 Metrics can be added either from a device scan or by manually creating a new metric for the profile. Inherited metrics are highlighted in purple with the `Inherited` tag.
 
 {{< tabs >}}
-{{% tab "Device scan" %}}
+{{% tab "Device scan (recommended)" %}}
 
 1. To define a metric using the **Device Scan** option, click **Add Metrics**. This opens a modal displaying all available metrics for the device.
 2. Hover over metrics to see units and descriptions for easier selection.
@@ -112,14 +112,16 @@ Metrics can be added either from a device scan or by manually creating a new met
 2. Click **Create New Metric** at the top of the modal.
 3. Specify the OID (Scalar, or Tabular). 
 4. Click the dropdown in the search field to add the OID name.
-5. Select the metric type, scale factor, and extract value (Regex pattern). 
-See [advanced options for scalar metrics](?tab=manual#advanced-options-for-scalar-metrics) and [advanced options for tabular metrics](#advanced-options-for-tabular-metrics) for more information.
+5. Select the metric type, scale factor, and extract value (regex pattern). 
+See [advanced options for scalar metrics](?tab=manual#scalar-metrics) and [advanced options for tabular metrics](?tab=manual#tabular-metrics) for more information.
 6. Click **Create** to save the metric.
 7. This returns you to the define metrics screen where you can see the new metric that was added.
 
    **insert video later, getting validation error in staging**
 
-#### Advanced options for scalar metrics:
+{{% collapse-content title="Advanced options scalar" level="h4" expanded=false %}}
+
+#### Scalar metrics
 
 [Metric Type][11]
 : One of `gauge`, `rate`, `monotonic_count`, or `monotonic_count_and_rate`. 
@@ -134,6 +136,40 @@ See [advanced options for scalar metrics](?tab=manual#advanced-options-for-scala
 [11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
 [12]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#scale_factor
 
+{{% /collapse-content %}}
+
+{{% collapse-content title="Advanced options tabular" level="h4" expanded=false %}}
+
+#### Tabular metrics
+
+Adding tags to tabular metrics is similar to adding [global tags](#step-7-global-tags), with two additional options:
+
+1. Select whether the tag value originates from an `OID` value or a segment of the table index. If `Index` is chosen as the source, an index position must be specified, which then becomes the tag.
+
+    <details>
+      <summary><b>Example of using an Index position</b></summary></br>
+  
+      Consider a table at `OID 1.2.3.1.1` with two indices. Each row in this table includes a two-number index. Suppose column 3 of a row has `OID 1.2.3.1.1.3.55.12` - here, `1.2.3.1.1` represents the table, `.3` is the column number within the table, and `.55.12` is the index of this specific row (all other columns for this row will also end with `.55.12`). If you establish a tag with the Source set to `Index` and `Index Position` set to 1, the tag's value for metrics from this table row will be `55`; if you set the index position to 2, it will be 12. If you use an index less than 1 or more than the number of indices in the table, the tag will not be populated. 
+  
+      See [Using an Index][9] for more information.
+  
+    </details>
+
+2. Use Index Transformation when you need to tag a table metric value with a value from a _different_ table that employs a subset of this table's index. This is **not** a typical scenario. You configure this by adding one or more transformation segments, each with a start and end number. These numbers index into the original table's index to create a new index value for the new table.
+
+    <details>
+      <summary><b>Example of using Index Transformation</b></summary></br>
+
+      Consider the `CPI-UNITY-MIB` module. It has a `table`, `cpiPduTable`, with details about a specific PDU, and another table, `cpiPduBranchTable`, with information about specific PDU branches. The index of the main table is the PDU's MAC address, such as `6.0.36.155.53.3.246`. The branch table's index is a `branch ID` followed by the `PDU MAC`, therefore a branch table row index might be `1.6.0.36.155.53.3.246`. 
+      If you want to report the current on a PDU branch, you could add `cpiPduBranchCurrent` (`OID 1.3.6.1.4.1.30932.1.10.1.3.110.1.3`, from the branch table) as a tabular metric. To tag this metric with the PDU name, add `cpiPduName` as a tag (`OID 1.3.6.1.4.1.30932.1.10.1.2.10.1.3`, from the main table), then add an index transform with `start:1` and `end:7`. This means the branch current metric from the branch table indexed with `1.6.0.36.155.53.3.246` would be tagged using the name from the main table indexed with `6.0.36.155.53.3.246`. 
+  
+      For more information see [Using a column from a different table with different indexes][10].
+
+    </details>
+
+{{% /collapse-content %}}
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -142,7 +178,7 @@ See [advanced options for scalar metrics](?tab=manual#advanced-options-for-scala
 Add global tags to ensure the metadata, metrics, and global tags are applied to all matching devices. Global tags can be added either from a device scan or by manually creating a new tag for the profile. Additionally, the `Inherited` tag will appear next to any global tags inherited from this profile. 
 
 {{< tabs >}}
-{{% tab "Device scan" %}}
+{{% tab "Device scan (recommended)" %}}
 
 1. To define a global tag using the **Device Scan** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
 2. Select one or more tags you wish to add to the device profile, then click **Add Tag**.
@@ -157,13 +193,15 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 1. To define a global tag using the **Manual** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
 2. Click **Create New Tag** at the top of the modal.
 3. Select the dropdown in the search field to add the OID name.
-4. Click the **Modification** dropdown to add a [modification](?tab=manual#global-tags-advanced-options).
+4. Click the **Modification** dropdown to add a modification. See advanced [options](?tab=manual#global-tags).
 5. Click **Create** to save the new tag.
 6. This returns you to the define global tags screen where you can see the new tag that was added.
 
    {{< img src="/network_device_monitoring/profile_onboarding/add_global_tags_manual.mp4" alt="Video showing the add global tags modal, adding a new tag with the manual method, and returning to global tags step." video=true >}}
 
-#### Global tags advanced options:
+{{% collapse-content title="Advanced options" level="h4" expanded=false %}}
+
+#### Global tags:
 
 | Modification    | Description                                                                                         |
 |-----------------|-----------------------------------------------------------------------------------------------------|
@@ -177,13 +215,15 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 [7]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#extract_value
 [8]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#mapping-index-to-tag-string-value
 
+{{% /collapse-content %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Apply a profile to created devices
 
 {{< tabs >}}
-{{% tab "Automatic" %}}
+{{% tab "Automatic (recommended)" %}}
 
 After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
 
@@ -195,12 +235,12 @@ After applying your configuration options to your device profile, click **Save a
 
 {{% tab "Manual" %}}
 
-1. After you save a profile as a draft, navigate back to the [profile home page][4] and select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
+1. After you save a profile as a draft, navigate back to the [profile home page][4], select the **Draft Profiles** tab, then select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
 2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
 3. Restart the Datadog Agent.
 4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
-{{< img src="/network_device_monitoring/profile_onboarding/download_all_profiles_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/profile_download.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
 [4]: https://app.datadoghq.com/devices/profiles
 [13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
@@ -245,33 +285,6 @@ Once a profile is applied, you cannot bring it back to draft status.
 - Why would a device not be scanned?
 
 
-### Advanced options for tabular metrics
-
-Adding tags to tabular metrics is similar to adding global tags, with two additional options:
-
-1. Select whether the tag value originates from an `OID` value or a segment of the table index. If `Index` is chosen as the source, an index position must be specified, which then becomes the tag.
-
-    <details>
-      <summary><b>Example of using an Index position</b></summary></br>
-  
-      Consider a table at `OID 1.2.3.1.1` with two indices. Each row in this table includes a two-number index. Suppose column 3 of a row has `OID 1.2.3.1.1.3.55.12` - here, `1.2.3.1.1` represents the table, `.3` is the column number within the table, and `.55.12` is the index of this specific row (all other columns for this row will also end with `.55.12`). If you establish a tag with the Source set to `Index` and `Index Position` set to 1, the tag's value for metrics from this table row will be `55`; if you set the index position to 2, it will be 12. If you use an index less than 1 or more than the number of indices in the table, the tag will not be populated. 
-  
-      See [Using an Index][9] for more information.
-  
-    </details>
-
-2. Use Index Transformation when you need to tag a table metric value with a value from a _different_ table that employs a subset of this table's index. This is **not** a typical scenario. You configure this by adding one or more transformation segments, each with a start and end number. These numbers index into the original table's index to create a new index value for the new table.
-
-    <details>
-      <summary><b>Example of using Index Transformation</b></summary></br>
-
-      Consider the `CPI-UNITY-MIB` module. It has a `table`, `cpiPduTable`, with details about a specific PDU, and another table, `cpiPduBranchTable`, with information about specific PDU branches. The index of the main table is the PDU's MAC address, such as `6.0.36.155.53.3.246`. The branch table's index is a `branch ID` followed by the `PDU MAC`, therefore a branch table row index might be `1.6.0.36.155.53.3.246`. 
-      If you want to report the current on a PDU branch, you could add `cpiPduBranchCurrent` (`OID 1.3.6.1.4.1.30932.1.10.1.3.110.1.3`, from the branch table) as a tabular metric. To tag this metric with the PDU name, add `cpiPduName` as a tag (`OID 1.3.6.1.4.1.30932.1.10.1.2.10.1.3`, from the main table), then add an index transform with `start:1` and `end:7`. This means the branch current metric from the branch table indexed with `1.6.0.36.155.53.3.246` would be tagged using the name from the main table indexed with `6.0.36.155.53.3.246`. 
-  
-      For more information see [Using a column from a different table with different indexes][10].
-
-    </details>
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -284,3 +297,4 @@ Adding tags to tabular metrics is similar to adding global tags, with two additi
 [10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
+[16]: /network_monitoring/devices/supported_devices/
