@@ -1346,6 +1346,18 @@ menu:
           - GetLogsIndex
         unstable: []
         order: 2
+    - name: Delete an index
+      url: '#delete-an-index'
+      identifier: logs-indexes-delete-an-index
+      parent: logs-indexes
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - DeleteLogsIndex
+        unstable: []
+        order: 5
     - name: Create an index
       url: '#create-an-index'
       identifier: logs-indexes-create-an-index
@@ -4748,7 +4760,7 @@ menu:
         versions:
           - v2
         operationids:
-          - RetrieveAwsOnDemandTask
+          - GetAwsOnDemandTask
         unstable: []
         order: 6
     - name: Post an AWS on demand task
@@ -4923,6 +4935,130 @@ menu:
           - DeleteApps
         unstable: []
         order: 3
+    - name: Application Security
+      url: /api/latest/application-security/
+      identifier: application-security
+      generated: true
+    - name: Update a WAF exclusion filter
+      url: '#update-a-waf-exclusion-filter'
+      identifier: application-security-update-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 5
+    - name: Get a WAF exclusion filter
+      url: '#get-a-waf-exclusion-filter'
+      identifier: application-security-get-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 1
+    - name: Delete a WAF exclusion filter
+      url: '#delete-a-waf-exclusion-filter'
+      identifier: application-security-delete-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 6
+    - name: Create a WAF exclusion filter
+      url: '#create-a-waf-exclusion-filter'
+      identifier: application-security-create-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 2
+    - name: List all WAF exclusion filters
+      url: '#list-all-waf-exclusion-filters'
+      identifier: application-security-list-all-waf-exclusion-filters
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWafExclusionFilters
+        unstable: []
+        order: 3
+    - name: Update a WAF Custom Rule
+      url: '#update-a-waf-custom-rule'
+      identifier: application-security-update-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafCustomRule
+        unstable: []
+        order: 15
+    - name: Get a WAF custom rule
+      url: '#get-a-waf-custom-rule'
+      identifier: application-security-get-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafCustomRule
+        unstable: []
+        order: 10
+    - name: Delete a WAF Custom Rule
+      url: '#delete-a-waf-custom-rule'
+      identifier: application-security-delete-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafCustomRule
+        unstable: []
+        order: 16
+    - name: Create a WAF custom rule
+      url: '#create-a-waf-custom-rule'
+      identifier: application-security-create-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafCustomRule
+        unstable: []
+        order: 12
+    - name: List all WAF custom rules
+      url: '#list-all-waf-custom-rules'
+      identifier: application-security-list-all-waf-custom-rules
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWAFCustomRules
+        unstable: []
+        order: 13
     - name: Audit
       url: /api/latest/audit/
       identifier: audit

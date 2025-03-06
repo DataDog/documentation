@@ -4182,16 +4182,11 @@ menu:
       identifier: data_streams_pipeline_lineage
       parent: data_streams
       weight: 3
-    - name: Troubleshooting
-      url: data_streams/troubleshooting
-      identifier: data_streams_troubleshooting
-      parent: data_streams
-      weight: 4
     - name: Guide
       url: data_streams/guide
       identifier: data_streams_guide
       parent: data_streams
-      weight: 5
+      weight: 4
     - name: Data Jobs Monitoring
       url: data_jobs/
       pre: data-jobs-monitoring
@@ -5335,31 +5330,41 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_parse_json
       weight: 709
+    - name: Parse XML
+      url: observability_pipelines/processors/parse_xml
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_parse_xml
+      weight: 710
     - name: Quota
       url: observability_pipelines/processors/quota
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_quota
-      weight: 710
+      weight: 711
     - name: Reduce
       url: observability_pipelines/processors/reduce
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_reduce
-      weight: 711
+      weight: 712
     - name: Remap to OCSF
       url: observability_pipelines/processors/remap_ocsf
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_remap_ocsf
-      weight: 712
+      weight: 713
     - name: Sample
       url: observability_pipelines/processors/sample
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sample
-      weight: 713
+      weight: 714
     - name: Sensitive Data Scanner
       url: observability_pipelines/processors/sensitive_data_scanner
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_sensitive_data_scanner
-      weight: 713
+      weight: 715
+    - name: Split Array
+      url: observability_pipelines/processors/split_array
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_split_array
+      weight: 716
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
@@ -5380,61 +5385,66 @@ menu:
       url: observability_pipelines/destinations/azure_storage/
       parent: observability_pipelines_destinations
       weight: 804
+    - name: CrowdStrike NG-SIEM
+      identifier: observability_pipelines_crowdstrike_ng_siem
+      url: observability_pipelines/destinations/crowdstrike_ng_siem/
+      parent: observability_pipelines_destinations
+      weight: 805
     - name: Datadog Logs
       url: observability_pipelines/destinations/datadog_logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_datadog_logs
-      weight: 805
+      weight: 806
     - name: Elasticsearch
       url: observability_pipelines/destinations/elasticsearch/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
-      weight: 806
+      weight: 807
     - name: Google Chronicle
       url: observability_pipelines/destinations/google_chronicle
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_google_chronicle
-      weight: 807
+      weight: 808
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
       url: /observability_pipelines/destinations/google_cloud_storage/
       parent: observability_pipelines_destinations
-      weight: 808
+      weight: 809
     - name: Microsoft Sentinel
       identifier: observability_pipelines_microsoft_sentinel
       url: /observability_pipelines/destinations/microsoft_sentinel/
       parent: observability_pipelines_destinations
-      weight: 809
+      weight: 810
     - name: New Relic
       identifier: observability_pipelines_new_relic
       url: /observability_pipelines/destinations/new_relic/
       parent: observability_pipelines_destinations
-      weight: 810
+      weight: 811
     - name: OpenSearch
       url: observability_pipelines/destinations/opensearch
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
-      weight: 811
+      weight: 812
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 812
+      weight: 813
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 813
+      weight: 814
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 814
+      weight: 815
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 815
+      weight: 816
     - name: Best Practices for Scaling Observability Pipelines
       url: observability_pipelines/best_practices_for_scaling_observability_pipelines/
       parent: observability_pipelines
