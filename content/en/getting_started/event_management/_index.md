@@ -30,8 +30,8 @@ Event Management provides a centralized inbox that helps teams efficiently triag
 
 - **Inbox for Centralized Triage:** View and manage all incoming cases in a single location.  
 - **Related Events and Metrics**: Gain insights into correlated logs, metrics, and alerts.  
-- **Root Cause Identification:** Preview linked cases to quickly diagnose incidents.  
-- **Bulk Actions:** Apply updates to  (e.g., change priority, assign cases, escalate) across multiple cases.
+- **Root Cause Identification:** Preview linked cases to diagnose incidents.  
+- **Bulk Actions:** Apply updates to cases by modifying their priority, assigning them to team members, or escalating multiple cases at once. 
 
 # Getting Started
 
@@ -44,16 +44,16 @@ Event Management provides a centralized inbox that helps teams efficiently triag
 7. Share the case with your team for collaboration and visibility.  
 8. View related events and metrics relative to the current case.
 9. Click to Declare an Incident, Create a Jira Issue or Create a Service Now Incident, or run a Workflow.
-10. Once the issue is resolved, the system will automatically close the case, or you can manually mark it as resolved.
+10. When the issue is resolved, the system automatically closes the case, or you can manually mark it as resolved.
   
 With Datadog Event Management, teams can improve operations efficiency by reducing time spent on even correlations and triage, ensuring faster and more effective incident resolution.
 
 ## View and Navigation
 
-- **Configurable Views:** Filter inbox to show high-urgency cases or specific statuses (e.g., only P1/P2 cases, Status, Created at).  
+- **Configurable Views:** Filter inbox to show high-urgency cases or specific statuses, such as only P1/P2 cases, Status, or Created at.  
 - **Table and Split Views:** Choose between a structured table layout or a split view for contextual details.  
 - **Sorting and Filtering:** Organize cases by priority, severity, or custom attributes.  
-- **Collapsible Panel**: Maximize screen space for better efficient case management.  
+- **Collapsible Panel:** Maximize screen space for better efficient case management.  
 - **Keyboard Shortcuts:** Navigate quickly with shortcuts.
 
 ## Collaboration and Insights
