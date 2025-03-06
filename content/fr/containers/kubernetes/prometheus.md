@@ -115,7 +115,7 @@ Les placeholders à configurer sont les suivants :
 | `<NOUVEAU_NOM_MÉTRIQUE>`                      | Remplace la clé de métrique `<MÉTRIQUE_À_RÉCUPÉRER>` par le `<NOUVEAU_NOM_MÉTRIQUE>` dans Datadog.                   |
 
 
-Le paramètre `metrics` correspond à la liste des métriques à récupérer sous forme de métriques custom. Ajoutez chaque métrique à récupérer et le nom de métrique souhaité dans Datadog sous la forme de paires key/value : `{"<MÉTRIQUE_À_RÉCUPÉRER>":"<NOUVEAU_NOM_MÉTRIQUE>"}`. Il est également possible de fournir une liste de noms de métriques sous forme de chaînes, qui seront interprétées en tant qu'expressions régulières, afin de récupérer les métriques de votre choix avec leur nom actuel. Si vous souhaitez récupérer **toutes** les métriques, utilisez `"*"` au lieu de `".*"`.
+Le paramètre `metrics` correspond à la liste des métriques à récupérer sous forme de métriques custom. Ajoutez chaque métrique à récupérer et le nom de métrique souhaité dans Datadog sous la forme de paires key/value : `{"<MÉTRIQUE_À_RÉCUPÉRER>":"<NOUVEAU_NOM_MÉTRIQUE>"}`. Il est également possible de fournir une liste de noms de métriques sous forme de chaînes, qui seront interprétées en tant qu'expressions régulières, afin de récupérer les métriques de votre choix avec leur nom actuel. Si vous souhaitez récupérer **toutes** les métriques, utilisez `".*"` au lieu de `"*"`.
 
 **Remarque** : les expressions régulières peuvent entraîner l'envoi d'un volume important de métriques custom.
 
