@@ -4173,6 +4173,8 @@ components:
             of EC2 instances, lambda functions, AMI, ECR, RDS and S3 buckets.
           example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
           type: string
+      required:
+      - arn
       type: object
     AwsOnDemandCreateData:
       description: Object for a single AWS on demand task.
@@ -4270,6 +4272,11 @@ components:
           description: Indicates if scanning for vulnerabilities in hosts is enabled.
           example: true
           type: boolean
+      required:
+      - lambda
+      - sensitive_data
+      - vuln_containers_os
+      - vuln_host_os
       type: object
     AwsScanOptionsCreateData:
       description: Object for the scan options of a single AWS account.
@@ -34708,7 +34715,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Trigger the scan of an AWS resource with a high priority.
+      description: Trigger the scan of an AWS resource with a high priority. Agentless
+        scanning must be activated for the AWS account containing the resource to
+        scan.
       operationId: CreateAwsOnDemandTask
       requestBody:
         content:
@@ -34744,7 +34753,7 @@ paths:
   /api/v2/agentless_scanning/ondemand/aws/{task_id}:
     get:
       description: Fetch the data of a specific on demand task.
-      operationId: RetrieveAwsOnDemandTask
+      operationId: GetAwsOnDemandTask
       parameters:
       - $ref: '#/components/parameters/OnDemandTaskId'
       responses:
@@ -57096,8 +57105,9 @@ tags:
   name: Action Connection
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
-    teams to install Agents on every host or where Agents cannot be installed.\nGo
-    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+    teams to install Agents on every host or where Agents cannot be installed.\nAgentless
+    offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/
+    to learn more."
   name: Agentless Scanning
 - description: Datadog App Builder provides a low-code solution to rapidly develop
     and integrate secure, customized applications into your monitoring stack that
