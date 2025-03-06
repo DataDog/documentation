@@ -692,6 +692,9 @@ h5 {
         padding-left: 0 !important;
     }
     .tab-content {
+        display: grid;
+        grid-template-rows: 1fr;
+        grid-template-columns: minmax(329px,auto);
         padding-top: 12px;
         h2 > a,
         h3 > a,
@@ -702,6 +705,15 @@ h5 {
             &:hover {
                 color: #000;
                 border-bottom: 1px solid #000;
+            }
+        }
+        .tab-pane {
+            display: initial; // overrides bootstrap display
+            grid-row: 1;
+            grid-column: 1;
+            &:not(.active) {
+                opacity: 0;
+                z-index: -1;
             }
         }
         .text-center img {
@@ -911,6 +923,12 @@ table,
 
     @include media-breakpoint-up(xl) {
             table-layout: fixed;
+    }
+}
+
+.table-fixed {
+    @include media-breakpoint-up(xl) {
+        table-layout: fixed;
     }
 }
 

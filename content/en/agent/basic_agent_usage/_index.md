@@ -4,6 +4,7 @@ aliases:
     - /guides/basic_agent_usage/
     - /agent/faq/where-is-the-configuration-file-for-the-agent/
     - /agent/faq/log-location
+    - /agent/basic_agent_usage//
 further_reading:
 - link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "FAQ"

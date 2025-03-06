@@ -20,30 +20,34 @@ further_reading:
 
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
-| Framework                                   | Framework Tag     | Rule Type                |
-|---------------------------------------------|-------------------|--------------------------|
-| [CIS AWS Foundations Benchmark v1.5.0*][2]  | `cis-aws`         | Cloud                    |
-| [CIS Azure Foundations Benchmark v2.0.0][3] | `cis-azure`       | Cloud                    |
-| [CIS GCP Foundations Benchmark v1.3.0][22]  | `cis-gcp`         | Cloud                    |
-| [CIS Docker Benchmark v1.2.0][4]            | `cis-docker `     | Infrastructure           |
-| [CIS Kubernetes Benchmark v1.7.0**][5]      | `cis-kubernetes`  | Infrastructure           |
-| [CIS Kubernetes (AKS) Benchmark v1.4.0**][5]      | `cis-aks`         | Cloud and Infrastructure |
-| [CIS Kubernetes (EKS) Benchmark v1.3.0 **][5]     | `cis-eks`         | Cloud and Infrastructure |
-| [CIS Ubuntu 20.04 v1.0.0][23]               | `cis-ubuntu2004`  | Infrastructure           |
-| [CIS Ubuntu 22.04 v1.0.0][23]               | `cis-ubuntu2204 ` | Infrastructure           |
-| [CIS Red Hat Linux 7 v3.1.1][24]            | `cis-rhel7`       | Infrastructure           |
-| [CIS Red Hat Linux 8 v2.0.0][24]            | `cis-rhel8`       | Infrastructure           |
-| [CIS Red Hat Linux 9 v1.0.0][24]            | `cis-rhel9`       | Infrastructure           |
-| [CIS Amazon Linux 2 v1.0.0][25]             | `cis-amzn2`       | Infrastructure           |
-| [CIS Amazon Linux 2023 v1.0.0][25]          | `cis-al2023`      | Infrastructure           |
-| [PCI DSS v4.0][6]                           | `pci-dss`         | Cloud                    |
-| [AICPA SOC 2][7]                            | `soc-2`           | Cloud                    |
-| [ISO/IEC 27001 v2][8]                       | `iso-27001`       | Cloud                    |
-| [HIPAA][9]                                  | `hipaa`           | Cloud                    |
-| [GDPR][10]                                  | `gdpr`            | Cloud                    |
-| [NIST 800-53][30]                           | `nist-800-53`     | Cloud                    |
-| [NIST 800-171][31]                          | `nist-800-171`    | Cloud                    |
-| [NIST Cybersecurity Framework v1.1][32]     | `nist-csf`        | Cloud                    |
+| Framework                                       | Supported Versions     | Framework Tag                       | Rule Type                |
+|-------------------------------------------------|------------------------|-------------------------------------|--------------------------|
+| [CIS AWS Foundations Benchmark*][2]             | v1.5.0, v3.0.0, v4.0.0 | `cis-aws`                           | Cloud                    |
+| [CIS Azure Foundations Benchmark][3]            | v2.0.0                 | `cis-azure`                         | Cloud                    |
+| [CIS GCP Foundations Benchmark][22]             | v3.0.0                 | `cis-gcp`                           | Cloud                    |
+| [CIS Docker Benchmark][4]                       | v1.0.0                 | `cis-docker `                       | Infrastructure           |
+| [CIS Kubernetes Benchmark**][5]                 | v1.9.0                 | `cis-kubernetes`                    | Infrastructure           |
+| [CIS Kubernetes (AKS) Benchmark**][5]           | v1.4.0                 | `cis-aks`                           | Cloud and Infrastructure |
+| [CIS Kubernetes (EKS) Benchmark**][5]           | v1.4.0                 | `cis-eks`                           | Cloud and Infrastructure |
+| [CIS Ubuntu 20.04][23]                          | v1.0.0                 | `cis-ubuntu2004`                    | Infrastructure           |
+| [CIS Ubuntu 22.04][23]                          | v1.0.0                 | `cis-ubuntu2204 `                   | Infrastructure           |
+| [CIS Red Hat Linux 7][24]                       | v3.1.1                 | `cis-rhel7`                         | Infrastructure           |
+| [CIS Red Hat Linux 8][24]                       | v2.0.0                 | `cis-rhel8`                         | Infrastructure           |
+| [CIS Red Hat Linux 9][24]                       | v1.0.0                 | `cis-rhel9`                         | Infrastructure           |
+| [CIS Amazon Linux 2][25]                        | v3.0.0                 | `cis-amzn2`                         | Infrastructure           |
+| [CIS Amazon Linux 2023][25]                     | v1.0.0                 | `cis-al2023`                        | Infrastructure           |
+| [CIS GKE][34]                                   | v1.6.0                 | `cis-gke`                           | Cloud                    |
+| [PCI DSS][6]                                    | v4.0                   | `pci-dss`                           | Cloud                    |
+| [AICPA SOC 2][7]                                |                        | `soc-2`                             | Cloud                    |
+| [ISO/IEC 27001][8]                              | 2013                   | `iso-27001`                         | Cloud                    |
+| [HIPAA][9]                                      |                        | `hipaa`                             | Cloud                    |
+| [GDPR][10]                                      |                        | `gdpr`                              | Cloud                    |
+| [NIST 800-53][30]                               | v5                     | `nist-800-53`                       | Cloud                    |
+| [NIST 800-171][31]                              | v2                     | `nist-800-171`                      | Cloud                    |
+| [NIST Cybersecurity Framework][32]              | v1.1                   | `nist-csf`                          | Cloud                    |
+| [Essential Cloud Security Controls][33]         | v2                     | `essential-cloud-security-controls` | Cloud                    |
+| [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532           | `dora`                              | Cloud                    |
+| [FedRAMP High][36] (Preview)                    | v5                     | `fedramp-high`                      | Cloud                    |
 
 *To pass the Monitoring Section of the [CIS AWS Foundations benchmark][2], you **must** enable [Cloud SIEM][11] and forward [CloudTrail logs to Datadog][12].
 
@@ -78,3 +82,7 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 [30]: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
 [31]: https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final
 [32]: https://www.nist.gov/cyberframework/framework
+[33]: https://www.datadoghq.com/blog/essential-cloud-security-controls-ruleset-v2/
+[34]: https://www.cisecurity.org/benchmark/kubernetes
+[35]: https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en
+[36]: https://www.fedramp.gov/

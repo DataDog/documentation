@@ -103,23 +103,7 @@ The metrics, mapped to Datadog metrics, are used in the following views:
 
 The following table shows which Datadog host metric names are associated with corresponding OpenTelemetry host metric names, and, if applicable, what math is applied to the OTel host metric to transform it to Datadog units during the mapping.
 
-| Datadog metric name   | OTel metric name      | Metric description         | Transform done on OTel metric      |
-|-----------------------|-----------------------|----------------------------|--------------------------|
-| `system.load.1`         | `system.cpu.load_average.1m`     | The average system load over one minute. (Linux only)       |         |
-| `system.load.5`         | `system.cpu.load_average.5m`        | The average system load over five minutes. (Linux only)   | |
-| `system.load.15`        | `system.cpu.load_average.15m`     | The average system load over 15 minutes. (Linux only)         |            |
-| `system.cpu.idle`       | `system.cpu.utilization` <br>Attribute Filter state: `idle`    | Fraction of time the CPU spent in an idle state. Shown as percent.   | Multiplied by 100     |
-| `system.cpu.user`       | `system.cpu.utilization` <br>Attribute Filter state: `user`    | Fraction of time the CPU spent running user space processes. Shown as percent.  | Multiplied by 100     |
-| `system.cpu.system`     | `system.cpu.utilization` <br>Attribute Filter state: `system`  | Fraction of time the CPU spent running the kernel.    | Multiplied by 100    |
-| `system.cpu.iowait`     | `system.cpu.utilization` <br>Attribute Filter state: `wait`    | The percent of time the CPU spent waiting for IO operations to complete.         | Multiplied by 100       |
-| `system.cpu.stolen`     | `system.cpu.utilization` <br>Attribute Filter state: `steal`     | The percent of time the virtual CPU spent waiting for the hypervisor to service another virtual CPU. Only applies to virtual machines. Shown as percent.| Multiplied by 100   |
-| `system.mem.total`      | `system.memory.usage`     | The total amount of physical RAM in bytes.   | Converted to MB (divided by 2^20) |
-| `system.mem.usable`     | `system.memory.usage` <br>Attributes Filter state: `(free, cached, buffered)` | Value of `MemAvailable` from `/proc/meminfo` if present. If not present, falls back to adding `free + buffered + cached memory`. In bytes.    | Converted to MB (divided by 2^20) |
-| `system.net.bytes_rcvd` | `system.network.io` <br>Attribute Filter direction: `receive`   | The number of bytes received on a device per second.       |         |
-| `system.net.bytes_sent` | `system.network.io` <br>Attribute Filter direction: `transmit`   | The number of bytes sent from a device per second.           |       |
-| `system.swap.free`      | `system.paging.usage` <br>Attribute Filter state: `free`    | The amount of free swap space, in bytes      | Converted to MB (divided by 2^20) |
-| `system.swap.used`      | `system.paging.usage` <br>Attribute Filter state: `used`     | The amount of swap space in use, in bytes.  | Converted to MB (divided by 2^20) |
-| `system.disk.in_use`    | `system.filesystem.utilization`    | The amount of disk space in use as a fraction of the total.      |        |
+{{< mapping-table resource="host.csv">}}
 
 See [OpenTelemetry Metrics Mapping][2] for more information.
 

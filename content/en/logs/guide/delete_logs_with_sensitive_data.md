@@ -33,7 +33,7 @@ To check or change your log retention period:
 
 ## Make logs with sensitive data un-queryable
 
-If logs with sensitive data are within the the log retention period, you can make then un-queryable in Datadog's Log Explorer, Dashboards, and Live Tail until they age out. Logs made un-queryable are not available for querying or viewing. Follow these [instructions][2] to make logs with sensitive data un-queryable in Datadog.
+If logs with sensitive data are within the log retention period, you can make then un-queryable in Datadog's Log Explorer, Dashboards, and Live Tail until they age out. Logs made un-queryable are not available for querying or viewing. Follow these [instructions][2] to make logs with sensitive data un-queryable in Datadog.
 
 ## Delete an entire index
 

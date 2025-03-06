@@ -1,5 +1,7 @@
 ---
 title: Inferred services
+aliases:
+  - /tracing/guide/inferred-service-opt-in
 further_reading:
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
@@ -14,16 +16,17 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< site-region region="ap1,us3,us5,eu,us" >}}
 
-Explore inferred services in the [Service Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
+Explore inferred services in the [Software Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
 
 To see inferred services, you must enable some configurations. 
+Starting from version [7.60.0][1] of the Datadog Agent, these configurations are enabled by default. 
 
 {{< tabs >}}
 {{% tab "Agent v7.55.1+" %}}
 
-For Datadog Agent versions [7.55.1][1] or later, add the following to your `datadog.yaml` configuration file:
+For Datadog Agent versions [7.55.1][2] or later, add the following to your `datadog.yaml` configuration file:
 
 {{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
@@ -42,10 +45,11 @@ DD_APM_PEER_TAGS_AGGREGATION=true
 
 {{< /code-block >}}
 
-If you are using Helm, include these environment variables in your `values.yaml` [file][2].
+If you are using Helm, include these environment variables in your `values.yaml` [file][3].
 
-[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
-[2]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[1]: https://github.com/DataDog/datadog-agent/releases/tag/7.60.0
+[2]: https://github.com/DataDog/datadog-agent/releases/tag/7.55.1
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Agent v7.50.3 - v7.54.1" %}}
 
@@ -161,7 +165,7 @@ Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog 
 
 For instructions on how to remove service overrides and migrate to inferred services, see the [Service Overrides guide][4].
 
-[1]: /service_catalog/
+[1]: /software_catalog/
 [2]: /tracing/services/service_page
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
