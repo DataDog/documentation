@@ -101,7 +101,7 @@ To display the committed and allotted pills on a card, ensure the **See included
 
 ## Top custom metrics
 
-In the Custom Metrics tab, the Top Custom Metrics table provides two views for your month-to-date usage and most recent day usage, such as usage on the date of the last update).
+In the Custom Metrics tab, the Top Custom Metrics table provides two views for your month-to-date usage and most recent day usage, such as usage on the date of the last update.
 
 The "Top 5000" view provides the following information about your Top 5000 custom metrics:
 * Metric name

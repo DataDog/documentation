@@ -66,7 +66,7 @@ When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be
 
 ### Track resources
 
-Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and and HTTP calls from your RUM views.
+Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
 
 You can use it the same way as you would any other `UnityWebRequest`:
 
@@ -164,9 +164,10 @@ To remove an existing attribute, set it to `null`.
 For example:
 
 ```cs
-DatadogSdk.Instance.AddUserExtraInfo({
- 'attribute_1': 'foo',
- 'attribute_2': null,
+DatadogSdk.Instance.AddUserExtraInfo(new ()
+{
+ { "attribute_1", "foo" },
+ { "attribute_2", null },
 });
 ```
 

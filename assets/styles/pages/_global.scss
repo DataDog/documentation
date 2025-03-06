@@ -914,6 +914,12 @@ table,
     }
 }
 
+.table-fixed {
+    @include media-breakpoint-up(xl) {
+        table-layout: fixed;
+    }
+}
+
 .break-word {
     table {
         td {
