@@ -1346,6 +1346,18 @@ menu:
           - GetLogsIndex
         unstable: []
         order: 2
+    - name: Delete an index
+      url: '#delete-an-index'
+      identifier: logs-indexes-delete-an-index
+      parent: logs-indexes
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - DeleteLogsIndex
+        unstable: []
+        order: 5
     - name: Create an index
       url: '#create-an-index'
       identifier: logs-indexes-create-an-index
