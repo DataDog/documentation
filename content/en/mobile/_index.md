@@ -417,25 +417,25 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 
 ## Notifications
 
-The mobile app is able to send out regular as well as critical notifications. As a reminder, critical notifications can circumvent your Do Not Disturb (DnD) mode. This is however only possible if you **explicitly** grant us permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
+The mobile app is able to send out regular as well as critical notifications. Critical notifications can circumvent your Do Not Disturb (DnD) mode, but you must **explicitly** grant Datadog permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
 
 ### Push Notifications for On-Call
-To properly set up your mobile device for On-Call, please follow [this guide][25]. Once set up, make sure you visit your [On-Call profile][26] and select your mobile device in your notification preferences.
+To set up your mobile device for On-Call, follow [this guide][25]. After you've set up your mobile device, navigate to your [On-Call profile][26] and select the device in your notification preferences.
 
-### Push Notifications for Incidents
-To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications via [Incident Notification Rules][13]. Here's a step-by-step guide on how to set that up:
+### Push Notifications for incidents
+To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications using [Incident Notification Rules][13]. To receive push notifications:
 
 1. Navigate to **Account**.
 2. Click **Notifications**.
 3. Select the toggle for **Enable Notifications**.
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
+4. In Datadog, navigate to [Incident Notification Rules][13].
 5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
 6. Select your mobile device and click **Save**.
 
 For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
 
-### Push Notifications from Workflows
-It is also possible to trigger push notifications directly from Workflows via the [Send mobile push notification message action][27]. All you need to provide is the target user and the body of the push notification and you're good to go. Note, the target user must have already logged into the Datadog Mobile application and allowed the Datadog mobile application to receive push notifications.
+### Push notifications from Workflow Automation
+It is also possible to trigger push notifications directly from Workflows using the [Send mobile push notification message action][27]. Provide the target user and the body of the push notification. Before the user can receive push notifications, they must log into the Datadog Mobile application and allow the Datadog mobile application to receive push notifications.
 
 
 ## Quick actions
