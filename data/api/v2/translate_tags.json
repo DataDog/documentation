@@ -21,7 +21,7 @@
   },
   "agentless-scanning": {
     "name": "Agentless Scanning",
-    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
   },
   "app-builder": {
     "name": "App Builder",
@@ -202,6 +202,10 @@
   "rum-metrics": {
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
+  },
+  "rum-retention-filters": {
+    "name": "Rum Retention Filters",
+    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) for your organization."
   },
   "scim": {
     "name": "SCIM",

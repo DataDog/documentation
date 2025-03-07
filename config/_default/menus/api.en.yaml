@@ -1346,6 +1346,18 @@ menu:
           - GetLogsIndex
         unstable: []
         order: 2
+    - name: Delete an index
+      url: '#delete-an-index'
+      identifier: logs-indexes-delete-an-index
+      parent: logs-indexes
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - DeleteLogsIndex
+        unstable: []
+        order: 5
     - name: Create an index
       url: '#create-an-index'
       identifier: logs-indexes-create-an-index
@@ -4748,7 +4760,7 @@ menu:
         versions:
           - v2
         operationids:
-          - RetrieveAwsOnDemandTask
+          - GetAwsOnDemandTask
         unstable: []
         order: 6
     - name: Post an AWS on demand task
@@ -7784,6 +7796,82 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Retention Filters
+      url: /api/latest/rum-retention-filters/
+      identifier: rum-retention-filters
+      generated: true
+    - name: Update a RUM retention filter
+      url: '#update-a-rum-retention-filter'
+      identifier: rum-retention-filters-update-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRetentionFilter
+        unstable: []
+        order: 4
+    - name: Get a RUM retention filter
+      url: '#get-a-rum-retention-filter'
+      identifier: rum-retention-filters-get-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRetentionFilter
+        unstable: []
+        order: 2
+    - name: Delete a RUM retention filter
+      url: '#delete-a-rum-retention-filter'
+      identifier: rum-retention-filters-delete-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRetentionFilter
+        unstable: []
+        order: 5
+    - name: Create a RUM retention filter
+      url: '#create-a-rum-retention-filter'
+      identifier: rum-retention-filters-create-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRetentionFilter
+        unstable: []
+        order: 3
+    - name: Get all RUM retention filters
+      url: '#get-all-rum-retention-filters'
+      identifier: rum-retention-filters-get-all-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRetentionFilters
+        unstable: []
+        order: 1
+    - name: Order RUM retention filters
+      url: '#order-rum-retention-filters'
+      identifier: rum-retention-filters-order-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - OrderRetentionFilters
+        unstable: []
+        order: 6
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim
