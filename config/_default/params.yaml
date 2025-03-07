@@ -72,8 +72,7 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
+
     android: Android
     ios: iOS
     expo: Expo
@@ -126,6 +125,7 @@ code_language_ids:
     notebooks_new: "Notebooks (New)"
     envoy: "Envoy"
     httpd: "Apache HTTP Server"
+    ibm: "IBM HTTP Server" 
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
