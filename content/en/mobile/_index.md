@@ -425,7 +425,7 @@ To set up your mobile device for On-Call, follow [this guide][25]. After you've 
 ### Push Notifications for incidents
 To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications using [Incident Notification Rules][13]. To receive push notifications:
 
-1. Navigate to **Account**.
+1. In the Datadog mobile app, navigate to **Account**.
 2. Click **Notifications**.
 3. Select the toggle for **Enable Notifications**.
 4. In Datadog, navigate to [Incident Notification Rules][13].
