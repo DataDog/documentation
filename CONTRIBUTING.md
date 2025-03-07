@@ -33,7 +33,7 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 
 **Treat the reader as an equal**: Assume the reader is knowledgeable. Datadog has a technical audience, so don't spend too many words on something that's fairly common knowledge, for example, the meaning of `p95`. Likewise, don't assume the reader is clairvoyant—that's why they're reading docs. Avoid hedging statements and disclaimers, such as "As you probably know..."
 
-**Provide examples**: Don't make an abstract statement and then leave the reader guessing.
+**Provide explicit instructions and examples**: Don't make an abstract statement or provide conceptual descriptions and then leave the reader guessing.
 - **Recommended**: "Often, two monitors grouped by different tags have reporting sources whose tag values never overlap, for example, `web04` and `web05` for a monitor grouped by host, or `dev` and `prod` for a monitor grouped by environment."
 - **Not recommended**: "Often, two monitors grouped by different tags have reporting sources whose tag values never overlap."
 

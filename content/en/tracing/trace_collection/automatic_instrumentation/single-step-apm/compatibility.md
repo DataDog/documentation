@@ -192,6 +192,21 @@ SSI disables automatically when it detects:
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+## Tracer libraries
+
+The following tracer library versions are supported for Single Step Instrumentation: 
+
+| Tracer Language  | Version   |
+|------------------|-----------|
+| Java             | 1.44.0+   | 
+| Python           | 2.20.1+   | 
+| Node.js          | 4+        | 
+| .NET             | 3.7.0+    | 
+| Ruby             | 2.5.0+    |  
+| PHP              | 1.6.0+    |  
+
+Single Step Instrumentation automatically downloads the tracer version compatible with your application's language version. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
