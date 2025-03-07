@@ -1,5 +1,7 @@
 ---
 title: Deploying Agentless Scanning
+aliases: 
+  - /security/cloud_security_management/agentless_scanning/deployment_methods
 further_reading:
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"

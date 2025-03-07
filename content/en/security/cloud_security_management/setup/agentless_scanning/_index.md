@@ -8,6 +8,7 @@ aliases:
   - /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
   - /security/cloud_security_management/guide/agentless_aws_integration
   - /security/cloud_security_management/guide/agentless_terraform
+  - /security/cloud_security_management/agentless_scanning
 further_reading:
   - link: "https://www.datadoghq.com/blog/agentless-scanning/"
     tag: "Blog"

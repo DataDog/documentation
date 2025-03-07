@@ -1,5 +1,7 @@
 ---
 title: Agentless Scanning Compatibility
+aliases: 
+ - /security/cloud_security_management/agentless_scanning/compatibility
 ---
 
 ## Availability

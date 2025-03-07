@@ -48,8 +48,8 @@ To exclude volumes or Lambda resources in AWS, set the tag `DatadogAgentlessScan
 [3]: https://app.datadoghq.com/security/csm/vm
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
-[6]: /security/cloud_security_management/setup/agentless_scanning/#terraform
-[7]: /security/cloud_security_management/setup/agentless_scanning/#aws-integration
+[6]: /security/cloud_security_management/setup/agentless_scanning/enable/#terraform
+[7]: /security/cloud_security_management/setup/agentless_scanning/enable/#aws-integration
 [7]: mailto:sales@datadoghq.com
 [8]: mailto:success@datadoghq.com
 

@@ -5970,25 +5970,25 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Enable Agentless Scanning
+    - name: Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 101
-    - name: Overview
-      url: security/cloud_security_management/setup/agentless_scanning/overview
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_overview
-      weight: 10000
     - name: Compatibility
       url: security/cloud_security_management/setup/agentless_scanning/compatibility
       parent: csm_setup_agentless_scanning
       identifier: csm_setup_agentless_scanning_compatibility
-      weight: 10001
+      weight: 10000
     - name: Deployment Methods
       url: security/cloud_security_management/setup/agentless_scanning/deployment_methods
       parent: csm_setup_agentless_scanning
       identifier: csm_agentless_deployment_methods
+      weight: 10001
+    - name: Enable Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/enable
+      parent: csm_setup_agentless_scanning
+      identifier: csm_setup_agentless_scanning_enable
       weight: 10002
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
