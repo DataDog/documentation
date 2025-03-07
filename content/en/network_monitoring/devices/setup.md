@@ -52,7 +52,7 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 Requires Datadog Agent version `7.64+`
 
-Enable High Availability (HA) in Device Monitoring to prevent service disruptions. This feature allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
+Enable High Availability (HA) in Network Device Monitoring to prevent service disruptions. This feature allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
 
 You can configure active and standby Agents to function as an HA pair in NDM. If the active Agent goes down, the standby Agent takes over within 90 seconds, becoming the new active Agent. Additionally, you can designate a preferred active Agent, allowing NDM to automatically revert to it once it becomes available again. This feature allows for proactive Agent switching ahead of scheduled maintenance.
 
