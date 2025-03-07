@@ -4,7 +4,7 @@ title: Cross-Organization Connections API
 
 {{< callout url="#" btn_hidden="true">}}
   Cross-organization visibility is in beta.
-{{< /callout >}} 
+{{< /callout >}}
 
 [Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
@@ -19,19 +19,25 @@ Configure connections through the public API `/api/v2/org_connections` endpoint.
 List all the connections this organization participates in, either as a source organization or as a destination organization. Listing connections requires the _Org Connections Read_ permission.
 
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">GET</span>
-https://{datadog_site}/api/v2/org_connections?api_key={datadog_api_key}&application_key={datadog_application_key}
+https://{datadog_site}/api/v2/org_connections
+
+### Header
+Content-Type: application/json
+DD-API-KEY: <YOUR_DATADOG_API_KEY>
+DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ## Create a connection
 
 Creates a connection from this organization to the destination organization. You must perform this operation in the to-be-source organization. Creating connections requires the _Org Connections Write_ permission.
 
-<span style="padding:3px" class="font-semibold text-api-post bg-bg-api-post">POST</span> https://{datadog_site}/api/v2/org_connections?api_key={datadog_api_key}&application_key={datadog_application_key}
+<span style="padding:3px" class="font-semibold text-api-post bg-bg-api-post">POST</span> https://{datadog_site}/api/v2/org_connections
 
 **Note:** The payload of this call requires the destination organization UUID. Get the destination organization's UUID from the "List your managed organizations" [endpoint][3].
 
 ### Header
-
 Content-Type: application/json
+DD-API-KEY: <YOUR_DATADOG_API_KEY>
+DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ### Payload
 
@@ -60,7 +66,12 @@ Content-Type: application/json
 
 Deletes a connection. Perform this operation either from the source organization or the destination organization. Reference the connection to delete with its ID, which you can get from the [List connections](#list-connections) request. Deleting connections requires the _Org Connections Write_ permission.
 
-<span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">DELETE</span> https://{datadog_site}/api/v2/org_connections/{connection_id}?api_key={datadog_api_key}&application_key={datadog_application_key}
+<span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">DELETE</span> https://{datadog_site}/api/v2/org_connections/{connection_id}
+
+### Header
+Content-Type: application/json
+DD-API-KEY: <YOUR_DATADOG_API_KEY>
+DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ### Failure scenarios
 
