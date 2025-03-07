@@ -22,9 +22,9 @@ List all the connections this organization participates in, either as a source o
 https://{datadog_site}/api/v2/org_connections
 
 ### Header
-Content-Type: application/json
-DD-API-KEY: <YOUR_DATADOG_API_KEY>
-DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
+- Content-Type: application/json
+- DD-API-KEY: <YOUR_DATADOG_API_KEY>
+- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ## Create a connection
 
@@ -35,9 +35,9 @@ Creates a connection from this organization to the destination organization. You
 **Note:** The payload of this call requires the destination organization UUID. Get the destination organization's UUID from the "List your managed organizations" [endpoint][3].
 
 ### Header
-Content-Type: application/json
-DD-API-KEY: <YOUR_DATADOG_API_KEY>
-DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
+- Content-Type: application/json
+- DD-API-KEY: <YOUR_DATADOG_API_KEY>
+- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ### Payload
 
@@ -69,9 +69,9 @@ Deletes a connection. Perform this operation either from the source organization
 <span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">DELETE</span> https://{datadog_site}/api/v2/org_connections/{connection_id}
 
 ### Header
-Content-Type: application/json
-DD-API-KEY: <YOUR_DATADOG_API_KEY>
-DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
+- Content-Type: application/json
+- DD-API-KEY: <YOUR_DATADOG_API_KEY>
+- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
 
 ### Failure scenarios
 
