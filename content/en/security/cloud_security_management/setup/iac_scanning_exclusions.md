@@ -23,6 +23,8 @@ You can configure exclusions using:
 - A configuration file to define exclusions for severity levels, file paths, query IDs, and categories.
 - Inline comments to ignore specific findings within Terraform, Kubernetes, or CloudFormation files.
 
+<div class="alert alert-info">Exclusions defined in the configuration file take precedence over inline comments.</div>
+
 ## Configure exclusions with a configuration file
 
 1. Create a file named `dd-iac-scan.config` in the root directory of your project repository.
@@ -218,6 +220,8 @@ exclude-queries = [ "Access control", "Best Practices" ]
 ## Configure exclusions with inline comments
 
 To exclude specific findings, add a comment that starts with `# dd-iac-scan`, followed by a command and any required values. Inline exclusions apply only within the file where they are used.
+
+<div class="alert alert-info">Exclusions defined in the configuration file take precedence over inline comments.</div>
 
 ### Supported commands
 
