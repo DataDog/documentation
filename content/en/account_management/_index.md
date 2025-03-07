@@ -70,7 +70,7 @@ If you are an organization administrator, reference the additional documentation
 * [Change your Datadog plan and view usage and billing history][8]
 
 ### Email verification
-Datadog now requires users to verify their email addresses to enhance account security and provide access to additional management features. Verified users have more control over their account security and organizational visibility.
+Verify your email addresses to enhance account security and provide access to additional management features. Verified users have more control over their account security and organizational visibility.
 
 #### Who needs to verify their email?
 - **SAML users**: Must manually verify their email through Datadog.
@@ -78,13 +78,13 @@ Datadog now requires users to verify their email addresses to enhance account se
 - **Password-based users**: Verify their email when setting their password for the first time.
 
 #### Benefits of email verification
-Once you verify your email addresss, you gain access to:
+After you verify your email addresss, you gain access to:
 - The ability to **revoke all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of their current org hierarchy.
 
 Unverified users are still able to access Datadog but are limited to viewing organizations within their existing hierarchy and don't have access to session revocation features.
 
-#### How to Verify Your Email
+#### How to verify your email
 1. Navigate to your **Profile Settings**.
 2. Click on **Verify Account**.
 3. Enter the **verification code** sent to your registered email.
