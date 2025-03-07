@@ -28,5 +28,3 @@ This page lists data collected by the APM runtime metrics.
 ## .NET
 
 {{< get-metrics-from-git "dotnet" >}}
-
-[8]: /integrations/java/#configuration
