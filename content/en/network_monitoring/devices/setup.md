@@ -145,4 +145,3 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [17]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [19]: /network_monitoring/devices/troubleshooting
-[20]: https://app.datadoghq.com/fleet
