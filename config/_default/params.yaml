@@ -101,7 +101,6 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
@@ -129,6 +128,7 @@ code_language_ids:
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
+    gcp-service-extensions: "GCP Service Extensions"
 branch: ""
 
 signupclass: sign-up-trigger

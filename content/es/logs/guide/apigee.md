@@ -6,9 +6,12 @@ description: Recopila logs de proxy de Apigee para realizar un seguimiento de er
   tiempos de respuesta de solicitudes, duración, latencia, rendimiento del monitor
   y problemas de proxies agregados en un solo lugar.
 further_reading:
+- link: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+  tag: Apigee
+  text: Política JavaScript de Apigee
 - link: logs/
   tag: Documentación
-  text: Log Management
+  text: Gestión de logs
 integration_id: apigee
 name: apigee
 short_description: Recopilar logs de Apigee
@@ -42,36 +45,36 @@ Utiliza el tipo de política MessageLogging con el parámetro syslog en tu API p
         <Port><site_port></Port>
         <Protocol>TCP</Protocol>
     </Syslog>
+    <logLevel>ALERT</logLevel>
 </MessageLogging>
 ```
 
-[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+[1]: https://cloud.google.com/apigee/docs/api-platform/reference/policies/javascript-policy?hl=en
+[2]: https://cloud.google.com/apigee/docs/api-platform/reference/policies/message-logging-policy
 
 {{% /site-region %}}
 #### Política JavaScript
 
-Envía logs de proxy de Apigee a Datadog utilizando la [política JavaScript][1] de Apigee.
-
-El JavaScript se ha configurado para registrar las variables de flujo esenciales como atributos de logs en Datadog. Los atributos se nombran de acuerdo con la [lista de atributos estándar][2].
+Envía logs de proxy de Apigee a Datadog utilizando la política JavaScript de Apigee. Para obtener instrucciones detalladas, consulta la [documentación de Apigee][1].
 
 1. Selecciona el proxy de Apigee desde el que quieres enviar logs a Datadog.
-2. En la página de información general del proxy seleccionada, haz clic en la pestaña **DEVELOP** (Ampliar), situada en la esquina superior derecha.
+2. En la página de información general del proxy seleccionada, haz clic en la pestaña **DESARROLLAR**.
+3. Selecciona **Nuevo script**.
+4. Selecciona JavaScript y añada variables de flujo en JavaScript desde la [referencia de variables de flujo de Apigee][4]. 
 
-{{< img src="static/images/logs/guide/apigee/apigee_develop.png" alt="Ampliar" style="width:75%;">}}
+{{% collapse-content title="Fragmento de código JavaScript de ejemplo" level="h4" expanded=false %}}
 
-3. En **Navigator** (Navegador), añade una nueva política JavaScript y edita el archivo JavaScript creado en el menú desplegable **Resources --> jsc** (Recursos --> jsc).
-4. Añade el siguiente fragmento de código JavaScript en él. Asegúrate de sustituir `<Datadog_API_KEY>` en la variable `dd_api_url` por tu [clave de API Datadog][3].
+Consulta el siguiente fragmento de código JavaScript de ejemplo. Sustituye `<DATADOG_API_KEY>` en la variable `dd_api_url` por tu [clave de API Datadog][3]. JavaScript se ha configurado para capturar las variables de flujo esenciales como atributos de logs en Datadog. Los atributos se nombran de acuerdo a la lista de atributos estándar.
 
 ```
-// Configura la URL de la API Datadog aquí..
+// Set the Datadog API URL here.
 var dd_api_url = "https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
-// Depurar
+// Debug
 // print(dd_api_url);
 // print('Name of the flow: ' + context.flow);
 
-// calcular tiempos de respuesta de cliente, destino y total
+// calculate response times for client, target and total
 var request_start_time = context.getVariable('client.received.start.timestamp');
 var request_end_time = context.getVariable('client.received.end.timestamp');
 var system_timestamp = context.getVariable('system.timestamp');
@@ -93,15 +96,14 @@ var appName = context.getVariable("developer.app.name");
 var httpMethod = context.getVariable("request.verb");
 var httpUrl = '' + context.getVariable("client.scheme") + '://' + context.getVariable("request.header.host") + context.getVariable("request.uri");
 var httpStatusCode = context.getVariable("message.status.code");
-var statusResponse = context.getVariable("message.reason.phrase");
+var statusResponse = context.getVariable("response.reason.phrase");
 var clientLatency = total_client_time;
 var targetLatency = total_target_time;
 var totalLatency = total_request_time;
 var userAgent = context.getVariable('request.header.User-Agent');
 var messageContent = context.getVariable('message.content');
 
-
-// Atributos de logs de Datadog
+// Datadog log attributes
 var logObject = {
     "timestamp": timestamp,
     "organization": organization,
@@ -125,28 +127,27 @@ var logObject = {
     "message": messageContent,
 };
 
-
 var headers = {
     'Content-Type': 'application/json'
 };
 
-
-// Depurar
+// Debug
 // print('LOGGING OBJECT' + JSON.stringify(logObject));
 
 var myLoggingRequest = new Request(dd_api_url, "POST", headers, JSON.stringify(logObject));
 
-// Enviar logs a Datadog
+// Send logs to Datadog
 httpClient.send(myLoggingRequest);
 ```
 
-**Nota**: Añade más variables de flujo en JavaScript a partir de la [referencia de la variable de flujo Apigee][4].
+{{% /collapse-content %}}
 
-## Solucionar problemas
+
+## Resolución de problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][5].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

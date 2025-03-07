@@ -1451,11 +1451,13 @@ components:
       enum:
       - open
       - invite
+      - embed
       nullable: true
       type: string
       x-enum-varnames:
       - OPEN
       - INVITE
+      - EMBED
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -6156,6 +6158,7 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
+      - $ref: '#/components/schemas/LogsSpanRemapper'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6267,6 +6270,43 @@ components:
       x-enum-varnames:
       - TIME_ASCENDING
       - TIME_DESCENDING
+    LogsSpanRemapper:
+      description: "There are two ways to define correlation between application spans
+        and logs:\n\n  1. Follow the documentation on [how to inject a span ID in
+        the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces).\n
+        \ Log integrations automatically handle all remaining setup steps by default.\n\n
+        \ 2. Use the span remapper processor to define a log attribute as its associated
+        span ID."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - dd.span_id
+          description: Array of source attributes.
+          items:
+            description: Attribute to extract the span ID from.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsSpanRemapperType'
+      required:
+      - type
+      type: object
+    LogsSpanRemapperType:
+      default: span-id-remapper
+      description: Type of logs span remapper.
+      enum:
+      - span-id-remapper
+      example: span-id-remapper
+      type: string
+      x-enum-varnames:
+      - SPAN_ID_REMAPPER
     LogsStatusRemapper:
       description: "Use this Processor if you want to assign some attributes as the
         official status.\n\nEach incoming status value is mapped as follows.\n\n  -
@@ -6382,7 +6422,7 @@ components:
           - dd.trace_id
           description: Array of source attributes.
           items:
-            description: Attribute to extract the Trace ID from.
+            description: Attribute to extract the trace ID from.
             type: string
           type: array
         type:
@@ -7506,7 +7546,7 @@ components:
       properties:
         day_starts:
           description: The time of the day at which a one day cumulative evaluation
-            window starts. Must be defined in UTC time in `HH:mm` format.
+            window starts.
           example: 04:00
           type: string
         hour_starts:
@@ -7525,6 +7565,11 @@ components:
           maximum: 1
           minimum: 1
           type: integer
+        timezone:
+          description: The timezone of the time of the day of the cumulative evaluation
+            window start.
+          example: Europe/Paris
+          type: string
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7613,6 +7658,9 @@ components:
           - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
+          quality_issues:
+          - broken_at_handle
+          - noisy_monitor
           scopes:
           - '!availability-zone:us-east-1c'
           - name:cassandra
@@ -7712,6 +7760,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        quality_issues:
+          description: Quality issues detected with the monitor.
+          items:
+            description: A quality issue detected with the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
         query:
           description: The monitor query.
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
@@ -13147,7 +13203,7 @@ components:
       properties:
         author:
           $ref: '#/components/schemas/SharedDashboardAuthor'
-        created_at:
+        created:
           description: Date the dashboard was shared.
           format: date-time
           readOnly: true
@@ -13158,6 +13214,20 @@ components:
           type: string
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
@@ -13165,6 +13235,23 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
+        last_accessed:
+          description: The last time the shared dashboard was accessed. Null if never
+            accessed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         public_url:
           description: URL of the shared dashboard.
           readOnly: true
@@ -13184,6 +13271,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can receive an invitation to access
             to the shared dashboard.
           example:
@@ -13197,10 +13285,17 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
         token:
           description: A unique token assigned to the shared dashboard.
           readOnly: true
           type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       required:
       - dashboard_id
       - dashboard_type
@@ -13219,6 +13314,27 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      type: object
+    SharedDashboardInviteesItems:
+      description: The allowlisted invitees for an INVITE-only shared dashboard.
+      properties:
+        access_expiration:
+          description: Time of the invitee expiration. Null means the invite will
+            not expire.
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: Time that the invitee was created.
+          format: date-time
+          readOnly: true
+          type: string
+        email:
+          description: Email of the invitee.
+          example: test@datadoghq.com
+          type: string
+      required:
+      - email
       type: object
     SharedDashboardInvites:
       description: Invitations data and metadata that exists for a shared dashboard
@@ -13336,6 +13452,17 @@ components:
           format: int64
           type: integer
       type: object
+    SharedDashboardStatus:
+      description: Active means the dashboard is publicly available. Paused means
+        the dashboard is not publicly available.
+      enum:
+      - active
+      - paused
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - PAUSED
     SharedDashboardUpdateRequest:
       description: Update a shared dashboard's settings.
       example:
@@ -13346,6 +13473,20 @@ components:
         - test2@datadoghq.com
         share_type: invite
       properties:
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/SharedDashboardUpdateRequestGlobalTime'
         global_time_selectable_enabled:
@@ -13353,6 +13494,16 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
         selectable_template_vars:
           description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
@@ -13368,6 +13519,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can be given access to the shared
             dashboard.
           example:
@@ -13381,8 +13533,13 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
-      required:
-      - global_time
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       type: object
     SharedDashboardUpdateRequestGlobalTime:
       description: Timeframe setting for the shared dashboard.
@@ -14123,6 +14280,9 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -15389,7 +15549,7 @@ components:
       description: Object describing the synthetics tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: List of Synthetic tests with overrides.
           items:
             $ref: '#/components/schemas/SyntheticsCITest'
           type: array
@@ -17473,7 +17633,7 @@ components:
       description: Object describing the Synthetic tests to trigger.
       properties:
         tests:
-          description: Individual Synthetic test.
+          description: List of Synthetic tests.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerTest'
           type: array
@@ -17633,11 +17793,13 @@ components:
       enum:
       - number
       - bar
+      - trend
       example: number
       type: string
       x-enum-varnames:
       - NUMBER
       - BAR
+      - TREND
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
@@ -22907,6 +23069,28 @@ components:
       example: 0
       format: int64
       type: integer
+    ViewingPreferences:
+      description: The viewing preferences for a shared dashboard.
+      properties:
+        high_density:
+          description: Whether the widgets on the shared dashboard should be displayed
+            with high density.
+          type: boolean
+        theme:
+          $ref: '#/components/schemas/ViewingPreferencesTheme'
+      type: object
+    ViewingPreferencesTheme:
+      description: The theme of the shared dashboard view. "system" follows your system's
+        default viewing theme.
+      enum:
+      - system
+      - light
+      - dark
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+      - LIGHT
+      - DARK
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
@@ -23326,6 +23510,8 @@ components:
           type: string
         cell_display_mode:
           $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        cell_display_mode_options:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptions'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -23344,6 +23530,37 @@ components:
       required:
       - formula
       type: object
+    WidgetFormulaCellDisplayModeOptions:
+      description: Cell display mode options for the widget formula. (only if `cell_display_mode`
+        is set to `trend`).
+      properties:
+        trend_type:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsTrendType'
+        y_scale:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsYScale'
+      type: object
+    WidgetFormulaCellDisplayModeOptionsTrendType:
+      description: Trend type for the cell display mode options.
+      enum:
+      - area
+      - line
+      - bars
+      example: area
+      type: string
+      x-enum-varnames:
+      - AREA
+      - LINE
+      - BARS
+    WidgetFormulaCellDisplayModeOptionsYScale:
+      description: Y scale for the cell display mode options.
+      enum:
+      - shared
+      - independent
+      example: shared
+      type: string
+      x-enum-varnames:
+      - SHARED
+      - INDEPENDENT
     WidgetFormulaLimit:
       description: Options for limiting results returned.
       properties:
@@ -29613,6 +29830,50 @@ paths:
         parameters: []
         type: unsafe
   /api/v1/logs/config/indexes/{name}:
+    delete:
+      description: 'Delete an existing index from your organization. Index deletions
+        are permanent and cannot be reverted.
+
+        You cannot recreate an index with the same name as deleted ones.'
+      operationId: DeleteLogsIndex
+      parameters:
+      - description: Name of the log index.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsIndex'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an index
+      tags:
+      - Logs Indexes
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
+      x-undo:
+        type: idempotent
     get:
       description: Get one log index from your organization. This endpoint takes no
         JSON arguments.
