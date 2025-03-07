@@ -34,8 +34,8 @@ Runtime metrics are application metrics that monitor memory usage, garbage colle
 | Node.js  | 3.0.0+                | GA            | No                 | No                               |
 | Ruby     | 0.44.0+               | GA            | No                 | No                               |
 | Python   | 0.30.0+               | Preview       | No                 | No                               |
-| PHP      | Not supported         |               |                    |                                  |
-| C++      | Not supported         |               |                    |                                  |
+| PHP      | Not supported         | N/A           | N/A                | N/A                              |
+| C++      | Not supported         | N/A           | N/A                | N/A                              |
 
 ### Language-specific considerations
 
@@ -199,3 +199,4 @@ After setup is complete, you can view your runtime metrics in:
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /tracing/metrics/runtime_metrics/data_collected
 [7]: /developers/dogstatsd/unix_socket/
+[8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
