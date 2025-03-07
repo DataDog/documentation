@@ -247,6 +247,11 @@ menu:
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
       weight: 2503
+    - name: Event Management
+      identifier: getting_started_event_management
+      url: getting_started/event_management/
+      parent: getting_started
+      weight: 25.5
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
