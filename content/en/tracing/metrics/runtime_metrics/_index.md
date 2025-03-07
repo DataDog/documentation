@@ -79,7 +79,7 @@ Ensure that [DogStatsD is enabled for the Agent][2]. By default, the Datadog Age
 #### For containerized environments
 
 1. Set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
-2. See the specific setup instructions to ensure that the Agent is configured to receive DogStatsD metrics in a containerized environment:
+2. Follow these container-specific setup instructions:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
 
