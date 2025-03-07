@@ -9,7 +9,7 @@ aliases:
   - /tracing/metrics/runtime_metrics/nodejs
   - /tracing/metrics/runtime_metrics/python
   - /tracing/metrics/runtime_metrics/ruby
-description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
+description: "Gain additional insights into an application's performance with the runtime metrics associated with your traces."
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
@@ -22,7 +22,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-Runtime metrics are application metrics about memory usage, garbage collection, or parallelization. Datadog tracing libraries can automatically collect these metrics for supported environments and send them to the Datadog agent.
+Runtime metrics are application metrics that monitor memory usage, garbage collection, and parallelization. Datadog tracing libraries can automatically collect these metrics for supported environments and send them to the Datadog Agent.
 
 ## Tracing requirements
 
@@ -42,7 +42,7 @@ Runtime metrics are application metrics about memory usage, garbage collection, 
 {{< programming-lang-wrapper langs="java,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 #### Supported runtimes
-Runtime metrics are only supported on Java 8.
+Runtime metrics are only supported on Java 8+.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -63,36 +63,35 @@ IIS application pools use special accounts that do not appear in the list of use
 
 This can be done either from the "Computer Management" UI, or from an administrator command prompt:
 
-```
+```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Getting started
+## Setup instructions
 
-### Configure the Datadog Agent
+### 1. Configure the Datadog Agent
 
-Make sure that [DogStatsD is enabled for the Agent][2]. By default, the Datadog Agent is configured to ingest metrics with UDP over port `8125`. Alternatively, the Datadog Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][7].
+Ensure that [DogStatsD is enabled for the Agent][2]. By default, the Datadog Agent is configured to ingest metrics with UDP over port `8125`. Alternatively, the Datadog Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][7].
 
-For containerized environments, follow the links below to enable DogStatsD metrics collection within the Datadog Agent.
 
-#### Containers
+#### For containerized environments
 
 1. Set `dogstatsd_non_local_traffic: true` in your main [`datadog.yaml` configuration file][8], or set the [environment variable][3] `DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true`.
 2. See the specific setup instructions to ensure that the Agent is configured to receive DogStatsD metrics in a containerized environment:
 
 {{< partial name="apm/apm-runtime-metrics-containers.html" >}}
 
-</br>
+<br>
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
 
-3. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
+3. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the correct Datadog location.
 
 {{< /site-region >}}
 
-### Configure your application
+### 2. Configure your application
 
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**: `true` for Java, `false` for all other languages <br>
@@ -106,7 +105,7 @@ For containerized environments, follow the links below to enable DogStatsD metri
 : **Default**: `8125` <br>
 **Description**: Sets the port for the tracing library's metric submission.
 
-#### Additional configuration
+#### Language-specific configuration
 
 {{< programming-lang-wrapper langs="java,python,nodejs,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
@@ -174,21 +173,25 @@ Runtime metrics cannot be enabled in code.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-## Data Collected
+## Data collected
 
 See [Runtime Metrics Data Collected][4] for the full list of collected runtime metrics.
 
 ## View runtime metric dashboards
 
-After setup is complete, see your runtime metrics in the instrumented service's details page (see Java example below), the flame graph metrics tab, and in default runtime dashboards.
+After setup is complete, you can view your runtime metrics in:
+
+- The instrumented service's details page
+- The flame graph **Metrics** tab
+- Default runtime dashboards
 
 {{< img src="tracing/runtime_metrics/jvm_runtime_trace.png" alt="JVM Runtime Trace" >}}
 
-**Notes**:
+## Troubleshooting
 - To associate runtime metrics within flame graphs, ensure the `env` tag (case-sensitive) is set and matching across your environment.
 - For runtime metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and that the configured `env` tag matches the `env` of the instrumented service.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
