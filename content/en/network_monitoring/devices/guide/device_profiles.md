@@ -56,7 +56,7 @@ Use profile inheritance to adopt configurations such as metadata, metrics, and t
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
-    **Note**: Changes to parent profiles are propagated to the child profiles. However, changes made to inherited data on a child profile (such as tags and metrics), only affect that specific child profile.
+    **Note**: Changes made to the parent profile are automatically applied to the child profiles. If you need to adjust any inherited attributes in the child profiles, such as metrics, tags, or metadata, you must modify the parent profile.
 
 ### Step 3: Select reference devices
 
@@ -117,7 +117,7 @@ See [advanced options for scalar metrics](?tab=manual#scalar-metrics) and [advan
 6. Click **Create** to save the metric.
 7. This returns you to the define metrics screen where you can see the new metric that was added.
 
-   **insert video later, getting validation error in staging**
+   {{< img src="/network_device_monitoring/profile_onboarding/add_metrics_manually.mp4" alt="Video showing the add metrics modal, adding a new metric with the manual method and returning to define metrics step." video=true >}}
 
 {{% collapse-content title="Advanced options scalar" level="h4" expanded=false %}}
 
