@@ -82,8 +82,7 @@ const initCodeTabs = () => {
 
     const scrollToAnchor = (tab, anchorname) => {
         const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
-        console.log('tab: ', tab);
-        console.log('scrolling to anchor: ', anchor);
+        
         if (anchor) {
             anchor.scrollIntoView();
         } else {
