@@ -199,4 +199,4 @@ After setup is complete, you can view your runtime metrics in:
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /tracing/metrics/runtime_metrics/data_collected
 [7]: /developers/dogstatsd/unix_socket/
-[8]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[8]: /agent/configuration/agent-configuration-files/#main-configuration-file
