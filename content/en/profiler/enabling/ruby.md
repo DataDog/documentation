@@ -50,7 +50,7 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.10'
+    gem 'datadog', '~> 2.12'
     ```
 3. Install the gems with `bundle install`.
 
