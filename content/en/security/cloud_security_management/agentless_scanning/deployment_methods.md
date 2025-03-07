@@ -26,7 +26,7 @@ For larger accounts with 250 or more hosts, this is the most cost-effective opti
 
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
 
-{{< img src="/security/agentless_scanning/agentless_advanced_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%" >}}
 
 {{% /tab %}}
 {{% tab "Same account scanning" %}}
@@ -35,7 +35,7 @@ With same account scanning, a single Agentless scanner is deployed per account. 
 
 The following diagram illustrates how Agentless scanning works when deployed within each Cloud account:
 
-{{< img src="/security/agentless_scanning/agentless_quickstart_2.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagram of Agentless scanning showing the Agentless scanner is deployed in each Cloud account" width="90%" >}}
 
 [3]: https://app.datadoghq.com/security/csm/vm
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
