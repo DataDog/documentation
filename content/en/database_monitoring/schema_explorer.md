@@ -19,7 +19,11 @@ collect_schemas: true
 
 ## Exploring schemas
 
-On the [Schemas][1] page, select a table to open the table details panel. This panel allows you to examine:
+On the [Schemas][1] page, select a table to open the table details panel.
+
+### Definition
+
+The **Definition** tab allows you to examine:
 
 - **Columns**: Review each column's name, data type, and default values, including constraints such as **NOT NULL**.
 - **Indexes**: View details about index types and their usage metrics.
@@ -27,7 +31,11 @@ On the [Schemas][1] page, select a table to open the table details panel. This p
 
 ### Metrics
 
+The **Metrics** tab...
+
 ### Queries
+
+The **Queries** tab...
 
 [1]: https://app.datadoghq.com/databases/schemas
 [2]: https://app.datadoghq.com/databases/list
