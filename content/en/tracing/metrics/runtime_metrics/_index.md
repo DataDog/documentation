@@ -2,13 +2,13 @@
 title: Runtime Metrics
 aliases:
   - /tracing/advanced/runtime_metrics/
-  - /tracing//metrics/runtime_metrics/
-  - /tracing//metrics/runtime_metrics/dotnet
-  - /tracing//metrics/runtime_metrics/go
-  - /tracing//metrics/runtime_metrics/java
-  - /tracing//metrics/runtime_metrics/nodejs
-  - /tracing//metrics/runtime_metrics/python
-  - /tracing//metrics/runtime_metrics/ruby
+  - /tracing/metrics/runtime_metrics/
+  - /tracing/metrics/runtime_metrics/dotnet
+  - /tracing/metrics/runtime_metrics/go
+  - /tracing/metrics/runtime_metrics/java
+  - /tracing/metrics/runtime_metrics/nodejs
+  - /tracing/metrics/runtime_metrics/python
+  - /tracing/metrics/runtime_metrics/ruby
 description: "Gain additional insights into an application's performance with the runtime metrics associated to your traces."
 further_reading:
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
@@ -37,7 +37,7 @@ Runtime metrics are application metrics about memory usage, garbage collection, 
 | PHP      | Not supported         |               |                    |                                  |
 | C++      | Not supported         |               |                    |                                  |
 
-### Caveats
+### Language-specific considerations
 
 {{< programming-lang-wrapper langs="java,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
