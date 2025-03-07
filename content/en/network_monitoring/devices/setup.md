@@ -41,11 +41,30 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
+## High Availability
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning"> Datadog Agent High Availability in Network Device Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+
+{{< /site-region >}}
+
+<div class="alert alert-info"> Datadog Agent High Availability in Network Device Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
+
+Requires Datadog Agent version `7.64+`
+
+Enable High Availability (HA) in Device Monitoring to prevent service disruptions. This feature allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
+
+You can configure active and standby Agents to function as an HA pair in NDM. If the active Agent goes down, the standby Agent takes over within 90 seconds, becoming the new active Agent. Additionally, you can designate a preferred active Agent, allowing NDM to automatically revert to it once it becomes available again. This feature allows for proactive Agent switching ahead of scheduled maintenance.
+
+After you have enabled and configured Datadog Agent High Availability in NDM, you can view your HA configured Agents in the **HA Agent Overview Dashboard**, and in [Fleet Automation][20].
+
+{{< img src="network_device_monitoring/ha_agent/ha_agent_dashboard_2.png" alt="High Availability Agent NDM Dashboard" style="width:100%;" >}}
+
 ## Setup
 
-### Integration Configuration
+### Configuration
 
-To begin monitoring your network devices, enable the SNMP integration using one of the following methods:
+To begin monitoring your network devices, enable SNMP monitoring using one of the following methods:
 
 [Individual devices][3]
 : Configure SNMP monitoring on your individual devices.
@@ -132,3 +151,4 @@ Configure [NetFlow Monitoring][11] to visualize and monitor your flow records fr
 [17]: /api/latest/network-device-monitoring/#get-the-list-of-tags-for-a-device
 [18]: /api/latest/network-device-monitoring/#update-the-tags-for-a-device
 [19]: /network_monitoring/devices/troubleshooting
+[20]: https://app.datadoghq.com/fleet
