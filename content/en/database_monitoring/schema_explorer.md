@@ -3,7 +3,7 @@ title: Exploring Database Schemas
 description: Explore and analyze database schemas, including tables, columns, and indexes.
 ---
 
-The [Schemas][1] page allows you to explore and analyze database structures directly in Datadog, removing the need to manually access a database to view table details.
+The [Schemas][1] page allows you to explore and analyze database structures directly in Datadog, removing the need to manually access a database to view table details and analyze schema structures.
 
 <div class="alert alert-info">The Schemas feature is available for PostgreSQL and SQL Server.</div>
 
@@ -11,7 +11,7 @@ The [Schemas][1] page allows you to explore and analyze database structures dire
 
 ## Configuration
 
-To enable the schemas feature, ensure that your Database Monitoring configuration includes the following parameter:
+To enable the schemas feature, add the following parameter to your Database Monitoring configuration:
 
 ```yaml
 collect_schemas: true
@@ -45,7 +45,13 @@ The **Metrics** tab displays performance and usage statistics for the table over
 
 ### Recommendations
 
-The **Recommendations** tab...
+The Recommendations tab highlights potential schema issues and suggests improvements. Each recommendation includes:
+
+- A detected issue, such as a missing primary key or an inefficient index.
+- An explanation of why the issue matters and how it affects database performance or integrity.
+- A suggested fix, often in the form of an SQL statement that can be executed on the impacted database.
+
+If no schema issues are detected, this tab is empty.
 
 ### Queries
 
