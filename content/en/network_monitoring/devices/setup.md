@@ -41,7 +41,7 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 
 {{< img src="network_device_monitoring/getting_started/ndm_install_agent.png" alt="The Agent configuration page, highlighting the Ubuntu installation." style="width:100%;" >}}
 
-## High Availability
+#### High Availability
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning"> Datadog Agent High Availability in Network Device Monitoring is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -49,8 +49,6 @@ Navigate to the [Agent installation page][1], and install the [Datadog Agent][2]
 {{< /site-region >}}
 
 <div class="alert alert-info"> Datadog Agent High Availability in Network Device Monitoring is in Preview. Reach out to your Datadog representative to sign up.</div>
-
-Requires Datadog Agent version `7.64+`
 
 Enable High Availability (HA) in Network Device Monitoring to prevent service disruptions. This feature allows you to designate an active Agent and a standby Agent, ensuring automatic failover if the active Agent encounters an issue. This setup eliminates the Agent as a single point of failure, maintaining continuous monitoring during unexpected incidents or planned maintenance, such as OS updates and Agent upgrades.
 
