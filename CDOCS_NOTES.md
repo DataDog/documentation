@@ -25,7 +25,7 @@ If you modify anything about your local copy of cdocs-hugo-integration while wor
 
 Ideally, you won't make updates to the packages while working in the documentation repo. If you find an issue, it's better to create a ticket for it, then update the package separately by using a new test case to verify the changes (rather than using the results you're getting in the documentation repo to confirm fixes).
 
-If you need to debug an unexpected error in the cdocs build, edit the Makefile to use `node inspect` instead of `node` in the `build-cdocs`. This will trigger the [Node debugger](https://nodejs.org/api/debugger.html). This allows you to inspect variables without adding console.log calls to the packages themselves.
+If you need to debug an unexpected error in the cdocs build, edit the Makefile to use `node inspect` instead of `node` in the `build-cdocs` action. This will trigger the [Node debugger](https://nodejs.org/api/debugger.html). This allows you to inspect variables without adding console.log calls to the packages themselves.
 
 ## Add a customization configuration directory
 
