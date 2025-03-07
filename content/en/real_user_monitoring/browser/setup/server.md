@@ -34,7 +34,7 @@ Keep in mind the following limitations when using this setup:
 
 ## Prerequisites
 
-The [Datadog Agent][2] is required. Make sure you already have installed and configured the Agent.
+The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
@@ -46,7 +46,7 @@ The [Datadog Agent][2] is required. Make sure you already have installed and con
 The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML.
 
-For more granular control over instrumented RUM application, you can also manually install and configure the module.
+For more granular control over the instrumentation of the RUM application, you can also manually install and configure the module.
 
 [1]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 
@@ -118,12 +118,12 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% /tab %}}
-{{% tab "Apache HTTP Server / IBM HTTP Server" %}}
+{{% tab "Apache/IBM HTTP Server" %}}
 
 The Auto-Instrumentation method leverages the [Apache httpd Modules capability][1] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML.
 
-For more granular control over instrumented RUM application, you can also manually install and configure the module.
+For more granular control over the instrumentation of the RUM application, you can also manually install and configure the module.
 
 [1]: https://httpd.apache.org/modules/
 
@@ -241,7 +241,7 @@ To update your RUM Application:
 
 {{% /tab %}}
 
-{{% tab "Apache HTTP Server / IBM HTTP Server" %}}
+{{% tab "Apache/IBM HTTP Server" %}}
 
 To update your RUM Application:
 
