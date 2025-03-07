@@ -28,7 +28,24 @@ Agentless Scanning provides visibility into vulnerabilities that exist within yo
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog schedules automated scans in 12-hour intervals through [Remote Configuration][2]. During a scan cycle, Agentless scanners gather Lambda code dependencies and create snapshots of your VM instances. With these snapshots, the Agentless scanners scan, generate, and transmit a list of packages to Datadog to check for vulnerabilities, along with Lambda code dependencies. When scans of a snapshot are completed, the snapshot is deleted. No confidential or private personal information is ever transmitted outside of your infrastructure.
+- **Remote Configuration**: [Remote Configuration][3] is required to enable Datadog to send information to Agentless scanners, such as which cloud resources to scan.
+- **Cloud permissions**: The Agentless Scanning instance requires specific permissions to scan hosts, host images, container registries, and functions. These permissions are automatically applied as part of the installation process.<br><br>
+  {{< collapse-content title="AWS Host and container scanning permissions" level="h5" >}}
+  <ul>
+    <li><code>ec2:DescribeVolumes</code></li>
+    <li><code>ec2:CreateTags</code></li>
+    <li><code>ec2:CreateSnapshot</code></li>
+    <li><code>ec2:DeleteSnapshot</code></li>
+    <li><code>ec2:DescribeSnapshots</code></li>
+    <li><code>ec2:DescribeSnapshotAttribute</code></li>
+    <li><code>ebs:ListSnapshotBlocks</code></li>
+    <li><code>ebs:ListChangedBlocks</code></li>
+    <li><code>ebs:GetSnapshotBlock</code></li>
+    <li><code>ecr:GetAuthorizationToken</code></li>
+    <li><code>ecr:GetDownloadUrlForLayer</code></li>
+    <li><code>ecr:BatchGetImage</code></li>
+  </ul>
+  {{< /collapse-content >}}
 
 The following diagram illustrates how Agentless Scanning works:
 

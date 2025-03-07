@@ -56,6 +56,17 @@ The following application languages and libraries are supported for vulnerabilit
 | PHP      | composer                  | composer.lock                                                        |
 | Python   | pip, poetry               | pipfile.lock, poetry.lock, egg package, wheel package, conda package |
 
+## Container image registries
+
+The following container image registries are supported for container image scans:
+
+- AWS ECR public
+- AWS ECR private
+
+**Note**: Container image scanning from registry is only supported if you have installed Agentless with:
+  - Cloudformation Integrations >= v2.0.8
+  - Terraform Agentless Module >= v0.11.7
+
 ## Container runtimes
 
 The following container runtimes are supported:
