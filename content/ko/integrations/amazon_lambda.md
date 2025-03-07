@@ -7,6 +7,7 @@ categories:
 - cloud
 - log collection
 - tracing
+custom_kind: 통합
 dependencies: []
 description: 람다 실행 시간, 오류 호출 개수 등을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -27,7 +28,6 @@ integration_id: amazon-lambda
 integration_title: AWS 람다
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_lambda
 public_title: Datadog-AWS 람다 통합
@@ -81,7 +81,7 @@ AWS에서 검색한 각 메트릭에는 AWS 콘솔에 표시하는 동일한 태
 
 AWS 람다 함수는 [Datadog 서버리스 배포 추적[9]이 활성화된 경우 AWS CloudTrail에서 람다 배포 이벤트를 수집합니다.
 
-### 서비스 검사
+### 서비스 점검
 
 AWS 람다 함수에는 서비스 점검이 포함되어 있지 않습니다.
 
@@ -124,19 +124,19 @@ AWS 람다 통합은 즉시 사용 가능한 모니터링 기능을 제공해 �
 
 
 
-[1]: /ko/integrations/amazon_web_services/
+[1]: https://app.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: /ko/integrations/amazon_web_services/#installation
+[3]: https://app.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
 [5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
-[7]: /ko/serverless
+[7]: https://app.datadoghq.com/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv
-[9]: /ko/serverless/deployment_tracking
-[10]: /ko/serverless/enhanced_lambda_metrics/
-[11]: /ko/serverless/custom_metrics/#custom-metrics
-[12]: /ko/serverless/forwarder/
-[13]: /ko/serverless/distributed_tracing/
+[9]: https://app.datadoghq.com/serverless/deployment_tracking
+[10]: https://app.datadoghq.com/serverless/enhanced_lambda_metrics/
+[11]: https://app.datadoghq.com/serverless/custom_metrics/#custom-metrics
+[12]: https://app.datadoghq.com/serverless/forwarder/
+[13]: https://app.datadoghq.com/serverless/distributed_tracing/
 [14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
 [15]: https://app.datadoghq.com/monitors/recommended
-[16]: /ko/help/
+[16]: https://app.datadoghq.com/help/
