@@ -251,12 +251,12 @@ menu:
       identifier: getting_started_event_management
       url: getting_started/event_management/
       parent: getting_started
-      weight: 25.5
+      weight: 26
     - name: Code Security
       identifier: getting_started_code_security
       url: getting_started/code_security/
       parent: getting_started
-      weight: 26
+      weight: 27
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
