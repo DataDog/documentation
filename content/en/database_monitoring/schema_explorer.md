@@ -25,5 +25,9 @@ On the [Schemas][1] page, select a table to open the table details panel. This p
 - **Indexes**: View details about index types and their usage metrics.
 - **Foreign Keys**: If applicable, explore existing foreign key associations for the table.
 
+### Metrics
+
+### Queries
+
 [1]: https://app.datadoghq.com/databases/schemas
 [2]: https://app.datadoghq.com/databases/list
