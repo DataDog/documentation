@@ -1,6 +1,6 @@
 ---
 aliases:
-- /integrations/azure_containerservice
+- /ko/integrations/azure_containerservice
 categories:
 - 클라우드
 - 컨테이너

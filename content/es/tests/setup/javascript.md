@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/javascript
-- /continuous_integration/tests/javascript
-- /continuous_integration/tests/setup/javascript
+- /es/continuous_integration/setup_tests/javascript
+- /es/continuous_integration/tests/javascript
+- /es/continuous_integration/tests/setup/javascript
 code_lang: javascript
 code_lang_weight: 20
 further_reading:

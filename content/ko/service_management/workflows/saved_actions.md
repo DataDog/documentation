@@ -5,9 +5,9 @@ algolia:
   - 워크플로우
   - 워크플로우 자동화
 aliases:
-- /workflows/actions_catalog/action_blueprints/
-- /service_management/workflows/actions_catalog/saved_actions/
-- /service_management/workflows/actions/saved_actions/
+- /ko/workflows/actions_catalog/action_blueprints/
+- /ko/service_management/workflows/actions_catalog/saved_actions/
+- /ko/service_management/workflows/actions/saved_actions/
 description: 작업과 파라미터를 저장 및 재사용
 disable_sidebar: false
 disable_toc: false

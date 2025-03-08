@@ -1,6 +1,6 @@
 ---
 aliases:
-- /logs/explorer/insights
+- /fr/logs/explorer/insights
 description: Sachez précisément où regarder pour commencer ou poursuivre vos enquêtes
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/

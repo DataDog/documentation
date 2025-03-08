@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/guide/semantic_mapping/
+- /es/opentelemetry/guide/semantic_mapping/
 further_reading:
 - link: /opentelemetry/guide/metrics_mapping
   tag: Documentación

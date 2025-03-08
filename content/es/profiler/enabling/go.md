@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/go/
+- /es/tracing/profiler/enabling/go/
 code_lang: go
 code_lang_weight: 30
 further_reading:

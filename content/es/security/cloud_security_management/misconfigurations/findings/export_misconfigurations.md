@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security/misconfigurations/findings/export_misconfigurations
+- /es/security/misconfigurations/findings/export_misconfigurations
 further_reading:
 - link: security/default_rules
   tag: Documentación

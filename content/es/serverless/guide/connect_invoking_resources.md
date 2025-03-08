@@ -1,6 +1,6 @@
 ---
 aliases:
-- /serverless/troubleshooting/connect_invoking_resources/
+- /es/serverless/troubleshooting/connect_invoking_resources/
 title: Mayor visibilidad de los recursos que invocan funciones de Lambda
 ---
 

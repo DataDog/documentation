@@ -1,10 +1,10 @@
 ---
 aliases:
-- /developers/faq/reduce-submission-rate
-- /developers/faq/why-is-my-counter-metric-showing-decimal-values
-- /developers/faq/dog-statsd-sample-rate-parameter-explained
-- /developers/metrics/dogstatsd_metrics_submission/
-- /metrics/dogstatsd_metrics_submission
+- /ko/developers/faq/reduce-submission-rate
+- /ko/developers/faq/why-is-my-counter-metric-showing-decimal-values
+- /ko/developers/faq/dog-statsd-sample-rate-parameter-explained
+- /ko/developers/metrics/dogstatsd_metrics_submission/
+- /ko/metrics/dogstatsd_metrics_submission
 description: '애플리케이션에서 직접 커스텀 메트릭을 제출합니다. '
 further_reading:
 - link: /developers/dogstatsd/

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /monitors/guide/as-count-monitor-evaluation
+- /ko/monitors/guide/as-count-monitor-evaluation
 title: 모니터 평가에서의 as_count()
 ---
 

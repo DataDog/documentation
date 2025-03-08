@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/java/
+- /es/tracing/profiler/enabling/java/
 code_lang: java
 code_lang_weight: 10
 further_reading:

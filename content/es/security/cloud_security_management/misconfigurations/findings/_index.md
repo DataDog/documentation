@@ -1,9 +1,9 @@
 ---
 aliases:
-- /security_platform/findings
-- /security_platform/cspm/findings
-- /security/cspm/findings
-- /security/misconfigurations/findings
+- /es/security_platform/findings
+- /es/security_platform/cspm/findings
+- /es/security/cspm/findings
+- /es/security/misconfigurations/findings
 further_reading:
 - link: security/default_rules
   tag: Documentación
