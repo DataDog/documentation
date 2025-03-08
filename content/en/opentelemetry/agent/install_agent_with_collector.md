@@ -11,6 +11,10 @@ further_reading:
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
