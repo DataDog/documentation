@@ -47,13 +47,13 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 ## Configuration of multiple metrics 
 
-Clicking on **Configure Metrics** gives you multiple options that you can use to configure more than one metric at a time: 
+Clicking **Configure Metrics** gives you multiple options to configure more than one metric at a time: 
 
 {{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
 * **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
-{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+{{< img src="metrics/summary/tags-bulk-config.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
