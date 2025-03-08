@@ -69,7 +69,6 @@ If you are an organization administrator, reference the additional documentation
 * [Manage multi-organization accounts][7]
 * [Change your Datadog plan and view usage and billing history][8]
 
-
 ### Security
 
 #### Application keys
@@ -91,7 +90,7 @@ Verify your email address to enhance account security and access additional mana
 - **Password-based users**: Verify their email when setting their password for the first time.
 
 #### Benefits of email verification
-Once verified, you gain access to:
+After verified, you gain access to:
 - The ability to **revoke all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of their current org hierarchy.
 
