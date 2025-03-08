@@ -133,6 +133,7 @@ The following services are supported:
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 <div class="alert alert-info">To request support for additional services, open a feature request with the <a href="/help/">Datadog Support</a> team.</div>
 
