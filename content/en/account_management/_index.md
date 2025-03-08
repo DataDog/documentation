@@ -81,6 +81,21 @@ The [Apps tab][14] in **Personal Settings** allows you to manage apps that have 
 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
 
+#### Revoke All Active Sessions
+You can revoke all active web sessions across devices from your Profile Settings. This logs you out of all current sessions, including the one you're using.
+
+##### Who can use this feature?
+This feature is only available if you've verified your email. To verify your email, follow the steps in How to Verify Your Email.
+
+#### How to revoke all active sessions:
+- Go to Personnal Settings.
+- Click Log Out of All Web Sessions.
+- Confirm the action.
+
+After confirming, you are logged out from all devices and need to log back in.
+
+Use this feature to secure your account and immediately end all active sessions if you suspect unauthorized access.
+
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
