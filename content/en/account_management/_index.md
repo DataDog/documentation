@@ -70,7 +70,7 @@ If you are an organization administrator, reference the additional documentation
 * [Change your Datadog plan and view usage and billing history][8]
 
 ### Email verification
-Verify your email addresses to enhance account security and provide access to additional management features. Verified users have more control over their account security and organizational visibility.
+Verify your email addresses to enhance account security and access additional management features. Verified users have more control over their account security and organizational visibility.
 
 #### Who needs to verify their email?
 - **SAML users**: Must manually verify their email through Datadog.
