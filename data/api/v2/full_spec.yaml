@@ -28471,6 +28471,10 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          description: Track of logs events.
+          example: logs
+          type: string
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
