@@ -28,6 +28,8 @@ further_reading:
 
 Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without requiring you to install the Datadog Agent. Datadog recommends enabling Agentless Scanning as a first step to gain complete visibility into your cloud resources, and then installing the Datadog Agent on your core assets over time for deeper security and observability context.
 
+<div class="alert alert-warning"><strong>Note</strong>: For Amazon Machine Images (AMIs), Agentless Scanning scans only those images associated with running instances. It does not scan private AMIs stored in external AWS accounts.</div>
+
 ## Availability
 
 The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
