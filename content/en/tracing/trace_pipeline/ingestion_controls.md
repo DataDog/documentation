@@ -191,7 +191,7 @@ With remote configuration, you don't have to restart the Agent to update these p
 
 ### Sampling precedence rules
 
-If sampling rules are set in multiple locations, the following precedence rules apply in order, where rules that appear first on the list can override lower precedence rules:
+If sampling rules are set for the root span ([head-based sampling][4]) in multiple locations, the following precedence rules apply in order, where rules that appear first on the list can override lower precedence rules:
 
 1. Remotely configured sampling rules, set through [resource-based sampling](#configure-the-service-ingestion-rates-by-resource)
 1. [Adaptive sampling rules][17]
