@@ -182,7 +182,7 @@ Use `exclude-categories` to exclude specific categories. This option can be used
 {{% tab "YAML" %}}
 
 ```yaml
-exclude-queries:
+exclude-categories:
   - "Access control"
   - "Best Practices"
 ```
@@ -191,7 +191,7 @@ exclude-queries:
 {{% tab "JSON" %}}
 
 ```json
-"exclude-queries": [
+"exclude-categories": [
      "Access control",
      "Best Practices"
 ]
@@ -201,14 +201,14 @@ exclude-queries:
 {{% tab "TOML" %}}
 
 ```
-exclude-queries = [ "Access control", "Best Practices" ]
+exclude-categories = [ "Access control", "Best Practices" ]
 ```
 
 {{% /tab %}}
 {{% tab "HCL" %}}
 
 ```
-"exclude-queries" = ["Access control", "Best Practices"]
+"exclude-categories" = ["Access control", "Best Practices"]
 ```
 
 {{% /tab %}}
@@ -249,7 +249,7 @@ resource "aws_s3_bucket" "example" {
 Excludes scan results for the specified queries in this file. This comment must be placed at the beginning of the file to take effect.
 
 ```
-# dd-iac-scan enable=e592a0c5-5bdb-414c-9066-5dba7cdea370
+# dd-iac-scan disable=e592a0c5-5bdb-414c-9066-5dba7cdea370,e69890e6-fce5-461d-98ad-cb98318dfc96
 
 resource "aws_s3_bucket" "example" {
   bucket = "my-tf-test-bucket"
@@ -266,7 +266,7 @@ Limits scan results in this file to only the specified queries. This comment mus
 
 
 ```
-# dd-iac-scan disable=e592a0c5-5bdb-414c-9066-5dba7cdea370,e69890e6-fce5-461d-98ad-cb98318dfc96
+# dd-iac-scan enable=e592a0c5-5bdb-414c-9066-5dba7cdea370
 
 resource "aws_s3_bucket" "example" {
   bucket = "my-tf-test-bucket"
