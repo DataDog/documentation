@@ -41,7 +41,7 @@ To create a detection rule in Datadog, navigate to the [Detection Rules page][1]
 
 ## Detection mechanism
 
-Select **Real-Time Rule** to analyze all incoming logs or Audit Trail events. Select **Historical job** if you want to execute an one-time search job. See [Historical Jobs][5] for more information.
+Select whether you want to generate security signals from a **Real-Time Rule** or a **Historical job**. See [Historical Jobs][5] for more information on the one-time search job for historical logs or Audit Trail.
 
 ## Detection methods
 
