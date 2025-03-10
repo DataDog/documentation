@@ -211,7 +211,7 @@ To enable Cloud Network Monitoring for Windows hosts:
 {{% tab "Kubernetes" %}}
 
 To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:**Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
+**Note:** Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
