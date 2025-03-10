@@ -71,7 +71,7 @@ IMDSv2, in its default configuration, refuses connections with an IP hop count g
 
 #### Agent versions before 7.64.0
 
-In some situations, the of EC2 [IMDSv2][5] configuration may make it impossible for the Agent to access the necessary metadata. This can cause the Agent to fall back to the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
+In some situations, the EC2 [IMDSv2][5] configuration may make it impossible for the Agent to access the necessary metadata. This can cause the Agent to fall back to the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
 
 The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, but IMDSv2 is enabled and accessible, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][6]. See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
 
