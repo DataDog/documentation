@@ -15,6 +15,8 @@ aliases:
     - /serverless/installation/java
 ---
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`), Java 17 (`java17`), or Java 21 (`java21`) runtimes with at least 1024 MB of memory.
 
 If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
@@ -24,6 +26,8 @@ If you previously set up your Lambda functions using the Datadog Forwarder, see 
 If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the [special instructions to upgrade][10].
 
 ## Installation
+
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/java">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
@@ -273,7 +277,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.3.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -283,7 +287,7 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 58
+  datadog_extension_layer_version = 67
   datadog_java_layer_version = 15
 
   # aws_lambda_function arguments
@@ -309,7 +313,7 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Java Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 58
+  datadog_extension_layer_version = 67
   datadog_java_layer_version = 15
 ```
 
@@ -365,6 +369,17 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][12] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][13] and tagging your issue with `version/next`.
+
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
@@ -393,3 +408,5 @@ module "lambda-datadog" {
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
 [11]: /security/application_security/serverless/
+[12]: https://github.com/DataDog/datadog-lambda-extension
+[13]: https://github.com/DataDog/datadog-lambda-extension/issues

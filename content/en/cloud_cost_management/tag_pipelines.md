@@ -12,23 +12,21 @@ further_reading:
   text: "Learn about Reference Tables"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 ## Overview
 
 To effectively monitor cloud costs, you need a comprehensive understanding of how various services, teams, and products contribute to your overall spending. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
 
 With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking.
 
+Tag pipelines are applied to Cloud Cost metrics from all providers. Tag pipelines are not applied to Cloud Cost Recommendations.
+
 ## Create a ruleset
 
 <div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
-Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**. 
+Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**.
 
-Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom. 
+Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom.
 
 {{< img src="cloud_cost/tags_order.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:80%;" >}}
 
@@ -60,7 +58,7 @@ To ensure the rule only applies if the `application` tag doesn't already exist, 
 
 Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
 
-For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. 
+For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags.
 
 {{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" style="width:60%;" >}}
 
@@ -68,7 +66,7 @@ Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each 
 
 ## Reserved tags
 
-Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines. 
+Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines.
 
 Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
 

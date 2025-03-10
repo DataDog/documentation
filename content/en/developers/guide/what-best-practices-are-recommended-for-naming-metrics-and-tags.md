@@ -20,6 +20,7 @@ Naming convention is an art and possibly one of the most difficult decisions to 
 * Maintain consistency across all teams, apps, and services.
 * Avoid reserved keywords that might cause clashes with the other tags or metrics.
 * In the case of metrics, prefix them with a namespace depicting the application or service generating the data.
+* Avoid the use of personal and sensitive data of any kind. 
 
 ## Rules and best practices for naming metrics
 

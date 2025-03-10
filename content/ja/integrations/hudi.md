@@ -19,7 +19,7 @@ assets:
     source_type_id: 10217
     source_type_name: Hudi
   monitors:
-    commit_duration: assets/monitors/commit_duration.json
+    Commit duration is high: assets/monitors/commit_duration.json
   saved_views:
     hudi_error_logs: assets/saved_views/error_logs.json
     hudi_overview: assets/saved_views/hudi_overview.json
@@ -31,7 +31,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
 display_on_public_website: true
@@ -39,7 +39,7 @@ draft: false
 git_integration_title: hudi
 integration_id: hudi
 integration_title: Hudi
-integration_version: 2.3.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: hudi

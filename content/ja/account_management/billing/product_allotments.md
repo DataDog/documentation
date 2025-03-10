@@ -145,7 +145,7 @@ Ingested Span のデフォルトの使用量集計関数は合計であるため
 | Profiled Containers | APM Enterprise、Continuous Profiler    |   N/A        | 合計   |
 | Profiled Hosts        | APM Enterprise       | HWMP   | 合計     |
 | CI Indexed Spans    | CI Visibility         | 合計     | 合計   |      
-| Test Indexed Spans    | Test Visibility         | 合計   | 合計   |               
+| Test Indexed Spans    | テストの最適化         | 合計   | 合計   |               
 | APM インデックス化スパン | APM、APM Pro、APM Enterprise、Serverless APM、</br> Legacy - Serverless Invocations、</br> Legacy - Serverless Functions、Fargate Task (APM Pro)、</br> Fargate Task (APM Enterprise) | 合計 | 合計 |
 | APM 取り込みスパン | APM、APM Pro、APM Enterprise </br> Serverless APM、Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro)、Fargate Task (APM Enterprise) | 合計 | 合計 | 
 | DBM Normalized Queries | Database Monitoring (DBM) | 平均 | 平均 |

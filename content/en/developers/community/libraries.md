@@ -39,7 +39,6 @@ Using Datadog [APIs][4], it's possible to write a script to backup your Dashboar
 | Language   | Library          | Author          |
 |------------|------------------|-----------------|
 | JavaScript | [dog-watcher][5] | [Brightcove][6] |
-| Ruby       | [doggy][7]       | [Shopify][8]    |
 | Ruby       | [kennel][9]      | [Zendesk][10]    |
 
 ### Managing monitors
@@ -48,10 +47,7 @@ There are multiple community projects available to maintain, manage, or backup m
 
 | Language  | Library          | Author               |
 |-----------|------------------|----------------------|
-| Python    | [DogPush][11]              | [TrueAccord][12]     |
-| Ruby      | [barkdog][13]              | [codenize-tools][14] |
 | Ruby      | [interferon][15]           | [Airbnb][16]         |
-| Ruby      | [dogwatch][17]             | [Rapid7][18]         |
 | Terraform | [Terraform][19]            | [Terraform][20]      |
 | Terraform | [datadog-to-terraform][21] | [Intercom][22]       |
 
@@ -63,7 +59,7 @@ In addition to the official Ansible integration, the [monitoring section][23] of
 
 ### Aptible
 
-Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
+The Aptible platform can deliver container logs and metrics to a Datadog account. Consult the [Aptible help center][25] for details.
 
 ### CLI management
 
@@ -83,10 +79,7 @@ This is for a [FreeSwitch ESL][30] application to export statistics to Datadog u
 
 ### Heroku
 
-Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
-
-* [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
-* [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
+To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
 
 To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
@@ -104,10 +97,6 @@ A [LaunchDarkly][41] webhook handler that records changes as Datadog events.
 
 * [Logstash output for Datadog][42]
 * [Logstash output for DogStatsD][43]
-
-### Moogsoft
-
-A Moogsoft [listener][44] that ingests Datadog notifications.
 
 ### NGINX LUA
 
@@ -164,35 +153,24 @@ If you've written a Datadog library and would like to add it to this page, send 
 [4]: /api/
 [5]: https://github.com/brightcove/dog-watcher
 [6]: https://www.brightcove.com
-[7]: https://github.com/Shopify/doggy
-[8]: https://www.shopify.com
 [9]: https://github.com/grosser/kennel
 [10]: https://www.zendesk.com
-[11]: https://github.com/trueaccord/DogPush
-[12]: https://github.com/trueaccord
-[13]: https://github.com/codenize-tools/barkdog
 [14]: https://github.com/codenize-tools
 [15]: https://github.com/airbnb/interferon
 [16]: https://github.com/airbnb
-[17]: https://github.com/rapid7/dogwatch
-[18]: https://github.com/rapid7
 [19]: https://www.terraform.io/docs/providers/datadog/r/monitor.html
 [20]: https://www.terraform.io
 [21]: https://github.com/intercom/datadog-to-terraform
 [22]: https://github.com/intercom
 [23]: https://docs.ansible.com/ansible/2.9/modules/list_of_monitoring_modules.html
 [24]: https://github.com/ansible/ansible-modules-extras
-[25]: https://www.aptible.com/documentation/enclave/reference/metrics/metric-drains/datadog.html
+[25]: https://www.aptible.com/docs/core-concepts/integrations/datadog
 [27]: https://github.com/keirans/datadog-management
 [28]: https://github.com/zendesk/consul2dogstats
 [29]: https://github.com/cvent/dogscaler
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
 [34]: /logs/guide/collect-heroku-logs/
-[35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://oz.com/
-[37]: https://github.com/apiaryio/heroku-datadog-drain-golang
-[38]: https://apiary.io
 [40]: https://grafana.com/docs/k6/latest/results-output/real-time/datadog/
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html

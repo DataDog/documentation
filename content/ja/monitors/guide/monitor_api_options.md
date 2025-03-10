@@ -6,21 +6,21 @@ title: モニター API オプション
 
 - **`silenced`** スコープからタイムスタンプへの辞書または `null`。各スコープは、指定された POSIX タイムスタンプまで、または値が `null` の場合は無制限にミュートされます。デフォルト: **null** 例:
 
-  - To mute the alert completely: `{'*': null}`
+  - アラートを完全にミュートするには: `{'*': null}`
   - しばらくの間 `role:db` をミュートするには: `{'role:db': 1412798116}`
 
 - **`new_group_delay`** 新しく作成されたアプリケーションまたはコンテナを完全に開始できるようにするための、新しいグループのアラートを開始するまでの時間 (秒単位)。負でない整数である必要があります。デフォルト: **60**。例: コンテナ化されたアーキテクチャーを使用している場合、評価遅延を設定すると、新しいコンテナが作成されたときにモニターのグループ化コンテナがトリガーされなくなり、最初の数分間にレイテンシーや CPU 使用率の急上昇が発生する可能性があります。
 
 - **`new_host_delay`** モニター結果の評価を開始する前に、ホストがブートし、アプリケーションが完全に起動するまで待つ時間 (秒単位)。負でない整数である必要があります。**非推奨: 代わりに `new_group_delay` を使用してください**。
 
-- **`notify_no_data`** a boolean indicating whether this monitor notifies when data stops reporting. Default: **False**.
+- **`notify_no_data`** データが報告を停止したことをこのモニターが通知するかどうかを示すブール値。デフォルト: **False**
 - **`no_data_timeframe`** データが報告を停止してから何分後にモニターが通知を行うかを定める分数。Datadog では、メトリクスアラートの場合は少なくともモニタータイムフレームの 2 倍、サービスのチェックの場合は少なくとも 2 分に設定するよう推奨しています。**省略した場合、メトリクスアラートには評価タイムフレームの 2 倍、サービスチェックには 24 時間が設定されます。**
 - **`timeout_h`** データを報告していないモニターが、トリガーされた状態から自動的に回復するまでの時間数。最小許容値は 0 時間、最大許容値は 24 時間です。デフォルト: **null**。
 
 -  **`require_full_window`** このモニターがウィンドウ全体のデータを取得するまで評価を行わないかどうかを示すブール値。疎なメトリクスの場合は `False` に設定することをお勧めします。そうしないと、一部の評価がスキップされます。デフォルト: **False**
 - **`renotify_interval`** モニターが最後に通知してから現在のステータスを再通知するまでの分数。これは、回復していないことを再通知するだけです。デフォルト: **null**。
 - **`renotify_statuses`** モニターが再通知する状態。デフォルト: `renotify_interval` が **null** の場合は *null*。`renotify_interval` が設定されている場合、デフォルトは `Alert` と `No Data` で再通知します。
-- **`renotify_occurrences`** the number of times a monitor re-notifies. It can only be set if `renotify_interval` is set. Default: **null**, it renotifies without a limit.
+- **`renotify_occurrences`** モニターが再通知する回数。`renotify_interval` が設定されている場合にのみ設定できます。デフォルト: **null**、無制限に再通知します。
 - **`escalation_message`** 再通知に含めるメッセージ。他の場所と同様に '@username' 通知をサポートします。`renotify_interval` が `null` の場合は適用されません。デフォルト: **null**。
 - **`notify_audit`** タグ付けされたユーザーに、このモニターへの変更が通知されるかどうかを示すブール値。デフォルト: **False**
 - **`include_tags`** このモニターからの通知のタイトルに、トリガーしているタグを自動的に挿入するかどうかを示すブール値。デフォルト: **True** 例:
@@ -30,17 +30,9 @@ title: モニター API オプション
 
 ### 権限オプション
 
-- **`locked`** このモニターへの変更を、作成者または組織管理 (`org_management`) 権限を持つユーザーに制限するかどうかを示すブール値。デフォルト: **False**。**非推奨: 代わりに `restricted_roles` を使用してください**。
-- **`restricted_roles`** モニターの編集が許可されているロールの UUID をリストアップした配列。モニターの編集には、モニター構成の更新、モニターの削除、任意の時間でのモニターのミュートが含まれます。ロールの UUID は、[Roles API][1] から取得することができます。`restricted_roles` は `locked` の後継です。
+- **`restricted_roles`** モニターの編集が許可されているロールの UUID をリストアップした配列。モニターの編集には、モニター構成の更新、モニターの削除、任意の時間でのモニターのミュートが含まれます。ロールの UUID は、[Roles API][1] から取得することができます。
 
-**注:** 同じモニターに `locked` と `restricted_roles` の両方のパラメーターを設定しないでください。両方が設定された場合、より制限の強いパラメーターが適用されます。`restricted_roles` に設定されたロールは、`locked:true` よりも制限されているとみなされます。
-
-以下の例では、`locked` と `restricted_roles` パラメーターがどのように相互作用するかを示しています。
-- モニターが `locked:false` および `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]` に設定されている場合、`restricted_roles` パラメーターが適用されます。
-- モニターが `locked:true` および `"restricted_roles": [ "er6ec1b6-903c-15ec-8686-da7fd0960002" ]` に設定されている場合、`restricted_roles` パラメーターが適用されます。
-- モニターに `locked:true` が設定され、かつ `"restricted_roles"` パラメーターが設定されていない場合、`locked:true` パラメーターが適用されます。
-
-モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[専用ガイド][2]をご参照ください。
+**注:** [制限ポリシー][5]を使用して、ロールに加えて、[Teams][4] およびユーザーに基づいてモニターの権限を設定できるようになりました。モニターの権限制限の詳細については、[専用ガイド][2]を参照してください。
 
 ## 異常値のオプション
 
@@ -91,3 +83,5 @@ _これらのオプションはログアラートにのみ適用されます。_
 [1]: /ja/api/latest/roles/
 [2]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
 [3]: /ja/monitors/guide/recovery-thresholds/
+[4]: /ja/account_management/teams/
+[5]:/ja/api/latest/restriction-policies/

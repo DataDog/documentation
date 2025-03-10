@@ -17,14 +17,14 @@ assets:
     source_type_id: 10141
     source_type_name: PHP OPcache
   monitors:
-    '[php_opcache] Cache Full has been detected': assets/monitors/php-opcache_expunges.json
+    OPcache is full: assets/monitors/php-opcache_expunges.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md
 display_on_public_website: true

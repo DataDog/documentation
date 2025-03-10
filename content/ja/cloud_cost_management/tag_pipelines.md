@@ -12,9 +12,6 @@ further_reading:
 title: タグパイプライン
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -26,9 +23,9 @@ With [Tag Pipelines][1], you can create tag rules to address missing or incorrec
 
 <div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
-Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**. 
+Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**.
 
-Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom. 
+Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom.
 
 {{< img src="cloud_cost/tags_order.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:80%;" >}}
 
@@ -60,7 +57,7 @@ To ensure the rule only applies if the `application` tag doesn't already exist, 
 
 [リファレンステーブル][2]を使用すると、複数のルールを作成することなく、コストデータに複数のタグを追加できます。これにより、リファレンステーブルのプライマリキー列の値がコストタグの値にマップされます。見つかった場合、パイプラインは選択したリファレンステーブルの列をタグとしてコストデータに追加します。
 
-For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. 
+For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags.
 
 {{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" style="width:60%;" >}}
 
@@ -68,7 +65,7 @@ Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each 
 
 ## Reserved tags
 
-Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines. 
+Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines.
 
 Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
 

@@ -29,7 +29,7 @@ categories:
 - data stores
 - キャッシュ
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: hazelcast
 integration_id: hazelcast
 integration_title: Hazelcast
-integration_version: 3.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: hazelcast

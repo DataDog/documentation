@@ -26,7 +26,7 @@ Watchdog RCA는 분석에서 다음과 같은 데이터 소스를 고려합니�
 
 ## Watchdog 근본 원인 분석의 구성 요소
 
-{{< img src="watchdog/rca/root_cause.png" alt="근본 원인, 심각한 오류 및 영향을 보여주는 Watchdog 근본 원인 분석">}}
+{{< img src="watchdog/rca/root_cause_cropped.png" alt="Watchdog Root Cause Analysis showing Root Cause, Critical Failure, and Impact">}}
 
 Watchdog 근본 원인 분석에는 근본 원인, 심각한 오류 및 영향 등 세 가지 구성 요소가 포함됩니다.
 
@@ -38,7 +38,7 @@ Watchdog은 다음 네 가지 유형의 근본 원인을 지원합니다.
 
 * APM 배포 추적에서 캡처한 버전 변경
 * APM 계측 서비스의 적중률 메트릭에 캡처된 트래픽 증가
-* AWS EC2 통합 메트릭에서 캡처한 AWS 인스턴스 오류
+* Amazon EC2 통합 메트릭에서 캡처한 AWS 인스턴스 실패
 * Datadog 에이전트의 시스템 메트릭에서 캡처한 디스크 공간 부족
 
 Watchdog은 더 높은 레이턴시 또는 새로운 오류와 같은 애플리케이션 성능 저하를 인시던트의 근본 원인으로 분류하지 않습니다. Datadog은 애플리케이션 성능 저하의 초기 증상을 아래에 설명된 대로 **심각한 오류**라고 부릅니다.

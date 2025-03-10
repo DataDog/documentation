@@ -48,6 +48,17 @@ Set up the Amazon S3 destination and its environment variables when you [set up 
 
 {{% observability_pipelines/destination_env_vars/datadog_archives_amazon_s3 %}}
 
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][4] for more information.
+
+| Max Events     | Max Bytes       | Timeout (seconds)   |
+|----------------| ----------------| --------------------|
+| None           | 100,000,000     | 900                 |
+
 [1]: /observability_pipelines/archive_logs/
 [2]: /logs/log_configuration/archives/
 [3]: /integrations/amazon_web_services/#setup
+[4]: /observability_pipelines/destinations/#event-batching

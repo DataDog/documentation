@@ -16,7 +16,10 @@ ELB、RDS、DynamoDB などの他の AWS リソースは、インフラストラ
 
 ## AWS リソースの除外
 
-一部のサービスに対して収集する AWS メトリクスを、特定のリソースに限定することができます。[Datadog-AWS インテグレーションページ][3]で、AWS アカウントを選択し、**Metric Collection** タブをクリックします。次に、**Limit Metric Collection to Specific Resources** で、EC2、Lambda、ELB、Application ELB、Network ELB、RDS、SQS、CloudWatch カスタムメトリクスのうち 1 つまたは複数に対するメトリクスを除外することが可能です。
+一部のサービスに対して収集する AWS メトリクスを、特定のリソースに限定することができます。[Datadog-AWS インテグレーションページ][3]で、AWS アカウントを選択し、**Metric Collection** タブをクリックします。次に、**Limit Metric Collection to Specific Resources** で、EC2、Lambda、ELB、Application ELB、Network ELB、RDS、SQS、Step Functions、CloudWatch カスタムメトリクスのうち 1 つまたは複数に対するメトリクスを制限することが可能です。
+このセクションに追加されたタグが、AWS 上の該当するリソースに正しく割り当てられていることを確認してください。
+
+**注**: 除外記法 (`!`) を使用する場合は、リソースが指定したタグを含まないことを確認してください。
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="Datadog AWS インテグレーションページ内の AWS アカウントのメトリクス収集タブ。AWS サービスを選択するドロップダウンメニューと key:value 形式でタグを追加するフィールドで、特定のリソースにメトリクス収集を制限するオプションが表示されている" >}}
 

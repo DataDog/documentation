@@ -27,6 +27,8 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview
@@ -107,7 +109,7 @@ Datadog integrations and log collection are tied together. You can use an integr
 
 ## Reduce data transfer fees
 
-Use Datadog's [Network Performance Monitoring][7] to identify your organization’s highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
 
 For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
 
@@ -117,7 +119,7 @@ For more information, see [How to send logs to Datadog while reducing data trans
 [4]: /agent/kubernetes/log/#autodiscovery
 [5]: /agent/docker/log/#log-integrations
 [6]: /integrations/#cat-log-collection
-[7]: /network_monitoring/performance/
+[7]: /network_monitoring/cloud_network_monitoring/
 [8]: /cloud_cost_management/
 [9]: /logs/guide/reduce_data_transfer_fees/
  
@@ -206,7 +208,7 @@ Use the [site][13] selector dropdown on the right side of the page to see suppor
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
 
 [1]: /api/latest/logs/#send-logs
 [2]: /agent/logs/#send-logs-over-https
@@ -264,6 +266,7 @@ Your payload, or `Log sent directly using TLS` as written in the example, can be
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /account_management/api-app-keys/#api-keys
 
@@ -326,6 +329,8 @@ The TCP endpoint is not supported for this site.
 * Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
+
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 ### Attributes and tags
 

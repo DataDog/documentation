@@ -5,7 +5,7 @@ algolia:
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: Blog
-  text: Presentación del Real User Monitoring de Datadog
+  text: Presentación del Real User Monitoring (RUM) de Datadog
 - link: /real_user_monitoring/explorer/
   tag: Documentación
   text: Explorar tus vistas en Datadog
@@ -44,7 +44,7 @@ El SDK del RUM Browser realiza un rastreo automático de los clics. Se crea una 
 
 ## Métricas del tiempo de acción
 
-Para obtener información sobre los atributos por defecto para todos los tipos de eventos de RUM, consulta [Datos de RUM Browser recopilados][3].
+Para obtener información sobre los atributos predeterminados para todos los tipos de eventos de RUM, consulta [Datos de RUM Browser recopilados][3].
 
 | Métrica    | Tipo   | Descripción              |
 |--------------|--------|--------------------------|
@@ -124,4 +124,4 @@ Para más información, consulta [Enviar acciones personalizadas][5].
 [3]: /es/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /es/real_user_monitoring/guide/send-rum-custom-actions
-[6]: /es/real_user_monitoring/session_replay/privacy_options#mask-action-names
+[6]: /es/data_security/real_user_monitoring/#mask-action-names

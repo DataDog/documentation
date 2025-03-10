@@ -8,38 +8,37 @@ aliases:
 further_reading:
 - link: /serverless/installation/
   tag: Documentación
-  text: Instalar la monitorización serverless para AWS Lambda
+  text: Instalar Serverless Monitoring para AWS Lambda
 - link: /serverless/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas relacionados con la monitorización serverless para AWS
-    Lambda
+  text: Solucionar problemas relacionados con Serverless Monitoring para AWS Lambda
 - link: /integrations/github
   tag: Documentación
   text: Integración de GitHub para Datadog
-title: Configurar la monitorización serverless para AWS Lambda
+title: Configurar Serverless Monitoring para AWS Lambda
 ---
 
 Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar métricas, trazas (traces) y logs. Cuando la instalación se complete, consulta los siguientes temas y configura la instalación según tus necesidades de monitorización.
 
-- [Conectar la telemetría mediante etiquetas](#connect-telemetry-using-tags)
+- [Conectar la telemetría mediante etiquetas (tags)](#connect-telemetry-using-tags)
 - [Recopilar las cargas útiles de solicitud y respuesta](#collect-the-request-and-response-payloads)
 - [Recopilar trazas procedentes de recursos distintos de Lambda](#collect-traces-from-non-lambda-resources)
 - [Configurar el rastreador de Datadog](#configure-the-datadog-tracer)
-- [Seleccionar las frecuencias de muestreo para la ingesta de tramos de APM](#select-sampling-rates-for-ingesting-apm-spans)
+- [Seleccionar las frecuencias de muestreo para la ingesta de tramos (spans) de APM](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filtrar o borrar información confidencial de las trazas](#filter-or-scrub-sensitive-information-from-traces)
 - [Habilitar y deshabilitar la recopilación de trazas](#enabledisable-trace-collection)
 - [Conectar logs y trazas](#connect-logs-and-traces)
 - [Vincular errores al código fuente](#link-errors-to-your-source-code)
 - [Enviar métricas personalizadas][27]
-- [Recopilar datos de la creación de perfiles (beta pública)](#collect-profiling-data-public-beta)
+- [Recopilar datos de perfiles](#collect-profiling-data)
 - [Enviar la telemetría a través de PrivateLink o un proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Enviar la telemetría a varias organizaciones de Datadog](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagar el contexto de las trazas en los recursos de AWS](#propagate-trace-context-over-aws-resources)
 - [Fusionar las trazas de X-Ray y Datadog](#merge-x-ray-and-datadog-traces)
 - [Habilitar la firma de código para AWS Lambda](#enable-aws-lambda-code-signing)
-- [Migrar a la extensión Datadog Lambda](#migrate-to-the-datadog-lambda-extension)
-- [Migrar de x86 a arm64 con la extensión Datadog Lambda](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
-- [Configurar la extensión Datadog Lambda para hacer pruebas locales](#configure-the-datadog-lambda-extension-for-local-testing)
+- [Migrar a la Datadog Lambda Extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrar de x86 a arm64 con la Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
+- [Configurar la Datadog Lambda Extension para hacer tests locales](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Instrumentar AWS Lambda con la API de OpenTelemetry](#Instrumentar-AWS-lambda-with-the-opentelemetry-api)
 - [Solucionar problemas](#troubleshoot)
 - [Referencias adicionales](#further-reading)
@@ -47,7 +46,7 @@ Primero, [instala][1] Datadog Serverless Monitoring para comenzar a recopilar m�
 
 ## Habilitar la detección de amenazas para observar los intentos de ataque
 
-Recibe alertas sobre atacantes que tengan como objetivo tus aplicaciones serverless y responde con rapidez. 
+Recibe alertas sobre atacantes que tengan como objetivo tus aplicaciones serverless y responde con rapidez.
 
 Para empezar, asegúrate de tener el [rastreo habilitado][43] para tus funciones.
 
@@ -58,7 +57,7 @@ Para habilitar la monitorización de amenazas, añade las siguientes variables d
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-Vuelve a desplegar la función e invócala. Al cabo de unos minutos, la función aparece en las [vistas de ASM][3].
+Vuelve a desplegar la función e invócala. Al cabo de unos minutos, aparecerá en las [vistas ASM][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
@@ -70,12 +69,12 @@ Unos minutos después de habilitar tu aplicación y enviar los patrones de ataqu
 
 ## Conectar la telemetría mediante etiquetas
 
-Conecta la telemetría de Datadog a través del uso de etiquetas (tags) personalizadas y de etiquetas reservadas (`env`, `service` y `version`). Puedes utilizarlas para navegar fácilmente por métricas, trazas y logs. Añade los parámetros adicionales que se indican a continuación en función de tu método de instalación.
+Conecta la telemetría de Datadog a través del uso de etiquetas personalizadas y de etiquetas reservadas (`env`, `service` y `version`). Puedes utilizarlas para navegar fácilmente por métricas, trazas y logs. Añade los parámetros adicionales que se indican a continuación en función de tu método de instalación.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Asegúrate de usar la última versión de la [CLI de Datadog][1] y ejecuta el comando `datadog-ci lambda instrument` con los argumentos adicionales adecuados. Por ejemplo:
+Asegúrate de usar la última versión de la [Datadog CLI][1] y ejecuta el comando `datadog-ci lambda instrument` con los argumentos adicionales adecuados. Por ejemplo:
 
 ```sh
 datadog-ci lambda instrument \
@@ -90,7 +89,7 @@ datadog-ci lambda instrument \
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-Asegúrate de usar la última versión del [complemento serverless de Datadog][1] y aplica las etiquetas con los parámetros `env`, `service`, `version` y `tags`. Por ejemplo:
+Asegúrate de usar la última versión del complemento [Datadog Serverless Plugin][1] y aplica las etiquetas con los parámetros `env`, `service`, `version` y `tags`. Por ejemplo:
 
 ```yaml
 custom:
@@ -124,9 +123,9 @@ Transform:
 
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/macro
 {{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{% tab "CDK AWS" %}}
 
-Asegúrate de usar la última versión del [constructo del CDK serverless de Datadog][1] y aplica las etiquetas con los parámetros `env`, `service`, `version` y `tags`. Por ejemplo:
+Asegúrate de usar la última versión de la [construcción del CDK serverless de Datadog][1] y aplica las etiquetas con los parámetros `env`, `service`, `version` y `tags`. Por ejemplo:
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -143,13 +142,13 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 {{% /tab %}}
 {{% tab "Others" %}}
 
-Si vas a recopilar la telemetría de tus funciones de Lambda mediante la [extensión Datadog Lambda][1], define las siguientes variables de entorno en tus funciones de Lambda. Por ejemplo:
+Si vas a recopilar la telemetría de tus funciones de Lambda mediante la [Datadog Lambda Extension][1], define las siguientes variables de entorno en tus funciones de Lambda. Por ejemplo:
 - DD_ENV: dev
 - DD_SERVICE: web
 - DD_VERSION: v1.2.3
 - DD_TAGS: team:avengers,project:marvel
 
-Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [función de Lambda del Datadog Forwarder][2], define `env`, `service`, `version` y las etiquetas adicionales como etiquetas de recursos de AWS en tus funciones de Lambda. Asegúrate de que la opción `DdFetchLambdaTags` esté definida como `true` en el stack tecnológico de CloudFormation de tu Datadog Forwarder. De forma predeterminada, el valor de esta opción es true desde la versión 3.19.0.
+Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [Función de Lambda del Datadog Forwarder][2], define `env`, `service`, `version` y las etiquetas adicionales como etiquetas de recursos de AWS en tus funciones de Lambda. Asegúrate de que la opción `DdFetchLambdaTags` esté definida como `true` en el stack tecnológico de CloudFormation de tu Datadog Forwarder. De forma predeterminada, el valor de esta opción es true desde la versión 3.19.0.
 
 [1]: /es/serverless/libraries_integrations/extension/
 [2]: /es/serverless/libraries_integrations/forwarder/
@@ -158,9 +157,9 @@ Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [func
 
 Datadog también puede enriquecer la telemetría recopilada con las etiquetas de recursos de AWS definidas en tus funciones de Lambda con un retraso de unos minutos.
 
-- Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [extensión Datadog Lambda][2], habilita la [integración de AWS para Datadog][3]. Esta característica se creó para enriquecer la telemetría con etiquetas **personalizadas**. Las etiquetas reservadas de Datadog (`env`, `service` y `version`) deben definirse en las variables de entorno correspondientes (`DD_ENV`, `DD_SERVICE` y `DD_VERSION` respectivamente). Las etiquetas reservadas también pueden definirse mediante los parámetros que ofrecen las integraciones de Datadog con las herramientas de desarrollo serverless. Esta característica no es compatible con funciones de Lambda implementadas con imágenes de contenedor.
+- Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [Datadog Lambda Extension][2], habilita la [Integración de AWS para Datadog][3]. Esta característica se creó para enriquecer la telemetría con etiquetas **personalizadas**. Las etiquetas reservadas de Datadog (`env`, `service` y `version`) deben definirse en las variables de entorno correspondientes (`DD_ENV`, `DD_SERVICE` y `DD_VERSION` respectivamente). Las etiquetas reservadas también pueden definirse mediante los parámetros que ofrecen las integraciones de Datadog con las herramientas de desarrollo serverless. Esta característica no es compatible con funciones de Lambda implementadas con imágenes de contenedor.
 
-- Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [función de Lambda del Datadog Forwarder][4], define la opción `DdFetchLambdaTags` como `true` en el stack tecnológico de CloudFormation de tu Datadog Forwarder. De forma predeterminada, el valor de esta opción es true desde la versión 3.19.0.
+- Si quieres recopilar la telemetría de tus funciones de Lambda mediante la [Función de Lambda del Datadog Forwarder][4], define la opción `DdFetchLambdaTags` como `true` en el stack tecnológico de CloudFormation de tu Datadog Forwarder. De forma predeterminada, el valor de esta opción es true desde la versión 3.19.0.
 
 ## Recopilar las cargas útiles de solicitud y respuesta
 
@@ -173,7 +172,7 @@ Esta característica está deshabilitada de forma predeterminada. Sigue las inst
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Asegúrate de usar la última versión de la [CLI de Datadog][1] y ejecuta el comando `datadog-ci lambda instrument` con el argumento adicional `--capture-lambda-payload`. Por ejemplo:
+Asegúrate de usar la última versión de la [Datadog CLI][1] y ejecuta el comando `datadog-ci lambda instrument` con el argumento adicional `--capture-lambda-payload`. Por ejemplo:
 
 ```sh
 datadog-ci lambda instrument \
@@ -185,7 +184,7 @@ datadog-ci lambda instrument \
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-Asegúrate de usar la última versión del [complemento serverless de Datadog][1] y define `captureLambdaPayload` como `true`. Por ejemplo:
+Asegúrate de usar la última versión del [Datadog Serverless Plugin][1] y define `captureLambdaPayload` como `true`. Por ejemplo:
 
 ```yaml
 custom:
@@ -211,9 +210,9 @@ Transform:
 
 [1]: https://docs.datadoghq.com/es/serverless/serverless_integrations/macro
 {{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{% tab "CDK AWS" %}}
 
-Asegúrate de usar la última versión del [constructo del CDK serverless de Datadog][1] y define el parámetro `captureLambdaPayload` como `true`. Por ejemplo:
+Asegúrate de usar la última versión de la [construcción del CDK serverless de Datadog][1] y define el parámetro `captureLambdaPayload` como `true`. Por ejemplo:
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -234,7 +233,7 @@ Define la variable de entorno `DD_CAPTURE_LAMBDA_PAYLOAD` como `true` en tus fun
 
 Para evitar que se envíe a Datadog información confidencial incluida en objetos JSON de solicitud o respuesta, puedes borrar parámetros específicos.
 
-Para hacerlo, añade un archivo `datadog.yaml` nuevo a la misma carpeta del código de tu función de Lambda. Podrás enmascarar los campos en la carga útil de Lambda mediante [el bloque replace_tags][6] de la configuración `apm_config` en `datadog.yaml`:
+Para hacerlo, añade un archivo `datadog.yaml` nuevo a la misma carpeta del código de tu función de Lambda. Podrás enmascarar los campos en la carga útil de Lambda mediante [el bloque replace_tags][6] dentro de los parámetros de `apm_config` en el archivo `datadog.yaml`:
 
 ```yaml
 apm_config:
@@ -281,7 +280,7 @@ DD_APM_REPLACE_TAGS=[
 
 <div class="alert alert-info">En estos momentos, esta característica es compatible con Python, Node.js, Java y .NET.</div>
 
-Datadog puede inferir tramos (spans) de APM en función de los eventos de Lambda entrantes para los recursos gestionados de AWS que activan la función de Lambda. Esto puede ayudarte a visualizar la relación entre los recursos gestionados de AWS e identificar problemas de rendimiento en tus aplicaciones serverless. Consulta [más detalles sobre el producto][12].
+Datadog puede inferir tramos de APM en función de los eventos de Lambda entrantes para los recursos gestionados de AWS que activan la función de Lambda. Esto puede ayudarte a visualizar la relación entre los recursos gestionados de AWS e identificar problemas de rendimiento en tus aplicaciones serverless. Consulta [más detalles sobre el producto][12].
 
 Los siguientes recursos son compatibles en estos momentos:
 
@@ -351,7 +350,9 @@ Para ver qué bibliotecas y marcos instrumenta de forma automática el cliente d
 
 ## Seleccionar las frecuencias de muestreo para la ingesta de tramos de APM
 
-Para gestionar la [frecuencia de muestreo de las invocaciones rastreadas de APM][17] para las funciones serverless, define la variable de entorno `DD_TRACE_SAMPLE_RATE` en una función con un valor entre 0,000 (no se rastrea ninguna invocación de la función de Lambda) y 1,000 (se rastrean todas las invocaciones).
+Para gestionar la [frecuencia de muestreo de las invocaciones rastreadas de APM][17] para las funciones serverless, define la variable de entorno `DD_TRACE_SAMPLING_RULES` en una función con un valor entre 0,000 (no se rastrea ninguna invocación de la función de Lambda) y 1,000 (se rastrean todas las invocaciones).
+
+Nota: El uso de DD_TRACE_SAMPLE_RATE está obsoleto. Utiliza DD_TRACE_SAMPLING_RULES en su lugar. Por ejemplo, si ya has establecido DD_TRACE_SAMPLE_RATE en 0.1, estableceDD_TRACE_SAMPLING_RULES en [{"sample_rate":0.1}] en su lugar.
 
 Las métricas se calculan en función del 100 % del tráfico de la aplicación, y son precisas independientemente de la configuración del muestreo.
 
@@ -371,7 +372,7 @@ Para borrar atributos de trazas por razones de seguridad de los datos, consulta 
 
 ## Habilitar y deshabilitar la recopilación de trazas
 
-La recopilación de trazas a través de la extensión Datadog Lambda está habilitada de forma predeterminada. 
+La recopilación de trazas a través de la Datadog Lambda Extension está habilitada de forma predeterminada.
 
 Si quieres empezar a recopilar las trazas de tus funciones de Lambda, aplica las configuraciones que se indican a continuación:
 
@@ -406,7 +407,7 @@ Transform:
 ```
 
 {{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{% tab "CDK AWS" %}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -459,7 +460,7 @@ Transform:
 ```
 
 {{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{% tab "CDK AWS" %}}
 
 ```typescript
 const datadog = new Datadog(this, "Datadog", {
@@ -502,21 +503,21 @@ Si usas un tiempo de ejecución o un logger personalizado no compatible, sigue e
 
 ## Vincular errores al código fuente
 
-La [integración del código fuente de Datadog][26] te permite vincular tu telemetría (como stack traces) al código fuente de tus funciones de Lambda en los repositorios de Git. 
+La [integración del código fuente de Datadog][26] te permite vincular tu telemetría (como stack traces) al código fuente de tus funciones de Lambda en los repositorios de Git.
 
 Para obtener instrucciones sobre cómo configurar la integración del código fuente en tus aplicaciones serverless, consulta la [sección Integrar información de Git en los artefactos de compilación][101].
 
 [101]: /es/integrations/guide/source-code-integration/?tab=go#serverless
 
-## Recopilar datos de la creación de perfiles (beta pública)
+## Recopilar datos de perfiles
 
-[Continuous Profiler][42] de Datadog está disponible en versión beta para Python en la versión 4.62.0 y la versión de capa 62 y anteriores. Esta característica opcional se habilita mediante la definición de la variable de entorno `DD_PROFILING_ENABLED` como `true`.
+El [Continuous Profiler][42] de Datadog está disponible en Vista Previa para Python versión 4.62.0 y para la capa versión 62 y anteriores. Esta función opcional se activa configurando la variable de entorno `DD_PROFILING_ENABLED` como `true`.
 
 Continuous Profiler genera un subproceso que toma periódicamente una snapshot de la CPU y el montículo de todo el código de Python en ejecución. Esto puede incluir el propio generador de perfiles. Si quieres que el generador de perfiles se ignore a sí mismo, define `DD_PROFILING_IGNORE_PROFILER` como `true`.
 
 ## Enviar la telemetría a través de PrivateLink o un proxy
 
-La extensión Datadog Lambda necesita acceder a la red pública de Internet para enviar datos a Datadog. Si tus funciones de Lambda están desplegadas en una VPC sin acceso a una red pública, puedes [enviar datos a través de AWS PrivateLink][28] al [sitio de Datadog][29] `datadoghq.com` o [a través de un proxy][30] para el resto de los sitios.
+La Datadog Lambda extension necesita acceder a la red pública de Internet para enviar datos a Datadog. Si tus funciones de Lambda están desplegadas en una VPC sin acceso a una red pública, puedes [enviar datos a través de AWS PrivateLink][28] al [sitio de Datadog][29] `datadoghq.com` o [a través de un proxy][30] para cualquier otro sitio.
 
 Si usas el Datadog Forwarder, sigue estas [instrucciones][31].
 
@@ -530,14 +531,14 @@ Si quieres enviar datos a varias organizaciones, puedes habilitar el envío múl
 Puedes habilitar el envío múltiple con una clave de API de texto sin formato al configurar las siguientes variables de entorno en tu función de Lambda.
 
 ```bash
-# Habilitar el envío múltiple para métricas
+# Habilitar el envío doble para métricas
 DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
-# Habilitar el envío múltiple para APM (trazas)
+# Habilitar el envío doble para APM (trazas)
 DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
-# Habilitar el envío múltiple para APM (creación de perfiles)
+# Habilitar el envío doble para APM (perfilado)
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
-# Habilitar el envío múltiple para logs
-DD_LOGS_CONFIG_USE_HTTP=true
+# Habilitar el envío doble para logs
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
 ```
 
@@ -546,7 +547,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 
 La extensión de Datadog es compatible con la recuperación automática de valores de [AWS Secrets Manager][1] para cualquier variable de entorno con el prefijo `_SECRET_ARN`. Puedes utilizar esta estrategia para almacenar de forma segura tus variables de entorno en Secrets Manager y aprovechar la característica de envío múltiple de Datadog.
 
-1. Define la variable de entorno `DD_LOGS_CONFIG_USE_HTTP=true` en tu función de Lambda.
+1. Establece la variable de entorno `DD_LOGS_CONFIG_FORCE_USE_HTTP` en tu función de Lambda.
 2. Añade el permiso `secretsmanager:GetSecretValue` a los permisos del rol de IAM de tu función de Lambda.
 3. Crea un secreto nuevo en Secrets Manager para almacenar la variable de entorno de las métricas de envío múltiple. El contenido debe ser similar a este: `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`.
 4. Define la variable de entorno `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` en tu función de Lambda como el ARN del secreto antes mencionado.
@@ -564,7 +565,7 @@ La extensión de Datadog es compatible con la recuperación automática de valor
 
 La extensión de Datadog es compatible con el descifrado automático de valores de [AWS KMS][41] para cualquier variable de entorno con el prefijo `_KMS_ENCRYPTED`. Puedes utilizar esta estrategia para almacenar de forma segura tus variables de entorno en KMS y aprovechar la característica de envío múltiple de Datadog.
 
-1. Define la variable de entorno `DD_LOGS_CONFIG_USE_HTTP=true` en tu función de Lambda.
+1. Establece la variable de entorno `DD_LOGS_CONFIG_FORCE_USE_HTTP=true` en tu función de Lambda.
 2. Añade los permisos `kms:GenerateDataKey` y `kms:Decrypt` a los permisos del rol de IAM de tu función de Lambda.
 3. Para habilitar el envío múltiple de las métricas, cifra `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` con KMS y define la variable de entorno `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` de modo que coincida con su valor.
 4. Para habilitar el envío múltiple de las trazas, cifra `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` con KMS y define la variable de entorno `DD_APM_ADDITIONAL_KMS_ENCRYPTED` de modo que coincida con su valor.
@@ -606,11 +607,11 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 {{< /site-region >}}
 
 
-## Migrar a la extensión Datadog Lambda
+## Migrar a la Datadog Lambda Extension
 
-Datadog puede recopilar los datos de monitorización de tus funciones de Lambda mediante la [función de Lambda del Forwarder][4] o la [extensión de Lambda][2]. Datadog recomienda utilizar la extensión para las instalaciones nuevas. Si no lo tienes claro, consulta [Decidir migrar a la extensión Datadog Lambda][37].
+Datadog puede recopilar los datos de monitorización de tus funciones de Lambda mediante la [función de Lambda del Forwarder][4] o la [extensión de Lambda][2]. Datadog recomienda utilizar la extensión para las instalaciones nuevas. Si no lo tienes claro, consulta [Decidir migrar a la Datadog Lambda Extension][37].
 
-Para proceder con la migración, compara las [instrucciones de instalación de la extensión Datadog Lambda][1] con las [instrucciones del Datadog Forwarder][38]. Las principales diferencias se resumen a continuación:
+Para proceder con la migración, compara las [instrucciones de instalación de la Datadog Lambda Extension][1] con las [instrucciones del Datadog Forwarder][38]. Las principales diferencias se resumen a continuación:
 
 **Nota**: Datadog recomienda migrar las aplicaciones de desarrollo y de prueba primero y las aplicaciones de producción una por una.
 
@@ -627,7 +628,7 @@ Para proceder con la migración, compara las [instrucciones de instalación de l
 {{% /tab %}}
 {{% tab "Serverless Framework" %}}
 
-1. Actualiza `serverless-plugin-datadog` a la última versión, que instala de forma predeterminada la extensión Datadog Lambda, a no ser que hayas definido `addExtension` como `false`.
+1. Actualiza `serverless-plugin-datadog` a la última versión, que instala de forma predeterminada la Datadog Lambda Extension, a no ser que hayas definido `addExtension` como `false`.
 2. Define los parámetros obligatorios `site` y `apiKeySecretArn`.
 3. Define los parámetros `env`, `service` y `version` si antes los definiste como etiquetas de recursos de Lambda. El complemento los definirá automáticamente en las variables de entorno reservadas de Datadog, como `DD_ENV`, al utilizar la extensión.
 4. Elimina el parámetro `forwarderArn`, a no ser que quieras que el Forwarder continúe recopilando logs procedentes de recursos distintos de Lambda y tengas `subscribeToApiGatewayLogs`, `subscribeToHttpApiLogs` o `subscribeToWebsocketLogs` definidos como `true`.
@@ -643,20 +644,20 @@ Para proceder con la migración, compara las [instrucciones de instalación de l
 5. Si configuraste tu integración de AWS para Datadog de modo que suscriba automáticamente los grupos de logs del Forwarder a Lambda, deshabilita esta característica cuando migres _todas_ las funciones de Lambda de esa región.
 
 {{% /tab %}}
-{{% tab "AWS CDK" %}}
+{{% tab "CDK AWS" %}}
 
 1. Actualiza `datadog-cdk-constructs` o `datadog-cdk-constructs-v2` a la última versión.
 2. Configura el parámetro `extensionLayerVersion` con la última versión de la extensión, que es `{{< latest-lambda-layer-version layer="extension" >}}`.
 3. Define los parámetros obligatorios `site` y `apiKeySecretArn`.
-4. Define los parámetros `env`, `service` y `version` si antes los definiste como etiquetas de recursos de Lambda. El constructo los definirá en las variables de entorno reservadas de Datadog, como `DD_ENV`, al utilizar la extensión.
+4. Define los parámetros `env`, `service` y `version` si antes los definiste como etiquetas de recursos de Lambda. La construcción los definirá en las variables de entorno reservadas de Datadog, como `DD_ENV`, al utilizar la extensión.
 5. Elimina el parámetro `forwarderArn`.
 6. Si configuraste tu integración de AWS para Datadog de modo que suscriba automáticamente los grupos de logs del Forwarder a Lambda, deshabilita esta característica cuando migres _todas_ las funciones de Lambda de esa región.
 
 {{% /tab %}}
 {{% tab "Others" %}}
 
-1. Actualiza la capa de la biblioteca de Datadog Lambda de tu tiempo de ejecución a la última versión.
-2. Instala la última versión de la extensión Datadog Lambda.
+1. Actualiza la capa de la biblioteca Lambda de Datadog de tu tiempo de ejecución a la última versión.
+2. Instala la última versión de la Datadog Lambda Extension.
 3. Define las variables de entorno obligatorias `DD_SITE` y `DD_API_KEY_SECRET_ARN`.
 3. Define las variables de entorno `DD_ENV`, `DD_SERVICE` y `DD_VERSION` si antes las definiste como etiquetas de recursos de Lambda.
 4. Elimina el filtro de suscripción que transmite logs procedentes del grupo de logs de tu función de Lambda al Datadog Forwarder.
@@ -665,22 +666,22 @@ Para proceder con la migración, compara las [instrucciones de instalación de l
 {{% /tab %}}
 {{< /tabs >}}
 
-## Migrar de x86 a arm64 con la extensión Datadog Lambda
+## Migrar de x86 a arm64 con la Datadog Lambda Extension
 
-La extensión de Datadog es un archivo binario compilado, disponible en x86 y arm64. Si vas a migrar una función de Lambda de x86 a arm64 (o de arm64 a x86) mediante una herramienta de despliegue como CDK, Serverless Framework o SAM, asegúrate de que la integración de tu servicio (como API Gateway, SNS o Kinesis) esté configurada para utilizar versiones o alias de una función de Lambda. De lo contrario, la función no estará disponible durante unos diez segundos durante el despliegue.
+La extensión de Datadog es un archivo binario compilado, disponible en x86 y arm64. Si vas a migrar una función de Lambda de x86 a arm64 (o de arm64 a x86) mediante una herramienta de despliegue como el CDK, Serverless Framework o SAM, asegúrate de que la integración de tu servicio (como API Gateway, SNS o Kinesis) esté configurada para utilizar versiones o alias de una función de Lambda. De lo contrario, la función no estará disponible durante unos diez segundos durante el despliegue.
 
 Esto ocurre porque migrar una función de Lambda de x86 a arm64 se hace mediante dos llamadas paralelas a la API, `updateFunction` y `updateFunctionConfiguration`. Durante estas llamadas, existe un breve periodo en el que la llamada de Lambda `updateFunction` y el código se actualizan para utilizar la arquitectura nueva, pero la llamada`updateFunctionConfiguration` aún no se completa, por lo que la arquitectura antigua sigue configurada para la extensión.
 
 Si no puedes usar versiones de capa, Datadog recomienda configurar el [Datadog Forwarder][38] durante el proceso de migración de la arquitectura.
 
 
-## Configurar la extensión Datadog Lambda para hacer pruebas locales
+## Configurar la Datadog Lambda Extension para hacer tests locales
 
-Para probar la imagen de contenedor de tu función de Lambda de forma local con la extensión Datadog Lambda instalada, debes definir `DD_LOCAL_TEST` como `true` en tu entorno de pruebas local. De lo contrario, la extensión esperará respuestas de la API de extensiones de AWS y bloqueará la invocación.
+Para testear la imagen de contenedor de tu función de Lambda de forma local con la Datadog Lambda Extension instalada, debes definir `DD_LOCAL_TEST` como `true` en tu entorno de tests local. De lo contrario, la extensión esperará respuestas de API de las extensiones de AWS y bloqueará la invocación.
 
 ## Instrumentar AWS Lambda con la API de OpenTelemetry
 
-La biblioteca de rastreo de Datadog, que se incluye en la extensión Lambda Datadog tras su instalación, acepta los tramos y trazas generados a partir del código instrumentado por OpenTelemetry, procesa la telemetría y la envía a Datadog.
+La biblioteca de rastreo de Datadog, que se incluye en la Datadog Lambda Extension tras su instalación, acepta los tramos y trazas generados a partir del código instrumentado por OpenTelemetry, procesa la telemetría y la envía a Datadog.
 
 Puedes utilizar este enfoque si, por ejemplo, tu código ya se instrumentó con la API de OpenTelemetry. También puedes utilizar este enfoque si quieres instrumentar mediante código agnóstico del proveedor con la API de OpenTelemetry sin dejar de obtener los beneficios de utilizar las bibliotecas de rastreo de Datadog.
 
@@ -688,7 +689,7 @@ Para instrumentar AWS Lambda con la API de OpenTelemetry, define la variable de 
 
 ## Solucionar problemas
 
-Si tienes problemas para configurar tus instalaciones, define la variable de entorno `DD_LOG_LEVEL` como `debug` para depurar los logs. Para obtener más consejos sobre cómo solucionar problemas, consulta la [guía de solución de problemas de la monitorización serverless][39].
+Si tienes problemas para configurar tus instalaciones, define la variable de entorno `DD_LOG_LEVEL` como `debug` en los logs de depuración. Para obtener más consejos sobre cómo solucionar problemas, consulta la [guía de solución de problemas de la monitorización serverless][39].
 
 ## Referencias adicionales
 

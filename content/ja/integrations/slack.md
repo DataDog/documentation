@@ -4,11 +4,15 @@ aliases:
 categories:
 - collaboration
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Datadog のアラートとグラフをチームの Slack チャンネルに送信。
 doc_link: https://docs.datadoghq.com/integrations/slack/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/slack-content-pack/
+  tag: ブログ
+  text: Datadog Cloud SIEM で Slack 監査ログを監視
 git_integration_title: slack
 has_logo: true
 integration_id: ''
@@ -63,7 +67,7 @@ Slack インテグレーションがインストールされると、任意の S
 
 {{% tab "Slack Webhook (レガシー)" %}}
 
-### Installation
+### インストール
 
 Datadog サイトの [Slack インテグレーションタイル][1]を使用してインテグレーションをインストールします。
 
@@ -151,7 +155,7 @@ Slack のモニターアラートメッセージに含まれるコンテンツ�
 
 {{< img src="integrations/slack/slack_monitor_options.png" alt="Slack インテグレーションタイルのモニターアラートメッセージオプション" style="width:90%;" >}}
 
-### Migrate monitors from Slack Webhook (Legacy) to Datadog for Slack
+### Slack Webhook (レガシー) から Datadog for Slack へのモニターの移行
 
 モニターがレガシーの Slack webhook を使用している場合、Slack アプリから送信されるようにモニターを更新するには 2 つの方法があります。
 
@@ -179,14 +183,14 @@ Slack の Datadog アプリの **Home** タブを使用して、スターを付�
 
 ## インシデント
 
-Anyone in your Slack org can declare an incident, regardless of whether they have access to Datadog. When a new incident is created, a corresponding Slack channel `#incident-(unique number ID)` is created, and a message is sent to the channel telling you the new incident channel to use. The channel topic changes with the incident.
+Datadog へのアクセス権の有無に関わらず、Slack 組織内の誰でもインシデントを宣言することができます。新しいインシデントが作成されると、対応する Slack チャンネル `#incident-(unique number ID)` が作成され、新しいインシデントチャンネルの使用について伝えるメッセージがチャンネルに送信されます。チャンネルのトピックは、インシデントとともに変わります。
 
 ### インシデントコマンド
 
 Slack から新しいインシデントを宣言するには
 
 ```
-/datadog incident
+/datadog incident 
 ```
 
 インシデントの状態 (重大度など) を更新するには
@@ -238,41 +242,44 @@ Slack アクションを使用してタスクを作成するには、インシ�
 
 ## 権限
 
-Datadog for Slack requires the following OAuth Scopes. See the [Slack permission scopes documentation][10] for more information.
+Datadog for Slack は、以下の OAuth Scope を必要とします。詳しくは、[Slack の権限スコープに関するドキュメント][10]を参照してください。
 
 ### ボットトークンのスコープ
 
-| スコープ                   | リクエスト理由                                                                                                 |
-|--------------------------|----------------------------------------------------------------------------------------------------------------|
-| `channels:join`          | Datadog の Slack インテグレーションタイルで構成された公開チャンネルに自動で参加します。                        |
-| `channels:manage`        | Datadog Incident Management を使用して、インシデントを管理および修復するチャンネルを作成します。                           |
-| `channels:read`          | Datadog の Slack インテグレーションタイルにチャンネル名のオートコンプリートの提案を提供します。                      |
-| `chat:write`             | 承認されたチャンネルや会話で Datadog のアラートと通知を受け取ります。                               |
-| `commands`               | Datadog のアクションを実行するために、/datadog コマンドとそのエイリアスである /dd を有効化します。                                |
-| `groups:read`            | Datadog の Slack インテグレーションタイルの非公開チャンネルにチャンネル名のオートコンプリートの提案を提供します。 |
-| `im:history`             | Datadog が Messages タブで、オンボーディングの指示などのメッセージを送信できるようにします。              |
-| `im:read`                | ダイレクトメッセージから Datadog のアクションを実行するために、/datadog コマンドとエイリアスである /dd を有効化します。               |
-| `im:write`               | Datadog アカウントに関連する Datadog ボットからのメッセージ、プロンプト、エラーを受信します。                    |
-| `links:read`             | グラフやログサンプルなどの追加情報とともに、会話中の Datadog のリンクを展開します。                |
-| `links:write`            | グラフやログサンプルなどの追加情報とともに、会話中の Datadog のリンクを展開します。                |
-| `mpim:read`              | グループダイレクトメッセージから Datadog のアクションを実行するために、/datadog コマンドとエイリアスである /dd を有効化します。         |
-| `reactions:write`        | インシデントタイムラインに追加されたメッセージに、ショートカットで絵文字のリアクションを追加します。                   |
-| `team:read`              | Datadog の Slack インテグレーションタイルで、ワークスペースの状態を常に最新に保つことができます。                        |
-| `users:read`             | Datadog アカウントに関連付けられた Datadog ユーザーとして、Slack からアクションを実行します。                                 |
-| `users:read.email`       | Datadog の Slack 以外で作成されたインシデントのメッセージングとユーザーを追加します。                                  |
-| `workflow.steps:execute` | Slack Workflow Step から Datadog のダッシュボードウィジェットを使ってメッセージを自動送信します。                         |
+| スコープ                   | リクエスト理由                                                                                                               |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| `channels:join`          | Datadog の Slack インテグレーションタイルで構成された公開チャンネルに自動で参加します。                                      |
+| `channels:manage`        | Datadog Incident Management を使用して、インシデントを管理および修復するチャンネルを作成します。                                         |
+| `channels:read`          | Datadog の Slack インテグレーションタイルにチャンネル名のオートコンプリートの提案を提供します。                                    |
+| `chat:write`             | 承認されたチャンネルや会話で Datadog のアラートと通知を受け取ります。                                             |
+| `commands`               | Datadog のアクションを実行するために、/datadog コマンドとそのエイリアスである /dd を有効化します。                                              |
+| `groups:read`            | Datadog の Slack インテグレーションタイルの非公開チャンネルにチャンネル名のオートコンプリートの提案を提供します。               |
+| `im:history`             | Datadog が Messages タブで、オンボーディングの指示などのメッセージを送信できるようにします。                            |
+| `im:read`                | ダイレクトメッセージから Datadog のアクションを実行するために、/datadog コマンドとエイリアスである /dd を有効化します。                             |
+| `im:write`               | Datadog アカウントに関連する Datadog ボットからのメッセージ、プロンプト、エラーを受信します。                                  |
+| `links:read`             | グラフやログサンプルなどの追加情報とともに、会話中の Datadog のリンクを展開します。                              |
+| `links:write`            | グラフやログサンプルなどの追加情報とともに、会話中の Datadog のリンクを展開します。                              |
+| `mpim:read`              | グループダイレクトメッセージから Datadog のアクションを実行するために、/datadog コマンドとエイリアスである /dd を有効化します。                       |
+| `reactions:write`        | インシデントタイムラインに追加されたメッセージに、ショートカットで絵文字のリアクションを追加します。                                 |
+| `remote_files:read`      | 近日対応予定: 構成済みの Slack チャンネルで共有された、Datadog がホストするダッシュボードなどの PDF レポートを閲覧できるようになります。 |
+| `remote_files:share`     | 近日対応予定: Datadog がホストするダッシュボードなどの PDF レポートを、構成済みの Slack チャンネルと共有できるようになります。                  |
+| `remote_files:write`     | 近日対応予定: Datadog がホストするダッシュボードなどの PDF レポートへのリンクを、構成済みのワークスペースにアップロードできるようになります。             |
+| `team:read`              | Datadog の Slack インテグレーションタイルで、ワークスペースの状態を常に最新に保つことができます。                                      |
+| `users:read`             | Datadog アカウントに関連付けられた Datadog ユーザーとして、Slack からアクションを実行します。                                               |
+| `users:read.email`       | Datadog の Slack 以外で作成されたインシデントのメッセージングとユーザーを追加します。                                                |
+| `workflow.steps:execute` | Slack Workflow Step から Datadog のダッシュボードウィジェットを使ってメッセージを自動送信します。                                       |
 
 ### オプションの Optional Bot Token Scopes
 
 Datadog for Slack では、オプションの Bot Token Scopes を追加で有効にする必要がある機能があります。これらのスコープは、機能の有効化に基づいて動的に追加され、最初のインストール時には追加されません。
 
-| スコープ              | リクエスト理由                                                                               |
-|---------------------|----------------------------------------------------------------------------------------------|
-| `channels:history`  | インシデントチャンネルからのメッセージをインシデントタイムラインに自動的に同期します。               |
-| `groups:write`      | Datadog Incident Management を使用して、インシデントを管理および修復するプライベートチャンネルを作成します。 |
-| `pins:write`        | インシデントチャンネルに、Datadog インシデントの関連リンクやリソースのピンを作成します。          |
-| `bookmarks:write`   | 対応中のインシデントチャンネルで重要なリンクをブックマークします。                  |
-| `bookmarks:read`    | 重要なリンクのブックマークは、変更したときに編集します。                                          |
+| スコープ             | リクエスト理由                                                                               |
+|--------------------|----------------------------------------------------------------------------------------------|
+| `channels:history` | インシデントチャンネルからのメッセージをインシデントタイムラインに自動的に同期します。               |
+| `groups:write`     | Datadog Incident Management を使用して、インシデントを管理および修復するプライベートチャンネルを作成します。 |
+| `pins:write`       | インシデントチャンネルに、Datadog インシデントの関連リンクやリソースのピンを作成します。          |
+| `bookmarks:write`  | 対応中のインシデントチャンネルで重要なリンクをブックマークします。                 |
+| `bookmarks:read`   | 重要なリンクのブックマークは、変更したときに編集します。                                         |
 
 ### ユーザトークンのスコープ
 
@@ -316,7 +323,7 @@ Enterprise Grid 組織の所有者のみが、Slack 監査ログの収集を Dat
 - Entity: アクターがアクションを起こした対象。
 - Context: アクターがエンティティにアクションを起こした場所 (ワークスペースまたはエンタープライズ)。
 
-For more information, see the [official Slack documentation][11].
+詳しくは [Slack 公式ドキュメント][11]をご覧ください。
 
 ## 収集データ
 
@@ -335,6 +342,10 @@ Slack 用インテグレーションには、サービスのチェック機能�
 ## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/monitors/configuration/
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/

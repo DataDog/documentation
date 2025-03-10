@@ -86,7 +86,7 @@ There are a few limitations that are **not supported** which include:
 
 * More than two levels of nesting, such as `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
 * Negation is only supported for key/value pairs and tags with `OR`. For example, `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, or `-service(A B)` are not supported.
-* Top level ORs are not supported, for example, `service:A OR host:X`. This requires two separate Downtimes.
+* Top level ORs are not supported. For example, `service:A OR service:B` is valid, but `service:A OR host:X` does not work. An `OR` between two different top level tags requires two separate Downtimes.
 * Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
 * Question mark wildcards: `service:auth?` are not supported. Use `*` instead if you need to use wildcards.
 * Invalid characters within the key: `en&v:prod` is not a valid Downtime scope and will be rejected.
@@ -192,7 +192,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [6]: /monitors/guide/suppress-alert-with-downtimes/
 [7]: /monitors/notify/#overview
 [8]: /integrations/#cat-notification
-[9]: /monitors/manage/status/
+[9]: /monitors/status/
 [10]: /service_management/events/explorer
 [11]: /api/latest/downtimes/#cancel-a-downtime
 [12]: /account_management/#preferences

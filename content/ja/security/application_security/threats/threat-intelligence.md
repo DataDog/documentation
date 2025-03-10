@@ -11,62 +11,58 @@ title: Threat Intelligence
 
 ## 概要
 
-This topic describes [threat intelligence][1] for Application Security Management (ASM).
+このトピックでは、Application Security Management (ASM) における[脅威インテリジェンス][1]について説明します。
 
-Datadog provides built-in threat intelligence [datasets][1] for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
+Datadog は、ASM 向けに組み込みの脅威インテリジェンス[データセット][1]を提供しており、これによりセキュリティ活動に対する追加の証拠が得られ、一部のビジネスロジック検出のしきい値が低減されます。
 
-Additionally, ASM supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
+さらに、ASM は *Bring Your Own Threat Intelligence* (BYOTI) をサポートしており、この機能により、ビジネス特有の脅威インテリジェンスで検出が強化されます。
 
 ## ベストプラクティス
 
-Datadog recommends the following methods for consuming threat intelligence:
+Datadog は、脅威インテリジェンスの活用方法として以下を推奨しています。
 
-1. Reducing detection rule thresholds for business logic threats such as credential stuffing. Users can clone the default [Credential Stuffing][6] rule and modify it to meet their needs.
-2. Using threat intelligence as a indicator of reputation with security activity.
+1. クレデンシャルスタッフィングなどのビジネスロジックに対する脅威の検出ルールのしきい値を低く設定すること。ユーザーは、デフォルトの[クレデンシャルスタッフィング][6]ルールを複製し、ニーズに応じてカスタマイズすることができます。
+2. セキュリティ活動において、脅威インテリジェンスをレピュテーションの指標として活用すること。
 
-Datadog recommends _against_ the following:
-1. Blocking threat intelligence traces without corresponding security activity. IP addresses might have many hosts behind them. Detection of a residential proxy means that the associated activity has been observed by a host behind that IP. It does not guarantee that the host running the malware or proxy is the same host communicating with your services.
-2. Blocking on all threat intelligence categories, as this is inclusive of benign traffic from corporate VPNs and blocks unmalicious traffic.
+Datadog は、以下を推奨しません。
+1. セキュリティ活動に対応していない脅威インテリジェンスのトレースをブロックすること。IP アドレスの背後には多くのホストが存在する可能性があり、住宅用プロキシが検出された場合、その IP アドレスの背後にあるホストが関連する活動を行っていたことを示しますが、そのホストがマルウェアやプロキシを実行しているホストと、あなたのサービスと通信しているホストが同一であることを保証するものではありません。
+2. すべての脅威インテリジェンスカテゴリーに対してブロックを行うこと。これにより、企業の VPN からの良性のトラフィックや悪意のないトラフィックもブロックされる可能性があります。
 
-## Filtering on threat intelligence in ASM
+## ASM の脅威インテリジェンスのフィルタリング
 
-Users can filter threat intelligence on the Signals and Traces explorers using facets and the search bar.
+ユーザーは、Signal Explorer と Traces Explorer 上でファセットや検索バーを使用して脅威インテリジェンスをフィルタリングできます。
 
-To search for all traces flagged by a specific source, use the following query with the source name:
+特定のソースによってフラグ付けされたすべてのトレースを検索するには、次のクエリをソース名と共に使用します。
 
     @threat_intel.results.source.name:<SOURCE_NAME> 
 
-To query for all traces containing threat intelligence from any source, use the following query:
+任意のソースからの脅威インテリジェンスを含むすべてのトレースを検索するには、次のクエリを使用します。
 
     @appsec.threat_intel:true 
 
-## Bring your own threat intelligence
+## Bring Your Own Threat Intelligence
 
-{{< callout url="https://forms.gle/JV8VLH1ZTzmUnK5F7" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Bring your own threat intelligence (BYOTI) is in private beta.
-{{< /callout >}} 
+ASM は、Datadog リファレンステーブルに格納された脅威インテリジェンスの侵害指標を使用して、トレースの拡充と検索をサポートします。[リファレンステーブル][2]を使用すると、Datadog にすでに存在する情報とメタデータを組み合わせることができます。
 
-ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+### 侵害指標をリファレンステーブルに格納
 
-### Storing indicators of compromise in reference tables
+Threat Intelligence は CSV 形式に対応しており、次の列が必要となります。
 
-Threat intelligence is supported in the CSV format and requires 4 columns.
+**CSV 構造**
 
-**CSV Structure**
-
-| field            | データ  | 説明| 必須 | 例|
+| フィールド            | データ  | 説明| 必須 | 例|
 |------------------|-------|----|-----|--|
-| ip_address       | テキスト | The primary key for the reference table in the IPv4 dot notation format. | true | 192.0.2.1  |
-| additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
-| category         | テキスト  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
-| intention        | テキスト | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | 悪意がある | |
-| source           | テキスト  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
+| ip_address       | テキスト | IPv4 のドット表記形式のリファレンステーブルのプライマリキー。 | true | 192.0.2.1  |
+| additional_data  | json      | トレースを強化するための追加データ。 | false | `{"ref":"hxxp://example.org"}`
+| category         | テキスト  | 脅威インテリジェンスの[カテゴリー][7]。これは、すぐに使える検出ルールで使用されます。 | true | `residential_proxy` |
+| intention        | テキスト | 脅威インテリジェンスの[意図][8]。すぐに使える検出ルールで使用されます。| true | 悪意がある | |
+| source           | テキスト  | ソースの名前とそのサイトへのリンク (例: あなたのチームとチームの Wiki)。 | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
 
-The full list of supported categories and intents is available at [Threat Intelligence Facets][3].
+サポートされているカテゴリーと意図の全リストは、[Threat Intelligence Facets][3] で確認できます。
 
-<div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV.</div>
+<div class="alert alert-info">CSV 内の JSON には二重引用符が必要です。以下はその例です。</div>
 
 ```
 ip_address,additional_data,category,intention,source
@@ -75,61 +71,91 @@ ip_address,additional_data,category,intention,source
 192.0.2.3,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
 
-### Uploading and enabling your own threat intel
+### 独自の脅威インテリジェンスをアップロードして有効化する
 
-On a new [references table][4] page:
+Datadog では、手動でアップロードするか、[Amazon S3、Azure Storage、Google Cloud Storage][10] から定期的にデータを取得することで参照テーブルを作成できます。
 
-1. Name the table. The table name is referenced in ASM's **Threat Intel** config.
-2. Upload a CSV.
-3. Preview the table schema and choose the IP address as the Primary Key.
+注:
+- テーブルを作成してから ASM トレースのエンリッチメントが開始されるまでには、10～30 分ほどかかる場合があります。
+- プライマリキーが重複している場合、該当する行はスキップされ、そのキーに関するエラーメッセージが表示されます。
 
-   {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table.png" alt="New reference table" style="width:100%;" >}}
-4. Save the table.
-5. In [Threat Intel][5], locate the new table, and then select the toggle to enable it. 
+新しい[リファレンステーブル][4]ページで、
 
-   {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="Enabled reference table" style="width:100%;" >}}
+1. テーブルに名前を付けます。この名前は ASM の **Threat Intel** 構成で参照されます。
+2. ローカルの CSV ファイルをアップロードするか、クラウドストレージバケットから CSV をインポートできます。ファイルは正規化および検証されます。
+3. テーブルスキーマをプレビューし、IP アドレスをプライマリキーとして選択します。
 
-### Filter traces by joining the list with a Reference Table
+   {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table.png" alt="新しいリファレンステーブル" style="width:100%;" >}}
+4. テーブルを保存します。
+5. [Threat Intel][5] で新しいテーブルを見つけ、トグルを選択して有効にします。
 
-You can filter ASM traces in Datadog by joining a trace table with a Reference Table. 
+   {{< img src="/security/application_security/threats/threat_intel/threat_intel_ref_table_enabled.png" alt="有効なリファレンステーブル" style="width:100%;" >}}
 
-To join a Reference Table with a trace query, you combine rows from the Datadog trace table and a Reference Table based on a related column between them. The traces query returns only those traces where there is a match in both tables.
+#### クラウドストレージを使用する場合
 
-Using a join with a Reference Table enables you to evaluate impact before enrichment by searching for historical matches with existing traces.
+参照テーブルがクラウドストレージから作成された場合、定期的にリフレッシュされます。テーブル全体が*置き換え*られ、データはマージされません。
 
-You can use any fields, not just IP addresses. For example, by associating security traces with specific URLs from a reference table, you can identify which parts of your application are being targeted by attacks. This can help pinpoint vulnerabilities or high-risk areas within the application.
+関連する参照テーブルのドキュメントを参照してください。
+- [Amazon S3][11]
+- [Azure storage][12]
+- [Google Cloud storage][13]
+
+#### クラウドインポートのトラブルシューティング
+
+参照テーブルがリフレッシュされていない場合、参照テーブル詳細ページの設定から **View Change Events** リンクを選択します。
+
+**View Change Events** を選択すると、**Event Management** ページが開き、取り込みに関する潜在的なエラーイベントが表示されます。また、参照テーブル名を使用して **Event Management** 内でフィルタリングすることもできます。
+
+<div class="alert alert-info">Datadog の Event Management 上では、クラウドからデータが取得されたように見えることがありますが、これらの変更が Threat Intelligence に反映されるまでには、さらに数分かかる場合があります。</div>
+
+その他、クラウドインポートに関して覚えておくと有用なポイント:
+
+- ソースがアップロードまたは更新された後、更新されたエンリッチメントが利用可能になるまでの予想レイテンシーは 10～30 分です。
+- 更新が適用されたかどうかを知るには、変更は参照テーブルまたはスパン内で確認できます。関連イベントを確認するには、参照テーブル詳細ページの設定から **View Change Events** リンクを選択してください。
+- 更新によって*テーブル全体*が新しいデータで置き換えられます。
+- 重複するプライマリキーがある場合、その重複キーの行は書き込まれず、参照テーブル詳細ページにエラーが表示されます。
+
+### リファレンステーブルとリストを結合してトレースをフィルタリングする
+
+Datadog では、トレーステーブルをリファレンステーブルと結合することで、ASM トレースをフィルタリングできます。
+
+リファレンステーブルをトレースクエリと結合するには、Datadog のトレーステーブルとリファレンステーブルの関連する列に基づいて、それらのテーブルの行を結合します。トレースクエリは、両方のテーブルで一致するものがあるトレースのみを返します。
+
+リファレンステーブルとの結合を使用することで、既存のトレースとの過去の一致を検索し、強化前の影響を評価することができます。
+
+IP アドレスに限らず、任意のフィールドを使用できます。たとえば、リファレンステーブルの特定の URL とセキュリティトレースを関連付けることで、アプリケーションのどの部分が攻撃の標的となっているかを特定できます。これにより、アプリケーション内の脆弱性やリスクの高い領域を正確に特定できます。
 
 例:
 
-- Investigation and incident response. You can upload and join using IPs or other fields from attacks and see the traffic related to that incident.
-- By using security traces with the IP addresses from a Reference Table, such as associating IP addresses with geographic locations or organizational details, security teams can gain better context around attack attempts. This can help in understanding the origin and potential motivation behind the attacks.
+- 調査とインシデント対応。攻撃の IP アドレスやその他のフィールドをアップロードして結合し、そのインシデントに関連するトラフィックを確認することができます。
+- リファレンステーブルの IP アドレスとセキュリティトレースを結合し、例えば IP アドレスを地理的な場所や組織の詳細と関連付けることで、セキュリティチームは攻撃の試みに関するより優れたコンテキストを得ることができます。これにより、攻撃の起源や潜在的な動機を理解するのに役立ちます。
 
 
-To join a trace with a Reference Table:
+リファレンステーブルにトレースを結合するには
 
-1. Upload the Reference Table you want to use as described in [Uploading and enabling your own threat intel](#uploading-and-enabling-your-own-threat-intel).
-2. To join a trace with a Reference Table, in [Traces][9], select **Add**, and then select **Join with Reference Table**.
-3. In **Inner join with reference table**, select the Reference Table to use.
-4. In **where field**, select the Datadog traces field to use for the join.
-5. In **column**, select the Reference Table field to use for the join.
+1. [独自の脅威インテリジェンスをアップロードして有効化する](#uploading-and-enabling-your-own-threat-intel)で説明されているように、使用するリファレンステーブルをアップロードします。
+2. トレースをリファレンステーブルと結合するには、[Traces][9] で **Add** を選択し、その後 **Join with Reference Table** を選択します。
+3. **Inner join with reference table** で使用するリファレンステーブルを選択します。
+4. **where field** で、結合に使用する Datadog トレースフィールドを選択します。
+5. **column** では、結合に使用するリファレンステーブルのフィールドを選択します。
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="イメージの説明" style="width:100%;" >}}
 
-### Enriching traces for detection rules
+### 検出ルール用のトレースの強化
 
-Enriching traces includes the threat intelligence attributes in ASM traces when the indicator of compromise matches the value of the `http.client_ip` key in the ASM trace. This enables searching for traces with threat intelligence matches using existing facets and using threat intelligence with detection rules.
+トレースの強化には、侵害の兆候が ASM トレース内の `http.client_ip` キーの値と一致する場合に、ASM トレースに脅威インテリジェンス属性を含めることが含まれます。これにより、既存のファセットを使用して脅威インテリジェンスと一致するトレースを検索したり、脅威インテリジェンスを検出ルールで活用したりすることが可能になります。
 
 
 
-## Threat intelligence in the user interface
+## ユーザーインターフェイスにおける脅威インテリジェンス
 
-When viewing the traces in the ASM Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
+ASM Traces Explorer でトレースを表示すると、`@appsec` 属性の下に脅威インテリジェンスデータが表示されます。`category` 属性と `security_activity` 属性の両方が設定されています。
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
+{{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="脅威インテリジェンスデータを含む appsec 属性の例">}}
 
-Under `@threat_intel.results` you can always see the full details of what was matched from which source:
+`@threat_intel.results` の下には、どのソースから一致したかの詳細が常に表示されます。
 
- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
+{{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="脅威インテリジェンスデータを含む threat_intel 属性の例">}}
 
 ## その他の参考資料
 
@@ -144,3 +170,7 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 [7]: /ja/security/threat_intelligence#threat-intelligence-categories
 [8]: /ja/security/threat_intelligence#threat-intelligence-intents
 [9]: https://app.datadoghq.com/security/appsec/traces
+[10]: /ja/integrations/guide/reference-tables/?tab=manualupload#create-a-reference-table
+[11]: /ja/integrations/guide/reference-tables/?tab=amazons3#create-a-reference-table
+[12]: /ja/integrations/guide/reference-tables/?tab=azurestorage#create-a-reference-table
+[13]: /ja/integrations/guide/reference-tables/?tab=googlecloudstorage#create-a-reference-table

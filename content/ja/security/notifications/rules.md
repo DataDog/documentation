@@ -27,46 +27,46 @@ title: 通知ルール
 
 ## 概要
 
-Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
+通知ルールは、セキュリティ問題に関するチームへの通知プロセスを自動化するための、事前に定義された条件のセットです。通知ルールを使用することで、各検出ルールごとに通知を手動でセットアップする必要がなくなります。通知ルールは、深刻度、ルールのタイプ、ルールタグ、シグナル属性、シグナルタグなどのパラメーターを指定することで、さまざまなシナリオに対応できるように構成できます。
 
-{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
+{{< img src="security/notification-rules-overview.png" alt="通知ルール概要ページ" style="width:100%;" >}}
 
-## Create notification rules
+## 通知ルールの作成
 
-To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
+通知ルールを作成するには、そのルールがトリガーされる条件を指定します。これらの条件には、深刻度、検出ルールのタイプ、タグ、属性などの基準が含まれます。問題が定義された条件に一致すると、そのルールによって指定された受信者に通知が自動的に送信されます。
 
-As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
+<div class="alert alert-info">ルールの構成中、通知ルールの条件に一致する問題のプレビューが <strong>Preview of Matching Results</strong> パネルに表示されます。このプレビューは、通知ルールが特定しすぎているか、あるいは広範すぎるかを判断するのに役立ち、条件を調整して最適なカバー範囲を設定できます。</div>
 
-1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
-3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
-4. Under **Rule Criteria**, select one or more severity levels.
-5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
-6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
-7. 通知ルールの名前を入力します。
-8. **Save and Activate** をクリックします。
+1. [**Notification Rules**][1] ページで、**New Notification Rule** をクリックします。
+1. 通知ルールの **Name** (名前) を入力します。
+1. 通知ルールのソースタイプを選択します。
+    - **Vulnerability** : インフラストラクチャーにおける潜在的なセキュリティの欠陥。
+    - **Signal** : インフラストラクチャーに対してアクティブな脅威をもたらす疑わしい活動。
+1. 1 つ以上の深刻度レベルを選択します。
+1. 通知ルールがトリガーされるために必要なタグと属性を指定します。
+1. **Add Recipient** をクリックします。
+1. 通知ルールがトリガーされた際に通知を行う受信者を指定します。個人やチーム、Jira 課題の作成など、さまざまな通知が可能です。詳細は[通知チャネル][2]を参照してください。
+1. **Save** をクリックします。
 
-{{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
+{{< img src="security/notification-rules-setup.png" alt="通知ルールを作成するためのセットアップページ" style="width:100%;" >}}
 
-If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
+## 通知ルールの管理
 
-## Manage notification rules
+### 通知ルールの有効化または無効化
 
-### Enable or disable a notification rule
+通知ルールの有効化または無効化を行うには、通知ルールカード上のスイッチを切り替えます。
 
-To enable or disable a notification rule, toggle the switch on the notification rule card.
+### 通知ルールの編集
 
-### Edit a notification rule
+通知ルールを編集するには、通知ルールカードをクリックし、変更が完了したら **Save** をクリックします。
 
-To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save and Activate**.
+### 通知ルールの複製
 
-### Clone a notification rule
+通知ルールを複製するには、通知ルールカードの縦に並んだ 3 つのドットメニューをクリックし、**Clone** を選択します。
 
-To clone a notification rule, click the vertical three-dot menu on the notification rule card and select **Clone**.
+### 通知ルールの削除
 
-### Delete a notification rule
-
-To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
+通知ルールを削除するには、通知ルールカードの縦に並んだ 3 つのドットメニューをクリックし、**Delete** を選択します。
 
 ## その他の参考資料
 

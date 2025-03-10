@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 태깅
 aliases:
 - /ko/getting_started/getting_started_with_tags
 - /ko/guides/getting_started/tagging/
@@ -37,6 +40,7 @@ title: 태그 시작하기
 | `service` | 메트릭, 트레이스, 로그를 기준으로 특정 애플리케이션 데이터의 범위 설정. |
 | `env`     | 메트릭, 트레이스, 로그를 기준으로 특정 애플리케이션 데이터의 범위 설정. |
 | `version` | 메트릭, 트레이스, 로그를 기준으로 특정 애플리케이션 데이터의 범위 설정. |
+| `team`    | 리소스에 소유권 할당                                     |
 
 Datadog는 집계 서비스 수준에서 컨테이너, 가상 머신(VM), 클라우드 인프라스트럭처에 주목하시길 권장합니다. 예를 들면 서버 A와 서버 B에서 개별적으로 CPU 사용 내역을 확인하는 대신, 서비스를 나타내는 호스트 컬렉션 전체에서 CPU 사용률을 살펴보세요.
 

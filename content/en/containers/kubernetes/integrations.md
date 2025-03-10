@@ -46,7 +46,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 Otherwise:
 
 1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart) that suits your use case.
-2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IDENTIFIER>`.
+2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
 {{< tabs >}}
@@ -63,18 +63,18 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": <INIT_CONFIG>,
           "instances": [<INSTANCES_CONFIG>]
         }
       }
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOGS_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.logs: '[<LOGS_CONFIG>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 # (...)
 ```
 
@@ -87,14 +87,14 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: '[<INTEGRATION_NAME>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCES_CONFIG>]'
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOGS_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<INTEGRATION_NAME>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.init_configs: '[<INIT_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.instances: '[<INSTANCES_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.logs: '[<LOGS_CONFIG>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 # (...)
 ```
 
@@ -108,7 +108,7 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
 1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host:
    ```yaml
    ad_identifiers:
-     - <CONTAINER_IDENTIFIER>
+     - <CONTAINER_IMAGE>
 
    init_config:
      <INIT_CONFIG>
@@ -136,7 +136,7 @@ metadata:
 data:
   <INTEGRATION_NAME>-config: |-
     ad_identifiers:
-      <CONTAINER_IDENTIFIER>
+      <CONTAINER_IMAGE>
     init_config:
       <INIT_CONFIG>
     instances:
@@ -194,7 +194,7 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```yaml
 /datadog/
   check_configs/
-    <CONTAINER_IDENTIFIER>/
+    <CONTAINER_IMAGE>/
       - check_names: ["<INTEGRATION_NAME>"]
       - init_configs: ["<INIT_CONFIG>"]
       - instances: ["<INSTANCES_CONFIG>"]
@@ -228,7 +228,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - <CONTAINER_IDENTIFIER>
+              - <CONTAINER_IMAGE>
             init_config:
               <INIT_CONFIG>
             instances:
@@ -259,7 +259,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - <CONTAINER_IDENTIFIER>
+              - <CONTAINER_IMAGE>
             init_config:
               <INIT_CONFIG>
             instances:
@@ -282,7 +282,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-        - <CONTAINER_IDENTIFIER>
+        - <CONTAINER_IMAGE>
       init_config:
         <INIT_CONFIG>
       instances:
@@ -302,7 +302,7 @@ clusterAgent:
   confd:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-        - <CONTAINER_IDENTIFIER>
+        - <CONTAINER_IMAGE>
       init_config:
         <INIT_CONFIG>
       instances:
@@ -327,10 +327,13 @@ Supply placeholder values as follows:
 `<INTEGRATION_NAME>`
 : The name of your Datadog integration, such as `etcd` or `redisdb`.
 
-`<CONTAINER_IDENTIFIER>`
-: An identifier to match against the names (`spec.containers[0].name`, **not** `spec.containers[0].image`) of the containers that correspond to your integration. The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers.<br/><br/>
-For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
-You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
+`<CONTAINER_NAME>`
+: An identifier to match against the names (`spec.containers[i].name`, **not** `spec.containers[i].image`) of the containers that correspond to your integration.
+
+`<CONTAINER_IMAGE>`
+: An identifier to match against the container image (`.spec.containers[i].image`). <br/><br/>
+For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with image names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
+The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers. You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
 
 `<INIT_CONFIG>`
 : The configuration parameters listed under `init_config` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file. The `init_config` section is usually empty.
@@ -548,7 +551,7 @@ spec:
     nodeAgent:
       extraConfd:
         configDataMap:
-          postgresql.yaml: |-
+          postgres.yaml: |-
             ad_identifiers:
               - postgres
             init_config:
@@ -558,7 +561,7 @@ spec:
                 username: "datadog"
                 password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgres.yaml` file with the above configuration in the `conf.d` directory.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -568,7 +571,7 @@ In `datadog-values.yaml`:
 ```yaml
 datadog:
   confd:
-    postgresql.yaml: |-
+    postgres.yaml: |-
       ad_identifiers:
         - postgres
       init_config:
@@ -578,7 +581,7 @@ datadog:
           username: "datadog"
           password: "%%env_PG_PASSWORD%%"
 ```
-As a result, the Agent contains a `postgresql.yaml` file with the above configuration in the `conf.d` directory.
+As a result, the Agent contains a `postgres.yaml` file with the above configuration in the `conf.d` directory.
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -4,7 +4,7 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Deleting data using the UI is in private beta.
+  Deleting data using the UI is in Preview.
 {{< /callout >}} 
 
 This page explains how to delete data from Datadog.

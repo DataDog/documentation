@@ -4,6 +4,7 @@ app_uuid: b613759e-89ca-4d98-a2c1-4d465c42e413
 assets:
   dashboards:
     CoreDNS: assets/dashboards/coredns.json
+    CoreDNS [V2]: assets/dashboards/coredns_v2.json
   integration:
     auto_install: true
     configuration:
@@ -21,8 +22,8 @@ assets:
     source_type_id: 10038
     source_type_name: CoreDNS
   monitors:
-    '[CoreDNS] Cache hits count low': assets/monitors/coredns_cache_hits_low.json
-    '[CoreDNS] Request duration high': assets/monitors/coredns_request_duration_high.json
+    Cache hits count is low: assets/monitors/coredns_cache_hits_low.json
+    Request duration is high: assets/monitors/coredns_request_duration_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -34,7 +35,7 @@ categories:
 - kubernetes
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/coredns/README.md
 display_on_public_website: true
@@ -42,7 +43,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 3.2.3
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: coredns
@@ -115,7 +116,7 @@ LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:91
 この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```yaml
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
 ```
 
 **注**:
@@ -161,7 +162,7 @@ metadata:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "openmetrics_endpoint": "http://%%host%%:9153/metrics",
+          "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -186,7 +187,7 @@ metadata:
           "init_config": {},
           "instances": [
             {
-              "openmetrics_endpoint": "http://%%host%%:9153/metrics",
+              "openmetrics_endpoint": "http://%%host%%:9153/metrics", 
               "tags": ["dns-pod:%%host%%"]
             }
           ]
@@ -207,7 +208,7 @@ spec:
     ad.datadoghq.com/coredns.instances: |
       [
         {
-          "prometheus_url": "http://%%host%%:9153/metrics",
+          "prometheus_url": "http://%%host%%:9153/metrics", 
           "tags": ["dns-pod:%%host%%"]
         }
       ]
@@ -218,7 +219,7 @@ spec:
 ```yaml
           "instances": [
             {
-              "prometheus_url": "http://%%host%%:9153/metrics",
+              "prometheus_url": "http://%%host%%:9153/metrics", 
               "tags": ["dns-pod:%%host%%"]
             }
           ]
@@ -334,7 +335,7 @@ CoreDNS チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

@@ -19,7 +19,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6、10、11、12、13、14、15
+: 9.6、10、11、12、13、14、15、16
 
 サポートされる Azure PostgreSQL のデプロイメントタイプ
 : Azure VM 上の PostgreSQL、シングルサーバー、フレキシブルサーバー
@@ -185,7 +185,7 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ### 検証する
@@ -391,7 +391,7 @@ Windows の場合は、<code>helm install</code> コマンドに <code>--set tar
 マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -400,12 +400,12 @@ instances:
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: 'ENC[datadog_user_database_password]'
     ssl: "require"
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、Datadog Azure インテグレーションを構成して、CPU、メモリなどの追加のクラウドデータを取得します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
       fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
-    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
+    ## 必須。Postgres 9.6 の場合、セットアップで作成した関数を使用するため、以下の行をコメント解除します
     # pg_stat_statements_view: datadog.pg_stat_statements()
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```

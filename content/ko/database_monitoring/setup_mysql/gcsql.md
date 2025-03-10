@@ -40,25 +40,24 @@ title: Google Cloud SQL 관리형 MySQL을 위한 데이터베이스 모니터�
 설정을 적용하려면 다음 [Database Flags][3]를 설정한 후 **서버를 재시작**합니다.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| 파라미터 | 값 | 설명 |
-| --- | --- | --- |
-| `performance_schema`|`on`| 필수 사항. [성능 스키마][9]를 활성화합니다. |
-| `max_digest_length`| `4096`| 더 큰 쿼리를 수집하는 데 필요합니다. `events_statements_*` 테이블에서 SQL 다이제스트 텍스트 크기를 늘립니다. 기본값을 그대로 두면 `1024`보다 긴 쿼리가 수집되지 않습니다. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code>| `4096`| `max_digest_length`와 일치해야 합니다.
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | 파라미터| 값| 설명|
 | --- | --- | --- |
 | `performance_schema`| `on`| 필수 사항. [성능 스키마][9]를 활성화합니다. |
-| `max_digest_length`| `4096`| 더 큰 쿼리를 수집하는 데 필요합니다. `events_statements_*` 테이블에서 SQL 다이제스트 텍스트 크기를 늘립니다. 기본값을 그대로 두면 `1024`보다 긴 쿼리가 수집되지 않습니다. |
+| `max_digest_length`| `4096`| 보다 대규모 쿼리를 수집하는 데 필요합니다. `events_statements_*` 테이블에서 SQL 다이제스트 텍스트 크기를 늘립니다. 기본값을 그대로 두면 `1024`보다 긴 쿼리가 수집되지 않습니다. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code>| `4096`| `max_digest_length`와 일치해야 합니다. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code>| `4096`|  `max_digest_length`와 일치해야 합니다.|
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| 파라미터 | 값 | 설명 |
+| --- | --- | --- |
+| `performance_schema`|`on`| 필수 사항. [성능 스키마][9]를 활성화합니다. |
+| `max_digest_length`| `4096`| 보다 대규모 쿼리를 수집하는 데 필요합니다. `events_statements_*` 테이블에서 SQL 다이제스트 텍스트 크기를 늘립니다. 기본값을 그대로 두면 `1024`보다 긴 쿼리가 수집되지 않습니다. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code>| `4096`| `max_digest_length`와 일치해야 합니다.
+
+[9]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -66,21 +65,9 @@ title: Google Cloud SQL 관리형 MySQL을 위한 데이터베이스 모니터�
 
 Datadog 에이전트가 통계와 쿼리를 수집하려면 데이터베이스에 대한 읽기 전용 액세스가 필요합니다.
 
-다음 지침은 `datadog@'%'`를 사용하는 모든 호스트에서 로그인할 수 있도록 에이전트에 권한을 부여합니다. `datadog@'localhost'`를 사용하여 로컬 호스트에서만 로그인하도록 `datadog` 사용자를 제한할 수 있습니다. 자세한 정보는 [MySQL 설명서][4]를 참조하세요.
+다음 지침은 `datadog@'%'`를 사용하는 모든 호스트에서 로그인할 수 있도록 에이전트에 권한을 부여합니다. `datadog@'localhost'`를 사용하여 로컬 호스트에서만 로그인하도록 `datadog` 사용자를 제한할 수 있습니다. 자세한 정보는 [MySQL 설명서][11]를 참조하세요.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-`datadog` 사용자를 생성하고 기본 권한을 부여하세요.
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` 사용자를 생성하고 기본 권한을 부여하세요.
@@ -89,6 +76,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` 사용자를 생성하고 기본 권한을 부여하세요.
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -150,6 +149,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ### 확인
 
 다음 명령을 사용해 `<UNIQUEPASSWORD>`를 위에서 생성한 비밀번호로 변경하여 사용자가 성공적으로 생성되었는지 확인합니다.
@@ -172,7 +174,7 @@ Cloud SQL 호스트를 모니터링하려면 인프라스트럭처에 Datadog �
 
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 호스트에서 실행 중인 에이전트에 대해 이 검사를 구성하려면 다음과 같이 실행하세요(예: 에이전트가 Google Cloud SQL 데이터베이스에서 수집할 수 있도록 작은 GCE 인스턴스를 프로비저닝하는 경우).
 
@@ -188,18 +190,15 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # 앞의 CREATE USER 단계에서
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
-    #프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Google Cloud(GCP) 통합을 설정합니다.
+    # 프로젝트 및 인스턴스를 추가한 후 GCP(Datadog Google Cloud) 통합을 통해 CPU, 메모리 등 추가 클라우드 데이터를 풀링합니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-**참고**: 특수 문자가 있는 경우 비밀번호를 작은따옴표로 묶어 입력하세요.
-
-
-설정 `project_id` 및 `instance_id` 필드에 대한 자세한 내용은 [MySQL 통합 사양][3]을 참조하세요.
+`project_id` 및 `instance_id` 필드 설정에 대한 자세한 내용은 [`mysql.conf.yaml` 파일의 GCP 섹션][4]을 참조하세요.
 
 [에이전트를 재시작][3]하여 MySQL 메트릭을 Datadog에 전송하기 시작합니다.
 
@@ -207,6 +206,8 @@ instances:
 [1]: /ko/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /ko/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -249,17 +250,15 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-설정 `project_id` 및 `instance_id` 필드에 대한 자세한 내용은 [MySQL 통합 사양][2]을 참조하세요.
-
-일반 텍스트에서 `datadog` 사용자의 암호가 노출되지 않도록 하려면 에이전트의 [비밀 관리 패키지][3]를 사용하고`ENC[]` 구문을 사용하여 암호를 선언하세요. 또는 환경 변수로 암호를 전달하는 방법에 대해 알아보려면 [자동탐지 템플릿 변수 설명서][2]를 참조하세요.
+`project_id` 및 `instance_id` 필드 설정에 대한 자세한 내용은 [`mysql.conf.yaml` 파일의 GCP 섹션][2]을 참조하세요.
 
 
 [1]: /ko/agent/docker/integrations/?tab=docker
-[2]: /ko/agent/faq/template_variables/
-[3]: /ko/agent/configuration/secrets-management
+[2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -276,18 +275,18 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
     ```yaml
     clusterAgent:
       confd:
-        mysql.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
-            instances:
-              - dbm: true
-                host: <INSTANCE_ADDRESS>
-                port: 3306
-                username: datadog
-                password: '<UNIQUEPASSWORD>'
-                gcp:
-                  project_id: '<PROJECT_ID>'
-                  instance_id: '<INSTANCE_ID>'
+          instances:
+            - dbm: true
+              host: <INSTANCE_ADDRESS>
+              port: 3306
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              gcp:
+                project_id: '<PROJECT_ID>'
+                instance_id: '<INSTANCE_ID>'
 
     clusterChecksRunner:
       enabled: true
@@ -311,15 +310,15 @@ Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</
 연결된 구성 파일로 클러스터 검사를 구성하려면 `/conf.d/mysql.yaml` 경로의 Cluster 에이전트 컨테이너에서 설정 파일을 연결하세요.
 
 ```yaml
-cluster_check: true  # 다음 플래그를 포함해야 합니다.
+cluster_check: true  # Make sure to include this flag
 init_config:
 instances:
   - dbm: true
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
-    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog Google Cloud (GCP) 통합을 설정합니다.
+    password: 'ENC[datadog_user_database_password]'
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -347,7 +346,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -362,23 +361,22 @@ spec:
     name: mysql
 ```
 
-설정 `project_id` 및 `instance_id` 필드에 대한 자세한 내용은 [MySQL 통합 사양][4]을 참조하세요.
+`project_id` 및 `instance_id` 필드 설정에 대한 자세한 내용은 [`mysql.conf.yaml` 파일의 GCP 섹션][4]을 참조하세요.
 
 Cluster 에이전트가 자동으로 이 설정을 등록하고 MySQL 검사를 실행합니다. 
-
-`datadog` 사용자 암호가 일반 텍스트로 노출되는 것을 예방하려면 에이전트의 [비밀 관리 패키지][4]를 이용해`ENC[]` 구문을 사용하여 암호를 선언하세요.
 
 [1]: /ko/agent/cluster_agent
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /ko/agent/configuration/secrets-management
+[4]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### 검증
 
-[에이전트의 상태 하위 명령을 실행][5]하고 Checks 섹션에서 `mysql`을 찾습니다. 또는 [Databases][6] 페이지를 방문하여 시작합니다.
+[에이전트의 상태 하위 명령을 실행][5]하고 점검섹션에서 `mysql`을 찾습니다. 또는 [데이터베이스][6] 페이지를 확인하여 시작합니다.
 
 ## 에이전트 설정 예시
 {{% dbm-mysql-agent-config-examples %}}
@@ -406,3 +404,5 @@ Google Cloud에서 보다 포괄적인 데이터베이스 메트릭을 수집하
 [7]: /ko/integrations/google_cloudsql
 [8]: /ko/database_monitoring/troubleshooting/?tab=mysql
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
+[11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html

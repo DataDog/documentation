@@ -26,7 +26,7 @@ further_reading:
 
 
 <div class="alert alert-warning">
-Live Processes is included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+Live Processes and Live Process Monitoring are included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
 ## Introduction
@@ -230,6 +230,48 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
    ```
 
    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+
+### Optimize footprint for process collection
+By default, the Datadog Agent has a separate Process Agent for container and process collection. You can consolidate container and process collection to the core Agent if you're running a Linux environment.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+Add the `runInCoreAgent` configuration to your `datadog-values.yaml` file:
+```
+datadog:
+  processAgent:
+    runInCoreAgent: true
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+Add the `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` configuration in your `datadog-agent.yaml` file:
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{% tab "Linux hosted" %}}
+If you are running the Agent outside of containers on Linux, add the `run_in_core_agent` flag in your `datadog.yaml` file:
+
+```
+process_config:
+  run_in_core_agent:
+    enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ### Process arguments scrubbing
@@ -448,7 +490,7 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
-### Network Performance Monitoring
+### Cloud Network Monitoring
 
 When you inspect a dependency in the [Network Analytics][11] page, you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
 
@@ -471,10 +513,10 @@ Processes are normally collected at 10s resolution. While actively working with 
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
-[11]: /network_monitoring/performance/network_analytics
+[11]: /network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /agent/configuration/agent-commands/#restart-the-agent
 

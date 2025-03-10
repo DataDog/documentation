@@ -29,7 +29,7 @@ categories:
 - ログの収集
 - ネットワーク
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.6.1
+integration_version: 5.0.0
 is_public: true
 manifest_version: 2.0.0
 name: twistlock
@@ -106,7 +106,7 @@ Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージ�
 
 ##### メトリクスの収集
 
-| Parameter            | 値                                                                               |
+| パラメーター            | 値                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `twistlock`                                                                         |
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                       |

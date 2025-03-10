@@ -225,7 +225,7 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 
 {{< tabs >}}
 
-{{% tab "Registry Editor" (Editor de registro) %}}
+{{% tab "Editor de registro" %}}
 
 En el Editor de registro, crea un valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y configura los datos de valor como:
 

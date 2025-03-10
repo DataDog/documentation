@@ -23,7 +23,7 @@ cascade:
 * [How do I configure Azure AD as a SAML IdP?][9]
 * [Why are users being added as "none none"?][10]
 * [How do I configure NoPassword as a SAML IdP?][11]
-* [How do I configure Okta as a SAML IdP?][12]
+* [Legacy Okta SAML IdP configuration][12]
 * [How do I configure Google as a SAML IdP?][13]
 * [How do I setup Microsoft Active Directory Federation Services as a SAML IdP?][14]
 * [How is Datadog retrieving my data? Are my data and credentials safe?][15]
@@ -40,7 +40,7 @@ cascade:
 [9]: /account_management/faq/how-do-i-configure-azure-ad-as-a-saml-idp/
 [10]: /account_management/faq/why-are-users-being-added-as-none-none/
 [11]: /account_management/faq/how-do-i-configure-nopassword-as-a-saml-idp/
-[12]: /account_management/faq/how-do-i-configure-okta-as-a-saml-idp/
+[12]: /account_management/faq/okta/
 [13]: /account_management/faq/how-do-i-configure-google-as-a-saml-idp/
 [14]: /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 [15]: /account_management/faq/how-is-datadog-retrieving-my-data-are-my-data-and-credentials-safe/

@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/"
   tag: "Blog"
   text: "Identify and remediate permission gaps in AWS with Datadog CIEM and AWS IAM Access Analyzer"
+- link: "https://www.datadoghq.com/blog/detect-cross-account-risks-aws/"
+  tag: "Blog"
+  text: "Detect cross-account access risks in AWS with Datadog"
 ---
 
 Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
@@ -50,6 +53,18 @@ To remediate the identity risk, click **Fix in AWS** to update the resource in A
 {{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
 
 You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
+
+## Gain visibility into who can access at-risk resources
+
+To see all the principals that can directly or indirectly access a given misconfigured resource, click the **Access Insights** tab in Misconfigurations, Identity Risks, and the Security Inbox. In this example, it shows all the principals that can access this EC2 instance:
+
+{{< img src="security/csm/access_insights.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
+
+You can see the risks associated with each principal in the **Risks** column, as well as the type of **Path** the principal can take (direct or indirect) to access the resource.
+
+You can search for a subset of principals by name, type, public accessibility, or administrative access. Additionally, you can filter for direct or indirect access.
+
+Click the **Actions** dropdown beside a principal to see it in Resource Catalog, or update its configuration in AWS IAM console.
 
 ## AWS IAM Access Analyzer integration
 

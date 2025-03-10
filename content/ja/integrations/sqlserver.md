@@ -21,11 +21,11 @@ assets:
     source_type_id: 45
     source_type_name: SQL Server
   monitors:
-    SQLServer ao not healthy: assets/monitors/sqlserver_ao_not_healthy.json
-    SQLServer db not in sync: assets/monitors/sqlserver_db_not_sync.json
-    SQLServer db not online: assets/monitors/sqlserver_db_not_online.json
-    SQLServer high failed auto param: assets/monitors/sqlserver_high_number_failed_auto_param.json
-    SQLServer high processes blocked: assets/monitors/sqlserver_high_processes_blocked.json
+    Auto-parameterization attempts are failing: assets/monitors/sqlserver_high_number_failed_auto_param.json
+    Availability Group is not healthy: assets/monitors/sqlserver_ao_not_healthy.json
+    Database is not online: assets/monitors/sqlserver_db_not_online.json
+    Database not in sync: assets/monitors/sqlserver_db_not_sync.json
+    Processes are blocked: assets/monitors/sqlserver_high_processes_blocked.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -34,7 +34,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 17.5.1
+integration_version: 20.2.0
 is_public: true
 manifest_version: 2.0.0
 name: sqlserver
@@ -59,7 +59,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Stores
-  - Category::Log Collection
+  - Category::ログの収集
   - Offering::Integration
   configuration: README.md#Setup
   description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
@@ -93,7 +93,7 @@ SQL Server インテグレーションを使用して、SQL Server インスタ�
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
-SQL Server 2012 以降のすべてのエディションがサポートされています。
+SQL Server 2012、2014、2016、2017、2019、2022 がサポートされています。
 
 ## セットアップ
 
@@ -127,7 +127,7 @@ SQL Server チェックでサポートされる SQL Server のバージョンは
    データベースごとにファイルサイズのメトリクスを収集するには、作成したユーザー (`datadog`) にデータベースへの[接続権限アクセス][6]があることを確認するために、以下を実行します。
 
    ```SQL
-       GRANT CONNECT ANY DATABASE to datadog;
+       GRANT CONNECT ANY DATABASE to datadog; 
    ```
 
 2. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。

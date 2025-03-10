@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: /metrics/custom_metrics/
   tag: ドキュメント
-  text: Learn more about Custom Metrics
+  text: カスタムメトリクスについて
 - link: /metrics/guide/custom_metrics_governance/
   tag: ガイド
-  text: Best Practice for Custom Metric Governance
+  text: カスタムメトリクスのガバナンスに関するベストプラクティス
 title: カスタムメトリクスの課金
 ---
 
@@ -20,7 +20,7 @@ title: カスタムメトリクスの課金
 
 **カスタムメトリクスは、メトリクス名とタグ値 (ホストタグを含む) の組み合わせにより、一意に識別されます**。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
 
-Your monthly billable custom metrics usage (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics (also known as timeseries) for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value. Your billable usage is not impacted by data point submission frequency or the number of queries you run on your metrics.
+請求対象の月間カスタムメトリクス使用量 (使用量ページに表示される数値) は、指定された月の各時間におけるすべての個別カスタムメトリクス (時系列とも呼ばれる) の合計をその月の総時間数で割り、月間平均値を算出することで計算されます。請求対象の使用量は、データポイントの送信頻度やメトリクスに対して実行するクエリの数には影響を受けません。
 
 Metrics without LimitsTM のユーザーは、インジェストおよびインデックスされたカスタムメトリクスの月間課金量を Usage ページで確認できます。インジェストおよびインデックスされたカスタムメトリクスと [Metrics without LimitsTM][5] について詳しくはこちら。
 

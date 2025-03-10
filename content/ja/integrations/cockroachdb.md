@@ -30,7 +30,7 @@ categories:
 - クラウド
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
 display_on_public_website: true
@@ -38,7 +38,7 @@ draft: false
 git_integration_title: cockroachdb
 integration_id: cockroachdb
 integration_title: CockroachDB
-integration_version: 3.3.2
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: cockroachdb

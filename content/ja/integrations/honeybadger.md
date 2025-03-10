@@ -18,7 +18,7 @@ author:
 categories:
 - event management
 - issue tracking
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -73,7 +73,7 @@ Honeybadger インテグレーションには、メトリクスは含まれま�
 
 ### イベント
 
-Honeybadger インテグレーションには、イベントは含まれません。
+Honeybadger インテグレーションはイベントを収集します。
 
 ### サービスチェック
 

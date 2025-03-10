@@ -6,48 +6,48 @@
 
 <!-- Python Layer -->
 {{- if eq (.Get "layer") "python" -}}
-    98
+    106
 {{- end -}}
 
 <!-- Node Layer -->
 {{- if eq (.Get "layer") "node" -}}
-    115
+    121
 {{- end -}}
 
 <!-- Ruby Layer -->
 {{- if eq (.Get "layer") "ruby" -}}
-    22
+    24
 {{- end -}}
 
 <!-- Lambda Extension -->
 {{- if eq (.Get "layer") "extension" -}}
-    64
+    73
 {{- end -}}
 
 <!-- dd-trace-java Layer -->
 {{- if eq (.Get "layer") "dd-trace-java" -}}
-    15
+    19
 {{- end -}}
 
 <!-- dd-trace-dotnet Layer -->
 {{- if eq (.Get "layer") "dd-trace-dotnet" -}}
-    15
+    19
 {{- end -}}
 
 <!-- Python Versions -->
 {{- if eq (.Get "layer") "python-versions" -}}
-    `Python38`, `Python39`, `Python310`, `Python311`, `Python312`
+    `Python38`, `Python39`, `Python310`, `Python311`, `Python312`, `Python313`
 {{- end -}}
 
 {{- if eq (.Get "layer") "python-example-version" -}}
-    Python312
+    Python313
 {{- end -}}
 
 <!-- Node Versions -->
 {{- if eq (.Get "layer") "node-versions" -}}
-    `Node16-x`, `Node18-x`, `Node20-x`
+    `Node18-x`, `Node20-x`, `Node22-x`
 {{- end -}}
 
 {{- if eq (.Get "layer") "node-example-version" -}}
-    Node20-x
+    Node22-x
 {{- end -}}

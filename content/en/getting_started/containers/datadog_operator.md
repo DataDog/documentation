@@ -32,8 +32,8 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
   ```
   Replace `<DATADOG_API_KEY>` with your [Datadog API key][5].
-
-  **Note**: add the application key for autoscaling using the external metrics server.
+  
+  **Note**: Add an application key for autoscaling using the external metrics server by adding `--from-literal app-key=<DATADOG_APP_KEY>`
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
@@ -43,6 +43,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
     name: datadog
   spec:
     global:
+      site: datadoghq.com
       credentials:
         apiSecret:
           secretName: datadog-secret
@@ -53,6 +54,8 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
       logCollection:
         enabled: true
   ```
+  **Note**: Make sure to set `site` to the Datadog site you are using (for instance, `datadoghq.eu`). 
+  
   For all configuration options, see the [Operator configuration spec][6].
 
 4. Deploy the Datadog Agent:

@@ -21,7 +21,7 @@ further_reading:
 Shared visualizations allow you to display metric, trace, and log visualizations outside of Datadog. Share visualizations to enhance decision-making and problem-solving processes with team members. 
 
 {{< whatsnext desc="How to share visualizations:" >}}
-   {{< nextlink href="dashboards/sharing/public_dashboards" >}}<strong>Share dashboards</strong>: Generate a public link for users to access{{< /nextlink >}}
+   {{< nextlink href="dashboards/sharing/shared_dashboards" >}}<strong>Shared dashboards</strong>: Generate a public link for users to access{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/graphs" >}}<strong>Share graphs</strong>: Generate an embed code{{< /nextlink >}}
    {{< nextlink href="dashboards/sharing/scheduled_reports" >}}<strong>Scheduled reports</strong>: Set a schedule to send email reports{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -35,5 +35,5 @@ To see the complete list of publicly shared dashboards, navigate to [**Organizat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/public-sharing/shared-dashboards
-[2]: /dashboards/sharing/public_dashboards/#revoke
+[2]: /dashboards/sharing/shared_dashboards/
 [3]: /dashboards/sharing/graphs/#revoke

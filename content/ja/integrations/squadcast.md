@@ -26,7 +26,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
 display_on_public_website: true
@@ -80,7 +80,7 @@ Squadcast を Datadog に接続すると、以下のことができます。
 
 ### Squadcast
 
-Follow these steps in Squadcast:
+Squadcast で以下の手順に従います。
 
 1. 上部のチームピッカーで **Team** を選択します。
 

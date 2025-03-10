@@ -22,7 +22,7 @@ assets:
     source_type_id: 10012
     source_type_name: Envoy
   monitors:
-    Envoy - connected state: assets/monitors/connected_state.json
+    Envoy instance disconnected from control plane: assets/monitors/connected_state.json
   saved_views:
     envoy_4xx: assets/saved_views/envoy_4xx.json
     envoy_5xx: assets/saved_views/envoy_5xx.json
@@ -37,7 +37,7 @@ categories:
 - cloud
 - log collection
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_on_public_website: true
@@ -45,7 +45,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 3.5.1
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: envoy
@@ -78,7 +78,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
 このチェックは、[Envoy][1] から分散型システムの可観測性メトリクスを収集します。
 

@@ -18,9 +18,9 @@ title: Data Streams Monitoring for Python のセットアップ
 Data Streams Monitoring を開始するには、Datadog Agent と Python ライブラリの最新バージョンが必要です。
 * [Datadog Agent v7.34.0 以降][1]
 * [Python Tracer][2]
-  * Kafka: v1.16.0 or later
-  * Amazon SQS and Amazon Kinesis: v1.20.0
-  * RabbitMQ: v2.6.0 or later
+  * Kafka: v1.16.0 以上
+  * Amazon SQS および Amazon Kinesis: v1.20.0
+  * RabbitMQ: v2.6.0 以上
 
 ### インストール
 
@@ -33,13 +33,13 @@ environment:
 ```
 
 ### サポートされるライブラリ
-Data Streams Monitoring supports the [confluent-kafka library][3] and [kombu package][5].
+Data Streams Monitoring は、[confluent-kafka ライブラリ][3]と [kombu パッケージ][5]をサポートしています。
 
 ### SQS パイプラインの監視
-Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+Data Streams Monitoring は、SQS キューを通るメッセージのパスを追跡するために 1 つの[メッセージ属性][4]を使用します。Amazon SQS にはメッセージごとに許可されるメッセージ属性が最大 10 個という制限があるため、すべてのメッセージをデータパイプラインを通じてストリーミングする際には、設定するメッセージ属性を 9 個以下にして、残りの 1 つの属性を Data Streams Monitoring のために残しておく必要があります。
 
-### Monitoring Kinesis Pipelines
-There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
+### Kinesis パイプラインの監視
+Kinesis にはメッセージ属性がないため、コンテキストを伝播してメッセージが Kinesis ストリームを通る完全なパスを追跡することができません。その結果、Data Streams Monitoring のエンドツーエンドのレイテンシーメトリクスは、メッセージのパス上のセグメントごとのレイテンシー (プロデューサーサービスから Kinesis ストリームを経由し、コンシューマーサービスに至るまでのレイテンシー) を合計して近似されます。スループットメトリクスも、プロデューサーサービスから Kinesis ストリームを経てコンシューマーサービスに至るまでのセグメントに基づいています。それでも、サービスにインスツルメンテーションを施すことで、データストリームの完全なトポロジーを視覚化することが可能です。
 
 ## その他の参考資料
 

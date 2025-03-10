@@ -30,7 +30,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics][27]
-- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
+- [Collect Profiling data](#collect-profiling-data)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -46,7 +46,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 ## Enable Threat Detection to observe attack attempts
 
-Get alerted on attackers targeting your serverless applications and respond quickly. 
+Get alerted on attackers targeting your serverless applications and respond quickly.
 
 To get started, first ensure that you have [tracing enabled][43] for your functions.
 
@@ -278,8 +278,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## Collect traces from non-Lambda resources
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
-
 Datadog can infer APM spans based on the incoming Lambda events for the AWS managed resources that trigger the Lambda function. This can be help visualize the relationship between AWS managed resources and identify performance issues in your serverless applications. See [additional product details][12].
 
 The following resources are currently supported:
@@ -350,9 +348,11 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 ## Select sampling rates for ingesting APM spans
 
-To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
+To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
+**Notes**: 
+   - The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.   
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -370,7 +370,7 @@ To scrub trace attributes for data security, see [Configure the Datadog Agent or
 
 ## Enable/disable trace collection
 
-Trace collection through the Datadog Lambda extension is enabled by default. 
+Trace collection through the Datadog Lambda extension is enabled by default.
 
 If you want to start collecting traces from your Lambda functions, apply the configurations below:
 
@@ -501,15 +501,15 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories. 
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories.
 
 For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 
 [101]: /integrations/guide/source-code-integration/?tab=go#serverless
 
-## Collect Profiling data (public beta)
+## Collect profiling data
 
-Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+Datadog's [Continuous Profiler][42] is available in Preview for Python tracer version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
@@ -536,7 +536,7 @@ DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_ke
 # Enable dual shipping for APM (profiling)
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
 # Enable dual shipping for logs
-DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
 ```
 
@@ -545,7 +545,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 
 The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
 
-1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+1. Set the environment variable `DD_LOGS_CONFIG_FORCE_USE_HTTP` on your Lambda function.
 2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
 3. Create a new secret on Secrets Manager to store the dual shipping metrics environment variable. The contents should be similar to `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`.
 4. Set the environment variable `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function to the ARN from the aforementioned secret.
@@ -563,7 +563,7 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automa
 
 The Datadog Extension supports decrypting [AWS KMS][41] values automatically for any environment variables prefixed with `_KMS_ENCRYPTED`. You can use this to securely store your environment variables in KMS and dual ship with Datadog.
 
-1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
+1. Set the environment variable `DD_LOGS_CONFIG_FORCE_USE_HTTP=true` on your Lambda function.
 2. Add the `kms:GenerateDataKey` and `kms:Decrypt` permissions to your Lambda function IAM role permissions.
 3. For dual shipping metrics, encrypt `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 4. For dual shipping traces, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_ADDITIONAL_KMS_ENCRYPTED` environment variable equal to its value.

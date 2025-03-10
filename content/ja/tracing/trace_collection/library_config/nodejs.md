@@ -64,10 +64,6 @@ dd-trace を有効にするかどうか。`false` に設定すると、ライブ
 **デフォルト**: `true`<br>
 トレースを有効にするかどうか。
 
-`DD_TRACE_DEBUG`
-: **構成**: N/A<br>
-**デフォルト**: `false`<br>
-トレーサーのデバッグロギングを有効にします。
 
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>

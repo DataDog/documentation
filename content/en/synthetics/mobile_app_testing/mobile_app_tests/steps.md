@@ -36,13 +36,25 @@ Click the green **Device Connection Notification** button in the **Launch a devi
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
+After you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
 
 To stop recording, click **Stop Recording**.
 
 ## Manually added steps
 
-In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion) and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using the [element inspector](#element-inspector), [assertions](#assertion), and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
+
+### Element Inspector
+
+The Element Inspector allows you to visualize the element hierarchy, copy attributes, and target elements to generate interaction steps using XML.
+
+You can use this feature by going to the test recorder, launching a device, and clicking the Element Inspector button. Use the Element Inspector to:
+
+- **Visualize the element tree**: View the complete hierarchy of elements in your application for a clear, structured overview.
+- **Copy attributes**: Copy attributes like element name or XPATH values directly from the inspector.
+- **Target elements**: Generate steps such as _tap_ or _scroll_ by selecting the element within the element tree. 
+
+{{< img src="mobile_app_testing/element_inspector_3.mp4" alt="Video showing the Element Inspector in Mobile App Tests" style="width:60%; height:300px;" video="true" >}}
 
 ### Assertion
 
@@ -85,13 +97,13 @@ In addition to automatically recording steps based on your device interactions, 
 
 Interacting with elements with a double tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a double tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/double_tap_2.mp4" alt="Recording a double tap step in a mobile test" style="width:60%" video=true >}}
 
 #### Extract variable from element
 
 This action allows you to extract the value of an element and save it as a variable.
 
-{{< img src="mobile_app_testing/test_steps/extract_variable_from_element.mp4" alt="Recording how to extract a variable from an element on a mobile test" style="width:60%" video=true >}}
+{{< img src="/mobile_app_testing/test_steps/extract_variable_from_element_2.mp4" alt="Recording how to extract a variable from an element on a mobile test" style="width:60%" video=true >}}
 
 #### Open deep link
 
@@ -104,7 +116,7 @@ Add a name to the step and enter a deep link URI.
 This action allows you to restart your application.
 This action does not reinstall the application but instead closes and then launches the application again. 
 
-{{< img src="mobile_app_testing/test_steps/restart_application.mp4" alt="Recording how to restart your application" style="width:60%" video=true >}}
+{{< img src="mobile_app_testing/test_steps/restart_application_2.mp4" alt="Recording how to restart your application" style="width:60%" video=true >}}
 
 #### Rotate device
 
@@ -126,13 +138,13 @@ By default, the **Scroll** step scrolls through the entire page. If you need to 
 
 This action allows you to scroll to a specific element horizontally or vertically.
 
-{{< img src="mobile_app_testing/test_steps/scroll_to_element_2.mp4" alt="Recording a scroll to element in a mobile test" style="width:60%" video=true >}}
+{{< img src="mobile_app_testing/test_steps/scroll_to_element_3.mp4" alt="Recording a scroll to element in a mobile test" style="width:60%" video=true >}}
 
 #### Tap
 
 Interacting with elements with a tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/tap.mp4" alt="Recording a tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/tap_2.mp4" alt="Recording a tap step in a mobile test" video=true >}}
 
 #### Toggle Wi-Fi
 
@@ -144,7 +156,7 @@ This action allows you to enable or disable Wi-Fi within your test to monitor ho
 
 Interacting with a text input field on your mobile application, adding a name, and setting a value records a step.
 
-{{< img src="mobile_app_testing/type_text.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/type_text_2.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
@@ -162,9 +174,9 @@ By default, mobile app tests wait for a page to be fully loaded before performin
 
 #### Press back
 
-Interacting with the **Back** button below the mobile application records a step.
+Interacting with the **Back** button below the mobile application records a step. Available on Android only.
 
-{{< img src="mobile_app_testing/press_back.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/test_steps/press_back_2.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
 
 </br>
 
@@ -184,6 +196,17 @@ For more information about advanced options for subtests, see [Advanced Options 
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][6].
 
+#### Step preview
+
+When adding subtests to your mobile tests, click the **steps** dropdown to show a preview of each step within the subtest:
+
+{{< img src="mobile_app_testing/test_steps/subtest_mobile_preview_steps.png" alt="Add a subtest and select existing subtest or extract from steps" style="width:60%" >}}
+
+After adding the subtest to your mobile test, click the subtest to view another preview of each step within the subtest:
+
+{{< img src="mobile_app_testing/test_steps/subtest_preview_steps_click.png" alt="Selecting a subtest shows a preview of the steps" style="width:60%" >}}
+
+
 ### Variables
 If your subtest contains variables, they are inherited by the test you import them into. 
 To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
@@ -192,11 +215,11 @@ To override these variables, create a variable in your parent test with the name
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
 
-1. Hover over a recorded test step and click the **Set Cursor** icon. A blue line appears above your test step. 
+1. Hover between two recorded test steps and click **Add Steps here**. A blue line appears above your test step. 
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
-3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
+3. When you complete adding additional steps above your tests step, click **Clear** to exit.
 
-{{< img src="mobile_app_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
+{{< img src="mobile_app_testing/test_steps/manage_step_order_2.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
 
 ## Edit a recording 
 
@@ -204,11 +227,10 @@ To edit a mobile recording after it's saved:
 
 - Navigate to [Synthetics > Tests.][7]
 - Click on a previously saved mobile test.
-- Click the gear icon on the top right hand corner and then click "edit recording".
+- Click the video icon in the left hand panel, then click "edit recording".
 - Select multiple or single steps for deletion or replay, then click **Save & Quit**.
-- Select multiple or single steps for deletion or replay, then click "Save & Quit".
 
-{{< img src="mobile_app_testing/test_steps/edit-mobile-recording.png" alt="Editing a mobile recording, and using the multi-select feature" width="70%" >}}
+{{< img src="mobile_app_testing/test_steps/edit_recording_2.png" alt="Editing a mobile recording, and using the multi-select feature" width="70%" >}}
 
 ## Further reading
 

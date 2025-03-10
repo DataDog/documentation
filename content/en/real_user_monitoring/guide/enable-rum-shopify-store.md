@@ -10,6 +10,10 @@ further_reading:
   text: 'Alerting With Conversion Rates'
 ---
 
+<div class="alert alert-warning">
+<a href="https://www.shopify.com/plus/upgrading-to-checkout-extensibility">Shopify's Checkout Extensibility</a> is not supported with RUM tracking. If this feature is critical for your business needs, create a ticket with <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
+</div>
+
 ## Overview
 
 Understanding how customers interact with your web pages is crucial to the success of your online store.
@@ -56,8 +60,7 @@ For example, you can:
 - Get valuable insights about your customers' behavior by
 making data-driven decisions to improve your store
 - Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
-- Use [funnel analysis][4] to better understand the customer journey, or
-- [Generate metrics][5] from those newly captured sessions
+- [Generate metrics][5] from newly captured sessions
 
 ## Further Reading
 
@@ -66,6 +69,5 @@ making data-driven decisions to improve your store
 [1]: /real_user_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code
 [3]: /real_user_monitoring/session_replay/browser/
-[4]: /product_analytics/journeys/funnel_analysis
 [5]: /real_user_monitoring/platform/generate_metrics/
 

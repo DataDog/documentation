@@ -17,8 +17,8 @@ assets:
     source_type_id: 10139
     source_type_name: PHP APCu
   monitors:
-    '[php_apcu] Cache Full has been detected': assets/monitors/php-apcu_expunges.json
-    '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
+    Cache is Full: assets/monitors/php-apcu_expunges.json
+    Cache usage is high: assets/monitors/php-apcu_high_usage.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: コミュニティ
@@ -26,7 +26,7 @@ author:
   support_email: noname@withgod.jp
 categories:
 - キャッシュ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true

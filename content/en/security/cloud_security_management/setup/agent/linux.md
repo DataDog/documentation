@@ -9,7 +9,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/agent/linux/
 ---
 
-Use the following instructions to enable Misconfigurations, Threat Detection, Host Vulnerability Management, and Container Vulnerability Management.
+Use the following instructions to enable Misconfigurations, Threat Detection, and Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -50,8 +50,6 @@ sbom:
   # Set to true to enable Host Vulnerability Management  
   host:
     enabled: true
-container_image:
-  enabled: true
 {{< /code-block >}}
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}

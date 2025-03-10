@@ -6,6 +6,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/anthropic-integration-datadog-llm-observability/"
   tag: "Blog"
   text: "Monitor your Anthropic applications with Datadog LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-llm-prompt-injection-attacks/"
+  tag: "Blog"
+  text: "Best practices for monitoring LLM prompt injection attacks to protect sensitive data"
+- link: "https://www.datadoghq.com/blog/vllm-integration/"
+  tag: "Blog"
+  text: "Optimize LLM application performance with Datadog's vLLM integration"
 ---
 
 {{< site-region region="gov" >}}
@@ -44,15 +50,13 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 Identify problematic clusters and monitor the quality of responses over time with topical clustering and checks like sentiment, failure to answer, and so on.
 
-{{< img src="llm_observability/clusters-page.png" alt="The clusters page in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 
 Automatically scan and redact any sensitive data in your AI applications and identify prompt injections, among other evaluations.
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by LLM Observability" style="width:100%;" >}}
-
-<br>
 
 ## Use integrations with LLM Observability
 
@@ -63,8 +67,6 @@ The [LLM Observability SDK for Python][3] integrates with frameworks such as Ope
 For more information, see the [Auto Instrumentation documentation][8].
 
 ## Ready to start?
-
-<div class="alert alert-warning">By using LLM Observability, you acknowledge that Datadog is authorized to share your company's data with OpenAI LLC for the purpose of providing and improving LLM Observability. OpenAI will not use your data for training or tuning purposes. If you have any questions or want to opt out of features that depend on OpenAI, reach out to your account representative.</div>
 
 See the [Setup documentation][5] for instructions on instrumenting your LLM application or follow the [Trace an LLM Application guide][6] to generate a trace using the [LLM Observability SDK for Python][3].
 

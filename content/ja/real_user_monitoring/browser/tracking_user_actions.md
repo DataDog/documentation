@@ -124,4 +124,4 @@ Datadog Browser SDK は、クリックアクション名を決定するために
 [3]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /ja/real_user_monitoring/guide/send-rum-custom-actions
-[6]: /ja/real_user_monitoring/session_replay/privacy_options#mask-action-names
+[6]: /ja/data_security/real_user_monitoring/#mask-action-names

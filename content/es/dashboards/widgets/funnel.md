@@ -10,7 +10,7 @@ further_reading:
   text: Utilizar el análisis del embudo para comprender y optimizar los flujos de
     usuarios clave
 title: Widget embudo
-widget_type: embudo
+widget_type: funnel
 ---
 
 El análisis del embudo te ayuda a realizar un seguimiento de las tasas de conversión en los flujos de trabajo clave para identificar y abordar los cuellos de botella en los recorridos de usuario de extremo a extremo. El widget embudo visualiza las tasas de conversión en los flujos de trabajo de los usuarios y en los recorridos integrales de los usuarios.

@@ -32,6 +32,8 @@ Clics Muertos
 Clics de error
 : Un usuario hace clic en un elemento justo antes de que se produzca un error en JavaScript.
 
+Al activar las señales de frustración, Datadog recopila de modo predeterminado los tres tipos de señales.
+
 ## Requisitos
 
 En primer lugar, necesitas la versión del Browser RUM SDK >= 4.14.0.
@@ -95,7 +97,7 @@ Haz clic en una sesión con un valor en la columna **Número de frustraciones** 
 
 Haz clic en una vista para identificar si un usuario se frustró en una página específica con la etiqueta (tag) `frustration detected`.
 
-{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Menú desplegable de acciones de señales de frustración en los <txprotected>eventos</txprotected> en el gráfico de cascada de rendimiento" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Acciones de señales de frustración en el menú desplegable de eventos en el gráfico de cascada del rendimiento" style="width:90%;" >}}
 
 La cascada de rendimiento muestra las acciones que contienen señales de frustración.
 
@@ -107,7 +109,7 @@ La pestaña **Acciones** muestra la etiqueta `frustration detected` si la acció
 
 Si se producen varias señales de frustración en una acción, se muestran en el panel de acciones **Qué ha ocurrido**.
 
-{{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="Se detectaron varios tipos de acciones en la acción en el panel Qué ha ocurrido" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="Se detectaron varios tipos de señales de frustración en la acción en el panel “Qué ha ocurrido" style="width:90%;" >}}
 
 #### Errores
 
@@ -119,7 +121,7 @@ Haz clic en un error en la pestaña **Errores** para abrir un panel lateral con 
 
 En [Repetición de sesiones][7], puedes observar una réplica en vídeo de la actividad real de un usuario. Las réplicas proporcionan pruebas en vídeo de las acciones que realizan los usuarios cuando muestran signos de frustración.
 
-El recorrido del usuario de una repetición de sesiones detalla los <txprotected>eventos</txprotected> que se producen en orden cronológico. Colócate sobre un evento para desplazarte a ese momento de la repetición: por ejemplo, cuando se produce un clic muerto.
+El recorrido del usuario de una repetición de sesiones detalla los eventos que se producen en orden cronológico. Colócate sobre un evento para desplazarte a ese momento de la repetición: por ejemplo, cuando se produce un clic muerto.
 
 {{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Las señales de frustración se producen en la grabación del navegador" style="width:90%;" >}}
 
@@ -129,31 +131,27 @@ Para más información, consulta la [Documentación sobre la repetición de sesi
 
 Puedes crear monitores y configurar alertas sobre señales de frustración para notificarte a ti o a tu equipo si se produce alguna señal de frustración en una página importante de tu aplicación.
 
-Por ejemplo, para configurar una alerta que le notifique si se produce alguna señal de frustración en una página específica:
+Por ejemplo, para configurar una alerta que te notifique si se produce alguna señal de frustración en una página específica:
 
 {{< img src="real_user_monitoring/frustration_signals/rum_monitor_frustration_count.png" alt="Crear un RUM Monitor que alerta sobre el número de señales de frustración" style="width:90%;" >}}
 
-Para más información, consulta la [Documentación de Monitor sobre <txprotected>monitorización</txprotected> del usuario real][9].
+Para más información, consulta la [Documentación de Monitor sobre monitorización del usuario real][9].
 
 ## Solucionar problemas
 
-### ¿Por qué no se crea un clic de furia cuando un usuario presiona una tecla (como Supr) en el teclado?
+### No se crean clics de rabia cuando un usuario pulsa una tecla (como Supr) en el teclado.
 
 Las señales de frustración se generan a partir de los clics del ratón, no al pulsar el teclado.
 
-### ¿Por qué el panel lateral muestra que una sesión tiene un número diferente de señales de frustración que en la línea de tiempo de evento?
+### El panel lateral no muestra que una sesión tiene un número diferente de señales de frustración que en la línea de tiempo del evento 
 
 Si una sesión está en vivo, está obteniendo información y puede hacer que los banners reflejen un número diferente a los de la línea de tiempo.
-
-### ¿Puedo elegir qué señales rastrear?
-
-Al activar las señales de frustración, Datadog recopila los tres tipos de señales por defecto. Ponte en contacto con tu [Customer Success Manager][10] para obtener más información.
 
 <div class="alert alert-warning">
 Para hacernos llegar tus comentarios o solicitar una función, ponte en contacto con el <a href="/ayuda/">Servicio de asistencia de Datadog </a>.
 </div>
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

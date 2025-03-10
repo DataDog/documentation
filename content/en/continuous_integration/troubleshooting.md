@@ -7,9 +7,9 @@ further_reading:
   - link: "/continuous_integration/pipelines"
     tag: "Documentation"
     text: "Learn how to monitor your CI pipelines"
-  - link: "/continuous_integration/intelligent_test_runner"
+  - link: "/tests/test_impact_analysis"
     tag: "Documentation"
-    text: "Learn about the Intelligent Test Runner"
+    text: "Learn about Test Impact Analyzer"
 ---
 
 {{< site-region region="gov" >}}
@@ -65,7 +65,7 @@ A pipeline execution can maintain `Running` status for a maximum of three days. 
 [7]: /continuous_integration/tests/containers/
 [8]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /continuous_integration/intelligent_test_runner/
+[10]: /tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event

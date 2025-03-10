@@ -4,7 +4,7 @@ further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
-    - link: 'tracing/service_catalog/'
+    - link: 'tracing/software_catalog/'
       tag: 'Documentation'
       text: 'Discover and catalog the services reporting to Datadog'
     - link: 'tracing/services/service_page'
@@ -104,7 +104,7 @@ With the following definitions:
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
-`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}.rollup(sum).fill(zero)` <br>
 This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information.
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
@@ -149,6 +149,6 @@ XRay spans are sampled before they are sent to Datadog, which means trace metric
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/service_catalog/#services-types
+[8]: /tracing/software_catalog/#services-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

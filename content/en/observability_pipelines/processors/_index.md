@@ -23,60 +23,26 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-## Processors
+#### Select a processor for more information:
 
-{{< whatsnext desc="Set up each processor in the pipeline UI. The available processors are:" >}}
-    {{< nextlink href="observability_pipelines/processors/#add-hostname" >}}Add hostname{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#edit-fields" >}}Edit fields{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#enrichment-table" >}}Enrichment table{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#filter" >}}Filter{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#grok-parser" >}}Grok parser{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#parse-json" >}}Parse JSON{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#quota" >}}Quota{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#reduce" >}}Reduce{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#sample" >}}Sample{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/#sensitive-data-scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="observability_pipelines/processors/add_environment_variables" >}}Add environment variables{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/add_hostname" >}}Add hostname{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/dedupe" >}}Deduplicate{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/edit_fields" >}}Edit fields{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/enrichment_table" >}}Enrichment table{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/filter" >}}Filter{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/generate_metrics" >}}Generate metrics{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/grok_parser" >}}Grok parser{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/parse_json" >}}Parse JSON{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/parse_xml" >}}Parse XML{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/quota" >}}Quota{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/reduce" >}}Reduce{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/remap_ocsf" >}}Remap to OCSF{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/split_array" >}}Split array{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Add hostname
-
-{{% observability_pipelines/processors/add_hostname %}}
-
-## Edit fields
-
-{{% observability_pipelines/processors/remap %}}
-
-## Enrichment table
-
-{{% observability_pipelines/processors/enrichment_table %}}
-
-## Filter
-
-{{% observability_pipelines/processors/filter %}}
-
-## Grok parser
-
-{{% observability_pipelines/processors/grok_parser %}}
-
-## Parse JSON
-
-{{% observability_pipelines/processors/parse_json %}}
-
-## Quota
-
-{{% observability_pipelines/processors/quota %}}
-
-## Reduce
-
-{{% observability_pipelines/processors/reduce %}}
-
-## Sample
-
-{{% observability_pipelines/processors/sample %}}
-
-## Sensitive Data Scanner
-
-{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
 

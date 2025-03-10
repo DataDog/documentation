@@ -26,7 +26,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: mapr
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.11.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: mapr
@@ -72,7 +72,7 @@ tile:
 
 MapR チェックは [Datadog Agent][2] パッケージに含まれていますが、追加のセットアップが必要です。
 
-#### Prerequisites
+#### 前提条件
 
 - [MapR モニタリング][3]が問題なく実行されている。
 - `/var/mapr/mapr.monitoring/metricstreams` ストリームで 'consume' を許可された利用可能な [MapR ユーザー][4] (ユーザー名、パスワード、UID、GID あり) がある。既存のユーザーの場合と、新規作成ユーザーの場合があります。
@@ -138,7 +138,7 @@ MapR はログに fluentD を使用します。[fluentD Datadog プラグイン]
 
 ### 検証
 
-Run the [Agent's status subcommand][11] and look for `mapr` under the Checks section.
+[Agent の status サブコマンド][11]を実行し、Checks セクションで `mapr` を探します。
 
 ## 収集データ
 

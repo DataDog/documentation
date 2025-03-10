@@ -15,7 +15,7 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging/
   tag: 설명서
   text: 통합 서비스 태깅
-- link: /tracing/service_catalog/
+- link: /tracing/software_catalog/
   tag: 설명서
   text: Datadog에 보고되는 서비스 검색 및 카탈로그 작성
 - link: /metrics
@@ -33,7 +33,7 @@ title: 동적 계측
 
 동적 계측을 사용하면 재시작 없이도 타사 라이브러리를 포함하여 애플리케이션 코드의 어느 위치에서든 실행 중인 프로덕션 시스템에 계측을 추가할 수 있습니다. 또한, Datadog UI에서 로그, 메트릭, 스팬 및 해당 태그 지정에 대한 원격 분석을 추가하거나 수정할 수 있습니다. 동적 계측은 오버헤드가 낮고 시스템에 부작용이 없습니다.
 
-동적 계측에 대한 최신 사용자 경험 개선 사항을 시험해 보고 싶다면 [자동 완성 및 검색 공개 베타][17]를 선택하는 것을 고려해 보세요.
+Dynamic Instrumentation에 대한 최신 개선 사항을 시험해 보고 싶다면 [자동 완성 및 검색 Preview][17]를 선택하는 것이 좋습니다.
 
 ## 시작하기
 
@@ -46,8 +46,10 @@ title: 동적 계측
 - Java 애플리케이션의 경우 추적 라이브러리 [`dd-trace-java`][3] 1.34.0 또는 이상.
 - Python 애플리케이션의 경우 추적 라이브러리 [`dd-trace-py`][4] 2.2.0 이상.
 - .NET 애플리케이션의 경우 추적 라이브러리 [`dd-trace-dotnet`][5] 2.54.0 또는 이상.
+- (제한된 Preview) Node.js 애플리케이션의 경우 추적 라이브러리 [`dd-trace-js`][18] 5.35.0 또는 이상.
+- (제한된 Preview) Ruby 애플리케이션의 경우 추적 라이브러리 [`dd-trace-rb`][19] 2.9.0 또는 이상.
 - [통합 서비스 태깅][6] 태그 `service`, `env` 및 `version`가 배포에 적용됩니다.
-- (권장 사항) [자동 완성 및 검색(오픈 베타)][17]이 활성화됩니다.
+- (권장 사항) [자동 완성 및 검색(Preview 단계)][17]이 활성화됩니다.
 - (권장 사항) [소스코드 통합][7]이 서비스에 설정되어 있습니다.
 - Dynamic Instrumentation 페이지에 접근하려면 **Dynamic Instrumentation Read Configuration**(`debugger_read`) 권한이 필요합니다.
 - 계측을 생성하거나 수정하려면 **Dynamic Instrumentation Write Configuration**(`debugger_write`) 권한이 필요합니다.
@@ -77,7 +79,8 @@ title: 동적 계측
 ### 한계
 
 - 동적 계측은 아직 Azure App Services 또는 서버리스 환경과 호환되지 않습니다.
-- Python, Java 및 .NET으로 구축된 애플리케이션만 지원이 가능합니다.
+- Python, Java, .NET으로 구축된 애플리케이션에 대해서만 지원이 제공됩니다.
+- Node.js 및 Ruby로 구축된 애플리케이션에 대해 제한된 Preview가 진행 중입니다.
 
 ## 동적 계측 살펴보기
 
@@ -98,7 +101,7 @@ title: 동적 계측
 1. [Dynamic Instrumentation 페이지][12]로 이동합니다.
 1. 오른쪽 상단에서 **Create Probe**를 클릭하거나 서비스에서 점 3개 메뉴를 클릭하고 **Add a probe for this service**를 선택합니다.
 1. 미리 채워져 있지 않은 경우 서비스, 런타임, 환경 및 버전을 선택합니다.
-1. 소스 코드에서 클래스와 메서드 또는 소스 파일과 행을 선택하여 프로브를 설정할 위치를 지정합니다. [자동 완성 및 검색 공개 베타][17]를 선택한 경우 자동 완성 기능은 클래스나 메서드 선택에 대한 제안을 표시합니다.
+1. 소스 코드에서 클래스와 메서드 또는 소스 파일과 줄을 선택하여 프로브를 설정할 위치를 지정합니다. [자동 완성 및 검색 Preview][17]를 선택하면 자동 완성 기능은 클래스나 메서드 선택에 대한 제안 사항을 표시합니다.
 
 각 프로브 유형에 대한 특정 생성 단계는 아래의 개별 프로브 유형을 참조하세요.
 
@@ -142,10 +145,10 @@ title: 동적 계측
 
 이 설정이 활성화된 프로브는 초당 1회 적중으로 속도가 제한됩니다.
 
-<div class="alert alert-warning"><p><strong>경고: 캡처된 데이터에는 개인 데이터, 암호, AWS 키와 같은 비밀을 포함한 민감한 정보가 포함될 수 있습니다.</strong></p><p>이 정보가 올바르게 삭제되었는지 확인하려면 다음을 따르세요.<ul>
-<li>Datadog 동적 계측은 민감한 정보를 삭제하기 위해 여러 기술을 사용합니다. 기본 메커니즘이나 필요에 맞게 확장하는 방법에 대해 자세히 알아보려면 <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">민감한 데이터 스크러빙</a>을 참고하세요.</li>
-<li><strong>Capture method parameters and local variables</strong> 옵션을 비활성화하고 로그 메시지 템플릿에 포함하려는 변수를 명시적으로 선택합니다. 이렇게 하면 로그 프로브에 특별히 식별한 변수와 관련된 데이터만 포함되어 의도하지 않은 민감한 데이터 유출 위험이 줄어듭니다. </li>
-<li>귀하가 Datadog 계정의 관리자이고 다른 사용자가 <strong>Capture method parameters and local variables</strong> 옵션을 사용하는 것을 방지하려면 Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) 권한을 취소할 수 있습니다. </li></ul></p><p>또는 데이터를 기록하면서 Datadog 제품에서 해당 데이터에 액세스할 수 있는 것과 관련된 위험을 줄이려면 <code>source:dd_debugger</code>에서 <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">제한 쿼리</a>를 설정하여 캡처된 데이터를 볼 수 있는 조직의 사용자를 제한할 수 있습니다.</p></div>
+<div class="alert alert-info"><p><strong>경고: 캡처된 데이터에는 개인 데이터, 비밀번호, AWS 키 등 민감한 정보가 포함될 수 있습니다.</strong></p><p>이러한 정보가 적절하게 삭제되었는지 확인하세요.<ul>
+<li>Datadog 동적 계측은 민감한 정보를 삭제하기 위해 여러 가지 기술을 사용합니다. 기본 메커니즘 또는 필요에 맞게 확장하는 방법에 대해 자세히 알아보려면 <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">민감한 데이터 스크러빙을</a> 참조하세요.</li>
+<li><strong>캡처 방법 파라미터 및 로컬 변수</strong> 옵션을 끄고 로그 메시지 템플릿에 포함할 변수를 명시적으로 선택합니다. 이렇게 하면 로그 프로브에 구체적으로 식별한 변수와 관련된 데이터만 포함되므로 의도하지 않은 민감한 데이터 유출의 위험을 줄일 수 있습니다. </li>
+<li>Datadog 계정의 관리자로서 다른 사용자가 <strong>캡처 방법 파라미터 및 로컬 변수</strong> 옵션을 사용하지 못하도록 하려면 동적 계측 변수 캡처<code>(debugger_capture_variables</code>) 권한을 취소할 수 있습니다. </li></ul></p><p>또는 로그을 남겨야 하지만 Datadog 제품에서 이 데이터에 액세스할 수 있는 위험을 완화하려는 경우 <code>source:dd_debugger에</code> <a href="/로그/guide/로그-rbac/?탭=ui#restrict-access-to-로그">제한 쿼리</a> 을 설정하여 조직에서 캡처된 데이터를 볼 수 있는 사용자를 제한할 수 있습니다.</p></div>
 
 ### 메트릭 프로브 생성하기
 
@@ -223,3 +226,5 @@ title: 동적 계측
 [15]: /ko/dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /ko/dynamic_instrumentation/symdb/
+[18]: https://github.com/DataDog/dd-trace-js
+[19]: https://github.com/DataDog/dd-trace-rb

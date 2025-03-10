@@ -21,7 +21,7 @@ assets:
     source_type_id: 8465752
     source_type_name: Argo Rollouts
   monitors:
-    Rollout Phase: assets/monitors/rollout_phase.json
+    Argo Rollout is in Non Running or Completed State: assets/monitors/rollout_phase.json
   saved_views:
     Argo Rollouts Error Logs Overview: assets/saved_views/error_logs_overview.json
     Argo Rollouts Logs Overview: assets/saved_views/logs_overview.json
@@ -35,7 +35,7 @@ categories:
 - kubernetes
 - 開発ツール
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/argo_rollouts/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: argo_rollouts
 integration_id: argo-rollouts
 integration_title: Argo Rollouts
-integration_version: 1.0.2
+integration_version: 2.2.0
 is_public: true
 manifest_version: 2.0.0
 name: argo_rollouts

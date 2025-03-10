@@ -156,7 +156,7 @@ If you deploy Node.js Lambda functions using the `NodeJsFunction` construct, but
             return []
           }
         },
-        externalModules: ['@aws-sdk/client-dynamodb'] // The AWS SDK is included as part of the NodeJS Lambda runtime
+        externalModules: ['@aws-sdk/client-dynamodb'] // The AWS SDK is included as part of the Node.js Lambda runtime
       }
     });
     ```

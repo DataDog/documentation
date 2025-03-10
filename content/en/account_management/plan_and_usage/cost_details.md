@@ -37,7 +37,7 @@ Use the cost summary to:
 
 ### Projected Costs (parent organization)
 
-Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
+Projected end-of-month costs are calculated by applying the prior and current month's projected usage data against your contracted rates. Projected end-of-month costs are updated daily and may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
 ### Cost Summary (parent organization)
 
@@ -45,7 +45,7 @@ The cost summary functionality changes according to your Datadog usage as a sing
 
 {{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
-View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1,3, 6 or 12 months.
+View historical costs by toggling back to previous months, or use the date dropdown to view costs over 1, 3, 6 or 12 months.
 
 {{< img src="account_management/plan_and_usage/parent-org-multi-month-cost-changes.png" alt="Screenshot of a parent organization's historical costs over a three month period, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
@@ -69,7 +69,7 @@ To query estimated cost data through the API, see [Get estimated cost across you
 
 ### Cost Summary (sub-organization)
 
-<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
+<div class="alert alert-warning">This feature is in limited availability. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 

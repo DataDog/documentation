@@ -179,9 +179,9 @@ At minimum, these log configurations require a `source` and `service` tag. You m
 
 With Autodiscovery, the Agent automatically searches all Pod annotations for integration templates.
 
-To apply a specific configuration to a given container, add the annotation `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` to your Pod with the JSON formatted log configuration. 
+To apply a specific configuration to a given container, add the annotation `ad.datadoghq.com/<CONTAINER_NAME>.logs` to your Pod with the JSON formatted log configuration. 
 
-**Note**: Autodiscovery annotations identify containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to the `.spec.containers[i].name`, not `.spec.containers[i].image`.
+**Note**: Autodiscovery annotations identify containers by name, **not** image. It tries to match `<CONTAINER_NAME>` to the `.spec.containers[i].name`, not `.spec.containers[i].image`.
 
 <div class="alert alert-info">
 If you define your Kubernetes Pods <i>directly</i> (with <code>kind:Pod</code>), add each Pod's annotations in its <code>metadata</code> section, as shown in the following section.
@@ -189,7 +189,7 @@ If you define your Kubernetes Pods <i>directly</i> (with <code>kind:Pod</code>),
 If you define your Kubernetes Pods <i>indirectly</i> (with replication controllers, ReplicaSets, or Deployments), add Pod annotations to the Pod template under <code>.spec.template.metadata</code>.</div>
 
 #### Configure a single container
-To configure log collection for a given `<CONTAINER_IDENTIFIER>` within your Pod, add the following annotations to your Pod:
+To configure log collection for a given container within your Pod, add the following annotations to your Pod:
 
 ```yaml
 apiVersion: v1
@@ -198,11 +198,11 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
+    ad.datadoghq.com/<CONTAINER_NAME>.logs: '[<LOG_CONFIG>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 # (...)
 ```
 
@@ -234,7 +234,7 @@ spec:
 ```
 
 #### Configure two different containers
-To apply two different integration templates to two different containers within your Pod, `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>`, add the following annotations to your Pod:
+To apply two different integration templates to two different containers within your Pod, `<CONTAINER_NAME_1>` and `<CONTAINER_NAME_2>`, add the following annotations to your Pod:
 
 ```yaml
 apiVersion: v1
@@ -243,14 +243,14 @@ kind: Pod
 metadata:
   name: '<POD_NAME>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.logs: '[<LOG_CONFIG_1>]'
+    ad.datadoghq.com/<CONTAINER_NAME_1>.logs: '[<LOG_CONFIG_1>]'
     # (...)
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.logs: '[<LOG_CONFIG_2>]'
+    ad.datadoghq.com/<CONTAINER_NAME_2>.logs: '[<LOG_CONFIG_2>]'
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER_1>'
+    - name: '<CONTAINER_NAME_1>'
     # (...)
-    - name: '<CONTAINER_IDENTIFIER_2>'
+    - name: '<CONTAINER_NAME_2>'
 # (...)
 ```
 
@@ -274,14 +274,14 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-            - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+            - <CONTAINER_IMAGE>
         
             logs:
             - source: example-source
               service: example-service
 ```
 
-The `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` should match the container short image name that you want this to apply towards. See the sample manifest [with ConfigMap mapping][1] for an additional example.
+The `<CONTAINER_IMAGE>` should match the container short image name that you want this to apply towards. See the sample manifest [with ConfigMap mapping][1] for an additional example.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-extraconfd.yaml
 {{% /tab %}}
@@ -295,14 +295,14 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
-      - <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+      - <CONTAINER_IMAGE>
       
       logs:
       - source: example-source
         service: example-service
 ```
 
-The `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` should match the container short image name that you want this to apply towards.
+The `<CONTAINER_IMAGE>` should match the container short image name that you want this to apply towards.
 
 {{% /tab %}}
 
@@ -364,12 +364,12 @@ With the key-value store enabled as a template source, the Agent looks for templ
 ```yaml
 /datadog/
   check_configs/
-    <CONTAINER_IDENTIFIER>/
+    <CONTAINER_IMAGE>/
       - logs: ["<LOGS_CONFIG>"]
     ...
 ```
 
-**Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
+**Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IMAGE>` to `.spec.containers[0].image`.
 
 [1]: /integrations/consul/
 [2]: /agent/configuration/agent-commands/
@@ -388,7 +388,7 @@ Use Autodiscovery log labels to apply advanced log collection processing logic, 
 
 Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection.
 
-However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
+However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IMAGE>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself. Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can automatically set up log collection. For more information, see the [Recommended configurations](#recommended-configurations).
 
 These file paths are **relative** to the Agent container. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
 
@@ -443,7 +443,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
 
 - When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container output streams and file are needed, explicitly enable this in the annotation. For example:
   ```yaml
-  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
+  ad.datadoghq.com/<CONTAINER_IMAGE>.logs: |
     [
       {"type":"file","path":"/var/log/example/app.log","source":"file","service":"example-service"},
       {"source":"container","service":"example-service"}

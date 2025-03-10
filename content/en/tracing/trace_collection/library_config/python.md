@@ -48,7 +48,8 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 Enable web framework and library instrumentation. When `false`, the application code doesn't generate any traces.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable trace volume control
+: Enable trace volume control<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
 
 `DD_TRACE_DEBUG`
 : **Default**: `false`<br>

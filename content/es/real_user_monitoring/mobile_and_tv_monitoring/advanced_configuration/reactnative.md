@@ -305,6 +305,14 @@ DdSdkReactNative.setUser({
 });
 ```
 
+Si deseas añadir o modificar la información del usuario, puedes modificar las detalles del usuario existante, como se indica a continuación:
+
+```js
+DdSdkReactNative.addUserExtraInfo({
+    hasPaid: 'true'
+});
+```
+
 Si deseas borrar la información del usuario (por ejemplo, cuando el usuario cierra la sesión), puedes hacerlo pasando un objeto vacío, como se indica a continuación:
 
 ```js

@@ -24,7 +24,7 @@ author:
 categories:
 - message queues
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md
 display_on_public_website: true
@@ -62,7 +62,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
 Gnatsd サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 

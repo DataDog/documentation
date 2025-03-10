@@ -19,7 +19,7 @@ title: 로그 오류 추적
 
 ## 개요
 
-{{< img src="logs/error_tracking/logs-error-tracking-explorer.png" alt="오류 추적 탐색기 문제 세부 정보" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="오류 추적 탐색기의 이슈 상세 정보" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 

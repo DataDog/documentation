@@ -24,7 +24,7 @@ author:
 categories:
 - キャッシュ
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
 display_on_public_website: true
@@ -64,7 +64,7 @@ tile:
 
 ## 概要
 
-Get metrics from EventStore in real time to:
+EventStore からメトリクスをリアルタイムに取得して、以下のことができます。
 
 * EventStore のキューを視覚化および監視できます。
 * 以下の API エンドポイントで、使用可能なすべてのメトリクスをキャプチャします。統計、ノード情報、非過渡的な予測、サブスクリプション、クラスターゴシップ（スクレープするエンドポイントのリストは構成できます）

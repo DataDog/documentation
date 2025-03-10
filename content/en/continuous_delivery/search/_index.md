@@ -11,8 +11,8 @@ further_reading:
 <div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
-CD Visibility is in private beta. To request access, complete the form.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
+CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Deployments
@@ -47,6 +47,12 @@ Get insights on the selected service deployment such as the number of successful
 The [**Deployment Executions** page][2] shows all the times that a deployment ran during the selected time frame. Use the facets on the left side to filter the list of deployment executions, and click on an execution to see additional details on the Deployment Execution Details side panel.
 
 {{< img src="continuous_delivery/search/details_side_panel.png" alt="Deployment Details side panel on the Deployments page" style="width:100%;">}}
+
+When a deployment is correctly associated to a pipeline in CI Visibility, the deployment executions panel contains a new **Pipeline** tab from which the pipeline trace is visible. From this tab, you can navigate to CI Visibility by clicking the **View Full Pipeline** link at the top:
+
+{{< img src="ci/cd-ci-correlation-pipeline-tab.png" alt="Deployment executions panel with Pipeline tab" style="width:100%;">}}
+
+Additional setup might be required to associate a deployment to a CI pipeline. For more information, see the setup page for your CD provider.
 
 ## Further reading
 

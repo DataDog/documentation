@@ -11,137 +11,137 @@ title: Datadog におけるアプリケーションセキュリティの仕組�
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Application Security Management はサポートされていません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-Datadog Application Security provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems.
+Datadog Application Security は、コードレベルの脆弱性を狙った攻撃やアプリケーションのビジネスロジックを悪用する攻撃、さらにシステムを標的とする悪意ある行為に対する可観測性を提供します。
 
-Here's a quick summary:
+以下に簡単にまとめます。
 
-- **Observability into attacks**: Provides insight into application-level attacks targeting code vulnerabilities or business logic.
-- **Risk detection**: Identifies risks in applications, such as vulnerable libraries and dependencies.
-- **Trace-based monitoring**: Utilizes the same tracing libraries as Datadog APM to monitor traffic and detect security threats.
-- **Security signals**: Automatically generates security signals when attacks or business logic abuses are detected, focusing on meaningful threats rather than individual attempts.
-- **Notification Options**: Offers notifications through Slack, email, or PagerDuty based on security signal settings.
-- **Embedded security**: Integrated within the application, providing better threat identification and classification by accessing trace data.
-- **Enhanced WAF functionality**: Functions like a Web Application Firewall (WAF) but with additional application context, improving accuracy and reducing false positives.
+- **攻撃の可観測性**: コードの脆弱性やビジネスロジックを標的とするアプリケーションレベルの攻撃に関する洞察を提供します。
+- **リスクの検出**: 脆弱なライブラリや依存関係など、アプリケーションにおけるリスクを特定します。
+- **トレースに基づくモニタリング**: Datadog APM と同じトレーシングライブラリを使用してトラフィックを監視し、セキュリティ脅威を検出します。
+- **セキュリティシグナル**: 攻撃やビジネスロジックの悪用が検出された際に、個々の試行ではなく、意味のある脅威に焦点を当ててセキュリティシグナルを自動的に生成します。
+- **通知オプション**: セキュリティシグナルの設定に基づいて、Slack、メール、または PagerDuty を通じて通知を行います。
+- **組み込みセキュリティ**: アプリケーションに統合され、トレースデータにアクセスすることで、より優れた脅威の識別と分類を可能にします。
+- **強化された WAF 機能**: 従来の Web Application Firewall (WAF) の機能に加え、アプリケーションのコンテキストを追加することで、精度が向上し、誤検知を減少させます。
 
-### Identify services exposed to application attacks
+### アプリケーション攻撃にさらされているサービスの特定
 
-Datadog Application Security [Threat Management][1] uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling Application Security in the tracing library is necessary to effectively monitor and protect your services.
+Datadog Application Security [Threat Management][1] は、APM がすでに収集している情報を活用して、攻撃の試みを含むトレースを識別します。APM がアプリケーショントラフィックのサンプルを収集する一方で、サービスを効果的に監視および保護するには、トレーシングライブラリで Application Security を有効にすることが重要です。
 
-Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
+アプリケーション攻撃にさらされているサービスは、APM に組み込まれたセキュリティビュー ([サービスカタログ][2]、[サービス詳細画面][3]、[トレース][4]) で直接ハイライトされます。
 
-Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
+Datadog Threat Monitoring and Detection は、すべてのリクエストにおけるクライアント IP アドレス、ログインアカウント情報 (ユーザーアカウント/ID など)、および手動で追加されたユーザータグを収集し、悪意のあるユーザーを特定します。
 
-<div class="alert alert-info"><strong>1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="https://app.datadoghq.com/security/configuration/asm/setup">enable Application Security</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+<div class="alert alert-info"><strong>1-Click 有効化</strong><br>
+サービスが <a href="/agent/remote_config/#enabling-remote-configuration"> Remote Configuration が有効な Agent と、それをサポートするバージョンのトレーシングライブラリ</a>で実行されている場合、Agent または トレーシングライブラリの追加構成なしで Datadog UI から <a href="https://app.datadoghq.com/security/configuration/asm/setup">Application Security を有効にする</a>ことができます。</div>
 
-### Identify vulnerabilities in open source libraries used by services
+### サービスで使用されているオープンソースライブラリの脆弱性を特定
 
 Datadog [Software Composition Analysis][5] は、オープンソースのソフトウェアライブラリに関連する様々な既知の脆弱性データソースと、Datadog のセキュリティリサーチチームから提供される情報を利用して、アプリケーションがランタイムに依存するライブラリとその潜在的脆弱性を照合し、改善策を提言します。
 
-### Identify code-level vulnerabilities in services
+### サービスにおけるコードレベルの脆弱性を特定
 
-Datadog [Code Security][28] identifies code-level vulnerabilities in services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within application code. IAST uses instrumentation embedded in code, similar to Application Performance Monitoring (APM), enabling Datadog to identify vulnerabilities using legitimate application traffic rather than relying on external tests that may require extra configuration or periodic scheduling. Datadog Code Security automatically provides the information teams need to locate a vulnerability in an application, from the affected filename down to the exact method and line number.
+Datadog [Code Security][28] は、サービス内のコードレベルの脆弱性を特定し、実用的な洞察と修正の提案を提供します。アプリケーションコード内の脆弱性を検出するために、インタラクティブ・アプリケーション・セキュリティ・テスト (IAST) のアプローチを採用しています。IAST は、Application Performance Monitoring (APM) と同様にコード内に埋め込まれたインスツルメンテーションを利用して、追加の構成や定期的なスケジューリングを必要とする外部テストに依存することなく、Datadog が正規のアプリケーショントラフィックを使用して脆弱性を特定することを可能にします。Datadog Code Security は、影響を受けたファイル名から正確なメソッドや行番号に至るまで、アプリケーション内の脆弱性を特定するために必要な情報を自動的に提供します。
 
-## Compatibility
+## 互換性
 
-For Datadog Application Security to be compatible with your Datadog configuration, you must have APM enabled and [sending traces to Datadog][6]. Application Security uses the same libraries used by APM, so you don't need to deploy and maintain another library. 
+Datadog Application Security を Datadog の構成と互換性を持たせるためには、APM を有効にし、[Datadog にトレースを送信している][6]必要があります。Application Security は APM が使用するのと同じライブラリを使用するため、別のライブラリをデプロイして維持する必要はありません。 
 
-Steps to enable Datadog Application Security are specific to each runtime language. Check to see if your language is supported in the Application Security prerequisites for each product.
+Datadog Application Security を有効にするための手順は、ランタイム言語ごとに異なります。各製品の Application Security の前提条件で、お使いの言語がサポートされているかどうかを確認してください。
 
-## Serverless monitoring
+## サーバーレスモニタリング
 
-Datadog Application Security for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
+AWS Lambda 向け Datadog Application Security は、関数を標的としている攻撃者を詳細に視覚化します。攻撃に関する豊富な情報を提供する分散型トレーシングにより、影響を評価し、脅威に効果的に対処できます。
 
-Read [Enabling Application Security for Serverless][8] for information on setting it up.
+セットアップに関する情報については、[サーバーレスのための Application Security の有効化][8]をお読みください。
 
-## Performance
+## パフォーマンス
 
-Datadog Application Security uses processes already contained in the Agent and APM, so there are negligible performance implications when using it. 
+Datadog Application Security は、Agent と APM にすでに含まれているプロセスを使用するため、使用する際のパフォーマンスへの影響はほとんどありません。
 
-When APM is enabled, the Datadog library generates distributed traces. Datadog Application Security flags security activity in traces by using known attack patterns. Correlation between the attack patterns and the execution context provided by the distributed trace triggers security signals based on detection rules.
+APM が有効な場合、Datadog ライブラリは分散型トレースを生成します。Datadog Application Security は、既知の攻撃パターンを使用して、トレース内のセキュリティアクティビティにフラグを立てます。攻撃パターンと分散型トレースで提供される実行コンテキストを相関させることで、検出ルールに基づいてセキュリティシグナルをトリガーします。
 
-{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="A diagram illustrates that the Datadog tracer library operates at the application service level and sends traces to the Datadog backend. The Datadog backend flags actionable security signals and sends a notification to the relevant application, such as PagerDuty, Jira or Slack." >}}
+{{< img src="security/application_security/How_Appsec_Works_June2023.png" alt="Datadog トレーサーライブラリは、アプリケーションサービスレベルで動作し、Datadog バックエンドにトレースを送信することを図解しています。Datadog バックエンドは、対処可能なセキュリティシグナルにフラグを立て、PagerDuty、Jira、Slack などの関連アプリケーションに通知を送信します。" >}}
 
-## Data sampling and retention
+## データのサンプリングと保持
 
-In the tracing library, Datadog Application Security collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
+トレーシングライブラリでは、Datadog Application Security は、セキュリティデータを含むすべてのトレースを収集します。デフォルトの[保持フィルター][9]は、Datadog プラットフォームですべてのセキュリティ関連トレースが保持されることを保証します。
 
-Data for security traces is kept for 90 days. The underlying trace data is kept for 15 days.
+セキュリティトレースのデータは、90 日間保存されます。基礎となるトレースデータは 15 日間保存されます。
 
-## Data privacy
+## データプライバシー
 
-By default, Application Security collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, Application Security scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
+デフォルトでは、Application Security はセキュリティトレースから情報を収集し、そのリクエストが疑わしいと判定された理由を理解するのに役立ちます。データを送信する前に、Application Security はデータが機密であることを示すパターンとキーワードをスキャンします。データが機密であると判断された場合、それは `<redacted>` フラグに置き換えられます。これは、リクエストは疑わしいが、データセキュリティの懸念からリクエストデータを収集できなかったことを示します。
 
-Here are some examples of data that is flagged as sensitive by default:
-* `pwd`, `password`, `ipassword`, `pass_phrase`
+ここでは、デフォルトで機密としてフラグが立てられるデータの例をいくつか紹介します。
+* `pwd`、`password`、`ipassword`、`pass_phrase`
 * `secret`
-* `key`, `api_key`, `private_key`, `public_key`
+* `key`、`api_key`、`private_key`、`public_key`
 * `token`
-* `consumer_id`, `consumer_key`, `consumer_secret`
-* `sign`, `signed`, `signature`
+* `consumer_id`、`consumer_key`、`consumer_secret`
+* `sign`、`signed`、`signature`
 * `bearer`
 * `authorization`
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-To configure the information redacted by Application Security, refer to the [data security configuration][17]
+Application Security で編集される情報を構成するには、[データセキュリティ構成][17]を参照してください。
 
-## Threat detection methods
+## 脅威の検出方法
 
-Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
+Datadog は、[OWASP ModSecurity Core Rule Set][12] を含む複数のパターン提供ソースを使用して、HTTP リクエストにおける既知の脅威と脆弱性を検出します。HTTP リクエストが[すぐに使える検出ルール][13]のいずれかにマッチすると、Datadog 内にセキュリティシグナルが生成されます。
 
-**Automatic Threat Patterns Updates:** If your service is running with [an Agent with Remote Configuration enabled and a tracing library version that supports it][26] , the threat patterns being used to monitor your service are automatically updated whenever Datadog publishes updates.
+**脅威パターンの自動更新:** サービスが[リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン][26]で実行されている場合、サービスの監視に使用される脅威パターンは、Datadog がアップデートを公開するたびに自動で更新されます。
 
-Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
+セキュリティシグナルは、Datadog が本番サービスを標的とした重要な攻撃を検出すると、自動的に作成されます。これにより、攻撃者や標的とされたサービスに対する可視性を提供します。しきい値を用いたカスタム検出ルールを設定して、どの攻撃について通知を受けたいかを決定することができます。
 
-## Built-in protection
+## 内蔵保護機能
 
 {{% asm-protect %}}
 
 
-## Attack attempt qualification
+## 攻撃試行の分類
 
-Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful.
-* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java.
-* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack's probability of success.
-* A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
-
-
-
-## Threat monitoring coverage
+分散トレーシング情報を利用して、攻撃の試みは安全、不明、または有害として評価されます。
+* 例えば、PHP インジェクション攻撃が Java で書かれたサービスを標的としている場合のように、安全と分類された攻撃試行はアプリケーションを侵害することはできません。
+* 未知の評価は、攻撃が成功する確率について確定的な判断を下すのに十分な情報がない場合に与えられます。
+* コードレベルの脆弱性が攻撃者によって発見された証拠がある場合、有害の評価がハイライトされます。
 
 
-Datadog Application Security includes over 100 attack signatures that help protect against [many different kinds of attacks][14], including, but not limited to, the following categories:
 
-* SQL injections
-* Code injections
-* Shell injections
-* NoSQL injections
-* Cross-Site Scripting (XSS)
-* Server-side Request Forgery (SSRF)
+## 脅威の監視範囲
 
-## Built-in vulnerability detection
 
-Datadog Application Security offers built-in detection capabilities that warn you about the vulnerabilities detected in your application code and open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+Datadog Application Security には、以下のカテゴリーを含むがこれに限られない、[多くの異なる種類の攻撃][14]から保護するのに役立つ 100 以上の攻撃シグネチャーが含まれています。
 
-For more information, read [Code Security][28] and [Software Composition Analysis][5].
+* SQL インジェクション
+* コードインジェクション
+* シェルインジェクション
+* NoSQL インジェクション
+* クロスサイトスクリプティング (XSS)
+* サーバーサイドリクエストフォージェリー (SSRF)
 
-## API security
+## 内蔵の脆弱性検出
 
-<div class="alert alert-info">API security is in private beta.</div>
+Datadog Application Security には、アプリケーションコードおよびオープンソース依存部分で検出された脆弱性について警告する検出機能が組み込まれています。その情報の詳細は、[Vulnerability Explorer][15] に表示され、重大度、影響を受けるサービス、潜在的に脆弱なインフラストラクチャー、および表面化したリスクを解決するための改善手順が特定されます。
 
-Datadog Application Security provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both Application Security and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+詳しくは、[Code Security][28] および [Software Composition Analysis][5] をお読みください。
 
-## How Datadog Application Security protects against Log4Shell
+## API セキュリティ
 
-Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
+<div class="alert alert-info">API セキュリティはプレビュー版です。</div>
 
-## Further Reading
+Datadog Application Security は、API を標的とした脅威を視覚化します。[API カタログ][27]を使用して API の健全性とパフォーマンスのメトリクスを監視します。ここでは、API を標的とした攻撃を表示することができます。このビューには、攻撃者の IP と認証情報のほか、攻撃がどのように形成されたかの詳細を示すリクエストヘッダーが含まれます。Application Security と API 管理の両方を使用することで、API 攻撃対象の包括的なビューを維持し、そして脅威を緩和する対応を行うことができます。
+
+## Datadog アプリケーションセキュリティによる Log4Shell の保護方法
+
+Datadog Application Security は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意のあるコードをリモートでロードしようとする脆弱なアプリを可視化します。[Datadog の Cloud SIEM][16] の他の機能と組み合わせて使用することで、一般的なエクスプロイト後のアクティビティを特定して調査し、攻撃ベクトルとして機能する可能性のある脆弱な Java Web サービスをプロアクティブに修正することができます。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

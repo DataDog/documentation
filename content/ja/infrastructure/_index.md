@@ -22,8 +22,8 @@ further_reading:
 title: インフラストラクチャー
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
-  Explore and register for Foundation Enablement sessions. Learn about how Datadog's SaaS-based infrastructure monitoring provides metrics, visualizations, and alerting to ensure your engineering teams can maintain and optimize your cloud or hybrid environments.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Foundation Enablement セッションを調べて登録しましょう。Datadog の SaaS ベースのインフラストラクチャー監視が、メトリクスの提供、可視化、アラート機能を通じて、エンジニアリングチームがクラウドやハイブリッド環境を維持・最適化する方法を学べます。
 {{< /learning-center-callout >}}
 
 

@@ -98,4 +98,5 @@ export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/dynamic_instrumentation/symdb
+[6]: https://github.com/DataDog/dd-trace-java
+

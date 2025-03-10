@@ -1,7 +1,7 @@
 ---
 algolia:
   tags:
-  - log facets
+  - ログファセット
 aliases:
 - /ja/logs/facets
 description: ログファセットとファセットパネル
@@ -33,7 +33,7 @@ title: ログファセット
 
 ファセットを使用すると、[ログモニター][4]のログ、[ダッシュボード][5]のログウィジェット、[ノートブック][6]を操作することもできます。
 
-**Note**: You do not need facets to support [log processing][7], [livetail search][8], [log explorer search][9], [metric generation][10] from logs, [archive][11] forwarding, or [rehydration][12]. You also do not need facets for routing logs through to [Pipelines][13] and [Indexes][14] with filters, or excluding or sampling logs from indexes with [exclusion filters][15]. 
+**注**: [ログ処理][7]、[ライブテイル検索][8]、[ログエクスプローラー検索][9]、ログからの[メトリクス生成][10]、[アーカイブ][11]転送、または[リハイドレーション][12]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][13]や[インデックス][14]にログをルーティングする場合や、[除外フィルター][15]を使用してインデックスからログを除外またはサンプリングする場合にもファセットは必要ありません。
 
 これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
 
@@ -99,16 +99,16 @@ title: ログファセット
 ### ファセットを非表示にする
 
 ログを使用するすべてのチームのあらゆるユースケースに対処する必要があるため、組織が持つファセットは膨大になるものです。しかし、特定のトラブルシューティングのコンテキストで必要となるのは、こうしたファセットの一部のみであることが大半でしょう。トラブルシューティングセッションで最も関連性の高いファセットのみを保持するために、必要のないファセットを定期的に非表示にします。
-
-{{< img src="logs/explorer/facet/hide_facet.png" alt="ファセットを非表示にする" style="width:30%;">}}
+1. [Logs Explorer][30] で、非表示にしたいファセットを見つけます。
+1. ファセットの隣にある歯車アイコンをクリックします。
+1. **Hide Facet** を選択します。
 
 必要に応じて、ファセットは非表示にしてもファセット検索に表示されます（[ファセットのフィルター](#filter-facets)セクションを参照）。そこから非表示のファセットを再表示します。
 
-{{< img src="logs/explorer/facet/unhide_facet.png" style="width:50%;" alt="ファセットを再表示" style="width:30%;">}}
 
 非表示のファセットは、検索バーのオートコンプリートと、ログエクスプローラーの分析のドロップダウン（メジャー、グループ化など）からも非表示になります。ただし、ファセットは非表示にしても検索クエリでは有効です（たとえば、ログエクスプローラーのリンクをコピーして貼り付けた場合）。
 
-非表示のファセットはログエクスプローラー以外には影響を与えません（例: Live Tail、モニター、ダッシュボードのウィジェットの定義）。
+非表示のファセットはログエクスプローラー以外には影響を与えません (例: Live Tail、モニター、ダッシュボードのウィジェットの定義)。
 
 #### 非表示のファセットとチームメイト
 
@@ -263,3 +263,4 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [27]: /ja/logs/indexes/#indexes
 [28]: /ja/logs/log_configuration/rehydrating
 [29]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: https://app.datadoghq.com/logs

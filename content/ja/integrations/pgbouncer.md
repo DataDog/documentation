@@ -33,7 +33,7 @@ author:
 categories:
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 6.2.0
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: pgbouncer

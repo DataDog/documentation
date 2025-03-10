@@ -80,7 +80,7 @@ El período de retención predeterminado para un evento de trazas de auditoría 
 
 Para explorar un evento de auditoría, navega hasta la sección [Audit Trail][1], también accesible desde los [parámetros de tu organización][3] en Datadog.
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Parámetros de Audit Trail en el menú Organization Settings style="width:30%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Parámetros de Audit Trail en el menú Organization Settings" style="width:30%;">}}
 
 Los eventos de Audit Trail tienen la misma funcionalidad que los logs del [navegador de logs][5]:
 

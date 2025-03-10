@@ -6,6 +6,7 @@ aliases:
   - /security/application_security/enabling/single_step
   - /security/application_security/enabling/compatibility
   - /security/application_security/enabling
+  - /security/application_security/getting_started
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -13,21 +14,15 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
-  tag: "Blog"
-  text: "Introducing Datadog Application Security"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
-- link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
-  tag: "Blog"
-  text: "Best practices for application security in cloud-native environments"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
@@ -40,6 +35,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
   tag: "Blog"
   text: "Monitor AWS WAF activity with Datadog"
+- link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
+  tag: "Blog"
+  text: "How Datadog Security Inbox prioritizes security risks"
+- link: "https://www.datadoghq.com/blog/understanding-your-waf/"
+  tag: "Blog"
+  text: "Understanding your WAF: How to address common gaps in web application security"
+algolia:
+  tags: ["asm", "application security"]
 ---
 
 {{< site-region region="gov" >}}
@@ -74,13 +77,10 @@ To start configuring your environment to detect and protect threats with ASM, fo
 
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
-## Investigate risk introduced in upstream open source libraries and dependencies
+## Disable ASM
+For information on disabling ASM or its features, see the following:
 
-[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
-
-## Detect vulnerabilities in your application's code
-
-[Code Security][9] identifies code-level vulnerabilities in your services and provides actionable insights and recommended fixes. It uses an Interactive Application Security Testing (IAST) approach to find vulnerabilities within your application code. IAST uses instrumentation embedded in your code like application performance monitoring (APM) and it enables Datadog to identify vulnerabilities using legitimate application traffic instead of relying on external tests that could require extra configuration or periodic scheduling.
+- [Disabling threat management and protection][10]
 
 ## Next steps
 
@@ -92,5 +92,8 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [4]: /security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/software_composition_analysis/
-[9]: /security/application_security/code_security/
+[8]: /security/code_security/software_composition_analysis/
+[9]: /security/code_security/
+[10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /security/application_security/troubleshooting/#disabling-code-security

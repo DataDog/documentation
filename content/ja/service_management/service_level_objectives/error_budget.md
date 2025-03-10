@@ -13,15 +13,15 @@ title: エラー予算アラート
 
 SLO エラーバジェットアラートは閾値に基づき、SLO のエラーバジェットの一定の割合が消費されなかったときに通知します。たとえば、対象とする 7 日間でエラーバジェットの 75% が消費されたらアラート、50% が消費されたら警告（オプション）のように設定します。
 
-**Note:** Error budget alerts are available for the following SLO types:
+**注:** エラーバジェットのアラートは、以下の SLO タイプで利用可能です。
 
-- [Metric-based SLOs][1],
-- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
-- [Time Slice SLOs][8]
+- [メトリクスベースの SLO][1]、
+- [メトリクスモニタータイプ (メトリクス、インテグレーション、 APM メトリクス、異常、予測、外れ値モニター) のみで構成されるモニターベースの SLO][2]、および
+- [タイムスライス SLO][8]
 
 *エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
 
-{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="Error budget alert configuration">}}
+{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="エラーバジェットアラート構成">}}
 
 ## モニターの作成
 
@@ -30,10 +30,10 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 3.  **Step 1: Setting alerting conditions** の **Error Budget**  タブを選択
 4. 過去の `target` 日数において、エラーバジェットの消費割合が `threshold` を超えるとアラートをトリガーするタイミングを設定します。
 。
-4. Add [Notification information][5] in the **Configure notifications and automations** section.
-5. Click the **Create & Set Alert** button on the SLO configuration page.
+4. **Configure notifications and automations** セクションに [通知情報][5]を追加します。
+5. SLO 構成ページで **Create &amp; Set Alert** ボタンをクリックします。
 
-{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="Create SLO and set up an error budget alert" style="width:80%;">}}
+{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="SLO を作成し、エラーバジェットアラートをセットアップする" style="width:80%;">}}
 
 ### API および Terraform
 
@@ -55,7 +55,7 @@ resource "datadog_monitor" "metric-based-slo" {
     type  = "slo alert"
 
     query = <<EOT
-    error_budget("slo_id").over("time_window") > 75
+    error_budget("slo_id").over("time_window") > 75 
     EOT
 
     message = "Example monitor message"

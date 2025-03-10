@@ -23,7 +23,7 @@ assets:
     source_type_name: RapDev ServiceNow
   logs: {}
   monitors:
-    ServiceNow Pending Approval: assets/monitors/servicenow_pending_approval_monitor.json
+    ServiceNow Records Pending Approval: assets/monitors/servicenow_pending_approval_monitor.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -34,7 +34,7 @@ categories:
 - クラウド
 - インシデント
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -116,4 +116,4 @@ ServiceNow Performance Monitoring インテグレーションは、トランザ�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-servicenow" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-servicenow" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

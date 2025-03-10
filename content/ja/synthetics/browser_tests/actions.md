@@ -18,7 +18,7 @@ title: ブラウザテストのステップ
 
 ## 自動記録されたステップ
 
-Once you click **Start Recording**, the [Datadog browser test recorder extension][3], automatically detects and records steps on your website.
+**Start Recording** をクリックすると、[Datadog ブラウザテストレコーダー拡張機能][3]が自動的に Web サイト上の操作手順を検出し、記録します。
 
 ### クリック
 
@@ -36,7 +36,7 @@ Once you click **Start Recording**, the [Datadog browser test recorder extension
 
 Datadog は、`select` ドロップダウンメニューからオプションを選択するなど、アプリケーション上で実行したステップを記録し、その要約がステップとして表示されます。
 
-{{< img src="synthetics/browser_tests/input_text.mp4" alt="ブラウザテストテキスト入力ステップ" video="true" width="95%" >}}
+{{< img src="synthetics/browser_tests/type_text.mp4" alt="ブラウザテストのテキスト入力ステップ" video="true" width="95%" >}}
 
 ### オプションを選択する
 
@@ -65,7 +65,7 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 テストが期待通りの状態で終了することを確認するために、ブラウザテストは**アサーション**で終了させる必要があります。
 
-{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/browser_test_assertions_2.png" alt="ブラウザテストステップでのアサーションのオプション" style="width:70%;" >}}
 
 いくつかのアサーションは、アクティブなページ、つまりユーザーがページ要素上で**クリック**や**アサーション**など、最後に操作したページを検証します。
 
@@ -88,11 +88,11 @@ Datadog は、アップロードなどアプリケーション上で実行した
 
 ブラウザテストが正しい要素をターゲットにするように、ドロップダウンメニューから `CSS` または `XPath 1.0` を選択し、セレクタを追加してユーザーロケータを設定します。**Test** をクリックします。
 
-#### Test the state of a checkbox or radio button
+#### チェックボックスやラジオボタンの状態をテストする
 
-Create this assertion step to have your browser test select a page element and validate the state of the assertion (unchecked or checked).
+このアサーションステップを作成することで、ブラウザテストでページ要素を選択し、アサーションの状態 (未チェックまたはチェック済み) を検証することができます。
 
-{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="Options for assertions in a browser test step" style="width:60%;" >}}
+{{< img src="synthetics/browser_tests/checkbox_state_assertion.png" alt="ブラウザテストステップでのアサーションのオプション" style="width:60%;" >}}
 
 {{% /tab %}}
 {{% tab "アクティブページコンテンツのテスト" %}}
@@ -127,13 +127,13 @@ Create this assertion step to have your browser test select a page element and v
 
 JavaScript アサーション関数には以下のパラメーターが含まれており、return ステートメントが必要です。
 
-* The `return` (mandatory) statement reflects the condition the assertion needs to meet for your test step to succeed. Any type can be returned, but the value is automatically cast as a boolean. If a falsy value is returned, the test step fails.
+* `return` (必須) ステートメントは、テストステップが成功するためにアサーションが満たす必要がある条件を反映します。任意のタイプを返すことができますが、値はブール値として自動的にキャストされます。偽の値が返された場合、テストステップは失敗します。
 
 * `vars` (オプション): ブラウザテストの[変数][2]を含む文字列。JavaScript スニペットでブラウザテスト変数を参照するには、`vars.<YOUR_VARIABLE>` を使用します。たとえば、ブラウザテストに `USERNAME` 変数が含まれている場合は、`vars.USERNAME` を使用して JavaScript スニペットでそれを呼び出します。
 
 * `element` (オプション): ページ上の要素のロケーター。これを設定するには、**Select** および **Update** ターゲット要素ボタンを使用します。選択された要素は、Datadog のブラウザテストの複数配置アルゴリズムを自動的に利用します。
 
-{{< img src="synthetics/browser_tests/js_assertion.mp4" alt="ブラウザテスト JavaScript アサーション" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/assertion_java.mp4" alt="ブラウザテストの JavaScript アサーション" video="true" width="100%" >}}
 
 JavaScript アサーションはアクティブページのコンテキストで実行されるため、これらのステップはアクティブページで定義されたすべてのオブジェクト (ライブラリ、組み込み、グローバル変数など) にアクセスできます。外部ライブラリをロードするには、promise を使用します。
 
@@ -162,6 +162,13 @@ return jQuery().jquery.startsWith('3.5.1')
 [1]: /ja/synthetics/guide/email-validation
 [2]: /ja/synthetics/browser_tests/actions#use-variables
 [3]: /ja/synthetics/guide/testing-file-upload-and-download/#testing-a-file-download
+
+#### HTTP リクエスト数のテスト
+
+このアサーションステップを作成して、特定の URL パターンへの HTTP リクエスト数をテストします。期待されるリクエスト数と、テスト対象のターゲット URL の正規表現を入力してください。
+
+{{< img src="synthetics/browser_tests/number_and_target_2.png" alt="リクエスト数とターゲットをテストするオプションと、リクエストのドロップダウンが表示されている" style="width:60%;" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -289,7 +296,7 @@ JavaScript 関数には以下のパラメーターが付属しており、return
 
 * `element` (オプション): ページ上の要素のロケーター。これを設定するには、**Select** および **Update** ターゲット要素ボタンを使用します。選択された要素は、Datadog のブラウザテストの複数配置アルゴリズムを自動的に利用します。
 
-{{< img src="synthetics/browser_tests/js_variable.mp4" alt="ブラウザテスト JavaScript 変数" video="true" width="100%" >}}
+{{< img src="synthetics/browser_tests/custom_java_script.mp4" alt="ブラウザテストの JavaScript 変数" video="true" width="100%" >}}
 
 JavaScript アサーションはアクティブページのコンテキストで実行されるため、これらのステップはアクティブページで定義されたすべてのオブジェクト (ライブラリ、組み込み、グローバル変数など) にアクセスできます。外部ライブラリをロードするには、promise を使用します。
 
@@ -345,7 +352,7 @@ Datadog Synthetics のメールアドレスを作成し、テストステップ�
 
 ブラウザテストの一環として HTTP リクエストを実行できます。
 
-{{< img src="synthetics/browser_tests/recorder_http_requests2.png" alt="HTTP リクエストの手順" style="width:70%;" >}}
+{{< img src="synthetics/browser_tests/http_request_2.png" alt="HTTP リクエストステップ" style="width:70%;" >}}
 
 #### セットアップ
 
@@ -465,16 +472,28 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストや JavaScript ステップの変数など、実行時にのみ計算される変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` を使用する `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に一貫して置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
-## Edit a recording 
+### 複数の変数を使用
 
-To edit a browser recording after it's saved:
+ブラウザテストの記録ステップに複数の変数を追加できます。
 
-- Navigate to [Synthetics > Tests.][14]
-- Click on a previously saved browser test.
-- Click the gear icon on the top right hand corner and then click "edit recording".
-- Select multiple or single steps for deletion or replay, then click **Save & Quit**.
+ブラウザテストの記録で、**+ Add Variable** ボタンをクリックして、テストに 1 つ以上の変数を追加します。
 
-{{< img src="synthetics/browser_tests/multi-step-edit.png" alt="Editing a browser recording, and using the multi-select feature"="70%" >}}
+{{< img src="synthetics/browser_tests/extract_multiple_variables.png" alt="グローバル変数からローカル変数を定義する" width="90%" >}}
+
+ブラウザテストのレコーダーで、ステップ記録を追加し、**Extract variables from the response(optional)** をクリックして、ブラウザテストで変数を抽出して使用します。
+
+{{< img src="synthetics/browser_tests/edit_test_extract_multiple_variables.png" alt="ブラウザ記録中にフィールドにローカル変数を挿入する" width="90%" >}}
+
+## 記録を編集する
+
+ブラウザの記録を保存後に編集するには
+
+- [Synthetics > Tests][14] に移動します。
+- 以前に保存したブラウザテストをクリックします。
+- 右上隅にある歯車アイコンをクリックし、"edit recording" をクリックします。
+- 削除または再生する複数のステップまたは単一のステップを選択し、**Save &amp; Quit** をクリックします。
+
+{{< img src="synthetics/browser_tests/edit_a_recording.png" alt="ブラウザ記録を編集し、マルチセレクト機能を使用する"="70%" >}}
 
 
 ## その他の参考資料

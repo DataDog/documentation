@@ -30,7 +30,7 @@ The [Results Explorer][1] provides visibility into all test runs and CI batches 
 {{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "Test Runs" %}}
-{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer/explorer_test_runs_2.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 

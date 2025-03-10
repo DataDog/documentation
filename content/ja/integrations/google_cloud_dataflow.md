@@ -3,7 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Google Cloud Dataflow のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataflow/
@@ -20,7 +20,7 @@ integration_version: ''
 is_public: true
 manifest_version: '1.0'
 monitors:
-  job-backlog-time: assets/monitors/backlog_monitor.json
+  Job backlog time is high: assets/monitors/backlog_monitor.json
 name: google_cloud_dataflow
 public_title: Datadog-Google Cloud Dataflow インテグレーション
 short_description: Google Cloud Dataflow のキーメトリクスを追跡

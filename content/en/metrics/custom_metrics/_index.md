@@ -35,13 +35,18 @@ algolia:
 
 ## Overview
 
-Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. 
+Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In the example below, the metric `request.Latency` has four unique tag value combinations from its two tag keys:
+
+- `endpoint`, which has the value `endpoint:X` or `endpoint:Y`.
+- `status`, which has the value `status:200` or `status:400`.
+
+{{< img src="account_management/billing/custom_metrics/request_latency.png" alt="Request latency" style="width:80%;">}}
 
 The following are also considered custom metrics:
 - In general, any metric submitted through [DogStatsD][3] or through a [custom Agent Check][4]
 - Metrics submitted by [Marketplace integrations][29]
 - Certain [standard integrations](#standard-integrations) can potentially emit custom metrics
-- Metrics submitted from an integration that is not one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1]. **Note**: Marketplace integrations emit custom metrics.
+- Metrics submitted from an integration that is not one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1].
 
 **Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
 

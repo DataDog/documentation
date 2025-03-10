@@ -59,7 +59,8 @@ To run the workflow:
 
 ## Monitor triggers
 
-To trigger a workflow from a monitor, you must first add a monitor trigger to your workflow:
+### Add a monitor trigger to your workflow
+
 1. Add a monitor trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Monitor**.
    - If your workflow already has one or more triggers and you're adding the monitor as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Monitor**.
@@ -69,27 +70,26 @@ To trigger a workflow from a monitor, you must first add a monitor trigger to yo
 1. Save your Workflow.
 1. Click **Publish** to publish your workflow. Workflows don't run automatically until you've published them. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
-Add the workflow to your monitor:
+### Add the workflow to your monitor
+
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the **Configure notifications & automations** section, click **Add Workflow**.
-1. Use the workflow mention name to search for your workflow and select it from the drop-down. Only workflows with monitor triggers appear in the list.
-1. Optionally, to pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+1. In the **Configure notifications & automations** section, click **+ Add Workflow**.
+1. Use the workflow mention name to search for your workflow and select it from the dropdown. Only workflows with monitor triggers appear in the list.<br>A mention for the monitor appears in the notification message field, in the format `@workflow-name` if it takes no input parameters or `@workflow-name(param="")` if it takes input parameters.
+1. If the workflow takes input parameters:
+    1. Click **Configure Inputs** next to the monitor name and ID.
+        {{< img src="service_management/workflows/monitor-configure-inputs-arrow.png" alt="An attached workflow with a Configure Inputs link available" style="width:100%;" >}}
+    1. Enter values for the input parameters.<br>**Note**: Values can include monitor message template variables. To see a list of available variables, click **Use Message Template Variables** in the upper-right of the **Configure notifications & automations** section.
+    <br>The parameters populate in the mention within the notification message field.<br>For example, if you configure a workflow named `@workflow-test-inputs` to have the following parameters:
+        {{< img src="service_management/workflows/monitor-configure-inputs-modal.png" alt="Configure Inputs panel with values set as follows: im_a_string to 'abc', im_a_number to 123, im_a_boolean toggled to true, and i_have_a_default_value to 'override this'" style="width:70%;" >}}
+        the mention changes to `@workflow-test-inputs(im_a_string="abc", im_a_number=123, im_a_boolean=true, i_have_a_default_value="override this")`.
 1. Save the monitor.
 
-Each time the monitor threshold is hit, the monitor triggers a workflow run.
+Each time the monitor threshold is reached, the monitor triggers a workflow run.
 
 ### Test a monitor trigger
 
-You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
-
-To test a monitor trigger:
-1. Select the monitor trigger action in your workflow.
-1. Click **Test from Monitor**.
-1. If your monitor passes inputs to the workflow, enter a test value under **Workflow Inputs**.
-1. Select a monitor to test.
-1. Select a monitor state.
-1. Click **Run From Monitor**.
+See the test and debug page for information on [how to test a monitor trigger][12].
 
 ## Incident triggers
 
@@ -152,6 +152,39 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
+## GitHub triggers
+
+<div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
+
+You can trigger a workflow from GitHub using the following steps.
+
+1. Add a GitHub trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger > GitHub**.
+   - If your workflow already has one or more triggers and you're adding GitHub as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **GitHub**.
+1. Navigate to the GitHub repo you want to use to trigger your workflow.
+1. In GitHub, click **Settings**, click **Webhooks**, and then click **Add webhook**.
+1. In the **Configure** tab of your workflow, copy the **Payload URL**. Paste it into the **Payload URL** field on the GitHub webhook creation page.
+1. In GitHub, set the **Content type** of your webhook to `application/json`.
+1. In GitHub, create a secret that is at least 16 characters long, then copy this secret to the **Secret** field of your workflow trigger.
+1. In GitHub, choose which events you would like to trigger your webhook, then click **Add webhook**.
+1. _Optionally_, in your workflow, click the **plus** (+) to add a **Rate Limit**.
+1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from GitHub. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+## Slack triggers
+
+<div class="alert alert-info"><strong>Note</strong>: You must install the Datadog App in your Slack workspace to use this feature. For more information, see <a href="/integrations/slack/?tab=datadogforslack#setup">Slack Setup</a>.</div>
+
+You can trigger a workflow from Slack using the following steps.
+
+1. Add a Slack trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Slack**.
+   - If your workflow already has one or more triggers and you're adding the Slack trigger as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Slack**.
+1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+1. Click **Save** on your workflow.
+1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
+
 ## API triggers
 
 Triggering a workflow using an API call requires an [API key][8] and an [application key][9] with the `workflows_run` scope. For information on adding a scope to an application key, see [Scopes][10].
@@ -210,15 +243,13 @@ If the child workflow has [input parameters][5], these parameters appear as requ
 
 {{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
+### Access the result of a child workflow
+
+You can pass the result of a child workflow back to the parent workflow by defining **Output parameters** in the child workflow. Use the `WorkflowOutputs` context variable in the parent workflow to retrieve the output parameters of the child workflow. For example, given a child workflow named `Example_workflow` with an output parameter named `exampleList`, use `Steps.Example_workflow.workflowOutputs.exampleList` to access the result of the child workflow.
+
 ## Run history
 
-After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views.
-
-Use run history to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
-
-{{< img src="service_management/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
-
-The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
+After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views. Use run history to watch the progress of a triggered workflow or [debug a failed step][13].
 
 ## Further reading
 
@@ -237,3 +268,5 @@ The initial run history for a workflow provides a panel with the list of previou
 [9]: /account_management/api-app-keys/#application-keys
 [10]: /account_management/api-app-keys/#scopes
 [11]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[12]: /service_management/workflows/test_and_debug/#test-a-monitor-trigger
+[13]: /service_management/workflows/test_and_debug/#debug-a-failed-step

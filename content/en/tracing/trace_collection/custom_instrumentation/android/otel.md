@@ -1,6 +1,6 @@
 ---
-title: Android and Android TV Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your Android and Android TV application with OpenTelemetry API, to send traces to Datadog.'
+title: Android and Android TV Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Android and Android TV application with the OpenTelemetry API, to send traces to Datadog.'
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -525,8 +525,8 @@ final Request:request = new Request.Builder()
 [3]: https://app.datadoghq.com/rum/application/create
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
 [8]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#attributes
 [10]: https://opentelemetry.io/docs/concepts/signals/traces/#span-events
@@ -535,6 +535,6 @@ final Request:request = new Request.Builder()
 [13]: /real_user_monitoring/platform/connect_rum_and_traces/?tab=browserrum#opentelemetry-support
 [14]: /account_management/api-app-keys/#client-tokens
 [15]: /account_management/api-app-keys/#api-keys
-[16]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
-[17]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[16]: /real_user_monitoring/mobile_and_tv_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[17]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
 [18]: https://opentelemetry.io/docs/concepts/signals/traces/

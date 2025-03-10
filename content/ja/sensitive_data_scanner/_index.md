@@ -9,6 +9,9 @@ further_reading:
 - link: /sensitive_data_scanner/regular_expression_syntax
   tag: ドキュメント
   text: カスタムスキャンルールのための正規表現構文
+- link: /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
+  tag: ドキュメント
+  text: カスタムルール作成のベストプラクティス
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: ブログ
   text: 機密データスキャナーを使用して、機密データの問題を大規模に発見、トリアージ、そして修復する
@@ -20,7 +23,10 @@ further_reading:
   text: 機密データ管理のベストプラクティス
 - link: https://www.datadoghq.com/blog/data-security/
   tag: ブログ
-  text: データセキュリティでクラウドデータストア内の機密データを発見
+  text: Data Security でクラウドデータストア内の機密データを発見
+- link: https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/
+  tag: ブログ
+  text: HIPAA 要件の対象となる企業が Datadog で機密データを管理する方法
 title: Sensitive Data Scanner
 ---
 
@@ -28,7 +34,7 @@ title: Sensitive Data Scanner
 
 クレジットカード番号、銀行コード、API キーなどの機密データは、アプリケーションログ、APM スパン、RUM イベントで意図せずに公開されることが多く、組織が財務リスクやプライバシーリスクにさらされる可能性があります。
 
-機密データスキャナーは、ストリームベースのパターンマッチングサービスで、機密データの特定、タグ付け、オプションで秘匿化やハッシュ化に使用されます。セキュリティおよびコンプライアンスチームは、機密データスキャナーを新たな防御策として導入し、機密データの漏洩防止とコンプライアンス違反リスクの抑制に役立てることができます。
+機密データスキャナーは、ストリームベースのパターンマッチングサービスで、機密データの特定、タグ付け、オプションでマスキングやハッシュ化に使用されます。セキュリティおよびコンプライアンスチームは、機密データスキャナーを新たな防御策として導入し、機密データの漏洩防止とコンプライアンス違反リスクの抑制に役立てることができます。
 
 機密データスキャナーを使用するためには、まずスキャングループを設定してスキャン対象のデータを定義し、次にスキャンルールを設定してデータ内でマッチングさせる機密情報を決定します。
 
@@ -54,12 +60,14 @@ title: Sensitive Data Scanner
 **環境:**
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-Sensitive Data Scanner using the Agent は非公開ベータ版です。アクセスをリクエストするには、このフォームに記入してください。
+Datadog Agent の Sensitive Data Scanner サポートはプレビュー版です。参加するには、<strong>Request Access</strong> をクリックしてください。
 {{< /callout >}}
 
 - **Sensitive Data Scanner using the Agent** では、ログを Datadog バックエンドに送信する前に Datadog がログをマスキングし、マスキングされていないログはプレミス外に出る必要がなくなります。この方法では、組織ごとに 1 つのスキャングループに制限され、定義済みのライブラリルールしか使用できません。
 
-- 環境内の機密データを下流の宛先に送信する前にマスキングする別の方法としては、[Observability Pipelines][14] を使用することがあります。
+**Observability Pipelines を使用:**
+
+Observability Pipelines で[パイプラインをセットアップ][2]するとき、[Sensitive Data Scanner プロセッサ][3]を追加して、環境を離れる前にログ内の機密データをマスキングします。詳細については、[Observability Pipelines][4] を参照してください。
 
 ### 前提条件
 
@@ -90,22 +98,22 @@ Sensitive Data Scanner using the Agent は非公開ベータ版です。アク�
 
 {{< tabs >}}
 {{% tab "クラウド" %}}
-スキャングループは、スキャンするデータを決定します。これは、ログ、APM、RUM、およびイベントのスキャンを有効にするためのクエリフィルターとトグルのセットで構成されています。クエリフィルターの詳細については、[ログ検索構文][2]のドキュメントを参照してください。
+スキャングループは、スキャンするデータを決定します。これは、クエリフィルターと、ログ、APM、RUM、イベントのスキャンを有効にするためのトグルのセットで構成されます。クエリフィルターの詳細については、[ログ検索構文][1]のドキュメントを参照してください。
 
-Terraform に関しては、[Datadog 機密データスキャナーグループ][3]のリソースを参照してください。
+Terraform については、[Datadog Sensitive Data Scanner グループ][2]のリソースを参照してください。
 
 スキャングループをセットアップするには、以下の手順を実行します。
 
-1. [Sensitive Data Scanner][1] 構成ページに移動します。
+1. [Sensitive Data Scanner][3] 構成ページに移動します。
 1. **Add scanning group** をクリックします。または、ページ右上にある **Add** ドロップダウンメニューをクリックし、**Add Scanning Group** を選択します。
 1. スキャンしたいデータのクエリーフィルターを入力します。フィルタリングされたスパンをプレビューするには、一番上の **APM Spans** をクリックします。フィルタリングされたログを表示するには、**Logs** をクリックします。
 1. グループの名前と説明を入力します。
 1. トグルボタンをクリックし、希望する製品 (例: ログ、APM スパン、RUM イベント、Datadog イベント) で機密データスキャナーを有効にします。
 1. **Create** をクリックします。
 
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: /ja/logs/explorer/search_syntax/
-[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+[1]: /ja/logs/explorer/search_syntax/
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+[3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
 {{% tab "Agent の使用" %}}
 <div class="alert alert-warning"><strong>注</strong>: Sensitive Data Scanner using the Agent は、1 つの組織につき 1 つのスキャングループのみをサポートします。</div>
@@ -121,8 +129,6 @@ Terraform に関しては、[Datadog 機密データスキャナーグループ]
 1. **Save** をクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
-[2]: /ja/logs/explorer/search_syntax/
-[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -134,11 +140,11 @@ Terraform に関しては、[Datadog 機密データスキャナーグループ]
 {{% tab "クラウド" %}}
 スキャンルールは、スキャングループで定義されたデータ内のどの機密情報をマッチングさせるかを決定します。Datadog のスキャンルールライブラリから事前定義されたスキャンルールを追加するか、正規表現パターンを使って独自のルールを作成することができます。データは、処理の中で取り込みが行われる際にスキャンされます。ログの場合、これはインデックス化やその他のルーティング関連の決定の前にスキャンが行われることを意味します。
 
-Terraform に関しては、[Datadog Sensitive Data Scanner ルール][2]のリソースを参照してください。
+Terraform については、[Datadog Sensitive Data Scanner ルール][1]のリソースを参照してください。
 
 スキャンルールを追加するには、以下の手順を実行します。
 
-1. [Sensitive Data Scanner][1] 構成ページに移動します。
+1. [Sensitive Data Scanner][2] 構成ページに移動します。
 1. スキャンルールを追加する対象のスキャングループをクリックします。
 1. **Add Scanning Rule** をクリックします。または、ページ右上にある **Add** ドロップダウンメニューをクリックし、**Add Scanning Rule** を選択します。
 1. ライブラリルールを追加するか、カスタムスキャンルールを作成するかを選択します。
@@ -147,18 +153,27 @@ Terraform に関しては、[Datadog Sensitive Data Scanner ルール][2]のリ�
 
 スキャンルールライブラリには、メールアドレスやクレジットカード番号、API キー、認証トークンなどの一般的なパターンを検出するための、あらかじめ定義されたルールが含まれています。
 
+1. このルールをスキャングループ内で作成していない場合は、スキャングループを選択します。
 1. **Add library rules to the scanning group** (スキャングループにライブラリルールを追加する) セクションで、使用したいライブラリルールを選択します。
-1. **Define rule target and action** (ルールの対象とアクションを定義する) セクションでは、スキャンする対象が **Entire Event** (イベント全体) か **Specific Attributes** (特定の属性) かを選択します。
-    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外できます。
-    - 特定の属性をスキャンする場合は、スキャンする属性を指定します。
 {{% sds-scanning-rule %}}
 1. **Add Rules** をクリックします。
 
-{{< /collapse-content >}}
-{{< collapse-content title="カスタムスキャンルールの追加" level="p" >}}
-正規表現パターンを使用してカスタムスキャンルールを作成し、機密データをスキャンできます。
+#### 他のキーワードを追加
 
-1. **Define match conditions** (一致条件を定義する) セクションの **Define regex** フィールドで、イベントのマッチングに使用する正規表現パターンを指定します。**Regex tester** フィールドにサンプルデータを入力して、正規表現パターンの有効性を検証します。
+すぐに使えるスキャンルールを追加した後、各ルールを個別に編集して、キーワード辞書に他のキーワードを追加できます。
+
+1. [Sensitive Data Scanner][2] 構成ページに移動します。
+1. 編集したいルールがあるスキャングループをクリックします。
+1. ルールにカーソルを合わせ、鉛筆アイコンをクリックします。
+1. デフォルトでは、推奨キーワードが使用されます。他のキーワードを追加するには、**Use recommended keywords** をトグルし、キーワードをリストに追加します。また、これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
+1. **Update** をクリックします。
+
+{{< /collapse-content >}}
+{{< collapse-content title="カスタムスキャンルールを追加する" level="p" >}}
+正規表現パターンを使用して機密データをスキャンするカスタムスキャンルールを作成できます。
+
+1. このルールをスキャングループ内で作成していない場合は、スキャングループを選択します。
+1. **Define match conditions** セクションで、**Define the regex** フィールドにイベントに対してマッチングに使用する正規表現パターンを指定します。**Add sample data** フィールドにサンプルデータを入力して、正規表現パターンが有効であることを確認します。
     機密データスキャナーは Perl 互換正規表現 (PCRE) をサポートしていますが、以下のパターンはサポートされていません。
     - 後方参照、およびサブマッチ文字列のキャプチャ (ルックアラウンド)
     - 任意のゼロ幅マッチ
@@ -170,6 +185,7 @@ Terraform に関しては、[Datadog Sensitive Data Scanner ルール][2]のリ�
     - `\K` マッチの開始位置のリセットディレクティブ
     - コールアウトおよび埋め込みコード
     - アトミックグループおよび絶対最大量指定子
+1. **Create keyword dictionary** では、正規表現条件とマッチする際の検出精度を高めるためにキーワードを追加します。例えば、16 桁の Visa クレジットカード番号をスキャンする場合、`visa`、`credit`、`card` などのキーワードを追加できます。また、これらのキーワードがマッチした値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードはマッチした値の前に 30 文字以内に配置されている必要があります。
 {{% sds-scanning-rule %}}
 1. **Add Rule** をクリックします。
 {{< /collapse-content >}}
@@ -182,11 +198,11 @@ Terraform に関しては、[Datadog Sensitive Data Scanner ルール][2]のリ�
 
 機密データの問題をトリアージするための [Summary][4] ページの使い方について、詳しくは[機密データの問題を調査する][3]を参照してください。
 
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+
+[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+[2]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [3]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-
 {{% /tab %}}
 {{% tab "Agent の使用" %}}
 
@@ -212,7 +228,6 @@ Terraform に関しては、[Datadog Sensitive Data Scanner ルール][2]のリ�
 - ルールが追加されたら、スキャングループのトグルが有効になっていることを確認してスキャンを開始します。
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration/agent
-[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -279,17 +294,17 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 
 ### 機密データを含むログへのアクセス制御
 
-機密データを含むログにアクセスできるユーザーを制御するには、機密データスキャナーによって追加されたタグを使用して、ロールベースのアクセス制御 (RBAC) の付いたクエリを作成します。保持期間後にデータが期限切れになるまで、特定の個人またはチームにアクセスを限定できます。詳しくは、[ログ用に RBAC を設定する方法][10]を参照してください。
+機密データを含むログへのアクセスを制御するには、Sensitive Data Scanner によって追加されたタグを使用して、ロールベースアクセス制御 (RBAC) によるクエリを構築します。保持期間が過ぎてデータが古くなるまで、特定の個人やチームへのアクセスを制限できます。詳細については、[ログのための RBAC のセットアップ方法][5]を参照してください。
 
-### タグ内の機密データの秘匿化
+### タグ内の機密データをマスキングする
 
 {{< tabs >}}
 {{% tab "クラウド" %}}
-タグに含まれる機密データを秘匿化するには、タグを属性に[リマップ][2]してから、その属性を秘匿化する必要があります。リマッピング中にタグが保存されないように、リマッパープロセッサーで `Preserve source attribute` のチェックを外してください。
+タグに含まれる機密データをマスキングするには、タグを属性に[リマップ][1] し、その属性をマスキングする必要があります。リマッパープロセッサで `Preserve source attribute` のチェックを外し、リマップ中にタグが保持されないようにします。
 
 タグを属性にリマップするには:
 
-1. [ログパイプライン][3]に移動します。
+1. [ログパイプライン][2]に移動します。
 2. **Add Processor** をクリックします。
 3. プロセッサーの種類のドロップダウンメニューで **Remapper** を選択します。
 4. プロセッサーに名前を付けます。
@@ -299,9 +314,9 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 8. **Preserve source attribute** を無効にします。
 9. **Create** をクリックします。
 
-属性を秘匿化するには:
+属性をマスキングするには
 
-1. [スキャングループ][1]に移動します。
+1. [スキャングループ][3]に移動します。
 2. **Add Scanning Rule** をクリックします。
 3. 使用したいライブラリルールにチェックを入れます。
 4. **Scan entire event or portion of it** (イベント全体またはその一部をスキャンする)で **Specific Attributes** を選択します。
@@ -310,28 +325,30 @@ Datadog プラットフォームが機能上必要とする予約キーワード
 7. オプションで、タグを追加します。
 8. **Add Rules** をクリックします。
 
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[2]: /ja/logs/log_configuration/processors/?tab=ui#remapper
-[3]: https://app.datadoghq.com/logs/pipelines
+[1]: /ja/logs/log_configuration/processors/?tab=ui#remapper
+[2]: https://app.datadoghq.com/logs/pipelines
+[3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 {{% /tab %}}
 {{% tab "Agent の使用" %}}
 この関数は Sensitive Data Scanner using the Agent では使用できません。
 {{% /tab %}}
 {{< /tabs >}}
 
-## データセキュリティ
+## Cloud Storage のスキャン
 
-<div class="alert alert-warning">Data Security は非公開ベータ版です。非公開ベータ版に登録するには、<a href="https://www.datadoghq.com/private-beta/data-security">こちらからサインアップ</a>してください。</div>
+{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
+  Scanning support for Amazon S3 buckets and RDS instances is in Limited Availability. To enroll, click <strong>Request Access</strong>.
+{{< /callout >}}
 
-[Sensitive Data Scanner][8] と [Cloud Security Management][16] を有効にしている場合、Data Security を使用して機密データを特定し、AWS S3 バケットと RDS インスタンスに影響するセキュリティ問題を修正できます。
+[Sensitive Data Scanner][6] を有効にしている場合、Amazon S3 バケットや RDS インスタンス内の機密データをカタログ化し、分類することができます。
 
-Data Security は、クラウド環境に[エージェントレススキャナー][17]をデプロイすることで、機密データをスキャンします。これらのスキャンインスタンスは、[Remote Configuration][18] を介してすべての S3 バケットと RDS インスタンスのリストを取得し、すべてのデータストア内の CSV や JSON などのテキストファイルとテーブルを時間経過とともにスキャンするように設定されています。Data Security は、Sensitive Data Scanner が提供するルールを活用して一致するものを見つけます。一致するものが見つかると、その場所がスキャンインスタンスから Datadog に送信されます。データストアとそのファイルは、お客様の環境でのみ読み取られ、機密データが Datadog に返送されることはありません。
+Sensitive Data Scanner は、クラウド環境に[エージェントレススキャナー][8]をデプロイして機密データをスキャンします。これらのスキャンインスタンスは、[Remote Configuration][9] を通じてすべての S3 バケットと RDS インスタンスのリストを取得し、CSV や JSON などのテキストファイルや、各データストア内のテーブルを時間をかけてスキャンするように設定されています。Sensitive Data Scanner は、[全ルールライブラリ][11]を活用して一致を検出します。一致が見つかると、その場所がスキャンインスタンスから Datadog に送信されます。データストアとそのファイルはお客様の環境内でのみ読み取られ、機密データが Datadog に送信されることはありません。
 
-機密データとの一致を表示すると同時に、Data Security は、機密データストアに影響を与える Cloud Security Management によって検出されたセキュリティ問題も表示します。問題をクリックすると、Cloud Security Management 内でトリアージと修復を続けることができます。
+Cloud Storage は、機密データの一致を表示するだけでなく、[Cloud Security Management][7] によって検出された、機密データストアに影響を与えるセキュリティ問題も表示します。問題をクリックすると、Cloud Security Management 内でトリアージと修正を続けることができます。
 
 ## すぐに使えるダッシュボード
 
-Sensitive Data Scanner を有効にすると、[すぐに使えるダッシュボード][13]が自動的にアカウントにインストールされ、機密データの診断結果の要約を見ることができます。このダッシュボードにアクセスするには、**Dashboards > Dashboards List** に移動し、 "Sensitive Data Scanner Overview" を検索します。
+Sensitive Data Scanner が有効になると、機密データの発見を要約した[すぐに使えるダッシュボード][10]がアカウントに自動的にインストールされます。このダッシュボードにアクセスするには、**Dashboards > Dashboards List** に移動し、"Sensitive Data Scanner Overview" を検索します。
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview ダッシュボード" style="width:80%;">}}
 
@@ -344,19 +361,13 @@ Sensitive Data Scanner を完全にオフにするには、各スキャングル
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/data_security/pci_compliance/
-[2]: /ja/account_management/rbac/permissions/#compliance
-[3]: /ja/account_management/rbac/
-[4]: /ja/logs/explorer/search_syntax/
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
-[6]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
-[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[8]: /ja/sensitive_data_scanner/investigate_sensitive_data_issues/
-[9]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[10]: /ja/logs/guide/logs-rbac/
-[11]: /ja/logs/log_configuration/processors/?tab=ui#remapper
-[12]: https://app.datadoghq.com/logs/pipelines
-[13]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
-[14]: /ja/observability_pipelines/sensitive_data_redaction/
-[16]: /ja/security/cloud_security_management
-[17]: /ja/security/cloud_security_management/setup/agentless_scanning
-[18]: /ja/agent/remote_config
+[2]: /ja/observability_pipelines/set_up_pipelines/
+[3]: /ja/observability_pipelines/processors/#sensitive-data-scanner
+[4]: /ja/observability_pipelines/
+[5]: /ja/logs/guide/logs-rbac/
+[6]: /ja/sensitive_data_scanner/
+[7]: /ja/security/cloud_security_management
+[8]: /ja/security/cloud_security_management/setup/agentless_scanning
+[9]: /ja/agent/remote_config
+[10]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[11]: /ja/sensitive_data_scanner/library_rules/

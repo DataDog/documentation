@@ -24,8 +24,8 @@ assets:
     source_type_id: 10259
     source_type_name: Traffic Server
   monitors:
-    '[Traffic Server] 4xx Errors higher than usual': assets/monitors/4xx.json
-    '[Traffic Server] 5xx Errors higher than usual': assets/monitors/5xx.json
+    4xx errors number is high: assets/monitors/4xx.json
+    5xx errors number is high: assets/monitors/5xx.json
   saved_views:
     traffic_server_error_logs: assets/saved_views/traffic_server_error_logs.json
     traffic_server_overview: assets/saved_views/traffic_server_overview.json
@@ -38,7 +38,7 @@ author:
 categories:
 - キャッシュ
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/traffic_server/README.md
 display_on_public_website: true
@@ -46,7 +46,7 @@ draft: false
 git_integration_title: traffic_server
 integration_id: traffic-server
 integration_title: Traffic Server
-integration_version: 2.2.1
+integration_version: 3.1.0
 is_public: true
 manifest_version: 2.0.0
 name: traffic_server

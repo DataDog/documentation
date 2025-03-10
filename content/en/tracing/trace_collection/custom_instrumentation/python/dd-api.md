@@ -1,5 +1,5 @@
 ---
-title: Python Custom Instrumentation using Datadog API
+title: Python Custom Instrumentation using the Datadog API
 aliases:
     - /tracing/opentracing/python
     - /tracing/manual_instrumentation/python
@@ -231,6 +231,38 @@ except TypeError as e:
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][2] for information.
 
+### Baggage
+
+Manipulating [Baggage][3] on a span:
+
+```python
+from ddtrace import tracer
+
+# Start a new span and set baggage
+with tracer.trace("example") as span:
+    # set_baggage_item
+    span.context.set_baggage_item("key1", "value1")
+    span.context.set_baggage_item("key2", "value2")
+
+    # get_all_baggage_items
+    all_baggage = span.context.get_all_baggage_items()
+    print(all_baggage) # {'key1': 'value1', 'key2': 'value2'}
+
+    # remove_baggage_item
+    span.context.remove_baggage_item("key1")
+    print(span.context.get_all_baggage_items()) # {'key2': 'value2'}
+
+    # get_baggage_item
+    print(span.context.get_baggage_item("key1")) # None
+    print(span.context.get_baggage_item("key2")) # value2
+
+    # remove_all_baggage_items
+    span.context.remove_all_baggage_items()
+    print(span.context.get_all_baggage_items()) # {}
+```
+
+To see an example in action, see [flask-baggage on trace-examples][7]
+
 ## Resource filtering
 
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][4] page or in [Ignoring Unwanted Resources][5].
@@ -241,6 +273,8 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 [1]: /tracing/compatibility_requirements/python
 [2]: /tracing/trace_collection/trace_context_propagation/
+[3]: /tracing/trace_collection/trace_context_propagation/#baggage
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
 [6]: /tracing/setup/python/
+[7]: https://github.com/DataDog/trace-examples/tree/master/python/flask-baggage

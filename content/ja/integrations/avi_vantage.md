@@ -23,7 +23,7 @@ assets:
     source_type_id: 10189
     source_type_name: Avi Vantage
   monitors:
-    Avi Vantage - Error Rate Monitor: assets/monitors/error_rate_monitor.json
+    Virtual service has a high number of errors: assets/monitors/error_rate_monitor.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -32,7 +32,7 @@ author:
 categories:
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 4.2.2
+integration_version: 5.2.0
 is_public: true
 manifest_version: 2.0.0
 name: avi_vantage

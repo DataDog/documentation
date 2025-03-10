@@ -156,7 +156,7 @@ gnutls-cli intake.logs.datadoghq.com:10516
 <API_KEY> これはテストメッセージです
 ```
 
-ポート 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
+ポート 10516 を開くことを選択できない場合は、`DD_LOGS_CONFIG_FORCE_USE_HTTP` 環境変数を `true` に設定して、Datadog Agent が HTTPS 経由でログを送信するよう構成することができます。
 
 #### コンテナに JSON ロギングドライバーが使用されていない
 

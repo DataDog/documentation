@@ -1,5 +1,4 @@
 ---
-kind: Guía
 title: Cambios en la cadena de confianza del certificado TLS de Datadog
 ---
 
@@ -8,7 +7,7 @@ title: Cambios en la cadena de confianza del certificado TLS de Datadog
 El 5 de abril de 2023, la autoridad de certificación raíz (CA) y la autoridad de certificación intermedia (ICA) utilizadas para firmar los certificados de Datadog cambiaron de:
 
 {{< tabs >}}
-{{% tab "G1 root certificate (old)" (Certificado raíz G1 (anterior)) %}}
+{{% tab "Certificado raíz G1 (anterior)" %}}
 
 `DigiCert Global Root CA`<br/>
 **N.º de serie:** `08:3B:E0:56:90:42:46:B1:A1:75:6A:C9:59:91:C7:4A`<br/>
@@ -20,7 +19,7 @@ El 5 de abril de 2023, la autoridad de certificación raíz (CA) y la autoridad 
 
 {{% /tab %}}
 
-{{% tab "G1 ICA certificate (old)" (Certificado G1 de la ICA (anterior)) %}}
+{{% tab "Certificado G1 de la ICA (anterior)" %}}
 `DigiCert TLS RSA SHA256 2020 CA1`<br/>
 **N.º de serie:** `06:D8:D9:04:D5:58:43:46:F6:8A:2F:A7:54:22:7E:C4`</br>
 **Huella digital de SHA256:**
@@ -35,7 +34,7 @@ El 5 de abril de 2023, la autoridad de certificación raíz (CA) y la autoridad 
 a:
 
 {{< tabs >}}
-{{% tab "G2 root certificate (new)" (Certificado G2 raíz (nuevo)) %}}
+{{% tab "Certificado G2 raíz (nuevo)" %}}
 `DigiCert Global Root G2`</br>
 **N.º de serie**: `03:3A:F1:E6:A7:11:A9:A0:BB:28:64:B1:1D:09:FA:E5`<br/>
 **Huella digital de SHA1**: `DF:3C:24:F9:BF:D6:66:76:1B:26:80:73:FE:06:D1:CC:8D:4F:82:A4`</br>
@@ -47,7 +46,7 @@ CB:3C:CB:B7:60:31:E5:E0:13:8F:8D:D3:9A:23:F9:DE:47:FF:C3:5E:43:C1:14:4C:EA:27:D4
 
 {{% /tab %}}
 
-{{% tab "G2 ICA certificate (new)" (Certificado G2 de la ICA (nuevo)) %}}
+{{% tab "Certificado G2 de la ICA (nuevo)" %}}
 
 `DigiCert Global G2 TLS RSA SHA256 2020 CA1`</br>
 **N.º de serie**: `0c:f5:bd:06:2b:56:02:f4:7a:b8:50:2c:23:cc:f0:66`</br>

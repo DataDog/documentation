@@ -21,9 +21,9 @@ assets:
     source_type_id: 10124
     source_type_name: MarkLogic
   monitors:
-    Marklogic high load: assets/monitors/marklogic_high_load.json
-    Marklogic long requests: assets/monitors/marklogic_long_requests.json
-    Marklogic low cache: assets/monitors/marklogic_low_cache.json
+    Active requests are taking too long: assets/monitors/marklogic_long_requests.json
+    Cache is not large enough: assets/monitors/marklogic_low_cache.json
+    Forest processing load is high: assets/monitors/marklogic_high_load.json
   saved_views:
     marklogic_processes: assets/saved_views/marklogic_processes.json
 author:
@@ -34,7 +34,7 @@ author:
 categories:
 - data stores
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marklogic/README.md
 display_on_public_website: true
@@ -42,7 +42,7 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 4.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: marklogic
@@ -113,7 +113,7 @@ API または Admin インターフェイスで、Datadog Agent に [`manage-use
 3. このクエリを実行し、Datadog Agent で使用するユーザーとパスワードを `<USER>` と `<PASSWORD>` に置き換えます。
     ```
     xquery version "1.0-ml";
-    import module namespace sec="http://marklogic.com/xdmp/security" at
+    import module namespace sec="http://marklogic.com/xdmp/security" at 
         "/MarkLogic/security.xqy";
 
     sec:create-user(

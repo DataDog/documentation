@@ -20,13 +20,13 @@ title: アプリ内 WAF ルール
 
 Application Security Management (ASM) を有効にすると、Datadog のトレーシングライブラリは、すべての Web サービスや API リクエストを積極的に監視し、疑わしいセキュリティアクティビティがないかどうかを確認します。
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
+_アプリ内 WAF ルール_は、受信するリクエストの条件を指定し、ライブラリが何を疑わしいとみなすかを定義します。Datadog トレーシングライブラリは、何百ものすぐに使える ASM アプリ内 WAF ルールを含んでおり、それらはトレースエクスプローラーやデフォルトシグナルルールでセキュリティトレースを表示するために使用されます。
 
 トレーシングライブラリをアップグレードすることなく、アプリ内 WAF ルールに追加することができます。
 
 ## ASM アプリ内 WAF ルールの構造
 
-An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a security trace is detected, tags from the rules are propagated onto the security trace, and can be used to build [detection rules][1].
+アプリ内 WAF ルールは、カテゴリー、名前、タグ、条件からなる JSON オブジェクトです。セキュリティトレースを検出すると、ルールのタグがセキュリティトレースに伝搬され、[検出ルール][1]を構築するのに利用されます。
 
 ### 条件
 条件は、ルールが受信リクエストにタグ付けするタイミングを定義します。条件は、_入力_と_演算子_で構成されます。
@@ -55,26 +55,24 @@ An In-App WAF rule is a JSON object composed of a category, a name, tags, and co
 
 ## カスタムアプリ内 WAF ルール
 
-   <div class="alert alert-info">Custom in-app WAF rules is in beta.</div>
-
 カスタムアプリ内 WAF ルールにより、ユーザーはアプリケーションへの特定のタイプのリクエストを記録したり、ブロックしたりすることができます。例えば、カスタムルールを使用して、ログインの成功または失敗を監視することができます。開始するには、**Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4] へ移動します。
 
-**Note:** Default rules in in-app WAF are read-only. To refine your in-app WAF behavior, modify the in-app WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
+**注:** アプリ内 WAF のデフォルトのルールは読み取り専用です。アプリ内 WAF の動作を調整するには、アプリ内 WAF のルールを変更します。デフォルトのルールを変更することはできませんが、デフォルトのルールの 1 つに基づいてカスタムルールを作成し、必要に応じて一致条件を変更することができます。同じリクエストを評価する 2 つの非常によく似たルールが存在することにならないように、デフォルトのルールは必ず無効にしてください。
 
 ## ASM アプリ内 WAF ルールの構成
 
 サービスのブロックは、ポリシールールで定義します。アプリ内 WAF には、*Datadog Recommended*、攻撃のみを監視する *Datadog Monitoring-only*、攻撃ツールをブロックし、その他のすべての攻撃を監視する *Datadog Block Attack tools* の 3 つの Datadog デフォルトポリシーが含まれています。
 
-Services using a policy are visible directly in the policy management page.
+ポリシーが適用されているサービスは、ポリシー管理ページで直接確認できます。
 
 1. Datadog で、[Security > Application Security > Protection > In-App WAF][2] に移動します。
 
-   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
+   {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="アプリ内 WAF 構成ページ、2 つのデフォルトポリシーを表示しています。" style="width:100%;" >}} 
 
-2. Click on the three dots to the right of one of the policies, and select **Download Configuration of this Policy** to download the configuration file to your local machine.
-3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled ASM services.
+2. ポリシーの右側にある 3 つのドットをクリックし、**Download Configuration of this Policy** を選択して、コンフィギュレーションファイルをローカルマシンにダウンロードします。
+3. オプションとして、**Apply this Policy to Services** を選択して、デフォルトのポリシーを保護が有効な 1 つ以上の ASM サービスに適用することもできます。
 
-   **Note:** A policy can be applied to one or more services, but a service can only contain one _policy_.
+   注: ポリシーは複数のサービスに適用できますが、1 つのサービスには 1 つの_ポリシー_しか含めることができません。
 
 3. 上記の仕様に従って、新しいルールの JSON 定義を含むようにファイルを更新します。例:
 
@@ -119,7 +117,7 @@ Services using a policy are visible directly in the policy management page.
 
 ## 次にやるべきこと
 
-Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
+次に、作成したアプリ内 WAF ルールで定義されたセキュリティトレースに基づいて、[セキュリティシグナルを生成するための検出ルールを構成][1]します。ASM の検出ルールは、すぐに利用可能なものを変更したり、新しいものを作成したりすることができます。
 
 ## その他の参考資料
 

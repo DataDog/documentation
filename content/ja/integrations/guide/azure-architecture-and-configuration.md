@@ -9,120 +9,120 @@ title: Azure インテグレーションアーキテクチャと構成
 
 ## 概要
 
-This guide provides detailed information and reference architectures for users configuring Datadog's Azure integration, as well as alternative configuration options for specific use cases.
+このガイドでは、Datadog の Azure インテグレーションを構成するユーザー向けに詳細な情報とリファレンスアーキテクチャ、および特定のユースケースを対象とした代替構成オプションについて説明します。
 
-### Reference architectures
+### リファレンスアーキテクチャ
 
-The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Azure integration page][1]. This guide provides a detailed overview of Datadog's interaction with your Azure environment and answers common security, compliance, and governance questions.
+このガイドに含まれる図は、[Azure インテグレーションページ][1]の手順に従った場合の構成プロセスと結果を視覚的に表現しています。このガイドでは、Datadog と Azure 環境との相互作用の全体像を詳細に説明し、セキュリティ、コンプライアンス、ガバナンスに関する一般的な疑問に答えます。
 
-### Alternate configurations
+### 代替構成
 
-The setup processes documented in the [Azure integration page][1] are the recommended steps and result in the ideal configuration for the majority of users. Alternate configuration options in this document may be preferable for certain use cases. Any trade-offs in performance, features, or ease-of-management are outlined as needed.
+[Azure インテグレーションページ][1]に記載された設定プロセスは推奨手順であり、大多数のユーザーにとって理想的な構成になります。特定のユースケースでは、このドキュメントに記載されている別の構成オプションが望ましい場合があります。パフォーマンス、機能、または管理のしやすさの面でのトレードオフについては、必要に応じて概説します。
 
-## Azure metric and data collection
+## Azure のメトリクスとデータの収集
 
-Enabling Datadog's Azure integration allows Datadog to:
+Datadog の Azure インテグレーションを有効にすると、Datadog で次のことが可能になります。
 
-  - Discover and monitor all resources in all subscriptions within the given scope
-  - Automatically update discovered metric definitions, to ensure that all of the metrics available from Azure Monitor are collected
-  - Ingest a range of both general and resource-specific metadata (including custom Azure tags), and apply it to the associated resource metrics in Datadog as tags
-  - Query Azure metadata APIs and use the responses to [generate useful metrics in Datadog][2] for insights that Azure Monitor does not support
+  - 指定されたスコープ内のすべてのサブスクリプションのすべてのリソースを検出、監視する。
+  - 検出されたメトリクス定義を自動的に更新し、Azure Monitor から利用可能なすべてのメトリクスが収集されるようにする。
+  - 一般的なメタデータとリソース固有のメタデータの両方 (カスタム Azureタグ を含む) を広範に取り込み、Datadog の関連リソースメトリクスにタグとして適用する。
+  - Azure メタデータ API にクエリを発行し、そのレスポンスを使用して [Datadog で有用なメトリクスを生成][2]し、Azure Monitor がサポートしていないインサイトを得る。
 
-The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure Native version of the integration.
+インテグレーションの標準版と Azure Native 版のどちらを使用しても、使用される Azure API と収集されるデータは同じです。
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
 
-### Standard Azure integration metric and data collection
+### 標準の Azureインテグレーションメトリクスとデータの収集
 
-_Available in all Datadog Sites_
+_すべての Datadog サイトで利用可能_
 
-Follow these steps to enable the standard Azure integration:
+以下の手順に従って、標準の Azure インテグレーションを有効にします。
 
-  1. Create an app registration in your Active Directory and enter the credentials in the [Datadog Azure integration page][2].
-  2. Give the application read access (`Monitoring Reader` role) to the subscriptions or management group you would like to monitor.
+  1. Active Directory にアプリの登録を作成し、[Datadog Azure インテグレーションページ][2]で資格情報を入力します。
+  2. アプリケーションに、監視したいサブスクリプションまたは管理グループへの読み取りアクセス権 (`Monitoring Reader` ロール) を付与します。
 
-The diagram below outlines the process and resulting architecture of the Azure integration configuration described in the main documentation.
+下の図は、メインのドキュメントで説明されている Azure インテグレーションの構成プロセスとその結果として得られるアーキテクチャの概要を示しています。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="Diagram of the app registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="アプリ登録のインテグレーションの設定図" >}}
 
-Once this is completed, data collection begins automatically. The app registration information entered in Datadog allows Datadog to [request a token from Azure Active Directory][1] (AD). Datadog uses this token as the authorization for API calls to various Azure APIs, to discover resources within the scope provided, and collect data. This continuous process runs with two-minute intervals by default, and is used to discover and collect data from your Azure environment. The data collection process is pictured below.
+これが完了すると、データ収集が自動的に開始されます。Datadog に入力されたアプリ登録情報により、Datadog は [Azure Active Directory][1] (AD) にトークンを要求することができます。Datadog は、このトークンを各種 Azure API への API 呼び出しの認可として使用して、指定されたスコープ内のリソースを検出し、データを収集します。この継続的なプロセスはデフォルトで 2 分間隔で実行され、Azure 環境からのデータの検出および収集に使用されます。データ収集プロセスは次の図のようになります。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="アプリ登録のインテグレーション設定図" >}}
 
 [1]: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/
 [2]: https://app.datadoghq.com/integrations/azure
 {{% /site-region %}}
 {{% site-region region="us3" %}}
 
-### Azure Native integration metric collection
-_Available only in the Datadog US3 site_
+### Azure Native インテグレーションメトリクスの収集
+_Datadog US3 サイトでのみ利用可能_
 
-**Linking accounts**: The Datadog resource in Azure links your Azure environment and your Datadog account. This link enables the same data collection as the standard Azure integration available for other Datadog sites, but with a different authentication mechanism. Its access is assigned using a **System Managed Identity** associated with the Datadog resource in Azure, rather than a user-created and configured **App Registration**. 
+**アカウントのリンク**: Azure の Datadog リソースが、Azure 環境と Datadog アカウントをリンクします。このリンクは、他の Datadog サイトで利用可能な標準の Azure インテグレーションと同じデータ収集を可能にしますが、認証メカニズムが異なります。そのアクセス権は、ユーザーが作成・構成した **アプリの登録** ではなく、Azure の Datadog リソースに関連付けられた**システムマネージドアイデンティティ**を使用して割り当てられます。
 
-**Permissions**: The `Monitoring Reader` role assignment happens automatically during the creation of the Datadog resource, and is scoped to the parent subscription of the Datadog resource. If you add additional subscriptions for monitoring to the Datadog resource, this scope is updated for the Managed Identity automatically.
+**権限**: `Monitoring Reader` ロールの割り当ては Datadog リソースの作成中に自動的に行われ、Datadog リソースの親サブスクリプションにスコープされます。Datadog リソースにモニタリング用のサブスクリプションを追加した場合、このスコープは該当のマネージド ID に応じて自動的に更新されます。
 
-Follow these steps to enable the Azure Native integration:
+以下の手順に従って、Azure Native インテグレーションを有効にします。
 
-1. Confirm that your Datadog organization is hosted on the US3 [Datadog site][1], or [create a trial Datadog account on the US3 site][5].
-2. Create a Datadog resource in Azure that links at least one subscription.
-3. Optionally, update the Datadog resource to include other subscriptions.
+1. Datadog 組織が US3 [Datadog サイト][1]にホストされていることを確認するか、[US3 サイトで Datadog のトライアルアカウントを作成][5]します。
+2. 少なくとも 1 つのサブスクリプションをリンクする Datadog リソースを Azure に作成します。
+3. オプションで Datadog リソースを更新し、他のサブスクリプションを含めます。
 
-As an [external ISV][6], there is an additional, separate process to request and use this access:
+[外部の ISV][6]であるため、このアクセス権を要求して使用するために、さらに別のプロセスが存在します。
 
-1. Datadog authenticates into Azure and uses a private Azure service to request the customer token associated with the given Datadog resource.
-1. This Azure service verifies Datadog's identity, and ensures the requested Datadog resource exists and is enabled.
-1. Azure returns a short-lived customer token to Datadog. This token enables the same level of access granted to the associated system managed identity.
-1. Datadog uses this customer token to query data in the monitored environment until it approaches expiration, at which point the process repeats.
+1. Datadog が Azure に認証され、プライベートな Azure サービスを使用して、指定された Datadog リソースに関連付けられたカスタマートークンを要求します。
+1. この Azureサービスが Datadog のアイデンティティを検証し、要求された Datadog リソースが存在し、有効になっていることを確認します。
+1. Azure は Datadog に存続期間の短いカスタマートークンを返します。このトークンによって、関連するシステムマネージド ID に付与されたのと同じレベルのアクセス権が有効になります。
+1. Datadog は、このカスタマートークンを使用して監視対象環境内のデータをクエリし、有効期限が切れると、上記のプロセスが繰り返されます。
 
-The diagram below outlines the process and resulting architecture of the Azure Native integration configuration.
+下の図は、Azure Native インテグレーションの構成プロセスとその結果として得られるアーキテクチャの概要を示しています。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_integration_setup.png" alt="Diagram of the Azure Native integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_integration_setup.png" alt="Azure Native インテグレーションの設定を示した図" >}}
 
-Once this is completed, data collection begins automatically. Datadog continuously discovers and collects metrics from your Azure environment, as pictured below.
+これが完了すると、データ収集が自動的に開始されます。Datadog は、次の図に示すように、Azure 環境からメトリクスを継続的に検出して収集します。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_metric_collection.png" alt="Diagram of the Azure Native metric collection setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_metric_collection.png" alt="Azure Native メトリクス収集の設定を示した図" >}}
 
-### Alternate configuration options for metric collection
+### メトリクス収集の代替構成オプション
 
-Whether you use the standard or the Azure Native integration, Datadog strongly recommends using the default configuration. This is because the integration is continually enhanced to provide new and differentiated insights, as well as improved performance and reliability of data collection. These improvements can be inhibited by more restrictive configurations for metric collection.
+標準 または Azure Native インテグレーションのいずれを使用する場合でも、Datadog はデフォルト構成の使用を強く推奨しています。なぜなら、インテグレーションは、データ収集のパフォーマンスと信頼性を向上させるだけでなく、新しい差別化されたインサイトを提供するために継続的に強化されているからです。メトリクス収集の構成をより制限的にすることで、こうした改善が阻害される可能性があります。
 
-#### Options for restricting access
+#### アクセス権制限のオプション
 
-The following sections detail options for restricting access and their implications.
+次のセクションでは、アクセス権制限のオプションとその影響について詳しく説明します。
 
-##### 1. Assigning access below subscription level
+##### 1. サブスクリプションレベル未満のアクセス権の割り当て
 
-You can assign Datadog access below the subscription level:
+Datadog にサブスクリプションレベル未満のアクセス権を割り当てることができます。
 
-  - By resource group   
-  - By individual resource
+  - リソースグループ単位
+  - 個別リソース単位
 
-**Note**: This access is managed through the **App Registration** for the standard Azure integration, and through the **System Managed Identity** associated with the Datadog resource for the Azure Native integration.
+**注**: このアクセス権は、標準の Azure インテグレーション では**アプリの登録** を通じて、Azure Native インテグレーションでは Datadog リソースに関連付けられた**システムマネージドアイデンティティ**を通じて管理されます。
 
-If you update the scope of the access below subscription level, Datadog is still able to discover resources and their available metrics, and ingest them dynamically within the given scope.
+サブスクリプションレベル未満のアクセス権のスコープを更新しても、Datadog はリソースとその利用可能なメトリクスを検出し、指定されたスコープ内で動的に取り込むことができます。
 
-Restricting Datadog's access to below the subscription level does the following:
+Datadog のアクセス権をサブスクリプションレベル未満に制限すると、次のような影響が出ます。
 
-  - Inhibits the ability to batch metric calls, which leads to delays beyond the typical one to two minutes before they populate in Datadog. Restricting by individual resource has a greater impact than restricting by resource group. The actual delay is heavily dependent on the size, composition, and distribution of your Azure environment; there may be no noticeable effect in some cases, or latency of up to 45 minutes in others.
-  - Increases Azure API calls, which may result in higher costs within Azure.
-  - Limits autodiscovery of resources.
-  - Requires manual updating of the role assignment's scope for any new resources, resource groups, or subscriptions to be monitored.
+  - メトリクスの呼び出しをバッチ処理する機能が阻害されるため、Datadog に入力されるまでに、通常の 1～2 分を超える遅延が発生します。個別リソース単位の制限は、リソースグループ単位での制限よりも影響が大きくなります。実際の遅延は、Azure 環境のサイズ、構成、および分布に大きく依存します。顕著な影響がない場合もあれば、最大 45 分の遅延が発生する場合もあります。
+  - Azure API の呼び出しが増加し、Azure 内のコストが上昇する可能性があります。
+  - リソースのオートディスカバリーが制限されます。
+  - 新しいリソース、リソースグループ、またはサブスクリプションを監視するために、ロール割り当てのスコープの手動更新が必要になります。
 
-##### 2.Assigning more restrictive role(s) than Monitoring Reader
+##### 2.  Monitoring Reader よりも制限的なロールの割り当て
 
-The **Monitoring Reader** role provides broad access to monitor resources and subscription-level data. This read-only access enables Datadog to provide the best user experience for both existing features and new capabilities. Azure AD roles allow the extension of this access into tenant-level Azure AD resources.
+**Monitoring Reader** ロールは、リソースとサブスクリプションレベルのデータを監視するための広範なアクセス権を提供します。この読み取り専用アクセスにより、Datadog は既存の機能と新機能の両方で最高のユーザーエクスペリエンスを提供することができます。Azure AD のロールは、このアクセス権をテナントレベルの Azure AD リソースに拡張することができます。
 
-The implications of restricting access below the Monitoring Reader role are:
+アクセス権を Monitoring Reader ロール未満に制限すると、次のような影響があります。
 
-  - Partial or total loss of monitoring data
-  - Partial or total loss of metadata in the form of tags on your resource metrics
+  - モニタリングデータの一部または全部の消失
+  - リソースメトリクス上でタグの形式をとっているメタデータの一部または全部の消失
   - [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3] または [Resource Catalog][4] のデータの一部または全部の消失
-  - Partial or total loss of Datadog-generated metrics
+  - Datadog により生成されたメトリクスの一部または全部の消失
 
-The implications of restricting or omitting the Azure AD roles are:
+Azure AD のロールを制限または省略すると、次のような影響があります。
 
   - CSM Misconfigurations における Azure AD リソースのメタデータの一部または全部の消失
-  - Partial or total loss of credential expiration monitoring for Azure AD resources
+  - Azure AD リソースの資格情報有効期限モニタリングの一部または全部の消失
 
 [1]: /ja/getting_started/site/
 [2]: https://www.datadoghq.com/
@@ -132,89 +132,88 @@ The implications of restricting or omitting the Azure AD roles are:
 [6]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{% /site-region %}}
 
-## Azure log collection
+## Azure のログ収集
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
 
-### Standard Azure integration log collection
+### 標準の Azure インテグレーションのログ収集
 _すべての Datadog サイトで利用可能_
 
-The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [log collection section][1] of the Azure integration page.
+下の図は、Azure インテグレーションページの[ログ収集セクション][1]で説明されている、Azure から Datadog へログを転送するためのリファレンスアーキテクチャを示しています。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Diagram of the manual log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="手動ログ転送の設定を示した図" >}}
 
-### Alternate configuration options for log forwarding with the standard Azure integration
+### 標準の Azure インテグレーションでログを転送するための代替構成オプション
 
-The default architecture above is suitable for most users. Depending on the scale and composition of your Azure environment, as well as the methods your organization uses to implement this architecture, the sections below detail additional considerations that may be relevant.
+上記のデフォルトのアーキテクチャは、ほとんどのユーザーに適しています。以下のセクションでは、Azure 環境の規模と構成、および組織がこのアーキテクチャの実装に使用する方法に応じて、関連する可能性のある追加の考慮事項について詳しく説明します。
 
-#### Using the provided templates
+#### 提供されたテンプレートの使用
 
-The **Deploy to Azure** button in the main Azure [log collection section][1] provides a template for creating an Event Hub and forwarder function pair. In addition to using this template to deploy directly, you can use the underlying ARM templates as a starting point for your own infrastructure as code deployments.
+メインの Azure [ログ収集セクション][1]にある **Deploy to Azure** ボタンを使用すると、Event Hub とフォワーダー関数のペアを作成するためのテンプレートが提供されます。このテンプレートを使用して直接デプロイするだけでなく、独自の Infrastructure as Code のデプロイの出発点として、基礎となる ARM テンプレートを使用することができます。
 
-These templates do not add diagnostic settings, apart from one optional diagnostic setting for activity logs. For resource logs, Datadog recommends utilizing ARM templates or Terraform to add diagnostic settings to your resources programmatically. These diagnostic settings must be added to every resource that needs to send resource logs to Datadog.
+これらのテンプレートは、アクティビティログ用のオプションの診断設定を除いて、診断設定を追加しません。Datadog は、リソースログについては、ARM テンプレートや Terraform を利用して、プログラムでリソースに診断設定を追加することを推奨します。これらの診断設定は、リソースログを Datadog に送信する必要があるすべてのリソースに追加する必要があります。
 
-#### Region considerations
+#### リージョンに関する考慮事項
 
-Diagnostic settings can only send resource logs to Event Hubs in the same region as the resource. Add an Event Hub and forwarder function pair in each region that contains resources for which you want to send resource logs to Datadog.
+診断設定は、リソースと同じリージョン内の Event Hub にのみリソースログを送信できます。リソースログを Datadog に送信したいリソースを含む各リージョンに、Event Hub とフォワーダー関数のペアを追加します。
 
-However, diagnostic settings are not limited to sending logs to Event Hubs in the same subscription as the resource. If you have multiple subscriptions within your Azure tenant, they can share a single Event Hub and forwarder function within the same region.
+ただし、診断設定は、リソースと同じサブスクリプション内の Event Hub にログを送信することに限定されません。Azure テナント内に複数のサブスクリプションがある場合、同じリージョン内で単一の Event Hub とフォワーダー関数を共有できます。
 
-#### High-volume log considerations
+#### 大容量のログに関する考慮事項
 
-As the volume of logs scales, you may see bottlenecks, typically arising in the Event Hubs. If you plan to submit high log volumes, you may want to consider adding additional partitions or using a Premium or Dedicated tier.
-For especially high log volumes, you may consider adding additional Event Hub and forwarder function pairs within the same region, and splitting traffic between them.
+ログの量が増加すると、一般的には Event Hub で、ボトルネックが発生することがあります。大量のログを送信する予定の場合は、パーティションを追加するか、Premium または Dedicated ティアの使用を検討するとよいでしょう。 ログ量が特に多い場合は、同じリージョン内に Event Hub とフォワーダー関数のペアを追加し、トラフィックを分割することを検討できます。
 
 [1]: /ja/integrations/azure/#log-collection
 {{% /site-region %}}
 {{% site-region region="us3" %}}
 
-### Azure Native integration log collection
+### Azure Native インテグレーションのログ収集
 _Datadog US3 サイトでのみ利用可能_
 
-The diagram below outlines the process and resulting architecture of the Azure Native integration log forwarding configuration.
+下の図は、Azure Native インテグレーションのログ転送構成のプロセスと、その結果として得られるアーキテクチャの概要を示しています。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_log_forwarding.png" alt="Diagram of the Azure Native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_log_forwarding.png" alt="Azure Native ログ転送設定を示した図" >}}
 
-With the Azure Native integration, you do not need to configure anything outside of the Datadog resource to implement Azure resource or activity log forwarding to Datadog. Diagnostic settings are added or removed automatically to match your configuration using only the tag rules specified in the Datadog resource.
+Azure Native インテグレーションでは、Azure リソースやアクティビティログの Datadog への転送を実装するために、Datadog リソースの外で何かを構成する必要はありません。診断設定は、Datadog リソースで指定されたタグルールだけを使用して、構成に合わせて自動的に追加または削除されます。
 
-**Note**: You can enable resource logs without any filters to send all resource logs, as shown below.
+**注**: 以下のように、フィルターなしでリソースログを有効にすると、すべてのリソースログを送信できます。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_metrics_and_logs.png" alt="Diagram of the Datadog Agent build" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_metrics_and_logs.png" alt="Datadog Agent のビルドを示した図" >}}
 
-Diagnostic settings created by the Datadog resource include all log categories, are configured with `Send to Partner Solution`, and send logs back to the originating Datadog resource. They follow the naming format `DATADOG_DS_V2_<UNIQUE_IDENTIFIER>`.
+Datadog リソースによって作成された診断設定は、すべてのログカテゴリーを含み、`Send to Partner Solution` で構成され、発信元の Datadog リソースにログを送り返します。これらは、`DATADOG_DS_V2_<UNIQUE_IDENTIFIER>` という命名形式に従っています。
 
-Any manual changes to the resource, including deleting it, are reverted within a few minutes.
+リソースの削除を含む手動による変更は、数分以内に元に戻されます。
 
-See below an example of a diagnostic setting created by a Datadog resource:
+Datadog リソースによって作成された診断設定の例を以下に示します。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/diagnostic_setting.png" alt="Diagram of the diagnostic setting" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/diagnostic_setting.png" alt="診断設定の図" >}}
 
-### Alternate configuration options for log forwarding with the Azure Native integration
+### Azure Native インテグレーションでのログ転送の代替構成オプション
 
-The one-click buttons to enable logs in the Datadog resource automate the process of adding diagnostic settings. In some cases, organizations may want to manage and configure diagnostic settings themselves, while still taking advantage of the automated log forwarding capability with the Azure Native integration. 
+Datadog リソースでログを有効にするためのワンクリックボタンは、診断設定の追加プロセスを自動化します。場合によっては、Azure Native インテグレーションによる自動ログ転送機能を利用しながら、診断設定を組織で管理・構成したい場合もあります。
 
-Manually created diagnostic settings are not impacted by log settings on the Datadog resource, and are not deleted based on the tag rules specified in the Datadog resource. Resource logs do not have to be enabled on the Datadog resource in order for manual log forwarding to work. However, the Datadog resource being used for log forwarding must not be in a disabled state.
+手動で作成された診断設定は、Datadog リソースのログ設定に影響されず、Datadog リソースで指定されたタグルールに基づいて削除されることはありません。手動でログ転送を行うために、Datadog リソースでリソースログを有効にする必要はありません。ただし、ログ転送に使用する Datadog リソースが無効な状態であってはなりません。
 
-Reasons for manually managing diagnostic settings include:
+診断設定を手動で管理する理由には、以下のようなものがあります。
 
-  1. Infrastructure as code policies
-       Strict internal policies around IaC that require all resources to to be created and managed deterministically (for example, if automatic creation of diagnostic settings by the Datadog resource would cause an unresolvable conflict between the desired and the actual state).
+  1. Infrastructure as Code ポリシー
+       すべてのリソースを決定論的に作成および管理することを求める、IaC に関する厳格な内部ポリシー (たとえば、Datadog リソースによる診断設定の自動作成によって、希望する状態と実際の状態との間に解決不能な齟齬が発生する場合など)。
 
-  2. Limiting resource log categories
-       As the diagnostic settings created automatically by the Datadog resource include all log categories, specifying a subset of these categories requires you to create diagnostic settings yourself.  
-       **Note**: You can also use [exclusion filters][1] to exclude these logs from being indexed upon ingestion into Datadog.
+  2. リソースログカテゴリーの制限
+       Datadog リソースによって自動的に作成される診断設定にはすべてのログカテゴリーが含まれるため、これらのカテゴリーの一部を指定するには、診断設定を自分で作成する必要があります。
+       **注**: [除外フィルター][1]を使用して、Datadog への取り込み時にこれらのログのインデックス化を除外することもできます。
 
-  3. Cross-subscription log forwarding
-       Cross-subscription log forwarding is useful for sending logs and no other data from a specific subscription. To enable cross-subscription log forwarding, register the `Microsoft.Datadog` resource provider in each subscription intended to send logs before creating the diagnostic settings. The Datadog resource used for log forwarding still collects metrics and data from its own subscription and any subscriptions configured through the Monitored resources blade.
+  3. クロスサブスクリプションログ転送
+       クロスサブスクリプションログ転送は、特定のサブスクリプションからログを送信し、他のデータを送信しない場合に便利です。クロスサブスクリプションのログ転送を有効にするには、診断設定を作成する前に、ログを送信する各サブスクリプションに `Microsoft.Datadog` リソースプロバイダーを登録します。ログ転送に使用される Datadog リソースは、自身のサブスクリプションと、監視対象リソースのブレードを介して構成されたサブスクリプションから、引き続きメトリクスとデータを収集します。
 
-       {{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_resource_providers.png" alt="Screenshot of the resource providers page in the Azure Portal with Microsoft. Datadog showing the status of registered." >}}
+       {{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_resource_providers.png" alt="Microsoft.Datadog のステータスが登録済みであることを示す、Azure Portal のリソースプロバイダーページのスクリーンショット。" >}}
 
-  4. Testing 
-       Sending example logs to Datadog can be useful for testing or other investigations. In these cases, adding diagnostic settings manually can be quicker than waiting for them to be created automatically from updated tags and settings.
+  4. テスト
+       Datadog にログのサンプルを送信することは、テストやその他の調査に役立ちます。このような場合、更新されたタグや設定から自動的に作成されるのを待つよりも、手動で診断設定を追加した方が早い場合があります。
 
-This architecture is shown below, including the optional cross-subscription set up:
+このアーキテクチャは、オプションのクロスサブスクリプションのセットアップを含め、以下の通りです。
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/custom_azure_native_log_forwarding.png" alt="Diagram of the custom Azure Native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/custom_azure_native_log_forwarding.png" alt="Azure Native ログ転送のカスタム設定を示した図" >}}
 
 [1]: /ja/logs/log_configuration/indexes/#exclusion-filters
 {{% /site-region %}}
