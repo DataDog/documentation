@@ -703,7 +703,7 @@ components:
       schema:
         type: string
     RumApplicationIDParameter:
-      description: Application ID.
+      description: RUM application ID.
       in: path
       name: app_id
       required: true
@@ -26233,7 +26233,9 @@ components:
       minimum: 0
       type: integer
     RumRetentionFilterSource:
-      description: The type of RUM events to filter on.
+      description: The origin source of the retention filter, which may be created
+        or updated through the Datadog UI, terraform, or other channels such as direct
+        API calls.
       enum:
       - ui
       - terraform
@@ -26308,7 +26310,8 @@ components:
       description: 'The list of RUM retention filter IDs along with their corresponding
         type to reorder.
 
-        All retention filter IDs should be included in the list created for an application.'
+        All retention filter IDs should be included in the list created for a RUM
+        application.'
       properties:
         data:
           description: A list of RUM retention filter IDs along with type.
@@ -26326,7 +26329,7 @@ components:
           type: array
       type: object
     RumRetentionFiltersResponse:
-      description: All RUM retention filters for an application.
+      description: All RUM retention filters for a RUM application.
       properties:
         data:
           description: A list of RUM retention filters.
@@ -48801,7 +48804,7 @@ paths:
       post: false
   /api/v2/rum/applications/{app_id}/relationships/retention_filters:
     patch:
-      description: 'Order RUM retention filters for an application.
+      description: 'Order RUM retention filters for a RUM application.
 
         Returns RUM retention filter objects without attributes and meta from the
         request body when the request is successful.'
@@ -48837,7 +48840,7 @@ paths:
         type: idempotent
   /api/v2/rum/applications/{app_id}/retention_filters:
     get:
-      description: Get the list of RUM retention filters for an application.
+      description: Get the list of RUM retention filters for a RUM application.
       operationId: ListRetentionFilters
       parameters:
       - $ref: '#/components/parameters/RumApplicationIDParameter'
@@ -48859,7 +48862,7 @@ paths:
       x-undo:
         type: safe
     post:
-      description: 'Create a RUM retention filter for an application.
+      description: 'Create a RUM retention filter for a RUM application.
 
         Returns RUM retention filter objects from the request body when the request
         is successful.'
@@ -48895,7 +48898,7 @@ paths:
         type: safe
   /api/v2/rum/applications/{app_id}/retention_filters/{rf_id}:
     delete:
-      description: Delete a RUM retention filter for an application.
+      description: Delete a RUM retention filter for a RUM application.
       operationId: DeleteRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RumApplicationIDParameter'
@@ -48916,7 +48919,7 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get a RUM retention filter for an application.
+      description: Get a RUM retention filter for a RUM application.
       operationId: GetRetentionFilter
       parameters:
       - $ref: '#/components/parameters/RumApplicationIDParameter'
@@ -48941,7 +48944,7 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: 'Update a RUM retention filter for an application.
+      description: 'Update a RUM retention filter for a RUM application.
 
         Returns RUM retention filter objects from the request body when the request
         is successful.'
@@ -57880,7 +57883,7 @@ tags:
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
 - description: Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list)
-    for your organization.
+    of RUM for your organization.
   name: Rum Retention Filters
 - description: 'Provision Datadog users and teams using SCIM APIs.
 
