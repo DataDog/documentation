@@ -21,10 +21,13 @@ List all the connections this organization participates in, either as a source o
 <span style="padding:3px" class="font-semibold text-api-get bg-bg-api-get">GET</span>
 https://{datadog_site}/api/v2/org_connections
 
-### Header
-- Content-Type: application/json
-- DD-API-KEY: <YOUR_DATADOG_API_KEY>
-- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
+### Example
+{{< code-block lang="json" collapsible="true" >}}
+curl -X get "https://{datadog_site}/api/v2/org_connections/" \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+{{< /code-block >}}
 
 ## Create a connection
 
@@ -34,27 +37,25 @@ Creates a connection from this organization to the destination organization. You
 
 **Note:** The payload of this call requires the destination organization UUID. Get the destination organization's UUID from the "List your managed organizations" [endpoint][3].
 
-### Header
-- Content-Type: application/json
-- DD-API-KEY: <YOUR_DATADOG_API_KEY>
-- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
-
-### Payload
-
+### Example
 {{< code-block lang="json" collapsible="true" >}}
-{
-    "data": {
-        "type": "org_connection",
-        "relationships": {
-            "sink_org": {
-                "data": {
-                    "type": "orgs",
-                    "id": "{{the destination organization UUID}}"
-                }
-            }
-        }
-    }
-}
+curl -X POST "https://{datadog_site}/api/v2/org_connections" \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+   -d '{
+        "data": {
+          "type": "org_connection",
+          "relationships": {
+              "sink_org": {
+                  "data": {
+                      "type": "orgs",
+                      "id": "{{the destination organization UUID}}"
+                  }
+              }
+          }
+      }
+  }'
 {{< /code-block >}}
 
 ### Failure scenarios
@@ -68,10 +69,15 @@ Deletes a connection. Perform this operation either from the source organization
 
 <span style="padding:3px" class="font-semibold text-api-delete bg-bg-api-delete">DELETE</span> https://{datadog_site}/api/v2/org_connections/{connection_id}
 
-### Header
-- Content-Type: application/json
-- DD-API-KEY: <YOUR_DATADOG_API_KEY>
-- DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>
+### Example
+{{< code-block lang="json" collapsible="true" >}}
+curl -X DELETE "https://{datadog_site}/api/v2/org_connections/{connection_id}" \
+  -H "Content-Type: application/json" \
+  -H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
+{{< /code-block >}}
+
+
 
 ### Failure scenarios
 
