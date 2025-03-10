@@ -7224,6 +7224,70 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: Observability Pipelines
+      url: /api/latest/observability-pipelines/
+      identifier: observability-pipelines
+      generated: true
+    - name: Update a specific pipeline
+      url: '#update-a-specific-pipeline'
+      identifier: observability-pipelines-update-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePipeline
+        unstable: []
+        order: 3
+    - name: Get a specific pipeline
+      url: '#get-a-specific-pipeline'
+      identifier: observability-pipelines-get-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPipeline
+        unstable: []
+        order: 3
+    - name: Delete a specific pipeline
+      url: '#delete-a-specific-pipeline'
+      identifier: observability-pipelines-delete-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePipeline
+        unstable: []
+        order: 4
+    - name: Create a new pipeline
+      url: '#create-a-new-pipeline'
+      identifier: observability-pipelines-create-a-new-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePipeline
+        unstable: []
+        order: 2
+    - name: Get all pipelines
+      url: '#get-all-pipelines'
+      identifier: observability-pipelines-get-all-pipelines
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListPipelines
+        unstable: []
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration

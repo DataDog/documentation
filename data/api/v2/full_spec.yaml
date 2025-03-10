@@ -10677,6 +10677,60 @@ components:
       type: string
       x-enum-varnames:
       - DATATRANSFORM
+    DatadogAgentSource:
+      description: A Datadog Agent source component.
+      properties:
+        id:
+          description: The unique ID of the source.
+          example: source-0
+          type: string
+        tls:
+          $ref: '#/components/schemas/Tls'
+        type:
+          $ref: '#/components/schemas/DatadogAgentSourceType'
+      required:
+      - id
+      - type
+      type: object
+    DatadogAgentSourceType:
+      default: datadog_agent
+      description: The type of source.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
+    DatadogLogsDestination:
+      description: A Datadog Logs destination component.
+      properties:
+        id:
+          description: The unique ID of the destination.
+          example: destination-0
+          type: string
+        inputs:
+          description: The inputs for the destination.
+          example:
+          - filter-0
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DatadogLogsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    DatadogLogsDestinationType:
+      default: datadog_logs
+      description: The type of destination.
+      enum:
+      - datadog_logs
+      example: datadog_logs
+      type: string
+      x-enum-varnames:
+      - DATADOG_LOGS
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -13698,6 +13752,40 @@ components:
             $ref: '#/components/schemas/FastlyServiceData'
           type: array
       type: object
+    FilterProcessor:
+      description: A filter processor component.
+      properties:
+        id:
+          description: The unique ID of the processor.
+          example: ''
+          type: string
+        include:
+          description: Inclusion filter for the processor.
+          example: ''
+          type: string
+        inputs:
+          description: The inputs for the processor.
+          example:
+          - source-0
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/FilterProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      type: object
+    FilterProcessorType:
+      description: The type of processor.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
     Finding:
       description: A single finding without the message and resource configuration.
       properties:
@@ -22588,6 +22676,44 @@ components:
       - name
       - value
       type: object
+    ParseJSONProcessor:
+      description: A Parse JSON processor component.
+      properties:
+        field:
+          description: The field to parse.
+          example: message
+          type: string
+        id:
+          description: The unique ID of the processor.
+          example: ''
+          type: string
+        include:
+          description: Inclusion filter for the processor.
+          example: ''
+          type: string
+        inputs:
+          description: The inputs for the processor.
+          example:
+          - source-0
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ParseJSONProcessorType'
+      required:
+      - id
+      - type
+      - inputs
+      - field
+      type: object
+    ParseJSONProcessorType:
+      description: The type of processor.
+      enum:
+      - parse_json
+      example: parse_json
+      type: string
+      x-enum-varnames:
+      - PARSE_JSON
     PartialAPIKey:
       description: Partial Datadog API key.
       properties:
@@ -22794,6 +22920,77 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Pipeline:
+      description: A pipeline definition.
+      properties:
+        data:
+          $ref: '#/components/schemas/PipelineData'
+      required:
+      - data
+      type: object
+    PipelineData:
+      description: The definition of `PipelineData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PipelineDataAttributes'
+        id:
+          description: Pipeline ID
+          example: e8890e15-053e-4d34-9404-1b41b9e403e2
+          type: string
+        type:
+          description: The type of the resource. The value should always be pipeline.
+          example: pipeline
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    PipelineDataAttributes:
+      description: pipeline attributes
+      properties:
+        config:
+          $ref: '#/components/schemas/PipelineDataAttributesConfig'
+        name:
+          description: The pipeline name.
+          example: ''
+          type: string
+      required:
+      - name
+      - config
+      type: object
+    PipelineDataAttributesConfig:
+      description: pipeline config
+      properties:
+        destinations:
+          description: The `PipelineDataAttributesConfig` `destinations`.
+          example: []
+          items:
+            description: The `config` `destinations`.
+            oneOf:
+            - $ref: '#/components/schemas/DatadogLogsDestination'
+          type: array
+        processors:
+          description: The `PipelineDataAttributesConfig` `processors`.
+          example: []
+          items:
+            description: The `config` `processors`.
+            oneOf:
+            - $ref: '#/components/schemas/FilterProcessor'
+            - $ref: '#/components/schemas/ParseJSONProcessor'
+          type: array
+        sources:
+          description: The `PipelineDataAttributesConfig` `sources`.
+          example: []
+          items:
+            description: The `config` `sources`.
+            oneOf:
+            - $ref: '#/components/schemas/DatadogAgentSource'
+          type: array
+      required:
+      - sources
+      - processors
+      - destinations
+      type: object
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -32729,6 +32926,24 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    Tls:
+      description: TLS settings
+      properties:
+        ca_file:
+          description: CA file
+          example: my_ca_file
+          type: string
+        crt_file:
+          description: CRT file
+          example: my_crt_file
+          type: string
+        key_file:
+          description: Key file
+          example: my_key_file
+          type: string
+      required:
+      - crt_file
+      type: object
     TokenName:
       description: Name for tokens.
       example: MyTokenName
@@ -47859,6 +48074,184 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/remote_config/products/obs_pipelines/pipelines:
+    get:
+      description: Retrieves a list of all configured observability pipelines.
+      operationId: ListPipelines
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Pipeline'
+                type: array
+          description: A list of pipelines
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+          description: Too Many Requests
+      summary: Get all pipelines
+      tags:
+      - Observability Pipelines
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Creates a new observability pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: Pipeline created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Deletes a specific observability pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Pipeline deleted
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-undo:
+        type: safe
+    get:
+      description: Retrieves a specific observability pipeline.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: Details of a pipeline
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    put:
+      description: Updates a specific observability pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: Pipeline updated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-undo:
+        type: safe
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -57806,6 +58199,11 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Observability Pipelines are awesome!
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/observability_pipelines/
+  name: Observability Pipelines
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration

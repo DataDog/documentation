@@ -1395,6 +1395,30 @@
     "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest CSM Threats policy"
   },
+  "ListPipelines": {
+    "description": "Retrieves a list of all configured observability pipelines.",
+    "summary": "Get all pipelines"
+  },
+  "CreatePipeline": {
+    "description": "Creates a new observability pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "A pipeline definition."
+  },
+  "DeletePipeline": {
+    "description": "Deletes a specific observability pipeline.",
+    "summary": "Delete a specific pipeline"
+  },
+  "GetPipeline": {
+    "description": "Retrieves a specific observability pipeline.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Updates a specific observability pipeline.",
+    "summary": "Update a specific pipeline",
+    "request_description": "",
+    "request_schema_description": "A pipeline definition."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
