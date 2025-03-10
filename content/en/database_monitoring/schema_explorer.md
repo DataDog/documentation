@@ -21,6 +21,8 @@ collect_schemas: true
 
 On the [Schemas][1] page, select a table to open the table details panel.
 
+{{< img src="database_monitoring/dbm_schemas_table_details_panel.png" alt="The Schemas table details panel in Datadog" style="width:100%;" >}}
+
 ### Definition
 
 The Definition tab provides structural details about the table, including its schema, indexing, and constraints. It includes the following sections:
