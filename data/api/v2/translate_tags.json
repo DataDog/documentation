@@ -205,7 +205,7 @@
   },
   "rum-retention-filters": {
     "name": "Rum Retention Filters",
-    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) for your organization."
+    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
   "scim": {
     "name": "SCIM",
