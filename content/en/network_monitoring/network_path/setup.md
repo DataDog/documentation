@@ -249,8 +249,8 @@ Agent `v7.61+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To enable Cloud Network Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
-**Helm chart v3.106.2+ is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
+**Note:** Helm chart v3.106.2+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
   ```yaml
   datadog:
