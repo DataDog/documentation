@@ -80,7 +80,7 @@ For example:
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
-**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the [App Service extension section][12] of Datadog's [Azure Portal guide][13].
+**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the **App Service extension section** of Datadog's [Azure Portal guide][13].
 
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
