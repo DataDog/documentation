@@ -17,7 +17,7 @@ CI Visibility leverages OpenAI to generate enhanced error messages and categoriz
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
 
-AI-generated errors are categorized the following domains and subdomains:
+#### Domains and Subdomains of AI-generated errors
 
 {{< tabs >}}
 {{% tab "Code Error" %}}
@@ -68,9 +68,12 @@ Notice that OpenAI does not store any logs, and each log line is pre-scanned to 
 
 ### Supported CI providers
 
-* [GitHub Actions][]
-* [GitLab][]
+* [GitHub Actions][1]
+* [GitLab][2]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]:/continuous_integration/pipelines/github/
+[2]:/continuous_integration/pipelines/gitlab/

@@ -309,7 +309,7 @@ If the Job logs collection is enabled, every failed CI job will have an AI-gener
 
 AI-generated errors contain a summary of the root cause kept in the `error.message` tag, and an error categorization stored in `error.domain` and `error.subdomain` tags.
 
-You can see a full explanation about AI-generated errors on the following page.
+You can see a full explanation about AI-generated errors on the following [guide][28].
 
 #### Errors provided by GitLab
 
@@ -450,3 +450,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [25]: /glossary/#custom-span
 [26]: /continuous_integration/explorer
 [27]: /continuous_integration/search/#search-for-pipelines
+[28]: /continuous_integration/guides/use_ai_generated_errors/
