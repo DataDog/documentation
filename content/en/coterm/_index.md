@@ -11,7 +11,7 @@ For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfusca
 1. Install CoTerm:
 
    ```shell
-   curl --tlsv1.2 --proto '=https' -sSf 'https://update.coscreen.org/install-ddcoterm.sh' | bash
+   curl --tlsv1.2 --proto '=https' -sSf 'https://coterm.datadoghq.com/install-ddcoterm.sh' | bash
    ```
 
 2. Initialize and authenticate CoTerm:
