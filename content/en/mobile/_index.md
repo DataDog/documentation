@@ -78,6 +78,28 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
+## Traces
+
+{{< img src="service_management/mobile/traces_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
+
+## Logs
+
+{{< img src="service_management/mobile/logs_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+
+On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][25].
+
+You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][24].
+
+## Services
+
+{{< img src="service_management/mobile/services_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][26].
+
 ## Incidents
 
 {{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
@@ -420,12 +442,6 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 {{% /tab %}}
 {{< /tabs >}}
 
-## Traces
-
-On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
-
-For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
-
 ## Quick actions
 
 {{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
@@ -502,3 +518,6 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [23]: /tracing/trace_explorer/query_syntax/
+[24]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[25]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[26]: https://docs.datadoghq.com/software_catalog/manage/
