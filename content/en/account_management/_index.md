@@ -102,6 +102,19 @@ Unverified users can still access Datadog but are limited to viewing organizatio
 3. Enter the **verification code** sent to your registered email.
 4. Click **Submit** to complete the verification process.
 
+#### Log out all active web sessions
+You can log out all active web sessions across devices from your Profile Settings. This logs you out of all current sessions, including the one you're using.
+
+##### Who can use this feature?
+This feature is only available if you've verified your email. To verify your email, follow the steps in How to verify your email.
+
+#### How to log out all active sessions:
+- Go to Personnal Settings.
+- Click Log Out of All Web Sessions.
+- Confirm the action.
+
+After confirming, you are logged out from all devices and need to log back in.
+
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
