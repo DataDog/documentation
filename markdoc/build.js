@@ -16,11 +16,13 @@ const baseSiteDir = path.resolve(__dirname, '..');
 
 const ASSETS_PARTIAL_PATH = path.resolve(__dirname, '../layouts/partials/markdoc-assets.html');
 const CONTENT_DIR = path.resolve(__dirname, '../content');
+const AUTHOR_CONSOLE_DIR = baseSiteDir + '/static/markdoc/console';
 
 // Initialize the Markdoc integration
 const markdocIntegration = new CdocsHugoIntegration({
     baseSiteDir,
-    env
+    env,
+    publishAuthorConsoleInDir: AUTHOR_CONSOLE_DIR
 });
 
 // Build the assets partial, and write it to the target file path

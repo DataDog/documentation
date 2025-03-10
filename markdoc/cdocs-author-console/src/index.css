@@ -1,0 +1,17 @@
+body {
+  padding: 10px 30px;
+  font-family: "Roboto", sans-serif;
+  max-width: 960px;
+}
+
+pre,
+code {
+  color: DeepPink;
+  font-size: 1.15em;
+}
+
+/* Make text inputs bigger */
+input[type="text"] {
+  font-size: 1em;
+  padding: 5px;
+}
