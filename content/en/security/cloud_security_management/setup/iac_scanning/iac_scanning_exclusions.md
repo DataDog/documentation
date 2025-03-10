@@ -214,9 +214,9 @@ exclude-categories = [ "Access control", "Best Practices" ]
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure exclusions with inline comments
+## Configure exclusions with an inline comment
 
-To control which parts of a file are scanned, add a comment that starts with # dd-iac-scan, followed by a command and any required values. Inline exclusions apply only within the file where they are used.
+To control which parts of a file are scanned, add a comment that starts with `# dd-iac-scan`, followed by a command and any required values. Inline exclusions apply only within the file where they are used.
 
 <div class="alert alert-info">If an exclusion is defined in both the configuration file and an inline comment, the configuration file takes priority.</div>
 
