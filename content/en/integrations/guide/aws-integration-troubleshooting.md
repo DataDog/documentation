@@ -75,7 +75,7 @@ In some situations, the EC2 [IMDSv2][5] configuration may make it impossible for
 
 The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, but IMDSv2 is enabled and accessible, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][6]. See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
 
-Upgrading to Datadog Agent 7.64.0+ should resolve these issues as the newer version of the Agent use IMDSv2 by default.
+Upgrading to Datadog Agent 7.64.0+ should resolve these issues as the newer versions of the Agent use IMDSv2 by default.
 
 #### Agent version 7.64.0 and after
 
