@@ -341,6 +341,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `telemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
 
+`trackAnonymousUser`
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
+
 `trackFrustrations`
 : Determines whether automatic tracking of user frustrations is enabled. By default, this is set to `true`.
 
