@@ -29845,10 +29845,6 @@ paths:
           type: string
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LogsIndex'
           description: OK
         '403':
           content:
