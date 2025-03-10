@@ -178,7 +178,7 @@ Check out the [issues][27] section to discover known issues.
 [2]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: mailto:team-ide-integration@datadoghq.com
 [10]: /tracing/error_tracking/
-[11]: /security/application_security/vulnerability_management/
+[11]: /security/code_security/software_composition_analysis/
 [12]: /continuous_integration/guides/flaky_test_management/
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/

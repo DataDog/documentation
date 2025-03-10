@@ -24,7 +24,7 @@ title: 로그 아카이브
 
 [인덱싱][1] 여부에 관계없이 수집된 모든 로그를 자체 클라우드 스토리지 시스템에 전달하도록 Datadog 계정을 설정하세요. [Rehydration][2]을 사용하면 스토리지에 최적화된 아카이브에 로그를 장기간 보관하고 컴플라이언스 요구 사항을 충족하는 동시에 임시 조사에 대한 감사 기능을 유지할 수 있습니다.
 
-{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding 페이지의 Archives 탭" style="width:100%;">}}
+{{< img src="/logs/archives/log_forwarding_archives_122024.png" alt="Log Forwarding 페이지의 Archives 탭" style="width:100%;" >}}
 
 [**Log Forwarding** 페이지][13]로 이동하여 수집된 로그를 자체 클라우드 호스팅 스토리지 버킷에 전달하기 위한 아카이브를 설정하세요.
 
@@ -43,10 +43,6 @@ title: 로그 아카이브
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"> <em>Role Delegation을 사용한 S3 Log Archives 설정은 현재 제한적으로 제공됩니다. 정부용 Datadog 계정에서 이 기능을 요청하려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요</em>.</div>
-{{< /site-region >}}
 
 아직 설정하지 않은 경우 S3 버킷을 보유한 AWS 계정에 대해 [AWS 통합][1]을 설정합니다.
    * 일반적인 경우 Datadog이 AWS S3와의 통합에 사용할 수 있는 역할 생성이 포함됩니다.
@@ -190,7 +186,7 @@ title: 로그 아카이브
 2. [Google Cloud IAM Admin 페이지][1]에서 Datadog Google Cloud 서비스 계정 주체를 선택하고 **Edit principal**을 선택합니다.
 3. **ADD ANOTHER ROLE**을 클릭한 후 **Storage Object Admin** 역할을 선택하고 저장합니다.
 
-   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud 서비스 계정에 Storage Object Admin역할을 추가합니다." style="width:75%;">}}
+{{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud 서비스 계정에 Storage Object Admin역할을 추가합니다." style="width:75%;" >}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

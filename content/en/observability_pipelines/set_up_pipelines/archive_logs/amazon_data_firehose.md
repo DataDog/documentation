@@ -88,9 +88,25 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+##### Prerequisites
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -221,6 +237,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -257,6 +278,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Add another set of processors and destinations
@@ -273,9 +299,19 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

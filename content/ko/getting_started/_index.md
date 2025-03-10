@@ -1,7 +1,7 @@
 ---
 aliases:
-- /overview
-- /getting_started/faq/
+- /ko/overview
+- /ko/getting_started/faq/
 cascade:
   algolia:
     category: 시작하기

@@ -37,12 +37,14 @@ If you are using APM and would like to remove the automatically named *services*
 For information about discovering endpoints, see [Discovering Endpoints from APM][11].
 
 ## Enrich auto-detected services with metadata 
-To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. 2.2 is the recommended version. To try experimental features like enhanced relationship mapping and precise code location, opt in to the beta program for [schema 3.0][3] by [submitting a request][4].
+To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. v3 is the recommended version.
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for metadata schema v3.0!" >}}
-{{< /callout >}}
+### Entity Definition Schema (v3) (Recommended)
+The Entity Definition Schema is a structure that contains basic information about a software component. 
 
-### Service Definition Schema (v2.2) (Recommended)
+For more details, see the [Definition Schema v3.0][3].
+
+### Service Definition Schema (v2.2)
 
 The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][5].
 

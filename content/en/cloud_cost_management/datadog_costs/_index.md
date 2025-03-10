@@ -29,6 +29,8 @@ further_reading:
 
 {{< callout url="https://www.datadoghq.com/product-preview/daily-datadog-costs/" btn_hidden="false" header="Join the Preview!">}}
 Daily Datadog costs in Cloud Cost Management are in Preview. If you're interested in this feature, complete the form to request access.
+
+<p>Only customers with a direct contract through Datadog or an External Marketplace drawdown contract are eligible for the Preview.</p>
 {{< /callout >}}
 
 ## Overview

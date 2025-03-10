@@ -108,7 +108,7 @@ To delete a custom rule, click the vertical three-dot menu for the rule and sele
 
 **Note**: You can only delete custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
 
-### Rule Version History
+### See the version history for a rule
 
 {{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
 

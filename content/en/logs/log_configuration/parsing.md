@@ -67,10 +67,13 @@ After processing, the following structured log is generated:
 * You must have unique rule names within the same Grok parser.
 * The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
 * Properties with null or empty values are not displayed.
-* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
+* You must define your parsing rule to match the entire log entry, as each rule applies from the beginning to the end of the log.
 * Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
 
 ### Matcher and filter
+
+<div class="alert alert-warning"><a href="/logs/workspaces/#transformation-cell">Workspaces</a> and <a href="/logs/explorer/calculated_fields/">Log Explorer</a> only support <em>query-time</em> parsing which includes the following subset of matchers: <strong>date</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>.<br><br>
+The matchers on this page are specific to <em>ingest-time</em> <a href="/logs/log_configuration/processors/?tab=ui#grok-parser">Grok Parser</a> functionality.</div>
 
 Here is a list of all the matchers and filters natively implemented by Datadog:
 
