@@ -35,10 +35,12 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
     {{< nextlink href="observability_pipelines/processors/generate_metrics" >}}Generate metrics{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/grok_parser" >}}Grok parser{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/parse_json" >}}Parse JSON{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/parse_xml" >}}Parse XML{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/quota" >}}Quota{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/reduce" >}}Reduce{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/remap_ocsf" >}}Remap to OCSF{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/split_array" >}}Split array{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
 {{< /whatsnext >}}
 
