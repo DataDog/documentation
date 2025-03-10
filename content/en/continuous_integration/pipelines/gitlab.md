@@ -305,7 +305,7 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 #### AI-generated errors
 
-If the Job logs collection is enabled, every failed Job will have AI-generated errors based on relevant logs coming from GitLab.
+If the Job logs collection is enabled, every failed CI job will have an AI-generated error based on relevant logs coming from GitLab.
 
 AI-generated errors contain a summary of the root cause kept in the `error.message` tag, and an error categorization stored in `error.domain` and `error.subdomain` tags.
 
