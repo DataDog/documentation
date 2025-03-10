@@ -15,7 +15,7 @@ further_reading:
   text: "How to investigate a log parsing issue?"
 ---
 
-The `logs_config.open_files_limit` parameter in the Agent's configuration file (`/etc/datadog-agent/datadog.yaml`) determines the maximum number of log files the Agent can tail simultaneously. This limit is set to prevent performance issues when wildcards are set on huge directories. You can increase this limit by adjusting the parameter.
+The `logs_config.open_files_limit` parameter in the Agent's configuration file (`/etc/datadog-agent/datadog.yaml`) determines the maximum number of log files the Agent can tail simultaneously. This limit is set to prevent performance issues when wildcards are set on huge directories. You can increase the limit by adjusting this parameter.
 
 ```yaml
 logs_config:
