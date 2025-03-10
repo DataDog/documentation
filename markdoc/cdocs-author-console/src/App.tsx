@@ -1,118 +1,126 @@
-import { ChangeEvent, useState } from 'react';
-import reactLogo from './assets/react.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import styled from '@emotion/styled';
-import Rating from '@mui/material/Rating';
-import Greeter from './components/Greeter';
-// import the data from db.json
-import { dbData as dbDataOnDisk } from './db/data';
-import { DbData } from './db/types';
+// import { dbData as dbDataOnDisk } from './db/data';
+import { CustomizationConfig, CdocsCoreError } from 'cdocs-data';
+// import { AuthorConsoleData } from '../../schemas/authorConsole';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+// import PrefsBuilder from './components/builder/PrefsBuilder';
+import ErrorsReport from './components/errors/ErrorsReport';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import ErrorIcon from '@mui/icons-material/Error';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const Button = styled.button`
-  padding: 15px;
-  background-color: Indigo;
-  font-size: 18px;
-  border-radius: 4px;
-  border-color: Indigo;
-  color: white;
-  font-weight: bold;
-  &:hover {
-    background-color: DeepPink;
-    border-color: DeepPink;
-  }
-`;
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
 
-const ExampleWrapper = styled.div`
-  padding: 20px;
-  padding-top: 0;
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-`;
+interface AuthorConsoleData {
+  timestamp: number;
+  errorsByFilePath: Record<string, CdocsCoreError[]>;
+  customizationConfig: CustomizationConfig;
+}
+
+function CustomTabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  };
+}
 
 function App() {
-  const [count, setCount] = useState<number>(0);
-  const [rating, setRating] = useState<number | null>(null);
-  const [dbData, setDbData] = useState<DbData>(dbDataOnDisk);
+  const [consoleData, setConsoleData] = useState<AuthorConsoleData | null>(null);
+  const [hasErrors, setHasErrors] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetch('/data.json')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setConsoleData(data);
+        if (Object.keys(data.errorsByFilePath).length > 0) {
+          setHasErrors(true);
+        }
+      });
+  }, []);
+
+  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
+
+  const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
+    setCurrentTabIndex(currentTabIndex);
+  };
+
+  if (!consoleData) {
+    return <h1>Loading...</h1>;
+  }
 
   return (
     <>
-      <h1>Single-file app</h1>
-      <p>
-        This app runs from a single HTML file. It's written with React, TypeScript, and
-        Vite.
-      </p>
-      <p>Material UI and Emotion are also installed and available to use.</p>
-      <h2>Usage examples</h2>
-      <ExampleWrapper>
-        <h3>Include an image asset</h3>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>React counter</h3>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        </div>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Style a component with Emotion</h3>
-        <p>
-          The button below is styled with Emotion at the top of <code>src/App.tsx</code>.
-        </p>
-        <Button>Hover on me</Button>
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Use a Material UI component</h3>
-        <p>
-          MUI is installed, so you can use MUI components, such as the rating below (see{' '}
-          <a href="https://mui.com/material-ui/react-rating/">the Rating docs</a>
-          ).
-        </p>
-        <Rating
-          name="my-rating"
-          value={rating}
-          onChange={(_event: ChangeEvent, newRating: number) => {
-            setRating(newRating);
-          }}
-        />
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Imported React component</h3>
-        <Greeter />
-      </ExampleWrapper>
-      <ExampleWrapper>
-        <h3>Import data</h3>
-        <p>
-          A common use case for a single-file tooling app is to layer a UI over a dataset.
-        </p>
-        <p>
-          Add your data to <code>src/db/data.ts</code> (and update the corresponding type
-          in <code>src/db/types.ts</code>), and your data will be available to your app as{' '}
-          <code>dbData</code>.
-        </p>
-        <p>
-          The data below comes from <code>src/db/data.ts</code> and is imported at the top
-          of <code>src/App.tsx</code>. Any other component can accept it (or a subset of
-          it) as a prop, and use the data in some way.
-        </p>
-        <pre>{JSON.stringify(dbData, null, 2)}</pre>
-        <p>
-          This data can be updated in memory using <code>setDbData()</code> as in the
-          example below, but updates do not persist between page loads.
-        </p>
-        <p>Press the button below to update the data shown above.</p>
-        <Button
-          onClick={() => {
-            setDbData({
-              msg: 'Hello, entire universe!'
-            });
-          }}
-        >
-          Update!
-        </Button>
-      </ExampleWrapper>
+      <h1>Markdoc author console</h1>
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={currentTabIndex}
+            onChange={handleTabChange}
+            aria-label="basic tabs example"
+            TabIndicatorProps={{ style: { backgroundColor: '#632ca6' } }}
+            textColor="inherit"
+          >
+            <Tab label="Build status" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
+            {/* <Tab label="Create" {...a11yProps(1)} /> */}
+          </Tabs>
+        </Box>
+        <CustomTabPanel value={currentTabIndex} index={0}>
+          {hasErrors && (
+            <>
+              <Alert
+                severity="error"
+                icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
+                sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
+              >
+                <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
+                  The latest build has Markdoc errors.
+                </AlertTitle>
+              </Alert>
+              <ErrorsReport errorsByFilePath={consoleData.errorsByFilePath} />
+            </>
+          )}
+          {!hasErrors && (
+            <Alert
+              severity="success"
+              sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#ecf9ef' }}
+              icon={<CheckCircleIcon sx={{ color: '#2a7e41' }} />}
+            >
+              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>The latest build has no errors.</AlertTitle>
+            </Alert>
+          )}
+        </CustomTabPanel>
+        {/*
+        <CustomTabPanel value={currentTabIndex} index={1}>
+          <PrefsBuilder glossary={consoleData.glossary} />
+        </CustomTabPanel>
+        */}
+      </Box>
     </>
   );
 }
