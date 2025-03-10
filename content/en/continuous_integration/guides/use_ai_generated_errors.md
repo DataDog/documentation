@@ -15,6 +15,8 @@ This guide explains how to use AI-generated errors to help you determine which a
 
 CI Visibility leverages OpenAI to generate enhanced error messages and categorize errors by domain and subdomain, based on the relevant logs collected from every failed CI job.
 
+{{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
+
 #### How relevant logs are computed?
 
 CI Visibility considers that a log line as "relevant" when that log line has not appeared in the logs collected from the successful jobs of that particular CI Pipeline before. Log relevancy is only computed for failed CI Jobs.
