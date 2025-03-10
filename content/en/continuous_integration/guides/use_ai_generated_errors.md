@@ -11,15 +11,52 @@ further_reading:
 
 This guide explains how to use AI-generated errors to help you determine which are the most common root causes of your failed jobs in order to improve the UX in the CI pipelines.
 
-### Understanding how AI-generated errors are created
+### Understanding AI-generated errors
 
 CI Visibility leverages OpenAI to generate enhanced error messages and categorize errors by domain and subdomain, based on the relevant logs collected from every failed CI job.
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
 
+AI-generated errors are categorized the following domains and subdomains:
+
+{{< tabs >}}
+{{% tab "Code Error" %}}
+
+Failures that are caused by the code that is being built and tested in the CI pipeline, and they should be fixed by the developer that launched the CI pipeline.
+
+| Subdomain | Description                                     | Examples                                                                                                                   |
+|-----------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| build     | Failures caused by compilation or build errors. | `Compilation error in processor_test.go:28:50`                                                                             |
+| test      | Failures caused by tests failures.              | `7 failed tests. Error: Can't find http.request.headers.x-amzn-trace-id in span's meta.`                                   |
+| quality   | Failures caused by format or lint failures.     | `Detected differences in files after running 'go fmt'. To fix, run 'go fmt' on the affected files and commit the changes.` |
+| security  | Failures caused by security violations.         | `Security violation: Use of weak SHA1 hash for security. Consider usedforsecurity=False.`                                  |
+
+{{% /tab %}}
+{{% tab "Platform Error" %}}
+
+Failures that are not cause by the code that is being built and tested. These failures can come from the CI provider itself or they could be caused by external dependencies.
+
+| Subdomain      | Description                                                                                         | Examples                                                                                                                                              |
+|----------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| assembly       | Failures caused by errors in the artifacts generation or assembly errors during a script execution. | `Artifact generation failed due to rejected file 'domains/backend/cart-shopping-proto/mod.info' that exists in the repository.`                       |
+| deployment     | Failures caused by errors during deployments, or related to deployments configurations.             | `Subprocess command returned non-zero exit status 1 during deployment config generation.`                                                             |
+| infrastructure | Failures caused by errors related to the infrastructure where the job was executed.                 | `Invalid docker image reference format for tag 'registry.gitlab.com/cart-shopping/infrastructure/backend-deploy-image:AE/create-kubectl-image'.`      |
+| network        | Failures caused by errors on connectivity with other dependencies.                                  | `Connection refused when accessing localhost:8080.`                                                                                                   |
+| credentials    | Failures caused by errors on authentication, missing or wrong credentials.                          | `Failed to get image auth for docker.elastic.co. No credentials found. Unable to pull image 'docker.elastic.co/elasticsearch/elasticsearch:7.17.24'.` |
+| dependencies   | Failures caused by errors on installing or updating dependencies required to execute the job.       | `Package 'systemd-container' cannot be installed. Depends on 'libsystemd-shared' v255.4-1ubuntu8.4 but v255.4-1ubuntu8.5 is to be installed.`         |
+| git            | Failures caused by errors executing git commands.                                                   | `Automatic merge failed due to conflicts between branches 'cart-shopping-new-feature' and 'staging'.`                                                 |
+| checks         | Failures caused by errors on required fulfillment of checks during the CI Job execution.            | `Release note not found during changelog validation`                                                                                                  |
+| setup          | Failures caused by errors on setting up the CI Job.                                                 | `Execution failed during the TLS setup or client dialing process.`                                                                                    |
+| script         | Failures caused by syntactic errors in the script in the CI Job.                                    | `No tests ran due to file or directory not found.`                                                                                                    |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### How AI-generated errors are created?
+
 #### How relevant logs are computed?
 
-CI Visibility considers that a log line as "relevant" when that log line has not appeared in the logs collected from the successful jobs of that particular CI Pipeline before. Log relevancy is only computed for failed CI Jobs.
+CI Visibility considers that a log line as relevant when that log line has not appeared in the logs collected from the successful jobs executions of that CI Job before. Log relevancy is only computed for failed CI Jobs.
 
 You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
 
