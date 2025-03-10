@@ -33,7 +33,7 @@ For more information on advanced profile details, review the [Profile Format Ref
 
 ## Prerequisites 
 
-The minimum Agent version required is `7.64` or higher.
+The minimum Agent version required is `7.65` or higher.
 
 ## Setup
 
@@ -182,7 +182,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 
 1. To define a global tag using the **Device Scan** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
 2. Select one or more tags you wish to add to the device profile, then click **Add Tag**.
-3. This returns you to the define global tags screen where you can see the new tag that was added.
+3. This returns you to the define global tags screen where you can see and edit the new tag that was added.
 
    {{< img src="/network_device_monitoring/profile_onboarding/add_global_tag.mp4" alt="Video showing the add global tags modal, adding a new tag and returning to global tags step." video=true >}}
 
