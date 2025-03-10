@@ -68,6 +68,16 @@ If reports are missing in Datadog, please define the following environment varia
 - `DD_GIT_BRANCH`: branch being committed to
 - `DD_GIT_COMMIT_SHA`: commit sha
 
+### SARIF file too large
+
+We are filtering SARIF files that are too large. If your code is not being scanned because your SARIF file
+is too large, consider the following options:
+
+ - Update your configuration to scan only specific directories.
+ - Configure the analyzer to run only the rulesets necessary for your codebase.
+
+Updating the configuration is done either in the Datadog application or using the `static-analysis.datadog.yml` file.
+
 ### `GLIBC_X.YY not found` error message
 
 If you run the static analyzer in your CI pipeline and get an error message similar to the following line:
@@ -137,7 +147,7 @@ The generated lock file is used by [`osv-scanner`][7] to extract dependencies an
 
 ## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog Security View][16] or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
 ### Confirming runtime detection is enabled
 
@@ -171,11 +181,15 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
 - If you are scanning GitHub repositories through Datadog-hosted scanning, navigate to [**Code Security > Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
-- If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines. 
+- If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services
 
-SCA can be enabled on your running services using two methods: the UI or manually using the `DD_APPSEC_SCA_ENABLED` environment variable. When you disable SCA, you must use the *same method* you used to enable SCA. 
+SCA can be enabled on your running services using one of the following two methods: 
+- The Datadog UI. 
+- Manually, using the `DD_APPSEC_SCA_ENABLED` environment variable.
+
+To disable SCA, you must use the *same method* you used to enable SCA.
 
 **Note**: If you enabled SCA manually, you must disable it manually. You cannot disable it using the UI.
 

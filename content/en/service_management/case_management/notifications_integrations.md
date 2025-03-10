@@ -1,5 +1,7 @@
 ---
-title: Create notifications and third party tickets
+title: Notifications and Integrations
+aliases:
+- /service_management/case_management/create_notifications_and_third_party_tickets
 further_reading:
 - link: "/service_management/case_management/troubleshooting"
   tag: "Documentation"
