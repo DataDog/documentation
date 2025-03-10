@@ -4,6 +4,15 @@ aliases:
 - /tracing/setup_overview/open_standards/
 - /opentelemetry/interoperability/
 further_reading:
+- link: "/opentelemetry/compatibility/"
+  tag: "Documentation"
+  text: "Feature Compatibility"
+- link: "/opentelemetry/instrument/"
+  tag: "Documentation"
+  text: "Instrument Your Applications"
+- link: "/opentelemetry/setup/"
+  tag: "Documentation"
+  text: "Send Data to Datadog"
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"
   text: "Datadog's partnership with OpenTelemetry"
@@ -73,9 +82,9 @@ For more information, read [Feature Compatibility][9].
 
 There are several ways to instrument your applications with OpenTelemetry and Datadog. Each approach provides different features and levels of vendor neutrality.
 
+- **Full OpenTelemetry**: Use the OpenTelemetry SDK and API for a vendor-neutral setup.
 - **OpenTelemetry API**: Use the OpenTelemetry API with Datadog's SDK implementation.
 - **OpenTelemetry instrumentation libraries**: Extend Datadog's observability to additional frameworks and technologies.
-- **Full OpenTelemetry**: Use the OpenTelemetry SDK and API for a vendor-neutral setup.
 
 For more information, see [Instrument Your Applications][8]. 
 
@@ -83,7 +92,7 @@ For more information, see [Instrument Your Applications][8].
 
 If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data into Datadog.
 
-<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong></br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
+<div class="alert alert-info"><strong>Not sure which setup is right for you?</strong><br> See the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table to understand which Datadog features are supported.</div>
 
 ### Option 1: Use the OpenTelemetry Collector
 
@@ -102,9 +111,16 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol directly to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
 
-**Best for**: Existing Datadog users or teams requiring Agent-based features.
+**Best for**: Existing Datadog users or teams requiring Agent-based features such as:
 
-- Access to Agent-based features like Live Processes and Cloud Network Monitoring
+- Fleet Automation
+- Live Container Monitoring
+- Kubernetes Explorer
+- Live Processes
+- Cloud Network Monitoring
+- Universal Service Monitoring
+
+<div class="alert alert-info">For a complete list of Agent-based features, see <strong>OTel to Datadog Agent (OTLP)</strong> in <a href="/opentelemetry/compatibility/">Feature Compatibility</a>.</div>
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/otlp_ingest_in_the_agent" >}}Learn more about using OTLP ingest in the Agent{{< /nextlink >}}
@@ -119,9 +135,6 @@ For other setup options, including direct OTLP intake, see [Send Data to Datadog
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/
-[2]: https://www.cncf.io/
-[3]: /opentelemetry/collector_exporter/
-[4]: /opentelemetry/otlp_ingest_in_the_agent/
 [7]: /opentelemetry/setup
 [8]: /opentelemetry/instrument/
 [9]: /opentelemetry/compatibility/

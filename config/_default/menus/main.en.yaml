@@ -598,47 +598,47 @@ menu:
       identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
+    - name: OTel SDKs
+      url: opentelemetry/instrument/otel_sdks/
+      identifier: otel_sdks
+      parent: otel-instrumentation
+      weight: 301
     - name: OTel APIs
       url: /opentelemetry/instrument/api_support
       identifier: otel-api-dd-sdk
       parent: otel-instrumentation
-      weight: 301
+      weight: 302
     - name: Java
       url: /opentelemetry/instrument/api_support/java
       parent: otel-api-dd-sdk
-      weight: 3011
+      weight: 3021
     - name: Python
       url: /opentelemetry/instrument/api_support/python
       parent: otel-api-dd-sdk
-      weight: 3012
+      weight: 3022
     - name: Ruby
       url: /opentelemetry/instrument/api_support/ruby
       parent: otel-api-dd-sdk
-      weight: 3013
+      weight: 3023
     - name: Go
       url: /opentelemetry/instrument/api_support/go
       parent: otel-api-dd-sdk
-      weight: 3014
+      weight: 3024
     - name: Node.js
       url: /opentelemetry/instrument/api_support/nodejs
       parent: otel-api-dd-sdk
-      weight: 3015
+      weight: 3025
     - name: PHP
       url: /opentelemetry/instrument/api_support/php
       parent: otel-api-dd-sdk
-      weight: 3016
+      weight: 3026
     - name: .NET
       url: /opentelemetry/instrument/api_support/dotnet
       parent: otel-api-dd-sdk
-      weight: 3017
+      weight: 3027
     - name: OTel Instrumentation Libraries
       url: /opentelemetry/instrument/instrumentation_libraries/
       identifier: otel_instrumentation_libraries
-      parent: otel-instrumentation
-      weight: 302
-    - name: OTel SDKs
-      url: opentelemetry/instrument/otel_sdks/
-      identifier: otel_sdks
       parent: otel-instrumentation
       weight: 303
     - name: Environment Variables
