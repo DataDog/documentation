@@ -94,8 +94,6 @@ This feature is only available if you've verified your email. To verify your ema
 
 After confirming, you are logged out from all devices and need to log back in.
 
-Use this feature to secure your account and immediately end all active sessions if you suspect unauthorized access.
-
 ## Appearance
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
