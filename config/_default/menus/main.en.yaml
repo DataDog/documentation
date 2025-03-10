@@ -6780,7 +6780,7 @@ menu:
       parent: rum_browser_setup
       identifier: rum_browser_setup_client
       weight: 1101
-    - name: Server-Side
+    - name: Auto-Instrumentation
       url: real_user_monitoring/browser/setup/server
       parent: rum_browser_setup
       identifier: rum_browser_setup_server
