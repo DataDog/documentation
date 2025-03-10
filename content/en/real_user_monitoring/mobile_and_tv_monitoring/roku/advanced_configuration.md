@@ -109,13 +109,13 @@ Adding user information to your RUM sessions makes it easy to:
 * Know which users are the most impacted by errors.
 * Monitor performance for your most important users.
 
-The following attributes are **optional**, but you should provide **at least one** of them:
+The `id` attribute is the only **mandatory** field. All other attributes are **optional**:
 
-| Attribute | Type   | Description                                                                                              |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| id        | String | Unique user identifier.                                                                                  |
-| name      | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| email     | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute | Type   | Description                                                                                       |
+|-----------|--------|---------------------------------------------------------------------------------------------------|
+| `usr.id`    | String | (Required) Unique user identifier.                                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.                              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present.                 |
 
 To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
 
