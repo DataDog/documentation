@@ -30,6 +30,7 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
+  - **Note**: EKS Fargate environments are not supported
 - [Helm (v3+)][54]
 - [Docker][50]
 - [kubectl][5]
@@ -118,11 +119,11 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 {{< /code-block >}}
 
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
 
@@ -202,7 +203,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
@@ -265,12 +266,12 @@ Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datad
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.62.2-ot-beta-jmx
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 ...
 {{< /code-block >}}
 
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
 
@@ -340,7 +341,7 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.62.2-ot-beta-jmx
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 
 datadog:
@@ -484,7 +485,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
@@ -672,7 +673,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
