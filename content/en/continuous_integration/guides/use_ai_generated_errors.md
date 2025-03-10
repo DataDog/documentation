@@ -1,5 +1,5 @@
 ---
-title: Use AI-generated errors
+title: Use AI-generated errors to identify the root cause of your failed CI Jobs
 description: TBD
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
@@ -32,3 +32,6 @@ Notice that OpenAI does not store any logs, and each log line is pre-scanned to 
 * [GitHub Actions][]
 * [GitLab][]
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
