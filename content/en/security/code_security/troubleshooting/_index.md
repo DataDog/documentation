@@ -101,10 +101,10 @@ If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by defa
 
 ### Diff-aware is not working
 
-If diff-aware is not working with the static analyzer, make sure that
- 1. your default branch is specific for your repository
- 2. one revision with the same configuration (e.g. same rulesets, same arguments, only/ignore flags, etc.) has been pushed on the repository default branch.
- 3. The current user can read the repository metadata (use the following command to fix this: `git config --global --add safe.directory <repo-path>`)
+If diff-aware is not working with the Static Analyzer, ensure that:
+ 1. Your default branch is specific for your repository.
+ 2. One revision with the same configuration (for example, same rulesets, same arguments, only/ignore flags, etc.) has been pushed on the repository default branch.
+ 3. The current user can read the repository metadata. Use the following command to fix this: `git config --global --add safe.directory <repo-path>`.
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
