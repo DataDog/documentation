@@ -11,28 +11,28 @@ aliases:
 - /es/security/cloud_siem/log_detection_rules/
 further_reading:
 - link: /cloud_siem/default_rules/
-  tag: documentation
+  tag: Documentación
   text: Configurar reglas de detección predeterminadas de Cloud SIEM
 - link: /cloud_siem/explorer/
-  tag: documentation
+  tag: Documentación
   text: Más información sobre Security Signals Explorer
 - link: https://www.datadoghq.com/blog/detect-unauthorized-third-parties-aws/
-  tag: Centro de aprendizaje
+  tag: Blog
   text: Detectar terceros no autorizados en tu cuenta de AWS
 - link: https://www.datadoghq.com/blog/anomaly-detection-rules-datadog/
-  tag: Centro de aprendizaje
+  tag: Blog
   text: Detectar amenazas a la seguridad con reglas de detección de anomalías
 - link: /security/notifications/variables/
-  tag: documentation
+  tag: Documentación
   text: Más información sobre las variables de notificación de seguridad
 - link: https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/
-  tag: Centro de aprendizaje
+  tag: Blog
   text: Monitorizar Cloudflare Zero Trust con Datadog Cloud SIEM
 - link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
-  tag: Centro de aprendizaje
+  tag: Blog
   text: Monitorizar 1Password con Datadog Cloud SIEM
 title: Reglas de detección
-type: documentation
+type: Documentación
 ---
 
 ## Información general
@@ -165,7 +165,6 @@ Haz clic en **Add Query** (Añadir consulta) para añadir consultas adicionales.
 **Nota**: La consulta se aplica a todas las ingestas de logs.
 
 [1]: /es/logs/search_syntax/
-Accede a dashboards preconfigurados
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -304,8 +303,6 @@ Un caso de regla contiene operaciones lógicas (`>, >=, &&, ||`) para determinar
 
 Haz clic en **Add case** (Añadir caso) para añadir casos adicionales.
 
-Accede a dashboards preconfigurados
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -315,9 +312,9 @@ Una forma de disminuir el ruido de las señales es dar prioridad a las señales 
 
 | Gravedad de la señal en el entorno de producción| Gravedad de la señal en el entorno de no producción|
 | ---------------------------------------- | -------------------------------------------- |
-| Imprescindible                                 | Optimice su prueba conjunto [asegurándose de que se prueban los flujos de trabajo más críticos de su aplicación][22].                                         |
-| Optimice su prueba conjunto [asegurándose de que se prueban los flujos de trabajo más críticos de su aplicación][22].                                     | Utilice el explorador de resultados de pruebas y de Monitorización Sintético                                        |
-| Utilice el explorador de resultados de pruebas y de Monitorización Sintético                                    | Información                                         |
+| Imprescindible                                 | Alto                                         |
+| Alto                                     | Medio                                       |
+| Medio                                   | Información                                         |
 | Información                                     | Información                                         |
 
 La disminución de la gravedad se aplica a las señales con una etiqueta de entorno empezando por `staging`, `test` o `dev`.
@@ -336,6 +333,26 @@ Opcionalmente, añade una regla de supresión para evitar que se genere una señ
 
 Además, en la regla de supresión, puedes añadir una consulta de exclusión de logs para excluir logs del análisis. Estas consultas se basan en **atributos de logs**. **Nota**: La supresión heredada se basaba en consultas de exclusión de logs, pero ahora se incluye en el paso **Añadir consulta de supresión** de la regla de supresión.
 
+## Historial de versiones de las reglas
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="The version history for a GitHub OAuth access token compromise showing" style="width:80%;" >}}
+
+Utilice el historial de versiones de reglas para:
+- Vea las versiones anteriores de una regla de detección y comprenda los cambios a lo largo del tiempo.
+- Vea quién ha realizado los cambios para mejorar la colaboración.
+- Compare versiones con diffs para analizar las modificaciones y el impacto de los cambios.
+
+Para ver el historial de versiones de una regla:
+1. Vaya a [Reglas de detección][4].
+1. Haga clic en la norma que le interese.
+1. En el editor de reglas, haga clic en **Historial de versiones** para ver los cambios anteriores.
+1. Haga clic en una versión concreta para ver los cambios realizados.
+1. Haga clic en **Abrir comparación de versiones** para ver los cambios entre versiones.
+1. Seleccione las dos versiones que desea comparar.
+    - Los datos resaltados en rojo indican datos modificados o eliminados.
+    - Los datos resaltados en verde indican los datos que se han añadido.
+1. Haga clic en **Unificado** si desea ver la comparación en el mismo panel.
+
 ## Obsolescencia de reglas
 
 Se realizan auditorías periódicas de todas las reglas de detección predefinidas para mantener una calidad de señal de alta fidelidad. Las reglas obsoletas se sustituyen por una regla mejorada.
@@ -348,11 +365,10 @@ El proceso de obsolescencia de las reglas es el siguiente:
 2. Una vez que la regla se vuelve obsoleta, transcurre un periodo de 15 meses antes de que se elimine la regla. Esto se debe al periodo de conservación de señales de 15 meses. Durante este tiempo, puedes volver a habilitar la regla [clonando la regla][2] en la interfaz de usuario.
 3. Una vez eliminada la regla, ya no podrás clonarla ni volver a activarla.
 
-## Configurar tests de API y tests de API multupaso
-Grabar pruebas de aplicaciones móviles
-
+## Referencias adicionales
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /es/security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
+[4]: https://app.datadoghq.com/security/rules

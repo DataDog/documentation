@@ -23,28 +23,35 @@ title: ブラウザテストの概要
 
 ## 概要
 
-[ブラウザテスト][1]は、Datadog が Web アプリケーション上で実行するシナリオです。定期的なインターバルを設定して、複数の場所、デバイス、ブラウザからテストを実行したり、CI/CD パイプラインから実行したりすることが可能です。
-
-{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Synthetics ブラウザテストの概要" style="width:100%;" >}}
-
-これらのテストは、ユーザーがアプリケーション上で**主要なビジネストランザクション**を実行できること、および最近のコード変更によってマイナスの影響を受けていないことを検証します。
+[ブラウザテスト][1]は、Datadog が Web アプリケーションで実行するシナリオです。定期的な間隔を構成して、複数の場所、デバイス、およびブラウザからテストを実行したり、CI/CD パイプラインからテストを実行したりできます。これらのテストは、ユーザーがアプリケーションで**主要なビジネストランザクション**を実行できること、およびユーザーが最近のコード変更によって悪影響を受けていないことを確認します。
 
 ## ブラウザテストを作成
 
 以下の例は、カートにアイテムを追加してから正常にチェックアウトするまでのユーザーのジャーニーをマップするブラウザテストの作成を示しています。
 
-{{< img src="getting_started/synthetics/browser-test-1.png" alt="ユーザージャーニーをマッピングするブラウザテスト" style="width:100%;" >}}
 ### テストの詳細を構成する
 
 1. Datadog サイトで、左側のメニューから **Digital Experience** にカーソルを合わせ、**[Tests][2]** (**Synthetic Monitoring & Testing** の下) を選択します。
 2. 右上隅にある **New Test** > **[Browser Test][3]** をクリックします。
-3. ブラウザテストを定義します。
 
-    - 監視する Web サイトの URL を追加します。追加する URL がない場合は、テスト用の e コマース Web アプリケーションである `https://www.shopist.io` を使用してください。
-    - **Advanced Options** を選択して、カスタムリクエストオプション、証明書、認証情報などを設定します。
-      この例では、特定の詳細オプションは必要ありません。
-    - テストに名前を付け、`env:prod` や `app:shopist` などのタグを設定します。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
-    - テストするブラウザとデバイスを選択します。
+You may create a test using one of the following options:
+
+- **Create a test from a template**:
+
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. **+Create Test** をクリックして構成ページを開き、あらかじめ設定された構成オプションを確認および編集します。ここで提示されるフィールドは、テストを一から作成する場合と同じです。
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
+
+- **Build a test from scratch**:
+
+    1. Click the **+** template to start a new Browser Test from scratch.
+    1. 監視する Web サイトの URL を追加します。追加する URL がない場合は、テスト用の e コマース Web アプリケーションである `https://www.shopist.io` を使用してください。
+    2. **Advanced Options** を選択して、カスタムリクエストオプション、証明書、認証情報などを設定します。
+    3. テストに名前を付け、`env:prod` や `app:shopist` などのタグを設定します。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
+    4. テストするブラウザとデバイスを選択します。
+    5. Click **Save & Edit Recording** to submit your Browser Test.
 
 ### ロケーションを選択する
 

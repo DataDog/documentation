@@ -2,6 +2,9 @@
 title: Database Monitoring
 description: Learn about Database Monitoring and get started
 further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
+  tag: "Blog"
+  text: "Improve database host and query performance with Database Monitoring Recommendations"
 - link: "https://www.datadoghq.com/blog/database-performance-monitoring-datadog"
   tag: "Blog"
   text: "Monitor and visualize database performance"

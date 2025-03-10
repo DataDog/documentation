@@ -24,8 +24,6 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/change_light_large.png">}} Change {{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/distribution"
         img="dashboards/widgets/icons/distribution_light_large.png">}} Distribution{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel"
-        img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" 
         img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map"
@@ -34,7 +32,6 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/pie_light_large.png">}} Pie Chart{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value"
         img="dashboards/widgets/icons/query-value_light_large.png">}} Query Value{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot"
         img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Scatter Plot{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/table"
@@ -57,6 +54,26 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/split_graph"
         img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Product Analytics
+{{< whatsnext desc="Visualize Product Analytics data: ">}}
+    {{< nextlink href="/dashboards/widgets/sankey" 
+        img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" 
+        img="dashboards/widgets/icons/funnel_light_large.png">}} Funnel{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/retention" 
+        img="/dashboards/widgets/icons/cohort_light_small.svg">}} Retention{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### Architecture
+{{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
+    {{< nextlink href="/dashboards/widgets/hostmap" 
+        img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" 
+        img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" 
+        img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
@@ -89,16 +106,6 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Monitor Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/run_workflow" 
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Architecture
-{{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
-        img="dashboards/widgets/icons/host-map_light_large.png">}} Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
-        img="dashboards/widgets/icons/service-map_light_large.png">}} Topology Map{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
-        img="dashboards/widgets/icons/service-summary_light_large.png">}} Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Performance and reliability
@@ -155,7 +162,7 @@ Widgets not linked to global time show the data for their local time frame as ap
 
 ## Copy and paste widgets
 
-<div class="alert alert-warning">You must have <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> permissions</a> and enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
+<div class="alert alert-warning">Enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
 
 Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
 

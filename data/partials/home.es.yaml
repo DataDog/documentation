@@ -56,8 +56,12 @@ nav_sections:
       title: Eventos
     - desc: Automatizar y orquestar procesos en todo tu stack tecnológico
       icon: workflows
-      link: workflows
+      link: service_management/workflows/
       title: Automatización de flujos de trabajo
+    - desc: Cree aplicaciones de bajo código para agilizar sus herramientas internas
+      icon: app-builder
+      link: service_management/app_builder/
+      title: Creador de aplicaciones
 - nav_section:
   - name: Productos
   - navtiles:

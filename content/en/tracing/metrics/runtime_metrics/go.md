@@ -26,9 +26,9 @@ To enable Go runtime metrics collection, start the tracer using the `WithRuntime
 tracer.Start(tracer.WithRuntimeMetrics())
 ```
 
-View runtime metrics in correlation with your Go services on the [Service Catalog][1] in Datadog.
+View runtime metrics in correlation with your Go services on the [Software Catalog][1] in Datadog.
 
-By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
+By default, runtime metrics from your application are sent every 10 seconds to the Datadog Agent with DogStatsD. Make sure that [DogStatsD is enabled for the Agent][2]. If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] (or [`WithDogstatsdAddress` v2][9]) option (available starting in 1.18.0) or the environment variables `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`.
 
 If `WithDogstatsdAddress` is not used, the tracer attempts to determine the address of the statsd service according to the following rules:
   1. Look for `/var/run/datadog/dsd.socket` and use it if present. IF NOT, continue to #2.
@@ -62,3 +62,4 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 [6]: /agent/amazon_ecs/#create-an-ecs-task
 [7]: https://app.datadoghq.com/dash/integration/30587/go-runtime-metrics
 [8]: /developers/dogstatsd/unix_socket/
+[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress

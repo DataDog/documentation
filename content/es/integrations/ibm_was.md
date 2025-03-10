@@ -26,7 +26,7 @@ author:
 categories:
 - recopilación de logs
 - so y sistema
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 3.3.2
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: ibm_was

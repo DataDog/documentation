@@ -13,7 +13,7 @@ further_reading:
 
 ## Custom metrics
 
-[Generate metrics][5] with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see [Event Analytics][6].
+[Generate metrics][5] with 15-month retention from any event search query to create and monitor historical events and alerts. Events ingested with a timestamp within the past 20 minutes are considered for aggregation. For more information, see [Event Analytics][6].
 
 {{< img src="service_management/events/guides/usage/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
