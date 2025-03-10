@@ -32,7 +32,7 @@ version: '1.0'
 
 ## Información general
 
-Salesforce ofrece un servicio de gestión de relaciones con los clientes y un conjunto complementario de aplicaciones empresariales centradas en el servicio al cliente, la automatización del marketing, el análisis y el desarrollo de aplicaciones. 
+Salesforce ofrece un servicio de gestión de relaciones con los clientes y un conjunto complementario de aplicaciones empresariales centradas en el servicio al cliente, la automatización del marketing, el análisis y el desarrollo de aplicaciones.
 
 Integra Salesforce con Datadog para:
 
@@ -66,21 +66,31 @@ de eventos compatibles en la sección **Platform Events** (Eventos de plataforma
 
 #### Conexión de tu organización
 
-1. Crea una cuenta de sistema única en tu organización Salesforce. 
+1. Crea una cuenta de sistema única en tu organización de Salesforce.
 2. Haz clic en **New Production Org** (Nueva organización de producción) o **New Sandbox Org** (Nueva organización sandbox) en la pestaña **Configuration** (Configuración) del [cuadro de la integración Salesforce][9].
 3. Define cualquier etiqueta (tag) personalizada que quieras adjuntar a estos eventos como una lista separada por comas. Puede elegir cuáles eventos activar.
 
-    {{< img src="integrations/salesforce/salesforce-1.png" alt="Pantalla 'Logrado' cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
+    {{< img src="integrations/salesforce/salesforce-1.png" alt="Pantalla logrado cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
 
-4. Haz clic en **Save** (Guardar). Se te pedirá que inicies sesión en tu cuenta de Salesforce y que concedas permisos de acceso a Datadog. 
+4. Haz clic en **Save** (Guardar). Se te pedirá que inicies sesión en tu cuenta de Salesforce y que concedas permisos de acceso a Datadog.
 5. Una vez que hayas completado el proceso de inicio de sesión, regresa al [cuadro de la integración Salesforce][9] en Datadog. Tu organización incluye etiquetas predeterminadas.
 
-    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Pantalla 'Logrado' cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
+    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Pantalla logrado cuando has configurado con éxito tu organización Salesforce en Datadog" popup="true" style="width:90%" >}}
 
 6. Selecciona las etiquetas que quieres utilizar y haz clic en **Connect** (Conectar).
-7. Repite estos pasos para conectar tus organizaciones restantes. Debes tener acceso a las organizaciones que estás intentando añadir. 
+7. Repite estos pasos para conectar tus organizaciones restantes. Debes tener acceso a las organizaciones que estás intentando añadir.
 
 **Nota**: Se añade una etiqueta predeterminada con el ID de tu organización Salesforce, pero puedes editar [las etiquetas][10] con algo que sea más significativo para tu empresa.
+
+#### Adición de objetos personalizados de Salesforce
+
+Los [objetos personalizados de Salesforce][11] pueden ingerirse en Datadog de la siguiente manera:
+
+1. En el cuadro de la integración de Salesforce, abre la sección Custom Objects (Objetos personalizados).
+2. Añade uno o más objetos personalizados, en el formato de la API de Salesforce (`CustomObject__c`), separados por comas (`CustomObject1__c, CustomObject2__c`).
+3. Activa o desactiva estos objetos personalizados como lo harías con otros eventos de Salesforce.
+
+Los objetos personalizados se ingieren como logs, en función de la fecha de modificación. Todos los logs de objetos personalizados se etiquetan automáticamente con `salesforce_custom_object:true`.
 
 #### Resultados
 
@@ -94,13 +104,17 @@ Transcurrido un tiempo, los [logs][1] aparecen bajo el origen `salesforce`. Sale
 {{< get-metrics-from-git "salesforce" >}}
 
 
-### Eventos
+### Logs
 
-Para consultar la lista completa de eventos de logs, consulta el [almacenamiento de datos de monitorización de eventos en tiempo real][12] y los [eventos EventLogFile][13].
+Esta integración te permitirá ver los logs generados a partir de la actividad del usuario de Salesforce, la actividad de acceso a la plataforma y la seguridad mediante [Datadog Log Management][1]. Para ver la lista completa de la actividad admitida, consulta [Real-Time Event Monitoring Data Storage][13] (Almacenamiento de datos de monitorización de eventos en tiempo real) y [EventLogFile Events][14] (Eventos de EventLogFile). Esta información también se encuentra disponible en la pestaña **Data Collected** (Datos recopilados) del cuadro de la integración de Salesforce.
 
 ### Checks de servicio
 
 La integración Salesforce no incluye checks de servicio.
+
+### Eventos
+
+Esta integración no incluye eventos.
 
 ## Resolución de problemas
 
@@ -116,9 +130,9 @@ Como mínimo, el usuario debe tener los siguientes permisos:
 
 El usuario también debe tener permiso de lectura de cualquier objeto de evento subyacente que esté seleccionado en la configuración.
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][14].
+¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][15].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -132,7 +146,8 @@ El usuario también debe tener permiso de lectura de cualquier objeto de evento 
 [8]: https://login.salesforce.com/
 [9]: https://app.datadoghq.com/integrations/salesforce
 [10]: /es/getting_started/tagging/using_tags/
-[11]: https://github.com/DataDog/dogweb/blob/prod/integration/salesforce/salesforce_metadata.csv
-[12]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
-[13]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
-[14]: https://docs.datadoghq.com/es/help/
+[11]: https://help.salesforce.com/s/articleView?id=platform.dev_objectcreate_task_parent.htm&type=5
+[12]: https://github.com/DataDog/integrations-internal-core/blob/main/salesforce/metadata.csv
+[13]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
+[14]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
+[15]: https://docs.datadoghq.com/es/help/

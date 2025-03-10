@@ -1,5 +1,7 @@
 ---
 title: Data Streams Monitoring
+aliases:
+- /data_streams/troubleshooting
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -28,7 +30,7 @@ cascade:
 ---
 
 
-{{% site-region region="gov,ap1" %}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
@@ -41,19 +43,13 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 ## Setup
 
-To get started, follow the installation instructions to configure services with Data Streams Monitoring:
+Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
+
+For installation instructions and lists of supported technologies, choose your language:
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
 <br/>
-
-| Runtime | Supported technologies |
-|---|----|
-| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS |
-| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon SNS, IBM MQ, Azure Service Bus |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
-| Go | All (with [manual instrumentation][1]) |
 
 ## Explore Data Streams Monitoring
 

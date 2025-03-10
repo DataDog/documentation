@@ -216,6 +216,11 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
+## Audit terminal commands with CoTerm
+
+[CoTerm][14] allows you to record terminal sessions for analysis in Datadog. You can use CoTerm to audit sensitive system changes done through terminals. You can then review these commands and their output as logs and events in Datadog.
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -233,3 +238,4 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows vari
 [11]: /dashboards/widgets/list/
 [12]: /dashboards/querying/#define-the-metric/
 [13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[14]: /coterm
