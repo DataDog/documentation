@@ -2501,36 +2501,36 @@ menu:
       parent: case_management
       identifier: case_management_projects
       weight: 1
-    - name: View and Manage
-      url: service_management/case_management/view_and_manage
-      parent: case_management_projects
-      identifier: case_management_view_and_manage
-      weight: 101
-    - name: Create notifications and tickets
-      url: service_management/case_management/create_notifications_and_third_party_tickets
-      parent: case_management_projects
-      identifier: case_management_create_notifications_and_third_party_tickets
-      weight: 102
     - name: Settings
       url: service_management/case_management/settings
       parent: case_management_projects
       identifier: case_management_settings
-      weight: 103
+      weight: 102
     - name: Create a Case
       url: service_management/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
+    - name: View and Manage Cases
+      url: service_management/case_management/view_and_manage
+      parent: case_management
+      identifier: case_management_view_and_manage
+      weight: 3
+    - name: Notifications and Integrations
+      url: service_management/case_management/notifications_integrations
+      parent: case_management
+      identifier: case_management_notifications_and_integrations
+      weight: 4
     - name: Case Automation Rules
       url: service_management/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
-      weight: 3
+      weight: 5
     - name: Troubleshooting
       url: service_management/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
-      weight: 4
+      weight: 6
     - name: Workflow Automation
       url: service_management/workflows/
       pre: workflows
