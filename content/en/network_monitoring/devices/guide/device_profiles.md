@@ -50,9 +50,10 @@ The minimum Agent version required is `7.65` or higher.
 
 ### Step 2: Profile inheritance 
 
-Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, labeled as `_base.yaml`, which are recommended **not** to be removed. Reference the [Supported Device Profiles][16] for the full list of inherited profiles.
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, (`_base.yaml` `_generic-if.yaml`, `_generic-ip.yaml`, `_generic-ospf.yaml`, `_generic-tcp.yaml` and `_generic-udp.yaml`), which are recommended **not** to be removed. <br/>
+Reference the [Supported Device Profiles][16] for the full list of inherited profiles.
 
-1. Keep the Datadog `_base.yaml` profile, and optionally, select one or more profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics, tags, or metadata:
+1. Keep the Datadog `_base.yaml` profile, and any other inherited Datadog profiles specific to your needs. Optionally, you can select additional profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics, tags, or metadata:
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
@@ -80,9 +81,9 @@ The **Scanned Devices** tab will show which devices were scanned with Remote Con
 
 ### Step 5: Define metadata
 
-Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles. Devices with inherited profiles contain predefined settings such as device name and description. Additionally, devices using the `_base.yaml` profile include predefined configurations. You have the option to override these defaults in the **Define Metadata** section.
+Datadog provides reasonable defaults for most devices through out-of-the-box (OOTB) profiles, such as device and description. You can override these defaults in the **Define Metadata** section.
 
-  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata.png" alt="The Network Device profile creation page showing the define metrics section." style="width:80%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/define_metadata_2.png" alt="The Network Device profile creation page showing the define metrics section." style="width:80%;">}}
 
   1. Click the pencil icon to edit and modify any of the default metadata fields.
   
@@ -111,13 +112,15 @@ Metrics can be added either from a device scan or by manually creating a new met
 1. To define a metric using the **Manual** option, click **Add Metrics**. This opens a modal displaying all available metrics for the device.
 2. Click **Create New Metric** at the top of the modal.
 3. Specify the OID (Scalar, or Tabular). 
-4. Click the dropdown in the search field to add the OID name.
+4. Click the dropdown in the search field to add the OID name. The search bar offers an autocomplete feature that suggests OIDs matching the searched value, or you can manually enter the name or OID.
 5. Select the metric type, scale factor, and extract value (regex pattern). 
 See [advanced options for scalar metrics](?tab=manual#scalar-metrics) and [advanced options for tabular metrics](?tab=manual#tabular-metrics) for more information.
 6. Click **Create** to save the metric.
 7. This returns you to the define metrics screen where you can see the new metric that was added.
 
-   {{< img src="/network_device_monitoring/profile_onboarding/add_metrics_manually.mp4" alt="Video showing the add metrics modal, adding a new metric with the manual method and returning to define metrics step." video=true >}}
+**Note**: To avoid a validation error for tabular metrics, at least one metric tag must be added on the Define metrics screen. 
+
+{{< img src="/network_device_monitoring/profile_onboarding/add_metrics_manually.mp4" alt="Video showing the add metrics modal, adding a new metric with the manual method and returning to define metrics step." video=true >}}
 
 {{% collapse-content title="Advanced options scalar" level="h4" expanded=false %}}
 
@@ -167,8 +170,10 @@ Adding tags to tabular metrics is similar to adding [global tags](#step-7-global
 
     </details>
 
-{{% /collapse-content %}}
+[9]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-an-index
+[10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
 
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -293,8 +298,6 @@ Once a profile is applied, you cannot bring it back to draft status.
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles
-[9]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-an-index
-[10]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#using-a-column-from-a-different-table-with-different-indexes 
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
 [16]: /network_monitoring/devices/supported_devices/
