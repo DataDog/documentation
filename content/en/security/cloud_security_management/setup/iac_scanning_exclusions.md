@@ -216,7 +216,7 @@ exclude-queries = [ "Access control", "Best Practices" ]
 
 ## Configure exclusions with inline comments
 
-To exclude specific findings, add a comment that starts with `# dd-iac-scan`, followed by a command and any required values. Inline exclusions apply only within the file where they are used.
+To control which parts of a file are scanned, add a comment that starts with # dd-iac-scan, followed by a command and any required values. Inline exclusions apply only within the file where they are used.
 
 <div class="alert alert-info">If an exclusion is defined in both the configuration file and an inline comment, the configuration file takes priority.</div>
 
@@ -230,7 +230,7 @@ To exclude specific findings, add a comment that starts with `# dd-iac-scan`, fo
 | `dd-iac-scan ignore-line`        | Ignores a single line.          |
 | `dd-iac-scan ignore-block`       | Ignores a block of code.        |
 
-#### `dd-iac-scan ignore`
+#### dd-iac-scan ignore
 
 Excludes the entire file from IaC scanning. This comment must be placed at the beginning of the file to take effect.
 
@@ -244,9 +244,9 @@ resource "aws_s3_bucket" "example" {
 ...
 ```
 
-#### `dd-iac-scan disable=<query_id>`
+#### dd-iac-scan disable=query_id
 
-Limits scan results in this file to only the specified queries. This comment must be placed at the beginning of the file to take effect.
+Excludes scan results for the specified queries in this file. This comment must be placed at the beginning of the file to take effect.
 
 ```
 # dd-iac-scan enable=e592a0c5-5bdb-414c-9066-5dba7cdea370
@@ -258,11 +258,12 @@ resource "aws_s3_bucket" "example" {
 ...
 ```
 
-Only findings from the specified queries are included in the scan results for this file.
+Findings from the specified queries are ignored for this file.
 
-#### `dd-iac-scan enable=<query_id>`
+#### dd-iac-scan enable=query_id
 
-Excludes findings from the specified queries in this file. This comment must be placed at the beginning of the file to take effect.
+Limits scan results in this file to only the specified queries. This comment must be placed at the beginning of the file to take effect.  
+
 
 ```
 # dd-iac-scan disable=e592a0c5-5bdb-414c-9066-5dba7cdea370,e69890e6-fce5-461d-98ad-cb98318dfc96
@@ -274,29 +275,29 @@ resource "aws_s3_bucket" "example" {
 ...
 ```
 
-Findings from the specified queries are ignored for this file.
+Only findings from the specified queries are included in scan results for this file.
 
-#### `dd-iac-scan ignore-line`
+#### dd-iac-scan ignore-line
 
 Prevents scan results from flagging the line immediately after this comment. This comment can be placed anywhere in the file.
 
 ```
 1: resource "google_storage_bucket" "example" {
-2:  # kics-scan ignore-line
+2:  # dd-scan ignore-line
 3:  name          = "image-store.com"
 4:  location      = "EU"
 5:  force_destroy = true
 6: }
 ```
 
-Findings related to the next line (line 3 in this example) are ignored.
+Findings for lines 2 and 3 are ignored.
 
-#### `dd-iac-scan ignore-block`
+#### dd-iac-scan ignore-block
 
 Prevents scan results from flagging an entire resource block and all its key-value pairs. This comment can be placed anywhere in the file.
 
 ```
-1: # kics-scan ignore-block
+1: # dd-scan ignore-block
 2: resource "google_storage_bucket" "example" {
 3:  name          = "image-store.com"
 4:  location      = "EU"
@@ -304,7 +305,7 @@ Prevents scan results from flagging an entire resource block and all its key-val
 6: }
 ```
 
-Findings related to the entire block (lines 2-6 in this example) are ignored.
+Findings related to the entire block (lines 1-6 in this example) are ignored.
 
 ## Further reading
 
