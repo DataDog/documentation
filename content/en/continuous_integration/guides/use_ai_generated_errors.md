@@ -19,6 +19,20 @@ CI Visibility leverages OpenAI to generate enhanced error messages and categoriz
 
 #### Domains and Subdomains of AI-generated errors
 
+You can filter and aggregate failed CI Jobs using the public facets `@error.domain` and `@error.subdomain`.
+
+{{< img src="continuous_integration/failed_jobs_ai_gen_errors_facets.png" alt="Failed CI Jobs filtered by error.domain and error.subdomain" width="90%">}}
+
+###### Domains
+
+| Domain   | Description                                                                                                                                                       |
+|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| code     | Failures caused by the code that is being built and tested in the CI pipeline, and they should be fixed by the developer that launched the CI pipeline.           |
+| platform | Failures caused by the code that is being built and tested. These failures can come from the CI provider itself or they could be caused by external dependencies. |
+| unknown  | Used when the logs do not reveal a clear root cause of job failure                                                                                                |
+
+##### Subdomains
+
 {{< tabs >}}
 {{% tab "Code Error" %}}
 
