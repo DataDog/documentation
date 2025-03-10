@@ -1,15 +1,12 @@
 ---
 title: Setting up IaC Scanning Exclusions
 further_reading:
-    - link: "/security/cloud_security_management/setup"
+    - link: "/security/cloud_security_management/iac_scanning"
       tag: "Documentation"
-      text: "Setting up Cloud Security Management"
-    - link: "/security/cloud_security_management/misconfigurations"
+      text: "IaC Scanning"
+    - link: "/security/cloud_security_management/setup/iac_scanning"
       tag: "Documentation"
-      text: "CSM Misconfigurations"
-    - link: "/security/cloud_security_management/identity_risks"
-      tag: "Guide"
-      text: "CSM Identity Risks"
+      text: "Setting up IaC Scanning for Cloud Security Management"
 ---
 
 <div class="alert alert-info">IaC Scanning exclusions is in Preview.</div>
@@ -99,7 +96,7 @@ exclude-paths:
 ```json
 "exclude-paths": [
      "./shouldNotScan/*",
-     "dir/somefile.txt",
+     "dir/somefile.txt"
 ]
 ```
 
@@ -139,7 +136,7 @@ exclude-queries:
 ```json
 "exclude-queries": [
      "e69890e6-fce5-461d-98ad-cb98318dfc96",
-     "4728cd65-a20c-49da-8b31-9c08b423e4db",
+     "4728cd65-a20c-49da-8b31-9c08b423e4db"
 ]
 ```
 
@@ -162,7 +159,7 @@ exclude-queries = [ "e69890e6-fce5-461d-98ad-cb98318dfc96", "4728cd65-a20c-49da-
 
 #### Exclude categories
 
-Use `exclude-categories` to exclude queries that belong to specified categories. This option can be used multiple times or as a string representation of a list.
+Use `exclude-categories` to exclude specific categories. This option can be used multiple times or as a string representation of a list.
 
 **Possible values**:  
 - `Access Control`  
@@ -196,7 +193,7 @@ exclude-queries:
 ```json
 "exclude-queries": [
      "Access control",
-     "Best Practices",
+     "Best Practices"
 ]
 ```
 
@@ -308,3 +305,7 @@ Prevents scan results from flagging an entire resource block and all its key-val
 ```
 
 Findings related to the entire block (lines 2-6 in this example) are ignored.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
