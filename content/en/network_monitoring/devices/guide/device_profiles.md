@@ -193,7 +193,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 1. To define a global tag using the **Manual** option, click **+ Add Tags**. This opens a modal displaying all available tags for the device.
 2. Click **Create New Tag** at the top of the modal.
 3. Select the dropdown in the search field to add the OID name.
-4. Click the **Modification** dropdown to add a modification. See advanced [options](?tab=manual#global-tags).
+4. Click the **Modification** dropdown to add a modification. See [advanced options](?tab=manual#global-tags).
 5. Click **Create** to save the new tag.
 6. This returns you to the define global tags screen where you can see the new tag that was added.
 
@@ -250,7 +250,7 @@ After applying your configuration options to your device profile, click **Save a
 
 ## Inventory page
 
-Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#setup) below. 
+Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#setup) above. 
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
