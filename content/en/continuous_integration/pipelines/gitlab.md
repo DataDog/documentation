@@ -299,11 +299,23 @@ CI Visibility does not support Infrastructure metrics for other executors.
 
 ### View error messages for pipeline failures
 
-Error messages are supported for GitLab versions 15.2.0 and above.
-
 For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
+
+#### AI-generated errors
+
+If the Job logs collection is enabled, every failed Job will have AI-generated errors based on relevant logs coming from GitLab.
+
+AI-generated errors contain a summary of the root cause kept in the `error.message` tag, and an error categorization stored in `error.domain` and `error.subdomain` tags.
+
+You can see a full explanation about AI-generated errors on the following page.
+
+#### Errors provided by GitLab
+
+Error messages are supported for GitLab versions 15.2.0 and above.
+
+The error information provided by GiLab are stored in `error.provider_message` an `error.provider_domain` tags.
 
 The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
