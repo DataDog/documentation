@@ -81,22 +81,22 @@ The [Apps tab][14] in **Personal Settings** allows you to manage apps that have 
 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
 
-### Email verification
+#### Email verification
 Verify your email address to enhance account security and access additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
 
-#### Who needs to verify their email?
+**Who needs to verify their email?**
 - **SAML users**: Must manually verify their email through Datadog.
 - **Google login users**: Are automatically verified during their first login.
 - **Password-based users**: Verify their email when setting their password for the first time.
 
-#### Benefits of email verification
+**Benefits of email verification**
 After verified, you gain access to:
 - The ability to **log out all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of your current org hierarchy.
 
 Unverified users can still access Datadog but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
 
-#### How to verify your email
+**How to verify your email**
 1. Navigate to your **Profile Settings**.
 2. Click on **Verify Account**.
 3. Enter the **verification code** sent to your registered email.
@@ -105,10 +105,10 @@ Unverified users can still access Datadog but are limited to viewing organizatio
 #### Log out all active web sessions
 You can log out all active web sessions across devices from your Profile Settings. This logs you out of all current sessions, including the one you're using.
 
-##### Who can use this feature?
+**Who can use this feature?**
 This feature is only available if you've verified your email. To verify your email, follow the steps in How to verify your email.
 
-#### How to log out all active sessions:
+**How to log out all active sessions:**
 - Go to Personnal Settings.
 - Click Log Out of All Web Sessions.
 - Confirm the action.
