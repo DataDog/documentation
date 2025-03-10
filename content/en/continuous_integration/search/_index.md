@@ -89,11 +89,15 @@ Job log collection is supported for the following providers:
 - [GitLab][4]
 - [Jenkins][5]
 
-#### AI-generated log summaries
+### AI-generated errors based on relevant logs.
 
-<div class="alert alert-info">AI-generated log summaries are in Preview. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+CI Visibility provides improved errors based on the relevant logs of every failed CI Job with AI. The improved error contains a brief summary of what was the root cause of the error kept in the `error.message` tag, and a AI-generated categorization kept `error.domain` and `error.subdomain`. The error categorization is useful to understand which are the most common errors in your CI and prioritize them.
 
-Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
+AI-generated errors is supported for the following CI providers:
+- [GitHub Actions][12]
+- [GitLab][13]
+
+Notice that this feature requires Job Log Collection enabled.
 
 ## Further reading
 
@@ -109,3 +113,5 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
+[12]: /continuous_integration/pipelines/github/#ai-generated-errors
+[13]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#ai-generated-errors

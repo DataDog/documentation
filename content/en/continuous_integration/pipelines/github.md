@@ -105,6 +105,14 @@ The GitHub Actions CI Visibility integration allows for correlation between infr
 
 To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
 
+### AI-generated errors
+
+If job logs collection is enabled, every failed CI job will have an AI-generated error based on relevant logs coming from GitHub Actions.
+
+AI-generated errors contain a summary of the root cause kept in the `error.message` tag, and an error categorization stored in `error.domain` and `error.subdomain` tags.
+
+You can see a full explanation about AI-generated errors on the following [guide][23].
+
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][17] and [**Executions**][18] pages populate with data after the pipelines finish.
@@ -137,3 +145,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [20]: /agent
 [21]: https://github.com/actions/actions-runner-controller
 [22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[23]: /continuous_integration/guides/use_ai_generated_errors/
