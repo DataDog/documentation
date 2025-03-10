@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/guide/host_metadata/
+- /es/opentelemetry/guide/host_metadata/
 further_reading:
 - link: /opentelemetry/
   tag: Documentación
