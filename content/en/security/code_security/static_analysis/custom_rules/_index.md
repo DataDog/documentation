@@ -55,6 +55,8 @@ To get a captured node, use the `captures` attribute of the first argument of th
  - `start`: start position of the node. The position contains `line` and `col` attributes.
  - `end`: end position of the node. The position contains `line` and `col` attributes.
 
+Important: **`line` and `col` attributes starts at 1, any result with line or col set to 0 is ignored**.
+
 ```javascript
 function visit(node, filename, code) {
   const functionNameNode = node.captures["functionName"];
