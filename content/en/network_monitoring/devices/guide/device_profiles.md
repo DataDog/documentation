@@ -75,7 +75,7 @@ Use reference devices to select which devices you want to gather OIDs for your c
 
 This step scans your devices to discover their available metrics. Running a scan allows you to view all available metrics for your device, making it easier to fill in metrics, metadata, and tags. The scan performs an SNMP walk on your devices using [Datadog Remote Configuration][14]. 
 
-The **Scanned Devices** tab will show which devices were scanned with Remote Configuration or manually.
+The **Scanned Devices** tab displays which devices were scanned with Remote Configuration or manually.
 
   {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
 
@@ -180,7 +180,7 @@ Adding tags to tabular metrics is similar to adding [global tags](#step-7-global
 
 ### Step 7: Global Tags
 
-Add global tags to ensure the metadata, metrics, and global tags are applied to all matching devices. Global tags can be added either from a device scan or by manually creating a new tag for the profile. Additionally, the `Inherited` tag will appear next to any global tags inherited from this profile. 
+Add global tags to ensure the metadata, metrics, and global tags are applied to all matching devices. Global tags can be added either from a device scan or by manually creating a new tag for the profile. Additionally, the `Inherited` tag appears next to any global tags inherited from this profile. 
 
 {{< tabs >}}
 {{% tab "Device scan (recommended)" %}}
@@ -210,7 +210,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 
 | Modification    | Description                                                                                         |
 |-----------------|-----------------------------------------------------------------------------------------------------|
-| No Modification | The device's returned value will be used directly as the tag value.                                 |
+| No Modification | The device's returned value is used directly as the tag value.                                 |
 | Format          | This can be [mac_address][5] or [ip_address][6].                                                    |
 | Extract Value   | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
 | Mapping         | This is described [here][8].   
@@ -273,11 +273,11 @@ Once a profile is applied, you cannot bring it back to draft status.
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_filters.png" alt="Screenshot of the device profile inventory page showing the filter options" style="width:60%;">}}
 
-- **Create new profile and Download**: The **+ Create New Profile** button opens the profile creation form which allows you to [build a new device profile.](#build-device-profiles) Clicking the download button will generate and download a `.zip` bundle which contains the `yaml` files for the profiles you created. <br></br>
+- **Create new profile and Download**: The **+ Create New Profile** button opens the profile creation form which allows you to [build a new device profile.](#build-device-profiles) Clicking the download button generates and download a `.zip` bundle which contains the `yaml` files for the profiles you created. <br></br>
 
   {{< img src="/network_device_monitoring/profile_onboarding/create_profile_download.png" alt="Screenshot of the device profile inventory page showing the download and create a new profile buttons" style="width:50%;">}}
 
-- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom or draft profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device the profile is applied to.<br></br>
+- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device(s) the profile is applied to.<br></br>
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:40%;">}}
                                                   
