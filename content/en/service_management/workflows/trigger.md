@@ -183,7 +183,7 @@ You can trigger a workflow from Slack using the following steps.
 1. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
 1. Click **Save** on your workflow.
 1. Click **Publish** to publish the workflow. A workflow must be published before you can trigger it from Slack. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
-1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow.
+1. In a Slack channel with the Datadog App, run `/datadog workflow` to select and run a workflow. You can also use the `/dd` alias to run /datadog commands.
 
 ## API triggers
 
