@@ -283,7 +283,7 @@ Prevents scan results from flagging the line immediately after this comment. Thi
 
 ```
 1: resource "google_storage_bucket" "example" {
-2:  # dd-scan ignore-line
+2:  # dd-iac-scan ignore-line
 3:  name          = "image-store.com"
 4:  location      = "EU"
 5:  force_destroy = true
@@ -297,7 +297,7 @@ Findings for lines 2 and 3 are ignored.
 Prevents scan results from flagging an entire resource block and all its key-value pairs. This comment can be placed anywhere in the file.
 
 ```
-1: # dd-scan ignore-block
+1: # dd-iac-scan ignore-block
 2: resource "google_storage_bucket" "example" {
 3:  name          = "image-store.com"
 4:  location      = "EU"
