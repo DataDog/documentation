@@ -20,15 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
-  tag: "Blog"
-  text: "Introducing Datadog Application Security"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
-- link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
-  tag: "Blog"
-  text: "Best practices for application security in cloud-native environments"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
@@ -44,6 +38,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
   tag: "Blog"
   text: "How Datadog Security Inbox prioritizes security risks"
+- link: "https://www.datadoghq.com/blog/understanding-your-waf/"
+  tag: "Blog"
+  text: "Understanding your WAF: How to address common gaps in web application security"
 algolia:
   tags: ["asm", "application security"]
 ---
