@@ -362,6 +362,9 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 `useCustomEndpoint`
 : Use RUM to target a custom server.
+
+`trackAnonymousUser`
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
  
 ### Automatically track views
 
