@@ -80,9 +80,9 @@ Los siguientes tutoriales te guiarán a través de la configuración de trazas d
     {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Habilitación del rastreo para una aplicación Go en Amazon ECS con Fargate{{< /nextlink >}}
 
 {{< /whatsnext >}}
-## {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}
+## Referencias adicionales
 
-Grabar pruebas de aplicaciones móviles
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/developers/community/libraries/#apm-tracing-client-libraries
 [2]: /es/tracing/trace_collection/library_injection_local/

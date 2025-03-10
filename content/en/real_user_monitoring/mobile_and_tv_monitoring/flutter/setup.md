@@ -166,7 +166,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
 
 For more information on available configuration options, see the [DatadogConfiguration object documentation][4].
 
-To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin.
+To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog [Flutter Plugin][5].
 
 - If you are using RUM, set up a **Client Token** and **Application ID**.
 - If you are only using Logs, initialize the library with a client token.
@@ -176,7 +176,7 @@ To ensure the safety of your data, you must use a client token. You cannot use D
 
 You can initialize the library using one of two methods in your `main.dart` file.
 
-- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][5].
+- Use `DatadogSdk.runApp` to automatically set up [Error Tracking][6].
 
    ```dart
    await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
@@ -184,7 +184,7 @@ You can initialize the library using one of two methods in your `main.dart` file
    })
    ```
 
-- You can also manually set up [Error Tracking][5] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
+- You can also manually set up [Error Tracking][6] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
    WidgetsFlutterBinding.ensureInitialized();
@@ -243,6 +243,8 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 ## Automatically track views
 
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. See [Flutter Integrated Libraries][12] for instructions on how to integrate with [go_router][7], [AutoRoute][9], and [Beamer][10].
+
 ### Flutter Navigator v1
 
 The Datadog Flutter Plugin can automatically track named routes using the `DatadogNavigationObserver` on your MaterialApp:
@@ -262,7 +264,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][6] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][7] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -279,11 +281,12 @@ MaterialApp.router(
 )
 ```
 
-For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][7].
+For examples that use routers other than `go_router`, see [Automatically track views](#automatically-track-views).
+
 
 ### Renaming Views
 
-For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
+For all setups, you can rename views or supply custom paths by providing a [`viewInfoExtractor`][11] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
 
 ```dart
 RumViewInfo? infoExtractor(Route<dynamic> route) {
@@ -303,28 +306,6 @@ var observer = DatadogNavigationObserver(
   viewInfoExtractor: infoExtractor,
 );
 ```
-
-## Automatically track resources
-
-Use the [Datadog Tracking HTTP Client][9] package to enable automatic tracking of resources and HTTP calls from your views.
-
-Add the package to your `pubspec.yaml` and add the following to your initialization file:
-
-```dart
-final configuration = DatadogConfiguration(
-  // configuration
-  firstPartyHosts: ['example.com'],
-)..enableHttpTracking()
-```
-
-**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][10]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][11]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
-
-In order to enable Datadog [Distributed Tracing][12], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
-
-- `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
-
-- `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
-
 
 ## Automatically track actions
 
@@ -390,13 +371,13 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
-[5]: /real_user_monitoring/error_tracking/flutter
-[6]: https://pub.dev/packages/go_router
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#automatic-view-tracking
-[8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
-[9]: https://pub.dev/packages/datadog_tracking_http_client
-[10]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
-[11]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
-[12]: /serverless/distributed_tracing
-[13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
-[14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
+[5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[6]: /real_user_monitoring/error_tracking/flutter
+[7]: https://pub.dev/packages?q=go_router
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[9]: https://pub.dev/packages/auto_route
+[10]: https://pub.dev/packages/beamer
+[11]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/integrated_libraries/
+[13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
+[14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html

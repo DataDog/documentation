@@ -473,15 +473,10 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Upgrade the Agent
-      url: agent/upgrade
-      parent: agent
-      identifier: agent_upgrade
-      weight: 9
     - name: トラブルシューティング
       url: agent/troubleshooting/
       parent: agent
-      weight: 10
+      weight: 9
       identifier: agent_troubleshooting
     - name: Container Hostname Detection
       identifier: agent_troubleshooting_hostname_containers
@@ -2095,21 +2090,31 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
+    - name: Processing Rules
+      url: service_management/on-call/processing_rules/
+      parent: oncall
+      identifier: oncall_processing_rules
+      weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
-      weight: 3
+      weight: 4
     - name: Schedules
       url: service_management/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
-      weight: 4
+      weight: 5
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 5
+      weight: 6
+    - name: Guides
+      url: service_management/on-call/guides/
+      parent: oncall
+      identifier: oncall_guides
+      weight: 7
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -2769,32 +2774,32 @@ menu:
       parent: infrastructure_heading
       weight: 40000
     - name: ネットワークパフォーマンスモニタリング
-      url: network_monitoring/performance/
+      url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
       identifier: npm
       weight: 1
     - name: セットアップ
-      url: network_monitoring/performance/setup/
+      url: network_monitoring/cloud_network_monitoring/setup/
       parent: npm
       identifier: npm_setup
       weight: 101
     - name: Overview Page
-      url: network_monitoring/performance/overview_page/
+      url: network_monitoring/cloud_network_monitoring/overview_page/
       parent: npm
       identifier: npm_overview_page
       weight: 102
     - name: Network Analytics
-      url: network_monitoring/performance/network_analytics/
+      url: network_monitoring/cloud_network_monitoring/network_analytics/
       parent: npm
       identifier: npm_analytics
       weight: 103
     - name: ネットワークマップ
-      url: network_monitoring/performance/network_map/
+      url: network_monitoring/cloud_network_monitoring/network_map/
       parent: npm
       identifier: npm_map
       weight: 104
     - name: ガイド
-      url: network_monitoring/performance/guide/
+      url: network_monitoring/cloud_network_monitoring/guide/
       identifier: npm_guides
       parent: npm
       weight: 105

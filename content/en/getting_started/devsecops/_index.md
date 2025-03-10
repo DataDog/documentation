@@ -34,13 +34,13 @@ Learn more about the features included with APM DevSecOps:
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
-[3]: /security/application_security/vulnerability_management/
+[3]: /security/code_security/software_composition_analysis/
 [4]: /security/application_security
 [5]: /agent/
 [6]: /tracing/trace_collection/
 [7]: /universal_service_monitoring/setup/
 [9]: /tracing/metrics/
-[10]: /getting_started/application_security/vulnerability_management/
+[10]: /getting_started/code_security/software_composition_analysis/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Pro" %}}
@@ -71,13 +71,13 @@ Learn more about the features included with APM DevSecOps Pro:
 [1]: /tracing/
 [2]: /universal_service_monitoring/
 [3]: /data_streams/
-[4]: /security/application_security/vulnerability_management/
+[4]: /security/code_security/software_composition_analysis/
 [5]: /security/application_security
 [6]: /agent/
 [7]: /tracing/trace_collection/
 [8]: /universal_service_monitoring/setup/
 [9]: /data_streams/#setup
-[10]: /getting_started/application_security/vulnerability_management/
+[10]: /getting_started/code_security/software_composition_analysis/
 [11]: /tracing/metrics/
 
 {{% /tab %}}
@@ -112,7 +112,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [2]: /universal_service_monitoring/
 [3]: /data_streams/
 [4]: /profiler/
-[5]: /security/application_security/vulnerability_management/
+[5]: /security/code_security/software_composition_analysis/
 [6]: /security/application_security
 [7]: /agent/
 [8]: /tracing/trace_collection/
@@ -120,7 +120,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [10]: /data_streams/#setup
 [11]: /profiler/enabling
 [13]: /tracing/metrics/
-[14]: /getting_started/application_security/vulnerability_management/
+[14]: /getting_started/code_security/software_composition_analysis/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -223,8 +223,8 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /security/application_security/vulnerability_management/
+[1]: /security/code_security/software_composition_analysis/
 [2]: /security/application_security
 [3]: /security/cloud_security_management/
 [4]: /tracing
-[10]: /security/application_security/software_composition_analysis/
+[10]: /security/code_security/software_composition_analysis/

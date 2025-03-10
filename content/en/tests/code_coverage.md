@@ -295,8 +295,6 @@ This feature is enabled by default. Use `DD_CIVISIBILITY_SIMPLECOV_INSTRUMENTATI
 
 {{% tab "Go" %}}
 
-<div class="alert alert-info">Test optimization for Go is in Preview.</div>
-
 ### Compatibility
 
 * `go test -cover`

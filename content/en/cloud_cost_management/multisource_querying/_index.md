@@ -3,6 +3,9 @@ title: Multisource Querying
 is_beta: true
 description: Learn how to use Multisource Querying to query costs across multiple providers in Cloud Cost Management.
 further_reading:
+- link: "https://www.datadoghq.com/blog/focus-cost-data/"
+  tag: "Blog"
+  text: "Monitor your multi-cloud costs with Cloud Cost Management and FOCUS"
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -11,15 +14,11 @@ further_reading:
   text: "Learn about Container Cost Allocation"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/multisource-querying/" btn_hidden="false" header="Join the Preview!">}}
-Multisource Querying is in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 After you start ingesting your [AWS][1], [Azure][2], [Google Cloud][3], [SaaS][4], or [Datadog costs][5] in [Cloud Cost Management][6], you can flexibly query costs across providers. Multisource Querying enables you to query costs across multiple providers using consistent and standardized tags instead of building multiple queries for each provider.
 
-Use Multisource Querying to build cost views, understand the total cost of service ownership, and alert on cost changes and trends across the [**Analytics** page][6], [dashboards][7], [notebooks][8], and [cost monitors][9].
+Use Multisource Querying to build cost views, understand the total cost of service ownership, and alert on cost changes and trends across the [**Explorer** page][6], [dashboards][7], [notebooks][8], and [cost monitors][9].
 
 ## Setup
 
@@ -27,13 +26,13 @@ To use Multisource Querying, ensure you have configured [Cloud Cost Management][
 
 ## Query your cost data
 
-You can select multiple providers in the **Provider** field on the [**Analytics** page][6].
+You can select multiple providers in the **Provider** field on the [**Explorer** page][6].
 
-{{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Analytics page" style="width:40%;" >}}
+{{< img src="cloud_cost/multisource_querying/provider.png" alt="The Provider field below the search query on the Cloud Cost Explorer page" style="width:40%;" >}}
 
 Dropdown filters like **Provider** and **Team** maintain flexibility and streamline the process of creating a search query so you can refine your cost data. To add a filter, click **+ Filter**. 
 
-{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/filters_2.png" alt="A search query that uses the Team filter and groups reports by service on the Cloud Cost Explorer page" style="width:100%;" >}}
 
 Click **Refine Results** to access the following options and filter your cost data.
 
@@ -52,7 +51,7 @@ Dollar Change
 Percent Change
 : Only display cost changes within a specified percentage change range.
 
-{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Additional options to refine your cost data on the Cloud Cost Analytics page" style="width:100%;" >}}
+{{< img src="cloud_cost/multisource_querying/refine_results_1.png" alt="Additional options to refine your cost data on the Cloud Cost Explorer page" style="width:100%;" >}}
 
 ## Visualize your cost data
 
@@ -119,7 +118,7 @@ Cloud Cost Management retrieves the billing currency from each cloud provider's 
 [3]: /cloud_cost_management/google_cloud
 [4]: /cloud_cost_management/saas_costs
 [5]: /cloud_cost_management/datadog_costs
-[6]: https://app.datadoghq.com/cost/analytics
+[6]: https://app.datadoghq.com/cost/explorer
 [7]: /dashboards
 [8]: /notebooks
 [9]: /cloud_cost_management/monitors

@@ -4,10 +4,10 @@ disable_toc: false
 aliases:
 - /service_management/app_builder/tables/
 further_reading:
-- link: "/service_management/workflows/components/"
+- link: "/service_management/app_builder/components/"
   tag: "Documentation"
   text: "Components"
-- link: "/service_management/workflows/build/"
+- link: "/service_management/app_builder/build/"
   tag: "Documentation"
   text: "Build Apps"
 ---
