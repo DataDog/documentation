@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b; vite build",
+    "dev": "yarn copy-mock-data && vite",
+    "build": "tsc -b; vite build; yarn copy-mock-data;",
     "prod": "npm run build && open dist/index.html",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "copy-mock-data": "cp -r ./src/mocks/data.json ./dist/data.json"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
