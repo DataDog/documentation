@@ -102,9 +102,9 @@ If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by defa
 ### Diff-aware is not working
 
 If diff-aware is not working with the Static Analyzer, ensure that:
- 1. Your default branch is specific for your repository.
- 2. One revision with the same configuration (for example, same rulesets, same arguments, only/ignore flags, etc.) has been pushed on the repository default branch.
- 3. The current user can read the repository metadata. Use the following command to fix this: `git config --global --add safe.directory <repo-path>`.
+ 1. The default branch is specific to your repository.
+ 2. At least one revision with the same configuration (for example, same rulesets, same arguments, or only/ignore flags) has been pushed to the repository's default branch.
+ 3. The current user can read the repository metadata. If they do not have the correct permissions, run this command: `git config --global --add safe.directory <repo-path>`.
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
@@ -194,7 +194,7 @@ To disable scanning Static Code Analysis (SAST) or static Software Composition A
 ### Disabling runtime SCA on your services
 
 SCA can be enabled on your running services using one of the following two methods:
-- The Datadog UI.
+- From the Datadog UI.
 - Manually, using the `DD_APPSEC_SCA_ENABLED` environment variable.
 
 To disable SCA, you must use the *same method* you used to enable SCA.
