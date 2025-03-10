@@ -538,20 +538,6 @@
               dest_path: "/layouts/shortcodes/"
               file_name: "semantic-color.md"
 
-      - repo_name: apps
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-            - "docs/en/getting-started.md"
-          options:
-            dest_path: "/developers/faq/"
-            file_name: "ui_extensions.md"
-            front_matters:
-              dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
-              private: true    
-
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file
