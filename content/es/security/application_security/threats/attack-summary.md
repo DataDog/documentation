@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security/application_security/threats/threat-overview
+- /es/security/application_security/threats/threat-overview
 title: Resumen de ataques
 ---
 

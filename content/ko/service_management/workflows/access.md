@@ -5,8 +5,8 @@ algolia:
   - 워크플로우
   - 워크플로우 자동화
 aliases:
-- /workflows/access
-- /workflows/service_accounts
+- /ko/workflows/access
+- /ko/workflows/service_accounts
 description: 워크플로우 자동화용 액세스 및 인증
 disable_toc: false
 further_reading:

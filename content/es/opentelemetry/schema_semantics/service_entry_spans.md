@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/guide/service_entry_spans_mapping/
+- /es/opentelemetry/guide/service_entry_spans_mapping/
 further_reading:
 - link: /opentelemetry/integrations/trace_metrics
   tag: Documentación

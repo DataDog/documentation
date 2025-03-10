@@ -1,6 +1,6 @@
 ---
 aliases:
-- /serverless/serverless_integrations/macro/
+- /es/serverless/serverless_integrations/macro/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md
 title: Datadog Serverless Macro

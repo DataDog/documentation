@@ -1,8 +1,8 @@
 ---
 aliases:
-- /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
-- /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
-- /opentelemetry/otel_collector_datadog_exporter/
+- /es/tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
+- /es/tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
+- /es/opentelemetry/otel_collector_datadog_exporter/
 description: Envío de datos de OpenTelemetry al OpenTelemetry Collector y el explorador
   de Datadog
 further_reading:

@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/dotnet
-- /continuous_integration/tests/dotnet
-- /continuous_integration/tests/setup/dotnet
+- /es/continuous_integration/setup_tests/dotnet
+- /es/continuous_integration/tests/dotnet
+- /es/continuous_integration/tests/setup/dotnet
 code_lang: dotnet
 code_lang_weight: 0
 further_reading:

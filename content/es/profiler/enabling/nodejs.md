@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/nodejs/
+- /es/tracing/profiler/enabling/nodejs/
 code_lang: nodejs
 code_lang_weight: 50
 further_reading:

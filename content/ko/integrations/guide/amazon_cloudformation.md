@@ -1,6 +1,6 @@
 ---
 aliases:
-- /developers/amazon_cloudformation/
+- /ko/developers/amazon_cloudformation/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
 title: Datadog-Amazon CloudFormation

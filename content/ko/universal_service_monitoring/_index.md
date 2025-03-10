@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/universal_service_monitoring/
+- /ko/tracing/universal_service_monitoring/
 cascade:
   algolia:
     rank: 70

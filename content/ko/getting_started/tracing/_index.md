@@ -1,6 +1,6 @@
 ---
 aliases:
-- /getting_started/tracing/distributed-tracing
+- /ko/getting_started/tracing/distributed-tracing
 further_reading:
 - link: /tracing/
   tag: 설명서
