@@ -83,6 +83,9 @@ The GitHub Action works for the following languages and following files:
 ## Generic CI Providers
 If you don't use GitHub Actions, you can run the [datadog-ci][14] CLI directly in your CI pipeline platform and upload your SBOM to Datadog.
 
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][17].
+
 Prerequisites:
 
 - unzip
@@ -217,3 +220,4 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
 [15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/
+[17]: https://app.datadoghq.com/ci/settings/repository

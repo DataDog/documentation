@@ -1,7 +1,9 @@
 ---
 title: Google Cloud Run
 further_reading:
-
+- link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
+  tag: 'Blog'
+  text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
   tag: 'Blog'
   text: 'Collect traces, logs, and custom metrics from Cloud Run services'
@@ -26,6 +28,9 @@ In your main application, add the `dd-trace-js` library. See [Tracing Node.js ap
 
 Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-trace/init` module is required when the Node.js process starts.
 
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Node.js Profiler][5] to add the environment variables.
+
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
 
@@ -38,12 +43,16 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
 [3]: /logs/log_collection/nodejs/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[5]: https://docs.datadoghq.com/profiler/enabling/nodejs?tab=environmentvariables
 
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Tracing
 
 In your main application, add the `dd-trace-py` library. See [Tracing Python Applications][1] for instructions. You can also use [Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers][5].
+
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Python Profiler][7] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -59,6 +68,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /tracing/guide/tutorial-enable-python-containers/
 [6]: https://www.datadoghq.com/blog/python-logging-best-practices/
+[7]: https://docs.datadoghq.com/profiler/enabling/python
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -82,6 +92,8 @@ EXPOSE 8080
 # Start the Datadog tracer with the javaagent argument
 ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.jar" ]
 ```
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Java Profiler][5] to add the environment variables.
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
@@ -95,12 +107,16 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 [2]: /developers/dogstatsd/?tab=hostagent&code-lang=java#install-the-dogstatsd-client
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
+[5]: https://docs.datadoghq.com/profiler/enabling/java?tab=datadogprofiler
 
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Tracing
 
 In your main application, add the `dd-trace-go` library. See [Tracing Go Applications][1] for instructions.
+
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Go Profiler][5] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -114,6 +130,8 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
 [3]: /logs/log_collection/go
 [4]: /tracing/other_telemetry/connect_logs_and_traces/go
+[5]: https://docs.datadoghq.com/profiler/enabling/go
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 #### Tracing
@@ -140,6 +158,9 @@ ENV DD_TRACE_DEBUG=true
 
 ENTRYPOINT ["dotnet", "dotnet.dll"]
 ```
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
+The previous Dockerfile example also has the environment variables for the profiler.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -153,6 +174,8 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 [2]: https://www.datadoghq.com/blog/statsd-for-net-dogstatsd/
 [3]: /log_collection/csharp/?tab=serilog
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
+[5]: https://docs.datadoghq.com/profiler/enabling/dotnet?tab=nuget
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 In your main application, add the `dd-trace-php` library. See [Tracing PHP Applications][1] for instructions.
