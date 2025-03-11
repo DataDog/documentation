@@ -22,9 +22,7 @@ CI Visibility leverages OpenAI to generate enhanced error messages and categoriz
 
 #### Domains and Subdomains of AI-generated errors
 
-You can filter and aggregate failed CI Jobs using the public facets `@error.domain` and `@error.subdomain`.
-
-{{< img src="continuous_integration/failed_jobs_ai_gen_errors_facets.png" alt="Failed CI Jobs filtered by error.domain and error.subdomain" width="90%">}}
+Errors are categorized with a domain and subdomain using AI.
 
 ##### Domains
 
@@ -78,24 +76,42 @@ Failures that are not cause by the code that is being built and tested. These fa
 {{% /tab %}}
 {{< /tabs >}}
 
-### How AI-generated errors are created?
+### Supported CI providers
 
-#### How relevant logs are computed?
+* [GitHub Actions][1]
+* [GitLab][2]
+
+<div class="alert alert-info">If you are interested in AI-generated errors but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
+
+## Identify the most recurrent errors in your CI pipelines
+
+### Using facets
+
+You can use the facets `@error.message`, `@error.domain`, and `@error.subdomain` to identify the most recurrent errors in your CI pipelines. Using those facets, you can create custom dashboards and notebooks for your needs.
+
+{{< img src="continuous_integration/failed_jobs_ai_gen_errors_facets.png" alt="Failed CI Jobs filtered by error.domain and error.subdomain" width="90%">}}
+
+Notice that these facets are only available using the `ci_level:job` in your queries. In case that AI-generated errors cannot be computed (e.g., you are not using a supported CI provider), these facets will contain the error information coming from the CI provider.
+
+### Using the dashboard template
+
+TBD
+
+## How AI-generated errors are created?
+
+CI Visibility use the relevant logs of every failed CI job to generate improved errors using OpenAI.
+
+### How relevant logs are computed?
 
 CI Visibility considers that a log line as relevant when that log line has not appeared in the logs collected from the successful jobs executions of that CI Job before. Log relevancy is only computed for failed CI Jobs.
 
 You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
 
-#### What information is sent to OpenAI?
+### What information is sent to OpenAI?
 
 If a failed job has relevant logs, CI Visibility sends the last 100 relevant log lines to OpenAI. In case that a failed job oes not have relevant logs, CI Visibility will send the last 100 log lines.
 
-Notice that OpenAI does not store any logs, and each log line is pre-scanned to redact any potentially sensitive information before being sent.
-
-### Supported CI providers
-
-* [GitHub Actions][1]
-* [GitLab][2]
+OpenAI does not store any logs, and each log line is pre-scanned to redact any potentially sensitive information before being sent.
 
 ## Further reading
 
