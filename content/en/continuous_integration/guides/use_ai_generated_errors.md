@@ -83,6 +83,16 @@ AI-generated errors are available for the following CI providers:
 
 ## Identify the most recurrent errors in your CI pipelines
 
+### Using CI Health page
+
+You can access to the [CI Health page][3] to see a breakdown of the errors in your CI pipelines split by Error Domain.
+
+- Go to [CI Health page][3]
+- Click on a CI pipeline.
+- Check the `Breakdown` column in the `Failed Executions` section.
+
+{{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
+
 ### Using facets
 
 You can use the facets `@error.message`, `@error.domain`, and `@error.subdomain` to identify the most recurrent errors in your CI pipelines. Using those facets, you can create custom dashboards and notebooks for your needs.
@@ -130,3 +140,4 @@ Notice that OpenAI can categorize errors with similar messages with different su
 
 [1]:/continuous_integration/pipelines/github/
 [2]:/continuous_integration/pipelines/gitlab/
+[3]:/ci/pipelines/health/
