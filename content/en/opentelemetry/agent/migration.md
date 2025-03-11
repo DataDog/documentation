@@ -28,6 +28,7 @@ Before starting the migration process, ensure you have:
 - An OpenTelemetry-instrumented application ready to send telemetry data
 - Access to your current OpenTelemetry Collector configurations
 - Administrative access to your Kubernetes cluster (Kubernetes v1.29+ is required)
+  - **Note**: EKS Fargate environments are not supported
 - Helm v3+
 
 ## Review existing configuration

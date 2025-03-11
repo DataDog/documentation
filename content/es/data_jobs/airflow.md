@@ -173,14 +173,7 @@ Para los clientes de Astronomer que utilizan Astro, <a href=https://www.astronom
 
 ## Configuración
 
-1. Instala el proveedor OpenLineage (`apache-airflow-providers-openlineage`) 1.11.0 o posterior y [`openlineage-python`][8] 1.23.0 o posterior. Añade lo siguiente a tu archivo `requirements.txt` dentro de tu [proyecto de Astro][4]:
-
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   openlineage-python>=1.23.0
-   ```
-
-2. Para configurar el proveedor de OpenLineage, define las siguientes variables de entorno. Puedes configurar estas variables en tu despliegue de Astronomer utilizando cualquiera de los siguientes métodos:
+1. Para configurar el proveedor de OpenLineage, define las siguientes variables de entorno. Puedes configurar estas variables en tu despliegue de Astronomer utilizando cualquiera de los siguientes métodos:
 
     - [Desde la interfaz de usuario de Astro][5]: ve a la configuración de despliegue y añade directamente las variables de entorno.
     - [En el archivo Docker][11]: define las variables de entorno en tu `Dockerfile` para asegurarte de que se incluyen durante el proceso de compilación.
@@ -222,7 +215,7 @@ Para los clientes de Astronomer que utilizan Astro, <a href=https://www.astronom
 En Datadog, consulta la página [Monitorización de trabajos de datos][2] para ver una lista de tus ejecuciones de trabajos de Airflow después de la configuración. 
 
 
-## Resolución de problemas
+## Solucionar problemas
 Comprueba que las variables de entorno de OpenLineage están correctamente configuradas en el despliegue de Astronomer.
 
 **Nota**: Utilizando el archivo `.env` para agregar las variables entorno no funciona porque las variables sólo se aplican a la local de flujo de aire entorno.
@@ -261,7 +254,7 @@ Para ver el vínculo entre la tarea de Airflow y la aplicación de Spark que has
 
 3. Una vez que hayas vuelto a desplegar tu entorno Airflow con la [configuración lazy_load_plugins][3] actualizada y el archivo DAG actualizado, y que tu DAG Airflow se haya vuelto a ejecutar, ve a la página [Data Jobs Monitoring][2]. A continuación, podrás encontrar tu última ejecución de un trabajo de Airflow y ver un SpanLink en la traza (trace) de ejecución del trabajo de Airflow para la traza de la aplicación Spark lanzada. Esto permite solucionar los problemas de Airflow o Spark en un solo lugar.
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
