@@ -79,6 +79,8 @@ AI-generated errors are available for the following CI providers:
 * [GitHub Actions][1]
 * [GitLab][2]
 
+Notice that Job Logs collection enabled is required to have AI-generated errors. If you need to setup Job Logs collection, check out the setup instructions of your CI provider on the [Pipeline Visibility page][6].
+
 <div class="alert alert-info">If you are interested in AI-generated errors but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
 
 ## Identify the most recurrent errors in your CI pipelines
@@ -145,3 +147,4 @@ OpenAI can categorize errors with similar messages with different subdomains.
 [3]:/ci/pipelines/health/
 [4]:/resources/json/civisibility-ai-gen-job-errors-dashboard.json
 [5]:/dashboards/
+[6]:/continuous_integration/pipelines/#setup
