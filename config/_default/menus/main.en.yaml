@@ -1027,7 +1027,7 @@ menu:
       identifier: coterm
       parent: essentials_heading
       weight: 120000
-    - name: Cloudcraft
+    - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
       identifier: cloudcraft
