@@ -36,7 +36,7 @@ To collect profile types, use at least the minimum versions summarized in the fo
 | {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK&nbsp;11+][17]<br>tracer&nbsp;1.39.0+ | Python 3.6+<br> tracer&nbsp;0.50+ | tracer&nbsp;1.23+ | alpha<br>Ruby 3.1+<br>tracer&nbsp;2.3.0+ | tracer&nbsp;0.23+ | beta<br>.NET 7+<br>tracer&nbsp;2.22+ |       | Preview<br>ddprof&nbsp;0.15+ |
 | {{< ci-details title="Wall time" >}}The elapsed time spent in each function/method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function/method is running.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | tracer&nbsp;0.35+ |       | tracer&nbsp;0.48+ | tracer&nbsp;0.23+ | tracer&nbsp;2.7+ | tracer&nbsp;0.71+ |       |
 | {{< ci-details title="Locks" >}}The time each function/method spent waiting for and holding locks, and the number of times each function acquired a lock.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 | tracer&nbsp;0.45+ | tracer&nbsp;1.47+ |      |       | .NET 5+ and .NET Framework beta (requires Datadog Agent 7.51+)<br>tracer&nbsp;2.49+ |       |      |
-| {{< ci-details title="I/O" >}}The time each method spent reading from and writing to files and sockets.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 |       |       |       |       |       |       |       |
+| {{< ci-details title="I/O" >}}The time each method spent reading from and writing to files and sockets.{{< /ci-details >}}   |                 [JDK&nbsp;8+][17]                 |       |       |       |       |       | Preview<br>tracer&nbsp;1.7.2+ |       |
 
 
 ## Other features
