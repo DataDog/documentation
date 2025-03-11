@@ -57,6 +57,10 @@ Sources from highest to lowest priority:
 
 Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
+## Supported environments
+
+Remote Configuration works in environments where the Datadog Agent is deployed. Remote Configuration supports serverless container cloud services such as AWS Fargate. Remote Configuration does not support serverless container managed apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and functions deployed with container packaging (AWS Lambda, Azure Functions, Google Cloud Functions).
+
 ## Supported products and feature capabilities
 The following products and features are supported with Remote Configuration:
 
@@ -71,7 +75,7 @@ The following products and features are supported with Remote Configuration:
 
 ### Application Performance Monitoring (APM)
 
-- **Configuration at runtime** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Service Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
+- **Configuration at runtime** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 - **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 
@@ -87,6 +91,10 @@ The following products and features are supported with Remote Configuration:
 ### Observability Pipelines
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
+
+### Sensitive Data Scanner (SDS) through the Datadog Agent
+
+- **Redact sensitive information in your logs within your premises (Preview)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
 
 ## Security considerations
 
@@ -276,10 +284,6 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Supported environments
-
-Remote Configuration works in environments where the Datadog Agent is deployed. For a Serverless Container service like AWS Fargate, the underlying hosts do not appear in the Remote Configuration onboarding workflow. Remote Configuration does not support Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed with Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
-.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -288,7 +292,7 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/enabling/compatibility/
+[6]: /security/application_security/
 [7]: /account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security
@@ -301,7 +305,7 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/configuration/network
 [18]: /agent/configuration/proxy/
-[19]: /tracing/service_catalog/
+[19]: /tracing/software_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [22]: /tracing/trace_collection/runtime_config/
@@ -310,3 +314,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
+[28]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=usingtheagent

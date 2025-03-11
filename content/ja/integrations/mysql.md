@@ -21,11 +21,9 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 18
     source_type_name: MySQL
-  logs:
-    source: mysql
   monitors:
-    replica running: assets/monitors/replica_running.json
-    select query rate: assets/monitors/select_query_rate.json
+    MySQL database replica is not running properly: assets/monitors/replica_running.json
+    SELECT query volume is dropping: assets/monitors/select_query_rate.json
   saved_views:
     mysql_processes: assets/saved_views/mysql_processes.json
     operations: assets/saved_views/operations.json
@@ -39,6 +37,7 @@ author:
 categories:
 - data stores
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mysql/README.md
 display_on_public_website: true
@@ -46,9 +45,8 @@ draft: false
 git_integration_title: mysql
 integration_id: mysql
 integration_title: MySQL
-integration_version: 12.4.0
+integration_version: 14.2.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mysql
 public_title: MySQL
@@ -65,10 +63,14 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-mysql-performance-metrics
   support: README.md#Support
   title: MySQL
 ---
@@ -84,11 +86,13 @@ MySQL インテグレーションは、MySQL インスタンスのパフォー�
 
 [データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画が提供されます。
 
-## 計画と使用
+MySQL バージョン 5.6、5.7、8.0、および MariaDB バージョン 10.5、10.6、10.11、11.1 がサポートされています。
+
+## セットアップ
 
 <div class="alert alert-info">このページでは、MySQL Agent の標準的なインテグレーションについて説明します。MySQL のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### インフラストラクチャーリスト
+### インストール
 
 MySQL チェックは [Datadog Agent][3] パッケージに含まれています。MySQL サーバーに追加でインストールする必要はありません。
 
@@ -129,7 +133,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 MySQL 8.0 以上の場合は、`replication client` を付与し、次のコマンドで `max_user_connections` を設定します。
 
 ```shell
-mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'%'
+mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 mysql> ALTER USER 'datadog'@'%' WITH MAX_USER_CONNECTIONS 5;
 Query OK, 0 rows affected (0.00 sec)
@@ -165,7 +169,7 @@ mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
@@ -174,7 +178,7 @@ Query OK, 0 rows affected (0.00 sec)
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -211,7 +215,7 @@ MySQL の[メトリクス](#metric-collection)と[ログ](#log-collection)の収
 
 [Agent を再起動][4]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -323,7 +327,7 @@ LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-#### 収集データ
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][3]を参照してください。
@@ -341,7 +345,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -403,7 +407,7 @@ spec:
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][3]を参照してください。
 
-#### 収集データ
+#### ログ収集
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
@@ -456,7 +460,7 @@ metadata:
 
 `<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -486,9 +490,9 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `mysql` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mysql" >}}
 
 
@@ -635,15 +639,15 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | ---------------------- | ----------- |
 | mysql.info.schema.size | GAUGE       |
 
-### ヘルプ
+### イベント
 
 MySQL チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mysql" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 - [SQL Server インテグレーションでの接続の問題][8]
 - [MySQL Localhost エラー - Localhost と 127.0.0.1][9]
@@ -662,7 +666,7 @@ MySQL チェックには、イベントは含まれません。
 - [MySQL パフォーマンスメトリクスの監視][17]
 
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd-2.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/database_monitoring/#mysql

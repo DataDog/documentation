@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/check_references.md
-kind: documentation
 title: Références pour les ressources d'intégration
 ---
 ## Fichier de configuration

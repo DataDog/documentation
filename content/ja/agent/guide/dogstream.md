@@ -63,7 +63,7 @@ Datadog にこのメトリクスを読み取らせるには、Agent の構成フ
 * すべてが正常に動作していると、`dogstream: parsing {filename} with {function name} (requested {config option text})` のように表示されます。
 
 <div class="alert alert-warning">
-dogstreams が動作していることをテストする場合は、Agent の監視対象として設定したログファイルに 1 行を追加します。既存の行を編集してもテストできません。Agent は各ログファイルの末尾のみを<a href="/glossary/#tail">テール</a>するため、ファイルの他の部分を変更しても認識されません。
+dogstreams が動作していることをテストする場合は、Agent の監視対象として設定したログファイルに 1 行を追加します。既存の行を編集してもテストできません。Agent は各ログファイルの末尾のみを<a href="/glossary/#tail">追跡</a>するため、ファイルの他の部分を変更しても認識されません。
 </div>
 
 ### パース関数の記述
@@ -128,14 +128,14 @@ dogstreams: /path/to/mylogfile.log:/path/to/mylogparser.py:my_log_parser
 
 | フィールド           | タイプ        | 値                                                                                                                                                                                                                             |
 |-----------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **msg_title**   | string      | イベントのタイトル。全文検索によってインデックス化されます。                                                                                                                                                                         |
-| **timestamp**   | integer     | UNIX Epoch タイムスタンプ。省略した場合のデフォルトは、Agent がそのイベントをパースした時刻です。                                                                                                                                        |
-| **msg_text**    | string      | イベントの本文。全文検索によってインデックス化されます。                                                                                                                                                                           |
+| **msg_title**   | 文字列      | イベントのタイトル。全文検索によってインデックス化されます。                                                                                                                                                                         |
+| **timestamp**   | 整数     | UNIX Epoch タイムスタンプ。省略した場合のデフォルトは、Agent がそのイベントをパースした時刻です。                                                                                                                                        |
+| **msg_text**    | 文字列      | イベントの本文。全文検索によってインデックス化されます。                                                                                                                                                                           |
 | alert_type      | string enum | イベントの重要度を示します。`error`、`warning`、`success`、`info` のいずれかでなければなりません。省略した場合のデフォルトは `info` です。`alert_type:value` で検索できます。                                                                  |
-| event_type      | string      | このイベントの種類を記述します。集計キーの 1 つとして使用されます。                                                                                                                                                         |
-| aggregation_key | string      | このイベントの影響を受けたものがある場合に、それを記述します。集計キーの 1 つとして使用されます。                                                                                                                                              |
-| ホスト            | string      | このイベントが発生したホストの名前。イベントは、[タグ付け][1]ページまたは[タグ付け API][2] を使用してこのホストに指定したタグに基づいて自動的にタグ付けされます。host 値は、集計キーの 1 つとして使用されます。 |
-| **priority**    | string      | このイベントがストリーム内にデフォルトで表示/非表示されるかを決定します。`low` または `normal` のいずれかでなければなりません。                                                                                                                      |
+| event_type      | 文字列      | このイベントの種類を記述します。集計キーの 1 つとして使用されます。                                                                                                                                                         |
+| aggregation_key | 文字列      | このイベントの影響を受けたものがある場合に、それを記述します。集計キーの 1 つとして使用されます。                                                                                                                                              |
+| ホスト            | 文字列      | このイベントが発生したホストの名前。イベントは、[タグ付け][1]ページまたは[タグ付け API][2] を使用してこのホストに指定したタグに基づいて自動的にタグ付けされます。host 値は、集計キーの 1 つとして使用されます。 |
+| **priority**    | 文字列      | このイベントがストリーム内にデフォルトで表示/非表示されるかを決定します。`low` または `normal` のいずれかでなければなりません。                                                                                                                      |
 
 24 時間のタイムウィンドウ内で同じ集計キーを持つイベントがストリーム内で集計されます。
 集計キーは、次のフィールドの組み合わせです。
@@ -248,9 +248,9 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [4]: /ja/events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /ja/agent/guide/agent-log-files/
+[6]: /ja/agent/configuration/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /ja/agent/guide/agent-commands/
+[8]: /ja/agent/configuration/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /ja/help/
 [11]: /ja/agent/troubleshooting/send_a_flare/

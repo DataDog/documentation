@@ -1,6 +1,6 @@
 ---
 title: HAProxy in multi-process mode
-kind: faq
+
 ---
 
 When using the HAProxy in multi process mode, each process has its own memory area and therefore has its own statistics.

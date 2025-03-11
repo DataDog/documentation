@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: Documentación
   text: Solucionar problemas en los checks de endpoint
-kind: documentación
 title: Checks de endpoint con Autodiscovery
 ---
 

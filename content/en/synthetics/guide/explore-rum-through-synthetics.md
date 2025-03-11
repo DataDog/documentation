@@ -1,6 +1,5 @@
 ---
 title: Explore A Preview of RUM Features In Synthetics
-kind: documentation
 description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
 aliases:
 further_reading:

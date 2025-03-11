@@ -1,6 +1,5 @@
 ---
 title: Serverless Glossary
-kind: documentation
 ---
 
 This glossary focuses on terms and concepts specific to serverless architectures, cloud platform providers, and Datadog Serverless monitoring. 

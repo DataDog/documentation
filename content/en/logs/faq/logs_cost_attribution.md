@@ -1,6 +1,6 @@
 ---
 title: Logs Cost Attribution
-kind: faq
+
 further_reading:
 - link: "/logs/log_configuration/logs_to_metrics/"
   tag: "Documentation"

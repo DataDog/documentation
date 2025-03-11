@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/integrations/faq/comment-ajouter-des-fichiers-de-logs-d-evenements-a-la-classe-wmi-win32-ntlogevent
-kind: guide
+
 title: Ajouter des fichiers de logs d'événements à la classe WMI Win32_NTLogEvent
 ---
 

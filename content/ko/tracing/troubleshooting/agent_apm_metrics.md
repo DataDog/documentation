@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/agent-apm-metrics/
 - /ko/tracing/send_traces/agent-apm-metrics/
-kind: 설명서
 title: Datadog 에이전트로 전송한 애플리케이션 성능 모니터링(APM) 메트릭
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Managing the Azure Native Integration
-kind: guide
+
 further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
@@ -131,7 +131,7 @@ There are three types of logs that can be emitted from Azure to Datadog using th
 
 1. [Activity logs](#activity-logs)
 2. [Resource logs](#resource-logs)
-3. [Azure Active Directory logs](#azure-active-directory-logs)
+3. [Microsoft Entra ID](#microsoft-entra-id-logs)
 
 ##### Activity logs
 
@@ -157,17 +157,17 @@ For example, the screenshot below shows a tag rule where only virtual machines, 
 
 {{< img src="integrations/guide/azure_portal/metrics-and-logs-tag-rules.png" alt="A screenshot showing a metric tag rule of Datadog=true set for virtual machines, virtual machine scale sets, and app service plans. The logs section is also configured with tag rule of Datadog=true" responsive="true" style="width:100%;">}}
 
-##### Azure Active Directory logs
+##### Microsoft Entra ID logs
 
-Azure Active Directory (Azure AD) logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send Azure AD Logs:
+Microsoft Entra ID logs contain the history of sign-in activity and an audit trail of changes made in Microsoft Entra ID for a particular tenant. To send Microsoft Entra ID logs:
 
-1. Navigate to Azure Active Directory in Azure, and select **Diagnostic Settings** in the left navigation bar.
+1. Navigate to Microsoft Entra ID, and select **Diagnostic Settings** under **Monitoring** in the left navigation bar.
 2. Click **Add diagnostic setting**.
 3. Select the log categories you want to send to Datadog. Datadog recommends sending all categories.
 4. In **Destination details**, select **Send to a partner solution**.
 5. Select a subscription. Select a Datadog resource in the **Destination** dropdown.
 
-All Azure AD logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
+All Microsoft Entra ID logs from the tenant are sent to the Datadog organization linked to the Datadog resource selected. For cases where you have more than one Datadog resource that links subscriptions to the same Datadog organization, it does not matter which Datadog resource is selected. You only need to set this up once for each Azure tenant.
 
 ### Monitored resources
 
@@ -284,9 +284,9 @@ To uninstall the Datadog extension, select the appropriate app, then click **Uni
 
 Select **Single sign-on** in the left sidebar to reconfigure single sign-on.
 
-To activate single sign-on through Azure Active Directory, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Azure Active Directory. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
+To activate single sign-on through Microsoft Entra ID, select **Enable single sign-on**. The portal retrieves the appropriate Datadog application from Microsoft Entra ID. The app name is the enterprise app name you chose when setting up the integration. Select the Datadog application name as shown below.
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Azure active directory enabled" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="The Azure portal with Enable Single sign-on through Microsoft Entra ID enabled" responsive="true" style="width:100%;">}}
 
 ### API keys
 

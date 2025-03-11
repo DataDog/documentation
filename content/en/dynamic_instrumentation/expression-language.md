@@ -5,7 +5,7 @@ private: false
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators. 
+The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
 
 For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
@@ -23,6 +23,8 @@ It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
 
+Try [autocomplete and search (in Preview)][6] for an improved user experience using the Expression Language.
+
 The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
 
 ## Contextual variables
@@ -31,9 +33,9 @@ The following sections summarize the variables and operations that the Dynamic I
 |-------------|----------------------------------------------------------------------------|
 | `@return`   | Provides access to the return value                                        |
 | `@duration` | Provides access to the call execution duration                             |
-| `@it`       | Provides access to the current value in collection iterating operations    |
 | `@exception`| Provides access to the current uncaught exception                          |
 
+**Note**: These variables are **only available** when instrumenting an **entire method**, and **not** for individual lines of code.
 
 ## String operations
 
@@ -49,13 +51,15 @@ The following sections summarize the variables and operations that the Dynamic I
 
 ## Collection operations
 
+When working with collections (lists, maps, etc.), a variable `@it` is available which provides access to the current value in a collection during iteration.
+
 The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, @it > 2)` -> `True` |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, @it < 4)` -> `True` |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, @it > 1)` -> `[2,3]` |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, {@it > 2})` -> `True` |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, {@it < 4})` -> `True` |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, {@it > 1})` -> `[2,3]` |
 | `len(value_src)` | Gets the collection size. | `len(myCollection)` -> `3` |
 | `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | `myCollection[1]` -> `2` |
 
@@ -64,3 +68,4 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 [3]: /metrics/types/?tab=histogram#metric-types
 [4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[6]: /dynamic_instrumentation/symdb/

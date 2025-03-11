@@ -54,7 +54,7 @@ $ALERT_CYCLE_KEY
 : アラートがトリガーした時点から解決するまでイベントにリンクする ID。
 
 $ALERT_ID
-: アラートの ID。<br />
+: アラートを発行するモニターの ID です。<br />
 **例**: `1234`
 
 $ALERT_METRIC
@@ -261,9 +261,9 @@ $SYNTHETICS_FIRST_FAILING_STEP_NAME
 : Synthetics テストの最初の失敗したステップの名前。
 
 $SYNTHETICS_SUMMARY
-: Synthetic テストの詳細の概要<br />
-**例**:
-```
+: Summary of Synthetic test details.<br />
+**Example**:
+: {{< code-block lang="json">}}
 {
   "result_id": "1871796423670117676",
   "test_type": "browser",
@@ -283,7 +283,7 @@ $SYNTHETICS_SUMMARY
     }
   ]
 }
-```
+{{< /code-block >}}
 
 $TAGS
 : イベントタグのカンマ区切りリスト。<br />
@@ -398,10 +398,10 @@ URL として使用する:
 | `query_alert_monitor` | メトリクス、異常値、予測 |
 | `rum_alert` | RUM |
 | `service_check` | ホスト、サービスチェック |
-| `synthetics_alert` | テストを一時停止または開始する |
+| `synthetics_alert` | Synthetics |
 | `trace_analytics_alert` | トレース分析 |
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

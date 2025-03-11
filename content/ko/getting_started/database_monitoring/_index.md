@@ -12,7 +12,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세선에 참여해 데이터 베이스 모니터링을 한 단계 업그레이드 하세요.
-kind: 설명서
 title: 데이터베이스 모니터링 시작하기
 ---
 

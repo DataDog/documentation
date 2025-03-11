@@ -1,6 +1,5 @@
 ---
 title: Session Replay Browser Privacy Options
-kind: documentation
 description: Describes privacy controls available in Session Replay and how to set privacy options
 aliases:
 - /real_user_monitoring/session_replay/privacy_options
@@ -26,6 +25,8 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 <div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
+
+**Note:** If the privacy setting is not specified when enabling Session Replay, `mask` is enabled by default.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -54,7 +55,6 @@ Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, im
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
-**Note:** By default, `mask` is the privacy setting when you enable Session Replay.
 **Note**: Masked data is not stored on Datadog servers.
 
 ### Mask user input mode
@@ -111,8 +111,6 @@ If you are concerned about the number of visible elements in sensitive fields, e
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
-
-
 
 ### Override the action name
 

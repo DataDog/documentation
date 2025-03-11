@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10049
     source_type_name: IBM MQ
-  logs:
-    source: ibm_mq
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,6 +27,7 @@ categories:
 - ログの収集
 - メッセージキュー
 - ネットワーク
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
 display_on_public_website: true
@@ -36,9 +35,8 @@ draft: false
 git_integration_title: ibm_mq
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 6.3.0
+integration_version: 8.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: ibm_mq
 public_title: IBM MQ
@@ -56,10 +54,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: IBM MQ はメッセージキューです
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
   support: README.md#Support
   title: IBM MQ
 ---
@@ -71,9 +73,9 @@ tile:
 
 このチェックは [IBM MQ][1] バージョン 9.1 以降を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -224,12 +226,12 @@ No commands have a syntax error.
 All valid MQSC commands were processed.
 ```
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -256,7 +258,7 @@ All valid MQSC commands were processed.
 
 2. [Agent を再起動します][2]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -299,7 +301,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                                                                                                                   |
 | `<INSTANCE_CONFIG>`  | `{"channel": "DEV.ADMIN.SVRCONN", "queue_manager": "datadog", "host":"%%host%%", "port":"%%port%%", "queues":["<キュー名>"]}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -318,21 +320,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `ibm_mq` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "ibm_mq" >}}
 
 
-### ヘルプ
+### イベント
 
 IBM MQ には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "ibm_mq" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### リセットキュー統計 MQRC_NOT_AUTHORIZED 権限の警告
 以下の警告が表示される場合

@@ -5,7 +5,6 @@ further_reading:
 - link: agent/kubernetes/log
   tag: Documentation
   text: Datadog と Kubernetes
-kind: ガイド
 title: Datadog Operator の高度なセットアップ
 ---
 
@@ -41,7 +40,6 @@ Datadog Operator をデプロイした後、Kubernetes クラスターでの Dat
 
 * [ログ、APM、プロセス、メトリクス収集を有効にしたマニフェスト][4]。
 * [ログ、APM、メトリクス収集を有効にしたマニフェスト][5]。
-* [ログとメトリクス収集を有効にしたマニフェスト][6]。
 * [APMとメトリクス収集を有効にしたマニフェスト][7]。
 * [クラスター Agent のあるマニフェスト][8]。
 * [許容範囲のあるマニフェスト][9]。
@@ -137,10 +135,9 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
+[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-all.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-apm-hostport.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

@@ -6,7 +6,7 @@ further_reading:
 - link: /logs/faq/log-parsing-best-practice
   tag: Documentation
   text: 'Parsing de log : bonnes pratiques à adopter'
-kind: guide
+
 title: Surveiller et interroger les logs non parsés
 ---
 

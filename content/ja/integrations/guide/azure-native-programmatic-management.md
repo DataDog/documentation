@@ -7,7 +7,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal
   tag: Documentation
   text: Azure Native インテグレーションの管理
-kind: ガイド
 title: Azure Native インテグレーションプログラム管理ガイド
 ---
 
@@ -15,7 +14,7 @@ title: Azure Native インテグレーションプログラム管理ガイド
 
 ## 概要
 
-Azure Native インテグレーションは、Azure の Datadog リソースを使用して、Azure 環境の管理とデータ収集を効率化します。Datadog では、可能な限りこの方法を使用することを推奨しています。この方法では、[azurerm_datadog_monitor][3] リソースを作成し、[Monitoring Reader ロール][4]を割り当てて、Azure サブスクリプションを Datadog 組織にリンクします。これは、メトリクス収集のための App Registration 資格情報プロセスとログ転送のための Event Hub セットアップを置き換えるものです。
+The Azure Native integration uses the Datadog resource in Azure to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This method involves creating the [azurerm_datadog_monitor][3] resource and assigning it the [Monitoring Reader role][4] to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
 
 ## セットアップ
 
@@ -75,7 +74,7 @@ resource "azurerm_role_assignment" "example" {
 
 3. `terraform apply` を実行します。
 
-## ログの収集
+## ログ収集
 
 Azure アカウントで Datadog リソースのセットアップが完了したら、Azure ポータルを通じてログの収集を構成します。詳細については、Azure ドキュメントの[メトリクスとログの構成][5]を参照してください。
 

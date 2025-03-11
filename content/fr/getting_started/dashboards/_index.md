@@ -23,7 +23,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive sur l'amélioration des visualisations
     avec des dashboards
-kind: documentation
 title: Débuter avec les dashboards
 ---
 

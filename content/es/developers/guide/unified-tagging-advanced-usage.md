@@ -1,5 +1,4 @@
 ---
-kind: guía
 title: Guía de uso avanzado del etiquetado unificado
 ---
 

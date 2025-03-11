@@ -5,6 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
+custom_kind: integration
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
@@ -15,7 +16,6 @@ integration_id: azure-db-for-mysql
 integration_title: Microsoft Azure DB for MySQL
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_db_for_mysql
 public_title: Datadog-Microsoft Azure DB for MySQL インテグレーション
@@ -33,27 +33,27 @@ Azure Database for MySQL からメトリクスを取得すると、以下のこ�
 - MySQL データベースのパフォーマンスを視覚化できます。
 - MySQL データベースのパフォーマンスをアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_db_for_mysql" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Database for MySQL インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Database for MySQL インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

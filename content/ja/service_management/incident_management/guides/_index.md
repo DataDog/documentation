@@ -12,7 +12,6 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Service%20Management
   tag: リリースノート
   text: 最新の Service Management リリースを見る
-kind: ドキュメント
 private: true
 title: インシデント管理ガイド
 ---

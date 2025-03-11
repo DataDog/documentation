@@ -8,7 +8,7 @@ cascade:
     rank: 50
     subcategory: Guides APM
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides de tracing
 ---

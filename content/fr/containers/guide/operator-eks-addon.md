@@ -5,7 +5,6 @@ further_reading:
 - link: agent/kubernetes/log
   tag: Documentation
   text: Datadog et Kubernetes
-kind: guide
 title: Installer l'Agent Datadog sur Amazon EKS avec l'Operator Datadog
 ---
 

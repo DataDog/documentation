@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: Blog
   text: Configurar alertas de pipeline con los monitores de CI de Datadog
-kind: documentación
 title: Explorador de visibilidad de pruebas
 ---
 

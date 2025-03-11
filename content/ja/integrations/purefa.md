@@ -27,6 +27,7 @@ author:
 categories:
 - data stores
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: purefa
 integration_title: Pure Storage FlashArray
 integration_version: 1.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: purefa
 public_title: Pure Storage FlashArray
@@ -88,24 +88,24 @@ tile:
  - Python 3
  - Pure Storage OpenMetrics エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[GitHub リポジトリ][3]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、オートディスカバリーのインテグレーションテンプレートのガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Pure FlashArray インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][4]を参照してください。
 
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホスト上で動作している Agent に対してこのチェックを構成するには、`sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>` を実行します。
 
 注: `<INTEGRATION_VERSION>` は、Datadog Integration Extras の [CHANGELOG.md][5] 内に記載されています。
   * 例: `sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==1.2.0`
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. FlashArray に Read-Only ロールのローカルユーザーを作成し、このユーザー用の API トークンを生成します。
    ![API キーの生成][6]
@@ -185,7 +185,7 @@ instances:
 
 PureFA Agent Check の将来のバージョンでは、Pure Storage Prometheus エクスポーターからのメトリクス名は削除されます。
 
-### ヘルプ
+### トラブルシューティング
 
 #### ダッシュボードにアレイが表示されない
 
@@ -207,17 +207,17 @@ min_collection_interval: 120
 ```
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "purefa" >}}
 
 
-### ヘルプ
+### イベント
 
 PureFA インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][13] を参照してください。
 

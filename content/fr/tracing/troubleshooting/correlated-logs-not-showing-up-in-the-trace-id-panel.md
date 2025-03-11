@@ -8,7 +8,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Documentation
   text: Diagnostics simplifiés grâce à la mise en corrélation entre produits
-kind: documentation
 title: Aucun log corrélé ne s'affiche dans le volet de l'ID de trace
 ---
 

@@ -217,6 +217,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
     sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
@@ -259,6 +260,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -295,7 +297,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-1. Download the the [sample configuration][1]. 
+1. Download the [sample configuration][1]. 
 1. Set up the Worker module in your existing Terraform using the sample configuration. Make sure to update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment in the configuration. Also, update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
 [1]: /resources/yaml/observability_pipelines/datadog/terraform_opw_datadog.tf
@@ -403,7 +405,7 @@ No built-in support for load-balancing is provided, given the single-machine nat
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
+An NLB is provisioned by the Terraform module, and configured to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 

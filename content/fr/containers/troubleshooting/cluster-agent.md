@@ -12,7 +12,6 @@ further_reading:
 - link: /containers/kubernetes/integrations/
   tag: Documentation
   text: Intégrations personnalisées
-kind: documentation
 title: Dépannage de l'Agent de cluster
 ---
 

@@ -2,7 +2,6 @@
 dependencies:
 - https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md
 description: Datadog と GitHub を使用して、CI パイプラインで Static Analysis ジョブを実行します。
-kind: documentation
 title: Static Analysis と GitHub Actions
 ---
 ## 概要
@@ -54,8 +53,6 @@ jobs:
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
-          dd_service: "my-service"
-          dd_env: "ci"
 ```
 
 Datadog API キーとアプリケーションキーを GitHub リポジトリにシークレットとして設定する必要があります。詳しくは、[API とアプリケーションキー][1]を参照してください。

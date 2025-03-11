@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting and Deep Dive for Kafka
-kind: faq
+
 aliases:
   - /integrations/faq/producer-and-consumer-metrics-don-t-appear-in-my-datadog-application
 ---

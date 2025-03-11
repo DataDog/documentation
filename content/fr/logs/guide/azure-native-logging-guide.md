@@ -3,7 +3,6 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Apprendre à explorer vos logs
-kind: documentation
 title: Envoyer des logs Azure avec la ressource Datadog
 ---
 
@@ -25,9 +24,11 @@ Fournissent des informations clés sur les opérations réalisées sur vos resso
 
 Pour envoyer les logs dʼactivité à Datadog, sélectionnez **Send subscription activity logs**. Si vous ne sélectionnez pas cette option, aucun log dʼactivité ne sera envoyé à Datadog.
 
-## Les logs de ressource Azure 
+<div class="alert alert-warning">Lorsque la collecte des logs est activée, la ressource Datadog modifie automatiquement les configurations de journalisation des <a href="https://learn.microsoft.com/azure/app-service/">App Services</a>. Azure déclenche un <strong>redémarrage</strong> des App services lorsque leurs configurations de journalisation changent.</div>
 
-Fournissent des informations clés sur les opérations réalisées sur les ressources Azure dans le [plan de données][1]. Les opérations du plan de données consistent par exemple à récupérer un secret à partir d'un coffre de clés ou à transmettre une requête à une base de données. Le contenu de ces logs de ressources varie en fonction du service Azure et du type de ressource.
+## Logs de ressource Azure
+
+fournissent des informations clés sur les opérations réalisées sur les ressources Azure dans le [plan de données][1]. Les opérations du plan de données consistent par exemple à récupérer un secret à partir d'un coffre de clés ou à transmettre une requête à une base de données. Le contenu de ces logs de ressources varie en fonction du service Azure et du type de ressource.
 
 Pour envoyer des logs de ressource Azure à Datadog, sélectionnez **Send Azure resource logs for all defined resources**. Les types de logs de ressource Azure sont répertoriés dans les [catégories de logs de ressource d'Azure Monitor][2]. Si vous sélectionnez cette option, tous les logs de ressource seront envoyés à Datadog, y compris pour les nouvelles ressources créées dans l'abonnement.
 
@@ -43,7 +44,7 @@ Par exemple, avec la règle de tag de la capture d'écran ci-dessous, seuls les 
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Créer des logs de ressource Datadog US3 Azure" responsive="true" style="width:90%;">}}
 
-## Logs Azure Active Directory (Azure AD) 
+## Logs Azure Active Directory (Azure AD)
 
 Les logs Azure AD contiennent l'historique des activités de connexion ainsi qu'un journal d'audit des modifications apportées dans Azure AD pour un client donné. Pour envoyer ces logs à Datadog, commencez par créer une ressource Datadog. Après avoir créé une ressource Datadog dans Azure, suivez la procédure de configuration indiquée dans le guide [Datadog sur le portail Azure][3].
 
@@ -58,7 +59,7 @@ Les logs Azure AD contiennent l'historique des activités de connexion ainsi qu'
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
 
-<div class="alert alert-info">La ressource Datadog dans Azure n'est disponible que pour les organisations situées sur le site Datadog US3. Si vous utilisez un autre site Datadog, consultez le guide <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure logs to Datadog</a> (en anglais) pour connaître les options de configuration. Si vous utilisez le site Datadog US3, <a href="?site=us3" target="_blank">modifiez le sélecteur de site</a> à droite de cette page.</div>
+<div class="alert alert-info">La ressource Datadog dans Azure n'est disponible que pour les organisations situées sur le site US3 de Datadog. Si vous utilisez un autre site Datadog, consultez le guide <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Envoyer des logs Azure à Datadog</a> pour connaître les options de configuration. Si vous utilisez le site US3 de Datadog, <a href="?site=us3" target="_blank">modifiez le sélecteur de site</a> à droite de cette page.</div>
 
 {{< /site-region >}}
 

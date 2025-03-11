@@ -55,8 +55,10 @@
             "metric": "system.load.1",
             "points": [
               [
-                0.5,
-                1
+                [
+                  0.5,
+                  1
+                ]
               ]
             ]
           }
@@ -69,8 +71,10 @@
             "metric": "system.load.1",
             "points": [
               [
-                0.5,
-                1
+                [
+                  0.5,
+                  1
+                ]
               ]
             ],
             "tags": [
@@ -400,8 +404,10 @@
           {
             "metric": "system.load.1",
             "points": [
-              1575317847,
-              0.5
+              [
+                1575317847,
+                0.5
+              ]
             ]
           }
         ]
@@ -413,8 +419,10 @@
             "interval": 20,
             "metric": "system.load.1",
             "points": [
-              1575317847,
-              0.5
+              [
+                1575317847,
+                0.5
+              ]
             ],
             "tags": [
               "environment:test"

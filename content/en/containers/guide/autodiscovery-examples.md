@@ -1,6 +1,5 @@
 ---
 title: "Autodiscovery: Scenarios & Examples"
-kind: guide
 further_reading:
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
@@ -133,11 +132,23 @@ spec:
 {{% /tab %}}
 {{% tab "Docker labels" %}}
 
+**docker-compose.yaml**
 
-**Dockerfile - Autodiscovery Annotations v2** (for Datadog Agent v7.36+)**
+For Datadog Agent v7.36+:
 
-```dockerfile
-LABEL "com.datadoghq.ad.checks"='{"redisdb": {"instances": [{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}], "logs": [{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]}}'
+```yaml
+labels:
+  com.datadoghq.ad.checks: '{"redisdb": {"instances": [{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}], "logs": [{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]}}'
+```
+
+For earlier Agent versions:
+
+```yaml
+labels:
+  com.datadoghq.ad.check_names: '["redisdb"]'
+  com.datadoghq.ad.init_configs: '[{}]'
+  com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
+  com.datadoghq.ad.logs: '[{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]'
 ```
 
 {{% /tab %}}
@@ -401,8 +412,15 @@ spec:
 {{% /tab %}}
 {{% tab "Docker labels" %}}
 
-**Dockerfile - Autodiscovery Annotations v1** 
+**Dockerfile** 
 
+For Datadog Agent v7.36+:
+
+```yaml
+LABEL "com.datadoghq.ad.checks"='{"apache": {"instances": [{"apache_status_url": "http://%%host%%/server-status?auto", "min_collection_interval": 30}]}, "http_check":{"instances": [{"name":"my_website_1","url":"http://%%host%%/website_1","timeout":1},{"name":"my_website_2","url":"http://%%host%%/website_2","timeout":1}]}}'
+```
+
+For earlier Agent versions:
 ```dockerfile
 LABEL "com.datadoghq.ad.check_names"='["apache", "http_check"]'
 LABEL "com.datadoghq.ad.init_configs"='[{},{}]'

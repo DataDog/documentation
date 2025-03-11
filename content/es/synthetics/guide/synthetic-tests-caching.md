@@ -6,21 +6,24 @@ further_reading:
 - link: /synthetics/api_tests/http_tests
   tag: Documentación
   text: Configurar un test de HTTP
-kind: guía
-title: Prevenir problemas con la caché en los tests de Synthetics
+title: Evita los problemas de caché en los tests de Sintético
 ---
 
-## Tests de navegador
+## Información general
 
-El navegador se cierra cada vez que se termina de ejecutar un test para que los test de navegador no se vean afectados por problemas con el almacenamiento en caché en el cliente.
+En esta guía se describe cómo evitar los problemas de almacenamiento en caché al utilizar los tests de Sintético.
 
 ## Tests de API
 
 ### Tests de HTTP
 
-Puedes usar [variables locales][1] para generar una cadena aleatoria que se envíe con la carga útil y que en los [tests de HTTP][2] no se utilicen tus sistemas de almacenamiento en caché.
+Puedes aprovechar las [variables locales][1] para generar una cadena aleatoria y enviarla con tu carga útil para asegurarte de que tus [tests HTTP][2] no utilicen tus sistemas de almacenamiento en caché.
 
-## Leer más
+## Tests de navegador
+
+Los navegadores se eliminan después de cada ejecución del test, lo que garantiza que tus tests de navegador no tengan problemas relacionados con la caché en el lado del cliente.
+
+## Referencias adiionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

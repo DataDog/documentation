@@ -6,7 +6,6 @@ further_reading:
 - link: https://docs.datadoghq.com/notebooks/
   tag: documentation
   text: ノートブック
-kind: ガイド
 title: セッションリプレイをポストモーテムのキーツールとして活用する
 ---
 

@@ -169,7 +169,7 @@ docker service create \
 
 ---
 
-Si el almacén de valores clave se ha activado como fuente de plantillas, el Agent busca plantillas con la clave `/datadog/check_configs`. Autodiscovery espera una jerarquía clave-valor como la siguiente:
+Si la base de datos clave-valor se ha activado como fuente de plantillas, el Agent busca plantillas con la clave `/datadog/check_configs`. Autodiscovery espera una jerarquía clave-valor como la siguiente:
 
 ```text
 /datadog/
@@ -246,8 +246,8 @@ metadata:
     name: apache
 spec:
   containers:
-    - name: apache # use this as the container identifier in your annotations
-      image: httpd # NOT this
+    - name: apache # usa esto como el identificador de contenedor en tus anotaciones
+      image: httpd # NO este
       ports:
         - containerPort: 80
 ```
@@ -258,7 +258,7 @@ Si vas a definir los pods con despliegues, no añadas anotaciones de plantilla a
 
 ```yaml
 apiVersion: apps/v1beta1
-metadata: # Don't add templates here
+metadata: # No añadas plantillas aquí
   name: apache-deployment
 spec:
   replicas: 2
@@ -272,8 +272,8 @@ spec:
         service-discovery.datadoghq.com/apache.instances: '[{"apache_status_url": "http://%%host%%/server-status?auto"},{"name": "My service", "url": "http://%%host%%", timeout: 1}]'
     spec:
       containers:
-      - name: apache # use this as the container identifier in your annotations
-        image: httpd # NOT this
+      - name: apache # usa esto como el identificador de contenedor en tus anotaciones
+        image: httpd # NO este
         ports:
         - containerPort: 80
 ```

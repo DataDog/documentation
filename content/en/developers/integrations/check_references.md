@@ -11,7 +11,6 @@ further_reading:
 - link: /developers/integrations/oauth_for_integrations/
   tag: Documentation
   text: Learn about using OAuth for integrations
-kind: documentation
 title: Integration Assets Reference
 ---
 ## Overview
@@ -127,7 +126,8 @@ You can find the complete list of mandatory and optional attributes for the `met
 | `orientation`   | Mandatory          | Set to `1` if the metric should go up, such as `myapp.turnover`. Set to `0` if the metric variations are irrelevant. Set to `-1` if the metric should go down, such as `myapp.latency`.                                                                                                                                                         |
 | `integration`   | Mandatory          | The name of the integration that emits the metric. Must be the normalized version of the `tile.title` from the `manifest.json` file. Any character besides letters, underscores, dashes, and numbers are converted to underscores. For example: `Openstack Controller` -> `openstack_controller`, `ASP.NET` -> `asp_net`, and `CRI-o` -> `cri-o`. |
 | `short_name`    | Mandatory          | Explicit unique ID for the metric.                                                                                                                                                                                                                                                                                                      |
-| `curated_metric`| Optional           | Marks which metrics for an integration are noteworthy for a given type (`cpu` and `memory` are both accepted). These are displayed in the UI above the other integration metrics.
+| `curated_metric`| Optional           | Marks which metrics for an integration are noteworthy for a given type (`cpu` and `memory` are both accepted). These are displayed in the UI above the other integration metrics. |
+| `sample_tags` | Optional           | List of example tags associated with the metric. |
 
 ## Further Reading
 

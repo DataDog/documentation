@@ -1,6 +1,6 @@
 ---
 title: Alerting With Conversion Rates
-kind: guide
+
 description: Guide for creating alerts on conversion rates.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'

@@ -5,7 +5,6 @@ further_reading:
   tag: Blog
   text: Datadog presenta los servicios Log Management y APM de Datadog que cumplen
     con el PCI
-kind: Documentation
 title: Cumplimiento del estándar PCI DSS
 ---
 
@@ -13,7 +12,7 @@ title: Cumplimiento del estándar PCI DSS
 <div class="alert alert-warning">
 La conformidad con el PCI DSS para APM y Log Management sólo está disponible para las organizaciones de Datadog en el <a href="/getting_started/site/">sitio US1</a>.
 </div>
-{{% /región del sitio %}}
+{{% /site-region %}}
 
 {{% site-region region="us" %}}
 <div class="alert alert-warning">

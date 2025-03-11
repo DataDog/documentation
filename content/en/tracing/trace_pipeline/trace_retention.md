@@ -1,6 +1,5 @@
 ---
 title: Trace Retention
-kind: documentation
 description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/
@@ -60,7 +59,7 @@ Last Updated
 Enabled toggle
 : Allows filters to be turned on and off.
 
-**Note**: The order of the retention filter list changes indexing behavior. If a span matches a retention filter early in the list, the span is either kept or dropped. Any matching retention filter lower on the list does not catch the already-processed span.
+**Note**: The order of the retention filter list changes indexing behavior. If a span matches a retention filter early in the list, the span is either kept or dropped. Any matching custom retention filter lower on the list does not catch the already-processed span.
 
 The `Spans Indexed` column for each retention filter is powered by the `datadog.estimated_usage.apm.indexed_spans` metric, which you can use to track your indexed span usage. For more information, read [Usage Metrics][2], or see the [dashboard][4] available in your account.
 
@@ -96,7 +95,9 @@ This sampling mechanism is uniform, and it is proportionally representative of t
 
 ### Create your own retention filter
 
-Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained. Any span that is retained has its corresponding trace saved as well, and when it is viewed in the [Trace Explorer][7], the complete trace is available.
+Decide which spans are indexed and retained for 15 days by creating, modifying, and disabling additional filters based on tags. Set a percentage of spans matching each filter to be retained.
+
+When a span is retained, you can see and query it in [Trace Explorer][7], dashboards, and monitors for 15 days. When viewing a retained span, you can see the complete trace visualization it belongs to, for example in a flame graph. However, note that other spans in that visualization might not be independently searchable unless they were also retained by filters.
 
 **Note:** In order for you to search by tag in the Trace Explorer, the span that directly contains the searched-upon tag must have been indexed by a retention filter.
 
@@ -119,9 +120,9 @@ For example, you can create filters to keep all traces for:
 
 ## Trace search and analytics on indexed spans
 
-### In the Trace Explorer
+### In the Trace Explorer, dashboards, and notebooks
 
-By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table).
+By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table), as well as in dashboards and notebook queries.
 
 However, because the diversity-sampled set of data is **not uniformly sampled** (that is, not proportionally representative of the full traffic) and is biased towards errors and high latency traces, you can choose to exclude these spans from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
 
@@ -132,9 +133,9 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
 
-### In dashboards, notebooks, and monitors
+### In trace analytics monitors
 
-For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM trace analytics monitor evaluation.
 
 ## Further Reading
 

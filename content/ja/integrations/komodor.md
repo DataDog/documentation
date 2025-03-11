@@ -11,6 +11,7 @@ categories:
 - コンテナ
 - kubernetes
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: komodor
 integration_title: Komodor Automation
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: komodor
 public_title: Komodor Automation
@@ -77,7 +77,7 @@ Komodor は、K8s スタック全体の変更を追跡し、その波及効果�
 
 このインテグレーションを使用すると、必要なダッシュボードに直接アクセスできる動的なデプロイメントリンクを使用して、Datadog メトリクスにリンクすることができます。これにより、Datadog で検出された最も関連性の高いコンテキスト、接続、サービスの依存関係に基づいて、マイクロサービスのトラブルシューティングを行うことができます。
 
-## 計画と使用
+## セットアップ
 
 1. [Komodor プラットフォーム][1]にログインします。
 2. Helm チャートまたは Kustomize を使用して、各 Kubernetes クラスターに Komodor ポッドベース Agent をインストールします。詳しくは [Komodor のドキュメント][2]を参照して、Agent をインストールしてください。

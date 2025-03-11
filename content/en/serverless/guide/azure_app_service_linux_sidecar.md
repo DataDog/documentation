@@ -1,6 +1,6 @@
 ---
 title: Instrument Azure App Service - Linux Containers with Sidecar Pattern
-kind: guide
+
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -119,7 +119,7 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
    Corresponds to your [Datadog site][5]. Defaults to `datadoghq.com`.
 
    `DD_SERVICE` 
-   : Supply a service name to be displayed in your Datadog [Service Catalog][6]. See [Unified Service Tagging][7]. 
+   : Supply a service name to be displayed in your Datadog [Software Catalog][6]. See [Unified Service Tagging][7]. 
 
    `DD_ENV` 
    : A name for your environment, such as `staging` or `prod`. See [Unified Service Tagging][7].

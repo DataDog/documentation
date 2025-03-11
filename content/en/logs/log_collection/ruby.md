@@ -1,6 +1,5 @@
 ---
 title: Ruby on Rails Log Collection
-kind: documentation
 aliases:
   - /logs/languages/ruby
 further_reading:

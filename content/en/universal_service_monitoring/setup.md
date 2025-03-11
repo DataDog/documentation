@@ -1,6 +1,5 @@
 ---
 title: Setting up Universal Service Monitoring
-kind: Documentation
 further_reading:
 - link: "/universal_service_monitoring/"
   tag: "Documentation"
@@ -14,14 +13,14 @@ further_reading:
 ## Supported versions and compatibility
 
 Required Agent version
-: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some beta features require higher versions.
+: Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40. As noted below, some features in Preview require higher versions.
 
 Supported Linux platforms
 : Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater
 
 Supported Windows platforms
-: IIS on Windows 2012 R2 and greater
+: Windows 2012 R2 and greater
 
 Supported application-layer protocols
 : HTTP<br/>
@@ -31,15 +30,15 @@ Known limitations
 : Universal Service Monitoring requires the use of Datadog's `system-probe`, which is not supported on Google Kubernetes Engine (GKE) Autopilot.
 
 <div class="alert alert-info">
-Additional protocols and traffic encryption methods are supported in <a href="/universal_service_monitoring/additional_protocols/">private beta</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
+Additional protocols and traffic encryption methods are in <a href="/universal_service_monitoring/additional_protocols/">Preview</a>. If you have feedback about what platforms and protocols you'd like to see supported, <a href="/help/">contact Support</a>.
 </div>
 
 ## Prerequisites
 
 - If on Linux:
     - Your service is running in a container.
-    - **Beta:** For non-containerized services see the [instructions here](#additional-configuration).
-- If on Windows IIS:
+    - **In Preview:** For non-containerized services, see the [instructions here](#additional-configuration).
+- If on Windows:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
@@ -66,6 +65,20 @@ If your cluster is running Google Container-Optimized OS (COS), add the followin
 providers:
   gke:
     cos: true
+```
+
+If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
+
+```
+agents:
+  containers:
+    systemProbe:
+      securityContext:
+        seLinuxOptions:
+          user: "system_u"
+          role: "system_r"
+          type: "spc_t"
+          level: "s0"
 ```
 
 {{% /tab %}}
@@ -326,7 +339,6 @@ docker run --cgroupns host \
 -v /etc/yum/vars:/host/etc/yum/vars:ro \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
--e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -720,7 +732,7 @@ If you use load balancers with your services, enable additional cloud integratio
 **For services running on IIS:**
 
 1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.
-   For Agent version 7.44 or earlier, you must pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command during installation, or select **Network Performance Monitoring** when running the Agent installation through the GUI.
+   For Agent version 7.44 or earlier, you must pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command during installation, or select **Cloud Network Monitoring** when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -728,6 +740,17 @@ If you use load balancers with your services, enable additional cloud integratio
    service_monitoring_config:
      enabled: true
    ```
+**For non-IIS services:**
+
+Discovery of non-IIS services is enabled by default starting with Agent version 7.57. Previous Agent versions may require the following configuration change to `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+   
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
 {{% /tab %}}
 
@@ -735,11 +758,11 @@ If you use load balancers with your services, enable additional cloud integratio
 
 ## Additional configuration
 
-The following systems or services require additonal configuration due to limited or beta support:
+The following systems or services require additional configuration:
 
 {{< collapse-content title="Non-containerized services on Linux" level="h4" >}}
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor services running bare-metal on Linux virtual machines.
+Universal Service Monitoring is available to monitor services running bare-metal on Linux virtual machines.
 </div>
 
 Requires Agent version 7.42 or greater.
@@ -765,7 +788,7 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Go TLS Monitoring" level="h4" >}}
 <div class="alert alert-info">
@@ -775,7 +798,7 @@ Universal Service Monitoring is available in <strong>beta</strong> to monitor TL
 <strong>Note</strong>:
 <br>
 <ul role="list">
-  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta. Reach out to your account manager for details.</li>
+  <li>Go HTTPS servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in Preview. Reach out to your account manager for details.</li>
   <li>Requires Agent version 7.51 or greater.</li>
 </ul>
 
@@ -813,12 +836,12 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
-{{< collapse-content title="NodeJS TLS Monitoring" level="h4" >}}
+{{< collapse-content title="Node.js TLS Monitoring" level="h4" >}}
 
 <div class="alert alert-info">
-Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in NodeJS.
+Universal Service Monitoring is available in <strong>beta</strong> to monitor HTTP, HTTP/2, and gRPC requests from services implemented in Node.js.
 </div>
 
 Requires Agent version 7.54 or greater.
@@ -857,7 +880,7 @@ agents:
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="Istio Monitoring" level="h4" >}}
 
@@ -896,10 +919,11 @@ agents:
         - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
           value: "true"
 ```
+
 {{% /tab %}}
 
 {{< /tabs >}}
-{{< /collapse-content >}} 
+{{< /collapse-content >}}
 
 {{< collapse-content title="HTTP/2 monitoring" level="h4" >}}
 Universal Service Monitoring can capture HTTP/2 and gRPC traffic.
@@ -943,10 +967,10 @@ agents:
 {{< /tabs >}}
 {{< /collapse-content >}}
 
-{{< collapse-content title="Kafka Monitoring (Private Beta)" level="h4" >}}
+{{< collapse-content title="Kafka Monitoring (Preview)" level="h4" >}}
 
 <div class="alert alert-info">
-Kafka Monitoring is available in <strong>Private beta</strong>.
+Kafka Monitoring is available in <strong>Preview</strong>.
 </div>
 
 <strong>Note</strong>:
@@ -1059,7 +1083,7 @@ agents:
 {{< /tabs >}}
 
 
-<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM has beta support for discovering cloud services and for decoding additional protocols and traffic encryption methods. For more information and to request access to the private beta, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
+<div class="alert alert-info"><strong>Support for additional protocols and encryption methods</strong><p>USM is in Preview for discovering cloud services and decoding additional protocols and traffic encryption methods. For more information and to request access to the Preview, read <a href="/universal_service_monitoring/additional_protocols/">Cloud Service Discovery and Additional Protocols</a>.</p></div>
 
 
 ## Further reading

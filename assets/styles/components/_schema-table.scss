@@ -52,10 +52,6 @@
                 left: -20px;
             }
         }
-
-        @media (min-width: 768px) {
-            word-break: normal;
-        }
     }
 
     p {
@@ -105,6 +101,13 @@
                                 .isNested {
                                     .key {
                                         margin-left: 80px;
+                                    }
+                                    &.hasChildData {
+                                      .isNested {
+                                          .key {
+                                              margin-left: 100px;
+                                          }
+                                      }
                                     }
                                 }
                             }

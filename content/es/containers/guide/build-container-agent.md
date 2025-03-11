@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/guide/build-container-agent
-kind: guía
 title: Crear la imagen del Datadog Agent
 ---
 

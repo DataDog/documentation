@@ -15,41 +15,22 @@ further_reading:
 - link: /integrations/github
   tag: 설명서
   text: Datadog GitHub 통합
-kind: 설명서
 title: AWS Lambda용 서버리스 모니터링 구성
 ---
 
 먼저 Datadog 서버리스 모니터링을 [설치][1]하여 메트릭, 트레이스 및 로그 수집을 시작합니다. 설치가 완료되면 다음 항목을 참조하여 모니터링 요구 사항에 맞도록 설치 옵션을 설정합니다.
 
-### 메트릭
-- [논람다 리소스에서 메트릭 수집](#collect-metrics-from-non-lambda-resources)
-- [커스텀 메트릭 제출](#submit-custom-metrics)
-
-### 로그
-- [로그에서 정보 필터링 또는 스크러빙](#filter-or-scrub-information-from-logs)
-- [로그 수집 활성화/비활성화](#enabledisable-log-collection)
-- [논람다 리소스에서 로그 수집](#collect-logs-from-non-lambda-resources)
-- [로그 변환 및 파싱](#parse-and-transform-logs)
-- [로그와 트레이스 연결](#connect-logs-and-traces)
-
-### APM
 - [태그를 사용하여 텔레메트리 연결](#connect-telemetry-using-tags)
 - [요청 및 응답 페이로드 수집](#collect-the-request-and-response-payloads)
-- [논람다 리소스에서 메트릭 수집](#collect-metrics-from-non-lambda-resources)
-- [논람다 리소스에서 로그 수집](#collect-logs-from-non-lambda-resources)
 - [논람다 리소스에서 트레이스 수집](#collect-traces-from-non-lambda-resources)
-- [로그에서 정보 필터링 또는 스크러빙](#filter-or-scrub-information-from-logs)
-- [로그 수집 활성화/비활성화](#enabledisable-log-collection)
-- [로그 변환 및 파싱](#parse-and-transform-logs)
 - [Datadog 트레이서 구성](#configure-the-datadog-tracer)
 - [APM 스팬 수집용 샘플 속도 선택](#select-sampling-rates-for-ingesting-apm-span)
 - [트레이스에서 민감한 정보 필터링 또는 스크러빙](#filter-or-scrub-sensitive-information-from-traces)
 - [트레이스 수집 활성화/비활성화](#enabledisable-trace-collection)
 - [로그와 트레이스 연결](#connect-logs-and-traces)
 - [오류를 소스 코드에 연결](#link-errors-to-your-source-code)
-- [커스텀 메트릭 제출](#submit-custom-metrics)
-- [Datadog에 OpenTelemetry 데이터 전송](#send-opentelemetry-data-to-datadog)
-- [프로파일링 데이터 수집 (퍼블릭 베타)](#collect-profiling-data-public-beta)
+- [커스텀 메트릭 제출][27]
+- [프로파일링 데이터 수집][#collect-profiling-data)
 - [PrivateLink나 프록시를 통해 텔레메트리 전송](#send-telemetry-over-privatelink-or-proxy)
 - [다중 Datadog 조직에 텔레메트리 전송](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS 리소스를 통한 트레이스 컨텍스트 전파](#propagate-trace-context-over-aws-resources)
@@ -58,64 +39,25 @@ title: AWS Lambda용 서버리스 모니터링 구성
 - [Datadog Lambda 확장으로 마이그레이션](#migrate-to-the-datadog-lambda-extension)
 - [Datadog Lambda 확장을 사용하여 x86에서 arm64로 마이그레이션](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [로컬 테스트용 Datadog Lambda 확장 구성](#configure-the-datadog-lambda-extension-for-local-testing)
+- [OpenTelemetry API로 AWS Lambda 계측](#instrument-aws-lambda-with-the-opentelemetry-api)
 - [문제 해결](#troubleshoot)
 - [더 알아보기](#further-reading)
 
-### 보안
-- [위협 탐지를 활성화하여 공격 시도 주시](#enable-threat-detection-to-observe-attack-attempts)
-
-### 기타
-- [태그를 사용하여 텔레메트리 연결](#connect-telemetry-using-tags)
-- [요청 및 응답 페이로드 수집](#collect-the-request-and-response-payloads)
-- [논람다 리소스에서 메트릭 수집](#collect-metrics-from-non-lambda-resources)
-- [논람다 리소스에서 로그 수집](#collect-logs-from-non-lambda-resources)
-- [논람다 리소스에서 트레이스 수집](#collect-traces-from-non-lambda-resources)
-- [로그에서 정보 필터링 또는 스크러빙](#filter-or-scrub-information-from-logs)
-- [로그 수집 비활성화](#disable-logs-collection)
-- [로그 변환 및 파싱](#parse-and-transform-logs)
-- [Datadog 트레이서 구성](#configure-the-datadog-tracer)
-- [APM 스팬 수집용 샘플 속도 선택](#select-sampling-rates-for-ingesting-apm-span)
-- [트레이스에서 민감한 정보 필터링 또는 스크러빙](#filter-or-scrub-sensitive-information-from-traces)
-- [트레이스 수집 비활성화](#disable-trace-collection)
-- [로그와 트레이스 연결](#connect-logs-and-traces)
-- [오류를 소스 코드에 연결](#link-errors-to-your-source-code)
-- [커스텀 메트릭 제출](#submit-custom-metrics)
-- [Datadog에 OpenTelemetry 데이터 전송](#send-opentelemetry-data-to-datadog)
-- [PrivateLink나 프록시를 통해 텔레메트리 전송](#send-telemetry-over-privatelink-or-proxy)
-- [다중 Datadog 조직에 텔레메트리 전송](#send-telemetry-to-multiple-datadog-organizations)
-- [AWS 리소스를 통한 트레이스 컨텍스트 전파](#propagate-trace-context-over-aws-resources)
-- [X-Ray 및 Datadog 트레이스 병합](#merge-x-ray-and-datadog-traces)
-- [AWS Lambda 코드 서명 활성화](#enable-aws-lambda-code-signing)
-- [Datadog Lambda 확장으로 마이그레이션](#migrate-to-the-datadog-lambda-extension)
-- [Datadog Lambda 확장을 사용하여 x86에서 arm64로 마이그레이션](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
-- [로컬 테스트용 Datadog Lambda 확장 구성](#configure-the-datadog-lambda-extension-for-local-testing)
-- [문제 해결](#troubleshoot)
-- [더 알아보기](#further-reading)
 
 ## 위협 탐지를 활성화하여 공격 시도를 주시하세요
 
-서버리스 애플리케이션을 공격하려는 시도에 대한 알림을 받고 신속하게 대응하세요.
+서버리스 애플리케이션 공격 발생 시 알림을 받고 신속하게 대응하세요.
 
 시작하려면 먼저 함수가 [추적 활성화][43]되어 있는지 확인하세요.
 
-위협 모니터링을 활성화하려면 언어에 따라 다음 환경 변수를 추가하세요:
+위협 모니터링을 사용하려면 다음 환경 변수를 배포에 추가하세요.
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   **Go 함수 전용**의 경우 다음을 추가하세요:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   **NodeJS 또는 파이썬 함수**의 경우 다음을 추가하세요;
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-함수를 다시 배포하고 호출합니다. 몇 분 후에 [ASM 화면][3]에 표시됩니다.
+함수를 다시 배포하고 호출합니다. 몇 분 후에 [ASM 보기][3]에 표시됩니다.
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
@@ -145,7 +87,7 @@ datadog-ci lambda instrument \
 
 [1]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/cli
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 최신 버전의 [Datadog 서버리스 플러그인][1]을 사용 중인지 확인하고 다음과 같이 `env`, `service`, `version`, `tags` 파라미터를 사용하여 태그를 적용합니다:
 
@@ -240,7 +182,7 @@ datadog-ci lambda instrument \
 
 [1]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/cli
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 최신 버전의 [Datadog 서버리스 플러그인][1]을 사용 중인지 확인하고 다음과 같이 `captureLambdaPayload`를 `true`로 설정합니다:
 
@@ -332,22 +274,9 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-## 논람다 리소스에서 메트릭 수집
 
-Datadog은 실시간 [Datadog Lambda  강화 메트릭][7]을 수집하는 것 외에도, [API 게이트웨이][8], [AppSync][9], [SQS][10]와 같은 AWS 관리 리소스에 대한 메트릭을 수집하여 전체 서버리스 애플리케이션을 모니터링할 수 있도록 도와드립니다. 또한 메트릭은 해당 AWS 리소스 태그를 통해 더욱 강력해집니다.
-
-해당 메트릭을 수집하려면 [Datadog AWS 통합][3]을 설정하세요.
-
-## 논람다 리소스에서 로그 수집
-
-AWS Lambda 함수 이외의 관리 리소스에서 생성된 로그는 서버리스 애플리케이션의 오류의 근본 원인을 파악하는 데 유용할 수 있습니다. Datadog은 사용자 환경의 AWS 관리형 리소스에서 다음과 같은 [로그를 수집][11]할 것을 권장합니다:
-- API: API Gateway, AppSync, ALB
-- 쿼리 & 스트림: SQS, SNS, Kinesis
-- 데이터 저장: DynamoDB, S3, RDS
 
 ## 논람다 리소스에서 트레이스 수집
-
-<div class="alert alert-info">본 기능은 현재 파이썬(Python), Node.js, 자바(Java), .NET에서 지원됩니다.</div>
 
 Datadog은 Lambda 함수를 트리거하는 AWS 관리 리소스로 들어오는 Lambda 이벤트를 기반으로 APM 스팬을 추론할 수 있습니다. 이를 통해 AWS 관리 리소스 간의 관계를 시각화하고 서버리스 애플리케이션의 성능 문제를 식별할 수 있도록 도와드립니다. 자세한 내용은 [추가 제품 세부 정보][12]를 참조하세요.
 
@@ -368,7 +297,7 @@ Datadog은 Lambda 함수를 트리거하는 AWS 관리 리소스로 들어오는
 
 `DD_SERVICE_MAPPING`는 업스트림 논람다  [서비스 이름][46]의 이름을 변경하는 환경 변수입니다. `old-service:new-service`과 한 쌍으로 동작합니다.
 
-#### Syntax
+#### 구문
 
 `DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
@@ -378,7 +307,7 @@ Datadog은 Lambda 함수를 트리거하는 AWS 관리 리소스로 들어오는
 
 AWS Lambda 통합과 관련된 모든 업스트림 서비스의 이름을 변경하려면 다음의 식별자를 사용합니다:
 
-| AWS 람다 통합 | DD_SERVICE_MAPPING 값 |
+| AWS Lambda 통합 | DD_SERVICE_MAPPING 값 |
 |---|---|
 | `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
 | `lambda_sns` | `"lambda_sns:newServiceName"` |
@@ -413,129 +342,17 @@ AWS Lambda 통합과 관련된 모든 업스트림 서비스의 이름을 변경
 
 다운스트림 서비스의 이름을 변경하려면 [트레이서 구성 문서][45]의 `DD_SERVICE_MAPPING`을 참조하세요.
 
-## 로그에서 정보 필터링 또는 스크러빙
-
-`START`, `END` 로그를 제외하려면 환경 변수 `DD_LOGS_CONFIG_PROCESSING_RULES`를 `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]` 로 설정합니다. 또는 프로젝트 루트 디렉터리에 다음 내용이 포함된 `datadog.yaml` 파일을 추가합니다:
-
-```yaml
-logs_config:
-  processing_rules:
-    - type: exclude_at_match
-      name: exclude_start_and_end_logs
-      pattern: (START|END) RequestId
-```
-
-Datadog은 서버리스 함수 보기에서 호출 목록을 채우는 데 사용되는 `REPORT` 로그를 보관할 것을 권장합니다.
-
-기타 로그를 Datadog으로 보내기 전에 스크러빙 또는 필터링하려면 [고급 로그 수집][13]을 참조하세요.
-
-## 로그 수집 활성화/비활성화
-
-Datadog Lambda 확장 프로그램을 사용한 로그 수집은 기본으로 활성화되어 있습니다.
-
-{{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-```yaml
-custom:
-  datadog:
-    # ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-    enableDDLogs: true
-```
-
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      # ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-      enableDDLogs: true
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-    enableDatadogLogs: true
-});
-datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-Lambda 함수에서 환경 변수 `DD_SERVERLESS_LOGS_ENABLED`를 `true`로 설정합니다.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### 로그 수집 비활성화
-
-Datadog Forwarder Lambda 함수를 사용한 로그 수집을 중단하려면, Lambda 함수의 CloudWatch 로그 그룹에서 구독 필터를 삭제합니다.
-
-Datadog Lambda 확장 프로그램을 사용한 로그 수집을 중단하려면, 적용되는 설치 방법에 대한 하단의 지침을 참조하세요:
-
-{{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-```yaml
-custom:
-  datadog:
-    # ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-    enableDDLogs: false
-```
-
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      # ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-      enableDDLogs: false
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // ... Datadog 사이트 및 API 키와 같은 기타 필수 파라미터
-    enableDatadogLogs: false
-});
-datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-Lambda 함수에서 환경 변수 `DD_SERVERLESS_LOGS_ENABLED`를 `false`로 설정합니다.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-더 자세한 정보를 확인하려면 [로그 관리][7] 지침을 참조하세요.
-
-## 로그 파싱 및 변환
-
-Datadog에서 로그를 파싱 및 변환하려면 [Datadog 로그 파이프라인][14] 문서를 참조하세요.
-
 ## Datadog 트레이서 구성
 
 Datadog APM 클라이언트가 자동으로 계측하는 라이브러리 및 프레임워크를 확인하려면 [APM 호환성 요구 사항][15]을 참조합니다. 사용자 지정 애플리케이션을 계측하려면 [커스텀 계측][16]에 관한 Datadog의 APM 지침을 확인하세요.
 
 ## APM 스팬 수집용 샘플링 속도 선택
 
-서버리스 함수용  [APM 호출 트레이스 샘플링 속도][17]를 관리하려면 함수의 `DD_TRACE_SAMPLE_RATE` 환경 변수를 0.000(Lambda 함수 호출 트레이스 없음)에서 1.000(모든 Lambda 함수 호출 트레이스) 사이의 값으로 설정합니다.
+서버리스 함수에 대한 [APM 추적 호출 샘플링 속도][17]를 관리하려면 함수의 `DD_TRACE_SAMPLING_RULES` 환경 변수를 0.000(Lambda 함수 호출 추적 없음)에서 1.000(모든 Lambda 함수 호출 추적) 사이의 값으로 설정합니다.
 
-메트릭은 애플리케이션 트래픽의 100%를 기준으로 산출되며, 샘플링 구성에 관계없이 정확성을 유지합니다.
+**참고**: 
+   - `DD_TRACE_SAMPLE_RATE`는 더 이상 사용되지 않습니다. 대신 `DD_TRACE_SAMPLING_RULES`를 사용하세요. 예를 들어, 이미 `DD_TRACE_SAMPLE_RATE`를 `0.1`로 설정한 경우 `DD_TRACE_SAMPLING_RULES`를 `[{"sample_rate":0.1}]`로 설정합니다.
+   - `trace.<OPERATION_NAME>.hits`와 같은 전체 트래픽 메트릭은 *Lambda에서만* 샘플링된 호출을 기반으로 계산됩니다.
 
 처리량이 많은 서비스의 경우, 트레이싱 데이터가 고빈도로 반복되기 때문에 대개 모든 요청을 수집할 필요가 없습니다. 상당히 중요한 문제의 경우 항상 여러 트레이스에서 그 증상을 나타냅니다. 이러한 [수집 관리][18]는 예산 범위 내에서 문제를 해결하는 데 필요한 가시성을 확보하도록 도와드립니다.
 
@@ -553,7 +370,7 @@ Datadog이 스팬을 수집한 후, Datadog Intelligent Retention 필터는 애�
 
 ## 트레이스 수집 활성화/비활성화
 
-Datadog Lambda 확장 프로그램을 사용한 트레이스 수집은 기본으로 활성화되어 있습니다.
+Datadog Lambda 확장을 통한 트레이스 수집은 기본적으로 활성화됩니다.
 
 Lambda  함수에서 트레이스 수집을 시작하려면 다음과 같은 설정을 적용하세요:
 
@@ -566,7 +383,7 @@ datadog-ci lambda instrument \
     # ... 함수 이름과 같은 기타 필수 인수
 ```
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 ```yaml
 custom:
@@ -619,7 +436,7 @@ datadog-ci lambda instrument \
     # ... 함수 이름과 같은 기타 필수 인수
 ```
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 ```yaml
 custom:
@@ -684,173 +501,15 @@ Lambda 함수에서 환경 변수 `DD_TRACE_ENABLED`를 `false`로 설정합니�
 
 ## 소스 코드에 오류 연결
 
-<div class="alert alert-info">본 기능은 Go, 자바(Java), 파이썬(Python), 자바스크립트(Javascript)에서 지원됩니다.</div>
+[Datadog 소스 코드 통합][26]을 사용하면 원격 측정(예: 스택 트레이스)을 Git 리포지토리에 있는 Lambda 함수의 소스 코드에 연결할 수 있습니다.
 
-[Datadog 소스 코드 통합][26]을 사용하면 텔레메트리(예: 스택 트레이스)를 GitHub의 Lambda 함수 소스 코드에 연결할 수 있습니다. 해당 기능을 활성화하려면 아래 지침을 따르세요. **참고**: 원격보다 복잡하거나 상위에 있지 않은 로컬 Git 리포지토리에서 배포해야 합니다.
+서버리스 애플리케이션에 소스 코드 통합을 설정하는 방법에 관한 지침은 [빌드 아티팩트 섹션의 Embed Git 정보][101]를 참고하세요.
 
-{{< tabs >}}
-{{% tab "Datadog CLI" %}}
+[101]: /ko/integrations/guide/source-code-integration/?tab=go#serverless
 
-`datadog-ci lambda instrument`을 `--source-code-integration=true` 로 실행하면 현재 로컬 디렉터리의 Git 메타데이터를 자동으로 전송하고 Lambda 함수에 필요한 태그를 추가합니다.
+## 프로파일링 데이터 수집
 
-**참고**: `datadog-ci`에 환경 변수 `DATADOG_API_KEY` 를 설정해야 Git 메타데이터를 업로드할 수 있습니다. 아울러, `DATADOG_API_KEY_SECRET_ARN`이 정의되어 있지 않은 경우 Lambda 함수에서 텔레메트리를 전송하도록 `DATADOG_API_KEY`가 설정되며, 이는 `DATADOG_API_KEY`보다 우선합니다.
-
-
-```sh
-# ... DATADOG_SITE와 같은 기타 필수 환경 변수
-
-# git metadata 업로드 시 필수 조건
-export DATADOG_API_KEY=<DATADOG_API_KEY>
-
-# 선택 조건이며, 정의되지 않은 경우 DATADOG_API_KEY가 사용됨
-export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
-
-datadog-ci lambda instrument \
-    --source-code-integration=true
-    # ... 함수 이름과 같은 기타 필수 인수
-```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
-
-`enableSourceCodeIntegration`를 `true`로 설정하면, Datadog 서버리스 플러그인이 자동으로 현재 로컬 디렉터리에 있는 Git 메타데이터를 전송하고 Lambda 함수에 필요한 태그를 추가합니다.
-
-**참고**: 플러그인이 Git 메타데이터를 업로드하려면 `apiKey` 파라미터를 반드시 설정해야 합니다. 아울러, `apiKeySecretArn` 가 정의되어 있지 않은 경우 Lambda 함수에서 텔레메트리를 전송하도록 `apiKey`가 설정되며, 이는 `apiKey`보다 우선합니다.
-
-```yaml
-custom:
-  datadog:
-    # ... such as the Datadog 사이트와 같은 기타 필수 파라미터
-    apiKey: <apiKey> # git metadata 업로드를 위한 필수 조건
-    apiKeySecretArn: <apiKeySecretArn> # 선택 조건이며 정의되지 않은 경우 apiKey가 사용됨
-    enableSourceCodeIntegration: true # 기본값은 true로 설정
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-다음과 같이 초기화 함수를 변경하여 gitHash 값을 CDK 스택에 전달합니다:
-
-```typescript
-async function main() {
-  // 패키지 매니저로 @datadog/datadog-ci를 추가합니다.
-  const datadogCi = require("@datadog/datadog-ci");
-  const gitHash = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
-
-  const app = new cdk.App();
-  // ExampleStack 생성자에 해시를 전달합니다.
-  new ExampleStack(app, "ExampleStack", {}, gitHash);
-}
-```
-
-스택 생성자에서 선택 `gitHash` 파라미터를 추가하고 `addGitCommitMetadata()`을 호출합니다:
-
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-1. Lambda 함수에서 환경 변수 `DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>,git.repository_url=<REPOSITORY_URL>"` 를 설정합니다.
-2. CI 파이프라인에서 [datadog-ci git-metadata 업로드][1]를 실행하여 Git 메타데이터를 업로드합니다.
-3. 선택 사항으로, 인라인 소스 코드 스니펫을 표시하려면 [GitHub 앱을 설치][2]하세요.
-
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/integrations/github/
-{{% /tab %}}
-{{< /tabs >}}
-
-## 커스텀 메트릭 제출
-
-[커스텀 메트릭 제출][27]로 커스텀 비즈니스 로직을 모니터링할 수 있습니다.
-
-## Datadog에 OpenTelemetry 데이터 전송하기
-
-1. OpenTelemetry가 [Datadog Lambda 확장][40]에 스팬을 내보내도록 명령하세요.
-
-   ```js
-   // instrument.js
-
-   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
-   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
-   const { Resource } = require('@opentelemetry/resources');
-   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
-   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
-
-   const provider = new NodeTracerProvider({
-      resource: new Resource({
-          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
-      })
-   });
-
-   provider.addSpanProcessor(
-      new SimpleSpanProcessor(
-          new OTLPTraceExporter(
-              { url: 'http://localhost:4318/v1/traces' },
-          ),
-      ),
-   );
-   provider.register();
-   ```
-2. AWS Lambda에 대한 OpenTelemetry의 계측값을 추가합니다. 해당 작업은 트레이싱 레이어를 추가하는 것과 비슷합니다.
-   ```js
-   // instrument.js
-
-   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
-   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
-   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
-
-   registerInstrumentations({
-      instrumentations: [
-          new AwsInstrumentation({
-              suppressInternalInstrumentation: true,
-          }),
-          new AwsLambdaInstrumentation({
-              disableAwsContextPropagation: true,
-          }),
-      ],
-   });
-
-   ```
-3. 런타임에 계측을 적용하세요. 예를 들어 Node.js의 경우 `NODE_OPTIONS`을 사용하세요.
-
-   ```yaml
-   # serverless.yml
-
-   functions:
-     node:
-       handler: handler.handler
-       environment:
-         NODE_OPTIONS: --require instrument
-   ```
-
-4. `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` 또는 `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 환경 변수를 사용하여 OpenTelemetry를 활성화합니다. Datadog 확장 v41 이상 버전을 추가합니다. Datadog 트레이스 레이어는 추가하지 마세요.
-
-   ```yaml
-   # serverless.yml
-
-   provider:
-     name: aws
-     region: sa-east-1
-     runtime: nodejs18.x
-     environment:
-       DD_API_KEY: ${env:DD_API_KEY}
-       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
-     layers:
-       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-   ```
-
-5. 배포.
-
-## 프로파일링 데이터 수집(공개 베타)
-
-Datadog의 [연속 프로파일러][42]는 파이썬(Python) 버전 4.62.0 및 레이어 버전 62 이하에서 베타 버전으로 사용할 수 있습니다. 해당 옵션 기능은 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하여 활성화합니다.
+Datadog의 [Continuous Profiler][42]는 Python 트레이서 버전 4.62.0 및 계층 버전 62 이하의 Preview에서 사용할 수 있습니다. 이 기능(선택 사항)을 활성화하려면 `DD_PROFILING_ENABLED` 환경 변수를 `true`로 설정하세요.
 
 연속 프로파일러는 실행 중인 모든 파이썬(Python) 코드의 CPU 및 힙의 스냅샷을 주기적으로 생성하는 스레드를 생성하는 방식으로 동작합니다. 여기에는 프로파일러 자체가 포함될 수 있습니다. 프로파일러 자체를 무시하려면 `DD_PROFILING_IGNORE_PROFILER`을 `true`으로 설정합니다.
 
@@ -870,14 +529,14 @@ Datadog 포워더(Forwarder)를 사용하는 경우 다음 [지침][31]을 따�
 Lambda 함수에서 다음 환경 변수를 설정하여 플레인 텍스트 API 키를 사용하여 이중 전송을 활성화합니다.
 
 ```bash
-# 메트릭 이중 전송 활성화
+# 메트릭에 대한 이중 전송 활성화
 DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
-# APM (트레이스) 이중 전송 활성화
+# APM (트레이스)에 대한 이중 전송 활성화
 DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
-# APM (프로파일링) 이중 전송 활성화
+# APM (프로파일링)에 대한 이중 전송 활성화
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
-# 로그 이중 전송 활성화
-DD_LOGS_CONFIG_USE_HTTP=true
+# 로그에 대한 이중 전송 활성화
+DD_LOGS_CONFIG_FORCE_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
 ```
 
@@ -886,7 +545,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 
 Datadog 확장 프로그램은 접두사가 `_SECRET_ARN`로 시작하는 모든 환경 변수에 대해 [AWS Secrets Manager][1] 값을 자동으로 검색할 수 있도록 지원합니다. 해당 기능을 사용하여 환경 변수를 Secrets Manager에 안전하게 저장하고 Datadog에 이중 전송할 수 있습니다.
 
-1. Lambda 함수에서 환경 변수`DD_LOGS_CONFIG_USE_HTTP=true`를 설정합니다.
+1. 환경 변수 `DD_LOGS_CONFIG_FORCE_USE_HTTP`를 Lambda 함수에 설정합니다.
 2. `secretsmanager:GetSecretValue` 권한을 Lambda 함수 IAM 역할 권한에 추가합니다.
 3. Secrets Manager에서 이중 전송 메트릭 환경 변수를 저장할 새 시크릿을 생성합니다. 콘텐츠는 `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` 과 유사해야 합니다.
 4. Lambda 함수의 환경 변수 `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN`를 위에서 설명한 시크릿의 ARN으로 설정합니다.
@@ -904,7 +563,7 @@ Datadog 확장 프로그램은 접두사가 `_SECRET_ARN`로 시작하는 모든
 
 Datadog 확장 프로그램은 접두사가 `_KMS_ENCRYPTED`로 시작하는 모든 환경 변수에 대해 [AWS KMS][41] 값을 자동으로 복호화 수 있도록 지원합니다. 해당 기능을 사용하여 환경 변수를 KMS에 안전하게 저장하고 Datadog에 이중 전송할 수 있습니다.
 
-1. Lambda 함수에서 환경 변수`DD_LOGS_CONFIG_USE_HTTP=true`를 설정합니다.
+1. 환경 변수 `DD_LOGS_CONFIG_FORCE_USE_HTTP=true`를 Lambda 함수에 설정합니다.
 2. `kms:GenerateDataKey` 및 `kms:Decrypt`권한을 Lambda 함수 IAM 역할 권한에 추가합니다.
 3. 이중 전송 메트릭의 경우 KMS를 사용하여 `{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` 를 암호화하고 `DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 환경 변수를 해당 값과 동일하게 설정합니다.
 4. 이중 전송 트레이스의 경우 KMS를 사용하여`{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` 를 암호화하고 `DD_APM_ADDITIONAL_KMS_ENCRYPTED` 환경 변수를 해당 값과 동일하게 설정합니다.
@@ -965,10 +624,10 @@ Datadog은 [Forwarder Lambda 함수][4] 또는 [Lambda 확장][2]을 사용하�
 6. Forwarder에서 Lambda 로그 그룹으로 자동 구독하도록 Datadog AWS 통합을 설정한 경우, 해당 리전에서 Lambda 함수를 모두 마이그레이션한 후 해당 기능을 비활성화하세요.
 
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 1. `addExtension`을 `false`으로 설정하지 않은 경우,`serverless-plugin-datadog`을 최신 버전으로 업그레이드하여 Datadog Lambda 확장 프로그램을 기본 설치합니다.
-2. 필수 파라미터 `site`, `apiKeySecretArn`를 설정합니다.
+2. 필수 파라미터를 `site` 및 `apiKeySecretArn`로 설정합니다.
 3. 기존에 Lambda 리소스 태그로 설정한 경우, `env`, `service`, `version` 파라미터를 설정합니다. 확장 기능을 사용할 때 플러그인은 `DD_ENV`와 같은 Datadog 예약 환경 변수를 통해 자동으로 설정됩니다.
 4. 논람다 리소스에서 로그를 수집하기 위해 포워더를 유지하려는 경우와 `subscribeToApiGatewayLogs`, `subscribeToHttpApiLogs` 또는 `subscribeToWebsocketLogs`이 `true`로 설정된 경우를 제외하고 `forwarderArn` 파라미터를 삭제합니다.
 5. Forwarder에서 Lambda 로그 그룹으로 자동 구독하도록 Datadog AWS 통합을 설정한 경우, 해당 리전에서 Lambda 함수를 모두 마이그레이션한 후 해당 기능을 비활성화하세요.
@@ -1018,6 +677,14 @@ Datadog 확장 프로그램은 컴파일된 바이너리이며, x86 및 arm64 �
 
 Datadog Lambda 확장 프로그램이 설치된 상태에서 로컬로 Lambda 함수의 컨테이너 이미지를 테스트하려면, 로컬 테스트 환경에서 `DD_LOCAL_TEST`을 `true`로 설정해야 합니다. 그렇지 않은 경우 확장 프로그램이 AWS 확장 API의 응답을 기다렸다가 호출을 차단합니다.
 
+## OpenTelemetry API를 사용해 AWS Lambda 계측
+
+Datadog 추적 라이브러리는 Datadog Lambda Extension을 설치할 때 포함되어 있으며, OpenTelemetry 계측 코드로 생성된 스팬과 트레이스를 허용하고, 텔레메트리를 처리하며, Datadog로 전송할 수 있습니다.
+
+예를 들어 코드가 이미 OpenTelemetry API로 계측된 상태라면 이 방법을 사용할 수 있습니다. 또 OpenTelemetry API를 사용해 벤더 중립적 코드로 계측하면서 Datadog 추적 라이브러리의 혜택을 누리고 싶을 경우에 이 방법을 사용할 수 있습니다.
+
+OpenTelemetry API로 AWS Lambda를 계측하려면 환경 변수 `DD_TRACE_OTEL_ENABLED`를 `true`로 설정하세요. 자세한 내용은 [OpenTelemetry API로 커스텀 계측][48]을 참고하세요.
+
 ## 문제 해결
 
 설치 구성에 문제가 있는 경우, 디버깅 로그를 위해 환경 변수 `DD_LOG_LEVEL`를 `debug`로 설정하세요. 추가 문제 해결 팁을 확인하려면 [서버리스 모니터링 문제 해결 지침][39]를 참조하세요.
@@ -1053,7 +720,7 @@ Datadog Lambda 확장 프로그램이 설치된 상태에서 로컬로 Lambda �
 [24]: /ko/tracing/other_telemetry/connect_logs_and_traces/
 [25]: /ko/logs/log_configuration/parsing/
 [26]: /ko/integrations/guide/source-code-integration
-[27]: /ko/serverless/custom_metrics
+[27]: /ko/serverless/aws_lambda/metrics/#submit-custom-metrics
 [28]: /ko/agent/guide/private-link/
 [29]: /ko/getting_started/site/
 [30]: /ko/agent/proxy/
@@ -1074,3 +741,4 @@ Datadog Lambda 확장 프로그램이 설치된 상태에서 로컬로 Lambda �
 [45]: https://docs.datadoghq.com/ko/tracing/trace_collection/library_config/
 [46]: https://docs.datadoghq.com/ko/tracing/glossary/#services
 [47]: /ko/logs/
+[48]: /ko/tracing/trace_collection/otel_instrumentation/

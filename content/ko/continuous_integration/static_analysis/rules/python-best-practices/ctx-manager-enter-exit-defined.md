@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: __exit__ 과 __enter__ 가 모두 정의되었는지 확인하기
 ---
 ## 메타데이터

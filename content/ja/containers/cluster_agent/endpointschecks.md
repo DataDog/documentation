@@ -10,10 +10,9 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: ドキュメント
   text: クラスターチェック
-- link: /containers/cluster_agent/troubleshooting#endpoint-checks
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: ドキュメント
   text: エンドチェックのトラブルシューティング
-kind: documentation
 title: オートディスカバリーによるエンドポイントチェック
 ---
 
@@ -21,7 +20,7 @@ title: オートディスカバリーによるエンドポイントチェック
 
 クラスターチェック機能は、Kubernetes サービスなど、負荷分散型のクラスターサービスを[自動検出][1]してチェックを実行する機能を提供します。_エンドポイントチェック_はこのメカニズムを拡張し、Kubernetes サービスによって管理される各エンドポイントを監視します。
 
-[Cluster Agent][2] は、Kubernetes サービス上の[オートディスカバリー][1]アノテーションに基づいてエンドポイントチェック構成を検出します。その後、Cluster Agent はこれらの構成をノードベースの Agent にディスパッチし、個別に実行させます。エンドポイントチェックは、監視対象の Kubernetes サービスのエンドポイントの背後にあるポッドと同じノード上で実行される Agent にディスパッチされます。このディスパッチロジックにより、Agent は、それぞれのポッドに対して既に収集したポッドおよびコンテナタグを追加することができます。
+The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
 
 ノートベースの Agent は 10 秒ごとに Cluster Agent に接続し、実行するチェックの構成を取得します。エンドポイントチェックで取得したメトリクスは、サービスタグ、[Kubernetes タグ][3]、ホストタグ、そして評価対象の IP アドレスに応じた `kube_endpoint_ip` タグを付けて送信されます。
 
@@ -80,7 +79,7 @@ kubectl get endpoints nginx -o yaml
 ## エンドポイントチェックのディスパッチを設定する
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `features.clusterChecks.enabled` 構成キーを使用して有効にします。
 ```yaml
@@ -112,7 +111,7 @@ clusterAgent:
 
 この構成では、Cluster Agent と Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "DaemonSet" %}}
 ### Cluster Agent の設定
@@ -160,7 +159,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Agent を再起動][2]して、構成の変更を適用します。
 
 [1]: /ja/agent/cluster_agent/clusterchecks/
-[2]: /ja/agent/guide/agent-commands/
+[2]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -176,8 +175,32 @@ Cluster Agent v1.18.0 からは、Kubernetes エンドポイントを対象と�
 Kubernetes サービスのエンドポイントに対して [HTTP チェック][9]を実行する場合
 
 {{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Use the `spec.override.clusterAgent.extraConfd.configDataMap` section to define your check configuration:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            advanced_ad_identifiers:
+              - kube_endpoints:
+                  name: "<ENDPOINTS_NAME>"
+                  namespace: "<ENDPOINTS_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
 {{% tab "Helm" %}}
-`clusterAgent.confd` フィールドを使用して、チェックの構成を定義します。
+Use the `clusterAgent.confd` field to define your check configuration:
 
 ```yaml
 #(...)

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Configuration de la surveillance mobile et TV
 type: multi-code-lang
 ---

@@ -1,6 +1,5 @@
 ---
 title: CD Visibility in Datadog
-kind: documentation
 further_reading:
 - link: "/continuous_delivery/search"
   tag: "Documentation"
@@ -18,8 +17,8 @@ cascade:
 <div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
-CD Visibility is in private beta. To request access, complete the form.
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" btn_hidden="false" header="Join the Preview!" >}}
+CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -33,7 +32,7 @@ CD Visibility is in private beta. To request access, complete the form.
     {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}CI Providers (GitLab, Jenkins, CircleCI, and more){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-warning">If you are using a provider that is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">fill out this form to request support</a>.</div>
+<div class="alert alert-info">If you are using a provider that is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">fill out this form to request support</a>.</div>
 
 ## Use deployment data
 
@@ -43,7 +42,7 @@ When creating a [dashboard][2] or a [notebook][3], you can use deployment data i
 
 You can export your search query to a [saved view][6] by clicking the **Export** button.
 
-{{< img src="continuous_delivery/explorer/deployment_executions.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
+{{< img src="continuous_delivery/explorer/deployment_executions_export.png" alt="Deployment execution results appearing in the CD Visibility Explorer" width="100%" >}}
 
 ## Further reading
 

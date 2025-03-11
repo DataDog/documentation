@@ -11,7 +11,7 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: Documentation
   text: En savoir plus sur le parsing
-kind: guide
+
 title: Remapper les valeurs de gravité personnalisées pour le statut officiel des
   logs
 ---

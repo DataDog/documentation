@@ -1,6 +1,6 @@
 ---
 title: Database user lacks privileges
-kind: faq
+
 ---
 
 ```text

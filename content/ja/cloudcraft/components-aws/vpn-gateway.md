@@ -15,7 +15,7 @@ VPN Gatewayコンポーネントを使用して、Amazon Web Services アーキ�
 - **Rotate**: コンポーネントを回転させ、その方向を変更します。
 - **Connections**: このゲートウェイへの VPN 接続を表示、削除、または追加します。
 
-## ヘルプ
+## API
 
 [Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 

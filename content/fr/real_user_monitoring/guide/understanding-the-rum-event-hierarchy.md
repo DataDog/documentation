@@ -6,7 +6,7 @@ further_reading:
 - link: /real_user_monitoring/
   tag: Documentation
   text: Apprendre visualiser des données RUM
-kind: guide
+
 title: Comprendre la hiérarchie des événement du RUM
 ---
 

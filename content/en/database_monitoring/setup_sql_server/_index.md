@@ -1,6 +1,5 @@
 ---
 title: Setting up SQL Server
-kind: documentation
 description: Setting up Database Monitoring on a SQL Server database
 disable_sidebar: true
 ---

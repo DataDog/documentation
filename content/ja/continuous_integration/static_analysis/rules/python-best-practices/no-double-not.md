@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 二重否定を使用しない
 ---
 ## メタデータ

@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: __bytes__ メソッドは文字列ではなくバイトを返すべきである
 ---
 ## メタデータ

@@ -27,7 +27,6 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: Documentation
   text: Créer un monitor Error Tracking
-kind: documentation
 title: Error Tracking pour les applications Web et mobiles
 ---
 

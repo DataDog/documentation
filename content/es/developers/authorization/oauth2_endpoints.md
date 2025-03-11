@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/
   tag: Documentación
   text: Más información sobre la autorización OAuth2
-kind: documentación
 title: Referencia de endpoints de autorización OAuth2
 ---
 
@@ -229,4 +228,4 @@ Si la solicitud de token de acceso o actualización es válida y está autorizad
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}

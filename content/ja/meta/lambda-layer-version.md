@@ -1,8 +1,8 @@
 ---
+outputs:
+- json
 title: Lambda Layer の最新バージョン
 url: /meta/latest-lambda-layer-version.json
-outputs:
-  - json
 ---
 
 "python": {{< latest-lambda-layer-version layer="python" >}},  

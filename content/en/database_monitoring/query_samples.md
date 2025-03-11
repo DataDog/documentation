@@ -1,6 +1,5 @@
 ---
 title: Exploring Query Samples
-kind: documentation
 description: Get information about queries currently running and find problematic outliers
 further_reading:
 - link: "/database_monitoring/"

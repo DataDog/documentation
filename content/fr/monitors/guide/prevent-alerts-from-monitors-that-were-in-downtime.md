@@ -12,7 +12,7 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentation
   text: En savoir plus sur les downtimes
-kind: guide
+
 title: Empêcher des monitors de générer des alertes pendant un downtime
 ---
 

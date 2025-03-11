@@ -1,6 +1,5 @@
 ---
 title: Docker Tag Extraction
-kind: documentation
 aliases:
 - /agent/docker/tag
 further_reading:
@@ -65,7 +64,7 @@ Starting with Agent v6.0+, the Agent can collect labels for a given container an
 To extract a given container label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
 ```bash
-DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>":"<TAG_KEY>"}'
 ```
 
 For example, you could set up:

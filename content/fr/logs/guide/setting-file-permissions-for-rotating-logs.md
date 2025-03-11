@@ -11,7 +11,7 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: Documentation
   text: En savoir plus sur le parsing
-kind: guide
+
 title: Définir les autorisations de fichier pour la rotation des logs (Linux)
 ---
 

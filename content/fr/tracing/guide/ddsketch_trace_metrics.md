@@ -11,7 +11,7 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: Documentation
   text: En savoir plus sur les métriques de trace
-kind: guide
+
 title: Métriques basées sur DDSketch dans APM
 ---
 

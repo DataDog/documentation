@@ -1,22 +1,21 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
-title: チュートリアル - AWS ECS with Fargate 上の Java アプリケーションのトレースを有効にする
+title: チュートリアル - Amazon ECS with Fargate 上の Java アプリケーションのトレースを有効にする
 ---
 
 ## 概要
@@ -35,8 +34,8 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 - Git
 - Docker
 - Terraform
-- AWS ECS
-- イメージをホスティングするための AWS ECR リポジトリ
+- Amazon ECS
+- イメージをホスティングするための Amazon ECR リポジトリ
 - `AdministratorAccess` 権限を持つ AWS IAM ユーザー。アクセスキーとシークレットアクセスキーを使用して、ローカルの資格情報ファイルにプロファイルを追加する必要があります。詳しくは、[AWS の資格情報ファイルと資格情報プロファイルの使用][20]を参照してください。
 
 ## サンプルの Java アプリケーションをインストールする
@@ -51,11 +50,11 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 `notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
 
-サンプルアプリケーションはシンプルなマルチサービスの Java アプリケーションで、2 つの API (`notes` サービスと `calendar` サービス) を備えています。`notes` サービスには、メモリ内 H2 データベースに保存されたノートに対する `GET`、`POST`、`PUT`、`DELETE` のエンドポイントがあります。`calendar` サービスはリクエストを受け、ノートで使用するランダムな日付を返します。両方のアプリケーションには、それぞれ関連する Docker イメージがあり、AWS ECS に別々のサービスとして、それぞれ独自のタスクとそれぞれのコンテナを持ってデプロイします。ECS は、ビルド後にイメージを公開するアプリケーションイメージのリポジトリである ECR からイメージを取得します。
+サンプルアプリケーションはシンプルなマルチサービスの Java アプリケーションで、2 つの API (`notes` サービスと `calendar` サービス) を備えています。`notes` サービスには、メモリ内 H2 データベースに保存されたノートに対する `GET`、`POST`、`PUT`、`DELETE` のエンドポイントがあります。`calendar` サービスはリクエストを受け、ノートで使用するランダムな日付を返します。両方のアプリケーションには、それぞれ関連する Docker イメージがあり、Amazon ECS に別々のサービスとして、それぞれ独自のタスクとそれぞれのコンテナを持ってデプロイします。ECS は、ビルド後にイメージを公開するアプリケーションイメージのリポジトリである ECR からイメージを取得します。
 
 ### ECS の初期設定
 
-このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、AWS ECR リポジトリの追加など、いくつかの初期構成が必要です。
+このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、Amazon ECR リポジトリの追加など、いくつかの初期構成が必要です。
 
 `terraform/Fargate/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
 
@@ -107,7 +106,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 アプリケーションを起動し、トレースせずにいくつかのリクエストを送信します。アプリケーションがどのように動作するかを確認した後、トレーシングライブラリと Datadog Agent を使用してインスツルメントを行います。
 
-まずは、Terraform スクリプトを使用して AWS ECS にデプロイします。
+まずは、Terraform スクリプトを使用して Amazon ECS にデプロイします。
 
 1. `terraform/Fargate/Uninstrumented` ディレクトリで、以下のコマンドを実行します。
 
@@ -157,7 +156,7 @@ Java アプリケーションが動作するようになったので、トレー
 1. dockerfile を編集して、アプリケーションがトレースを生成するために必要な Java トレーシングパッケージを追加します。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
 2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -169,7 +168,7 @@ Java アプリケーションが動作するようになったので、トレー
    もう一つのサービスである `calendar` でこのステップを繰り返します。`calendar/dockerfile.calendar.maven` を開き、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
 
    ```
-   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"] 
+   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
    これで、どちらのサービスも自動インスツルメンテーションが行われるようになります。
@@ -211,7 +210,7 @@ Java アプリケーションが動作するようになったので、トレー
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -338,7 +337,7 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 アプリケーションを再デプロイし、API を実行します。
 
-1. [先ほどと同じ terraform コマンド](#deploy-the-application)を使って、AWS ECS にアプリケーションを再デプロイしてください。ただし、インスツルメンテーション版のコンフィギュレーションファイルを使います。`terraform/Fargate/Instrumented` ディレクトリから、以下のコマンドを実行します。
+1. [先ほどと同じ terraform コマンド](#deploy-the-application)を使って、Amazon ECS にアプリケーションを再デプロイしてください。ただし、インスツルメンテーション版のコンフィギュレーションファイルを使います。`terraform/Fargate/Instrumented` ディレクトリから、以下のコマンドを実行します。
 
    ```sh
    terraform init
@@ -374,9 +373,9 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
 4. しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
 
-   `h2` はこのチュートリアルのために埋め込まれたインメモリデータベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
+   `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
 もし、数分待ってもトレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
 
@@ -411,7 +410,7 @@ terraform destroy
 
 もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -431,4 +430,4 @@ terraform destroy
 [15]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
 [18]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#create-and-provide-a-secret-that-contains-your-datadog-api-and-app-keys
-[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-profiles.html

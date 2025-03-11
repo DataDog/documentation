@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Admission Controller
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
@@ -78,9 +77,9 @@ Refer to the [Kubernetes Distributions][17] for more configuration details regar
 
 #### OpenShift
 
-OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods. 
+OpenShift has `SecurityContextConstraints` (SCCs) that are required to deploy pods with extra permissions, such as a `volume` with a `hostPath`. Datadog components are deployed with SCCs to allow activity specific to Datadog pods, but Datadog does not create SCCs for other pods. The Admission Controller might add the socket based configuration to your application pods, causing them to fail to deploy.
 
-If you are using OpenShift, use `hostip` mode. The following configuration enables `hostip` mode:
+If you are using OpenShift, use `hostip` mode. The following configuration enables `hostip` mode by disabling the socket options:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -97,7 +96,14 @@ spec:
         enabled: true
       unixDomainSocketConfig:
         enabled: false
+    dogstatsd:
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
 ```
+Alternatively, you can set `features.admissionController.agentCommunicationMode` to `hostip` or `service` directly.
+
 {{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
@@ -106,10 +112,11 @@ datadog:
     portEnabled: true
     socketEnabled: false
 ```
+Alternatively, you can set `clusterAgent.admissionController.configMode` to `hostip` or `service` directly.
 {{% /tab %}}
 {{< /tabs >}}
 
-Refer to the [Kubernetes Distributions][18] for more configuration details regarding Autopilot.
+Refer to [Kubernetes Distributions][18] for more configuration details regarding OpenShift.
 
 ## View Admission Controller status
 
@@ -355,6 +362,8 @@ For more information, see [Adding firewall rules for specific use cases][15] in 
 
 If you are using Rancher with an EKS cluster or a private GKE cluster, additional configuration is required. For more information, see [Rancher Webhook - Common Issues][16] in the Rancher documentation.
 
+**Note**: Since Datadog's Admission Controller's webhook operates similarly to the Rancher webhook, Datadog needs access to port `8000` instead of Rancher's `9443`.
+
 ##### Rancher and EKS
 To use Rancher in an EKS cluster, deploy the Cluster Agent pod with the following configuration:
 
@@ -386,7 +395,7 @@ clusterAgent:
 You must also add a security group inbound rule, as described in the [Amazon EKS](#amazon-elastic-kubernetes-service-eks) section on this page.
 
 ##### Rancher and GKE
-To use Rancher in a private GKE cluster, edit your firewall rules to allow inbound access over TCP on port `8000` and port `9443`. See the [GKE](#google-kubernetes-engine-gke) section on this page.
+To use Rancher in a private GKE cluster, edit your firewall rules to allow inbound access over TCP on port `8000`. See the [GKE](#google-kubernetes-engine-gke) section on this page.
 
 ## Further Reading
 

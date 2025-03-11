@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: 블로그
   text: 쿠버네티스 워크로드 규모 효율화를 위한 실용적인 팁
-kind: 설명서
 title: 프로세스 리텐션 증가
 ---
 
@@ -31,9 +30,7 @@ title: 프로세스 리텐션 증가
 
 ## 프로세스 기반 메트릭 생성
 
-실시간 프로세스 페이지의 쿼리에서 직접 새 프로세스 기반 메트릭을 생성하거나 _[리텐션 증가][1]_ 탭에서 **메트릭 생성** 버튼을 선택하여 새 메트릭을 생성할 수 있습니다.
-
-{{< img src="infrastructure/process/process2metrics_create_LP_2.png" alt="프로세스 기반 메트릭 생성" style="width:80%;">}}
+[**Live Process** 페이지][2] 또는 [**Manage Metric** 탭][1]에서 **+ New Metric**을 클릭하여 바로 새 처리 기반 메트릭을 생성할 수 있습니다.
 
 ### 새 프로세스 기반 메트릭 추가
 

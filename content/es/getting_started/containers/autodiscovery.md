@@ -22,7 +22,6 @@ further_reading:
 - link: /agent/configuration/secrets-management/
   tag: Documentación
   text: Gestión de secretos
-kind: documentación
 title: Autodiscovery básico del Agent
 ---
 

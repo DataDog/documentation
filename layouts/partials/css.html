@@ -1,5 +1,5 @@
 {{- $options := (dict "enableSourceMap" true) -}}
-{{- $isLocalServer := .Site.IsServer -}}
+{{- $isLocalServer := hugo.IsServer -}}
 {{- $inputStyleFile := "styles/style.scss" -}}
 {{- $outputStyles := "" -}}
 
@@ -12,4 +12,4 @@
     {{ end }}
 {{- end -}}
 
-<link rel="stylesheet" integrity="{{ $outputStyles.Data.Integrity }}" href="{{- $outputStyles.Permalink -}}">
+<link rel="stylesheet" integrity="{{ $outputStyles.Data.Integrity }}" href="{{- $outputStyles.Permalink -}}" crossorigin="anonymous">

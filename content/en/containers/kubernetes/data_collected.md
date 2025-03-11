@@ -1,6 +1,5 @@
 ---
 title: Kubernetes Data Collected
-kind: documentation
 aliases:
  - /agent/kubernetes/metrics
  - /agent/kubernetes/data_collected
@@ -25,9 +24,9 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. 
+This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. The set of metrics collected may vary depending on the version of Kubernetes in use.
 
-The set of metrics collected may vary depending on the version of Kubernetes in use.
+**Note**: For Windows containers, see [Limited metrics for Windows deployments][7].
 
 ## Metrics
 
@@ -179,3 +178,4 @@ For more information, see the documentation for the [Kubernetes state metrics co
 [4]: /integrations/kube_metrics_server
 [5]: /integrations/kube_scheduler
 [6]: /integrations/kubernetes_state_core/
+[7]: /agent/troubleshooting/windows_containers/#limited-metrics-for-windows-deployments

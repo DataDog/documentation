@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 further_reading:
     - link: '/product_analytics/session_replay/mobile'
@@ -20,4 +19,4 @@ further_reading:
       text: Session Replay
 ---
 
-{{< include-markdown "content/en/real_user_monitoring/session_replay/mobile/privacy_options.md" >}}
+{{< include-markdown "real_user_monitoring/session_replay/mobile/privacy_options" >}}

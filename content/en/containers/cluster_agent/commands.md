@@ -1,6 +1,5 @@
 ---
 title: Cluster Agent Commands and Options
-kind: documentation
 aliases:
 - /agent/cluster_agent/commands
 further_reading:

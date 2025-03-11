@@ -6,7 +6,7 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentation
   text: Créer un test Browser
-kind: guide
+
 title: Ajouter manuellement l'extension Chrome de test Browser aux boutiques d'applications
   internes
 ---

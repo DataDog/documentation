@@ -31,7 +31,7 @@ integration_id: bonsai
 integration_title: Bonsai
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: bonsai
 public_title: Bonsai

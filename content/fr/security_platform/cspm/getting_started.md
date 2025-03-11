@@ -9,7 +9,6 @@ further_reading:
 - link: security_platform/cspm/frameworks_and_benchmarks
   tag: Documentation
   text: En savoir plus sur les frameworks et les benchmarks de l'industrie
-kind: documentation
 title: Débuter avec CSPM
 ---
 

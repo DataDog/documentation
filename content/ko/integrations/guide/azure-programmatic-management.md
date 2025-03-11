@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: 설명서
   text: Azure 통합
-kind: 지침
 title: Azure 통합 프로그래밍 관리 지침
 ---
 

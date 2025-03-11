@@ -1,6 +1,6 @@
 ---
 title: Logs Show Info Status For Warnings Or Errors
-kind: guide
+
 aliases:
   - /logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors
 further_reading:
@@ -16,6 +16,8 @@ further_reading:
 - link: "/logs/faq/how-to-investigate-a-log-parsing-issue/"
   tag: "Documentation"
   text: "Learn how to investigate a log parsing issue"
+algolia:
+  tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
 
 ## Overview

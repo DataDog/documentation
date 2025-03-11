@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/session-replay-datadog/
   tag: 블로그
   text: Datadog 세션 재생을 사용하여 실제 사용자 이동 경로 보기
-kind: 가이드
 title: RUM 브라우저 SDK 업그레이드
 ---
 

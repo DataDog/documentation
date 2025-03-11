@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: ブログ
   text: Datadog イベントの改善によるトラブルシューティングの迅速化
-kind: ガイド
 title: 新イベント機能への移行
 ---
 
@@ -46,7 +45,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ### イベント分析
 
-{{< img src="service_management/events/events-analytics.png" alt="Events Analytics の表示を 'source:cloudtrail' でフィルターしたもの" >}}
+{{< img src="service_management/events/events-analytics.png" alt="'source:cloudtrail' でフィルタリングされたイベントアナリティクスの表示" >}}
 
 エクスプローラーでのイベントの表示や検索に加え、時系列、トップリスト、テーブルとしてグラフ化し、指定したクエリのイベント数をグループ化することができるようになりました。詳しくは、[イベントアナリティクス][2]をご覧ください。
 
@@ -57,7 +56,7 @@ Datadog のレガシーイベントストリームとイベントモニターは
 
 ### ダッシュボードでイベントをグラフ化する
 
-{{< img src="service_management/events/graph-events.png" alt="Events Analytics">}}
+{{< img src="service_management/events/graph-events.png" alt="イベントアナリティクス" >}}
 
 ダッシュボード内で、指定したクエリのイベントを、時系列グラフ、クエリ値、トップリスト、テーブルなどでグラフ化できるようになりました。
 
@@ -190,14 +189,14 @@ GitHub または Chef からのイベントを表示する
 : 新しい構文 </br>
 `events("service:datadog-agent").rollup("cardinality", "datacenter").by("service").last("15m") < 1`
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/service_management/events/explorer
-[2]: /ja/service_management/events/explorer/#event-analytics
-[3]: /ja/service_management/events/#generate-custom-metrics-from-events
+[2]: /ja/service_management/events/explorer/analytics
+[3]: /ja/service_management/events/usage/#custom-metrics
 [4]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [5]: /ja/service_management/events/guides/new_events_sources/
 [6]: /ja/help/

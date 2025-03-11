@@ -4,7 +4,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: 설명서
   text: Azure 통합
-kind: guide
+
 title: Azure 통합 아키텍처 및 설정
 ---
 

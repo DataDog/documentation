@@ -1,56 +1,39 @@
-{{ $dot := . }}
+{{ $root := . }}
+{{ $saas_cost_integrations := slice
+    (dict "name" "databricks" "href" "/cloud_cost_management/saas_costs/?tab=databricks#configure-your-saas-accounts" "src" "integrations_logos/databricks_small.svg")
+    (dict "name" "confluent cloud" "href" "/cloud_cost_management/saas_costs/?tab=confluentcloud#configure-your-saas-accounts" "src" "integrations_logos/confluent-cloud_small.svg")
+    (dict "name" "mongodb" "href" "/cloud_cost_management/saas_costs/?tab=mongodb#configure-your-saas-accounts" "src" "integrations_logos/mongodb_small.svg")
+    (dict "name" "snowflake" "href" "/cloud_cost_management/saas_costs/?tab=snowflake#configure-your-saas-accounts" "src" "integrations_logos/snowflake_small.svg")
+    (dict "name" "elastic cloud" "href" "/cloud_cost_management/saas_costs/?tab=elasticcloud#configure-your-saas-accounts" "src" "integrations_logos/elastic-cloud_small.svg")
+    (dict "name" "openai" "href" "/cloud_cost_management/saas_costs/?tab=openai#configure-your-saas-accounts" "src" "integrations_logos/openai_small.svg")
+    (dict "name" "fastly" "href" "/cloud_cost_management/saas_costs/?tab=fastly#configure-your-saas-accounts" "src" "integrations_logos/fastly_small.svg")
+    (dict "name" "twilio" "href" "/cloud_cost_management/saas_costs/?tab=twilio#configure-your-saas-accounts" "src" "integrations_logos/twilio_small.svg")
+}}
+
 <div class="saas-cost-integrations">
   <div class="container cards-dd">
-    <div class="row row-cols-7 g-2 g-xl-3 justify-content-center">
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
+      {{ range first 4 $saas_cost_integrations }}
       <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=databricks#setup">
+        <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/databricks_small.svg" "class" "img-fluid" "alt" "databricks" "width" "150") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
           </div>
         </a>
       </div>
+      {{ end }}
+    </div>
+    <br>
+    <div class="row row-cols-4 g-2 g-xl-3 justify-content-center">
+      {{ range (last 4 $saas_cost_integrations) }}
       <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=confluentcloud#setup">
+        <a class="card h-100" href="{{ .href }}">
           <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/confluent-cloud_small.svg" "class" "img-fluid" "alt" "confluent cloud" "width" "150") }}
+            {{ partial "img.html" (dict "root" $root "src" .src "class" "img-fluid" "alt" .name "width" "150") }}
           </div>
         </a>
       </div>
-      <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=mongodb#setup">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/mongodb_small.svg" "class" "img-fluid" "alt" "mongodb" "width" "150") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=snowflake#setup">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/snowflake_small.svg" "class" "img-fluid" "alt" "snowflake" "width" "150") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=openai#setup">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/openai_small.svg" "class" "img-fluid" "alt" "openai" "width" "150") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=fastly#setup">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/fastly_small.svg" "class" "img-fluid" "alt" "fastly" "width" "150") }}
-          </div>
-        </a>
-      </div>
-      <div class="col">
-        <a class="card h-100" href="/cloud_cost_management/saas_costs/?tab=twilio#setup">
-          <div class="card-body text-center py-2 px-1">
-            {{ partial "img.html" (dict "root" . "src" "integrations_logos/twilio_small.svg" "class" "img-fluid" "alt" "twilio" "width" "150") }}
-          </div>
-        </a>
-      </div>
+      {{ end }}
     </div>
   </div>
 </div>

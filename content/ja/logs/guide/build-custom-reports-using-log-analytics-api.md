@@ -1,17 +1,18 @@
 ---
-title: ログ分析 API を使用したカスタムレポートの構築
-kind: ガイド
 further_reading:
-  - link: /logs/explorer/analytics/?tab=timeseries#overview
-    tag: Documentation
-    text: ログ分析に関する詳細
-  - link: /api/v2/logs/#aggregate-events
-    tag: Documentation
-    text: ログ分析 API の構文
-  - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
-    tag: Documentation
-    text: ページ区切りで複数のログを収集する
+- link: /logs/explorer/analytics/?tab=timeseries#overview
+  tag: Documentation
+  text: ログ分析に関する詳細
+- link: /api/v2/logs/#aggregate-events
+  tag: Documentation
+  text: ログ分析 API の構文
+- link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
+  tag: Documentation
+  text: ページ区切りで複数のログを収集する
+title: ログ分析 API を使用したカスタムレポートの構築
 ---
+
+
 ## 概要
 
 [ログ分析 API][1] を使用すると、ビジネスや他のサービスの情報とログデータを併せたチームのカスタムレポートおよびダッシュボードをすばやく構築できます。
@@ -26,13 +27,9 @@ further_reading:
 
 ## 前提条件
 
-本ガイドは API の使用手順を説明するため、管理者ユーザーからの API キーとアプリケーションキーが必要となります。これらは [Datadog アカウントの API キーページ][2]にあります。
+- ログ分析 API の使用には、[API キー][2]と[アプリケーションキー][3]が必要です。アプリケーションキーを作成したユーザーは、データにアクセスするための適切な権限を所有する必要があります。以下の例を使用する場合は、`<DATADOG_API_KEY>` および `<DATADOG_APP_KEY>` を、それぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えます。
 
-この記事をとおして、`<Datadog_API_キー >` および `<Datadog_アプリケーションキー >` はそれぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えて進めてください。
-
-また、本ガイドでは `CURL` に対応するターミナルであることを前提としています。
-
-**注:** Datadog EU サイトの場合、https://api.datadoghq.eu/api/  をエンドポイントとして使用してください。
+- また、本ガイドでは `curl` に対応するターミナルであることを前提としています。
 
 ## 例
 
@@ -868,4 +865,5 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/api/v2/logs/
-[2]: https://docs.datadoghq.com/ja/api/v1/authentication/
+[2]: /ja/account_management/api-app-keys/#api-keys
+[3]: /ja/account_management/api-app-keys/#application-keys

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/connection-issues-with-the-sql-server-integration
-kind: 지침
 title: SQL 서버 통합 연결 문제
 ---
 

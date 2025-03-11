@@ -13,7 +13,6 @@ further_reading:
 - link: logs/explorer/visualize
   tag: Documentación
   text: Crear visualizaciones a partir de logs
-kind: documentación
 title: Exportar logs
 ---
 

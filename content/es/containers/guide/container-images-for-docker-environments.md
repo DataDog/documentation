@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/cluster_agent/
   tag: Documentación
   text: Empezando con el Cluster Agent
-kind: documentation
 title: Imágenes de contenedor para entornos de Docker
 ---
 

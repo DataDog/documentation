@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
 ---
 
@@ -30,7 +29,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 * 手動で作成する。_（ステップ 4.、5.）_
 * Analytics クエリをエクスポートする。_（ステップ 7.）_
 
-1. **[サービスカタログ][1]**を開き、`web-store` サービスを選択します。
+1. **[サービスカタログ][1]を開き**、`web-store` サービスを選択します。
 
 2. **Total Requests グラフを見つけ**、右上の `export` ボタンをクリックして `Export to Dashboard` を選択します。**`New Timeboard` をクリックします**。
 

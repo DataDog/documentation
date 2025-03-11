@@ -1,6 +1,5 @@
 ---
 title: PHP OpenTracing Instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/php
 - /tracing/trace_collection/open_standards/php

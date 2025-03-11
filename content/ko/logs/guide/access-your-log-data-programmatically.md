@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/search_syntax/
   tag: 설명서
   text: 로그 검색 API용 구문에 대해 더 알아보기
-kind: 지침
 title: 로그 검색 API를 활용하여 로그 데이터에 프로그래밍으로 액세스하기
 ---
 
@@ -18,15 +17,15 @@ title: 로그 검색 API를 활용하여 로그 데이터에 프로그래밍으�
 
 [로그 검색 API ][1]을 사용하여 프로그래밍으로 로그 데이터에 액세스하고 쿼리를 실행합니다.
 
-본 지침에서는 다음 예시를 설명합니다.
+본 지침에서는 다음 예시를 살펴봅니다.
 
 * [기본 검색](#basic-search)
 * [패싯 또는 타임스탬프로 정렬](#sort-by-facet-or-timestamp)
 * [검색 결과 수 제한](#limit-the-number-of-results-retrieved)
 * [시간 설정](#time-settings)
-* [페이지 매김](#pagination)
+* [페이지 매김](#페이지 매김)
 
-## 전제 조건
+## 사전 필수 조건
 
 - 로그 검색 API를 사용하려면 [API 키][2]와 [애플리케이션 키][3]가 있어야 합니다. 애플리케이션 키를 생성한 사용자는 데이터에 접근할 수 있는 적절한 권한이 있어야 합니다. 아래 예시를 사용할 때 `<DATADOG_API_KEY>`와 `<DATADOG_APP_KEY>`를 Datadog API 키와 Datadog 애플리케이션 키로 각각 대체하세요.
 
@@ -40,7 +39,7 @@ title: 로그 검색 API를 활용하여 로그 데이터에 프로그래밍으�
 
 `from`은 `start time`, `to`은 로그 데이터에 대한 `end time` 을 나타냅니다. `query`은 검색 쿼리를 반드시 실행해야 함을 의미합니다.
 
-**API 불러오기:**
+**API 호출:**
 
 ```bash
 
@@ -144,7 +143,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 다음 API 호출을 사용하여 검색한 로그 이벤트를 패싯(예: `pageViews`)에 따라 오름차순으로 정렬합니다. 또한, 패싯에 `@`을 포함합니다. 내림차순으로 정렬하려면 `-` hyphen in front of the facet name such as `-@pageViews`를 사용합니다. 정렬 순서 기본값은 타임스탬프별 내림차순입니다.
 
-**API 불러오기:**
+**API 호출:**
 
 ```bash
 
@@ -247,7 +246,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 다음 API 호출로 검색한 로그 이벤트는 `timestamp` 값에 따라 오름차순으로 정렬됩니다. 기본값은 내림차순 정렬입니다.
 
-**API 불러오기:**
+**API 호출:**
 
 ```bash
 

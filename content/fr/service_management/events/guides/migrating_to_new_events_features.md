@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-events/
   tag: Blog
   text: Dépannage plus rapide grâce aux événements Datadog améliorés
-kind: guide
+
 title: Migration vers les nouvelles fonctionnalités dédiées aux événements
 ---
 

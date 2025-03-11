@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications du monitor
-kind: guide
+
 title: Comment mettre à jour un monitor de détection des anomalies pour quʼil prenne
   en compte le fuseau horaire
 ---

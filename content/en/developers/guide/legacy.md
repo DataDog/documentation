@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Create an Agent check for Datadog Agent 5
 description: Learn how to create an Agent check for Datadog Agent 5.
 aliases:

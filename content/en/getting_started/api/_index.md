@@ -1,6 +1,5 @@
 ---
 title: Using Postman with Datadog APIs
-kind: documentation
 aliases:
     - /developers/faq/using-postman-with-datadog-apis
     - /getting_started/using-postman-with-datadog-apis
@@ -48,7 +47,7 @@ data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434
 
 **Note**: Configure the **collection variables** of the Datadog API collection with your API and application key values.
 
-### Postman environment setup
+### Postman collection setup
 
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
 

@@ -4,31 +4,28 @@ description: Learn about the Error Tracking monitor type.
 aliases :
   - /monitors/create/types/error_tracking/
 further_reading:
-- link: "/real_user_monitoring/error_tracking/"
+- link: "/error_tracking/issue_states/"
   tag: "Documentation"
-  text: "Learn about Error Tracking for Web and Mobile Applications"
-- link: "/tracing/error_tracking/"
+  text: "Learn about Error Tracking states and how they impact monitors"
+- link: "/error_tracking/"
   tag: "Documentation"
-  text: "Learn about Error Tracking for Backend Services"
-- link: "/logs/error_tracking/"
-  tag: "Documentation"
-  text: "Learn about Error Tracking for Logs"
+  text: "Learn about Error Tracking for Web, Mobile, and Backend"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Check your monitor status"
 ---
 
 ## Overview
 
-Datadog Error Tracking automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
+Datadog [Error Tracking][1] automatically groups all your errors into issues across your web, mobile, and backend applications. Viewing errors grouped into issues helps you prioritize and find the problems that are most impactful, making it easier to minimize service downtimes and reduce user frustration.
 
-With [Real User Monitoring][1], [APM][2], or [Logs][6] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs starts, when it has a high impact, and when it starts regressing.
+With Error Tracking enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs is new, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
 
@@ -42,29 +39,26 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 | Alerting&nbsp;condition     | Description    | 
 | ---  | ----------- |
-|Count| Alert on issues with a high number of errors. For example, alert for your service whenever more than 500 occurrences of your error happen. |
-|New Issue| Triggers when an issue occurs for the first time. You have the option to be notified if a regression occurs, and set a threshold to reduce alerting fatigue.|
+|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
+|New Issue| Alert when an issue occurs for the first time or a regression occurs. For example, alert for your service whenever more than 2 users are impacted by a new error. |
 
 ### Define the search query
 
 {{< tabs >}}
-{{% tab "Count" %}}
+{{% tab "High Impact" %}}
+High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
 
-1. Select **RUM Events**, **Traces**, or **Logs** from the dropdown menu and choose what metric you want to monitor: a count, facet, or measure.
-   - For error occurrences, monitor over an overall count based on the issue ID.
-   - For impacted users, monitor over a unique count of user emails based on the issue ID or over a measure.
-   - For impacted sessions, monitor over a unique count of session IDs based on the issue ID.
-   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+1. Build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
-   There are three quickfilter options to access the most frequently used facets:
+    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
+    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
+    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
 
-   - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
-   - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
-   - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
 
-   If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
+    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above` or `above or equal to`.
 
-2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues' error occurrences.
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
 
 <div class="alert alert-info"><strong>Note</strong>: Count monitors for APM can only be created based on spans retained by <a href="/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter/">custom retention filters</a> (not the intelligent retention filter).</div>
@@ -73,22 +67,27 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
 
-[1]: /real_user_monitoring/explorer/search/
-[2]: /monitors/configuration/#alert-grouping/
-[3]: /tracing/trace_explorer/?tab=listview#filtering
-[4]: /logs/explorer/search/
+[1]: /error_tracking/issue_states
+[2]: /error_tracking/explorer
 {{% /tab %}}
 
 {{% tab "New Issue" %}}
 
-1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
+New monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors. 
 
-   The list of issues on top has a separate time frame selector. It can be used to find which issues would be considered new in this time frame.
-2. Select **RUM Events**, **Traces**, or **Logs** and choose to monitor over a count or [measure][1].
-   - Monitor the count of occurrences for a specific issue ID.
-   - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Construct a search query using the same logic as a [RUM Explorer search][2], [APM Explorer search][3], or [Log Explorer search][5] for the issues' error occurrences.
-4. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][4].
+
+1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+
+    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
+    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
+    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+
+    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
+
+    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts over the count of unique value of the facet.
+
+3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][3].
 
 ### Set alert conditions
 
@@ -98,11 +97,9 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 - Set the alerting threshold > `<NUMBER>`.
 - Set the warning threshold > `<NUMBER>`.
 
-[1]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[2]: /real_user_monitoring/explorer/search/
-[3]: /tracing/trace_explorer/?tab=listview#filtering
-[4]: /monitors/configuration/#alert-grouping/
-[5]: /logs/explorer/search/
+[1]: /error_tracking/issue_states
+[2]: /error_tracking/explorer
+[3]: /monitors/configuration/#alert-grouping/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -114,15 +111,50 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
+In addition to [matching attribute variables][7], the following Error Tracking specific variables are available
+for alert message notifications:
+
+* `{{issue.attributes.error.type}}`
+* `{{issue.attributes.error.message}}`
+* `{{issue.attributes.error.stack}}`
+* `{{issue.attributes.error.file}}`
+* `{{issue.attributes.error.is_crash}}`
+* `{{issue.attributes.error.category}}`
+* `{{issue.attributes.error.handling}}`
+
 For more information about the **Configure notifications and automations** section, see [Notifications][5].
+
+
+### Muting monitors
+Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+
+**Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
+
+## Troubleshooting
+
+### New Issue monitors do not take into account issue age
+`issue.age` and `issue.regression.age` are not added by default because they can cause missed alerts. For instance, if an issue first appears in `env:staging` and then a week later appears in `env:prod` for the first time, the issue would be considered a week old and wouldn't trigger an alert in `env:prod` for the first time.
+
+As a result, Datadog does not recommend using `issue.age` and `issue.regression.age`. However, If state-based monitor behavior is not suitable for you, these filters can still be used if manually specified.
+
+**Note**: If you plan to use `issue.age` and `issue.regression.age` in your monitor, this filter key is not consistent across products. For example, it could be `@issue.age` or `issue.age`.
+
+### New Issue monitors are generating too much noise
+New Issue monitors trigger alerts on issues marked **For Review** that meet your alerting criteria. If issues are not properly triaged (marked as **Reviewed**, **Ignored**, or **Resolved**), a New Issue monitor may trigger more than once for the same issue if the issue fluctuates between OK and ALERT states.
+
+If your monitors are generating too much noise, consider the following adjustments:
+- **Triage your alerts**: Set issues to **Reviewed**, **Ignored**, or **Resolved** when appropriate
+- **Expand the evaluation time window**: The default evaluation window is 1 day. If errors occur infrequently (for example, every other day), the monitor may switch between OK and ALERT states. Expanding the window helps prevent re-triggering and keeps the monitor in the ALERT state.
+- **Increase the alerting threshold**: The default threshold is set to `0`, meaning alerts fire on the first occurrence of a new issue. To reduce noise from one-off or sporadic errors, increase the threshold to alert only after multiple occurrences of an error
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/
-[2]: /tracing/
+[1]: /error_tracking/
+[2]: /error_tracking/issue_states/
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
 [6]: /logs/
+[7]: /monitors/notify/variables/#matching-attributetag-variables

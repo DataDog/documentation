@@ -10,7 +10,6 @@ further_reading:
 - link: https://github.com/DataDog/apps/blob/master/docs/en/programming-model.md
   tag: GitHub
   text: Modelo de programación
-kind: documentation
 title: Extensiones de interfaz de usuario de Datadog
 ---
 ## ¿Qué es una extensión de la interfaz de usuario?

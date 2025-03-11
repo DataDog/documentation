@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted Oracle
-kind: documentation
 description: Install and configure Database Monitoring for Self-Hosted Oracle
 further_reading:
 - link: "/integrations/oracle/"
@@ -88,6 +87,9 @@ Log on as `sysdba`, and grant the following permissions:
 
 {{< /tabs >}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Create a view
 
 Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
@@ -126,7 +128,7 @@ instances:
   - server: '<HOSTNAME_1>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -134,7 +136,7 @@ instances:
   - server: '<HOSTNAME_2>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'

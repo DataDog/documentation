@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 演算子 -- と ++ を使用しない
 ---
 ## メタデータ

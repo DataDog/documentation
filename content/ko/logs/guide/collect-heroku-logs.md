@@ -1,5 +1,4 @@
 ---
-kind: 지침
 title: 헤로쿠(Heroku) 로그 수집
 ---
 

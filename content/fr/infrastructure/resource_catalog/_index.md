@@ -15,7 +15,6 @@ further_reading:
   text: Contrôler les ressources de votre infrastructure avec le Resource Catalog
     Datadog
 is_beta: true
-kind: documentation
 title: Resource Catalog Datadog
 ---
 

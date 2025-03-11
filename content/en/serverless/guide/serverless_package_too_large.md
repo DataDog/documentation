@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Serverless Package Too Large Errors
-kind: documentation
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'

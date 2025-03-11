@@ -1,6 +1,5 @@
 ---
 title: Correlate Logs and Traces
-kind: documentation
 type: multi-code-lang
 description: 'Connect your logs and traces to correlate them in Datadog.'
 aliases:
@@ -10,7 +9,7 @@ algolia:
   tags: ["logs and traces"]
 ---
 
-{{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="Logs in Traces" style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Logs in Traces" style="width:100%;">}}
 
 The correlation between Datadog APM and Datadog Log Management is improved by the injection of trace IDs, span IDs, `env`, `service`, and `version` as attributes in your logs. With these fields you can find the exact logs associated with a specific service and version, or all logs correlated to an observed [trace][1].
 

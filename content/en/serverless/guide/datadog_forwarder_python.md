@@ -1,6 +1,6 @@
 ---
 title: Instrumenting Python Serverless Applications Using the Datadog Forwarder
-kind: guide
+
 ---
 ## Overview
 

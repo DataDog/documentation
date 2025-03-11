@@ -1,6 +1,5 @@
 ---
 title: Search Syntax
-kind: documentation
 description: Learn how to create a search query in the Synthetic Monitoring & Testing Results Explorer.
 aliases:
   - /synthetics/explorer/search_syntax

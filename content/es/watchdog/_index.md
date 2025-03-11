@@ -33,7 +33,6 @@ further_reading:
   tag: Blog
   text: Solución de anomalías en el rendimiento de la carga de trabajo con Watchdog
     Insights para Live Processes
-kind: Documentación
 title: Datadog WatchdogTM
 ---
 ## Información general

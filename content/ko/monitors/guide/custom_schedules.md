@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/configuration/?tab=thresholdalert#evaluation-window
   tag: 설명서
   text: 누적 시간 창
-kind: 가이드
 title: 모니터 평가 빈도 사용자 지정
 ---
 

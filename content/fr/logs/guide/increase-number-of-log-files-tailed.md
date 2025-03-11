@@ -11,7 +11,7 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: Comment étudier un problème de parsing de log ?
-kind: guide
+
 title: Augmenter le nombre de fichiers de log suivis par l'Agent
 ---
 

@@ -15,7 +15,6 @@ further_reading:
 - link: /synthetics/api_tests/
   tag: Documentation
   text: Configurer un test API
-kind: documentation
 title: Identifier les bots Synthetic
 ---
 

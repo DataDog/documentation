@@ -10,7 +10,6 @@ further_reading:
 - link: real_user_monitoring/connect_rum_and_traces/
   tag: 설명서
   text: RUM과 트레이스 연결
-kind: 설명서
 title: Watchdog 영향 분석
 ---
 

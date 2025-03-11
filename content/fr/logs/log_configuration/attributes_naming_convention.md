@@ -1,6 +1,5 @@
 ---
 title: Attributs et alias
-kind: documentation
 description: Apprenez à utiliser les attributs et à appliquer une convention de nommage.
 aliases:
   - /fr/logs/processing/attributes_naming_convention/

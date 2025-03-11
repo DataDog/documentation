@@ -4,7 +4,6 @@ further_reading:
 - link: /developers/authorization/oauth2_endpoints
   tag: Documentación
   text: Aprende a utilizar los endpoints de autorización OAuth 2.0
-kind: documentación
 title: OAuth2 en Datadog
 ---
 
@@ -96,7 +95,7 @@ El [protocolo PKCE][11] se integra con el flujo de concesión del código de aut
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749
 [2]: /es/api/latest/scopes/

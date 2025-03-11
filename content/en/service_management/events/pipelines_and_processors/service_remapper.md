@@ -1,6 +1,5 @@
 ---
 title: Service Remapper
-kind: Documentation
 
 ---
 

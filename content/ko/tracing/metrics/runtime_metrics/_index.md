@@ -3,7 +3,6 @@ aliases:
 - /ko/tracing/advanced/runtime_metrics/
 - /ko/tracing/runtime_metrics/
 description: 트레이스와 관련된 런타임 메트릭을 통해 애플리케이션 성능에 대한 인사이트를 확보하세요.
-kind: 설명서
 title: Python
 type: multi-code-lang
 ---

@@ -1,6 +1,6 @@
 ---
 title: Réutiliser des parcours de test Browser pour toute votre collection de tests
-kind: guide
+
 further_reading:
   - link: synthetics/browser_tests
     tag: Documentation

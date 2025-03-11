@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: 설명서
   text: 파싱에 대해 배우기
-kind: 가이드
 title: 공식 로그 상태에 커스텀 심각도 값 리매핑하기
 ---
 

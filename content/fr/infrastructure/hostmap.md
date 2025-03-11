@@ -10,7 +10,6 @@ further_reading:
 - link: /infrastructure/process/
   tag: Graphiques
   text: Découvrir ce qui se passe à tous les niveaux de votre système
-kind: documentation
 title: Hostmap et Container map
 ---
 

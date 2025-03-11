@@ -9,7 +9,6 @@ further_reading:
 - link: security_platform/cspm/frameworks_and_benchmarks
   tag: 설명서
   text: 프레임워크와 업계 벤치마크 알아보기
-kind: 설명서
 title: CSPM 시작하기
 ---
 

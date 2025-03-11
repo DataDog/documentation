@@ -11,7 +11,7 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans le RUM Explorer
-kind: guide
+
 title: Débuter avec les données des feature flags dans RUM
 ---
 

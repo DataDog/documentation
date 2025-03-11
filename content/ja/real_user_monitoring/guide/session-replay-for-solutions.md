@@ -1,16 +1,15 @@
 ---
 description: RUM とセッションリプレイをソリューションまたはサポート組織に導入する方法について説明します。
 further_reading:
-- link: /real_user_monitoring/connect_rum_and_traces/
+- link: /real_user_monitoring/platform/connect_rum_and_traces/
   tag: ドキュメント
   text: RUM と APM トレースとの接続方法について
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser/
   tag: ドキュメント
   text: セッションリプレイについて
-- link: /real_user_monitoring/session_replay/developer_tools
+- link: /real_user_monitoring/session_replay/browser/developer_tools
   tag: ドキュメント
   text: ブラウザ開発ツールについて
-kind: ガイド
 title: テクニカルサポートのワークフローにセッションリプレイを活用する
 ---
 
@@ -36,7 +35,7 @@ title: テクニカルサポートのワークフローにセッションリプ�
 
 ## 根本原因の調査
 
-もし、Datadog で顧客のユーザージャーニーを表示し、関連するバックエンドリクエストを確認する方法があれば、技術ソリューションチームはこの問題の原因についてより良く理解することができます。
+もし、Datadog で顧客のユーザージャーニーを表示し、関連するバックエンドリクエストを確認する方法があれば、テクニカルソリューションチームはこの問題の原因についてより深く理解することができます。
 
 {{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="RUM ビューアクションに関連する APM スタックトレース" style="width:100%;">}}
 
@@ -50,7 +49,7 @@ APM インテグレーションを使用すると、Web アプリケーション
 
 テクニカルソリューションチームは、セッションリプレイを使用して Datadog のユーザージャーニーのレプリカを表示し、ブラウザ開発ツールを使用してフロントエンドに表示される可能性のある追加のエラーにアクセスすることができます。フロントエンドのエラーとバックエンドのトレースにアクセスすることで、テクニカルソリューションチームは、RUM & セッションリプレイと APM インテグレーションを使用して、顧客の問題のトラブルシューティングを支援する権限を与えられます。
 
-リプレイ記録のあるユーザーセッションをクリックし、Datadog プラットフォーム上でのユーザーの行動を観測することができます。セッションリプレイを使用することで、対応する RUM イベントを見つけ、マルチステップ API テストを保存するための特定の `click` アクションを特定することができます。UI で **Save** をクリックすると、バックエンドの呼び出しがトリガーされ、テストの構成が保存されます。
+リプレイ記録のあるユーザーセッションをクリックすると、Datadog プラットフォーム上でのユーザーの行動を観察できます。セッションリプレイを使用することで、対応する RUM イベントを見つけ、マルチステップ API テストを保存するための特定の `click` アクションを特定できます。UI で **Save** をクリックすると、バックエンドの呼び出しがトリガーされ、テストの構成が保存されます。
 
 ## バックエンドのトレースからエラーを発見
 
@@ -70,7 +69,7 @@ APM インテグレーションを使用すると、Web アプリケーション
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/session_replay/
-[2]: /ja/real_user_monitoring/session_replay/developer_tools/
+[1]: /ja/real_user_monitoring/session_replay/browser/
+[2]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
 [3]: /ja/real_user_monitoring/connect_rum_and_traces
 [4]: https://app.datadoghq.com/rum/explorer

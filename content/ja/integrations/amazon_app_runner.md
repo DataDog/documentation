@@ -5,6 +5,7 @@ categories:
 - 構成 & デプロイ
 - ログの収集
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: AWS App Runner
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_app_runner
 public_title: Datadog-AWS App Runner Integration
@@ -30,9 +30,9 @@ AWS App Runner を使用すると、ソースコードまたはコンテナイ�
 
 このインテグレーションを有効にすると、Datadog にすべての App Runner メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -61,21 +61,21 @@ AWS App Runner は、サービスとオペレーションのステータス変�
 2. AWS App Runner のイベントに対応する EventBridge ルールを作成します ([EventBridge で App Runner のイベントを処理する][8]を参照)。ターゲットとして API Destination を選択します。
 3. Datadog イベントストリームで新しいステータス変更イベントの表示を開始します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_app_runner" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS App Runner インテグレーションは、EventBridge からのサービスとオペレーションのステータス変更イベントの両方をサポートします。
 
-### ヘルプ
+### サービスチェック
 
 AWS App Runner  インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

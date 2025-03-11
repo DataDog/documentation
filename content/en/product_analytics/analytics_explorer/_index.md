@@ -1,6 +1,5 @@
 ---
 title: Analytics Explorer
-kind: documentation
 description: ""
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"

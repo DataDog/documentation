@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: 설명서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
-kind: 설명서
 title: 쿠버네티스 로그 수집
 ---
 

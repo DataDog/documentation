@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/python.md
-kind: 설명서
 title: Datadog 에이전트 통합 개발자 도구 설치
 ---
 이 문서에서는 에이전트 기반 통합에서 작동하도록 Python 환경을 설정하는 방법에 대해 설명합니다. 여기에는 인터프리터 설치 및 필요한 모든 종속성에 대한 확인이 포함됩니다.

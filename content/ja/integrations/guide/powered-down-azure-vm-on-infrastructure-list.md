@@ -8,7 +8,6 @@ further_reading:
 - link: /account_management/billing/azure/#azure-vm-exclusion
   tag: ドキュメント
   text: タグで Azure VM をフィルターする
-kind: ガイド
 title: インフラストラクチャーリストのパワーダウンした Azure VM
 ---
 

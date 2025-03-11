@@ -1,5 +1,5 @@
 ---
-kind: guide
+
 title: Instrumenter des applications Node.js sans serveur avec le Forwarder Datadog
 ---
 

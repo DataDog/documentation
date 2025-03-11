@@ -1,6 +1,5 @@
 ---
 title: Datadog Watchdog™
-kind: Documentation
 description: Automatically detect potential application and infrastructure issues
 aliases:
   - /tracing/watchdog

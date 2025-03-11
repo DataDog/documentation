@@ -1,6 +1,5 @@
 ---
 title: Getting Started with AWS
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
@@ -40,6 +39,8 @@ At a high level, this involves creating an IAM role and associated policy to ena
 After the initial connection is established, you can enable individual AWS service integrations relevant to your AWS environment. With a single click, Datadog provisions the necessary resources in your AWS account and begins querying metrics and events for the services you use. For popular AWS services you are using, Datadog provisions out-of-the-box dashboards, providing immediate and customizable visibility. This guide demonstrates setting up the integration and installing the Datadog Agent on an Amazon Linux EC2 instance, as well as providing a broad overview of the integration's capabilities. See the [Enable integrations for individual AWS service](#enable-integrations-for-individual-aws-service) section for a list of the available sub-integrations.
 
 This process can be repeated for as many AWS accounts as necessary, or you can also use the [API][3], [AWS CLI][4], or [Terraform][5] to set up multiple accounts at once. For more information, read the [Datadog-Amazon CloudFormation guide][6].
+
+**Note**: Datadog's CloudFormation template only supports creation and deletion of its defined resources. See [Update your stack template][59] for guidance on applying updates to your stack.
 
 ## Prerequisites
 
@@ -140,8 +141,8 @@ Read the [Enable logging for your AWS service][14] section to get logs flowing f
 
 ### Validation
 
-Once you have enabled logs, find them in the [Logs Explorer][15] using either the `source` or `service` facets from the facet panel, such as this example from S3:
-{{< img src="getting_started/integrations/logs-explorer.png" alt="The Logs Explorer page of the Datadog account. Along the left the image displays the Source and Service facets, both checked with 's3'. Along the right, some log entries are displayed in a list format.">}}
+Once you have enabled logs, find them in the [Log Explorer][15] using either the `source` or `service` facets from the facet panel, such as this example from S3:
+{{< img src="getting_started/integrations/logs-explorer.png" alt="The Log Explorer page of the Datadog account. Along the left the image displays the Source and Service facets, both checked with 's3'. Along the right, some log entries are displayed in a list format.">}}
 
 ## Get more from the Datadog platform
 
@@ -277,5 +278,4 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [56]: /security/default_rules/#cat-posture-management-infra
 [57]: /integrations/guide/aws-integration-troubleshooting/
 [58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
-
-
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html

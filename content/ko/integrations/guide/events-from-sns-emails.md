@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-fully-managed-services-datadog-serverless-monitoring/
   tag: 블로그
   text: Amazon API Gateway, SQS, Kinesis 등에 대한 Datadog 서버리스 모니터링
-kind: 가이드
 title: Amazon SNS 이메일에서 Datadog 이벤트 생성
 ---
 

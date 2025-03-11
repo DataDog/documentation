@@ -27,6 +27,7 @@ categories:
 - metrics
 - cloud
 - cost management
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +36,6 @@ integration_id: amazon-billing
 integration_title: AWS Billing and Cost Management
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_billing
 public_title: AWS Billing and Cost Management
@@ -48,6 +48,7 @@ tile:
   - Category::Metrics
   - Category::クラウド
   - Category::Cost Management
+  - Offering::Integration
   configuration: README.md#Setup
   description: AWS Billing で AWS の請求予測とコストを追跡できます。
   media: []
@@ -65,9 +66,9 @@ AWS Billing and Cost Management は、推定請求額と予算メトリクスを
 
 **注**: このインテグレーションでは `budgets:ViewBudget` 権限が完全に有効になっている必要があります。請求メトリクスは AWS コンソールで有効にする必要があります。AWS のセットアップの詳細については、[Amazon Web Services インテグレーションドキュメント][1]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -76,21 +77,21 @@ AWS Billing and Cost Management は、推定請求額と予算メトリクスを
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Billing` が有効になっていることを確認します。
 2. [Datadog - AWS Billing インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_billing" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS Billing and Cost Management インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS Billing and Cost Management インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

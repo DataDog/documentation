@@ -21,7 +21,7 @@
 			},
 			"inputs": {
 				"runCommand": [
-					"wget -O ddinstall.sh https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh",
+					"wget -O ddinstall.sh https://install.datadoghq.com/scripts/install_script_agent7.sh",
 					"export DD_API_KEY=$(aws --region <AWS_REGION> ssm get-parameters --names dd-api-key-for-ssm --with-decryption --query Parameters[].Value --output text)",
 					"export DD_SITE=datadoghq.eu",
 					"bash ./ddinstall.sh"

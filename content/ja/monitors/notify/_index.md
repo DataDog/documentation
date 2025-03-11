@@ -12,7 +12,9 @@ further_reading:
 - link: /monitors/manage/
   tag: ドキュメント
   text: モニターの管理
-kind: documentation
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: ラーニングセンター
+  text: アラートモニター通知をカスタマイズするコースを受講する
 title: 通知
 ---
 
@@ -33,7 +35,7 @@ title: 通知
 
 ### メッセージ
 
-メッセージフィールドでは、標準の[マークダウンフォーマット][3]と[変数][4]を使用できます。[@通知](#notifications)を使用して別の連絡先に送信される通知テキストを調整するには、[条件付き変数][5]を使用します。
+メッセージフィールドでは、標準の[マークダウンフォーマット][3]と[変数][4]を使用できます。別の連絡先に送信される通知テキストを調整するには、[@通知](#notifications)と[条件付き変数][5]を使用します。
 
 モニターメッセージの一般的な使用例は、問題を解決するための段階的な方法を含めることです。次に例を示します。
 
@@ -56,7 +58,7 @@ Disk space is low @ops-team@company.com
 ```
 `@通知`は以下に送信できます。
 
-#### メール
+#### Email
 
 {{% notifications-email %}}
 
@@ -71,16 +73,10 @@ Disk space is low @ops-team@company.com
 ### ワークフロー
 [ワークフローの自動化][7]をトリガーしたり、モニターから新しいワークフローを作成することができます。
 
-**既存のワークフローをモニターに追加するには**:
-1. メッセージセクションに、ワークフローの完全なメンション名を追加します。
-   - メンション名は `@workflow-` で始まる必要があります。例えば、`@workflow-my-workflow` のようになります。
-   - ワークフローにトリガー変数を渡すには、カンマ区切りのリストで `@workflow-name(key=value, key=value)` という構文を使います。メッセージテンプレート変数をトリガー変数として使用することができます。例えば、`@workflow-my-workflow(hostname=host.name)` とします。
+ワークフローをモニターに追加する前に、[ワークフローにモニタートリガーを追加][17]します。
 
-1. または、**Add Workflow** をクリックし、ドロップダウンメニューで検索します。
+モニタートリガーを追加した後、[モニターに既存のワークフローを追加][8]するか、新しいワークフローを作成します。モニターページから新しいワークフローを作成するには
 
-ワークフローのトリガーについては、[ワークフローをトリガーする][8]を参照してください。
-
-**ワークフローを作成するには**:
 1. **Add Workflow** をクリックします。
 1. **+** アイコンをクリックし、ブループリントを選択するか、**Start From Scratch** を選択します。
    {{< img src="/monitors/notifications/create-workflow.png" alt="+ ボタンをクリックして、新しいワークフローを追加する" style="width:90%;">}}
@@ -106,7 +102,7 @@ Disk space is low @ops-team@company.com
 
 ### 追加コンテンツのトグル
 
-モニター通知には、モニターのクエリ、使用された @メンション、メトリクススナップショット (メトリクスモニターの場合)、Datadog の関連ページへのリンクなどのコンテンツが含まれます。個々のモニターの通知に含める、または除外するコンテンツを選択するオプションがあります。
+モニター通知には、モニターのクエリ、使用された @メンション、メトリクススナップショット (メトリクスモニターの場合)、Datadog の関連ページへのリンクなどが含まれます。個々のモニターの通知に含める、または除外するコンテンツを選択することができます。
 
 <div class="alert alert-warning">パーセンタイルアグリゲーターを持つディストリビューションメトリクス (`p50`、`p75`、`p95`、`p99` など) は、通知でスナップショットグラフを生成しません。 </div>
 
@@ -119,7 +115,7 @@ Disk space is low @ops-team@company.com
 - **Hide Handles**: 通知メッセージで使用されている @メンションを削除します。
 - **Hide All**: 通知メッセージには、クエリ、ハンドル、スナップショット (メトリクスモニター用)、フッターの追加リンクは含まれません。
 
-**注**: インテグレーションによっては、デフォルトで表示されないコンテンツがあります。
+**注**: インテグレーションによっては、一部のコンテンツがデフォルトで表示されない場合があります。
 
 ### メタデータ
 
@@ -129,14 +125,14 @@ Disk space is low @ops-team@company.com
 
 ### 再通知
 
-モニターの再通知（オプション）を有効にすると、問題の未解決をチームに知らせることができます。
+モニターの再通知 (オプション) を有効にすると、問題の未解決をチームに知らせることができます。
 
   {{< img src="monitors/notifications/renotify_options.png" alt="再通知の有効化" style="width:90%;" >}}
 
 再通知の間隔、再通知の対象となるモニターの状態 (`alert`、`no data`、`warn`) を構成し、オプションで再通知メッセージの送信数の制限を設定します。
 
-例えば、`stop renotifying after 1 occurrence` (1 回発生したら再通知を停止する) ようにモニターを設定すると、メインの警告の後に 1 回のエスカレーションメッセージを受信することができます。
-**注:** 再通知の[属性とタグの変数][12]には、再通知の期間中にモニターが利用できるデータが入力されます。
+例えば、`stop renotifying after 1 occurrence` (1 回発生したら再通知を停止する) ようにモニターを設定すると、メインのアラートの後に 1 回のエスカレーションメッセージを受信することができます。
+**注:** 再通知の[属性とタグの変数][2]には、再通知期間中にモニターが利用できるデータが入力されます。
 
 再通知が有効になっている場合、モニターが指定した時間、選択した状態のいずれかに留まっている場合に送信されるエスカレーションメッセージを含めるオプションが提供されます。
 
@@ -147,47 +143,29 @@ Disk space is low @ops-team@company.com
 * `Configure notifications and automations` セクションの *Renotification message* フィールド。
 * API の `escalation_message` 属性。
 
-`{{#is_renotify}}` ブロックを使用する場合、元の通知メッセージも再通知に含まれます。
+`{{#is_renotify}}` ブロックを使用する場合、元の通知メッセージも再通知に含まれるため、
 
 1. `{{#is_renotify}}` ブロックには余分な詳細のみを含め、元のメッセージの詳細は繰り返さないでください。
-2. グループのサブセットにエスカレーションメッセージを送信します。
+2. グループの一部にエスカレーションメッセージを送信します。 
 
-[サンプルセクション][13]で、これらのユースケースに合わせてモニターを構成する方法を学びましょう。
+[サンプルセクション][12]で、これらのユースケースに合わせてモニターを構成する方法を学びましょう。
 
 
-## 権限と監査通知の定義
+## 監査通知
 
-### 変更
-
-モニターが作成、変更、無音設定、または削除されるたびに[イベント][14]が生成されます。`Notify` オプションを設定して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
-
-### 権限
-
-すべてのユーザーは、関連するロールに関係なく、すべてのモニターを読むことができます。
-
-デフォルトでは、[モニターの書き込み権限][15]を持つユーザーのみがモニターを編集できます。[Datadog Admin ロールおよび Datadog Standard ロール][16]には、デフォルトでモニターの書き込み権限があります。オーガニゼーションで[カスタムロール][17]を使用している場合、他のカスタムロールにモニターの書き込み権限が付与されていることがあります。
-
-モニターの編集が許可される[ロール][18]のリストを指定することで、さらにモニターに制限を設定できます。モニターの作成者は、常にモニターを編集することが可能です。
-
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" style="width:90%;" >}}
-
-編集には、モニターのコンフィギュレーションの更新、モニターの削除、モニターのミュート（時間の長短を問わず）などが含まれます。
-
-**注**: 制限は UI と API の両方に適用されます。
-
-モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[モニターに RBAC を設定する方法][19]をご参照ください。
+モニターが作成、変更、サイレンス、または削除されるたびに監査[イベント][13]が生成されます。**Define permissions and audit notifications** (権限と監査通知の定義) セクションで **Notify** を選択して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
 
 ## テスト通知
 
-テスト通知は、ホスト、メトリクス、異常、外れ値、予測値、ログ、RUM、APM、インテグレーション (チェックのみ)、プロセス (チェックのみ)、ネットワーク (チェックのみ)、カスタムチェック、イベント、複合条件の[モニターの種類][20]でサポートされています。
+テスト通知は、ホスト、メトリクス、異常、外れ値、予測値、ログ、RUM、APM、インテグレーション（チェックのみ）、プロセス（チェックのみ）、ネットワーク（チェックのみ）、カスタムチェック、イベント、複合条件の[モニターの種類][14]でサポートされています。
 
 ### テストを実行する
 
 1. モニターを定義したら、モニターページの右下にある **Test Notifications** ボタンを使用して通知をテストします。
 
-2. テスト通知ポップアップから、テストするモニターケースを選択します。テストできるのは、アラート条件で指定されたしきい値について、モニターのコンフィギュレーションで使用可能な状態のみです。ただし、[回復しきい値][21]は例外です。これは、モニターがアラート状態でなくなったか、警告状態がなくなったときに、Datadog が回復通知を送信するためです。
+2. テスト通知のポップアップから、テストするモニターの遷移状態とグループ (クエリに[グループ化][15]がある場合のみ利用可能) を選択します。テストできるのは、アラート条件で指定されたしきい値に対して、モニターの構成で利用可能な状態のみです。ただし、[回復しきい値][16]は例外です。Datadog は、モニターがアラート状態でなくなるか、警告条件がなくなったときに回復通知を送信します。
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="このモニターの通知をテストする" style="width:70%;" >}}
+    {{< img src="/monitors/notifications/test_notification_modal.png" alt="このモニターの通知をテストする" style="width:70%;" >}}
 
 3. **Run Test** をクリックして、モニターにリストされている人とサービスに通知を送信します。
 
@@ -211,23 +189,19 @@ Disk space is low @ops-team@company.com
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/configuration
-[2]: /ja/monitors/notify/variables/#tag-variables
+[2]: /ja/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [3]: http://daringfireball.net/projects/markdown/syntax
 [4]: /ja/monitors/notify/variables/
 [5]: /ja/monitors/notify/variables/#conditional-variables
 [6]: /ja/account_management/teams/#send-notifications-to-a-specific-communication-channel
 [7]: /ja/service_management/workflows/
-[8]: /ja/service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[8]: /ja/service_management/workflows/trigger/#add-the-workflow-to-your-monitor
 [9]: /ja/service_management/workflows/build/
 [10]: /ja/monitors/settings/#tag-policies
 [11]: /ja/account_management/teams/
-[12]: /ja/monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
-[13]: /ja/monitors/notify/variables/?tab=is_renotify#examples
-[14]: /ja/events/
-[15]: /ja/account_management/rbac/permissions/#monitors
-[16]: /ja/account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[17]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
-[18]: /ja/account_management/rbac/?tab=datadogapplication
-[19]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
-[20]: /ja/monitors/types
-[21]: /ja/monitors/guide/recovery-thresholds/
+[12]: /ja/monitors/notify/variables/?tab=is_renotify#examples
+[13]: /ja/events/
+[14]: /ja/monitors/types
+[15]: /ja/monitors/configuration/
+[16]: /ja/monitors/guide/recovery-thresholds/
+[17]: /ja/service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow

@@ -5,6 +5,7 @@ app_id: crest-data-systems-proofpoint-email-security
 app_uuid: 4e419332-b689-486b-ae36-09abecd41a9e
 assets:
   dashboards:
+    Crest Proofpoint - Isolation Dashboard: assets/dashboards/cds_proofpoint_isolation.json
     Crest Proofpoint - TAP Dashboard: assets/dashboards/cds_proofpoint_tap.json
     Crest Proofpoint On Demand - Email Security: assets/dashboards/cds_proofpoint_on_demand_email_security.json
     Crest Proofpoint On Demand - TLS Overview: assets/dashboards/cds_proofpoint_on_demand_tls_overview.json
@@ -22,16 +23,19 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10379
     source_type_name: crest_data_systems_proofpoint_email_security
+  monitors:
+    '[Proofpoint Email Security] Service Check Monitor': assets/monitors/cds_service_check_monitor.json
 author:
-  homepage: https://www.crestdatasys.com
-  name: Crest Data Systems
-  sales_email: datadog-sales@crestdatasys.com
-  support_email: datadog.integrations@crestdatasys.com
+  homepage: https://crestdata.ai
+  name: Crest Data
+  sales_email: datadog-sales@crestdata.ai
+  support_email: datadog.integrations@crestdata.ai
   vendor_id: crest-data-systems
 categories:
 - マーケットプレイス
 - data stores
 - イベント管理
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -40,7 +44,6 @@ integration_id: crest-data-systems-proofpoint-email-security
 integration_title: Proofpoint Email Security
 integration_version: ''
 is_public: true
-kind: インテグレーション
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -55,7 +58,7 @@ pricing:
   unit_label: Proofpoint 登録ユーザー
   unit_price: 1.0
 public_title: Proofpoint Email Security
-short_description: Proofpoint TAP および Proofpoint On-Demand の監視
+short_description: Monitors Proofpoint TAP, Proofpoint On-Demand, and Proofpoint Isolation
 supported_os:
 - linux
 - windows
@@ -74,7 +77,7 @@ tile:
   - Submitted Data Type::Events
   - Submitted Data Type::Logs
   configuration: README.md#Setup
-  description: Proofpoint TAP および Proofpoint On-Demand の監視
+  description: Monitors Proofpoint TAP, Proofpoint On-Demand, and Proofpoint Isolation
   media:
   - caption: Crest Proofpoint - TAP ダッシュボード
     image_url: images/crest_data_systems_proofpoint_tap_1.png
@@ -83,19 +86,22 @@ tile:
     image_url: images/crest_data_systems_proofpoint_tap_2.png
     media_type: image
   - caption: Crest Proofpoint On Demand - Email Security
-    image_url: images/crest_datat_systems_proofpoint_on_demand_email_security_1.png
+    image_url: images/crest_data_systems_proofpoint_on_demand_email_security_1.png
     media_type: image
   - caption: Crest Proofpoint On Demand - Email Security
-    image_url: images/crest_datat_systems_proofpoint_on_demand_email_security_2.png
+    image_url: images/crest_data_systems_proofpoint_on_demand_email_security_2.png
     media_type: image
   - caption: Crest Proofpoint On Demand - Email Security
-    image_url: images/crest_datat_systems_proofpoint_on_demand_email_security_3.png
+    image_url: images/crest_data_systems_proofpoint_on_demand_email_security_3.png
     media_type: image
   - caption: Crest Proofpoint On Demand - TLS 概要
-    image_url: images/crest_datat_systems_proofpoint_on_demand_tls_1.png
+    image_url: images/crest_data_systems_proofpoint_on_demand_tls_1.png
     media_type: image
   - caption: Crest Proofpoint On Demand - TLS 概要
-    image_url: images/crest_datat_systems_proofpoint_on_demand_tls_2.png
+    image_url: images/crest_data_systems_proofpoint_on_demand_tls_2.png
+    media_type: image
+  - caption: Crest Proofpoint - Isolation
+    image_url: images/crest_data_systems_proofpoint_isolation.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -108,7 +114,7 @@ tile:
 
 ## 概要
 
-この Proofpoint Email Security インテグレーションは、[Proofpoint TAP][7] と [Proofpoint on Demand][8] を監視し、視覚化します。
+The Proofpoint email security integration monitors and visualizes [Proofpoint TAP][7], [Proofpoint on Demand][8], and [Proofpoint Isolation][9].
 
 ### Proofpoint Targeted Attack Protection (TAP)
 
@@ -125,29 +131,38 @@ tile:
 * **インシデント調査:** メールセキュリティとコンプライアンスデータを活用し、潜在的なセキュリティインシデントを徹底的に調査します。これには、セキュリティ脅威の起源を追跡し、その影響を評価することが含まれます。
 * **ユーザーの行動監視:** 内部脅威や不正アクセスの兆候を検出するために、メールに関連する行動を注視します。
 
+### Proofpoint Isolation
+
+**Proofpoint Isolation** is designed to enhance cybersecurity by isolating and protecting users from potentially malicious content. The primary goal is to prevent users from interacting directly with harmful or suspicious content, thereby reducing the risk of cyber threats.
 
 このインテグレーションは、以下を監視します。
 - Proofpoint TAP サーバーで処理される `Messages Blocked and Delivered` と `Clicks Blocked and Permitted`。
 - Proofpoint on Demand Log Service をソースとして使用し、セキュアな WebSocket (WSS) プロトコルを利用したメッセージデータタイプ。
+- User's web browsing and email activity by the Proofpoint Isolation Server.
 
 
 ## Agent
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
-- サポートメール: [datadog.integrations@crestdatasys.com][5]
-- 営業メール: [datadog-sales@crestdatasys.com][6]
-- Web サイト: [crestdatasys.com][3]
+- Support Email: [datadog.integrations@crestdata.ai][5]
+- Sales Email: [datadog-sales@crestdata.ai][6]
+- Web サイト: [crestdata.ai][3]
+- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][14]
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://www.crestdatasys.com/
+[3]: https://www.crestdata.ai/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
-[5]: mailto:datadog.integrations@crestdatasys.com
-[6]: mailto:datadog-sales@crestdatasys.com
+[5]: mailto:datadog.integrations@crestdata.ai
+[6]: mailto:datadog-sales@crestdata.ai
 [7]: https://www.proofpoint.com/us/products/advanced-threat-protection/targeted-attack-protection
 [8]: https://www.proofpoint.com/us/products/email-security-and-protection/email-protection
-[9]: https://www.crestdatasys.com/datadog-integrations-readme/Proofpoint_Email_Security.pdf
-
+[9]: https://www.proofpoint.com/us/products/cloud-security/isolation
+[10]: https://proofpointisolation.com
+[11]: https://docs.crestdata.ai/datadog-integrations-readme/Proofpoint_Email_Security.pdf
+[12]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[13]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[14]: https://docs.crestdata.ai/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-proofpoint-email-security" target="_blank">こちらをクリック</a>してください。

@@ -13,7 +13,6 @@ further_reading:
 - link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
   tag: ソースコード
   text: Datadog Helm のアップグレード
-kind: documentation
 title: Kubernetes に Datadog Agent をインストールする
 ---
 

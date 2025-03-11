@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
-kind: documentation
 title: Tracing Android Applications
 ---
 Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
@@ -271,7 +270,7 @@ dependencies {
    * `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
    * `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-**Note**: In the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][8].
+**Note**: In the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][12].
 
    Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
@@ -308,12 +307,16 @@ dependencies {
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+import io.opentracing.util.GlobalTracer
+
 val tracer = AndroidTracer.Builder().build()
 GlobalTracer.registerIfAbsent(tracer)
 ```
 {{% /tab %}} 
 {{% tab "Java" %}}
 ```java
+import io.opentracing.util.GlobalTracer;
+
 AndroidTracer tracer = new AndroidTracer.Builder().build();
 GlobalTracer.registerIfAbsent(tracer);
 ```
@@ -685,19 +688,24 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient = OkHttpClient.Builder() 
         .addInterceptor(
-            DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
         )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -715,20 +723,32 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
+        )
+        .addNetworkInterceptor(
+            TracingInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .addNetworkInterceptor(
-                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+            new TracingInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -948,3 +968,4 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
 [10]: /tracing/trace_collection/custom_instrumentation/android/otel
 [11]: https://opentracing.io
+[12]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file

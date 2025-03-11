@@ -4,6 +4,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies: []
 description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/
@@ -14,7 +15,6 @@ integration_id: azure-vm-scale-set
 integration_title: Microsoft Azure VM Scale Set
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_vm_scale_set
 public_title: Datadog-Microsoft Azure VM Scale Set インテグレーション

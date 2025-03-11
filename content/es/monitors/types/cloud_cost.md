@@ -21,7 +21,6 @@ further_reading:
   tag: Blog
   text: Permitir a los ingenieros hacerse cargo de los costes de Google Cloud con
     Datadog
-kind: Documentación
 title: Monitor de costes de la nube
 ---
 
@@ -36,7 +35,7 @@ Para crear un monitor de costes en la nube en Datadog, utiliza la navegación pr
 
 También puedes crear monitores de costes en la nube en [Análisis de costes en la nube][2]. Haz clic en **+Export to Monitor** (+Exportar al monitor), arriba de la tabla de costes.
 
-{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="Botón "Exportar al monitor" en la página Análisis de costes en la nube" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="Botón 'Exportar al monitor' en la página Análisis de costes en la nube" style="width:100%;" >}}
 
 ## Seleccionar un tipo de monitor de costes
 

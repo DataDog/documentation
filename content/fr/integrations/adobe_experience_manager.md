@@ -3,6 +3,7 @@ aliases:
 - /fr/logs/log_collection/adobe_experience_manager
 categories:
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md
 description: Recueillez des logs Adobe Experience Manager pour suivre les erreurs,
@@ -17,7 +18,6 @@ has_logo: true
 integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
-custom_kind: integration
 name: adobe_experience_manager
 public_title: Datadog/Adobe Experience Manager
 short_description: Recueillez des logs pour suivre les erreurs, obtenir des délais
@@ -29,8 +29,8 @@ supported_os:
 title: Adobe Experience Manager
 ---
 
-{{< site-region region="us3" >}}
-<div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="us3,ap1" >}}
+<div class="alert alert-warning">L'intégration Adobe Experience Manager n'est pas disponible pour le <a href="/getting_started/site">site Datadog</a> ({{< region-param key="dd_site_name" >}}) que vous avez sélectionné.</div>
 {{< /site-region >}}
 
 ## Présentation
@@ -75,7 +75,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: /fr/agent/guide/agent-commands/#restart-the-agent
 [4]: /fr/help/

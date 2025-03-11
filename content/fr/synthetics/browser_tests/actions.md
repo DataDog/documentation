@@ -8,7 +8,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
   tag: Site externe
   text: Créer et gérer des variables globales Synthetic avec Terraform
-kind: documentation
 title: Étapes des tests de navigateurs
 ---
 

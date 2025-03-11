@@ -1,6 +1,5 @@
 ---
 title: Ruby Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Ruby application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/ruby
@@ -18,10 +17,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
 
 ## Automatic configuration
 

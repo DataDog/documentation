@@ -12,13 +12,12 @@ further_reading:
 - link: /infrastructure/process/
   tag: ドキュメント
   text: ライブプロセスモニタリング
-kind: documentation
 title: インフラストラクチャーリスト
 ---
 
 ## 概要
 
-インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。
+インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索したり、タグでグループ化することができます。Datadog で [**Infrastructure > Hosts**][10] に移動してインフラストラクチャーリストを表示します。このリストは、インフラストラクチャーホストの請求額の概算に使用しないでください。請求に関する詳細は、[請求][11]ページをご覧ください。
 
 ## ホスト
 
@@ -57,6 +56,9 @@ Cloud Platform
 Datadog Agent
 : ホストでデータを収集する Agent のバージョン。
 
+OpenTelemetry
+: ホスト上でデータを収集している OpenTelemetry Collector のバージョン。
+
 ### ホスト名
 
 Datadog Agent は、複数のソースから潜在的なホスト名を収集します。詳細については、[Datadog が Agent ホスト名を決定する方法][1]を参照してください。
@@ -83,35 +85,28 @@ Datadog は、1 つのホストに一意に識別可能な名前が複数ある�
 
 #### Agent の構成
 
-{{< callout url="#" btn_hidden="true" >}}
-  Agent 構成ビューは公開ベータ版で、Agent バージョン 7.39/6.39 以降で利用可能です。
-
-  Agent バージョン 7.47/6.47 以降、この機能はデフォルトで有効になっています。
-{{< /callout >}}
-
 Agent は、ホスト詳細パネルの `Agent Configuration` セクションに表示されるように、Datadog に自身の構成を送信することができます。
 
 Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
 
-この機能は、Agent バージョン 7.47.0/6.47.0 以降でデフォルトで有効になっています。 
+Agent バージョン 7.47.0/6.47.0 以降では、Agent 構成ビューはデフォルトで有効になっています。Agent バージョン 7.39/6.39 以降では、手動で有効にすることができます。
 
-
-この動作を変更するには、[Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成が送信され、`false` に設定すると無効になります。
-
-あるいは、`DD_INVENTORIES_CONFIGURATION_ENABLED` 環境変数を使って、この機能を有効または無効にすることができます。
+構成ビューを有効または無効にするには
+- [Agent コンフィギュレーションファイル][6]の `inventories_configuration_enabled` の値を `true` に設定すると構成ビューが有効になり、`false` に設定すると無効になります。
+- または、`DD_INVENTORIES_CONFIGURATION_ENABLED` 環境変数を使用して構成ビューを有効または無効にします。
 
 {{< img src="infrastructure/index/infra-list-config3.png" alt="Agent 構成ビュー" style="width:100%;">}}
 
 ### エクスポート
 
-Datadog にレポートしているホストの JSON 形式のリストについては、次のいずれかを使用します。
+Datadog にレポートしているホストの JSON 形式のリストを取得するには、以下のいずれかを使用してください。
 
 * インフラストラクチャーリストの上部にある **JSON API パーマリンク**。
 * [検索ホスト API エンドポイント][7] - 例については、[開発者ガイド][8]を参照してください。
 
 #### Agent バージョン
 
-時折、Agent のバージョンを監査して、最新バージョンを実行していることを確認することも役立つ場合があります。この場合、[get_host_agent_list script][9] を使用します。これにより、JSON パーマリンクを利用して、現在実行中の Agent がバージョン番号とともに出力されます。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトもあります。
+Agent のバージョンを監査して、最新バージョンを実行していることを確認することが役立つ場合もあります。そのために、[get_host_agent_list script][9] を使用します。このスクリプトは、JSON パーマリンクを利用して、現在実行中の Agent をバージョン番号とともに出力します。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトも用意されています。
 
 #### Agent なし
 
@@ -157,3 +152,4 @@ for host in infra['rows']:
 [8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
 [10]: https://app.datadoghq.com/infrastructure
+[11]: https://docs.datadoghq.com/ja/account_management/billing/

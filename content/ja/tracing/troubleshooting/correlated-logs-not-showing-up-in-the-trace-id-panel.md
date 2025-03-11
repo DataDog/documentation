@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ドキュメント
   text: クロスプロダクト相関で容易にトラブルシューティング
-kind: documentation
 title: 関連するログがトレース ID パネルに表示されない
 ---
 

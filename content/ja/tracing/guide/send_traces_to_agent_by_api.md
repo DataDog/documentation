@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: APM の用語と概要
-kind: ガイド
 title: API で Agent にトレースを送信する
 ---
 
@@ -58,7 +57,7 @@ trace1 = [ span, span2, span3 ]
 | `service`    | 文字列  | トレース対象のサービス。サービス名の長さは、最大 100 文字です。 |
 | `span_id`    | int64   | スパンの整数 (64 ビット符号なし) ID。 |
 | `start`      | int64   | リクエストの開始時間を UNIX Epoch からのナノ秒で指定します。 |
-| `trace_id`   | int64 または int128   | このスパンが含まれるトレースの一意の整数 (64 ビット符号なし、または 128 ビット符号なし) ID。 |
+| `trace_id`   | int64   | このスパンを含むトレースに割り当てられた一意の整数 ID の下位 64 ビットを示します。128 ビットのトレース ID を利用する場合は、`meta` フィールド内で 16 進数の小文字表記にエンコードした`_dd.p.tid` タグを用いて上位 64 ビットを設定してください。 |
 | `type`       | enum    | リクエストの種類。`web`、`db`、`cache`、`custom` などの enum 値を許容します。 |
 
 

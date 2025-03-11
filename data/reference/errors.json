@@ -321,7 +321,7 @@
     "title": "Divide by zero",
     "description": "You've attempted to divide an integer or float by zero.",
     "rationale": "Unlike some other programming languages, VRL doesn't have any concept of infinity, as it's\nunclear how that could be germane to observability data use cases. Thus, dividing by zero\ncan't have any meaningful result.",
-    "resolution": "If you know that a value is necessarily zero, don't divide by it. If a value *could* be\nzero, capture the potential error thrown by the operation:\n\n```coffee\nresult, err = 27 / .some_value\nif err != nil {\n\t# Handle error\n}\n```"
+    "resolution": "If you know that a value is necessarily zero, don't divide by it. If a value *could* be\nzero, capture the potential error thrown by the operation:\n\n```coffee\nresult, err = 27 / .some_value\nif err != null {\n\t# Handle error\n}\n```"
   },
   "306": {
     "anchor": "306",

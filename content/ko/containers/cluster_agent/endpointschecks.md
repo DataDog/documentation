@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: 설명서
   text: 엔드포인트 점검 트러블슈팅
-kind: 설명서
 title: 자동탐지로 엔드포인트 점검
 ---
 

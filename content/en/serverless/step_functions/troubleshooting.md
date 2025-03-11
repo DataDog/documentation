@@ -1,13 +1,11 @@
 ---
 title: Troubleshooting Serverless Monitoring for AWS Step Functions
-kind: documentation
 ---
 
 ## I cannot see any traces
 
 ### Verify that your Step Function is configured to send all logs
-
-- Ensure that the `DD_TRACE_ENABLED` environment variable is set to `true` on the Lambda function in your AWS console.
+- Ensure that the `DD_TRACE_ENABLED` tag is set to `true` on the Step Function in your AWS console.
 - In your AWS console, open your Step Function's logging tab. Ensure that _Log level_ is set to `ALL`, and that _Include execution data_ is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
@@ -31,6 +29,14 @@ If your organization has an existing all-encompassing index with a low limit, pl
 
 **Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][6] for more information.
 
+### Verify that your Step Function is using the latest version
+- AWS may release updates to the Step Function API or introduce newer versions of the Step Function definitions. Older versions may result in unexpected log formatting or behavior.
+- It's also recommended that you are using the latest version of the Datadog Lambda Forwarder to avoid discrepancies in how logs are forwarded.
+
+### Caution when using custom log pipelines
+- Custom log pipelines can offer flexibility in processing logs, but altering the log format too much can lead to issues downstream, such as logs not being parsed or recognized.
+- Avoid making significant changes to the Step Function log structure that change the JSON format.
+
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
 - Verify that you are using Python layer v95+ or Node.js layer v112+.
@@ -40,22 +46,24 @@ If your organization has an existing all-encompassing index with a low limit, pl
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
 
+## Traces are missing intermittently
+When searching traces, select the **Live Search** option in the upper right corner. If Live Search shows your trace, add "@trace_type:stepfunctions" to the [retention filter](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) and set the desired retention rate. For debugging, Datadog recommends setting the retention rate to 100%. The filter can be disabled after debugging is done.
+
 ## Some step spans are missing in the traces
-- For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
-- `Wait`, `Choice`, `Success`, `Fail`, and `Pass` are supported, while `Map` and `Parallel` are not. You are able to see parallel executing spans stacked on top of each other, but no `Parallel` spans show on the flame graph.
+- Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
+- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
 - On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
 - To enable Step Functions trace generation on the Datadog backend, the Datadog-Forwarder layer version must be greater than 31. This version is able to fetch state machine tags, including the required `DD_TRACE_ENABLED` tag.
+- You can also set the `DD_STEP_FUNCTIONS_TRACE_ENABLED` tag at the Forwarder-level to enable tracing for all Step Functions using that Forwarder on v3.121.0+.
 - The IAM role for the forwarder should have `tags:getResources` permission.
 - Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
 - To verify if logs are reaching the Datadog backend, open the Log Explorer page and search `source:stepfunction` with the `Live` search timeframe (which shows all logs going into Datadog's logs intake). If you cannot see any logs, check if there are any error logs on the Datadog Forwarder such as wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you see Step Functions logs, verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized) and you should see Step Function traces associated with the log in a few minutes.
 
 
 #### Notes
-Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
-
 If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
 
 [1]: https://app.datadoghq.com/logs

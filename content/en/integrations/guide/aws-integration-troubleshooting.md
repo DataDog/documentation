@@ -1,6 +1,6 @@
 ---
 title: AWS Integration Troubleshooting
-kind: guide
+
 description: "Troubleshooting steps for the Datadog AWS Integration"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
@@ -59,17 +59,28 @@ When installing the Agent on an AWS host, you might see duplicated hosts on the 
 
 ### EC2 metadata with IMDS v2
 
-In some situations, the configuration of EC2's [IMDSv2][5] makes it impossible for the agent to access metadata, leading the Agent to fall back to the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
-
 In containerized environments the problem might be that you have locked down the EC2 metadata endpoint, by way of assigning IAM roles/credentials to pods running in the Kubernetes cluster. `Kube2IAM` and `kiam` are common tools used to do this. To solve this, update your `Kube2IAM` or `kiam` configuration to allow access to this endpoint.
-
-The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, but IMDSv2 is enabled and accessible, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][6]. See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
 
 IMDSv2, in its default configuration, refuses connections with an IP hop count greater than one, that is, connections that have passed through an IP gateway. This can cause problems when the Agent is running in a container with a network other than the host's network, as the runtime forwards the container's traffic through a virtual IP gateway. This is common in ECS deployments. The following options may remedy this issue:
 
- * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well. 
+ * [Increase the maximum hop count to at least `2`][8]. Doing so may have implications for the security of data stored in the IMDS, as it permits containers other than the Agent to access this data as well.
  * Use the hostname discovered by cloud-init, by [setting `providers.eks.ec2.useHostnameFromFile` to true][9].
  * Run the Agent in the host UTS namespace, by [setting `agents.useHostNetwork` to true][10].
+
+### EC2 hostname with IMDS
+
+#### Agent versions before 7.64.0
+
+In some situations, the EC2 [IMDSv2][5] configuration may make it impossible for the Agent to access the necessary metadata. This can cause the Agent to fall back to the `os` hostname provider instead of `aws`, as seen in the output of `agent status`.
+
+The AWS API supports disabling IMDSv1, which the Agent uses by default. If this is the case, but IMDSv2 is enabled and accessible, set the parameter `ec2_prefer_imdsv2` to `true` (defaults to `false`) in your [Agent configuration][6]. See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
+
+Upgrading to Datadog Agent 7.64.0+ should resolve these issues as the newer versions of the Agent use IMDSv2 by default.
+
+#### Agent version 7.64.0 and after
+
+Starting at v7.64.0, the Datadog Agent defaults to using IMDSv2 and falls back on IMDSv1 in case of failure. To revert to the previous behavior, set `ec2_imdsv2_transition_payload_enabled` to `false` in your host configuration.
+See the [Transition to using Instance Metadata Service Version 2][7] documentation for details.
 
 ## Tags
 
@@ -81,7 +92,9 @@ If you removed the AWS integration, but continue to run a Datadog Agent on your 
 
 You can verify the integration is enabled by checking the "Apps Running" for that host from the infrastructure list or by checking the metrics summary and creating a notebook scoped to that host.
 
-If you want to permanently remove AWS host tags from a host, you can do this by using the [Remove host tags API endpoint][11].
+By default, host-level tags remain permanently attached to AWS hosts. If you want to permanently remove AWS host tags from a host, you can do this by the following methods:
+   - Use the [Remove host tags API endpoint][11] to remove all user-assigned tags for a single host
+   - Use the [remove_lingering_aws_host_tags.py tool][12] to remove all user-assigned tags from a list of hosts, or from all hosts
 
 [1]: /integrations/amazon_web_services/
 [2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/#pagetitle
@@ -94,3 +107,4 @@ If you want to permanently remove AWS host tags from a host, you can do this by 
 [9]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L1683-L1688
 [10]: https://github.com/DataDog/helm-charts/blob/58bf52e4e342c79dbec95659458f7de8c5de7e6c/charts/datadog/values.yaml#L930-L937
 [11]: /api/latest/tags/#remove-host-tags
+[12]: https://github.com/DataDog/Miscellany/blob/master/remove_lingering_aws_host_tags.py

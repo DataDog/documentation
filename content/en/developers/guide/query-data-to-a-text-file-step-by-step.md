@@ -1,6 +1,6 @@
 ---
 title: Query data to a text file, step by step
-kind: guide
+
 aliases:
   - /developers/faq/query-data-to-a-text-file-step-by-step
 ---

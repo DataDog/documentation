@@ -9,7 +9,6 @@ further_reading:
 - link: synthetics/settings/?tab=specifyvalue#global-variables
   tag: ドキュメント
   text: グローバル変数について
-kind: ガイド
 title: ブラウザテストにおいて、多要素認証 (MFA) に時間ベースのワンタイムパスワード (TOTP) を使用する
 ---
 
@@ -26,7 +25,7 @@ Datadog Synthetic MFA グローバル変数を使用すると、重要なセキ�
 2. **Define variable** で、**Variable Name** を入力します。変数名に使用できるのは大文字、数字、アンダースコアのみです。
 3. 変数の **Description** を入力します（任意）。
 4. **Tags** を選択して変数と関連付けます（任意）。
-5. 変数に**シークレットキー**を入力または QR コードイメージをアップロードします。
+5. 変数に**シークレットキー**を入力するか、QR コードイメージをアップロードします。
 6. **+ Generate** をクリックして TOTP を作成します。**コピー**アイコンを使用すると、生成した TOTP をコピーできます。
 7. **Permissions settings** で、オーガニゼーション内のロールに基づいて変数へのアクセスを制限します。ロールの詳細については、[RBAC ドキュメント][1]を参照してください。
 

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: トラブルシューティングのための .NET 診断ツールの使用について
 ---
 

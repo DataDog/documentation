@@ -15,7 +15,7 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: Documentation
   text: Apprendre à étudier un problème de parsing de log
-kind: guide
+
 title: Logs avec un statut Info en cas d'avertissement ou d'erreur
 ---
 

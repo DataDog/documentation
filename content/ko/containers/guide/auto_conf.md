@@ -16,7 +16,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: 설명서
   text: 컨테이너에 Agent 자동탐지를 포함하도록 관리하기
-kind: guide
 title: 자동 탐지에 대한 자동 설정
 ---
 

@@ -5,7 +5,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: 설명서
   text: Node.js 애플리케이션 계측
-kind: 설명서
 title: Node.js Lambda 추적 및 웹팩 호환성
 ---
 

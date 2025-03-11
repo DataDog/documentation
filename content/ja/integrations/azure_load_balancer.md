@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Load Balancer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
@@ -14,7 +15,6 @@ integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: azure_load_balancer
 public_title: Datadog-Microsoft Azure Load Balancer インテグレーション
@@ -29,27 +29,27 @@ Azure Load Balancer は、インバウンドとアウトバウンドのどちら
 
 Datadog Azure インテグレーションを使用して、Azure Load Balancer からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_load_balancer" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Load Balancer インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Load Balancer インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - アラート設定
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: botprise
 integration_title: Botprise
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: botprise
 public_title: Botprise
@@ -47,6 +47,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 生成されたイベントを監視する Botprise インテグレーション
   media: []
@@ -62,14 +63,14 @@ Botprise の Datadog インテグレーションを使用すると、Webhook を
 
 ![image-datadog-botprise-events][2]
 
-## 計画と使用
+## セットアップ
 
 Botprise-Datadog インテグレーションを使用するには、Botprise ユーザーである必要があります。Botprise の詳細については、[https://www.botprise.com/][1] をご覧ください。
 
-### インフラストラクチャーリスト
+### インストール
 
 
-### ブラウザトラブルシューティング
+### 構成
 1. ラボデバイスに Datadog Agent をインストールします。
 2. インストールが完了すると、デバイスから Datadog へのデータ送信が開始します。データは、[Datadog ホストリスト][3]で確認できます。
 3. Datadog で、各ホスト用のモニターを作成します。モニターの規則に基づき、Datadog でアラートが作成されます。
@@ -78,24 +79,24 @@ Botprise-Datadog インテグレーションを使用するには、Botprise ユ
 6. Datadog Rest API を呼び出すための [API キーとアプリケーションキー][6]を生成します。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Botprise インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### サービスチェック
 
 Botprise インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 すべてのイベントが Datadog のイベントストリームに送信されます。
 
-### ブラウザトラブルシューティング
+### 構成
 Datadog API を使用するには、[API キーとアプリケーションキー][6]を入力する必要があります。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

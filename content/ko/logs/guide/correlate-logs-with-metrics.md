@@ -5,11 +5,10 @@ further_reading:
   text: 로그 탐색 방법 보기
 - link: /logs/logging_without_limits/
   tag: 설명서
-  text: 제한없는 로그 수집*
+  text: Logging without Limits*
 - link: /logs/live_tail/
   tag: 설명서
   text: Datadog 라이브 테일 기능
-kind: 지침
 title: 로그와 메트릭 상호 연결하기
 ---
 
@@ -52,7 +51,7 @@ Datadog 앱 내에서 로그와 메트릭을 상호 연관시키는 몇 가지 �
 ## 참고 자료
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*제한 없는 로그 수집은 Datadog, Inc.의 상표입니다.
+\*제한 없는 로깅은 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/logs/explorer/
 [2]: /ko/dashboards/

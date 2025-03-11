@@ -5,6 +5,7 @@ synonyms:
     - Distributed Tracing
 core_product:
   - apm
+short_definition: Application Performance Monitoring (APM) monitors requests, errors, and latency in your application.
 ---
 Application Performance Monitoring (APM) monitors requests, errors, and latency in your application. Add distributed traces throughout your application to correlate to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across your hosts, containers, proxies, and server less functions.
 

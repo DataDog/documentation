@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Detección automática de una implementación con errores
 ---
 

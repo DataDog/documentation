@@ -17,7 +17,7 @@ integration_id: mongodb-atlas
 integration_title: MongoDB Atlas
 integration_version: ''
 is_public: true
-kind: intégration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   '[MongoDB Atlas] CPU usage is higher than average on host: {{host.name}} ': assets/monitors/high_cpu.json

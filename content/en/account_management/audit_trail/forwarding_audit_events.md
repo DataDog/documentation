@@ -13,8 +13,10 @@ Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-{{% site-region region="US,US3,US5,EU,AP1" %}}
-<div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+<div class="alert alert-warning">
+Audit Event Forwarding is in Preview.
+</div>
 {{% /site-region %}}
 
 ## Overview
@@ -75,6 +77,20 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
 9. Click **Save**.
+
+{{% /tab %}}
+{{% tab "Microsoft Sentinel" %}}
+
+<div class="alert alert-info">Log forwarding to Microsoft Sentinel is in Preview. To access this feature, <a href="https://www.datadoghq.com/product-preview/log-forwarding-to-microsoft-sentinel/">register here.</a></div>
+
+6. Enter a name for the destination.
+7. Authentication for the Microsoft Sentinel Forwarder requires configuring an App Registration through the Datadog Azure Integration.
+8. In the **Configure Destination** section, enter the following details:
+  | Setting                   | Description                                                                                                          | Example                                                   |
+|---------------------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| **Logs Ingestion Endpoint** | Enter the endpoint on the Data Collection Endpoint (DCE) where logs are sent. This is labeled "Logs Ingestion" on the DCE Overview page. | `https://my-dce-5kyl.eastus-1.ingest.monitor.azure.com`   |
+| **Immutable ID**           | Specify the immutable ID of the Data Collection Rule (DCR) where logging routes are defined, as found on the DCR Overview page as "Immutable Id".  **Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings. | `dcr-000a00a000a00000a000000aa000a0aa`                     |
+| **Stream Declaration Name**| Provide the name of the target Stream Declaration found in the Resource JSON of the DCR under `streamDeclarations`.  | `Custom-MyTable`                                          |
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/types/event/
   tag: Documentation
   text: イベントモニター
-kind: documentation
 private: true
 title: イベントガイド
 ---
@@ -31,7 +30,11 @@ title: イベントガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="イベントには必ずタグを付けてください。">}}
-{{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}イベントへのタグ付けのベストプラクティス{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/recommended_event_tags/" >}}イベントへのタグ付けのベストプラクティス{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Learn more about Event Management use cases:">}}
+    {{< nextlink href="/service_management/events/guides/usage" >}}イベントの使用例{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="その他のガイド:">}}

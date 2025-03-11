@@ -1,7 +1,6 @@
 ---
 description: CWS バックエンドイベントの JSON スキーマドキュメント
 disable_edit: true
-kind: documentation
 title: クラウドワークロードセキュリティ (CWS) イベント形式
 ---
 <!-- このファイルは自動生成されています。scripts/templates フォルダーにあるファイルを編集してください -->

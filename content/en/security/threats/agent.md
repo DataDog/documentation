@@ -5,7 +5,6 @@ further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: Documentation
   text: Get started with Datadog CSM Threats
-kind: documentation
 title: Creating Agent Rule Expressions
 ---
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->

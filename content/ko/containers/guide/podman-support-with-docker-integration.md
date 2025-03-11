@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/guide/podman-support-with-docker-integration
-kind: 도움말
 title: Podman 컨테이너 런타임과 Docker 통합 사용하기
 ---
 

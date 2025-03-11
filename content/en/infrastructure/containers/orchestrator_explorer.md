@@ -1,6 +1,5 @@
 ---
 title: Orchestrator Explorer
-kind: documentation
 ---
 
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Orchestrator Explorer, showing Kubernetes Pods." style="width:80%;">}}
@@ -116,7 +115,7 @@ To prevent displaying a large number of irrelevant changes, updates affecting on
 
 The other tabs show more information for troubleshooting the selected resource:
 
-* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
+* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in the Log Explorer.
 * [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
 * **Processes**: View all processes running in the container of this resource.
@@ -161,6 +160,7 @@ There are multiple types of terms available:
 | **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
 | **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
+| **Fields**: Extracted from [a resource's metadata][27]. | `field#metadata.creationTimestamp:>=4wk`<br>`field#metadata.deletionTimestamp:<=1hr` |
 
 >  ***Note**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
@@ -232,7 +232,7 @@ Additionally, resources contain a `kube_<api_kind>:<metadata.name>` tag. For exa
 >
 > - Pods use `pod_name` instead.
 > - *VPAs: `verticalpodautoscaler`*.
-> - *VPHs: `horizontalpodautoscaler`*.
+> - *HPAs: `horizontalpodautoscaler`*.
 > - *Persistent Volume Claims: `persistentvolumeclaim`*.
 
 Based on the labels attached to the resource, the following tags will also be extracted:
@@ -345,7 +345,7 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 
 ## Notes and known issues
 
-* Data is updated automatically in constant intervals. Update intervals may change during beta.
+* Data is updated automatically in constant intervals.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
 [1]: https://app.datadoghq.com/orchestration/overview
@@ -359,3 +359,4 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 [20]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
 [25]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 [26]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+[27]: https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/

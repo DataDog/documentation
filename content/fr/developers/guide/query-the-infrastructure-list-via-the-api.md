@@ -1,6 +1,6 @@
 ---
 title: Interroger la liste d'infrastructures via l'API
-kind: guide
+
 aliases:
   - /fr/developers/faq/query-the-infrastructure-list-via-the-api
 ---

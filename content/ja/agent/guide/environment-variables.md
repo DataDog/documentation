@@ -113,8 +113,8 @@ Datadog Agent 7.45 から、Datadog Agent サービス (`datadog-agent.service` 
 [1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: /ja/agent/configuration/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
 [5]: https://docs.datadoghq.com/ja/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment

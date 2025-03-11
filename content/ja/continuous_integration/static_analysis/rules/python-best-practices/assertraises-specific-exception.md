@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: assertRaises は特定の例外をチェックしなければならない
 ---
 ## メタデータ

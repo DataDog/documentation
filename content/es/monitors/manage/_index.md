@@ -12,13 +12,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
   tag: Blog
   text: Prácticas recomendadas para el etiquetado de tus monitores
-kind: documentación
 title: Gestionar monitores
 ---
 
 Utiliza la página [Gestionar monitores][1] para buscar, borrar, silenciar o resolver tus monitores y editar etiquetas (tags) de monitores en bloque. También puedes clonar o editar monitores individuales a partir de los resultados de búsquedas.
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="manage monitor page" (Página de gestión de monitores"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="Página de gestión de monitores"  >}}
 
 ## Buscar
 

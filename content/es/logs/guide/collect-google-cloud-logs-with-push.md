@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentación
   text: Aprende a procesar tus logs
-kind: documentación
 title: Recopilar logs de Google Cloud con una suscripción Pub/Sub Push
 ---
 

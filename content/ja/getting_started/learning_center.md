@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - チュートリアル
 aliases:
 - /ja/video-categories/
 - /ja/video-categories/datadog-101/
@@ -33,7 +36,6 @@ aliases:
 - /ja/videos/apm
 - /ja/videos/aws
 - /ja/videos/host-map
-kind: documentation
 title: Datadog ラーニングセンター
 ---
 

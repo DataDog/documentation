@@ -14,7 +14,7 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-kind: guide
+
 title: Utiliser l'Agent de conteneur pour suivre les logs provenant d'un host
 ---
 

@@ -22,7 +22,7 @@ further_reading:
   tag: Blog
   text: Utiliser l'injection de bibliothèque pour instrumenter et tracer automatiquement
     vos applications Kubernetes avec la solution APM Datadog
-kind: guide
+
 title: 'Tutoriel : Activer le tracing pour une application Java avec le contrôleur
   d''admission'
 ---

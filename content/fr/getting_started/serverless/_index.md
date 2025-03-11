@@ -7,7 +7,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour en savoir plus sur la surveillance
     sans serveur
-kind: documentation
 title: Débuter avec la surveillance sans serveur AWS Lambda
 ---
 

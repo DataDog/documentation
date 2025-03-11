@@ -17,7 +17,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: Blog
   text: Présentation de Datadog Security Monitoring
-kind: guide
+
 title: Configuration multicompte de l'intégration AWS pour les organisations AWS
 ---
 

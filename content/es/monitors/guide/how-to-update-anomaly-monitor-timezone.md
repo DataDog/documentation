@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Configurar notificaciones de monitor
-kind: guía
 title: Cómo actualizar un monitor de detección de anomalía para tener en cuenta la
   zona horaria local
 ---

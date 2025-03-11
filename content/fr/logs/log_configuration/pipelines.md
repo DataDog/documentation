@@ -15,7 +15,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: Centre d'apprentissage
   text: Des analyses plus poussées grâce au traitement des logs
-kind: documentation
 title: Pipelines
 ---
 

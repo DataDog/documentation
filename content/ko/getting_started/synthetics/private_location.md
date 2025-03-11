@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: 설명서
   text: 프라이빗 위치 자세히 알아보기
-kind: 설명서
 title: 프라이빗 위치로 시작하기
 ---
 

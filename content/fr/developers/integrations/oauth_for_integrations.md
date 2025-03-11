@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_integrations.md
-kind: documentation
 title: OAuth pour les intégrations
 ---
 {{< callout btn_hidden="true" >}}

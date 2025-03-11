@@ -8,7 +8,6 @@ further_reading:
 - link: tracing/trace_explorer/search
   tag: Documentation
   text: Rechercher des spans
-kind: documentation
 title: Trace Explorer
 ---
 

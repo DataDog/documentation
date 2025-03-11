@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/amazon_web_services/#installation
   tag: ドキュメント
   text: AWS Datadog インストール
-kind: ガイド
 title: 'エラー: Datadog に sts:AssumeRole を実行する権限がない'
 ---
 

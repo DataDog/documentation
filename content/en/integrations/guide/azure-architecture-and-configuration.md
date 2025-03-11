@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Architecture and Configuration
-kind: guide
+
 description: "Guide to architecture of the Datadog Azure integration and alternate configuration options"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"

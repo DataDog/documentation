@@ -14,7 +14,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: 설명서
   text: 모니터 상태 확인
-kind: 설명서
 title: 이상치 모니터
 ---
 

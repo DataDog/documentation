@@ -6,7 +6,7 @@ further_reading:
 - link: account_management/rbac/permissions
   tag: Documentation
   text: En savoir plus sur les autorisations RBAC
-kind: guide
+
 title: Autorisations RBAC pour les logs
 ---
 

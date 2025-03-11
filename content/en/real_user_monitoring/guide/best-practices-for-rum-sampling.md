@@ -1,6 +1,6 @@
 ---
 title: Best Practices for RUM Sampling
-kind: guide
+
 description: Guide for RUM sampling.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
@@ -21,7 +21,7 @@ This guide walks you through best practices for RUM sampling so you can capture 
 Sessions are randomly sampled based on the percentage listed in the [SDK configuration][1]. To that end, make sure to use the correct configuration variable names for the SDK version being used.
 
 ### Configure the sampling rate
-Before each new user session, the SDK draws a random floating-point number between 0 and 1, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the value is higher, the session is not kept and events are not collected until the end of the session.
+Before each new user session, the SDK draws a random floating-point number between 0 and 100, which is then compared to the value set in the SDK configuration. If the random number is lower than the value set in the SDK configuration, the session is kept and events start being collected. If the random number is higher, the session is not kept and events are not collected until the end of the session.
 
 You can set the sampling rate with the SDK ([Browser][2], [Android][3], [iOS][4], [React Native][5], [Flutter][6], [Roku][7]), then deploy it in the application code.
 
@@ -57,10 +57,10 @@ RUM ensures availability of data when user devices are offline. In low-network a
 
 [1]: /real_user_monitoring/guide/sampling-browser-plans/#overview
 [2]: /real_user_monitoring/guide/sampling-browser-plans/#overview
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#initialization-parameters
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
 [4]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#sample-rum-sessions
 [5]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#sample-rum-sessions
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/#initialize-the-library
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup/advanced_configuration/#sample-rum-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup/#initialize-the-library
 [8]: /help
 [9]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions

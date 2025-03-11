@@ -1,6 +1,6 @@
 ---
 title: Send traces to the Agent by API
-kind: guide
+
 further_reading:
   - link: '/tracing/'
     tag: 'Documentation'
@@ -58,7 +58,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 | `service`    | string  | The service you are tracing. The service name must not be longer than 100 characters. |
 | `span_id`    | int64   | The span integer (64-bit unsigned) ID. |
 | `start`      | int64   | The start time of the request in nanoseconds from the UNIX epoch. |
-| `trace_id`   | int64 or int128   | The unique integer (64-bit unsigned or 128-bit unsigned) ID of the trace containing this span. |
+| `trace_id`   | int64   | The lower 64 bits of the unique integer ID for the trace containing this span. For a 128-bit trace ID, set the upper 64 bits using the `_dd.p.tid` tag in hex-encoded lowercase format in the `meta` field. |
 | `type`       | enum    | The type of request. Allowed enum values: `web`, `db`, `cache`, `custom` |
 
 

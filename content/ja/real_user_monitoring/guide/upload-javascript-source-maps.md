@@ -6,7 +6,9 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: エクスプローラーでエラー追跡データを視覚化する
-kind: ガイド
+- link: https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps
+  tag: ソースコード
+  text: ソースマップのコマンドリファレンス
 title: JavaScript ソースマップのアップロード
 ---
 
@@ -14,11 +16,20 @@ title: JavaScript ソースマップのアップロード
 
 フロントエンドの JavaScript ソースコードが縮小化されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースの難読化を解除します。任意のエラーについて、関連するスタックトレースの各フレームのファイルパス、行番号、コードスニペットにアクセスすることができます。また、Datadog はスタックフレームをリポジトリ内のソースコードにリンクすることができます。
 
-<div class="alert alert-info"><a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
+<div class="alert alert-info"><a href="/error_tracking/">Error Tracking</a>、<a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
 
 ## コードのインスツルメンテーション
 
-JavaScript バンドルは、ソースコードを縮小化する際に、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように構成します。また、各ソースマップのサイズと関連する縮小化ファイルのサイズを足したものが、US1 または EU1 のサイトでは **200 MB**、その他のサイトでは **50 MB** という制限を超えないことを確認してください。
+ソースコードを縮小するときに、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように JavaScript バンドラーを構成します。
+
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**300** MB の制限を超えないようにしてください。
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**50** MB の制限を超えないようにしてください。
+{{< /site-region >}}
+</div>
 
 一般的な JavaScript のバンドルソフトについては、以下の構成を参照してください。
 
@@ -75,7 +86,14 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning"><code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>US1 または EU1 サイトでは 200 MB (その他のサイトでは 50 MB)</b> の制限を超える場合は、ソースコードを複数の小さな塊に分割するようにバンドラーを構成してファイルサイズを小さくしてください。詳しくは、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS によるコードの分割</a>を参照してください。</div>
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+<code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**300** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+<code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**50** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
+{{< /site-region >}}
+</div>
 
 ## ソースマップのアップロード
 
@@ -84,7 +102,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 {{< site-region region="us" >}}
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
-3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+3. アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -101,7 +119,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
 3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}
-4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
+4. アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -117,9 +135,9 @@ CI のパフォーマンスに対するオーバーヘッドを最小限に抑�
 
 **注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
-`service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
+`service` と `--release-version` パラメーターは、Error Tracking イベント、RUM イベント、およびブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
 
-<div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
+<div class="alert alert-info">アプリケーションで複数のサービスを定義している場合、アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
 
 サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 
@@ -150,6 +168,6 @@ Datadog は、縮小化を解除されたスタックフレームにソースコ
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#initialization-parameters
+[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#initialization-parameters
 [4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

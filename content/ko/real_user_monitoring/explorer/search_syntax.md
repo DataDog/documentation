@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: 설명서
   text: 이벤트 검색
-kind: 설명서
 title: 검색 구문
 ---
 

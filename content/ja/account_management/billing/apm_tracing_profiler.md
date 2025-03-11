@@ -16,7 +16,7 @@ APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されてい
 | APM Enterprise (APM ホストと Data Streams Monitoring & [Continuous Profiler)][6] | 基底の [APM ホスト][5]あたり 40 ドル。Data Streams Monitoring と [Continuous Profiler][6] が含まれ、1 ホストあたり 月 4 つのプロファイルされたコンテナが付属します。 | APM ホストと同様 | Datadog は、同時監視している Datadog APM サービスのユニーク APM ホスト、ユニーク DSM ホスト、ユニーク Continuous Profiler ホストの数を 1 時間に 1 回記録します。APM Enterprise の 1 時間ごとの測定と請求は、APM ホストと同じように行われます。 |
 | [Fargate][4]       | APM: 同時実行タスク 1 件につき 2 ドル/月 <br> APM Pro: 同時実行タスク 1 件につき 2.30 ドル/月 <br> APM Enterprise: 同時実行タスク 1 件につき 2.60 ドル/月              | 65,000 の Indexed Span と 10 GB と Ingested Spans を価格に含む。              | お客様が Datadog APM サービスで監視しているタスクのインスタンス数を 5 分間隔で記録します。月末にこの間隔に基づく測定値を集計し、アプリケーションが実行されて監視された平均時間数に基づいて課金されます。[Fargate の料金について詳しくはこちら][4]              |
 | [Indexed span][5] | Indexed Span 100 万件あたり 1.70 ドル / 月 | すべての APM ホストで使用される Indexed Span の数が超過すると料金が発生 | Indexed Span は、スタック内の個々のサービスに対する個別のリクエストです。保持フィルターを使用してインデックス化されたスパンまたは Datadog APM サービスに送信された レガシー Analyzed Span の合計数に基づき月末に課金されます。[APM の料金について詳しくはこちら。][5]                                                                                          |
-| [Ingested span][5] | Ingested Span 1 GB あたり 0.1 ドル / 月 | すべての APM ホストで使用される Ingested Span の数が超過すると料金が発生 | Ingested Span は、スタック内の個々のサービスに対する個別のリクエストです。Datadog に取り込まれたスパンのギガバイトの総数に基づき月末に課金されます。[APM の料金について詳しくはこちら][5]                                                                                          |
+| [Ingested span][5] | Ingested Span 1 GB あたり 0.10 ドル / 月 | すべての APM ホストで使用される Ingested Span の数が超過すると料金が発生 | Ingested Span は、スタック内の個々のサービスに対する個別のリクエストです。Datadog に取り込まれたスパンのギガバイトの総数に基づき月末に課金されます。[APM の料金について詳しくはこちら][5]                                                                                          |
 
 **注**:  
    - Fargate 以外のコンテナベースの環境を使用している場合、Datadog Agent をデプロイしている基盤となるホストの料金が発生します。
@@ -25,7 +25,7 @@ APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されてい
 
 詳細については、[料金ページ][7]を参照してください。
 
-## データベース モニタリング
+## Database Monitoring
 
 | 請求パラメーター  | 正規化されたクエリ                | 課金                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|

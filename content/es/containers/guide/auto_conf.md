@@ -19,7 +19,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
   text: Autodiscovery Gestión
-kind: guía
 title: Configuración automática de Autodiscovery
 ---
 
@@ -62,8 +61,8 @@ Kubernetes Las anotaciones y las etiquetas Docker tienen prioridad sobre los arc
 
 Los siguientes ejemplos desactivan el auto-Configuración para Redis e Istio integraciones.
 
-{{< <txprotected>pestañas</txprotected> >}}
-{{% pestaña "Datadog Operador" %}}
+{{< tabs >}}
+{{% tab "Datadog Operador" %}}
 
 En su `datadog-agent.yaml`, utilice `override.nodeAgent.env` para establecer la variable `DD_IGNORE_AUTOCONF` entorno .
 

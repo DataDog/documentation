@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Dépannage des erreurs relatives aux couches sans serveur non autorisées
 ---
 Ce guide vous aide à corriger l'erreur de déploiement `not authorized to perform: lambda:GetLayerVersion on resource`. Cette erreur concerne généralement les couches de la bibliothèque Lambda Datadog ou la couche de l'extension Datadog.

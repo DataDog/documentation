@@ -3,6 +3,7 @@ categories:
 - languages
 - log collection
 - tracing
+custom_kind: integration
 dependencies: []
 description: PHP アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。
 doc_link: https://docs.datadoghq.com/integrations/php/
@@ -20,7 +21,6 @@ integration_id: php
 integration_title: PHP
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: php
 public_title: Datadog-PHP インテグレーション
@@ -33,7 +33,7 @@ version: '1.0'
 
 Datadog-PHP インテグレーションを利用して、PHP アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
@@ -53,7 +53,7 @@ Datadog-PHP インテグレーションを利用して、PHP アプリケーシ�
 
 [PHP プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

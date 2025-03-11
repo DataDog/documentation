@@ -14,14 +14,9 @@ further_reading:
 - link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
-kind: documentation
 title: Node.js ランタイムメトリクス
 type: multi-code-lang
 ---
-
-<div class="alert alert-warning">
-これは公開ベータ版の機能です。
-</div>
 
 ## 自動コンフィギュレーション
 
@@ -61,7 +56,7 @@ Kubernetes では、[DogstatsD ポートをホストポートにバインド][4]
 
 または、Agent は UDP トランスポートの代わりに Unix Domain Socket (UDS) を使用してメトリクスを取り込むこともできます。詳細については、[Unix Domain Socket 経由の DogStatsD][7] を参照してください。
 
-## CoScreen
+## 収集データ
 
 以下のメトリクスはランタイムメトリクスを有効にした後、デフォルトで収集されます。
 

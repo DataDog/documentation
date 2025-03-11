@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: 値が呼び出し可能かどうかをチェックするために hasattr を使わない
 ---
 ## メタデータ

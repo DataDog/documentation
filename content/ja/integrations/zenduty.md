@@ -26,6 +26,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zenduty/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: zenduty
 integration_title: Zenduty
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: zenduty
 public_title: Zenduty
@@ -89,7 +89,7 @@ Zenduty と Datadog を接続することで、以下のことが可能になり
 - オンコールスケジュール、エスカレーションポリシー、インシデントプレイブック、ポストモーテム、詳細分析のデプロイメント
 - アラートルールを使用して、特定のユーザーやチームへの Datadog アラートのルーティングをカスタマイズし、抑制ルールを記述して、メモ、対応者、インシデントタスクを自動的に追加する
 
-## 計画と使用
+## セットアップ
 
 ### Zenduty
 [Zenduty][1] では、以下の手順で操作してください。
@@ -127,20 +127,20 @@ Zenduty と Datadog を接続することで、以下のことが可能になり
 
 **注**: Datadog のインシデントが作成または解決されたときに Zenduty を通してアラートを受け取るには、Datadog モニターの構成で **Notify your team** の下に `@zenduty` をチャンネルとして記載してください。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 
 Zenduty インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 トリガーされたイベント、承認されたイベント、解決されたイベントは Zenduty のダッシュボードに表示されます。
 
-### ヘルプ
+### サービスチェック
 
 Zenduty インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://www.zenduty.com

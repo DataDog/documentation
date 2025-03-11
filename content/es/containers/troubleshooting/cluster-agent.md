@@ -12,7 +12,6 @@ further_reading:
 - link: /containers/kubernetes/integrations/
   tag: Documentación
   text: Integraciones personalizadas
-kind: Documentación
 title: Solucionar problemas del Cluster Agent
 ---
 

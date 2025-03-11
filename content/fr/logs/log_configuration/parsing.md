@@ -1,6 +1,5 @@
 ---
 title: Parsing
-kind: documentation
 description: Parser vos logs à l'aide du processeur Grok
 aliases:
   - /fr/logs/parsing/

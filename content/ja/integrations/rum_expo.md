@@ -12,7 +12,8 @@ categories:
 - モニター
 - apm
 - ネットワーク
-- profiler_troubleshooting
+- tracing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_expo/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: rum-expo
 integration_title: Expo
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: rum_expo
 public_title: Expo
@@ -40,10 +40,16 @@ tile:
   - Category::Tracing
   - Supported OS::Android
   - Supported OS::iOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した Expo アプリケーションの監視とメトリクス生成
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/reactnative/expo/
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/real_user_monitoring/error_tracking/expo/
   support: README.md#Support
   title: Expo
 ---
@@ -71,7 +77,7 @@ Expo アプリケーションのエンドツーエンドの健全性を監視し
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -85,21 +91,21 @@ Expo アプリケーションは、自動的に Datadog にトレースを送信
 
 Expo アプリケーションのログを Datadog に転送し始めるには、[Expo ログ収集][3]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Expo インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
-### ヘルプ
+### イベント
 
 イベントや属性の詳細については、[RUM Expo モニタリング][5]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 Expo インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

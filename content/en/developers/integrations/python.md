@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Install the Datadog Agent Integration Developer Tool
 description: Install the Datadog Agent Integration Developer Tool.
 ---
@@ -12,7 +11,7 @@ Many operating systems come with a pre-installed version of Python. However, the
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-Install Python 3.11 using [Homebrew][1]:
+Install Python 3.12 using [Homebrew][1]:
 
 1. Update Homebrew:
    ```
@@ -21,31 +20,31 @@ Install Python 3.11 using [Homebrew][1]:
 
 2. Install Python:
    ```
-   brew install python@3.11
+   brew install python@3.12
    ```
 
 3. Check the Homebrew installation output and run any additional commands recommended by the installation script.
 
 4. Verify that the Python binary is installed in your `PATH` and that have installed the correct version:
    ```
-   which python3.11
+   which python3.12
    ```
 
    You should see the following output depending on your Mac architecture:
    - ARM (M1+) machines:
      ```
-     /opt/homebrew/bin/python3.11
+     /opt/homebrew/bin/python3.12
      ```
    - MacOS on Intel machines:
      ```
-     /usr/local/bin/python3.11
+     /usr/local/bin/python3.12
      ```
 
 [1]: https://brew.sh/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Download the [Python 3.11 64-bit executable installer][1] and run it.
+1. Download the [Python 3.12 64-bit executable installer][1] and run it.
 1. Select the option to add Python to your PATH.
 1. Click **Install Now**.
 1. After the installation has completed, restart your machine.
@@ -60,7 +59,7 @@ Install Python 3.11 using [Homebrew][1]:
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.11 using [pyenv][1] or [miniconda][2].
+For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.12 using [pyenv][1] or [miniconda][2].
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
@@ -104,9 +103,9 @@ You have 2 options to install the `ddev` CLI.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
+1. Download the file using the `curl` command. The -L option allows for redirects, and the -o option specifies the file name to which the downloaded package is written. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
    ```shell
-   curl -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
+   curl -L -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
 2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` on the command to grant write permissions to those folders.
    ```shell

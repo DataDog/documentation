@@ -23,6 +23,7 @@ author:
 categories:
 - メトリクス
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sendmail
 public_title: Sendmail
@@ -45,6 +45,7 @@ tile:
   - Category::Metrics
   - Category::Network
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: メールキューを監視する Sendmail インテグレーション
   media: []
@@ -60,11 +61,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Sendmail][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Sendmail チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -76,7 +77,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. sendmail のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `sendmail.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sendmail.d/conf.yaml][5] を参照してください。
 
@@ -86,21 +87,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sendmail チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `sendmail` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "sendmail" >}}
 
 
-### ヘルプ
+### イベント
 
 Sendmail には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "sendmail" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

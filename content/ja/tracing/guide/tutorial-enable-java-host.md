@@ -1,21 +1,20 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの追加構成オプション
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレーシングライブラリの詳細設定手順
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トレースとスパンを手動で構成する
 - link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
+  tag: ソースコード
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - Datadog Agent と同じホスト上の Java アプリケーションのトレースを有効にする
 ---
 
@@ -40,7 +39,7 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
 {{< /code-block >}}
 
 `datadoghq.com` 以外の Datadog サイトにデータを送信するには、`DD_SITE` 環境変数を [Datadog サイト][6]に置き換えてください。
@@ -70,7 +69,7 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 ./mvnw clean package
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -80,7 +79,7 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 
 これは、Spring Boot Jar プラグインを使用して、Java アプリケーションを実行するために必要なすべてのファイルを含む単一の Jar ファイルを作成するものです。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -94,7 +93,7 @@ Maven または Gradle のどちらか使いやすい方を使用して、サン
 java -jar target/notes-0.0.1-SNAPSHOT.jar
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -102,7 +101,7 @@ java -jar target/notes-0.0.1-SNAPSHOT.jar
 java -jar build/libs/notes-0.0.1-SNAPSHOT.jar
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -116,7 +115,7 @@ java -jar build/libs/notes-0.0.1-SNAPSHOT.jar
 sh ./scripts/mvn_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -124,7 +123,7 @@ sh ./scripts/mvn_run.sh
 sh ./scripts/gradle_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -152,10 +151,10 @@ sh ./scripts/gradle_run.sh
 次に、Java トレーシングライブラリ (Java Agent と呼ばれることもあります) をダウンロードします。`apm-tutorial-java-host` ディレクトリから、以下を実行します。
 
 {{< code-block lang="sh" >}}
-curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
-お使いの OS が curl をサポートしていない場合は、直接 `https://dtdg.co/latest-java-tracer ` にアクセスして `dd-java-agent.jar` ファイルをダウンロードすることができます。
+If your operating system does not support curl, you can go directly to `'https://dtdg.co/latest-java-tracer' ` to download the `dd-java-agent.jar` file.
 
 ## 自動インスツルメンテーションによる Java アプリケーションの起動
 
@@ -180,7 +179,7 @@ java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes
 sh ./scripts/mvn_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -196,7 +195,7 @@ java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=notes
 sh ./scripts/gradle_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -217,7 +216,7 @@ sh ./scripts/gradle_instrumented_run.sh
 
 しばらく待って、Datadog の UI を見てみてください。[**APM > Traces**][11] に移動します。Traces リストには、次のように表示されます。
 
-{{< img src="tracing/guide/tutorials/tutorial-java-host-traces.png" alt="Traces ビューには、ホストから入ってくるトレースデータが表示されます。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-host-traces_cropped.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 `h2` はこのチュートリアルのために埋め込まれたメモリ内データベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
 
@@ -331,7 +330,7 @@ b. 以下を実行します。
    sh ./scripts/mvn_instrumented_run.sh
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -350,7 +349,7 @@ b. 以下を実行します。
    sh ./scripts/gradle_instrumented_run.sh
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -390,7 +389,7 @@ java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calen
 sh ./scripts/mvn_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Gradle" %}}
 
@@ -407,7 +406,7 @@ java -javaagent:../dd-java-agent.jar -Ddd.trace.sample.rate=1 -Ddd.service=calen
 sh ./scripts/gradle_instrumented_run.sh
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -430,7 +429,7 @@ sh ./scripts/gradle_instrumented_run.sh
 もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
 
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -438,7 +437,7 @@ sh ./scripts/gradle_instrumented_run.sh
 [2]: /ja/tracing/trace_collection/dd_libraries/java/
 [3]: /ja/account_management/api-app-keys/
 [4]: /ja/tracing/trace_collection/compatibility/java/
-[5]: https://app.datadoghq.com/account/settings#agent/overview
+[5]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [6]: /ja/getting_started/site/
 [7]: https://www.baeldung.com/java-instrumentation
 [8]: https://app.datadoghq.com/event/explorer

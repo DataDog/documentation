@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: Documentación
   text: Asignar etiquetas a todos los datos emitidos por un contenedor
-kind: documentación
 title: Recopilación de métricas de Docker Prometheus y OpenMetrics
 ---
 

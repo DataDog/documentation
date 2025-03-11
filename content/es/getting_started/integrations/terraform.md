@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: Blog
   text: Gestión de Datadog con Terraform
-kind: documentación
 title: Empezando con Terraform
 ---
 

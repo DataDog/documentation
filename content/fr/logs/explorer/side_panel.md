@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/guide/correlate-logs-with-metrics
   tag: Documentation
   text: Associer vos logs à vos métriques d'infrastructure
-kind: documentation
 title: Volet latéral des logs
 ---
 

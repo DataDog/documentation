@@ -1,6 +1,5 @@
 ---
 title: Tests DNS
-kind: documentation
 description: Surveiller les délais de résolution et de correspondance de vos enregistrements DNS
 aliases:
   - /fr/synthetics/dns_test

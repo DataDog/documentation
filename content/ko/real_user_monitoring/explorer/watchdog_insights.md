@@ -13,7 +13,6 @@ further_reading:
 - link: /real_user_monitoring/explorer/search/
   tag: 설명서
   text: RUM 탐색기에서 검색하는 방법 알아보기
-kind: 설명서
 title: RUM을 위한 Watchdog Insights
 ---
 

@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - grok
+  - grok パーサー
+  - ログのパース
+  - 属性の抽出
+  - 属性の再マッピング
+  - パース
 aliases:
 - /ja/logs/faq/why-do-my-logs-show-up-with-an-info-status-even-for-warnings-or-errors
 further_reading:
@@ -14,7 +22,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: ドキュメント
   text: ログのパースに関する問題を調査する方法
-kind: ガイド
 title: ログが警告やエラーの情報ステータスを表示する
 ---
 
@@ -34,7 +41,7 @@ Datadog で生ログが正しいステータスを表示していない場合、
 
 Grok パーサーを利用して、[`word()` マッチャー][1]でルールを定義し、実際のログのステータスを抽出します。
 
-1. [Logs Pipelines][2] に移動し、ログを処理するパイプラインをクリックします。
+1. [ログパイプライン][2]に移動し、ログを処理するパイプラインをクリックします。
 2. **Add Processor** をクリックします。
 3. プロセッサーの種類で **Grok Parser** を選択します。
 4. [`word()` マッチャー][1]を使用してステータスを抽出し、それをカスタムの `log_status` 属性に渡します。
@@ -67,12 +74,12 @@ MyParsingRule %{word:log_status}: %{word:user.name} %{word:action}.*
 
 `log_status` 属性は正しいステータスを含んでいます。[ログステータスリマッパーを追加][3]して、`log_status` 属性のステータス値がデフォルトのログステータスをオーバーライドすることを確認します。
 
-1. [Logs Pipelines][2] に移動し、ログを処理するパイプラインをクリックします。
+1. [ログパイプライン][2]に移動し、ログを処理するパイプラインをクリックします。
 2. **Add Processor** をクリックします。
 3. プロセッサーの種類で Status remapper を選択します。
 4. プロセッサーの名前を入力します。
 5. Set status attribute(s) セクションに **log_status** を追加します。
-6. **作成**をクリックします。
+6. **Create** をクリックします。
 
 {{< img src="logs/guide/log_post_processing.png" alt="重大度属性の値が警告に一致するステータスを持つログを表示するログパネル" style="width:50%;">}}
 
@@ -88,10 +95,10 @@ JSON ログは Datadog で自動的にパースされます。ログの `status`
 
 `logger_severity` 属性の値がデフォルトのログステータスをオーバーライドするようにするには、`logger_severity` をステータス属性のリストに追加します。
 
-1. [Logs Pipelines][2] に移動し、ログを処理するパイプラインをクリックします。
+1. [ログパイプライン][2]に移動し、ログを処理するパイプラインをクリックします。
 2. Preprocessing for JSON Logs にカーソルを合わせ、鉛筆のアイコンをクリックします。
 3. ステータス属性のリストに `logger_severity` を追加します。ステータスリマッパーは予約されたすべての属性をリストの順番に探します。ステータスが `logger_severity` 属性に由来していることを確認するために、リストの最初に置きます。
-4. **保存**をクリックします。
+4. **Save** をクリックします。
 
 {{< img src="logs/guide/new_log_remapped.png" alt="logger_severity 属性の値がエラーに一致するステータスを持つログを表示するログパネル" style="width:50%;">}}
 

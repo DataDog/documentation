@@ -1,6 +1,5 @@
 ---
 title: Résultats de la recherche
-kind: search
 disable_sidebar: true
 ---
 

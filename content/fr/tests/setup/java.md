@@ -15,7 +15,6 @@ further_reading:
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: Dépannage de CI Visibility
-kind: documentation
 title: Tests Java
 type: multi-code-lang
 ---

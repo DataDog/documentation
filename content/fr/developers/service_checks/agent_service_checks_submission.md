@@ -1,6 +1,5 @@
 ---
 title: "Envoi de checks de service\_: check de l'Agent"
-kind: documentation
 further_reading:
   - link: /developers/custom_checks/write_agent_check/
     tag: Documentation

@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Database Monitoring
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
@@ -13,11 +12,12 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 * [Troubleshooting Oracle Setup][8]
 * [Troubleshooting Postgres Setup][3]
 * [Troubleshooting SQL Server Setup][4]
+* [Troubleshooting MongoDB Setup][9]
 
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
 
-At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, settings to expose the un-obfuscated query bind parameters are planned.
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character.
 
 
 ### DBM host limit
@@ -38,8 +38,8 @@ telnet dbm-metrics-intake.datadoghq.com 443
 telnet dbquery-intake.datadoghq.com 443
 ```
 
-2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
-These commands should fail with HTTP code `403: Forbidden`. 
+2. Test posting an empty payload with an invalid API key on both DBM endpoints.
+These commands should fail with HTTP code `403: Forbidden`.
 
 ```
 curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
@@ -71,3 +71,5 @@ If you are still experiencing problems, contact [Datadog Support][5] for help.
 [5]: /help/
 [7]: /agent/configuration/proxy/?tab=linux
 [8]: /database_monitoring/setup_oracle/troubleshooting/
+[9]: /database_monitoring/setup_mongodb/troubleshooting/
+

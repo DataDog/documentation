@@ -1,6 +1,6 @@
 ---
 title: Datadog Application Monitoring for VMware Tanzu
-kind: guide
+
 description: "Datadog Application Monitoring for VMware Tanzu"
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-tanzu-application-service/"

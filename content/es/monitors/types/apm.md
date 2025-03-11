@@ -16,7 +16,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
-kind: Documentación
 title: Monitor de APM
 ---
 
@@ -33,7 +32,7 @@ Para crear un [monitor de APM][2] en Datadog, utiliza la navegación principal: 
 Elige entre un monitor de **métricas de APM** o un monitor de **rastreo Analytics**:
 
 {{< tabs >}}
-{{% tab "APM Metrics" (Métricas de APM) %}}
+{{% tab "Métricas de APM" %}}
 
 ### Seleccionar un contexto para el monitor
 
@@ -72,7 +71,7 @@ Para obtener instrucciones detalladas sobre las opciones avanzadas de alerta (re
 [4]: /es/monitors/configuration/#advanced-alert-conditions
 [5]: /es/monitors/types/metric/#data-window
 {{% /tab %}}
-{{% tab "Trace Analytics" (Rastreo Analytics) %}}
+{{% tab "Rastreo Analytics" %}}
 
 <div class="alert alert-info"><strong>Nota</strong>: Existe un límite predeterminado de 1000 monitores de rastreo Analytics por cada cuenta. Si estás por alcanzar este límite, considera la posibilidad de utilizar <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">alertas múltiples</a> o <a href="/help/">ponte en contacto con el servicio de asistencia</a>.</div>
 

@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/monitors/faq/why-did-my-monitor-settings-change-not-take-effect
-kind: guide
+
 title: Surveiller les modifications de paramètres non appliquées
 ---
 

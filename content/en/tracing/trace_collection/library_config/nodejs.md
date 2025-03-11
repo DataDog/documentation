@@ -1,6 +1,5 @@
 ---
 title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -11,7 +10,7 @@ further_reading:
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
-    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+    - link: "/tracing/trace_collection/trace_context_propagation/"
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'
@@ -20,13 +19,16 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "/opentelemetry/interoperability/environment_variable_support"
+      tag: "Documentation"
+      text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
 Tracer settings can be configured with the following environment variables:
 
-### Tagging
+### Unified Service Tagging
 
 `DD_ENV`
 : **Configuration**: `env`<br>
@@ -43,22 +45,9 @@ The service name used for this application.
 **Default**: The `version` field in `package.json`<br>
 The version number of the application.
 
-`DD_TAGS`
-: **Configuration**: `tags`<br>
-**Default**: `{}`<br>
-Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
-
-`DD_TRACE_HEADER_TAGS`
-: **Configuration**: `headerTags` <br>
-**Default**: N/A <br>
-Accepts a comma-delimited list of case-insensitive HTTP headers optionally mapped to tag names. Automatically applies matching header values as tags on traces. When a tag name is not specified, it defaults to tags of the form `http.request.headers.<header-name>` for requests and `http.response.headers.<header-name>` for responses. **Note**: This option is only supported for HTTP/1.<br><br>
-**Example**: `User-ID:userId,Request-ID`<br>
-  - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
-  - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
-
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
-### Instrumentation
+### Traces
 
 `DD_TRACE_ENABLED`
 : **Configuration**: N/A<br>
@@ -75,80 +64,35 @@ Enable debug logging in the tracer.
 **Default**: `true`<br>
 Whether to enable tracing.
 
-`DD_TRACE_AGENT_URL`
-: **Configuration**: `url`<br>
-**Default**: `http://localhost:8126`<br>
-The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
-
-`DD_TRACE_AGENT_HOSTNAME`
-: **Configuration**: `hostname`<br>
-**Default**: `localhost`<br>
-The address of the Agent that the tracer submits to.
-
-`DD_TRACE_AGENT_PORT`
-: **Configuration**: `port`<br>
-**Default**: `8126`<br>
-The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
-
-`DD_DOGSTATSD_PORT`
-: **Configuration**: `dogstatsd.port`<br>
-**Default**: `8125`<br>
-The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
-
-`DD_LOGS_INJECTION`
-: **Configuration**: `logInjection`<br>
-**Default**: `false`<br>
-Enable automatic injection of trace IDs in logs for supported logging libraries.
-
-`DD_TRACE_SAMPLE_RATE`
-: **Configuration**: `sampleRate`<br>
-**Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.
-
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
 **Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
 The maximum number of traces per second per service instance.<br>
+
+`DD_TRACE_HEADER_TAGS`
+: **Configuration**: `headerTags` <br>
+**Default**: N/A <br>
+Accepts a comma-delimited list of case-insensitive HTTP headers optionally mapped to tag names. Automatically applies matching header values as tags on traces. When a tag name is not specified, it defaults to tags of the form `http.request.headers.<header-name>` for requests and `http.response.headers.<header-name>` for responses. **Note**: This option is only supported for HTTP/1.<br><br>
+**Example**: `User-ID:userId,Request-ID`<br>
+  - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
+  - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
+
+`DD_TRACE_SAMPLE_RATE`
+: **Configuration**: `sampleRate`<br>
+**Default**: Defers the decision to the Agent.<br>
+Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
+**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>
 **Default**: `[]`<br>
 Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
 
-`DD_SPAN_SAMPLING_RULES`
-: **Configuration**: `spanSamplingRules`<br>
-**Default**: `[]`<br>
-Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
-For more information, see [Ingestion Mechanisms][3].<br>
-**Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
-`DD_SPAN_SAMPLING_RULES_FILE`
-: **Configuration**: N/A<br>
-**Default**: N/A<br>
-Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_RULES` takes precedence over this variable. See `DD_SPAN_SAMPLING_RULES` for the rule format.
-
-`DD_RUNTIME_METRICS_ENABLED`
-: **Configuration**: `runtimeMetrics`<br>
-**Default**: `false`<br>
-Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
-
 `DD_SERVICE_MAPPING`
 : **Configuration**: `serviceMapping`<br>
 **Default**: N/A<br>
 **Example**: `mysql:my-mysql-service-name-db,pg:my-pg-service-name-db`<br>
 Provide service names for each plugin. Accepts comma separated `plugin:service-name` pairs, with or without spaces.
-
-`DD_TRACE_DISABLED_PLUGINS`
-: **Configuration**: N/A<br>
-**Default**: N/A<br>
-**Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
-A comma-separated string of integration names automatically disabled when the tracer is initialized.
-
-`DD_TRACE_LOG_LEVEL`
-: **Configuration**: `logLevel`<br>
-**Default**: `debug`<br>
-A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
 
 Flush Interval
 : **Configuration**: `flushInterval`<br>
@@ -180,15 +124,34 @@ Custom function for DNS lookups when sending requests to the Agent. Some setups 
 **Default**: `0.4`<br>
 Protocol version to use for requests to the Agent. The version configured must be supported by the Agent version installed or all traces are dropped.
 
-`DD_PROFILING_ENABLED`
-: **Configuration**: `profiling`<br>
-**Default**: `false`<br>
-Whether to enable profiling.
-
 `DD_TRACE_REPORT_HOSTNAME`
 : **Configuration**: `reportHostname`<br>
 **Default**: `false`<br>
 Whether to report the system's hostname for each trace. When disabled, the hostname of the Agent is used instead.
+
+`DD_TRACE_STARTUP_LOGS`
+: **Configuration**: `startupLogs`<br>
+**Default**: `false`<br>
+Enable tracer startup configuration and diagnostic log.
+
+`DD_SPAN_SAMPLING_RULES`
+: **Configuration**: `spanSamplingRules`<br>
+**Default**: `[]`<br>
+Span sampling rules to keep individual spans when the rest of the trace would otherwise be dropped. A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+For more information, see [Ingestion Mechanisms][3].<br>
+**Example:**<br>
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+
+`DD_SPAN_SAMPLING_RULES_FILE`
+: **Configuration**: N/A<br>
+**Default**: N/A<br>
+Points to a JSON file that contains the span sampling rules. `DD_SPAN_SAMPLING_RULES` takes precedence over this variable. See `DD_SPAN_SAMPLING_RULES` for the rule format.
+
+`DD_TRACE_DISABLED_PLUGINS`
+: **Configuration**: N/A<br>
+**Default**: N/A<br>
+**Example**: `DD_TRACE_DISABLED_PLUGINS=express,dns`<br>
+A comma-separated string of integration names automatically disabled when the tracer is initialized.
 
 Experimental Features
 : **Configuration**: `experimental`<br>
@@ -200,15 +163,57 @@ Automatically Instrument External Libraries
 **Default**: `true`<br>
 Whether to enable automatic instrumentation of external libraries using the built-in plugins.
 
-`DD_TRACE_STARTUP_LOGS`
-: **Configuration**: `startupLogs`<br>
-**Default**: `false`<br>
-Enable tracer startup configuration and diagnostic log.
+`DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.request`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_REQUEST_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK requests. Setting this enables [AWS payload tagging][6] for requests.
 
-`DD_DBM_PROPAGATION_MODE`
-: **Configuration**: `dbmPropagationMode`<br>
-**Default**: `'disabled'`<br>
-To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
+`DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING`
+: **Configuration**: `cloudPayloadTagging.response`<br>
+**Default**: N/A (disabled)<br>
+**Example**: `DD_TRACE_CLOUD_RESPONSE_PAYLOAD_TAGGING=$.Metadata.UserId`<br>
+A comma-separated string of JSONPath entries to redact from AWS SDK responses. Setting this enables [AWS payload tagging][6] for responses.
+
+`DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH`
+: **Configuration**: `cloudPayloadTagging.maxDepth`<br>
+**Default**: 10<br>
+**Example**: `DD_TRACE_CLOUD_PAYLOAD_TAGGING_MAX_DEPTH=10`<br>
+An integer representing the maximum depth of an AWS SDK request/reponse payload to use for [AWS payload tagging][6].
+
+### Agent
+
+`DD_TAGS`
+: **Configuration**: `tags`<br>
+**Default**: `{}`<br>
+Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
+
+`DD_TRACE_AGENT_URL`
+: **Configuration**: `url`<br>
+**Default**: `http://localhost:8126`<br>
+The URL of the Trace Agent that the tracer submits to. Takes priority over hostname and port, if set. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Supports Unix Domain Sockets in combination with the `apm_config.receiver_socket` in your `datadog.yaml` file, or the `DD_APM_RECEIVER_SOCKET` environment variable.
+
+`DD_TRACE_AGENT_HOSTNAME`
+: **Configuration**: `hostname`<br>
+**Default**: `localhost`<br>
+The address of the Agent that the tracer submits to.
+
+`DD_TRACE_AGENT_PORT`
+: **Configuration**: `port`<br>
+**Default**: `8126`<br>
+The port of the Trace Agent that the tracer submits to. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+
+`DD_DOGSTATSD_PORT`
+: **Configuration**: `dogstatsd.port`<br>
+**Default**: `8125`<br>
+The port of the DogStatsD Agent that metrics are submitted to. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then this tracing library `DD_DOGSTATSD_PORT` must match it.
+
+`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
+: **Configuration**: `remoteConfig.pollInterval`<br>
+**Default**: 5<br>
+Remote configuration polling interval in seconds.
+
+### ASM
 
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
@@ -235,12 +240,47 @@ A regex string to redact sensitive data by its key in attack reports.
 **Default**: N/A<br>
 A regex string to redact sensitive data by its value in attack reports.
 
-`DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
-: **Configuration**: `remoteConfig.pollInterval`<br>
-**Default**: 5<br>
-Remote configuration polling interval in seconds.
+### Database monitoring
 
-### Headers extraction and injection
+`DD_DBM_PROPAGATION_MODE`
+: **Configuration**: `dbmPropagationMode`<br>
+**Default**: `'disabled'`<br>
+To enable DBM to APM link using tag injection, can be set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres.
+
+### Logs
+
+`DD_LOGS_INJECTION`
+: **Configuration**: `logInjection`<br>
+**Default**: `false`<br>
+Enable automatic injection of trace IDs in logs for supported logging libraries.
+
+`DD_TRACE_LOG_LEVEL`
+: **Configuration**: `logLevel`<br>
+**Default**: `debug`<br>
+A string for the minimum log level for the tracer to use when debug logging is enabled, for example, `error`, `debug`.
+
+### OpenTelemetry
+
+`DD_TRACE_OTEL_ENABLED`
+: **Configuration**: N/A<br>
+**Default**: `undefined`<br>
+When `true`, OpenTelemetry-based tracing for [custom][15] instrumentation is enabled.
+
+### Profiling
+
+`DD_PROFILING_ENABLED`
+: **Configuration**: `profiling`<br>
+**Default**: `false`<br>
+Whether to enable profiling.
+
+### Runtime metrics
+
+`DD_RUNTIME_METRICS_ENABLED`
+: **Configuration**: `runtimeMetrics`<br>
+**Default**: `false`<br>
+Whether to enable capturing runtime metrics. Port `8125` (or configured with `DD_DOGSTATSD_PORT`) must be opened on the Agent for UDP.
+
+### Trace context propagation
 
 For information about valid values and using the following configuration options, see [Propagating Node.js Trace Context][5].
 
@@ -269,5 +309,8 @@ For more examples of how to work with the library see [API documentation][2].
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /help/
-[5]: /tracing/trace_collection/trace_context_propagation/nodejs
+[5]: /tracing/trace_collection/trace_context_propagation/
+[6]: /tracing/guide/aws_payload_tagging/?code-lang=nodejs
 [13]: /agent/configuration/network/#configure-ports
+[14]: /opentelemetry/interoperability/environment_variable_support
+[15]: /tracing/trace_collection/custom_instrumentation/nodejs/otel/

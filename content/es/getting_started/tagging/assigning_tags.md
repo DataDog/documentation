@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/tagging
-- /es/getting_started/tagging/assigning_tags
 - /es/tagging/assigning_tags/
 description: Descubre cómo asignar etiquetas (tags) en Datadog.
 further_reading:
@@ -10,19 +9,18 @@ further_reading:
   text: Empezando con las etiquetas (tags)
 - link: /getting_started/tagging/using_tags/
   tag: Documentación
-  text: Descubre cómo usar etiquetas (tags) en Datadog.
-kind: documentación
+  text: Descubre cómo utilizar etiquetas (tags) en Datadog.
 title: Asignar etiquetas (tags)
 ---
 
 ## Información general
 
-En Datadog, el etiquetado sirve para realizar consultas sobre las máquinas y métricas monitorizadas. Si no existiese la posibilidad de asignar y filtrar elementos mediante etiquetas (tags), resultaría difícil buscar los problemas que afectan al entorno y acotar los resultados lo suficiente como para descubrir sus causas reales. Antes de continuar, obtén más información sobre cómo [definir las etiquetas (tags)][1] en Datadog.
+En Datadog, el etiquetado (tag) sirve para realizar consultas sobre las máquinas y métricas monitorizadas. Si no existiese la posibilidad de asignar y filtrar elementos mediante etiquetas (tags), resultaría difícil buscar los problemas que afectan al entorno y acotar los resultados lo suficiente como para descubrir sus causas reales. Antes de continuar, obtén más información sobre cómo [definir las etiquetas][1] en Datadog.
 
 Las etiquetas (tags) se pueden configurar de varias formas diferentes:
 
 - En el [archivo de configuración](#configuration-file) del Datadog Agent o en el de cualquier integración particular
-- A través de la [IU](#ui) de Datadog
+- A través de la [interfaz de usuario](#ui) de Datadog
 - Con la [API](#api) de Datadog
 - Con el [DogStatsD](#dogstatsd)
 
@@ -32,9 +30,9 @@ En los entornos no contenedorizados, el Agent asigna automáticamente la [etique
 {{% /tab %}}
 
 {{% tab "Entornos contenedorizados" %}}
-En los entornos contenedorizados, Datadog recomienda utilizar [Autodiscovery][1], puesto que permite emplear el [etiquetado de servicios unificado][2], que es el método recomendado para obtener un único punto de configuración en toda la telemetría de Datadog.
+En los entornos contenedorizados, Datadog recomienda utilizar [Autodiscovery][1], puesto que permite emplear el [etiquetado (tag) de servicios unificado][2], que es el método recomendado para definir un único punto de configuración en toda la telemetría de Datadog.
 
-El objetivo de Autodiscovery consiste en aplicar la configuración de una integración de Datadog al efectuar un check de Agent en un contenedor determinado. Cuando se utiliza Autodiscovery, el Datadog Agent identifica automáticamente los servicios que se ejecutan en el nuevo contenedor, busca la configuración más adecuada para la monitorización e inicia la recopilación de métricas. A continuación, pueden configurarse las etiquetas (tags) desde la [plantilla de configuración][3] de Autodiscovery.
+El objetivo de Autodiscovery consiste en aplicar la configuración de una integración de Datadog al efectuar un check del Agent en un contenedor determinado. Cuando se utiliza Autodiscovery, el Datadog Agent identifica automáticamente los servicios que se ejecutan en el nuevo contenedor, busca la configuración más adecuada para la monitorización e inicia la recopilación de métricas. A continuación, las etiquetas (tags) se pueden configurar desde la [plantilla de configuración][3] de Autodiscovery.
 
 Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta (tag) del host](#host-tags) y hereda las etiquetas de las integraciones, al igual que ocurre en los entornos no contenedorizados. Estas etiquetas, así como las etiquetas que se hayan añadido manualmente, se configuran en el [archivo de configuración del Datadog Agent](#configuration-file).
 
@@ -54,13 +52,13 @@ Si no se utiliza Autodiscovery, el Agent asigna automáticamente la [etiqueta (t
 
 #### Localización de los archivos
 
-El archivo de configuración del Agent (`datadog.yaml`) se usa para configurar las etiquetas (tags) de host que se aplican a todas las métricas, trazas y logs reenviados por el Datadog Agent.
+El archivo de configuración del Agent (`datadog.yaml`) se utiliza para configurar las etiquetas (tags) de host que se aplican a todas las métricas, trazas (traces) y logs reenviados por el Datadog Agent.
 
 Las etiquetas (tags) de las [integraciones][1] instaladas con el Agent se configuran con archivos YAML localizados en el directorio **conf.d** de la instalación del Agent. Para localizar los archivos de configuración, consulta la sección [Archivos de configuración del Agent][2].
 
 #### Formato YAML
 
-En los archivos YAML, usa una de las listas de segmentos de la clave `tags` para asignar una lista de etiquetas (tags). En YAML, las listas se definen de dos formas diferentes, aunque funcionalmente equivalentes:
+En los archivos YAML, utiliza una de las listas de cadenas de la clave `tags` para asignar una lista de etiquetas (tags). En YAML, las listas se definen de dos formas diferentes, aunque funcionalmente equivalentes:
 
 ```yaml
 tags: ["<KEY_1>:<VALUE_1>", "<KEY_2>:<VALUE_2>", "<KEY_3>:<VALUE_3>"]
@@ -75,29 +73,29 @@ tags:
     - "<KEY_3>:<VALUE_3>"
 ```
 
-Aunque se recomienda asignar las etiquetas (tags) en pares con el formato `<KEY>:<VALUE>`, también se aceptan las etiquetas que solo constan de claves (`<KEY>`). Para obtener más información, consulta [cómo se definen las etiquetas][3].
+Aunque se recomienda asignar las etiquetas (tags) en pares de `<KEY>:<VALUE>`, también se aceptan las etiquetas que sólo constan de claves (`<KEY>`). Para obtener más información, consulta [cómo se definen las etiquetas][3].
 
 #### Etiquetas (tags) de host
 
-El nombre de host (clave de etiqueta `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, usa el archivo de configuración del Agent: `datadog.yaml`. Ejemplo:
+El nombre de host (clave de etiqueta (tag) `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, utiliza el archivo de configuración del Agent `datadog.yaml`:
 
 ```yaml
-# Establece el nombre de host (por defecto: detección automática)
-# Debe seguir el formato RFC-1123, que solo permite:
-# mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
+# Define el nombre de host (por defecto: detección automática)
+# Debe seguir el formato RFC-1123, que sólo permite:
+# Mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
 hostname: mymachine.mydomain
 ```
 
 ##### Cambiar el nombre de host
 
-* El nombre de host anterior permanecerá en la IU durante dos horas, pero no reflejará las nuevas métricas.
-* Se podrá consultar con la API cualquier dato procedente de hosts que tenga el nombre de host anterior.
-* Para representar las métricas en un gráfico con los nombres de host nuevo y antiguo, usa [cálculos aritméticos entre dos métricas][5].
+* El nombre de host anterior permanecerá en la interfaz de usuario durante dos horas, pero no reflejará las nuevas métricas.
+* Con la API, se podrá consultar cualquier dato procedente de hosts que tengan el nombre de host anterior.
+* Para representar las métricas en un gráfico con los nombres de host nuevo y antiguo, utiliza [cálculos aritméticos entre dos métricas][5].
 
 
 [1]: /es/getting_started/integrations/
-[2]: /es/agent/guide/agent-configuration-files/
-[3]: /es/getting_started/tagging/#defining-tags
+[2]: /es/agent/configuration/agent-configuration-files/
+[3]: /es/getting_started/tagging/#define-tags
 [4]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /es/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -105,41 +103,41 @@ hostname: mymachine.mydomain
 
 #### Localización de los archivos
 
-El archivo de configuración del Agent (`datadog.conf`) se usa para configurar las etiquetas (tags) de host que se aplican a todas las métricas, trazas y logs reenviados por el Datadog Agent.
+El archivo de configuración del Agent (`datadog.conf`) se utiliza para configurar las etiquetas (tags) de host que se aplican a todas las métricas, trazas y logs reenviados por el Datadog Agent.
 
 Las etiquetas (tags) de las [integraciones][1] instaladas con el Agent se configuran con archivos YAML localizados en el directorio **conf.d** de la instalación del Agent. Para localizar los archivos de configuración, consulta la sección [Archivos de configuración del Agent][2].
 
 #### Formato YAML
 
-En los archivos YAML, usa una de las listas de segmentos de la clave `tags` para asignar una lista de etiquetas (tags). En YAML, las listas se definen de dos formas diferentes, aunque funcionalmente equivalentes:
+En los archivos YAML, utiliza una de las listas de cadenas de la clave `tags` para asignar una lista de etiquetas (tags). En YAML, las listas se definen de dos formas diferentes, aunque funcionalmente equivalentes:
 
 ```yaml
 tags: <KEY_1>:<VALUE_1>, <KEY_2>:<VALUE_2>, <KEY_3>:<VALUE_3>
 ```
 
-Aunque se recomienda asignar las etiquetas (tags) en pares con el formato `<KEY>:<VALUE>`, también se aceptan las etiquetas que solo constan de claves (`<KEY>`). Para obtener más información, consulta [cómo se definen las etiquetas][3].
+Aunque se recomienda asignar las etiquetas (tags) en pares de `<KEY>:<VALUE>`, también se aceptan las etiquetas que sólo constan de claves (`<KEY>`). Para obtener más información, consulta [cómo se definen las etiquetas][3].
 
 #### Etiquetas (tags) de host
 
-El nombre de host (clave de etiqueta `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, usa el archivo de configuración del Agent: `datadog.conf`. Ejemplo:
+El nombre de host (clave de etiqueta (tag) `host`) lo [asigna automáticamente][4] el Datadog Agent. Para personalizarlo, utiliza el archivo de configuración del Agent `datadog.conf`:
 
 ```yaml
-# Establece el nombre de host (por defecto: detección automática)
-# Debe seguir el formato RFC-1123, que solo permite:
-# mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
+# Define el nombre de host (por defecto: detección automática)
+# Debe seguir el formato RFC-1123, que sólo permite:
+# Mayúsculas de la "A" a la "Z", minúsculas de la "a" a la "z", números del "0" al "9" y guiones (-)
 hostname: mymachine.mydomain
 ```
 
 ##### Cambiar el nombre de host
 
-* El nombre de host anterior permanecerá en la IU durante dos horas, pero no reflejará las nuevas métricas.
-* Se podrá consultar con la API cualquier dato procedente de hosts que tenga el nombre de host anterior.
-* Para representar las métricas en un gráfico con los nombres de host nuevo y antiguo, usa [cálculos aritméticos entre dos métricas][5].
+* El nombre de host anterior permanecerá en la interfaz de usuario durante dos horas, pero no reflejará las nuevas métricas.
+* Con la API, se podrá consultar cualquier dato procedente de hosts que tengan el nombre de host anterior.
+* Para representar las métricas en un gráfico con los nombres de host nuevo y antiguo, utiliza [cálculos aritméticos entre dos métricas][5].
 
 
 [1]: /es/getting_started/integrations/
-[2]: /es/agent/guide/agent-configuration-files/
-[3]: /es/getting_started/tagging/#defining-tags
+[2]: /es/agent/configuration/agent-configuration-files/
+[3]: /es/getting_started/tagging/#define-tags
 [4]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /es/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -147,62 +145,62 @@ hostname: mymachine.mydomain
 
 #### Herencia de integraciones
 
-El método más eficaz para asignar etiquetas (tags) consiste en basarse en la herencia de integraciones. Las etiquetas que asignes a instancias de AWS, recetas de Chef y otras integraciones las heredan automáticamente los hosts y las métricas que envíes a Datadog.
+El método más eficaz para asignar etiquetas (tags) consiste en basarse en la herencia de integraciones. Las etiquetas que asignes a instancias de AWS, recetas de Chef y otras integraciones las heredan automáticamente los hosts y las métricas que envías a Datadog.
 
-En los entornos contenedorizados, se recomienda seguir la documentación acerca del [etiquetado de servicios unificado][2] para conseguir un único punto de configuración en toda la telemetría de Datadog.
+En los entornos contenedorizados, se recomienda seguir la documentación del [etiquetado (tag) de servicios unificado][2] para definir un único punto de configuración en toda la telemetría de Datadog.
 
-##### Integraciones con soluciones en la nube
+##### Integraciones en la nube
 
-Las [integraciones con soluciones en la nube][3] se basan en la autenticación. Datadog recomienda usar el cuadro de las principales integraciones con soluciones en la nube (AWS, Azure, Google Cloud, etc.) e [instalar el Agent][4] siempre que sea posible. **Nota**: Si decides usar solo el Agent, algunas etiquetas (tags) de integración no estarán disponibles.
+Las [integraciones en la nube][3] se basan en la autenticación. Datadog recomienda utilizar el cuadro de las principales integraciones en la nube (AWS, Azure, Google Cloud, etc.) e [instalar el Agent][4] siempre que sea posible. **Nota**: Si decides utilizar sólo el Agent, algunas etiquetas (tags) de integracones no estarán disponibles.
 
-##### Integraciones con soluciones web
+##### Integraciones web
 
-Las [integraciones con soluciones web][5] se basan en la autenticación. Las métricas se recopilan con llamadas de la API. **Nota**: Datadog convierte las etiquetas (tags) `CamelCase` en guiones bajos; por ejemplo, `TestTag` --> `test_tag`.
+Las [integraciones web][5] se basan en la autenticación. Las métricas se recopilan con llamadas de la API. **Nota**: Datadog convierte las etiquetas (tags) `CamelCase` en guiones bajos; por ejemplo, `TestTag` --> `test_tag`.
 
 #### Variables de entorno
 
-Una vez que hayas instalado el Datadog Agent contenedorizado, podrás configurar tus etiquetas (tags) de host con la variable de entorno `DD_TAGS` en el archivo de configuración principal de tus Agents.
+Después de instalar el Datadog Agent contenedorizado, puedes configurar tus etiquetas (tags) de host utilizando la variable de entorno `DD_TAGS` en tu archivo de configuración principal del Agent. Si especifica varias etiquetas, separa cada una de ellas con una coma y un espacio.
 
 Datadog recopila automáticamente las etiquetas (tags) habituales de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad y Rancher][6]. Para extraer aún más etiquetas, utiliza las siguientes opciones:
 
 | Variable de entorno               | Descripción                                                                                             |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|
-| `DD_CONTAINER_LABELS_AS_TAGS`      | Extrae etiquetas (labels) del contenedor. Esta variable de entorno es equivalente a la antigua `DD_DOCKER_LABELS_AS_TAGS`.             |
-| `DD_CONTAINER_ENV_AS_TAGS`         | Extrae variables de entorno del contenedor. Esta variable de entorno es equivalente a la antigua `DD_DOCKER_ENV_AS_TAGS`. |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extrae etiquetas (labels) del pod                                                                                      |
-| `DD_CHECKS_TAG_CARDINALITY`        | Añade etiquetas (tags) a las métricas de los checks (bajas, orquestador, altas)                                                     |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Añade etiquetas (tags) a las métricas personalizadas (bajas, orquestador, altas)                                                    |
+| `DD_CONTAINER_LABELS_AS_TAGS`      | Extrae etiquetas (labels) del contenedor. Este entorno es equivalente al antiguo entorno `DD_DOCKER_LABELS_AS_TAGS`.             |
+| `DD_CONTAINER_ENV_AS_TAGS`         | Extrae variables de entorno del contenedor. Este entorno es equivalente al antiguo entorno `DD_DOCKER_ENV_AS_TAGS`. |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extracción de etiquetas (labels) del pod                                                                                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | Añadir etiquetas (tags) a las métricas de los checks (bajas, orquestador, altas)                                                     |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Añadir etiquetas (tags) a las métricas personalizadas (bajas, orquestador, altas)                                                    |
 
 **Ejemplos:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
-Con `DD_KUBERNETES_POD_LABELS_AS_TAGS`, puedes usar comodines en este formato:
+Con `DD_KUBERNETES_POD_LABELS_AS_TAGS`, puedes utilizar comodines con este formato:
 
 ```text
 {"foo": "bar_%%label%%"}
 ```
 
-Por ejemplo: `{"app*": "kube_%%label%%"}` cambia el nombre de la etiqueta (tag) a `kube_application` en el caso de `application`. Asimismo, `{"*": "kube_%%label%%"}` añade todas las labels del pod como si fuesen tags con el prefijo `kube_`.
+Por ejemplo: `{"app*": "kube_%%label%%"}` cambia el nombre de la etiqueta (tag) a `kube_application` en el caso de la etiqueta (label) `application`. Asimismo, `{"*": "kube_%%label%%"}` añade todas las etiquetas (labels) del pod como si fuesen etiquetas (tags) con el prefijo `kube_`.
 
-Cuando uses la variable `DD_CONTAINER_LABELS_AS_TAGS` en un archivo `docker-compose.yaml` de Docker Swarm, elimina los apóstrofes. Ejemplo:
+Cuando utilices la variable `DD_CONTAINER_LABELS_AS_TAGS` en un archivo `docker-compose.yaml` de Docker Swarm, elimina los apóstrofes. Por ejemplo:
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
-Al añadir etiquetas (labels) a contenedores Docker, es importante tener en cuenta la posición de la palabra clave `labels:` dentro del archivo `docker-compose.yaml`. Para evitar problemas, sigue la documentación acerca de [etiquetado de servicios unificado de Docker][2].
+Al añadir etiquetas (labels) a contenedores Docker, es importante tener en cuenta la posición de la palabra clave `labels:` dentro del archivo `docker-compose.yaml`. Para evitar problemas, sigue la documentación del [etiquetado (tag) de servicios unificado de Docker][2].
 
- Si es necesario etiquetar con labels el contenedor fuera de esta configuración, sitúa la palabra clave `labels:` **dentro** de la sección `services:` y **no** dentro de `deploy:`. Sitúa la palabra clave `labels:` dentro de la sección `deploy:` solo en caso de que sea necesario etiquetar el servicio. De no hacerlo, el Datadog Agent no tendrá ninguna label que extraer de los contenedores.
+Si es necesario aplicar etiquetas (labels) al contenedor fuera de esta configuración, coloca la palabra clave `labels:` **dentro** de la sección `services:` y **no** dentro de `deploy:`. Coloca la palabra clave `labels:` dentro de la sección `deploy:` sólo en caso de que sea necesario etiquetar el servicio. De no hacerlo, el Datadog Agent no tendrá ninguna etiqueta que extraer de los contenedores.
 
-Más abajo, te presentamos un archivo `docker-compose.yaml` funcional de muestra. En el ejemplo, puedes ver que las etiquetas (labels) de la sección `myapplication:`, `my.custom.label.project` y `my.custom.label.version`, presentan valores independientes. Al usar la variable de entorno `DD_CONTAINER_LABELS_AS_TAGS` en la sección `datadog:`, se extraen las labels y se producen estas tags para el contenedor `myapplication`:
+A continuación podrás ver un archivo `docker-compose.yaml` funcional de muestra. En el ejemplo, las etiquetas (labels) de la sección `myapplication:`, `my.custom.label.project` y `my.custom.label.version`, presentan valores únicos. Al utilizar la variable de entorno `DD_CONTAINER_LABELS_AS_TAGS` de la sección `datadog:`, se extraen las etiquetas (labels) y se generan esas etiquetas (tags) para el contenedor `myapplication`:
 
-Las etiquetas (labels) que hay dentro del contenedor `myapplication` son `my.custom.label.project` y `my.custom.label.version`
+Dentro del contenedor `myapplication` se encuentran las etiquetas (labels)`my.custom.label.project` y `my.custom.label.version`
 
-Cuando el Agent extrae las labels del contenedor, las tags son:
+Cuando el Agent extrae las etiquetas (labels) del contenedor, las etiquetas (tags) son:
 `projecttag:projectA`
 `versiontag:1`
 
@@ -218,7 +216,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1 key2:value2 key3:value3"
+      - DD_TAGS="key1:value1, key2:value2, key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -241,15 +239,15 @@ Puedes definir las variables en tu `datadog.yaml` personalizado o configurarlas 
 
 ##### Cardinalidad de las etiquetas (tags)
 
-Hay dos variables de entorno que establecen la cardinalidad de las etiquetas (tags): `DD_CHECKS_TAG_CARDINALITY` y `DD_DOGSTATSD_TAG_CARDINALITY`. El precio de DogStatsD se fija de un modo diferente, por lo que se aparta el parámetro de cardinalidad de las etiquetas (tags) de DogStatsD para obtener una configuración más precisa. De lo contrario, estas variables funcionarían igual, es decir, podrían presentar valores `low`, `orchestrator` o `high`. En ambos casos, `low` es el valor predeterminado, lo que introduce etiquetas (tags) de nivel de host.
+Hay dos variables de entorno que establecen la cardinalidad de las etiquetas (tags): `DD_CHECKS_TAG_CARDINALITY` y `DD_DOGSTATSD_TAG_CARDINALITY`. Debido a que el precio de DogStatsD se fija de un modo diferente, la definición de la cardinalidad de las etiquetas de DogStatsD se realiza de forma separada para ofrecer una configuración más precisa. De lo contrario, estas variables funcionarían igual; es decir, podrían presentar valores `low`, `orchestrator` o `high`. En ambos casos, `low` es el valor predeterminado, lo que introduce etiquetas de nivel de host.
 
-Dependiendo de la cardinalidad, existe un conjunto diferente de etiquetas (tags) predefinidas para [Kubernetes y OpenShift][7], y para [Docker, Rancher, y Mesos][8]. En el caso de ECS y Fargate, al establecer la variable `orchestrator`, se añade la etiqueta (tag) `task_arn`.
+Dependiendo de la cardinalidad, existe un conjunto diferente de etiquetas (tags) predefinidas para [Kubernetes y OpenShift][7], y para [Docker, Rancher, y Mesos][8]. En el caso de ECS y Fargate, al definir la variable como `orchestrator`, se añade la etiqueta `task_arn`.
 
 #### Trazas
 
-El rastreador de Datadog se puede configurar con variables de entorno, propiedades del sistema o mediante configuración en código. La documentación acerca de la [configuración de trazas de Datadog][9] contiene información sobre las opciones de etiquetado y la configuración de cada rastreador. También puedes seguir la documentación acerca del [etiquetado de servicios unificado][2] en caso de que desees configurar tu rastreador con esta finalidad.
+El rastreador de Datadog se puede configurar con variables de entorno, propiedades del sistema o mediante la configuración en código. La documentación de la [configuración del rastreo en Datadog][9] contiene información sobre las opciones de etiquetado (tag) y la configuración de cada rastreador. También puedes seguir la documentación del [etiquetado de servicios unificado][2] en caso de que desees configurar tu rastreador con esta función.
 
-Independientemente del rastreador que se utilice, los metadatos del tramo (span) deben seguir una estructura en árbol de tipos. Cada nodo del árbol está dividido por un `.` y es de un tipo único. 
+Independientemente del rastreador que se utilice, los metadatos del tramo (span) deben seguir una estructura en árbol de tipos. Cada nodo del árbol está dividido por un `.` y es de tipo único. 
 
 Por ejemplo, un nodo no puede ser un objeto (con subnodos) y una cadena:
 ```json
@@ -258,63 +256,64 @@ Por ejemplo, un nodo no puede ser un objeto (con subnodos) y una cadena:
   "key.subkey": "value_2"
 }
 ```
-Los metadatos del tramo (span) de arriba no son válidos, ya que el valor de `key` no puede hacer referencia a una cadena (`"value"`) y también a un subárbol (`{"subkey": "value_2"}`).
+Los metadatos del tramo anterior no son válidos, ya que el valor de `key` no puede hacer referencia a una cadena (`"value"`) y también a un subárbol (`{"subkey": "value_2"}`).
 
-### IU
+### Interfaz de usuario
 
 {{< tabs >}}
-{{% tab "Mapa de hosts" %}}
+{{% tab "Mapa de host" %}}
 
-Usa la [página Host Map][1] para asignar etiquetas (tags) de host en la IU. Haz clic en un hexágono (o host) cualquiera para mostrar la superposición de hosts en la parte inferior de la página. A continuación, en la sección *User* (Usuario), haz clic en el botón **Edit Tags** (Editar etiquetas). Introduce una lista de etiquetas (tags) separadas por comas entre sí y, luego, haz clic en **Save Tags** (Guardar etiquetas). Los cambios realizados en las etiquetas (tags) de host de la IU pueden tardar hasta cinco minutos en aplicarse.
+Asigna etiquetas (tags) de host en la interfaz de usuario utilizando la [página del mapa de host][1]. Haz clic en cualquier hexágono (host) para mostrar la superposición de hosts en la parte inferior de la página. A continuación, en la sección *Usuario*, haz clic en el botón **Add Tags** (Añadir etiquetas). Introduce las etiquetas en forma de lista separada por comas y haz clic en **Save Tags** (Guardar etiquetas). Los cambios realizados en las etiquetas de host en la interfaz de usuario pueden tardar hasta cinco minutos en surtir efecto.
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags de Host Map" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="Mapa de host con la información del host abierta, donde se resalta el botón Añadir etiquetas (tags)" style="width:80%;">}}
+
 
 [1]: /es/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Lista de infraestructuras" %}}
 
-Usa la [página Infrastructure List][1] para asignar etiquetas (tags) de host en la IU. Haz clic en un host cualquiera para mostrar la superposición de hosts en el lado derecho de la página. A continuación, en la sección *User* (Usuario), haz clic en el botón **Edit Tags** (Editar etiquetas). Introduce una lista de etiquetas (tags) separadas por comas entre sí y, luego, haz clic en **Save Tags** (Guardar etiquetas). Los cambios realizados en las etiquetas (tags) de host de la IU pueden tardar hasta cinco minutos en aplicarse. Una vez que hayas añadido las etiquetas, asegúrate de que sean visibles en la IU antes de intentar añadir más.
+Asigna etiquetas (tags) de host en la interfaz de usuario utilizando la [página de la lista de infraestructuras][1]. Haz clic en un host cualquiera para mostrar la superposición de hosts en el lado derecho de la página. A continuación, en la sección *Usuario*, haz clic en el botón **Edit Tags** (Editar etiquetas). Introduce una lista de etiquetas separadas por comas entre sí y, luego, haz clic en **Save Tags** (Guardar etiquetas). Los cambios realizados en las etiquetas de host de la interfaz de usuario pueden tardar hasta cinco minutos en surtir efecto. Una vez que hayas añadido las etiquetas, asegúrate de que sean visibles en la interfaz de usuario antes de intentar añadir más.
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags de Infrastructure List" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Lista de infraestructuras con un panel de información de las infraestructuras abierto, donde se resalta el botón Añadir etiquetas (tags)" style="width:80%;">}}
+
 
 [1]: /es/infrastructure/
 {{% /tab %}}
 {{% tab "Monitores" %}}
 
-En la página [Manage Monitors][1], selecciona la casilla que está situada junto a cada monitor para añadir etiquetas (tags); puedes seleccionar uno o varios monitores. Haz clic en el botón **Edit Tags** (Editar etiquetas). Introduce una etiqueta (tag) o selecciona una que ya hayas usado previamente. Después, haz clic en **Add Tag `tag:name`** (Añadir la etiqueta tag:name) o **Apply Changes** (Aplicar cambios). En caso de que ya se hubiesen añadido las etiquetas con anterioridad, ten en cuenta que es posible asignar varias etiquetas al mismo tiempo con las casillas de las etiquetas.
+En la página [Gestionar monitores][1], selecciona la casilla de verificación junto a cada monitor para añadir etiquetas (tags) (selecciona uno o varios monitores). Haz clic en el botón **Edit Tags** (Editar etiquetas). Introduce una etiqueta o selecciona una utilizada anteriormente. A continuación, haz clic en **Add Tag `tag:name`** (Añadir etiqueta [nombre]) o en **Apply Changes** (Aplicar cambios). Si ya se han añadido etiquetas, se pueden asignar varias a la vez utilizando sus casillas de verificación correspondientes. Para obtener más información, consulta la [documentación de gestión de monitores][2].
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Tags de Gestionar monitores" style="width:80%;">}}
+Al crear un monitor, asigna etiquetas (tags) de monitor en el paso 4, *Cuéntanos qué ocurre* o *Notifica a tu equipo*:
 
-Cuando crees un monitor, asigna las etiquetas (tags) del monitor en el paso 4 *Say what's happening* (Saber qué ocurre):
+{{< img src="monitors/notificaciones/notifications_add_required_tags.png" alt="Vista de la configuración de una etiqueta (tag) de política. Debajo de 'Etiquetas de política', hay tres ejemplos de etiquetas: cost_center, product_id y env, junto al menú desplegable 'Seleccionar valor'." style="width:80%;" >}}
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Tags de Crear monitor" style="width:80%;">}}
-
-[1]: /es/monitors/manage/
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /es/monitors/manage/
 {{% /tab %}}
 {{% tab "Métricas de distribución" %}}
 
-En [Distribution Metrics][1], crea agregaciones de percentiles aplicando una lista de permisos de hasta diez etiquetas (tags) a una métrica. De este modo, crearás una cronología por cada combinación de valores de etiquetas potencialmente consultable. Para obtener más información sobre cómo hacer un count de métricas personalizadas y cronologías emitidas a partir de métricas de distribución, consulta la sección [Métricas personalizadas][2].
+En [Métricas de distribución][1], crea agregaciones de percentiles aplicando una lista de permisos de hasta diez etiquetas (tags) a una métrica. De este modo, crearás una cronología por cada combinación de valores de etiquetas potencialmente consultable. Para obtener más información sobre cómo hacer un recuento de métricas personalizadas y cronologías emitidas a partir de métricas de distribución, consulta [Métricas personalizadas][2].
 
 **Aplica hasta diez etiquetas (tags). No se aceptan etiquetas restrictivas**:
 
-{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Tags de Crear monitor" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/global_metrics_selection.png" alt="Crear etiquetas (tags) de monitor" style="width:80%;">}}
 
 [1]: /es/metrics/distributions/
 [2]: /es/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Integraciones" %}}
 
-El cuadro de integración de [AWS][1] te permite asignar etiquetas (tags) adicionales a todas las métricas en el nivel de cuenta. Utiliza una lista de etiquetas (tags) separadas por comas en formato `<KEY>:<VALUE>`.
+El cuadro de integración de [AWS][1] te permite asignar etiquetas (tags) adicionales a todas las métricas a nivel de cuenta. Utiliza una lista de etiquetas separadas por comas con el formato `<KEY>:<VALUE>`.
 
-{{< img src="tagging/assigning_tags/integrationtags.png" alt="Tags de AWS" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/integrationtags.png" alt="Etiquetas (tags) AWS" style="width:80%;">}}
 
 [1]: /es/integrations/amazon_web_services/
 {{% /tab %}}
-{{% tab "Objetivos de nivel de servicio" %}}
+{{% tab "Objetivos de nivel de servicio (SLOs)" %}}
 
-Cuando crees un SLO, asigna las etiquetas (tags) en el paso 3 *Add name and tags* (Añadir nombre y etiquetas):
+Cuando crees un SLO, asigna las etiquetas (tags) en el paso 3, *Añadir nombre y etiquetas*:
 
-{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Tags de Crear SLO" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Crear etiquetas (tags) de SLOs" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -324,7 +323,7 @@ Cuando crees un SLO, asigna las etiquetas (tags) en el paso 3 *Add name and tag
 {{< tabs >}}
 {{% tab "Asignación" %}}
 
-Las etiquetas (tags) pueden asignarse de diferentes formas con la [API de Datadog][1]. Consulta la lista de abajo para encontrar los enlaces a esas secciones:
+Las etiquetas (tags) pueden asignarse de diferentes formas con la [API de Datadog][1]. Consulta la siguiente lista para encontrar los enlaces a esas secciones:
 
 * [Publicar la ejecución de un check][1]
 * [Publicar un evento][2]
@@ -332,8 +331,8 @@ Las etiquetas (tags) pueden asignarse de diferentes formas con la [API de Datado
 * [Publicar un punto en una cronología][4]
 * [Crear][5] o [editar][6] un monitor
 * [Añadir][7] o [actualizar][8] etiquetas (tags) de host
-* [Enviar trazas (traces)][9]
-* [Crear][10] o [actualizar][11] un objetivo de nivel de servicio
+* [Enviar trazas][9]
+* [Crear][10] o [actualizar][11] un objetivo de nivel de servicio (SLO)
 
 [1]: /es/api/v1/service-checks/#submit-a-service-check
 [2]: /es/api/v1/events/#post-an-event
@@ -349,7 +348,7 @@ Las etiquetas (tags) pueden asignarse de diferentes formas con la [API de Datado
 {{% /tab %}}
 {{% tab "Ejemplo" %}}
 
-El etiquetado de Datadog constituye una manera muy eficaz de agrupar tus métricas. Por poner un ejemplo rápido, imagínate que quieres obtener la suma de las siguientes métricas procedentes de tu sitio web (example.com):
+El etiquetado (tag) de Datadog constituye una manera muy eficaz de agrupar tus métricas. Por poner un ejemplo rápido, imagínate que quieres obtener la suma de las siguientes métricas procedentes de tu sitio web (example.com):
 
 ```text
 Web server 1: api.metric('page.views', [(1317652676, 100), ...], host="example_prod_1")
@@ -380,28 +379,28 @@ sum:page.views{domain:example.com} by {host}
 
 ### DogStatsD
 
-Añade etiquetas (tags) a cualquier métrica, evento o check de servicio que envíes a [DogStatsD][9]. Por ejemplo, puedes comparar el rendimiento de dos algoritmos etiquetando una métrica de temporizador con la versión del algoritmo:
+Añade etiquetas (tags) a cualquier métrica, evento o check de servicio que envíes a [DogStatsD][10]. Por ejemplo, puedes comparar el rendimiento de dos algoritmos etiquetando una métrica de temporizador con la versión del algoritmo:
 
 ```python
 
 @statsd.timed('algorithm.run_time', tags=['algorithm:one'])
 def algorithm_one():
-    # Haz algo elaborado aquí…
+    # Haz algo elaborado aquí ...
 
 @statsd.timed('algorithm.run_time', tags=['algorithm:two'])
 def algorithm_two():
-    # Haz algo elaborado (¿más rápido?) aquí…
+    # Haz algo elaborado (tal vez más rápido) aquí ...
 ```
 
-**Nota**: El etiquetado es una [extensión de Datadog][10] en StatsD.
+**Nota**: El etiquetado es una [extensión específica de Datadog][11] en StatsD.
 
-Cabe destacar que hay que prestar especial atención cuando se asigna la etiqueta (tag) `host` a las métricas de DogStatsD. Para obtener más información sobre la clave de la etiqueta (tag) de host, consulta la [sección DogStatsD][11].
+Es necesario prestar especial atención cuando se asigna la etiqueta `host` a las métricas de DogStatsD. Para obtener más información sobre la clave de la etiqueta de host, consulta la documentación [Envío de métricas: DogStatsD][12].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/getting_started/tagging/#defining-tags
+[1]: /es/getting_started/tagging/#define-tags
 [2]: /es/getting_started/tagging/unified_service_tagging
 [3]: /es/integrations/#cat-cloud
 [4]: /es/getting_started/agent/#setup
@@ -412,3 +411,4 @@ Cabe destacar que hay que prestar especial atención cuando se asigna la etiquet
 [9]: /es/tracing/setup/
 [10]: /es/developers/dogstatsd/
 [11]: /es/developers/community/libraries/
+[12]: /es/metrics/dogstatsd_metrics_submission/#host-tag

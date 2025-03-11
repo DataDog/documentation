@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: 로그 파싱 문제 조사
-kind: 가이드
 title: 로그 파싱 - 모범 사례
 ---
 

@@ -22,6 +22,7 @@ categories:
 - network
 - ログの収集
 - containers
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: consul-connect
 integration_title: Consul Connect
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: consul_connect
 public_title: Consul Connect
@@ -49,6 +49,7 @@ tile:
   - Category::Network
   - Category::Log Collection
   - Category::Containers
+  - Offering::Integration
   configuration: README.md#Setup
   description: Consul Connect Envoy サイドカープロキシを監視します。
   media: []
@@ -64,19 +65,19 @@ tile:
 
 [Datadog Envoy インテグレーション][2]で、[Consul Connect][1] Envoy サイドカープロキシを監視します。Consul Connect インテグレーションは [Envoy で構成された Consul Connect][3]のみをサポートしています。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Consul Connect を実行しているサービスで [Datadog Agent][4] をインストールし、適切な環境の[コンフィギュレーション](#configuration)手順に従います。
 
-### ブラウザトラブルシューティング
-ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
+### 構成
+Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -85,7 +86,7 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 
 2. [Envoy インテグレーション][2]を有効にしてメトリクスの収集を有効にします。
 
-##### 収集データ
+##### ログ収集
 
 [Envoy ホスト][3]の手順に従いログ収集を構成します。
 
@@ -105,7 +106,7 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 
  2. [Envoy インテグレーションをコンテナ化環境用][3]に構成し、メトリクスの収集を開始します。
 
-##### 収集データ
+##### ログ収集
 
 [Envoy コンテナ化手順][4]に従いログ収集を構成します。
 
@@ -120,21 +121,21 @@ Consul Connect を実行しているサービスで [Datadog Agent][4] をイン
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `envoy` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 収集されたメトリクスのリストについては、[Envoy インテグレーションドキュメント][6]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 収集されたサービスチェックのリストについては、[Envoy インテグレーションドキュメント][7]を参照してください。
 
-### ヘルプ
+### イベント
 
 Consul Connect には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

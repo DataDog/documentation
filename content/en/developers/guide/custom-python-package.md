@@ -1,6 +1,5 @@
 ---
 title: Adding a Custom Python Package to the Agent
-kind: documentation
 aliases:
 - /agent/custom_python_package
 - /agent/faq/custom_python_package

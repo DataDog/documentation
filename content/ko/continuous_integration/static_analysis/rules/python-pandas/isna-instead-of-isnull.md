@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: isnull 대신 isna 사용하기
 ---
 ## 메타데이터

@@ -18,10 +18,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10217
     source_type_name: Hudi
-  logs:
-    source: hudi
   monitors:
-    commit_duration: assets/monitors/commit_duration.json
+    Commit duration is high: assets/monitors/commit_duration.json
   saved_views:
     hudi_error_logs: assets/saved_views/error_logs.json
     hudi_overview: assets/saved_views/hudi_overview.json
@@ -33,6 +31,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hudi/README.md
 display_on_public_website: true
@@ -40,9 +39,8 @@ draft: false
 git_integration_title: hudi
 integration_id: hudi
 integration_title: Hudi
-integration_version: 2.3.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: hudi
 public_title: Hudi
@@ -58,6 +56,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Hudi の構成に関するメトリックスを追跡します。
   media: []
@@ -74,14 +73,14 @@ tile:
 このチェックは [Hudi][1] を監視しています。
 Hudi [バージョン][2] `0.10.0` 以降と互換性があります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Hudi チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Hudi で [JMX Metrics Reporter][5] を[構成][4]します。
 
@@ -109,14 +108,14 @@ Hudi チェックは [Datadog Agent][3] パッケージに含まれています�
 
 [Agent の `status` サブコマンドを実行][11]し、Checks セクションで `hudi` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "hudi" >}}
 
 
 
-### 収集データ
+### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -159,15 +158,15 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
            name: new_log_start_with_date
    ```
-### ヘルプ
+### イベント
 
 Hudi インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "hudi" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

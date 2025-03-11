@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-tanzu-application-service/
   tag: 블로그
   text: VMware Tanzu Application Service에서 실행되는 애플리케이션 모니터링
-kind: guide
+
 title: Cloud Foundry 설치 가이드
 ---
 

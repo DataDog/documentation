@@ -4,7 +4,6 @@ aliases:
 description: Aprende a configurar los plugins del entorno de desarrollo integrado
   de Datadog.
 disable_toc: false
-kind: Documentación
 title: Plugins del entorno de desarrollo integrado de Datadog
 ---
 

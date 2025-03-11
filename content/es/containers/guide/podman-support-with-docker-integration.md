@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/guide/podman-support-with-docker-integration
-kind: documentation
 title: Utilizar la integración de Docker con la herramienta de gestión de contenedores
   Podman
 ---

@@ -1,6 +1,5 @@
 ---
 title: Node.js OpenTracing Instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/nodejs
 - /tracing/trace_collection/open_standards/nodejs
@@ -12,7 +11,7 @@ code_lang_weight: 40
 ---
 
 
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
 OpenTracing support is included in the `dd-trace` package.
 

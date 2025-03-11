@@ -11,7 +11,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: トレースの保持
-kind: documentation
 title: 使用量メトリクス
 ---
 
@@ -86,5 +85,5 @@ Datadog APM のプランには、インデックス化されたスパンと取�
 [4]: /ja/account_management/billing/apm_tracing_profiler/
 [5]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [6]: https://app.datadoghq.com/dash/integration/apm_ingestion_reasons
-[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms//#head-based-sampling
+[7]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

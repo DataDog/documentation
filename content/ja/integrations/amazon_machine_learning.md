@@ -6,6 +6,7 @@ categories:
 - aws
 - log collection
 - ai/ml
+custom_kind: integration
 dependencies: []
 description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
@@ -20,7 +21,6 @@ integration_id: ''
 integration_title: Amazon Machine Learning
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_machine_learning
 public_title: Datadog-Amazon Machine Learning インテグレーション
@@ -62,7 +62,7 @@ AWS Machine Learning から S3 バケットまたは CloudWatch のいずれか�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "amazon_machine_learning" >}}

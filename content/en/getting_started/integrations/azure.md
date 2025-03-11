@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Azure
-kind: documentation
 further_reading:
     - link: 'https://docs.datadoghq.com/integrations/azure/#overview'
       tag: 'Documentation'
@@ -121,7 +120,7 @@ If you are using the Azure Native integration, see the [Send Azure Logs with the
 ### Standard Azure integration
 If you are using the Standard Azure integration, see the [Send Azure Logs to Datadog guide][10] for instructions on sending your Azure logs to Datadog with Event Hub. You can choose between an automatic or manual process to enable log collection. 
 
-You can find your Azure logs in the log explorer page in the Datadog platform by navigating to the Logs Explorer and querying for `source:azure*`.
+You can find your Azure logs in the Log Explorer page in the Datadog platform by navigating to the Log Explorer and querying for `source:azure*`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_logExplorer.png" alt="Log explorer image" style="width:100%;" >}}
 

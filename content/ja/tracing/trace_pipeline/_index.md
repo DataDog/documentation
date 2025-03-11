@@ -4,13 +4,12 @@ aliases:
 - /ja/tracing/trace_ingestion/
 - /ja/tracing/trace_retention_and_ingestion/
 description: スパンの取り込みをコントロールする方法を学ぶ
-kind: documentation
 title: トレースパイプライン
 ---
 
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースパイプライン" >}}
 
-インスツルメントされたアプリケーションからトレースを収集し、アプリケーションをエンドツーエンドで視覚化することができます。[トレースエクスプローラー][1]から分散型トレースをクエリして視覚化し、マイクロサービス内のリクエストの流れを理解して、エラーやパフォーマンスの問題を簡単に調査することができます。
+Collect traces from your intrumented applications to gain end-to-end visibility into your applications. Query and visualize distributed traces from the [Trace Explorer][1], understand how requests flow through your microservices and easily investigate errors and performance issues.
 
 APM では、トレースの**取り込み**と**保持**の両方を完全にカスタマイズすることができます。
 

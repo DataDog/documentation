@@ -1,6 +1,5 @@
 ---
 title: Session Replay Playlists
-kind: documentation
 description: Learn how to create and use Playlists for organizing Session Replays.
 aliases:
 further_reading:

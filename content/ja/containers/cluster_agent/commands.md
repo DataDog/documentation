@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
-kind: documentation
 title: Cluster Agent のコマンドとオプション
 ---
 
@@ -34,21 +33,81 @@ Datadog Cluster Agent には次のコマンドがあります。
 `datadog-cluster-agent flare <CASE_ID>`
 ノードベース Agent と同様に、Cluster Agent は、ログや使用された構成を集計し、サポートチームにアーカイブを転送したり、圧縮してローカルで使用したりすることもできます。**注**: このコマンドは Cluster Agent ポッド内から実行されます。
 
-## Cluster Agent のオプション
+## Cluster Agent 環境変数
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+`override.clusterAgent.env` の下で Cluster Agent の環境変数を設定します。
+
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+`clusterAgent.env` の下で Cluster Agent の環境変数を設定します。
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+clusterAgent:
+  env:
+    - name: <ENV_VAR_NAME>
+      value: <ENV_VAR_VALUE>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 次の環境変数がサポートされています。
 
 `DD_API_KEY`                                  
 : [Datadog API キー][1]。
 
+`DD_CLUSTER_CHECKS_ENABLED`
+クラスターチェックのオートディスカバリーを有効にします。デフォルトは `false` です。
+
+`DD_CLUSTER_AGENT_AUTH_TOKEN`                 
+: ノード Agent と Datadog Cluster Agent 間で共有する必要がある 32 文字のトークンです。
+
+`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`
+Cluster Agent が公開される Kubernetes サービスの名前。デフォルトは `datadog-cluster-agent` です。
+
+`DD_CLUSTER_NAME`
+クラスター名。インスタンスタグとしてすべてのクラスターチェック構成に追加されます。
+
+`DD_CLUSTER_CHECKS_ENABLED`
+: true に設定すると、リーダー Cluster Agent 上でのディスパッチロジックを有効にします。デフォルト: `false`
+
+`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`
+ノードベースの Agent が停止していると見なされてプールから削除されるまでの時間（秒単位）。デフォルトは `30` 秒です。
+
+`DD_CLUSTER_CHECKS_WARMUP_DURATION`
+リーダーシップの取得からクラスターチェックロジックの開始までの遅延（秒単位）。すべてのノードベースの Agent が先に登録されるようにします。デフォルトは `30` 秒です。
+
+`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`
+`DD_CLUSTER_NAME` オプションによって設定されるインスタンスタグの名前。デフォルトは `cluster_name` です。
+
+`DD_CLUSTER_CHECKS_EXTRA_TAGS`                
+: クラスターチェックのメトリクスに追加のタグを付与します。
+
+`DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED`
+: true に設定すると、リーダー Cluster Agent がクラスターレベルのチェックランナーから統計情報を収集し、チェックのディスパッチロジックを最適化します。デフォルト: `false`
+
+`DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
+: Cluster Agent クライアントがクラスターレベルのチェックランナーにアクセスし、その統計情報を収集する際に使用するポートです。デフォルト: `5005`
+
 `DD_HOSTNAME`
 Datadog Cluster Agent に使用するホスト名。
 
 `DD_ENV`
 Cluster Agent によって発行されたデータの `env` タグを設定します。Cluster Agent が単一環境内のサービスを監視する場合にのみ推奨されます。
-
-`DD_CLUSTER_AGENT_CMD_PORT`
-Datadog Cluster Agent がサービスを提供するポート。デフォルトは `5005` です。
 
 `DD_USE_METADATA_MAPPER`
 クラスターレベルのメタデータマッピングを有効にします。デフォルトは `true` です。
@@ -62,14 +121,8 @@ Datadog Cluster Agent がサービスを提供するポート。デフォルト�
 `DD_LEADER_LEASE_DURATION`
 : リーダー選出が有効になっている場合にのみ使用されます。値は秒単位で、デフォルトは 60 です。
 
-`DD_CLUSTER_AGENT_AUTH_TOKEN`
-ノード Agent と Datadog Cluster Agent の間で共有される 32 文字のトークン。
-
 `DD_KUBE_RESOURCES_NAMESPACE`
 Cluster Agent がリーダー選出、イベント収集 (オプション)、および水平ポッドオートスケーリングに必要な ConfigMap を作成する場所となるネームスペースを構成します。
-
-`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`
-Cluster Agent が公開される Kubernetes サービスの名前。デフォルトは `datadog-cluster-agent` です。
 
 `DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`
 ローカルキャッシュを再同期するために API サーバーに問い合わせる頻度 (秒単位)。デフォルトは 5 分 (`300` 秒) です。
@@ -95,29 +148,11 @@ Datadog からのメトリクスの問い合わせに使用するウィンドウ
 `DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE`
 処理済みメトリクスのローカルキャッシュをグローバルストアと再同期する頻度。Cluster Agent のレプリカが複数ある場合に便利です。
 
-`DD_CLUSTER_CHECKS_ENABLED`
-クラスターチェックのオートディスカバリーを有効にします。デフォルトは `false` です。
-
 `DD_EXTRA_CONFIG_PROVIDERS`
 追加で使用するオートディスカバリー構成プロバイダー。
 
 `DD_EXTRA_LISTENERS`
 追加で実行するオートディスカバリーリスナー。
-
-`DD_CLUSTER_NAME`
-クラスター名。インスタンスタグとしてすべてのクラスターチェック構成に追加されます。
-
-`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`
-`DD_CLUSTER_NAME` オプションによって設定されるインスタンスタグの名前。デフォルトは `cluster_name` です。
-
-`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`
-ノードベースの Agent が停止していると見なされてプールから削除されるまでの時間（秒単位）。デフォルトは `30` 秒です。
-
-`DD_CLUSTER_CHECKS_WARMUP_DURATION`
-リーダーシップの取得からクラスターチェックロジックの開始までの遅延（秒単位）。すべてのノードベースの Agent が先に登録されるようにします。デフォルトは `30` 秒です。
-
-`DD_CLUSTER_CHECKS_EXTRA_TAGS`
-クラスターチェックメトリクスにタグを追加します。
 
 `DD_PROXY_HTTPS`
 : HTTPS リクエスト用のプロキシサーバーを設定します。
@@ -127,6 +162,12 @@ Datadog からのメトリクスの問い合わせに使用するウィンドウ
 
 `DD_PROXY_NO_PROXY`
 : プロキシをバイパスするホストのリストを設定します。リストはスペース区切りです。
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: init コンテナの CPU リクエストと制限を構成します。
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: init コンテナのメモリリクエストと制限を構成します。
 
 ## その他の参考資料
 

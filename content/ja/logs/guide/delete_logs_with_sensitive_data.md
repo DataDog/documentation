@@ -7,7 +7,6 @@ further_reading:
 - link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
-kind: ガイド
 title: 機密データを含むログを削除する
 ---
 

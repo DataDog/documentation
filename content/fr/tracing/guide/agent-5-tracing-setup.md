@@ -1,7 +1,7 @@
 ---
 aliases:
 - /fr/tracing/faq/agent-5-tracing-setup
-kind: guide
+
 private: true
 title: APM et profileur en continu avec la version 5 de l'Agent
 ---
@@ -40,7 +40,7 @@ Pour obtenir davantage d'informations, consultez [la page Docker][7].
     {{< nextlink href="tracing/setup/python" tag="Python" >}}Instrumentation avec Python{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Instrumentation avec Ruby{{< /nextlink >}}
     {{< nextlink href="tracing/setup/go" tag="Go" >}}Instrumentation avec Go{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Nodejs" >}}Instrumentation avec Node.js{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Instrumentation avec Node.js{{< /nextlink >}}
     {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}Instrumentation avec .NET{{< /nextlink >}}
     {{< nextlink href="tracing/setup/php" tag="PHP" >}}Instrumentation avec PHP{{< /nextlink >}}
 {{< /whatsnext >}}

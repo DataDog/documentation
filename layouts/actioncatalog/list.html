@@ -1,19 +1,69 @@
+{{/*  Local Partials start  */}}
+{{ define "partials/verify-icon"}}
+  {{/*  Determine if icon exists in our iconfont. Store verification value  */}}
+  <span x-data="{
+    setVerificationValue () {
+      // Look for `content` property.
+      const icon = $refs.icon
+      const iconBefore = window.getComputedStyle(icon, ':before')
+      const shouldShowIcon = iconBefore.getPropertyValue('content') !== 'none'
+
+      // Set the verfication value in the hidden icon data attribute
+      $refs.icon.dataset.iconExists = shouldShowIcon
+    }
+  }" x-init='$nextTick(() => setVerificationValue())' style="display: none">
+    <i x-ref="icon" id="icon-{{ .name }}" class="icon-{{ .name }}" data-icon-exists=""></i>
+</span>
+{{ end }}
+
+{{ define "partials/get-action-catalog-icon" }}
+  {{/*  Determines icon to display  */}}
+
+  {{ if and (eq .icon_type "INTEGRATION") .logo_path }}
+    {{/*  Using INTEGRATION logo  */}}
+    <img src="{{ .logo_path }}" height="17" alt="{{ .workflow_title }}"/>
+  {{ else if and .icon_name (eq .icon_type "ICON") }}
+    {{/*  
+      Using ICON from iconfont 
+      1. Change icon name to kebab case to match our iconfont names (e.g. SecurityPlatform --> security-platform)
+      2. Icon Verfication
+      3. Conditionally render icon or default datadog integration logo
+    */}}
+    {{ $kebab_icon_name := (replaceRE `(.)([A-Z][a-z]+)` (print "$1" "-" "$2") .icon_name) | lower }}
+    {{ partial "partials/verify-icon" (dict "name" $kebab_icon_name) }}
+
+    <span x-data="{showIcon: false}" x-init='$nextTick(() => {
+      // Evaluate value set in `verify-icon` partial
+      const icon = document.getElementById("icon-{{$kebab_icon_name}}")
+      showIcon = icon.dataset.iconExists === "true";
+    })'>  
+      <template x-if="showIcon">
+        {{ partial "icon" (dict "name" $kebab_icon_name "size" "17px" "vertical_align" "-5px") }}
+      </template>
+      <template x-if="!showIcon">
+        <img src="{{ .dd_logo_path }}" height="17" alt="{{ .workflow_title }}"/>
+      </template>
+    </span>
+  {{ else }}
+    {{/*  Using default INTEGRATION Agent logo  */}}
+    <img height="17" src='{{ partial "img-resource.html" (dict "context" .page_ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x' />
+  {{ end }}
+{{ end }}
+{{/*  Local Partials end  */}}
 
 {{ define "main" }}
 {{ $dot := . }}
 {{ $scratch := .Scratch }}
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
 
-<!-- From imported files -->
-{{ $list := sort .Pages }}
+{{ if lt (len $workflow_bundles) 1 }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
 
-<!-- build filters -->
-{{ $.Scratch.Set "filters" (slice)}}
-{{ range $index, $element := $list }}
-    {{ range $e := $element.Params.rule_category }}
-        {{ if not (in ($.Scratch.Get "filters") ($e | lower)) }}
-            {{ $.Scratch.Add "filters" ($e | lower) }}
-        {{ end }}
-    {{ end }}
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
 {{ end }}
 
 <div class="row">
@@ -26,11 +76,48 @@
 </div>
 
 {{ .Content }}
+<div class="form-group clearfix">
+  <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
+</div>
+
 <form id="rules">
-  {{- with $list -}}
-      {{- if isset (index . 0).Params "bundle_title" -}}
-        {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "bundle_title") ) -}}
-      {{- end -}}
-  {{- end -}}
+  <div>
+    <div class="js-empty-results d-none font-semibold"></div>
+    {{ range sort $workflow_bundles "title" }}
+      {{ $workflow_title := .title }}
+      {{ $workflow_name := .name }}
+      {{ $icon_id := .icon.id }}
+      {{ $icon_name := .icon.name }}
+      {{ $icon_type := .icon.type }}
+      
+      {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
+      {{ $default_dd_logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" "_datadog" "variant" "avatar" "fallback" "cloud") "_datadog" "avatar" }}
+      <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
+        <div class="js-group-header mb-1 d-flex align-items-center active" id="">
+          <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
+            {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
+          </div>
+          <div class="font-semibold ms-1 group-header-text">
+            <span>{{ $workflow_title }}</span>
+            <span class="icon-wrapper" data-anchor="#{{ $workflow_title | anchorize }}">{{ partial "icon" (dict "name" "click" "title" (printf "copy anchor for %s" $workflow_title)) }}</span>
+            <span class="icon-wrapper d-none">{{ partial "icon" (dict "name" "check-bold" "color" "#7c3eb9") }}</span>
+          </div>
+          <div class="js-group-header__arrow">></div>
+        </div>
+        <div class="group-{{ $workflow_title }} mb-2 ms-4 d-none">
+          {{ range $action_name, $action_data := .actions }}
+            {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#/" }}
+            {{ $full_url := print $base_url $workflow_name "/" $workflow_name "." $action_name }}
+
+            <a class="mb-1 font-semibold mix js-single-rule" href="{{ $full_url }}" data-name="{{ lower $workflow_title }} {{ lower $action_name }} {{ .File.TranslationBaseName }}">
+              {{ partial "get-action-catalog-icon" (dict "page_ctx" $dot "icon_name" $icon_name "icon_type" $icon_type "logo_path" $logo_path "workflow_title" $workflow_title "dd_logo_path" $default_dd_logo_path) }}
+              <span class="ps-1">{{ .title }}</span>
+              <br>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
 </form>
 {{ end }}

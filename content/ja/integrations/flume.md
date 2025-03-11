@@ -22,6 +22,7 @@ author:
   sales_email: kealan.maas@datadoghq.com
   support_email: kealan.maas@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flume/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: flume
 public_title: flume
@@ -46,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
   media: []
@@ -61,11 +62,11 @@ tile:
 
 このチェックは [Apache Flume][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Flume チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Flume チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -77,7 +78,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Flume チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. 以下の JVM 引数を [flume-env.sh][5] に追加して、Flume Agent を構成し JMX を有効にします。
 
@@ -105,21 +106,21 @@ export JAVA_OPTS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.
 
 このチェックによって取得されるメトリクスは、Flume Agent が使用するソース、チャネル、シンクによって異なります。各コンポーネントによって公開されるメトリクスの完全なリストについては、Apache Flume ドキュメントの[利用可能なコンポーネントメトリクス][9]を確認してください。Datadog に表示されるメトリクスのリストについては、このページの[メトリクス](#metrics)セクションを参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "flume" >}}
 
 
-### ヘルプ
+### イベント
 
 Flume には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "flume" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

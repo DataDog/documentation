@@ -1,6 +1,6 @@
 ---
 title: Créer une intégration JMX
-kind: guide
+
 ---
 Ce guide décrit la création d'une intégration JMX à l'aide du [kit de développement][1].
 

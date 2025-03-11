@@ -1,6 +1,11 @@
 {{ $dot := . }}
 {{ $.Scratch.Add "meta_image" "" }}
-{{ $hash := .File.UniqueID }}
+{{ $hash := "" }}
+
+{{ with .File }}
+    {{ $hash = .UniqueID }}
+{{ end }}
+
 {{ if $dot.Params.meta_image }}
     {{ $.Scratch.Set "meta_image" $dot.Params.meta_image }}
 {{ else if $hash }}

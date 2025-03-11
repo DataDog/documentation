@@ -1,6 +1,5 @@
 ---
 title: Containers View
-kind: documentation
 aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/

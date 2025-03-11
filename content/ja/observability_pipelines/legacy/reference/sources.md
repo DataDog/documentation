@@ -4,7 +4,7 @@ aliases:
 - /ja/observability_pipelines/integrations/
 - /ja/observability_pipelines/reference/sources/
 legacy: true
-title: OOTB ルール
+title: ソース
 ---
 
 {{< site-region region="gov" >}}

@@ -25,7 +25,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive pour obtenir des informations grâce sur
     la surveillance Kubernetes
-kind: documentation
 title: Kubernetes
 ---
 

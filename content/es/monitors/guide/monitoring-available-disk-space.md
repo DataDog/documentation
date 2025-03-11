@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Monitorización del espacio disponible en disco
 ---
 

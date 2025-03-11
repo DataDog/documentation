@@ -16,7 +16,10 @@ Other AWS resources such as ELB, RDS, and DynamoDB are not part of monthly infra
 
 ## AWS resource exclusion
 
-You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then exclude metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, and CloudWatch custom metrics.
+You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then limit metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, Step Functions, and CloudWatch custom metrics.
+Ensure that the tags added to this section are assigned to the corresponding resources on AWS.
+
+**Note**: If using exclusion notation (`!`), ensure the resource lacks the specified tag.
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="The metric collection tab of an AWS account within the Datadog AWS integration page showing the option to limit metric collection to specific resources with a dropdown menu to select AWS service and a field to add tags in key:value format" >}}
 

@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/visualize
   tag: 설명서
   text: 로그에서 시각화 생성
-kind: 설명서
 title: 로그 내보내기
 ---
 
@@ -28,7 +27,7 @@ title: 로그 내보내기
 - **CSV**(개별 로그 및 트랜잭션용)의 경우 개별 로그에 대해 한 번에 최대 100,000개 로그, 500개 트랜잭션을 내보낼 수 있습니다. 또한 시계열, 상위 목록 또는 표 보기를 CSV 파일로 다운로드할 수도 있습니다.
 - **공유** 보기: 이메일, Slack 등을 통해 팀원에게 현재 보기에 대한 링크를 공유합니다. 이 기능에서 사용할 수 있는 모든 [Datadog 알림 통합][6]을 참조하세요.
 
-{{< img src="logs/explorer/export2.png" alt="검색 필터" style="width:100%;" >}}
+{{< img src="logs/explorer/export3.png" alt="Search Filter" style="width:100%;" >}}
 
 또한 로그 이벤트 측면 패널에서 `Save to notebook`를 선택하여 노트북에 개별 로그를 저장할 수도 있습니다. 노트북에 저장되는 로그는 읽기 편한 형식으로 표시됩니다. 또한, 이 디스플레이는 로그 이벤트 보존 기간이 종료된 이후에도 노트북에 저장됩니다.
 

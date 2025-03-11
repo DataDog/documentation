@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
   text: Gérer les conteneurs à inclure dans Autodiscovery avec l'Agent
-kind: guide
 title: Template variables Autodiscovery
 ---
 

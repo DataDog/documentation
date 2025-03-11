@@ -1,6 +1,5 @@
 ---
 title: Correlation
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "service_management/events/"
@@ -12,6 +11,11 @@ further_reading:
 algolia:
   tags: ["event correlation", "event grouping", "correlation pattern"]
 ---
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Event Correlation is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 ## Overview
 
 Event Correlation groups events based on their relationships or on user-defined configurations to reduce the number of notifications and issues identified from the environment. Use correlation and cases to: 

@@ -1,8 +1,9 @@
 ---
 title: Autodiscovery with JMX
-kind: guide
 aliases:
   - /agent/guide/autodiscovery-with-jmx
+algolia:
+  tags: ["JMX", "JMX Metrics", "Missing Web Logic", "JMX Limit", "Cassandra", "Kafka", "Tomcat", "Weblogic"]
 further_reading:
     - link: '/agent/kubernetes/integrations/'
       tag: 'Documentation'
@@ -16,6 +17,7 @@ further_reading:
     - link: '/agent/kubernetes/tag/'
       tag: 'Documentation'
       text: 'Dynamically assign and collect tags from your application'
+
 ---
 
 In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations. Use Datadog's JMX based integrations to collect JMX applications metrics from your pods in Kubernetes. 
@@ -74,7 +76,7 @@ kind: Pod
 metadata:
   name: <POD_NAME>
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "<INTEGRATION_NAME>": {
           "init_config": {
@@ -90,7 +92,7 @@ metadata:
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
       # (...)
       env:
         - name: POD_IP
@@ -110,7 +112,7 @@ spec:
 
 In this example:
 - `<POD_NAME>` is the name of your pod.
-- `<CONTAINER_IDENTIFIER>` matches the desired container within your pod.
+- `<CONTAINER_NAME>` matches the desired container within your pod.
 - `<INTEGRATION_NAME>` is the name of the desired JMX integration. See the list of [available JMX integrations](#available-jmx-integrations).
 - Set `<JMX_PORT>` as desired, as long as it matches between the annotations and `JAVA_OPTS`.
 
@@ -169,7 +171,7 @@ spec:
 If you need to collect additional metrics from these integrations, add them to the `init_config` section:
 
 ```yaml
-ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+ad.datadoghq.com/<CONTAINER_NAME>.checks: |
   {
     "<INTEGRATION_NAME>": {
       "init_config": {
@@ -218,7 +220,7 @@ This configuration file should include `ad_identifiers`:
 
 ```yaml
 ad_identifiers:
-  - "<SHORT_IMAGE>"
+  - <CONTAINER_IMAGE>
 
 init_config:
   is_jmx: true
@@ -230,7 +232,7 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example, the container image `gcr.io/CompanyName/my-app:latest` has a short image name of `my-app`. As the Datadog Agent discovers that container, it sets up the JMX configuration as described in this file.
+Replace `<CONTAINER_IMAGE>` with the short image name of your desired container. For example, the container image `gcr.io/CompanyName/my-app:latest` has a short image name of `my-app`. As the Datadog Agent discovers that container, it sets up the JMX configuration as described in this file.
 
 You can alternatively reference and specify [custom identifiers to your containers][4] if you do not want to base this on the short image name.
 
@@ -259,7 +261,7 @@ spec:
         configDataMap:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
-              - "<SHORT_IMAGE>"
+              - <CONTAINER_IMAGE>
 
             init_config:
               is_jmx: true
@@ -279,7 +281,7 @@ datadog:
   confd:
     <INTEGRATION_NAME>.yaml: |
       ad_identifiers:
-        - "<SHORT_IMAGE>"
+        - <CONTAINER_IMAGE>
 
       init_config:
         is_jmx: true

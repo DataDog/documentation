@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/tracing/troubleshooting/apm_rate_limits
-kind: 설명서
 title: 에이전트 요율 제한
 ---
 

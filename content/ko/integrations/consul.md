@@ -49,7 +49,7 @@ integration_id: consul
 integration_title: Consul
 integration_version: 2.6.1
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: consul
 public_title: Consul

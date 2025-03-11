@@ -1,6 +1,5 @@
 ---
 title: Datadog Admission Controller
-kind: documentation
 aliases:
 - /agent/cluster_agent/admission_controller
 further_reading:
@@ -13,12 +12,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
   tag: "Blog"
   text: "Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM"
+- link: "https://www.datadoghq.com/architecture/instrument-your-app-using-the-datadog-operator-and-admission-controller/"
+  tag: "Architecture Center"
+  text: "Instrument your app using the Datadog Operator and Admission Controller"
+- link: "/containers/guide/cluster_agent_disable_admission_controller"
+  tag: "Documentation"
+  text: "Disable the Datadog Admission Controller with the Cluster Agent"
 ---
 
 ## Overview
 The Datadog Admission Controller is a component of the Datadog Cluster Agent. The main benefit of the Admission Controller is to simplify your application Pod configuration. For that, it has two main functionalities:
 
-- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL`, `DD_ENTITY_ID` and `DD_EXTERNAL_ENV`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
 Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide on admission controllers][1].
@@ -176,6 +181,8 @@ When these environment variables are not set, the Admission Controller uses stan
 Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller can be configured to inject different modes of communication between the application and Datadog agent.
 
 This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a Pod-specific mode using the `admission.datadoghq.com/config.mode` Pod label.
+
+Starting from Helm chart v3.22.0 and Datadog Operator v1.1.0, the communication mode is automatically set to `socket` if either APM socket or DSD socket is enabled.
 
 Possible options:
 | Mode               | Description                                                                                                       |

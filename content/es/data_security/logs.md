@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/
   tag: Blog
   text: Datadog presenta los servicios de Log Management y APM compatibles con PCI
-kind: Documentación
 title: Seguridad de los datos en Log Management
 ---
 

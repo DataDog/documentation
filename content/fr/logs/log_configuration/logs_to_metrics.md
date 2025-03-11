@@ -1,6 +1,5 @@
 ---
 title: Générer des métriques à partir de logs ingérés
-kind: documentation
 aliases:
   - /fr/logs/processing/logs_to_metrics/
   - /fr/logs/logs_to_metrics/

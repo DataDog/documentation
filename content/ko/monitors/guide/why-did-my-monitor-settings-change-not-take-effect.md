@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/monitors/faq/why-did-my-monitor-settings-change-not-take-effect
-kind: 가이드
 title: 모니터 설정 변경 사항이 적용되지 않음
 ---
 

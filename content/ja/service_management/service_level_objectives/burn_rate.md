@@ -2,7 +2,6 @@
 aliases:
 - /ja/monitors/service_level_objectives/burn_rate/
 description: モニターを使用して SLO のバーンレートを警告する
-kind: documentation
 title: バーンレートアラート
 ---
 {{< jqmath-vanilla >}}
@@ -11,9 +10,13 @@ title: バーンレートアラート
 
 SLO バーンレートアラートは、SLO エラーバジェットの消費率が指定した閾値を超え、それが特定の期間継続した場合に通知されます。たとえば、SLO の 30 日間目標に対して、過去 5 分間で過去 1 時間に 14.4 以上のバーンレートが測定された場合にアラートを設定できます。また、アラートが必要な閾値より少し低い閾値、例えば 7.2 以上のバーンレートが観測された場合にオプションで警告を出すように設定することができます。
 
-**注:** バーンレートアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
+**Note:** Burn rate alerts are available for the following SLO types:
 
-{{< img src="service_management/service_level_objectives/burn_rate_alert_config.jpeg" alt="バーンレートアラートのコンフィギュレーション">}}
+- [Metric-based SLOs][1],
+- [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
+- [Time Slice SLOs][7]
+
+{{< img src="service_management/service_level_objectives/slo-burn-rate-alert-v2.png" alt="Burn rate alert configuration">}}
 
 ## バーンレートアラートの仕組み
 
@@ -92,7 +95,7 @@ $$\text"バーンレート" = {7 \text"日" * 24 \text"時間" * 10% \text"消�
    * Datadog は、長いウィンドウの最大値として 48 時間をサポートしています。長いウィンドウは、`1 hour <= long window <= 48 hours` の範囲である必要があります。
    * 短いウィンドウは、UI 上で `short window = 1/12 * long window` として自動的に計算されます。
    * [API または Terraform](#api-and-terraform) を使用して別の短いウィンドウ値を指定できますが、常に長いウィンドウより小さい値である必要があります。
-5. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][4]を追加します。
+5. Add [Notification information][4] into the **Configure notifications and automations** section.
 6. SLO コンフィギュレーションページで **Save and Exit** ボタンをクリックします。
 
 ### 例
@@ -164,3 +167,4 @@ resource "datadog_monitor" "metric-based-slo" {
 [4]: https://app.datadoghq.com/slo
 [5]: /ja/api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
+[7]: /ja/service_management/service_level_objectives/time_slice

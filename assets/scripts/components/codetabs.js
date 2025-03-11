@@ -41,7 +41,7 @@ const initCodeTabs = () => {
     }
 
     /**
-     * Adds active class to the selected tab and shows the related tab pane. 
+     * Adds active class to the selected tab and shows the related tab pane.
      * @param {object} tabAnchorElement - Reference to the HTML DOM node representing the anchor tag within each tab.
     */
     const activateCodeTab = (tabAnchorElement) => {
@@ -63,7 +63,7 @@ const initCodeTabs = () => {
                     activeLangTab.closest('li').classList.add('active')
                     activePane.classList.add('active', 'show')
                 }
-                
+
                 const currentActiveTab = codeTabsElement.querySelector('.nav-tabs li.active')
 
                 // If we got this far and no tabs are highlighted, activate the first tab in the list of code tabs.
@@ -80,6 +80,16 @@ const initCodeTabs = () => {
         updateUrl(activeLang)
     }
 
+    const scrollToAnchor = (tab, anchorname) => {
+        const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
+        
+        if (anchor) {
+            anchor.scrollIntoView();
+        } else {
+            document.querySelector(anchorname).scrollIntoView();
+        }
+    }
+
     const activateTabsOnLoad = () => {
         const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
@@ -87,6 +97,11 @@ const initCodeTabs = () => {
 
             if (selectedLanguageTab) {
                 activateCodeTab(selectedLanguageTab)
+                if (window.location.hash) {
+                    setTimeout(function () {
+                        scrollToAnchor(tabQueryParameter, window.location.hash);
+                    }, 300);
+                }
             }else{
                 activateCodeTab(firstTab)
             }
@@ -102,25 +117,22 @@ const initCodeTabs = () => {
             codeTabsList.forEach(codeTabsElement => {
                 let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
                 allTabLinksNodeList.forEach(link => {
-                    link.addEventListener('click', e => {                        
+                    link.addEventListener('click', e => {
                         e.preventDefault();
-                        const region = getCookieByName('site');
-                        const regionalCodeTabs = codeTabParameters[region];
-                        const targetTop = e.target.getBoundingClientRect().top + window.scrollY;
-                        let offsetY = 0;
+
+                        const previousTabPosition = e.target.getBoundingClientRect().top
+
                         activateCodeTab(link);
                         getContentTabHeight();
-                        for(const [idx, codeTab] of Object.entries(regionalCodeTabs)) {
-                            if (codeTab.elementTop < targetTop && codeTab.elementCurrentHeight > 0) {
-                                offsetY += codeTab.elementHeightDifference;
-                            }
-                        }
+                        
+                        // ensures page doesnt jump when navigating tabs.
+                        // takes into account page shifting that occurs due to navigating tabbed content w/ height changes.
+                        // implementation of synced tabs from https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro
                         window.scrollTo({
-                            top: window.scrollY + offsetY,
+                            top: (window.scrollY + e.target.getBoundingClientRect().top) - previousTabPosition,
                             behavior: "instant"
                         });
                         getContentTabHeight();
-                        offsetY = 0;
                     })
                 });
             });
@@ -128,7 +140,7 @@ const initCodeTabs = () => {
     }
 
     /**
-     * Append the active lang to the URL as a query parameter. 
+     * Append the active lang to the URL as a query parameter.
     */
     const updateUrl = (activeLang) => {
         const url = window.location.href
@@ -214,4 +226,4 @@ const initCodeTabs = () => {
     init()
 }
 
-export default initCodeTabs;
+export default initCodeTabs

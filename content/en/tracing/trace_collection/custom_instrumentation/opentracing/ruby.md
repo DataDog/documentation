@@ -1,6 +1,5 @@
 ---
 title: Ruby OpenTracing Instrumentation
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/ruby
 - /tracing/trace_collection/open_standards/ruby
@@ -11,7 +10,7 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/ruby/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/ruby/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
 To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
 

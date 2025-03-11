@@ -51,13 +51,20 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: ドキュメント
   text: 収集された RUM ブラウザデータ
-kind: documentation
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: ブログ
+  text: プログレッシブ Web アプリケーションをモニタリングするためのベストプラクティス
 title: RUM & セッションリプレイ
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM ダッシュボード" >}}
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=RUM">}}
+  特定のビジネスニーズに合わせてカスタマイズされたユーザーアクションを作成する方法を発見し、ユーザー行動の正確な追跡を可能にします。
+{{< /learning-center-callout >}}
 
 ## リアルユーザーモニタリングとは？
+
+{{< img src="real_user_monitoring/performance-summary-browser.png" alt="RUM ダッシュボード" >}}
 
 Datadog の*リアルユーザーモニタリング (RUM)* は、個々のユーザーのリアルタイムのアクティビティとエクスペリエンスをエンドツーエンドで可視化します。RUM は Web およびモバイルアプリケーションを監視するための 4 種類のユースケースを解決します。
 
@@ -74,7 +81,7 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 セッションリプレイを RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、Web アプリケーションの使用パターンや設計上の落とし穴を把握することができます。
 
-## 詳細はこちら
+## 開始する
 
 アプリケーションタイプを選択して、RUM データの収集を開始します。
 
@@ -101,8 +108,7 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 | プラットフォーム固有のバイタルを監視 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | ログのグローバルコンテキスト/属性追跡  | {{< X >}} |  |  |  |  |  |  |
 | クライアント側のトレース |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| セッションリプレイ | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | モバイルセッションリプレイは、ネイティブモバイルアプリ向けの公開ベータ版です。 |
-| ヒートマップ | {{< X >}} |  |  |  |  |  |  |
+| セッション リプレイ | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | ネイティブモバイルアプリ向けの Mobile Session Replay は現在プレビュー版です。 |
 | フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
 
 ## SDK ドメインでサポートされるエンドポイント
@@ -121,6 +127,28 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 ## Datadog RUM を探索する
 
 [**Digital Experience > Performance Summary**][1] に移動して、RUM にアクセスします。
+
+上部ナビゲーションからアプリケーションを選択するか、[ブラウザ][15]または[モバイル][16]のセットアップ手順に従って、最初のアプリケーションを追加してください。
+
+{{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="RUM アプリケーションを選択" >}}
+
+**ヒント**: Datadog のグローバル検索で RUM を開くには、<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> を押し、`real user monitoring` と入力して検索してください。
+
+## パフォーマンスモニタリングの概要
+
+| ブラウザパフォーマンスの概要 | モバイルパフォーマンスの概要 |
+|---------|---------|
+| {{< img src="real_user_monitoring/performance-summary-browser.png" alt="ブラウザアプリケーション向けの RUM パフォーマンスモニタリング概要ページ" >}} | {{< img src="real_user_monitoring/performance-summary-mobile-2.png" alt="モバイルアプリケーション向けの RUM パフォーマンスモニタリング概要ページ" >}} | 
+
+[RUM パフォーマンスモニタリング概要][1]ページは、Web およびモバイルアプリケーション双方に関連性が高く実用的なインサイトを提供します。また、各プラットフォームに合わせたエクスペリエンスによって、以下が可能となります。
+
+- **重要なデータポイントに注目**: Web では UI レイテンシー、モバイルではクラッシュなど、プラットフォームごとの主要指標にフォーカスできます。
+- **アプリケーションの健全性をモニタリング**: Core Web Vitals (Web アプリ) やハング率 (iOS) などの馴染みのある KPI を用いて、アプリの信頼性を評価できます。
+- **直接調査を開始**: ページを離れることなく、インタラクティブなウィジェットから直ちに問題の原因究明に取りかかれます。
+
+**Web アプリ**の場合: 検索バーでデータをフィルタリングし、遅いページを特定したうえで UI ガイドに従い、[RUM Optimization Inspect][17] ページにアクセスできます。
+
+**モバイルアプリ**の場合: ページ下部で最近のクラッシュを確認し、[Error Tracking][6] サイドパネルを活用してトラブルシューティングを行えます。
 
 ### すぐに使えるダッシュボード
 
@@ -142,7 +170,7 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 
 ### エラー追跡とクラッシュレポート
 
-[エラー追跡][6]を使用して、外れ値およびエラー、タイムアウト、クラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
+[Error Tracking][6] を使用して、外れ値、エラー、タイムアウト、およびクラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM エラー追跡" video=true >}}
 
@@ -166,7 +194,7 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 
 [ブラウザ開発ツール][14]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -184,3 +212,6 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 [12]: /ja/real_user_monitoring/session_replay/browser/
 [13]: /ja/real_user_monitoring/session_replay/browser/privacy_options/
 [14]: /ja/real_user_monitoring/session_replay/browser/developer_tools/
+[15]: /ja/real_user_monitoring/browser/setup/
+[16]: /ja/real_user_monitoring/mobile_and_tv_monitoring/
+[17]: https://app.datadoghq.com/rum/optimization/inspect

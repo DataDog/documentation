@@ -9,7 +9,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/php
   tag: Documentation
   text: Instrumenter votre application
-kind: documentation
 title: Exigences de compatibilité PHP
 type: multi-code-lang
 ---

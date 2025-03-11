@@ -4,7 +4,6 @@ further_reading:
 - link: service_management/case_management/create_case
   tag: Documentación
   text: Crear un caso
-kind: documentación
 title: Proyectos
 ---
 

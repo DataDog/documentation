@@ -1,6 +1,6 @@
 ---
 title: Collect more metrics from the SQL Server integration
-kind: guide
+
 aliases:
   - /integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
 ---

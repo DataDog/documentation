@@ -1,5 +1,5 @@
 ---
-title: OpenTelemetry Collector Datadog Exporter
+title: OpenTelemetry Collector
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
@@ -19,28 +19,35 @@ further_reading:
   text: "OTLP Metrics Types"
 ---
 
-The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
+The OpenTelemetry Collector receives, processes, and exports telemetry data from your applications. To send this data to Datadog, you need to configure several components within the Collector:
+
+- [Datadog Exporter][1]: Forwards trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent).
+- [Datadog Connector][29]: Calculates Trace Metrics from collected span data.
 
 {{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
-## Setting up the OpenTelemetry Collector with the Datadog Exporter
+## Setting up the OpenTelemetry Collector
 
-To run the OpenTelemetry Collector along with the Datadog Exporter:
+To run the OpenTelemetry Collector with the Datadog Exporter and Datadog Connector:
 
 ### Step 1 - Download the OpenTelemetry Collector
 
 Download the latest release of the OpenTelemetry Collector Contrib distribution, from [the project's repository][3].
 
-### Step 2 - Configure the Datadog Exporter
+### Step 2 - Configure the Datadog Exporter and Connector
 
 To use the Datadog Exporter, add it to your [OpenTelemetry Collector configuration][4]. Create a configuration file and name it `collector.yaml`. Use the example file which provides a basic configuration that is ready to use after you set your Datadog API key as the `DD_API_KEY` environment variable:
 
-{{< code-block lang="yaml" filename="collector.yaml" collapsible="true" >}}
+{{% otel-endpoint-note %}}
+
+```yaml
 receivers:
   otlp:
     protocols:
       http:
+        endpoint: 0.0.0.0:4318
       grpc:
+        endpoint: 0.0.0.0:4317
   # The hostmetrics receiver is required to get correct infrastructure metrics in Datadog.
   hostmetrics:
     collection_interval: 10s
@@ -83,29 +90,30 @@ processors:
     send_batch_size: 10
     timeout: 10s
 
+connectors:
+  datadog/connector:
+
 exporters:
-  datadog:
+  datadog/exporter:
     api:
-      site: <DD_SITE>
+      site: {{< region-param key="dd_site" >}}
       key: ${env:DD_API_KEY}
 
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, prometheus, otlp]
+      receivers: [hostmetrics, prometheus, otlp, datadog/connector]
       processors: [batch]
-      exporters: [datadog]
+      exporters: [datadog/exporter]
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [datadog]
+      exporters: [datadog/connector, datadog/exporter]
     logs:
       receivers: [otlp, filelog]
       processors: [batch]
-      exporters: [datadog]
-{{< /code-block >}}
-
-Where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}.
+      exporters: [datadog/exporter]
+```
 
 The above configuration enables the receiving of OTLP data from OpenTelemetry instrumentation libraries over HTTP and gRPC, and sets up a [batch processor][5], which is mandatory for any non-development environment. Note that you may get `413 - Request Entity Too Large` errors if you batch too much telemetry data in the batch processor.
 
@@ -130,7 +138,7 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 {{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data to the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
 
-Since the OpenTelemetry SDKs' logging functionality is not fully supported (see your specific language in the [OpenTelemetry documentation][11] for more information), Datadog recommends using a standard logging library for your application. Follow the language-specific [Log Collection documentation][12] to set up the appropriate logger in your application. Datadog strongly encourages setting up your logging library to output your logs in JSON to avoid the need for [custom parsing rules][13]. 
+Since the OpenTelemetry SDKs' logging functionality is not fully supported (see your specific language in the [OpenTelemetry documentation][11] for more information), Datadog recommends using a standard logging library for your application. Follow the language-specific [Log Collection documentation][12] to set up the appropriate logger in your application. Datadog strongly encourages setting up your logging library to output your logs in JSON to avoid the need for [custom parsing rules][13].
 
 #### Configure the filelog receiver
 
@@ -162,12 +170,12 @@ filelog:
      ddtags: env:staging
 ```
 
-- `include`: The list of files the receiver tails 
-- `start_at: end`: Indicates to read new content that is being written 
-- `poll_internal`: Sets the poll frequency 
+- `include`: The list of files the receiver tails
+- `start_at: end`: Indicates to read new content that is being written
+- `poll_internal`: Sets the poll frequency
 - Operators:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
-    - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
+    - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog.
 
 #### Remap OTel's `service.name` attribute to `service` for logs
 
@@ -180,7 +188,7 @@ To get the `service` field correctly populated in your logs, you can specify `se
 
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
-In containerized environments, applications write logs to `stdout` or `stderr`. Kubernetes collects the logs and writes them to a standard location. You need to mount the location on the host node into the Collector for the filelog receiver. Below is an [extension example][17] with the mounts required for sending logs. 
+In containerized environments, applications write logs to `stdout` or `stderr`. Kubernetes collects the logs and writes them to a standard location. You need to mount the location on the host node into the Collector for the filelog receiver. Below is an [extension example][17] with the mounts required for sending logs.
 
 ```
 apiVersion: apps/v1
@@ -349,7 +357,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
    ```
 
    This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
-  
+
 3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
 
    ```yaml
@@ -415,7 +423,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    ```
 
    This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
-  
+
 3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
 
    ```yaml
@@ -459,7 +467,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    # ...
    ```
 
-   This ensures that each agent forwards its data via the OTLP protocol to the Collector Gateway. 
+   This ensures that each agent forwards its data via the OTLP protocol to the Collector Gateway.
 
 6. Replace `GATEWAY_HOSTNAME` with the address of your OpenTelemetry Collector Gateway.
 
@@ -510,7 +518,7 @@ To use the OpenTelemetry Operator:
 1. Follow the [official documentation for deploying the OpenTelemetry Operator][1]. As described there, deploy the certificate manager in addition to the Operator.
 
 2. Configure the Operator using one of the OpenTelemetry Collector standard Kubernetes configurations:
-   * [Daemonset deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics. 
+   * [Daemonset deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics.
    * [Gateway deployment][3]
 
    For example:
@@ -534,8 +542,10 @@ To use the OpenTelemetry Operator:
        receivers:
          otlp:
            protocols:
-             grpc:
              http:
+               endpoint: 0.0.0.0:4318
+             grpc:
+               endpoint: 0.0.0.0:4317
        hostmetrics:
          collection_interval: 10s
          scrapers:
@@ -561,6 +571,8 @@ To use the OpenTelemetry Operator:
            send_batch_max_size: 100
            send_batch_size: 10
            timeout: 10s
+       connectors:
+         datadog/connector:
        exporters:
          datadog:
            api:
@@ -618,8 +630,6 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 
 ### Containers overview dashboard
 
-<div class="alert alert-info">The Container Overview dashboard is in private beta. <a href="https://forms.gle/g3ndvTnepWY4Bvuh7">Fill out this form</a> to try it out.</div>
-
 <div class="alert alert-warning">This feature is affected by <a href="/containers/guide/docker-deprecation/">Docker deprecation in Kubernetes</a> and you might not be able to use <code>dockerstatsreceiver</code> for OpenTelemetry with Kubernetes version 1.24+.</div>
 
 The [Docker Stats][24] receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts.
@@ -645,7 +655,7 @@ Use the following configuration to enable additional attributes on the Docker St
         enabled: true
 ```
 
-The minimum required OpenTelemetry Collector version that supports this feature is v0.78.0. 
+The minimum required OpenTelemetry Collector version that supports this feature is v0.78.0.
 
 ## Further reading
 
@@ -679,3 +689,4 @@ The minimum required OpenTelemetry Collector version that supports this feature 
 [26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
 [27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper
 [28]: /opentelemetry/schema_semantics/hostname/
+[29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector

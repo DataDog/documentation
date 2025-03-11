@@ -1,6 +1,5 @@
 ---
 title: Cluster Check Runners
-kind: documentation
 aliases:
 - /agent/cluster_agent/clusterchecksrunner
 - /containers/cluster_agent/clusterchecksrunner

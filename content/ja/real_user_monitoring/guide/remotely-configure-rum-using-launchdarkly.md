@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 private: true
 title: LaunchDarkly を使用した RUM のリモート構成
 ---
@@ -72,7 +71,7 @@ LaunchDarkly は多変量フラグをサポートしており、返すバリエ�
 ## RUM 構成に機能フラグを追加する
 [上記][7]のように LaunchDarkly をセットアップし、依存関係をインストールし、[LaunchDarkly クライアントを初期化][8]したら、Datadog のコードに機能フラグ評価を追加することが可能です。LaunchDarkly でのフラグ評価については、[こちら][9]を参照してください。
 
-### 個別パラメーターオプション
+### 個々のパラメーターオプション
 
 個々のパラメーターについて RUM SDK を初期化する前に、まず LaunchDarkly の機能フラグを評価する必要があります。
 
@@ -116,13 +115,13 @@ datadogRum.init(RUM_configuration_object)
 ## LaunchDarkly のコントロールを埋め込んで、ダッシュボードで直接 RUM を構成する
 Datadog アプリケーションで直接 RUM の構成を変更したい場合は、LaunchDarkly UI を Datadog に埋め込んで、機能フラグのオン/オフを切り替えることができます。機能フラグはデフォルト値のまま、オフにしておくことができるように設定されています。より忠実度の高いデータを取得したい場合は、機能フラグをオンにすれば、オンのバリエーションに設定した値が RUM の初期化に使用されます。
 
-LaunchDarkly の Datadog アプリインテグレーションは、機能フラグ管理 UI をダッシュボードウィジェットとして埋め込んでいます。このウィジェットを使用すると、Datadog を離れることなく機能フラグを切り替えることができます。主要なメトリクスを表示する新規または既存のダッシュボード内に、LaunchDarkly ウィジェットを埋め込むことができます。インシデントやエラーの急増があった場合、Datadog 内から RUM 構成の機能フラグを素早く切り替え、より多くのデータのサンプリングを開始し、チームが問題に対処し解決するために必要な情報にアクセスできるようにすることが可能です。
+LaunchDarkly の Datadog アプリインテグレーションは、機能フラグ管理 UI をダッシュボードウィジェットとして埋め込んでいます。このウィジェットを使用すると、Datadog を離れることなく機能フラグを切り替えることができます。主要なメトリクスを表示する新規または既存のダッシュボード内に、LaunchDarkly ウィジェットを埋め込むことができます。インシデントやエラーの急増があった場合、Datadog 内から RUM 構成の機能フラグを切り替え、より多くのデータのサンプリングを開始し、チームが問題に対処し解決するために必要な情報にアクセスできるようにすることが可能です。
 
 {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog と LaunchDarkly の UI インテグレーションウィジェット" style="width:100%;">}}
 
 構成に最初に設定した値を変更する必要がある場合は、いつでも LaunchDarkly 内でフラグを更新することができます。変更を保存すると、すべての新しいフラグ評価には更新された値が適用されます。
 
-
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/browser#setup

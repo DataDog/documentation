@@ -14,7 +14,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: Documentation
   text: Planifier un downtime pour désactiver un monitor
-kind: documentation
 title: Monitor de journal d'audit
 ---
 

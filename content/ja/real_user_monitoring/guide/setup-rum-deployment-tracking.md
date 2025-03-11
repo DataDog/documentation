@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/real_user_monitoring/guide/getting-started-rum-deployment-tracking/
-beta: true
 description: Datadog で新しいリリースをキャプチャし、デプロイメントを追跡し、パフォーマンスを分析するために RUM を設定する方法について説明します。
 further_reading:
 - link: /real_user_monitoring/explorer
@@ -13,13 +12,8 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
   tag: ブログ
   text: RUM のデプロイメント追跡でフロントエンドの不具合をトラブルシュートする
-kind: ガイド
 title: RUM デプロイメント追跡の概要
 ---
-
-<div class="alert alert-warning">
-    RUM デプロイ追跡は現在ベータ版です。
-</div>
 
 
 ## 概要
@@ -74,13 +68,13 @@ window.DD_RUM &&
 
 #### Android RUM
 
-バージョンタグは、アプリケーションのマニフェストから自動的にキャプチャされます。
+The version tag is captured automatically from the application's manifest.
 
 #### iOS RUM
 
-バージョンタグは、アプリケーションのアプリの `info.plist` から自動的にキャプチャされます。
+The version tag is captured automatically from the application's `info.plist`.
 
-## RUM でデプロイメントのパフォーマンスを分析する
+## Analyze your deployment performance in RUM
 
 {{< tabs >}}
 {{% tab "ブラウザ RUM" %}}

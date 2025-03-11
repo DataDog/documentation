@@ -26,7 +26,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail » (suivi)
-kind: documentation
 title: Collecte de logs avec Java
 ---
 

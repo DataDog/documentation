@@ -22,13 +22,12 @@ further_reading:
 - link: /monitors/types/error_tracking/
   tag: 설명서
   text: 오류 추적 모니터 만들기
-kind: 설명서
 title: 웹 및 모바일 애플리케이션에 대한 오류 추적
 ---
 
 ## 개요
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="오류 추적 탐색기에서 확인된 문제의 세부정보" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-explorer-1.png" alt="오류 추적 탐색기의 문제 상세 정보" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -38,7 +37,7 @@ RUM 오류 이슈에는 스택 트레이스, 사용자 세션 타임라인, 메�
 
 ## 설정
 
-{{< whatsnext desc="RUM에 대한 Datadog 오류 추적을 시작하려면 해당 설명서를 참조하세요:" >}}
+{{< whatsnext desc="RUM에 대한 Datadog 오류 추적을 시작하려면 해당 설명서를 참조하세요." >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
@@ -46,6 +45,7 @@ RUM 오류 이슈에는 스택 트레이스, 사용자 세션 타임라인, 메�
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

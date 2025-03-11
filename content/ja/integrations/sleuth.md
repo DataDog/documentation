@@ -26,6 +26,7 @@ categories:
 - 問題追跡
 - orchestration
 - ソースコントロール
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: sleuth
 integration_title: Sleuth
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: sleuth
 public_title: Sleuth
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Sleuth Deployment Tracker
   media: []
@@ -67,7 +68,7 @@ tile:
 
 Sleuth は、DevOps スタック全体でソフトウェアのデプロイを追跡できるようにするデプロイ追跡ツールです。Datadog インテグレーションにより、Sleuth は洞察に満ちた有意義で実用的なリアルタイムデータを提供し、コードに加えた変更の影響を明確に確認できるようにします。
 
-## 計画と使用
+## Setup
 
 Datadog インテグレーションを追加するには
 
@@ -86,11 +87,11 @@ Datadog インテグレーションを追加するには
 
 ![][3]
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Sleuth インテグレーションは、Sleuth アカウントからのみインストールされます。Sleuth で Datadog API とアプリケーションキーを指定する以外に、Datadog アカウントから行う必要がある設定や追加の構成はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 - **Add metric** ドロップダウンをクリックし、受信した Datadog メトリクスを処理する Sleuth プロジェクトを選択します。Sleuth 組織内のすべてのプロジェクトがドロップダウンに表示されます。
 
@@ -101,17 +102,17 @@ Datadog Sleuth インテグレーションは、Sleuth アカウントからの�
 コンフィギュレーションが完了すると、Sleuth はデプロイで Datadog メトリクスを表示します。Sleuth のデプロイカードでメトリクスがどのように伝達されるかについて詳しくは、[**ダッシュボード**][5]を参照してください。
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Sleuth インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Sleuth インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Sleuth インテグレーションには、イベントは含まれません。
 
@@ -122,7 +123,7 @@ Sleuth インテグレーションには、イベントは含まれません。
 
 Datadog インテグレーションが切断され、その組織内のプロジェクトで使用できなくなります。Datadog インテグレーションに加えたプロジェクトレベルの変更はすべて失われます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、このインテグレーションの[メインテナー][6]までお問い合わせください。
 

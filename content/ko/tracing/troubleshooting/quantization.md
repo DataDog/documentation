@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/library_config/
   tag: 설명서
   text: 라이브러리 구성 추적하기
-kind: 설명서
 title: APM 데이터 양자화
 ---
 

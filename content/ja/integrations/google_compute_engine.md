@@ -6,6 +6,7 @@ categories:
 - log collection
 - network
 - os & system
+custom_kind: integration
 dependencies: []
 description: ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較
 doc_link: https://docs.datadoghq.com/integrations/google_compute_engine/
@@ -16,7 +17,6 @@ integration_id: google-compute-engine
 integration_title: Google Compute Engine
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: google_compute_engine
 public_title: Datadog-Google Compute Engine インテグレーション
@@ -34,15 +34,15 @@ Google Compute Engine からメトリクスを取得して、以下のことが�
 - Compute Engine のパフォーマンスを視覚化できます。
 - Compute Engine のパフォーマンスをアプリケーションと関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
-#### インフラストラクチャーリスト
+#### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-#### ブラウザトラブルシューティング
+#### 構成
 
 カスタム Compute Engine ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
 
@@ -50,17 +50,17 @@ Google Compute Engine からメトリクスを取得して、以下のことが�
 
 Google Compute Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
-これが完了したら、Google Compute Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+これが完了したら、Google Compute Engine のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
 
 1. [Google Cloud Logging のページ][3]に移動し、Google Compute Engine のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 
     {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### ホスト収集の制限
 
@@ -74,27 +74,27 @@ GCE インスタンスのシャットダウンが予期される場合にモニ�
 
 {{< img src="integrations/google_compute_engine/gce_automuting.png" alt="GCE オートミュート" >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_compute_engine" >}}
 
 
-### ヘルプ
+### イベント
 
 Google Cloud Compute Engine インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud Compute Engine インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
--   [Google Compute Engine のメトリクスの監視][9]  
+-   [Google Compute Engine のメトリクスの監視][9]
 -   [Google Compute Engine のメトリクスの収集方法][10]
 -   [Datadog を使用した Google Compute Engine の監視方法][11]
 

@@ -1,6 +1,13 @@
 ---
 aliases:
 - /ko/graphing/functions/interpolation/
+further_reading:
+- link: /dashboards/functions/
+  tag: 설명서
+  text: 기타 함수 유형
+- link: /metrics/guide/interpolation-the-fill-modifier-explained/
+  tag: 설명서
+  text: 보간 및 입력 한정자
 title: 보간
 ---
 
@@ -35,7 +42,7 @@ title: 보간
 `default_zero()` 함수는 다음 사용 사례를 해결하기 위해 고안되었습니다(다른 사용 사례에서도 작동할 수 있습니다).
 
 - 희소 메트릭의 산술을 수행할 때 게이지를 0으로 정렬(참고: `as_count()` 또는 `as_rate()`(으)로 쿼리된 `COUNT` 또는 `RATE` 유형 메트릭은 항상 0으로 정렬되므로, `default_zero()`를 사용해도 정렬 방법은 바뀌지 않습니다. 이는 `GAUGE` 유형 메트릭에만 영향을 미칩니다).
-- 데이터가 없는 상태에서 모니터를 해결합니다. 이는 단순 경고와 다중 경고 모두에서 작동하지만, 값 0은 모니터를 트리거하지 않아야 합니다. 예를 들어, `avg(last_10m):avg:system.cpu.idle{*} < 10` 쿼리가 있는 모니터에서는 작동하지 않는데, 그 이유는 값 0으로 평가될 때 (해결  조치 대신) 모니터 트리거가 이루어지기 때문입니다. `as_count()` 쿼리가 있는 오류 빈도 모니터에서는 이 함수를 사용하지 말아야 합니다. 자세한 내용은 [모니터링 평가의 as_count() 가이드][3]를 참조하세요.
+- 데이터가 없는 조건 이전에 모니터를 해결합니다. 이는 단순 경고와 다중 경고 모두에서 작동하지만, 값 0은 모니터를 트리거하지 않아야 합니다. 예를 들어, `avg(last_10m):avg:system.cpu.idle{*} < 10` 쿼리가 있는 모니터에서는 작동하지 않는데, 그 이유는 값 0으로 평가될 때 (해결  조치 대신) 모니터 트리거가 이루어지기 때문입니다. `as_count()` 쿼리가 있는 오류 빈도 모니터에서는 이 함수를 사용하지 말아야 합니다. 자세한 내용은 [모니터링 평가의 as_count() 가이드][3]를 참조하세요.
 - 시각 관련 사유로 또는 모니터 평가에서 시계열의 최소/최대/평균에 영향을 미치기 위해 희소(그러나 비어 있지 않은) 시리즈의 빈 간격을 채웁니다. 평가 윈도우가 데이터 포인트를 포함하지 않으면 `default_zero()`는 아무런 효과가 없습니다.
 - 데이터가 없을 때 시계열 위젯에 값 0을 표시합니다.
 
@@ -85,22 +92,11 @@ default_zero(avg:custom_metric{*})
 +---------------------+-----------------------------+
 ```
 
-## 기타 함수
+## 참고 자료
 
-{{< whatsnext desc="사용 가능한 다른 함수를 참조하세요." >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}알고리즘: 메트릭에 이상 또는 아웃라이어 감지를 구현합니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}산술: 메트릭에 대해 산술 연산을 수행합니다.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}계산: 메트릭의 0이 아닌 값 또는 null이 아닌 값을 계산합니다. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}제외: 메트릭의 특정 값을 제외합니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}순위: 메트릭의 하위 집합만 선택합니다. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}비율: 메트릭 대비 커스텀 파생값을 계산합니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}회귀: 메트릭에 일부 기계 학습 기능을 적용합니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rollup" >}}롤업: 메트릭에 사용되는 원시 포인트 수를 제어합니다. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}평활화: 메트릭 변동을 평활화합니다.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}타임시프트: 타임라인을 따라 메트릭 데이터 포인트를 이동합니다. {{< /nextlink >}}
-{{< /whatsnext >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/metrics/guide/interpolation-the-fill-modifier-explained/
-[2]: /ko/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
+[2]: /ko/dashboards/functions/#add-a-function
 [3]: /ko/monitors/guide/as-count-in-monitor-evaluations/
 [4]: /ko/metrics/

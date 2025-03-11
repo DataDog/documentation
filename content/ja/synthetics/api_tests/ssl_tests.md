@@ -24,7 +24,6 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: ドキュメント
   text: Synthetic テストモニターについて
-kind: documentation
 title: SSL テスト
 ---
 
@@ -34,34 +33,49 @@ SSL テストを使用すると、SSL/TLS 証明書の有効性と有効期限�
 
 SSL テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。SSL テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
-## コンフィギュレーション
+## 構成
 
-`SSL` テストの作成を選択した後、テストのリクエストを定義します。
+You may create a test using one of the following options:
 
-### リクエストを定義する
+- **Create a test from a template**:
 
-1. テストを実行する **Host** と **Port** を指定します。デフォルトでは、ポートは `443` に設定されています。
-2. **Advanced Options** (オプション) をテストに追加します。
-   * **Accept self-signed certificates**: 自己署名証明書に関連するサーバーエラーをバイパスします。
-   * **Fail on revoked certificate in stapled OCSP**: 証明書が OCSP ステープリングによって取り消されたとラベル付けされた場合、テストに失敗します。
-   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
-   * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
-   * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
+     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click **Save Details** to submit your API test.<br /><br>
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-   `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+- **Build a test from scratch**:
 
-   ```
-   openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-   openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-   ```
+   1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、SSL リクエストタイプを選択します。
+   1. テストを実行する **Host** と **Port** を指定します。デフォルトの SSL ポートは `443` です。
+   1. **Advanced Options** (オプション) をテストに追加します。
+      * **Accept self-signed certificates**: 自己署名証明書に関連するサーバーエラーをバイパスします。
+      * **Fail on revoked certificate in stapled OCSP**: 証明書が OCSP ステープリングによって取り消されたとラベル付けされた場合、テストに失敗します。
+      * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
+      * **Server Name**: TLS ハンドシェイクを開始するサーバーを指定し、サーバーが同じ IP アドレスと TCP ポート番号上の複数の可能な証明書のうちの 1 つを提示することを可能にします。デフォルトでは、このパラメータは **Host** の値で埋められています。
+      * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
 
-3. SSL テストに**名前**を付けます。
+      `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
 
-4. SSL テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
 
-   {{< img src="synthetics/api_tests/ssl_test_config.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
+   1. SSL テストに**名前**を付けます。
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+   1. SSL テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+   1. **Test Certificate** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
+
+      {{< img src="synthetics/api_tests/synthetics_ssl_test_cert.png" alt="SSL リクエストを定義する" style="width:90%;" >}}
+
+   1. Click **Create Test** to submit your API test.
+
+
+
+### スニペット
+
+{{% synthetics-api-tests-snippets %}}
 
 ### アサーションを定義する
 
@@ -89,7 +103,7 @@ SSL テストは、ネットワークの外部または内部からのテスト�
 
 SSL テストを実行する**ロケーション**を選択します。SSL テストは、ネットワークの外部または内部のどちらから証明書を監視するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -99,47 +113,7 @@ SSL テストは次の頻度で実行できます。
 * [**Within your CI/CD pipelines**][2]。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
-### アラート条件を定義する
-
-アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
-
-#### アラート設定規則
-
-アラートの条件を `An alert is triggered if your test fails for X minutes from any n of N locations` に設定すると、次の 2 つの条件が当てはまる場合にのみアラートがトリガーされます。
-
-* 直近 *X* 分間に、最低 1 個のロケーションで失敗 (最低 1 つのアサーションが失敗)。
-* 直近 *X* 分間に、ある時点で最低 *n* 個のロケーションで失敗。
-
-#### 高速再試行
-
-テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
-
-ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
-
-### テストモニターを構成する
-
-以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
-
-1. [モニターの構成方法と同様][5]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
-
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][7]を使用できます。
-
-    | 条件付き変数       | 説明                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            |テストがアラートを発する場合に表示します。                                          |
-    | `{{^is_alert}}`            |テストがアラートを発しない限り表示します。                                        |
-    | `{{#is_recovery}}`         | テストがアラートから回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | テストがアラートから回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
-
-3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-
-4. **Create** をクリックすると、テストの構成とモニターが保存されます。
-
-詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 
@@ -159,9 +133,9 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 : 接続がリモートサーバーによって突然閉じられました。Web サーバーにエラーが発生した、応答中にシステムが停止した、Web サーバーへの接続が失われた、などの原因が考えられます。
 
 `DNS`
-: テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
+: テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
@@ -173,7 +147,7 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
-## アクセス許可
+## 権限
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][11]を持つユーザーのみが、Synthetic SSL テストを作成、編集、削除できます。Synthetic SSL テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][11]のいずれかにアップグレードします。
 
@@ -181,11 +155,7 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 
 ### アクセス制限
 
-アカウントに[カスタムロール][13]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、SSL テストへのアクセスを制限することができます。SSL テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 
@@ -195,7 +165,7 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 [2]: /ja/synthetics/cicd_integrations
 [3]: /ja/synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /ja/monitors/notify/#notify-your-team
+[5]: /ja/monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /ja/synthetics/guide/synthetic-test-monitors
@@ -203,4 +173,3 @@ SSL テストの URL、高度なオプション、アサーションで、[**Set
 [10]: /ja/synthetics/api_tests/errors/#ssl-errors
 [11]: /ja/account_management/rbac/
 [12]: /ja/account_management/rbac#custom-roles
-[13]: /ja/account_management/rbac/#create-a-custom-role

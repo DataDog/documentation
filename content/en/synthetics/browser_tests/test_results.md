@@ -1,6 +1,5 @@
 ---
 title: Browser Testing Results
-kind: documentation
 description: View Synthetic browser test results and compare successful or failed sample runs to test runs. 
 aliases:
  - "/synthetics/apm/browser_tests"

@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: __exit__ と __enter__ の両方が定義されていることを確認する
 ---
 ## メタデータ

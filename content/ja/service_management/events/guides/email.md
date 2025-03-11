@@ -3,9 +3,12 @@ aliases:
 - /ja/developers/events/email/
 - /ja/guides/eventsemail
 - /ja/events/guides/email
-kind: ガイド
 title: メールによるイベント送信
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Events with email is not supported on {{< region-param key=dd_datacenter code="true" >}}</div>
+{{< /site-region >}}
 
 アプリケーションに既存の [Datadog インテグレーション][1]がなく、[カスタム Agent チェック][2]を作成したくない場合、メールでイベントを送信することができます。これは、Amazon SNS トピックに公開されたメッセージでも可能です。詳細は、[Amazon SNS のメールから Datadog のイベントを作成する][6]ガイドをお読みください。
 

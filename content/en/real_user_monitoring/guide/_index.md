@@ -1,6 +1,6 @@
 ---
 title: Real User Monitoring & Session Replay Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -17,12 +17,12 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/alerting-with-conversion-rates" >}}Create alerts for conversion rates{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/rum-for-product-analytics" >}}Use RUM & Session Replay for Product Analytics{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/debug-symbols" >}}Investigate obfuscated stack traces with RUM debug symbols{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -40,10 +40,11 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-capacitor-applications-using-browser-sdk/" >}}Monitor Capacitor applications using the browser SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDKs Deprecation Policy{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDKs deprecation policy{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Upgrade the RUM Mobile SDKs{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Proxy your Mobile RUM data{{< /nextlink >}}
@@ -58,5 +59,5 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
     {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk Tickets with Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk tickets with Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

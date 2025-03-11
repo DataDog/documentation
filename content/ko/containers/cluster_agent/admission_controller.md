@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
   tag: 블로그
   text: 라이브러리 삽입을 사용해 Datadog APM으로 Kubernetes 애플리케이션에 대한 자동 계측 추적
-kind: 설명서
 title: Datadog Admission Controller
 ---
 

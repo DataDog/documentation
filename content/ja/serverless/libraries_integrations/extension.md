@@ -3,7 +3,6 @@ aliases:
 - /ja/serverless/datadog_lambda_library/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
-kind: documentation
 title: Datadog Lambda 拡張機能
 ---
 [![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
@@ -46,7 +45,7 @@ Datadog サイトから遠く離れた地域にデプロイされた Lambda 関�
 
 ## 寄稿
 
-このパッケージに問題が見つかり、修正された場合は、[手順](https://github.com/DataDog/datadog-agent/blob/master/docs/dev/contributing.md)に従ってプルリクエストを開いてください。
+このパッケージに問題が見つかり、修正方法が分かる場合は、[手順](https://github.com/DataDog/datadog-agent/blob/main/docs/public/guidelines/contributing.md)に従ってプルリクエストを開いてください。
 
 ## テスト
 
@@ -71,7 +70,7 @@ COPY datadog-init /app/datadog-init
 
 サーバーレスアプリケーションをデプロイすると、コードへの変更を含むバージョンの Serverless-Init で実行されます。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

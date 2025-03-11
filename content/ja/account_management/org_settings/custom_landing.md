@@ -17,8 +17,8 @@ Datadog Admin Role または Org Management (`org_management`) 権限を持つ�
 カスタムランディングページを設定するには、以下の手順で行います。
 
 1. [組織の設定][1]に移動します。
-2. 左のタブから、**Preferences** を選択します。
-3. Datadog Homepage セクションで、**Dashboard** ボタンをクリックします。
+2. 左のタブから、[**Preferences**][2] を選択します。
+3. Datadog Homepage セクションで、**Individual Dashboard** をクリックします。
 4. ドロップダウンリストを使用して、ダッシュボードを選択します。
 5. **Save** ボタンをクリックします。
 
@@ -30,7 +30,8 @@ APM ホームのランディングページをデフォルトに戻すには、�
 
 1. [組織の設定][1]に移動します。
 2. 左のタブから、**Preferences** を選択します。
-3. Datadog Homepage セクションで、**Default: APM Home** ボタンをクリックします。
+3. Datadog Homepage セクションで、**Default: Dashboard List** をクリックします。
 4. **Save** ボタンをクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/
+[2]: https://app.datadoghq.com/organization-settings/preferences

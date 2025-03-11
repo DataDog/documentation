@@ -6,6 +6,7 @@ categories:
 - developer tools
 - issue tracking
 - source control
+custom_kind: インテグレーション
 dependencies: []
 description: GitHub と Datadog を接続し、サービスのパフォーマンスに影響を与えるコミットやプルリクエストを監視する
 doc_link: https://docs.datadoghq.com/integrations/github/
@@ -23,7 +24,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/guide/source-code-integration/
   tag: Documentation
   text: Datadog のソースコードインテグレーションについて
-- link: https://docs.datadoghq.com/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github
+- link: https://docs.datadoghq.com/service_catalog/adding_metadata/#store-and-edit-service-definitions-in-github
   tag: Documentation
   text: サービスカタログで GitHub インテグレーションを利用する方法について
 - link: https://docs.datadoghq.com/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code
@@ -35,7 +36,6 @@ integration_id: github
 integration_title: GitHub
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: '1.0'
 name: github
 public_title: GitHub インテグレーション
@@ -53,7 +53,7 @@ GitHub Apps と GitHub Actions の構成、リポジトリの安全なアクセ�
 
 Datadog の[ソースコードインテグレーション][1]を利用すると、スタックトレース内のコードスニペットを表示したり、スタックトレースと GitHub 内の [Lambda 関数][2]のソースコードとをリンクさせたり、[CI Visibility][3] のプルリクエストコメントからテスト結果のサマリーを表示したり、GitHub の複数のサービス定義に[サービスカタログ][4]からアクセスしたりすることなどができます。
 
-## 計画と使用
+## セットアップ
 
 <div class="alert alert-info">
 以下の手順で GitHub Apps をインストールし、Datadog に権限を付与してください。付与された権限に応じて、ソースコードインテグレーションの設定、スタックトレースでのコードスニペットの表示、監査ログなどの収集したテレメトリーの表示、CI Visibility での GitHub Actions へのアクセスなどが可能です。
@@ -76,7 +76,7 @@ GitHub 組織の管理者であれば、GitHub アプリを構成することが
 
 GitHub アプリがインテグレーションタイルに表示されます。スタックトレースでインラインコードスニペットを有効にするには、[ソースコードインテグレーションの設定][1]を参照してください。
 
-### チェック内容のサマリー
+### ノートブック
 
 GitHub アプリに問題やプルリクエストの読み取り権限を与えている場合、GitHub の問題やプルリクエストは自動的にプレビューホバーボックスを生成し、コミット履歴、作成者、日付などの詳細が[ノートブック][7]に表示されます。
 
@@ -90,15 +90,15 @@ GitHub アプリに問題やプルリクエストの読み取り権限を与え�
 
 ### 監査ログ
 
-監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションをインストールする際には、**Organization Administration** 権限が読み取りアクセス権を持つように許可してください。これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
+**要件**: 監査ログを収集するには GitHub Enterprise アカウントが必要です。
 
-**注**: 監査ログを収集するには GitHub Enterprise アカウントが必要です。
+監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションをインストールする際には、**Organization Administration** 権限が読み取りアクセス権を持つように許可してください。これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
 
 GitHub ドキュメントの [Datadog へのストリーミングのセットアップ][8]の手順に従って、監査ログを Datadog に転送します。監査ログの詳細については、GitHub ドキュメントの[監査ログアクション][9]を参照してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert のメトリクスを収集します。これらのメトリクスは、アラートの状態、リポジトリ、およびシークレットタイプを分類することで、組織のアラート状態の概要を提供します。また、これらは、アラートのトレンドとその全般的な進展に関する長期的な洞察を提供します。
 
@@ -106,7 +106,7 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 
 これらのメトリクスを収集し始めるには、アプリケーションのインストール時に、読み取りアクセスのためにそれぞれの権限を選択します。Code Scan または Secret Scan のメトリクスをオプトアウトするには、インテグレーションタイルの **Telemetery** タブで対応する組織を探し、それぞれのセクションのトグルをクリックし、**Update Account** をクリックします。
 
-### ヘルプ
+### イベント
 
 <div class="alert alert-info">
 以下の手順で、GitHub と Datadog に Webhook を構成し、イベントエクスプローラーにイベントを表示できるようにします。
@@ -121,18 +121,18 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 5. オプションで、**Secret** フィールドにシークレットを追加します。
 6. **Which events would you like to trigger this webhook?** セクションで、**Let me select individual events.** をクリックし、以下のサポートされるオプションから選択して、Datadog に[イベント][11]を送信します。
 
-   | イベント名 | イベントアクション |
-   |---|---|
-   | [ブランチまたはタグの作成][12] |  |
-   | [コミットコメント][13] |  |
-   | [問題のコメント][14] | 以下のアクションがサポートされています。 <br><br>- [`created`][15]<br>- [`deleted`][16]<br>- [`edited`][17] |
-   | [問題][18] | 以下のアクションがサポートされています。 <br><br>- [`assigned`][19]<br>- [`closed`][20]<br>- [`deleted`][21]<br>- [`demilestoned`][22]<br>- [`edited`][23]<br>- [`labeled`][24]<br>- [`locked`][25]<br>- [`milestoned`][26]<br>- [`opened`][27]<br>- [`pinned`][28]<br>- [`reopened`][29]<br>- [`transferred`][30]<br>- [`unassigned`][31]<br>- [`unlabeled`][32]<br>- [`unlocked`][33]<br>- [`unpinned`][34] |
-   | [プルリクエストレビューコメント][35] | 以下のアクションがサポートされています。 <br><br>- [`created`][36]<br>- [`deleted`][37]<br>- [`edited`][38] |
-   | [プルリクエスト][39] | 以下のアクションがサポートされています。 <br><br>- [`opened`][40]<br>- [`closed`][41]<br>- [`labeled`][42]<br>- [`edited`][43]<br>- [`assigned`][44]<br>- [`unassigned`][45]<br>- [`reopened`][46] |
-   | [プッシュ][47] |  |
-   | [リポジトリ][48] | 以下のアクションがサポートされています。 <br><br>- [`archived`][49]<br>- [`created`][50]<br>- [`deleted`][51]<br>- [`edited`][52]<br>- [`privatized`][53]<br>- [`publicized`][54]<br>- [`renamed`][55]<br>- [`transferred`][56]<br>- [`unarchived`][57] |
-   | [セキュリティと分析][58] |  |
-   | [チームの追加][59] |  |
+   | イベント名 | イベントアクション                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+   |---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+   | [ブランチまたはタグの作成][12] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | [コミットコメント][13] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | [課題コメント][14] | 以下のアクションがサポートされています。 <br><br>- [`created`][15]<br>- [`deleted`][16]<br>- [`edited`][17]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+   | [課題][18] | 以下のアクションがサポートされています。 <br><br>- [`assigned`][19]<br>- [`closed`][20]<br>- [`deleted`][21]<br>- [`demilestoned`][22]<br>- [`edited`][23]<br>- [`labeled`][24]<br>- [`locked`][25]<br>- [`milestoned`][26]<br>- [`opened`][27]<br>- [`pinned`][28]<br>- [`reopened`][29]<br>- [`transferred`][30]<br>- [`unassigned`][31]<br>- [`unlabeled`][32]<br>- [`unlocked`][33]<br>- [`unpinned`][34]                                                                                                                                                                                |
+   | [プルリクエストレビューコメント][35] | 以下のアクションがサポートされています。 <br><br>- [`created`][36]<br>- [`deleted`][37]<br>- [`edited`][38]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+   | [プルリクエスト][39] | 以下のアクションがサポートされています。 <br><br>- [`assigned`][40]<br>- [`unassigned`][41]<br>- [`labeled`][42]<br>- [`unlabeled`][43]<br>- [`opened`][44]<br>- [`edited`][45]<br>- [`closed`][46]<br>- [`reopened`][47]<br>- [`synchronize`][48]<br>- [`converted_to_draft`][49]<br>- [`locked`][50]<br>- [`unlocked`][51]<br>- [`enqueued`][52]<br>- [`dequeued`][53]<br>- [`milestoned`][54]<br>- [`demilestoned`][55]<br>- [`ready_for_review`][56]<br>- [`review_requested`][57]<br>- [`review_request_removed`][58]<br>- [`auto_merge_enabled`][59]<br>- [`auto_merge_disabled`][60]  |
+   | [プッシュ][61] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | [リポジトリ][62] | 以下のアクションがサポートされています。 <br><br>- [`archived`][63]<br>- [`created`][64]<br>- [`deleted`][65]<br>- [`edited`][66]<br>- [`privatized`][67]<br>- [`publicized`][68]<br>- [`renamed`][69]<br>- [`transferred`][70]<br>- [`unarchived`][71]                                                                                                                                                                                                                                                                                                                                      |
+   | [セキュリティと分析][72] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+   | [チームへの追加][73] |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 7. **Active** を選択すると、フックがトリガーされたときにイベントの詳細を受け取ることができます。
 8. **Add webhook** をクリックして、Webhook を保存します。
@@ -150,17 +150,17 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 3. **Commits** と **Issues** のチェックボックスをクリックすると、これらのイベントがアラートされます。
 4. **Update Configuration** をクリックすると、Webhook の構成が保存されます。
 
-インテグレーションタイルの **Webhooks** タブで Webhook を追加すると、上記で指定した GitHub リポジトリのイベントが[イベントエクスプローラー][60]に表示されるようになります。詳しくは、[イベントエクスプローラーのドキュメント][61]をご覧ください。
+インテグレーションタイルの **Webhooks** タブで Webhook を追加すると、上記で指定した GitHub リポジトリのイベントが [Events Explorer][74] に表示されるようになります。詳しくは、[Events Explorer のドキュメント][75]をご覧ください。
 
 GitHub からのイベントをフィルターするには、**Core** の下にある **Source** ファセットメニューで **Github** を選択するか、検索クエリに `source:github` と入力してください。イベントの棒グラフは、検索クエリを編集すると自動的に更新されます。
 
-### ヘルプ
+### サービスチェック
 
 GitHub インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][62]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][76]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -169,7 +169,7 @@ GitHub インテグレーションには、サービスのチェック機能は�
 [1]: https://docs.datadoghq.com/ja/integrations/guide/source-code-integration/
 [2]: https://docs.datadoghq.com/ja/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code
 [3]: https://docs.datadoghq.com/ja/continuous_integration/guides/pull_request_comments/
-[4]: https://docs.datadoghq.com/ja/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github
+[4]: https://docs.datadoghq.com/ja/service_catalog/adding_metadata/#store-and-edit-service-definitions-in-github
 [5]: https://app.datadoghq.com/integrations/github/
 [6]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
 [7]: https://app.datadoghq.com/notebook
@@ -205,26 +205,40 @@ GitHub インテグレーションには、サービスのチェック機能は�
 [37]: hhttps://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=deleted#pull_request_review_comment
 [38]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=edited#pull_request_review_comment
 [39]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
-[40]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
-[41]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request
+[40]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=assigned#pull_request
+[41]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unassigned#pull_request
 [42]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request
-[43]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=edited#pull_request
-[44]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=assigned#pull_request
-[45]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unassigned#pull_request
-[46]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=reopened#pull_request
-[47]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
-[48]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#repository
-[49]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=archived#repository
-[50]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=created#repository
-[51]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=deleted#repository
-[52]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=edited#repository
-[53]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=privatized#repository
-[54]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=publicized#repository
-[55]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=renamed#repository
-[56]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=transferred#repository
-[57]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unarchived#repository
-[58]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_and_analysis
-[59]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#team_add
-[60]: https://app.datadoghq.com/event/explorer/
-[61]: https://docs.datadoghq.com/ja/events/explorer/
-[62]: https://docs.datadoghq.com/ja/help/
+[43]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unlabeled#pull_request
+[44]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request
+[45]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=edited#pull_request
+[46]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request
+[47]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=reopened#pull_request
+[48]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=synchronize#pull_request
+[49]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=converted_to_draft#pull_request
+[50]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=locked#pull_request
+[51]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unlocked#pull_request
+[52]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=enqueued#pull_request
+[53]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=dequeued#pull_request
+[54]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=milestoned#pull_request
+[55]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=demilestoned#pull_request
+[56]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=ready_for_review#pull_request
+[57]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request
+[58]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_request_removed#pull_request
+[59]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=auto_merge_enabled#pull_request
+[60]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=auto_merge_disabled#pull_request
+[61]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+[62]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#repository
+[63]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=archived#repository
+[64]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=created#repository
+[65]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=deleted#repository
+[66]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=edited#repository
+[67]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=privatized#repository
+[68]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=publicized#repository
+[69]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=renamed#repository
+[70]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=transferred#repository
+[71]: https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=unarchived#repository
+[72]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_and_analysis
+[73]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#team_add
+[74]: https://app.datadoghq.com/event/explorer/
+[75]: https://docs.datadoghq.com/ja/events/explorer/
+[76]: https://docs.datadoghq.com/ja/help/

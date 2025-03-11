@@ -3,7 +3,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentación
   text: Escribir un check personalizado del Agent
-kind: Documentación
 title: 'Envío de checks de servicios: Check del Agent'
 ---
 

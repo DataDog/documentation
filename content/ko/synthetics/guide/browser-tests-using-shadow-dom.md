@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: 설명서
   text: 브라우저 테스트에 대해 자세히 알아보기
-kind: 가이드
 title: Shadow DOM을 사용해 애플리케이션에서 테스트 실행
 ---
 

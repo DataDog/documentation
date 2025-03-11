@@ -3,13 +3,12 @@ further_reading:
 - link: service_management/case_management/settings
   tag: 설명서
   text: 케이스 설정
-kind: 설명서
 title: 사례 보기 및 관리
 ---
 
 ## 개요
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="모든 사례 보기, 상태 선택 옵션, 배정된 멤버 보기를 표시하는 사례 관리 페이지" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="모든 사례 보기, 상태 선택 옵션 및 할당 번호 보기를 표시하는 사례 관리 폐이지" style="width:100%;" >}}
 
 [사례 관리 페이지][1]에서 사례를 생성 날짜, 상태 또는 우선순위별로 정렬할 수 있습니다. 기본값으로 사례는 생성 날짜별로 정렬됩니다. 
 
@@ -49,13 +48,7 @@ title: 사례 보기 및 관리
 1. 프로젝트 내에서 **보기 추가**를 선택합니다.
 1. 보기 이름을 지정합니다.
 1. 검색 상자에 쿼리를 입력합니다. 미리보기가 새로고침되어 현재 검색 쿼리와 매칭되는 사례가 표시됩니다.
-1. (옵션) Slack, Microsoft Teams, PagerDuty 또는 Webhooks 등의  타사 툴을 사용하여 알림을 전송합니다. **+수신자 유형 추가**를 클릭하고 사전 설정 채널 또는 수신자 중에서 선택합니다. 쿼리와 일치하는 사례가 생성될 때마다 알림이 전송됩니다.
-    | 통합 | 설정 |
-    | --------------- | ---------------- |
-    | Slack | Slack 워크스페이스 및 채널을 선택합니다. |
-    | Microsoft Teams | Microsoft Teams 테넌트를 Datadog에 연결한 경우 테넌트, 팀, 채널을 선택합니다. 그 외의 경우 커넥터를 선택합니다.|
-    | 페이저듀티 | 서비스를 선택합니다. |
-    | Webhooks | Webhook의이름을 선택합니다. |
+1. (선택 사항) Slack, Microsoft Teams, PagerDuty 또는 Webhook와 같은 타사 도구를 사용하여 알림을 전송합니다. **+수신자 유형 추가**를 클릭하고 미리 구성된 채널 또는 수신자 중에서 선택합니다. 사용 가능한 도구 및 옵션에 대해 자세히 알아보려면 [알림 및 티켓 생성][2]을 참조하세요.
 1. **보기 저장**을 클릭합니다.
 
 ## 사례 세부 정보
@@ -87,18 +80,18 @@ title: 사례 보기 및 관리
 사례 관리 기능으로 정보, 컨텍스트 및 리소스를 수집하여 취해야 할 적절한 조치를 결정하세요. 해당 조치에는 추가 조사, 인시던트로 에스컬레이션 또는 사례 종결이 포함됩니다.
 
 개별 사례:
-- [조사 노트북 생성][2]: 조사 정보를 수집하고 팀원들과 협업하세요.
-- [인시던트 선언][3]: 사례를 인시던트로 에스컬레이션하고 인시던트 대응 프로세스를 시작합니다. 
-- 수동으로 Jira 이슈 생성: `Shift + J`으로 Jira 이슈를 생성합니다. Jira 이슈 자동 생성 및 양방향 동기화 설정 방법에 대한 자세한 내용을 확인하려면 [설정][4] 설명서를 참조하세요.
+- [조사 노트북 생성][3]: 조사 정보를 수집하고 팀 구성원과 협력하세요.
+- [인시던트 선언][4]을 클릭합니다: 케이스를 인시던트로 에스컬레이션하고 인시던트 대응 프로세스를 시작하세요.
+- 수동으로 Jira 이슈를 만듭니다: `Shift + J`를 사용하여 Jira 이슈를 생성합니다. 자동 Jira 이슈 생성 및 양방향 동기화를 설정하는 방법에 대한 자세한 내용은 [설정][5] 설명서를 참조하세요. 
 - 수동으로 ServiceNow 인시던트 생성: `Shift + N`을 사용하여 ServiceNow 인시던트를 생성합니다.
-- [CoScreen 미팅][5]: 협업 디버깅용 화면을 공유 
+- [CoScreen 회의][6]: 협력 디버깅을 위한 화면 공유
 - 사례 종료: 더 이상의 조치가 필요하지 않음을 팀에 알립니다. 사례 상태를 종결로 업데이트합니다.
 
 ## 사례 분석
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="데이터 소스로 선택한 사례 옵션을 표시하는 그래프 편집기" style="width:100%;" >}}
 
-사례 분석은 집계한 사례 통계용 쿼리 수집 가능 데이터 소스입니다. [대시보드][6] 및 [노트북][2]의 다양한 그래프 위젯의 분석을 쿼리 수집하여 팀 생산성을 분석하고 이슈 패턴을 파악할 수 있습니다. 
+Case Analytics는 집계된 케이스 통계에 대한 쿼리 가능한 데이터 소스입니다. [대시보드][7] 및 [노트북][3]의 다양한 그래프 위젯에서 이러한 분석을 통해 팀 생산성을 분석하고 이슈의 패턴을 파악할 수 있습니다. 
 
 다음 위젯은 시계열, 상위 목록, 쿼리 값, 테이블, 트리 맵, 파이 차트, 변경 및 목록과 같은 사례 분석을 지원합니다. 
 
@@ -107,8 +100,9 @@ title: 사례 보기 및 관리
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /ko/notebooks/
-[3]: /ko/service_management/incident_management/#describing-the-incident
-[4]: /ko/service_management/case_management/settings/#jira
-[5]: /ko/coscreen/
-[6]: https://docs.datadoghq.com/ko/dashboards/
+[2]: /ko/service_management/case_management/create_notifications_and_third_party_tickets
+[3]: /ko/notebooks/
+[4]: /ko/service_management/incident_management/#describing-the-incident
+[5]: /ko/service_management/case_management/settings/#jira
+[6]: /ko/coscreen/
+[7]: https://docs.datadoghq.com/ko/dashboards/

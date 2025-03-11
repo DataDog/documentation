@@ -13,7 +13,6 @@ further_reading:
 - link: https://www.datadoghq.com/videos/dash-keynote-creating-context-with-service-maps/
   tag: ブログ
   text: サービスマップ（Datadog + Airbnb）を使用してコンテキストを作成
-kind: documentation
 title: サービスマップ
 ---
 

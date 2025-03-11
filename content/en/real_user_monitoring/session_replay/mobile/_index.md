@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay
-kind: documentation
 description: Setting up Session Replay for mobile devices.
 aliases:
 further_reading:
@@ -8,11 +7,6 @@ further_reading:
       tag: Documentation
       text: Session Replay
 ---
-
-<div class="alert alert-warning">
-Mobile Session Replay is in public beta for native mobile apps. There is no billing for this feature.
-</div>
-
 ## Overview
 
 Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
@@ -33,6 +27,8 @@ See [How Mobile Session Replay Impacts App Performance][3].
 ## Troubleshooting
 
 Learn how to [Troubleshoot Mobile Session Replay][4].
+
+<div class="alert alert-info">For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but it is not supported for smart TVs or wearables.</div>
 
 ## Further reading
 

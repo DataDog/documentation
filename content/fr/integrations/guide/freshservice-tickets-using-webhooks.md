@@ -1,6 +1,6 @@
 ---
 title: Tickets Freshservice avec des webhooks
-kind: guide
+
 author: Trevor Veralrud
 further_reading:
   - link: /integrations/webhooks/

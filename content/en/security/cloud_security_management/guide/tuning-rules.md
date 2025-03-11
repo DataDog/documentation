@@ -33,7 +33,7 @@ Common keys:
 - `@process.ancestors.executable.path`
 - `@process.ancestors.executable.envs`
 
-When evaluating if a process is legitimate, check past processes to help you contextualize its execution flow. The process ancestry tree traces a process back to its origin.
+To determine if a process is legitimate, review its parent process in the process tree. The process ancestry tree traces a process back to its origin, providing context for its execution flow. This helps in understanding the sequence of events leading up to the current process.
 
 Usually, it's sufficient to suppress based on both the parent process and on unwanted process attributes.
 

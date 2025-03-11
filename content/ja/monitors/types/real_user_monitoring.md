@@ -15,13 +15,14 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスを確認
-kind: documentation
 title: リアルユーザーモニタリングモニター
 ---
 
 ## 概要
 
-組織で[リアルユーザーモニタリング (RUM) を有効][1]にすると、特定のタイプの RUM イベントが事前定義のしきい値を一定期間にわたって超えた場合にアラートを発するように RUM モニターを作成することができます。
+Datadog's [Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
+
+After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
 ## RUM モニターの作成
 
@@ -38,7 +39,15 @@ Datadog で RUM モニターを作成するには、まず [**Monitors** --> **N
     * **Monitor over a RUM count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が RUM イベント数を評価し、それをしきい値の条件と比較します。
     * **Monitor over a facet**: [ファセット][4]を選択すると、モニターはファセットの `Unique value count` に対してアラートを発出します。
     * **Monitor over measure**: [メジャー][5]を選択すると、モニターは (メトリクスモニターと同様に) RUM ファセットの数値に対してアラートを発出します。集計タイプ (`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
-3. 複数のディメンションで RUM イベントをグループ化します (オプション)。クエリに一致するすべての RUM イベントは、最大 4 つのファセットの値に基づいてグループに集約されます。
+3. 複数のディメンションで RUM イベントをグループ化する (オプション):
+  All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. The dimensions limit depends on the total number of dimensions:
+   * **ファセット 1 個**: 上位値 1000
+   * **ファセット 2 個**: ファセットごとに上位値 30 (最大 900 グループ)
+   * **ファセット 3 個**: ファセットごとに上位値 10 (最大 1000 グループ)
+   * **ファセット 4 個**: ファセットごとに上位値 5 (最大 625 グループ)
+
+
+
 4. アラート設定のグループ化方法を構成します (オプション)。
    * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。クエリに `group by` があり、**シンプルアラートモード**を選択した場合、1 つまたは複数のグループの値がしきい値に違反すると 1 つのアラートが表示されます。通知ノイズを減らすには、この方法を使用します。
    * **Multi Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、クエリを `@browser.name` でグループ化すると、エラーの数が多い場合にブラウザごとに個別のアラートを受信することができます。
@@ -83,7 +92,7 @@ Datadog で RUM モニターを作成するには、まず [**Monitors** --> **N
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳細は、[通知][7]を参照してください。
+For more information about the **Configure notifications and automations** section, see [Notifications][7].
 
 ## その他の参考資料
 

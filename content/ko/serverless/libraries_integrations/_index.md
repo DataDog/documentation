@@ -3,7 +3,6 @@ aliases:
 - /ko/serverless/serverless_integrations
 - /ko/serverless/datadog_lambda_library/
 - /ko/serverless/libraries_integrations/library/
-kind: 설명서
 title: 서버리스 라이브러리 및 통합
 ---
 

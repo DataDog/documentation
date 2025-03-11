@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
   tag: 블로그
   text: Datadog으로 단 몇 분만에 엔터프라이즈 규모 Azure 환경을 모니터링하기
-kind: 지침
 title: Azure Native 통합 관리
 ---
 

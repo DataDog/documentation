@@ -1,6 +1,5 @@
 ---
 title: Quantization of APM Data
-kind: Documentation
 further_reading:
   - link: /tracing/trace_collection/custom_instrumentation/
     tag: Documentation
@@ -70,7 +69,7 @@ apm_config:
 Alternatively, you can use the `DD_APM_REPLACE_TAGS` environment variable with a JSON string as its value:
 
 ```bash
-export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get_id_[0-9]+", "repl": "get_id_x"}, {...}, …]'
+export DD_APM_REPLACE_TAGS = '[{"name": "span.name", "pattern": "get id_[0-9]+", "repl": "get id_x"}, {...}, …]'
 ```
 
 ## Further Reading

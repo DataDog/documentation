@@ -13,7 +13,6 @@ further_reading:
 - link: /logs/explorer/export
   tag: Documentación
   text: Exportar vistas desde el Log Explorer
-kind: documentación
 title: Visualizaciones de log
 ---
 

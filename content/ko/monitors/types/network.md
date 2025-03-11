@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: 설명서
   text: 모니터 상태 점검
-kind: 설명서
 title: 네트워크 모니터
 ---
 

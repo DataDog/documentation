@@ -23,7 +23,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- aws
 - metrics
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -32,7 +34,6 @@ integration_id: amazon-es
 integration_title: Amazon OpenSearch Service
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_es
 public_title: Amazon OpenSearch Service
@@ -41,7 +42,9 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::AWS
   - Category::Metrics
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon OpenSearch Service は、OpenSearch のデプロイと運用を簡単にします。
   media: []
@@ -59,9 +62,9 @@ Amazon OpenSearch Service は、AWS Cloud における OpenSearch クラスタ�
 
 注: このインテグレーションでは、'es:ListTags'、'es:ListDomainNames'、'es:DescribeElasticsearchDomains' の権限が完全に有効になっている必要があります。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -70,27 +73,46 @@ Amazon OpenSearch Service は、AWS Cloud における OpenSearch クラスタ�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `ES` が有効になっていることを確認します。
 2. [Datadog - Amazon OpenSearch Service インテグレーション][4]をインストールします。
 
-## リアルユーザーモニタリング
+### ログ収集
 
-### データセキュリティ
+#### ログの有効化
+
+Amazon OpenSearch Service から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+
+**注**: S3 バケットにログを送信する場合は、_Target prefix_ に `amazon_elasticsearch` が設定されていることを確認してください。
+
+#### ログを Datadog に送信する方法
+
+1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Elasticsearch ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+
+    - [S3 バケットに手動トリガーを追加][6]
+    - [CloudWatch ロググループに手動トリガーを追加][7]
+
+## 収集データ
+
+### メトリクス
 {{< get-metrics-from-git "amazon_es" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon OpenSearch Service インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon OpenSearch Service インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/elastic
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-es
-[5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#manually-set-up-triggers
+[8]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_es/metadata.csv
+[9]: https://docs.datadoghq.com/ja/help/

@@ -5,7 +5,6 @@ further_reading:
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: リアルユーザーモニタリングについて
-kind: ガイド
 title: モバイルの RUM データをプロキシする
 ---
 
@@ -17,11 +16,11 @@ RUM モバイル SDK は、プロキシを介してリクエストを送信す�
 
 ## HTTP/HTTPS プロキシ
 
-### 前提プロキシのセットアップ
+### Prerequisite proxy setup
 
 リクエストを Datadog に正常に転送するには、プロキシが [HTTP CONNECT][1] をサポートしている必要があります。
 
-### 推奨 SDK セットアップ
+### Recommended SDK setup
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -49,6 +48,7 @@ configBuilder.setProxy(proxy, authenticator)
 
 iOS SDK の初期化時に、以下のプロキシ構成を指定します。
 
+#### Swift
 ```swift
 import DatadogCore
 
@@ -68,6 +68,7 @@ Datadog.initialize(
 )
 ```
 
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 
@@ -106,11 +107,11 @@ config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, '<www.example.com>'
 
 ## SOCKS プロキシ
 
-### 前提プロキシのセットアップ
+### Prerequisite proxy setup
 
 リクエストを Datadog に正常に転送するには、プロキシが [SOCKS5 プロキシ][4]をサポートしている必要があります。
 
-### 推奨 SDK セットアップ
+### Recommended SDK setup
 
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -136,6 +137,7 @@ configBuilder.setProxy(proxy, authenticator)
 {{% tab "iOS" %}}
 iOS SDK の初期化時に、以下のプロキシ構成を指定します。
 
+#### Swift
 ```swift
 import DatadogCore
 
@@ -155,6 +157,7 @@ Datadog.initialize(
 )
 ```
 
+#### Objective C
 ```objective-c
 @import DatadogObjc;
 

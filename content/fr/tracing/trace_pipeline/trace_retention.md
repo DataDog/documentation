@@ -13,7 +13,6 @@ further_reading:
 - link: /tracing/trace_retention/usage_metrics/
   tag: Documentation
   text: Métriques d'utilisation
-kind: documentation
 title: Rétention des traces
 ---
 

@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/guide/clustercheckrunners
   tag: 설명서
   text: 클러스터 점검 실행기
-kind: 설명서
 title: 클러스터 점검
 ---
 

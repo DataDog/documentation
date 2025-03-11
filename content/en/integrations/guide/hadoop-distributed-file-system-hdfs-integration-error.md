@@ -1,6 +1,6 @@
 ---
 title: Hadoop Distributed File System (HDFS) Integration Error
-kind: guide
+
 aliases:
   - /integrations/faq/hadoop-distributed-file-system-hdfs-integration-error/
 ---

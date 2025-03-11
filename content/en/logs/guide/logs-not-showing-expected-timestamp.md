@@ -1,6 +1,6 @@
 ---
 title: Logs Not Showing the Expected Timestamp
-kind: guide
+
 aliases:
   - /logs/faq/why-do-my-logs-not-have-the-expected-timestamp
 further_reading:

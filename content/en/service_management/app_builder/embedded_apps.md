@@ -1,6 +1,5 @@
 ---
 title: Embedded Apps
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/app-builder/action-catalog"
@@ -18,11 +17,11 @@ When you have Datadog App Builder apps embedded in your dashboards, you can take
 
 Add a previously published app to your dashboard by dragging the **App** widget type out of the dashboard's widget tray:
 
-{{< img src="/service_management/app_builder/embedded_apps/app_widget_select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:80%;">}}
+{{< img src="/service_management/app_builder/embedded_apps/app-widget-select.png" alt="The dashboard widget tray with the App widget type highlighted" style="width:30%;">}}
 
 The App Editor modal appears, allowing you to select an app and provide it with a title:
 
-{{< img src="/service_management/app_builder/embedded_apps/app_editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
+{{< img src="/service_management/app_builder/embedded_apps/app-editor.png" alt="The App Editor modal with an app selected and a widget title" style="width:80%;">}}
 
 ## Sync your app with dashboard template and time frame variables
 
@@ -94,6 +93,19 @@ To add a button that sets the value of a date range picker component to the dash
     - **Value**: `${global?.dashboard?.timeframe}`
 1. Save and publish your app.
 
+## Add apps to Software Catalog
+
+Add a published app to the [Self-Service][2] section of [Software Catalog][3] to provision infrastructure, scaffold services, remediate issues, and more.
+
+To add to Self-Service, first ensure your app is published and permissions are defined. Next, you can click **Add to Self-Service**.
+
+{{< img src="tracing/service_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
+
+Once added, you can view and use your app in Software Catalog.
+
+{{< img src="tracing/service_catalog/self-service-ui.png" alt="View your app in Self-Service" style="width:80%;">}}
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +113,5 @@ To add a button that sets the value of a date range picker component to the dash
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][1].
 
 [1]: https://datadoghq.slack.com/
+[2]: https://app.datadoghq.com/software/self-service
+[3]: https://app.datadoghq.com/software

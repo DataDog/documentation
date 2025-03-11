@@ -1,6 +1,5 @@
 ---
 title: Segmentation
-kind: documentation
 description: Analyze and understand specific groups or segments of your user base.
 further_reading:
 - link: "/product_analytics/"

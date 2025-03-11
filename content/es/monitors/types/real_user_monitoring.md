@@ -15,7 +15,6 @@ further_reading:
 - link: /monitors/manage/status/
   tag: Documentación
   text: Comprobar el estado de tu monitor
-kind: documentación
 title: Monitor Real User Monitoring
 ---
 
@@ -53,14 +52,14 @@ A medida que amplías tus filtros de búsqueda, el gráfico situado sobre la bar
    * **Alerta simple**: las alertas simples agregan todas las fuentes de información. Recibirás una alerta cuando el valor agregado cumpla las condiciones establecidas. Si la consulta tiene un `group by` y seleccionas **Alerta simple**, recibirás una alerta cuando uno o varios valores de grupo superen el umbral. Puedes utilizar esta estrategia para reducir el ruido de una notificación.
    * **Alerta múltiple**: las alertas múltiples aplican la alerta a cada fuente en función de tus parámetros de grupo. Se genera un evento de alerta para cada grupo que cumple las condiciones establecidas. Por ejemplo, puedes agrupar una consulta por `@browser.name` para recibir una alerta distinta para cada navegador, cuando el número de errores es elevado.
 
-   {{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Define the search query" (Definir la consulta de la búsqueda) style="width:80%;" >}}
+   {{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Definir la consulta de la búsqueda" style="width:80%;" >}}
 
 5. Añade múltiples consultas y aplica fórmulas y funciones (opcional):
 
     * **Consultas múltiples**: haz clic en **Add Query** (Añadir consulta) para analizar la relación entre múltiples conjuntos diferentes de datos RUM.
     * **Fórmulas y funciones**: después de añadir las consultas deseadas, haz clic en el icono **Add Function** (Añadir función) para añadir un cálculo matemático. El siguiente ejemplo calcula la tasa de error en una página de carrito utilizando la fórmula `(a/b)*100`.
 
-   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="A monitor configured to alert on the error rate of a cart page. This monitor has two queries (a and b) and contains a formula: (a/b)*100." (Monitor configurado para emitir alertas sobre la tasa de error de una página de carrito. El monitor tiene dos consultas (a y b) y contiene la fórmula (a/b)*100. style="width:80%;" >}}
+   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="Monitor configurado para emitir alertas sobre la tasa de error de una página de carrito. El monitor tiene dos consultas (a y b) y contiene la fórmula (a/b)*100." style="width:80%;" >}}
 
 ### Definir tus condiciones de alerta
 
@@ -81,11 +80,11 @@ Cuando se divide el monitor por cualquier dimensión (etiqueta o faceta) y se ut
 
 Por ejemplo, este monitor se activa si y sólo si no existen eventos RUM para todas las aplicaciones:
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="The monitor configuration page with the search query left blank, set to the count of all RUM events and grouped by @application.id over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" (Página de configuración del monitor con la consulta de búsqueda vacía, configurada con el conteo de todos los eventos RUM, agrupados por @application.id durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0) style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="Página de configuración del monitor con la consulta de búsqueda vacía, configurada con el conteo de todos los eventos RUM, agrupados por @application.id durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0" style="width:70%;" >}}
 
 Y este monitor se activa si no existen logs para la aplicación `Shop.ist`:
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" (Página de configuración del monitor con Id:Shopist de la aplicación ingresado en la consulta de búsqueda, configurada con el conteo de todos los eventos RUM que coinciden con esa aplicación durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0) style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="Página de configuración del monitor con Id:Shopist de la aplicación ingresado en la consulta de búsqueda, configurada con el conteo de todos los eventos RUM que coinciden con esa aplicación durante los últimos 5 minutos. La sección Configurar condiciones de alerta está configurada para activarse cuando el valor es inferior al umbral de 1 y, si no hay datos durante más de 5 minutos, está configurada para evaluar la cantidad como 0" style="width:70%;" >}}
 
 #### Condiciones de alerta avanzadas
 

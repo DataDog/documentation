@@ -7,18 +7,26 @@ import { initializeGroupedListings } from './grouped-item-listings';
 import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName } from '../helpers/helpers';
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
-import { loadInstantSearch } from './algolia';
+import { loadInstantSearch } from './instantsearch';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
 function loadPage(newUrl) {
     // scroll to top of page on new page load
-    window.scroll({
+    // but only if there is no hash in the URL
+    const newHash = new URL(newUrl).hash;
+    if (!newHash) {
+      window.scroll({
         top: 0,
         left: 0,
         behavior: "instant"
-    });
+      });
+    }
+
+    const pathName = new URL(newUrl).pathname;
+    const commitRef = document.documentElement.dataset.commitRef
+    const commitRefLen = commitRef.length ? (commitRef.length + 1) : 0
 
     let mainContent = document.getElementById('mainContent');
 
@@ -216,10 +224,22 @@ function loadPage(newUrl) {
                 }
             }
 
-            const pathName = new URL(newUrl).pathname;
+            // Clean window pathname in order to update language dropdown items href
+            const nonEnPage = document.documentElement.lang !== 'en-US' // check if page is not in english
+
+            const noCommitRefPathName = pathName.slice(commitRefLen) // adjust pathname to remove commit ref if in preview env
+            const noCommitRefNoLangPathName = nonEnPage ? noCommitRefPathName.slice(3) : noCommitRefPathName // adjust pathname to remove language if not in english e.g. /ja/agent -> /agent
+
+            document.querySelectorAll('.language-select-container .dropdown-menu > a.dropdown-item').forEach((ddItem) => {
+                // Updates langauge dropdown item hrefs on asynchronous page loads
+                const noFtBranchddItemPathName = ddItem.pathname.slice(commitRefLen) // adjust dd item pathname to remove commit ref if in preview env
+                const noFtBranchNoLangddItemPathName = ddItem.dataset.lang ? noFtBranchddItemPathName.slice(3) : noFtBranchddItemPathName // adjust dd item pathname to remove language if not in english e.g. /ja/agent -> /agent
+
+                const updatedURL = ddItem.href.replace(noFtBranchNoLangddItemPathName, noCommitRefNoLangPathName)
+                ddItem.setAttribute('href', updatedURL)
+            })
 
             // sets query params if code tabs are present
-
             initCodeTabs();
 
             const regionSelector = document.querySelector('.js-region-select');
@@ -237,7 +257,7 @@ function loadPage(newUrl) {
             toggleMultiCodeLangNav(pageCodeLang);
             hideTOCItems(true)
             initCopyCode()
-            
+
             // Gtag virtual pageview
             gtag('config', gaTag, { page_path: pathName });
 
@@ -253,8 +273,15 @@ function loadPage(newUrl) {
         httpRequest.open('GET', newUrl);
         httpRequest.send();
     } else {
-        window.location.href = newUrl;
+        // Integrations Pages
+
+        if(pathName.slice(commitRefLen) !== document.documentElement.dataset.relpermalink) {
+            // if switching between integrations pages, reload page. adjusts the pathName to remove commit ref if in preview env.
+            window.location.href = newUrl;
+        }
     }
 }
 
 export {loadPage};
+
+

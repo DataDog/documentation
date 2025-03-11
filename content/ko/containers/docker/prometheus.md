@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/docker/tag/
   tag: 설명서
   text: 컨테이너에서 내보내는 모든 데이터에 태그 할당
-kind: 설명서
 title: 도커 Prometheus 및 OpenMetrics 메트릭 수집
 ---
 
@@ -25,9 +24,9 @@ Datadog 에이전트와 [Datadog-OpenMetrics][1] 또는 [Datadog-Prometheus][2] 
 
 ## 개요
 
-버전 6.5.0부터 에이전트에 Prometheus 엔드포인트를 스크래핑할 수 있는 [OpenMetrics][3] 및 [Prometheus][4] 검사가 포함되어 있습니다. Datadog은 더 효율적이고 Prometheus 텍스트 형식을 완벽하게 지원하는 OpenMetrics 검사를 사용할 것을 권장합니다. 사용자 지정 검사 작성 등 `OpenMetricsCheck` 인터페이스의 고급 사용법은 [개발자 도구][5] 섹션을 참조하세요. 또한, 메트릭 엔드포인트가 텍스트 형식을 지원하지 않는 경우에만 Prometheus 검사를 사용하세요.
+버전 6.5.0부터 프로메테우스 엔드포인트를 스크래핑할 수 있는 [개방형 메트릭][3] 및 [프로메테우스][4] 점검이 에이전트에 포함되어 있습니다. Datadog은 더 효율적이고 프로메테우스 텍스트 형식을 완벽하게 지원하는 개방형 메트릭 점검을 사용할 것을 권장합니다. 커스텀 점검 작성 등 `OpenMetricsCheck` 인터페이스의 고급 사용법은 [개발자 도구][5] 섹션을 참조하세요. 또한, 메트릭 엔드포인트가 텍스트 형식을 지원하지 않는 경우에만 프로메테우스 점검을 사용하세요.
 
-이 페이지에서는 이러한 검사의 기본 사용법을 설명하며, 이를 통해 Datadog 내에 노출된 모든 Prometheus 메트릭을 가져올 수 있습니다.
+이 페이지에서는 이러한 검사의 기본 사용법을 설명하며, 이를 통해 Datadog 내에 노출된 모든 프로메테우스 메트릭을 가져올 수 있습니다.
 
 이 페이지에 있는 CLI 명령은 도커 런타임에 대한 것입니다. 컨테이너화된 런타임인 경우 `docker`를 `nerdctl`로 대체하며, 포드맨 런타임의 경우 `podman`으로 대체합니다.
 
@@ -64,7 +63,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
 ```
 
 {{% /tab %}}
-{{% tab "윈도우즈(Windows)" %}}
+{{% tab "Windows" %}}
 
 ```shell
 docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
@@ -77,7 +76,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 
  **참고**: Datadog 사이트는 {{< region-param key="dd_site" code="true" >}} 입니다.
 
-### 설정
+### 구성
 
 에이전트는 도커에서 실행 중인지를 감지하고 모든 컨테이너 라벨에서 Datadog-OpenMetrics 라벨을 자동으로 검색합니다. 자동 탐지는 파일 유형에 따라 다음의 라벨 형식을 예상합니다:
 
@@ -87,7 +86,7 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}]'
 ```
 
 #### 다중 엔드포인트 예시
@@ -95,7 +94,7 @@ LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics","openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}", "{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}, {"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}]'
 ```
 
 {{% /tab %}}
@@ -146,7 +145,25 @@ labels:
 {{% tab "Docker run command" %}}
 
 ```shell
--l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+# 단일 메트릭
+-l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}]"
+```
+
+**`com.datadoghq.ad.instances` 메트릭 형식 예시**
+
+```shell
+# 복수 메트릭
+-l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}, {\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}]"
+```
+
+```shell
+# 기본 유형의 모든 메트릭
+-l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[\"<METRIC_BASE_TO_FETCH>.*\"]}]"
+```
+
+```shell
+# 모든 메트릭
+-l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[\".*\"]}]"
 ```
 
 **다중 엔드포인트 예시**:
@@ -160,11 +177,11 @@ labels:
 
 다음 설정 플레이스홀더 값을 사용합니다:
 
-| 플레이스홀더             | 설명                                                                                                                               |
+| 자리표시자             | 설명                                                                                                                               |
 |-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | `<PROMETHEUS_PORT>`     | Prometeus 엔드포인트에 액세스하기 위해 연결할 포트입니다. [자동 탐지 템플릿 변수][6] `%%port%%`를 사용할 수도 있습니다. |
-| `<PROMETHEUS_ENDPOINT>` | Prometheus 형식으로 컨테이너에서 제공하는 메트릭의 URL 경로입니다.                                                                    |
-| `<NAMESPACE>`           | Datadog에서 볼 때 모든 메트릭에 접두사가 붙도록 네임스페이스를 설정합니다.                                                                      |
+| `<PROMETHEUS_ENDPOINT>` | Prometheus 형식으로 컨테이너에서 제공하는 메트릭 URL 경로입니다.                                                                   |
+| `<NAMESPACE>`           | Datadog에서 모든 메트릭의 앞에 표시될 네임스페이스를 설정합니다.                                                                      |
 | `<METRIC_TO_FETCH>`     | Prometheus 엔드포인트에서 가져올 Prometheus 메트릭 키입니다.                                                                        |
 | `<NEW_METRIC_NAME>`     | Datadog에서 `<METRIC_TO_FETCH>` 메트릭 키를  `<NEW_METRIC_NAME>`로 변환합니다.                                                          |
 
@@ -236,11 +253,11 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 
 ## 사용자 지정에서 공식 통합까지
 
-기본적으로 일반 Prometheus 검사에서 검색된 모든 메트릭은 사용자 지정 메트릭으로 간주됩니다. 기성 소프트웨어를 모니터링하면서 공식 통합이 필요하다고 생각되면 주저하지 마시고 [참여][5]해 주세요!
+기본적으로 일반 Prometheus 검사에서 검색된 모든 메트릭은 커스텀 메트릭으로 간주됩니다. 기성 소프트웨어에 대한 공식 통합이 필요할 경우 주저하지 마시고 [참여][5]해 주세요!
 
 공식 통합에는 전용 디렉토리가 있습니다. 일반 검사에는 기본 설정 및 메트릭 메타데이터를 하드코딩하는 기본 인스턴스 메커니즘이 있습니다. 예를 들어, [kube-proxy][9] 통합을 참조하세요.
 
-
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 

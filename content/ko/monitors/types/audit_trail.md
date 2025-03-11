@@ -13,7 +13,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: 설명서
   text: 모니터 숨김을 위한 다운타임 예약
-kind: documentation
 title: 감사 추적 모니터
 ---
 

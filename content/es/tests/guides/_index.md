@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: Guías de Visibilidad de pruebas
 disable_toc: true
-kind: guía
 private: true
 title: Guías de Visibilidad de pruebas
 ---

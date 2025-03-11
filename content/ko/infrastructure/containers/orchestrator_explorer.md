@@ -1,5 +1,4 @@
 ---
-kind: 도움말
 title: Orchestrator Explorer
 ---
 

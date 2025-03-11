@@ -3,7 +3,7 @@ aliases:
 - /fr/developers/events/email/
 - /fr/guides/eventsemail
 - /fr/events/guides/email
-kind: guide
+
 title: Envoi d'événements par e-mail
 ---
 

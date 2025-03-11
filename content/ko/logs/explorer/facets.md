@@ -15,7 +15,6 @@ further_reading:
 - link: logs/explorer/saved_views
   tag: 설명서
   text: 로그 탐색기 자동 설정
-kind: 설명서
 title: 로그 패싯
 ---
 

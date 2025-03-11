@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/agent/docker/data_collected
-kind: 설명서
 title: 수집된 도커 데이터
 ---
 

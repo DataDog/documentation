@@ -1,5 +1,4 @@
 ---
-kind: Documentación
 title: Analizador de Grok
 ---
 

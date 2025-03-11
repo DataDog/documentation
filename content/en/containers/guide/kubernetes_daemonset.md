@@ -1,11 +1,14 @@
 ---
 title: Manually install and configure the Datadog Agent on Kubernetes with DaemonSet
-kind: documentation
 further_reading:
 - link: "/containers/kubernetes/installation"
   tag: "Documentation"
   text: "Install the Datadog Agent on Kubernetes"
 ---
+
+<div class="alert alert-warning">
+  Datadog discourages using DaemonSets to deploy the Datadog Agent because the manual process is prone to errors. Datadog recommends that you <a href="/containers/kubernetes/installation">use Datadog Operator or Helm</a> to install the Agent on Kubernetes.
+</div>
 
 ## Installation
 You can use DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
@@ -36,7 +39,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [Manifest template][10] | no template                          |
     | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [Manifest template][11] | [Manifest template][12]              |
 
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
+     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Cloud Network Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
 
      **Note**: Those manifests are set for the `default` namespace. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
 
@@ -364,7 +367,7 @@ Additional examples are available on the [Container Discover Management][27] pag
 [14]: /agent/kubernetes/log/
 [15]: /agent/kubernetes/apm/
 [16]: /infrastructure/process/?tab=kubernetes#installation
-[17]: /network_monitoring/performance/setup/
+[17]: /network_monitoring/cloud_network_monitoring/setup/
 [18]: /data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/

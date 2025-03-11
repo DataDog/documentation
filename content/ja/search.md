@@ -1,6 +1,5 @@
 ---
 title: 結果
-kind: search
 disable_sidebar: true
 ---
 

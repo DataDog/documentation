@@ -36,7 +36,7 @@ If you're using one of the following installation methods, your host automatical
 - [Puppet module][8] v3.21.0+ (released Jul 05, 2023)
 - [SaltStack formula][9] v3.6+ (released Aug 10, 2023)
 - [Heroku buildpack][10] v2.11+ (released Jun 15, 2023)
-- [Elastic Beanstalk][11] config templates updated as of Jun 27, 2023 or later (should contain `source: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh`)
+- [Elastic Beanstalk][11] config templates updated as of Jun 27, 2023 or later (should contain `source: https://install.datadoghq.com/scripts/install_script_agent7.sh`)
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
@@ -192,7 +192,7 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
-[5]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
+[5]: https://install.datadoghq.com/scripts/install_script_agent7.sh
 [6]: https://github.com/DataDog/chef-datadog
 [7]: https://github.com/DataDog/ansible-datadog
 [8]: https://github.com/DataDog/puppet-datadog-agent

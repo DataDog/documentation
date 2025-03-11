@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: 설명서
   text: RUM 탐색기에서 RUM 데이터 시각화
-kind: 가이드
 private: true
 title: 실제 사용자 모니터링(RUM) 커스텀 작업 전송
 ---

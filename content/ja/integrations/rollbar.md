@@ -1,25 +1,54 @@
 ---
+app_id: rollbar
+app_uuid: 63175032-65a1-4bc8-82da-251a27005f1f
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 137
+    source_type_name: Rollbar
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - notification
-  - issue tracking
-  - exceptions
-ddtype: crawler
+- log collection
+- issue tracking
+- notifications
+custom_kind: インテグレーション
 dependencies: []
-description: Datadog イベントストリームに、例外、エラー、コードデプロイを送信。
-doc_link: https://docs.datadoghq.com/integrations/rollbar/
+display_on_public_website: true
 draft: false
 git_integration_title: rollbar
-has_logo: true
 integration_id: rollbar
 integration_title: Rollbar
+integration_version: ''
 is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: rollbar
-public_title: Datadog-Rollbar インテグレーション
+public_title: Rollbar
 short_description: Datadog イベントストリームに、例外、エラー、コードデプロイを送信。
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::ログの収集
+  - Category::問題の追跡
+  - Category::Notifications
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Datadog イベントストリームに、例外、エラー、コードデプロイを送信。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Rollbar
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 {{< img src="integrations/rollbar/rollbar_error.png" alt="Rollbar エラーイベント" popup="true">}}
 
 ## 概要
@@ -28,7 +57,7 @@ Rollbar は、開発者がより優れたソフトウェアを迅速に構築で
 
 Rollbar を Datadog に接続して、以下のことができます。
 
-- イベントストリームで例外、エラー、コードデプロイの通知を受けることができます。
+- イベントエクスプローラーで例外、エラー、コードのデプロイの通知を受けることができます。
 - 重大度、環境、ホスト、ユーザーなどで通知を絞り込むことができます。
 - グラフで例外を検索できます。
 - 例外についてチームで議論できます。
@@ -38,18 +67,22 @@ Rollbar を Datadog に接続して、以下のことができます。
 
 ### インストール
 
-インストールは必要ありません。
+1. [Rollbar インテグレーションタイル][1]に移動し、**Install Integration** をクリックします。
+2. インテグレーションタイルから、既存の API キーをクリックして選択するか、このインテグレーション用に新しい API キーを作成します。
 
-### コンフィギュレーション
+### 構成
 
 構成は、Rollbar でプロジェクトごとに行います。
 
-1. Rollbar で、**Dashboard** → **Settings** → **Notifications** → **Datadog** を選択して、プロジェクトの通知設定ページに移動します。
-2. Datadog で、**Integrations** → **APIs** の順に選択して [API ページに移動][1]し、API キーを取得 (クリップボードにコピー) します。
-3. Rollbar に Datadog API キーを追加します。
-4. [Enable Datadog Integration][2] をクリックします。
+1. Rollbar で、Projects ページに移動します。
+2. プラスボタン **\[ + \]** をクリックして、プロジェクトにインテグレーションを追加します。
 
-これで完了しました。例外が発生するたびに、イベントストリームに表示されます。
+   {{< img src="/integrations/rollover/rollover_project.png" alt="Rollbar プロジェクトページ" style="width:100%" >}}
+
+3. リストから Datadog を選択します。
+4. Datadog の Rollbar インテグレーションタイルから API キーをコピーし、Rollbar の API キーボックスに貼り付けます。
+
+この時点で、**Send Test Notification** ボタンをクリックし、構成が正しく行われていることを確認します。これをクリックすると、[イベントエクスプローラー][2]に Rollbar からのイベントが表示されます。
 
 ## 収集データ
 
@@ -61,7 +94,7 @@ Rollbar インテグレーションには、メトリクスは含まれません
 
 Rollbar インテグレーションは、例外、エラー、およびコードデプロイをイベントとして Datadog にプッシュします。
 
-### サービスのチェック
+### サービスチェック
 
 Rollbar インテグレーションには、サービスチェックは含まれません。
 
@@ -69,6 +102,6 @@ Rollbar インテグレーションには、サービスチェックは含まれ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#api
-[2]: https://app.datadoghq.com/account/settings#integrations/rollbar
+[1]: https://app.datadoghq.com/account/settings#integrations/rollbar
+[2]: https://app.datadoghq.com/event/explorer
 [3]: https://docs.datadoghq.com/ja/help/

@@ -13,7 +13,9 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentation
   text: モニターの管理
-kind: documentation
+- link: https://learn.datadoghq.com/courses/alert-monitor-notifications
+  tag: ラーニングセンター
+  text: アラートモニター通知をカスタマイズするコースを受講する
 title: 変数
 ---
 
@@ -29,16 +31,16 @@ title: 変数
 |----------------------------|--------------------------------------------------------------------|
 | `{{#is_alert}}`            | モニターがアラートする                                                 |
 | `{{^is_alert}}`            | モニターがアラートしない                                         |
-| `{{#is_match}}`            | コンテキストが指定された部分文字列と一致する                         |
+| `{{#is_match}}`            | コンテキストは指定されたサブストリングに一致します。数値が使用された場合、文字列に変換されます。|
 | `{{^is_match}}`            | コンテキストが指定された部分文字列と一致しない                  |
-| `{{#is_exact_match}}`      | コンテキストが指定された文字列と完全に一致する                    |
+| `{{#is_exact_match}}`      | コンテキストは指定された文字列と正確に一致します。<br>数値が使用された場合、その型に関係なく数値として扱われます。つまり、2 つの数値が同じ値である限り、この関数はそれらを等しいとみなします。 |
 | `{{^is_exact_match}}`      | コンテキストが指定された文字列と完全に一致しない             |
 | `{{#is_no_data}}`          | 不足しているデータに対してモニターがトリガーされる                          |
 | `{{^is_no_data}}`          | 不足しているデータに対してモニターがトリガーされない                      |
 | `{{#is_warning}}`          | モニターが警告する                                                  |
 | `{{^is_warning}}`          | モニターが警告しない                                          |
-| `{{#is_recovery}}`         | `ALERT`、`WARNING`、または `NO DATA` からモニターが回復する         |
-| `{{^is_recovery}}`         | `ALERT`、`WARNING`、または `NO DATA` からモニターが回復しない |
+| `{{#is_recovery}}`         | `ALERT`、`WARNING`、`UNKNOWN`、または `NO DATA` からモニターが回復する         |
+| `{{^is_recovery}}`         | `ALERT`、`WARNING`、`UNKNOWN`、または `NO DATA` からモニターが回復しない |
 | `{{#is_warning_recovery}}` | モニターが `WARNING` から `OK` に回復する                        |
 | `{{^is_warning_recovery}}` | モニターが `WARNING` から `OK` に回復しない                |
 | `{{#is_alert_recovery}}`   | モニターが `ALERT` から `OK` に回復する                          |
@@ -177,7 +179,7 @@ title: 変数
 {{/is_exact_match}}
 ```
 
-モニターのしきい値を突破した値が 5 であった場合に開発チームに通知するには、次のようにします。
+モニターで設定したしきい値を超過した値が 5 (または 5.0 ) の場合に、開発チームへ通知するには、以下を使用してください。
 
 ```text
 {{#is_exact_match "value" "5"}}
@@ -234,7 +236,7 @@ title: 変数
 
 ## 属性変数とタグ変数
 
-属性変数とタグ変数を使用して、カスタマイズされた、有益で、特定のアラートメッセージをレンダリングして、アラートの性質を理解できるようにします。
+属性変数とタグ変数を使用して、カスタマイズされた、有益で、特定のアラートメッセージを表示して、アラートの性質を理解できるようにします。
 
 **注**: データがない状態 (例えば、クエリに一致するイベントがない状態) でモニターが回復するように構成されている場合、回復メッセージにはデータは含まれません。回復メッセージの情報を保持するには、`{{tag.name}}` でアクセスできる追加のタグでグループ化します。
 
@@ -251,22 +253,11 @@ title: 変数
 {{ key.name }}
 ```
 
-これにより、各アラート通知の `key` に関連付けられた `value` がレンダリングされます。グループが同じ `key` に関連付けられた複数の `values` でタグ付けされている場合、アラートメッセージは、辞書式順序ですべての値のコンマ区切りの文字列をレンダリングします。
+これにより、各アラート通知の `key` に関連付けられた `value` が表示されます。グループが同じ `key` に関連付けられた複数の `values` でタグ付けされている場合、アラートメッセージは、辞書順ですべての値をコンマ区切りの文字列として表示します。
 
 **例**: モニターが各 `env` に対してアラートをトリガーする場合、変数 `{{env.name}}` が通知メッセージで使用可能です。
 
 {{< img src="monitors/notifications/multi_alert_variable.png" alt="マルチアラート変数の構文" style="width:90%;">}}
-
-#### ホストごとのクエリグループ
-
-モニターが各 `host` に対してアラートをトリガーする場合、タグ変数 `{{host.name}}` と `{{host.ip}}` 、およびこのホストで使用可能なホストタグを使用できます。タグの選択に基づいてタグ変数のリストを表示するには、**Say what's happening** セクションで **Use message template variables** をクリックします。
-
-いくつかの特定のホストメタデータ変数が利用可能です。
-
-- Agent Version: `{{host.metadata_agent_version}}`
-- Machine: `{{host.metadata_machine}}`
-- Platform: `{{host.metadata_platform}}`
-- Processor: `{{host.metadata_processor}}`
 
 #### ピリオドを含むタグキー
 
@@ -308,9 +299,58 @@ This alert was triggered on {{ @machine_id.name }}
 {{% /tab %}}
 {{< /tabs >}}
 
+#### 通知をグループごとにカスタマイズする
+
+クエリが特定のディメンションでグループ化されている場合、そのグループに関連する動的メタデータを活用して通知を拡充できます。
+
+##### ホストごとのクエリグループ
+
+モニターが各 `host` に対してアラートをトリガーする場合、タグ変数 `{{host.name}}` と `{{host.ip}}` 、およびこのホストで使用可能なホストタグを使用できます。タグの選択に基づいてタグ変数のリストを表示するには、**Say what's happening** セクションで **Use message template variables** をクリックします。
+
+特定のホストのメタデータ変数:
+
+- Agent Version: `{{host.metadata_agent_version}}`
+- Machine: `{{host.metadata_machine}}`
+- Platform: `{{host.metadata_platform}}`
+- Processor: `{{host.metadata_processor}}`
+
+##### クエリを kube_namespace および kube_cluster_name でグループ化する
+
+モニターが `kube_namespace` と `kube_cluster_name` ごとにアラートをトリガーする場合、ネームスペースの任意の属性にアクセスできます。
+
+ネームスペースのメタデータ変数:
+
+- クラスター名: `{{kube_namespace.cluster_name}}`
+- ネームスペース名: `{{kube_namespace.display_name}}`
+- ネームスペースのステータス: `{{kube_namespace.status}}`
+- ネームスペースのラベル: `{{kube_namespace.labels}}`
+
+以下の表には、利用可能なすべての属性が含まれています。
+
+| 変数構文   | 第 1 レベルの属性 |
+|-------------------|------------------------|
+| `{{kube_namespace.key}}`     | `k8s_namespace_key`、`tags`、`annotations`、`cluster_id`、`cluster_name`、`creation_timestamp`、`deletion_timestamp`、`display_name`、`external_id`、`finalizers`、`first_seen_at`、`group_size`、`labels`、`name`、`namespace`、`status`、`uid`|
+
+##### クエリを pod_name、kube_namespace、kube_cluster_name でグループ化する
+
+モニターが `pod_name`、`kube_namespace`、`kube_cluster_name` ごとにアラートを発生させる場合、ポッドの任意の属性にアクセスできます。
+
+ポッドのメタデータ変数:
+- クラスター名: `{{pod_name.cluster_name}}`
+- ポッド名: `{{pod_name.name}}`
+- ポッドのフェーズ: `{{pod_name.phase}}`
+
+以下の表には、利用可能なすべての属性が含まれています。
+
+| 変数構文   | 第 1 レベルの属性 |
+|-------------------|------------------------|
+| `{{pod_name.key}}`     | `k8s_pod_key`、`tags`、`annotations`、`cluster_id`、`cluster_name`、`conditions`、`container_statuses`、`creation_timestamp`、`deletion_timestamp`、`display_name`、`external_id`、`finalizers`、`first_seen_at`、`host_id`、`host_key`、`hostname`、`init_container_statuses`、`ip`、`labels`、`name`、`namespace`、`node_name`、`nominated_node_name`、`phase`、`pod_scheduled_timestamp`、`priority_class_name`、`qosclass`、`resource_requirements`、`uid`|
+
+
+
 ### 一致する属性/タグ変数
 
-_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]、[データベースモニタリングモニター][8]で使用できます。_
+これらは [Log モニター][2]、[Trace Analytics モニター][3] (APM)、[Error Tracking モニター][9]、[RUM モニター][4]、[CI モニター][5]、[Database Monitoring モニター][6]で利用できます。
 
 モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
 
@@ -318,13 +358,14 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 |-----------------|--------------------------------------------------|
 | ログ             | `{{log.attributes.key}}` または `{{log.tags.key}}`   |
 | トレース分析 | `{{span.attributes.key}}` または `{{span.tags.key}}` |
-| エラー追跡  | トレース: `{{span.attributes.[error.message]}}`<br>RUM イベント: `{{rum.attributes.[error.message]}}`<br>ログ: `{{log.attributes.[error.message]}}`             |
+| Error Tracking  | `{{issue.attributes.key}}`                         |
 | RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
+| Audit trail（監査証跡）     | `{{audit.attributes.key}}` または `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
-| データベースモニタリング | `{{databasemonitoring.attributes.key}}`      |
+| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
 
-`key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` をレンダリングします。
+`key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` を表示します。
 
 **例**: ログモニターが `@http.status_code` でグループ化されている場合、通知メッセージにエラーメッセージまたはインフラストラクチャータグを含めるには、次の変数を使用します。
 
@@ -336,7 +377,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 {{< img src="monitors/notifications/tag_attribute_variables.png" alt="一致する属性変数の構文" style="width:90%;">}}
 
-メッセージは、**属性が存在する場合**、クエリに一致する選択されたログの `error.message` 属性をレンダリングします。
+メッセージは、**属性が存在する場合**、クエリに一致する選択されたログの `error.message` 属性を表示します。
 
 <div class="alert alert-info"><strong>注</strong>: 選択したイベントに属性またはタグキーが含まれていない場合、変数は通知メッセージで空になります。通知の欠落を回避するには、<code>{{#is_match}}</code> ハンドルを使用して通知をルーティングするためにこれらの変数を使用しません。</div>
 
@@ -348,22 +389,22 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 | モニターの種類    | 変数構文   | 第 1 レベルの属性 |
 |-----------------|-------------------|------------------------|
-| ログ             | `{{log.key}}`     | `message`、`service`、`status`、`source`、`span_id`、`timestamp`、`trace_id`、`link` |
+| ログ             | `{{log.key}}`     | `message`、`service`、`status`、`source`、`span_id`、`timestamp`、`trace_id`、`link`、`host` |
 | トレース分析 | `{{span.key}}`    | `env`、`operation_name`、`resource_name`、`service`、`status`、`span_id`、`timestamp`、`trace_id`、`type`、`link` |
 | RUM             | `{{rum.key}}`     | `service`、`status`、`timestamp`、`link` |
-| イベント             | `{{event.key}}`     | `id`、`title`、`text`、`host.name`、`tags` |
+| イベント             | `{{event.key}}`     | `attributes`、`host.name`、`id`、`link`、`title`、`text`、`tags` |
 | CI Pipeline             | `{{cipipeline.key}}`     | `service`、`env`、`resource_name`、`ci_level`、`trace_id`、`span_id`、`pipeline_fingerprint`、`operation_name`、`ci_partial_array`、`status`、`timestamp`、`link` |
-| CI Test             | `{{citest.key}}`     | `service`、`env`、`resource_name`、`error.message`、`trace_id`、`span_id`、`operation_name`、`status`、`timestamp`、`link` |
+| CI Test             | `{{citest.key}}`     | `service`、`env`、`resource_name`、`trace_id`、`span_id`、`operation_name`、`status`、`timestamp`、`link` |
 
 一致するイベントの定義に属性が含まれていない場合、変数は空になります。
 
 #### エクスプローラーリンク
 
-`{{log.link}}`、`{{span.link}}`、`{{rum.link}}` を使用して、クエリに一致するイベントを対象としたログエクスプローラー、トレースエクスプローラー、または RUM エクスプローラーへのリンクで通知を充実させます。
+`{{log.link}}`、`{{span.link}}`、`{{rum.link}}`、`{{issue.link}}` を使用して、クエリに一致するイベントを対象としたログエクスプローラー、トレースエクスプローラー、RUM エクスプローラー、またはエラー追跡へのリンクで通知を充実させます。
 
 ### チェックモニター変数
 
-チェックモニター変数（カスタムチェックおよびインテグレーションチェック）には、変数 `{{check_message}}` が利用可能で、カスタムチェックまたはインテグレーションチェックで指定されたメッセージをレンダリングします。
+チェックモニター変数（カスタムチェックおよびインテグレーションチェック）には、変数 `{{check_message}}` が利用可能で、カスタムチェックまたはインテグレーションチェックで指定されたメッセージを表示します。
 
 ### 複合条件モニター変数
 
@@ -383,7 +424,13 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 ステータスに指定できる値は、`OK`、`Alert`、`Warn`、および `No Data` です。
 
-複合条件モニターは、基底のモニターと同様の方法でタグ変数もサポートします。基底のモニターが同じタグ/ファセットでグループ化されていることを条件に、複合条件モニターは他のモニターと同様の形式に従います。
+複合条件モニターは、基底のモニターと同様の方法でタグ変数もサポートします。基底のモニターが同じタグまたはファセットでグループ化されていることを条件に、複合条件モニターは他のモニターと同様の形式に従います。
+
+例えば、複合条件モニターにサブモニター `a` があり、それがログモニターであるとします。この場合は、次の方法で `a` のタグまたはファセットの値を含めることができます。
+
+```text
+{{ a.log.message }} または {{ a.log.my_facet }}
+```
 
 ### 文字エスケープ
 
@@ -393,22 +440,41 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 テンプレート変数を使用して、モニター通知をカスタマイズします。組み込み変数は次のとおりです。
 
-| 変数                       | 説明                                                                   |
-|--------------------------------|-------------------------------------------------------------------------------|
-| `{{value}}`                    | メトリクスベースのクエリモニターのアラートに違反した値。            |
-| `{{threshold}}`                | モニターのアラート条件に設定されたアラートしきい値の値。       |
-| `{{warn_threshold}}`           | モニターのアラート条件に設定された警告しきい値の値。     |
-| `{{ok_threshold}}`             | サービスチェックモニターを回復した値。                            |
-| `{{comparator}}`               | モニターのアラート条件に設定された関係値。                   |
-| `{{first_triggered_at}}`       | モニターが最初にトリガーされた UTC 日時。                       |
-| `{{first_triggered_at_epoch}}` | モニターが最初にトリガーされた UTC 日時（エポックミリ秒）。 |
-| `{{last_triggered_at}}`        | モニターが最後にトリガーされた UTC 日時。                        |
-| `{{last_triggered_at_epoch}}`  | モニターが最後にトリガーされた UTC 日時（エポックミリ秒）。  |
-| `{{triggered_duration_sec}}`   | モニターがトリガー状態になっている秒数。              |
+| 変数                             | 説明                                                                   |
+|-----------------------------------   |-------------------------------------------------------------------------------|
+| `{{value}}`                          | メトリクスベースのクエリモニターのアラートに違反した値。            |
+| `{{threshold}}`                      | モニターのアラート条件に設定されたアラートしきい値の値。       |
+| `{{warn_threshold}}`                 | モニターのアラート条件に設定された警告しきい値の値。     |
+| `{{alert_recovery_threshold}}`       | モニターを `ALERT` 状態から回復させた値。                  |
+| `{{warn_recovery_threshold}}`        | モニターを `WARN` 状態から回復させた値。                   |
+| `{{ok_threshold}}`                   | サービスチェックモニターを回復した値。                           |
+| `{{comparator}}`                     | モニターのアラート条件に設定された関係値。                   |
+| `{{first_triggered_at}}`<br>*以下のセクションを参照*         | モニターが最初にトリガーされた UTC 日時。                       |
+| `{{first_triggered_at_epoch}}`<br>*以下のセクションを参照*   | モニターが最初にトリガーされた UTC 日時（エポックミリ秒）。 |
+| `{{last_triggered_at}}`<br>*以下のセクションを参照*          | モニターが最後にトリガーされた UTC 日時。                        |
+| `{{last_triggered_at_epoch}}`<br>*以下のセクションを参照*    | モニターが最後にトリガーされた UTC 日時（エポックミリ秒）。  |
+| `{{triggered_duration_sec}}`         | モニターがトリガー状態になっている秒数。              |
+
+### トリガーされた変数
+
+`{{first_triggered_at}}`、`{{first_triggered_at_epoch}}`、`{{last_triggered_at}}`、`{{last_triggered_at_epoch}}` というモニターテンプレート変数は、モニターの状態が変わるときの値を反映し、新しいモニターイベントが発生したときの値を反映する**わけではありません**。モニターの状態が変化していない場合、再通知イベントは同じテンプレート変数を表示します。`{{triggered_duration_sec}}` を使用して、モニターイベント時の継続時間を表示します。
+
+`{{first_triggered_at}}` は、モニターグループが `OK` から `OK` 以外の状態になったとき、または新しいグループが `OK` 以外の状態で現れたときに設定されます。`{{last_triggered_at}}` は、モニターグループがその 1 つ前の状態とは無関係に `OK` 以外の状態になったときに設定されます (`WARN` →`ALERT`、`ALERT` →`WARN` など)。また、`{{last_triggered_at}}` は、新しいグループが `OK` 以外の状態で現れたときにも設定されます。違いは、`{{last_triggered_at}}` がその 1 つ前の状態とは無関係であることです。
+
+ {{< img src="monitors/notifications/triggered_variables.png" alt="状態の遷移をタイムスタンプとともに 4 つ表示。A: 1419 OK から WARN へ、B: 1427 WARN から ALERT へ、C: 1445 ALERT から NO DATA へ、D: 1449 NO DATA から OK へ" style="width:90%;">}}
+
+**例**: モニターが `OK` → `WARN` と遷移するとき、`{{first_triggered_at}}` と `{{last_triggered_at}}` の値のタイムスタンプはどちらも A になります。モニターが回復するまでの値を下表に示します。
+
+| 遷移         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
+|------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
+| `OK` → `WARN`      | A                                | A                                | 0                                |
+| `WARN` → `ALERT`   | A                                | B                                | B - A                            |
+| `ALERT` → `NO DATA`| A                                | C                                | C - A                            |
+| `NO DATA` → `OK`   | A                                | C                                | D - A                            |
 
 ### 評価
 
-数値を返すテンプレート変数は、算術演算と関数をサポートしています。これにより、数値の算術演算や値のフォーマット変更を実行できます。詳細については、[テンプレート変数の評価][6]を参照してください。
+数値を返すテンプレート変数は、算術演算と関数をサポートしています。これにより、数値の算術演算や値のフォーマット変更を実行できます。詳細については、[テンプレート変数の評価][7]を参照してください。
 
 ### ローカルタイム
 
@@ -420,9 +486,9 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 ```
 
 結果は、ISO 8601 形式 `yyyy-MM-dd HH:mm:ss±HH:mm` で表示されます。例: `2021-05-31 23:43:27+09:00`。 
-利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][7]で、TZ データベース名の列をご参照ください。
+利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][8]で、TZ データベース名の列をご参照ください。
 
-## 高度な検索
+## アドバンスド
 
 ### ダイナミックハンドル
 
@@ -439,6 +505,17 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 ```text
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
+
+常に存在するとは限らない属性を用いて動的ハンドルを構築する場合、通知の配信に問題が生じる可能性があります。属性が欠けている場合、その変数は通知メッセージ内で空としてレンダリングされ、無効なハンドルとなり得ます。
+
+これらの変数を用いた動的ハンドルで通知が失われないよう、フォールバックハンドルを必ず追加してください。
+
+```text
+{{#is_match "kube_namespace.owner" ""}}
+  @slack-example
+{{/is_match}}
+```
+
 
 ### ダイナミックリンク
 
@@ -505,10 +582,10 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 {{% /tab %}}
 {{% tab "Logs" %}}
 
-`{{last_triggered_at_epoch}}` [テンプレート変数](#template-variables)を使って、警告の瞬間に起きている全てのログへのリンクを提供します。
+`{{last_triggered_at_epoch}}` [テンプレート変数](#template-variables)を使用して、アラートの瞬間に発生しているすべてのログへのリンクを提供します。
 
 ```text
-https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
+https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
 ログリンクは、追加のパラメーターを使用してカスタマイズできます。最も一般的なものは次のとおりです。
@@ -529,6 +606,7 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 
 ```text
 {{!-- これはコメントです --}}
+{{!-- これはコメントです }}
 ```
 
 ### 未加工の形式
@@ -565,13 +643,13 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 
 アラートメッセージに URL でエンコードする必要がある情報が含まれている場合 (例えば、リダイレクトの場合)、`{{ urlencode "<variable>"}}` 構文を使います。
 
-**例**: モニターメッセージに特定のサービスにフィルタリングされた APM サービスページへの URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使い、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
+**例**: モニターメッセージに特定のサービスにフィルタリングされたサービスカタログへの URL が含まれている場合、`service` [タグ変数](#attribute-and-tag-variables)を使い、URL に `{{ urlencode "<variable>"}}` 構文を追加します。
 
 ```
-https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -580,6 +658,7 @@ https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 [3]: /ja/monitors/types/apm/?tab=analytics
 [4]: /ja/monitors/types/real_user_monitoring/
 [5]: /ja/monitors/types/ci/
-[6]: /ja/monitors/guide/template-variable-evaluation/
-[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[8]: /ja/monitors/types/database_monitoring/
+[6]: /ja/monitors/types/database_monitoring/
+[7]: /ja/monitors/guide/template-variable-evaluation/
+[8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[9]: /ja/monitors/types/error_tracking/

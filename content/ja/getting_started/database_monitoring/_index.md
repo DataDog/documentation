@@ -12,13 +12,8 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
-kind: documentation
 title: Database モニタリングの概要
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) ではデータベースモニタリングは利用できません。</div>
-{{% /site-region %}}
 
 ## 概要
 

@@ -1,6 +1,6 @@
 ---
 title: Mappage de métriques Prometheus avec des métriques Datadog
-kind: guide
+
 aliases:
   - /fr/integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:

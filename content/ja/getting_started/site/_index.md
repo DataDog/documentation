@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/configuration/dual-shipping/
   tag: ガイド
   text: デュアルシッピング
-kind: documentation
 title: Datadog サイトの概要
 ---
 

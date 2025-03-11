@@ -12,7 +12,6 @@ further_reading:
 - link: /developers/integrations/
   tag: Documentación
   text: Introducción a integraciones basadas en Agent
-kind: documentación
 title: Check de OpenMetrics personalizado
 ---
 

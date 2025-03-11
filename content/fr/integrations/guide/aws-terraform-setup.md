@@ -6,7 +6,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
   tag: Blog
   text: Gérer Datadog avec Terraform
-kind: guide
+
 title: Intégration AWS avec Terraform
 ---
 
@@ -65,6 +65,11 @@ L'utilisation de [Terraform][1] vous permet de créer le rôle IAM Datadog, le d
    resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
       role = "${aws_iam_role.datadog_aws_integration.name}"
       policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+   }
+
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration_security_audit" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "arn:aws:iam::aws:policy/SecurityAudit"
    }
 
    resource "datadog_integration_aws" "sandbox" {

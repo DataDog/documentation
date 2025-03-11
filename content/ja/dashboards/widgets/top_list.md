@@ -12,45 +12,45 @@ further_reading:
   tag: Documentation
   text: コンテキストリンク
 title: トップリストウィジェット
-widget_type: toplist
+widget_type: トップリスト
 ---
 
-トップリスト可視化機能を使用すると、`hostname`、`service` などのタグ値のリストを任意のメトリクス値の最大値または最小値と共に表示できます。たとえば、CPU を多く使用しているサービス、ディスクの空き容量が少ないホストなどをリストできます。
-
-{{< img src="dashboards/widgets/toplist/toplist_w_colors.png" alt="条件に応じた視覚化の書式設定ルールを適用したトップリストウィジェット" >}}
+トップリストの視覚化を使用すると、CPU の消費量が最も多い対象、ディスク容量が最も少ないホスト、コストが最も高いクラウド製品など、メトリクスまたはイベントの値が最も多いまたは最も少ないタグ値のリストを表示できます。
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/toplist/toplist_config.png" alt="トップリストの視覚化の書式設定ルールのセットアップ画面" style="width:80%;">}}
+{{< img src="dashboards/widgets/toplist/top_list_graph_display.png" alt="Stacked、Relative display mode、Visual Formatting Rules をハイライトしているグラフ表示の構成オプション" style="width:100%;" >}}
 
-### コンフィギュレーション
+### 構成
 
 1. グラフ化するデータを選択します。
     * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][1]のドキュメントを参照してください。
-    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
-    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
+    * メトリクス以外のデータソース: イベントクエリを構成するには、[トレース検索ドキュメント][2]または[ログ検索ドキュメント][3]を参照してください。
 
-2. オプション: *視覚化の書式設定ルール**で、エントリの値に応じた*条件付き書式を構成します。Datadog 全体で視覚化データ同士を結び付けるには、[コンテキストリンク][6]を追加します。
+2. オプション: [グラフ表示](#graph-display)の追加構成を参照してください。
 
 ### オプション
+
+#### グラフ表示
+
+オプションの Display Mode 機能を構成して、トップリストの視覚化にコンテキストを追加します。
+
+* 複数のスタックグループを表示して、クエリの各ディメンションの内訳を示します。デフォルトでは、**Stacked** は有効になっています。**Flat** に切り替えることもできます。
+* 値を全体のパーセントで表示するには **Relative** 表示モードを、クエリするデータの生カウントを表示するには **Absolute** 表示モードを選択します。</br>
+   **注**: 相対表示は、カウントメトリクスやログイベントなどのカウントデータでのみ使用できます。
+* **Visual Formatting Rules** で、エントリーの値に応じて条件付き書式を構成します。
+
+#### コンテキストリンク
+
+[コンテキストリンク][1]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog の他のページまたはサードパーティアプリケーションの橋渡しをします。
 
 #### グローバルタイム
 
 スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
 
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
-
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][4] ドキュメントをご参照ください。
-
-トップリストウィジェットの[ウィジェット JSON スキーマ定義][5]は次のとおりです。
+このウィジェットは **[Dashboards API][5]** で使用できます。[ウィジェット JSON スキーマ定義][6]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -59,8 +59,8 @@ widget_type: toplist
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/querying/
-[2]: /ja/tracing/app_analytics/search/#search-bar
+[2]: /ja/tracing/trace_explorer/query_syntax/#search-bar
 [3]: /ja/logs/search_syntax/
-[4]: /ja/api/v1/dashboards/
-[5]: /ja/dashboards/graphing_json/widget_json/
-[6]: /ja/dashboards/guide/context-links/#overview
+[4]: /ja/dashboards/guide/context-links
+[5]: /ja/api/latest/dashboards/
+[6]: /ja/dashboards/graphing_json/widget_json/

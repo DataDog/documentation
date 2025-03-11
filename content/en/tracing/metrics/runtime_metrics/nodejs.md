@@ -1,6 +1,5 @@
 ---
 title: Node.js Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Node.js application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/nodejs
@@ -18,10 +17,6 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-
-<div class="alert alert-warning">
-This feature is in public beta.
-</div>
 
 ## Automatic configuration
 
@@ -53,7 +48,7 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{< /tabs >}}
 
-Runtime metrics can be viewed in correlation with your Node services. See the [Service Catalog][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Node services. See the [Software Catalog][1] in Datadog.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent.

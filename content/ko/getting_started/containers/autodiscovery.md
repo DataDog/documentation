@@ -22,7 +22,6 @@ further_reading:
 - link: /agent/configuration/secrets-management/
   tag: 설명서
   text: 시크릿 관리
-kind: 설명서
 title: 기본 에이전트 자동탐지
 ---
 

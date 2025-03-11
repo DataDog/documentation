@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: documentation
 title: チェックイコールは一貫した基本型に使用される
 ---
 ## メタデータ

@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: 블로그
   text: Datadog을 사용해 Graviton3-powered EC2 인스턴스 모니터링
-kind: documentation
 title: AWS를 이용해 시작하기
 ---
 

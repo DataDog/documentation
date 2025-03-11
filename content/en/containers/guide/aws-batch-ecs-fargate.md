@@ -1,6 +1,5 @@
 ---
 title: AWS Batch with ECS Fargate and the Datadog Agent
-kind: guide
 further_reading:
     - link: "integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate"
       tag: 'Documentation'

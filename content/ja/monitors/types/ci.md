@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
   tag: GitHub
   text: Datadog CI モニターによるパイプラインアラートの構成
-kind: documentation
 title: CI モニター
 ---
 
@@ -84,9 +83,9 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
     * **Dimension**: ディメンション (質的ファセット) を選択し、そのファセットの `Unique value count` に対してアラートを表示します。
     * **Measure**: CI Pipeline ファセットの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
 4. 複数のディメンションで CI Test イベントをグループ化する (オプション):
-    * クエリに一致するすべての CI Test イベントは、最大 4 つのファセットの値に基づいてグループに集約されます。
+    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
 5. アラート設定のグループ化方法を構成します（任意）:
-    * クエリに `group by` がある場合、グループパラメーターにしたがって、すべてのソースに対してアラートが送信されます。設定された条件を満たす各グループに対してアラートイベントが生成されます。例えば、クエリを `@test.full_name` でグループ化し、エラー数が多い場合に CI Test フルネーム毎に個別のアラートを受信することができます。テストのフルネームはテストスイートとテスト名の組み合わせで、例えば `MySuite.myTest` のようなものです。Swift では、テストのフルネームはテストバンドルとスイートと名前の組み合わせで、例えば `MyBundle.MySuite.myTest` のような名前になります。
+    * If the query has a `group by`, an alert is sent for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, for example: `MySuite.myTest`. In Swift, test full name is a combination of a test bundle, and suite and name, for example: `MyBundle.MySuite.myTest`.
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="パイプライン名でグループ化されるよう設定される CI Status:Error のクエリ" style="width:100%;" >}}
 
@@ -95,7 +94,7 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
 
 例えば、同じフルネームのテストが Chrome では失敗し、Firefoxでは合格した場合、フィンガープリントを使用すると、Chrome のテスト実行時にのみアラートが発生します。
 
-この場合、`@test.full_name` を使用すると、Firefox 上でテストに合格していても、警告が表示されます。
+Using `@test.full_name` in this case triggers the alert, even though the test passed on Firefox.
 
 #### 数式と関数
 
@@ -141,7 +140,7 @@ Datadog で [CI モニター][2]を作成するには、メインナビゲーシ
 
 ### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][4]のページを参照してください。
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 #### ログのサンプルと違反値トップリスト
 
@@ -160,7 +159,7 @@ CI テストまたはパイプラインモニターがトリガーされると�
 
 サンプルを無効にするには、**Say what's happening** セクションの一番下にあるチェックボックスをオフにします。チェックボックスの隣に表示されるテキストは、モニターのグループ化によって変わります（上記を参照）。
 
-#### サンプル例
+#### Sample examples
 
 アラート通知に CI テスト 10 サンプルのテーブルを含めます。
 {{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10" style="width:60%;" >}}
@@ -174,7 +173,7 @@ CI テストまたはパイプラインモニターがトリガーされると�
 
 代替案として、Datadog はレートフォーミュラの使用を推奨しています。例えば、パイプラインの失敗数 (カウント) のモニターを使う代わりに、`(パイプラインの失敗数)/(全パイプライン実行数)` のようなパイプライン失敗の割合 (式) のモニターを使います。この場合、データがないときには分母の `(全パイプライン実行数)` は `0` となり、割り算 `x/0` は評価できません。モニターは `0` に評価する代わりに、以前の既知の状態を維持します。
 
-この方法では、パイプラインの故障が多発してエラーレートがモニターのしきい値を超えたためにモニターがトリガーされた場合、エラーレートがしきい値を下回るまでクリアされません (その後、いつでもクリアできます)。
+This way, if the monitor triggers because there's a burst of pipeline failures that makes the error rate go above the monitor threshold, it will not clear until the error rate goes below the threshold, which can be at any time afterwards.
 
 ## モニター例
 一般的なモニターの使用例を以下に示します。モニタークエリは、特定のブランチ、作成者、その他のアプリ内のファセットに対してフィルターをかけるように変更することができます。
@@ -191,24 +190,25 @@ CI テストまたはパイプラインモニターがトリガーされると�
 
 同じブランチやデフォルトブランチ内でそのテストが不安定であると検出されていない場合、そのテスト実行は `new flaky` としてマークされます。新しい不安定として検出された最初のテスト実行だけが、(再試行の回数に関係なく) `is_new_flaky` タグでマークされます。
 
-不安定テストについては、[不安定テスト管理ガイド][6]を参照してください。
-
 {{< img src="ci/flaky_test_monitor.png" alt="CI の不安定なテストモニター" style="width:100%;">}}
+
+詳しくは、[CI テストの検索と管理][6]を参照してください。
 
 ### コードカバレッジ率の維持
 コードカバレッジ率などの[カスタムメトリクス][5]を作成し、モニター内で使用することができます。以下のモニターは、コードカバレッジが一定の割合以下になるとアラートを送信し、長期間にわたってテストのパフォーマンスを維持するのに役立ちます。
 
 {{< img src="ci/codecoveragepct_monitor_light.png" alt="CI の不安定なテストモニター" style="width:100%;">}}
 
+詳しくは、[コードカバレッジ][7]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /ja/continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
 [3]: /ja/monitors/configuration/#advanced-alert-conditions
 [4]: /ja/monitors/notify/
-[5]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[6]: https://docs.datadoghq.com/ja/continuous_integration/guides/flaky_test_management/
+[5]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /ja/continuous_integration/search/#new-flaky-tests
+[7]: /ja/continuous_integration/tests/code_coverage

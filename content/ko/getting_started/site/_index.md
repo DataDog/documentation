@@ -10,7 +10,6 @@ further_reading:
 - link: /agent/configuration/dual-shipping/
   tag: 가이드
   text: 이중 배송
-kind: 설명서
 title: Datadog 사이트 시작하기
 ---
 

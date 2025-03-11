@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/FAQ/cómo-investigar-un-problema-de-parseo-de-log/
   tag: Documentación
   text: Aprende cómo investigar un problema de parseo de log
-kind: errores
 title: Los logs muestran el estado de información para la guía de advertencias o
 ---
 
@@ -23,7 +22,7 @@ title: Los logs muestran el estado de información para la guía de advertencias
 
 Por defecto, cuando la API de entrada de Datadog recibe un log, se genera un estado de `INFO` y se agrega como el atributo del `status`.
 
-{{<img src="logs/guide/original_log.png" alt="el panel de logs muestra un log con el estado de información, pero el mensaje muestra una advertencia". style="width:50%;">}}
+{{<img src="logs/guide/original_log.png" alt="el panel de logs muestra un log con el estado de información, pero el mensaje muestra una advertencia." style="width:50%;">}}
 
 Este `status` por defecto puede no reflejar siempre el estado real contenido en el propio log. En esta guía se explica cómo reemplazar el valor por defecto por el estado real.
 

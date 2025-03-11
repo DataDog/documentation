@@ -12,7 +12,6 @@ further_reading:
 - link: /containers/kubernetes/integrations/
   tag: 설명서
   text: 커스텀 통합
-kind: 설명서
 title: Cluster Agent 트러블슈팅
 ---
 

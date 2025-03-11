@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/faq/content_security_policy/
   tag: Documentation
   text: Stratégie de sécurité de contenu
-kind: documentation
 title: Dépannage
 ---
 

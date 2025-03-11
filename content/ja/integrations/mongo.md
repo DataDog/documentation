@@ -20,10 +20,15 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 19
     source_type_name: MongoDB
-  logs:
-    source: mongodb
   monitors:
-    '[MongoDB] High incoming connections': assets/monitors/high_connections.json
+    Connection pool is reaching saturation: assets/monitors/high_connections.json
+    High query targeting: assets/monitors/high_query_targeting.json
+    High queued readers: assets/monitors/high_queued_readers.json
+    High queued writers: assets/monitors/high_queued_writers.json
+    High replication lag: assets/monitors/high_replication_lag.json
+    Low oplog window: assets/monitors/low_oplog_window.json
+    Unhealthy replica set member: assets/monitors/unhealthy_repliset_member.json
+    Used file system storage is reaching capacity: assets/monitors/high_fsstorage_usage.json
   saved_views:
     mongodb_processes: assets/saved_views/mongodb_processes.json
     operations_by_type_overview: assets/saved_views/operations_by_type_overview.json
@@ -38,6 +43,7 @@ author:
 categories:
 - data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_on_public_website: true
@@ -45,9 +51,8 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 6.4.0
+integration_version: 8.3.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: mongo
 public_title: MongoDB
@@ -64,10 +69,16 @@ tile:
   - Supported OS::Windows
   - Category::Data Stores
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-wiredtiger
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-mongodb-performance-metrics-mmap
   support: README.md#Support
   title: MongoDB
 ---
@@ -86,17 +97,17 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 また、カスタム `find`/`count`/`aggregate` クエリを使用して、独自のメトリクスを作成することもできます。
 
-**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10 以降のクラスターでのみ使用できます。
+**注**: このインテグレーションには MongoDB v3.0 以降が必要です。MongoDB Atlas と Datadog のインテグレーションは、M10+ クラスターでのみ利用可能です。このインテグレーションは、Alibaba ApsaraDB と AWS DocumentDB のインスタンスベースのクラスターもサポートしています。一方、DocumentDB Elastic クラスターは、クラスター (mongos) エンドポイントのみを公開するためサポートされていません。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
-### Synthetic モニタリング
+### アーキテクチャ
 
-ほとんどの低レベルのメトリクス (アップタイム、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (収集/インデックス統計など) は、一度だけ収集する必要があります。これらの理由により、Agent を構成する方法は、mongo クラスターのデプロイ方法によって異なります。
+ほとんどの低レベルのメトリクス (稼働時間、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (コレクションやインデックスの統計など) は、一度だけ収集する必要があります。これらの理由により、Agent の構成方法は mongo クラスターのデプロイ方法によって異なります。
 
 {{< tabs >}}
 {{% tab "スタンドアロン" %}}
@@ -119,7 +130,12 @@ db.createUser({
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
-    { role: "read", db: "local" }
+    { role: "read", db: "local" },
+    # コレクション/インデックスの統計情報を収集するデータベースへの読み取り専用アクセス権を追加します。
+    { role: "read", db: "mydb" },
+    { role: "read", db: "myanotherdb" },
+    # または、すべてのデータベースに読み取り専用アクセス権を付与します。
+    { role: "readAnyDatabase", db: "admin" }
   ]
 })
 ```
@@ -147,7 +163,12 @@ db.createUser({
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
-    { role: "read", db: "local" }
+    { role: "read", db: "local" },
+    # コレクション/インデックスの統計情報を収集するデータベースへの読み取り専用アクセス権を追加します。
+    { role: "read", db: "mydb" },
+    { role: "read", db: "myanotherdb" },
+    # または、すべてのデータベースに読み取り専用アクセス権を付与します。
+    { role: "readAnyDatabase", db: "admin" }
   ]
 })
 ```
@@ -223,14 +244,14 @@ db.createUser({
 {{< /tabs >}}
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -276,6 +297,81 @@ db.createUser({
 
 2. [Agent を再起動します][3]。
 
+##### データベースオートディスカバリー
+
+Datadog Agent v7.56 から、データベースのオートディスカバリーを有効にして、MongoDB インスタンス上のすべてのデータベースからメトリクスを自動的に収集することができます。
+データベースオートディスカバリーはデフォルトで無効になっていることに注意してください。自動的に発見されたデータベースからメトリクスを収集するには、データベースへの読み取りアクセスが必要です。
+これを有効にするには、`mongo.d/conf.yaml` ファイルに次の構成を追加します。
+
+```yaml
+   init_config:
+
+   instances:
+       ## @param hosts - 文字列のリスト - 必須
+       ## デプロイのトポロジに応じて、メトリクスを収集するホスト。
+       ## 例: スタンドアロンデプロイの場合、mongod インスタンスのホスト名とポートを指定します。
+       ## レプリカセットまたはシャードクラスターについては、サンプルの conf.yaml の説明を参照してください。
+       ## mongos 経由で接続する場合のみ、複数のホストを指定します。
+       #
+     - hosts:
+         - <HOST>:<PORT>
+
+       ## @param username - 文字列 - オプション
+       ## 認証に使用するユーザー名。
+       #
+       username: datadog
+
+       ## @param password - 文字列 - オプション
+       ## 認証に使用するパスワード。
+       #
+       password: <UNIQUE_PASSWORD>
+
+       ## @param options - mapping - オプション
+       ## 接続オプション。完全なリストは以下を参照してください。
+       ## https://docs.mongodb.com/manual/reference/connection-string/#connections-connection-options
+       #
+       options:
+         authSource: admin
+
+       ## @param database_autodiscovery - マッピング - オプション
+       ## データベースオートディスカバリーを有効にして、すべての MongoDB データベースからメトリクスを自動的に収集します。
+       #
+       database_autodiscovery:
+         ## @param enabled - ブール値 - 必須
+         ## データベースオートディスカバリーを有効にします。
+         #
+         enabled: true
+
+         ## @param include - 文字列のリスト - オプション
+         ## オートディスカバリーに含めるデータベースのリスト。複数のデータベースにマッチさせるには正規表現を使用します。
+         ## 例えば、"mydb" で始まるすべてのデータベースを含めるには、"^mydb.*" を使用します。
+         ## デフォルトでは、include は ".*" に設定され、すべてのデータベースが含まれます。
+         #
+         include:
+            - "^mydb.*"
+
+         ## @param exclude - 文字列のリスト - オプション
+         ## オートディスカバリーから除外するデータベースのリスト。複数のデータベースにマッチさせるには正規表現を使用します。
+         ## 例えば、"mydb" で始まるすべてのデータベースを除外するには、"^mydb.*" を使用します。
+         ## 除外リストと包含リストが競合する場合は、除外リストが優先されます。
+         #
+         exclude:
+            - "^mydb2.*"
+            - "admin$"
+
+         ## @param max_databases - 整数 - オプション
+         ## メトリクスを収集するデータベースの最大数。デフォルト値は 100 です。
+         #
+         max_databases: 100
+
+         ## @param refresh_interval - 整数 - オプション
+         ## データベースのリストを更新する間隔を秒単位で指定します。デフォルト値は 600 秒です。
+         #
+         refresh_interval: 600
+   ```
+
+2. [Agent を再起動します][3]。
+
 ##### トレースの収集
 
 Datadog APM は Mongo を統合して、分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
@@ -283,7 +379,7 @@ Datadog APM は Mongo を統合して、分散システム全体のトレース�
 1. [Datadog でトレースの収集を有効にします][4]。
 2. [Mongo へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -329,7 +425,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%"], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
 ```
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -364,7 +460,7 @@ Agent コンテナで必要な環境変数
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -385,9 +481,9 @@ metadata:
     ad.datadoghq.com/mongo.instances: |
       [
         {
-          "hosts": ["%%host%%:%%port%%"], 
-          "username": "datadog", 
-          "password": "<UNIQUEPASSWORD>", 
+          "hosts": ["%%host%%:%%port%%"],
+          "username": "datadog",
+          "password": "<UNIQUEPASSWORD>",
           "database": "<DATABASE>"
         }
       ]
@@ -410,9 +506,9 @@ metadata:
           "init_config": {},
           "instances": [
             {
-              "hosts": ["%%host%%:%%port%%"], 
-              "username": "datadog", 
-              "password": "<UNIQUEPASSWORD>", 
+              "hosts": ["%%host%%:%%port%%"],
+              "username": "datadog",
+              "password": "<UNIQUEPASSWORD>",
               "database": "<DATABASE>"
             }
           ]
@@ -423,7 +519,7 @@ spec:
     - name: mongo
 ```
 
-##### 収集データ
+##### ログ収集
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
@@ -492,7 +588,7 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -542,9 +638,9 @@ Agent コンテナで必要な環境変数
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `mongo` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "mongo" >}}
 
 
@@ -554,32 +650,35 @@ Agent コンテナで必要な環境変数
 
 次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
-| メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
-| ------------------------ | ------------------------------------------------- |
-| mongodb.collection       | collection                                        |
-| mongodb.commands         | top                                               |
-| mongodb.getmore          | top                                               |
-| mongodb.insert           | top                                               |
-| mongodb.queries          | top                                               |
-| mongodb.readLock         | top                                               |
-| mongodb.writeLock        | top                                               |
-| mongodb.remove           | top                                               |
-| mongodb.total            | top                                               |
-| mongodb.update           | top                                               |
-| mongodb.writeLock        | top                                               |
-| mongodb.tcmalloc         | tcmalloc                                          |
-| mongodb.metrics.commands | metrics.commands                                  |
+| メトリクスのプレフィックス                     | 収集するために `additional_metrics` に追加する項目 |
+| --------------------------------- | ------------------------------------------------- |
+| mongodb.collection                | collection                                        |
+| mongodb.usage.commands            | top                                               |
+| mongodb.usage.getmore             | top                                               |
+| mongodb.usage.insert              | top                                               |
+| mongodb.usage.queries             | top                                               |
+| mongodb.usage.readLock            | top                                               |
+| mongodb.usage.writeLock           | top                                               |
+| mongodb.usage.remove              | top                                               |
+| mongodb.usage.total               | top                                               |
+| mongodb.usage.update              | top                                               |
+| mongodb.usage.writeLock           | top                                               |
+| mongodb.tcmalloc                  | tcmalloc                                          |
+| mongodb.metrics.commands          | metrics.commands                                  |
+| mongodb.chunks.jumbo              | jumbo_chunks                                      |
+| mongodb.chunks.total              | jumbo_chunks                                      |
+| mongodb.sharded_data_distribution | sharded_data_distribution                         |
 
-### ヘルプ
+### イベント
 
 **レプリケーション状態の変化**:<br>
 このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "mongo" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

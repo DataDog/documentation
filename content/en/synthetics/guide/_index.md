@@ -1,6 +1,6 @@
 ---
 title: Synthetic Monitoring Guides
-kind: guide
+
 aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
@@ -15,6 +15,7 @@ cascade:
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="synthetics/guide/identify_synthetics_bots/" >}}Identify Synthetic bots{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/clone-test" >}}Clone your Synthetic tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/otp-email-synthetics-test" >}}Extract a one-time passcode from an email body using Synthetic Browser Tests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Alerting:" >}}

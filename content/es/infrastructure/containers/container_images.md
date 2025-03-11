@@ -13,7 +13,6 @@ further_reading:
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities/
   tag: Documentación
   text: Solución de problemas de Cloud Security Management Vulnerabilities
-kind: documentación
 title: Vista de imágenes de contenedor
 ---
 

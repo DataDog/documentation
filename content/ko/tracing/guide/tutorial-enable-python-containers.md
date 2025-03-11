@@ -15,7 +15,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-py
   tags: GitHub
   text: 추적 라이브러리 오픈 소스 리포지토리
-kind: 가이드
 title: 튜토리얼 - 컨테이너에서 파이썬(Python) 애플리케이션 및 Datadog 에이전트에 대한 추적 활성화
 ---
 

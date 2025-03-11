@@ -1,6 +1,5 @@
 ---
 title: Enhanced metrics for AWS Step Functions
-kind: documentation
 ---
 
 In addition to [ingesting integration metrics from AWS][3], Datadog generates enhanced metrics for AWS Step Functions, similar to [enhanced metrics for AWS Lambda][1]. Enhanced Step Functions metrics are distinguished by being in the `aws.states.enhanced.*` namespace. To add enhanced metrics, follow the [AWS Step Function monitoring installation instructions][3] and ensure that `DD_ENHANCED_METRICS` is set to `true`. 
@@ -30,9 +29,6 @@ The following enhanced Step Functions metrics are available.
 
 `aws.states.enhanced.task.execution.task_duration`
 : Distribution of the durations of individual tasks.
-
-`aws.states.enhanced.task.execution.tasks_timed_out`
-: Counts the total number of tasks that timed out.
 
 `aws.states.enhanced.state.run_duration`
 : Gauge for durations of a state's runs.

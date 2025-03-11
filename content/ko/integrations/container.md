@@ -34,7 +34,7 @@ integration_id: container
 integration_title: 컨테이너
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: container
 public_title: 컨테이너

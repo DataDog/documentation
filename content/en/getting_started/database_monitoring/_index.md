@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Database Monitoring
-kind: documentation
 further_reading:
     - link: '/database_monitoring/'
       tag: 'Documentation'
@@ -15,10 +14,6 @@ further_reading:
       tag: 'Foundation Enablement'
       text: 'Join an interactive session to level up your Database Monitoring'
 ---
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">Database Monitoring is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
 
 ## Overview
 

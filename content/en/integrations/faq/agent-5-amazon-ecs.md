@@ -1,6 +1,6 @@
 ---
 title: Amazon Elastic Container Service with Agent v5
-kind: faq
+
 private: true
 ---
 

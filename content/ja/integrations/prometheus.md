@@ -3,12 +3,14 @@ app_id: prometheus
 app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10013
     source_type_name: Prometheus
 author:
   homepage: https://www.datadoghq.com
@@ -17,6 +19,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - metrics
+- event management
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
 display_on_public_website: true
@@ -24,9 +28,8 @@ draft: false
 git_integration_title: prometheus
 integration_id: prometheus
 integration_title: Prometheus (レガシー)
-integration_version: 3.5.1
+integration_version: 5.0.0
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: prometheus
 public_title: Prometheus (レガシー)
@@ -41,15 +44,25 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Category::Metrics
+  - Category::Event Management
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-prometheus-metrics
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/agent/prometheus/
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/developers/prometheus/
   support: README.md#Support
   title: Prometheus (レガシー)
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -74,7 +87,7 @@ Prometheus に接続して:
 
 Prometheus チェックは、[Datadog Agent][4] のバージョン 6.1.0 以降にパッケージ化されています。
 
-### コンフィギュレーション
+### 構成
 
 `prometheus.d/conf.yaml` ファイルを編集して、OpenMetrics/Prometheus エンドポイントを公開するアプリケーションからメトリクスを取得します。
 
@@ -110,7 +123,7 @@ Prometheus チェックによって収集されたメトリクスはすべて、
 
 Prometheus Alertmanager アラートは、Webhook コンフィギュレーションに従って、Datadog イベントストリームに自動的に送信されます。
 
-### サービスのチェック
+### サービスチェック
 
 Prometheus チェックには、サービスのチェック機能は含まれません。
 
@@ -142,7 +155,7 @@ sudo systemctl restart prometheus.service alertmanager.service
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 ## その他の参考資料
 

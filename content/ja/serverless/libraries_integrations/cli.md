@@ -4,7 +4,6 @@ aliases:
 - /ja/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-kind: documentation
 title: Datadog サーバーレス CLI
 ---
 CLI を使って、AWS Lambda 関数を Datadog でインスツルメントすることができます。CLI は既存の Lambda 関数のコンフィギュレーションを変更することでインスツルメンテーションを可能にするため、再デプロイは*必要ありません*。Datadog のサーバーレスモニタリングをはじめるにはこの方法が最速です。
@@ -65,7 +64,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 
 コンフィギュレーションセクションでその設定を確認します。
 
-## コンフィギュレーション
+## 構成
 
 ### AWS 資格情報
 
@@ -189,7 +188,7 @@ datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id> --w
 | `--dry-run`           | `-d`      | Datadog サポートに送信される収集データをプレビューします。                                                                        | `false` |
 
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 
@@ -209,4 +208,4 @@ datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id> --w
 <!--
   This page is single-sourced:
   https://github.com/DataDog/documentation/blob/7007931530baf7da59310e7224a26dc9a71c53c5/local/bin/py/build/configurations/pull_config_preview.yaml#L301
-->
+-->

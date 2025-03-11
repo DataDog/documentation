@@ -1,6 +1,6 @@
 ---
 title: Understand the Difference Between the Agent Host and the Tracer Host
-kind: guide
+
 ---
 
 ## Overview

@@ -7,7 +7,6 @@ further_reading:
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentation
   text: ステップに高度なオプションを構成する
-kind: documentation
 title: ブラウザテストでメール検証を使用する
 ---
 

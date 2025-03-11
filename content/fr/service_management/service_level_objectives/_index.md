@@ -22,7 +22,6 @@ further_reading:
   tag: Validation des bases
   text: Participer à une session interactive sur la création de monitors et de SLO
     efficaces
-kind: documentation
 title: Service Level Objectives
 ---
 

@@ -16,7 +16,6 @@ further_reading:
 - link: /logs/explorer/saved_views/
   tag: Documentation
   text: En savoir plus sur les vues enregistrées
-kind: documentation
 title: Syntaxe de recherche de logs
 ---
 

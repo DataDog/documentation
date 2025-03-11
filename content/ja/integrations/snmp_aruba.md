@@ -20,6 +20,7 @@ author:
 categories:
 - notifications
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_aruba/README.md
 display_on_public_website: true
@@ -29,7 +30,6 @@ integration_id: snmp-aruba
 integration_title: Aruba
 integration_version: ''
 is_public: true
-kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp_aruba
 public_title: Aruba
@@ -46,10 +46,14 @@ tile:
   - Supported OS::macOS
   - Category::Notifications
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: Aruba ネットワークデバイスから SNMP メトリクスを収集します。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   support: README.md#Support
   title: Aruba
 ---
@@ -67,7 +71,11 @@ Aruba Networks は Hewlett Packard Enterprise のワイヤレスネットワー�
 
 SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][2]のドキュメントを参照してください。
 
-## データ収集
+## ベンダープロファイル
+
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
+
+## 収集データ
 
 ### メトリクス
 
@@ -75,17 +83,18 @@ SNMP インテグレーションをインストールして構成するには、
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-* [Datadog での SNMP モニタリング][4]
+* [Monitor SNMP with Datadog][5]
 
 
 
 [1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
 [2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[3]: https://docs.datadoghq.com/ja/network_monitoring/devices/#vendor-profiles
+[4]: https://docs.datadoghq.com/ja/help/
+[5]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

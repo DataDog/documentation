@@ -4,7 +4,9 @@
         <h1 id="pagetitle">{{ .Title }}</h1>
     </div>
     <div class="col-12">
+      {{ if .File }}
         {{ partial "breadcrumbs.html" . }}
+      {{ end }}
     </div>
   </div>
   {{ partial "translate_status_banner/translate_status_banner.html" . }} 
