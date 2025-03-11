@@ -1488,31 +1488,31 @@
     "request_schema_description": "RUM application creation request attributes."
   },
   "OrderRetentionFilters": {
-    "description": "Order RUM retention filters for an application.\nReturns RUM retention filter objects without attributes and meta from the request body when the request is successful.",
+    "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
     "summary": "Order RUM retention filters",
     "request_description": "New definition of the RUM retention filter.",
-    "request_schema_description": "The list of RUM retention filter IDs along with their corresponding type to reorder.\nAll retention filter IDs should be included in the list created for an application."
+    "request_schema_description": "The list of RUM retention filter IDs along with their corresponding type to reorder.\nAll retention filter IDs should be included in the list created for a RUM application."
   },
   "ListRetentionFilters": {
-    "description": "Get the list of RUM retention filters for an application.",
+    "description": "Get the list of RUM retention filters for a RUM application.",
     "summary": "Get all RUM retention filters"
   },
   "CreateRetentionFilter": {
-    "description": "Create a RUM retention filter for an application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "description": "Create a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
     "summary": "Create a RUM retention filter",
     "request_description": "The definition of the new RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to create."
   },
   "DeleteRetentionFilter": {
-    "description": "Delete a RUM retention filter for an application.",
+    "description": "Delete a RUM retention filter for a RUM application.",
     "summary": "Delete a RUM retention filter"
   },
   "GetRetentionFilter": {
-    "description": "Get a RUM retention filter for an application.",
+    "description": "Get a RUM retention filter for a RUM application.",
     "summary": "Get a RUM retention filter"
   },
   "UpdateRetentionFilter": {
-    "description": "Update a RUM retention filter for an application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "description": "Update a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
     "summary": "Update a RUM retention filter",
     "request_description": "New definition of the RUM retention filter.",
     "request_schema_description": "The RUM retention filter body to update."
