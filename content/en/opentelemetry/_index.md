@@ -119,6 +119,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 - Live Processes
 - Cloud Network Monitoring
 - Universal Service Monitoring
+- {{< translate key="integration_count" >}}+ Datadog integrations
 
 <div class="alert alert-info">For a complete list of Agent-based features, see <strong>OTel to Datadog Agent (OTLP)</strong> in <a href="/opentelemetry/compatibility/">Feature Compatibility</a>.</div>
 
