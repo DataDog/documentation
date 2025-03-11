@@ -1,6 +1,6 @@
 ---
-title: Use AI-generated errors to identify the root cause of your failed CI Jobs
-description: Learn how to use AI-generated errors to identify the most common root cause of failure in your CI pipelines.
+title: Use CI jobs failure analysis to identify the root cause of your failed CI Jobs
+description: Learn how to use CI jobs failure analysis to identify the most common root cause of failure in your CI pipelines.
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
       tag: "Documentation"
@@ -12,17 +12,17 @@ further_reading:
 
 ## Overview
 
-This guide explains how to use AI-generated errors to help you determine which are the most common root cause of your failed CI jobs in order to improve the UX in the CI pipelines.
+This guide explains how to use CI jobs failure analysis to help you determine which are the most common root cause of your failed CI jobs in order to improve the UX in the CI pipelines.
 
-### Understanding AI-generated errors
+### Understanding CI jobs failure analysis
 
-CI Visibility leverages OpenAI to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
+CI Visibility leverages a LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
-{{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
+{{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with LLM-generated errors" width="90%">}}
 
-#### Domains and Subdomains of AI-generated errors
+#### Domains and Subdomains of LLM-generated errors
 
-Errors are categorized with a domain and subdomain using AI:
+Errors are categorized with a domain and subdomain using a LLM model:
 
 ##### Domains
 
@@ -74,14 +74,14 @@ Click on a domain tab to see the correspondent subdomains:
 
 ### Supported CI providers
 
-AI-generated errors are available for the following CI providers:
+CI jobs failure analysis is available for the following CI providers:
 
 * [GitHub Actions][1]
 * [GitLab][2]
 
-Notice that Job Logs collection enabled is required to have AI-generated errors. If you need to setup Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
+Notice that Job Logs collection enabled is required. If you need to setup Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
 
-<div class="alert alert-info">If you are interested in AI-generated errors but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
+<div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
 
 ## Identify the most recurrent errors in your CI pipelines
 
@@ -103,40 +103,40 @@ You can use the facets `@error.message`, `@error.domain`, and `@error.subdomain`
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors_facets.png" alt="Failed CI Jobs filtered by error.domain and error.subdomain" width="90%">}}
 
-Notice that these facets are only available using the `ci_level:job` in your queries. In case that AI-generated errors cannot be computed (e.g., you are not using a supported CI provider), these facets will contain the error information coming from the CI provider.
+Notice that these facets are only available using the `ci_level:job` in your queries. In case that the CI jobs failures analysis cannot be computed (e.g., you are not using a supported CI provider), these facets will contain the error information coming from the CI provider.
 
 ### Using the dashboard template
 
-You can also import the CI Visibility - AI-generated Job Errors dashboard template:
+You can also import the CI Visibility - CI Jobs Failure Analysis dashboard template:
 
-- Open the [civisibility-ai-gen-job-errors-dashboard.json][4] dashboard template and copy the content in the clipboard.
+- Open the [civisibility-ci-jobs-failure-analysis-dashboard.json][4] dashboard template and copy the content in the clipboard.
 - Create a [New Dashboard][5] in Datadog.
 - Paste the copied content in the new dashboard.
 - Save the dashboard.
 
-{{< img src="continuous_integration/civis_ai_gen_errors_dashboard.png" alt="AI generated errors dashboard" width="90%">}}
+{{< img src="continuous_integration/civis_ai_gen_errors_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
 
-## How AI-generated errors are created?
+## How the CI jobs failure analysis is computed?
 
-CI Visibility uses the relevant logs of every failed CI job to generate improved errors using OpenAI.
+CI Visibility uses the relevant logs of every failed CI job to generate improved errors using a LLM model.
 
-### How relevant logs are computed?
+### How CI Visibility identifies the relevant logs of a CI job?
 
 CI Visibility considers that a log line is relevant when that log line has not appeared in the logs collected from the previous successful jobs executions of that CI Job. Log relevancy is only computed for logs coming from failed CI Jobs.
 
 You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
 
-### What information is sent to OpenAI?
+### What information is used as input of the LLM model?
 
-If a failed CI job has relevant logs, CI Visibility sends the last 100 relevant log lines to OpenAI. In case that a failed CI job does not have relevant logs, CI Visibility will send the last 100 log lines.
+If a failed CI job has relevant logs, CI Visibility uses the last 100 relevant log lines as input of the LLM model. In case that a failed CI job does not have relevant logs, CI Visibility will send the last 100 log lines.
 
-OpenAI does not store any logs, and each log line is pre-scanned to redact any potentially sensitive information before being sent.
+Each log line is pre-scanned to redact any potentially sensitive information before being used.
 
 **Limitations**
 
-OpenAI can categorize errors with similar messages into different subdomains.
+The LLM model can categorize errors with similar messages into different subdomains.
 
-<u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, OpenAI may sometimes classify it under subdomain:`infrastructure` instead.
+<u>Example</u>: If the error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, the LLM model may sometimes classify it under subdomain:`infrastructure` instead.
 
 ## Further reading
 
