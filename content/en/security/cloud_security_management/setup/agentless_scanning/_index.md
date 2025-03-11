@@ -110,7 +110,7 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [1]: /security/cloud_security_management/setup/agentless_scanning#setup
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/#prerequisites
+[4]: /security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
 [6]: #terraform
 [7]: mailto:success@datadoghq.com

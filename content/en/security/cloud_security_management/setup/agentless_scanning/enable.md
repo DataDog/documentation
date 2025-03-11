@@ -234,7 +234,7 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
-[2]: /security/cloud_security_management/setup/agentless_scanning/?tab=newawsaccount#set-up-aws-cloudformation
+[2]: /security/cloud_security_management/setup/agentless_scanning/enable?tab=newawsaccount#set-up-aws-cloudformation
 
 {{% /tab %}}
 {{< /tabs >}}

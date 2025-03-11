@@ -60,8 +60,8 @@ The following application languages and libraries are supported for vulnerabilit
 
 The following container image registries are supported for container image scans:
 
-- AWS ECR public
-- AWS ECR private
+- Amazon ECR public
+- Amazon ECR private
 
 **Note**: Container image scanning from registry is only supported if you have installed Agentless with:
   - Cloudformation Integrations >= v2.0.8
