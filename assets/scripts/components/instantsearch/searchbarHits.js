@@ -111,8 +111,8 @@ const renderHits = (renderOptions, isFirstRender) => {
                 `;
             })
             .join('');
-        
-        const enhanceCategoryHeader = (category.toLowerCase() === 'api' && bodyClassContains('api')) || (category.toLowerCase() === 'partner' && bodyClassContains('partner'));
+                                      
+        const enhanceCategoryHeader = ['api', 'partners'].includes(category.toLowerCase()) && bodyClassContains(category.toLowerCase());
         const categoryLiClassList = 'ais-Hits-item ais-Hits-category';
         const categoryParagraphClassList = enhanceCategoryHeader ? 'fw-bold text-primary' : '';
 
