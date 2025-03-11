@@ -87,6 +87,8 @@ AI-generated errors are available for the following CI providers:
 
 You can access to the [CI Health page][3] to see a breakdown of the errors in your CI pipelines split by Error Domain.
 
+[CI Health page][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
+
 - Go to [CI Health page][3]
 - Click on a CI pipeline.
 - Check the `Breakdown` column in the `Failed Executions` section.
