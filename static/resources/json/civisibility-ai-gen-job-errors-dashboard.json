@@ -1,6 +1,6 @@
 {
     "title": "CI Visibility - AI-generated Job Errors",
-    "description": "[[suggested_dashboards]] (cloned)",
+    "description": "Use AI-generated errors to identify the root cause of your failed CI Jobs",
     "experience_type": "default",
     "widgets": [
         {
