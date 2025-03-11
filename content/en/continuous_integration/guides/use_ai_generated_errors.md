@@ -5,6 +5,9 @@ further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
       tag: "Documentation"
       text: "Learn how to search and manage your pipeline executions"
+    - link: "/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path"
+      tag: "Documentation"
+      text: "Identify CI Jobs on the Critical Path to Reduce the Pipeline Duration"
 ---
 
 ## Overview
@@ -23,7 +26,7 @@ You can filter and aggregate failed CI Jobs using the public facets `@error.doma
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors_facets.png" alt="Failed CI Jobs filtered by error.domain and error.subdomain" width="90%">}}
 
-###### Domains
+##### Domains
 
 | Domain   | Description                                                                                                                                                       |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,8 +36,10 @@ You can filter and aggregate failed CI Jobs using the public facets `@error.doma
 
 ##### Subdomains
 
+Click on a domain tab to see the correspondent subdomains:
+
 {{< tabs >}}
-{{% tab "Code Error" %}}
+{{% tab "code" %}}
 
 Failures that are caused by the code that is being built and tested in the CI pipeline, and they should be fixed by the developer that launched the CI pipeline.
 
@@ -46,7 +51,7 @@ Failures that are caused by the code that is being built and tested in the CI pi
 | security  | Failures caused by security violations.         | `Security violation: Use of weak SHA1 hash for security. Consider usedforsecurity=False.`                                  |
 
 {{% /tab %}}
-{{% tab "Platform Error" %}}
+{{% tab "platform" %}}
 
 Failures that are not cause by the code that is being built and tested. These failures can come from the CI provider itself or they could be caused by external dependencies.
 
@@ -62,6 +67,13 @@ Failures that are not cause by the code that is being built and tested. These fa
 | checks         | Failures caused by errors on required fulfillment of checks during the CI Job execution.            | `Release note not found during changelog validation`                                                                                                  |
 | setup          | Failures caused by errors on setting up the CI Job.                                                 | `Execution failed during the TLS setup or client dialing process.`                                                                                    |
 | script         | Failures caused by syntactic errors in the script in the CI Job.                                    | `No tests ran due to file or directory not found.`                                                                                                    |
+
+{{% /tab %}}
+{{% tab "unknown" %}}
+
+| Subdomain | Description                     | Example                                                 |
+|-----------|---------------------------------|---------------------------------------------------------|
+| unknown   | Error could not be categorized. | `Job failed with exit code 1. View full logs or trace.` |
 
 {{% /tab %}}
 {{< /tabs >}}
