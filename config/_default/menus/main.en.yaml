@@ -7747,6 +7747,7 @@ menu:
       parent: account_management_billing
       weight: 5
     - name: Containers
+      identifier: account_management_billing_containers
       url: account_management/billing/containers
       parent: account_management_billing
       weight: 6
