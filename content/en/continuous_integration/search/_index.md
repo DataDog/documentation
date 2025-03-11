@@ -109,4 +109,4 @@ You can use [this guide][12] to use CI jobs failure analysis to identify the mos
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
-[12]: /continuous_integration/guides/use_ai_generated_errors/
+[12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
