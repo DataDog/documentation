@@ -134,7 +134,7 @@ OpenAI does not store any logs, and each log line is pre-scanned to redact any p
 
 OpenAI can categorize errors with similar messages with different subdomains.
 
-<u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, the vast majority of the times this error is going to be categorized as domain:`platform` and subdomain:`network`. However, OpenAI sometimes categorize this error with subdomain:`infrastructure`.
+<u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, OpenAI may sometimes classify it under subdomain:`infrastructure` instead.
 
 ## Further reading
 
