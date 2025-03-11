@@ -18,7 +18,7 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to quickly drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Summary][1] page.
+Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to quickly drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Summary][1] page.
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
@@ -32,6 +32,7 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
+<!-- I need to update this image once we surface aggregation deprecation in the front-end  -->
 {{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
 You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
@@ -43,6 +44,7 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
+<!-- I need to update this image once we surface aggregation deprecation in the front-end  -->
 {{< img src="metrics/mwl-example-tag-exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
@@ -56,17 +58,6 @@ When configuring tags for counts, rates, and gauges, the most frequently queried
 Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
 
 You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API.
-
-### Refine and optimize your aggregations
-
-You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
-
-- Configured counts and rates are queryable in time/space with SUM
-- Configured gauges are queryable in time/space with AVG
-
-You can add or remove aggregations at any time with no required Agent or code-level changes. 
-
-The tag configuration modal pre-populates with an allowlist of aggregations that have been actively queried on dashboards, notebooks, monitors and through API in the past 30 days (colored in blue with an icon). You can also include your own additional aggregations.
 
 ## Metrics without Limits™ billing
 
