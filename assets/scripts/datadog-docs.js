@@ -9,6 +9,7 @@ import initCodeTabs from './components/codetabs';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
+import ExpressionEvaluator from './components/expression-evaluator';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -122,6 +123,10 @@ const doOnLoad = () => {
 
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
+    }
+
+    if (document.querySelector('.expression-evaluator')) {
+        new ExpressionEvaluator();
     }
 };
 
