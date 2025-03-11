@@ -28,8 +28,8 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
-| AI-generated errors | AI-generated errors | Identify the root cause of a failed CI job using AI-generated errors based on Logs |
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| CI jobs failure analysis | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM-models|
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
