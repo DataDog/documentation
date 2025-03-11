@@ -1,4 +1,4 @@
-import { CompilationError } from '../../../../schemas/compilationResults';
+import { CdocsCoreError } from 'cdocs-data';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,19 +10,14 @@ import Checkbox from '@mui/material/Checkbox';
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import { useState } from 'react';
 
-const ErrorsPrintout = (props: {
-  errorReportsByFilePath: Record<string, CompilationError[]>;
-}) => {
+const ErrorsPrintout = (props: { errorReportsByFilePath: Record<string, CdocsCoreError[]> }) => {
   const [textWasCopied, setTextWasCopied] = useState(false);
 
   const handleTextCopy = () => {
     setTextWasCopied(true);
   };
 
-  const handleCopySnackbarClose = (
-    _event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason
-  ) => {
+  const handleCopySnackbarClose = (_event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -70,12 +65,10 @@ const ErrorsPrintout = (props: {
                   <TableRow>
                     <TableCell sx={{ fontSize: '1em', width: '25px' }}></TableCell>
                     <TableCell sx={{ fontSize: '1em' }}>Message</TableCell>
-                    {errors.some((error) => error.lines) && (
-                      <TableCell sx={{ fontSize: '1em', width: '75px' }}>
-                        At line
-                      </TableCell>
+                    {errors.some((error) => error.data?.lines) && (
+                      <TableCell sx={{ fontSize: '1em', width: '75px' }}>At line</TableCell>
                     )}
-                    {errors.some((error) => error.searchTerm) && (
+                    {errors.some((error) => error.data?.searchTerm) && (
                       <TableCell sx={{ fontSize: '1em' }}>
                         Suggested search term
                         <br />
@@ -87,8 +80,8 @@ const ErrorsPrintout = (props: {
                 <TableBody>
                   {errors.map((error, i) => {
                     let startingLine: number | null = null;
-                    if (error.lines) {
-                      startingLine = error.lines[0];
+                    if (Array.isArray(error.data?.lines)) {
+                      startingLine = error.data.lines[0];
                     }
                     return (
                       <TableRow key={i}>
@@ -107,21 +100,21 @@ const ErrorsPrintout = (props: {
                           />
                         </TableCell>
                         <TableCell sx={{ fontSize: '1em' }}>{error.message}</TableCell>
-                        {errors.some((error) => error.lines) && (
+                        {errors.some((error) => error.data?.lines) && (
                           <TableCell sx={{ fontSize: '1em' }}>
                             <a href={vscodeLink + ':' + startingLine}>{startingLine}</a>
                           </TableCell>
                         )}
-                        {errors.some((error) => error.searchTerm) && (
+                        {errors.some((error) => typeof error.data?.searchTerm === 'string') && (
                           <TableCell sx={{ fontSize: '1em' }}>
                             <code
                               style={{ cursor: 'pointer' }}
                               onClick={() => {
-                                navigator.clipboard.writeText(error.searchTerm || '');
+                                navigator.clipboard.writeText((error.data?.searchTerm as string) || '');
                                 handleTextCopy();
                               }}
                             >
-                              {error.searchTerm}
+                              {error.data?.searchTerm as string}
                             </code>
                           </TableCell>
                         )}
@@ -145,16 +138,11 @@ const ErrorsPrintout = (props: {
   );
 };
 
-const ErrorsReport = (props: {
-  errorsByFilePath: Record<string, CompilationError[]>;
-}) => {
+const ErrorsReport = (props: { errorsByFilePath: Record<string, CdocsCoreError[]> }) => {
   return (
     <div>
       <h2>Compilation errors</h2>
-      <p>
-        Checking the box next to an error has no effect — it's optional for tracking your
-        fixes between builds.
-      </p>
+      <p>Checking the box next to an error has no effect — it's optional for tracking your fixes between builds.</p>
       <ErrorsPrintout errorReportsByFilePath={props.errorsByFilePath} />
     </div>
   );
