@@ -91,13 +91,9 @@ Job log collection is supported for the following providers:
 
 ### AI-generated errors based on relevant logs.
 
-CI Visibility provides improved errors based on the relevant logs of every failed CI Job with AI. The improved error contains a brief summary of what was the root cause of the error kept in the `error.message` tag, and a AI-generated categorization kept `error.domain` and `error.subdomain`. The error categorization is useful to understand which are the most common errors in your CI and prioritize them.
+CI Visibility leverages OpenAI to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
-AI-generated errors is supported for the following CI providers:
-- [GitHub Actions][12]
-- [GitLab][13]
-
-Notice that this feature requires Job Log Collection enabled.
+You can use [this guide][12] to use AI-generated errors to identify the most common root cause of failure of your CI Jobs.
 
 ## Further reading
 
@@ -113,5 +109,4 @@ Notice that this feature requires Job Log Collection enabled.
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
-[12]: /continuous_integration/pipelines/github/#ai-generated-errors
-[13]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#ai-generated-errors
+[12]: /continuous_integration/guides/use_ai_generated_errors/
