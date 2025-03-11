@@ -41,13 +41,13 @@ The following sections summarize the variables and operations that the Dynamic I
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | {{< expression-evaluator expression="isEmpty(\"Hello\")" result="False" >}} |
-| `len(value_src)` | Gets the string length. | {{< expression-evaluator expression="len(\"Hello\")" result="5" >}} |
-| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-evaluator expression="substring(\"Hello\", 0, 2)" result="\"He\"" >}} |
-| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-evaluator expression="startsWith(\"Hello\", \"He\")" result="True" >}} |
-| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-evaluator expression="endsWith(\"Hello\", \"lo\")" result="True" >}} |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-evaluator expression="contains(\"Hello\", \"ll\")" result="True" >}} |
-| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-evaluator expression="matches(\"Hello\", \"^H.*o$\")" result="True" >}} |
+| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | {{< expression-language-evaluator expression="isEmpty(\"Hello\")" result="False" >}} |
+| `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(\"Hello\")" result="5" >}} |
+| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(\"Hello\", 0, 2)" result="\"He\"" >}} |
+| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(\"Hello\", \"He\")" result="True" >}} |
+| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(\"Hello\", \"lo\")" result="True" >}} |
+| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | {{< expression-language-evaluator expression="contains(\"Hello\", \"ll\")" result="True" >}} |
+| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(\"Hello\", \"^H.*o$\")" result="True" >}} |
 
 ## Collection operations
 
@@ -57,11 +57,11 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | {{< expression-evaluator expression="any(myCollection, {@it > 2})" result="True" >}} |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-evaluator expression="all(myCollection, {@it < 4})" result="True" >}} |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-evaluator expression="filter(myCollection, {@it > 1})" result="[2,3]" >}} |
-| `len(value_src)` | Gets the collection size. | {{< expression-evaluator expression="len(myCollection)" result="3" >}} |
-| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | {{< expression-evaluator expression="myCollection[1]" result="2" >}} |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="any(myCollection, {@it > 2})" result="True" >}} |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(myCollection, {@it < 4})" result="True" >}} |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(myCollection, {@it > 1})" result="[2,3]" >}} |
+| `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(myCollection)" result="3" >}} |
+| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | {{< expression-language-evaluator expression="myCollection[1]" result="2" >}} |
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=gauge#metric-types
@@ -69,3 +69,11 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 [4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [6]: /dynamic_instrumentation/symdb/
+
+## Expression Language REPL
+
+This interactive REPL tool helps you experiment with the Expression Language syntax before using it in your Dynamic Instrumentation probes. Try the examples from the documentation above or create your own expressions to see how they work.
+
+The REPL below includes some predefined variables like `myCollection` with the value `[1, 2, 3]` that you can use in your expressions. You can also define your own variables and use them in subsequent expressions.
+
+{{< expression-language-repl >}}
