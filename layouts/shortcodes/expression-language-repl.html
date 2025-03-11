@@ -1,0 +1,36 @@
+<div class="expression-repl">
+  <div class="repl-header">
+    <h4>Expression Language REPL</h4>
+  </div>
+  <div class="repl-container">
+    <div class="repl-history" id="repl-history">
+      <!-- Pre-populated examples -->
+      <div class="repl-entry">
+        <div class="repl-command">
+          <span class="repl-prompt">→</span>
+          <span class="repl-expression">len(myCollection)</span>
+        </div>
+        <div class="repl-result">3</div>
+      </div>
+      <div class="repl-entry">
+        <div class="repl-command">
+          <span class="repl-prompt">→</span>
+          <span class="repl-expression">newCollection = [1, "b", 2.5, true]; newCollection[1]</span>
+        </div>
+        <div class="repl-result">b</div>
+      </div>
+      <div class="repl-entry">
+        <div class="repl-command">
+          <span class="repl-prompt">→</span>
+          <span class="repl-expression">newDictionary = {"a": 1, "b": 2, "c": 3}; filter(newDictionary, {@key == "a"})</span>
+        </div>
+        <div class="repl-result">{a: 1}</div>
+      </div>
+    </div>
+    <div class="repl-input-container">
+      <span class="repl-prompt">→</span>
+      <input type="text" class="repl-input" id="repl-input" placeholder="Enter an expression..." aria-label="Expression input">
+      <button type="button" class="run-expression-btn" id="repl-run-btn" aria-label="Evaluate expression">▶</button>
+    </div>
+  </div>
+</div>
