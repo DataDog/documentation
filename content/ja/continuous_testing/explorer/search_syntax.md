@@ -1,8 +1,7 @@
 ---
 aliases:
 - /ja/synthetics/explorer/search_syntax
-description: Learn how to create a search query in the Synthetic Monitoring & Testing
-  Results Explorer.
+description: Synthetic Monitoring & Testing Results Explorer で検索クエリを作成する方法を学びましょう。
 further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント

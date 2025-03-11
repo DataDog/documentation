@@ -1,7 +1,5 @@
 ---
 title: Unity Monitoring Setup
-is_beta: true
-private: true
 description: Collect RUM data from your Unity Mobile projects.
 aliases:
     - /real_user_monitoring/unity/
@@ -20,10 +18,6 @@ further_reading:
 
 ---
 ## Overview
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in Preview.
-{{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
 
@@ -204,7 +198,7 @@ To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in y
 RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
 
 Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
- 
+
 This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 ## Further Reading
