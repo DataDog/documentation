@@ -87,13 +87,13 @@ AI-generated errors are available for the following CI providers:
 
 You can access to the [CI Health page][3] to see a breakdown of the errors in your CI pipelines split by Error Domain.
 
-[CI Health page][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
-
 - Go to [CI Health page][3]
 - Click on a CI pipeline.
 - Check the `Breakdown` column in the `Failed Executions` section.
 
 {{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
+
+[CI Health page][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
 
 ### Using facets
 
@@ -132,7 +132,7 @@ OpenAI does not store any logs, and each log line is pre-scanned to redact any p
 
 **Limitations**
 
-Notice that OpenAI can categorize errors with similar messages with different subdomains.
+OpenAI can categorize errors with similar messages with different subdomains.
 
 <u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, the vast majority of the times this error is going to be categorized as domain:`platform` and subdomain:`network`. However, OpenAI sometimes categorize this error with subdomain:`infrastructure`.
 
