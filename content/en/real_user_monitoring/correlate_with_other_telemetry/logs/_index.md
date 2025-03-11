@@ -32,13 +32,7 @@ To ensure proper correlation for **Browser Logs**, you must [match configuration
 
 To access the Logs Setup pages, follow the links below based on your platform:
 
-- **Browser**: [Integration setup for Browser][5]
-- **Android**: [Integration setup for Android][6]
-- **iOS**: [Integration setup for iOS][7]
-- **Flutter**: [Integration setup for Flutter][8]
-- **React Native**: [Integration setup for React Native][9]
-- **Roku**: [Integration setup for Roku][10]
-- **Kotlin Multiplatform**: [Integration setup for Kotlin Multiplatform][11]
+{{< partial name="rum/rum-correlate-rum-and-logs.html" >}}
 
 ## Further Reading
 
@@ -48,10 +42,3 @@ To access the Logs Setup pages, follow the links below based on your platform:
 [2]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
 [3]: /real_user_monitoring/browser/setup/#initialization-parameters
 [4]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#correlate-frontend-products
-[5]: /logs/log_collection/javascript/
-[6]: /logs/log_collection/android/
-[7]: /logs/log_collection/ios/
-[8]: /logs/log_collection/flutter/
-[9]: /logs/log_collection/reactnative/
-[10]: /logs/log_collection/roku/
-[11]: /logs/log_collection/kotlin_multiplatform/
