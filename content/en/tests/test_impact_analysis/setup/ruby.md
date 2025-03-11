@@ -23,7 +23,6 @@ Test Impact Analysis is only supported in the following versions and testing fra
   * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
-  * [Rails parallel testing][2] is not supported.
 * `cucumber >= 3.0.0`
 
 ## Setup
