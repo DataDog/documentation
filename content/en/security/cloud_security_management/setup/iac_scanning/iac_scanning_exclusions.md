@@ -9,7 +9,9 @@ further_reading:
       text: "Setting up IaC Scanning for Cloud Security Management"
 ---
 
-<div class="alert alert-info">IaC Scanning exclusions is in Preview.</div>
+{{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
+  Static Infrastructure as Code (IaC) scanning is in Preview. To request access, complete the form.
+{{< /callout >}}
 
 Infrastructure as Code (IaC) Scanning detects security misconfigurations in Terraform, Kubernetes, and CloudFormation files. Exclusions allow you to control which findings appear in scan results by ignoring specific rules, files, or issue categories.
 
