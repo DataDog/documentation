@@ -240,12 +240,12 @@ After applying your configuration options to your device profile, click **Save a
 
 {{% tab "Manual" %}}
 
-1. After you save a profile as a draft, navigate back to the [profile home page][4], select the **Draft Profiles** tab, then select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
+1. After you save a profile as a draft, navigate back to the [profile home page][4], then select the **Download All Profiles** option. This allows you to download the `.zip` bundle which contains the `yaml` files for the profiles you created. 
 2. Place the `yaml` files in the [profile directory][13] on each of the relevant installed Agents.
 3. Restart the Datadog Agent.
 4. To ensure the profiles you created are accurate, confirm that NDM is receiving metrics from the matched devices as expected.
 
-{{< img src="/network_device_monitoring/profile_onboarding/profile_download.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/profile_download_2.png" alt="The Network Device profile main page highlighting the Download All Profiles option" style="width:100%;">}}
 
 [4]: https://app.datadoghq.com/devices/profiles
 [13]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
@@ -255,7 +255,7 @@ After applying your configuration options to your device profile, click **Save a
 
 ## Inventory page
 
-Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. This is where you can see a snapshot of the device profiles you created using the [Device Profile Setup](#setup) above. 
+Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. Here, you can view a summary of the out-of-the-box (OOTB) profiles, as well as the device profiles you created using the [Device Profile Setup](#setup) above.  
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
