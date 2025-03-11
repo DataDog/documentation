@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "yarn copy-mock-data && vite",
-    "build": "tsc -b; vite build; yarn copy-mock-data;",
-    "prod": "npm run build && open dist/index.html",
+    "dev": "yarn copy-mock-data && concurrently \"vite build --watch --emptyOutDir false\" \"yarn serve\"",
+    "serve": "live-server dist --port=8000",
+    "build": "tsc -b; vite build;",
+    "prod": "yarn build && open dist/index.html",
     "lint": "eslint .",
     "preview": "vite preview",
     "copy-mock-data": "cp -r ./src/mocks/data.json ./dist/data.json"
@@ -27,6 +28,7 @@
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.3",
+    "concurrently": "^9.1.2",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.13",
