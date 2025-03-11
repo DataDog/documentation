@@ -12,11 +12,11 @@ further_reading:
 
 ## Overview
 
-This guide explains how to use AI-generated errors to help you determine which are the most common root causes of your failed jobs in order to improve the UX in the CI pipelines.
+This guide explains how to use AI-generated errors to help you determine which are the most common root cause of your failed CI jobs in order to improve the UX in the CI pipelines.
 
 ### Understanding AI-generated errors
 
-CI Visibility leverages OpenAI to generate enhanced error messages and categorize errors by domain and subdomain, based on the relevant logs collected from every failed CI job.
+CI Visibility leverages OpenAI to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
 
@@ -79,7 +79,7 @@ AI-generated errors are available for the following CI providers:
 * [GitHub Actions][1]
 * [GitLab][2]
 
-Notice that Job Logs collection enabled is required to have AI-generated errors. If you need to setup Job Logs collection, check out the setup instructions of your CI provider on the [Pipeline Visibility page][6].
+Notice that Job Logs collection enabled is required to have AI-generated errors. If you need to setup Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
 
 <div class="alert alert-info">If you are interested in AI-generated errors but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
 
@@ -87,15 +87,15 @@ Notice that Job Logs collection enabled is required to have AI-generated errors.
 
 ### Using CI Health page
 
-You can access to the [CI Health page][3] to see a breakdown of the errors in your CI pipelines split by Error Domain.
+You can access to the [CI Health page][3] to see a breakdown of the errors in your CI pipelines split by error domain.
 
-- Go to [CI Health page][3]
+- Go to [CI Health][3]
 - Click on a CI pipeline.
 - Check the `Breakdown` column in the `Failed Executions` section.
 
 {{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
 
-[CI Health page][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
+[CI Health][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
 
 ### Using facets
 
@@ -118,23 +118,23 @@ You can also import the CI Visibility - AI-generated Job Errors dashboard templa
 
 ## How AI-generated errors are created?
 
-CI Visibility use the relevant logs of every failed CI job to generate improved errors using OpenAI.
+CI Visibility uses the relevant logs of every failed CI job to generate improved errors using OpenAI.
 
 ### How relevant logs are computed?
 
-CI Visibility considers that a log line as relevant when that log line has not appeared in the logs collected from the successful jobs executions of that CI Job before. Log relevancy is only computed for failed CI Jobs.
+CI Visibility considers that a log line is relevant when that log line has not appeared in the logs collected from the previous successful jobs executions of that CI Job. Log relevancy is only computed for logs coming from failed CI Jobs.
 
 You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
 
 ### What information is sent to OpenAI?
 
-If a failed job has relevant logs, CI Visibility sends the last 100 relevant log lines to OpenAI. In case that a failed job oes not have relevant logs, CI Visibility will send the last 100 log lines.
+If a failed CI job has relevant logs, CI Visibility sends the last 100 relevant log lines to OpenAI. In case that a failed CI job does not have relevant logs, CI Visibility will send the last 100 log lines.
 
 OpenAI does not store any logs, and each log line is pre-scanned to redact any potentially sensitive information before being sent.
 
 **Limitations**
 
-OpenAI can categorize errors with similar messages with different subdomains.
+OpenAI can categorize errors with similar messages into different subdomains.
 
 <u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, OpenAI may sometimes classify it under subdomain:`infrastructure` instead.
 
