@@ -90,15 +90,15 @@ For example, to filter on traces with the tag `#env:prod` or the tag `#test`, us
 
 {{< img src="service_management/mobile/logs_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
 
-On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][25].
+On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][29].
 
-You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][24].
+You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][28].
 
 ## Services
 
 {{< img src="service_management/mobile/services_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
 
-On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][26].
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][30].
 
 ## Incidents
 
@@ -111,17 +111,6 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
 2. Click the "+" button in the top right corner.
 3. Give your incident a title, severity, and commander.
-
-### Receive push notifications for incidents
-
-1. Navigate to **Account**.
-2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
-5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
-6. Select your mobile device and click **Save**.
-
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
 
 ## Widgets
 
@@ -442,6 +431,28 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Notifications
+
+The mobile app is able to send out regular as well as critical notifications. Critical notifications can circumvent your Do Not Disturb (DnD) mode, but you must **explicitly** grant Datadog permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
+
+### Push Notifications for On-Call
+To set up your mobile device for On-Call, follow [this guide][25]. After you've set up your mobile device, navigate to your [On-Call profile][26] and select the device in your notification preferences.
+
+### Push Notifications for incidents
+To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications using [Incident Notification Rules][13]. To receive push notifications:
+
+1. In the Datadog mobile app, navigate to **Account**.
+2. Click **Notifications**.
+3. Select the toggle for **Enable Notifications**.
+4. In Datadog, navigate to [Incident Notification Rules][13].
+5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
+6. Select your mobile device and click **Save**.
+
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
+
+### Push notifications from Workflow Automation
+It is also possible to trigger push notifications directly from Workflows using the [Send mobile push notification message action][27]. Provide the target user and the body of the push notification. Before the user can receive push notifications, they must log into the Datadog Mobile application and allow the Datadog mobile application to receive push notifications.
+
 ## Quick actions
 
 {{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
@@ -518,6 +529,10 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
 [23]: /tracing/trace_explorer/query_syntax/
-[24]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
-[25]: https://docs.datadoghq.com/logs/explorer/search_syntax/
-[26]: https://docs.datadoghq.com/software_catalog/manage/
+[24]: /service_management/on-call
+[25]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[26]: https://app.datadoghq.com/on-call/profile
+[27]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.push_notification/com.datadoghq.dd.push_notification.sendPushNotification
+[28]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[29]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[30]: https://docs.datadoghq.com/software_catalog/manage/
