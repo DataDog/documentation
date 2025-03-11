@@ -278,10 +278,12 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     window.location.pathname = searchPathname;
                 }
             };
-
+            
             const handleOutsideSearchbarClick = (e) => {
                 // Intercept user clicks within instantSearch dropdown to send custom RUM event before redirect.
-                if (hitsContainer.contains(e.target)) {
+                const targetIsDescendant = [hitsContainer, partnersHitsContainer].some((c) => c.contains(e.target));
+                
+                if (targetIsDescendant) {
                     e.preventDefault();
                 }
 
@@ -290,7 +292,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 do {
                     if (target === searchBoxContainerContainer) return;
 
-                    if (target && target.href && hitsContainer.contains(e.target)) {
+                    if (target && target.href && targetIsDescendant) {
                         sendSearchRumAction(search.helper.state.query, target.href);
                         window.history.pushState({}, '', target.href);
                         window.location.reload();
