@@ -20,7 +20,7 @@ CI Visibility leverages a LLM model to generate enhanced error messages and cate
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with LLM-generated errors" width="90%">}}
 
-#### Domains and Subdomains of LLM-generated errors
+#### Domains and Subdomains
 
 Errors are categorized with a domain and subdomain using a LLM model:
 
