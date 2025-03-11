@@ -1,5 +1,5 @@
 1. Enter the name of the Google Cloud storage bucket you created earlier.
-1. Enter the path to the credentials JSON file that you placed in `DD_OP_DATA_DIR/config` [earlier](#allow-the-observability-pipeline-worker-to-write-to-the-bucket).
+1. Enter the path to the [credentials JSON file that you placed in `DD_OP_DATA_DIR/config`](#allow-the-observability-pipeline-worker-to-write-to-the-bucket) earlier.
 1. Select the storage class for the created objects.
 1. Select the access level of the created objects.
 1. Optionally, enter in the prefix.
