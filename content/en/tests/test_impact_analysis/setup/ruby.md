@@ -163,4 +163,3 @@ Test Impact Analysis can be disabled locally by setting the `DD_CIVISIBILITY_ITR
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tests/setup/ruby
-[2]: https://edgeguides.rubyonrails.org/testing.html#parallel-testing
