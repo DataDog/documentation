@@ -93,6 +93,13 @@ Notice that these facets are only available using the `ci_level:job` in your que
 
 ### Using the dashboard template
 
+You can also import the CI Visibility - Job Errors dashboard template:
+
+- Open the civisibility-job-errors-dashboard.json dashboard template and copy the content in the clipboard.
+- Create a New Dashboard in Datadog.
+- Paste the copied content in the new dashboard.
+- Save the dashboard.
+
 TBD
 
 ## How AI-generated errors are created?
@@ -110,6 +117,12 @@ You can check if a log line has been considered as relevant by using the `@relev
 If a failed job has relevant logs, CI Visibility sends the last 100 relevant log lines to OpenAI. In case that a failed job oes not have relevant logs, CI Visibility will send the last 100 log lines.
 
 OpenAI does not store any logs, and each log line is pre-scanned to redact any potentially sensitive information before being sent.
+
+**Limitations**
+
+Notice that OpenAI can categorize errors with similar messages with different subdomains.
+
+<u>Example</u>: If the AI-generated error message is `Cannot connect to docker daemon.`, the vast majority of the times this error is going to be categorized as domain:`platform` and subdomain:`network`. However, OpenAI sometimes categorize this error with subdomain:`infrastructure`.
 
 ## Further reading
 
