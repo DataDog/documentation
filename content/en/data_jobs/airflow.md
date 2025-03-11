@@ -172,14 +172,7 @@ For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/lea
 
 ## Setup
 
-1. Install the OpenLineage provider (`apache-airflow-providers-openlineage`) 1.11.0+ and [`openlineage-python`][8] 1.23.0+. Add the following to your `requirements.txt` file inside your [Astro project][4]:
-
-   ```text
-   apache-airflow-providers-openlineage>=1.11.0
-   openlineage-python>=1.23.0
-   ```
-
-2. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
+1. To set up the OpenLineage provider, define the following environment variables. You can configure these variables in your Astronomer deployment using either of the following methods:
 
     - [From the Astro UI][5]: Navigate to your deployment settings and add the environment variables directly.
     - [In the Dockerfile][11]: Define the environment variables in your `Dockerfile` to ensure they are included during the build process.

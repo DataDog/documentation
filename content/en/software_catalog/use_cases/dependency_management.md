@@ -2,14 +2,12 @@
 title: Manage and Map Dependencies
 aliases:
   - /tracing/software_catalog/guides/dependency_management
-  - /software_catalog/use_cases/dependency_management
   - /software_catalog/guides/dependency_management
   - /tracing/software_catalog/use_cases/dependency_management
   - /tracing/service_catalog/guides/dependency_management
   - /service_catalog/use_cases/dependency_management
   - /service_catalog/guides/dependency_management
   - /tracing/service_catalog/use_cases/dependency_management
-  - /service_catalog/use_cases/dependency_management
 further_reading:
   - link: "/tracing/"
     tag: "Documentation"
@@ -22,7 +20,7 @@ further_reading:
     text: "Datadog Real User Monitoring"
 ---
 
-Datadog’s Software Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
+Datadog's Software Catalog offers powerful dependency mapping capabilities to help teams document, track, and assess upstream and downstream relationships. These features support both automatic discovery and manual definition so you can flexibly and accurately define your system architecture.
 
 ## Automatic dependency mapping and entity discovery
 

@@ -97,9 +97,9 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
@@ -113,9 +113,9 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 4. Run the following command once per service in your application:
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
