@@ -22,11 +22,11 @@ On the Worker installation page:
 1. Select your platform in the **Choose your installation platform** dropdown menu.
 1. If you want to update source environment variables, update the information for your log source.
 {{< tabs >}}
-<!-- {{% tab "Amazon Data Firehose" %}}
+{{% tab "Amazon Data Firehose" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_data_firehose %}}
 
-{{% /tab %}} -->
+{{% /tab %}}
 {{% tab "Amazon S3" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_s3 %}}
@@ -95,9 +95,19 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

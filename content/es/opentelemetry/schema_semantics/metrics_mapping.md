@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/guide/metrics_mapping/
+- /es/opentelemetry/guide/metrics_mapping/
 further_reading:
 - link: /metrics/open_telemetry/otlp_metric_types
   tag: Documentación

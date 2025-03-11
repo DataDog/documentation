@@ -31,7 +31,7 @@ Para un host Ubuntu:
 1. Ejecuta el comando de instalación de una línea:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Sustituye `<YOUR_DD_API_KEY>` por tu [clave de API Datadog][4], `<YOUR_DD_SITE>` por tu [sitio Datadog][3] y `<AGENT_ENV>` por el entorno en el que está instalado tu Agent (por ejemplo, `staging`).
@@ -56,7 +56,7 @@ Para un contenedor Linux Docker:
 
 1. Ejecuta el comando de instalación de una línea:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configura el Agent en Docker:
    ```shell
@@ -262,6 +262,7 @@ Las versiones disponibles figuran en los repositorios fuentes de cada lenguaje:
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+- [PHP][13] (`php`)
 
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
