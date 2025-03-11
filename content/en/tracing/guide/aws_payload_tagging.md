@@ -162,7 +162,7 @@ To enable tag extraction for additional services, use this environment variable:
 
 ```sh
 # Default values
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,dynamodb
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge
 ```
 
 Add services by appending to the comma-separated list. For example, to add support for AWS Amplify:
