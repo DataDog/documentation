@@ -4,9 +4,9 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
-    - link: '/tracing/service_catalog/'
+    - link: '/tracing/software_catalog/'
       tag: 'Documentation'
-      text: 'Service Catalog'
+      text: 'Software Catalog'
 ---
 
 ### Prerequisites
@@ -29,22 +29,31 @@ further_reading:
 
 ### Installation
 
-Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the `DD_DATA_STREAMS_ENABLED` environment variable to `true` on services sending messages to (or consuming messages from) Kafka, SQS or RabbitMQ.
+To enable Data Streams Monitoring, set the following environment variables to `true` on services that are sending or consuming messages:
 
-Also, set the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` variable to `true` so that `DD_SERVICE` is used as the service name in traces.
+- `DD_DATA_STREAMS_ENABLED`
+- `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED`
 
-For example:
+{{< tabs >}}
+{{% tab "Environment variables" %}}
+
 ```yaml
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
   - DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED: "true"
 ```
 
-As an alternative, you can set the `-Ddd.data.streams.enabled=true` system property by running the following when you start your Java application:
+{{% /tab %}}
+{{% tab "Command line" %}}
 
-```bash
+Run the following when you start your Java application:
+
+```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -Ddd.trace.remove.integration-service-names.enabled=true -jar path/to/your/app.jar
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### One-Click Installation
 To set up Data Streams Monitoring from the Datadog UI without needing to restart your service, use [Configuration at Runtime][4]. Navigate to the APM Service Page and `Enable DSM`.

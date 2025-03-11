@@ -493,20 +493,6 @@
             front_matters:
               disable_edit: true
 
-      - repo_name: apps
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-            - "docs/en/getting-started.md"
-          options:
-            dest_path: "/developers/faq/"
-            file_name: "ui_extensions.md"
-            front_matters:
-              dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
-              private: true
-
       - repo_name: datadog-agent
         contents:
         - action: pull-and-push-file
@@ -517,7 +503,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.61.x
+          branch: 7.63.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'

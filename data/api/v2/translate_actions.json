@@ -23,6 +23,36 @@
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "Get AWS Scan Options"
   },
+  "CreateAwsScanOptions": {
+    "description": "Activate Agentless scan options for an AWS account.",
+    "summary": "Post AWS Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Request object that includes the scan options to create."
+  },
+  "DeleteAwsScanOptions": {
+    "description": "Delete Agentless scan options for an AWS account.",
+    "summary": "Delete AWS Scan Options"
+  },
+  "UpdateAwsScanOptions": {
+    "description": "Update the Agentless scan options for an activated account.",
+    "summary": "Patch AWS Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object that includes the scan options to update."
+  },
+  "ListAwsOnDemandTasks": {
+    "description": "Fetches the most recent 1000 AWS on demand tasks.",
+    "summary": "Get AWS On Demand tasks"
+  },
+  "CreateAwsOnDemandTask": {
+    "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
+    "summary": "Post an AWS on demand task",
+    "request_description": "The definition of the on demand task.",
+    "request_schema_description": "Request object that includes the on demand task to submit."
+  },
+  "GetAwsOnDemandTask": {
+    "description": "Fetch the data of a specific on demand task.",
+    "summary": "Get AWS On Demand task by id"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -358,7 +388,7 @@
     "summary": "Delete Cloud Cost Management AWS CUR config"
   },
   "UpdateCostAWSCURConfig": {
-    "description": "Update the status of an AWS CUR config (active/archived).",
+    "description": "Update the status (active/archived) and/or account filtering configuration of an AWS CUR config.",
     "summary": "Update Cloud Cost Management AWS CUR config",
     "request_description": "",
     "request_schema_description": "AWS CUR config Patch Request."
@@ -740,6 +770,30 @@
     "summary": "Update tenant-based handle",
     "request_description": "Tenant-based handle payload.",
     "request_schema_description": "Update tenant-based handle request."
+  },
+  "ListWorkflowsWebhookHandles": {
+    "description": "Get a list of all Workflows webhook handles from the Datadog Microsoft Teams integration.",
+    "summary": "Get all Workflows webhook handles"
+  },
+  "CreateWorkflowsWebhookHandle": {
+    "description": "Create a Workflows webhook handle in the Datadog Microsoft Teams integration.",
+    "summary": "Create Workflows webhook handle",
+    "request_description": "Workflows Webhook handle payload.",
+    "request_schema_description": "Create Workflows webhook handle request."
+  },
+  "DeleteWorkflowsWebhookHandle": {
+    "description": "Delete a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Delete Workflows webhook handle"
+  },
+  "GetWorkflowsWebhookHandle": {
+    "description": "Get the name of a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Get Workflows webhook handle information"
+  },
+  "UpdateWorkflowsWebhookHandle": {
+    "description": "Update a Workflows webhook handle from the Datadog Microsoft Teams integration.",
+    "summary": "Update Workflows webhook handle",
+    "request_description": "Workflows Webhook handle payload.",
+    "request_schema_description": "Update Workflows webhook handle request."
   },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
@@ -1265,6 +1319,54 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "ListApplicationSecurityWAFCustomRules": {
+    "description": "Retrieve a list of WAF custom rule.",
+    "summary": "List all WAF custom rules"
+  },
+  "CreateApplicationSecurityWafCustomRule": {
+    "description": "Create a new WAF custom rule with the given parameters.",
+    "summary": "Create a WAF custom rule",
+    "request_description": "The definition of the new WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the custom rule to create."
+  },
+  "DeleteApplicationSecurityWafCustomRule": {
+    "description": "Delete a specific WAF custom rule.",
+    "summary": "Delete a WAF Custom Rule"
+  },
+  "GetApplicationSecurityWafCustomRule": {
+    "description": "Retrieve a WAF custom rule by ID.",
+    "summary": "Get a WAF custom rule"
+  },
+  "UpdateApplicationSecurityWafCustomRule": {
+    "description": "Update a specific WAF custom Rule.\nReturns the Custom Rule object when the request is successful.",
+    "summary": "Update a WAF Custom Rule",
+    "request_description": "New definition of the WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the Custom Rule to update."
+  },
+  "ListApplicationSecurityWafExclusionFilters": {
+    "description": "Retrieve a list of WAF exclusion filters.",
+    "summary": "List all WAF exclusion filters"
+  },
+  "CreateApplicationSecurityWafExclusionFilter": {
+    "description": "Create a new WAF exclusion filter with the given parameters.\n\nA request matched by an exclusion filter will be ignored by the Application Security WAF product.\nGo to https://app.datadoghq.com/security/appsec/passlist to review existing exclusion filters (also called passlist entries).",
+    "summary": "Create a WAF exclusion filter",
+    "request_description": "The definition of the new WAF exclusion filter.",
+    "request_schema_description": "Request object for creating a single WAF exclusion filter."
+  },
+  "DeleteApplicationSecurityWafExclusionFilter": {
+    "description": "Delete a specific WAF exclusion filter using its identifier.",
+    "summary": "Delete a WAF exclusion filter"
+  },
+  "GetApplicationSecurityWafExclusionFilter": {
+    "description": "Retrieve a specific WAF exclusion filter using its identifier.",
+    "summary": "Get a WAF exclusion filter"
+  },
+  "UpdateApplicationSecurityWafExclusionFilter": {
+    "description": "Update a specific WAF exclusion filter using its identifier.\nReturns the exclusion filter object when the request is successful.",
+    "summary": "Update a WAF exclusion filter",
+    "request_description": "The exclusion filter to update.",
+    "request_schema_description": "Request object for updating a single WAF exclusion filter."
+  },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Cloud Security Management Threats Agent rules.",
     "summary": "Get all CSM Threats Agent rules"
@@ -1384,6 +1486,36 @@
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
+  },
+  "OrderRetentionFilters": {
+    "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
+    "summary": "Order RUM retention filters",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The list of RUM retention filter IDs along with their corresponding type to reorder.\nAll retention filter IDs should be included in the list created for a RUM application."
+  },
+  "ListRetentionFilters": {
+    "description": "Get the list of RUM retention filters for a RUM application.",
+    "summary": "Get all RUM retention filters"
+  },
+  "CreateRetentionFilter": {
+    "description": "Create a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Create a RUM retention filter",
+    "request_description": "The definition of the new RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to create."
+  },
+  "DeleteRetentionFilter": {
+    "description": "Delete a RUM retention filter for a RUM application.",
+    "summary": "Delete a RUM retention filter"
+  },
+  "GetRetentionFilter": {
+    "description": "Get a RUM retention filter for a RUM application.",
+    "summary": "Get a RUM retention filter"
+  },
+  "UpdateRetentionFilter": {
+    "description": "Update a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Update a RUM retention filter",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
     "description": "Delete an existing RUM application in your organization.",
@@ -1543,25 +1675,25 @@
   },
   "GetSignalNotificationRules": {
     "description": "Returns the list of notification rules for security signals.",
-    "summary": "Get the list of signal-based rules"
+    "summary": "Get the list of signal-based notification rules"
   },
   "CreateSignalNotificationRule": {
     "description": "Create a new notification rule for security signals and return the created rule.",
-    "summary": "Create a new signal-based rule",
+    "summary": "Create a new signal-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteSignalNotificationRule": {
     "description": "Delete a notification rule for security signals.",
-    "summary": "Delete a signal-based rule"
+    "summary": "Delete a signal-based notification rule"
   },
   "GetSignalNotificationRule": {
     "description": "Get the details of a notification rule for security signals.",
-    "summary": "Get details of a signal-based rule"
+    "summary": "Get details of a signal-based notification rule"
   },
   "PatchSignalNotificationRule": {
     "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
-    "summary": "Patch a signal-based rule",
+    "summary": "Patch a signal-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
@@ -1571,25 +1703,25 @@
   },
   "GetVulnerabilityNotificationRules": {
     "description": "Returns the list of notification rules for security vulnerabilities.",
-    "summary": "Get the list of vulnerability-based rules"
+    "summary": "Get the list of vulnerability notification rules"
   },
   "CreateVulnerabilityNotificationRule": {
     "description": "Create a new notification rule for security vulnerabilities and return the created rule.",
-    "summary": "Create a new vulnerability-based rule",
+    "summary": "Create a new vulnerability-based notification rule",
     "request_description": "The body of the create notification rule request is composed of the rule type and the rule attributes:\nthe rule name, the selectors, the notification targets, and the rule enabled status.\n",
     "request_schema_description": "Body of the notification rule create request."
   },
   "DeleteVulnerabilityNotificationRule": {
     "description": "Delete a notification rule for security vulnerabilities.",
-    "summary": "Delete a vulnerability-based rule"
+    "summary": "Delete a vulnerability-based notification rule"
   },
   "GetVulnerabilityNotificationRule": {
     "description": "Get the details of a notification rule for security vulnerabilities.",
-    "summary": "Get details of a vulnerability-based rule"
+    "summary": "Get details of a vulnerability notification rule"
   },
   "PatchVulnerabilityNotificationRule": {
     "description": "Partially update the notification rule. All fields are optional; if a field is not provided, it is not updated.",
-    "summary": "Patch a vulnerability-based rule",
+    "summary": "Patch a vulnerability-based notification rule",
     "request_description": "",
     "request_schema_description": "Body of the notification rule patch request."
   },
@@ -1716,6 +1848,10 @@
     "summary": "Test an existing rule",
     "request_description": "",
     "request_schema_description": "Test the rule queries of a rule (rule property is ignored when applied to an existing rule)"
+  },
+  "GetRuleVersionHistory": {
+    "description": "Get a rule's version history.",
+    "summary": "Get a rule's version history"
   },
   "ListSecurityMonitoringSignals": {
     "description": "The list endpoint returns security signals that match a search query.\nBoth this endpoint and the POST endpoint can be used interchangeably when listing\nsecurity signals.",
@@ -2128,6 +2264,26 @@
   "GetUserMemberships": {
     "description": "Get a list of memberships for a user",
     "summary": "Get user memberships"
+  },
+  "CreateWorkflow": {
+    "description": "Create a new workflow, returning the workflow ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Create a Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for creating a new workflow."
+  },
+  "DeleteWorkflow": {
+    "description": "Delete a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Delete an existing Workflow"
+  },
+  "GetWorkflow": {
+    "description": "Get a workflow by ID.  This API requires an application key scoped with the `workflows_read` permission.",
+    "summary": "Get an existing Workflow"
+  },
+  "UpdateWorkflow": {
+    "description": "Update a workflow by ID. This API requires an application key scoped with the `workflows_write` permission.",
+    "summary": "Update an existing Workflow",
+    "request_description": "",
+    "request_schema_description": "A request object for updating an existing workflow."
   },
   "ListWorkflowInstances": {
     "description": "List all instances of a given workflow. This API requires an application key scoped with the workflows_read permission.",

@@ -31,7 +31,7 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
@@ -41,7 +41,7 @@ For an Ubuntu host:
 
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /tracing/service_catalog/
+[5]: /tracing/software_catalog/
 [7]: https://github.com/DataDog/dd-trace-java/releases
 [8]: https://github.com/DataDog/dd-trace-js/releases
 [9]: https://github.com/DataDog/dd-trace-py/releases
@@ -56,7 +56,7 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -78,7 +78,7 @@ For a Docker Linux container:
 4. [Explore the performance observability of your services in Datadog][6].
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /tracing/service_catalog/
+[6]: /tracing/software_catalog/
 
 {{% /tab %}}
 
@@ -136,6 +136,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
              dotnet: "3"
              python: "2"
              js: "5"
+             php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -176,6 +177,7 @@ To enable Single Step Instrumentation with Helm:
             dotnet: "3"
             python: "2"
             js: "5"
+            php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -201,7 +203,7 @@ To enable Single Step Instrumentation with Helm:
 {{% /tab %}}
 {{< /tabs >}}
 
-After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Service Catalog][3].
+After you complete these steps, you may want to enable [runtime metrics][2] or view observability data from your application in the [Software Catalog][3].
 
 ## Advanced options
 
@@ -212,7 +214,7 @@ When you run the one-line installation command, there are a few options to custo
 
 ### `DD_APM_INSTRUMENTATION_LIBRARIES` - customizing APM libraries
 
-By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
+By default, Java, Python, Ruby, Node.js, PHP and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
 
 Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 
@@ -228,6 +230,7 @@ Available versions are listed in source repositories for each language:
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+- [PHP][13] (`php`)
 
 
 [2]: /agent/remote_config
@@ -237,6 +240,7 @@ Available versions are listed in source repositories for each language:
 [10]: https://github.com/DataDog/dd-trace-py/releases
 [11]: https://github.com/DataDog/dd-trace-dotnet/releases
 [12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
 
 {{% /tab %}}
 
@@ -261,6 +265,7 @@ Available versions are listed in source repositories for each language:
 - [Python][10] (`python`)
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
+- [PHP][13] (`php`)
 
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
@@ -270,6 +275,7 @@ Available versions are listed in source repositories for each language:
 [10]: https://github.com/DataDog/dd-trace-py/releases
 [11]: https://github.com/DataDog/dd-trace-dotnet/releases
 [12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-php/releases
 
 {{% /tab %}}
 
@@ -359,14 +365,16 @@ To automatically instrument applications in specific pods, add the appropriate l
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
 | Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| PHP        | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`   |
 
 Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
 
-- [Java][31]
-- [Node.js][32]
-- [Python][33]
-- [.NET][34]
-- [Ruby][35]
+- [Java][34]
+- [Node.js][35]
+- [Python][36]
+- [.NET][37]
+- [Ruby][38]
+- [PHP][39]
 
 <div class="alert alert-warning">Exercise caution when using the <code>latest</code> tag, as major library releases may introduce breaking changes.</div>
 
@@ -440,12 +448,13 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
+| PHP        | [gcr.io/datadoghq/dd-lib-php-init][30] | [hub.docker.com/r/datadog/dd-lib-php-init][31] | [gallery.ecr.aws/datadog/dd-lib-php-init][32] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
 You can pull the tracing library from a different registry by changing it to `docker.io/datadog`, `public.ecr.aws/datadog`, or another URL if you are hosting the images in a local container registry.
 
-For instructions on changing your container registry, see [Changing Your Container Registry][30].
+For instructions on changing your container registry, see [Changing Your Container Registry][33].
 
 [1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/
@@ -468,12 +477,16 @@ For instructions on changing your container registry, see [Changing Your Contain
 [27]: http://gcr.io/datadoghq/dd-lib-ruby-init
 [28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
 [29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
-[30]: /containers/guide/changing_container_registry/
-[31]: https://github.com/DataDog/dd-trace-java/releases
-[32]: https://github.com/DataDog/dd-trace-js/releases
-[33]: https://github.com/DataDog/dd-trace-py/releases
-[34]: https://github.com/DataDog/dd-trace-dotnet/releases
-[35]: https://github.com/DataDog/dd-trace-rb/releases
+[30]: http://gcr.io/datadoghq/dd-lib-php-init
+[31]: http://hub.docker.com/r/datadog/dd-lib-php-init
+[32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
+[33]: /containers/guide/changing_container_registry/
+[34]: https://github.com/DataDog/dd-trace-java/releases
+[35]: https://github.com/DataDog/dd-trace-js/releases
+[36]: https://github.com/DataDog/dd-trace-py/releases
+[37]: https://github.com/DataDog/dd-trace-dotnet/releases
+[38]: https://github.com/DataDog/dd-trace-rb/releases
+[39]: https://github.com/DataDog/dd-trace-php/releases
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -609,7 +622,7 @@ Single Step Instrumentation automatically disables when it detects [custom instr
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /tracing/metrics/runtime_metrics/
-[3]: /tracing/service_catalog/
+[3]: /tracing/software_catalog/
 [4]: /tracing/glossary/#instrumentation
 [5]: /containers/cluster_agent/admission_controller/
 [6]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility

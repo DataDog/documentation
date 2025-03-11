@@ -5,7 +5,7 @@ aliases:
   - /security/application_security/guide/automate_risk_reduction_sca/
 ---
 
-Datadog Software Composition Analysis (SCA) enables you to identify, prioritize, and resolve vulnerabilities and other risks in the third-party, open source software (OSS) libraries used in your application services.
+Datadog Software Composition Analysis (SCA) enables you to identify, prioritize, and resolve vulnerabilities and other risks in the third-party, open source software (OSS) libraries used in your repositories and application services.
 
 This topic describes how to use SCA to view and resolve vulnerabilities and risks in your open source libraries.
 
@@ -22,18 +22,18 @@ SCA addresses the following risks associated with open source libraries:
 
 Datadog SCA helps automate risk reduction processes, enhancing productivity in the following ways:
 
-- **Integration across development lifecycle:** Analyzes open source and third-party components, providing a detailed library catalog.
+- **Integration across development lifecycle:** Analyzes open source and third-party components from development to production, providing a detailed library inventory.
 - **Continuous evaluation:** Offers real-time visibility into deployed services, enhancing the security posture by enabling prioritization of vulnerabilities in sensitive environments.
 - **Collaboration:** Breaks down silos and involves more teams in security (DevOps, Operations, SREs), fostering a culture of collaboration.
 
 
 ## View the libraries used in your services
 
-The Libraries catalog displays the libraries and versions used across your services. 
+The Libraries inventory displays the libraries and versions used across your services and repositories. 
 
-The catalog surfaces all library details using several public data sources (GuardDog, NIST, osv.dev, OpenSSF scores, etc.) and private data sources (including Datadog’s Security Research group). 
+The inventory surfaces all library details using several public data sources (such as GuardDog, NIST, osv.dev, and OpenSSF scores) and private data sources (including Datadog’s Security Research group). 
 
-To use the Libraries catalog, see [Libraries][1] or select **Security > Code Security > Vulnerabilities**, and then select **Libraries**.
+To use the Libraries inventory, see [Libraries][1] or select **Security > Code Security**, and then select **Libraries**.
 
 In **Libraries**, you can:
 
@@ -46,7 +46,7 @@ In **Libraries**, you can:
 
 ## View vulnerabilities and risks in libraries
 
-In the **Vulnerabilities** explorer, you can view the vulnerabilities and risks for the libraries you are using.
+In the **Vulnerabilities** explorer, you can view the vulnerabilities for the libraries you are using.
 
 ### Library vulnerabilities
 
@@ -66,7 +66,7 @@ In **Libraries**, you can:
   - Severity breakdown
   - Remediation steps
 
-### Library risks
+<!-- ### Library risks
 
 A library's risks are a group of weaknesses that are not directly tied to security. For example, the library is deprecated, the licensing of the project is too restrictive, or the team follows poor security practices.
 
@@ -80,7 +80,7 @@ In **Libraries**, you can:
   - Service and environment
   - First and last detection
   - Window of exposure
-  - Severity breakdown
+  - Severity breakdown -->
 
 
 ## Best practices to mitigate risks
