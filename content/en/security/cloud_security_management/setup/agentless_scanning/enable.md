@@ -1,5 +1,12 @@
 ---
 title: Enabling Agentless Scanning
+aliases:
+  - /security/cloud_security_management/setup/agentless_scanning/quick_start
+  - /security/cloud_security_management/setup/agentless_scanning/cloudformation
+  - /security/cloud_security_management/setup/agentless_scanning/terraform
+  - /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
+  - /security/cloud_security_management/guide/agentless_aws_integration
+  - /security/cloud_security_management/guide/agentless_terraform
 further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"

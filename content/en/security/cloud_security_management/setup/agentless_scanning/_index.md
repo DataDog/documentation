@@ -2,12 +2,6 @@
 title: Cloud Security Management Agentless Scanning
 aliases:
   - /security/agentless_scanning
-  - /security/cloud_security_management/setup/agentless_scanning/quick_start
-  - /security/cloud_security_management/setup/agentless_scanning/cloudformation
-  - /security/cloud_security_management/setup/agentless_scanning/terraform
-  - /security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
-  - /security/cloud_security_management/guide/agentless_aws_integration
-  - /security/cloud_security_management/guide/agentless_terraform
   - /security/cloud_security_management/agentless_scanning
 further_reading:
   - link: "https://www.datadoghq.com/blog/agentless-scanning/"
