@@ -144,4 +144,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [20]: /agent
 [21]: https://github.com/actions/actions-runner-controller
 [22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
-[23]: /continuous_integration/guides/use_ai_generated_errors/
+[23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

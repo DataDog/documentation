@@ -449,4 +449,4 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [25]: /glossary/#custom-span
 [26]: /continuous_integration/explorer
 [27]: /continuous_integration/search/#search-for-pipelines
-[28]: /continuous_integration/guides/use_ai_generated_errors/
+[28]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
