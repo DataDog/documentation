@@ -126,7 +126,7 @@ Each tracer implementation provides additional configuration options specific to
 {{< programming-lang lang="nodejs" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 
 - SNS
 - SQS
@@ -148,12 +148,13 @@ The Node.js tracer applies redaction rules on a per-service basis. For example:
 {{< programming-lang lang="python" >}}
 ### Supported services
 
-The following services are supported:
+The following services are supported by default:
 - SNS
 - SQS
 - Kinesis
 - S3
 - EventBridge
+- DynamoDB
 
 #### Configure services
 
@@ -161,13 +162,13 @@ To enable tag extraction for additional services, use this environment variable:
 
 ```sh
 # Default values
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,dynamodb
 ```
 
 Add services by appending to the comma-separated list. For example, to add support for AWS Amplify:
 
 ```sh
-DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,amplify
+DD_TRACE_CLOUD_PAYLOAD_TAGGING_SERVICES=s3,sns,sqs,kinesis,eventbridge,dynamodb,amplify
 ```
 
 <div class="alert alert-warning">
