@@ -1,5 +1,5 @@
 ---
-title: Use CI jobs failure analysis to identify the root cause of your failed CI Jobs
+title: Use CI jobs failure analysis to identify the most common root cause in your failed CI jobs
 description: Learn how to use CI jobs failure analysis to identify the most common root cause of failure in your CI pipelines.
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
