@@ -2,8 +2,8 @@
 title: Reglas de análisis estático
 description: Consulta reglas de varios lenguajes para el análisis estático.
 aliases:
-- /continuous_integration/static_analysis/rules
-- /static_analysis/rules
+- /es/continuous_integration/static_analysis/rules
+- /es/static_analysis/rules
 is_beta: false
 type: static-analysis
 rulesets:

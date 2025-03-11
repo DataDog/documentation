@@ -21,7 +21,8 @@ For a list of supported services, see the [Library Compatibility Requirements][5
 | Critical | Code Injection                        | FALSE | FALSE | TRUE    | FALSE  |
 | Critical | Command Injection                     | TRUE  | TRUE  | TRUE    | TRUE   |
 | High     | LDAP Injection                        | TRUE  | TRUE  | TRUE    | FALSE  |
-| High     | Hardcoded Secrets                     | TRUE  | TRUE  | TRUE    | FALSE  |
+| High     | Email HTML Injection                  | TRUE  | TRUE  | TRUE    | FALSE  |
+| High     | Hardcoded Secrets                     | TRUE  | TRUE  | FALSE   | FALSE  |
 | High     | Hardcoded Passwords                   | FALSE | FALSE | TRUE    | FALSE  |
 | High     | Path Traversal                        | TRUE  | TRUE  | TRUE    | TRUE   |
 | High     | Trust Boundary Violation              | TRUE  | TRUE  | FALSE   | FALSE  |

@@ -32,7 +32,7 @@ further_reading:
 - [Application Security Management (ASM)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
-- [Quality Gates](#quality-gates)
+- [Quality Gates](#quality-gates-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
@@ -138,7 +138,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### Quality Gates events
 | Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
-|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|                              |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | [Quality gates rule][37]        | A user has created, modified, or deleted a quality gate rule. | `@evt.name:"Quality Gates" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
 ### Cloud Security Platform events
