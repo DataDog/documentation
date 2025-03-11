@@ -1,5 +1,7 @@
 ---
 title: Instrument Your Applications
+aliases:
+    - /opentelemetry/guide/otel_api_tracing_interoperability
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/instrumentation/'
       text: 'OpenTelemetry Instrumentation'
