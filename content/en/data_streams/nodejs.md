@@ -36,11 +36,6 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Monitoring connectors
-
-#### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
-
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
@@ -52,6 +47,11 @@ There are no message attributes in Kinesis to propagate context and track a mess
 
 ### Manual instrumentation
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][7].
+
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
 
 ## Further reading
 

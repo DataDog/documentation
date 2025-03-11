@@ -12,8 +12,10 @@ Data Streams Monitoring can automatically discover your [Confluent Cloud][101] c
    Under **Actions**, a list of resources populates with detected clusters and connectors. Datadog attempts to discover new connectors every time you view this integration tile.
 1. Select the resources you want to add.
 1. Click **Add Resources**.
+1. Navigate to [Data Streams Monitoring][103] to visualize the connectors and track connector status and throughput.
 
 
 
 [101]: https://www.confluent.io/confluent-cloud/
 [102]: https://app.datadoghq.com/integrations/confluent-cloud
+[103]: https://app.datadoghq.com/data-streams/

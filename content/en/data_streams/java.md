@@ -54,17 +54,6 @@ To set up Data Streams Monitoring from the Datadog UI without needing to restart
 
 {{< img src="data_streams/enable_dsm_software_catalog.png" alt="Enable the Data Streams Monitoring from the Dependencies section of the APM Service Page" >}}
 
-### Monitoring connectors
-
-#### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
-
-#### Self-hosted Kafka connectors
-
-<div class="alert alert-info">This feature is in Preview.</div>
-
-Data Streams Monitoring can collect information from your self-hosted Kafka connectors. In Datadog, these connectors are shown as services connected to Kafka topics. Datadog collects throughput to and from all Kafka topics. Datadog does not collect connector status or sinks and sources from self-hosted Kafka connectors.
-
 ##### Setup
 
 Use Datadog's Java tracer, [`dd-trace-java`][6], to collect information from your Kafka Connect workers.
@@ -105,6 +94,17 @@ There are no message attributes in Kinesis to propagate context and track a mess
 
 ### Manual instrumentation
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][5].
+
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+#### Self-hosted Kafka connectors
+
+<div class="alert alert-info">This feature is in Preview.</div>
+
+Data Streams Monitoring can collect information from your self-hosted Kafka connectors. In Datadog, these connectors are shown as services connected to Kafka topics. Datadog collects throughput to and from all Kafka topics. Datadog does not collect connector status or sinks and sources from self-hosted Kafka connectors.
 
 ## Further reading
 

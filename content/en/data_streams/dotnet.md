@@ -31,16 +31,16 @@ environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
 
-### Monitoring connectors
-
-#### Confluent Cloud connectors
-{{% dsm_confluent_connectors %}}
-
 ### Monitoring SQS pipelines
 Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][9].
+
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
 
 ## Further reading
 
