@@ -22,7 +22,7 @@ CI Visibility leverages OpenAI to generate enhanced error messages and categoriz
 
 #### Domains and Subdomains of AI-generated errors
 
-Errors are categorized with a domain and subdomain using AI.
+Errors are categorized with a domain and subdomain using AI:
 
 ##### Domains
 
@@ -39,8 +39,6 @@ Click on a domain tab to see the correspondent subdomains:
 {{< tabs >}}
 {{% tab "code" %}}
 
-Failures that are caused by the code that is being built and tested in the CI pipeline, and they should be fixed by the developer that launched the CI pipeline.
-
 | Subdomain | Description                                     | Examples                                                                                                                   |
 |-----------|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
 | build     | Failures caused by compilation or build errors. | `Compilation error in processor_test.go:28:50`                                                                             |
@@ -50,8 +48,6 @@ Failures that are caused by the code that is being built and tested in the CI pi
 
 {{% /tab %}}
 {{% tab "platform" %}}
-
-Failures that are not cause by the code that is being built and tested. These failures can come from the CI provider itself or they could be caused by external dependencies.
 
 | Subdomain      | Description                                                                                         | Examples                                                                                                                                              |
 |----------------|-----------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -77,6 +73,8 @@ Failures that are not cause by the code that is being built and tested. These fa
 {{< /tabs >}}
 
 ### Supported CI providers
+
+AI-generated errors are available for the following CI providers:
 
 * [GitHub Actions][1]
 * [GitLab][2]
