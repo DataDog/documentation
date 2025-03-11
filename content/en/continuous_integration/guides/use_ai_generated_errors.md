@@ -103,14 +103,14 @@ Notice that these facets are only available using the `ci_level:job` in your que
 
 ### Using the dashboard template
 
-You can also import the CI Visibility - Job Errors dashboard template:
+You can also import the CI Visibility - AI-generated Job Errors dashboard template:
 
-- Open the civisibility-job-errors-dashboard.json dashboard template and copy the content in the clipboard.
-- Create a New Dashboard in Datadog.
+- Open the [civisibility-ai-gen-job-errors-dashboard.json][4] dashboard template and copy the content in the clipboard.
+- Create a [New Dashboard][5] in Datadog.
 - Paste the copied content in the new dashboard.
 - Save the dashboard.
 
-TBD
+{{< img src="continuous_integration/civis_ai_gen_errors_dashboard.png" alt="AI generated errors dashboard" width="90%">}}
 
 ## How AI-generated errors are created?
 
@@ -141,3 +141,5 @@ Notice that OpenAI can categorize errors with similar messages with different su
 [1]:/continuous_integration/pipelines/github/
 [2]:/continuous_integration/pipelines/gitlab/
 [3]:/ci/pipelines/health/
+[4]:/resources/json/civisibility-ai-gen-job-errors-dashboard.json
+[5]:/dashboards/
