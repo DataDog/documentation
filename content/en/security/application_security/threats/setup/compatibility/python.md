@@ -66,10 +66,10 @@ And the library supports the following runtimes:
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
-| Django    | 1.8   |  {{< X >}} | {{< X >}}  |
-| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
+| Django    | 2.2   |  {{< X >}} | {{< X >}}  |
+| FastAPI   | 0.86  |  {{< X >}} | {{< X >}}  |
+| Flask     | 1.1   |  {{< X >}} | {{< X >}}  |
 
-Support for query strings is not available for Flask.
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

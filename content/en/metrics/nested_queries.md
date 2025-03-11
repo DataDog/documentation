@@ -249,7 +249,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 {{% collapse-content title="is_less() example query" level="h5" %}}
-`is_less()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+`is_less()` returns 1.0 for each point where the query is less than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}

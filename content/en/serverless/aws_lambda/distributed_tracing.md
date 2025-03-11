@@ -125,9 +125,9 @@ This functionality is available for:
 - Python AWS Lambda functions instrumented with layer version 101 and above, and Python applications instrumented with [`dd-trace-py`][31] on version 2.16 and above.
 - Node.js AWS Lambda functions instrumented with layer version 118 and above, and Node.js applications instrumented with [`dd-trace-js`][32] on versions 4.53.0 and above or versions 5.29.0 and above.
 
-### DyanmoDB Change Stream Auto-linking
+### DynamoDB Change Stream Auto-linking
 
-For [DyanmoDB Change Streams][29], Span Auto-linking supports the following operations:
+For [DynamoDB Change Streams][29], Span Auto-linking supports the following operations:
 
 - `PutItem`
 - `UpdateItem`

@@ -26,7 +26,7 @@ There are additional [metrics and attributes that are specific to a given event 
 | View       | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `viewDidAppear(animated:)` and `viewDidDisappear(animated:)` callbacks on the `UIViewController` class are notified. Individual `UIViewControllers` are classified as distinct views. While a user stays on a view, RUM event attributes (Errors, Resources, Actions) get attached to the view with a unique `view.id`.                           |
 | Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                       |
 | Error      | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                                                                        |
-| Action     | 30 days   | An action represents user activity in your mobile application (for example, application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][7].                                                                                                                                                 |
+| Action     | 30 days   | An action represents user activity in your mobile application (for example, application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in. When an action is being tracked, other actions within the next `100 ms` do not get sent, unless they are [custom actions][1].                                                                                                                                                 |
 | Long Task | 15 days | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold. |
 
 
@@ -40,11 +40,23 @@ During initialization, the RUM iOS SDK creates a view called "ApplicationLaunch"
 
 The ApplicationLaunch view includes any logs, actions, and resources created before your first call to `startView`. Use the duration of this view to determine time to first view. This view has an action, `application_start`, with a duration equal to the amount of time from process start until the call to `applicationDidBecomeActive`.
 
-In cases where iOS decides to [prewarm your application][4], the ApplicationLaunch view instead starts when the RUM iOS SDK is initialized, and the `application_start` event does not have a duration.
+In cases where iOS decides to [prewarm your application][2], the ApplicationLaunch view instead starts when the RUM iOS SDK is initialized, and the `application_start` event does not have a duration.
+
+## Views instrumentation versus app lifecycle
+
+RUM integrates seamlessly with `UIKit` and `SwiftUI` views and also provides APIs for manual view tracking. The timing of when a view starts and ends depends on the type of instrumentation used:
+
+**UIKit Views**: When [automatically tracking UIKit views][3] using `UIKitRUMViewsPredicate`, RUM starts the view at the `viewDidAppear(animated:)` event of the `UIViewController` lifecycle. The view is stopped at `viewDidDisappear(animated:)`.
+**SwiftUI Views**: When [tracking SwiftUI views][4] with the `.trackRUMView(name:)` view modifier, RUM starts the view at the `onAppear(perform:)` callback and stops it at `onDisappear(perform:)`.
+**Manual View Tracking**: When tracking views manually using `RUMMonitor` APIs, the view starts precisely when you call the `startView(...)` method and stops when you call the `stopView()` method.
+
+When the application leaves the foreground, RUM automatically stops the current view, leaving no active view. Since RUM's data model requires an active view to track other events, by default, all events tracked in the background are skipped due to the absence of a view. To capture these events instead, see the [Track Background Events][5].
+
+**Note**: If you're tracking views manually, you need to decide on your own whether the view should be stopped when the app leaves the foreground.
 
 ## Default attributes
 
-RUM collects common attributes for all events and attributes specific to each event by default listed below. You can also choose to enrich your user session data with [additional events][1] to default events specific to your application monitoring and business analytics needs.
+RUM collects common attributes for all events and attributes specific to each event by default listed below. You can also choose to enrich your user session data with [additional events][6] to default events specific to your application monitoring and business analytics needs.
 
 
 ### Common core attributes
@@ -53,7 +65,7 @@ RUM collects common attributes for all events and attributes specific to each ev
 |------------------|---------|------------------------------------------------------------------------------------|
 | `date`           | integer | Start of the event in milliseconds from epoch.                                               |
 | `type`           | string  | The type of the event (for example, `view` or `resource`).                         |
-| `service`        | string  | The [unified service name][2] for this application used to corelate user sessions. |
+| `service`        | string  | The [unified service name][7] for this application used to corelate user sessions. |
 | `application.id` | string  | The Datadog application ID.                                                        |
 | `application.name` | string  | The Datadog application name.                                                        |
 
@@ -96,7 +108,7 @@ The following OS-related attributes are attached automatically to all events col
 
 The below attributes are related to the geo-location of IP addresses.
 
-**Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][6].
+**Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][8].
 
 | Attribute name                     | Type   | Description                                                                                                                               |
 |------------------------------------|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -110,7 +122,7 @@ The below attributes are related to the geo-location of IP addresses.
 
 ### Global user attributes
 
-You can enable [tracking user info][2] globally to collect and apply user attributes to all RUM events.
+You can enable [tracking user info][7] globally to collect and apply user attributes to all RUM events.
 
 | Attribute name | Type   | Description             |
 |----------------|--------|-------------------------|
@@ -145,7 +157,7 @@ You can enable [tracking user info][2] globally to collect and apply user attrib
 | `session.initial_view.name` | string | Name of the initial view of the session.                                    |
 | `session.last_view.url`      | string | URL of the last view of the session.                                        |
 | `session.last_view.name`     | string | Name of the last view of the session.                                       |
-| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][5]. |
+| `session.ip`                 | string | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][9]. |
 | `session.useragent`          | string | System user agent info to interpret device info.                            |
 
 
@@ -169,7 +181,9 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.id`      | string | Unique ID of the initial view corresponding to the event.  |
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
 | `view.name`    | string | Customizable name of the view corresponding to the event.       |
-
+| `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
+| `view.network_settled_time` | number (ns) | Time it ook for a view to be fully initiated at the start of the view. | 
+| `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
 
 ### Resource metrics
 
@@ -248,16 +262,19 @@ Network errors include information about failing HTTP requests. The following fa
 
 ## Data Storage
 
-Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][3], which can't be read by any other app installed on the device.
+Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#track-user-sessions
-[3]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[4]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
-[5]: /data_security/real_user_monitoring/#ip-address
-[6]: /data_security/real_user_monitoring/#geolocation
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#custom-actions
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/#custom-actions
+[2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-views
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup/?tab=swiftpackagemanagerspm#instrument-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#track-background-events
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#enrich-user-sessions
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/advanced_configuration/#track-user-sessions
+[8]: /data_security/real_user_monitoring/#geolocation
+[9]: /data_security/real_user_monitoring/#ip-address
+[10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

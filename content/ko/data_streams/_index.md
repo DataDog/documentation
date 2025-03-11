@@ -21,6 +21,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
   tag: 블로그
   text: 데이터 스트림 모니터링으로 SQS 모니터링
+- link: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
+  tag: 블로그
+  text: Confluent Cloud 커넥터를 자동 탐지하고 데이터 스트림 모니터링에서 쉽게 성능 모니터링하기
 title: 데이터 스트림 모니터링
 ---
 
@@ -47,10 +50,10 @@ title: 데이터 스트림 모니터링
 | 런타임 | 지원되는 기술 |
 |---|----|
 | 자바(Java)/Scala | Kafka(자체 호스팅됨, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| 파이썬(Python) | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
+| Python | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
 | .NET | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
 | Node.js | Kafka(자체 호스팅, Amazon MSK, Confluent Cloud/플랫폼), RabbitMQ, Amazon SQS |
-| 고(Go) | 전체([수동 계측 포함][1]) |
+| Go | 전체([수동 계측 포함][1]) |
 
 ## 데이터 스트림 모니터링 살펴보기
 

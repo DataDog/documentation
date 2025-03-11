@@ -25,7 +25,9 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
+</div>
 {{< /site-region >}}
 
 ## Overview
@@ -49,7 +51,7 @@ Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
 
 Detect vulnerabilities continuously
-: Scan recent updates and newly published CVEs, across running container images, hosts, host images, and serverless, and identify vulnerable container image layers.
+: Scan recent updates and newly published CVEs, across running container images from hosts and registries, host, host images, and serverless, and identify vulnerable container image layers.
 
 Prioritize exploitable vulnerabilities, using runtime observability
 : Leverage Datadog's security scoring, which is based on CVSS, by incorporating intel from CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and privileged access.
@@ -87,7 +89,7 @@ Use these tables to decide which solution to start with:
 | Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux                                         | Linux, Windows                 |
 | Serverless                                | AWS Lambda                                    | Not applicable                 |
-| Container registries                      | [Amazon ECR (Preview)][16]                    | Not applicable                 |
+| Container registries                      | Amazon ECR                                    | Not applicable                 |
 
 For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -131,10 +133,10 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
-[5]: /security/application_security/software_composition_analysis/
+[5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-[10]: /security/application_security/code_security/
+[10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
