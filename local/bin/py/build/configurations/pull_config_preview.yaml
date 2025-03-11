@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: joepeeples/sci-github-update-flow
+          branch: prod
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
