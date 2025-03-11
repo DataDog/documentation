@@ -28,6 +28,9 @@ further_reading:
 - link: "/data_streams/"
   tag: "Documentation"
   text: "Data Streams Monitoring"
+- link: "https://www.datadoghq.com/blog/change-tracking/"
+  tag: "Blog"
+  text: "Unify visibility into changes to your services and dependencies"
 ---
 
 ## Overview
@@ -39,6 +42,7 @@ Change Tracking streamlines troubleshooting and incident response by surfacing r
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
 - Feature Flags
+- Configuration Changes
 - Database Modifications
 - Schema Changes
 - Scale Adjustments
@@ -112,18 +116,21 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
 
-| Change Type | Tracking Requirements |
-| ----------- | ----------- |
-| Code Deployments (APM) | APM & [Deployment Tracking][4]. A version must be available on the service.
-| Kubernetes Deployment Manifest Updates | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)
-| LaunchDarkly Feature Flag Events (service tag must be defined on event) | Third Party Datadog Integrations ([LaunchDarkly only][5])
-| Custom Feature Flag Events | [Event Management API][6]
-| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.). | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.
-| CrashLoopBackOff Kubernetes Pod Crashes | Kubernetes Integration (Add service label to kubernetes yaml file if possible)
-| PostgreSQL Database Table Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
-| PostgreSQL Database Settings Change | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]
-|  Kafka Schema Updates | [Data Streams Monitoring (DSM)][9]
-| Manual Kubernetes Deployment Scale Events | Kubernetes Audit Logging
+| Change Type                                                                       | Tracking Requirements                                                                          |
+|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Code Deployments (APM)                                                            | APM & [Deployment Tracking][4]. A version must be available on the service.                    |
+| Kubernetes Deployment Manifest Updates                                            | Datadog Agent Set Up for Kubernetes (Add service label to kubernetes yaml file if possible)    |
+| LaunchDarkly Feature Flag Events (service tag must be defined on event)           | Third Party Datadog Integrations ([LaunchDarkly only][5])                                      |
+| Custom Feature Flag Events                                                        | [Event Management API][6]                                                                      |
+| Custom Configuration Change Events                                                | [Event Management API][6]                                                                      |
+| Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts. |
+| CrashLoopBackOff Kubernetes Pod Crashes                                           | Kubernetes Integration (Add service label to kubernetes yaml file if possible)                 |
+| PostgreSQL Database Table Change                                                  | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| PostgreSQL Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| SQL Server Database Table Change                                                  | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| SQL Server Database Settings Change                                               | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10]                 |
+| Kafka Schema Updates                                                              | [Data Streams Monitoring (DSM)][9]                                                             |
+| Manual Kubernetes Deployment Scale Events                                         | Kubernetes Audit Logging                                                                       |
 
 ### Optional enrichment for feature flag changes
 Change Tracking offers an optional way to enhance visibility into feature flag changes by automatically detecting affected services when tracing is set up for the feature flag client. This enhancement enables faster and more precise root cause analysis, especially when feature flag changes impact multiple services.

@@ -2,7 +2,7 @@
 algolia:
   tags:
   - asm
-  - seguridad de las aplicaciones
+  - application security
 aliases:
 - /es/security_platform/application_security
 - /es/security/application_security/enabling/single_step
@@ -18,7 +18,7 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentación
   text: Gestión de amenazas
-- link: /security/application_security/software_composition_analysis/
+- link: /security/code_security/software_composition_analysis/
   tag: Documentación
   text: Análisis de la composición del software
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
@@ -86,13 +86,10 @@ Para empezar a configurar tu entorno para detectar y proteger amenazas con ASM, 
 
 En el [Security Signals Explorer][6], haz clic en cualquier señal de seguridad para ver qué ha sucedido y qué pasos se sugieren para mitigar el ataque. En el mismo panel, consulta trazas con sus flujos de ataque correlacionados y solicita información para disponer de un mayor contexto.
 
-## Investigar riesgos introducidos en bibliotecas y dependencias de código abierto anteriores
+## Desactivar ASM
+Para obtener información sobre cómo desactivar ASM o sus funciones, consulta lo siguiente:
 
-El [Análisis de composición del software (SCA)][8] te muestra cuándo están en riesgo tus servicios ya que utiliza o tiene dependencias de bibliotecas de código abierto que tienen vulnerabilidades conocidas. Investiga los hallazgos sobre vulnerabilidades y protege tu software siguiendo los consejos de corrección o investigando la causa de la vulnerabilidad.
-
-## Detectar vulnerabilidades en el código de tu aplicación
-
-[Code Security][9] identifica las vulnerabilidades a nivel de código en tus servicios y proporciona información práctica y correcciones recomendadas. Utiliza un enfoque de Application Security Testing (IAST) para encontrar vulnerabilidades en el código de tu aplicación. IAST utiliza la instrumentación incrustada en tu código como Application Performance Monitoring (APM) y permite a Datadog identificar vulnerabilidades utilizando tráfico legítimo de la aplicación en lugar de depender de pruebas externas que podrían requerir configuración adicionales o programación periódica.
+- [Desactivación de la gestión y protección frente a amenazas][10]
 
 ## Siguientes pasos
 
@@ -104,5 +101,8 @@ El [Análisis de composición del software (SCA)][8] te muestra cuándo están e
 [4]: /es/security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /es/security/application_security/software_composition_analysis/
-[9]: /es/security/application_security/code_security/
+[8]: /es/security/code_security/software_composition_analysis/
+[9]: /es/security/code_security/
+[10]: /es/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /es/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /es/security/application_security/troubleshooting/#disabling-code-security

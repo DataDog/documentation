@@ -13,7 +13,7 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: Postgres, MySQL, SQL Server, Oracle
+: Postgres, MySQL, SQL Server, Oracle, MongoDB
 
 Supported Agent versions
 : 7.46+
@@ -28,46 +28,47 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for Oracle applications.
 - `disabled` mode disables propagation and does not send any information from applications.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
-|:------------------------|:---------:|:-----------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} |
-| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |  MongoDB   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|:----------:|
+| `full`                  | {{< X >}} | {{< X >}} * | {{< X >}}  | {{< X >}} | {{< X >}}  |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} | {{< X >}}  |
 
 \* Full propagation mode on Aurora MySQL requires version 3.
 
 **Supported application tracers and drivers**
 
-| Language                                 | Library or Framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |
-|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |
-|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
-|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |
-|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |
-|                                          | [pg][8]                | {{< X >}} |           |                     |                     |
-|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
-|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
-|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
-|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
-|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
-|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
-|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
-|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
-| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
-|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
-|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
-|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |
-|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |
-|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |
-|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |
-|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |
-|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |
-|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |
-|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |
+| Language                                 | Library or Framework   | Postgres  |   MySQL   |     SQL Server      |       Oracle        |       MongoDB        |
+|:-----------------------------------------|:-----------------------|:---------:|:---------:|:-------------------:|:-------------------:|:--------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                        |           |           |                     |                     |                      |
+|                                          | [database/sql][4]      | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |                      |
+|                                          | [sqlx][5]              | {{< X >}} | {{< X >}} | `service` mode only | `service` mode only |                      |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                        |           |           |                     |                     |                      |
+|                                          | [jdbc][22]             | {{< X >}} | {{< X >}} | {{< X >}} **        | {{< X >}} ***       |                      |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                        |           |           |                     |                     |                      |
+|                                          | [pg][8]                | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |                      |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |                      |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |                      |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |                      |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |                      |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |                      |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |                      |
+| **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |                      |
+|                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |                      |
+|                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |                      |
+|                                          | [MySqlConnector][18] * |           | {{< X >}} |                     |                     |                      |
+|                                          | [System.Data.SqlClient][24] * |    |           | {{< X >}} **        |                     |                      |
+|                                          | [Microsoft.Data.SqlClient][32] * | |           | {{< X >}} **        |                     |                      |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                        |           |           |                     |                     |                      |
+|                                          | [pdo][20]              | {{< X >}} | {{< X >}} |                     |                     |                      |
+|                                          | [MySQLi][21]           |           | {{< X >}} |                     |                     |                      |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                        |           |           |                     |                     |                      |
+|                                          | [postgres][10]         | {{< X >}} |           |                     |                     |                      |
+|                                          | [mysql][13]            |           | {{< X >}} |                     |                     |                      |
+|                                          | [mysql2][14]           |           | {{< X >}} |                     |                     |                      |
+|                                          | [mongodb][33]          |           |           |                     |                     | {{< X >}} ****       |
 
 \* [CommandType.StoredProcedure][25] not supported
 
@@ -85,6 +86,10 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
   - The instrumentation overwrites `V$SESSION.ACTION`.
   - Prerequisite: Java tracer 1.45 or greater
 
+\*\*\*\* Service/Full mode MongoDB for Node.js:
+  - Prerequisite:
+    - Node.js tracer 5.37.0 or greater
+
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
 
@@ -92,6 +97,12 @@ For the best user experience, ensure the following environment variables are set
 DD_SERVICE=(application name)
 DD_ENV=(application environment)
 DD_VERSION=(application version)
+```
+
+Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for Agent versions `7.63` and higher. Add the following parameter in the `apm_config` section of your APM Agent configuration file:
+
+```
+  sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
 {{< tabs >}}
@@ -208,7 +219,7 @@ Enable the prepared statements tracing for Postgres using **one** of the followi
 - Set the system property `dd.dbm.trace_prepared_statements=true`
 - Set the environment variable `export DD_DBM_TRACE_PREPARED_STATEMENTS=true`
 
-**Note**: The prepared statements instrumentation overwrites the `Application` property and causes an extra roundtrip to the database. This additional roundtrip has a negligible impact on latency.
+**Note**: The prepared statements instrumentation overwrites the `Application` property, leading to an extra round trip to the database. While this has a negligible impact on latency, the overwritten property inflates metrics aggregated by application name.
 
 **Tracer versions below 1.44**:
 Prepared statements are not supported in `full` mode for Postgres and MySQL, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
@@ -431,7 +442,7 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Service Catalog][26] to open a details panel, then click **View Service Page** in the panel.
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Software Catalog][26] to open a details panel, then click **View Service Page** in the panel.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
@@ -475,3 +486,4 @@ View historical performance of similar queries to those executed in your trace, 
 [30]: https://pypi.org/project/mysqlclient/
 [31]: https://github.com/PyMySQL/PyMySQL
 [32]: https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace
+[33]: https://github.com/mongodb/node-mongodb-native

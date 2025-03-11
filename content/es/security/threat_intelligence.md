@@ -1,6 +1,6 @@
 ---
 aliases:
-- /security/threat_intel
+- /es/security/threat_intel
 description: Información sobre amenazas en Datadog
 further_reading:
 - link: /security/application_security/threats/threat-intelligence/

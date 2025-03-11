@@ -72,73 +72,13 @@ DDRUMMonitor *rum = [DDRUMMonitor shared];
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, filter the [relevant file on GitHub][9] for the `DDRUMMonitor` class.
-
-### Notify the SDK that your view finished loading
-
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime(override:)` method
-through the `RUMMonitor` instance. Call this method when your view is fully loaded and displayed to the user:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-@_spi(Experimental)
-import DatadogRUM
-
-func onHeroImageLoaded() {
-    let rum = RUMMonitor.shared()
-    rum.addViewLoadingTime(override: false)
-}
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-- (void)onHeroImageLoad {
-    [[DDRUMMonitor shared] addViewLoadingTimeWithOverride:NO | YES];
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-Use the `override` option to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-
-**Note**: This API is still experimental and might change in the future.
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.
-
-For example, you can time how long it takes for your hero image to appear:
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-func onHeroImageLoaded() {
-    let rum = RUMMonitor.shared()
-    rum.addTiming(name: "hero_image")
-}
-```
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-- (void)onHeroImageLoad {
-    [[DDRUMMonitor shared] addTimingWithName:@"hero_image"];
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
-
-To create visualizations in your dashboards, [create a measure][4] first.
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Actions
 
 In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
 
 For example:
 
@@ -169,9 +109,9 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Resources
 
@@ -221,11 +161,14 @@ rum.stopResource(
 
 **Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
-Find more details and available options in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
 
 ### Custom Errors
 
-To track specific errors, notify `RUMMonitor` when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][5].
+To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
+
+- `.addError(message:)`
+- `.addError(error:)`
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -241,11 +184,11 @@ rum.addError(message: "error message.")
 {{% /tab %}}
 {{< /tabs >}}
 
-For more details and available options, refer to the code documentation comments in the [`DDRUMMonitor` class][9].
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][7] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
+In addition to the [default RUM attributes][6] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
@@ -256,6 +199,8 @@ To set a custom global attribute, use `RUMMonitor.shared().addAttribute(forKey:v
 * To add an attribute, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<VALUE>")`.
 * To update the value, use `RUMMonitor.shared().addAttribute(forKey: "<KEY>", value: "<UPDATED_VALUE>")`.
 * To remove the key, use `RUMMonitor.shared().removeAttribute(forKey: "<KEY_TO_REMOVE>")`.
+
+For better performance in bulk operations (modifying multiple attributes at once), use `.addAttributes(_:)` and `.removeAttributes(forKeys:)`.
 
 **Note**: You can't create facets on custom attributes if you use spaces or special characters in your key names. For example, use `forKey: "store_id"` instead of `forKey: "Store ID"`.
 
@@ -277,13 +222,15 @@ The following attributes are **optional**, you should provide **at least one** o
 | `usr.id`    | String | Unique user identifier.                                                                                  |
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  
 
-To identify user sessions, use the `setUserInfo(id:name:email:)` API.
+To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
 
 For example:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+import DatadogCore
+
 Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 ```
 {{% /tab %}}
@@ -340,7 +287,7 @@ You can use the following properties in `Datadog.Configuration` when creating th
 : A proxy configuration attribute which can be used to enable a custom proxy for uploading tracked data to Datadog's intake.
 
 `serverDateProvider`
-: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][13]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
+: A custom NTP synchronization interface. By default, the Datadog SDK synchronizes with dedicated NTP pools provided by the [NTP Pool Project][7]. Using different pools or setting a no operation `ServerDateProvider` implementation results in a de-synchronization of the SDK instance and the Datadog servers. This can lead to significant time shifts in RUM sessions or distributed traces.
 
 `service`
 : The service name associated with data sent to Datadog. The default value is the application bundle identifier.
@@ -359,7 +306,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Sets the data scrubbing callback for actions. This can be used to modify or drop action events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `appHangThreshold`
-: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][10].
+: Sets the threshold for reporting when an app hangs. The minimum allowed value for this option is `0.1` seconds. To disable reporting, set this value to `nil`. For more information, see [Add app hang reporting][8].
 
 `applicationID`
 : The RUM application identifier.
@@ -375,6 +322,12 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 
 `longTaskThreshold`
 : The threshold for RUM long tasks tracking (in seconds). By default, this is sent to `0.1` seconds.
+
+`networkSettledResourcePredicate`
+: The predicate used to classify "initial" resources for the Time-to-Network-Settled (TNS) view timing calculation.
+
+`nextViewActionPredicate`
+: The predicate used to classify the "last" action for the Interaction-to-Next-View (INV) timing calculation.
 
 `onSessionStart`
 : (Optional) The method that gets called when RUM starts the session.
@@ -594,8 +547,8 @@ let session = URLSession(
 
 This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace][1].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 
+[1]: https://docs.datadoghq.com/real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
@@ -826,69 +779,39 @@ For example, if the current tracking consent is `.pending`:
 
 ## Add user properties
 
-You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
+You can use the `Datadog.addUserExtraInfo(_:)` API to append extra user properties to previously set properties.
 
 ```swift
-   public static func addUserExtraInfo(
-       _ extraInfo: [AttributeKey: AttributeValue?],
-       in core: DatadogCoreProtocol = CoreRegistry.default
-   ) {
-       let core = core as? DatadogCore
-       core?.addUserExtraInfo(extraInfo)
-   }
+import DatadogCore
+
+Datadog.addUserExtraInfo(["company": "Foo"])
 ```
 
 ## Data management
 
-The iOS SDK first stores events locally and only uploads events when the [intake specifications][11] conditions are met.
+The iOS SDK first stores events locally and only uploads events when the [intake specifications][9] conditions are met.
 
 ### Clear all data
 
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
+You have the option of deleting all unsent data stored by the SDK with the `Datadog.clearAllData()` API.
 
 ```swift
-   public static func clearAllData(in core: DatadogCoreProtocol = CoreRegistry.default) {
-       let core = core as? DatadogCore
-       core?.clearAllData()
-   }
+import DatadogCore
+
+Datadog.clearAllData()
 ```
 
 ### Stop data collection
 
-You can use the `StopInstance` API to stop a named SDK instance (or the default instance if the name is null) from collecting and uploading data further.
+You can use the `Datadog.stopInstance()` API to stop a named SDK instance (or the default instance if the name is `nil`) from collecting and uploading data further.
 
 ```swift
-   public static func stopInstance(named instanceName: String = CoreRegistry.defaultInstanceName) {
-       let core = CoreRegistry.unregisterInstance(named: instanceName) as? DatadogCore
-       core?.stop()
-   }
+import DatadogCore
+
+Datadog.stopInstance()
 ```
 
-### Set remote log threshold
-
-You can define the minimum log level (priority) at which to send events to Datadog in a logger instance. If the log's priority is below the one you set in this threshold, the log does not get sent. The default value is `debug` (send all logs).
-
-```swift
-public init(
-    service: String? = nil,
-    name: String? = nil,
-    networkInfoEnabled: Bool = false,
-    bundleWithRumEnabled: Bool = true,
-    bundleWithTraceEnabled: Bool = true,
-    remoteSampleRate: Float = 100,
-    remoteLogThreshold: LogLevel = .debug,
-    consoleLogFormat: ConsoleLogFormat? = nil
-) {
-    self.service = service
-    self.name = name
-    self.networkInfoEnabled = networkInfoEnabled
-    self.bundleWithRumEnabled = bundleWithRumEnabled
-    self.bundleWithTraceEnabled = bundleWithTraceEnabled
-    self.remoteSampleRate = remoteSampleRate
-    self.remoteLogThreshold = remoteLogThreshold
-    self.consoleLogFormat = consoleLogFormat
-}
-```
+Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically
 
 ## Further Reading
 
@@ -897,12 +820,9 @@ public init(
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/ios
 [3]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
-[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/platform/connect_rum_and_traces?tab=browserrum
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
-[9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
-[12]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
-[13]: https://www.ntppool.org/en/
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/?tab=session#default-attributes
+[7]: https://www.ntppool.org/en/
+[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/ios/setup

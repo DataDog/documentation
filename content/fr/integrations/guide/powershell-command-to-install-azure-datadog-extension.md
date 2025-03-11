@@ -27,7 +27,7 @@ Pour exécuter l'Agent Datadog sous forme dʼextension dans vos instances Azure,
 {{% tab "Windows" %}}
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 Pour plus d'informations sur la syntaxe des extensions d'instances Azure, consultez la [documentation relative à lʼextension Azure Set-AzVMExtension][1].
@@ -58,7 +58,7 @@ L'extension Windows Azure de lʼAgent Datadog vérifiera que l'URI `agentConfigu
 La configuration de lʼAgent Datataog doit être créée à partir du dossier `%PROGRAMDATA%\Datadog`.
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 **Remarque** : une fois que lʼAgent Datadog est installé, la configuration ne peut plus être modifiée que lors d'une mise à niveau vers une version plus récente.
@@ -69,7 +69,7 @@ Cet exemple montre comment indiquer la version de lʼAgent à installer. Par dé
 **Remarque** : les rétrogradations ne sont *pas* prises en charge, il n'est donc pas possible d'installer une version de lʼAgent Datadog *antérieure* à celle qui est actuellement installée sur la machine cible. Pour installer une version antérieure de lʼAgent Datadog, désinstallez d'abord la version précédente en supprimant lʼextension Windows Azure de lʼAgent Datadog sur la machine cible. La suppression de lʼextension Windows Azure de lʼAgent Datadog nʼentraîne pas celle de la configuration de lʼAgent Datadog.
 
 {{< code-block lang="powershell" >}}
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "7.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "latest"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 {{< /code-block >}}
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension

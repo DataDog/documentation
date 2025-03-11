@@ -58,12 +58,14 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
    curl -L https://install.datadoghq.com/scripts/install-dataproc.sh > djm-install-script; bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.9.1.sh` to use version `0.9.1`, for example. The source code used to generate this script can be found on the [Datadog Agent repository][13].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
 
 1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
 
+    When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
 
-When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
+1. **Optional**: Enable logs collection for your cluster by following the Dataproc integration [Log collection setup][14] steps. This correlates application logs to Spark job run traces.
+
 
 ### Specify service tagging per Spark application
 
@@ -108,3 +110,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [11]: https://docs.datadoghq.com/data_jobs/kubernetes/
 [12]: https://cloud.google.com/secret-manager/docs/access-control
 [13]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/dataproc.go
+[14]: /integrations/google_cloud_dataproc/#log-collection

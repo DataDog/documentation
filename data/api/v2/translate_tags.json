@@ -21,11 +21,15 @@
   },
   "agentless-scanning": {
     "name": "Agentless Scanning",
-    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more"
+    "description": "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin your hosts, running containers, and serverless functions—all without\nrequiring teams to install Agents on every host or where Agents cannot be installed.\nAgentless offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
   },
   "app-builder": {
     "name": "App Builder",
     "description": "Datadog App Builder provides a low-code solution to rapidly develop and integrate secure, customized applications into your monitoring stack that are built to accelerate remediation at scale. These API endpoints allow you to create, read, update, delete, and publish apps."
+  },
+  "application-security": {
+    "name": "Application Security",
+    "description": "[Datadog Application Security](https://docs.datadoghq.com/security/application_security/) provides protection against\napplication-level attacks that aim to exploit code-level vulnerabilities,\nsuch as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and\nReflected Cross-Site-Scripting (XSS). You can monitor and protect apps\nhosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for\nsupported languages) AWS Fargate."
   },
   "audit": {
     "name": "Audit",
@@ -199,6 +203,10 @@
     "name": "Rum Metrics",
     "description": "Manage configuration of [rum-based metrics](https://app.datadoghq.com/rum/generate-metrics) for your organization."
   },
+  "rum-retention-filters": {
+    "name": "Rum Retention Filters",
+    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
+  },
   "scim": {
     "name": "SCIM",
     "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
@@ -257,6 +265,6 @@
   },
   "workflow-automation": {
     "name": "Workflow Automation",
-    "description": "Automate your teams operational processes with Datadog Workflow Automation."
+    "description": "Datadog Workflow Automation allows you to automate your end-to-end processes by connecting Datadog with the rest of your tech stack. Build workflows to auto-remediate your alerts, streamline your incident and security processes, and reduce manual toil. Workflow Automation supports over 1,000+ OOTB actions, including AWS, JIRA, ServiceNow, GitHub, and OpenAI. Learn more in our Workflow Automation docs [here](https://docs.datadoghq.com/service_management/workflows/)."
   }
 }

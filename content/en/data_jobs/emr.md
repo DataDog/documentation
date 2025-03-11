@@ -105,12 +105,15 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    SECRET_NAME=datadog/dd_api_key
    export DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
 
+   # Optional: uncomment to send spark driver and worker logs to Datadog
+   # export DD_EMR_LOGS_ENABLED=true
+
    # Download and run the latest init script
    curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true
 
    ```
 
-   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.9.1.sh` to use version `0.9.1`, for example. The source code used to generate this script can be found on the [Datadog Agent repository][12].
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in EMR. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-emr-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions can be found on the [Datadog Agent repository][12].
 
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
    {{< img src="data_jobs/emr/add_bootstrap_action_without_arguments.png" alt="Amazon EMR console, Create Cluster, Add Bootstrap Action dialog. Text fields for name, script location, and arguments." style="width:80%;" >}}
