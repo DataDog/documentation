@@ -1,6 +1,6 @@
 ---
 title: Use AI-generated errors to identify the root cause of your failed CI Jobs
-description: TBD
+description: Learn how to use AI-generated errors to identify the most common root cause of failure in your CI pipelines.
 further_reading:
     - link: "/continuous_integration/search/#pipeline-details-and-executions"
       tag: "Documentation"
