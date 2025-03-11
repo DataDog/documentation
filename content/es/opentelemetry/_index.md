@@ -41,10 +41,6 @@ further_reading:
 title: OpenTelemetry en Datadog
 ---
 
-<div class="alert alert-danger">
-<strong>Importante:</strong> OpenTelemetry Collector Contrib v0.95.0 introduce un cambio de último momento que desactiva el cálculo de Métricas de rastreo en el Exportador Datadog. Al actualizar, sigue la <a href="/opentelemetry/guide/migration/">guía de migración</a> de Datadog.
-</div>
-
 ## Información general
 
 [OpenTelemetry][1] es un marco de observabilidad de código abierto que proporciona a los equipos de TI protocolos y herramientas estandarizados para recopilar y enrutar datos de telemetría. Creado como proyecto incubador por la [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry proporciona un formato coherente para instrumentar, generar, recopilar y exportar datos de telemetría de aplicaciones como métricas, logs y trazas, a plataformas de monitorización para su análisis y comprensión.
@@ -61,7 +57,7 @@ Si tus aplicaciones y servicios están instrumentados con bibliotecas de OpenTel
 
 Datadog es compatible con el [Contexto de rastreo W3C estándar][6], lo que garantiza la captura completa de trazas, incluso cuando una solicitud viaja entre servicios que han sido instrumentadas con diferentes herramientas. Los servicios pueden ser instrumentados con cualquier sistema, como una biblioteca de OpenTelemetry o una biblioteca de rastreo de Datadog, que siga el Contexto de rastreo W3C estándar. Para obtener más información, consulta [Propagación del contexto de rastreo][5].
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

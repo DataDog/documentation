@@ -20,11 +20,17 @@ further_reading:
 
 Use [Logic actions][1] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
 
-## Branch workflow from condition
+## If condition
 
-You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, a **Branch workflow from condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
+You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, an **If condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
 
-{{< img src="service_management/workflows/branch-workflow-configuration3.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
+{{< img src="service_management/workflows/if-condition.png" alt="The workflow canvas with a if condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
+
+## Switch statement
+
+Use the Switch statement action to handle multiple branching paths in a single step. Specify a switch expression and compare it against one or more case values. If no case matches, a default branch runs instead. In the example below, a Switch statement routes the workflow based on whether the status code from a previous HTTP request is `200`, `403`, `404`, `500`, or another value.
+
+{{< img src="service_management/workflows/switch-statement.png" alt="The workflow canvas showing a Switch statement action named 'Make_request.status' branching into multiple cases for different HTTP status codes. Each case sends a different Slack message, and the default branch throws an unexpected error if no other case matches." >}}
 
 ## Sleep
 

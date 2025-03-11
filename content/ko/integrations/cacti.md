@@ -16,8 +16,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 25
     source_type_name: Cacti
-  logs:
-    source: cacti
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -26,6 +24,7 @@ author:
 categories:
 - developer tools
 - log collection
+custom_kind: 통합
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
 display_on_public_website: true
@@ -33,9 +32,8 @@ draft: false
 git_integration_title: cacti
 integration_id: cacti
 integration_title: Cacti
-integration_version: 2.1.0
+integration_version: 4.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cacti
 public_title: Cacti
@@ -46,8 +44,9 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Developer Tools
-  - Category::로그 수집
+  - Category::Log Collection
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cacti RRD를 Datadog에 전달하여 더 많은 알림과 그래프화를 이용하세요.
   media: []
@@ -97,7 +96,7 @@ sudo yum install rrdtool-devel
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ```
 
-### 설정
+### 구성
 
 #### Datadog 사용자 생성
 
@@ -170,13 +169,13 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
        rrd_path: "<CACTI_RRA_PATH>"
    ```
 
-2. [Restart the Agent][3].
+2. [에이전트를 재시작][3]하세요.
 
 ### 검증
 
-[에이전트 상태 하위 명령을 실행하고][4] 점검 섹션 아래에서 `cacti`를 찾으세요.
+[에이전트 상태 하위 명령을 실행하고][4] Checks 섹션 아래에서 `cacti`를 찾으세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "cacti" >}}
@@ -184,7 +183,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
 ### 로그 수집
 
-1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml` 파일에서 로그 수집을 사용하도록 설정합니다.
+1. Datadog 에이전트에서 로그 수집은 기본적으로 사용하지 않도록 설정되어 있습니다. `datadog.yaml`파일에서 로그 수집을 사용하도록 설정합니다.
 
     ```yaml
     logs_enabled: true
@@ -201,13 +200,13 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 
    환경에 따라 `path` 파라미터 값을 변경합니다. 사용 가능한 모든 설정 옵션은 [샘플 cacti.d/conf.yaml][2]을 참조하세요.
 
-3. [Restart the Agent][3].
+3. [에이전트를 재시작][3]하세요.
 
 ### 이벤트
 
 Cacti 점검은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Cacti 점검은 서비스 점검을 포함하지 않습니다.
 

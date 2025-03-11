@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/microsoft-365-detections/"
   tag: "Blog"
   text: "How attackers take advantage of Microsoft 365 services"
+- link: "https://www.datadoghq.com/blog/google-workspace-detections/"
+  tag: "Blog"
+  text: "Detect malicious activity in Google Workspace apps with Datadog Cloud SIEM"
 ---
 
 ## Overview

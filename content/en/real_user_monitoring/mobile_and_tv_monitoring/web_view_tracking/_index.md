@@ -6,6 +6,8 @@ aliases:
   - /real_user_monitoring/flutter/web_view_tracking
   - /real_user_monitoring/reactnative/web_view_tracking
   - /real_user_monitoring/kotlin-multiplatform/web_view_tracking
+  - /real_user_monitoring/kotlin_multiplatform/web_view_tracking
+  - /real_user_monitoring/mobile_and_tv_monitoring/unity/web_view_tracking
 further_reading:
   - link: https://github.com/DataDog/dd-sdk-android
     tag: "Source Code"
@@ -133,7 +135,7 @@ Set up the RUM Browser SDK on the web page you want rendered on your mobile appl
 
 Add `DatadogWebViewTracking` library to your application by following the guide [here][1].
 
-[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin-multiplatform/#add-native-dependencies-for-ios
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/kotlin_multiplatform/#add-native-dependencies-for-ios
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -346,9 +348,9 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
 `allowedHosts` matches the given hosts and their subdomain. No regular expressions are allowed.
 
 [1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-rum
-[2]: /real_user_monitoring/kotlin-multiplatform/#setup
+[2]: /real_user_monitoring/kotlin_multiplatform/#setup
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-logs
-[4]: /logs/log_collection/kotlin-multiplatform/#setup
+[4]: /logs/log_collection/kotlin_multiplatform/#setup
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -364,6 +366,8 @@ To access your web views:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
    - The platform using `source`
+
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they may belong to the Browser SDK version. In that case, you can filter out the Browser platform session. For example, `source: react-native`.
 3. Click a session. A side panel with a list of events in the session appears.
 
    {{< img src="real_user_monitoring/android/android-webview-tracking.png" alt="Webview events captured in a session in the RUM Explorer" style="width:100%;">}}

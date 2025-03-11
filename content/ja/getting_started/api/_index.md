@@ -47,7 +47,7 @@ data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434
 
 **注**: API キーとアプリケーションキーの値を使って、Datadog API コレクションの**コレクション変数**を構成します。
 
-### Postman 環境のセットアップ
+### Postman コレクションのセットアップ
 
 Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
 

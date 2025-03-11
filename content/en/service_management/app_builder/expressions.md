@@ -15,11 +15,11 @@ further_reading:
 
 You can use JavaScript (JS) expressions anywhere in App Builder to create custom interactions between the different parts of your app. As you begin an expression, App Builder offers autocomplete suggestions based on the existing queries and components in your app. Click on an autocomplete suggestion to use it in your expression, or use the arrow keys on your keyboard and make a selection with the Enter key.
 
-{{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" video=true >}}
+{{< img src="service_management/app_builder/app-builder-variable.png" alt="If you're not sure what to enter as an expression, type ${ to open a suggestion menu with all available expressions" style="width:70%;" >}}
 
 Some fields, like [post-query transformation][1], display a code editor by default and accept plain JS. In all other fields, enclose your JS expressions in `${}`. For example, to interpolate the values of two text input components named `textInput0` and `textInput1` into the **Content** property of a text component (and add an exclamation mark), use the expression `${textInput0.value} ${textInput1.value}!`.
 
-{{< img src="service_management/app_builder/interpolation.png" alt="The text component fills with the words 'Hello' and 'World', each interpolated from a text input component value" style="width:100%;" >}}
+{{< img src="service_management/app_builder/interpolation-2.png" alt="The text component fills with the words 'Hello' and 'World', each interpolated from a text input component value" style="width:70%;" >}}
 
 App Builder accepts standard vanilla JavaScript syntax, with the following caveats:
 - The result of the expression must match the result expected by the component or query property. For example, the text component's **Is Visible** property expects a Boolean. To find out what type of data a component property expects, see [View component properties](#view-component-properties).
@@ -39,7 +39,7 @@ To access **App State**:
 1. Click **App Properties** in the left side-panel.
 1. Scroll down to the **App State** section.
 
-{{< img src="service_management/app_builder/app-state.png" alt="The App State section in App Properties" style="width:100%;" >}}
+{{< img src="service_management/app_builder/app-state-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Inspect Data" level="h4" %}}
@@ -47,7 +47,7 @@ To access **Inspect Data**:
 1. Click on the query or component you want to inspect.
 1. Scroll down to the **Inspect Data** section.
 
-{{< img src="service_management/app_builder/inspect-data.png" alt="The App State section in App Properties" style="width:100%;" >}}
+{{< img src="service_management/app_builder/inspect-data-2.png" alt="The App State section in App Properties" style="width:80%;" >}}
 {{% /collapse-content %}}
 
 {{% collapse-content title="Admin Console" level="h4" %}}
@@ -55,7 +55,7 @@ To access the **Admin Console**:
 1. Click on the cog (**Settings**) icon and select **Admin Console**.
 1. Click **Data**.
 
-{{< img src="service_management/app_builder/admin-console.png" alt="The App State section in App Properties" style="width:100%;" >}}
+{{< img src="service_management/app_builder/admin-console-2.png" alt="The App State section in App Properties" style="width:50%;" >}}
 {{% /collapse-content %}}
 
 ## Custom component interactions

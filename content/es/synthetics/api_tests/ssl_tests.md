@@ -62,16 +62,20 @@ Cuando decidas crear un test `SSL`, define la solicitud de tu test.
 
 Haz clic en **URL del test** para probar la configuración de la solicitud. Aparecerá una vista previa de la respuesta en la parte derecha de la pantalla.
 
+### Fragmentos
+
+{{% synthetics-api-tests-snippets %}}
+
 ### Definición de aserciones
 
 Las aserciones definen cuál es el resultado esperado de un test. Después de hacer clic en **URL del test**, se añaden aserciones básicas sobre la validez del certificado, la fecha de caducidad. la versión de TLS y el `response time` basadas en la respuesta obtenida. Debes definir al menos una aserción para que sea monitorizada por tu test.
 
-| Tipo                  | Operador                                                                               | Tipo de valor                 |
+| {{< img src="synthetics/browser_test.mp4" alt="Browser tests" video=true style="width:100%;">}}                  | Operador                                                                               | Tipo de valor                 |
 |-----------------------|----------------------------------------------------------------------------------------|----------------------------|
 | certificado           | `expires in more than`, `expires in less than`                                         | Entero (número de días) |
 | propiedad              | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`       | Cadena <br> [Expresión regular][4] |
-| tiempo de respuesta         | `is less than`                                                                         | Entero (ms)             |
-| versión de TLS máxima   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | Decimal                  |
+| tiempo de respuesta         | `is less than`                                                                         | _Entero (ms)_             |
+| versión TLS máxima   | `is less than`, `is less than or equal`, `is`, `is more than`, `is more than or equal` | Decimal                  |
 | versión de TLS mínima   | `is more than`, `is more than or equal`                                                | Decimal                  |
 
 Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserción** o haciendo clic directamente en la vista previa de la respuesta:
@@ -80,9 +84,9 @@ Puedes crear hasta 20 aserciones por test de API haciendo clic en **Nueva aserci
 
 Para aplicar una lógica `OR` en una aserción, utiliza los comparadores `matches regex` o `does not match regex` para definir una expresión regular con varios valores esperados para el mismo tipo de aserción, como `(0|100)`. Se considera que el resultado del test tiene éxito si el valor de la aserción de la propiedad es 0 o 100.
 
-Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud, dentro del límite de tiempo de espera establecido por el worker de Synthetics.
+Si un test no contiene una aserción en el cuerpo de la respuesta, la carga útil del cuerpo cae y devuelve un tiempo de respuesta asociado para la solicitud dentro del límite de tiempo de espera establecido por el worker de Synthetics.
 
-Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparece un error `Assertions on the body/response cannot be run beyond this limit`.
+Si un test contiene una aserción en el cuerpo de la respuesta y se alcanza el límite de tiempo de espera, aparecerá el error `Assertions on the body/response cannot be run beyond this limit`.
 
 ### Seleccionar localizaciones
 
@@ -102,7 +106,7 @@ Los tests SSL se pueden ejecutar:
 
 {{% synthetics-variables %}}
 
-### Uso de variables
+### Usar variables
 
 Puedes utilizar las [variables globales definidas en la página **Parámetros**][9] en la URL, las opciones avanzadas y las aserciones de tus tests SSL.
 
@@ -128,11 +132,11 @@ No se ha encontrado la entrada DNS para la URL del test. Entre las posibles caus
 
 `TIMEOUT`
 : La solicitud no se ha podido completar en un plazo razonable. Pueden ocurrir dos tipos de `TIMEOUT`:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se establece en 60 segundos).
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indica que la duración de la solicitud ha alcanzado el tiempo de espera definido en el test (por defecto se define en 60 segundos).
   Para cada solicitud, en la cascada de la red sólo se muestran las etapas completadas de la solicitud. Por ejemplo, en el caso de que sólo se muestre `Total response time`, el tiempo de espera se produjo durante la resolución DNS.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indica que la duración del test (solicitud + aserciones) alcanza la duración máxima (60,5 segundos).
 
-## Permisos
+## {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Sintético Mobile Test" style="width:100%;">}}
 
 De manera predeterminada, sólo los usuarios con los roles de [administrador de Datadog y estándar de Datadog][11] pueden crear, editar y eliminar tests SSL Synthetic. Para crear, editar y eliminar tests SSL Synthetic, actualiza tu usuario a uno de esos dos [roles predeterminados][11].
 
@@ -144,11 +148,11 @@ La restricción del acceso está disponible para clientes que utilizan [roles pe
 
 Puedes restringir el acceso a un test SSL en función de los roles de tu organización. Al crear un test SSL, elige qué roles (además de tu usuario) pueden leer y escribir tu test.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Definir permisos para tu test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Establecer permisos para tu test" style="width:70%;" >}}
 
-## Referencias adicionales
+## Configurar tests de API y tests de API multupaso
 
-{{< partial name="whats-next/whats-next.html" >}}
+Grabar pruebas de aplicaciones móviles
 
 [1]: /es/synthetics/private_locations
 [2]: /es/synthetics/cicd_integrations

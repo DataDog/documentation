@@ -158,7 +158,7 @@ Los eventos de acción, error, recurso y tarea larga de RUM contienen informaci�
 
 | Métrica                         | Tipo           | Descripción                                                                                                                                |
 | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `duration`                     | número (ns)    | Tiempo total empleado en cargar el recurso.                                                                                                    |
+| `resource.duration`            | número (ns)    | Tiempo total empleado en cargar el recurso.                                                                                                    |
 | `resource.size`                | número (bytes) | Tamaño del recurso.                                                                                                                             |
 | `resource.connect.duration`    | número (ns)    | Tiempo empleado en establecer una conexión con el servidor (connectEnd - connectStart).                                                            |
 | `resource.ssl.duration`        | número (ns)    | Tiempo empleado por el protocolo TLS. Si la última solicitud no es en HTTPS, esta métrica no aparece (connectEnd - secureConnectionStart). |

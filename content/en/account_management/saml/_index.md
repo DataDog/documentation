@@ -55,14 +55,23 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
     
 6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
 
-7. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
+**Note**: To configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][21].
 
-   - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
-    {{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
+## Using SAML
 
-   - **If using IdP-initiated login** (Identity Provider, or login initiated from your app portal): By clicking on the app icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
+After SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in.
 
-**Note**: If you want to configure SAML for a multi-org, see [Managing Multiple-Organization Accounts][21].
+### SP-initiated login
+
+SP-initiated, or Service Provider-initiated, means login initiated from Datadog. Users log in through the **Single Sign-on URL** shown in the status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL only displays if SAML is enabled for your account and you are using SP-initiated login.
+
+{{< img src="account_management/saml/saml_enabled_cropped.png" alt="Confirmation that SAML Enabled" >}}
+
+When a user logs in through SP-initiated SAML and the organization does not have a custom subdomain, Datadog requires additional security. Users receive a one-time email verification code that is required to log in.
+
+### IdP-initiated login
+
+IdP-initiated, or Identity Provider-initiated, means login initiated from your app portal. Users log in by clicking on the app icon in your app portal, for example, in the Google App drawer or the Okta App Portal. Users of SP-initiated login may also be able to use IdP-initiated login, depending on your Identity Provider's configuration.
 
 ## Assertions and attributes
 
@@ -123,6 +132,10 @@ With JIT provisioning, a user is created within Datadog the first time they try 
 Some organizations might not want to invite all of their users to Datadog. If you would like to make changes to how SAML works for your account, contact [Datadog support][2]. It is up to the organization to configure their IdP to not send assertions to Datadog if they don't want a particular user to access Datadog.
 
 Administrators can set the default role for new JIT users. The default role is **Standard**, but you can choose to add new JIT users as **Read-Only**, **Administrators**, or any custom role.
+
+<div class="alert alert-warning">
+  <strong>Important:</strong> If Role Mapping is enabled, it takes priority over the roles set during JIT provisioning. Without the proper Group Attribute statements, users might end up without roles and lose access to Datadog. To prevent users from being locked out after JIT provisioning, make sure to review your mapping definitions and check your assertions before enabling both Mappings and JIT.
+</div>
 
 {{< img src="account_management/saml/saml_jit_default.png" alt="saml JIT Default" style="width:50%;" >}}
 
