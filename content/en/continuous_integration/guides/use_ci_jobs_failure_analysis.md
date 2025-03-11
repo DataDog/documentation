@@ -93,7 +93,7 @@ You can access to the [CI Health page][3] to see a breakdown of the errors in yo
 - Click on a CI pipeline.
 - Check the `Breakdown` column in the `Failed Executions` section.
 
-{{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="Failed CI jobs with AI-generated errors" width="90%">}}
+{{< img src="continuous_integration/ci_health_failed_executions_breakdown.png" alt="CI Job Failure analysis breakdown in CI Health" width="90%">}}
 
 [CI Health][3] provides a high-level overview of the health and performance of your CI pipelines. It helps DevOps and engineering teams monitor CI jobs, detect failures, and optimize build performance.
 
@@ -114,7 +114,7 @@ You can also import the CI Visibility - CI Jobs Failure Analysis dashboard templ
 - Paste the copied content in the new dashboard.
 - Save the dashboard.
 
-{{< img src="continuous_integration/civis_ai_gen_errors_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
+{{< img src="continuous_integration/ci_jobs_failure_analysis_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
 
 ## How the CI jobs failure analysis is computed?
 
