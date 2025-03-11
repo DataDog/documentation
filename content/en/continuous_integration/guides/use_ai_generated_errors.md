@@ -144,7 +144,7 @@ OpenAI can categorize errors with similar messages with different subdomains.
 
 [1]:/continuous_integration/pipelines/github/
 [2]:/continuous_integration/pipelines/gitlab/
-[3]:/ci/pipelines/health/
+[3]:https://app.datadoghq.com/ci/pipelines/health/
 [4]:/resources/json/civisibility-ai-gen-job-errors-dashboard.json
 [5]:/dashboards/
 [6]:/continuous_integration/pipelines/#setup
