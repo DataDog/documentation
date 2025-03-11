@@ -1,6 +1,6 @@
 {
-    "title": "CI Visibility - AI-generated Job Errors",
-    "description": "Use AI-generated errors to identify the root cause of your failed CI Jobs",
+    "title": "CI Visibility - CI Jobs Failure Analysis",
+    "description": "Use CI Jobs Failure Analysis to identify the root cause of your failed CI Jobs",
     "experience_type": "default",
     "widgets": [
         {
