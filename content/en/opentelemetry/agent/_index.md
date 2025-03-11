@@ -52,7 +52,7 @@ The Datadog Agent with embedded OpenTelemetry Collector offers:
 
 Datadog provides different levels of support depending on the type of component:
 
-- **Fully Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are fully maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements.
+- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
 
 - **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent. While Datadog provides assistance with configuration and usage, feature development and enhancements for these components are managed through the OpenTelemetry community.
 
