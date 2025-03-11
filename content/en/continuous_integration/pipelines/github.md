@@ -31,6 +31,7 @@ Set up CI Visibility in GitHub Actions to track the execution of your workflows,
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
+| AI-generated errors | AI-generated errors | Identify the root cause of a failed CI job using AI-generated errors based on Logs |
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
