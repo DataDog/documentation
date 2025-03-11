@@ -34,7 +34,7 @@ cascade:
 </div>
 {{% /site-region %}}
 
-{{< img src="data_streams/map_view.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Filtered to a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
+{{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
 * Measure pipeline health with end-to-end latencies for events traversing across your system.
@@ -63,7 +63,7 @@ To get started, follow the installation instructions to configure services with 
 
 {{< img src="data_streams/topology_map.png" alt="A DSM topology map visualization. " style="width:100%;" >}}
 
-Data Streams Monitoring provides a [topology map][10], so that you can visualize interdependencies, service ownership, and key health metrics across the services and infrastructure your pipeline depends on.
+Data Streams Monitoring provides an out-of-the-box [topology map][10], so that you can visualize data flow across your pipelines and identify producer/consumer services, queue dependencies, service ownership, and key health metrics.
 
 ### Measure end-to-end pipeline health with new metrics
 
@@ -109,7 +109,7 @@ Datadog automatically links the infrastructure powering your services and relate
 ### Monitor connector throughput and status
 {{< img src="data_streams/connectors_topology.png" alt="A DSM topology map, showing a connector called 'analytics-sink'. The visualization indicates that the connector has a status of FAILED." style="width:100%;" >}}
 
-Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors.
+Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors—including throughput, status, and topic dependencies.
 
 ## Further Reading
 
