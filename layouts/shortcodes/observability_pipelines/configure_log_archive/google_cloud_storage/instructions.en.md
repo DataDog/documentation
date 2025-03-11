@@ -11,7 +11,7 @@
 
 1. Create a Google Cloud Storage [service account][9092].
 1. Follow these [instructions][9093] to create a service account key.
-    - Grant the Service Account permissions to your bucket with Storage Admin and Storage Object Admin permissions.
+    - Grant the Service Account permissions to your bucket with `Storage Admin` and `Storage Object Admin` permissions.
     - Download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. You will reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) in the pipeline UI.
 
 #### Connect the storage bucket to Datadog Log Archives
