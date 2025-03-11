@@ -32,7 +32,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Configuration**: Metrics with tag configurations
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
-- **Query Activity**: (Preview) Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
+- **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
 - **Related Assets** (Preview): Metrics that are used on assets (dashboards, monitors, notebooks, SLOs)
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
