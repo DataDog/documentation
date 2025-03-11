@@ -108,7 +108,7 @@ If diff-aware is not working with the Static Analyzer, ensure that:
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
-Note that diff-aware works only on feature branches. You can learn more about the [implementation details of diff-aware][13] on the datadog-static-analyzer repository.
+**Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
 
 ## Software Composition Analysis
 
