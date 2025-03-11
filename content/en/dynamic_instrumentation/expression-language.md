@@ -69,3 +69,12 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 [4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [6]: /dynamic_instrumentation/symdb/
+
+## Expression Language REPL
+
+This interactive REPL tool helps you experiment with the Expression Language syntax before using it in your Dynamic Instrumentation probes. Try the examples from the documentation above or create your own expressions to see how they work.
+
+The REPL below includes some predefined variables like `myCollection` with the value `[1, 2, 3]` that you can use in your expressions. You can also define your own variables and use them in subsequent expressions.
+
+{{< expression-repl >}}
+
