@@ -13,7 +13,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: kong.total_requests
+      check:
+      - kong.total_requests
+      - kong.nginx.requests.total
       metadata_path: metadata.csv
       prefix: kong.
     process_signatures:

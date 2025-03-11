@@ -136,6 +136,22 @@ Users with the `Org Management` permission can customize the time zone used in a
 
 The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
 
+#### Max session duration configuration
+
+Users with the `Org Management` permission can set a maximum session duration for their organization. The duration applies to all new web sessions created after you change it, for all users, regardless of their role in the organization. It doesn't apply to Datadog mobile application sessions.
+
+The session duration can be configured within the following limits:
+{{% site-region region="gov" %}}
+- **Minimum duration:** 1 hour
+- **Maximum duration:** 12 hours
+{{% /site-region %}}
+{{% site-region region="us,eu,us3,us5,ap1" %}}
+- **Minimum duration:** 1 hour
+- **Maximum duration:** 720 hours (30 days)
+{{% /site-region %}}
+
+{{< img src="account_management/org_settings/max_session_duration.png" alt="Max Session Duration Setting" style="width:70%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
