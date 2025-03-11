@@ -10,9 +10,9 @@
 ### Create a service account to allow Workers to write to the bucket
 
 1. Create a Google Cloud Storage [service account][9092].
-1. Follow these [instructions][9093] to create a service account key.
     - Grant the Service Account permissions to your bucket with `Storage Admin` and `Storage Object Admin` permissions.
     - Download the JSON service account key file. This is the credentials JSON file and must be placed under `DD_OP_DATA_DIR/config`. You will reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) in the pipeline UI.
+1. Follow these [instructions][9093] to create a service account key. Choose `json` for the key type.
 
 #### Connect the storage bucket to Datadog Log Archives
 
@@ -31,7 +31,8 @@
 See the [Log Archives documentation][9096] for additional information.
 
 [9091]: https://console.cloud.google.com/storage
-[9092]: https://cloud.google.com/chronicle/docs/reference/ingestion-api#getting_api_authentication_credentials
+[9092]: https://console.cloud.google.com/iam-admin/serviceaccounts
+[9093]: https://cloud.google.com/iam/docs/keys-create-delete#creating
 [9094]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [9095]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
 [9096]: /logs/log_configuration/archives
