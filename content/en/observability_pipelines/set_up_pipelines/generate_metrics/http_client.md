@@ -53,6 +53,11 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -183,6 +188,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -219,6 +229,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% /collapse-content %}}
 
 {{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Add another set of processors and destinations
@@ -244,6 +259,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

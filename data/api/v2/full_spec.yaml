@@ -160,6 +160,22 @@ components:
       required: false
       schema:
         $ref: '#/components/schemas/ApplicationKeysSort'
+    ApplicationSecurityWafCustomRuleIDParam:
+      description: The ID of the custom rule.
+      example: 3b5-v82-ns6
+      in: path
+      name: custom_rule_id
+      required: true
+      schema:
+        type: string
+    ApplicationSecurityWafExclusionFilterID:
+      description: The identifier of the WAF exclusion filter.
+      example: 3b5-v82-ns6
+      in: path
+      name: exclusion_filter_id
+      required: true
+      schema:
+        type: string
     ArchiveID:
       description: The ID of the archive.
       in: path
@@ -566,6 +582,14 @@ components:
       required: false
       schema:
         type: string
+    OnDemandTaskId:
+      description: The UUID of the task.
+      example: 6d09294c-9ad9-42fd-a759-a0c1599b4828
+      in: path
+      name: task_id
+      required: true
+      schema:
+        type: string
     OpsgenieServiceIDPathParameter:
       description: The UUID of the service.
       in: path
@@ -678,10 +702,24 @@ components:
       required: true
       schema:
         type: string
+    RumApplicationIDParameter:
+      description: RUM application ID.
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
     RumMetricIDParameter:
       description: The name of the rum-based metric.
       in: path
       name: metric_id
+      required: true
+      schema:
+        type: string
+    RumRetentionFilterIDParameter:
+      description: Retention filter ID.
+      in: path
+      name: rf_id
       required: true
       schema:
         type: string
@@ -1777,10 +1815,6 @@ components:
             type: string
           type: array
       type: object
-    AccountId:
-      description: The ID of the AWS account.
-      example: '184366314700'
-      type: string
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -2474,6 +2508,770 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    ApplicationSecurityWafCustomRuleAction:
+      description: The definition of `ApplicationSecurityWafCustomRuleAction` object.
+      properties:
+        action:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleActionAction'
+        parameters:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleActionParameters'
+      type: object
+    ApplicationSecurityWafCustomRuleActionAction:
+      default: block_request
+      description: Override the default action to take when the WAF custom rule would
+        block.
+      enum:
+      - redirect_request
+      - block_request
+      example: block_request
+      type: string
+      x-enum-varnames:
+      - REDIRECT_REQUEST
+      - BLOCK_REQUEST
+    ApplicationSecurityWafCustomRuleActionParameters:
+      description: The definition of `ApplicationSecurityWafCustomRuleActionParameters`
+        object.
+      properties:
+        location:
+          description: The location to redirect to when the WAF custom rule triggers.
+          example: /blocking
+          type: string
+        status_code:
+          default: 403
+          description: The status code to return when the WAF custom rule triggers.
+          example: 403
+          format: int64
+          type: integer
+      type: object
+    ApplicationSecurityWafCustomRuleAttributes:
+      description: A WAF custom rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleAction'
+        blocking:
+          description: Indicates whether the WAF custom rule will block the request.
+          example: false
+          type: boolean
+        conditions:
+          description: 'Conditions for which the WAF Custom Rule will triggers, all
+            conditions needs to match in order for the WAF
+
+            rule to trigger.'
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCondition'
+          type: array
+        enabled:
+          description: Indicates whether the WAF custom rule is enabled.
+          example: false
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleMetadata'
+        name:
+          description: The Name of the WAF custom rule.
+          example: Block request from bad useragent
+          type: string
+        path_glob:
+          description: The path glob for the WAF custom rule.
+          example: /api/search/*
+          type: string
+        scope:
+          description: The scope of the WAF custom rule.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleScope'
+          type: array
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleTags'
+      required:
+      - enabled
+      - blocking
+      - name
+      - tags
+      - conditions
+      type: object
+    ApplicationSecurityWafCustomRuleCondition:
+      description: One condition of the WAF Custom Rule.
+      properties:
+        operator:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleConditionOperator'
+        parameters:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleConditionParameters'
+      required:
+      - operator
+      - parameters
+      type: object
+    ApplicationSecurityWafCustomRuleConditionInput:
+      description: Input from the request on which the condition should apply.
+      properties:
+        address:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleConditionInputAddress'
+        key_path:
+          description: Specific path for the input.
+          items:
+            type: string
+          type: array
+      required:
+      - address
+      type: object
+    ApplicationSecurityWafCustomRuleConditionInputAddress:
+      description: Input from the request on which the condition should apply.
+      enum:
+      - server.db.statement
+      - server.io.fs.file
+      - server.io.net.url
+      - server.sys.shell.cmd
+      - server.request.method
+      - server.request.uri.raw
+      - server.request.path_params
+      - server.request.query
+      - server.request.headers.no_cookies
+      - server.request.cookies
+      - server.request.trailers
+      - server.request.body
+      - server.response.status
+      - server.response.headers.no_cookies
+      - server.response.trailers
+      - grpc.server.request.metadata
+      - grpc.server.request.message
+      - grpc.server.method
+      - graphql.server.all_resolvers
+      - usr.id
+      - http.client_ip
+      example: server.db.statement
+      type: string
+      x-enum-varnames:
+      - SERVER_DB_STATEMENT
+      - SERVER_IO_FS_FILE
+      - SERVER_IO_NET_URL
+      - SERVER_SYS_SHELL_CMD
+      - SERVER_REQUEST_METHOD
+      - SERVER_REQUEST_URI_RAW
+      - SERVER_REQUEST_PATH_PARAMS
+      - SERVER_REQUEST_QUERY
+      - SERVER_REQUEST_HEADERS_NO_COOKIES
+      - SERVER_REQUEST_COOKIES
+      - SERVER_REQUEST_TRAILERS
+      - SERVER_REQUEST_BODY
+      - SERVER_RESPONSE_STATUS
+      - SERVER_RESPONSE_HEADERS_NO_COOKIES
+      - SERVER_RESPONSE_TRAILERS
+      - GRPC_SERVER_REQUEST_METADATA
+      - GRPC_SERVER_REQUEST_MESSAGE
+      - GRPC_SERVER_METHOD
+      - GRAPHQL_SERVER_ALL_RESOLVERS
+      - USR_ID
+      - HTTP_CLIENT_IP
+    ApplicationSecurityWafCustomRuleConditionOperator:
+      description: Operator to use for the WAF Condition.
+      enum:
+      - match_regex
+      - '!match_regex'
+      - phrase_match
+      - '!phrase_match'
+      - is_xss
+      - is_sqli
+      - exact_match
+      - '!exact_match'
+      - ip_match
+      - '!ip_match'
+      - capture_data
+      example: match_regex
+      type: string
+      x-enum-varnames:
+      - MATCH_REGEX
+      - NOT_MATCH_REGEX
+      - PHRASE_MATCH
+      - NOT_PHRASE_MATCH
+      - IS_XSS
+      - IS_SQLI
+      - EXACT_MATCH
+      - NOT_EXACT_MATCH
+      - IP_MATCH
+      - NOT_IP_MATCH
+      - CAPTURE_DATA
+    ApplicationSecurityWafCustomRuleConditionOptions:
+      description: Options for the operator of this condition.
+      properties:
+        case_sensitive:
+          default: false
+          description: Evaluate the value as case sensitive.
+          type: boolean
+        min_length:
+          default: 0
+          description: Only evaluate this condition if the value has a minimum amount
+            of characters.
+          format: int64
+          type: integer
+      type: object
+    ApplicationSecurityWafCustomRuleConditionParameters:
+      description: The scope of the WAF custom rule.
+      properties:
+        data:
+          description: Identifier of a list of data from the denylist. Can only be
+            used as substitution from the list parameter.
+          example: blocked_users
+          type: string
+        inputs:
+          description: List of inputs on which at least one should match with the
+            given operator.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleConditionInput'
+          type: array
+        list:
+          description: 'List of value to use with the condition. Only used with the
+            phrase_match, !phrase_match, exact_match and
+
+            !exact_match operator.'
+          items:
+            type: string
+          type: array
+        options:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleConditionOptions'
+        regex:
+          description: Regex to use with the condition. Only used with match_regex
+            and !match_regex operator.
+          example: path.*
+          type: string
+        value:
+          description: Store the captured value in the specified tag name. Only used
+            with the capture_data operator.
+          example: custom_tag
+          type: string
+      required:
+      - inputs
+      type: object
+    ApplicationSecurityWafCustomRuleCreateAttributes:
+      description: Create a new WAF custom rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleAction'
+        blocking:
+          description: Indicates whether the WAF custom rule will block the request.
+          example: false
+          type: boolean
+        conditions:
+          description: 'Conditions for which the WAF Custom Rule will triggers, all
+            conditions needs to match in order for the WAF
+
+            rule to trigger'
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCondition'
+          type: array
+        enabled:
+          description: Indicates whether the WAF custom rule is enabled.
+          example: false
+          type: boolean
+        name:
+          description: The Name of the WAF custom rule.
+          example: Block request from a bad useragent
+          type: string
+        path_glob:
+          description: The path glob for the WAF custom rule.
+          example: /api/search/*
+          type: string
+        scope:
+          description: The scope of the WAF custom rule.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleScope'
+          type: array
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleTags'
+      required:
+      - enabled
+      - blocking
+      - name
+      - tags
+      - conditions
+      type: object
+    ApplicationSecurityWafCustomRuleCreateData:
+      description: Object for a single WAF custom rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityWafCustomRuleCreateRequest:
+      description: Request object that includes the custom rule to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCreateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityWafCustomRuleData:
+      description: Object for a single WAF custom rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleAttributes'
+        id:
+          description: The ID of the custom rule.
+          example: 2857c47d-1e3a-4300-8b2f-dc24089c084b
+          readOnly: true
+          type: string
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleType'
+      type: object
+    ApplicationSecurityWafCustomRuleListResponse:
+      description: Response object that includes a list of WAF custom rules.
+      properties:
+        data:
+          description: The WAF custom rule data.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleData'
+          type: array
+      type: object
+    ApplicationSecurityWafCustomRuleMetadata:
+      description: Metadata associated with the WAF Custom Rule.
+      properties:
+        added_at:
+          description: The date and time the WAF custom rule was created.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        added_by:
+          description: The handle of the user who created the WAF custom rule.
+          example: john.doe@datadoghq.com
+          type: string
+        added_by_name:
+          description: The name of the user who created the WAF custom rule.
+          example: John Doe
+          type: string
+        modified_at:
+          description: The date and time the WAF custom rule was last updated.
+          example: '2021-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        modified_by:
+          description: The handle of the user who last updated the WAF custom rule.
+          example: john.doe@datadoghq.com
+          type: string
+        modified_by_name:
+          description: The name of the user who last updated the WAF custom rule.
+          example: John Doe
+          type: string
+      readOnly: true
+      type: object
+    ApplicationSecurityWafCustomRuleResponse:
+      description: Response object that includes a single WAF custom rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleData'
+      type: object
+    ApplicationSecurityWafCustomRuleScope:
+      description: The scope of the WAF custom rule.
+      properties:
+        env:
+          description: The environment scope for the WAF custom rule.
+          example: prod
+          type: string
+        service:
+          description: The service scope for the WAF custom rule.
+          example: billing-service
+          type: string
+      required:
+      - service
+      - env
+      type: object
+    ApplicationSecurityWafCustomRuleTags:
+      additionalProperties:
+        type: string
+      description: 'Tags associated with the WAF Custom Rule. The concatenation of
+        category and type will form the security
+
+        activity field associated with the traces.'
+      maxProperties: 32
+      properties:
+        category:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleTagsCategory'
+        type:
+          description: The type of the WAF rule, associated with the category will
+            form the security activity.
+          example: users.login.success
+          type: string
+      required:
+      - category
+      - type
+      type: object
+    ApplicationSecurityWafCustomRuleTagsCategory:
+      description: The category of the WAF Rule, can be either `business_logic`, `attack_attempt`
+        or `security_response`.
+      enum:
+      - attack_attempt
+      - business_logic
+      - security_responses
+      example: business_logic
+      type: string
+      x-enum-varnames:
+      - ATTACK_ATTEMPT
+      - BUSINESS_LOGIC
+      - SECURITY_RESPONSES
+    ApplicationSecurityWafCustomRuleType:
+      default: custom_rule
+      description: The type of the resource. The value should always be `custom_rule`.
+      enum:
+      - custom_rule
+      example: custom_rule
+      type: string
+      x-enum-varnames:
+      - CUSTOM_RULE
+    ApplicationSecurityWafCustomRuleUpdateAttributes:
+      description: Update a WAF custom rule.
+      properties:
+        action:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleAction'
+        blocking:
+          description: Indicates whether the WAF custom rule will block the request.
+          example: false
+          type: boolean
+        conditions:
+          description: 'Conditions for which the WAF Custom Rule will triggers, all
+            conditions needs to match in order for the WAF
+
+            rule to trigger.'
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCondition'
+          type: array
+        enabled:
+          description: Indicates whether the WAF custom rule is enabled.
+          example: false
+          type: boolean
+        name:
+          description: The Name of the WAF custom rule.
+          example: Block request from bad useragent
+          type: string
+        path_glob:
+          description: The path glob for the WAF custom rule.
+          example: /api/search/*
+          type: string
+        scope:
+          description: The scope of the WAF custom rule.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleScope'
+          type: array
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleTags'
+      required:
+      - enabled
+      - blocking
+      - name
+      - tags
+      - conditions
+      type: object
+    ApplicationSecurityWafCustomRuleUpdateData:
+      description: Object for a single WAF Custom Rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityWafCustomRuleUpdateRequest:
+      description: Request object that includes the Custom Rule to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityWafExclusionFilterAttributes:
+      description: Attributes describing a WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Exclude false positives on a path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: true
+          type: boolean
+        event_query:
+          description: The event query matched by the legacy exclusion filter. Cannot
+            be created nor updated.
+          type: string
+        ip_list:
+          description: The client IP addresses matched by the exclusion filter (CIDR
+            notation is supported).
+          items:
+            example: 198.51.100.72
+            type: string
+          type: array
+        metadata:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterMetadata'
+        on_match:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterOnMatch'
+        parameters:
+          description: A list of parameters matched by the exclusion filter in the
+            HTTP query string and HTTP request body. Nested parameters can be matched
+            by joining fields with a dot character.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The HTTP path glob expression matched by the exclusion filter.
+          example: /accounts/*
+          type: string
+        rules_target:
+          description: The WAF rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The services where the exclusion filter is deployed.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterScope'
+          type: array
+        search_query:
+          description: Generated event search query for traces matching the exclusion
+            filter.
+          readOnly: true
+          type: string
+      type: object
+    ApplicationSecurityWafExclusionFilterCreateAttributes:
+      description: Attributes for creating a WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Exclude false positives on a path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: true
+          type: boolean
+        ip_list:
+          description: The client IP addresses matched by the exclusion filter (CIDR
+            notation is supported).
+          items:
+            example: 198.51.100.72
+            type: string
+          type: array
+        on_match:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterOnMatch'
+        parameters:
+          description: A list of parameters matched by the exclusion filter in the
+            HTTP query string and HTTP request body. Nested parameters can be matched
+            by joining fields with a dot character.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The HTTP path glob expression matched by the exclusion filter.
+          example: /accounts/*
+          type: string
+        rules_target:
+          description: The WAF rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The services where the exclusion filter is deployed.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      type: object
+    ApplicationSecurityWafExclusionFilterCreateData:
+      description: Object for creating a single WAF exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityWafExclusionFilterCreateRequest:
+      description: Request object for creating a single WAF exclusion filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterCreateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityWafExclusionFilterID:
+      description: The identifier of the WAF exclusion filter.
+      example: 3dd-0uc-h1s
+      readOnly: true
+      type: string
+    ApplicationSecurityWafExclusionFilterMetadata:
+      description: Extra information about the exclusion filter.
+      properties:
+        added_at:
+          description: The creation date of the exclusion filter.
+          format: date-time
+          type: string
+        added_by:
+          description: The handle of the user who created the exclusion filter.
+          type: string
+        added_by_name:
+          description: The name of the user who created the exclusion filter.
+          type: string
+        modified_at:
+          description: The last modification date of the exclusion filter.
+          format: date-time
+          type: string
+        modified_by:
+          description: The handle of the user who last modified the exclusion filter.
+          type: string
+        modified_by_name:
+          description: The name of the user who last modified the exclusion filter.
+          type: string
+      readOnly: true
+      type: object
+    ApplicationSecurityWafExclusionFilterOnMatch:
+      description: The action taken when the exclusion filter matches. When set to
+        `monitor`, security traces are emitted but the requests are not blocked. By
+        default, security traces are not emitted and the requests are not blocked.
+      enum:
+      - monitor
+      type: string
+      x-enum-varnames:
+      - MONITOR
+    ApplicationSecurityWafExclusionFilterResource:
+      description: A JSON:API resource for an WAF exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterAttributes'
+        id:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterID'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterType'
+      type: object
+    ApplicationSecurityWafExclusionFilterResponse:
+      description: Response object for a single WAF exclusion filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResource'
+      type: object
+    ApplicationSecurityWafExclusionFilterRulesTarget:
+      description: Target WAF rules based either on an identifier or tags.
+      properties:
+        rule_id:
+          description: Target a single WAF rule based on its identifier.
+          example: dog-913-009
+          type: string
+        tags:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterRulesTargetTags'
+      type: object
+    ApplicationSecurityWafExclusionFilterRulesTargetTags:
+      additionalProperties:
+        type: string
+      description: Target multiple WAF rules based on their tags.
+      properties:
+        category:
+          description: The category of the targeted WAF rules.
+          example: attack_attempt
+          type: string
+        type:
+          description: The type of the targeted WAF rules.
+          example: lfi
+          type: string
+      type: object
+    ApplicationSecurityWafExclusionFilterScope:
+      description: Deploy on services based on their environment and/or service name.
+      properties:
+        env:
+          description: Deploy on this environment.
+          example: www
+          type: string
+        service:
+          description: Deploy on this service.
+          example: prod
+          type: string
+      type: object
+    ApplicationSecurityWafExclusionFilterType:
+      default: exclusion_filter
+      description: Type of the resource. The value should always be `exclusion_filter`.
+      enum:
+      - exclusion_filter
+      example: exclusion_filter
+      type: string
+      x-enum-varnames:
+      - EXCLUSION_FILTER
+    ApplicationSecurityWafExclusionFilterUpdateAttributes:
+      description: Attributes for updating a WAF exclusion filter.
+      properties:
+        description:
+          description: A description for the exclusion filter.
+          example: Exclude false positives on a path
+          type: string
+        enabled:
+          description: Indicates whether the exclusion filter is enabled.
+          example: true
+          type: boolean
+        ip_list:
+          description: The client IP addresses matched by the exclusion filter (CIDR
+            notation is supported).
+          items:
+            example: 198.51.100.72
+            type: string
+          type: array
+        on_match:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterOnMatch'
+        parameters:
+          description: A list of parameters matched by the exclusion filter in the
+            HTTP query string and HTTP request body. Nested parameters can be matched
+            by joining fields with a dot character.
+          items:
+            example: list.search.query
+            type: string
+          type: array
+        path_glob:
+          description: The HTTP path glob expression matched by the exclusion filter.
+          example: /accounts/*
+          type: string
+        rules_target:
+          description: The WAF rules targeted by the exclusion filter.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterRulesTarget'
+          type: array
+        scope:
+          description: The services where the exclusion filter is deployed.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterScope'
+          type: array
+      required:
+      - description
+      - enabled
+      type: object
+    ApplicationSecurityWafExclusionFilterUpdateData:
+      description: Object for updating a single WAF exclusion filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterType'
+      required:
+      - attributes
+      - type
+      type: object
+    ApplicationSecurityWafExclusionFilterUpdateRequest:
+      description: Request object for updating a single WAF exclusion filter.
+      properties:
+        data:
+          $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterUpdateData'
+      required:
+      - data
+      type: object
+    ApplicationSecurityWafExclusionFiltersResponse:
+      description: Response object for multiple WAF exclusion filters.
+      properties:
+        data:
+          description: A list of WAF exclusion filters.
+          items:
+            $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResource'
+          type: array
+      type: object
     AppsSortField:
       description: The field and direction to sort apps by
       enum:
@@ -3132,7 +3930,7 @@ components:
       x-enum-varnames:
       - AUTHN_MAPPINGS
     AwsAccountId:
-      description: The ID of an AWS account.
+      description: The ID of the AWS account.
       example: '123456789012'
       type: string
     AwsCURConfig:
@@ -3351,6 +4149,102 @@ components:
             $ref: '#/components/schemas/AwsCURConfig'
           type: array
       type: object
+    AwsOnDemandAttributes:
+      description: Attributes for the AWS on demand task.
+      properties:
+        arn:
+          description: The arn of the resource to scan.
+          example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
+          type: string
+        assigned_at:
+          description: Specifies the assignment timestamp if the task has been already
+            assigned to a scanner.
+          example: '2025-02-11T18:25:04.550564Z'
+          type: string
+        created_at:
+          description: The task submission timestamp.
+          example: '2025-02-11T18:13:24.576915Z'
+          type: string
+        status:
+          description: 'Indicates the status of the task.
+
+            QUEUED: the task has been submitted successfully and the resource has
+            not been assigned to a scanner yet.
+
+            ASSIGNED: the task has been assigned.
+
+            ABORTED: the scan has been aborted after a period of time due to technical
+            reasons, such as resource not found, insufficient permissions, or the
+            absence of a configured scanner.'
+          example: QUEUED
+          type: string
+      type: object
+    AwsOnDemandCreateAttributes:
+      description: Attributes for the AWS on demand task.
+      properties:
+        arn:
+          description: The arn of the resource to scan. Agentless supports the scan
+            of EC2 instances, lambda functions, AMI, ECR, RDS and S3 buckets.
+          example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
+          type: string
+      required:
+      - arn
+      type: object
+    AwsOnDemandCreateData:
+      description: Object for a single AWS on demand task.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsOnDemandCreateAttributes'
+        type:
+          $ref: '#/components/schemas/AwsOnDemandType'
+      required:
+      - type
+      - attributes
+      type: object
+    AwsOnDemandCreateRequest:
+      description: Request object that includes the on demand task to submit.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsOnDemandCreateData'
+      required:
+      - data
+      type: object
+    AwsOnDemandData:
+      description: Single AWS on demand task.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AwsOnDemandAttributes'
+        id:
+          description: The UUID of the task.
+          example: 6d09294c-9ad9-42fd-a759-a0c1599b4828
+          type: string
+        type:
+          $ref: '#/components/schemas/AwsOnDemandType'
+      type: object
+    AwsOnDemandListResponse:
+      description: Response object that includes a list of AWS on demand tasks.
+      properties:
+        data:
+          description: A list of on demand tasks.
+          items:
+            $ref: '#/components/schemas/AwsOnDemandData'
+          type: array
+      type: object
+    AwsOnDemandResponse:
+      description: Response object that includes an AWS on demand task.
+      properties:
+        data:
+          $ref: '#/components/schemas/AwsOnDemandData'
+      type: object
+    AwsOnDemandType:
+      default: aws_resource
+      description: The type of the on demand task. The value should always be `aws_resource`.
+      enum:
+      - aws_resource
+      example: aws_resource
+      type: string
+      x-enum-varnames:
+      - AWS_RESOURCE
     AwsScanOptionsAttributes:
       description: Attributes for the AWS scan options.
       properties:
@@ -3372,19 +4266,45 @@ components:
           example: true
           type: boolean
       type: object
+    AwsScanOptionsCreateAttributes:
+      description: Attributes for the AWS scan options to create.
+      properties:
+        lambda:
+          description: Indicates if scanning of Lambda functions is enabled.
+          example: true
+          type: boolean
+        sensitive_data:
+          description: Indicates if scanning for sensitive data is enabled.
+          example: false
+          type: boolean
+        vuln_containers_os:
+          description: Indicates if scanning for vulnerabilities in containers is
+            enabled.
+          example: true
+          type: boolean
+        vuln_host_os:
+          description: Indicates if scanning for vulnerabilities in hosts is enabled.
+          example: true
+          type: boolean
+      required:
+      - lambda
+      - sensitive_data
+      - vuln_containers_os
+      - vuln_host_os
+      type: object
     AwsScanOptionsCreateData:
       description: Object for the scan options of a single AWS account.
       properties:
         attributes:
-          $ref: '#/components/schemas/AwsScanOptionsAttributes'
+          $ref: '#/components/schemas/AwsScanOptionsCreateAttributes'
         id:
           $ref: '#/components/schemas/AwsAccountId'
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       required:
       - id
-      - attributes
       - type
+      - attributes
       type: object
     AwsScanOptionsCreateRequest:
       description: Request object that includes the scan options to create.
@@ -3457,12 +4377,13 @@ components:
         attributes:
           $ref: '#/components/schemas/AwsScanOptionsUpdateAttributes'
         id:
-          $ref: '#/components/schemas/AccountId'
+          $ref: '#/components/schemas/AwsAccountId'
         type:
           $ref: '#/components/schemas/AwsScanOptionsType'
       required:
-      - attributes
+      - id
       - type
+      - attributes
       type: object
     AwsScanOptionsUpdateRequest:
       description: Request object that includes the scan options to update.
@@ -17902,6 +18823,8 @@ components:
         path:
           description: The archive path.
           type: string
+        storage_class:
+          $ref: '#/components/schemas/LogsArchiveStorageClassS3Type'
         type:
           $ref: '#/components/schemas/LogsArchiveDestinationS3Type'
       required:
@@ -18045,6 +18968,23 @@ components:
       - WORKING
       - FAILING
       - WORKING_AUTH_LEGACY
+    LogsArchiveStorageClassS3Type:
+      default: STANDARD
+      description: The storage class where the archive will be stored.
+      enum:
+      - STANDARD
+      - STANDARD_IA
+      - ONEZONE_IA
+      - INTELLIGENT_TIERING
+      - GLACIER_IR
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - STANDARD_IA
+      - ONEZONE_IA
+      - INTELLIGENT_TIERING
+      - GLACIER_IR
     LogsArchives:
       description: The available archives.
       properties:
@@ -25195,6 +26135,199 @@ components:
             $ref: '#/components/schemas/RumMetricResponseData'
           type: array
       type: object
+    RumRetentionFilterAttributes:
+      description: The object describing attributes of a RUM retention filter.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      type: object
+    RumRetentionFilterCreateAttributes:
+      description: The object describing attributes of a RUM retention filter to create.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      required:
+      - event_type
+      - name
+      - sample_rate
+      type: object
+    RumRetentionFilterCreateData:
+      description: The new RUM retention filter properties to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - type
+      - attributes
+      type: object
+    RumRetentionFilterCreateRequest:
+      description: The RUM retention filter body to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterCreateData'
+      required:
+      - data
+      type: object
+    RumRetentionFilterData:
+      description: The RUM retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterAttributes'
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      type: object
+    RumRetentionFilterEnabled:
+      description: Whether the retention filter is enabled.
+      example: true
+      type: boolean
+    RumRetentionFilterEventType:
+      description: The type of RUM events to filter on.
+      enum:
+      - session
+      - view
+      - action
+      - error
+      - resource
+      - long_task
+      - vital
+      example: session
+      type: string
+      x-enum-varnames:
+      - SESSION
+      - VIEW
+      - ACTION
+      - ERROR
+      - RESOURCE
+      - LONG_TASK
+      - VITAL
+    RumRetentionFilterID:
+      description: ID of retention filter in UUID.
+      example: 051601eb-54a0-abc0-03f9-cc02efa18892
+      type: string
+    RumRetentionFilterQuery:
+      description: The query string for a RUM retention filter.
+      example: '@session.has_replay:true'
+      type: string
+    RumRetentionFilterResponse:
+      description: The RUM retention filter object.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterData'
+      type: object
+    RumRetentionFilterSampleRate:
+      description: The sample rate for a RUM retention filter, between 0 and 100.
+      example: 25
+      format: int64
+      maximum: 100
+      minimum: 0
+      type: integer
+    RumRetentionFilterType:
+      default: retention_filters
+      description: The type of the resource. The value should always be retention_filters.
+      enum:
+      - retention_filters
+      example: retention_filters
+      type: string
+      x-enum-varnames:
+      - RETENTION_FILTERS
+    RumRetentionFilterUpdateAttributes:
+      description: The object describing attributes of a RUM retention filter to update.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      type: object
+    RumRetentionFilterUpdateData:
+      description: The new RUM retention filter properties to update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RumRetentionFilterUpdateRequest:
+      description: The RUM retention filter body to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterUpdateData'
+      required:
+      - data
+      type: object
+    RumRetentionFiltersOrderData:
+      description: The RUM retention filter data for ordering.
+      properties:
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - id
+      - type
+      type: object
+    RumRetentionFiltersOrderRequest:
+      description: 'The list of RUM retention filter IDs along with their corresponding
+        type to reorder.
+
+        All retention filter IDs should be included in the list created for a RUM
+        application.'
+      properties:
+        data:
+          description: A list of RUM retention filter IDs along with type.
+          items:
+            $ref: '#/components/schemas/RumRetentionFiltersOrderData'
+          type: array
+      type: object
+    RumRetentionFiltersOrderResponse:
+      description: The list of RUM retention filter IDs along with type.
+      properties:
+        data:
+          description: A list of RUM retention filter IDs along with type.
+          items:
+            $ref: '#/components/schemas/RumRetentionFiltersOrderData'
+          type: array
+      type: object
+    RumRetentionFiltersResponse:
+      description: All RUM retention filters for a RUM application.
+      properties:
+        data:
+          description: A list of RUM retention filters.
+          items:
+            $ref: '#/components/schemas/RumRetentionFilterData'
+          type: array
+      type: object
     RunHistoricalJobRequest:
       description: Run a historical job request.
       properties:
@@ -25227,6 +26360,10 @@ components:
       type: string
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBCREATE
+    RunRetentionFilterName:
+      description: The name of a RUM retention filter.
+      example: Retention filter for session
+      type: string
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -33782,6 +34919,98 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
+  /api/v2/agentless_scanning/ondemand/aws:
+    get:
+      description: Fetches the most recent 1000 AWS on demand tasks.
+      operationId: ListAwsOnDemandTasks
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS On Demand tasks
+      tags:
+      - Agentless Scanning
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+      x-undo:
+        type: safe
+    post:
+      description: Trigger the scan of an AWS resource with a high priority. Agentless
+        scanning must be activated for the AWS account containing the resource to
+        scan.
+      operationId: CreateAwsOnDemandTask
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsOnDemandCreateRequest'
+        description: The definition of the on demand task.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandResponse'
+          description: AWS on demand task created successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Post an AWS on demand task
+      tags:
+      - Agentless Scanning
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_write
+      x-undo:
+        type: idempotent
+  /api/v2/agentless_scanning/ondemand/aws/{task_id}:
+    get:
+      description: Fetch the data of a specific on demand task.
+      operationId: GetAwsOnDemandTask
+      parameters:
+      - $ref: '#/components/parameters/OnDemandTaskId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AwsOnDemandResponse'
+          description: OK.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get AWS On Demand task by id
+      tags:
+      - Agentless Scanning
+      x-menu-order: 6
+      x-permission:
+        operator: OR
+        permissions:
+        - security_monitoring_findings_read
+      x-undo:
+        type: safe
   /api/v2/api_keys:
     get:
       description: List all API keys available for your account.
@@ -36331,7 +37560,7 @@ paths:
       x-menu-order: 1
       x-pagination:
         limitParam: page[limit]
-        pageParam: page[offset]
+        pageOffsetParam: page[offset]
         resultsPath: data
       x-undo:
         type: safe
@@ -46099,6 +47328,352 @@ paths:
         - timeseries_query
       x-undo:
         type: idempotent
+  /api/v2/remote_config/products/asm/waf/custom_rules:
+    get:
+      description: Retrieve a list of WAF custom rule.
+      operationId: ListApplicationSecurityWAFCustomRules
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleListResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all WAF custom rules
+      tags:
+      - Application Security
+      x-menu-order: 13
+      x-undo:
+        type: safe
+    post:
+      description: Create a new WAF custom rule with the given parameters.
+      operationId: CreateApplicationSecurityWafCustomRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleCreateRequest'
+        description: The definition of the new WAF Custom Rule.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a WAF custom rule
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-given:
+        custom_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"custom_rule\",\n    \"attributes\":
+              {\n      \"blocking\": false,\n      \"conditions\": [\n        {\n
+              \         \"operator\": \"match_regex\",\n          \"parameters\":
+              {\n            \"inputs\": [\n              {\n                \"address\":
+              \"server.request.query\",\n                \"key_path\": [\n                  \"id\"\n
+              \               ]\n              }\n            ],\n            \"regex\":
+              \"badactor\"\n          }\n        }\n      ],\n      \"enabled\": true,\n
+              \     \"name\": \"test\",\n      \"path_glob\": \"/test\",\n      \"scope\":
+              [\n        {\n          \"env\": \"test\",\n          \"service\": \"test\"\n
+              \       }\n      ],\n      \"tags\": {\n        \"category\": \"attack_attempt\",\n
+              \       \"type\": \"test\"\n      }\n    }\n  }\n}"
+          step: there is a valid "custom_rule" in the system
+      x-menu-order: 12
+      x-undo:
+        operationId: DeleteApplicationSecurityWafCustomRule
+        parameters:
+        - name: custom_rule_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/custom_rules/{custom_rule_id}:
+    delete:
+      description: Delete a specific WAF custom rule.
+      operationId: DeleteApplicationSecurityWafCustomRule
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafCustomRuleIDParam'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a WAF Custom Rule
+      tags:
+      - Application Security
+      x-menu-order: 16
+      x-terraform-resource: appsec_waf_custom_rule
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a WAF custom rule by ID.
+      operationId: GetApplicationSecurityWafCustomRule
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafCustomRuleIDParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a WAF custom rule
+      tags:
+      - Application Security
+      x-menu-order: 10
+      x-terraform-resource: appsec_waf_custom_rule
+      x-undo:
+        type: safe
+    put:
+      description: 'Update a specific WAF custom Rule.
+
+        Returns the Custom Rule object when the request is successful.'
+      operationId: UpdateApplicationSecurityWafCustomRule
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafCustomRuleIDParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleUpdateRequest'
+        description: New definition of the WAF Custom Rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafCustomRuleResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a WAF Custom Rule
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-menu-order: 15
+      x-terraform-resource: appsec_waf_custom_rule
+      x-undo:
+        type: idempotent
+  /api/v2/remote_config/products/asm/waf/exclusion_filters:
+    get:
+      description: Retrieve a list of WAF exclusion filters.
+      operationId: ListApplicationSecurityWafExclusionFilters
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafExclusionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all WAF exclusion filters
+      tags:
+      - Application Security
+      x-menu-order: 3
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_read
+      x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new WAF exclusion filter with the given parameters.
+
+
+        A request matched by an exclusion filter will be ignored by the Application
+        Security WAF product.
+
+        Go to https://app.datadoghq.com/security/appsec/passlist to review existing
+        exclusion filters (also called passlist entries).'
+      operationId: CreateApplicationSecurityWafExclusionFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterCreateRequest'
+        description: The definition of the new WAF exclusion filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a WAF exclusion filter
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-given:
+        exclusion_filter:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"exclusion_filter\",\n    \"attributes\":
+              {\n      \"description\": \"My Exclusion Filter\",\n      \"enabled\":
+              true,\n      \"path_glob\": \"*\",\n      \"parameters\": [\n        \"list.search.query\"\n
+              \     ],\n      \"rules_target\": [\n        {\n          \"tags\":
+              {\n            \"category\":\"attack_attempt\",\n            \"type\":\"xss\"\n
+              \         }\n        }\n      ],\n      \"scope\": [\n        {\n          \"env\":
+              \"staging\",\n          \"service\": \"event-query\"\n        }\n      ]\n
+              \   }\n  }\n}"
+          step: there is a valid "exclusion_filter" in the system
+      x-menu-order: 2
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        operationId: DeleteApplicationSecurityWafExclusionFilter
+        parameters:
+        - name: exclusion_filter_id
+          source: data.id
+        type: unsafe
+  /api/v2/remote_config/products/asm/waf/exclusion_filters/{exclusion_filter_id}:
+    delete:
+      description: Delete a specific WAF exclusion filter using its identifier.
+      operationId: DeleteApplicationSecurityWafExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafExclusionFilterID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a WAF exclusion filter
+      tags:
+      - Application Security
+      x-menu-order: 6
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        type: idempotent
+    get:
+      description: Retrieve a specific WAF exclusion filter using its identifier.
+      operationId: GetApplicationSecurityWafExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafExclusionFilterID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a WAF exclusion filter
+      tags:
+      - Application Security
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_read
+      x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        type: safe
+    put:
+      description: 'Update a specific WAF exclusion filter using its identifier.
+
+        Returns the exclusion filter object when the request is successful.'
+      operationId: UpdateApplicationSecurityWafExclusionFilter
+      parameters:
+      - $ref: '#/components/parameters/ApplicationSecurityWafExclusionFilterID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterUpdateRequest'
+        description: The exclusion filter to update.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationSecurityWafExclusionFilterResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a WAF exclusion filter
+      tags:
+      - Application Security
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-permission:
+        operator: AND
+        permissions:
+        - appsec_protect_write
+      x-terraform-resource: appsec_waf_exclusion_filter
+      x-undo:
+        type: idempotent
   /api/v2/remote_config/products/cws/agent_rules:
     get:
       description: Get the list of Cloud Security Management Threats Agent rules.
@@ -47218,6 +48793,185 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/rum/applications/{app_id}/relationships/retention_filters:
+    patch:
+      description: 'Order RUM retention filters for a RUM application.
+
+        Returns RUM retention filter objects without attributes from the request body
+        when the request is successful.'
+      operationId: OrderRetentionFilters
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFiltersOrderRequest'
+        description: New definition of the RUM retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFiltersOrderResponse'
+          description: Ordered
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Order RUM retention filters
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/rum/applications/{app_id}/retention_filters:
+    get:
+      description: Get the list of RUM retention filters for a RUM application.
+      operationId: ListRetentionFilters
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all RUM retention filters
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a RUM retention filter for a RUM application.
+
+        Returns RUM retention filter objects from the request body when the request
+        is successful.'
+      operationId: CreateRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFilterCreateRequest'
+        description: The definition of the new RUM retention filter.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/rum/applications/{app_id}/retention_filters/{rf_id}:
+    delete:
+      description: Delete a RUM retention filter for a RUM application.
+      operationId: DeleteRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a RUM retention filter for a RUM application.
+      operationId: GetRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a RUM retention filter for a RUM application.
+
+        Returns RUM retention filter objects from the request body when the request
+        is successful.'
+      operationId: UpdateRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFilterUpdateRequest'
+        description: New definition of the RUM retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: Updated
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -55760,14 +57514,31 @@ tags:
   name: Action Connection
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
-    teams to install Agents on every host or where Agents cannot be installed.\nGo
-    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+    teams to install Agents on every host or where Agents cannot be installed.\nAgentless
+    offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/
+    to learn more."
   name: Agentless Scanning
 - description: Datadog App Builder provides a low-code solution to rapidly develop
     and integrate secure, customized applications into your monitoring stack that
     are built to accelerate remediation at scale. These API endpoints allow you to
     create, read, update, delete, and publish apps.
   name: App Builder
+- description: '[Datadog Application Security](https://docs.datadoghq.com/security/application_security/)
+    provides protection against
+
+    application-level attacks that aim to exploit code-level vulnerabilities,
+
+    such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and
+
+    Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps
+
+    hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for
+
+    supported languages) AWS Fargate.'
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/security/application_security/
+  name: Application Security
 - description: Search your Audit Logs events over HTTP.
   name: Audit
 - description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
@@ -56102,6 +57873,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list)
+    of RUM for your organization.
+  name: Rum Retention Filters
 - description: 'Provision Datadog users and teams using SCIM APIs.
 
 
