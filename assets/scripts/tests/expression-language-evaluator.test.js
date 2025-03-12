@@ -6,10 +6,31 @@ jest.mock('../components/expression-language-parser', () => {
     return {
       evaluate: jest.fn((expr) => {
         // Simple mock implementation that returns success for valid expressions
-        if (expr) {
+        if (expr === "invalid_expression") {
+          return { success: false, error: 'Invalid expression' };
+        } else if (expr) {
           return { success: true, result: `Result of ${expr}` };
         } else {
           return { success: false, error: 'Empty expression' };
+        }
+      }),
+      getAutocompleteSuggestions: jest.fn((input) => {
+        // Mock implementation for autocomplete suggestions
+        if (input.includes('len')) {
+          return [
+            { name: 'len', type: 'function', description: 'Returns the length of a string, array, or object' }
+          ];
+        } else if (input.includes('my')) {
+          return [
+            { name: 'myCollection', type: 'variable', description: 'Array with 3 elements' }
+          ];
+        } else if (input.includes('new')) {
+          return [
+            { name: 'newCollection', type: 'variable', description: 'Array with 4 elements' },
+            { name: 'newDictionary', type: 'variable', description: 'Object with 3 properties' }
+          ];
+        } else {
+          return [];
         }
       })
     };
@@ -24,6 +45,7 @@ describe('ExpressionLanguageEvaluator', () => {
       <div class="expression-repl">
         <div class="repl-history" id="repl-history"></div>
         <input type="text" id="repl-input">
+        <div id="autocomplete-container"></div>
         <button id="repl-run-btn"></button>
       </div>
     `;
@@ -44,12 +66,13 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
           <div class="expression-result-container"></div>
         </div>
         <div class="expression-repl">
           <div class="repl-history" id="repl-history"></div>
           <input type="text" id="repl-input">
+          <div id="autocomplete-container"></div>
           <button id="repl-run-btn"></button>
         </div>
       `;
@@ -69,7 +92,7 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
           <div class="expression-result-container"></div>
         </div>
       `;
@@ -85,7 +108,30 @@ describe('ExpressionLanguageEvaluator', () => {
       runButton.click();
 
       // Verify the result was set
-      expect(resultElement.textContent).toBe('Test Result');
+      expect(resultElement.textContent).toBe('Result of len(myCollection)');
+      expect(resultElement.classList.contains('repl-result')).toBe(true);
+    });
+
+    it('should handle error expressions', () => {
+      // Create the evaluator DOM structure with an invalid expression
+      document.body.innerHTML = `
+        <div class="expression-evaluator">
+          <button class="run-expression-btn"></button>
+          <div class="expression-result" data-expression="invalid_expression"></div>
+          <div class="expression-result-container"></div>
+        </div>
+      `;
+
+      new ExpressionLanguageEvaluator();
+      const runButton = document.querySelector('.run-expression-btn');
+      const resultElement = document.querySelector('.expression-result');
+
+      // Simulate clicking the button
+      runButton.click();
+
+      // Verify the error was displayed
+      expect(resultElement.textContent).toBe('Invalid expression');
+      expect(resultElement.classList.contains('repl-error')).toBe(true);
     });
 
     it('should not set up handler if elements are missing', () => {
@@ -93,7 +139,7 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
         </div>
       `;
 
@@ -307,6 +353,129 @@ describe('ExpressionLanguageEvaluator', () => {
       const displayedErrorElement = history.querySelector('.repl-error');
       expect(displayedErrorElement).not.toBeNull();
       expect(displayedErrorElement.textContent).toBe('Test error message');
+    });
+  });
+
+  describe('Autocomplete', () => {
+    it('should show autocomplete suggestions when typing', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.dispatchEvent(new Event('input'));
+
+      // Check if autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Check if the correct suggestion is shown
+      const suggestionItem = autocompleteContainer.querySelector('.autocomplete-item');
+      expect(suggestionItem).not.toBeNull();
+      expect(suggestionItem.querySelector('.item-name').textContent).toBe('len');
+      expect(suggestionItem.querySelector('.item-type').textContent).toBe('function');
+    });
+
+    it('should hide autocomplete when input is empty', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // First show autocomplete
+      input.value = 'len';
+      input.dispatchEvent(new Event('input'));
+
+      // Then clear input
+      input.value = '';
+      input.dispatchEvent(new Event('input'));
+
+      // Check if autocomplete is hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should select suggestion with Tab key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Tab key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Check if the suggestion was applied
+      expect(input.value).toBe('len()');
+
+      // Check if autocomplete is now hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should navigate suggestions with arrow keys', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger multiple suggestions
+      input.value = 'new';
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Down arrow key press to select first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Check if the first suggestion is selected
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item');
+      expect(items[0].classList.contains('selected')).toBe(true);
+
+      // Simulate Down arrow key press again to select second suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Check if the second suggestion is selected
+      expect(items[0].classList.contains('selected')).toBe(false);
+      expect(items[1].classList.contains('selected')).toBe(true);
+
+      // Simulate Up arrow key press to go back to first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+
+      // Check if the first suggestion is selected again
+      expect(items[0].classList.contains('selected')).toBe(true);
+      expect(items[1].classList.contains('selected')).toBe(false);
+    });
+
+    it('should select suggestion with Enter key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'my';
+      input.dispatchEvent(new Event('input'));
+
+      // Select the first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Simulate Enter key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Check if the suggestion was applied
+      expect(input.value).toBe('myCollection');
+
+      // Check if autocomplete is now hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should close autocomplete with Escape key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Escape key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      // Check if autocomplete is hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+
+      // Check that input value is preserved
+      expect(input.value).toBe('len');
     });
   });
 });

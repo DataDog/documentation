@@ -18,15 +18,30 @@ class ExpressionLanguageEvaluator {
 
     if (!runButton || !resultElement || !resultContainer) return;
 
-    const result = resultElement.getAttribute('data-result');
+    // Get the expression from the data attribute
+    const expression = resultElement.getAttribute('data-expression');
+
+    // Create a parser instance
+    const parser = new ExpressionLanguageParser();
 
     // Only set up the click handler if it hasn't been set up already
     if (!runButton.hasAttribute('data-initialized')) {
       runButton.setAttribute('data-initialized', 'true');
 
       runButton.addEventListener('click', () => {
-        // Set the result text
-        resultElement.textContent = result;
+        // Evaluate the expression using the parser
+        const evaluation = parser.evaluate(expression);
+
+        // Set the result text based on the evaluation
+        if (evaluation.success) {
+          resultElement.textContent = evaluation.result;
+          resultElement.classList.remove('repl-error');
+          resultElement.classList.add('repl-result');
+        } else {
+          resultElement.textContent = evaluation.error;
+          resultElement.classList.remove('repl-result');
+          resultElement.classList.add('repl-error');
+        }
 
         // Force a repaint to ensure styles are applied correctly
         void resultContainer.offsetWidth;
@@ -38,8 +53,9 @@ class ExpressionLanguageEvaluator {
     const input = repl.querySelector('#repl-input');
     const runButton = repl.querySelector('#repl-run-btn');
     const history = repl.querySelector('#repl-history');
+    const autocompleteContainer = repl.querySelector('#autocomplete-container');
 
-    if (!input || !runButton || !history) return;
+    if (!input || !runButton || !history || !autocompleteContainer) return;
 
     // Create a new instance of the expression language parser
     const parser = new ExpressionLanguageParser();
@@ -48,6 +64,11 @@ class ExpressionLanguageEvaluator {
     const commandHistory = [];
     let historyIndex = -1;
     let currentInput = '';
+
+    // Autocomplete state
+    let selectedSuggestionIndex = -1;
+    let suggestions = [];
+    let isAutocompleteVisible = false;
 
     // Function to add an entry to the history
     const addToHistory = (expr, result, isError = false) => {
@@ -81,10 +102,161 @@ class ExpressionLanguageEvaluator {
       history.scrollTop = history.scrollHeight;
     };
 
+    // Function to show autocomplete suggestions
+    const showAutocompleteSuggestions = () => {
+      // Get suggestions from parser
+      suggestions = parser.getAutocompleteSuggestions(input.value);
+
+      // Clear previous suggestions
+      autocompleteContainer.innerHTML = '';
+
+      if (suggestions.length === 0) {
+        // Show "no suggestions" message if there are no suggestions
+        const noSuggestions = document.createElement('div');
+        noSuggestions.className = 'no-suggestions';
+        noSuggestions.textContent = 'No suggestions available';
+        autocompleteContainer.appendChild(noSuggestions);
+      } else {
+        // Create suggestion elements
+        suggestions.forEach((suggestion, index) => {
+          const item = document.createElement('div');
+          item.className = 'autocomplete-item';
+          item.dataset.index = index;
+
+          const name = document.createElement('span');
+          name.className = 'item-name';
+          name.textContent = suggestion.name;
+
+          const type = document.createElement('span');
+          type.className = 'item-type';
+          type.textContent = suggestion.type;
+
+          const description = document.createElement('span');
+          description.className = 'item-description';
+          description.textContent = suggestion.description;
+
+          item.appendChild(name);
+          item.appendChild(type);
+          item.appendChild(description);
+
+          // Add click handler to select suggestion
+          item.addEventListener('click', () => {
+            selectSuggestion(index);
+          });
+
+          autocompleteContainer.appendChild(item);
+        });
+      }
+
+      // Show the autocomplete container
+      autocompleteContainer.classList.add('visible');
+      isAutocompleteVisible = true;
+      selectedSuggestionIndex = -1;
+
+      // Adjust position to ensure it's visible (only in browser environment)
+      try {
+        // Check if we're in a browser environment with proper DOM support
+        if (typeof window !== 'undefined' && window.innerHeight &&
+            autocompleteContainer.getBoundingClientRect &&
+            typeof autocompleteContainer.getBoundingClientRect === 'function') {
+
+          const containerRect = autocompleteContainer.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+
+          if (containerRect.bottom > viewportHeight) {
+            // Position above the input if it would go below viewport
+            autocompleteContainer.style.top = 'auto';
+            autocompleteContainer.style.bottom = '100%';
+            autocompleteContainer.style.maxHeight = `${Math.min(200, containerRect.top - 10)}px`;
+          } else {
+            // Reset to default position below input
+            autocompleteContainer.style.top = '100%';
+            autocompleteContainer.style.bottom = 'auto';
+            autocompleteContainer.style.maxHeight = '200px';
+          }
+        }
+      } catch (e) {
+        // Fallback for test environment
+        autocompleteContainer.style.top = '100%';
+        autocompleteContainer.style.bottom = 'auto';
+        autocompleteContainer.style.maxHeight = '200px';
+      }
+    };
+
+    // Function to hide autocomplete suggestions
+    const hideAutocompleteSuggestions = () => {
+      autocompleteContainer.classList.remove('visible');
+      isAutocompleteVisible = false;
+      selectedSuggestionIndex = -1;
+    };
+
+    // Function to navigate through suggestions
+    const navigateSuggestions = (direction) => {
+      if (!isAutocompleteVisible || suggestions.length === 0) return;
+
+      // Remove selection from current item
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item');
+      if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < items.length) {
+        items[selectedSuggestionIndex].classList.remove('selected');
+      }
+
+      // Update selected index
+      if (direction === 'down') {
+        selectedSuggestionIndex = (selectedSuggestionIndex + 1) % suggestions.length;
+      } else {
+        selectedSuggestionIndex = (selectedSuggestionIndex - 1 + suggestions.length) % suggestions.length;
+      }
+
+      // Add selection to new item
+      items[selectedSuggestionIndex].classList.add('selected');
+
+      // Scroll to make selected item visible (only in browser environment)
+      if (items[selectedSuggestionIndex].scrollIntoView && typeof items[selectedSuggestionIndex].scrollIntoView === 'function') {
+        items[selectedSuggestionIndex].scrollIntoView({ block: 'nearest' });
+      }
+    };
+
+    // Function to select a suggestion
+    const selectSuggestion = (index) => {
+      if (index < 0 || index >= suggestions.length) return;
+
+      const suggestion = suggestions[index];
+      const inputValue = input.value;
+
+      // Get the part of the input before the current word
+      const lastWordMatch = inputValue.match(/.*?([a-zA-Z0-9_@]*)$/);
+      const prefix = lastWordMatch ? inputValue.slice(0, inputValue.length - lastWordMatch[1].length) : inputValue;
+
+      // Replace the current word with the suggestion
+      input.value = prefix + suggestion.name;
+
+      // If it's a function, add parentheses and place cursor between them
+      if (suggestion.type === 'function') {
+        input.value += '()';
+        setTimeout(() => {
+          input.selectionStart = input.selectionEnd = input.value.length - 1;
+        }, 0);
+      } else {
+        // For other types, place cursor at the end
+        setTimeout(() => {
+          input.selectionStart = input.selectionEnd = input.value.length;
+        }, 0);
+      }
+
+      // Hide autocomplete
+      hideAutocompleteSuggestions();
+
+      // Focus the input
+      input.focus();
+    };
+
     // Handle the run button click
     runButton.addEventListener('click', () => {
       const expr = input.value.trim();
       if (!expr) return; // Don't process empty expressions
+
+      // Hide autocomplete if visible
+      hideAutocompleteSuggestions();
 
       // Improved deduplication: Remove the command if it already exists in history
       // and add it to the end (most recent position)
@@ -113,12 +285,72 @@ class ExpressionLanguageEvaluator {
       input.focus();
     });
 
-    // Handle Enter key in the input
+    // Handle input events for autocomplete
+    input.addEventListener('input', () => {
+      if (input.value.trim()) {
+        showAutocompleteSuggestions();
+      } else {
+        hideAutocompleteSuggestions();
+      }
+    });
+
+    // Handle focus/blur events for autocomplete
+    input.addEventListener('focus', () => {
+      if (input.value.trim()) {
+        showAutocompleteSuggestions();
+      }
+    });
+
+    // Close autocomplete when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!autocompleteContainer.contains(e.target) && e.target !== input) {
+        hideAutocompleteSuggestions();
+      }
+    });
+
+    // Handle key events for autocomplete and command history
     input.addEventListener('keydown', (e) => {
+      // Handle Enter key
       if (e.key === 'Enter') {
-        runButton.click();
+        // If autocomplete is visible and an item is selected, select it
+        if (isAutocompleteVisible && selectedSuggestionIndex >= 0) {
+          selectSuggestion(selectedSuggestionIndex);
+          e.preventDefault();
+        } else {
+          // Otherwise, run the command
+          runButton.click();
+          e.preventDefault();
+        }
+      }
+      // Handle Tab key for autocomplete
+      else if (e.key === 'Tab') {
+        if (isAutocompleteVisible) {
+          if (selectedSuggestionIndex >= 0) {
+            // If an item is selected, select it
+            selectSuggestion(selectedSuggestionIndex);
+          } else if (suggestions.length === 1) {
+            // If there's only one suggestion, select it automatically
+            selectSuggestion(0);
+          }
+          e.preventDefault();
+        }
+      }
+      // Handle Escape key to close autocomplete
+      else if (e.key === 'Escape' && isAutocompleteVisible) {
+        hideAutocompleteSuggestions();
         e.preventDefault();
-      } else if (e.key === 'ArrowUp') {
+      }
+      // Handle arrow keys for autocomplete navigation
+      else if (e.key === 'ArrowDown' && isAutocompleteVisible) {
+        navigateSuggestions('down');
+        e.preventDefault();
+      }
+      else if (e.key === 'ArrowUp' && isAutocompleteVisible) {
+        navigateSuggestions('up');
+        e.preventDefault();
+      }
+      // Handle command history navigation when autocomplete is not visible
+      else if (e.key === 'ArrowUp' && !isAutocompleteVisible) {
         // Save current input if we're just starting to navigate history
         if (historyIndex === -1) {
           currentInput = input.value;
@@ -135,7 +367,8 @@ class ExpressionLanguageEvaluator {
           }, 0);
         }
         e.preventDefault();
-      } else if (e.key === 'ArrowDown') {
+      }
+      else if (e.key === 'ArrowDown' && !isAutocompleteVisible) {
         // Navigate down through history
         if (historyIndex > 0) {
           historyIndex--;
