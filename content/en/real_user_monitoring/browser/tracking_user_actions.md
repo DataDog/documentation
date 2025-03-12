@@ -35,7 +35,7 @@ To control which information is sent to Datadog, you can [mask action names with
 
 ## Track user interactions
 
-The RUM Browser SDK automatically tracks clicks to generate click actions. In general, one click action represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (for more information, see [Frustration Signals "rage clicks"][7]).
+The RUM Browser SDK automatically tracks clicks to generate click actions. A one-click action generally represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (see [Frustration Signals "rage clicks"][7]).
 
 ## Action timing metrics
 
