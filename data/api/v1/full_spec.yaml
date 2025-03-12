@@ -29830,6 +29830,46 @@ paths:
         parameters: []
         type: unsafe
   /api/v1/logs/config/indexes/{name}:
+    delete:
+      description: 'Delete an existing index from your organization. Index deletions
+        are permanent and cannot be reverted.
+
+        You cannot recreate an index with the same name as deleted ones.'
+      operationId: DeleteLogsIndex
+      parameters:
+      - description: Name of the log index.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an index
+      tags:
+      - Logs Indexes
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
+      x-undo:
+        type: idempotent
     get:
       description: Get one log index from your organization. This endpoint takes no
         JSON arguments.
