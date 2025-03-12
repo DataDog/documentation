@@ -4391,16 +4391,11 @@ menu:
       identifier: cd_deployments_ciproviders
       parent: cd_deployments
       weight: 102
-    - name: Search and Manage
-      url: continuous_delivery/search
-      identifier: cd_search
-      parent: cd
-      weight: 2
     - name: Explorer
       url: continuous_delivery/explorer
       identifier: cd_explorer
       parent: cd
-      weight: 3
+      weight: 2
     - name: Search Syntax
       url: continuous_delivery/explorer/search_syntax
       identifier: cd_explorer_search_syntax
