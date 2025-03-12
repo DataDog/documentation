@@ -12,6 +12,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ReactTimeAgo from 'react-time-ago';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -71,8 +72,13 @@ function App() {
   };
 
   if (!consoleData) {
-    return <h1>Loading...</h1>;
+    return null;
   }
+
+  // Use red text if build is more than 5 minutes old
+  const now = new Date().getTime();
+  const minutesAgo = Math.floor((now - consoleData.timestamp) / 60000);
+  const buildTimeStyles = minutesAgo > 5 ? { color: 'red' } : {};
 
   return (
     <>
@@ -99,7 +105,10 @@ function App() {
                 sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
               >
                 <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
-                  The latest build has Markdoc errors.
+                  The latest build has Markdoc errors.{' '}
+                  <span style={buildTimeStyles}>
+                    Last built <ReactTimeAgo date={consoleData.timestamp} locale="en-US" />.
+                  </span>
                 </AlertTitle>
               </Alert>
               <ErrorsReport errorsByFilePath={consoleData.errorsByFilePath} />
@@ -111,7 +120,12 @@ function App() {
               sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#ecf9ef' }}
               icon={<CheckCircleIcon sx={{ color: '#2a7e41' }} />}
             >
-              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>The latest build has no errors.</AlertTitle>
+              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>
+                The latest build has no errors.{' '}
+                <span style={buildTimeStyles}>
+                  Last built <ReactTimeAgo date={consoleData.timestamp} locale="en-US" />.
+                </span>
+              </AlertTitle>
             </Alert>
           )}
         </CustomTabPanel>

@@ -1637,8 +1637,10 @@ __metadata:
     eslint-plugin-react-hooks: ^5.0.0
     eslint-plugin-react-refresh: ^0.4.13
     globals: ^15.11.0
+    javascript-time-ago: ^2.5.11
     react: ^18.3.1
     react-dom: ^18.3.1
+    react-time-ago: ^7.3.3
     typescript: ~5.6.2
     typescript-eslint: ^8.10.0
     vite: ^5.4.9
@@ -2674,6 +2676,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"javascript-time-ago@npm:^2.5.11":
+  version: 2.5.11
+  resolution: "javascript-time-ago@npm:2.5.11"
+  dependencies:
+    relative-time-format: ^1.1.6
+  checksum: 7ab215ab731c832e5468e1da6dd36bdfdc0503d918041513baa3f9929f1fabfb75363e5f1669a56f4d58212f866887270279ef1b661b4b925318f3560d8f007c
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -2917,6 +2928,13 @@ __metadata:
   version: 2.0.0
   resolution: "mdurl@npm:2.0.0"
   checksum: 880bc289ef668df0bb34c5b2b5aaa7b6ea755052108cdaf4a5e5968ad01cf27e74927334acc9ebcc50a8628b65272ae6b1fd51fae1330c130e261c0466e1a3b2
+  languageName: node
+  linkType: hard
+
+"memoize-one@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "memoize-one@npm:6.0.0"
+  checksum: f185ea69f7cceae5d1cb596266dcffccf545e8e7b4106ec6aa93b71ab9d16460dd118ac8b12982c55f6d6322fcc1485de139df07eacffaae94888b9b3ad7675f
   languageName: node
   linkType: hard
 
@@ -3253,6 +3271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"performance-now@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "performance-now@npm:2.1.0"
+  checksum: 534e641aa8f7cba160f0afec0599b6cecefbb516a2e837b512be0adbe6c1da5550e89c78059c7fabc5c9ffdf6627edabe23eb7c518c4500067a898fa65c2b550
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
@@ -3334,6 +3359,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"raf@npm:^3.4.1":
+  version: 3.4.1
+  resolution: "raf@npm:3.4.1"
+  dependencies:
+    performance-now: ^2.1.0
+  checksum: 50ba284e481c8185dbcf45fc4618ba3aec580bb50c9121385d5698cb6012fe516d2015b1df6dd407a7b7c58d44be8086108236affbce1861edd6b44637c8cd52
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:^18.3.1":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -3367,6 +3401,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-time-ago@npm:^7.3.3":
+  version: 7.3.3
+  resolution: "react-time-ago@npm:7.3.3"
+  dependencies:
+    memoize-one: ^6.0.0
+    prop-types: ^15.8.1
+    raf: ^3.4.1
+  peerDependencies:
+    javascript-time-ago: ^2.3.7
+    react: ">=0.16.8"
+    react-dom: ">=0.16.8"
+  checksum: 07a05fa2be8c0ed8ff343cf07e00e06affffea7bdbf2d31d5592fac4fa66900eefc7b1eaafc5e3ab6e1991d2d34d792dcfd36a92b13f8c1f5f7ae8a3ee4aa139
+  languageName: node
+  linkType: hard
+
 "react-transition-group@npm:^4.4.5":
   version: 4.4.5
   resolution: "react-transition-group@npm:4.4.5"
@@ -3395,6 +3444,13 @@ __metadata:
   version: 0.14.1
   resolution: "regenerator-runtime@npm:0.14.1"
   checksum: 9f57c93277b5585d3c83b0cf76be47b473ae8c6d9142a46ce8b0291a04bb2cf902059f0f8445dcabb3fb7378e5fe4bb4ea1e008876343d42e46d3b484534ce38
+  languageName: node
+  linkType: hard
+
+"relative-time-format@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "relative-time-format@npm:1.1.6"
+  checksum: b0c14f2d81bb086d0bcedabab78cff0cd31d3ad5040db88f0dc671361c33bf5ec924fe897e9308a43c2f569b114dd543557b9df659f7a06e2d06d392b539d5d7
   languageName: node
   linkType: hard
 
