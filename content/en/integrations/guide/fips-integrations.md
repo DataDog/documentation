@@ -40,7 +40,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Envoy                   | OOTB                                                                                                                                                  |
 | Haproxy                 | OOTB                                                                                                                                                  |
 | Istio                   | OOTB                                                                                                                                                  |
-| Kafka                   | To enable TLS make sure to follow [this guide][1].                                                                                                         |
+| Kafka                   | To enable TLS make sure to follow the [JMXFetch FIPS-140 mode][1] guide.                                                                                                         |
 | MongoDB                 | The `tls` option must be set to `true` through the integration configuration.                                                                                  |
 | MySQL                   | The `ssl` option must be set through the integration configuration.                                                                                          |
 | Nginx                   | OOTB                                                                                                                                                  |
@@ -50,7 +50,7 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 | Redis                   | The `ssl` option must be enabled through the integration configuration.                                                                                      |
 | SSH                     | OOTB                                                                                                                                                  |
 | TLS                     | OOTB                                                                                                                                                  |
-| Tomcat                  | To enable TLS make sure to follow [this guide][1].                                                                                                         |
+| Tomcat                  | To enable TLS make sure to follow the [JMXFetch FIPS-140 mode][1] guide.                                                                                                         |
 | Vault                   | OOTB                                                                                                                                                  |
 | vSphere                 | Both `ssl_verify` and `rest_api_options > tls_verify` need to be set to `true` if using the vSphere REST API to get tags (`collect_tags: true`).        |
 | Windows Service         | OOTB                                                                                                                                                  |
@@ -61,9 +61,9 @@ Integrations marked out of the box ("OOTB") require no further configuration.
 Configuring the <strong>IIS integration<strong> to query remote systems is discouraged. It relies on a Windows API for cryptography, which Datadog cannot control.
 </div>
 
-[1]: /integrations/guide/jmxfetch-fips
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/guide/jmxfetch-fips
 
