@@ -12,9 +12,8 @@ Security Controls prevent false positives reporting in vulnerability detection u
 
 Security Controls differentiate between **Input Validators** and **Sanitizers**, depending on how a function is used in security validation:
 
-**Input Validators** → Used when the function validates the parameters passed to it. These ensure that user inputs comply with expected formats before they are processed.
-
-**Sanitizers** → Used when the function validates or modifies the return value before it is used further in the application. These help clean data to ensure it does not contain potentially harmful content.
+- **Input Validators**: Used when the function validates the parameters passed to it. Validators ensure that user inputs comply with expected formats before they are processed.
+- **Sanitizers**: Used when the function validates or modifies the return value before it is used further in the application. Sanitizers help clean data to ensure it does not contain potentially harmful content.
 
 ## Configuring security controls
 
