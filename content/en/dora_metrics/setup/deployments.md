@@ -186,7 +186,7 @@ When configuring the GitHub application:
 1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
 2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
-To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **Pull Request Information** feature is enabled.
+To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, in the **Datadog Features** table, the **Pull Request Information** feature is marked as valid.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
