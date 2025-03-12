@@ -39,7 +39,7 @@ CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules
 | [CIS GKE][34]                                   | v1.6.0                 | `cis-gke`                           | Cloud                    |
 | [PCI DSS][6]                                    | v4.0                   | `pci-dss`                           | Cloud                    |
 | [AICPA SOC 2][7]                                |                        | `soc-2`                             | Cloud                    |
-| [ISO/IEC 27001][8]                              | 2013                   | `iso-27001`                         | Cloud                    |
+| [ISO/IEC 27001][8]                              | 2013,2022              | `iso-27001`                         | Cloud                    |
 | [HIPAA][9]                                      |                        | `hipaa`                             | Cloud                    |
 | [GDPR][10]                                      |                        | `gdpr`                              | Cloud                    |
 | [NIST 800-53][30]                               | v5                     | `nist-800-53`                       | Cloud                    |
