@@ -23,7 +23,7 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
-# Developers/ui_extensions
+# Developers/ui_extensions (source removed in #27992)
 content/en/developers/ui_extensions.md
 content/en/developers/faq/ui_extensions.md
 

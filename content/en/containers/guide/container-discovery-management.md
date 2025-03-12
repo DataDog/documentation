@@ -22,7 +22,7 @@ In a containerized environment, you should deploy the Datadog Agent once per hos
 
 You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any [Autodiscovery][2]-based Agent integrations. 
 
-When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. 
+When the logs [`containerCollectAll` option][1] is enabled, the Agent collects logs from all discovered containers. These filtering options do not affect log collection if `containerCollectAll` is not enabled.
 
 You can set exceptions in two ways:
 
