@@ -56,6 +56,11 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/destination_settings/datadog %}}
@@ -184,6 +189,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -208,7 +218,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-<!-- {{% collapse-content title="Add rules from the library" level="h5" %}}
+{{% collapse-content title="Add rules from the library" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
@@ -217,7 +227,12 @@ Follow the instructions for the cloud provider you are using to archive your log
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
-{{% /collapse-content %}} -->
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -247,6 +262,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

@@ -341,6 +341,7 @@ Agent 6 and 7 support the following [AIX][1] versions:
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
+- 7.3 TL3 SP0
 
 
 [1]: /agent/basic_agent_usage/aix/

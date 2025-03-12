@@ -29,7 +29,12 @@ algolia:
 
 Tags are a way of adding dimensions to Datadog telemetries so they can be filtered, aggregated, and compared in Datadog visualizations. [Using tags][1] enables you to observe aggregate performance across several hosts and (optionally) narrow the set further based on specific elements. In summary, tagging is a method to observe aggregate data points.
 
-Tagging binds different data types in Datadog, allowing for correlation and call to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys.
+Tags are `key:value` pairs containing two parts:
+
+- The tag key is the identifier. The tag key can only exist once on each resource and is case sensitive.
+- The tag value is the specific data or information associated with the key. Tag values are not unique per resource and can be used across many resources in a `key-value` pair.
+
+Tagging binds different data types in Datadog, allowing for correlation and calls to action between metrics, traces, and logs. This is accomplished with **reserved** tag keys:
 
 | Tag Key   | Allows for                                                            |
 | --------- | --------------------------------------------------------------------- |
@@ -86,9 +91,14 @@ Tags may be assigned using any (or all) of the following methods.
 | [DogStatsD][6]           | When submitting metrics with DogStatsD.                          |
 
 For more information, see [Assigning Tags][7].
+
 #### Unified service tagging
 
 As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see [Unified Service Tagging][8].
+
+### Tag inheritance
+
+All metrics, logs, traces, and integrations go through a process of `host-tag` inheritance as data is ingested into Datadog. Since data is associated with a given hostname, those components inherit all the `host-level` tags associated with that host. These tags are visible in the [infrastructure list][12] for a given host, sourced from either the cloud provider or the Datadog Agent. See [missing `host-level` tags on new hosts or nodes][25] for more information. 
 
 ## Usage
 
@@ -142,3 +152,4 @@ For more information, see [Using Tags][1].
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
 [24]: /getting_started/tagging/using_tags/#ci-visibility
+[25]: /containers/kubernetes/log/?tab=datadogoperator#missing-host-level-tags-on-new-hosts-or-nodes
