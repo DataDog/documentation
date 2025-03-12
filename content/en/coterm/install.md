@@ -18,16 +18,15 @@ further_reading:
    curl --tlsv1.2 --proto '=https' -sSf 'https://update.coscreen.org/install-ddcoterm.sh' | bash
    ```
 
-   This command downloads the latest version of CoTerm to `~/.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually. 
+   This command downloads the latest version of CoTerm to `.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually. 
 
-2. Set your [Datadog site][6] in `~/.ddcoterm/config.yaml` under `connection_config.host`:
+2. If your [Datadog site][6] is not `https://app.datadoghq.com`, set your site in `.ddcoterm/config.yaml` under `connection_config.host`:
    ```yaml
    ...
    connection_config:
      host: {{< region-param key=dd_full_site code="true" >}}
    ...
    ```
-   **Note**: This defaults to `https://app.datadoghq.com`.
   
 3. Initialize your configuration file by running:
 
@@ -68,19 +67,19 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
   : Port for connecting to Datadog. Defaults to `443`.
 
   `api_key`
-  : If you are not using OAuth, your [Datadog API key][1]. If you have enabled OAuth, CoTerm defaults to using OAuth.
+  : If you are not using OAuth, your [Datadog API key][1]. If you have enabled OAuth, CoTerm defaults to using OAuth and ignores `api_key`.
 
   `app_key`
   : If you are not using OAuth, your [Datadog application key][2]. <br/>**Note**: To [require approvals with Case Management][5], you must use OAuth _or_ specify both your API key and application key in this file.
-
-## Uninstall
-
-To uninstall CoTerm, delete the `~/.ddcoterm` folder.
 
 ## Next steps
 
 - Run `ddcoterm` to start a recorded terminal session.
 - Learn more about [using CoTerm][3].
+
+## Uninstall
+
+To uninstall CoTerm, delete the `.ddcoterm` folder.
 
 ## Further reading
 

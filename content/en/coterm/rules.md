@@ -82,15 +82,16 @@ To take no action (other than running the command) when `rule` returns `true`, s
 
 ### Rule evaluation
 
-Rules are evaluated in order. CoTerm runs the actions specified for the first rule that evaluates to `true`.
+Rules are evaluated in order. CoTerm runs the actions specified for the first rule that evaluates to `true`, and does not evaluate any further rules.
 
 ## Action hierarchy
 
-CoTerm takes actions according to the following hierarchy:
-1. If CLI flags (such as `--save-level`, `--approval`) are set, actions specified through these CLI flags 
-2. If any Lua rule evaluates to `true`, actions associated with that rule
-3. Actions set in `process_config.default_actions`, if any
-4. Default actions: `["record", "logs", "process_info"]`
+You can specify actions for CoTerm to take in a number of different ways. CoTerm decides which actions to take according to the following hierarchy:
+
+1. **CLI flags**: If you specify actions in CLI flags (such as `--save-level`, `--approval`), CoTerm takes only the actions specified through these CLI flags. This overrides all other configurations.
+2. **Lua configuration file**: If no CLI flags specify actions, but a Lua rule in `.ddcoterm/config.yaml` evaluates to `true`, CoTerm takes the actions specified with the first rule that evalutes to `true`. Overrides all configurations other than CLI flags.
+3. **`process_config.default_actions`**: If no CLI flags specify actions, and no Lua rules match, CoTerm takes the actions specified in `process_config.default_actions` in `.ddcoterm/config.yaml`, if any.
+4. **Default actions**: If no CLI flags specify actions, no Lua rules match, and `process_config.default_actions` is not set, CoTerm takes the following actions: `["record", "logs", "process_info"]`.
 
 ## Lua environment and helper functions
 
