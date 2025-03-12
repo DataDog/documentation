@@ -44,15 +44,13 @@ This launches CoTerm and runs `datadog-agent status`. When the process completes
 
 ## Automatically record a command
 
-To configure CoTerm to automatically record a particular command, create a shim:
+To configure CoTerm to automatically record all future invocations of a particular command, create a shim:
 
 ```shell
 ddcoterm shim create datadog-agent
 ```
 
 After you create a shim, restart your terminal or source your profile. (For example, run `source ~/.bashrc`.) If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/overrides` to your PATH manually.
-
-All future invocations of `datadog-agent` are automatically recorded.
 
 ## Protect against dangerous terminal commands
 
@@ -66,7 +64,7 @@ When you try to execute a designated command (for example, `kubectl scale`), CoT
 
 1. Configure a linting rule in your `.ddcoterm/config.yaml` file. For details on how to configure linting in CoTerm, see [CoTerm Configuration Rules][4].
 
-{{< code-block lang="yaml" filename=".ddcoterm/config.yaml" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="yaml" filename=".ddcoterm/config.yaml" disable_copy="true" collapsible="true" >}}
 process_config:
   commands:
     - command: "kubectl"
@@ -75,11 +73,11 @@ process_config:
           if has_arg("scale") and flags.context == nil then
             return string.format("No kubectl context specified (effective context: '%s'). It is recommended to always explicitly specify the context when running `kubectl scale`.", k8s_context)
           end
-{{< /code-block >}}
+   {{< /code-block >}}
 
 With this configuration, CoTerm intercepts any `kubectl scale` command without a `--context` flag. 
 
-{{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm.No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
+{{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm: No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
 
 ### Require approval for commands
 
@@ -89,7 +87,7 @@ For even more dangerous commands, CoTerm can require explicit approval by anothe
 
 2. Configure requiring approval in your `.ddcoterm/config.yaml` file. For details, see [CoTerm Configuration Rules][4].
 
-{{< code-block lang="yaml" filename=".ddcoterm/config.yaml" disable_copy="true" collapsible="true" >}}
+   {{< code-block lang="yaml" filename=".ddcoterm/config.yaml" disable_copy="true" collapsible="true" >}}
 process_config:
   commands:
     - command: "kubectl"
@@ -97,11 +95,11 @@ process_config:
         # Record and require approval for all executions of `kubectl scale` in a production context
         - rule: |
             local applicable = has_arg("scale") and k8s_context:match("prod")
-            local user_message = "Proceed with caution. This command may disrupt your kubernetes cluster setup."
+            local user_message = "Proceed with caution. This command may disrupt your Kubernetes cluster setup."
             local approver_message = "Ensure that the user has documented a rollback plan before approving."
             return applicable, user_message, approver_message
           actions: ["record", "logs", "process_info", "approval"]
-{{< /code-block >}}
+   {{< /code-block >}}
 
 With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes.
 

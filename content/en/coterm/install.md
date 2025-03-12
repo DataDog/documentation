@@ -35,12 +35,12 @@ further_reading:
    ddcoterm init
    ```
 
-   Select your settings. You can change these settings [in the `~/.ddcoterm/config.yaml` file](#configure).
+   Select your settings. You can change these settings in the [`~/.ddcoterm/config.yaml` file](#configure-your-coterm-settings).
 
 ## Authorize CoTerm to connect to Datadog
 
-During initialization, you can choose one of the following ways to authorize CoTerm to access your Datadog Account.
-- **OAuth**: Opens a browser for you to log in with OAuth
+During initialization, you can choose one of the following ways to authorize CoTerm to access your Datadog Account:
+- **OAuth**: Opens a browser for you to log in with OAuth.
 - **API Key + App Key**: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
 - **API Key Only**: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
 

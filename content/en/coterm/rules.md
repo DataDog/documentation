@@ -31,7 +31,7 @@ process_config:
 
 Each item under `lints` is a Lua snippet that can return a string. Lints are evaluated in order. If a lint returns a string, that string is shown to the user as a warning prompt:
 
-{{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm.No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
+{{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm: No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
 
 The user then has the option to continue or abort.
 
@@ -46,7 +46,7 @@ process_config:
         - rule: |
             local k8s_context = flags.context or k8s_current_context or "unknown"
             local matches = has_arg("scale") and k8s_context:match("prod")
-            local user_message = "Proceed with caution. This command may disrupt your kubernetes cluster setup."
+            local user_message = "Proceed with caution. This command may disrupt your Kubernetes cluster setup."
             local approver_message = "Ensure that the user has documented a rollback plan before approving."
             return matches, user_message, approver_message
           actions: ["record", "logs", "process_info", "approval"]
@@ -64,7 +64,7 @@ Rules are more powerful than lints. For each item under `rules`, set `rule`, a L
 
 Each `rule` returns 1-3 values: `boolean, [string], [string]`.
 
-1. (required) A Boolean, whether the rule matches
+1. (required) A Boolean, whether the rule matches.
 2. (optional) A string, containing a message for the user. This string provides context to the user. It is only displayed if the first return value is `true`.
 3. (optional) A string, containing a message for the approver. If the first return value is `true` and the corresponding `actions` field contains `approval`, this string is displayed in the approval request in Datadog.
 
@@ -72,10 +72,10 @@ Each `rule` returns 1-3 values: `boolean, [string], [string]`.
 
 CoTerm can take the following actions when `rule` returns `true`:
 
-- `record`: Record the terminal session and send it to Datadog
-- `logs`: Generate Datadog logs, containing searchable snapshots of terminal output
-- `process_info`: Record all processes launched inside the terminal session and generate an event for each process
-- `approval`: Require approval before running the command
+- `record`: Record the terminal session and send it to Datadog.
+- `logs`: Generate Datadog logs, containing searchable snapshots of terminal output.
+- `process_info`: Record all processes launched inside the terminal session and generate an event for each process.
+- `approval`: Require approval before running the command.
 - `incidents`: Associate the recording with the [Datadog Incident][6] that the user is responding to, if any. If the user is responding to more than one incident, they are prompted to pick one.
 
 To take no action (other than running the command) when `rule` returns `true`, set `actions: []`.
@@ -88,7 +88,7 @@ Rules are evaluated in order. CoTerm runs the actions specified for the first ru
 
 CoTerm takes actions according to the following hierarchy:
 1. If CLI flags (such as `--save-level`, `--approval`) are set, actions specified through these CLI flags 
-2. If any Lua rule evaluates to `true`, the actions associated with that rule
+2. If any Lua rule evaluates to `true`, actions associated with that rule
 3. Actions set in `process_config.default_actions`, if any
 4. Default actions: `["record", "logs", "process_info"]`
 
