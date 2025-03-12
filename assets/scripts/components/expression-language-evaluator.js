@@ -44,6 +44,11 @@ class ExpressionLanguageEvaluator {
     // Create a new instance of the expression language parser
     const parser = new ExpressionLanguageParser();
 
+    // Command history management
+    const commandHistory = [];
+    let historyIndex = -1;
+    let currentInput = '';
+
     // Function to add an entry to the history
     const addToHistory = (expr, result, isError = false) => {
       const entry = document.createElement('div');
@@ -81,6 +86,20 @@ class ExpressionLanguageEvaluator {
       const expr = input.value.trim();
       if (!expr) return; // Don't process empty expressions
 
+      // Improved deduplication: Remove the command if it already exists in history
+      // and add it to the end (most recent position)
+      const existingIndex = commandHistory.indexOf(expr);
+      if (existingIndex !== -1) {
+        commandHistory.splice(existingIndex, 1);
+      }
+
+      // Add the command to the end of history
+      commandHistory.push(expr);
+
+      // Reset history index
+      historyIndex = -1;
+      currentInput = '';
+
       const evaluation = parser.evaluate(expr);
 
       if (evaluation.success) {
@@ -98,6 +117,40 @@ class ExpressionLanguageEvaluator {
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         runButton.click();
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp') {
+        // Save current input if we're just starting to navigate history
+        if (historyIndex === -1) {
+          currentInput = input.value;
+        }
+
+        // Navigate up through history
+        if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+          historyIndex++;
+          input.value = commandHistory[commandHistory.length - 1 - historyIndex];
+
+          // Move cursor to end of input
+          setTimeout(() => {
+            input.selectionStart = input.selectionEnd = input.value.length;
+          }, 0);
+        }
+        e.preventDefault();
+      } else if (e.key === 'ArrowDown') {
+        // Navigate down through history
+        if (historyIndex > 0) {
+          historyIndex--;
+          input.value = commandHistory[commandHistory.length - 1 - historyIndex];
+        } else if (historyIndex === 0) {
+          // Return to the current input when reaching the bottom of history
+          historyIndex = -1;
+          input.value = currentInput;
+        }
+
+        // Move cursor to end of input
+        setTimeout(() => {
+          input.selectionStart = input.selectionEnd = input.value.length;
+        }, 0);
+
         e.preventDefault();
       }
     });
