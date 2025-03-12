@@ -11,7 +11,7 @@ Database Monitoring (DBM) Recommendations draw attention to potential optimizati
 
 {{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
 
-## How it Works
+## How it works
 
 Datadog analyzes metrics and sample data from DBM to identify your systems' highest-priority issues. A severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. High-severity recommendations may indicate immediate or impending problems, while lower-severity recommendations can be addressed asynchronously to proactively maintain database health.
 
