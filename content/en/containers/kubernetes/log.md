@@ -63,7 +63,7 @@ Then apply the new configuration:
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-See the sample [manifest with logs, metrics, and APM collection enabled][1] for an additional example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+See the sample [manifest with logs, metrics, and APM collection enabled][1] for an additional example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection. The configuration parameter `datadog.containerIncludeLogs` is ignored in this case, and Autodiscovery log configurations must be set in the desired target pods or as an agent configuration file.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
 {{% /tab %}}
@@ -78,7 +78,7 @@ datadog:
     containerCollectAll: true
 ```
 
-You can set `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+You can set `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection. The configuration parameter `datadog.containerIncludeLogs` is ignored in this case, and Autodiscovery log configurations must be set in the desired target pods or as an agent configuration file.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
