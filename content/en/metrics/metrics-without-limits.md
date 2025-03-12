@@ -75,8 +75,8 @@ When selecting tags to include or exclude, choose to either [override existing t
 
 {{< img src="metrics/bulk_include_tags.png" alt="The Manage Tags option with Include tags and Override selected in the Configure tags section. The options to include tags actively queried on dashboards and monitors from the past 90 days and Specific tags are selected" style="width:100%" >}}
 
-All existing tag configurations for the selected metrics are overrided, and you define a new tag configuration. If you are choosing to **include tags**, you can select to include either or both of the following:
-   - Only tags actively queried in Datadog from the past 30, 60, or 90 days.
+All existing tag configurations for the selected metrics are overridden, and you define a new tag configuration. This allows you to make all tags queryable on all metric names. If you are choosing to **include tags**, you can select to include either or both of the following:
+   - Tags actively queried in Datadog from the past 30, 60, or 90 days.
    - A specific set of tags that you define.
 
 ##### Keep existing tag configurations
@@ -88,6 +88,8 @@ Existing tag configurations are retained, and you define new tags to be added to
 #### Use the API
 
 You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API call.
+
+**Note**: Use the `include_actively_queried_tags_window` attribute to include only tags actively queried within a given time frame.
 
 ### Refine and optimize your aggregations
 

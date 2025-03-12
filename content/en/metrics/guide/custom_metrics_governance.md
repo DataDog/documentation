@@ -153,7 +153,7 @@ Identify your organization's entire list of unqueried metrics over the past 30, 
 5. At the top of the [Metrics Summary page][6], click the **Configure Metrics** dropdown menu.
 6. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
 7. Specify the metric namespace prefix of the metrics you'd like to configure.
-8. Select **Include tags**.
+8. Select **Include tags**. By default, this includes all tags on all metric names queried in past 30 days, along with tags used on dashboards, monitors, notebooks and SLOs.
 9. Uncheck the option to include tags actively queried on dashboards and monitors.
 10. Click **Save**.
 
