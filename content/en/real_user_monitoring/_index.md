@@ -200,7 +200,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [2]: /real_user_monitoring/platform/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/platform/connect_rum_and_traces/
+[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
 [7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
