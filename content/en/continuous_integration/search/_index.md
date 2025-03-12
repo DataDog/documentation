@@ -1,5 +1,5 @@
 ---
-title: Search and Manage CI Pipelines 
+title: Search and Manage CI Pipelines
 description: Learn how to search for your CI pipelines.
 aliases:
 - /continuous_integration/explorer/search/
@@ -15,7 +15,7 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-  
+
 ## Overview
 
 The [Pipelines page][1] is useful for developers who want to keep an eye on the build pipeline for their service.
@@ -103,9 +103,9 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [3]: /continuous_integration/pipelines/github/#enable-log-collection
 [4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
-[6]: /account_management/teams/ 
+[6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

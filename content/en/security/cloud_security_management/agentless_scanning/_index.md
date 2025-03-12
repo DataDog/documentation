@@ -34,10 +34,11 @@ The following table provides a summary of Agentless scanning technologies in rel
 
 | Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Container Registries                            | Public ECR registries </br> Private ECR registries                                                                                        | -                                                                                                                                                                             |
 | Operating System                                | Linux                                                                                                                                     | Linux                                                                                                                                                                             |
 | Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      |
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
-| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
+| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> Encrypted - Customer Managed Key (CMK)                           | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
 | Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][12]                                                                                                                                                         |
 | Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
@@ -57,9 +58,13 @@ The following diagram illustrates how Agentless Scanning works:
     **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security Management enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
 2. For Lambda functions, the scanners fetch the function's code.
-3. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
-4. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
-5. Leveraging the collected package list along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
+3. For Container Images from registries, the scanners scan images from all running tasks, by pulling the layers from the registries using standard OCI APIs.
+
+    **Note**: The last 1000 published images in the accessible private registries are also selected for scanning.
+
+4. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
+5. After the scan is complete, the list of packages and information related to collected hosts are transmitted to Datadog, with all other data remaining within your infrastructure. Snapshots created during the scan cycle are deleted.
+6. Using the collected package list, along with Datadog's access to the Trivy vulnerabilities database, Datadog finds matching affected vulnerabilities in your resources and code.
 
 **Notes**:
 - The scanner operates as a separate VM instance within your infrastructure, ensuring minimal impact on existing systems and resources.
@@ -114,9 +119,12 @@ Along with displaying sensitive data matches, Sensitive Data Scanner surfaces an
 
 ## Cloud service provider cost
 
-When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends setting up [Agentless Scanning with Terraform][6] as the default template, as this also avoids cross-region networking.
+When using Agentless Scanning, there are additional cloud provider costs for running scanners and analyzing your cloud environments.
 
-To establish estimates on scanner costs, reach out to your [Datadog Customer Success Manager.][7]
+Your cloud configuration affects your cloud provider costs. Typically, using the [recommended configuration][13], these are in the range of $1 USD per scanned host per year. You should consult your cloud provider's information for exact amounts, which are subject to change without Datadog's involvement.
+
+For large cloud workloads distributed across multiple regions, Datadog recommends setting up [Agentless Scanning with Terraform][6] to avoid cross-region networking.
+
 
 ## Further reading
 
@@ -134,3 +142,4 @@ To establish estimates on scanner costs, reach out to your [Datadog Customer Suc
 [10]: /agent/remote_config
 [11]: /sensitive_data_scanner/scanning_rules/library_rules/
 [12]: /help
+[13]: /security/cloud_security_management/agentless_scanning/deployment_methods#recommended-configuration
