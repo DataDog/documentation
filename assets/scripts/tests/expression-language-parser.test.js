@@ -323,6 +323,21 @@ describe('ExpressionLanguageParser', () => {
       expect(result.success).toBe(true);
       expect(result.result).toBe('[2, 3]');
     });
+
+    test('should evaluate nested function calls', () => {
+      const result = parser.evaluate('len(filter(myCollection, {@it > 1}))');
+      expect(result.success).toBe(true);
+      expect(result.result).toBe('2');
+    });
+
+    test('should evaluate complex nested function calls with multiple levels', () => {
+      parser.evaluate('numbers = [1, 2, 3, 4, 5, 6]');
+      parser.evaluate('words = ["hello", "world", "test"]');
+
+      const result = parser.evaluate('len(filter(numbers, {@it > len(filter(words, {len(@it) > 4}))}))');
+      expect(result.success).toBe(true);
+      expect(result.result).toBe('4');
+    });
   });
 
   describe('Multi-Statement Expressions', () => {
@@ -364,20 +379,6 @@ describe('ExpressionLanguageParser', () => {
       const result = parser.evaluate('(5 > 3) && (2 < 4)');
       expect(result.success).toBe(true);
       expect(result.result).toBe('True');
-    });
-  });
-
-  describe('Function Calls', () => {
-    test('should evaluate matches function', () => {
-      const result = parser.evaluate('matches("Hello", "^H.*o$")');
-      expect(result.success).toBe(true);
-      expect(result.result).toBe('True');
-    });
-
-    test('should evaluate collection functions', () => {
-      const result = parser.evaluate('filter(myCollection, {@it > 1})');
-      expect(result.success).toBe(true);
-      expect(result.result).toBe('[2, 3]');
     });
   });
 
@@ -558,6 +559,48 @@ describe('ExpressionLanguageParser', () => {
       const result3 = parser.evaluate('filter(x, {@value = 2})');
       expect(result3.success).toBe(false);
       expect(result3.error).toContain('Assignment not allowed in predicate');
+    });
+
+    // New test for nested function calls within predicates
+    test('should support nested function calls within predicates', () => {
+      const parser = new ExpressionLanguageParser();
+      parser.evaluate('stringsCollection = ["apple", "banana", "cherry", "date"]');
+
+      // Test filter with startsWith function in the predicate
+      const result1 = parser.evaluate('filter(stringsCollection, {startsWith(@it, "a")})');
+      expect(result1.success).toBe(true);
+      expect(result1.result).toBe('["apple"]');
+
+      // Test filter with multiple nested functions
+      const result2 = parser.evaluate('filter(stringsCollection, {startsWith(@it, substring("apple", 0, 1))})');
+      expect(result2.success).toBe(true);
+      expect(result2.result).toBe('["apple"]');
+
+      // Test with deeply nested functions
+      parser.evaluate('nestedCollection = [{"name": "John", "age": 30}, {"name": "Jane", "age": 25}]');
+      const result3 = parser.evaluate('filter(nestedCollection, {startsWith(@it["name"], "J") && @it["age"] > 25})');
+      expect(result3.success).toBe(true);
+      expect(result3.result).toBe('[{"age": 30, "name": "John"}]');
+
+      // More complex nested scenarios
+      parser.evaluate('words = ["hello", "world", "test", "example"]');
+
+      // Test with nested filter inside another filter
+      const result4 = parser.evaluate('filter(filter(words, {len(@it) > 4}), {startsWith(@it, "h")})');
+      expect(result4.success).toBe(true);
+      expect(result4.result).toBe('["hello"]');
+
+      // Test with deeply nested function calls in predicate
+      parser.evaluate('numbers = [1, 2, 3, 4, 5]');
+      const result5 = parser.evaluate('filter(numbers, {@it > len(filter(words, {startsWith(@it, "t")}))})');
+      expect(result5.success).toBe(true);
+      expect(result5.result).toBe('[2, 3, 4, 5]');
+
+      // Test with extremely complex nesting
+      parser.evaluate('users = [{"name": "Alice", "tags": ["admin", "user"]}, {"name": "Bob", "tags": ["user"]}]');
+      const result6 = parser.evaluate('filter(users, {any(@it["tags"], {startsWith(@it, "a")})})');
+      expect(result6.success).toBe(true);
+      expect(result6.result).toBe('[{"name": "Alice", "tags": ["admin", "user"]}]');
     });
   });
 
