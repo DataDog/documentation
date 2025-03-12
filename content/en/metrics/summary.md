@@ -166,7 +166,7 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note:** Metrics without Limits™ is only available for custom metrics.
 
-You can configure tags using the [bulk metric tag configuration](#configuration-of-multiple-metrics) button or the **Manage Tags** button in a metric's details side panel. 
+You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
@@ -262,3 +262,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
+[34]: https://app.datadoghq.com/metric/overview
