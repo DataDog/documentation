@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Security Controls is a feature that allows users to configure escaping and sanitization functions to prevent the reporting of false positives in vulnerability detection. By defining these security functions, users can refine how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
+Security Controls prevent false positives reporting in vulnerability detection using escaping and sanitization functions. Security functions refine how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
 
 ## Understanding input validators vs. sanitizers
 
