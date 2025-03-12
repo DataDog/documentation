@@ -597,6 +597,13 @@
       "description": "Send logs returns \"Response from server (always 200 empty JSON).\" response"
     }
   ],
+  "CreateLogsPipeline": [
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2707101123",
+      "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    }
+  ],
   "SubmitDistributionPoints": [
     {
       "group": "metrics",

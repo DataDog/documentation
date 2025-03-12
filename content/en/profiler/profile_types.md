@@ -168,9 +168,9 @@ Heap Live Size (alpha, v2.3.0+)
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Ruby 3.1+_ and [manual enablement][2]
 
-GVL profiling (in Timeline) (preview, v2.4.0+)
+GVL profiling (in Timeline) (v2.11.0+)
 : Records time when threads are prevented from working by other "noisy neighbor" threads, including background threads. This is useful for investigating latency spikes in the application when using the timeline visualization.<br />
-_Requires: Ruby 3.2+_ and [manual enablement][2]
+_Requires: Ruby 3.2+_
 
 [1]: /profiler/enabling/ruby/#requirements
 [2]: /profiler/enabling/ruby/#configuration
@@ -240,6 +240,12 @@ _Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2
 
 Thrown Exceptions (v0.92+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type.
+
+File I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to files, as well as the amount of bytes read from and written to files.
+
+Socket I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to a socket, as well as the amount of bytes read from and written to sockets.
 
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}

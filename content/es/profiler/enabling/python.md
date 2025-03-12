@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/python/
+- /es/tracing/profiler/enabling/python/
 code_lang: python
 code_lang_weight: 20
 further_reading:

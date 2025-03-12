@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/runtime_metrics/
+- /es/opentelemetry/runtime_metrics/
 title: Métricas de tiempo de ejecución de OpenTelemetry
 type: multi-code-lang
 ---
