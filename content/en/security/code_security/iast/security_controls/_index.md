@@ -5,7 +5,6 @@ aliases:
 - /security/application_security/code_security/iast
 ---
 
-## Overview
 
 Security Controls prevent false positives reporting in vulnerability detection using escaping and sanitization functions. Security functions refine how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
 
