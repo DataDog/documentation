@@ -1,0 +1,18 @@
+package-lock.json
+dist/
+debug/
+
+vitest.config.js
+
+# Dist files that are temporarily copied to src so Vitest can access them,
+# these are usually cleaned up by the test process
+src/clientBundle
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+esbuild-meta-dev.json
+esbuild-meta-prod.json

@@ -1,0 +1,1 @@
+export { CdocsHugoIntegration } from './CdocsHugoIntegration';
