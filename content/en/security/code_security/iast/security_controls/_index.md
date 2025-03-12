@@ -8,7 +8,7 @@ aliases:
 
 Security Controls prevent false positives reporting in vulnerability detection using escaping and sanitization functions. Security functions refine how data is processed, ensuring that legitimate transformations do not trigger unnecessary security alerts.
 
-## Understanding input validators vs. sanitizers
+## Input validators vs. sanitizers
 
 Security Controls differentiate between **Input Validators** and **Sanitizers**, depending on how a function is used in security validation:
 
