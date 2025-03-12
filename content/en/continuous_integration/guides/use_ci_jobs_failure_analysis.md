@@ -20,17 +20,33 @@ CI Visibility leverages a LLM model to generate enhanced error messages and cate
 
 {{< img src="continuous_integration/failed_jobs_ai_gen_errors.png" alt="Failed CI jobs with LLM-generated errors" width="90%">}}
 
+#### How CI Visibility identifies the relevant logs of a CI job?
+
+CI Visibility considers that a log line is relevant when that log line has not appeared in the logs collected from the previous successful jobs executions of that CI Job. Log relevancy is only computed for logs coming from failed CI Jobs.
+
+You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
+
+#### What information is used as input of the LLM model?
+
+If a failed CI job has relevant logs, CI Visibility uses the last 100 relevant log lines as input of the LLM model. In case that a failed CI job does not have relevant logs, CI Visibility will send the last 100 log lines.
+
+Each log line is pre-scanned to redact any potentially sensitive information before being used.
+
+Note that the LLM model can classify errors with similar messages into distinct yet related subdomains.
+
+<u>Example</u>: If the error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, the LLM model may sometimes classify it under subdomain:`infrastructure` instead.
+
 #### Domains and Subdomains
 
-Errors are categorized with a domain and subdomain using a LLM model:
+Errors are categorized with a domain and subdomain:
 
 ##### Domains
 
 | Domain   | Description                                                                                                                                                       |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| code     | Failures caused by the code that is being built and tested in the CI pipeline, and they should be fixed by the developer that launched the CI pipeline.           |
-| platform | Failures caused by the code that is being built and tested. These failures can come from the CI provider itself or they could be caused by external dependencies. |
-| unknown  | Used when the logs do not reveal a clear root cause of job failure                                                                                                |
+| code     | Failures caused by the code that is being built and tested in the CI pipeline. They should be fixed by the developer that modified the code.           |
+| platform | Failures caused by reasons external to the code that is being built and tested. These failures can come from the CI provider, the underlying infrastructure or external dependencies. They are not related to the developer code changes and should often be fixed by the team owning the whole CI system. |
+| unknown  | Used when the logs do not reveal a clear root cause of job failure.                                                                                                |
 
 ##### Subdomains
 
@@ -79,7 +95,7 @@ CI jobs failure analysis is available for the following CI providers:
 * [GitHub Actions][1]
 * [GitLab][2]
 
-Notice that Job Logs collection enabled is required. If you need to setup Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
+Notice that CI Job Logs collection enabled is required and the logs need to be indexed. If you need to setup CI Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
 
 <div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
 
@@ -115,28 +131,6 @@ You can also import the CI Visibility - CI Jobs Failure Analysis dashboard templ
 - Save the dashboard.
 
 {{< img src="continuous_integration/ci_jobs_failure_analysis_dashboard.png" alt="CI jobs failure analysis dashboard" width="90%">}}
-
-## How the CI jobs failure analysis is computed?
-
-CI Visibility uses the relevant logs of every failed CI job to generate improved errors using a LLM model.
-
-### How CI Visibility identifies the relevant logs of a CI job?
-
-CI Visibility considers that a log line is relevant when that log line has not appeared in the logs collected from the previous successful jobs executions of that CI Job. Log relevancy is only computed for logs coming from failed CI Jobs.
-
-You can check if a log line has been considered as relevant by using the `@relevant:true` tag in the Logs explorer.
-
-### What information is used as input of the LLM model?
-
-If a failed CI job has relevant logs, CI Visibility uses the last 100 relevant log lines as input of the LLM model. In case that a failed CI job does not have relevant logs, CI Visibility will send the last 100 log lines.
-
-Each log line is pre-scanned to redact any potentially sensitive information before being used.
-
-**Limitations**
-
-The LLM model can categorize errors with similar messages into different subdomains.
-
-<u>Example</u>: If the error message is `Cannot connect to docker daemon.`, it is usually categorized under domain:`platform` and subdomain:`network`. However, the LLM model may sometimes classify it under subdomain:`infrastructure` instead.
 
 ## Further reading
 

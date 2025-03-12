@@ -143,7 +143,7 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 |  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| {{< ci-details title="Job failure analysis" >}}Analysis and categorization of Job failures using LLM-models based on relevant logs.{{< /ci-details >}} | | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
+| {{< ci-details title="Job failure analysis" >}}Analysis and categorization of Job failures using LLM-models based on relevant logs. Check out [this guide][14].{{< /ci-details >}} | | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | | | {{< X >}} | | | | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Filter CI Jobs on the critical path" >}}Identification of CI jobs that are on the critical path of the pipeline.{{< /ci-details >}} | | {{< X >}} | | | | | | | | |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
@@ -180,3 +180,4 @@ You can export your search query to a [CI Pipeline monitor][12] on the [**Execut
 [11]: /notebooks
 [12]: /monitors/types/ci
 [13]: https://app.datadoghq.com/ci/test-runs
+[14]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
