@@ -78,6 +78,28 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
+## Traces
+
+{{< img src="service_management/mobile/traces_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
+
+## Logs
+
+{{< img src="service_management/mobile/logs_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+
+On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][29].
+
+You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][28].
+
+## Services
+
+{{< img src="service_management/mobile/services_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][30].
+
 ## Incidents
 
 {{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
@@ -409,12 +431,6 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 {{% /tab %}}
 {{< /tabs >}}
 
-## Traces
-
-On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
-
-For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
-
 ## Notifications
 
 The mobile app is able to send out regular as well as critical notifications. Critical notifications can circumvent your Do Not Disturb (DnD) mode, but you must **explicitly** grant Datadog permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
@@ -436,7 +452,6 @@ For more information on configuring Incident Notification Rules, see the [Incide
 
 ### Push notifications from Workflow Automation
 It is also possible to trigger push notifications directly from Workflows using the [Send mobile push notification message action][27]. Provide the target user and the body of the push notification. Before the user can receive push notifications, they must log into the Datadog Mobile application and allow the Datadog mobile application to receive push notifications.
-
 
 ## Quick actions
 
@@ -518,3 +533,6 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [25]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
 [26]: https://app.datadoghq.com/on-call/profile
 [27]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.push_notification/com.datadoghq.dd.push_notification.sendPushNotification
+[28]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[29]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[30]: https://docs.datadoghq.com/software_catalog/manage/
