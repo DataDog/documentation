@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-// import { dbData as dbDataOnDisk } from './db/data';
-import { CustomizationConfig, CdocsCoreError } from 'cdocs-data';
-// import { AuthorConsoleData } from '../../schemas/authorConsole';
+import { AuthorConsoleData } from './schemas';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-// import PrefsBuilder from './components/builder/PrefsBuilder';
 import ErrorsReport from './components/errors/ErrorsReport';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactTimeAgo from 'react-time-ago';
+import TraitSelector from './components/selectors/TraitSelector';
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
-}
-
-interface AuthorConsoleData {
-  timestamp: number;
-  errorsByFilePath: Record<string, CdocsCoreError[]>;
-  customizationConfig: CustomizationConfig;
 }
 
 function CustomTabPanel(props: TabPanelProps) {
@@ -93,7 +85,7 @@ function App() {
             textColor="inherit"
           >
             <Tab label="Build status" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
-            {/* <Tab label="Create" {...a11yProps(1)} /> */}
+            <Tab label="Config lookup" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
@@ -128,6 +120,11 @@ function App() {
               </AlertTitle>
             </Alert>
           )}
+        </CustomTabPanel>
+        <CustomTabPanel value={currentTabIndex} index={1}>
+          <h2>Trait</h2>
+          <TraitSelector customizationConfig={consoleData.customizationConfig} onSelect={() => {}} />
+          <h2>Option group</h2>
         </CustomTabPanel>
         {/*
         <CustomTabPanel value={currentTabIndex} index={1}>
