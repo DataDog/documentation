@@ -131,9 +131,9 @@ If your application consists of more elaborate prompting or complex chains or wo
 
 ## In AWS Lambda
 <!-- TODO (sabrenner): we will need to add tabs here once Node.js has a better OOTB serverless experience -->
-This quickstart will have you create a very simple AWS Bedrock based chatbot running with LLM Observability in AWS Lambda.
+This generate an LLM Observability trace in an AWS Lambda serverless environment, create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
-1. Create a [simple Lambda function chatbot using AWS Bedrock][13]
+1. Create a [Lambda function chatbot using Amazon Bedrock][13]
 2. Instrument your Lambda function with the [Datadog Python extension][14]:
     1. Open a Cloudshell
     2. Install the Datadog CLI client
