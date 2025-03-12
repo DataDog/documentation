@@ -26,7 +26,7 @@ When the logs [`containerCollectAll` option][1] is enabled, the Agent collects l
 
 You can set exceptions in two ways:
 
-- Provide environment variables to the Datadog Agent container as an allowlist/blocklist of containers. Recommended if you have a list of container names, images, or namespaces to exclude for the entire cluster.
+- Provide environment variables to the Datadog Agent container as an allowlist/blocklist of containers. Recommended if you have a list of container names, images, or namespaces to exclude for the entire cluster. The [`containerCollectAll` option][1] **must** be enabled if you would like to use these filtering options.
 - Add annotations to your Kubernetes pods to block individual pods or containers. Recommended if you need fine-tuned exclusions.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
