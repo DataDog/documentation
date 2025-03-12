@@ -214,7 +214,40 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
-<!-- Deployment Options  -->
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: localhost
+       port: 5432
+       username: datadog
+       password: 'ENC[datadog_user_database_password]'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+{{% tab "Postgres 9.6" %}}
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: localhost
+       port: 5432
+       username: datadog
+       password: 'ENC[datadog_user_database_password]'
+       pg_stat_statements_view: datadog.pg_stat_statements()
+       pg_stat_activity_view: datadog.pg_stat_activity()
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+<!-- Deployment options -->
 {{< tabs >}}
 {{% tab "Host" %}}
 
@@ -226,47 +259,207 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
+
+      ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
+      # pg_stat_statements_view: datadog.pg_stat_statements()
+      # pg_stat_activity_view: datadog.pg_stat_activity()
+
+      ## Optional: Connect to a different database if needed for `custom_queries`
+      # dbname: '<DB_NAME>'
+
    ```
 
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
+To configure the Database Monitoring Agent running in a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+
+### Command line
+
+Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+
+```bash
+export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export DD_AGENT_VERSION=7.63.3
+
+docker run -e "DD_API_KEY=${DD_API_KEY}" \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -l com.datadoghq.ad.checks='{"postgres": {
+    "init_config": {},
+    "instances": [{
+      "dbm": true,
+      "host": "<HOST>",
+      "port": 5432,
+      "username": "datadog",
+      "password": "<UNIQUEPASSWORD>",
+    }]
+  }}' \
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+```
+
+For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+
+```json
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()",
+```
+
+### Dockerfile
+
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+
+```Dockerfile
+FROM gcr.io/datadoghq/agent:7.36.1
+
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<HOST>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
+```
+
+For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+
+```json
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()",
+```
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
+
+
+[1]: /agent/docker/integrations/?tab=docker
+[2]: /agent/configuration/secrets-management
+[3]: /agent/faq/template_variables/
 
 {{% /tab %}}
-
 {{% tab "Kubernetes" %}}
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
+If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
-{{% /tab %}}
-{{< /tabs >}}
+Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
 
+### Helm
+
+Complete the following steps to install the [Datadog Cluster Agent][1] on your Kubernetes cluster. Replace the values to match your account and environment.
+
+1. Complete the [Datadog Agent installation instructions][3] for Helm.
+2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <HOST>
+            port: 5432
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
+
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+    For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+
+    ```yaml
+    pg_stat_statements_view: datadog.pg_stat_statements()
+    pg_stat_activity_view: datadog.pg_stat_activity()
+    ```
+
+3. Deploy the Agent with the above configuration file from the command line:
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+<div class="alert alert-info">
+For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+</div>
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /getting_started/site
+[3]: /containers/kubernetes/installation/?tab=helm#installation
+
+### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
+
+```yaml
+cluster_check: true  # Make sure to include this flag
+init_config:
+instances:
+  - dbm: true
+    host: '<HOST>'
+    port: 5432
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+
+    ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
+    # pg_stat_statements_view: datadog.pg_stat_statements()
+    # pg_stat_activity_view: datadog.pg_stat_activity()
+```
+
+### Configure with Kubernetes service annotations
+
+Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+
+### Annotations V1
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
+  annotations:
+    ad.datadoghq.com/service.check_names: '["postgres"]'
+    ad.datadoghq.com/service.init_configs: '[{}]'
+    ad.datadoghq.com/service.instances: |
+      [
+        {
+          "dbm": true,
+          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "port": 5432,
+          "username": "datadog",
+          "password": "ENC[datadog_user_database_password]",
+          "tags": [
+            "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+          ]
+        }
+      ]
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
+```
+
+For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+
+```yaml
+pg_stat_statements_view: datadog.pg_stat_statements()
+pg_stat_activity_view: datadog.pg_stat_activity()
+```
+
+The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+
+[1]: /agent/cluster_agent
+[2]: /agent/cluster_agent/clusterchecks/
+[3]: https://helm.sh
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
-{{% tab "Postgres 9.6" %}}
+
+
+
+{{% tab "Docker" %}}
 
    ```yaml
    init_config:
