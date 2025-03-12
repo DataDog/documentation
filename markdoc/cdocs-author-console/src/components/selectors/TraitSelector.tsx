@@ -11,7 +11,8 @@ export default function TraitSelector(props: {
 
   const traitOptions = Object.keys(traitsById).map((traitId) => {
     const trait = traitsById[traitId];
-    const label = `${trait.label} (\`${trait.id}\`)${trait.internal_notes && ':'} ${trait.internal_notes || ''}`;
+    const hasNotes = trait.internal_notes && trait.internal_notes.length > 0;
+    const label = `${trait.label} (\`${trait.id}\`)${hasNotes ? `: ${trait.internal_notes}` : ''}`;
     return { label, value: trait.id };
   });
 

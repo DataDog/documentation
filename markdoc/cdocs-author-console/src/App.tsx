@@ -85,7 +85,8 @@ function App() {
             textColor="inherit"
           >
             <Tab label="Build status" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
-            <Tab label="Config lookup" {...a11yProps(1)} />
+            <Tab label="Quick filter" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
+            {/* <Tab label="Page builder" {...a11yProps(1)} sx={{ color: '#632ca6' }} /> */}
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
