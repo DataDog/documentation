@@ -214,6 +214,10 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
+<!-- Deployment Options  -->
+{{< tabs >}}
+{{% tab "Host" %}}
+
    ```yaml
    init_config:
    instances:
@@ -225,6 +229,41 @@ Installing the Datadog Agent also installs the Postgres check which is required 
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
+
+{{% /tab %}}
+
+{{% tab "Docker" %}}
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: localhost
+       port: 5432
+       username: datadog
+       password: 'ENC[datadog_user_database_password]'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: localhost
+       port: 5432
+       username: datadog
+       password: 'ENC[datadog_user_database_password]'
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
