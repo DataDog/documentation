@@ -45,7 +45,7 @@ This format uses specific separators to structure each security control entry.
 
 The available secure marks correspond to the codes associated with each injection-related vulnerability. These codes and their availability for each language can be found in [supported vulnerabilities][1].
 
-The injection-related vulnerabilities are as follows:
+The injection-related vulnerabilities are:
 
 * Code Injection
 * Command Injection
