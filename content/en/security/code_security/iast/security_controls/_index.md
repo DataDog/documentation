@@ -37,9 +37,9 @@ This format uses specific separators to structure each security control entry.
 
 
 ### Separators
-- **`;` (Semicolon)** → Separates each security control.
-- **`:` (Colon)** → Separates each field within a security control.
-- **`,` (Comma)** → Separates items within a field that accepts a list.
+- `;` (semicolon): Separates each security control.
+- `:` (colon): Separates each field within a security control.
+- `,` (comma): Separates items within a field that accepts a list.
 
 ### Secure marks
 
