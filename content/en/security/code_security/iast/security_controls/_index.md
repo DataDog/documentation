@@ -17,7 +17,7 @@ Security Controls differentiate between **Input Validators** and **Sanitizers**,
 
 ## Configuring security controls
 
-The definition of **Security Controls** shall be placed in the configuration variable **`DD_IAST_SECURITY_CONTROLS_CONFIGURATION`**.
+The Security Controls definition must be placed in the configuration variable `DD_IAST_SECURITY_CONTROLS_CONFIGURATION`.
 To configure a list of security controls, follow the format and field specifications below.
 This format uses specific separators to structure each security control entry.
 
