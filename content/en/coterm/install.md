@@ -15,7 +15,7 @@ further_reading:
 1. Install Datadog CoTerm by running:
 
    ```shell
-   curl --tlsv1.2 --proto '=https' -sSf 'https://update.coscreen.org/install-ddcoterm.sh' | bash
+   curl --tlsv1.2 --proto '=https' -sSf 'https://coterm.datadoghq.com/install-ddcoterm.sh' | bash
    ```
 
    This command downloads the latest version of CoTerm to `.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually. 
