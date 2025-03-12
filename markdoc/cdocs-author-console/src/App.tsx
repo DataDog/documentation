@@ -82,7 +82,7 @@ function App() {
 
   return (
     <>
-      <h1>Markdoc author console</h1>
+      <h1>cdocs author console</h1>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
