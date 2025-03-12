@@ -73,7 +73,7 @@ When selecting tags to include or exclude, choose to either [override existing t
 
 ##### Override existing tag configurations
 
-{{< img src="metrics/bulk_include_tags.png" alt="The Manage Tags option with Include tags and Override selected in the Configure tags section. The options to include tags actively queried on dashboards and monitors from the past 90 days and Specific tags are selected" video=true style="width:100%" >}}
+{{< img src="metrics/bulk_include_tags.png" alt="The Manage Tags option with Include tags and Override selected in the Configure tags section. The options to include tags actively queried on dashboards and monitors from the past 90 days and Specific tags are selected" style="width:100%" >}}
 
 All existing tag configurations for the selected metrics are overrided, and you define a new tag configuration. If you are choosing to **include tags**, you can select to include either or both of the following:
    - Only tags actively queried in Datadog from the past 30, 60, or 90 days.
@@ -81,7 +81,7 @@ All existing tag configurations for the selected metrics are overrided, and you 
 
 ##### Keep existing tag configurations
 
-{{< img src="metrics/bulk_exclude_tags.png" alt="The Manage Tags option with Exclude tags and Keep selected in the Configure tags section" video=true style="width:100%" >}}
+{{< img src="metrics/bulk_exclude_tags.png" alt="The Manage Tags option with Exclude tags and Keep selected in the Configure tags section" style="width:100%" >}}
 
 Existing tag configurations are retained, and you define new tags to be added to the configuration.
 
