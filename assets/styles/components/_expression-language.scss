@@ -52,9 +52,16 @@
       background-color: transparent;
       white-space: pre;
       overflow-x: auto;
-      color: #28a745;
       display: block;
       border-radius: 0;
+
+      &.repl-result {
+        color: #28a745;
+      }
+
+      &.repl-error {
+        color: #dc3545;
+      }
     }
   }
 }
@@ -64,7 +71,10 @@
   margin: 1.5rem 0;
   border: 1px solid #e5e5e5;
   border-radius: 4px;
-  overflow: hidden;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
+  font-feature-settings: 'liga' 0;
 
   .repl-header {
     background-color: #f8f8f8;
@@ -84,6 +94,8 @@
     height: 400px; // Increased height
     display: flex;
     flex-direction: column;
+    position: relative; // Added to establish a stacking context
+    overflow: visible; // Ensure dropdowns can extend outside
   }
 
   .repl-history {
@@ -93,6 +105,7 @@
     flex: 1;
     overflow-y: auto;
     padding-right: 0.5rem;
+    overflow-x: hidden; // Prevent horizontal scrolling
 
     .repl-entry {
       margin-bottom: 0.5rem;
@@ -111,7 +124,6 @@
           white-space: pre;
           overflow-x: auto;
           word-break: break-all;
-          font-feature-settings: 'liga' 0;
         }
       }
 
@@ -143,6 +155,7 @@
     border-radius: 4px;
     padding: 0.5rem;
     margin-top: auto;
+    position: relative;
 
     .repl-prompt {
       color: #632ca6;
@@ -159,6 +172,100 @@
       font-size: 0.85rem;
       background: transparent;
       padding: 0.25rem 0;
+    }
+
+    // Autocomplete styles
+    .autocomplete-container {
+      position: absolute;
+      top: 100%;
+      left: 2rem;
+      right: 3rem;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      display: none;
+      margin-top: 2px; // Add a small gap between input and dropdown
+
+      &.visible {
+        display: block;
+      }
+
+      .autocomplete-item {
+        padding: 0.5rem;
+        cursor: pointer;
+        font-family: monospace;
+        font-size: 0.85rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap; // Prevent wrapping of content
+
+        &:hover, &.selected {
+          background-color: #f0f0f0;
+        }
+
+        .item-name {
+          font-weight: bold;
+          margin-right: 0.5rem;
+          flex-shrink: 0; // Prevent name from shrinking
+        }
+
+        .item-type {
+          font-size: 0.75rem;
+          color: #632ca6;
+          background-color: #f8f5fd;
+          padding: 0.1rem 0.3rem;
+          border-radius: 2px;
+          margin-right: 0.5rem;
+          flex-shrink: 0; // Prevent type from shrinking
+
+          // Special styling for different types
+          &[data-type="function"] {
+            color: #632ca6;
+            background-color: #f8f5fd;
+          }
+
+          &[data-type="variable"] {
+            color: #0275d8;
+            background-color: #e6f3ff;
+          }
+
+          &[data-type="special"] {
+            color: #d9534f;
+            background-color: #ffeeee;
+          }
+
+          &[data-type="property"] {
+            color: #5cb85c;
+            background-color: #efffef;
+          }
+
+          &[data-type="index"] {
+            color: #f0ad4e;
+            background-color: #fff9e6;
+          }
+        }
+
+        .item-description {
+          font-size: 0.75rem;
+          color: #666;
+          margin-left: auto;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 75%;
+          flex-shrink: 1; // Allow description to shrink if needed
+        }
+      }
+
+      .no-suggestions {
+        padding: 0.5rem;
+        color: #666;
+        font-style: italic;
+      }
     }
 
     .run-expression-btn {

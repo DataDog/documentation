@@ -6,10 +6,56 @@ jest.mock('../components/expression-language-parser', () => {
     return {
       evaluate: jest.fn((expr) => {
         // Simple mock implementation that returns success for valid expressions
-        if (expr) {
+        if (expr === "invalid_expression") {
+          return { success: false, error: 'Invalid expression' };
+        } else if (expr) {
           return { success: true, result: `Result of ${expr}` };
         } else {
           return { success: false, error: 'Empty expression' };
+        }
+      }),
+      getAutocompleteSuggestions: jest.fn((input) => {
+        // Mock implementation for autocomplete suggestions
+        // This mock now needs to handle partial words at cursor position
+        if (!input || input.trim() === '') {
+          return [];
+        }
+
+        if (input.includes('@')) {
+          const specialOperators = [];
+          if ('@it'.includes(input)) {
+            specialOperators.push({ name: '@it', type: 'special', description: 'Current element in collection iteration' });
+          }
+          if ('@key'.includes(input)) {
+            specialOperators.push({ name: '@key', type: 'special', description: 'Current key in object/map iteration' });
+          }
+          if ('@value'.includes(input)) {
+            specialOperators.push({ name: '@value', type: 'special', description: 'Current value in object/map iteration' });
+          }
+          return specialOperators;
+        } else if (input === 'len' || input.startsWith('len')) {
+          return [
+            { name: 'len', type: 'function', description: 'Returns the length of a string, array, or object' }
+          ];
+        } else if (input === 'fil' || input.startsWith('fil')) {
+          return [
+            { name: 'filter', type: 'function', description: 'Filters elements in a collection' }
+          ];
+        } else if (input === 'my' || input.startsWith('my')) {
+          return [
+            { name: 'myCollection', type: 'variable', description: 'Array with 3 elements' }
+          ];
+        } else if (input === 'new' || input.startsWith('new')) {
+          return [
+            { name: 'newCollection', type: 'variable', description: 'Array with 4 elements' },
+            { name: 'newDictionary', type: 'variable', description: 'Object with 3 properties' }
+          ];
+        } else if (input === 'm' || input.startsWith('m')) {
+          return [
+            { name: 'myCollection', type: 'variable', description: 'Array with 3 elements' }
+          ];
+        } else {
+          return [];
         }
       })
     };
@@ -24,6 +70,7 @@ describe('ExpressionLanguageEvaluator', () => {
       <div class="expression-repl">
         <div class="repl-history" id="repl-history"></div>
         <input type="text" id="repl-input">
+        <div id="autocomplete-container"></div>
         <button id="repl-run-btn"></button>
       </div>
     `;
@@ -44,12 +91,13 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
           <div class="expression-result-container"></div>
         </div>
         <div class="expression-repl">
           <div class="repl-history" id="repl-history"></div>
           <input type="text" id="repl-input">
+          <div id="autocomplete-container"></div>
           <button id="repl-run-btn"></button>
         </div>
       `;
@@ -69,7 +117,7 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
           <div class="expression-result-container"></div>
         </div>
       `;
@@ -85,7 +133,30 @@ describe('ExpressionLanguageEvaluator', () => {
       runButton.click();
 
       // Verify the result was set
-      expect(resultElement.textContent).toBe('Test Result');
+      expect(resultElement.textContent).toBe('Result of len(myCollection)');
+      expect(resultElement.classList.contains('repl-result')).toBe(true);
+    });
+
+    it('should handle error expressions', () => {
+      // Create the evaluator DOM structure with an invalid expression
+      document.body.innerHTML = `
+        <div class="expression-evaluator">
+          <button class="run-expression-btn"></button>
+          <div class="expression-result" data-expression="invalid_expression"></div>
+          <div class="expression-result-container"></div>
+        </div>
+      `;
+
+      new ExpressionLanguageEvaluator();
+      const runButton = document.querySelector('.run-expression-btn');
+      const resultElement = document.querySelector('.expression-result');
+
+      // Simulate clicking the button
+      runButton.click();
+
+      // Verify the error was displayed
+      expect(resultElement.textContent).toBe('Invalid expression');
+      expect(resultElement.classList.contains('repl-error')).toBe(true);
     });
 
     it('should not set up handler if elements are missing', () => {
@@ -93,7 +164,7 @@ describe('ExpressionLanguageEvaluator', () => {
       document.body.innerHTML = `
         <div class="expression-evaluator">
           <button class="run-expression-btn"></button>
-          <div class="expression-result" data-result="Test Result"></div>
+          <div class="expression-result" data-expression="len(myCollection)"></div>
         </div>
       `;
 
@@ -307,6 +378,310 @@ describe('ExpressionLanguageEvaluator', () => {
       const displayedErrorElement = history.querySelector('.repl-error');
       expect(displayedErrorElement).not.toBeNull();
       expect(displayedErrorElement.textContent).toBe('Test error message');
+    });
+  });
+
+  describe('Autocomplete', () => {
+    it('should show autocomplete suggestions when typing', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      // Set cursor position at the end
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Check if autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Check if the correct suggestion is shown
+      const suggestionItem = autocompleteContainer.querySelector('.autocomplete-item');
+      expect(suggestionItem).not.toBeNull();
+      expect(suggestionItem.querySelector('.item-name').textContent).toBe('len');
+      expect(suggestionItem.querySelector('.item-type').textContent).toBe('function');
+    });
+
+    it('should hide autocomplete when input is empty', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // First show autocomplete
+      input.value = 'len';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Then clear input
+      input.value = '';
+      input.selectionStart = input.selectionEnd = 0;
+      input.dispatchEvent(new Event('input'));
+
+      // Check if autocomplete is hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should select suggestion with Tab key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Tab key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Check if the suggestion was applied
+      expect(input.value).toBe('len()');
+
+      // Check if autocomplete is now hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should navigate suggestions with arrow keys', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger multiple suggestions
+      input.value = 'new';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Down arrow key press to select first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Check if the first suggestion is selected
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item');
+      expect(items[0].classList.contains('selected')).toBe(true);
+
+      // Simulate Down arrow key press again to select second suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Check if the second suggestion is selected
+      expect(items[0].classList.contains('selected')).toBe(false);
+      expect(items[1].classList.contains('selected')).toBe(true);
+
+      // Simulate Up arrow key press to go back to first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+
+      // Check if the first suggestion is selected again
+      expect(items[0].classList.contains('selected')).toBe(true);
+      expect(items[1].classList.contains('selected')).toBe(false);
+    });
+
+    it('should select suggestion with Enter key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'my';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Select the first suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+
+      // Simulate Enter key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Check if the suggestion was applied
+      expect(input.value).toBe('myCollection');
+
+      // Check if autocomplete is now hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should close autocomplete with Escape key', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Simulate Escape key press
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+
+      // Check if autocomplete is hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+
+      // Check that input value is preserved
+      expect(input.value).toBe('len');
+    });
+
+    it('should show special operators in autocomplete', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type @ to trigger special operators
+      input.value = '@';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Check if autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Check if special operators are shown
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item');
+      expect(items.length).toBeGreaterThan(0);
+
+      // Check if at least one of the items is a special operator
+      let hasSpecialOperator = false;
+      items.forEach(item => {
+        const typeElement = item.querySelector('.item-type');
+        if (typeElement && typeElement.textContent === 'special' && typeElement.dataset.type === 'special') {
+          hasSpecialOperator = true;
+        }
+      });
+
+      expect(hasSpecialOperator).toBe(true);
+    });
+
+    it('should not show autocomplete after typing a space', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type something that should trigger autocomplete
+      input.value = 'len';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Verify autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Select the suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Verify the suggestion was applied
+      expect(input.value).toBe('len()');
+
+      // Verify autocomplete is hidden
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+
+      // Now add a space after the function
+      input.value = 'len() ';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Autocomplete should not be visible after typing a space
+      expect(autocompleteContainer.classList.contains('visible')).toBe(false);
+    });
+
+    it('should handle cursor position when showing and applying suggestions', () => {
+      const input = document.getElementById('repl-input');
+      // Type a function and select it
+      input.value = 'fil';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Force the cursor position to be set correctly for the test
+      setTimeout(() => {
+        input.selectionStart = input.selectionEnd = input.value.length;
+      }, 0);
+
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Verify the function was applied with cursor inside parentheses
+      expect(input.value).toBe('filter()');
+    });
+
+    it('should insert suggestions at cursor position inside parentheses', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // Type a function and select it
+      input.value = 'fil';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Verify the function was applied
+      expect(input.value).toBe('filter()');
+
+      // Set cursor position inside the parentheses
+      input.selectionStart = input.selectionEnd = input.value.length - 1;
+
+      // Type 'm' inside the parentheses
+      input.value = 'filter(m)';
+      input.selectionStart = input.selectionEnd = input.value.length - 1;
+      input.dispatchEvent(new Event('input'));
+
+      // Verify autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Select the suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Verify the suggestion was applied at the cursor position (inside parentheses)
+      expect(input.value).toBe('filter(myCollection)');
+    });
+
+    it('should handle autocomplete after manually typing curly braces', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // First, autocomplete filter
+      input.value = 'fil';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }));
+
+      // Then, autocomplete myCollection
+      input.value = 'filter(m';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Now manually type curly brace and @i - IMPORTANT: no closing brace
+      input.value = 'filter(myCollection, {@i';
+      input.selectionStart = input.selectionEnd = input.value.length;
+      input.dispatchEvent(new Event('input'));
+
+      // Verify autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Select the @it suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Verify the suggestion was applied correctly
+      expect(input.value).toBe('filter(myCollection, {@it');
+      expect(input.value).not.toBe('filter(myCollection, {@i)@it');
+    });
+
+    it('should handle special operators with auto-closing parentheses', () => {
+      const input = document.getElementById('repl-input');
+      const autocompleteContainer = document.getElementById('autocomplete-container');
+
+      // This test simulates what might be happening in the real browser
+      // The key insight is that the browser might be auto-closing parentheses
+
+      // Set up the initial state with an auto-closed parenthesis
+      input.value = 'filter(myCollection, {@i)';
+      input.selectionStart = input.selectionEnd = input.value.length - 1; // Position cursor before the closing parenthesis
+      input.dispatchEvent(new Event('input'));
+
+      // Verify autocomplete is visible
+      expect(autocompleteContainer.classList.contains('visible')).toBe(true);
+
+      // Select the @it suggestion
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+
+      // Log the result
+
+      // This is what we want
+      const expectedValue = 'filter(myCollection, {@it)';
+
+      // This is what might be happening in the browser
+      const potentialBugValue = 'filter(myCollection, {@i)@it';
+
+      expect(input.value).toBe(expectedValue);
+      expect(input.value).not.toBe(potentialBugValue);
     });
   });
 });

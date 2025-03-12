@@ -124,6 +124,172 @@ class ExpressionLanguageParser {
   }
 
   /**
+   * Get autocomplete suggestions based on current input
+   * @param {string} input - The current input text
+   * @returns {Array} - Array of suggestion objects with name, type, and description
+   */
+  getAutocompleteSuggestions(input) {
+    const suggestions = [];
+    const lastWord = this._getLastWord(input);
+
+    // If input ends with a dot, suggest object properties
+    if (input.trim().endsWith('.')) {
+      const objectName = input.trim().slice(0, -1).trim();
+      return this._getObjectProperties(objectName);
+    }
+
+    // Add special operators
+    const specialOperators = [
+      {
+        name: '@it',
+        type: 'special',
+        description: 'Current element in collection iteration'
+      },
+      {
+        name: '@key',
+        type: 'special',
+        description: 'Current key in object/map iteration'
+      },
+      {
+        name: '@value',
+        type: 'special',
+        description: 'Current value in object/map iteration'
+      }
+    ];
+
+    for (const operator of specialOperators) {
+      if (operator.name.toLowerCase().startsWith(lastWord.toLowerCase())) {
+        suggestions.push(operator);
+      }
+    }
+
+    // Add built-in functions
+    for (const funcName of Object.keys(this.builtinFunctions)) {
+      if (funcName.toLowerCase().startsWith(lastWord.toLowerCase())) {
+        suggestions.push({
+          name: funcName,
+          type: 'function',
+          description: this._getFunctionDescription(funcName)
+        });
+      }
+    }
+
+    // Add environment variables (excluding functions)
+    for (const varName of Object.keys(this.environment)) {
+      if (typeof this.environment[varName] !== 'function' &&
+          varName.toLowerCase().startsWith(lastWord.toLowerCase())) {
+        suggestions.push({
+          name: varName,
+          type: 'variable',
+          description: this._getTypeDescription(this.environment[varName])
+        });
+      }
+    }
+
+    return suggestions;
+  }
+
+  /**
+   * Get the last word of the input for autocomplete matching
+   * @param {string} input - The input text
+   * @returns {string} - The last word
+   * @private
+   */
+  _getLastWord(input) {
+    const match = input.match(/[a-zA-Z0-9_@]*$/);
+    return match ? match[0] : '';
+  }
+
+  /**
+   * Get properties of an object for autocomplete
+   * @param {string} objectName - The name of the object
+   * @returns {Array} - Array of property suggestions
+   * @private
+   */
+  _getObjectProperties(objectName) {
+    const suggestions = [];
+    try {
+      // Try to evaluate the object name to get its value
+      const tokens = this._tokenize(objectName);
+      const ast = this._parse(tokens);
+      const obj = this._evaluateAst(ast);
+
+      if (typeof obj === 'object' && obj !== null) {
+        // For arrays, suggest length property and indices
+        if (Array.isArray(obj)) {
+          suggestions.push({
+            name: 'length',
+            type: 'property',
+            description: 'Number of elements in the array'
+          });
+
+          // Add some array indices as suggestions
+          for (let i = 0; i < Math.min(obj.length, 5); i++) {
+            suggestions.push({
+              name: i.toString(),
+              type: 'index',
+              description: `Value: ${this._formatValue(obj[i])}`
+            });
+          }
+        } else {
+          // For objects, suggest all keys
+          for (const key of Object.keys(obj)) {
+            suggestions.push({
+              name: key,
+              type: 'property',
+              description: `Value: ${this._formatValue(obj[key])}`
+            });
+          }
+        }
+      }
+    } catch (e) {
+      // If evaluation fails, return empty suggestions
+      console.log('Error getting object properties:', e);
+    }
+
+    return suggestions;
+  }
+
+  /**
+   * Get a description for a function
+   * @param {string} funcName - The function name
+   * @returns {string} - The function description
+   * @private
+   */
+  _getFunctionDescription(funcName) {
+    const descriptions = {
+      'len': 'Returns the length of a string, array, or object',
+      'isEmpty': 'Checks if a string, array, or object is empty',
+      'substring': 'Returns a substring from start to end index',
+      'startsWith': 'Checks if a string starts with the specified prefix',
+      'endsWith': 'Checks if a string ends with the specified suffix',
+      'contains': 'Checks if a string/array/object contains a value',
+      'matches': 'Checks if a string matches a regular expression pattern',
+      'filter': 'Filters elements of a collection based on a predicate',
+      'any': 'Checks if any element in a collection satisfies a predicate',
+      'all': 'Checks if all elements in a collection satisfy a predicate'
+    };
+
+    return descriptions[funcName] || 'Function';
+  }
+
+  /**
+   * Get a description of the value type
+   * @param {*} value - The value to describe
+   * @returns {string} - The type description
+   * @private
+   */
+  _getTypeDescription(value) {
+    if (Array.isArray(value)) {
+      return `Array with ${value.length} elements`;
+    } else if (typeof value === 'object' && value !== null) {
+      return `Object with ${Object.keys(value).length} properties`;
+    } else {
+      return typeof value;
+    }
+  }
+
+  /**
    * Evaluate an expression
    * @param {string} expr - The expression to evaluate
    * @returns {Object} - The result of the evaluation
@@ -882,6 +1048,11 @@ class ExpressionLanguageParser {
    * @private
    */
   _evaluateWithEnvironment(predicate, tempEnv) {
+    // Check for assignments in the predicate
+    if (this._containsAssignment(predicate.expression)) {
+      throw new Error('Assignment not allowed in predicate');
+    }
+
     // Save the current environment
     const savedEnv = { ...this.environment };
 
@@ -895,6 +1066,29 @@ class ExpressionLanguageParser {
     this.environment = savedEnv;
 
     return result;
+  }
+
+  /**
+   * Check if an AST node contains an assignment
+   * @param {Object} node - The AST node to check
+   * @returns {boolean} - True if the node contains an assignment, false otherwise
+   * @private
+   */
+  _containsAssignment(node) {
+    if (!node || typeof node !== 'object') return false;
+
+    // Check if the current node is an assignment
+    if (node.type === 'ASSIGN') return true;
+
+    // Recursively check all properties of the node
+    return Object.values(node).some(value => {
+      if (Array.isArray(value)) {
+        return value.some(item => this._containsAssignment(item));
+      } else if (value && typeof value === 'object') {
+        return this._containsAssignment(value);
+      }
+      return false;
+    });
   }
 
   /**
