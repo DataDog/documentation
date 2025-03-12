@@ -686,7 +686,7 @@ menu:
       identifier: otel-setup-otlp-ingest
       parent: otel_collect
       weight: 402
-    - name: Direct Ingest
+    - name: Direct OTLP Ingest
       url: /opentelemetry/setup/intake_endpoint
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
