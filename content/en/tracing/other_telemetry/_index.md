@@ -50,7 +50,7 @@ Read [Investigate Slow Traces or Endpoints][5] for more information.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [3]: /synthetics/apm/
 [4]: /database_monitoring/connect_dbm_and_apm/
 [5]: /profiler/connect_traces_and_profiles/
