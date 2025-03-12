@@ -105,6 +105,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
 
 {{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
 {{% tab "Datadog" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}

@@ -51,7 +51,7 @@ To set up Mobile Session Replay for Android:
     // in case you need Material extension support
     .addExtensionSupport(MaterialExtensionSupport())
     // in case you need Jetpack Compose support
-    .addExtensionSupport(ComposeExtensionSupport)
+    .addExtensionSupport(ComposeExtensionSupport())
     .build()
    SessionReplay.enable(sessionReplayConfig)
    {{< /code-block >}}

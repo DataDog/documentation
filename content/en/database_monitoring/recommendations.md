@@ -1,6 +1,10 @@
 ---
 title: Recommendations
 description: View recommendations to proactively address issues in your system
+further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-index-recommendations/"
+  tag: "blog"
+  text: "A deep dive into Database Monitoring index recommendations"
 ---
 
 Database Monitoring (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.
@@ -109,3 +113,7 @@ Unused Index
 {{% /tab %}}
 
 {{< /tabs>}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
