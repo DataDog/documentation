@@ -64,7 +64,7 @@ To upload a SARIF report, follow the steps below:
    ```
 
 If reports are missing in Datadog, please define the following environment variables before invoking datadog-ci:
-- `DD_GIT_REPOSITORY_URL`: URL of the repository 
+- `DD_GIT_REPOSITORY_URL`: URL of the repository
 - `DD_GIT_BRANCH`: branch being committed to
 - `DD_GIT_COMMIT_SHA`: commit sha
 
@@ -99,6 +99,14 @@ It means that you are either:
 
 If you are using Datadog's analyzer, [diff-aware scanning][6] is enabled by default. If you running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
+### Diff-aware is not working
+
+If diff-aware is not working with the Static Analyzer, ensure that:
+ 1. The default branch is specific to your repository.
+ 2. At least one revision with the same configuration (for example, same rulesets, same arguments, or only/ignore flags) has been pushed to the repository's default branch.
+ 3. The current user can read the repository metadata. If they do not have the correct permissions, run this command: `git config --global --add safe.directory <repo-path>`.
+
+You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
 ## Software Composition Analysis
 
@@ -185,8 +193,8 @@ To disable scanning Static Code Analysis (SAST) or static Software Composition A
 
 ### Disabling runtime SCA on your services
 
-SCA can be enabled on your running services using one of the following two methods: 
-- The Datadog UI. 
+SCA can be enabled on your running services using one of the following two methods:
+- From the Datadog UI.
 - Manually, using the `DD_APPSEC_SCA_ENABLED` environment variable.
 
 To disable SCA, you must use the *same method* you used to enable SCA.

@@ -2,10 +2,10 @@
 title: Reglas de SAST
 description: Consulta las reglas de Static Code Analysis para múltiples lenguajes.
 aliases:
-- /continuous_integration/static_analysis/rules
-- /static_analysis/rules
-- /code_analysis/static_analysis_rules
-- /security/code_security/static_analysis_rules
+- /es/continuous_integration/static_analysis/rules
+- /es/static_analysis/rules
+- /es/code_analysis/static_analysis_rules
+- /es/security/code_security/static_analysis_rules
 is_beta: false
 type: static-analysis
 rulesets:
