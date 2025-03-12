@@ -5,3 +5,7 @@ options:
     label: Go
   - id: javascript
     label: JavaScript
+  - id: windows
+    label: Windows
+  - id: linux
+    label: Linux

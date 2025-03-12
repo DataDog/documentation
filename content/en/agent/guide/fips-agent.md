@@ -7,6 +7,9 @@ further_reading:
 algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
+content_filters:
+  - trait_id: os
+    option_group_id: os_options
 ---
 
 {{< callout btn_hidden="true" header="Try the Preview!">}}
@@ -23,25 +26,28 @@ The FIPS Agent is a flavor of the Datadog Agent that natively supports Federal I
 
 ## Requirements
 
-**Linux:**
-   - A non-containerized Linux host.
-   - Your Linux OS must be in FIPS-compliant mode. See your OS vendor's documentation on what steps are required to meet this requirement.
-   - FIPS-compliant storage backing the host file system.
+**Operating system requirements**:
+{% if equals($os, "linux") %}
+- A non-containerized Linux host.
+- Your Linux OS must be in FIPS-compliant mode. See your OS vendor's documentation on what steps are required to meet this requirement.
+- FIPS-compliant storage backing the host file system.
+{% /if %}
 
-**Windows:**
-   - A non-containerized Windows host.
-   - Windows must be in [FIPS-compliant mode][1].
-   - FIPS-compliant storage backing the host file system.
 
+{% if equals($os, "windows") %}
+- A non-containerized Windows host.
+- Windows must be in [FIPS-compliant mode][1].
+- FIPS-compliant storage backing the host file system.
+{% /if %}
+
+**General requirements**
 In addition to the Operating System (OS) requirements above:
 - You must have access to a FIPS-compliant Datadog environment (US1-FED or GovCloud).
 - The FIPS Agent is only available on Agent versions 7.63 and above.
 
 ## Installation
 
-{{< tabs >}}
-{{% tab "Linux" %}}
-
+{% if equals($os, "linux") %}
 The Datadog FIPS Agent is in Preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
 
 1. Remove any `fips-proxy` installations on the host by uninstalling the `datadog-fips-proxy` package with your OS package manager. For example:
@@ -79,9 +85,9 @@ The Datadog FIPS Agent is in Preview and has not been fully audited. Install and
 [2]: /agent/configuration/fips-compliance/
 [3]: /agent/guide/how-do-i-uninstall-the-agent/
 [4]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
-{{% /tab %}}
+{% /if %}
 
-{{% tab "Windows" %}}
+{% if equals($os, "windows") %}
 
 The Datadog FIPS Agent is in preview and has not been fully audited. Install and test the Agent only on hosts that are not critical to production workloads.
 
@@ -110,8 +116,7 @@ The Datadog FIPS Agent is in preview and has not been fully audited. Install and
 [1]: /agent/basic_agent_usage/windows/#uninstall-the-agent
 [2]: https://s3.amazonaws.com/ddagent-windows-stable/beta/installers_v2.json
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
 
 ## Further reading
 

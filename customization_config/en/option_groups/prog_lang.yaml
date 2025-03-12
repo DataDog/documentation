@@ -3,3 +3,7 @@ prog_lang_options:
     default: true
   - id: go
   - id: javascript
+os_options: 
+  - id: windows
+  - id: linux
+    default: true

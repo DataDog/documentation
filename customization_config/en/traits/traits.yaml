@@ -1,3 +1,5 @@
 traits:
   - id: prog_lang
     label: Programming Language
+  - id: os
+    label: Operating System  
