@@ -6043,31 +6043,26 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Enable Agentless Scanning
+    - name: Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 101
-    - name: Quick Start
-      url: security/cloud_security_management/setup/agentless_scanning/quick_start
+    - name: Compatibility
+      url: security/cloud_security_management/setup/agentless_scanning/compatibility
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_quick_start
+      identifier: csm_setup_agentless_scanning_compatibility
       weight: 10000
-    - name: CloudFormation
-      url: security/cloud_security_management/setup/agentless_scanning/cloudformation
+    - name: Deployment Methods
+      url: security/cloud_security_management/setup/agentless_scanning/deployment_methods
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_cloudformation
+      identifier: csm_agentless_deployment_methods
       weight: 10001
-    - name: Terraform
-      url: security/cloud_security_management/setup/agentless_scanning/terraform
+    - name: Enable Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/enable
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_terraform
+      identifier: csm_setup_agentless_scanning_enable
       weight: 10002
-    - name: Azure Resource Manager
-      url: security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_azure_resource_manager
-      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -6198,36 +6193,21 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
-    - name: Agentless Scanning
-      url: security/cloud_security_management/agentless_scanning
-      parent: csm
-      identifier: csm_agentless
-      weight: 7
-    - name: Compatibility Matrix
-      url: security/cloud_security_management/agentless_scanning/compatibility
-      parent: csm_agentless
-      identifier: csm_agentless_compatibility
-      weight: 101
-    - name: Deployment Methods
-      url: security/cloud_security_management/agentless_scanning/deployment_methods
-      parent: csm_agentless
-      identifier: csm_agentless_deployment_methods
-      weight: 102
     - name: IaC Scanning
       url: security/cloud_security_management/iac_scanning
       parent: csm
       identifier: csm_iac_scanning
-      weight: 8
+      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 9
+      weight: 8
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 10
+      weight: 9
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -6247,27 +6227,27 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 11
+      weight: 10
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
       identifier: csm_guides
-      weight: 12
+      weight: 11
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 13
+      weight: 12
     - name: Threats
       url: security/cloud_security_management/troubleshooting/threats/
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_threats
-      weight: 1101
+      weight: 1201
     - name: Vulnerabilities
       url: security/cloud_security_management/troubleshooting/vulnerabilities/
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
-      weight: 1102
+      weight: 1202
     - name: Application Security Management
       url: security/application_security/
       parent: security_platform_heading

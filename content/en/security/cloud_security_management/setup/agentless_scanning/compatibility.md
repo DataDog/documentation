@@ -1,6 +1,24 @@
 ---
-title: Agentless Scanning Compatibility Matrix
+title: Agentless Scanning Compatibility
+aliases: 
+ - /security/cloud_security_management/agentless_scanning/compatibility
 ---
+
+## Availability
+
+The following table provides a summary of Agentless scanning technologies in relation to their corresponding components for each supported cloud provider:
+
+| Component                                       | AWS                                                                                                                                       | Azure                                                                                                                                                                             |
+|-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Operating System                                | Linux                                                                                                                                     | Linux                                                                                                                                                                             |
+| Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      |
+| Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
+| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
+| Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
+| Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][16]                                                                                                                                                         |
+| Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
+
+**Note**: AMIs must be stored in an account that uses Datadog's AWS integration. Otherwise, Datadog can't read the AMI's underlying Amazon Elastic Block Store (EBS) snapshot, so it can't scan or report on the AMI.
 
 ## Linux distributions
 
@@ -42,8 +60,8 @@ The following application languages and libraries are supported for vulnerabilit
 
 The following container image registries are supported for container image scans:
 
-- AWS ECR public
-- AWS ECR private
+- Amazon ECR public
+- Amazon ECR private
 
 **Note**: Container image scanning from registry is only supported if you have installed Agentless with:
   - Cloudformation Integrations >= v2.0.8
@@ -73,3 +91,4 @@ The following container runtimes are supported:
 [13]: https://security-tracker.debian.org/tracker/
 [14]: https://www.debian.org/security/oval/
 [15]: https://ubuntu.com/security/cve
+[16]: /help
