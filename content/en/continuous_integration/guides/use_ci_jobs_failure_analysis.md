@@ -97,7 +97,7 @@ CI jobs failure analysis is available for the following CI providers:
 
 Notice that CI Job Logs collection enabled is required and the logs need to be indexed. If you need to setup CI Job Logs collection, check out the setup instructions for your CI provider on the [Pipeline Visibility page][6].
 
-<div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="TBD" target="_blank">this form</a>.</div>
+<div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="https://forms.gle/vSrqS5QwitgHf9wG6" target="_blank">this form</a>.</div>
 
 ## Identify the most recurrent errors in your CI pipelines
 
