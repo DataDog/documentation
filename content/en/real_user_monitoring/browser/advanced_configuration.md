@@ -477,7 +477,7 @@ window.DD_RUM &&
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
 
-The RUM Browser SDK ignores attributes added outside of `event.context`
+The RUM Browser SDK ignores attributes added outside of `event.context`.
 
 ### Enrich RUM events with feature flags
 
@@ -540,7 +540,7 @@ You can update the following event properties:
 | `view.name`                    | String | The name of the current view.                                                                                                                                                             |
 | `view.performance.lcp.resource_url` | String |   The resource URL for the Largest Contentful Paint.                                                                                                                                 |
 | `service`                      | String | The service name for your application.                                                                                                                                                    |
-| `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
+| `version`                      | String | The application's version. For example: 1.2.3, 6c44da20, or 2020.02.13.                                                                                                                  |
 | `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
 | `error.message`                | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
 | `error.stack `                 | String | The stack trace or complementary information about the error.                                                                                                                             |
