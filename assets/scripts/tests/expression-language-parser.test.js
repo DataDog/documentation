@@ -538,6 +538,27 @@ describe('ExpressionLanguageParser', () => {
       const result2 = parser.evaluate('filter(myCollection, {})');
       expect(result2.success).toBe(false);
     });
+
+    test('should reject assignments in filter predicates', () => {
+      const parser = new ExpressionLanguageParser();
+      parser.evaluate('myCollection = [1, 2, 3]');
+      parser.evaluate('x = {"a": 2, "b": 1, "c": 3}');
+
+      // Test assignment in array filter predicate
+      const result1 = parser.evaluate('filter(myCollection, {@it = 2})');
+      expect(result1.success).toBe(false);
+      expect(result1.error).toContain('Assignment not allowed in predicate');
+
+      // Test assignment in dictionary filter predicate with @key
+      const result2 = parser.evaluate('filter(x, {@key = "a"})');
+      expect(result2.success).toBe(false);
+      expect(result2.error).toContain('Assignment not allowed in predicate');
+
+      // Test assignment in dictionary filter predicate with @value
+      const result3 = parser.evaluate('filter(x, {@value = 2})');
+      expect(result3.success).toBe(false);
+      expect(result3.error).toContain('Assignment not allowed in predicate');
+    });
   });
 
   describe('Edge case tests', () => {

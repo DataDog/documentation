@@ -221,6 +221,32 @@
           border-radius: 2px;
           margin-right: 0.5rem;
           flex-shrink: 0; // Prevent type from shrinking
+
+          // Special styling for different types
+          &[data-type="function"] {
+            color: #632ca6;
+            background-color: #f8f5fd;
+          }
+
+          &[data-type="variable"] {
+            color: #0275d8;
+            background-color: #e6f3ff;
+          }
+
+          &[data-type="special"] {
+            color: #d9534f;
+            background-color: #ffeeee;
+          }
+
+          &[data-type="property"] {
+            color: #5cb85c;
+            background-color: #efffef;
+          }
+
+          &[data-type="index"] {
+            color: #f0ad4e;
+            background-color: #fff9e6;
+          }
         }
 
         .item-description {

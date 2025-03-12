@@ -104,54 +104,73 @@ class ExpressionLanguageEvaluator {
 
     // Function to show autocomplete suggestions
     const showAutocompleteSuggestions = () => {
-      // Get suggestions from parser
-      suggestions = parser.getAutocompleteSuggestions(input.value);
+      // Get the current word at the cursor position
+      const cursorPosition = input.selectionStart;
+      const textBeforeCursor = input.value.substring(0, cursorPosition);
+
+      // Find the current word being typed at the cursor position
+      const lastWordMatch = textBeforeCursor.match(/[a-zA-Z0-9_@]*$/);
+      const currentWord = lastWordMatch ? lastWordMatch[0] : '';
+
+      // Don't show suggestions if there's no word at the cursor position
+      if (!currentWord) {
+        hideAutocompleteSuggestions();
+        return;
+      }
+
+      // Get suggestions from parser based on the current word only
+      suggestions = parser.getAutocompleteSuggestions(currentWord);
+
+      // Don't show autocomplete if there are no suggestions
+      if (suggestions.length === 0) {
+        hideAutocompleteSuggestions();
+        return;
+      }
 
       // Clear previous suggestions
       autocompleteContainer.innerHTML = '';
 
-      if (suggestions.length === 0) {
-        // Show "no suggestions" message if there are no suggestions
-        const noSuggestions = document.createElement('div');
-        noSuggestions.className = 'no-suggestions';
-        noSuggestions.textContent = 'No suggestions available';
-        autocompleteContainer.appendChild(noSuggestions);
-      } else {
-        // Create suggestion elements
-        suggestions.forEach((suggestion, index) => {
-          const item = document.createElement('div');
-          item.className = 'autocomplete-item';
-          item.dataset.index = index;
+      // Create suggestion elements
+      suggestions.forEach((suggestion, index) => {
+        const item = document.createElement('div');
+        item.className = 'autocomplete-item';
+        item.dataset.index = index;
 
-          const name = document.createElement('span');
-          name.className = 'item-name';
-          name.textContent = suggestion.name;
+        const name = document.createElement('span');
+        name.className = 'item-name';
+        name.textContent = suggestion.name;
 
-          const type = document.createElement('span');
-          type.className = 'item-type';
-          type.textContent = suggestion.type;
+        const type = document.createElement('span');
+        type.className = 'item-type';
+        type.textContent = suggestion.type;
+        type.dataset.type = suggestion.type;
 
-          const description = document.createElement('span');
-          description.className = 'item-description';
-          description.textContent = suggestion.description;
+        const description = document.createElement('span');
+        description.className = 'item-description';
+        description.textContent = suggestion.description;
 
-          item.appendChild(name);
-          item.appendChild(type);
-          item.appendChild(description);
+        item.appendChild(name);
+        item.appendChild(type);
+        item.appendChild(description);
 
-          // Add click handler to select suggestion
-          item.addEventListener('click', () => {
-            selectSuggestion(index);
-          });
-
-          autocompleteContainer.appendChild(item);
+        // Add click handler to select suggestion
+        item.addEventListener('click', () => {
+          selectSuggestion(index);
         });
-      }
+
+        autocompleteContainer.appendChild(item);
+      });
 
       // Show the autocomplete container
       autocompleteContainer.classList.add('visible');
       isAutocompleteVisible = true;
       selectedSuggestionIndex = -1;
+
+      // Ensure no items are initially selected
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item.selected');
+      items.forEach(item => {
+        item.classList.remove('selected');
+      });
 
       // Adjust position to ensure it's visible (only in browser environment)
       try {
@@ -188,6 +207,12 @@ class ExpressionLanguageEvaluator {
       autocompleteContainer.classList.remove('visible');
       isAutocompleteVisible = false;
       selectedSuggestionIndex = -1;
+
+      // Clear all selected items to prevent visual selection state from persisting
+      const items = autocompleteContainer.querySelectorAll('.autocomplete-item.selected');
+      items.forEach(item => {
+        item.classList.remove('selected');
+      });
     };
 
     // Function to navigate through suggestions
@@ -222,24 +247,59 @@ class ExpressionLanguageEvaluator {
 
       const suggestion = suggestions[index];
       const inputValue = input.value;
+      const cursorPosition = input.selectionStart;
 
-      // Get the part of the input before the current word
-      const lastWordMatch = inputValue.match(/.*?([a-zA-Z0-9_@]*)$/);
-      const prefix = lastWordMatch ? inputValue.slice(0, inputValue.length - lastWordMatch[1].length) : inputValue;
+      // Find the word being replaced at the cursor position
+      const textBeforeCursor = inputValue.substring(0, cursorPosition);
+      const textAfterCursor = inputValue.substring(cursorPosition);
 
-      // Replace the current word with the suggestion
-      input.value = prefix + suggestion.name;
+      // Find the word boundary before cursor
+      const wordBeforeCursorMatch = textBeforeCursor.match(/[a-zA-Z0-9_@]*$/);
+      const wordBeforeCursor = wordBeforeCursorMatch ? wordBeforeCursorMatch[0] : '';
 
-      // If it's a function, add parentheses and place cursor between them
+      // Find the word boundary after cursor
+      const wordAfterCursorMatch = textAfterCursor.match(/^[a-zA-Z0-9_@]*/);
+      const wordAfterCursor = wordAfterCursorMatch ? wordAfterCursorMatch[0] : '';
+
+      // Calculate the full word at cursor and its boundaries
+      const fullWord = wordBeforeCursor + wordAfterCursor;
+      const wordStartPos = cursorPosition - wordBeforeCursor.length;
+      const wordEndPos = cursorPosition + wordAfterCursor.length;
+
+      // Create the new input value by replacing the word at cursor
+      const newValue = inputValue.substring(0, wordStartPos) +
+                       suggestion.name +
+                       inputValue.substring(wordEndPos);
+
+      // Set the new input value
+      input.value = newValue;
+
+      // Calculate the new cursor position
+      const newCursorPosition = wordStartPos + suggestion.name.length;
+
+      // Add parentheses for functions and position cursor between them
       if (suggestion.type === 'function') {
-        input.value += '()';
-        setTimeout(() => {
-          input.selectionStart = input.selectionEnd = input.value.length - 1;
-        }, 0);
+        // Check if there are already parentheses after the function name
+        if (input.value.substring(newCursorPosition, newCursorPosition + 2) !== '()') {
+          // Insert parentheses
+          input.value = input.value.substring(0, newCursorPosition) +
+                        '()' +
+                        input.value.substring(newCursorPosition);
+
+          // Position cursor between parentheses
+          setTimeout(() => {
+            input.selectionStart = input.selectionEnd = newCursorPosition + 1;
+          }, 0);
+        } else {
+          // Parentheses already exist, just position cursor between them
+          setTimeout(() => {
+            input.selectionStart = input.selectionEnd = newCursorPosition + 1;
+          }, 0);
+        }
       } else {
-        // For other types, place cursor at the end
+        // For non-functions, position cursor after the inserted suggestion
         setTimeout(() => {
-          input.selectionStart = input.selectionEnd = input.value.length;
+          input.selectionStart = input.selectionEnd = newCursorPosition;
         }, 0);
       }
 
@@ -282,13 +342,25 @@ class ExpressionLanguageEvaluator {
 
       // Clear the input
       input.value = '';
+
+      // Reset autocomplete state completely
+      hideAutocompleteSuggestions();
+      suggestions = [];
+      selectedSuggestionIndex = -1;
+
       input.focus();
     });
 
     // Handle input events for autocomplete
     input.addEventListener('input', () => {
       if (input.value.trim()) {
-        showAutocompleteSuggestions();
+        // Check if the input ends with a space or other non-word character
+        // If it does, don't show autocomplete
+        if (input.value.match(/\s$/)) {
+          hideAutocompleteSuggestions();
+        } else {
+          showAutocompleteSuggestions();
+        }
       } else {
         hideAutocompleteSuggestions();
       }
@@ -318,6 +390,10 @@ class ExpressionLanguageEvaluator {
           e.preventDefault();
         } else {
           // Otherwise, run the command
+          // Make sure to completely reset autocomplete state
+          hideAutocompleteSuggestions();
+          suggestions = [];
+          selectedSuggestionIndex = -1;
           runButton.click();
           e.preventDefault();
         }

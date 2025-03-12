@@ -138,6 +138,31 @@ class ExpressionLanguageParser {
       return this._getObjectProperties(objectName);
     }
 
+    // Add special operators
+    const specialOperators = [
+      {
+        name: '@it',
+        type: 'special',
+        description: 'Current element in collection iteration'
+      },
+      {
+        name: '@key',
+        type: 'special',
+        description: 'Current key in object/map iteration'
+      },
+      {
+        name: '@value',
+        type: 'special',
+        description: 'Current value in object/map iteration'
+      }
+    ];
+
+    for (const operator of specialOperators) {
+      if (operator.name.toLowerCase().startsWith(lastWord.toLowerCase())) {
+        suggestions.push(operator);
+      }
+    }
+
     // Add built-in functions
     for (const funcName of Object.keys(this.builtinFunctions)) {
       if (funcName.toLowerCase().startsWith(lastWord.toLowerCase())) {
@@ -1023,6 +1048,11 @@ class ExpressionLanguageParser {
    * @private
    */
   _evaluateWithEnvironment(predicate, tempEnv) {
+    // Check for assignments in the predicate
+    if (this._containsAssignment(predicate.expression)) {
+      throw new Error('Assignment not allowed in predicate');
+    }
+
     // Save the current environment
     const savedEnv = { ...this.environment };
 
@@ -1036,6 +1066,29 @@ class ExpressionLanguageParser {
     this.environment = savedEnv;
 
     return result;
+  }
+
+  /**
+   * Check if an AST node contains an assignment
+   * @param {Object} node - The AST node to check
+   * @returns {boolean} - True if the node contains an assignment, false otherwise
+   * @private
+   */
+  _containsAssignment(node) {
+    if (!node || typeof node !== 'object') return false;
+
+    // Check if the current node is an assignment
+    if (node.type === 'ASSIGN') return true;
+
+    // Recursively check all properties of the node
+    return Object.values(node).some(value => {
+      if (Array.isArray(value)) {
+        return value.some(item => this._containsAssignment(item));
+      } else if (value && typeof value === 'object') {
+        return this._containsAssignment(value);
+      }
+      return false;
+    });
   }
 
   /**
