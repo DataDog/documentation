@@ -294,7 +294,7 @@ Use the `overwrite` parameter to replace the previously calculated loading time 
 
 After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
 
-**Note**: This API is still experimental and might change in the future.
+**Note**: This API is experimental.
 
 ### Add custom timings
 You can add custom timings:
