@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup
 further_reading:
-    - link: "/sensitive_data_scanner/scanning_rules/"
+    - link: "/security/sensitive_data_scanner/scanning_rules/"
       tag: "Documentation"
       text: "Learn more about scanning rules"
 ---
@@ -20,5 +20,5 @@ Set up Sensitive Data Scanner to scan your:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/setup/telemetry_data/
-[2]: /sensitive_data_scanner/setup/cloud_storage/
+[1]: /security/sensitive_data_scanner/setup/telemetry_data/
+[2]: /security/sensitive_data_scanner/setup/cloud_storage/

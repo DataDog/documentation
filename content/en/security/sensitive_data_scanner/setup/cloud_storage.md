@@ -4,10 +4,10 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/cloud_storage
 further_reading:
-  - link: "/sensitive_data_scanner/scanning_rules/library_rules"
+  - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
     text: "Learn more about out-of-the-box library rules"
-  - link: "/sensitive_data_scanner/scanning_rules/custom_rules"
+  - link: "/security/sensitive_data_scanner/scanning_rules/custom_rules"
     tag: "Documentation"
     text: "Learn more about creating custom rules"
 ---
@@ -150,7 +150,7 @@ To uninstall Agentless Scanning, log in to your AWS console and delete the Cloud
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/remote_config/?tab=configurationyamlfile
-[2]: /sensitive_data_scanner/library_rules/
+[2]: /security/sensitive_data_scanner/library_rules/
 [3]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/data-security
 [4]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: /agent/remote_config/?tab=configurationyamlfile#enable-remote-configuration-on-the-api-key

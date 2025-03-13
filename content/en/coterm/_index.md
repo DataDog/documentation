@@ -59,7 +59,7 @@ You can review your recorded terminal sessions and process data in Datadog:
 - On Linux, `seccomp`-based tracing prevents you from elevating your permissions during a recording.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /sensitive_data_scanner/
+[2]: /security/sensitive_data_scanner/
 [3]: http://app.datadoghq.com/terminal-streams
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
 [5]: https://app.datadoghq.com/logs?query=service%3Addcoterm

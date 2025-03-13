@@ -4,13 +4,13 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/telemetry_data
 further_reading:
-  - link: "/sensitive_data_scanner/scanning_rules/library_rules"
+  - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"
     text: "Learn more about out-of-the-box library rules"
-  - link: "/sensitive_data_scanner/scanning_rules/custom_rules"
+  - link: "/security/sensitive_data_scanner/scanning_rules/custom_rules"
     tag: "Documentation"
     text: "Learn more about creating custom rules"
-  - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
+  - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
     tag: "Documentation"
     text: "Best practices for creating custom scanning rules"
 ---
@@ -210,7 +210,7 @@ To turn off Sensitive Data Scanner entirely, set the toggle to **off** for each 
 [4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
 [5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
-[7]: /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
+[7]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/log_configuration/processors/?tab=ui#remapper

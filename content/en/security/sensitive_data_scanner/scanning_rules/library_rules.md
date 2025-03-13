@@ -4,7 +4,7 @@ aliases:
   - /sensitive_data_scanner/library_rules/
   - /sensitive_data_scanner/scanning_rules/library_rules
 further_reading:
-    - link: "/sensitive_data_scanner/"
+    - link: "/security/sensitive_data_scanner/"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner"
 ---
@@ -14,10 +14,10 @@ further_reading:
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
 
 {{< whatsnext desc="The library rules are organized into the following categories:">}}
-  {{< nextlink href="/sensitive_data_scanner/scanning_rules/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/scanning_rules/library_rules#credit-cards-and-banking">}}Credit cards and banking{{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/scanning_rules/library_rules#personal-identifiable-information-pii">}}Personal identifiable information (PII){{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/scanning_rules/library_rules#network-and-device-information">}}Network and device information{{< /nextlink >}}
+  {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
+  {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/library_rules#credit-cards-and-banking">}}Credit cards and banking{{< /nextlink >}}
+  {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/library_rules#personal-identifiable-information-pii">}}Personal identifiable information (PII){{< /nextlink >}}
+  {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/library_rules#network-and-device-information">}}Network and device information{{< /nextlink >}}
 {{< /whatsnext >}}
 
 These rules can also be viewed in Datadog:
@@ -142,4 +142,4 @@ These rules can also be viewed in Datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/
-[2]: /sensitive_data_scanner/?#add-scanning-rules
+[2]: /security/sensitive_data_scanner/?#add-scanning-rules
