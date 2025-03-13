@@ -23,6 +23,6 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 
 The CD Visibility product collects deployment events so that key metrics can be identified from them. On top of that, it provides a series of features to enhance the Continuous Delivery workflow:
 
-{{< whatsnext desc="CD Visibility Features:" >}}
+{{< whatsnext desc="" >}}
 {{< nextlink href="/continuous_delivery/features/changes_detection" >}}Detect Changes between Deployments{{< /nextlink >}}
 {{< /whatsnext >}}
