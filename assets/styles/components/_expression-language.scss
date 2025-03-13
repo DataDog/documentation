@@ -96,6 +96,17 @@
   font-feature-settings: 'liga' 0;
   background-color: #edf5fd;
 
+  // Indentation styles for Python code
+  .indent-1 {
+    display: inline-block;
+    width: 4ch; // 4 character width for first level indentation
+  }
+
+  .indent-2 {
+    display: inline-block;
+    width: 8ch; // 8 character width for second level indentation
+  }
+
   // Non-interactive elements styling
   .non-interactive {
     cursor: default !important;
