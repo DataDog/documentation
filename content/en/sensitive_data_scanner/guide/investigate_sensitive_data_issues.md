@@ -3,9 +3,12 @@ title: Investigate Sensitive Data Issues
 aliases:
   - /sensitive_data_scanner/investigate_sensitive_data_issues/
 further_reading:
-    - link: "/sensitive_data_scanner/"
+    - link: "sensitive_data_scanner/setup/telemetry_data/"
       tag: "Documentation"
-      text: "Set up Sensitive Data Scanner"
+      text: "Set up Sensitive Data Scanner for Telemetry Data"
+    - link: "sensitive_data_scanner/setup/cloud_storage/"
+      tag: "Documentation"
+      text: "Set up Sensitive Data Scanner for Cloud Storage"
     - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
       tag: "Blog"
       text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
