@@ -3,6 +3,7 @@ title: Sensitive Data Scanner
 disable_toc: false
 aliases:
   - /account_management/org_settings/sensitive_data_detection
+  - /sensitive_data_scanner/
 further_reading:
     - link: "/sensitive_data_scanner/setup/telemetry_data"
       tag: "Documentation"

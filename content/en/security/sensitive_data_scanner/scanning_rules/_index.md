@@ -1,6 +1,8 @@
 ---
 title: Scanning Rules
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/scanning_rules
 further_reading:
 - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
   tag: "Documentation"

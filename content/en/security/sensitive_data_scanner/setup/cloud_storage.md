@@ -1,6 +1,8 @@
 ---
 title: Cloud Storage
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/setup/cloud_storage
 further_reading:
   - link: "/sensitive_data_scanner/scanning_rules/library_rules"
     tag: "Documentation"

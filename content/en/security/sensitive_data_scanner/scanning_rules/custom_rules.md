@@ -3,6 +3,7 @@ title: Custom Rules
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/regular_expression_syntax/
+  - /sensitive_data_scanner/scanning_rules/custom_rules
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"

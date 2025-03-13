@@ -2,6 +2,7 @@
 title: Library Rules
 aliases:
   - /sensitive_data_scanner/library_rules/
+   - /sensitive_data_scanner/scanning_rules/library_rules
 further_reading:
     - link: "/sensitive_data_scanner/"
       tag: "Documentation"

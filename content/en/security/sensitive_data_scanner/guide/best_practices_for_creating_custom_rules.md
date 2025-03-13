@@ -1,6 +1,8 @@
 ---
 title: Best Practices for Creating Custom Rules
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
 further_reading:
 - link: "/sensitive_data_scanner/"
   tag: "Documentation"
