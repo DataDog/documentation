@@ -220,3 +220,4 @@ To add custom instrumentation:
 [5]: /tracing/glossary/#instrumentation
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
