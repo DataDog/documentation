@@ -207,15 +207,17 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. 
 
-1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+1. If you haven't already installed the Agent, see the [Agent installation instructions][8] then come back here to complete the configuration process for the Postgres check.
 
-
+2. Follow the instructions below for the Agent deployment option you selected in step 1.
 
 <!-- Deployment options -->
 {{< tabs >}}
 {{% tab "Host" %}}
+
+Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 
    ```yaml
    init_config:
@@ -285,23 +287,6 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<HOST>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-### Docker Compose
-
-```yaml
-services:
-  agent:
-    environment:
-      - DD_API_KEY=${DD_API_KEY}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    labels:
-      - "com.datadoghq.ad.checks='{\"postgres\": { \"init_config\": {},
-        \"instances\": [{ \"dbm\": true, \"host\": \"<HOST>\", \"port\":
-        5432, \"username\": \"datadog\", \"password\":
-        \"ENC[datadog_user_database_password]\", }] }}'"
-    image: gcr.io/datadoghq/agent:7.63.3
-```
-
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
 ```json
@@ -323,51 +308,53 @@ Follow the instructions to [enable the cluster checks][2] if not already enabled
 
 ### Operator
 
-Complete the following steps to install the [Datadog Operator][6] on your Kubernetes cluster. Once you have installed the Datadog Operator use the example below to update the `datadog-agent.yaml`:
+To configure a Cluster Check via the Datadog Operator, follow in the instructions below:
 
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    clusterName: <CLUSTER_NAME>
-    site: <DD_SITE>
-    credentials:
-      apiSecret:
-        secretName: datadog-agent-secret
-        keyName: api-key
+1. Use the example below to create or update the `datadog-agent.yaml`:
 
-  features:
-    clusterChecks:
-      enabled: true
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
 
-  override:
-    nodeAgent:
-      image:
-        name: agent
-        tag: 7.63.3
+      features:
+        clusterChecks:
+          enabled: true
 
-    clusterAgent:
-      extraConfd:
-        configDataMap:
-          postgres.yaml: |-
-            cluster_check: true
-            init_config:
-            instances:
-            - host: <HOST>
-              port: 5432
-              username: datadog
-              password: 'ENC[datadog_user_database_password]
-              dbm: true
-```
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: 7.63.3
 
-Apply the changes to the Datadog Operator with the following command:
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              postgres.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <HOST>
+                  port: 5432
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]
+                  dbm: true
+    ```
 
-```shell
-kubectl apply -f datadog-agent.yaml
-```
+2. Apply the changes to the Datadog Operator with the following command:
+
+  ```shell
+  kubectl apply -f datadog-agent.yaml
+  ```
 
 ### Helm
 
@@ -375,6 +362,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
 
 1. Complete the [Datadog Agent installation instructions][3] for Helm.
 2. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+
     ```yaml
     clusterAgent:
       confd:
@@ -400,6 +388,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```
 
 3. Deploy the Agent with the above configuration file from the command line:
+
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
