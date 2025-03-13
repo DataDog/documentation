@@ -1,6 +1,6 @@
 ---
 title: Agentless Scanning Compatibility
-aliases: 
+aliases:
  - /security/cloud_security_management/agentless_scanning/compatibility
 ---
 
@@ -13,7 +13,7 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Operating System                                | Linux                                                                                                                                     | Linux                                                                                                                                                                             |
 | Host Filesystem                                 | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                              | Btrfs, Ext2, Ext3, Ext4, xfs                                                                                                                                                      |
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                                    | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          |
-| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
+| Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) and Customer Managed Key (CMK)                                         | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                             | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     |
 | Serverless                                      | AWS Lambda                                                                                                                                | To request this feature, contact [Datadog Support][16]                                                                                                                                                         |
 | Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                       | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               |
