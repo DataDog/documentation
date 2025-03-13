@@ -1,15 +1,10 @@
 ---
 title: Install the Datadog Agent with Embedded OpenTelemetry Collector
-private: true
 further_reading:
 - link: "/opentelemetry/agent/agent_with_custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
-
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
-{{< /callout >}}
 
 ## Overview
 
