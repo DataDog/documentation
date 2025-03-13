@@ -38,7 +38,7 @@ You can also create a cost anomaly monitor to get alerted of similar cost anomal
 
 ## Resolve anomalies
 
-As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are simply not considered an anomaly. 
+As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are otherwise not considered an anomaly. 
 
 Mark anomalies as significant or insignificant to give feedback and help improve the anomaly detection algorithm. Resolve anomalies with context to move anomalies to the Resolved tab, and add context for others in your organization.
 
