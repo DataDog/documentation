@@ -8,6 +8,9 @@ further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn how to query and visualize deployments"
+- link: "/continuous_delivery/features/changes_detection"
+  tag: "Documentation"
+  text: "Learn about Changes Detection in CD Visibility"
 ---
 
 {{< site-region region="gov" >}}

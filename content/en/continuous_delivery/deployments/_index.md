@@ -4,6 +4,9 @@ further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn how to query and visualize deployments"
+- link: "/continuous_delivery/features"
+  tag: "Documentation"
+  text: "Learn about the CD Visibility Features"
 cascade:
     algolia:
         rank: 70
