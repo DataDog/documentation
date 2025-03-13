@@ -1,6 +1,6 @@
 ---
 title: Retention Filter Best Practices
-description: 
+description: Learn the best practices for sequencing your retention filters to store the RUM data you need.
 aliases:
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
@@ -24,8 +24,8 @@ This guide provides strategies for managing your RUM session volumes effectively
 Sequencing your retention filters properly ensures you store the RUM data you need. Based on the [retention filter logic][1], follow these best practices:
 
 ### Retention rate order
-- Place filters with a 100% retention rate at the top to ensure no valuable sessions are discarded.
-- Filters with low retention rates should be last to potentially discard less critical sessions.
+- Place the most specific filters (usually these have a 100% retention rate) at the top to ensure no valuable sessions are discarded.
+- Place less specific and catch-all filters (usually these have a smaller retention rate) lower in the list.
 
 ### Setting up filters
 - If unsure about your settings, start by arranging filters from highest to lowest retention rates.
@@ -38,7 +38,6 @@ Below we describe the set of default filters, suggested filters, and their typic
 
 | Filter | Query Example | Description |
 |--------|---------------|-------------|
-| Sessions with replays | `@session.has_replay:true` | A default filter that ensures the system retains all sessions with available session replays. |
 | Sessions with errors | `@type:error @error.is_crash:true` | A default filter that can be applied to retain all web sessions with errors and mobile sessions with crashes. |
 | Sessions | `@type:session` | A default filter, placed last in the list, to apply to all sessions and allows you to retain or discard a percentage of them. |
 | Versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. |
@@ -49,7 +48,7 @@ Below we describe the set of default filters, suggested filters, and their typic
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. |
 | Sessions with a specific user | `@type:session user.idr:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code.
-| Sessions with a specific duration | `@session.view_count < 3 OR @session.duration <5, retention rate 0%` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
+| Sessions with a specific duration | `@session.view_count > 3 OR @session.duration  > 15, retention rate 100%` | If you notice many short sessions, like a user viewing a page for 10 seconds without further action or errors, they are typically not useful. You can use a duration retention filter to reduce these sessions. |
 | Sessions with a network error 4XX and 5XX | `@type:resource AND @resource.status_code:>=400` | Frontend applications often encounter issues with downstream services returning 4XX or 5XX status codes. Using this filter, you can capture all sessions with resource calls that result in error codes. |
 
 

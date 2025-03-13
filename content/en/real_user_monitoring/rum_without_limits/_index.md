@@ -1,11 +1,14 @@
 ---
 title: RUM without Limits
-description: 
+description: Keep only the RUM data you need while maintaining full visibility of performance metrics for your applications.
 aliases:
 further_reading:
-    - link: '/real_user_monitoring/session_replay'
-      tag: Documentation
-      text: Session Replay
+  - link: '/real_user_monitoring/rum_without_limits/retention_filters'
+    tag: Documentation
+    text: Retain Data with Retention Filters
+  - link: '/real_user_monitoring/rum_without_limits/metrics'
+    tag: Documentation
+    text: Analyze Performance with Metrics
 ---
 
 {{< img src="real_user_monitoring/rum_without_limits/overview-test.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
@@ -28,21 +31,21 @@ This page identifies key components of RUM without Limits that can help you mana
 
 To get started with RUM without Limits for new applications, at the [instrumentation][1] step:
 
-1. Set the `sessionSampleRate` to 100%. This step is required.
+1. Ensure the `sessionSampleRate` is set to 100%. This step is required.
 
 2. Choose a `sessionReplaySampleRate` that meets your observability needs.
 
    **Note**: All replays are kept and billed.
 3. For applications with the [APM integration enabled][2], set the percentage of traces for which you want to make the correlation with APM traces with `traceSampling`.
 
-   <div class="alert alert-warning">Steps 3-4 can significantly impact APM traces ingestion.</div>
-
 4. Enable `traceContextInjection: sampled` to defer sampling decisions to backend tracers.
+
+   <div class="alert alert-warning">Steps 3-4 can significantly impact APM traces ingestion.</div>
 
 ### For existing applications
 Existing RUM users must redeploy applications to fully use RUM without Limits. Ensure your session sampling rate is 100% for all applications.
 
-#### Step 1: Adjust session rates
+#### Step 1: Adjust sampling rates
 If you are already collecting replays, increasing the session sampling rate requires reducing the replay sampling rate to collect the same number of replays (see example below). The replay sampling rate is based on the existing session sampling rate.
 
 Before:
@@ -62,7 +65,7 @@ After:
 1. Navigate to [**Digital Experiences > Real User Monitoring > Manage Applications**][3].
 1. Click the application you want to migrate.
 1. Click the **SDK Configuration** tab.
-1. Set the `sessionSampleRate` to 100%.
+1. Ensure the `sessionSampleRate` is set to 100%.
 1. Set the `sessionReplaySampleRate` to a rate that results in the same number of replays prior to increasing the Session Sample Rate.
 1. Use the generated code snippet to update your source code and redeploy your applications to make sure the new configuration is applied.
 

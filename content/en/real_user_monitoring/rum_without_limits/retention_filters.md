@@ -1,11 +1,17 @@
 ---
 title: Retain Data with Retention Filters
-description: 
+description: Learn how retention filters work in RUM without Limits.
 aliases:
 further_reading:
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices
+  - link: '/real_user_monitoring/rum_without_limits/rum_without_limits'
+    tag: Documentation
+    text: RUM without Limits
+  - link: '/real_user_monitoring/rum_without_limits/metrics'
+    tag: Documentation
+    text: Analyze Performance with Metrics
 ---
 ## Overview
 
@@ -17,9 +23,7 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 A session is stored when a retention filter matches the session event or any event within it. The retention rate allows retaining only sessions meeting filter criteria, discarding the rest.
 
-{{< img src="real_user_monitoring/rum_without_limits/filters-test.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
-
-## Logic
+{{< img src="real_user_monitoring/rum_without_limits/filters.png" alt="Visualization of Android app crash-free sessions percentage over four weeks." style="width:90%" >}}
 
 The logical flow of retention filters is the following:
 
@@ -32,7 +36,7 @@ The logical flow of retention filters is the following:
 
 ## Default replay retention filter
 
-Sessions ingested with replays are always kept.
+Sessions ingested with replays are always kept. However, you maintain control of all other sessions that do not include replays from the UI. For example, if you send 100% of sessions and 5% of them have replays, Datadog automatically retains the 5% of sessions with the replays, while you can control the remaining 95% of sessions.
 
 ## Creating a retention filter
 
@@ -48,27 +52,38 @@ To create a retention filter:
 
 The new filter gets added to the bottom of the Retention Filters list. It takes seconds for Datadog to propagate a new filter and start making sampling decisions.
 
-## Editing a filter
+## Modifying filters
+
+{{< img src="real_user_monitoring/rum_without_limits/modifying-filters.png" alt="Hover over a retention filter to modify it." style="width:100%" >}}
+
+### Edit a filter
 
 To modify an existing filter:
 
 1. Hover over the filter and click the **Edit** icon.
-2. Click **Save Changes**.
+1. Click **Save Changes**.
 
-## Deleting a filter
+### Duplicate a filter
+
+To duplicate a filter:
+
+1. Hover over the filter and click the **Duplicate** icon.
+1. Make any modifications you want to the filter, then click **Save Changes**.
+
+### Delete a filter
 
 To delete a retention filter:
 
 1. Hover over the filter and click the **Delete** icon.
-2. Click **Confirm**.
+1. Click **Confirm**.
 
-## Disabling a filter
+### Disable a filter
 
 Disabled filters simply ignore events and do not make any sampling decisions. Events flowing in the list will skip disabled filters.
 
 Use the toggle to the right of the filter to disable or enable it.
 
-## Reordering filters
+### Reorder filters
 
 Drag and drop filters to reorder filters to their new position.
 
