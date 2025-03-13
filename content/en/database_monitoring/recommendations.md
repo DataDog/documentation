@@ -27,6 +27,24 @@ Datadog analyzes metrics and sample data from DBM to identify your systems' high
 | **Missing Index**       | The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.                |                             |                             |                             | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 | **Unused Index**        | The index has not been used in any execution plans recently.                                                                                           | <i class='icon-check-bold'> |                             |                             | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
+## Configuration
+
+### Defaults
+These features are on by default when DBM is enabled and are used to power specific recommendations when applicable:
+
+Query Activity Samples
+- Powers recommendations for: Missing Index, High Impact Blocker, Long Running Query
+
+Explain Plans
+- Powers recommendations for: Missing Index, Function in Filter, High Row Count
+
+### Additional configuration required
+
+| Recommendation  | Postgres            | SQL Server            | MySQL            | Oracle            | MongoDB              |
+|-----------------|---------------------|-----------------------|------------------|-------------------|----------------------|
+| Unused Index    | [Relation Metrics](https://github.com/DataDog/integrations-core/blob/893ded2e783741cc1524b9cda72428895aaf5d90/postgres/datadog_checks/postgres/data/conf.yaml.example#L143-L178) | [Index Usage Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201), [(Optional) Fragmentation Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201) | - | - | [Index Access Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201) |
+| Low Disk Space  | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | - |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
