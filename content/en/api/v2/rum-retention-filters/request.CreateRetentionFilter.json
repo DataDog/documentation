@@ -7,9 +7,6 @@
       "query": "custom_query",
       "sample_rate": 50,
       "enabled": true
-    },
-    "meta": {
-      "source": "terraform"
     }
   }
 }
