@@ -15,7 +15,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to id
 
 ## View cost anomalies
 
-You can filter to Active, Past, or Resolved anomalies:
+On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view the anomalies and filter them to Active, Past, or Resolved:
 - **Active**: An anomaly is **Active** if there were anomalous costs in the last day (the last full day of cost data, which is often 2-3 days prior). 
 - **Past**: If an anomaly lasts more than 7 days, or the algorithm detects that costs are no longer anomalous, the anomaly is moved to the **Past** tab. Past anomalies can be useful to report on, but are often less urgent and actionable.
 - **Resolved**: If you Resolve an anomaly, the anomaly can be found in the **Resolved** tab.
