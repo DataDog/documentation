@@ -137,25 +137,25 @@ cascade:
   aliases:
     - /integrations/snowflake/
 - _target:
-    path: /integrations/redpeaks_sap_netweaver/
+    path: /integrations/redpeaks_sap_netweaver
     lang: en
   aliases:
-    - /integrations/agentil_software_sap_netweaver
+    - /integrations/agentil_software_sap_netweaver/
 - _target:
-    path: /integrations/redpeaks_sap_businessobjects/
+    path: /integrations/redpeaks_sap_businessobjects
     lang: en
   aliases:
-    - /integrations/agentil_software_sap_businessobjects
+    - /integrations/agentil_software_sap_businessobjects/
 - _target:
-    path: /integrations/redpeaks_services_5_days/
+    path: /integrations/redpeaks_services_5_days
     lang: en
   aliases:
-    - /integrations/agentil_software_services_5_days
+    - /integrations/agentil_software_services_5_days/
 - _target:
-    path: /integrations/redpeaks_sap_hana/
+    path: /integrations/redpeaks_sap_hana
     lang: en
   aliases:
-    - /integrations/agentil_software_sap_hana
+    - /integrations/agentil_software_sap_hana/
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
