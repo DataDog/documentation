@@ -6,6 +6,12 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
     text: Retention Filters
+  - link: '/real_user_monitoring/rum_without_limits/'
+    tag: Documentation
+    text: RUM without Limits
+  - link: '/real_user_monitoring/rum_without_limits/metrics'
+    tag: Documentation
+    text: Analyze Performance with Metrics
 ---
 
 ## Overview
@@ -21,6 +27,9 @@ RUM without Limits allows you to capture all session data while only retaining t
 This guide provides strategies for managing your RUM session volumes effectively within your observability budget.
 
 ## Retention filter sequencing
+
+{{< img src="real_user_monitoring/rum_without_limits/how-filters-work-placeholder.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
+
 Sequencing your retention filters properly ensures you store the RUM data you need. Based on the [retention filter logic][1], follow these best practices:
 
 ### Retention rate order
