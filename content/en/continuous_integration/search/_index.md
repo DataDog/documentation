@@ -10,6 +10,9 @@ further_reading:
 - link: "/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/"
   tag: "Documentation"
   text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
+- link: "/continuous_integration/guides/use_ci_jobs_failure_analysis/"
+  tag: "Documentation"
+  text: "Use CI jobs failure analysis to identify root causes in failed jobs"
 ---
 
 {{< site-region region="gov" >}}
