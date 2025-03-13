@@ -55,6 +55,8 @@ class ExpressionLanguageEvaluator {
     const templateInput = simulator.querySelector('.template-input');
     const simulationControls = simulator.querySelector('.simulation-controls');
     const autocompleteContainer = simulator.querySelector('#simulator-autocomplete-container');
+    // Add example buttons selector
+    const exampleButtons = document.querySelectorAll('.example-button');
 
     if (!simulateButton || !conditionInput || !templateInput || !simulationControls || !autocompleteContainer) return;
 
@@ -71,6 +73,28 @@ class ExpressionLanguageEvaluator {
       resultsContainer.className = 'simulation-results';
       simulator.appendChild(resultsContainer);
     }
+
+    // Set up click handlers for example buttons
+    exampleButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Get the expression from the data-expression attribute
+        const expression = button.getAttribute('data-expression');
+
+        // Check if this is the "Write your own!" button (empty expression)
+        if (expression === '') {
+          // Clear the condition input
+          conditionInput.value = '';
+        } else if (expression) {
+          // Set the expression in the condition input
+          conditionInput.value = expression;
+        }
+
+        // Focus the input
+        conditionInput.focus();
+        // Hide autocomplete if visible
+        hideAutocompleteSuggestions();
+      });
+    });
 
     // Autocomplete state
     let selectedSuggestionIndex = -1;

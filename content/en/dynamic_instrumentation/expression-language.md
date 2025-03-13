@@ -74,10 +74,11 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
 This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether a log line will be generated when instrumenting a method.
 
-The simulator below demonstrates how to use conditions to control when logs are emitted. Enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
+Enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
 
 Available variables in this example:
-- `loops`: The route parameter (available as a function parameter)
+
+- `loops`: The route parameter hardcoded to `5`
 - `a`: An array of integers `[6, 7, 8, 9, 10]`
 - `b`: A dictionary/object `{"a": 1, "b": 2, "c": 3}`
 - `c`: A string `"hello world"`

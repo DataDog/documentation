@@ -140,14 +140,6 @@
     font-family: monospace;
     font-size: 0.85rem;
 
-    .simulation-header {
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #333;
-      font-family: sans-serif;
-      font-size: 0.9rem;
-    }
-
     .simulation-log-entry {
       margin: 0.5rem 0;
       padding: 0.5rem;
@@ -459,4 +451,39 @@
   align-items: center;
   margin-bottom: 0.75rem;
   position: relative;
+}
+
+// Expression Examples Container Styles
+.expression-examples-container {
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+
+  .examples-header {
+    font-size: 0.95rem;
+    // font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+
+  .examples-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .example-button {
+    background-color: #f0f0f0;
+    border: 1px solid #d8e5f2;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #e0e9f4;
+      border-color: #632ca6;
+    }
+  }
 }
