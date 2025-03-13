@@ -133,23 +133,29 @@ If your application consists of more elaborate prompting or complex chains or wo
 <!-- TODO (sabrenner): we will need to add tabs here once Node.js has a better OOTB serverless experience -->
 This generate an LLM Observability trace in an AWS Lambda serverless environment, create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
+{{< tabs >}}
+{{% tab "Python" %}}
+
 1. Create a [Lambda function chatbot using Amazon Bedrock][13]
 2. Instrument your Lambda function with the [Datadog Python extension][14]:
     1. Open a Cloudshell
     2. Install the Datadog CLI client
-    ```shell
-    npm install -g @datadog/datadog-cli
+    ```bash
+    npm install -g @datadog/datadog-ci
     ```
     3. Set the Datadog API key and site
-    ```shell
+    ```bash
     export DD_SITE=<YOUR_DD_SITE>
     export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+    ```
+    If you already have or prefer to use a secret in Secrets Manager, you can set the API key via the secret ARN:
+    ```bash
+    export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
     ```
     4. Instrument your Lambda function
     ```shell
     datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
     ```
-    <!-- verify versions -->
 3. Verify the setup <!-- screenshot -->
 4. Add the LLM Observability environment variables to your Lambda function environment variables.
     1. In the AWS console, go to your Lambda function in Configuration > Environment variables. Click "Edit" and add the following environment variables:
@@ -157,6 +163,59 @@ This generate an LLM Observability trace in an AWS Lambda serverless environment
         |----------------------|-------------------------|
         | DD_LLMOBS_ENABLED    | 1                       |
         | DD_LLMOBS_ML_APP     | <NAME_YOUR_APPLICATION> |
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+1. Create a [Lambda function chatbot using Amazon Bedrock][13]
+2. Instrument your Lambda function with the [Datadog Node.js extension][14]:
+    1. Open a Cloudshell
+    2. Install the Datadog CLI client
+    ```bash
+    npm install -g @datadog/datadog-ci
+    ```
+    3. Set the Datadog API key and site
+    ```bash
+    export DD_SITE=<YOUR_DD_SITE>
+    export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+    ```
+    4. Instrument your Lambda function
+    ```shell
+    datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="nodejs" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+3. Verify the setup
+4. Add the necessary LLM Observability environment variables to your Lambda function environment variables.
+    1. In the AWS console, go to your Lambda function in Configuration > Environment variables. Click "Edit" and add the following environment variables:
+        | Environment Variable | Value                          |
+        |-----------------------------|-------------------------|
+        | DD_LLMOBS_ENABLED           | 1                       |
+        | DD_LLMOBS_ML_APP            | <NAME_YOUR_APPLICATION> |
+        | DD_LLMOBS_AGENTLESS_ENABLED | 1                       |
+    2. Additionally, add the following environment variable if your lambda is in ESM:
+        | Environment Variable | Value                          |
+        |----------------------|--------------------------------|
+        | NODE_OPTIONS         | --import dd-trace/register.mjs |
+5. Flush the LLM Observability SDK before your Lambda handler returns
+```javascript
+import tracer from 'dd-trace';
+const llmobs = tracer.llmobs;
+
+export const handler = async (event) => {
+  // your lambda body
+  llmobs.flush(); // if your lambda has a `finally` block, make sure it is included there instead
+  return response;
+};
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Compatibility Notes
+Add some version compatibility notes here (version of python layer where we stopped using trace filter)
 
 ## Further Reading
 
