@@ -1,9 +1,6 @@
 ---
 title: CD Visibility in Datadog
 further_reading:
-- link: "/continuous_delivery/search"
-  tag: "Documentation"
-  text: "Learn how to search and manage your deployment results"
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn how to query and visualize deployments"
