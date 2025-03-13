@@ -150,6 +150,47 @@ instances:
     port: 443 # optional port number, default is 80
 ```
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+
+  ```yaml
+  datadog:
+    traceroute:
+      enabled: true
+    confd:
+      network_path.yaml: |-
+        init_config:
+          min_collection_interval: 60 # in seconds, default 60 seconds
+        instances:
+          # configure the endpoints you want to monitor, one check instance per endpoint
+          # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
+
+          - hostname: api.datadoghq.eu # endpoint hostname or IP
+            protocol: TCP
+            port: 443
+            tags:
+              - "tag_key:tag_value"
+              - "tag_key2:tag_value2"
+          ## optional configs:
+          # max_ttl: 30 # max traderoute TTL, default is 30
+          # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+
+          # more endpoints
+          - hostname: 1.1.1.1 # endpoint hostname or IP
+            protocol: UDP
+            tags:
+              - "tag_key:tag_value"
+              - "tag_key2:tag_value2"
+```
+
+Agent `v7.59+` is required.
+
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
+[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Network traffic paths (experimental)
@@ -246,45 +287,6 @@ Agent `v7.61+` is required.
 
 [3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
 
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
-
-  ```yaml
-  datadog:
-    traceroute:
-      enabled: true
-    confd:
-      network_path.yaml: |-
-        init_config:
-          min_collection_interval: 60 # in seconds, default 60 seconds
-        instances:
-          # configure the endpoints you want to monitor, one check instance per endpoint
-          # warning: Do not set the port when using UDP. Setting the port when using UDP can cause traceroute calls to fail and falsely report an unreachable destination.
-
-          - hostname: api.datadoghq.eu # endpoint hostname or IP
-            protocol: TCP
-            port: 443
-            tags:
-              - "tag_key:tag_value"
-              - "tag_key2:tag_value2"
-          ## optional configs:
-          # max_ttl: 30 # max traderoute TTL, default is 30
-          # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-
-          # more endpoints
-          - hostname: 1.1.1.1 # endpoint hostname or IP
-            protocol: UDP
-            tags:
-              - "tag_key:tag_value"
-              - "tag_key2:tag_value2"
-```
-
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
-[2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
