@@ -20552,6 +20552,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -21420,6 +21425,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         error_tracking_error_events_sum:
@@ -22295,6 +22305,11 @@ components:
         eph_infra_host_proplus_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         error_tracking_error_events_agg_sum:
