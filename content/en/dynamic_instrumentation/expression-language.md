@@ -70,10 +70,17 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 [5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [6]: /dynamic_instrumentation/symdb/
 
-## Expression Language REPL
+## Try It Out
 
-This interactive REPL tool helps you experiment with the Expression Language syntax before using it in your Dynamic Instrumentation probes. Try the examples from the documentation above or create your own expressions to see how they work.
+This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether a log line will be generated when instrumenting a method.
 
-The REPL below includes some predefined examples and variables like `myCollection` with the value `[1, 2, 3]` that you can use in your expressions. You can also define your own variables and use them in subsequent expressions.
+The simulator below demonstrates how to use conditions to control when logs are emitted. Enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
 
-{{< expression-language-repl >}}
+Available variables in this example:
+- `loops`: The route parameter (available as a function parameter)
+- `a`: An array of integers `[6, 7, 8, 9, 10]`
+- `b`: A dictionary/object `{"a": 1, "b": 2, "c": 3}`
+- `c`: A string `"hello world"`
+- `i`: The current loop iteration index
+
+{{< expression-language-simulator >}}

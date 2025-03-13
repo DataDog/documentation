@@ -113,8 +113,11 @@ class ExpressionLanguageParser {
     // Initialize the environment with default variables
     this.environment = {
       myCollection: [1, 2, 3],
-      newCollection: [1, "b", 2.5, true],
-      newDictionary: {"a": 1, "b": 2, "c": 3}
+      loops: 5,
+      a: [6, 7, 8, 9, 10],
+      b: {"a": 1, "b": 2, "c": 3},
+      c: "hello world",
+      i: 0 // Current loop iteration index
     };
 
     // Add built-in functions to the environment
