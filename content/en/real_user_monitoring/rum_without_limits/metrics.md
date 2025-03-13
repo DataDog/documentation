@@ -1,7 +1,7 @@
 ---
 title: Analyze Performance with Metrics
-description: 
-aliases:
+description: Understand the out-of-the-box performance metrics that are available with RUM without Limits.
+private: true
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
@@ -11,6 +11,8 @@ further_reading:
     text: Retention Filters
 ---
 ## Overview
+
+{{< img src="real_user_monitoring/rum_without_limits/filters.png" alt="Visualization of Android app crash-free sessions percentage over four weeks." style="width:90%" >}}
 
 Datadog provides the below out-of-the-box metrics for a comprehensive overview of your application's health over time. To ensure accuracy, these metrics are computed prior to retaining or discarding any sessions. This means that even though you keep 0.01% of your sessions, these metrics are computed based on 100% of the ingested sessions. These metrics are powering the [performance summary][1] to give you an accurate overview of the performance of your apps.
 
@@ -27,15 +29,13 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | Count of errors per session (@session.error.count) | | Session | Default, Percentiles breakdown | Mobile & Browser |
 | Count of frustration signals | | View | Default | Mobile & Browser |
 | Count of sessions | | Session | Default | Mobile & Browser |
-| Count of unique user | Session | Default, View Name | Mobile & Browser |
-| Count of views | View | Default, View Name | Mobile & Browser |
+| Count of unique user | | Session | Default, View Name | Mobile & Browser |
+| Count of views | | View | Default, View Name | Mobile & Browser |
 | Session duration | | Session | Default, Percentiles breakdown | Mobile & Browser |
 | View duration | | View | Default, Percentiles breakdown, View Name | Mobile & Browser |
 | App startup time | | Session | Default, Percentiles breakdown | Mobile only |
 | Count of frozen frames | | View | Default, View Name | Mobile only |
 | Crash-free session rate | | Session | Default | Mobile only |
-
-{{< img src="real_user_monitoring/rum_without_limits/metrics-test.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 
 ## Further reading
 

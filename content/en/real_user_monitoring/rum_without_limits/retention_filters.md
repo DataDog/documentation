@@ -1,12 +1,12 @@
 ---
 title: Retain Data with Retention Filters
 description: Learn how retention filters work in RUM without Limits.
-aliases:
+private: true
 further_reading:
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices
-  - link: '/real_user_monitoring/rum_without_limits/rum_without_limits'
+  - link: '/real_user_monitoring/rum_without_limits/'
     tag: Documentation
     text: RUM without Limits
   - link: '/real_user_monitoring/rum_without_limits/metrics'
@@ -23,7 +23,7 @@ The **retention rate** specifies the percentage of matching sessions you want to
 
 A session is stored when a retention filter matches the session event or any event within it. The retention rate allows retaining only sessions meeting filter criteria, discarding the rest.
 
-{{< img src="real_user_monitoring/rum_without_limits/filters.png" alt="Visualization of Android app crash-free sessions percentage over four weeks." style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/how-filters-work-placeholder.png" alt="Diagram showing the logical flow of retention filters and how they impact the number of sessions ultimately retained." style="width:90%" >}}
 
 The logical flow of retention filters is the following:
 

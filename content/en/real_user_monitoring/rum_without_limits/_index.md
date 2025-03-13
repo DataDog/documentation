@@ -1,7 +1,7 @@
 ---
 title: RUM without Limits
 description: Keep only the RUM data you need while maintaining full visibility of performance metrics for your applications.
-aliases:
+private: true
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
@@ -38,9 +38,9 @@ To get started with RUM without Limits for new applications, at the [instrumenta
    **Note**: All replays are kept and billed.
 3. For applications with the [APM integration enabled][2], set the percentage of traces for which you want to make the correlation with APM traces with `traceSampling`.
 
-4. Enable `traceContextInjection: sampled` to defer sampling decisions to backend tracers.
-
    <div class="alert alert-warning">Steps 3-4 can significantly impact APM traces ingestion.</div>
+
+4. Enable `traceContextInjection: sampled` to defer sampling decisions to backend tracers.
 
 ### For existing applications
 Existing RUM users must redeploy applications to fully use RUM without Limits. Ensure your session sampling rate is 100% for all applications.

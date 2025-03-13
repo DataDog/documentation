@@ -1,7 +1,7 @@
 ---
 title: Retention Filter Best Practices
 description: Learn the best practices for sequencing your retention filters to store the RUM data you need.
-aliases:
+private: true
 further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
