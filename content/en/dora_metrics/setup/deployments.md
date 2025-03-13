@@ -232,10 +232,11 @@ If the source code of multiple services is present in the same repository, furth
 
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
-If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
 
 **Example (schema version v2.2):**
-
+{{< tabs >}}
+{{% tab "GitHub" %}}
 ```yaml
 links:
   - name: shopist
@@ -243,6 +244,17 @@ links:
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
+{{% /tab %}}
+{{% tab "GitLab" %}}
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: gitlab
+    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+{{% /tab %}}
+{{< tabs >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
@@ -268,7 +280,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
-  - For GitHub: Metrics are emitted for the original commits.
+  - For GitHub and GitLab: Metrics are emitted for the original commits.
   - For other git providers: Metrics are emitted for the new commit added to the target branch.
 
 ## Calculating change failure rate
