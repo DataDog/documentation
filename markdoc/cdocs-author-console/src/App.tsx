@@ -10,7 +10,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactTimeAgo from 'react-time-ago';
-import TraitSelector from './components/selectors/TraitSelector';
+import QuickFilterBuilder from './components/QuickFilterBuilder';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -123,9 +123,7 @@ function App() {
           )}
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={1}>
-          <h2>Trait</h2>
-          <TraitSelector customizationConfig={consoleData.customizationConfig} onSelect={() => {}} />
-          <h2>Option group</h2>
+          <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
         {/*
         <CustomTabPanel value={currentTabIndex} index={1}>
