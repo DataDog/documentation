@@ -52,3 +52,5 @@ Mark anomalies as significant or insignificant to give feedback and help improve
 Anomalies are irregular or unexpected changes that significantly deviate from established patterns. We use a machine learning-based anomaly detection algorithm that accounts for weekly seasonality and automatically filters out low-cost anomalies below $5 to reduce noise.
 
 Weekly seasonality further reduce noise by identifying expected weekly patterns. For example, many business spin down a part of their infrastructure over the weekend and spin back up on Mondays, that's a cost increase but it shouldn't be flag as an anomaly.
+
+[1]: https://app.datadoghq.com/cost/analyze/anomalies
