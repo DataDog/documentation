@@ -5,7 +5,10 @@
  */
 
 class ExpressionLanguageParser {
-  constructor() {
+  constructor(options = {}) {
+    // Set simulator mode (default: false)
+    this.simulatorMode = options.simulatorMode || false;
+
     // Built-in functions
     this.builtinFunctions = {
       // String functions
@@ -73,6 +76,15 @@ class ExpressionLanguageParser {
           throw new Error('any() requires an array or object as first argument');
         }
 
+        // If no predicate is provided, check if the collection has any elements
+        if (predicate === undefined) {
+          if (Array.isArray(collection)) {
+            return collection.length > 0;
+          } else {
+            return Object.keys(collection).length > 0;
+          }
+        }
+
         if (Array.isArray(collection)) {
           if (collection.length === 0) return false;
           return collection.some(item => {
@@ -91,6 +103,18 @@ class ExpressionLanguageParser {
       all: (collection, predicate) => {
         if (!Array.isArray(collection) && (typeof collection !== 'object' || collection === null)) {
           throw new Error('all() requires an array or object as first argument');
+        }
+
+        // If no predicate is provided, check if all elements in the collection are truthy
+        if (predicate === undefined) {
+          if (Array.isArray(collection)) {
+            if (collection.length === 0) return true;
+            return collection.every(item => Boolean(item));
+          } else {
+            const values = Object.values(collection);
+            if (values.length === 0) return true;
+            return values.every(value => Boolean(value));
+          }
         }
 
         if (Array.isArray(collection)) {
@@ -113,8 +137,11 @@ class ExpressionLanguageParser {
     // Initialize the environment with default variables
     this.environment = {
       myCollection: [1, 2, 3],
-      newCollection: [1, "b", 2.5, true],
-      newDictionary: {"a": 1, "b": 2, "c": 3}
+      loops: 5,
+      a: [6, 7, 8, 9, 10],
+      b: {"a": 1, "b": 2, "c": 3},
+      c: "hello world",
+      i: 0 // Current loop iteration index
     };
 
     // Add built-in functions to the environment
@@ -305,6 +332,23 @@ class ExpressionLanguageParser {
 
       // Split the expression into statements
       const statements = this._splitStatements(expr);
+
+      // In simulator mode, reject multiple statements
+      if (this.simulatorMode && statements.length > 1) {
+        return {
+          success: false,
+          error: 'Multiple statements are not allowed'
+        };
+      }
+
+      // In simulator mode, reject assignments
+      if (this.simulatorMode && this._containsAssignmentInExpression(expr)) {
+        return {
+          success: false,
+          error: 'Variable assignments are not allowed'
+        };
+      }
+
       let result;
 
       // Evaluate each statement
@@ -1111,6 +1155,18 @@ class ExpressionLanguageParser {
       return `{${entries.join(', ')}}`;
     }
     return String(value);
+  }
+
+  /**
+   * Check if an expression contains an assignment
+   * @param {string} expr - The expression to check
+   * @returns {boolean} - True if the expression contains an assignment, false otherwise
+   * @private
+   */
+  _containsAssignmentInExpression(expr) {
+    const tokens = this._tokenize(expr);
+    const ast = this._parse(tokens);
+    return this._containsAssignment(ast);
   }
 }
 

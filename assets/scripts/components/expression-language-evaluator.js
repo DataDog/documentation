@@ -6,9 +6,9 @@ class ExpressionLanguageEvaluator {
     const evaluators = document.querySelectorAll('.expression-evaluator');
     evaluators.forEach(evaluator => this.setupEvaluator(evaluator));
 
-    // Find and set up the REPL if it exists
-    const repl = document.querySelector('.expression-repl');
-    if (repl) this.setupRepl(repl);
+    // Find and set up the simulator
+    const simulator = document.querySelector('.expression-simulator');
+    if (simulator) this.setupSimulator(simulator);
   }
 
   setupEvaluator(evaluator) {
@@ -49,64 +49,39 @@ class ExpressionLanguageEvaluator {
     }
   }
 
-  setupRepl(repl) {
-    const input = repl.querySelector('#repl-input');
-    const runButton = repl.querySelector('#repl-run-btn');
-    const history = repl.querySelector('#repl-history');
-    const autocompleteContainer = repl.querySelector('#autocomplete-container');
+  setupSimulator(simulator) {
+    const simulateButton = simulator.querySelector('#simulate-button');
+    const conditionInput = simulator.querySelector('#condition-input');
+    const templateInput = simulator.querySelector('.template-input');
+    const simulationControls = simulator.querySelector('.simulation-controls');
+    const autocompleteContainer = simulator.querySelector('#simulator-autocomplete-container');
 
-    if (!input || !runButton || !history || !autocompleteContainer) return;
+    if (!simulateButton || !conditionInput || !templateInput || !simulationControls || !autocompleteContainer) return;
 
-    // Create a new instance of the expression language parser
-    const parser = new ExpressionLanguageParser();
+    // Get the template text (without the styling)
+    const templateText = templateInput.textContent;
 
-    // Command history management
-    const commandHistory = [];
-    let historyIndex = -1;
-    let currentInput = '';
+    // Create a new instance of the expression language parser with simulator mode enabled
+    const parser = new ExpressionLanguageParser({ simulatorMode: true });
+
+    // Create a container for simulation results if it doesn't exist
+    let resultsContainer = simulator.querySelector('.simulation-results');
+    if (!resultsContainer) {
+      resultsContainer = document.createElement('div');
+      resultsContainer.className = 'simulation-results';
+      simulator.appendChild(resultsContainer);
+    }
 
     // Autocomplete state
     let selectedSuggestionIndex = -1;
     let suggestions = [];
     let isAutocompleteVisible = false;
 
-    // Function to add an entry to the history
-    const addToHistory = (expr, result, isError = false) => {
-      const entry = document.createElement('div');
-      entry.className = 'repl-entry';
-
-      const command = document.createElement('div');
-      command.className = 'repl-command';
-
-      const prompt = document.createElement('span');
-      prompt.className = 'repl-prompt';
-      prompt.textContent = '→';
-
-      const expression = document.createElement('span');
-      expression.className = 'repl-expression';
-      expression.textContent = expr;
-
-      command.appendChild(prompt);
-      command.appendChild(expression);
-
-      const resultElement = document.createElement('div');
-      resultElement.className = isError ? 'repl-error' : 'repl-result';
-      resultElement.textContent = result;
-
-      entry.appendChild(command);
-      entry.appendChild(resultElement);
-
-      history.appendChild(entry);
-
-      // Scroll to the bottom
-      history.scrollTop = history.scrollHeight;
-    };
-
     // Function to show autocomplete suggestions
     const showAutocompleteSuggestions = () => {
       // Get the current word at the cursor position
-      const cursorPosition = input.selectionStart;
-      const textBeforeCursor = input.value.substring(0, cursorPosition);
+      const cursorPosition = conditionInput.selectionStart;
+      const textBeforeCursor = conditionInput.value.substring(0, cursorPosition);
 
       // Find the current word being typed at the cursor position
       const lastWordMatch = textBeforeCursor.match(/[a-zA-Z0-9_@]*$/);
@@ -172,27 +147,21 @@ class ExpressionLanguageEvaluator {
         item.classList.remove('selected');
       });
 
-      // Adjust position to ensure it's visible (only in browser environment)
+      // Adjust position to ensure it's visible
       try {
-        // Check if we're in a browser environment with proper DOM support
-        if (typeof window !== 'undefined' && window.innerHeight &&
-            autocompleteContainer.getBoundingClientRect &&
-            typeof autocompleteContainer.getBoundingClientRect === 'function') {
+        const containerRect = autocompleteContainer.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
 
-          const containerRect = autocompleteContainer.getBoundingClientRect();
-          const viewportHeight = window.innerHeight;
-
-          if (containerRect.bottom > viewportHeight) {
-            // Position above the input if it would go below viewport
-            autocompleteContainer.style.top = 'auto';
-            autocompleteContainer.style.bottom = '100%';
-            autocompleteContainer.style.maxHeight = `${Math.min(200, containerRect.top - 10)}px`;
-          } else {
-            // Reset to default position below input
-            autocompleteContainer.style.top = '100%';
-            autocompleteContainer.style.bottom = 'auto';
-            autocompleteContainer.style.maxHeight = '200px';
-          }
+        if (containerRect.bottom > viewportHeight) {
+          // Position above the input if it would go below viewport
+          autocompleteContainer.style.top = 'auto';
+          autocompleteContainer.style.bottom = '100%';
+          autocompleteContainer.style.maxHeight = `${Math.min(200, containerRect.top - 10)}px`;
+        } else {
+          // Reset to default position below input
+          autocompleteContainer.style.top = '100%';
+          autocompleteContainer.style.bottom = 'auto';
+          autocompleteContainer.style.maxHeight = '200px';
         }
       } catch (e) {
         // Fallback for test environment
@@ -235,8 +204,8 @@ class ExpressionLanguageEvaluator {
       // Add selection to new item
       items[selectedSuggestionIndex].classList.add('selected');
 
-      // Scroll to make selected item visible (only in browser environment)
-      if (items[selectedSuggestionIndex].scrollIntoView && typeof items[selectedSuggestionIndex].scrollIntoView === 'function') {
+      // Scroll to make selected item visible
+      if (items[selectedSuggestionIndex].scrollIntoView) {
         items[selectedSuggestionIndex].scrollIntoView({ block: 'nearest' });
       }
     };
@@ -246,8 +215,8 @@ class ExpressionLanguageEvaluator {
       if (index < 0 || index >= suggestions.length) return;
 
       const suggestion = suggestions[index];
-      const inputValue = input.value;
-      const cursorPosition = input.selectionStart;
+      const inputValue = conditionInput.value;
+      const cursorPosition = conditionInput.selectionStart;
 
       // Find the word being replaced at the cursor position
       const textBeforeCursor = inputValue.substring(0, cursorPosition);
@@ -268,11 +237,11 @@ class ExpressionLanguageEvaluator {
 
       // Create the new input value by replacing the word at cursor
       const newValue = inputValue.substring(0, wordStartPos) +
-                       suggestion.name +
-                       inputValue.substring(wordEndPos);
+                     suggestion.name +
+                     inputValue.substring(wordEndPos);
 
       // Set the new input value
-      input.value = newValue;
+      conditionInput.value = newValue;
 
       // Calculate the new cursor position
       const newCursorPosition = wordStartPos + suggestion.name.length;
@@ -280,26 +249,26 @@ class ExpressionLanguageEvaluator {
       // Add parentheses for functions and position cursor between them
       if (suggestion.type === 'function') {
         // Check if there are already parentheses after the function name
-        if (input.value.substring(newCursorPosition, newCursorPosition + 2) !== '()') {
+        if (conditionInput.value.substring(newCursorPosition, newCursorPosition + 2) !== '()') {
           // Insert parentheses
-          input.value = input.value.substring(0, newCursorPosition) +
-                        '()' +
-                        input.value.substring(newCursorPosition);
+          conditionInput.value = conditionInput.value.substring(0, newCursorPosition) +
+                      '()' +
+                      conditionInput.value.substring(newCursorPosition);
 
           // Position cursor between parentheses
           setTimeout(() => {
-            input.selectionStart = input.selectionEnd = newCursorPosition + 1;
+            conditionInput.selectionStart = conditionInput.selectionEnd = newCursorPosition + 1;
           }, 0);
         } else {
           // Parentheses already exist, just position cursor between them
           setTimeout(() => {
-            input.selectionStart = input.selectionEnd = newCursorPosition + 1;
+            conditionInput.selectionStart = conditionInput.selectionEnd = newCursorPosition + 1;
           }, 0);
         }
       } else {
         // For non-functions, position cursor after the inserted suggestion
         setTimeout(() => {
-          input.selectionStart = input.selectionEnd = newCursorPosition;
+          conditionInput.selectionStart = conditionInput.selectionEnd = newCursorPosition;
         }, 0);
       }
 
@@ -307,56 +276,15 @@ class ExpressionLanguageEvaluator {
       hideAutocompleteSuggestions();
 
       // Focus the input
-      input.focus();
+      conditionInput.focus();
     };
 
-    // Handle the run button click
-    runButton.addEventListener('click', () => {
-      const expr = input.value.trim();
-      if (!expr) return; // Don't process empty expressions
-
-      // Hide autocomplete if visible
-      hideAutocompleteSuggestions();
-
-      // Improved deduplication: Remove the command if it already exists in history
-      // and add it to the end (most recent position)
-      const existingIndex = commandHistory.indexOf(expr);
-      if (existingIndex !== -1) {
-        commandHistory.splice(existingIndex, 1);
-      }
-
-      // Add the command to the end of history
-      commandHistory.push(expr);
-
-      // Reset history index
-      historyIndex = -1;
-      currentInput = '';
-
-      const evaluation = parser.evaluate(expr);
-
-      if (evaluation.success) {
-        addToHistory(expr, evaluation.result);
-      } else {
-        addToHistory(expr, evaluation.error, true);
-      }
-
-      // Clear the input
-      input.value = '';
-
-      // Reset autocomplete state completely
-      hideAutocompleteSuggestions();
-      suggestions = [];
-      selectedSuggestionIndex = -1;
-
-      input.focus();
-    });
-
     // Handle input events for autocomplete
-    input.addEventListener('input', () => {
-      if (input.value.trim()) {
+    conditionInput.addEventListener('input', () => {
+      if (conditionInput.value.trim()) {
         // Check if the input ends with a space or other non-word character
         // If it does, don't show autocomplete
-        if (input.value.match(/\s$/)) {
+        if (conditionInput.value.match(/\s$/)) {
           hideAutocompleteSuggestions();
         } else {
           showAutocompleteSuggestions();
@@ -367,34 +295,26 @@ class ExpressionLanguageEvaluator {
     });
 
     // Handle focus/blur events for autocomplete
-    input.addEventListener('focus', () => {
-      if (input.value.trim()) {
+    conditionInput.addEventListener('focus', () => {
+      if (conditionInput.value.trim()) {
         showAutocompleteSuggestions();
       }
     });
 
     // Close autocomplete when clicking outside
     document.addEventListener('click', (e) => {
-      if (!autocompleteContainer.contains(e.target) && e.target !== input) {
+      if (!autocompleteContainer.contains(e.target) && e.target !== conditionInput) {
         hideAutocompleteSuggestions();
       }
     });
 
-    // Handle key events for autocomplete and command history
-    input.addEventListener('keydown', (e) => {
+    // Handle key events for autocomplete
+    conditionInput.addEventListener('keydown', (e) => {
       // Handle Enter key
       if (e.key === 'Enter') {
         // If autocomplete is visible and an item is selected, select it
         if (isAutocompleteVisible && selectedSuggestionIndex >= 0) {
           selectSuggestion(selectedSuggestionIndex);
-          e.preventDefault();
-        } else {
-          // Otherwise, run the command
-          // Make sure to completely reset autocomplete state
-          hideAutocompleteSuggestions();
-          suggestions = [];
-          selectedSuggestionIndex = -1;
-          runButton.click();
           e.preventDefault();
         }
       }
@@ -425,50 +345,113 @@ class ExpressionLanguageEvaluator {
         navigateSuggestions('up');
         e.preventDefault();
       }
-      // Handle command history navigation when autocomplete is not visible
-      else if (e.key === 'ArrowUp' && !isAutocompleteVisible) {
-        // Save current input if we're just starting to navigate history
-        if (historyIndex === -1) {
-          currentInput = input.value;
-        }
+    });
 
-        // Navigate up through history
-        if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
-          historyIndex++;
-          input.value = commandHistory[commandHistory.length - 1 - historyIndex];
+    // Function to add a log entry to the results
+    const addLogEntry = (loopIndex, result, isError = false) => {
+      const entry = document.createElement('div');
+      entry.className = 'simulation-log-entry';
 
-          // Move cursor to end of input
-          setTimeout(() => {
-            input.selectionStart = input.selectionEnd = input.value.length;
-          }, 0);
-        }
-        e.preventDefault();
+      const logMessage = document.createElement('div');
+      logMessage.className = isError ? 'log-error' : 'log-message';
+
+      if (isError) {
+        logMessage.textContent = `Error on loop ${loopIndex + 1}: ${result}`;
+      } else {
+        // Replace {i+1} with the actual value
+        const logText = templateText.replace(/{i\+1}/g, loopIndex + 1);
+        logMessage.textContent = logText;
       }
-      else if (e.key === 'ArrowDown' && !isAutocompleteVisible) {
-        // Navigate down through history
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = commandHistory[commandHistory.length - 1 - historyIndex];
-        } else if (historyIndex === 0) {
-          // Return to the current input when reaching the bottom of history
-          historyIndex = -1;
-          input.value = currentInput;
+
+      entry.appendChild(logMessage);
+      resultsContainer.appendChild(entry);
+
+      // Scroll to the bottom
+      resultsContainer.scrollTop = resultsContainer.scrollHeight;
+    };
+
+    // Set up the click handler for the simulate button
+    simulateButton.addEventListener('click', () => {
+      // Hide autocomplete if visible
+      hideAutocompleteSuggestions();
+
+      // Clear previous results
+      resultsContainer.innerHTML = '';
+
+      // Add a header to the results section
+      const header = document.createElement('div');
+      header.className = 'simulation-header';
+      header.textContent = 'Simulation Results:';
+      resultsContainer.appendChild(header);
+
+      // Get the condition expression
+      const condition = conditionInput.value.trim();
+
+      // Track if any logs were generated
+      let logsGenerated = false;
+
+      // Run the simulation for 5 loops (0 to 4)
+      for (let i = 0; i < 5; i++) {
+        // Update the loop index in the parser environment
+        parser.environment.i = i;
+
+        try {
+          // If no condition is provided, always log
+          if (!condition) {
+            addLogEntry(i, null);
+            logsGenerated = true;
+            continue;
+          }
+
+          // Evaluate the condition
+          const evaluation = parser.evaluate(condition);
+
+          if (evaluation.success) {
+            // Convert the result to a boolean
+            const result = evaluation.result.toLowerCase();
+            const shouldLog = result === 'true';
+
+            // If the condition is true, add a log entry
+            if (shouldLog) {
+              addLogEntry(i, null);
+              logsGenerated = true;
+            }
+          } else {
+            // If there's an error evaluating the condition, show it
+            addLogEntry(i, evaluation.error, true);
+            logsGenerated = true; // Errors count as output
+            break; // Stop the simulation if there's an error
+          }
+        } catch (error) {
+          addLogEntry(i, error.message, true);
+          logsGenerated = true; // Errors count as output
+          break; // Stop the simulation if there's an error
         }
+      }
 
-        // Move cursor to end of input
-        setTimeout(() => {
-          input.selectionStart = input.selectionEnd = input.value.length;
-        }, 0);
+      // If no logs were generated, show a message
+      if (!logsGenerated) {
+        const noLogsEntry = document.createElement('div');
+        noLogsEntry.className = 'simulation-log-entry no-logs-entry';
 
-        e.preventDefault();
+        const noLogsMessage = document.createElement('div');
+        noLogsMessage.className = 'log-error';
+        noLogsMessage.textContent = 'No logs generated';
+
+        noLogsEntry.appendChild(noLogsMessage);
+        resultsContainer.appendChild(noLogsEntry);
       }
     });
 
-    // Scroll to the bottom of history on load
-    history.scrollTop = history.scrollHeight;
-
-    // Focus the input on load
-    input.focus();
+    // Set up the clear button
+    const clearButton = simulator.querySelector('.clear-button');
+    if (clearButton) {
+      clearButton.addEventListener('click', () => {
+        conditionInput.value = '';
+        hideAutocompleteSuggestions();
+        conditionInput.focus();
+      });
+    }
   }
 }
 
