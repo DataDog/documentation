@@ -38,9 +38,25 @@ Enter the following information based on your selected logs destinations.
 {{% observability_pipelines/destination_settings/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+##### Prerequisites
+
+{{% observability_pipelines/prerequisites/amazon_security_lake %}}
+
+##### Set up the destination
+
+{{% observability_pipelines/destination_settings/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_settings/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}
@@ -173,6 +189,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/parse_json %}}
 
 {{% /tab %}}
+{{% tab "Parse XML" %}}
+
+{{% observability_pipelines/processors/parse_xml %}}
+
+{{% /tab %}}
 {{% tab "Quota" %}}
 
 {{% observability_pipelines/processors/quota %}}
@@ -197,7 +218,7 @@ To set up the destination, follow the instructions for the cloud provider you ar
 
 {{% observability_pipelines/processors/sensitive_data_scanner %}}
 
-<!-- {{% collapse-content title="Add rules from the library" level="h5" %}}
+{{% collapse-content title="Add rules from the library" level="h5" %}}
 
 {{% observability_pipelines/processors/sds_library_rules %}}
 
@@ -206,7 +227,12 @@ To set up the destination, follow the instructions for the cloud provider you ar
 
 {{% observability_pipelines/processors/sds_custom_rules %}}
 
-{{% /collapse-content %}} -->
+{{% /collapse-content %}}
+
+{{% /tab %}}
+{{% tab "Split array" %}}
+
+{{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -217,7 +243,7 @@ To set up the destination, follow the instructions for the cloud provider you ar
 
 ### Install the Observability Pipelines Worker
 1. Select your platform in the **Choose your installation platform** dropdown menu.
-1. Enter the Datadog Agent address. The Observability Pipelines Worker listens to this address and port for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
+1. Enter the listener address, which is the address and port the Observability Pipelines Worker listens on for incoming logs from the Datadog Agent. For example, `0.0.0.0:<port_number>`.
 1. Provide the environment variables for each of your selected destinations.
 {{< tabs >}}
 {{% tab "Amazon OpenSearch" %}}
@@ -225,9 +251,19 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/destination_env_vars/amazon_opensearch %}}
 
 {{% /tab %}}
+<!-- {{% tab "Amazon Security Lake" %}}
+
+{{% observability_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}} -->
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_env_vars/chronicle %}}
+
+{{% /tab %}}
+{{% tab "CrowdStrike NG-SIEM" %}}
+
+{{% observability_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
 
 {{% /tab %}}
 {{% tab "Datadog" %}}

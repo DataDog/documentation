@@ -985,6 +985,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Error context
+
+### Attaching local error context with dd_context
+
+When capturing errors, additional context may be provided at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event context.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Global context
 
 ### Add global context property
@@ -1306,7 +1319,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
 [12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[14]: /real_user_monitoring/guide/enrich-and-control-rum-data
+[14]: /real_user_monitoring/feature_flag_tracking/using_feature_flags/#feature-flag-naming
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130

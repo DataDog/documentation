@@ -51,7 +51,7 @@ Watchdog은 시스템과 애플리케이션에서 이상 징후를 사전에 식
 | 서비스             | 서비스에서 경고를 표시합니다. `service` 태그에 대한 자세한 내용을 확인하려면 [통합 서비스 태깅][5]을 참조하세요.|
 | 영향을 받는 최종 사용자   | (RUM 필요). Watchdog이 영향을 받는 최종 사용자를 식별한 경우입니다. 자세한 내용을 확인하려면 [영향 분석][4] 항목을 참조하세요. |
 | 근본 원인          | (애플리케이션 성능 모니터링(APM) 필요). Watchdog이 이상 징후 또는 심각한 서비스 장애의 근본 원인을 발견한 경우입니다. 자세한 내용을 확인하려면 [근본 원인 분석][9] 항목을 참조하세요. |
-| 팀                | 영향을 받는 팀 소유 서비스입니다. [서비스 카탈로그][7]에서 보강되었습니다.  |
+| 팀                | 영향을 받은 서비스를 소유한 팀입니다. [Software Catalog][7]에서 강화되었습니다.  |
 | 로그 이상 유형    | 해당 유형의 로그 이상만 표시합니다. 지원하는 유형은 신규 로그 패턴과 기존 로그 패턴의 증가입니다.|
 | 로그 소스          | 해당 소스의 로그를 포함하는 경고만 표시합니다.                           |
 | 로그 상태          | 해당 로그 상태의 로그를 포함하는 경고만 표시합니다.                         |
@@ -132,6 +132,10 @@ Watchdog은 다음 통합에서 인프라스트럭처 메트릭을 확인합니�
   * 호스트 수준 메모리 사용량(메모리 누수) 및 TCP 재전송 속도의 경우에는 [System][1].
   * [Redis][2]
   * [PostgreSQL][3]
+  * [MySQL][15]
+  * [SQLServer][16]
+  * [Cassandra][17]
+  * [Oracle Database][18]
   * [NGINX][4]
   * [도커(Docker)][13]
   * [쿠버네티스(Kubernetes)][14]
@@ -163,6 +167,10 @@ Watchdog은 필수 최소 기록이 확보되면 이상 징후을 찾기 시작�
 [12]: /ko/serverless/
 [13]: /ko/containers/docker/?tab=standard
 [14]: /ko/containers/kubernetes/installation/?tab=operator
+[15]: /ko/integrations/mysql/
+[16]: /ko/integrations/mysql/
+[17]: /ko/integrations/cassandra/
+[18]: /ko/integrations/oracle/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -180,14 +188,14 @@ Watchdog Alerts는 Datadog 내의 다음 위치에 나타납니다.
 
 * [Watchdog 경고 익스플로러][1]
 * 개별 [APM 서비스 페이지][3]
-* [서비스 카탈로그][7]
+* [Software Catalog][7]에서
 * 모든 익스플로러에서 사용할 수 있는 [Watchdog 통찰 패널][8]
 
 ### 애플리케이션 성능 모니터링(APM) 페이지의 워치독 쌍안경 아이콘
 
-Watchdog이 애플리케이션 성능 모니터링(APM) 메트릭에서 불규칙한 동작을 감지하면, [애플리케이션 성능 모니터링(APM) 서비스 카탈로그][7] 내의 '영향을 받는 서비스' 옆에 분홍색 Watchdog 쌍안경 아이콘이 표시됩니다.
+Watchdog이 APM 메트릭에서 불규칙성을 감지하면 [APM Software Catalog][7]에서 영향을 받는 서비스 옆에 분홍색 Watchdog 쌍안경 아이콘이 나타납니다.
 
-{{< img src="watchdog/service_list.png" alt="5개의 서비스를 보여주는 서비스 카탈로그의 스크린샷. 웹 스토어 서비스 이름 뒤에는 분홍색 쌍안경 아이콘이 있습니다." style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="5개 서비스를 보여주는 Software Catalog 스크린샷. 웹 스토어 서비스 이름 뒤에는 분홍색 쌍안경 아이콘이 표시됩니다." style="width:75%;" >}}
 
 [서비스 페이지][3] 상단의 [Watchdog 통찰][8] 캐러셀에서 메트릭 이상 상태에 대한 자세한 내용을 확인할 수 있습니다.
 
@@ -210,7 +218,7 @@ Watchdog 경고를 보관하려면 사이드 패널에서 오른쪽 상단 모�
 [4]: /ko/watchdog/impact_analysis/
 [5]: /ko/getting_started/tagging/unified_service_tagging/
 [6]: /ko/tracing/guide/setting_primary_tags_to_scope/
-[7]: /ko/tracing/service_catalog/
+[7]: /ko/tracing/software_catalog/
 [8]: /ko/watchdog/insights?tab=logmanagement#explore-insights
 [9]: /ko/watchdog/rca/
 [10]: /ko/monitors/types/anomaly/
