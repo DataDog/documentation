@@ -250,7 +250,7 @@ Agent `v7.61+` is required.
 {{% tab "Helm" %}}
 
 To enable Network Path with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
-**Note:** Helm chart v3.106.2+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+**Note:** Helm chart v3.109.1+ **is required**. For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
   ```yaml
   datadog:
