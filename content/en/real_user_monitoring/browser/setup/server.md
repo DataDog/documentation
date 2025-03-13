@@ -21,8 +21,6 @@ Datadog RUM Auto-Instrumentation (server-side) lets you opt into Real User Monit
 
 RUM Auto-Instrumentation works by injecting a RUM SDK JavaScript scriptlet into the HTML responses being served through a web server or proxy.
 
-After your applications have been instrumented, you can configure your RUM application in Datadog.
-
 ## Limitations
 
 The available functionality has the following important limitations:
