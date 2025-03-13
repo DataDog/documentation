@@ -682,7 +682,7 @@ menu:
       parent: otel-setup-collector-exporter
       weight: 105
     - name: Datadog Agent
-      url: /opentelemetry/setup/otlp_ingest_in_the_agent
+      url: /opentelemetry/setup/agent
       identifier: otel-setup-agent
       parent: otel_collect
       weight: 402
