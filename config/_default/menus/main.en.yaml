@@ -6452,11 +6452,6 @@ menu:
       url: /security/code_security/guides/
       parent: code_security
       weight: 7
-    - name: Security Controls
-      identifier: sec_code_security_controls
-      url: /security/code_security/security_controls/
-      parent: code_security
-      weight: 8
     - name: Synthetic Testing and Monitoring
       url: synthetics/
       pre: synthetics
