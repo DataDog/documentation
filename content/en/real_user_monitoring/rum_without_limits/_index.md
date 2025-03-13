@@ -6,6 +6,9 @@ further_reading:
   - link: '/real_user_monitoring/rum_without_limits/retention_filters'
     tag: Documentation
     text: Retain Data with Retention Filters
+  - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
+    tag: Guide
+    text: Retention Filter Best Practices
   - link: '/real_user_monitoring/rum_without_limits/metrics'
     tag: Documentation
     text: Analyze Performance with Metrics
