@@ -40,13 +40,11 @@ Execute the permission grants listed in the **Grant permissions** step of the [s
 
 ### No Oracle DB hostname reported
 
-Datadog Agent detects the Oracle DB hostname by running SQL against [V$INSTANCE][4].
-When Oracle DB returns `null` for the `HOST_NAME` column, the Datadog Agent reports the Oracle DB host name as empty. We have confirmed this behavior with Oracle Autonomous Database.
-In this case, we recommend setting the `reported_hostname` in the `conf.yaml`.
-[Since v7.65.0 and above][5], the Datadog Agent will output logs if this condition is met.
+The Datadog Agent detects Oracle DB hostname by running SQL command against [V$INSTANCE][4].
+When an Oracle DB returns `null` for the `HOST_NAME` column, the Datadog Agent reports the Oracle DB host name as empty. This behavior has been confirmed with Oracle Autonomous Database.
+In this case, Datadog recommends setting the `reported_hostname` in the `conf.yaml` file.
 
 [1]: /database_monitoring/setup_oracle/
 [2]: /database_monitoring/setup_oracle#recommended-agent-version
 [3]: /database_monitoring/setup_oracle#setup
 [4]: https://docs.oracle.com/en/database/oracle/oracle-database/23/refrn/V-INSTANCE.html
-[5]: https://github.com/DataDog/datadog-agent/pull/34866
