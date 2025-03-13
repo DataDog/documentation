@@ -230,7 +230,7 @@ To control which parts of a file are scanned, add a comment that starts with `# 
 | `dd-iac-scan disable=<query_id>` | Ignores specific queries.       |
 | `dd-iac-scan enable=<query_id>`  | Includes only specific queries. |
 | `dd-iac-scan ignore-line`        | Ignores a single line.          |
-| `dd-iac-scan ignore-block`       | Ignores a block of code.        |
+| `dd-iac-scan ignore-block`       | Ignores an entire block.        |
 
 #### dd-iac-scan ignore
 
