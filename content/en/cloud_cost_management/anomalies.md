@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) continuously monitors your environment to identify and prioritize unexpected cost changes, so that you can detect, share, investigate, and resolve cost anomalies. Cost anomalies are currently available for AWS, and does not require any additional set up after CCM is set up.
+Datadog Cloud Cost Management (CCM) continuously monitors your environment to identify and prioritize unexpected cost changes, so that you can detect, share, investigate, and resolve cost anomalies. Cost anomalies are available for AWS, and do not require any additional setup after CCM is set up.
 
 ## View cost anomalies
 
