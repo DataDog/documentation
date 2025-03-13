@@ -19,16 +19,6 @@ further_reading:
   text: "Discover Widgets for your Dashboard"
 ---
 
-## Share states
-
-Shared graphs can be in one of two share states:
-
-**Active**
-: The shared graph is assigned a specific URL and is available to anyone on the internet with a link.
-
-**Disabled**
-: Viewers cannot access the shared graph. This is configured by an organization admin in [**Organization Settings > Public Sharing**][10], and previous access is restored if the shared graphs feature is re-enabled.
-
 To share a graph:
 
 1. From the graph you want to share, click the pencil icon in the upper right corner.
@@ -39,6 +29,8 @@ To share a graph:
 1. Get the embed code with the **Generate embed code** button.
 
 {{< img src="dashboards/sharing/graph_share_tab.png" alt="Share tab in a graphing editor" style="width:95%;">}}
+
+All shared graphs are listed in the [Public Sharing Settings page][10]. On the settings page, you can also revoke individual shared graphs or disable all shared graphs.
 
 ## Revoke
 
