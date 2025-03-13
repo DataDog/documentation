@@ -144,7 +144,7 @@ function App() {
           <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={2}>
-          Coming soon to a tarball near you ...
+          <p>Coming soon to a tarball near you ...</p>
         </CustomTabPanel>
       </Box>
     </>

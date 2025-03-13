@@ -48,10 +48,12 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
 
   return (
     <div>
-      <h2>Quick Filter Builder</h2>
       <p>
-        With this tool, you can quickly configure a page filter with an <strong>existing</strong> trait and option
-        group.
+        With this tool, you can quickly configure a{' '}
+        <a href="https://github.com/DataDog/corp-node-packages/tree/master/packages/cdocs-data#key-terms">
+          page filter
+        </a>{' '}
+        with an <strong>existing</strong> trait and option group.
       </p>
       <p>Use the dropdowns below to update this frontmatter snippet, then click the snippet to copy it:</p>
       <pre onClick={copyToClipboard}>{filterConfig}</pre>
