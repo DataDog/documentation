@@ -68,11 +68,11 @@ Additionally, you can also:
 
 Click the **Datastores with Sensitive Data** tab to see all sensitive data issues for Cloud Storage.
 
-In the **xxx Datastores with Sensitive section**, click on any of the dropdown menus to filter on data stores based on the type of sensitive data, account, region, team and so on.
+In the **xxx Datastores with Sensitive section**, click on any of the dropdown menus to filter on datastores based on the type of sensitive data, account, region, team and so on.
 
-To investigate a data store:
+To investigate a datastore:
 
-1. Click on a data store.
+1. Click on a datastore.
 1. You can view files where sensitive data was found and then click on a file to inspect it in AWS.
   Datadog recommends doing the following:
     - Review a few files to get a sense of the classification accuracy.
