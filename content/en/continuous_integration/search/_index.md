@@ -89,11 +89,11 @@ Job log collection is supported for the following providers:
 - [GitLab][4]
 - [Jenkins][5]
 
-### CI Jobs Failure Analysis based on relevant logs.
+### CI jobs failure analysis based on relevant logs
 
-CI Visibility leverages a LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
+CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
-You can use [this guide][12] to use CI jobs failure analysis to identify the most common root cause of failure of your CI Jobs.
+Use [CI jobs failure analysis][12] to identify the most common root causes of failure for your CI jobs.
 
 ## Further reading
 

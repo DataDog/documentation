@@ -29,7 +29,7 @@ Set up tracing in GitLab to collect data on your pipeline executions, analyze pe
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| CI jobs failure analysis | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM-models|
+| CI jobs failure analysis | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -304,17 +304,17 @@ For failed GitLab pipeline executions, each error under the `Errors` tab within 
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
 
-#### CI Jobs Failure Analysis
+#### CI jobs failure analysis
 
-If job logs collection is enabled, CI Visibility computes analysis using LLM-models for failed CI jobs based on relevant logs coming from GitLab.
+If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitLab.
 
-You can see a full explanation about CI jobs failure analysis on the following [guide][28].
+For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
 #### Errors provided by GitLab
 
 Error messages are supported for GitLab versions 15.2.0 and above.
 
-The error information provided by GiLab are stored in `error.provider_message` an `error.provider_domain` tags.
+The error information provided by GitLab is stored in `error.provider_message` and `error.provider_domain` tags.
 
 The following table describes the message and domain correlated with each error type. Any unlisted error type results in a `Job failed` error message and an `unknown` error domain.
 
