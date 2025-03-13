@@ -136,8 +136,8 @@ This generate an LLM Observability trace in an AWS Lambda serverless environment
 {{< tabs >}}
 {{% tab "Python" %}}
 
-1. Create a [Lambda function chatbot using Amazon Bedrock][13]
-2. Instrument your Lambda function with the [Datadog Python extension][14]:
+1. Create a [Lambda function chatbot using Amazon Bedrock][1]
+2. Instrument your Lambda function with the [Datadog Python extension][2]:
     1. Open a Cloudshell
     2. Install the Datadog CLI client
     ```bash
@@ -164,12 +164,15 @@ This generate an LLM Observability trace in an AWS Lambda serverless environment
         | DD_LLMOBS_ENABLED    | 1                       |
         | DD_LLMOBS_ML_APP     | <NAME_YOUR_APPLICATION> |
 
+[1]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
+[2]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=datadogcli#installation
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-1. Create a [Lambda function chatbot using Amazon Bedrock][13]
-2. Instrument your Lambda function with the [Datadog Node.js extension][14]:
+1. Create a [Lambda function chatbot using Amazon Bedrock][1]
+2. Instrument your Lambda function with the [Datadog Node.js extension][2]:
     1. Open a Cloudshell
     2. Install the Datadog CLI client
     ```bash
@@ -208,8 +211,8 @@ export const handler = async (event) => {
 };
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+[1]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
+[2]: https://docs.datadoghq.com/serverless/aws_lambda/installation/nodejs/?tab=datadogcli#installation
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -232,5 +235,3 @@ Add some version compatibility notes here (version of python layer where we stop
 [10]: /llm_observability/setup/auto_instrumentation/
 [11]: /llm_observability/setup/
 [12]: https://github.com/DataDog/llm-observability
-[13]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
-[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=datadogcli#installation
