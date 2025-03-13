@@ -285,6 +285,23 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<HOST>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
+### Docker Compose
+
+```yaml
+services:
+  agent:
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "com.datadoghq.ad.checks='{\"postgres\": { \"init_config\": {},
+        \"instances\": [{ \"dbm\": true, \"host\": \"<HOST>\", \"port\":
+        5432, \"username\": \"datadog\", \"password\":
+        \"ENC[datadog_user_database_password]\", }] }}'"
+    image: gcr.io/datadoghq/agent:7.63.3
+```
+
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
 ```json
