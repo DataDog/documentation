@@ -11,7 +11,7 @@ Database Monitoring (DBM) Recommendations draw attention to potential optimizati
 
 {{< img src="database_monitoring/recommendations-page.png" alt="The Recommendations page in Datadog" style="width:90%;" >}}
 
-## How it Works
+## How it works
 
 Datadog analyzes metrics and sample data from DBM to identify your systems' highest-priority issues. A severity indicator is calculated for each recommendation, highlighting the most impactful areas to focus on. High-severity recommendations may indicate immediate or impending problems, while lower-severity recommendations can be addressed asynchronously to proactively maintain database health.
 
@@ -48,7 +48,7 @@ Low Disk Space
 
 {{% /tab %}}
 
-{{% tab "SQLServer" %}}
+{{% tab "SQL Server" %}}
 
 Missing Index
 : The query's execution plan performs expensive sequential scans. When detected, Datadog recommends using an index to expedite the query.
@@ -113,6 +113,26 @@ Unused Index
 {{% /tab %}}
 
 {{< /tabs>}}
+
+## Configuration
+
+### Default state
+These features are on by default when DBM is enabled and are used to power specific recommendations when applicable:
+
+Query Activity Samples
+- Powers recommendations for: Missing Index, High Impact Blocker, Long Running Query
+
+Explain Plans
+- Powers recommendations for: Missing Index, Function in Filter, High Row Count
+
+### Additional configuration required
+
+| Recommendation  | Postgres            | SQL Server            | MySQL            | Oracle            | MongoDB              |
+|-----------------|---------------------|-----------------------|------------------|-------------------|----------------------|
+| Unused Index    | [Relation Metrics](https://github.com/DataDog/integrations-core/blob/893ded2e783741cc1524b9cda72428895aaf5d90/postgres/datadog_checks/postgres/data/conf.yaml.example#L143-L178) | [Index Usage Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201), [(Optional) Fragmentation Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201) | - | - | [Index Access Metrics](https://github.com/DataDog/integrations-core/blob/e3f44fbe555703e30c3b9c96e4fccdc5e57d626d/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example#L130-L201) |
+| Low Disk Space  | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | [AWS RDS Integration](https://docs.datadoghq.com/integrations/amazon_rds/?tab=standard) | - |
+
+***Note**: 
 
 ## Further reading
 
