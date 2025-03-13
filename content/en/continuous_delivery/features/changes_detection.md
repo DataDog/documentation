@@ -99,7 +99,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 To correctly understand the changes that a deployment has introduced, only the commits affecting the specific service being deployed should be considered.
 
-This is done via specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
+This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
 If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
 
@@ -137,4 +137,5 @@ If both entries are defined for a service, only `extensions[datadoghq.com/cd-vis
 [2]: https://app.datadoghq.com/ci/deployments/executions
 [3]: https://app.datadoghq.com/ci/commits
 [4]: /tracing/software_catalog/adding_metadata
+[5]: /tracing/software_catalog
 
