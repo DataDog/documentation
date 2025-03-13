@@ -28,12 +28,12 @@ To detect the changes deployed, Datadog runs the [Git Log][1] between the curren
 
 The deployed changes are visible inside any deployment execution of the [**Deployment Executions** page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the changes detected between the two.
 
-{{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:80%;">}}
+{{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
 Additionally, the **Deployments** column of the [**Recent Code Changes** page][3] displays the service and environment details for all deployments that included a specific commit. This view provide a quick way to understand if and where your changes are deployed.
 Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
 
-{{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:80%;">}}
+{{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
 
 Changes are only detected for deployments that:
 1. Have a service and an environment. Additionally, the service needs to have the file path specs defined in Service Catalog (see the setup below for more information).
