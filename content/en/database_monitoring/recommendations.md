@@ -2,6 +2,9 @@
 title: Recommendations
 description: View recommendations to proactively address issues in your system
 further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-recommendations/"
+  tag: "blog"
+  text: "An overview of Database Monitoring Recommendations"
 - link: "https://www.datadoghq.com/blog/database-monitoring-index-recommendations/"
   tag: "blog"
   text: "A deep dive into Database Monitoring index recommendations"
