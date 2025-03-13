@@ -105,6 +105,8 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
   sql_obfuscation_mode: "obfuscate_and_normalize"
 ```
 
+<div class="alert alert-danger">Changing the obfuscation mode may alter the normalized SQL text. If you have monitors based on SQL text in APM traces, you may need to update them.</div>
+
 {{< tabs >}}
 {{% tab "Go" %}}
 
