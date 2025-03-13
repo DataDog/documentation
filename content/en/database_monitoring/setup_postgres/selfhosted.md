@@ -293,7 +293,6 @@ For Postgres 9.6, add the following settings to the instance config where host a
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
 
-
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
@@ -304,6 +303,54 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
 
 Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration either with static files mounted in the Cluster Agent container or using service annotations:
+
+### Operator
+
+Complete the following steps to install the [Datadog Operator][6] on your Kubernetes cluster. Once you have installed the Datadog Operator use the example below to update the `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DD_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-agent-secret
+        keyName: api-key
+
+  features:
+    clusterChecks:
+      enabled: true
+
+  override:
+    nodeAgent:
+      image:
+        name: agent
+        tag: 7.63.3
+
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          postgres.yaml: |-
+            cluster_check: true
+            init_config:
+            instances:
+            - host: <HOST>
+              port: 5432
+              username: datadog
+              password: 'ENC[datadog_user_database_password]
+              dbm: true
+```
+
+Apply the changes to the Datadog Operator with the following command:
+
+```shell
+kubectl apply -f datadog-agent.yaml
+```
 
 ### Helm
 
@@ -422,13 +469,10 @@ metadata:
       [
         {
           "dbm": true,
-          "host": "<AWS_INSTANCE_ENDPOINT>",
+          "host": "<HOST>",
           "port": 5432,
           "username": "datadog",
           "password": "ENC[datadog_user_database_password]",
-          "tags": [
-            "dbinstanceidentifier:<DB_INSTANCE_NAME>"
-          ]
         }
       ]
 spec:
@@ -439,13 +483,13 @@ spec:
     name: postgres
 ```
 
-Visit [Autodiscovery Annotations][4] for more information.
+Visit [Autodiscovery Annotations][5] for more information.
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
-```yaml
-pg_stat_statements_view: datadog.pg_stat_statements()
-pg_stat_activity_view: datadog.pg_stat_activity()
+```json
+"pg_stat_statements_view": "datadog.pg_stat_statements()",
+"pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
 The Cluster Agent automatically registers this configuration and begin running the Postgres check.
@@ -457,6 +501,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [3]: https://helm.sh
 [4]: /agent/configuration/secrets-management
 [5]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[6]: /containers/kubernetes/installation?tab=datadogoperator#installation
 {{% /tab %}}
 
 {{< /tabs >}}
