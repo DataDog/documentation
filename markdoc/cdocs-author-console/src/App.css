@@ -1,8 +1,28 @@
 body {
+  padding: 10px 30px;
+  font-family: 'Noto Sans', sans-serif;
+  max-width: 960px;
   margin: 0 auto;
   margin-top: 5px;
   padding-top: 0px;
   line-height: 1.5;
+}
+
+pre,
+code {
+  color: #ff0099;
+  font-size: 1em;
+  font-family: 'Roboto Mono', sans-serif;
+}
+
+a {
+  color: #0953bf;
+}
+
+/* Make text inputs bigger */
+input[type='text'] {
+  font-size: 1em;
+  padding: 5px;
 }
 
 h1#title {
@@ -11,7 +31,7 @@ h1#title {
   margin-bottom: -1px;
   text-align: center;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 600;
   color: black;
   padding: 0.8em;
   border-bottom: 1px solid #ccc;
