@@ -1,17 +1,56 @@
 body {
   padding: 10px 30px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
   max-width: 960px;
+  margin: 0 auto;
+  margin-top: 5px;
+  padding-top: 0px;
+  line-height: 1.5;
 }
 
 pre,
 code {
-  color: DeepPink;
-  font-size: 1.15em;
+  color: #ff0099;
+  font-size: 1em;
+  font-family: 'Roboto Mono', sans-serif;
+}
+
+a {
+  color: #0953bf;
 }
 
 /* Make text inputs bigger */
-input[type="text"] {
+input[type='text'] {
   font-size: 1em;
   padding: 5px;
+}
+
+h1#title {
+  line-height: 1;
+  margin-top: 0;
+  margin-bottom: -1px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 500;
+  color: black;
+  padding: 0.8em;
+  border-bottom: 1px solid #ccc;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+}
+
+/* first p after a header */
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p {
+  margin-top: -5px;
 }
