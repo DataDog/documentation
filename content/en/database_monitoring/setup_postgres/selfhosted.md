@@ -352,9 +352,9 @@ To configure a Cluster Check via the Datadog Operator, follow in the instruction
 
 2. Apply the changes to the Datadog Operator with the following command:
 
-  ```shell
-  kubectl apply -f datadog-agent.yaml
-  ```
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
 
 ### Helm
 
