@@ -6525,9 +6525,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@file:/Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/package.tgz::locator=docs%40workspace%3A.":
-  version: 1.0.0
-  resolution: "cdocs-hugo-integration@file:/Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/package.tgz::locator=docs%40workspace%3A."
+"cdocs-hugo-integration@file:/Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/cdocs-hugo-integration-1.0.3.tgz::locator=docs%40workspace%3A.":
+  version: 1.0.3
+  resolution: "cdocs-hugo-integration@file:/Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/cdocs-hugo-integration-1.0.3.tgz::locator=docs%40workspace%3A."
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
@@ -6551,7 +6551,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: bc29cd2f1c219682a67a3f2430e36865226c35276c8ba1b5a21e0b5e033b17fe7693ec15d4b9752a7820f3de1fb1e682d8622bcc432295f4ec2161322405805f
+  checksum: 4e5768c06c91b5d895f1ce6b291a06fb34a7422211989c629d874664a71499811e5ce396cfe3c25a47c8923327c1006e4d0e9f7374e8d50fb27c69da1e28ac76
   languageName: node
   linkType: hard
 
@@ -7584,7 +7584,7 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: /Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/package.tgz
+    cdocs-hugo-integration: /Users/heston.hoffman/repos/corp-node-packages/packages/cdocs-hugo-integration/cdocs-hugo-integration-1.0.3.tgz
     cross-env: ^5.2.1
     del: 4.1.1
     eslint: ^6.8.0

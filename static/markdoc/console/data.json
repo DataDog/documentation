@@ -1,0 +1,66 @@
+{
+  "timestamp": 1741882421330,
+  "errorsByFilePath": {},
+  "customizationConfig": {
+    "traitsById": {
+      "prog_lang": {
+        "id": "prog_lang",
+        "label": "Programming Language"
+      },
+      "os": {
+        "id": "os",
+        "label": "Operating System"
+      }
+    },
+    "optionsById": {
+      "python": {
+        "id": "python",
+        "label": "Python"
+      },
+      "go": {
+        "id": "go",
+        "label": "Go"
+      },
+      "javascript": {
+        "id": "javascript",
+        "label": "JavaScript"
+      },
+      "windows": {
+        "id": "windows",
+        "label": "Windows"
+      },
+      "linux": {
+        "id": "linux",
+        "label": "Linux"
+      }
+    },
+    "optionGroupsById": {
+      "prog_lang_options": [
+        {
+          "default": true,
+          "id": "python",
+          "label": "Python"
+        },
+        {
+          "id": "go",
+          "label": "Go"
+        },
+        {
+          "id": "javascript",
+          "label": "JavaScript"
+        }
+      ],
+      "os_options": [
+        {
+          "id": "windows",
+          "label": "Windows"
+        },
+        {
+          "default": true,
+          "id": "linux",
+          "label": "Linux"
+        }
+      ]
+    }
+  }
+}

@@ -13,6 +13,11 @@ further_reading:
 <div class="alert alert-warning">This feature is not supported for the selected Datadog site.</div>
 {{% /site-region %}}
 
+<div class="alert alert-info">Text containing an <a href="https://google.com">HTML link.</a>
+<br><br>Bitters Brooklyn glossier, shoreditch asymmetrical post-ironic irony echo park whatever jawn polaroid chillwave before they sold out. Lo-fi pork belly PBR&B ethical, lumbersexual plaid drinking vinegar roof party. Bespoke hot chicken 8-bit prism gluten-free blackbird spyplane kickstarter raw denim fit gastropub. Lomo authentic big mood neutral milk hotel master cleanse poke. Before they sold out XOXO austin hashtag dreamcatcher occupy unicorn jianbing direct trade freegan organic bespoke. 90's meggings brunch readymade pop-up master cleanse. Sriracha sustainable chillwave iPhone forage humblebrag skateboard pinterest pug yes plz kale chips helvetica palo santo banjo gochujang.
+<br><br>Vibecession meggings squid normcore farm-to-table ethical. Cray blog hexagon, tumblr vibecession bruh marxism neutral milk hotel letterpress cold-pressed vexillologist. Actually food truck gluten-free, pinterest fixie lyft 8-bit. Affogato humblebrag stumptown, artisan bodega boys vaporware prism trust fund mukbang. Four loko man braid jean shorts, tote bag poke post-ironic irony DIY squid.
+</div>
+
 {{% site-region region="us5" %}}
 [Google Cloud Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
