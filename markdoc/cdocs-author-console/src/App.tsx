@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import './App.css';
 import { AuthorConsoleData } from './schemas';
 import Tabs from '@mui/material/Tabs';
@@ -11,6 +11,9 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactTimeAgo from 'react-time-ago';
 import QuickFilterBuilder from './components/QuickFilterBuilder';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import BoltIcon from '@mui/icons-material/Bolt';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -67,14 +70,27 @@ function App() {
     return null;
   }
 
+  let buildStatusIcon = <CheckCircleIcon />;
+  if (hasErrors) {
+    buildStatusIcon = <ErrorIcon />;
+  }
+
   // Use red text if build is more than 5 minutes old
   const now = new Date().getTime();
   const minutesAgo = Math.floor((now - consoleData.timestamp) / 60000);
-  const buildTimeStyles = minutesAgo > 5 ? { color: 'red' } : {};
+  const buildTimeStyles: CSSProperties = {};
+  if (minutesAgo > 5) {
+    buildTimeStyles.color = '#eb364b';
+  }
 
   return (
     <>
-      <h1>cdocs author console</h1>
+      <h1 id="title">
+        cdocs author console{' '}
+        <span style={buildTimeStyles}>
+          (last build: <ReactTimeAgo date={consoleData.timestamp} locale="en-US" />)
+        </span>
+      </h1>
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs
@@ -84,9 +100,21 @@ function App() {
             TabIndicatorProps={{ style: { backgroundColor: '#632ca6' } }}
             textColor="inherit"
           >
-            <Tab label="Build status" {...a11yProps(0)} sx={{ color: '#632ca6' }} />
-            <Tab label="Quick filter" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
-            {/* <Tab label="Page builder" {...a11yProps(1)} sx={{ color: '#632ca6' }} /> */}
+            <Tab
+              disableRipple
+              label="Build errors"
+              icon={buildStatusIcon}
+              {...a11yProps(0)}
+              sx={{ color: '#632ca6' }}
+            />
+            <Tab disableRipple label="Quick filter" icon={<BoltIcon />} {...a11yProps(1)} sx={{ color: '#632ca6' }} />
+            <Tab
+              disableRipple
+              label="Page wizard"
+              icon={<AutoFixHighIcon />}
+              {...a11yProps(2)}
+              sx={{ color: '#632ca6' }}
+            />
           </Tabs>
         </Box>
         <CustomTabPanel value={currentTabIndex} index={0}>
@@ -97,12 +125,7 @@ function App() {
                 icon={<ErrorIcon sx={{ color: '#eb364b' }} />}
                 sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#fdebed' }}
               >
-                <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>
-                  The latest build has Markdoc errors.{' '}
-                  <span style={buildTimeStyles}>
-                    Last built <ReactTimeAgo date={consoleData.timestamp} locale="en-US" />.
-                  </span>
-                </AlertTitle>
+                <AlertTitle sx={{ marginTop: '0px', color: '#922c35' }}>The latest cdocs build has errors.</AlertTitle>
               </Alert>
               <ErrorsReport errorsByFilePath={consoleData.errorsByFilePath} />
             </>
@@ -113,23 +136,16 @@ function App() {
               sx={{ padding: '10px', paddingBottom: '5px', backgroundColor: '#ecf9ef' }}
               icon={<CheckCircleIcon sx={{ color: '#2a7e41' }} />}
             >
-              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>
-                The latest build has no errors.{' '}
-                <span style={buildTimeStyles}>
-                  Last built <ReactTimeAgo date={consoleData.timestamp} locale="en-US" />.
-                </span>
-              </AlertTitle>
+              <AlertTitle sx={{ marginTop: '0px', color: '#2a7e41' }}>The latest cdocs build has no errors.</AlertTitle>
             </Alert>
           )}
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={1}>
           <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
-        {/*
-        <CustomTabPanel value={currentTabIndex} index={1}>
-          <PrefsBuilder glossary={consoleData.glossary} />
+        <CustomTabPanel value={currentTabIndex} index={2}>
+          Coming soon to a tarball near you ...
         </CustomTabPanel>
-        */}
       </Box>
     </>
   );

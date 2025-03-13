@@ -32,7 +32,12 @@ export default function TraitSelector(props: {
         disablePortal
         options={traitOptions}
         sx={{ width: '100%', marginBottom: '15px ' }}
-        renderInput={(params) => <TextField {...params} />}
+        renderInput={(params) => {
+          if (params.inputProps.value === '') {
+            params.inputProps.placeholder = 'Type here to search';
+          }
+          return <TextField {...params} />;
+        }}
         onChange={handleTraitIdChange}
       />
     </div>

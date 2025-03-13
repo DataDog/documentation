@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import TraitSelector from './selectors/TraitSelector';
+import OptionGroupSelector from './selectors/OptionGroupSelector';
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 
 function buildFilterConfig({
   traitId,
@@ -9,10 +11,9 @@ function buildFilterConfig({
   traitId: string | null;
   optionGroupId: string | null;
 }): string {
-  return `
-content_filters:
-  - trait_id: ${traitId || '<INSERT_TRAIT_ID_HERE>'}
-    option_group_id: ${optionGroupId || '<INSERT_OPTION_GROUP_ID_HERE>'}
+  return `content_filters:
+  - trait_id: ${traitId || '<CHOOSE_A_TRAIT_BELOW>'}
+    option_group_id: ${optionGroupId || '<CHOOSE_AN_OPTION_GROUP_BELOW>'}
 `;
 }
 
@@ -20,18 +21,53 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
   const [traitId, setTraitId] = useState<string | null>(null);
   const [optionGroupId, setOptionGroupId] = useState<string | null>(null);
   const [filterConfig, setFilterConfig] = useState<string>(buildFilterConfig({ traitId, optionGroupId }));
+  const [textWasCopied, setTextWasCopied] = useState(false);
 
   const handleTraitSelect = (newTraitId: string) => {
-    setTraitId(traitId);
+    setTraitId(newTraitId);
     setFilterConfig(buildFilterConfig({ traitId: newTraitId, optionGroupId }));
+  };
+
+  const handleOptionGroupIdSelect = (newOptionGroupId: string) => {
+    setOptionGroupId(newOptionGroupId);
+    setFilterConfig(buildFilterConfig({ traitId, optionGroupId: newOptionGroupId }));
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(filterConfig);
+    setTextWasCopied(true);
+  };
+
+  const handleCopySnackbarClose = (_event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setTextWasCopied(false);
   };
 
   return (
     <div>
-      <pre>{filterConfig}</pre>
-      <h2>Trait</h2>
+      <h2>Quick Filter Builder</h2>
+      <p>
+        With this tool, you can quickly configure a page filter with an <strong>existing</strong> trait and option
+        group.
+      </p>
+      <p>Use the dropdowns below to update this frontmatter snippet, then click the snippet to copy it:</p>
+      <pre onClick={copyToClipboard}>{filterConfig}</pre>
+      <h3>Choose a trait</h3>
+      <p>Select the user characteristic you want to filter the page on, such as the user's operating system.</p>
       <TraitSelector customizationConfig={props.customizationConfig} onSelect={handleTraitSelect} />
-      <h2>Option group</h2>
+      <h3>Choose an option group</h3>
+      <p>Select the list of options to offer for the filter, such as "Linux, Windows, and MacOS".</p>
+      <OptionGroupSelector customizationConfig={props.customizationConfig} onSelect={handleOptionGroupIdSelect} />
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={textWasCopied}
+        autoHideDuration={1000}
+        onClose={handleCopySnackbarClose}
+        message="Copied"
+      />
     </div>
   );
 }
