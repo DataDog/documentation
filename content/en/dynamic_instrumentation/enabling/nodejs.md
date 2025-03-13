@@ -22,7 +22,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
 1. Install or upgrade your Agent to version [7.45.0][6] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
-3. Install or upgrade the Node.js tracing library to version 5.37.1 or higher, by following the [relevant instructions][2].
+3. Install or upgrade the Node.js tracing library to version 5.39.0 or higher, by following the [relevant instructions][2].
 4. If your source code is transpiled during deployment (for example, if using TypeScript), ensure that source maps are published along with the deployed Node.js application.
 5. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 6. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
@@ -38,6 +38,18 @@ Configure Dynamic Instrumentation using the following environment variables:
 | `DD_ENV`                                         | String        | The [environment][5] name, for example, `production`.                                                                     |
 | `DD_VERSION`                                     | String        | The [version][5] of your service.                                                                                         |
 | `DD_TAGS`                                        | String        | Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
+
+## Source map support
+
+If the source code of your Node.js application is transpiled or bundled,
+you need to generate and publish the source maps along with the code, either inline or as separate files.
+
+* **TypeScript**: Set either [`inlineSourceMap`][10] or [`sourceMap`][11] to `true` in the TypeScript config file.
+* **Babel**: Configure the [`sourceMaps`][12] option in the Babel config file (see also the special `--source-maps` CLI option, used to generate separate source map files).
+* **Webpack**: Configure the [`devtools`][13] option in the Webpack config file.
+* **CoffeeScript**: Use either `--inline-map` or `--map` as arguments to the [`coffee`][14] CLI.
+
+**Note:** For better runtime performance, it's recommended *not* to include the original source code in the source maps.
 
 ## What to do next
 
@@ -75,3 +87,8 @@ The following limitations apply to the limited preview:
 [7]: /dynamic_instrumentation/#creating-log-probes
 [8]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [9]: /integrations/guide/source-code-integration/?tab=nodejs#embed-git-information-in-your-build-artifacts
+[10]: https://www.typescriptlang.org/tsconfig/#inlineSourceMap
+[11]: https://www.typescriptlang.org/tsconfig/#sourceMap
+[12]: https://babeljs.io/docs/options#sourcemaps
+[13]: https://webpack.js.org/configuration/devtool/
+[14]: https://coffeescript.org/#usage
