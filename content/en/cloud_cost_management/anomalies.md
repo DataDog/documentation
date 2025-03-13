@@ -11,72 +11,44 @@ further_reading:
 
 ## Overview
 
-The Cloud Cost Management Anomalies page is designed to provide you insights about the automated detection of cost anomalies within your infrastructure. Leveraging advanced algorithms and machine learning, Datadog continuously monitors your environment to identify any unexpected spikes or irregularities in usage costs on a daily basis. This proactive approach not only helps you optimize your budget but also ensures that you are promptly alerted to potential issues before they escalate. The page aims to guide you through the process of understanding, investigating, and addressing cost anomalies.
+Datadog Cloud Cost Management (CCM) continuously monitors your environment to identify and prioritize unexpected cost changes, so that you can detect, share, investigate, and resolve cost anomalies. Cost anomalies are currently available for AWS, and does not require any additional set up after CCM is set up.
 
-_Note: It's only available for AWS for now, other cloud provider will arrive soon._
+## View cost anomalies
 
-## View Cost Anomalies
+You can filter to Active, Past, or Resolved anomalies:
+- **Active**: An anomaly is **Active** if there were anomalous costs in the last day (the last full day of cost data, which is often 2-3 days prior). 
+- **Past**: If an anomaly lasts more than 7 days, or the algorithm detects that costs are no longer anomalous, the anomaly is moved to the **Past** tab. Past anomalies can be useful to report on, but are often less urgent and actionable.
+- **Resolved**: If you Resolve an anomaly, the anomaly can be found in the **Resolved** tab.
 
-On this page, you will find a comprehensive list of cost anomalies that have been automatically detected within your infrastructure. Each anomaly is represented by a detailed card, offering the following information:
+Each anomaly explains how much more costs were than expected, the specific cloud service name (ex: rds), usage type (ex: db.r6g.12xl), and cloud accounts where the anomaly occured. The anomaly also shows what expected costs would have been in the time frame, with a graph that shows the cost pattern over the past 1 month.
 
-- The duration of the anomaly and its start time
-- The anomalous cost that has been identified
-- The specific usage_type contributing to the cost anomaly
-- The impacted account
-- The actual cost incurred
-- A selection of correlated tags for further context
-- A graph illustrating the detected anomaly
+Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
-These cards provide a clear overview of each anomaly, enabling you to quickly assess and address the cost irregularities within your system.
-
-<!-- SCREENSHOT -->
 {{< img src="cloud_cost/anomalies/cost anomalies - list.png" alt="List of cost anomalies automatically detected" style="width:100%;" >}}
 
 ## Take action on anomalies
 
-When you click on an anomaly in the list, a side panel will open, providing you with detailed information related to that anomaly. This includes insights such as the associated service, team, and environment, offering a clearer context of the issue.
+Click an anomaly to view the services, teams, environments, and resource IDs that may be driving the cost anomaly.
 
-Inside the side panel, you'll find a section titled **Next Steps**, guiding you on actionable measures to address and further investigate the anomaly.
+Investigate the anomaly further, and by any additional dimensions, by viewing the costs in Explorer or saving the query to a Notebook. You can also send the anomaly, Explorer link, or Notebook to the associated service owners or teams, so they can help provide context for why the anomaly occured, and if it's expected or not.
 
-<!-- SCREENSHOT -->
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel" alt="In the side panel you can take action on your cost anomaly, we are display detailed information related to it" style="width:100%;" >}}
+You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
+
+{{< img src="cloud_cost/anomalies/cost anomalies - side panel" alt="In the side panel you can take action on your cost anomaly" style="width:100%;" >}}
 
 ## Resolve anomalies
 
-During the anomaly resolution process, you have the opportunity to assess whether the detected anomaly is truly significant. Your input here is essential, as it helps us refine our algorithms and enhance the accuracy of future results.
+As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are simply not considered an anomaly. 
 
-Once you've made your assessment, you can proceed to "Resolve" the anomaly. This action will guide you to a dedicated section where you can provide a detailed explanation of your decision and the reasons behind the resolution.
+Mark anomalies as significant or insignificant to give feedback and help improve the anomaly detection algorithm. Resolve anomalies with context to move anomalies to the Resolved tab, and add context for others in your organization.
 
-Your insights will assist colleagues within your organization in understanding the rationale behind your resolution decision, fostering a shared comprehension and more efficient management of anomalies.
-
-<!-- SCREENSHOT -->
 {{< img src="cloud_cost/anomalies/cost anomalies - side panel - is significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:100%;" >}}
 {{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - is significant.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it should be an anomaly  and then resolve it" style="width:100%;" >}}
 {{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - not an anomaly.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it's not an anomaly and then resolve it" style="width:100%;" >}}
 
-### Investigate
-
-To effectively investigate cost anomalies, consider taking the following actions:
-
-- **View in Explorer / Save to Notebook**: This option allows you to expand the time range and conduct a more refined analysis using the available tags, enabling a deeper dive into the factors contributing to the anomaly.
-
-- **Create Monitor**: Set up a cost monitor to receive alerts and stay informed of future anomalies, empowering you to take proactive measures to manage your budget.
-
-- **JIRA/Case**: Collaborate with your team by using JIRA or our internal Case Management feature for seamless follow-up and resolution of the identified anomalies.
-
-- **Share**: Easily share the URL with colleagues to facilitate collaborative investigation, ensuring all relevant team members have access to the necessary information for effective analysis.
-
-<!-- SCREENSHOT -->
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel - next steps.png" alt="The next steps section will help you investigate your cost anomaly" style="width:100%;" >}}
-
 
 ## How anomalies are defined
 
-Not all changes in cost are classified as anomalies, as fluctuations in usage and cost can occur naturally due to various factors such as increased workload, scaling activities, or seasonal variations. An anomaly typically indicates an irregular or unexpected change that deviates significantly from the established usage patterns.
+Anomalies are irregular or unexpected changes that significantly deviate from established patterns. We use a machine learning-based anomaly detection algorithm that accounts for weekly seasonality and automatically filters out low-cost anomalies below $5 to reduce noise.
 
-For example:
-Many business spin down a part of their infrastructure over the weekend and spin back up on Mondays, that's a cost increase but it shouldn't be flag as an anomaly.
-
-We are using the anomaly detection function to compute those anomalies. Here a link on [how it works][1].
-g
-[1]: /dashboards/functions/algorithms/#anomalies
+Weekly seasonality further reduce noise by identifying expected weekly patterns. For example, many business spin down a part of their infrastructure over the weekend and spin back up on Mondays, that's a cost increase but it shouldn't be flag as an anomaly.
