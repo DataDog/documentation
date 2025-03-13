@@ -24,6 +24,7 @@ further_reading:
 
 
 Shared dashboards allow external viewers or users who prefer not to log into Datadog to access them. You can manage access using different sharing types, each with specific configuration options.
+All shared dashboards and their public accesss settings are listed in the [Public Sharing Settings page][3]. On the settings page, you can also add additional security configuration such as disabling specific sharing types, or setting maximum public access period.
 
 Shared dashboards refresh approximately every 60 seconds, and this [refresh rate][1] cannot be customized.
 
@@ -53,6 +54,8 @@ To share a dashboard with one or more email addresses:
 6. Click **Share Dashboard** to generate a share URL and email an access link to specific invitees. Emails are only sent to specific email addresses. For email domains, you need to manually distribute the dashboard link, as no email is sent.
 
 **Note**: Invited emails lose access at 12:00 a.m. local time on the expiration date.
+
+The maximum valid duration of an invitation can be configured by an organization admin in [**Organization Settings > Public Sharing**][3], it defaults to no maximum.
 
 ### Access an invite-only shared dashboard
 
@@ -89,6 +92,7 @@ By default, public dashboards are accessible for one year before they expire and
 ## Embedded shared dashboards
 
 You can embed shared dashboards into a website using an iframe. Access to these embedded dashboards is restricted to allowlisted request referrers.
+This feature is currently not supported on Safari web browsers.
 
 The HTTP request's referrer header is checked against the allowlisted entries for validation. In most cases, typing `window.location.origin` into your browser console should give you the expected referrer. However, if you have any special manipulation on browser headers (for example, browser privacy settings) you should check the actual network request. 
 
@@ -162,3 +166,4 @@ View all shared dashboards in your organization and your settings on the [Shared
 
 [1]: /dashboards/#refresh-rate
 [2]: https://app.datadoghq.com/dashboard/shared
+[3]: https://app.datadoghq.com/organization-settings/public-sharing
