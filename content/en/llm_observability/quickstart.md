@@ -227,9 +227,6 @@ export const handler = async (event) => {
 {{% /tab %}}
 {{< /tabs >}}
 
-### Compatibility Notes
-Add some version compatibility notes here (version of python layer where we stopped using trace filter)
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
