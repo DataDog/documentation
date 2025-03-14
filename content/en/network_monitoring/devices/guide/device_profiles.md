@@ -233,7 +233,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 
 After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
 
-{{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents_2.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
 
 [14]: /agent/remote_config
 
