@@ -198,7 +198,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 By default, all users can change an application's RUM configuration.
 
 Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown should appear.
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
 1. Select **Manage App Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
