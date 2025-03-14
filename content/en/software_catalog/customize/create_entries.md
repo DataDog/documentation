@@ -14,7 +14,7 @@ aliases:
 further_reading:
 - link: "/software_catalog/customize/validating_service_definition"
   tag: "Documentation"
-  text: "Validate your service definition YAMLs as you create them"
+  text: "Validate service definition YAMLs as you create them"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
   text: "Create and manage service definitions with Terraform"
