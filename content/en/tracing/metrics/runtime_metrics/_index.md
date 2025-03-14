@@ -22,40 +22,62 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-Runtime metrics are application metrics that monitor memory usage, garbage collection, and parallelization. Datadog tracing libraries can automatically collect these metrics for supported environments and send them to the Datadog Agent.
+## Overview 
+
+Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog tracing libraries automatically collect these metrics for supported environments and send them to the Datadog Agent.
+
+These metrics help you identify bottlenecks, troubleshoot performance issues, and optimize resource utilization. By viewing runtime metrics alongside traces and logs, you gain comprehensive visibility into your application's health and performance.
 
 ## Tracing requirements
 
-| Language | Library Version       | Support Level | Enabled By Default | Generates runtime-id granularity |
-|----------|-----------------------|---------------|--------------------|----------------------------------|
-| Java     | 0.29.0+               | GA            | Yes                | Yes                              |
-| Go       | 1.18.0+               | GA            | No                 | Yes                              |
-| .NET     | 1.23.0+               | GA            | No                 | Yes                              |
-| Node.js  | 3.0.0+                | GA            | No                 | No                               |
-| Ruby     | 0.44.0+               | GA            | No                 | No                               |
-| Python   | 0.30.0+               | Preview       | No                 | No                               |
-| PHP      | Not supported         | N/A           | N/A                | N/A                              |
-| C++      | Not supported         | N/A           | N/A                | N/A                              |
-
-### Language-specific considerations
-
 {{< tabs >}}
 {{% tab "Java" %}}
-#### Supported runtimes
-Runtime metrics are only supported on Java 8+.
+- **Enabled By Default**: Yes  
+- **Library Version**: 0.29.0+  
+- **Support Level**: GA  
+- **Generates runtime-id granularity**: Yes  
+- **Runtimes**: Java 8+  <br><br>
+{{% /tab %}}
+
+{{% tab "Python" %}}
+- **Enabled By Default**: No  
+- **Library Version**: 0.30.0+  
+- **Support Level**: Preview  
+- **Generates runtime-id granularity**: No  
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-You must add the [`dogstatsd-ruby`][100] gem to your Ruby application.
+- **Enabled By Default**: No  
+- **Library Version**: 0.44.0+  
+- **Support Level**: GA  
+- **Generates runtime-id granularity**: No
+- **[`dogstatsd-ruby`][100]**: Add the gem to your Ruby application
 
 [100]: https://rubygems.org/gems/dogstatsd-ruby
 {{% /tab %}}
 
-{{% tab ".NET" %}}
-#### Supported runtimes
-Runtime metrics are only supported on .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
+{{% tab "Go" %}}
+- **Enabled By Default**: No  
+- **Library Version**: 1.18.0+  
+- **Support Level**: GA  
+- **Generates runtime-id granularity**: Yes  
+{{% /tab %}}
 
-#### Additional permissions for IIS
+{{% tab "Node.js" %}}
+- **Enabled By Default**: No  
+- **Library Version**: 3.0.0+  
+- **Support Level**: GA  
+- **Generates runtime-id granularity**: No  
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+- **Enabled By Default**: No  
+- **Library Version**: 1.23.0+  
+- **Support Level**: GA  
+- **Generates runtime-id granularity**: Yes
+- **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).  
+
+### Permissions for Internet Information Services (IIS)
 
 On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
 
@@ -69,7 +91,7 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{< /tabs >}}
 
-## Setup instructions
+## Setup
 
 ### 1. Configure the Datadog Agent
 
@@ -125,30 +147,6 @@ RuntimeMetrics.enable()
 ```
 {{% /tab %}}
 
-{{% tab "Node.js" %}}
-Runtime metrics collection can also be enabled in code with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
-
-```js
-const tracer = require('dd-trace').init({
-  // ...
-  runtimeMetrics: true
-})
-```
-{{% /tab %}}
-
-{{% tab "Go" %}}
-Runtime metrics collection can also be enabled in code by starting the tracer with the `WithRuntimeMetrics` option:
-
-```go
-tracer.Start(tracer.WithRuntimeMetrics())
-```
-
-If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] (or [`WithDogstatsdAddress` v2][9]) option (available starting in 1.18.0).
-
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
-[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
-{{% /tab %}}
-
 {{% tab "Ruby" %}}
 Runtime metrics collection can also be enabled in code by setting the following configuration in your Ruby application:
 
@@ -168,14 +166,34 @@ end
 ```
 {{% /tab %}}
 
+{{% tab "Go" %}}
+Runtime metrics collection can also be enabled in code by starting the tracer with the `WithRuntimeMetrics` option:
+
+```go
+tracer.Start(tracer.WithRuntimeMetrics())
+```
+
+If your Datadog Agent DogStatsD address differs from the default `localhost:8125`, use the [`WithDogstatsdAddress`][3] (or [`WithDogstatsdAddress` v2][9]) option (available starting in 1.18.0).
+
+[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
+[9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+Runtime metrics collection can also be enabled in code with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
+
+```js
+const tracer = require('dd-trace').init({
+  // ...
+  runtimeMetrics: true
+})
+```
+{{% /tab %}}
+
 {{% tab ".NET" %}}
 Runtime metrics cannot be enabled in code.
 {{% /tab %}}
 {{< /tabs >}}
-
-## Data collected
-
-See [Runtime Metrics Data Collected][4] for the full list of collected runtime metrics.
 
 ## View runtime metric dashboards
 
