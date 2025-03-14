@@ -23,23 +23,40 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 - The **Default** cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
 
-| Description | Metric Name | Dimensions | Platform | 
-|--------|-------------|------------|----------|
-| Cumulative Layout Shift | `views.cumulative_layout_shift` | Default, Percentiles breakdown, View Name | Browser only |
-| First Contentful Paint | `views.first_contentful_paint` | Default, Percentiles breakdown, View Name | Browser only |
-| Largest Contentful Paint | `views.largest_contentful_paint` | Default, Percentiles breakdown, View Name | Browser only |
-| Count of actions | `sessions.actions` | Default, Action Type, View Name | Mobile & Browser |
-| Count of errors | `errors` | Default, Is Crash, View Name | Mobile & Browser |
-| Count of errors per session (@session.error.count) | `sessions.errors` | Default, Percentiles breakdown | Mobile & Browser |
-| Count of frustration signals | `sessions.frustration_signals` | Default | Mobile & Browser |
-| Count of sessions | `sessions` | Default | Mobile & Browser |
-| Count of unique user | `@session.type:user` | Default, View Name | Mobile & Browser |
-| Count of views | `views` | Default, View Name | Mobile & Browser |
-| Session duration | `sessions.time_spent` | Default, Percentiles breakdown | Mobile & Browser |
-| View duration | `views.duration` | Default, Percentiles breakdown, View Name | Mobile & Browser |
-| App startup time | `app_startup_time` | Default, Percentiles breakdown | Mobile only |
-| Count of frozen frames | `views.frozen_frames` | Default, View Name | Mobile only |
-| Crash-free session rate | `views.crash_free` | Default | Mobile only |
+| Metric Name | Description | Dimensions | Platform |
+|-------------|-------------|------------|----------|
+| `app_startup_time` | App startup time | Default, Percentiles breakdown | Mobile only |
+| `errors` | Count of errors | Default, Is Crash, View Name | Mobile & Browser |
+| `errors.hang_duration` | Errors - hang duration | Default, View Name | Mobile only |
+| `sessions` | Count of sessions | Default | Mobile & Browser |
+| `sessions.actions` | Count of actions | Default, Action Type, View Name | Mobile & Browser |
+| `sessions.anr` | Count of sessions with ANR errors | Default | Mobile only |
+| `sessions.crash_free` | Count of crash-free sessions | Default | Mobile & Browser |
+| `sessions.errors` | Count of errors per session (@session.error.count) | Default, Percentiles breakdown | Mobile & Browser |
+| `sessions.frustration_signals` | Count of frustration signals | Default | Mobile & Browser |
+| `sessions.hang` | Count of sessions with hangs | Default | Mobile only |
+| `sessions.inactive` | Count of inactive sessions | Default | Mobile & Browser |
+| `@session.type:user` | Count of unique user | Default, View Name | Mobile & Browser |
+| `sessions.time_spent` | Session duration | Default, Percentiles breakdown | Mobile & Browser |
+| `views` | Count of views | Default, View Name | Mobile & Browser |
+| `views.cpu_ticks_per_second` | CPU tickets per second | Default, View Name | Browser only |
+| `views.crash_free` | Crash-free session rate | Default, View Name | Mobile only |
+| `views.cumulative_layout_shift` | Cumulative Layout Shift | Default, Percentiles breakdown, View Name | Browser only |
+| `views.duration` | View duration | Default, Percentiles breakdown, View Name | Mobile & Browser |
+| `views.error_free` | Count of error free sessions | Default, View Name | Mobile & Browser |
+| `views.first_contentful_paint` | First Contentful Paint | Default, Percentiles breakdown, View Name | Browser only |
+| `views.frozen_frames` | Count of frozen frames | Default, View Name | Mobile & Browser |
+| `view.frozen_frames_free` | Count of views with frozen frames | Default | Mobile & Browser |
+| `views.inactive` | Count of inactive views | Default, Percentiles breakdown | Mobile & Browser |
+| `views.interaction_to_next_paint` | Interaction to Next Paint | Default, Percentiles breakdown | Browser only |
+| `views.interaction_to_next_view` | Interaction to Next View | Default, Percentiles breakdown | Browser only |
+| `views.largest_contentful_paint` | Largest Contentful Paint | Default, Percentiles breakdown, View Name | Browser only |
+| `views.loading_time` | Loading time | Default | Mobile & Browser |
+| `views.memory` | Memory | Default, Percentiles breakdown | Mobile & Browser |
+| `views.network_settled` | Network settled | Default, Percentiles breakdown | Mobile & Browser |
+| `views.refresh_rate` | Refresh rate | Default, Percentiles breakdown | Mobile & Browser |
+| `views.slow_rendered` | Count of slow rendered views | Default | Mobile & Browser |
+
 
 ## Further reading
 
