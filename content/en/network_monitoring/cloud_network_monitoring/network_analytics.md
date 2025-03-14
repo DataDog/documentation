@@ -342,11 +342,14 @@ External traffic (to public IPs) and Datadog Agent traffic is shown by default. 
 
 ### Unresolved traffic
 
-Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because:
+Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because it lacks identifiable metadata, such as source or destination information. This can occur when Datadog cannot resolve the traffic to known entities like load balancers, cloud services, or specific IP addresses within the monitored infrastructure. Typically, unresolved traffic may arise due to:
 
 * The host or container client or server IPs are not tagged with the client or server tags used for traffic aggregation.
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
+* The destination has not been tagged with a service, or an IP has not been mapped to any service. 
+
+Monitoring unresolved traffic is essential for identifying blind spots in network visibility and ensuring all relevant traffic is accounted for in performance and security analysis.
 
 Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
