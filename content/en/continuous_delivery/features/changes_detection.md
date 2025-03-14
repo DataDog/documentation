@@ -1,6 +1,6 @@
 ---
-title: Changes Detection
-description: Learn how CD Visibility detects changes.
+title: Code Changes Detection
+description: Learn how CD Visibility detects code changes.
 further_reading:
 - link: "/continuous_delivery/deployments/"
   tag: "Documentation"
@@ -20,28 +20,29 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 
 ## Overview
 
-Changes Detection allows Datadog to identify the commits introduced as part of a deployment. This is particularly valuable to:
+Code Changes Detection allows Datadog to identify the commits introduced as part of a deployment. This is particularly valuable to:
 - Understand where specific changes have been deployed, such as tracking when updates reach the `production` environment.
 - Diagnose incidents related to a deployment by providing visibility into the exact changes introduced. This helps teams quickly pinpoint potential root causes and accelerate troubleshooting.
 
-To detect the changes deployed, Datadog runs the [`git log`][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
+To detect the code changes deployed, Datadog runs the [`git log`][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
 
-The deployed changes are visible inside any deployment execution of the [Deployment Executions page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the changes detected between the two.
+The deployed code changes are visible inside any deployment execution of the [Deployment Executions page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the code changes detected between the two.
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
-Additionally, the **Deployments** column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your changes are deployed.
+Additionally, the **Deployments** column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your code changes are deployed.
 Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
 
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
 
-Changes are only detected for deployments that:
-- Have a service and an environment. Additionally, the service needs to have the file path specs defined in Software Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
-- Have a repository URL and a commit SHA defined.
+Code changes are only detected for deployments that:
+- Have a service (`@deployment.service`) with file path specs defined in Software Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
+- Have an environment (`@deployment.env`).
+- Have a repository URL (`@deployment.git.repository_url`) and a commit SHA (`@deployment.git.commit.sha`).
 
 ## Setup
 
-To allow Changes Detection on your deployments, two steps are required:
+To allow Code Changes Detection on your deployments, two steps are required:
 1. [Synchronize your repository metadata to Datadog](#synchronize-repository-metadata-to-datadog).
 2. [Specify the source code file path for your services](#specify-service-file-path-patterns).
 
@@ -97,7 +98,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 ### Specify service file path patterns
 
-To correctly understand the changes that a deployment has introduced, only the commits affecting the specific service being deployed should be considered.
+To correctly understand the code changes that a deployment has introduced, only the commits affecting the specific service being deployed should be considered.
 
 This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
@@ -113,7 +114,7 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
+Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
 
 **Example (schema version v2.2):**
 
@@ -125,7 +126,7 @@ extensions:
       - src/libs/utils/**
 ```
 
-Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
+Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
 
 If both entries are defined for a service, only `extensions[datadoghq.com/cd-visibility]` is considered when filtering the commits.
 
