@@ -13,7 +13,7 @@ further_reading:
   text: 'Learn about the Datadog Browser SDK for Logs'
 ---
 
-<div class="alert alert-info">To try the preview for RUM SDK Auto-Instrumentation, follow the setup instructions below.</div>
+<div class="alert alert-info">To preview RUM Auto-Instrumentation, follow the setup instructions to set up the SDK injector on your web server.</div>
 
 ## Overview
 

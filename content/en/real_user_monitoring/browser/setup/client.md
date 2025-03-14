@@ -1,8 +1,5 @@
 ---
 title: Browser Monitoring Client-Side Instrumentation
-code_lang: client
-type: multi-code-lang
-code_lang_weight: 1
 aliases:
   - /real_user_monitoring/setup
   - /real_user_monitoring/browser/setup
