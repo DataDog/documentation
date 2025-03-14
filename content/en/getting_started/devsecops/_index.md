@@ -40,7 +40,7 @@ Learn more about the features included with APM DevSecOps:
 [6]: /tracing/trace_collection/
 [7]: /universal_service_monitoring/setup/
 [9]: /tracing/metrics/
-[10]: /getting_started/code_security/software_composition_analysis/
+[10]: /security/code_security/software_composition_analysis/
 
 {{% /tab %}}
 {{% tab "APM DevSecOps Pro" %}}
@@ -77,7 +77,7 @@ Learn more about the features included with APM DevSecOps Pro:
 [7]: /tracing/trace_collection/
 [8]: /universal_service_monitoring/setup/
 [9]: /data_streams/#setup
-[10]: /getting_started/code_security/software_composition_analysis/
+[10]: /security/code_security/software_composition_analysis/
 [11]: /tracing/metrics/
 
 {{% /tab %}}
@@ -120,7 +120,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 [10]: /data_streams/#setup
 [11]: /profiler/enabling
 [13]: /tracing/metrics/
-[14]: /getting_started/code_security/software_composition_analysis/
+[14]: /security/application_security/ 
 
 {{% /tab %}}
 {{< /tabs >}}
