@@ -156,10 +156,13 @@ This generate an LLM Observability trace in an AWS Lambda serverless environment
     ```shell
     datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
     ```
-3. In the Datadog UI, navigate to `Infrastructure > Serverless` and search for the name of your function. Click on it to open the details panel. Under the configuration tab, you should see the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the "Datadog Environment Variables" section.
-      {{< img src="llm_observability/serverless_lambda_python_configuration.png" alt="Instrumented Lambda example with Python" style="width:100%;" >}}
+3. Verify that your function was instrumented.
+    1. In the Datadog UI, navigate to `Infrastructure > Serverless`
+    2. Search for the name of your function.
+    3. Click on it to open the details panel.
+    4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
 4. Add the LLM Observability environment variables to your Lambda function environment variables (`Configuration > Environment Variables`).
-    1. In the AWS console, go to your Lambda function in Configuration > Environment variables. Click "Edit" and add the following environment variables:
+    1. In the AWS console, go to your Lambda function in `Configuration > Environment` variables. Click "Edit" and add the following environment variables:
         | Environment Variable | Value                   |
         |----------------------|-------------------------|
         | DD_LLMOBS_ENABLED    | 1                       |
@@ -193,10 +196,13 @@ This generate an LLM Observability trace in an AWS Lambda serverless environment
     ```shell
     datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
     ```
-3. In the Datadog UI, navigate to `Infrastructure > Serverless` and search for the name of your function. Click on it to open the details panel. Under the configuration tab, you should see the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the "Datadog Environment Variables" section.
-      {{< img src="llm_observability/serverless_lambda_nodejs_configuration.png" alt="Instrumented Lambda example with Node.js" style="width:100%;" >}}
+3. Verify that your function was instrumented.
+    1. In the Datadog UI, navigate to `Infrastructure > Serverless`
+    2. Search for the name of your function.
+    3. Click on it to open the details panel.
+    4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
 4. Add the necessary LLM Observability environment variables to your Lambda function environment variables.
-    1. In the AWS console, go to your Lambda function in Configuration > Environment variables. Click "Edit" and add the following environment variables:
+    1. In the AWS console, go to your Lambda function in `Configuration > Environment` variables. Click "Edit" and add the following environment variables:
         | Environment Variable | Value                          |
         |-----------------------------|-------------------------|
         | DD_LLMOBS_ENABLED           | 1                       |
