@@ -114,8 +114,7 @@ Datadog's [Metrics without Limits™][4] is a first in industry cost management 
 
 Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
-<!--change this image as the modal is outdated and still has the "configure aggregations section" in the modal -->
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.

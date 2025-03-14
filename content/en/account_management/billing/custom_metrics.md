@@ -293,8 +293,7 @@ Administrative users (those with [Datadog Admin roles][7]) can see the monthly a
 
 For more real-time tracking of the count of custom metrics for a particular metric name, click into the metric name on the [Metrics Summary page][10]. You can view the number of **ingested** custom metrics and **indexed** custom metrics on the metric's details sidepanel. 
 
-<!-- replace this image here as it looks old -->
-{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
+{{< img src="account_management/billing/custom_metrics/mwl_sidepanel_ingested_03142025.jpg" alt="Metrics Summary sidepanel" style="width:80%;">}}
 
 
 ## Allocation
