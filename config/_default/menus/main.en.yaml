@@ -1955,6 +1955,11 @@ menu:
       parent: software_catalog_customize
       identifier: software_catalog_import_from_servicenow
       weight: 104
+    - name: Validate Service Definition YAMLs
+      url: software_catalog/customize/validating_service_definition
+      parent: software_catalog_customize
+      identifier: software_catalog_validating_service_definition
+      weight: 105
     - name: Navigate the Software Catalog
       url: software_catalog/navigating
       parent: software_catalog
