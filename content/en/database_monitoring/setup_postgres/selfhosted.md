@@ -183,14 +183,12 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-    {{< tabs >}}
     {{% tab "One" %}}
     One
     {{% /tab %}}
     {{% tab "Two" %}}
     Two
     {{% /tab %}}
-    {{< /tabs >}}
 
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
