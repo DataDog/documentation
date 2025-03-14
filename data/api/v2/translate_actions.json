@@ -538,7 +538,7 @@
     "request_schema_description": "Request for creating a downtime."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime.\n\n**Note**: Downtimes canceled through the API are no longer active, but are retained for approximately two days before being permanently removed. The downtime may still appear in search results until it is permanently removed.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
