@@ -14,20 +14,20 @@ Correlating data by various Datadog products gives context to help estimate the 
 
 ## Correlate RUM and Logs
 
-Correlate data collected from user sessions and view events with logs to gain deeper insights into application behavior and streamline troubleshooting. See [Connect Logs and RUM][1] to set it up.
+Correlate data collected from user sessions and view events with logs to gain deeper insights into application behavior and streamline troubleshooting. To set it up, see [Connect Logs and RUM][1].
 
 {{< img src="real_user_monitoring/correlate_rum_and_logs/rum_browser_logs.png" alt="Browser logs in a RUM action" style="width:100%;" >}}
 
 ## Correlate RUM and Traces
 
-Correlate data collected in front end views with trace and spans on the back end by [Connecting RUM and Traces][2]. Pinpoint issues anywhere in your stack and understand what your users are experiencing. 
+Correlate data collected in front end views with trace and spans on the back end by connecting RUM and Traces. Pinpoint issues anywhere in your stack and understand what your users are experiencing. For more information, see [Connect RUM and Traces][2].
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
 
 
 ## Correlate RUM and Synthetic tests
 
-Follow the data from synthetic tests directly through to the root causes by digging into related rum events. [Connect Synthetics and RUM][3] to have better visibility of your synthetics tests.
+Follow the data from Synthetic tests directly through to the root causes by digging into related rum events. [Connect Synthetics and RUM][3] to have better visibility of your Synthetic tests.
 
 {{< img src="synthetics/guide/rum_in_synthetics/sessions_details_panel.png" alt="Sessions Details Side Panel" style="width:100%;" >}}
 
