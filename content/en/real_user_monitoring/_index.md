@@ -210,7 +210,7 @@ Use granular access controls to limit the [roles][18] that may edit a particular
 **Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted application. Complete the following steps:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown should appear.
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
 1. Select **Manage App Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
