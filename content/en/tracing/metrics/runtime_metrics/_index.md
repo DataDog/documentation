@@ -39,6 +39,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Support Level**: GA  
 - **Generates runtime-id granularity**: Yes  
 - **Runtimes**: Java 8+  <br><br>
+
 {{% /tab %}}
 
 {{% tab "Python" %}}
@@ -46,6 +47,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 0.30.0+  
 - **Support Level**: Preview  
 - **Generates runtime-id granularity**: No  
+- **Runtimes**: All supported Python versions  <br><br>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
@@ -53,9 +55,10 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 0.44.0+  
 - **Support Level**: GA  
 - **Generates runtime-id granularity**: No
-- **[`dogstatsd-ruby`][100]**: Add the gem to your Ruby application
+- **Runtimes**: All supported Ruby versions
 
-[100]: https://rubygems.org/gems/dogstatsd-ruby
+<div class="alert alert-info">You must add the <a href="https://rubygems.org/gems/dogstatsd-ruby">dogstatsd-ruby</a> gem to your application.</div>
+
 {{% /tab %}}
 
 {{% tab "Go" %}}
@@ -63,6 +66,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 1.18.0+  
 - **Support Level**: GA  
 - **Generates runtime-id granularity**: Yes  
+- **Runtimes**: All supported Go versions  <br><br>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -70,6 +74,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 3.0.0+  
 - **Support Level**: GA  
 - **Generates runtime-id granularity**: No  
+- **Runtimes**: All supported Node.js versions  <br><br>
 {{% /tab %}}
 
 {{% tab ".NET" %}}
@@ -122,7 +127,7 @@ When running the Agent in containerized environments, additional configuration i
 
 ### 2. Configure your application
 
-Configure runtime metrics in your application using environment variables. Some languages also support configuring runtime metrics directly in code.
+Configure runtime metrics in your application using environment variables. Some languages also support configuring runtime metrics [directly in code](#code-based-configuration).
 
 #### Environment variables
 
