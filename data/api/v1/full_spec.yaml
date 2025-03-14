@@ -29845,10 +29845,6 @@ paths:
           type: string
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LogsIndex'
           description: OK
         '403':
           content:
@@ -38888,7 +38884,7 @@ servers:
   variables:
     site:
       default: datadoghq.com
-      description: The regional site for a Datadog customer.
+      description: The regional site for Datadog customers.
       enum:
       - datadoghq.com
       - us3.datadoghq.com

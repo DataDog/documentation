@@ -59,7 +59,7 @@ Use `--no-fail` (default: `false`) to prevent the deployment command from failin
 If you are using GitHub Actions as your CI provider, see the [section below][11] for additional considerations.
 
 Once you have added the command to a CI job, the [**Deployments** page][5] and the [Deployment Executions page][6] populates with data after pipelines are executed.
-For more information, see [Exploring CD Visibility Deployments][8].
+For more information, see [Explore CD Visibility Deployments][8].
 
 ### Examples
 

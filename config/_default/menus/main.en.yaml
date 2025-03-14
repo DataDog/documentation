@@ -582,205 +582,283 @@ menu:
       identifier: opentelemetry_top_level
       pre: open-telemetry
       parent: essentials_heading
-      weight: 60000
+      weight: 70000
     - name: Getting Started
-      url: getting_started/opentelemetry/
-      identifier: getting_started_otel_dd
+      url: /getting_started/opentelemetry
+      identifier: otel_guides_getting_started
       parent: opentelemetry_top_level
       weight: 1
-    - name: Terms and Concepts
-      url: opentelemetry/otel_terms/
-      identifier: otel_terms
+    - name: Feature Compatibility
+      url: opentelemetry/compatibility/
+      identifier: otel_compatibility
       parent: opentelemetry_top_level
       weight: 2
-    - name: OTLP Metrics Types
-      url: opentelemetry/otlp_metric_types/
-      parent: otel_terms
-      weight: 201
-    - name: Collector and Exporter
-      url: opentelemetry/collector_exporter/
-      identifier: otel_collector
+    - name: Instrument Your Applications
+      url: /opentelemetry/instrument/
+      identifier: otel-instrumentation
       parent: opentelemetry_top_level
       weight: 3
-    - name: Deployment
-      url: opentelemetry/collector_exporter/deployment/
-      identifier: otel_collector_deployment
-      parent: otel_collector
+    - name: OTel SDKs
+      url: opentelemetry/instrument/otel_sdks/
+      identifier: otel_sdks
+      parent: otel-instrumentation
       weight: 301
-    - name: Configuration
-      url: opentelemetry/collector_exporter/configuration/
-      identifier: otel_collector_configuration
-      parent: otel_collector
+    - name: OTel APIs
+      url: /opentelemetry/instrument/api_support
+      identifier: otel-api-dd-sdk
+      parent: otel-instrumentation
       weight: 302
-    - name: OTLP Receiver
-      url: opentelemetry/collector_exporter/otlp_receiver/
-      identifier: otel_receiver
-      parent: otel_collector_configuration
+    - name: Java
+      url: /opentelemetry/instrument/api_support/java
+      parent: otel-api-dd-sdk
       weight: 3021
-    - name: Hostnames and Tagging
-      url: opentelemetry/collector_exporter/hostname_tagging/
-      identifier: otel_hostnames_tagging
-      parent: otel_collector_configuration
+    - name: Python
+      url: /opentelemetry/instrument/api_support/python
+      parent: otel-api-dd-sdk
       weight: 3022
-    - name: Batch and Memory Settings
-      url: opentelemetry/collector_exporter/collector_batch_memory/
-      identifier: otel_batch_memory
-      parent: otel_collector_configuration
+    - name: Ruby
+      url: /opentelemetry/instrument/api_support/ruby
+      parent: otel-api-dd-sdk
       weight: 3023
-    - name: Log Collection
-      url: /opentelemetry/collector_exporter/log_collection/
-      identifier: otel_log_collection
-      parent: otel_collector_configuration
+    - name: Go
+      url: /opentelemetry/instrument/api_support/go
+      parent: otel-api-dd-sdk
       weight: 3024
-    - name: Integrations
-      url: opentelemetry/integrations/
-      identifier: otel_integrations
+    - name: Node.js
+      url: /opentelemetry/instrument/api_support/nodejs
+      parent: otel-api-dd-sdk
+      weight: 3025
+    - name: PHP
+      url: /opentelemetry/instrument/api_support/php
+      parent: otel-api-dd-sdk
+      weight: 3026
+    - name: .NET
+      url: /opentelemetry/instrument/api_support/dotnet
+      parent: otel-api-dd-sdk
+      weight: 3027
+    - name: OTel Instrumentation Libraries
+      url: /opentelemetry/instrument/instrumentation_libraries/
+      identifier: otel_instrumentation_libraries
+      parent: otel-instrumentation
+      weight: 303
+    - name: Environment Variables
+      url: opentelemetry/config/environment_variable_support/
+      identifier: otel_env_var
+      parent: otel-instrumentation
+      weight: 304
+    - name: Send Data to Datadog
+      identifier: otel_collect
+      url: /opentelemetry/setup/
       parent: opentelemetry_top_level
       weight: 4
-    - name: Trace Metrics
-      url: opentelemetry/integrations/trace_metrics/
-      identifier: otel_trace_metrics
-      parent: otel_integrations
+    - name: OpenTelemetry Collector
+      url: /opentelemetry/setup/collector_exporter/
+      identifier: otel-setup-collector-exporter
+      parent: otel_collect
       weight: 401
-    - name: Runtime Metrics
-      url: opentelemetry/integrations/runtime_metrics/
-      identifier: otel_runtime_metrics
-      parent: otel_integrations
+    - name: Deploy
+      url: /opentelemetry/setup/collector_exporter/deploy
+      identifier: otel-setup-collector-exporter-deploy
+      parent: otel-setup-collector-exporter
+      weight: 101
+    - name: Batch and Memory Settings
+      url: opentelemetry/config/collector_batch_memory/
+      identifier: otel_batch_memory
+      parent: otel-setup-collector-exporter
+      weight: 102
+    - name: Hostnames and Tagging
+      url: opentelemetry/config/hostname_tagging/
+      identifier: otel_hostnames_tagging
+      parent: otel-setup-collector-exporter
+      weight: 103
+    - name: Log Collection
+      url: opentelemetry/config/log_collection/
+      identifier: otel_log_collection
+      parent: otel-setup-collector-exporter
+      weight: 104
+    - name: OTLP Receiver
+      url: opentelemetry/config/otlp_receiver/
+      identifier: otel_otlp_receiver
+      parent: otel-setup-collector-exporter
+      weight: 105
+    - name: Datadog Agent
+      url: /opentelemetry/setup/otlp_ingest_in_the_agent
+      identifier: otel-setup-otlp-ingest
+      parent: otel_collect
       weight: 402
-    - name: Collector Health Metrics
-      url: opentelemetry/integrations/collector_health_metrics/
-      identifier: otel_health_metrics
-      parent: otel_integrations
+    - name: Direct OTLP Ingest
+      url: /opentelemetry/setup/intake_endpoint
+      identifier: otel-setup-intake-endpoint
+      parent: otel_collect
       weight: 403
-    - name: Docker Metrics
-      url: opentelemetry/integrations/docker_metrics/
-      identifier: otel_docker_metrics
-      parent: otel_integrations
-      weight: 404
-    - name: Host Metrics
-      url: opentelemetry/integrations/host_metrics/
-      identifier: otel_host_metrics
-      parent: otel_integrations
-      weight: 405
-    - name: Kafka Metrics
-      url: opentelemetry/integrations/kafka_metrics/
-      identifier: otel_kafka_metrics
-      parent: otel_integrations
-      weight: 406
-    - name: Schema and Semantics
-      url: opentelemetry/schema_semantics/
+    - name: Logs Endpoint
+      url: /opentelemetry/setup/intake_endpoint/otlp_logs
+      parent: otel-setup-intake-endpoint
+      weight: 301
+    - name: Metrics Endpoint
+      url: /opentelemetry/setup/intake_endpoint/otlp_metrics
+      parent: otel-setup-intake-endpoint
+      weight: 302
+    - name: Semantic Mapping
+      url: opentelemetry/mapping/
       identifier: otel_schema
       parent: opentelemetry_top_level
       weight: 5
     - name: Resource Attribute Mapping
-      url: opentelemetry/schema_semantics/semantic_mapping/
+      url: opentelemetry/mapping/semantic_mapping/
       identifier: otel_semantic_mapping
       parent: otel_schema
       weight: 501
     - name: Metrics Mapping
-      url: opentelemetry/schema_semantics/metrics_mapping/
+      url: opentelemetry/mapping/metrics_mapping/
       identifier: otel_metrics_mapping
       parent: otel_schema
       weight: 502
     - name: Infrastructure Host Mapping
-      url: opentelemetry/schema_semantics/host_metadata/
+      url: opentelemetry/mapping/host_metadata/
       identifier: otel_host_metadata
       parent: otel_schema
       weight: 503
     - name: Hostname Mapping
-      url: opentelemetry/schema_semantics/hostname/
+      url: opentelemetry/mapping/hostname/
       identifier: otel_hostname
       parent: otel_schema
       weight: 504
     - name: Service-entry Spans Mapping
-      url: opentelemetry/schema_semantics/service_entry_spans/
+      url: opentelemetry/mapping/service_entry_spans/
       identifier: otel_service_entry_spans
       parent: otel_schema
-      weight: 504
+      weight: 505
     - name: Ingestion Sampling
-      url: opentelemetry/ingestion_sampling_with_opentelemetry
-      identifier: otel_sampling
+      url: opentelemetry/ingestion_sampling
+      identifier: otel_ingestion_sampling
       parent: opentelemetry_top_level
       weight: 6
-    - name: Interoperability with Datadog
-      url: opentelemetry/interoperability/
-      identifier: otel_interoperability
+    - name: Correlate Data
+      url: opentelemetry/correlate/
+      identifier: otel_explore
       parent: opentelemetry_top_level
       weight: 7
-    - name: OTLP Ingestion by the Agent
-      url: opentelemetry/interoperability/otlp_ingest_in_the_agent/
-      identifier: otel_ingest
-      parent: otel_interoperability
-      weight: 701
-    - name: OTLP Logs Intake Endpoint
-      url: /opentelemetry/otlp_logs
-      identifier: otel_otlp_logs
-      parent: otel_interoperability
-      weight: 702
-    - name: Trace Context Propagation
-      url: /opentelemetry/interoperability/trace_context_propagation
-      identifier: otel_propagation
-      parent: otel_interoperability
-      weight: 703
-    - name: OpenTelemetry API Support
-      url: /opentelemetry/interoperability/api_support
-      identifier: otel_instrumentation
-      parent: otel_interoperability
-      weight: 704
-    - name: OpenTelemetry Instrumentation Libraries
-      url: /opentelemetry/interoperability/instrumentation_libraries/
-      identifier: otel_instrumentation_libraries
-      parent: otel_interoperability
-      weight: 705
-    - name: Environment Variable Configuration
-      url: /opentelemetry/interoperability/environment_variable_support
-      identifier: otel_env_var_configuration
-      parent: otel_interoperability
-      weight: 706
-    - name: Correlate RUM and Traces
-      url: /opentelemetry/interoperability/connect_rum_and_traces
-      identifier: otel_rum
-      parent: otel_interoperability
-      weight: 707
     - name: Correlate Logs and Traces
-      url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
+      url: /opentelemetry/correlate/logs_and_traces/
       identifier: otel_logs
-      parent: otel_interoperability
-      weight: 708
-    - name: Compatibility
-      url: opentelemetry/compatibility/
-      identifier: otel_compatibility
+      parent: otel_explore
+      weight: 701
+    - name: Correlate RUM and Traces
+      url: /opentelemetry/correlate/rum_and_traces/
+      identifier: otel_rum
+      parent: otel_explore
+      weight: 702
+    - name: Integrations
+      url: opentelemetry/integrations/
+      identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 8
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 801
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 802
+    - name: Java
+      url: opentelemetry/integrations/runtime_metrics/java
+      identifier: otel_runtime_metrics_java
+      parent: otel_runtime_metrics
+      weight: 8021
+    - name: .NET
+      url: opentelemetry/integrations/runtime_metrics/dotnet
+      identifier: otel_runtime_metrics_dotnet
+      parent: otel_runtime_metrics
+      weight: 8022
+    - name: Go
+      url: opentelemetry/integrations/runtime_metrics/go
+      identifier: otel_runtime_metrics_go
+      parent: otel_runtime_metrics
+      weight: 8023
+    - name: Collector Health Metrics
+      url: opentelemetry/integrations/collector_health_metrics/
+      identifier: otel_health_metrics
+      parent: otel_integrations
+      weight: 803
+    - name: Docker Metrics
+      url: opentelemetry/integrations/docker_metrics/
+      identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 804
+    - name: Host Metrics
+      url: opentelemetry/integrations/host_metrics/
+      identifier: otel_host_metrics
+      parent: otel_integrations
+      weight: 805
+    - name: Kafka Metrics
+      url: opentelemetry/integrations/kafka_metrics/
+      identifier: otel_kafka_metrics
+      parent: otel_integrations
+      weight: 806
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
       parent: opentelemetry_top_level
       weight: 9
     - name: Guides and Resources
-      url: opentelemetry/guide/
+      url: /opentelemetry/guide
       identifier: otel_guides
       parent: opentelemetry_top_level
       weight: 10
-    - name: Visualizing OTLP Histograms as Heatmaps
-      url: opentelemetry/guide/otlp_histogram_heatmaps/
-      identifier: otel_guides_heatmaps
+    - name: Produce Delta Temporality Metrics
+      url: /opentelemetry/guide/otlp_delta_temporality
       parent: otel_guides
       weight: 1001
-    - name: Migrate to OpenTelemetry Collector version 0.95.0+
-      url: opentelemetry/guide/migration/
-      identifier: otel_guides_migration
+    - name: Send Data from the OTel Demo
+      url: /opentelemetry/guide/otel_demo_to_datadog
       parent: otel_guides
       weight: 1002
-    - name: Producing Delta Temporality Metrics
-      url: opentelemetry/guide/otlp_delta_temporality/
-      identifier: otel_guides_delta_temporality
+    - name: Visualize Histograms as Heatmaps
+      url: /opentelemetry/guide/otlp_histogram_heatmaps
       parent: otel_guides
       weight: 1003
-    - name: Sending Data from OpenTelemetry Demo
-      url: /opentelemetry/guide/otel_demo_to_datadog/
+    - name: Migration Guides
+      url: /opentelemetry/guide/migrate/
+      identifier: otel_guides_migration
       parent: otel_guides
       weight: 1004
+    - name: Migrate to OTel Collector v0.95.0+
+      url: /opentelemetry/guide/migrate/collector_0_95_0
+      parent: otel_guides_migration
+      weight: 10041
+    - name: New Operation Name Mappings
+      url: /opentelemetry/guide/migrate/migrate_operation_names/
+      parent: otel_guides_migration
+      weight: 10042
+    - name: Reference
+      url: /opentelemetry/reference
+      identifier: otel_reference
+      parent: opentelemetry_top_level
+      weight: 11
+    - name: Terms and Concepts
+      url: /opentelemetry/reference/concepts
+      identifier: otel_concepts
+      parent: otel_reference
+      weight: 1101
+    - name: Trace Context Propagation
+      url: /opentelemetry/reference/trace_context_propagation
+      identifier: otel_propagation
+      parent: otel_reference
+      weight: 1102
+    - name: Trace IDs
+      url: /opentelemetry/reference/trace_ids
+      identifier: otel_trace_ids
+      parent: otel_reference
+      weight: 1103
+    - name: OTLP Metric Types
+      url: /opentelemetry/reference/otlp_metric_types
+      identifier: otel_otlp_metric_types
+      parent: otel_reference
+      weight: 1104
     - name: Developers
       url: developers/
       pre: dev-code
@@ -1027,6 +1105,21 @@ menu:
       identifier: coterm
       parent: essentials_heading
       weight: 120000
+    - name: Install
+      url: coterm/install
+      identifier: coterm_install
+      parent: coterm
+      weight: 1
+    - name: Using CoTerm
+      url: coterm/usage
+      identifier: coterm_usage
+      parent: coterm
+      weight: 2
+    - name: Configuration Rules
+      url: coterm/rules
+      identifier: coterm_rules
+      parent: coterm
+      weight: 3
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
@@ -1690,77 +1783,6 @@ menu:
       weight: 10
       parent: alerting
       identifier: alerting_guide
-    - name: Infrastructure
-      url: infrastructure/
-      identifier: infrastructure
-      pre: host-map
-      parent: platform_heading
-      weight: 70000
-    - name: Host and Container Maps
-      url: infrastructure/hostmap/
-      parent: infrastructure
-      weight: 1
-      identifier: infrastructure_host_map
-    - name: Infrastructure List
-      identifier: infrastructure_list
-      url: infrastructure/list/
-      parent: infrastructure
-      weight: 2
-    - name: Containers View
-      url: infrastructure/containers/
-      parent: infrastructure
-      identifier: infrastructure_livecontainers
-      weight: 3
-    - name: Configuration
-      url: infrastructure/containers/configuration
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_configuration
-      weight: 301
-    - name: Container Images View
-      url: infrastructure/containers/container_images
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_container_images
-      weight: 302
-    - name: Orchestrator Explorer
-      url: infrastructure/containers/orchestrator_explorer
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_explorer
-      weight: 303
-    - name: Kubernetes Resource Utilization
-      url: infrastructure/containers/kubernetes_resource_utilization
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_resource_utilization
-      weight: 304
-    - name: Amazon Elastic Container Explorer
-      url: infrastructure/containers/amazon_elastic_container_explorer
-      parent: infrastructure_livecontainers
-      identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
-      weight: 305
-    - name: Processes View
-      url: infrastructure/process/
-      parent: infrastructure
-      identifier: infrastructure_process
-      weight: 4
-    - name: Increase Process Retention
-      identifier: infrastructure_process_increase_process_retention
-      url: infrastructure/process/increase_process_retention/
-      parent: infrastructure_process
-      weight: 401
-    - name: Resource Catalog
-      url: infrastructure/resource_catalog/
-      parent: infrastructure
-      identifier: infrastructure_resource_catalog
-      weight: 5
-    - name: Cloud Resources Schema
-      url: infrastructure/resource_catalog/schema/
-      parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
-      weight: 501
-    - name: Governance
-      url: infrastructure/resource_catalog/governance/
-      parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_governance
-      weight: 502
     - name: Metrics
       url: metrics/
       identifier: metrics_top_level
@@ -2685,12 +2707,28 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 202
+    - name: Resource Catalog
+      url: infrastructure/resource_catalog/
+      pre: resource-catalog
+      parent: infrastructure_heading
+      identifier: infrastructure_resource_catalog
+      weight: 10000
+    - name: Cloud Resources Schema
+      url: infrastructure/resource_catalog/schema/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_schema
+      weight: 10001
+    - name: Governance
+      url: infrastructure/resource_catalog/governance/
+      parent: infrastructure_resource_catalog
+      identifier: infrastructure_resource_catalog_governance
+      weight: 10002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
       parent: infrastructure_heading
-      weight: 10000
+      weight: 20000
     - name: Setup
       url: universal_service_monitoring/setup/
       parent: usm_parent
@@ -2701,228 +2739,280 @@ menu:
       parent: usm_parent
       identifier: universal_service_monitoring_guides
       weight: 2
+    - name: Hosts
+      url: infrastructure/hostmap/
+      identifier: hosts
+      parent: infrastructure_heading
+      weight: 30000
+      pre: host-map
+    - name: Host List
+      identifier: infrastructure_list
+      url: infrastructure/list/
+      parent: hosts
+      weight: 1
     - name: Containers
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 20000
+      weight: 40000
       pre: container
+    - name: Monitoring Containers
+      url: infrastructure/containers/
+      parent: containers
+      identifier: infrastructure_livecontainers
+      weight: 1
+    - name: Configuration
+      url: infrastructure/containers/configuration
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_configuration
+      weight: 101
+    - name: Container Images View
+      url: infrastructure/containers/container_images
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_container_images
+      weight: 102
+    - name: Orchestrator Explorer
+      url: infrastructure/containers/orchestrator_explorer
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_explorer
+      weight: 103
+    - name: Kubernetes Resource Utilization
+      url: infrastructure/containers/kubernetes_resource_utilization
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_resource_utilization
+      weight: 104
+    - name: Amazon Elastic Container Explorer
+      url: infrastructure/containers/amazon_elastic_container_explorer
+      parent: infrastructure_livecontainers
+      identifier: infrastructure_livecontainers_amazon_elastic_container_explorer
+      weight: 105
     - name: Docker and other runtimes
       url: containers/docker/
       parent: containers
       identifier: containers_docker
-      weight: 1
+      weight: 2
     - name: APM
       url: containers/docker/apm/
       parent: containers_docker
       identifier: containers_docker_apm
-      weight: 101
+      weight: 201
     - name: Log collection
       url: containers/docker/log/
       parent: containers_docker
       identifier: containers_docker_log
-      weight: 102
+      weight: 202
     - name: Tag extraction
       url: containers/docker/tag/
       parent: containers_docker
       identifier: containers_docker_tag
-      weight: 103
+      weight: 203
     - name: Integrations
       url: containers/docker/integrations/
       parent: containers_docker
       identifier: containers_docker_integrations
-      weight: 104
+      weight: 204
     - name: Prometheus
       url: containers/docker/prometheus/
       parent: containers_docker
       identifier: containers_docker_prometheus
-      weight: 105
+      weight: 205
     - name: Data Collected
       url: containers/docker/data_collected/
       parent: containers_docker
       identifier: containers_docker_data_collected
-      weight: 106
+      weight: 206
     - name: Kubernetes
       url: containers/kubernetes/
       parent: containers
       identifier: containers_kubernetes
-      weight: 2
+      weight: 3
     - name: Installation
       url: containers/kubernetes/installation
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
-      weight: 201
+      weight: 301
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 202
+      weight: 302
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 203
+      weight: 303
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 204
+      weight: 304
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 205
+      weight: 305
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 206
+      weight: 306
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 207
+      weight: 307
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 208
+      weight: 308
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 209
+      weight: 309
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 210
+      weight: 310
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 211
+      weight: 311
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
       identifier: containers_cluster
-      weight: 3
+      weight: 4
     - name: Setup
       url: containers/cluster_agent/setup/
       parent: containers_cluster
       identifier: cluster_agent_setup
-      weight: 301
+      weight: 401
     - name: Commands & Options
       url: containers/cluster_agent/commands/
       identifier: cluster_agent_commands
       parent: containers_cluster
-      weight: 302
+      weight: 402
     - name: Cluster Checks
       identifier: containers_cluster_agent_clusterchecks
       url: containers/cluster_agent/clusterchecks/
       parent: containers_cluster
-      weight: 303
+      weight: 403
     - name: Endpoint Checks
       identifier: containers_cluster_agent_endpoint_checks
       url: containers/cluster_agent/endpointschecks/
       parent: containers_cluster
-      weight: 304
+      weight: 404
     - name: Admission Controller
       identifier: containers_cluster_agent_admission_controller
       url: containers/cluster_agent/admission_controller/
       parent: containers_cluster
-      weight: 305
+      weight: 405
     - name: Amazon ECS
       url: containers/amazon_ecs/
       parent: containers
       identifier: containers_amazon_ecs
-      weight: 4
+      weight: 5
     - name: APM
       url: containers/amazon_ecs/apm/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_apm
-      weight: 401
+      weight: 501
     - name: Log collection
       url: containers/amazon_ecs/logs/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_logs
-      weight: 402
+      weight: 502
     - name: Tag extraction
       url: containers/amazon_ecs/tags/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_tags
-      weight: 403
+      weight: 503
     - name: Data collected
       url: containers/amazon_ecs/data_collected/
       parent: containers_amazon_ecs
       identifier: containers_amazon_ecs_data_collected
-      weight: 404
+      weight: 504
     - name: AWS Fargate
       url: integrations/ecs_fargate/
       parent: containers
       identifier: ecs_fargate
-      weight: 5
+      weight: 6
     - name: Datadog Operator
       url: containers/datadog_operator
       identifier: containers_datadog_operator
       parent: containers
-      weight: 6
+      weight: 7
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 601
+      weight: 701
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 602
+      weight: 702
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 603
+      weight: 703
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
       identifier: containers_troubleshooting
-      weight: 7
+      weight: 8
     - name: Duplicate hosts
       url: containers/troubleshooting/duplicate_hosts
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_duplicate_hosts
-      weight: 701
+      weight: 801
     - name: Cluster Agent
       url: containers/troubleshooting/cluster-agent
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_agent
-      weight: 702
+      weight: 802
     - name: Cluster Checks
       url: containers/troubleshooting/cluster-and-endpoint-checks
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_cluster_and_endpoint_checks
-      weight: 703
+      weight: 803
     - name: HPA and Metrics Provider
       url: containers/troubleshooting/hpa
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_hpa
-      weight: 704
+      weight: 804
     - name: Admission Controller
       url: containers/troubleshooting/admission-controller
       parent: containers_troubleshooting
       identifier: containers_troubleshooting_admission_controller
-      weight: 705
+      weight: 805
     - name: Guides
       url: containers/guide
       parent: containers
       identifier: containers_guide
-      weight: 8
+      weight: 9
+    - name: Processes
+      url: infrastructure/process
+      identifier: process
+      pre: process
+      parent: infrastructure_heading
+      weight: 50000
+    - name: Increase Process Retention
+      identifier: infrastructure_process_increase_process_retention
+      url: infrastructure/process/increase_process_retention/
+      parent: process
+      weight: 401
     - name: Serverless
       url: serverless
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 30000
+      weight: 60000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3072,7 +3162,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 40000
+      weight: 70000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
@@ -3213,7 +3303,7 @@ menu:
       identifier: cloud_cost
       pre: cloud-cost-management
       parent: infrastructure_heading
-      weight: 50000
+      weight: 80000
     - name: AWS
       url: cloud_cost_management/aws
       parent: cloud_cost
@@ -5970,31 +6060,26 @@ menu:
       parent: csm_setup
       identifier: csm_setup_deployment_types
       weight: 100
-    - name: Enable Agentless Scanning
+    - name: Agentless Scanning
       url: security/cloud_security_management/setup/agentless_scanning
       parent: csm_setup
       identifier: csm_setup_agentless_scanning
       weight: 101
-    - name: Quick Start
-      url: security/cloud_security_management/setup/agentless_scanning/quick_start
+    - name: Compatibility
+      url: security/cloud_security_management/setup/agentless_scanning/compatibility
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_quick_start
+      identifier: csm_setup_agentless_scanning_compatibility
       weight: 10000
-    - name: CloudFormation
-      url: security/cloud_security_management/setup/agentless_scanning/cloudformation
+    - name: Deployment Methods
+      url: security/cloud_security_management/setup/agentless_scanning/deployment_methods
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_cloudformation
+      identifier: csm_agentless_deployment_methods
       weight: 10001
-    - name: Terraform
-      url: security/cloud_security_management/setup/agentless_scanning/terraform
+    - name: Enable Agentless Scanning
+      url: security/cloud_security_management/setup/agentless_scanning/enable
       parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_terraform
+      identifier: csm_setup_agentless_scanning_enable
       weight: 10002
-    - name: Azure Resource Manager
-      url: security/cloud_security_management/setup/agentless_scanning/azure_resource_manager
-      parent: csm_setup_agentless_scanning
-      identifier: csm_setup_agentless_scanning_azure_resource_manager
-      weight: 10003
     - name: Deploy the Agent
       url: security/cloud_security_management/setup/agent
       parent: csm_setup
@@ -6125,36 +6210,21 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
-    - name: Agentless Scanning
-      url: security/cloud_security_management/agentless_scanning
-      parent: csm
-      identifier: csm_agentless
-      weight: 7
-    - name: Compatibility Matrix
-      url: security/cloud_security_management/agentless_scanning/compatibility
-      parent: csm_agentless
-      identifier: csm_agentless_compatibility
-      weight: 101
-    - name: Deployment Methods
-      url: security/cloud_security_management/agentless_scanning/deployment_methods
-      parent: csm_agentless
-      identifier: csm_agentless_deployment_methods
-      weight: 102
     - name: IaC Scanning
       url: security/cloud_security_management/iac_scanning
       parent: csm
       identifier: csm_iac_scanning
-      weight: 8
+      weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
       parent: csm
       identifier: csm_default_rules
-      weight: 9
+      weight: 8
     - name: Review and Remediate
       url: security/cloud_security_management/review_remediate
       parent: csm
       identifier: csm_review_remediate
-      weight: 10
+      weight: 9
     - name: Mute Issues
       url: security/cloud_security_management/review_remediate/mute_issues
       parent: csm_review_remediate
@@ -6174,27 +6244,27 @@ menu:
       url: security/cloud_security_management/severity_scoring/
       parent: csm
       identifier: csm_severity_scoring
-      weight: 11
+      weight: 10
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
       identifier: csm_guides
-      weight: 12
+      weight: 11
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 13
+      weight: 12
     - name: Threats
       url: security/cloud_security_management/troubleshooting/threats/
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_threats
-      weight: 1101
+      weight: 1201
     - name: Vulnerabilities
       url: security/cloud_security_management/troubleshooting/vulnerabilities/
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
-      weight: 1102
+      weight: 1202
     - name: Application Security Management
       url: security/application_security/
       parent: security_platform_heading
@@ -7746,6 +7816,11 @@ menu:
       url: account_management/billing/product_allotments
       parent: account_management_billing
       weight: 5
+    - name: Containers
+      identifier: account_management_billing_containers
+      url: account_management/billing/containers
+      parent: account_management_billing
+      weight: 6
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

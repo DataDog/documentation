@@ -47,7 +47,7 @@ Use the data aggregated over time to identify trends and improve your deployment
 
 ## Ready to start?
 
-See [Deployment Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. See [Exploring CD Visibility Deployments][2] to understand how to query and visualize deployments.
+See [Deployment Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. See [Explore CD Visibility Deployments][2] to understand how to query and visualize deployments.
 
 ## Further reading
 
