@@ -168,7 +168,8 @@ export function initializeIntegrations() {
     }
 
     function updateData(filter, isSearch) {
-        const show = [];
+        const exactMatches = [];
+        const partialMatches = [];
         const hide = [];
         const filterWords = filter.split(/\s+/);
 
@@ -180,21 +181,34 @@ export function initializeIntegrations() {
                 if (!isSafari) {
                     int.classList.remove('dimmer');
                 }
-                show.push(item);
+                exactMatches.push(item);
             } else {
                 const name = item.name ? item.name.toLowerCase() : '';
                 const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
-                const matchesFilter = filterWords.some(word => 
+                // Check for exact matches first
+                const hasExactMatch = isSearch && (
+                    name === filter || 
+                    publicTitle === filter ||
+                    filterWords.some(word => name === word || publicTitle === word)
+                );
+                
+                // Then check for partial matches
+                const hasPartialMatch = filterWords.some(word => 
                     (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
                     (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
                 );
 
-                if (matchesFilter) {
+                if (hasExactMatch) {
                     if (!isSafari) {
                         int.classList.remove('dimmer');
                     }
-                    show.push(item);
+                    exactMatches.push(item);
+                } else if (hasPartialMatch) {
+                    if (!isSafari) {
+                        int.classList.remove('dimmer');
+                    }
+                    partialMatches.push(item);
                 } else {
                     if (!isSafari) {
                         int.classList.add('dimmer');
@@ -204,7 +218,9 @@ export function initializeIntegrations() {
             }
         }
 
-        const mixerItems = [].concat(show, hide);
+        // Combine exact matches first, then partial matches, then hidden items
+        const show = [...exactMatches, ...partialMatches];
+        const mixerItems = [...show, ...hide];
         mixer.dataset(mixerItems).then(function () {
             if (isSafari) {
                 for (let i = 0; i < window.integrations.length; i++) {
@@ -217,12 +233,20 @@ export function initializeIntegrations() {
                         const name = item.name ? item.name.toLowerCase() : '';
                         const publicTitle = item.public_title ? item.public_title.toLowerCase() : '';
 
-                        const matchesFilter = filterWords.some(word => 
+                        // Check for exact matches first
+                        const hasExactMatch = isSearch && (
+                            name === filter || 
+                            publicTitle === filter ||
+                            filterWords.some(word => name === word || publicTitle === word)
+                        );
+                        
+                        // Then check for partial matches
+                        const hasPartialMatch = filterWords.some(word => 
                             (isSearch && (name.includes(word) || publicTitle.includes(word))) ||
                             (!isSearch && item.tags.indexOf(word.substr(1)) !== -1)
                         );
 
-                        if (matchesFilter) {
+                        if (hasExactMatch || hasPartialMatch) {
                             int.classList.remove('dimmer');
                         } else {
                             int.classList.add('dimmer');
