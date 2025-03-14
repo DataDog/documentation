@@ -12,6 +12,10 @@ further_reading:
   text: "CoTerm Configuration Rules"
 ---
 
+## View all recorded terminal sessions
+
+Recordings are listed [here](https://app.datadoghq.com/terminal-streams) in the Datadog UI.
+
 ## CoTerm CLI command structure
 
 ```shell
@@ -24,7 +28,7 @@ Run `ddcoterm --help` for all options and commands.
 
 CoTerm records terminal sessions that you can play back and review in Datadog. For your security, sensitive data (such as passwords and API keys) are [automatically redacted][1]. Any processes launched in the terminal session are recorded as [events][2].
 
-### Launch a recorded terminal session
+### Launch and record an interactive terminal session
 To manually launch Datadog CoTerm and record the entirety of your terminal session:
 
 ```shell
@@ -75,7 +79,7 @@ process_config:
           end
    {{< /code-block >}}
 
-With this configuration, CoTerm intercepts any `kubectl scale` command without a `--context` flag. 
+With this configuration, CoTerm intercepts any `kubectl scale` command without a `--context` flag.
 
 {{< img src="coterm/linter-warning.png" alt="Command line interface. The user has run 'kubectl scale foo'. The output says 'Warning from CoTerm: No kubectl context specified (effective context: 'minikube'). It is recommended to always explicitly specify the context when running kubectl scale. Do you want to continue? (y/n)'" style="width:70%;" >}}
 
@@ -108,7 +112,7 @@ With this configuration, when you run a `kubectl scale --context prod` command, 
 To create an approval request manually, run:
 
 ```shell
-ddcoterm approve 
+ddcoterm approve
 ```
 
 #### Bypass approval
