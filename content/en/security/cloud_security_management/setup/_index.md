@@ -145,7 +145,7 @@ For information on disabling CSM, see the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_scanning/enable
 [2]: /security/cloud_security_management/agentless_scanning
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs

@@ -220,7 +220,7 @@ metadata:
 
 ## Visualize deployments in Datadog
 
-The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Explore CD Visibility Deployments][10].
 
 ## Troubleshooting
 

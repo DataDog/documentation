@@ -186,7 +186,7 @@ When configuring the GitHub application:
 1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
 2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
-To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
+To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that the **Datadog Features** table shows **Pull Request Information** meets all requirements.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/

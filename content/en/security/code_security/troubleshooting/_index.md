@@ -108,6 +108,8 @@ If diff-aware is not working with the Static Analyzer, ensure that:
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
+**Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
+
 ## Software Composition Analysis
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
@@ -228,6 +230,7 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
+[13]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/diff-aware.md
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup

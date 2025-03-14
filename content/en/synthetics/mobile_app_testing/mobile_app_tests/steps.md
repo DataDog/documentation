@@ -5,7 +5,7 @@ aliases:
 - /mobile_testing/mobile_app_tests/steps
 - /mobile_app_testing/mobile_app_tests/steps
 further_reading:
-- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/synthetics/mobile_app_testing/mobile_app_tests/advanced_options"

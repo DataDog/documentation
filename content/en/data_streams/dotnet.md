@@ -1,5 +1,9 @@
 ---
 title: Setup Data Streams Monitoring for .NET
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+    tag: 'Blog'
+    text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 ### Prerequisites
@@ -33,6 +37,14 @@ Data Streams Monitoring uses one [message attribute][2] to track a message's pat
 ### Monitoring SNS-to-SQS pipelines
 To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][10].
 
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html

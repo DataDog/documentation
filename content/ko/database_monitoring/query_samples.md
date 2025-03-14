@@ -4,7 +4,7 @@ further_reading:
 - link: /database_monitoring/
   tag: 설명서
   text: 데이터베이스 모니터링
-- link: /데이터 베이스_모니터링/데이터_수집됨/
+- link: /database_monitoring/data_collected/
   tag: 설명서
   text: 수집한 데이터
 - link: /database_monitoring/troubleshooting/
@@ -13,19 +13,13 @@ further_reading:
 title: 쿼리 샘플 탐색
 ---
 
-{{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
-{{< /site-region >}}
+[샘플 페이지][1]에서 주어진 시간 내에 어떤 쿼리가 실행되는지 확인할 수 있습니다. 각 실행을 쿼리 평균 성능 및 관련 쿼리와 비교할 수 있습니다.
 
-쿼리 샘플 보기는 주어진 시간에 실행되는 쿼리를 확인할 수 있도록 해줍니다. 각 대상을 쿼리 및 관련 쿼리의 평균 수행 능력과 비교합니다. 
-
-데이터베이스 모니터링에서 **[APM > Databases][1]**를 클릭한 다음 UI에서 **Query Samples** 탭을 선택해 쿼리 샘플 조회 화면으로 이동합니다.
-
-쿼리 샘플 페이지는 실행 쿼리와 최근 완료된 쿼리 시간의 스냅샷을 표시합니다. 시간의 스냅샷이기 때문에 _모든_쿼리를 표시하지 않지만 비율을 보여줄 수 있습니다.
+샘플 페이지는 실행 중이거나 최근 완료된 쿼리의 특정 시점 스냅샷을 표시합니다. 일정 시점의 스냅샷이기 때문에 _모든_ 쿼리를 나타내지는 않지만 비율을 표시할 수 있습니다.
 
 ## 검색 및 필터링
 
-탐색하려는 데이터베이스를 선택할 수 있는 쿼리 메트릭 페이지와 달리 쿼리 샘플 페이지는 지원되는 모든 데이터베이스 제품의 쿼리를 표시합니다. `source` 패싯에서 필터링하여 특정 데이터베이스(Postgres 또는 MySQL)에 대한 데이터를 확인합니다.
+탐색하려는 데이터베이스를 선택할 수 있는 쿼리 메트릭 페이지와 달리 샘플 페이지는 지원되는 모든 데이터베이스 제품의 쿼리를 표시합니다. `source` 패싯에서 필터링하여 특정 데이터베이스(Postgres 또는 MySQL)에 대한 데이터를 확인합니다.
 
 검색 필드에 태그를 입력하여 쿼리 샘플 목록을 필터링하거나 왼쪽에 나열된 패싯을 사용합니다. 패싯은 다음을 포함합니다.
 
@@ -68,7 +62,7 @@ title: 쿼리 샘플 탐색
 
 실행 계획 섹션은 전체 시간 프레임의 모든 수집된 스냅샷에 대한 현재 샘플_및_평균/p90 기간 및 비용 통계를 표시합니다.
 
-실행 계획은 또한 계획에서 각 노드(단계)에 대한 측정치를 표시합니다. 측정치에는 시작 비용, 총 비용, 계획 행 및 행 너비가 포함됩니다. 열 머리글을 마우스로 가리켜 각 측정치에 대한 설명을 확인하세요.
+실행 계획은 또한 계획에서 각 노드(단계)에 대한 측정치를 표시합니다. 측정치에는 시작 비용, 총 비용, 계획 행, 계획 너비가 포함됩니다. 열 머리글에 마우스를 올려 각 측정치에 대한 설명을 확인하세요.
 
 {{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
 
@@ -94,5 +88,5 @@ title: 쿼리 샘플 탐색
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/databases
+[1]: https://app.datadoghq.com/databases/samples
 [2]: /ko/database_monitoring/data_collected/#which-queries-are-tracked

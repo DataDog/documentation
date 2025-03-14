@@ -5,7 +5,7 @@ aliases:
 - /mobile_testing/settings
 - /mobile_app_testing/settings
 further_reading:
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create a mobile test"
 - link: "/continuous_testing/cicd_integrations"

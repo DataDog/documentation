@@ -33,9 +33,9 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
 - **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity**: Metrics not queried in Datadog or by the API in the past 30, 60, or 90 days
-- **Related Assets** (Preview): Metrics that are used on assets (dashboards, monitors, notebooks, SLOs)
+- **Related Assets**: Metrics that are being used on dashboards, notebooks, monitors, and SLOs
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
-- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12].
+- **Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans). To learn more about the different metric origin types, see [Metric origin definitions][12]
 
 ### Definitions
 
@@ -245,11 +245,11 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [14]: /security/cloud_security_management/
 [15]: /database_monitoring/
 [16]: /data_streams/
-[17]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter/?tab=onahost
+[17]: /opentelemetry/setup/collector_exporter/
 [18]: /opentelemetry/collector_exporter/
 [19]: /network_monitoring/cloud_network_monitoring/
 [20]: /observability_pipelines/
-[21]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[21]: /opentelemetry/setup/otlp_ingest_in_the_agent/
 [22]: /integrations/process/
 [23]: /monitors/types/real_user_monitoring/
 [24]: /serverless/

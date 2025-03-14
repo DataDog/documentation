@@ -7,6 +7,9 @@ further_reading:
     - link: '/tracing/software_catalog/'
       tag: 'Documentation'
       text: 'Software Catalog'
+    - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+      tag: 'Blog'
+      text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 ### Prerequisites
@@ -34,7 +37,7 @@ environment:
 ```
 
 ### Monitoring SQS Pipelines
-Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.
+Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ### Monitoring Kinesis pipelines
 There are no message attributes in Kinesis to propagate context and track a message's full path through a Kinesis stream. As a result, Data Streams Monitoring's end-to-end latency metrics are approximated based on summing latency on segments of a message's path, from the producing service through a Kinesis Stream, to a consumer service. Throughput metrics are based on segments from the producing service through a Kinesis Stream, to the consumer service. The full topology of data streams can still be visualized through instrumenting services.
@@ -45,7 +48,12 @@ To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you mu
 ### Manual instrumentation
 Data Streams Monitoring propagates context through message headers. If you are using a message queue technology that is not supported by DSM, a technology without headers (such as Kinesis), or Lambdas, use [manual instrumentation to set up DSM][6].
 
-## Further Reading
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

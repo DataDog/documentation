@@ -77,7 +77,7 @@ But because your logs are not all and equally valuable, exclusion filters contro
 To add an exclusion filter:
 
 1. Navigate to [Log Indexes][11].
-2. Expand the pipeline for which you want to add an exclusion filter. 
+2. Expand the index for which you want to add an exclusion filter. 
 3. Click **Add an Exclusion Filter**.
 
 Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:
