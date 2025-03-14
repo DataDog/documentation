@@ -159,7 +159,7 @@ For containerized environments, it is recommended to follow the [unified service
 
 #### Environment variables
 
-After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file. If you specify multiple tags, separate each one with a comma and space.
+After installing the containerized Datadog Agent, you can set your host tags using the environment variable `DD_TAGS` in your Agents main configuration file. If you specify multiple tags, separate each one with a space.
 
 Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad, and Rancher][6]. To extract even more tags, use the following options:
 
@@ -216,7 +216,7 @@ services:
     environment:
       - DD_API_KEY= "<DATADOG_API_KEY>"
       - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
-      - DD_TAGS="key1:value1, key2:value2, key3:value3"
+      - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
       restart_policy:
@@ -242,6 +242,10 @@ Either define the variables in your custom `datadog.yaml`, or set them as JSON m
 There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
 
 Depending on the cardinality, there is a different set of out-of-the box tags for [Kubernetes and OpenShift][7], and for [Docker, Rancher, and Mesos][8]. For ECS and Fargate, setting the variable to `orchestrator` adds the `task_arn` tag.
+
+**Notes**:
+- Sending container tags for DogStatsD metrics may create more metrics (one per container instead of one per host). This may impact your custom metrics billing.
+- In metrics, timestamps are rounded to the nearest second. If any points have the same timestamp, the latest point overwrites the previous ones. Setting higher cardinality may help prevent this issue.
 
 #### Traces
 

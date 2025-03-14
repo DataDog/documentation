@@ -19,17 +19,17 @@ assets:
     source_type_id: 10068
     source_type_name: Active Directory
   monitors:
-    '[Active Directory] Anomalous number of sessions for connected LDAP clients for host: {{host.name}}': assets/monitors/ldap_client_sessions.json
-    '[Active Directory] Anomalous number of successful LDAP bindings for host: {{host.name}}': assets/monitors/ldap_binding_successful.json
-    '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
+    LDAP binding duration is high: assets/monitors/ldap_binding.json
+    Number of LDAP bindings is anomalous: assets/monitors/ldap_binding_successful.json
+    Number of sessions for LDAP clients is anomalous: assets/monitors/ldap_client_sessions.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
-custom_kind: integration
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
 display_on_public_website: true
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 2.1.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: active_directory
@@ -49,7 +49,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Windows
-  - Category::OS とシステム
+  - Category::Windows
   - Offering::Integration
   configuration: README.md#Setup
   description: Microsoft Active Directory のメトリクスを収集してグラフ化

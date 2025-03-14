@@ -23,43 +23,43 @@ For example, the CSM Misconfigurations rule ['Block Public Access' feature is en
 
 **Note**: Muting a misconfiguration removes it from the calculation of your posture score.
 
-{{< img src="security/csm/mute_issue.png" alt="The Mute Issue dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
+{{< img src="security/csm/mute_issue-2.png" alt="The Mute Issue dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. On the misconfiguration, issue, or identity risk side panel, select one or more resources.
-2. Select **Actions** > **Mute for...**.
-3. Select a reason for the mute, for example, a fix is pending, it's a false positive, or it's an accepted risk.
+1. On the misconfiguration, vulnerability, or identity risk side panel, find the triage status dropdown for the resource.
+   - If the side panel contains a single resource, under **Next Steps**, the dropdown is under **Triage**.
+   - If the side panel contains a list of aggregated resources, the dropdown is in the **Status** column for each resource. Alternatively, you can select one or more resources, then click the **Set State** dropdown that appears, so you can mute your entire selection at once.
+2. Open the dropdown with the current triage status and click **Muted**. The **Mute issue** window opens.
+3. Select a reason for the mute; for example, a fix is pending, it's a false positive, or it's an accepted risk.
 4. Enter an optional **Description**.
 5. Select the duration of the mute.
-6. Click **Mute**.
+6. Click **Mute**. The **Mute issue** window closes.
 
-### Unmute an issue
+## Unmute an issue
 
 Muted issues automatically unmute after the specified mute duration expires. You can also manually unmute an issue.
 
-1. On the misconfiguration, issue, or identity risk side panel, select the resources with the muted issue.
-2. Select **Actions** > **Unmute**.
-3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
-4. Enter an optional **Description**.
-5. Click **Unmute**.
+1. On the misconfiguration, vulnerability, or identity risk side panel, find the triage status dropdown for the resource.
+   - If the side panel contains a single resource, under **Next Steps**, the dropdown is under **Triage**.
+   - If the side panel contains a list of aggregated resources, the dropdown is in the **Status** column for each resource. Alternatively, you can select one or more resources, then click the **Set State** dropdown that appears, so you can unmute your entire selection at once.
+2. Click **Muted** to open the dropdown, then select a new triage status. The triage status updates immediately for the selected resources.
 
-### Audit your muted issues
+## Audit your muted issues
 
 To view your organization's muted issues:
 
-- Sort by the **Muted** column on the Security Inbox and Misconfigurations issue explorer.
-- Filter the Security Inbox, Misconfigurations, and Identity Risks issue explorer using the **Muted** facet.
+1. By default, all issue explorers hide muted issues. To view muted issues on the Misconfigurations and Identity Risks issue explorers, remove the `@workflow.triage.status:(open OR in-progress)` filter from the search bar.
+1. Depending on the issue explorer you're using, sort or filter the issues:
+   - On the Misconfigurations issue explorer, sort by the **Muted** column.
+   - On the Misconfigurations or Identity Risks issue explorers, filter issues using the **Muted** facet.
+   - On the Vulnerabilities issue explorer, click the **Muted** tab.
 
 To audit the mute history for a misconfiguration:
 
 1. Open the misconfiguration side panel.
 2. Select the resource with the muted misconfiguration.
-3. On the **Overview** tab, use the **Resource evaluation over time** timeline to view when the misconfiguration was muted or unmuted over a specified period of time (up to six months).
+3. Click the **Timeline** tab to view a chronological history of the misconfiguration. Hover over a mute or unmute action to view additional details, such as the reason for the mute, how long the mute is intended to last, and who muted it.
 
-{{< img src="security/csm/muted_finding_evaluation_over_time.png" alt="The resource evaluation over time timeline shows the history of the misconfiguration including periods when it was muted" style="width:90%;">}}
-
-4. Click the **Timeline** tab to view a chronological history of the misconfiguration. Hover over a mute or unmute action to view additional details, such as the reason for the mute, how long the mute is intended to last, and who muted it.
-
-{{< img src="security/csm/muted_finding_timeline.png" alt="The Timeline tab shows a chronological history of the misconfiguration, including details on when a misconfiguration was muted" style="width:90%;">}}
+{{< img src="security/csm/muted_finding_timeline-2.png" alt="The Timeline tab shows a chronological history of the misconfiguration, including details on when a misconfiguration was muted" style="width:90%;">}}
 
 ## Further reading
 

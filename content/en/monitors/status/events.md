@@ -20,10 +20,10 @@ For each event, you can access quick actions and view related assets, like dashb
 
 To explore each individual event for more information, including associated tags and actions:
 
-1. From the monitor status page, scroll down to the **Event timeline.**   
-2. Click on an event in the timeline to view event details.  
-   
-Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations. 
+1. From the monitor status page, scroll down to the **Event timeline.**
+2. Click on an event in the timeline to view event details.
+
+Use the event details to understand monitor alerts and identify root causes. This information supports responder workflows and helps you stay informed about ongoing situations.
 
 ### Take action to remediate
 
@@ -39,7 +39,7 @@ With Quick Actions, you can take action without leaving the status page. Respond
 
 ### Resolve
 
-You can resolve a monitor alert from the status page [Header][10] or Event details sections. Resolving from the Event details section only affects the group related to the selected event, while resolving from the Header resolves all groups in the alert and sets the monitor status to `OK` (all groups).
+You can resolve a monitor alert from the status page [Header][5] or Event details sections. Resolving from the Event details section only affects the group related to the selected event, while resolving from the Header resolves all groups in the alert and sets the monitor status to `OK` (all groups).
 
 If a monitor is alerting because its current data corresponds to the `ALERT` state, using `resolve` will cause the state to temporarily switch from `ALERT` to `OK`, and then back to `ALERT`. Therefore, `resolve` is not meant for acknowledging the alert or instructing Datadog to ignore it.
 
@@ -53,9 +53,10 @@ Manually resolving a monitor is useful when data is reported intermittently. For
 
 For each event, access troubleshooting information to help responders quickly understand the context of the alert.
 
-| Troubleshooting component     | Description    | 
-| ---  | ----------- | 
+| Troubleshooting component     | Description    |
+| ---  | ----------- |
 | Dependency Map | When a service tag is available, either as a monitor tag or in the group, you can access a dependency map showing the status of your dependencies. |
+| Change Tracking | When a service tag is available, either as a monitor tag or in the group, you can access a list of relevant changes to your service and its dependencies. For details on specific types of supported changes and setup requirements, see the [Change Tracking][6] documentation. |
 
 
 ## Further reading
@@ -66,4 +67,5 @@ For each event, access troubleshooting information to help responders quickly un
 [2]: /service_management/incident_management/
 [3]: /service_management/case_management/
 [4]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
-[10]: /monitors/status/status_page/#header
+[5]: /monitors/status/status_page/#header
+[6]: /change_tracking

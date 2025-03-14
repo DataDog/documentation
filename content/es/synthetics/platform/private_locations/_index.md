@@ -18,6 +18,10 @@ further_reading:
 - link: /synthetics/api_tests
   tag: Documentación
   text: Configurar un test de API
+- link: https://www.datadoghq.com/architecture/protect-sensitive-data-with-synthetics-private-location-runners/
+  tag: Centro de arquitectura
+  text: Protege los datos confidenciales con los ejecutores de localización privada
+    de Synthetics
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
   tag: Sitio externo
   text: Crear y gestionar localizaciones privadas Synthetic con Terraform
@@ -34,7 +38,7 @@ Las localizaciones privadas permiten **monitorizar aplicaciones internas o cualq
 
 {{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Diagrama de arquitectura que muestra cómo funciona una localización privada durante la monitorización Synthetic" style="width:100%;">}}
 
-Las localizaciones privadas vienen como contenedores Docker o servicios Windows que puedes instalar en tu red privada. Después de crear e instalar una localización privada, puedes asignarle [tests Synthetic][2], como a cualquier localización gestionada.
+Las localizaciones privadas vienen como contenedores Docker o servicios de Windows que puedes instalar en tu red privada. Después de crear e instalar una localización privada, puedes asignarle [tests Synthetic][2], como a cualquier localización gestionada.
 
 El worker de tu localización privada extrae tus configuraciones de test de los servidores de Datadog utilizando HTTPS, ejecuta el test de forma programada o bajo demanda y devuelve los resultados a los servidores de Datadog. A continuación, puedes ver los resultados de tus tests de localizaciones privadas exactamente de la misma forma que verías los tests que se ejecutan desde localizaciones gestionadas:
 
@@ -72,17 +76,17 @@ Las localizaciones privadas son servicios de Windows que puedes instalar en cual
 
 **\*** **El uso y el funcionamiento de este software se rigen por el Acuerdo de licencia del usuario final, disponible [aquí][102]**.
 
-Los requisitos de esta máquina se enumeran en la tabla siguiente. Los scripts de PowerShell deben estar habilitados en el equipo en el que instalas el worker de localización privada.
+Los requisitos de esta máquina se enumeran en la tabla siguiente. Los scripts de PowerShell deben estar habilitados en el equipo en el que instalas el worker de la localización privada.
 
 | Sistema | Requisitos |
 |---|---|
-| Sistema operativo | Windows Server 2016, Windows Server 2019 o Windows 10. |
+| Sistema operativo | Windows Server 2022, Windows Server 2019, Windows Server 2016 o Windows 10. |
 | RAM | 4GB mínimo. 8GB recomendado. |
 | CPU | Procesador Intel o AMD compatible con 64 bits. Procesador de 2,8 GHz o superior recomendado. |
 
 **Nota**: Para que las localizaciones privadas de Windows ejecuten tests de navegador, los navegadores (por ejemplo, Chrome, Edge o Firefox) deben estar instalados en el ordenador Windows.
 
-Antes de utilizar el instalador MSI, debes instalar .NET versión 4.7.2 o posterior en tu ordenador.
+Debes instalar .NET versión 4.7.2 o posterior en tu ordenador antes de utilizar el instalador de MSI.
 
 {{< site-region region="gov" >}}
 
@@ -90,7 +94,7 @@ Antes de utilizar el instalador MSI, debes instalar .NET versión 4.7.2 o poster
 
 {{< /site-region >}}
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://www.datadoghq.com/legal/eula/
 
 {{% /tab %}}
@@ -176,11 +180,11 @@ Ve a [**Monitorización Synthetic** > **Parámetros** > **Localizaciones privada
 Rellena la información de tu localización privada:
 
 1. Especifica el **nombre** y la **descripción** de tu localización privada.
-2. Añade cualquier **Etiqueta** que quieras asociar a tu localización privada.
+2. Añade cualquier **Etiqueta** (tag) que quieras asociar a tu localización privada.
 3. Selecciona una de tus **claves de API** actuales. Al seleccionar una clave de API, se posibilita la comunicación entre tu localización privada y Datadog. Si aún no tienes una clave de API, haz clic en **Generate API key** (Generar clave de API) para crear una en la página correspondiente. Sólo son obligatorios los campos `Name` y `API key`.
 4. Configura el acceso para tu localización privada y haz clic en **Save Location and Generate Configuration File** (Guardar localización y generar archivo de configuración). Datadog creará tu localización privada y generará el archivo de configuración asociado.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Añadir información a la localización privada" style="width:85%;">}} 
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Añadir detalles a una localización privada" style="width:85%;">}}
 
 ### Configuración de tu localización privada
 
@@ -421,6 +425,8 @@ Crea una nueva definición de tarea de EC2 que coincida con lo siguiente. Sustit
 
 {{% tab "Fargate" %}}
 
+Si deseas almacenar la configuración en AWS Secret Manager, consulta la [pestaña Fargate con AWS Secret Manager](./?tab=fargatewithawssecretmanager#install-your-private-location).
+
 Crea una nueva definición de tarea de Fargate que coincida con lo siguiente. Sustituye cada parámetro con el valor correspondiente de tu archivo de configuración de localización privada generado anteriormente:
 
 ```yaml
@@ -437,6 +443,93 @@ Crea una nueva definición de tarea de Fargate que coincida con lo siguiente. Su
                 "--privateKey='-----BEGIN RSA PRIVATE KEY-----XXXXXXXX-----END RSA PRIVATE KEY-----'",
                 "--publicKey.pem='-----BEGIN PUBLIC KEY-----XXXXXXXX-----END PUBLIC KEY-----'",
                 "--publicKey.fingerprint='...'"
+            ],
+            ...
+            "image": "datadog/synthetics-private-location-worker:latest",
+            ...
+        }
+    ],
+    ...
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    ...
+}
+```
+
+**Nota:** Como la opción de firewall de localización privada no es compatible con AWS Fargate, no es posible configurar el parámetro `enableDefaultBlockedIpRanges` como `true`.
+
+{{% /tab %}}
+
+{{% tab "Fargate con AWS Secret Manager" %}}
+
+Crea un secreto en AWS Secret Manager para almacenar toda o parte de la configuración de localización privada generada anteriormente. Ten en cuenta que la `publicKey` no puede guardarse tal cual en el archivo de configuración. Por ejemplo:
+
+```json
+{
+    "datadogApiKey": "...",
+    "id": "...",
+    "site": "...",
+    "accessKey": "...",
+    "secretAccessKey": "...",
+    "privateKey": "...",
+    "pem": "...",
+    "fingerprint": "..."
+}
+```
+
+Se requieren permisos para permitir que la definición de tarea y la instancia de AWS Fargate lean en Secret Manager. Consulta [Especificación de datos confidenciales mediante secretos de Secret Manager en Amazon ECS][25] para obtener más información.
+
+Crea una definición de tarea de Fargate que coincida con el siguiente ejemplo, sustituyendo los valores de la lista de secretos por el ARN del secreto que creaste en el paso anterior. Por ejemplo: `arn:aws:secretsmanager:<region>:<account-id>:secret:<secret_arn>:<secret_key>::`.
+
+Si no guardaste toda la configuración en Secret Manager, todavía puedes pasar el valor como argumentos de cadena codificados, consulta la [pestaña de Fargate]./?tab=fargate#install-your-private-location) y haz una mezcla.
+
+```yaml
+{
+    ...
+    "containerDefinitions": [
+        {
+            "entryPoint": [
+                "/bin/bash",
+                "-c"
+            ],
+            "command": [
+                "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
+            ],
+            "secret": [
+              {
+                "name": "DATADOG_ACCESS_KEY",
+                "valueFrom": "..."
+              },
+              {
+                "name": "DATADOG_API_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "fingerprint",
+                "valueFrom": "...",
+              },
+              {
+                "name": "locationID",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PUBLIC_KEY_PEM",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_PRIVATE_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SECRET_ACCESS_KEY",
+                "valueFrom": "...",
+              },
+              {
+                "name": "DATADOG_SITE",
+                "valueFrom": "...",
+              }
             ],
             ...
             "image": "datadog/synthetics-private-location-worker:latest",
@@ -510,19 +603,19 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
 {{% /tab %}}
 {{% tab "Windows vía GUI" %}}
 
-1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
+1. Descarga el archivo [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi`][101] y ejecútalo desde la máquina en la que deseas instalar la localización privada.
 1. Haz clic en **Next** (Siguiente) en la página de bienvenida, lee el EULA y acepta los términos y condiciones. Luego, haz clic en **Next** (Siguiente).
 1. Modifica dónde se instalará la aplicación o deja la configuración predeterminada. Haz clic en **Next** (Siguiente).
 1. Para configurar tu localización Windows privada, puedes:
-   - Pegar e introducir una configuración JSON para tu worker de localización privada Synthetics de Datadog. Este archivo es generado por Datadog cuando [creas una localización privada][102].
-   - Busca o escribe una ruta de acceso a un archivo que contenga una configuración JSON para tu worker de localización privada Synthetics de Datadog.
+   - Pegar e introducir una configuración JSON para tu worker de la localización privada Synthetics de Datadog. Este archivo es generado por Datadog cuando [creas una localización privada][102].
+   - Busca o escribe una ruta de acceso a un archivo que contenga una configuración JSON para tu worker de la localización privada Synthetics de Datadog.
    - Una vez finalizada la instalación, puedes dejarla en blanco y ejecutar `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` en la línea de comandos Windows.
 
-   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Asistente del worker de localización privada Synthetics, instalador MSI. La opción 'Pegar en una configuración JSON' está seleccionada. Se muestra un campo de texto para esta configuración JSON." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Asistente del worker de la localización privada Synthetics, instalador MSI. La opción 'Pegar en una configuración JSON' está seleccionada. Se muestra un campo de texto para esta configuración JSON." style="width:80%;" >}}
 
 1. Puedes aplicar las siguientes opciones de configuración:
 
-   {{< img src="synthetics/private_locations/settings.png" alt="Asistente del worker de localización privada Synthetics, instalador MSI. Se muestran los parámetros de firewalls y logs." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/settings.png" alt="Asistente del worker de la localización privada Synthetics, instalador MSI. Se muestran los parámetros de firewalls y logs." style="width:80%;" >}}
 
    Aplica las reglas de firewall que necesita este programa a Windows Firewall
    : Permite que el instalador aplique reglas de firewall durante la instalación y las elimine durante la desinstalación.
@@ -531,39 +624,39 @@ Como Datadog ya se integra con Kubernetes y AWS, está preparado para monitoriza
    : Configura reglas de bloqueo para Chrome, Firefox y Edge (si están instalados) y añade reglas para bloquear rangos de direcciones IP reservadas salientes en Windows Firewall.
 
    Habilita el registro de archivos
-   : Permite que el worker de localización privada Synthetics registre archivos en el directorio de instalación.
+   : Permite que el worker de la localización privada Synthetics registre archivos en el directorio de instalación.
 
    Días de rotación de logs
    : Especifica cuántos días conservar logs antes de eliminarlos del sistema local.
 
    Verbosidad del registro
-   : Especifica la verbosidad de la consola y el registro de archivos para el el worker de localización privada Synthetics.
+   : Especifica la verbosidad de la consola y el registro de archivos para el el worker de la localización privada Synthetics.
 
-1. Haz clic en **Next** (Siguiente) y en **Install** (Instalar) para iniciar el proceso de instalación.
+1. Haz clic en **Next** (Siguiente) e **Install** (Instalar) para iniciar el proceso de instalación.
 
 Una vez completado el proceso, haz clic en **Finish** (Finalizar) en la página de finalización de la instalación.
 
-<div class="alert alert-warning">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio para iniciar el worker de localización privada Synthetics.</div>
+<div class="alert alert-warning">Si introdujiste tu configuración JSON, el servicio de Windows comienza a ejecutarse utilizando esa configuración. Si no introdujiste tu configuración JSON, ejecuta <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> desde un símbolo del sistema o utilice el acceso directo del <code>menú de inicio</code> para iniciar el worker de la localización privada Synthetics.</div>
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
 {{% /tab %}}
 {{% tab "Windows vía CLI" %}}
 
-1. Descarga el archivo [`datadog-synthetics-worker-1.49.0.amd64.msi` ][101] y ejecútalo desde la máquina en la que quieres instalar la localización privada. 
+1. Descarga el archivo [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi`][101] y ejecútalo desde la máquina en la que deseas instalar la localización privada.
 2. Ejecuta uno de los siguientes comandos dentro del directorio en el que descargaste el instalador.
 
    - En un terminal PowerShell:
 
      ```powershell
-     Start-Process msiexec "/i datadog-synthetics-worker-1.49.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     Start-Process msiexec "/i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
 
    - O en un terminal de comandos:
 
      ```cmd
-     msiexec /i datadog-synthetics-worker-1.49.0.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
 Se pueden añadir parámetros adicionales:
@@ -573,11 +666,11 @@ Se pueden añadir parámetros adicionales:
 | APPLYDEFAULTFIREWALLRULES | Aplica las reglas de firewall necesarias para el programa. | 1 | N/A | 0: Deshabilitado<br>1: Habilitado |
 | APPLYFIREWALLDEFAULTBLOCKRULES | Bloquea las direcciones IP reservadas para cada navegador que tengas instalado (Chrome, Edge y Firefox). El bloqueo de conexiones loopback no es posible en Windows Firewall. | 0 | N/A | 0: Deshabilitado<br>1: Habilitado |
 | LOGGING_ENABLED | Cuando se habilita, se configura el registro de archivos. Estos logs se almacenan en el directorio de instalación en la carpeta de logs. | 0 | `--enableFileLogging` | 0: Deshabilitado<br>1: Habilitado |
-| LOGGING_VERBOSITY | Configura la verbosidad del registro para el programa. Esto afecta a la consola y a los logs de archivo. | Esto afecta a la consola y a los logs de archivo. | `-vvv` | `-v`: Error<br>`-vvv`: Advertencia`-vvvv`: Información`vvvv`: Depurar |
+| LOGGING_VERBOSITY | Configura la verbosidad del registro para el programa. Esto afecta a la consola y a los logs de archivo. | Esto afecta a la consola y a los logs de archivo. | `-vvv` | `-v`: Error<br>`-vv`: Advertencia<br>`-vvv`: Información<br>`vvvv`: Depurar |
 | LOGGING_MAXDAYS | Número de días para conservar logs de archivo en el sistema antes de eliminarlos. Puede ser cualquier número cuando se ejecuta una instalación desatendida. | 7 | `--logFileMaxDays` | Entero |
-| WORKERCONFIG_FILEPATH | Debe cambiarse por la ruta a tu archivo de configuración JSON del worker de localización privada Synthetics. Escriba esta ruta entre comillas, si la ruta contiene espacios. | <None> | `--config` | Cadena |
+| WORKERCONFIG_FILEPATH | Debe cambiarse por la ruta a tu archivo de configuración JSON del worker de la localización privada Synthetics. Escriba esta ruta entre comillas, si la ruta contiene espacios. | <None> | `--config` | Cadena |
 
-[101]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.49.0.amd64.msi
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -818,14 +911,14 @@ Para actualizar una localización privada existente, haga clic en el icono del *
 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="Acceder al flujo (flow) de trabajo de una localización privada" style="width:90%;" >}}
 
-Luego, ejecuta el [comando de configuración basado en tu entorno](#install-your-private-location)
-para obtener la última versión de la imagen de la localización privada.
+A continuación, ejecuta el [comando de configuración basado en tu entorno](#install-your-private-location
+) para obtener la última versión de imagen de la localización privada.
 
-**Nota**: Si estás utilizando `docker run` para iniciar la imagen de tu localización privada y ya has instalado la imagen de la localización privada utilizando la etiqueta (tag) `latest`, asegúrate de añadir `--pull=always` al comando `docker run` para asegurarte de que se extraiga la última versión, en lugar de depender de la versión en caché de la imagen que pueda existir localmente con la misma etiqueta `latest`.
+**Nota**: Si estás utilizando `docker run` para iniciar la imagen de tu localización privada y ya has instalado la imagen de la localización privada utilizando la etiqueta `latest`, asegúrate de añadir `--pull=always` al comando `docker run` para asegurarte de que se extraiga la última versión, en lugar de depender de la versión en caché de la imagen que pueda existir localmente con la misma etiqueta `latest`.
 
 ### Realizar un test de tu endpoint interno
 
-Una vez que al menos un worker de localización privada comienza a informar a Datadog, el estado de la localización privada aparece en verde.
+Una vez que al menos un worker de la localización privada comienza a informar a Datadog, el estado de la localización privada aparece en verde.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Localización privada informando" style="width:90%;">}}
 
@@ -871,7 +964,28 @@ Los usuarios que tienen el [rol de administrador de Datadog y el rol estándar d
 
 Si utilizas la [función de rol personalizado][21], añade tu usuario a un rol personalizado que incluya los permisos `synthetics_private_location_read` y `synthetics_private_location_write`.
 
-## Referencias adicionales
+## Restringir el acceso
+
+Utiliza el [control de acceso granular][24] para limitar quién tiene acceso a tu test en función de roles, equipos o usuarios individuales:
+
+1. Abre la sección de permisos del formulario.
+2. Haz clic en **Edit Access** (Editar acceso).
+  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de Localizaciones privadas" style="width:100%;" >}}
+3. Haz clic en **Restrict Access** (Restringir el acceso).
+4. Selecciona equipos, roles o usuarios.
+5. Haz clic en **Add** (Añadir).
+6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
+7. Haz clic en **Done** (Listo).
+
+<div class="alert alert-info"><strong>Nota</strong>: Puedes ver los resultados de una localización privada incluso sin tener acceso a esa localización privada.</div>
+
+| Nivel de acceso | Ver instrucciones de PL | Ver métricas de PL | Utilizar PL en el test | Editar la configuración de PL  |
+| ------------ | ---------------------| --------------- | -------------- | ---------------------- |
+| Sin acceso    |                      |                 |                |                        |
+| Visor       | {{< X >}}            | {{< X >}}       | {{< X >}}      |                        |
+| Editor       | {{< X >}}            | {{< X >}}       | {{< X >}}      | {{< X >}}              |
+
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -895,3 +1009,5 @@ Si utilizas la [función de rol personalizado][21], añade tu usuario a un rol p
 [21]: /es/account_management/rbac#custom-roles
 [22]: https://app.datadoghq.com/synthetics/settings/private-locations
 [23]: /es/continuous_testing/cicd_integrations/configuration
+[24]: /es/account_management/rbac/granular_access
+[25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html

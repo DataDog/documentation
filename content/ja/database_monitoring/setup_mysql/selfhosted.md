@@ -20,6 +20,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 サポートされている MySQL バージョン
 : 5.6、5.7、または 8.0+
 
+対応している MariaDB バージョン: 10.5, 10.6, 10.11, 11.1 <br/><br/>
+MariaDB の Database Monitoring は、[既知の制限事項][13]付きでサポートされています。
+
 サポート対象の Agent バージョン
 : 7.36.1+
 
@@ -38,29 +41,28 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 クエリのメトリクス、サンプル、および実行計画を収集するには、[MySQL パフォーマンススキーマ][3]を有効にし、以下の[パフォーマンススキーマオプション][4]をコマンドラインまたはコンフィギュレーションファイル (例: `mysql.conf`) で構成します。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| パラメーター | 値 | 説明|
-| --- | --- | --- |
-| `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。|
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
-| `performance-schema-consumer-events-statements-current` | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
-| `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `ON` | 必須。パフォーマンススキーマを有効にします。|
-| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。|
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` |  `max_digest_length` と一致する必要があります。|
-| `performance-schema-consumer-events-statements-current` | `ON` | 必須。現在実行中のクエリのモニタリングを可能にします。|
-| `performance-schema-consumer-events-waits-current` | `ON` | 必須。待機イベントの収集を有効にします。 |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | 推奨。すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
-| `performance-schema-consumer-events-statements-history` | `ON` | オプション。スレッドごとに最近のクエリの履歴を追跡することができます。この機能を有効にすると、頻度の低いクエリの実行情報を取得できる可能性が高まります。|
+| `performance_schema` | `ON` | **必須**。Performance Schema を有効にします。 |
+| `max_digest_length` | `4096` | **必須**。長いクエリを収集するために必要です。デフォルト値のままでは、`1024`文字を超えるクエリは収集されません。 |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と同じ値にする必要があります。 |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と同じ値にする必要があります。 |
+| `performance-schema-consumer-events-statements-current` | `ON` | **必須**。現在実行中のクエリを監視します。 |
+| `performance-schema-consumer-events-waits-current` | `ON` | **必須**。待ちイベントの収集を有効にします。 |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | **推奨**。すべてのスレッドで、より多くの最近実行されたクエリを追跡します。有効化すると、まれなクエリからの実行詳細を取得しやすくなります。 |
+| `performance-schema-consumer-events-statements-history` | `ON` | **任意**。スレッドごとの最近のクエリ履歴を追跡します。有効化すると、まれなクエリからの実行詳細を取得しやすくなります。 |
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| パラメーター | 値 | 説明 |
+| --- | --- | --- |
+| `performance_schema` | `ON` | **必須**。Performance Schema を有効にします。 |
+| `max_digest_length` | `4096` | **必須**。長いクエリを収集するために必要です。デフォルト値のままでは、`1024` 文字を超えるクエリは収集されません。 |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と同じ値にする必要があります。 |
+| `performance-schema-consumer-events-statements-current` | `ON` | **必須**。現在実行中のクエリを監視します。 |
+| `performance-schema-consumer-events-waits-current` | `ON` | **必須**。待ちイベントの収集を有効にします。 |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | **推奨**。すべてのスレッドで、より多くの最近実行されたクエリを追跡します。有効化すると、まれなクエリからの実行詳細を取得しやすくなります。 |
+| `performance-schema-consumer-events-statements-history` | `ON` | **任意**。スレッドごとの最近のクエリ履歴を追跡します。有効化すると、まれなクエリからの実行詳細を取得しやすくなります。 |
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -71,21 +73,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
+次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][5]を参照してください。
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
@@ -94,6 +84,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -155,7 +157,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Securely store your password
+### パスワードを安全に保管
 {{% dbm-secret %}}
 
 ## Agent のインストール
@@ -172,13 +174,13 @@ MySQL メトリクスを収集するには、`mysql.d/conf.yaml` に次のコン
 
 ```yaml
 init_config:
-
+ 
 instances:
-  - dbm: true
-    host: 127.0.0.1
-    port: 3306
-    username: datadog
-    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
+  - dbm: true
+    host: 127.0.0.1
+    port: 3306
+    username: datadog
+    password: 'ENC[datadog_user_database_password]' # 前述の CREATE USER 手順で設定したパスワード
 ```
 
 `datadog` ユーザーは、`localhost` ではなく `host: 127.0.0.1` として MySQL インテグレーション構成内にセットアップされる必要があります。または、`sock` を使用することもできます。
@@ -207,7 +209,7 @@ Agent によってデータベースから収集されたテレメトリーに�
        long_query_time = 3
      ```
 
-   3. Save the file and restart MySQL.
+   3. ファイルを保存して MySQL を再起動します。
    4. Agent が `/var/log/mysql` ディレクトリとその中のすべてのファイルに対する読み取りアクセス許可を持つことを確認します。`logrotate` コンフィギュレーションもチェックして、これらのファイルが考慮され、アクセス許可が正しく設定されていることを確認します。
       `/etc/logrotate.d/mysql-server` の内容は次のようになります。
 
@@ -274,7 +276,7 @@ Agent によってデータベースから収集されたテレメトリーに�
 
 ## UpdateAzureIntegration
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `mysql` を探します。または、[データベース][11]のページを参照してください。
+[Agent の status サブコマンド][10]を実行して Checks セクションに `mysql` が表示されているか確認するか、[Databases][11] ページを参照してセットアップを開始してください！ 
 
 ## Agent の構成例
 {{% dbm-mysql-agent-config-examples %}}
@@ -299,3 +301,4 @@ Agent によってデータベースから収集されたテレメトリーに�
 [10]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[13]: /ja/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

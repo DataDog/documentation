@@ -141,6 +141,12 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
 
+## Mobile tests
+
+### Unable to launch a device recording
+
+If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
+
 ## Private locations
 
 {{< tabs >}}
@@ -219,7 +225,7 @@ If you provided a configuration file when installing the application, a Windows 
 
 The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
 
-Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
+Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. You can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
 
 ## Further reading
 

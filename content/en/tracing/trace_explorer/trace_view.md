@@ -6,7 +6,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -197,7 +197,7 @@ See associated tags, as well as critical host/container metrics graphs including
 
 See logs related to your service at the time of the trace. When you hover over a log, a line showing its timestamp is displayed on the trace flame graph. Clicking on the log brings you to the [Log Explorer search][1].
 
-{{< img src="tracing/trace_view/logs_tab.png" alt="Logs tab" style="width:90%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Logs in Traces" style="width:100%;">}}
 
 
 [1]: /logs/explorer/search/
@@ -214,7 +214,7 @@ Click on a service's span to see the processes running on its underlying infrast
 
 {{% tab "Network" %}}
 
-Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Network Performance Monitoring][2].
+Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Analytics][1] page. To view span-specific processes, enable [Cloud Network Monitoring][2].
 
 **Note**: Related network telemetry is not currently supported for serverless traces.
 

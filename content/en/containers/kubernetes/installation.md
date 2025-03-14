@@ -79,7 +79,7 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
            secretName: datadog-secret
            keyName: api-key
    ```
-   - Replace `<CLUSTER_NAME>` with a name for your cluster.
+   - Replace `<CLUSTER_NAME>` with a name for your cluster. 
    - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 4. **Deploy Agent with the above configuration file**
@@ -139,6 +139,17 @@ Use the [Installing on Kubernetes][16] page in Datadog to guide you through the 
 
    Verify that Agent pods (tagged with `app.kubernetes.io/component:agent`) appear on the [Containers][13] page in Datadog. Agent pods are detected within a few minutes of deployment.
 
+<div class="alert alert-info">
+
+<code>&lt;CLUSTER_NAME&gt;</code> allows you to scope hosts and Cluster Checks. This unique name must be dot-separated tokens and abide by the following restrictions:
+<ul>
+  <li/>Must only contain lowercase letters, numbers, and hyphens
+  <li/>Must start with a letter
+  <li/>Must end with a number or a letter
+  <li/>Must be less than or equal to 80 characters
+</ul>
+</div>
+
 ### Unprivileged installation
 
 {{< tabs >}}
@@ -166,8 +177,10 @@ agent:
         - <GROUP_ID>
 {{< /highlight >}}
 
-- Replace `<USER_ID>` with the UID to run the Datadog Agent.
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: /data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 

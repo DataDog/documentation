@@ -34,7 +34,8 @@ Utiliza el selector de aplicaciones en las opciones de navegación superiores pa
 
 ## Buscar y filtrar
 
-Busca y filtra tus eventos RUM escribiendo en la barra de búsqueda y seleccionando un tipo de visualización en el [Explorador RUM][1]. Puedes reducir, ampliar y cambiar tu enfoque en los subconjuntos de eventos que te interesen.
+Busca y filtra tus eventos RUM escribiendo en la barra de búsqueda y seleccionando un tipo de visualización en el [Explorador RUM][1]. Puedes limitar, ampliar y cambiar tu enfoque en subconjuntos de eventos que te interesen.
+Utiliza las sugerencias de autocompletar para ver facetas y consultas recientes.
 
 ## Agrupar
 

@@ -20,8 +20,6 @@ When you need to further refine the results of a log search, use [subqueries](#f
 
 ## Filter logs with subqueries
 
-<div class="alert alert-warning">Filtering logs with subqueries is in Preview.</div>
-
 Use subqueries when you want to filter the results of a query based on the results of a secondary query. See [subquery examples](#subquery-examples) for two example scenarios.
 
 To add a subquery filter:
@@ -76,7 +74,7 @@ In this example, use `service:network_directory` as your main query, and then de
 
 {{% filter_by_reference_tables %}}
 
-{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog Log Explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/reference_table_join_filter.png" alt="The Datadog Log Explorer with reference table search options highlighted. Includes numbered steps aligned with prior instructions" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 

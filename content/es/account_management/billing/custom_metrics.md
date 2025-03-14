@@ -177,7 +177,7 @@ Configurar etiquetas y agregaciones con [Metrics without LimitsTM][4] puede infl
 **Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no se ha configurado con Metrics without LimitsTM, solo se te factura por su volumen de métricas personalizadas indexadas.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas frente a las indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without LimitsTM para configurar las métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función de la cantidad promedio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
@@ -259,7 +259,7 @@ Configurar etiquetas y agregaciones con [Metrics without LimitsTM][2] puede infl
 **Nota: Solo las métricas configuradas contribuyen al volumen de métricas personalizadas ingeridas.** Si una métrica no se ha configurado con Metrics without LimitsTM, solo se te factura por su volumen de métricas personalizadas indexadas.
 
 #### ¿Cuándo se te cobra por las métricas personalizadas ingeridas frente a las indexadas?
-Si no utilizas Metrics without LimitsTM para configurar tus métricas, pagas por las métricas personalizadas indexadas.
+Si no utilizas Metrics without LimitsTM para configurar las métricas, pagas por las métricas personalizadas indexadas.
 
 |                                      | Métricas personalizadas indexadas<br>(en función de la cantidad promedio mensual de métricas personalizadas por hora)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|

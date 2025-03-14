@@ -38,6 +38,26 @@ If you have opened at least one Datadog support ticket, follow this process to a
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Password requirements
+
+To ensure the security of your account, any password used to sign in to Datadog's Zendesk support portal must meet the following requirements:
+
+1. Password complexity:
+    - Must include at least **12 characters**.
+    - Must contain **uppercase and lowercase letters (A-Z)**.
+    - Must include at least **one number (0-9)**.
+    - Must include at least **one special character** (for example, `!`, `@`, `#`, or `%`).
+    - Must **not resemble an email address**.
+    - Must **not include the word "Zendesk"**.
+1. Failed attempts and lockout:
+    - Users are allowed a maximum of **5 attempts** before the account is locked out temporarily.
+1. Prohibited sequences:
+    - Passwords cannot include more than a specified number of consecutive letters or numbers. For instance, if the limit is set to 4, the system rejects passwords like `admin12345`.
+1. Previous passwords:
+    - Users cannot reuse a certain number of their previously used passwords.
+1. Expiration Policy:
+    - Passwords must be updated at least **every 90 days**, or whenever prompted by the system.
+
 ## Troubleshooting
 ### Error: Refused to connect
 **Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][1] in Google Chrome Help.

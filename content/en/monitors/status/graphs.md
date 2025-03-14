@@ -66,6 +66,13 @@ To filter the view for an individual group, hover over the group title and click
 
 When investigating past status changes, the color dot next to the group title indicates the group's current status.
 
+### Change Tracking
+The Change Tracking graph allows you to view and analyze changes related to your service and its dependencies that occurred around the same time as the alert, as such events are often the root cause of problems.
+
+{{< img src="/monitors/status/change_tracking_monitor_status_page.png" alt="Example of a deployment shown in the monitor status page" style="width:100%;" >}}
+
+Change Tracking supports multiple changes like deployments, feature flags or database modifications. To see the full list and setup requirements, see the [Change Tracking][2] documentation.
+
 ## Source data graph
 
 {{< img src="/monitors/status/source_data_graph_1.png" alt="Status page displaying the source data graph" style="width:100%;" >}}
@@ -109,3 +116,4 @@ Datadog keeps monitor groups in the UI for 24 hours unless configured differentl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration/?tab=thresholdalert#group-retention-time
+[2]: /change_tracking

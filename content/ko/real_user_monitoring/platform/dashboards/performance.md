@@ -66,9 +66,9 @@ RUM 리소스 대시보드는 애플리케이션에 가장 큰 영향을 미치�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/real_user_monitoring/data_collected/
+[1]: /ko/real_user_monitoring/browser/data_collected/
 [2]: /ko/real_user_monitoring/ios/data_collected/
 [3]: /ko/real_user_monitoring/android/data_collected/
 [4]: /ko/real_user_monitoring/reactnative/data_collected/
-[5]: /ko/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[5]: /ko/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [6]: /ko/data_security/real_user_monitoring/

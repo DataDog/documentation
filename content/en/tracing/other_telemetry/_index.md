@@ -23,7 +23,7 @@ Inject trace IDs into DBM data collection to correlate the two data sources. Vie
 
 Inject trace IDs into logs, and leverage unified service tagging to find the exact logs associated with a specific service and version, or all logs correlated to an observed trace. See [Connect Logs and Traces][1] to set it up.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
+{{< img src="tracing/connect_logs_and_traces/logs-trace-correlation.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
 ## Correlate RUM and traces
 

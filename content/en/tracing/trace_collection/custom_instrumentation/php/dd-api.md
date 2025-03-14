@@ -34,10 +34,10 @@ If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to you
 ```php
 <?php
 class Server {
-    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
+    #[\DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
     static function process($arg) {}
 
-    #[DDTrace\Trace]
+    #[\DDTrace\Trace]
     function get() {
       Foo::simple(1);
     }

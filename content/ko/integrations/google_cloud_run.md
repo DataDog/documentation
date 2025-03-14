@@ -1,36 +1,73 @@
 ---
+app_id: google-cloud-run
+app_uuid: 20ba733c-60a3-4c78-9c54-0f86025d6ea6
+assets:
+  dashboards:
+    gcp_cloudrun: assets/dashboards/gcp_cloudrun.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.run.container.cpu.allocation_time
+      metadata_path: metadata.csv
+      prefix: gcp.run.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 233
+    source_type_name: Google Cloud Run
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - containers
 - google cloud
 - log collection
 - orchestration
+custom_kind: integration
 dependencies: []
-description: 클러스터 전체에서 메트릭, 트레이스, 로그를 수집하고 Datadog에서 분석하세요.
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
+display_on_public_website: true
 draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/
-  tag: 블로그
-  text: Datadog으로 Google Cloud Run 모니터링
-- link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
-  tag: 설명서
-  text: Google Cloud Run for Anthos
 git_integration_title: google_cloud_run
-has_logo: true
 integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
-custom_kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_run
-public_title: Datadog-Google Cloud Run 통합
-short_description: 클러스터 전체에서 메트릭, 트레이스, 로그를 수집하고 Datadog에서 분석하세요.
-version: '1.0'
+public_title: Google Cloud Run
+short_description: 관리형 컴퓨팅 플랫폼에서 HTTP 요청을 통해 호출된 스테이트리스 컨테이너를 실행합니다.
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Containers
+  - Category::Google Cloud
+  - Category::Log Collection
+  - 카테고리::오케스트레이션
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 관리형 컴퓨팅 플랫폼에서 HTTP 요청을 통해 호출된 스테이트리스 컨테이너를 실행합니다.
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/monitoring-cloud-run-datadog/
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/collecting-cloud-run-metrics/
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/key-metrics-for-cloud-run-monitoring/
+  - resource_type: 설명서
+    url: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
+  support: README.md#Support
+  title: Google Cloud Run
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Cloud Run은 HTTP 요청으로 호출 가능한 스테이트리스(Stateless) 컨테이너를 실행할 수 있게 해주는 관리형 컴퓨팅 플랫폼입니다.
@@ -66,11 +103,11 @@ Google Cloud Run 로그는 Google Cloud Logging으로 수집되어 Cloud Pub/Sub
 #### 직접 로깅
 Cloud Run 서비스에서 Datadog에 직접 애플리케이션을 로깅하는 방법은 [서버리스 문서][3]를 참조하세요.
 
-### 트레이싱 
+### 추적
 
 완전 관리형 Google Cloud Run에 대한 전문적인 Agent 설정 지침은 [서버리스 문서][3]에서 확인하세요.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "google_cloud_run" >}}
@@ -80,7 +117,7 @@ Cloud Run 서비스에서 Datadog에 직접 애플리케이션을 로깅하는 �
 
 Google Cloud Functions 통합에는 이벤트가 포함되지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Google Cloud Functions 통합에는 서비스 점검이 포함되지 않습니다.
 

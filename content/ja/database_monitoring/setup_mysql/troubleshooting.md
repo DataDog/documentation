@@ -214,6 +214,38 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 接続にデフォルトのデータベースが構成されていない場合、その接続で行われるクエリには `schema` タグは付きません。
 
+## MariaDB の既知の制限事項
+
+### 非互換の InnoDB メトリクス
+
+以下の InnoDB メトリクスは、一部の MariaDB バージョンでは利用できません。
+
+| メトリクス名                             | MariaDB バージョン        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### MariaDB の実行計画
+
+MariaDB は実行計画で MySQL と同じ JSON 形式を出力しません。そのため、MariaDB の実行計画では、`cost_info`、`rows_examined_per_scan`、`rows_produced_per_join`、`used_columns` など一部の実行計画のフィールドが欠落する場合があります。
+
 [1]: /ja/database_monitoring/setup_mysql/
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information

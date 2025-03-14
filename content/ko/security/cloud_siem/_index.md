@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/akamai-zero-trust-application-security/
   tag: 블로그
   text: Datadog Cloud SIEM으로 Akamal Zero Trust와 Application Security 모니터링
+- link: https://www.datadoghq.com/blog/microsoft-365-detections/
+  tag: 블로그
+  text: 공격자가 Microsoft 365 서비스를 악용하는 방법
 title: Cloud SIEM
 ---
 
@@ -38,7 +41,7 @@ title: Cloud SIEM
 
 ## 개요
 
-Datadog Cloud SIEM(보안 정보 및 이벤트 관리)은 개발자, 운영 및 보안 팀을 하나의 플랫폼을 통해 통합합니다. 단일 대시보드를 사용하여 DevOps 콘텐츠, 비즈니스 메트릭 및 보안 콘텐츠를 표시합니다. 표적 공격, 시스템과 통신하는 위협 정보 목록 IP 또는 안전하지 않은 설정과 같은 위협을 실시간으로 애플리케이션 및 인프라스트럭처에서 탐지하고 이메일, Slack, Jira, PagerDuty 또는 웹훅을 통해 팀에 알립니다.
+Datadog Cloud SIEM(Security Information and Event Management)는 개발자, 운영, 보안팀이 한 플랫폼에서 작업할 수 있도록 통합합니다. 대시보드 하나에 DevOps 컨텐츠, 비즈니스 메트릭, 보안 인사이트를 표시합니다. Cloud SIEM에서 표적 공격, 위협 정보 목록 IP 주소, 안전하지 않은 구성과 같은 위협 애플리케이션과 인프라스트럭처에 있는 위협을 실시간으로 감지합니다. 이와 같은 안전 문제를 이메일, Slack, Jira, PagerDuty, 또는 웹훅으로 올립니다.
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="중요한 신호, 의심스러운 행위자, 영향을 받은 리소스, 위협 정보, 신호 추세에 대한 위젯이 포함된 Security Overview 섹션을 보여주는 Cloud SIEM 홈페이지" >}}
 

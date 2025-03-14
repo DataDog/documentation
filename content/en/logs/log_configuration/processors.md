@@ -717,9 +717,9 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following lookup process
 
 ## Trace remapper
 
-There are two ways to improve correlation between application traces and logs:
+There are two ways to define correlation between application traces and logs:
 
-1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations take care of all the rest of the setup by default.
+1. Follow the documentation on [how to inject a Trace ID in the application logs][8]. Log integrations automatically handle all remaining setup steps by default.
 
 2. Use the trace remapper processor to define a log attribute as its associated trace ID.
 
@@ -750,6 +750,49 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 | `type`       | String           | Yes      | Type of the processor.                                 |
 | `name`       | String           | No       | Name of the processor.                                 |
 | `is_enabled` | Boolean          | No       | If the processors is enabled or not. Default: `false`. |
+| `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
+
+[1]: /api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+
+## Span remapper
+
+There are two ways to define correlation between application spans and logs:
+
+1. Follow the documentation on [how to inject a Span ID in the application logs][8]. Log integrations automatically handle all remaining setup steps by default.
+
+2. Use the span remapper processor to define a log attribute as its associated span ID.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+Define the span remapper processor on the [**Pipelines** page][1]. Enter the Span ID attribute path in the processor tile as follows:
+
+{{< img src="logs/log_configuration/processor/span_id_remapper.png" alt="Span ID processor" style="width:80%;">}}
+
+[1]: https://app.datadoghq.com/logs/pipelines
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][1] with the following span remapper JSON payload:
+
+```json
+{
+  "type": "span-id-remapper",
+  "name": "Define dd.span_id as the official span id associate to this log",
+  "is_enabled": true,
+  "sources": ["dd.span_id"]
+}
+```
+
+| Parameter    | Type             | Required | Description                                            |
+|--------------|------------------|----------|--------------------------------------------------------|
+| `type`       | String           | Yes      | Type of the processor.                                 |
+| `name`       | String           | No       | Name of the processor.                                 |
+| `is_enabled` | Boolean          | No       | Indicates whether the processor is enabled. Default: `false`. |
 | `sources`    | Array of strings | No       | Array of source attributes. Default: `dd.trace_id`.    |
 
 [1]: /api/v1/logs-pipelines/

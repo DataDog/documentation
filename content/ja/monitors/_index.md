@@ -70,9 +70,10 @@ Datadog を使用して、アプリケーションの健全性とインフラス
 ## 次のステップ
 
 モニターとアラートは、IT システムやアプリケーションの信頼性、パフォーマンス、および可用性を確保するために不可欠なツールです。これらは運用効率の維持、ユーザーエクスペリエンスの改善、および潜在的なリスクの軽減に役立ち、問題が拡大する前に迅速な検出と対応を行うことを可能にします。モニターの機能についてさらに詳しくは、以下をご覧ください。
-1. [ダウンタイムをスケジュールしてモニターをミュートする][7]
-1. [モニターを整理および管理する][8]
-1. [Monitor Quality ページで誤って構成されたモニターを解決する][9]
+1. [ダウンタイムをスケジュールしてモニターをミュートする][4]
+1. [モニターを整理および管理する][5]
+1. [ステータスページでアラートを調査する][6]
+1. [Monitor Quality ページで誤って構成されたモニターを解決する][7]
 
 ## その他の参考資料
 
@@ -81,9 +82,7 @@ Datadog を使用して、アプリケーションの健全性とインフラス
 [1]: https://app.datadoghq.com/monitors/recommended
 [2]: /ja/monitors/notify
 [3]: /ja/monitors/downtimes
-[4]: /ja/monitors/types/
-[5]: /ja/monitors/configuration/?tab=thresholdalert
-[6]: /ja/monitors/notify/
-[7]: /ja/monitors/downtimes/?tab=bymonitorname
-[8]: /ja/monitors/manage
-[9]: /ja/monitors/quality/
+[4]: /ja/monitors/downtimes/?tab=bymonitorname
+[5]: /ja/monitors/manage
+[6]: /ja/monitors/status/status_page
+[7]: /ja/monitors/quality/

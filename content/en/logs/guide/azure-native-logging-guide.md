@@ -17,7 +17,7 @@ Use this guide to set up and manage logging directly from your Azure subscriptio
 
    - [Activity logs](#activity-logs)
    - [Azure resource logs](#azure-resource-logs)
-   - [Azure Active Directory (Azure AD) logs](#azure-active-directory-azure-ad-logs)
+   - [Microsoft Entra ID logs](#microsoft-entra-id-logs)
 
 **Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][5], see the [Send Azure Logs to Datadog][6] guide for configuration options.
 
@@ -47,13 +47,13 @@ For example, the screenshot below shows a tag rule where only those virtual mach
 
 {{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 create a Datadog resource logs" responsive="true" style="width:90%;">}}
 
-## Azure Active Directory (Azure AD) logs 
+## Microsoft Entra ID logs 
 
-Azure AD logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Once you have a Datadog resource in Azure, follow the setup steps in the [Datadog in the Azure Portal][3] guide.
+Microsoft Entra ID logs contain the history of sign-in activity and an audit trail of changes made in Microsoft Entra ID for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Once you have a Datadog resource in Azure, follow the setup steps in the [Datadog in the Azure Portal][3] guide.
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[3]: https://docs.datadoghq.com/integrations/guide/azure-portal/#azure-active-directory-logs
+[3]: https://docs.datadoghq.com/integrations/guide/azure-portal/#microsoft-entra-id-logs
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [5]: /getting_started/site/
 [6]: /logs/guide/azure-logging-guide
