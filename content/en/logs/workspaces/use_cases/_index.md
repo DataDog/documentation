@@ -14,4 +14,5 @@ This page provides insights on various applications of Log Workspaces, outlining
 
 {{< whatsnext desc="See examples of how to use Log Workspaces:" >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
+    {{< nextlink href="/logs/workspaces/use_cases/correlate_access_error_logs" >}}Correlate Web Access Logs and Web Error Logs{{< /nextlink >}}
 {{< /whatsnext >}}
