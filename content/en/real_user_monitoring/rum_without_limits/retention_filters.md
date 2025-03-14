@@ -87,6 +87,10 @@ Use the toggle to the right of the filter to disable or enable it.
 
 Drag and drop filters to reorder filters to their new position.
 
+## Best practices
+
+See [Retention Filter Best Practices][4].
+
 ## Next steps
 
 Analyze performance with [metrics][3].
@@ -98,3 +102,4 @@ Analyze performance with [metrics][3].
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/explorer/
 [3]: /real_user_monitoring/rum_without_limits/metrics
+[4]: /real_user_monitoring/guide/retention_filter_best_practices
