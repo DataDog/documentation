@@ -94,7 +94,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/integrations/runtime_metrics/
-[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [3]: /network_monitoring/cloud_network_monitoring/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging
