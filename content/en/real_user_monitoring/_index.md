@@ -195,6 +195,11 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 ## Permissions
 
+{{< callout url="#" btn_hidden="true" header="false">}}
+  Granular access control for RUM is in Preview.
+{{< /callout >}} 
+
+
 By default, all users can change an application's RUM configuration.
 
 Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
