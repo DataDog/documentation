@@ -10,7 +10,7 @@ further_reading:
   text: "Learn how to query and visualize deployments"
 - link: "/continuous_delivery/features"
   tag: "Documentation"
-  text: "Learn about the CD Visibility Features"
+  text: "Learn about CD Visibility Features"
 - link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
   tag: "Blog"
   text: "Best practices for CI/CD monitoring"

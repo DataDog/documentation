@@ -1,6 +1,6 @@
 ---
 title: Changes Detection
-description: Learn about how CD Visibility detects changes.
+description: Learn how CD Visibility detects changes.
 further_reading:
 - link: "/continuous_delivery/deployments/"
   tag: "Documentation"
@@ -20,30 +20,30 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 
 ## Overview
 
-The Changes Detection feature allows Datadog to identify the commits introduced as part of a deployment. This is particularly valuable to:
-1.	Understand where specific changes have been deployed, such as tracking when updates reach the `production` environment.
-2.	Diagnose incidents related to a deployment by providing visibility into the exact changes introduced, helping teams quickly pinpoint potential root causes and accelerate troubleshooting.
+Changes Detection allows Datadog to identify the commits introduced as part of a deployment. This is particularly valuable to:
+- Understand where specific changes have been deployed, such as tracking when updates reach the `production` environment.
+- Diagnose incidents related to a deployment by providing visibility into the exact changes introduced. This helps teams quickly pinpoint potential root causes and accelerate troubleshooting.
 
-To detect the changes deployed, Datadog runs the [Git Log][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
+To detect the changes deployed, Datadog runs the [`git log`][1] between the current deployment commit SHA and the previous deployment commit SHA. Merge commits are excluded from the computation.
 
-The deployed changes are visible inside any deployment execution of the [**Deployment Executions** page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the changes detected between the two.
+The deployed changes are visible inside any deployment execution of the [Deployment Executions page][2]. The **Code Changes** tab shows the previous deployment taken into consideration, and the changes detected between the two.
 
 {{< img src="continuous_delivery/features/code_changes_tab.png" alt="Code Changes tab for changes detection feature" style="width:100%;">}}
 
-Additionally, the **Deployments** column of the [**Recent Code Changes** page][3] displays the service and environment details for all deployments that included a specific commit. This view provide a quick way to understand if and where your changes are deployed.
+Additionally, the **Deployments** column of the [Recent Code Changes][3] page displays the service and environment details for all deployments that included a specific commit. This view provides a quick way to understand if and where your changes are deployed.
 Hovering over the service value reveals whether the deployment has reached all expected environments, based on where the service is typically deployed.
 
 {{< img src="continuous_delivery/features/recent_code_changes_deployments.png" alt="Showing deployments in Recent Code Changes page" style="width:100%;">}}
 
 Changes are only detected for deployments that:
-1. Have a service and an environment. Additionally, the service needs to have the file path specs defined in Service Catalog (see the setup below for more information).
-2. Have a repository URL and a commit SHA defined.
+- Have a service and an environment. Additionally, the service needs to have the file path specs defined in Software Catalog (see the [setup instructions](#specify-service-file-path-patterns) for more information).
+- Have a repository URL and a commit SHA defined.
 
 ## Setup
 
 To allow Changes Detection on your deployments, two steps are required:
-1. Synchronize your repository metadata to Datadog.
-2. Specify the source code file path for your services.
+1. [Synchronize your repository metadata to Datadog](#synchronize-repository-metadata-to-datadog).
+2. [Specify the source code file path for your services](#specify-service-file-path-patterns).
 
 ### Synchronize repository metadata to Datadog
 
@@ -56,17 +56,17 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{% tab "GitHub" %}}
 
 <div class="alert alert-warning">
-GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
+GitHub workflows running the <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
 
 If the [GitHub integration][1] is not already installed, install it on the [GitHub integration tile][2].
 
-When configuring the GitHub application:
+When configuring the GitHub App:
 1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
 2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
-To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, in the **Datadog Features** table, the **Pull Request Information** feature is marked as valid.
+To confirm that the setup is valid, select your GitHub App in the [GitHub integration tile][2] and verify that, in the **Datadog Features** table, the **Pull Request Information** feature is marked as valid.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/

@@ -1,6 +1,6 @@
 ---
 title: CD Visibility Features
-description: Learn about the different features offered by the CD Visibility product.
+description: Learn about the different features offered by CD Visibility.
 further_reading:
 - link: "/continuous_delivery/deployments/"
   tag: "Documentation"
@@ -21,8 +21,8 @@ further_reading:
 CD Visibility is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
-The CD Visibility product collects deployment events so that key metrics can be identified from them. On top of that, it provides a series of features to enhance the Continuous Delivery workflow:
+CD Visibility collects deployment events so that Datadog can identify key metrics from them. Additionally, it provides a series of features to enhance the Continuous Delivery workflow. Select the following topics for more information.
 
 {{< whatsnext desc="" >}}
-{{< nextlink href="/continuous_delivery/features/changes_detection" >}}Detect Changes between Deployments{{< /nextlink >}}
+{{< nextlink href="/continuous_delivery/features/changes_detection" >}}Detect changes between deployments{{< /nextlink >}}
 {{< /whatsnext >}}

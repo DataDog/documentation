@@ -4,7 +4,7 @@ description: Learn about how to query and visualize CD Visibility deployments.
 further_reading:
 - link: "/continuous_delivery/features"
   tag: "Documentation"
-  text: "Learn about the CD Visibility Features"
+  text: "Learn about CD Visibility Features"
 - link: "/continuous_delivery/deployments/"
   tag: "Documentation"
   text: "Learn about Deployment Visibility"
