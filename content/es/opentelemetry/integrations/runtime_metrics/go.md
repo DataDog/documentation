@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/runtime_metrics/go/
+- /es/opentelemetry/runtime_metrics/go/
 code_lang: go
 code_lang_weight: 30
 title: Métricas de tiempo de ejecución de OpenTelemetry Go
