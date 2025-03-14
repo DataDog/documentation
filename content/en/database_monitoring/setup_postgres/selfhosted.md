@@ -246,13 +246,13 @@ Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf
 
 {{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+To configure the Database Monitoring Agent running in a Docker container, you have a couple methods available, they are all covered in detail in the [Docker Configuration Documentation][4], below are some examples of how you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Get up and running quickly by executing the following command to run the agent from your [command line][5]. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -303,6 +303,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/docker/integrations/?tab=docker
 [2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
+[4]: /containers/docker/integrations/?tab=labels#configuration
+[5]: /containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
