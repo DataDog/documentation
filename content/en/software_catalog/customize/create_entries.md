@@ -12,6 +12,9 @@ aliases:
   - /api_catalog/add_entries
   - /service_catalog/customize/create_entries/
 further_reading:
+- link: "/software_catalog/customize/validating_service_definition"
+  tag: "Documentation"
+  text: "Validate your service definition YAMLs as you create them"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "External Site"
   text: "Create and manage service definitions with Terraform"
@@ -26,9 +29,16 @@ further_reading:
   text: "Import Backstage YAML files into Datadog"
 ---
 
-## Create user-defined entries 
+## Overview 
 
-To manage your own components that are not currently emitting performance metrics through APM, USM, or RUM products with Datadog Software Catalog, you can either manually add them by creating Service Definitions through the API, Terraform, GitHub integration, or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files. 
+To manage components that do not emit performance metrics through APM, USM, or RUM products, you can add them to Software Catalog by doing one of the following:
+
+-  Manually creating Service Definitions through the API, Terraform, or a GitHub integration
+-  Importing existing services from sources like [ServiceNow][1] or [Backstage][2]
+
+Because these services are not automatically linked to Datadog telemetry, you need to manually define their metadata and dependencies using entity definition YAML files. This allows you to track and organize them within the Software Catalog, even if they don't generate telemetry data.
+
+## Create user-defined entries 
 
 To create a user-defined component, name your component in the `dd-service` (if using schema version v2.2 or prior) or `name` field (if using schema version v3.0 or later) in a `service.datadog.yaml` or `entity.datadog.yaml` file using one of the supported metadata schema versions. Datadog accepts both `service.datadog.yaml` and `entity.datadog.yaml` file names. For example: 
 
@@ -65,13 +75,5 @@ You can register multiple services in one YAML file by separating each definitio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/software_catalog/service_definition_api/
-[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-[3]: https://app.datadoghq.com/services/settings/get-started
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /integrations/github/
-[15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
-[16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
-[17]: https://docs.datadoghq.com/universal_service_monitoring/
-[18]: https://docs.datadoghq.com/tracing/
+[1]: /software_catalog/customize/import_entries_servicenow
+[2]: /software_catalog/customize/import_entries_backstage
