@@ -1,6 +1,11 @@
 ---
 title: Browser Monitoring Setup
-type: multi-code-lang
+further_reading:
+- link: '/real_user_monitoring/browser/setup/client/'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Client-Side Instrumentation'
+- link: '/real_user_monitoring/browser/setup/server'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
 ---
 
-{{< include-markdown "/real_user_monitoring/browser/setup/client/" >}}
