@@ -28,7 +28,7 @@ El seguimiento de errores de fragmentos de repeticiones te permite ver una recre
 1. Si no configuraste el seguimiento de errores frontend en Datadog, sigue las [instrucciones de configuración de la aplicación][1] o consulta la documentación de configuración para [navegadores][2] y [móviles][3].
 2. Durante la inicialización del SDK, configura la frecuencia de muestreo de reproducción de tu aplicación.
 
-   {{< pestañas >}}
+   {{< tabs >}}
    {{% tab "Navegador" %}}
 
    Configura la `sessionReplaySampleRate` entre 1 y 100.
