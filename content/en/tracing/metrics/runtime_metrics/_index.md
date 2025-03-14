@@ -39,19 +39,19 @@ Runtime metrics are application metrics that monitor memory usage, garbage colle
 
 ### Language-specific considerations
 
-{{< programming-lang-wrapper langs="java,ruby,dotnet" >}}
-{{< programming-lang lang="java" >}}
+{{< tabs >}}
+{{% tab "Java" %}}
 #### Supported runtimes
 Runtime metrics are only supported on Java 8+.
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="ruby" >}}
+{{% tab "Ruby" %}}
 You must add the [`dogstatsd-ruby`][100] gem to your Ruby application.
 
 [100]: https://rubygems.org/gems/dogstatsd-ruby
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="dotnet" >}}
+{{% tab ".NET" %}}
 #### Supported runtimes
 Runtime metrics are only supported on .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
@@ -66,8 +66,8 @@ This can be done either from the "Computer Management" UI, or from an administra
 ```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Setup instructions
 
@@ -107,25 +107,25 @@ Ensure that [DogStatsD is enabled for the Agent][2]. By default, the Datadog Age
 
 #### Language-specific configuration
 
-{{< programming-lang-wrapper langs="java,python,nodejs,go,ruby,dotnet" >}}
-{{< programming-lang lang="java" >}}
+{{< tabs >}}
+{{% tab "Java" %}}
 Runtime metrics cannot be enabled in code.
 
 Additional JMX metrics can be added using configuration files that are passed on using `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`. You can also enable existing Datadog JMX integrations individually with the `dd.jmxfetch.<INTEGRATION_NAME>.enabled=true` parameter. This auto-embeds configuration from Datadog's existing JMX configuration files. See the [JMX Integration][100] for further details on configuration.
 
 [100]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="python" >}}
+{{% tab "Python" %}}
 If you are not using `ddtrace-run`, you can enable runtime metrics collection in code:
 
 ```python
 from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="nodejs" >}}
+{{% tab "Node.js" %}}
 Runtime metrics collection can also be enabled in code with one configuration parameter in the tracing client through the tracer option: `tracer.init({ runtimeMetrics: true })`
 
 ```js
@@ -134,9 +134,9 @@ const tracer = require('dd-trace').init({
   runtimeMetrics: true
 })
 ```
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="go" >}}
+{{% tab "Go" %}}
 Runtime metrics collection can also be enabled in code by starting the tracer with the `WithRuntimeMetrics` option:
 
 ```go
@@ -147,9 +147,9 @@ If your Datadog Agent DogStatsD address differs from the default `localhost:8125
 
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [9]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="ruby" >}}
+{{% tab "Ruby" %}}
 Runtime metrics collection can also be enabled in code by setting the following configuration in your Ruby application:
 
 ```ruby
@@ -166,12 +166,12 @@ Datadog.configure do |c|
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
-{{< /programming-lang >}}
+{{% /tab %}}
 
-{{< programming-lang lang="dotnet" >}}
+{{% tab ".NET" %}}
 Runtime metrics cannot be enabled in code.
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Data collected
 
@@ -190,6 +190,34 @@ After setup is complete, you can view your runtime metrics in:
 ## Troubleshooting
 - To associate runtime metrics within flame graphs, ensure the `env` tag (case-sensitive) is set and matching across your environment.
 - For runtime metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and that the configured `env` tag matches the `env` of the instrumented service.
+
+## Data collected
+
+{{< tabs >}}
+{{< tab "Java" >}}
+{{< get-metrics-from-git "java" >}}
+{{< /tab >}}
+
+{{< tab "Python" >}}
+{{< get-metrics-from-git "python" >}}
+{{< /tab >}}
+
+{{< tab "Ruby" >}}
+{{< get-metrics-from-git "ruby" >}}
+{{< /tab >}}
+
+{{< tab "Go" >}}
+{{< get-metrics-from-git "go" >}}
+{{< /tab >}}
+
+{{< tab "Node.js" >}}
+{{< get-metrics-from-git "node" >}}
+{{< /tab >}}
+
+{{< tab ".NET" >}}
+{{< get-metrics-from-git "dotnet" >}}
+{{< /tab >}}
+{{< /tabs >}}
 
 ## Further reading
 
