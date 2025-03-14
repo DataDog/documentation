@@ -8,7 +8,7 @@ further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn how to query and visualize deployments"
-- link: "/continuous_delivery/features/changes_detection"
+- link: "/continuous_delivery/features/code_changes_detection"
   tag: "Documentation"
   text: "Learn about Code Changes Detection in CD Visibility"
 ---
@@ -24,5 +24,5 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 CD Visibility collects deployment events so that Datadog can identify key metrics from them. Additionally, it provides a series of features to enhance the Continuous Delivery workflow. Select the following topics for more information.
 
 {{< whatsnext desc="" >}}
-{{< nextlink href="/continuous_delivery/features/changes_detection" >}}Detect code changes between deployments{{< /nextlink >}}
+{{< nextlink href="/continuous_delivery/features/code_changes_detection" >}}Detect code changes between deployments{{< /nextlink >}}
 {{< /whatsnext >}}

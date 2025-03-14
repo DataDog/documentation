@@ -4506,9 +4506,9 @@ menu:
       identifier: cd_features
       parent: cd
       weight: 3
-    - name: Changes Detection
-      url: continuous_delivery/features/changes_detection
-      identifier: cd_features_changes_detection
+    - name: Code Changes Detection
+      url: continuous_delivery/features/code_changes_detection
+      identifier: cd_features_code_changes_detection
       parent: cd_features
       weight: 301
     - name: Test Optimization
