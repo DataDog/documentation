@@ -27,8 +27,8 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | First Contentful Paint | | Default, Percentiles breakdown, View Name | Browser only |
 | Largest Contentful Paint | | Default, Percentiles breakdown, View Name | Browser only |
 | API requests | | Default, HTTP status code, View Name | Mobile & Browser | 
-| Count of actions | Default, Action Type, View Name | Mobile & Browser |
-| Count of errors | Default, Is Crash, View Name | Mobile & Browser |
+| Count of actions | | Default, Action Type, View Name | Mobile & Browser |
+| Count of errors | | Default, Is Crash, View Name | Mobile & Browser |
 | Count of errors per session (@session.error.count) | | Default, Percentiles breakdown | Mobile & Browser |
 | Count of frustration signals | | Default | Mobile & Browser |
 | Count of sessions | | Default | Mobile & Browser |
