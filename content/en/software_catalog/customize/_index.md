@@ -19,6 +19,10 @@ aliases:
     - /service_catalog/manage_entries/
     - /service_catalog/enrich_default_catalog/
     - /service_catalog/customize/
+    - /software_catalog/best-practices
+    - /software_catalog/guides/best-practices
+    - /service_catalog/guides/best-practices
+    - /service_catalog/use_cases/best_practices
 ---
 
 You can customize your engineering team's landing experience in Software Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
