@@ -183,13 +183,6 @@ psql -h localhost -U datadog postgres -A \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
 
-    {{% tab "One" %}}
-    One
-    {{% /tab %}}
-    {{% tab "Two" %}}
-    Two
-    {{% /tab %}}
-
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
@@ -215,7 +208,7 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. 
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres.
 
 1. If you haven't already installed the Agent, see the [Agent installation instructions][8] then come back here to complete the configuration process for the Postgres check.
 
@@ -244,6 +237,10 @@ Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf
       # dbname: '<DB_NAME>'
 
    ```
+
+**Note**: Wrap your password in single quotes if a special character is present.
+
+3. [Restart the Agent][10].
 
 {{% /tab %}}
 
@@ -519,10 +516,6 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 
 {{< /tabs >}}
-
-**Note**: Wrap your password in single quotes if a special character is present.
-
-2. [Restart the Agent][10].
 
 ### Collecting logs (optional)
 
