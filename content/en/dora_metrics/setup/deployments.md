@@ -254,7 +254,7 @@ links:
     url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
 ```
 {{% /tab %}}
-{{< tabs >}}
+{{< /tabs >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
