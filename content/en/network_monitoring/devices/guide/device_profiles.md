@@ -50,7 +50,8 @@ The minimum Agent version required is `7.65` or higher.
 
 ### Step 2: Profile inheritance 
 
-Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, (`_base.yaml` `_generic-if.yaml`, `_generic-ip.yaml`, `_generic-ospf.yaml`, `_generic-tcp.yaml` and `_generic-udp.yaml`), which are recommended **not** to be removed. <br/>
+Use profile inheritance to adopt configurations such as metadata, metrics, and tags. This simplifies scaling your device profiles and allows you to build on existing ones. Datadog automatically includes some inherited profiles, (`_base.yaml` `_generic-if.yaml`, `_generic-ip.yaml`, `_generic-ospf.yaml`, `_generic-tcp.yaml` and `_generic-udp.yaml`), which are recommended **not** to be removed. 
+
 Reference the [Supported Device Profiles][16] for the full list of inherited profiles.
 
 1. Keep the Datadog `_base.yaml` profile, and any other inherited Datadog profiles specific to your needs. Optionally, you can select additional profiles to inherit. The relevant fields appear on the right under Inherited Profiles, with an `Inherited` tag next to any inherited metrics, tags, or metadata:
@@ -232,7 +233,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 
 After applying your configuration options to your device profile, click **Save and Sync Agents** to automatically apply this profile to all NDM agents. The configurations are applied to your devices with [Remote Configuration][14].
 
-{{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
+{{< img src="/network_device_monitoring/profile_onboarding/save_sync_agents_2.png" alt="The Network Device profile page showing the final step to save and sync agents" style="width:100%;">}}
 
 [14]: /agent/remote_config
 
@@ -257,7 +258,7 @@ After applying your configuration options to your device profile, click **Save a
 
 Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. Here, you can view a summary of the out-of-the-box (OOTB) profiles, as well as the device profiles you created using the [Device Profile Setup](#setup) above.  
 
-  {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page.png" alt="The Network Device profile inventory page" style="width:100%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page_2.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
 This page includes the following features:
 
@@ -294,7 +295,7 @@ Once a profile is applied, you cannot bring it back to draft status.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/devices/enrichment
+[1]: https://app.datadoghq.com/devices/profiles
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
 [4]: https://app.datadoghq.com/devices/profiles
