@@ -1105,6 +1105,21 @@ menu:
       identifier: coterm
       parent: essentials_heading
       weight: 120000
+    - name: Install
+      url: coterm/install
+      identifier: coterm_install
+      parent: coterm
+      weight: 1
+    - name: Using CoTerm
+      url: coterm/usage
+      identifier: coterm_usage
+      parent: coterm
+      weight: 2
+    - name: Configuration Rules
+      url: coterm/rules
+      identifier: coterm_rules
+      parent: coterm
+      weight: 3
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
@@ -4466,16 +4481,11 @@ menu:
       identifier: cd_deployments_ciproviders
       parent: cd_deployments
       weight: 102
-    - name: Search and Manage
-      url: continuous_delivery/search
-      identifier: cd_search
-      parent: cd
-      weight: 2
-    - name: Explorer
+    - name: Explore Deployments
       url: continuous_delivery/explorer
       identifier: cd_explorer
       parent: cd
-      weight: 3
+      weight: 2
     - name: Search Syntax
       url: continuous_delivery/explorer/search_syntax
       identifier: cd_explorer_search_syntax
