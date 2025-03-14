@@ -3,17 +3,18 @@ title: Sensitive Data Scanner
 disable_toc: false
 aliases:
   - /account_management/org_settings/sensitive_data_detection
+  - /sensitive_data_scanner/
 further_reading:
-    - link: "/sensitive_data_scanner/setup/telemetry_data"
+    - link: "/security/sensitive_data_scanner/setup/telemetry_data"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner for Telemetry Data"
-    - link: "/sensitive_data_scanner/setup/cloud_storage"
+    - link: "/security/sensitive_data_scanner/setup/cloud_storage"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner for Cloud Storage"
     - link: "coterm"
       tag: "Documentation"
       text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
-    - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
+    - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
       tag: "Documentation"
       text: "Best practices for creating custom rules"
     - link: "/data_security/"
@@ -121,17 +122,17 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /data_security/pci_compliance/
-[2]: /sensitive_data_scanner/scanning_rules/library_rules/
-[3]: /sensitive_data_scanner/scanning_rules/custom_rules/
-[4]: /sensitive_data_scanner/setup/telemetry_data/
+[2]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[3]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
+[4]: /security/sensitive_data_scanner/setup/telemetry_data/
 [5]: /observability_pipelines/
 [6]: /observability_pipelines/processors/sensitive_data_scanner
 [7]: /observability_pipelines/set_up_pipelines/
 [8]: /security/cloud_security_management/setup/agentless_scanning
 [9]: /agent/remote_config
-[10]: /sensitive_data_scanner/library_rules/
+[10]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [11]: /security/cloud_security_management
-[12]: /sensitive_data_scanner/setup/cloud_storage/
+[12]: /security/sensitive_data_scanner/setup/cloud_storage/
 [13]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[14]: /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
+[14]: /security/sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 [15]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner

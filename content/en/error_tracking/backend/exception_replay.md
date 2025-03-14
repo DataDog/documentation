@@ -79,7 +79,7 @@ To keep the performance overhead of the feature at a minimum, error capturing is
 [1]: https://github.com/DataDog/dd-trace-py/blob/2bd8e73b639af811cee2703198aa9e7e32b2f74e/ddtrace/debugging/_redaction.py
 [2]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-specific-classes-or-types
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
 [7]: https://app.datadoghq.com/dynamic-instrumentation/setup

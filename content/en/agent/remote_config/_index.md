@@ -314,4 +314,4 @@ datadog:
 [25]: /agent/guide/
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
-[28]: https://docs.datadoghq.com/sensitive_data_scanner/?tab=usingtheagent
+[28]: /security/sensitive_data_scanner/?tab=usingtheagent

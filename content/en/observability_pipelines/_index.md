@@ -8,7 +8,7 @@ further_reading:
 - link: "data_security/logs/"
   tag: "documentation"
   text: "Log Management data security"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "documentation"
   text: "Sensitive Data Scanner"
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"

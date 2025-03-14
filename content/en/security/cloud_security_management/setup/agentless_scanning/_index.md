@@ -108,8 +108,8 @@ For large cloud workloads distributed across multiple regions, Datadog recommend
 [5]: https://app.datadoghq.com/security/csm/vm
 [6]: #terraform
 [7]: mailto:success@datadoghq.com
-[8]: /sensitive_data_scanner
+[8]: /security/sensitive_data_scanner
 [9]: /security/cloud_security_management
 [10]: /agent/remote_config
-[11]: /sensitive_data_scanner/scanning_rules/library_rules/
+[11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration

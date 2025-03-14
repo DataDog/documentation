@@ -1,6 +1,8 @@
 ---
 title: Redact All Emails Except Those from a Specific Domain in Logs
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs
 further_reading:
 - link: "/sensitive_data_scanner/"
   tag: "Documentation"

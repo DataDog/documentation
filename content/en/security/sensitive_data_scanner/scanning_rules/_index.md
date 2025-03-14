@@ -1,8 +1,10 @@
 ---
 title: Scanning Rules
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/scanning_rules
 further_reading:
-- link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
+- link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules/"
   tag: "Documentation"
   text: "Best practices for creating custom scanning rules"
 ---
@@ -23,5 +25,5 @@ Sensitive Data Scanner for Cloud Storage also uses scanning rules to determine w
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/scanning_rules/library_rules/
-[2]: /sensitive_data_scanner/scanning_rules/custom_rules/
+[1]: /security/sensitive_data_scanner/scanning_rules/library_rules/
+[2]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
