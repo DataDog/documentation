@@ -46,7 +46,7 @@ cascade:
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.
 
-{{< img src="cloud_cost/overview_2.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
+{{< img src="cloud_cost/summary.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Summary page in Datadog" style="width:100%;" >}}
 
 Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Explorer** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 

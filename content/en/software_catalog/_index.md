@@ -77,8 +77,10 @@ Component
 ## Getting started
 
 {{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/software_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/customize/" >}}Customize Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/navigating/" >}}Navigate Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/use_cases/" >}}Learn about common use cases{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/manage/" >}}Manage a component in Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions
