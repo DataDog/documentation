@@ -18,41 +18,45 @@ Datadog can collect metrics from the Agent as well as from the API independently
 This method doesn't require you to have the Agent installed on the system running the PowerShell script. You have to explicitly pass your [API key][1] as well as an application key when making the POST request.
 
 ```powershell
-# Tested on Windows Server 2012 R2 w/ PSVersion 4.0
-
 function unixTime() {
   Return (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 }
 
-function postMetric($metric,$tags) {
+function postMetric($metric,$tags,$api_key) {
   $currenttime = unixTime
-  $host_name = $env:COMPUTERNAME #optional parameter .
+  $host_name = $env:COMPUTERNAME # Optional parameter
 
   # Construct JSON
-  $points = ,@($currenttime, $metric.amount)
-  $post_obj = [pscustomobject]@{"series" = ,@{"metric" = $metric.name;
+  $points = ,@{"timestamp"=$currenttime; "value"=$metric.amount}
+  $post_obj = [pscustomobject]@{"series" = ,@{
+      "metric" = $metric.name;
       "points" = $points;
-      "type" = "gauge";
-      "host" = $host_name;
-      "tags" = $tags}}
+      "type" = 0;
+      "resources" = ,@{"name"=$host_name; "type"="host";}
+      "tags" = $tags;
+  }}
   $post_json = $post_obj | ConvertTo-Json -Depth 5 -Compress
+
+  # Construct headers
+  $headers = @{
+    "DD-API-KEY"=$api_key
+  }
+
   # POST to DD API
-  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -ContentType "application/json"
+  $response = Invoke-RestMethod -Method Post -Uri $url -Body $post_json -Headers $headers -ContentType "application/json"
 }
 
-# Datadog account, API information and optional parameters
-$app_key = "<DATADOG_APPLICATION_KEY>" #provide your valid app key
-$api_key = "<DATADOG_API_KEY>" #provide your valid api key
-$url_base = "https://app.datadoghq.com/"
+# Datadog account, API information, and optional parameters
+$api_key = "<DD-API-KEY>" # Provide your valid API key
+$url_base = "https://{{< region-param key="dd_full_site" code="true" >}}"
 $url_signature = "api/v2/series"
-$url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
-$tags = "[env:test]" #optional parameter
+$url = $url_base + $url_signature
+$tags = @(@("env", "test")) # Optional parameter
 
-# Select what to send to Datadog. In this example, the number of handles opened by process "mmc" is being sent
-$metric_ns = "ps1." # your desired metric namespace
-$temp = Get-Process mmc
-$metric = @{"name"=$metric_ns + $temp.Name; "amount"=$temp.Handles}
-postMetric($metric)($tags) # pass your metric as a parameter to postMetric()
+# Select what to send to Datadog
+$metric_ns = "ps1." # Your desired metric namespace
+$metric = @{"name"=$metric_ns + $temp.Name; "amount"=100}
+postMetric($metric)($tags)($api_key) # Pass your metric as a parameter to postMetric()
 ```
 
 ## Submitting metrics with PowerShell with DogStatsD
