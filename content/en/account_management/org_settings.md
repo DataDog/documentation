@@ -88,7 +88,7 @@ The [**Safety Center**][14] page contains security alerts, warnings, and recomme
 
 ### Public sharing
 
-The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
+The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can enable different sharing features, and add additional security configuration such as maximum public access period.
 
 ### OAuth Apps
 
