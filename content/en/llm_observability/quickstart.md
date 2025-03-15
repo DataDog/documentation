@@ -19,9 +19,9 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
 
 ### Jupyter notebooks
 
-To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time. 
+To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time.
 
-## Command line
+## Generating your first trace
 
 To generate an LLM Observability trace, you can run a Python or Node.js script.
 
@@ -67,7 +67,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2]. 
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2].
 
    For more information about required environment variables, see [the SDK documentation][1].
 
@@ -128,6 +128,104 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_OPTIONS="--import dd-trace/initialize.mjs"` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
+
+## In AWS Lambda
+<!-- TODO (sabrenner): we will need to add tabs here once Node.js has a better OOTB serverless experience -->
+This generate an LLM Observability trace in an AWS Lambda serverless environment, create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+1. Create a [Lambda function chatbot using Amazon Bedrock][1]
+2. Instrument your Lambda function with the [Datadog Python extension][2]:
+    1. Open a Cloudshell
+    2. Install the Datadog CLI client
+    ```shell
+    npm install -g @datadog/datadog-ci
+    ```
+    3. Set the Datadog API key and site
+    ```shell
+    export DD_SITE=<YOUR_DD_SITE>
+    export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+    ```
+    If you already have or prefer to use a secret in Secrets Manager, you can set the API key via the secret ARN:
+    ```shell
+    export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
+    ```
+    4. Instrument your Lambda function
+    ```shell
+    datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+3. Verify that your function was instrumented.
+    1. In the Datadog UI, navigate to `Infrastructure > Serverless`
+    2. Search for the name of your function.
+    3. Click on it to open the details panel.
+    4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
+4. Add the LLM Observability environment variables to your Lambda function environment variables (`Configuration > Environment Variables`).
+    1. In the AWS console, go to your Lambda function in `Configuration > Environment` variables. Click "Edit" and add the following environment variables:
+        | Environment Variable | Value                   |
+        |----------------------|-------------------------|
+        | DD_LLMOBS_ENABLED    | 1                       |
+        | DD_LLMOBS_ML_APP     | <NAME_YOUR_APPLICATION> |
+5. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
+
+[1]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
+[2]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=datadogcli#installation
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+1. Create a [Lambda function chatbot using Amazon Bedrock][1]
+2. Instrument your Lambda function with the [Datadog Node.js extension][2]:
+    1. Open a Cloudshell
+    2. Install the Datadog CLI client
+    ```shell
+    npm install -g @datadog/datadog-ci
+    ```
+    3. Set the Datadog API key and site
+    ```shell
+    export DD_SITE=<YOUR_DD_SITE>
+    export DD_API_KEY=<YOUR_DATADOG_API_KEY>
+    ```
+    If you already have or prefer to use a secret in Secrets Manager, you can set the API key via the secret ARN:
+    ```shell
+    export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
+    ```
+    4. Instrument your Lambda function
+    ```shell
+    datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+3. Verify that your function was instrumented.
+    1. In the Datadog UI, navigate to `Infrastructure > Serverless`
+    2. Search for the name of your function.
+    3. Click on it to open the details panel.
+    4. Under the `Configuration` tab are the details of the Lambda function, attached layers, and a list of `DD_` Datadog-related environment variables under the `Datadog Environment Variables` section.
+4. Add the necessary LLM Observability environment variables to your Lambda function environment variables.
+    1. In the AWS console, go to your Lambda function in `Configuration > Environment` variables. Click "Edit" and add the following environment variables:
+        | Environment Variable | Value                          |
+        |-----------------------------|-------------------------|
+        | DD_LLMOBS_ENABLED           | 1                       |
+        | DD_LLMOBS_ML_APP            | <NAME_YOUR_APPLICATION> |
+        | DD_LLMOBS_AGENTLESS_ENABLED | 1                       |
+5. Flush the LLM Observability SDK before your Lambda handler returns
+```javascript
+import tracer from 'dd-trace';
+const llmobs = tracer.llmobs;
+
+export const handler = async (event) => {
+  // your lambda body
+  llmobs.flush(); // if your lambda has a `finally` block, make sure it is included there instead
+  return response;
+};
+```
+6. Invoke your Lambda function and verify that LLM Observability traces are visible in the Datadog UI.
+
+[1]: https://repost.aws/articles/ARixmsXALpSWuxI02zHgv1YA/bedrock-unveiled-a-quick-lambda-example
+[2]: https://docs.datadoghq.com/serverless/aws_lambda/installation/nodejs/?tab=datadogcli#installation
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
