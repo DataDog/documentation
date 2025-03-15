@@ -7,15 +7,7 @@ aliases:
   - /software_catalog/guides
 ---
 
-## Best practices guides
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/software_catalog/guides/best-practices/" >}}Best Practices 
-    {{< /nextlink >}}
-    {{< nextlink href="tracing/software_catalog/guides/validating-service-definition" >}}Validating Service Definition YAMLs{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## Use cases guides
+Learn how teams use Datadog Software Catalog to centralize knowledge, streamline processes, and improve operational efficiency:
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/software_catalog/use_cases/api_management/" >}}API Management{{< /nextlink >}}
