@@ -2231,10 +2231,10 @@ menu:
     parent: oncall
     url: service_management/on-call/pages/
     weight: 2
-  - identifier: oncall_processing_rules
+  - identifier: oncall_routing_rules
     name: Procesamiento de reglas
     parent: oncall
-    url: service_management/on-call/processing_rules/
+    url: service_management/on-call/routing_rules/
     weight: 3
   - identifier: oncall_escalation_policies
     name: Políticas de escalada
