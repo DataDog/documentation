@@ -20,7 +20,7 @@ On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view the an
 - **Past**: If an anomaly lasts more than 7 days, or the algorithm detects that costs are no longer anomalous, the anomaly is moved to the **Past** tab. Past anomalies can be useful to report on, but are often less urgent and actionable.
 - **Resolved**: If you [resolve an anomaly](#resolve-anomalies), the anomaly can be found in the **Resolved** tab.
 
-Each anomaly explains how much more costs were than expected, the specific cloud service name (ex: rds), usage type (ex: db.r6g.12xl), and cloud accounts where the anomaly occured. The anomaly also shows what expected costs would have been in the time frame, with a graph that shows the cost pattern over the past 1 month.
+Each anomaly explains how much more costs were than expected, the specific cloud service name (such as `rds`), usage type (such as `db.r6g.12xl`), and cloud accounts where the anomaly occurred. The anomaly also shows what expected costs would have been in the time frame, with a graph that shows the cost pattern over the past 1 month.
 
 Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
