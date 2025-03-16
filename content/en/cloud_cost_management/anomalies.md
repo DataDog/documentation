@@ -30,7 +30,7 @@ Anomalies with the most unexpected costs are at the top, so that it is easier to
 
 Click an anomaly to view the services, teams, environments, and resource IDs that may be driving the cost anomaly.
 
-Investigate the anomaly further, and by any additional dimensions, by viewing the costs in Explorer or saving the query to a Notebook. You can also send the anomaly, Explorer link, or Notebook to the associated service owners or teams, so they can help provide context for why the anomaly occured, and if it's expected or not.
+Investigate the anomaly further, and by any additional dimensions, by viewing the costs in Explorer or saving the query to a Notebook. You can also send the anomaly, Explorer link, or Notebook to the associated service owners or teams, so they can help provide context for why the anomaly occurred, and if it's expected.
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
