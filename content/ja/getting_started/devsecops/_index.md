@@ -134,7 +134,7 @@ Infrastructure DevSecOps バンドルは、[Cloud Security Management (CSM)][3] 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro には、[Containers][1]、[Serverless][2]、[CSM Pro][3] が含まれ、[800 を超える標準インテグレーション][4]も利用できます。
+Infrastructure DevSecOps Pro には、[Containers][1]、[Serverless][2]、[CSM Pro][3] が含まれ、{{< translate key="integration_count" >}} [を超える標準インテグレーション][4]も利用できます。
 
 ### セットアップ
 
@@ -174,7 +174,7 @@ Infrastructure DevSecOps Pro に含まれる機能の詳細については、次
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise には、[Containers][1]、[Serverless][2]、[Live Processes][3]、[CSM Enterprise][4] が含まれ、[800 を超える標準インテグレーション][5]も利用できます。
+Infrastructure DevSecOps Enterprise には、[Containers][1]、[Serverless][2]、[Live Processes][3]、[CSM Enterprise][4] が含まれ、{{< translate key="integration_count" >}} [を超える標準インテグレーション][5]も利用できます。
 
 ### セットアップ
 

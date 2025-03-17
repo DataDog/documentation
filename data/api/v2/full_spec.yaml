@@ -28298,6 +28298,17 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringStandardDataSource:
+      default: logs
+      description: Source of events, either logs or audit trail.
+      enum:
+      - logs
+      - audit
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - AUDIT
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -28465,6 +28476,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -39837,7 +39850,12 @@ paths:
         type: unsafe
   /api/v2/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      description: 'Cancel a downtime.
+
+
+        **Note**: Downtimes canceled through the API are no longer active, but are
+        retained for approximately two days before being permanently removed. The
+        downtime may still appear in search results until it is permanently removed.'
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
