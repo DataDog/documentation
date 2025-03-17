@@ -66,7 +66,7 @@ You can also find which Datadog features you are actively using for a given serv
 
 This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
-## Take Actions on a Given Component
+## Take actions on a given component
 ### Find Software Catalog Actions in Action Catalog
 To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
 
