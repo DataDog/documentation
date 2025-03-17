@@ -23,6 +23,7 @@ Access the [Custom Allocation Rules section][1] under Cloud Cost settings to est
 | Proportional  | Costs are allocated based on the proportional spend of destination values. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend, for example, on `aws_product:ec2`.|
 | Even  | Costs are allocated evenly to your destination tags. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
 | Custom Percentage  | Costs are allocated based on custom percentages for the destination tags. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
+| Dynamic by Metric  | Costs are allocated based on the proportional amount of a defined metric. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
 
 ## Allocation methods
 
@@ -34,12 +35,6 @@ Costs are allocated based on the proportional spend of destination values. Apply
 {{< img src="cloud_cost/custom_allocation_rules/proportional_diagram.png" alt="Diagram illustrating the proportional split strategy" style="width:60%;" >}}
 
 {{< img src="cloud_cost/custom_allocation_rules/proportional_ui.png" alt="The proportional split strategy as seen in Datadog" style="width:60%;" >}}
-
-### Partitioning
-
-You can also specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
-
-{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
 
 {{% /tab %}}
 
@@ -61,6 +56,12 @@ With the custom percentage strategy, you can define static custom percentages fo
 {{< img src="cloud_cost/custom_allocation_rules/custom_percentage_ui.png" alt="The even split strategy as seen in Datadog" style="width:60%;" >}}
 
 {{% /tab %}}
+
+{{% tab "Dynamic by Metric Allocation" %}}
+With the custom percentage strategy, you can define static custom percentages for the destination tags you select. For example, if you have 3 destinations (`teamA`, `teamB`, `teamC`) you can allocate 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Specify what costs are included in the allocation
@@ -72,6 +73,12 @@ With the custom percentage strategy, you can define static custom percentages fo
 | Filter by | Only applicable for Proportional and Even strategies, optional | `aws_product` is `ec2` |
 | Partition costs by | Only applicable for Proportional and Even strategies, optional | `environment` is all values |
 | Name | Yes | allocate\_untagged\_support\_costs |
+
+### Partitioning
+
+For some of the allocation strategies, you can specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, with proportional allocation, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+
+{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
 
 ## Managing rules
 Rules can be modified and deleted in the [Custom Allocation Rules section][1] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
