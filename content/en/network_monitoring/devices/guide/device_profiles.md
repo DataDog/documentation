@@ -66,11 +66,11 @@ Use reference devices to select which devices you want to gather OIDs for your c
 
 1. Keep the current reference device selection to perform a device scan. Additionally, you can add more devices or change the current selection.
 
-2. Optionally, click **Proceed Manually** to proceed without performing a scan.
+2. Click **Scan Devices** to proceed to Step 4, which initiates the scan.
+
+3. Optionally, click **Proceed Manually** to proceed without performing a scan.
 
   {{< img src="/network_device_monitoring/profile_onboarding/reference_devices.png" alt="The Network Device profile creation page showing the Reference device section." style="width:100%;">}}
-
-2. Click **Scan Devices** to proceed to Step 4, which initiates the scan.
 
 ### Step 4: Scan reference devices
 
