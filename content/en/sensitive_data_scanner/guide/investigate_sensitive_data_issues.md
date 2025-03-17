@@ -29,7 +29,7 @@ The Sensitive Data Scanner's [Summary][1] page categorizes and prioritizes sensi
 
 ## Triage sensitive data issues
 
-Navigate to the [Summary][1] page to see all sensitive data issues within the selected timeframe and start investigating issues.
+Navigate to the [Summary][1] page to see all sensitive data issues within the selected time frame and start investigating issues.
 
 {{< tabs >}}
 {{% tab "Telemetry Data" %}}
@@ -40,10 +40,11 @@ To investigate an issue:
 
 1. Click on the issue in the **Issues Overview**.
 2. In the issue panel, click **View Recent Changes** to navigate to [Audit Trail][3] and see if there are any recent configuration changes that caused the sensitive data issue.
-3. Click **View All Logs** to see in Log Explorer all logs matching the query.<br>
-Click **View All APM Spans** to see in Trace Explorer all traces matching the query.<br>
-Click **View All RUM Events** to see in RUM Explorer all RUM events matching the query.<br>
-Click **View All Events** to see in Events Explorer all events matching the query.
+3. Use the following options to explore different types of data matching the query:
+    a. To view all logs related to the query in Log Explorer, click **View All Logs**.<br>
+    b. To view all traces matching the query in Trace Explorer, click **View All APM Spans**.<br>
+    c. To view all RUM events matching the query, click **View All RUM Events**.<br>
+    d. To view all events matching the query, click **View All Events**.
   {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/issues_panel_02_01_2024.png" alt="The issues panel showing a critical visa card scanner issue" style="width:50%;">}}
 4. In the **Blast Radius** section:<br>
     a. View the Top 10 services, hosts, and environments impacted by this sensitive data issue.<br>
@@ -76,9 +77,9 @@ To investigate a datastore:
 1. You can view files where sensitive data was found and then click on a file to inspect it in AWS.
   Datadog recommends doing the following:
     - Review a few files to get a sense of the classification accuracy.
-    - Follow up with the team or service owner (shown in the side panel) to confirm if sensitive data is supposed to be in that bucket.
-      - If it is not supposed to be in that bucket, delete the files or move them to an appropriate bucket.
-      - If it is supposed to be in that bucket, follow the following steps to improve your security posture:
+    - Follow up with the team or service owner listed in the side panel to confirm whether sensitive data is meant to be in the bucket.
+      - If it is not supposed to be in the bucket, delete the files or move them to an appropriate bucket.
+      - If it is supposed to be in the bucket, complete the following steps to improve your security posture:
 
         1. Click the **Security** tab in the side panel and review the **Misconfigurations** section.
         1. Click on a misconfiguration to see details in Cloud Security Management.
