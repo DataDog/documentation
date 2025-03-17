@@ -6518,6 +6518,11 @@ menu:
       url: /security/code_security/iast/setup/
       parent: sec_iast
       weight: 1
+    - name: Security Controls
+      identifier: sec_code_security_controls
+      url: /security/code_security/iast/security_controls/
+      parent: sec_iast
+      weight: 2
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/

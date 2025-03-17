@@ -33,7 +33,7 @@ For your security, CoTerm uses [Sensitive Data Scanner][2] to detect and obfusca
 
 You can review your recorded terminal sessions and process data in Datadog:
 
-- **As replays**: Watch terminal sessions in a video-like player.
+- **As replays**: Watch [terminal sessions][6] in a video-like player.
 - **As events**: In [Event Explorer][4], each recorded command appears as an event.
 - **As logs**: In [Log Explorer][5], you can perform full-text searches and queries of terminal sessions as multi-line logs.
 
@@ -52,3 +52,4 @@ You can review your recorded terminal sessions and process data in Datadog:
 [3]: /service_management/case_management/
 [4]: http://app.datadoghq.com/event/explorer?query=source%3Acoterm_process_info
 [5]: https://app.datadoghq.com/logs?query=service%3Addcoterm
+[6]: https://app.datadoghq.com/terminal-streams

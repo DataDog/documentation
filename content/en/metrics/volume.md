@@ -44,6 +44,7 @@ Use the search, filter, and sort features to understand:
 - Which team owns what metric names?
 - Which metric names your team should focus on optimizing?
 - Which metrics have the highest cardinality, and which metric names are spiking (have the highest increase in volume)?
+- Which top metrics aren't being queried on assets?
 
 The Metric and Tag search bars provide a set of actions to filter the list of metrics. Enter keywords to search metric names. Type in any tag key value pair in the *Filter by Tag Value* box to filter the list by a specific team, application, or service.
 
