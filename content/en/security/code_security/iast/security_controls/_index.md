@@ -63,7 +63,7 @@ The injection-related vulnerabilities are:
 * XPath Injection
 * Cross-Site Scripting (XSS)
 
-## Compatibility Requirements
+## Compatibility requirements
 
 This feature is available starting from the following versions of each language’s tracing library:
 
