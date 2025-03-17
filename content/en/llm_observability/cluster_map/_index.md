@@ -25,6 +25,8 @@ You can visualize the clusters by using a **Box Packing** or **Scatter Plot** la
 
 Cluster Maps provide an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
 
+<div class="alert alert-info"> Built with Llama - the Cluster Map uses Llama to generate topic labels based on your instrumented LLM application's inputs and outputs. </div>
+
 ## Search and manage clusters
 
 Customize your search query by selecting the sorting options to narrow down the clusters based on your specific criteria, such as evaluation metrics or time periods, for more targeted analysis.
@@ -36,8 +38,6 @@ Customize your search query by selecting the sorting options to narrow down the 
 Select a topic cluster from the list to examine how inputs or outputs about specific topics perform against other topics for each metric or evaluation. You can also see individual prompts and responses for each cluster. For example, you can get an overview of your slowest topics when you overlay by `duration`.
 
 {{< img src="llm_observability/cluster_map/box.png" alt="The box packing layout displays clusters of traces represented by colored circles, and includes a panel listing clusters with topics, trace counts, and failure rates." style="width:100%;" >}}
-
-<div class="alert alert-info">Cluster Map feature includes components built with Llama</div>
 
 ## Further Reading
 
