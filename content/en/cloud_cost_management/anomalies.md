@@ -16,7 +16,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to id
 ## View cost anomalies
 
 On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view the anomalies and filter them to Active, Past, or Resolved:
-- **Active**: An anomaly is **Active** if anomalous costs occurred in the last day (the last full day of cost data, which is often 2-3 days prior). 
+- **Active**: An anomaly is **Active** if anomalous costs occurred in the last day (the last full day of cost data, which is often 2-3 days prior).
 - **Past**: If an anomaly lasts more than 7 days, or the algorithm detects that costs are no longer anomalous, the anomaly is moved to the **Past** tab. Past anomalies can be useful to report on, but are often less urgent and actionable.
 - **Resolved**: If you [resolve an anomaly](#resolve-anomalies), the anomaly can be found in the **Resolved** tab.
 
@@ -24,7 +24,7 @@ Each anomaly explains how much more costs were than expected, the specific cloud
 
 Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
-{{< img src="cloud_cost/anomalies/cost anomalies - list.png" alt="List of cost anomalies automatically detected" style="width:100%;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
 ## Take action on anomalies
 
@@ -34,18 +34,15 @@ Investigate the anomaly further, and by any additional dimensions, by viewing th
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel" alt="In the side panel you can take action on your cost anomaly" style="width:100%;" >}}
+{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
 
 ## Resolve anomalies
 
-As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are otherwise not considered an anomaly. 
+As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are otherwise not considered an anomaly.
 
 Mark anomalies as significant or insignificant to give feedback and help improve the anomaly detection algorithm. Resolve anomalies with context to move anomalies to the Resolved tab, and add context for others in your organization.
 
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel - is significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:100%;" >}}
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - is significant.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it should be an anomaly  and then resolve it" style="width:100%;" >}}
-{{< img src="cloud_cost/anomalies/cost anomalies - side panel - not significant - not an anomaly.png" alt="You can mark cost anomaly as not significant and then you can choose not an anomaly and write an explanation about why it's not an anomaly and then resolve it" style="width:100%;" >}}
-
+{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:90%;" >}}
 
 ## How anomalies are defined
 
