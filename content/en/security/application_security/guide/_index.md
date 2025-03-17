@@ -12,3 +12,6 @@ disable_toc: true
     {{< nextlink href="/security/code_security/guides/automate_risk_reduction_sca/" >}}Automate open source risk reduction with Datadog SCA{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Advanced Topics" >}}
+    {{< nextlink href="/security/application_security/guide/standalone_application_security/" >}}Standalone Application Security{{< /nextlink >}}
+{{< /whatsnext >}}
