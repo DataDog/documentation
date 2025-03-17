@@ -280,7 +280,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
   - For GitHub and GitLab: Metrics are emitted for the original commits.
-  - For other git providers: Metrics are emitted for the new commit added to the target branch.
+  - For other Git providers: Metrics are emitted for the new commit added to the target branch.
 
 ## Calculating change failure rate
 
