@@ -58,7 +58,7 @@ Alternatively, on the [*Service* page][8], click **Service Config** on the lower
 
 {{< img src="tracing/software_catalog/service-page-service-config.png" alt="Service page with the Service Config link highlighted." >}}
 
-In the Setup Guidance section, you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][9].
+Above the Setup Guidance section in the Service Information section, you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][9].
 
 You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
 
