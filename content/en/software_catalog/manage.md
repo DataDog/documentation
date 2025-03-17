@@ -82,7 +82,7 @@ Below is a comprehensive list of actions available for Software Catalog in Datad
   - "Get service dependencies" to get a service's immediate upstream and downstream services
 - **Incident Triage**
   - "Get service PagerDuty on call"
-  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
+  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks)
 
 ## Investigating infrastructure
 From the **Performance** tab, find the service you are investigating. In the **Infrastructure** column, click the resources related to this service to **View in Service Context Map**.
