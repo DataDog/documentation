@@ -38,7 +38,7 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-**Note**: If you do not see the tag or attribute you're looking for, it may depend on when your data was last reported to Datadog. For more information, see [Historical Data][4].
+**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
 
 ## Add a template variable
 
