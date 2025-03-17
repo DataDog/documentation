@@ -1,6 +1,5 @@
 ---
 title: Monitors
-disable_sidebar: true
 aliases:
   - /guides/monitors/
   - /guides/monitoring/
@@ -47,7 +46,7 @@ You can also build your own monitors from scratch in lab environments in the Lea
 {{< whatsnext desc="Use the following resources to create a monitor:" >}}
     {{< nextlink href="/getting_started/monitors/" >}}Getting started with Monitors: Guide on how to build a metric based monitor{{< /nextlink >}}
     {{< nextlink href="/monitors/types/" >}}Create a monitor from Monitor Types{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Learning Center: Build a metric base monitor in a sandbox lab environment{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/getting-started-monitors" >}}Learning Center: Build a monitor in a sandbox lab environment{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Analyze aggregate data

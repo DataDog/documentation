@@ -2,7 +2,7 @@
 categories:
 - nube
 - azure
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Utiliza Datadog para monitorizar implementaciones de Canary en Azure
   Deployment Manager.
@@ -43,7 +43,7 @@ y una instancia activa de Azure Deployment Manager.
 
 1. Empieza por configurar monitores en Datadog para tu implementación. Comienza con un monitor para cada región. En función de la complejidad de tu aplicación, es posible que desees tener monitores para diferentes partes de la implementación en cada región. Completar el [Tutorial: Usar Azure Deployment Manager con plantillas de Resource Manager][1] te puede ayudar a decidir dónde monitorizar. Para monitorizar ideas, desmarca [el blog][2].
 2. Si al final tienes varios monitores para cada región, crea un [monitor compuesto][3] para cada paso o región de despliegue. Cada monitor compuesto es una combinación lógica de otros monitores que juntos indican el estado general de un paso de implementación.
-3. A continuación, configura Datadog como check de estado en la topología de Azure Deployment Manager [como parte del despliegue][4]. Establece estos pasos de check de estado como dependencias entre los pasos de implementación. Utiliza la [plantilla](#full-configuration-example) y sustituye `<API_KEY>` y `<APP_KEY>` por tus claves de la API y la aplicación Datadog. Crea una sección en `resources` para cada monitor (o monitor compuesto) que acabas de crear y sustituye `<monitor_ID>` por los ID de monitor. Es posible añadir varios checks dentro de un [paso de check de estado](#example-health-check-step), pero Datadog recomienda crear un [check](#example-health-check) por cada paso de check de estado y luego, crear pasos de check de estado adicionales para cada monitor compuesto. Si estás configurando el check con algo más que un monitor compuesto, asegúrate de actualizar la `regex` en consecuencia.
+3. A continuación, configura Datadog como check de estado en la topología de Azure Deployment Manager [como parte del despliegue][4]. Establece estos pasos de check de estado como dependencias entre los pasos de implementación. Utiliza la [plantilla](#full-configuration-example) y sustituye `<API_KEY>` y `<APP_KEY>` por tus claves de la API y la aplicación Datadog. Crea una sección en `resources` para cada monitor (o monitor compuesto) que acabas de crear y sustituye `<MONITOR_ID>` por los ID de monitor. Es posible añadir varios checks dentro de un [paso de check de estado](#example-health-check-step), pero Datadog recomienda crear un [check](#example-health-check) por cada paso de check de estado y luego, crear pasos de check de estado adicionales para cada monitor compuesto. Si estás configurando el check con algo más que un monitor compuesto, asegúrate de actualizar la `regex` en consecuencia.
 4. Sigue la [documentación de Microsoft][5] para iniciar la implementación.
 
 #### Ejemplo de check de estado

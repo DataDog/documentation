@@ -23,7 +23,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][18].
 
-The Datadog Profiler requires Go 1.19+.
+The Datadog Profiler requires one of the latest two major Go releases. These are the major Go releases [supported by the Go project][24].
 
 For the [Trace to Profiling integration][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.51.0+.
 
@@ -162,3 +162,4 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [21]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#pkg-constants
 [22]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
 [23]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
+[24]: https://go.dev/doc/devel/release

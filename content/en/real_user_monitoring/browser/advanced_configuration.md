@@ -35,7 +35,7 @@ There are various ways you can modify the [data and context collected][1] by RUM
 
 ## Override default RUM view names
 
-The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable alphanumeric IDs are removed automatically. For example, `/dashboard/1234` becomes `/dashboard/?`.
+The RUM Browser SDK automatically generates a [view event][2] for each new page visited by your users, or when the page URL is changed (for single-page applications). A view name is computed from the current page URL, where variable IDs are removed automatically. A path segment that contains at least one number is considered a variable ID. For example, `/dashboard/1234` and `/dashboard/9a` become `/dashboard/?`.
 
 Starting with [version 2.17.0][3], you can add view names and assign them to a dedicated service owned by a team by tracking view events manually with the `trackViewsManually` option:
 
@@ -477,10 +477,7 @@ window.DD_RUM &&
 
 If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
 
-The RUM Browser SDK ignores:
-
-- Attributes added outside of `event.context`
-- Modifications made to a RUM view event context
+The RUM Browser SDK ignores attributes added outside of `event.context`
 
 ### Enrich RUM events with feature flags
 
@@ -536,19 +533,22 @@ window.DD_RUM &&
 
 You can update the following event properties:
 
-|   Attribute           |   Type    |   Description                                                                                       |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------|
-|   `view.url`            |   String  |   The URL of the active web page.                            |
-|   `view.referrer`       |   String  |   The URL of the previous web page from which a link to the currently requested page was followed.  |
-|   `view.name`           |   String  |   The name of the current view.                            |
-|   `service`             |   String  |   The service name for your application.                                                            |
-|   `version`             |   String  |   The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                          |
-|   `action.target.name`  |   String  |   The element that the user interacted with. Only for automatically collected actions.              |
-|   `error.message`       |   String  |   A concise, human-readable, one-line message explaining the error.                                 |
-|   `error.stack `        |   String  |   The stack trace or complementary information about the error.                                     |
-|   `error.resource.url`  |   String  |   The resource URL that triggered the error.                                                        |
-|   `resource.url`        |   String  |   The resource URL.                                                                                 |
-|   `context`        |   Object  |   Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**).                                                                                 |
+| Attribute                      | Type   | Description                                                                                                                                                                               |
+| ------------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view.url`                     | String | The URL of the active web page.                                                                                                                                                           |
+| `view.referrer`                | String | The URL of the previous web page from which a link to the currently requested page was followed.                                                                                          |
+| `view.name`                    | String | The name of the current view.                                                                                                                                                             |
+| `view.performance.lcp.resource_url` | String |   The resource URL for the Largest Contentful Paint.                                                                                                                                 |
+| `service`                      | String | The service name for your application.                                                                                                                                                    |
+| `version`                      | String | The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13.                                                                                                                  |
+| `action.target.name`           | String | The element that the user interacted with. Only for automatically collected actions.                                                                                                      |
+| `error.message`                | String | A concise, human-readable, one-line message explaining the error.                                                                                                                         |
+| `error.stack `                 | String | The stack trace or complementary information about the error.                                                                                                                             |
+| `error.resource.url`           | String | The resource URL that triggered the error.                                                                                                                                                |
+| `resource.url`                 | String | The resource URL.                                                                                                                                                                         |
+| `long_task.scripts.source_url` | String | The script resource url                                                                                                                                                                   |
+| `long_task.scripts.invoker`    | String | A meaningful name indicating how the script was called                                                                                                                                    |
+| `context`                      | Object | Attributes added with the [Global Context API](#global-context), the [View Context API](#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][15].
 
@@ -985,6 +985,19 @@ window.DD_RUM &&
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Error context
+
+### Attaching local error context with dd_context
+
+When capturing errors, additional context may be provided at the time an error is generated. Instead of passing extra information through the `addError()` API, you can attach a `dd_context` property directly to the error instance. The RUM Browser SDK automatically detects this property and merges it into the final error event context.
+
+{{< code-block lang="javascript" >}}
+const error = new Error('Something went wrong')
+error.dd_context = { component: 'Menu', param: 123, }
+throw error
+{{< /code-block >}}
+
 ## Global context
 
 ### Add global context property
@@ -1306,7 +1319,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
 [12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
-[14]: /real_user_monitoring/guide/enrich-and-control-rum-data
+[14]: /real_user_monitoring/feature_flag_tracking/using_feature_flags/#feature-flag-naming
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
 [17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130

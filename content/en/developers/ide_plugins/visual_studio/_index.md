@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
-- link: "/code_analysis/static_analysis"
+- link: "/security/code_security/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
 - link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
@@ -110,7 +110,7 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [3]: https://www.datadoghq.com/
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [5]: /tracing/error_tracking/
-[6]: /security/application_security/vulnerability_management/
+[6]: /security/code_security/software_composition_analysis/
 [8]: /profiler/
 [10]: /continuous_integration/guides/flaky_test_management/
 [12]: /integrations/guide/source-code-integration/
@@ -120,8 +120,8 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [16]: https://github.com/DataDog/datadog-for-visual-studio/issues
 [17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
 [18]: /logs/explorer/
-[19]: /code_analysis/static_analysis/
-[20]: /code_analysis/static_analysis_rules/
+[19]: /security/code_security/static_analysis/
+[20]: /security/code_security/static_analysis/static_analysis_rules/
 [21]: https://www.datadoghq.com/legal/privacy/
 [22]: https://www.datadoghq.com/legal/eula/
 [23]: /account_management/multi_organization/#custom-sub-domains

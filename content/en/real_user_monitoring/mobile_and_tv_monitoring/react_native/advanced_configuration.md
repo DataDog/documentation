@@ -126,7 +126,7 @@ Enables crash reporting for native platforms (iOS, Android).
 **Default**: `100`<br/>
 See `sessionSampleRate`.
 
-`sessionSampleRate`
+`sessionSamplingRate`
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `100`<br/>
@@ -172,13 +172,13 @@ Telemetry data (such as errors and debug logs) about SDK execution is sent to Da
 : Optional<br/>
 **Type**: Number | false<br/>
 **Default**: `0`<br/>
-The threshold for javascript long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+The threshold for JavaScript long tasks reporting in milliseconds. Setting it to `0` or `false` disables JavaScript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `nativeLongTaskThresholdMs`
 : Optional<br/>
 **Type**: Number | false<br/>
 **Default**: `200`<br/>
-The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables native long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
 
 `vitalsUpdateFrequency`
 : Optional<br/>
@@ -280,6 +280,21 @@ DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}
 //...
 DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
+
+### Notify the SDK that your view finished loading
+
+You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`. 
+Call this method when your view is fully loaded and ready to be displayed to the user:
+
+```javascript
+DdRum.addViewLoadingTime(true);
+```
+
+Use the `overwrite` parameter to replace the previously calculated loading time for the current view.
+
+After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
+
+**Note**: This API is experimental.
 
 ### Add custom timings
 You can add custom timings:

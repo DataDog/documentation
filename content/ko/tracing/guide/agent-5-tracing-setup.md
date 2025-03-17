@@ -34,19 +34,19 @@ APM는 리눅스와 도커에서 Datadog Agent 5.13 이상의 버전을 사용�
 ### 애플리케이션의 계측
 
 {{< whatsnext desc="지원 언어 중 하나를 선택하세요">}}
-    {{< nextlink href="tracing/setup/java" tag="Java" >}}자바(Java) 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}C++ 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/python" tag="Python" >}}파이썬(Python) 언어 계측.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/java" tag="Java" >}}자바(Java) 언어 계측{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/cpp" tag="C++" >}}C++ 언어 계측{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/python" tag="Python" >}}Python 언어 계측{{< /nextlink >}}
     {{< nextlink href="tracing/setup/ruby" tag="Ruby" >}}Ruby 언어 계측{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 언어 계측.{{< /nextlink >}}
-    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 언어 계측.{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/go" tag="Go" >}}Go 언어 계측{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/nodejs" tag="Node.js" >}}Node.js 언어 계측{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/dotnet" tag=".NET" >}}.NET 언어 계측{{< /nextlink >}}
+    {{< nextlink href="tracing/setup/php" tag="PHP" >}}PHP 언어 계측{{< /nextlink >}}
 {{< /whatsnext >}}
 
 공식 라이브러리 지원에 포함되지 않은 언어로 작성된 애플리케이션을 계측하려면 [트레이싱 API][8] 페이지를 참조하세요.
 
-## 설정
+## 구성
 
 Datadog Agent는 인프라스트럭처 모니터링과 APM 설정 옵션 모두에서 설정 파일을 사용합니다.
 

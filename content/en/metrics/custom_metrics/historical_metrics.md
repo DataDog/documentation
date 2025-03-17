@@ -15,6 +15,10 @@ further_reading:
   text: "Monitor system performance across longer time frames with historical metrics"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
+
 ## Overview
 
 Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).

@@ -27,7 +27,7 @@ If you send a Page through a monitor alert, and your Team's processing rule uses
 
 ### Page manually
 
-You can manually send a Page directly in the Datadog platform, through a tool like Slack or Microsoft Teams, or with the Datadog API.
+You can manually send a Page directly in the Datadog platform, or through a tool like Slack or Microsoft Teams.
 
 #### Through Datadog
 
@@ -38,12 +38,12 @@ You can manually send a Page directly in the Datadog platform, through a tool li
 
 Manually paging a Team through Datadog always results in a `high` urgency Page.
 
-#### Through Slack or Microsoft Teams
+#### Through Slack
 1. Install the Datadog app
 1. Enter `/datadog page` or `/dd page`.
 1. Select a Team to send a Page to.
 
-Manually paging a Team from Slack or Microsoft Teams always results in a `high` urgency Page.
+Manually paging a Team from Slack always results in a `high` urgency Page.
 
 ## Further Reading
 

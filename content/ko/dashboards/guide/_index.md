@@ -23,7 +23,7 @@ title: 그래프 작성 가이드
     {{< nextlink href="dashboards/guide/context-links" >}}컨텍스트 링크{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unit-override" >}}단위 재정의{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Terraform을 사용해 대시보드 편집 제한하기{{< /nextlink >}}
-    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}대시보드 API: 2024년 11월 30일까지 마이그레이션이 _준비_될 예정{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/is-read-only-deprecation" >}}대시보드 API: 2024년 12월 13일까지 마이그레이션이 _준비_될 예정{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}템플릿 변수와 임베드 가능한 그래프{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}특정 HTTS URL을 iFrame할 수 없는 이유는 무엇인가요?{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks 모범 사례{{< /nextlink >}}
@@ -31,8 +31,10 @@ title: 그래프 작성 가이드
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}메트릭 기반 SLO 쿼리 범위 지정{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}APM 통계 그래프 구성하기{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/version_history" >}}버전 내역{{< /nextlink >}}
-    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기
-    {{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기{{< /nextlink >}} 
+    {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Datadog에서 와일드카드 위젯과 함께 Vega-Lite 사용하기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/graphing_json/" >}}JSON으로 그래프 만들기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/tv_mode" >}}대시보드용 TV 모드 사용하기{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="함수:" >}}

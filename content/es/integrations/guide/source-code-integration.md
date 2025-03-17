@@ -390,13 +390,13 @@ La integración del código fuente admite los siguientes proveedores Git:
 
 | Proveedor | Compatibilidad con enlaces contextuales | Compatibilidad con fragmentos de código |
 |---|---|---|
-| SaaS GitHub (github.com) | Sí | Accede a dashboards preconfigurados |
-| GitHub Enterprise Server | Sí | Accede a dashboards preconfigurados |
-| SaaS GitLab (gitlab.com) | Sí | Accede a dashboards preconfigurados |
-| GitLab autogestionado | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Bitbucket | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Servicios Azure DevOps | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
-| Azure DevOps Server | Accede a dashboards preconfigurados | {{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}} |
+| SaaS GitHub (github.com) | Sí | Sí |
+| GitHub Enterprise Server | Sí | Sí |
+| SaaS GitLab (gitlab.com) | Sí | Sí |
+| GitLab autogestionado | Sí | No |
+| Bitbucket | Sí | No |
+| Servicios Azure DevOps | Sí | No |
+| Azure DevOps Server | Sí | No |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -586,7 +586,7 @@ Si utilizas la integración GitHub, haz clic en **Connect to preview** en los ma
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 

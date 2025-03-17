@@ -327,7 +327,8 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Configure the `Logger`:
+3. Configure the `Logger`: <br>
+**Note**: You must create the logger *after* calling `Logs.enable()`.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
