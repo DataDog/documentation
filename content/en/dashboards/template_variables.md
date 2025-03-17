@@ -38,6 +38,8 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
+**Note**: If you do not see the tag or attribute you're looking for, it may be because that data hasn't been reported to Datadog recently. For more information, see [Historical Data][4].
+
 ## Add a template variable
 
 To add a template variable in a dashboard:
@@ -169,3 +171,4 @@ For example, enter `$region` in the event overlays search box. This searches for
 [1]: /getting_started/tagging/#define-tags
 [2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[4]: /dashboards/faq/historical-data/
