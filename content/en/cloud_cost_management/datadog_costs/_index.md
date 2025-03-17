@@ -53,7 +53,7 @@ Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) c
 
 Datadog cost data is available at the parent or sub-organization level. For sub-organizations, [Cost Summary (sub-organization)][5] also needs to be enabled.
 
-Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
+Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
