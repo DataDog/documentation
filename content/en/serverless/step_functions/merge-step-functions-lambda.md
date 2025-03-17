@@ -8,12 +8,16 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
-<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. If you are using <code>JSONPath</code> to define your Step Function definitions, see the below sections for supported configurations</a>.</div>
+<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach will ensure that any context upstream to the Step Function will be preserved and passed down. If you are using <code>JSONPath</code> to define your Step Function definitions, see the below sections for supported configurations</a>.</div>
 
 ## Merge Step Functions with downstream Lambda traces
 
 ### Requirements
-Node.js (layer v116+) or Python (layer v103+) runtimes.
+For Node.js: Datadog Lambda Library for Node.js layer v116+.
+
+For Python: Datadog Lambda Library for Python layer v103+.
+
+For other runtimes: Datadog Extension v75+.
 
 Your State Machine Definition must be using [JSONata][3] as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
 
@@ -62,7 +66,7 @@ On the Step Functions Task, set the `_datadog` field in the `Input` key as follo
 
 ## Merge Step Functions with downstream Lambda traces through Managed Services
 
-For cases where a the Step Function is indirectly invoking a Lambda through an Managed AWS Service.
+For cases where a Step Function is indirectly invoking a Lambda through a managed AWS service.
 
 ### Requirements
 Python (layer v107+) runtimes only.
@@ -154,8 +158,6 @@ If the layer or tracer version requirements are fulfilled, no further setup is r
 <div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
 
 ## Merge Step Functions traces with downstream Lambda traces (JSONPath)
-
-<div class="alert alert-info">If another service upstream to the Step Function is propagating its context, that context will not be injected into the Lambda following the <code>JSONPath</code> approach.</div>
 
 ### Requirements
 Node.js (layer v112+) or Python (layer v95+) runtimes.
