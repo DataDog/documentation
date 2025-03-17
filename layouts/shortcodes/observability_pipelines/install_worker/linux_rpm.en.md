@@ -1,3 +1,5 @@
+<div class="alert alert-warning">The Observability Pipelines Worker supports RHEL and CentOS versions 8.0 or later.</div>
+
 1. Click **Select API key** to choose the Datadog API key you want to use.
 1. Run the one-step command provided in the UI to install the Worker.
 
