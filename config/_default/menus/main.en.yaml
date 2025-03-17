@@ -4481,16 +4481,11 @@ menu:
       identifier: cd_deployments_ciproviders
       parent: cd_deployments
       weight: 102
-    - name: Search and Manage
-      url: continuous_delivery/search
-      identifier: cd_search
-      parent: cd
-      weight: 2
-    - name: Explorer
+    - name: Explore Deployments
       url: continuous_delivery/explorer
       identifier: cd_explorer
       parent: cd
-      weight: 3
+      weight: 2
     - name: Search Syntax
       url: continuous_delivery/explorer/search_syntax
       identifier: cd_explorer_search_syntax
@@ -6482,6 +6477,11 @@ menu:
       url: /security/code_security/iast/setup/
       parent: sec_iast
       weight: 1
+    - name: Security Controls
+      identifier: sec_code_security_controls
+      url: /security/code_security/iast/security_controls/
+      parent: sec_iast
+      weight: 2
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/
