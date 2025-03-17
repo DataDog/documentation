@@ -224,7 +224,7 @@ To control which parts of a file are scanned, add a comment that starts with `# 
 
 ### Supported commands
 
-| **Command**                      | **Description**                 |
+| **Comment**                      | **Description**                 |
 |----------------------------------|---------------------------------|
 | `dd-iac-scan ignore`             | Ignores the entire file.        |
 | `dd-iac-scan disable=<query_id>` | Ignores specific queries.       |
@@ -292,7 +292,7 @@ Prevents scan results from flagging the line immediately after this comment. Thi
 6: }
 ```
 
-Findings for lines 2 and 3 are ignored.
+Findings for line 3 are ignored.
 
 #### dd-iac-scan ignore-block
 
@@ -307,7 +307,7 @@ Prevents scan results from flagging an entire resource block and all its key-val
 6: }
 ```
 
-Findings related to the entire block (lines 1-6 in this example) are ignored.
+Findings related to the entire block (lines 2-6 in this example) are ignored.
 
 ## Further reading
 
