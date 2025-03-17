@@ -20,30 +20,6 @@ After your applications have been manually instrumented, you can begin managing 
 
 The Browser SDK supports all modern desktop and mobile browsers. For more information, see the [Browser Support][3] table.
 
-## Choosing an installation method
-
-### Manual instrumentation
-
-You can add the RUM SDK manually to your application code.
-
-**Frontend engineering, mobile engineering, or product teams** may find this method useful for:
-
-- Daily engineering needs (live support, troubleshooting, downstream services health checks, and so on)
-- Product needs (user flow analysis, user segmentation, feature flag tracking, and so on)
-
-### Auto-instrumentation
-
-{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="true" header="Try the Auto-Instrumentation Preview!">}}
-You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
-{{< /callout >}}
-
-You can automatically add RUM JS to your web app HTML by installing the RUM injector by downloading the RUM Installer or by CLI (running a command).
-
-**SRE and engineering teams** without access to frontend code or **teams who need to manage** all observability needs centrally may find this useful for:
-
-- Unlocking performance data across all applications upon setting up RUM
-- Start holistically monitoring application performance across the organization
-
 ## Setup
 
 To set up Browser Monitoring manually, create an application in Datadog:

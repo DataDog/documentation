@@ -2,12 +2,9 @@
 title: Browser Monitoring Setup
 description: Understand your options for setting up the RUM Browser SDK.
 further_reading:
-- link: '/real_user_monitoring/browser/setup/client/'
+- link: '/real_user_monitoring/browser/'
   tag: 'Documentation'
-  text: 'Browser Monitoring Client-Side Instrumentation'
-- link: '/real_user_monitoring/browser/setup/server'
-  tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
+  text: 'RUM Browser Monitoring'
 ---
 
 ## Overview
@@ -38,7 +35,7 @@ Automatically add RUM JS to your web app HTML by installing the RUM injector by 
 - Unlocking performance data across all applications upon setting up RUM
 - Start holistically monitoring application performance across the organization
 
-To learn more, see auto-instrumentation.
+To learn more, see [auto-instrumentation][1].
 
 ### Manual instrumentation
 
@@ -49,6 +46,11 @@ Add the RUM SDK manually to your application code.
 - Daily engineering needs (live support, troubleshooting, downstream services health checks, and so on)
 - Product needs (user flow analysis, user segmentation, feature flag tracking, and so on)
 
+To learn more, see [client-side instrumentation][2].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/setup/server
 [2]: /real_user_monitoring/browser/setup/client
