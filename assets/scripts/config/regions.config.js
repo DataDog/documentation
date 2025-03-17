@@ -198,6 +198,14 @@ export default {
       ap1: 'ap-northeast-1',
       gov: 'N/A'
     },
+    aws_private_link_cross_region: {
+      us: 'US East (N.Virginia) (us-east-1)',
+      us3: 'N/A',
+      us5: 'N/A',
+      eu: 'N/A',
+      ap1: 'Asia Pacific (Tokyo) (ap-northeast-1)',
+      gov: 'N/A'
+    },
     aws_private_link_api_service_name: {
       us: 'com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77',
       us3: 'The private link service for US3 is not supported.',

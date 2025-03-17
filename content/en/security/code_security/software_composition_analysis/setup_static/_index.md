@@ -83,6 +83,9 @@ The GitHub Action works for the following languages and following files:
 ## Generic CI Providers
 If you don't use GitHub Actions, you can run the [datadog-ci][14] CLI directly in your CI pipeline platform and upload your SBOM to Datadog.
 
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
+`master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][17].
+
 Prerequisites:
 
 - unzip
@@ -146,15 +149,15 @@ You **must** run an analysis of your repository on the default branch before res
 ### Link results to services
 Datadog associates static code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
 2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
 3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 
 If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
 
-#### Identifying the code location in the Service Catalog
+#### Identifying the code location in the Software Catalog
 
-The [schema version `v3`][15] and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+The [schema version `v3`][15] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of globs that should match paths in the repository.
 
@@ -215,5 +218,6 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
 [16]: https://docs.datadoghq.com/account_management/teams/
+[17]: https://app.datadoghq.com/ci/settings/repository
