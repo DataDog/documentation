@@ -17,7 +17,7 @@ For more information on contributing, see the [contribution guidelines][18].
 ### Datadog Staff
 
 - Always branch off of master; never commit directly to master.
-- You MUST name your branch `<slack_username>/<branch_name>`. If you don't include the forward slash (`/`), the GitLab pipeline won't run, you won't get a branch preview, and your pull request will not pass CI. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] also ensures you get build notifications in Slack.
+- You MUST name your branch `<slack_username>/<branch_name>`. If you do not include the forward slash (`/`), the GitLab pipeline won't run, you won't get a branch preview, and your pull request will not pass in CI. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] also ensures you get build notifications in Slack.
 - Consult our [contributing guidelines][8].
 - When you're ready to commit, create a new pull request to master from your branch.
 - Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
