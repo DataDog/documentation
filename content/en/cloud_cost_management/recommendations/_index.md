@@ -420,6 +420,30 @@ multifiltersearch:
       recommendation_type: NAT Gateway cross-zone transfer charges
       recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
       recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Terminate CloudSQL Instance
+      recommendation_description: CloudSQL instances with minimal usage that can be terminated.
+      recommendation_prerequisites: ""
+    - category: Over-provisioned resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Downsize CloudSQL Database
+      recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Purchase CUD for Cloud SQL
+      recommendation_description: CloudSQL instances that would benefit from committed use discounts.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Cloud Run Job
+      recommendation_type: Purchase Flexible CUD for Cloud Run Job
+      recommendation_description: Cloud Run Jobs that would benefit from flexible committed use discounts.
+      recommendation_prerequisites: ""
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}

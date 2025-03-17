@@ -7,6 +7,10 @@ aliases:
 cascade:
     algolia:
         rank: 70
+further_reading:
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>

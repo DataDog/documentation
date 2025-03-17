@@ -16,7 +16,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog SCA in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
 

@@ -41,7 +41,7 @@ algolia:
 
 ## Assigning an owner 
 
-You can assign a `team` to entries in the Software Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. 
+You can assign a `team` to entries in the Software Catalog either in the UI or by creating a [Service Definition][4]. Datadog recommends that you set up [Datadog Teams][5] so that you can specify individual members of the team and take advantage of *Teams* filters across common views like Dashboards and Notebook lists. The ability to sync Datadog Teams with your identity providers (IdPs) is in [Preview][11].
 
 ## Determining and communicating criticality 
 Not all instances of observability carry the same level of importance. Some are mission-critical, while others are less so. By identifying the service tier, lifecycle, and the application ecosystem they belong to, you can determine if the observability coverage is adequate and quickly assess the severity of issues. 
@@ -58,7 +58,7 @@ Alternatively, on the [*Service* page][8], click **Service Config** on the lower
 
 {{< img src="tracing/software_catalog/service-page-service-config.png" alt="Service page with the Service Config link highlighted." >}}
 
-In the Setup Guidance section, you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][9].
+Above the Setup Guidance section in the Service Information section, you can see the ownership, PagerDuty, and related links information you've specified for the service in its [service definition][9].
 
 You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
 
@@ -106,3 +106,4 @@ Click a service in Software Catalog to open the side panel with the following de
 [8]: /tracing/services/service_page/
 [9]: /tracing/software_catalog/service_definition_api/
 [10]: /software_catalog/service_definitions/v3-0/
+[11]: /account_management/teams/manage/#manage-teams-through-an-identity-provider
