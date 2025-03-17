@@ -275,7 +275,6 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 ### Limitations
 
 - Change lead time stage breakdown metrics are only available for GitHub and GitLab.
-  - The GitLab integration is in Preview. Contact [Datadog support][8] to request access.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
