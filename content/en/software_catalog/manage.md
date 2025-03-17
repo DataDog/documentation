@@ -74,7 +74,7 @@ To explore the complete set of actions specifically related to Software Catalog,
 2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
 
 ### Available Software Catalog actions
-Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation:
 
 - **Retrieve Service Information**
   - "Get service definition" for a single service
