@@ -11,16 +11,16 @@ further_reading:
 
 Custom cost allocation allows you to showback or chargeback your costs by attributing selected costs to relevant business dimensions. After you have set up allocation rules, you can report on which costs were allocated by a rule. 
 
-Custom cost allocation runs after Tag Pipelines, enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
+Custom cost allocation runs after [Tag Pipelines][1], enabling allocations based on user-defined tags. Costs are allocated on a daily basis, and can be applied to Cloud Cost metrics from AWS, Google Cloud, and Azure. 
 
 ## Rule creation
 
-Access the [Custom Allocation Rules section][1] under Cloud Cost settings to establish rules. Choose from the following allocation methods:
+Access the [Custom Allocation Rules section][2] under Cloud Cost settings to establish rules. Choose from the following allocation methods:
 
 
 | Allocation Method | Description | Examples |
 | ----------------  | ----------- | -------- |
-| Proportional  | Costs are allocated based on the proportional spend of destination values. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend, for example, on `aws_product:ec2`.|
+| Proportional  | Costs are allocated based on the proportional spend of destination values. | Untagged support costs are allocated to teams `teamA`, `teamB`, and `teamC` based on their proportion of total spend on Amazon EC2.|
 | Even  | Costs are allocated evenly to your destination tags. | Untagged support costs are allocated evenly to teams `teamA`, `teamB`, and `teamC`. |
 | Custom Percentage  | Costs are allocated based on custom percentages for the destination tags. | Untagged support costs are allocated 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`. |
 | Dynamic by Metric  | Costs are allocated based on the proportional amount of a defined metric. | Shared PostgreSQL costs are allocated by total query execution time to users as defined by the Datadog metrics query `sum:postgresql.queries.time{*} by {user}.as_count()`. |
@@ -93,4 +93,5 @@ Changes to dynamic allocation rules may take up to 24 hours to be applied. After
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
+[1]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
+[2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
