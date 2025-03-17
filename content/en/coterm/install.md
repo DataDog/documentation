@@ -12,14 +12,20 @@ further_reading:
   text: "CoTerm Configuration Rules"
 ---
 
-CoTerm is currently supported on macOS and Linux.
+CoTerm is supported on macOS and Linux.
 
-1. Install Datadog CoTerm by running `brew install coterm` (macOS only), or:
+1. Install Datadog CoTerm with Homebrew or curl:
 
+   **brew** (macOS only)
+   ```shell
+   brew install coterm
+   ```
+  
+   **curl**
    ```shell
    curl --tlsv1.2 --proto '=https' -sSf 'https://coterm.datadoghq.com/install-ddcoterm.sh' | bash
    ```
-
+   
    This command downloads the latest version of CoTerm to `.ddcoterm/bin/ddcoterm` and updates your PATH in `.bashrc` and `.zshrc`. Restart your terminal or source your profile. If you are using a shell other than Bash or Zsh, add `path/to/.ddcoterm/bin` to your PATH manually.
 
 2. If your [Datadog site][6] is not `https://app.datadoghq.com`, set your site in `.ddcoterm/config.yaml` under `connection_config.host`:
@@ -61,7 +67,7 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
 : Enable or disable experimental `ptrace`-based process monitoring on Linux. Defaults to `false`.
 
 `connection_config`
-:
+: 
   `host`
   : Host for connecting to Datadog. Defaults to `https://app.datadoghq.com`.
 

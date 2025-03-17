@@ -12,9 +12,8 @@ further_reading:
   text: "CoTerm Configuration Rules"
 ---
 
-## View all recorded terminal sessions
-
-Recordings are listed [here](https://app.datadoghq.com/terminal-streams) in the Datadog UI.
+## View recorded terminal sessions
+At the beginning and end of every recorded terminal session, CoTerm displays a link to view the session in Datadog. You can also [view all recorded terminal sessions][7].
 
 ## CoTerm CLI command structure
 
@@ -135,3 +134,4 @@ COTERM_BREAK_GLASS=true kubectl delete foo
 [4]: /coterm/rules
 [5]: /service_management/incident_management/
 [6]: /coterm/install
+[7]: https://app.datadoghq.com/terminal-streams
