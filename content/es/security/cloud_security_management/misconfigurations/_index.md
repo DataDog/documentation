@@ -3,10 +3,10 @@ algolia:
   tags:
   - cspm
 aliases:
-- /security_platform/cspm/
-- /security/cspm/#glossary
-- /security/cspm/
-- /security/misconfigurations/
+- /es/security_platform/cspm/
+- /es/security/cspm/#glossary
+- /es/security/cspm/
+- /es/security/misconfigurations/
 title: Cloud Security Management Misconfigurations
 ---
 

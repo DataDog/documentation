@@ -1,5 +1,9 @@
 ---
 title: Setup Data Streams Monitoring for .NET
+further_reading:
+  - link: 'https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/'
+    tag: 'Blog'
+    text: 'Autodiscover Confluent Cloud connectors and easily monitor performance in Data Streams Monitoring'
 ---
 
 ### Prerequisites
@@ -15,7 +19,7 @@ title: Setup Data Streams Monitoring for .NET
 | Amazon SQS        | [Amazon SQS SDK][5]             | 2.48.0                 | 2.48.0 or later            |
 | Amazon SNS        | [Amazon SNS SDK][6]             | 3.6.0                  | 3.6.0 or later             |
 | IBM MQ            | [IBMMQDotnetClient][7]          | 2.49.0                 | 2.49.0 or later            |
-| Azure service bus | [Azure.Messaging.ServiceBus][8] | 2.38.0                 | 2.38.0 or later            |
+| Azure Service Bus <br><br> (requires enabling support for [OpenTelemetry Instrumentation Libraries][8]) | [Azure.Messaging.ServiceBus][9] | 2.53.0                 | 2.53.0 or later            |
 
 ### Installation
 
@@ -31,8 +35,16 @@ environment:
 Data Streams Monitoring uses one [message attribute][2] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or fewer message attributes set, allowing the remaining attribute for Data Streams Monitoring.
 
 ### Monitoring SNS-to-SQS pipelines
-To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][9].
+To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you must enable [Amazon SNS raw message delivery][10].
 
+### Monitoring connectors
+
+#### Confluent Cloud connectors
+{{% dsm_confluent_connectors %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent
 [2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
@@ -41,5 +53,6 @@ To monitor a data pipeline where Amazon SNS talks directly to Amazon SQS, you mu
 [5]: https://www.nuget.org/packages/AWSSDK.SQS
 [6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
 [7]: https://www.nuget.org/packages/IBMMQDotnetClient
-[8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
-[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
+[8]: /opentelemetry/interoperability/instrumentation_libraries/?tab=net
+[9]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[10]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html
