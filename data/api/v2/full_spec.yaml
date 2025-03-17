@@ -14864,6 +14864,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
