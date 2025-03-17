@@ -80,18 +80,19 @@ To investigate a datastore:
     - Follow up with the team or service owner listed in the side panel to confirm whether sensitive data is meant to be in the bucket.
       - If it is not supposed to be in the bucket, delete the files or move them to an appropriate bucket.
       - If it is supposed to be in the bucket, complete the following steps to improve your security posture:
-
         1. Click the **Security** tab in the side panel and review the **Misconfigurations** section.
         1. Click on a misconfiguration to see details in Cloud Security Management.
         1. In the **Next Steps** section:
-          1. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
-          1. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
-          1. Click **See remediation** to see more information on how to remediate the issue.
-          1. Under **More Actions**, you can add a Jira issue, run workflows, or add a comment.
-        To run a workflow, select **Run Workflow** and then in the workflow browser, search and select a workflow to run. See Automate Security Workflows with Workflow Automation for more information.
+            1. Under **Triage**, click the dropdown to change the triage status of the signal. The default status is `OPEN`.
+            1. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
+            1. Click **See remediation** to see more information on how to remediate the issue.
+            1. Under **More Actions**, you can add a Jira issue, run workflows, or add a comment.
+        To run a workflow, select **Run Workflow** and then in the workflow browser, search and select a workflow to run. See [Automate Security Workflows with Workflow Automation][1] for more information.
           1. Click on the different tabs to see the severity breakdown, related logs, and timeline of the issue.
 
         {{< img src="sensitive_data_scanner/investigate_sensitive_data_issues/datastore_side_panel.png" alt="The datastore issue side panel showing the S3 buckets should have Block Public Access enabled misconfiguration" style="width:90%;">}}
+
+[1]: /security/cloud_security_management/review_remediate/workflows/
 
 {{% /tab %}}
 {{< /tabs >}}
