@@ -10,7 +10,7 @@ This page describes how to merge your AWS Step Functions traces with related AWS
 
 <div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach will ensure that any context upstream to the Step Function will be preserved and passed down. If you are using <code>JSONPath</code> to define your Step Function definitions, see the below sections for supported configurations</a>.</div>
 
-## Merge Step Functions with downstream Lambda traces
+## Merge with downstream Lambda traces
 
 ### Requirements
 For Node.js: Datadog Lambda Library for Node.js layer v116+.
@@ -23,7 +23,7 @@ Your State Machine Definition must be using [JSONata][3] as the query language. 
 
 ### Setup
 
-On the Lambda Task, set the `Payload` field in the `Arguments` key as follows: 
+On the Lambda Task, set the `Payload` in the `Arguments` field as follows: 
 
 {{< highlight json "hl_lines=7-7" >}}
 "Lambda Invoke": {
@@ -45,11 +45,11 @@ Alternatively, if you have business logic defined in the payload, you can replac
 [2]: /serverless/aws_lambda/installation
 [3]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
 
-## Merge Step Functions with nested Step Functions traces
+## Merge with nested Step Functions traces
 
 ### Setup
 
-On the Step Functions Task, set the `_datadog` field in the `Input` key as follows: 
+On the Step Functions Task, set `_datadog` in the `Input` field as follows: 
 
 {{< highlight json "hl_lines=7-7" >}}
 "Step Functions StartExecution": {
@@ -64,7 +64,7 @@ On the Step Functions Task, set the `_datadog` field in the `Input` key as follo
 }
 {{< /highlight >}}
 
-## Merge Step Functions with downstream Lambda traces through Managed Services
+## Merge with downstream Lambda traces through Managed Services
 
 For cases where a Step Function is indirectly invoking a Lambda through a managed AWS service.
 
@@ -75,7 +75,7 @@ Python (layer v107+) runtimes only.
 
 For cases where an EventBridge Rule has a Lambda function as a target. Also works for cases where an SQS queue is a target and that queue has a Lambda trigger.
 
-On the EventBridge PutEvents Task, set the `_datadog` field in the `Detail` key as follows: 
+On the EventBridge PutEvents Task, set `_datadog` in the `Detail` field as follows: 
 
 {{< highlight json "hl_lines=10-10" >}}
 "EventBridge PutEvents": {
@@ -102,7 +102,7 @@ On the EventBridge PutEvents Task, set the `_datadog` field in the `Detail` key 
 
 For cases where an SQS queue has a Lambda trigger.
 
-On the SQS SendMessage Task, set the `_datadog` field in the `MessageAttributes` key as follows: 
+On the SQS SendMessage Task, set `_datadog` in the `MessageAttributes` field as follows: 
 
 {{< highlight json "hl_lines=8-11" >}}
 "SQS SendMessage": {
@@ -125,7 +125,7 @@ On the SQS SendMessage Task, set the `_datadog` field in the `MessageAttributes`
 
 For cases where there is a Lambda subscription on the topic. Also works for cases where there's an SQS subscription and that queue has a Lambda trigger.
 
-On the SNS Publish Task, set the `_datadog` field in the `MessageAttributes` key as follows: 
+On the SNS Publish Task, set `_datadog` in the `MessageAttributes` field as follows: 
 
 {{< highlight json "hl_lines=8-11" >}}
 "SNS Publish": {
@@ -157,7 +157,7 @@ If the layer or tracer version requirements are fulfilled, no further setup is r
 
 <div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
 
-## Merge Step Functions traces with downstream Lambda traces (JSONPath)
+## Merge with downstream Lambda traces (JSONPath)
 
 ### Requirements
 Node.js (layer v112+) or Python (layer v95+) runtimes.
@@ -345,7 +345,7 @@ Alternatively, if you have business logic defined in the payload, you can also u
 {{% /tab %}}
 {{< /tabs >}}
 
-## Merge Step Functions traces with nested Step Functions traces (JSONPath)
+## Merge with nested Step Functions traces (JSONPath)
 
 To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
 
