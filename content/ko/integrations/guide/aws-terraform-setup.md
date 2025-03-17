@@ -185,7 +185,7 @@ resource "datadog_integration_aws_account" "datadog_integration" {
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 {{< /site-region >}}
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 2. 하단의 예시를 기본 템플릿으로 사용하여 Terraform 구성 파일을 설정합니다. 변경 사항을 적용하기 전에 다음과 같은 파라미터를 업데이트해야 합니다:
    * `AWS_PERMISSIONS_LIST`: Datadog AWS 통합에 필요한 IAM 정책입니다. 기존 목록은 [Datadog AWS 통합][1] 문서에서 확인할 수 있습니다.
    * `AWS_ACCOUNT_ID`: 귀하의 AWS 계정 ID입니다.
