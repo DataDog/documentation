@@ -58,7 +58,13 @@ With the custom percentage strategy, you can define static custom percentages fo
 {{% /tab %}}
 
 {{% tab "Dynamic by Metric Allocation" %}}
-With the custom percentage strategy, you can define static custom percentages for the destination tags you select. For example, if you have 3 destinations (`teamA`, `teamB`, `teamC`) you can allocate 60% to `teamA`, 30% to `teamB`, and 10% to `teamC`.
+
+Metrics-based allocation provides the ability to split up costs based on Datadog’s [metrics queries][3]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
+
+For example, this PostgreSQL metrics query sum:postgresql.queries.time{*} by {user}.as_count() tracks the total query execution time per user. The relative values are then used, similarly to the proportional allocation method, to determine what proportion of total PostgreSQL costs should be allocated to each user. 
+
+
+In this example,  metrics query sum:postgresql.queries.time{*} by {user}.as_count().rollup(sum, daily) which tracks how many EC2 bytes are read by each team every day. The relative values are used, similarly to the proportional allocation method, to determine what proportion of costs should be allocated to each team. 
 
 {{% /tab %}}
 
@@ -95,3 +101,4 @@ Changes to dynamic allocation rules may take up to 24 hours to be applied. After
 
 [1]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
+[3]: https://docs.datadoghq.com/metrics/#querying-metrics
