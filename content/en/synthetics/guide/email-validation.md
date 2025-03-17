@@ -10,6 +10,10 @@ further_reading:
   text: "Configure advanced options for steps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Email Validation In Browser Tests is not supported on this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Web application journeys often involve emails being triggered and sent to users' mailboxes, such as an email verification after account creation, an email sent to reset forgotten passwords, an email sent to notify order confirmation, or an email confirmation after contact form submission.
