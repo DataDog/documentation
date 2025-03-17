@@ -70,7 +70,7 @@ This table does not necessarily reflect billing for individual products, but rat
 ### Find Software Catalog actions in Action Catalog
 To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
 
-1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
+1. **Access the Action Catalog**: Go to the Action Catalog within your Datadog Workflow Automation environment.
 2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
 
 ### Available Software Catalog actions
