@@ -21,7 +21,7 @@ The four DORA Metrics are calculated based on two types of events that support d
 [**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. Deployment events are used to compute deployment frequency, change lead time, and change failure rate.
 
-[**Incident events**][9]
+[**Failures events**][9]
 : Indicate that a new failure has occurred for a service in a specific environment. Incident events are used to compute change failure rate and mean time to restore.
 
 ## Configure data sources
@@ -33,7 +33,7 @@ The four DORA Metrics are calculated based on two types of events that support d
   {{< nextlink href="/dora_metrics/setup/deployments?tab=apiorcli" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Select an incident data source
+### Select a failure data source
 
 {{< whatsnext desc="DORA Metrics supports the following data sources for incident events. See the respective documentation to set up a data source for your incident events:" >}}
   {{< nextlink href="/dora_metrics/setup/failures?tab=pagerduty" >}}PagerDuty{{< /nextlink >}}
@@ -43,7 +43,7 @@ The four DORA Metrics are calculated based on two types of events that support d
 ## Limitations
 
 - When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
-- Deployments or incidents of the same service cannot occur at the same second.
+- Deployments or failures of the same service cannot occur at the same second.
 
 ## Further Reading
 
