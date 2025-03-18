@@ -2077,14 +2077,14 @@ menu:
       parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 503
-    - name: Self-Service
-      url: software_catalog/self-service
+    - name: Actions
+      url: software_catalog/actions
       parent: software_catalog
-      identifier: self-service
+      identifier: software_catalog_actions
       weight: 7
     - name: Software Templates
-      url: software_catalog/self-service/software_templates
-      parent: self-service
+      url: software_catalog/actions/software_templates
+      parent: software_catalog_actions
       identifier: software_templates
     - name: Definition APIs
       url: software_catalog/apis
