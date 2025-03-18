@@ -20871,6 +20871,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for all organizations (To be introduced
@@ -20883,6 +20888,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -20891,6 +20901,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -21745,6 +21760,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for the given org (To be introduced
@@ -21757,6 +21777,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -21765,6 +21790,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -22651,6 +22681,11 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current month for all organizations (To be introduced
@@ -22663,6 +22698,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current month for all organizations.
@@ -22671,6 +22711,11 @@ components:
         rum_mobile_replay_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_agg_sum:
