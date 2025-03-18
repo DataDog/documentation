@@ -20,7 +20,7 @@ RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML re
 
 Keep in mind the following limitations when using this setup:
 
-- This instrumentation method **does not support [advanced RUM configurations][3]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
+- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
 - If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
   - **Disable content compression** on the upstream server.
   - **Enable TLS origination** on the web server.
@@ -54,14 +54,16 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-### Download the module file
+To manually instrument your RUM application:
+
+#### Download the module file
 
 1. Download the [zipped module][1].
 2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that Apache HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 [1]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
 
-### Update Apache HTTP server configuration
+#### Update Apache HTTP server configuration
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
    ```javascript
@@ -89,7 +91,7 @@ To automatically instrument your RUM application:
    </DatadogRumSettings>
    ```
 
-### Restart your server
+#### Restart your server
 
 1. Restart the Apache HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.

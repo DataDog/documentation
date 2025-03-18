@@ -58,12 +58,15 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-### Download the appropriate `.tgz` file
+To manually instrument your RUM application:
+
+#### Download the appropriate `.tgz` file
 
 1. Use the `.tgz` file corresponding to your version of NGINX. You can find all the relevant `.tgz` files listed by NGINX version under [Reference](#reference).
 2. Extract the tarball to extract the `ngx_http_datadog_module.so` file. Move it to a location that NGINX has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
-### Update NGINX configuration
+#### Update NGINX configuration
+
 1. The `nginx.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
 
    ```javascript
@@ -91,7 +94,7 @@ To automatically instrument your RUM application:
    }
    ```
 
-### Restart your server
+#### Restart your server
 
 1. Restart the NGINX server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:

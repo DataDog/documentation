@@ -54,12 +54,15 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-### Download the module file
+To manually instrument your RUM application:
+
+#### Download the module file
 
 1. Download the [zipped module][4].
 2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that IBM HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
-### Update IBM HTTP server configuration
+#### Update IBM HTTP server configuration
+
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
    ```javascript
@@ -87,7 +90,7 @@ To automatically instrument your RUM application:
    </DatadogRumSettings>
    ```
 
-### Restart your server
+#### Restart your server
 
 1. Restart the IBM HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that IBM HTTP Server is configured with at least the `info` log level.
