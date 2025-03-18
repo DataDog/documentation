@@ -23,7 +23,7 @@
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
-1. Navigate back to the Observability Pipelines installation page and click **Deploy**.<br><br>
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][602] if you want to make changes to your pipeline's configuration.
 
