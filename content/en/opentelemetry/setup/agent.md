@@ -29,7 +29,7 @@ The Datadog Agent provides multiple ways to ingest OpenTelemetry data:
 
 The **Datadog Agent with Embedded OpenTelemetry Collector** combines the Datadog Agent with a built-in OpenTelemetry Collector.
 
-{{< img src="/opentelemetry/setup/embedded-collector.png" alt="Architecture overview for OpenTelemetry Collector embedded in the Datadog Agent." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Existing Datadog users or teams requiring Agent-based features	
 

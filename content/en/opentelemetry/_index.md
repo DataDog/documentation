@@ -109,7 +109,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the Datadog Agent
 
-{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol directly to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 **Best for**: Existing Datadog users or teams requiring Agent-based features such as:
 
