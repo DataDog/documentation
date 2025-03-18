@@ -64,7 +64,7 @@ Connect your Anthropic account to LLM Observability with your Anthropic API key.
 1. Follow the instructions on the tile.
    - Provide your Anthropic API key. Ensure that this key has **write** permission for **model capabilities**.
 
-{{< img src="llm_observability/configuration/openai-tile.png" alt="The Anthropic configuration tile in LLM Observability. Lists instructions for configuring Anthropic and providing your Anthropic API key." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/anthropic-tile.png" alt="The Anthropic configuration tile in LLM Observability. Lists instructions for configuring Anthropic and providing your Anthropic API key." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
