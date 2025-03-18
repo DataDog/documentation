@@ -42,17 +42,15 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 1. Download the Datadog RUM installer.
 2. Follow the installer as an administrator by opening the `.msi` file.
 3. Follow the prompts and accept the license agreement.
-4. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][1].
+4. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 5. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
-
-[1]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using the command line" level="h5" %}}
 
 1. Run the Powershell command line as an administrator.
-2. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][1].
+2. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 3. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
 
 [1]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
@@ -85,3 +83,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
+[4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/

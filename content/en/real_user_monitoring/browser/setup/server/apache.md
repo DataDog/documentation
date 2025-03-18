@@ -123,4 +123,3 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/sampling-browser-plans/
 [6]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
-
