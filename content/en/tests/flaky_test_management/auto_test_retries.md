@@ -81,7 +81,7 @@ If you use [Exclusion filters][4], ensure Failed Test Replay logs are not filter
 
 1. Create a logs index and [configure it][5] to the desired retention with **no sampling**.
 2. Set the filter to match on the `source:dd_debugger` tag. All Failed Test Replay logs have this source.
-3. Ensure that the new index takes precedence over any other with filters that match that tag, because the first match wins.
+3. Ensure that the new index takes precedence over any other index with filters that match that tag, because the first match wins.
 
 
 After you enable this feature, you can see local variable data in failed tests:
