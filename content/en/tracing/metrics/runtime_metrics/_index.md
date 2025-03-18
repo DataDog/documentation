@@ -32,68 +32,95 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 {{< tabs >}}
 {{% tab "Java" %}}
-- **Enabled By Default**: Yes  
-- **Library Version**: 0.29.0+  
-- **Support Level**: GA  
-- **Generates runtime-id granularity**: Yes  
-- **Runtimes**: Java 8+  <br><br>
-
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: Yes</li>
+  <li><strong>Library Version</strong>: 0.29.0+</li>
+  <li><strong>Support Level</strong>: GA</li>
+  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
+  <li><strong>Runtimes</strong>: Java 8+</li>
+</ul>
+</div>
 {{% /tab %}}
 
 {{% tab "Python" %}}
-- **Enabled By Default**: No  
-- **Library Version**: 0.30.0+  
-- **Support Level**: Preview  
-- **Generates runtime-id granularity**: No  
-- **Runtimes**: All supported Python versions  <br><br>
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: No</li>
+  <li><strong>Library Version</strong>: 0.30.0+</li>
+  <li><strong>Support Level</strong>: Preview</li>
+  <li><strong>Generates runtime-id granularity</strong>: No</li>
+  <li><strong>Runtimes</strong>: All supported Python versions</li>
+</ul>
+</div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-- **Enabled By Default**: No  
-- **Library Version**: 0.44.0+  
-- **Support Level**: GA  
-- **Generates runtime-id granularity**: No
-- **Runtimes**: All supported Ruby versions
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: No</li>
+  <li><strong>Library Version</strong>: 0.44.0+</li>
+  <li><strong>Support Level</strong>: GA</li>
+  <li><strong>Generates runtime-id granularity</strong>: No</li>
+  <li><strong>Runtimes</strong>: All supported Ruby versions</li>
+</ul>
 
 <div class="alert alert-info">You must add the <a href="https://rubygems.org/gems/dogstatsd-ruby">dogstatsd-ruby</a> gem to your application.</div>
-
+</div>
 {{% /tab %}}
 
 {{% tab "Go" %}}
-- **Enabled By Default**: No  
-- **Library Version**: 1.18.0+  
-- **Support Level**: GA  
-- **Generates runtime-id granularity**: Yes  
-- **Runtimes**: All supported Go versions  <br><br>
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: No</li>
+  <li><strong>Library Version</strong>: 1.18.0+</li>
+  <li><strong>Support Level</strong>: GA</li>
+  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
+  <li><strong>Runtimes</strong>: All supported Go versions</li>
+</ul>
+</div>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-- **Enabled By Default**: No  
-- **Library Version**: 3.0.0+  
-- **Support Level**: GA  
-- **Generates runtime-id granularity**: No  
-- **Runtimes**: All supported Node.js versions  <br><br>
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: No</li>
+  <li><strong>Library Version</strong>: 3.0.0+</li>
+  <li><strong>Support Level</strong>: GA</li>
+  <li><strong>Generates runtime-id granularity</strong>: No</li>
+  <li><strong>Runtimes</strong>: All supported Node.js versions</li>
+</ul>
+</div>
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-- **Enabled By Default**: No  
-- **Library Version**: 1.23.0+  
-- **Support Level**: GA  
-- **Generates runtime-id granularity**: Yes
-- **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).  
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+<ul>
+  <li><strong>Enabled By Default</strong>: No</li>
+  <li><strong>Library Version</strong>: 1.23.0+</li>
+  <li><strong>Support Level</strong>: GA</li>
+  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
+  <li><strong>Runtimes</strong>: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).</li>
+</ul> 
 
-### Permissions for Internet Information Services (IIS)
+<h4>Permissions for Internet Information Services (IIS)</h4>
 
-On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the **Performance Monitoring Users** group to access counter data.
+<p>On .NET Framework, metrics are collected using performance counters. Users in non-interactive logon sessions (that includes IIS application pool accounts and some service accounts) must be added to the <strong>Performance Monitoring Users</strong> group to access counter data.</p>
 
-IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for `IIS APPPOOL\<name of the pool>`. For instance, the user for the DefaultAppPool would be `IIS APPPOOL\DefaultAppPool`.
+<p>IIS application pools use special accounts that do not appear in the list of users. To add them to the Performance Monitoring Users group, look for <code>IIS APPPOOL\<name of the pool></code>. For instance, the user for the DefaultAppPool would be <code>IIS APPPOOL\DefaultAppPool</code>.</p>
 
-This can be done either from the "Computer Management" UI, or from an administrator command prompt:
+<p>This can be done either from the "Computer Management" UI, or from an administrator command prompt:</p>
 
 ```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
-
+</div>
+{{% /tab %}}
+{{% tab "PHP" %}}
+<div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
+{{% /tab %}}
+{{% tab "C++" %}}
+<div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -148,17 +175,22 @@ Use the following environment variables to configure runtime metrics in your app
 
 In addition to environment variables, some languages support configuring runtime metrics directly in code.
 
+In addition to environment variables, some languages support configuring runtime metrics directly in code.
+
 {{< tabs >}}
 {{% tab "Java" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can only enable runtime metrics with [environment variables](#environment-variables).
 
 However, you can extend the metrics collected by adding custom JMX metrics. For more information, see [JMX Integration][100] documentation.
 
 [100]: /integrations/java/
+</div>
 {{% /tab %}}
 
 {{% tab "Python" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -168,10 +200,11 @@ RuntimeMetrics.enable()
 ```
 
 <div class="alert alert-warning">This only applies if you are not using <code>ddtrace-run</code></div>
-
+</div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -189,10 +222,11 @@ Datadog.configure do |c|
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
-
+</div>
 {{% /tab %}}
 
 {{% tab "Go" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -211,10 +245,11 @@ The `WithDogstatsdAddr` option allows you to specify a custom address for the Do
 
 [100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
-
+</div>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -224,13 +259,15 @@ const tracer = require('dd-trace').init({
   runtimeMetrics: true
 })
 ```
-
+</div>
 {{% /tab %}}
 
 {{% tab ".NET" %}}
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 You can only enable runtime metrics with [environment variables](#environment-variables).
 
+</div>
 {{% /tab %}}
 {{< /tabs >}}
 
