@@ -76,7 +76,7 @@ This setup does not support Databricks Clusters on Shared Policy. If you are usi
 {{% tab "Manually install a global init script" %}}
 
 <div class="alert alert-warning">
-This setup does not support Databricks Clusters on Shared Policy. If you are using Shared Clusters, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions instead.
+This setup does not work on Databricks Clusters in `Standard (formerly Shared)` access mode because global init scripts cannot be installed on those clusters. If you are using clusters with the `Standard (formerly Shared)` access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
 </div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
