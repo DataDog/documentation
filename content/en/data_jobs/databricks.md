@@ -47,6 +47,10 @@ The Datadog Agent must be installed on Databricks clusters to monitor Databricks
 
 Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
 
+<div class="alert alert-warning">
+This setup does not support Databricks Clusters on Shared Policy. If you are using Shared Clusters, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions instead.
+</div>
+
 #### When integrating a workspace with Datadog
 
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
@@ -70,6 +74,10 @@ Datadog can install and manage a global init script in the Databricks workspace.
 {{% /tab %}}
 
 {{% tab "Manually install a global init script" %}}
+
+<div class="alert alert-warning">
+This setup does not support Databricks Clusters on Shared Policy. If you are using Shared Clusters, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions instead.
+</div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Settings** and click the **Compute** tab.
