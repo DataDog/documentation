@@ -9,14 +9,12 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. When you set up a pipeline in the UI, you first select a [source][2], the [destinations][3], and the [processors][4]. Next, you set up environment variables for your components as required on the Install page. Finally, you [install the Worker](#install-the-worker) in your environment by running the installation command, which includes information such as the pipeline ID and component environment variables. After the Worker is installed, you deploy the pipeline configuration with those components.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker when you set up a pipeline. These are the general steps for setting up a pipeline in the UI:
 
-These steps outline the setup process:
-
-1. Select a log source.
-1. Select destinations to which you want to send your logs.
-1. Select and configure processors to transform your logs.
-1. Install the Worker.
+1. Select a log [source][2].
+1. Select [destinations][3] to which you want to send your logs.
+1. Select and configure [processors][4] to transform your logs.
+1. [Install the Worker](#install-the-worker).
 1. Deploy the pipeline.
 
 **Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
@@ -42,21 +40,7 @@ After you set up your source, destinations, and processors on the Build page of 
 {{% observability_pipelines/install_worker/kubernetes %}}
 
 {{% /tab %}}
-{{% tab "Linux (APT)" %}}
-
-Follow the steps below if you want to use the one-line installation script to install the Worker. Otherwise, see [Manually install the Worker on Linux](#manually-install-the-worker-on-linux).
-
-1. Click **Select API key** to choose the Datadog API key you want to use.
-1. Run the one-step command provided in the UI to install the Worker.
-
-    **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
-
-See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
-
-[1]: /observability_pipelines/update_existing_pipelines
-
-{{% /tab %}}
-{{% tab "Linux (RPM)" %}}
+{{% tab "Linux" %}}
 
 <div class="alert alert-warning">For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or later.</div>
 
@@ -66,6 +50,7 @@ Follow the steps below if you want to use the one-line installation script to in
 1. Run the one-step command provided in the UI to install the Worker.
 
     **Note**: The environment variables used by the Worker in `/etc/default/observability-pipelines-worker` are not updated on subsequent runs of the install script. If changes are needed, update the file manually and restart the Worker.
+1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 See [Update Existing Pipelines][1] if you want to make changes to your pipeline's configuration.
 
