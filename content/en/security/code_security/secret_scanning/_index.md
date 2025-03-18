@@ -6,7 +6,7 @@ algolia:
   tags: ['secrets scanning', 'datadog static analysis', 'SAST']
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/secret-scanning/" btn_hidden="false" header="Join the Preview!" >}}
 Secrets Scanning is in Preview. Contact your Customer Success Manager to get access.
 {{< /callout >}}
 
