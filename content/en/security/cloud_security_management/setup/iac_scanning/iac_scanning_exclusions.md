@@ -34,7 +34,7 @@ You can configure exclusions using:
 
 #### Exclude severities
 
-Use `exclude-severities` to exclude findings based on severity level. This option can be used multiple times or as a string representation of a list.
+Use `exclude-severities` to exclude findings based on severity level. To supply multiple values to this option, you can set the option multiple times or pass in a list.
 
 **Possible values:** 
 - `critical`
@@ -121,7 +121,7 @@ exclude-paths = [ "./shouldNotScan/*", "dir/somefile.txt" ]
 
 #### Exclude queries
 
-Use `exclude-queries` to exclude specific queries by their query ID. This option can be used multiple times or as a string representation of a list.
+Use `exclude-queries` to exclude specific queries by their query ID. To supply multiple values to this option, you can set the option multiple times or pass in a list.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -185,7 +185,7 @@ Use `exclude-categories` to exclude specific categories. This option can be used
 
 ```yaml
 exclude-categories:
-  - "Access control"
+  - "Access Control"
   - "Best Practices"
 ```
 
@@ -194,7 +194,7 @@ exclude-categories:
 
 ```json
 "exclude-categories": [
-     "Access control",
+     "Access Control",
      "Best Practices"
 ]
 ```
@@ -203,14 +203,14 @@ exclude-categories:
 {{% tab "TOML" %}}
 
 ```
-exclude-categories = [ "Access control", "Best Practices" ]
+exclude-categories = [ "Access Control", "Best Practices" ]
 ```
 
 {{% /tab %}}
 {{% tab "HCL" %}}
 
 ```
-"exclude-categories" = ["Access control", "Best Practices"]
+"exclude-categories" = ["Access Control", "Best Practices"]
 ```
 
 {{% /tab %}}
