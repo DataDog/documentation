@@ -1,17 +1,17 @@
 ---
-title: Migrate to the Datadog Agent with Embedded OpenTelemetry Collector
+title: Migrate to the Datadog Distribution of OTel Collector
 further_reading:
 - link: "/opentelemetry/agent/agent_with_custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 - link: "/opentelemetry/agent/install_agent_with_collector"
   tag: "Documentation"
-  text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
+  text: "Install the Datadog Distribution of OTel Collector"
 ---
 
-If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
+If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Distribution of OpenTelemetry (DDOT) Collector. The DDOT Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
 
-To migrate to the Datadog Agent with embedded OpenTelemetry Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
+To migrate to the DDOT Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
 
 <div class="alert alert-danger">This guide covers migrating the OpenTelemetry Collector deployed as an <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent</a>. The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">Gateway deployment pattern</a> is not supported.</div>
 
@@ -135,14 +135,14 @@ service:
       exporters: [datadog]
 {{< /code-block >}}
 
-In this case, you can proceed to installing the Agent with the embedded OpenTelemetry Collector.
+In this case, you can proceed to installing the DDOT Collector.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Install the Agent with OpenTelemetry Collector
 
-Follow these steps to install the Agent with embedded OpenTelemetry Collector.
+Follow these steps to install the DDOT Collector.
 
 ### Add the Datadog Helm Repository
 
@@ -183,7 +183,7 @@ datadog:
    {{< /code-block >}}
    Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
    <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
-1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry collector:
+1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
@@ -302,7 +302,7 @@ datadog:
 
 ## Configure your application
 
-To configure your existing application to use Datadog Agent instead of standalone Collector, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with embedded Collector deployed as a DaemonSet, so the current host needs to be targeted.
+To configure your existing application to use Datadog Agent instead of standalone Collector, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with DDOT Collector deployed as a DaemonSet, so the current host needs to be targeted.
 
 1. Go to your application's Deployment manifest file (`deployment.yaml`).
 1. Add following environment variables to configure the OTLP endpoint:

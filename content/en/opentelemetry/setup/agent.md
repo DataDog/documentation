@@ -3,16 +3,16 @@ title: Datadog Agent
 further_reading:
 - link: "opentelemetry/agent/"
   tag: "Documentation"
-  text: "Datadog Agent with Embedded Collector"
+  text: "Datadog Agent with DDOT Collector"
 - link: "/opentelemetry/agent/install_agent_with_collector"
   tag: "Documentation"
-  text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
+  text: "Install the Datadog Agent with DDOT OpenTelemetry Collector"
 - link: "/opentelemetry/agent/agent_with_custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 - link: "/opentelemetry/agent/migration"
   tag: "Documentation"
-  text: "Migrate to the Datadog Agent with Embedded OpenTelemetry Collector"
+  text: "Migrate to the Datadog Agent with DDOT OpenTelemetry Collector"
 - link: "/opentelemetry/setup/otlp_ingest_in_the_agent"
   tag: "Documentation"
   text: "OTLP Ingest in the Agent"
@@ -22,12 +22,12 @@ further_reading:
 
 The Datadog Agent provides multiple ways to ingest OpenTelemetry data:
 
-- **Embedded Collector**: Use the Datadog Agent with built-in OpenTelemetry Collector.
+- **Datadog Distribution of OpenTelemetry (DDOT) Collector**: Use the DDOT Collector embedded in the Datadog Agent.
 - **OTLP Ingest**: Send telemetry data to the Datadog Agent using OpenTelemetry Protocol (OTLP).
 
-## Agent with Embedded OpenTelemetry Collector
+## Datadog Distribution of OpenTelemetry (DDOT) Collector
 
-The **Datadog Agent with Embedded OpenTelemetry Collector** combines the Datadog Agent with a built-in OpenTelemetry Collector.
+The **DDOT Collector** combines the Datadog Agent with a built-in OpenTelemetry Collector.
 
 {{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
@@ -40,7 +40,7 @@ The **Datadog Agent with Embedded OpenTelemetry Collector** combines the Datadog
 - Access Datadog's global support team for assistance with onboarding and troubleshooting
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/agent/" >}}Learn more about the Agent with Embedded OpenTelemetry Collector{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/agent/" >}}Learn more about the DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## OTLP Ingest

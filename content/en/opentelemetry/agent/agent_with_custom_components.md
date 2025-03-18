@@ -14,7 +14,7 @@ To complete this guide, you need the following:
 
 - [Docker][2]
 - GitHub and access to the [Datadog Agent][3] source code.
-- The OpenTelemetry components you plan to include in the Agent must be compatible with embedded OpenTelemetry Collector version.
+- The OpenTelemetry components you plan to include in the Agent must be compatible with DDOT Collector version.
 
 **Recommended**:
 
@@ -194,7 +194,7 @@ Create a sample configuration file and run your custom Agent to ensure everythin
 
 You can now use this new image to install the Agent. This enables Datadog monitoring capabilities along with the additional OpenTelemetry components you've added.
 
-For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Agent with Embedded OpenTelemetry Collector][9] guide.
+For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Distribution of OTel Collector][9] guide.
 
 ## Troubleshooting
 

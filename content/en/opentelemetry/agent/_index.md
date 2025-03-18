@@ -1,24 +1,24 @@
 ---
-title: Datadog Agent with Embedded Collector
+title: Datadog Distribution of OpenTelemetry Collector
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-agent-with-otel-collector/"
   tag: "Blog"
-  text: "Unify OpenTelemetry and Datadog with the embedded OTel Collector in the Agent"
+  text: "Unify OpenTelemetry and Datadog with the Datadog distribution of OpenTelemetry (DDOT) Collector in the Agent"
 ---
 
 ## Overview
 
-The Datadog Agent with embedded OpenTelemetry (OTel) Collector is an open source solution that combines the flexibility of OpenTelemetry with the comprehensive observability capabilities of Datadog. This integrated solution includes:
+The Datadog distribution of OpenTelemetry (DDOT) Collector is an open source solution that combines the flexibility of OpenTelemetry (OTel) with the comprehensive observability capabilities of Datadog. This integrated solution includes:
 
 - A curated set of [OpenTelemetry components](#included-components) optimized for performance and reliability with Datadog, with ability to add additional components of your choosing
-- Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring, including [Datadog Fleet Automation][9] support for the embedded OTel Collector (see [Key benefits](#key-benefits))
+- Full data collection and processing capabilities of the Datadog Agent for seamless integration and robust monitoring, including [Datadog Fleet Automation][9] support for the DDOT Collector (see [Key benefits](#key-benefits))
 - [Custom Datadog components](#custom-datadog-components) designed to deliver the best onboarding experience
 
 {{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
 ## Key benefits
 
-The Datadog Agent with embedded OpenTelemetry Collector offers:
+The DDOT Collector offers:
 
 ### Comprehensive observability
 
@@ -28,7 +28,7 @@ The Datadog Agent with embedded OpenTelemetry Collector offers:
 
 ### Simplified fleet management
 
-- Remotely manage fleets of embedded OpenTelemetry Collectors with [Datadog Fleet Automation][9]
+- Remotely manage fleets of DDOT Collectors with [Datadog Fleet Automation][9]
 - Gain visibility into your entire configuration, dependencies, and runtime environment
 - Onboard faster with out-of-the-box tagging enrichment for OTLP data, automatically enabling [unified service tagging][1]
 
@@ -41,7 +41,7 @@ The Datadog Agent with embedded OpenTelemetry Collector offers:
 
 ### OpenTelemetry Collector components
 
-By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
+By default, the DDOT Collector ships with the following Collector components. You can also see the list in [YAML format][11].
 
 {{% collapse-content title="Receivers" level="p" %}}
 
@@ -112,7 +112,7 @@ In addition to standard OpenTelemetry components, Datadog provides and maintains
 
 - [Converter][51]: An OpenTelemetry converter component that enhances user-provided configurations. It offers an API to return both the original and enhanced configurations, automatically checking for known misconfigurations to reduce errors. This ensures seamless integration of existing OpenTelemetry Collector configurations with the Agent.
 
-- [DD Flare Extension][52]: An OpenTelemetry extension component for generating Agent Flare, which contains diagnostic information from both the embedded OTel Collector and the Agent for troubleshooting purposes.
+- [DD Flare Extension][52]: An OpenTelemetry extension component for generating Agent Flare, which contains diagnostic information from both the DDOTCollector and the Agent for troubleshooting purposes.
 
 {{% /collapse-content %}}
 
@@ -122,7 +122,7 @@ Whether you're new to Datadog or already familiar with OpenTelemetry, the follow
 
 ### Quick start with the default Agent package
 
-The default Datadog Agent package includes an embedded Collector with a [curated set of included OpenTelemetry components](#included-components) designed to meet most needs out of the box. This guide is suitable if you're:
+The default Datadog Agent package includes a DDOT Collector with a [curated set of included OpenTelemetry components](#included-components) designed to meet most needs out of the box. This guide is suitable if you're:
 
 - Setting up monitoring from scratch without needing OpenTelemetry components outside the [included components](#included-components)
 - Using the Datadog Agent and want to test OpenTelemetry functionality with included components

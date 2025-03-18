@@ -1,5 +1,5 @@
 ---
-title: Install the Datadog Agent with Embedded OpenTelemetry Collector
+title: Install the Datadog Distribution of OTel Collector
 further_reading:
 - link: "/opentelemetry/agent/agent_with_custom_components"
   tag: "Documentation"
@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
+Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
 
 <div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
 
@@ -106,7 +106,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
   - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
-2. Switch the Datadog Agent image to use builds with embedded OpenTelemetry Collector:
+2. Switch the Datadog Agent image to use builds with DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   ...
@@ -255,7 +255,7 @@ Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datad
 
 <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
 
-3. Switch the Datadog Agent image tag to use builds with the embedded OpenTelemetry Collector:
+3. Switch the Datadog Agent image tag to use builds with the DDOT OpenTelemetry Collector:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -875,7 +875,7 @@ Deploy the Datadog Agent with the configuration file:
 kubectl apply -f datadog-agent.yaml
 ```
 
-This deploys the Datadog Agent as a DaemonSet with the embedded OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
+This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is not supported.
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -1075,13 +1075,13 @@ Monitor your runtime (JVM) metrics for your applications.
 
 ### Collector health metrics
 
-View metrics from the embedded Collector to monitor the Collector health.
+View metrics from the DDOT Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
 
 ## Included components
 
-By default, the Datadog Agent with embedded Collector ships with the following Collector components. You can also see the list in [YAML format][11].
+By default, the Datadog Agent with DDOT Collector ships with the following Collector components. You can also see the list in [YAML format][11].
 
 {{% collapse-content title="Receivers" level="p" %}}
 
