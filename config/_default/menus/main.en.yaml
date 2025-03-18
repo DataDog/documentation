@@ -6401,12 +6401,53 @@ menu:
       parent: application_security
       identifier: appsec_troubleshooting
       weight: 11
+    - name: Sensitive Data Scanner
+      url: /security/sensitive_data_scanner/
+      pre: sensitive-data-scanner
+      identifier: sensitive_data_scanner
+      parent: security_platform_heading
+      weight: 50000
+    - name: Setup
+      url: /security/sensitive_data_scanner/setup/
+      identifier: sds_setup
+      parent: sensitive_data_scanner
+      weight: 1
+    - name: Telemetry Data
+      url: /security/sensitive_data_scanner/setup/telemetry_data/
+      identifier: sds_telemetry
+      parent: sds_setup
+      weight: 101
+    - name: Cloud Storage
+      url: /security/sensitive_data_scanner/setup/cloud_storage/
+      identifier: sds_cloud_storage
+      parent: sds_setup
+      weight: 102
+    - name: Scanning Rules
+      url: /security/sensitive_data_scanner/scanning_rules/
+      identifier: sds_scanning_rules
+      parent: sensitive_data_scanner
+      weight: 2
+    - name: Library Rules
+      url: /security/sensitive_data_scanner/scanning_rules/library_rules/
+      identifier: sds_library_rules
+      parent: sds_scanning_rules
+      weight: 201
+    - name: Custom Rules
+      url: /security/sensitive_data_scanner/scanning_rules/custom_rules/
+      identifier: sds_custom_rules
+      parent: sds_scanning_rules
+      weight: 202
+    - name: Guides
+      url: /security/sensitive_data_scanner/guide/
+      identifier: sds_guides
+      parent: sensitive_data_scanner
+      weight: 3
     - name: Code Security
       identifier: code_security
       url: /security/code_security/
       parent: security_platform_heading
       pre: security-code-security
-      weight: 50000
+      weight: 60000
     - name: Static Code Analysis (SAST)
       identifier: sec_static_analysis
       url: /security/code_security/static_analysis/
@@ -7892,47 +7933,6 @@ menu:
       url: data_security/guide/
       parent: data_security
       weight: 9
-    - name: Sensitive Data Scanner
-      url: sensitive_data_scanner/
-      pre: sensitive-data-scanner
-      identifier: sensitive_data_scanner
-      parent: administration_heading
-      weight: 30000
-    - name: Setup
-      url: sensitive_data_scanner/setup/
-      identifier: sds_setup
-      parent: sensitive_data_scanner
-      weight: 1
-    - name: Telemetry Data
-      url: sensitive_data_scanner/setup/telemetry_data/
-      identifier: sds_telemetry
-      parent: sds_setup
-      weight: 101
-    - name: Cloud Storage
-      url: sensitive_data_scanner/setup/cloud_storage/
-      identifier: sds_cloud_storage
-      parent: sds_setup
-      weight: 102
-    - name: Scanning Rules
-      url: sensitive_data_scanner/scanning_rules/
-      identifier: sds_scanning_rules
-      parent: sensitive_data_scanner
-      weight: 2
-    - name: Library Rules
-      url: sensitive_data_scanner/scanning_rules/library_rules/
-      identifier: sds_library_rules
-      parent: sds_scanning_rules
-      weight: 201
-    - name: Custom Rules
-      url: sensitive_data_scanner/scanning_rules/custom_rules/
-      identifier: sds_custom_rules
-      parent: sds_scanning_rules
-      weight: 202
-    - name: Guides
-      url: sensitive_data_scanner/guide/
-      identifier: sds_guides
-      parent: sensitive_data_scanner
-      weight: 3
     - name: Help
       url: help/
       pre: info-fill

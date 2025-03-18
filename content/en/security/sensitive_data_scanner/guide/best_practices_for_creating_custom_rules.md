@@ -1,11 +1,13 @@
 ---
 title: Best Practices for Creating Custom Rules
 disable_toc: false
+aliases:
+  - /sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
 further_reading:
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Set up Sensitive Data Scanner"
-- link: "/sensitive_data_scanner/regular_expression_syntax"
+- link: "/security/sensitive_data_scanner/regular_expression_syntax"
   tag: "Documentation"
   text: "Regular expression syntax for custom rules"
 ---
@@ -45,8 +47,8 @@ Whenever possible, use Datadog's out-of-the-box [library rules][3]. These rules 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/scanning_rules/custom_rules/
-[2]: /sensitive_data_scanner/setup/telemetry_data/#add-scanning-rules
-[3]: /sensitive_data_scanner/scanning_rules/library_rules/
+[1]: /security/sensitive_data_scanner/scanning_rules/custom_rules/
+[2]: /security/sensitive_data_scanner/setup/telemetry_data/#add-scanning-rules
+[3]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [4]: /help/
-[5]: /sensitive_data_scanner/setup/telemetry_data/#add-additional-keywords
+[5]: /security/sensitive_data_scanner/setup/telemetry_data/#add-additional-keywords

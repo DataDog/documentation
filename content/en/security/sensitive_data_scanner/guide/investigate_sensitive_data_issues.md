@@ -2,6 +2,7 @@
 title: Investigate Sensitive Data Issues
 aliases:
   - /sensitive_data_scanner/investigate_sensitive_data_issues/
+  - /sensitive_data_scanner/guide/investigate_sensitive_data_issues/
 further_reading:
     - link: "sensitive_data_scanner/setup/telemetry_data/"
       tag: "Documentation"

@@ -3,11 +3,12 @@ title: Custom Rules
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/regular_expression_syntax/
+  - /sensitive_data_scanner/scanning_rules/custom_rules
 further_reading:
-    - link: "/sensitive_data_scanner/"
+    - link: "/security/sensitive_data_scanner/"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner"
-    - link: "/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
+    - link: "/security/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules"
       tag: "Documentation"
       text: "Best practices for creating custom rules"
 ---
@@ -224,6 +225,6 @@ Script names can be used to match any character from the script. The following a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /sensitive_data_scanner/
-[2]: /sensitive_data_scanner/scanning_rules/library_rules/
+[1]: /security/sensitive_data_scanner/
+[2]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [3]: https://www.pcre.org/current/doc/html/pcre2syntax.html
