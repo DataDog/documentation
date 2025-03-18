@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Device Onboarding Experience is not supported on this site.</div>
+<div class="alert alert-warning">Device Profile onboarding is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
@@ -78,7 +78,7 @@ This step scans your devices to discover their available metrics. Running a scan
 
 The **Scanned Devices** tab displays which devices were scanned with Remote Configuration or manually.
 
-  {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
+  {{< img src="/network_device_monitoring/profile_onboarding/scan_reference_devices_2.png" alt="The Network Device profile creation page showing the Scan reference device section." style="width:80%;">}}
 
 ### Step 5: Define metadata
 
