@@ -69,6 +69,7 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 
 {{< img src="cloud_cost/custom_allocation_rules/dynamic_ui.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:60%;" >}}
 
+[3]: /metrics/#querying-metrics
 
 {{% /tab %}}
 
@@ -103,6 +104,5 @@ Changes to dynamic allocation rules may take up to 24 hours to be applied. After
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
+[1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
-[3]: https://docs.datadoghq.com/metrics/#querying-metrics
