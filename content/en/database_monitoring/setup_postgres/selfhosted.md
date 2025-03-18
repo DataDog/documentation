@@ -218,7 +218,7 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for all available configuration options.
 
    ```yaml
    init_config:
@@ -242,6 +242,7 @@ Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf
 
 3. [Restart the Agent][10] so that the configurations are applied.
 
+[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 {{% /tab %}}
 
 {{% tab "Docker" %}}
