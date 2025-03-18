@@ -32,7 +32,7 @@ To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Cod
 For GitHub repositories, you can run Datadog SCA scans directly on Datadog's infrastructure. To get started, navigate to the [**Code Security** page][1].
 
 <div class="alert alert-info">
-Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a>.
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use <a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage">Git Large File Storage</a>. To scan repositories that use Large File Storage, set up SCA in your CI pipelines.
 </div>
 
 ### Scan in CI pipelines
