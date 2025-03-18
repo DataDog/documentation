@@ -6,7 +6,7 @@ Datadog CSM's Related Logs feature allows you to quickly identify cloud audit lo
 - Who created the resource
 - Who last modified the resource, possibly introducing the misconfiguration
 
-To identify related logs, Datadog uses an internal service that maps resource attributes to CloudTrail event fields. CloudTrail events lack a standardized format that would allow a generic Logs query.
+CloudTrail events lack a standardized format that would allow a generic Logs query, but Related Logs uses an internal service that maps resource attributes to CloudTrail event fields, enabling Datadog to identify related CloudTrail logs.
 
 Here's a sample Logs query that Related Logs automatically generates and runs to find related CloudTrail logs. In this example, the query looks for logs that relate to a specific EC2 instance:
 
