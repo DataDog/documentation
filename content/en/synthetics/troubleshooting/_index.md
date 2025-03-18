@@ -164,6 +164,22 @@ This could uncover a resource exhaustion issue on your private locations workers
 
 Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
+### Requirements for browser tests running on private location
+
+Browser tests require elevated privileges in order to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, then the private location will emit error logs when the browser test is executed. The reported logs will vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge will report
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+and Firefox will report
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
