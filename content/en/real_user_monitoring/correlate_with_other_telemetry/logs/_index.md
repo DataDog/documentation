@@ -25,12 +25,12 @@ To start sending RUM events to Datadog, see [Real User Monitoring][1].
 
 Logs and RUM events are automatically correlated. Correlating your logs with RUM also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `session_id` and `view.id`.
 
-For more information, see [RUM & Session Replay Billing][2]. 
-To ensure proper correlation for **Browser Logs**, you must [match configurations between the RUM Browser SDK and Logs SDK][3].
+For more information, see [RUM & Session Replay Billing][3]. 
+To ensure proper correlation for **Browser Logs**, you must [match configurations between the RUM Browser SDK and Logs SDK][4].
 
-## Setup Instructions
+## Setup instructions
 
-To access the Logs Setup pages, follow the links below based on your platform:
+To access the Logs setup pages, follow the links below based on your platform:
 
 {{< partial name="rum/rum-correlate-rum-and-logs.html" >}}
 
@@ -39,6 +39,6 @@ To access the Logs Setup pages, follow the links below based on your platform:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[3]: /real_user_monitoring/browser/setup/#initialization-parameters
-[4]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#correlate-frontend-products
+[2]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#correlate-frontend-products
+[3]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
+[4]: /real_user_monitoring/browser/setup/#initialization-parameters
