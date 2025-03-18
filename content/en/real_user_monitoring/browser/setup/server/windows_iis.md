@@ -33,11 +33,9 @@ The [Datadog Agent][2] is installed and configured.
 
 Auto-Instrumentation leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
 
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][3] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
 3. Set up the IIS module using either the GUI installer or command line as described below:
-
-[1]: https://app.datadoghq.com/rum/list/create/
 
 {{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 
@@ -67,11 +65,9 @@ You can adjust your Session Sampling and Session Replay Sampling rates from the 
 
 To update your RUM Application:
 
-1. Go to your RUM application from the [Application Management][1] list.
+1. Go to your RUM application from the [Application Management][3] list.
 2. On the Instrument Your Application page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
 3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
-
-[1]: https://app.datadoghq.com/rum/list
 
 ## Troubleshooting
 
@@ -86,7 +82,6 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/setup/
+[1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/
-[3]: /real_user_monitoring/browser/advanced_configuration/
-[4]: /help
+[3]: https://app.datadoghq.com/rum/list/create/

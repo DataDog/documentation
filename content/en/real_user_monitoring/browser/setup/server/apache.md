@@ -40,15 +40,12 @@ For more granular control over the instrumentation of the RUM application, you c
 
 To automatically instrument your RUM application:
 
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
+1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][4] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **httpd**.
-3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][2].
+3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][5].
 4. Copy and run the installer command to load the Datadog httpd Module with the RUM SDK Injector onto httpd.
 5. After the installer successfully installs the SDK Injector, restart Apache HTTP Server to begin collecting RUM sessions.
 6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
-
-[1]: https://app.datadoghq.com/rum/list
-[2]: /real_user_monitoring/guide/sampling-browser-plans/
 
 {{% /collapse-content %}}
 
@@ -58,10 +55,8 @@ To manually instrument your RUM application:
 
 #### Download the module file
 
-1. Download the [zipped module][1].
+1. Download the [zipped module][6].
 2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that Apache HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
-
-[1]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
 
 #### Update Apache HTTP server configuration
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
@@ -126,3 +121,6 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [2]: /agent/
 [3]: https://httpd.apache.org/modules/
 [4]: https://app.datadoghq.com/rum/list
+[5]: /real_user_monitoring/guide/sampling-browser-plans/
+[6]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
+
