@@ -28,7 +28,7 @@ To detect rollbacks, Datadog compares the current deployment version with the pr
 1. The current version is different from the previous version. This ensures that re-deploying the same version does not constitute a rollback.
 2. The current version matches a version that was previously deployed
 
-You can search for rollbacks deployments in the [Deployment Executions page][1], using the `@deployment.is_rollback` tag:
+You can search for rollback deployments in the [Deployment Executions page][1], using the `@deployment.is_rollback` tag:
 
 {{< img src="continuous_delivery/features/rollbacks-deployment-executions.png" alt="Rollback indicator in Deployment Executions page" style="width:100%;">}}
 
