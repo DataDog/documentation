@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-Use Software Templates within Self-Service to help developers quickly provision infrastructure and create microservices that align with your best practices. 
+Use Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
