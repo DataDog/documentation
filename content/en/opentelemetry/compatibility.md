@@ -20,10 +20,10 @@ The following setups are supported:
 | **[Full OpenTelemetry][7]**                                   | OTel API    | OTel SDK                | OTel Collector                          |
 | **[OTel to Datadog Agent (OTLP)][6]**                         | OTel API    | OTel SDK                | Datadog Agent (OTLP Ingest)             |
 | **[OTel API with Datadog SDK and Agent][8]**                  | OTel API    | Datadog SDK             | Datadog Agent                           |
-| **[Datadog Agent with embedded OTel Collector][9] (Preview)** | OTel API    | OTel SDK or Datadog SDK | Datadog Agent (with embedded Collector) |
+| **[Datadog Agent with embedded OTel Collector][9]** | OTel API    | OTel SDK or Datadog SDK | Datadog Agent (with embedded Collector) |
 | **[Full Datadog][10]**                                        | Datadog API | Datadog SDK             | Datadog Agent                           |
 
-<div class="alert alert-info">The <strong>Agent with embedded OTel Collector (Preview)</strong> supports two data flow options:
+<div class="alert alert-info">The <strong>Agent with embedded OTel Collector</strong> supports two data flow options:
     <li>OTel SDK &#8594; embedded Collector, or</li>
     <li>Datadog SDK &#8594; Datadog Agent</li></div>
 
@@ -33,7 +33,7 @@ The following setups are supported:
 
 The following table shows Datadog feature compatibility across different setups:
 
-| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector (Preview) | Full Datadog |
+| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector | Full Datadog |
 |-----------------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|--------------|
 | [Cloud SIEM][18]                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Correlated Traces, Metrics, Logs][19]              | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
@@ -54,7 +54,7 @@ The following table shows Datadog feature compatibility across different setups:
 
 The following table shows OpenTelemetry feature compatibility across different setups:
 
-| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector (Preview) | Full Datadog |
+| Feature                                             | Full OTel                          | OTel to Datadog Agent (OTLP)       | OTel API with Datadog SDK and Agent | Datadog Agent with embedded OTel Collector | Full Datadog |
 |-----------------------------------------------------|------------------------------------|------------------------------------|-------------------------------------|------------------------------------------------------|--------------|
 | [Span Links][25]                                    | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            |              |
 
@@ -101,7 +101,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [6]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/
 [7]: /opentelemetry/collector_exporter/
 [8]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-[9]: https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/
+[9]: /opentelemetry/agent
 [10]: /tracing/trace_collection/
 [11]: /security/application_security/
 [12]: /profiler/
