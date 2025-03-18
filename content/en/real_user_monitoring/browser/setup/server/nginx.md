@@ -10,13 +10,11 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
 ---
 
-<div class="alert alert-info">RUM Auto-Instrumentation is in Preview.</div>
+<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
 
-Datadog RUM Auto-Instrumentation (server-side) lets you opt into Real User Monitoring (RUM) automatically by instrumenting web applications served through a web server or proxy.
-
-RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served.
+RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
 
 ## Limitations
 
@@ -36,7 +34,7 @@ The [Datadog Agent][2] is installed and configured.
 The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML.
 
-For more granular control over the instrumentation of the RUM application, you can also manually install and configure the module.
+For more granular control over the instrumentation of the RUM application, you can also **manually** install and configure the module.
 
 {{% collapse-content title="Automatic installation (recommended)" level="h5" %}}
 

@@ -126,7 +126,7 @@ code_language_ids:
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
-    windowsiis: "Windows IIS" 
+    windows_iis: "Windows IIS" 
     apache: "Apache HTTP Server"
     ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"

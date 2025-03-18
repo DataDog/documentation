@@ -25,10 +25,11 @@ There are two main approaches to instrument your application: automatic or custo
 ### Auto-instrumentation
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="true" header="Try the Auto-Instrumentation Preview!">}}
+
 You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
 {{< /callout >}}
 
-Automatically add RUM JS to your web app HTML by installing the RUM injector by downloading the RUM Installer or by CLI (running a command).
+Automatically add RUM JS to your web app HTML with minimal steps by installing the RUM injector by downloading the RUM Installer or by CLI (running a command).
 
 **SRE and engineering teams** without access to frontend code or **teams who need to manage** all observability needs centrally may find this useful for:
 
@@ -41,10 +42,11 @@ To learn more, see [auto-instrumentation][1].
 
 Add the RUM SDK manually to your application code.
 
-**Frontend engineering, mobile engineering, or product teams** may find this method useful for:
+**Frontend engineering, mobile engineering, or product teams** with access to frontend code may find this method useful for:
 
 - Daily engineering needs (live support, troubleshooting, downstream services health checks, and so on)
 - Product needs (user flow analysis, user segmentation, feature flag tracking, and so on)
+- Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation
 
 To learn more, see [client-side instrumentation][2].
 
