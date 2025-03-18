@@ -1105,6 +1105,21 @@ menu:
       identifier: coterm
       parent: essentials_heading
       weight: 120000
+    - name: Install
+      url: coterm/install
+      identifier: coterm_install
+      parent: coterm
+      weight: 1
+    - name: Using CoTerm
+      url: coterm/usage
+      identifier: coterm_usage
+      parent: coterm
+      weight: 2
+    - name: Configuration Rules
+      url: coterm/rules
+      identifier: coterm_rules
+      parent: coterm
+      weight: 3
     - name: Cloudcraft
       url: cloudcraft/
       pre: cloudcraft
@@ -4466,31 +4481,36 @@ menu:
       identifier: cd_deployments_ciproviders
       parent: cd_deployments
       weight: 102
-    - name: Search and Manage
-      url: continuous_delivery/search
-      identifier: cd_search
-      parent: cd
-      weight: 2
-    - name: Explorer
+    - name: Explore Deployments
       url: continuous_delivery/explorer
       identifier: cd_explorer
       parent: cd
-      weight: 3
+      weight: 2
     - name: Search Syntax
       url: continuous_delivery/explorer/search_syntax
       identifier: cd_explorer_search_syntax
       parent: cd_explorer
-      weight: 301
+      weight: 201
     - name: Facets
       url: continuous_delivery/explorer/facets
       identifier: cd_explorer_facets
       parent: cd_explorer
-      weight: 302
+      weight: 202
     - name: Saved Views
       url: continuous_delivery/explorer/saved_views
       identifier: cd_explorer_saved_views
       parent: cd_explorer
-      weight: 303
+      weight: 203
+    - name: Features
+      url: continuous_delivery/features
+      identifier: cd_features
+      parent: cd
+      weight: 3
+    - name: Code Changes Detection
+      url: continuous_delivery/features/code_changes_detection
+      identifier: cd_features_code_changes_detection
+      parent: cd_features
+      weight: 301
     - name: Test Optimization
       url: tests/
       pre: ci
@@ -6075,6 +6095,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_iac_scanning
       weight: 104
+    - name: Set Up IaC Exclusions
+      url: security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions
+      parent: csm_setup_iac_scanning
+      identifier: csm_setup_iac_scanning_exclusions
+      weight: 10000
     - name: Set Up IaC Remediation
       url: security/cloud_security_management/setup/iac_remediation
       parent: csm_setup
@@ -6467,6 +6492,11 @@ menu:
       url: /security/code_security/iast/setup/
       parent: sec_iast
       weight: 1
+    - name: Security Controls
+      identifier: sec_code_security_controls
+      url: /security/code_security/iast/security_controls/
+      parent: sec_iast
+      weight: 2
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/

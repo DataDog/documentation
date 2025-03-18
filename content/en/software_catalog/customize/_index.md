@@ -112,23 +112,6 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Find Software Catalog actions
-To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
-
-1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
-2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
-
-### Available Software Catalog Actions
-
-Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
-
-- **Retrieve Service Information**
-  - "Get service definition" for a single service
-  - "List service definitions" to get all definitions from Datadog Software Catalog
-  - "Get service dependencies" to get a service's immediate upstream and downstream services
-- **Incident Triage**
-  - "Get service PagerDuty on call"
-  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
 
 ## Change the service color
 The service color is used in trace visualizations. Click the service type icon to change it.
