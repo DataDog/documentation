@@ -59,12 +59,16 @@ With the custom percentage strategy, you can define static custom percentages fo
 
 {{% tab "Dynamic by Metric Allocation" %}}
 
-Metrics-based allocation provides the ability to split up costs based on Datadog’s [metrics queries][3]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
+Metrics-based allocation provides the ability to split up costs based on Datadog's [metrics queries][3]. By using performance metrics to allocate expenses, you can more accurately allocate costs based on application usage patterns.
 
-For example, this PostgreSQL metrics query sum:postgresql.queries.time{*} by {user}.as_count() tracks the total query execution time per user. The relative values are then used, similarly to the proportional allocation method, to determine what proportion of total PostgreSQL costs should be allocated to each user. 
+For example, this PostgreSQL metrics query `sum:postgresql.queries.time{*} by {user}.as_count()` tracks the total query execution time per user. The relative values are then used to determine what proportion of total PostgreSQL costs should be allocated to each user.
 
+For determining the proportion of costs to be allocate, metrics can be aggregated on a daily or monthly basis. However, the costs themselves are still allocated on a daily basis.
 
-In this example,  metrics query sum:postgresql.queries.time{*} by {user}.as_count().rollup(sum, daily) which tracks how many EC2 bytes are read by each team every day. The relative values are used, similarly to the proportional allocation method, to determine what proportion of costs should be allocated to each team. 
+{{< img src="cloud_cost/custom_allocation_rules/dynamic_diagram.png" alt="Diagram illustrating the dynamic by metric strategy" style="width:60%;" >}}
+
+{{< img src="cloud_cost/custom_allocation_rules/dynamic_ui.png" alt="The dynamic by metric split strategy as seen in Datadog" style="width:60%;" >}}
+
 
 {{% /tab %}}
 
@@ -87,7 +91,7 @@ For some of the allocation strategies, you can specify how cost proportions shou
 {{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
 
 ## Managing rules
-Rules can be modified and deleted in the [Custom Allocation Rules section][1] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
+Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
 
 Rules are applied in the same order as shown in the list.
 
