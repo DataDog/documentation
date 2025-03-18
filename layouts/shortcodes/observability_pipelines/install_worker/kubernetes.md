@@ -29,7 +29,7 @@ See [Update Existing Pipelines][602] if you want to make changes to your pipelin
 
 #### Self-hosted and self-managed Kubernetes clusters
 
-If you are running a self-hosted and self-managed Kubernetes cluster, and have defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
+If you are running a self-hosted and self-managed Kubernetes cluster, and defined zones with node labels using `topology.kubernetes.io/zone`, then you can use the Helm chart values file as is. However, if you are not using the label `topology.kubernetes.io/zone`, you need to update the `topologyKey` in the `values.yaml` file to match the key you are using. Or if you run your Kubernetes install without zones, remove the entire `topology.kubernetes.io/zone` section.
 
 [601]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
 [602]: /observability_pipelines/update_existing_pipelines
