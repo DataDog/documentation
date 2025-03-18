@@ -14864,6 +14864,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -30558,24 +30560,8 @@ components:
       x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot2Type:
       description: The type of service.
-      enum:
-      - web
-      - db
-      - cache
-      - function
-      - browser
-      - mobile
-      - custom
       example: web
       type: string
-      x-enum-varnames:
-      - WEB
-      - DB
-      - CACHE
-      - FUNCTION
-      - BROSWER
-      - MOBILE
-      - CUSTOM
     ServiceDefinitionV2Dot2Version:
       default: v2.2
       description: Schema version being used.
