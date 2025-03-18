@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: juniper-srx-firewall-v1.0.0
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
