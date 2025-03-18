@@ -66,6 +66,24 @@ You can also find which Datadog features you are actively using for a given serv
 
 This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
+## Take actions on a given component
+### Find Software Catalog actions in Action Catalog
+To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
+
+1. **Access the Action Catalog**: Go to the Action Catalog within your Datadog Workflow Automation environment.
+2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
+
+### Available Software Catalog actions
+Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation:
+
+- **Retrieve Service Information**
+  - "Get service definition" for a single service
+  - "List service definitions" to get all definitions from Datadog Software Catalog
+  - "Get service dependencies" to get a service's immediate upstream and downstream services
+- **Incident Triage**
+  - "Get service PagerDuty on call"
+  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks)
+
 ## Investigating infrastructure
 From the **Performance** tab, find the service you are investigating. In the **Infrastructure** column, click the resources related to this service to **View in Service Context Map**.
 

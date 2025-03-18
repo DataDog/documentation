@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+Enabling Historical Metrics Ingestion allows you to collect **custom metric** values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
 
 Having Historical Metrics Ingestion enabled on your metrics can be helpful for a variety of use cases such as recovering from an outage, correcting erroneous values, and managing IoT delays.
 

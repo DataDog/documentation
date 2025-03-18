@@ -13,6 +13,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Best practices for managing Datadog organizations at scale"
 algolia:
   tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
