@@ -218,31 +218,8 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for all available configuration options.
+{{% dbm/self-hosted-install-host %}}
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-
-      ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
-      # pg_stat_statements_view: datadog.pg_stat_statements()
-      # pg_stat_activity_view: datadog.pg_stat_activity()
-
-      ## Optional: Connect to a different database if needed for `custom_queries`
-      # dbname: '<DB_NAME>'
-
-   ```
-
-**Note**: Wrap your password in single quotes if a special character is present.
-
-3. [Restart the Agent][10] so that the configurations are applied.
-
-[9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 {{% /tab %}}
 
 {{% tab "Docker" %}}
@@ -523,6 +500,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [4]: /agent/configuration/secrets-management
 [5]: /containers/kubernetes/integrations/?tab=annotations#configuration
 [6]: /containers/kubernetes/installation?tab=datadogoperator#installation
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -592,6 +570,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
+
 [2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
