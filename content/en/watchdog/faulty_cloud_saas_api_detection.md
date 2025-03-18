@@ -52,8 +52,10 @@ Watchdog monitors the status of the following external providers' APIs:
 | PagerDuty | api.pagerduty.com |
 | Palo Alto Networks | api.urlcloud.paloaltonetworks.com |
 | Render | api.render.com |
-| SendGrid | .sendgrid.com |
+| SendGrid | *.sendgrid.com |
+| ServiceNow | *.service-now.com |
 | Slack | *.slack.com |
+| Snowflake | *.snowflakecomputing.com |
 | SoundCloud | api.soundcloud.com |
 | Splunk | *.splunkcloud.com |
 | Square | connect.squareup.com |
@@ -62,6 +64,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Twilio | api.twilio.com |
 | Twitter | api.twitter.com |
 | Zendesk | *.zendesk.com |
+| Zoom    | api.zoom.us |
 
 The following AWS services are monitored (.*amazonaws.com):
 - CloudWatch
