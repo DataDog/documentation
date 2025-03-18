@@ -166,7 +166,7 @@ Confirm you are not seeing [out of memory issues][102] with your private locatio
 
 ### Requirements for ICMP tests running on private location
 
-ICMP tests use the `ping` command to assess network routes and connectivity to a host. `ping` opens a raw socket through which ICMP packets are sent/received and so `ping` requires the `NET_RAW` capability to allow for the creation of raw sockets. If your container is configured with a security context that drops or removes this capability, ICMP tests will not be able to function properly on the private location.
+ICMP tests use the `ping` command to assess network routes and connectivity to a host. `ping` opens a raw socket to send ICMP packets through, so it requires the `NET_RAW` capability to allow for the creation of raw sockets. If your container is configured with a security context that drops or removes this capability, ICMP tests will not be able to function properly on the private location.
 
 Additionally, `ping` requires elevated privileges in order to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
 
