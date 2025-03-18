@@ -2,9 +2,7 @@
 title: Runtime Metrics
 aliases:
   - /tracing/advanced/runtime_metrics/
-  - /tracing/metrics/runtime_metrics/
   - /tracing/metrics/runtime_metrics/dotnet
-  - /tracing/metrics/runtime_metrics/go
   - /tracing/metrics/runtime_metrics/java
   - /tracing/metrics/runtime_metrics/nodejs
   - /tracing/metrics/runtime_metrics/python
@@ -95,6 +93,7 @@ This can be done either from the "Computer Management" UI, or from an administra
 ```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -163,7 +162,6 @@ However, you can extend the metrics collected by adding custom JMX metrics. For 
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
-
 ```python
 from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
@@ -191,6 +189,7 @@ Datadog.configure do |c|
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
+
 {{% /tab %}}
 
 {{% tab "Go" %}}

@@ -3605,6 +3605,11 @@ menu:
       parent: tracing_metrics
       identifier: tracing_runtime_metrics
       weight: 302
+    - name: Data Collected
+      url: tracing/metrics/runtime_metrics/data_collected/
+      parent: tracing_runtime_metrics
+      identifier: tracing_runtime_metrics_data_collected
+      weight: 3021
     - name: Trace Pipeline Configuration
       url: tracing/trace_pipeline/
       parent: tracing
@@ -4481,16 +4486,11 @@ menu:
       identifier: cd_deployments_ciproviders
       parent: cd_deployments
       weight: 102
-    - name: Search and Manage
-      url: continuous_delivery/search
-      identifier: cd_search
-      parent: cd
-      weight: 2
-    - name: Explorer
+    - name: Explore Deployments
       url: continuous_delivery/explorer
       identifier: cd_explorer
       parent: cd
-      weight: 3
+      weight: 2
     - name: Search Syntax
       url: continuous_delivery/explorer/search_syntax
       identifier: cd_explorer_search_syntax
