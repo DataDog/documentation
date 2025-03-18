@@ -10,7 +10,7 @@ further_reading:
   text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page to set up the SDK injector on.</div>
+<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page to set up the SDK injector.</div>
 
 ## Overview
 
