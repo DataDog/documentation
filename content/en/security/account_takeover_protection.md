@@ -255,7 +255,7 @@ insert screenshot here
 
 The notification targets defined on the detection rule condition will receive a notification message every time new user ids are seen for that condition. Notification profiles looking for those signals won't be notified on new user id values.
 
-You can set-up a webhook through Datadog webhook integration to receive the notification payload. Make sure you add the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the payload of the webhook integration. The user ids values will be stored under the "notify_on_update" path of the json payload.
+To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Be sure to include the ”$SECURITY_SIGNAL_ATTRIBUTES” variable in the webhook payload. The user IDs will be stored under the “notify_on_update” path in the JSON payload.
 
 insert another screenshot here.
 
