@@ -4515,7 +4515,7 @@ menu:
       url: continuous_delivery/features/rollbacks_detection
       identifier: cd_features_rollbacks_detection
       parent: cd_features
-      weight: 301
+      weight: 302
     - name: Test Optimization
       url: tests/
       pre: ci
