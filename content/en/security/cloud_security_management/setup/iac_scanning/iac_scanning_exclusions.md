@@ -81,7 +81,7 @@ exclude-severities = [ "info", "low" ]
 
 #### Exclude paths
 
-Use `exclude-paths` to exclude specific files or directories from scanning. This option supports glob patterns and can be used multiple times or as a string representation of a list.
+Use `exclude-paths` to exclude specific files or directories from scanning. This option supports glob patterns. To supply multiple values to this option, you can set the option multiple times or pass in a list.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
