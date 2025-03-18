@@ -67,7 +67,7 @@ The injection-related vulnerabilities are:
 
 This feature is available starting from the following versions of each language's tracing library:
 
-* **Java**: 1.45.0
+* **Java**: 1.45.0+
 * **.NET**: not supported
 * **Node.js**: not supported
 * **Python**: not supported
