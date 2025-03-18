@@ -32,7 +32,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 
 {{< tabs >}}
 {{% tab "Java" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: Yes</li>
   <li><strong>Library Version</strong>: 0.29.0+</li>
@@ -44,7 +44,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 {{% /tab %}}
 
 {{% tab "Python" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: No</li>
   <li><strong>Library Version</strong>: 0.30.0+</li>
@@ -56,7 +56,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: No</li>
   <li><strong>Library Version</strong>: 0.44.0+</li>
@@ -70,7 +70,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 {{% /tab %}}
 
 {{% tab "Go" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: No</li>
   <li><strong>Library Version</strong>: 1.18.0+</li>
@@ -82,7 +82,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: No</li>
   <li><strong>Library Version</strong>: 3.0.0+</li>
@@ -94,7 +94,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 <ul>
   <li><strong>Enabled By Default</strong>: No</li>
   <li><strong>Library Version</strong>: 1.23.0+</li>
@@ -117,10 +117,14 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 </div>
 {{% /tab %}}
 {{% tab "PHP" %}}
+<div class="alert bg-light">
 <div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
+</div>
 {{% /tab %}}
 {{% tab "C++" %}}
+<div class="alert bg-light">
 <div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
+</div>
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,11 +179,9 @@ Use the following environment variables to configure runtime metrics in your app
 
 In addition to environment variables, some languages support configuring runtime metrics directly in code.
 
-In addition to environment variables, some languages support configuring runtime metrics directly in code.
-
 {{< tabs >}}
 {{% tab "Java" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can only enable runtime metrics with [environment variables](#environment-variables).
 
@@ -190,7 +192,7 @@ However, you can extend the metrics collected by adding custom JMX metrics. For 
 {{% /tab %}}
 
 {{% tab "Python" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -204,7 +206,7 @@ RuntimeMetrics.enable()
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -226,7 +228,7 @@ end
 {{% /tab %}}
 
 {{% tab "Go" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -249,7 +251,7 @@ The `WithDogstatsdAddr` option allows you to specify a custom address for the Do
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
@@ -263,7 +265,7 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 You can only enable runtime metrics with [environment variables](#environment-variables).
 
