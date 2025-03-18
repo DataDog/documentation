@@ -84,7 +84,7 @@ To build a Software Template from scratch:
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the app to a Dashboard or the Self-Service portal for easy discovery.
+- Add the app to a Dashboard or to Software Catalog for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 
