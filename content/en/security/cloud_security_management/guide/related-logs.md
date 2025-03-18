@@ -36,6 +36,8 @@ source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnl
   - `aws_sns_topic`
   - `aws_sqs_queue`
   - `aws_subnet`
+  
+    To request additional resource types, fill out the [feedback form][4].
 
 ## View related logs
 
@@ -54,3 +56,4 @@ By default, Related Logs looks through the last two weeks of related CloudTrail 
 [1]: /security/cloud_security_management/setup/cloudtrail_logs/
 [2]: https://app.datadoghq.com/security/compliance
 [3]: /logs/log_configuration/flex_logs/
+[4]: https://forms.gle/AqZg9jqBusDf62h87
