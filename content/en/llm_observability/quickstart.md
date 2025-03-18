@@ -129,8 +129,7 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_O
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
 
-## In AWS Lambda
-<!-- TODO (sabrenner): we will need to add tabs here once Node.js has a better OOTB serverless experience -->
+## AWS Lambda
 This generate an LLM Observability trace in an AWS Lambda serverless environment, create an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
 {{< tabs >}}
@@ -225,6 +224,37 @@ export const handler = async (event) => {
 [2]: https://docs.datadoghq.com/serverless/aws_lambda/installation/nodejs/?tab=datadogcli#installation
 
 {{% /tab %}}
+{{< /tabs >}}
+
+For serverless environments other than AWS Lambda, use the `flush` method to ensure traces are flushed before the process exits.
+
+{{< tabs >}}
+
+{{% tab "Python" %}}
+
+```python
+from ddtrace.llmobs import LLMObs
+def handler():
+  # function body
+  LLMObs.flush()
+```
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+```javascript
+import tracer from 'dd-trace';
+const llmobs = tracer.llmobs;
+
+export const handler = async (event) => {
+  // your function body
+  llmobs.flush();
+};
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Further Reading
