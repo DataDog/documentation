@@ -25,6 +25,8 @@ You can visualize the clusters by using a **Box Packing** or **Scatter Plot** la
 
 Cluster Maps provide an overview of each cluster's performance across operational metrics, such as error types and latency, or [out-of-the-box or custom evaluations][3], enabling you to identify trends such as topic drift and additional quality issues.
 
+<div class="alert alert-info"> Built with Llama - the Cluster Map uses Llama to generate topic labels based on your LLM application's inputs and outputs. </div>
+
 ## Search and manage clusters
 
 Customize your search query by selecting the sorting options to narrow down the clusters based on your specific criteria, such as evaluation metrics or time periods, for more targeted analysis.
