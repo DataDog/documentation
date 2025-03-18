@@ -11841,7 +11841,10 @@ components:
       properties:
         rawSchema:
           description: Schema from user input in base64 encoding.
+          example: ''
           type: string
+      required:
+      - rawSchema
       type: object
     EntityResponseIncludedRelatedEntity:
       description: Included related entity.
@@ -11862,6 +11865,7 @@ components:
       properties:
         kind:
           description: Entity kind.
+          example: ''
           type: string
         name:
           description: Entity name.
@@ -11872,6 +11876,8 @@ components:
         type:
           description: Entity relation type to the associated entity.
           type: string
+      required:
+      - kind
       type: object
     EntityResponseIncludedRelatedEntityMeta:
       description: Included related entity meta.
@@ -11909,7 +11915,10 @@ components:
           type: string
         title:
           description: Incident title.
+          example: ''
           type: string
+      required:
+      - title
       type: object
     EntityResponseIncludedRelatedOncallAttributes:
       description: Included related oncall attributes.
@@ -11918,7 +11927,10 @@ components:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalations'
         provider:
           description: Oncall provider.
+          example: ''
           type: string
+      required:
+      - provider
       type: object
     EntityResponseIncludedRelatedOncallEscalationItem:
       description: Oncall escalation.
@@ -11956,6 +11968,8 @@ components:
       properties:
         schema:
           $ref: '#/components/schemas/EntityV3'
+      required:
+      - schema
       type: object
     EntityResponseMeta:
       description: Entity metadata.
