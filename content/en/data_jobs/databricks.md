@@ -48,7 +48,7 @@ The Datadog Agent must be installed on Databricks clusters to monitor Databricks
 Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
 
 <div class="alert alert-warning">
-This setup does not work on Databricks Clusters in `Standard (formerly Shared)` access mode because global init scripts cannot be installed on those clusters. If you are using clusters with the `Standard (formerly Shared)` access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
+This setup does not work on Databricks Clusters in <code>Standard (formerly Shared)</code> access mode because global init scripts cannot be installed on those clusters. If you are using clusters with the <code>Standard (formerly Shared)</code> access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
 </div>
 
 #### When integrating a workspace with Datadog
@@ -76,7 +76,7 @@ This setup does not work on Databricks Clusters in `Standard (formerly Shared)` 
 {{% tab "Manually install a global init script" %}}
 
 <div class="alert alert-warning">
-This setup does not work on Databricks Clusters in `Standard (formerly Shared)` access mode because global init scripts cannot be installed on those clusters. If you are using clusters with the `Standard (formerly Shared)` access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
+This setup does not work on Databricks Clusters in <code>Standard (formerly Shared)</code> access mode because global init scripts cannot be installed on those clusters. If you are using clusters with the <code>Standard (formerly Shared)</code> access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
 </div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
