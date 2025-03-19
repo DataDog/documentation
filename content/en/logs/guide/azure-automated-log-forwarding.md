@@ -56,7 +56,7 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 ## Uninstall
 
-Begin by opening an [Azure Cloud Shell][5], and ensure you are running the Azure CLI/Bash, not PowerShell.
+Begin by opening an [Azure Cloud Shell][5], and ensure it is running in Azure CLI/Bash, not PowerShell.
 
 Download and run the uninstall script:
 {{< code-block lang="bash" >}}
