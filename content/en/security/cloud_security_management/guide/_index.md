@@ -23,4 +23,5 @@ aliases:
     {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Writing Custom CSM Misconfigurations Rules with Rego{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}How Datadog Determines if Resources are Publicly Accessible{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/resource_evaluation_filters" >}}Use Filters to Exclude Resources from Evaluation{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/related-logs" >}}View a Misconfiguration's Related Logs{{< /nextlink >}}
 {{< /whatsnext >}}
