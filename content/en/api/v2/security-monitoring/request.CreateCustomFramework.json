@@ -1,0 +1,24 @@
+{
+  "data": {
+    "type": "custom_framework",
+    "attributes": {
+      "name": "uritymonitoring",
+      "handle": "uritymonitoring",
+      "version": "uritymonitoring",
+      "icon_url": "",
+      "requirements": [
+        {
+          "name": "uritymonitoring",
+          "controls": [
+            {
+              "name": "uritymonitoring",
+              "rules_id": [
+                "kyz-e99-tys"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
