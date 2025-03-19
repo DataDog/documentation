@@ -21,7 +21,7 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
 
 To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time.
 
-## Generating your first trace
+## Trace an LLM application
 
 To generate an LLM Observability trace, you can run a Python or Node.js script.
 
@@ -129,7 +129,7 @@ The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_O
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
 
-## AWS Lambda
+## Trace an LLM application in AWS Lambda
 This generates an LLM Observability trace in an AWS Lambda environment and creates an Amazon Bedrock based chatbot running with LLM Observability in AWS Lambda.
 
 {{< tabs >}}

@@ -10,7 +10,8 @@ cascade:
 ---
 
 {{< whatsnext desc="LLM Observability Guides:" >}}
-    {{< nextlink href="/llm_observability/quickstart" >}}Trace an LLM Application{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application" >}}Trace an LLM Application{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/quickstart#trace-an-llm-application-in-aws-lambda" >}}Trace an LLM Application in AWS Lambda{{< /nextlink >}}
     {{< nextlink href="/llm_observability/submit_evaluations" >}}Submit Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/ragas_quickstart" >}}Ragas Quickstart{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/llm_observability_and_apm" >}}Using LLM Observability and APM{{< /nextlink >}}
