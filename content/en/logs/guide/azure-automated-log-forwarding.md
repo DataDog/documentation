@@ -64,7 +64,7 @@ wget https://ddazurelfo.blob.core.windows.net/uninstall/uninstall.py
 python uninstall.py
 {{< /code-block >}}
 
-The script will first discover any instances running in each subscription, and prompt you to select the instance(s) to uninstall. Then, confirm the resource deletions, and wait for the resources to be deleted.
+The script first discovers any instances running in each subscription, then prompts you to select the instance(s) to uninstall. Confirm the resource deletions, and wait for the resources to be deleted.
 
 ## Further reading
 
