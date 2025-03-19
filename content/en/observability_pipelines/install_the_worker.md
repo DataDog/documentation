@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker when you set up a pipeline. These are the general steps for setting up a pipeline in the UI:
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps for setting up a pipeline in the UI:
 
 1. Select a log [source][2].
 1. Select [destinations][3] to which you want to send your logs.
