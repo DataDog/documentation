@@ -41,7 +41,7 @@ For more granular control over the instrumentation of the RUM application, you c
 To automatically instrument your RUM application:
 
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][4] and select the JavaScript (JS) application type.
-2. Select **Auto-Instrumentation** and **httpd**.
+2. Select **Auto-Instrumentation** and **Apache httpd**.
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][5].
 4. Copy and run the installer command to load the Datadog httpd Module with the RUM SDK Injector onto httpd.
 5. After the installer successfully installs the SDK Injector, restart Apache HTTP Server to begin collecting RUM sessions.
