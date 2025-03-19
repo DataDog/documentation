@@ -29,7 +29,6 @@
 <ul>
 {{ range $title, $name := $on_prem_actions -}}
     {{ $full_url := print $base_url $name "/" $name -}}
-    <!-- com.datadoghq.gitlab/com.datadoghq.gitlab.branches/ -->
-    <li><a href="{{ $full_url -}}">{{ $title}}</a></li>
+    <li><a href="{{ $full_url }}">{{ $title}}</a></li>
 {{ end -}}
 </ul>
