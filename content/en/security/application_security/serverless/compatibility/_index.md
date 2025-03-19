@@ -14,7 +14,7 @@ Application Security provides serverless capability for the following platforms 
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
   
-|Type           	| Threat Detection	|  Software Composition Analysis (SCA)	| Code Security 	|
+|Type           	| Threat Detection	|  Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| {{< X >}}         	| 	                			|						|
 | .NET    	| {{< X >}}         	|  	                          		|						|
@@ -59,7 +59,7 @@ Go
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type           	| Threat Detection	|  Software Composition Analysis	| Code Security 	|
+|Type           	| Threat Detection	|  Runtime Software Composition Analysis (SCA)	| Runtime Code Analysis (IAST) 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| Preview         	| Preview	                			|						|
 | .NET    	| Preview         	| Preview 	                          		|						|
@@ -76,7 +76,7 @@ Only *web applications* are supported. Azure Functions are not supported.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
    
-|Type       | OS			     |Threat Detection	|  Software Composition Analysis	 | Code Security 	|
+|Type       | OS			     | Threat Detection	|  Runtime Software Composition Analysis (SCA)	 | Runtime Code Analysis (IAST) 	|
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
 | Java  	| Windows, Linux	 | {{< X >}}    	| {{< X >}}	                         | {{< X >}}			                            |
 | .NET    	| Windows, Linux	 | {{< X >}}        | {{< X >}}      	                 |			                                |
