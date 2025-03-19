@@ -56,7 +56,7 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 
 ## Uninstall
 
-Begin by opening an [Azure Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview), and ensure you are running the Azure CLI/Bash, not PowerShell.
+Begin by opening an [Azure Cloud Shell][5], and ensure you are running the Azure CLI/Bash, not PowerShell.
 
 Download and run the uninstall script:
 {{< code-block lang="bash" >}}
@@ -73,3 +73,4 @@ The script will first discover any instances running in each subscription, and p
 [1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
+[5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview
