@@ -14,7 +14,7 @@ further_reading:
 
 Cloudcraft offers a powerful, live read-only visualization tool for cloud architecture, enabling you to explore, analyze, and manage your infrastructure with ease. Not to be confused with the [Standalone Cloudcraft documentation][1], this guide outlines the functionality, setup, and use cases of Cloudcraft *in Datadog*, detailing its benefits for various user personas, and highlighting key features and capabilities.
 
-<div class="alert alert-info">This documentation applies to the Cloudcraft <em>in Datadog</em> product. For information on the standalone Cloudcraft product, please refer to the <a href="/cloudcraft"> Cloudcraft (Standalone) </a> documentation.</div>
+<div class="alert alert-info">This documentation applies to the Cloudcraft <em>in Datadog</em> product. For information on the standalone Cloudcraft product, please refer to the <a href="/cloudcraft">Cloudcraft (Standalone)</a> documentation.</div>
 
 Cloudcraft's core functionality is its ability to generate detailed architecture diagrams. These diagrams visually represent AWS cloud resources, allowing you to explore and analyze your environments. Cloudcraft's diagrams are optimized for clarity and performance, providing an intuitive interface for navigating large-scale deployments. This helps teams to:
 
@@ -31,10 +31,10 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 ### Prerequisites
 
 - [Resource collection][2] must be enabled for your AWS accounts.
-- For the best experience, Datadog strongly recommends to use the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
+- For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
 - To view security misconfigurations on the [Security findings overlay](#security-findings), [CSM][3] must be enabled.
 
-**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the user-interface(UI).
+**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the user interface (UI).
 
 ## Getting started
 
@@ -44,7 +44,7 @@ To get started using Cloudcraft, select one or more accounts, regions, and resou
 
 **Note**: The account name in the **Account** dropdown originates from your AWS account tags in the AWS integration tile.
 
-## Group by
+## Group By
 
 With Group By, Cloudcraft divides your diagram into distinct sections based on different group types. This feature offers a clear and organized perspective of your resources, making it especially helpful for visualizing complex cloud environments.
 
@@ -62,7 +62,7 @@ Cloudcraft provides three built-in presets: [Infrastructure](#infrastructure-dia
 
 ### Infrastructure diagram
 
-The infrastructure view provides a broad overview, grouping resources by Account, Region and VPC. This view is ideal for generating architecture diagrams for troubleshooting or high-level review.
+The infrastructure view provides a broad overview, grouping resources by Account, Region, and VPC. This view is ideal for generating architecture diagrams for troubleshooting or high-level review.
 
 The infrastructure diagram excludes components like EBS, NAT Gateway, and Transit Gateway, among others, to give you an uncluttered diagram, showing you the most important parts of your architecture.
 
@@ -97,7 +97,7 @@ To apply a saved view to your diagram:
 
 ## Explore resources
 
-In any of the Cloudcraft presets, you utilize the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource reveals a hover panel with basic information. Clicking on a resource opens a side panel that displays its Datadog observability, cost information, and security data, with cross-links to other Datadog products where relevant.
+In any of the Cloudcraft presets, use the zoom and hover features to pinpoint the most critical resources. As you zoom in, additional resource names become visible. Hovering over a resource reveals a hover panel with basic information. Clicking on a resource opens a side panel that displays its Datadog observability, cost information, and security data, with cross-links to other Datadog products where relevant.
 
 {{< img src="datadog_cloudcraft/zoom_feature_hover.mp4" alt="Video showing the zoom and hover feature in Cloudcraft and clicking on a resource to open the side panel" video=true >}}
 
@@ -126,7 +126,7 @@ Cloudcraft supports overlays that integrate various data sources and display the
 The security findings overlay in Cloudcraft provides an overlay from CSM misconfigurations, allowing you to quickly identify CSM findings. This allows you to:
 
 - Identify security issues in infrastructure diagrams.  
-- View misconfigurations in context to analyze their impact and prioritize remediation  
+- View misconfigurations in context to analyze their impact and prioritize remediation.
 - Assess security posture before deploying applications.
 
 By default, the security overlay shows Critical, High, and Medium misconfigurations, but can be filtered at the bottom of the screen:
@@ -135,7 +135,7 @@ By default, the security overlay shows Critical, High, and Medium misconfigurati
 
 ### Agent Overlay
 
-The Agent overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not installed on that resource.
+The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not installed on that resource.
 
 {{< img src="datadog_cloudcraft/agent_overlay.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
 
