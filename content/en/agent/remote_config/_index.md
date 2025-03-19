@@ -123,11 +123,11 @@ To enable Remote Configuration:
 2. Ensure your RBAC permissions include [`api_keys_write`][5], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 
 3. On the [Remote Configuration][8] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
-**Note:** Beginning April 8, 2024, Remote Configuration is on-by-default for:
-* New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level **and** are in the same Datadog site as their parent organization.
-* Organizations created by new Datadog customers.
+**Note:** Beginning April 8, 2024, Remote Configuration is on by default for:
+   - New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level **and** are in the same Datadog site as their parent organization.
+   - Organizations created by new Datadog customers.
 
-To opt-out of Remote Configuration use, see the [opt-out section][23].
+   To opt out of Remote Configuration use, see the [opt-out section][23].
 
 4. Select an existing API key or create a new API key, and enable the Remote Configuration capability on the key. If your new organization fulfills the conditions mentioned in step 3, Remote Configuration is enabled on your API keys be default.
 
@@ -136,35 +136,35 @@ To opt-out of Remote Configuration use, see the [opt-out section][23].
 5. Update your Agent configuration file:
 **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
 
-{{< tabs >}}
-{{% tab "Configuration YAML file" %}}
-Add the following to your configuration YAML file, specifying the API key that has Remote Configuration capability enabled:
-```yaml
-api_key: xxx
-remote_configuration:
-  enabled: true
-```
+   {{< tabs >}}
+   {{% tab "Configuration YAML file" %}}
+   Add the following to your configuration YAML file, specifying the API key that has Remote Configuration capability enabled:
+   ```yaml
+   api_key: xxx
+   remote_configuration:
+     enabled: true
+   ```
 
-{{% /tab %}}
-{{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest, specifying the API key that has Remote Configuration capability enabled:
-```yaml
-DD_API_KEY=xxx
-DD_REMOTE_CONFIGURATION_ENABLED=true
-```
+   {{% /tab %}}
+   {{% tab "Environment variable" %}}
+   Add the following to your Datadog Agent manifest, specifying the API key that has Remote Configuration capability enabled:
+   ```yaml
+   DD_API_KEY=xxx
+   DD_REMOTE_CONFIGURATION_ENABLED=true
+   ```
 
-{{% /tab %}}
-{{% tab "Helm" %}}
-Add the following to your Helm chart, specifying the API key that has Remote Configuration capability enabled:
-```yaml
-datadog:
-  apiKey: xxx
-remoteConfiguration:
-  enabled: true
-```
+   {{% /tab %}}
+   {{% tab "Helm" %}}
+   Add the following to your Helm chart, specifying the API key that has Remote Configuration capability enabled:
+   ```yaml
+   datadog:
+     apiKey: xxx
+   remoteConfiguration:
+     enabled: true
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 
 6. Restart your Agent for the changes to take effect.
@@ -237,7 +237,7 @@ The following table describes the meaning of each Tracing library status:
 
 ## Opting out of Remote Configuration
 
-To opt-out of Remote Configuration use, you can disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and Agent level.
+To opt out of Remote Configuration use, you can disable Remote Configuration at the organization level. Optionally, you can also disable Remote Configuration capability at the API key level and Agent level.
 
 ### At the Organization level
 
