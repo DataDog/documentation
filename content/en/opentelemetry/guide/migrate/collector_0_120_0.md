@@ -60,9 +60,32 @@ source NOT IN (datadogexporter, datadogconnector)
 
 ## Changes to Prometheus Server reader defaults
 
-<div class="alert alert-info">If you use the default Prometheus reader configuration, there is no impact to you.</div>
+<div class="alert alert-info">If you use default configurations for your OpenTelemetry Collector's telemetry settings, you will not be impacted by these changes.</div>
 
-If you customized the Prometheus reader configuration to differ from the default (which is uncommon), you may experience changes to metric names, units, and metadata.
+You are only impacted if you have explicitly configured the Prometheus reader with custom settings, such as:
+
+```yaml
+service:
+  telemetry:
+    metrics:
+      level: detailed
+      readers:
+        - pull:
+            exporter:
+              prometheus:
+                host: localhost
+                port: 8888
+```
+
+If you are affected by these changes, you may see differences in metric names, such as suffix changes and unit additions.
+
+To revert to the previous behavior, add these three parameters to your existing Prometheus reader configuration:
+
+```yaml
+without_scope_info: true
+without_type_suffix: true
+without_units: true
+```
 
 For questions or assistance, contact [Datadog support][5].
 
