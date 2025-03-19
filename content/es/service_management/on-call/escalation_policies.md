@@ -32,7 +32,7 @@ Datadog crea una política de elevación predeterminada cuando [incorporas un eq
 En cada paso de una política de elevación, puedes notificar a usuarios individuales, a equipos enteros o a quien esté de guardia en un horario.
 
 ### Cronogramas
-{{< img src="service_management/oncall/escalation_policy_notify_schedule.png" alt="Un paso de la política de elevación de muestras que notifica un cronograma". style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_notify_schedule.png" alt="Un paso de la política de elevación de muestras que notifica un cronograma" style="width:100%;" >}}
 
 Las políticas de elevación pueden notificar a quien esté de guardia según un cronograma predefinido. El sistema checks el cronograma y notifica a la persona o al grupo que está de guardia activamente durante la incidencia. El uso de cronogramas es beneficioso para lo siguiente:
 
@@ -42,10 +42,10 @@ Las políticas de elevación pueden notificar a quien esté de guardia según un
 
 Si no hay nadie de guardia para un horario determinado, el paso de elevación se omite lentamente y el proceso avanza sin retrasos ni interrupciones. La interfaz de usuario indica que se ha omitido el paso.
 
-{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="Una política de elevación de muestras que indica una elevación omitida debido a que no había ninguna persona de guardia". style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_schedule_skipped.png" alt="Una política de elevación de muestras que indica una elevación omitida debido a que no había ninguna persona de guardia" style="width:100%;" >}}
 
 ### Usuarios
-{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="Una política de elevación de muestras que especifica un usuario en la política de elevación". style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_notify_user.png" alt="Una política de elevación de muestras que especifica un usuario en la política de elevación" style="width:100%;" >}}
 
 Puedes incluir usuarios específicos en una política de elevación para asegurarte de que siempre se notifique a las personas clave en el evento de una página. Los casos de uso más comunes para avisar directamente a un usuario son los siguientes:
 
@@ -54,7 +54,7 @@ Puedes incluir usuarios específicos en una política de elevación para asegura
 - Dirigir alertas a personal de reserva si el contacto principal no está disponible.
 
 ### Equipos
-{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="Una política de elevación de muestras que notifica a un equipo entero". style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_notify_team.png" alt="Una política de elevación de muestras que notifica a un equipo entero" style="width:100%;" >}}
 
 Los casos de uso más comunes para avisar a un equipo entero son los siguientes:
 
