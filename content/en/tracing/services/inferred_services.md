@@ -19,10 +19,6 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 Explore inferred services in the [Software Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
-
-To see inferred services, you must enable some configurations. 
-Starting from version [7.60.0][1] of the Datadog Agent, these configurations are enabled by default. 
-
 {{< tabs >}}
 {{% tab "Agent v7.60.0+" %}}
 Starting from Datadog Agent version [7.60.0][1], no manual configuration is needed to see inferred services. The required configurations—`apm_config.compute_stats_by_span_kind` and `apm_config.peer_tags_aggregation`—are enabled by default.
