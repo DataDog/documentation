@@ -6,7 +6,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
@@ -29,7 +29,7 @@ algolia:
 
 ## Overview
 
-Selecting a service on the Service Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Software Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
@@ -51,17 +51,18 @@ Consult on this page:
   Service health is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-The **Service Health** banner and alert badges provides a real-time summary of service signals to help you understand if a service needs your attention.
+**Service Health** provides a real-time summary of signals to help you understand if a service needs your attention.
 
-Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts on the Service Page. 
+Service health considers multiple signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts as a badge on Software Catalog and service pages. 
 
-{{< img src="/tracing/services/service_page/service-health2.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+{{< img src="/tracing/services/service_page/service-health3.png" alt="Service health on the service page and service dependency map." style="width:100%;" >}}
 
-To access service health:
+Service health is available in several places in Datadog:
 
-1. Go to [APM > Service Catalog][23].
-2. Hover over a service and click **Full Page**.
-3. View the **Service Health** banner at the top of the page and the related alert badges in the vertical navigation. 
+1. [Software Catalog][23]
+2. Service pages
+3. Service dependendency maps
+4. Service pills
 
 The Service Health banner displays the status of your service as *Warning*, or *Alert* if at least one of the following conditions is met:
 

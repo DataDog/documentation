@@ -44,7 +44,7 @@ Install the [Datadog IDE plugins][5] to run Static Code Analysis (SAST) scans lo
 To start running code scans in your IDE, see the respective documentation for your code editor of choice.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PhpStorm, and PyCharm{{< /nextlink >}}
+    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
     {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -138,15 +138,15 @@ Code Security helps you set up workflows to track and manage remediation of find
 ### Link results to services
 Datadog associates code and library scan results with relevant services by using the following mechanisms:
 
-1. [Identifying the code location associated with a service using the Service Catalog.](#identifying-the-code-location-in-the-service-catalog)
+1. [Identifying the code location associated with a service using the Software Catalog.](#identifying-the-code-location-in-the-software-catalog)
 2. [Detecting usage patterns of files within additional Datadog products.](#detecting-file-usage-patterns)
 3. [Searching for the service name in the file path or repository.](#detecting-service-name-in-paths-and-repository-names)
 
 If one method succeeds, no further mapping attempts are made. Each mapping method is detailed below.
 
-#### Identifying the code location in the Service Catalog
+#### Identifying the code location in the Software Catalog
 
-The [schema version `v3`][12] and later of the Service Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
+The [schema version `v3`][12] and later of the Software Catalog allows you to add the mapping of your code location for your service. The `codeLocations` section specifies the location of the repository containing the code and its associated paths.
 
 The `paths` attribute is a list of globs that should match paths in the repository.
 
@@ -204,4 +204,4 @@ If no services or teams are found, Datadog uses the `CODEOWNERS` file in your re
 [9]: https://app.datadoghq.com/security/configuration/notification-rules
 [10]: /account_management/teams/
 [11]: /security/code_security/static_analysis/setup/#customize-your-configuration
-[12]: https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/
+[12]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/

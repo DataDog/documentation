@@ -1346,6 +1346,18 @@ menu:
           - GetLogsIndex
         unstable: []
         order: 2
+    - name: Delete an index
+      url: '#delete-an-index'
+      identifier: logs-indexes-delete-an-index
+      parent: logs-indexes
+      generated: true
+      params:
+        versions:
+          - v1
+        operationids:
+          - DeleteLogsIndex
+        unstable: []
+        order: 5
     - name: Create an index
       url: '#create-an-index'
       identifier: logs-indexes-create-an-index
@@ -2658,7 +2670,8 @@ menu:
           - v2
         operationids:
           - ListVulnerabilities
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Patch a signal-based notification rule
       url: '#patch-a-signal-based-notification-rule'
@@ -2730,7 +2743,8 @@ menu:
           - v2
         operationids:
           - GetSBOM
-        unstable: []
+        unstable:
+          - v2
         order: 27
     - name: List vulnerable assets
       url: '#list-vulnerable-assets'
@@ -2742,7 +2756,8 @@ menu:
           - v2
         operationids:
           - ListVulnerableAssets
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get a finding
       url: '#get-a-finding'
@@ -4736,6 +4751,78 @@ menu:
       url: /api/latest/agentless-scanning/
       identifier: agentless-scanning
       generated: true
+    - name: Get AWS On Demand task by id
+      url: '#get-aws-on-demand-task-by-id'
+      identifier: agentless-scanning-get-aws-on-demand-task-by-id
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAwsOnDemandTask
+        unstable: []
+        order: 6
+    - name: Post an AWS on demand task
+      url: '#post-an-aws-on-demand-task'
+      identifier: agentless-scanning-post-an-aws-on-demand-task
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsOnDemandTask
+        unstable: []
+        order: 7
+    - name: Get AWS On Demand tasks
+      url: '#get-aws-on-demand-tasks'
+      identifier: agentless-scanning-get-aws-on-demand-tasks
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListAwsOnDemandTasks
+        unstable: []
+        order: 5
+    - name: Patch AWS Scan Options
+      url: '#patch-aws-scan-options'
+      identifier: agentless-scanning-patch-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateAwsScanOptions
+        unstable: []
+        order: 3
+    - name: Delete AWS Scan Options
+      url: '#delete-aws-scan-options'
+      identifier: agentless-scanning-delete-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteAwsScanOptions
+        unstable: []
+        order: 4
+    - name: Post AWS Scan Options
+      url: '#post-aws-scan-options'
+      identifier: agentless-scanning-post-aws-scan-options
+      parent: agentless-scanning
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateAwsScanOptions
+        unstable: []
+        order: 2
     - name: Get AWS Scan Options
       url: '#get-aws-scan-options'
       identifier: agentless-scanning-get-aws-scan-options
@@ -4747,7 +4834,7 @@ menu:
         operationids:
           - ListAwsScanOptions
         unstable: []
-        order: 3
+        order: 1
     - name: App Builder
       url: /api/latest/app-builder/
       identifier: app-builder
@@ -4762,8 +4849,7 @@ menu:
           - v2
         operationids:
           - PublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Unpublish App
       url: '#unpublish-app'
@@ -4775,8 +4861,7 @@ menu:
           - v2
         operationids:
           - UnpublishApp
-        unstable:
-          - v2
+        unstable: []
         order: 8
     - name: Update App
       url: '#update-app'
@@ -4788,8 +4873,7 @@ menu:
           - v2
         operationids:
           - UpdateApp
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Get App
       url: '#get-app'
@@ -4801,8 +4885,7 @@ menu:
           - v2
         operationids:
           - GetApp
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete App
       url: '#delete-app'
@@ -4814,8 +4897,7 @@ menu:
           - v2
         operationids:
           - DeleteApp
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Create App
       url: '#create-app'
@@ -4827,8 +4909,7 @@ menu:
           - v2
         operationids:
           - CreateApp
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List Apps
       url: '#list-apps'
@@ -4840,8 +4921,7 @@ menu:
           - v2
         operationids:
           - ListApps
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Delete Multiple Apps
       url: '#delete-multiple-apps'
@@ -4853,9 +4933,132 @@ menu:
           - v2
         operationids:
           - DeleteApps
-        unstable:
-          - v2
+        unstable: []
         order: 3
+    - name: Application Security
+      url: /api/latest/application-security/
+      identifier: application-security
+      generated: true
+    - name: Update a WAF exclusion filter
+      url: '#update-a-waf-exclusion-filter'
+      identifier: application-security-update-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 5
+    - name: Get a WAF exclusion filter
+      url: '#get-a-waf-exclusion-filter'
+      identifier: application-security-get-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 1
+    - name: Delete a WAF exclusion filter
+      url: '#delete-a-waf-exclusion-filter'
+      identifier: application-security-delete-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 6
+    - name: Create a WAF exclusion filter
+      url: '#create-a-waf-exclusion-filter'
+      identifier: application-security-create-a-waf-exclusion-filter
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafExclusionFilter
+        unstable: []
+        order: 2
+    - name: List all WAF exclusion filters
+      url: '#list-all-waf-exclusion-filters'
+      identifier: application-security-list-all-waf-exclusion-filters
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWafExclusionFilters
+        unstable: []
+        order: 3
+    - name: Update a WAF Custom Rule
+      url: '#update-a-waf-custom-rule'
+      identifier: application-security-update-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateApplicationSecurityWafCustomRule
+        unstable: []
+        order: 15
+    - name: Get a WAF custom rule
+      url: '#get-a-waf-custom-rule'
+      identifier: application-security-get-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetApplicationSecurityWafCustomRule
+        unstable: []
+        order: 10
+    - name: Delete a WAF Custom Rule
+      url: '#delete-a-waf-custom-rule'
+      identifier: application-security-delete-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteApplicationSecurityWafCustomRule
+        unstable: []
+        order: 16
+    - name: Create a WAF custom rule
+      url: '#create-a-waf-custom-rule'
+      identifier: application-security-create-a-waf-custom-rule
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateApplicationSecurityWafCustomRule
+        unstable: []
+        order: 12
+    - name: List all WAF custom rules
+      url: '#list-all-waf-custom-rules'
+      identifier: application-security-list-all-waf-custom-rules
+      parent: application-security
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListApplicationSecurityWAFCustomRules
+        unstable: []
+        order: 13
     - name: Audit
       url: /api/latest/audit/
       identifier: audit
@@ -7593,6 +7796,82 @@ menu:
           - ListRumMetrics
         unstable: []
         order: 1
+    - name: Rum Retention Filters
+      url: /api/latest/rum-retention-filters/
+      identifier: rum-retention-filters
+      generated: true
+    - name: Update a RUM retention filter
+      url: '#update-a-rum-retention-filter'
+      identifier: rum-retention-filters-update-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRetentionFilter
+        unstable: []
+        order: 4
+    - name: Get a RUM retention filter
+      url: '#get-a-rum-retention-filter'
+      identifier: rum-retention-filters-get-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRetentionFilter
+        unstable: []
+        order: 2
+    - name: Delete a RUM retention filter
+      url: '#delete-a-rum-retention-filter'
+      identifier: rum-retention-filters-delete-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRetentionFilter
+        unstable: []
+        order: 5
+    - name: Create a RUM retention filter
+      url: '#create-a-rum-retention-filter'
+      identifier: rum-retention-filters-create-a-rum-retention-filter
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRetentionFilter
+        unstable: []
+        order: 3
+    - name: Get all RUM retention filters
+      url: '#get-all-rum-retention-filters'
+      identifier: rum-retention-filters-get-all-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRetentionFilters
+        unstable: []
+        order: 1
+    - name: Order RUM retention filters
+      url: '#order-rum-retention-filters'
+      identifier: rum-retention-filters-order-rum-retention-filters
+      parent: rum-retention-filters
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - OrderRetentionFilters
+        unstable: []
+        order: 6
     - name: SCIM
       url: /api/latest/scim/
       identifier: scim

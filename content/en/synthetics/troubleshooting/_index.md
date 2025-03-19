@@ -164,6 +164,12 @@ This could uncover a resource exhaustion issue on your private locations workers
 
 Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
+### Requirements for ICMP tests running on private location
+
+ICMP tests use the `ping` command to assess network routes and connectivity to a host. `ping` opens a raw socket to send ICMP packets through, so it requires the `NET_RAW` capability to allow for the creation of raw sockets. If your container is configured with a security context that drops or removes this capability, ICMP tests will not be able to function properly on the private location.
+
+Additionally, `ping` requires elevated privileges to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
+
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
