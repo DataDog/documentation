@@ -13,7 +13,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-*Note: the ddtrace-api Python paackage is in a pre-release state and may contain significant issues. If you'd rather use something more stable, use the [ddtrace API][9].*
+*Note: the ddtrace-api Python package is in a pre-release state and may contain significant issues. If you'd rather use something more stable, use the [ddtrace API][9].*
 
 If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6]
 
