@@ -1,7 +1,7 @@
 ---
 further_reading:
 - link: /service_management/on-call/
-  tag: Documentation
+  tag: Documentación
   text: Datadog On-Call
 title: Políticas de elevación
 ---
