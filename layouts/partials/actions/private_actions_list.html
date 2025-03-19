@@ -25,6 +25,16 @@
 
 {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#" }}
 
+{{ if lt (len $on_prem_actions) 1}}
+    {{ $err_msg := "On prem action list is empty" }}
+
+    {{ if eq hugo.Environment "development" -}}
+        {{ warnf $err_msg }}
+    {{ else }}
+        {{ errorf $err_msg }}
+    {{ end }}    
+{{ end }}
+
 <p>The following integrations support private actions:</p>
 <ul>
 {{ range $title, $name := $on_prem_actions -}}

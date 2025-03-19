@@ -519,7 +519,7 @@
       - repo_name: dd-source
         contents:
         - action: pull-and-push-file
-          branch: merchristk-ACTP-add-environments-for-public-doc
+          branch: main
           globs:
             - "domains/workflow/actionplatform/documentation/stable_bundles.json"
           options:
