@@ -23,10 +23,10 @@ These are the mappings available:
 | Log Source             | Log Type                                      | OCSF Category                 | Supported OCSF versions|
 |------------------------|-----------------------------------------------|-------------------------------| -----------------------|
 | AWS CloudTrail         | Type: Management<br>EventName: ChangePassword | Account Change (3001)         | 1.3.0<br>1.1.0         |
-| GCP Audit              | SetIamPolicy                                  | Account Change (3001)         | 1.3.0<br>1.1.0         |
-| GCP Audit              | CreateSink                                    | Account Change (3001)         | 1.3.0<br>1.1.0         |
-| GCP Audit              | UpdateSync                                    | Account Change (3001)         | 1.3.0<br>1.1.0         |
-| GCP Audit              | CreateBucket                                  | Account Change (3001)         | 1.3.0<br>1.1.0         |
+| Google Cloud Audit     | SetIamPolicy                                  | Account Change (3001)         | 1.3.0<br>1.1.0         |
+| Google Cloud Audit     | CreateSink                                    | Account Change (3001)         | 1.3.0<br>1.1.0         |
+| Google Cloud Audit     | UpdateSync                                    | Account Change (3001)         | 1.3.0<br>1.1.0         |
+| Google Cloud Audit     | CreateBucket                                  | Account Change (3001)         | 1.3.0<br>1.1.0         |
 | GitHub                 | Create User                                   | Account Change (3001)         | 1.1.0                  |
 | Google Workspace Admin | addPrivilege                                  | User Account Management (3005)| 1.1.0                  |
 | Okta                   | User session start                            | Authentication (3002)         | 1.1.0                  |
