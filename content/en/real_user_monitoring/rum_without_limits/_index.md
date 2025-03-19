@@ -45,6 +45,8 @@ To get started with RUM without Limits for new applications, at the [instrumenta
 
    <div class="alert alert-warning">Steps 1, 3, and 4 may impact your APM traces ingestion. To ensure that ingested span volumes remain stable, configure the `traceSampleRate` to the previously configured `sessionSampleRate`. For instance, if you used to have `sessionSampleRate` set to 0.1 and you bump it to 100% for RUM without Limits, decrease the `traceSampleRate` from 100% to 10% accordingly to keep the same amount of traces.</div>
 
+5. Deploy your application to apply the configuration.
+
 ### For existing applications
 Existing RUM users must redeploy applications to fully use RUM without Limits. Ensure your session sampling rate is 100% for all applications.
 
