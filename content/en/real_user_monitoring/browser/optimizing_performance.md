@@ -1,5 +1,7 @@
 ---
-title: Monitoring Performance Vitals
+title: Optimizing Performance
+aliases:
+  - real_user_monitoring/browser/monitoring_performance_vitals/
 further_reading:
   - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
     tag: "Learning Center"
@@ -14,7 +16,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-workflow.mp4" alt="RUM Vitals helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/optimization-workflow.mp4" alt="RUM Vitals helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
 
 RUM Vitals helps you find the true root cause of browser performance issues based on real user traffic. You can troubleshoot browser metrics, including the [Core Web Vitals][1] (CWV), [Loading Time][2] (Datadog's custom metric that evaluates how long it takes for a page to fully load from the user's perspective), and more. Determine what caused a slow page, with all the relevant information in one place.
 
@@ -29,7 +31,7 @@ To get the most out of this feature, Datadog recommends that you use:
 
 Navigate to the [Vitals page][5], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][6] page.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-page-selectors-1.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/page-selectors.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
 From this view, you have two ways of selecting the page and vital to review and optimize:
 
@@ -49,7 +51,7 @@ From here, you can:
 
 In the example below, a pc75 evaluation means that the displayed value is at the 75th percentile of views in the selected filters. Pc75 is the typical percentile used to evaluate CWV for a given page.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vital-filter-and-evaluate-1.png" alt="Filter and evaluate your vitals for the selected view." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/filter-and-evaluate.png" alt="Filter and evaluate your vitals for the selected view." style="width:100%;" >}}
 
 ## Visualize the user's experience
 
@@ -69,7 +71,7 @@ In the troubleshooting section, you can see resources and errors that occurred o
 - Resources that are particularly slow or large could be contributing to performance issues
 - Recurring errors could be causing problems as well
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-troubleshoot.png" alt="The Troubleshooting section shows  resources and errors that occurred on the page that might have affected the vital's performance." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/troubleshoot.png" alt="The Troubleshooting section shows  resources and errors that occurred on the page that might have affected the vital's performance." style="width:100%;" >}}
 
 ## View event samples
 
@@ -77,7 +79,7 @@ To see everything in context with the rest of the page activity, scroll down to 
 
 You can select another sample event using the dropdown in the top left, and expand any event in the waterfall by clicking it to see the side panel, as shown below.
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-view-event-samples-1.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/view-event-samples.png" alt="View event samples to see everything in context with the rest of the page activity." style="width:100%;" >}}
 
 ## Further Reading
 
