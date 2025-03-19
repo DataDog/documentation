@@ -149,7 +149,11 @@ On the SNS Publish Task, set `_datadog` in the `MessageAttributes` field as foll
 ### Requirements
 For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0.
 
-For Python: Datadog Lambda Library for Python layer 99+ **or** `dd-trace-py` v2.13.0.
+For Python: Datadog Lambda Library for Python layer v99+ **or** `dd-trace-py` v2.13.0.
+
+For Java: `dd-trace-java` v1.47.0.
+
+For .NET: `dd-trace-dotnet` v3.11.0.
 
 ### Setup
 
