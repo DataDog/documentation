@@ -85,7 +85,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account.
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
-1. Select **OpenAI** or **Azure OpenAI** as your LLM provider.
+1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider.
 1. Select the account you want to run the evaluation on.
 1. Assign the LLM application you want to run the evaluation on.
 
