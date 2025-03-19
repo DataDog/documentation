@@ -187,7 +187,7 @@ This generates an LLM Observability trace in an AWS Lambda environment and creat
     export DD_SITE=<YOUR_DD_SITE>
     export DD_API_KEY=<YOUR_DATADOG_API_KEY>
     ```
-    If you already have or prefer to use a secret in Secrets Manager, you can set the API key via the secret ARN:
+    If you already have or prefer to use a secret in Secrets Manager, you can set the API key by using the secret ARN:
     ```shell
     export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
     ```
