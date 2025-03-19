@@ -591,7 +591,7 @@ See [Monitor hybrid React Native applications][18].
 [5]: /getting_started/tagging/#define-tags
 [6]: /getting_started/site/
 [7]: /real_user_monitoring/browser/frustration_signals/
-[8]: /real_user_monitoring/platform/connect_rum_and_traces?tab=reactnativerum
+[8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
 [11]: /real_user_monitoring/mobile_and_tv_monitoring/react_native/integrated_libraries/
