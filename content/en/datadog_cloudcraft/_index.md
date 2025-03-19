@@ -38,7 +38,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 
 ## Getting started
 
-To get started using Cloudcraft, select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
+To get started using [Cloudcraft][7], select one or more accounts, regions, and resources. The diagram automatically displays the Infrastructure diagram.
 
 {{< img src="datadog_cloudcraft/getting_started.mp4" alt="Video showing getting started in Cloudcraft by selecting the Account, Region, and Resource" video=true;" >}}
 
@@ -87,6 +87,8 @@ This diagram excludes EBS, NAT Gateway, and other components that might clutter 
 {{< img src="datadog_cloudcraft/cloudcraft_security_diagram.png" alt="Screenshot of the Security diagram in Cloudcraft" style="width:100%;" >}}
 
 ### Saved views 
+
+Saved views allow you to save specific filters on your diagram that are most important to you, enabling efficient troubleshooting with scoped queries on your accounts, regions, environments, and resources.
 
 To apply a saved view to your diagram:
 
