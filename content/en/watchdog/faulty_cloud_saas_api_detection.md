@@ -40,6 +40,7 @@ Watchdog monitors the status of the following external providers' APIs:
 | Coreweave | *.coreweave.com |
 | Cloudflare | api.cloudflare.com |
 | Confluent | api.confluent.cloud & api.telemetry.confluent.cloud |
+| Databricks | *.cloud.databricks.com |
 | Envoy | api.envoy.com |
 | Facebook | graph.facebook.com |
 | GitHub | api.github.com |
