@@ -59,10 +59,10 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 Begin by opening an [Azure Cloud Shell](https://learn.microsoft.com/en-us/azure/cloud-shell/overview), and ensure you are running the Azure CLI/Bash, not PowerShell.
 
 Download and run the uninstall script:
-```bash
+{{< code-block lang="bash" >}}
 wget https://ddazurelfo.blob.core.windows.net/uninstall/uninstall.py
 python uninstall.py
-```
+{{< /code-block >}}
 
 The script will first discover any instances running in each subscription, and prompt you to select the instance(s) to uninstall. Then, confirm the resource deletions, and wait for the resources to be deleted.
 
