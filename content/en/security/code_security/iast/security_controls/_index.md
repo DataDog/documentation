@@ -69,7 +69,7 @@ This feature is available starting from the following versions of each language'
 
 * **Java**: 1.45.0+
 * **.NET**: Not supported
-* **Node.js**: Not supported
+* **Node.js**: 5.37.0+
 * **Python**: Not supported
 
 
@@ -200,6 +200,106 @@ applies for both methods
 
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="Node.js" level="h4" %}}
+
+### Input validator
+
+#### Method that validates all input parameters to avoid command injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_validator.js#validate(input1, input2)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar/foo/custom_input_validator.js:validate`
+
+#### Method that validates one input parameter to avoid command injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_validator.js#validate(input1, inputToValidate)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar/foo/custom_input_validator.js:validate:1`
+
+#### Method that validates two input parameters to avoid command injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_validator.js#validate(input1, firstInputToValidate, secondInputToValidate, anotherInput)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar/foo/custom_input_validator.js:validate:1,2`
+
+#### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_validator.js#validate(input)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:bar/foo/custom_input_validator.js:validate`
+
+#### Method that validates the input parameter to avoid any vulnerabilities
+
+##### Method
+`bar/foo/custom_input_validator.js#validate(input)`
+
+##### Config
+`INPUT_VALIDATOR:*:bar/foo/custom_input_validator.js:validate`
+
+### Sanitizer
+
+#### Sanitizer to avoid command injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_sanitizer.js#sanitize(input)`
+
+##### Config
+`SANITIZER:COMMAND_INJECTION:bar/foo/custom_input_sanitizer.js:sanitize`
+
+#### Sanitizer to avoid command injection and code injection vulnerabilities
+
+##### Method
+`bar/foo/custom_input_sanitizer.js#sanitize(input)`
+
+##### Config
+`SANITIZER:COMMAND_INJECTION,CODE_INJECTION:bar/foo/custom_input_sanitizer.js:sanitize`
+
+#### Sanitizer to avoid any vulnerabilities
+
+##### Method
+`bar/foo/custom_input_sanitizer.js#sanitize(input)`
+
+##### Config
+`SANITIZER:*:bar/foo/custom_input_sanitizer.js:sanitize`
+
+### Special cases
+
+#### Security control method inside an exported object
+Method `validate`, which is exported inside an object `validators`, that validates the input parameter to avoid command injection vulnerabilities.
+
+```javascript
+// bar/foo/custom_input_validator.js
+module.exports = {
+  validators: {
+    validateSql: (input) => {
+      /* validation process */
+    }
+  }
+}
+```
+
+#### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:bar/foo/custom_input_validator.js:validators.validate`
+
+#### Security control method from a transitive dependency
+As long as the `node_modules` folder is present in the file path of a security control definition, all files whose file path ends with that path are evaluated as such.
+
+The following security control defines every `sql-sanitizer` found in the dependency tree as a sanitizer.
+
+#### Config
+`SANITIZER:SQL_INJECTION:node_modules/sql-sanitizer/index.js:sanitize`
+
+
+{{% /collapse-content %}}
 
 [1]: /security/code_security/iast/#overview
 
