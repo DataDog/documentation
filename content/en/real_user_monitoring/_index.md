@@ -192,6 +192,35 @@ Watch [browser recordings][12] of real users interacting with your website and s
 
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
 
+
+## Permissions
+
+{{< callout url="#" btn_hidden="true" header="false">}}
+  Granular access control for RUM is in Preview.
+{{< /callout >}} 
+
+
+By default, all users can change an application's RUM configuration.
+
+Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
+1. Select **Manage App Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**.
+
+**Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
+
+You must have edit access to restore general access to a restricted application. Complete the following steps:
+1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
+1. Select **Manage App Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -213,3 +242,4 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [15]: /real_user_monitoring/browser/setup/
 [16]: /real_user_monitoring/mobile_and_tv_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
+[18]: /account_management/rbac/

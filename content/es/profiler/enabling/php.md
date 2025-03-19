@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/profiler/enabling/php/
+- /es/tracing/profiler/enabling/php/
 code_lang: php
 code_lang_weight: 70
 further_reading:

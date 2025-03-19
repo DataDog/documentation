@@ -2722,7 +2722,7 @@ menu:
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
+      identifier: infrastructure_resource_catalog_schemat
       weight: 20001
     - name: Governance
       url: infrastructure/resource_catalog/governance/
