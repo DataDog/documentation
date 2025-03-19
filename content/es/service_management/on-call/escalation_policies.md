@@ -15,7 +15,7 @@ En Datadog On-Call, las políticas de elevación garantizan que las páginas se 
 Datadog crea una política de elevación predeterminada cuando [incorporas un equipo a On-Call][1].
 
 ## Crea una nueva política de elevación
-{{< img src="service_management/oncall/escalation_policy_2.png" alt="Política de elevación de una muestra". style="width:100%;" >}}
+{{< img src="service_management/oncall/escalation_policy_2.png" alt="Política de elevación de una muestra" style="width:100%;" >}}
 
 1. Ve a [**On-Call** > **Políticas de elevación**][2].
 1. Selecciona [**+ Nueva política de elevación**][3].
