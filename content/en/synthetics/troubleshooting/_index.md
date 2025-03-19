@@ -173,7 +173,7 @@ sudo: The "no new privileges" flag is set, which prevents sudo from running as r
 sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
 ```
 
-and Firefox will report
+Firefox reports the following error:
 ```
 Impossible to spawn Firefox: binary is not a Firefox executable
 sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
