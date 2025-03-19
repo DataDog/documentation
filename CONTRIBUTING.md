@@ -4,7 +4,7 @@ This document is a guide to writing and editing documentation for the [Datadog D
 
 Some of these guidelines are enforced by [the Datadog docs implementation of the Vale linter][4]. After you make a PR, check its **Files changed** tab to see and fix warnings and errors flagged by the linter.
 
-See our [README][9] for additional contribution requirements, including the `<username>/<branch_name>` branch naming convention for all pull requests.
+See our [README][9] for additional contribution requirements, including the `<slack_username>/<branch_name>` branch naming convention for all pull requests.
 
 ## Language
 
