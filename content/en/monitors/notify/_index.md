@@ -85,7 +85,7 @@ After you add the monitor trigger, [add an existing workflow to your monitor][8]
 For more information on building a workflow, see [Build workflows][9].
 
 ### Incidents 
-Incidents can be automatically created from a monitor when the monitor transitions to an alert, warn, or no data status. Click on **Add Incident** and select an @incident- option. Admins can create @incident- options in [Incident Settings][22].
+Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on **Add Incident** and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][22].
 
 Incidents created from a monitor will inherit its [field values][20] from the monitor's tags. To send automated notifications from incidents, add tags to the monitor so that created incidents match the criteria of [notification rules][21].
 
