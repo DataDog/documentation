@@ -6,7 +6,7 @@ algolia:
   tags: ['secrets scanning', 'datadog static analysis', 'SAST']
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/secret-scanning/" btn_hidden="false" header="Join the Preview!" >}}
 Secrets Scanning is in Preview. Contact your Customer Success Manager to get access.
 {{< /callout >}}
 
@@ -20,7 +20,7 @@ Datadog Secrets Scanning scans code to find exposed secrets. Datadog also attemp
 
 ## Set up secrets scanning
 
-Scans can run via your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only). To get started, go to the [**Code Security Setup**][1] and click **Enable scanning for your repositories** or learn how to set up secrets scanning using [GitHub actions][5] or with [other CI providers][6].
+Scans can run in your CI/CD pipelines or directly in Datadog with hosted scanning (GitHub-only). To get started, go to the [**Code Security Setup**][1] and click **Activate scanning for your repositories** or learn how to set up secrets scanning using [GitHub actions][5] or with [other CI providers][6].
 
 ## Secrets scanning rules
 
@@ -30,7 +30,7 @@ Datadog secrets scanning is powered by [Sensitive Data Scanner (SDS)][3] and inc
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: /security/code_security/static_analysis/setup
-[3]: /sensitive_data_scanner/
-[4]: /sensitive_data_scanner/scanning_rules/library_rules/#secrets-and-credentials
+[3]: /security/sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/scanning_rules/library_rules/#secrets-and-credentials
 [5]: /security/code_security/secret_scanning/github_actions
 [6]: /security/code_security/secret_scanning/generic_ci_providers

@@ -249,13 +249,13 @@ Attackers attempting to access stored funds will use accounts immediately after 
 
 Consider blocking compromised users in addition to blocking the attacker.
 
-You can export the list of compromised or targeted users from a signal by enabling the "notify on update" feature in the notification section of a detection rule condition.
+To export a list of compromised or targeted users from a signal, follow these steps. First, go to the notification settings in a detection rule condition. Then add a recipient and turn on "Notify for every new @usr.id detected". This will allow you to export the list when updates occur.
 
 {{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
 
-The notification targets defined on the detection rule condition receives a notification message every time new user ids are seen for that condition. Notification profiles looking for those signals won't be notified on new user id values.
+Notification targets set in the detection rule condition receives a message whenever new user IDs are detected. However, notification profiles monitoring these signals not receive alerts for new user IDs.
 
-You can set-up a webhook through Datadog webhook integration to receive the notification payload. Make sure you add the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the payload of the webhook integration. The user ids values will be stored under the "@usr.id" path of the json payload.
+To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Be sure to include the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the webhook payload. The user IDs will be stored under the "notify_on_update” path in the JSON payload.
 
 {{<img src="security/application_security/threats/notify-on-update-payload.png" alt="Notify on update example payload" style="width:100%;">}}
 
