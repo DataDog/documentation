@@ -14,7 +14,7 @@ further_reading:
     text: Analyze Performance with Metrics
 ---
 
-{{< img src="real_user_monitoring/rum_without_limits/overview-test.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-overview.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 
 ## Overview
 
