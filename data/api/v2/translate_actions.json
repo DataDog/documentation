@@ -365,6 +365,26 @@
     "request_description": "",
     "request_schema_description": "The request for a tests search."
   },
+  "CreateCustomFramework": {
+    "description": "Create a custom framework.",
+    "summary": "Create a custom framework",
+    "request_description": "",
+    "request_schema_description": "Request object to create  a custom framework."
+  },
+  "DeleteCustomFramework": {
+    "description": "Delete a custom framework.",
+    "summary": "Delete a custom framework"
+  },
+  "RetrieveCustomFramework": {
+    "description": "Retrieve a custom framework.",
+    "summary": "Retrieve a custom framework"
+  },
+  "UpdateCustomFramework": {
+    "description": "Update a custom framework.",
+    "summary": "Update a custom framework",
+    "request_description": "",
+    "request_schema_description": "Request object to update a custom framework."
+  },
   "ListContainerImages": {
     "description": "Get all Container Images for your organization.",
     "summary": "Get all Container Images"
