@@ -1,0 +1,35 @@
+{{ $dot := . }}
+{{ $scratch := .Scratch }}
+{{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
+{{ $on_prem_actions := dict }}
+
+{{ if lt (len $workflow_bundles) 1 }}
+  {{ $err_msg := "Could not load workflow bundles data" }}
+
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf $err_msg }}
+  {{ else }}
+    {{ errorf $err_msg }}
+  {{ end }}
+{{ end }}
+
+{{ range sort $workflow_bundles "title" }}
+    {{ $workflow_title := .title }}
+    {{ $workflow_name := .name }}
+    {{ range $action_name, $action_data := .actions }}
+        {{ if $action_data.canRunOnPremises -}}
+            {{ $on_prem_actions = merge $on_prem_actions (dict $workflow_title $workflow_name) }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#" }}
+
+<p>The following integrations support private actions:</p>
+<ul>
+{{ range $title, $name := $on_prem_actions -}}
+    {{ $full_url := print $base_url $name "/" $name -}}
+    <!-- com.datadoghq.gitlab/com.datadoghq.gitlab.branches/ -->
+    <li><a href="{{ $full_url -}}">{{ $title}}</a></li>
+{{ end -}}
+</ul>
