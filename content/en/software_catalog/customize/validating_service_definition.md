@@ -6,6 +6,7 @@ aliases:
   - /tracing/service_catalog/guides/validating-service-definition
   - /service_catalog/guides/validating-service-definition
   - /service_catalog/use_cases/validating_service_definition
+  - /software_catalog/use_cases/validating_service_definition
 further_reading:
   - link: "/tracing/software_catalog/"
     tag: "Documentation"
