@@ -120,7 +120,7 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/logs-rbac/
-[2]: /sensitive_data_scanner/
+[2]: /security/sensitive_data_scanner/
 [3]: /account_management/org_settings/
 [4]: /logs/search_syntax/
 [5]: /logs/indexes
