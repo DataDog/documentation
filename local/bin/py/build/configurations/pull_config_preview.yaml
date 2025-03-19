@@ -115,7 +115,7 @@
         contents:
 
         - action: integrations
-          branch: main
+          branch: docs10263/bigquery-updates
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
