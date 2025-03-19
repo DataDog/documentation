@@ -4,13 +4,9 @@ beta: true
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 5
-further_reading:
-- link: '/real_user_monitoring/browser/setup/server/'
-  tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
+<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page to set up the SDK injector.</div>
 
 ## Overview
 
@@ -158,9 +154,6 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 | 1.27.3 | [ngx_http_datadog-amd64-1.27.3][49] | [ngx_http_datadog-arm64-1.27.3][50] |
 | 1.27.4 | [ngx_http_datadog-amd64-1.27.4][51] | [ngx_http_datadog-arm64-1.27.4][52] |
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/

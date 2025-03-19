@@ -4,10 +4,6 @@ beta: true
 code_lang: apache
 type: multi-code-lang
 code_lang_weight: 3
-further_reading:
-- link: '/real_user_monitoring/browser/setup/server/'
-  tag: 'Documentation'
-  text: 'Browser Monitoring Auto-Instrumentation (Server-side)'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page to set up the SDK injector.</div>
@@ -112,10 +108,6 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 - **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/
