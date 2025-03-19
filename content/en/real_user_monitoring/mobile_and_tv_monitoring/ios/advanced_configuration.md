@@ -214,13 +214,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" >}}
 
-The `id` attribute is the only **mandatory** field. All other attributes are **optional**:
-
-| Attribute | Type   | Description                                                                                       |
-|-----------|--------|---------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | (Required) Unique user identifier.                                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.                              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present.                 |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
 
@@ -734,19 +732,19 @@ Returning `nil` from the error, resource, or action mapper drops the event entir
 
 Depending on the event's type, only some specific properties can be modified:
 
-| Event Type       | Attribute key                     | Description                             |
-|------------------|-----------------------------------|-----------------------------------------|
-| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                      |
-|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.   |
-| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                           |
-|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                 |
-|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to. |
-|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.    |
-| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                     |
-|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource. |
-| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                        |
-|                  | `RUMViewEvent.view.url`              | URL of the view.                         |
-|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page.|
+| Event Type       | Attribute key                        | Description                                      |
+| ---------------- | ------------------------------------ | ------------------------------------------------ |
+| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                              |
+|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.           |
+| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                                   |
+|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                         |
+|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to.         |
+|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.            |
+| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                             |
+|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource.         |
+| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                                |
+|                  | `RUMViewEvent.view.url`              | URL of the view.                                 |
+|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page. |
 
 ## Retrieve the RUM session ID
 

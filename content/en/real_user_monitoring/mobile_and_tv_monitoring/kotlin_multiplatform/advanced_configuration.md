@@ -163,13 +163,11 @@ Adding user information to your RUM sessions helps you to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The `id` attribute is the only **mandatory** field. All other attributes are **optional**:
-
-| Attribute | Type   | Description                                                                                       |
-|-----------|--------|---------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | (Required) Unique user identifier.                                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.                              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present.                 |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `setUserInfo` API, for example:
 
@@ -404,28 +402,28 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
      
-   | Event type    | Attribute key      | Description                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Event type    | Attribute key        | Description                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
    | ActionEvent   | `action.target.name` | Target name.                                     |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                               |
+   |               | `view.name`          | Name of the view.                                |
    | ErrorEvent    | `error.message`      | Error message.                                   |
    |               | `error.stack`        | Stacktrace of the error.                         |
    |               | `error.resource.url` | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
    | ResourceEvent | `resource.url`       | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | LongTaskEvent | `view.referrer`       | URL that linked to the initial view of the page. |
-   |               | `view.url`            | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
+   | LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`          | Name of the view.                                |
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
