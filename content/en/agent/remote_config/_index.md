@@ -51,6 +51,7 @@ Configurations set by higher-priority sources take precedence in the active conf
 Sources from highest to lowest priority:
 
 1. Remote Configuration
+   
    **Note**: Configuration changes applied through Remote Configuration are not shown in your local configuration file (`datadog.yaml`).
 2. Environment variables set by tools like Helm
 3. Configuration files (`datadog.yaml`) that are managed locally or by configuration management tools like Ansible, Chef, or Puppet
@@ -123,7 +124,9 @@ To enable Remote Configuration:
 2. Ensure your RBAC permissions include [`api_keys_write`][5], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 
 3. On the [Remote Configuration][8] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
-**Note:** Beginning April 8, 2024, Remote Configuration is on by default for:
+
+   **Note:** Beginning April 8, 2024, Remote Configuration is on by default for:
+
    - New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level **and** are in the same Datadog site as their parent organization.
    - Organizations created by new Datadog customers.
 
@@ -134,7 +137,8 @@ To enable Remote Configuration:
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
 5. Update your Agent configuration file:
-**Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
+
+   **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
 
    {{< tabs >}}
    {{% tab "Configuration YAML file" %}}
