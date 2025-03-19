@@ -653,7 +653,7 @@ components:
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
-        `app-builder-app`, `connection`, `connection-group`.'
+        `app-builder-app`, `connection`, `connection-group`, `rum-application`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -47952,6 +47952,8 @@ paths:
 
         - Connection Groups: `connection-group`
 
+        - RUM Applications: `rum-application`
+
 
         #### Supported relations for resources
 
@@ -47985,7 +47987,9 @@ paths:
 
         Connections                 | `viewer`, `resolver`, `editor`
 
-        Connection Groups           | `viewer`, `editor`'
+        Connection Groups           | `viewer`, `editor`
+
+        RUM Application             | `viewer`, `editor`'
       operationId: UpdateRestrictionPolicy
       parameters:
       - $ref: '#/components/parameters/ResourceID'
