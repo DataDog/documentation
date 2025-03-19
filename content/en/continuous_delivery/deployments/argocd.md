@@ -75,8 +75,11 @@ The following resources have been added:
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
 <div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
-If your Argo CD application source is not a defined commit SHA (for example, if you are using Helm repositories), adjust the body by removing that line and the comma in the previous line.
+The <code>commit_metadata</code> field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
+<ul>
+<li>You are already syncing your repository information to Datadog (see <a href="/continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog">synchronize your repository metadata to Datadog</a>).</li>
+<li>Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).</li>
+</ul>
 </div>
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
