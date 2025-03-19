@@ -139,7 +139,8 @@ original_formatter = Logger::Formatter.new
 logger.formatter  = proc do |severity, datetime, progname, msg|
   current_span = OpenTelemetry::Trace.current_span(OpenTelemetry::Context.current).context
   
-  dd_trace_id = current_span.trace_id
+  trace_id_int = current_span.trace_id.unpack1('H*').to_i(16)
+  dd_trace_id = trace_id_int < 2**64 ? trace_id_int.to_s : format("%032x", trace_id_int)
   dd_span_id = current_span.span_id.unpack1('H*').to_i(16).to_s
   
   if current_span
