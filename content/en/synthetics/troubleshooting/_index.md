@@ -166,7 +166,7 @@ Confirm you are not seeing [out of memory issues][102] with your private locatio
 
 ### Requirements for browser tests running on private location
 
-Browser tests require elevated privileges in order to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, then the private location will emit error logs when the browser test is executed. The reported logs will vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge will report
+Browser tests require elevated privileges to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, then the private location emits error logs when the browser test is executed. The reported logs vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge report the following error:
 ```
 Critical error in startBrowser: Failed to launch the browser process!
 sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
