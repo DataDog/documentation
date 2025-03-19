@@ -16,9 +16,9 @@ further_reading:
 
 ## Overview
 
-{{< img src="real_user_monitoring/browser/optimizing_performance/optimization-workflow.mp4" alt="RUM Vitals helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/optimization-workflow.mp4" alt="RUM Performance Optimization helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
 
-RUM Vitals helps you find the true root cause of browser performance issues based on real user traffic. You can troubleshoot browser metrics, including the [Core Web Vitals][1] (CWV), [Loading Time][2] (Datadog's custom metric that evaluates how long it takes for a page to fully load from the user's perspective), and more. Determine what caused a slow page, with all the relevant information in one place.
+The Optimization page helps you find the true root cause of browser performance issues based on real user traffic. You can troubleshoot browser metrics, including the [Core Web Vitals][1] (CWV), [Loading Time][2] (Datadog's custom metric that evaluates how long it takes for a page to fully load from the user's perspective), and more. Determine what caused a slow page, with all the relevant information in one place.
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ To get the most out of this feature, Datadog recommends that you use:
 
 ## Select a vital
 
-Navigate to the [Vitals page][5], or click the "Vitals" tab under the [**Digital Experience > Performance Monitoring**][6] page.
+Navigate to the [Optimization page][5], or click the "Optimization" tab under the [**Digital Experience > Performance Monitoring**][6] page.
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/page-selectors.png" alt="You can check vitals for the top most visited pages or specific pages." style="width:100%;" >}}
 
@@ -57,7 +57,7 @@ In the example below, a pc75 evaluation means that the displayed value is at the
 
 The next part of the page helps you visualize exactly what your users are experiencing.
 
-Based on the selected time period and traffic, RUM Vitals highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][4], this is where you see a visual of the page.
+Based on the selected time period and traffic, the Optimization page highlights the most typical example of what users see on the page when the selected vital is captured. If you use [Session Replay][4], this is where you see a visual of the page.
 
 For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
 
