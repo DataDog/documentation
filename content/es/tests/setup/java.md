@@ -1,8 +1,8 @@
 ---
 aliases:
-- /continuous_integration/setup_tests/java
-- /continuous_integration/tests/java
-- /continuous_integration/tests/setup/java
+- /es/continuous_integration/setup_tests/java
+- /es/continuous_integration/tests/java
+- /es/continuous_integration/tests/setup/java
 code_lang: java
 code_lang_weight: 10
 further_reading:
