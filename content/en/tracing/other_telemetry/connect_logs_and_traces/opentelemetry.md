@@ -48,7 +48,8 @@ class CustomDatadogLogProcessor(object):
 
         context = current_span.get_span_context() if current_span is not None else None
         if context is not None:
-            event_dict["dd.trace_id"] = str(context.trace_id)
+            # if trace_id > 2**64 store as hex otherwise store the id as an integer
+            event_dict["dd.trace_id"] = str(context.trace_id) if context.trace_id < 2**64 else f"{context.trace_id:032x}"
             event_dict["dd.span_id"] = str(context.span_id)
 
         return event_dict        
