@@ -255,7 +255,7 @@ To export a list of compromised or targeted users from a signal, follow these st
 
 Notification targets set in the detection rule condition receives a message whenever new user IDs are detected. However, notification profiles monitoring these signals not receive alerts for new user IDs.
 
-To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Be sure to include the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the webhook payload. The user IDs will be stored under the "notify_on_update” path in the JSON payload.
+To receive targeted and compromised user IDs with a webhook, set up a webhook using the Datadog webhook integration. Be sure to include the "$SECURITY_SIGNAL_ATTRIBUTES" variable in the webhook payload. The user IDs will be stored under the "@usr.id" path in the JSON payload.
 
 {{<img src="security/application_security/threats/notify-on-update-payload.png" alt="Notify on update example payload" style="width:100%;">}}
 
