@@ -89,7 +89,7 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account.
 1. Select the account you want to run the evaluation on.
 1. Assign the LLM application you want to run the evaluation on.
 
-After you click **Save**, LLM Observability invokes the `GPT-4o mini` model for OpenAI and the `Haiku` model for Anthropic and Amazon Bedrock using the API key you provided.
+After you click **Save**, LLM Observability uses the API key you provided to invoke the `GPT-4o mini` model for OpenAI and the `Haiku` model for Anthropic and Amazon Bedrock.
 
 For more information about evaluations, see [Terms and Concepts][1].
 
