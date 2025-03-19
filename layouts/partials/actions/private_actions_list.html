@@ -20,21 +20,20 @@
     {{ $workflow_title := .title }}
     {{ $workflow_name := .name }}
     {{ range $action_name, $action_data := .actions }}
-        {{ if $action_data.canRunOnPremises -}}
+        {{ if $action_data.canRunOnPremises }}
             {{ $on_prem_actions = merge $on_prem_actions (dict $workflow_name $workflow_title) }}
         {{ end }}
     {{ end }}
 {{ end }}
 
-
 {{/* Grab parent action for each workflow name */}}
-{{ range $fqn, $title := $on_prem_actions -}}
-    {{ $parts := split $fqn "." -}}
-    {{ range $parts -}}
+{{ range $fqn, $title := $on_prem_actions }}
+    {{ $parts := split $fqn "." }}
+    {{ range $parts }}
         {{ $parent_fqn := print (index $parts 0) "." (index $parts 1) "." (index $parts 2) }}
         {{ $on_prem_parents = $on_prem_parents | append $parent_fqn | uniq }}
     {{ end }}
-{{ end -}}
+{{ end }}
 
 {{/* Match on_prem_parents to action and build final dict */}}
 {{ range sort $workflow_bundles "title" }}
@@ -44,11 +43,10 @@
         {{ range $on_prem_parents}}
             {{ if eq $fqn . }}
                 {{ $final_actions = merge $final_actions (dict $fqn $title) }}
-            {{ end -}}
-        {{ end -}}
+            {{ end }}
+        {{ end }}
     {{ end }}
 {{ end }}
-
 
 {{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#" }}
 
@@ -61,6 +59,9 @@
         {{ errorf $err_msg }}
     {{ end }}    
 {{ end }}
+
+{{/* Kubernetes doesnt have a parent */}}
+{{ $final_actions = merge $final_actions (dict "com.datadoghq.kubernetes" "Kubernetes") }}
 
 {{/* Final output */}}
 <p>The following integrations support private actions:</p>
