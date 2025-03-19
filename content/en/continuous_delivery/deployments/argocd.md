@@ -74,13 +74,9 @@ The following resources have been added:
 2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
-<div class="alert alert-warning">
-The <code>commit_metadata</code> field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
-<ul>
-<li>You are already syncing your repository information to Datadog (see <a href="/continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog">synchronize your repository metadata to Datadog</a>).</li>
-<li>Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).</li>
-</ul>
-</div>
+The `commit_metadata` field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
+- You are already syncing your repository information to Datadog (see [synchronize your repository metadata to Datadog][20]).
+- Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
@@ -253,3 +249,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
 [18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [19]: https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#resource-hooks
+[20]: /continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog
