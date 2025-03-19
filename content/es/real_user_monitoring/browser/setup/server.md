@@ -240,7 +240,7 @@ Para actualizar tu solicitud RUM:
 
 {{% /tab %}}
 
-{{% tab "Apache HTTP Server" (Servidor HTTP Apache) %}}
+{{% tab "Apache HTTP Server (Servidor HTTP Apache)" %}}
 
 Para actualizar tu solicitud RUM:
 
