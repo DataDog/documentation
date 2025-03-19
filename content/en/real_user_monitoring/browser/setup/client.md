@@ -2,7 +2,6 @@
 title: Browser Monitoring Client-Side Instrumentation
 aliases:
   - /real_user_monitoring/setup
-  - /real_user_monitoring/browser/setup
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
