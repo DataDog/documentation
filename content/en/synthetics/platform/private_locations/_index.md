@@ -243,7 +243,7 @@ This command starts a Docker container and makes your private location ready to 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Docker Composer" level="h4" expanded=false %}}
+{{% collapse-content title="Docker Compose" level="h4" expanded=false %}}
 
 1. Create a `docker-compose.yml` file with:
 
