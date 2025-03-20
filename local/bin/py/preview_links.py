@@ -26,17 +26,15 @@ def grab_glossary_title(filename):
     new_filename = 'glossary/#' + anchor
     return new_filename
 
-# Handle markdoc files
-def grab_markdoc_title(filename):
-    return filename.replace('content/en/', '').replace('.mdoc.md', '')
-
 def compile_filename(filename):
-    if pattern3.match(filename):
-        return grab_markdoc_title(filename)
-    elif pattern2.match(filename):
+    if pattern2.match(filename):
         return grab_glossary_title(filename)
     elif pattern1.match(filename):
-        filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
+        filename = filename.replace(
+            'content/en/', ''
+            ).replace('_index', ''
+            ).replace('.mdoc', ''
+            ).replace('.md', '')
         return filename
 
 def sort_files(file_string):
