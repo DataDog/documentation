@@ -291,9 +291,9 @@ module.exports = {
 `INPUT_VALIDATOR:COMMAND_INJECTION:bar/foo/custom_input_validator.js:validators.validate`
 
 #### Security control method from a transitive dependency
-As long as the `node_modules` folder is present in the file path of a security control definition, all files whose file path ends with that path are evaluated as such.
+Because of `npm`'s flat dependency structure, it is not possible to differentiate between a direct dependency and a transitive dependency. This means if a security control is defined inside a dependency, all instances of that dependency (direct or transitive), will be affected.
 
-The following security control defines every `sql-sanitizer` found in the dependency tree as a sanitizer.
+The following security control definition affects every `sql-sanitizer` package found in the dependency tree.
 
 #### Config
 `SANITIZER:SQL_INJECTION:node_modules/sql-sanitizer/index.js:sanitize`
