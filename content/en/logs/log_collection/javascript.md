@@ -17,7 +17,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 - Record real client IP addresses and user agents.
 - Optimized network usage with automatic bulk posts.
 
-**Notes**: 
+**Notes**:
 - **Independent of the RUM SDK**: The Browser Logs SDK can be used without the RUM SDK.
 
 ## Setup
@@ -369,6 +369,14 @@ The following parameters are available to configure the Datadog browser logs SDK
 | `allowUntrustedEvents`     | Boolean                                                                   | No       |                 | Allow capture of [untrusted events][13], for example in automated UI tests.                                                                                                           |
 | `sendLogsAfterSessionExpiration` | Boolean                                                             | No       |                 | Keep sending logs after the session expires.
 
+
+{{< callout type="warning" >}}
+### Important: Consistency Between Logs and RUM SDKs
+
+When using both the Logs Browser SDK and the RUM Browser SDK in your application, the following session-related options **must have identical values** in both SDK initializations. Inconsistent configuration can lead to sessions being tracked differently by each SDK, causing difficulties in correlating logs with RUM events and debugging issues.
+
+For details on configuring the RUM Browser SDK, see the [RUM Browser Documentation][17].
+{{< /callout >}}
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
@@ -1268,3 +1276,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
 [16]: https://docs.datadoghq.com/data_security/logs/#pci-dss-compliance-for-log-management
+[17]: /real_user_monitoring/browser/setup/client/#initialization-parameters
