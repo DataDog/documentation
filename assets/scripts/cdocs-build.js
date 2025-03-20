@@ -34,17 +34,20 @@ const { compiledFilePaths, hasErrors } = markdocIntegration.compileMdocFiles();
 
 console.log(`Markdoc compilation completed. Compiled ${compiledFilePaths.length} files.`);
 
-// Build a .gitignore file for the compiled files,
-// to be written to the content directory
-let gitignoreContents = `# GENERATED FILE: DO NOT EDIT
-# Ignore .md files compiled from Markdoc\n`;
+// Read the contents of the .gitignore file in the content directory into an array of strings
+let gitignoreContents = fs.readFileSync(CONTENT_DIR + '/.gitignore', 'utf8').split('\n');
 
+// Compare gitignoreContents with compiledFilePaths
+// Add any files in compiledFilePaths that are not in gitignoreContents to gitignoreContents
 compiledFilePaths.forEach((file) => {
     const sanitizedFile = file.replace(CONTENT_DIR, '');
-    gitignoreContents += sanitizedFile + '\n';
+    if (!gitignoreContents.includes(sanitizedFile)) {
+        gitignoreContents.push(sanitizedFile);
+    }
 });
 
-fs.writeFileSync(CONTENT_DIR + '/.gitignore', gitignoreContents);
+// Write the updated gitignoreContents to the .gitignore file in the content directory
+fs.writeFileSync(CONTENT_DIR + '/.gitignore', gitignoreContents.join('\n'));
 
 if (hasErrors) {
     console.error('Markdoc compilation failed with errors:');
