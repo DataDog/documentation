@@ -1,6 +1,15 @@
 traits:
   - id: prog_lang
     label: Programming Language
+    internal_notes: Do not use for frameworks like Next or React Native. Instead, use `env`.
+
+  - id: protocol
+    label: Protocol
+    internal_notes: For example, HTTP, gRPC, or SOCKS.
+
+  - id: env
+    label: "Environment"
+    internal_notes: The environment (language/framework/other env) for a library, SDK, or other third-party entity. Do not use if every option is a pure programming language -- use `prog_lang` instead. Re-label to "Platform", "Framework", etc. if it's more appropriate for your context.
   
   - id: host
     label: "Host"
@@ -9,10 +18,6 @@ traits:
   - id: host_type
     label: "Host type"
     internal_notes: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
-
-  - id: prog_lang
-    label: "Language"
-    internal_notes: Programming language, such as Python.
 
   - id: os
     label: "OS"

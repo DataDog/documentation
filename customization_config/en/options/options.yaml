@@ -195,6 +195,15 @@ options:
 - label: HTTP
   id: http
 
+- label: HTTPS
+  id: https
+
+- label: HTTP/HTTPS
+  id: http_https
+
+- label: SOCKS
+  id: socks
+
 - label: iOS
   id: ios
 
