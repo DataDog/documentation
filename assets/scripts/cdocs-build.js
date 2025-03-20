@@ -13,6 +13,9 @@ const path = require('path');
 
 const { CdocsHugoIntegration } = require('cdocs-hugo-integration');
 
+console.log('CI env name:', process.env.CI_ENVIRONMENT_NAME);
+console.log('CI branch name:', process.env.BRANCH);
+
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 const baseSiteDir = path.resolve(__dirname, '../..');
 

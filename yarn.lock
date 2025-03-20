@@ -6525,9 +6525,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cdocs-hugo-integration@file:./cdocs-hugo-integration-v1.0.10.tgz::locator=docs%40workspace%3A.":
-  version: 1.0.10
-  resolution: "cdocs-hugo-integration@file:./cdocs-hugo-integration-v1.0.10.tgz::locator=docs%40workspace%3A."
+"cdocs-hugo-integration@file:./cdocs-hugo-integration-v1.0.11.tgz::locator=docs%40workspace%3A.":
+  version: 1.0.11
+  resolution: "cdocs-hugo-integration@file:./cdocs-hugo-integration-v1.0.11.tgz::locator=docs%40workspace%3A."
   dependencies:
     "@prettier/sync": ^0.5.2
     "@types/markdown-it": ^14.1.2
@@ -6551,7 +6551,7 @@ __metadata:
     vite: ^5.4.10
     vite-plugin-singlefile: ^2.0.2
     zod: ^3.22.4
-  checksum: 9a5a0c67cc010d57b954704f22b5e9cbc1d5a8e51daa27eed39466095546f55c684d60304632ffedf421a37f4a5483ca0647bbfbc37c3b0013e0a3f11d0efa68
+  checksum: 017acef1886092edc3101f49e72514c199c108edaf60e9f0e19171ecdb107561d1d7c808a14c3f7d25a456d1e9f8baeb6f402489711b190385d39d1d3ea31a74
   languageName: node
   linkType: hard
 
@@ -7584,7 +7584,7 @@ __metadata:
     acorn: ^7.4.1
     alpinejs: ^3.13.7
     bootstrap: ^5.2
-    cdocs-hugo-integration: "file:./cdocs-hugo-integration-v1.0.10.tgz"
+    cdocs-hugo-integration: "file:./cdocs-hugo-integration-v1.0.11.tgz"
     cross-env: ^5.2.1
     del: 4.1.1
     eslint: ^6.8.0

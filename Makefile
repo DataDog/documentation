@@ -66,7 +66,6 @@ server:
 # so Hugo can include them in the site
 build-cdocs: 
 	@echo "Compiling .mdoc files to HTML";
-	@CI_ENVIRONMENT_NAME=$(CI_ENVIRONMENT_NAME);
 	@node ./assets/scripts/cdocs-build.js;
 
 start:
