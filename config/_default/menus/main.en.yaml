@@ -1930,7 +1930,7 @@ menu:
       parent: platform_heading
       identifier: software_catalog
       weight: 110000
-    - name: Set Up Software Catalog
+    - name: Set Up
       url: software_catalog/set_up
       parent: software_catalog
       identifier: software_catalog_set_up
@@ -1945,12 +1945,12 @@ menu:
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_existing_dd_customer
       weight: 102
-    - name: Customize Software Catalog
+    - name: Customize
       url: software_catalog/customize
       parent: software_catalog
       identifier: software_catalog_customize
       weight: 2
-    - name: Navigate Software Catalog
+    - name: Navigate
       url: software_catalog/navigating
       parent: software_catalog
       identifier: software_catalog_browse
