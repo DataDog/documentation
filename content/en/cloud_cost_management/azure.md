@@ -150,7 +150,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure Cloud Costs in Datadog
+### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
 ### Cost types
