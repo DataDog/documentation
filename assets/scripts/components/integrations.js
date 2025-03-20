@@ -230,6 +230,24 @@ export function initializeIntegrations() {
                     }
                 }
             }
+            
+            // Apply virtualization after filtering
+            updateVisibleTiles();
+            
+            // Reset progressive loading
+            for (let i = 0; i < show.length; i++) {
+                const item = show[i];
+                const domitem = getDomElement(item.id);
+                if (domitem) {
+                    domitem.style.display = i < INITIAL_LOAD_COUNT ? '' : 'none';
+                }
+            }
+            
+            // Update loaded count
+            loadedCount = Math.min(INITIAL_LOAD_COUNT, show.length);
+            
+            // Check if we need to load more tiles
+            checkScrollPosition();
         });
 
         // if no integrations are found, trigger hotjar popup
@@ -238,6 +256,75 @@ export function initializeIntegrations() {
             popupClosed = false;
         }
     }
+
+    // Virtualization: Update which tiles are visible based on scroll position
+    function updateVisibleTiles() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const viewportHeight = window.innerHeight;
+        
+        // Calculate which tiles should be visible
+        const startRow = Math.max(0, Math.floor(scrollTop / TILE_HEIGHT) - BUFFER_SIZE);
+        const endRow = Math.ceil((scrollTop + viewportHeight) / TILE_HEIGHT) + BUFFER_SIZE;
+        
+        const startIndex = startRow * tilesPerRow;
+        const endIndex = Math.min(allTiles.length, endRow * tilesPerRow);
+        
+        // Create a set of tiles that should be visible
+        const newVisibleTiles = new Set();
+        for (let i = startIndex; i < endIndex; i++) {
+            if (allTiles[i]) {
+                newVisibleTiles.add(allTiles[i].id);
+            }
+        }
+        
+        // Hide tiles that are no longer visible
+        visibleTiles.forEach(id => {
+            if (!newVisibleTiles.has(id)) {
+                const tile = getDomElement(id);
+                if (tile) {
+                    tile.style.visibility = 'hidden';
+                    tile.style.height = `${TILE_HEIGHT}px`; // Maintain height to preserve scroll position
+                }
+            }
+        });
+        
+        // Show tiles that are now visible
+        newVisibleTiles.forEach(id => {
+            const tile = getDomElement(id);
+            if (tile) {
+                tile.style.visibility = 'visible';
+                tile.style.height = 'auto';
+            }
+        });
+        
+        // Update the set of visible tiles
+        visibleTiles = newVisibleTiles;
+    }
+    
+    // Add scroll event listener for virtualization
+    window.addEventListener('scroll', function() {
+        lastScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateVisibleTiles();
+                checkScrollPosition(); // Check if we need to load more tiles
+                ticking = false;
+            });
+            
+            ticking = true;
+        }
+    });
+    
+    // Update visible tiles on window resize
+    window.addEventListener('resize', function() {
+        // Recalculate tiles per row
+        const newTilesPerRow = Math.floor(container.clientWidth / TILE_WIDTH) || 4;
+        if (newTilesPerRow !== tilesPerRow) {
+            tilesPerRow = newTilesPerRow;
+            updateVisibleTiles();
+        }
+    });
 
     // Handle search query param filtering on page load.
     const handleQueryParamFilter = () => {
@@ -266,12 +353,26 @@ export function initializeIntegrations() {
                     'info'
                 );
             }
+        } else {
+            // If no search parameter, still initialize virtualization
+            updateVisibleTiles();
         }
     };
 
     // Set controls the active controls on startup
     activateButton(controls.querySelector('[data-filter="all"]'), filters);
     activateButton(mobilecontrols.querySelector('[data-filter="all"]'), mobilefilters);
+
+    // Initialize all tiles with display: none to support progressive loading
+    if (items && items.length) {
+        for (let i = INITIAL_LOAD_COUNT; i < items.length; i++) {
+            const item = items[i];
+            const domitem = getDomElement(item.id);
+            if (domitem) {
+                domitem.style.display = 'none';
+            }
+        }
+    }
 
     handleQueryParamFilter();
 
