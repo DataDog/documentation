@@ -16,6 +16,7 @@ comment_template = Template(filename='local/bin/py/preview-links-template.mako')
 
 pattern1 = re.compile('content/en/(.*?).md')
 pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
+pattern3 = re.compile('content/en/(.*?).mdoc.md')
 
 # Grab YAML frontmatter from markdown file
 def grab_glossary_title(filename):
@@ -25,8 +26,14 @@ def grab_glossary_title(filename):
     new_filename = 'glossary/#' + anchor
     return new_filename
 
+# Handle markdoc files
+def grab_markdoc_title(filename):
+    return filename.replace('content/en/', '').replace('.mdoc.md', '')
+
 def compile_filename(filename):
-    if pattern2.match(filename):
+    if pattern3.match(filename):
+        return grab_markdoc_title(filename)
+    elif pattern2.match(filename):
         return grab_glossary_title(filename)
     elif pattern1.match(filename):
         filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
