@@ -177,8 +177,10 @@ agent:
         - <GROUP_ID>
 {{< /highlight >}}
 
-- Replace `<USER_ID>` with the UID to run the Datadog Agent.
+- Replace `<USER_ID>` with the UID to run the Datadog Agent. Datadog recommends [setting this value to 100 since Datadog Agent v7.48+][1].
 - Replace `<GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+
+[1]: /data_security/kubernetes/#running-container-as-root-user
 
 Then, deploy the Agent:
 
