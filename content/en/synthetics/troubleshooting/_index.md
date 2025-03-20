@@ -184,6 +184,22 @@ This might mean your private location is unable to reach the endpoint your API t
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+### Resolving IPv4 forwarding issues for private location containers
+
+Private locations require access to [Datadog's Synthetic Monitoring intake endpoints][103] to pull test configurations and push test results. If IPv4 forwarding is disabled on a Linux server, the private location may lose access to the public internet and consequently cannot connect to the intake. Docker typically attempts to enable IP forwarding when a container starts, but if it remains disabled, then the container cannot reach external services like the intake. 
+
+If this is the case, the private location will report logs like:
+
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+and
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host. 
+
 ### My private location containers sometimes get killed `OOM`
 
 Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
@@ -194,6 +210,7 @@ This occurs when you attempt to mount a single file in a Windows-based container
 
 [101]: /synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}
