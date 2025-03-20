@@ -22,7 +22,8 @@ const CONTENT_DIR = path.resolve(__dirname, `${baseSiteDir}/content`);
 // Initialize the Markdoc integration
 const markdocIntegration = new CdocsHugoIntegration({
     baseSiteDir,
-    env
+    env,
+    publishAuthorConsoleInDir: baseSiteDir + '/static/cdocs/console'
 });
 
 // Build the assets partial, and write it to the target file path
