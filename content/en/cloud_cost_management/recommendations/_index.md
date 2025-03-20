@@ -185,7 +185,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Azure Container Registry
       recommendation_type: Terminate Azure Container Registry
-      recommendation_description: A container registry that has never received successful pulls  
+      recommendation_description: A container registry that has never received successful pulls
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
@@ -420,10 +420,34 @@ multifiltersearch:
       recommendation_type: NAT Gateway cross-zone transfer charges
       recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
       recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Terminate CloudSQL Instance
+      recommendation_description: CloudSQL instances with minimal usage that can be terminated.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Downsize CloudSQL Database
+      recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Purchase CUD for Cloud SQL
+      recommendation_description: CloudSQL instances that would benefit from committed use discounts.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Cloud Run Job
+      recommendation_type: Purchase Flexible CUD for Cloud Run Job
+      recommendation_description: Cloud Run Jobs that would benefit from flexible committed use discounts.
+      recommendation_prerequisites: ""
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Cloud Cost Recommendations is in Preview with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
+Cloud Cost Recommendations is in Preview with support for AWS, Azure, and Google Cloud, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
 {{< /callout >}}
 
 ## Overview
