@@ -1,5 +1,10 @@
 ---
 title: Set Up Software Catalog
+aliases:
+  - /tracing/software_catalog/setup
+  - /software_catalog/setup
+  - /tracing/service_catalog/setup
+  - /service_catalog/setup
 ---
 
 Get started with Software Catalog with one of the following set-up paths.

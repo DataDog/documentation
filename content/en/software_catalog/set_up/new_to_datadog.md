@@ -1,16 +1,26 @@
 ---
 title: New to Datadog
 aliases:
-  - /tracing/software_catalog/setup
-  - /software_catalog/setup
-  - /software_catalog/create_entries/
+  - /software_catalog/create_entries/   ### aliases for Create Entries page 
   - /software_catalog/enrich_default_catalog/create_entries
-  - /tracing/service_catalog/setup
-  - /service_catalog/setup
   - /service_catalog/create_entries/
   - /service_catalog/enrich_default_catalog/create_entries
   - /api_catalog/add_entries
   - /service_catalog/customize/create_entries/
+  - /software_catalog/import_entries_integrations/     ## aliases for Import Entries from Backstage page 
+  - /software_catalog/enrich_default_catalog/import_entries_integrations
+  - /software_catalog/customize/import_entries_integrations/
+  - /service_catalog/import_entries_integrations/
+  - /service_catalog/enrich_default_catalog/import_entries_integrations
+  - /service_catalog/customize/import_entries_integrations/
+  - /service_catalog/customize/import_entries_backstage/
+  - /service_catalog/customize/import_entries_servicenow/   ## alias for Import Entries from ServiceNow page
+  - /tracing/software_catalog/guides/validating-service-definition  ## aliases for Validating Service Definition page
+  - /software_catalog/guides/validating-service-definition
+  - /tracing/service_catalog/guides/validating-service-definition
+  - /service_catalog/guides/validating-service-definition
+  - /service_catalog/use_cases/validating_service_definition
+  - /software_catalog/use_cases/validating_service_definition
 further_reading:
   - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
     tag: "External Site"
@@ -24,6 +34,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
     tag: "Blog"
     text: "Import Backstage YAML files into Datadog"
+  - link: "https://www.datadoghq.com/blog/servicenow-cmdb-it-management-datadog/#get-cmdb-metadata-in-the-datadog-service-catalog"
+    tag: "Blog"
+    text: "Manage your infrastructure with ServiceNow CMDB and Datadog"
+  - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json"
+    tag: "Source Code"
+    text: "Service Definition Schema"
+  - link: "https://www.datadoghq.com/blog/manage-service-catalog-categories-with-service-definition-json-schema/"
+    tag: "Blog"
+    text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
 If you're new to Datadog, you can add components to Software Catalog by:

@@ -4,6 +4,12 @@ further_reading:
   - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"
     text: "Setting Up Software Catalog"
+aliases:
+    - /software_catalog/import_entries_dd/
+    - /software_catalog/enrich_default_catalog/import_entries_dd
+    - /service_catalog/import_entries_dd/
+    - /service_catalog/enrich_default_catalog/import_entries_dd
+    - /service_catalog/customize/import_entries_dd
 ---
 
 Learn how Software Catalog discovers services from Datadog APM, USM, RUM, infrastructure metrics, and logs.
