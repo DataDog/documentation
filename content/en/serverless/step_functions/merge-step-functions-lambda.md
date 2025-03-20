@@ -8,9 +8,9 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
-<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach will ensure that any context upstream to the Step Function will be preserved and passed down. If you are using <code>JSONPath</code> to define your Step Function definitions, see the below sections for supported configurations</a>.</div>
+<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach ensures that any context upstream to the Step Function is preserved and passed down. For those using <code>JSONPath</code> to define Step Function definitions, refer to the sections at the bottom of the page</a>.</div>
 
-## Merge with downstream Lambda traces
+## Merge with Downstream Lambda traces
 
 ### Requirements
 For Node.js: Datadog Lambda Library for Node.js layer v116+.
@@ -45,7 +45,7 @@ Alternatively, if you have business logic defined in the payload, you can replac
 [2]: /serverless/aws_lambda/installation
 [3]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
 
-## Merge with nested Step Functions traces
+## Merge with Nested Step Functions traces
 
 ### Setup
 
@@ -64,7 +64,7 @@ On the Step Functions Task, set `_datadog` in the `Input` field as follows:
 }
 {{< /highlight >}}
 
-## Merge with downstream Lambda traces through Managed Services
+## Merge with Downstream Lambda traces through Managed Services
 
 For cases where a Step Function is indirectly invoking a Lambda through a managed AWS service.
 
@@ -144,7 +144,9 @@ On the SNS Publish Task, set `_datadog` in the `MessageAttributes` field as foll
 }
 {{< /highlight >}}
 
-## Merge Lambda traces with downstream Step Functions traces
+## Merge Lambda traces with Downstream Step Functions traces
+
+For cases where a Lambda function directly invokes a Step Function using `StartExecution` or `StartSyncExecution`.
 
 ### Requirements
 For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0.
@@ -161,7 +163,7 @@ If the layer or tracer version requirements are fulfilled, no further setup is r
 
 <div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
 
-## Merge with downstream Lambda traces (JSONPath)
+## Merge with Downstream Lambda traces (JSONPath)
 
 ### Requirements
 Node.js (layer v112+) or Python (layer v95+) runtimes.
@@ -349,7 +351,7 @@ Alternatively, if you have business logic defined in the payload, you can also u
 {{% /tab %}}
 {{< /tabs >}}
 
-## Merge with nested Step Functions traces (JSONPath)
+## Merge with Nested Step Functions traces (JSONPath)
 
 To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
 
