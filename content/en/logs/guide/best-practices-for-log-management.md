@@ -13,6 +13,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+    - link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+      tag: "Blog"
+      text: "Best practices for managing Datadog organizations at scale"
 algolia:
   tags: ["log usage", "grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
@@ -223,7 +226,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [20]: /logs/log_configuration/indexes/#exclusion-filters
 [21]: /logs/explorer/analytics/patterns
 [22]: /logs/log_configuration/logs_to_metrics/
-[23]: /sensitive_data_scanner/
+[23]: /security/sensitive_data_scanner/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
 [25]: /account_management/audit_trail/events/
 [26]: /account_management/audit_trail/

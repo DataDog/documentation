@@ -6,7 +6,7 @@ further_reading:
 - link: "logs/guide/control-sensitive-logs-data/"
   tag: "Documentation"
   text: "Control Sensitive Logs Data"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 ---
