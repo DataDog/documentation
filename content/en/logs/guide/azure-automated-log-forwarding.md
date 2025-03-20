@@ -54,6 +54,18 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 1. Review the finalized deployment details.
 2. Click **Create**.
 
+## Uninstall
+
+Begin by opening an [Azure Cloud Shell][5], and ensure it is running in Azure CLI/Bash, not PowerShell.
+
+Download and run the uninstall script:
+{{< code-block lang="bash" >}}
+wget https://ddazurelfo.blob.core.windows.net/uninstall/uninstall.py
+python uninstall.py
+{{< /code-block >}}
+
+The script first discovers any instances running in each subscription, then prompts you to select the instance(s) to uninstall. Confirm the resource deletions, and wait for the resources to be deleted.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -61,3 +73,4 @@ Begin by opening the [Automated Log Forwarding ARM template][1]. The sections be
 [1]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2FcreateUiDefinition.json
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: /getting_started/site/
+[5]: https://learn.microsoft.com/en-us/azure/cloud-shell/overview

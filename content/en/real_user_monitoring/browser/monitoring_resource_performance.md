@@ -79,6 +79,6 @@ To resolve this, enable extended data collection for resources subject to CORS b
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/platform/connect_rum_and_traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API#Coping_with_CORS

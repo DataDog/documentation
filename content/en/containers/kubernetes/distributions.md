@@ -58,20 +58,10 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
@@ -218,7 +208,7 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
+**Note**: Cloud Network Monitoring is supported from version 3.100.0 of the Helm chart and with GKE version 1.32.1-gke.1729000 or later
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -258,6 +248,13 @@ agents:
         requests:
           cpu: 100m
           memory: 200Mi
+
+    systemProbe:
+      # resources for the System Probe container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
 
   priorityClassCreate: true
 
