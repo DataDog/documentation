@@ -1,7 +1,0 @@
-options:
-  - id: python
-    label: Python
-  - id: go
-    label: Go
-  - id: javascript
-    label: JavaScript

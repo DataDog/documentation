@@ -1,3 +1,30 @@
 traits:
   - id: prog_lang
     label: Programming Language
+  
+  - id: host
+    label: "Host"
+    internal_notes: Hosting platform, such as AWS or GCP. Can also refer to containers like Kubernetes.
+
+  - id: host_type
+    label: "Host type"
+    internal_notes: The machine or container type within a given host, such as EC2. Use only as a followup to a `host` selection.
+
+  - id: prog_lang
+    label: "Language"
+    internal_notes: Programming language, such as Python.
+
+  - id: os
+    label: "OS"
+    internal_notes: Env operating system, such as Linux or Windows. Can refer to a mobile OS, but `mobile_os` is preferred for lists of mobile-only options.
+
+  - id: database
+    label: "Database"
+
+  - id: mobile_os
+    label: "OS"
+    internal_notes: Mobile operating system, such as Android.
+    
+  - id: pkg_mgr
+    label: "Package manager"
+    internal_notes: Software package manager, such as npm.
