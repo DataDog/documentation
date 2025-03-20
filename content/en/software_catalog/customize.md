@@ -26,9 +26,13 @@ aliases:
     - /software_catalog/use_cases/best_practices
 ---
 
-You can customize your engineering team's landing experience in Software Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
+Customize your engineering team's experience in Software Catalog with the following features.
 
-{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for Developer Homepage experience!" >}}
+## Create a customized landing page
+
+Developer Homepage is a personalized dashboard experience that enables developers to access prioritized tasks, pull requests, alerts, and insights--all in one place.
+
+{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Developer Home is in private beta. Opt in here!" >}}
 {{< /callout >}}
 
 ## Enrich auto-detected services with metadata 

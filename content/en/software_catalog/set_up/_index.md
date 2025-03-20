@@ -2,7 +2,7 @@
 title: Set Up Software Catalog
 ---
 
-Learn how to set up Software Catalog depending on your use case. 
+Get started with Software Catalog with one of the following set-up paths.
 
 ## New to Datadog 
 

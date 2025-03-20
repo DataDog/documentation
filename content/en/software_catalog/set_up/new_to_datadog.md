@@ -1,17 +1,37 @@
 ---
 title: New to Datadog
+aliases:
+  - /tracing/software_catalog/setup
+  - /software_catalog/setup
+  - /software_catalog/create_entries/
+  - /software_catalog/enrich_default_catalog/create_entries
+  - /tracing/service_catalog/setup
+  - /service_catalog/setup
+  - /service_catalog/create_entries/
+  - /service_catalog/enrich_default_catalog/create_entries
+  - /api_catalog/add_entries
+  - /service_catalog/customize/create_entries/
 further_reading:
-  - link: "/tracing/software_catalog/setup/"
+  - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+    tag: "External Site"
+    text: "Create and manage service definitions with Terraform"
+  - link: "/api/latest/service-definition/"
+    tag: "API"
+    text: "Learn about the Service Definition API"
+  - link: "/integrations/github"
     tag: "Documentation"
-    text: "Setting Up Software Catalog"
+    text: "Learn about the GitHub Integration"
+  - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
+    tag: "Blog"
+    text: "Import Backstage YAML files into Datadog"
 ---
 
-If you're new to Datadog, you can add components to Software Catalog by doing one of the following:
+If you're new to Datadog, you can add components to Software Catalog by:
 
--  Manually creating service definitions through the API, Terraform, or a GitHub integration
--  Importing existing services from sources like ServiceNow or Backstage
+-  Manually creating service definitions through the API, Terraform, or a GitHub integration.
+-  Importing existing services from sources like ServiceNow or Backstage.
 
-These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files.
+By default, these services are not associated with Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files.
 
 ## Build your first Software Catalog
 
@@ -70,11 +90,11 @@ To prevent this, validate your service definition files in one of the following 
 
 If creating your service definition in-app, the UI will automatically flag invalid data. 
 
+{{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
+
 #### Validate with an IDE extension
 
 Built-in validation mechanisms prevent you from sending incorrect metadata into Software Catalog. 
-
-{{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
 #### Validate with Datadog Event Management and Github Integration
 
