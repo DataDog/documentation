@@ -152,6 +152,20 @@ If there are security checks during application startup, such as verifying if US
 {{< tabs >}}
 {{% tab "Common" %}}
 
+### Resolving IPv4 Forwarding Issues for Private Location Containers in Docker
+
+The private location requires access to [Datadog’s Synthetics Intake][105] to pull test configurations and push test results. If IPv4 forwarding is disabled on a Linux server, the private location may lose access to the public internet which means it cannot connect to the intake. Docker typically attempts to enable IP forwarding when a container starts, but if it remains disabled, then the container won’t be able to reach external services like the intake. The private location will report logs like
+
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+and
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host. 
+
 ### My browser test results sometimes show `Page crashed` errors
 
 This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
@@ -180,6 +194,7 @@ This might mean your private location is unable to reach the endpoint your API t
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /help/
+[105]: https://docs.datadoghq.com/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Docker" %}}
