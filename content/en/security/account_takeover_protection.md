@@ -249,7 +249,10 @@ Attackers attempting to access stored funds will use accounts immediately after 
 
 Consider blocking compromised users in addition to blocking the attacker.
 
-To export a list of compromised or targeted users from a signal, follow these steps. First, go to the notification settings in a detection rule condition. Then add a recipient and turn on "Notify for every new @usr.id detected". This will allow you to export the list when updates occur.
+To export a list of compromised or targeted users from a signal:
+
+1. Go to the notification settings in a detection rule condition. 
+2. Add a recipient and turn on _Notify for every new `@usr.id` detected_. This allows you to export the list when updates occur.
 
 {{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
 
