@@ -47,52 +47,60 @@ further_reading:
 
 If you're new to Datadog, you can add components to Software Catalog by:
 
--  Manually creating service definitions through the API, Terraform, or a GitHub integration.
+-  Manually creating service definitions through the Datadog app, the Datadog API, Terraform, or a GitHub integration.
 -  Importing existing services from sources like ServiceNow or Backstage.
 
 By default, these services are not associated with Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files.
 
 ## Build your first Software Catalog
 
-### Manually create your service definition
+Create service definitions for each component you want to add to your Software Catalog. 
 
-#### Edit `service.datadog.yaml` or `entity.datadog.yaml`
+### Create service definitions through code 
 
-To create a user-defined component, name your component in the `dd-service` (if using schema version v2.2 or prior) or `name` field (if using schema version v3.0 or later) in a `service.datadog.yaml` or `entity.datadog.yaml` file. You must use one of the supported metadata schema versions. 
+To create a service definition using the Datadog API, Terraform, or a GitHub integration:
 
-For example: 
+1. Create or find `service.datadog.yaml` or `entity.datadog.yaml` (Datadog accepts both file names).
+1. Name your component in the `dd-service` (schema version v2.2 or prior) or `name` (schema version v3.0+) field.
 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-schema-version: v2.2
-dd-service: my-unmonitored-cron-job
-team: e-commerce
-lifecycle: production
-application: shopping-app
-description: important cron job for shopist backend
-tier: "2"
-type: web
-contacts:
- - type: slack
-   contact: https://datadogincidents.slack.com/archives/XXXXX
-links:
- - name: Common Operations
-   type: runbook
-   url: https://datadoghq.atlassian.net/wiki/
- - name: Disabling Deployments
-   type: runbook
-   url: https://datadoghq.atlassian.net/wiki/
-tags: []
-integrations:
- pagerduty:
-   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
-External Resources (Optional)
-{{< /code-block >}}
+   For example:
 
-You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
+   {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+    schema-version: v2.2
+    dd-service: my-unmonitored-cron-job
+    team: e-commerce
+    lifecycle: production
+    application: shopping-app
+    description: important cron job for shopist backend
+    tier: "2"
+    type: web
+    contacts:
+    - type: slack
+    contact: https://datadogincidents.slack.com/archives/XXXXX
+    links:
+    - name: Common Operations
+    type: runbook
+    url: https://datadoghq.atlassian.net/wiki/
+    - name: Disabling Deployments
+    type: runbook
+    url: https://datadoghq.atlassian.net/wiki/
+    tags: []
+    integrations:
+    pagerduty:
+    service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
+    External Resources (Optional)
+   {{< /code-block >}}
 
-#### Create the service definition in-app
+1. (Optional) Register multiple services in one YAML file by separating each definition with three dashes (`---`).
+1. Import your service(s) through one of the following:
 
-Instead of editing `service.datadog.yaml` or `entity.datadog.yaml` directly, you can create your service definition in-app:
+   - [The Datadog API][4]
+   - [Terraform][5]
+   - [Datadog's GitHub integration][6]
+
+### Create service definitions in-app
+
+Alternatively, create service definitions in the Datadog app:
 
 1. Navigate to the [Software Catalog Setup & Config page][1].
 2. Click **Create a New Entry**.
@@ -123,13 +131,13 @@ To validate your service definitions ingested by Datadog's Github integration, y
 
 ## Import Entries from Backstage
 
-{{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
-
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
+
+{{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
 If you use API or Terraform, replace the YAMLs in your requests. 
 
-If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of a repo.
+If you use a GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of a repo.
 
 Upon import, the following occurs:
 - Datadog recognizes `kind:component` and `kind:system` in Backstage YAML; `kind:component` in Backstage is recognized as a service in Datadog
@@ -176,5 +184,8 @@ To populate your Datadog Software Catalog with services from your ServiceNow CMD
 [1]: https://app.datadoghq.com/services/settings/get-started
 [2]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_catalog%20status%3Aerror&cols=&messageDisplay=expanded-lg&options=&refresh_mode=sliding&sort=DESC&view=all&from_ts=1736452185424&to_ts=1736453085424&live=true
 [3]: /integrations/servicenow/#service-ingestion
+[4]: /api/latest/service-definition/
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+[6]: https://docs.datadoghq.com/integrations/github/
 
 
