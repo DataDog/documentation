@@ -185,7 +185,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Azure Container Registry
       recommendation_type: Terminate Azure Container Registry
-      recommendation_description: A container registry that has never received successful pulls  
+      recommendation_description: A container registry that has never received successful pulls
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
@@ -425,13 +425,13 @@ multifiltersearch:
       resource_type: CloudSQL Instance
       recommendation_type: Terminate CloudSQL Instance
       recommendation_description: CloudSQL instances with minimal usage that can be terminated.
-      recommendation_prerequisites: ""
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
     - category: Over-provisioned resource
       cloud_provider: GCP
       resource_type: CloudSQL Instance
       recommendation_type: Downsize CloudSQL Database
       recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
-      recommendation_prerequisites: ""
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
     - category: Rate optimization
       cloud_provider: GCP
       resource_type: CloudSQL Instance
