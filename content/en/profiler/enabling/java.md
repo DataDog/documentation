@@ -193,14 +193,16 @@ sudo sh -c 'echo 2 >/proc/sys/kernel/perf_event_paranoid'
 
 {{% tab "JFR" %}}
 
-For version 1.7.0+, to switch from the default Datadog to JFR CPU profiling:
+To switch from the default Datadog profiling to JFR profiling:
 
 ```
 export DD_PROFILING_DDPROF_CPU_ENABLED=false
+export DD_PROFILING_DDPROF_ENABLED=false
 ```
 or:
 ```
 -Ddd.profiling.ddprof.cpu.enabled=false
+-Ddd.profiling.ddprof.enabled=false
 ```
 For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionSample`.
 
