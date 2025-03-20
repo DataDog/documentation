@@ -20,7 +20,7 @@ RUM without Limits allows you to capture all session data while only retaining t
 
 ## Key features
 
-- **Dynamic retention filters**: Adjust what data to keep directly in the user interface
+- **Dynamic retention filters**: Adjust what data to keep without changing any code
 - **Comprehensive metrics**: Metrics reflect 100% of sessions, ensuring full visibility
 - **Targeted session retention**: Prioritize crucial session data for cost optimization
 
@@ -39,7 +39,7 @@ Sequencing your retention filters properly ensures you store the RUM data you ne
 ### Setting up filters
 - If unsure about your settings, start by arranging filters from highest to lowest retention rates.
 - Use more filters with a 100% rate, and limit filters with lower percentages.
-- Add a default "catch-all" retention filter at the end to capture any sessions not matched by previous filters
+- Add a default "catch-all" retention filter at the end to capture any sessions not matched by previous filters.
 
 ## Suggested retention filters and use cases
 Below we describe the set of default filters, suggested filters, and their typical use cases.

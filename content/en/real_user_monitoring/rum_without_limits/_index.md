@@ -20,8 +20,8 @@ further_reading:
 
 RUM without Limits provides you flexibility over your RUM sessions volumes by decoupling session data ingestion from indexing. This enables you to:
 
-- Dynamically set retention filters from the UI without upfront sampling decisions or code changes
-- Focus on high-impact sessions for improved visibility and troubleshooting of errors, crashes and high latencies
+- Dynamically set retention filters from the Datadog UI without up-front sampling decisions or code changes
+- Focus on high-impact sessions for improved visibility and troubleshooting of errors, crashes, and high latencies
 - Retain sessions with errors or performance issues and discard less significant ones, such as ones with few user interactions
 
 Even if you retain only a fraction of your sessions, Datadog provides performance metrics for all ingested sessions. This ensures an accurate, long-term overview of application health and performance, even if only a fraction of session data is retained.
@@ -39,7 +39,7 @@ To get started with RUM without Limits for new applications, at the [instrumenta
 2. Choose a `sessionReplaySampleRate` that meets your observability needs.
 
    **Note**: All replays are kept and billed.
-3. For applications with the [APM integration enabled][2], configure the percentage of sessions for which you want to make sure APM backend traces are ingested with `traceSampleRate` (browser), `traceSampler` (android), or `sampleRate` (iOS).
+3. For applications with the [APM integration enabled][2], configure the percentage of sessions for which you want to make sure APM backend traces are ingested with `traceSampleRate` (browser), `traceSampler` (Android), or `sampleRate` (iOS).
 
 4. Enable `traceContextInjection: sampled` to defer sampling decisions to backend tracers for sessions where the decision is **not** to keep the trace.
 
