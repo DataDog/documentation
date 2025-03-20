@@ -51,6 +51,9 @@ class CustomDatadogLogProcessor(object):
             # if trace_id > 2**64 store as hex otherwise store the id as an integer
             event_dict["dd.trace_id"] = str(context.trace_id) if context.trace_id < 2**64 else f"{context.trace_id:032x}"
             event_dict["dd.span_id"] = str(context.span_id)
+            event_dict["dd.service"] = span.attributes.get("service.name")
+            event_dict["dd.env"] = span.attributes.get("deployment.environment")
+            event_dict["dd.version"] = span.attributes.get("service.version")
 
         return event_dict        
 # ##########
