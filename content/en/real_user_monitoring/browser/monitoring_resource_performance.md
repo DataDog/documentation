@@ -72,15 +72,15 @@ RUM infers the name and category of the resource provider from the resource URL 
 
 ## Cross origin resources
 
-Some resource timings and attributes are collected by using the [Resource Timing API][4]. For resources coming from a different URL origin than the current page origin (ex: your web application is hosted on `www.example.com` and loads resources from `static.example.com`), the browser enforces a security policy that prevents some information from being collected.
+Certain resource timings and attributes are collected using the [Resource Timing API][4]. However, when a resource originates from a different URL than the current page (for example, a web application hosted on `www.example.com` loading resources from `static.example.com`), the browser's security policy restricts access to some of this information.
 
 ### Resource timings
 
-To collect detailed resource timings, you need to add the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. Find more about CORS on the [MDN Web Docs][5]
+To collect detailed resource timings, add the `Timing-Allow-Origin` HTTP response header to your cross-origin resources. For example, to grant access to the resource timing to any origin, use `Timing-Allow-Origin: *`. For more information about CORS, see [Cross-origin timing information][5] in the MDN Web Docs.
 
 ### Resource status code
 
-To collect the resource status code, you need to allow access to cross-origin resources. To do so, add the `Access-Control-Allow-Origin` HTTP response header and the `crossorigin` attribute to your HTML tags to your cross-origin resources. For example, to grant access to the resource status code to any origin, use `Access-Control-Allow-Origin: *` and add `crossorigin="anonymous"` to your HTML tags. For more information, see MDN Web Docs about the [`Access-Control-Allow-Origin` header][6], and the [`crossorigin` attribute][7].
+To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP response header and the `crossorigin` attribute to the relevant HTML tags to allow access to cross-origin resources. For example, to grant access to the resource status code to any origin, use `Access-Control-Allow-Origin: *` and add `crossorigin="anonymous"` to your HTML tags. For more information, see [`Access-Control-Allow-Origin` header][6], and [`crossorigin` attribute][7] in the MDN Web Docs.
 
 ## Further Reading
 
