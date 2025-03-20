@@ -69,7 +69,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Grok parser JS
 |----------------------|------------------|----------|---------------------------------------------------------|
 | `type`               | String           | Yes      | Type of the processor.                                  |
 | `name`               | String           | No       | Name of the processor.                                  |
-| `is_enabled`         | Boolean          | No       | If the processors is enabled or not. Default: `false`.  |
+| `is_enabled`         | Boolean          | No       | If the processor is enabled or not. Default: `false`.  |
 | `source`             | String           | Yes      | Name of the log attribute to parse. Default: `message`. |
 | `samples`            | Array of strings | No       | List of (up to 5) sample logs for this grok parser.     |
 | `grok.support_rules` | String           | Yes      | List of Support rules for your grok parser.             |
