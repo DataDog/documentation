@@ -31,7 +31,7 @@ Continuous Profiler is not supported on some serverless platforms, such as AWS L
 
 ## Installation
 
-If you are using version 2.x of the Go Tracer, follow the import instrumentions marked with `2.x`.
+If you are using version 2.x of the Go Tracer, follow the import instrumentions marked with `2.x`. Profiler documentation for `dd-trace-go` version 2.x can be found [here][21].
 
 To begin profiling applications:
 
