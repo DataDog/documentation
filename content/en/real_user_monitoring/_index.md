@@ -164,7 +164,7 @@ View user sessions in segments, such as checking when latency impacts your premi
 
 View your [backend traces, logs, and infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs-2.png" alt="RUM and APM" >}}
 
 ### Error tracking and crash reporting
 
@@ -229,7 +229,7 @@ You must have edit access to restore general access to a restricted application.
 [2]: /real_user_monitoring/platform/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/platform/connect_rum_and_traces/
+[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
 [7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
