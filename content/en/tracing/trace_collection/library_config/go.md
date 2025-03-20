@@ -209,7 +209,7 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [14]: https://github.com/w3c/trace-context
 [15]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [16]: https://www.rfc-editor.org/rfc/rfc7230#section-3.2
-[17]: https://docs.datadoghq.com/tracing/metrics/runtime_metrics/go
-[18]: https://docs.datadoghq.com/tracing/trace_collection/trace_context_propagation/
+[17]: /tracing/metrics/runtime_metrics/?tab=go
+[18]: /tracing/trace_collection/trace_context_propagation/
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption

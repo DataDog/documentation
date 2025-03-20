@@ -87,7 +87,7 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[2]: /real_user_monitoring/platform/connect_rum_and_traces
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming/responseStatus#browser_compatibility
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/Resource_timing#cross-origin_timing_information
