@@ -118,7 +118,7 @@ For information and options, read [the .NET tracer documentation][1].
 
 The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1] (or [v2 documentation][2]).
 
-This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
+This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability. If you are using [version 2.x of the Go Tracer][3], follow the import instructions marked with `2.x`.
 
 ```go
 import (
@@ -137,6 +137,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 [2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
+[3]: /tracing/trace_collection/custom_instrumentation/go/migration
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
@@ -475,7 +477,7 @@ void OnUserSignupComplete(string userId, ...)
 
 Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
 
-The following examples show how to track login events or custom events (using signup as an example).
+The following examples show how to track login events or custom events (using signup as an example). If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
 
 {{< tabs >}}
 {{% tab "Login success" %}}
@@ -535,6 +537,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 
 {{< /tabs >}}
+
+[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}

@@ -135,6 +135,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
+If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+
 To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
 or enable the debug mode during the `Start` config:
 
@@ -173,6 +175,8 @@ func main() {
     defer tracer.Stop()
 }
 ```
+
+[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 

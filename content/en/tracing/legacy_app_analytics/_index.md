@@ -207,6 +207,10 @@ func main() {
 }
 ```
 
+If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+
+[1]: /tracing/trace_collection/custom_instrumentation/go/migration
+
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

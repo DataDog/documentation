@@ -48,7 +48,7 @@ The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_in
 
 #### Framework compatibility
 
-Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
+Integrate the Go tracer with the following list of web frameworks using one of the following helper packages. Supported frameworks have changed between v1 and v2 of the Go Tracer. To upgrade from v1 to v2 of the tracer and to learn more about the Go Tracer v2 Preview, visit our [migration guide][79].
 
 {{< tabs >}}
 {{% tab "v1" %}}
@@ -319,3 +319,4 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [4]: https://www.datadoghq.com/support/
 [77]: /tracing/trace_collection/library_config/go/
 [78]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=manualinstrumentation#activate-go-integrations-to-create-spans
+[79]: /tracing/trace_collection/custom_instrumentation/go/migration

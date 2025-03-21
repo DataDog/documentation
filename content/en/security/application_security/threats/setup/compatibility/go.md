@@ -48,7 +48,7 @@ Starting from tracer version 1.53.0, application security capabilities do not re
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 
-The Go packages listed in this page are relevant for Application Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
+The Go packages listed in this page are relevant for Application Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16]. Supported packages have changed between v1 and v2 of the Go Tracer. To upgrade from v1 to v2 of the tracer and to learn more about the Go Tracer v2 Preview, visit our [migration guide][16].
 
 {{% tabs %}}
 {{% tab "v1" %}}
@@ -152,3 +152,4 @@ The Go packages listed in this page are relevant for Application Security capabi
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
 [5]: https://www.datadoghq.com/support/
 [15]: https://github.com/golang/go/wiki/cgo
+[16]: /tracing/trace_collection/custom_instrumentation/go/migration

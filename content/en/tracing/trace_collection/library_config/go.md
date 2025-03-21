@@ -24,7 +24,7 @@ further_reading:
   text: "OpenTelemetry Environment Variable Configurations"
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired.
+After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], start the tracer and configure the library as desired. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`.
 
 Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
 
