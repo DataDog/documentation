@@ -28,14 +28,22 @@ Proxies use [OkHttpClient Proxy and Authenticator][2] on Android.
 Proxies use [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
 {% /if %}
 
-<!-- HTTP/HTTPS -->
-{% if equals($protocol, "http_https") %}
-
 ## Prerequisite proxy setup
 
+<!-- HTTP/HTTPS -->
+{% if equals($protocol, "http_https") %}
 To successfully forward a request to Datadog, your proxy must support [HTTP CONNECT][1] requests.
+{% /if %}
+
+<!-- SOCKS -->
+{% if equals($protocol, "socks") %}
+To successfully forward a request to Datadog, your proxy must support [SOCKS5 proxying][4].
+{% /if %}
 
 ## Recommended SDK setup
+
+<!-- HTTP/HTTPS -->
+{% if equals($protocol, "http_https") %}
 
 <!-- HTTP/HTTPS > Android -->
 {% if equals($platform, "android") %}
@@ -131,12 +139,6 @@ config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, '<www.example.com>'
 
 <!-- SOCKS -->
 {% if equals($protocol, "socks") %}
-
-## Prerequisite proxy setup
-
-To successfully forward a request to Datadog, your proxy must support [SOCKS5 proxying][4].
-
-## Recommended SDK setup
 
 <!-- SOCKS > Android -->
 {% if equals($platform, "android") %}
