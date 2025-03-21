@@ -21,13 +21,13 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "host": "<HOST>",
       "port": 5432,
       "username": "datadog",
-      "password": "ENC[datadog_user_database_password]",
+      "password": "ENC[datadog_user_database_password]"
     }]
   }}' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-For Postgres 9.6, add the following settings to the instance config:
+**Note**: For Postgres 9.6, add the following settings to the instance config:
 
 ```json
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
@@ -41,10 +41,10 @@ Labels can also be specified in a `Dockerfile`, so you can build and deploy a cu
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.63.3
 
-LABEL "com.datadoghq.ad.checks"='{"postgres": {"instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
+LABEL "com.datadoghq.ad.checks"='{"postgres": {"init_config": {}, "instances": [{"dbm": true, "host": "<HOST>", "port": 5432, "username": "datadog", "password": "ENC[datadog_user_database_password]"}]}}'
 ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+**Note**: For Postgres 9.6, add the following settings to the instance config where host and port are specified:
 
 ```json
 "pg_stat_statements_view": "datadog.pg_stat_statements()", "pg_stat_activity_view": "datadog.pg_stat_activity()",
