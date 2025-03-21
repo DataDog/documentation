@@ -180,6 +180,12 @@ sudo: The "no new privileges" flag is set, which prevents sudo from running as r
 sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
 ```
 
+### Requirements for ICMP tests running on private location
+
+ICMP tests use the `ping` command to assess network routes and connectivity to a host. `ping` opens a raw socket to send ICMP packets through, so it requires the `NET_RAW` capability to allow for the creation of raw sockets. If your container is configured with a security context that drops or removes this capability, ICMP tests will not be able to function properly on the private location.
+
+Additionally, `ping` requires elevated privileges to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
+
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
@@ -194,6 +200,22 @@ This might mean your private location is unable to reach the endpoint your API t
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+### Resolving IPv4 forwarding issues for private location containers
+
+Private locations require access to [Datadog's Synthetic Monitoring intake endpoints][103] to pull test configurations and push test results. If IPv4 forwarding is disabled on a Linux server, the private location may lose access to the public internet and consequently cannot connect to the intake. Docker typically attempts to enable IP forwarding when a container starts, but if it remains disabled, then the container cannot reach external services like the intake. 
+
+If this is the case, the private location will report logs like:
+
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+and
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host. 
+
 ### My private location containers sometimes get killed `OOM`
 
 Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
@@ -204,6 +226,7 @@ This occurs when you attempt to mount a single file in a Windows-based container
 
 [101]: /synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}

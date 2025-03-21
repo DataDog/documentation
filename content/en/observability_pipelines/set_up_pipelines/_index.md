@@ -29,7 +29,7 @@ Set up your pipelines and its [sources][1], [processors][2], and [destinations][
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up your processors.
-1. Install the Observability Pipelines Worker.
+1. [Install the Observability Pipelines Worker][13].
 1. Enable monitors for your pipeline.
 
 For detailed setup instructions, select a template-specific documentation and then select your source from that page:
@@ -75,3 +75,4 @@ After you have set up your pipeline, see [Update Existing Pipelines][12] if you 
 [10]: /observability_pipelines/set_up_pipelines/generate_metrics/
 [11]: /observability_pipelines/advanced_configurations/
 [12]: /observability_pipelines/update_existing_pipelines/
+[13]: /observability_pipelines/install_the_worker/
