@@ -186,6 +186,8 @@ Where `integration` is the name of the integration. See the [list of available i
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
+If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+
 In addition to the global setting, you can enable or disable App Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
 ```go
@@ -206,8 +208,6 @@ func main() {
     // ...
 }
 ```
-
-If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
 
 [1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
