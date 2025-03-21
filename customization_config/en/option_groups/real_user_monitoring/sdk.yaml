@@ -1,0 +1,10 @@
+rum_sdk_env_options:
+  - id: android
+    default: true
+  - id: ios
+  - id: react_native
+
+rum_mobile_proxy_protocol_options:
+  - id: http_https
+    default: true
+  - id: socks

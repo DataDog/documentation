@@ -13,6 +13,9 @@ const path = require('path');
 
 const { CdocsHugoIntegration } = require('cdocs-hugo-integration');
 
+console.log('CI env name:', process.env.CI_ENVIRONMENT_NAME);
+console.log('CI branch name:', process.env.BRANCH);
+
 const env = process.env.CI_ENVIRONMENT_NAME || 'development';
 const baseSiteDir = path.resolve(__dirname, '../..');
 
@@ -22,7 +25,8 @@ const CONTENT_DIR = path.resolve(__dirname, `${baseSiteDir}/content`);
 // Initialize the Markdoc integration
 const markdocIntegration = new CdocsHugoIntegration({
     baseSiteDir,
-    env
+    env,
+    publishAuthorConsoleInDir: baseSiteDir + '/static/cdocs/console'
 });
 
 // Build the assets partial, and write it to the target file path

@@ -1,30 +1,44 @@
 ---
 title: Proxy Your Mobile RUM Data
-
 aliases:
   - /real_user_monitoring/faq/proxy_mobile_rum_data/
 further_reading:
   - link: '/real_user_monitoring/'
     tag: 'Documentation'
     text: 'Learn about Real User Monitoring'
+content_filters:
+  - trait_id: env
+    option_group_id: rum_sdk_env_options
+    label: "SDK"
+  - trait_id: protocol
+    option_group_id: rum_mobile_proxy_protocol_options
 ---
 
 ## Overview
 
 The RUM Mobile SDKs can be configured to send requests through a proxy.
 
-Proxies use [OkHttpClient Proxy and Authenticator][2] on Android and [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
+<!-- Android -->
+{% if equals($env, "android") %}
+Proxies use [OkHttpClient Proxy and Authenticator][2] on Android.
+{% /if %}
 
-## HTTP/HTTPS proxy
+<!-- iOS -->
+{% if equals($env, "ios") %}
+Proxies use [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
+{% /if %}
 
-### Prerequisite proxy setup
+<!-- HTTP/HTTPS -->
+{% if equals($protocol, "http_https") %}
+
+## Prerequisite proxy setup
 
 To successfully forward a request to Datadog, your proxy must support [HTTP CONNECT][1] requests.
 
-### Recommended SDK setup
+## Recommended SDK setup
 
-{{< tabs >}}
-{{% tab "Android" %}}
+<!-- HTTP/HTTPS > Android -->
+{% if equals($env, "android") %}
 
 When initializing the Android SDK, specify the following proxy configuration:
 
@@ -42,14 +56,17 @@ configBuilder.setProxy(proxy, authenticator)
 
 For more information, see the [OkHttpClient Proxy and Authenticator][2] documentation.
 
-[2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html
+{% /if %}
+<!-- end HTTP/HTTPS > Android -->
 
-{{% /tab %}}
-{{% tab "iOS" %}}
+<!-- HTTP/HTTPS > iOS -->
+{% if equals($env, "ios") %}
 
 When initializing the iOS SDK, specify the following proxy configuration:
 
-#### Swift
+{% tabs %}
+
+{% tab label="Swift" %}
 ```swift
 import DatadogCore
 
@@ -68,8 +85,9 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
+{% /tab %}
 
-#### Objective C
+{% tab label="Objective C" %}
 ```objective-c
 @import DatadogObjc;
 
@@ -87,12 +105,15 @@ configuration.proxyConfiguration = @{
 ```
 
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
+{% /tab %}
 
-[3]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
+{% /tabs %}
 
-{{% /tab %}}
-{{% tab "React Native" %}}
+{% /if %}
+<!-- END: HTTP/HTTPS > iOS -->
 
+<!-- HTTP/HTTPS > React Native -->
+{% if equals($env, "react_native") %}
 When initializing the React Native SDK, specify the following proxy configuration:
 
 ```javascript
@@ -102,20 +123,23 @@ const config = new DatadogProviderConfiguration('<client token>', '<environment>
 
 config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, '<www.example.com>', <123>, '<proxy user>', '<proxy password>');
 ```
+{% /if %}
+<!-- end HTTP/HTTPS > React Native -->
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end HTTP/HTTPS -->
 
-## SOCKS proxy
+<!-- SOCKS -->
+{% if equals($protocol, "socks") %}
 
-### Prerequisite proxy setup
+## Prerequisite proxy setup
 
 To successfully forward a request to Datadog, your proxy must support [SOCKS5 proxying][4].
 
-### Recommended SDK setup
+## Recommended SDK setup
 
-{{< tabs >}}
-{{% tab "Android" %}}
+<!-- SOCKS > Android -->
+{% if equals($env, "android") %}
 When initializing the Android SDK, specify the following proxy configuration:
 
 ```kotlin
@@ -132,13 +156,16 @@ configBuilder.setProxy(proxy, authenticator)
 
 For more information, see the [OkHttpClient Proxy and Authenticator][2] documentation.
 
-[2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html
+{% /if %}
+<!-- end SOCKS > Android -->
 
-{{% /tab %}}
-{{% tab "iOS" %}}
+<!-- SOCKS > iOS -->
+{% if equals($env, "ios") %}
 When initializing the iOS SDK, specify the following proxy configuration:
 
-#### Swift
+{% tabs %}
+
+{% tab label="Swift" %}
 ```swift
 import DatadogCore
 
@@ -157,8 +184,9 @@ Datadog.initialize(
   trackingConsent: trackingConsent
 )
 ```
+{% /tab %}
 
-#### Objective C
+{% tab label="Objective C" %}
 ```objective-c
 @import DatadogObjc;
 
@@ -176,11 +204,14 @@ configuration.proxyConfiguration = @{
 ```
 
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
+{% /tab %}
+{% /tabs %}
 
-[3]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
+{% /if %}
+<!-- end SOCKS > iOS -->
 
-{{% /tab %}}
-{{% tab "React Native" %}}
+<!-- SOCKS > React Native -->
+{% if equals($env, "react_native") %}
 
 When initializing the React Native SDK, specify the following proxy configuration:
 
@@ -192,12 +223,11 @@ const config = new DatadogProviderConfiguration('<client token>', '<environment>
 config.proxyConfig = new ProxyConfiguration(ProxyType.SOCKS, '<www.example.com>', <123>, '<proxy user>', '<proxy password>');
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
+{% /if %}
+<!-- end SOCKS > React Native -->
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+{% /if %}
+<!-- end SOCKS -->
 
 [1]: https://www.rfc-editor.org/rfc/rfc9110#CONNECT
 [2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html

@@ -66,7 +66,6 @@ server:
 # so Hugo can include them in the site
 build-cdocs: 
 	@echo "Compiling .mdoc files to HTML";
-	@CI_ENVIRONMENT_NAME=$(CI_ENVIRONMENT_NAME);
 	@node ./assets/scripts/cdocs-build.js;
 
 start:
@@ -110,7 +109,7 @@ source-dd-source:
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples update_pre_build node_modules placeholders
+	make hugpython all-examples update_pre_build node_modules placeholders build-cdocs
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
