@@ -216,20 +216,17 @@ Installing the Datadog Agent also installs the Postgres check which is required 
 
 <!-- Deployment options -->
 {{< tabs >}}
+
 {{% tab "Host" %}}
-
 {{% dbm/postgres/self-hosted-install-host %}}
-
 {{% /tab %}}
+
 {{% tab "Docker" %}}
-
 {{% dbm/postgres/self-hosted-install-docker %}}
-
 {{% /tab %}}
+
 {{% tab "Kubernetes" %}}
-
 {{% dbm/postgres/self-hosted-install-kubernetes %}}
-
 {{% /tab %}}
 
 {{< /tabs >}}

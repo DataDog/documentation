@@ -1,4 +1,4 @@
-Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf.yaml` file to point the Postgres Instance you would like to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
 
    ```yaml
    init_config:
@@ -20,7 +20,7 @@ Once you have installed the Host Agent, edit the Agent's `conf.d/postgres.d/conf
 
 **Note**: Wrap your password in single quotes if a special character is present.
 
-3. [Restart the Agent][2] so that the configurations are applied.
+[Restart the Agent][2] so that the configurations are applied.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
