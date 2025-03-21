@@ -135,6 +135,8 @@ export function onScroll() {
         const elementTocOpen = document.querySelector('.toc_open');
         elementTocOpen ? elementTocOpen.classList.remove('toc_open') : null;
 
+        console.log('Mapping the side nav ...');
+
         // TOC mapping
         for (let i = 0; i < sidenavMapping.length; i++) {
             const sideNavItem = sidenavMapping[i];
@@ -158,8 +160,10 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
+                        console.log('Adding toc_open to parent with id:', id);
                         const header = document.getElementById(`${decodeURI(id)}`);
                         if (header && header.nodeName === 'H2') {
+                            console.log('Adding toc_open to header:', header);
                             link.classList.add('toc_open');
                         }
                     }
@@ -245,15 +249,23 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-// Expose the necessary functions to the Markdoc-Hugo integration
-if (!window.markdocBeforeRevealHooks) {
-    window.markdocBeforeRevealHooks = [];
-}
-markdocBeforeRevealHooks.push(buildTOCMap);
-if (!window.markdocAfterRerenderHooks) {
-    window.markdocAfterRerenderHooks = [];
-}
-markdocAfterRerenderHooks.push(buildTOCMap);
-markdocAfterRerenderHooks.push(onScroll);
+// Expose the necessary functions to cdocs
+window.cdocsHooks = {};
+
+const phases = ['beforeReveal', 'afterReveal', 'afterRerender'];
+phases.forEach((phase) => {
+    window.cdocsHooks[phase] = [];
+});
+
+// Update the TOC after the page is initially rendered
+// and before it is revealed
+cdocsHooks.beforeReveal.push(buildTOCMap);
+
+// Update the active header in the TOC after the page is revealed
+cdocsHooks.afterReveal.push(onScroll);
+
+// Update the TOC any time the page is re-rendered
+cdocsHooks.afterRerender.push(buildTOCMap);
+cdocsHooks.afterRerender.push(onScroll);
 
 DOMReady(handleAPIPage);
