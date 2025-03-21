@@ -276,7 +276,7 @@ To deploy your Cloud Run service with YAML service specification, use the follow
                - name: DD_SERVERLESS_LOG_PATH
                  value: shared-volume/logs/*.log
                - name: DD_SITE
-                 value: <DATADOG_SITE>
+                 value: '<DATADOG_SITE>'
                - name: DD_ENV
                  value: serverless
                - name: DD_API_KEY
