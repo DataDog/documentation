@@ -230,7 +230,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 If the source code of multiple services is present in the same repository, further actions are needed to ensure that the change lead time is calculated by taking into account only the commits affecting the specific service being deployed.
 
-To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
+To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5]. Name the link either "Source" or the service name ("shopist" in the examples below).
 
 If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
 
