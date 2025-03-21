@@ -38,22 +38,22 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 1. Navigate to [Cost Management | Configuration][5] under Azure portal's *Tools > Cost Management > Settings > Configuration* and click on *Exports*.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
-2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
-3. After the scope is selected, click **Schedule export*.
+2. Select the export scope located next to the search filter. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+3. After the scope is selected, click **Schedule export**.
 
    {{< img src="cloud_cost/azure_exports_page.png" alt="In Azure portal highlighting the export scope and schedule button" style="width:100%" >}}
 
 4. Select the **Cost and usage (actual + amortized)** template *OR* manually create your own export with the following details:
-  - Metric: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
-  - Export type: **Daily export of month-to-date costs**
-  - File Partitioning: `On`
+    - Metric: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
+    - Export type: **Daily export of month-to-date costs**
+    - File Partitioning: `On`
 
-  {{< img src="cloud_cost/azure_new_export.png" alt="New export page with template and manual options highlighted" style="width:100%" >}}
+    {{< img src="cloud_cost/azure_new_export.png" alt="New export page with template and manual options highlighted" style="width:100%" >}}
 
-5. On the *Destination* tab fill in the required fields and make sure **File Partiioning** is `On`.
+5. On the **Destination** tab fill in the required fields and make sure **File Partioning** is `On`.
     - **Note:** Do not use special characters like `.` in these fields.
     - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-6. On the *Review + create* tab select **Create**.
+6. On the **Review + create** tab select **Create**.
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 
