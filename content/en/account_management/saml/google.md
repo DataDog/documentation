@@ -18,7 +18,7 @@ further_reading:
 ## Service provider details
 
 As a prerequisite, **IdP initiated SSO** must be checked on the Datadog [SAML configuration page][2].
-For Google, if IdP-initiated login is enabled, SP-initiated login will no longer work.
+For Google, if IdP-initiated login is enabled, SP-initiated login will no longer be supported.
 
 Application Name
 : Can be anything
