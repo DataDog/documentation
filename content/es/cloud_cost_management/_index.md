@@ -56,7 +56,7 @@ Explora los costes de tu proveedor de nube y correlaciónalos con datos telemét
 
 Cloud Cost Management proporciona información a los equipos de ingeniería y finanzas para que comprendan cómo afectan los cambios de infraestructura a los costes, asignen gastos en toda la organización e identifiquen ineficiencias.
 
-{{< img src="cloud_cost/overview_2.png" alt="Obtener información de costes y uso de tu proveedor de nube en la página de Datadog Información general de costes de la nube" style="width:100%;" >}}
+{{< img src="cloud_cost/summary.png" alt="Obtener información de costes y uso de tu proveedor de nube en la página de Datadog Información general de costes de la nube" style="width:100%;" >}}
 
 Datadog ingiere tus datos de costes de la nube y los transforma en métricas que puedes utilizar en una consulta de búsqueda en la página [**Analytics**][1]. Si los costes aumentan, puedes correlacionar el aumento con las métricas de uso para determinar la causa raíz.
 
