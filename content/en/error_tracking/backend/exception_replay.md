@@ -45,7 +45,7 @@ Exception Replay is only available in APM Error Tracking. Error Tracking for Log
 1. Install or upgrade your Agent to version `7.44.0` or higher.
 2. Ensure that you are using:
    * `ddtrace` version `1.16.0` or higher.
-   * `dd-trace-java` version `1.35.0` or higher.
+   * `dd-trace-java` version `1.47.0` or higher.
    * `dd-trace-dotnet` version `2.53.0` or higher.
 4. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
@@ -79,7 +79,7 @@ To keep the performance overhead of the feature at a minimum, error capturing is
 [1]: https://github.com/DataDog/dd-trace-py/blob/2bd8e73b639af811cee2703198aa9e7e32b2f74e/ddtrace/debugging/_redaction.py
 [2]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-specific-classes-or-types
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
 [7]: https://app.datadoghq.com/dynamic-instrumentation/setup

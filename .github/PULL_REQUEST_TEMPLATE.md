@@ -13,7 +13,9 @@ If the PR is ready to be merged once it receives the required reviews, check the
 Merge readiness:
 - [ ] Ready for merge
 
-Merge queue is enabled in this repo. To have it automatically merged after it receives the required reviews, create the PR (from a branch that follows the `<yourname>/description` naming convention) and then add the following PR comment:
+Merge queue is enabled in this repo. Your branch name MUST follow the `<slack_username>/<branch_name>` convention, or your pull request will not pass in CI. If your branch doesn't follow this format, rename it or create a new branch and PR.
+
+To have your PR automatically merged after it receives the required reviews, add the following PR comment:
 
 ```
 /merge

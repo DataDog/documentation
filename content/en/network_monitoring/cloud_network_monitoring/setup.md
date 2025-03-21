@@ -58,8 +58,6 @@ Datadog Cloud Network Monitoring does not support macOS platforms.
 
 CNM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
-CNM is not supported for Google Kubernetes Engine (GKE) Autopilot.
-
 ### Network routing tools
 
 #### Istio
