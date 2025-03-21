@@ -31,7 +31,7 @@ Continuous Profiler is not supported on some serverless platforms, such as AWS L
 
 ## Installation
 
-If you are using version 2.x of the Go Tracer, follow the import instrumentions marked with `2.x`. Profiler documentation for `dd-trace-go` version 2.x can be found [here][21].
+If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`. The profile has not changed between versions v1 and v2.
 
 To begin profiling applications:
 
@@ -45,7 +45,7 @@ To begin profiling applications:
     ```
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
-3. Import the [profiler][6] at the start of your application:
+3. Import the [profiler][6] (or [profiler in v2][21]) at the start of your application:
 
     ```go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // 1.x
