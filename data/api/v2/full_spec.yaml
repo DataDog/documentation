@@ -8632,11 +8632,13 @@ components:
       - identity
       - gzip
       - deflate
+      - zstd1
       type: string
       x-enum-varnames:
       - IDENTITY
       - GZIP
       - DEFLATE
+      - ZSTD1
     ConvertJobResultsToSignalsAttributes:
       description: Attributes for converting historical job results to signals.
       properties:
