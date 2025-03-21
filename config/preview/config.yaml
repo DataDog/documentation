@@ -22,6 +22,9 @@ deployment:
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"
       include: "**.{jpg,jpeg,png,gif,mp4,mov,svg,json}"
+    - name: "previewApi"
+      URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
+      include: "{api/latest/**}"
 
     matchers:
       # temporarily lets nocache this sh file
