@@ -231,7 +231,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
-To deploy your Cloud Run service with YAML service specification, use the following example configuration file. In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
+To deploy your Cloud Run service with YAML service specification, use the following example configuration file.
 
 1. Create a YAML file that contains the following:
 
