@@ -143,27 +143,6 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-### Collecting schemas
-
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. Schemas are collected ONLY on tables for which the Agent has `SELECT` access.
-
-To grant `SELECT` permissions to the Datadog user, use one of the following commands:
-
-- **Per table basis**:
-    ```sql
-    GRANT SELECT ON [database name].[table name] TO datadog@'%';
-    ```
-
-- **Per database basis**:
-    ```sql
-    GRANT SELECT ON [database name].* TO datadog@'%';
-    ```
-
-- **All databases**:
-    ```sql
-    GRANT SELECT ON *.* TO datadog@'%';
-    ```
-
 ### Runtime setup consumers
 Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
