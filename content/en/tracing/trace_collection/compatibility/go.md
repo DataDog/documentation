@@ -88,7 +88,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL][40]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
 | [SQLx][42]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
 | [MongoDB][44]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
-| [MongoDB (mgo)[73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
+| [MongoDB (mgo)][73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
 | [BuntDB][47]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
 | [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
 | [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
@@ -216,7 +216,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL][40]               | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/database/sql/v2][96]                      |
 | [SQLx][42]              | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx/v2][97]                      |
 | [MongoDB][44]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/go.mongodb.org/mongo-driver/mongo/v2][98] |
-| [MongoDB (mgo)[73]      | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][99]                    |
+| [MongoDB (mgo)][73]      | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][99]                    |
 | [BuntDB][47]            | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/tidwall/buntdb/v2][100]                    |
 | [LevelDB][49]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/syndtr/goleveldb/leveldb/v2][101]          |
 | [miekg/dns][51]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/miekg/dns/v2][102]                         |
