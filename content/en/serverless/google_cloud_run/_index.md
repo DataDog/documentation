@@ -276,7 +276,7 @@ To deploy your Cloud Run service with YAML service specification, use the follow
                - name: DD_SERVERLESS_LOG_PATH
                  value: shared-volume/logs/*.log
                - name: DD_SITE
-                 value: datadoghq.com
+                 value: '<DATADOG_SITE>'
                - name: DD_ENV
                  value: serverless
                - name: DD_API_KEY
@@ -323,7 +323,6 @@ To deploy your Cloud Run service with YAML service specification, use the follow
    - `<API_KEY>`: Your [Datadog API key][1].
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
    - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run. For example, `us-docker.pkg.dev/cloudrun/container/hello`.
-   - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
 
 1. Run:
    ```bash
