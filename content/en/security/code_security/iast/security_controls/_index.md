@@ -280,7 +280,7 @@ Method `validate`, which is exported inside an object `validators`, that validat
 // bar/foo/custom_input_validator.js
 module.exports = {
   validators: {
-    validateSql: (input) => {
+    validate: (input) => {
       /* validation process */
     }
   }
