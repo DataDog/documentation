@@ -151,20 +151,18 @@ To grant `SELECT` permissions to the Datadog user, use one of the following comm
 
 - **Per table basis**:
     ```sql
-    GRANT SELECT ON [database name].[table name] TO 'datadog'@'%';
+    GRANT SELECT ON [database name].[table name] TO datadog@'%';
     ```
 
 - **Per database basis**:
     ```sql
-    GRANT SELECT ON [database name].* TO 'datadog'@'%';
+    GRANT SELECT ON [database name].* TO datadog@'%';
     ```
 
 - **All databases**:
     ```sql
-    GRANT SELECT ON *.* TO 'datadog'@'%';
+    GRANT SELECT ON *.* TO datadog@'%';
     ```
-
-Make sure to run these commands with a user that has sufficient privileges to grant permissions.
 
 ### Runtime setup consumers
 Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
