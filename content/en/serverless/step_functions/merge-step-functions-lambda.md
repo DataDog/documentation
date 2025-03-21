@@ -144,6 +144,8 @@ On the SNS Publish Task, set `_datadog` in the `MessageAttributes` field as foll
 }
 {{< /highlight >}}
 
+*Looking to trace through services not listed above? [Open a feature request][4].*
+
 ## Merge Lambda traces with Downstream Step Functions traces
 
 For cases where a Lambda function directly invokes a Step Function using `StartExecution` or `StartSyncExecution`.
@@ -202,11 +204,12 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][8].
 
 
-[4]: /serverless/libraries_integrations/plugin/
-[5]: /logs/guide/forwarder/
-[6]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
-[7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
+[4]: https://docs.datadoghq.com/help/
+[5]: /serverless/libraries_integrations/plugin/
+[6]: /logs/guide/forwarder/
+[7]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[8]: https://app.datadoghq.com/organization-settings/api-keys
+[9]: https://github.com/datadog/serverless-plugin-datadog?tab=readme-ov-file#configuration-parameters
 
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
@@ -236,10 +239,10 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][12].
 
 
-[9]: /serverless/libraries_integrations/cli/
-[10]: /logs/guide/forwarder/
-[11]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
-[12]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
+[10]: /serverless/libraries_integrations/cli/
+[11]: /logs/guide/forwarder/
+[12]: /logs/guide/forwarder/?tab=cloudformation#upgrade-to-a-new-version
+[13]: https://github.com/DataDog/datadog-ci/blob/master/src/commands/stepfunctions/README.md
 
 {{% /tab %}}
 {{% tab "AWS CDK" %}}
@@ -297,7 +300,7 @@ datadog_sfn.add_state_machines([child_state_machine, state_machine])
 
 For additional code examples in TypeScript and Go, see [CDK Examples for Instrumenting AWS Step Functions][13].
 
-[13]: /serverless/guide/step_functions_cdk
+[14]: /serverless/guide/step_functions_cdk
 {{% /tab %}}
 {{% tab "Custom" %}}
 
@@ -345,8 +348,8 @@ Alternatively, if you have business logic defined in the payload, you can also u
 }
 {{< /highlight >}}
 
-[14]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
-[15]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
+[15]: https://docs.aws.amazon.com/step-functions/latest/dg/amazon-states-language-intrinsic-functions.html#asl-intrsc-func-json-manipulate
+[16]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
 
 {{% /tab %}}
 {{< /tabs >}}
