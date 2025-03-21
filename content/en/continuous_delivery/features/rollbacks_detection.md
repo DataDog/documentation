@@ -1,5 +1,5 @@
 ---
-title: Rollbacks Detection
+title: Rollback Detection
 description: Learn how CD Visibility detects deployment rollbacks.
 further_reading:
 - link: "/continuous_delivery/deployments/"
@@ -21,14 +21,14 @@ CD Visibility is in Preview. If you're interested in this feature, complete the 
 ## Overview
 
 Knowing when specific deployments are performing a rollback is useful to:
-- Understand deployment stability and the frequency of rollbacks across your services
-- Identify patterns in deployment issues that lead to rollbacks
+- Understand deployment stability and the frequency of rollbacks across your services.
+- Identify patterns in deployment issues that lead to rollbacks.
 
-To detect rollbacks, Datadog compares the current deployment version with the previous deployment versions deployed for the same service and environment. A rollback is identified when:
-1. The current version is different from the previous version. This ensures that re-deploying the same version does not constitute a rollback.
-2. The current version matches a version that was previously deployed
+To detect rollbacks, Datadog compares the current deployment version with the previous versions deployed for the same service and environment. A rollback is identified when both of the following occur:
+- The current version is different from the previous version. This ensures that redeploying the same version does not constitute a rollback.
+- The current version matches a version that was previously deployed.
 
-You can search for rollback deployments in the [Deployment Executions page][1], using the `@deployment.is_rollback` tag:
+You can search for rollback deployments in [Deployment Executions][1], using the `@deployment.is_rollback` tag:
 
 {{< img src="continuous_delivery/features/rollbacks-deployment-executions.png" alt="Rollback indicator in Deployment Executions page" style="width:100%;">}}
 
@@ -38,12 +38,12 @@ You can also see more detailed information in the event detail:
 
 ## Requirements
 
-Rollback detection works for deployments that have:
+Rollback detection works for deployments that have all of the following:
 - A service (`@deployment.service`)
 - An environment (`@deployment.env`)
 - A version identifier (`@deployment.version`)
 
-### Version for CI Based providers
+### Version for CI-based providers
 For CI-based providers, Datadog uses the `--revision` parameter that you pass to the `datadog ci` command. This parameter should contain the version identifier for your deployment (such as a commit SHA, image tag, or version number).
 
 ### Version for Argo CD
