@@ -32,7 +32,7 @@ The following are key differences between using CloudWatch Metric Streams and AP
 
 - **Metrics that report with more than a two hour delay**: API polling continues to collect metrics like `aws.s3.bucket_size_bytes` and `aws.billing.estimated_charges` after metric streaming is enabled, since these cannot be sent through CloudWatch Metric Stream.
 
-- **Metrics Metadata**: Datadog continues to use API polling to collect custom tags and other metadata for your streamed metrics so you will need to keep the configuration on the AWS integration unchanged.
+- **Metrics Metadata**: Datadog continues to use API polling to collect custom tags and other metadata for your streamed metrics. To ensure that you continue to receive these metrics, do not change the configuration on the AWS integration.
 
 #### Switching from API polling to metric streams
 If you already receive metrics for a given CloudWatch namespace through the API polling method, Datadog automatically detects this and stops polling metrics for that namespace once you start streaming them. Leave your configuration settings in the AWS integration page unchanged; as Datadog continues to use API polling to collect custom tags and other metadata for your streamed metrics.
