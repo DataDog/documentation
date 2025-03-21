@@ -3432,6 +3432,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_budgets
       weight: 13
+    - name: Anomalies
+      url: /cloud_cost_management/anomalies
+      parent: cloud_cost
+      identifier: cloud_cost_anomalies
+      weight: 14
     - name: APM
       url: tracing/
       pre: apm
