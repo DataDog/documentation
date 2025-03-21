@@ -65,7 +65,27 @@ instances:
 ```
 
 ### Collecting schemas
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. Schemas are collected on tables for which the Agent has `SELECT` access.
+
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. Schemas are collected ONLY on tables for which the Agent has `SELECT` access.
+
+To grant `SELECT` permissions to the Datadog user, use one of the following commands:
+
+- **Per table basis**:
+    ```sql
+    GRANT SELECT ON [database name].[table name] TO 'datadog'@'%';
+    ```
+
+- **Per database basis**:
+    ```sql
+    GRANT SELECT ON [database name].* TO 'datadog'@'%';
+    ```
+
+- **All databases**:
+    ```sql
+    GRANT SELECT ON *.* TO 'datadog'@'%';
+    ```
+
+Make sure to run these commands with a user that has sufficient privileges to grant permissions.
 
 ### Working with hosts through a proxy
 If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
