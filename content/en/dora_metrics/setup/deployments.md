@@ -95,7 +95,7 @@ For the following example, replace `<DD_SITE>` in the URL with {{< region-param 
         },
         "env": "prod",
         "team": "backend",
-        "version"="v1.12.07"
+        "version": "v1.12.07"
       }
     }
   }
@@ -139,7 +139,7 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 ## Calculating deployment frequency
 
-Deployment frequency is calculated based on the count of `DORA Metrics - Deployment`. Frequency is calculated by dividing thiscount over a specific time frame.
+Deployment frequency is calculated based on the count of deployment events. Frequency is calculated by dividing this count over a specific time frame.
 
 ## Calculating change lead time
 
@@ -166,6 +166,7 @@ For service deployments tracked by APM to contribute to change lead time, ensure
 {{% tab "API or CLI" %}}
 
 For service deployments tracked by the DORA Metrics API or the `datadog-ci dora deployment` command to contribute to change lead time, ensure the following:
+
 ### Requirements for calculating change lead time
 
 - The attributes `repository_url` and `commit_sha` are included in the deployment events payload.
@@ -275,7 +276,7 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 ## Calculating change failure rate
 
-Change failure rate is calculated by dividing `failure.count` over `deployment.count` for the same services and/or teams associated to both a failure and a deployment event.
+Change failure rate is calculated by dividing the number of failure events over the number of deployment events for the same services and/or teams associated to both a failure and a deployment event.
 
 ## Further Reading
 

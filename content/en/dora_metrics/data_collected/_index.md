@@ -23,19 +23,24 @@ further_reading:
 
 ## Overview
 
-DORA Metrics generates [metrics][9] for each one of the four core DORA Metrics, as well as events with associated tags and attributes that are available in the [Events Explorer][1].
+DORA Metrics generates events that have associated metrics and tags.
+
+| Event Type | Description |
+| :--- | :--- |
+|Deployment | Represents a single code deployment. Each deployment is uniquely identified by a specific combination of env, service, and version tags.
+|Commit | A commit event is generated for each individual commit included in a deployment. These events contain metadata and are automatically linked to the corresponding deployment.
+|Failure | Captures a failure in production, such as an incident, rollback, or alert.
 
 ## DORA metrics
 
-DORA Metrics provides the following default metrics:
-
+DORA Metrics provide the following event-based metrics:
 
 | DORA Metric | Type | Description |
 | :--- | :--- | :--- |
-| Deployment Frequency | count | The number of deployments detected by Datadog based on your selected [deployment data source][10].
-| Change Lead Time | distribution | The age in `seconds` of associated Git commits at the time of deployment.
-| Change Failure Rate | count | Calculated dividing the number of failures by the number of deployments.
-| Time to Restore | distribution | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.
+| `deployment.count` | count | The number of deployments detected by Datadog based on your selected [deployment data source][10].
+| `commit.change_lead_time` | distribution | The age in `seconds` of associated Git commits at the time of deployment.
+| `failure.count` | count | Used for change failure rate with the formula `failure.count/deployment.count`. A big time rollup of at least 1 week is recommended to account for the time difference between deployments and when the impact starts.
+| `failure.time_to_restore` | distribution | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.
 
 ### Default tags
 
@@ -44,11 +49,13 @@ All default metrics contain the following tags if any are available:
 - `service`
 - `team`
 - `env`
+- `version`
+- `source`
 - `repository_id`
 
 **Note**: The `severity` tag is available for failure events when it is provided by the failure's data source.
 
-For more information about using `env`, `service`, and `version` tags, see [Getting Started with Tags][6].
+For more information about using tags, see [Getting Started with Tags][6].
 
 ## Change lead time metrics
 
@@ -56,13 +63,17 @@ Datadog breaks down change lead time into the following metrics, which represent
 
 | Metric | Type | Description |
 |---|---|---|
-| `time_to_pr_ready` | duration | Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review. |
-| `review_time` | duration | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved. |
-| `merge_time` | duration | Time from the last approval until the PR is merged. |
-| `time_to_deploy` | duration | Time from PR merge to start of deployment. If a commit does not have an associated PR, this metric is calculated as the time from commit creation to start of deployment. |
-| `deploy_time` | duration | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
+| `commit.time_to_pr_ready` | duration | Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review. |
+| `commit.review_time` | duration | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved. |
+| `commit.merge_time` | duration | Time from the last approval until the PR is merged. |
+| `commit.time_to_deploy` | duration | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
+| `commit.deploy_time` | duration | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit does not have an associated PR, only `time_to_deploy` and `deploy_time` metrics are available.
+These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `time_to_deploy` and `deploy_time` metrics are available.
+
+**Recommendations :**
+
+Querying at the commit level provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
 
 **Notes:**
 
@@ -88,13 +99,8 @@ These metrics are only computed when the source of the repository metadata is Gi
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `deployment.service`              | string | The name of the deployed service. |
-| `deployment.env`                 | string | The environment where the service was deployed (e.g., prod, staging). |
-| `deployment.team`               | string | The team responsible for the deployed service. |
-| `deployment.git.repository_id`  | string | The unique identifier of the service's Git repository. |
 | `deployment.git.commit_sha`     | string | The SHA of the HEAD commit for the deployment. |
-| `deployment.source`             | string | The source of the deployment event (e.g., apm_deployment, api). |
-| `deployment.version`            | string | The version number or identifier associated with the deployment. |
+| `deployment.id`                 | string | Unique ID of the deployment. If not provided, one will be randomly generated. |
 | `deployment.id`                 | string | Unique ID of the deployment. If not provided, one will be randomly generated. |
 
 ### Commit metrics
@@ -113,13 +119,7 @@ These metrics are only computed when the source of the repository metadata is Gi
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `commit.service`              | string | The name of the deployed service. |
-| `commit.env`                 | string | The environment where the service was deployed (e.g., prod, staging). |
-| `commit.team`               | string | The team responsible for the deployed service. |
-| `commit.git.repository_id`  | string | The unique identifier of the service's Git repository. |
-| `commit.git.commit_sha`     | string | The SHA of the commit. |
-| `commit.source`             | string | The source of the deployment event (e.g., apm_deployment, api). |
-| `commit.version`            | string | The version number or identifier associated with the deployment. |
+| `commit.sha`     | string | The SHA of the commit. |
 
 ### Failure metrics
 
@@ -132,13 +132,7 @@ These metrics are only computed when the source of the repository metadata is Gi
 
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `failure.services`              | list<string> | The name of the affected services. |
-| `failure.env`                 | string | The environment where the failure occurred (e.g., prod, staging). |
-| `failure.teams`               | list<string> | The teams responsible for the affected service. |
-| `failure.git.repository_id`  | string | The unique identifier of the service's Git repository. |
-| `failure.source`             | string | The source of the failure event (e.g., monitoring, logging). |
-| `failure.version`            | string | The version number or identifier associated with the failure. |
-| `failure.severity`            | string | The severity level of the failure (e.g., critical, high, medium, low). |
+| `failure.severity`            | string | The severity level of the failure (e.g., SEV-1). |
 
 ## Custom Dashboards
  

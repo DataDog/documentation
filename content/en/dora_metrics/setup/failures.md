@@ -34,7 +34,7 @@ further_reading:
 
 ## Overview
 
-Failed deployments events, currently interpreted through failure events, are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
+Failed deployment events, currently interpreted through failure events, are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
 
 ## Selecting and configuring a failure data source
 
@@ -167,7 +167,7 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
         "envs": ["prod"],
         "name": "Web server is down failing all requests",
         "severity": "High",
-        "version"="v1.12.07"
+        "version": "v1.12.07"
       }
     }
   }
@@ -186,7 +186,7 @@ Change failure rate requires both [deployment data][7] and [failure data](#selec
 Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `failure.count` over `deployment.count` for the same services and/or teams associated to both a failure and a deployment event. 
 
 ## Calculating time to restore 
-Time to restore is calculated as the duration distribution for *resolved failures* events.
+Time to restore is calculated as the duration distribution for *resolved failure* events.
 
 DORA Metrics generates the `time_to_restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `time_to_restore` data points over a selected time frame. 
 
