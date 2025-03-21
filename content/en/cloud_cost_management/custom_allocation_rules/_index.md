@@ -31,7 +31,7 @@ Access the [Custom Allocation Rules section][2] under Cloud Cost settings to est
 
 {{% tab "Even Allocation" %}}
 
-With the even strategy, costs are allocated evenly towards your destination tags, regardless of any other spend.   Apply a filter to refine which part of the bill determines the proportions.
+With the even strategy, costs are allocated evenly towards your destination tags, regardless of any other spend. Apply a filter to refine which part of the bill determines the proportions.
 
 {{< img src="cloud_cost/custom_allocation_rules/even_diagram.png" alt="Diagram illustrating the even split strategy" style="width:60%;" >}}
 
