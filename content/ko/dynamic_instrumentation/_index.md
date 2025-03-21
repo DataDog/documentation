@@ -46,8 +46,9 @@ Dynamic Instrumentation에 대한 최신 개선 사항을 시험해 보고 싶�
 - Java 애플리케이션의 경우 추적 라이브러리 [`dd-trace-java`][3] 1.34.0 또는 이상.
 - Python 애플리케이션의 경우 추적 라이브러리 [`dd-trace-py`][4] 2.2.0 이상.
 - .NET 애플리케이션의 경우 추적 라이브러리 [`dd-trace-dotnet`][5] 2.54.0 또는 이상.
-- (제한된 Preview) Node.js 애플리케이션의 경우 추적 라이브러리 [`dd-trace-js`][18] 5.35.0 또는 이상.
+- (제한된 미리보기) Node.js 애플리케이션의 경우 추적 라이브러리 [`dd-trace-js`][18] 5.39.0 이상.
 - (제한된 Preview) Ruby 애플리케이션의 경우 추적 라이브러리 [`dd-trace-rb`][19] 2.9.0 또는 이상.
+- (제한된 미리보기) PHP 애플리케이션의 경우 추적 라이브러리 [`dd-trace-php`][20] 1.5.0 이상.
 - [통합 서비스 태깅][6] 태그 `service`, `env` 및 `version`가 배포에 적용됩니다.
 - (권장 사항) [자동 완성 및 검색(Preview 단계)][17]이 활성화됩니다.
 - (권장 사항) [소스코드 통합][7]이 서비스에 설정되어 있습니다.
@@ -80,7 +81,7 @@ Dynamic Instrumentation에 대한 최신 개선 사항을 시험해 보고 싶�
 
 - 동적 계측은 아직 Azure App Services 또는 서버리스 환경과 호환되지 않습니다.
 - Python, Java, .NET으로 구축된 애플리케이션에 대해서만 지원이 제공됩니다.
-- Node.js 및 Ruby로 구축된 애플리케이션에 대해 제한된 Preview가 진행 중입니다.
+- Node.js, Ruby, PHP로 구축된 애플리케이션에 대한 제한된 미리보기가 진행 중입니다.
 
 ## 동적 계측 살펴보기
 
@@ -228,3 +229,4 @@ Dynamic Instrumentation에 대한 최신 개선 사항을 시험해 보고 싶�
 [17]: /ko/dynamic_instrumentation/symdb/
 [18]: https://github.com/DataDog/dd-trace-js
 [19]: https://github.com/DataDog/dd-trace-rb
+[20]: https://github.com/DataDog/dd-trace-php

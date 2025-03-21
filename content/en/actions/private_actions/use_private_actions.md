@@ -31,12 +31,7 @@ For more information about how private actions work, see the full [overview page
 
 ## Supported private actions
 
-The following integrations support private actions:
-- [Kubernetes][1]
-- [Postgres][2]
-- [Jenkins][3]
-- [Temporal][4]
-- The [HTTP][5] action
+{{< partial name="actions/private_actions_list" >}}
 
 ## Prerequisites
 
