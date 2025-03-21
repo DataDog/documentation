@@ -43,17 +43,40 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/azure_exports_page.png" alt="In Azure portal highlighting the export scope and schedule button" style="width:100%" >}}
 
-4. Select the **Cost and usage (actual + amortized)** template *OR* manually create your own export with the following details:
-    - Metric: **Cost and usage details (actual)** THEN **Cost and usage details (amortized)**
-    - Export type: **Daily export of month-to-date costs**
-    - File Partitioning: `On`
-
+4. Select the **Cost and usage (actual + amortized)** template
     {{< img src="cloud_cost/azure_new_export.png" alt="New export page with template and manual options highlighted" style="width:100%" >}}
 
-5. On the **Destination** tab fill in the required fields and make sure **File Partioning** is `On`.
-    - **Note:** Do not use special characters like `.` in these fields.
-    - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-6. On the **Review + create** tab select **Create**.
+5. Click **Edit** on each export and confirm the following details:
+    - Frequency: **Daily export of month-to-date costs**
+    - Dataset version:
+      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
+      - Unsupported versions: `2019-10-01`
+    {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
+
+6. Enter an "Export prefix" for the new exports. For example, enter "datadog" to avoid conflicts with existing exports.
+
+7. Click "Edit" on each export and confirm the following details:
+    - Frequency: **Daily export of month-to-date costs**
+    - Dataset version:
+      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
+      - Unsupported versions: `2019-10-01`
+
+   {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
+
+8. In the **Destination** tab, select the following details:
+    - Choose **Azure blob storage** as the storage type.
+    - Choose a storage account, container, and directory for the exports.
+        - **Note:** Do not use special characters like `.` in these fields.
+        - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+    - Choose **CSV** as the format. **Parquet is not supported.**
+    - Choose **Gzip** as the compression type. **None** is also supported.
+    - Ensure that **File partitioning** is checked.
+    - Ensure that **Overwrite data** is not checked.
+        - **Note:** Datadog does not support the Overwrite Data setting. If the setting was previously checked, make sure to clean the files in the directory or move them to another one.
+
+   {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
+
+9. On the **Review + create** tab select **Create**.
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 
