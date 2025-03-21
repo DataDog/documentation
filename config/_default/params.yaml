@@ -118,6 +118,7 @@ code_language_ids:
     elixir: "Elixir"
     rust: "Rust"
     dd-api: "Datadog API"
+    dd-api-alpha: "ddtrace-api (pre-release)"
     otel: "OpenTelemetry API"
     status_legacy: "Status Page (Legacy)"
     status_page: "Status Page"
