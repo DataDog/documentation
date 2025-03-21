@@ -44,7 +44,7 @@ Available vitals include:
 |-------|-------------|
 | [Loading Time][2] | Time for a page to load from a user's perspective. |
 | [Largest Contentful Paint][8] | Time to render the largest visible DOM object. |
-| [First Contentful Paint][9] | | Time for the first text/image to appear, indicating content loading start. |
+| [First Contentful Paint][9] | Time for the first text/image to appear, indicating content loading start. |
 | [Cumulative Layout Shift][10] | Measures unexpected page movement; 0 means no shifts. |
 | [Interaction to Next Paint][11] | Longest delay between user interaction and next paint (RUM SDK v5.1.0 required). |
 
@@ -69,7 +69,7 @@ Based on the selected time period and traffic, the Optimization page highlights 
 
 For some vitals, you can also select other versions of the page to investigate by clicking "See a different element".
 
-{{< img src="real_user_monitoring/browser/vitals_performance/vitals-visualize.png" alt="Select different elements to preview and visualize the user's experience." style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/optimizing_performance/vitals-visualize.png" alt="Select different elements to preview and visualize the user's experience." style="width:100%;" >}}
 
 ## Troubleshoot resources and errors
 
