@@ -22,7 +22,7 @@ Datadog supports several approaches for instrumenting your applications with Ope
 
 ### OpenTelemetry API and Datadog SDK
 
-Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This allows you to collect, visualize, and analyze traces, metrics, and logs from your applications and infrastructure.
+Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This allows you to collect, visualize, and analyze traces from your applications and infrastructure.
 
 Use the OpenTelemetry Tracing APIs with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set.
 

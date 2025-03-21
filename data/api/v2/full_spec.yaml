@@ -14864,6 +14864,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -28298,6 +28300,17 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringStandardDataSource:
+      default: logs
+      description: Source of events, either logs or audit trail.
+      enum:
+      - logs
+      - audit
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - AUDIT
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -28465,6 +28478,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -30545,24 +30560,8 @@ components:
       x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot2Type:
       description: The type of service.
-      enum:
-      - web
-      - db
-      - cache
-      - function
-      - browser
-      - mobile
-      - custom
       example: web
       type: string
-      x-enum-varnames:
-      - WEB
-      - DB
-      - CACHE
-      - FUNCTION
-      - BROSWER
-      - MOBILE
-      - CUSTOM
     ServiceDefinitionV2Dot2Version:
       default: v2.2
       description: Schema version being used.
@@ -39837,7 +39836,12 @@ paths:
         type: unsafe
   /api/v2/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      description: 'Cancel a downtime.
+
+
+        **Note**: Downtimes canceled through the API are no longer active, but are
+        retained for approximately two days before being permanently removed. The
+        downtime may still appear in search results until it is permanently removed.'
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.

@@ -8,7 +8,7 @@ further_reading:
 - link: "data_security/logs/"
   tag: "documentation"
   text: "Log Management data security"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "documentation"
   text: "Sensitive Data Scanner"
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
@@ -74,7 +74,7 @@ To set up a pipeline:
 1. Select and set up your [source][9].
 1. Select and set up your [destinations][10].
 1. Set up your [processors][11].
-1. Install the Observability Pipelines Worker.
+1. [Install the Observability Pipelines Worker][14].
 1. Enable monitors for your pipeline.
 
 See [Set Up Pipelines][12] for more information.
@@ -152,3 +152,4 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [11]: /observability_pipelines/processors/
 [12]: /observability_pipelines/set_up_pipelines/
 [13]: /observability_pipelines/advanced_configurations/
+[14]: /observability_pipelines/install_the_worker/
