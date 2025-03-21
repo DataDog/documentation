@@ -135,8 +135,6 @@ export function onScroll() {
         const elementTocOpen = document.querySelector('.toc_open');
         elementTocOpen ? elementTocOpen.classList.remove('toc_open') : null;
 
-        console.log('Mapping the side nav ...');
-
         // TOC mapping
         for (let i = 0; i < sidenavMapping.length; i++) {
             const sideNavItem = sidenavMapping[i];
@@ -148,6 +146,7 @@ export function onScroll() {
             sideNavItem.navLink.classList.remove('toc_scrolled');
 
             if (
+                windowTopPosition !== 0 &&
                 sideNavItem.header.getBoundingClientRect().top <= 0 + localOffset &&
                 (typeof nextSideNavItem === 'undefined' ||
                     nextSideNavItem.header.getBoundingClientRect().top > 0 + localOffset)
@@ -160,10 +159,8 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        console.log('Adding toc_open to parent with id:', id);
                         const header = document.getElementById(`${decodeURI(id)}`);
                         if (header && header.nodeName === 'H2') {
-                            console.log('Adding toc_open to header:', header);
                             link.classList.add('toc_open');
                         }
                     }
@@ -262,6 +259,7 @@ phases.forEach((phase) => {
 cdocsHooks.beforeReveal.push(buildTOCMap);
 
 // Update the active header in the TOC after the page is revealed
+cdocsHooks.afterReveal.push(buildTOCMap);
 cdocsHooks.afterReveal.push(onScroll);
 
 // Update the TOC any time the page is re-rendered
