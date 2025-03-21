@@ -1,4 +1,4 @@
-rum_sdk_env_options:
+rum_sdk_platform_options:
   - id: android
     default: true
   - id: ios

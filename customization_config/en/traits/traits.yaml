@@ -7,9 +7,9 @@ traits:
     label: Protocol
     internal_notes: For example, HTTP, gRPC, or SOCKS.
 
-  - id: env
-    label: "Environment"
-    internal_notes: The environment (language/framework/other env) for a library, SDK, or other third-party entity. Do not use if every option is a pure programming language -- use `prog_lang` instead. Re-label to "Platform", "Framework", etc. if it's more appropriate for your context.
+  - id: platform
+    label: "Platform"
+    internal_notes: The target platform (language, framework, specific env) for a library, SDK, or other third-party entity. Do not use if every option is a pure programming language (Go, Python, etc.) -- use `prog_lang` instead. Re-label to "Framework", "SDK", etc. if it's more appropriate for your context.
   
   - id: host
     label: "Host"

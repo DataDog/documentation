@@ -7,8 +7,8 @@ further_reading:
     tag: 'Documentation'
     text: 'Learn about Real User Monitoring'
 content_filters:
-  - trait_id: env
-    option_group_id: rum_sdk_env_options
+  - trait_id: platform
+    option_group_id: rum_sdk_platform_options
     label: "SDK"
   - trait_id: protocol
     option_group_id: rum_mobile_proxy_protocol_options
@@ -19,12 +19,12 @@ content_filters:
 The RUM Mobile SDKs can be configured to send requests through a proxy.
 
 <!-- Android -->
-{% if equals($env, "android") %}
+{% if equals($platform, "android") %}
 Proxies use [OkHttpClient Proxy and Authenticator][2] on Android.
 {% /if %}
 
 <!-- iOS -->
-{% if equals($env, "ios") %}
+{% if equals($platform, "ios") %}
 Proxies use [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
 {% /if %}
 
@@ -38,7 +38,7 @@ To successfully forward a request to Datadog, your proxy must support [HTTP CONN
 ## Recommended SDK setup
 
 <!-- HTTP/HTTPS > Android -->
-{% if equals($env, "android") %}
+{% if equals($platform, "android") %}
 
 When initializing the Android SDK, specify the following proxy configuration:
 
@@ -60,7 +60,7 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 <!-- end HTTP/HTTPS > Android -->
 
 <!-- HTTP/HTTPS > iOS -->
-{% if equals($env, "ios") %}
+{% if equals($platform, "ios") %}
 
 When initializing the iOS SDK, specify the following proxy configuration:
 
@@ -110,10 +110,10 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 {% /tabs %}
 
 {% /if %}
-<!-- END: HTTP/HTTPS > iOS -->
+<!-- end HTTP/HTTPS > iOS -->
 
 <!-- HTTP/HTTPS > React Native -->
-{% if equals($env, "react_native") %}
+{% if equals($platform, "react_native") %}
 When initializing the React Native SDK, specify the following proxy configuration:
 
 ```javascript
@@ -139,7 +139,7 @@ To successfully forward a request to Datadog, your proxy must support [SOCKS5 pr
 ## Recommended SDK setup
 
 <!-- SOCKS > Android -->
-{% if equals($env, "android") %}
+{% if equals($platform, "android") %}
 When initializing the Android SDK, specify the following proxy configuration:
 
 ```kotlin
@@ -160,7 +160,7 @@ For more information, see the [OkHttpClient Proxy and Authenticator][2] document
 <!-- end SOCKS > Android -->
 
 <!-- SOCKS > iOS -->
-{% if equals($env, "ios") %}
+{% if equals($platform, "ios") %}
 When initializing the iOS SDK, specify the following proxy configuration:
 
 {% tabs %}
@@ -211,7 +211,7 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 <!-- end SOCKS > iOS -->
 
 <!-- SOCKS > React Native -->
-{% if equals($env, "react_native") %}
+{% if equals($platform, "react_native") %}
 
 When initializing the React Native SDK, specify the following proxy configuration:
 
