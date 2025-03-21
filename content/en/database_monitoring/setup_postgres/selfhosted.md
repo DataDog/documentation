@@ -182,6 +182,7 @@ psql -h localhost -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
+
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
@@ -207,48 +208,28 @@ When it prompts for a password, use the password you entered when you created th
 
 ## Install the Agent
 
-Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres.
 
-1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+1. If you haven't already installed the Agent, see the [Agent installation instructions][8] then come back here to complete the configuration process for the Postgres check.
 
+2. Follow the instructions below based on the Agent deployment option you selected in step 1.
+
+<!-- Deployment options -->
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
-
+{{% tab "Host" %}}
+{{% dbm/postgres/self-hosted-install-host %}}
 {{% /tab %}}
-{{% tab "Postgres 9.6" %}}
 
-   ```yaml
-   init_config:
-   instances:
-     - dbm: true
-       host: localhost
-       port: 5432
-       username: datadog
-       password: 'ENC[datadog_user_database_password]'
-       pg_stat_statements_view: datadog.pg_stat_statements()
-       pg_stat_activity_view: datadog.pg_stat_activity()
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-   ```
-
+{{% tab "Docker" %}}
+{{% dbm/postgres/self-hosted-install-docker %}}
 {{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+{{% dbm/postgres/self-hosted-install-kubernetes %}}
+{{% /tab %}}
+
 {{< /tabs >}}
-
-**Note**: Wrap your password in single quotes if a special character is present.
-
-2. [Restart the Agent][10].
 
 ### Collecting logs (optional)
 
@@ -315,6 +296,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
+
 [2]: /database_monitoring/agent_integration_overhead/?tab=postgres
 [3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
