@@ -1,6 +1,6 @@
 ---
-title: How to Set Up Incident Data for DORA Metrics
-description: Learn how to send incident events for DORA Metrics.
+title: How to Set Up Failure Data for DORA Metrics
+description: Learn how to send failure events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
 - /dora_metrics/setup/incidents
@@ -34,9 +34,9 @@ further_reading:
 
 ## Overview
 
-Failed deployments events, currently interpreted through incident events, are used to compute [change failure rate](#calculating-change-failure-rate) and [mean time to restore (MTTR)](#calculating-mean-time-to-restore). 
+Failed deployments events, currently interpreted through failure events, are used to compute [change failure rate](#calculating-change-failure-rate) and [time to restore](#calculating-time-to-restore). 
 
-## Selecting and configuring an incident data source
+## Selecting and configuring a failure data source
 
 {{< tabs >}}
 {{% tab "PagerDuty" %}}
@@ -81,7 +81,7 @@ To integrate your PagerDuty account with DORA Metrics:
 
 1. To save the webhook, click **Add Webhook**.
 
-The severity of the incident in the DORA Metrics product is based on the [incident priority][106] in PagerDuty.
+The severity of the failure in the DORA Metrics product is based on the [incident priority][106] in PagerDuty.
 
 **Note:** Upon webhook creation, a new secret is created and used to sign all the webhook payloads. That secret is not needed for the integration to work, as the authentication is performed using the API key instead.
 
@@ -122,24 +122,24 @@ The matching algorithm works in the following steps:
 {{% /tab %}}
 {{% tab "API" %}}
 
-To send your own incident events, use the [DORA Metrics API][13]. Incident events are used in order to compute change failure rate and mean time to restore.
+To send your own failure events, use the [DORA Metrics API][13]. Failure events are used in order to calculate change failure rate and time to restore.
 
-Include the `finished_at` attribute in an incident event to mark that the incident is resolved. You can send events at the start of the incident and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
+Include the `finished_at` attribute in a failure event to mark that the failure is resolved. You can send events at the start of the failure and after it has been resolved. Failure events are matched by the `env`, `service` and `started_at` attributes.
 
-The following attributes are required:
+**The following attributes are required:**
 
-- `services` or `team` (at least one must be present)
+- `services` or `teams` (at least one must be present)
 - `started_at`
 
-You can optionally add the following attributes to the incident events:
-
-- `finished_at` for *resolved incidents*. This attribute is required for calculating the time to restore service.
-- `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
-- `name` to describe the incident.
+You can optionally add the following attributes to the failure events:
+- `finished_at` for *resolved failures*. ***Required for calculating time to restore***
+- `id` for identifying failures. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
+- `name` to describe the failure.
 - `severity`
-- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][14].
+- `envs` to filter your DORA metrics by environments on the [**DORA Metrics** page][14].
 - `repository_url`
 - `commit_sha`
+- `version`
 
 See the [DORA Metrics API reference documentation][13] for the full spec and additional code samples.
 
@@ -157,16 +157,17 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
     "data": {
       "attributes": {
         "services": ["shopist"],
-        "team": "shopist-devs",
+        "teams": ["shopist-devs"],
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
           "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
           "repository_url": "https://github.com/organization/example-repository"
         },
-        "env": "prod",
+        "envs": ["prod"],
         "name": "Web server is down failing all requests",
-        "severity": "High"
+        "severity": "High",
+        "version"="v1.12.07"
       }
     }
   }
@@ -180,14 +181,14 @@ EOF
 {{< /tabs >}}
 
 ## Calculating change failure rate 
-Change failure rate requires both [deployment data][7] and [incident data](#selecting-an-incident-data-source).
+Change failure rate requires both [deployment data][7] and [failure data](#selecting-and-configuring-a-failure-data-source).
 
-Change failure rate is calculated as the percentage of incident events out of the total number of deployments. Datadog divides `dora.incidents.count` over `dora.deployments.count` for the same services and/or teams associated to both an failure and a deployment event. 
+Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `failure.count` over `deployment.count` for the same services and/or teams associated to both a failure and a deployment event. 
 
 ## Calculating time to restore 
-Time to restore is calculated as the duration distribution for *resolved incident* events.
+Time to restore is calculated as the duration distribution for *resolved failures* events.
 
-DORA Metrics generates the `dora.time_to_restore` metric by recording the start and end times of each incident event. It calculates the mean time to restore (MTTR) as the average of these `dora.time_to_restore` data points over a selected time frame. 
+DORA Metrics generates the `time_to_restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `time_to_restore` data points over a selected time frame. 
 
 ## Further Reading
 

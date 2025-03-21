@@ -51,7 +51,7 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-To start configuring data sources to send deployment and incident events to Datadog, see the [Setup documentation][2].
+To start configuring data sources to send deployment and failure events to Datadog, see the [Setup documentation][2].
 
 ## Analyze DORA Metrics
 
@@ -65,7 +65,7 @@ Click **View Deployments** to open a side panel with the Deployment Frequency an
 
 {{< img src="dora_metrics/deployments_2.png" alt="The Deployments Breakdown side panel on the DORA Metrics page displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 
-Click **View Failures** to open a side panel with the Change Failure Rate and Mean Time To Restore (MTTR) metrics in addition to a list of failure events.
+Click **View Failures** to open a side panel with the Change Failure Rate and Time To Restore metrics in addition to a list of failure events.
 
 {{< img src="dora_metrics/failures_2.png" alt="The Failures Breakdown side panel on the DORA Metrics page displaying a breakdown of metrics and a list of related events" style="width:100%;" >}}
 

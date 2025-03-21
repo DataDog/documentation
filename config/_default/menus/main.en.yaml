@@ -4759,7 +4759,7 @@ menu:
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_deployments
       weight: 101
-    - name: Incident Data Sources
+    - name: Failure Data Sources
       url: dora_metrics/setup/failures/
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_incidents
