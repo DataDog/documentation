@@ -82,7 +82,7 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
 
 You can enable APM by installing the Agent with either:
 
@@ -98,7 +98,7 @@ You can enable APM by installing the Agent with either:
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. For instructions on how to restrict Single Step Instrumentation to specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
@@ -281,64 +281,124 @@ Available versions are listed in source repositories for each language:
 
 {{% tab "Kubernetes (Preview)" %}}
 
-### Enabling or disabling instrumentation for namespaces
+### Enabling or disabling instrumentation for namespaces and pods
 
-You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
+By default, Single Step Instrumentation will instrument all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
-The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+Each target block has the following keys:
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+- `name`: The name of the target block. 
 
-To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-agent.yaml`:
+  **Note:** `name`` has no effect on the actual state of your monitoring and is used only as metadata.
 
-{{< highlight yaml "hl_lines=5-7" >}}
-   features:
-     apm:
-       instrumentation:
-         enabled: true
-         enabledNamespaces: # Add namespaces to instrument
-           - default
-           - applications
-{{< /highlight >}}
+- selector type (default: all services in all namespaces in your cluster)
+  
+  - `namespaceSelector`: The namespace(s) to instrument, specified by using one of the following:
+     
+     - `matchNames`: One or more namespace names.
+     - `matchLabels`: One or more namespace labels.
 
-To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-agent.yaml`:
+  - `podSelector`: The pod(s) to instrument. Pods are selected based on labels under `matchLabels`.
 
-{{< highlight yaml "hl_lines=5-7" >}}
-   features:
-     apm:
-       instrumentation:
-         enabled: true
-         disabledNamespaces: # Add namespaces to not instrument
-           - default
-           - applications
+- `ddTraceVersions`: The Datadog APM SDK version you want to use, for example:
+
+  - `java: default`: Java services will be instrumented with the default APM Java trace SDK version.
+  - `python: "3.1.0"`: Python services will be instrumented with v3.1.0 of APM Python trace SDK version.
+
+- `ddTraceConfigs`: APM SDK configs that allow you to set Unified Service Tags, enable Datadog products other than distributed tracing, and set other Datadog APM configs. See the full list of options [here][40].
+
+The file you need to configure depends on how you enabled Single Step Instrumentation:
+- If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
+- If you enabled SSI with Helm, edit `datadog-values.yaml`.
+
+Review the following examples demonstrating how to select specific services:
+
+{{< collapse-content title="Enabling all namespaces except one selected namespace" level="h4" >}}
+
+This configuration enables APM for all namespaces except the `jenkins` namespace. It instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
+
+{{< highlight yaml "hl_lines=4-10" >}}
+   apm:  
+   instrumentation:  
+      enabled: true  
+      disabledNamespaces:  
+         - "jenkins"  
+      targets:  
+         - name: "all-remaining-services"  
+           ddTraceVersions:  
+             java: "default"  
+             python: "3.1.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h4" >}}
+{{< collapse-content title="Instrument one namespace using `matchNames`" level="h4" >}}
 
-To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-values.yaml`:
+This configuration:
+- enables APM for services in the `login-service` namespace only.
+- instructs Datadog to instrument all services in `login-service` with the default version of Java APM SDK.
+- sets several Datadog environment and application variables.
 
-{{< highlight yaml "hl_lines=5-7" >}}
-   datadog:
-      apm:
-        instrumentation:
-          enabled: true
-          enabledNamespaces: # Add namespaces to instrument
-             - namespace_1
-             - namespace_2
+{{< highlight yaml "hl_lines=4-17" >}}
+   apm:
+   instrumentation:
+      enabled: true
+   targets:
+      - name: "login-service_namespace"
+         namespaceSelector:
+           matchNames:
+             - "login-service"
+         ddTraceVersions:
+           java: "default"
+         ddTraceConfigs:
+           - name: "DD_SERVICE"
+             value: "login-service"
+           - name: "DD_ENV"
+             value: "prod"
+           - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
+             value: "auto"
 {{< /highlight >}}
 
-To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-values.yaml`:
+{{< /collapse-content >}}
 
-{{< highlight yaml "hl_lines=5-7" >}}
-   datadog:
-      apm:
-        instrumentation:
-          enabled: true
-          disabledNamespaces: # Add namespaces to not instrument
-            - namespace_1
-            - namespace_2
+{{< collapse-content title="Instrument a subset of namespaces using `matchNames` and `matchLabels`" level="h4" >}}
+
+This configuration:
+- enables APM for services in the `login-service` and `billing-service` namespaces only.
+- instructs Datadog to:
+  - instrument services in `login-service` with the default version of the Java APM SDK.
+  - instrument services in `billing-service` with `v3.1.0` of the Python APM SDK. 
+- sets several Datadog environment and application variables.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+   instrumentation:
+      enabled: true
+   targets:
+      - name: "login-service_namespace"
+         namespaceSelector:
+         matchNames:
+             - "login-service"
+         ddTraceVersions:
+           java: "default"
+         ddTraceConfigs:
+           - name: "DD_SERVICE"
+             value: "login-service"
+           - name: "DD_ENV"
+             value: "prod"
+           - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
+             value: "auto"
+      - name: "billing-service_apps"
+         namespaceSelector:
+           matchLabels:
+             app: "billing-service"
+         ddTraceVersions:
+           python: "3.1.0"
+         ddTraceConfigs:
+           - name: "DD_SERVICE"
+             value: "billing-service"
+           - name: "DD_ENV"
+             value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -487,6 +547,7 @@ For instructions on changing your container registry, see [Changing Your Contain
 [37]: https://github.com/DataDog/dd-trace-dotnet/releases
 [38]: https://github.com/DataDog/dd-trace-rb/releases
 [39]: https://github.com/DataDog/dd-trace-php/releases
+[40]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
 {{< /tabs >}}
