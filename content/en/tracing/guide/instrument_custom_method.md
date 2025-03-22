@@ -179,6 +179,8 @@ end
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
+  If you are using [version 2.x of the Go Tracer][2], follow the import instructions marked with `2.x`.
+
 ```go
 package ledger
 
@@ -221,6 +223,8 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 ```
 
 [1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[2]: /tracing/trace_collection/custom_instrumentation/go/migration
+
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

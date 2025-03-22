@@ -20,7 +20,7 @@ further_reading:
 
 ## Imports
  
-Import the following packages to setup the Datadog trace provider and use cases demonstrated below:
+Import the following packages to setup the Datadog trace provider and use cases demonstrated below. If you are using [version 2.x of the Go Tracer][18], follow the import instructions marked with `2.x`.
 
 ```go
 import (
@@ -212,3 +212,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
 [17]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events
+[18]: /tracing/trace_collection/custom_instrumentation/go/migration

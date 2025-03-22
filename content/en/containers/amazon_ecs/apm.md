@@ -214,7 +214,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly:
+You can alternatively update your code to have the tracer set the hostname explicitly. If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
 
 ```go
 package main
@@ -240,6 +240,8 @@ func main() {
     //...
 }
 ```
+
+[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 

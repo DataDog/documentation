@@ -28,7 +28,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Go ap
 
 For other scenarios, including applications in containers or on cloud infrastructure, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go. If you are using [version 2.x of the Go Tracer][18], use the instructions marked with `2.x`.
 
 ### Prerequisites
 
@@ -402,3 +402,4 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=Go
 [16]: /tracing/trace_collection/compatibility/go/#library-compatibility
 [17]: /getting_started/tagging/unified_service_tagging/
+[18]: /tracing/trace_collection/custom_instrumentation/go/migration

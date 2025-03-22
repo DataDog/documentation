@@ -277,6 +277,8 @@ end
 
 {{< programming-lang lang="go" >}}
 
+If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+
 ```go
 package main
 
@@ -290,6 +292,7 @@ func main() {
     defer tracer.Stop()
 }
 ```
+[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 
