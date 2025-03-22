@@ -11841,7 +11841,10 @@ components:
       properties:
         rawSchema:
           description: Schema from user input in base64 encoding.
+          example: b3BlbmFwaTogMy4wLjQKaW5mbzoKICB0aXRsZTogU2FtcGxlIEFQSQogIHZlcnNpb246IDAuMS45Cg==
           type: string
+      required:
+      - rawSchema
       type: object
     EntityResponseIncludedRelatedEntity:
       description: Included related entity.
@@ -11862,9 +11865,11 @@ components:
       properties:
         kind:
           description: Entity kind.
+          example: team
           type: string
         name:
           description: Entity name.
+          example: bits-ai
           type: string
         namespace:
           description: Entity namespace.
@@ -11872,6 +11877,9 @@ components:
         type:
           description: Entity relation type to the associated entity.
           type: string
+      required:
+      - kind
+      - name
       type: object
     EntityResponseIncludedRelatedEntityMeta:
       description: Included related entity meta.
@@ -11909,7 +11917,10 @@ components:
           type: string
         title:
           description: Incident title.
+          example: fake-incident-title
           type: string
+      required:
+      - title
       type: object
     EntityResponseIncludedRelatedOncallAttributes:
       description: Included related oncall attributes.
@@ -11918,7 +11929,10 @@ components:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedOncallEscalations'
         provider:
           description: Oncall provider.
+          example: pagerduty
           type: string
+      required:
+      - provider
       type: object
     EntityResponseIncludedRelatedOncallEscalationItem:
       description: Oncall escalation.
@@ -11956,6 +11970,8 @@ components:
       properties:
         schema:
           $ref: '#/components/schemas/EntityV3'
+      required:
+      - schema
       type: object
     EntityResponseMeta:
       description: Entity metadata.
@@ -12362,7 +12378,7 @@ components:
       properties:
         name:
           description: Team name.
-          example: ''
+          example: fake-team-name
           type: string
         type:
           description: Team type.
