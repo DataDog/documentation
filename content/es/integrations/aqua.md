@@ -34,7 +34,7 @@ draft: false
 git_integration_title: aqua
 integration_id: aqua
 integration_title: Aqua
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 manifest_version: 2.0.0
 name: aqua

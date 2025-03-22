@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - synthetics
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: 학습 센터
@@ -9,15 +12,21 @@ further_reading:
 - link: /synthetics/multistep
   tag: 설명서
   text: 멀티스텝 API 테스트에 대해 자세히 알아보기
+- link: /synthetics/mobile_app_testing
+  tag: 설명서
+  text: 모바일 테스트에 대해 알아보기
 - link: /synthetics/browser_tests
   tag: 설명서
   text: 브라우저 테스트 알아보기
 - link: /synthetics/private_locations
   tag: 설명서
   text: 프라이빗 위치 자세히 알아보기
-- link: /synthetics/cicd_integrations
+- link: /continuous_testing/cicd_integrations
   tag: 설명서
   text: CI 파이프라인에서 신서틱 테스트 실행하는 방법 알아보기
+- link: https://dtdg.co/fe
+  tag: 기초 구축
+  text: 대화형 세션에 참여하여 synthetic 테스트 역량을 강화하세요.
 title: 신서틱(Synthetic) 모니터링 시작하기
 ---
 
@@ -29,11 +38,11 @@ title: 신서틱(Synthetic) 모니터링 시작하기
 
 ## 신서틱 테스트 유형
 
-Datadog는 **API 테스트**, **멀티스텝 API 테스트**, **브라우저 테스트**를 지원합니다.
+Datadog은 **API 테스트**, **다단계 API 테스트**, **브라우저 테스트**, **모바일 테스트**를 제공합니다.
 
-내부용 애플리케이션을 모니터링하려면 관리형 위치나 프라이빗 위치에서 테스트를 실행하세요. 신서틱 테스트는 직접 트리거하거나 스케줄에 맞추어 실행할 수 있습니다. CI/CD 파이프라인에서 바로 실행하기도 가능합니다.
+내부용 애플리케이션을 모니터링하려면 관리되는 위치 또는 프라이빗 위치에서 테스트를 실행하세요. 합성(Synthetic) 테스트는 수동으로, 일정에 따라 또는 [CI/CD 파이프라인에서 직접][7] 트리거할 수 있습니다.
 
-## 전제 조건
+## 사전 필수 조건
 
 계정이 없다면 [Datadog 계정][1]을 만드세요.
 
@@ -44,6 +53,7 @@ Datadog는 **API 테스트**, **멀티스텝 API 테스트**, **브라우저 테
 - [API 테스트를 생성][2]해 API 엔드포인트의 업타임을 모니터링하세요.
 - [멀티스텝 API 테스트를 생성][3]해 여러 HTTP 요청을 연결하고, API 수준에서 주요 작업 흐름을 모니터링하세요.
 - [브라우저 테스트를 생성][4]해 애플리케이션에서 수행하는 주요 비즈니스 트랜잭션을 테스트하세요.
+- Android 및 iOS 애플리케이션에서 주요 비즈니스 워크플로 테스트를 시작하려면 [모바일 테스트를 생성하세요][6].
 - [프라이빗 위치를 생성][5]해 모든 신서틱 테스트 유형을 활용하여 내부 애플리케이션을 모니터링하세요.
 
 ## 참고 자료
@@ -55,3 +65,5 @@ Datadog는 **API 테스트**, **멀티스텝 API 테스트**, **브라우저 테
 [3]: /ko/getting_started/synthetics/api_test/#create-a-multistep-api-test
 [4]: /ko/getting_started/synthetics/browser_test/
 [5]: /ko/getting_started/synthetics/private_location/
+[6]: /ko/getting_started/synthetics/mobile_app_testing/
+[7]: /ko/getting_started/continuous_testing/

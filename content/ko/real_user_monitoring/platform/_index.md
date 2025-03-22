@@ -26,10 +26,6 @@ RUM 애플리케이션에 대한 데이터 수집을 시작하면 Datadog 플랫
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="RUM 기반 커스텀 메트릭 생성" width="80%" >}}
 
-## RUM과 트레이스 연결 
-[RUM 및 트레이스를 연결][4]하여 프런트엔드 요청을 해당 백엔드 트레이스에 연결하고 스택의 모든 위치에서 문제를 찾아냅니다.
-
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM 및 트레이스" style="width:100%;">}}
 
 ## 참고 자료
 
@@ -38,4 +34,3 @@ RUM 애플리케이션에 대한 데이터 수집을 시작하면 Datadog 플랫
 [1]: /ko/real_user_monitoring/platform/dashboards
 [2]: /ko/monitors/types/real_user_monitoring/
 [3]: /ko/real_user_monitoring/platform/generate_metrics
-[4]: /ko/real_user_monitoring/platform/connect_rum_and_traces

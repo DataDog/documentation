@@ -26,7 +26,8 @@ author:
 categories:
 - 보안
 - 설정 및 배포
-- cog-2
+- ㅊ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cert_manager/README.md
 display_on_public_website: true
@@ -34,9 +35,8 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 4.1.0
+integration_version: 5.3.0
 is_public: true
-custom_kind: 통합
 manifest_version: 2.0.0
 name: cert_manager
 public_title: cert-manager
@@ -54,6 +54,7 @@ tile:
   - Category::Security
   - Category::Configuration & Deployment
   - Category::Containers
+  - 제공::통합
   configuration: README.md#Setup
   description: Datadog를 사용해 모든 cert-manager 메트릭을 추적하세요.
   media: []
@@ -80,17 +81,17 @@ tile:
 cert_manager 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있습니다.
 서버에서 추가 설치가 필요하지 않습니다.
 
-### 설정
+### 구성
 
 1. 에이전트의 설정 디렉터리 루트에 있는 `conf.d/` 폴더에서 `cert_manager.d/conf.yaml` 파일을 편집하여 cert_manager 성능 데이터를 수집하기 시작합니다. 사용 가능한 모든 설정 옵션은 [샘플 cert_manager.d/conf.yaml][4]을 참조하세요.
 
-2. [에이전트를 재시작합니다][5].
+2. [Agent를 재시작합니다][5].
 
 ### 검증
 
 [에이전트의 상태 하위 명령을 실행하고][6] 점검 섹션에서 `cert_manager`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "cert_manager" >}}
@@ -100,7 +101,7 @@ cert_manager 점검은 [Datadog 에이전트][3] 패키지에 포함되어 있�
 
 cert_manager 통합은 이벤트를 포함하지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 {{< get-service-checks-from-git "cert_manager" >}}
 
 
