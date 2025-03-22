@@ -192,6 +192,16 @@ To confirm that the setup is valid, select your GitHub application in the [GitHu
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 
+{{% tab "GitLab" %}}
+<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+
+After your organization has access, follow the [GitLab installation guide][1].
+
+**Note**: The scope of the service account's personal access token needs to be at least `read_api`.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -222,10 +232,11 @@ If the source code of multiple services is present in the same repository, furth
 
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
-If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
 
 **Example (schema version v2.2):**
-
+{{< tabs >}}
+{{% tab "GitHub" %}}
 ```yaml
 links:
   - name: shopist
@@ -233,6 +244,17 @@ links:
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
+{{% /tab %}}
+{{% tab "GitLab" %}}
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: gitlab
+    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
@@ -252,13 +274,13 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 ### Limitations
 
-- Change lead time stage breakdown metrics are only available for GitHub.
+- Change lead time stage breakdown metrics are only available for GitHub and GitLab.
 - Change lead time is not available for the first deployment of a service that includes Git information.
 - The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
-  - For GitHub: Metrics are emitted for the original commits.
-  - For other git providers: Metrics are emitted for the new commit added to the target branch.
+  - For GitHub and GitLab: Metrics are emitted for the original commits.
+  - For other Git providers: Metrics are emitted for the new commit added to the target branch.
 
 ## Calculating change failure rate
 
@@ -275,3 +297,4 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 [5]: /tracing/software_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
 [7]: /dora_metrics/data_collected
+[8]: https://www.datadoghq.com/support/
