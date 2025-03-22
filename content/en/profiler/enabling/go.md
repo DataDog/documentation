@@ -31,6 +31,8 @@ Continuous Profiler is not supported on some serverless platforms, such as AWS L
 
 ## Installation
 
+The Go Tracer v2 is in Preview! For more information and to upgrade, see the [migration guide][25]. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`. The profiler has not changed between versions v1 and v2.
+
 To begin profiling applications:
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][19].
@@ -38,16 +40,16 @@ To begin profiling applications:
 2. Get `dd-trace-go` using the command:
 
     ```shell
-    go get gopkg.in/DataDog/dd-trace-go.v1/profiler # v1
-    # go get github.com/DataDog/dd-trace-go/v2/profiler # v2
+    go get gopkg.in/DataDog/dd-trace-go.v1/profiler # 1.x
+    # go get github.com/DataDog/dd-trace-go/v2/profiler # 2.x
     ```
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
-3. Import the [profiler][6] ([or profiler v2][21]) at the start of your application:
+3. Import the [profiler][6] (or [profiler in v2][21]) at the start of your application:
 
     ```go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/profiler" // 2.x
+    // import "github.com/DataDog/dd-trace-go/v2/profiler" // 2.x
     ```
 
 4. Add the following snippet to start the profiler:
@@ -163,3 +165,4 @@ The [Getting Started with Profiler][17] guide takes a sample service with a perf
 [22]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#WithProfileTypes
 [23]:https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/profiler#ProfileType
 [24]: https://go.dev/doc/devel/release
+[25]: /tracing/trace_collection/custom_instrumentation/go/migration
