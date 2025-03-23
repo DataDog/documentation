@@ -182,6 +182,14 @@ export default {
       ap1: 'browser-intake-ap1-datadoghq.com',
       gov: 'browser-intake-ddog-gov.com'
     },
+    aws_integration_dd_account_id: {
+      us: '464622532012',
+      us3: '464622532012',
+      us5: '464622532012',
+      eu: '464622532012',
+      ap1: '417141415827',
+      gov: '065115117704'
+    },
     aws_region: {
       us: 'us-east-1',
       us3: 'N/A',
