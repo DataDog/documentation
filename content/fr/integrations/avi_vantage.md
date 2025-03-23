@@ -82,7 +82,7 @@ Avi Vantage n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-[1]: https://avinetworks.com/why-avi/multi-cloud-load-balancing/
+[1]: https://www.vmware.com/products/cloud-infrastructure/avi-load-balancer
 [2]: https://docs.datadoghq.com/fr/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/avi_vantage/datadog_checks/avi_vantage/data/conf.yaml.example

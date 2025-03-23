@@ -218,5 +218,5 @@ Salt Formula には Salt の状態が事前に記述されています。Datadog
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://docs.datadoghq.com/ja/integrations/directory/
 [4]: https://github.com/DataDog/datadog-formula/blob/master/pillar.example
-[5]: https://docs.saltstack.com/en/latest/ref/configuration/master.html#pillar-merge-lists
+[5]: https://docs.saltproject.io/en/latest/ref/configuration/master.html#pillar-merge-lists
 [6]: https://github.com/DataDog/datadog-formula
