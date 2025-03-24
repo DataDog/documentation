@@ -37,7 +37,7 @@ This information is particularly valuable when:
 
 ### Prerequisites
 - Set up [Datadog APM][6] to capture spans and view them in the Traces Explorer.
-- Service must meet the Compatibility Requirements below.
+- Service must meet the [Compatibility Requirements](#compatibility-requirements) below.
 - (Recommended) For the best experience, enable [Source Code Integration][7] to see Code Origin application code previews.
 
 ### Compatibility requirements
@@ -140,7 +140,7 @@ DD_TRACE_CODE_ORIGINS_ENABLED=true
 If you don't see Code Origin information:
 
 1. Verify that Code Origins is enabled in your tracing library configuration.
-2. Ensure your tracing library version supports Code Origins.
+2. Confirm all [Compatibility Requirements](#compatibility-requirements) are met.
 3. Note that Code Origin information is only available on entry spans for most services.
 4. Code Origins does not support third-party code.
 5. Enable [Source Code Integration][7] to see the application code preview in the Code Origin section of the APM Trace details.
