@@ -33,7 +33,7 @@ The time range appears on the top right of the Explorer as a timeline. This feat
 ### Sorting
 
 Order issues in the list using one of these options:
--   **Relevance** combines multiple issue features by relevance. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they were triggered by an application crash. This option prioritizes code related, recent, or spiking issues.
+-   **Relevance** combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
 -   **Count** sorts issues based on the total count of occurrences over the selected time range.
 -   **Newest** orders issues by when they were first seen.
 -   **Impacted Sessions** sorts issues by the number of impacted [RUM sessions][4].
