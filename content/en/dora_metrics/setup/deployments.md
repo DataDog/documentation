@@ -57,12 +57,15 @@ For more information about ensuring service deployments that are tracked by APM 
 
 To send your own deployment events, use the [DORA Metrics API][21] or the [`datadog-ci dora deployment`][22] command.
 
-**The following attributes are required:**
-- `started_at`: The time the deployment started.
-- `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+### Requirements
 
-You can optionally add the following attributes to the failure events:
+- datadog-ci CLI / API is enabled as a Deployment events data source in DORA settings.
+- The following attributes are required:
+  - `started_at`: The time the deployment started.
+  - `finished_at`: The time the deployment finished.
+  - `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+
+You can optionally add the following attributes to the deployment events:
 
 - `repository_url`: The source code repository of the service. ***Required for calculating change lead time***
 - `commit_sha`: The SHA of the HEAD commit associated with the deployment. ***Required for calculating change lead time***

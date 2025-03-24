@@ -44,6 +44,8 @@ Failed deployment events, currently interpreted through failure events, are used
 
 To integrate your PagerDuty account with DORA Metrics: 
 
+1. Enable PagerDuty as a failure data source in DORA metrics settings. 
+
 1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
 1. Click **+ New Webhook** and enter the following details:
@@ -126,10 +128,12 @@ To send your own failure events, use the [DORA Metrics API][13]. Failure events 
 
 Include the `finished_at` attribute in a failure event to mark that the failure is resolved. You can send events at the start of the failure and after it has been resolved. Failure events are matched by the `env`, `service` and `started_at` attributes.
 
-**The following attributes are required:**
+### Requirements
 
-- `services` or `teams` (at least one must be present)
-- `started_at`
+- datadog-ci CLI / API is enabled as a failure events data source in DORA settings.
+- The following attributes are required:
+  - `services` or `teams` (at least one must be present)
+  - `started_at`
 
 You can optionally add the following attributes to the failure events:
 - `finished_at` for *resolved failures*. ***Required for calculating time to restore***
