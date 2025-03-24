@@ -73,6 +73,16 @@ To confirm that the setup is valid, select your GitHub App in the [GitHub integr
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 
+{{% tab "GitLab" %}}
+<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+
+After your organization has access, follow the [GitLab installation guide][1].
+
+**Note**: The scope of the service account's personal access token needs to be at least `read_api`.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -102,9 +112,12 @@ To correctly understand the code changes that a deployment has introduced, only 
 
 This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
-If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
 
 **Example (schema version v2.2):**
+
+{{< tabs >}}
+{{% tab "GitHub" %}}
 
 ```yaml
 links:
@@ -113,6 +126,21 @@ links:
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
+
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: gitlab
+    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
 
