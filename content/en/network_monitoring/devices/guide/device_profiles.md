@@ -12,18 +12,18 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Device Profile onboarding is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">SNMP Profile Manager is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/easily-onboard-and-start-monitoring-network-devices-to-datadog/" >}}
-  Device Onboarding is in Preview. Use this form to request access.
+  SNMP Profile Manager is in Preview. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
 
 Device profiles define which metrics to collect and how to transform them into Datadog metrics. Each [profile][2] is expected to monitor a class of similar devices from the same vendor. 
 
-The Device profiles template provides a guided, GUI-based experience to:
+The SNMP Profile Manager template provides a guided, GUI-based experience to:
 - Seamlessly create and manage device profiles.
 - Specify tags and metrics to be collected from your network devices. 
 - Verify the matching devices to each profile.
@@ -40,7 +40,7 @@ The minimum Agent version required is `7.65` or higher.
 ### Step 1: Profile details
 
   1. Build your own NDM profile by navigating to [Infrastructure > Network Devices > Configuration][1]. 
-  2. Click on **Device Onboarding > + Create New Profile**. This brings you to the profile creation page shown below.
+  2. Click on **SNMP Profile Manager > + Create New Profile**. This brings you to the profile creation page shown below.
      {{< img src="/network_device_monitoring/profile_onboarding/create_profile_3.png" alt="The Network Device profile creation page" style="width:100%;">}}
 
   3. Provide your device profile a name and description (optional).
