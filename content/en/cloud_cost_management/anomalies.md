@@ -54,6 +54,6 @@ As you investigate anomalies, you may find anomalies that are not significant, w
 
 Mark anomalies as significant or insignificant to give feedback and help improve the anomaly detection algorithm. Resolve anomalies with context to move anomalies to the Resolved tab, and add context for others in your organization.
 
-Here a screenshot on how you can mark cost anomaly as significant and write an explanation about why it's an anomaly:
+This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:90%;" >}}
