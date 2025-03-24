@@ -74,21 +74,40 @@ To add a template variable to widget queries:
 
 ### Create
 
-Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
+1. Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
+1. To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. 
+1. Enter a unique name for the view with an optional description
+1. Click **Save**. 
 
-{{< img src="dashboards/template_variables/saved_views_dropdown_options.png" alt="Saved views dropdown options to set selected template variables as the default view or a saved view" style="width:90%;" >}}
-
-To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**. 
+{{< img src="/dashboards/template_variables/saved_view_create.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
 
 Your saved view appears in the dropdown menu. Click on the view to retrieve your previously saved template variable values.
 
 ### Delete
 
-To delete a view, click on the saved views dropdown menu and choose **Manage views...**. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
+1. Click on the saved views dropdown menu and hover over the desired saved view. 
+1. Click **Delete View**.
 
 ### Modify
 
-To modify the **Default view**, click on the pencil icon and update the template variable values. Then click **Done** to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
+The **Default view** can only be edited by changing the default values of the template variables. To edit the Default View:
+1. Hover over the templates
+1. Click **Edit** when the button appears. 
+1. Click **Done** to save.
+
+To modify template variables values for other saved views:
+1. Select the desired saved view from the dropdown menu.
+1. Edit the template variables to have the new desired models.
+1. Open the dropdown menu again.
+1. Click **Save Changes**. 
+
+{{< img src="/dashboards/template_variables/saved_views_update_template_variable.png" alt="Modify the template variables of your saved views" style="width:100%;" >}}
+
+To edit the title and description:
+1. Hover over the desired saved view from the dropdown menu.
+1. Click **Edit**.
+1. Modify the title or description.
+1. Click **Save**.
 
 ## Usage
 
