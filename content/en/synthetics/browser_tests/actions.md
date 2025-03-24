@@ -174,35 +174,25 @@ Create this assertion step to test the number of HTTP requests made to a specifi
 
 </br>
 
-### Navigation
+### Interactions
 
-{{< img src="synthetics/browser_tests/navigation_step.png" alt="Choose between three navigation types in a browser test recording" style="width:60%;" >}}
+In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. 
+
+{{< img src="synthetics/browser_tests/browser_interaction.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
 #### Refresh a page
 
 Create this navigation step to have your browser test refresh the current page of the recording.
 
-#### Go to an email and click on a link
+#### Click on email link
 
-Once you have [created an email variable][4], create this navigation step to have your browser test access unique Synthetic mail inboxes.
+After you have [created an email variable][4], create this navigation step to have your browser test access unique Synthetic mail inboxes.
 
 Select the email and links you want the browser test to click on. This step brings you to the corresponding page and allows you to move on with the rest of your journey from that specific page.
 
-#### Follow a specific link
+#### Navigate to link
 
 Create this navigation step to have your browser test go to a specific page. You must prepend your URLs with `http` or `https` in the **Enter link URL** box.
-
-### Special actions
-
-You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
-
-Create this assertion step manually by clicking **Special Actions** and selecting an action type.
-
-#### Hover
-
-This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
-
-Select **Hover** and click on an element to add a step.
 
 #### Press key
 
@@ -219,6 +209,12 @@ To press keys that are not automatically recorded, specify the values that need 
  Select `Alt`, `Control`, `Meta`, and `Shift` modifiers to add to the inputted value.
 
 {{< img src="synthetics/browser_tests/browser_test_press_key.png" alt="Press Key step in a browser test recording" style="width:50%;" >}}
+
+#### Hover on element
+
+This step uses a dedicated click, not a hovering mechanism, to avoid generating a separate step every time a user hovers over an element during recording.
+
+Select **Hover** and click on an element to add a step.
 
 #### Scroll
 
@@ -239,6 +235,81 @@ If you know that a page or page element takes more than 60 seconds to load, you 
 {{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
 
 This additional time is systematically added to **every run** of your browser test's recording.
+
+#### HTTP requests
+
+You can run HTTP requests as part of your browser tests.
+
+{{< img src="synthetics/browser_tests/http_request_3.png" alt="HTTP Request step" style="width:70%;" >}}
+
+#### Set up
+
+To define your HTTP request:
+
+1. Select **Interaction**, then **Run HTTP Test**. Enter the URL you wish to test.
+2. Optionally, specify **Advanced Options**:
+   
+   {{< tabs >}}
+
+   {{% tab "Request Options" %}}
+
+   * **Follow redirects**: Click to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Click to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+   {{% /tab %}}
+
+   {{% tab "Authentication" %}}
+
+   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
+   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
+   * **Digest Auth**: Add Digest authentication credentials. 
+   * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
+   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
+   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password)
+
+   {{% /tab %}}
+
+   {{% tab "Query Parameters" %}}
+
+   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
+
+   {{% /tab %}}
+
+   {{% tab "Request Body" %}}
+
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
+
+   {{% /tab %}}
+
+   {{% tab "Proxy" %}}
+
+   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
+
+   {{% /tab %}}
+  
+   {{% tab "Privacy" %}}
+
+   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
+
+[1]: /data_security/synthetics
+   {{% /tab %}}
+
+   {{< /tabs >}}
+   </br>
+
+3. Click **Send** to try out the request configuration. A response preview appears.
+
+{{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Make HTTP Request" style="width:80%;" >}}
+
+### Special actions
+
+You can use the [Datadog browser test recorder extension][3] to record and monitor most steps associated with user journeys. However, the extension does not automatically record some steps such as **Hover**, **Press Key**, **Scroll**, and **Wait**.
+
+Create this assertion step manually by clicking **Special Actions** and selecting an action type.
 
 ### Variables
 
@@ -347,72 +418,6 @@ In order to override variables from subtests in parent tests, ensure the variabl
 For more information about advanced options for subtests, see [Advanced Options for Browser Test Steps][9].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][10].
-
-### HTTP requests
-
-You can run HTTP requests as part of your browser tests.
-
-{{< img src="synthetics/browser_tests/http_request_2.png" alt="HTTP Request step" style="width:70%;" >}}
-
-#### Set up
-
-To define your HTTP request:
-
-1. Select a **Method** and **URL** to query. Choose between `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`.
-2. Optionally, specify **Advanced Options**:
-   
-   {{< tabs >}}
-
-   {{% tab "Request Options" %}}
-
-   * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
-
-   {{% /tab %}}
-
-   {{% tab "Authentication" %}}
-
-   * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
-   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-
-   {{% /tab %}}
-
-   {{% tab "Query Parameters" %}}
-
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
-
-   {{% /tab %}}
-
-   {{% tab "Request Body" %}}
-
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
-
-   {{% /tab %}}
-
-   {{% tab "Proxy" %}}
-
-   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
-
-   {{% /tab %}}
-  
-   {{% tab "Privacy" %}}
-
-   * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
-
-[1]: /data_security/synthetics
-   {{% /tab %}}
-
-   {{< /tabs >}}
-   </br>
-3. Click **Test URL** to try out the request configuration. A response preview appears.
-
-{{< img src="synthetics/browser_tests/http_request2.png" alt="Make HTTP Request" style="width:80%;" >}}
 
 #### Add assertions
 
