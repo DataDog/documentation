@@ -108,7 +108,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-### Trace a command in GitHub Actions
+## Trace a command in GitHub Actions
 
 If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
 the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
@@ -137,7 +137,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         - run: datadog-ci trace ...
     ```
 
-## Create custom spans
+## Trace multiple commands
 
 It is possible to trace multiple commands at once by manually specifying the start and end timestamps (or the duration).
 
@@ -167,6 +167,18 @@ These options are available for the `datadog-ci span` command:
 `--name`
 : Display name of the custom span.<br/>
 **Example**: `Build Step`
+
+`--start-time`
+: Timestamp in milliseconds representing the start time of the span.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
+
+`--end-time`
+: Timestamp in milliseconds representing the end time of the span.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
+
+`--duration`
+: Duration amount as a number of milliseconds. Using this, the end time is the current time when executing this command.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
 
 `--tags`
 : Key-value pairs in the form `key:value` to be attached to the custom span (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
