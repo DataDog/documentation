@@ -38,7 +38,9 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
-2. Select the export scope located next to the search filter. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+2. Select the export scope located next to the search filter. 
+    
+   **Note:** The scope must be **billing account**, **subscription**, or **resource group**.
 3. After the scope is selected, click **Schedule export**.
 
    {{< img src="cloud_cost/azure_exports_page.png" alt="In Azure portal highlighting the export scope and schedule button" style="width:100%" >}}
@@ -53,9 +55,9 @@ You need to generate exports for two data types: **actual** and **amortized**. D
       - Unsupported versions: `2019-10-01`
     {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" style="width:100%" >}}
 
-6. Enter an "Export prefix" for the new exports. For example, enter "datadog" to avoid conflicts with existing exports.
+6. Enter an "Export prefix" for the new exports. For example, enter `datadog` to avoid conflicts with existing exports.
 
-7. Click "Edit" on each export and confirm the following details:
+7. Click **Edit** on each export and confirm the following details:
     - Frequency: **Daily export of month-to-date costs**
     - Dataset version:
       - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
@@ -76,7 +78,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
    {{< img src="cloud_cost/improved_export_destination_2.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}
 
-9. On the **Review + create** tab select **Create**.
+9. On the **Review + create** tab, select **Create**.
 
 For faster processing, generate the first exports manually by clicking **Run Now**.
 
