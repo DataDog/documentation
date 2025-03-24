@@ -33,7 +33,7 @@ This information is particularly valuable when:
 {{< img src="tracing/guide/code_origins/code_origin_details.png" alt="Code Origin Details" style="width:100%;">}}
 
 
-## Getting Started
+## Getting started
 
 ### Prerequisites
 - Set up [Datadog APM][6] to capture spans and view them in the Traces Explorer.
@@ -67,7 +67,7 @@ DDTrace.enableCodeOrigins();
 {{% /tab %}}
 {{% tab "Python" %}}
 
-<div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Python tracing library</a> version 2.15.0 or later is required. Django, Flask, Starlette and derivatives are supported.</div>
+<div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Python tracing library</a> version 2.15.0 or later is required. Django, Flask, and Starlette (and Starlette derivatives) are supported.</div>
 
 ```python
 import ddtrace
@@ -107,7 +107,7 @@ DD_TRACE_CODE_ORIGINS_ENABLED=true
 1. Navigate to the [Trace Explorer][1].
 2. Click on any trace to view its details.
 3. In the span details panel, look for the "Code Origin" section.
-4. Optionally, click on variables referenced the source code to quickly add them as attributes on future spans using [Dynamic Instrumentation][5].
+4. Optionally, click on variables referenced the source code to add them as attributes on future spans using [Dynamic Instrumentation][5].
 
 {{< img src="tracing/guide/code_origins/code_origin_traces_explorer.png" alt="Code Origin in Traces Explorer" style="width:100%;">}}
 
@@ -123,9 +123,9 @@ DD_TRACE_CODE_ORIGINS_ENABLED=true
 
 ## How it works
 
-**Entry spans**: The Code Origin will be the first method in the application code that handles the incoming request. When a given service is being [instrumented][6], we use the metadata available within that particular integration to identify where in the application code incoming requests will first enter the system.
+**Entry spans**: The Code Origin is the first method in the application code that handles the incoming request. When a service is [instrumented][6], we use the APM integration metadata to identify the source code location where incoming requests enter the system.
 
-**Exit spans**: The Code Origin will be the specific line of code that made the outgoing request to a downstream service/component. By examining the call stack, we can identify the line of code where an exit span starts, instrument that line, and decorate the span accordingly. Third-party code is skipped when walking the call stack. 
+**Exit spans**: The Code Origin is the specific line of code that made the outgoing request to a downstream service/component. By examining the call stack, we can identify the line of code where an exit span starts, instrument that line, and decorate the span accordingly. Third-party code is skipped when walking the call stack. 
 
 <div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
 
