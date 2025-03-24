@@ -44,7 +44,7 @@ Investigate the anomaly further, and by any additional dimensions, by viewing th
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
-Here a screenshot of the side panel where you can take action on your cost anomaly:
+This is the side panel where you can take action on your cost anomaly:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel.png" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
 
