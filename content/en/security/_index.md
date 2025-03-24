@@ -110,6 +110,14 @@ CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [
 
 To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
+## Sensitive Data Scanner
+
+[Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
+
+After you [set up Sensitive Data Scanner][25], use the Summary page to see details of sensitive data issues that have been identified, so that you can triage, investigate, and remediate the issues.
+
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -135,3 +143,5 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [21]: /security/code_security/static_analysis/
 [22]: /security/code_security/software_composition_analysis/
 [23]: /security/code_security/iast/
+[24]: /sensitive_data_scanner/
+[25]: /sensitive_data_scanner/setup/

@@ -103,7 +103,6 @@ Other tabs provide additional information for troubleshooting the selected resou
 * [**Logs**][5]: Access logs from your container or resource. Click on any log entry to view the full log details in the Log Explorer.
 * [**Metrics**][6]: View live metrics for your container or resource. You can maximize any graph for full-screen viewing, share a snapshot, or export it from this tab.
 * [**APM**][7]: Access traces from your container or resource, including details such as date, service, duration, method, and status code.
-* **Processes**: See all processes running in the resource's containers.
 * **Network**: View network performance metrics for a container or resource, including source and destination, sent and received volume, and throughput. Use the **Destination** field to filter by tags like `DNS` or `ip_type`, or use the **Group by** filter to group network data by tags, such as `task_name` or `service`.
 * **Monitors**: View monitors that are tagged, scoped, or grouped for this resource.
 
@@ -159,6 +158,7 @@ Some resources have specific tags. The following tags are available in addition 
 | **Service**         | ~15 seconds             | ~24 hours                 |
 | **Container Instance**         | ~24 hours               | ~24 hours                 |
 
+* A newly created ECS Service is typically collected within approximately 15 seconds. However, for status changes in an existing Service, a refresh within 15 seconds is not guaranteed.
 * Installing the Datadog Agent in your cluster enables visibility into task lifecycle changes. Without the Datadog Agent, stopped tasks can appear as running for up to two days.
 * Installing the Datadog Agent in your cluster provides additional, relevant host-level tags, such as `availability_zone`.
 

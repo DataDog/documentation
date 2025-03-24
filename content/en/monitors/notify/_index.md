@@ -27,7 +27,8 @@ Notifications are a key component of monitors that keep your team informed of is
 Use the **Configure notifications and automations** section to:
 - Send notifications to your team through email, Slack, PagerDuty, and other integrations.
 - Trigger a workflow or create a workflow from a monitor.
-- Add a case to your monitor.
+- [Automatically create a case][19].
+- Automatically create an incident.
 
 ### Title
 
@@ -82,6 +83,11 @@ After you add the monitor trigger, [add an existing workflow to your monitor][8]
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][9].
+
+### Incidents 
+Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on **Add Incident** and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][22].
+
+Incidents created from a monitor will inherit its [field values][20] from the monitor's tags. To send automated notifications from incidents, add tags to the monitor so that created incidents match the criteria of [notification rules][21].
 
 ### Priority
 
@@ -215,3 +221,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [16]: /monitors/guide/recovery-thresholds/
 [17]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
 [18]: /monitors/configuration/#set-alert-aggregation
+[19]: /service_management/case_management/create_case/#automatic-case-creation
+[20]: /service_management/incident_management/incident_settings/property_fields
+[21]: /service_management/incident_management/incident_settings/notification_rules
+[22]: https://app.datadoghq.com/incidents/settings?section=global-settings
