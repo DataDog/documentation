@@ -155,6 +155,10 @@ this file, you can update your project definition to generate it. Follow these [
 
 The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
 
+### No results from Datadog-hosted scans for a repository using `git-lfs`
+
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
+
 ## No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
@@ -234,3 +238,5 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
+[18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines

@@ -3,7 +3,7 @@ title: Set Up Application Security Products without using APM
 disable_toc: false
 ---
 
-Datadog ASM [Threat Management][1] and [Code Security][2] are built on top of [APM][3]. While Datadog recommends using these security products with APM and adopting DevSecOps practices, you can also use these security products without using APM. This configuration is referred to as Standalone Application Security. This guide explains how to set up Standalone Application Security. 
+Datadog ASM [Threat Management][1] and [Code Security][2] are built on top of [APM][3]. While Datadog recommends using these security products with APM and adopting DevSecOps practices, you can also use these security products without using APM. This configuration is referred to as Standalone Application Security. This guide explains how to set up Standalone Application Security.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ Standalone Application Security is currently supported for the following tracing
 | Java     | 1.47.0  |
 | Node.js  | 5.40.0  |
 | PHP      | N/A     |
-| Python   | 2.19.0  |
+| Python   | 3.2.0   |
 | Ruby     | N/A     |
 
 ## Setup

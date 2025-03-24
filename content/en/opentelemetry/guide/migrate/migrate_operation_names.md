@@ -13,7 +13,7 @@ When using OpenTelemetry with Datadog, you might see unclear or lengthy operatio
 Datadog now provides new operation name mappings that improve trace visibility in the service page. This feature requires opt-in configuration now but will become the default in the near future.
 
 <div class="alert alert-warning">
-Datadog strongly recommends migrating to the new mappings as soon as possible before they become the default.
+Datadog strongly recommends migrating to the new mappings as soon as possible before they become the default.<br>If you have monitors or dashboards observing operation names, they will be affected by the change. Please update them to observe the new conventions.
 </div>
 
 ## Prerequisites

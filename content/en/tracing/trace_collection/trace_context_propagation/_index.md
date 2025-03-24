@@ -642,7 +642,7 @@ By default, Baggage is automatically propagated through a distributed request us
 [4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [5]: #none-format
 [6]: #language-support
-[7]: /real_user_monitoring/platform/connect_rum_and_traces
+[7]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [8]: /synthetics/platform/apm
 [9]: /opentelemetry/interoperability/environment_variable_support
 [10]: https://www.w3.org/TR/baggage/

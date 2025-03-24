@@ -22,7 +22,7 @@ title: ログに期待されたタイムスタンプが表示されない
 
 ログのタイムスタンプは、ログパネルのトップセクションにあります。タイムスタンプは UTC で保存され、ユーザーのローカルタイムゾーンで表示されます。上記のスクリーンショットでは、ローカルプロファイルが `UTC+1` に設定されているため、ログを受信した時刻は `11:06:16.807 UTC` となります。
 
-The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Preferences][1] and look at the **Time zone** section.
+タイムゾーンが正しく設定されていないため、タイムスタンプが期待通りの値を示さない場合があります。[Preferences][1] の **Time zone** セクションで確認できます。
 
 タイムゾーンが正しい場合、メッセージからタイムスタンプを抽出し、表示されているログのタイムスタンプをオーバーライドします。
 
