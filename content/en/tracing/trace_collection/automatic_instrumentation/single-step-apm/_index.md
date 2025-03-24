@@ -283,9 +283,9 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (with Agent v7.64+)" %}}
+{{% tab "Kubernetes (Agent v7.64+)" %}}
 
-### Enabling or disabling instrumentation for namespaces and pods
+### Configuring instrumentation for namespaces and pods
 
 By default, Single Step Instrumentation will instrument all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
@@ -450,8 +450,69 @@ This configuration:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (with Agent < v7.64)" %}}
+{{% tab "Kubernetes (Agent <=v7.63)" %}}
 
+### Enabling or disabling instrumentation for namespaces
+
+You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
+
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+         enabledNamespaces: # Add namespaces to instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-agent.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+         disabledNamespaces: # Add namespaces to not instrument
+           - default
+           - applications
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          enabledNamespaces: # Add namespaces to instrument
+             - namespace_1
+             - namespace_2
+{{< /highlight >}}
+
+To disable instrumentation for specific namespaces, add `disabledNamespaces` configuration to `datadog-values.yaml`:
+
+{{< highlight yaml "hl_lines=5-7" >}}
+   datadog:
+      apm:
+        instrumentation:
+          enabled: true
+          disabledNamespaces: # Add namespaces to not instrument
+            - namespace_1
+            - namespace_2
+{{< /highlight >}}
+
+{{< /collapse-content >}}
 
 
 ### Specifying tracing library versions
