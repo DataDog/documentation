@@ -58,7 +58,7 @@ Create service definitions for each component you want to add to your Software C
 
 ### Create service definitions through code 
 
-To create a service definition using the Datadog API, Terraform, or a GitHub integration:
+To create a service definition using the [Datadog Service Definition API][8], [Terraform][7], or a [GitHub integration][9]:
 
 1. Create or find `service.datadog.yaml` or `entity.datadog.yaml` (Datadog accepts both file names).
 1. Name your component in the `dd-service` (schema version v2.2 or prior) or `name` (schema version v3.0+) field.
@@ -187,5 +187,6 @@ To populate your Datadog Software Catalog with services from your ServiceNow CMD
 [4]: /api/latest/service-definition/
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [6]: https://docs.datadoghq.com/integrations/github/
-
-
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+[8]: /api/latest/service-definition/
+[9]: /software_catalog/service_definitions/#store-and-edit-definitions-in-github
