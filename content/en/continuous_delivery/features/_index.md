@@ -25,4 +25,5 @@ CD Visibility collects deployment events so that Datadog can identify key metric
 
 {{< whatsnext desc="" >}}
 {{< nextlink href="/continuous_delivery/features/code_changes_detection" >}}Detect code changes between deployments{{< /nextlink >}}
+{{< nextlink href="/continuous_delivery/features/rollbacks_detection" >}}Automatically detect rollbacks{{< /nextlink >}}
 {{< /whatsnext >}}
