@@ -14,7 +14,7 @@ further_reading:
 [Datadog Audit Trail][1] records more than 100 types of audit events from across the Datadog platform. These audit events are categorized into different product categories as event names.
 
 
-{{< account_management/audit_events description="See the [Audit Trail documentation](/account_management/audit_trail/) for more information on setting up and configuring Audit Trail." >}}
+{{< account_management/audit_events additional_info="See the [Audit Trail documentation](/account_management/audit_trail/) for more information on setting up and configuring Audit Trail." >}}
 
 ## Further Reading
 

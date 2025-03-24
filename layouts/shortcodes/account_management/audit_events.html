@@ -1,3 +1,12 @@
+{{/*  
+    Renders audit event tables data in from data/audit_events.json
+
+    Note: 
+    - json file mounted from websites-sources: https://github.com/DataDog/websites-sources/tree/main/data/audit_events.json
+
+    @param additional_info: string - additional information displayed above the audit events tables
+*/}}
+
 <div>
     {{ $audit_events_data := $.Site.Data.audit_events }}
     <h2>Audit Events</h2>
@@ -5,7 +14,7 @@
         {{ $platform_events := slice }}
         {{ $product_events := slice }}
         <div class="col-12 order-1">
-            <p>{{ .Get "description" | markdownify }}</p>
+            <p>{{ .Get "additional_info" | markdownify }}</p>
             {{ with $audit_events_data }}
 
                 {{ range . }}
