@@ -30,7 +30,7 @@ For other scenarios, including the application and Agent on a host, the applicat
 
 This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.  If you are using [version 2.x of the Go Tracer][11], follow the import instructions marked with `2.x`.
 
 ### Prerequisites
 
@@ -472,3 +472,4 @@ If you're not receiving traces as expected, set up debug mode for the Go tracer.
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: https://app.datadoghq.com/apm/traces
 [10]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=go
+[11]: /tracing/trace_collection/custom_instrumentation/go/migration

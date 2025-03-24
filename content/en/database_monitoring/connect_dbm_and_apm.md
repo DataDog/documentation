@@ -110,7 +110,7 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater:
+Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater. If you are using [version 2.x of the Go Tracer][2], follow the import instructions marked with `2.x`.
 ```shell
 go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
 # go get github.com/DataDog/dd-trace-go/v2 # 2.x
@@ -177,6 +177,7 @@ func main() {
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
+[2]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{% /tab %}}
 

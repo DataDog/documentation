@@ -21,6 +21,8 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
+The Go Tracer v2 is in Preview! For more information and to upgrade, see the [migration guide][3]. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`.
+
 ## Manual injection
 
 The Go tracer API allows printing span information along with log statements using the `%v` format specifier:
@@ -52,7 +54,6 @@ The above example illustrates how to use the span's context in the standard libr
 ## Injection into logrus logs
 
 A hook for the logrus package is available to automatically link your log and spans.
-The package is available in the Go tracer.
 
 ```go
 package main
@@ -89,3 +90,4 @@ This automatically injects the trace id to your logs when you log with the conte
 
 [1]: /logs/log_collection/go/#configure-your-logger
 [2]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[3]: /tracing/trace_collection/custom_instrumentation/go/migration

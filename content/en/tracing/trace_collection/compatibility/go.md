@@ -48,7 +48,7 @@ The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_in
 
 #### Framework compatibility
 
-Integrate the Go tracer with the following list of web frameworks using one of the following helper packages.
+Integrate the Go tracer with the following list of web frameworks using one of the following helper packages. Supported frameworks have changed between v1 and v2 of the Go Tracer. To upgrade from v1 to v2 of the tracer and to learn more about the Go Tracer v2 Preview, visit our [migration guide][79].
 
 {{< tabs >}}
 {{% tab "v1" %}}
@@ -88,7 +88,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL][40]               | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql][41]                      |
 | [SQLx][42]              | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx][43]                      |
 | [MongoDB][44]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/go.mongodb.org/mongo-driver/mongo][45] |
-| [MongoDB (mgo)[73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
+| [MongoDB (mgo)][73]      | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/globalsign/mgo][46]                    |
 | [BuntDB][47]            | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/tidwall/buntdb][48]                    |
 | [LevelDB][49]           | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/syndtr/goleveldb/leveldb][50]          |
 | [miekg/dns][51]         | Fully Supported | [gopkg.in/DataDog/dd-trace-go.v1/contrib/miekg/dns][52]                         |
@@ -216,7 +216,7 @@ The Go tracer includes support for the following data stores and libraries.
 | [SQL][40]               | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/database/sql/v2][96]                      |
 | [SQLx][42]              | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/jmoiron/sqlx/v2][97]                      |
 | [MongoDB][44]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/go.mongodb.org/mongo-driver/mongo/v2][98] |
-| [MongoDB (mgo)[73]      | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][99]                    |
+| [MongoDB (mgo)][73]      | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/globalsign/mgo/v2][99]                    |
 | [BuntDB][47]            | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/tidwall/buntdb/v2][100]                    |
 | [LevelDB][49]           | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/syndtr/goleveldb/leveldb/v2][101]          |
 | [miekg/dns][51]         | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/miekg/dns/v2][102]                         |
@@ -319,3 +319,4 @@ import "github.com/DataDog/dd-trace-go/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>/v2"
 [4]: https://www.datadoghq.com/support/
 [77]: /tracing/trace_collection/library_config/go/
 [78]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/?tab=manualinstrumentation#activate-go-integrations-to-create-spans
+[79]: /tracing/trace_collection/custom_instrumentation/go/migration
