@@ -283,7 +283,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (with Agent v7.64+)" %}}
 
 ### Enabling or disabling instrumentation for namespaces and pods
 
@@ -311,95 +311,148 @@ The file you need to configure depends on how you enabled Single Step Instrument
 
 Review the following examples demonstrating how to select specific services:
 
-{{< collapse-content title="Enabling all namespaces except one" level="h4" >}}
+{{< collapse-content title="Example 1: Enable all namespaces except one" level="h4" >}}
 
-This configuration enables APM for all namespaces except the `jenkins` namespace. It instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
+This configuration:
+- enables APM for all namespaces except the `jenkins` namespace. 
+- instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}
    apm:  
-   instrumentation:  
-      enabled: true  
-      disabledNamespaces:  
-         - "jenkins"  
-      targets:  
-         - name: "all-remaining-services"  
-           ddTraceVersions:  
-             java: "default"  
-             python: "3.1.0"
+     instrumentation:  
+       enabled: true  
+     disabledNamespaces:  
+       - "jenkins"  
+     targets:  
+       - name: "all-remaining-services"  
+         ddTraceVersions:  
+           java: "default"  
+            python: "3.1.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Instrument one namespace using `matchNames`" level="h4" >}}
-
-This configuration:
-- enables APM for services in the `login-service` namespace only.
-- instructs Datadog to instrument all services in `login-service` with the default version of Java APM SDK.
-- sets several Datadog environment and application variables.
-
-{{< highlight yaml "hl_lines=4-17" >}}
-   apm:
-   instrumentation:
-      enabled: true
-   targets:
-      - name: "login-service_namespace"
-         namespaceSelector:
-           matchNames:
-             - "login-service"
-         ddTraceVersions:
-           java: "default"
-         ddTraceConfigs:
-           - name: "DD_SERVICE"
-             value: "login-service"
-           - name: "DD_ENV"
-             value: "prod"
-           - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
-             value: "auto"
-{{< /highlight >}}
-
-{{< /collapse-content >}}
-
-{{< collapse-content title="Instrument a subset of namespaces using `matchNames` and `matchLabels`" level="h4" >}}
+{{< collapse-content title="Example 2: Instrument a subset of namespaces, matching on names and labels" level="h4" >}}
 
 This configuration:
 - enables APM for services in the `login-service` and `billing-service` namespaces only.
 - instructs Datadog to:
   - instrument services in `login-service` with the default version of the Java APM SDK.
   - instrument services in `billing-service` with `v3.1.0` of the Python APM SDK. 
-- sets several Datadog environment and application variables.
+- sets several Datadog environment variables to apply to this target.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+  apm:
+    instrumentation:
+      enabled: true
+    targets:
+      - name: "login-service_namespace"
+        namespaceSelector:
+          matchNames:
+            - "login-service"
+        ddTraceVersions:
+          java: "default"
+        ddTraceConfigs:
+          - name: "DD_SERVICE"
+            value: "login-service"
+          - name: "DD_ENV"
+            value: "prod"
+          - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
+            value: "auto"
+      - name: "billing-service_apps"
+        namespaceSelector:
+          matchLabels:
+            app: "billing-service"
+        ddTraceVersions:
+          python: "3.1.0"
+        ddTraceConfigs:
+          - name: "DD_SERVICE"
+            value: "billing-service"
+          - name: "DD_ENV"
+            value: "prod
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 3: Instrument a subset of pods" level="h4" >}}
+
+This configuration:
+- enables APM for pods labeled:
+  - `app:db-user`, which run the `db-user` application.
+  - `webserver:routing`, which run the `request-router` application.
+- instructs Datadog to use the default versions of the Datadog Tracer SDKs.
+- sets several Datadog environment variables to apply to each target group.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
-   instrumentation:
-      enabled: true
-   targets:
-      - name: "login-service_namespace"
-         namespaceSelector:
-         matchNames:
-             - "login-service"
+     instrumentation:
+       enabled: true
+     targets:
+       - name: "db-user"
+         podSelector:
+           matchLabels:
+             app: "db-user"
          ddTraceVersions:
            java: "default"
-         ddTraceConfigs:
+         ddTraceConfigs:   ## trace configs set for services in matching pods
            - name: "DD_SERVICE"
-             value: "login-service"
+             value: "db-user"
            - name: "DD_ENV"
              value: "prod"
-           - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
-             value: "auto"
-      - name: "billing-service_apps"
-         namespaceSelector:
+           - name: "DD_DSM_ENABLED"  
+             value: "true"
+       - name: "user-request-router"
+         podSelector:
            matchLabels:
-             app: "billing-service"
+             webserver: "user"
          ddTraceVersions:
-           python: "3.1.0"
+           php: "default"
          ddTraceConfigs:
            - name: "DD_SERVICE"
-             value: "billing-service"
+             value: "user-request-router"
            - name: "DD_ENV"
              value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
+
+{{< collapse-content title="Example 4: Instrument a pod within a namespace" level="h4" >}}
+
+This configuration:
+- enables APM for pods labeled `app:password-resolver` inside the `login-service` namespace.
+- instructs Datadog to use the default version of the Datadog Java Tracer SDK.
+- sets several Datadog environment variables to apply to this target.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+     instrumentation:
+       enabled: true
+     targets:
+       - name: "login-service-namespace"
+         namespaceSelector:
+           matchNames:
+             - "login-service"
+         podSelector:
+           matchLabels:
+             app: "password-resolver"
+         ddTraceVersions:
+           java: "default"
+         ddTraceConfigs:   
+           - name: "DD_SERVICE"
+             value: "password-resolver"
+           - name: "DD_ENV"
+             value: "prod"
+           - name: "DD_PROFILING_ENABLED"  
+             value: "auto"
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (with Agent < v7.64)" %}}
+
+
 
 ### Specifying tracing library versions
 
