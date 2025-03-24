@@ -53,6 +53,8 @@ Log forwarders consist of an Azure Container Apps job and storage account for lo
 	
 In Azure, a resource's diagnostic settings can only target storage accounts within the same region. As such, the forwarders are spun up in each region where resources with diagnostic settings exist.
 
+See Azure's [Diagnostic settings in Azure Monitor][13] page for more information.
+
 ### Detailed architecture
 
 {{<img src="/logs/guide/azure_automated_logs_architecture/detailed_architecture.png" alt="A detailed representation of the automated log forwarding setup" style="width:100%">}}
@@ -101,3 +103,4 @@ To get help or provide feedback, email [azure-log-forwarding@datadoghq.com][4].
 [10]: https://learn.microsoft.com/azure/azure-monitor/roles-permissions-security#monitoring-contributor
 [11]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/privileged#contributor
 [12]: https://learn.microsoft.com/azure/role-based-access-control/built-in-roles/web-and-mobile#website-contributor
+[13]: https://learn.microsoft.com/azure/azure-monitor/essentials/diagnostic-settings
