@@ -291,23 +291,19 @@ By default, Single Step Instrumentation will instrument all services in all name
 
 Each target block has the following keys:
 
-- `name`: The name of the target block. This has no effect on the state of your monitoring and is used only as metadata.
-- `namespaceSelector`: The namespace(s) to instrument, specified by using one of the following:
-   
-   - `matchNames`: One or more namespace names.
-   - `matchLabels`: One or more namespace labels.
-
-- `podSelector`: The pod(s) to instrument. Pods are selected based on labels under `matchLabels`.
-- `ddTraceVersions`: The Datadog APM SDK version you want to use, for example:
-
-  - `java: default`: Java services will be instrumented with the default APM Java trace SDK version.
-  - `python: "3.1.0"`: Python services will be instrumented with v3.1.0 of APM Python trace SDK version.
-
-- `ddTraceConfigs`: APM SDK configs that allow you to set Unified Service Tags, enable Datadog products other than distributed tracing, and set other Datadog APM configs. See the full list of options [here][40].
+| Key             | Description |
+|------------------|-------------|
+| `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
+| `namespaceSelector` | The namespace(s) to instrument. Specify using either:<br> - `matchNames`: One or more namespace name(s). <br> - `matchLabels`: One or more namespace label(s). |
+| `podSelector`     | The pod(s) to instrument. Specify using: <br> - `matchLabels`: One or more pod label(s). |
+| `ddTraceVersions` | The Datadog APM SDK version to use for each language. |
+| `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
 - If you enabled SSI with Helm, edit `datadog-values.yaml`.
+
+#### Example configurations
 
 Review the following examples demonstrating how to select specific services:
 
@@ -447,6 +443,8 @@ This configuration:
 {{< /highlight >}}
 
 {{< /collapse-content >}}
+
+[1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
 
@@ -659,7 +657,6 @@ For instructions on changing your container registry, see [Changing Your Contain
 [37]: https://github.com/DataDog/dd-trace-dotnet/releases
 [38]: https://github.com/DataDog/dd-trace-rb/releases
 [39]: https://github.com/DataDog/dd-trace-php/releases
-[40]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
 {{< /tabs >}}
