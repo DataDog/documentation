@@ -20,37 +20,46 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Configure notifications and automations** section.
-
-## Configure notifications and automations
-
-Use the **Configure notifications and automations** section to:
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], configure your response to:
 - Send notifications to your team through email, Slack, PagerDuty, and other integrations.
 - Trigger a workflow or create a workflow from a monitor.
 - [Automatically create a case][19].
 - Automatically create an incident.
 
-### Title
+## Constructing effectice titles and messages
 
-Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
+This approach helps ensure your monitor titles and messages are clear, actionable, and tailored to your audience's needs.
+- **Unique titles**: Add a unique title to your monitor (this is required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. You can use [tag variables][2] to enhance specificity.
+- **Message field**: The message field supports standard [Markdown formatting][3] and [variables][4]. Use [conditional variables][5] to modulate the notification text sent to different contacts with [@notifications](#notifications).
 
-### Message
-
-The message field allows standard [Markdown formatting][3] and [variables][4]. Use [conditional variables][5] to modulate the notification text sent to different contacts with [@notifications](#notifications).
-
+{{% collapse-content title="Example monitor message" level="h4" expanded=false %}}
 A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
 
 ```text
-Steps to free up disk space:
+{{#is_alert}} <-- conditional variable
+
+Steps to free up disk space on {{host.name}}: <-- tag variable
+
 1. Remove unused packages
 2. Clear APT cache
 3. Uninstall unnecessary applications
 4. Remove duplicate files
+
+@slack-incident-response <-- channel to send notification
+
+{{/is_alert}}
+
 ```
 
-### Notifications
 
-Use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
+{{% /collapse-content %}}
+
+Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][2].
+
+## Notification recipients
+<div class="alert alert-info">Datadog recommends using <a href="/monitors/notify/notification_rules">Notification rules</a> as part of your monitoring strategy. </div>
+
+Use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
 
 **Note**: An `@notification` must have a space between it and the last line character, for example:
 
