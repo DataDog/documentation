@@ -76,7 +76,7 @@ To add a template variable to widget queries:
 
 1. Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
 1. To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. 
-1. Enter a unique name for the view with an optional description
+1. Enter a unique name for the view with an optional description.
 1. Click **Save**. 
 
 {{< img src="/dashboards/template_variables/saved_view_create.png" alt="Create saved views by selecting save selections as view" style="width:100%;" >}}
@@ -91,7 +91,7 @@ Your saved view appears in the dropdown menu. Click on the view to retrieve your
 ### Modify
 
 The **Default view** can only be edited by changing the default values of the template variables. To edit the Default View:
-1. Hover over the templates
+1. Hover over the templates.
 1. Click **Edit** when the button appears. 
 1. Click **Done** to save.
 
