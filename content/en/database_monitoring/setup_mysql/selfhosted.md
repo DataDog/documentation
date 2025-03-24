@@ -143,7 +143,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][14] section below for more info on how to grant the agent permissions for this collection.
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][14] section below for more info on how to grant the Agent permissions for this collection.
 
 
 ### Runtime setup consumers
