@@ -226,6 +226,23 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 
 You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
 
+### Remote configuration
+
+To perform remote configuration, you use the Datadog UI to modify application settings without having to instrument any code. You can configure the following sampling rates, privacy settings, and attributes:
+
+- Session sampling rate
+- Session Replay sampling rate
+- Session Replay privacy setting
+- Action name privacy setting
+- Environment
+- Service name
+
+1. Go to your RUM application from the [Application Management][1] list.
+1. On the Instrument your application page, modify the desired configuration settings.
+1. Click **Save Changes**.
+
+### Non-remote configuration  
+
 {{< tabs >}}
 {{% tab "NGINX" %}}
 
