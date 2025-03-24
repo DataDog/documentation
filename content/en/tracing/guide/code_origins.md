@@ -30,23 +30,29 @@ This information is particularly valuable when:
 - Identifying hot spots in your application
 - Onboarding new team members to your codebase
 
-<div class="alert alert-info">Code Origin information is only available for entry spans on most services.</div>
-
 {{< img src="tracing/guide/code_origins/code_origin_details.png" alt="Code Origin Details" style="width:100%;">}}
 
-## Enable Code Origins
 
-You can configure Code Origins behavior through environment variables or library configuration:
+## Getting Started
+
+### Prerequisites
+- Set up [Datadog APM][6] to capture spans and view them in the Traces Explorer.
+- Service must meet the Compatibility Requirements below.
+- (Recommended) For the best experience, enable [Source Code Integration][7] to see Code Origin application code previews.
+
+### Compatibility requirements
+
+| Runtime Language | Tracing Library Version | Frameworks |
+|---|---|---|
+| Java | `1.47.0` or later | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers (entry spans only)|
+| Python | `2.15.0` or later | Django, Flask, Starlette and derivatives (entry spans only)|
+| Node.js | `4.49.0` or later | Fastify (supports both entry & exit spans), All other [APM-supported integrations][8] (support exit spans only)|
+
+### Enable Code Origins
+
+You can enable Code Origins through environment variables or Datadog tracing library configuration:
 
 {{< tabs >}}
-{{% tab "Environment Variables" %}}
-
-```bash
-# Enable/disable Code Origins
-DD_TRACE_CODE_ORIGINS_ENABLED=true
-```
-
-{{% /tab %}}
 {{% tab "Java" %}}
 
 <div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Java tracing library</a> version 1.47.0 or later is required. Spring Boot/Data, gRPC servers, Micronaut 4, and Kafka consumers are supported.</div>
@@ -83,6 +89,14 @@ tracer.enableCodeOrigins();
 ```
 
 {{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```bash
+# Enable/disable Code Origins
+DD_TRACE_CODE_ORIGINS_ENABLED=true
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -107,7 +121,15 @@ tracer.enableCodeOrigins();
 
 {{< img src="tracing/guide/code_origins/code_origin_ide_details.png" alt="Code Origin Details in IDE" style="width:100%;">}}
 
-## Performance and Pricing Impact
+## How it works
+
+**Entry spans**: The Code Origin will be the first method in the application code that handles the incoming request. When a given service is being [instrumented][6], we use the metadata available within that particular integration to identify where in the application code incoming requests will first enter the system.
+
+**Exit spans**: The Code Origin will be the specific line of code that made the outgoing request to a downstream service/component. By examining the call stack, we can identify the line of code where an exit span starts, instrument that line, and decorate the span accordingly. Third-party code is skipped when walking the call stack. 
+
+<div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
+
+## Impact on performance and billing
 
 **Performance Impact**: Code Origins has negligible performance overhead that is virtually unnoticeable in production environments.
 
@@ -120,6 +142,8 @@ If you don't see Code Origin information:
 1. Verify that Code Origins is enabled in your tracing library configuration.
 2. Ensure your tracing library version supports Code Origins.
 3. Note that Code Origin information is only available on entry spans for most services.
+4. Code Origins does not support third-party code.
+5. Enable [Source Code Integration][7] to see the application code preview in the Code Origin section of the APM Trace details.
 
 ## Further Reading
 
@@ -130,3 +154,6 @@ If you don't see Code Origin information:
 [3]: /tracing/services/resource_page/ 
 [4]: /developers/ide_plugins/
 [5]: /dynamic_instrumentation/
+[6]: /tracing/trace_collection/
+[7]: /integrations/guide/source-code-integration/
+[8]: /tracing/trace_collection/compatibility/nodejs#web-framework-compatibility
