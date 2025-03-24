@@ -143,6 +143,8 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][12] section below for more info on how to grant the agent permissions for this collection.
+
 ### Runtime setup consumers
 With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
@@ -367,3 +369,4 @@ If you have installed and configured the integrations and Agent as described and
 [9]: /database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
 [11]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[12]: /database_monitoring/setup_mysql/rds?tab=mysql57#collecting-schemas

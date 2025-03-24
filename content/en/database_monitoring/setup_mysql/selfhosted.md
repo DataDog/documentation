@@ -143,20 +143,7 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. **Note**: Schemas are only collected for tables where the Agent has `SELECT` access.
-To grant `SELECT` permissions to the Datadog user, use one of the following commands:
-- **Per table basis**:
-    ```sql
-    GRANT SELECT ON [database name].[table name] TO datadog@'%';
-    ```
-- **Per database basis**:
-    ```sql
-    GRANT SELECT ON [database name].* TO datadog@'%';
-    ```
-- **All databases**:
-    ```sql
-    GRANT SELECT ON *.* TO datadog@'%';
-    ```
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][14] section below for more info on how to grant the agent permissions for this collection.
 
 
 ### Runtime setup consumers
@@ -319,3 +306,4 @@ If you have installed and configured the integrations and Agent as described and
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
 [13]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[14]: /database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas
