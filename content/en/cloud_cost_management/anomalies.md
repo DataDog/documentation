@@ -32,7 +32,7 @@ Each anomaly explains how much more costs were than expected for the service nam
 
 Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
-Here a screenshot of the list of anomalies detected in your infrastructure:
+This is an example of the list of anomalies detected in your infrastructure:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
