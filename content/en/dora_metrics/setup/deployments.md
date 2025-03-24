@@ -41,9 +41,9 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 ### Requirements
 
+- APM Deployment Tracking is enabled as a Deployment events data source in DORA settings.
 - Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
-- APM Deployment Tracking is enabled as a Deployment events data source in DORA settings.
 
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [change lead time requirements](#requirements-for-calculating-change-lead-time).
 
@@ -59,7 +59,7 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a Deployment events data source in DORA settings.
+- datadog-ci CLI / API is enabled as a deployment events data source in DORA settings.
 - The following attributes are required:
   - `started_at`: The time the deployment started.
   - `finished_at`: The time the deployment finished.

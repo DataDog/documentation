@@ -101,7 +101,6 @@ Querying at the commit level provides a more accurate view of engineering perfor
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `deployment.git.commit_sha`     | string | The SHA of the HEAD commit for the deployment. |
 | `deployment.id`                 | string | Unique ID of the deployment. If not provided, one will be randomly generated. |
-| `deployment.id`                 | string | Unique ID of the deployment. If not provided, one will be randomly generated. |
 
 ### Commit metrics
 
