@@ -1,0 +1,58 @@
+<div>
+    {{ $audit_events_data := $.Site.Data.audit_events }}
+    <h2>Audit Events</h2>
+    <div class="d-flex flex-column">
+        {{ $platform_events := slice }}
+        {{ $product_events := slice }}
+        <div class="col-12 order-1">
+            <p>{{ .Get "description" | markdownify }}</p>
+            {{ with $audit_events_data }}
+
+                {{ range . }}
+                    {{ if .IsProduct }}
+                        {{ $product_events = $product_events | append . }}  
+                    {{ else }}
+                        {{ $platform_events = $platform_events | append . }}
+                    {{ end }}
+                    <h3 id="{{ .Name | urlize }}">{{ .Name | title }}</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description of Audit Event</th>
+                                <th>Query In Audit Explorer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range .Events }}
+                                <tr>
+                                    <td><a href="{{ .Link }}">{{ .Name }}</a></td>
+                                    <!-- convert description text with brackets into hyperlinks -->
+                                    {{ $description_link := (printf "<a href='%s'>$1</a>" .DescriptionLink) }}
+                                    <td>{{ (replaceRE `\[(.+)\]` $description_link .Description) | safeHTML }}</td>
+                                    <td><code>{{ .Query }}</code></td>
+                                </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                {{ end }}
+            {{ end }}
+        </div>
+        <div class="col-12">
+            <h4>Platform Events</h4>
+            <ul>
+                {{ range $platform_events }}
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name }}</a></li>
+                {{ end }}
+            </ul>
+            <h4>Product-Specific Events</h4>
+            <ul>
+                {{ range $product_events }}
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
