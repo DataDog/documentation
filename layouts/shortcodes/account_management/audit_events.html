@@ -42,13 +42,13 @@
             <h4>Platform Events</h4>
             <ul>
                 {{ range $platform_events }}
-                    <li><a href="#{{ .Name | urlize }}">{{ .Name }}</a></li>
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
                 {{ end }}
             </ul>
             <h4>Product-Specific Events</h4>
             <ul>
                 {{ range $product_events }}
-                    <li><a href="#{{ .Name | urlize }}">{{ .Name }}</a></li>
+                    <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
                 {{ end }}
             </ul>
         </div>
