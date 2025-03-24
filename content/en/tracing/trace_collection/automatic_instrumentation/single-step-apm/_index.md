@@ -98,7 +98,9 @@ You can enable APM by installing the Agent with either:
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. For instructions on how to restrict Single Step Instrumentation to specific namespace or pods, see [Advanced options](#advanced-options).
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+
+**Note:** For instructions on how to restrict Single Step Instrumentation to specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
@@ -149,7 +151,9 @@ To enable Single Step Instrumentation with the Datadog Operator:
 {{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+
+**Note:** For instructions on how to restrict Single Step Instrumentation to specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with Helm:
 
@@ -279,7 +283,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
 
 ### Enabling or disabling instrumentation for namespaces and pods
 
@@ -287,19 +291,13 @@ By default, Single Step Instrumentation will instrument all services in all name
 
 Each target block has the following keys:
 
-- `name`: The name of the target block. 
+- `name`: The name of the target block. This has no effect on the state of your monitoring and is used only as metadata.
+- `namespaceSelector`: The namespace(s) to instrument, specified by using one of the following:
+   
+   - `matchNames`: One or more namespace names.
+   - `matchLabels`: One or more namespace labels.
 
-  **Note:** `name`` has no effect on the actual state of your monitoring and is used only as metadata.
-
-- selector type (default: all services in all namespaces in your cluster)
-  
-  - `namespaceSelector`: The namespace(s) to instrument, specified by using one of the following:
-     
-     - `matchNames`: One or more namespace names.
-     - `matchLabels`: One or more namespace labels.
-
-  - `podSelector`: The pod(s) to instrument. Pods are selected based on labels under `matchLabels`.
-
+- `podSelector`: The pod(s) to instrument. Pods are selected based on labels under `matchLabels`.
 - `ddTraceVersions`: The Datadog APM SDK version you want to use, for example:
 
   - `java: default`: Java services will be instrumented with the default APM Java trace SDK version.
@@ -313,7 +311,7 @@ The file you need to configure depends on how you enabled Single Step Instrument
 
 Review the following examples demonstrating how to select specific services:
 
-{{< collapse-content title="Enabling all namespaces except one selected namespace" level="h4" >}}
+{{< collapse-content title="Enabling all namespaces except one" level="h4" >}}
 
 This configuration enables APM for all namespaces except the `jenkins` namespace. It instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
 
