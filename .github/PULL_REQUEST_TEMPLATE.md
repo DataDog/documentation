@@ -13,7 +13,6 @@ If the PR is ready to be merged once it receives the required reviews, check the
 Merge readiness:
 - [ ] Ready for merge
 
-**For internal Datadog contributors**:
 Merge queue is enabled in this repo. Your branch name MUST follow the `<name>/<description>` convention and include the forward slash (`/`). Without this format, your pull request will not pass in CI, the GitLab pipeline will not run, and you won't get a branch preview. Getting a branch preview makes it easier for us to check any issues with your PR, such as broken links.
 
 If your branch doesn't follow this format, rename it or create a new branch and PR.
