@@ -19,7 +19,7 @@ The Datadog Agent can automatically assign tags to metrics, traces, and logs emi
 
 ## Out-of-the-box tags
 
-The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
+The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1]. [Tag Cardinality][4] can impact billing as different cardinality settings impact the number of emitted metrics.
 
 <div style="overflow-x: auto;">
 
@@ -978,3 +978,4 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 [1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /account_management/billing/custom_metrics
+[4]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
