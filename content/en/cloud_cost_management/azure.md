@@ -36,7 +36,7 @@ Navigate to [Setup & Configuration][3] and select an Azure account from the menu
 
 You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Navigate to [Cost Management | Configuration][5] under Azure portal's *Tools > Cost Management > Settings > Configuration* and click on *Exports*.
+1. Navigate to [Cost Management | Configuration][5] under Azure portal's **Tools** > **Cost Management** > **Settings** > **Configuration** and click **Exports**.
   {{< img src="cloud_cost/azure_export_path.png" alt="In Azure portal highlighting Exports option in navigation" style="width:100%" >}}
 2. Select the export scope located next to the search filter. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. After the scope is selected, click **Schedule export**.
