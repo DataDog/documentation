@@ -139,7 +139,7 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
 
 ## Create custom spans
 
-It is possible to create custom spans to trace CI steps.
+It is possible to trace multiple commands at once by manually specifying the start and end timestamps (or the duration).
 
 {{< code-block lang="shell" >}}
 datadog-ci span [--name <name>] [--start-time <timestamp-ms>] [--end-time <timestamp-ms>] # [--duration <duration-ms>] can be used instead of start / end time
