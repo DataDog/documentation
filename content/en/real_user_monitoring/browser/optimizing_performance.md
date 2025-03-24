@@ -18,11 +18,11 @@ further_reading:
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/optimization-workflow.mp4" alt="RUM Performance Optimization helps you find the root cause of browser performance issues based on real user traffic." video="true" >}}
 
-The Optimization page helps identify the root cause of browser performance issues using real user traffic data. Here, you can troubleshoot browser metrics such as [Core Web Vitals][1] (CWV), [Loading Time][2] to determine the causes of slow pages, with all relevant information in one place.
+The Optimization page helps to identify the root cause of browser performance issues using real user traffic data. Troubleshoot the causes of slow pages using browser metrics such as [Core Web Vitals][1] (CWV) and [Loading Time][2].
 
 ## Prerequisites
 
-To optimize your application effectively, ensure you are using:
+To optimize your application, ensure you are using:
 
 - [RUM Browser SDK][3] version 5.4.0 or newer
 - [Session Replay][4] for at least some sessions
