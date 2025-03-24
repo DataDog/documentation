@@ -11809,9 +11809,15 @@ components:
           description: Incident ID.
           type: string
         type:
-          description: Incident description.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedIncidentType'
       type: object
+    EntityResponseIncludedIncidentType:
+      description: Incident description.
+      enum:
+      - incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
     EntityResponseIncludedOncall:
       description: Included oncall.
       properties:
@@ -11821,9 +11827,15 @@ components:
           description: Oncall ID.
           type: string
         type:
-          description: Oncall type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedOncallType'
       type: object
+    EntityResponseIncludedOncallType:
+      description: Oncall type.
+      enum:
+      - oncall
+      type: string
+      x-enum-varnames:
+      - ONCALL
     EntityResponseIncludedRawSchema:
       description: Included raw schema.
       properties:
@@ -11833,8 +11845,7 @@ components:
           description: Raw schema ID.
           type: string
         type:
-          description: Raw schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRawSchemaType'
       type: object
     EntityResponseIncludedRawSchemaAttributes:
       description: Included raw schema attributes.
@@ -11843,6 +11854,13 @@ components:
           description: Schema from user input in base64 encoding.
           type: string
       type: object
+    EntityResponseIncludedRawSchemaType:
+      description: Raw schema type.
+      enum:
+      - rawSchema
+      type: string
+      x-enum-varnames:
+      - RAW_SCHEMA
     EntityResponseIncludedRelatedEntity:
       description: Included related entity.
       properties:
@@ -11854,8 +11872,7 @@ components:
         meta:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityMeta'
         type:
-          description: Related entity.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityType'
       type: object
     EntityResponseIncludedRelatedEntityAttributes:
       description: Related entity attributes.
@@ -11891,6 +11908,13 @@ components:
           description: Entity relation source.
           type: string
       type: object
+    EntityResponseIncludedRelatedEntityType:
+      description: Related entity.
+      enum:
+      - relatedEntity
+      type: string
+      x-enum-varnames:
+      - RELATED_ENTITY
     EntityResponseIncludedRelatedIncidentAttributes:
       description: Incident attributes.
       properties:
@@ -11948,8 +11972,7 @@ components:
           description: Entity ID.
           type: string
         type:
-          description: Schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedSchemaType'
       type: object
     EntityResponseIncludedSchemaAttributes:
       description: Included schema.
@@ -11957,6 +11980,13 @@ components:
         schema:
           $ref: '#/components/schemas/EntityV3'
       type: object
+    EntityResponseIncludedSchemaType:
+      description: Schema type.
+      enum:
+      - schema
+      type: string
+      x-enum-varnames:
+      - SCHEMA
     EntityResponseMeta:
       description: Entity metadata.
       properties:
