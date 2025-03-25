@@ -13,7 +13,7 @@ The following instrumentation types are available:
 
 ### Prerequisites
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries. If you are using [version 2.x of the Go Tracer][10], follow the import instructions marked with `2.x`. Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
+To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries. {{% tracing-go-v2 %}} Data Streams Monitoring has not been changed between v1 and v2 of the tracer.
 
 * [Datadog Agent v7.34.0 or later][1]
 * [dd-trace-go v1.56.1 or later][2]

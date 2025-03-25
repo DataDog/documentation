@@ -185,7 +185,7 @@ if __name__ == "__main__":
 
 ## Compatibility requirements
 
-The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries. If you are using [version 2.x of the Go Tracer][24], follow the import instructions marked with `2.x`. OpenTelemetry support has not changed between v1 and v2 of the Go Tracer.
+The Datadog SDK for Go supports library instrumentations written using the [Opentelemetry-Go Trace API][21], including the [`opentelemetry-go-contrib/instrumentation`][22] libraries. {{% tracing-go-v2 %}} OpenTelemetry support has not changed between v1 and v2 of the Go Tracer.
 
 ## Setup
 

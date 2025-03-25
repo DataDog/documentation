@@ -28,7 +28,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Go ap
 
 For other scenarios, including the application and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go. If you are using [version 2.x of the Go Tracer][18], follow the import instructions marked with `2.x`.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go. {{% tracing-go-v2 %}}
 
 ### Prerequisites
 

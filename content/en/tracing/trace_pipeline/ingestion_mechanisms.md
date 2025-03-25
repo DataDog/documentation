@@ -450,7 +450,7 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+{{% tracing-go-v2 %}}
 
 Manually keep a trace:
 

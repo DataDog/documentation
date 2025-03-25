@@ -179,7 +179,7 @@ end
 
   This example creates a new span for every transaction posted to the ledger and adds a [custom tag][1] with the specific transaction ID to the span.
 
-  If you are using [version 2.x of the Go Tracer][2], follow the import instructions marked with `2.x`.
+  {{% tracing-go-v2 %}}
 
 ```go
 package ledger

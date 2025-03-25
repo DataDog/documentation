@@ -20,7 +20,7 @@ further_reading:
 
 ## Imports
  
-Import the following packages to setup the Datadog trace provider and use cases demonstrated below. If you are using [version 2.x of the Go Tracer][18], follow the import instructions marked with `2.x`.
+Import the following packages to setup the Datadog trace provider and use cases demonstrated below. {{% tracing-go-v2 %}}
 
 ```go
 import (

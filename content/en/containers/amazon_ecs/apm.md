@@ -214,7 +214,7 @@ Update the Task Definition's `entryPoint` with the following, substituting your 
 ```
 
 #### Code
-You can alternatively update your code to have the tracer set the hostname explicitly. If you are using [version 2.x of the Go Tracer][1], follow the import instructions marked with `2.x`.
+You can alternatively update your code to have the tracer set the hostname explicitly. {{% tracing-go-v2 %}}
 
 ```go
 package main

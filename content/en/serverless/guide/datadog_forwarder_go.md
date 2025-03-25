@@ -33,7 +33,7 @@ go get github.com/DataDog/datadog-lambda-go
 Follow these steps to instrument the function:
 
 1. Set environment variable `DD_FLUSH_TO_LOG` and `DD_TRACE_ENABLED` to `true`.
-2. Import the required packages in the file declaring your Lambda function handler. If you are using [version 2.x of the Go Tracer][8], follow the import instructions marked with `2.x`.
+2. Import the required packages in the file declaring your Lambda function handler. {{% tracing-go-v2 %}}
 
     ```go
     package main
