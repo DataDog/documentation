@@ -8,7 +8,7 @@ further_reading:
   text: "Learn more about custom metrics"
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
-  text: "Best Practice for custom metric Governance"
+  text: "Best practices for custom metrics governance"
 algolia:
   tags: ['custom metrics billing']
 ---
