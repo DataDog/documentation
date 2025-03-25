@@ -49,7 +49,7 @@ Code Origins captures the exact location in your codebase where APM spans are cr
 
 ### Enable Code Origins
 
-You can enable Code Origins through environment variables or Datadog tracing library configuration:
+Enable Code Origins through environment variables or tracing library configuration:
 
 {{< tabs >}}
 {{% tab "Java" %}}
