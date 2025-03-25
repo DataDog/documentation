@@ -72,8 +72,7 @@ Datadog's Vulnerability Management program includes regular assessments of suppo
 
 Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases using [clair by CoreOS][10] and [Trivy][11]. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][12], and additionally, Datadog agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, please see [Report An Issue][13].  For existing customers wishing to submit a vulnerability inquiry on a Datadog product, please reach out to [Datadog Support][14] through your normal standard support process. If submitting a ticket through our website, when creating a new ticket, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
-
+If you believe you've discovered a bug in Datadog's security, see [Report An Issue][13].  To submit a vulnerability inquiry on a specific Datadog product as an existing customer, reach out to [Datadog Support][14] through your standard support process. If submitting a ticket through our website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
 ## Running as an unprivileged user
 
 By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][16]. The exceptions are as follows:
