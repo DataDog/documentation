@@ -382,7 +382,7 @@ This configuration:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 3: Instrument a subset of pods" level="h4" >}}
+{{< collapse-content title="Example 3: Instrument different workloads with different tracers" level="h4" >}}
 
 This configuration:
 - enables APM for pods labeled:
