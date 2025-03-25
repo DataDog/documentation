@@ -1,5 +1,5 @@
 ---
-title: custom metrics Billing
+title: Custom Metrics Billing
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 further_reading:
