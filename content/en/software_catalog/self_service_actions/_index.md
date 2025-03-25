@@ -73,13 +73,23 @@ If you prefer to build an app from the ground up:
 
 ### Publish your app 
 
-Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
+Once your App is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
 - Add the app to a Dashboard or to Self-Service Actions for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     
+
+### Take Actions on Your Entities in Software Catalog
+
+Connect Workflows to entities in Software Catalog through the new Software Catalog workflow trigger. Workflows will automatically have context on the relevant entity that can be used for routing logic in your workflow. These workflows can be used to take common actions like:
+
+- Restart a service
+- Scale up capacity
+- Initiate a new deployment
+
+
 
 ## Further reading
 
