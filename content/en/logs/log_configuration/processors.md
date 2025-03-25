@@ -19,7 +19,7 @@ algolia:
 
 ## Overview
 
-<div class="alert alert-info">The processors outlined in this documentation are specific to cloud-based logging environments. To parse, structure, and enrich on-premises logs, see <a href="/observability_pipelines/processors/">Observability Pipelines.</a></div>
+<div class="alert alert-info">The processors outlined in this documentation are specific to cloud-based logging environments. To parse, structure, and enrich on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/processors/">Observability Pipelines</a>.</div>
 
 A processor executes within a [Pipeline][1] to complete a data-structuring action and generate attributes to enrich your logs.
 
