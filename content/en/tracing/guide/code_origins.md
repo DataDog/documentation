@@ -49,55 +49,12 @@ Code Origins captures the exact location in your codebase where APM spans are cr
 
 ### Enable Code Origins
 
-Enable Code Origins through environment variables or tracing library configuration:
-
-{{< tabs >}}
-{{% tab "Java" %}}
-
-<div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Java tracing library</a> version 1.47.0 or later is required. Spring Boot/Data, gRPC servers, Micronaut 4, and Kafka consumers are supported.</div>
-
-```java
-import datadog.trace.api.DDTrace;
-
-// Enable/disable Code Origins
-DDTrace.enableCodeOrigins();
-```
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-<div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Python tracing library</a> version 2.15.0 or later is required. Django, Flask, and Starlette (and Starlette derivatives) are supported.</div>
-
-```python
-import ddtrace
-
-# Enable/disable Code Origins
-ddtrace.config.code_origins.enabled = True
-```
-
-{{% /tab %}}
-{{% tab "Node.js" %}}
-
-<div class="alert alert-info"><a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/">Node.js tracing library</a> version 4.49.0 or later is required. Both Entry and exit spans are supported on Fastify apps; Only exit spans are supported for all other apps.</div>
-
-```javascript
-const tracer = require('dd-trace').init();
-
-// Enable/disable Code Origins
-tracer.enableCodeOrigins();
-```
-
-{{% /tab %}}
-{{% tab "Environment Variables" %}}
+Run your service with the below environment variable:
 
 ```bash
 # Enable/disable Code Origins
-DD_TRACE_CODE_ORIGINS_ENABLED=true
+DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 
 ## Using Code Origins
 
