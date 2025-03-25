@@ -335,7 +335,7 @@ This configuration:
        - name: "all-remaining-services"  
          ddTraceVersions:  
            java: "default"  
-            python: "3.1.0"
+           python: "3.1.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
