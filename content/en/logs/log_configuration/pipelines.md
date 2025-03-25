@@ -27,9 +27,9 @@ further_reading:
   text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
-<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="/observability_pipelines/set_up_pipelines/">Observability Pipelines.</a></div>
-
 ## Overview
+
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="/observability_pipelines/set_up_pipelines/">Observability Pipelines.</a></div>
 
 Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
