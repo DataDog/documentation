@@ -75,6 +75,9 @@ log.info("Example log line with trace correlation info")
 
 
 Altenative approach: Correlating logs with traces can also be done with unstructured logs using only OpenTelemetry SDK logic in your application.
+
+Note: This approach uses OpenTelemetry-native trace context fields (not `dd.trace_id` or `dd.span_id`), which can still be correlated in Datadog using remappers. See below for details.
+
 ```python
 import logging
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
