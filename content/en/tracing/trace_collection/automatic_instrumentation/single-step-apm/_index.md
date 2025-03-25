@@ -82,7 +82,7 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 You can enable APM by installing the Agent with either:
 
@@ -295,11 +295,11 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent v7.64+)" %}}
+{{% tab "Kubernetes (Agent v7.64+) (Preview)" %}}
 
 ### Configuring instrumentation for namespaces and pods
 
-By default, Single Step Instrumentation will instrument all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
+By default, Single Step Instrumentation instruments all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
 Each target block has the following keys:
 
@@ -308,7 +308,7 @@ Each target block has the following keys:
 | `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
 | `namespaceSelector` | The namespace(s) to instrument. Specify using either:<br> - `matchNames`: One or more namespace name(s). <br> - `matchLabels`: One or more namespace label(s). |
 | `podSelector`     | The pod(s) to instrument. Specify using: <br> - `matchLabels`: One or more pod label(s). |
-| `ddTraceVersions` | The Datadog APM SDK version to use for each language. |
+| `ddTraceVersions` | The [Datadog APM SDK][2] version to use for each language. |
 | `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
@@ -482,10 +482,11 @@ This configuration enables APM for pods that meet the following criteria:
 {{< /collapse-content >}}
 
 [1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent <=v7.63)" %}}
+{{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -727,7 +728,7 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 2. Restart the service.
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 #### Use workload selection (recommended)
 
@@ -783,7 +784,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
