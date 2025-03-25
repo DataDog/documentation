@@ -82,13 +82,12 @@ To learn more about logs injection, read the [ddtrace documentation][6].
 
 ### No standard library logging
 
-If you are not using the standard library `logging` module, you can use the following code snippet to inject tracer information into your logs:
+By default, `ddtrace.trace.tracer.log_correlation` will return `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
 ```python
 from ddtrace import tracer
 
-span = tracer.current_span()
-correlation_ids = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
+log_correlation_dict = tracer.get_log_correlation_context()
 ```
 As an illustration of this approach, the following example defines a function as a *processor* in `structlog` to add tracer fields to the log output:
 
@@ -100,18 +99,7 @@ import structlog
 
 def tracer_injection(logger, log_method, event_dict):
     # get correlation ids from current tracer context
-    span = tracer.current_span()
-    trace_id, span_id = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
-
-    # add ids to structlog event dictionary
-    event_dict['dd.trace_id'] = str(trace_id or 0)
-    event_dict['dd.span_id'] = str(span_id or 0)
-
-    # add the env, service, and version configured for the tracer
-    event_dict['dd.env'] = ddtrace.config.env or ""
-    event_dict['dd.service'] = ddtrace.config.service or ""
-    event_dict['dd.version'] = ddtrace.config.version or ""
-
+    event_dict.update(tracer.get_log_correlation_context())
     return event_dict
 
 structlog.configure(
