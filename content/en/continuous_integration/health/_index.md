@@ -36,7 +36,7 @@ This objective helps you reduce the cost of your CI environment by identifying w
 
 This view highlights the **wasted active jobs time**, which is the sum of durations of jobs that needed retries. In SaaS CI environments, this indicates potential savings in billable time you wouldn't have to pay for if there were no flaky pipelines. 
 
-This measure is also significant for on-premises CI runners, though it may overestimate the impact of pipelines with highly parallelized jobs. For self-hosted CI environments, **wasted runners time** represents the infrastructure cost that you could save without flaky pipelines.
+This measure is also significant for on-premises CI runners, though it may overestimate the impact of pipelines with parallelized jobs. For self-hosted CI environments, **wasted runners time** represents the infrastructure cost that you could save without flaky pipelines.
 
 By default, pipelines are sorted by **wasted active jobs time**, so you can focus on pipelines contributing to your CI cost with the most retries.
 
@@ -65,7 +65,7 @@ The breakdown column identifies several types of time measurements and how they 
    - Apply [Auto Test Retries][7].
    - Optimize notifications so developers know their pipeline failed and may need a retry.
 
-- **Pipeline creation time**:  The time spent creating the pipeline.
+- **Pipeline creation time**: The time spent creating the pipeline.
 - **Queue time**: The time jobs spend waiting for a runner. To reduce this, spin up more runners.
 - **Wait/Approval time**: The time for manual approvals.
 - **Other time**: Uncategorized time contributing to total time to pass.
