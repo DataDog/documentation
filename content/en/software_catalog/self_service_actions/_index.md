@@ -63,6 +63,7 @@ If you prefer to build an app from the ground up:
     1. Save and publish the app.
 
 1. Pair your app with [Actions][7] or a [Workflow][6] to automate processes.
+    1. Backend logic for your App can be handled via direct integrations with third-party tools as shown in the [Actions Catalog][7]. Multiple actions can be chained together with conditional logic using Workflows to orchestrate a multi-step process that involves custom logic, multiple integrations, or approvals. If you prefer to keep backend logic in existing tools that you use, you can kickoff processes through integrations with CI/CD tools (e.g. Github Actions, Gitlab, Azure Pipelines, Jenkins, etc.), functions (e.g. AWS Lambda), or hit internal endpoints with the HTTP action.
 
    {{< img src="tracing/software_catalog/templating-workflow.png" alt="Workflow for building software template automation" style="width:100%;" >}}
 
@@ -79,11 +80,10 @@ Once your App is configured and tested, publish it so your team can use it. The 
 - Add the app to a Dashboard or to Self-Service Actions for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
-    
 
 ### Take Actions on Your Entities in Software Catalog
 
-Connect Workflows to entities in Software Catalog through the new Software Catalog workflow trigger. Workflows will automatically have context on the relevant entity that can be used for routing logic in your workflow. These workflows can be used to take common actions like:
+Connect Workflows to entities in Software Catalog through new Software Catalog workflow trigger. Workflows will automatically have context on the relevant entity that can be used for routing logic in your workflow. These workflows can be used to take common actions like:
 
 - Restart a service
 - Scale up capacity
