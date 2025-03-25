@@ -146,6 +146,7 @@ export function onScroll() {
             sideNavItem.navLink.classList.remove('toc_scrolled');
 
             if (
+                windowTopPosition !== 0 &&
                 sideNavItem.header.getBoundingClientRect().top <= 0 + localOffset &&
                 (typeof nextSideNavItem === 'undefined' ||
                     nextSideNavItem.header.getBoundingClientRect().top > 0 + localOffset)
@@ -245,15 +246,24 @@ window.addEventListener('scroll', () => {
     onScroll();
 });
 
-// Expose the necessary functions to the Markdoc-Hugo integration
-if (!window.markdocBeforeRevealHooks) {
-    window.markdocBeforeRevealHooks = [];
-}
-markdocBeforeRevealHooks.push(buildTOCMap);
-if (!window.markdocAfterRerenderHooks) {
-    window.markdocAfterRerenderHooks = [];
-}
-markdocAfterRerenderHooks.push(buildTOCMap);
-markdocAfterRerenderHooks.push(onScroll);
+// Expose the necessary functions to cdocs
+window.cdocsHooks = {};
+
+const phases = ['beforeReveal', 'afterReveal', 'afterRerender'];
+phases.forEach((phase) => {
+    window.cdocsHooks[phase] = [];
+});
+
+// Update the TOC after the page is initially rendered
+// and before it is revealed
+cdocsHooks.beforeReveal.push(buildTOCMap);
+
+// Update the active header in the TOC after the page is revealed
+cdocsHooks.afterReveal.push(buildTOCMap);
+cdocsHooks.afterReveal.push(onScroll);
+
+// Update the TOC any time the page is re-rendered
+cdocsHooks.afterRerender.push(buildTOCMap);
+cdocsHooks.afterRerender.push(onScroll);
 
 DOMReady(handleAPIPage);
