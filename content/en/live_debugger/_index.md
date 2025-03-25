@@ -20,18 +20,18 @@ further_reading:
 
 ## Overview
 
-Live Debugger enables you to debug your production applications without redeploying code or interrupting service. Built on Datadog's [Dynamic Instrumentation][1] capabilities, Live Debugger allows you to inspect and troubleshoot code behavior in real-time. Start a Debug Session by adding a group of auto-expiring logs and variable snapshots anywhere in your application code. 
+Live Debugger enables you to debug production applications without redeploying code or interrupting service. Built on Datadog's [Dynamic Instrumentation][1] capabilities, Live Debugger allows you to inspect and troubleshoot code behavior in real-time. Start a Debug Session by adding a group of auto-expiring logs and variable snapshots anywhere in your application code. 
 
-Live Debugger offers a non-invasive approach to production debugging, functioning as a "non-breaking breakpoint" that lets you gather vital information from your running applications without halting their execution. This makes it particularly valuable for diagnosing issues in environments where traditional debugging methods are impractical.
+Live Debugger logs function as "non-breaking breakpoints" that gather vital information from running applications without halting their execution. This makes it particularly valuable for diagnosing issues in environments where traditional debugging methods are impractical.
 
 ## Key capabilities
 
 Live Debugger provides the following capabilities:
 
-* **Real-time inspection**: Examine variable states, method arguments, and execution paths in your running production code.
+* **Real-time inspection**: Examine variable states, method arguments, and execution paths in running production code.
 * **Non-invasive debugging**: Collect debugging information without stopping application execution or degrading performance.
 * **Code instrumentation**: Add logs to any location in your code, including third-party libraries.
-* **Auto-expiring logs**: Logs created in Debug Session will expire automatically after a fixed time period (default 60 minutes), to prevent unnecessary data accumulation.
+* **Auto-expiring logs**: Logs created in Debug Sessions expire automatically after a fixed time period (default 60 minutes), preventing unnecessary data accumulation.
 * **Conditional execution**: Configure logs to execute only when specific conditions are met using [expression language][2].
 * **Sensitive data protection**: Built-in [sensitive data scrubbing][3] prevents accidental exposure of personal information, passwords, and secrets.
 
@@ -39,41 +39,41 @@ Live Debugger provides the following capabilities:
 
 ### Prerequisites
 
-1. Live Debugger is built on Datadog's Dynamic Instrumentation technology and requires the [same prerequisites][16].
-2. Create a logs index to store the debugging information ([see instructions here][19]).
+1. Live Debugger requires the [same prerequisites][16] as Dynamic Instrumentation.
+2. Create a logs index to store the debugging information ([see instructions][19]).
 3. (Recommended) Enable [Source Code Integration][20] to view and select specific code locations when adding logs.
 
 ### Setup Live Debugger
 
-To enable Live Debugger on a service, there are two methods:
+Enable Live Debugger on a service using one of these methods:
 
 **One-click enablement (Recommended)**
 - Select the service and environment on the [Live Debugger Settings][18] page.
-- Ensure all prerequisites are met (any unmet requirements will be displayed on the [Settings][18] page).
+- Ensure all prerequisites are met (unmet requirements display on the [Settings][18] page).
 - Enable Live Debugger (and Dynamic Instrumentation simultaneously) by clicking the "Enable" button.
 - One-click enablement does not require the service to be restarted before using Live Debugger.
 - Note:
-    - Only users with eligible permissions will have access to use one-click enablement.
-    - For security, users may be asked to re-authenticate before using one-click enablement. Also, other admin and security contacts in the organization will receive an email notification when a new service and environment have been enabled via one-click enablement.
+    - Only users with eligible permissions have access to use one-click enablement.
+    - For security, users may need to re-authenticate before using one-click enablement. Admin and security contacts in the organization receive an email notification when a new service and environment are enabled via one-click enablement.
 
 **Manual enablement**
 - Select the service and environment on the [Live Debugger Settings][18] page.
-- Ensure all prerequisites are met (unmet requirements are displayed on the [Settings][18] page).
+- Ensure all prerequisites are met (unmet requirements display on the [Settings][18] page).
 - Follow the instructions on the [Settings][18] page to enable Live Debugger (and Dynamic Instrumentation simultaneously).
-- Manual enablement requires that the service is restarted to apply the configuration changes.
+- Manual enablement requires restarting the service before using Live Debugger.
 
 ## Using Live Debugger
 
 ### Creating and using a Debug Session
 
-Debug Sessions allow you to inspect your code at runtime with auto-expiring (time-boxed) log instrumentations. To create and use a Debug Session:
+Debug Sessions let you inspect your code at runtime with auto-expiring log instrumentations. To create and use a Debug Session:
 
 1. From the Live Debugger page, click **Create Debug Session**.
 2. Add the first log instrumentation to start the session.
 3. Add, remove, and modify logs within the session.
-4. Logs within the same session can be added across multiple services.
+4. Add logs within the same session across multiple services.
 
-Debug Sessions automatically expire after 60 minutes. You can also manually disable and re-enable both sessions and individual logs at any time.
+Debug Sessions automatically expire after 60 minutes. You can manually disable and re-enable both sessions and individual logs at any time.
 
 Start Debug Sessions from:
 - Live Debugger page
@@ -81,7 +81,7 @@ Start Debug Sessions from:
 
 ### Creating log instrumentations
 
-Logs are the most common way to debug applications with Live Debugger as they allow you to capture and output variable values during execution:
+Logs capture and output variable values during execution. To add a log for debugging:
 
 1. Go to the [Live Debugger page][14].
 2. Click **Create Debug Session**.
@@ -90,17 +90,19 @@ Logs are the most common way to debug applications with Live Debugger as they al
 5. Optionally enable "Capture Variables" to collect all execution context (this feature is rate-limited to one hit per second).
 6. Optionally define a condition for when the log should be emitted.
 
+Note: Some feature limitations may apply depending on the service's runtime language. Please see the specific Dynamic Instrumentation [runtime language page][17] for more details.
+
 
 ## Protecting sensitive data
 
 Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. To protect this data:
 
 1. Use Dynamic Instrumentation's built-in [sensitive data scrubbing][3] mechanisms.
-4. Use [Sensitive Data Scanner][15] to identify and redact sensitive information based on regular expressions.
+2. Use [Sensitive Data Scanner][15] to identify and redact sensitive information based on regular expressions.
 
 ## Limitations
 
-- Live Debugger is supported for the [same runtime languages][17] as Dynamic Instrumentation.
+- Live Debugger supports the [same runtime languages][17] as Dynamic Instrumentation.
 - Probes with "Capture Variables" enabled are rate-limited to one hit per second.
 - Regular log probes are rate-limited to 5000 executions per second per service instance.
 
