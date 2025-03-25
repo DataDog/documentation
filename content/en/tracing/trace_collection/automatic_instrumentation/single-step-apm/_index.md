@@ -456,6 +456,31 @@ This configuration:
 
 {{< /collapse-content >}}
 
+{{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h4" >}}
+
+This configuration enables APM for pods that meet the following criteria:
+- have the label `inject/ssi: true`
+- do not have either of the labels `app=app1` or `app=app2`
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+     instrumentation:
+       enabled: true
+     targets:
+       - name: "default-target"
+         podSelector:
+           matchLabels:
+             inject/ssi: "true"
+         matchExpressions:
+           - key: app
+             operator: NotIn
+             values:
+             - app1
+             - app2
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
 [1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 
 {{% /tab %}}
@@ -704,7 +729,13 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 
 {{% tab "Kubernetes" %}}
 
-#### Use workload selection to disable instrumentation for specific services
+#### Use workload selection (recommended)
+
+With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+
+#### Disable the Datadog Admission Controller
+
+<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml
