@@ -241,6 +241,12 @@ _Note: Not available when JIT is active on PHP `8.0.0`-`8.1.20` and `8.2.0`-`8.2
 Thrown Exceptions (v0.92+)
 : The number of caught or uncaught exceptions raised by each method, as well as their type.
 
+File I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to files, as well as the amount of bytes read from and written to files.
+
+Socket I/O (in beta, v1.7.2+)
+: The time each method spent reading from and writing to a socket, as well as the amount of bytes read from and written to sockets.
+
 [1]: /profiler/enabling/php/#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="ddprof" >}}

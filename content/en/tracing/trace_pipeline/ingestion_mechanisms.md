@@ -51,7 +51,7 @@ Sampling rate configuration in the Agent is configurable remotely if you are usi
 
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
-@param max_traces_per_second - integer - optional - default: 10
+@param target_traces_per_second - integer - optional - default: 10
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
 
@@ -830,7 +830,7 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [4]: /tracing/glossary/#trace-root-span
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /tracing/trace_pipeline/generate_metrics/
-[7]: /real_user_monitoring/platform/connect_rum_and_traces/
+[7]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [8]: https://github.com/DataDog/browser-sdk/releases/tag/v4.30.0
 [9]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.11.0
 [10]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.13.0
