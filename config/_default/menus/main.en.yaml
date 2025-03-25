@@ -4367,7 +4367,7 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
-    - name: Pipeline Visibility
+    - name: Setup
       url: continuous_integration/pipelines/
       parent: ci
       identifier: pipeline_visibility
