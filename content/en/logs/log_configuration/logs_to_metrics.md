@@ -15,7 +15,7 @@ algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---
 
-<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the<a href="/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a> documentation.</div>
+<div class="alert alert-info">The solutions outlined in this documentation are specific to cloud-based logging environments. To generate metrics from on-premises logs, see the <a href="/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a> documentation.</div>
 
 ## Overview
 
