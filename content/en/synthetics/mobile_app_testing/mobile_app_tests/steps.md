@@ -178,7 +178,6 @@ This action allows you to enable or disable Wi-Fi within your test to monitor ho
 
 {{< img src="mobile_app_testing/test_steps/toggle_wifi.png" alt="Screenshot of the Toggle Wi-Fi interaction step" style="width:60%" >}}
 
-
 #### HTTP requests
 
 You can run HTTP requests as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your to allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
@@ -210,7 +209,7 @@ To define your HTTP request:
    * **Digest Auth**: Add Digest authentication credentials. 
    * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password)
+   * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password).
 
    {{% /tab %}}
 
@@ -246,6 +245,41 @@ To define your HTTP request:
 3. Click **Send** to try out the request configuration. A response preview appears.
 
 {{< img src="mobile_app_testing/test_steps/http_mobile_request.png" alt="Make HTTP Request" style="width:80%;" >}}
+
+##### Add assertions
+
+Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
+
+| Type          | Operator                                                                                               | Value type                                                      |
+|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
+| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
+| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
+
+HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
+
+- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
+
+- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
+
+You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+
+##### Extract a variable from the response
+
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
+
+To start parsing a variable, click **Extract a variable from response content**:
+
+1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
+2. Decide whether to extract your variable from the response headers or the response body.
+
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][13].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][13], a [`JSONPath`][11], or a [`XPath`][12].
+
+{{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
 </br>
 
