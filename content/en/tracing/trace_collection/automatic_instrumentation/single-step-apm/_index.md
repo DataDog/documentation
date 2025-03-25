@@ -159,7 +159,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
 {{< collapse-content title="Installing with Helm" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages. 
 
-**Note:** For instructions on how to restrict Single Step Instrumentation to specific namespace or pods, see [Advanced options](#advanced-options).
+**Note:** For instructions on how to configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with Helm:
 
