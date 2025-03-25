@@ -2081,12 +2081,12 @@ menu:
       identifier: using_scorecards
       weight: 503
     - name: Self-Service Actions
-      url: software_catalog/self-service-actions
+      url: software_catalog/self_service_actions
       parent: software_catalog
       identifier: self_service_actions
       weight: 7
     - name: Software Templates
-      url: software_catalog/self-service-actions/software_templates
+      url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
     - name: Definition APIs
