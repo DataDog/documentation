@@ -351,8 +351,7 @@ annotations:
             "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics",
             "extra_headers": {"accept":"*/*"},
             "bearer_token_auth": "true",
-            "tls_ignore_warning":"true",
-            "tls_verify":"false"
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
           }
         ]
       },
@@ -363,8 +362,7 @@ annotations:
             "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics",
             "extra_headers": {"accept":"*/*"},
             "bearer_token_auth": "true",
-            "tls_ignore_warning":"true",
-            "tls_verify":"false"
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
           }
         ]
       }
