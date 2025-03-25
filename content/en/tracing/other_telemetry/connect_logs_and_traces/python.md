@@ -82,7 +82,7 @@ To learn more about logs injection, read the [ddtrace documentation][6].
 
 ### No standard library logging
 
-By default, `ddtrace.trace.tracer.log_correlation` will return `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
+By default, `ddtrace.trace.tracer.log_correlation` returns `dd.env=<ENV> dd.service=<SERVICE> dd.version=<VERSION> dd.trace_id=<TRACE_ID> dd.span_id=<SPAN_ID>`.
 
 ```python
 from ddtrace import tracer
