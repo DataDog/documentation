@@ -74,6 +74,41 @@ log.info("Example log line with trace correlation info")
 ```
 
 
+Altenative approach: Correlating logs with traces can also be done with unstructured logs using only OpenTelemetry SDK logic in your application.
+```python
+import logging
+from opentelemetry.instrumentation.logging import LoggingInstrumentor
+LoggingInstrumentor().instrument(set_logging_format=True)
+
+logger = logging.getLogger(__name__)
+
+logger.info("This is a log message")
+
+# This will create a log that looks as follows:
+# 2025-03-25 10:31:52,116 INFO [__main__] [test-logging.py:9] [trace_id=0 span_id=0 resource.service.name= trace_sampled=False] - This is a log message
+# A more realistic example may look like:
+# 2025-03-20 12:45:10,123 INFO [jobs.scheduler.task_runner.execute] [task_runner.py:123] [trace_id=123abc456def789ghi012jkl345mno67 span_id=89ab01cd23ef45gh resource.service.name=job_scheduler trace_sampled=True] - STARTED JOB TASK. Success
+ ```
+
+Then, modify or create a Log Pipeline with the following Grok Parser Rule:
+
+```
+# Define prefix components
+_timestamp %{date("yyyy-MM-dd HH:mm:ss','SSS"):timestamp}
+_level %{word:level}
+_module \[%{notSpace:module}\]
+_file_location \[%{notSpace:file_location}\]
+_trace_info \[trace_id=%{notSpace:trace_id} span_id=%{notSpace:span_id} resource\.service\.name=%{notSpace:service_name} trace_sampled=%{notSpace:trace_sampled}\]
+
+# Complete rule
+custom_format %{_timestamp} %{_level} %{_module} %{_file_location} %{_trace_info} - %{data:message}
+```
+And add the `Trace Id Remapper` and `Span Id Remapper` to extract the `trace_id` and `span_id`, respectively. This should allow for logs to appear correlated with traces.
+
+
+
+
+
 
 [1]: https://www.structlog.org/en/stable/standard-library.html
 [2]: /tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
