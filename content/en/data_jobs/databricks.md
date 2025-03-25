@@ -47,13 +47,18 @@ The Datadog Agent must be installed on Databricks clusters to monitor Databricks
 
 Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
 
+<div class="alert alert-warning">
+This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
+</div>
+
 #### When integrating a workspace with Datadog
 
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
 1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
+1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs.
 1. Click **Save Databricks Workspace**.
-   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new-2.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
 
 #### When adding the init script to a Databricks workspace already integrated with Datadog
 
@@ -62,12 +67,17 @@ Datadog can install and manage a global init script in the Databricks workspace.
 1. Make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
 1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
-1. Click **Save** at the bottom of the browser window.
+1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs.
+1. Click **Save Databricks Workspace** at the bottom of the browser window.
    {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-existing.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup for a Databricks workspace already added to the integration. Datadog can install and manage a global init script." style="width:100%;" >}}
 
 {{% /tab %}}
 
 {{% tab "Manually install a global init script" %}}
+
+<div class="alert alert-warning">
+This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> instructions for installation on those specific clusters.
+</div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Settings** and click the **Compute** tab.
@@ -83,10 +93,11 @@ Datadog can install and manage a global init script in the Databricks workspace.
    export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 
    # Download and run the latest init script
-   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+   bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.7.1.sh` to use the last stable version.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -115,6 +126,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
 
 {{% /tab %}}
 
@@ -125,10 +137,11 @@ Optionally, you can also set other init script parameters and Datadog environmen
    #!/bin/bash
 
    # Download and run the latest init script
-   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+   bash djm-install-script || true
    ```
 
-   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.3.1.sh` to use the last stable version.
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.10.0.sh` to use version `0.10.0`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
@@ -167,6 +180,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
 
 3. Click **Confirm**.
 

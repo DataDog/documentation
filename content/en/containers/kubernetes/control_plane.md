@@ -154,7 +154,7 @@ agents:
 
 #### Insecure ports
 
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration.
 
 #### Secure ports
 
@@ -317,18 +317,61 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-On Amazon Elastic Kubernetes Service (EKS), [API server metrics are exposed][5]. This allows the Datadog Agent to obtain API server metrics using endpoint checks as described in the [Kubernetes API server metrics check documentation][1]. To configure the check, add the following annotations to the `default/kubernetes` service:
+Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks.
+
+### Prerequisites
+- An EKS Cluster running on Kubernetes version >= 1.28
+- Deploy the Agent using one of:
+  - Helm chart version >= `3.90.1`
+  - Datadog Operator >= `v1.13.0`
+- Enable the Datadog [Cluster Agent][6]
+
+Add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
-  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
-  ad.datadoghq.com/endpoints.init_configs: '[{}]'
-  ad.datadoghq.com/endpoints.instances:
-    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
+  ad.datadoghq.com/endpoints.checks: |-
+    {
+      "kube_apiserver_metrics": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/metrics",
+            "bearer_token_auth": "true"
+          }
+        ]
+      }
+    }
+  ad.datadoghq.com/service.checks: |-
+    {
+      "kube_controller_manager": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      },
+      "kube_scheduler": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      }
+    }
 ```
 
-Other control plane components are not exposed in EKS and cannot be monitored.
-
+**Notes:**
+- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group.
+- The addition of `"extra_headers":{"accept":"*/*"}` prevents `HTTP 406` errors when querying the EKS metrics API.
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
 
@@ -438,7 +481,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
@@ -499,7 +542,7 @@ clusterChecksRunner:
       readOnly: true
     - name: disable-etcd-autoconf
       mountPath: /etc/datadog-agent/conf.d/etcd.d
-      
+
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -518,7 +561,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ### Controller Manager
@@ -1037,3 +1080,4 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
 [9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
+[11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html

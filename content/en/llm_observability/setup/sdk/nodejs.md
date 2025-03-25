@@ -32,7 +32,7 @@ npm install dd-trace
 
 ### Command-line setup
 
-Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-race/initialize.mjs"`  and specifying the required environment variables.
+Enable LLM Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"`  and specifying the required environment variables.
 
 **Note**: `dd-trace/initialize.mjs` automatically turns on all APM integrations.
 

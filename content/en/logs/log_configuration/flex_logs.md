@@ -63,7 +63,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 
@@ -212,7 +212,7 @@ Datadog generally recommends Flex Logs scalable compute sizes (XS, S, M, and L) 
 
 ### When the compute limit is reached
 
-When your organization reaches the compute limit in terms of concurrent queries, you many experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
+When your organization reaches the compute limit in terms of concurrent queries, you may experience slower queries because queries continue to retry until capacity is available. If a query retries multiple times, it may fail to run. In such situations, there is an error message that says Flex Logs compute capacity is constrained and you should contact your admin.
 
 ## Further reading
 

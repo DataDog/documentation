@@ -24,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-connection-churn-datadog/"
   tag: "Blog"
   text: "Best practices for monitoring and remediating connection churn"
+- link: "https://www.datadoghq.com/blog/software-catalog/"
+  tag: "Blog"
+  text: "Improve developer experience and collaboration with Software Catalog"
 cascade:
     algolia:
         rank: 70
