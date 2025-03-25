@@ -15,7 +15,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 ## How anomalies are defined
 
-Anomalies are irregular or unexpected changes that significantly deviate from established patterns. Datadog uses a machine learning-based anomaly detection algorithm that automatically filters out weekly seasonality out low-cost anomalies below $5 to reduce noise.
+Anomalies are irregular or unexpected changes that significantly deviate from established patterns. Datadog uses a machine learning-based anomaly detection algorithm that automatically filters out weekly seasonality and anomalies below $5 to reduce noise.
 
 Weekly seasonality further reduces noise by identifying expected weekly patterns. For example, many businesses spin down a part of their infrastructure over the weekend and spin back up on Mondays, which causes a cost increase that shouldn't be flagged as an anomaly.
 
@@ -32,6 +32,8 @@ Each anomaly explains how much more costs were than expected for the service nam
 
 Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
+This is an example of the list of anomalies detected in your infrastructure:
+
 {{< img src="cloud_cost/anomalies/cost_anomalies_list.png" alt="List of cost anomalies automatically detected" style="width:90%;" >}}
 
 ## Take action on anomalies
@@ -42,12 +44,16 @@ Investigate the anomaly further, and by any additional dimensions, by viewing th
 
 You can also create a cost anomaly monitor to get alerted of similar cost anomalies in the future.
 
-{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
+This is the side panel where you can take action on your cost anomaly:
+
+{{< img src="cloud_cost/anomalies/cost_anomalies_side-panel.png" alt="In the side panel you can take action on your cost anomaly" style="width:90%;" >}}
 
 ## Resolve anomalies
 
 As you investigate anomalies, you may find anomalies that are not significant, were actually expected costs, or are otherwise not considered an anomaly.
 
 Mark anomalies as significant or insignificant to give feedback and help improve the anomaly detection algorithm. Resolve anomalies with context to move anomalies to the Resolved tab, and add context for others in your organization.
+
+This is an example of how to mark a cost anomaly as significant and explain why it's an anomaly:
 
 {{< img src="cloud_cost/anomalies/cost_anomalies_side-panel_is-significant.png" alt="You can mark cost anomaly as significant and write an explanation about why it's an anomaly  and then resolve it" style="width:90%;" >}}
