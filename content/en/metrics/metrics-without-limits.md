@@ -32,7 +32,6 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
-<!-- I need to update this image once we surface aggregation deprecation in the front-end  -->
 {{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
 You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
@@ -44,7 +43,6 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
-<!-- I need to update this image once we surface aggregation deprecation in the front-end  -->
 {{< img src="metrics/mwl-example-tag-exclusion-compressed_03182025.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
