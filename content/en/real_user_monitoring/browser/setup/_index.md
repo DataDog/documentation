@@ -38,7 +38,7 @@ Automatically add RUM JS to your web app HTML with minimal steps by installing t
 
 To learn more, see [auto-instrumentation][1].
 
-### Manual instrumentation
+### Client-side (manual instrumentation)
 
 Add the RUM SDK manually to your application code.
 
