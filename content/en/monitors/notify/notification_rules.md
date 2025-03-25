@@ -52,20 +52,103 @@ In your monitor configuration you can view the notification recipients that are 
 ## Routing logic
 
 Notification rules apply the recipients to all monitors that match the scopes in the rule configuration. 
-- Notification rule recipients override recipients configured in individual monitors.
 - Multiple tags apply an AND logic to the scope.
 - Multiple rules can match with one monitor, all recipients are added to the monitor wthout duplication.
 
 
-Multiple rules can match to one monitor, all recipient from matching notification rules are added to the monitor without duplicates.
-<!-- 
-{{% collapse-content title="Multiple tag scopes" level="h4" expanded=false %}}
-...
-{{% /collapse-content %}}
+{{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
-{{% collapse-content title="Multiple notification rules" level="h4" expanded=false %}}
-...
-{{% /collapse-content %}} -->
+
+The following table demonstrates how monitors with different tag combinations match notification rules and their resulting notifications. This table shows how:
+1. Multiple notification rules can match a single monitor based on its tags.
+2. The AND logic works for multiple tags within a rule.
+3. All matching notification rules contribute their recipients to the final notification list.
+4. Recipients are deduplicated in the final notification list.
+
+<table>
+    <thead>
+        <tr>
+            <th style="width: 20%">Alert Tags</th>
+            <th colspan="6" style="text-align: center">Notification Rules</th>
+            <th style="width: 20%">Notified Handles</th>
+        </tr>
+        <tr>
+            <th></th>
+            <th>Rule 1<br><code>team:shopist AND<br>service:web-store</code></th>
+            <th>Rule 2<br><code>team:shopist</code></th>
+            <th>Rule 3<br><code>service:web-store</code></th>
+            <th>Rule 4<br><code>service:web-store AND<br>env:prod</code></th>
+            <th>Rule 5<br><code>service:web-store AND<br>env:dev</code></th>
+            <th>Rule 6<br><code>team:shopist AND<br>service:web-store AND<br>env:prod</code></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>team:shopist AND service:web-store</code></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td><code>@slack-channel1</code><br><code>@jira-project</code></td>
+        </tr>
+        <tr>
+            <td><code>team:shopist</code></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td><code>@jira-project</code></td>
+        </tr>
+        <tr>
+            <td><code>service:web-store</code></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td><code>@jira-project</code></td>
+        </tr>
+        <tr>
+            <td><code>service:web-store AND env:prod</code></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td><code>@jira-project</code><br><code>@user@datadoghq.com</code></td>
+        </tr>
+        <tr>
+            <td><code>service:web-store AND env:dev</code></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td><code>@jira-project</code></td>
+        </tr>
+        <tr>
+            <td><code>team:shopist AND service:web-store AND env:prod</code></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center">{{< X >}}</td>
+            <td><code>@slack-channel1</code><br><code>@jira-project</code><br><code>@pagerduty-service1</code><br><code>@slack-service1</code><br><code>@user@datadoghq.com</code></td>
+        </tr>
+    </tbody>
+</table>
+
+
+{{% /collapse-content %}}
 
 ## Further reading
 
