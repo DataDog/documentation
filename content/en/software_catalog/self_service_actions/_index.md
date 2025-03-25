@@ -89,6 +89,7 @@ Connect Workflows to entities in Software Catalog through the new Software Catal
 - Scale up capacity
 - Initiate a new deployment
 
+{{< img src="tracing/service_catalog/actions_in_catalog.png" alt="Summarize Service Status" style="width:100%;" >}}
 
 
 ## Further reading
