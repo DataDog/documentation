@@ -135,7 +135,7 @@ Querying at the commit level provides a more accurate view of engineering perfor
 
 ## Custom Dashboards
  
-DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs. You can also export the default dashboards available in the DORA UI and personalize them to match your workflows and visualization preferences.
+DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs. You can also export the default widgets available in the DORA Metrics page and personalize them to match your workflows and visualization preferences.
 
 {{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
 
