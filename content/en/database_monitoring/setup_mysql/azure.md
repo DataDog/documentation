@@ -100,6 +100,8 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][11] section below for more info on how to grant the Agent permissions for this collection.
+
 ### Securely store your password
 {{% dbm-secret %}}
 
@@ -339,3 +341,4 @@ If you have installed and configured the integrations and Agent as described, an
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
 [10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+[11]: /database_monitoring/setup_mysql/azure/?tab=host#collecting-schemas
