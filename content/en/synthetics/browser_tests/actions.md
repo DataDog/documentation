@@ -279,7 +279,7 @@ To define your HTTP request:
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL`, or `None`) you want to add to your HTTP request.
    * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
 
    {{% /tab %}}
