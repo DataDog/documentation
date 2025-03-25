@@ -45,7 +45,7 @@ To create a custom policy:
 7. A name is automatically generated based on the data entered, but you can modify it.
 8. Click **Create Custom Policy**.
 
-Click the new policy to review all non-compliant resources and filter them by region, environment, account, service, or team. You can also group them by attributes or tags.
+Click the new policy to review all non-compliant resources and filter them by region, environment, account, service, or team. You can also group them by attributes or tags so you can take easy followup action.
 
 ## Create a tagging policy
 
