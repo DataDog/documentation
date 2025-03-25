@@ -31,11 +31,11 @@ For Agent v7.21+ / v6.21+:
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
+    **Note**: If necessary, prepend `sudo -u dd-agent` to the installation command.
+
    The version for the integration can be found in the respective changelog on the integration's Github repository
 2. Configure your integration similar to core [integrations][1].
 3. [Restart the Agent][2].
-
-**Note**: If necessary, prepend `sudo -u dd-agent` to the install command.
 
 [1]: /getting_started/integrations/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
