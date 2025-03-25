@@ -158,7 +158,7 @@ If the Agent displays this error:
 ```
 Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
 ```
-Can be resolved by granting the `datadog` user the SELECT privilege to collect index metrics:
+Resolve the error by granting the `datadog` user the SELECT privilege to collect index metrics:
 
 ```sql
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
