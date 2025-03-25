@@ -83,7 +83,7 @@ For the Datadog application to function correctly, you must activate IdP initiat
 To activate IdP initiated login, execute the following steps:
 1. Navigate to the [SAML configuration page][5].
 1. Under **Additional Features**, click the checkbox for **Identity Provider (IdP) Initiated Login**. The component displays the **Assertion Consumer Service URL**.
-1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Enter this value with the **/id/** prefix in Okta to finalize your configuration.
+1. The content in the Assertion Consumer Service URL after `/saml/assertion` is your company ID. Enter this value with the `/id/` prefix in Okta to finalize your configuration.
 1. Click **Save Changes**.
 
 {{< img src="account_management/saml/okta/company_id.png" alt="SAML configuration in Datadog, highlighting the company ID portion of the assertion consumer service URL" style="width:100%;" >}}
