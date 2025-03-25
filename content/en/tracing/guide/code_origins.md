@@ -22,13 +22,12 @@ further_reading:
 
 ## Overview
 
-Code Origins is a feature that helps you understand where your APM spans originate from in your codebase. When enabled, it automatically captures the file path, line number, and function name where each span was created, giving you deeper visibility into your application's execution flow.
+Code Origins captures the exact location in your codebase where APM spans are created. When enabled, it automatically adds file path, line number, and function name to each span, making it easier to:
 
-This information is particularly valuable when:
-- Debugging performance issues
-- Understanding which parts of your code are being executed
-- Identifying hot spots in your application
-- Onboarding new team members to your codebase
+- Debug performance issues
+- Understand code execution flow
+- Identify performance bottlenecks
+- Onboard new team members
 
 {{< img src="tracing/guide/code_origins/code_origin_details.png" alt="Code Origin Details" style="width:100%;">}}
 
