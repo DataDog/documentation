@@ -35,9 +35,9 @@ Code Origins captures the exact location in your codebase where APM spans are cr
 ## Getting started
 
 ### Prerequisites
-- Set up [Datadog APM][6] to capture spans and view them in the Traces Explorer.
-- Service must meet the [Compatibility Requirements](#compatibility-requirements) below.
-- (Recommended) For the best experience, enable [Source Code Integration][7] to see Code Origin application code previews.
+- [Datadog APM][6] configured to capture spans
+- Service meets the [Compatibility Requirements](#compatibility-requirements) below
+- [Source Code Integration][7] enabled (recommended for code previews)
 
 ### Compatibility requirements
 
