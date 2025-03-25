@@ -22,7 +22,7 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ### Out-of-the-box tagging
 
-The Agent can Autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1]. [Tag Cardinality][5] can impact billing as different cardinality settings impact the number of emitted metrics.
+The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1]. [Tag Cardinality][5] can impact billing as different cardinality settings impact the number of emitted metrics.
 
 
 | Tag                 | Cardinality  | Requirement                                 |
