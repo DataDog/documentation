@@ -16,7 +16,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-[Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these pre-approved actions to:
+[Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these predefined actions to:
 
 - build microservices and infrastructure with proper configurations
 - initialize development environments
