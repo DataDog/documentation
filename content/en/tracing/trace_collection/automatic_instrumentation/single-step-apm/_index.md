@@ -133,12 +133,18 @@ To enable Single Step Instrumentation with the Datadog Operator:
        apm:
          instrumentation:
            enabled: true
-           libVersions:
-             java: "1"
-             dotnet: "3"
-             python: "2"
-             js: "5"
-             php: "1"
+           targets:
+             - name: "all-services"
+               namespaceSelector:
+                 matchNames:
+                   - "foo"
+                   - "bar"
+               ddTracerVersions:
+                 java: "1"
+                 dotnet: "3"
+                 python: "2"
+                 js: "5"
+                 php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -176,12 +182,18 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
-         libVersions:
-            java: "1"
-            dotnet: "3"
-            python: "2"
-            js: "5"
-            php: "1"
+         targets:
+           - name: "all-services"
+             namespaceSelector:
+               matchNames:
+                 - "foo"
+                 - "bar"
+             ddTracerVersions:
+               java: "1"
+               dotnet: "3"
+               python: "2"
+               js: "5"
+               php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -691,6 +703,8 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+#### Use workload selection to disable instrumentation for specific services
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml
