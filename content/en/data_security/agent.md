@@ -68,11 +68,11 @@ Agent v6/7 comes bundled with a Graphical User Interface (GUI) by default, which
 
 ## Agent security scans
 
-Datadog's Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform monthly scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog's Vulnerability Management policy.
+Datadog's Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform regular scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog's Vulnerability Management policy.
 
-Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][10] and [snyk.io][11]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][12], as well as the [Red Hat Container Catalog][13]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
+Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases using [clair by CoreOS][10] and [Trivy][11]. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][12], and additionally, Datadog agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][14] and we will get back to you within 24 hours. Datadog's [PGP key][15] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
+If you believe you've discovered a bug in Datadog's security, please see [Report An Issue][13].  For existing customers wishing to submit a vulnerability inquiry on a Datadog product, please reach out to [Datadog Support][14] through your normal standard support process. If submitting a ticket through our website, when creating a new ticket, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
 
 ## Running as an unprivileged user
 
@@ -196,10 +196,10 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/
 [10]: https://coreos.com/clair
-[11]: https://snyk.io
-[12]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
-[13]: https://access.redhat.com/containers
-[14]: mailto:security@datadoghq.com
+[11]: https://trivy.dev/
+[12]: /containers/docker/?tab=standard
+[13]: https://www.datadoghq.com/security/?tab=contact
+[14]: https://www.datadoghq.com/support/
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
