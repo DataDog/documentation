@@ -16,7 +16,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-[Software Catalog Actions][17] help platform teams define and share self-service templates to streamline tasks across the software development lifecycle. Developers can use these pre-approved actions to:
+[Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these pre-approved actions to:
 
 - build microservices and infrastructure with proper configurations
 - initialize development environments
@@ -76,7 +76,7 @@ If you prefer to build an app from the ground up:
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the app to a Dashboard or to Software Catalog Actions for easy discovery.
+- Add the app to a Dashboard or to Self-Service Actions for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     
