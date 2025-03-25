@@ -123,9 +123,11 @@ DD_TRACE_CODE_ORIGINS_ENABLED=true
 
 ## How it works
 
-**Entry spans**: The Code Origin is the first method in the application code that handles the incoming request. When a service is [instrumented][6], we use the APM integration metadata to identify the source code location where incoming requests enter the system.
+Code Origins captures two types of spans:
 
-**Exit spans**: The Code Origin is the specific line of code that made the outgoing request to a downstream service/component. By examining the call stack, we can identify the line of code where an exit span starts, instrument that line, and decorate the span accordingly. Third-party code is skipped when walking the call stack. 
+**Entry spans**: Shows the first method in your application code that handles an incoming request. The APM integration identifies the source code location where requests enter your system.
+
+**Exit spans**: Shows the exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code.
 
 <div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
 
