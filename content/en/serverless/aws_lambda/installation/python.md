@@ -188,15 +188,15 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     from datadog_cdk_constructs import Datadog
 
     # For AWS CDK v2
-    from datadog_cdk_constructs_v2 import Datadog
+    from datadog_cdk_constructs_v2 import DatadogLambda
 
-    datadog = Datadog(self, "Datadog",
+    datadogLambda = DatadogLambda(self, "DatadogLambda",
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
         api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
-    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    datadogLambda.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```
 
     To fill in the placeholders:
