@@ -122,6 +122,7 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 - Any rules that you add or update affect only data coming into Datadog after the rule was defined.
 - Sensitive Data Scanner does not affect any rules you define on the Datadog Agent directly.
 - After rules are added, ensure that the toggles for your scanning groups are enabled to begin scanning.
+- When you add rules to a scanning group with sampling enabled, you will not be able to select the **redact**, **partially redact**, or **hash** actions. For complete obfuscation, disable sampling in your scanning group settings.
 
 See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
 
