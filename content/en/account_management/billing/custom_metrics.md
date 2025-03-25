@@ -184,7 +184,7 @@ For metrics configured with Metrics without Limits™ (tags are configured), you
 | Account Allotment                    | - Pro: 100 ingested custom metrics per host<br>- Enterprise: 200 ingested custom metrics per host | - Pro: 100 indexed custom metrics per host<br>- Enterprise: 200 indexed custom metrics per host                               |
 | Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-By default, Datadog gives you the following aggregations accessible upon querying:
+By default, the following aggregations can be used for querying:
 - group by `SUM` & rollup by `AVG`
 - group by `MAX` & rollup by `AVG`
 - group by `MIN` & rollup by `AVG`
