@@ -154,7 +154,7 @@ Before following these steps to diagnose missing query metric data, ensure the A
 
 ### Index metrics are missing
 
-The Agent displaying this error:
+If the Agent displays this error:
 ```
 Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
 ```
