@@ -34,15 +34,13 @@ title: Docker、containerd、Podman に対応した Docker Agent
 
 Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバージョンです。Docker Agent は、Docker、containerd、Podman のランタイムをサポートしています。公式の [Docker イメージ][2]は Docker Hub、GCR 、および ECR-Public からご利用いただけます。
 
-<div class="alert alert-warning">2023 年 7 月 10 日、Docker Hub は Datadog の Docker Hub レジストリへのダウンロードレート制限を実施するようになります。これらのレジストリからのイメージのプルは、レート制限割り当てにカウントされます。<br/><br/>
-
-Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レート制限が適用されない他のレジストリからプルすることを推奨しています。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリを変更する</a>を参照してください。</div>
+<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
 | ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
 |----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
-| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          | 
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
 | [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
@@ -50,19 +48,19 @@ Datadog は、Datadog Agent と Cluster Agent の構成を更新して、レー�
 
 ## セットアップ
 
-Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<YOUR_DATADOG_API_KEY>` を [Datadog API キー][10]と置き換えてください。
+Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<YOUR_DATADOG_API_KEY>` を [Datadog API キー][10]に、`<DATADOG_SITE>` を {{< region-param key=dd_site code="true" >}} に置き換えてください。
 
 {{< tabs >}}
 {{% tab "標準" %}}
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 
 ECR-Public の場合:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 **注**: GCR または ECR-Public 以外の別のレジストリを使用している場合は、必ずイメージを更新してください。
@@ -75,23 +73,23 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 Amazon Linux < v2 の場合:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 ECR-Public の場合:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 Amazon Linux v2 の場合:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7
 ```
 ECR-Public の場合:
 
 ```shell
-docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
+docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7
 ```
 
 {{% /tab %}}
@@ -100,13 +98,13 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 Datadog Agent は、Windows Server 2019 (LTSC) と Windows Server 2022 (LTSC) でサポートされています。
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
+docker run -d --name dd-agent -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
 ```
 
 ECR-Public の場合:
 
 ```shell
-docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
+docker run -d --name dd-agent -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine public.ecr.aws/datadog/agent
 ```
 
 {{% /tab %}}
@@ -115,13 +113,13 @@ docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:
 (オプション) 非特権インストールを実行するには、インストールコマンドに `--group-add=<DOCKER_GROUP_ID>` を追加します。次に例を示します。
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> gcr.io/datadoghq/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 ECR-Public の場合:
 
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_SITE=<DATADOG_SITE> -e DD_API_KEY=<DATADOG_API_KEY> public.ecr.aws/datadog/agent:7 --group-add=<DOCKER_GROUP_ID>
 ```
 
 {{% /tab %}}
@@ -151,7 +149,7 @@ Agent の [メインコンフィギュレーションファイル][13]は `datad
 | `DD_DD_URL`          | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | `DD_DD_URL` のエイリアス。すでに `DD_DD_URL` が設定されている場合は無視されます。                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | Agent はデフォルトですべてのチェックを同時に実行します (デフォルト値は `4` ランナーです)。チェックを順次実行する場合は、値を `1` に設定してください。ただし、多数のチェック (または時間のかかるチェック) を実行する必要がある場合、`collector-queue` コンポーネントが遅延して、ヘルスチェックに失敗する可能性があります。ランナーの数を増やすと、チェックを並行して実行できます。 |
-| `DD_APM_ENABLED`             | トレース収集を有効にします。デフォルトは `true` です。トレース収集の追加環境変数について詳しくは、[Docker アプリケーションのトレース][14]をご覧ください。   |
+| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
 | `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | 環境によっては、ホストからの最初のログに正しいタグが含まれないことがあります。新しいホストのタグがログに含まれていない場合は、この環境変数を含めて `"10m"` に設定してください。|
 
 ### プロキシ設定
@@ -170,11 +168,11 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 
 セキュリティまたはパフォーマンス上の理由により、オプションの収集 Agent はデフォルトで無効になっています。このエージェントを有効にするには、以下の環境変数を使用します。
 
-| 環境変数               | 説明                                                                                                                                                                                                                                                      |
-|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `DD_APM_NON_LOCAL_TRAFFIC` | [他のコンテナからのトレース][16]時に非ローカルなトラフィックを許可します。       |
-| `DD_LOGS_ENABLED`          | ログ Agent による[ログの収集][17]を有効にします。                                                                                                                                                                                                                 |
-| `DD_PROCESS_AGENT_ENABLED` | プロセス Agent による[ライブプロセスの収集][18]を有効にします。Docker ソケットがある場合、[ライブコンテナービュー][19]はすでにデフォルトで有効になっています。`false` に設定すると、[ライブプロセスの収集][18]と[ライブコンテナービュー][19]が無効になります。 |
+| 環境変数                                   | 説明                                                                                                                                                   |
+|------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_APM_NON_LOCAL_TRAFFIC`                     | [他のコンテナからのトレース][16]時に非ローカルなトラフィックを許可します。                                                                                             |
+| `DD_LOGS_ENABLED`                              | ログ Agent による[ログの収集][17]を有効にします。                                                                                                              |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Enable [live process collection][18] with the Process Agent. The [live container view][19] is already enabled by default if the Docker socket is available. |
 
 ### DogStatsD (カスタムメトリクス)
 
@@ -230,6 +228,15 @@ Datadog は Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher から�
 
 **注**: containerd を使用する場合、`DD_CONTAINERD_NAMESPACES` と `DD_CONTAINERD_EXCLUDE_NAMESPACES` を使用すると、ネームスペースでコンテナを無視することが可能です。どちらもスペースで区切られたネームスペースのリストです。`DD_CONTAINERD_NAMESPACES` が設定されている場合、Agent はリストに存在するネームスペースに属するコンテナのデータを報告します。`DD_CONTAINERD_EXCLUDE_NAMESPACES` が設定されている場合、Agent はリストのネームスペースに属するものを除く、すべてのコンテナのデータをレポートします。
 
+### オートディスカバリー
+
+| 環境変数                 | 説明                                                                                                                                                                           |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | 実行するオートディスカバリーリスナー。                                                                                                                                                       |
+| `DD_EXTRA_LISTENERS`         | 実行するオートディスカバリーリスナーを追加します。これは `datadog.yaml` コンフィギュレーションファイルの `listeners` セクションで定義された変数に加えて追加されます。                   |
+| `DD_CONFIG_PROVIDERS`        | Agent がチェック構成を収集するために呼び出すべきプロバイダー。デフォルトのプロバイダーは `docker` です。Docker プロバイダーはコンテナラベルに埋め込まれたテンプレートを処理します。 |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | 使用するオートディスカバリー構成プロバイダーを追加します。これは `datadog.yaml` コンフィギュレーションファイルの `config_providers` セクションで定義された変数に加えて追加されます。 |
+
 ### その他
 
 | 環境変数                        | 説明                                                                                                                                                     |
@@ -237,13 +244,11 @@ Datadog は Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher から�
 | `DD_PROCESS_AGENT_CONTAINER_SOURCE` | コンテナソースの自動検出を上書きして、1 つのソースに制限します (`"docker"`、`"ecs_fargate"`、`"kubelet"` など)。Agent v7.35.0 以降、不要になりました。 |
 | `DD_HEALTH_PORT`                    | これを `5555` に設定すると、Agent のヘルスチェックをポート `5555` で公開します。                                                                                             |
 
-リスナーおよび構成プロバイダーを追加するには、`DD_EXTRA_LISTENERS` と `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を使用します。これらは `datadog.yaml` 構成ファイルの `listeners` セクションと `config_providers` セクションに定義する変数に追加されます。
-
 ## コマンド
 
 すべての Docker Agent コマンドは [Agent コマンドガイド][26]でご確認いただけます。
 
-## 収集データ
+## データ収集
 
 ### メトリクス
 
@@ -275,6 +280,10 @@ Agent が Datadog に接続できない場合は、`CRITICAL` を返します。
 **datadog.agent.check_status**: <br>
 Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
+## Uninstall Single Step APM Instrumentation
+
+If you installed the Datadog Docker Agent with Single Step APM Instrumentation, and you want to uninstall the Agent, you need to [run additional commands][33] to uninstall APM Instrumentation.
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -286,14 +295,14 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[8]: https://app.datadoghq.com/account/settings#agent/docker
-[9]: /ja/agent/basic_agent_usage/#supported-os-versions
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[9]: /ja/agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /ja/agent/guide/compose-and-the-datadog-agent/
 [12]: /ja/agent/docker/integrations/
-[13]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[13]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [14]: /ja/agent/docker/apm/
-[15]: /ja/agent/proxy/#agent-v6
+[15]: /ja/agent/configuration/proxy/#agent-v6
 [16]: /ja/agent/docker/apm/#tracing-from-other-containers
 [17]: /ja/agent/docker/log/
 [18]: /ja/infrastructure/process/
@@ -302,12 +311,13 @@ Agent チェックが Datadog にメトリクスを送信できない場合は�
 [21]: /ja/developers/dogstatsd/unix_socket/
 [22]: /ja/getting_started/tagging/unified_service_tagging/
 [23]: /ja/agent/docker/tag/
-[24]: /ja/agent/guide/secrets-management/?tab=linux
+[24]: /ja/agent/configuration/secrets-management/?tab=linux
 [25]: /ja/agent/guide/autodiscovery-management/
-[26]: /ja/agent/guide/agent-commands/
+[26]: /ja/agent/configuration/agent-commands/
 [27]: /ja/integrations/container/
 [28]: /ja/integrations/system/#metrics
 [29]: /ja/integrations/disk/#metrics
 [30]: /ja/agent/docker/data_collected/#metrics
 [31]: /ja/integrations/network/#metrics
 [32]: /ja/integrations/ntp/#metrics
+[33]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=docker#removing-apm-for-all-services-on-the-infrastructure

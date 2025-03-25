@@ -67,7 +67,7 @@ title: プライベートロケーションの概要
     Windows を使用している場合は、[GUI で Synthetics プライベートロケーションインストーラーを実行する][12]か、インストーラーをダウンロードしたディレクトリ内のコマンドラインで `msiexec` コマンドを実行してください。
 
     ```shell
-    msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
+    msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
     ```
 
 10. プライベートロケーションが Datadog に正しく報告されている場合、ヘルスステータスが **Private Location Status** と **Settings** ページの **Private Locations** リストに `OK` と表示されます。
@@ -98,6 +98,8 @@ title: プライベートロケーションの概要
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
 [1]: /ja/continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /ja/getting_started/synthetics/
@@ -110,5 +112,5 @@ title: プライベートロケーションの概要
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [12]: /ja/synthetics/private_locations?tab=windows#install-your-private-location
-[13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
+[13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/

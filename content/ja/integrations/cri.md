@@ -25,6 +25,7 @@ author:
 categories:
 - コンテナ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cri
 public_title: CRI
@@ -47,6 +47,7 @@ tile:
   - Category::Containers
   - Category::Kubernetes
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: CRI のすべてのメトリクスを Datadog で追跡
   media: []
@@ -62,9 +63,9 @@ tile:
 
 このチェックは Container Runtime Interface を監視します
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 CRI は [Datadog Agent][1] の中核となるチェックで、`datadog.yaml` に `cri.d/conf.yaml` と共に構成する必要があります。
 
@@ -109,7 +110,7 @@ spec:
 
 **注:** 問題なくインテグレーションを実行するには、ホストから `/var/run` ディレクトリをマウントする必要があります。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. CRI-O のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `cri.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル cri.d/conf.yaml][2] を参照してください。
 
@@ -119,21 +120,21 @@ spec:
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cri` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cri" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 CRI には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 CRI には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

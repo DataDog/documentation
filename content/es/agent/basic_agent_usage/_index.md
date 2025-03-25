@@ -37,7 +37,7 @@ Utiliza la GUI del Datadog Agent Manager para:
 - Añadir o editar los checks del Agent
 - Enviar flares
 
-La GUI del Datadog Agent Manager se encuentra habilitada por defecto en Windows y macOS, y se ejecuta en el puerto `5052`. Utiliza el comando `datadog-agent launch-gui` para abrir la GUI en tu navegador web predeterminado.
+La GUI del Datadog Agent Manager se encuentra habilitada por defecto en Windows y macOS, y se ejecuta en el puerto `5002`. Utiliza el comando `datadog-agent launch-gui` para abrir la GUI en tu navegador web predeterminado.
 
 Puedes cambiar el puerto predeterminado de la GUI en tu archivo de configuración `datadog.yaml`. Para deshabilitar la GUI, establece el valor del puerto en `-1`. En Linux, la GUI se encuentra deshabilitada por defecto.
 

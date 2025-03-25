@@ -83,6 +83,9 @@ grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install the Agent
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
@@ -105,7 +108,7 @@ instances:
   - server: '<HOST_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     protocol: TCPS
     wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true
@@ -115,7 +118,7 @@ instances:
   - server: '<HOST_2>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     protocol: TCPS
     wallet: <YOUR_WALLET_DIRECTORY>
     dbm: true

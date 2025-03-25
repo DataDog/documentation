@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /ja/guides/logs/
 - /ja/en/logs
@@ -20,7 +23,7 @@ further_reading:
   text: ログ管理の紹介
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
+  text: ログ管理を最適化するためのインタラクティブセッションにご参加ください
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
   tag: ブログ
   text: ログ異常検出によるインシデント調査の迅速化
@@ -39,8 +42,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
   tag: ブログ
   text: サブクエリを使用したログの動的なフィルタリングと相関付け
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: ブログ
+  text: ネットワークとセキュリティ分析のための DNS ログの監視
 title: ログ管理
 ---
+
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  入門編または中級編のイネーブルメントセッションに参加して、Datadog Log Management がどのようにしてログ、メトリクス、トレースを単一のビューに統合し、ログデータの分析に役立つ豊富なコンテキストを提供するかを学びましょう。
+{{< /learning-center-callout >}}
 
 ## 概要
 

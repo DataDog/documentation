@@ -33,23 +33,36 @@ ICMP テストを使用すると、ホストの可用性を監視し、ネット
 
 ICMP テストは、ネットワークの外部または内部のどちらからエンドポイントへの ICMP ping をトリガーするかに応じて、[管理ロケーション](#select-locations)および[プライベートロケーション][1]の両方から実行できます。ICMP テストは、定義されたスケジュールで、オンデマンドで、または [CI/CD パイプライン][2]内から実行できます。
 
-**注**: Windows プライベートロケーションは `ICMP` テストの実行をサポートしていません。
+## 構成
 
-## ブラウザトラブルシューティング
+You may create a test using one of the following options:
 
-`ICMP` テストの作成を選択した後、テストのリクエストを定義します。
+   - **Create a test from a template**:
 
-### リクエストを定義する
+       1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
+       2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+       3. Click **Save Details** to submit your API test.<br /><br>
+          {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
-1. テストを実行する**ドメイン名**または **IP アドレス**を指定します。
-2. **Track number of network hops (TTL)** (ネットワークホップ数 (TTL) の追跡) を選択または選択解除します。このオプションを選択すると、"traceroute" プローブをオンにして、ホストの宛先へのパスに沿ったすべてのゲートウェイを検出します。
-3. テストセッションごとにトリガーする **Number of Pings** (Ping の数) を選択します。 デフォルトでは、ping の数は 4 に設定されています。この数値は、減らすか最大 10 まで増やすかを選択できます。
-4. ICMP テストに**名前**を付けます。
-5. ICMP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+   - **Build a test from scratch**:
 
-{{< img src="synthetics/api_tests/icmp_test_config.png" alt="ICMP リクエストを定義する" style="width:90%;" >}}
+      1. テストを一から作成するには、**+ Start from scratch** テンプレートをクリックし、`ICMP` リクエストタイプを選択します。
+      1. テストを実行する**ドメイン名**または **IP アドレス**を指定します。
+      1. **Track number of network hops (TTL)** (ネットワークホップ数 (TTL) の追跡) を選択または選択解除します。このオプションを選択すると、"traceroute" プローブをオンにして、ホストの宛先へのパスに沿ったすべてのゲートウェイを検出します。
+      1. テストセッションごとにトリガーする **Number of Pings** (Ping の数) を選択します。 デフォルトでは、ping の数は 4 に設定されています。この数値は、減らすか最大 10 まで増やすかを選択できます。
+      1. ICMP テストに**名前**を付けます。
+      1. ICMP テストに Environment **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring & Continuous Testing ページ][3]で Synthetic テストをフィルタリングできます。
+      1. **Test Host** をクリックして、リクエストの構成をテストします。画面の右側に応答プレビューが表示されます。<br /><br>
 
-**Test URL** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
+        {{< img src="synthetics/api_tests/icmp_test_config_2.png" alt="ICMP リクエストを定義する" style="width:90%;" >}}
+      8. Click **Create Test** to submit your API test.
+
+
+
+
+### スニペット
+
+{{% synthetics-api-tests-snippets %}}
 
 ### アサーションを定義する
 
@@ -74,7 +87,7 @@ ICMP テストは、ネットワークの外部または内部のどちらから
 
 ICMP テストを実行する**ロケーション**を選択します。ICMP テストは、ネットワークの外部または内部のどちらから ICMP ping をトリガーするかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -96,14 +109,14 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 
 ## テストの失敗
 
-テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが途中で失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対するアサーションをテストせずにテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
 これらの理由には以下が含まれます。
 
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。原因としては、テスト URL の誤構成や DNS エントリの誤構成が考えられます。
 
-## ヘルプ
+## 権限
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic ICMP テストを作成、編集、削除できます。Synthetic ICMP テストの作成、編集、および削除のアクセス権を取得するには、ユーザーのロールをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードしてください。
 
@@ -111,11 +124,7 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 
 ### アクセス制限
 
-アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
-
-組織内の役割に基づいて、ICMP テストへのアクセスを制限することができます。ICMP テストを作成する際に、ユーザーに加えてどのロールがあなたのテストを読み取りおよび書き込むことができるかを選択します。
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## その他の参考資料
 
@@ -124,11 +133,10 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 [1]: /ja/synthetics/private_locations
 [2]: /ja/synthetics/cicd_integrations
 [3]: /ja/synthetics/search/#search
-[4]: /ja/monitors/notify/#notify-your-team
+[4]: /ja/monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /ja/synthetics/guide/synthetic-test-monitors
 [8]: /ja/synthetics/settings/#global-variables
 [9]: /ja/account_management/rbac/
 [10]: /ja/account_management/rbac#custom-roles
-[11]: /ja/account_management/rbac/#create-a-custom-role

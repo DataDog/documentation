@@ -14,6 +14,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md
 display_on_public_website: true
@@ -23,7 +24,6 @@ integration_id: taskcall
 integration_title: TaskCall
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: taskcall
 public_title: TaskCall
@@ -85,7 +85,7 @@ TaskCall のインテグレーションにより、Datadog ユーザーは、イ
 - このインテグレーションは、すべての TaskCall サブスクリプションプランで利用可能です。
 
 
-## 計画と使用
+## セットアップ
 
 インテグレーションは、TaskCall と Datadog の両方から構成する必要があります。
 

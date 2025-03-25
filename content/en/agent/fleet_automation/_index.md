@@ -13,8 +13,6 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< callout btn_hidden="true">}}Fleet Automation is in beta. Access it from the <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> page in Datadog.{{< /callout >}}
-
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
@@ -23,7 +21,9 @@ further_reading:
 
 Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support your evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet-automation.png" alt="The fleet automation page" style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet-automation1.png" alt="The fleet automation page" style="width:100%;" >}}
+
+## Use cases
 
 With the Fleet Automation platform, you can:
 - View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
@@ -31,18 +31,7 @@ With the Fleet Automation platform, you can:
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
-Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
-- The Agent version
-- Whether the Agent has any unconfigured or misconfigured integrations
-- The services that the Agent is monitoring
-- The Agent's Remote Configuration status
-- The products that are enabled on the Agent
-
-Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
-
-{{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
-
-## Configuring Fleet Automation
+## Configure Fleet Automation
 
 Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
 
@@ -53,13 +42,29 @@ If you're using an older Agent, you might still be able to enable the following 
 
 Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
+## Observe your fleet
+
+Use the [**Fleet Automation**][1] page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+- The Agent version
+- Whether the Agent has any unconfigured or misconfigured integrations
+- The services that the Agent is monitoring
+- The Agent's Remote Configuration status
+- The products that are enabled on the Agent
+
+### Examine an Agent
+
+Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
+
+{{< img src="agent/fleet_automation/fleet-automation-agent.png" alt="An Agent's integration information" style="width:100%;" >}}
+
+## Remote Agent Management
+
+Remote Agent Management simplifies the process of upgrading your Agent fleet by reducing the need to coordinate with multiple deployment or configuration management tools. For more information, see [Remote Agent Management][6].
+
 ## Send a remote flare
 
-Before you send a flare, make sure that Remote Configuration is [enabled](#configuring-fleet-automation) on the selected Agent.
+After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
-{{% remote-flare %}}
-
-{{< img src="agent/fleet_automation/fleet-automation-flares2.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 
@@ -81,3 +86,5 @@ For information on setting up roles and permissions, see [Access Control][5].
 [3]: /agent/remote_config#enabling-remote-configuration
 [4]: /infrastructure/list/#agent-configuration
 [5]: https://docs.datadoghq.com/account_management/rbac/
+[6]: /agent/fleet_automation/remote_management/
+[7]: /agent/troubleshooting/send_a_flare/#send-a-flare-from-the-datadog-site

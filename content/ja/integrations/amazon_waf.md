@@ -6,17 +6,27 @@ categories:
 - security
 - aws
 - log collection
+custom_kind: インテグレーション
 dependencies: []
 description: 許可およびブロックされたリクエストを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_waf/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/aws-waf-metrics/
+  tag: ブログ
+  text: AWS WAF 監視のためのキーメトリクス
+- link: https://www.datadoghq.com/blog/aws-waf-monitoring-tools/
+  tag: ブログ
+  text: AWS WAF データ収集のためのツール
+- link: https://www.datadoghq.com/blog/aws-waf-datadog/
+  tag: ブログ
+  text: Datadog を使用した AWS WAF のアクティビティの監視
 git_integration_title: amazon_waf
 has_logo: true
 integration_id: ''
 integration_title: AWS WAF
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_waf
 public_title: Datadog-AWS WAF インテグレーション
@@ -31,9 +41,9 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 このインテグレーションを有効にすると、WAF メトリクスを Datadog に表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -43,31 +53,35 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 2. [Datadog - AWS WAF インテグレーション][3]をインストールします。
 
-### 収集データ
-
-#### 監査ログ
+### ログ収集
 
 Web Application Firewall 監査ログを有効にして、Web ACL で分析されたトラフィックに関する詳細情報を取得します。
 
+#### WAF
 1. `aws-waf-logs-` から始まる名前で `Amazon Data Firehose` を作成します。
 2. `Amazon Data Firehose` の送信先で `Amazon S3` を選択し、`waf` をプレフィックスとして必ず追加してください。
-3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][4])。
+3. 希望する Web ACL を選択し、それを構成して、新しく作成した Firehose にログを送信するようにします ([詳細な手順はこちら][4])。
 
-WAF ログが収集され、S3 バケットに送信されます。
+#### WAFV2
+1. `aws-waf-logs-` から始まる名前で `S3 bucket` を作成します。
+2. Amazon S3 バケットのログの宛先を構成します ([詳細手順][5])。
+
+WAF/WAFV2 ログが収集され、指定された S3 バケットに送信されます。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
+1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで WAF ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
-   WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+3. トリガーを構成するには、WAF ログを含む S3 バケットを選択して、イベントタイプを `Object Created (All)` に変更します。
+4. **Add** をクリックします。
 
-**注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
+**注**: 
+- Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
+- "Configurations on the same bucket cannot share a common event type" (同じバケットの構成で共通のイベントタイプを共有することはできない) というエラーメッセージが表示された場合は、該当バケットに他の Lambda Forwarder にリンクされた別のイベント通知が存在しないことを確認してください。S3 バケットは、`All object create events` の複数のインスタンスを持つことができません。
 
-## Datadog Operator
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_waf" >}}
 
 
@@ -75,22 +89,23 @@ WAF ログが収集され、S3 バケットに送信されます。
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 AWS WAF インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS WAF インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-waf
-[4]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
-[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-logging.html
+[5]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

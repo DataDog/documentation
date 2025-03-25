@@ -1,7 +1,19 @@
 {
+  "api-management": {
+    "name": "API 管理",
+    "description": "Datadog API を通じて API エンドポイントを構成します。"
+  },
   "apm-retention-filters": {
     "name": "APM 保持フィルター",
-    "description": "組織の [APM 保持フィルター](https://app.datadoghq.com/apm/traces/retention-filters)の構成を管理します。このエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
+    "description": "組織の [APM 保持フィルター](https://app.datadoghq.com/apm/traces/retention-filters)の構成を管理します。このエンドポイントを操作するには、管理者権限を持つ API キーとアプリケーションキーが必要です。詳細については、トレース保持ページの[保持フィルター](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)をご覧ください。"
+  },
+  "aws-integration": {
+    "name": "AWS インテグレーション",
+    "description": "Datadog-AWS インテグレーションの構成は、Datadog API から直接行います。\n詳細については、[AWS インテグレーションのページ](https://docs.datadoghq.com/integrations/amazon_web_services)を参照してください。"
+  },
+  "aws-logs-integration": {
+    "name": "AWS ログインテグレーション",
+    "description": "Datadog-AWS-Logs インテグレーションの構成は、Datadog API から直接行います。\n詳細については、[AWS インテグレーションのページ](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)を参照してください。"
   },
   "audit": {
     "name": "監査",
@@ -9,31 +21,59 @@
   },
   "authn-mappings": {
     "name": "AuthN Mappings",
-    "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nは、ID プロバイダーから送信される属性を使用して、Datadogでユーザーグループをロールに自動的にマッピングするために使用されます。"
+    "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nは、ID プロバイダーから送信される属性を使用して、Datadogでユーザーグループをロールに自動的にマッピングするために使用されます。これらのエンドポイントを使用して、AuthN Mappings を管理します。"
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility パイプライン",
-    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計し、Datadog サイトに送信します。"
+    "description": "CI Visibility のパイプラインイベントを検索または集計し、HTTP 経由で Datadog サイトに送信します。詳細については、[Datadog の CI Pipeline Visibility ページ](https://docs.datadoghq.com/continuous_integration/pipelines/)をご覧ください。"
   },
   "ci-visibility-tests": {
     "name": "CI Visibility テスト",
-    "description": "CI Visibility のテストイベントを HTTP で検索・集計します。"
+    "description": "CI Visibility のテストイベントを HTTP 経由で検索または集計します。詳細については、[Datadog の Test Visibility ページ](https://docs.datadoghq.com/tests/)をご覧ください。"
   },
-  "cloud-workload-security": {
-    "name": "クラウドワークロードセキュリティ",
-    "description": "Datadog セキュリティエージェントを使用してイベントを生成するためのワークロードアクティビティセキュリティルール。"
+  "csm-agents": {
+    "name": "CSM エージェント",
+    "description": "Datadog Cloud Security Management (CSM) delivers real-time threat detection\nand continuous configuration audits across your entire cloud infrastructure,\nall in a unified view for seamless collaboration and faster remediation.\nGo to https://docs.datadoghq.com/security/cloud_security_management to learn more"
+  },
+  "csm-threats": {
+    "name": "CSM Threats",
+    "description": "Cloud Security Management Threats (CSM Threats) は、環境全体のファイル、ネットワーク、プロセスの活動を監視し、インフラストラクチャに対する脅威をリアルタイムで検出します。CSM Threats の設定については、[Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/) をご覧ください。"
+  },
+  "case-management": {
+    "name": "Case Management",
+    "description": "Case Management 内でケースとプロジェクトを表示および管理します。詳細については、[Case Management ページ](https://docs.datadoghq.com/service_management/case_management/)をご覧ください。"
+  },
+  "cloud-cost-management": {
+    "name": "Cloud Cost Management",
+    "description": "Cloud Cost Management API を使用すると、AWS および Azure 向け の Cloud Cost Management アカウントを設定・編集・削除できます。[Metrics エンドポイント](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)と `cloud_cost` データソース を用いてコストデータをクエリできます。詳細は [Cloud Cost Management ドキュメント](https://docs.datadoghq.com/cloud_cost_management/)をご覧ください。"
   },
   "cloudflare-integration": {
     "name": "Cloudflare インテグレーション",
-    "description": "Datadog API を通じて、Datadog Cloudflare インテグレーションを直接構成します。"
+    "description": "Datadog API を使用して、Datadog Cloudflare インテグレーションを直接管理します。詳細については、[Cloudflare インテグレーションページ](https://docs.datadoghq.com/integrations/cloudflare/)をご覧ください。"
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
-    "description": "Datadog API を通じて、Datadog Confluent Cloud インテグレーションを直接構成します。"
+    "description": "Datadog API を使用して、Datadog Confluent Cloud インテグレーションのアカウントとアカウントリソースを直接管理します。詳細については、[Confluent Cloud のページ](https://docs.datadoghq.com/integrations/confluent_cloud/)をご覧ください。"
+  },
+  "container-images": {
+    "name": "コンテナイメージ",
+    "description": "Container Images API を使用すると、組織のコンテナイメージデータをクエリできます。詳細については、[Container Images View ページ](https://docs.datadoghq.com/infrastructure/containers/container_images/)をご覧ください。"
+  },
+  "containers": {
+    "name": "コンテナ",
+    "description": "Containers API を使用すると、組織のコンテナデータをクエリできます。詳細については、[Container Monitoring ページ](https://docs.datadoghq.com/containers/)をご覧ください。"
+  },
+  "dora-metrics": {
+    "name": "DORA メトリクス",
+    "description": "DORA Metrics 用にイベントを送信し、ソフトウェアデリバリーを測定・改善します。詳細については、[DORA Metrics ページ](https://docs.datadoghq.com/dora_metrics/)をご覧ください。"
   },
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
     "description": "API を介してすべてのダッシュボードを整理、検索、およびチームや組織と共有できます。"
+  },
+  "domain-allowlist": {
+    "name": "Domain Allowlist",
+    "description": "Datadog API を通じて、Datadog Email Domain Allowlist を直接構成できます。\nEmail Domain Allowlist は、一部の Datadog メールが送信可能なドメインを制御します。\n詳細は [Domain Allowlist ドキュメントページ](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)をご覧ください。"
   },
   "downtimes": {
     "name": "ダウンタイム",
@@ -41,11 +81,11 @@
   },
   "events": {
     "name": "イベント",
-    "description": "イベントサービスを使用すると、プログラムでイベントをイベントストリームにポストしたり、イベントストリームから取得することができます。イベントは 4000 文字に制限されています。4000 文字を超えるメッセージを含むイベントが送信された場合は、最初の 4000 文字だけが表示されます。"
+    "description": "Event Management API を使用すると、Events Explorer にプログラムでイベントを投稿したり、Events Explorer からイベントを取得したりできます。詳細については、[Event Management ページ](https://docs.datadoghq.com/service_management/events/)をご覧ください。"
   },
   "fastly-integration": {
     "name": "Fastly インテグレーション",
-    "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
+    "description": "Datadog API を使用して、Datadog Fastly インテグレーションのアカウントとサービスを直接管理します。詳細については、[Fastly インテグレーションページ](https://docs.datadoghq.com/integrations/fastly/)をご覧ください。"
   },
   "gcp-integration": {
     "name": "GCP インテグレーション",
@@ -53,11 +93,11 @@
   },
   "ip-allowlist": {
     "name": "IP 許可リスト",
-    "description": "IP allowlist API は、Datadog API および Web UI にアクセスできる IP アドレスを管理するために使用されます。インテーク API や公開ダッシュボードへのアクセスをブロックするものではありません。\n\nこれはエンタープライズ専用の機能です。Datadog のサポートに連絡してアクセスをリクエストしてください。"
+    "description": "IP allowlist API は、Datadog API および Web UI にアクセスできる IP アドレスを管理するために使用されます。インテーク API や公開ダッシュボードへのアクセスをブロックするものではありません。\n\nこれはエンタープライズ専用の機能です。Datadog のサポートに連絡してアクセスをリクエストするか、[IP 許可リストページ](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/)を参照して詳細をご確認ください。"
   },
   "incident-services": {
     "name": "インシデントサービス",
-    "description": "インシデントに関連付けられるサービスを作成、更新、削除、取得します。"
+    "description": "インシデントに関連付けられるサービスを作成、更新、削除、および取得します。詳細については、[Incident Management ページ](https://docs.datadoghq.com/service_management/incident_management/)をご覧ください。"
   },
   "incident-teams": {
     "name": "インシデントサービス",
@@ -65,7 +105,7 @@
   },
   "incidents": {
     "name": "インシデント",
-    "description": "インシデント対応を管理します。"
+    "description": "インシデントレスポンス、および関連付けられたアタッチメント、メタデータ、ToDo を管理します。詳細については、[Incident Management ページ](https://docs.datadoghq.com/service_management/incident_management/)をご覧ください。"
   },
   "key-management": {
     "name": "Key Management",
@@ -73,27 +113,43 @@
   },
   "logs": {
     "name": "ログ",
-    "description": "ログを検索して、HTTP で Datadog プラットフォームに送信します。"
+    "description": "ログを検索し、HTTP 経由で Datadog プラットフォームに送信します。詳細については、[Log Management ページ](https://docs.datadoghq.com/logs/)をご覧ください。"
   },
   "logs-archives": {
     "name": "ログアーカイブ",
-    "description": "アーカイブは、取り込んだすべてのログをクラウドストレージシステムに転送します。\n\nウェブ UI で現在構成されているアーカイブのリストについては、[アーカイブページ](https://app.datadoghq.com/logs/pipelines/archives)を参照してください。"
+    "description": "アーカイブは、取り込まれたすべてのログをクラウドストレージシステムへ転送します。\n\n現在 Datadog に構成されているアーカイブ一覧については、[Archives ページ](https://app.datadoghq.com/logs/pipelines/archives)を参照してください。\n\nこれらのエンドポイントを操作するには、Admin 権限を持つ API キー と、スコープが設定されていないアプリケーションキーが必要です。"
+  },
+  "logs-custom-destinations": {
+    "name": "ログのカスタム宛先",
+    "description": "カスタム宛先は、取り込んだすべてのログを外部宛先に転送します。\n\n**注**: ログ転送は、政府 (US1-FED) サイトでは利用できません。詳細については、アカウント担当者にお問い合わせください。\n\nWeb UI で現在構成されているカスタム宛先のリストについては、[カスタム宛先ページ](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)をご覧ください。"
   },
   "logs-metrics": {
     "name": "ログメトリクス",
-    "description": "オーガニゼーションの[ログベースメトリクスlog-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics)のコンフィギュレーションのを管理します。"
+    "description": "組織向けの[ログベースメトリクス](https://app.datadoghq.com/logs/pipelines/generate-metrics)の構成を管理します。\nこれらのエンドポイントを操作するには、Admin 権限を持つ API キー と、スコープが設定されていないアプリケーションキーが必要です。"
   },
   "logs-restriction-queries": {
     "name": "ログ制限クエリ",
-    "description": "**注: このエンドポイントは公開ベータ版です。フィードバックがある場合は、[Datadog サポート](https://docs.datadoghq.com/help/)にご連絡ください。**\n\nログデータへの読み取りアクセスを許可するには、`logs_read_data` 権限を付与する必要があります。\nそこから、制限クエリをそのロールに関連付けることで、ロールが読み取りアクセスを許可するデータを制限できます。\n\n制限クエリは、`logs_read_data` 権限が読み取りアクセスを許可するログを制限するログクエリです。\nロールに制限クエリがあるユーザーの場合、ユーザーが行うログクエリは、制限クエリの 1 つにも一致するログイベントのみを返します。これは、ユーザーがログエクスプローラー、Live Tail、再ハイドレーション、ダッシュボードウィジェットなどのログ関連機能からログイベントをクエリするかどうかに関係なく当てはまります。\n\n制限クエリは現在、ログイベントの次のコンポーネントの使用のみをサポートしています。\n\n- 予約済み属性\n- ログメッセージ\n- タグ\n\n大規模または複雑な組織構造を持つ顧客のログデータに対する制限付き読み取りアクセスを管理するための推奨される方法は、ログイベントにチームタグを追加して、どのチームがそれらを所有しているかを示し、制限クエリをチームタグの適切な値にスコープすることです。タグはさまざまな方法でログイベントに適用できます。ログイベントには、同じキー (チームなど) と異なる値を持つ複数のタグを含めることができます。このようにして、制限クエリが異なるチームの値にスコープされているロールに同じログイベントを表示できます。\n\nこのエンドポイントとやり取りするには、管理者権限を持つ API とアプリケーションキーが必要です。"
+    "description": "**注: このエンドポイントは現在公開ベータ版です。フィードバックがございましたら、[Datadog サポート](https://docs.datadoghq.com/help/)までお寄せください。 **\n\n制限クエリ (Restriction Query) は、`logs_read_data` 権限によるログへの読み取りアクセス対象を制限するためのログクエリです。\nロールに制限クエリが設定されているユーザーがログクエリを実行すると、いずれのクエリであっても、その制限クエリのいずれかに合致するログイベントのみが返されます。これは、ログエクスプローラー、Live Tail、リハイドレーション、ダッシュボードウィジェットなど、あらゆるログ関連機能を通じてログイベントをクエリする場合でも同様です。\n制限クエリは現時点では、以下のログイベントコンポーネントのみをサポートしています。\n \n- 予約済み属性 (Reserved attributes)\n- ログメッセージ\n- タグ\n \nログデータへの読み取りアクセスを制限するには、対象のログイベントに所有チームを示すチームタグを付与し、そのタグ値に合わせて制限クエリのスコープを設定します。タグは様々な方法でログイベントに適用でき、1 つのログイベントに同一キー (例: team) で異なる値を持つ複数のタグを付けることも可能です。その結果、同一のログイベントが、異なるチーム値でスコープされた制限クエリを持つ複数のロールから参照される場合もあります。\n\nこれらのエンドポイントを操作するには、Admin 権限を持つ API キー と、スコープが設定されていないアプリケーションキーが必要です。\n\n制限クエリの追加方法など詳細については、[ログの RBAC の設定方法](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)を参照してください。"
   },
   "metrics": {
     "name": "メトリクス",
-    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする (時系列とスカラー)\n- メトリクスのタグコンフィギュレーションを変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示されるタイムフレームが長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` アクセス許可を持つユーザーのみが実行できます。"
+    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする (時系列とスカラー)\n- メトリクスのタグ構成を変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示される期間が長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` 権限を持つユーザーのみが実行できます。\n\n詳しくは[メトリクスページ](https://docs.datadoghq.com/metrics/)をご覧ください。"
+  },
+  "microsoft-teams-integration": {
+    "name": "Microsoft Teams インテグレーション",
+    "description": "Datadog API を介して [Datadog Microsoft Teams インテグレーション](https://docs.datadoghq.com/integrations/microsoft_teams/)を直接構成します。注: これらのエンドポイントはレガシーコネクタハンドルをサポートしていません。"
   },
   "monitors": {
     "name": "アラート設定",
     "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\n詳しくは、[モニターの作成](https://docs.datadoghq.com/monitors/create/types/)と[タグポリシー](https://docs.datadoghq.com/monitors/settings/)のページを参照してください。"
+  },
+  "network-device-monitoring": {
+    "name": "ネットワークデバイスモニタリング",
+    "description": "Network Device Monitoring API を使用すると、デバイスおよびインターフェイスならびにその属性を取得できます。詳細は [Network Device Monitoring ページ](https://docs.datadoghq.com/network_monitoring/)をご覧ください。"
+  },
+  "okta-integration": {
+    "name": "Okta インテグレーション",
+    "description": "[Datadog Okta インテグレーション](https://docs.datadoghq.com/integrations/okta/)を Datadog API を介して直接構成します。"
   },
   "opsgenie-integration": {
     "name": "Opsgenie インテグレーション",
@@ -103,13 +159,17 @@
     "name": "Organizations",
     "description": "Organization を作成、編集、および管理します。マルチ Organization のアカウントについては、[こちらを参照してください](https://docs.datadoghq.com/account_management/multi_organization)。"
   },
+  "powerpack": {
+    "name": "Powerpack",
+    "description": "パワーパックエンドポイントを使用すると、次のことができます。\n\n- パワーパックの取得\n- パワーパックの作成\n- パワーパックの削除\n- すべてのパワーパックのリストの取得\n\nPatch and Delete API メソッドは、特定のパワーパックのパワーパック作成権限を持つユーザーによってのみ実行できます。\n\n詳細については、[パワーパックを使用したグラフ作成の専門知識の拡張](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/)をご覧ください。"
+  },
   "processes": {
     "name": "プロセス",
-    "description": "処理 API により、オーガニゼーションのプロセスデータのクエリを作成できます。"
+    "description": "プロセス API を使用すると、組織のプロセスデータをクエリできます。詳細については、[Live Processes ページ](https://docs.datadoghq.com/infrastructure/process/)をご覧ください。"
   },
   "rum": {
     "name": "RUM",
-    "description": "HTTP 経由で RUM イベントを検索または集計します。"
+    "description": "Real User Monitoring (RUM) アプリケーションを管理し、HTTP 経由で RUM イベントを検索または集計します。詳細については、[RUM &amp; Session Replay ページ](https://docs.datadoghq.com/real_user_monitoring/)をご覧ください。"
   },
   "restriction-policies": {
     "name": "制限ポリシー",
@@ -119,21 +179,41 @@
     "name": "ロール",
     "description": "Roles API は、Datadog ロール、ロールに付与する[グローバルアクセス許可](https://docs.datadoghq.com/account_management/rbac/)、そしてそのロールに属するユーザーを作成し、管理するために使用します。\n\n特定のアカウントアセットに関連したアクセス許可は、この API を使用しなくても Datadog アプリケーションでロールに付与することができます。たとえば、ロールに特定のログインデックスの読み取りアクセス権限を付与する場合、Datadog の[パイプラインページ](https://app.datadoghq.com/logs/pipelines)から実行できます。"
   },
+  "rum-metrics": {
+    "name": "Rum Metrics",
+    "description": "組織向けの [RUM ベースメトリクス](https://app.datadoghq.com/rum/generate-metrics)を管理します。"
+  },
+  "scim": {
+    "name": "SCIM",
+    "description": "Provision Datadog users and teams using SCIM APIs.\n\nNote: SCIM provisioning for Datadog teams is only available for select organizations at this point. Request access by contacting Datadog support, or see the [SCIM page](https://docs.datadoghq.com/account_management/scim/) for more information."
+  },
   "security-monitoring": {
     "name": "セキュリティモニタリング",
-    "description": "信号を生成し、生成された信号を一覧表示するための検出ルール。"
+    "description": "セキュリティ ルール、シグナル、フィルターなどを作成および管理します。詳細については、[Datadog Security ページ](https://docs.datadoghq.com/security/)をご覧ください。"
   },
   "sensitive-data-scanner": {
     "name": "センシティブ データ スキャナー",
-    "description": "機密データスキャナーのグループやルールを作成、更新、削除、取得します。"
+    "description": "Sensitive Data Scanner グループとルールを作成、更新、削除、取得します。詳細については、[Sensitive Data Scanner ページ](https://docs.datadoghq.com/sensitive_data_scanner/)をご覧ください。"
   },
   "service-accounts": {
     "name": "サービスアカウント",
-    "description": "サービスアカウントを作成、編集、無効化します。"
+    "description": "サービスアカウントを作成、編集、および無効化します。詳細については、[サービスアカウントページ](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)をご覧ください。"
   },
   "service-definition": {
     "name": "サービス定義",
-    "description": "サービス定義の作成、更新、取得、削除を行うための API。"
+    "description": "API to create, update, retrieve and delete service definitions.\nNote: Service Catalog [v3.0 schema](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/) has new API endpoints documented under [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/). Use the following Service Definition endpoints for v2.2 and earlier."
+  },
+  "service-level-objectives": {
+    "name": "サービスレベル目標",
+    "description": "[サービスレベル目標](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration) (SLO) は、サイト信頼性エンジニアリングツールキットの重要な要素です。SLO は、アプリケーションのパフォーマンスに明確なターゲットを定義するためのフレームワークを提供し、最終的にはチームが一貫したカスタマーエクスペリエンスを提供し、プラットフォームの安定性と機能開発のバランスを取り、内部および外部ユーザーとのコミュニケーションを改善するのに役立ちます。"
+  },
+  "service-scorecards": {
+    "name": "サービススコアカード",
+    "description": "スコアカードのルールおよび成果 (アウトカム) を作成・更新するための API です。詳細は [サービススコアカード](https://docs.datadoghq.com/service_catalog/scorecards)をご覧ください。\n\nこの機能は現在ベータ版です。ご意見・ご要望がございましたら、[Datadog サポート](https://docs.datadoghq.com/help/)までお寄せください。"
+  },
+  "software-catalog": {
+    "name": "Software Catalog",
+    "description": "API を使用して、Software Catalog エンティティの作成・更新・取得・削除を行います。"
   },
   "spans": {
     "name": "スパン",
@@ -141,7 +221,7 @@
   },
   "spans-metrics": {
     "name": "スパンメトリクス",
-    "description": "組織の[スパンベースメトリクス](https://app.datadoghq.com/apm/traces/generate-metrics)の構成を管理します。"
+    "description": "組織の[スパンベースのメトリクス](https://app.datadoghq.com/apm/traces/generate-metrics)の構成を管理します。詳細については、[スパンからメトリクスを生成する](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)をご覧ください。"
   },
   "synthetics": {
     "name": "Synthetics",
@@ -149,14 +229,18 @@
   },
   "teams": {
     "name": "チーム",
-    "description": "Datadog 内のチームを表示・管理します。"
+    "description": "Datadog 内のチームを表示および管理します。詳細については、[チームページ](https://docs.datadoghq.com/account_management/teams/)をご覧ください。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",
-    "description": "使用量計測 API を使用すると、Datadog の複数のファセットで 1 時間ごと、1 日ごと、および 1 か月ごとの使用量を取得できます。\nこの API は、すべての Pro および Enterprise のお客様が利用できます。\n使用量にアクセスできるのは[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)のみです。\n\n**注**: 使用量データは、発生してから最大 72 時間遅れます。\n15 か月間保持されます。\n\n1 回のリクエストで、複数組織の 1 時間単位の利用データを最大 24 時間分、1 組織の 1 時間単位の利用データを最大 2 か月分取得することができます。"
+    "description": "使用量計測 API を使用すると、Datadog の多面的な使用量を 1 時間毎、1 日毎、1 か月毎に取得することができます。\nこの API は、Pro と Enterprise のすべてのお客様にご利用いただけます。\n\n**注**: 使用量データは、発生から最大 72 時間遅延します。\n15 か月間保持されます。\n\n1 回のリクエストで、複数組織の最大 24 時間分の 1 時間ごとの使用量データ、および単一組織の最大 2 か月分の 1 時間ごとの使用量データを取得できます。\n詳細については、[使用量の詳細ドキュメント](https://docs.datadoghq.com/account_management/billing/usage_details/)をご覧ください。"
   },
   "users": {
     "name": "ユーザー",
     "description": "ユーザーを作成、編集、無効化します。"
+  },
+  "workflow-automation": {
+    "name": "Workflow Automation",
+    "description": "Datadog Workflow Automation を使用して、チームの運用プロセスを自動化しましょう。"
   }
 }

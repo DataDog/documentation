@@ -24,6 +24,7 @@ categories:
 - 構成 & デプロイ
 - notifications
 - プロビジョニング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: configcat
 integration_title: ConfigCat
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: configcat
 public_title: ConfigCat
@@ -51,6 +51,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog により追跡する設定変更イベント
   media: []
@@ -71,11 +72,11 @@ tile:
 *例:*
 ![Datadog イベント][4]
 
-## 計画と使用
+## セットアップ
 
 1. [Datadog サブスクリプション][5]を入手します。
 2. [Datadog API キー][6]を取得します。
-    ![Datadog イベント][7] 
+    ![Datadog イベント][7]
 4. ConfigCat ダッシュボードで [integrations タブ][8]を開きます。
 5. Datadog の _CONNECT_ ボタンをクリックし、Datadog API キーを設定します。
 6. これで完了です。機能フラグに何かしらの変更を加え、次に Datadog でイベントをチェックします。
@@ -86,13 +87,13 @@ tile:
 1. ConfigCat ダッシュボードで [integrations タブ][8]を開きます。
 2. Datadog の DISCONNECT ボタンをクリックし、Datadog API キーを設定します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 ConfigCat インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 収集されたすべての ConfigCat 関連のイベントは、`source:configcat` プロパティと一緒に Datadog イベントストリームに表示され、製品、コンフィギュレーション、環境の各名前でタグ付けされます。
 
@@ -100,11 +101,11 @@ ConfigCat インテグレーションには、メトリクスは含まれませ�
 
 ![フィルタリング][9]
 
-### ヘルプ
+### サービスチェック
 
 ConfigCat インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要な場合は [ConfigCat ドキュメント][10]を確認するか、[ConfigCat サポート][11]にお問い合わせください。
 

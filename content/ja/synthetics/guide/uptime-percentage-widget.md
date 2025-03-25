@@ -41,12 +41,12 @@ title: SLO を用いて Web サイトのアップタイムを監視する
 
     {{< img src="synthetics/guide/uptime_slo/slo_notif.png" alt="SLO 通知" >}}
 
-5. **保存**をクリックします。
+5. **Save** をクリックします。
 
 ### ダッシュボードに SLO をインポートする
 
 1. [新しいダッシュボードを作成][6]して SLO ウィジェットをホストします。
-2. SLO サマリーウィジェットをボードにドラッグアンドドロップします。
+2. SLO ウィジェットをボードにドラッグアンドドロップします。
 3. 上記で定義した SLO を選択します。
 
     {{< img src="synthetics/guide/uptime_slo/slo_selection.png" alt="SLO ウィジェット選択" >}}

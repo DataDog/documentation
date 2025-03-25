@@ -73,7 +73,7 @@ Datadog combina estos tramos de OpenTelemetry con otros tramos de Datadog APM en
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/ruby/manual/#context-propagation
 [2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor

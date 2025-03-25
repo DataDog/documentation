@@ -23,6 +23,7 @@ author:
 categories:
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: neutrona
 integration_title: Neutrona
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: neutrona
 public_title: Neutrona
@@ -49,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Neutrona Telemetry
   media: []
@@ -66,11 +67,11 @@ tile:
 
 - Azure (ExpressRoute)
 
-## 計画と使用
+## セットアップ
 
 Neutrona チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -82,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Neutrona の[メトリクス](#metrics)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `neutrona.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル neutrona.d/conf.yaml][6] を参照してください。
@@ -93,21 +94,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Neutrona チ�
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `neutrona` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "neutrona" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 現時点で、Neutrona には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 現時点で、Neutrona には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

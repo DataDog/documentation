@@ -26,6 +26,9 @@ further_reading:
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集 "テール" の項目
+- link: https://github.com/DataDog/serilog-sinks-datadog-logs/
+  tag: GitHub パッケージ
+  text: Serilog.Sinks.Datadog.Logs パッケージ
 title: C# ログ収集
 ---
 
@@ -35,13 +38,16 @@ C# のログを Datadog に送信するには、次のいずれかの方法を�
 - [エージェントレスロギングを有効にします](#agentless-logging-with-apm)。
 - [Serilog シンクを使用します](#agentless-logging-with-serilog-sink)。
 
-このページでは、`Serilog`、`NLog`、`log4net`、`Microsoft.Extensions.Logging` ロギングライブラリのセットアップ例を、上記の各アプローチで詳しく説明します。
-
 ## Datadog Agent によるファイルテールロギング
 
-C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]することです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
+C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]監視することです。これにより、Datadog Agent が追加のメタデータでログを強化することができます。
 
 Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
+
+ファイルテールロギングは、以下のフレームワークをサポートしています。
+- Serilog
+- NLog
+- log4net
 
 ### ロガーの構成
 
@@ -456,9 +462,12 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 ## Serilog シンクによるエージェントレスロギング
 
+<div class="alert alert-info">バージョン <code>0.2.0</code> 以降、<a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> パッケージを使用して、<code>appsettings.json</code> ファイルで Datadog シンクを構成できます。 
+詳細は、<a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> パッケージを参照してください。</div>
+
 もし、ファイルテールロギングや APM エージェントレスロギングを使用することができず、`Serilog` フレームワークを使用している場合は、Datadog [Serilog シンク][19]を使用して直接 Datadog にログを送信することが可能です。
 
-Datadog [Serilog シンク][19]をアプリケーションにインストールします。このシンクは、イベントとログを Datadog に送信し、デフォルトではポート 443 の HTTPS 経由でログを転送します。
+[Datadog Serilog シンク][19]をアプリケーションにインストールします。このシンクは、イベントとログを Datadog に送信し、デフォルトではポート 443 の HTTPS 経由でログを転送します。
 パッケージマネージャーコンソールで、次のコマンドを実行してください。
 
 ```text
@@ -467,83 +476,14 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 次に、アプリケーションでロガーを直接初期化します。必ず[ご使用の `<API_KEY>`][15] を追加してください。
 
-{{< site-region region="us" >}}
-
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
     .CreateLogger())
 {
     // コード
 }
 ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
-    .CreateLogger())
-{
-    // コード
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
-    .CreateLogger())
-{
-    // コード
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
-    .CreateLogger())
-{
-    // コード
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger())
-{
-    // コード
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
-    .CreateLogger())
-{
-    // コード
-}
-```
-
-{{< /site-region >}}
 
 {{< site-region region="us" >}}
 
@@ -598,33 +538,6 @@ using (var log = new LoggerConfiguration()
 {{< /site-region >}}
 
 これで、新しいログが Datadog に直接送信されるようになります。
-
-または、`0.2.0` 以降、`Serilog.Setting.Configuration` パッケージで `appsettings.json` ファイルを使用して Datadog シンクを構成できます。
-
-`Serilog.WriteTo` 配列で、`DatadogLogs` のエントリを追加します。以下に例を示します。
-
-```json
-"Serilog": {
-  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
-  "MinimumLevel": "Debug",
-  "WriteTo": [
-    { "Name": "Console" },
-    {
-      "Name": "DatadogLogs",
-      "Args": {
-        "apiKey": "<API_キー>",
-        "source": "<ソース名>",
-        "host": "<ホスト名>",
-        "tags": ["<タグ_1>:<値_1>", "<タグ_2>:<値_2>"],
-      }
-    }
-  ],
-  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
-  "Properties": {
-    "Application": "Sample"
-  }
-}
-```
 
 ## その他の参考資料
 

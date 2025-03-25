@@ -3,6 +3,7 @@ app_id: storm
 app_uuid: a3c93ee5-077d-467d-87d7-a2325bdcf782
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: storm.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10207
     source_type_name: storm
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -21,6 +23,7 @@ author:
 categories:
 - metrics
 - event management
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/storm/README.md
 display_on_public_website: true
@@ -30,7 +33,6 @@ integration_id: storm
 integration_title: Storm
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: storm
 public_title: Storm
@@ -47,6 +49,7 @@ tile:
   - Category::Metrics
   - Category::Event Management
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Apache Storm 1.x.x トポロジー実行統計
   media: []
@@ -55,6 +58,7 @@ tile:
   title: Storm
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -80,7 +84,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Storm チェ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### 構成
 
 1. Storm の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `storm.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル storm.d/conf.yaml][5] を参照してください。
 
@@ -100,7 +104,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Storm チェ�
 
 Storm チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "storm" >}}
 
 
@@ -109,7 +113,7 @@ Storm チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [3]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory

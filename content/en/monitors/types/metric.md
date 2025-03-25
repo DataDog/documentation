@@ -12,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "/monitors/types/change-alert"
@@ -151,6 +151,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
   - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
+  - `N/A` groups are not included in monitors, so tag keys must have a value. 
 
 ## Set alert conditions
 
@@ -188,7 +189,7 @@ The following logic determines the bucket size:
 In order to be considered as a "full window", the monitor requires:
 
 1. At least one data point in the first bucket. The first bucket is chronologically the earliest bucket in the window.
-2. At most three buckets in total with no data points (including the first one).
+2. No more than three buckets in total with no data points.
 
 If the conditions are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state is unchanged.
 

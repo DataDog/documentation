@@ -11,7 +11,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-## コンフィギュレーション
+## 構成
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -20,7 +20,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 CI/CD パイプラインにコマンドを追加してすべてのサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
 
-### Install
+### インストール
 
 NPM または Yarn を使用して Datadog CLI をインストールします。
 
@@ -65,7 +65,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 
 [Datadog Serverless Plugin][1] は、レイヤーを使用して Datadog Lambda ライブラリを関数に自動的に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][3]に追加する必要があります。
+Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Serverless Plugin をインストールする前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名構成][3]に追加する必要があります。
 
 Datadog サーバーレスプラグインをインストールして構成するには、次の手順に従います。
 
@@ -94,7 +94,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 [Datadog CloudFormation マクロ][1]は、SAM アプリケーションテンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-### Install
+### インストール
 
 [AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
@@ -140,7 +140,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 
 [Datadog CloudFormation マクロ][1]は、AWS CDK によって生成された CloudFormation テンプレートを自動的に変換して、レイヤーを使用して Datadog Lambda ライブラリを関数に追加し、[Datadog Forwarder][2] を介してメトリクス、トレース、ログを Datadog に送信するように関数を構成します。
 
-### Install
+### インストール
 
 [AWS 認証情報][3]で次のコマンドを実行して、マクロ AWS リソースをインストールする CloudFormation スタックをデプロイします。アカウントの特定のリージョンに**一度だけ**マクロをインストールする必要があります。マクロを最新バージョンに更新するには、`create-stack` を `update-stack` に置き換えます。
 
@@ -280,7 +280,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 {{% /tab %}}
 {{% tab "Container Image" %}}
 
-### Install
+### インストール
 
 Lambda 関数をコンテナイメージとしてデプロイする場合は、Datadog Lambda ライブラリをレイヤーとして使用できません。代わりに、Datadog Lambda ライブラリを、イメージ内の関数の依存関係としてインストールする必要があります。
 
@@ -315,7 +315,7 @@ pip install datadog-lambda
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-### Install
+### インストール
 
 Datadog Lambda ライブラリは、レイヤー (推奨) または Python パッケージとしてインストールできます。
 

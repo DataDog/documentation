@@ -7,8 +7,9 @@ import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
 import { loadPage } from './components/async-loading';
-import { loadInstantSearch } from './components/algolia';
+import { loadInstantSearch } from './components/instantsearch';
 import { setMobileNav, closeMobileNav } from './components/mobile-nav';
+import ExpressionLanguageEvaluator from './components/expression-language-evaluator';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -81,7 +82,7 @@ const doOnLoad = () => {
         });
     }
 
-    // Load algolia instant search for the first time
+    // Load instant search for the first time
     loadInstantSearch((asyncLoad = false));
 
     if (!bodyClassContains('api')) {
@@ -123,6 +124,11 @@ const doOnLoad = () => {
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
     }
+
+    // Only initialize the expression language evaluator if the page contains an expression evaluator.
+    if (document.querySelector('.expression-evaluator')) {
+        new ExpressionLanguageEvaluator();
+    }
 };
 
 DOMReady(doOnLoad);
@@ -130,7 +136,7 @@ DOMReady(doOnLoad);
 function getVisibleParentPath(ancestralEl, path){
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
-    
+
     let el = document.querySelector(`${ancestralEl} [data-path="${path}"][data-skip="false"]`)
     // account for preview branch name in url
     let endIdx = env === 'preview' ? 6 : 4
@@ -178,7 +184,7 @@ function getPathElement(event = null) {
     path = path.replace(/\/$/, '');
 
     let sideNavPathElement = getVisibleParentPath('.side',path)
-    
+
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
@@ -411,7 +417,6 @@ window.addEventListener(
     'popstate',
     function (event) {
         setMobileNav();
-        loadPage(window.location.href);
         closeNav();
         getPathElement();
     }

@@ -3,6 +3,10 @@ title: Application Security Management
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
   - /security_platform/application_security
+  - /security/application_security/enabling/single_step
+  - /security/application_security/enabling/compatibility
+  - /security/application_security/enabling
+  - /security/application_security/getting_started
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -10,24 +14,15 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
-- link: "/security/application_security/enabling/#compatibility"
-  tag: "Documentation"
-  text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
   text: "Datadog Application Security Management"
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
-  tag: "Blog"
-  text: "Introducing Datadog Application Security"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
-- link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
-  tag: "Blog"
-  text: "Best practices for application security in cloud-native environments"
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
@@ -40,6 +35,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
   tag: "Blog"
   text: "Monitor AWS WAF activity with Datadog"
+- link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
+  tag: "Blog"
+  text: "How Datadog Security Inbox prioritizes security risks"
+- link: "https://www.datadoghq.com/blog/understanding-your-waf/"
+  tag: "Blog"
+  text: "Understanding your WAF: How to address common gaps in web application security"
+algolia:
+  tags: ["asm", "application security"]
 ---
 
 {{< site-region region="gov" >}}
@@ -68,15 +71,16 @@ If you're curious how Application Security Management is structured and how it u
 
 Powered by provided [out-of-the-box rules][4], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect and protect threats with ASM, follow the [Enabling documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+To start configuring your environment to detect and protect threats with ASM, follow the enabling documentation for each product. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
 ## Investigate and remediate security signals
 
 In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
-## Investigate risk introduced in upstream open source libraries and dependencies
+## Disable ASM
+For information on disabling ASM or its features, see the following:
 
-[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+- [Disabling threat management and protection][10]
 
 ## Next steps
 
@@ -86,7 +90,10 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [2]: /agent/
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/?category=cat-application-security
-[5]: /security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/software_composition_analysis/
+[8]: /security/code_security/software_composition_analysis/
+[9]: /security/code_security/
+[10]: /security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /security/application_security/troubleshooting/#disabling-code-security

@@ -7,6 +7,7 @@ categories:
 - cloud
 - log collection
 - network
+custom_kind: integration
 dependencies: []
 description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
@@ -17,7 +18,6 @@ integration_id: ''
 integration_title: Amazon CloudFront
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_cloudfront
 public_title: Datadog-Amazon CloudFront インテグレーション
@@ -32,9 +32,9 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 このインテグレーションを有効にすると、Datadog にすべての CloudFront メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -88,7 +88,7 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 
 Datadog は、このデフォルトのコンフィギュレーションを維持し、以下のカスタムパースルールを追加して、すべてのフィールドが有効な状態でログを自動的に処理することをおすすめします。
 
-[Pipelines ページ][1]に移動し、Amazon CloudFront を検索し、[grok parser processor を作成または編集][7]し、*Advanced Settings* に以下のヘルパールールを追加します。
+[Pipelines ページ][1]に移動し、Amazon CloudFront を検索し、[grok parser processor を作成または編集][2]し、*Advanced Settings* に以下のヘルパールールを追加します。
 
 {{< code-block lang="java" >}}
       real_time_logs (%{number:timestamp:scale(1000)}|%{number:timestamp})\s+%{_client_ip}\s+%{_time_to_first_byte}\s+%{_status_code}\s+%{_bytes_write}\s+%{_method}\s+%{regex("[a-z]*"):http.url_details.scheme}\s+%{notSpace:http.url_details.host:nullIf("-")}\s+%{notSpace:http.url_details.path:nullIf("-")}\s+%{_bytes_read}\s+%{notSpace:cloudfront.edge-location:nullIf("-")}\s+%{_request_id}\s+%{_ident}\s+%{_duration}\s+%{_version}\s+IPv%{integer:network.client.ip_version}\s+%{_user_agent}\s+%{_referer}\s+%{notSpace:cloudfront.cookie}\s+(%{notSpace:http.url_details.queryString:querystring}|%{notSpace:http.url_details.queryString:nullIf("-")})\s+%{notSpace:cloudfront.edge-response-result-type:nullIf("-")}\s+%{_x_forwarded_for}\s+%{_ssl_protocol}\s+%{_ssl_cipher}\s+%{notSpace:cloudfront.edge-result-type:nullIf("-")}\s+%{_fle_encrypted_fields}\s+%{_fle_status}\s+%{_sc_content_type}\s+%{_sc_content_len}\s+%{_sc_range_start}\s+%{_sc_range_end}\s+%{_client_port}\s+%{_x_edge_detailed_result_type}\s+%{notSpace:network.client.country:nullIf("-")}\s+%{notSpace:accept-encoding:nullIf("-")}\s+%{notSpace:accept:nullIf("-")}\s+%{notSpace:cache-behavior-path-pattern:nullIf("-")}\s+%{notSpace:headers:nullIf("-")}\s+%{notSpace:header-names:nullIf("-")}\s+%{integer:headers-count}.*
@@ -96,33 +96,35 @@ Datadog は、このデフォルトのコンフィギュレーションを維持
 
 #### ログを Datadog に送信する方法
 
-リアルタイムログは、選択した Kinesis Data Stream へ配信され、[Amazon Data Firehose インテグレーション][2]により Datadog に直接転送することが可能です。
+リアルタイムログは、選択した Kinesis Data Stream へ配信され、[Amazon Data Firehose インテグレーション][3]を使用して Datadog に直接転送することが可能です。
 
-Amazon Data Firehose などのコンシューマーを構成してリアルタイムログを S3 バケットに送信し、[Datadog Lambda forwarder][3] を使用してログを Datadog へ送信することもできます。
+Amazon Data Firehose などのコンシューマーを構成してリアルタイムログを S3 バケットに送信し、[Datadog Lambda forwarder][4] を使用してログを Datadog へ送信することもできます。
+
 
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
-[3]: https://docs.datadoghq.com/ja/serverless/forwarder/
+[2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#grok-parser
+[3]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/
+[4]: https://docs.datadoghq.com/ja/serverless/forwarder/
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_cloudfront" >}}
 
 
 AWS から取得される各メトリクスには、`aws_account`、`region`、`distributionid` など、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 Amazon CloudFront インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon CloudFront インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

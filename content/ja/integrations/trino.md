@@ -22,6 +22,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/trino/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: trino
 integration_title: Trino
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: trino
 public_title: Trino
@@ -46,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Trino クラスターのパフォーマンスと使用量を収集する
   media: []
@@ -64,9 +65,9 @@ tile:
 - 全体的なアクティビティメトリクス: 完了/失敗したクエリ、データ入力/出力サイズ、実行時間。
 - パフォーマンスメトリクス: クラスターメモリ、入力 CPU 時間、実行 CPU 時間。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -78,7 +79,7 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `trino.d/conf.yaml` ファイルを編集して、
    Trino パフォーマンスデータの収集を開始します。
@@ -95,21 +96,21 @@ Agent v7.33.0 以降の場合は、下記の手順に従い Trino チェック�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで Trino を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "trino" >}}
 
 
-### ヘルプ
+### イベント
 
 Trino インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Trino インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

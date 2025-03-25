@@ -19,7 +19,7 @@ assets:
     source_type_name: Amazon Bedrock
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
@@ -27,6 +27,7 @@ categories:
 - モニター
 - クラウド
 - ai/ml
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -35,7 +36,6 @@ integration_id: amazon-bedrock
 integration_title: Amazon Bedrock
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_bedrock
 public_title: Amazon Bedrock
@@ -48,10 +48,14 @@ tile:
   - Category::Metrics
   - Category::Cloud
   - Category::AI/ML
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon Bedrock は、API を通じて AI 基盤モデルを利用可能にします。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-amazon-bedrock-with-datadog/
   support: README.md#Support
   title: Amazon Bedrock
 ---
@@ -63,9 +67,9 @@ Amazon Bedrock は、Amazon および先進的な AI スタートアップの[�
 
 このインテグレーションを有効にすると、Datadog にすべての Bedrock メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -74,21 +78,21 @@ Amazon Bedrock は、Amazon および先進的な AI スタートアップの[�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `Bedrock` が有効になっていることを確認します。
 2. [Datadog - Amazon Bedrock インテグレーション][4]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_bedrock" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon Bedrock インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon Bedrock インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

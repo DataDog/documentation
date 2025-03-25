@@ -42,6 +42,9 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 {{% dbm-create-oracle-user %}}
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Install the Agent
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
@@ -60,7 +63,7 @@ instances:
   - server: '<RAC_NODE_1>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - rac_cluster:<CLUSTER_NAME>
@@ -69,7 +72,7 @@ instances:
   - server: '<RAC_NODE_2>:<PORT>'
     service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     dbm: true
     tags:  # Optional
       - rac_cluster:<CLUSTER_NAME>

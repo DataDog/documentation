@@ -26,7 +26,6 @@ La convención de nomenclatura es un arte y posiblemente una de las decisiones m
 * Solo puede contener caracteres alfanuméricos ASCII, guiones bajos y puntos. Los demás caracteres se convierten en guiones bajos.
 * No debe superar los 200 caracteres (aunque, desde el punto de vista de la interfaz de usuario, es preferible que tenga menos de 100).
 * No se admite Unicode.
-* Es recomendado para evitar espacios.
 
 Las métricas informadas por el Agent tienen un formato pseudojerárquico de puntos, por ejemplo: `http.nginx.response_time`. Se describe como pseudojerárquico porque en realidad no se impone una jerarquía, pero la estructura se utiliza para inferir ciertas relaciones, por ejemplo: "_Veo que hostA y hostB informan de `http.nginx.*`, deben ser frontend web"_).
 
@@ -46,7 +45,7 @@ Datadog recomienda utilizar el etiquetado de servicios unificado al asignar etiq
 
 Ejemplos de claves de etiqueta de métrica comunes son `instance`, `name` y `role`.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

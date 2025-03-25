@@ -14,9 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
   tag: blog
-  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
+  text: Datadog Observability Pipelines によるログの変換と強化
 title: ノートブック
 ---
 
@@ -77,6 +77,40 @@ title: ノートブック
 
 ユーザーが特定のセルの URL にアクセスすると、ノートブックが開き、ビューポートの上部にセルが表示されます。絶対リンクのため、セルの URL はノートブック内で新しい位置に移されたとしても、変わることはありません。
 
+## ノートブックに画像を追加する
+
+<div class="alert alert-info">ファイル形式は PNG、JPG、JPEG、GIF のみ対応しており、アップロードの最大ファイルサイズは 4MB です。</a></div>
+
+ノートブックに画像を追加するには、[イメージセル](#image-cell)または [Markdown エディタ](#markdown-editor)のいずれかを使用します。
+
+### イメージセル
+
+この方法では、画像をテキストとは別のセルに配置し、サイズ変更、整列、キャプションの追加が可能です。イメージセルでアップロードされた画像は Datadog によってホストされます。
+
+画像を追加するには、**Add New Cell** メニューの **Image** セルオプションをクリックします。
+
+{{< img src="notebooks/image_cell.png" alt="Add New Cell メニューのイメージセル" style="width:70%;" >}}
+
+Datadog にホストする画像をアップロードするには、以下のいずれかの方法を使用します。
+- アップロード領域に画像ファイルをドロップします。
+- **Choose File** をクリックし、ファイルディレクトリから画像を選択します。
+- 画像の公開 URL を貼り付けます。
+
+セルのアクショントレイにあるアイコンをクリックして、サイズや配置を調整したり、キャプションを追加したり、フルスクリーンモードで画像を表示したりします。
+
+{{< img src="notebooks/notebooks_image_edit_action_tray.png" alt="イメージセルのアクショントレイで画像の配置を調整し、キャプションを追加する" style="width:70%;" >}}
+
+### Markdown エディタ
+
+この方法では画像はテキストとインラインで配置されますが、画像のサイズを変更するオプションはありません。
+
+任意の Markdown セルの編集モードに入り、以下のいずれかの方法で画像を追加します。
+- 画像ファイルをテキストセル領域にドロップします。
+- 画像をコピーしてテキストセル領域に直接貼り付けます。
+- ヘッダーの画像ウィジェットを使用するか、[公式 Markdown ガイド][2]を参照して外部画像をハイパーリンクします。**注**: この方法では Datadog にホストする画像をアップロードしません。
+
+画像をノートブックに保存する前に、Preview タブで画像を確認できます。
+
 ## ノートブック一覧
 
 {{< img src="notebooks/notebook_list.png" alt="選択したノートブックのセルの種類をプレビューするノートブック一覧" style="width:100%;">}}
@@ -90,10 +124,10 @@ title: ノートブック
 任意のノートブックのプレビューアイコンにカーソルを合わせると、ウィジェットタイプや Markdown を含むコンテンツのプレビューが表示されます。[ビューモード](#view-mode)でノートブックを開くには、ノートブックにカーソルを合わせ、右側にある **Open notebook in view mode** をクリックします。
 
 ## テンプレートギャラリー
-[テンプレートギャラリー][2]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+[テンプレートギャラリー][3]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
 
 ## バージョン履歴
-ノートブックから **Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][3]を参照してください。
+ノートブックから ** Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][4]を参照してください。
 
 ## ノートブックの構成
 
@@ -135,7 +169,7 @@ title: ノートブック
 
 ### テンプレート変数
 
-ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][4]を参照してください。
+ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][5]を参照してください。
 
 ### セルの構成
 
@@ -159,26 +193,31 @@ title: ノートブック
 
 #### コンテンツの種類
 
-ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][6] でフォーマットされたダイアグラムもサポートしています。
+ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][6] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][7] でフォーマットされたダイアグラムもサポートしています。
 
 ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
 
-* [時系列][7]
-* [トップリスト][8]
-* [テーブル][9]
-* [ヒートマップ][10]
-* [ディストリビューション][11]
-* [リスト][12]
-* [クエリ値][13]
-* [ファネル][14]
-* [パイ][15]
-* [SLO][16]
+* [テキスト][8]
+* [画像](#add-images-to-cells)
+* [時系列][9]
+* [トップリスト][10]
+* [テーブル][11]
+* [クエリ値][12]
+* [ヒートマップ][13]
+* [分布][14]
+* [リスト][15]
+* [プロファイリングフレームグラフ][16]
+* [ファネル][17]
+* [円グラフ][18]
+* [ツリーマップ][16]
+* [ジオマップ][19]
+* [SLO][20]
 
 ### 編集アクセス権の制限
 
 デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
 
-きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][17]を制限することができます。
+きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][21]を制限することができます。
 1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
@@ -201,19 +240,23 @@ title: ノートブック
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
-[3]: /ja/notebooks/guide/version_history
-[4]: /ja/dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: https://mermaid.js.org/
-[7]: /ja/dashboards/widgets/timeseries/
-[8]: /ja/dashboards/widgets/top_list/
-[9]: /ja/dashboards/widgets/table/
-[10]: /ja/dashboards/widgets/heatmap/
-[11]: /ja/dashboards/widgets/distribution/
-[12]: /ja/dashboards/widgets/list/
-[13]: /ja/dashboards/widgets/query_value/
-[14]: /ja/dashboards/widgets/funnel/
-[15]: /ja/dashboards/widgets/pie_chart/
-[16]: /ja/dashboards/widgets/slo/
-[17]: /ja/account_management/rbac/
+[2]: https://www.markdownguide.org/basic-syntax/#images-1
+[3]: https://app.datadoghq.com/notebook/template-gallery
+[4]: /ja/notebooks/guide/version_history
+[5]: /ja/dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /ja/dashboards/widgets/free_text/
+[9]: /ja/dashboards/widgets/timeseries/
+[10]: /ja/dashboards/widgets/top_list/
+[11]: /ja/dashboards/widgets/table/
+[12]: /ja/dashboards/widgets/query_value/
+[13]: /ja/dashboards/widgets/heatmap/
+[14]: /ja/dashboards/widgets/distribution/
+[15]: /ja/dashboards/widgets/list/
+[16]: /ja/dashboards/widgets/treemap/
+[17]: /ja/dashboards/widgets/funnel/
+[18]: /ja/dashboards/widgets/pie_chart/
+[19]: /ja/dashboards/widgets/geomap/
+[20]: /ja/dashboards/widgets/slo/
+[21]: /ja/account_management/rbac/

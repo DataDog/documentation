@@ -3,11 +3,13 @@ app_id: amazon-eks-blueprints
 app_uuid: 4c0828d6-0c41-47d0-aa20-c174773e2bda
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10268
     source_type_name: amazon_eks_blueprints
 author:
   homepage: https://www.datadoghq.com
@@ -19,6 +21,7 @@ categories:
 - 構成 & デプロイ
 - コンテナ
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md
 display_on_public_website: true
@@ -28,7 +31,6 @@ integration_id: amazon-eks-blueprints
 integration_title: Datadog Blueprints アドオン
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
 public_title: Datadog Blueprints アドオン
@@ -47,6 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
   media: []
@@ -55,6 +58,7 @@ tile:
   title: Datadog Blueprints アドオン
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要

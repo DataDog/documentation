@@ -21,6 +21,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
+Supported MariaDB versions
+: 10.5, 10.6, 10.11, or 11.1 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][13].
+
 Supported Agent versions
 : 7.36.1+
 
@@ -39,18 +43,6 @@ Data security considerations
 To collect query metrics, samples, and explain plans, enable the [MySQL Performance Schema][3] and configure the following [Performance Schema Options][4], either on the command line or in configuration files (for example, `mysql.conf`):
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
-| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -58,6 +50,17 @@ To collect query metrics, samples, and explain plans, enable the [MySQL Performa
 | `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Optional. Enables tracking recent query history per thread. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `ON` | Required. Enables the Performance Schema. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. If left at the default value then queries longer than `1024` characters will not be collected. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
 | `performance-schema-consumer-events-statements-current` | `ON` | Required. Enables monitoring of currently running queries. |
 | `performance-schema-consumer-events-waits-current` | `ON` | Required. Enables the collection of wait events. |
 | `performance-schema-consumer-events-statements-history-long` | `ON` | Recommended. Enables tracking of a larger number of recent queries across all threads. If enabled it increases the likelihood of capturing execution details from infrequent queries. |
@@ -75,18 +78,6 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
@@ -100,6 +91,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Create the following schema:
@@ -107,7 +110,6 @@ Create the following schema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Create the `explain_statement` procedure to enable the Agent to collect explain plans:
@@ -141,6 +143,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][14] section below for more info on how to grant the Agent permissions for this collection.
+
+
 ### Runtime setup consumers
 Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
@@ -155,6 +160,9 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ## Install the Agent
 
@@ -176,10 +184,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
-
-**Note**: Wrap your password in single quotes in case a special character is present.
 
 Note that the `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
 
@@ -274,7 +280,7 @@ In addition to telemetry collected from the database by the Agent, you can also 
 
 ## Validate
 
-[Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
+[Run the Agent's status subcommand][10] and look for `mysql` under the Checks section, or see the [Databases][11] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
@@ -299,3 +305,5 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
+[13]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[14]: /database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas

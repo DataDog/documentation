@@ -19,7 +19,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Supported Azure PostgreSQL deployment types
 : PostgreSQL on Azure VMs, Single Server, Flexible Server
@@ -185,6 +185,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Securely store your password
+{{% dbm-secret %}}
+
 ### Verify
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
@@ -245,7 +248,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        host: '<AZURE_INSTANCE_ENDPOINT>'
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -315,7 +318,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "ENC[datadog_user_database_password]", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -327,13 +330,8 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 See the [Postgres integration spec][2] for additional information on setting `deployment_type` and `name` fields.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] on how to pass the password in as an environment variable.
-
-
 [1]: /agent/docker/integrations/?tab=docker
-[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[3]: /agent/configuration/secrets-management
-[4]: /agent/faq/template_variables/
+[2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L47
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -350,7 +348,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        postgres.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -358,7 +356,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
               host: <AZURE_INSTANCE_ENDPOINT>
               port: 5432
               username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
-              password: '<UNIQUE_PASSWORD>'
+              password: 'ENC[datadog_user_database_password]'
               ssl: 'require'
               azure:
                 deployment_type: '<DEPLOYMENT_TYPE>'
@@ -400,7 +398,7 @@ instances:
     host: '<AZURE_INSTANCE_ENDPOINT>'
     port: 5432
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     ssl: "require"
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
@@ -435,7 +433,7 @@ metadata:
           "host": "<AZURE_INSTANCE_ENDPOINT>",
           "port": 5432,
           "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "ssl": "require",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",

@@ -3,6 +3,7 @@ app_id: upstash
 app_uuid: fe1f17e3-11a4-4e44-b819-8781ebcc86f8
 assets:
   dashboards:
+    Upstash-Kafka-Overview: assets/dashboards/upstash_kafka_overview.json
     Upstash-Overview: assets/dashboards/upstash_overview.json
   integration:
     auto_install: true
@@ -10,13 +11,15 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: upstash.db.totaldatasize
+      check:
+      - upstash.metadata.metric_publish
       metadata_path: metadata.csv
-      prefix: upstash.db.
+      prefix: upstash.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 10412
     source_type_name: Upstash
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://upstash.com
   name: Upstash
@@ -26,6 +29,7 @@ categories:
 - クラウド
 - ai/ml
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/upstash/README.md
 display_on_public_website: true
@@ -35,11 +39,10 @@ integration_id: upstash
 integration_title: Upstash
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: upstash
 public_title: Upstash
-short_description: Upstash からの帯域幅、キースペース、レイテンシー、ヒット/ミス率のデータを視覚化する
+short_description: Visualize metrics for databases and kafka clusters from Upstash
 supported_os:
 - linux
 - windows
@@ -56,10 +59,13 @@ tile:
   - Category::Data Stores
   - Submitted Data Type::Metrics
   configuration: README.md#Setup
-  description: Upstash からの帯域幅、キースペース、レイテンシー、ヒット/ミス率のデータを視覚化する
+  description: Visualize metrics for databases and kafka clusters from Upstash
   media:
   - caption: Upstash データベースメトリクス
     image_url: images/upstash-dashboard.png
+    media_type: image
+  - caption: Upstash Kafka Metrics
+    image_url: images/upstash-kafka-overview-dashboard.png
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -91,9 +97,9 @@ Upstash は、さまざまなアプリケーションに対して Redis®、Kafk
     * 総データサイズ
     * スループット
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Upstash][1] にアクセスして無料でサインアップしてください。登録が完了したら、Datadog の [Upstash インテグレーションタイル][2]にアクセスし、インテグレーションをインストールします。インストールが完了したら、**Configure** タブに移動し、**Connect Accounts** をクリックします。これにより、Datadog の OAuth フローが案内され、Upstash がデータベースメトリクスにアクセスできるようになります。
 
@@ -103,15 +109,15 @@ Upstash から Datadog インテグレーションを削除するには、[Upsta
 
 さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][4]で `upstash` を検索して確認してください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "upstash" >}}
 
-### ヘルプ
+### イベント
 Upstash インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Upstash インテグレーションには、サービスのチェック機能は含まれません。
 

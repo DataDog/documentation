@@ -53,6 +53,8 @@ If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x
 
 Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
+<div class="alert alert-info">With frameworks like <strong>Next.js</strong> and <strong>Nest.js</strong> you must either provide an environment variable or add an additional Node.js flag. See <a href="/tracing/trace_collection/compatibility/nodejs/#complex-framework-usage">Complex framework usage</a> for more information.</div>
+
 After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
 When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
@@ -65,6 +67,10 @@ When using a transpiler such as TypeScript, Webpack, Babel, or others, import an
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
+
+**Note**: `DD_TRACE_ENABLED` is true by default, which means some instrumentation occurs at import time, before initialization. To fully disable instrumentation, you can do one of the following:
+- import the module conditionally 
+- set `DD_TRACE_ENABLED=false` (if, for example, static or top-level ESM imports prevent conditional loading)
 
 ##### TypeScript and bundlers
 
@@ -128,7 +134,7 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Esbuild support
+#### Bundling with Esbuild
 
 This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
@@ -146,7 +152,7 @@ esbuild.build({
   platform: 'node', // allows built-in modules to be required
   target: ['node16'],
   external: [
-    // esbuild cannot bundle native modules
+    // required if you use native metrics
     '@datadog/native-metrics',
 
     // required if you use profiling
@@ -168,6 +174,48 @@ esbuild.build({
 })
 ```
 
+#### Bundling with Next.js
+
+If you are using Next.js or another framework relying on webpack to bundle your application, add a declaration
+similar to the one for webpack inside your `next.config.js` configuration file:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // ... non-relevant parts omitted, substitute your own config ...
+
+  // this custom webpack config is required for Datadog tracing to work
+  webpack: (
+    config,
+    { buildId, dev, isServer, defaultLoaders, nextRuntime, webpack }
+  ) => {
+    const externals = [
+      // required if you use native metrics
+      '@datadog/native-metrics',
+
+      // required if you use profiling
+      '@datadog/pprof',
+
+      // required if you use Datadog security features
+      '@datadog/native-appsec',
+      '@datadog/native-iast-taint-tracking',
+      '@datadog/native-iast-rewriter',
+
+      // required if you encounter graphql errors during the build step
+      'graphql/language/visitor',
+      'graphql/language/printer',
+      'graphql/utilities'
+    ];
+    config.externals.push(...externals);
+    return config;
+  },
+};
+
+export default nextConfig;
+```
+
+#### General bundling remarks
+
 **Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
 
 To generate a smaller `node_modules/` directory with only the required native modules, (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
@@ -186,6 +234,8 @@ npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
+**Note**: In case of Next.js the `path/to/bundle` is usually the `.next/standalone` directory of your app.
+
 At this stage you should be able to deploy your bundle, (which is your application code and most of your dependencies), with the `node_modules/` directory, which contains the native modules and their dependencies.
 
 ## Configuration
@@ -203,5 +253,6 @@ Read [tracer settings][3] for a list of initialization options.
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
+[6]: /tracing/trace_collection/compatibility/nodejs/#complex-framework-usage
 [11]: /tracing/trace_collection/library_injection_local/
 [13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

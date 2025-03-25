@@ -50,14 +50,14 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure インテグレーションプログラム管理ガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Azure Native インテグレーションプログラム管理ガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Azure Native インテグレーションの管理{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Datadog による Azure クラウド採用フレームワーク{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Datadog と Azure クラウド採用フレームワーク{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag=" Azure" >}}Azure のトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure のアーキテクチャと構成{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-status-metric" tag=" Azure" >}}Azure ステータスとカウントメトリクス{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}メトリクスなしでアプリに表示される Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}インフラストラクチャーリスト上のパワーダウンした Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}
-{{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Azure を監視するための Microsoft Graph API 権限{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Azure を監視するための Microsoft Graph API 権限{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX ガイド" >}}

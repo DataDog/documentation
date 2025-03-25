@@ -13,6 +13,7 @@ categories:
 - 構成 & デプロイ
 - developer tools
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -22,7 +23,6 @@ integration_id: firefly
 integration_title: Firefly
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: firefly
 public_title: Firefly
@@ -82,7 +82,7 @@ Infrastructure-as-Code と実際のクラウドの状態に差異がある場合
 ### ポリシー違反の検出と修正
 Firefly の統合ポリシーエンジンにより、危険な構成ミスやコストのかかる使用不足を発見し、カスタムポリシーと既成ポリシーの両方でポリシー違反のアラートを受け取ることができます。
 
-## 計画と使用
+## セットアップ
 
 ### Firefly - Datadog インテグレーションの構成
 1. Datadog のアプリケーションキーと API キーを新規に作成します。

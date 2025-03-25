@@ -57,10 +57,10 @@ Once the integration is configured, Datadog begins running a continuous series o
 
 When critical errors are encountered, the Azure integration generates events in the Datadog Events Explorer, and republishes them every five minutes. You can configure an Event Monitor to trigger when these events are detected and notify the appropriate team.
 
-Datadog provides a recommended monitor you can use as a template to get started. To use the recommended monitor:
+Datadog provides a monitor template to help you get started. To use the monitor template:
 
 1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][19] tab.
-2. Select the recommended monitor titled `[Azure] Integration Errors`.
+2. Select the monitor template titled `[Azure] Integration Errors`.
 3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][20] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
@@ -79,7 +79,28 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 2. Apply any desired [Agent configurations][12].
 3. For Windows Server 2008, Vista, and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
 4. Upload the file to blob storage.
-5. Reference the blob storage URL in the Terraform block to create the VM extension:
+5. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+#### Extension settings
+
+The Azure Extension can accept both normal settings and protected settings.
+
+The normal settings include:
+
+| Variable | Type | Description  |
+|----------|------|--------------|
+| `site` | String | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true">}} |
+| `agentVersion` | String | The Agent version to install, following the format `x.y.z` or `latest` |
+| `agentConfiguration` | URI | (optional) URL to the Azure blob containing the Agent configuration as a zip. |
+| `agentConfigurationChecksum` | String | The SHA256 checksum of the Agent configuration zip file, mandatory if `agentConfiguration` is specified. |
+
+The protected settings include:
+
+| Variable | Type | Description  |
+|----------|------|--------------|
+| `api_key`| String | Adds the Datadog API KEY to the configuration file. |
+
+**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence.
 
 {{< tabs >}}
 {{% tab "Windows" %}}
@@ -90,7 +111,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogWindowsAgent"
-  type_handler_version = "2.0"
+  type_handler_version = "7.0"
    settings = <<SETTINGS
   {
     "site":"<DATADOG_SITE>"
@@ -112,7 +133,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogLinuxAgent"
-  type_handler_version = "2.0"
+  type_handler_version = "7.0"
    settings = <<SETTINGS
   {
     "site":"<DATADOG_SITE>"
@@ -120,7 +141,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
   {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
+    "api_key": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
 ```

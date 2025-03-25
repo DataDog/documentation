@@ -3,6 +3,11 @@ on: [pull_request]
 
 jobs:
   label:
+    permissions:
+      pull-requests: write # to update pull request
+      contents: read # to read the contents of the repository
+      statuses: write # to set the status of the commit
+
     runs-on: ubuntu-latest
     steps:
     - uses: actions/labeler@v4
@@ -10,7 +15,7 @@ jobs:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Set documentation preview
-      if: github.event.pull_request.head.repo.fork == false
+      if: github.event.pull_request.head.repo.fork == false && github.ref != 'refs/heads/guacbot/translation-pipeline'
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}

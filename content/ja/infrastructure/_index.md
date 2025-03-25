@@ -3,13 +3,13 @@ aliases:
 - /ja/graphing/infrastructure/
 cascade:
 - _target:
+    lang: en
     path: /infrastructure/resource_catalog/aws_iam_user
-    lang: ja
   aliases:
-  - /ja/security/cspm/custom_rules/aws_iam_user/
+  - /security/cspm/custom_rules/aws_iam_user/
 - _target:
+    lang: en
     path: /infrastructure/**/*
-    lang: ja
   algolia:
     rank: 70
 further_reading:
@@ -22,9 +22,14 @@ further_reading:
 title: インフラストラクチャー
 ---
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="ホストマップを Nginx ホストにフィルターするビデオ" video="true">}}
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Foundation Enablement セッションを調べて登録しましょう。Datadog の SaaS ベースのインフラストラクチャー監視が、メトリクスの提供、可視化、アラート機能を通じて、エンジニアリングチームがクラウドやハイブリッド環境を維持・最適化する方法を学べます。
+{{< /learning-center-callout >}}
+
 
 ## 概要
+
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="ホストマップを Nginx ホストにフィルターするビデオ" video="true">}}
 
 インフラストラクチャーモニタリングには、ホスト、コンテナ、プロセスのパフォーマンスを視覚化、監視、測定する Datadog のコア機能が含まれています。
 

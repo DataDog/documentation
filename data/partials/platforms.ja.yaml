@@ -114,7 +114,7 @@ platforms:
   link: agent/kubernetes/
   name: Kubernetes
 - category: macOS
-  image: platform_macosx.png
+  image: platform_macos.png
   link: agent/basic_agent_usage/osx/
   name: osx
 - category: Linux
@@ -145,11 +145,11 @@ platforms:
   image: platform_ubuntu.png
   link: agent/basic_agent_usage/ubuntu/
   name: ubuntu
-- category: ログの収集
+- category: Windows
   image: platform_windows.png
   link: agent/basic_agent_usage/windows/
   name: windows
-- category: ログの収集
+- category: Windows
   image: platform_sccm.png
   link: agent/basic_agent_usage/sccm/
   name: sccm

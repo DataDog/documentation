@@ -17,14 +17,14 @@ further_reading:
 
 The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
-Two release branches are supported:
+Two Python APM Client library release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
 | `>=1.0,<2` | Maintenance          |
 | `>=2.0,<3` | General Availability |
 
-And the library supports the following runtimes:
+The Python APM Client library supports the following Python runtimes:
 
 | OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
 |---------|-----------------------|---------|-----------------|---------------------------|
@@ -57,7 +57,7 @@ The `ddtrace` library includes support for a number of web frameworks, including
 | [FastAPI][10]              | >= 0.51           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
 | [Gunicorn][61]            | >= 20.0.04        | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gunicorn |
 | [Molten][11]               | >= 0.7.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
-| [Pylons][12]              | >= 0.9.6          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
+| [Pylons][12]              | >= 0.9.6 (dd-trace-py 1.x only) | no | https://ddtrace.readthedocs.io/en/v1.20.19/integrations.html#pylons  |
 | [Pyramid][13]             | >= 1.7            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
 | [Sanic][15]               | >= 19.6.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#sanic   |
 | [Starlette][16]           | >= 0.13.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#starlette |

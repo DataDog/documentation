@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - インテグレーション
+  - インテグレーションセットアップ
 aliases:
 - /ja/integrations/verisign_openhybrid/
 - /ja/integrations/snyk/
@@ -6,15 +10,18 @@ aliases:
 - /ja/integrations/mainstorconcept_ziris/
 - /ja/integrations/rookout/
 - /ja/integrations/rookout_license/
+- /ja/integrations/shoreline/
+- /ja/integrations/shoreline_license/
+- /ja/integrations/shoreline_software_license/
 cascade:
 - _target:
+    lang: en
     path: /integrations/akamai_datastream_2
-    lang: ja
   aliases:
-  - /ja/integrations/akamai_datastream
+  - /integrations/akamai_datastream
 - _target:
+    lang: en
     path: /integrations/azure
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 80
@@ -23,8 +30,8 @@ cascade:
     - azure
     - microsoft azure
 - _target:
+    lang: en
     path: /integrations/kubernetes_state_core
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 60
@@ -32,8 +39,8 @@ cascade:
     tags:
     - ksm
 - _target:
+    lang: en
     path: /integrations/google_cloud_platform
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 80
@@ -42,8 +49,8 @@ cascade:
     - gcp
     - google cloud platform
 - _target:
+    lang: en
     path: /integrations/amazon_web_services
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 80
@@ -52,8 +59,8 @@ cascade:
     - aws
     - amazon web services
 - _target:
+    lang: en
     path: /integrations/eks_fargate
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 60
@@ -61,85 +68,83 @@ cascade:
     tags:
     - eks logging
 - _target:
+    lang: en
     path: /integrations/win32_event_log
-    lang: ja
   algolia:
     category: ドキュメント
     rank: 60
-    subcategory: CoScreen
+    subcategory: インテグレーション
     tags:
     - event viewer
   aliases:
-  - /ja/integrations/eventviewer/
+  - /integrations/eventviewer/
 - _target:
+    lang: en
     path: /integrations/lambdatest_license
-    lang: ja
   aliases:
-  - /ja/integrations/lambdatest_software_license/
+  - /integrations/lambdatest_software_license/
 - _target:
+    lang: en
     path: /integrations/mongo
-    lang: ja
   aliases:
-  - /ja/integrations/mongodb/
+  - /integrations/mongodb/
 - _target:
+    lang: en
     path: /integrations/rapdev_validator
-    lang: ja
   aliases:
-  - /ja/integrations/rapdev_dashboard_widget_pack/
+  - /integrations/rapdev_dashboard_widget_pack/
 - _target:
+    lang: en
     path: /integrations/wmi_check
-    lang: ja
   aliases:
-  - /ja/integrations/wmi/
+  - /integrations/wmi/
 - _target:
+    lang: en
     path: /integrations/jfrog_platform_self_hosted
-    lang: ja
   aliases:
-  - /ja/integrations/jfrog_platform/
+  - /integrations/jfrog_platform/
 - _target:
+    lang: en
     path: /integrations/komodor_license
-    lang: ja
   aliases:
-  - /ja/integrations/komodor_komodor/
+  - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/shoreline_license
-    lang: ja
-  aliases:
-  - /ja/integrations/shoreline_software_license/
-- _target:
+    lang: en
     path: /integrations/stormforge_license
-    lang: ja
   aliases:
-  - /ja/integrations/stormforge_stormforge_license/
+  - /integrations/stormforge_stormforge_license/
 - _target:
+    lang: en
     path: /integrations/feed
-    lang: ja
   aliases:
-  - /ja/integrations/rss/
+  - /integrations/rss/
 - _target:
+    lang: en
     path: /integrations/java
-    lang: ja
   aliases:
-  - /ja/agent/faq/jmx_integrations/
-  - /ja/agent/faq/docker-jmx/
+  - /agent/faq/jmx_integrations/
+  - /agent/faq/docker-jmx/
 - _target:
+    lang: en
     path: /integrations/amazon_elb
-    lang: ja
   aliases:
-  - /ja/integrations/awselb
+  - /integrations/awselb
 - _target:
+    lang: en
     path: /integrations/elastic
-    lang: ja
   aliases:
-  - /ja/integrations/awses
+  - /integrations/awses
 - _target:
+    lang: en
     path: /integrations/amazon_s3
-    lang: ja
   aliases:
-  - /ja/integrations/awss3
-- params:
-    custom_kind: "integration"
-description: すべてのシステム、アプリケーション、およびサービスからデータを収集
+  - /integrations/awss3
+- _target:
+    lang: en
+    path: /integrations/snowflake_web
+  aliases:
+  - /integrations/snowflake/
+description: すべてのシステム、アプリケーション、そしてサービスからデータを収集
 disable_sidebar: true
 title: インテグレーション
 ---

@@ -966,7 +966,7 @@ const processSpecs = (specs) => {
   specs
     .forEach((spec) => {
       const fileData = yaml.safeLoad(fs.readFileSync(spec, 'utf8'));
-      $RefParser.dereference(fileData)
+      $RefParser.dereference(fileData, { resolve: { external: false } })
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);

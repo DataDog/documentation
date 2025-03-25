@@ -31,11 +31,23 @@ Traffic is always initiated by the Agent to Datadog. No sessions are ever initia
 
 All Agent traffic is sent over SSL. The destination is dependent on the Datadog service and site. To see destinations based on your [Datadog site][11], click the `DATADOG SITE` selector on the right.
 
+## Installation
+
+Add the following domains to your inclusion list to allow for Agent installation:
+
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `keys.datadoghq.com`
+- `apt.datadoghq.com`
+
 ## Destinations
 
 [APM][1]
 : `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 `instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
+
+[LLM Observabilty][23]
+: `llmobs-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Container Images][13]
 : `contimage-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -235,79 +247,45 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% site-region region="us" %}}
 
-443/tcp
-: Port for most Agent data (Metrics, APM, Live Processes & Containers).
+| Product/Functionality | Port | Protocol | Description |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 10516 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-123/udp
-: Port for NTP ([more details on the importance of NTP][1]).<br>
-See [default NTP targets][2].
-
-8443/tcp
-: Port for [Custom Agent Autoscaling][5].
-
-10516/tcp
-: Port for log collection over TCP.<br>
-See [logs endpoints][3] for other connection types.
-
-10255/tcp
-: Port for the [Kubernetes HTTP Kubelet][4].
-
-10250/tcp
-: Port for the [Kubernetes HTTPS Kubelet][4].
-
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
-[5]: /containers/guide/cluster_agent_autoscaling_metrics
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
 {{% site-region region="eu" %}}
 
-443/tcp
-: Port for most Agent data (Metrics, APM, Live Processes & Containers).
+| Product/Functionality | Port | Protocol | Description |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| [Custom Agent Autoscaling][22] | 8443 | TCP |  |
+| Log collection | 443 | TCP | Logging over TCP. See [logs endpoints][21] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-123/udp
-: Port for NTP ([more details on the importance of NTP][1]).<br>
-See [default NTP targets][2].
-
-443/tcp
-: Port for log collection over TCP.<br>
-See [logs endpoints][3] for other connection types.
-
-10255/tcp
-: Port for the [Kubernetes HTTP Kubelet][4].
-
-10250/tcp
-: Port for the [Kubernetes HTTPS Kubelet][4].
-
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 
 {{% site-region region="us3,us5,gov,ap1" %}}
 
-443/tcp
-: Port for most Agent data (Metrics, APM, Live Processes & Containers).
+| Product/Functionality | Port | Protocol | Description |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19]. |
 
-123/udp
-: Port for NTP ([more details on the importance of NTP][1]).<br>
-See [default NTP targets][2].
-
-10255/tcp
-: Port for the [Kubernetes HTTP Kubelet][4].
-
-10250/tcp
-: Port for the [Kubernetes HTTPS Kubelet][4].
-
-[1]: /agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /integrations/ntp/#overview
-[3]: /logs/log_collection/#logging-endpoints
-[4]: /agent/basic_agent_usage/kubernetes/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
 
 {{% /site-region %}}
 
@@ -315,29 +293,16 @@ See [default NTP targets][2].
 
 Used for Agent services communicating with each other locally within the host only.
 
-5000/tcp
-: Port for the [go_expvar server][15].
-
-5001/tcp
-: Port the IPC API listens to.
-
-5002/tcp
-: Port for the [Agent browser GUI][16].
-
-5012/tcp
-: Port for the APM [go_expvar server][15].
-
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
-
-8125/udp
-: Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
-
-8126/tcp
-: Port for the [APM receiver][17]
+| Product/Functionality | Port | Protocol | Description |
+| ------  | ---- | ------- | ----------- |
+| [Agent browser GUI][16] | 5002 | TCP |  |
+| APM receiver | 8126 | TCP | Includes Tracing and the Profiler. |
+| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
+| go_expvar server (APM) | 5012 | TCP | For more information, see [the go_expar integration documentation][15]. |
+| go_expvar integration server | 5000 | TCP | For more information, see [the go_expar integration documentation][15]. |
+| IPC API | 5001 | TCP | Port used for Inter Process Communication (IPC). |
+| Process Agent debug | 6062 | TCP | Debug endpoints for the Process Agent. |
+| Process Agent runtime | 6162 | TCP | Runtime configuration settings for the Process Agent. |
 
 ## Configure ports
 
@@ -406,6 +371,18 @@ The metrics are stored in the folder defined by the `forwarder_storage_path` set
 
 To avoid running out of storage space, the Agent stores the metrics on disk only if the total storage space used is less than 80 percent. This limit is defined by `forwarder_storage_max_disk_ratio` setting.
 
+## Installing the Datadog Operator
+
+If you are installing the Datadog Operator in a Kubernetes environment with limited connectivity, you need to allowlist the following endpoints for TCP port 443, based on your location:
+
+- `gcr.io/datadoghq` (GCR US)
+- `eu.gcr.io/datadoghq` (GCR Europe)
+- `asia.gcr.io/datadoghq` (GCR Asia)
+- `datadoghq.azurecr.io` (Azure)
+- `public.ecr.aws/datadog` (AWS)
+- `docker.io/datadog` (DockerHub)
+
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -427,3 +404,9 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [15]: /integrations/go_expvar/
 [16]: /agent/basic_agent_usage/#gui
 [17]: /tracing/
+[18]: /developers/dogstatsd/
+[19]: /agent/faq/network-time-protocol-ntp-offset-issues/
+[20]: /integrations/ntp/#overview
+[21]: /logs/log_collection/#logging-endpoints
+[22]: /containers/guide/cluster_agent_autoscaling_metrics
+[23]: /llm_observability/

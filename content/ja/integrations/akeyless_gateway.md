@@ -21,6 +21,7 @@ assets:
       - akeyless.gw.quota.total_transactions_limit
       - akeyless.gw.system.http_response_status_code
       - akeyless.gw.system.request_count
+      - akeyless.gw.system.healthcheck.status
       metadata_path: metadata.csv
       prefix: akeyless
     service_checks:
@@ -35,6 +36,7 @@ author:
 categories:
 - セキュリティ
 - kubernetes
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md
 display_on_public_website: true
@@ -44,7 +46,6 @@ integration_id: akeyless-gateway
 integration_title: Akeyless Gateway
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: akeyless_gateway
 public_title: Akeyless Gateway
@@ -83,7 +84,7 @@ Akeyless Platform は、資格情報、証明書、暗号化キーの保存、�
 
 このインテグレーションにより、[Akeyless Gateway][1] のパフォーマンスを視覚化し、監視することができます。テレメトリーメトリクスはアプリケーションとランタイム環境から取得されます。
 
-## 計画と使用
+## セットアップ
 
 Akeyless は、プライベートネットワークとクラウドの間に保護レベルを追加する独自のゲートウェイを提供します。当社のコアサービスの SaaS 拡張機能として機能するステートレスゲートウェイは、すぐに使える堅牢なメカニズムで透過的な内部運用を可能にし、お客様の内部リソースと連携するためにネットワークインフラストラクチャーを変更することなく、サービスの継続と復旧を保証します。
 
@@ -104,13 +105,13 @@ Datadog とのインテグレーションを構成して重要な Akeyless Gatew
 
 ```
 metrics:
-  enabled: true  
+  enabled: true
   config: |
-    exporters:    
+    exporters:
       datadog:
         api:
           key: "<Your Datadog API key>"
-          site: <Your Datadog server site>         
+          site: <Your Datadog server site>
     service:
       pipelines:
         metrics:
@@ -162,21 +163,21 @@ docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081
 
 ゲートウェイのセットアップに成功したら、Datadog サイトの[メトリクスエクスプローラー][5]にアクセスし、サマリーページで Akeyless メトリクスをフィルタリングします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "akeyless_gateway" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Akeyless Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Akeyless Gateway インテグレーションには、イベントは含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[Akeyless のサポートチーム][7]までお問い合わせください。
 

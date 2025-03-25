@@ -93,6 +93,7 @@ password::::== <MY_PASSWORD>
 | Ingresses | 7.33.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | ジョブ | 7.33.0 | 1.18.0 | 2.15.5 | 1.16.0 |
 | ネームスペース | 7.33.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Network Policies | 7.33.0 | 7.56.0 | 3.57.2 | 1.14.0 |
 | ノード | 7.33.0 | 1.18.0 | 2.10.0 | 1.17.0 |
 | PersistentVolumes | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
 | PersistentVolumeClaims | 7.33.0 | 1.18.0 | 2.30.4 | 1.17.0 |
@@ -189,7 +190,7 @@ Process Agent と Cluster Agent の両コンテナに環境変数を設定しま
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

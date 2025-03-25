@@ -25,6 +25,7 @@ author:
 categories:
 - 構成 & デプロイ
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
 display_on_public_website: true
@@ -34,7 +35,6 @@ integration_id: launchdarkly
 integration_title: LaunchDarkly
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: launchdarkly
 public_title: LaunchDarkly
@@ -48,7 +48,6 @@ tile:
   classifier_tags:
   - Category::Configuration & Deployment
   - Category::Notifications
-  - Offering::Integration
   - Offering::UI Extension
   - Supported OS::Linux
   - Supported OS::Windows
@@ -67,6 +66,11 @@ tile:
     image_url: images/toggle-flag.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: その他
+    url: https://launchdarkly.com
+  - resource_type: documentation
+    url: https://docs.launchdarkly.com/integrations/datadog/events
   support: README.md#Support
   title: LaunchDarkly
 ---
@@ -100,7 +104,7 @@ LaunchDarkly のダッシュボードウィジェットでは、サブセット�
 
 [LaunchDarkly Relay Proxy][2] を使用している場合、アクティブ接続や累積接続などのメトリクスを Datadog にエクスポートするように構成することができます。
 
-## 計画と使用
+## セットアップ
 
 ### イベントインテグレーション
 
@@ -152,9 +156,9 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 Relay Proxy の[メトリクスインテグレーションのドキュメント][8]に従って、この機能を構成することができます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 LaunchDarkly Relay Proxy は、以下のメトリクスを Datadog に送信するように構成することができます。
 
@@ -162,15 +166,15 @@ LaunchDarkly Relay Proxy は、以下のメトリクスを Datadog に送信す�
 - **`newconnections`**: Relay Proxy が起動してからのストリーム接続の累積数。
 - **`requests`**: Relay Proxy のすべての[サービスエンドポイント][9] (ステータスエンドポイントを除く) が起動してから受け取ったリクエストの累積数。
 
-### ヘルプ
+### イベント
 
 LaunchDarkly イベントインテグレーションは、LaunchDarkly から Datadog にフラグ、プロジェクト、環境イベントを送信します。
 
-### ヘルプ
+### サービスチェック
 
 LaunchDarkly インテグレーションには、サービスのチェック機能は含まれません。
 
-## Agent
+## サポート
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
 

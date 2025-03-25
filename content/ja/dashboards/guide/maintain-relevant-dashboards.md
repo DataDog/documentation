@@ -66,7 +66,7 @@ title: 適切なダッシュボードを維持するためのベストプラク�
 - [Datadog Miscellany: 古いダッシュボードやモニターを削除する][3]
 - [Datadog Miscellany: タイトルのテキストに基づいたダッシュボードの削除][4]
 
-[1]: https://docs.datadoghq.com/ja/dashboards/#restore-deleted-dashboards
+[1]: https://docs.datadoghq.com/ja/dashboards/list/#restore-deleted-dashboards
 [2]: https://docs.datadoghq.com/ja/api/latest/dashboards/#restore-deleted-dashboards
 [3]: https://github.com/DataDog/Miscellany/tree/master/remove_old_dash_monitors
 [4]: https://github.com/DataDog/Miscellany/tree/master/delete_dashboards_by_text_search

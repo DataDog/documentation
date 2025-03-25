@@ -5,7 +5,7 @@ title: データベースモニタリングモニター
 
 ## 概要
 
-[データベースモニタリング (DBM)][1] のモニタータイプでは、モニターを作成し、DBM で表示されるデータに対してアラートを発することができます。これらのモニターは、DBM のイベントタイプが所定の期間にわたって事前に定義されたしきい値から逸脱した場合にアラートするように構成することができます。
+With the [Database Monitoring (DBM)][1] monitor type, you can create monitors and alert on the data surfaced in DBM. These monitors can be configured to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
 
 一般的なモニタリングシナリオは以下の通りです。
 - [待機クエリ数](#number-of-waiting-queries)
@@ -68,7 +68,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 評価遅延などの高度なアラートオプションについて、詳しくは[モニターの構成][3]をご覧ください。
 
 ### 通知
-**Notify your team** および **Say what's happening** セクションの詳細については、[通知][4]を参照してください。
+For more information about the **Configure notifications and automations** section, see [Notifications][4].
 
 ## モニター例
 
@@ -91,7 +91,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 
 #### 通知の構成
 
-1. **Notify your team** の下に、通知メッセージを書きます。詳細な手順については、[通知][4]を参照してください。このテキストはメッセージ本文に使用できます。
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} で待機クエリが {{value}} の値で 
@@ -129,7 +129,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 
 #### 通知の構成
 
-1. **Notify your team** の下に、通知メッセージを書きます。詳細な手順については、[通知][4]を参照してください。このテキストはメッセージ本文に使用できます。
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} で継続時間が 30 秒を超えるクエリの数が 
@@ -173,7 +173,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 
 1. **Add Query** をクリックして、クエリ **a** のコピーであるクエリ **b** を作成します。
 1. **a + b** を **a - b** に変更します。2 つのクエリは一時的に同一であるため、この値はチャート上では 0 として表示されます。
-1. **b** クエリ内で、**∑** ボタンをクリックし、**Timeshift > Week before** を選択します。これにより、先週と現在の間の大幅な変化を検出するようにモニターが構成されます。
+1. In the **b** query, click the **∑** button and choose **Timeshift > Week before**. This configures the monitor to detect significant changes between last week and the present.
 
 #### アラートしきい値の設定
 
@@ -183,7 +183,7 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 
 #### 通知の構成
 
-1. **Notify your team** の下に、通知メッセージを書きます。詳細な手順については、[通知][4]を参照してください。このテキストはメッセージ本文に使用できます。
+1. Under **Configure notifications and automations**, write the notification message. For detailed instructions, see [Notifications][4]. You can use this text for the message body:
 {{< code-block lang="text" >}}
 {{#is_alert}}
 {{host.name}} の 1 日あたりの平均実行計画コストは、1 週間前と比べて少なくとも {{threshold}} 増加しており、
@@ -208,6 +208,6 @@ Datadog で新しい DBM モニターを作成するには、UI で [**Monitors*
 [4]: /ja/monitors/notify/
 [5]: /ja/monitors/configuration/?tab=thresholdalert#thresholds
 [6]: /ja/monitors/configuration/?tab=thresholdalert#set-alert-conditions
-[7]: /ja/monitors/configuration/?tab=thresholdalert#notify-your-team
+[7]: /ja/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations
 [8]: https://app.datadoghq.com/databases/list
 [9]: /ja/help/

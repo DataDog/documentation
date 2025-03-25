@@ -6,7 +6,7 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/resource_page/"
@@ -29,15 +29,17 @@ algolia:
 
 ## Overview
 
-Selecting a service on the Service Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
+Selecting a service on the Software Catalog leads you to the detailed service page. A service is a set of processes that do the same job - for example a web framework or database (read more about how services are defined in [Getting Started with APM][1]).
 
 Consult on this page:
 
-* [Service health](#service-health) (private beta)
+* [Service health](#service-health) (in Preview)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
+{{< site-region region="ap1,us3,us5,eu,us" >}}
 * [Dependencies](#dependencies)
+{{< /site-region >}}
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional sections](#additional-sections)
@@ -45,29 +47,30 @@ Consult on this page:
 
 ## Service health
 
-{{< callout header="Opt in to the private beta!" url="https://www.datadoghq.com/private-beta/service-health/" >}}
-  Service health is in private beta. To request access, complete the form.
+{{< callout header="Opt in to the Preview!" url="https://www.datadoghq.com/product-preview/service-health/" >}}
+  Service health is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-The **Service Health** panel provides a real-time summary of service signals to help you understand if a service needs your attention.
+**Service Health** provides a real-time summary of signals to help you understand if a service needs your attention.
 
-Service health considers many types of signals (including monitors, incidents, Watchdog insights, and error tracking issues) and surfaces the most critical alerts. Additionally, the Service Health panel provides links to associated incidents, which helps you to take necessary actions.
+Service health considers multiple signals (including monitors, incidents, Watchdog insights, and error tracking issues), and surfaces the most critical alerts as a badge on Software Catalog and service pages. 
 
-{{< img src="/tracing/services/service_page/service-health.png" alt="Service Health panel on service page showing an active incident." style="width:100%;" >}}
+{{< img src="/tracing/services/service_page/service-health3.png" alt="Service health on the service page and service dependency map." style="width:100%;" >}}
 
-To access service health:
+Service health is available in several places in Datadog:
 
-1. Go to [APM > Service Catalog][23].
-2. Hover over a service and click **Full Page**.
-3. Select **Service Health**.
+1. [Software Catalog][23]
+2. Service pages
+3. Service dependendency maps
+4. Service pills
 
-The Service Health panel displays the status of your service as *Ok*, *Warning*, or *Alert* if at least one of the following conditions is met:
+The Service Health banner displays the status of your service as *Warning*, or *Alert* if at least one of the following conditions is met:
 
 |   Status    |                         Condition                          |
 |-------------|------------------------------------------------------------|
-|  **Alert**  | **Monitors**: <br>- A non-muted alerting P1 monitor is triggered.<br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
-| **Warning** | **Monitors**: <br>- A non-muted alerting P2 monitor is triggered.<br>- A non-muted warning P1 monitor is triggered.<br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
-|   **Ok**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
+|  **Alert**  | **Monitors**: <br>- A non-muted monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is active.<br><br>**Watchdog Insights**: <br>- A faulty deployment is active.<br>- An ongoing APM latency/error rate alert is active.  |
+| **Warning** | **Monitors**: <br>- A non-muted warning monitor with a paging integration setup (PagerDuty or Opsgenie) is triggered.<br><br>**Incidents**: <br>- An incident of any severity is in a stable state.<br><br>**Watchdog Insights**: <br>- An ongoing log anomaly alert is active.<br><br>**Error Tracking Issues**: <br>- A new issue (within 48 hours) requires review. |                                                                                                                                                                                                   |
+|   **No Alerts**    |    No signal from critical or alert state is active.     |                                                                                                                                                                       ||
 
 ## Service monitor
 
@@ -82,7 +85,7 @@ Enable them directly or create your own [APM monitors][3].
 
 ## Watchdog Insights
 
-The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19].
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Log Explorer][19].
 
 {{< img src="tracing/visualization/service/cross_product_insight_1.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
@@ -114,9 +117,11 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ## Resources
 
-See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1].
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). 
 
-Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
+Below, there's a list of [resources][11] associated with your service. Note: If the resource represents an external interface of an HTTP service, the list displays endpoints instead.
+
+Sort the service's resources by requests, latency, errors, or time to identify high-traffic areas or potential issues. You can configure these metric columns, as shown in the following example:
 
 {{< img src="tracing/visualization/service/resources_tab_1.jpg" alt="Resources" style="width:100%;">}}
 
@@ -136,6 +141,30 @@ Choose what to display in your resources list:
 * **Error Rate**: Percent of error for a given resource
 
 {{< img src="tracing/visualization/service/resource_columns.png" alt="Resource columns" style="width:40%;">}}
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+## Dependencies
+
+Visualize upstream and downstream dependencies that the service interacts with from the dependency map. The map is powered by [APM metrics][1] to surface accurate request counts, error rates, and latency numbers. The map automatically groups dependencies by operation name. For instance, if a service calls two downstream services using gRPC, these services are grouped together. The table on the left-hand side of the map shows requests and error rates over time, useful to identify failing dependencies.
+
+[Inferred service dependencies][2] like databases, queues, or third-party services are represented with a purple background node.
+
+{{< img src="tracing/visualization/service/dependencies_section.png" alt="Service page dependency map" style="width:100%;">}}
+
+**Note**: [Service overrides][3] display along the edges (connecting lines) between nodes in the dependency map to keep visibility over the actual remote service, database, or queue the service is interacting with.
+
+### Investigating a specific service dependency
+
+Click on a dependency service node to investigate one of the service's dependencies. In the side panel, request count, errors, and latency metrics are scoped to requests going from the service to the downstream dependency.
+
+Use the following table to see which resources are invoked in client calls from the service to the downstream dependency. For instance, if the service is calling a database, see the breakdown of queries that are made to the database, and use the table to identify slow or failing queries.
+
+{{< img src="tracing/visualization/service/dependencies_side_panel.png" alt="Service page service dependency map" style="width:100%;">}}
+
+[1]: /tracing/metrics/metrics_namespace/
+[2]: /tracing/services/inferred_services/
+[3]: /tracing/guide/service_overrides/
+{{< /site-region >}}
 
 ## Additional sections
 

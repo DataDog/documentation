@@ -25,7 +25,7 @@ widget_type: 변경
 
 ## 설정
 
-### 설정
+### 구성
 
 1. 그래프화할 메트릭을 선택합니다.
 2. 집계 함수를 선택합니다.
@@ -65,4 +65,4 @@ widget_type: 변경
 [2]: /ko/api/latest/dashboards/
 [3]: /ko/dashboards/graphing_json/widget_json/
 [6]: /ko/monitors/types/metric/?tab=change
-[7]: /ko/monitors/guide/change-alert/
+[7]: /ko/monitors/types/change-alert/

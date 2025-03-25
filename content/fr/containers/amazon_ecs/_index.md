@@ -29,7 +29,7 @@ title: Amazon ECS
 Amazon ECS est un service d'orchestration de conteneurs évolutif et à hautes performances qui prend en charge les conteneurs Docker. Grâce à l'Agent Datadog, vous pouvez surveiller des conteneurs et tâches ECS sur chaque instance EC2 de votre cluster.
 
 <div class="alert alert-info">
-Si vous souhaitez surveiller <strong>ECS sur Fargate</strong>, consultez la section <a href="/integrations/ecs_fargate/">Amazon ECS sur AWS Fargate</a>.  
+Si vous souhaitez surveiller <strong>ECS sur Fargate</strong>, consultez la section <a href="/integrations/ecs_fargate/">Amazon ECS sur AWS Fargate</a>.
 </div>
 
 ## Configuration
@@ -64,7 +64,7 @@ L'exemple suivant montre comment effectuer une surveillance générale de l'infr
     - Définissez la variable d'environnement `DD_SITE` sur votre [site Datadog][13], à savoir {{< region-param key="dd_site" code="true" >}}.
 
       <div class="alert alert-info">
-      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>. 
+      If <code>DD_SITE</code> is not set, it defaults to the <code>US1</code> site, <code>datadoghq.com</code>.
       </div>
     - Si vous le souhaitez, ajoutez une variable d'environnement `DD_TAGS` afin de spécifier des tags supplémentaires.
 
@@ -285,7 +285,7 @@ Pour envoyer des données à Datadog pour le site gouvernemental, ajoutez le con
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.3",
+            "image": "datadog/fips-proxy:1.1.4",
             "portMappings": [
                 {
                     "containerPort": 9803,

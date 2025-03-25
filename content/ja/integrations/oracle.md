@@ -28,19 +28,19 @@ categories:
 - data stores
 - network
 - oracle
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: oracle
 integration_id: oracle
-integration_title: Oracle
-integration_version: 5.2.0
+integration_title: Oracle Database
+integration_version: 6.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: oracle
-public_title: Oracle
+public_title: Oracle Database
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 supported_os:
 - linux
@@ -55,12 +55,13 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Oracle
+  title: Oracle Database
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -75,9 +76,9 @@ Oracle インテグレーションは、Oracle データベースの健全性と
 [Database Monitoring][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーション機能に加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 #### 前提条件
 
@@ -110,7 +111,7 @@ Instant Client を使用していない場合は、この手順をスキップ�
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-###### ログの収集
+###### Windows
 
 1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
 
@@ -252,7 +253,7 @@ grant select on dba_data_files to datadog;
 {{% /tab %}}
 
 {{% tab "RDS" %}}
-##### Splunk
+##### RDS
 
 ###### ユーザーの作成
 
@@ -360,7 +361,7 @@ grant select on dba_data_files to datadog;
 
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -478,7 +479,7 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
 
 使用可能なすべてのコンフィギュレーションオプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "oracle" >}}
@@ -500,7 +501,7 @@ Oracle Database チェックには、イベントは含まれません。
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
 [2]: https://docs.datadoghq.com/ja/database_monitoring/
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://docs.datadoghq.com/ja/help/

@@ -11,10 +11,6 @@ further_reading:
   text: "Mapping OpenTelemetry Semantic Conventions to Service-entry Spans"
 ---
 
-<div class="alert alert-info">
-<a href="/opentelemetry/guide/service_entry_spans_mapping/">Mapping OpenTelemetry Semantic Conventions to Service-entry Spans</a> is now in public beta, and includes improvements to trace metrics generated from OpenTelemetry spans.
-</div>
-
 ## Overview
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="APM metrics from OpenTelemetry" style="width:100%;" >}}

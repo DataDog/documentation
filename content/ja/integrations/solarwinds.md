@@ -2,6 +2,7 @@
 categories:
 - event management
 - notifications
+custom_kind: integration
 dependencies: []
 description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
 doc_link: https://docs.datadoghq.com/integrations/solarwinds/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: SolarWinds
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: solarwinds
 public_title: Datadog-SolarWinds インテグレーション
@@ -27,7 +27,7 @@ SolarWinds Orion からアラートを受け取り、一元化された場所で
 
 このインテグレーションは、Datadog をお使いの SolarWinds アラート通知すべてにサブスクライブすることで機能します。
 
-## 計画と使用
+## セットアップ
 
 ### トリガーアクションを作成する
 
@@ -59,7 +59,7 @@ SolarWinds で新規トリガーアクションを作成します:
 3. Send Alert to Datadog - Reset アクションを使い、Assign Action > Assign Reset Action を繰り返します
 
 ### 投稿するトリガーアクション本文
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -79,10 +79,10 @@ SolarWinds で新規トリガーアクションを作成します:
     "object_type": "${N=Alerting;M=ObjectType}",
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}"
 }
-``` 
+```
 
 ### 投稿するリセットアクション本文
-``` 
+```
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
     "acknowledged_by": "${N=Alerting;M=AcknowledgedBy}",
@@ -103,22 +103,22 @@ SolarWinds で新規トリガーアクションを作成します:
     "timestamp": "${N=SWQL;M=SELECT GETUTCDATE() as a1 FROM Orion.Engines}",
     "reset": "true"
 }
-``` 
+```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 SolarWinds のインテグレーションにメトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 SolarWinds インテグレーションはイベントストリームで SolarWinds アラートを集めます。
 
-### ヘルプ
+### サービスチェック
 
 SolarWinds のインテグレーションにサービスチェックは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、Datadog サポートまでお問い合わせください

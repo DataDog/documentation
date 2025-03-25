@@ -2,6 +2,7 @@
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure Diagnostic Extension のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_diagnostic_extension/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: Azure Diagnostic Extension
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_diagnostic_extension
 public_title: Datadog-Azure Diagnostic Extension インテグレーション
@@ -36,27 +36,27 @@ Datadog Azure インテグレーションは、Azure Diagnostic Extension から
 - 組織が Datadog の US3 サイトを利用しており、Azure で Datadog リソースを構成している場合、[Azure Native インテグレーション手動セットアップガイド][2]の指示に従ってください。
 - **すべてのサイト**は、[Azure インテグレーション手動セットアップガイド][3]または [Azure プログラム管理ガイド][4]の手順を使用できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][5]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_diagnostic_extension" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure Diagnostic Extension インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure Diagnostic Extension インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

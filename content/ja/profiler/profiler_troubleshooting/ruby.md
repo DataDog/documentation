@@ -13,21 +13,8 @@ type: multi-code-lang
 
 プロファイラを設定してもプロファイル検索ページにプロファイルが表示されない場合は、[デバッグモード][1]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][2]。
 
-- オペレーティングシステムのタイプとバージョン (例: Linux Ubuntu 20.04)
+- Operating system type and version (for example, Ubuntu Linux 22.04)
 - ランタイムのタイプ、バージョン、ベンダー (例: Ruby 2.7.3)
-
-## アプリケーションが「スタックレベルが深すぎます (SystemStackError)」エラーをトリガーします
-
-この問題は [`dd-trace-rb` バージョン `0.54.0`][3] からは発生しないと思われます。
-それでも問題が解決しない場合は、エラーに至るまでのバックトレースを添えて、[サポートチケットを作成][2]してください。
-
-`0.54.0` より前のバージョンでは、プロファイラーはスレッド生成を追跡するために Ruby VM をインスツルメントする必要があり、他の gem による同様のインスツルメンテーションと衝突していました。
-
-以下の gem のいずれかを使用している場合
-
-* `rollbar`: バージョン 3.1.2 以降を使用していることを確認します。
-* `logging`: `LOGGING_INHERIT_CONTEXT` 環境変数を `false` に設定して、 `logging` のスレッドコンテキストの継承を
-  無効にします。
 
 ## レスキュージョブのプロファイルがありません
 
@@ -55,9 +42,9 @@ Datadog.configure do |c|
 end
 ```
 
-## `dd-trace-rb` 1.11.0+ でネイティブ拡張機能を使用する Ruby gems からの予期しない失敗やエラー
+## Unexpected failures or errors from Ruby gems that use native extensions
 
-`dd-trace-rb` 1.11.0 から、プロファイラー "CPU Profiling 2.0" が、Ruby アプリケーションに unix シグナル `SIGPROF` を送ることでデータを集め、よりきめ細かいデータ収集が可能になりました。
+The Ruby profiler gathers data by sending `SIGPROF` UNIX signals to Ruby applications, enabling finer-grained data gathering.
 
 `SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
 まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
@@ -65,11 +52,13 @@ end
 以下のような非互換性があることが知られています。
 * `mysql2` gem を [8.0.0 より古い][9]バージョンの `libmysqlclient` と一緒に使用すること。影響を受ける `libmysqlclient` のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 またはそれ以降のリリースには存在しません。
 * [`rugged` gem を使用すること。][10]
+* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
+* [Some APIs in the `Dir` class][13]
 
-このような場合、プロファイラーが自動的に非互換性を検出し、回避策を適用します。
+In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
-上記以外のネイティブ拡張機能を使用した Ruby gems で失敗やエラーが発生した場合、手動で "no signals" 回避策を有効にすることで、`SIGPROF` シグナルを使用しないようにすることができます。
-この回避策を有効にするには、`DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` 環境変数を `true` に設定するか、コードで以下を設定します。
+上記以外のネイティブ拡張機能を使用する Ruby gem で失敗やエラーが発生した場合、手動で "no signals" 回避策を有効にすることで `SIGPROF` シグナルの使用を回避することができます。
+この回避策を有効にするには、環境変数 `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` を `true` に設定します。
 
 ```ruby
 Datadog.configure do |c|
@@ -77,10 +66,24 @@ Datadog.configure do |c|
 end
 ```
 
-**注**: 上記の設定は `dd-trace-rb` 1.12.0 以降で利用可能です。
-
 非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
 そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
+
+## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
+
+A workaround for this issue is automatically applied since [`dd-trace-rb` version 1.21.0][3]. Datadog recommends upgrading to this version or later to fix this issue.
+
+Prior to version 1.21.0, in rare situations the profiler could trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
+
+This bug has been fixed for Ruby 3.3 and above. For older Ruby versions (and prior to dd-trace-rb 1.21.0), you can use the "no signals" workaround to resolve this issue.
+
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.no_signals_workaround_enabled = true
+end
+```
 
 ## その他の参考資料
 
@@ -89,7 +92,7 @@ end
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
-[3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
+[3]: https://github.com/datadog/dd-trace-rb/releases/tag/v1.21.0
 [4]: https://github.com/resque/resque
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
@@ -97,3 +100,6 @@ end
 [8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
+[11]: https://github.com/DataDog/dd-trace-rb/issues/2976
+[12]: https://bugs.ruby-lang.org/issues/19991
+[13]: https://github.com/DataDog/dd-trace-rb/issues/3450

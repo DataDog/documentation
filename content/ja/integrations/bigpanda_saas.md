@@ -30,6 +30,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,7 +39,6 @@ integration_id: bigpanda-bigpanda
 integration_title: BigPanda SaaS プラットフォーム
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
@@ -86,6 +86,11 @@ tile:
     image_url: images/958addd-arch.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/bigpanda-datadog-marketplace/
+  - resource_type: documentation
+    url: https://docs.bigpanda.io/docs/datadog
   support: README.md#Support
   title: BigPanda SaaS プラットフォーム
   uninstallation: README.md#Uninstallation
@@ -103,7 +108,7 @@ BigPanda は、[インフラストラクチャー][5]、[ログ管理][6]、[APM
 
 Datadog マーケットプレイスでのご提供には、BigPanda プラットフォームへのアクセスが含まれています。すでに BigPanda をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから BigPanda にお問い合わせください。
 
@@ -124,4 +129,4 @@ Datadog マーケットプレイスでのご提供には、BigPanda プラット
 [6]: https://docs.datadoghq.com/ja/logs
 [7]: https://docs.datadoghq.com/ja/tracing
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

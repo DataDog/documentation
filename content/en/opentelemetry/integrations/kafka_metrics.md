@@ -255,9 +255,11 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][9] for information about collected Kafka metrics.
+{{< mapping-table resource="kafka.csv">}}
 
+**Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
 
+See [OpenTelemetry Metrics Mapping][9] for more information.
 
 ## Full example configuration
 

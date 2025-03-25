@@ -6,6 +6,8 @@ categories:
 - notifications
 - aws
 - log collection
+- event management
+custom_kind: integration
 dependencies: []
 description: Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。
 doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
@@ -16,7 +18,6 @@ integration_id: ''
 integration_title: Amazon Simple Notification Service (SNS)
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon Simple Notification Service (SNS) インテグレーション
@@ -31,7 +32,7 @@ version: '1.0'
 
 Amazon Simple Notification Service (SNS) を Datadog に接続すると、次のことが可能になります。
 
-- SNS メッセージをイベントとしてストリームに表示できます。
+- SNS メッセージをイベントとして Event Explorer に表示できます。
 - アラートおよびイベント通知を SNS に送信できます。
 
 ## セットアップ
@@ -57,7 +58,7 @@ Amazon Simple Notification Service (SNS) を Datadog に接続すると、次の
 
 #### SNS メッセージの受信
 
-Datadog Event Stream の SNS メッセージは、`HTTPS` と `Email` の両方のプロトコルで受け取ることができます。`HTTPS` プロトコルを使用すると、Webhook URL で自動的にサブスクリプションを確認することができます。
+Datadog Event Explorer の SNS メッセージは、`HTTPS` と `Email` の両方のプロトコルで受け取ることができます。`HTTPS` プロトコルを使用すると、Webhook URL で自動的にサブスクリプションを確認することができます。
 
 `Email` プロトコルを使用する場合、Datadog がこの目的のために自動的に生成したメールアドレスの確認ステップを手動で行う必要があります。詳しくは [Amazon SNS のメールから Datadog のイベントを作成する][6]のガイドをお読みください。
 

@@ -27,6 +27,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'Blog'
   text: 'Best practices for continuous testing with Datadog'
+- link: 'https://www.datadoghq.com/blog/progressive-web-application-monitoring/'
+  tag: 'Blog'
+  text: 'Best practices for monitoring progressive web applications'
 cascade:
     algolia:
         rank: 70

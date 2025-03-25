@@ -18,8 +18,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 3
     source_type_name: Nagios
-  logs:
-    source: nagios
   saved_views:
     nagios_processes: assets/saved_views/nagios_processes.json
 author:
@@ -30,6 +28,7 @@ author:
 categories:
 - log collection
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_on_public_website: true
@@ -37,9 +36,8 @@ draft: false
 git_integration_title: nagios
 integration_id: nagios
 integration_title: Nagios
-integration_version: 1.13.0
+integration_version: 3.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nagios
 public_title: Nagios
@@ -56,10 +54,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/nagios-monitoring
   support: README.md#Support
   title: Nagios
 ---
@@ -80,20 +82,20 @@ Nagios が監視するインフラストラクチャーから Datadog にイベ�
 
 このチェックは、Nagios のパフォーマンスデータを Datadog にメトリクスとして送信することもできます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Nagios チェックは [Datadog Agent][1] パッケージに含まれています。Nagios サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -131,13 +133,13 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 [Agent の status サブコマンドを実行][2]し、Checks セクションで `nagios` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 デフォルトの構成では、Nagios チェックはメトリクスを収集しません。ただし、`collect_host_performance_data` や `collect_service_performance_data` を `True` に設定すると、チェックは Nagios パフォーマンスデータを監視し、それをゲージメトリクスとして Datadog に送信します。
 
-### 収集データ
+### ログ収集
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -158,7 +160,7 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 
 3. [Agent を再起動します][4]。
 
-### ヘルプ
+### イベント
 
 このチェックは Nagios イベントログを監視して、次の文字列を含むログ行を検出すると、行ごとにイベントを送信します。
 
@@ -172,11 +174,11 @@ Nagios チェックは [Datadog Agent][1] パッケージに含まれていま�
 - PROCESS_SERVICE_CHECK_RESULT
 - SERVICE DOWNTIME ALERT
 
-### ヘルプ
+### サービスチェック
 
 Nagios チェックには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

@@ -21,7 +21,7 @@ title: Node.js サーバーレスアプリケーションのインスツルメ�
 
 <div class="alert alert-warning">以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Datadog Forwarder を使用したインスツルメント</a>を参照してください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
 
-<div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/configuration/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
+<div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
 <div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_bundlers/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
 
@@ -266,7 +266,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.1.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -276,8 +276,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 67
+  datadog_node_layer_version = 117
 
   # aws_lambda_function arguments
 }
@@ -287,23 +287,23 @@ module "lambda-datadog" {
 
 2. `aws_lambda_function` 引数を設定します。
 
-   `aws_lambda_function` リソースで利用可能な引数は、この Terraform モジュールでもすべて利用可能です。`aws_lambda_function` リソースでブロックとして定義された引数は、ネストされた引数とともに変数として再定義されます。
+   `aws_lambda_function` リソースで利用可能なすべての引数は、この Terraform モジュールでも使用できます。`aws_lambda_function` リソースでブロックとして定義された引数は、ネストされた引数を含む変数として再定義されます。
 
    たとえば、`aws_lambda_function` では、`environment` は `variables` 引数を持つブロックとして定義されています。`lambda-datadog` Terraformモジュールでは、`environment_variables` の値が `aws_lambda_function` の `environment.variables` 引数に渡されます。このモジュールの変数の完全なリストは [Inputs][3] を参照してください。
 
 3. 環境変数のプレースホルダーを埋めます。
 
    - `<DATADOG_API_KEY_SECRET_ARN>` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN に置き換えます。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに環境変数 `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
-   - `<ENVIRONMENT>` を、`prod` や `staging` などの Lambda 関数の環境で置き換えます。　
-   - `<SERVICE_NAME>` を、Lambda 関数のサービス名に置き換えます。
+   - `<ENVIRONMENT>` を `prod` や `staging` などの Lambda 関数の環境に置き換えます。　
+   - `<SERVICE_NAME>` を Lambda 関数のサービス名に置き換えます。
    - `<DATADOG_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。(このページで正しい [Datadog サイト][4]が選択されていることを確認してください。)
    - `<VERSION>` を Lambda 関数のバージョン番号に置き換えます。
 
 4. 使用する Datadog 拡張機能 Lambda レイヤーと Datadog Node.js Lambda レイヤーのバージョンを選択します。デフォルトは、レイヤーの最新バージョンになります。
 
 ```
-  datadog_extension_layer_version = 58
-  datadog_node_layer_version = 112
+  datadog_extension_layer_version = 67
+  datadog_node_layer_version = 117
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -313,7 +313,7 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、Datadog はお使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli">Datadog CLI</a> でインスツルメントすることを強く推奨します。</div>
+<div class="alert alert-info">Datadog がサポートする Serverless Framework や AWS CDK などのサーバーレス開発ツールを使用していない場合、Datadog は <a href="./?tab=datadogcli">Datadog CLI</a> を使用してサーバーレスアプリケーションをインスツルメントすることを強く推奨します。</div>
 
 1. Datadog Lambda ライブラリのインストール
 
@@ -441,4 +441,4 @@ exports.handler = async (event) => {
 [3]: /ja/serverless/configuration/
 [4]: /ja/serverless/custom_metrics?tab=nodejs
 [5]: /ja/tracing/custom_instrumentation/nodejs/
-[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework
+[6]: /ja/security/application_security/serverless/

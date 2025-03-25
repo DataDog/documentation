@@ -24,6 +24,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10297
     source_type_name: RapDev MSTeams
+  logs:
+    source: rapdev_msteams
   monitors:
     '[Microsoft Teams] Poor Call Session Audio Performance Qualifier A': assets/monitors/performance_audio_packet_utilization.json
     '[Microsoft Teams] Poor Call Session Audio Performance Qualifier B': assets/monitors/performance_audio_rtt.json
@@ -41,6 +43,7 @@ author:
 categories:
 - コラボレーション
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -49,7 +52,6 @@ integration_id: rapdev-msteams
 integration_title: Microsoft Teams
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -83,22 +85,19 @@ tile:
   description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
   media:
   - caption: 通話品質概要
-    image_url: images/1.png
+    image_url: images/1.jpg
     media_type: image
   - caption: 通話品質ユーザーエクスペリエンス概要
-    image_url: images/2.png
-    media_type: image
-  - caption: 通話品質ユーザーエクスペリエンスネットワークとオーディオ
-    image_url: images/3.png
+    image_url: images/2.jpg
     media_type: image
   - caption: 通話品質ユーザーエクスペリエンスオーディオとビデオ
-    image_url: images/4.png
+    image_url: images/3.jpg
     media_type: image
   - caption: 通話品質ユーザーデバイス
-    image_url: images/5.png
+    image_url: images/4.jpg
     media_type: image
   - caption: パフォーマンス修飾子ルックアップテーブル
-    image_url: images/6.png
+    image_url: images/5.jpg
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
@@ -118,12 +117,12 @@ RapDev Microsoft Teams インテグレーションは、通話品質レポート
 
 Microsoft Teams インテグレーションは、Active Directory テナントに最小限の権限しか必要とせず、インストールも簡単なため、組織は迅速に Microsoft Teams の通話品質レポートを展開し、レポーティングを開始することができます。
 
-## Agent
+## サポート
 サポートまたは機能リクエストについては、以下のチャンネルで RapDev.io までお問い合わせください。
 
- - メール: support@rapdev.io 
+ - メール: support@rapdev.io
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
- - 電話: 855-857-0222 
+ - 電話: 855-857-0222
 
 ---
 

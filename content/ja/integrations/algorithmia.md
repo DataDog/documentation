@@ -18,7 +18,7 @@ assets:
     source_type_id: 10128
     source_type_name: Algorithmia
   monitors:
-    Algorithmia: assets/monitors/algorithm_duration.json
+    Algorithm is taking too long to execute: assets/monitors/algorithm_duration.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Algorithmia
@@ -27,6 +27,7 @@ author:
 categories:
 - メトリクス
 - ai/ml
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: algorithmia
 integration_title: Algorithmia
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: algorithmia
 public_title: Algorithmia
@@ -49,6 +49,7 @@ tile:
   - Category::Metrics
   - Category::AI/ML
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: 本番環境の機械学習モデルのメトリクスを監視
   media: []
@@ -78,7 +79,7 @@ Algorithmia Enterprise の機能のひとつである Algorithmia Insights は�
 よる推論関連のメトリクスを Algorithmia から Kafka へ、さらに Datadog の
 メトリクス API へストリーミングすることができます。
 
-## 計画と使用
+## セットアップ
 
 1. Algorithmia インスタンスから、Algorithmia Insights を構成して
    Kafka Broker (Algorithmia の外部) へ接続します。
@@ -116,21 +117,21 @@ scikit-learn の回帰モデルからの予測可能性、TensorFlow の画像�
 スクリプトには、Datadog でユーザー定義のメトリクスに `algorithmia.` の
 プレフィックスが追加されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "algorithmia" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Algorithmia チェックには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Algorithmia チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Algorithmia サポートチーム][5]までお問い合わせください。
 

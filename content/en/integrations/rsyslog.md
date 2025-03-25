@@ -18,6 +18,10 @@ public_title: Datadog-Rsyslog Integration
 supported_os:
     - linux
 integration_id: "rsyslog"
+further_reading:
+- link: "https://www.datadoghq.com/architecture/using-rsyslog-to-send-logs-to-datadog/"
+  tag: "Architecture Center"
+  text: "Using Rsyslog to send logs to Datadog"
 ---
 
 ## Overview
@@ -29,10 +33,12 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 ### Log collection
 
 #### Rsyslog version >=8
+<div class="alert alert-info"> From <a href="https://www.rsyslog.com/doc/configuration/modules/imfile.html#mode">version 8.1.5</a> Rsyslog recommends <code>inotify</code> mode. Traditionally, <code>imfile</code> used polling mode, which is much more resource-intense (and slower) than <code>inotify</code> mode. </div>
 
 {{< tabs >}}
 
 {{% tab "Ubuntu and Debian" %}}
+
 1. Activate the `imfile` module to monitor specific log files. To add the `imfile` module, add the following to your `rsyslog.conf`:
 
     ```conf
@@ -446,5 +452,8 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 Need help? Contact [Datadog support][1].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/

@@ -70,8 +70,8 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                                       |
 | `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                                                                                                                                                                                                                                |
 | `apmFlushDeadline`            | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                                                                                                             |
-| `mergeStepFunctionAndLambdaTraces` | `true` に設定すると、Lambda トレースは呼び出し元の Step Function のトレースとマージされます。デフォルトは `false` です。                                                                                                                                                                                                                                                                                                                          |
 | `enableStepFunctionsTracing`    | Datadog Forwarder の Step Function ロググループと Step Function トレーシングへの自動サブスクリプションを有効にします。Step Function のロググループが構成されていない場合は、自動的に作成されます。`forwarderArn` の設定が必要です。デフォルトは `false` です。                                                                                                                                                                  |
+| `propagateUpstreamTrace` | `true` に設定すると、下流の Stepfunction の起動トレースは上流の Stepfunction の起動とマージされます。デフォルトは `false` です。 |
 | `redirectHandlers`    | オプションで、`false` に設定した場合にハンドラーのリダイレクトを無効にします。これは APM が完全に無効になっている場合にのみ `false` に設定してください。デフォルトは `true` です。                                                                                                                                                                  |
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
@@ -127,7 +127,7 @@ custom:
 
 デフォルト値が事前構成された 7 つの推奨モニターがあります。
 
-|       モニター        |                                         データセキュリティ                                          | しきい値  | サーバーレスモニター ID  |
+|       モニター        |                                         メトリクス                                          | しきい値  | サーバーレスモニター ID  |
 | :------------------: | :--------------------------------------------------------------------------------------: | :--------: | :--------------------: |
 |   高いエラー率    |                       `aws.lambda.errors`/`aws.lambda.invocations`                       |   >= 10%   |   `high_error_rate`    |
 |       タイムアウト        |                      `aws.lambda.duration.max`/`aws.lambda.timeout`                      |    >= 1    |       `timeout`        |
@@ -174,7 +174,6 @@ custom:
             include_tags: true
             notify_audit: true
             thresholds:
-              ok: 0.025
               warning: 0.05
               critical: 0.1
 ```
@@ -205,7 +204,6 @@ custom:
             notify_audit: true
             notify_no_data: false
             thresholds:
-              ok: 1
               warning: 2
               critical: 3
 ```
@@ -243,7 +241,7 @@ plugins:
 
 このパッケージに問題が見つかり、修正された場合は、[手順][14]に従ってプルリクエストを開いてください。
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

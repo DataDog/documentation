@@ -29,6 +29,7 @@ categories:
 - data stores
 - cloud
 - ログの収集
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: tidb
 integration_title: TiDB
 integration_version: 2.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tidb
 public_title: TiDB
@@ -56,6 +56,7 @@ tile:
   - Category::Data Stores
   - Category::Cloud
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: TiDB クラスター用インテグレーション
   media: []
@@ -77,12 +78,12 @@ tile:
 
 > **注**:
 >
-> - このインテグレーションには TiDB 4.0 以降が必要です。 
+> - このインテグレーションには TiDB 4.0 以降が必要です。
 > - TiDB Cloud の場合は、[TiDB Cloud インテグレーション][2]をご覧ください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 まず、[Datadog Agent をダウンロードして起動][3]します。
 
@@ -90,7 +91,7 @@ tile:
 
 `datadog-agent integration install -t datadog-tidb==<INTEGRATION_VERSION>` を実行します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ##### メトリクスの収集
 
@@ -131,7 +132,7 @@ tile:
 
 3. [Agent を再起動します][6]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -199,23 +200,23 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンド][7]を実行し、Checks セクションで `tidb` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tidb" >}}
 
 
 > `metrics` コンフィギュレーションオプションを使用して TiDB クラスターから追加のメトリクスを収集することが可能です。
 
-### ヘルプ
+### イベント
 
 TiDB チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "tidb" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ### macOS で TiKV および TiFlash インスタンスに CPU とメモリのメトリクスがありません
 

@@ -1,10 +1,10 @@
 ---
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/php/
-  tags: ドキュメント
+  tag: ドキュメント
   text: PHP トレース収集の設定
 - link: /tracing/troubleshooting/
-  tags: ドキュメント
+  tag: ドキュメント
   text: トラブルシューティング
 title: PHP CLI スクリプトのトレース
 ---
@@ -149,6 +149,6 @@ $ php long_running.php
 
 {{< img src="tracing/guide/trace_php_cli_scripts/long-running-cli.jpg" alt="長時間で実行される PHP CLI スクリプトのトレース" >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

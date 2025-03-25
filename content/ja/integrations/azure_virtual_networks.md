@@ -3,6 +3,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Microsoft Azure Virtual Network
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_virtual_networks
 public_title: Datadog-Microsoft Azure Virtual Network インテグレーション
@@ -35,26 +35,26 @@ Azure Virtual Network からメトリクスを取得して、以下のことを�
 
 **このインテグレーションによるメトリクスは、Azure Monitor からは利用できません**。Datadog は Azure のメタデータ API を照会し、応答を時系列データポイントに変換することで、これらを生成します。これらは、Azure インテグレーションからの標準メトリクスとして Datadog で提供されます。
 
-## 計画と使用
+## セットアップ
 
 **注**: ゲートウェイサブネットの使用量は Azure ではサポートされておらず、使用可能なアドレス空間と割り当てられたアドレス空間の双方について (-1) の値が返されます。ゲートウェイサブネットを含む仮想ネットワークの使用量を集計する場合は、この点を考慮するようにしてください。
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_virtual_networks" >}}
 
 
-### ヘルプ
+### イベント
 Azure Virtual Network インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 Azure Virtual Network インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

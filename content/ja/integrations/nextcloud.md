@@ -22,6 +22,7 @@ author:
   support_email: emeric.planet@gmail.com
 categories:
 - コラボレーション
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: nextcloud
 public_title: Nextcloud
@@ -47,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Collaboration
+  - Offering::Integration
   configuration: README.md#Setup
   description: Nextcloud インスタンスからの総合的な統計を追跡
   media: []
@@ -62,11 +63,11 @@ tile:
 
 このチェックは [Nextcloud][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Nextcloud チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -78,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Nextcloud の[メトリクス](#メトリクス) を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `nextcloud.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nextcloud.d/conf.yaml][6] を参照してください。
 
@@ -88,21 +89,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Nextcloud チ�
 
 [Agent の status サブコマンド][8]を実行し、Checks セクションで `nextcloud` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "nextcloud" >}}
 
 
-### ヘルプ
+### イベント
 
 Nextcloud には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "nextcloud" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

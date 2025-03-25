@@ -13,13 +13,16 @@ Use the different principals to control access patterns in your organization and
 
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
+| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Powerpacks][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Synthetic tests][7]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Security rules][6]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+
 
 ### Elevate access to individual resources
 
@@ -29,7 +32,9 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [2]: /dashboards/configure/#permissions
 [3]: /monitors/configuration/#permissions
 [4]: /notebooks/#limit-edit-access
-[5]: /security/detection_rules/#limit-edit-access
-[6]: /service_management/service_level_objectives/#permissions
-[7]: /synthetics/browser_tests/#permissions
-[8]: /dashboards/widgets/powerpack/#powerpack-permissions
+[5]: /dashboards/widgets/powerpack/#powerpack-permissions
+[6]: /security/detection_rules/#restrict-edit-permissions
+[7]: /security/suppressions/#restrict-edit-permissions
+[8]: /service_management/service_level_objectives/#permissions
+[9]: /synthetics/browser_tests/#permissions
+[10]: /service_management/case_management/settings#granular-access-control

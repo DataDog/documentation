@@ -7,17 +7,20 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentation
   text: Threat Management
-- link: /security/application_security/risk_management/
+- link: /security/application_security/software_composition_analysis/
   tag: Documentation
-  text: Application Vulnerability Management
-title: ASM の用語と概念
+  text: Software Composition Analysis
+- link: https://www.datadoghq.com/blog/datadog-threat-intelligence/
+  tag: ブログ
+  text: Datadog Threat Intelligenceによるセキュリティ調査の迅速化
+title: 用語と概念
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Datadog Application Security はサポートされていません。</div>
 {{< /site-region >}}
 
-Datadog Application Security Management (ASM) は、脅威を監視し、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する保護を提供します。実行時のコード実行コンテキスト、トレースおよびエラーデータ、ユーザーの属性を利用します。
+Datadog Application Security は、脅威を監視し、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する保護を提供します。実行時のコード実行コンテキスト、トレースおよびエラーデータ、ユーザーの属性を利用します。
 
 ## 一般的なアプリケーションセキュリティ用語
 
@@ -26,14 +29,14 @@ Datadog Application Security Management (ASM) は、脅威を監視し、コー�
 
 Datadog ライブラリ
 : _別名_: トレーサー、トレーシングライブラリ
-: Web アプリケーションに埋め込まれたプログラミング言語に特化したライブラリ。ASM は、監視と保護のためにこのライブラリを使用します。APM は同じライブラリを使用して、テレメトリーをトレースするためのコードをインスツルメンテーションします。
+: Web アプリケーションに埋め込まれたプログラミング言語に特化したライブラリ。Datadog Application Security は、監視と保護のためにこのライブラリを使用します。APM は同じライブラリを使用して、テレメトリーをトレースするためのコードをインスツルメンテーションします。
 
 検出ルール
 : 取り込まれたデータやクラウド構成に適用される条件付きロジックの定義。ルールで定義された条件の少なくとも 1 つが一定期間内に満たされると、Datadog は_セキュリティシグナル_を生成します。
 : [検出ルール][10]を参照してください。
 
 パスリスト (旧除外フィルター)
-: ASM ライブラリやアプリ内 WAF ルールによってフラグが立てられた不審なリクエストを除外するための仕組み。パスリストはリクエストが Datadog に取り込まれる際に適用されます (インテーク)。パスリストは誤検出の管理と取り込みコストの削減に役立ちます。
+: Datadog Application Security ライブラリやアプリ内 WAF ルールによってフラグが立てられたセキュリティトレースを除外するための仕組み。パスリストはリクエストが Datadog に取り込まれる際に適用されます (インテーク)。パスリストは誤検出の管理と取り込みコストの削減に役立ちます。
 : アプリ内の[除外フィルター][11]を参照してください。
 
 アプリ内 WAF ルール (旧イベントルール)
@@ -44,7 +47,7 @@ Datadog ライブラリ
 : 自動テストや人間のテスター、またはアプリケーションの機能とインタラクションを持つ任意のアクティビティによってアプリが実行されている際に、積極的に脆弱性を検出するアプリケーションセキュリティテスティングの手法。
 
 リモート構成
-: Agent の構成をリモートで更新できる Datadog プラットフォームの仕組み。アプリ内 WAF ルールの更新、製品の有効化、攻撃者のブロックのために ASM で使用されます。
+: Agent の構成をリモートで更新できる Datadog プラットフォームの仕組み。アプリ内 WAF ルールの更新、製品の有効化、攻撃者のブロックのために Datadog Application Security で使用されます。
 : [リモート構成の仕組み][8]を参照してください。
 
 サービス
@@ -60,6 +63,9 @@ Datadog ライブラリ
 重大度
 : 攻撃試行をどれだけ迅速にトリアージし、対処すべきかを示す指標。攻撃の潜在的な影響やリスクを含む複数の要因に基づいています。値は、Critical、High、Medium、Low、Info です。
 
+セキュリティトレース
+: アプリ内 WAF ルールによってセキュリティアクティビティが警告された分散トレース。基礎となるトレースは APM と共有されており、これによりより深くて迅速な調査が可能になります。
+
 不審なリクエスト
 : アプリ内 WAF ルールによってセキュリティアクティビティが警告された分散トレース。基礎となるトレースは APM と共有されており、これによりより深くて迅速な調査が可能になります。
 
@@ -69,6 +75,22 @@ Datadog ライブラリ
 
 脆弱性
 : アプリケーション内の潜在的なリスク。[OWASP][1]より: "脆弱性とは、攻撃者がアプリケーションの利害関係者に危害を加えることを可能にする、設計上の欠陥あるいは実装バグである、アプリケーションの穴または弱点のことを指します。利害関係者には、アプリケーションの所有者、アプリケーションのユーザー、および、アプリケーションに依存する他のエンティティが含まれます。"
+
+トレースの適格性確認
+: Datadog がトレースの影響を理解する手助けをするプロセスで、 `Harmful (有害)、Safe (安全) または Unknown (不明)` としてラベル付けします。
+: [トレースの適格性確認][15]を参照してください。
+
+脅威インテリジェンス
+: Datadog ライブラリで実行される、脅威を検出するためのルールセット。これには、既知の脆弱性を悪用しようとする試みを監視する Web Application Firewall (WAF) のパターンが含まれます。
+: [脅威インテリジェンス][16]を参照してください。
+
+不審な攻撃者
+: フラグが立てられた IP の前段階。不審な IP は、攻撃トラフィックの最低限のしきい値を満たしているため、不審として分類されますが、フラグのしきい値には達していません。しきい値はユーザーによる構成はできません。 
+: [Attacker Explorer][17] を参照してください。
+
+フラグが立てられた攻撃者
+: 大量の攻撃トラフィックを送信する IP アドレス。フラグが立てられた IP アドレスを確認し、ブロックすることをお勧めします。しきい値はユーザーによる構成はできません。
+: [Attacker Explorer][17] を参照してください。
 
 ## 攻撃と既知の脆弱性の用語
 
@@ -121,3 +143,6 @@ Datadog ライブラリ
 [12]: /ja/security/application_security/threats/inapp_waf_rules
 [13]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&product=appsec&view=signal
 [14]: /ja/security/application_security/threats/add-user-info/
+[15]: /ja/security/application_security/threats/trace_qualification/
+[16]: /ja/security/application_security/threats/threat-intelligence/
+[17]: /ja/security/application_security/threats/attacker-explorer/

@@ -21,10 +21,8 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10145
     source_type_name: GlusterFS
-  logs:
-    source: glusterfs
   monitors:
-    brick status: assets/monitors/brick_status.json
+    Number of offline bricks is high: assets/monitors/brick_status.json
   saved_views:
     glusterfs_processes: assets/saved_views/glusterfs_processes.json
 author:
@@ -35,6 +33,7 @@ author:
 categories:
 - data stores
 - ログの収集
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md
 display_on_public_website: true
@@ -42,9 +41,8 @@ draft: false
 git_integration_title: glusterfs
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
-integration_version: 1.7.0
+integration_version: 3.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: glusterfs
 public_title: Red Hat Gluster Storage
@@ -57,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Category::Data Stores
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
   media: []
@@ -73,16 +72,16 @@ tile:
 このチェックは、Datadog Agent を介して [RedHat Gluster Storage][1] クラスターの状態、ボリューム、ブリックステータスを監視します。
 この GlusterFS インテグレーションは、RedHat ベンダーバージョンとオープンソースバージョンの GlusterFS の両方と互換性があります。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 GlusterFS チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. GlusterFS のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `glusterfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル glusterfs.d/conf.yaml][4] を参照してください。
 
@@ -119,7 +118,7 @@ GlusterFS チェックは [Datadog Agent][3] パッケージに含まれてい�
 
 2. [Agent を再起動します][6]。
 
-#### 収集データ
+#### ログ収集
 
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
@@ -150,21 +149,21 @@ Kubernetes 環境でのログ収集のための Agent の構成については�
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `glusterfs` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "glusterfs" >}}
 
 
-### ヘルプ
+### イベント
 
 GlusterFS には、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "glusterfs" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 

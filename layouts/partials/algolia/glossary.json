@@ -1,0 +1,30 @@
+{{- $hugo_context := .context -}}
+{{- $glossaryPage := $hugo_context.Site.GetPage "/glossary" }}
+{{- with $headless := $hugo_context.Site.GetPage "/glossary/terms" -}}
+    {{- range $headless.Resources.ByType "page" -}}
+        {{- $page := . -}}
+        {{- $object_id := (print $glossaryPage.File.UniqueID "_" $headless.File.Lang "_" ($page.Params.Title | anchorize)) -}}
+        {{- $relpermalink := print $glossaryPage.RelPermalink "#" ($page.Params.Title | anchorize) -}}
+        {{- $content := .Plain -}}
+        {{
+            $hugo_context.Scratch.Add "algoliaindex" (
+                dict "objectID" $object_id
+                "id" $object_id
+                "title" "Glossary"
+                "section_header" $page.Params.Title
+                "content" $content
+                "type" $page.Type
+                "relpermalink" $relpermalink
+                "distinct_base_url" $glossaryPage.RelPermalink
+                "full_url" ($relpermalink | absLangURL)
+                "language" $page.Language.Lang
+                "category" "Documentation"
+                "subcategory" "Glossary"
+                "rank" 70
+                "order" 1
+                "tags" (slice)
+            )
+          }}
+    {{- end -}}
+{{- end -}}
+

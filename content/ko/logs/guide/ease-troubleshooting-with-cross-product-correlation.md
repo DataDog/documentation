@@ -72,11 +72,11 @@ title: 제품 간 상호 연결로 쉬운 트러블슈팅
 
 ##### 로그에 트레이스 ID 삽입
 
-트레이스 ID는 `opentracing_context_x_datadog_trace_id` 변수로 저장됩니다. NGINX 설정 파일 `/etc/nginx/nginx.conf`의 HTTP 섹션에 다음 설정 블록을 추가하여 NGINX 로그 형식을 업데이트합니다.
+트레이스 ID는 `opentelemetry_trace_id` 변수로 저장됩니다. NGINX 설정 파일 `/etc/nginx/nginx.conf`의 HTTP 섹션에 다음 설정 블록을 추가하여 NGINX 로그 형식을 업데이트합니다.
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 

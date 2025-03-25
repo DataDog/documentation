@@ -27,5 +27,5 @@ title: インデックス化
 [3]: /ja/glossary/#retention-filter
 [4]: /ja/tracing/trace_explorer/search
 [5]: /ja/getting_started/tagging
-[6]: /ja/tracing/guide/add_span_md_and_graph_it/
+[6]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [7]: /ja/glossary/#facet

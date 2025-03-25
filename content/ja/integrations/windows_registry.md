@@ -13,11 +13,13 @@ assets:
     source_type_name: windows-registry
 author:
   homepage: https://www.datadoghq.com
-  name: Ruby
+  name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
 - OS & システム
+- windows
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/windows_registry/README.md
 display_on_public_website: true
@@ -27,7 +29,6 @@ integration_id: windows-registry
 integration_title: Windows レジストリ
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: windows_registry
 public_title: Windows レジストリ
@@ -39,6 +40,8 @@ tile:
   classifier_tags:
   - Supported OS::Windows
   - Category::OS & System
+  - カテゴリー::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Windows ホストでレジストリキーの変更を監視します。
   media: []
@@ -57,13 +60,13 @@ Windows レジストリキーの変更を監視し、Datadog に転送します�
 - Windows レジストリの値を通じて、システムとアプリケーションレベルの健全性と状態を把握する。
 - セキュリティおよびコンプライアンス要件に影響を与える予期せぬ変更を監視する。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Windows レジストリインテグレーションは、[Datadog Agent][1] パッケージに含まれています。追加のインストールは必要ありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 このインテグレーションは、次の両方の方法を使用して Windows レジストリ情報を収集し、レポートします。
 
@@ -86,21 +89,21 @@ Windows レジストリインテグレーションは、[Datadog Agent][1] パ�
 
 Datadog Agent Manager の情報ページを確認するか、Agent の `status` [サブコマンド][7]を実行し、**Checks** セクションで `windows_registry` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Windows レジストリインテグレーションにより収集されたすべてのメトリクスは、[カスタムメトリクス][11]として Datadog に送信できますが、これはお客様への請求に影響します。
 
-### ワークフローの自動化
+### Logs
 
 Windows レジストリのインテグレーションによって収集されたログはすべて Datadog に転送され、[ログの請求][8]の対象となります。
 
-### ヘルプ
+### サービスチェック
 
 Windows レジストリインテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要ですか？[Datadog サポート][9]に [Agent Flare][10] でお問い合わせください。
 

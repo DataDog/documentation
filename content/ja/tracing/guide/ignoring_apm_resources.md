@@ -58,18 +58,39 @@ apm_config:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{% tab "Kubernetes" %}}
+#### Datadog Operator
 
-`values.yaml` ファイルの `traceAgent` セクションの `env` セクションに `DD_APM_FILTER_TAGS_REJECT` を追加し、[通常通り helm を立ち上げます][1]。複数のタグを使用する場合は、各 key:value をスペースで区切ります。
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
+{{< /code-block >}}
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
-traceAgent:
-  # agents.containers.traceAgent.env -- trace-agent コンテナ用の追加環境変数
-    env:
-      - name: DD_APM_FILTER_TAGS_REJECT
-        value: tag_key1:tag_val2 tag_key2:tag_val2
+{{% k8s-operator-redeploy %}}
+
+#### Helm
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
+
+{{% k8s-helm-redeploy %}}
 
 [1]: /ja/agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
@@ -77,7 +98,7 @@ traceAgent:
 
 この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
-バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。これらのタグは、Datadog Agent レベルでトレースをドロップするために使用することはできません。
+バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。なお、これらのタグは Datadog Agent レベルでトレースをドロップするためには使用できません。エージェントは取り込み前に利用可能なタグに基づいてのみフィルタリングを行うためです。
 
 
 | 名前                                    | 説明                                      |
@@ -107,7 +128,7 @@ traceAgent:
 | **名前**                       | **Remap from**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
-| `http.useragent`               | `user_agent` - Java                                                                                   |
+| `http.useragent`               | `user_agent` - Java、C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
 #### データベース
@@ -346,7 +367,7 @@ helm install dd-agent -f values.yaml \
 {{% /tab %}}
 {{% tab "Amazon ECS タスク定義" %}}
 
-Amazon ECS を使用する場合 (EC2 など)、Datadog Agent のコンテナ定義に、JSON が以下のように評価される値を持つ環境変数 `DD_APM_IGNORE_RESOURCES` を追加してください。
+Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent のコンテナ定義に環境変数 `DD_APM_IGNORE_RESOURCES` を追加し、その値が次のような JSON に評価されるようにします。
 
 {{< code-block lang="json" >}}
     "environment": [
@@ -430,7 +451,7 @@ tracer.use('http', {
 ```
 <div class="alert alert-info"><strong>注</strong>: インテグレーションのためのトレーサーコンフィギュレーションは、インスツルメントされたモジュールがインポートされる<em>前に</em>行う必要があります。</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}

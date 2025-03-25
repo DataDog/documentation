@@ -49,7 +49,7 @@ title: Synthetic モニタリングガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="メトリクス:" >}}
-    {{< nextlink href="synthetics/guide/monitor-usage/" >}}推定使用量メトリクスの使用{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/monitor-usage/" >}}推定使用量メトリクスを使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/using-synthetic-metrics/" >}}Synthetic メトリクスをモニターで使用する{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}API テストのタイミングを理解し、ばらつきのトラブルシューティングを行う{{< /nextlink >}}
 {{< /whatsnext >}}

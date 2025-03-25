@@ -7,18 +7,18 @@ further_reading:
   tag: ドキュメント
   text: Synthetic モニタリングについて
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
+  tag: 外部サイト
   text: Terraform による Synthetic API テストの作成と管理
 title: API で API テストを作成する
 ---
 
 ## 概要
 
-このガイドには、API テストの作成に使用できるコンフィギュレーションファイルの例や [Terraform][2] リソースへのリンク、グローバル変数などの関連する Synthetics リソースが含まれています。
+このガイドには、 API テストを作成するために使用できるコンフィギュレーションファイルの例や [Terraform][2] リソースへのリンク、グローバル変数などの関連する Synthetic リソースが含まれています。
 
    - API を使用している場合は、[JSON の構成例](#json-configuration)を参照してください。
-   - Python クライアントを使用している場合は、[Python クライアントの例](#python-client)を参照してください。
-   - Terraform を使用している場合は、[Terraform の例](#terraform)を参照してください。
+   - Python クライアントを使用している場合は、 [Python クライアントの例](#python-client)を参照してください。
+   - Terraform を使用している場合は、 [Terraform の例](#terraform)を参照してください。
 
 詳しくは、API ドキュメントの [API テストの作成][1]をご覧ください。
 
@@ -403,7 +403,7 @@ from datadog_api_client.v1.api import synthetics_api
 from datadog_api_client.v1.models import *
 from pprint import pprint
 
-// サポートされているすべてのコンフィギュレーションパラメータの一覧は configure.py を参照してください
+// See configuration.py for a list of all supported configuration parameters
 configuration = Configuration(
     host = "https://api.datadoghq.com",
     api_key= {"apiKeyAuth": "<YOUR_API_KEY>","appKeyAuth": "<YOUR_APPLICATION_KEY>"}
@@ -465,23 +465,23 @@ configuration = Configuration(
         print("Exception when calling SyntheticsApi->create_synthetics_api_test: %s\n" % e)
 {{< /code-block >}}
 
-## ダッシュボード  
+## Terraform
 
 ### API テスト
 
-[Synthetic テストリソース][7]を使用して、`type` を `api` に設定することで、Terraform で API テストを作成・管理することができます。
+`type` を `api` に設定した [Synthetic テストリソース][7]を使って、 Terraform で API テストを作成・管理することができます。
 
 ### プライベートロケーション
 
-カスタムロケーションや保護されたロケーションから Synthetic テストを実行する必要がある場合は、[プライベートロケーションリソース][3]を使用して、テストを実行するプライベートロケーションを作成および管理できます。[プライベートロケーション][4]のページで詳細をご覧ください。
+カスタムロケーションやセキュリティ保護されたロケーションから Synthetic テストを実行する必要がある場合は、 [プライベートロケーションリソース][3]を使ってテストを実行するプライベートロケーションを作成・管理できます。詳しくは[プライベートロケーション][4]のページをご覧ください。
 
 ### グローバル変数とローカル変数
 
 [Synthetics グローバル変数リソース][5]を使用して、Synthetics グローバル変数を作成・管理します。これはテスト間で安全に共有できる変数です。また、[config_variable][9] でネストされたスキーマを使用して、テスト固有の[組み込みのローカル変数][8]を作成することもできます。
 
-### 同時実行上限
+### 同時実行数の上限
 
-[Synthetics の同時実行上限リソース][6]を使用すると、並列で実行される Synthetic テストの数を制限することができます。
+[Synthetics 同時実行数の上限リソース][6]を使用すると、並列で実行される Synthetic テストの数を制限することができます。
 
 ## その他の参考資料
 

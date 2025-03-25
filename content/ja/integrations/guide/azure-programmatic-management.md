@@ -9,19 +9,17 @@ title: Azure インテグレーションプログラム管理ガイド
 
 ## 概要
 
-このガイドでは、Datadog と Azure インテグレーション、および Datadog Agent VM 拡張機能などの他の Azure リソースをプログラムで管理する方法を示します。これにより、一度に複数のアカウントで観測可能性を管理することができます。
+ This guide demonstrates how to programmatically manage the Azure integration with Datadog, as well as other Azure resources such as the Datadog Agent VM extension. This enables you to manage observability across multiple accounts at once.
 
-**全サイト**: すべての Datadog サイトは、このページのステップを使用して、Azure メトリクス収集のための App Registration 資格情報プロセスと、Azure Platform Logs を送信するための Event Hub セットアップを完了することができます。
+**All sites**: すべての [Datadog サイト][3]は、このページのステップを使用して、Azure メトリクス収集のための App Registration の認証プロセスと、Azure プラットフォームログを送信するための Event Hub のセットアップを完了することができます。
 
-**US3:** Datadog US3 サイトに組織がある場合、Azure Native インテグレーションを使用して、Azure 環境の管理およびデータ収集を効率化できます。Datadog では、可能な限りこの方法を使用することを推奨しています。セットアップには、Azure サブスクリプションを Datadog 組織にリンクするための [Datadog リソースを Azure に][14]作成することが必要です。これは、メトリクス収集のためのアプリ登録資格情報プロセスと、ログ転送のための Event Hub セットアップを置き換えるものです。
+**US3**: 組織が Datadog US3 サイトにある場合、Azure Native インテグレーションを使用して、Azure 環境の管理とデータ収集を効率化することができます。Datadog では、可能な限りこの方法を使用することを推奨しています。セットアップには、[Azure 内の Datadog リソース][14]を作成して、Azure サブスクリプションを Datadog 組織にリンクします。これは、メトリクス収集のためのアプリ登録の認証プロセスとログ転送のための Event Hub のセットアップを置き換えるものです。詳細は、[Azure Native Integration の管理ガイド][1]を参照してください。
 
-## Datadog Azure インテグレーション
+## Datadog Azure integration
 
-標準の Azure インテグレーションプロセスでは、メトリクス収集を実装するためのアプリ登録資格情報プロセスと、Azure Platform Logs を送信するための Event Hub セットアップを使用します。Datadog アカウントが Datadog の [US3 サイト][3]でホストされている場合、[Azure の Datadog リソース][14]を使用して、Azure 環境と Datadog インテグレーションを作成および管理することができます。これは、Azure Native インテグレーションと呼ばれ、ログやメトリクス収集の構成、Datadog Agent のデプロイ、アカウント設定の管理が可能です。詳細は、[Azure Native インテグレーションの管理][4]を参照してください。
+標準の Azure インテグレーションでは、メトリクス収集を実装するためのアプリ登録の認証プロセスと、Azure プラットフォームログを送信するための Azure Event Hub のセットアップを使用します。Datadog を Azure 環境とインテグレーションする前に、Azure でアプリ登録を作成し、Datadog が提供されたスコープ (サブスクリプションまたは管理グループ) を監視するための **Monitoring Reader** 権限で構成します。アプリ登録がまだ作成されていない場合は、[Azure Portal 経由でのインテグレーション][6]または [Azure CLI 経由でのインテグレーション][4]でセットアップ手順を参照してください。
 
-Datadog アカウントが他の [Datadog サイト][3]でホストされている場合は、標準の [Azure インテグレーション][5]を使用して、Azure 環境からモニタリングデータを収集します。
-
-CLI を使用したい場合は、[Datadog の Azure CLI][2] を参照してください。
+**注**: Azure でアプリ登録を作成するときに、管理グループレベルで読み取り権限を割り当てることで、複数のサブスクリプションを監視し、管理グループ内の新しいサブスクリプションを自動的に監視することができます。
 
 ### Terraform
 
@@ -30,9 +28,9 @@ CLI を使用したい場合は、[Datadog の Azure CLI][2] を参照してく�
 1. [Datadog Terraform プロバイダー][15]を構成し、Terraform の構成で Datadog API と対話するように設定します。
 
 2. 以下の例を基本テンプレートとして、Terraform のコンフィギュレーションファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
-    * `azure_tenant_name`: Azure Active Directory ID。
-    * `client_id`: Azure Web アプリケーションのシークレットキー。
-    * `client_secret`: Azure Web アプリケーションのシークレットキー。
+    * `tenant_name`: Azure Active Directory ID。
+    * `client_id`: Your Azure application (client) ID.
+    * `client_secret`: Your Azure web application secret key.
 
    さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、Terraform レジストリの [Datadog Azure インテグレーションリソース][17]ページを参照してください。
 
@@ -46,11 +44,11 @@ resource "datadog_integration_azure" "sandbox" {
 
 {{< /code-block >}}
 
-3. `terraform apply` を実行します。データ収集が開始されるまで最大 10 分待ち、すぐに使える Azure 概要ダッシュボードを表示し、Azure リソースから送信されるメトリクスを確認します。
+3. `terraform apply` を実行します。データが収集され始めるまで最大 10 分間待ち、すぐに使える Azure 概要ダッシュボードを表示して、Azure リソースから送信されたメトリクスを確認します。
 
 #### 複数のサブスクリプションまたはテナントの管理
 
-複数のサブスクリプションまたはテナントにまたがって Terraform リソースを管理するために、エイリアスを持つ複数のプロバイダーブロックを使用できます。詳しくは[プロバイダーの構成][9]をお読みください。
+複数のサブスクリプションまたはテナントにまたがって Terraform リソースを管理するために、エイリアスを持つ複数の provider ブロックを使用できます。詳しくは [Provider Configuration][9] をお読みください。
 
 ### インテグレーションステータスの監視
 
@@ -74,13 +72,34 @@ Azure 環境から Datadog へのログ転送を設定するには、[Azure ロ�
 
 ### Terraform
 
-Terraform を使用して、Datadog Agent 拡張機能を作成および管理することができます。以下の手順で Agent を 1 台のマシンにインストールして構成し、zip 圧縮したコンフィギュレーションファイルを Blob ストレージにアップロードして、VM 拡張機能の Terraform ブロックで参照します。
+Terraform を使用して、Datadog Agent 拡張機能を作成および管理することができます。以下の手順で Agent を 1 台のマシンにインストールして構成し、zip 圧縮したコンフィギュレーションファイルを blob storage にアップロードして、Terraform の VM Extension ブロックで参照します。
 
 1. [Agent をインストールします][11]。
 2. 任意の [Agent 構成][12]を適用します。
 3. Windows Server 2008、Vista、およびそれ以降では、`%ProgramData%\Datadog` フォルダを zip ファイルとして保存します。Linux の場合は、`/etc/datadog-agent` フォルダを zip ファイルとして保存します。
-4. Blob ストレージにファイルをアップロードします。
-5. Terraform ブロック内で Blob ストレージの URL を参照し、VM 拡張機能を作成します。
+4. blob storage にファイルをアップロードします。
+5. Reference the blob storage URL in the Terraform block with the `agentConfiguration` parameter to create the VM extension.
+
+#### Extension settings
+
+Azure 拡張機能は、通常の設定と保護された設定の両方を受け入れることができます。
+
+通常の設定は以下の通りです。
+
+| 変数 | タイプ | 説明  |
+|----------|------|--------------|
+| `site` | 文字列 | Datadog インテークサイトを設定します。例: `SITE=`{{< region-param key="dd_site" code="true">}} |
+| `agentVersion` | 文字列 | `x.y.z` または `latest` というフォーマットの、インストールする Agent のバージョン |
+| `agentConfiguration` | URI | (optional) URL to the Azure blob containing the Agent configuration as a zip. |
+| `agentConfigurationChecksum` | 文字列 | Agent 構成 zip ファイルの SHA256 チェックサム。`agentConfiguration` が指定された場合、必須です。 |
+
+保護された設定は以下の通りです。
+
+| 変数 | タイプ | 説明  |
+|----------|------|--------------|
+| `api_key`| 文字列 | Datadog API キーを構成ファイルに追加します。 |
+
+**Note**: If `agentConfiguration` and `api_key` are specified at the same time, the API key found in the `agentConfiguration` takes precedence.
 
 {{< tabs >}}
 {{% tab "Windows" %}}
@@ -99,9 +118,10 @@ Terraform を使用して、Datadog Agent 拡張機能を作成および管理�
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
   {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
+    "api_key": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
+}
 ```
 {{% /tab %}}
 {{% tab "Linux" %}}
@@ -127,17 +147,17 @@ Terraform を使用して、Datadog Agent 拡張機能を作成および管理�
 {{% /tab %}}
 {{< /tabs >}}
 
-利用可能な引数の詳細については、Terraform レジストリの[仮想マシン拡張機能リソース][10]を参照してください。
+利用可能な引数の詳細については、Terraform レジストリの [Virtual Machine Extension リソース][10]を参照してください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+[1]: https://docs.datadoghq.com/ja/integrations/guide/azure-portal/
 [2]: https://learn.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: /ja/getting_started/site/
-[4]: /ja/integrations/guide/azure-portal/
+[4]: /ja/integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-cli
 [5]: /ja/integrations/azure/
-[6]: /ja/agent/basic_agent_usage/ansible/
-[7]: /ja/integrations/azure_container_service/
+[6]: /ja/integrations/guide/azure-manual-setup/?tab=azurecli#integrating-through-the-azure-portal
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 [11]: https://app.datadoghq.com/account/settings/agent/latest
@@ -145,8 +165,7 @@ Terraform を使用して、Datadog Agent 拡張機能を作成および管理�
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [15]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /ja/logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /ja/monitors/notify/#notify-your-team
+[20]: /ja/monitors/notify/#configure-notifications-and-automations

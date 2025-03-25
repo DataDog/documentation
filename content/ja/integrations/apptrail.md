@@ -10,6 +10,7 @@ author:
 categories:
 - ログの収集
 - セキュリティ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -19,7 +20,6 @@ integration_id: apptrail
 integration_title: Apptrail
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apptrail
 public_title: Apptrail
@@ -73,7 +73,7 @@ Apptrail の監査イベントストリーミング機能 ([_トレイル_][2]) 
 
 Apptrail と Datadog のインテグレーションにより、SaaS の監査ログを Apptrail から Datadog にリアルタイムで継続的にエクスポートすることができるようになります。Datadog を使用して、SaaS 監査ログの分析、アーカイブ、監視、警告を行うことができます。
 
-## 計画と使用
+## セットアップ
 
 前提条件として、SaaS ベンダーから Apptrail にサインアップしている必要があります。
 
@@ -100,7 +100,7 @@ Apptrail の監査ログを Datadog で表示するには
 
 詳しくは、[Apptrail Datadog 配信ドキュメント][7]をお読みください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
 ### 収集データ
 

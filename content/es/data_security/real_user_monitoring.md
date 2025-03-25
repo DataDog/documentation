@@ -134,7 +134,7 @@ Consulta las [opciones de privacidad específicas de Session Replay][12].
 
 ### Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [2]: /es/real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events

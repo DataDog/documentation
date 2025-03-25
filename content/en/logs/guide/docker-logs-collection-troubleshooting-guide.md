@@ -156,7 +156,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_USE_HTTP` environment variable to `true`:
+If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by setting the `DD_LOGS_CONFIG_FORCE_USE_HTTP` environment variable to `true`:
 
 #### Your containers are not using the JSON logging driver
 

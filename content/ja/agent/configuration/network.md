@@ -53,6 +53,9 @@ title: ネットワークトラフィック
 `snmp-traps-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `ndmflow-intake.`{{< region-param key="dd_site" code="true" >}}
 
+[Network Path][14]
+: `netpath-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [オーケストレーター][5]
 : `orchestrator.`{{< region-param key="dd_site" code="true" >}}<br>
 `contlcycle-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -232,32 +235,19 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 </div>
 
 **Agent** のすべての機能を利用するには、以下のポートを開きます。
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
 
 #### アウトバウンド
 
 {{% site-region region="us" %}}
 
-443/tcp
-: 大半の Agent データ (メトリクス、APM、ライブプロセス、コンテナなど) 用のポート。
-
-123/udp
-: NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
-[デフォルトの NTP ターゲット][2]を参照してください。
-
-8443/tcp
-: [Custom Agent Autoscaling][5] のポート。
-
-10516/tcp
-:TCP 経由のログ収集用ポート。<br>
-その他の接続タイプについては[ログのエンドポイント][3]を参照してください。
-
-10255/tcp
-: [Kubernetes HTTP Kubelet][4] 用のポート。
-
-10250/tcp
-: [Kubernetes HTTPS Kubelet][4] 用のポート。
+| Product/Functionality | ポート | プロトコル | 説明 |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
+| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
+| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
+| ログ収集 | 10516 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /ja/integrations/ntp/#overview
@@ -269,22 +259,14 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 {{% site-region region="eu" %}}
 
-443/tcp
-: 大半の Agent データ (メトリクス、APM、ライブプロセス、コンテナなど) 用のポート。
-
-123/udp
-: NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
-[デフォルトの NTP ターゲット][2]を参照してください。
-
-443/tcp
-:TCP 経由のログ収集用ポート。<br>
-その他の接続タイプについては[ログのエンドポイント][3]を参照してください。
-
-10255/tcp
-: [Kubernetes HTTP Kubelet][4] 用のポート。
-
-10250/tcp
-: [Kubernetes HTTPS Kubelet][4] 用のポート。
+| Product/Functionality | ポート | プロトコル | 説明 |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| [Custom Agent Autoscaling][5] | 8443 | TCP |  |
+| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
+| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
+| ログ収集 | 443 | TCP | Logging over TCP. See [logs endpoints][3] for other connection types. |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /ja/integrations/ntp/#overview
@@ -295,18 +277,12 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 {{% site-region region="us3,us5,gov,ap1" %}}
 
-443/tcp
-: 大半の Agent データ (メトリクス、APM、ライブプロセス、コンテナなど) 用のポート。
-
-123/udp
-: NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
-[デフォルトの NTP ターゲット][2]を参照してください。
-
-10255/tcp
-: [Kubernetes HTTP Kubelet][4] 用のポート。
-
-10250/tcp
-: [Kubernetes HTTPS Kubelet][4] 用のポート。
+| Product/Functionality | ポート | プロトコル | 説明 |
+| ------  | ---- | ------- | ----------- |
+| Agent<br>APM<br>Containers<br>Live Processes<br>Metrics | 443 | TCP | Most Agent data uses port 443. |
+| [Kubernetes HTTP Kubelet][4] | 10255 | TCP |  |
+| [Kubernetes HTTPS Kubelet][4] | 10250 | TCP |  |
+| NTP | 123 | UDP | Network Time Protocol (NTP). See [default NTP targets][2].<br>For information on troubleshooting NTP, see [NTP issues][1]. |
 
 [1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
 [2]: /ja/integrations/ntp/#overview
@@ -319,70 +295,16 @@ Agent < v7.18.0 または 6.18.0: `app.`{{< region-param key="dd_site" code="tru
 
 Agent のサービスがホスト内のローカルで相互通信する場合にのみ使用されます。
 
-5000/tcp
-: [go_expvar server][1] 用のポート。
-
-5001/tcp
-: IPC API がリスニングするポート。
-
-5002/tcp
-: [Agent ブラウザ GUI][2] 用のポート。
-
-5012/tcp
-: APM [go_expvar server][1] 用のポート。
-
-6062/tcp
-: Process Agent のデバッグエンドポイント用のポート。
-
-6162/tcp
-: Process Agent のランタイム設定を構成するためのポート。
-
-8125/udp
-: DogStatsD 用のポート。ただし、`dogstatsd_non_local_traffic` が true に設定されていない場合。このポートは、次のローカルホストで利用できます: `127.0.0.1`、`::1`、`fe80::1`。
-
-8126/tcp
-: [APM レシーバー][3]用のポート
-
-[1]: /ja/integrations/go_expvar/
-[2]: /ja/agent/basic_agent_usage/#gui
-[3]: /ja/tracing/
-{{% /tab %}}
-{{% tab "Agent v5 & v4" %}}
-
-#### アウトバウンド
-
-443/tcp
-: 大半の Agent データ (メトリクス、APM、ライブプロセス、コンテナなど) 用のポート。
-
-123/udp
-: NTP 用のポート (詳細は、[NTP の重要性に関するドキュメント][1]を参照してください)。<br>
-[デフォルトの NTP ターゲット][2]を参照してください。
-
-#### インバウンド
-
-6062/tcp
-: Process Agent のデバッグエンドポイント用のポート。
-
-6162/tcp
-: Process Agent のランタイム設定を構成するためのポート。
-
-8125/udp
-: DogStatsD 用のポート。ただし、`dogstatsd_non_local_traffic` が true に設定されていない場合。このポートは、次のローカルホストで利用できます: `127.0.0.1`、`::1`、`fe80::1`。
-
-8126/tcp
-: [APM レシーバー][3]用のポート。
-
-17123/tcp
-: Agent Forwarder。Agent と Datadog の間でネットワークスプリットが発生した場合にトラフィックのバッファリングに使用されます。
-
-17124/tcp
-: オプションの graphite アダプター。
-
-[1]: /ja/agent/faq/network-time-protocol-ntp-offset-issues/
-[2]: /ja/integrations/ntp/#overview
-[3]: /ja/tracing/
-{{% /tab %}}
-{{< /tabs >}}
+| Product/Functionality | ポート | プロトコル | 説明 |
+| ------  | ---- | ------- | ----------- |
+| [Agent browser GUI][16] | 5002 | TCP |  |
+| APM receiver | 8126 | TCP | Includes Tracing and the Profiler. |
+| [DogStatsD][18] | 8125 | UDP | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`. |
+| go_expvar server (APM) | 5012 | TCP | For more information, see [the go_expar integration documentation][15]. |
+| go_expvar integration server | 5000 | TCP | For more information, see [the go_expar integration documentation][15]. |
+| IPC API | 5001 | TCP | Port used for Inter Process Communication (IPC). |
+| Process Agent debug | 6062 | TCP | Debug endpoints for the Process Agent. |
+| Process Agent runtime | 6162 | TCP | Runtime configuration settings for the Process Agent. |
 
 ## ポートの構成
 
@@ -468,3 +390,8 @@ Agent の v7.27.0 以降では、メモリ制限に達した場合にディス�
 [11]: /ja/getting_started/site/
 [12]: /ja/agent/troubleshooting/send_a_flare
 [13]: /ja/infrastructure/containers/container_images
+[14]: /ja/network_monitoring/network_path/
+[15]: /ja/integrations/go_expvar/
+[16]: /ja/agent/basic_agent_usage/#gui
+[17]: /ja/tracing/
+[18]: /ja/developers/dogstatsd/

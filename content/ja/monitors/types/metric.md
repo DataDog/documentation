@@ -14,7 +14,7 @@ further_reading:
 - link: /monitors/manage/status/
   tag: ドキュメント
   text: モニターステータスの参照
-- link: /monitors/guide/change-alert
+- link: /monitors/types/change-alert
   tag: ドキュメント
   text: 変化アラートモニターのトラブルシューティング
 title: メトリクスモニター
@@ -24,16 +24,18 @@ title: メトリクスモニター
 
 メトリクスモニターは連続的なデータのストリームに役立ちます。Datadog に送信されるメトリクスのいずれかが、一定の期間にしきい値から外れると、アラートを送信します。
 
-Datadog で[メトリクスモニター][1]を作成するには、メインナビゲーションを使用して *Monitors --> New Monitor --> Metric* に移動します:。
+To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][1] and select the **Metric** monitor type.
 
 ## 検出方法を選択します。
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{% tab "しきい値" %}}
 
 しきい値アラートは、メトリクス値を静的なしきい値と比較します。
 
-アラートの評価では、Datadog が選択された期間の平均、最小、最大、合計の値を計算し、しきい値を上回って (または下回って) いるかどうかをチェックします。予期値がわかっている場合に使用される標準的なアラート向けです。[ディストリビューションメトリクス][1]は、選択期間におけるパーセンタイル計算の追加しきい値オプションを提供します。
+On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
+
+For more information, see the [Set alert conditions](#set-alert-conditions) section.
 
 [1]: /ja/metrics/distributions/
 {{% /tab %}}
@@ -45,6 +47,9 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 このタイプのアラートは、しきい値を常に予測できる場合に、メトリクスのスパイク、ドロップ、あるいは緩やかな変化を追跡するのに役立ちます。
 
+For more information, see the [Change alert monitors][1] guide.
+
+[1]: /ja/monitors/types/change-alert/
 {{% /tab %}}
 {{% tab "異常" %}}
 
@@ -54,7 +59,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 アラートの評価には、予期される範囲の内、外、上、下にある系列の割合を計算します。この割合がしきい値から外れる場合にアラートがトリガーされます。
 
-詳細については、[異常検出モニター][1]のページを参照してください。
+For more information, see the [Anomaly Monitor][1] page.
 
 [1]: /ja/monitors/types/anomaly/
 {{% /tab %}}
@@ -64,7 +69,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 アラートの評価では、すべてのグループが一緒にクラスター化され、同じ動作を示しているかをチェックします。1 つ以上のグループの動作が他のグループと異なる場合にアラートがトリガーされます。
 
-詳細については、[外れ値モニター][1]のページを参照してください。
+For more information, see the [Outlier Monitor][1] page.
 
 [1]: /ja/monitors/types/outlier/
 {{% /tab %}}
@@ -74,7 +79,7 @@ Datadog で[メトリクスモニター][1]を作成するには、メインナ�
 
 アラートの評価では、偏差の範囲を考慮してメトリクスの今後の値を予測します。この範囲のいずれかの部分がしきい値から外れる場合にアラートがトリガーされます。
 
-詳細については、[予測値モニター][1]のページを参照してください。
+For more information, see the [Forecast Monitor][1] page.
 
 [1]: /ja/monitors/types/forecasts/
 {{% /tab %}}
@@ -87,7 +92,7 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{< tabs >}}
 {{% tab "しきい値" %}}
 
-{{< img src="monitors/monitor_types/metric/new_metric_monitor_threshold.png" alt="しきい値検出メトリクスモニターのメトリクスの定義" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
 
 | 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -112,7 +117,7 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{% /tab %}}
 {{% tab "変化" %}}
 
-{{< img src="monitors/monitor_types/metric/new_metric_monitor_change.png" alt="変化検出メトリクスモニターのメトリクスの定義" style="width:100%;">}}
+{{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
 
 | 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
@@ -142,14 +147,22 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 {{< /tabs >}}
 
 **注:**
-  - パーセンタイル集計でディストリビューションメトリクスを使用する場合、一致するパーセンタイルしきい値が自動的に指定されます。
+  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified. Metrics with percentile aggregators do not generate a snapshot graph in the notifications message.
   - **max/min**: これらの max と min の説明は、メトリクスがしきい値を上回ったときにモニターがアラートすることを想定しています。しきい値を下回ったときにアラートするモニターでは、max と min の動作は逆になります。
   - モニターを作成するメトリクスの定義は、グラフを作成するメトリクスの定義と似ています。`Advanced...` オプションの使用について詳しくは、[高度なグラフの作成][2]を参照してください。
   - `as_count()` を使用する場合は動作が異なります。詳しくは、[モニター評価での as_count()][3] を参照してください。
 
 ## アラートの条件を設定する
 
-メトリクスが `above` (上)、`above or equal to` (上または等しい)、`below` (下)、または `below or equal to` (下または等しい) の場合にトリガーします。値が 0 から 1 の間の場合、先行ゼロが必要です。例: `0.3`
+Trigger when the metric is one of the following:
+- `above`
+- `above or equal to`
+- `below`
+- `below or equal to`
+- `equal to`
+- `not equal to`
+
+If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
 ### 高度なアラート条件
 
@@ -192,20 +205,20 @@ Datadog に報告する任意のメトリクスは、モニターに利用でき
 
 #### その他のオプション
 
-高度なアラートオプション (データなし、自動解決など) の詳細な手順については、[モニター構成][6]ページを参照してください。
+For instructions on the advanced alert options (no data, auto resolve), see the [Monitor configuration][6] page.
 
 ## 通知
 
-**Say what's happening** セクションと **Notify your team** セクションの詳細については、[通知][8]ページと[モニターの構成][8]ページをご確認ください。
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/metric
+[1]: https://app.datadoghq.com/monitors/create
 [2]: /ja/dashboards/querying/#advanced-graphing
 [3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [5]: /ja/monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /ja/monitors/configuration/#advanced-alert-conditions
 [7]: /ja/monitors/notify/
-[8]: /ja/monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /ja/monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

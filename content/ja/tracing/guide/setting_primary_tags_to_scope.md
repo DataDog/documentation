@@ -3,16 +3,16 @@ aliases:
 - /ja/tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
-  tags: トレースの加工
+  tag: ドキュメント
   text: ログとトレースの接続
 - link: /tracing/manual_instrumentation/
-  tags: トレースの加工
+  tag: ドキュメント
   text: 手動でアプリケーションのインスツルメンテーションを行いトレースを作成します。
 - link: /tracing/opentracing/
-  tags: トレースの加工
+  tag: ドキュメント
   text: アプリケーション全体に Opentracing を実装します。
 - link: /tracing/glossary/
-  tag: APM の UI を利用する
+  tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 title: プライマリタグをスコープに設定
 ---

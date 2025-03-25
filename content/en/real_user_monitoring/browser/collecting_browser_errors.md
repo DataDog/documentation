@@ -1,38 +1,35 @@
+
 ---
 title: Collecting Browser Errors
+aliases:
+ - /error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
-  - link: "/real_user_monitoring/error_tracking/"
-    tag: Documentation
-    text: "Error tracking"
-  - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-    tag: "Blog"
-    text: "Real User Monitoring"
-  - link: "/real_user_monitoring/explorer/"
+  - link: "/error_tracking/explorer/"
     tag: "Documentation"
-    text: "Explore your views within Datadog"
-  - link: "/real_user_monitoring/explorer/visualize/"
+    text: "Explore your Errors within Datadog"
+  - link: "/error_tracking/monitors/"
     tag: "Documentation"
-    text: "Apply visualizations on your events"
-  - link: "/real_user_monitoring/platform/dashboards/"
+    text: "Proactively alert on impactful issues"
+  - link: "/real_user_monitoring"
     tag: "Documentation"
-    text: "RUM Dashboards"
+    text: "Measure performance and user impact"
 ---
 ## Overview
 
-Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
+Front-end errors are collected with Browser SDK. The error message and stack trace are included when available.
 
 ## Error sources
 Front-end errors come from several different sources:
 
 - **agent**: From the SDK execution
 - **console**: From `console.error()` API calls
-- **custom**: Sent with the [RUM `addError` API](#collect-errors-manually)
+- **custom**: Sent with the [`addError` API](#collect-errors-manually)
 - **report**: From the `ReportingObserver` API
 - **source**: From unhandled exceptions or unhandled promise rejections in the source code
 
 ## Error attributes
 
-For information about the default attributes for all RUM event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying RUM Data and Context][2].
+For information about the default attributes for all event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying Data and Context][2].
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -40,6 +37,7 @@ For information about the default attributes for all RUM event types, see [Data 
 | `error.type`    | string | The error type (or error code in some cases).                     |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
+| `error.causes` | [Array][12] | An optional list of errors providing additional context. This attribute is used to display errors separately and enhance formatting. For more information, see the [MDN documentation][13]. |
 
 ### Source errors
 
@@ -51,7 +49,7 @@ Source errors include code-level information about the error. More information a
 
 ## Collect errors manually
 
-Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the RUM Browser SDK with the `addError()` API:
+Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -60,7 +58,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: The [Error Tracking][4] feature processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+**Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source`, `report` or `console`, and contain a stack trace. Errors sent with any other source (such as `network`) or sent from browser extensions are not processed by Error Tracking.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -259,3 +257,5 @@ Get visibility into cross-origin scripts by following these two steps:
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

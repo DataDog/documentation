@@ -9,6 +9,7 @@ categories:
 - data stores
 - log collection
 - network
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -29,12 +30,11 @@ integration_id: amazon-rds
 integration_title: Amazon RDS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 monitors:
-  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
-  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
-  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
+  Anomaly in database connections: assets/monitors/rds_database_connections_anomaly.json
+  CPU utilization is high: assets/monitors/rds_cpu_utilization.json
+  Storage utilization is high: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。
@@ -101,7 +101,7 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 
 インスタンスの作成中または作成後に RDS インスタンスの拡張モニタリングを有効にするには、**Instance Actions** の下にある **Modify** を選択します。監視の詳細度には `15` を選択することをお勧めします。
 
-次の手順では、KMS と Lambda Management Console を使用して、RDS Enhanced Monitoring Lambda 関数でのみ使用できる Datadog API キーの暗号化バージョンを作成します。[Log Forwarder][1] などの別の Lambda からの暗号化された API キーを既にお持ちの場合、他のオプションについては [Lambda 関数の README][2] を参照してください。
+次の手順では、KMS と Lambda Management Console を使用して、RDS Enhanced Monitoring Lambda 関数でのみ使用できる Datadog API キーの暗号化バージョンを作成します。[Log Forwarder][1] などの別の Lambda 関数ですでに暗号化された API キーをお持ちの場合は、他のオプションについて [Lambda 関数の README][2] を参照してください。
 
 #### KMS キーの作成
 
@@ -177,7 +177,7 @@ Lambda 関数のテストボタンをクリックすると、次のエラーが�
 
 3. [Datadog - Amazon RDS インテグレーション][4]をインストールします。
 
-[1]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/security_iam_service-with-iam.html
 [4]: https://app.datadoghq.com/integrations/amazon-rds

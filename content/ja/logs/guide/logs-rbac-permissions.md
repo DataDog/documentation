@@ -67,10 +67,7 @@ title: ログ RBAC アクセス許可
 {{% tab "UI" %}}
 
 1. ロールのグローバルなアクセス許可を削除。
-2. インデックスを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog サイトのインデックスページ][1]でロールにこのアクセス許可を付与できます（下のスクリーンショット）。
-
-{{< img src="account_management/rbac/logs_write_exclusion_filters.png" alt="ログ書き込み除外フィルター" style="width:75%;" >}}
-
+2. インデックスを編集し、"Grant editing Exclusion Filters of this index to" フィールドにロールを追加することで、[Datadog サイトのインデックスページ][1]でこの権限をロールに付与します。
 
 [1]: /ja/logs/log_configuration/indexes/
 {{% /tab %}}
@@ -100,9 +97,7 @@ title: ログ RBAC アクセス許可
 {{< tabs >}}
 {{% tab "UI" %}}
 
-特定のパイプラインのモーダルでロールを割り当てます。
-
-{{< img src="account_management/rbac/logs_write_processors.png" alt="ログ書き込みプロセッサ" style="width:75%;" >}}
+特定のパイプラインの `Edit` モーダルでロールを割り当てます。
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -291,7 +286,7 @@ Data Access ページには、セクションごとに最大 50 の制限クエ�
 [ログ読み取りデータ](#logs_read_data)アクセス許可は、これらのレガシーアクセス許可の上にあります。たとえば、ユーザーがクエリ `service:api` に制限されているとします。
 
 * このユーザーが `audit` および `errors` インデックスのスコープ[読み取りインデックスデータ](#logs_read_index_data)アクセス許可を持っている場合、このユーザーにはこれらのインデックス内の `service:api` ログのみが表示されます。
-* このユーザーが [livetail](#logs_live_tail) アクセス許可を持っている場合、このユーザーには livetail の `service:api` ログのみが表示されます。
+* このユーザーが [livetail](#logs_live_tail) 権限を持っている場合、このユーザーには livetail の `service:api` ログのみが表示されます。
 
 
 ### `logs_read_index_data`
@@ -308,7 +303,7 @@ Data Access ページには、セクションごとに最大 50 の制限クエ�
 {{< img src="account_management/rbac/logs_read_index_data.png" alt="特定のロールにインデックスの読み取りアクセス権を付与する" style="width:75%;" >}}
 
 
-[1]: https://app.datadoghq.com/logs/indexes
+[1]: https://app.datadoghq.com/logs/pipelines/indexes
 {{% /tab %}}
 {{% tab "API" %}}
 
@@ -340,7 +335,7 @@ curl -X POST \
 
 このアクセス許可はグローバルで、[ログ読み取りインデックスデータ](#logs_read_index_data)アクセス許可に関係なく、livetail へのアクセスを許可します。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

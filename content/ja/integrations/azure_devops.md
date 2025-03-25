@@ -6,6 +6,7 @@ categories:
 - 問題追跡
 - プロビジョニング
 - ソースコントロール
+custom_kind: integration
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
@@ -26,7 +27,6 @@ integration_id: azuredevops
 integration_title: Microsoft Azure DevOps
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_devops
 public_title: Datadog-Microsoft Azure DevOps インテグレーション
@@ -45,13 +45,13 @@ version: '1.0'
 - 完了したビルドと作業項目の期間を追跡します。
 - 作業項目と更新を追跡します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog で、[Azure DevOps インテグレーションタイル][2]のインストールボタンをクリックします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 サービスフックを使用して、Azure DevOps サービスからのイベントに応じて Datadog でイベントとメトリクスを作成します。
 
@@ -101,13 +101,13 @@ Datadog のモニターをゲートとして使用し、Azure Pipelines での�
 
 ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][9]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_devops" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure DevOps インテグレーションは、以下の[サービスフックイベントタイプ][11]をサポートします。
 
@@ -116,11 +116,11 @@ Azure DevOps インテグレーションは、以下の[サービスフックイ
 - コード
 
 
-### ヘルプ
+### サービスチェック
 
 Azure DevOps インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 

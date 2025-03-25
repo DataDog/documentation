@@ -2,6 +2,9 @@
 aliases:
 - /ja/tracing/profiling/
 - /ja/tracing/profiler/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /profiler/enabling
   tag: ドキュメント
@@ -15,6 +18,9 @@ further_reading:
 - link: /developers/guide/data-collection-resolution-retention/
   tag: ドキュメント
   text: データ収集、解決、保持
+- link: https://www.datadoghq.com/blog/source-code-preview/
+  tag: ブログ
+  text: Focus on code that matters with source code previews in Continuous Profiler
 - link: https://www.datadoghq.com/blog/introducing-datadog-profiling/
   tag: ブログ
   text: Datadog に常時接続型の本番環境プロファイリングが登場
@@ -61,6 +67,10 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 デフォルトでは、プロファイルは 7 日間、プロファイルデータから生成されたメトリクスは 1 か月間保持されます。
 
+{{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
+  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.
+{{< /learning-center-callout >}}
+
 ### プロファイルタイプ
 
 対応言語ごとに収集されるプロファイルデータの種類については、[プロファイルのデータタイプ][6]を参照してください。
@@ -71,7 +81,7 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 [タグを使用してプロファイルを検索][2]します。特定のホスト、サービス、バージョン、あるいはいずれかの組み合わせなど、すべてのディメンションのデータを表示させることができます。
 
-{{< img src="profiler/search_profiles.mp4" alt="タグによるプロファイルの検索" video=true >}}
+{{< img src="profiler/search_profiles2.mp4" alt="タグによるプロファイルの検索" video=true >}}
 
 ### デプロイメントでの機能パフォーマンスを追跡する
 

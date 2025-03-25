@@ -87,7 +87,7 @@ Install the Datadog .NET Tracer machine-wide so that all services on the machine
 
 To install the .NET Tracer machine-wide:
 
-1. Download the [.NET Tracer MSI installer][1]. Select the MSI installer for the architecture that matches the operating system (x64 or x86).
+1. Download the [.NET Tracer MSI installer][1]. Use the x64 MSI installer if you are running 64-bit Windows; this can instrument both 64-bit and 32-bit applications. Only choose the x86 installer if you are running 32-bit Windows. Starting with v3.0.0, only the x64 installer is provided, as we do not support 32-bit operating systems.
 
 2. Run the .NET Tracer MSI installer with administrator privileges.
 
@@ -139,15 +139,16 @@ For information about the different methods for setting environment variables, s
    </div>
 
 
-#### Services not in IIS
+#### Services outside IIS
 
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
+</div>
 
 1. Set the following required environment variables for automatic instrumentation to attach to your application:
 
    ```
    COR_ENABLE_PROFILING=1
-   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. For standalone applications and Windows services, manually restart the application.
 
@@ -158,10 +159,9 @@ For information about the different methods for setting environment variables, s
 Follow the instructions in the package readme, also available in [`dd-trace-dotnet` repository][1].
 Docker examples are also available in the [repository][2].
 
-
-
 [1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
 [2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -182,23 +182,24 @@ If needed, configure the tracing library to send application performance telemet
 
 ## Custom instrumentation
 
-Your setup for custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
+Custom instrumentation depends on your automatic instrumentation and includes additional steps depending on the method:
 
 {{< tabs >}}
 
 {{% tab "Windows" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> If you are using both automatic and custom instrumentation, you must keep the package versions (for example: MSI and NuGet) in sync.
+<strong>Note:</strong> Starting with v3.0.0, custom instrumentation requires you also use automatic instrumentation. You should aim to keep both automatic and custom instrumentation package versions (for example: MSI and NuGet) in sync, and ensure you don't mix major versions of packages.
 </div>
 
 To use custom instrumentation in your .NET application:
 
-1. Add the `Datadog.Trace` [NuGet package][1] to your application.
-2. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
-
+1. Instrument your application using automatic instrumentation.
+2. Add the `Datadog.Trace` [NuGet package][1] to your application.
+3. In your application code, access the global tracer through the `Datadog.Trace.Tracer.Instance` property to create new spans.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
+
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
@@ -217,9 +218,9 @@ For more information on adding spans and tags for custom instrumentation, see th
 
 To attach automatic instrumentation to your service, set the required environment variables before starting the application. See [Enable the tracer for your service](#enable-the-tracer-for-your-service) section to identify which environment variables to set based on your .NET Tracer installation method and follow the examples below to correctly set the environment variables based on the environment of your instrumented service.
 
-### Windows
-
-<div class="alert alert-info">Starting v2.14.0, you don't need to set <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-warning">
+  <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
+</div>
 
 #### Windows services
 
@@ -231,7 +232,6 @@ In the Registry Editor, create a multi-string value called `Environment` in the 
 
 ```text
 COR_ENABLE_PROFILING=1
-COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
 {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
@@ -241,8 +241,7 @@ COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
-Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
+Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value 'COR_ENABLE_PROFILING=1'
 ```
 {{% /tab %}}
 
@@ -271,12 +270,10 @@ After installing the MSI, no additional configuration is needed to automatically
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
 
 ```bat
-rem Set environment variables
+rem Set required environment variables
 SET COR_ENABLE_PROFILING=1
-rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
-rem Set additional Datadog environment variables
+rem (Optionally) Set additional Datadog environment variables, for example:
 SET DD_LOGS_INJECTION=true
 SET DD_RUNTIME_METRICS_ENABLED=true
 

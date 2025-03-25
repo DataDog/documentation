@@ -6,13 +6,13 @@ further_reading:
   text: "Remote Configuration"
 ---
 
-<div class="alert alert-info">This feature is in public beta.</div>
+<div class="alert alert-info">This feature is in Preview.</div>
 
 ## Overview
 
 Configuration at runtime lets you modify APM library configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.
 
-{{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Service Catalog to use configuration at runtime." video="true" style="width:100%;">}}
+{{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Software Catalog to use configuration at runtime." video="true" style="width:100%;">}}
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ Configuration at runtime lets you modify APM library configuration from the Data
 
 To make changes to a service's configuration at runtime:
 
-1. Go to the [Service Catalog][3] in APM.
+1. Go to the [Software Catalog][3] in APM.
 1. Hover over the service for which you want to update configuration.
 1. Click **Full Page** next to the service name.
 1. Click **Service Info**.
@@ -45,7 +45,7 @@ You can tell when the configuration changes have been successfully applied by re
 
 The following options are supported with configuration at runtime. The required tracer version is listed for each language:
 
-| Option                                                                                                                                 | Java      | Javascript              | Python   | .NET      | Ruby      | Go        | C++ |
+| Option                                                                                                                                 | Java      | Node.js                 | Python   | .NET      | Ruby      | Go        | C++ |
 |----------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------|----------|-----------|-----------|-----------|-|
 | <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.4.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` | `0.2.0+` |
 | <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`. | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.6.0+` | `2.33.0+` | `1.13.0+` |           | |
@@ -58,6 +58,6 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /agent/remote_config/
 [2]: /agent/
-[3]: /tracing/service_catalog/
+[3]: /tracing/software_catalog/
 [4]: /account_management/rbac/permissions/
 [5]: /tracing/trace_explorer/trace_view

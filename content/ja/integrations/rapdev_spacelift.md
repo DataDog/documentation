@@ -21,7 +21,7 @@ assets:
     source_type_id: 10382
     source_type_name: RapDev Spacelift
   monitors:
-    '[RapDev Spacelift] Spacelift Stack Run Failed': assets/monitors/spacelift_stack_run_failed.json
+    Spacelift Stack Run Failed: assets/monitors/spacelift_stack_run_failed.json
 author:
   homepage: https://www.rapdev.io
   name: RapDev
@@ -31,6 +31,7 @@ author:
 categories:
 - マーケットプレイス
 - 開発ツール
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -39,7 +40,6 @@ integration_id: rapdev-spacelift
 integration_title: Spacelift
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0

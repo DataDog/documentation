@@ -22,20 +22,23 @@ title: Browser RUM および Browser RUM & セッションリプレイのサン�
 この機能を使用するには、Datadog ブラウザ SDK v3.0.0+ が必要です。
 
 <blockquote class="alert alert-info">
-Datadog Browser SDK v4.20.0 では、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターを非推奨とし、<code>sessionReplaySampleRate</code> 初期化パラメーターを導入しました。
+Datadog ブラウザ SDK v4.20.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターが導入され、<code>premiumSampleRate</code> と <code>replaySampleRate</code> 初期化パラメーターは非推奨となりました。
 </blockquote>
 <blockquote class="alert alert-info">
-Datadog Browser SDK v5.0.0 では、<code>sessionReplaySampleRate</code> 初期化パラメーターのデフォルト値は `0` です。SDK の以前のバージョンは `100` を使用します。</blockquote>
+The Datadog Browser SDK v5.0.0 introduces two major behavior changes:
 
+- Only sessions that have recorded a replay are considered as Browser RUM & Session Replay
+- The <code>sessionReplaySampleRate</code> initialization parameter default value is `0` . Previous versions of the SDK use `100`.
+</blockquote>
 セッションが作成されると、RUM はそのセッションを次のいずれかとして追跡します。
 
-- [**Browser RUM**][2]: セッション、ビュー、アクション、リソース、ロングタスクおよびエラーが収集されます。`startSessionReplayRecording()` への呼び出しは無視されます。
-- [**Browser RUM & セッションリプレイ**][2]: リプレイ記録を含む、Browser RUM からのすべての情報が収集されます。リプレイ記録を収集するには、`startSessionReplayRecording()` を呼び出します。
+- [**Browser RUM**][2]: Sessions, views, actions, resources, long tasks, and errors are collected.
+- [**Browser RUM & Session Replay**][2]: Everything from Browser RUM is collected, including replay recordings.
 
 セッションの追跡方法を制御するために、2 つの初期化パラメーターが利用可能です。
 
 - `sessionSampleRate` は、追跡されるセッション全体の割合を制御します。デフォルトは `100%` で、すべてのセッションが追跡されます。
-- `sessionReplaySampleRate` は、全体のサンプルレートの**後に**適用され、Browser RUM & セッションリプレイとして追跡されるセッションの割合を制御します。デフォルトは `0` で、セッションはデフォルトで Browser RUM & セッションリプレイとして追跡されません。
+- `sessionReplaySampleRate` is applied **after** the overall sample rate, and controls the percentage of sessions tracked as Browser RUM & Session Replay. From Datadog Browser SDK v5.0.0, it defaults to `0`, so no session is tracked as Browser RUM & Session Replay by default.
 
 セッションの 100% を Browser RUM として追跡する場合
 
@@ -204,9 +207,25 @@ datadogRum.init({
 
 </details>
 
+From v5.0.0, to track 100% of the sessions that reach a custom state as Browser RUM & Session Replay:
+
+```
+datadogRum.init({
+    ....
+    sessionSampleRate: 100,
+    sessionReplaySampleRate: 100,
+    startSessionReplayRecordingManually: true,
+});
+
+// when the custom state is reached
+datadogRum.startSessionReplayRecording()
+```
+
+With the use of `startSessionReplayRecordingManually: true`, sessions that do not call `startSessionReplayRecording()` are considered as Browser RUM.
+
 タグ付けや属性の確認については、[ブラウザモニタリング][3]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

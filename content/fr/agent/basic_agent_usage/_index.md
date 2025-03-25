@@ -37,7 +37,7 @@ L'interface graphique Datadog Agent Manager vous permet d'accomplir ce qui sui
 - Ajouter ou modifier des checks d'Agent
 - Envoyer des flares
 
-L'interface graphique Datadog Agent Manager est activée par défaut sous Windows et macOS. Elle s'exécute sur le port `5052`. La commande `datadog-agent launch-gui` vous permet d'ouvrir l'interface graphique dans votre navigateur Web par défaut.
+L'interface graphique Datadog Agent Manager est activée par défaut sous Windows et macOS. Elle s'exécute sur le port `5002`. La commande `datadog-agent launch-gui` vous permet d'ouvrir l'interface graphique dans votre navigateur Web par défaut.
 
 Vous pouvez modifier le port par défaut de l'interface graphique depuis le fichier de configuration `datadog.yaml`. Pour désactiver l'interface graphique, définissez la valeur du port sur `-1`. Sous Linux, l'interface graphique est désactivée par défaut.
 

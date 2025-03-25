@@ -4,38 +4,41 @@ aliases:
 - /ja/tracing/setup_overview/compatibility_requirements/dotnet-framework
 code_lang: dotnet-framework
 code_lang_weight: 80
-description: .NET トレーサーの互換性要件です。
+description: Compatibility Requirements for the .NET Tracer
 further_reading:
 - link: tracing/trace_collection/dd_libraries/dotnet-framework
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
-  tag: GitHub
+  tag: ソースコード
   text: カスタムインスツルメンテーションの例
 title: .NET Framework 互換性要件
 type: multi-code-lang
 ---
 
 
-.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。オープンソースです。詳細は、[.NET トレーサーのリポジトリ][1]を参照してください。
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
+
+.NET トレーサーはオープンソースです。詳細については、[.NET トレーサーリポジトリ][1]を参照してください。
 
 ## サポートされている .NET フレームワークのランタイム
 
-.NET トレーサーは、以下の .NET Framework バージョンでの自動およびカスタムインスツルメンテーションに対応しています。また、[.NET Core][2] にも対応しています。.NET トレーサーは、部分信頼環境で実行されるコードをサポートしません。
+The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
 
-| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン             | Datadog サポート終了 |
-| ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |
-| 4.8                     |                       | [GA](#support-ga)                   | 最新                      |                     |
-| 4.7.2                   |                       | [GA](#support-ga)                   | 最新                      |                     |
-| 4.7                     |                       | [GA](#support-ga)                   | 最新                      |                     |
-| 4.6.2                   |                       | [GA](#support-ga)                   | 最新                      |                     |
-| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | 最新                      |                     |
+| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン            | Datadog サポート終了 |
+| ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
+| 4.8.1                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.8                     |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.7.2                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.7                     |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.6.2                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | 最新                     |                     |
 | 4.6                     | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 | 4.5.2                   | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 | 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 | 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 
-その他の情報は、[マイクロソフトの .NET コアライフサイクルポリシー][4] および [.NET Framework APM のランタイムサポートポリシー](#runtime-support-policy-for-net-framework-apm)に記載されています。
+Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
 <div class="alert alert-info">
   <div class="alert-info"><b>注:</b> 自動インスツルメンテーションに使用するトレーサーのバージョンを決定する場合、アプリケーションサーバーにインストールされている .NET Framework のバージョンを使用します。たとえば、.NET Framework 4.5.1 をターゲットとしてアプリケーションをコンパイルしたが、アプリケーションは .NET Framework 4.8 がインストールされているサーバー上で実行されている場合、トレーサーの最新バージョンを使用します。マシンにインストールされている .NET Framework のバージョンを確認するには、<a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">Microsoft が提供するガイダンス</a>に従います。
@@ -57,20 +60,24 @@ type: multi-code-lang
 
 | フレームワークまたはライブラリ            | NuGet パッケージ                                                                             | インテグレーション名     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| .NET Remoting                   | 組み込み                                                                                  | `Remoting`           |
 | ADO.NET                         | すべての AdoNet インテグレーション                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (Web Forms を含む)   | 組み込み                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | 組み込み                                                                                  | `HttpMessageHandler` |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | 組み込み                                                                                  | `Msmq`               |
@@ -86,19 +93,19 @@ type: multi-code-lang
 | WCF (サーバー)                    | 組み込み                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | 組み込み                                                                                  | `WebRequest`         |
 
-希望するライブラリが見つかりませんか？Datadog では継続的にサポートを追加しています。[Datadog チーム][6]までお気軽にお問い合わせください。
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][11] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
 ## サポートされている Datadog Agent バージョン
 
 | **Datadog Agent バージョン**   | **パッケージバージョン** |
 |-----------------------------|---------------------|
-| [7.x][7]                   | 最新              |
-| [6.x][7]                   | 最新              |
-| [5.x][8]                   | 最新              |
+| [7.x][7]                    | 最新              |
+| [6.x][7]                    | 最新              |
+| [5.x][8]                    | 最新              |
 
-## .NET Framework APM のランタイムサポートポリシー
+## .NET runtime support policy
 
-Datadog APM for .NET Framework は、ホスト OS、.NET Framework ランタイム、特定の .NET Framework ライブラリ、Datadog Agent/API に依存しています。これらのサードパーティソフトウェアシステムは、.NET Framework の特定のバージョンをサポートしています。外部ソフトウェアが .NET Framework のバージョンをサポートしなくなった場合、Datadog APM for .NET Framework もそのバージョンのサポートを制限します。
+The .NET Tracer depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET Tracer also limits its support for that version.
 
 ### サポートレベル
 
@@ -119,7 +126,7 @@ Datadog APM for .NET Framework は、[セマンティックバージョニング
   - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
   - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -133,3 +140,4 @@ Datadog APM for .NET Framework は、[セマンティックバージョニング
 [8]: /ja/agent/basic_agent_usage/?tab=agentv5
 [9]: https://www.datadoghq.com/support/
 [10]: https://semver.org/
+[11]: /ja/opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet

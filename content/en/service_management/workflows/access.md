@@ -14,7 +14,7 @@ further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/actions/actions_catalog"
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
@@ -148,7 +148,7 @@ You can restrict access on a specific workflow either from the workflow list pag
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
 [4]: /service_management/workflows/trigger/
-[5]: /service_management/workflows/actions_catalog/
+[5]: /actions/actions_catalog/
 [6]: /service_management/workflows/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow

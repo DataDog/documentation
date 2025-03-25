@@ -23,6 +23,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
+Supported MariaDB versions
+: 10.5, 10.6, or 10.11 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][11].
+
 Supported Agent versions
 : 7.36.1+
 
@@ -45,17 +49,6 @@ Enable **Standard Collection** in the **Resource Collection** section of your [A
 Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
-
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-
 {{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
@@ -63,6 +56,16 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
+
+[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
+
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
@@ -75,18 +78,6 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
@@ -100,6 +91,18 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Create the following schema:
@@ -107,7 +110,6 @@ Create the following schema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Create the `explain_statement` procedure to enable the Agent to collect explain plans:
@@ -141,6 +143,8 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][12] section below for more info on how to grant the Agent permissions for this collection.
+
 ### Runtime setup consumers
 With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
@@ -155,6 +159,9 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
+
+### Securely store your password
+{{% dbm-secret %}}
 
 ## Install and configure the Agent
 
@@ -177,14 +184,12 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier, stored as a secret
 
     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU and Memory.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
-
-**Note**: Wrap your password in single quotes in case a special character is present.
 
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
@@ -230,15 +235,10 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>"}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "ENC[datadog_user_database_password]"}]'
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][2] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][3] to learn how to pass the password as an environment variable.
-
-
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/configuration/secrets-management
-[3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -255,7 +255,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        mysql.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -263,7 +263,7 @@ Complete the following steps to install the [Datadog Cluster Agent][1] on your K
               host: <INSTANCE_ADDRESS>
               port: 3306
               username: datadog
-              password: '<UNIQUE_PASSWORD>'
+              password: 'ENC[datadog_user_database_password]'
 
     clusterChecksRunner:
       enabled: true
@@ -294,7 +294,7 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -320,7 +320,7 @@ metadata:
           "host": "<AWS_INSTANCE_ENDPOINT>",
           "port": 3306,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>"
+          "password": "ENC[datadog_user_database_password]"
         }
       ]
 spec:
@@ -333,18 +333,15 @@ spec:
 
 The Cluster Agent automatically registers this configuration and begins running the MySQL check.
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
-
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Validate
 
-[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+[Run the Agent's status subcommand][6] and look for `mysql` under the Checks section, or see the [Databases][7] page to get started!
 
 ## Example Agent Configurations
 {{% dbm-mysql-agent-config-examples %}}
@@ -371,3 +368,5 @@ If you have installed and configured the integrations and Agent as described and
 [8]: /integrations/amazon_rds
 [9]: /database_monitoring/troubleshooting/?tab=mysql
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
+[11]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[12]: /database_monitoring/setup_mysql/rds?tab=mysql57#collecting-schemas

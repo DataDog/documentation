@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /real_user_monitoring/session_replay/
+- link: /real_user_monitoring/session_replay/browser
   tag: 설명서
   text: 세션 재생
 - link: /real_user_monitoring/session_replay/mobile/
@@ -135,8 +135,8 @@ Detail 페이지에서 워터폴 보기를 확장해 보다 자세한 정보를 
 [4]: https://app.datadoghq.com/rum/sessions
 [5]: /ko/real_user_monitoring/explorer/search/#facets
 [6]: /ko/real_user_monitoring/explorer/saved_views/
-[7]: /ko/real_user_monitoring/browser/#setup
-[8]: /ko/real_user_monitoring/session_replay/developer_tools
+[7]: /ko/real_user_monitoring/browser/setup
+[8]: /ko/real_user_monitoring/session_replay/browser/developer_tools
 [9]: /ko/real_user_monitoring/connect_rum_and_traces
 [10]: /ko/real_user_monitoring/error_tracking/
 [11]: /ko/synthetics/guide/rum-to-synthetics/

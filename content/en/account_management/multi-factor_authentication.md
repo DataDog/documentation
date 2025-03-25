@@ -10,6 +10,7 @@ Multi-Factor Authentication (MFA), or Two-Factor Authentication (2FA) requires a
 
 -   **MFA for native Datadog accounts**: MFA is available as an extra layer of security during login for accounts that log into Datadog directly using an email and password. Native email/password accounts are more vulnerable to attack than accounts maintained through an identity provider.
 -   **Opt-in MFA**: MFA is available for end users as an optional feature. Enable MFA at any time through your personal settings.
+-   **Mandatory MFA**: Administrators can require all users in an organization that log in with an email and password to register a second authentication factor before accessing the organization. To turn on MFA enforcement, see [Login methods][1]. 
 -   **Authenticator apps**: Any authenticator app that supports time-based one-time password (TOTP) authentication can be used for MFA. Examples include Microsoft Authenticator, Google Authenticator, Authy, and Duo.
 
 ## Limitations
@@ -24,7 +25,7 @@ To configure MFA for your account, log in using your **email and password**. Use
 
 ## Configure MFA for your user account
 
-To find the [Password & Authentication page][1]:
+To find the [Password & Authentication page][2]:
 
 1. Ensure you are logged in with a username and password combination, not through SSO.
 1. Navigate to **Personal Settings** from your account menu.
@@ -47,7 +48,7 @@ To view if a user has MFA configured or not, you can filter on the Users table. 
 
 If you don't have access to your authenticator app, during the login process you can use a recovery code instead of a one-time password. Each of the recovery codes can only be used once.
 
-1. Navigate to the [login page][2].
+1. Navigate to the [login page][3].
 1. Enter your email address and password, then select **Log in**.
 1. Select **Don't have access to your authenticator?**
 1. Enter one of your unused recovery codes and click **Verify**.
@@ -56,7 +57,7 @@ If you don't have access to your authenticator app, during the login process you
 
 If you don't have access to your authenticator app or recovery codes, during the login process you can request a one-time recovery link via email.
 
-1. Navigate to the [login page][2].
+1. Navigate to the [login page][3].
 1. Enter your email address and password, then select **Log in**.
 1. Select **Don't have access to your authenticator?**
 1. Select **Don't have access to your recovery codes? Get a one time recovery link via email.**
@@ -65,5 +66,6 @@ If you don't have access to your authenticator app or recovery codes, during the
 
 If you have lost access to your registered authenticator app, Datadog recommends that you remove the lost device and add a new one. Maintaining a valid authenticator app helps prevent issues logging into your account in the future.
 
-[1]: https://app.datadoghq.com/personal-settings/password-and-authentication
-[2]: https://app.datadoghq.com
+[1]: /account_management/login_methods/#requiring-multi-factor-authentication
+[2]: https://app.datadoghq.com/personal-settings/password-and-authentication
+[3]: https://app.datadoghq.com

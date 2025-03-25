@@ -65,7 +65,7 @@ Los resultados de los tests de las localizaciones privadas se muestran de forma 
     Si utiliza Windows, ejecuta el instalador de localizaciones privadas de Synthetics con una GUI][12] o ejecuta el comando `msiexec` en la línea de comandos, dentro del directorio donde has descargado el instalador:
 
     ```shell
-    msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
+    msiexec /i datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
     ```
 
 10. Si tu localización privada envía información correctamente a Datadog, aparecerá un `OK` en **Private Location Status** (Estado de la localización privada) y en la lista de **Private Locations** (Localizaciones privadas) de la página **Settings** (Configuración):

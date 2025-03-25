@@ -64,7 +64,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 
 コンフィギュレーションセクションでその設定を確認します。
 
-## コンフィギュレーション
+## 構成
 
 ### AWS 資格情報
 
@@ -208,4 +208,4 @@ datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id> --w
 <!--
   This page is single-sourced:
   https://github.com/DataDog/documentation/blob/7007931530baf7da59310e7224a26dc9a71c53c5/local/bin/py/build/configurations/pull_config_preview.yaml#L301
-->
+-->

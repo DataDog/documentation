@@ -3,6 +3,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
+custom_kind: integration
 dependencies: []
 description: Azure Data Explorer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Microsoft Azure Data Explorer
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_data_explorer
 public_title: Datadog-Microsoft Azure Data Explorer インテグレーション
@@ -31,23 +31,23 @@ Azure Data Explorer からメトリクスを取得すると、以下のことが
 * Data Explorer インスタンスの取り込み、処理、レイテンシーのパフォーマンスを追跡する。
 * Data Explorer のコンピューティング、メモリ、ネットワークリソースの使用状況を監視する。
 
-## 計画と使用
-### インフラストラクチャーリスト
+## セットアップ
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_data_explorer" >}}
 
 
-### ヘルプ
+### イベント
 Azure Data Explorer インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 Azure Data Explorer インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/azure/

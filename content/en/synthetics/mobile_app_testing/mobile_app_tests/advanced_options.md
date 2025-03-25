@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests/"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create mobile app tests"
 - link: "/synthetics/mobile_app_testing/mobile_app_tests/steps/"
@@ -68,6 +68,12 @@ You can prevent a step screenshot from being captured at test execution by click
 {{< img src="mobile_app_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
 
 This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
+
+## Exit on success
+
+Configure this option to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as a failure.
+
+{{< img src="mobile_app_testing/exit_on_success.png" alt="Stop the test and mark it as passed" style="width:50%" >}}
 
 ## Subtests
 

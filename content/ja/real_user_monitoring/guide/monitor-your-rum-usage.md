@@ -44,7 +44,7 @@ RUM アプリケーションによって生成されたセッション数を追�
 3. **Graph your data** セクションで、ドロップダウンメニューから **Metrics** と `datadog.estimated_usage.rum.sessions` を選択します。
 4. `from` 節で、追跡したいアプリケーション ID を選択します。RUM のアプリケーション ID は、その **Application Overview** ページで確認できます。
 5. 表示設定を行い、グラフの名前を入力します。
-6. **保存**をクリックします。
+6. **Save** をクリックします。
 
 ### SKU の下で価格設定されたセッション数の追跡
 
@@ -55,7 +55,7 @@ RUM アプリケーションによって生成されたセッション数を追�
 3. **Graph your data** セクションで、ドロップダウンメニューから **Metrics** と `datadog.estimated_usage.rum.sessions` を選択します。
 4. `sum` 節で、ドロップダウンメニューから `sku` タグを選択します。
 5. 表示設定を行い、グラフの名前を入力します。
-6. **保存**をクリックします。
+6. **Save** をクリックします。
 
 ## 予期せぬスパイクにアラートを生成
 
@@ -82,7 +82,7 @@ RUM メトリクスは、[異常検知モニター][3]で使用できます。
    ```
 
 7. このモニターの権限と通知の設定をします。
-8. **作成**をクリックします。
+8. **Create** をクリックします。
 
 ## 固定しきい値で RUM セッションを監視する
 
@@ -99,7 +99,7 @@ RUM メトリクスは、[異常検知モニター][3]で使用できます。
    この通知メッセージの例には、アクションの指示が含まれています。
 
    ```
-   Shopist.io is sending too many user sessions. Go to the application's codebase and decrease the sample rate. Here is the (documentation)[https://docs.datadoghq.com/real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration] for how to do so.
+   Shopist.io is sending too many user sessions. Go to the application's codebase and decrease the sample rate. Here is the (documentation)[https://docs.datadoghq.com/real_user_monitoring/guide/sampling-browser-plans] for how to do so.
 
    {{#is_warning}}@slack-Shopist-alerts {{/is_warning}}
 
@@ -107,7 +107,7 @@ RUM メトリクスは、[異常検知モニター][3]で使用できます。
    ```
 
 6. このモニターの権限と通知の設定をします。
-7. **作成**をクリックします。
+7. **Create** をクリックします。
 
 アプリケーションの任意のスコープ (`application.id`、`geography`、`device` など) でキャプチャしたセッションの量が通知されます。
 
@@ -117,6 +117,6 @@ RUM メトリクスは、[異常検知モニター][3]で使用できます。
 
 [1]: /ja/account_management/billing/usage_metrics/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: /ja/monitors/create/types/anomaly/
+[3]: /ja/monitors/types/anomaly/
 [4]: https://app.datadoghq.com/monitors#create/anomaly
 [5]: https://app.datadoghq.com/rum/explorer?query=%40type%3Asession

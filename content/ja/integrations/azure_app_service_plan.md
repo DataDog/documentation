@@ -4,6 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
+custom_kind: integration
 dependencies: []
 description: Azure App Service Plan のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_app_service_plan/
@@ -14,7 +15,6 @@ integration_id: azure-appserviceplan
 integration_title: Microsoft Azure App Service Plan
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: azure_app_service_plan
 public_title: Datadog-Microsoft Azure App Service Plan インテグレーション
@@ -29,27 +29,27 @@ Azure App Service Plan は、1 つの Web アプリを実行するためのコ�
 
 Datadog Azure インテグレーションを使用して、Azure App Service Plan からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "azure_app_service_plan" >}}
 
 
-### ヘルプ
+### イベント
 
 Azure App Service Plan インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Azure App Service Plan インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

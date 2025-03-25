@@ -69,7 +69,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    See the [HTTP Tests documentation][101] to create an HTTP request and add assertions. Assertions are optional in multistep API tests.
 
-   [101]: /synthetics/multistep#define-the-request
+   [101]: /synthetics/api_tests/http_tests/
 
    {{% /tab %}}
    {{% tab "gRPC" %}}
@@ -81,13 +81,29 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
    {{% /tab %}}
    {{< /tabs >}}
 
-#### Add execution parameters
+### Add execution settings
 
-Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. 
+Under **Execution Settings**, the following options are available:
+
+#### Step success:
+
+Click **If step succeeds, continue to next step** to let your test proceed with subsequent steps after successful steps.  
+
+{{< img src="synthetics/multistep_tests/multistep_test_success.png" alt="Screenshot of execution settings showing step success options continue to next step" style="width:90%;" >}}
+
+Click **If step succeeds, exit test and mark it as passed** to exit the test after a successful step completion. This prevents running unnecessary steps and avoids marking the test as failed. 
+
+{{< img src="synthetics/multistep_tests/multistep_execution_settings.png" alt="Screenshot of execution settings showing step success exit and mark as passed" style="width:90%;" >}}
+
+#### Step failure
+
+Click **If step fails, continue to next step** to proceed with subsequent steps after step failure. This can be useful for clean-up tasks when you want subsequent steps to proceed. For example, a test may create a resource, perform several actions on that resource, and end with the deletion of that resource. 
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
 The test generates an alert if an endpoint does not answer as expected. Your test can trigger retries X times after Y ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
+
+{{< img src="synthetics/multistep_tests/step_failure.png" alt="Screenshot of execution settings showing step failure" style="width:90%;" >}}
 
 #### Extract variables from the response
 
@@ -152,7 +168,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
   - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (10 minutes).
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (30 minutes).
 
 For HTTP steps, see [common HTTP step failures][15]. For gRPC steps, see [common gRPC step failures][16].
 

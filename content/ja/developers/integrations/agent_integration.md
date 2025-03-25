@@ -46,7 +46,7 @@ Agent ベースのインテグレーションを構築するプロセスは、�
 
 必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
-- Python v3.9、[pipx][2]、Agent Integration Developer Tool (`ddev`)。インストール方法については、[Datadog Agent Integration Developer Tool のインストール][3]を参照してください。
+- Python v3.11, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
 - フルテストスイートを実行するための [Docker][4]。
 - git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 
@@ -439,8 +439,35 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 
 Agent ベースのインテグレーションを作成したら、インテグレーションタイルに表示される残りの[必須アセット][31]を入力し、プルリクエストを開くための情報については、[タイルの作成][20]ドキュメントを参照してください。
 
+## Update your integration
+To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository. 
 
-## その他の参考資料
+* If you are editing or adding new integration code, a version bump is required.
+
+* If you are editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+
+After making updates to assets such as dashboards and recommended monitors, or non-code files such as `README.md` and `manifest.json`, no further action is needed from the developer after the corresponding pull requests have been merged. These changes will show up for the customer without any action on their end. 
+
+### Bumping an integration version 
+In addition to any code changes, the following is required when bumping an integration version:
+1. Update `__about__.py` to reflect the new version number. This file can be found in your integration's directory under `/datadog_checks/<your_check_name>/__about__.py`.
+2. Add an entry to the CHANGELOG.md file that adheres to the following format:
+   ```
+   ## Version Number / Date
+
+   ***Added***: 
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+   ```
+3. Update all references to the version number mentioned in `README.md` and elsewhere. Installation instructions in `README.md` often include the version number, which needs to be updated.
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

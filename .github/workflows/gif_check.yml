@@ -5,18 +5,28 @@ on:
     paths:
     - 'static/images/**/*'
 
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
 jobs:
   look-for-gifs:
+    permissions:
+      contents: read
+    
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
           fetch-depth: 0
+          persist-credentials: false
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v42
+      uses: tj-actions/changed-files@9200e69727eb73eb060652b19946b8a2fdfb654b # v45.0.8
 
     - name: Look for gifs
       env:

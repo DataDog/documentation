@@ -7,6 +7,12 @@ further_reading:
 - link: logs/explorer/analytics
   tag: Documentation
   text: ログの分析方法
+- link: https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/
+  tag: ブログ
+  text: Filter and correlate logs dynamically using Subqueries
+- link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
+  tag: ブログ
+  text: ネットワークとセキュリティ分析のための DNS ログの監視
 title: ログをパターンにグループ化する
 ---
 
@@ -40,7 +46,7 @@ title: ログをパターンにグループ化する
 
 {{< img src="logs/explorer/group/pattern_inspector_panel_1.png" alt="Pattern Inspector タブを表示したパターンパネル" style="width:90%;" >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
