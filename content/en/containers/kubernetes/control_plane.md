@@ -330,12 +330,45 @@ Add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
-  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
-  ad.datadoghq.com/endpoints.init_configs: '[{}]'
-  ad.datadoghq.com/endpoints.instances: '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
-  ad.datadoghq.com/service.check_names: '["kube_controller_manager","kube_scheduler"]'
-  ad.datadoghq.com/service.init_configs: '[{},{}]'
-  ad.datadoghq.com/service.instances: '[{"prometheus_url":"https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics","extra_headers":{"accept":"*/*"},"tls_ignore_warning":"true","tls_verify":"false","bearer_token_auth":"true"},{"prometheus_url":"https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics","extra_headers":{"accept":"*/*"},"tls_ignore_warning":"true","tls_verify":"false","bearer_token_auth":"true"}]'
+  ad.datadoghq.com/endpoints.checks: |-
+    {
+      "kube_apiserver_metrics": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/metrics",
+            "bearer_token_auth": "true"
+          }
+        ]
+      }
+    }
+  ad.datadoghq.com/service.checks: |-
+    {
+      "kube_controller_manager": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ignore_warning":"true",
+            "tls_verify":"false"
+          }
+        ]
+      },
+      "kube_scheduler": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ignore_warning":"true",
+            "tls_verify":"false"
+          }
+        ]
+      }
+    }
 ```
 
 **Notes:**
