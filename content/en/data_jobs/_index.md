@@ -7,6 +7,9 @@ further_reading:
 
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog Data Jobs Monitoring is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 {{< img src="data_jobs/overview_062024.png" alt="Datadog Data Jobs Monitoring overview page" style="width:100%;" >}}
 
 Data Jobs Monitoring provides visibility into the performance, reliability, and cost efficiency of your data processing jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
@@ -45,7 +48,7 @@ Click on a job to see how it performed across multiple runs, as well as error me
 
 ### Analyze an individual run
 
-Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration. 
+Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration.
 
 On the **Infrastructure** tab, you can correlate the execution to infrastructure metrics.
 

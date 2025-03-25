@@ -88,6 +88,27 @@
       "description": "Update App returns \"OK\" response"
     }
   ],
+  "CreateApplicationSecurityWafExclusionFilter": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF exclusion filter returns \"OK\" response"
+    }
+  ],
+  "UpdateApplicationSecurityWafCustomRule": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Update a WAF Custom Rule returns \"OK\" response"
+    }
+  ],
+  "UpdateApplicationSecurityWafExclusionFilter": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Update a WAF exclusion filter returns \"OK\" response"
+    }
+  ],
   "SearchAuditLogs": [
     {
       "group": "audit",
@@ -945,6 +966,27 @@
       "group": "rum_metrics",
       "suffix": "",
       "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Create a RUM retention filter returns \"Created\" response"
+    }
+  ],
+  "OrderRetentionFilters": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Order RUM retention filters returns \"Ordered\" response"
+    }
+  ],
+  "UpdateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [

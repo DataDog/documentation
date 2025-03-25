@@ -16,7 +16,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog SCA in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
 
@@ -85,7 +85,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 ```
 
 If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
@@ -100,7 +100,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 
 ```
 
@@ -108,13 +108,13 @@ As you can see, the `ignore: ["**"]` from the first file was overlayed with the 
 
 #### Org level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
 
 #### Repository level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
 
