@@ -284,12 +284,40 @@ Once a profile is applied, you cannot bring it back to draft status.
                                                   
 ## Troubleshooting
 
-- What is a profile?
-- What is a device scan?
-- Why do I see no matching devices? 
-- What happens if I don't have remote configuration enabled on my collectors? need screenshot of error state that directs them to Fleet automation to upgrade to the most recent Datadog Agent or run scan manually.
-- Why would a device not be scanned?
+### What is a profile?
+* A profile is a configuration file that defines the metadata, metrics, and tags to collect from a device. See [metadata definition][17] for more information.
 
+### What is a device scan?
+* A device scan conducts a complete SNMP walk of the device, collecting all available data and forwarding it to Datadog for display in the UI. This process helps you identify the OIDs available on the device and add them to the profile for monitoring.
+
+### Why would I see no matching devices? 
+If no matching devices are found, it may be due to the following reasons:  
+  * **The profile is in Draft mode**:
+    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile you must sync it to the Agent(s). This can be done by opening the profile and clicking on the [**Save & Sync Agents**](#apply-a-profile-to-created-devices) button.  
+  * **The profile is applied but is not matching any device(s)**:  
+    * Profiles are matched to devices using their SysObjectID. Ensure that the SysObjectID specified in the profile matches one or more of your monitored devices.
+  * **Multiple profiles have the same SysObjectID(s)**:  
+    * Profiles are matched to devices using their SysObjectID. If multiple profiles share the same SysObjectID, it can cause matching conflicts at the Agent level. Ensure that each [SysObjectID](#step-1-profile-details) is assigned to only one profile.
+
+### Why would a device not be scanned?
+
+* The device scan may take up to 10 minutes to complete. You can monitor the scan's progress in the UI. If errors occur, try restarting the scan or selecting a different [reference device](#step-3-select-reference-devices).
+
+### What if I don't have Remote Configuration enabled on my collectors? 
+
+* If you are using an Agent version earlier than `7.47.0` and do not already have [Remote Configuration][18] manually enabled on your hosts, you will not be able to trigger device scans or sync profiles to the Agents through the UI. However, you can perform these steps manually. <br /><br>
+
+   To scan a device, follow the instructions in the UI: <br /><br>
+
+   {{< img src="/network_device_monitoring/profile_onboarding/remote_configuration.png" alt="Screenshot of the " style="width:80%;">}}
+
+   Or, to apply the profiles to your Agent(s) manually:  
+
+     1. Save the profile.  
+     2. Click on the download button to save a zip file of all your profiles.  
+     3. Upload the zip file to your Agent(s) by following the instructions in the [manually apply a profile to created devices][19] section.
+
+Datadog strongly recommends enabling Remote Configuration to ensure a seamless, UI-based experience and to minimize unnecessary interactions with the Agent.
 
 ## Further Reading
 
@@ -302,3 +330,6 @@ Once a profile is applied, you cannot bring it back to draft status.
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
 [16]: /network_monitoring/devices/supported_devices/
+[17]: /network_monitoring/devices/profiles/#metadata-definition-by-profile
+[18]: /agent/remote_config/?tab=configurationyamlfile&site=us#setup
+[19]: /network_monitoring/devices/guide/device_profiles/?tab=manual#apply-a-profile-to-created-devices
