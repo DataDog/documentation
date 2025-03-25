@@ -219,7 +219,7 @@ Forwarding logs from your Google Cloud environment enables near real-time monito
 
 Use the [Datadog Dataflow template][14] to batch and compresses your log events before forwarding them to Datadog through [Google Cloud Dataflow][15]. This is the most network-efficient way to forward your logs. To specify which logs are forwarded, configure the [Google Cloud Logging sink][40] with any inclusion or exclusion queries using Google Cloud's [Logging query language][56].
 
-Follow [the instructions listed here][16] to set up Log Collection. You can also use the [Stream logs from Google Cloud to Datadog][9] guide in the Google Cloud architecture center, for a more detailed explanation of the steps and architecture involved in log forwarding. For a deep dive into the benefits of the Pub/Sub to Datadog template, read [Stream your Google Cloud logs to Datadog with Dataflow][17] in the Datadog blog.
+You can use the [terraform-gcp-datadog-integration][64] module to manage this infrastructure through Terraform, or follow [the instructions listed here][16] to set up Log Collection. You can also use the [Stream logs from Google Cloud to Datadog][9] guide in the Google Cloud architecture center, for a more detailed explanation of the steps and architecture involved in log forwarding. For a deep dive into the benefits of the Pub/Sub to Datadog template, read [Stream your Google Cloud logs to Datadog with Dataflow][17] in the Datadog blog.
 
 <div class="alert alert-warning">The <b>Dataflow API</b> must be enabled to use Google Cloud Dataflow. See <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Enabling APIs</b></a> in the Google Cloud documentation for more information.</div>
 
@@ -350,3 +350,4 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
+[64]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration

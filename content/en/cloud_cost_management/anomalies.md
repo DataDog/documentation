@@ -15,7 +15,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 ## How anomalies are defined
 
-Anomalies are irregular or unexpected changes that significantly deviate from established patterns. Datadog uses a machine learning-based anomaly detection algorithm that automatically filters out weekly seasonality out low-cost anomalies below $5 to reduce noise.
+Anomalies are irregular or unexpected changes that significantly deviate from established patterns. Datadog uses a machine learning-based anomaly detection algorithm that automatically filters out weekly seasonality and anomalies below $5 to reduce noise.
 
 Weekly seasonality further reduces noise by identifying expected weekly patterns. For example, many businesses spin down a part of their infrastructure over the weekend and spin back up on Mondays, which causes a cost increase that shouldn't be flagged as an anomaly.
 
