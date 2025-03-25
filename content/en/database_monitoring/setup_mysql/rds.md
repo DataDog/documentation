@@ -146,7 +146,6 @@ GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 To collect index metrics, grant the `datadog` user an additional privilege:
 
 ```sql
-
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 

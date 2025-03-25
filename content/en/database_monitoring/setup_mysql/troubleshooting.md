@@ -161,7 +161,6 @@ Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user '
 Can be resolved by granting the `datadog` user the SELECT privilege to collect index metrics:
 
 ```sql
-
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 
