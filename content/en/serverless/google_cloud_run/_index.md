@@ -231,7 +231,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
-To deploy your Cloud Run service with YAML service specification, use the following example configuration file. In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
+To deploy your Cloud Run service with YAML service specification, use the following example configuration file.
 
 1. Create a YAML file that contains the following:
 
@@ -276,7 +276,7 @@ To deploy your Cloud Run service with YAML service specification, use the follow
                - name: DD_SERVERLESS_LOG_PATH
                  value: shared-volume/logs/*.log
                - name: DD_SITE
-                 value: datadoghq.com
+                 value: '<DATADOG_SITE>'
                - name: DD_ENV
                  value: serverless
                - name: DD_API_KEY
@@ -323,7 +323,6 @@ To deploy your Cloud Run service with YAML service specification, use the follow
    - `<API_KEY>`: Your [Datadog API key][1].
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
    - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run. For example, `us-docker.pkg.dev/cloudrun/container/hello`.
-   - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
 
 1. Run:
    ```bash
