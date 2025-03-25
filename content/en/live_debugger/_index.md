@@ -92,7 +92,6 @@ Logs capture and output variable values during execution. To add a log for debug
 
 Note: Some feature limitations may apply depending on the service's runtime language. Please see the specific Dynamic Instrumentation [runtime language page][17] for more details.
 
-
 ## Protecting sensitive data
 
 Live Debugger data might contain sensitive information, especially when using the "Capture Variables" option. To protect this data:
@@ -103,8 +102,8 @@ Live Debugger data might contain sensitive information, especially when using th
 ## Limitations
 
 - Live Debugger supports the [same runtime languages][17] as Dynamic Instrumentation.
-- Probes with "Capture Variables" enabled are rate-limited to one hit per second.
-- Regular log probes are rate-limited to 5000 executions per second per service instance.
+- Logs with "Capture Variables" enabled are rate-limited to one hit per second.
+- Regular logs (without variable capture) are rate-limited to 5000 executions per second per service instance.
 
 ## Further Reading
 
