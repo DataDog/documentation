@@ -140,7 +140,7 @@ tags:audit "Queryable tag configuration"
 
 To ensure you're not removing valuable visibility while reducing costs, you need to differentiate between the actively queried metrics that your team relies on from the metrics that aren't queried anywhere within the Datadog platform or through the API. Datadog's intelligent query insights continuously computes and analyzes all users' interactions (in Datadog or through the API) on any metric to help identify less valuable, unused metrics.
 
-Additionally, to reduce costs without accidentally breaking any assets, you need visbility into all metrics that are unused on your platform. Filtering for all unused metrics with the [Related Assets facet][16] gives you further insight into which metircs are used on your assets such as dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations. 
+Additionally, to reduce costs without accidentally breaking any assets, you need visbility into all metrics that are unused on your platform. Filtering for all unused metrics with the [Related Assets facet][16] gives you further insight into which metrics are used on your assets, such as dashboards, notebooks, monitors, and SLOs. This can help you make informed decisions about your metric configurations. 
 
 Identify your organization's entire list of unqueried and unused metrics:
 

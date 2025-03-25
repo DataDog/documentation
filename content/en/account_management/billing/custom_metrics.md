@@ -1,5 +1,5 @@
 ---
-title: custom metrics Billing
+title: Custom Metrics Billing
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
 further_reading:
@@ -8,7 +8,7 @@ further_reading:
   text: "Learn more about custom metrics"
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
-  text: "Best Practice for custom metric Governance"
+  text: "Best practices for custom metrics governance"
 algolia:
   tags: ['custom metrics billing']
 ---
@@ -83,7 +83,7 @@ To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 ### Configure tags with Metrics without Limits™
 
-custom metrics volumes can be impacted by configuring tags using [Metrics without Limits™][3]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags using [Metrics without Limits™][3]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested custom metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed custom metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -162,7 +162,7 @@ To obtain the temperature in Florida, you can recombine the custom metrics of:
 
 ### Configure tags with Metrics without Limits™
 
-custom metrics volumes can be impacted by configuring tags using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested custom metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed custom metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -184,7 +184,7 @@ For metrics configured with Metrics without Limits™ (tags are configured), you
 | Account Allotment                    | - Pro: 100 ingested custom metrics per host<br>- Enterprise: 200 ingested custom metrics per host | - Pro: 100 indexed custom metrics per host<br>- Enterprise: 200 indexed custom metrics per host                               |
 | Usage greater than account allotment | For each 100 ingested custom metrics over the account allotment, you pay $0.10.                   | For each 100 indexed custom metrics over the account allotment, you pay an amount that is specified in your current contract. |
 
-By default, Datadog gives you the following aggregations accessible upon querying:
+By default, the following aggregations can be used for querying:
 - group by `SUM` & rollup by `AVG`
 - group by `MAX` & rollup by `AVG`
 - group by `MIN` & rollup by `AVG`
@@ -250,7 +250,7 @@ This table summarizes the effect of adding percentile aggregations to any distri
 
 ### Configure tags with Metrics without Limits™
 
-custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested custom metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed custom metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
