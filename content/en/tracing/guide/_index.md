@@ -82,4 +82,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Setting up APM with Kubernetes Service{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/aws_payload_tagging/" >}}Capture requests and responses from AWS services automatically{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/service_overrides/" >}}Service Overrides{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/code_origins/" >}}Capture Code Origins for spans{{< /nextlink >}}
 {{< /whatsnext >}}
