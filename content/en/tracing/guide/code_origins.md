@@ -138,13 +138,13 @@ Code Origins captures two types of spans:
 
 ## Troubleshooting
 
-If you don't see Code Origin information:
+If Code Origin information is missing:
 
-1. Verify that Code Origins is enabled in your tracing library configuration.
-2. Confirm all [Compatibility Requirements](#compatibility-requirements) are met.
-3. Note that Code Origin information is only available on entry spans for most services.
-4. Code Origins does not support third-party code.
-5. Enable [Source Code Integration][7] to see the application code preview in the Code Origin section of the APM Trace details.
+1. Verify Code Origins is enabled in your tracing library configuration
+2. Check that your service meets all [Compatibility Requirements](#compatibility-requirements)
+3. Most services only show Code Origin information on entry spans
+4. Code Origins does not capture third-party code
+5. Enable [Source Code Integration][7] to see code previews in the APM Trace details
 
 ## Further Reading
 
