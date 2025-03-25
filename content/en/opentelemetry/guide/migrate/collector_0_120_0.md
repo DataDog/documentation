@@ -50,7 +50,7 @@ If you are using a cloned version of this dashboard or have monitors that query 
 
 ### APM Datadog Trace Agent dashboard
 
-Queries on the [APM Datadog Trace Agent dashboard][4] were updated with filters to exclude sources `datadogexporter` and `datadogconnector` to prevent metric collisions with OTel sources that emit the same metric names. This dashboard is designed to show only Trace Agent data, and the update ensures that data from these sources doesn't mix with OTel data.
+Queries on the [APM Datadog Trace Agent dashboard][4] were updated with filters to exclude sources `datadogexporter` and `datadogconnector` to prevent metric collisions with OpenTelemetry sources that emit the same metric names. This dashboard is designed to show only Trace Agent data, and the update ensures that data from these sources doesn't mix with OpenTelemetry data.
 
 Only the out-of-the-box dashboard template was updated. If you are using a cloned version of this dashboard, you may need to manually update queries on custom dashboards to exclude sources `datadogexporter` and `datadogconnector` using:
 
