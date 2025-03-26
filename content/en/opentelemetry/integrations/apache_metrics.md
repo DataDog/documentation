@@ -8,6 +8,8 @@ further_reading:
 
 ## Overview
 
+{{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="OpenTelemetry Apache metrics in an Apache dashboard" style="width:100%;" >}}
+
 The [Apache receiver][1] allows for collection of Apache Web Server metrics. Please configure the receiver according to the specifications of the latest version of the `apachereceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [Apache receiver][1].
