@@ -134,11 +134,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
          instrumentation:
            enabled: true
            targets:
-             - name: "all-services"
-               namespaceSelector:
-                 matchNames:
-                   - "foo"
-                   - "bar"
+             - name: "default-target"
                ddTracerVersions:
                  java: "1"
                  dotnet: "3"
@@ -183,11 +179,7 @@ To enable Single Step Instrumentation with Helm:
       instrumentation:
          enabled: true
          targets:
-           - name: "all-services"
-             namespaceSelector:
-               matchNames:
-                 - "foo"
-                 - "bar"
+           - name: "default-target"
              ddTracerVersions:
                java: "1"
                dotnet: "3"
@@ -331,13 +323,13 @@ This configuration:
    apm:  
      instrumentation:  
        enabled: true  
-     disabledNamespaces:  
-       - "jenkins"  
-     targets:  
-       - name: "all-remaining-services"  
-         ddTraceVersions:  
-           java: "default"  
-           python: "3.1.0"
+       disabledNamespaces:  
+         - "jenkins"  
+       targets:  
+         - name: "all-remaining-services"  
+           ddTraceVersions:  
+             java: "default"  
+             python: "3.1.0"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -359,31 +351,31 @@ This configuration creates two targets blocks:
   apm:
     instrumentation:
       enabled: true
-    targets:
-      - name: "login-service_namespace"
-        namespaceSelector:
-          matchNames:
-            - "login-service"
-        ddTraceVersions:
-          java: "default"
-        ddTraceConfigs:
-          - name: "DD_SERVICE"
-            value: "login-service"
-          - name: "DD_ENV"
-            value: "prod"
-          - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
-            value: "auto"
-      - name: "billing-service_apps"
-        namespaceSelector:
-          matchLabels:
-            app: "billing-service"
-        ddTraceVersions:
-          python: "3.1.0"
-        ddTraceConfigs:
-          - name: "DD_SERVICE"
-            value: "billing-service"
-          - name: "DD_ENV"
-            value: "prod
+      targets:
+        - name: "login-service_namespace"
+          namespaceSelector:
+            matchNames:
+              - "login-service"
+          ddTraceVersions:
+            java: "default"
+          ddTraceConfigs:
+            - name: "DD_SERVICE"
+              value: "login-service"
+            - name: "DD_ENV"
+              value: "prod"
+            - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
+              value: "auto"
+        - name: "billing-service_apps"
+          namespaceSelector:
+            matchLabels:
+              app: "billing-service"
+          ddTraceVersions:
+            python: "3.1.0"
+          ddTraceConfigs:
+            - name: "DD_SERVICE"
+              value: "billing-service"
+            - name: "DD_ENV"
+              value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -401,31 +393,31 @@ This configuration:
    apm:
      instrumentation:
        enabled: true
-     targets:
-       - name: "db-user"
-         podSelector:
-           matchLabels:
-             app: "db-user"
-         ddTraceVersions:
-           java: "default"
-         ddTraceConfigs:   ## trace configs set for services in matching pods
-           - name: "DD_SERVICE"
-             value: "db-user"
-           - name: "DD_ENV"
-             value: "prod"
-           - name: "DD_DSM_ENABLED"  
-             value: "true"
-       - name: "user-request-router"
-         podSelector:
-           matchLabels:
-             webserver: "user"
-         ddTraceVersions:
-           php: "default"
-         ddTraceConfigs:
-           - name: "DD_SERVICE"
-             value: "user-request-router"
-           - name: "DD_ENV"
-             value: "prod
+       targets:
+         - name: "db-user"
+           podSelector:
+             matchLabels:
+               app: "db-user"
+           ddTraceVersions:
+             java: "default"
+           ddTraceConfigs:   ## trace configs set for services in matching pods
+             - name: "DD_SERVICE"
+               value: "db-user"
+             - name: "DD_ENV"
+               value: "prod"
+             - name: "DD_DSM_ENABLED"  
+               value: "true"
+         - name: "user-request-router"
+           podSelector:
+             matchLabels:
+               webserver: "user"
+           ddTraceVersions:
+             php: "default"
+           ddTraceConfigs:
+             - name: "DD_SERVICE"
+               value: "user-request-router"
+             - name: "DD_ENV"
+               value: "prod
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -441,23 +433,23 @@ This configuration:
    apm:
      instrumentation:
        enabled: true
-     targets:
-       - name: "login-service-namespace"
-         namespaceSelector:
-           matchNames:
-             - "login-service"
-         podSelector:
-           matchLabels:
-             app: "password-resolver"
-         ddTraceVersions:
-           java: "default"
-         ddTraceConfigs:   
-           - name: "DD_SERVICE"
-             value: "password-resolver"
-           - name: "DD_ENV"
-             value: "prod"
-           - name: "DD_PROFILING_ENABLED"  
-             value: "auto"
+       targets:
+         - name: "login-service-namespace"
+           namespaceSelector:
+             matchNames:
+               - "login-service"
+           podSelector:
+             matchLabels:
+               app: "password-resolver"
+           ddTraceVersions:
+             java: "default"
+           ddTraceConfigs:   
+             - name: "DD_SERVICE"
+               value: "password-resolver"
+             - name: "DD_ENV"
+               value: "prod"
+             - name: "DD_PROFILING_ENABLED"  
+               value: "auto"
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -465,24 +457,21 @@ This configuration:
 {{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h4" >}}
 
 This configuration enables APM for pods that meet the following criteria:
-- have the label `inject/ssi: true`
-- do not have either of the labels `app=app1` or `app=app2`
+
+- for all apps except for the ones that have either of the labels `app=app1` or `app=app2`
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
      instrumentation:
        enabled: true
-     targets:
-       - name: "default-target"
-         podSelector:
-           matchLabels:
-             inject/ssi: "true"
-         matchExpressions:
-           - key: app
-             operator: NotIn
-             values:
-             - app1
-             - app2
+       targets:
+         - name: "default-target"
+           matchExpressions:
+             - key: app
+               operator: NotIn
+               values:
+               - app1
+               - app2
 {{< /highlight >}}
 
 {{< /collapse-content >}}
@@ -659,7 +648,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
-| Node.js  | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Node.js    | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
