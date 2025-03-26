@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloudcraft in Datadog is not supported on this site.</div>
+<div class="alert alert-warning">Cloudcraft in Datadog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -34,7 +34,7 @@ Cloudcraft's core functionality is its ability to generate detailed architecture
 - For the best experience, Datadog strongly recommends using the AWS-managed [`SecurityAudit`][5] policy, or the more permissive [`ReadOnlyAccess`][6] policy.
 - To view security misconfigurations on the [Security findings overlay](#security-findings), [CSM][3] must be enabled.
 
-**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the user interface (UI).
+**Note**: Cloudcraft adapts to restrictive permissions by excluding inaccessible resources. For example, if you opt to not grant permission to list S3 buckets, the diagram will simply exclude those buckets. If permissions block certain resources, an alert is displayed in the UI.
 
 ## Getting started
 
@@ -137,9 +137,9 @@ By default, the security overlay shows Critical, High, and Medium misconfigurati
 
 ### Agent Overlay
 
-The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a red dot indicates it is not installed on that resource.
+The Agent Overlay indicates whether the Agent is installed on your EC2 hosts using a collapsible legend. A green dot signifies the Agent is installed, while a grey dot indicates it is not installed on that resource.
 
-{{< img src="datadog_cloudcraft/agent_overlay.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
+{{< img src="datadog_cloudcraft/agent_overlay_2.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
 
 ## FAQ 
 
