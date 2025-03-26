@@ -94,22 +94,24 @@ After being verified, you gain access to:
 
 Unverified users can still access Datadog, but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
 
-**How to verify your email**
+#### Verify your email
+
+To verify your email:
 1. Navigate to your **Profile Settings**.
 2. Click on **Verify Account**.
 3. Enter the **verification code** sent to your registered email.
 4. Click **Submit** to complete the verification process.
 
-#### Log out all active web sessions
-You can log out all active web sessions across devices from your Profile Settings. This logs you out of all current sessions, including the one you're using.
+#### Log out of all active web sessions
 
-**Who can use this feature?**
-This feature is only available if you've verified your email. To verify your email, follow the steps in How to verify your email.
+To log out of all active web sessions:
+Logging out of all active web sessions logs you out of all current sessions across devices, including the one you're using.
 
-**How to log out all active sessions:**
-- Go to Personnal Settings.
-- Click Log Out of All Web Sessions.
-- Confirm the action.
+
+To log out of all active sessions:
+1. Go to Personal Settings.
+2. Click Log Out of All Web Sessions.
+3. Confirm the action.
 
 After confirming, you are logged out from all devices and need to log back in.
 
