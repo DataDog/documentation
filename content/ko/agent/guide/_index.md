@@ -10,7 +10,7 @@ title: 에이전트 가이드
 ---
 
 {{< whatsnext desc="구성 가이드:" >}}
-    {{< nextlink href="agent/guide/environment-variables" >}}Agent 환경 변수{< /nextlink >}}
+    {{< nextlink href="agent/guide/environment-variables" >}}Agent 환경 변수{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}인터넷 연결이 제한된 서버에 Agent 설치{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}독립형 Datadog 역할을 사용하여 Ansible 설정{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent 제거 방법{{< /nextlink >}}
