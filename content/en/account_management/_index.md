@@ -89,7 +89,7 @@ Verify your email address for enhanced account security and access to additional
 - **SAML users** must manually verify their email through Datadog.
 
 After being verified, you gain access to:
-- The ability to **log out all active web sessions** across devices, ensuring security in case of credential compromise.
+- The ability to **log out of all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of your current org hierarchy.
 
 Unverified users can still access Datadog but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
