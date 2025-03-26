@@ -9,7 +9,7 @@ title: Datadog CoTerm
 
 Datadog CoTerm es una utilidad de CLI que puede grabar sesiones de terminal y añadir una capa de validación a tus comandos de terminal.
 
-{{< img src="coterm/hero.png" alt="En Datadog, una página titulada Sesión de terminal. Un video insertado en el que se muestra una sesión de terminal. Una barra de depurador controla la reproducción del video". style="width:100%;" >}}
+{{< img src="coterm/hero.png" alt="En Datadog, una página titulada Sesión de terminal. Un video insertado en el que se muestra una sesión de terminal. Una barra de depurador controla la reproducción del video" style="width:100%;" >}}
 
 Con CoTerm, puedes:
 
@@ -25,8 +25,8 @@ Para tu seguridad, CoTerm utiliza [Sensitive Data Scanner][2] para detectar y en
 ## Para empezar
 
 {{< whatsnext desc="This section contains the following pages:">}}
-  {{< nextlink href="/coterm/install">]]<u>Instalación</u>: Instala CoTerm y autorízalo a acceder a tu cuenta de Datadog.{{< /nextlink >}}
-  {{< nextlink href="/coterm/usage">]]<u>Uso</u>: Utiliza la CLI de CoTerm, configura la grabación automática y protégete de comandos peligrosos. {{< /nextlink >}}
+  {{< nextlink href="/coterm/install">}}<u>Instalación</u>: Instala CoTerm y autorízalo a acceder a tu cuenta de Datadog.{{< /nextlink >}}
+  {{< nextlink href="/coterm/usage">}}<u>Uso</u>: Utiliza la CLI de CoTerm, configura la grabación automática y protégete de comandos peligrosos. {{< /nextlink >}}
   {{< nextlink href="/coterm/rules">}}<u>Reglas de configuración</u>: Establece reglas altamente configurables para la gestión de comandos específicos por parte de CoTerm.{{< /nextlink >}}
 {{< /whatsnext >}}
 
