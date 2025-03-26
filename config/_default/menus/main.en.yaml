@@ -2725,10 +2725,10 @@ menu:
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_schema
       weight: 10001
-    - name: Governance
-      url: infrastructure/resource_catalog/governance/
+    - name: Policies
+      url: infrastructure/resource_catalog/policies/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_governance
+      identifier: infrastructure_resource_catalog_policies
       weight: 10002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
