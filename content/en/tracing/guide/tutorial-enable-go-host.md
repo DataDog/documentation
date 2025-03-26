@@ -28,7 +28,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Go ap
 
 For other scenarios, including applications in containers or on cloud infrastructure, Agent in a container, and applications written in different languages, see the other [Enabling Tracing tutorials][1].
 
-See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go. If you are using [version 2.x of the Go Tracer][18], use the instructions marked with `2.x`.
+See [Tracing Go Applications][2] for general comprehensive tracing setup documentation for Go.
 
 ### Prerequisites
 
@@ -92,6 +92,8 @@ make exitNotes
 {{< /code-block >}}
 
 ## Install Datadog tracing
+
+{{% tracing-go-v2 %}}
 
 Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 
