@@ -142,7 +142,7 @@ links:
 {{% /tab %}}
 {{< /tabs >}}
 
-Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
+Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control using either `extensions[datadoghq.com/cd-visibility]` or `extensions[datadoghq.com/dora-metrics]`. If both extensions are detected, `extensions[datadoghq.com/cd-visibility]` is used.
 
 **Example (schema version v2.2):**
 
@@ -156,7 +156,7 @@ extensions:
 
 Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
 
-If both entries are defined for a service, only `extensions[datadoghq.com/cd-visibility]` is considered when filtering the commits.
+If the source code patterns for a service are defined in both a link and an extension, only the extension is considered when filtering the commits.
 
 ## Further Reading
 
