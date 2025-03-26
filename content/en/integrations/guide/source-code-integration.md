@@ -391,7 +391,7 @@ The source code integration supports the following Git providers:
 | GitHub SaaS (github.com) | Yes | Yes |
 | GitHub Enterprise Server | Yes | Yes |
 | GitLab SaaS (gitlab.com) | Yes | Yes |
-| GitLab self-managed | Yes | No |
+| GitLab self-managed | Yes | Yes (Closed preview) |
 | Bitbucket | Yes | No |
 | Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
@@ -415,10 +415,10 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 {{% tab "GitLab" %}}
 
 <div class="alert alert-warning">
-Repositories from self-managed GitLab instances are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
+Repositories from GitLab instances are supported in closed preview. <a href="https://www.datadoghq.com/product-preview/gitlab-source-code-integration/">Join the preview</a>.
 </div>
 
-To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
+To link telemetry with your source code, either install the GitLab integration (join the closed preview above) or upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command. `datadog-ci v2.10.0` or later is required.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
