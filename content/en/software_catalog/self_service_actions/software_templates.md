@@ -3,6 +3,7 @@ title: Software Templates
 aliases:
   - /service_catalog/software_templates
   - /software_catalog/software_templates
+  - /software_catalog/self-service/software_templates
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
@@ -15,7 +16,7 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-Use Software Templates within Self-Service to help developers quickly provision infrastructure and create microservices that align with your best practices. 
+Create Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 {{< callout url="https://forms.gle/6Er52qd3BCERhotg7" d_target="#signupModal" btn_hidden="false">}}
   Software Templates are in Preview. Complete the form to request access.
@@ -84,7 +85,7 @@ To build a Software Template from scratch:
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the app to a Dashboard or the Self-Service portal for easy discovery.
+- Add the app to a Dashboard or to Self-Service Actions for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
 

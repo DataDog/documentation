@@ -71,7 +71,7 @@ With the following definitions:
 
 `trace.<SPAN_NAME>`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags.<br>
+**Description:** Represent the latency distribution for all services, resources, and versions across different environments and second primary tags. **Recommended for all latency measurement use cases.**<br>
 **Metric type:** [DISTRIBUTION][6].<br>
 **Tags:** `env`, `service`,`version`, `resource`, `resource_name`, `http.status_code`, `synthetics`, and [the second primary tag][4].
 
@@ -97,9 +97,15 @@ With the following definitions:
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `version`, `resource` / `resource_name`, `synthetics`, and [the second primary tag][4].
 
-### Duration
+## Legacy metrics
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
+The following metrics are maintained for backward compatibility. For all latency measurement use cases, Datadog strongly recommends using [Latency Distribution metrics](#latency-distribution) instead.
+
+### Duration (Legacy)
+
+<div class="alert alert-warning">
+<strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
+</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
@@ -109,9 +115,11 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
-### Duration by
+### Duration by (Legacy)
 
-<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a>.</div>
+<div class="alert alert-warning">
+<strong>Important:</strong> Duration metrics are maintained for backward compatibility only. For all latency measurement use cases, Datadog strongly recommends using <a href="#latency-distribution">Latency Distribution metrics</a> instead, as they provide better accuracy for percentile calculations and overall performance analysis.
+</div>
 
 `trace.<SPAN_NAME>.duration.by_http_status`
 : **Prerequisite:** This metric exists for HTTP/WEB APM services if http metadata exists.<br>
