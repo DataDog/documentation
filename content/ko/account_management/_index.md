@@ -12,7 +12,7 @@ further_reading:
   text: 대규모 Datadog 조직 관리 모범 사례
 title: 계정 관리
 ---
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">정부 사이트용 Datadog는 SAML 로그인만을 지원합니다.</div>
 {{< /site-region >}}
 
