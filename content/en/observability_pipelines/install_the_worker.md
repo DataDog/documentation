@@ -17,7 +17,7 @@ The Observability Pipelines Worker is software that runs in your environment to 
 1. [Install the Worker](#install-the-worker).
 1. Deploy the pipeline.
 
-**Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
+**Notes**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
 ## Install the Worker
 
@@ -160,11 +160,41 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
-[2]: /observability_pipelines/sources/
-[3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/processors/
+## Uninstall the Worker
+
+If you want to uninstall the work, run the following commands:
+
+{{< tabs >}}
+{{% tab "APT" %}}
+
+```
+apt-get remove --purge observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{% tab "RPM" %}}
+
+1.
+    ```
+    sudo apt purge observability-pipelines-worker
+    ```
+1.
+    ```
+    yum remove observability-pipelines-worker
+    ```
+1.
+    ```
+    rpm -q --configfiles observability-pipelines-worker
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[2]: /observability_pipelines/sources/
+[3]: /observability_pipelines/destinations/
+[4]: /observability_pipelines/processors/
