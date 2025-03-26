@@ -1,5 +1,5 @@
 ---
-title: Actions
+title: Self-Service Actions
 aliases:
   - /software_catalog/actions
   - /software_catalog/self-service
