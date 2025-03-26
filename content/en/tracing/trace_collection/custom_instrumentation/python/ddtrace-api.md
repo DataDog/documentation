@@ -29,7 +29,7 @@ an API that changes less frequently and more predictably, while allowing autoins
 The separation of interface and implementation means that setting up custom instrumentation requires installing two libraries: `ddtrace` as explained in the [Python Setup Instructions][6] and `ddtrace-api`:
 
 ```python
-pip install ddtrace ddtrace-api
+pip install 'ddtrace>=3.1' ddtrace-api
 ```
 
 Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
