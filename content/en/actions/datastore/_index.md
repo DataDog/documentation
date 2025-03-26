@@ -19,21 +19,21 @@ Datastore is in Preview. Use this form to request access today.
 
 ## Overview
 
-The Apps Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
+The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
 
 You can interact with a datastore using an app or a workflow, or you can use the UI in the Datadog App.
 
 
 ## Prerequisites
 
-To interact with the Apps Datastore, your Datadog account must have the following [permissions][6], which are included in the Datadog Standard Role:
+To interact with the Actions Datastore, your Datadog account must have the following [permissions][6], which are included in the Datadog Standard Role:
 
-* `apps_datastore_read` - Allows read access to the data within the Apps Datastore.
-* `apps_datastore_write` - Allows modification of data within the Apps Datastore, including adding, editing, and deleting records.
+* `apps_datastore_read` - Allows read access to the data within the Actions Datastore.
+* `apps_datastore_write` - Allows modification of data within the Actions Datastore, including adding, editing, and deleting records.
 
-To use the [Apps Datastore UI][1], you also need the following permission, which is also included in the Datadog Standard Role:
+To use the [Actions Datastore UI][1], you also need the following permission, which is also included in the Datadog Standard Role:
 
-* `apps_datastore_manage` - Allows management of the Apps Datastore, including creating, updating, and deleting the datastore itself.
+* `apps_datastore_manage` - Allows management of the Actions Datastore, including creating, updating, and deleting the datastore itself.
 
 
 ## Create a datastore
