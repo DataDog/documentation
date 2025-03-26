@@ -85,7 +85,8 @@ When you hover over an app, the option to enable or disable it appears on the ri
 Verify your email address for enhanced account security and access to additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
 
 - **Google login users** are automatically verified during their first login.
-- **Password-based users**: Verify their email when setting their password for the first time.
+- **Password-based users** verify their email when setting their password for the first time.
+- **SAML users** must manually verify their email through Datadog.
 
 **Benefits of email verification**
 After verified, you gain access to:
