@@ -12,12 +12,12 @@ Private Actions are in Preview. Use this form to request access today.
 
 ## Overview
 
-Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network and pair the runner with a Datadog Connection. For more information on setting up a runner and pairing it with a connection, see [Private Actions][1].
+Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must install a private action runner on a host in your network and pair the runner with a Datadog Connection. For more information on setting up a runner and pairing it with a connection, see [Private Actions][1].
 
 Some private actions, such as Jenkins and PostgreSQL, require credentials to function. To configure credentials for a private action, you must:
-1. Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files).
+1. Create a JSON file for the credential and use the JSON structure provided in [Credential files](#credential-files). Alternatively, you can use the default JSON file automatically generated during runner bootstrap (located by default at `/etc/dd-action-runner/credentials/`)
 2. Store your credential files in the configuration directory you created during setup.
-3. Specify the path to the credential in the runner's connection. Use the path to the credential on the container. For example: `/etc/dd-action-runner/creds/jenkins_creds.json`.
+3. Specify the path to the credential in the runner's connection. Use the path to the credential on the container. For example: `/etc/dd-action-runner/credentials/jenkins_token.json`.
 
 ## Credential files
 
@@ -41,7 +41,7 @@ Include all credentials in a single file.
 
 In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, all three credentials are stored in a single file. Replace the capitalized example values with your credentials.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/creds.pgpass" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
@@ -81,9 +81,9 @@ In the runner's connection, specify the location of the credential file on the p
 }
 {{< /code-block >}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/creds.pgpass` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json` on the runner.
 
-{{< img src="service_management/private-runner-creds1.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/creds.pgpass'" style="width:80%;" >}}
+{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/postgresql_token.json`'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
 [102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
@@ -97,95 +97,43 @@ In the runner's connection, specify the location of the credential file on the p
 
 {{% tab "Jenkins" %}}
 
-Jenkins connections require three credentials:
-- **username**: The username of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want to perform.
-- **token**: The API token of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want to perform. You can generate an API token in the Jenkins user settings.
-- **domain**: The domain of the Jenkins server that you want to connect to.
+The Jenkins connection accepts the following credentials:
+
+|  Credential    | Required    | Description |
+| -------------  | ----------- | ----------- |
+| `domain` | Yes | The domain of the Jenkins server that you want to connect to. |
+| `username` | Yes | The username of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want your runner to perform. |
+| `token` | Yes | The API token of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want to perform. You can generate an API token in the Jenkins user settings. |
 
 You can include all credentials in a single file or store each credential in a separate file.
 
-{{% collapse-content title="Single file example" level="p" %}}
+Include all credentials in a single file.
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, all three credentials are stored in a single file. Replace `USERNAME`, `TOKEN`, and `DOMAIN` with your username, token, and domain.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, all three credentials are stored in a single file. Replace the capitalized example values with your credentials.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
 {
         "auth_type": "Token Auth",
         "credentials": [
                 {
                         "tokenName": "username",
-                        "tokenValue": "USERNAME"
+                        "tokenValue": "YOUR_USERNAME"
                 },
                 {
                         "tokenName": "token",
-                        "tokenValue": "TOKEN"
+                        "tokenValue": "YOUR_TOKEN"
                 },
                 {
                         "tokenName": "domain",
-                        "tokenValue": "DOMAIN"
+                        "tokenValue": "YOUR_DOMAIN"
                 }
         ]
 }
 {{< /code-block >}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/creds/jenkins_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json` on the runner.
 
-{{< img src="service_management/single-file-creds.png" alt="All credential paths for the Jenkins connection point to '/etc/dd-action-runner/creds/jenkins_creds.json'" style="width:80%;" >}}
-
-{{% /collapse-content %}}
-{{% collapse-content title="Multiple file example" level="p" %}}
-In this example, each Jenkins credential is stored in a separate file.
-
-For the username credential, replace `USERNAME` with your username.
-
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_username.json" disable_copy="false" collapsible="true" >}}
-{
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "tokenName": "username",
-                        "tokenValue": "USERNAME"
-                }
-        ]
-}
-{{< /code-block >}}
-
-For the token credential, replace `TOKEN` with your token.
-
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_token.json" disable_copy="false" collapsible="true" >}}
-{
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "tokenName": "token",
-                        "tokenValue": "TOKEN"
-                }
-        ]
-}
-{{< /code-block >}}
-
-For the domain credential, replace `DOMAIN` with your domain.
-
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/jenkins_domain.json" disable_copy="false" collapsible="true" >}}
-{
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "tokenName": "domain",
-                        "tokenValue": "DOMAIN"
-                }
-        ]
-}
-{{< /code-block >}}
-
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the path to each credential. In this example, the credential files are stored at the following locations on the runner:
-- `/etc/dd-action-runner/creds/jenkins_username.json`
-- `/etc/dd-action-runner/creds/jenkins_token.json`
-- `/etc/dd-action-runner/creds/jenkins_domain.json`
-
-{{< img src="service_management/multi-file-creds.png" alt="Each path points to the location of the credential file on the runner container" style="width:80%;" >}}
-
-{{% /collapse-content %}}
+{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/jenkins_token.json'" style="width:80%;" >}}
 
 {{% /tab %}}
 
@@ -197,7 +145,7 @@ Basic authentication for the HTTP connection requires a credential file with a u
 
 Replace `USERNAME` and `PASSWORD` with your username and password.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/http_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/http_basic.json" disable_copy="false" collapsible="true" >}}
 {
 	"auth_type": "Basic Auth",
 	"credentials": [
@@ -209,9 +157,9 @@ Replace `USERNAME` and `PASSWORD` with your username and password.
 }
 {{< /code-block >}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/creds/http_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/http_basic.json` on the runner.
 
-{{< img src="service_management/http-creds.png" alt="The path to the credential file is '/etc/dd-action-runner/creds/http_creds.json'" style="width:80%;" >}}
+{{< img src="service_management/par-http-basic-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/http_basic.json'" style="width:80%;" >}}
 
 ### Token authentication
 
@@ -219,7 +167,7 @@ Token authentication for the HTTP connection requires a credential file with an 
 
 The example below includes two tokens named `TOKEN1` and `TOKEN2`. Replace the example token names and values with your token names and values.
 
-{{< code-block lang="json" filename="/etc/dd-action-runner/creds/http_creds.json" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/http_token.json" disable_copy="false" collapsible="true" >}}
 {
 	"auth_type": "Token Auth",
 	"credentials": [
@@ -235,9 +183,47 @@ The example below includes two tokens named `TOKEN1` and `TOKEN2`. Replace the e
 }
 {{< /code-block >}}
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/creds/http_creds.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/http_token.json` on the runner.
+
+{{< img src="service_management/par-http-token-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/http_token.json'" style="width:80%;" >}}
 
 [101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING-URIS
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+
+The GitLab connection accepts the following credentials:
+
+|  Credential    | Required    | Description |
+| -------------  | ----------- | ----------- |
+| `baseURL` | Yes | The URL of your self-managed GitLab instance. For more information, see [GitLab API documentation][201]. |
+| `gitlabApiToken` | Yes | The API token to authenticate with your GitLab instance. You can generate this token in your GitLab user settings. |
+
+Include all credentials in a single file.
+
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, all credentials are stored in a single file. Replace the capitalized example values with your credentials.
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/gitlab_token.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "tokenName": "gitlabApiToken",
+                        "tokenValue": "YOUR_API_TOKEN"
+                },
+                {
+                        "tokenName": "baseURL",
+                        "tokenValue": "YOUR_GITLAB_URL"
+                }
+        ]
+}
+{{< /code-block >}}
+
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your GitLab connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/gitlab_token.json` on the runner.
+
+{{< img src="service_management/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/gitlab_token.json'" style="width:80%;" >}}
+
+[201]: https://docs.gitlab.com/ee/api/
 {{% /tab %}}
 
 {{< /tabs >}}
