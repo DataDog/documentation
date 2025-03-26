@@ -1,12 +1,12 @@
 ---
 title: Notification Rules
 further_reading:
-- link: "/monitors/settings/"
-  tag: "Documentation"
-  text: "Monitor Settings"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure monitor notifications"
+- link: "/monitors/settings/"
+  tag: "Documentation"
+  text: "Monitor Settings"
 ---
 
 ## Overview
@@ -22,28 +22,23 @@ With notification rules, you no longer need to manually set up notifications rec
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.
 1. Set the scope for the rule through specific tags. Notification rules use an AND logic for multiple tags. For an example of this, see [Routing logic](#routing-logic).
-1. Add notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
-1. You can view and validate the list of monitors that match the rule. 
+1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
 1. Click **Create Rule**.
 
-**Note**: Notification rules override individual monitor `@mentions`. 
-
-{{< img src="path/to/your/image-name-here.png" alt="TBD Configuration for a new notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
-
+{{< img src="/monitors/notifications/notification_rules/new_notification_rule.png" alt=" Configuration for a new notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 
-### From Monitor Settings:
+### From Monitor Settings
+
+Navigate to [**Monitors > Settings > Notification Rules**][1].
 
 | Action     | Instructions    |
 | ---------  | ----------- |
 | **Edit**   | Click the vertical three-dot menu on the notification rule and select **Edit**. |
 | **Delete** | Click the vertical three-dot menu on the notification rule and select **Delete**. |
 
-### From an individual monitor:
-
-<div class="alert alert-info">Enabling Notification rules overrides individual monitor @mentions. 
-</div>
+### From an individual monitor
 
 In your monitor configuration you can view the notification recipients that are applied to the monitor under **Configure response**. Notification rules automatically add recipients to monitors that match the configured scopes.
 
@@ -53,8 +48,7 @@ In your monitor configuration you can view the notification recipients that are 
 
 Notification rules apply the recipients to all monitors that match the scopes in the rule configuration. 
 - Multiple tags apply an AND logic to the scope.
-- Multiple rules can match with one monitor, all recipients are added to the monitor wthout duplication.
-
+- Multiple rules can match with one monitor, all recipients are added to the monitor alert wthout duplication.
 
 {{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
