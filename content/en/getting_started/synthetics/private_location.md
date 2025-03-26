@@ -27,7 +27,9 @@ You can also use private locations to:
 - **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic tests in your CI/CD pipelines][1].
 - **Compare the application performance** from inside and outside your internal network.
 
-Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** **Note**: Currently, private locations on Docker containers are supported only on the amd64 architecture. If you have any questions about arm64 support, please contact [Datadog support][15].
+Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** 
+
+**Note**: Private locations on Docker containers are supported only on the amd64 architecture. If you have any questions about arm64 support, contact [Datadog support][15].
 
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][14].**
 
