@@ -31,7 +31,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
- Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}) as it requires <a href="/agent/remote_config/">Remote Configuration</a> to be enabled.
+ Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}), as it requires <a href="/agent/remote_config/">Remote Configuration</a> to be enabled.
 </div>
 {{% /site-region %}}
 
