@@ -1,7 +1,9 @@
 ---
 title: Backend Error Tracking
 is_beta: true
-private: true
+private: false
+aliases:
+  - /error_tracking/standalone_backend/
 further_reading:
   - link: '/error_tracking/explorer/'
     tag: 'Documentation'
@@ -13,11 +15,6 @@ further_reading:
     tag: 'Documentation'
     text: 'Simplify production debugging with Datadog Exception Replay'
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/backend-error-tracking/" btn_hidden="false" header="false">}}
-Datadog's standalone backend Error Tracking is in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 
 ## Overview
 
@@ -32,6 +29,13 @@ Error Tracking simplifies debugging by grouping thousands of similar errors into
 - Set monitors on error tracking events, such as high error volume or new issues
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
 - Automatically capture local variable values so you can reproduce exceptions, simplifying the process to resolve errors quickly
+
+## Setup
+{{< whatsnext desc="To get started with Datadog Error Tracking, see the corresponding documentation:" >}}
+    {{< nextlink href="error_tracking/backend/getting_started" >}}Standalone Backend Error Tracking{{< /nextlink >}}
+    {{< nextlink href="error_tracking/apm" >}}APM{{< /nextlink >}}
+    {{< nextlink href="error_tracking/backend/logs" >}}Logs{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

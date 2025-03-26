@@ -2194,6 +2194,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_backend
       weight: 10
+    - name: Getting Started
+      url: error_tracking/backend/getting_started
+      parent: error_tracking_backend
+      identifier: error_tracking_backend_setup
+      weight: 100
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -3391,7 +3396,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 8
-    - name: Custom Allocation Rules 
+    - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
