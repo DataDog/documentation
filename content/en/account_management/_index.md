@@ -92,7 +92,7 @@ After being verified, you gain access to:
 - The ability to **log out of all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of your current org hierarchy.
 
-Unverified users can still access Datadog but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
+Unverified users can still access Datadog, but are limited to viewing organizations within their hierarchy and cannot revoke active sessions.
 
 **How to verify your email**
 1. Navigate to your **Profile Settings**.
