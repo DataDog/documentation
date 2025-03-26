@@ -79,13 +79,6 @@ The following monitor types are not supported by the provisional status page:
 - SLO Alerts
 - Usage
 
-### Limited support for monitor features
-
-The following features are not supported by the provisional status page:
-
-- Notification grouping
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

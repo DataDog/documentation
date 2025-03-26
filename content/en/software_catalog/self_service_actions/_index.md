@@ -1,6 +1,8 @@
 ---
-title: Self-Service
+title: Self-Service Actions
 aliases:
+  - /software_catalog/actions
+  - /software_catalog/self-service
   - /service_catalog/self-service
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
@@ -14,18 +16,18 @@ further_reading:
   text: "Learn about Workflows"
 ---
 
-[Self-Service][17] is a centralized interface where developers can take action directly within Datadog. Platform teams can define and share golden paths to streamline tasks across the software development lifecycle. For example, you can use Self-Service to:
+[Self-Service Actions][17] help platform teams define and share templates to streamline tasks across the software development lifecycle. Developers can use these predefined actions to:
 
 - build microservices and infrastructure with proper configurations
 - initialize development environments
 - manage deployments across environments
 - actively monitor and optimize running services
 
-Each tile in Self-Service represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Actions Catalog][7] and [Workflow Automation][1], and surfaced in Self-Service to streamline developer workflows.
+Each tile represents an app, which provides a structured interface for executing predefined actions. Apps are created through [App Builder][2], powered by [Actions Catalog][7] and [Workflow Automation][1], and surfaced in Software Catalog to streamline developer workflows.
 
 ## Automate developer workflows
 
-To create a new app in Self-Service, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
+To create a new app in Software Catalog, you can start with an example or build from scratch. At a high level, creating a new app involves the following steps:
 
 1. Use [App Builder][2] to create dynamic, user-friendly forms to collect inputs from developers.
 1. Call Datadog's [Actions][7] from your app to initiate API calls to external services, perform custom logic, or transform data. 
@@ -74,7 +76,7 @@ If you prefer to build an app from the ground up:
 Once your Software Template is configured and tested, publish it so your team can use it. The publishing flow lets you:
 
 - Define permissions to control access.
-- Add the app to a Dashboard or the Self-Service portal for easy discovery.
+- Add the app to a Dashboard or to Self-Service Actions for easy discovery.
 
 {{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service" style="width:100%;" >}}
     
