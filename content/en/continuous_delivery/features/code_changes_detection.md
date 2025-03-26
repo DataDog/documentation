@@ -112,7 +112,7 @@ To correctly understand the code changes that a deployment has introduced, only 
 
 This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
-If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
 **Example (schema version v2.2):**
 
@@ -142,7 +142,7 @@ links:
 {{% /tab %}}
 {{< /tabs >}}
 
-Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
+Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control using either `extensions[datadoghq.com/cd-visibility]` or `extensions[datadoghq.com/dora-metrics]`. If both extensions are detected, `extensions[datadoghq.com/cd-visibility]` is used.
 
 **Example (schema version v2.2):**
 
@@ -156,7 +156,7 @@ extensions:
 
 Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
 
-If both entries are defined for a service, only `extensions[datadoghq.com/cd-visibility]` is considered when filtering the commits.
+If the source code patterns for a service are defined in both a link and an extension, only the extension is considered when filtering the commits.
 
 ## Further Reading
 
