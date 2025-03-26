@@ -45,7 +45,7 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
 ## Secret Scanning
-Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the preview here][9].
+Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
 
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/software_composition_analysis/
