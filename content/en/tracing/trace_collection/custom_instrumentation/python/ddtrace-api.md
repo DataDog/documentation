@@ -13,7 +13,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-*Note: the ddtrace-api Python package is in a pre-release state and may contain significant issues. If you'd rather use something more stable, use the [ddtrace API][9].*
+<div class="alert alert-warning">The ddtrace-api Python package is in preview and may not include the API calls you need. If you'd rather use something more complete, use the [Datadog API (ddtrace)][9].</div>
 
 If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6]
 
@@ -22,9 +22,9 @@ over your application's instrumentation.
 
 ## Additional Setup
 
-The stable public API for Datadog APM's custom Python instrumentation is implemented by the [ddtrace-api package][8]. This package doesn't implement any of the tracing functionality that creates and
+The stable public API for Datadog APM's custom Python instrumentation is implemented by the [ddtrace-api package][8]. This package doesn't implement any of the underlying functionality that creates and
 sends spans to Datadog; it *only* implements the API interface. This separation between interface in `ddtrace-api` and implementation in `ddtrace` allows users of cusom instrumentation to rely on
-an API that changes less frequently and more predictably, while allowing autoinstrumentation users to ignore semantic versioning entirely.
+an API that changes less frequently and more predictably, while allowing autoinstrumentation-only users to ignore API changes.
 
 The separation of interface and implementation means that setting up custom instrumentation requires installing two libraries: `ddtrace` as explained in the [Python Setup Instructions][6] and `ddtrace-api`:
 
