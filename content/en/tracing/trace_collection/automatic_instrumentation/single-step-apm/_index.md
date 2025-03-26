@@ -306,10 +306,12 @@ Each target block has the following keys:
 | Key             | Description |
 |------------------|-------------|
 | `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
-| `namespaceSelector` | The namespace(s) to instrument. Specify using either:<br> - `matchNames`: One or more namespace name(s). <br> - `matchLabels`: One or more namespace label(s). |
-| `podSelector`     | The pod(s) to instrument. Specify using: <br> - `matchLabels`: One or more pod label(s). |
+| `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. See the [Kubernetes selector documentation][3] for details.|
+| `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. See the [Kubernetes selector documentation][3] for details. |
 | `ddTraceVersions` | The [Datadog APM SDK][2] version to use for each language. |
 | `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
+
+
 
 The file you need to configure depends on how you enabled Single Step Instrumentation:
 - If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
@@ -342,12 +344,16 @@ This configuration:
 
 {{< collapse-content title="Example 2: Instrument a subset of namespaces, matching on names and labels" level="h4" >}}
 
-This configuration:
-- enables APM for services in the `login-service` and `billing-service` namespaces only.
-- instructs Datadog to:
-  - instrument services in `login-service` with the default version of the Java APM SDK.
-  - instrument services in `billing-service` with `v3.1.0` of the Python APM SDK. 
-- sets several Datadog environment variables to apply to this target.
+This configuration creates two targets blocks:
+
+- The first block (nameed `login-service_namespace`):
+  - enables APM for services in the namespace `login-service`.
+  - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
+  - sets environment variables -- `DD_SERVICE`, `DD_ENV`, and `DD_PROFILING_ENABLED` -- for this target group.
+- The second block (named `billing-service_apps`)
+  - enables APM for services in the namespace(s) with label `app:billing-service`.
+  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK. 
+  - sets environment variables -- `DD_SERVICE` and `DD_ENV` -- for this target group.
 
 {{< highlight yaml "hl_lines=4-28" >}}
   apm:
@@ -483,6 +489,7 @@ This configuration enables APM for pods that meet the following criteria:
 
 [1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[3]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
 
 {{% /tab %}}
 
