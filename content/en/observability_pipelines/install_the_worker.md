@@ -17,7 +17,7 @@ The Observability Pipelines Worker is software that runs in your environment to 
 1. [Install the Worker](#install-the-worker).
 1. Deploy the pipeline.
 
-**Notes**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
+**Note**: If you are using a proxy, see the `proxy` option in [Bootstrap options][1].
 
 ## Install the Worker
 
