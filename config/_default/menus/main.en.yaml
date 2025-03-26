@@ -15,27 +15,30 @@ menu:
     - name: Infrastructure
       identifier: infrastructure_heading
       weight: 5000000
+    - name: Cloud Cost
+      identifier: cloud_cost_heading
+      weight: 6000000
     - name: Application Performance
       identifier: apm_heading
-      weight: 6000000
+      weight: 7000000
     - name: Digital Experience
       identifier: digital_experience_heading
-      weight: 7000000
+      weight: 8000000
     - name: Software Delivery
       identifier: software_delivery_heading
-      weight: 8000000
+      weight: 9000000
     - name: Security
       identifier: security_platform_heading
-      weight: 9000000
+      weight: 10000000
     - name: AI Observability
       identifier: ai_observability_heading
-      weight: 10000000
+      weight: 11000000
     - name: Log Management
       identifier: log_management_heading
-      weight: 11000000
+      weight: 12000000
     - name: Administration
       identifier: administration_heading
-      weight: 12000000
+      weight: 13000000
     - name: Getting Started
       identifier: getting_started
       url: getting_started/
@@ -826,14 +829,18 @@ menu:
       identifier: otel_guides_migration
       parent: otel_guides
       weight: 1004
+    - name: Migrate to OTel Collector v0.120.0+
+      url: /opentelemetry/guide/migrate/collector_0_120_0
+      parent: otel_guides_migration
+      weight: 10041
     - name: Migrate to OTel Collector v0.95.0+
       url: /opentelemetry/guide/migrate/collector_0_95_0
       parent: otel_guides_migration
-      weight: 10041
+      weight: 10042
     - name: New Operation Name Mappings
       url: /opentelemetry/guide/migrate/migrate_operation_names/
       parent: otel_guides_migration
-      weight: 10042
+      weight: 10043
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
@@ -2077,14 +2084,14 @@ menu:
       parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 503
-    - name: Self-Service
-      url: software_catalog/self-service
+    - name: Self-Service Actions
+      url: software_catalog/self_service_actions
       parent: software_catalog
-      identifier: self-service
+      identifier: self_service_actions
       weight: 7
     - name: Software Templates
-      url: software_catalog/self-service/software_templates
-      parent: self-service
+      url: software_catalog/self_service_actions/software_templates
+      parent: self_service_actions
       identifier: software_templates
     - name: Definition APIs
       url: software_catalog/apis
@@ -3302,25 +3309,25 @@ menu:
       url: cloud_cost_management/
       identifier: cloud_cost
       pre: cloud-cost-management
-      parent: infrastructure_heading
-      weight: 80000
+      parent: cloud_cost_heading
+      weight: 10000
     - name: AWS
-      url: cloud_cost_management/aws
+      url: cloud_cost_management/aws/
       parent: cloud_cost
       identifier: cloud_cost_aws
       weight: 1
     - name: Azure
-      url: cloud_cost_management/azure
+      url: cloud_cost_management/azure/
       parent: cloud_cost
       identifier: cloud_cost_azure
       weight: 2
     - name: Google Cloud
-      url: cloud_cost_management/google_cloud
+      url: cloud_cost_management/google_cloud/
       parent: cloud_cost
       identifier: cloud_cost_google_cloud
       weight: 3
     - name: SaaS Cost Integrations
-      url: cloud_cost_management/saas_costs
+      url: cloud_cost_management/saas_costs/
       parent: cloud_cost
       identifier: cloud_cost_saas_cost_integrations
       weight: 4
@@ -3384,16 +3391,21 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 8
+    - name: Custom Allocation Rules 
+      url: cloud_cost_management/custom_allocation_rules
+      parent: cloud_cost
+      identifier: cloud_cost_custom_allocation_rules
+      weight: 9
     - name: Tag Explorer
       url: cloud_cost_management/tag_explorer
       parent: cloud_cost
       identifier: cloud_cost_tag_explorer
-      weight: 9
+      weight: 10
     - name: Container Cost Allocation
       url: cloud_cost_management/container_cost_allocation
       parent: cloud_cost
       identifier: cloud_cost_container_cost_allocation
-      weight: 10
+      weight: 11
     - name: AWS
       url: cloud_cost_management/container_cost_allocation/?tab=aws
       parent: cloud_cost_container_cost_allocation
@@ -3413,7 +3425,7 @@ menu:
       url: cloud_cost_management/recommendations
       parent: cloud_cost
       identifier: cloud_cost_recommendations
-      weight: 11
+      weight: 12
     - name: Cost Monitors
       url: /cloud_cost_management/monitors
       parent: cloud_cost
@@ -3424,6 +3436,11 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_budgets
       weight: 13
+    - name: Anomalies
+      url: /cloud_cost_management/anomalies
+      parent: cloud_cost
+      identifier: cloud_cost_anomalies
+      weight: 14
     - name: APM
       url: tracing/
       pre: apm
@@ -4511,6 +4528,11 @@ menu:
       identifier: cd_features_code_changes_detection
       parent: cd_features
       weight: 301
+    - name: Rollback Detection
+      url: continuous_delivery/features/rollbacks_detection
+      identifier: cd_features_rollbacks_detection
+      parent: cd_features
+      weight: 302
     - name: Test Optimization
       url: tests/
       pre: ci
