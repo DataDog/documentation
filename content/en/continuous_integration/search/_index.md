@@ -54,12 +54,6 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
-### View unified pipeline trace
-
-To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
-
-The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
-
 ### Highlight critical path
 
 To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
