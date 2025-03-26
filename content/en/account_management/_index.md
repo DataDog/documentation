@@ -84,7 +84,7 @@ When you hover over an app, the option to enable or disable it appears on the ri
 #### Email verification
 Verify your email address for enhanced account security and access to additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
 
-- **Google login users**: Are automatically verified during their first login.
+- **Google login users** are automatically verified during their first login.
 - **Password-based users**: Verify their email when setting their password for the first time.
 
 **Benefits of email verification**
