@@ -82,7 +82,7 @@ The [Apps tab][14] in **Personal Settings** allows you to manage apps that have 
 When you hover over an app, the option to enable or disable it appears on the right of the app listing.
 
 #### Email verification
-Verify your email address to enhance account security and access additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
+Verify your email address for enhanced account security and access to additional management features. Verified users have greater control over their account security and can see all the organizations they belong to.
 
 **Who needs to verify their email?**
 - **SAML users**: Must manually verify their email through Datadog.
