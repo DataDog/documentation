@@ -88,7 +88,7 @@ Verify your email address for enhanced account security and access to additional
 - **Password-based users** verify their email when setting their password for the first time.
 - **SAML users** must manually verify their email through Datadog.
 
-After verified, you gain access to:
+After being verified, you gain access to:
 - The ability to **log out all active web sessions** across devices, ensuring security in case of credential compromise.
 - The ability to **view and switch between organizations** outside of your current org hierarchy.
 
