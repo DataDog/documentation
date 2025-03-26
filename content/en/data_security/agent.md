@@ -70,13 +70,13 @@ Agent v6/7 comes bundled with a Graphical User Interface (GUI) by default, which
 
 Datadog's Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform regular scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog's Vulnerability Management policy.
 
-Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases using [clair by CoreOS][10] and [Trivy][11]. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][12], and additionally, Datadog agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog agent for potential vulnerabilities.
+Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis on both its general availability (GA) and release candidate (RC) releases. The Datadog Container Agent can be found in public registries as mentioned in [Docker Agent][10], and additionally, Datadog agent source code is open source. This empowers customers to perform vulnerability scanning with their preferred tooling based on a cadence that meets their unique needs. This provides the required visibility for customers inclined to monitor the Datadog agent for potential vulnerabilities.
 
-If you believe you've discovered a bug in Datadog's security, see [Report An Issue][13]. To submit a vulnerability inquiry on a specific product as an existing customer, reach out to [Datadog Support][14] through your standard support process. If submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
+If you believe you've discovered a bug in Datadog's security, see [Report An Issue][11]. To submit a vulnerability inquiry on a specific product as an existing customer, reach out to [Datadog Support][12] through your standard support process. If submitting a support ticket through the Datadog website, set the `Product type` field to `Vulnerability Inquiry on Datadog Product`.
 
 ## Running as an unprivileged user
 
-By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][16]. The exceptions are as follows:
+By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][14]. The exceptions are as follows:
 
 - The `system-probe` runs as `root` on Linux and as `LOCAL_SYSTEM` on Windows.
 - The `process-agent` runs as `LOCAL_SYSTEM` on Windows.
@@ -84,9 +84,9 @@ By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentus
 
 ## Secrets management
 
-If you have a requirement to avoid storing secrets in plaintext in the Agent's configuration files, you can leverage the [secrets management][17] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. You can design your executable according to your preferred key management service, authentication method, and continuous integration workflow.
+If you have a requirement to avoid storing secrets in plaintext in the Agent's configuration files, you can leverage the [secrets management][15] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. You can design your executable according to your preferred key management service, authentication method, and continuous integration workflow.
 
-For more information, see the [Secrets Management][18] documentation.
+For more information, see the [Secrets Management][16] documentation.
 
 ## Telemetry collection
 
@@ -195,16 +195,16 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [7]: /agent/faq/network/
 [8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/
-[10]: https://coreos.com/clair
-[11]: https://trivy.dev/
-[12]: /containers/docker/?tab=standard
-[13]: https://www.datadoghq.com/security/?tab=contact
-[14]: https://www.datadoghq.com/support/
-[15]: https://www.datadoghq.com/8869756E.asc.txt
-[16]: /agent/faq/windows-agent-ddagent-user/
-[17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/configuration/secrets-management/
-[19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
-[20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[10]: /containers/docker/?tab=standard
+[11]: https://www.datadoghq.com/security/?tab=contact
+[12]: https://www.datadoghq.com/support/
+[13]: https://www.datadoghq.com/8869756E.asc.txt
+[14]: /agent/faq/windows-agent-ddagent-user/
+[15]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[16]: /agent/configuration/secrets-management/
+[17]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
+[18]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[19]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
+[20]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
 [21]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
 [22]: https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public
