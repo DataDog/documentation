@@ -30,7 +30,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 ## Enabling threat detection
 ### Get started
 
-1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later). If you are using [version 2.x of the Go Tracer][3], follow the instructions marked with `v2`.
+1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later). {{% tracing-go-v2 %}}
 
    ```shell
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1 # v1
@@ -122,4 +122,3 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 [1]: /security/application_security/threats/setup/compatibility/go/#web-framework-compatibility
 [2]: /security/application_security/threats/setup/compatibility/go/
-[3]: /tracing/trace_collection/custom_instrumentation/go/migration
