@@ -176,7 +176,10 @@ String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
-logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{traceIdHexString} dd.span_id=%X{datadogSpanIdString} %n
+MDC.put("dd.trace_id", traceIdHexString);
+MDC.put("dd.span_id", datadogSpanIdString);
+
+logger.info("Log Message");
 ```
 
 See [Java Log Collection][4] on how to send your Java logs to Datadog.
