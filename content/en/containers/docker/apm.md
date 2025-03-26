@@ -292,7 +292,6 @@ func main() {
     defer tracer.Stop()
 }
 ```
-[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 

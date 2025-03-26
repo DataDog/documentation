@@ -21,7 +21,7 @@ further_reading:
       text: 'Ease troubleshooting with cross product correlation.'
 ---
 
-The Go Tracer v2 is in Preview! For more information and to upgrade, see the [migration guide][3]. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`.
+{{% tracing-go-v2 %}}
 
 ## Manual injection
 

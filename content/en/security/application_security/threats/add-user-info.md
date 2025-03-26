@@ -137,7 +137,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#SetUser
 [2]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#SetUser
-[3]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 
@@ -537,8 +536,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{% /tab %}}
 
 {{< /tabs >}}
-
-[1]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}

@@ -209,8 +209,6 @@ func main() {
 }
 ```
 
-[1]: /tracing/trace_collection/custom_instrumentation/go/migration
-
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

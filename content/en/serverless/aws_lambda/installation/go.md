@@ -25,7 +25,7 @@ aliases:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/go">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
-The Go Tracer v2 is in Preview! For more information and to upgrade, see the [migration guide][7]. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`.
+{{% tracing-go-v2 %}}
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}

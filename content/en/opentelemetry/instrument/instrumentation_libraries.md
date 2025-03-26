@@ -237,7 +237,6 @@ func hello(w http.ResponseWriter, req *http.Request) {
 [21]: https://github.com/open-telemetry/opentelemetry-go/tree/main/trace
 [22]: https://github.com/open-telemetry/opentelemetry-go-contrib/tree/main/instrumentation
 [23]: https://docs.datadoghq.com/tracing/trace_collection/custom_instrumentation/go/otel/#imports
-[24]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{% /tab %}}
 

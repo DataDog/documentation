@@ -152,4 +152,3 @@ The Go packages listed in this page are relevant for Application Security capabi
 [4]: https://github.com/DataDog/dd-trace-go#support-maintenance
 [5]: https://www.datadoghq.com/support/
 [15]: https://github.com/golang/go/wiki/cgo
-[16]: /tracing/trace_collection/custom_instrumentation/go/migration

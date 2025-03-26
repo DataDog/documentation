@@ -177,7 +177,6 @@ func main() {
 ```
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1
-[2]: /tracing/trace_collection/custom_instrumentation/go/migration
 
 {{% /tab %}}
 

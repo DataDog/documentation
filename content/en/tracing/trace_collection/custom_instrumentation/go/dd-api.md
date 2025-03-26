@@ -24,11 +24,9 @@ further_reading:
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/go/">Go Setup Instructions</a>.
 </div>
 
-<div class="alert alert-info">
-The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade. If you are using version 2.x of the Go Tracer, follow the import instructions marked with `2.x`.
-</div>
-
 This page details common use cases for adding and customizing observability with Datadog APM.
+
+{{% tracing-go-v2 %}}
 
 ## Adding tags
 
@@ -36,7 +34,7 @@ Add custom [span tags][1] to your [spans][2] to customize your observability wit
 
 ### Add custom span tags
 
-Add [tags][1] directly to a `Span` interface by calling `SetTag`.
+Add [tags][1] directly to a `Span` interface by calling `SetTag`:
 
 ```go
 package main

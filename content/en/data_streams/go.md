@@ -138,4 +138,3 @@ if ok {
 [7]: https://github.com/DataDog/dd-trace-go/blob/main/datastreams/propagation.go#L44
 [8]: https://github.com/confluentinc/confluent-kafka-go
 [9]: https://github.com/Shopify/sarama
-[10]: /tracing/trace_collection/custom_instrumentation/go/migration
