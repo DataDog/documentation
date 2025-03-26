@@ -2,6 +2,7 @@
 title: Getting Started with Application Security Management
 aliases:
 - /security/security_monitoring/getting_started/
+- /getting_started/application_security
 further_reading:
 - link: "/security/application_security/terms"
   tag: "Documentation"
