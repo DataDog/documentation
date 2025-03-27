@@ -55,7 +55,7 @@ See [event batching][6] for more information.
 
 ## Getting an error when installing a new version of the Worker
 
-If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][7] the older version of the Worker before you can install the new version of the Worker.
+If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][7] the older version before you can install the new version of the Worker.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
