@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { CustomizationConfig, FilterConfig, FilterConfigSchema } from 'cdocs-data';
-import TraitSelector from './selectors/TraitSelector';
-import OptionGroupSelector from './selectors/OptionGroupSelector';
+import OptionGroupSelector from '../selectors/OptionGroupSelector';
+import TraitForm from './TraitForm';
 
 function FilterList({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   return (
     <div>
       <p>Filter list goes here.</p>
+      <hr />
+      <p>
+        <strong>Filter form test</strong>
+      </p>
       <FilterForm customizationConfig={customizationConfig} onEdit={() => {}} />
     </div>
   );
@@ -100,23 +104,3 @@ function FilterForm({
 }
 
 export default FilterList;
-
-function TraitForm({
-  customizationConfig,
-  onUpdate
-}: {
-  customizationConfig: CustomizationConfig;
-  onUpdate: ({
-    traitId,
-    newTraitConfig
-  }: {
-    traitId: string;
-    newTraitConfig?: { id: string; label: string; internal_notes?: string };
-  }) => void;
-}) {
-  const handleExistingTraitSelect = (traitId: string) => {
-    onUpdate({ traitId });
-  };
-
-  return <TraitSelector customizationConfig={customizationConfig} onSelect={handleExistingTraitSelect} />;
-}

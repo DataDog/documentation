@@ -13,7 +13,7 @@ import ReactTimeAgo from 'react-time-ago';
 import QuickFilterBuilder from './components/QuickFilterBuilder';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import BoltIcon from '@mui/icons-material/Bolt';
-import PageWizard from './components/PageWizard';
+import PageWizard from './components/wizard/PageWizard';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -46,6 +46,9 @@ function a11yProps(index: number) {
 
 function App() {
   const tabParamVals = ['build-errors', 'quick-filter', 'page-wizard'];
+  const [consoleData, setConsoleData] = useState<AuthorConsoleData | null>(null);
+  const [hasErrors, setHasErrors] = useState<boolean>(false);
+  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
   function setTabWithIndex(tabIndex: number) {
     const tabParamVal = tabParamVals[tabIndex];
@@ -67,10 +70,6 @@ function App() {
     const tabIndex = tabParamVals.indexOf(tabKey);
     setCurrentTabIndex(tabIndex);
   }
-
-  const [consoleData, setConsoleData] = useState<AuthorConsoleData | null>(null);
-  const [hasErrors, setHasErrors] = useState<boolean>(false);
-  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
   useEffect(() => {
     fetch('/data.json')
