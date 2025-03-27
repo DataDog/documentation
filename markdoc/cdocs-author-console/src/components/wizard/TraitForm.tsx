@@ -7,6 +7,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
+export interface TraitConfig {
+  id: string;
+  label: string;
+  internal_notes?: string;
+}
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -41,13 +47,7 @@ function TraitForm({
   onUpdate
 }: {
   customizationConfig: CustomizationConfig;
-  onUpdate: ({
-    traitId,
-    newTraitConfig
-  }: {
-    traitId: string;
-    newTraitConfig?: { id: string; label: string; internal_notes?: string };
-  }) => void;
+  onUpdate: ({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
@@ -58,6 +58,8 @@ function TraitForm({
   const handleExistingTraitSelect = (traitId: string) => {
     onUpdate({ traitId });
   };
+
+  const handleNewTraitSave = () => {};
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CustomizationConfig, FilterConfig, FilterConfigSchema } from 'cdocs-data';
 import OptionGroupSelector from '../selectors/OptionGroupSelector';
-import TraitForm from './TraitForm';
+import TraitForm, { TraitConfig } from './TraitForm';
 
 function FilterList({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   return (
@@ -68,13 +68,7 @@ function FilterForm({
       <h2>Trait</h2>
       <TraitForm
         customizationConfig={customizationConfig}
-        onUpdate={({
-          traitId,
-          newTraitConfig
-        }: {
-          traitId: string;
-          newTraitConfig?: { id: string; label: string; internal_notes?: string };
-        }) => {
+        onUpdate={({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => {
           // If a new trait config was passed, add it to the new customization config
           if (newTraitConfig) {
             setNewCustomizationConfig({
