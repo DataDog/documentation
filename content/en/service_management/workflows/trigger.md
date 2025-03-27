@@ -156,8 +156,6 @@ For additional examples of security workflows you can automate, see [Automate Se
 
 To run a workflow from a software catalog entity, you must first add a software catalog trigger to your workflow:
 
-### Add a software catalog trigger to your workflow
-
 1. Add a software catalog trigger to your workflow:
    - If your workflow doesn't have any triggers, click **Add Trigger** > **Software Catalog**.
    - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Software Catalog**.
