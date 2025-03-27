@@ -55,9 +55,9 @@ Steps to free up disk space on {{host.name}}: <-- tag variable
 
 
 ## Notification recipients
-<div class="alert alert-info">Datadog recommends using <a href="/monitors/notify/notification_rules">Notification rules</a> to manage monitor notifications. You can also add notification recipients directly to individual monitors.</div>
+Datadog recommends using [monitor notification rules][22] to manage monitor notifications. With notification rules you can automate which notification recipients are added to a monitor based on predefined sets of conditions. Create different rules to route monitor alerts based on the tags of the monitor notification so you don't have to manually set up recipients nor notification routing logic for each individual monitor. 
 
- You can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
+In both notification rules and individual monitors, you can use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog auto-recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
 
 An @notification must have a space between it and the last line character:
 
@@ -230,3 +230,4 @@ Message variables auto-populate with a randomly selected group based on the scop
 [19]: /monitors/types
 [20]: /monitors/configuration/
 [21]: /monitors/guide/recovery-thresholds/
+[22]: /monitors/notify/notification_rules

@@ -23,6 +23,7 @@ With notification rules, you no longer need to manually set up notifications rec
 1. Click **New Rule**.
 1. Set the scope for the rule through specific tags. Notification rules use an AND logic for multiple tags. For an example of this, see [Routing logic](#routing-logic).
 1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
+1. Add a name for the rule.
 1. Click **Create Rule**.
 
 {{< img src="/monitors/notifications/notification_rules/new_notification_rule.png" alt=" Configuration for a new notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
@@ -46,15 +47,15 @@ In your monitor configuration you can view the notification recipients that are 
 
 ## Routing logic
 
-Notification rules apply the recipients to all monitors that match the scopes in the rule configuration. 
+Notification rules apply the recipients to all monitor notifications that match the scopes in the rule configuration. 
 - Multiple tags apply an AND logic to the scope.
-- Multiple rules can match with one monitor, all recipients are added to the monitor alert wthout duplication.
+- Multiple rules can match with one monitor notification, all recipients are added to the monitor alert without duplication.
 
 {{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
 
 The following table demonstrates how monitors with different tag combinations match notification rules and their resulting notifications. This table shows how:
-1. Multiple notification rules can match a single monitor based on its tags.
+1. Multiple notification rules can match a single monitor notification based on its tags.
 2. The AND logic works for multiple tags within a rule.
 3. All matching notification rules contribute their recipients to the final notification list.
 4. Recipients are deduplicated in the final notification list.
