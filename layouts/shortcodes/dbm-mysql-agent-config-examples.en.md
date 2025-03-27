@@ -66,9 +66,11 @@ instances:
 
 ### Collecting schemas
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. **Note**: Schemas are only collected for tables where the Agent has `SELECT` access.
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. To enable this feature, use the `schemas_collection` option. **Note**: To collect schemas, MySQL requires that the datadog Agent has SELECT access on the table. This is a [MySQL-enforced restriction](https://dev.mysql.com/doc/refman/9.2/en/information-schema-introduction.html#information-schema-privileges) — without SELECT, the table will not appear in metadata queries.
 
-To grant `SELECT` permissions to the Datadog user, use one of the following commands:
+The Agent does not use SELECT to access or read your table data. This permission is needed solely to retrieve schema details, due to how MySQL handles metadata visibility.
+
+To grant `SELECT` permissions to the Datadog user, use one or a combination of the following commands:
 - **All databases**:
     ```sql
     GRANT SELECT ON *.* TO datadog@'%';
@@ -80,6 +82,10 @@ To grant `SELECT` permissions to the Datadog user, use one of the following comm
 - **Per table basis**:
     ```sql
     GRANT SELECT ON [database name].[table name] TO datadog@'%';
+    ```
+- **Per column basis**:
+    ```sql
+    GRANT SELECT ([column name1], [column name 2]) ON [table name] TO datadog@'%';
     ```
 
 ### Working with hosts through a proxy
