@@ -17,6 +17,7 @@ cascade:
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for Log Management{{< /nextlink >}}
     {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
+    {{< nextlink href="logs/guide/flex_logs_compute" >}}Monitor Flex Logs Compute Usage{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
