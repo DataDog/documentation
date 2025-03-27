@@ -9,12 +9,12 @@
 
 <div>
     {{ $audit_events_data := $.Site.Data.audit_events }}
-    <h2>Audit Events</h2>
+    {{ $platform_events := slice }}
+    {{ $product_events := slice }}
     <div class="d-flex flex-column">
-        {{ $platform_events := slice }}
-        {{ $product_events := slice }}
         <div class="col-12 order-1">
             <p>{{ .Get "additional_info" | markdownify }}</p>
+            <h2>Audit Events</h2>
             {{ with $audit_events_data }}
 
                 {{ range . }}
@@ -50,13 +50,13 @@
         <div class="col-12">
             <h4>Platform Events</h4>
             <ul>
-                {{ range $platform_events }}
+                {{ range sort $platform_events "Name" }}
                     <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
                 {{ end }}
             </ul>
             <h4>Product-Specific Events</h4>
             <ul>
-                {{ range $product_events }}
+                {{ range sort $product_events "Name" }}
                     <li><a href="#{{ .Name | urlize }}">{{ .Name | title }}</a></li>
                 {{ end }}
             </ul>
