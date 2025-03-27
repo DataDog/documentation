@@ -183,7 +183,7 @@ You can mix samples and regex patterns to support multiple log formats:
 ```yaml
 logs_config:
   auto_multi_line_detection_custom_samples:
-    - sample: "Failed to obtain"
+    - sample: "CORE | INFO | (pkg/logs/"
     - regex: "\\d{4}dog.\\s\\w+"
     - sample: "[ERR] Exception"
       label: no_aggregate
@@ -194,7 +194,7 @@ logs_config:
 
 ```shell
 DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
-  {"sample": "Failed to obtain"},
+  {"sample": "CORE | INFO | (pkg/logs/"},
   {"regex": "\\d{4}dog.\\s\\w+"},
   {"sample": "[ERR] Exception", "label": "no_aggregate"}
 ]'
