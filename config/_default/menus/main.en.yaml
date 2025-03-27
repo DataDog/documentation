@@ -98,8 +98,8 @@ menu:
     - name: Datadog Site
       identifier: getting_started_datadog_site
       url: getting_started/site/
-      parent: getting_started_datadog
-      weight: 801
+      parent: getting_started
+      weight: 9
     - name: DevSecOps
       identifier: getting_started_devsecops
       url: getting_started/devsecops
