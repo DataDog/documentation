@@ -1,5 +1,5 @@
 ---
-title: Risk Insights for AWS Entities
+title: Risk Insights
 further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
@@ -8,7 +8,7 @@ further_reading:
 
 ## Overview
 
-[Cloud SIEM's Risk Insights for AWS Entities][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
+[Cloud SIEM's Risk Insights][4] consolidates multiple data sources, such as SIEM threats and CSM insights, into a profile representing a single security entity, such as an IAM user.
 
 With Risk Insights, you can:
 
@@ -19,7 +19,7 @@ With Risk Insights, you can:
 
 ## Prerequisites
 
-- For AWS Risk Insights coverage, [AWS must be configured for Cloud SIEM][1].
+- For Risk Insights coverage, either [GCP][5] or [AWS must be configured for Cloud SIEM][1].
 - (Optional) To view associated Cloud Security Management (CSM) insights in the entity panel, [CSM must be configured][2].
 
 
@@ -61,3 +61,4 @@ The risk score is calculated from the characteristics of the entity's associated
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/entities
+[5]: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
