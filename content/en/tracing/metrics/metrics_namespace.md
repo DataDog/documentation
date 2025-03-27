@@ -49,7 +49,7 @@ With the following definitions:
 
 `<TAGS>`
 : Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag). 
-**Note:** Other tags set on spans are not available as tags on traces metrics.
+: **Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix
 
@@ -111,7 +111,7 @@ The following metrics are maintained for backward compatibility. For all latency
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
 `sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}.rollup(sum).fill(zero)` <br>
-This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information.
+This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information. <br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
@@ -141,9 +141,9 @@ Very few tracing libraries support this setting, and using it is generally not r
 
 The OpenTelemetry SDK's native sampling mechanisms lower the number of spans sent to the Datadog collector, resulting in sampled and potentially inaccurate trace metrics.
 
-### XRay sampling
+### X-Ray sampling
 
-XRay spans are sampled before they are sent to Datadog, which means trace metrics might not reflect all traffic.
+X-Ray spans are sampled before they are sent to Datadog, which means trace metrics might not reflect all traffic.
 
 
 ## Further Reading
