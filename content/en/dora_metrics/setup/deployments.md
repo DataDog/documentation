@@ -41,7 +41,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 ### Requirements
 
-- APM Deployment Tracking is enabled as a Deployment events data source in [DORA settings][19].
+- **APM Deployment Tracking** is enabled as a **Deployments** event data source in [DORA settings][19].
 - Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
@@ -61,7 +61,7 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a deployment events data source in [DORA settings][28].
+- **datadog-ci CLI / API** is enabled as a **Deployments** event data source in [DORA settings][28].
 - The following attributes are required:
   - `started_at`: The time the deployment started.
   - `finished_at`: The time the deployment finished.
@@ -69,12 +69,12 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 
 You can optionally add the following attributes to the deployment events:
 
-- `repository_url`: The source code repository of the service. ***Required for calculating change lead time***
-- `commit_sha`: The SHA of the HEAD commit associated with the deployment. ***Required for calculating change lead time***
-- `team` to associate a deployment with a different `team` than the one found automatically for the service.
-- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
-- `id` for identifying a deployment. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
-- `version`
+- `repository_url`: The source code repository of the service. Required for calculating change lead time.
+- `commit_sha`: The SHA of the HEAD commit associated with the deployment. Required for calculating change lead time.
+- `team`: Associate a deployment with a different `team` than the one found automatically for the service.
+- `env`: Filter your DORA metrics by environment on the [DORA Metrics][25] page.
+- `id`: Identify a deployment. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
+- `version`: The deployment version.
 
 
 ### API (cURL) Example

@@ -21,8 +21,8 @@ The four DORA Metrics are calculated based on two types of events that support d
 [**Deployment events**][8]
 : Indicate that a new deployment has occurred for a service in a specific environment. Deployment events are used to compute deployment frequency, change lead time, and change failure rate.
 
-[**Failures events**][9]
-: Indicate that a new failure has occurred for a service in a specific environment. Failures events are used to compute change failure rate and time to restore.
+[**Failure events**][9]
+: Indicate that a new failure has occurred for a service in a specific environment. Failure events are used to compute change failure rate and time to restore.
 
 ## Configure data sources
 

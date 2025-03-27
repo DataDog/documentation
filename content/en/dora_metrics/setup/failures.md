@@ -1,5 +1,5 @@
 ---
-title: How to Set Up Failure Data for DORA Metrics
+title: Set Up Failure Data for DORA Metrics
 description: Learn how to send failure events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents

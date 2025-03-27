@@ -54,9 +54,9 @@ DORA Metrics provide the following fields:
 | Metric                        | Description                |
 |-------------------------------|----------------------------|
 | `Deployment Frequency`          | The number of deployments detected by Datadog based on your selected [deployment data source][10].|
-| `Change Lead Time`          | The age in `seconds` of all associated Git commits at the time of deployment.|
-| `Change Failure Rate`          | Calculated with the formula `Count of Failures/Count of Deployments`. A big time rollup of at least 1 week is recommended to account for the time difference between deployments and when the failure starts.|
-| `Time to Restore`          | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.|
+| `Change Lead Time`          | The age in seconds of all associated Git commits at the time of deployment.|
+| `Change Failure Rate`          | Calculated with the formula `Count of Failures/Count of Deployments`. A long time rollup of at least 1 week is recommended to account for the time difference between deployments and when the failure starts.|
+| `Time to Restore`          | The time in seconds between a failure's `started_at` and `finished_at` timestamps.|
 
 
 ## Change lead time stages
@@ -65,24 +65,24 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 | Metric                     | Description                |
 |----------------------------|----------------------------|
-| `Time to Pr Ready`          | Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review. |
-| `Review Time`          | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved. |
+| `Time to Pr Ready`          | Time from when the commit is created until the PR is ready for review. This metric is only available for commits made before the PR is marked as ready for review. |
+| `Review Time`          | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits made before the PR is approved. |
 | `Merge Time`          | Time from the last approval until the PR is merged. |
 | `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
 | `Deploy Time`          | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These stages are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
+These stages are only computed when the source of the repository metadata is GitHub, and for most stages there must be a pull request (PR) associated with a commit. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 
-**Recommendations :**
+### Recommendations
 
 Using commit-level granularity provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
 
-**Notes:**
+### Notes
 
 - These fields are measured for every commit and not per deployment.
 - There are several edge cases depending on the way the commits were introduced to the deployment, view the [limitations][12].
 
-## Event-specific fieldss
+## Event-specific fields
 
 ### Deployment fields
 
@@ -90,7 +90,7 @@ Using commit-level granularity provides a more accurate view of engineering perf
 |------------|--------|----------------------------|
 | `Duration` | number (s) | Duration of the deployment. |
 | `Avg Change Lead Time`      | number (s)      | The average duration of [change lead time](#commit-fields) of all commits.  |
-| `Avg Time to Pr Ready`          | number (s)      | The average duration of [time to PR ready](#commit-fields) of all commits. |
+| `Avg Time to PR Ready`          | number (s)      | The average duration of [time to PR ready](#commit-fields) of all commits. |
 | `Avg Review Time`       | number (s)      | The average duration of [review time](#commit-fields) of all commits. |
 | `Avg Merge Time`       | number (s)      | The average duration of [merge time](#commit-fields) of all commits. |
 | `Avg Time to Deploy`       | number (s)      | The average duration of [time to deploy](#commit-fields) of all commits. |
@@ -104,8 +104,8 @@ Using commit-level granularity provides a more accurate view of engineering perf
 |------------|--------|----------------------------|
 | `Change Lead Time`       | number (s)       | Duration from the first commit in a change to its deployment. |
 | `Deploy Time`       | number (s)       | Duration from merging a change to its deployment. |
-| `Time to Pr Ready`       | number (s)       | Duration from commit creation to when the PR is marked as "ready for review". |
-| `Review Time`       | number (s)       | Duration from PR being marked "ready for review" to approval. |
+| `Time to PR Ready`       | number (s)       | Duration from commit creation to when the PR is marked as ready for review. |
+| `Review Time`       | number (s)       | Duration from PR being marked ready for review to approval. |
 | `Merge Time`       | number (s)       | Duration from PR approval to merging. |
 | `Time to Deploy`       | number (s)       | Duration from commit creation to deployment. |
 
