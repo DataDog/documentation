@@ -87,11 +87,11 @@ Create this assertion step to have your mobile app test confirm that the text yo
 {{% /tab %}}
 {{< /tabs >}}
 
-### Interactions
+### Interaction
 
 In addition to automatically recording steps based on your device assertions, you can also manually create steps by clicking **Interaction**. 
 
-{{< img src="mobile_app_testing/test_steps/mobile_app_interaction.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
+{{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
 #### Double tap
 
@@ -176,11 +176,11 @@ By default, mobile app tests wait for a page to be fully loaded before performin
 
 This action allows you to enable or disable Wi-Fi within your test to monitor how your application performs with or without internet access.
 
-{{< img src="mobile_app_testing/test_steps/toggle_wifi.png" alt="Screenshot of the Toggle Wi-Fi interaction step" style="width:60%" >}}
+{{< img src="mobile_app_testing/test_steps/toggle_wifi.png" alt="Toggle Wi-Fi interaction step" style="width:60%" >}}
 
 #### HTTP requests
 
-You can run HTTP requests as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
+You can run HTTP requests, add [assertions](#add-assertions), and [extract variables](#extract-a-variable-from-the-response) as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
 
 **Note**: You can copy an HTTP step from a Synthetic Monitoring Mobile test and re-use it into a Synthetic Monitoring Browser test. However, copying steps from a Browser test to a Mobile test is not supported.
 
@@ -188,7 +188,7 @@ You can run HTTP requests as part of your mobile app tests. If you are using [re
 
 To define your HTTP request:
 
-1. Select **Interaction**, then **Run HTTP Test**. Enter the URL you wish to test.
+1. Enter the URL you wish to test.
 2. Optionally, specify **Advanced Options**:
    
    {{< tabs >}}
@@ -250,12 +250,12 @@ To define your HTTP request:
 
 Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
 
-| Type          | Operator                                                                                               | Value type                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
-| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
+| Type            | Operator                                                                                                               | Value type                                               |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _String_ <br> _[Regex][13]_                              |
+| `response time` | `is less than`                                                                                                         | _Integer (ms)_                                           |
+| `status code`   | `is`, `is not`                                                                                                         | _Integer_                                                |
 
 HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -347,3 +347,4 @@ To edit a mobile recording after it's saved:
 [6]: /synthetics/guide/reusing-browser-test-journeys/
 [7]: https://app.datadoghq.com/synthetics/tests
 [8]: /synthetics/mobile_app_testing/mobile_app_tests/restricted_networks/
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions

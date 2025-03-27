@@ -174,13 +174,13 @@ Create this assertion step to test the number of HTTP requests made to a specifi
 
 </br>
 
-### Interactions
+### Interaction
 
 In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. Then, you can choose an action type to add an interaction.
 
-{{< img src="synthetics/browser_tests/browser_interaction.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
+{{< img src="mobile_app_testing/test_steps/mobile_app_interaction_2.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
-#### Refresh a page
+#### Refresh page
 
 Create this navigation step to have your browser test refresh the current page of the recording.
 
@@ -238,7 +238,7 @@ This additional time is systematically added to **every run** of your browser te
 
 #### Run HTTP test
 
-You can run HTTP requests as part of your browser tests.
+You can run HTTP requests, add [assertions](#add-assertions), and [extract variables](#extract-a-variable-from-the-response) as part of your browser tests.
 
 {{< img src="synthetics/browser_tests/http_request_3.png" alt="HTTP Request step" style="width:70%;" >}}
 
