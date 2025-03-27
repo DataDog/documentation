@@ -1,9 +1,9 @@
 ---
 aliases:
-- /serverless/custom_metrics
-- /serverless/enhanced_lambda_metrics
-- /serverless/real-time-enhanced-metrics
-- /serverless/real_time_enhanced_metrics
+- /ko/serverless/custom_metrics
+- /ko/serverless/enhanced_lambda_metrics
+- /ko/serverless/real-time-enhanced-metrics
+- /ko/serverless/real_time_enhanced_metrics
 title: AWS Lambda 메트릭
 ---
 

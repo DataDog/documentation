@@ -32,7 +32,8 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Application Performance:">}}{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
+{{< whatsnext desc="Application Performance:">}}
+{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
 {{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
