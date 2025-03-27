@@ -149,7 +149,7 @@ See the [AWS Config integration page][6] to launch a CloudFormation template tha
 
 #### Azure
 
-To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14]. Azure Resource Graph captures configuration changes periodically, every 10 minutes.
+To collect resource configuration changes, enable **Resource Collection** for your Azure subscriptions in the [Azure integration tile][14]. Azure Resource Graph captures configuration changes every 10 minutes.
 
 #### Google Cloud Platform
 
