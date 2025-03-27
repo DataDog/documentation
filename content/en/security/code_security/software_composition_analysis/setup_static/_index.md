@@ -24,7 +24,12 @@ SCA can scan dependency management files in your repositories to statically dete
 | Python (poetry) | `poetry.lock`                            |
 | Ruby (bundler)  | `Gemfile.lock`                           |
 
-To set up Datadog Static Code Analysis in-app, navigate to [**Security** > **Code Security**][1].
+You can set up Datadog Static Software Composition Analysis (SCA) in-app through [**Security** > **Code Security**][1].
+
+1. Navigate to the [Security Settings][2] page.
+2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+3. Select where to run static SCA scans.
+4. Complete the remaining steps for your provider.
 
 ## Select where to run static SCA scans
 

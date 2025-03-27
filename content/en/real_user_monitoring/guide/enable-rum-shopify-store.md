@@ -1,6 +1,6 @@
 ---
 title: Enable RUM on Your Shopify Store
-
+private: true
 further_reading:
 - link: '/real_user_monitoring/guide/rum-for-product-analytics/'
   tag: 'Documentation'

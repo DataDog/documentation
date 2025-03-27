@@ -38,6 +38,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/"
   tag: "blog"
   text: "Simplify your SIEM migration to Microsoft Sentinel with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/sled-observability-pipelines/"
+  tag: "blog"
+  text: "How state, local, and education organizations can manage logs flexibly and efficiently using Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -74,7 +77,7 @@ To set up a pipeline:
 1. Select and set up your [source][9].
 1. Select and set up your [destinations][10].
 1. Set up your [processors][11].
-1. Install the Observability Pipelines Worker.
+1. [Install the Observability Pipelines Worker][14].
 1. Enable monitors for your pipeline.
 
 See [Set Up Pipelines][12] for more information.
@@ -152,3 +155,4 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [11]: /observability_pipelines/processors/
 [12]: /observability_pipelines/set_up_pipelines/
 [13]: /observability_pipelines/advanced_configurations/
+[14]: /observability_pipelines/install_the_worker/
