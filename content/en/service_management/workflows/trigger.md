@@ -167,9 +167,9 @@ Run the workflow from your Software Catalog entity:
 
 1. On the [Software Catalog page][14], choose an entity from the list.
 1. Click **Run Workflow** at the top of the side panel.
-1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with software catalog triggers appear in the list.
-2. If your workflow requires input parameters, enter the values as required.
-3. Click **Run** to run the workflow.
+1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with Software Catalog triggers appear in the list.
+1. If your workflow requires input parameters, enter the values as required.
+1. Click **Run** to run the workflow.
 
 ## GitHub triggers
 
