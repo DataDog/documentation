@@ -2,8 +2,6 @@
 title: Notebooks
 aliases:
   - /graphing/notebooks/
-  - /notesbooks_new/
-  - /notesbooks_legacy/
 further_reading:
 - link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
   tag: "Blog"
