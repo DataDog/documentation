@@ -299,7 +299,7 @@ Each target block has the following keys:
 |------------------|-------------|
 | `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
 | `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. See the [Kubernetes selector documentation][3] for details.|
-| `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. See the [Kubernetes selector documentation][3] for details. |
+| `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3]. |
 | `ddTraceVersions` | The [Datadog APM SDK][2] version to use for each language. |
 | `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
 
