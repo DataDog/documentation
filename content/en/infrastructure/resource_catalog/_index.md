@@ -137,7 +137,7 @@ The **Recent Changes** tab displays a 7-day history of all configuration changes
 **Prerequisites**: 
    - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
    - You have [access to the Preview][9].
-   - Optionally, you can also configure change event forwarding through one of the cloud providers listed below.
+   - Optionally, you can configure change event forwarding through one of the following cloud providers.
 
 #### Snapshot Changes
 
