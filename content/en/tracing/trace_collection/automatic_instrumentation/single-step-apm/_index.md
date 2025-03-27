@@ -338,7 +338,7 @@ This configuration:
 
 This configuration creates two targets blocks:
 
-- The first block (nameed `login-service_namespace`):
+- The first block (named `login-service_namespace`):
   - enables APM for services in the namespace `login-service`.
   - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
   - sets environment variables -- `DD_SERVICE`, `DD_ENV`, and `DD_PROFILING_ENABLED` -- for this target group.
