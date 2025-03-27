@@ -249,7 +249,7 @@ If the source code of multiple services is present in the same repository, furth
 
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
-If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
 **Example (schema version v2.2):**
 {{< tabs >}}
