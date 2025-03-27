@@ -180,7 +180,7 @@ This action allows you to enable or disable Wi-Fi within your test to monitor ho
 
 #### HTTP requests
 
-You can run HTTP requests as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your to allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
+You can run HTTP requests as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
 
 **Note**: You can copy an HTTP step from a Synthetic Monitoring Mobile test and re-use it into a Synthetic Monitoring Browser test. However, copying steps from a Browser test to a Mobile test is not supported.
 
@@ -195,8 +195,8 @@ To define your HTTP request:
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Check to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Check to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Follow redirects**: Select this option to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -222,7 +222,7 @@ To define your HTTP request:
    {{% tab "Request Body" %}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.
+   * **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 KB.
 
    {{% /tab %}}
 
@@ -276,8 +276,8 @@ To start parsing a variable, click **Extract a variable from response content**:
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][13].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][13], a [`JSONPath`][11], or a [`XPath`][12].
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with [`regex`][13].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with [`regex`][13], [`JSONPath`][11], or [`XPath`][12].
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 

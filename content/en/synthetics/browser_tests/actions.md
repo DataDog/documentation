@@ -176,7 +176,7 @@ Create this assertion step to test the number of HTTP requests made to a specifi
 
 ### Interactions
 
-In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. 
+In addition to recording steps based on your browser assertions, you can also manually create steps by clicking **Interaction**. Then, you can choose an action type to add an interaction.
 
 {{< img src="synthetics/browser_tests/browser_interaction.png" alt="Choose an action type to add an interaction step" style="width:60%;" >}}
 
@@ -236,7 +236,7 @@ If you know that a page or page element takes more than 60 seconds to load, you 
 
 This additional time is systematically added to **every run** of your browser test's recording.
 
-#### HTTP requests
+#### Run HTTP test
 
 You can run HTTP requests as part of your browser tests.
 
@@ -244,15 +244,15 @@ You can run HTTP requests as part of your browser tests.
 
 To define your HTTP request:
 
-1. Select **Interaction**, then **Run HTTP Test**. Enter the URL you wish to test.
+1. Enter the URL you wish to test.
 2. Optionally, specify **Advanced Options**:
    
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Click to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Click to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * **Follow redirects**: Select this option to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Select this option to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
@@ -264,21 +264,21 @@ To define your HTTP request:
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **AWS Signature**: Add AWS Access Key ID and Secret Access Key.
-   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
+   * **NTLM**: Add NTLM authentication credentials. Supports both NTLMv2 and NTLMv1.
    * **OAuth 2.0**: Select a Grant Type (Client credentials, or Resource owner password).
 
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
+   * **Encode parameters**: Add the names and values of query parameters that require encoding. 
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
    * **Body type**: Select the type of the request body (`text/plain`, `application/json`, `text/xml`, `text/html`, `application/x-www-form-urlencoded`, `application/octet-stream`, `multipart/form-data`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body. For file uploads in Browser HTTP steps, the body size is limited to 3MB, while the request body has a maximum size limit of 50 kilobytes.
+   * **Request body**: Add the content of your HTTP request body. For file uploads in Browser HTTP steps, the body size is limited to 3MB, while the request body has a maximum size limit of 50 KB.
 
    {{% /tab %}}
 
@@ -307,12 +307,12 @@ To define your HTTP request:
 
 Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
 
-| Type          | Operator                                                                                               | Value type                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][13]_                                      |
-| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
+| Type            | Operator                                                                                                               | Value type                                               |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
+| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _String_ <br> _[Regex][13]_                              |
+| `response time` | `is less than`                                                                                                         | _Integer (ms)_                                           |
+| `status code`   | `is`, `is not`                                                                                                         | _Integer_                                                |
 
 HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -320,21 +320,21 @@ HTTP requests can decompress bodies with the following `content-encoding` header
 
 - If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
 
-{{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
-
 You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
+
+{{< img src="synthetics/browser_tests/assertions.png" alt="Define assertions for your browser test to succeed or fail on" style="width:80%;" >}}
 
 ##### Extract a variable from the response
 
-Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Then, you can use the variable in [later steps](#use-variables) of your browser test.
 
-To start parsing a variable, click **Extract a variable from response content**:
+To start parsing a variable, click **Extract a variable from response content**. Then, define the variable:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with a [`regex`][13].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][13], a [`JSONPath`][11], or a [`XPath`][12].
+   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value or parse it with [`regex`][13].
+   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with [`regex`][13], [`JSONPath`][11], or [`XPath`][12].
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
