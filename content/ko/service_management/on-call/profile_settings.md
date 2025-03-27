@@ -10,7 +10,7 @@ title: 프로필 설정
 모바일 기기에서 Datadog On-Call을 사용하려면 <a href="/mobile#installing">Datadog 모바일 앱</a>을 설치하세요.
 </div>
 
-{{ < site-region region="gov" > }}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">On-Call은 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}})에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
