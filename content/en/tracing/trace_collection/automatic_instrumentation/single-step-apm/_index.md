@@ -477,7 +477,7 @@ This configuration enables APM for pods that meet the following criteria:
 {{< /collapse-content >}}
 
 [1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
-[2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
 [3]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
 
 {{% /tab %}}
