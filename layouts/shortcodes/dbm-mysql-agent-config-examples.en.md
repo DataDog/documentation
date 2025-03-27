@@ -85,7 +85,7 @@ To grant `SELECT` permissions to the Datadog user, use one or a combination of t
     ```
 - **Per column basis**:
     ```sql
-    GRANT SELECT ([column name1], [column name 2]) ON [table name] TO datadog@'%';
+    GRANT SELECT ([column name1], [column name 2]) ON [database name].[table name] TO datadog@'%';
     ```
 
 ### Working with hosts through a proxy
