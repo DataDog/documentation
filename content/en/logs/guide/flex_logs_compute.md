@@ -32,7 +32,7 @@ The Flex Logs Controls page provides visualizations so you can assess how often 
 - Top users experiencing slowdowns
 - Top dashboards experiencing slowdowns
 
-### Optimization recommendations
+## Optimization recommendations
 
 Use this information to optimize your usage.
 
@@ -41,7 +41,7 @@ Use this information to optimize your usage.
    - Understand if there are logs they query frequently that should be stored in Standard Indexing instead
 1. **Improve dashboards experiencing slowdowns by:**
    - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex Logs compute usage
-   - Breaking down into smaller dashboards to spread the load
+   - Breaking them down into smaller dashboards to spread the load
    - Reducing the number of concurrent queries
 1. **Consider upgrading your Flex Logs compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
 
