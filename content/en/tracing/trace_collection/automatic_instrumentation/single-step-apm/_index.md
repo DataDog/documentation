@@ -724,11 +724,13 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 
 {{% tab "Kubernetes (Preview)" %}}
 
-#### Use workload selection (recommended)
+#### Using workload selection (recommended)
 
 With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
-#### Disable the Datadog Admission Controller
+#### Using the Datadog Admission Controller
+
+As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
 <div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
