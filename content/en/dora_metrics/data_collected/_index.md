@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-DORA Metrics generates events that have associated metrics and tags.
+DORA Metrics generates events that have associated fields and tags.
 
 | Event Type | Description |
 | :--- | :--- |
@@ -31,20 +31,9 @@ DORA Metrics generates events that have associated metrics and tags.
 |Commit | A commit event is generated for each individual commit included in a deployment. These events contain metadata and are automatically linked to the corresponding deployment.
 |Failure | Captures a failure in production, such as an incident, rollback, or alert.
 
-## DORA metrics
+#### Default tags
 
-DORA Metrics provide the following event-based metrics:
-
-| DORA Metric | Type | Description |
-| :--- | :--- | :--- |
-| `deployment.count` | count | The number of deployments detected by Datadog based on your selected [deployment data source][10].
-| `commit.change_lead_time` | distribution | The age in `seconds` of associated Git commits at the time of deployment.
-| `failure.count` | count | Used for change failure rate with the formula `failure.count/deployment.count`. A big time rollup of at least 1 week is recommended to account for the time difference between deployments and when the impact starts.
-| `failure.time_to_restore` | distribution | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.
-
-### Default tags
-
-All default metrics contain the following tags if any are available:
+All events contain the following tags if any are available:
 
 - `service`
 - `team`
@@ -57,87 +46,76 @@ All default metrics contain the following tags if any are available:
 
 For more information about using tags, see [Getting Started with Tags][6].
 
+## DORA metrics
+
+DORA Metrics provide the following event-based metrics:
+
+
+| Metric                        | Description                |
+|-------------------------------|----------------------------|
+| `Deployment Frequency`          | The number of deployments detected by Datadog based on your selected [deployment data source][10].|
+| `Change Lead Time`          | The age in `seconds` of all associated Git commits at the time of deployment.|
+| `Change Failure Rate`          | Calculated with the formula `Count of Failures/Count of Deployments`. A big time rollup of at least 1 week is recommended to account for the time difference between deployments and when the failure starts.|
+| `Time to Restore`          | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.|
+
+
 ## Change lead time metrics
 
 Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
 
-| Metric | Type | Description |
-|---|---|---|
-| `commit.time_to_pr_ready` | duration | Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review. |
-| `commit.review_time` | duration | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved. |
-| `commit.merge_time` | duration | Time from the last approval until the PR is merged. |
-| `commit.time_to_deploy` | duration | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
-| `commit.deploy_time` | duration | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
+| Metric                     | Description                |
+|----------------------------|----------------------------|
+| `Time to Pr Ready`          | Time from when the commit is created until the PR is ready for review. This metric is only available for commits that were made before the PR was marked as ready for review. |
+| `Review Time`          | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits that were made before the PR is approved. |
+| `Merge Time`          | Time from the last approval until the PR is merged. |
+| `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
+| `Deploy Time`          | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `time_to_deploy` and `deploy_time` metrics are available.
+These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` metrics are available.
 
 **Recommendations :**
 
-Querying at the commit level provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
+Having commit-level granularity provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
 
 **Notes:**
 
 - These metrics are emitted for every commit and not per deployment.
 - There are several edge cases depending on the way the commits were introduced to the deployment, view the [limitations][12].
 
-## Event-specific metrics and attributes
+## Event-specific fieldss
 
-### Deployment metrics
+### Deployment fields
 
-| Metric  | Type   | Description                |
+| Field     | Type   | Description                |
 |------------|--------|----------------------------|
-| `deployment.count` | number | The number of deployments. |
-| `deployment.duration` | number (s) | Duration of the deployment. |
-| `deployment.number_of_commits`        | number      | Count of all commits included in a deployment. |
-| `deployment.avg_change_lead_time`      | number (s)      | The average duration of [change lead time](#commit-metrics) of all commits.  |
-| `deployment.avg_time_to_pr_ready`          | number (s)      | The average duration of [time to PR ready](#commit-metrics) of all commits. |
-| `deployment.avg_review_time`       | number (s)      | The average duration of [review time](#commit-metrics) of all commits. |
-| `deployment.avg_merge_time`       | number (s)      | The average duration of [merge time](#commit-metrics) of all commits. |
-| `deployment.avg_time_to_deploy`       | number (s)      | The average duration of [time to deploy](#commit-metrics) of all commits. |
+| `Duration` | number (s) | Duration of the deployment. |
+| `Avg Change Lead Time`      | number (s)      | The average duration of [change lead time](#commit-fields) of all commits.  |
+| `Avg Time to Pr Ready`          | number (s)      | The average duration of [time to PR ready](#commit-fields) of all commits. |
+| `Avg Review Time`       | number (s)      | The average duration of [review time](#commit-fields) of all commits. |
+| `Avg Merge Time`       | number (s)      | The average duration of [merge time](#commit-fields) of all commits. |
+| `Avg Time to Deploy`       | number (s)      | The average duration of [time to deploy](#commit-fields) of all commits. |
+| `Number of Commits`        | number      | Count of all commits included in a deployment. |
 
-### Deployment attributes
 
-| Attribute name                 | Type   | Description                                                                                                    |
-|--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `deployment.git.commit_sha`     | string | The SHA of the HEAD commit for the deployment. |
-| `deployment.id`                 | string | Unique ID of the deployment. If not provided, one will be randomly generated. |
 
-### Commit metrics
+### Commit fields
 
-| Metric  | Type   | Description                |
+| Field  | Type   | Description                |
 |------------|--------|----------------------------|
-| `commit.count` | number | The number of commits. |
-| `commit.change_lead_time` | number (s) | Duration from the first commit in a change to its deployment. |
-| `commit.deploy_time` | number (s) | Duration from merging a change to its deployment. |
-| `commit.time_to_pr_ready` | number (s) | Duration from commit creation to when the PR is marked as "ready for review." |
-| `commit.review_time` | number (s) | Duration from PR being marked "ready for review" to approval. |
-| `commit.merge_time` | number (s) | Duration from PR approval to merging. |
-| `commit.time_to_deploy` | number (s) | Duration from commit creation to deployment. |
+| `Change Lead Time`       | number (s)       | Duration from the first commit in a change to its deployment. |
+| `Deploy Time`       | number (s)       | Duration from merging a change to its deployment. |
+| `Time to Pr Ready`       | number (s)       | Duration from commit creation to when the PR is marked as "ready for review". |
+| `Review Time`       | number (s)       | Duration from PR being marked "ready for review" to approval. |
+| `Merge Time`       | number (s)       | Duration from PR approval to merging. |
+| `Time to Deploy`       | number (s)       | Duration from commit creation to deployment. |
 
-### Commit attributes
 
-| Attribute name                 | Type   | Description                                                                                                    |
-|--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `commit.sha`     | string | The SHA of the commit. |
+### Failure fields
 
-### Failure metrics
-
-| Metric  | Type   | Description                |
+| Field  | Type   | Description                |
 |------------|--------|----------------------------|
-| `failure.count` | number | The number of failures. |
-| `failure.time_to_restore` | number (s) | The time in between a failure's `started_at` and `finished_at` timestamps. |
+| `Time to Restore`       | number (s)       | The time in between a failure's `started_at` and `finished_at` timestamps. |
 
-### Failure attributes
-
-| Attribute name                 | Type   | Description                                                                                                    |
-|--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
-| `failure.severity`            | string | The severity level of the failure (e.g., SEV-1). |
-
-## Custom Dashboards
- 
-DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs. You can also export the default widgets available in the DORA Metrics page and personalize them to match your workflows and visualization preferences.
-
-{{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
 
 ## Further Reading
 

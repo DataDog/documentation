@@ -132,7 +132,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 - datadog-ci CLI / API is enabled as a failure events data source in DORA settings.
 - The following attributes are required:
-  - `services` or `teams` (at least one must be present)
+  - `services` or `team` (at least one must be present)
   - `started_at`
 
 You can optionally add the following attributes to the failure events:
@@ -140,7 +140,7 @@ You can optionally add the following attributes to the failure events:
 - `id` for identifying failures. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the failure.
 - `severity`
-- `envs` to filter your DORA metrics by environments on the [**DORA Metrics** page][14].
+- `env` to filter your DORA metrics by environment on the [**DORA Metrics** page][14].
 - `repository_url`
 - `commit_sha`
 - `version`
@@ -161,14 +161,14 @@ curl -X POST "https://api.<DD_SITE>/api/v2/dora/incident" \
     "data": {
       "attributes": {
         "services": ["shopist"],
-        "teams": ["shopist-devs"],
+        "team": "shopist-devs",
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
           "commit_sha": "66adc9350f2cc9b250b69abddab733dd55e1a588",
           "repository_url": "https://github.com/organization/example-repository"
         },
-        "envs": ["prod"],
+        "env": "prod",
         "name": "Web server is down failing all requests",
         "severity": "High",
         "version": "v1.12.07"
@@ -187,12 +187,12 @@ EOF
 ## Calculating change failure rate 
 Change failure rate requires both [deployment data][7] and [failure data](#selecting-and-configuring-a-failure-data-source).
 
-Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `failure.count` over `deployment.count` for the same services and/or teams associated to both a failure and a deployment event. 
+Change failure rate is calculated as the percentage of failure events out of the total number of deployments. Datadog divides `Count of Failures` over `Count of Deployments` for the same services and/or teams associated to both a failure and a deployment event. 
 
 ## Calculating time to restore 
 Time to restore is calculated as the duration distribution for *resolved failure* events.
 
-DORA Metrics generates the `time_to_restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `time_to_restore` data points over a selected time frame. 
+DORA Metrics generates the `Time to Restore` metric by recording the start and end times of each failure event. It calculates the time to restore as the median of these `Time to Restore` data points over a selected time frame. 
 
 ## Further Reading
 

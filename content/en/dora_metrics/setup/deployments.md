@@ -153,7 +153,7 @@ To calculate change lead time for a deployment, Datadog runs [`git log`][6] betw
 {{< tabs >}}
 {{% tab "APM Deployment Tracking" %}}
 
-For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `deploy_time` metric is not available.
+For deployments identified through APM Deployment Tracking, the change lead time of a commit is computed from the time of commit creation to when that commit is first seen in a new version. It means that the `Deploy Time` metric is not available.
 
 For service deployments tracked by APM to contribute to change lead time, ensure the following:
 

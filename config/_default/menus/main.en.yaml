@@ -4790,7 +4790,7 @@ menu:
     - name: Failure Data Sources
       url: dora_metrics/setup/failures/
       parent: dora_metrics_setup
-      identifier: dora_metrics_setup_incidents
+      identifier: dora_metrics_setup_failures
       weight: 102
     - name: Data Collected
       url: dora_metrics/data_collected/

@@ -49,7 +49,7 @@ Time to restore service
 
 Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's speed and quality of software delivery.
 
-## Set Up DORA Metrics
+## Set up DORA Metrics
 
 To start configuring data sources to send deployment and failure events to Datadog, see the [Setup documentation][2].
 
@@ -71,11 +71,18 @@ Click **View Failures** to open a side panel with the Change Failure Rate and Ti
 
 ## Use DORA Metrics data
 
-Export your visualization widgets to dashboards or notebooks, add them to existing incidents, and create [metric monitors][5] to trigger alerts on your metrics.
+### Export DORA Metrics widgets
+Export your visualization widgets to dashboards, notebooks, or add them to existing incidents.
 
 {{< img src="dora_metrics/dora_ui_2.png" alt="Click the Export icon to add the visualization widget to an incident or to a dashboard or notebook" style="width:100%;" >}}
 
 Click the **Export** icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
+
+### Create custom dashboards
+ 
+DORA metrics are highly flexible and can be used in custom dashboards to fit your team’s specific needs.
+
+{{< img src="dora_metrics/dashboard.png" alt="An example of a custom DORA Metrics Dashboard" style="width:100%;" >}}
 
 ## Further Reading
 
