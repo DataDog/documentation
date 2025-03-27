@@ -11,9 +11,9 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ReactTimeAgo from 'react-time-ago';
 import QuickFilterBuilder from './components/QuickFilterBuilder';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import BoltIcon from '@mui/icons-material/Bolt';
+import PageWizard from './components/PageWizard';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,8 +45,32 @@ function a11yProps(index: number) {
 }
 
 function App() {
+  const tabParamVals = ['build-errors', 'quick-filter', 'page-wizard'];
+
+  function setTabWithIndex(tabIndex: number) {
+    const tabParamVal = tabParamVals[tabIndex];
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('tab', tabParamVal);
+    window.history.replaceState({}, '', `${window.location.pathname}?${searchParams}`);
+    setCurrentTabIndex(tabIndex);
+  }
+
+  function setTabFromUrl() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const tabKey = searchParams.get('tab');
+
+    if (!tabKey || !tabParamVals.includes(tabKey)) {
+      setCurrentTabIndex(0);
+      return;
+    }
+
+    const tabIndex = tabParamVals.indexOf(tabKey);
+    setCurrentTabIndex(tabIndex);
+  }
+
   const [consoleData, setConsoleData] = useState<AuthorConsoleData | null>(null);
   const [hasErrors, setHasErrors] = useState<boolean>(false);
+  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
 
   useEffect(() => {
     fetch('/data.json')
@@ -58,12 +82,12 @@ function App() {
           setHasErrors(true);
         }
       });
+
+    setTabFromUrl();
   }, []);
 
-  const [currentTabIndex, setCurrentTabIndex] = React.useState(0);
-
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
-    setCurrentTabIndex(currentTabIndex);
+    setTabWithIndex(currentTabIndex);
   };
 
   if (!consoleData) {
@@ -144,7 +168,7 @@ function App() {
           <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={2}>
-          <p>Coming soon to a tarball near you ...</p>
+          <PageWizard />
         </CustomTabPanel>
       </Box>
     </>
