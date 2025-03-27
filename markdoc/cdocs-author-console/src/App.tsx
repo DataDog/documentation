@@ -168,7 +168,7 @@ function App() {
           <QuickFilterBuilder customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
         <CustomTabPanel value={currentTabIndex} index={2}>
-          <PageWizard />
+          <PageWizard customizationConfig={consoleData.customizationConfig} />
         </CustomTabPanel>
       </Box>
     </>
