@@ -382,10 +382,10 @@ This configuration creates two targets blocks:
 
 {{< collapse-content title="Example 3: Instrument different workloads with different tracers" level="h4" >}}
 
-This configuration:
-- enables APM for pods labeled:
-  - `app:db-user`, which run the `db-user` application.
-  - `webserver:routing`, which run the `request-router` application.
+This configuration does the following:
+- enables APM for pods with the following labels:
+  - `app:db-user`, which marks pods running the `db-user` application.
+  - `webserver:routing`, which marks pods running the `request-router` application.
 - instructs Datadog to use the default versions of the Datadog Tracer SDKs.
 - sets several Datadog environment variables to apply to each target group.
 
@@ -456,9 +456,7 @@ This configuration:
 
 {{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h4" >}}
 
-This configuration enables APM for pods that meet the following criteria:
-
-- for all apps except for the ones that have either of the labels `app=app1` or `app=app2`
+This configuration enables APM for all pods except those that have either of the labels `app=app1` or `app=app2`.
 
 {{< highlight yaml "hl_lines=4-28" >}}
    apm:
