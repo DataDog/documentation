@@ -141,7 +141,7 @@ The **Recent Changes** tab displays a 7-day history of all configuration changes
 
 #### Snapshot Changes
 
-Snapshot Changes is a generated event stream captured periodically every 5 - 15 minutes through resource collection and requires no additional setup. For more frequent change updates, follow the links for your cloud providers in the sections below.
+Snapshot Changes is a generated Event Stream captured every 5 - 15 minutes through resource collection and requires no additional setup. For more frequent change updates, follow the links for your cloud providers in the following sections.
 
 #### AWS
 
