@@ -1,6 +1,6 @@
 ---
 aliases:
-- /es/./track_dashboard_usage/
+- /es/track_dashboard_usage/
 disable_toc: false
 further_reading:
 - link: account_management/audit_trail/
