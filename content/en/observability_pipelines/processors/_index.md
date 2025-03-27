@@ -9,6 +9,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">The processors outlined in this documentation are specific to on-premises logging environments. To parse, structure, and enrich cloud-based logs, see the <a href="https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics">Log Management</a> documentation.</div>
+
 Use Observability Pipelines' processors to parse, structure, and enrich your logs. All processors are available for all templates. Set up your processors in the Observability Pipelines UI after you have selected a template, source, and destinations. This is step 5 in the pipeline setup process:
 
 1. Navigate to [Observability Pipelines][1].
@@ -35,10 +37,12 @@ Use Observability Pipelines' processors to parse, structure, and enrich your log
     {{< nextlink href="observability_pipelines/processors/generate_metrics" >}}Generate metrics{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/grok_parser" >}}Grok parser{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/parse_json" >}}Parse JSON{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/parse_xml" >}}Parse XML{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/quota" >}}Quota{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/reduce" >}}Reduce{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/remap_ocsf" >}}Remap to OCSF{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/sample" >}}Sample{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/processors/split_array" >}}Split array{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/processors/sensitive_data_scanner" >}}Sensitive Data Scanner{{< /nextlink >}}
 {{< /whatsnext >}}
 

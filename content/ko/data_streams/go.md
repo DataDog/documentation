@@ -1,4 +1,8 @@
 ---
+further_reading:
+- link: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
+  tag: 블로그
+  text: Confluent Cloud 커넥터를 자동 탐지하고 데이터 스트림 모니터링에서 쉽게 성능 모니터링하기
 title: Go용 데이터 스트림 모니터링 설정
 ---
 
@@ -115,6 +119,16 @@ if ok {
 ```go
     ctx, ok := tracer.SetDataStreamsCheckpointWithParams(datastreams.ExtractFromBase64Carrier(context.Background(), message), options.CheckpointParams{PayloadSize: payloadSize}, "direction:in", "type:kinesis", "topic:kinesis_arn")
 ```
+
+### 모니터링 커넥터
+
+#### Confluent Cloud 커넥터
+{{% dsm_confluent_connectors %}}
+
+## 참고 자료
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ko/agent/
 [2]: https://github.com/DataDog/dd-trace-go
 [3]: https://docs.datadoghq.com/ko/tracing/trace_collection/library_config/go/

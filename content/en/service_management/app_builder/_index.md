@@ -1,6 +1,10 @@
 ---
 title: App Builder
 disable_toc: false
+aliases:
+    - /developers/datadog_apps/
+    - /developers/ui_extensions/
+    - /developers/faq/ui_extensions
 further_reading:
 - link: "/actions/actions_catalog/"
   tag: "Documentation"
