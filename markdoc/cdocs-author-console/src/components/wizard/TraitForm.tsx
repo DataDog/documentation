@@ -4,6 +4,8 @@ import TraitSelector from '../selectors/TraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -73,7 +75,21 @@ function TraitForm({
         <TraitSelector customizationConfig={customizationConfig} onSelect={handleExistingTraitSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
-        New trait form goes here.
+        <p>
+          Trait ID
+          <TextField variant="outlined" placeholder="e.g., prog_lang" fullWidth required />
+        </p>
+        <p>
+          Trait label
+          <TextField variant="outlined" placeholder="e.g., Programming language" fullWidth required />
+        </p>
+        <p>
+          Internal notes (optional)
+          <TextField variant="outlined" fullWidth multiline rows={4} />
+        </p>
+        <Button variant="contained" color="primary" sx={{ alignSelf: 'flex-start', backgroundColor: '#632ca6' }}>
+          Save
+        </Button>
       </CustomTabPanel>
     </div>
   );
