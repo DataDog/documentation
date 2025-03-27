@@ -108,6 +108,8 @@ If diff-aware is not working with the Static Analyzer, ensure that:
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
+**Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
+
 ## Software Composition Analysis
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
@@ -152,6 +154,10 @@ Our SBOM generator, ([`osv-scanner`][7]), extracts dependencies from a `packages
 this file, you can update your project definition to generate it. Follow these [instructions to update your project definition][9] to generate a `packages.lock.json` file.
 
 The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
+
+### No results from Datadog-hosted scans for a repository using `git-lfs`
+
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
 
 ## No vulnerabilities detected by Software Composition Analysis
 
@@ -228,6 +234,9 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
+[13]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/diff-aware.md
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
+[18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines
