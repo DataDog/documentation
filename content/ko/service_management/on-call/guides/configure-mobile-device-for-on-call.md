@@ -92,7 +92,7 @@ Datadog은 안정성을 위해 순환하는 전화번호 세트를 사용하여 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-{{< img src="service_management/oncall/override_dnd_telephony_iOS.png" alt=iOS 기기의 방해 금지 모드를 무시하고 SMS 및 음성통화를 인식할 수 있도록 합니다" style="width:100%;" >}}
+{{< img src="service_management/oncall/override_dnd_telephony_iOS.png" alt="iOS 기기의 방해 금지 모드를 무시하고 SMS 및 음성통화를 인식할 수 있도록 합니다" style="width:100%;" >}}
 
 1. Datadog 모바일 앱에서 **Account** > **Settings** > **Notifications**로 이동합니다.
 
