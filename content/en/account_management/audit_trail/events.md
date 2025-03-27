@@ -381,7 +381,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [21]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Afacet
 [22]: /tracing/trace_explorer/facets/
 [23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Aservice_operation_name
-[24]: /guide/configuring-primary-operation/
+[24]: /tracing/guide/configuring-primary-operation/
 [25]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Asecond_primary_tag
 [26]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [27]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40asset.type%3Asamplerconfig
