@@ -100,7 +100,7 @@ You can enable APM by installing the Agent with either:
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. 
 
-**Note:** For instructions on how to configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
+**Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
