@@ -160,6 +160,28 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{< /tabs >}}
 
+## Upgrade the Worker
+
+To upgrade the Worker to the latest version, run the following command:
+
+{{< tabs >}}
+{{% tab "APT" %}}
+
+```
+sudo apt-get install --only-upgrade observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{% tab "RPM" %}}
+
+```
+sudo yum install --only-upgrade observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ## Uninstall the Worker
 
 If you want to uninstall the Worker, run the following commands:
@@ -168,7 +190,7 @@ If you want to uninstall the Worker, run the following commands:
 {{% tab "APT" %}}
 
 ```
-apt-get remove --purge observability-pipelines-worker
+sudo apt-get remove --purge observability-pipelines-worker
 ```
 
 {{% /tab %}}
