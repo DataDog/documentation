@@ -86,35 +86,36 @@ Using commit-level granularity provides a more accurate view of engineering perf
 
 ### Deployment fields
 
-| Field     | Type   | Description                |
-|------------|--------|----------------------------|
-| `Duration` | number (s) | Duration of the deployment. |
-| `Avg Change Lead Time`      | number (s)      | The average duration of [change lead time](#commit-fields) of all commits.  |
-| `Avg Time to PR Ready`          | number (s)      | The average duration of [time to PR ready](#commit-fields) of all commits. |
-| `Avg Review Time`       | number (s)      | The average duration of [review time](#commit-fields) of all commits. |
-| `Avg Merge Time`       | number (s)      | The average duration of [merge time](#commit-fields) of all commits. |
-| `Avg Time to Deploy`       | number (s)      | The average duration of [time to deploy](#commit-fields) of all commits. |
-| `Number of Commits`        | number      | Count of all commits included in a deployment. |
+| Field     | Description                |
+|------------|----------------------------|
+| `Duration` | Duration of the deployment. |
+| `Avg Change Lead Time`      | The average duration of [change lead time](#commit-fields) of all commits.  |
+| `Avg Time to PR Ready`          | The average duration of [time to PR ready](#commit-fields) of all commits. |
+| `Avg Review Time`       | The average duration of [review time](#commit-fields) of all commits. |
+| `Avg Merge Time`       | The average duration of [merge time](#commit-fields) of all commits. |
+| `Avg Time to Deploy`       | The average duration of [time to deploy](#commit-fields) of all commits. |
+| `Number of Commits`        | Count of all commits included in a deployment. |
 
 
 
 ### Commit fields
 
-| Field  | Type   | Description                |
-|------------|--------|----------------------------|
-| `Change Lead Time`       | number (s)       | Duration from the first commit in a change to its deployment. |
-| `Deploy Time`       | number (s)       | Duration from merging a change to its deployment. |
-| `Time to PR Ready`       | number (s)       | Duration from commit creation to when the PR is marked as ready for review. |
-| `Review Time`       | number (s)       | Duration from PR being marked ready for review to approval. |
-| `Merge Time`       | number (s)       | Duration from PR approval to merging. |
-| `Time to Deploy`       | number (s)       | Duration from commit creation to deployment. |
+| Field  | Description                |
+|------------|----------------------------|
+| `Change Lead Time`       | Duration it takes for a commit to get into production. |
+| `Time to PR Ready`       | Duration from commit creation to when the PR is marked as ready for review. |
+| `Review Time`       | Duration from PR being marked ready for review to approval. |
+| `Merge Time`       | Duration from PR approval to merging. |
+| `Time to Deploy`       | Duration from merging to start of deployment. |
+| `Deploy Time`       | Duration from start of deployment to end of deployment. |
+
 
 
 ### Failure fields
 
-| Field  | Type   | Description                |
-|------------|--------|----------------------------|
-| `Time to Restore`       | number (s)       | The time in between a failure's `started_at` and `finished_at` timestamps. |
+| Field  | Description                |
+|------------|----------------------------|
+| `Time to Restore`       | The time in between a failure's `started_at` and `finished_at` timestamps. |
 
 
 ## Further Reading
