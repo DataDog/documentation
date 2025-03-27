@@ -11,32 +11,15 @@ CloudTrail events lack a standardized format that would allow a generic Logs que
 Here's a sample Logs query that Related Logs automatically generates and runs to find related CloudTrail logs. In this example, the query looks for logs that relate to a specific EC2 instance:
 
 {{< code-block lang="plaintext" >}}
-source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnly:false -status:error (@eventSource:ec2.amazonaws.com AND (@requestParameters.instanceId:"i-0d52853076ed2a357" OR @requestParameters.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @responseElements.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @requestParameters.resourcesSet.items.resourceId:"i-0d52853076ed2a357" OR @responseElements.ReplaceIamInstanceProfileAssociationResponse.iamInstanceProfileAssociation.instanceId:"i-0d52853076ed2a357" OR @responseElements.CreateFleetResponse.fleetInstanceSet.item.instanceIds.item:"i-0d52853076ed2a357" OR @requestParameters.CreateReplaceRootVolumeTaskRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.ModifyInstanceMetadataOptionsRequest.InstanceId:"i-0d52853076ed2a357" OR @serviceEventDetails.instanceIdSet:"i-0d52853076ed2a357" OR @requestParameters.AssociateIamInstanceProfileRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.CreateSnapshotsRequest.InstanceSpecification.InstanceId:"i-0d52853076ed2a357")) 
+source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnly:false -status:error (@eventSource:ec2.amazonaws.com AND (@requestParameters.instanceId:"i-0d52853076ed2a357" OR @requestParameters.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @responseElements.instancesSet.items.instanceId:"i-0d52853076ed2a357" OR @requestParameters.resourcesSet.items.resourceId:"i-0d52853076ed2a357" OR @responseElements.ReplaceIamInstanceProfileAssociationResponse.iamInstanceProfileAssociation.instanceId:"i-0d52853076ed2a357" OR @responseElements.CreateFleetResponse.fleetInstanceSet.item.instanceIds.item:"i-0d52853076ed2a357" OR @requestParameters.CreateReplaceRootVolumeTaskRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.ModifyInstanceMetadataOptionsRequest.InstanceId:"i-0d52853076ed2a357" OR @serviceEventDetails.instanceIdSet:"i-0d52853076ed2a357" OR @requestParameters.AssociateIamInstanceProfileRequest.InstanceId:"i-0d52853076ed2a357" OR @requestParameters.CreateSnapshotsRequest.InstanceSpecification.InstanceId:"i-0d52853076ed2a357"))
 {{< /code-block >}}
 
 ## Prerequisites
 
 - To use Related Logs, you need to set up [CloudTrail logs][1].
 - Related Logs supports the following AWS resources:
-  - `aws_acm`
-  - `aws_cloudfront_distribution`
-  - `aws_ec2_instance`
-  - `aws_ecs_service`
-  - `aws_ecr_repository`
-  - `aws_iam_account`
-  - `aws_iam_group`
-  - `aws_iam_policy`
-  - `aws_iam_role`
-  - `aws_iam_user`
-  - `aws_lambda_function`
-  - `aws_opensearch_domain`
-  - `aws_rds_instance`
-  - `aws_s3_bucket`
-  - `aws_security_group`
-  - `aws_sns_topic`
-  - `aws_sqs_queue`
-  - `aws_subnet`
-  
+  {{< related-logs-supported-resources >}}
+
     To request additional resource types, fill out the [feedback form][4].
 
 ## View related logs
@@ -49,7 +32,7 @@ source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnl
 By default, Related Logs looks through the last two weeks of related CloudTrail logs. To extend the search to a larger timeframe:
 
 1. While viewing a misconfiguration's related logs, click **View All Related Logs**. The search used to populate the list opens in Log Explorer.
-1. In the upper-right corner, change the timeframe of the search. 
+1. In the upper-right corner, change the timeframe of the search.
 
 **Note**: Related Logs only display CloudTrail logs within your retention period. To store CloudTrail logs for an extended period of time in a cost-effective manner, Datadog recommends using [Flex Logs][3].
 
