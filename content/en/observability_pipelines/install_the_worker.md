@@ -162,7 +162,7 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 
 ## Uninstall the Worker
 
-If you want to uninstall the work, run the following commands:
+If you want to uninstall the Worker, run the following commands:
 
 {{< tabs >}}
 {{% tab "APT" %}}
