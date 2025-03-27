@@ -152,6 +152,27 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 For additional examples of security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
+## Software Catalog triggers
+
+To run a workflow from a software catalog entity, you must first add a software catalog trigger to your workflow:
+
+### Add a software catalog trigger to your workflow
+
+1. Add a software catalog trigger to your workflow:
+   - If your workflow doesn't have any triggers, click **Add Trigger** > **Software Catalog**.
+   - If your workflow already has one or more triggers and you're adding the software catalog as an additional trigger, click the **Add Trigger** (lightning bolt) icon and select **Software Catalog**.
+2. Make sure the trigger is connected to a step in the workflow. You can connect the trigger to a step by clicking and dragging the plus icon (**+**) under the trigger.
+3. Save your Workflow.
+4. Click **Publish** to publish your workflow. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
+
+Run the workflow from your Software Catalog entity:
+
+1. On the [Software Catalog page][14], choose an entity from the list
+1. Click **Run Workflow** at the top of the side panel.
+1. In the search modal, enter the name of the workflow you want to run and select it. Only workflows with software catalog triggers appear in the list.
+2. If your workflow requires input parameters, enter the values as required.
+3. Click **Run** to run the workflow.
+
 ## GitHub triggers
 
 <div class="alert alert-info"><strong>Note</strong>: Your GitHub account must have permission to create webhooks to use this feature.</div>
@@ -270,3 +291,4 @@ After you trigger a workflow, the workflow page switches to the workflow's **Run
 [11]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [12]: /service_management/workflows/test_and_debug/#test-a-monitor-trigger
 [13]: /service_management/workflows/test_and_debug/#debug-a-failed-step
+[14]: https://app.datadoghq.com/software
