@@ -19,74 +19,32 @@ To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonito
 
    {{< code-block lang="yaml" filename="datadog-metric-monitor.yaml" collapsible="true" >}}
    apiVersion: datadoghq.com/v1alpha1
-   kind: DatadogDashboard
+   kind: DatadogMonitor
    metadata:
-     name: example-dashboard
+     name: datadog-monitor-test
+     namespace: datadog
    spec:
-     title: Test Dashboard
-     layoutType: ordered
+     query: "avg(last_10m):avg:system.disk.in_use{*} by {host} > 0.5"
+     type: "metric alert"
+     name: "Test monitor made from DatadogMonitor"
+     message: "1-2-3 testing"
      tags:
-       - "team:my_team"
-     templateVariables:
-       - availableValues:
-           - host1
-           - host2
-           - host3
-         name: first
-         prefix: bar-foo
-     notifyList:
-       - foobar@example.com
-     widgets: '[{
-               "id": 2639892738901474,
-               "definition": {
-                   "title": "",
-                   "title_size": "16",
-                   "title_align": "left",
-                   "show_legend": true,
-                   "legend_layout": "auto",
-                   "legend_columns": [
-                       "avg",
-                       "min",
-                       "max",
-                       "value",
-                       "sum"
-                   ],
-                   "type": "timeseries",
-                   "requests": [
-                       {
-                           "formulas": [
-                               {
-                                   "formula": "query1"
-                               }
-                           ],
-                           "queries": [
-                               {
-                                   "name": "query1",
-                                   "data_source": "metrics",
-                                   "query": "avg:system.cpu.user{*} by {host}"
-                               }
-                           ],
-                           "response_format": "timeseries",
-                           "style": {
-                               "palette": "dog_classic",
-                               "order_by": "values",
-                               "line_type": "solid",
-                               "line_width": "normal"
-                           },
-                           "display_type": "line"
-                       }
-                   ]
-               },
-               "layout": {
-                   "x": 0,
-                   "y": 0,
-                   "width": 4,
-                   "height": 2
-               }
-            }]'
+       - "test:datadog"
+     priority: 5
+     options:
+       evaluationDelay: 300
+       includeTags: true
+       locked: false
+       newGroupDelay: 300
+       notifyNoData: true
+       noDataTimeframe: 30
+       renotifyInterval: 1440
+       thresholds:
+         critical: "0.5"
+         warning: "0.28"
    {{< /code-block >}}
 
-   For all available configuration options, see the [Create a new dashboard API reference][5].
+   For all available configuration options, see the [Create a new monitor API reference][5].
 
 2. Deploy your `DatadogMonitor`:
 
@@ -122,7 +80,7 @@ To deploy a Datadog monitor, you can use the Datadog Operator and `DatadogMonito
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /containers/kubernetes/installation?tab=datadogoperator#installation
 [4]: /monitors/types/metric/?tab=threshold
-[5]: /api/latest/dashboards/#create-a-new-dashboard
+[5]: /api/latest/monitors/#create-a-monitor
 [6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-crashloopbackoff.yaml
 [7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-deployment-replicas.yaml
 [8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogmonitor/metric-monitor-imagepullbackoff.yaml

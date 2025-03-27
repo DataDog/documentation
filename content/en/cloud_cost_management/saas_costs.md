@@ -50,7 +50,7 @@ See the respective documentation for your cloud provider:
 
 ### Configure your SaaS accounts
 
-Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click **Configure** on a provider to collect cost data.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
 
@@ -78,7 +78,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
 5. Click **Save**.
 
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
 
@@ -150,6 +150,26 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
+**Snowflake query tags**
+
+[Snowflake's query tags][106] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][107] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+
+For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
+```
+ALTER SESSION SET QUERY_TAG = '{"team": "devops", "application": "CI_job_executor"}';
+```
+{{< img src="cloud_cost/saas_costs/snowflake_query_tags_example.png" alt="Group costs by team and application query tags." style="width:100%" >}}
+
+As a result, the costs of all queries executed with the `team` and `application` query tags are attributable to those concepts.
+
+To use query tags within cost management, ensure the following:
+
+- The `query_tag` string must be JSON parsable. Specifically, this means that the string is processable by the native `PARSE_JSON` function.
+
+- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under **Resources Collected -> Cloud Cost Management -> Collected Query Tags**.
+
+**Note**: Select your query tags with data magnitude in mind. Appropriate query tags are ones that have low to medium group cardinality (for example: team, user, service). Selecting a query tag with high group cardinality (such as unique UUID associated with job executions) can result in bottlenecking issues for both data ingestion and frontend rendering.
+
 **Snowflake CCM object tags**
 
 Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
@@ -166,6 +186,8 @@ Notes:
 [103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
 [105]: https://docs.snowflake.com/en/user-guide/object-tagging
+[106]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[107]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
 
 {{% /tab %}}
 
@@ -239,7 +261,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Costs Explorer** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 

@@ -73,7 +73,7 @@ code_languages:
 
 code_language_ids:
     client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
+    server: Auto-Instrumentation (Server-Side)
     android: Android
     ios: iOS
     expo: Expo
@@ -101,7 +101,6 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
@@ -125,6 +124,10 @@ code_language_ids:
     notebooks_legacy: "Notebooks (Legacy)"
     notebooks_new: "Notebooks (New)"
     envoy: "Envoy"
+    httpd: "Apache HTTP Server"
+    istio: "Istio"
+    kong: "Kong"
+    nginx: "NGINX"
     gcp-service-extensions: "GCP Service Extensions"
 branch: ""
 

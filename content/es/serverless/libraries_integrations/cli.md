@@ -1,7 +1,7 @@
 ---
 aliases:
-- /serverless/datadog_lambda_library/
-- /serverless/serverless_integrations/cli/
+- /es/serverless/datadog_lambda_library/
+- /es/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
 title: Datadog Serverless CLI

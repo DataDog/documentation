@@ -1,7 +1,7 @@
 ---
 aliases:
-- /security_platform/cloud_workload_security/guide/tuning-rules/
-- /security_platform/cloud_security_management/guide/tuning-rules/
+- /es/security_platform/cloud_workload_security/guide/tuning-rules/
+- /es/security_platform/cloud_security_management/guide/tuning-rules/
 title: Ajuste de las señales de seguridad de CSM Threats
 ---
 

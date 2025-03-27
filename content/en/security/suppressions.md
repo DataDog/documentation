@@ -12,6 +12,9 @@ products:
 - name: CSM Threats
   url: /security/threats/
   icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
 
 {{< product-availability >}}
