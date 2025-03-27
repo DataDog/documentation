@@ -59,7 +59,7 @@ The [Test Optimization settings][3] page gives you an overview of the features e
 - **[GitHub Comments][4]**: Show summaries of your test results directly in pull requests.
 - **[Auto Test Retries][5]**: Retry failing tests to avoid failing your build due to flaky tests.
 - **[Early Flake Detection][6]**: Identify flaky tests early in the development cycle.
-- **[Test Impact Analysis][7]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.
+- **[Test Impact Analysis][8]**: Automatically select and run only the relevant tests for a given commit based on the code being changed.
 
 #### Overrides for test services
 
