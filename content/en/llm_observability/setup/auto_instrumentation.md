@@ -194,7 +194,7 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 | [OpenAI](#openai)                       | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
 | [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
-| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.43.0 (CJS), >=5.43.0 (ESM)             |
+| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
