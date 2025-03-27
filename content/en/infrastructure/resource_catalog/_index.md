@@ -145,7 +145,7 @@ Snapshot Changes is a generated Event Stream captured every 5 - 15 minutes throu
 
 #### AWS
 
-See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config. AWS Config captures configuration changes in real time.
+See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config. AWS Config captures configuration changes in real time, or to the extent allowed by your configuration.
 
 #### Azure
 
