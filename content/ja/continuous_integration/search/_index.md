@@ -103,9 +103,9 @@ Pipeline Visibility では、CI ジョブログに基づき AI が生成した�
 [3]: /ja/continuous_integration/pipelines/github/#enable-log-collection
 [4]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection
 [5]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[6]: /ja/account_management/teams/ 
+[6]: /ja/account_management/teams/
 [7]: /ja/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
-[8]: /ja/continuous_integration/pipelines/awscodepipeline/#enable-log-correlation
+[8]: /ja/continuous_integration/pipelines/awscodepipeline/#collect-job-logs
 [9]: /ja/continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /ja/continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /ja/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path

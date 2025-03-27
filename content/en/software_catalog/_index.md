@@ -63,30 +63,23 @@ Built on real-time telemetry and automated metadata collection, Software Catalog
 ## Key terminology
 
 Service
-: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be one of the following:
-
-* URL endpoints grouped together under an API service.
-* DB queries grouped together within one database service.
-* A group of periodic jobs configured in the crond service.
-
-Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. 
-
-In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12], or import additional services through external sources like [Backstage][13] or [ServiceNow][14]. 
+: In APM, a [service][10] is a group of related endpoints, queries, or jobs that perform a piece of work for your application. For example, a service could be a group of endpoints, a group of DB queries, or a group of periodic jobs. Through custom instrumentation in APM, you can create an arbitrary `service`. In practice, microservice-based architecture includes multiple APM services, each measuring the performance of sub-components of the application through [Trace Metrics][2]. In the Software Catalog, you can collect non-instrumented services by declaring them through [metadata][12]. You can also import additional services through external sources like [Backstage][13] or [ServiceNow][14].
 
 System
 : In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
-
-**Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
+: **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
 
 Component
-: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, or an API. 
+: In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, an API, or a queue. 
 
 
 ## Getting started
 
 {{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/software_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/customize/" >}}Customize Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/navigating/" >}}Navigate Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/use_cases/" >}}Learn about common use cases{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/manage/" >}}Manage a component in Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions

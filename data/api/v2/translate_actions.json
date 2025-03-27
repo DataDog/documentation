@@ -23,6 +23,36 @@
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "Get AWS Scan Options"
   },
+  "CreateAwsScanOptions": {
+    "description": "Activate Agentless scan options for an AWS account.",
+    "summary": "Post AWS Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Request object that includes the scan options to create."
+  },
+  "DeleteAwsScanOptions": {
+    "description": "Delete Agentless scan options for an AWS account.",
+    "summary": "Delete AWS Scan Options"
+  },
+  "UpdateAwsScanOptions": {
+    "description": "Update the Agentless scan options for an activated account.",
+    "summary": "Patch AWS Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object that includes the scan options to update."
+  },
+  "ListAwsOnDemandTasks": {
+    "description": "Fetches the most recent 1000 AWS on demand tasks.",
+    "summary": "Get AWS On Demand tasks"
+  },
+  "CreateAwsOnDemandTask": {
+    "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
+    "summary": "Post an AWS on demand task",
+    "request_description": "The definition of the on demand task.",
+    "request_schema_description": "Request object that includes the on demand task to submit."
+  },
+  "GetAwsOnDemandTask": {
+    "description": "Fetch the data of a specific on demand task.",
+    "summary": "Get AWS On Demand task by id"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -508,7 +538,7 @@
     "request_schema_description": "Request for creating a downtime."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime.\n\n**Note**: Downtimes canceled through the API are no longer active, but are retained for approximately two days before being permanently removed. The downtime may still appear in search results until it is permanently removed.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
@@ -1289,6 +1319,54 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "ListApplicationSecurityWAFCustomRules": {
+    "description": "Retrieve a list of WAF custom rule.",
+    "summary": "List all WAF custom rules"
+  },
+  "CreateApplicationSecurityWafCustomRule": {
+    "description": "Create a new WAF custom rule with the given parameters.",
+    "summary": "Create a WAF custom rule",
+    "request_description": "The definition of the new WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the custom rule to create."
+  },
+  "DeleteApplicationSecurityWafCustomRule": {
+    "description": "Delete a specific WAF custom rule.",
+    "summary": "Delete a WAF Custom Rule"
+  },
+  "GetApplicationSecurityWafCustomRule": {
+    "description": "Retrieve a WAF custom rule by ID.",
+    "summary": "Get a WAF custom rule"
+  },
+  "UpdateApplicationSecurityWafCustomRule": {
+    "description": "Update a specific WAF custom Rule.\nReturns the Custom Rule object when the request is successful.",
+    "summary": "Update a WAF Custom Rule",
+    "request_description": "New definition of the WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the Custom Rule to update."
+  },
+  "ListApplicationSecurityWafExclusionFilters": {
+    "description": "Retrieve a list of WAF exclusion filters.",
+    "summary": "List all WAF exclusion filters"
+  },
+  "CreateApplicationSecurityWafExclusionFilter": {
+    "description": "Create a new WAF exclusion filter with the given parameters.\n\nA request matched by an exclusion filter will be ignored by the Application Security WAF product.\nGo to https://app.datadoghq.com/security/appsec/passlist to review existing exclusion filters (also called passlist entries).",
+    "summary": "Create a WAF exclusion filter",
+    "request_description": "The definition of the new WAF exclusion filter.",
+    "request_schema_description": "Request object for creating a single WAF exclusion filter."
+  },
+  "DeleteApplicationSecurityWafExclusionFilter": {
+    "description": "Delete a specific WAF exclusion filter using its identifier.",
+    "summary": "Delete a WAF exclusion filter"
+  },
+  "GetApplicationSecurityWafExclusionFilter": {
+    "description": "Retrieve a specific WAF exclusion filter using its identifier.",
+    "summary": "Get a WAF exclusion filter"
+  },
+  "UpdateApplicationSecurityWafExclusionFilter": {
+    "description": "Update a specific WAF exclusion filter using its identifier.\nReturns the exclusion filter object when the request is successful.",
+    "summary": "Update a WAF exclusion filter",
+    "request_description": "The exclusion filter to update.",
+    "request_schema_description": "Request object for updating a single WAF exclusion filter."
+  },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Cloud Security Management Threats Agent rules.",
     "summary": "Get all CSM Threats Agent rules"
@@ -1408,6 +1486,36 @@
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
+  },
+  "OrderRetentionFilters": {
+    "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
+    "summary": "Order RUM retention filters",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The list of RUM retention filter IDs along with their corresponding type to reorder.\nAll retention filter IDs should be included in the list created for a RUM application."
+  },
+  "ListRetentionFilters": {
+    "description": "Get the list of RUM retention filters for a RUM application.",
+    "summary": "Get all RUM retention filters"
+  },
+  "CreateRetentionFilter": {
+    "description": "Create a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Create a RUM retention filter",
+    "request_description": "The definition of the new RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to create."
+  },
+  "DeleteRetentionFilter": {
+    "description": "Delete a RUM retention filter for a RUM application.",
+    "summary": "Delete a RUM retention filter"
+  },
+  "GetRetentionFilter": {
+    "description": "Get a RUM retention filter for a RUM application.",
+    "summary": "Get a RUM retention filter"
+  },
+  "UpdateRetentionFilter": {
+    "description": "Update a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Update a RUM retention filter",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
     "description": "Delete an existing RUM application in your organization.",
