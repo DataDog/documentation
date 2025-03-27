@@ -141,12 +141,6 @@ The Agent Overlay indicates whether the Agent is installed on your EC2 hosts usi
 
 {{< img src="datadog_cloudcraft/agent_overlay_2.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
 
-## FAQ 
-
-Why are there two Cloudcraft's and which one is right for me ?
-Add Copy here
-
-
 [1]: /cloudcraft
 [2]: /security/cloud_security_management/setup/cloud_integrations?tab=aws
 [3]: /security/cloud_security_management
