@@ -41,7 +41,7 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 ### Requirements
 
-- APM Deployment Tracking is enabled as a Deployment events data source in DORA settings.
+- APM Deployment Tracking is enabled as a Deployment events data source in [DORA settings][19].
 - Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
@@ -51,6 +51,8 @@ For more information about ensuring service deployments that are tracked by APM 
 [16]: /software_catalog/adding_metadata
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
+[19]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{% tab "API or CLI" %}}
@@ -59,7 +61,7 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a deployment events data source in DORA settings.
+- datadog-ci CLI / API is enabled as a deployment events data source in [DORA settings][28].
 - The following attributes are required:
   - `started_at`: The time the deployment started.
   - `finished_at`: The time the deployment finished.
@@ -136,6 +138,8 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 [25]: https://app.datadoghq.com/ci/dora
 [26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [27]: https://app.datadoghq.com/organization-settings/api-keys
+[28]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{< /tabs >}}

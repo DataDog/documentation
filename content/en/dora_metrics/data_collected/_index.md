@@ -27,9 +27,9 @@ DORA Metrics generates events that have associated fields and tags.
 
 | Event Type | Description |
 | :--- | :--- |
-|Deployment | Represents a single code deployment. Each deployment is uniquely identified by a specific combination of env, service, and version tags.
+|Deployment | A single code deployment. Each deployment is uniquely identified by a specific combination of env, service, and version tags.
 |Commit | A commit event is generated for each individual commit included in a deployment. These events contain metadata and are automatically linked to the corresponding deployment.
-|Failure | Captures a failure in production, such as an incident, rollback, or alert.
+|Failure | A failure in production, such as an incident, rollback, or alert.
 
 #### Default tags
 
@@ -48,7 +48,7 @@ For more information about using tags, see [Getting Started with Tags][6].
 
 ## DORA metrics
 
-DORA Metrics provide the following event-based metrics:
+DORA Metrics provide the following fields:
 
 
 | Metric                        | Description                |
@@ -59,9 +59,9 @@ DORA Metrics provide the following event-based metrics:
 | `Time to Restore`          | The time in `seconds` between a failure's `started_at` and `finished_at` timestamps.|
 
 
-## Change lead time metrics
+## Change lead time stages
 
-Datadog breaks down change lead time into the following metrics, which represent the different stages from commit creation to deployment.
+Datadog breaks down change lead time into the following fields, which represent the different stages from commit creation to deployment.
 
 | Metric                     | Description                |
 |----------------------------|----------------------------|
@@ -71,15 +71,15 @@ Datadog breaks down change lead time into the following metrics, which represent
 | `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
 | `Deploy Time`          | Time from start of deployment to end of deployment. This metric is not available if there is no deployment duration information. |
 
-These metrics are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` metrics are available.
+These stages are only computed when the source of the repository metadata is GitHub, and there must be a pull request (PR) associated with a commit, if any. A commit is associated with a PR if the commit is first introduced to the target branch when merging that PR. If a commit has no associated PR, only `Time to Deploy` and `Deploy Time` fields are available.
 
 **Recommendations :**
 
-Having commit-level granularity provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
+Using commit-level granularity provides a more accurate view of engineering performance. At the deployment level, metrics are calculated as an average of averages, which can obscure key insights. This approach treats all deployments equally, even if one contains one commit and another contains ten, misrepresenting their impact.
 
 **Notes:**
 
-- These metrics are emitted for every commit and not per deployment.
+- These fields are measured for every commit and not per deployment.
 - There are several edge cases depending on the way the commits were introduced to the deployment, view the [limitations][12].
 
 ## Event-specific fieldss

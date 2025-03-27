@@ -44,7 +44,7 @@ Failed deployment events, currently interpreted through failure events, are used
 
 To integrate your PagerDuty account with DORA Metrics: 
 
-1. Enable PagerDuty as a failure data source in DORA metrics settings. 
+1. Enable PagerDuty as a failure data source in [DORA settings][111]. 
 
 1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
@@ -120,6 +120,8 @@ The matching algorithm works in the following steps:
 [107]: /integrations/pagerduty/#troubleshooting
 [109]: /monitors/configuration/#multi-alert
 [110]: /monitors/manage/#monitor-tags
+[111]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -130,7 +132,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a failure events data source in DORA settings.
+- datadog-ci CLI / API is enabled as a failure events data source in [DORA settings][15].
 - The following attributes are required:
   - `services` or `team` (at least one must be present)
   - `started_at`
@@ -180,6 +182,8 @@ EOF
 
 [13]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
 [14]: https://app.datadoghq.com/ci/dora
+[15]: https://app.datadoghq.com/ci/settings/dora
+
 
 {{% /tab %}}
 {{< /tabs >}}
