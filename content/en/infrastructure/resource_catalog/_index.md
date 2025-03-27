@@ -153,7 +153,7 @@ To collect resource configuration changes, enable **Resource Collection** for yo
 
 #### Google Cloud Platform
 
-See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription. Google Cloud Asset Inventory captures configuration changes periodically, every 10 minutes.
+See the [Resource changes collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription. Google Cloud Asset Inventory captures configuration changes every 10 minutes.
 
 ## Further reading
 
