@@ -1,5 +1,5 @@
 ---
-title: Auto Multi-line Detection and Aggregation
+title: Auto Multi-line Detection and Aggregation V1
 description: Use the Datadog Agent to detect and aggregate multi-line logs automatically 
 algolia:
   tags: ['advanced log filter']

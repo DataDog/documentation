@@ -16,13 +16,7 @@ algolia:
 
 ## Overview
 
-Auto multi-line Detection allows the agent to detect and aggregate common multi-line logs automatically. 
-
-- **Arbitrary datetime detection**: Automatically detects any datetime format in the first 60 bytes of a log line
-- **Continuous aggregation**: Logs are constantly tested for multi-line patterns
-- **Mixed format support**: Different formats don't influence each other
-- **Multiple pattern support**: Multiple patterns can be applied to the same log file
-- **JSON rejection**: JSON formatted logs are never aggregated
+Auto multi-line detection allows the agent to detect and aggregate common multi-line logs automatically. 
 
 ## Getting Started
 
@@ -50,10 +44,13 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 
 By default, the following features are enabled:
 
-- Automatic datetime aggregation
-- JSON detection and rejection
+- Automatic datetime aggregation: Logs beginning with a datetime format will be used to aggregate logs. 
+- JSON detection and rejection: JSON (structured) logs will never be aggregated. 
 
 You can disable these features with:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs_config:
@@ -61,6 +58,17 @@ logs_config:
     enable_datetime_detection: false
     enable_json_detection: false
 ```
+
+{{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_DATETIME_DETECTION=false
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_DETECTION=false
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Enable multi-line aggregation per integration
 
@@ -75,19 +83,54 @@ logs:
     auto_multi_line_detection: false
 ```
 
+### Supported datetime formats
+
+Auto multi-line detection uses a fuzzy algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. In order to prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
+
+Rule of thumb: Your datetime format should include both a date and time component to be detected. 
+
+Examples of formats that are long enough to be detected:
+```
+2021-03-28 13:45:30
+2023-03-28T14:33:53.743350Z
+Jun 14 15:16:01
+2024/05/16 19:46:15
+```
+
+Examples of formats that do not have enough context to be detected: 
+```
+12:30:2017
+12:30:20
+2024/05/16
+```
+
+
 ## Custom Pattern Configuration
 
-If datetime aggregation isn't sufficient, you can customize the feature in two ways:
+If datetime aggregation isn't sufficient, or your format is too short to be detected automatically, you can customize the feature in two ways:
 
 ### Custom Samples
 
-Configure custom samples in your `datadog.yaml`:
+Configure custom samples:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs_config:
   auto_multi_line_detection_custom_samples:
     - sample: "SEVERE Main main Exception occurred"
 ```
+
+{{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[{"sample": "SEVERE Main main Exception occurred"}]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 This will aggregate logs with similar formats. For example:
 
@@ -101,19 +144,20 @@ java.lang.Exception: Something bad happened!
     at Main.main(Main.java:29)
 ```
 
-**Note**: Most logs with datetime prefixes are automatically detected and require no additional configuration.
-
 #### How Custom Samples Work
 
 Custom samples tokenize the first 60 bytes of a log line and compare tokens linearly:
-- Tokens include: words, whitespace, numbers, special characters, and datetime components
-- 75% token match threshold by default
-- Works best with stable log formats
+- Tokens include: words and their length, whitespace, numbers and their length, special characters, and datetime components.
+- 75% of tokens must match in order for the sample to match by default.
+- Works best with stable log formats (ex - most logs start with a similar prefix)
 - Use regex for complex matching needs
 
 ### Regex Patterns
 
 Configure custom regex patterns:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
 
 ```yaml
 logs_config:
@@ -121,44 +165,97 @@ logs_config:
     - regex: "\\[\\w+\\] Main main Exception occurred"
 ```
 
-You can mix samples and regex patterns to support multiple log formats.
+{{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[{"regex": "\\[\\w+\\] Main main Exception occurred"}]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+You can mix samples and regex patterns to support multiple log formats:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs_config:
+  auto_multi_line_detection_custom_samples:
+    - sample: "Failed to obtain"
+    - regex: "\\d{4}dog.\\s\\w+"
+    - sample: "[ERR] Exception"
+      label: no_aggregate
+```
+
+{{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
+  {"sample": "Failed to obtain"},
+  {"regex": "\\d{4}dog.\\s\\w+"},
+  {"sample": "[ERR] Exception", "label": "no_aggregate"}
+]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **Note**: Previously configured `auto_multi_line_extra_patterns` are automatically supported [when migrating from V1][2].
 
 ## Advanced Customization
 
-Auto multi-line uses a labeled aggregation system with three label types:
+Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step will assign a label to logs, and the aggregation step will aggregate the logs based on the labels that were assigned. 
 
 ### Label Types
 
 1. **start_group**: Beginning of a multi-line log
-   - Flushes existing group if present
-   - Starts new group
-   - Only one group can exist at a time
+   - Flushes any buffered multi-line log if present
+   - Starts new multi-line log
+   - Only one multi-line log can be buffered at a time
 
-2. **aggregate**: Adds to existing group
-   - If no group exists, flushes immediately
+2. **aggregate**: Adds to existing multi-line log
+   - If no multi-line log exists, flushes immediately
    - Default label when nothing else matches
 
 3. **no_aggregate**: Never part of aggregation
-   - Flushes existing group if present
+   - Flushes buffered multi-line log if present
    - Flushes sample immediately
    - Used for JSON logs
 
 ### Label Configuration
 
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
 ```yaml
 logs_config:
   auto_multi_line_detection_custom_samples:
+    # Never aggregate these formats
     - sample: "some service we should not aggregate"
       label: no_aggregate
-    - regex: \w*\s(foo|bar)
+    - regex: \w*\s(data|dog)
       label: no_aggregate
 ```
 
+{{% /tab %}}
+{{% tab "Environment Variables" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
+  {"sample": "some service we should not aggregate", "label": "no_aggregate"},
+  {"regex": "\\w*\\s(data|dog)", "label": "no_aggregate"}
+]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Monitoring and Debugging
 
-Enable additional tagging to monitor multi-line logs:
+You can search for multiline logs or truncated logs by enabling the following settings:
 
 ```yaml
 logs_config:
@@ -166,11 +263,11 @@ logs_config:
   tag_truncated_logs: true
 ```
 
-This adds:
+These settings add the following tags to your logs so you can search for them in the logs explorer:
+
 - `multiline` tag: Shows source (e.g., `auto_multiline`, `multiline_regex`)
 - `truncated` tag: Shows truncation source (e.g., `single_line`, `multi_line`)
 
-**Note**: You can create metrics in Datadog using these tags for easier querying.
 
 ## Configuration Reference
 
