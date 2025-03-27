@@ -70,7 +70,7 @@ Starting from Agent v7.65, the Datadog Agent can collect schema information from
 
 The Agent does not use SELECT to access or read your table data. This permission is needed solely to retrieve schema details, due to how MySQL handles metadata visibility.
 
-To grant `SELECT` permissions to the Datadog user, use one or a combination of the following commands:
+To grant SELECT permissions to a Datadog user, use one or a combination of the following commands:
 - **All databases**:
     ```sql
     GRANT SELECT ON *.* TO datadog@'%';
