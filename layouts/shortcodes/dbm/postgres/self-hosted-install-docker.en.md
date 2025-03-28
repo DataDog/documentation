@@ -27,7 +27,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-**Note**: For Postgres 9.6, add the following settings to the instance config:
+**Note**: For Postgres 9.6, add the following lines to the instance config:
 
 ```json
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
