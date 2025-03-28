@@ -33,7 +33,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
-[2]: /tracing/metrics/runtime_metrics/nodejs/?tab=environmentvariables
+[2]: /tracing/metrics/runtime_metrics/?tab=nodejs
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
