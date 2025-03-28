@@ -67,8 +67,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-5. **Deploy your function**. 
-   Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy --no-gen2` to deploy a 1st Gen Cloud Run Function.
+5. **Deploy your function**. Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy <FUNCTION_NAME> --no-gen2` to deploy a 1st Gen Cloud Run Function.
 
 6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
@@ -85,6 +84,48 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].  |
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9]. |
    | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
+
+## Example Functions
+{{< programming-lang-wrapper langs="nodejs,python" >}}
+{{< programming-lang lang="nodejs" >}}
+```js
+// Example of a simple Cloud Run Function
+// This line must come before importing the logger. 
+const tracer = require('dd-trace').init();
+
+const functions = require('@google-cloud/functions-framework');
+
+function handler(req, res) {
+   tracer.dogstatsd.increment('ninja.func.sent', 1, {'runtime':'nodejs'});
+   return res.send('Welcome to Datadog💜!');
+}
+
+functions.http('httpexample',  handlerWithTrace)
+const handlerWithTrace = tracer.wrap('example-span', handler)
+
+module.exports = handlerWithTrace
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+```python
+# Example of a simple Cloud Run Function
+import functions_framework
+import ddtrace
+from datadog import initialize, statsd
+
+ddtrace.patch(logging=True)
+initialize(**{'statsd_port': 8125})
+
+@ddtrace.tracer.wrap()
+@functions_framework.http
+def dd_log_forwader(request):
+   with ddtrace.tracer.trace('sending_trace') as span:
+      span.set_tag('test', 'ninja')
+      statsd.increment('ninja.func.sent', tags=["runtime:python"])
+   return "Welcome To Datadog! 💜"
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ## What's next?
 
