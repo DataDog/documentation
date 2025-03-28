@@ -1,0 +1,56 @@
+# This workflow automatically checks for broken links in the repository
+# It runs weekly on Sunday at 18:00 UTC and can also be triggered manually
+#
+# Features:
+# - Scans all markdown files in the repository for links
+# - Will ONLY return HTTP status codes 404 and timeout as errors 
+# - Creates a GitHub issue with a detailed report if broken links are found
+# - Uses lychee-action for link checking with a 30-second timeout
+# - Allows up to 10 redirects before considering a link broken
+#
+# The report is generated in markdown format and includes:
+# - List of all broken links
+# - File locations where broken links were found
+
+name: 404 Links Finder
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+  schedule:
+    - cron: "00 18 * * 0"
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write # required for peter-evans/create-issue-from-file
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@master
+        with:
+          args: |
+            --format markdown
+            --accept '100..=403, 405..=599'
+            --no-progress
+            --timeout 30
+            --max-redirects 10
+            --exclude-path "content/es" 
+            --exclude-path "content/fr" 
+            --exclude-path "content/ja" 
+            --exclude-path "content/ko/" 
+            --exclude "file://*" 
+            --exclude-all-private
+            .
+          fail: false
+
+      - name: Create Issue From File
+        if: steps.lychee.outputs.exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Weekly Link Checker Report
+          content-filepath: ./lychee/out.md
+          labels: report, automated issue
