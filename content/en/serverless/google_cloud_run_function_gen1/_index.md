@@ -125,4 +125,3 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [8]: /serverless/google_cloud_run/functions
 [9]: /getting_started/tagging/unified_service_tagging/
-```
