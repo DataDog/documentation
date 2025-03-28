@@ -53,10 +53,8 @@ patch(openai=True)
 patch(langchain=True)
 patch(anthropic=True)
 patch(gemini=True)
-patch(botocore=True)
+patch(botocore=["bedrock-runtime"])
 ```
-
-**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -107,12 +105,16 @@ The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock
 
 The Amazon Bedrock integration instruments the following methods:
 
-- [Chat messages][7]:
+- [Chat messages][17]:
   - `InvokeModel`
-- [Streamed chat messages][8]:
+- [Streamed chat messages][18]:
   -  `InvokeModelWithResponseStream`
+- [Chat messages][15]:
+  - `Converse`
+- [Streamed chat messages][16]:
+  - `ConverseStream`
 
-**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
 ## Anthropic
 
@@ -355,6 +357,10 @@ module.exports = {
 [12]: https://js.langchain.com/docs/how_to/sequence/
 [13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
 [14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[15]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[16]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+[17]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[18]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
 {{% /tab %}}
 {{< /tabs >}}
 
