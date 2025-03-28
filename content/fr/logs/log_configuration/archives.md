@@ -46,7 +46,7 @@ Accédez à la [page **Log Forwarding**][14] pour configurer une archive afin de
 <div class="alert alert-warning">La délégation des rôles AWS n'est pas prise en charge par le site gouvernemental Datadog. En effet, il nécessite l'utilisation de clés d'accès.</div>
 {{< /site-region >}}
 
-Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3. 
+Si ce n'est pas déjà fait, configurez l'[intégration AWS][1] pour le compte AWS associé à votre compartiment S3.
 
 * En général, il est nécessaire de créer un rôle pouvant être utilisé par Datadog pour l'intégration à AWS S3.
 * Pour les comptes AWS GovCloud ou China uniquement, utilisez les clés d'accès comme alternative à la délégation de rôles.
@@ -196,7 +196,7 @@ Seuls les utilisateurs Datadog bénéficiant de l'[autorisation `logs_write_arch
 
 Accédez à la [page Log Forwarding][5], puis sélectionnez **Add a new archive** depuis l'onglet **Archives**.
 
-**Remarques :** 
+**Remarques :**
 * Seuls les utilisateurs de Datadog bénéficiant de l'[autorisation `logs_write_archive`][3] peuvent effectuer cette étape ainsi que la suivante.
 * Pour archiver des logs dans Stockage Blob Azure, une inscription d'application est requise. Consultez les instructions disponibles à la [section relative à l'intégration Azure][6] et définissez le site en haut à droite de la page sur US. Les inscriptions d'application créées exclusivement à des fins d'archivage nécessitent le rôle Storage Blob Data Contributor. Si votre compartiment de stockage est inclus dans un abonnement surveillé via une ressource Datadog, un avertissement s'affiche pour vous prévenir que l'inscription d'application est superflue. Vous pouvez ignorer cet avertissement.
 * Si seules certaines adresses IP peuvent accéder au réseau au sein de votre compartiment, ajoutez les IP de webhook de la [liste de plages d'IP][4] à la liste d'autorisation.
@@ -386,7 +386,7 @@ Datadog prend également en charge le chiffrement côté serveur à l'aide d'une
 
 3. Accédez à l'onglet **Properties** dans votre compartiment S3 et sélectionnez **Default Encryption**. Choisissez l'option "AWS-KMS", sélectionnez l'ARN de votre CMK et cliquez sur Save.
 
-Si vous souhaitez apporter des modifications à des clés KSM existantes, contactez l'[assistance Datadog][3] afin d'obtenir de l'aide.
+Si vous souhaitez apporter des modifications à des clés KMS existantes, contactez l'[assistance Datadog][3] afin d'obtenir de l'aide.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
