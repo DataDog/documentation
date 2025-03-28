@@ -32,12 +32,15 @@ With notification rules, you no longer need to manually set up notifications rec
 
 ### From Monitor Settings
 
-Navigate to [**Monitors > Settings > Notification Rules**][1].
+{{< img src="/monitors/notifications/notification_rules/settings_notification_rules.png" alt="List of notification rules in Monitor Settings" style="width:100%;" >}}
 
-| Action     | Instructions    |
-| ---------  | ----------- |
-| **Edit**   | Click the vertical three-dot menu on the notification rule and select **Edit**. |
-| **Delete** | Click the vertical three-dot menu on the notification rule and select **Delete**. |
+The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
+
+- **Scopes**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
+- **Teams**: Lists the teams that this notification rule is associated with
+- **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
+- **Channels**: Lists the notification channels (Slack, email) that will receive alerts when this rule matches.
+- **Actions**: Provides options to edit or delete each notification rule. Click the vertical three-dot menu on the notification rule and select **Edit** or **Delete**.
 
 ### From an individual monitor
 
@@ -53,7 +56,6 @@ Notification rules apply the recipients to all monitor notifications that match 
 
 {{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
-
 The following table demonstrates how monitors with different tag combinations match notification rules and their resulting notifications. This table shows how:
 1. Multiple notification rules can match a single monitor notification based on its tags.
 2. The AND logic works for multiple tags within a rule.
@@ -63,31 +65,36 @@ The following table demonstrates how monitors with different tag combinations ma
 <table>
     <thead>
         <tr>
-            <th style="width: 20%">Alert Tags</th>
-            <th colspan="6" style="text-align: center">Notification Rules</th>
-            <th style="width: 20%">Notified Handles</th>
+            <th rowspan="2">Monitor alert tags and notifications </th>
+            <th colspan="5" style="text-align: center; border-bottom: 1px solid #ddd; background-color:rgb(98, 92, 92);">Notification Rules</th>
+            <th rowspan="2">Notified Handles</th>
         </tr>
         <tr>
-            <th></th>
-            <th>Rule 1<br><code>team:shopist AND<br>service:web-store</code></th>
-            <th>Rule 2<br><code>team:shopist</code></th>
-            <th>Rule 3<br><code>service:web-store</code></th>
-            <th>Rule 4<br><code>service:web-store AND<br>env:prod</code></th>
-            <th>Rule 5<br><code>service:web-store AND<br>env:dev</code></th>
-            <th>Rule 6<br><code>team:shopist AND<br>service:web-store AND<br>env:prod</code></th>
-            <th></th>
+            <th><code>team:shopist AND<br>service:web-store</code></th>
+            <th><code>team:shopist</code></th>
+            <th><code>service:web-store</code></th>
+            <th><code>service:web-store AND<br>env:prod</code></th>
+            <th><code>service:web-store AND<br>env:dev</code></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><code>team:shopist AND service:web-store</code></td>
+            <td style="background-color:#E8E8E8"></td>
+            <td style="background-color:#E8E8E8"><i>@slack-channel1</i><br><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8"><i>@user@datadoghq.com</i></td>
+            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8">Final Recipients</td>
+        </tr>
+        <tr>
+            <td><code>team:shopist and service:web-store</code><br><i>@user@datadoghq.com</i></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
-            <td style="text-align: center"></td>
-            <td><code>@slack-channel1</code><br><code>@jira-project</code></td>
+            <td><i>@slack-channel1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
         </tr>
         <tr>
             <td><code>team:shopist</code></td>
@@ -96,8 +103,7 @@ The following table demonstrates how monitors with different tag combinations ma
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
-            <td style="text-align: center"></td>
-            <td><code>@jira-project</code></td>
+            <td><i>@jira-project</i></td>
         </tr>
         <tr>
             <td><code>service:web-store</code></td>
@@ -106,42 +112,37 @@ The following table demonstrates how monitors with different tag combinations ma
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
-            <td style="text-align: center"></td>
-            <td><code>@jira-project</code></td>
+            <td><i>@jira-project</i></td>
         </tr>
         <tr>
-            <td><code>service:web-store AND env:prod</code></td>
+            <td><code>service:web-store and env:prod</code></td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
-            <td style="text-align: center"></td>
-            <td><code>@jira-project</code><br><code>@user@datadoghq.com</code></td>
+            <td><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
         </tr>
         <tr>
-            <td><code>service:web-store AND env:dev</code></td>
+            <td><code>service:web-store and env:dev</code></td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
             <td style="text-align: center">{{< X >}}</td>
-            <td style="text-align: center"></td>
-            <td><code>@jira-project</code></td>
+            <td><i>@jira-project</i></td>
         </tr>
         <tr>
-            <td><code>team:shopist AND service:web-store AND env:prod</code></td>
+            <td><code>team:shopist and service:web-store and env:prod</code><br><i>@slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center"></td>
-            <td style="text-align: center">{{< X >}}</td>
-            <td><code>@slack-channel1</code><br><code>@jira-project</code><br><code>@pagerduty-service1</code><br><code>@slack-service1</code><br><code>@user@datadoghq.com</code></td>
+            <td><i>@pagerduty-service1 @slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
         </tr>
     </tbody>
 </table>
-
 
 {{% /collapse-content %}}
 
