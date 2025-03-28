@@ -58,20 +58,14 @@ tile:
   - Category::Metrics
   - Category::Mobile
   - Category::Network
-  - Offering::UI Extension
+  - Offering::Integration
+  - Submitted Data Type::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
   description: iOS、Android、React Native、Unity のためのモバイル可観測性
   media:
-  - caption: ウィジェットを追加して、Datadog から直接 Embrace のクラッシュおよびネットワーキングデータを監視。
-    image_url: images/datadog_dashboard.jpg
-    media_type: image
-  - caption: 影響を受けたすべてのユーザーセッションから、すべてのスタックトレースにアクセスして、アプリおよびセッションの詳細情報と共にクラッシュを調査。さらに、Embrace
-      のユーザーセッションの完全なリプレイに直接アクセスし、詳しいコンテキストを把握できます。
-    image_url: images/datadog_side_panel.jpg
-    media_type: image
   - caption: Embrace のユーザーセッションリプレイにより、ユーザーセッションの技術的および行動的詳細を時間単位で視覚化。問題を手動で再生しなくても、根本原因をすばやく認識できます。
     image_url: images/embrace_session.jpg
     media_type: image
@@ -100,8 +94,6 @@ tile:
 1. 無料トライアルを開始し、[Embrace のドキュメント][2]に従ってください。**Datadog でメトリクスを見る前に、このドキュメントに従う必要があります**。
 1. Embrace インテグレーションのセットアップが完了したら、Datadog に戻り両プラットフォームを接続します。
 1. 認証情報を使用してログインし、Embrace アカウントを認証して Datadog に接続します。
-1. Datadog でダッシュボードを新規作成します。クラッシュまたはネットワーキングメトリクスを含む Embrace のデータを表示するには、Embrace ウィジェットを選択します。
-1. "Details" をクリックすると、Datadog から Embrace の詳細を確認できます。
 
 ## サポート
 

@@ -33,7 +33,7 @@ categories:
 - métricas
 - mobile
 - la red
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -58,23 +58,14 @@ tile:
   - Categoría::Metricas
   - Categoría::Móvil
   - Categoría::Red
-  - Oferta::Extensión de la interfaz de usuario
-  - Sistema operativo compatible::Linux
-  - Sistema operativo compatible::Windows
-  - Sistema operativo compatible::macOS
+  - Offering::Integration
+  - Tipo de datos enviados::Métricas
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Configuración
   description: Observabilidad móvil para iOS, Android, React Native y Unity
   media:
-  - caption: Monitoriza los datos de fallos y de red de Embrace directamente desde
-      Datadog añadiendo widgets.
-    image_url: images/datadog_dashboard.jpg
-    media_type: imagen
-  - caption: Investiga los fallos accediendo a las trazas (traces) de stack tecnológico
-      de cada sesión de usuario afectada, junto con los detalles de la aplicación
-      y la sesión. Para obtener más contexto, navega directamente a la repetición
-      completa de una sesión de usuario en Embrace.
-    image_url: images/datadog_side_panel.jpg
-    media_type: imagen
   - caption: Las repeticiones de sesiones de usuarios de Embrace proporcionan todos
       los detalles técnicos y de comportamiento de cada sesión de usuario en una visualización
       basada en el tiempo. Identifica al instante la causa original, sin tener que
@@ -98,7 +89,7 @@ tile:
   title: Embrace móvil
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
 
 
 ## Información general
@@ -116,12 +107,10 @@ los detalles completos de cada sesión de usuario afectada, sin tener que reprod
 1. Inicia una prueba gratuita y sigue la [documentación de Embrace][2]. **Antes de ver métricas en Datadog, necesitas seguir esta documentación.**
 1. Una vez finalizada la configuración de la integración Embrace, vuelve a Datadog para conectar ambas plataformas.
 1. Autentícate y conecta tu cuenta de Embrace a Datadog iniciando sesión con tus credenciales.
-1. Crea un nuevo dashboard en Datadog. Selecciona el widget de Embrace para visualizar los datos de Embrace con métricas de fallos o de red.
-1. Haz clic en "Details" (Detalles) para profundizar en Embrace desde Datadog.
 
-## Asistencia
+## Ayuda
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://embrace.io
 [2]: https://embrace.io/docs/
