@@ -62,7 +62,7 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
 
    The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires you to set an `OPENAI_API_KEY` in your environment. You can also [customize Ragas](#customizations) to use a different LLM.
 
-2. **Instrument your LLM calls with RAG context information**. Datadog's Ragas integration attempts to extract context information from the prompt variables attached to a span.  
+3. **Instrument your LLM calls with RAG context information**. Datadog's Ragas integration attempts to extract context information from the prompt variables attached to a span.  
 
    **Examples**:
    {{< tabs >}}
@@ -97,9 +97,9 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
    {{% /tab %}}
    {{< /tabs >}}
 
-3. (Optional, but recommended) **Enable sampling**. Datadog traces Ragas score generation. These traces contain LLM spans, which may affect your LLM Observability billing. See [Sampling](#sampling).
+4. (Optional, but recommended) **Enable sampling**. Datadog traces Ragas score generation. These traces contain LLM spans, which may affect your LLM Observability billing. See [Sampling](#sampling).
 
-4. **Run your script and specify enabled Ragas evaluators**. Use the environment variable `DD_LLMOBS_EVALUATORS` to provide a comma-separated list of Ragas evaluators you wish to enable. These evaluators are `ragas_faithfulness`, `ragas_context_precision`, and `ragas_answer_relevancy`.
+5. **Run your script and specify enabled Ragas evaluators**. Use the environment variable `DD_LLMOBS_EVALUATORS` to provide a comma-separated list of Ragas evaluators you wish to enable. These evaluators are `ragas_faithfulness`, `ragas_context_precision`, and `ragas_answer_relevancy`.
    
    For example, to run your script with all Ragas evaluators enabled:
    ```bash
