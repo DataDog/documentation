@@ -53,10 +53,8 @@ patch(openai=True)
 patch(langchain=True)
 patch(anthropic=True)
 patch(gemini=True)
-patch(botocore=True)
+patch(botocore=["bedrock-runtime"])
 ```
-
-**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -111,8 +109,12 @@ The Amazon Bedrock integration instruments the following methods:
   - `InvokeModel`
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
+- [Chat messages][27]:
+  - `Converse`
+- [Streamed chat messages][28]:
+  - `ConverseStream`
 
-**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
 ## Anthropic
 
@@ -180,6 +182,8 @@ The Vertex AI integration instruments the following methods:
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
+[27]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[28]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -355,6 +359,7 @@ module.exports = {
 [12]: https://js.langchain.com/docs/how_to/sequence/
 [13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
 [14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+
 {{% /tab %}}
 {{< /tabs >}}
 
