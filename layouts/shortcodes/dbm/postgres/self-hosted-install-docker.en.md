@@ -6,7 +6,7 @@ The examples below show how to use [Docker Labels][2] and [Autodiscovery Templat
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your [command line][4]. Replace the values to match your account and environment:
+Run the following command from your [command line][4] to start the Agent. Replace the placeholder values with those for your account and environment.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
