@@ -69,6 +69,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 5. **Deploy your function**. Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy <FUNCTION_NAME> --no-gen2` to deploy a 1st Gen Cloud Run Function.
 
+   For more information read [this Google doc][11] for more flags for the gcloud command. 
+
 6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
    | Name | Value |
@@ -168,3 +170,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [8]: /serverless/google_cloud_run/functions
 [9]: /getting_started/tagging/unified_service_tagging/
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
+[11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
