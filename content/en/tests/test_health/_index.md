@@ -34,7 +34,7 @@ Test Health provides insights at the repository and test service levels, focusin
 - **Percentage of pipelines saved due to auto-retries**: `(Number of CI pipelines saved due to auto-retries / Total number of CI pipelines with tests)`.
 
 ### Time Saved in CI
-- **Saved time due to auto-retries**: Total duration of passed test sessions containing tests with `@test.is_retry:true` and `@test.is_new:false`. Individual test retries will have a minor impact on total duration saved.
+- **Saved time due to auto-retries**: Total duration of passed test sessions in which some tests initially failed but later passed due to the [Auto Test Retry][1] feature. These tests are tagged with `@test.is_retry:true` and `@test.is_new:false`.
 - **Saved time due to Test Impact Analysis**: Total duration indicated by `@test_session.itr.time_saved`.
 
 ## Common Use Cases
