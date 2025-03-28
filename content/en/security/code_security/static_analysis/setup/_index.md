@@ -4,6 +4,7 @@ description: Learn about Datadog Static Code Analysis to scan code for quality i
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
+- /security/code_security/static_analysis/circleci_orbs/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
