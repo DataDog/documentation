@@ -105,13 +105,13 @@ The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock
 
 The Amazon Bedrock integration instruments the following methods:
 
-- [Chat messages][17]:
+- [Chat messages][7]:
   - `InvokeModel`
-- [Streamed chat messages][18]:
+- [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
-- [Chat messages][15]:
+- [Chat messages][27]:
   - `Converse`
-- [Streamed chat messages][16]:
+- [Streamed chat messages][28]:
   - `ConverseStream`
 
 **Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
@@ -182,6 +182,8 @@ The Vertex AI integration instruments the following methods:
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
+[27]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[28]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
@@ -357,10 +359,7 @@ module.exports = {
 [12]: https://js.langchain.com/docs/how_to/sequence/
 [13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
 [14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
-[15]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
-[16]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
-[17]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
-[18]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModelWithResponseStream.html
+
 {{% /tab %}}
 {{< /tabs >}}
 
