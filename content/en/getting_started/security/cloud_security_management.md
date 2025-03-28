@@ -1,5 +1,7 @@
 ---
 title: Getting Started with Cloud Security Management
+aliases:
+- /getting_started/cloud_security_management
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"

@@ -8,6 +8,7 @@ aliases:
     - /security_platform/getting_started/
     - /security_platform/cloud_siem/getting_started/
     - /security/cloud_siem/getting_started/
+    - /getting_started/cloud_siem
 further_reading:
     - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
       tag: "Learning Center"
