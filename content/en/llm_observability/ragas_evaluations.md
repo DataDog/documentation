@@ -60,7 +60,7 @@ Datadog's Ragas evaluations require `ragas` v0.1+ and `ddtrace` v3.0.0+.
    pip install ragas==0.1.21 openai ddtrace>=3.0.0
    {{< /code-block >}}
 
-   The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires you to set an `OPENAI_API_KEY` in your environment. You can also [customize Ragas](#customizations) to use a different LLM.
+   The Ragas integration automatically runs evaluations in the background of your application. By default, Ragas uses OpenAI's GPT-4 model for evaluations, which requires you to set an `OPENAI_API_KEY` in your environment. You can also [customize Ragas](#customization) to use a different LLM.
 
 2. **Instrument your LLM calls with RAG context information**. Datadog's Ragas integration attempts to extract context information from the prompt variables attached to a span.  
 
@@ -187,9 +187,9 @@ Use the `LLMObs.flush()` command to guarantee all traces and evaluations are flu
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/explodinggradients/ragas
-[2]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/faithfulness/
-[3]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/answer_relevance/
-[4]: https://docs.ragas.io/en/latest/concepts/metrics/available_metrics/context_precision/
-[5]: https://docs.ragas.io/en/stable/howtos/customizations/
+[2]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/faithfulness/
+[3]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/answer_relevance/
+[4]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/context_precision/
+[5]: https://docs.ragas.io/en/v0.1.21/howtos/customisations/
 [6]: https://app.datadoghq.com/llm/traces
 [7]: /llm_observability/guide/ragas_quickstart
