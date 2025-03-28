@@ -212,7 +212,7 @@ Installing the Datadog Agent also installs the Postgres check, which is required
 
 1. If you haven't already installed the Agent, see the [Agent installation instructions][8] then come back here to complete the configuration process for the Postgres check.
 
-2. Follow the instructions below based on the Agent deployment option you selected in step 1.
+2. Follow the instructions below based on how you installed the Agent.
 
 <!-- Deployment options -->
 {{< tabs >}}
