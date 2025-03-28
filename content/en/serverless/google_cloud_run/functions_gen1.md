@@ -67,7 +67,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-5. **Deploy your function**.
+5. **Deploy your function**. 
+   Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy --no-gen2` to deploy a 1st Gen Cloud Run Function.
 
 6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
@@ -76,7 +77,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    | `DD_API_KEY` | Your [Datadog API key][1]. |
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
 
-7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Datadog Google Cloud Platform integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in Azure. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
+7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Datadog Google Cloud Platform integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in GC. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
    | Name | Value |
    | ---- | ----- |
@@ -125,3 +126,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [7]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
 [8]: /serverless/google_cloud_run/functions
 [9]: /getting_started/tagging/unified_service_tagging/
+[10]: https://cloud.google.com/functions/1stgendocs/deploy

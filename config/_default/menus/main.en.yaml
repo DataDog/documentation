@@ -3150,10 +3150,14 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
-    - name: Functions
-      url: serverless/google_cloud_run/functions
+    - name: Functions Gen 1
+      url: serverless/google_cloud_run/functions_gen1
       parent: serverless_gcr
       weight: 701
+    - name: Functions Gen 2
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 702
     - name: Glossary
       url: serverless/glossary
       parent: serverless
