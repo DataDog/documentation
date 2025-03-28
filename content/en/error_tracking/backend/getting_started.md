@@ -31,7 +31,7 @@ The following examples show how it works for each deployment type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-For an Ubuntu host:
+For a Linux host:
 
 1. Run the one-line installation command:
 
@@ -40,8 +40,7 @@ For an Ubuntu host:
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5], `<YOUR_DD_SITE>` with your [Datadog site][6], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
-2. Start a new shell session.
-3. Restart the services on the host or VM.
+2. Restart the services on the host or VM.
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /getting_started/site/
@@ -82,13 +81,13 @@ To enable Single Step Instrumentation with Helm:
    kubectl create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY>
    ```
 3. Create `datadog-values.yaml` and add the following configuration:
-   ```
+   ```yaml
    agents:
-      containers:
-        agent:
-          env:
-            - name: DD_CORE_AGENT_ENABLED
-              value: "false"
+     containers:
+       agent:
+         env:
+           - name: DD_CORE_AGENT_ENABLED
+             value: "false"
    datadog:
      processAgent:
        enabled: false
@@ -142,18 +141,18 @@ Install the Datadog Agent by following the [relevant documentation][11].
 To configure the agent for Error Tracking Backend only, you must be running Agent v7.61+.
 
 {{< tabs >}}
-{{% tab "Host " %}}
+{{% tab "Linux host or VM" %}}
 
 1. Open the [datadog.yaml configuration file][12].
 2. Add `core_agent` and `apm_config` as top-level attributes anywhere in the configuration file with the following settings:
 
-    ```yaml
-    core_agent:
-        enabled: false
-    apm_config:
-        error_tracking_standalone:
-            enabled: true
-    ```
+   ```yaml
+   core_agent:
+     enabled: false
+   apm_config:
+     error_tracking_standalone:
+       enabled: true
+   ```
 
 3. [Restart the Agent][13].
 
@@ -207,12 +206,224 @@ datadog:
 ```
 
 {{% /tab %}}
-
 {{< /tabs >}}
 
 #### Instrument your application
 
 Follow the relevant [documentation][14] to set up your application to send traces using one of the official Datadog tracing libraries.
+
+### Advanced options
+
+#### Enable Infrastructure Monitoring
+
+Update the Datadog Agent configuration to enable [Infrastructure monitoring][15].
+
+{{< tabs >}}
+{{% tab "Linux host or VM" %}}
+
+If your agent is deployed on a Linux host, the configuration update depends on the method you used to install the agent.
+
+{{< collapse-content title="Single Step Instrumentation" level="h5" >}}
+For a Datadog agent installed using the one-line installation command:
+
+1. Open the [datadog.yaml configuration file][16].
+2. Remove the `enable_payloads` top-level attribute:
+
+   ```diff
+   - enable_payloads:
+   -   series: false
+   -   events: false
+   -   service_checks: false
+   -   sketches: false
+
+     apm_config:
+       enabled: true
+       error_tracking_standalone:
+         enabled: true
+   ```
+
+3. [Restart the Agent][17].
+{{< /collapse-content >}}
+
+{{< collapse-content title="Using Datadog tracing libraries" level="h5" >}}
+For a Datadog agent configured manually for Backend Error Tracking:
+
+1. Open the [datadog.yaml configuration file][16].
+2. Remove the `core_agent` top-level attribute:
+
+   ```diff
+   - core_agent:
+   -   enabled: false
+     apm_config:
+       error_tracking_standalone:
+         enabled: true
+   ```
+
+3. [Restart the Agent][17].
+{{< /collapse-content >}}
+
+[16]: /agent/configuration/agent-configuration-files
+[17]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+If your agent is deployed in Kubernetes, you need to update its configuration in Datadog Operator or Helm depending on the method you used to install the agent.
+
+{{< collapse-content title="Helm" level="h5" >}}
+For a Datadog agent installed with Helm:
+
+1. Update your datadog-values.yaml file
+
+   ```diff
+     agents:
+       containers:
+         agent:
+           env:
+             [...]
+   -         - name: DD_CORE_AGENT_ENABLED
+   -           value: "false"
+     datadog:
+   -   processAgent:
+   -     enabled: false
+   -     containerCollection: false
+     apiKeyExistingSecret: datadog-secret
+     site: <DATADOG_SITE>
+     tags:
+       - env:<AGENT_ENV>
+     apm:
+       errorTrackingStandalone:
+         enabled: true
+       # Required to enable Single-Step Instrumentation
+       instrumentation:
+         enabled: true
+         libVersions:
+           java: "1"
+           dotnet: "3"
+           python: "2"
+           js: "5"
+           php: "1"
+   ```
+
+2. After making your changes, upgrade your Datadog Helm chart
+   ```shell
+   helm upgrade -f datadog-values.yaml datadog-agent datadog/datadog
+   ```
+{{< /collapse-content >}}
+
+{{< collapse-content title="Datadog Operator" level="h5" >}}
+Coming soon
+{{< /collapse-content >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Enable APM
+
+Update the Datadog Agent configuration to enable [APM][18].
+
+{{< tabs >}}
+{{% tab "Linux host or VM" %}}
+
+If your agent is deployed on a Linux host, the configuration update depends on the method you used to install the agent.
+
+{{< collapse-content title="Single Step Instrumentation" level="h5" >}}
+For a Datadog agent installed using the one-line installation command:
+
+1. Open the [datadog.yaml configuration file][19].
+2. Remove the `enable_payloads` and `error_tracking_standalone` attributes:
+
+   ```diff
+   - # Configuration to prevent sending metric data so that hosts don't show up in Datadog.
+   - enable_payloads:
+   -   series: false
+   -   events: false
+   -   service_checks: false
+   -   sketches: false
+
+     # Configuration to enable the collection of errors so they show up in Error Tracking.
+     apm_config:
+       enabled: true
+   -   error_tracking_standalone:
+   -     enabled: true
+   ```
+
+3. [Restart the Agent][20].
+{{< /collapse-content >}}
+
+{{< collapse-content title="Using Datadog tracing libraries" level="h5" >}}
+For a Datadog agent configured manually for Backend Error Tracking:
+
+1. Open the [datadog.yaml configuration file][19].
+2. Remove the `core_agent` and `error_tracking_standalone` attributes:
+
+   ```diff
+   - core_agent:
+   -   enabled: false
+     apm_config:
+   +   enabled: true
+   -   error_tracking_standalone:
+   -     enabled: true
+   ```
+
+3. [Restart the Agent][20].
+{{< /collapse-content >}}
+
+[19]: /agent/configuration/agent-configuration-files
+[20]: /agent/configuration/agent-commands/#restart-the-agent
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+
+If your agent is deployed in Kubernetes, you need to update its configuration in Datadog Operator or Helm depending on the method you used to install the Agent.
+
+{{< collapse-content title="Helm" level="h5" >}}
+For a Datadog Agent installed with Helm:
+
+1. Update your datadog-values.yaml file
+
+   ```diff
+     agents:
+       containers:
+         agent:
+           env:
+             [...]
+   -         - name: DD_CORE_AGENT_ENABLED
+   -           value: "false"
+     datadog:
+   -   processAgent:
+   -     enabled: false
+   -     containerCollection: false
+     apiKeyExistingSecret: datadog-secret
+     site: <DATADOG_SITE>
+     tags:
+       - env:<AGENT_ENV>
+     apm:
+   -   errorTrackingStandalone:
+   -     enabled: true
+       # Required to enable Single-Step Instrumentation
+       instrumentation:
+         enabled: true
+         libVersions:
+           java: "1"
+           dotnet: "3"
+           python: "2"
+           js: "5"
+           php: "1"
+   ```
+
+2. After making your changes, upgrade your Datadog Helm chart
+   ```shell
+   helm upgrade -f datadog-values.yaml datadog-agent datadog/datadog
+   ```
+{{< /collapse-content >}}
+
+{{< collapse-content title="Datadog Operator" level="h5" >}}
+Coming soon
+{{< /collapse-content >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -224,3 +435,5 @@ Follow the relevant [documentation][14] to set up your application to send trace
 [4]: https://app.datadoghq.com/error-tracking/settings/setup/backend
 [11]: /agent
 [14]: /tracing/trace_collection/automatic_instrumentation/dd_libraries
+[15]: /infrastructure
+[18]: /tracing

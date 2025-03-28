@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 It is critical for your system's health to consistently monitor the errors that Datadog collects. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting.
 
