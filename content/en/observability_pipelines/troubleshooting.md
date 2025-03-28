@@ -53,9 +53,16 @@ These are the batch parameters for each destination:
 
 See [event batching][6] for more information.
 
+## Duplicate Observability Pipelines logs
+
+If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you need to exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. Otherwise, you get duplicate Observability Pipelines logs because the Worker also sends logs to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
 [4]: /observability_pipelines/set_up_pipelines/#set-up-a-pipeline
 [5]: /observability_pipelines/advanced_configurations/#bootstrap-options
 [6]: /observability_pipelines/destinations/#event-batching-intro
+[7]: https://app.datadoghq.com/logs/
+[8]: /containers/docker/log/?tab=containerinstallation#linux
+[9]: /containers/guide/container-discovery-management/?tab=helm#setting-environment-variables
