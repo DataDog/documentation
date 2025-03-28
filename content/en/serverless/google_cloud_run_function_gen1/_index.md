@@ -3,7 +3,7 @@ title: Install Serverless Monitoring for Google Cloud Run Functions Gen 1
 ---
 
 ## Overview
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1(formerly known as cloud functions) . For Gen 2 support please go to [this doc][8] and to collect additional metrics, install the [Datadog Google Cloud Platform integration][6].
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions). For Gen 2 support, see [Google Cloud Run Functions][8], and to collect additional metrics, install the [Datadog Google Cloud Platform integration][6].
 
 ## Setup
 
