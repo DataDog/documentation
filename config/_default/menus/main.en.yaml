@@ -115,6 +115,7 @@ menu:
       url: getting_started/integrations/
       parent: getting_started
       weight: 12
+    - name: AWS
       identifier: getting_started_with_aws
       url: getting_started/integrations/aws/
       weight: 1201
