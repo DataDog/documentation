@@ -10,11 +10,13 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions ([formerly Cloud Functions][1]) through the [Google Cloud integration][1].
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the datadog agent in a sidecar container.
 
-<div class="alert alert-info">Datadog Serverless Monitoring is supported for Cloud Run functions (2nd gen). If you want to monitor 1st gen functions, contact your technical account manager.</div>
+This page is **only for 2nd Gen Cloud Run Functions**, for 1st Gen support, see [1st Gen Functions][2], and to collect additional metrics, install the [Google Cloud integration][3].
 
 [1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
+[2]:/serverless/google_cloud_run/functions_gen1
+[3]:/integrations/google_cloud_platform/
 
 ## Setup
 
