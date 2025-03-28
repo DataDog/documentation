@@ -13,6 +13,7 @@ export interface TraitConfig {
   internal_notes?: string;
 }
 
+// TODO: DRY up tabs across the console
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -51,6 +52,13 @@ function TraitForm({
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
+  const [newTraitConfig, setNewTraitConfig] = useState<TraitConfig>({
+    id: '',
+    label: '',
+    internal_notes: ''
+  });
+  const [newTraitError, setNewTraitError] = useState<string | null>(null);
+
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
     setCurrentTabIndex(currentTabIndex);
   };
@@ -59,7 +67,27 @@ function TraitForm({
     onUpdate({ traitId });
   };
 
-  const handleNewTraitSave = () => {};
+  const handleNewTraitSave = () => {
+    let error: string | null = null;
+
+    console.log('Handling new trait save, newTraitConfig: ', newTraitConfig);
+
+    if (!newTraitConfig.id || !newTraitConfig.label) {
+      error = 'Trait ID and trait label are required.';
+    } else if (customizationConfig.traitsById[newTraitConfig.id]) {
+      error = 'Trait ID is already taken. Did you mean to select an existing trait?';
+    } else {
+      onUpdate({
+        traitId: newTraitConfig.id,
+        newTraitConfig
+      });
+      setNewTraitHasChanges(false);
+    }
+
+    setNewTraitError(error);
+  };
+
+  const [newTraitHasChanges, setNewTraitHasChanges] = useState<boolean>(false);
 
   return (
     <div>
@@ -79,17 +107,64 @@ function TraitForm({
       <CustomTabPanel value={currentTabIndex} index={1}>
         <p>
           Trait ID
-          <TextField variant="outlined" placeholder="e.g., prog_lang" fullWidth required />
+          <TextField
+            value={newTraitConfig.id}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewTraitHasChanges(true);
+              setNewTraitConfig({
+                ...newTraitConfig,
+                id: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., prog_lang"
+            fullWidth
+            required
+          />
         </p>
         <p>
           Trait label
-          <TextField variant="outlined" placeholder="e.g., Programming language" fullWidth required />
+          <TextField
+            value={newTraitConfig.label}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewTraitHasChanges(true);
+              setNewTraitConfig({
+                ...newTraitConfig,
+                label: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., Programming language"
+            fullWidth
+            required
+          />
         </p>
         <p>
           Internal notes (optional)
-          <TextField variant="outlined" fullWidth multiline rows={4} />
+          <TextField
+            value={newTraitConfig.internal_notes}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewTraitHasChanges(true);
+              setNewTraitConfig({
+                ...newTraitConfig,
+                internal_notes: e.target.value
+              });
+            }}
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={4}
+          />
         </p>
-        <Button variant="contained" color="primary" sx={{ alignSelf: 'flex-start', backgroundColor: '#632ca6' }}>
+        {newTraitError && <div style={{ color: 'red' }}>{newTraitError}</div>}
+
+        <Button
+          onClick={handleNewTraitSave}
+          disabled={!newTraitHasChanges}
+          variant="contained"
+          color="primary"
+          sx={{ alignSelf: 'flex-start', backgroundColor: '#632ca6' }}
+        >
           Save
         </Button>
       </CustomTabPanel>
