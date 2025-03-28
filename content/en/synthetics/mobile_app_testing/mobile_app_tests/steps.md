@@ -328,7 +328,7 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 To edit a mobile recording after it's saved:
 
-- Navigate to [Synthetics > Tests.][7]
+- Navigate to [Synthetic Monitoring > Tests.][7]
 - Click on a previously saved mobile test.
 - Click the video icon in the left hand panel, then click "edit recording".
 - Select multiple or single steps for deletion or replay, then click **Save & Quit**.
@@ -347,4 +347,6 @@ To edit a mobile recording after it's saved:
 [6]: /synthetics/guide/reusing-browser-test-journeys/
 [7]: https://app.datadoghq.com/synthetics/tests
 [8]: /synthetics/mobile_app_testing/mobile_app_tests/restricted_networks/
+[11]: https://restfulapi.net/json-jsonpath/
+[12]: https://www.w3schools.com/xml/xpath_syntax.asp
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
