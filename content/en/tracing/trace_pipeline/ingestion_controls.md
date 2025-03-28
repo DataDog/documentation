@@ -164,14 +164,14 @@ Find below the minimum tracing library version required for the feature:
 
 Language  | Minimum version required
 ----------|--------------------------
-Java      | [v1.34.0][5]
-Go        | [v1.64.0][6]
-Python    | [v.2.9.0][10]
-Ruby      | [v2.0.0][11]
-Node.js   | [v5.16.0][12]
-PHP       | [v1.4.0][15]
-.NET      | [v.2.53.2][13]
-C++       | [v0.2.2][14]
+Java      | v1.34.0
+Go        | v1.64.0
+Python    | v.2.9.0
+Ruby      | v2.0.0
+Node.js   | v5.16.0
+PHP       | v1.4.0
+.NET      | v2.53.2
+C++       | v0.2.2
 
 ## Managing Datadog Agent ingestion configuration
 
@@ -198,7 +198,7 @@ If sampling rules are set in multiple locations, the following precedence rules 
 1. [Locally configured sampling rules][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [Remotely configured global sampling rate][8]
 1. [Locally configured global sampling rate][8] (`DD_TRACE_SAMPLE_RATE`)
-1. [rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_MAX_TPS`)
+1. [Rates from the trace agent controlled indirectly with Agent settings](#managing-datadog-agent-ingestion-configuration) remotely or locally (`DD_APM_MAX_TPS`)
 
 To phrase it another way, Datadog uses the following precedence rules:
 - Tracer settings > Agent settings

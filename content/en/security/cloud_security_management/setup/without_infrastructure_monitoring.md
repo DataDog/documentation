@@ -2,7 +2,7 @@
 title: Setting Up CSM without Infrastructure Monitoring
 ---
 
-In addition to setting up CSM with or without an Agent, you can also set it up without Infrastructure Monitoring.
+In addition to setting up Cloud Security Management (CSM) with or without an Agent, you can also set it up without Infrastructure Monitoring.
 
 ## Set up CSM on your AWS account
 
@@ -11,8 +11,9 @@ In addition to setting up CSM with or without an Agent, you can also set it up w
 
    If you don't see the required account, add it by clicking **Add AWS Account(s)** and following the onscreen prompts.
 1. To turn off infrastructure monitoring on the selected account, under the account number, navigate to the **Metric Collection** tab, then click the **disable metric collection** link. Then, click **Disable Metric Collection** to confirm.
-1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
-1. Click **Save**.
+1. On the **Resource Collection** tab, click **Enable** next to Cloud Security Management. You are redirected to the Cloud Security Management Setup page, and a setup dialog automatically opens for the selected account.
+1. On the setup dialog, switch the **Enable Resource Scanning** toggle to the on position.
+1. Click **Done** to complete the setup.
 
 **Note**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
@@ -23,8 +24,9 @@ In addition to setting up CSM with or without an Agent, you can also set it up w
 
    If you don't see the required client ID, add it by clicking **Add New App Registration** and following the onscreen prompts.
 1. To turn off infrastructure monitoring on the selected account, under the client ID, navigate to the **Metric Collection** tab, then turn off the **Enable Metric Collection** toggle. 
-1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
-1. Click **Save**.
+1. On the **Resource Collection** tab, click **Enable** next to Cloud Security Management. You are redirected to the Cloud Security Management Setup page, which automatically scrolls to the selected Azure subscription in the Cloud Integrations section.
+1. Switch the **Resource Scanning** toggle to the on position.
+1. Click **Done** to complete the setup.
 
 **Note**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 
@@ -35,8 +37,9 @@ In addition to setting up CSM with or without an Agent, you can also set it up w
 
    If you don't see the required account, add it by clicking **Add GCP Account** and following the onscreen prompts.
 1. To turn off infrastructure monitoring on the selected account, under the account name, navigate to the **Metric Collection** tab. Then, above the Metric Collection table, click **Disable All**.
-1. To turn on CSM, on the **Resource Collection** tab, turn on the **Enable Resource Collection** toggle, and select the **Enable Cloud Security Management** checkbox.
-1. Click **Save**.
+1. On the **Resource Collection** tab, click **Enable** next to Cloud Security Management. You are redirected to the Cloud Security Management Setup page, which automatically scrolls to the selected Google Cloud Platform project in the Cloud Integrations section.
+1. Switch the **Resource Scanning** toggle to the on position.
+1. Click **Done** to complete the setup.
 
 **Note**: In your CSM settings, set up [resource evaluation filters][1] to limit the number of hosts you need security on.
 

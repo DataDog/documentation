@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "name": "Example-Microsoft-Teams-Integration",
+      "url": "https://fake.url.com"
+    },
+    "type": "workflows-webhook-handle"
+  }
+}

@@ -11,9 +11,9 @@ further_reading:
 - link: "/dora_metrics/setup/failures"
   tag: "Documentation"
   text: "Learn about setting up failure data in DORA Metrics"
-- link: "/tracing/service_catalog"
+- link: "/tracing/software_catalog"
   tag: "Documentation"
-  text: "Learn about the Service Catalog"
+  text: "Learn about the Software Catalog"
 - link: "https://github.com/DataDog/datadog-ci"
   tag: "Source Code"
   text: "Learn about the datadog-ci CLI tool"
@@ -41,13 +41,13 @@ Deployment events are used to compute [deployment frequency](#calculating-deploy
 
 To ensure your service deployments tracked by APM contribute to DORA Metrics, the following requirements must be met:
 
-- Your service has [metadata][16] defined in the Service Catalog.
+- Your service has [metadata][16] defined in the Software Catalog.
 - Your service has [unified service tagging][17] enabled. Deployments are identified using the `version` tag.
 
 For more information about ensuring service deployments that are tracked by APM contribute to change lead time, see [Deployment Data Sources][18].
 
 [15]: /tracing/services/deployment_tracking
-[16]: /service_catalog/adding_metadata
+[16]: /software_catalog/adding_metadata
 [17]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [18]: /dora_metrics/setup/deployments/?tab=apmdeploymenttracking#selecting-a-deployment-data-source
 
@@ -59,7 +59,7 @@ To send your own deployment events, use the [DORA Metrics API][21] or the [`data
 The following attributes are required:
 - `started_at`: The time the deployment started.
 - `finished_at`: The time the deployment finished.
-- `service`: The service that was deployed. If the provided service is registered in the [Service Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
+- `service`: The service that was deployed. If the provided service is registered in the [Software Catalog][23] with metadata set up (see [Adding Metadata][24]), the `team` of the service is automatically retrieved and associated with all metrics.
 
 The `repository_url` and `commit_sha` attributes are also required for calculating the Change Lead Time metric. Optionally, you can specify a `team` attribute to associate a deployment with a different `team` than is found automatically for the service. You can also specify the `env` attribute to filter your DORA metrics by environment on the [**DORA Metrics** page][25].
 
@@ -118,8 +118,8 @@ The `--skip-git` option can be provided to disable sending the repository URL an
 
 [21]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [22]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
-[23]: /tracing/service_catalog
-[24]: /tracing/service_catalog/adding_metadata
+[23]: /tracing/software_catalog
+[24]: /tracing/software_catalog/adding_metadata
 [25]: https://app.datadoghq.com/ci/dora
 [26]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [27]: https://app.datadoghq.com/organization-settings/api-keys
@@ -186,10 +186,20 @@ When configuring the GitHub application:
 1. Select at least **Read** repository permissions for **Contents** and **Pull Requests**.
 2. Subscribe at least to **Push**, **PullRequest** and **PullRequestReview** events.
 
-To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that, under the **Features** tab, the **DORA Metrics: Collect Change Lead Time metric** feature is enabled.
+To confirm that the setup is valid, select your GitHub application in the [GitHub integration tile][2] and verify that the **Datadog Features** table shows **Pull Request Information** meets all requirements.
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+
+After your organization has access, follow the [GitLab installation guide][1].
+
+**Note**: The scope of the service account's personal access token needs to be at least `read_api`.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
 {{% /tab %}}
 
 {{% tab "Other Git Providers" %}}
@@ -222,10 +232,11 @@ If the source code of multiple services is present in the same repository, furth
 
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [service definition][5].
 
-If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
 **Example (schema version v2.2):**
-
+{{< tabs >}}
+{{% tab "GitHub" %}}
 ```yaml
 links:
   - name: shopist
@@ -233,6 +244,17 @@ links:
     provider: github
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
+{{% /tab %}}
+{{% tab "GitLab" %}}
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: gitlab
+    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 DORA Metrics for the `shopist` service only consider the Git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
@@ -252,12 +274,13 @@ If the two metadata entries are defined for a service, only `extensions[datadogh
 
 ### Limitations
 
-- Change lead time stage breakdown metrics are only available for GitHub.
+- Change lead time stage breakdown metrics are only available for GitHub and GitLab.
 - Change lead time is not available for the first deployment of a service that includes Git information.
+- The Change Lead Time calculation includes a maximum of 5000 commits per deployment.
 - For rebased branches, *change lead time* calculations consider the new commits created during the rebase, not the original commits.
 - When using "Squash" to merge pull requests:
-  - For GitHub: Metrics are emitted for the original commits.
-  - For other git providers: Metrics are emitted for the new commit added to the target branch.
+  - For GitHub and GitLab: Metrics are emitted for the original commits.
+  - For other Git providers: Metrics are emitted for the new commit added to the target branch.
 
 ## Calculating change failure rate
 
@@ -269,8 +292,9 @@ Change failure rate is calculated by dividing `dora.incidents.count` over `dora.
 
 [1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [2]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#how-to-install-the-cli
-[3]: /tracing/service_catalog
-[4]: /tracing/service_catalog/setup
-[5]: /tracing/service_catalog/adding_metadata
+[3]: /tracing/software_catalog
+[4]: /tracing/software_catalog/setup
+[5]: /tracing/software_catalog/adding_metadata
 [6]: https://git-scm.com/docs/git-log
 [7]: /dora_metrics/data_collected
+[8]: https://www.datadoghq.com/support/

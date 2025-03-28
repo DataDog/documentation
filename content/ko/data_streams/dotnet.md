@@ -2,17 +2,20 @@
 title: .NET용 데이터 스트림 모니터링 설정
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">데이터 스트림 모니터링은 AP1 리전에서 지원되지 않습니다.</a></div>
-{{< /site-region >}}
+### 사전 필수 조건
 
-### 전제 조건
-
-데이터 스트림 모니터링을 시작하려면 Datadog 에이전트와 .NET 라이브러리 라이브러리 최신 버전이 필요합니다.
 * [Datadog 에이전트 v7.34.0 이상][1]
-* .NET Tracer([.NET Core][2], [.NET Framework][3])
-  * Kafka 및 RabbitMQ: v2.28.0 이상
-  * Amazon SQS: v2.48.0
+
+### 지원되는 라이브러리
+
+| 기술        | 라이브러리                         | 최소 트레이서 버전 | 권장 트레이서 버전 |
+|-------------------|---------------------------------|------------------------|----------------------------|
+| Kafka             | [Confluent.Kafka][3]            | 2.28.0                 | 2.41.0 이상            |
+| RabbitMQ          | [RabbitMQ.Client][4]            | 2.28.0                 | 2.37.0 이상            |
+| Amazon SQS        | [Amazon SQS SDK][5]             | 2.48.0                 | 2.48.0 이상            |
+| Amazon SNS        | [Amazon SNS SDK][6]             | 3.6.0                  | 3.6.0 이상             |
+| IBM MQ            | [IBMMQDotnetClient][7]          | 2.49.0                 | 2.49.0 이상            |
+| Azure 서비스 버스 | [Azure.Messaging.ServiceBus][8] | 2.38.0                 | 2.38.0 이상            |
 
 ### 설치
 
@@ -23,15 +26,20 @@ title: .NET용 데이터 스트림 모니터링 설정
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-### 지원되는 라이브러리
-데이터 스트림 모니터링은 [confluent-kafka 라이브러리][4]를 지원합니다.
 
 ### SQS 파이프라인 모니터링
-데이터 스트림 모니터링은 하나의 [메시지 속성][5]을 사용하여 SQS 큐를 통해 메시지 경로를 추적합니다. Amazon SQS는 메시지당 허용되는 메시지 속성이 최대 10개로 제한되어 있으므로 데이터 파이프라인을 통해 스트리밍되는 모든 메시지는 9개 이하의 메시지 속성이 설정되어 있어야 합니다. 나머지 속성은 데이터 스트림 모니터링에서 허용됩니다.
+데이터 스트림 모니터링은 하나의 [메시지 속성][2]을 사용하여 SQS 큐를 통해 메시지의 경로를 추적합니다. Amazon SQS에는 메시지당 허용되는 메시지 속성이 최대 10개로 제한되어 있으므로 데이터 파이프라인을 통해 스트리밍되는 모든 메시지는 9개 이하의 메시지 속성이 설정되어야 합니다. 나머지 속성은 데이터 스트림 모니터링에 사용됩니다.
+
+### SNS-to-SQS 파이프라인 모니터링
+Amazon SNS와 Amazon SQS가 직접 통신하는 데이터 파이프라인을 모니터링하려면 [Amazon SNS 원시 메시지 전송][9]을 활성화해야 합니다.
 
 
 [1]: /ko/agent
-[2]: /ko/tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /ko/tracing/trace_collection/dd_libraries/dotnet-framework
-[4]: https://pypi.org/project/confluent-kafka/
-[5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[3]: https://www.nuget.org/packages/Confluent.Kafka
+[4]: https://www.nuget.org/packages/RabbitMQ.Client
+[5]: https://www.nuget.org/packages/AWSSDK.SQS
+[6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
+[7]: https://www.nuget.org/packages/IBMMQDotnetClient
+[8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

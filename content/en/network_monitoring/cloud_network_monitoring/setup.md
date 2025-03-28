@@ -58,8 +58,6 @@ Datadog Cloud Network Monitoring does not support macOS platforms.
 
 CNM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
-CNM is not supported for Google Kubernetes Engine (GKE) Autopilot.
-
 ### Network routing tools
 
 #### Istio
@@ -210,8 +208,8 @@ To enable Cloud Network Monitoring for Windows hosts:
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To enable Cloud Network Monitoring with Kubernetes using Helm, add the following to your `values.yaml` file.</br>
-**Helm chart v2.4.39+ is required**. For more information, see the [Datadog Helm Chart documentation][1].
+To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to your `values.yaml` file.</br>
+**Note:** Helm chart v2.4.39+ **is required**. For more information, see the [Datadog Helm Chart documentation][1].
 
   ```yaml
   datadog:
@@ -500,18 +498,11 @@ For additional information around these capabilities, see [Cloud service enhance
 
 ### Failed connections 
 
-**Requires Agent version `7.59` or higher**.
+Failed Connections allows collection and reporting of TCP failures including [resets, refusals, and timeouts][14]. This feature is enabled by default in Agent version `7.59+`, and it is accessible on the [CNM Analytics][15] page in the **Customize** menu by turning on the **Failures** toggle.
 
-To enable the Agent to start collecting data about failed connections, add the following setting to your `/etc/datadog-agent/system-probe.yaml` file (or `C:\ProgramData\Datadog\system-probe.yaml` for Windows).
+**Note**: If some Agents in your infrastructure are running a version earlier than `7.59`, you might encounter failures being under-reported. CNM advises maintaining the same Agent version across _all_ hosts.
 
-```yaml
-network_config: 
-  ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable Cloud Network Monitoring.
-  #
-  enabled: true
-  enable_tcp_failed_connections: true ##enabled by default
-```
+{{< img src="network_performance_monitoring/setup/cnm_tcp_failures_toggle.png" alt="Screenshot of the CNM customize menu, highlighting the Failures toggle" style="width:50%;">}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -529,3 +520,5 @@ network_config:
 [11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/README.md#enabling-system-probe-collection
 [12]: https://github.com/DataDog/chef-datadog
 [13]: https://github.com/DataDog/ansible-datadog/blob/master/README.md#system-probe
+[14]: /network_monitoring/cloud_network_monitoring/network_analytics/?tab=loadbalancers#tcp
+[15]: https://app.datadoghq.com/network

@@ -189,9 +189,12 @@ The Vertex AI integration instruments the following methods:
 Datadog's [LLM Observability Node.js SDK][4] provides integrations that automatically trace and annotate calls to LLM frameworks and libraries. Without changing your code, you can get out-of-the-box traces and observability for calls that your LLM application makes to the following frameworks:
 
 
-| Framework                               | Supported Versions | Tracer Version       |
-|-----------------------------------------|--------------------|----------------------|
-| [OpenAI](#openai) (common JS)           | >= 3.0.0           | >= 4.49.0, >= 5.25.0 |
+| Framework                               | Supported Versions | Tracer Version                              |
+|-----------------------------------------|--------------------|---------------------------------------------|
+| [OpenAI](#openai)                       | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
+| [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
+| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -248,52 +251,89 @@ The OpenAI integration instruments the following methods, including streamed cal
 - [Embeddings][5]:
   - `openai.embeddings.create()`
 
+## LangChain
+
+The LangChain integration provides automatic tracing for the [LangChain Node.js SDK's][9] LLM, chat model, chain, and OpenAI embeddings calls.
+
+### Traced methods
+
+The LangChain integration instruments the following methods:
+
+- [LLMs][10]:
+  - `llm.invoke()`
+- [Chat models][11]
+  - `chat_model.invoke()`
+- [Chains][12]
+  - `chain.invoke()`
+  - `chain.batch()`
+- [Embeddings][13]
+  - `embeddings.embedQuery()`
+  - `embeddings.embedDocuments()`
+
+## Amazon Bedrock
+
+The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Node.js SDK's chat model calls (using [BedrockRuntimeClient][20]).
+
+### Traced methods
+
+The Amazon Bedrock integration instruments the following methods:
+
+- [Chat messages][16]:
+  - `InvokeModel`
+
+## Vertex AI
+
+The Vertex AI integration automatically traces content generation and chat message calls made through [Google's Vertex AI Node.js SDK][17].
+
+### Traced methods
+
+The Vertex AI integration instruments the following methods:
+
+- [Generating content][18]:
+  - `model.generateContent()`
+  - `model.generateContentStream()`
+- [Chat Messages][19]:
+  - `chat.sendMessage()`
+  - `chat.sendMessageStream()`
+
 ### ESM support
 
-The OpenAI integration for the Node.js tracer is not supported in ESM. To use OpenAI along with `dd-trace` in your ESM projects without errors, create the following script:
+Auto-instrumentation for ECMAScript Module projects is supported starting from `dd-trace@>=5.38.0`. To enable auto-instrumentation in your ESM projects, run your application with the following Node option:
+
+```bash
+--import dd-trace/register.js
+```
+
+For [command-line setup][14], use the following option instead:
+
+```bash
+--import dd-trace/initialize.mjs
+# or
+--loader dd-trace/initialize.mjs
+```
+
+If there are errors launching your application when using this option, it is likely a module incompatibility. You can create your own hook file with the module and file in question excluded:
 
 ```javascript
-// register.mjs
+// hook.mjs
 
 import { register } from 'node:module';
 
-register("import-in-the-middle/hook.mjs", import.meta.url, {
+register('import-in-the-middle/hook.mjs', import.meta.url, {
   parentURL: import.meta.url,
-  data: { include: ["openai"]}, // this is the important bit here
+  data: { exclude: [
+    /langsmith/,
+    /openai\/_shims/,
+    /openai\/resources\/chat\/completions\/messages/,
+    // Add any other modules you want to exclude
+  ]}
 });
 ```
 
-And start your application with:
+To use this custom loader, run your application with the following Node option:
 
 ```bash
-DD_SITE=<YOUR_DATADOG_SITE> node --import ./register.js --require dd-trace/init script.js
-```
-
-This avoids any compatability issues with OpenAI and `dd-trace` in ESM projects.
-
-In this case, tracing is not used for OpenAI calls. To add this tracing for LLM Observability, you can instrument your OpenAI calls with the [`llmobs.trace()`][7] method.
-
-```javascript
-const tracer = require('dd-trace').init({
-  llmobs: { ... }
-});
-
-// user application code
-
-function makeOpenAICall (input) {
-  // user code
-  const response = await llmobs.trace({ kind: 'llm', name: 'openai.createChatCompletion', modelName: 'gpt-4', modelProvider: 'openai' }, async () => {
-    const res = await openai.chat.completions.create({ ... });
-    llmobs.annotate({
-      inputData: input,
-      outputData: res.choices[0].message.content
-    })
-
-    return res;
-  });
-
-  // user code to do something with `response`
-}
+--import ./hook.mjs
 ```
 
 ## Bundling support
@@ -341,6 +381,18 @@ module.exports = {
 [6]: /llm_observability/setup/sdk/nodejs/#in-code-setup
 [7]: /llm_observability/setup/sdk/nodejs/#tracing-spans-using-inline-methods
 [8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling
+[9]: https://js.langchain.com/docs/introduction/
+[10]: https://js.langchain.com/docs/integrations/llms/
+[11]: https://js.langchain.com/docs/concepts/chat_models
+[12]: https://js.langchain.com/docs/how_to/sequence/
+[13]: https://js.langchain.com/docs/integrations/text_embedding/
+[14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[15]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
+[16]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[17]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest
+[18]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
+[19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
+[20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 {{% /tab %}}
 {{< /tabs >}}
 

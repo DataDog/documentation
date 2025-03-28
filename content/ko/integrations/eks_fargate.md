@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: AWS Fargate에서의 Amazon EKS
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -76,7 +76,7 @@ tile:
 
 AWS Fargate의 Amazon EKS는 표준 쿠버네티스(Kubernetes) 환경의 배포 및 유지 관리의 특정 측면을 자동화하는 관리형 쿠버네티스(Kubernetes) 서비스입니다. 쿠버네티스(Kubernetes) 노드는 AWS Fargate로 관리하며 사용자로부터 추상화됩니다.
 
-**참고**: EKS Fargate는 네트워크 성능 모니터링(NPM)을 지원하지 않습니다.
+**참고**: 클라우드 네트워크 모니터링(CNM)은 EKS Fargate에서 지원되지 않습니다.
 
 ## 설정
 

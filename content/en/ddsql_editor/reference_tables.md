@@ -10,7 +10,7 @@ further_reading:
 
 Reference Tables allow you to combine metadata with information already in Datadog. These tables store predefined sets of information that can be easily referenced within your queries, reducing complexity and enhancing query performance. With DDSQL you can query and join reference tables with other tables to expand your analytical insights.
 
-For more information on adding reference tables, see the [Reference Tables Documentation](1).
+For more information on adding reference tables, see the [Reference Tables documentation][1].
 
 ## Querying reference tables
 

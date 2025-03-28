@@ -67,6 +67,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | Source | Category | Source Use Cases | Primary Products |
 |--------|------------|-----------|------------------|
 | Datadog Threat Research| scanners, Redis exploitation, Docker exploitation, malware, bruteforcer | Honeypots focused on software specific threats | ASM, CWS and Cloud SIEM |
+| [Datadog ASM](https://docs.datadoghq.com/security/application_security/) | scanner | List of IPs that have been observed attacking multiple ASM customers | ASM |
 | [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
@@ -85,6 +86,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
+| disposable_email | suspicious | Email domain  | Detect product usage from disposable email addresses | ASM |
 
 ### Threat Intelligence Intents
 | Intent | Use Case |

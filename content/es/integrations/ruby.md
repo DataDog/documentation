@@ -1,34 +1,34 @@
 ---
-"categories":
-- "languages"
-- "log collection"
-- "tracing"
-"custom_kind": "integration"
-"dependencies": []
-"description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/ruby/"
-"draft": false
-"further_reading":
-- "link": "https://www.datadoghq.com/blog/monitoring-rails-with-datadog/"
-  "tag": "Blog"
-  "text": "Monitorización de aplicaciones de Rails con Datadog"
-- "link": "https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/"
-  "tag": "Blog"
-  "text": "Recopilación y monitorización de logs de Rails con Datadog"
-- "link": "https://www.datadoghq.com/blog/managing-rails-application-logs/"
-  "tag": "Blog"
-  "text": "Cómo recopilar, personalizar y gestionar logs de aplicaciones de Rails"
-"git_integration_title": "ruby"
-"has_logo": true
-"integration_id": "ruby"
-"integration_title": "Ruby"
-"integration_version": ""
-"is_public": true
-"manifest_version": "1.0"
-"name": "ruby"
-"public_title": "Integración de Datadog y Ruby"
-"short_description": "Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog."
-"version": "1.0"
+categories:
+- languages
+- log collection
+- tracing
+custom_kind: integration
+dependencies: []
+description: Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog.
+doc_link: https://docs.datadoghq.com/integrations/ruby/
+draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/monitoring-rails-with-datadog/
+  tag: Blog
+  text: Monitorización de aplicaciones de Rails con Datadog
+- link: https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/
+  tag: Blog
+  text: Recopilación y monitorización de logs de Rails con Datadog
+- link: https://www.datadoghq.com/blog/managing-rails-application-logs/
+  tag: Blog
+  text: Cómo recopilar, personalizar y gestionar logs de aplicaciones de Rails
+git_integration_title: ruby
+has_logo: true
+integration_id: ruby
+integration_title: Ruby
+integration_version: 
+is_public: true
+manifest_version: 1.0
+name: ruby
+public_title: Integración de Datadog y Ruby
+short_description: Envía métricas personalizadas desde tus aplicaciones de Ruby con las bibliotecas de cliente de Datadog.
+version: 1.0
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->

@@ -23,6 +23,10 @@ You can declare an incident directly from a monitor from the Actions dropdown. S
 
 {{< img src="service_management/incidents/declare/declare_monitor.png" alt="Actions dropdown menu on monitors where you can select the Declare incident option" style="width:50%;" >}}
 
+Alternatively, you can have a monitor automatically create an incident when it transitions to a `warn`, `alert`, or `no data` status. To enable this, click **Add Incident** in the **Configure notifications and automations** section of a monitor and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][9].
+
+Incidents created from a monitor will inherit [field values][10] from the monitor's tags. To send automated notifications from incidents, add tags to a monitor so that created incidents match the criteria of [notification rules][11].
+
 ## From a Security Signal
 
 Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3] for Cloud Security Management.
@@ -78,3 +82,6 @@ After you declare an incident from Slack, it generates an incident channel.
 [6]: /service_management/incident_management/datadog_clipboard
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: https://app.datadoghq.com/synthetics/tests
+[9]: https://app.datadoghq.com/incidents/settings?section=global-settings
+[10]: /service_management/incident_management/incident_settings/property_fields
+[11]: /service_management/incident_management/incident_settings/notification_rules

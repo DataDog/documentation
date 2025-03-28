@@ -688,19 +688,24 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
+val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient = OkHttpClient.Builder() 
         .addInterceptor(
-            DatadogInterceptor(listOf("example.com", "example.eu"), traceSampler = RateBasedSampler(20f))
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
         )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```
@@ -718,20 +723,32 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 ```kotlin
 val tracedHosts = listOf("example.com", "example.eu") 
 val okHttpClient =  OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
-        .addNetworkInterceptor(TracingInterceptor(tracedHosts, traceSampler = RateBasedSampler(20f)))
+        .addInterceptor(
+            DatadogInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(20f))
+                .build()
+        )
+        .addNetworkInterceptor(
+            TracingInterceptor.Builder(tracedHosts)
+                .setTraceSampler(RateBasedSampler(100f))
+                .build()
+        )
         .build()
 ```
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-final List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
-final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
-                new DatadogInterceptor(/** SDK instance name or null **/, tracedHosts, null, null, new RateBasedSampler(20f))
+            new DatadogInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .addNetworkInterceptor(
-                new TracingInterceptor(/** SDK instance name or null **/, tracedHosts, null, new RateBasedSampler(20f))
+            new TracingInterceptor.Builder(tracedHosts)
+                    .setTraceSampler(new RateBasedSampler(20f))
+                    .build()
         )
         .build();
 ```

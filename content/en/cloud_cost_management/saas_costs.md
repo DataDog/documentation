@@ -50,7 +50,7 @@ See the respective documentation for your cloud provider:
 
 ### Configure your SaaS accounts
 
-Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and click **Configure** on a provider to collect cost data.
+Navigate to [**Cloud Cost** > **Settings**, select **Accounts**][8] and then click **Configure** on a provider to collect cost data.
 
 {{< img src="cloud_cost/saas_costs/all_accounts.png" alt="Add your accounts with AWS, Azure, Google Cloud to collect cost data. You can also add your accounts for Fastly, Snowflake, Confluent Cloud, MongoDB, Databricks, OpenAI, and Twilio" style="width:100%" >}}
 
@@ -78,7 +78,7 @@ Your Databricks cost data for the past 15 months can be accessed in Cloud Cost M
 4. Under the **Resources** section, click the toggle for `Collect cost data to view in Cloud Cost Management`.
 5. Click **Save**.
 
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+Your Confluent Cloud cost data becomes available in Cloud Cost Management 24 hours after setup. This data automatically includes 12 months of history, the maximum provided by the Confluent billing API. Over the next three months, the data gradually expands to cover 15 months of history. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 If you wish to collect cluster-level tags or business metadata tags for your costs, you can add a Schema Registry API key and secret. Please look into [Schema Management on Confluent Cloud][103] for more information.
 
@@ -125,7 +125,9 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
    grant usage on warehouse <WAREHOUSE> to role DATADOG;
 
    -- If you have cost usage collection enabled, ensure that your credentials have permission to view the ORGANIZATION_USAGE schema.
-   grant role orgadmin to role DATADOG
+   grant database role SNOWFLAKE.ORGANIZATION_USAGE_VIEWER to role DATADOG;
+
+   -- Note that the account in which you are creating the Datadog role and user must have OrgAdmin enabled. If the account does not have OrgAdmin, the Datadog role will be unable to access organization usage data used to calculate costs.
 
    -- Create a user.
    create user DATADOG_USER
@@ -148,12 +150,44 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 
 Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
+**Snowflake query tags**
+
+[Snowflake's query tags][106] are powerful metadata strings that can be associated with queries. The [Snowflake Cost Management integration][101] ingests [JSON parsable][107] query tags present in a comma-separated allowlist found in the Snowflake integration tile.
+
+For example, if an organization wishes to group its Snowflake compute costs by the `team` and `application` dimensions, it may choose to tag its Snowflake queries for a specific team's application in the following manner:
+```
+ALTER SESSION SET QUERY_TAG = '{"team": "devops", "application": "CI_job_executor"}';
+```
+{{< img src="cloud_cost/saas_costs/snowflake_query_tags_example.png" alt="Group costs by team and application query tags." style="width:100%" >}}
+
+As a result, the costs of all queries executed with the `team` and `application` query tags are attributable to those concepts.
+
+To use query tags within cost management, ensure the following:
+
+- The `query_tag` string must be JSON parsable. Specifically, this means that the string is processable by the native `PARSE_JSON` function.
+
+- An allowlist of keys must be provided in the Snowflake integration tile. These keys map to the first layer of the JSON-formatted `query_tag` field. This allowlist appears in the form of a comma-separated list of strings for example: `tag_1,tag_2,tag_3`. Ensure that strings contain only alphanumeric characters, underscores, hyphens, and periods. You can enter this information into the Snowflake tile, under **Resources Collected -> Cloud Cost Management -> Collected Query Tags**.
+
+**Note**: Select your query tags with data magnitude in mind. Appropriate query tags are ones that have low to medium group cardinality (for example: team, user, service). Selecting a query tag with high group cardinality (such as unique UUID associated with job executions) can result in bottlenecking issues for both data ingestion and frontend rendering.
+
+**Snowflake CCM object tags**
+
+Object tags are user-defined strings that you can attach to Snowflake objects for enhanced auditability and cost analysis. For example, to track costs by team, tag your warehouses with the respective teams that use them.
+
+All object tag configuration is done within [Snowflake][105].
+
+Notes:
+- **Tag Inheritance**: Snowflake objects adhere to a hierarchical structure, and the CCM integration considers inherited tags when submitting cost data.
+
 {{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
 [102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [103]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
 [104]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
+[105]: https://docs.snowflake.com/en/user-guide/object-tagging
+[106]: https://docs.snowflake.com/en/sql-reference/parameters#query-tag
+[107]: https://docs.snowflake.com/en/sql-reference/functions/parse_json
 
 {{% /tab %}}
 
@@ -227,7 +261,7 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 ## Data Collected
 
-You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+You can view cost data on the [**Cloud Cost Explorer** page][3], the [Cloud Cost Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
 
 The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
 
@@ -236,120 +270,126 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 | Tag Name | Tag Description |
 |---|---
-| `record_id` | Unique ID for this record. |
 | `account_id` | ID of the account this report was generated for. |
-| `workspace_id` | ID of the Workspace this usage was associated with. |
-| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
 | `billing_origin_product` | Product or feature originating the billing event (for example, JOBS, CLUSTERS). |
-| `usage_type` | Type of usage being billed (for example, COMPUTE_TIME). |
-| `job_run_id` | Identifier for the specific job run (if applicable). |
-| `node_type` | Type of node used in this billing record (for example, m5d.large). |
-| `destination_region` | Region where the workload is directed (if applicable). |
 | `central_clean_room_id` | ID of the central clean room associated with the workload (if applicable). |
-| `notebook_path` | Path to the notebook in Databricks (if applicable). |
-| `job_name` | Name of the job in Databricks (if applicable). |
-| `notebook_id` | ID of the notebook used in this billing record (if applicable). |
-| `dlt_update_id` | Delta Live Table update ID associated with this usage (if applicable). |
-| `job_id` | Unique identifier for the job in Databricks. |
-| `dlt_maintenance_id` | Maintenance ID for Delta Live Tables (if applicable). |
-| `run_name` | Name of the current job or workflow run (if applicable). |
-| `instance_pool_id` | ID of the instance pool used (if applicable). |
+| `charge_description` | A combination of the cloud type and name of the associated SKU (for example, AWS - PREMIUM_ALL_PURPOSE_COMPUTE). |
+| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
 | `cluster_id` | ID of the cluster associated with this usage. |
-| `endpoint_id` | ID of the endpoint for SQL-based or serving-related usage (if applicable). |
-| `warehouse_id` | ID of the SQL warehouse (if applicable). |
-| `source_region` | Originating region for this billing record (if applicable). |
+| `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
+| `destination_region` | Region where the workload is directed (if applicable). |
+| `dlt_maintenance_id` | Maintenance ID for Delta Live Tables (if applicable). |
 | `dlt_pipeline_id` | ID of the Delta Live Tables pipeline (if applicable). |
-| `endpoint_name` | Name of the SQL or serving endpoint (if applicable). |
-| `is_photon` | Indicates whether Photon processing was used (`true` or `false`). |
 | `dlt_tier` | Tier of Delta Live Tables service (if applicable). |
+| `dlt_update_id` | Delta Live Table update ID associated with this usage (if applicable). |
+| `endpoint_id` | ID of the endpoint for SQL-based or serving-related usage (if applicable). |
+| `endpoint_name` | Name of the SQL or serving endpoint (if applicable). |
+| `instance_pool_id` | ID of the instance pool used (if applicable). |
+| `is_photon` | Indicates whether Photon processing was used (`true` or `false`). |
+| `is_serverless` | Indicates if the usage pertains to a serverless compute resource (`true` or `false`). |
+| `job_id` | Unique identifier for the job in Databricks. |
+| `job_name` | Name of the job in Databricks (if applicable). |
+| `job_run_id` | Identifier for the specific job run (if applicable). |
 | `jobs_tier` | Tier of the job, such as `CLASSIC` or `PREMIUM`. |
 | `networking` | Type of networking used for this job, if specified. |
+| `node_type` | Type of node used in this billing record (for example, m5d.large). |
+| `notebook_id` | ID of the notebook used in this billing record (if applicable). |
+| `notebook_path` | Path to the notebook in Databricks (if applicable). |
+| `record_id` | Unique ID for this record. |
+| `run_name` | Name of the current job or workflow run (if applicable). |
 | `serving_type` | Type of serving model used, if applicable (for example, Model Serving). |
+| `source_region` | Originating region for this billing record (if applicable). |
 | `sql_tier` | SQL tier associated with the usage (if applicable). |
-| `is_serverless` | Indicates if the usage pertains to a serverless compute resource (`true` or `false`). |
-| `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
 | `usage_metadata` | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
+| `usage_type` | Type of usage being billed (for example, COMPUTE_TIME). |
+| `warehouse_id` | ID of the SQL warehouse (if applicable). |
+| `workspace_id` | ID of the Workspace this usage was associated with. |
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
 | Tag Name | Tag Description |
 |---|---
-| `resource_id` | The unique identifier of the Confluent resource. |
-| `resource_name` | The name of the Confluent resource. |
+| `charge_description` | The subtype of the cost (for example, KAFKA_NETWORK_WRITE). |
 | `environment_id` | The unique identifier for the environment. |
 | `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
 | `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
+| `resource_id` | The unique identifier of the Confluent resource. |
+| `resource_name` | The name of the Confluent resource. |
 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
 | Tag Name | Tag Description |
 |---|---|
-| `organization_name` | Name of the organization. |
-| `contract_number` | Snowflake contract number for the organization. |
-| `account_name` | Name of the account where the usage was consumed. |
 | `account_locator` | Locator for the account where the usage was consumed. |
+| `account_name` | Name of the account where the usage was consumed. |
+| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization's capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
+| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
+| `charge_description` | A description of the cost type associated with distinct line items. Descriptions differ for each cost type, represented by the `servicename` tag. |
+| `contract_number` | Snowflake contract number for the organization. |
+| `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
+| `organization_name` | Name of the organization. |
+| `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
+| `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
+| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
 | `region` | Name of the region where the account is located. |
 | `service_level` | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
+| `servicename` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with an execution time of 100ms or greater. Does not indicate usage of serverless or cloud services compute.<br-> **warehouse_metering_query_attribution**: Refer to Virtual warehouse credit usage of queries with execution time of 100ms or less, as well as idle warehouse time. Does not indicate usage of serverless or cloud services compute. |
 | `user_name` | Name of the user or service account associated with the query. |
 | `warehouse_id` | Identifier for the warehouse generating the cost. |
 | `warehouse_name` | Name of the warehouse associated with this usage. |
 | `warehouse_size` | Size of the warehouse (for example, Large, Medium). |
-| `cost_type` | Type of cost associated with the usage. Possible values include:<br> - `CLOUD_SERVICES`: General costs related to Snowflake's underlying cloud services, excluding warehouse usage.<br> - `IDLE_OR_LESS_100MS`: Costs from warehouse idle time or queries that completed in under 100 milliseconds. Unattributed to specific queries. Falls under the **warehouse_metering** service type.<br> - `QUERY_ATTRIBUTION`: Costs attributed to specific queries, grouped by the parameterized query hash. For these costs, the parameterized query associated with this cost can be found under **charge description**. Falls under the **warehouse_metering** service type. |
-| `query_hash` | Unique hash representing a parameterized version of the query for attribution purposes. Only found for **query attribution** costs. |
-| `query_hash_version` | Version of the Snowflake query hash algorithm used to generate `query_hash`. Only found for **query attribution** costs. |
-| `database_name` | Name of the database in which the query was executed (if applicable). Only found for **query attribution** costs. |
-| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization’s capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
-| `service_type` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering**: Refer to Virtual warehouse credit usage. Does not indicate usage of serverless or cloud services compute. |
-| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
-| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
 
 {{% /tab %}}
 {{% tab "Elastic Cloud" %}}
 | Tag Name | Tag Description |
 |---|---
+| `charge_description` | The SKU of a charge. |
+| `kind` | The type of resource. |
 | `name` | The unique identifier of the Elastic Cloud resource. |
 | `price_per_hour` | The cost of the Elastic Cloud resource per hour. |
-| `kind` | The type of resource. |
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
 | Tag Name | Tag Description |
 |---|---|
-| `invoice_id` | The unique identifier of the invoice. |
-| `status` | State of the payment. |
-| `mongo_org_id` | MongoDB organization ID. |
+| `charge_description` | The description of a charge. |
 | `cluster_name` | The name of the cluster that incurred the charge. |
 | `group_id` | ID of the project with which the line item is associated. |
+| `invoice_id` | The unique identifier of the invoice. |
+| `mongo_org_id` | MongoDB organization ID. |
 | `replica_set_name` | Name of the replica set with which the line item is associated. |
 | `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
+| `status` | State of the payment. |
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
 | Tag Name | Tag Description |
 |---|---|
+| `charge_description` | The name of the model whose costs are associated with the charge. |
 | `organization_id` | The unique identifier of the organization. |
+| `organization_name` | The name of the organization. |
 | `project_id` | The unique identifier of the project. |
 | `project_name` | The name of the project. |
-| `organization_name` | The name of the organization. |
 
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
 | Tag Name | Tag Description |
 |---|---|
+| `charge_description` | The description of the charge. |
 | `credit_coupon_code` | Code of any coupon or credit applied to this cost entry (if available). |
+| `plan_name` | Name of the plan under which this service falls, often matching "product_line". |
 | `product_name` | Name of the specific product being billed (for example, "North America Bandwidth"). |
 | `product_group` | Group or category of the product, such as "Full Site Delivery". |
 | `product_line` | Line of products to which this item belongs, for example, "Network Services". |
-| `usage_type` | Type of usage being billed (for example, "Bandwidth"). |
 | `region` | Region where the service usage occurred (for example, "North America"). |
 | `service_name` | Name of the service associated with this cost entry, often matching the `product_name`. |
+| `usage_type` | Type of usage being billed (for example, "Bandwidth"). |
 | `usage_type_cd` | Code or label representing the type of usage, such as "North America Bandwidth". |
-| `plan_name` | Name of the plan under which this service falls, often matching "product_line". |
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
@@ -358,6 +398,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 |---|---|
 | `account_sid` | Alphanumeric string identifying the Twilio account. |
 | `category` | The category of usage. For more information, see [Usage Categories][101]. |
+| `charge_description` | The description of the charge. |
 | `count_unit` | The units in which count is measured, such as calls for calls or messages for SMS. |
 | `usage_unit` | The units in which usage is measured, such as minutes for calls or messages for SMS. |
 
@@ -372,7 +413,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 [1]: /cloud_cost_management/custom
 [2]: /cloud_cost_management
-[3]: https://app.datadoghq.com/cost/analytics
+[3]: https://app.datadoghq.com/cost/explorer
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
 [5]: /dashboards
 [6]: /notebooks

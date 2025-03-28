@@ -83,7 +83,7 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 ## Visualizing aggregators
 
-You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The aggregation methods below use the the same metric. You can see how each method affects the way the metric is aggregated in a timeseries.
+You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The aggregation methods below use the same metric. You can see how each method affects the way the metric is aggregated in a timeseries.
 
 | Aggregation | Resulting graph | 
 | ---  | ----------- | 

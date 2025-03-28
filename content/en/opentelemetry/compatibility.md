@@ -41,7 +41,7 @@ The following table shows Datadog feature compatibility across different setups:
 | [Live Processes][16]                                |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Live Container Monitoring/Kubernetes Explorer][20] |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Cloud Network Monitoring][21] (CNM)          |                                    | {{< X >}}                          | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
-| [Universal Service Monitoring][17] (USM)            |                                    |                                    | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Universal Service Monitoring][17] (USM)            |                                    |{{< X >}}                           | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [Source code integration][24]                       | {{< X >}}                          | {{< X >}}                          | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
 | [Database Monitoring][14] (DBM)                     | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}}|   | {{< X >}}               | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
 | [Application Security Management][11] (ASM)         |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
@@ -94,7 +94,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/integrations/runtime_metrics/
-[2]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [3]: /network_monitoring/cloud_network_monitoring/setup/
 [4]: /infrastructure/process/
 [5]: /integrations/guide/source-code-integration/?tab=go#configure-telemetry-tagging

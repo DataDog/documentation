@@ -1,7 +1,7 @@
 ---
 aliases:
-- /security_platform/application_security/custom_rules
-- /security/application_security/custom_rules
+- /es/security_platform/application_security/custom_rules
+- /es/security/application_security/custom_rules
 further_reading:
 - link: /security/application_security/
   tag: Documentación

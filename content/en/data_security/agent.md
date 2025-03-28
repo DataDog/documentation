@@ -109,7 +109,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 ```
 {{% /tab %}}
 {{< /tabs >}}
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=hostorvm&site=gov
+[1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
@@ -147,13 +147,12 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | pymem.alloc                                 | Total number of bytes allocated by the Python interpreter since the start of the Agent            |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                  |
 | logs.decoded                                | Total number of decoded logs                                                                      |
-| logs.processed                              | Total number of processed logs                                                                    |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                               |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, such as after log rotation |
-| logs.sent                                   | Total number of sent logs                                                                         |
 | logs.dropped                                | Total number of logs dropped                                                                      |
 | logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
 | logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
+| logs.auto_multi_line_aggregator_flush       | Number of multiline logs aggregated by the Agent                                                  |
 | dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
 | dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
 | transactions.input_count                    | Incoming transaction count                                                                        |
