@@ -50,7 +50,7 @@ LABEL "com.datadoghq.ad.checks"='{"postgres": {"init_config": {}, "instances": [
 "pg_stat_statements_view": "datadog.pg_stat_statements()", "pg_stat_activity_view": "datadog.pg_stat_activity()",
 ```
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][6] to learn how to pass the password as an environment variable.
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
 
 [1]: /containers/docker/integrations/?tab=labels#configuration
 [2]: https://docs.docker.com/engine/manage-resources/labels/
