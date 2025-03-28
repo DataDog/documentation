@@ -485,13 +485,6 @@
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
-  "UpdateIPAllowlist": [
-    {
-      "group": "ip_allowlist",
-      "suffix": "",
-      "description": "Update IP Allowlist returns \"OK\" response"
-    }
-  ],
   "CreateIncidentService": [
     {
       "group": "incident_services",
