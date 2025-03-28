@@ -80,7 +80,7 @@ Include all credentials in a single file:
 Replace the example values with your credentials.
 
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your PostgreSQL connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json`.
 
 {{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/postgresql_token.json`'" style="width:80%;" >}}
 
@@ -130,7 +130,7 @@ Include all credentials in a single file:
 Replace `USERNAME`, `API_TOKEN`, and `DOMAIN` with your credentials.
 
 
-In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json` on the runner.
+In the runner's connection, specify the location of the credential file on the private action runner's container. Your Jenkins connection points to the same path for all credentials. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json`.
 
 {{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/jenkins_token.json'" style="width:80%;" >}}
 
