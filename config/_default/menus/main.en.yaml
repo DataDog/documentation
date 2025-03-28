@@ -3391,7 +3391,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 8
-    - name: Custom Allocation Rules 
+    - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
@@ -6480,11 +6480,6 @@ menu:
       url: /security/code_security/static_analysis/github_actions/
       parent: sec_static_analysis
       weight: 2
-    - name: CircleCI Orbs
-      identifier: sec_static_analysis_circleci_orbs
-      url: /security/code_security/static_analysis/circleci_orbs/
-      parent: sec_static_analysis
-      weight: 3
     - name: Generic CI Providers
       identifier: sec_static_analysis_generic_ci_providers
       url: /security/code_security/static_analysis/generic_ci_providers/
