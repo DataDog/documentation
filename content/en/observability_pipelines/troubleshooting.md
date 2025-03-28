@@ -53,9 +53,14 @@ These are the batch parameters for each destination:
 
 See [event batching][6] for more information.
 
+## Getting an error when installing a new version of the Worker
+
+If you try to install a new version of the Worker in an instance that is running an older version of the Worker, you get an error. You need to [uninstall][7] the older version before you can install the new version of the Worker.
+
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /logs/explorer/search_syntax/
 [4]: /observability_pipelines/set_up_pipelines/#set-up-a-pipeline
 [5]: /observability_pipelines/advanced_configurations/#bootstrap-options
 [6]: /observability_pipelines/destinations/#event-batching-intro
+[7]: /observability_pipelines/install_the_worker#uninstall-the-worker
