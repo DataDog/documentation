@@ -1,6 +1,6 @@
 To configure an integration for an Agent running in a Docker container, you have a couple methods available. All of which are covered in detail in the [Docker Configuration Documentation][1].
 
-Below are some examples of how you can use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the Postgres Integration.
+The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the Postgres integration.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
