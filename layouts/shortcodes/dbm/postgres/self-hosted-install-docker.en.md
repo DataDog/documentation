@@ -36,7 +36,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+You can also specify labels in a `Dockerfile`, allowing you to build and deploy a custom Agent without modifying your infrastructure configuration:
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.63.3
