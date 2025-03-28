@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "description": "My agent policy",
+      "enabled": true,
+      "hostTags": [],
+      "name": "my_agent_policy"
+    },
+    "type": "policy"
+  }
+}
