@@ -135,7 +135,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
            enabled: true
            targets:
              - name: "default-target"
-               ddTracerVersions:
+               ddTraceVersions:
                  java: "1"
                  dotnet: "3"
                  python: "2"
