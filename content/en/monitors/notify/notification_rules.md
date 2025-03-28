@@ -26,7 +26,7 @@ With notification rules, you no longer need to manually set up notifications rec
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
-{{< img src="/monitors/notifications/notification_rules/new_notification_rule.png" alt=" Configuration for a new notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_config.png" alt="Configuration for a notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 
@@ -46,7 +46,7 @@ The [Monitor Notification Rules][1] page displays a table of all your notificati
 
 In your monitor configuration you can view the notification recipients that are applied to the monitor under **Configure response**. Notification rules automatically add recipients to monitors that match the configured scopes.
 
-{{< img src="path/to/your/image-name-here.png" alt="TBD Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}}
+<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}} -->
 
 ## Routing logic
 
