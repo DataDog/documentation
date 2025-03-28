@@ -1735,11 +1735,16 @@ menu:
       parent: alerting
       identifier: monitors_notify
       weight: 4
+    - name: Notification Rules
+      url: monitors/notify/notification_rules/
+      parent: monitors_notify
+      identifier: monitors_notify_notification_rules
+      weight: 401
     - name: Variables
       url: monitors/notify/variables/
       parent: monitors_notify
       identifier: monitors_notify_variables
-      weight: 401
+      weight: 402
     - name: Downtimes
       url: monitors/downtimes/
       parent: alerting
