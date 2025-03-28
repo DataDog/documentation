@@ -22,7 +22,7 @@ Flex Logs compute is limited by two factors:
 - The number of concurrent queries
 - The maximum number of logs that can be scanned per query
 
-Query slowdowns occur when the concurrent query limit is reached, and a query is retrying to find an available slot to run in. If an available slot is not found, the query will not run. It displays  an error message advising you to retry your query at a later time.
+Query slowdowns occur when the concurrent query limit is reached, and a query is retrying to find an available slot to run in. If an available slot is not found, the query will not run. Datadog displays an error message advising you to retry your query at a later time.
 
 ### Available metrics
 
