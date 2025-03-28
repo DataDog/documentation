@@ -3,7 +3,11 @@ title: Install Serverless Monitoring for Google Cloud Run Functions Gen 1
 ---
 
 ## Overview
-This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions). For Gen 2 support, see [Google Cloud Run Functions][8], and to collect additional metrics, install the [Datadog Google Cloud Platform integration][6].
+This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatability layer. 
+
+For Gen 2 support, see [Google Cloud Run Functions][8], and to collect additional metrics, install the [Datadog Google Cloud Platform integration][6].
+
+<div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st gen functions will only be possible using the gcloud CLI, API or Terraform. We reccomend upgrading your cloud run function to Gen 2 for more features and datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
 ## Setup
 
@@ -91,8 +95,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< programming-lang-wrapper langs="nodejs,python" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
-// Example of a simple Cloud Run Function
-// This line must come before importing the logger. 
+// Example of a simple Cloud Run Function with traces and custom metrics
+// dd-trace must come before any other import. 
 const tracer = require('dd-trace').init();
 
 const functions = require('@google-cloud/functions-framework');
@@ -110,7 +114,7 @@ module.exports = handlerWithTrace
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 ```python
-# Example of a simple Cloud Run Function
+# Example of a simple Cloud Run Function with traces and custom metrics
 import functions_framework
 import ddtrace
 from datadog import initialize, statsd
