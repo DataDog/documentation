@@ -17,7 +17,7 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 Anomalies are significant, unexpected changes that stand out from typical patterns. Datadog automatically identifies anomalies using machine learning techniques that adapt to your specific usage patterns.
 
-Our algorithm takes into account seasonality, distinguishing true anomalies from expected fluctuations. For example, if your infrastructure typically scales up every Monday, Datadog recognizes this pattern and won’t flag it as a cost anomaly.
+Our algorithm takes into account seasonality, distinguishing true anomalies from expected fluctuations. For example, if your infrastructure typically scales up every Monday, Datadog recognizes this pattern and won't flag it as a cost anomaly.
 
 To further reduce noise, anomalies with low cost impact are automatically filtered out, ensuring your attention stays focused on the largest anomalies.
 
