@@ -1132,7 +1132,7 @@ menu:
       identifier: coterm_rules
       parent: coterm
       weight: 3
-    - name: Cloudcraft
+    - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
       identifier: cloudcraft
@@ -2714,28 +2714,34 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 202
+    - name: Cloudcraft
+      url: datadog_cloudcraft/
+      pre: cloudcraft
+      identifier: datadog_cloudcraft
+      parent: infrastructure_heading
+      weight: 10000
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
       parent: infrastructure_heading
       identifier: infrastructure_resource_catalog
-      weight: 10000
+      weight: 20000
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
-      weight: 10001
+      identifier: infrastructure_resource_catalog_schemat
+      weight: 20001
     - name: Governance
       url: infrastructure/resource_catalog/governance/
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_governance
-      weight: 10002
+      weight: 20002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
       parent: infrastructure_heading
-      weight: 20000
+      weight: 30000
     - name: Setup
       url: universal_service_monitoring/setup/
       parent: usm_parent
@@ -2750,7 +2756,7 @@ menu:
       url: infrastructure/hostmap/
       identifier: hosts
       parent: infrastructure_heading
-      weight: 30000
+      weight: 40000
       pre: host-map
     - name: Host List
       identifier: infrastructure_list
@@ -2761,7 +2767,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
       pre: container
     - name: Monitoring Containers
       url: infrastructure/containers/
@@ -3008,7 +3014,7 @@ menu:
       identifier: process
       pre: process
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
     - name: Increase Process Retention
       identifier: infrastructure_process_increase_process_retention
       url: infrastructure/process/increase_process_retention/
@@ -3019,7 +3025,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 60000
+      weight: 70000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3169,7 +3175,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 70000
+      weight: 80000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
