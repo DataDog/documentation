@@ -5,7 +5,7 @@ title: Install Serverless Monitoring for Google Cloud Run Functions Gen 1
 ## Overview
 This page explains how to collect traces, trace metrics, runtime metrics, and custom metrics from your Cloud Run Functions Gen 1 (formerly known as Cloud Functions) utilizing serverless compatability layer. 
 
-For Gen 2 support, see [Google Cloud Run Functions][8], and to collect additional metrics, install the [Datadog Google Cloud Platform integration][6].
+This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support, see [2nd Gen Functions][8], and to collect additional metrics, install the [Google Cloud integration][6].
 
 <div class="alert alert-info">Google has integrated Cloud Run functions into Cloud Run UI. Starting August 2025, creating legacy 1st gen functions will only be possible using the gcloud CLI, API or Terraform. We reccomend upgrading your cloud run function to Gen 2 for more features and datadog support. Reach out to Google for more information on the migration to Cloud Run.</div>
 
@@ -82,7 +82,7 @@ For Gen 2 support, see [Google Cloud Run Functions][8], and to collect additiona
    | `DD_API_KEY` | Your [Datadog API key][1]. |
    | `DD_SITE` | Your [Datadog site][2]. For example, {{< region-param key=dd_site code="true" >}}. |
 
-7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Datadog Google Cloud Platform integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in GC. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
+7. **Configure Unified Service Tagging**. You can collect metrics from your Cloud Run Function by installing the [Google Cloud integration][6]. To correlate these metrics with your traces, first set the `env`, `service`, and `version` tags on your resource in GC. Then, configure the following environment variables. You can add custom tags as `DD_TAGS`.
 
    | Name | Value |
    | ---- | ----- |
@@ -136,7 +136,7 @@ def dd_log_forwader(request):
 ## What's next?
 
 - You can view your Cloud Run Functions traces in [Trace Explorer][4]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
-- You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Datadog Google Cloud Platform integration][6].
+- You can use the [Serverless > Cloud Run Functions][5] page to see your traces enriched with telemetry collected by the [Google Cloud integration][6].
 
 ### Enable/disable trace metrics
 
