@@ -367,7 +367,7 @@ The Temporal mTLS authentication requires the following credentials:
 | -------------  | ----------- | ----------- |
 | `serverAddress` | Yes | The server address (hostname and optional port). If undefined, port defaults to 7233. |
 | `serverNameOverride` | Yes | The server name that overrides the target name (SNI) used for TLS host name checking. This can be useful when you have a reverse proxy in front of a temporal server and want to override the SNI to route traffic to the appropriate backend based on custom rules. |
-| `serverRootCACertificate` | Yes | The root CA certificate used by the server. If not set, and if the server's certificate is issued by a trusted authority, verification will still succeed (for example, Cloud offering). |
+| `serverRootCACertificate` | Yes | The root CA certificate used by the server. If not set, and if the server's certificate is issued by a trusted authority, verification will still succeed (for example, if using a cloud provider like AWS, Google Cloud, or Azure, which issue server certificates through trusted, recognized CAs). |
 | `clientCertPairCrt` | Yes | The client certificate for connecting with mTLS. |
 | `clientCertPairKey` | Yes | The client key for connecting with mTLS. |
 
@@ -415,7 +415,7 @@ The Temporal TLS authentication requires the following credentials:
 | -------------  | ----------- | ----------- |
 | `serverAddress` | Yes | The server address (hostname and optional port). If undefined, port defaults to 7233. |
 | `serverNameOverride` | Yes | The server name that overrides the target name (SNI) used for TLS host name checking. This can be useful when you have a reverse proxy in front of a temporal server and want to override the SNI to route traffic to the appropriate backend based on custom rules. |
-| `serverRootCACertificate` | Yes | The root CA certificate used by the server. If not set, and if the server's certificate is issued by a trusted authority, verification will still succeed (for example, Cloud offering). |
+| `serverRootCACertificate` | Yes | The root CA certificate used by the server. If not set, and if the server's certificate is issued by a trusted authority, verification will still succeed (for example, if using a cloud provider like AWS, Google Cloud, or Azure, which issue server certificates through trusted, recognized CAs). |
 
 Include all credentials in a single file:
 
