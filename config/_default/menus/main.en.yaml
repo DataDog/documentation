@@ -60,11 +60,6 @@ menu:
       url: getting_started/tracing/
       parent: getting_started
       weight: 3
-    - name: Code Security
-      identifier: getting_started_code_security
-      url: getting_started/code_security/
-      parent: getting_started
-      weight: 4
     - name: Containers
       identifier: getting_started_containers
       url: getting_started/containers/
@@ -115,6 +110,7 @@ menu:
       url: getting_started/integrations/
       parent: getting_started
       weight: 12
+    - name: AWS
       identifier: getting_started_with_aws
       url: getting_started/integrations/aws/
       weight: 1201
@@ -174,6 +170,11 @@ menu:
       url: getting_started/security/cloud_siem/
       parent: getting_started_security
       weight: 1703
+    - name: Code Security
+      identifier: getting_started_code_security
+      url: getting_started/code_security/
+      parent: getting_started_security
+      weight: 1704
     - name: Serverless for AWS Lambda
       identifier: getting_started_serverless
       url: getting_started/serverless/
