@@ -27,7 +27,7 @@ Choose a name, set the index filter to `Source:stepfunction`, leave everything e
 
 If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
 
-**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][6] for more information.
+**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][5] for more information.
 
 ### Verify that your Step Function is using the latest version
 - AWS may release updates to the Step Function API or introduce newer versions of the Step Function definitions. Older versions may result in unexpected log formatting or behavior.
@@ -39,9 +39,9 @@ If your organization has an existing all-encompassing index with a low limit, pl
 
 ## Lambda traces are not merging with Step Function traces
 - Verify that you can see both Lambda traces and Step Function traces in Datadog.
-- Verify that you are using Python layer v95+ or Node.js layer v112+.
-- In your AWS console, open your Step Function and ensure that your state machine has `"Payload.$": "States.JsonMerge($$, $, false)"` on the Lambda steps.
-- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][4]. If you do not have a `TaskScheduled` event and only have a `LambdaFunctionScheduled` event, update the task in Step Functions definition to use the recommended Lambda integration. See the [AWS documentation][5] for instructions on how to do this.
+- Verify that you are using the correct layer or tracer version according to the [trace merging][6] guide. Also ensure that the Lambda step is instrumented in your state machine definition.
+- Execute your Step Function once and verify that the `TaskScheduled` event log of the Lambda step has the payload containing data from the [Step Function context object][4].
+- If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
 
 ## I can see the `aws.stepfunctions` root span but I cannot see any step spans
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
@@ -63,12 +63,9 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 - To verify if logs are reaching the Datadog backend, open the Log Explorer page and search `source:stepfunction` with the `Live` search timeframe (which shows all logs going into Datadog's logs intake). If you cannot see any logs, check if there are any error logs on the Datadog Forwarder such as wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you see Step Functions logs, verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized) and you should see Step Function traces associated with the log in a few minutes.
 
 
-#### Notes
-If your Lambda has the `DD_TRACE_EXTRACTOR` environment variable set, its traces cannot be merged.
-
-[1]: https://app.datadoghq.com/logs
-[2]: https://app.datadoghq.com/logs/livetail
-[3]: https://app.datadoghq.com/logs/pipelines/indexes
+[1]: /logs
+[2]: /logs/livetail
+[3]: /logs/pipelines/indexes
 [4]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
-[5]: https://docs.aws.amazon.com/step-functions/latest/dg/connect-lambda.html
-[6]: /logs/log_configuration/indexes/
+[5]: /logs/log_configuration/indexes/
+[6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-upstream-traces-with-step-functions-and-downstream-lambda-traces
