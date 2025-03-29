@@ -46,7 +46,7 @@ nav_sections:
       title: 모바일 애플리케이션
     - desc: 위험 요소가 있는 조직의 인시던트 식별, 분석 및 완화
       icon: incidents
-      link: 서비스_관리/인시던트_관리
+      link: service_management/incident_management
       title: '인시던트 관리 '
     - desc: 애플리케이션 및 인프라스트럭처에서 중요한 변경 사항 및 알림을 추적합니다.
       icon: events
@@ -100,11 +100,11 @@ nav_sections:
       link: data_jobs/
       title: 데이터 작업 모니터링
     - desc: 코드 변경 없이 서비스를 검색하고 매핑하며, 모니터링합니다.
-      icon: USM
+      icon: usm
       link: universal_service_monitoring/
       title: 범용 서비스 모니터링
     - desc: 가동 시간을 보장하고, 지역적 문제를 제기하며, 애플리케이션 성능을 테스트합니다.
-      icon: 신서틱(Synthetic)
+      icon: synthetics
       link: synthetics/
       title: 신서틱(Synthetic) 모니터링
     - desc: 웹, 모바일, 백엔드에서 크리티컬한 오류를 파악하고 해결하는 속도 높이기
@@ -112,7 +112,7 @@ nav_sections:
       link: error_tracking/
       title: 오류 추적
     - desc: 애플리케이션 사용자 경험을 수집하고 관찰 및 분석합니다.
-      icon: "\bRUM"
+      icon: rum
       link: real_user_monitoring/
       title: 실제 사용자 모니터링
     - desc: 사용자 행동에 대한 인사이트를 확보하고 데이터 기반 제품 의사 결정을 내리세요
@@ -120,7 +120,7 @@ nav_sections:
       link: product_analytics/
       title: 제품 분석
     - desc: 모바일 애플리케이션의 사용자 여정 및 비즈니스 거래 모니터링
-      icon: 모바일
+      icon: mobile
       link: mobile_app_testing/
       title: 모바일 애플리케이션 테스팅
     - desc: CI/CD 제공 업체와 코딩 없는 통합 및 end-to-end 테스트를 수행합니다.
@@ -128,11 +128,11 @@ nav_sections:
       link: continuous_testing/
       title: 지속적인 테스트
     - desc: CI 파이프라인의 상태 및 성능 모니터링
-      icon: CI
+      icon: ci
       link: continuous_integration/
       title: CI 가시성
     - desc: 취약한 테스트를 감지하고 취약한 테스트를 기져오는 커밋 식별
-      icon: CI
+      icon: ci
       link: tests/
       title: 테스트 최적화
     - desc: 위협, 취약성 및 오설정 탐지
@@ -140,15 +140,15 @@ nav_sections:
       link: security/
       title: 보안
     - desc: 메트릭에 대한 배포를 탐색하고 생성합니다.
-      icon: 메트릭
+      icon: metric
       link: metrics/
       title: 메트릭
     - desc: 수집된 로그를 처리하고 모니터링 및 보관합니다.
-      icon: 로그
+      icon: log
       link: logs/
       title: 로그 관리
     - desc: 텔레메트리 파이프라인을 관리하고 모니터링합니다.
-      icon: 파이프라인
+      icon: pipelines
       link: observability_pipelines/
       title: 관측 가능성 파이프라인
     - desc: LLM 애플리케이션 추적 및 모니터링하고 보안 유지하기
