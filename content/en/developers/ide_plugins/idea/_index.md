@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm. It helps improve software performance by providing code insights in the IDE based on real-time observability data.  The plugin is for developers that use Datadog products including [Log Explorer][5], [Error Tracking][6], [Code Security][7], the [Continuous Profiler][10], [Test Optimization][18] and [CI Visibility][19] to monitor their services.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data.  The plugin is for developers that use Datadog products including [Log Explorer][5], [Error Tracking][6], [Code Security][7], the [Continuous Profiler][10], [Test Optimization][18] and [CI Visibility][19] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -77,7 +77,7 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 ## Logs insights
 
-Log patterns from Datadog are matched directly to lines of code in your editor for your Java, Go, and Python source files:
+Log patterns from Datadog are matched directly to lines of code in your editor for your Java, JavaScript, TypeScript, Go, and Python source files:
 {{< img src="/developers/ide_plugins/idea/log-patterns.png" alt="A log line showing log events from Datadog" style="width:100%;" >}}
 
 A popup shows runtime values from the log entries:
