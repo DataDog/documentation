@@ -2124,6 +2124,41 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    AddFieldsProcessor:
+      description: The `add_fields` processor adds static key-value fields to logs.
+      properties:
+        fields:
+          description: The `AddFieldsProcessor` `fields`.
+          items:
+            $ref: '#/components/schemas/FieldItem'
+          type: array
+        id:
+          description: The `AddFieldsProcessor` `id`.
+          example: ''
+          type: string
+        inputs:
+          description: The `AddFieldsProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/AddFieldsProcessorType'
+      required:
+      - id
+      - type
+      - fields
+      - inputs
+      type: object
+    AddFieldsProcessorType:
+      description: The definition of `AddFieldsProcessorType` object.
+      enum:
+      - add_fields
+      example: add_fields
+      type: string
+      x-enum-varnames:
+      - ADD_FIELDS
     Advisory:
       description: Advisory.
       properties:
@@ -10688,6 +10723,58 @@ components:
       required:
       - databaseMonitoringTrigger
       type: object
+    DatadogAgentSource:
+      description: The `datadog_agent` source collects logs from the Datadog Agent.
+      properties:
+        id:
+          description: The `DatadogAgentSource` `id`.
+          example: ''
+          type: string
+        tls:
+          $ref: '#/components/schemas/Tls'
+        type:
+          $ref: '#/components/schemas/DatadogAgentSourceType'
+      required:
+      - id
+      - type
+      type: object
+    DatadogAgentSourceType:
+      description: The definition of `DatadogAgentSourceType` object.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
+    DatadogLogsDestination:
+      description: The `datadog_logs` destination forwards logs to Datadog Logs.
+      properties:
+        id:
+          description: The `DatadogLogsDestination` `id`.
+          example: ''
+          type: string
+        inputs:
+          description: The `DatadogLogsDestination` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/DatadogLogsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    DatadogLogsDestinationType:
+      description: The definition of `DatadogLogsDestinationType` object.
+      enum:
+      - datadog_logs
+      example: datadog_logs
+      type: string
+      x-enum-varnames:
+      - DATADOG_LOGS
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -13739,6 +13826,57 @@ components:
             $ref: '#/components/schemas/FastlyServiceData'
           type: array
       type: object
+    FieldItem:
+      description: Reusable definition for a field with a name and value.
+      properties:
+        name:
+          description: The field name.
+          example: ''
+          type: string
+        value:
+          description: The field value.
+          example: ''
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    FilterProcessor:
+      description: The `filter` processor allows conditional processing of logs based
+        on a Datadog search query. Logs that match the `include` query are passed
+        through; others are discarded.
+      properties:
+        id:
+          description: The `FilterProcessor` `id`.
+          example: ''
+          type: string
+        include:
+          description: The `FilterProcessor` `include`.
+          example: ''
+          type: string
+        inputs:
+          description: The `FilterProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/FilterProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      type: object
+    FilterProcessorType:
+      description: The `FilterProcessor` `type`.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
     Finding:
       description: A single finding without the message and resource configuration.
       properties:
@@ -17656,6 +17794,81 @@ components:
       - index
       - caseIndex
       type: object
+    KafkaSource:
+      description: The `kafka` source ingests data from Apache Kafka topics.
+      properties:
+        group_id:
+          description: The `KafkaSource` `group_id`.
+          example: ''
+          type: string
+        id:
+          description: The `KafkaSource` `id`.
+          example: ''
+          type: string
+        librdkafka_options:
+          description: The `KafkaSource` `librdkafka_options`.
+          items:
+            $ref: '#/components/schemas/KafkaSourceLibrdkafkaOptionsItems'
+          type: array
+        sasl:
+          $ref: '#/components/schemas/KafkaSourceSasl'
+        tls:
+          $ref: '#/components/schemas/Tls'
+        topics:
+          description: The `KafkaSource` `topics`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/KafkaSourceType'
+      required:
+      - id
+      - type
+      - group_id
+      - topics
+      type: object
+    KafkaSourceLibrdkafkaOptionsItems:
+      description: The definition of `librdkafka_options` object.
+      properties:
+        name:
+          description: The `items` `name`.
+          example: ''
+          type: string
+        value:
+          description: The `items` `value`.
+          example: ''
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    KafkaSourceSasl:
+      description: The definition of `KafkaSourceSasl` object.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/KafkaSourceSaslMechanism'
+      type: object
+    KafkaSourceSaslMechanism:
+      description: The definition of `KafkaSourceSaslMechanism` object.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
+    KafkaSourceType:
+      description: The definition of `KafkaSourceType` object.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -22661,6 +22874,45 @@ components:
       - name
       - value
       type: object
+    ParseJSONProcessor:
+      description: The `parse_json` processor extracts JSON from a specified field
+        and flattens it into the event. This is useful when logs contain embedded
+        JSON as a string.
+      properties:
+        field:
+          description: The `ParseJSONProcessor` `field`.
+          example: ''
+          type: string
+        id:
+          description: The `ParseJSONProcessor` `id`.
+          example: ''
+          type: string
+        include:
+          description: The `ParseJSONProcessor` `include`.
+          type: string
+        inputs:
+          description: The `ParseJSONProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ParseJSONProcessorType'
+      required:
+      - id
+      - type
+      - field
+      - inputs
+      type: object
+    ParseJSONProcessorType:
+      description: The `ParseJSONProcessor` `type`.
+      enum:
+      - parse_json
+      example: parse_json
+      type: string
+      x-enum-varnames:
+      - PARSE_JSON
     PartialAPIKey:
       description: Partial Datadog API key.
       properties:
@@ -22867,6 +23119,79 @@ components:
       type: string
       x-enum-varnames:
       - PERMISSIONS
+    Pipeline:
+      description: The definition of `Pipeline` object.
+      properties:
+        data:
+          $ref: '#/components/schemas/PipelineData'
+      required:
+      - data
+      type: object
+    PipelineData:
+      description: The definition of `PipelineData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/PipelineDataAttributes'
+        id:
+          description: Unique identifier for the processor.
+          example: pipeline-1
+          type: string
+        type:
+          description: The `PipelineData` `type`.
+          example: pipeline
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    PipelineDataAttributes:
+      description: The definition of `PipelineDataAttributes` object.
+      properties:
+        config:
+          $ref: '#/components/schemas/PipelineDataAttributesConfig'
+        name:
+          description: Name of the pipeline.
+          example: Main Observability Pipeline
+          type: string
+      required:
+      - name
+      - config
+      type: object
+    PipelineDataAttributesConfig:
+      description: The definition of `PipelineDataAttributesConfig` object.
+      properties:
+        destinations:
+          description: The `PipelineDataAttributesConfig` `destinations`.
+          example: []
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/DatadogLogsDestination'
+          type: array
+        processors:
+          description: The `PipelineDataAttributesConfig` `processors`.
+          example: []
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/FilterProcessor'
+            - $ref: '#/components/schemas/ParseJSONProcessor'
+            - $ref: '#/components/schemas/QuotaProcessor'
+            - $ref: '#/components/schemas/AddFieldsProcessor'
+            - $ref: '#/components/schemas/RemoveFieldsProcessor'
+            - $ref: '#/components/schemas/RenameFieldsProcessor'
+          type: array
+        sources:
+          description: The `PipelineDataAttributesConfig` `sources`.
+          example: []
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/DatadogAgentSource'
+            - $ref: '#/components/schemas/KafkaSource'
+          type: array
+      required:
+      - sources
+      - processors
+      - destinations
+      type: object
     Powerpack:
       description: Powerpacks are templated groups of dashboard widgets you can save
         from an existing dashboard and turn into reusable packs in the widget tray.
@@ -23486,6 +23811,101 @@ components:
       x-enum-varnames:
       - ASC
       - DESC
+    QuotaLimit:
+      description: Unified definition of `QuotaLimit` object.
+      properties:
+        enforce:
+          $ref: '#/components/schemas/QuotaLimitEnforceType'
+        limit:
+          description: The limit for quota enforcement.
+          example: 0
+          format: int64
+          type: integer
+      required:
+      - enforce
+      - limit
+      type: object
+    QuotaLimitEnforceType:
+      description: The definition of `QuotaLimitEnforceType` object.
+      enum:
+      - bytes
+      - events
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+      - EVENTS
+    QuotaProcessor:
+      description: The Quota Processor measures logging traffic for logs that match
+        a specified filter. When the configured daily quota is met, the processor
+        can drop or alert.
+      properties:
+        drop_events:
+          description: The `QuotaProcessor` `drop_events`.
+          example: false
+          type: boolean
+        id:
+          description: Unique identifier.
+          example: ''
+          type: string
+        ignore_when_missing_partitions:
+          description: The `QuotaProcessor` `ignore_when_missing_partitions`.
+          type: boolean
+        inputs:
+          description: The `QuotaProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        limit:
+          $ref: '#/components/schemas/QuotaLimit'
+        name:
+          description: The `QuotaProcessor` `name`.
+          example: ''
+          type: string
+        overrides:
+          description: The `QuotaProcessor` `overrides`.
+          items:
+            $ref: '#/components/schemas/QuotaProcessorOverride'
+          type: array
+        partition_fields:
+          description: The `QuotaProcessor` `partition_fields`.
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/QuotaProcessorType'
+      required:
+      - id
+      - type
+      - name
+      - drop_events
+      - limit
+      - inputs
+      type: object
+    QuotaProcessorOverride:
+      description: The definition of `QuotaProcessorOverride` object.
+      properties:
+        fields:
+          description: The `QuotaProcessorOverride` `fields`.
+          items:
+            $ref: '#/components/schemas/FieldItem'
+          type: array
+        limit:
+          $ref: '#/components/schemas/QuotaLimit'
+      required:
+      - fields
+      - limit
+      type: object
+    QuotaProcessorType:
+      description: The definition of `QuotaProcessorType` object.
+      enum:
+      - quota
+      example: quota
+      type: string
+      x-enum-varnames:
+      - QUOTA
     RUMAggregateBucketValue:
       description: A bucket value, can be either a timeseries or a single value.
       oneOf:
@@ -24855,6 +25275,98 @@ components:
       - new_advisories
       - avoided_advisories
       type: object
+    RemoveFieldsProcessor:
+      description: The `remove_fields` processor deletes specified fields from logs.
+      properties:
+        fields:
+          description: The `RemoveFieldsProcessor` `fields`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        id:
+          description: The `RemoveFieldsProcessor` `id`.
+          example: ''
+          type: string
+        inputs:
+          description: The `RemoveFieldsProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/RemoveFieldsProcessorType'
+      required:
+      - id
+      - type
+      - fields
+      - inputs
+      type: object
+    RemoveFieldsProcessorType:
+      description: The definition of `RemoveFieldsProcessorType` object.
+      enum:
+      - remove_fields
+      example: remove_fields
+      type: string
+      x-enum-varnames:
+      - REMOVE_FIELDS
+    RenameFieldsProcessor:
+      description: The `rename_fields` processor changes field names.
+      properties:
+        fields:
+          description: The `RenameFieldsProcessor` `fields`.
+          items:
+            $ref: '#/components/schemas/RenameFieldsProcessorFieldsItems'
+          type: array
+        id:
+          description: The `RenameFieldsProcessor` `id`.
+          example: ''
+          type: string
+        inputs:
+          description: The `RenameFieldsProcessor` `inputs`.
+          example:
+          - ''
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/RenameFieldsProcessorType'
+      required:
+      - id
+      - type
+      - fields
+      - inputs
+      type: object
+    RenameFieldsProcessorFieldsItems:
+      description: The definition of `RenameFieldsProcessorFieldsItems` object.
+      properties:
+        destination:
+          description: The `items` `destination`.
+          example: ''
+          type: string
+        preserve_source:
+          description: The `items` `preserve_source`.
+          example: false
+          type: boolean
+        source:
+          description: The `items` `source`.
+          example: ''
+          type: string
+      required:
+      - source
+      - destination
+      - preserve_source
+      type: object
+    RenameFieldsProcessorType:
+      description: The definition of `RenameFieldsProcessorType` object.
+      enum:
+      - rename_fields
+      example: rename_fields
+      type: string
+      x-enum-varnames:
+      - RENAME_FIELDS
     ReorderRetentionFiltersRequest:
       description: A list of retention filters to reorder.
       properties:
@@ -32796,6 +33308,22 @@ components:
       items:
         $ref: '#/components/schemas/TimeseriesResponseValues'
       type: array
+    Tls:
+      description: The definition of `Tls` object.
+      properties:
+        ca_file:
+          description: The `Tls` `ca_file`.
+          type: string
+        crt_file:
+          description: The `Tls` `crt_file`.
+          example: ''
+          type: string
+        key_file:
+          description: The `Tls` `key_file`.
+          type: string
+      required:
+      - crt_file
+      type: object
     TokenName:
       description: Name for tokens.
       example: MyTokenName
@@ -47935,6 +48463,128 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/remote_config/products/obs_pipelines/pipelines:
+    post:
+      description: Create a new pipeline
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: Pipeline created
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 1
+      x-undo:
+        operationId: DeletePipeline
+        parameters:
+        - in: path
+          name: pipeline_id
+          required: true
+          schema:
+            type: string
+        type: unsafe
+  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Pipeline deleted
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific pipeline
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: A specific pipeline
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    put:
+      description: Update a pipeline
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pipeline'
+          description: Updated pipeline
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -57882,6 +58532,11 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Observability Pipelines are awesome!
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/observability_pipelines/
+  name: Observability Pipelines
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration
