@@ -328,7 +328,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "**"
+        ignore:
+          - "**"
 ```
 
 #### Ignore for a file or directory
@@ -339,7 +340,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
+        ignore:
+          - "ad-server/src/app.js"
 ```
 
 #### Ignore for a specific instance
