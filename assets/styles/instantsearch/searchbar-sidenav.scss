@@ -8,10 +8,6 @@
 
     .hits-container {
         z-index: 1;
-        max-width: 250px;
-    }
-
-    #hits {
         width: 50vw;
         margin-top: 6px;
     }
@@ -33,6 +29,23 @@
 
         & #submit-text {
             display: none;
+        }
+    }
+}
+
+body.partners {
+    .sidenav .searchbox-container {
+        .hits-container {
+            display: flex;
+            flex-direction: column;
+
+            #hits {
+                order: 2;
+            }
+
+            #hits-partners {
+                order: 1;
+            }
         }
     }
 }
