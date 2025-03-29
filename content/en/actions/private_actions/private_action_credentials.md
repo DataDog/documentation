@@ -19,123 +19,6 @@ Some private actions, such as Jenkins and PostgreSQL, require credentials to fun
 ## Credential files
 
 {{< tabs >}}
-{{% tab "PostgreSQL" %}}
-
-The PostgreSQL connection accepts the following credentials:
-
-|  Credential    | Required    | Description |
-| -------------  | ----------- | ----------- |
-| `host` | Yes | The name of the host to connect to. For more information, see [the official PostGreSQL documentation][101]. |
-| `port` | Yes | The port number to connect to at the server host, or socket filename extension for UNIX-domain connections. For more information, see [the official PostGreSQL documentation][102]. |
-| `user` | Yes | The PostgreSQL user name to connect as.<br><br>For more information, see [the official PostGreSQL documentation][103]. |
-| `password` | Yes | The password to use if the server demands password authentication. <br><br>For more information, see [the official PostGreSQL documentation][104]. |
-| `database` | Yes | The database name. For more information, see [the official PostGreSQL documentation][105]. |
-| `sslmode` | Yes | This option determines whether or with what priority a secure SSL TCP/IP connection is negotiated with the server.<br><br>Available options are `require` and `disable`.<br><br>For more information, see [the official PostGreSQL documentation][106]. |
-| `applicationName` | No | The name of the application connecting to the PostGreSQL server. For more information, see [the official PostGreSQL documentation][107]. |
-| `searchPath` | No | Set a schema search path. For more information, see [the official PostGreSQL documentation][108]. |
-
-Include all credentials in a single file:
-
-
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
-{
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "tokenName": "host",
-                        "tokenValue": "HOST_NAME"
-                },
-                {
-                        "tokenName": "port",
-                        "tokenValue": "PORT"
-                },
-                {
-                        "tokenName": "user",
-                        "tokenValue": "USER"
-                },
-                {
-                        "tokenName": "password",
-                        "tokenValue": "PASSWORD"
-                },
-                {
-                        "tokenName": "database",
-                        "tokenValue": "DATABASE_NAME"
-                },
-                {
-                        "tokenName": "sslmode",
-                        "tokenValue": "require"
-                },
-                {
-                        "tokenName": "applicationName",
-                        "tokenValue": "APPLICATION_NAME"
-                },
-                {
-                        "tokenName": "searchPath",
-                        "tokenValue": "SEARCH_PATH"
-                }
-        ]
-}
-{{< /code-block >}}
-
-Replace the example values with your credentials.
-
-
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json`.
-
-{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/postgresql_token.json`'" style="width:80%;" >}}
-
-[101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
-[102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
-[103]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-USER
-[104]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PASSWORD
-[105]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-DBNAME
-[106]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE
-[107]: https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-APPLICATION-NAME
-[108]: https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATH
-{{% /tab %}}
-
-{{% tab "Jenkins" %}}
-
-The Jenkins connection accepts the following credentials:
-
-|  Credential    | Required    | Description |
-| -------------  | ----------- | ----------- |
-| `domain` | Yes | The domain of the Jenkins server that you want to connect to. |
-| `username` | Yes | The username of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want your runner to perform. |
-| `token` | Yes | The API token of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want to perform. You can generate an API token in the Jenkins user settings. |
-
-Include all credentials in a single file:
-
-
-{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
-{
-        "auth_type": "Token Auth",
-        "credentials": [
-                {
-                        "tokenName": "username",
-                        "tokenValue": "USERNAME"
-                },
-                {
-                        "tokenName": "token",
-                        "tokenValue": "API_TOKEN"
-                },
-                {
-                        "tokenName": "domain",
-                        "tokenValue": "DOMAIN"
-                }
-        ]
-}
-{{< /code-block >}}
-
-Replace `USERNAME`, `API_TOKEN`, and `DOMAIN` with your credentials.
-
-
-In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json`.
-
-{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/jenkins_token.json'" style="width:80%;" >}}
-
-{{% /tab %}}
-
 {{% tab "HTTP" %}}
 
 HTTP supports three authentication methods:
@@ -239,6 +122,48 @@ In the runner's connection, specify the location of the credential file on the p
 {{< img src="service_management/par-gitlab-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/gitlab_token.json'" style="width:80%;" >}}
 
 [201]: https://docs.gitlab.com/ee/api/
+{{% /tab %}}
+
+{{% tab "Jenkins" %}}
+
+The Jenkins connection accepts the following credentials:
+
+|  Credential    | Required    | Description |
+| -------------  | ----------- | ----------- |
+| `domain` | Yes | The domain of the Jenkins server that you want to connect to. |
+| `username` | Yes | The username of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want your runner to perform. |
+| `token` | Yes | The API token of the Jenkins user that you want to use to authenticate with the Jenkins server. This user must have the necessary permissions to perform the actions you want to perform. You can generate an API token in the Jenkins user settings. |
+
+Include all credentials in a single file:
+
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/jenkins_token.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "tokenName": "username",
+                        "tokenValue": "USERNAME"
+                },
+                {
+                        "tokenName": "token",
+                        "tokenValue": "API_TOKEN"
+                },
+                {
+                        "tokenName": "domain",
+                        "tokenValue": "DOMAIN"
+                }
+        ]
+}
+{{< /code-block >}}
+
+Replace `USERNAME`, `API_TOKEN`, and `DOMAIN` with your credentials.
+
+
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/jenkins_token.json`.
+
+{{< img src="service_management/par-jenkins-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/jenkins_token.json'" style="width:80%;" >}}
+
 {{% /tab %}}
 
 {{% tab "MongoDB" %}}
@@ -349,6 +274,82 @@ In the runner's connection, specify the location of the credential file on the p
 
 {{< img src="service_management/par-mongodb-standard-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/mongodb_standard_token.json'" style="width:80%;" >}}
 
+{{% /tab %}}
+
+
+{{% tab "PostgreSQL" %}}
+
+The PostgreSQL connection accepts the following credentials:
+
+|  Credential    | Required    | Description |
+| -------------  | ----------- | ----------- |
+| `host` | Yes | The name of the host to connect to. For more information, see [the official PostGreSQL documentation][101]. |
+| `port` | Yes | The port number to connect to at the server host, or socket filename extension for UNIX-domain connections. For more information, see [the official PostGreSQL documentation][102]. |
+| `user` | Yes | The PostgreSQL user name to connect as.<br><br>For more information, see [the official PostGreSQL documentation][103]. |
+| `password` | Yes | The password to use if the server demands password authentication. <br><br>For more information, see [the official PostGreSQL documentation][104]. |
+| `database` | Yes | The database name. For more information, see [the official PostGreSQL documentation][105]. |
+| `sslmode` | Yes | This option determines whether or with what priority a secure SSL TCP/IP connection is negotiated with the server.<br><br>Available options are `require` and `disable`.<br><br>For more information, see [the official PostGreSQL documentation][106]. |
+| `applicationName` | No | The name of the application connecting to the PostGreSQL server. For more information, see [the official PostGreSQL documentation][107]. |
+| `searchPath` | No | Set a schema search path. For more information, see [the official PostGreSQL documentation][108]. |
+
+Include all credentials in a single file:
+
+
+{{< code-block lang="json" filename="/etc/dd-action-runner/credentials/postgresql_token.json" disable_copy="false" collapsible="true" >}}
+{
+        "auth_type": "Token Auth",
+        "credentials": [
+                {
+                        "tokenName": "host",
+                        "tokenValue": "HOST_NAME"
+                },
+                {
+                        "tokenName": "port",
+                        "tokenValue": "PORT"
+                },
+                {
+                        "tokenName": "user",
+                        "tokenValue": "USER"
+                },
+                {
+                        "tokenName": "password",
+                        "tokenValue": "PASSWORD"
+                },
+                {
+                        "tokenName": "database",
+                        "tokenValue": "DATABASE_NAME"
+                },
+                {
+                        "tokenName": "sslmode",
+                        "tokenValue": "require"
+                },
+                {
+                        "tokenName": "applicationName",
+                        "tokenValue": "APPLICATION_NAME"
+                },
+                {
+                        "tokenName": "searchPath",
+                        "tokenValue": "SEARCH_PATH"
+                }
+        ]
+}
+{{< /code-block >}}
+
+Replace the example values with your credentials.
+
+
+In the runner's connection, specify the location of the credential file on the private action runner's container. In this example, the credential file is stored at `/etc/dd-action-runner/credentials/postgresql_token.json`.
+
+{{< img src="service_management/par-postgresql-credentials.png" alt="The path to the credential file is '/etc/dd-action-runner/credentials/postgresql_token.json`'" style="width:80%;" >}}
+
+[101]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-HOST
+[102]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PORT
+[103]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-USER
+[104]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-PASSWORD
+[105]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-DBNAME
+[106]: https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNECT-SSLMODE
+[107]: https://www.postgresql.org/docs/current/runtime-config-logging.html#GUC-APPLICATION-NAME
+[108]: https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATH
 {{% /tab %}}
 
 {{% tab "Temporal" %}}
