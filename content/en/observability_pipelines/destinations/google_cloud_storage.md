@@ -3,6 +3,8 @@ title: Google Cloud Storage Destination
 disable_toc: false
 ---
 
+<div class="alert alert-warning">The Google Cloud Storage destination only supports <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a>.</div>
+
 The Google Cloud Storage destination is available for the [Archive Logs template][1]. Use this destination to send your logs in Datadog-rehydratable format to a Google Cloud Storage bucket for archiving. You need to set up [Datadog Log Archives][2] if you haven't already, and then set up the destination in the pipeline UI.
 
 ## Configure Log Archives
