@@ -4,29 +4,15 @@ import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
 import FilterForm from './FilterForm';
+import { WizardData } from './types';
 
-function FilterSummary({
-  filterConfig,
-  customizationConfig
+function FilterList({
+  customizationConfig,
+  onEdit
 }: {
-  filterConfig: FilterConfig;
   customizationConfig: CustomizationConfig;
+  onEdit: ({ filters, newCustomizationConfig }: WizardData) => void;
 }) {
-  if (!filterConfig.trait_id || !filterConfig.option_group_id) {
-    return <span>Incomplete filter.</span>;
-  }
-  const optionLabels = customizationConfig.optionGroupsById[filterConfig.option_group_id]?.map(
-    (option) => option.label
-  );
-
-  return (
-    <span>
-      {filterConfig.label}: {optionLabels.join(', ')}
-    </span>
-  );
-}
-
-function FilterList({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, FilterConfig>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
 
@@ -74,3 +60,27 @@ function FilterList({ customizationConfig }: { customizationConfig: Customizatio
 }
 
 export default FilterList;
+
+/**
+ * A short text representation of a filter configuration.
+ */
+function FilterSummary({
+  filterConfig,
+  customizationConfig
+}: {
+  filterConfig: FilterConfig;
+  customizationConfig: CustomizationConfig;
+}) {
+  if (!filterConfig.trait_id || !filterConfig.option_group_id) {
+    return <span>Incomplete filter.</span>;
+  }
+  const optionLabels = customizationConfig.optionGroupsById[filterConfig.option_group_id]?.map(
+    (option) => option.label
+  );
+
+  return (
+    <span>
+      {filterConfig.label}: {optionLabels.join(', ')}
+    </span>
+  );
+}

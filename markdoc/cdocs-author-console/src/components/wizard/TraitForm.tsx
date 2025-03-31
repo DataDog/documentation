@@ -43,6 +43,9 @@ function a11yProps(index: number) {
   };
 }
 
+/**
+ * A form that allows the user to choose an existing trait ID, or configure a new trait.
+ */
 function TraitForm({
   customizationConfig,
   onUpdate
