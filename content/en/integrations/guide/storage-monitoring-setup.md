@@ -257,7 +257,7 @@ storageinsights.reportDetails.list
 ```
 
 After the necessary permissions have been granted, Datadog can create the inventory report configuration with your setup details in the next step.
-
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Post-setup steps
