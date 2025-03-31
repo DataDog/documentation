@@ -60,8 +60,17 @@ const initCodeTabs = () => {
                     tabPanesList.forEach(pane => pane.classList.remove('active', 'show'))
 
                     // Show the active content and highlight active tab.
-                    activeLangTab.closest('li').classList.add('active')
+                    const activeTabLi = activeLangTab.closest('li')
+                    activeTabLi.classList.add('active')
                     activePane.classList.add('active', 'show')
+
+                    // Check if the first tab is active
+                    const isFirstTab = Array.from(tabsList).indexOf(activeTabLi) === 0
+                    if (isFirstTab) {
+                        codeTabsElement.classList.add('first-tab-active')
+                    } else {
+                        codeTabsElement.classList.remove('first-tab-active')
+                    }
                 }
 
                 const currentActiveTab = codeTabsElement.querySelector('.nav-tabs li.active')
@@ -73,6 +82,7 @@ const initCodeTabs = () => {
                     const firstTabPane = codeTabsElement.querySelector(`.tab-pane[data-lang="${firstTabActiveLang}"]`)
                     firstTab.classList.add('active')
                     firstTabPane.classList.add('active', 'show')
+                    codeTabsElement.classList.add('first-tab-active')
                 }
             })
         }
@@ -82,7 +92,7 @@ const initCodeTabs = () => {
 
     const scrollToAnchor = (tab, anchorname) => {
         const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
-        
+
         if (anchor) {
             anchor.scrollIntoView();
         } else {
@@ -116,7 +126,7 @@ const initCodeTabs = () => {
         if (codeTabsList.length > 0) {
             codeTabsList.forEach(codeTabsElement => {
                 let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
-                allTabLinksNodeList.forEach(link => {
+                allTabLinksNodeList.forEach((link, index) => {
                     link.addEventListener('click', e => {
                         e.preventDefault();
 
@@ -124,16 +134,23 @@ const initCodeTabs = () => {
 
                         activateCodeTab(link);
                         getContentTabHeight();
-                        
-                        // ensures page doesnt jump when navigating tabs.
-                        // takes into account page shifting that occurs due to navigating tabbed content w/ height changes.
-                        // implementation of synced tabs from https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro
+
                         window.scrollTo({
                             top: (window.scrollY + e.target.getBoundingClientRect().top) - previousTabPosition,
                             behavior: "instant"
                         });
                         getContentTabHeight();
-                    })
+                    });
+
+                    // Add hover listeners for the first tab
+                    if (index === 0) {
+                        link.addEventListener('mouseenter', () => {
+                            codeTabsElement.classList.add('first-tab-hover');
+                        });
+                        link.addEventListener('mouseleave', () => {
+                            codeTabsElement.classList.remove('first-tab-hover');
+                        });
+                    }
                 });
             });
         }

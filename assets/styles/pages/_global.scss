@@ -7,12 +7,14 @@ $dimGreyGrey: #707070;
 
 :root {
     --bs-link-hover-color: #{$ddpurple};
+    --background-color: #f8f8f8;
 }
 
 html {
     font-size: 18px;
     opacity: 1 !important;
     transition: opacity 0.3s ease-in;
+    background-color: var(--background-color);
 }
 
 body {
@@ -637,17 +639,27 @@ h5 {
 /* codetabs inside content */
 .code-tabs {
     min-height: 200px;
+    position: relative;
+    padding-top: 8px;
+
+    &.first-tab-active .tab-content,
+    &.first-tab-hover .tab-content {
+        border-top-left-radius: 0;
+    }
 
     & > ul {
         list-style-type: none;
-        padding-top: 6px;
+        padding-top: 0;
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
-        margin-bottom: 8px;
+        margin-bottom: -1px;
+        position: relative;
+        z-index: 2;
 
         li {
-            padding-bottom: 6px;
+            padding-bottom: 0;
+            position: relative;
 
             &:lang(ja) {
                 font-style: normal;
@@ -663,37 +675,38 @@ h5 {
             }
 
             &.active {
+                z-index: 3;
+
                 a {
-                    background: linear-gradient(135deg, $ddpurple, darken($ddpurple, 15%));
-                    color: white;
-                    box-shadow: 0 4px 20px rgba(99, 44, 166, 0.25);
-                    border: none;
+                    background: #FFFFFF;
+                    color: $ddpurple;
+                    box-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
+                    border: 1px solid rgba(99, 44, 166, 0.15);
+                    border-bottom-color: #FFFFFF;
                     font-weight: 700;
+                    margin-bottom: -1px;
 
                     &:hover {
-                        color: white;
+                        color: $ddpurple;
                     }
 
                     &::before {
-                        opacity: 1;
+                        opacity: 0;
                     }
                 }
             }
 
             a {
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: blur(8px);
-                border: 1px solid rgba(99, 44, 166, 0.15);
+                background: transparent;
+                border: 1px solid transparent;
                 padding: 8px 16px;
                 font-weight: 600;
                 font-size: 16px;
-                border-radius: 8px;
+                border-radius: 8px 8px 0 0;
                 display: inline-block;
-                margin-right: 0.625rem;
                 transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
-                overflow: hidden;
-                color: rgba(0, 0, 0, 0.75);
+                color: rgba(0, 0, 0, 0.6);
 
                 &::before {
                     content: '';
@@ -708,13 +721,13 @@ h5 {
                 }
 
                 &:hover {
-                    box-shadow: 0 4px 12px rgba(99, 44, 166, 0.12);
-                    border-color: rgba(99, 44, 166, 0.3);
                     color: $ddpurple;
+                    border-color: rgba(99, 44, 166, 0.15);
+                    border-bottom-color: transparent;
                 }
 
                 &:active {
-                    box-shadow: 0 2px 8px rgba(99, 44, 166, 0.15);
+                    box-shadow: 0 -2px 8px rgba(99, 44, 166, 0.15);
                 }
             }
         }
@@ -722,7 +735,7 @@ h5 {
 
     .nav-tabs-mobile {
         .dropdown-item:hover {
-            color: white;
+            color: $ddpurple;
         }
     }
 
@@ -732,16 +745,18 @@ h5 {
     }
 
     .tab-content {
-        background: rgba(249, 249, 249, 0.8);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(221, 221, 221, 0.5);
+        background: #FFFFFF;
+        border: 1px solid rgba(99, 44, 166, 0.15);
         border-radius: 12px;
         padding: 24px;
         margin: 0 0 32px 0;
+        position: relative;
+        z-index: 1;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: border-radius 0.2s ease;
 
         dl {
-            background-color: #FFFFFF;
+            background-color: transparent;
         }
 
         h2 > a,
