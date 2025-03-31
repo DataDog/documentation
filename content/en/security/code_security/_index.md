@@ -10,6 +10,7 @@ Code Security scans your first-party code and open source libraries used in your
 - [Static Code Analysis (SAST)][1] for identifying security and quality issues in your first-party code
 - [Software Composition Analysis (SCA)][2] for identifying open source dependencies in both your repositories and your services
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
+- [Secret Scanning][8] for identifying and validating leaked secrets (in Preview)
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
@@ -43,6 +44,9 @@ Runtime Code Analysis (IAST) identifies code-level vulnerabilities in your runni
 
 You can enable IAST on your services instrumented with Datadog APM. See [IAST setup][3] to get started.
 
+## Secret Scanning
+Secret Scanning identifies and validates leaked secrets in your codebase. [Request access to the Preview][9].
+
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/software_composition_analysis/
 [3]: /security/code_security/iast/
@@ -50,6 +54,8 @@ You can enable IAST on your services instrumented with Datadog APM. See [IAST se
 [5]: /security/code_security/software_composition_analysis/setup_runtime/
 [6]: /security/code_security/static_analysis/setup/
 [7]: /security/code_security/iast/setup/
+[8]: /security/code_security/secret_scanning/
+[9]: https://www.datadoghq.com/product-preview/secret-scanning/
 
 
 
