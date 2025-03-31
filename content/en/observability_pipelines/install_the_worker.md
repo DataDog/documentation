@@ -198,10 +198,6 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 1.
     ```
-    sudo apt purge observability-pipelines-worker
-    ```
-1.
-    ```
     yum remove observability-pipelines-worker
     ```
 1.
