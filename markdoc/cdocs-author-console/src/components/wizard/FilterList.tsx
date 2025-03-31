@@ -99,7 +99,6 @@ function FilterList({
 
   return (
     <div>
-      {Object.keys(filtersByUuid).length === 0 && <p>No filters added yet.</p>}
       {Object.keys(filtersByUuid).map((uuid) => {
         // Only show the edit and delete icons if the filter is not currently being edited
         let onEdit;

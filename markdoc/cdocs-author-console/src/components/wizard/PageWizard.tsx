@@ -25,13 +25,20 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
+      {filters.length === 0 && (
+        <p>
+          Click the button below to configure a filter and generate instructions for setting up a new customizable doc.
+        </p>
+      )}
       <div style={{ marginBottom: '30px' }}>
-        <h1 style={{ marginTop: '0px' }}>Filters</h1>
+        <h1 style={{ marginTop: '0px', marginBottom: '0px' }}>Filters</h1>
         <FilterList customizationConfig={customizationConfig} onChange={onFilterListChange} />
       </div>
-      <div>
-        <SetupInstructions filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
-      </div>
+      {filters.length > 0 && (
+        <div>
+          <SetupInstructions filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
+        </div>
+      )}
     </div>
   );
 }
