@@ -269,7 +269,7 @@ To see an example in action, see [flask-baggage on trace-examples][7]
 The <code>ddtrace-api</code> Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
 <br><br>The following steps are only necessary if you want to experiment with the in Preview <code>ddtrace-api</code> package.{{< /callout >}}
 
-The [ddtrace-api package][8] provides a stable public API for Datadog APM's custom Python instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog. 
+The [ddtrace-api package][8] provides a stable public API for Datadog APM's custom Python instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
 
 This separation between interface (`ddtrace-api`) and implementation (`ddtrace`) offers several benefits:
 
@@ -289,12 +289,12 @@ To use `ddtrace-api`:
    ddtrace-run python app.py
    ```
 
-3. After this is set up, you can write custom instrumentation exactly like the examples in the previous sections, but you import from `dd_trace_api` instead of `ddtrace`.
+3. After this is set up, you can write custom instrumentation exactly like the examples in the previous sections, but you import from `ddtrace_api` instead of `ddtrace`.
 
    For example:
    ```python
-   from dd_trace_api import tracer
-   
+   from ddtrace_api import tracer
+
    @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
    def get_ingredients():
        # go to the pantry
