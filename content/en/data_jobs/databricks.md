@@ -50,7 +50,7 @@ Datadog can install and manage a global init script in the Databricks workspace.
 <div class="alert alert-warning">
 <ul>
 <li>This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the instructions to <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> for installation on those specific clusters.</li>
-<li>This install option where Datadog installs & manages your Datadog global init script requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A Token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
+<li>This install option, in which Datadog installs and manages your Datadog global init script, requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
 </ul>
 </div>
 
