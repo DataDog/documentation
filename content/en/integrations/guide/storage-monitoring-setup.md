@@ -230,7 +230,7 @@ Download [this][401] terraform template inventory.tf & substitute the necessary 
 You can opt to allow Datadog to handle the inventory report configuration by providing the proper permissions to your service account.
 Navigate to IAM & Admin -> Service accounts, and find your Datadog service account & add the roles/storageinsights.Admin role.
 
-You'll also want to navigate to the source bucket you would like to monitor and grant that service account the following permissions:
+Next, navigate to the source bucket you would like to monitor and grant that service account the following permissions:
 - roles/storage.insightsCollectorService
 - roles/storage.ObjectViewer
 
@@ -256,7 +256,7 @@ storageinsights.reportDetails.get
 storageinsights.reportDetails.list
 ```
 
-After the necessary permissions have been granted, we can create the inventory report configuration with your setup details in the next step.
+After the necessary permissions have been granted, Datadog can create the inventory report configuration with your setup details in the next step.
 
 {{< /tabs >}}
 
