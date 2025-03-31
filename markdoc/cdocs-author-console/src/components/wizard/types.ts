@@ -1,3 +1,5 @@
+import { CustomizationConfig } from 'cdocs-data';
+
 export interface NewOptionConfig {
   id: string;
   label: string;
@@ -19,18 +21,13 @@ export interface TraitConfig {
 }
 
 /**
- * A filter configuration bundled with new configuration
- * to add to the customization config (if any).
+ * A filter configuration bundled with its customization config dependencies,
+ * which may include dependencies that do not exist on the site.
  */
 export interface WizardFilter {
   uuid: string;
   label?: string;
   trait_id: string;
   option_group_id: string;
-  // Any new traits required for this filter to work
-  newTraitConfig?: TraitConfig;
-  // Any new options required for this filter to work
-  newOptionConfigs?: NewOptionConfig[];
-  // Any new option groups required for this filter to work
-  newOptionGroupConfigs?: NewOptionGroupConfig[];
+  customizationConfig: CustomizationConfig;
 }

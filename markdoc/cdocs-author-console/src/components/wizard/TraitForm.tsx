@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CustomizationConfig, FilterConfig, FilterConfigSchema } from 'cdocs-data';
+import { CustomizationConfig } from 'cdocs-data';
 import TraitSelector from '../selectors/TraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -46,7 +46,7 @@ function TraitForm({
   onUpdate
 }: {
   customizationConfig: CustomizationConfig;
-  onUpdate: ({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => void;
+  onUpdate: ({ traitConfig }: { traitConfig: TraitConfig }) => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
@@ -62,7 +62,7 @@ function TraitForm({
   };
 
   const handleExistingTraitSelect = (traitId: string) => {
-    onUpdate({ traitId });
+    onUpdate({ traitConfig: customizationConfig.traitsById[traitId] });
   };
 
   const handleNewTraitSave = () => {
@@ -76,8 +76,7 @@ function TraitForm({
       error = 'Trait ID is already taken. Did you mean to select an existing trait?';
     } else {
       onUpdate({
-        traitId: newTraitConfig.id,
-        newTraitConfig
+        traitConfig: newTraitConfig
       });
       setNewTraitHasChanges(false);
     }

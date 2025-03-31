@@ -24,7 +24,12 @@ function FilterList({
       uuid: uuidv4(),
       label: '',
       trait_id: '',
-      option_group_id: ''
+      option_group_id: '',
+      customizationConfig: {
+        traitsById: {},
+        optionsById: {},
+        optionGroupsById: {}
+      }
     };
     setFiltersByUuid({ ...filtersByUuid, [newFilter.uuid]: newFilter });
     setCurrentFilterUuid(newFilter.uuid);

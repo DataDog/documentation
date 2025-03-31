@@ -29,43 +29,54 @@ function FilterForm({
     }
   }
 
+  const onTraitEdit = ({ traitConfig }: { traitConfig: TraitConfig }) => {
+    const updatedFilter = {
+      ...filter,
+      trait_id: traitConfig.id,
+      label: traitConfig.label,
+      customizationConfig: {
+        ...filter.customizationConfig,
+        traitsById: {
+          [traitConfig.id]: traitConfig
+        }
+      }
+    };
+    onEdit(updatedFilter);
+  };
+
+  const onOptionGroupEdit = ({ optionGroupId }: { optionGroupId: string }) => {
+    const options = customizationConfig.optionGroupsById[optionGroupId];
+
+    const newCustomizationConfig: CustomizationConfig = {
+      ...filter.customizationConfig,
+      optionGroupsById: {
+        [optionGroupId]: options
+      },
+      optionsById: {}
+    };
+
+    options.forEach((option) => {
+      const optionId = option.id;
+      newCustomizationConfig.optionsById[optionId] = customizationConfig.optionsById[optionId];
+    });
+
+    onEdit({
+      ...filter,
+      option_group_id: optionGroupId,
+      customizationConfig: newCustomizationConfig
+    });
+  };
+
   return (
     <div>
       <h2 style={formHeaderStyles}>Trait{traitLabel && `: ${traitLabel}`}</h2>
       <p style={{ fontSize: '0.9em' }}>
         The user characteristic to filter on, such as their host or programming language.
       </p>
-      <TraitForm
-        customizationConfig={customizationConfig}
-        onUpdate={({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => {
-          let traitConfig: TraitConfig;
-          console.log('Handling trait update in FilterList, traitId: ', traitId, ', newTraitConfig: ', newTraitConfig);
-          if (newTraitConfig) {
-            traitConfig = newTraitConfig;
-          } else {
-            traitConfig = customizationConfig.traitsById[traitId];
-          }
-
-          // Update the filter config with the newly chosen trait ID
-          onEdit({
-            ...filter,
-            trait_id: traitId,
-            label: traitConfig.label,
-            newTraitConfig
-          });
-        }}
-      />
+      <TraitForm customizationConfig={customizationConfig} onUpdate={onTraitEdit} />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
-      <OptionGroupForm
-        customizationConfig={customizationConfig}
-        onUpdate={({ optionGroupId }: { optionGroupId: string }) => {
-          onEdit({
-            ...filter,
-            option_group_id: optionGroupId
-          });
-        }}
-      />
+      <OptionGroupForm customizationConfig={customizationConfig} onUpdate={onOptionGroupEdit} />
     </div>
   );
 }
