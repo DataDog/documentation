@@ -6939,10 +6939,10 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
-    - name: Monitoring Performance Vitals
-      url: real_user_monitoring/browser/monitoring_performance_vitals/
+    - name: Optimizing Performance
+      url: real_user_monitoring/browser/optimizing_performance/
       parent: rum_browser
-      identifier: performance_vitals
+      identifier: optimizing_performance
       weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
