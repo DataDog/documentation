@@ -6052,7 +6052,7 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
       weight: 7
-    - name: Risk Insights for AWS Entities
+    - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
