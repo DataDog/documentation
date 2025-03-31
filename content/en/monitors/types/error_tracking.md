@@ -37,75 +37,83 @@ To create an Error Tracking monitor in Datadog, navigate to [**Monitors** > **Ne
 
 There are two types of alerting conditions you can configure your Error Tracking monitor with:
 
-| Alerting&nbsp;condition     | Description    | 
+| Alerting&nbsp;condition     | Description    |
 | ---  | ----------- |
 |High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
 |New Issue| Alert when an issue occurs for the first time or a regression occurs. For example, alert for your service whenever more than 2 users are impacted by a new error. |
 
-### Define the search query
+### Define alert conditions
 
 {{< tabs >}}
-{{% tab "High Impact" %}}
-High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
-
-1. Build a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
-
-    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
-
-    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
-
-    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above` or `above or equal to`.
-
-3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
-
-<div class="alert alert-info"><strong>Note</strong>: Count monitors for APM can only be created based on spans retained by <a href="/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter/">custom retention filters</a> (not the intelligent retention filter).</div>
-
-### Set alert conditions
-
-Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
-
-[1]: /error_tracking/issue_states
-[2]: /error_tracking/explorer
-{{% /tab %}}
 
 {{% tab "New Issue" %}}
+#### Issues to alert on
 
-New monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors. 
+New issue monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors.
 
+1. Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+2. Refine your query.
 
-1. Select **RUM**, **APM**, or **Logs** and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
-2. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+<div class="alert alert-info"><strong>Note</strong>: New Issue monitors only look at issues that were created or regressed within the last 24 hours before the monitor was created or last edited.</div>
 
-    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
-    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
-    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+#### Define alert threshold
 
-    If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
+Choose one of the following options:
 
-    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts over the count of unique value of the facet.
+* **Alert on all new issues**: The monitor triggers when any new issue is detected (number of errors per issue ID greater than 0 over the past day).
+* **Define an alert metric**:
+    1. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
 
-3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][3].
+       - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
+       - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
+       - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
 
-### Set alert conditions
+        If you select **All** or **Backend** issues, only the **Error Occurrences** option is available.
 
-The monitor triggers when the number of errors is `above` or `above or equal to`.
+        You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
 
-- Set a timespan between 5 minutes and 48 hours (such as `5 minutes`, `15 minutes`. `1 hour`, or `custom`) over which the monitor metric is evaluated.
-- Set the alerting threshold > `<NUMBER>`.
-- Set the warning threshold > `<NUMBER>`.
+    2. Have a notification for each issue that matches your query, and group the results by any other field you require (e.g. have a notification for each issue matching the query, on each environment).
+
+    3. Query data over the last day (by default) or any other time window.
+
+    4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
 
 [1]: /error_tracking/issue_states
 [2]: /error_tracking/explorer
 [3]: /monitors/configuration/#alert-grouping/
 {{% /tab %}}
+
+{{% tab "High Impact" %}}
+#### Issues to alert on
+
+High Impact monitors alert on issues that are **For Review** or **Reviewed** and that meet your alerting conditions. Read more about [Issue States][1].
+
+1. Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
+2. Refine your query.
+
+#### Define alert threshold
+1. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
+
+    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
+    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
+    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+
+    If you select **All** or **Backend** issues, only the **Error Occurrences** option is available.
+
+    You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
+
+2. Have a notification for each issue that matches your query, and group the results by any other field you require (e.g. have a notification for each issue matching the query, on each environment).
+
+3. Query data over the last day (by default) or any other time window.
+
+4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
+
+<div class="alert alert-info"><strong>Note</strong>: Count monitors for APM can only be created based on spans retained by <a href="/tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter/">custom retention filters</a> (not the intelligent retention filter).</div>
+
+[1]: /error_tracking/issue_states
+[2]: /error_tracking/explorer
+{{% /tab %}}
 {{< /tabs >}}
-
-#### Advanced Alert Conditions
-
-For more information about advanced alert options such as evaluation frequency, see [Configure Monitors][4].
 
 ### Notifications
 
@@ -124,9 +132,8 @@ for alert message notifications:
 
 For more information about the **Configure notifications and automations** section, see [Notifications][5].
 
-
 ### Muting monitors
-Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues. 
+Error Tracking monitors use [Issue States][2] to ensure that your alerts stay focused on high-priority matters, reducing distractions from non-critical issues.
 
 **Ignored** issues are errors requiring no additional investigation or action. By marking issues as **Ignored**, these issues are automatically muted from monitor notifications.
 
@@ -151,8 +158,8 @@ If your monitors are generating too much noise, consider the following adjustmen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /error_tracking/
-[2]: /error_tracking/issue_states/
+[1]: /error_tracking/issue_states
+[2]: /error_tracking/explorer
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
 [4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
