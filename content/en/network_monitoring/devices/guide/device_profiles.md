@@ -43,8 +43,8 @@ The minimum Agent version required is `7.65` or higher.
   2. Click on **SNMP Profile Manager > + Create New Profile**. This brings you to the profile creation page shown below.
      {{< img src="/network_device_monitoring/profile_onboarding/create_profile_3.png" alt="The Network Device profile creation page" style="width:100%;">}}
 
-  3. Provide your device profile a name and description (optional).
-  4. Select the `SysObjectID`. This is what is used to match network devices to the device profiles that define what is collected and monitored from each device. 
+  3. Provide your device profile with a name and description (optional).
+  4. Select the `SysObjectID`. This parameter matches network devices to the device profiles. 
 
      {{< img src="/network_device_monitoring/profile_onboarding/Sys_object_ID_Field_2.png" alt="The Network Device profile creation page showing the Sys Object ID Dropdown" style="width:60%;">}}
 
@@ -58,11 +58,11 @@ Reference the [Supported Device Profiles][16] for the full list of inherited pro
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_inheritance.png" alt="The Network Device profile creation page showing the Profile inheritance section." style="width:100%;">}}
 
-    **Note**: Changes made to the parent profile are automatically applied to the child profiles. If you need to adjust any inherited attributes in the child profiles, such as metrics, tags, or metadata, you must modify the parent profile.
+    **Note**: Changes made to the parent profile automatically apply to the child profiles. If you need to adjust any inherited attributes in the child profiles, such as metrics, tags, or metadata, you must modify the parent profile.
 
 ### Step 3: Select reference devices
 
-Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` that was specified in the [profile details](#step-1-profile-details).
+Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` you specified in the [profile details](#step-1-profile-details).
 
 1. Keep the current reference device selection to perform a device scan. Additionally, you can add more devices or change the current selection.
 
@@ -214,7 +214,7 @@ Add global tags to ensure the metadata, metrics, and global tags are applied to 
 | No Modification | The device's returned value is used directly as the tag value.                                 |
 | Format          | This can be [mac_address][5] or [ip_address][6].                                                    |
 | Extract Value   | A regular expression used to [extract][7] the tag value from the SNMP value provided by the device. |
-| Mapping         | This is described [here][8].   
+| Mapping         | See the [profile format reference][8].   
 
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-mac_address
 [6]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#format-ip_address
@@ -278,7 +278,7 @@ Once a profile is applied, you cannot bring it back to draft status.
 
   {{< img src="/network_device_monitoring/profile_onboarding/create_profile_download.png" alt="Screenshot of the device profile inventory page showing the download and create a new profile buttons" style="width:50%;">}}
 
-- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom profiles only). You can also navigate to the **View related devices** on the NDM page, filtered to the device(s) the profile is applied to.<br></br>
+- **Kebab menu**: Clicking the kebab menu to the right of a profile allows you to edit, clone, or delete the profile (for custom profiles only). You can also navigate to **View related devices** on the NDM page, filtered to the device(s) the profile is applied to.<br></br>
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_kebab_menu.png" alt="Screenshot of the device profile inventory page showing the kebab menu on the right hand side" style="width:40%;">}}
                                                   
@@ -293,7 +293,7 @@ Once a profile is applied, you cannot bring it back to draft status.
 ### Why would I see no matching devices? 
 If no matching devices are found, it may be due to the following reasons:  
   * **The profile is in Draft mode**:
-    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile you must sync it to the Agent(s). This can be done by opening the profile and clicking on the [**Save & Sync Agents**](#apply-a-profile-to-created-devices) button.  
+    * Draft profiles are not applied to the Agent. To start monitoring devices with your profile, you must sync it to the Agent(s). This can be done by opening the profile and clicking on the [**Save & Sync Agents**](#apply-a-profile-to-created-devices) button.  
   * **The profile is applied but is not matching any device(s)**:  
     * Profiles are matched to devices using their SysObjectID. Ensure that the SysObjectID specified in the profile matches one or more of your monitored devices.
   * **Multiple profiles have the same SysObjectID(s)**:  
@@ -311,11 +311,11 @@ If no matching devices are found, it may be due to the following reasons:
 
    {{< img src="/network_device_monitoring/profile_onboarding/remote_configuration.png" alt="Screenshot of the " style="width:80%;">}}
 
-   Or, to apply the profiles to your Agent(s) manually:  
+   Or, to apply the profiles to your Agents manually:  
 
      1. Save the profile.  
      2. Click on the download button to save a zip file of all your profiles.  
-     3. Upload the zip file to your Agent(s) by following the instructions in the [manually apply a profile to created devices][19] section.
+     3. Upload the zip file to your Agents by following the instructions in the [manually apply a profile to created devices][19] section.
 
 Datadog strongly recommends enabling Remote Configuration to ensure a seamless, UI-based experience and to minimize unnecessary interactions with the Agent.
 
