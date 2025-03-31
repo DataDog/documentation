@@ -1,26 +1,38 @@
 import { WizardFilter } from './types';
-import { CustomizationConfig, Frontmatter } from 'cdocs-data';
+import { CustomizationConfig, Frontmatter, buildFiltersManifest, FiltersManifest } from 'cdocs-data';
 import { TraitConfig } from './types';
 
 function buildMarkup({
   filters,
-  customizationConfig
+  wizardCustomizationConfig
 }: {
   filters: WizardFilter[];
-  customizationConfig: CustomizationConfig;
+  wizardCustomizationConfig: CustomizationConfig;
 }) {
   let markup = '';
-  markup += buildFrontmatter({ filters });
+  markup += buildFrontmatterMarkup({ filters });
   markup += `
 ## Some heading here
 
 This is top-level content, so it will show on the page regardless of any filters.
 `;
-  markup += buildIfBlocks({ filters, customizationConfig });
+  markup += buildIfBlocks({ filters, wizardCustomizationConfig });
   return markup;
 }
 
-function buildFrontmatter({ filters }: { filters: WizardFilter[] }) {
+function buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
+  let frontmatter: Frontmatter = {
+    title: 'Your Title Here',
+    content_filters: filters.map((filter) => ({
+      trait_id: filter.trait_id,
+      option_group_id: filter.option_group_id
+    }))
+  };
+
+  return frontmatter;
+}
+
+function buildFrontmatterMarkup({ filters }: { filters: WizardFilter[] }) {
   let frontmatter = `---
 title: Your Title Here`;
 
@@ -41,40 +53,37 @@ content_filters:`;
   return frontmatter;
 }
 
-function buildIfBlock({
-  filter,
-  customizationConfig
-}: {
-  filter: WizardFilter;
-  customizationConfig: CustomizationConfig;
-}) {
-  let traitConfig: TraitConfig;
+function buildIfBlock({ filter, filtersManifest }: { filter: WizardFilter; filtersManifest: FiltersManifest }) {
+  const options = Object.values(filtersManifest.optionGroupsById[filter.option_group_id]);
 
-  if (filter.newTraitConfig) {
-    traitConfig = filter.newTraitConfig;
-  } else {
-    traitConfig = customizationConfig.traitsById[filter.trait_id];
-  }
+  let markup = '';
 
-  return `
-<!-- Filter: ${filter.uuid} -->
-{% if equals($${traitConfig.id}, "something") %}
-Something goes here.
+  options.forEach((option) => {
+    markup += `
+<!-- ${option.label} -->
+{% if equals($${filter.trait_id}, "${option.id}") %}
+This content will only display if the user has chosen ${option.label}.
 {% /if %}
 `;
+  });
+
+  return markup;
 }
 
 function buildIfBlocks({
   filters,
-  customizationConfig
+  wizardCustomizationConfig
 }: {
   filters: WizardFilter[];
-  customizationConfig: CustomizationConfig;
+  wizardCustomizationConfig: CustomizationConfig;
 }) {
+  const frontmatter = buildFrontmatterData({ filters });
+  const filtersManifest = buildFiltersManifest({ frontmatter, customizationConfig: wizardCustomizationConfig });
+
   let ifBlocks = '';
 
   filters.forEach((filter) => {
-    ifBlocks += buildIfBlock({ filter, customizationConfig });
+    ifBlocks += buildIfBlock({ filter, filtersManifest });
   });
 
   return ifBlocks;
@@ -82,14 +91,14 @@ function buildIfBlocks({
 
 function MarkdocTemplate({
   filters,
-  customizationConfig
+  wizardCustomizationConfig
 }: {
   filters: WizardFilter[];
-  customizationConfig: CustomizationConfig;
+  wizardCustomizationConfig: CustomizationConfig;
 }) {
   return (
     <div>
-      <pre>{buildMarkup({ filters, customizationConfig })}</pre>
+      <pre>{buildMarkup({ filters, wizardCustomizationConfig })}</pre>
     </div>
   );
 }

@@ -4,10 +4,10 @@ import { CustomizationConfig } from 'cdocs-data';
 
 function SetupInstructions({
   filters,
-  customizationConfig
+  wizardCustomizationConfig
 }: {
   filters: WizardFilter[];
-  customizationConfig: CustomizationConfig;
+  wizardCustomizationConfig: CustomizationConfig;
 }) {
   return (
     <div>
@@ -34,7 +34,7 @@ function SetupInstructions({
           <li>Add the markup below to it.</li>
         </ol>
       </p>
-      <MarkdocTemplate filters={filters} customizationConfig={customizationConfig} />
+      <MarkdocTemplate filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
     </div>
   );
 }

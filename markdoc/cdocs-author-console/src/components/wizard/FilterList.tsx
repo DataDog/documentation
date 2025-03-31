@@ -13,11 +13,20 @@ function FilterList({
   onChange
 }: {
   customizationConfig: CustomizationConfig;
-  onChange: ({ filters }: { filters: WizardFilter[] }) => void;
+  onChange: ({
+    filters,
+    wizardCustomizationConfig
+  }: {
+    filters: WizardFilter[];
+    wizardCustomizationConfig: CustomizationConfig;
+  }) => void;
 }) {
   const [savedFiltersByUuid, setSavedFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
+  const [wizardCustomizationConfig, setWizardCustomizationConfig] = useState<CustomizationConfig>({
+    ...customizationConfig
+  });
 
   const addFilter = () => {
     const newFilter: WizardFilter = {
@@ -47,7 +56,7 @@ function FilterList({
     const newFiltersByUuid = { ...filtersByUuid };
     delete newFiltersByUuid[filter.uuid];
     setFiltersByUuid(newFiltersByUuid);
-    onChange({ filters: Object.values(newFiltersByUuid) });
+    onChange({ filters: Object.values(newFiltersByUuid), wizardCustomizationConfig });
   };
 
   const onFilterRowEdit = (filter: WizardFilter) => {
@@ -57,7 +66,30 @@ function FilterList({
   const onSave = () => {
     setCurrentFilterUuid(null);
     setSavedFiltersByUuid({ ...filtersByUuid });
-    onChange({ filters: Object.values(filtersByUuid) });
+    onChange({ filters: Object.values(filtersByUuid), wizardCustomizationConfig });
+
+    // Reset the wizard's customization config to the original config
+    const newWizardCustomizationConfig = { ...customizationConfig };
+
+    // Update the wizard's customization config with the new filters
+    Object.values(filtersByUuid).forEach((filter) => {
+      newWizardCustomizationConfig.traitsById = {
+        ...customizationConfig.traitsById,
+        ...filter.customizationConfig.traitsById
+      };
+
+      newWizardCustomizationConfig.optionsById = {
+        ...customizationConfig.optionsById,
+        ...filter.customizationConfig.optionsById
+      };
+
+      newWizardCustomizationConfig.optionGroupsById = {
+        ...customizationConfig.optionGroupsById,
+        ...filter.customizationConfig.optionGroupsById
+      };
+    });
+
+    setWizardCustomizationConfig(newWizardCustomizationConfig);
   };
 
   const onCancel = () => {
@@ -80,13 +112,13 @@ function FilterList({
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
             <FilterRow
               filter={filtersByUuid[uuid]}
-              customizationConfig={customizationConfig}
+              customizationConfig={wizardCustomizationConfig}
               onDelete={onDelete}
               onEdit={onEdit}
             />
             {currentFilterUuid === uuid && (
               <FilterForm
-                customizationConfig={customizationConfig}
+                customizationConfig={wizardCustomizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
                 onEdit={onFilterFormChange}
               />

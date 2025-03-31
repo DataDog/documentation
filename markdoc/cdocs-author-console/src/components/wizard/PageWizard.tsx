@@ -6,9 +6,21 @@ import SetupInstructions from './SetupInstructions';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
+  const [wizardCustomizationConfig, setWizardCustomizationConfig] = useState<CustomizationConfig>({
+    ...customizationConfig
+  });
 
-  const onFilterListChange = ({ filters }: { filters: WizardFilter[] }) => {
-    setFilters(filters);
+  const onFilterListChange = ({
+    filters,
+    wizardCustomizationConfig
+  }: {
+    filters: WizardFilter[];
+    wizardCustomizationConfig: CustomizationConfig;
+  }) => {
+    setFilters([...filters]);
+    setWizardCustomizationConfig({
+      ...wizardCustomizationConfig
+    });
   };
 
   return (
@@ -27,7 +39,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
         <FilterList customizationConfig={customizationConfig} onChange={onFilterListChange} />
       </div>
       <div style={{ display: 'inline-block', verticalAlign: 'top', width: '55%', height: '100vh', padding: '1rem' }}>
-        <SetupInstructions filters={filters} customizationConfig={customizationConfig} />
+        <SetupInstructions filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
       </div>
     </div>
   );
