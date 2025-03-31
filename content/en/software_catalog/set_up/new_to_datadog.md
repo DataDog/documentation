@@ -47,7 +47,9 @@ further_reading:
 
 ## Overview 
 
-If you're new to Datadog, you can add components to Software Catalog by:
+If you're new to Datadog, you can [automatically populate Software Catalog][10] by setting up Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, or logs.
+
+Alternatively, you can add components to Software Catalog by:
 
 -  Manually creating service definitions through the Datadog UI, the Datadog API, Terraform, or a GitHub integration.
 -  Importing existing services from sources like ServiceNow or Backstage.
@@ -197,3 +199,4 @@ To populate your Datadog Software Catalog with services from your ServiceNow Con
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [8]: /api/latest/service-definition/
 [9]: /software_catalog/service_definitions/#store-and-edit-definitions-in-github
+[10]: /software_catalog/set_up/existing_datadog_user

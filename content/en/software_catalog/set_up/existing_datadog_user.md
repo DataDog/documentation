@@ -20,14 +20,14 @@ Datadog Software Catalog is pre-populated with entries detected through [APM][5]
 
 ### APM service detection and dependencies
 
-**Note:** Datadog APM automatically discovers dependencies from instrumented services, even when the dependencies aren't instrumented. These include:
+Datadog APM automatically discovers dependencies from instrumented services, even when the dependencies aren't instrumented. These include:
 - Databases
 - Message queues
 - Other third-party dependencies
 
-These dependencies appear as *services*, to which Datadog automatically applies their names to service tags on client spans (`span.kind:client`). For example, a client call from `auth-dotnet` to PostgreSQL would create a service tagged as `service:auth-dotnet-postgres`.
+These dependencies appear as *services*, and Datadog automatically applies their names to service tags on client spans (`span.kind:client`). For example, a client call from `auth-dotnet` to PostgreSQL would create a service tagged as `service:auth-dotnet-postgres`.
 
-**Managing Automatically Named Services:**
+**Managing automatically-named services:**
 - You can opt-in to [inferred entities][7] to filter out entities by type (database, queue, third-party).
 - You can optionally [remove service overrides][8] such as `service:my-service-http-client` from your catalog or map.
 
