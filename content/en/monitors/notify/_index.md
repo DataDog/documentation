@@ -128,7 +128,6 @@ For example, configure the monitor to `stop renotifying after 1 occurrence` to r
 
 If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
 
-
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).

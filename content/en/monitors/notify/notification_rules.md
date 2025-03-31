@@ -42,9 +42,9 @@ The [Monitor Notification Rules][1] page displays a table of all your notificati
 
 ### From an individual monitor
 
-In your monitor configuration you can view the notification recipients that are applied to the monitor under **Configure response**. Notification rules automatically add recipients to monitors that match the configured scopes.
+In your monitor configuration you can view the notification recipients that are applied to the monitor under **Recipient Summary**. Notification rules automatically add recipients to monitors that match the configured scopes.
 
-<!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}} -->
+{{< img src="/monitors/notifications/notification_rules/monitor_matching_notification_rule.png" alt="Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}}
 
 ## Routing logic
 
