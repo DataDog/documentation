@@ -4,36 +4,25 @@ title: Troubleshooting Serverless Monitoring for AWS Step Functions
 
 ## I cannot see any traces
 
-### Verify that your Step Function is configured to send all logs
+#### Verify that your Step Function is configured to send all logs
 - Ensure that the `DD_TRACE_ENABLED` tag is set to `true` on the Step Function in your AWS console.
 - In your AWS console, open your Step Function's logging tab. Ensure that _Log level_ is set to `ALL`, and that _Include execution data_ is selected.
 - Ensure that the CloudWatch log group (also found on the logging tab) has a subscription filter to the Datadog Lambda Forwarder in the same region.
 
-### Verify that logs are forwarded successfully to Datadog
+#### Verify that logs are forwarded successfully to Datadog
 - Check the Datadog Lambda Forwarder for error messages. Ensure that you have correctly set your API key and Datadog site.
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
-### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
+#### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
 In Datadog, go to [**Logs > Log Stream**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, check that after the upgrade, the Forwarder has the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag set to `true`. If the upgraded Forwarder does not have the `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly. 
 
 If the Forwarder and state machine tags are set up correctly with the previous steps, the logs are tagged with `DD_TRACE_ENABLED:true`.
 
-#### Search historic logs
-To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [**Indexes**][3] tab. Click the **New Index** button in the upper right.
-
-Choose a name, set the index filter to `Source:stepfunction`, leave everything else with default values, and save.
-
-{{< img src="serverless/step_functions/log_index.png" alt="New Log index" style="width:80%;" >}}
-
-If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
-
-**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][5] for more information.
-
-### Verify that your Step Function is using the latest version
+#### Verify that your Step Function is using the latest version
 - AWS may release updates to the Step Function API or introduce newer versions of the Step Function definitions. Older versions may result in unexpected log formatting or behavior.
 - It's also recommended that you are using the latest version of the Datadog Lambda Forwarder to avoid discrepancies in how logs are forwarded.
 
-### Caution when using custom log pipelines
+#### Caution when using custom log pipelines
 - Custom log pipelines can offer flexibility in processing logs, but altering the log format too much can lead to issues downstream, such as logs not being parsed or recognized.
 - Avoid making significant changes to the Step Function log structure that change the JSON format.
 
@@ -53,6 +42,22 @@ When searching traces, select the **Live Search** option in the upper right corn
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
 - `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
+## Search historic logs
+To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [**Indexes**][3] tab. Click the **New Index** button in the upper right.
+
+Choose a name, set the index filter to `Source:stepfunction`, leave everything else with default values, and save.
+
+{{< img src="serverless/step_functions/log_index.png" alt="New Log index" style="width:80%;" >}}
+
+If your organization has an existing all-encompassing index with a low limit, place your new index at the top.
+
+**Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][5] for more information.
+
+## Missing logs within an execution
+[Exclusion fiters][7] can be used to ensure all logs with the same execution_arn are either kept or excluded. Note that this has no impact on tracing.
+
+{{< img src="serverless/step_functions/exclusion_filter.png" alt="New exclusion filter" style="width:80%;" >}}
+
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
 - On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
@@ -69,3 +74,4 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 [4]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
 [5]: /logs/log_configuration/indexes/
 [6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-upstream-traces-with-step-functions-and-downstream-lambda-traces
+[7]: /logs/log_configuration/indexes/#exclusion-filters
