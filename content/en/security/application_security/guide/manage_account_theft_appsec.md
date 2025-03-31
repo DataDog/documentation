@@ -9,11 +9,20 @@ Datadog Application Security Management (ASM) provides [builtin][1] detection an
 
 This guide describes how to use ASM to prepare for and respond to account takeover campaigns. This guide is divided into three phases:
 
-- [Phase 1: Collecting login information](#phase-1:-collecting-login-information)  
-- [Phase 2: Preparing for account takeover campaigns](#phase-2:-preparing-for-account-takeover-campaigns)  
-- [Phase 3: Reacting to account takeover campaigns](#phase-3:-reacting-to-account-takeover-campaigns)
+1. [Collecting login information](#collecting-login-information)
+   - Enable and verify login activity collection in Datadog ASM using automatic or manual instrumentation methods.
+   - Use remote configuration options if you cannot modify your service code.
+   - Troubleshoot missing or incorrect data.
+2. [Preparing for account takeover campaigns](#preparing-for-account-takeover-campaigns)
+   - Prepare for ATO campaigns detected by ASM. 
+   - Configure notifications for attack alerts.
+   - Validate proper data propagation for accurate attacker identification.
+   - Set up automatic IP blocking for immediate mitigation.
+   - Learn about the importance of temporary blocking due to dynamic attacker IPs.
+3. [Reacting to account takeover campaigns](#reacting-to-account-takeover-campaigns)
+   - Learn how to react to ATO campaigns, including attacker strategies, triage, response, investigation, monitoring, and cleanup.
 
-## Phase 1: Collecting login information
+## Collecting login information
 
 To detect malicious patterns, ASM requires visibility into your users' login activity. This phase describes how to enable and validate this visibility. 
 
@@ -134,7 +143,7 @@ To use custom In-App WAF rules, do the following:
 
 For more details, see [Tracking business logic information without modifying the code][13].
 
-## Phase 2: Preparing for Account Takeover campaigns
+## Preparing for Account Takeover campaigns
 
 After setting up instrumentation for your services, ASM monitord for attack campaigns. You can review the monitoring in the [Attacks overview][14] **Business logic** section. 
 
@@ -198,7 +207,7 @@ To configure automatic blocking, do the following:
 
 <!-- ![][image12] -->
 
-## Phase 3: Reacting to account takeover campaigns
+## Reacting to account takeover campaigns
 
 This section describes common account takeover hacker behavior and how to triage, investigate, and monitor detections.
 
@@ -616,7 +625,7 @@ This filter can be less accurate. For example, a filter that matches the signatu
 
 You can also pivot on the infrastructure used by the attacker. Did those malicious IPs do anything but logins? Are they accessing other sensitive APIs?
 
-## Take aways
+## Conclusion
 
 Account theft is a common threat but also much more complex than traditional injection exploits. Catching them requires tight integration with your systems and involves enough uncertainty that automated responses aren't possible for the most advanced attacks.  
 
