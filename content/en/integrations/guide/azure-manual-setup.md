@@ -176,60 +176,61 @@ A form to create a new app registration is displayed:
 
 14. Click **Review + create**, then click **Create**.
 
-15. Once the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
+15. After the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
 
 [17]: /security/cloud_security_management/
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. [Create an app registration](#creating-the-app-registration) in your Active Directory and pass the correct credentials to Datadog.
-2. [Give the application read-access](#giving-read-permissions-to-the-application) to any subscriptions you would like to monitor.
+1. [Create an app registration](#create-an-app-registration) in your Active Directory.
+2. [Give the application read-access](#give-read-permissions-to-the-application) to any subscriptions you would like to monitor.
+3. [Configure the application credentials](#complete-the-integration) in Datadog.
 
-#### Creating the app registration
+#### Create an app registration
 
 1. Under **Azure Active Directory**, navigate to **App Registrations** and click **New registration**.
-2. Enter the following and click the **Create** button.
+2. Enter the following and click the **Register** button.
 
     - Name: `Datadog Auth`
     - Supported Account Types: `Accounts in this organizational directory only`
 
-{{< img src="integrations/guide/azure_manual_setup/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/azure_app_registration.png" alt="The screen in the Azure portal for registering an application" popup="true" style="width:80%;" >}}
 
-#### Giving read permissions to the application
+#### Give read permissions to the application
 
-1. To assign access at the individual subscription level, navigate to **Subscriptions** through the search box or the left sidebar.
+1. Assign access at the individual subscription or management group level. 
+   - To assign access at the subscription level, navigate to **Subscriptions** through the search box or the left sidebar.
+   - To assign access at the management group level, navigate to **Management Groups** and select the management group that contains the set of subscriptions to monitor.<br />
+   **Note**: Assigning access at the management group level means that any new subscriptions added to the group are automatically discovered and monitored by Datadog.
 
-{{< img src="integrations/guide/azure_manual_setup/subscriptions_icon.png" alt="Subscriptions icon" popup="true" style="width:25%">}}
-
-To assign access at the Management Group level, navigate to **Management Groups** and select the Management Group that contains the set of subscriptions you would like to monitor.
-**Note**: Assigning access at the Management Group level means that any new subscriptions added to the group are automatically discovered and monitored by Datadog.
-
-{{< img src="integrations/guide/azure_manual_setup/azure_management_groups_icon.png" alt="Management groups icon" popup="true" style="width:25%">}}
-
-To configure monitoring for the entire tenant, assign access to the **Tenant Root Group**.
-
-2. Click on the subscription you would like to monitor.
-3. Select **Access control (IAM)** in the subscription menu and click **Add** > **Add role assignment**:
+2. Click on the subscription or management group you would like to monitor.
+3. Select **Access control (IAM)** in the subscription menu and click **Add role assignment**:
 
     {{< img src="integrations/guide/azure_manual_setup/azure-add-role.png" alt="Add Role Assignment" popup="true" style="width:80%">}}
 
-4. For **Role**, select **Monitoring Reader**. Under **Select**, choose the name of the Application you just created:
+4. In the **Role** tab, select **Reader**. 
+5. In the **Members** tab, click **Select members**.
+6. Enter the application created in the [create an app registration section](#create-an-app-registration).
+7. Click **Review + assign** to complete the creation.
+8. Repeat this process for any additional subscriptions or management groups you want to monitor with Datadog.
 
-5. Click **Save**.
-6. Repeat this process for any additional subscriptions you want to monitor with Datadog.
-**Note**: Users of Azure Lighthouse can add subscriptions from customer tenants.
+**Notes**: 
+   - Users of Azure Lighthouse can add subscriptions from customer tenants.
+   - Diagnostics must be enabled for ARM deployed VMs to collect metrics, see [Enable diagnostics][11].
 
-**Note**: Diagnostics must be enabled for ARM deployed VMs to collect metrics, see [Enable diagnostics][11].
+#### Complete the integration
 
-#### Completing the integration
+1. Under **App Registrations**, select the app you created, copy the **Application (client) ID** and **Directory (tenant) ID**, and paste the values in the [Datadog Azure integration tile][10] under **Client ID** and **Tenant ID**.
+2. For the same app, go to **Manage** > **Certificates & secrets**.
+3. Click **+ New client secret**:
+   1. Optionally, provide a description.
+   2. Select an expiration time frame in the **Expires** field.
+   3. Click **Add**.
 
-1. Under **App Registrations**, select the App you created, copy the **Application ID** and **Tenant ID**, and paste the values in the [Datadog Azure integration tile][10] under **Client ID** and **Tenant ID**.
-2. For the same app, go to **Manage** > **Certificates and secrets**.
-3. Add a new **Client Secret** called `datadogClientSecret`, select a timeframe for **Expires**, and click **Add**:
+    {{< img src="integrations/guide/azure_manual_setup/add_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
 
-    {{< img src="integrations/guide/azure_manual_setup/Azure_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
-
-4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][10] under **Client Secret** and click **Install Integration** or **Update Configuration**.
+4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][10] under **Client Secret**.
+5. Click **Create Configuration**.
 
 **Note**: Your updates to the Azure configuration can take up to 20 minutes to be reflected in Datadog.
 
