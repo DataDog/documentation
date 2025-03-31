@@ -25,20 +25,11 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
-      <div
-        style={{
-          display: 'inline-block',
-          verticalAlign: 'top',
-          height: '100vh',
-          width: '35%',
-          padding: '1rem',
-          borderRight: '1px solid #e0e0e0'
-        }}
-      >
+      <div style={{ marginBottom: '30px' }}>
         <h1 style={{ marginTop: '0px' }}>Filters</h1>
         <FilterList customizationConfig={customizationConfig} onChange={onFilterListChange} />
       </div>
-      <div style={{ display: 'inline-block', verticalAlign: 'top', width: '55%', height: '100vh', padding: '1rem' }}>
+      <div>
         <SetupInstructions filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
       </div>
     </div>
