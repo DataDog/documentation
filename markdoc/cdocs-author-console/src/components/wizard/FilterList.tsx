@@ -144,7 +144,7 @@ function FilterRow({
     <div style={containerStyles}>
       <div>{getFilterSummaryText()}</div>
       <div>
-        {onEdit && <EditIcon onClick={() => onEdit(filter)} />}{' '}
+        {onEdit && <EditIcon sx={{ color: '#632ca6' }} onClick={() => onEdit(filter)} />}{' '}
         {onDelete && <DeleteIcon sx={{ color: '#eb364b' }} onClick={() => onDelete(filter)} />}
       </div>
     </div>

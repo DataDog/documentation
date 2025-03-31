@@ -1,5 +1,5 @@
 import { WizardFilter } from './types';
-import { CustomizationConfig } from 'cdocs-data';
+import { CustomizationConfig, Frontmatter } from 'cdocs-data';
 import { TraitConfig } from './types';
 
 function buildMarkup({
@@ -58,7 +58,7 @@ function buildIfBlock({
 
   return `
 <!-- Filter: ${filter.uuid} -->
-{% if equals(${traitConfig.id}, something) %}
+{% if equals($${traitConfig.id}, "something") %}
 Something goes here.
 {% /if %}
 `;
