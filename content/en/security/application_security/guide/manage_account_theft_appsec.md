@@ -1,0 +1,660 @@
+---
+title: Managing Account Theft with ASM
+disable_toc: false
+---
+
+Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
+
+Datadog Application Security Management (ASM) provides [builtin][1] detection and protection capabilities to help you manage this threat. 
+
+This guide describes how to use ASM to prepare for and respond to account takeover campaigns. This guide is divided into three phases:
+
+- [Phase 1: Collecting login information](#phase-1:-collecting-login-information)  
+- [Phase 2: Preparing for account takeover campaigns](#phase-2:-preparing-for-account-takeover-campaigns)  
+- [Phase 3: Reacting to account takeover campaigns](#phase-3:-reacting-to-account-takeover-campaigns)
+
+## Phase 1: Collecting login information
+
+To detect malicious patterns, ASM requires visibility into your users' login activity. This phase describes how to enable and validate this visibility. 
+
+### Step 1.1: Ensure ASM is enabled on your identity service
+
+This step describes how to set up your service to use ASM.
+
+If your service is already using ASM, you can go to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+
+1. Go to [**Service Catalog**][2], click the **Security** lens, and search for your login service name. 
+
+   <!-- ![][image1] -->
+
+2. Click on the service to open its details. If the **Threat management** pill is green, ASM is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+   
+   <!-- ![][image2] -->
+
+   If ASM isn't enabled, the panel displays the **Discover ASM** button.
+
+   <!-- ![][image3] -->
+
+   To set up ASM, move to [Step 1.2: Enabling ASM on login service](#step-1.2:-enabling-app-&-api-protection-on-your-login-service).
+
+### Step 1.2: Enabling ASM on your login service
+
+To enable ASM on your login service, ensure you meet the following requirements:
+
+* Similarly to Datadog APM, ASM requires a library integration in your services and a running Datadog agent.  
+* ASM generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
+* **Threat Detection** is required at a minimum, and **Automatic user activity event tracking** should also be enabled, ideally.
+
+To enable ASM using a new deployment, use the `APPSEC\_ENABLED` environment variable/library configuration or [Remote Configuration]. You can use either method, but Remote Configuration can be set up using the Datadog UI.
+
+To enable ASM using Remote Configuration, do the following:
+
+1. Go to [Remote Configuration][5].  
+2. Click **Get Started with ASM**.   
+3. In **Threat Management**, click **Select Services.**   
+4. Select your service(s), and then click **Next** and proceed with the setup instructions.
+
+When you see traces from your service in [ASM Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+
+For more detailed instructions on using a new deployment, see [Enabling ASM Threat Detection using Datadog Tracing Libraries][7].
+
+### Step 1.3: Validating login information is automatically collected {#step-1.3:-validating-login-information-is-automatically-collected}
+
+After you have enabled ASM, you can validate that login information is collected by Datadog.
+
+**Note:** Once ASM is enabled on a service, wait a few minutes for users to log into the service or log into the service yourself.
+
+To validate login information is collected, do the following:
+
+1. Go to [Traces][8] in ASM.   
+2. Look for traces tagged with login activity from your login service. For example, in **Search for**, you might have `@appsec.security\_activity:business\_logic.users.login.\*`.  
+3. Check if all your login services are reporting login activity. You can see this in the **Service** facet.
+
+<!-- ![][image4] -->
+
+**If you don't see login activity from a service**, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
+
+### Step 1.4: Validating login metadata is automatically collected {#step-1.4:-validating-login-metadata-is-automatically-collected}
+
+To validate that login metadata is collected, do the following:
+
+1. Go to [Traces][8] in ASM.   
+2. Look for traces tagged with successful and failed login activity from your login service. For example, in **Search for**, you might have all.  
+3. Open a trace.  
+4. In the trace details, is the **Security** tab, review **Business Logic Event**.  
+5. Check if the event has a false user.
+
+<!-- ![][image5] -->
+
+In the event of a **false** user (`usr.exists:false`), look for the following issues:
+
+- A single event: if the trace contains multiple login events, such as both successes and failures, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).  
+- If the event does not contain the mandatory metadata, it might appear as a user attribution section. The mandatory metadata is `usr.login` and `usr.exists` in the case of login failure, and `usr.id` in the case of login success. In this case, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
+
+**If the instrumentation is correct, go to [Phase 2: Preparing for Account Takeover campaigns](#phase-2:-preparing-for-account-takeover-campaigns).**
+
+### Step 1.5: Manually instrumenting your services
+
+ASM collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
+
+**For an alternative to modifying the code of the service**, go to [Step 1.6: Remote instrumentation of your services](#step-1.6:-remote-instrumentation-of-your-services).
+
+To manually instrument your services, do the following:
+
+1. If auto-instrumentation is providing incorrect data (multiple events in a single trace), see [Disable auto-instrumentation][9].
+   For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. 
+2. Add the following metadata:
+   * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts.
+   * `usr.exists`: **Recommended for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
+   * `usr.id`: **Recommended for login success and failure (if available)**. This field contains a unique identifier for the account. User blocking is based on this value. This field also helps with investigation. If no identifier is available (because the account doesn't exist), you don't need to populate this field.
+
+**After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
+
+### Step 1.6: Remote instrumentation of your services
+
+ASM can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
+
+This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running in [Remote Configuration][12].
+
+To use custom In-App WAF rules, do the following:
+
+1. Open the [In-App WAF custom rule creation form](https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules&group_by=RULESET&order=desc&policy_by=rules&ruleColumn=modifiedAt&ruleId=newRule).   
+2. Name your rule and select the **Business Logic** category.   
+3. Set the rule type as `users.login.failure` for login failures and `users.login.success` for login successes.
+   <!-- ![][image7] -->
+4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`) and the status code (403 for failures, 302 or 200 for success).  
+5. Collect the tags required by detection rules. The most important tag is `usr.login`. Assuming the login was provided in the request, you can add a condition and set `store value as tag` as the operator.
+   <!-- ![][image8] -->
+6. Select a specific user parameter as an input, either in the body or the query.   
+7. Set the `Tag` field to the name of the tag where we want to save the value captured using `usr.login`.
+   <!-- ![][image9] -->
+8. Click **Save**. The rule is automatically sent to every instance of the service and will start capturing login failures. 
+
+**To validate that the instrumentation is correct**, see [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
+
+For more details, see [Tracking business logic information without modifying the code][13].
+
+## Phase 2: Preparing for Account Takeover campaigns
+
+After setting up instrumentation for your services, ASM monitord for attack campaigns. You can review the monitoring in the [Attacks overview][14] **Business logic** section. 
+
+<!-- ![][image10] -->
+
+ASM detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
+
+The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
+
+To fully leverage detections, take the following actions.
+
+### Step 2.1: Configuring notifications
+
+[Notifications][17] provide warnings when a signal is triggered. 
+
+To create a notification rule using the [Create a new rule][18] setting, do the following:
+
+1. Open [Create a new rule][18].  
+2. Enter a name for the rule.
+3. Select **Signal** and remove all entries except **ASM**.
+4. Restrict the rule to `category:account_takeover.`  
+5. Add notification recipients (Slack, Teams, PagerDuty).
+   To learn more, see [Notification channels][19].  
+6. Save the rule.
+   <!-- ![][image11] -->
+   The notification is sent the next time a signal is generated.
+
+### Step 2.2: Validate proper data propagation
+
+In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the attacker, such as IP, user agent, fingerprint, etc., and validate the data.
+
+[ASM Traces][20] can help to validate the data by exposing the source IPs and user agent traffic.
+
+To validate the data, do the following:
+
+1. Review login traces in the [Traces][21] and check for the following:  
+* Source IPs (`@http.client_ip`) are varied and public IPs.  
+  * **Problem:** If login attempts are coming from a few IPs only, this might be  a proxy that you can't block without risking availability.  
+  * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
+* The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
+  * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
+  * **Solution:** Use the client user agent when calling subsequent services.
+
+### Step 2.3: Configure automatic blocking
+
+**Before you begin:** Verify that the IP addresses are properly configured, as described in [Step 2.2: Validate proper data propagation](#step-2.2:-validate-proper-data-propagation).
+
+ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours.
+
+You can configure automatic blocking to block IPs identified as part of an attack. This is only a partial remediation because attackers can change IPs; however, it can give you more time to implement comprehensive remediation.
+
+To configure automatic blocking, do the following:
+
+1. Go to **ASM** > **Protection** > [Detection Rules][23].  
+2. In **Search**, enter `tag:"category:account_takeover"`.   
+3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for **High** or **Critical** severity.  
+4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**.  
+   You can control the blocking behavior per condition. Each rule can have multiple conditions based on your confidence and the attack success. 
+
+**Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, ASM has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
+
+<!-- ![][image12] -->
+
+## Phase 3: Reacting to account takeover campaigns
+
+This section describes common account takeover hacker behavior and how to triage, investigate, and monitor detections.
+
+### How attackers run their campaigns 
+
+Eventually, your systems come under attack. The wave of malicious login attempts can often eclipse the volume of normal login activity the service is expecting. The load might increase causing availability problems and the attacker could at any time successfully log into an account. 
+
+The actions the attackers take depend on their strategy and the configurations of your systems. Some attackers might decide to immediately abuse their access to extract value before you've had time to freeze their compromised accounts. Others might keep the accounts dormant until a later time. 
+
+Many strategies are available, but it's important to understand that the value chain of attacks is often carefully divided:
+
+1. The actor who initiates the attack often buys a database of credentials from a vendor (likely acquired by the compromise of another service).
+2. The actor procures a script designed to automate login attempts while evading detection (randomizing headers, trying to look as similar to normal traffic as possible).
+3. The actor buys access to a botnet, letting them leverage many different IPs to run their attack. There are extreme cases where large campaigns with 500k+ attempts were so distributed that Datadog saw an average of 1.01 requests per IP and a single attempt per account.
+4. When valid credentials are discovered, they might be sold downstream to another actor  to leverage them to some end such as financial theft, spam, abuse, etc.
+
+Whenever an attack starts against your systems, signals are generated mentioning **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**. These signal terms are based on the strategy used by the attacker. 
+
+### Step 3.1: Triage
+
+The first step is to confirm that the detection is correct. Certain behaviors, such as a security scan on a login endpoint or a lot of token rotation, might appear to the detection as an attack. The analysis depends on the signal, and the following examples provide general guidance that you'll need to adapt to your situation.
+
+{{< tabs >}}
+{{% tab "Bruteforce" %}}
+
+The signal is looking for an attempt to steal a user account by trying many different passwords for this account. Generally, a small number of accounts are targeted by those campaigns.
+
+Review the accounts flagged as compromised. Click on a user to open a summary of recent activity.
+
+Questions for triage:
+
+* Has there been a sharp increase of activity?   
+* Are the IPs attempting logins known?   
+* Are they flagged by threat intelligence?
+
+If the answer to those questions is yes, the signal is likely legitimate.
+
+You can adapt your response based on the sensitivity of the account (for example, a free account without much access/secrets vs admin account).
+
+{{% /tab %}}
+
+{{% tab "Credential Stuffing" %}}
+
+This signal is looking for a large number of accounts with failed logins coming from a small number of IPs. This is often caused by unsophisticated attackers.
+
+Review the accounts flagged as targeted.
+
+If they share attributes, such as all coming from one institution, check whether the IP might be a proxy for this institution by reviewing its past activity.
+
+Questions for triage:
+
+* Has there been a sharp increase of activity?   
+* Are the accounts uncorrelated?   
+* Are IPs flagged by threat intelligence?   
+* Are there much more login failures than successes ?
+
+If the answer to those questions is yes, the signal is likely legitimate.  
+You can adapt your response based on the scale of the attack and whether accounts are being compromised.
+
+{{% /tab %}}
+
+{{% tab "Distributed Credential Stuffing" %}}
+
+This signal is looking for a large increase in the overall number of login failures on a service. This is caused by sophisticated attackers leveraging a botnet.
+
+Datadog tries to identify common attributes between the login failures in your service. This can surface defects in the attacker script that can be used to isolate the malicious activity. When found, a section called **Attacker Attributes** is shown. If present, review whether this is legitimate activity by selecting the cluster and clicking on **Explore clusters**.
+
+If accurate, the activity of the cluster should closely match the increase in login failures while also being very low/nonexistent before.  
+If no cluster is available, click **Investigate in full screen** and review the targeted users/IPs for outliers. 
+
+If the list is truncated, click **View in App & API Protection Traces Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+If the conclusion of the triage is that the signal is a false positive, you can flag it as a false positive and close it. 
+
+If the false positive was caused by a unique setting in your service, you might introduce suppression filters to silence them out.
+
+**If the signal is legitimate**, move to step [Step 3.2: Preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response).
+
+### Step 3.2: Disrupting the attacker as a preliminary response
+
+If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker will slow down the attack and reduce the number of compromised accounts. 
+
+**Note:** This is a common step, although you might want to skip this step in the following circumstances:
+
+* Accounts aren't immediately valuable: you can block compromised accounts after the fact with no negative consequences.  
+* You want to maintain the maximum visibility on the attack by avoiding preventing the attacker from learning that an investigation is ongoing and changing their strategy to something more difficult to track.
+
+Enforcing this preliminary response requires [Remote Configuration][11] is enabled for your services.
+
+If you want to initiate a partial response, do the following:
+
+{{< tabs >}}
+{{% tab "Bruteforce or Credential Stuffing" %}}
+
+The attackers are likely using a small number of IPs. To block them, open the signal and use Next Steps. You can set the duration of blocking. 
+
+We recommend **12h**, which will be enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. We do not recommend permanent blocking.  
+You can also block compromised users, although a better approach would be to extract them and reset their credentials using your own systems.  
+Finally, you can introduce automated IP blocking while running your investigation.
+
+{{% /tab %}}
+
+{{% tab "Distributed Credential Stuffing" %}}
+
+Those attacks often rely on a large number of disposable IPs. The latency from the Datadog platform makes it impractical to block login attempts by blocking the IP before the IP gets dropped from the attacker's pool.  
+
+Instead, block traits of the request that are unique to the malicious attempt (a user agent, a specific header, a fingerprint, etc.).
+
+In a **Distributed Credential Stuffing campaign** signal, Datadog automatically identifies clear traits and presents them as **Attacker Attributes**. 
+
+Before blocking, we recommend that you review the activity from the cluster to confirm that the activity is indeed malicious.
+
+The questions you're trying to answer are:
+
+- Is the traffic malicious?  
+- Will a meaningful volume of legitimate traffic be caught?  
+- Will blocking based on this cluster be effective?
+
+To do so, select your cluster and click on **Explore clusters**.
+
+The **Investigate** explorer appears and provides cluster traffic indicators: a large share of the traffic from the attack and a high proportion of IPs flagged by Threat Intelligence. 
+
+Those are two important indicators: 
+
+- Threat Intel %  
+- Traffic Distribution
+
+Click an indicator to see further information about the cluster traffic. 
+
+In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster.
+
+In the following example, a lot of traffic comes from before the attack. This means a legitimate activity matches this cluster in normal traffic and it would get blocked if you were to take action. You don't need to escalate or click **Block All Attacking IPs** in the signal.
+
+In a different example, the activity from the cluster started with the attack. This means there shouldn't be collateral damage and you can proceed to block.
+
+<!-- screenshot to be sourced -->
+
+After confirming that the traits match the attackers, you can push an In-App WAF rule that will block requests matching those traits. Currently, this is supported for user agent-based traits only.
+
+To create the rule, do the following:
+
+1. Go to **ASM** > **In-App WAF** > [Custom Rules][24].
+2. Click **Create New Rule** and complete the configuration. 
+3. Select your login service (or a service where you want to block the requests). You can target blocking to the login route also.
+4. Configure the conditions of the rule. In this example, the user agent is used. If you want to block a specific user agent, you can paste it with the operator `matches value in list`. If you want more flexibility, you can also use a regex.
+5. Use the **Preview matching traces** section as a final review of the impact of the rule. 
+
+If no unexpected traces are shown, select a blocking mode and proceed to save the rule. The response will be automatically pushed to tracers. You'll soon see blocked traces appear in the Trace Explorer.
+
+Multiple blocking actions are available, each more or less obvious. Depending on the sophistication of the attackers, you might want a more stealthy answer so that they don't immediately realize they were blocked.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Step 3.3: Investigation
+
+When you have [disrupted the attacker as a preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response), you can identify the following:
+
+- Accounts compromised by the attackers so you can reset their credentials.  
+- Hints about the source of the targeted accounts you can use for proactive password reset or higher scrutiny.  
+- Data on the attacker infrastructure you can use to catch future attempts or other malicious activity (credit card stuffing, abuse, etc.).
+
+The first step is to isolate the attacker activity from the overall traffic of the application. 
+
+#### Isolate attacker activity
+
+To isolate attacker activity, ensure that your current filters are exhaustive:  
+ 
+
+1. Go to [Traces][25], and then *exclude* traces so that the remaining traffic closely tracks your normal traffic. If you're still seeing a spike during the attack, it means further filters are necessary to comprehensively neutralize the attack.
+2. Look at the matching traffic over an expanded time frame (for example, if the attack lasted an hour, use one day). Any traffic before or after the attack is likely be a false positive.
+
+Next, start by isolating the attack's activity.
+
+{{< tabs >}}
+{{% tab "Bruteforce" %}}
+
+Extract the list of targeted users by going to [Signals][26].
+
+<!-- screenshot -->
+
+To craft a query to review all the activity from targeted users, follow this template: 
+
+`@appsec.security_activity:business_logic.users.login.* @appsec.events_data.usr.login:(<users>)` 
+
+Successful logins should be considered very suspicious.
+
+{{% /tab %}}
+
+{{% tab "Credential Stuffing" %}}
+
+This signal flagged a lot of activity coming from a few IPs. This signal is closely related to its distributed variant. You might need to use the distributed credential stuffing method.
+
+Start by extracting a list of suspicious IPs from the signal side panel
+
+<!-- screenshot -->
+
+To craft a query to review all the activity from suspected IPs, follow this template: 
+
+`@appsec.security_activity:business_logic.users.login.* @http.client_ip:(<IPs>)`
+
+Successful logins should be considered highly suspicious.
+
+{{% /tab %}}
+
+{{% tab "Distributed Credential Stuffing" %}}
+
+This signal flagged a large increase in login failures in one service. If the attack is large enough, this signal might trigger both Bruteforce or Credential Stuffing signals. The signal is also able to detect very diffuse attacks.
+
+In the diffuse attacks case, attacker attributes are available in the signal.
+
+<!-- screenshot -->
+
+1. Click **Investigate in full screen**.   
+2. In **Attacker Attributes**, select the cluster and click, then, in **Traces**, click **View in ASM Protection Trace Explorer**.
+
+This will get you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query but will likely want to expand it to also match login successes on top of the failures. Review the exhaustiveness/accuracy of the filter using the technique described above (in the paragraph before the table).
+
+<!-- sceenshot -->
+
+In the case those attributes are inaccurate/incomplete, you may try to identify further traits to isolate the attacker activity. The traits we historically found the most useful are:
+
+1. User agent: `@http.user_agent`  
+2. ASN: `@http.client_ip_details.as.domain`  
+3. Threat intelligence: `@threat_intel.results.category`  
+4. URL: `@http.url`  
+5. Fingerprint, when available: `@appsec.fingerpring.*`
+
+<!-- sceenshot -->
+
+You may use Top List or Timeseries to identify the traits whose distribution most closely matches the attack.
+
+You may need multiple sets of filters, each possibly including multiple traits. Behind the scenes, the attacker may be using multiple randomized templates. This work identifies the constants in those templates.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Review login successes and failures
+
+Reviewing login successes and failures helps to identify the following:
+
+* What the attackers are after so that you can block them.  
+* What the attackers are doing so that you can catch them, even if they change their scripts.   
+* How successful the attackers are so that you can take back the accounts where they took control and see how much time you have to react.
+
+When attacker activity is isolated, review login successes and consider the following questions: 
+
+* Have any accounts been compromised?   
+* Are attackers doing something with their compromised accounts or are they leaving them dormant?   
+* Are the accounts accessed by a different infrastructure?   
+* Is there any past activity from this infrastructure?
+
+For the login failures, consider the following questions:
+
+* Are attackers targeting a specific subset of users?  
+* How successful are they? The accuracy of the attacks should be in the 1/100-1/1000 range.   
+* Are they defeating captchas or multifactor authentication?
+
+As your investigation progresses, you can go back and forth between this step and the next as you're ready to enforce a response based on your findings.
+
+### Step 3.4: Response
+
+Datadog's investigation capabilities are enriched by data from our Backend, which isn't available to the library running the response. Because of that, not all fields are compatible with enforcing a response.
+
+Motivated attackers try to circumvent your response as soon as they become aware of it. In anticipation of this approach, do the following:
+
+1. Ensure you don't lose visibility on the attack.  
+2. Make blocking as hard as possible to *identify* by the attacker. For example, make the blocking response the same as your login failure. This can confuse attackers and lead them to believe their attack is still successful.  
+3. Make blocking as hard as possible to *circumvent* by the attacker. Use subtle traits, such as specific header values, instead of IPs.
+
+You can either use Datadog's built-in blocking capabilities to deny any request that matches some criteria, or export the data automatically to one of your systems to perform a response (credentials reset, mimic login failures upon blocking, etc.).
+
+### Datadog blocking
+
+Users that are part of traffic blocked by Datadog will see a **You're blocked** page, or they receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
+
+<!-- ![][image31] -->
+
+#### Denylist
+
+The [Denylist][27] is an efficient way to block a large number of entries, but is limited to IPs and users. If your investigation uncovered a small set of IPs responsible for the attack (`<1000`), blocking these IPs is the best course of action. 
+
+The Denylist can be managed and automated using the Datadog platform by clicking **Automate Attacker Blocking** in the signal. 
+
+Use the **Automate Attacker Blocking** or **Block All Attacking IPs** signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users.  
+
+<!-- ![][image32] -->
+
+The blocking can be rescinded or extended from the [Denylist][27].
+
+<!-- ![][image33] -->
+
+If the signal wasn't accurate, you can extract the list and add it to the Denylist manually.
+
+<!-- ![][image34] -->
+
+#### In-App WAF rules
+
+If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluates slower than the Denylist, but it is more flexible. To create the rule, go to **ASM** > **Protection** > **In-App WAF** > [Custom Rules][28].
+
+<!-- ![][image35] -->
+
+To create a new rule, do the following:
+
+1. Go to **ASM** > **Protection** > **In-App WAF** > [Custom Rules][28].  
+2. Click **Create New Rule**.   
+3. Follow the steps in **Define your custom rule**.   
+4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
+   <!-- ![][image36] -->
+1. In **If incoming requests match these conditions**, configure the conditions of the rule. The following example uses the user agent.   
+   1. If you want to block a specific user agent, you can paste it in **Values**. In **Operator**, you can use **matches value in list**, or if you want more flexibility, you can also use a **Matches RegEx**.
+   2. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
+
+   The response is pushed to the Traces explorer automatically and blocked traces appear.
+
+<!-- ![][image38] -->
+
+Multiple blocking actions are available. Depending on the sophistication of the attackers, you might want a stealthier response so that attackers don't immediately realize they were blocked.
+
+For more information, see [In-App WAF Rules][30].
+
+### Step 3.5: Monitor
+
+After the attacker introduces the response, they might suspend or adapt their attack. Keep monitoring the rate of login attempts after introducing the response, especially failures. Attacks might drop off only to resume after a few minutes, hours, or days. 
+
+If a large-scale attack resumes, the Distributed Credential Stuffing signal should re-execute. In this case, review the following considerations:
+
+* Persistent attackers often require multiple iterations of defensive measures before giving up.
+* The ideal defense is a robust blocking strategy that the attacker cannot circumvent.
+* Attackers frequently attempt to evade detection by altering IPs and user agents.
+* Effective strategies include fingerprint-based or correlation methods that identify rare header combinations.
+* Monitor blocked traffic resulting from previous defensive responses.
+* Blocking attacker traffic may inadvertently block legitimate traffic. Implement mechanisms to unblock legitimate traffic, either adapt the Datadog response or ensure it is unblocked post attack.
+
+### Step 3.6: Cleanup
+
+After a few days with no significant attacker activity, you might consider the attack over and move to a cleanup phase. 
+
+The goals of the cleanup phase are the following:
+
+- Disable any mitigations that were added.  
+- Ensure no legitimate traffic is blocked.  
+- Identify opportunities to harden services against future attacks.  
+- Identify the source of the data the attacker used against users.
+
+#### Disabling mitigations
+
+User blocking should be based on the timer you set when you selected **Block All Attacking IPs** in the signal. This user blocking configuration doesn't require any further action.
+
+If you configured permanent blocking, unblock users and IPs from the Denylist by doing the following: 
+
+1. Open the [Denylist][27].  
+2. Click **Blocked IPs** or **Blocked users**.  
+3. In the entity list, locate the IP or user, and then click **Unblock**.
+
+<!-- <insert up to date screenshot\> -->
+
+Disable or delete any custom In-App WAF rule(s). 
+
+To disable or delete In-App WAF rule(s), in [custom In-App WAF rules][28], disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
+
+If the rule is no longer relevant, you can delete it by clicking more options (**...**) and selecting **Delete**.
+
+<!-- ![][image35] -->
+
+#### Validate no legitimate traffic is blocked
+
+To validate that no legitimate traffic is blocked, the volume of traffic should match that of the attack closely, with virtually no blocked traces outside the main waves.
+
+To validate that no legitimate traffic is blocked, do the following:
+
+1. Go to [Traces][25] and search for blocked traces with the search `@appsec.blocked:true`.   
+2. If you see significant traffic blocked on an ongoing basis, the traffic is likely legitimate users.
+   1. Disable the incorrect blocking rule to avoid blocking further users. 
+   2. Prioritize unblocking that traffic from the [Denylist][27].
+
+#### Hardening your services
+
+Large ATO campaigns are rarely an isolated occurrence. You might want to leverage the time between attacks to harden your services and establish configurations you can leverage during subsequent attacks.
+
+Here are some common hardening examples:
+
+* **Rate limit login attempt per IP/user/network range/user agent:** This soft-blocking feature lets you aggressively curtail the scale of the attack in some circumstances with minimal impact on normal users, even if they happen to share traits with the attacker  
+* **Adding friction at login:** To break attackers' automation without significantly impacting users, use captchas or modifying the login flow during an attack (for example, require that a token is fetched from a new endpoint).
+* **Limiting sensitive actions for users:** If your services allow users to perform sensitive actions (spending money, accessing sensitive information, changing contact information, etc.), you might want to prohibit high risk users with suspicious logins until they are reviewed manually or through multifactor authentication. Suspicious logins can be programmatically fed to your systems by Datadog through a webhook.  
+* **Ability to consume signal findings programmatically:** Create an endpoint to consume Datadog webhooks and automatically take action against suspected users/IPs/traits.
+
+#### Identifying the attacker data source
+
+Attackers acquire lists of compromised accounts in bulk. By identifying the source of their database, you can proactively identify users at risk. 
+
+To identify the source of their database, export users impacted by the attack using one of these options:
+
+* In the signal details, in **Targeted users**, click **Export to CSV**. This option exports up to 10k users.   
+* If you need to export more than 10k users, manually paginate your query by performing manual [API calls][31]. The Traces explorer performs similar calls, so you can base your requests on the call it's performing by grouping by `@appsec.events_data.usr.login`. Set the limit to 10000 and use smaller time ranges to avoid the backend cap.
+
+<!-- ![][image41] -->
+
+When you have a list, review it for common attributes: 
+- If all users are coming from one region or one customer. 
+- A large majority of users share any known compromise (use the [Have I Been Pwned][32] API).
+
+When the source of the database is identified, proactively force a password reset of those customers or flag them as higher risk. This will increase confidence that future suspicious logins were indeed compromised.
+
+#### Review additional attacker activity
+
+Leveraging the signature from the attacker, expand  filters to look at what non-login activity they performed. 
+
+This filter can be less accurate. For example, a filter that matches the signature of a mobile application with legitimate traffic but that was cloned by the attacker for their attack. The filter might show research done by the attacker ahead of time, and share hints on what the attacker may be looking to do next.
+
+You can also pivot on the infrastructure used by the attacker. Did those malicious IPs do anything but logins? Are they accessing other sensitive APIs?
+
+## Take aways
+
+Account theft is a common threat but also much more complex than traditional injection exploits. Catching them requires tight integration with your systems and involves enough uncertainty that automated responses aren't possible for the most advanced attacks.  
+
+In this guide, you did the following: 
+- Learned what account takeover campaigns can look like, how to triage them, and how to counter them.
+- Instrumented your login services to provide Datadog ASM with all the context it needs.
+- Configured your login services to provide every capability at the time of the attack. 
+
+This is general guidance. Depending on your applications and environments, there might be a need for additional response strategies.
+
+[1]: /security/account_takeover_protection/
+[2]: https://app.datadoghq.com/services?query=service%3Auser-auth&env=%2A&fromUser=false&hostGroup=%2A&lens=Security&sort=-fave%2C-team&start=1735636008863&end=1735639608863
+[3]: /security/application_security/threats/setup/compatibility/
+[4]: /agent/remote_config/?tab=configurationyamlfile
+[5]: https://app.datadoghq.com/security/appsec/onboarding
+[6]: https://app.datadoghq.com/security/appsec/traces?query=&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036043639&end=1735640843639&paused=false
+[7]: /security/application_security/threats/setup/threat_detection/
+[8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
+[9]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
+[10]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[11]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile
+[12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
+[13]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
+[14]: https://app.datadoghq.com/security/appsec/threat
+[15]: https://docs.datadoghq.com/security/account_takeover_protection/#attacker-strategies
+[16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
+[17]: https://docs.datadoghq.com/security/notifications/
+[18]: https://app.datadoghq.com/security/configuration/notification-rules/new?notificationData=
+[19]: https://docs.datadoghq.com/security/notifications/#notification-channels
+[20]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735222832468&end=1735827632468&paused=false
+[21]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735222832468&end=1735827632468&paused=false
+[22]: https://securitylabs.datadoghq.com/articles/challenges-with-ip-spoofing-in-cloud-environments/#what-should-you-do
+[23]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
+[24]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[25]: https://app.datadoghq.com/security/appsec/traces
+[26]: https://app.datadoghq.com/security
+[27]: https://app.datadoghq.com/security/appsec/denylist
+[28]: https://ddstaging.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[30]: https://docs.datadoghq.com/security/application_security/threats/inapp_waf_rules/
+[31]: https://docs.datadoghq.com/api/latest/spans/#aggregate-spans
+[32]: https://haveibeenpwned.com/
