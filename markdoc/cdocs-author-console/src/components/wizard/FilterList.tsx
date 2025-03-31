@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CustomizationConfig, FilterConfig, FilterConfigSchema } from 'cdocs-data';
-import OptionGroupSelector from '../selectors/OptionGroupSelector';
 import TraitForm, { TraitConfig } from './TraitForm';
 import OptionGroupForm from './OptionGroupForm';
+import Button from '@mui/material/Button';
+import { v4 as uuidv4 } from 'uuid';
+import AddIcon from '@mui/icons-material/Add';
 
 function FilterSummary({
   filterConfig,
@@ -26,41 +28,61 @@ function FilterSummary({
 }
 
 function FilterList({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
+  const [filtersByUuid, setFiltersByUuid] = useState<Record<string, FilterConfig>>({});
+  const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
+
+  const addFilter = () => {
+    const newFilter: FilterConfig = {
+      label: '',
+      trait_id: '',
+      option_group_id: ''
+    };
+    const newUuid = uuidv4();
+    setFiltersByUuid({ ...filtersByUuid, [newUuid]: newFilter });
+    setCurrentFilterUuid(newUuid);
+  };
+
+  const onFilterEdit = (filterConfig: FilterConfig) => {
+    if (!currentFilterUuid) {
+      throw new Error('No current filter to edit');
+    }
+    setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filterConfig });
+  };
+
   return (
     <div>
-      <p>Filter list goes here.</p>
-      <hr />
-      <p>
-        <strong>Filter form test</strong>
-      </p>
-      <FilterForm customizationConfig={customizationConfig} onEdit={() => {}} />
+      {Object.keys(filtersByUuid).length === 0 && <p>No filters added yet.</p>}
+      {Object.keys(filtersByUuid).map((uuid) => {
+        const filter = filtersByUuid[uuid];
+        return (
+          <div key={uuid} style={{ marginBottom: '1em', padding: '10px', borderBottom: '1px solid #e2e5ed' }}>
+            <FilterSummary filterConfig={filtersByUuid[uuid]} customizationConfig={customizationConfig} />
+            {currentFilterUuid === uuid && (
+              <FilterForm
+                customizationConfig={customizationConfig}
+                filterConfig={filtersByUuid[currentFilterUuid]}
+                onEdit={onFilterEdit}
+              />
+            )}
+          </div>
+        );
+      })}
+      <Button variant="contained" startIcon={<AddIcon />} onClick={addFilter}>
+        Add filter
+      </Button>
     </div>
   );
 }
 
 function FilterForm({
-  filter,
+  filterConfig,
   customizationConfig,
   onEdit
 }: {
-  filter?: FilterConfig;
+  filterConfig: FilterConfig;
   customizationConfig: CustomizationConfig;
   onEdit: (filter: FilterConfig) => void;
 }) {
-  const blankFilter: FilterConfig = {
-    label: '',
-    trait_id: '',
-    option_group_id: ''
-  };
-
-  const [filterConfig, setFilterConfig] = useState<FilterConfig>(blankFilter);
-
-  const [newCustomizationConfig, setNewCustomizationConfig] = useState<CustomizationConfig>({
-    traitsById: {},
-    optionsById: {},
-    optionGroupsById: {}
-  });
-
   const formHeaderStyles: React.CSSProperties = {
     backgroundColor: '#eff1f5',
     fontSize: '0.9em',
@@ -70,11 +92,14 @@ function FilterForm({
     marginTop: '0.5em'
   };
 
+  const [newCustomizationConfig, setNewCustomizationConfig] = useState<CustomizationConfig>({
+    traitsById: {},
+    optionsById: {},
+    optionGroupsById: {}
+  });
+
   return (
     <div>
-      <p>
-        <FilterSummary filterConfig={filterConfig} customizationConfig={customizationConfig} />
-      </p>
       <h2 style={formHeaderStyles}>Trait</h2>
       <TraitForm
         customizationConfig={customizationConfig}
@@ -96,7 +121,7 @@ function FilterForm({
           }
 
           // Update the filter config with the newly chosen trait ID
-          setFilterConfig({
+          onEdit({
             ...filterConfig,
             trait_id: traitId,
             label: traitConfig.label
