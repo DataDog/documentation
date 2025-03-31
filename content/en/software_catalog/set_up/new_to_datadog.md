@@ -127,9 +127,9 @@ If you create service definitions in the Datadog UI, Datadog automatically flags
 
 Built-in validation mechanisms prevent you from sending incorrect metadata into Software Catalog. 
 
-#### Github Integration validation
+#### GitHub Integration validation
 
-To validate your service definitions ingested by Datadog's Github integration, you can view events when services are updated or when there is an error. To view validation errors in [Event Management][2],  filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
+To validate your service definitions ingested by Datadog's GitHub integration, you can view events when services are updated or when there is an error. To view validation errors in [Event Management][2],  filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
 
 {{< img src="tracing/software_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 

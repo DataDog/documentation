@@ -7,7 +7,7 @@ aliases:
   - /service_catalog/setup
 ---
 
-Get started with Software Catalog with one of the following set-up paths.
+Get started with Software Catalog with one of the following setup paths.
 
 ## New to Datadog 
 
