@@ -3105,11 +3105,16 @@ menu:
       parent: serverless_step_functions
       identifier: serverless_step_functions_redrive
       weight: 204
+    - name: Distributed Map States
+      url: serverless/step_functions/distributed-maps
+      parent: serverless_step_functions
+      identifier: serverless_step_functions_distributed_maps
+      weight: 205
     - name: Troubleshooting
       url: serverless/step_functions/troubleshooting
       parent: serverless_step_functions
       identifier: serverless_step_functions_troubleshooting
-      weight: 205
+      weight: 206
     - name: AWS Fargate
       identifier: serverless_aws_fargate
       url: integrations/ecs_fargate

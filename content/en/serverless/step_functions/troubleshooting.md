@@ -56,6 +56,8 @@ If your organization has an existing all-encompassing index with a low limit, pl
 ## Missing logs within an execution
 [Exclusion fiters][7] can be used to ensure all logs with the same execution_arn are either kept or excluded. Note that this has no impact on tracing.
 
+Here is an example filter that excludes logs for 90% of the `@execution_arn`.
+
 {{< img src="serverless/step_functions/exclusion_filter.png" alt="New exclusion filter" style="width:80%;" >}}
 
 ## Customized way to deploy Datadog Lambda Forwarder

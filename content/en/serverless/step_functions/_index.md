@@ -15,7 +15,7 @@ further_reading:
   text: "Redrive Executions"
 - link: "/serverless/step_functions/distributed-maps"
   tag: "Documentation"
-  text: "Distributed Map States"
+  text: "Tracing Distributed Map States"
 - link: "/serverless/step_functions/troubleshooting"
   tag: "Documentation"
   text: "Troubleshoot Serverless Monitoring for AWS Step Functions"
