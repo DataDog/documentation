@@ -5523,10 +5523,10 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_elasticsearch
       weight: 906
-    - name: Google Chronicle
-      url: observability_pipelines/destinations/google_chronicle
+    - name: Google SecOps
+      url: observability_pipelines/destinations/google_secops/
       parent: observability_pipelines_destinations
-      identifier: observability_pipelines_google_chronicle
+      identifier: observability_pipelines_google_secops
       weight: 907
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage

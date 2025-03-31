@@ -1,12 +1,12 @@
 ---
-title: Google Chronicle Destination
+title: Google SecOps Destination
 disable_toc: false
 ---
-Use Observability Pipelines' Google Chronicle destination to send logs to Google Chronicle.
+Use Observability Pipelines' Google SecOps destination to send logs to Google SecOps.
 
 ## Setup
 
-Set up the Google Chronicle destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
+Set up the Google SecOps destination and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 ### Set up the destination
 

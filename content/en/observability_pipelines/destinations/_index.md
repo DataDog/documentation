@@ -28,7 +28,7 @@ Select and set up your destinations when you [set up a pipeline][1]. This is ste
     {{< nextlink href="observability_pipelines/destinations/crowdstrike_ng_siem" >}}CrowdStrike Next-Gen SIEM{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Datadog Logs{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/destinations/google_secops" >}}Google SecOps{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
@@ -53,7 +53,7 @@ The following table lists the destinations and fields that support template synt
 | Amazon S3         | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Elasticsearch     | Source type                         | The Worker writes logs to the `datadog-op` index.                                                                          |
-| Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Google SecOps  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
