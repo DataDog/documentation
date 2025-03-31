@@ -269,10 +269,13 @@ To see an example in action, see [flask-baggage on trace-examples][7]
 The <code>ddtrace-api</code> Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
 <br><br>The following steps are only necessary if you want to experiment with the in Preview <code>ddtrace-api</code> package.{{< /callout >}}
 
-A stable public API for Datadog APM's custom Python instrumentation is implemented by the [ddtrace-api package][8]. This package doesn't implement any of the underlying functionality that creates and
-sends spans to Datadog; it *only* implements the API interface. This separation between interface in `ddtrace-api` and implementation in `ddtrace` allows users of cusom instrumentation to rely on
-an API that changes less frequently and more predictably, while allowing autoinstrumentation-only users to ignore API changes. It also supports those users who integrate both single-step instrumentation
-and custom instrumentation by removing the need to depend on two copies of the `ddtrace` package.
+The [ddtrace-api package][8] provides a stable public API for Datadog APM's custom Python instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog. 
+
+This separation between interface (`ddtrace-api`) and implementation (`ddtrace`) offers several benefits:
+
+- You can rely on an API that changes less frequently and more predictably for your custom instrumentation
+- If you only use automatic instrumentation, you can ignore API changes entirely
+- If you implement both single-step and custom instrumentation, you avoid depending on multiple copies of the `ddtrace` package
 
 The separation of interface and implementation means that setting up custom instrumentation requires installing two libraries: `ddtrace` as explained in the [Python Setup Instructions][6]
 and `ddtrace-api`:
