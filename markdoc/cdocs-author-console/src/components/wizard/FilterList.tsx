@@ -15,6 +15,7 @@ function FilterList({
   customizationConfig: CustomizationConfig;
   onEdit: ({ filters }: { filters: WizardFilter[] }) => void;
 }) {
+  const [savedFiltersByUuid, setSavedFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
 
@@ -49,21 +50,34 @@ function FilterList({
     setCurrentFilterUuid(filter.uuid);
   };
 
+  const onSave = () => {
+    setCurrentFilterUuid(null);
+    setSavedFiltersByUuid(filtersByUuid);
+    onEdit({ filters: Object.values(filtersByUuid) });
+  };
+
+  const onCancel = () => {
+    setCurrentFilterUuid(null);
+    setFiltersByUuid(savedFiltersByUuid);
+  };
+
   return (
     <div>
       {Object.keys(filtersByUuid).length === 0 && <p>No filters added yet.</p>}
       {Object.keys(filtersByUuid).map((uuid) => {
-        // Only show the edit icon if the filter is not currently being edited
+        // Only show the edit and delete icons if the filter is not currently being edited
         let onEdit;
+        let onDelete;
         if (currentFilterUuid !== uuid) {
           onEdit = onFilterRowEdit;
+          onDelete = onFilterRowDelete;
         }
         return (
           <div key={uuid} style={{ marginBottom: '1em', padding: '10px', borderBottom: '1px solid #e2e5ed' }}>
             <FilterRow
               filter={filtersByUuid[uuid]}
               customizationConfig={customizationConfig}
-              onDelete={onFilterRowDelete}
+              onDelete={onDelete}
               onEdit={onEdit}
             />
             {currentFilterUuid === uuid && (
@@ -76,9 +90,21 @@ function FilterList({
           </div>
         );
       })}
-      <Button variant="contained" startIcon={<AddIcon />} onClick={addFilter}>
-        Add filter
-      </Button>
+      {!currentFilterUuid && (
+        <Button variant="contained" startIcon={<AddIcon />} onClick={addFilter}>
+          Add filter
+        </Button>
+      )}
+      {currentFilterUuid && (
+        <>
+          <Button variant="contained" onClick={onSave}>
+            Save
+          </Button>{' '}
+          <Button variant="contained" onClick={onCancel}>
+            Cancel
+          </Button>
+        </>
+      )}
     </div>
   );
 }
@@ -97,7 +123,7 @@ function FilterRow({
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
   onEdit?: (filter: WizardFilter) => void;
-  onDelete: (filter: WizardFilter) => void;
+  onDelete?: (filter: WizardFilter) => void;
 }) {
   const getFilterSummaryText = () => {
     if (!filter.trait_id || !filter.option_group_id) {
@@ -110,7 +136,7 @@ function FilterRow({
   return (
     <>
       <span>{getFilterSummaryText()}</span>
-      <DeleteIcon onClick={() => onDelete(filter)} />
+      {onDelete && <DeleteIcon sx={{ color: '#eb364b' }} onClick={() => onDelete(filter)} />}
       {onEdit && <EditIcon onClick={() => onEdit(filter)} />}
     </>
   );
