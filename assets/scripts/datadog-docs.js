@@ -129,6 +129,8 @@ const doOnLoad = () => {
     if (document.querySelector('.expression-evaluator')) {
         new ExpressionLanguageEvaluator();
     }
+
+    checkForBrokenImages();
 };
 
 DOMReady(doOnLoad);
@@ -411,6 +413,19 @@ function replaceURL(inputUrl) {
         return thisurl;
     }
     return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
+}
+
+function checkForBrokenImages() {
+    const images = document.getElementsByTagName('img');
+    brokenImageCount = 0;
+    for(let img of images) {
+        if (!img.complete ) {
+            brokenImageCount += 1;
+        }
+    }
+    if (brokenImageCount > 0) {
+        console.error('Broken images found on page:', brokenImageCount);
+    }
 }
 
 window.addEventListener(
