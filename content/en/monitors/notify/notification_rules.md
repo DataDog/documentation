@@ -11,9 +11,7 @@ further_reading:
 
 ## Overview
 
-Monitor notification rules are predefined sets of conditions that automate the process of alerting your team. Create different rules to route monitor alerts based on the tags of the monitor notification. Notification rules allow you to define the notification logic and recipients in one place and all the monitor events with matching tags will be routed to that list of handles automatically.
-
-With notification rules, you no longer need to manually set up notifications recipients nor notification routing logic for each individual monitor. 
+Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of configuring notification recipients and routing for every monitor individually, Notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
 
 ## Creating notification rules
 
@@ -37,9 +35,9 @@ With notification rules, you no longer need to manually set up notifications rec
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
 - **Scopes**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
-- **Teams**: Lists the teams that this notification rule is associated with
+- **Teams**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
 - **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
-- **Channels**: Lists the notification channels (Slack, email) that will receive alerts when this rule matches.
+- **Recipients**: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
 - **Actions**: Provides options to edit or delete each notification rule. Click the vertical three-dot menu on the notification rule and select **Edit** or **Delete**.
 
 ### From an individual monitor
