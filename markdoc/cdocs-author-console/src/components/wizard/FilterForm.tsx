@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import TraitForm, { TraitConfig } from './TraitForm';
 import OptionGroupForm from './OptionGroupForm';
@@ -18,13 +17,24 @@ function FilterForm({
     fontSize: '0.9em',
     padding: '0.5em',
     textAlign: 'center',
-    marginBottom: '0.2em',
+    marginBottom: '1em',
     marginTop: '0.5em'
   };
 
+  let traitLabel = '';
+  if (filter.trait_id) {
+    const traitConfig = customizationConfig.traitsById[filter.trait_id];
+    if (traitConfig) {
+      traitLabel = traitConfig.label;
+    }
+  }
+
   return (
     <div>
-      <h2 style={formHeaderStyles}>Trait</h2>
+      <h2 style={formHeaderStyles}>Trait{traitLabel && `: ${traitLabel}`}</h2>
+      <p style={{ fontSize: '0.9em' }}>
+        The user characteristic to filter on, such as their host or programming language.
+      </p>
       <TraitForm
         customizationConfig={customizationConfig}
         onUpdate={({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => {
@@ -45,7 +55,8 @@ function FilterForm({
           });
         }}
       />
-      <h2 style={formHeaderStyles}>Option group</h2>
+      <h2 style={formHeaderStyles}>Options</h2>
+      <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
       <OptionGroupForm customizationConfig={customizationConfig} />
     </div>
   );

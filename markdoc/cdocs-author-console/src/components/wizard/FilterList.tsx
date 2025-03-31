@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CustomizationConfig, FilterConfig, FilterConfigSchema } from 'cdocs-data';
+import { CustomizationConfig } from 'cdocs-data';
 import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
@@ -27,11 +27,11 @@ function FilterList({
     setCurrentFilterUuid(newUuid);
   };
 
-  const onFilterEdit = (filterConfig: FilterConfig) => {
+  const onFilterEdit = (filter: WizardFilter) => {
     if (!currentFilterUuid) {
       throw new Error('No current filter to edit');
     }
-    setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filterConfig });
+    setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filter });
     onEdit({ filters: Object.values(filtersByUuid) });
   };
 
