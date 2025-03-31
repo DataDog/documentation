@@ -692,14 +692,17 @@ h5 {
         padding-left: 0 !important;
     }
     .tab-content {
-        padding-top: 12px;
-        background-color: #ffffff;
-        border: 1px solid #e8e8e8;
+        background-color: #F8F9FA;
+        border: 1px solid #DDDDDD;
         border-radius: 4px;
-        padding: 20px;
-        margin-top: 10px;
-        margin: 10px 0 32px 0;
+        padding: 24px;
+        margin: 24px 0;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+        dl {
+            background-color: #FFFFFF;
+        }
+
         h2 > a,
         h3 > a,
         h4 > a,
