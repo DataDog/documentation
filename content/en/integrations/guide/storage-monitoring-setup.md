@@ -171,22 +171,22 @@ If you encounter any issues or need assistance:
 
 The process involves the following steps:
 
-#### Step 1: Install the GCP Integration & ensure Resource Collection is enabled
+#### Step 1: Install the GCP integration & ensure Resource Collection is enabled
 
-To ensure that we can collect GCP Storage metrics from your GCP project, you need to install the  GCP integration in Datadog. Make sure to enable resource collection for the project containing the buckets you want to monitor. Resource Collection allows Datadog to associate your buckets’ labels with the metrics collected through storage monitoring.
+To ensure that Datadog can collect GCP Storage metrics from your GCP project, you need to install the GCP integration in Datadog. Make sure to enable Resource Collection for the project containing the buckets you want to monitor. Resource Collection allows Datadog to associate your buckets' labels with the metrics collected through storage monitoring.
 
-**Note**: While you have the option to disable specific metric namespaces, it is crucial that the CloudStorage namespace remains enabled.
+**Note**: While you have the option to disable specific metric namespaces, it is crucial that the Cloud Storage namespace (gcp.storage) remains enabled.
 
 
-#### Step 2: Add the `roles/storage.ObjectViewer` Role to your Datadog Service Account
+#### Step 2: Add the `roles/storage.ObjectViewer` role to your Datadog service account
 
 This grants Datadog permission to access and extract the generated inventory reports from Google.
 
-#### Step 3: Enable the [Storage Insights][201] API in your GCP Project
+#### Step 3: Enable the [Storage Insights][201] API in your GCP project
 
-#### Step 4: Grant Service Agent Permissions
+#### Step 4: Grant service agent permissions
 
-Once the Storage Insights API has been enabled, a project-level service agent will be created automatically. The naming format for this service agent is: `service-PROJECT_NUMBER@gcp-sa-storageinsights.iam.gserviceaccount.com`
+After the Storage Insights API has been enabled, a project-level service agent is created automatically. The naming format for this service agent is: `service-PROJECT_NUMBER@gcp-sa-storageinsights.iam.gserviceaccount.com`
 The service agent requires the following IAM roles:
 
 1. `roles/storage.insightsCollectorService` on the source bucket (this includes storage.buckets.getObjectInsights and storage.buckets.get permissions).
@@ -196,7 +196,7 @@ The service agent requires the following IAM roles:
 
 There are multiple ways you can create an Inventory Report Configuration. The quickest way for customers to set up Storage Monitoring is through the Google Cloud CLI or Terraform templates. Regardless of the method you choose, the most important part is that the configuration:
 
-1. includes the following metadata fields:  "bucket", "name", "project","size","updated","storageClass"
+1. includes the following metadata fields: "bucket", "name", "project","size","updated","storageClass"
 2. generate CSV reports with '\n' as the delimiter & ',' as the separator
 3. The destination path follows the format: <Bucket>/{{date}}, where <Bucket> is the monitored bucket.
 
@@ -230,7 +230,7 @@ Download [this][401] terraform template inventory.tf & substitute the necessary 
 You can opt to allow Datadog to handle the inventory report configuration by providing the proper permissions to your service account.
 Navigate to IAM & Admin -> Service accounts, and find your Datadog service account & add the roles/storageinsights.Admin role.
 
-You’ll also want to navigate to the source bucket you’d like to monitor and grant that service account the following permissions:
+You'll also want to navigate to the source bucket you would like to monitor and grant that service account the following permissions:
 - roles/storage.insightsCollectorService
 - roles/storage.ObjectViewer
 
@@ -239,7 +239,7 @@ Finally, navigate to the destination bucket (where you set these inventory repor
 - roles/storage.insightsCollectorService
 
 
-Alternatively, if you’d like to create a custom role specifically for Datadog, here are the required permissions:
+Alternatively, if you'd like to create a custom role specifically for Datadog, here are the required permissions:
 
 ```
 storage.buckets.get
@@ -256,7 +256,7 @@ storageinsights.reportDetails.get
 storageinsights.reportDetails.list
 ```
 
-Once the necessary permissions have been granted, we can create the inventory report configuration with your setup details in the next step.
+After the necessary permissions have been granted, we can create the inventory report configuration with your setup details in the next step.
 
 {{< /tabs >}}
 
