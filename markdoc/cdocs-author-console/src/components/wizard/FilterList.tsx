@@ -4,20 +4,20 @@ import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
 import FilterForm from './FilterForm';
-import { WizardData } from './types';
+import { WizardFilter } from './types';
 
 function FilterList({
   customizationConfig,
   onEdit
 }: {
   customizationConfig: CustomizationConfig;
-  onEdit: ({ filters, newCustomizationConfig }: WizardData) => void;
+  onEdit: ({ filters }: { filters: WizardFilter[] }) => void;
 }) {
-  const [filtersByUuid, setFiltersByUuid] = useState<Record<string, FilterConfig>>({});
+  const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
 
   const addFilter = () => {
-    const newFilter: FilterConfig = {
+    const newFilter: WizardFilter = {
       label: '',
       trait_id: '',
       option_group_id: ''
@@ -32,20 +32,20 @@ function FilterList({
       throw new Error('No current filter to edit');
     }
     setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filterConfig });
+    onEdit({ filters: Object.values(filtersByUuid) });
   };
 
   return (
     <div>
       {Object.keys(filtersByUuid).length === 0 && <p>No filters added yet.</p>}
       {Object.keys(filtersByUuid).map((uuid) => {
-        const filter = filtersByUuid[uuid];
         return (
           <div key={uuid} style={{ marginBottom: '1em', padding: '10px', borderBottom: '1px solid #e2e5ed' }}>
-            <FilterSummary filterConfig={filtersByUuid[uuid]} customizationConfig={customizationConfig} />
+            <FilterSummary filter={filtersByUuid[uuid]} customizationConfig={customizationConfig} />
             {currentFilterUuid === uuid && (
               <FilterForm
                 customizationConfig={customizationConfig}
-                filterConfig={filtersByUuid[currentFilterUuid]}
+                filter={filtersByUuid[currentFilterUuid]}
                 onEdit={onFilterEdit}
               />
             )}
@@ -65,22 +65,20 @@ export default FilterList;
  * A short text representation of a filter configuration.
  */
 function FilterSummary({
-  filterConfig,
+  filter,
   customizationConfig
 }: {
-  filterConfig: FilterConfig;
+  filter: WizardFilter;
   customizationConfig: CustomizationConfig;
 }) {
-  if (!filterConfig.trait_id || !filterConfig.option_group_id) {
+  if (!filter.trait_id || !filter.option_group_id) {
     return <span>Incomplete filter.</span>;
   }
-  const optionLabels = customizationConfig.optionGroupsById[filterConfig.option_group_id]?.map(
-    (option) => option.label
-  );
+  const optionLabels = customizationConfig.optionGroupsById[filter.option_group_id]?.map((option) => option.label);
 
   return (
     <span>
-      {filterConfig.label}: {optionLabels.join(', ')}
+      {filter.label}: {optionLabels.join(', ')}
     </span>
   );
 }
