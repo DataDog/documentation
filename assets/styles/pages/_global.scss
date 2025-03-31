@@ -590,7 +590,7 @@ h5 {
         }
     }
 
-    ol ol {    
+    ol ol {
         list-style-type: lower-alpha;
         ol {
             list-style-type: lower-roman;
@@ -605,7 +605,7 @@ h5 {
             }
         }
     }
-    
+
     ul,
     ol,
     dl,
@@ -693,6 +693,13 @@ h5 {
     }
     .tab-content {
         padding-top: 12px;
+        background-color: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 4px;
+        padding: 20px;
+        margin-top: 10px;
+        margin: 10px 0 32px 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         h2 > a,
         h3 > a,
         h4 > a,
