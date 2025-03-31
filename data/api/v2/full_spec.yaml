@@ -1122,7 +1122,7 @@ components:
       x-enum-varnames:
       - API_KEYS
     APITrigger:
-      description: Trigger a workflow VIA an API. The workflow must be published.
+      description: Trigger a workflow from an API request. The workflow must be published.
       properties:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
@@ -2340,7 +2340,7 @@ components:
       description: Schema for an App-based trigger.
       properties:
         appTrigger:
-          description: Trigger a workflow VIA an App.
+          description: Trigger a workflow from an App.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -6580,7 +6580,7 @@ components:
       - IN_PROGRESS
       - CLOSED
     CaseTrigger:
-      description: Trigger a workflow VIA a Case. For automatic triggering a handle
+      description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -6817,7 +6817,7 @@ components:
       description: Schema for a Change Event-based trigger.
       properties:
         changeEventTrigger:
-          description: Trigger a workflow VIA a Change Event.
+          description: Trigger a workflow from a Change Event.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10589,7 +10589,7 @@ components:
       description: Schema for a Dashboard-based trigger.
       properties:
         dashboardTrigger:
-          description: Trigger a workflow VIA a Dashboard.
+          description: Trigger a workflow from a Dashboard.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10677,6 +10677,17 @@ components:
       type: string
       x-enum-varnames:
       - DATATRANSFORM
+    DatabaseMonitoringTriggerWrapper:
+      description: Schema for a Database Monitoring-based trigger.
+      properties:
+        databaseMonitoringTrigger:
+          description: Trigger a workflow from Database Monitoring.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - databaseMonitoringTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -14511,9 +14522,9 @@ components:
       example: https://github.com/organization/example-repository
       type: string
     GithubWebhookTrigger:
-      description: Trigger a workflow VIA GitHub webhook. To trigger a workflow from
-        GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set
-        the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
+      description: Trigger a workflow from a GitHub webhook. To trigger a workflow
+        from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings,
+        set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
         select application/json for the content type, and be highly recommend enabling
         SSL verification for security. The workflow must be published.
       properties:
@@ -16828,7 +16839,7 @@ components:
       x-enum-varnames:
       - INCIDENT_TODOS
     IncidentTrigger:
-      description: Trigger a workflow VIA an Incident. For automatic triggering a
+      description: Trigger a workflow from an Incident. For automatic triggering a
         handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -19462,10 +19473,10 @@ components:
           type: string
       type: object
     LogsQueryOptions:
+      deprecated: true
       description: 'Global query options that are used during the query.
 
-        Note: you should supply either timezone or time offset, but not both. Otherwise,
-        the query will fail.'
+        Note: These fields are currently deprecated and do not affect the query results.'
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
@@ -21574,7 +21585,7 @@ components:
           $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
       type: object
     MonitorTrigger:
-      description: Trigger a workflow VIA a Monitor. For automatic triggering a handle
+      description: Trigger a workflow from a Monitor. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -21711,6 +21722,17 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
+      type: object
+    NotebookTriggerWrapper:
+      description: Schema for a Notebook-based trigger.
+      properties:
+        notebookTrigger:
+          description: Trigger a workflow from a Notebook.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - notebookTrigger
       type: object
     NotificationRule:
       description: 'Notification rules allow full control over notifications generated
@@ -26795,7 +26817,7 @@ components:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
     ScheduleTrigger:
-      description: Trigger a workflow VIA a Schedule. The workflow must be published.
+      description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
         rruleExpression:
           description: Recurrence rule expression for scheduling.
@@ -29092,7 +29114,7 @@ components:
           type: string
       type: object
     SecurityTrigger:
-      description: Trigger a workflow VIA a Security Signal or Finding. For automatic
+      description: Trigger a workflow from a Security Signal or Finding. For automatic
         triggering a handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -29130,6 +29152,17 @@ components:
           $ref: '#/components/schemas/TriggerSource'
       required:
       - trigger_source
+      type: object
+    SelfServiceTriggerWrapper:
+      description: Schema for a Self Service-based trigger.
+      properties:
+        selfServiceTrigger:
+          description: Trigger a workflow from Self Service.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - selfServiceTrigger
       type: object
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
@@ -30853,7 +30886,7 @@ components:
       description: Schema for a Slack-based trigger.
       properties:
         slackTrigger:
-          description: Trigger a workflow VIA Slack. The workflow must be published.
+          description: Trigger a workflow from Slack. The workflow must be published.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -30906,6 +30939,17 @@ components:
           $ref: '#/components/schemas/SloReportCreateRequestAttributes'
       required:
       - attributes
+      type: object
+    SoftwareCatalogTriggerWrapper:
+      description: Schema for a Software Catalog-based trigger.
+      properties:
+        softwareCatalogTrigger:
+          description: Trigger a workflow from Software Catalog.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - softwareCatalogTrigger
       type: object
     SortDirection:
       default: desc
@@ -32772,13 +32816,17 @@ components:
       - $ref: '#/components/schemas/AppTriggerWrapper'
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
+      - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
+      - $ref: '#/components/schemas/NotebookTriggerWrapper'
       - $ref: '#/components/schemas/ScheduleTriggerWrapper'
       - $ref: '#/components/schemas/SecurityTriggerWrapper'
+      - $ref: '#/components/schemas/SelfServiceTriggerWrapper'
       - $ref: '#/components/schemas/SlackTriggerWrapper'
+      - $ref: '#/components/schemas/SoftwareCatalogTriggerWrapper'
       - $ref: '#/components/schemas/WorkflowTriggerWrapper'
     TriggerRateLimit:
       description: Defines a rate limit for a trigger.
@@ -34423,7 +34471,7 @@ components:
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
         workflowTrigger:
-          description: Trigger a workflow VIA the Datadog UI. Only required if no
+          description: Trigger a workflow from the Datadog UI. Only required if no
             other trigger exists.
           type: object
       required:
