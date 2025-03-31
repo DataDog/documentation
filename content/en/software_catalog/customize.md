@@ -32,7 +32,7 @@ Customize your engineering team's experience in Software Catalog with the follow
 
 Developer Homepage is a personalized dashboard experience that enables developers to access prioritized tasks, pull requests, alerts, and insights--all in one place.
 
-{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Developer Home is in private beta. Opt in here!" >}}
+{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Developer Home is in Preview. Opt in here!" >}}
 {{< /callout >}}
 
 ## Enrich auto-detected services with metadata 

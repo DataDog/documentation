@@ -1,5 +1,5 @@
 ---
-title: Existing Datadog Customer
+title: Discover Existing Services in Software Catalog
 further_reading:
   - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"
@@ -12,20 +12,28 @@ aliases:
     - /service_catalog/customize/import_entries_dd
 ---
 
-Learn how Software Catalog discovers services from Datadog APM, USM, RUM, infrastructure metrics, and logs.
+Learn how Software Catalog discovers services from Datadog Application Performance Monitoring (APM), Universal Service Monitoring (USM), Real User Monitoring (RUM), infrastructure metrics, and logs.
 
-## APM, USM, RUM Users
+## Automatic discovery with APM, USM, and RUM
 
 Datadog Software Catalog is pre-populated with entries detected through [APM][5], eBPF-based autodiscovery with [Universal Service Monitoring][6], and RUM applications.
 
-**Note:** 
-Datadog APM automatically discovers dependencies--such as databases, queues, and third-party dependencies--for instrumented services, even if the dependencies haven't been instrumented yet. These un-instrumented dependencies are each categorized as *services*, and Datadog applies their names to service tags on client spans (`span.kind:client`). For example, a client span representing a client call from a service `auth-dotnet` to a PostgreSQL database would be tagged with `service:auth-dotnet-postgres`. 
+### APM service detection and dependencies
 
-If you are using APM and would like to remove the automatically named *services* from your Software Catalog and Service Map, you can opt in to [inferred entities][7] to filter Software Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove service overrides][8] like `service:my-service-http-client` from your catalog or map.
+**Note:** Datadog APM automatically discovers dependencies from instrumented services, even when the dependencies aren't instrumented. These include:
+- Databases
+- Message queues
+- Other third-party dependencies
+
+These dependencies appear as *services*, to which Datadog automatically applies their names to service tags on client spans (`span.kind:client`). For example, a client call from `auth-dotnet` to PostgreSQL would create a service tagged as `service:auth-dotnet-postgres`.
+
+**Managing Automatically Named Services:**
+- You can opt-in to [inferred entities][7] to filter out entities by type (database, queue, third-party).
+- You can optionally [remove service overrides][8] such as `service:my-service-http-client` from your catalog or map.
 
 For information about discovering endpoints, see [Discovering Endpoints from APM][10].
 
-## Infrastructure and Logs Users
+## Discover Infrastructure and Logs services
 
 To discover services through Datadog infrastructure metrics or logs, navigate to the Software Catalog [**Import Entries** tab][11]. You can import services from Datadog telemetry containing the `DD_SERVICE` [tag][2].
 
@@ -52,6 +60,6 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [7]: /tracing/services/inferred_services
 [8]: /tracing/guide/service_overrides/#remove-service-overrides
 [9]: /tracing/guide/service_overrides/
-[10]: /software_catalog/service_definitions/#add-metadata-with-automation
+[10]: /software_catalog/endpoints/
 [11]: https://app.datadoghq.com/software/settings/get-started?currentTab=import
 

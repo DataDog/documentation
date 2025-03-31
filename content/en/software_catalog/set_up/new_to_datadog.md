@@ -1,5 +1,5 @@
 ---
-title: New to Datadog
+title: Set Up Software Catalog for New Datadog Users
 aliases:
   - /software_catalog/create_entries/   ### aliases for Create Entries page 
   - /software_catalog/enrich_default_catalog/create_entries
@@ -45,20 +45,22 @@ further_reading:
     text: "Manage Service Catalog entries with the Service Definition JSON Schema"
 ---
 
+## Overview 
+
 If you're new to Datadog, you can add components to Software Catalog by:
 
--  Manually creating service definitions through the Datadog app, the Datadog API, Terraform, or a GitHub integration.
+-  Manually creating service definitions through the Datadog UI, the Datadog API, Terraform, or a GitHub integration.
 -  Importing existing services from sources like ServiceNow or Backstage.
 
-By default, these services are not associated with Datadog telemetry, but you can link telemetries from Datadog or external sources manually using entity definition YAML files.
+By default, these services are not associated with Datadog telemetry, but you can link telemetry data from Datadog or external sources manually using entity definition YAML files.
 
-## Build your first Software Catalog
+## Build a Software Catalog
 
 Create service definitions for each component you want to add to your Software Catalog. 
 
 ### Create service definitions through code 
 
-To create a service definition using the [Datadog Service Definition API][8], [Terraform][7], or a [GitHub integration][9]:
+To create a service definition using the [Datadog Service Definition API][8], [Terraform][7], or [GitHub integration][9]:
 
 1. Create or find `service.datadog.yaml` or `entity.datadog.yaml` (Datadog accepts both file names).
 1. Name your component in the `dd-service` (schema version v2.2 or prior) or `name` (schema version v3.0+) field.
@@ -98,9 +100,9 @@ To create a service definition using the [Datadog Service Definition API][8], [T
    - [Terraform][5]
    - [Datadog's GitHub integration][6]
 
-### Create service definitions in-app
+### Create service definitions in the Datadog UI
 
-Alternatively, create service definitions in the Datadog app:
+Alternatively, create service definitions in the Datadog UI:
 
 1. Navigate to the [Software Catalog Setup & Config page][1].
 2. Click **Create a New Entry**.
@@ -113,47 +115,52 @@ A mistake in a service definition file could cause you to create a service with 
 
 To prevent this, validate your service definition files in one of the following ways:
 
-#### Validate through the Datadog app
+#### Datadog UI validation
 
-If creating your service definition in-app, the UI will automatically flag invalid data. 
+If you create service definitions in the Datadog UI, Datadog automatically flags invalid data. 
 
 {{< img src="tracing/software_catalog/software_catalog_definition_yaml.png" alt="Service metadata editor showing sample service definition." >}}
 
-#### Validate with an IDE extension
+#### IDE extension validation
 
 Built-in validation mechanisms prevent you from sending incorrect metadata into Software Catalog. 
 
-#### Validate with Datadog Event Management and Github Integration
+#### Github Integration validation
 
-To validate your service definitions ingested by Datadog's Github integration, you can view events when services or updated or when there is an error. You can view validation errors in [Event Management][2] by filtering by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
+To validate your service definitions ingested by Datadog's Github integration, you can view events when services are updated or when there is an error. To view validation errors in [Event Management][2],  filter by `source:software_catalog` and `status:error`. Adjust the timeframe as needed.
 
 {{< img src="tracing/software_catalog/github_error_event.png" alt="Github event showing error message from service definition." >}}
 
-## Import Entries from Backstage
+## Import entries from Backstage
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
 {{< img src="/tracing/software_catalog/software-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
 
-If you use API or Terraform, replace the YAMLs in your requests. 
+To import Backstage definitions:
 
-If you use a GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of a repo.
+- **API or Terraform**: Replace the YAMLs in your requests with Backstage YAMLs. 
+- **GitHub integration**: Save your Backstage YAMLs in a repository with Datadog read permissions. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of the repository.
 
-Upon import, the following occurs:
-- Datadog recognizes `kind:component` and `kind:system` in Backstage YAML; `kind:component` in Backstage is recognized as a service in Datadog
-- `metadata.name` gets mapped to `dd-service`
-- `metadata.namespace` gets mapped to a custom tag with the format `namespace:${metadata.namespace}`
-- `spec.lifecycle` gets mapped to `lifecycle`
-- `spec.owner` gets mapped to `team`
-- `metadata.links` gets mapped to `links`
-  - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
-  - The annotations `pagerduty.com/service-id` and `pagerduty.com/account` are combined and map to `integration.pagerduty`
-- `metadata.description` gets mapped to `description`
-- `spec.system` gets mapped to `application`
-- `spec.dependsOn` gets mapped to `dependsOn`
-- Other `spec` values get mapped to custom tags
+During import, Datadog maps Backstage data to Datadog data:
+| Backstage Field | Datadog Mapping |
+|-----------------|-----------------|
+| `kind:component` and `kind:system` | Datadog recognizes these; `kind:component` is recognized as a service |
+| `metadata.name` | `dd-service` |
+| `metadata.namespace` | Custom tag with format `namespace:${metadata.namespace}` |
+| `spec.lifecycle` | `lifecycle` |
+| `spec.owner` | `team` |
+| `metadata.links` | `links` |
+| Annotation `github.com/project-slug` | Link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}` |
+| Annotations `pagerduty.com/service-id` and `pagerduty.com/account` | Combined and mapped to `integration.pagerduty` |
+| `metadata.description` | `description` |
+| `spec.system` | `application` |
+| `spec.dependsOn` | `dependsOn` |
+| Other `spec` values | Mapped to custom tags |
 
-**Note**: The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have `kind:component` or `kind:system`, the entire `catalog-info.yaml file` is rejected. Schema version v3.0 is required to use kind:system and the `dependsOn` field.
+<div class="alert alert-warning">
+The Software Catalog processes the entire YAML file as a whole. If any section of the YAML file does not have <code>kind:component</code> or <code>kind:system</code>, the entire <code>catalog-info.yaml</code> file is rejected. Schema version v3.0 is required to use kind:system and the <code>dependsOn</code> field.
+</div>
 
 ### Example YAML for catalog-info.yaml
 {{< code-block lang="yaml" filename="catalog-info.yaml" collapsible="true" >}}
@@ -171,9 +178,9 @@ spec:
     - service:email-service
 {{< /code-block >}}
 
-## Import Entries from ServiceNow
+## Import entries from ServiceNow
 
-To populate your Datadog Software Catalog with services from your ServiceNow CMDB, use the Service Ingestion feature in the [Datadog-ServiceNow integration][3].
+To populate your Datadog Software Catalog with services from your ServiceNow Configuration Management Database (CMDB), use the Service Ingestion feature in the [Datadog-ServiceNow integration][3].
 
 {{< img src="integrations/servicenow/service-metadata.jpg" alt="Screenshot of the Service Configuration panel showing metadata populated from ServiceNow" >}}
 
@@ -186,7 +193,7 @@ To populate your Datadog Software Catalog with services from your ServiceNow CMD
 [3]: /integrations/servicenow/#service-ingestion
 [4]: /api/latest/service-definition/
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-[6]: https://docs.datadoghq.com/integrations/github/
+[6]: /integrations/github/
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [8]: /api/latest/service-definition/
 [9]: /software_catalog/service_definitions/#store-and-edit-definitions-in-github

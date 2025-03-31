@@ -1940,7 +1940,7 @@ menu:
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_new_to_dd
       weight: 101
-    - name: Existing Datadog Customer
+    - name: Existing Datadog User
       url: software_catalog/set_up/existing_datadog_customer
       parent: software_catalog_set_up
       identifier: software_catalog_set_up_existing_dd_customer

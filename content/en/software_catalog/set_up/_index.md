@@ -17,7 +17,7 @@ Get started with Software Catalog with one of the following set-up paths.
     {{< nextlink href="/software_catalog/set_up/new_to_datadog#import-entries-from-servicenow" >}}Import Entries from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Existing Datadog Customer
+## Existing Datadog user
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/software_catalog/set_up/existing_datadog_customer#apm-usm-rum-users" >}}APM, USM, and RUM Users{{< /nextlink >}}
