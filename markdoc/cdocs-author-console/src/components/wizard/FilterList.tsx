@@ -73,7 +73,7 @@ function FilterList({
           onDelete = onFilterRowDelete;
         }
         return (
-          <div key={uuid} style={{ marginBottom: '1em', padding: '10px', borderBottom: '1px solid #e2e5ed' }}>
+          <div key={uuid}>
             <FilterRow
               filter={filtersByUuid[uuid]}
               customizationConfig={customizationConfig}
@@ -125,6 +125,15 @@ function FilterRow({
   onEdit?: (filter: WizardFilter) => void;
   onDelete?: (filter: WizardFilter) => void;
 }) {
+  const containerStyles: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingTop: '10px',
+    paddingBottom: '8px',
+    borderBottom: '1px solid #e0e0e0'
+  };
+
   const getFilterSummaryText = () => {
     if (!filter.trait_id || !filter.option_group_id) {
       return 'Incomplete filter';
@@ -134,10 +143,12 @@ function FilterRow({
   };
 
   return (
-    <>
-      <span>{getFilterSummaryText()}</span>
-      {onDelete && <DeleteIcon sx={{ color: '#eb364b' }} onClick={() => onDelete(filter)} />}
-      {onEdit && <EditIcon onClick={() => onEdit(filter)} />}
-    </>
+    <div style={containerStyles}>
+      <div>{getFilterSummaryText()}</div>
+      <div>
+        {onEdit && <EditIcon onClick={() => onEdit(filter)} />}{' '}
+        {onDelete && <DeleteIcon sx={{ color: '#eb364b' }} onClick={() => onDelete(filter)} />}
+      </div>
+    </div>
   );
 }
