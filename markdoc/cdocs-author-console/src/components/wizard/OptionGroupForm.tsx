@@ -4,6 +4,7 @@ import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import { NewOptionConfig, NewOptionGroupConfig } from './types';
 
 function a11yProps(index: number) {
   return {
@@ -34,11 +35,30 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
-function OptionGroupForm({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
+/**
+ * Allows the user to select an existing option group, or create a new one.
+ */
+function OptionGroupForm({
+  customizationConfig,
+  onUpdate
+}: {
+  customizationConfig: CustomizationConfig;
+  onUpdate: ({
+    optionGroupId,
+    newOptionConfigs,
+    newOptionGroupConfigs
+  }: {
+    optionGroupId: string;
+    newOptionConfigs?: NewOptionConfig[];
+    newOptionGroupConfigs?: NewOptionGroupConfig[];
+  }) => void;
+}) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
-  const handleOptionGroupUpdate = () => {
-    console.log('Option group update handler called');
+  const handleExistingOptionGroupSelect = (optionGroupId: string) => {
+    onUpdate({
+      optionGroupId
+    });
   };
 
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
@@ -58,7 +78,7 @@ function OptionGroupForm({ customizationConfig }: { customizationConfig: Customi
         <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
       </Tabs>
       <CustomTabPanel value={currentTabIndex} index={0}>
-        <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleOptionGroupUpdate} />
+        <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleExistingOptionGroupSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
         New option group tab

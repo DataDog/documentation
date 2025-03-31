@@ -57,7 +57,15 @@ function FilterForm({
       />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
-      <OptionGroupForm customizationConfig={customizationConfig} />
+      <OptionGroupForm
+        customizationConfig={customizationConfig}
+        onUpdate={({ optionGroupId }: { optionGroupId: string }) => {
+          onEdit({
+            ...filter,
+            option_group_id: optionGroupId
+          });
+        }}
+      />
     </div>
   );
 }

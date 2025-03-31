@@ -7,7 +7,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
     <div style={{ display: 'flex', height: '100vh' }}>
       <div style={{ flex: 1, padding: '1rem', borderRight: '1px solid #e0e0e0' }}>
         <h1>Filters</h1>
-        <FilterList customizationConfig={customizationConfig} />
+        <FilterList customizationConfig={customizationConfig} onEdit={() => {}} />
       </div>
       <div style={{ flex: 1, padding: '1rem' }}>
         <h1>Setup instructions</h1>

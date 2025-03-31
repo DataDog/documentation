@@ -73,7 +73,7 @@ function FilterList({
           onDelete = onFilterRowDelete;
         }
         return (
-          <div key={uuid}>
+          <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
             <FilterRow
               filter={filtersByUuid[uuid]}
               customizationConfig={customizationConfig}
@@ -91,16 +91,16 @@ function FilterList({
         );
       })}
       {!currentFilterUuid && (
-        <Button variant="contained" startIcon={<AddIcon />} onClick={addFilter}>
+        <Button sx={{ marginTop: '1rem' }} variant="contained" startIcon={<AddIcon />} onClick={addFilter}>
           Add filter
         </Button>
       )}
       {currentFilterUuid && (
         <>
-          <Button variant="contained" onClick={onSave}>
+          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={onSave}>
             Save
           </Button>{' '}
-          <Button variant="contained" onClick={onCancel}>
+          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={onCancel}>
             Cancel
           </Button>
         </>
@@ -130,13 +130,12 @@ function FilterRow({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: '10px',
-    paddingBottom: '8px',
-    borderBottom: '1px solid #e0e0e0'
+    paddingBottom: '10px'
   };
 
   const getFilterSummaryText = () => {
     if (!filter.trait_id || !filter.option_group_id) {
-      return 'Incomplete filter';
+      return 'New filter';
     }
     const optionLabels = customizationConfig.optionGroupsById[filter.option_group_id]?.map((option) => option.label);
     return `${filter.label}: ${optionLabels.join(', ')}`;
