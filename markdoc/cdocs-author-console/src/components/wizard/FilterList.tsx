@@ -12,7 +12,7 @@ function FilterSummary({
   customizationConfig: CustomizationConfig;
 }) {
   if (!filterConfig.trait_id || !filterConfig.option_group_id) {
-    return <span>Filter incomplete so far.</span>;
+    return <span>Incomplete filter.</span>;
   }
   const optionLabels = customizationConfig.optionGroupsById[filterConfig.option_group_id]?.map(
     (option) => option.label
@@ -61,12 +61,21 @@ function FilterForm({
     optionGroupsById: {}
   });
 
+  const formHeaderStyles: React.CSSProperties = {
+    backgroundColor: '#eff1f5',
+    fontSize: '0.9em',
+    padding: '0.5em',
+    textAlign: 'center',
+    marginBottom: '0.2em',
+    marginTop: '0.5em'
+  };
+
   return (
     <div>
       <p>
         <FilterSummary filterConfig={filterConfig} customizationConfig={customizationConfig} />
       </p>
-      <h2>Trait</h2>
+      <h2 style={formHeaderStyles}>Trait</h2>
       <TraitForm
         customizationConfig={customizationConfig}
         onUpdate={({ traitId, newTraitConfig }: { traitId: string; newTraitConfig?: TraitConfig }) => {
@@ -94,7 +103,7 @@ function FilterForm({
           });
         }}
       />
-      <h2>Option group</h2>
+      <h2 style={formHeaderStyles}>Option group</h2>
       <OptionGroupForm customizationConfig={customizationConfig} />
     </div>
   );
