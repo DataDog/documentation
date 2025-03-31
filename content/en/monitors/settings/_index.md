@@ -20,6 +20,7 @@ further_reading:
 On the [Monitor Settings page][1], you can access and control the following topics:
 
 * [Tag Policies](#tag-policies)
+* [Notification Rules](#notification-rules)
 * [Deleted Monitors](#deleted-monitors)
 
 
