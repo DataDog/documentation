@@ -20,7 +20,7 @@ Get started with Software Catalog with one of the following set-up paths.
 ## Existing Datadog user
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/software_catalog/set_up/existing_datadog_customer#apm-usm-rum-users" >}}APM, USM, and RUM Users{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/set_up/existing_datadog_customer#infrastructure-and-logs-users" >}}Infrastructure and Logs Users{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/set_up/existing_datadog_user#automatic-discovery-with-apm-usm-and-rum" >}}APM, USM, and RUM Users{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/set_up/existing_datadog_user#discover-infrastructure-and-logs-services" >}}Infrastructure and Logs Users{{< /nextlink >}}
 {{< /whatsnext >}}
 
