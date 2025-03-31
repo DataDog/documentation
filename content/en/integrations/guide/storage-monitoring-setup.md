@@ -288,5 +288,5 @@ If you encounter any issues or need assistance:
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: https://cloud.google.com/storage/docs/insights/using-inventory-reports#enable_the_api
-[3]: https://docs.google.com/forms/d/e/1FAIpQLSeqboAbdJmDuf-4ujb3N_dK0mW2Pgupglt2r6uXD0oeVLyOyQ/viewform
+[3]: https://forms.gle/c7b8JiLENDaUEqGk8
 
