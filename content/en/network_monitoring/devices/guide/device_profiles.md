@@ -62,7 +62,7 @@ Reference the [Supported Device Profiles][16] for the full list of inherited pro
 
 ### Step 3: Select reference devices
 
-Use reference devices to select which devices you want to gather OIDs for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` you specified in the [profile details](#step-1-profile-details).
+Use reference devices to select which devices you want to gather {{< tooltip text="OIDs (Object Identifiers)" tooltip="A unique ID or address on a device that when polled returns the response code of that value." >}} for your chosen device models. The **reference devices** field is pre-selected based on the `SysObjectID` you specified in the [profile details](#step-1-profile-details).
 
 1. Keep the current reference device selection to perform a device scan. Additionally, you can add more devices or change the current selection.
 
@@ -134,7 +134,7 @@ See [advanced options for scalar metrics](?tab=manual#scalar-metrics) and [advan
 : Before being transmitted to Datadog, the extracted value is multiplied by this factor.
 
 [Extract Value][7]
-: This is the same as the [advanced options](?tab=manual#global-tags-advanced-options) for global tags.
+: This is the same as the [advanced options](?tab=manual#global-tags) for global tags.
 
 [7]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#extract_value
 [11]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/#forced-metric-types
@@ -256,7 +256,7 @@ After applying your configuration options to your device profile, click **Save a
 
 ## Inventory page
 
-Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][4] page. Here, you can view a summary of the out-of-the-box (OOTB) profiles, as well as the device profiles you created using the [Device Profile Setup](#setup) above.  
+Navigate to [Infrastructure > Network Devices > Configuration][1] to view the device profile [Inventory][1] page. Here, you can view a summary of the out-of-the-box (OOTB) profiles, as well as the device profiles you created using the [Device Profile Setup](#setup) above.  
 
   {{< img src="/network_device_monitoring/profile_onboarding/device_inventory_page_2.png" alt="The Network Device profile inventory page" style="width:100%;">}}
 
@@ -326,7 +326,6 @@ Datadog strongly recommends enabling Remote Configuration to ensure a seamless, 
 [1]: https://app.datadoghq.com/devices/profiles
 [2]: /network_monitoring/devices/profiles/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
-[4]: https://app.datadoghq.com/devices/profiles
 [14]: /agent/remote_config
 [15]: https://app.datadoghq.com/devices
 [16]: /network_monitoring/devices/supported_devices/
