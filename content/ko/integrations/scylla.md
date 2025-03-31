@@ -132,7 +132,7 @@ Scylla는 실행 중인 환경에 따라 로그를 출력하는 모드가 다릅
 Scylla 점검 에는 이벤트.
 
 ### 서비스 점검
-{{< get-서비스-점검-from-git "scylla" >}}
+{{<  get-service-checks-from-git"scylla" >}}
 
 
 ## 트러블슈팅
