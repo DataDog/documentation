@@ -37,8 +37,9 @@ The [Monitor Notification Rules][1] page displays a table of all your notificati
 - **Scope**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
 - **Team**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
 - **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
-- **Recipients**: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
-- **Actions**: Provides options to edit or delete each notification rule. Click the vertical three-dot menu on the notification rule and select **Edit** or **Delete**.
+- **Notifies**: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
+
+Additionally, you can click the vertical three-dot menu on the notification rule to **Edit** or **Delete**.
 
 ### From an individual monitor
 
