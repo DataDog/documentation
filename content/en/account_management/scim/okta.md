@@ -56,10 +56,6 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 
 ## Configure automatic team provisioning
 
-{{< callout url="/help/" header="false" >}}
-The Managed Teams feature is turned off by default. Request access by contacting support.
-{{< /callout >}}
-
 With [Managed Teams][6], you control the core provisioning of a Datadog Team — its name, handle, and membership — through the identity provider. The setup process differs depending on whether the team already exists in Datadog.
 
 **Note:** Users must exist in Datadog before you can add them to a team. Therefore, you must assign users to the Datadog app in Okta to ensure that they are created in Datadog through SCIM. Assign the Datadog application to your Okta group to ensure that all team members are created in Datadog automatically.
