@@ -2,7 +2,7 @@
 
 If you haven't already, set up the [Microsoft Azure integration][1].
 
-<div class="alert alert-info">To access the full set of Azure compliance rules—including [Identity Risks][5]—you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the [Microsoft Graph API][2].</div>
+**Note**:To access the full set of Azure compliance rules—including [Identity Risks][5]—you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the [Microsoft Graph API][2].
 
 ### Enable CSM for your Azure subscriptions
 
