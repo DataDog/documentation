@@ -180,7 +180,7 @@ This action allows you to enable or disable Wi-Fi within your test to monitor ho
 
 #### HTTP requests
 
-You can run HTTP requests, add [assertions](#add-assertions), and [extract variables](#extract-a-variable-from-the-response) as part of your mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
+You can run HTTP requests, add [assertions](#add-assertions), and [extract variables](#extract-a-variable-from-the-response) as part of your Mobile app tests. If you are using [restrictive networks][8], ensure the required IP address ranges are added to your allowlist to enable HTTP steps to run in your Synthetic Monitoring Mobile tests.
 
 **Note**: You can copy an HTTP step from a Synthetic Monitoring Mobile test and re-use it into a Synthetic Monitoring Browser test. However, copying steps from a Browser test to a Mobile test is not supported.
 
@@ -248,7 +248,7 @@ To define your HTTP request:
 
 ##### Add assertions
 
-Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
+Assertions define what an expected test result is. After you click **Send**, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in Mobile app tests.
 
 | Type            | Operator                                                                                                               | Value type                                               |
 |-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|

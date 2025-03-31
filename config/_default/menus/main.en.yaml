@@ -45,124 +45,104 @@ menu:
       pre: hex-ringed
       parent: essentials_heading
       weight: 10000
-    - name: Datadog
-      identifier: getting_started_datadog
-      url: getting_started/application/
-      parent: getting_started
-      weight: 1
-    - name: Datadog Site
-      identifier: getting_started_datadog_site
-      url: getting_started/site/
-      parent: getting_started
-      weight: 2
-    - name: DevSecOps
-      identifier: getting_started_devsecops
-      url: getting_started/devsecops
-      parent: getting_started
-      weight: 3
-    - name: Serverless for AWS Lambda
-      identifier: getting_started_serverless
-      url: getting_started/serverless/
-      parent: getting_started
-      weight: 4
     - name: Agent
       identifier: getting_started_agent
       url: getting_started/agent/
       parent: getting_started
-      weight: 5
-    - name: Integrations
-      identifier: getting_started_integrations
-      url: getting_started/integrations/
-      parent: getting_started
-      weight: 6
-    - name: AWS
-      identifier: getting_started_with_aws
-      url: getting_started/integrations/aws/
-      weight: 601
-      parent: getting_started_integrations
-    - name: Azure
-      identifier: getting_started_with_azure
-      url: getting_started/integrations/azure/
-      weight: 602
-      parent: getting_started_integrations
-    - name: Google Cloud
-      identifier: getting_started_with_google_cloud
-      url: getting_started/integrations/google_cloud/
-      weight: 603
-      parent: getting_started_integrations
-    - name: Terraform
-      identifier: getting_started_with_terraform
-      url: getting_started/integrations/terraform/
-      weight: 604
-      parent: getting_started_integrations
-    - name: Containers
-      identifier: getting_started_containers
-      url: getting_started/containers/
-      parent: getting_started
-      weight: 7
-    - name: Autodiscovery
-      identifier: getting_started_containers_autodiscovery
-      url: getting_started/containers/autodiscovery
-      parent: getting_started_containers
-      weight: 701
-    - name: Datadog Operator
-      identifier: getting_started_containers_operator
-      url: getting_started/containers/datadog_operator
-      parent: getting_started_containers
-      weight: 702
-    - name: Dashboards
-      identifier: getting_started_dashboards
-      url: getting_started/dashboards/
-      parent: getting_started
-      weight: 8
-    - name: Monitors
-      identifier: getting_started_monitors
-      url: getting_started/monitors/
-      parent: getting_started
-      weight: 9
-    - name: Logs
-      identifier: getting_started_logs
-      url: getting_started/logs/
-      parent: getting_started
-      weight: 10
-    - name: APM Tracing
-      identifier: getting_started_collect_traces
-      url: getting_started/tracing/
-      parent: getting_started
-      weight: 11
-    - name: Profiler
-      identifier: getting_started_profiler
-      url: getting_started/profiler/
-      parent: getting_started
-      weight: 12
-    - name: Tags
-      identifier: tagging_
-      url: getting_started/tagging/
-      parent: getting_started
-      weight: 13
-    - name: Assigning Tags
-      identifier: assigning_tags
-      url: getting_started/tagging/assigning_tags
-      parent: tagging_
-      weight: 1301
-    - name: Unified Service Tagging
-      identifier: unified_service_tagging
-      url: getting_started/tagging/unified_service_tagging
-      parent: tagging_
-      weight: 1302
-    - name: Using Tags
-      identifier: using_tags
-      url: getting_started/tagging/using_tags
-      parent: tagging_
-      weight: 1303
+      weight: 1
     - name: API
       identifier: getting_started_api
       url: getting_started/api/
       parent: getting_started
+      weight: 2
+    - name: APM Tracing
+      identifier: getting_started_collect_traces
+      url: getting_started/tracing/
+      parent: getting_started
+      weight: 3
+    - name: Containers
+      identifier: getting_started_containers
+      url: getting_started/containers/
+      parent: getting_started
+      weight: 5
+    - name: Autodiscovery
+      identifier: getting_started_containers_autodiscovery
+      url: getting_started/containers/autodiscovery
+      parent: getting_started_containers
+      weight: 501
+    - name: Datadog Operator
+      identifier: getting_started_containers_operator
+      url: getting_started/containers/datadog_operator
+      parent: getting_started_containers
+      weight: 502
+    - name: Dashboards
+      identifier: getting_started_dashboards
+      url: getting_started/dashboards/
+      parent: getting_started
+      weight: 6
+    - name: Database Monitoring
+      identifier: getting_started_database_monitoring
+      url: getting_started/database_monitoring/
+      parent: getting_started
+      weight: 7
+    - name: Datadog
+      identifier: getting_started_datadog
+      url: getting_started/application/
+      parent: getting_started
+      weight: 8
+    - name: Datadog Site
+      identifier: getting_started_datadog_site
+      url: getting_started/site/
+      parent: getting_started
+      weight: 9
+    - name: DevSecOps
+      identifier: getting_started_devsecops
+      url: getting_started/devsecops
+      parent: getting_started
+      weight: 10
+    - name: Incident Management
+      identifier: getting_started_incident_management
+      url: getting_started/incident_management/
+      parent: getting_started
+      weight: 11
+    - name: Integrations
+      identifier: getting_started_integrations
+      url: getting_started/integrations/
+      parent: getting_started
+      weight: 12
+    - name: AWS
+      identifier: getting_started_with_aws
+      url: getting_started/integrations/aws/
+      weight: 1201
+      parent: getting_started_integrations
+    - name: Azure
+      identifier: getting_started_with_azure
+      url: getting_started/integrations/azure/
+      weight: 1202
+      parent: getting_started_integrations
+    - name: Google Cloud
+      identifier: getting_started_with_google_cloud
+      url: getting_started/integrations/google_cloud/
+      weight: 1203
+      parent: getting_started_integrations
+    - name: Terraform
+      identifier: getting_started_with_terraform
+      url: getting_started/integrations/terraform/
+      weight: 1204
+      parent: getting_started_integrations
+    - name: Logs
+      identifier: getting_started_logs
+      url: getting_started/logs/
+      parent: getting_started
+      weight: 13
+    - name: Monitors
+      identifier: getting_started_monitors
+      url: getting_started/monitors/
+      parent: getting_started
       weight: 14
-    - name: Software Catalog
-      identifier: getting_started_software_catalog
-      url: getting_started/software_catalog/
+    - name: Profiler
+      identifier: getting_started_profiler
+      url: getting_started/profiler/
       parent: getting_started
       weight: 15
     - name: Session Replay
@@ -170,101 +150,126 @@ menu:
       url: getting_started/session_replay/
       parent: getting_started
       weight: 16
-    - name: Synthetic Monitoring and Testing
-      identifier: getting_started_synthetics
-      url: getting_started/synthetics/
+    - name: Security
+      identifier: getting_started_security
+      url: getting_started/security/
       parent: getting_started
-      weight: 18
-    - name: API Tests
-      identifier: getting_started_api_test
-      url: getting_started/synthetics/api_test
-      parent: getting_started_synthetics
-      weight: 1801
-    - name: Browser Tests
-      identifier: getting_started_browser_test
-      url: getting_started/synthetics/browser_test
-      parent: getting_started_synthetics
-      weight: 1802
-    - name: Mobile App Tests
-      identifier: getting_started_mobile_app
-      url: getting_started/synthetics/mobile_app_testing
-      parent: getting_started_synthetics
-      weight: 1803
-    - name: Continuous Testing
-      identifier: getting_started_continuous_testing
-      url: getting_started/continuous_testing/
-      parent: getting_started_synthetics
-      weight: 1804
-    - name: Private Locations
-      identifier: getting_started_private_location
-      url: getting_started/synthetics/private_location
-      parent: getting_started_synthetics
-      weight: 1805
-    - name: Incident Management
-      identifier: getting_started_incident_management
-      url: getting_started/incident_management/
-      parent: getting_started
-      weight: 19
-    - name: Database Monitoring
-      identifier: getting_started_database_monitoring
-      url: getting_started/database_monitoring/
-      parent: getting_started
-      weight: 20
-    - name: Cloud Security Management
-      identifier: getting_started_cloud_security_management
-      url: getting_started/cloud_security_management/
-      parent: getting_started
-      weight: 21
-    - name: Cloud SIEM
-      identifier: getting_started_cloud_siem
-      url: getting_started/cloud_siem/
-      parent: getting_started
-      weight: 22
+      weight: 17
     - name: Application Security Management
       identifier: getting_started_application_security
-      url: getting_started/application_security
+      url: getting_started/security/application_security
+      parent: getting_started_security
+      weight: 1701
+    - name: Cloud Security Management
+      identifier: getting_started_cloud_security_management
+      url: getting_started/security/cloud_security_management/
+      parent: getting_started_security
+      weight: 1702
+    - name: Cloud SIEM
+      identifier: getting_started_cloud_siem
+      url: getting_started/security/cloud_siem/
+      parent: getting_started_security
+      weight: 1703
+    - name: Code Security
+      identifier: getting_started_code_security
+      url: getting_started/code_security/
+      parent: getting_started_security
+      weight: 1704
+    - name: Serverless for AWS Lambda
+      identifier: getting_started_serverless
+      url: getting_started/serverless/
       parent: getting_started
-      weight: 23
-    - name: Workflow Automation
-      identifier: getting_started_workflow_automation
-      url: getting_started/workflow_automation/
+      weight: 18
+    - name: Software Catalog
+      identifier: getting_started_software_catalog
+      url: getting_started/software_catalog/
       parent: getting_started
-      weight: 24
+      weight: 19
     - name: Software Delivery
       identifier: getting_started_software_delivery
       url: getting_started/software_delivery/
       parent: getting_started
-      weight: 25
+      weight: 20
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
-      weight: 2501
+      weight: 2001
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2502
+      weight: 2002
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2503
-    - name: Code Security
-      identifier: getting_started_code_security
-      url: getting_started/code_security/
+      weight: 2003
+    - name: Synthetic Monitoring and Testing
+      identifier: getting_started_synthetics
+      url: getting_started/synthetics/
+      parent: getting_started
+      weight: 21
+    - name: API Tests
+      identifier: getting_started_api_test
+      url: getting_started/synthetics/api_test
+      parent: getting_started_synthetics
+      weight: 2101
+    - name: Browser Tests
+      identifier: getting_started_browser_test
+      url: getting_started/synthetics/browser_test
+      parent: getting_started_synthetics
+      weight: 2102
+    - name: Mobile App Tests
+      identifier: getting_started_mobile_app
+      url: getting_started/synthetics/mobile_app_testing
+      parent: getting_started_synthetics
+      weight: 2103
+    - name: Continuous Testing
+      identifier: getting_started_continuous_testing
+      url: getting_started/continuous_testing/
+      parent: getting_started_synthetics
+      weight: 2104
+    - name: Private Locations
+      identifier: getting_started_private_location
+      url: getting_started/synthetics/private_location
+      parent: getting_started_synthetics
+      weight: 2205
+    - name: Tags
+      identifier: tagging_
+      url: getting_started/tagging/
       parent: getting_started
       weight: 26
+    - name: Assigning Tags
+      identifier: assigning_tags
+      url: getting_started/tagging/assigning_tags
+      parent: tagging_
+      weight: 2601
+    - name: Unified Service Tagging
+      identifier: unified_service_tagging
+      url: getting_started/tagging/unified_service_tagging
+      parent: tagging_
+      weight: 2702
+    - name: Using Tags
+      identifier: using_tags
+      url: getting_started/tagging/using_tags
+      parent: tagging_
+      weight: 2803
+    - name: Workflow Automation
+      identifier: getting_started_workflow_automation
+      url: getting_started/workflow_automation/
+      parent: getting_started
+      weight: 29
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 29
+      weight: 30
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 30
+      weight: 31
     - name: Glossary
       url: glossary/
       pre: features
@@ -1127,7 +1132,7 @@ menu:
       identifier: coterm_rules
       parent: coterm
       weight: 3
-    - name: Cloudcraft
+    - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
       identifier: cloudcraft
@@ -2709,28 +2714,34 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 202
+    - name: Cloudcraft
+      url: datadog_cloudcraft/
+      pre: cloudcraft
+      identifier: datadog_cloudcraft
+      parent: infrastructure_heading
+      weight: 10000
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
       parent: infrastructure_heading
       identifier: infrastructure_resource_catalog
-      weight: 10000
+      weight: 20000
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
-      weight: 10001
+      identifier: infrastructure_resource_catalog_schemat
+      weight: 20001
     - name: Governance
       url: infrastructure/resource_catalog/governance/
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_governance
-      weight: 10002
+      weight: 20002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
       parent: infrastructure_heading
-      weight: 20000
+      weight: 30000
     - name: Setup
       url: universal_service_monitoring/setup/
       parent: usm_parent
@@ -2745,7 +2756,7 @@ menu:
       url: infrastructure/hostmap/
       identifier: hosts
       parent: infrastructure_heading
-      weight: 30000
+      weight: 40000
       pre: host-map
     - name: Host List
       identifier: infrastructure_list
@@ -2756,7 +2767,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
       pre: container
     - name: Monitoring Containers
       url: infrastructure/containers/
@@ -3003,7 +3014,7 @@ menu:
       identifier: process
       pre: process
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
     - name: Increase Process Retention
       identifier: infrastructure_process_increase_process_retention
       url: infrastructure/process/increase_process_retention/
@@ -3014,7 +3025,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 60000
+      weight: 70000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3164,7 +3175,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 70000
+      weight: 80000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
@@ -3386,7 +3397,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 8
-    - name: Custom Allocation Rules 
+    - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
@@ -6041,7 +6052,7 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
       weight: 7
-    - name: Risk Insights for AWS Entities
+    - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
@@ -6475,11 +6486,6 @@ menu:
       url: /security/code_security/static_analysis/github_actions/
       parent: sec_static_analysis
       weight: 2
-    - name: CircleCI Orbs
-      identifier: sec_static_analysis_circleci_orbs
-      url: /security/code_security/static_analysis/circleci_orbs/
-      parent: sec_static_analysis
-      weight: 3
     - name: Generic CI Providers
       identifier: sec_static_analysis_generic_ci_providers
       url: /security/code_security/static_analysis/generic_ci_providers/
@@ -6933,10 +6939,10 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
-    - name: Monitoring Performance Vitals
-      url: real_user_monitoring/browser/monitoring_performance_vitals/
+    - name: Optimizing Performance
+      url: real_user_monitoring/browser/optimizing_performance/
       parent: rum_browser
-      identifier: performance_vitals
+      identifier: optimizing_performance
       weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
