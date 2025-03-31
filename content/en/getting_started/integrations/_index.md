@@ -135,7 +135,7 @@ Each integration has one of three status types:
 For information on how Datadog handles your data, and other security considerations, see the [Security documentation][30].
 
 ## Granular Access Control
-By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level. Not all integrations support granular access controls yet, for a full supported list, see here.  
+By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level. Not all integrations support granular access controls yet. 
 
 1. While viewing an integration, locate the resource that should have granular access controls applied. 
 2. Click **Set Permissions**.
