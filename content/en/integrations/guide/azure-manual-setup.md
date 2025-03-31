@@ -188,11 +188,10 @@ A form to create a new app registration is displayed:
 
 #### Create an app registration
 
-1. Under **Azure Active Directory**, navigate to **App Registrations** and click **New registration**.
-2. Enter the following and click the **Register** button.
-
-    - Name: `Datadog Auth`
-    - Supported Account Types: `Accounts in this organizational directory only`
+1. Under **Microsoft Entra ID**, navigate to **App registrations**.
+2. Click **New registration**.
+3. Provide a name, and confirm that **Supported account types** is set to `Accounts in this organizational directory only`.
+4. Click **Register**.
 
 {{< img src="integrations/guide/azure_manual_setup/azure_app_registration.png" alt="The screen in the Azure portal for registering an application" popup="true" style="width:80%;" >}}
 
