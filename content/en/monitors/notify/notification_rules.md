@@ -11,20 +11,20 @@ further_reading:
 
 ## Overview
 
-Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of configuring notification recipients and routing for every monitor individually, Notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
+Monitor notification rules are predefined sets of conditions that automate the process of alerting your team based on predefined conditions and tags. Instead of individually configuring notification recipients and routing for every monitor, notification rules allow you to define the notification logic and recipients in one place and automatically route all monitor events with matching tags to that list of handles.
 
 ## Creating notification rules
 
-<div class="alert alert-warning">You must  have  <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+<div class="alert alert-warning">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
 
 1. Navigate to [**Monitors > Settings > Notification Rules**][1].
 1. Click **New Rule**.
-1. Set the scope for the rule through specific tags. Notification rules use an AND logic for multiple tags. For an example of this, see [Routing logic](#routing-logic).
+1. Add specific tags and values to set the scope for the rule. Notification rules use an AND logic for multiple tags. For an example of this, see [Routing logic](#routing-logic).
 1. Add up to 50 notification recipients. Notifications can be sent to emails, Team channels, or Integration channels. For more information, see [Notifications][2].
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_config.png" alt="Configuration for a notification rule, showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_config.png" alt="Configuration for a notification rule showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 
@@ -34,23 +34,23 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
-- **Scopes**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
-- **Teams**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
+- **Scope**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
+- **Team**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
 - **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
 - **Recipients**: Lists the notification channels (such as Slack or email) that will receive alerts when this rule matches.
 - **Actions**: Provides options to edit or delete each notification rule. Click the vertical three-dot menu on the notification rule and select **Edit** or **Delete**.
 
 ### From an individual monitor
 
-In your monitor configuration you can view the notification recipients that are applied to the monitor under **Recipient Summary**. Notification rules automatically add recipients to monitors that match the configured scopes.
+In your monitor configuration, you can view the notification recipients that are applied to the monitor under **Recipient Summary**. Notification rules automatically add recipients to monitors that match the configured scopes.
 
 {{< img src="/monitors/notifications/notification_rules/monitor_matching_notification_rule.png" alt="Recipient summary field showing the notification recipients applied by notification rules" style="width:100%;" >}}
 
 ## Routing logic
 
-Notification rules apply the recipients to all monitor notifications that match the scopes in the rule configuration. 
+Notification rules apply to recipients of all monitor notifications that match the scopes defined in the rule configuration. 
 - Multiple tags apply an AND logic to the scope.
-- Multiple rules can match with one monitor notification, all recipients are added to the monitor alert without duplication.
+- Multiple rules can match a single monitor notification, and all recipients are added to the monitor alert without duplication.
 
 {{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
 
