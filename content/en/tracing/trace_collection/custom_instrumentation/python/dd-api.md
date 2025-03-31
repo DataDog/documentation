@@ -277,33 +277,31 @@ This separation between interface (`ddtrace-api`) and implementation (`ddtrace`)
 - If you only use automatic instrumentation, you can ignore API changes entirely
 - If you implement both single-step and custom instrumentation, you avoid depending on multiple copies of the `ddtrace` package
 
-The separation of interface and implementation means that setting up custom instrumentation requires installing two libraries: `ddtrace` as explained in the [Python Setup Instructions][6]
-and `ddtrace-api`:
+To use `ddtrace-api`:
 
-```python
-pip install 'ddtrace>=3.1' ddtrace-api
-```
+1. Install both the `ddtrace` and `ddtrace-api` libraries:
+   ```python
+   pip install 'ddtrace>=3.1' ddtrace-api
+   ```
 
-Then to instrument your Python application use the included `ddtrace-run` command. To use it, prefix your Python entry-point command with `ddtrace-run`.
+2. Instrument your Python application using `ddtrace-run` by prefixing your Python entry-point command:
+   ```shell
+   ddtrace-run python app.py
+   ```
 
-For example, if your application is started with `python app.py` then:
+3. After this is set up, you can write custom instrumentation exactly like the examples in the previous sections, but you import from `dd_trace_api` instead of `ddtrace`.
 
-```shell
-ddtrace-run python app.py
-```
-
-Once you've done this setup, you can write custom instrumentation just like the above examples, with `ddtrace` replaced by `dd_trace_api`. For example:
-
-```python
-  from dd_trace_api import tracer
-
-  @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
-  def get_ingredients():
-      # go to the pantry
-      # go to the fridge
-      # maybe go to the store
-      return
-```
+   For example:
+   ```python
+   from dd_trace_api import tracer
+   
+   @tracer.wrap(service="my-sandwich-making-svc", resource="resource_name")
+   def get_ingredients():
+       # go to the pantry
+       # go to the fridge
+       # maybe go to the store
+       return
+   ```
 
 See that package's [API definition][9] for the full list of supported API calls.
 
