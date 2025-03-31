@@ -7,6 +7,7 @@ aliases:
   - /service_catalog/enrich_default_catalog/create_entries
   - /api_catalog/add_entries
   - /service_catalog/customize/create_entries/
+  - /software_catalog/customize/create_entries
   - /software_catalog/import_entries_integrations/     ## aliases for Import Entries from Backstage page 
   - /software_catalog/enrich_default_catalog/import_entries_integrations
   - /software_catalog/customize/import_entries_integrations/
@@ -14,7 +15,9 @@ aliases:
   - /service_catalog/enrich_default_catalog/import_entries_integrations
   - /service_catalog/customize/import_entries_integrations/
   - /service_catalog/customize/import_entries_backstage/
+  - /software_catalog/customize/import_entries_backstage
   - /service_catalog/customize/import_entries_servicenow/   ## alias for Import Entries from ServiceNow page
+  - /software_catalog/customize/import_entries_servicenow
   - /tracing/software_catalog/guides/validating-service-definition  ## aliases for Validating Service Definition page
   - /software_catalog/guides/validating-service-definition
   - /tracing/service_catalog/guides/validating-service-definition
