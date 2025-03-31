@@ -18,7 +18,7 @@ algolia:
 
 ## Overview
 
-If you don't use CircleCI Orbs or GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
+If you don't use GitHub Actions, you can run the [datadog-ci][4] CLI directly in your CI pipeline platform and upload SARIF results to Datadog.
 
 **If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch (for example, a branch name like
 `master`, `main`, `prod`, or `production`). After you commit on your default branch, non-default branches are analyzed. You can always configure your default branch in-app under [Repository Settings][5].
@@ -40,8 +40,6 @@ Provide the following inputs:
 
 | Name           | Description                                                                                                                | Required | Default         |
 |----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 | `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
 | `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 

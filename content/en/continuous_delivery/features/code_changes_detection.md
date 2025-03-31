@@ -73,6 +73,16 @@ To confirm that the setup is valid, select your GitHub App in the [GitHub integr
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 
+{{% tab "GitLab" %}}
+<div class="alert alert-warning">Datadog's GitLab integration is in Preview. To request access to Datadog's GitLab integration for your organization, reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a>.</div>
+
+After your organization has access, follow the [GitLab installation guide][1].
+
+**Note**: The scope of the service account's personal access token needs to be at least `read_api`.
+
+[1]: https://github.com/DataDog/gitlab-integration-setup?tab=readme-ov-file#datadog--gitlab-integration-installation-guide
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.
@@ -102,9 +112,12 @@ To correctly understand the code changes that a deployment has introduced, only 
 
 This can be done in [Software Catalog][5] by specifying, for the interested services, the source code glob file path patterns in the [service definition][4].
 
-If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub or GitLab URL to the application folder, a single path pattern is automatically used. The link type must be **repo** and the link name must be either "Source" or the name of the service (`shopist` in the examples below).
 
 **Example (schema version v2.2):**
+
+{{< tabs >}}
+{{% tab "GitHub" %}}
 
 ```yaml
 links:
@@ -114,7 +127,22 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control of the filtering with `extensions[datadoghq.com/cd-visibility]`.
+{{% /tab %}}
+
+{{% tab "GitLab" %}}
+
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: gitlab
+    url: https://gitlab.com/organization/example-repository/-/tree/main/src/apps/shopist?ref_type=heads
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` path. You can configure more granular control using either `extensions[datadoghq.com/cd-visibility]` or `extensions[datadoghq.com/dora-metrics]`. If both extensions are detected, `extensions[datadoghq.com/cd-visibility]` is used.
 
 **Example (schema version v2.2):**
 
@@ -128,7 +156,7 @@ extensions:
 
 Code Changes Detection for deployments of the `shopist` service will only consider the Git commits that include changes within the `src/apps/shopist/**` or the `src/libs/utils/**` paths.
 
-If both entries are defined for a service, only `extensions[datadoghq.com/cd-visibility]` is considered when filtering the commits.
+If the source code patterns for a service are defined in both a link and an extension, only the extension is considered when filtering the commits.
 
 ## Further Reading
 

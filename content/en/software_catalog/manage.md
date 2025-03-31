@@ -62,9 +62,27 @@ Above the Setup Guidance section in the Service Information section, you can see
 
 You can also find which Datadog features you are actively using for a given service, to help you find and close gaps in your monitoring completeness. 
 
-{{< img src="tracing/software_catalog/svc_cat_completeness1.png" alt="Service configuration page showing configuration completeness." >}}
+The Setup Guidance table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
 
-This table does not necessarily reflect billing for individual products, but rather activity for the service you are presently examining. For example, if the service does not emit infrastructure metrics for a long time, `Infrastructure Monitoring` might have `Not Detected` specified, even if you have hosts or containers running infrastructure monitoring. 
+Click a service in Software Catalog to open the side panel with the following details: 
+
+### Service details by views
+
+- **Ownership information** from the [Service Definition][4], such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
+- **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
+- **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
+- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
+- **Costs information** showing the cloud spend for a service, broken down by resource types.
+- **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
+
+### Configuration details 
+- **Setup completeness status** for Datadog products that can collect data for the service.
+- **External libraries used** which includes the ability to download the Inventory of Libraries.
+- **Service definition** in YAML with a link to the service's source code.
+- An interactive service map displaying services upstream and downstream from this service.
+- **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 
+- **Service Scorecards** showing a snapshot of the service's scores and last evaluation timestamp.
+
 
 ## Take actions on a given component
 ### Find Software Catalog actions in Action Catalog
@@ -91,24 +109,13 @@ From the **Performance** tab, find the service you are investigating. In the **I
 
 The Service Context Map provides an overview of the relationships and dependencies between services and related infrastructure. Use this view to analyze the source of an issue by looking at upstream and downstream services and infrastructure.
 
-Click a service in Software Catalog to open the side panel with the following details: 
+### Linking infrastructure telemetries
 
-### Service details by views
+The `service` tag is the primary key for Software Catalog entries. It's also the smallest common unit of analysis for Datadog telemetries with [Universal Service Tagging][12]. Set the `service` tag directly on [Kubernetes pod labels][14]. By setting the `service` tag within the `tags.datadoghq.com/service` label, all pod telemetry, like metrics and logs, receives the service tag in Datadog. This is the recommended Kubernetes service label. 
 
-- **Ownership information** from the [Service Definition][4], such as links to team, contacts, source code, and supplemental information like documentation and dashboards.
-- **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
-- **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
-- **Costs information** showing the cloud spend for a service, broken down by resource types.
-- **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
+In comparison, setting the label on a Kubernetes service only affects metric tagging, not other telemetry. Applying [additional container labels][13] is essential for correctly tagging logs and traces, so Datadog does not recommend adding tags directly on containers
 
-### Configuration details 
-- **Setup completeness status** for Datadog products that can collect data for the service.
-- **External libraries used** which includes the ability to download the Inventory of Libraries.
-- **Service definition** in YAML with a link to the service's source code.
-- An interactive service map displaying services upstream and downstream from this service.
-- **Defined and Related Dashboards** showing a list of pre-defined and Watchdog recommended dashboards when available. 
-- **Service Scorecards** showing a snapshot of the service's scores and last evaluation timestamp.
+
 
 ## Further reading
 
@@ -125,3 +132,6 @@ Click a service in Software Catalog to open the side panel with the following de
 [9]: /tracing/software_catalog/service_definition_api/
 [10]: /software_catalog/service_definitions/v3-0/
 [11]: /account_management/teams/manage/#manage-teams-through-an-identity-provider
+[12]: /getting_started/tagging/unified_service_tagging/
+[13]: /containers/docker/tag/
+[14]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#full-configuration
