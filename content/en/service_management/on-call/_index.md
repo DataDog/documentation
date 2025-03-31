@@ -4,6 +4,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/datadog-on-call/'
   tag: 'Blog'
   text: 'Enrich your on-call experience by using Datadog On-Call'
+- link: 'https://www.datadoghq.com/blog/on-call-paging/'
+  tag: 'Blog'
+  text: 'How to create an effective paging strategy'
 cascade:
     algolia:
         rank: 70
