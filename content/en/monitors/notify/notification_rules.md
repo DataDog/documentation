@@ -34,6 +34,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
+- **Name**: Notification rule name
 - **Scope**: Shows the tag combinations that define when this rule applies (for example, `team:shopist service:web-store env:prod`).
 - **Team**: Lists the teams that this notification rule is associated with (available only when the team tag is added in the scope)
 - **Coverage**: Shows the number of monitors that match this rule's scopes. Use this to verify rule coverage and identify rules that need adjustment.
