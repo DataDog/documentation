@@ -248,7 +248,9 @@ Follow these instructions if your Step Function indirectly invokes a Lambda thro
 | ------- | ----------- |
 | Python  | Datadog Lambda Library for Python layer v107+ |
 
-This capability is only supported for Python runtimes.
+Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
+
+Merging Step Functions with Lambda traces through managed services is only supported for Python runtimes.
 
 #### EventBridge
 
@@ -366,10 +368,10 @@ Follow these instructions if a Lambda function directly invokes a Step Function 
 ### Requirements
 | Runtime | Requirement |
 | ------- | ----------- |
-| Node.js | Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0 |
-| Python  | Datadog Lambda Library for Python layer v99+ **or** `dd-trace-py` v2.13.0|
-| Java | `dd-trace-java` v1.47.0 |
-| .NET | `dd-trace-dotnet` v3.11.0 |
+| Node.js | Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, or v5.13.0+ |
+| Python  | Datadog Lambda Library for Python layer v99+ **or** `dd-trace-py` v2.13.0+ |
+| Java | `dd-trace-java` v1.47.0+ |
+| .NET | `dd-trace-dotnet` v3.11.0+ |
 
 ### Setup
 
