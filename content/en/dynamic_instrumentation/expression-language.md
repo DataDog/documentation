@@ -29,13 +29,16 @@ The following sections summarize the variables and operations that the Dynamic I
 
 ## Contextual variables
 
+The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are available only within predicate expressions for filtering and transforming collections.
+
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
 | `@return`   | Provides access to the return value                                        |
 | `@duration` | Provides access to the call execution duration                             |
 | `@exception`| Provides access to the current uncaught exception                          |
-
-**Note**: These variables are **only available** when instrumenting an **entire method**, and **not** for individual lines of code.
+| `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
+| `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
+| `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
 
 ## String operations
 
@@ -51,7 +54,7 @@ The following sections summarize the variables and operations that the Dynamic I
 
 ## Collection operations
 
-When working with collections (lists, maps, etc.), a variable `@it` is available which provides access to the current value in a collection during iteration.
+When working with collections (lists, maps, etc.), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
 
 The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
@@ -62,13 +65,6 @@ The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 | `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(myCollection, {@it > 1})" >}} |
 | `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(myCollection)" >}} |
 | `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | {{< expression-language-evaluator expression="myCollection[1]" >}} |
-
-[1]: /metrics/types/?tab=count#metric-types
-[2]: /metrics/types/?tab=gauge#metric-types
-[3]: /metrics/types/?tab=histogram#metric-types
-[4]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[5]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
-[6]: /dynamic_instrumentation/symdb/
 
 ## Try It Out
 
