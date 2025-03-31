@@ -40,7 +40,7 @@ When searching traces, select the **Live Search** option in the upper right corn
 
 ## Some step spans are missing in the traces
 - Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported.
-- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
+- `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while [`Distributed MapState`][8] has limited support. 
 
 ## Search historic logs
 To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, open the Logs [**Indexes**][3] tab. Click the **New Index** button in the upper right.
@@ -75,3 +75,4 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 [5]: /logs/log_configuration/indexes/
 [6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-upstream-traces-with-step-functions-and-downstream-lambda-traces
 [7]: /logs/log_configuration/indexes/#exclusion-filters
+[8]: /serverless/step_functions/distributed-maps
