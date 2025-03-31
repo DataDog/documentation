@@ -11,7 +11,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support,
 
 ## Setup
 
-{{< programming-lang-wrapper langs="nodejs,python" >}}
+{{< programming-lang-wrapper langs="nodejs,python,java" >}}
 {{< programming-lang lang="nodejs" >}}
 1. **Install dependencies**. Run the following commands:
    ```shell
@@ -22,6 +22,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support,
    To use [automatic instrumentation][1], you must use `dd-trace` v5.25+.
 
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
+
 
 2. **Start the Datadog serverless compatibility layer and initialize the Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
 
@@ -51,6 +52,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support,
 
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `ddtrace` to ensure you have access to enhancements and bug fixes.
 
+
 2. **Initialize the Datadog Python tracer and serverless compatibility layer**. Add the following lines to your main application entry point file:
 
    ```python
@@ -69,11 +71,64 @@ This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support,
 [2]: /tracing/metrics/runtime_metrics/?tab=python
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+1. **Install dependencies**. Run the following commands in the terminal of your source directory:
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
+   ```
+   you can also install the tracer using the following maven dependency:
+   ```xml
+   <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-antrun-plugin</artifactId>
+       <version>1.8</version>
+       <executions>
+           <execution>
+               <phase>initialize</phase>
+               <configuration>
+                   <tasks>
+                       <get src="https://dtdg.co/latest-java-tracer" dest="dd-java-agent.jar" />
+                        <get src="https://dtdg.co/latest-serverless-compat-java-agent" dest="dd-serverless-compat-java-agent.jar" />
+                   </tasks>
+               </configuration>
+               <goals>
+                   <goal>run</goal>
+               </goals>
+           </execution>
+       </executions>
+   </plugin>
+   ```
+
+   Datadog recommends using the latest versions of both `datadog-serverless-compat` and `ddtrace` to ensure you have access to enhancements and bug fixes.
+
+
+2. **Initialize the Datadog Java tracer and serverless compatibility layer**. Add `JAVA_TOOL_OPTIONS` to your runtime environment variable:
+   
+   [Auto instruments][1], the java tracer by setting the Runtime environment variable to wrap your Java cloud function with the Datadog Java tracer and the serverless compatibility layer.
+
+   | Name      | Value |
+   |-----------| ----- |
+   | `JAVA_TOOL_OPTIONS` | `-javaagent:dd-serverless-compat-java-agent.jar -javaagent:dd-java-agent.jar ` |
+
+3. (Optional) **Enable runtime metrics**. See [Java Runtime Metrics][2].
+
+4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
+
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget
+[2]: /tracing/metrics/runtime_metrics/?tab=java
+[3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java
+{{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-5. **Deploy your function**. Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy <FUNCTION_NAME> --no-gen2` to deploy a 1st Gen Cloud Run Function.
+5. **Deploy your function**. Utilize `gcloud` or Google Console to dpeloy your cloud function gen 1:
+
+   Follow this [Google Cloud Doc][10] to utilize `gcloud function deploy <FUNCTION_NAME> --no-gen2` to deploy a 1st Gen Cloud Run Function.
+
+   Utilize the `--source` flag to point to the directory of your function code with `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` at the top level.
 
    For more information read [this Google doc][11] for more flags for the gcloud command. 
+
 
 6. **Configure Datadog intake**. Add the following environment variables to your function's application settings:
 
@@ -90,6 +145,14 @@ This page is **only for legacy 1st Gen Cloud Run Functions**, for Gen 2 support,
    | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][9].  |
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9]. |
    | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
+
+8. **Add Service Label**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+
+   Add the same value from `DD_SERVICE` to a `service` label on your cloud function's inside the info panel of your function. More information on how to add labels can be found [here][12].
+
+   | Name      | Value                                                 |
+   |-----------|-------------------------------------------------------|
+   | `service` | The name of your service matching `DD_SERVICE` env var |
 
 ## Example Functions
 {{< programming-lang-wrapper langs="nodejs,python" >}}
@@ -129,6 +192,32 @@ def dd_log_forwader(request):
       span.set_tag('test', 'ninja')
       statsd.increment('ninja.func.sent', tags=["runtime:python"])
    return "Welcome To Datadog! 💜"
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+```java
+// Example of a simple Cloud Run Function with traces and custom metrics
+package com.example;
+
+import com.google.cloud.functions.HttpFunction;
+import com.google.cloud.functions.HttpRequest;
+import com.google.cloud.functions.HttpResponse;
+import java.io.BufferedWriter;
+import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
+import com.timgroup.statsd.StatsDClient;
+
+public class Example implements HttpFunction {
+  @Override
+  public void service(HttpRequest request, HttpResponse response) throws Exception {
+    StatsDClient Statsd = new NonBlockingStatsDClientBuilder()
+            .hostname("localhost")
+            .port(8125)
+            .build();
+    BufferedWriter writer = response.getWriter();
+    Statsd.incrementCounter("ninja.func.sent", new String[]{"runtime:java"});
+    writer.write("Welcome to Datadog!");
+  }
+}
 ```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -175,3 +264,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [9]: /getting_started/tagging/unified_service_tagging/
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
+[12]: https://cloud.google.com/run/docs/configuring/services/labels
