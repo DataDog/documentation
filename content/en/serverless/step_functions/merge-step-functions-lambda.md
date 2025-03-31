@@ -8,20 +8,23 @@ further_reading:
 
 This page describes how to merge your AWS Step Functions traces with related AWS Lambda traces or nested Step Functions traces. These instructions assume that you have already instrumented these [AWS Step Functions][1] and [Lambda functions][2] to send traces to Datadog.
 
-<div class="alert alert-info">Datadog recommends using <code>JSONata</code> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach ensures that any context upstream to the Step Function is preserved and passed down. For those using <code>JSONPath</code> to define Step Function definitions, refer to the sections at the bottom of the page</a>.</div>
+<div class="alert alert-info">Datadog recommends using <a href="https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html"><code>JSONata</code></a> to define your Step Function definitions for the most complete end-to-end tracing experience. This approach ensures that any context upstream to the Step Function is preserved and passed down.</div>
 
-## Merge with Downstream Lambda traces
+## Merge Step Functions traces with downstream Lambda traces
 
-### Requirements
-For Node.js: Datadog Lambda Library for Node.js layer v116+.
+### With JSONata
 
-For Python: Datadog Lambda Library for Python layer v103+.
+#### Requirements
 
-For other runtimes: Datadog Extension v75+.
+| Runtime | Requirement |
+| ------- | ----------- |
+| Node.js | Datadog Lambda Library for Node.js layer v116+ |
+| Python  | Datadog Lambda Library for Python layer v103+ |
+| Other | Datadog Extension v75+ |
 
-Your State Machine Definition must be using [JSONata][3] as the query language. This can be enabled by setting `"QueryLanguage": "JSONata"` at the top-level of the State Machine Definition.
+Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
-### Setup
+#### Setup
 
 On the Lambda Task, set the `Payload` in the `Arguments` field as follows: 
 
@@ -41,136 +44,17 @@ The `JSONata` expression merges the upstream service's context with the current 
 
 Alternatively, if you have business logic defined in the payload, you can replace `$states.input` at the end of the `JSONata` expression with your intended value for the `Payload` key.
 
-[1]: /serverless/step_functions/installation
-[2]: /serverless/aws_lambda/installation
-[3]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
+### With JSONPath
 
-## Merge with Nested Step Functions traces
+#### Requirements
+| Runtime | Requirement |
+| ------- | ----------- |
+| Node.js | Datadog Lambda Library for Node.js layer v112+ |
+| Python  | Datadog Lambda Library for Python layer v95+ |
 
-### Setup
+Your State Machine definition is using `JSONPath`. If your definition's top-level `QueryLanguage` field is omitted, it defaults to `JSONPath`.
 
-On the Step Functions Task, set `_datadog` in the `Input` field as follows: 
-
-{{< highlight json "hl_lines=7-7" >}}
-"Step Functions StartExecution": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::states:startExecution.sync:2",
-  "Arguments": {
-    "StateMachineArn": "arn:aws:states:<REGION>:<ACCOUNT_ID>:stateMachine:<STATE_MACHINE_NAME>",
-    "Input": {
-      "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
-    }
-  }
-}
-{{< /highlight >}}
-
-## Merge with Downstream Lambda traces through Managed Services
-
-For cases where a Step Function is indirectly invoking a Lambda through a managed AWS service.
-
-### Requirements
-Python (layer v107+) runtimes only.
-
-### EventBridge Setup
-
-For cases where an EventBridge Rule has a Lambda function as a target. Also works for cases where an SQS queue is a target and that queue has a Lambda trigger.
-
-On the EventBridge PutEvents Task, set `_datadog` in the `Detail` field as follows: 
-
-{{< highlight json "hl_lines=10-10" >}}
-"EventBridge PutEvents": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::events:putEvents",
-  "Arguments": {
-    "Entries": [
-      {
-        "Detail": {
-          "Message": "Hello from Step Functions!",
-          "TaskToken": "{% $states.context.Task.Token %}",
-          "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
-        },
-        "DetailType": "MyDetailType",
-        "EventBusName": "MyEventBusName",
-        "Source": "MySource"
-      }
-    ]
-  }
-}
-{{< /highlight >}}
-
-### SQS Setup
-
-For cases where an SQS queue has a Lambda trigger.
-
-On the SQS SendMessage Task, set `_datadog` in the `MessageAttributes` field as follows: 
-
-{{< highlight json "hl_lines=8-11" >}}
-"SQS SendMessage": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::sqs:sendMessage",
-  "Arguments": {
-    "MessageBody": "{% $states.input %}",
-    "QueueUrl": "https://sqs.<REGION>.amazonaws.com/<ACCOUNT_ID>/<QUEUE_NAME>",
-    "MessageAttributes": {
-      "_datadog": {
-        "DataType": "String",
-        "StringValue": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
-      }
-    }
-  }
-}
-{{< /highlight >}}
-
-### SNS Setup
-
-For cases where there is a Lambda subscription on the topic. Also works for cases where there's an SQS subscription and that queue has a Lambda trigger.
-
-On the SNS Publish Task, set `_datadog` in the `MessageAttributes` field as follows: 
-
-{{< highlight json "hl_lines=8-11" >}}
-"SNS Publish": {
-  "Type": "Task",
-  "Resource": "arn:aws:states:::sns:publish",
-  "Arguments": {
-    "TopicArn": "arn:aws:sns:<REGION>:<ACCOUNT_ID>:<TOPIC_NAME>",
-    "Message": "{% $states.input %}",
-    "MessageAttributes": {
-      "_datadog": {
-        "DataType": "String",
-        "StringValue": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
-      }
-    }
-  }
-}
-{{< /highlight >}}
-
-*Looking to trace through services not listed above? [Open a feature request][4].*
-
-## Merge Lambda traces with Downstream Step Functions traces
-
-For cases where a Lambda function directly invokes a Step Function using `StartExecution` or `StartSyncExecution`.
-
-### Requirements
-For Node.js: Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0.
-
-For Python: Datadog Lambda Library for Python layer v99+ **or** `dd-trace-py` v2.13.0.
-
-For Java: `dd-trace-java` v1.47.0.
-
-For .NET: `dd-trace-dotnet` v3.11.0.
-
-### Setup
-
-If the layer or tracer version requirements are fulfilled, no further setup is required.
-
-<div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
-
-## Merge with Downstream Lambda traces (JSONPath)
-
-### Requirements
-Node.js (layer v112+) or Python (layer v95+) runtimes.
-
-### Setup
+#### Setup
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -198,8 +82,8 @@ Node.js (layer v112+) or Python (layer v95+) runtimes.
    ```
 
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][7] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
-    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder. Ensure that the Step Function log group name begins with "/aws/vendedlogs/states/". If it does not, you will need to set it up manually.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][7] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
+    - Replace `<FORWARDER_ARN>` with the ARN of your Datadog Lambda Forwarder. This step configures the log stream subscription for the Forwarder. Ensure that the Step Function log group name begins with `/aws/vendedlogs/states/`. If it does not, you must set it up manually.
 
     For additional settings, see [Datadog Serverless Framework Plugin - Configuration parameters][8].
 
@@ -354,9 +238,107 @@ Alternatively, if you have business logic defined in the payload, you can also u
 {{% /tab %}}
 {{< /tabs >}}
 
-## Merge with Nested Step Functions traces (JSONPath)
+### Through managed services
 
-To link your Step Function traces to nested Step Function traces, configure your task according to the following example:
+Follow these instructions if your Step Function indirectly invokes a Lambda through EventBridge, SQS, or SNS. To trace through another managed AWS service, [contact Datadog Support][3] to open a feature request.
+
+#### Requirements
+
+| Runtime | Requirement |
+| ------- | ----------- |
+| Python  | Datadog Lambda Library for Python layer v107+ |
+
+This capability is only supported for Python runtimes.
+
+#### EventBridge
+
+If an EventBridge rule has a Lambda function as a target, edit your EventBridge PutEvents Task to set `_datadog` in the `Detail` field as follows: 
+
+{{< highlight json "hl_lines=10-10" >}}
+"EventBridge PutEvents": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::events:putEvents",
+  "Arguments": {
+    "Entries": [
+      {
+        "Detail": {
+          "Message": "Hello from Step Functions!",
+          "TaskToken": "{% $states.context.Task.Token %}",
+          "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
+        },
+        "DetailType": "MyDetailType",
+        "EventBusName": "MyEventBusName",
+        "Source": "MySource"
+      }
+    ]
+  }
+}
+{{< /highlight >}}
+
+#### SQS
+
+If an SQS queue has a Lambda trigger, edit your SQS SendMessage Task to set `_datadog` in the `MessageAttributes` field as follows: 
+
+{{< highlight json "hl_lines=8-11" >}}
+"SQS SendMessage": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::sqs:sendMessage",
+  "Arguments": {
+    "MessageBody": "{% $states.input %}",
+    "QueueUrl": "https://sqs.<REGION>.amazonaws.com/<ACCOUNT_ID>/<QUEUE_NAME>",
+    "MessageAttributes": {
+      "_datadog": {
+        "DataType": "String",
+        "StringValue": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
+      }
+    }
+  }
+}
+{{< /highlight >}}
+
+#### SNS
+
+If there is a Lambda subscription on the topic, edit the SNS Publish Task to set `_datadog` in the `MessageAttributes` field as follows: 
+
+{{< highlight json "hl_lines=8-11" >}}
+"SNS Publish": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::sns:publish",
+  "Arguments": {
+    "TopicArn": "arn:aws:sns:<REGION>:<ACCOUNT_ID>:<TOPIC_NAME>",
+    "Message": "{% $states.input %}",
+    "MessageAttributes": {
+      "_datadog": {
+        "DataType": "String",
+        "StringValue": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
+      }
+    }
+  }
+}
+{{< /highlight >}}
+
+## Merge Step Functions traces with nested Step Functions traces
+
+### With JSONata
+
+Edit the Step Functions Task to set `_datadog` in the `Input` field as follows: 
+
+{{< highlight json "hl_lines=7-7" >}}
+"Step Functions StartExecution": {
+  "Type": "Task",
+  "Resource": "arn:aws:states:::states:startExecution.sync:2",
+  "Arguments": {
+    "StateMachineArn": "arn:aws:states:<REGION>:<ACCOUNT_ID>:stateMachine:<STATE_MACHINE_NAME>",
+    "Input": {
+      "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $sfnContext := $merge([$states.context, {'Execution': $sift($states.context.Execution, function($v, $k) { $k != 'Input' })}]); $merge([$sfnContext, $ddTraceContext, {'serverless-version': 'v1'}])) %}"
+    }
+  }
+}
+{{< /highlight >}}
+
+### With JSONPath
+
+Configure your task according to the following example:
 
 {{< highlight json "hl_lines=9-13" >}}
 "Step Functions StartExecution": {
@@ -376,3 +358,25 @@ To link your Step Function traces to nested Step Function traces, configure your
   "End": true
 }
 {{< /highlight >}}
+
+## Merge Lambda traces with downstream Step Functions traces
+
+Follow these instructions if a Lambda function directly invokes a Step Function using `StartExecution` or `StartSyncExecution`.
+
+### Requirements
+| Runtime | Requirement |
+| ------- | ----------- |
+| Node.js | Datadog Lambda Library for Node.js layer v112+ **or** `dd-trace-js` v3.58.0, v4.37.0, v5.13.0 |
+| Python  | Datadog Lambda Library for Python layer v99+ **or** `dd-trace-py` v2.13.0|
+| Java | `dd-trace-java` v1.47.0 |
+| .NET | `dd-trace-dotnet` v3.11.0 |
+
+### Setup
+
+If the layer or tracer version requirements are fulfilled, no further setup is required.
+
+<div class="alert alert-info">To ensure proper trace merging, provide input to the Step Functions Start Execution command, even if the input is an empty JSON object.</div>
+
+[1]: /serverless/step_functions/installation
+[2]: /serverless/aws_lambda/installation
+[3]: /help
