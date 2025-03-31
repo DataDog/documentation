@@ -104,7 +104,7 @@ Enter the following information based on your selected logs destinations.
 {{% /tab %}} -->
 {{% tab "Google SecOps" %}}
 
-{{% observability_pipelines/destination_settings/chronicle %}}
+{{% observability_pipelines/destination_settings/google_secops %}}
 
 {{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}
@@ -308,7 +308,7 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% /tab %}} -->
 {{% tab "Google SecOps" %}}
 
-{{% observability_pipelines/destination_env_vars/chronicle %}}
+{{% observability_pipelines/destination_env_vars/google_secops %}}
 
 {{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}

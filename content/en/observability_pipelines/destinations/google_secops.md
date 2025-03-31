@@ -10,11 +10,11 @@ Set up the Google SecOps destination and its environment variables when you [set
 
 ### Set up the destination
 
-{{% observability_pipelines/destination_settings/chronicle %}}
+{{% observability_pipelines/destination_settings/google_secops %}}
 
 ### Set the environment variables
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_secops %}}
 
 ### How the destination works
 

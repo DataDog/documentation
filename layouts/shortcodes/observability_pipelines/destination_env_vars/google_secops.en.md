@@ -1,0 +1,1 @@
+Enter the Google SecOps endpoint URL. For example, `https://chronicle.googleapis.com`.

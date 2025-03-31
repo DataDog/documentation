@@ -102,7 +102,7 @@ On the Worker installation page:
 {{% /tab %}} -->
 {{% tab "Google SecOps" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/chronicle %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/google_secops %}}
 
 {{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}
