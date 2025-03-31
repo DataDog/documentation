@@ -742,11 +742,6 @@ h5 {
         padding: 24px;
         margin: 0 0 32px 0;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-
-        &:hover {
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
-        }
 
         dl {
             background-color: #FFFFFF;
