@@ -64,30 +64,32 @@ The following table demonstrates how monitors with different tag combinations ma
 <table>
     <thead>
         <tr>
-            <th rowspan="2">Monitor alert tags and notifications </th>
+            <th></th>
             <th colspan="5" style="text-align: center; border-bottom: 1px solid #ddd; background-color:rgb(98, 92, 92);">Notification Rules</th>
-            <th rowspan="2">Notified Handles</th>
-        </tr>
-        <tr>
-            <th><code>team:shopist AND<br>service:web-store</code></th>
-            <th><code>team:shopist</code></th>
-            <th><code>service:web-store</code></th>
-            <th><code>service:web-store AND<br>env:prod</code></th>
-            <th><code>service:web-store AND<br>env:dev</code></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td style="background-color:#E8E8E8"></td>
-            <td style="background-color:#E8E8E8"><i>@slack-channel1</i><br><i>@jira-project</i></td>
-            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
-            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
-            <td style="background-color:#E8E8E8"><i>@user@datadoghq.com</i></td>
-            <td style="background-color:#E8E8E8"><i>@jira-project</i></td>
-            <td style="background-color:#E8E8E8">Final Recipients</td>
+            <th style="background-color:#E8E8E8;"></th>
+            <th style="background-color:#E8E8E8; border: 1px solid #ddd;"><code>team:shopist,<br>service:web-store</code></th>
+            <th style="background-color:#E8E8E8; border: 1px solid #ddd;"><code>team:shopist</code></th>
+            <th style="background-color:#E8E8E8; border: 1px solid #ddd;"><code>service:web-store</code></th>
+            <th style="background-color:#E8E8E8; border: 1px solid #ddd;"><code>service:web-store<br>env:prod</code></th>
+            <th style="background-color:#E8E8E8; border: 1px solid #ddd;"><code>service:web-store<br>env:dev</code></th>
+            <th style="background-color:#E8E8E8;"></th>
         </tr>
         <tr>
-            <td><code>team:shopist and service:web-store</code><br><i>@user@datadoghq.com</i></td>
+            <td style="background-color:#E8E8E8;"><strong>MONITOR ALERT TAGS AND NOTIFICATIONS</strong></td>
+            <td style="background-color:#E8E8E8; border: 1px solid #ddd;"><i>@slack-channel1</i><br><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8; border: 1px solid #ddd;"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8; border: 1px solid #ddd;"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8; border: 1px solid #ddd;"><i>@user@datadoghq.com</i></td>
+            <td style="background-color:#E8E8E8; border: 1px solid #ddd;"><i>@jira-project</i></td>
+            <td style="background-color:#E8E8E8;"><strong>NOTIFIED HANDLES</strong></td>
+        </tr>
+        <tr>
+            <td><code>team:shopist, service:web-store</code><br><i>@user@datadoghq.com</i></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
@@ -114,7 +116,7 @@ The following table demonstrates how monitors with different tag combinations ma
             <td><i>@jira-project</i></td>
         </tr>
         <tr>
-            <td><code>service:web-store and env:prod</code></td>
+            <td><code>service:web-store, env:prod</code></td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
             <td style="text-align: center">{{< X >}}</td>
@@ -123,7 +125,7 @@ The following table demonstrates how monitors with different tag combinations ma
             <td><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
         </tr>
         <tr>
-            <td><code>service:web-store and env:dev</code></td>
+            <td><code>service:web-store, env:dev</code></td>
             <td style="text-align: center"></td>
             <td style="text-align: center"></td>
             <td style="text-align: center">{{< X >}}</td>
@@ -132,7 +134,7 @@ The following table demonstrates how monitors with different tag combinations ma
             <td><i>@jira-project</i></td>
         </tr>
         <tr>
-            <td><code>team:shopist and service:web-store and env:prod</code><br><i>@slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
+            <td><code>team:shopist and service:web-store, env:prod</code><br><i>@slack-service1</i><br><i>@jira-project</i><br><i>@user@datadoghq.com</i></td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
             <td style="text-align: center">{{< X >}}</td>
