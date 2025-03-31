@@ -12,6 +12,12 @@ export interface NewOptionGroupConfig {
   }[];
 }
 
+export interface TraitConfig {
+  id: string;
+  label: string;
+  internal_notes?: string;
+}
+
 /**
  * A filter configuration bundled with new configuration
  * to add to the customization config (if any).
@@ -22,11 +28,7 @@ export interface WizardFilter {
   trait_id: string;
   option_group_id: string;
   // Any new traits required for this filter to work
-  newTraitConfig?: {
-    id: string;
-    label: string;
-    internal_notes?: string;
-  };
+  newTraitConfig?: TraitConfig;
   // Any new options required for this filter to work
   newOptionConfigs?: NewOptionConfig[];
   // Any new option groups required for this filter to work

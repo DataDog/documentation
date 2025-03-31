@@ -6,12 +6,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
-export interface TraitConfig {
-  id: string;
-  label: string;
-  internal_notes?: string;
-}
+import { TraitConfig } from './types';
 
 // TODO: DRY up tabs across the console
 interface TabPanelProps {

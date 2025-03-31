@@ -13,6 +13,8 @@ code {
   color: #ff0099;
   font-size: 1em;
   font-family: 'Roboto Mono', sans-serif;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 a {

@@ -10,10 +10,10 @@ import EditIcon from '@mui/icons-material/Edit';
 
 function FilterList({
   customizationConfig,
-  onEdit
+  onChange
 }: {
   customizationConfig: CustomizationConfig;
-  onEdit: ({ filters }: { filters: WizardFilter[] }) => void;
+  onChange: ({ filters }: { filters: WizardFilter[] }) => void;
 }) {
   const [savedFiltersByUuid, setSavedFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
@@ -35,7 +35,6 @@ function FilterList({
       throw new Error('No current filter to edit');
     }
     setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filter });
-    onEdit({ filters: Object.values(filtersByUuid) });
   };
 
   const onFilterRowDelete = (filter: WizardFilter) => {
@@ -43,7 +42,7 @@ function FilterList({
     const newFiltersByUuid = { ...filtersByUuid };
     delete newFiltersByUuid[filter.uuid];
     setFiltersByUuid(newFiltersByUuid);
-    onEdit({ filters: Object.values(newFiltersByUuid) });
+    onChange({ filters: Object.values(newFiltersByUuid) });
   };
 
   const onFilterRowEdit = (filter: WizardFilter) => {
@@ -52,13 +51,13 @@ function FilterList({
 
   const onSave = () => {
     setCurrentFilterUuid(null);
-    setSavedFiltersByUuid(filtersByUuid);
-    onEdit({ filters: Object.values(filtersByUuid) });
+    setSavedFiltersByUuid({ ...filtersByUuid });
+    onChange({ filters: Object.values(filtersByUuid) });
   };
 
   const onCancel = () => {
     setCurrentFilterUuid(null);
-    setFiltersByUuid(savedFiltersByUuid);
+    setFiltersByUuid({ ...savedFiltersByUuid });
   };
 
   return (
