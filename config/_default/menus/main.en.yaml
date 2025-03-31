@@ -6526,7 +6526,7 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
-    - name: Secrets Scanning
+    - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
       parent: code_security
