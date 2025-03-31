@@ -61,7 +61,7 @@ In both notification rules and individual monitors, you can use an `@notificatio
 
 An @notification must have a space between it and the last line character:
 
-| ✅ Correct Format | ❌ Incorrect Format |
+| 🟢 Correct Format | ❌ Incorrect Format |
 |------------------|-------------------|
 | `Disk space is low @ops-team@company.com` | `Disk space is low@ops-team@company.com` |
 
@@ -96,8 +96,7 @@ For more information on building a workflow, see [Build workflows][11].
 ## Incidents 
 Incidents can be automatically created from a monitor when the monitor transitions to an `alert`, `warn`, or `no data` status. Click on **Add Incident** and select an `@incident-` option. Admins can create `@incident-` options in [Incident Settings][12].
 
-Incidents created from a monitor will inherit its [field values][13] from the monitor's tags. To send automated notifications from incidents, add tags to the monitor so that created incidents match the criteria of [notification rules][14].
-
+When an incident is created from a monitor, the incident's [field values][13] are automatically populated based on the monitor's tags. For example, if your monitor has a tag `service:payments`, the incident's service field will be set to "payments". To receive notifications for these incidents, make sure the monitor's tags align with your incident notification rules. **Note**: Incident notification rules are configured separately from monitor notification rules and need to be set up independently. For more information, see [Incident Notification][14].
 
 ## Toggle additional content
 
@@ -222,7 +221,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 [11]: /service_management/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [13]: /service_management/incident_management/incident_settings/property_fields
-[14]: /service_management/incident_management/incident_settings/notification_rules
+[14]: /service_management/incident_management/notification
 [15]: /monitors/notify/variables/?tab=is_renotify#examples
 [16]: /monitors/settings/#tag-policies
 [17]: /account_management/teams/
