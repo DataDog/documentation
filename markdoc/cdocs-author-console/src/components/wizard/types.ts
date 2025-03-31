@@ -3,6 +3,7 @@
  * to add to the customization config (if any).
  */
 export interface WizardFilter {
+  uuid: string;
   label?: string;
   trait_id: string;
   option_group_id: string;

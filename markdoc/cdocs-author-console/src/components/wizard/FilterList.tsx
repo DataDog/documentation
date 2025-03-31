@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
 import FilterForm from './FilterForm';
 import { WizardFilter } from './types';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function FilterList({
   customizationConfig,
@@ -18,16 +20,16 @@ function FilterList({
 
   const addFilter = () => {
     const newFilter: WizardFilter = {
+      uuid: uuidv4(),
       label: '',
       trait_id: '',
       option_group_id: ''
     };
-    const newUuid = uuidv4();
-    setFiltersByUuid({ ...filtersByUuid, [newUuid]: newFilter });
-    setCurrentFilterUuid(newUuid);
+    setFiltersByUuid({ ...filtersByUuid, [newFilter.uuid]: newFilter });
+    setCurrentFilterUuid(newFilter.uuid);
   };
 
-  const onFilterEdit = (filter: WizardFilter) => {
+  const onFilterFormChange = (filter: WizardFilter) => {
     if (!currentFilterUuid) {
       throw new Error('No current filter to edit');
     }
@@ -35,18 +37,40 @@ function FilterList({
     onEdit({ filters: Object.values(filtersByUuid) });
   };
 
+  const onFilterRowDelete = (filter: WizardFilter) => {
+    setCurrentFilterUuid(null);
+    const newFiltersByUuid = { ...filtersByUuid };
+    delete newFiltersByUuid[filter.uuid];
+    setFiltersByUuid(newFiltersByUuid);
+    onEdit({ filters: Object.values(newFiltersByUuid) });
+  };
+
+  const onFilterRowEdit = (filter: WizardFilter) => {
+    setCurrentFilterUuid(filter.uuid);
+  };
+
   return (
     <div>
       {Object.keys(filtersByUuid).length === 0 && <p>No filters added yet.</p>}
       {Object.keys(filtersByUuid).map((uuid) => {
+        // Only show the edit icon if the filter is not currently being edited
+        let onEdit;
+        if (currentFilterUuid !== uuid) {
+          onEdit = onFilterRowEdit;
+        }
         return (
           <div key={uuid} style={{ marginBottom: '1em', padding: '10px', borderBottom: '1px solid #e2e5ed' }}>
-            <FilterSummary filter={filtersByUuid[uuid]} customizationConfig={customizationConfig} />
+            <FilterRow
+              filter={filtersByUuid[uuid]}
+              customizationConfig={customizationConfig}
+              onDelete={onFilterRowDelete}
+              onEdit={onEdit}
+            />
             {currentFilterUuid === uuid && (
               <FilterForm
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
-                onEdit={onFilterEdit}
+                onEdit={onFilterFormChange}
               />
             )}
           </div>
@@ -64,21 +88,30 @@ export default FilterList;
 /**
  * A short text representation of a filter configuration.
  */
-function FilterSummary({
+function FilterRow({
   filter,
-  customizationConfig
+  customizationConfig,
+  onEdit,
+  onDelete
 }: {
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
+  onEdit?: (filter: WizardFilter) => void;
+  onDelete: (filter: WizardFilter) => void;
 }) {
-  if (!filter.trait_id || !filter.option_group_id) {
-    return <span>Incomplete filter.</span>;
-  }
-  const optionLabels = customizationConfig.optionGroupsById[filter.option_group_id]?.map((option) => option.label);
+  const getFilterSummaryText = () => {
+    if (!filter.trait_id || !filter.option_group_id) {
+      return 'Incomplete filter';
+    }
+    const optionLabels = customizationConfig.optionGroupsById[filter.option_group_id]?.map((option) => option.label);
+    return `${filter.label}: ${optionLabels.join(', ')}`;
+  };
 
   return (
-    <span>
-      {filter.label}: {optionLabels.join(', ')}
-    </span>
+    <>
+      <span>{getFilterSummaryText()}</span>
+      <DeleteIcon onClick={() => onDelete(filter)} />
+      {onEdit && <EditIcon onClick={() => onEdit(filter)} />}
+    </>
   );
 }
