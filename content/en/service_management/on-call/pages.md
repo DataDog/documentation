@@ -19,6 +19,10 @@ You can send a Page by mentioning a Team's handle with `oncall-` prepended. For 
 
 You can send Pages to On-Call Teams wherever @-handles are supported, including monitors, Incident Management, security detection rules, Event Management, and more.
 
+### Trigger Pages via e-mails
+To page a team via email, navigate to the on-call team's page, scroll down to "Custom Triggering Sources" and click "Generate" under the email trigger section. This will generate a unique email address that can be used to trigger a page directly to the team's on-call responders. When an email is sent to this address, it initiates the paging process using your configured routing and escalation policies. For added clarity and ease of use, some customers choose to embed this paging address within a more human-readable distribution list (e.g., page-network@company.com), which can make life easier in case the email is destined to be used by humans.
+
+
 #### Monitors and dynamic urgencies
 
 If you send a Page through a monitor alert, and your Team's processing rule uses dynamic urgencies:
