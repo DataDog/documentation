@@ -265,8 +265,9 @@ To see an example in action, see [flask-baggage on trace-examples][7]
 
 ## ddtrace-api
 
-<div class="alert alert-warning">The ddtrace-api Python package is in preview and may not include the API calls you need. If you'd rather use something more complete, use the API described above.
-The following steps are only necessary if you want to experiment with the preview `ddtrace-api` package.</div>
+{{< callout btn_hidden="true" header="ddtrace-api is in Preview!">}}
+The <code>ddtrace-api</code> Python package is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
+<br><br>The following steps are only necessary if you want to experiment with the in Preview <code>ddtrace-api</code> package.{{< /callout >}}
 
 A stable public API for Datadog APM's custom Python instrumentation is implemented by the [ddtrace-api package][8]. This package doesn't implement any of the underlying functionality that creates and
 sends spans to Datadog; it *only* implements the API interface. This separation between interface in `ddtrace-api` and implementation in `ddtrace` allows users of cusom instrumentation to rely on
