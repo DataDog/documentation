@@ -143,7 +143,7 @@ By default, access to integration resources (accounts, services, webhooks) is un
 4. The dialog box updates to show that members of your organization now have **Viewer** access by default.
 5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor. Note: The [Integrations Manage][45] permission is also required to edit individual resources.  
 6. Click **Add**.
-7. The dialog box updates to show the updated permissions
+7. The dialog box updates to show the updated permissions.
 8. Click **Save**. The integration page will automatically refresh with updated permissions. 
 
 **Note:** To maintain your edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
