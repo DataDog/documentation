@@ -66,8 +66,7 @@ If your agent is deployed in Kubernetes, you need to update its configuration in
 {{< collapse-content title="Helm" level="h5" >}}
 For a Datadog agent installed with Helm:
 
-1. Update your datadog-values.yaml file
-
+1. Update your `datadog-values.yaml` file
    ```diff
      agents:
        containers:
@@ -105,7 +104,44 @@ For a Datadog agent installed with Helm:
 {{< /collapse-content >}}
 
 {{< collapse-content title="Datadog Operator" level="h5" >}}
-Coming soon
+For a Datadog agent installed with the Datadog Operator:
+
+1. Update your `datadog-agent.yaml` file:
+   ```diff
+     apiVersion: datadoghq.com/v2alpha1
+     kind: DatadogAgent
+     metadata:
+       name: datadog
+     spec:
+       global:
+         site: <DATADOG_SITE>
+         tags:
+           - env:<AGENT_ENV>
+         credentials:
+           apiSecret:
+             secretName: datadog-secret
+             keyName: api-key
+         env:
+   -       - name: DD_CORE_AGENT_ENABLED
+   -         value: "false"
+       features:
+         apm:
+           enabled: true
+           errorTrackingStandalone:
+             enabled: true
+           instrumentation:
+             enabled: true
+             libVersions:
+               java: "1"
+               dotnet: "3"
+               python: "2"
+               js: "5"
+               php: "1"
+   ```
+2. Deploy the Datadog Agent with the updated configuration file:
+   ```shell
+   kubectl apply -f path/to/your/datadog-agent.yaml
+   ```
 {{< /collapse-content >}}
 
 {{% /tab %}}
