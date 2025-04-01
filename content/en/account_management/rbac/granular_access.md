@@ -40,4 +40,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [8]: /service_management/service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
 [10]: /service_management/case_management/settings#granular-access-control
-[11]: /integrations
+[11]: /getting_started/integrations/#granular-access-control
