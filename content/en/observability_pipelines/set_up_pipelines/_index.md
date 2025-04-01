@@ -49,7 +49,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][12] if you 
 
 ### Index your Worker logs
 
-Make sure your Worker logs are [indexed][14] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
+Make sure your Worker logs are [indexed][14] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 ## Clone a pipeline
 
