@@ -33,9 +33,9 @@ The Expression Language provides contextual variables for different instrumentat
 
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
-| `@return`   | Provides access to the return value                                        |
-| `@duration` | Provides access to the call execution duration                             |
-| `@exception`| Provides access to the current uncaught exception                          |
+| `@return`   | Provides access to the method return value |
+| `@duration` | Provides access to the method call execution duration |
+| `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists) |
 | `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
 | `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
 | `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
