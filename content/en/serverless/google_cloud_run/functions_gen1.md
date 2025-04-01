@@ -80,8 +80,8 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    wget -O /path/to/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O /path/to/dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
    ```
+   For alternative ways to download the agent, see the [Datadog Java Agent documentation][4].
    
-   For alternative ways to download the agent, see the [Datadog Java Agent documentation][13].
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
@@ -100,6 +100,8 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=wget
 [2]: /tracing/metrics/runtime_metrics/?tab=java
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java
+[4]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot
+
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -315,4 +317,3 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
-[13]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot

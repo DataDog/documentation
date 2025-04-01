@@ -37,7 +37,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. Inside the [container step](#containers) add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Node.js Log Collection][3]. To set up trace log correlation, see [Correlating Node.js Logs and Traces][4].
 
@@ -59,7 +59,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. Inside the [container step](#containers) add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Python Log Collection][3]. [Python Logging Best Practices][6] can also be helpful. To set up trace log correlation, see [Correlating Python Logs and Traces][4].
 
@@ -76,7 +76,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 #### Tracing
    Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
-   When setting up your [containers](#containers) implement and [Auto instrument][1] the Java tracer by setting the environment variable to instrument your Java cloud function with the Datadog Java tracer.
+   When setting up your [containers](#containers); Implement and [Auto instrument][1] the Java tracer by setting the environment variable to instrument your Java cloud function with the Datadog Java tracer.
 
 | Name      | Value |
 |-----------| ----- |
@@ -108,7 +108,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
    - Ensure that you set [--clear-base-image][5] to deploy your Cloud Run Function with the Dockerfile.
 
    <div class="alert alert-info">
-   As an alternative to setting the env var `JAVA_TOOL_OPTIONS` in the console, you can use Artifact Registry to store the images built from your function source code utilizing the example Dockerfile. You can use <a href="https://cloud.google.com/docs/buildpacks/build-function#java_4">Google Cloud Build</a> or <a href="https://cloud.google.com/docs/buildpacks/build-function">Buildpacks</a> to build and deploy your image.<br/>
+   As an alternative to setting the environment variable <code>JAVA_TOOL_OPTIONS</code> in the console, you can use Artifact Registry to store the images built from your function source code utilizing the example Dockerfile. You can use <a href="https://cloud.google.com/docs/buildpacks/build-function#java_4">Google Cloud Build</a> or <a href="https://cloud.google.com/docs/buildpacks/build-function">Buildpacks</a> to build and deploy your image.<br/>
    For example: <code>gcloud builds submit --pack image=LOCATION-docker.pkg.dev/PROJECT_ID/REPO_NAME/IMAGE_NAME</code>
    </div>
 
@@ -119,7 +119,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 To collect custom metrics, [install the Java DogStatsD client][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. Inside the [container step](#containers) add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Java Log Collection][3]. To set up trace log correlation, see [Correlating Java Logs and Traces][4].
 
@@ -143,7 +143,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. Inside the [container step](#containers) add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 
 To set up logging in your application, see [Go Log Collection][3]. To set up trace log correlation, see [Correlating Go Logs and Traces][4].
 
@@ -166,7 +166,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 The tracing library also collects custom metrics. See the [code examples][2].
 
 #### Logs
-The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. You must follow the setup in the GCP UI to add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
+The Datadog sidecar collects logs through a shared volume. To forward logs from your main container to the sidecar, configure your application to write all logs to a location such as `shared-volume/logs/*.log` using the steps below. Inside the [container step](#containers) add the environment variable `DD_SERVERLESS_LOG_PATH` and a shared Volume Mount to both the main and sidecar container.
 To set up logging in your application, see [C# Log Collection][3]. To set up trace log correlation, see [Correlating .NET Logs and Traces][4].
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux#enable-the-tracer-for-your-service
@@ -200,7 +200,8 @@ If you are deploying a new Cloud Run function for the first time through the con
    - `DD_API_KEY`: Your [Datadog API key][4].
    - `DD_HEALTH_PORT`: The port you selected for the startup check in the previous step.
    - `FUNCTION_TARGET`: The entry point of your function. For example, `gcfv2.HelloworldApplication`.
-
+   - `JAVA_TOOL_OPTIONS`: `-javaagent:/path/to/dd-java-agent.jar` (_Java only_).
+   
    For a list of all environment variables, including additional tags, see [Environment variables](#environment-variables).
 
 #### Main container
