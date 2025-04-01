@@ -4,8 +4,10 @@ import TraitSelector from '../selectors/TraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+/**
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+*/
 import { TraitConfig } from './types';
 
 // TODO: DRY up tabs across the console
@@ -102,7 +104,16 @@ function TraitForm({
         <TraitSelector customizationConfig={customizationConfig} onSelect={handleExistingTraitSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
-        <p>
+        Not yet supported.
+      </CustomTabPanel>
+    </div>
+  );
+}
+
+export default TraitForm;
+
+/**
+ * <p>
           Trait ID
           <TextField
             value={newTraitConfig.id}
@@ -164,9 +175,4 @@ function TraitForm({
         >
           Save
         </Button>
-      </CustomTabPanel>
-    </div>
-  );
-}
-
-export default TraitForm;
+ */

@@ -81,7 +81,7 @@ function OptionGroupForm({
         <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleExistingOptionGroupSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
-        New option group tab
+        Not yet supported.
       </CustomTabPanel>
     </div>
   );
