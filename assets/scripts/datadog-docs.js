@@ -13,7 +13,6 @@ import ExpressionLanguageEvaluator from './components/expression-language-evalua
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
-const brokenImageError = new Error('Broken image found on page');
 
 // gTag
 gtag('js', new Date());
@@ -131,7 +130,7 @@ const doOnLoad = () => {
         new ExpressionLanguageEvaluator();
     }
 
-    checkForBrokenImages();
+    // checkForBrokenImages();
 };
 
 DOMReady(doOnLoad);
@@ -416,6 +415,18 @@ function replaceURL(inputUrl) {
     return inputUrl.replace('https://www.docs.datadoghq.com', thisurl);
 }
 
+window.addEventListener(
+    'popstate',
+    function (event) {
+        setMobileNav();
+        closeNav();
+        getPathElement();
+    }
+);
+
+const brokenImageError = new Error(`Broken image found at ${window.location.pathname}`);
+
+// Check for broken images and add an error to Datadog RUM
 function checkForBrokenImages() {
     const images = document.getElementsByTagName('img');
     brokenImageCount = 0;
@@ -425,18 +436,10 @@ function checkForBrokenImages() {
         }
     }
     if (brokenImageCount > 0) {
-        console.error('Broken image found on page:');
         window.DD_RUM && window.DD_RUM.addError(brokenImageError, {
             test: 'test',
         });
     }
 }
 
-window.addEventListener(
-    'popstate',
-    function (event) {
-        setMobileNav();
-        closeNav();
-        getPathElement();
-    }
-);
+checkForBrokenImages()
