@@ -29,13 +29,13 @@ The following sections summarize the variables and operations that the Dynamic I
 
 ## Contextual variables
 
-The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are available only within predicate expressions for filtering and transforming collections.
+The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are only available within predicate expressions for filtering and transforming collections.
 
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
-| `@return`   | Provides access to the method return value |
-| `@duration` | Provides access to the method call execution duration |
-| `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists) |
+| `@return`   | Provides access to the method return value. |
+| `@duration` | Provides access to the method call execution duration. |
+| `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists). |
 | `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
 | `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
 | `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
@@ -54,7 +54,7 @@ The Expression Language provides contextual variables for different instrumentat
 
 ## Collection operations
 
-When working with collections (lists, maps, etc.), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
+When working with collections (lists, maps, and so on), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
 
 The following examples use a variable named `myCollection` defined as `[1,2,3]`:
 
