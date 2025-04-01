@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-[Error Tracking][1] processes errors collected by the Datadog Agent. Whenever an error is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
+[Error Tracking][1] processes errors collected by the Datadog Tracing Libraries. Whenever an error is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
 ## Getting started
 
