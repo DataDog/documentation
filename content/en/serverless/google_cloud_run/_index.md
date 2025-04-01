@@ -229,15 +229,16 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
-### On the Cloud Run Service
-**Add Service Label**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+### **Add Service Label** in Google's Cloud Run Info Panel
 
-Add the same value from `DD_SERVICE` to a `service` label on your cloud function's inside the info panel of your function. More information on how to add labels can be found [here][1].
+Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-| Name      | Value                                                 |
-|-----------|-------------------------------------------------------|
-| `service` | The name of your service matching `DD_SERVICE` env var |
-[1]: https://cloud.google.com/run/docs/configuring/services/labels
+Add the same value from `DD_SERVICE` to a `service` label on your Cloud Run Service, inside the info panel of your service. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+
+| Name      | Value                                                       |
+|-----------|-------------------------------------------------------------|
+| `service` | The name of your service matching the `DD_SERVICE` env var. |
+
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
@@ -252,9 +253,12 @@ To deploy your Cloud Run service with YAML service specification, use the follow
      name: '<SERVICE_NAME>'
      labels:
        cloud.googleapis.com/location: '<LOCATION>'
+       service: '<SERVICE_NAME>'
    spec:
      template:
        metadata:
+         labels:
+           service: '<SERVICE_NAME>'
          annotations:
            autoscaling.knative.dev/maxScale: '100' # The maximum number of instances that can be created for this service. https://cloud.google.com/run/docs/reference/rest/v1/RevisionTemplate
            run.googleapis.com/container-dependencies: '{"run-sidecar-1":["serverless-init-1"]}' # Configure container start order for sidecar deployments https://cloud.google.com/run/docs/configuring/services/containers#container-ordering
@@ -347,7 +351,7 @@ To deploy your Cloud Run service with YAML service specification, use the follow
 {{% tab "Terraform deploy" %}}
 To deploy your Cloud Run service with Terraform, use the following example configuration file. In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service. If you do not want to allow public access, remove the IAM policy section.
 
-```
+```terraform
 provider "google" {
   project = "<PROJECT_ID>"
   region  = "<LOCATION>"  # example: us-central1
@@ -482,6 +486,9 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
           }
         }
       }
+      labels = {
+       service : "<SERVICE_NAME>"
+      } 
     }
   }
 
@@ -530,17 +537,6 @@ Supply placeholder values:
 | `DD_TAGS`         | See [Unified Service Tagging][13]. |
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
-
-### **Add Service Label** in Google's Cloud Run Function Info Panel.
-
-Tag your GCP entity with the `service` label to correlate your traces with your service:
-
-Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
-
-| Name      | Value                                                       |
-   |-----------|-------------------------------------------------------------|
-| `service` | The name of your service matching the `DD_SERVICE` env var. |
-
 
 ## Example application
 
