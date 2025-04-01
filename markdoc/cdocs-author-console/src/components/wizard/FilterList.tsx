@@ -47,14 +47,14 @@ function FilterList({
     setCurrentFilterUuid(newFilter.uuid);
   };
 
-  const onFilterFormChange = (filter: WizardFilter) => {
+  const handleFilterFormChange = (filter: WizardFilter) => {
     if (!currentFilterUuid) {
       throw new Error('No current filter to edit');
     }
     setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filter });
   };
 
-  const onFilterRowDelete = (filter: WizardFilter) => {
+  const handleFilterRowDelete = (filter: WizardFilter) => {
     setCurrentFilterUuid(null);
     const newFiltersByUuid = { ...filtersByUuid };
     delete newFiltersByUuid[filter.uuid];
@@ -62,11 +62,11 @@ function FilterList({
     onPublish({ filters: Object.values(newFiltersByUuid), wizardCustomizationConfig });
   };
 
-  const onFilterRowEdit = (filter: WizardFilter) => {
+  const handleFilterRowEdit = (filter: WizardFilter) => {
     setCurrentFilterUuid(filter.uuid);
   };
 
-  const onSave = () => {
+  const handleSave = () => {
     setCurrentFilterUuid(null);
     setSavedFiltersByUuid({ ...filtersByUuid });
     onPublish({ filters: Object.values(filtersByUuid), wizardCustomizationConfig });
@@ -95,7 +95,7 @@ function FilterList({
     setWizardCustomizationConfig(newWizardCustomizationConfig);
   };
 
-  const onCancel = () => {
+  const handleCancel = () => {
     setCurrentFilterUuid(null);
     setFiltersByUuid({ ...savedFiltersByUuid });
   };
@@ -108,8 +108,8 @@ function FilterList({
         let onEdit;
         let onDelete;
         if (currentFilterUuid !== uuid) {
-          onEdit = onFilterRowEdit;
-          onDelete = onFilterRowDelete;
+          onEdit = handleFilterRowEdit;
+          onDelete = handleFilterRowDelete;
         }
         return (
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
@@ -123,7 +123,7 @@ function FilterList({
               <FilterForm
                 customizationConfig={wizardCustomizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
-                onEdit={onFilterFormChange}
+                onPublish={handleFilterFormChange}
               />
             )}
           </div>
@@ -136,10 +136,10 @@ function FilterList({
       )}
       {currentFilterUuid && (
         <>
-          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={onSave}>
+          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleSave}>
             Save
           </Button>{' '}
-          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={onCancel}>
+          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleCancel}>
             Cancel
           </Button>
         </>

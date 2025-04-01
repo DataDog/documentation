@@ -1,12 +1,9 @@
 import { WizardFilter } from './types';
-import { CustomizationConfig, buildFiltersManifest, Frontmatter } from 'cdocs-data';
+import { CustomizationConfig } from 'cdocs-data';
 import Code from '../Code';
-import { MarkdocTemplateData } from './types';
 import { DocTemplater } from './DocTemplater';
 
-function buildMarkup(templateData: MarkdocTemplateData) {
-  const templater = new DocTemplater(templateData);
-
+function buildMarkup(templater: DocTemplater) {
   return `
 ${templater.buildFrontmatter()}
 
@@ -23,7 +20,7 @@ The \`if\` tags on this generated page are already set up for the filters you co
 You might want to leave this section at the bottom of your page for reference until you're finished writing content.
 
 {% alert level="info" %}
-Change any of the filters for this page to update the ${templateData.filters.length} lines below.
+Change any of the filters for this page to update the ${templater.filters.length} lines below.
 {% /alert %}
 
 ${templater.buildIfBlocks()}
@@ -52,30 +49,13 @@ function MarkdocTemplate({
   filters: WizardFilter[];
   wizardCustomizationConfig: CustomizationConfig;
 }) {
-  const templateData: MarkdocTemplateData = {
+  const templater = new DocTemplater({
     filters,
-    wizardCustomizationConfig,
-    filtersManifest: buildFiltersManifest({
-      frontmatter: buildFrontmatterData({ filters }),
-      customizationConfig: wizardCustomizationConfig
-    }),
-    frontmatter: buildFrontmatterData({ filters })
-  };
+    customizationConfig: wizardCustomizationConfig
+  });
 
-  const contents = buildMarkup(templateData);
+  const contents = buildMarkup(templater);
   return <Code contents={contents} language="markdown" />;
 }
 
 export default MarkdocTemplate;
-
-function buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
-  let frontmatter: Frontmatter = {
-    title: 'Your Title Here',
-    content_filters: filters.map((filter) => ({
-      trait_id: filter.trait_id,
-      option_group_id: filter.option_group_id
-    }))
-  };
-
-  return frontmatter;
-}

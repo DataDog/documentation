@@ -1,21 +1,44 @@
-import { MarkdocTemplateData, WizardFilter } from './types';
+import { CustomizationConfig, buildFiltersManifest, Frontmatter, FiltersManifest } from 'cdocs-data';
+import { WizardFilter } from './types';
 
 export class DocTemplater {
-  data: MarkdocTemplateData;
+  filters: WizardFilter[];
+  customizationConfig: CustomizationConfig;
+  frontmatter: Frontmatter;
+  filtersManifest: FiltersManifest;
 
-  constructor(markdocTemplateData: MarkdocTemplateData) {
-    this.data = markdocTemplateData;
+  constructor({ filters, customizationConfig }: { filters: WizardFilter[]; customizationConfig: CustomizationConfig }) {
+    const frontmatter = this.buildFrontmatterData({ filters });
+    this.filters = filters;
+    this.customizationConfig = customizationConfig;
+    this.frontmatter = this.buildFrontmatterData({ filters });
+    this.filtersManifest = buildFiltersManifest({
+      frontmatter,
+      customizationConfig: customizationConfig
+    });
+  }
+
+  buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
+    let frontmatter: Frontmatter = {
+      title: 'Your Title Here',
+      content_filters: filters.map((filter) => ({
+        trait_id: filter.trait_id,
+        option_group_id: filter.option_group_id
+      }))
+    };
+
+    return frontmatter;
   }
 
   buildFrontmatter() {
     let frontmatter = `---
 title: Your Title Here`;
 
-    if (this.data.filters.length > 0) {
+    if (this.filters.length > 0) {
       frontmatter += `
 content_filters:`;
 
-      this.data.filters.forEach((filter) => {
+      this.filters.forEach((filter) => {
         frontmatter += `
   - trait_id: ${filter.trait_id}
     option_group_id: ${filter.option_group_id}`;
@@ -29,13 +52,15 @@ content_filters:`;
   }
 
   buildIfBlock(filter: WizardFilter) {
-    const options = Object.values(this.data.filtersManifest.optionGroupsById[filter.option_group_id]);
+    const options = Object.values(this.filtersManifest.optionGroupsById[filter.option_group_id]);
 
     let markup = '';
 
-    options.forEach((option) => {
-      markup += `
-<!-- ${option.label} -->
+    options.forEach((option, idx) => {
+      if (idx > 0) {
+        markup += '\n';
+      }
+      markup += `<!-- ${option.label} -->
 {% if equals($${filter.trait_id}, "${option.id}") %}
 Your ${option.label}-specific content goes here.
 {% /if %}
@@ -46,22 +71,21 @@ Your ${option.label}-specific content goes here.
   }
 
   buildEqualsFnExample() {
-    const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
+    const filters = Object.values(this.filtersManifest.filtersByTraitId);
     if (filters.length === 0) {
       return '';
     }
 
     const firstFilter = filters[0];
-    const firstFilterTraitLabel = this.data.filtersManifest.filtersByTraitId[firstFilter.config.trait_id].config.label;
     const firstFilterOption = Object.values(
-      this.data.filtersManifest.optionGroupsById[firstFilter.config.option_group_id]
+      this.filtersManifest.optionGroupsById[firstFilter.config.option_group_id]
     )[0];
 
     return `equals($${firstFilter.config.trait_id}, "${firstFilterOption.id}")`;
   }
 
   buildNestedIfBlockExample() {
-    const manifest = this.data.filtersManifest;
+    const manifest = this.filtersManifest;
 
     const filters = Object.values(manifest.filtersByTraitId);
     if (filters.length < 2) {
@@ -103,7 +127,7 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
   buildIfBlocks() {
     let ifBlocks = '';
 
-    this.data.filters.forEach((filter) => {
+    this.filters.forEach((filter) => {
       ifBlocks += this.buildIfBlock(filter);
     });
 
@@ -118,9 +142,9 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
     table += '* Valid values\n';
     table += '* Equals function to use in `if` tag\n';
 
-    const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
+    const filters = Object.values(this.filtersManifest.filtersByTraitId);
     filters.forEach((filter) => {
-      const options = Object.values(this.data.filtersManifest.optionGroupsById[filter.config.option_group_id]);
+      const options = Object.values(this.filtersManifest.optionGroupsById[filter.config.option_group_id]);
 
       // Create a new row
       table += '---\n';
@@ -149,31 +173,4 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
     table += '{% /table %}\n';
     return table;
   }
-
-  /*
-  buildTraitsAndValuesTable() {
-    let table = '{% table %}\n';
-    table += '* Trait\n';
-    table += '* Valid values\n';
-
-    const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
-    filters.forEach((filter) => {
-      // Create a new row
-      table += '---\n';
-
-      // Add the trait id
-      table += `* \`$${filter.config.trait_id}\`\n`;
-
-      // Add the valid option values as a bulleted list in a single cell
-      table += `*\n`;
-      const options = Object.values(this.data.filtersManifest.optionGroupsById[filter.config.option_group_id]);
-      options.forEach((option) => {
-        table += `  * \`"${option.id}"\`\n`;
-      });
-    });
-
-    table += '{% /table %}\n';
-    return table;
-  }
-  */
 }

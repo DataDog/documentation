@@ -31,10 +31,3 @@ export interface WizardFilter {
   option_group_id: string;
   customizationConfig: CustomizationConfig;
 }
-
-export interface MarkdocTemplateData {
-  filters: WizardFilter[];
-  wizardCustomizationConfig: CustomizationConfig;
-  filtersManifest: FiltersManifest;
-  frontmatter: Frontmatter;
-}

@@ -6,11 +6,11 @@ import { WizardFilter, TraitConfig } from './types';
 function FilterForm({
   filter,
   customizationConfig,
-  onEdit
+  onPublish
 }: {
   filter: WizardFilter;
   customizationConfig: CustomizationConfig;
-  onEdit: (filter: WizardFilter) => void;
+  onPublish: (filter: WizardFilter) => void;
 }) {
   const formHeaderStyles: React.CSSProperties = {
     backgroundColor: '#eff1f5',
@@ -41,7 +41,7 @@ function FilterForm({
         }
       }
     };
-    onEdit(updatedFilter);
+    onPublish(updatedFilter);
   };
 
   const onOptionGroupEdit = ({ optionGroupId }: { optionGroupId: string }) => {
@@ -60,7 +60,7 @@ function FilterForm({
       newCustomizationConfig.optionsById[optionId] = customizationConfig.optionsById[optionId];
     });
 
-    onEdit({
+    onPublish({
       ...filter,
       option_group_id: optionGroupId,
       customizationConfig: newCustomizationConfig
