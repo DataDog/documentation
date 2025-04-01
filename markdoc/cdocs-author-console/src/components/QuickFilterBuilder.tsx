@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
 import TraitSelector from './selectors/TraitSelector';
 import OptionGroupSelector from './selectors/OptionGroupSelector';
-import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
+import Code from './Code';
 
 function buildFilterConfig({
   traitId,
@@ -21,7 +21,6 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
   const [traitId, setTraitId] = useState<string | null>(null);
   const [optionGroupId, setOptionGroupId] = useState<string | null>(null);
   const [filterConfig, setFilterConfig] = useState<string>(buildFilterConfig({ traitId, optionGroupId }));
-  const [textWasCopied, setTextWasCopied] = useState(false);
 
   const handleTraitSelect = (newTraitId: string) => {
     setTraitId(newTraitId);
@@ -31,19 +30,6 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
   const handleOptionGroupIdSelect = (newOptionGroupId: string) => {
     setOptionGroupId(newOptionGroupId);
     setFilterConfig(buildFilterConfig({ traitId, optionGroupId: newOptionGroupId }));
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(filterConfig);
-    setTextWasCopied(true);
-  };
-
-  const handleCopySnackbarClose = (_event: React.SyntheticEvent | Event, reason?: SnackbarCloseReason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setTextWasCopied(false);
   };
 
   return (
@@ -56,20 +42,13 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
         with an <strong>existing</strong> trait and option group.
       </p>
       <p>Use the dropdowns below to update this frontmatter snippet, then click the snippet to copy it:</p>
-      <pre onClick={copyToClipboard}>{filterConfig}</pre>
+      <Code contents={filterConfig} language="yaml" />
       <h3>Choose a trait</h3>
       <p>Select the user characteristic you want to filter the page on, such as the user's operating system.</p>
       <TraitSelector customizationConfig={props.customizationConfig} onSelect={handleTraitSelect} />
       <h3>Choose an option group</h3>
       <p>Select the list of options to offer for the filter, such as "Linux, Windows, and MacOS".</p>
       <OptionGroupSelector customizationConfig={props.customizationConfig} onSelect={handleOptionGroupIdSelect} />
-      <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={textWasCopied}
-        autoHideDuration={1000}
-        onClose={handleCopySnackbarClose}
-        message="Copied"
-      />
     </div>
   );
 }

@@ -18,10 +18,12 @@
     "@fontsource/roboto": "^5.1.0",
     "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.1.5",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "cdocs-data": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/cdocs-data-v1.0.2.tgz",
     "javascript-time-ago": "^2.5.11",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-syntax-highlighter": "^15.6.1",
     "react-time-ago": "^7.3.3",
     "uuid": "^11.1.0"
   },
