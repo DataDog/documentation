@@ -26,8 +26,8 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 After spans have been ingested, some are kept for 15 days according to the retention filters are set up on your account:
 1. The **[Intelligent Retention Filter](#datadog-intelligent-retention-filter)** retains spans for every environment, service, operation, and resource for different latency distributions.
-2. Some **[Default Retention Filters](#default-retention-filters)** are created to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces. 
-3. In addition to these, you can create any number of additional **[Custom Retention Filters](#create-your-own-retention-filter)** for your services, to capture the traces that matters the most to your business, based on any span attribute or tag filter.
+2. Several **[Default Retention Filters](#default-retention-filters)** are created to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces. 
+3. You can create any number of additional **[Custom Retention Filters](#create-your-own-retention-filter)** for your services, to capture the traces that matters the most to your business, based on any span attribute or tag filter.
 
 **Note**: The permission `apm_retention_filter_write` is required to create, delete, modify, enable, or disable retention filters.
 
@@ -60,13 +60,26 @@ The `Spans Indexed` column for each retention filter is powered by the `datadog.
 <div class="alert alert-info"><strong>Note</strong>: Retention filters do not affect what traces are collected by the Agent and sent to Datadog ("ingested"). To control ingestion, use dedicated <a href="/tracing/trace_pipeline/ingestion_controls/">ingestion controls</a>.</div>
 
 
+### Retention filter types
+
+There are two types of retention filters:
+
+1. **Span-level retention filters** - Index only the specific spans that match your filter criteria.
+2. **Trace-level retention filters** - Index entire traces that contain spans matching your filter criteria, making the complete traces searchable in Trace Queries.
+
+| Feature | Standard retention filters | Trace-level retention filters |
+| ------- | ------------------------- | ----------------------------- |
+| **Configuration** | Span query + Span retention rate | Span query + Span retention rate + Trace retention rate |
+| **What is indexed** | Only spans targeted by the query | All spans belonging to traces that contain spans matching the query |
+| **Where it is queryable** | Span Explorer | Span Explorer and Trace Queries |
+
 ### Default retention filters
 
-The following retention filters are enabled by default to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces: 
+The following retention filters are enabled by default: 
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
 - The `Application Security Monitoring Default` retention filter is enabled if you are using [Application Security Management][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The `Synthetics Default` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
-- The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically via Dynamic instrumentation remain available in the long term by default.
+- The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically with Dynamic instrumentation remain available in the long term by default.
 
 ### Datadog intelligent retention filter
 
@@ -106,20 +119,30 @@ For example, you can create filters to keep all traces for:
 - Checkout operation spans that have a duration longer than 2 seconds on the production environment: `resource_name:"GET /checkout" @duration:>2s env:prod`
 - Specific versions of an online delivery service application: `service:delivery-api @version:v2.0`
 
-When a span is indexed, you can see and query it in [Trace Explorer][7], dashboards, and monitors for 15 days. When clicking an indexed span from the trace explorer, you will always be able to visualize the **complete trace** it is a part of, in a flamegraph or waterfall view. However, note that other spans in that visualization might not be independently searchable in the Trace Explorer unless you also configured a _trace retention rate_ to ensure that all spans from a trace are indexed or other spans are retained by other retention filters.
+When you index a span using a retention filter:
+
+- **Searchability**: The indexed span can be found in Trace Explorer, dashboards, and monitored for 15 days.
+
+- **Visualization context**: When you click on any indexed span in the Trace Explorer, you always see its complete trace context (all parent and child spans) in flame graph or waterfall view, regardless of whether those other spans were indexed.
+
+- **Search context**: Although you can visualize a complete trace, only the spans that were specifically indexed by retention filters will be searchable in the Trace Explorer.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_create.png" style="width:90%;" alt="Create Retention Filter">}}
 
 To create a retention filter:
+1. Go to [**APM** > **Retention Filters**][18].
+1. Click **Add Retention Filter**.
 1. Define the **Retention Query** to target the spans you wish to retain. Use any span or attribute to filter spans, as you would write a query in the [Trace Explorer][7].
-2. Set a **Span rate** to define the percentage of spans matching this query that should be indexed.
-3. Optionally, Set a **Trace rate** to define the percentage of full traces associated with the spans that should be indexed. This will ensure that other spans from traces associated with the span targeted by the retention query are also indexed, so that the indexed data is queriable in [Trace Queries][11]. 
-4. Name the filter.
-5. Save the new filter.
+1. Set a **Span rate** to define the percentage of spans matching this query that should be indexed.
+1. Optionally, set a **Trace rate** to define the percentage of full traces associated with the spans that should be indexed. This ensures that other spans from traces associated with the span targeted by the retention query are also indexed, so that the indexed data is queryable in [Trace Queries][11]. 
+1. Set a name for the filter.
+1. Click **Add Filter** to save the filter.
 
-**Note**: Configuring a trace rate might increase significantly your indexed spans usage. For instance, if you configure a retention filter to index spans from `service:my-service`:
-- Configuring a span rate of `100%` will ensure that all spans matching `service:my-service` will get indexed.
-- Configuring a trace rate of `50%` will ensure that all spans from all traces with a span from `service:my-service` will get indexed. Assuming traces have 100 spans in average and 5 spans from `service:my-service`, configuring a trace rate will index the remaining 95 spans of the trace, for the trace rate percentage being configured.
+<div class="alert alert-danger">Configuring a trace rate can significantly increase your indexed spans usage.</div>
+
+For example, if you configure a retention filter to index spans from `service:my-service`:
+- Configuring a span rate of `100%` ensures that all spans matching `service:my-service` are indexed.
+- Configuring a trace rate of `50%` ensures that all spans from all traces with a span from `service:my-service` are indexed. Assuming traces have 100 spans in average and 5 spans from `service:my-service`, configuring a trace rate indexes the remaining 95 spans of the trace, for the trace rate percentage being configured.
 
 When you create a new filter or edit the retention rate of an existing filter, Datadog displays an estimate of the percentage change in global indexing volume.
 
@@ -131,7 +154,6 @@ Filters are retained in a serial order. If you have an upstream filter that reta
 
 By default, spans indexed by custom retention filters **and** the intelligent retention filter are included in the Trace Explorer [aggregated views][6] (timeseries, toplist, table), as well as in dashboards and notebook queries.
 
-Spans indexed by custom retention filters **without a trace rate**
 
 The `retained_by` attribute is present on all retained spans. Its value is: 
 - `retained_by:retention_filter` if the span was captured by a [custom retention filter](#create-your-own-retention-filter), including the [default retention filters](#default-retention-filters) and **no trace rate** was configured. These spans are not included in Trace Queries as trace queries require all spans of a trace to be indexed.
@@ -166,3 +188,4 @@ Spans indexed by the intelligent retention filter are **excluded** from APM trac
 [15]: /synthetics/apm/
 [16]: /security/application_security/
 [17]: /dynamic_instrumentation/
+[18]: https://app.datadoghq.com/apm/traces/retention-filters
