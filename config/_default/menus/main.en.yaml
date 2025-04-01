@@ -2378,16 +2378,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Automations
+      url: service_management/on-call/automations
+      parent: oncall
+      identifier: oncall_automations
+      weight: 6
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 6
+      weight: 7
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 7
+      weight: 8
     - name: Event Management
       url: service_management/events/
       pre: events
