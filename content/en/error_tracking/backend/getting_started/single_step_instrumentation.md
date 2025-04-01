@@ -61,7 +61,58 @@ You can enable Backend Error Tracking by installing the Agent with either:
 - [Kubectl CLI][4] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Coming soon
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
+
+To enable Single Step Instrumentation with the Datadog Operator:
+
+1. Install the [Datadog Operator][7] v1.14.0+ with Helm:
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm repo update
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
+2. Create a Kubernetes secret to store your Datadog [API key][5]:
+   ```shell
+   kubectl create secret generic datadog-secret --from-literal api-key=<YOUR_DD_API_KEY>
+   ```
+3. Create `datadog-agent.yaml` with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: <DATADOG_SITE>
+       tags:
+         - env:<AGENT_ENV>
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+       env:
+         - name: DD_CORE_AGENT_ENABLED
+           value: "false"
+     features:
+       apm:
+         enabled: true
+         errorTrackingStandalone:
+           enabled: true
+         instrumentation:
+           enabled: true
+           libVersions:
+             java: "1"
+             dotnet: "3"
+             python: "2"
+             js: "5"
+             php: "1"
+   ```
+   Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+4. Run the following command:
+   ```shell
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
+5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 {{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
@@ -108,7 +159,6 @@ To enable Single Step Instrumentation with Helm:
            php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][6] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
-
 4. Run the following command to deploy the agent:
    ```shell
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
@@ -121,6 +171,7 @@ To enable Single Step Instrumentation with Helm:
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /getting_started/site/
+[7]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
 
 {{% /tab %}}
 {{< /tabs >}}
