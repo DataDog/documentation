@@ -59,7 +59,9 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 
 Choose one of the following options:
 
-**Alert on all new issues**: Monitor triggers when any new issue is detected (the number of errors per issue is greater than 0 over the past day).
+**Alert on all new issues**:
+
+Monitor triggers when any new issue is detected (the number of errors is greater than 0 over the past day).
 
 Or **define your alert metric**:
 
@@ -78,6 +80,17 @@ Or **define your alert metric**:
 3. Query data over the last day (by default) or any other time window.
 
 4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
+
+#### Programmatic management
+
+If you are using Terraform or custom scripts using our public APIs to manage your monitors, you need to specify some clauses in the monitor query:
+* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. Note you can only use one at a time.
+* Make sure to use the `.new()` clause for new issue monitors.
+
+Example:
+```yaml
+error-tracking("{filter}").source("backend").new().rollup("count").by("@issue.id").last("1d") > 0
+```
 
 [1]: /error_tracking/issue_states
 [2]: /error_tracking/explorer
@@ -107,6 +120,17 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 3. Query data over the last day (by default) or any other time window.
 
 4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
+
+#### Programmatic management
+
+If you are using Terraform or custom scripts using our public APIs to manage your monitors, you need to specify some clauses in the monitor query:
+* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. Note you can only use one at a time.
+* Make sure to use the `.impact()` clause for high impact monitors.
+
+Example:
+```yaml
+error-tracking("{filter}").source("browser").impact().rollup("count").by("@issue.id").last("1d") > 0
+```
 
 [1]: /error_tracking/issue_states
 [2]: /error_tracking/explorer
