@@ -9,7 +9,7 @@ further_reading:
   - link: "https://opentelemetry.io/docs/reference/specification/sdk-environment-variables/"
     tag: "External Site"
     text: "OpenTelemetry Environment Variable Spec"
-  - link: "https://opentelemetry.io/docs/specification/protocol/exporter/"
+  - link: "https://opentelemetry.io/docs/specs/otel/protocol/exporter/"
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
   - link: "https://opentelemetry.io/docs/specs/otel/metrics/sdk_exporters/otlp/ "
