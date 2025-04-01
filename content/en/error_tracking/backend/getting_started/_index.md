@@ -1,5 +1,5 @@
 ---
-title: Backend Error Tracking
+title: Getting Started
 aliases:
 - /error_tracking/standalone_backend/getting_started
 further_reading:
@@ -18,11 +18,11 @@ further_reading:
 
 [Error Tracking][1] processes errors collected by the Datadog Tracing Libraries. Whenever an error is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
-## Getting started
+## Getting started with Backend Error Tracking
 
 Follow the [in-app setup instructions][2] or choose an instrumentation approach to start collecting backend errors:
 
-{{< whatsnext>}}
+{{< whatsnext desc="">}}
     {{< nextlink href="/error_tracking/backend/getting_started/single_step_instrumentation" >}}Single step instrumentation{{< /nextlink >}}
     {{< nextlink href="/error_tracking/backend/getting_started/dd_libraries" >}}Manual instrumentation{{< /nextlink >}}
 {{< /whatsnext >}}
