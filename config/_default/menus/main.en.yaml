@@ -2199,6 +2199,16 @@ menu:
       parent: error_tracking_backend
       identifier: error_tracking_backend_setup
       weight: 100
+    - name: Using Single Step Instrumentation
+      url: error_tracking/backend/getting_started/single_step_instrumentation
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_ssi
+      weight: 1000
+    - name: Using Datadog Tracing Libraries
+      url: error_tracking/backend/getting_started/dd_libraries
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_libs
+      weight: 1001
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -2224,6 +2234,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Guides
+      url: error_tracking/guides
+      parent: error_tracking
+      identifier: error_tracking_guides
+      weight: 13
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
