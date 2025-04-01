@@ -15,7 +15,7 @@ To view information about the Observability Pipelines Workers running for an act
 1. Select your pipeline.
 1. Click the **Workers** tab to see the Workers' memory and CPU utilization, traffic stats, and any errors.
 1. To view the Workers' statuses and versions, click the **Latest Deployment & Setup** tab.
-1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.
+1. To see the Workers' logs, click the cog at the top right side of the page, then select **View OPW Logs**. See [Logs Search Syntax][3] for details on how to filter your logs. To see logs for a specific Worker, add `@op_worker.id:<worker_id>` to the search query.<br>**Note**: If you are not seeing Observability Pipelines Worker logs, make sure you are [indexing Worker logs][8] to Log Management.
 
 ## Inspect events sent through your pipeline to identify setup issues
 
@@ -64,3 +64,4 @@ If you try to install a new version of the Worker in an instance that is running
 [5]: /observability_pipelines/advanced_configurations/#bootstrap-options
 [6]: /observability_pipelines/destinations/#event-batching-intro
 [7]: /observability_pipelines/install_the_worker#uninstall-the-worker
+[8]: /observability_pipelines/set_up_pipelines/#index-your-worker-logs
