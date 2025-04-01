@@ -373,11 +373,11 @@ details {
 
 .code-lang-list-container {
     padding: 0 !important;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     &.nav-tabs {
         .nav-item {
             z-index: 1;
-            padding-bottom: 6px;
+            padding-bottom: 0;
 
             &:before {
                 content: '' !important;
@@ -391,14 +391,14 @@ details {
                 background: rgba(255, 255, 255, 0.95);
                 backdrop-filter: blur(8px);
                 border: 1px solid rgba(99, 44, 166, 0.15);
-                padding: 8px 16px;
+                padding: 6px 12px;
                 font-weight: 600;
                 border-radius: 8px;
                 display: inline-block;
                 transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
                 overflow: hidden;
-                margin-right: 0.625rem;
+                margin-right: 8px;
                 color: rgba(0, 0, 0, 0.75);
 
                 &::before {
@@ -671,14 +671,12 @@ h5 {
 
     & > ul {
         list-style-type: none;
-        padding-top: 6px;
-
+        padding-top: 0;
         gap: 8px;
-
         margin-bottom: 8px;
 
         li {
-            padding-bottom: 6px;
+            padding-bottom: 0;
 
             &:lang(ja) {
                 font-style: normal;
@@ -713,12 +711,12 @@ h5 {
             a {
                 background: rgba(255, 255, 255, 0.95);
                 border: 1px solid rgba(99, 44, 166, 0.15);
-                padding: 8px 16px;
+                padding: 6px 12px;
                 font-weight: 600;
                 font-size: 16px;
                 border-radius: 8px;
                 display: inline-block;
-                margin-right: 0.625rem;
+                margin-right: 8px;
                 transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                 position: relative;
                 overflow: hidden;
@@ -752,8 +750,8 @@ h5 {
         background: #FFFFFF;
         border: 1px solid rgba(221, 221, 221, 0.5);
         border-radius: 12px;
-        padding: 24px;
-        margin: 0 0 32px 0;
+        padding: 16px;
+        margin: 0 0 24px 0;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 
         dl {
