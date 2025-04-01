@@ -11,7 +11,7 @@ function SetupInstructions({
 }) {
   return (
     <div>
-      <h1 style={{ marginTop: '0px' }}>Setup instructions</h1>
+      <h1>Setup instructions</h1>
       <p>You can copy any markup by clicking it.</p>
       {false && (
         <div>

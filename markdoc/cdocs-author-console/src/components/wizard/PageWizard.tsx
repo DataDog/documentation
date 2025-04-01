@@ -31,7 +31,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
         </p>
       )}
       <div style={{ marginBottom: '30px' }}>
-        <h1 style={{ marginTop: '0px', marginBottom: '0px' }}>Filters</h1>
+        <h1>Filters</h1>
         <FilterList customizationConfig={customizationConfig} onChange={onFilterListChange} />
       </div>
       {filters.length > 0 && (

@@ -99,6 +99,7 @@ function FilterList({
 
   return (
     <div>
+      {Object.keys(filtersByUuid).length === 0 && <div>No filters added yet.</div>}
       {Object.keys(filtersByUuid).map((uuid) => {
         // Only show the edit and delete icons if the filter is not currently being edited
         let onEdit;
@@ -164,8 +165,8 @@ function FilterRow({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: '10px',
-    paddingBottom: '10px'
+    marginTop: '10px',
+    marginBottom: '10px'
   };
 
   const getFilterSummaryText = () => {

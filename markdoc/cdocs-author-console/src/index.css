@@ -37,6 +37,15 @@ h1#title {
   border-bottom: 1px solid #ccc;
 }
 
+h1 {
+  font-size: 1.7em;
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
 h2,
 h3,
 h4,
