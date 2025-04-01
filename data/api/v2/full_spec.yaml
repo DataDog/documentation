@@ -30919,7 +30919,7 @@ components:
           format: int64
           type: integer
         rtt_micro_seconds:
-          description: Measured as TCP smoothed roundtrip time in microseconds (the
+          description: Measured as TCP smoothed round trip time in microseconds (the
             time between a TCP frame being sent and acknowledged).
           format: int64
           type: integer
@@ -46769,9 +46769,7 @@ paths:
         type: safe
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
-        contact [Datadog support](https://docs.datadoghq.com/help/).
-
-        type: safe'
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
