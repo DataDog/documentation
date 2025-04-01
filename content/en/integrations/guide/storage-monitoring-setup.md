@@ -177,14 +177,9 @@ To ensure that Datadog can collect GCP Storage metrics from your GCP project, yo
 
 **Note**: While you have the option to disable specific metric namespaces, it is crucial that the Cloud Storage namespace (gcp.storage) remains enabled.
 
+#### Step 2: Enable the [Storage Insights][201] API in your GCP project
 
-#### Step 2: Add the `roles/storage.ObjectViewer` role to your Datadog service account
-
-This grants Datadog permission to access and extract the generated inventory reports from Google.
-
-#### Step 3: Enable the [Storage Insights][201] API in your GCP project
-
-#### Step 4: Grant service agent permissions
+#### Step 3: Grant service agent permissions
 
 After the Storage Insights API has been enabled, a project-level service agent is created automatically. The naming format for this service agent is: `service-PROJECT_NUMBER@gcp-sa-storageinsights.iam.gserviceaccount.com`
 The service agent requires the following IAM roles:
@@ -192,7 +187,7 @@ The service agent requires the following IAM roles:
 1. `roles/storage.insightsCollectorService` on the source bucket (this includes storage.buckets.getObjectInsights and storage.buckets.get permissions).
 2. `roles/storage.objectCreator` on the destination bucket (this includes the storage.objects.create permission).
 
-#### Step 5: Create an Inventory Report Configuration
+#### Step 4: Create an Inventory Report Configuration
 
 There are multiple ways you can create an Inventory Report Configuration. The quickest way for customers to set up Storage Monitoring is through the Google Cloud CLI or Terraform templates. Regardless of the method you choose, the most important part is that the configuration:
 
@@ -257,6 +252,19 @@ storageinsights.reportDetails.list
 ```
 
 After the necessary permissions have been granted, Datadog can create the inventory report configuration with your setup details in the next step.
+
+#### Step 5: Add the roles/storage.ObjectViewer Role to your Datadog Service Account on the Destination Bucket
+
+This grants Datadog permission to access and extract the generated inventory reports from Google. This permission should be granted on the destination bucket, the bucket where the inventory reports will be written.
+
+1. Find and select the destination bucket where your inventory reports will be stored.
+2. In the bucket details page, click on the Permissions tab.
+3. Under the Permissions section, click Grant Access to add a new principal.
+4. Principal: Enter the Datadog Service Account email (you may have this from Datadog's setup instructions).
+5. Role: From the role dropdown, select Storage Object Viewer (roles/storage.objectViewer).
+
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
