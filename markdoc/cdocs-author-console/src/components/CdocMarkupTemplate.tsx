@@ -13,10 +13,8 @@ This is a template for a customizable doc. It includes some example tags and res
   
 This paragraph is top-level content (content that is not inside an \`if\` tag). It will show on the page regardless of any filters.
 
-## Conditional content example
-  
-The \`if\` tags on this generated page are already set up for the filters you configured in the Page Wizard.
-  
+## Conditional content examples
+    
 You might want to leave this section at the bottom of your page for reference until you're finished writing content.
 
 {% alert level="info" %}
@@ -27,7 +25,7 @@ ${templater.buildIfBlocks()}
 
 ## Valid traits and their values (option IDs)
   
-Just for your reference, here's a handy list of all the traits available on this page, and the valid values for each trait.
+For reference, here's a list of all the traits available on this page, and the valid values for each trait.
 
 You can use this table to populate the \`equals\` function in your \`if\` tags: \`equals(<TRAIT>, <VALUE>)\`. Example: \`${templater.buildEqualsFnExample()}\`. For details on using \`if\` tags, see the [relevant section of the Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)).
   

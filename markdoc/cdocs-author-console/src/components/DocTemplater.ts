@@ -1,5 +1,5 @@
 import { CustomizationConfig, buildFiltersManifest, Frontmatter, FiltersManifest } from 'cdocs-data';
-import { WizardFilter } from '../../types';
+import { WizardFilter } from '../types';
 
 export class DocTemplater {
   filters: WizardFilter[];
@@ -62,7 +62,7 @@ content_filters:`;
       }
       markup += `<!-- ${option.label} -->
 {% if equals($${filter.trait_id}, "${option.id}") %}
-Your ${option.label}-specific content goes here.
+${option.label}-specific content goes here.
 {% /if %}
 `;
     });
