@@ -67,7 +67,7 @@ const renderHits = (renderOptions, isFirstRender) => {
 
         const hideOrShowElements = (container) => {
             const finalHitsLists = container.querySelectorAll('.ais-Hits-list');
-
+            
             finalHitsLists.forEach((list) => {
                 if (list.childElementCount) {
                     list.classList.remove('no-hits');
@@ -125,15 +125,9 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const { widgetParams, hits } = renderOptions;
-    const { partnersPage, container, basePathName } = widgetParams;
+    const { container, basePathName } = widgetParams;
 
-    if (partnersPage && container.id === 'hits-partners') {
-        const partnersHitsArray = hits.filter((hit) => hit.type === 'partners');
-        const partnersListItemsHTML = generateJoinedHits(partnersHitsArray, 'Partners');
-        container.innerHTML = partnersListItemsHTML;
-
-        return;
-    }
+    const partnersHitsArray = hits.filter((hit) => hit.type === 'partners');
 
     const gettingStartedHitsArray = hits.filter((hit) => hit.category?.toLowerCase() === 'getting started');
     const docsHitsArray = hits.filter(
@@ -147,8 +141,9 @@ const renderHits = (renderOptions, isFirstRender) => {
     const allJoinedListItemsHTML = [
         generateJoinedHits(gettingStartedHitsArray, 'Getting Started'),
         generateJoinedHits(docsHitsArray, 'Documentation'),
-        generateJoinedHits(integrationsHitsArray, 'Integrations'),
         generateJoinedHits(guidesHitsArray, 'Guides'),
+        generateJoinedHits(partnersHitsArray, 'Partners'),
+        generateJoinedHits(integrationsHitsArray, 'Integrations'),
         generateJoinedHits(apiHitsArray, 'API')
     ].filter((item) => item !== null);
 
