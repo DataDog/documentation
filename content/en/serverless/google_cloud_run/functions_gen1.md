@@ -72,34 +72,16 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-1. **Install dependencies**. Run the following commands in the terminal of your source directory:
-   ```shell
-   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-   wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
-   ```
-   You can also install the tracer using the following Maven dependency:
-   ```xml
-   <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-antrun-plugin</artifactId>
-       <version>1.8</version>
-       <executions>
-           <execution>
-               <phase>initialize</phase>
-               <configuration>
-                   <tasks>
-                       <get src="https://dtdg.co/latest-java-tracer" dest="dd-java-agent.jar" />
-                        <get src="https://dtdg.co/latest-serverless-compat-java-agent" dest="dd-serverless-compat-java-agent.jar" />
-                   </tasks>
-               </configuration>
-               <goals>
-                   <goal>run</goal>
-               </goals>
-           </execution>
-       </executions>
-   </plugin>
-   ```
+1. **Install dependencies**. Download the Datadog Java tracer and serverless compatibility layer:
 
+   
+   Download `dd-java-agent.jar` and `dd-serverless-compat-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
+   ```shell
+   wget -O /path/to/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   wget -O /path/to/dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
+   ```
+   
+   For alternative ways to download the agent, see the [Datadog Java Agent documentation][13].
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `dd-java-agent` to ensure you have access to enhancements and bug fixes.
 
 
@@ -154,6 +136,8 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
 
 ## Example Functions
+The following example contains a sample function with tracing and metrics set up.
+
 {{< programming-lang-wrapper langs="nodejs,python" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
@@ -218,6 +202,71 @@ public class Example implements HttpFunction {
   }
 }
 ```
+You can also install the tracer using the following Maven dependency:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cloudfunctions</groupId>
+    <artifactId>http-function</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.release>17</maven.compiler.release>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.cloud.functions</groupId>
+            <artifactId>functions-framework-api</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datadoghq</groupId>
+            <artifactId>java-dogstatsd-client</artifactId>
+            <version>4.4.3</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <excludes>
+                        <exclude>.google/</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <tasks>
+                                <get src="https://dtdg.co/latest-serverless-compat-java-agent" dest="dd-serverless-compat-java-agent.jar" />
+                                <get src="https://dtdg.co/latest-java-tracer" dest="dd-java-agent.jar" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+        </plugins>
+    </build>
+</project>
+```
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -264,3 +313,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
+[13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot

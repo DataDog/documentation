@@ -336,6 +336,17 @@ If you are deploying a new Cloud Run function for the first time through the con
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
 
+#### **Add Service Label** in Google's Cloud Run Function Info Panel
+
+Tag your GCP entity with the `service` label to correlate your traces with your service:
+
+Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+
+| Name      | Value                                                       |
+|-----------|-------------------------------------------------------------|
+| `service` | The name of your service matching the `DD_SERVICE` env var. |
+
+
 ## Environment variables
 
 | Variable         | Description                                                                                                                                                                 |
@@ -352,16 +363,6 @@ If you are deploying a new Cloud Run function for the first time through the con
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
 `FUNCTION_TARGET` can also be found on the source tab inside Google console: `Function entry point`.
-
-### **Add Service Label** in Google's Cloud Run Function Info Panel. 
-
-Tag your GCP entity with the `service` label to correlate your traces with your service:
-
-Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
-
-| Name      | Value                                                       |
-   |-----------|-------------------------------------------------------------|
-| `service` | The name of your service matching the `DD_SERVICE` env var. |
 
 ## Example application
 
