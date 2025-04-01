@@ -13,7 +13,10 @@ further_reading:
       text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-warning">TThe Datadog for Government platform exclusively supports SAML or basic username/email and password authentication. Before configuring SAML authentication, you must establish at least one username/email and password account to ensure continued access during the setup process.
+
+If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
+
 {{< /site-region >}}
 
 ## Personal settings
