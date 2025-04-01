@@ -8,11 +8,33 @@ function buildMarkup(templateData: MarkdocTemplateData) {
   const templater = new DocTemplater(templateData);
 
   return `
+${templater.buildFrontmatter()}
+
 ## Overview
   
 This is a template for a customizable doc. It includes some example tags and resources.
   
 This paragraph is top-level content (content that is not inside an \`if\` tag). It will show on the page regardless of any filters.
+
+## Conditional content example
+  
+The \`if\` tags on this generated page are already set up for the filters you configured in the Page Wizard.
+  
+You might want to leave this section at the bottom of your page for reference until you're finished writing content.
+
+{% alert level="info" %}
+Change any of the filters for this page to update the ${templateData.filters.length} lines below.
+{% /alert %}
+
+${templater.buildIfBlocks()}
+
+## Valid traits and their values (option IDs)
+  
+Just for your reference, here's a handy list of all the traits available on this page, and the valid values for each trait.
+
+You can use this table to populate the \`equals\` function in your \`if\` tags: \`equals(<TRAIT>, <VALUE>)\`. Example: \`${templater.buildEqualsFnExample()}\`. For details on using \`if\` tags, see the [relevant section of the Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference#If-and-if/else-(conditional-display-tag)).
+  
+${templater.buildTraitsAndValuesTable()}
   
 ## Guidelines and resources
   
@@ -20,29 +42,7 @@ This paragraph is top-level content (content that is not inside an \`if\` tag). 
 - If you can't keep headers at the top level, follow the [best practices for avoiding duplicate headers](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers) to make sure your page's right nav works properly.
 - Need to add an alert or other element? See the [Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference).
 - If you need to link to this page, follow the [best practices for linking to a customizable doc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL).
-  
-### Displaying content conditionally
-  
-To only display content if a given trait has a particular value, wrap that content in an \`if\` tag:
-  
-\`\`\`
-{% if equals($<TRAIT_ID>, "<TRAIT_VALUE>") %}
-Your content goes here.
-{% /if %}
-\`\`\`
-  
-Lots of pre-configured \`if\` blocks are included in the next section, but just for your reference, here's a handy list of all the traits available on this page, and the valid values for each trait.
-  
-${templater.buildTraitsAndValuesTable()}
-  
-## Conditional content example
-  
-The \`if\` tags on this generated page are already set up for the filters you configured in the Page Wizard.
-  
-You might want to leave this section at the bottom of your page for reference until you're finished writing content.
-
-${templater.buildIfBlocks()}
-`;
+`.trimStart();
 }
 
 function MarkdocTemplate({
@@ -63,7 +63,7 @@ function MarkdocTemplate({
   };
 
   const contents = buildMarkup(templateData);
-  return <Code contents={contents} language="markdoc" />;
+  return <Code contents={contents} language="markdown" />;
 }
 
 export default MarkdocTemplate;

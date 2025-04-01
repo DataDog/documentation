@@ -9,21 +9,21 @@ export class DocTemplater {
 
   buildFrontmatter() {
     let frontmatter = `---
-        title: Your Title Here`;
+title: Your Title Here`;
 
     if (this.data.filters.length > 0) {
       frontmatter += `
-        content_filters:`;
+content_filters:`;
 
       this.data.filters.forEach((filter) => {
         frontmatter += `
-          - trait_id: ${filter.trait_id}
-            option_group_id: ${filter.option_group_id}`;
+  - trait_id: ${filter.trait_id}
+    option_group_id: ${filter.option_group_id}`;
       });
     }
 
     frontmatter += `
-        ---`;
+---`;
 
     return frontmatter;
   }
@@ -45,6 +45,21 @@ Your ${option.label}-specific content goes here.
     return markup;
   }
 
+  buildEqualsFnExample() {
+    const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
+    if (filters.length === 0) {
+      return '';
+    }
+
+    const firstFilter = filters[0];
+    const firstFilterTraitLabel = this.data.filtersManifest.filtersByTraitId[firstFilter.config.trait_id].config.label;
+    const firstFilterOption = Object.values(
+      this.data.filtersManifest.optionGroupsById[firstFilter.config.option_group_id]
+    )[0];
+
+    return `equals($${firstFilter.config.trait_id}, "${firstFilterOption.id}")`;
+  }
+
   buildNestedIfBlockExample() {
     const manifest = this.data.filtersManifest;
 
@@ -55,6 +70,8 @@ Your ${option.label}-specific content goes here.
 
     const firstFilter = filters[0];
     const secondFilter = filters[1];
+    const firstFilterTraitLabel = manifest.filtersByTraitId[firstFilter.config.trait_id].config.label;
+    const secondFilterTraitLabel = manifest.filtersByTraitId[secondFilter.config.trait_id].config.label;
     const firstFilterOption = Object.values(manifest.optionGroupsById[firstFilter.config.option_group_id])[0];
     const secondFilterOption = Object.values(manifest.optionGroupsById[secondFilter.config.option_group_id])[0];
 
@@ -64,13 +81,17 @@ Your ${option.label}-specific content goes here.
 You can nest \`if\` tags to create more complex conditional content. For example, if you have two filters, you can create a nested \`if\` tag to show content based on the combination of the two filters, as shown below.
     
 Use "end" comments as shown to avoid confusion around which \`if\` tag is being closed.
+
+{% alert level="info" %}
+To make additional content display below this alert, choose \`${firstFilterOption.id}\` for the ${firstFilterTraitLabel} filter and \`${secondFilterOption.id}\` for the ${secondFilterTraitLabel} filter.
+{% /alert %}
     
 <!-- ${firstFilterOption.label} -->
 {% if equals($${firstFilter.config.trait_id}, "${firstFilterOption.id}") %}
     
 <!-- ${firstFilterOption.label} > ${secondFilterOption.label} -->
 {% if equals($${secondFilter.config.trait_id}, "${secondFilterOption.id}") %}
-Your content goes here.
+This line of text only displays when the ${firstFilterTraitLabel} filter is set to \`${firstFilterOption.label}\` and the ${secondFilterTraitLabel} filter is set to \`${secondFilterOption.label}\`.
 {% /if %}
 <!-- end ${firstFilterOption.label} > ${secondFilterOption.label} -->
     
@@ -101,15 +122,14 @@ Your content goes here.
       // Create a new row
       table += '---\n';
 
-      // Add the trait label
-      const traitLabel = this.data.wizardCustomizationConfig.traitsById[filter.config.trait_id].label;
-      table += `* ${traitLabel}\n`;
+      // Add the trait id
+      table += `* \`$${filter.config.trait_id}\`\n`;
 
-      // Add the valid values as a bulleted list in a single cell
+      // Add the valid option values as a bulleted list in a single cell
       table += `*\n`;
       const options = Object.values(this.data.filtersManifest.optionGroupsById[filter.config.option_group_id]);
       options.forEach((option) => {
-        table += `  * ${option.label}\n`;
+        table += `  * \`"${option.id}"\`\n`;
       });
     });
 
