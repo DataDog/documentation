@@ -105,7 +105,7 @@ You can adjust your Session Sampling and Session Replay Sampling rates from the 
 To update your RUM Application:
 
 1. Go to your RUM application from the [Application Management][4] list.
-2. On the Instrument your application page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
+2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
 3. Copy and paste the configuration snippet to your `nginx.conf` file.
 
 ## Troubleshooting

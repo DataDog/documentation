@@ -77,7 +77,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 {{< tabs >}}
 {{% tab "RUM" %}}
 
-Server-side (Auto-instrumentation)
+Server-side (Auto-Instrumentation)
 : This method installs RUM by configuring your server to inject the SDK. RUM SDK injection is in Preview. Learn more about the auto-instrumentation method [here][1].
 
 npm (node package manager)

@@ -20,23 +20,23 @@ Instrumenting your application allows observability data from your application t
 
 ## Instrumentation types
 
-There are two main approaches to instrument your application: automatic or custom instrumentation.
+There are two main approaches to instrument your application: automatic or manual instrumentation.
 
-### Auto-instrumentation
+### Auto-Instrumentation
 
 {{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="true" header="Try the Auto-Instrumentation Preview!">}}
 
 You can set RUM configs on your web servers and Datadog will automatically inject RUM configs to instrument your RUM applications. Learn more about <a href="/real_user_monitoring/browser/setup/server">Auto-Instrumentation.</a>
 {{< /callout >}}
 
-Automatically add RUM JS to your web app HTML with minimal steps by installing the RUM injector by downloading the RUM Installer or by CLI (running a command).
+Download the RUM installer or use CLI to install the RUM Injector and automatically add RUM JS to your web app HTML.
 
 **SRE and engineering teams** without access to frontend code or **teams who need to manage** all observability needs centrally may find this useful for:
 
 - Unlocking performance data across all applications upon setting up RUM
 - Start holistically monitoring application performance across the organization
 
-To learn more, see [auto-instrumentation][1].
+To learn more, see [Auto-Instrumentation][1].
 
 ### Client-side (manual instrumentation)
 
@@ -48,7 +48,7 @@ Add the RUM SDK manually to your application code.
 - Product needs (user flow analysis, user segmentation, feature flag tracking, and so on)
 - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation
 
-To learn more, see [client-side instrumentation][2].
+To learn more, see [Client-Side Instrumentation][2].
 
 ## Further reading
 

@@ -35,11 +35,13 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 
 {{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
 
-1. Download the Datadog RUM installer.
+1. Download the [Datadog RUM installer][1].
 2. Follow the installer as an administrator by opening the `.msi` file.
 3. Follow the prompts and accept the license agreement.
 4. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 5. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
+
+[1]: https://www.npmjs.com/package/@datadog/browser-rum
 
 {{% /collapse-content %}}
 
@@ -60,7 +62,7 @@ You can adjust your Session Sampling and Session Replay Sampling rates from the 
 To update your RUM Application:
 
 1. Go to your RUM application from the [Application Management][3] list.
-2. On the Instrument Your Application page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
+2. On the **SDK Configuration** page, adjust the slider or enter a specific percentage in the input box for Session Sampling or Session Replay Sampling.
 3. Copy and replace the code in the Datadog RUM config file for the IIS site that you instrumented.
 
 ## Troubleshooting
