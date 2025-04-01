@@ -11,6 +11,10 @@ further_reading:
       text: 'Group Attribute Mapping'
 ---
 
+<div class="alert alert-info">
+SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+</div>
+
 See the following instructions to synchronize your Datadog users with Okta using SCIM.
 
 For the capabilities and limitations of this feature, see [SCIM][1].
