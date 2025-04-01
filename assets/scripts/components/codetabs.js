@@ -63,14 +63,6 @@ const initCodeTabs = () => {
                     const activeTabLi = activeLangTab.closest('li')
                     activeTabLi.classList.add('active')
                     activePane.classList.add('active', 'show')
-
-                    // Check if the first tab is active
-                    const isFirstTab = Array.from(tabsList).indexOf(activeTabLi) === 0
-                    if (isFirstTab) {
-                        codeTabsElement.classList.add('first-tab-active')
-                    } else {
-                        codeTabsElement.classList.remove('first-tab-active')
-                    }
                 }
 
                 const currentActiveTab = codeTabsElement.querySelector('.nav-tabs li.active')
@@ -78,11 +70,9 @@ const initCodeTabs = () => {
                 // If we got this far and no tabs are highlighted, activate the first tab in the list of code tabs.
                 if (!currentActiveTab) {
                     const firstTab = tabsList.item(0)
-                    const firstTabActiveLang = firstTab.querySelector('a').dataset.lang
                     const firstTabPane = codeTabsElement.querySelector(`.tab-pane[data-lang="${firstTabActiveLang}"]`)
                     firstTab.classList.add('active')
                     firstTabPane.classList.add('active', 'show')
-                    codeTabsElement.classList.add('first-tab-active')
                 }
             })
         }
@@ -110,9 +100,9 @@ const initCodeTabs = () => {
                 if (window.location.hash) {
                     setTimeout(function () {
                         scrollToAnchor(tabQueryParameter, window.location.hash);
-                    }, 300);
+                    }, 100);
                 }
-            }else{
+            } else {
                 activateCodeTab(firstTab)
             }
         } else {
@@ -126,7 +116,7 @@ const initCodeTabs = () => {
         if (codeTabsList.length > 0) {
             codeTabsList.forEach(codeTabsElement => {
                 let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
-                allTabLinksNodeList.forEach((link, index) => {
+                allTabLinksNodeList.forEach((link) => {
                     link.addEventListener('click', e => {
                         e.preventDefault();
 
@@ -141,16 +131,6 @@ const initCodeTabs = () => {
                         });
                         getContentTabHeight();
                     });
-
-                    // Add hover listeners for the first tab
-                    if (index === 0) {
-                        link.addEventListener('mouseenter', () => {
-                            codeTabsElement.classList.add('first-tab-hover');
-                        });
-                        link.addEventListener('mouseleave', () => {
-                            codeTabsElement.classList.remove('first-tab-hover');
-                        });
-                    }
                 });
             });
         }
