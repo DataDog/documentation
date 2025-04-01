@@ -17,7 +17,7 @@ Use Observability Pipelines' Datadog Agent source to receive logs from the Datad
 
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
-**Note**: If your Agent is running in a Docker container, you need to exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. Otherwise, you get duplicate Observability Pipelines logs because the Worker also sends logs to Datadog. See [Docker Log Collection][2] or [Setting environment variables for Helm][3] for more information.
+**Note**: If your Agent is running in a Docker container, you need to exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. Otherwise, you get duplicate Observability Pipelines logs because the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][2] or [Setting environment variables for Helm][3] for more information.
 
 {{< tabs >}}
 {{% tab "Agent configuration file" %}}
