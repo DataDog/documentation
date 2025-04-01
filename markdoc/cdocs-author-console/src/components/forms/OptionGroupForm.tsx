@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import OptionGroupSelector from '../selectors/OptionGroupSelector';
+import OptionGroupSelector from '../forms/OptionGroupSelector';
 import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

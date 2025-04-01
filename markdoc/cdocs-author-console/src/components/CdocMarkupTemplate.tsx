@@ -1,6 +1,6 @@
-import { WizardFilter } from './types';
+import { WizardFilter } from '../types';
 import { CustomizationConfig } from 'cdocs-data';
-import Code from '../Code';
+import Code from './Code';
 import { DocTemplater } from './DocTemplater';
 
 function buildMarkup(templater: DocTemplater) {
@@ -42,7 +42,7 @@ ${templater.buildTraitsAndValuesTable()}
 `.trimStart();
 }
 
-function MarkdocTemplate({
+function CdocMarkupTemplate({
   filters,
   wizardCustomizationConfig
 }: {
@@ -55,7 +55,7 @@ function MarkdocTemplate({
   });
 
   const contents = buildMarkup(templater);
-  return <Code contents={contents} language="markdown" />;
+  return <Code contents={contents} language="text" />;
 }
 
-export default MarkdocTemplate;
+export default CdocMarkupTemplate;

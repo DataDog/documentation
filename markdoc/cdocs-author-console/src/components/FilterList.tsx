@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { v4 as uuidv4 } from 'uuid';
 import AddIcon from '@mui/icons-material/Add';
 import FilterForm from './FilterForm';
-import { WizardFilter } from './types';
+import { WizardFilter } from '../types';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 

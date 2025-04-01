@@ -1,5 +1,5 @@
-import MarkdocTemplate from './MarkdocTemplate';
-import { WizardFilter } from './types';
+import CdocMarkupTemplate from './CdocMarkupTemplate';
+import { WizardFilter } from '../types';
 import { CustomizationConfig } from 'cdocs-data';
 
 function SetupInstructions({
@@ -34,7 +34,7 @@ function SetupInstructions({
           <li>Add the markup below to it.</li>
         </ol>
       </p>
-      <MarkdocTemplate filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
+      <CdocMarkupTemplate filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
     </div>
   );
 }

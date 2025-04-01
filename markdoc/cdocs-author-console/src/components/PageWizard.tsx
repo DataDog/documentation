@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
-import { WizardFilter } from './types';
+import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {

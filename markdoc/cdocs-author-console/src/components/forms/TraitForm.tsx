@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import TraitSelector from '../selectors/TraitSelector';
+import TraitSelector from '../forms/TraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -69,8 +69,6 @@ function TraitForm({
 
   const handleNewTraitSave = () => {
     let error: string | null = null;
-
-    console.log('Handling new trait save, newTraitConfig: ', newTraitConfig);
 
     if (!newTraitConfig.id || !newTraitConfig.label) {
       error = 'Trait ID and trait label are required.';

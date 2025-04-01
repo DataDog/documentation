@@ -13,7 +13,7 @@ import ReactTimeAgo from 'react-time-ago';
 import QuickFilterBuilder from './components/QuickFilterBuilder';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
 import BoltIcon from '@mui/icons-material/Bolt';
-import PageWizard from './components/wizard/PageWizard';
+import PageWizard from './components/PageWizard';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -75,7 +75,6 @@ function App() {
     fetch('/data.json')
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setConsoleData(data);
         if (Object.keys(data.errorsByFilePath).length > 0) {
           setHasErrors(true);

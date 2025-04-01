@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import TraitSelector from './selectors/TraitSelector';
-import OptionGroupSelector from './selectors/OptionGroupSelector';
+import TraitSelector from './forms/TraitSelector';
+import OptionGroupSelector from './forms/OptionGroupSelector';
 import Code from './Code';
-import { WizardFilter } from './wizard/types';
+import { WizardFilter } from '../types';
 import { v4 as uuidv4 } from 'uuid';
-import { DocTemplater } from './wizard/DocTemplater';
+import { DocTemplater } from './DocTemplater';
 
 function buildFrontmatterMarkup({
   traitId,
@@ -29,7 +29,6 @@ function buildWizardFilter({
   customizationConfig: CustomizationConfig;
 }): WizardFilter {
   const optionGroup = [...customizationConfig.optionGroupsById[optionGroupId]];
-  console.log('optionGroup', optionGroup);
   const optionIds = optionGroup.map((option) => option.id);
   const optionsById = optionIds.reduce(
     (acc, optionId) => {
@@ -129,7 +128,7 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
           <h3>
             Example <code>if</code> blocks
           </h3>
-          <Code contents={ifBlocksContent} language="markdown" />
+          <Code contents={ifBlocksContent} language="text" />
         </>
       )}
     </div>

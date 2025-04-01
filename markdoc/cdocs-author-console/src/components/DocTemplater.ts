@@ -1,5 +1,5 @@
 import { CustomizationConfig, buildFiltersManifest, Frontmatter, FiltersManifest } from 'cdocs-data';
-import { WizardFilter } from './types';
+import { WizardFilter } from '../../types';
 
 export class DocTemplater {
   filters: WizardFilter[];
