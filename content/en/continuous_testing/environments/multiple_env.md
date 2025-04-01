@@ -51,7 +51,7 @@ datadog-ci synthetics run-tests \
   --override startUrlSubstitutionRegex="<regex>|<rewriting-rule>"
 ```
 
-This field expects a string containing two parts, separated by a pipe character `|`: 
+This field expects a string containing two parts, separated by a pipe character `|`:
 
 `<regex>|<rewriting-rule>`
 - `<regex>`: Regular expression (regex) to apply to the default starting URL
@@ -79,8 +79,7 @@ With this override, the URL `https://my-app.com/some/path` gets rewritten as `ht
 Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
 
 <div class="alert alert-info">
-Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewritting rule&gt;|&lt;modifiers&gt;</code>.</br></br>
-The sed syntax is often used with a slash <code>/</code> separator, for example: <code>s/&lt;regex&gt;/&lt;rewritting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
+Only the pipe <code>|</code> syntax is supported for URL substitution regexes. Sed syntax and other delimiter characters are not supported.
 </div>
 
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
@@ -102,7 +101,7 @@ datadog-ci synthetics run-tests \
   --override resourceUrlSubstitutionRegexes="<regex2>|<rewriting-rule2>"
 ```
 
-The `resourceUrlSubstitutionRegexes` field expects strings, each containing two parts, separated by a pipe character `|`: 
+The `resourceUrlSubstitutionRegexes` field expects strings, each containing two parts, separated by a pipe character `|`:
 
 `<regex>|<rewriting-rule>`
 - `<regex>`: Regular expression (regex) to apply to the resource URL
@@ -116,9 +115,9 @@ Consider the following `<regex>|<rewriting-rule>` string:
 https://prod.my-app.com/assets/(.*)|https://staging.my-app.com/assets/$1
 ```
 
-The regex, `https://prod.my-app.com/assets/(.*)`, uses a capture group to capture the path of the resource URL. 
+The regex, `https://prod.my-app.com/assets/(.*)`, uses a capture group to capture the path of the resource URL.
 
-The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-looking URL that points to `staging.my-app.com` and appends the captured group using `$1`. 
+The rewriting rule, `https://staging.my-app.com/assets/$1`, produces a similar-looking URL that points to `staging.my-app.com` and appends the captured group using `$1`.
 
 As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritten as `https://staging.my-app.com/assets/js/chunk-123.js`.
 
@@ -135,9 +134,8 @@ With this override, the URL `https://my-app.com/some/path` gets rewritten as `ht
 <div class="alert alert-info">
 The <code>resourceUrlSubstitutionRegexes</code> is also applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
 </div>
-
 <div class="alert alert-info">
-Apart from the pipe <code>|</code> syntax presented above, <code>resourceUrlSubstitutionRegexes</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewriting rule&gt;|&lt;modifiers&gt;</code>.</br></br> The sed syntax is often used with a slash <code>/</code> separator, for example: <code>s/&lt;regex&gt;/&lt;rewriting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
+Only the pipe <code>|</code> syntax is supported for URL substitution regexes. Sed syntax and other delimiter characters are not supported.
 </div>
 
 ## Further reading
