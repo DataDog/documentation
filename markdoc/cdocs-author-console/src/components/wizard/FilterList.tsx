@@ -8,12 +8,15 @@ import { WizardFilter } from './types';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+/**
+ * A list of filters that can be added, edited, and deleted.
+ */
 function FilterList({
   customizationConfig,
-  onChange
+  onPublish
 }: {
   customizationConfig: CustomizationConfig;
-  onChange: ({
+  onPublish: ({
     filters,
     wizardCustomizationConfig
   }: {
@@ -56,7 +59,7 @@ function FilterList({
     const newFiltersByUuid = { ...filtersByUuid };
     delete newFiltersByUuid[filter.uuid];
     setFiltersByUuid(newFiltersByUuid);
-    onChange({ filters: Object.values(newFiltersByUuid), wizardCustomizationConfig });
+    onPublish({ filters: Object.values(newFiltersByUuid), wizardCustomizationConfig });
   };
 
   const onFilterRowEdit = (filter: WizardFilter) => {
@@ -66,7 +69,7 @@ function FilterList({
   const onSave = () => {
     setCurrentFilterUuid(null);
     setSavedFiltersByUuid({ ...filtersByUuid });
-    onChange({ filters: Object.values(filtersByUuid), wizardCustomizationConfig });
+    onPublish({ filters: Object.values(filtersByUuid), wizardCustomizationConfig });
 
     // Reset the wizard's customization config to the original config
     const newWizardCustomizationConfig = { ...customizationConfig };

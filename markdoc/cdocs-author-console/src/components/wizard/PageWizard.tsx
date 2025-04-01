@@ -32,7 +32,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
       )}
       <div style={{ marginBottom: '30px' }}>
         <h1>Filters</h1>
-        <FilterList customizationConfig={customizationConfig} onChange={onFilterListChange} />
+        <FilterList customizationConfig={customizationConfig} onPublish={onFilterListChange} />
       </div>
       {filters.length > 0 && (
         <div>
