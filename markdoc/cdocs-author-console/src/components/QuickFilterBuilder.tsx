@@ -7,7 +7,7 @@ import { WizardFilter } from './wizard/types';
 import { v4 as uuidv4 } from 'uuid';
 import { DocTemplater } from './wizard/DocTemplater';
 
-function buildFilterConfig({
+function buildFrontmatterMarkup({
   traitId,
   optionGroupId
 }: {
@@ -20,15 +20,15 @@ function buildFilterConfig({
 }
 
 function buildWizardFilter({
-  trait_id,
-  option_group_id,
+  traitId,
+  optionGroupId,
   customizationConfig
 }: {
-  trait_id: string;
-  option_group_id: string;
+  traitId: string;
+  optionGroupId: string;
   customizationConfig: CustomizationConfig;
 }): WizardFilter {
-  const optionGroup = [...customizationConfig.optionGroupsById[option_group_id]];
+  const optionGroup = [...customizationConfig.optionGroupsById[optionGroupId]];
   console.log('optionGroup', optionGroup);
   const optionIds = optionGroup.map((option) => option.id);
   const optionsById = optionIds.reduce(
@@ -46,15 +46,15 @@ function buildWizardFilter({
   );
 
   return {
-    trait_id,
-    option_group_id,
+    trait_id: traitId,
+    option_group_id: optionGroupId,
     uuid: uuidv4(),
     customizationConfig: {
       traitsById: {
-        [trait_id]: { ...customizationConfig.traitsById[trait_id] }
+        [traitId]: { ...customizationConfig.traitsById[traitId] }
       },
       optionGroupsById: {
-        [option_group_id]: optionGroup
+        [optionGroupId]: optionGroup
       },
       optionsById
     }
@@ -64,43 +64,34 @@ function buildWizardFilter({
 export default function QuickFilterBuilder(props: { customizationConfig: CustomizationConfig }) {
   const [traitId, setTraitId] = useState<string | null>(null);
   const [optionGroupId, setOptionGroupId] = useState<string | null>(null);
-  const [filterConfig, setFilterConfig] = useState<string>(buildFilterConfig({ traitId, optionGroupId }));
   const [ifBlocksContent, setIfBlocksContent] = useState<string>('');
+
+  const refreshIfBlocks = ({ traitId, optionGroupId }: { traitId: string | null; optionGroupId: string | null }) => {
+    if (!traitId || !optionGroupId) {
+      setIfBlocksContent('');
+      return;
+    }
+
+    const filter = buildWizardFilter({
+      traitId,
+      optionGroupId,
+      customizationConfig: props.customizationConfig
+    });
+    const templater = new DocTemplater({
+      filters: [filter],
+      customizationConfig: props.customizationConfig
+    });
+    setIfBlocksContent(templater.buildIfBlocks());
+  };
 
   const handleTraitSelect = (newTraitId: string) => {
     setTraitId(newTraitId);
-    setFilterConfig(buildFilterConfig({ traitId: newTraitId, optionGroupId }));
-    if (optionGroupId) {
-      console.log('building if blocks');
-      const filter = buildWizardFilter({
-        trait_id: newTraitId,
-        option_group_id: optionGroupId,
-        customizationConfig: props.customizationConfig
-      });
-      const templater = new DocTemplater({
-        filters: [filter],
-        customizationConfig: props.customizationConfig
-      });
-      setIfBlocksContent(templater.buildIfBlocks());
-    }
+    refreshIfBlocks({ traitId: newTraitId, optionGroupId });
   };
 
   const handleOptionGroupIdSelect = (newOptionGroupId: string) => {
     setOptionGroupId(newOptionGroupId);
-    setFilterConfig(buildFilterConfig({ traitId, optionGroupId: newOptionGroupId }));
-    if (traitId) {
-      console.log('building if blocks');
-      const filter = buildWizardFilter({
-        trait_id: traitId,
-        option_group_id: newOptionGroupId,
-        customizationConfig: props.customizationConfig
-      });
-      const templater = new DocTemplater({
-        filters: [filter],
-        customizationConfig: props.customizationConfig
-      });
-      setIfBlocksContent(templater.buildIfBlocks());
-    }
+    refreshIfBlocks({ traitId, optionGroupId: newOptionGroupId });
   };
 
   return (
@@ -112,7 +103,7 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
         </a>{' '}
         with an <strong>existing</strong> trait and option group.
       </p>
-      <p>Use the dropdowns below to generate markup, then click any snippet to copy it.</p>
+      <p>Use the dropdowns below to generate markup.</p>
 
       <h2>Filter configuration</h2>
 
@@ -124,23 +115,23 @@ export default function QuickFilterBuilder(props: { customizationConfig: Customi
       <p>Select the list of options to offer for the filter, such as "Linux, Windows, and MacOS".</p>
       <OptionGroupSelector customizationConfig={props.customizationConfig} onSelect={handleOptionGroupIdSelect} />
 
-      <h2>Generated markup</h2>
+      {traitId && optionGroupId && (
+        <>
+          <h2>Generated markup</h2>
+          <p>Click any snippet to copy it.</p>
 
-      <h3>Frontmatter</h3>
-      <p>
-        Add this to the <code>content_filters:</code> section of your page's frontmatter:
-      </p>
-      <Code contents={filterConfig} language="yaml" />
+          <h3>Frontmatter</h3>
+          <p>
+            Add this to the <code>content_filters:</code> section of your page's frontmatter:
+          </p>
+          <Code contents={buildFrontmatterMarkup({ traitId, optionGroupId })} language="yaml" />
 
-      <h3>
-        Example <code>if</code> blocks
-      </h3>
-      {!ifBlocksContent && (
-        <p>
-          Once you've selected a trait and option group, example <code>if</code> blocks will appear here.
-        </p>
+          <h3>
+            Example <code>if</code> blocks
+          </h3>
+          <Code contents={ifBlocksContent} language="markdown" />
+        </>
       )}
-      {ifBlocksContent && <Code contents={ifBlocksContent} language="markdown" />}
     </div>
   );
 }
