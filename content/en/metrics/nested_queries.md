@@ -8,10 +8,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  This feature is in Preview. To enable this feature, reach out to Customer Success. 
-{{< /callout >}}  
-
 By default, every metric query in Datadog consists of two layers of aggregation. Nested queries allows you to reuse the results of a previous query in a subsequent one.
 
 {{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}

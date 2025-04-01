@@ -45,124 +45,104 @@ menu:
       pre: hex-ringed
       parent: essentials_heading
       weight: 10000
-    - name: Datadog
-      identifier: getting_started_datadog
-      url: getting_started/application/
-      parent: getting_started
-      weight: 1
-    - name: Datadog Site
-      identifier: getting_started_datadog_site
-      url: getting_started/site/
-      parent: getting_started
-      weight: 2
-    - name: DevSecOps
-      identifier: getting_started_devsecops
-      url: getting_started/devsecops
-      parent: getting_started
-      weight: 3
-    - name: Serverless for AWS Lambda
-      identifier: getting_started_serverless
-      url: getting_started/serverless/
-      parent: getting_started
-      weight: 4
     - name: Agent
       identifier: getting_started_agent
       url: getting_started/agent/
       parent: getting_started
-      weight: 5
-    - name: Integrations
-      identifier: getting_started_integrations
-      url: getting_started/integrations/
-      parent: getting_started
-      weight: 6
-    - name: AWS
-      identifier: getting_started_with_aws
-      url: getting_started/integrations/aws/
-      weight: 601
-      parent: getting_started_integrations
-    - name: Azure
-      identifier: getting_started_with_azure
-      url: getting_started/integrations/azure/
-      weight: 602
-      parent: getting_started_integrations
-    - name: Google Cloud
-      identifier: getting_started_with_google_cloud
-      url: getting_started/integrations/google_cloud/
-      weight: 603
-      parent: getting_started_integrations
-    - name: Terraform
-      identifier: getting_started_with_terraform
-      url: getting_started/integrations/terraform/
-      weight: 604
-      parent: getting_started_integrations
-    - name: Containers
-      identifier: getting_started_containers
-      url: getting_started/containers/
-      parent: getting_started
-      weight: 7
-    - name: Autodiscovery
-      identifier: getting_started_containers_autodiscovery
-      url: getting_started/containers/autodiscovery
-      parent: getting_started_containers
-      weight: 701
-    - name: Datadog Operator
-      identifier: getting_started_containers_operator
-      url: getting_started/containers/datadog_operator
-      parent: getting_started_containers
-      weight: 702
-    - name: Dashboards
-      identifier: getting_started_dashboards
-      url: getting_started/dashboards/
-      parent: getting_started
-      weight: 8
-    - name: Monitors
-      identifier: getting_started_monitors
-      url: getting_started/monitors/
-      parent: getting_started
-      weight: 9
-    - name: Logs
-      identifier: getting_started_logs
-      url: getting_started/logs/
-      parent: getting_started
-      weight: 10
-    - name: APM Tracing
-      identifier: getting_started_collect_traces
-      url: getting_started/tracing/
-      parent: getting_started
-      weight: 11
-    - name: Profiler
-      identifier: getting_started_profiler
-      url: getting_started/profiler/
-      parent: getting_started
-      weight: 12
-    - name: Tags
-      identifier: tagging_
-      url: getting_started/tagging/
-      parent: getting_started
-      weight: 13
-    - name: Assigning Tags
-      identifier: assigning_tags
-      url: getting_started/tagging/assigning_tags
-      parent: tagging_
-      weight: 1301
-    - name: Unified Service Tagging
-      identifier: unified_service_tagging
-      url: getting_started/tagging/unified_service_tagging
-      parent: tagging_
-      weight: 1302
-    - name: Using Tags
-      identifier: using_tags
-      url: getting_started/tagging/using_tags
-      parent: tagging_
-      weight: 1303
+      weight: 1
     - name: API
       identifier: getting_started_api
       url: getting_started/api/
       parent: getting_started
+      weight: 2
+    - name: APM Tracing
+      identifier: getting_started_collect_traces
+      url: getting_started/tracing/
+      parent: getting_started
+      weight: 3
+    - name: Containers
+      identifier: getting_started_containers
+      url: getting_started/containers/
+      parent: getting_started
+      weight: 5
+    - name: Autodiscovery
+      identifier: getting_started_containers_autodiscovery
+      url: getting_started/containers/autodiscovery
+      parent: getting_started_containers
+      weight: 501
+    - name: Datadog Operator
+      identifier: getting_started_containers_operator
+      url: getting_started/containers/datadog_operator
+      parent: getting_started_containers
+      weight: 502
+    - name: Dashboards
+      identifier: getting_started_dashboards
+      url: getting_started/dashboards/
+      parent: getting_started
+      weight: 6
+    - name: Database Monitoring
+      identifier: getting_started_database_monitoring
+      url: getting_started/database_monitoring/
+      parent: getting_started
+      weight: 7
+    - name: Datadog
+      identifier: getting_started_datadog
+      url: getting_started/application/
+      parent: getting_started
+      weight: 8
+    - name: Datadog Site
+      identifier: getting_started_datadog_site
+      url: getting_started/site/
+      parent: getting_started
+      weight: 9
+    - name: DevSecOps
+      identifier: getting_started_devsecops
+      url: getting_started/devsecops
+      parent: getting_started
+      weight: 10
+    - name: Incident Management
+      identifier: getting_started_incident_management
+      url: getting_started/incident_management/
+      parent: getting_started
+      weight: 11
+    - name: Integrations
+      identifier: getting_started_integrations
+      url: getting_started/integrations/
+      parent: getting_started
+      weight: 12
+    - name: AWS
+      identifier: getting_started_with_aws
+      url: getting_started/integrations/aws/
+      weight: 1201
+      parent: getting_started_integrations
+    - name: Azure
+      identifier: getting_started_with_azure
+      url: getting_started/integrations/azure/
+      weight: 1202
+      parent: getting_started_integrations
+    - name: Google Cloud
+      identifier: getting_started_with_google_cloud
+      url: getting_started/integrations/google_cloud/
+      weight: 1203
+      parent: getting_started_integrations
+    - name: Terraform
+      identifier: getting_started_with_terraform
+      url: getting_started/integrations/terraform/
+      weight: 1204
+      parent: getting_started_integrations
+    - name: Logs
+      identifier: getting_started_logs
+      url: getting_started/logs/
+      parent: getting_started
+      weight: 13
+    - name: Monitors
+      identifier: getting_started_monitors
+      url: getting_started/monitors/
+      parent: getting_started
       weight: 14
-    - name: Software Catalog
-      identifier: getting_started_software_catalog
-      url: getting_started/software_catalog/
+    - name: Profiler
+      identifier: getting_started_profiler
+      url: getting_started/profiler/
       parent: getting_started
       weight: 15
     - name: Session Replay
@@ -170,101 +150,126 @@ menu:
       url: getting_started/session_replay/
       parent: getting_started
       weight: 16
-    - name: Synthetic Monitoring and Testing
-      identifier: getting_started_synthetics
-      url: getting_started/synthetics/
+    - name: Security
+      identifier: getting_started_security
+      url: getting_started/security/
       parent: getting_started
-      weight: 18
-    - name: API Tests
-      identifier: getting_started_api_test
-      url: getting_started/synthetics/api_test
-      parent: getting_started_synthetics
-      weight: 1801
-    - name: Browser Tests
-      identifier: getting_started_browser_test
-      url: getting_started/synthetics/browser_test
-      parent: getting_started_synthetics
-      weight: 1802
-    - name: Mobile App Tests
-      identifier: getting_started_mobile_app
-      url: getting_started/synthetics/mobile_app_testing
-      parent: getting_started_synthetics
-      weight: 1803
-    - name: Continuous Testing
-      identifier: getting_started_continuous_testing
-      url: getting_started/continuous_testing/
-      parent: getting_started_synthetics
-      weight: 1804
-    - name: Private Locations
-      identifier: getting_started_private_location
-      url: getting_started/synthetics/private_location
-      parent: getting_started_synthetics
-      weight: 1805
-    - name: Incident Management
-      identifier: getting_started_incident_management
-      url: getting_started/incident_management/
-      parent: getting_started
-      weight: 19
-    - name: Database Monitoring
-      identifier: getting_started_database_monitoring
-      url: getting_started/database_monitoring/
-      parent: getting_started
-      weight: 20
-    - name: Cloud Security Management
-      identifier: getting_started_cloud_security_management
-      url: getting_started/cloud_security_management/
-      parent: getting_started
-      weight: 21
-    - name: Cloud SIEM
-      identifier: getting_started_cloud_siem
-      url: getting_started/cloud_siem/
-      parent: getting_started
-      weight: 22
+      weight: 17
     - name: Application Security Management
       identifier: getting_started_application_security
-      url: getting_started/application_security
+      url: getting_started/security/application_security
+      parent: getting_started_security
+      weight: 1701
+    - name: Cloud Security Management
+      identifier: getting_started_cloud_security_management
+      url: getting_started/security/cloud_security_management/
+      parent: getting_started_security
+      weight: 1702
+    - name: Cloud SIEM
+      identifier: getting_started_cloud_siem
+      url: getting_started/security/cloud_siem/
+      parent: getting_started_security
+      weight: 1703
+    - name: Code Security
+      identifier: getting_started_code_security
+      url: getting_started/code_security/
+      parent: getting_started_security
+      weight: 1704
+    - name: Serverless for AWS Lambda
+      identifier: getting_started_serverless
+      url: getting_started/serverless/
       parent: getting_started
-      weight: 23
-    - name: Workflow Automation
-      identifier: getting_started_workflow_automation
-      url: getting_started/workflow_automation/
+      weight: 18
+    - name: Software Catalog
+      identifier: getting_started_software_catalog
+      url: getting_started/software_catalog/
       parent: getting_started
-      weight: 24
+      weight: 19
     - name: Software Delivery
       identifier: getting_started_software_delivery
       url: getting_started/software_delivery/
       parent: getting_started
-      weight: 25
+      weight: 20
     - name: CI Visibility
       identifier: getting_started_ci_visibility
       url: getting_started/ci_visibility/
       parent: getting_started_software_delivery
-      weight: 2501
+      weight: 2001
     - name: Test Optimization
       identifier: getting_started_test_optimization
       url: getting_started/test_optimization/
       parent: getting_started_software_delivery
-      weight: 2502
+      weight: 2002
     - name: Test Impact Analysis
       identifier: getting_started_test_impact_analysis
       url: getting_started/test_impact_analysis/
       parent: getting_started_software_delivery
-      weight: 2503
-    - name: Code Security
-      identifier: getting_started_code_security
-      url: getting_started/code_security/
+      weight: 2003
+    - name: Synthetic Monitoring and Testing
+      identifier: getting_started_synthetics
+      url: getting_started/synthetics/
+      parent: getting_started
+      weight: 21
+    - name: API Tests
+      identifier: getting_started_api_test
+      url: getting_started/synthetics/api_test
+      parent: getting_started_synthetics
+      weight: 2101
+    - name: Browser Tests
+      identifier: getting_started_browser_test
+      url: getting_started/synthetics/browser_test
+      parent: getting_started_synthetics
+      weight: 2102
+    - name: Mobile App Tests
+      identifier: getting_started_mobile_app
+      url: getting_started/synthetics/mobile_app_testing
+      parent: getting_started_synthetics
+      weight: 2103
+    - name: Continuous Testing
+      identifier: getting_started_continuous_testing
+      url: getting_started/continuous_testing/
+      parent: getting_started_synthetics
+      weight: 2104
+    - name: Private Locations
+      identifier: getting_started_private_location
+      url: getting_started/synthetics/private_location
+      parent: getting_started_synthetics
+      weight: 2205
+    - name: Tags
+      identifier: tagging_
+      url: getting_started/tagging/
       parent: getting_started
       weight: 26
+    - name: Assigning Tags
+      identifier: assigning_tags
+      url: getting_started/tagging/assigning_tags
+      parent: tagging_
+      weight: 2601
+    - name: Unified Service Tagging
+      identifier: unified_service_tagging
+      url: getting_started/tagging/unified_service_tagging
+      parent: tagging_
+      weight: 2702
+    - name: Using Tags
+      identifier: using_tags
+      url: getting_started/tagging/using_tags
+      parent: tagging_
+      weight: 2803
+    - name: Workflow Automation
+      identifier: getting_started_workflow_automation
+      url: getting_started/workflow_automation/
+      parent: getting_started
+      weight: 29
     - name: Learning Center
       identifier: getting_started_learning_center
       url: getting_started/learning_center/
       parent: getting_started
-      weight: 29
+      weight: 30
     - name: Support
       identifier: getting_started_support
       url: getting_started/support/
       parent: getting_started
-      weight: 30
+      weight: 31
     - name: Glossary
       url: glossary/
       pre: features
@@ -829,14 +834,18 @@ menu:
       identifier: otel_guides_migration
       parent: otel_guides
       weight: 1004
+    - name: Migrate to OTel Collector v0.120.0+
+      url: /opentelemetry/guide/migrate/collector_0_120_0
+      parent: otel_guides_migration
+      weight: 10041
     - name: Migrate to OTel Collector v0.95.0+
       url: /opentelemetry/guide/migrate/collector_0_95_0
       parent: otel_guides_migration
-      weight: 10041
+      weight: 10042
     - name: New Operation Name Mappings
       url: /opentelemetry/guide/migrate/migrate_operation_names/
       parent: otel_guides_migration
-      weight: 10042
+      weight: 10043
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
@@ -1123,7 +1132,7 @@ menu:
       identifier: coterm_rules
       parent: coterm
       weight: 3
-    - name: Cloudcraft
+    - name: Cloudcraft (Standalone)
       url: cloudcraft/
       pre: cloudcraft
       identifier: cloudcraft
@@ -1726,11 +1735,16 @@ menu:
       parent: alerting
       identifier: monitors_notify
       weight: 4
+    - name: Notification Rules
+      url: monitors/notify/notification_rules/
+      parent: monitors_notify
+      identifier: monitors_notify_notification_rules
+      weight: 401
     - name: Variables
       url: monitors/notify/variables/
       parent: monitors_notify
       identifier: monitors_notify_variables
-      weight: 401
+      weight: 402
     - name: Downtimes
       url: monitors/downtimes/
       parent: alerting
@@ -1955,155 +1969,151 @@ menu:
       parent: platform_heading
       identifier: software_catalog
       weight: 110000
-    - name: Customize the Software Catalog
+    - name: Set Up
+      url: software_catalog/set_up
+      parent: software_catalog
+      identifier: software_catalog_set_up
+      weight: 1
+    - name: New to Datadog
+      url: software_catalog/set_up/new_to_datadog
+      parent: software_catalog_set_up
+      identifier: software_catalog_set_up_new_to_dd
+      weight: 101
+    - name: Existing Datadog User
+      url: software_catalog/set_up/existing_datadog_user
+      parent: software_catalog_set_up
+      identifier: software_catalog_set_up_existing_dd_user
+      weight: 102
+    - name: Customize
       url: software_catalog/customize
       parent: software_catalog
       identifier: software_catalog_customize
-      weight: 1
-    - name: Create Entries
-      url: software_catalog/customize/create_entries
-      parent: software_catalog_customize
-      identifier: software_catalog_create_entry
-      weight: 101
-    - name: Import Entries from Datadog
-      url: software_catalog/customize/import_entries_dd
-      parent: software_catalog_customize
-      identifier: software_catalog_import_from_telemetries
-      weight: 102
-    - name: Import Entries from Backstage
-      url: software_catalog/customize/import_entries_backstage
-      parent: software_catalog_customize
-      identifier: software_catalog_import_from_backstage
-      weight: 103
-    - name: Import Entries from ServiceNow
-      url: software_catalog/customize/import_entries_servicenow
-      parent: software_catalog_customize
-      identifier: software_catalog_import_from_servicenow
-      weight: 104
-    - name: Navigate the Software Catalog
+      weight: 2
+    - name: Navigate
       url: software_catalog/navigating
       parent: software_catalog
       identifier: software_catalog_browse
-      weight: 2
+      weight: 3
     - name: Use Cases
       url: software_catalog/use_cases
       parent: software_catalog
       identifier: software_catalog_use_cases
-      weight: 3
+      weight: 4
     - name: API Management
       url: software_catalog/use_cases/api_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_api_management
-      weight: 301
+      weight: 401
     - name: Cloud Cost Management
       url: software_catalog/use_cases/cloud_cost_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
-      weight: 302
+      weight: 402
     - name: Application Security Management
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
-      weight: 303
+      weight: 403
     - name: Developer Onboarding
       url: software_catalog/use_cases/dev_onboarding
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dev_onboarding
-      weight: 304
+      weight: 404
     - name: Dependency Management
       url: software_catalog/use_cases/dependency_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_dependency_management
-      weight: 305
+      weight: 405
     - name: Production Readiness
       url: software_catalog/use_cases/production_readiness
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_production_readiness
-      weight: 306
+      weight: 406
     - name: Incident Response
       url: software_catalog/use_cases/incident_response
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_incident_response
-      weight: 307
+      weight: 407
     - name: CI Pipeline Visibility
       url: software_catalog/use_cases/pipeline_visibility
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_pipeline_visibility
-      weight: 308
+      weight: 408
     - name: Manage a Component
       url: software_catalog/manage
       parent: software_catalog
       identifier: software_catalog_investigate
-      weight: 4
+      weight: 5
     - name: Definitions
       url: software_catalog/service_definitions/
       parent: software_catalog
       identifier: software_catalog_definitions_versions
-      weight: 5
+      weight: 6
     - name: v3.0
       url: /software_catalog/service_definitions/v3-0/
       parent: software_catalog_definitions_versions
       identifier: software_catalog_definitions_3-0
-      weight: 401
+      weight: 601
     - name: v2.2
       url: /software_catalog/service_definitions/v2-2/
       parent: software_catalog_definitions_versions
       identifier: software_catalog_definitions_2-2
-      weight: 402
+      weight: 602
     - name: v2.1
       url: /software_catalog/service_definitions/v2-1/
       parent: software_catalog_definitions_versions
       identifier: software_catalog_definitions_2-1
-      weight: 403
+      weight: 603
     - name: v2.0
       url: /software_catalog/service_definitions/v2-0/
       parent: software_catalog_definitions_versions
       identifier: software_catalog_definitions_2-0
-      weight: 404
+      weight: 604
     - name: Scorecards
       url: software_catalog/scorecards
       parent: software_catalog
       identifier: software_catalog_scorecards
-      weight: 6
+      weight: 7
     - name: Scorecard Configuration
       url: software_catalog/scorecards/scorecard_configuration
       parent: software_catalog_scorecards
       identifier: scorecard_configuration
-      weight: 501
+      weight: 701
     - name: Custom Rules
       url: software_catalog/scorecards/custom_rules
       parent: software_catalog_scorecards
       identifier: scorecard_custom_rules
-      weight: 502
+      weight: 702
     - name: Using Scorecards
       url: software_catalog/scorecards/using_scorecards
       parent: software_catalog_scorecards
       identifier: using_scorecards
-      weight: 503
-    - name: Self-Service
-      url: software_catalog/self-service
+      weight: 703
+    - name: Self-Service Actions
+      url: software_catalog/self-service_actions
       parent: software_catalog
-      identifier: self-service
-      weight: 7
+      identifier: self-service_actions
+      weight: 8
     - name: Software Templates
-      url: software_catalog/self-service/software_templates
-      parent: self-service
+      url: software_catalog/self_service_actions/software_templates
+      parent: self_service_actions
       identifier: software_templates
+      weight: 9
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 8
+      weight: 10
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 9
+      weight: 11
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 10
+      weight: 12
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -2129,32 +2139,27 @@ menu:
       url: error_tracking/regression_detection
       parent: error_tracking
       identifier: error_tracking_regression_detection
-      weight: 4
-    - name: Default Grouping
-      url: error_tracking/default_grouping
+      weight: 3
+    - name: Error Grouping
+      url: error_tracking/error_grouping
       parent: error_tracking
-      identifier: error_tracking_default_grouping
-      weight: 5
+      identifier: error_tracking_error_grouping
+      weight: 4
     - name: Monitors
       url: error_tracking/monitors
       parent: error_tracking
       identifier: error_tracking_monitors
-      weight: 6
-    - name: Custom Grouping
-      url: error_tracking/custom_grouping
-      parent: error_tracking
-      identifier: error_tracking_custom_grouping
-      weight: 7
+      weight: 5
     - name: Identify Suspect Commits
       url: error_tracking/suspect_commits
       parent: error_tracking
       identifier: error_tracking_suspect_commits
-      weight: 8
+      weight: 6
     - name: Track Browser and Mobile Errors
       url: error_tracking/frontend
       parent: error_tracking
       identifier: error_tracking_frontend
-      weight: 9
+      weight: 7
     - name: Browser Error Tracking
       url: error_tracking/frontend/browser
       parent: error_tracking_frontend
@@ -2710,28 +2715,34 @@ menu:
       parent: private_actions
       identifier: private_actions_creds
       weight: 202
+    - name: Cloudcraft
+      url: datadog_cloudcraft/
+      pre: cloudcraft
+      identifier: datadog_cloudcraft
+      parent: infrastructure_heading
+      weight: 10000
     - name: Resource Catalog
       url: infrastructure/resource_catalog/
       pre: resource-catalog
       parent: infrastructure_heading
       identifier: infrastructure_resource_catalog
-      weight: 10000
+      weight: 20000
     - name: Cloud Resources Schema
       url: infrastructure/resource_catalog/schema/
       parent: infrastructure_resource_catalog
-      identifier: infrastructure_resource_catalog_schema
-      weight: 10001
+      identifier: infrastructure_resource_catalog_schemat
+      weight: 20001
     - name: Governance
       url: infrastructure/resource_catalog/governance/
       parent: infrastructure_resource_catalog
       identifier: infrastructure_resource_catalog_governance
-      weight: 10002
+      weight: 20002
     - name: Universal Service Monitoring
       url: universal_service_monitoring/
       pre: usm
       identifier: usm_parent
       parent: infrastructure_heading
-      weight: 20000
+      weight: 30000
     - name: Setup
       url: universal_service_monitoring/setup/
       parent: usm_parent
@@ -2746,7 +2757,7 @@ menu:
       url: infrastructure/hostmap/
       identifier: hosts
       parent: infrastructure_heading
-      weight: 30000
+      weight: 40000
       pre: host-map
     - name: Host List
       identifier: infrastructure_list
@@ -2757,7 +2768,7 @@ menu:
       url: containers/
       identifier: containers
       parent: infrastructure_heading
-      weight: 40000
+      weight: 50000
       pre: container
     - name: Monitoring Containers
       url: infrastructure/containers/
@@ -3004,7 +3015,7 @@ menu:
       identifier: process
       pre: process
       parent: infrastructure_heading
-      weight: 50000
+      weight: 60000
     - name: Increase Process Retention
       identifier: infrastructure_process_increase_process_retention
       url: infrastructure/process/increase_process_retention/
@@ -3015,7 +3026,7 @@ menu:
       pre: serverless
       identifier: serverless
       parent: infrastructure_heading
-      weight: 60000
+      weight: 70000
     - name: AWS Lambda
       url: serverless/aws_lambda
       parent: serverless
@@ -3165,7 +3176,7 @@ menu:
       pre: network
       identifier: nm_parent
       parent: infrastructure_heading
-      weight: 70000
+      weight: 80000
     - name: Cloud Network Monitoring
       url: network_monitoring/cloud_network_monitoring/
       parent: nm_parent
@@ -3387,7 +3398,7 @@ menu:
       parent: cloud_cost
       identifier: cloud_cost_tag_pipelines
       weight: 8
-    - name: Custom Allocation Rules 
+    - name: Custom Allocation Rules
       url: cloud_cost_management/custom_allocation_rules
       parent: cloud_cost
       identifier: cloud_cost_custom_allocation_rules
@@ -3797,16 +3808,11 @@ menu:
       parent: tracing_error_tracking
       identifier: tracing_error_tracking_states
       weight: 1002
-    - name: Default Grouping
-      url: tracing/error_tracking/default_grouping
+    - name: Error Grouping
+      url: tracing/error_tracking/error_grouping
       parent: tracing_error_tracking
-      identifier: tracing_error_tracking_default_grouping
+      identifier: tracing_error_tracking_error_grouping
       weight: 1003
-    - name: Custom Grouping
-      url: tracing/error_tracking/custom_grouping
-      parent: tracing_error_tracking
-      identifier: tracing_error_tracking_custom_grouping
-      weight: 1004
     - name: Monitors
       url: tracing/error_tracking/monitors
       parent: tracing_error_tracking
@@ -5860,16 +5866,11 @@ menu:
       url: logs/error_tracking/backend
       parent: log_management_error_tracking
       weight: 704
-    - name: Default Grouping
-      url: logs/error_tracking/default_grouping
+    - name: Error Grouping
+      url: logs/error_tracking/error_grouping
       parent: log_management_error_tracking
-      identifier: log_management_error_tracking_default_grouping
+      identifier: log_management_error_tracking_error_grouping
       weight: 705
-    - name: Custom Grouping
-      url: logs/error_tracking/custom_grouping
-      parent: log_management_error_tracking
-      identifier: log_management_error_tracking_custom_grouping
-      weight: 706
     - name: Manage Data Collection
       url: logs/error_tracking/manage_data_collection
       parent: log_management_error_tracking
@@ -6052,7 +6053,7 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
       weight: 7
-    - name: Risk Insights for AWS Entities
+    - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
@@ -6486,11 +6487,6 @@ menu:
       url: /security/code_security/static_analysis/github_actions/
       parent: sec_static_analysis
       weight: 2
-    - name: CircleCI Orbs
-      identifier: sec_static_analysis_circleci_orbs
-      url: /security/code_security/static_analysis/circleci_orbs/
-      parent: sec_static_analysis
-      weight: 3
     - name: Generic CI Providers
       identifier: sec_static_analysis_generic_ci_providers
       url: /security/code_security/static_analysis/generic_ci_providers/
@@ -6531,7 +6527,7 @@ menu:
       url: /security/code_security/software_composition_analysis/setup_runtime/compatibility/
       parent: sca_setup_runtime
       weight: 1
-    - name: Secrets Scanning
+    - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
       parent: code_security
@@ -6944,10 +6940,10 @@ menu:
       parent: rum_browser
       identifier: page_performance
       weight: 104
-    - name: Monitoring Performance Vitals
-      url: real_user_monitoring/browser/monitoring_performance_vitals/
+    - name: Optimizing Performance
+      url: real_user_monitoring/browser/optimizing_performance/
       parent: rum_browser
-      identifier: performance_vitals
+      identifier: optimizing_performance
       weight: 105
     - name: Monitoring Resource Performance
       url: real_user_monitoring/browser/monitoring_resource_performance/
@@ -7540,17 +7536,12 @@ menu:
       url: real_user_monitoring/error_tracking/mobile/
       parent: rum_error_tracking
       identifier: rum_error_tracking_mobile
-      weight: 904
-    - name: Default Grouping
-      url: real_user_monitoring/error_tracking/default_grouping
+      weight: 804
+    - name: Error Grouping
+      url: real_user_monitoring/error_tracking/error_grouping
       parent: rum_error_tracking
-      identifier: rum_error_tracking_default_grouping
-      weight: 905
-    - name: Custom Grouping
-      url: real_user_monitoring/error_tracking/custom_grouping
-      parent: rum_error_tracking
-      identifier: rum_error_tracking_custom_grouping
-      weight: 906
+      identifier: rum_error_tracking_error_grouping
+      weight: 805
     - name: Monitors
       url: real_user_monitoring/error_tracking/monitors
       parent: rum_error_tracking

@@ -98,7 +98,9 @@ You can enable APM by installing the Agent with either:
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+
+**Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
@@ -131,12 +133,14 @@ To enable Single Step Instrumentation with the Datadog Operator:
        apm:
          instrumentation:
            enabled: true
-           libVersions:
-             java: "1"
-             dotnet: "3"
-             python: "2"
-             js: "5"
-             php: "1"
+           targets:
+             - name: "default-target"
+               ddTracerVersions:
+                 java: "1"
+                 dotnet: "3"
+                 python: "2"
+                 js: "5"
+                 php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -149,7 +153,9 @@ To enable Single Step Instrumentation with the Datadog Operator:
 {{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
+Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+
+**Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with Helm:
 
@@ -172,12 +178,14 @@ To enable Single Step Instrumentation with Helm:
     apm:
       instrumentation:
          enabled: true
-         libVersions:
-            java: "1"
-            dotnet: "3"
-            python: "2"
-            js: "5"
-            php: "1"
+         targets:
+           - name: "default-target"
+             ddTracerVersions:
+               java: "1"
+               dotnet: "3"
+               python: "2"
+               js: "5"
+               php: "1"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
@@ -279,7 +287,200 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes (Agent v7.64+) (Preview)" %}}
+
+### Configuring instrumentation for namespaces and pods
+
+By default, Single Step Instrumentation instruments all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
+
+Each target block has the following keys:
+
+| Key             | Description |
+|------------------|-------------|
+| `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
+| `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3].|
+| `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3]. |
+| `ddTraceVersions` | The [Datadog APM SDK][2] version to use for each language. |
+| `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
+
+
+
+The file you need to configure depends on how you enabled Single Step Instrumentation:
+- If you enabled SSI with Datadog Operator, edit `datadog-agent.yaml`.
+- If you enabled SSI with Helm, edit `datadog-values.yaml`.
+
+#### Example configurations
+
+Review the following examples demonstrating how to select specific services:
+
+{{< collapse-content title="Example 1: Enable all namespaces except one" level="h4" >}}
+
+This configuration:
+- enables APM for all namespaces except the `jenkins` namespace. 
+- instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
+
+{{< highlight yaml "hl_lines=4-10" >}}
+   apm:  
+     instrumentation:  
+       enabled: true  
+       disabledNamespaces:  
+         - "jenkins"  
+       targets:  
+         - name: "all-remaining-services"  
+           ddTraceVersions:  
+             java: "default"  
+             python: "3.1.0"
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 2: Instrument a subset of namespaces, matching on names and labels" level="h4" >}}
+
+This configuration creates two targets blocks:
+
+- The first block (named `login-service_namespace`):
+  - enables APM for services in the namespace `login-service`.
+  - instructs Datadog to instrument services in this namespace with the default version of the Java APM SDK.
+  - sets environment variables -- `DD_SERVICE`, `DD_ENV`, and `DD_PROFILING_ENABLED` -- for this target group.
+- The second block (named `billing-service_apps`)
+  - enables APM for services in the namespace(s) with label `app:billing-service`.
+  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK. 
+  - sets environment variables -- `DD_SERVICE` and `DD_ENV` -- for this target group.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+  apm:
+    instrumentation:
+      enabled: true
+      targets:
+        - name: "login-service_namespace"
+          namespaceSelector:
+            matchNames:
+              - "login-service"
+          ddTraceVersions:
+            java: "default"
+          ddTraceConfigs:
+            - name: "DD_SERVICE"
+              value: "login-service"
+            - name: "DD_ENV"
+              value: "prod"
+            - name: "DD_PROFILING_ENABLED"  ## profiling is enabled for all services in this namespace
+              value: "auto"
+        - name: "billing-service_apps"
+          namespaceSelector:
+            matchLabels:
+              app: "billing-service"
+          ddTraceVersions:
+            python: "3.1.0"
+          ddTraceConfigs:
+            - name: "DD_SERVICE"
+              value: "billing-service"
+            - name: "DD_ENV"
+              value: "prod
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 3: Instrument different workloads with different tracers" level="h4" >}}
+
+This configuration does the following:
+- enables APM for pods with the following labels:
+  - `app:db-user`, which marks pods running the `db-user` application.
+  - `webserver:routing`, which marks pods running the `request-router` application.
+- instructs Datadog to use the default versions of the Datadog Tracer SDKs.
+- sets several Datadog environment variables to apply to each target group.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+     instrumentation:
+       enabled: true
+       targets:
+         - name: "db-user"
+           podSelector:
+             matchLabels:
+               app: "db-user"
+           ddTraceVersions:
+             java: "default"
+           ddTraceConfigs:   ## trace configs set for services in matching pods
+             - name: "DD_SERVICE"
+               value: "db-user"
+             - name: "DD_ENV"
+               value: "prod"
+             - name: "DD_DSM_ENABLED"  
+               value: "true"
+         - name: "user-request-router"
+           podSelector:
+             matchLabels:
+               webserver: "user"
+           ddTraceVersions:
+             php: "default"
+           ddTraceConfigs:
+             - name: "DD_SERVICE"
+               value: "user-request-router"
+             - name: "DD_ENV"
+               value: "prod
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 4: Instrument a pod within a namespace" level="h4" >}}
+
+This configuration:
+- enables APM for pods labeled `app:password-resolver` inside the `login-service` namespace.
+- instructs Datadog to use the default version of the Datadog Java Tracer SDK.
+- sets several Datadog environment variables to apply to this target.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+     instrumentation:
+       enabled: true
+       targets:
+         - name: "login-service-namespace"
+           namespaceSelector:
+             matchNames:
+               - "login-service"
+           podSelector:
+             matchLabels:
+               app: "password-resolver"
+           ddTraceVersions:
+             java: "default"
+           ddTraceConfigs:   
+             - name: "DD_SERVICE"
+               value: "password-resolver"
+             - name: "DD_ENV"
+               value: "prod"
+             - name: "DD_PROFILING_ENABLED"  
+               value: "auto"
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+{{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h4" >}}
+
+This configuration enables APM for all pods except those that have either of the labels `app=app1` or `app=app2`.
+
+{{< highlight yaml "hl_lines=4-28" >}}
+   apm:
+     instrumentation:
+       enabled: true
+       targets:
+         - name: "default-target"
+           matchExpressions:
+             - key: app
+               operator: NotIn
+               values:
+               - app1
+               - app2
+{{< /highlight >}}
+
+{{< /collapse-content >}}
+
+[1]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[2]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
+[3]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -342,6 +543,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 {{< /highlight >}}
 
 {{< /collapse-content >}}
+
 
 ### Specifying tracing library versions
 
@@ -444,7 +646,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Am
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
-| Node.js  | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Node.js    | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
 | Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
@@ -520,7 +722,17 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 2. Restart the service.
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
+
+#### Using workload selection (recommended)
+
+With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+
+#### Using the Datadog Admission Controller
+
+As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
+
+<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml
@@ -568,7 +780,7 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes (Preview)" %}}
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
