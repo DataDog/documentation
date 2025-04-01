@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-[Ragas][1] is an open-source library for evaluating and improving LLM applications. Ragas also provides LLM and non-LLM-based metrics to help assess the performance of your LLM application offline and in production. Datadog's Ragas integration enables you to evaluate your production application with scores for faithfulness, answer relevancy, and context precision. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
+[Ragas][1] is an open source library for evaluating and improving LLM applications. Ragas also provides LLM and non-LLM-based metrics to help assess the performance of your LLM application offline and in production. Datadog's Ragas integration enables you to evaluate your production application with scores for faithfulness, answer relevancy, and context precision. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
 
 For a simplified setup guide, see [Ragas Quickstart][7].
 
