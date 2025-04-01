@@ -10,13 +10,13 @@ Muchas de las vistas de Datadog pueden ajustarse a un marco temporal específico
 
 Para incrementar por mes, día, año, hora o minuto, resalta una parte del marco temporal y utiliza las teclas `[↑]` y `[↓]`:
 
-{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt=vídeo "Incrementar el tiempo con teclas de flechas"="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/increment_with_arrow_keys.mp4" alt="Incrementar el tiempo con teclas de flechas" video="true" width="500" >}}
 
 ## Sintaxis admitidas
 
 ### Fechas fijas
 
-{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt=vídeo "Tipo de marco de tiempo fijo personalizado"="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Tipo de marco de tiempo fijo personalizado" video="true" width="500" >}}
 
 | Formato                       | Ejemplos                                         |
 |------------------------------|--------------------------------------------------|
@@ -40,7 +40,7 @@ Cualquier fecha fija puede introducirse como parte de un intervalo. Por ejemplo:
 
 Las fechas relativas **no** se actualizan con el tiempo; se calculan cuando se introducen.
 
-{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt=vídeo "Tipo de marco de tiempo relativo personalizado"="true" width="500" >}}
+{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Tipo de marco de tiempo relativo personalizado" video="true" width="500" >}}
 
 | Formato                                             | Descripción                                                         |
 |----------------------------------------------------|---------------------------------------------------------------------|

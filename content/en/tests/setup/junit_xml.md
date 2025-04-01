@@ -2,7 +2,7 @@
 title: Uploading JUnit test report files to Datadog
 code_lang: junit_xml
 type: multi-code-lang
-code_lang_weight: 60
+code_lang_weight: 70
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
@@ -11,9 +11,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI Visibility"
+      text: "Troubleshooting Test Optimization"
 ---
 
 {{< site-region region="gov" >}}
@@ -83,7 +83,7 @@ datadog-ci version
 
 {{% tab "Windows" %}}
 {{< code-block lang="powershell" >}}
-Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
+Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 
 Then run any command with `Start-Process -FilePath "datadog-ci.exe"`:
@@ -182,6 +182,23 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 {{% /tab %}}
 
+{{% tab "CircleCI" %}}
+Use the [`when` attribute][1]:
+
+{{< code-block lang="yaml" >}}
+steps:
+  - run:
+      name: Run tests
+      command: ./run-tests.sh
+  - run:
+      name: Upload test results to Datadog
+      when: always
+      run: datadog-ci junit upload --service service_name ./junit.xml
+{{< /code-block >}}
+
+[1]: https://circleci.com/docs/configuration-reference/#the-when-attribute
+{{% /tab %}}
+
 {{< /tabs >}}
 
 Reports larger than 250 MiB may not be processed completely, resulting in missing tests or logs. For the best experience, ensure that the reports are under 250 MiB.
@@ -235,7 +252,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
-**Note**: Logs are billed separately from CI Visibility.
+**Note**: Logs are billed separately from Test Optimization.
 
 `--max-concurrency`
 : The number of concurrent uploads to the API.<br/>
@@ -369,7 +386,7 @@ The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 3. Follow the instructions to configure the integration for a personal or organization account.
 4. In **Edit Permissions**, grant `Contents: Read` access.
 5. Click **Create App in GitHub** to finish the app creation process on GitHub.
-6. Give the app a name, for example, `Datadog CI Visibility`.
+6. Give the app a name, for example, `Datadog Test Optimization`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
 ### Manually providing the `test.source.file` tag

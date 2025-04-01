@@ -44,13 +44,13 @@ Identifica los robots de Datadog utilizando **encabezados predeterminados**, que
 
 De manera predeterminada, se añade un encabezado `user-agent` a todas las solicitudes realizadas por los tests de Sintético. Cualquier `user-agent` personalizado que se añada en el test sustituye al predeterminado.
 
-{{< pestañas >}}
-{{% pestaña "Tests de la API de uno y varios pasos" %}}
+{{< tabs >}}
+{{% tab "Tests de la API de uno y varios pasos" %}}
 
 Para los tests de la API de uno o varios pasos, el encabezado predeterminado `user-agent` es `Datadog/Synthetics`.
 
-{{% /pestaña %}}
-{{% pestaña "Tests de navegador" %}}
+{{% /tab %}}
+{{% tab "Tests de navegador" %}}
 
 Para los tests de navegador, el valor del encabezado predeterminado `user-agent` varía en función del navegador y del dispositivo que ejecuta el test. El valor predeterminado de `user-agent` siempre termina en `DatadogSynthetics` para poder identificar los tests de Sintético.
 
@@ -61,18 +61,18 @@ Para los tests de navegador, el valor del encabezado predeterminado `user-agent`
 
 Se añade un encabezado `sec-datadog` a todas las solicitudes realizadas por los tests de Sintético. El valor incluye el ID del test del que procede la solicitud.
 
-{{< pestañas >}}
-{{% pestaña "Tests de la API de uno y varios pasos" %}}
+{{< tabs >}}
+{{% tab "Tests de la API de uno y varios pasos" %}}
 
 ```
-sec-Datadog: Solicitud enviada por un test de la API de Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+sec-datadog: Request sent by a Datadog Synthetics API Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
-{{% /pestaña %}}
-{{% pestaña "Tests de navegador" %}}
+{{% /tab %}}
+{{% tab "Tests de navegador" %}}
 
 ```
-sec-Datadog: Solicitud enviada por un test de Navegador Sintético de Datadog (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
+sec-datadog: Request sent by a Datadog Synthetics Browser Test (https://docs.datadoghq.com/synthetics/) - test_id: <SYNTHETIC_TEST_PUBLIC_ID>
 ```
 
 {{% /tab %}}
@@ -88,10 +88,10 @@ Puedes aprovechar tu configuración de test de la API y del navegador en **Opcio
 
 ## Variables del navegador
 
-Cuando un robot de Datadog está representando tu aplicación, la variable `window._Datadog_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
+Cuando un robot de Datadog está representando tu aplicación, la variable `window._DATADOG_SYNTHETICS_BROWSER` se configura en `true`. Para eliminar las acciones del robot de tus datos de análisis, ajusta el código de tu herramienta de análisis con el siguiente test:
 
-```JavaScript
-si (window._Datadog_SYNTHETICS_BROWSER === no definido) {
+```javascript
+if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
   initializeAnalytics()
 }
 ```
@@ -104,7 +104,7 @@ Las cookies que se aplican en tu navegador incluyen `datadog-synthetics-public-i
 
 Estas cookies están disponibles para todos los pasos en Firefox. En Microsoft Edge y Google Chrome, estas cookies solo se configuran para la URL de inicio.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

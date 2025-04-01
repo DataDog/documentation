@@ -18,7 +18,7 @@ aliases:
 ---
 
 <div class="alert alert-info">
-Exception Replay for APM Error Tracking is in beta.
+Exception Replay for APM Error Tracking is in Preview
 </div>
 
 ## Overview
@@ -45,15 +45,13 @@ Exception Replay is only available in APM Error Tracking. Error Tracking for Log
 1. Install or upgrade your Agent to version `7.44.0` or higher.
 2. Ensure that you are using:
    * `ddtrace` version `1.16.0` or higher.
-   * `dd-trace-java` version `1.35.0` or higher.
+   * `dd-trace-java` version `1.47.0` or higher.
    * `dd-trace-dotnet` version `2.53.0` or higher.
-4. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
-
-For `dd-trace-php` version `1.4.0` or higher, set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true`.
+4. Set the `DD_EXCEPTION_REPLAY_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
 ### Redacting sensitive data
 
-By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. See the full [list of redacted identifiers][1].
+After you enable Sensitive Data Scrubbing, by default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. Enable Sensitive Data Scrubbing rules [in Datadog][7]. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
@@ -79,9 +77,10 @@ To keep the performance overhead of the feature at a minimum, error capturing is
 [1]: https://github.com/DataDog/dd-trace-py/blob/2bd8e73b639af811cee2703198aa9e7e32b2f74e/ddtrace/debugging/_redaction.py
 [2]: /dynamic_instrumentation/sensitive-data-scrubbing/#custom-identifier-redaction
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-specific-classes-or-types
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
 [5]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [6]: https://app.datadoghq.com/apm/error-tracking
+[7]: https://app.datadoghq.com/dynamic-instrumentation/setup
 
 ## Further Reading
 

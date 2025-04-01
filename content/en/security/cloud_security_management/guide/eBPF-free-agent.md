@@ -3,7 +3,7 @@ title: Threat Detection for Linux Without eBPF Support
 disable_toc: false
 ---
 
-This guide describes how to set up the CMS Threats eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
+This guide describes how to set up the CSM Threats eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
 
 This guide also describes some advantages of the ptrace solution.
 
@@ -12,7 +12,7 @@ This guide also describes some advantages of the ptrace solution.
 
 ## Summary of Agent options
 
-CMS Threats includes two Agent options for threat detection and response:
+CSM Threats includes two Agent options for threat detection and response:
 
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).
@@ -27,7 +27,7 @@ Datadog has built all its security products around [eBPF (extended Berkeley Pack
 
 The Datadog eBPF Agent code is [fully open source][2].
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 {{% collapse-content title="eBPF-less solution with ptrace" level="h4" %}}
 Some environments use instances with old kernels that do not have eBPF at all. The ptrace solution is provided for these environments.
@@ -50,7 +50,7 @@ A ptrace-based solution achieves a balance between robust threat detection and u
 - Operational stability: Operating in user space, ptrace avoids the complexities and risks of kernel space, providing a safer and more manageable approach. In the event of a failure, a ptrace-based agent defaults to a fail-open state at the OS layer, keeping the system unaffected, even if the application hangs.
 - Performance efficiency: Recent benchmarks conducted by Datadog's engineering team demonstrate that the Datadog ptrace-based implementation shows comparable performance to kernel-based solutions. Specifically, it introduces only a minimal overhead of around 3% for PostgreSQL workloads and negligible impacts for Redis operations, making it very efficient for most use cases.
 - Open source verification: Datadog has open-sourced the ptrace-based and eBPF Agent, allowing clients and the security community to verify its safety and effectiveness themselves, fostering transparency and trust in the solution.
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ## eBPF-less Agent setup
@@ -152,7 +152,7 @@ runtime_security_config:
 Ensure you perform the following configuration requirements before deploying the Agent:
 
 1. Customize the [Agent Installation Instructions][5] before proceeding with the installation.
-2. Install/update the Agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4]. 
+2. Install/update the Agent with CSM enabled. For steps, see [Setting up Cloud Security Management on the Agent][4].
 3. Specify additional configurations from the previous **eBPF-less agent setup** sections to install the custom version and enable eBPF-less mode.
 
 
@@ -178,7 +178,7 @@ After the eBPF-less Agent is installed and set up to use the eBPF-Free mode, you
 - **Wrap mode:** (Recommended) In this mode, your application is launched by the Datadog wrapper that traces it from the beginning using ptrace.
   - All spawned children are traced also.
   - A seccomp profile is applied to drastically reduce the ptracing overhead.
-- **Attach mode:** In this mode, you can specify a list of PIDs to attach to your application processes. This should be done quickly because your application is not ptraced until this is done. 
+- **Attach mode:** In this mode, you can specify a list of PIDs to attach to your application processes. This should be done quickly because your application is not ptraced until this is done.
   - In this mode, a seccomp profile cannot be applied. Consequently, there is a small amount ptracing overhead.
 
 Both modes use the **cws-instrumentation** binary packaged with the Datadog Agent, and located at `/opt/datadog-agent/embedded/bin/cws-instrumentation`.
@@ -300,7 +300,7 @@ You also have to connect the container to Datadog on port 5678 by doing one of t
 {{% /tab %}}
 
 {{% tab "Attach mode" %}}
-The wrap mode is recommended because the attach mode has the following limitations: 
+The wrap mode is recommended because the attach mode has the following limitations:
 
 - It misses all initialization made by the application until Datadog attaches to it.
 - - When attaching, Datadog cannot set up a seccomp profile.

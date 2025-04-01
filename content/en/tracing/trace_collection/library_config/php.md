@@ -34,7 +34,7 @@ INI settings can be configured globally, for example, in the `php.ini` file, or 
 
 ## Apache
 
-For Apache with php-fpm, use the `env` directive in your `www.conf` configuration file to configure the PHP tracer, for example:
+For Apache with PHP-FPM, use the `env[]` directive in your `www.conf` configuration file to configure the PHP tracer. For example:
 
 ```
 ; Example of passing the host environment variable SOME_ENV
@@ -47,7 +47,9 @@ env[DD_SERVICE] = my-app
 php_value datadog.service my-app
 ```
 
-Alternatively, you can use [`SetEnv`][2] from the server config, virtual host, directory, or `.htaccess` file.
+**Note:** By default, PHP-FPM does not inherit environment variables from the host system when `clear_env=yes` is set in `www.conf`. If you need to use environment variables set on the host, you must explicitly define them using the `env[]` directive.
+
+For Apache without PHP-FPM (mod_php setups), you can set environment variables directly in the server config, virtual host, directory, or `.htaccess` file using [`SetEnv`][2]:
 
 ```text
 # In a virtual host configuration as an environment variable
@@ -162,12 +164,12 @@ The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. 
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**Default**: `0`<br>
+**Default**: `0` (`1` in CLI environment)<br>
 Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**Default**: `0`<br>
+**Default**: `1`<br>
 Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`
@@ -479,6 +481,11 @@ Configure the sampling distance for exceptions. The higher the sampling distance
 Enable the timeline profile type. Added in version `0.89.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
 
+`DD_PROFILING_EXPERIMENTAL_IO_ENABLED`
+: **INI**: `datadog.profiling.experimental_io_enabled`. INI available since `1.7.2`.<br>
+**Default**: `1`<br>
+Enable the I/O profile type. Added as beta in version `1.7.2`.
+
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
 **Default**: `off`<br>
@@ -531,7 +538,7 @@ Enables WordPress action hook callbacks instrumentation. This feature is only av
 **Default**: `DD_SERVICE`<br>
 The service name reported by default for OpenAI requests.
 
-`DD_OPENAI_LOGS_ENABLED` (beta)
+`DD_OPENAI_LOGS_ENABLED`
 : **INI**: `datadog.openai.logs_enabled`<br>
 **Default**: `false`<br>
 Enable collection of prompts and completions as logs. You can adjust the rate of prompts and completions collected using the sample rate configuration described below.
@@ -542,7 +549,7 @@ Enable collection of prompts and completions as logs. You can adjust the rate of
 Enable collection of OpenAI metrics.<br>
 If the Datadog Agent is configured to use a non-default StatsD hostname or port, use `DD_DOGSTATSD_URL` to configure the OpenAI metrics collection.
 
-`DD_OPENAI_SPAN_CHAR_LIMIT` (beta)
+`DD_OPENAI_SPAN_CHAR_LIMIT`
 : **INI**: `datadog.openai.span_char_limit`<br>
 **Default**: `128`<br>
 Configure the maximum number of characters for the following data within span tags:
@@ -553,12 +560,12 @@ Configure the maximum number of characters for the following data within span ta
 
 Text exceeding the maximum number of characters is truncated to the character limit and has `...` appended to the end.
 
-`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_SPAN_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.span_prompt_completion_sample_rate`<br>
 **Default**: `1.0`<br>
 Configure the sample rate for the collection of prompts and completions as span tags.
 
-`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE` (beta)
+`DD_OPENAI_LOG_PROMPT_COMPLETION_SAMPLE_RATE`
 : **INI**: `datadog.openai.log_prompt_completion_sample_rate`<br>
 **Default**: `0.1`<br>
 Configure the sample rate for the collection of prompts and completions as logs.

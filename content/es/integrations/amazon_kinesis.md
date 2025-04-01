@@ -5,7 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Seguimiento de métricas Amazon Kinesis clave.
 doc_link: https://docs.datadoghq.com/integrations/amazon_kinesis/

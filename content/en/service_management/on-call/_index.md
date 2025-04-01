@@ -4,6 +4,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/datadog-on-call/'
   tag: 'Blog'
   text: 'Enrich your on-call experience by using Datadog On-Call'
+- link: 'https://www.datadoghq.com/blog/on-call-paging/'
+  tag: 'Blog'
+  text: 'How to create an effective paging strategy'
 cascade:
     algolia:
         rank: 70
@@ -12,10 +15,6 @@ cascade:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
-  On-Call is in private beta. Complete the form to request access.
-{{< /callout >}} 
 
 Datadog On-Call integrates monitoring, paging, and incident response into one platform.
 

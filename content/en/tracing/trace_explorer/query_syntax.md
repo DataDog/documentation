@@ -25,7 +25,7 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/service_catalog/"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -46,8 +46,8 @@ A query is composed of *terms* and *operators*.
 
 There are two types of *terms*:
 
-* **Span tag**: Enrichments of context related to the span. For instance, host or container tags describing the infrastructure the service is running on.
 * **Span attribute**: Content of the span, collected with automatic or manual instrumentation in the application.
+* **Span tag**: Enrichments of context related to the span. For instance, host or container tags describing the infrastructure the service is running on.
   
 To combine multiple *terms* into a complex query, use any of the following boolean operators:
 
@@ -59,7 +59,7 @@ To combine multiple *terms* into a complex query, use any of the following boole
 
 ### Attribute search
 
-To search on a specific span attribute you must add `@` at the beginning of the attribute key.
+To search for a span attribute you must add `@` at the beginning of the attribute key.
 
 For instance, if you want to access a span with the following attribute below, you can use:
 
@@ -75,27 +75,35 @@ For instance, if you want to access a span with the following attribute below, y
     }
   }
 ```
+
+Span attributes are visible in the **Overview** tab of the trace side panel.
+
 **Note:** You do not need to use `@` on the [reserved attributes][17]: `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link`
 
 ### Tags search
 
-Your traces inherit tags from hosts and integrations that generate them. They can be used in the search query:
+Your spans inherit tags from hosts and integrations that generate them.
 
-| Query                                                          | Match                                                                       |
-|:---------------------------------------------------------------|:----------------------------------------------------------------------------|
-| `("env:prod" OR test)`                                         | All traces with the tag `#env:prod` or the tag `#test`                      |
-| `(service:srvA OR service:srvB)` or `(service:(srvA OR srvB))` | All traces that contain tags `#service:srvA` or `#service:srvB`.            |
-| `("env:prod" AND -"version:beta")`                             | All traces that contain `#env:prod` and that do not contain `#version:beta` |
+For example:
+
+| Query                                                        | Match                                                                                             |
+|:-------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|
+| `(hostname:web-server OR env:prod)`                          | All traces with the infrastructure tag `hostname:web-server` or the reserved attribute `env:prod` |
+| `(availability-zone:us-east OR container_name:api-frontend)` | All traces with either of these infrastructure tags                                               |
+| `(service:api AND -kube_deployment:canary)`                  | All traces from the `api` service that are not deployed to the `canary` deployment                |
+
+Span tags are visible in the **Infrastructure** tab of the trace side panel.
+
+#### Non-standard tag formats
 
 If your tags don't follow [tags best practices][2], then do not use `key:value` syntax. Instead, use the following search query:
 
-* `tags:<MY_TAG>`
+`tags:<MY_TAG>`
 
-Example tag that does not follow the best practices:
+For example, this tag does not follow the best practices:  
+`auto-discovery.cluster-autoscaler.k8s.io/daffy`
 
-<img width="867" alt="tagging-not-recommended" src="https://github.com/user-attachments/assets/4a3d5246-b6e7-4ab2-908a-bc2137062573">
-
-Search query for this specific tag:
+To search for this tag, use the following query:  
 `tags:"auto-discovery.cluster-autoscaler.k8s.io/daffy"`
 
 ### Wildcards
@@ -141,42 +149,64 @@ Don't lose time building the same views everyday. Saved searches contain your se
 
 To delete a saved search, click on the bin icon under the Trace search dropdown menu.
 
+### Search for services and entities 
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+To search for a service, use the `service` attribute. To search for another [entity type][20] (for example, a database, a queue, or a third-party provider), rely on other [peer attributes][21] which Datadog uses to describe dependencies that are not instrumented with APM. For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`
+
+**Note**: The span's `service` tag represents the service **emitting** the span if you migrated to the [global service naming][22] by setting `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAME_ENABLED=true`.
+
+[20]: /tracing/services/inferred_services
+[21]: /tracing/services/inferred_services#peer-tags
+[22]: /tracing/services/inferred_services#migrate-to-global-default-service-naming
+{{< /site-region >}}
+
 ## Time range
 
 The time range allows you to display traces within a given time period. Quickly change the time range by selecting a preset range from the dropdown menu (or [entering a custom time frame][3]):
 
 {{< img src="tracing/app_analytics/search/time_frame2.png" style="width:50%;" alt="Select time frame" >}}
 
-## Trace stream
+## Span table
 
-The Trace Stream is the list of traces that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+The Span table is the list of spans that match the selected context. A context is defined by a [search bar](#search-bar) filter and a [time range](#time-range).
+
+{{< site-region region="ap1,us3,us5,eu,us" >}}
+### The service column
+
+By default, the service column shows the `service` reserved attribute from the span.
+
+{{< img src="tracing/app_analytics/search/span_table_service.png" style="width:60%;" alt="Span table service column" >}}
+
+When the span represents a client call from an instrumented service to an inferred service, the service column shows:
+- the **service**, identified by the `service` reserved attribute.
+- the **[inferred service][4]**: name of the inferred entity being called by the base service, identified by one of the [peer attributes][5]
+
+{{< img src="tracing/app_analytics/search/span_table_inferred_service.png" style="width:90%;" alt="Span table service column with inferred service" >}}
+
+When the service name is an override from the base service name, the service column shows:
+- the **[base service][2]**: service from which the span is emitted, identified by the `@base_service` attribute.
+- the **[service override][3]**: service name, different from the base service name, set automatically in Datadog integrations or changed via the programmatic API. The service override is identified by the `service` reserved attribute.
+
+{{< img src="tracing/app_analytics/search/span_table_service_override.png" style="width:80%;" alt="Span table service column with service override" >}}
+
+[2]: /tracing/guide/service_overrides#base-service
+[3]: /tracing/guide/service_overrides
+[4]: /tracing/services/inferred_services
+[5]: /tracing/services/inferred_services#peer-tags
+{{< /site-region >}}
 
 ### Displaying a full trace
 
-Click on any trace to see more details about it:
+Click on any span to see details about the associated trace:
 
 {{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" style="width:80%;">}}
 
 ### Columns
 
-To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
+To add other [span tags or attributes][23] as columns to the list, click the **Options** button and select any dimension you want to add:
 
 {{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
-
-### Multi-line display
-
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" style="width:30%;">}}
-
-Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
-
-* With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" style="width:80%;">}}
-
-* With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" style="width:80%;">}}
-
-* With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" style="width:80%;">}}
 
 ## Facets
 
@@ -300,3 +330,4 @@ You can also generate a new metric for the query.
 [17]: /monitors/notify/variables/?tab=is_alert#reserved-attributes
 [18]: /notebooks/
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[23]: /tracing/trace_explorer/span_tags_attributes

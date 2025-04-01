@@ -6,6 +6,8 @@ categories:
 - notifications
 - aws
 - log collection
+- event management
+custom_kind: integration
 dependencies: []
 description: Amazon SNS 메시지를 Datadog에 전송하거나 Datadog 알림을 SNS에 전송하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_sns/
@@ -16,7 +18,6 @@ integration_id: ''
 integration_title: Amazon SNS(Simple Notification Service)
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sns
 public_title: Datadog-Amazon SNS(Simple Notification Service) 통합
@@ -31,7 +32,7 @@ version: '1.0'
 
 다음을 수행하려면 Amazon SNS(Simple Notification Service)를 Datadog에 연결하세요.
 
-- 스트림에 이벤트로 SNS 메시지 확인
+- Event Explorer에서 SNS 메시지를 이벤트로 확인하세요.
 - SNS에 알림 및 이벤트 알림 전송
 
 ## 설정
@@ -57,7 +58,7 @@ version: '1.0'
 
 #### SNS 메시지 수신
 
-`HTTPS` 및 `Email` 프로토콜 모두를 통해 Datadog 이벤트 스트림에서 SNS 메시지를 수신할 수 있습니다. `HTTPS` 프로토콜을 사용하면 자동으로 웹후크 URL을 사용해 구독을 확정할 수 있습니다.
+`HTTPS` 및 `Email` 프로토콜을 통해 Datadog Event Explorer에서 SNS 메시지를 수신할 수 있습니다. `HTTPS` 프로토콜을 사용하면 웹훅 URL로 구독을 자동으로 확인할 수 있습니다.
 
 `Email` 프로토콜을 사용하면 Datadog가 이러한 목적으로 자동으로 생성한 이메일 주소에 대한 수동 확인 단계가 필요합니다. 자세한 정보는 [Amazon SNS 이메일에서 Datadog 이벤트 생성] 가이드를 읽으세요.
 
@@ -116,7 +117,7 @@ Amazon SNS 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
-Datadog는 Datadog에서 GovCloud 또는 중국의 주제에 이르는 SNS 알림을 지원하지 않습니다.
+Datadog은 중국 내 토픽에 대한 Datadog의 SNS 알림을 지원하지 않습니다.
 
 도움이 필요하신가요? [Datadog 지원센터][8]로 연락하세요.
 

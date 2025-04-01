@@ -28,7 +28,7 @@ categories:
 - herramientas de desarrollo
 - orquestación
 - aprovisionamiento
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_on_public_website: true

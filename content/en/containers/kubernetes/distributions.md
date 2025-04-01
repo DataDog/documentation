@@ -58,40 +58,14 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
 
 {{% /tab %}}
 
@@ -116,11 +90,10 @@ spec:
     admissionController:
       enabled: true
   global:
+    site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    kubelet:
-      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -130,6 +103,9 @@ spec:
               value: "true"
 ```
 
+Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure that the correct SITE for your account is selected on the right of this page).
+
+[1]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -139,9 +115,6 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
-  kubelet:
-    tlsVerify: false
 
 providers:
   aks:
@@ -153,14 +126,6 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 
 {{< /tabs >}}
-
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
-
-### AKS Kubelet certificate
-
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
-
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -243,7 +208,7 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
+**Note**: Cloud Network Monitoring is supported from version 3.100.0 of the Helm chart and with GKE version 1.32.1-gke.1729000 or later
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -283,6 +248,13 @@ agents:
         requests:
           cpu: 100m
           memory: 200Mi
+
+    systemProbe:
+      # resources for the System Probe container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
 
   priorityClassCreate: true
 
@@ -329,6 +301,7 @@ agents:
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
 
 ## Red Hat OpenShift {#Openshift}
 

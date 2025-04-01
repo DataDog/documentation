@@ -125,16 +125,19 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 2. Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your service account
 3. Assign it the `roles/iam.serviceAccountTokenCreator` role.
 
-### Configure Cloud Costs
+### Configure Cloud Cost
 Continue to follow the steps indicated in [Setup & Configuration][3].
+
+**Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
-| Cost Type | Description |
-| ----------| ----------------------------------|
-| `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| Cost Type                                       | Description |
+|-------------------------------------------------| ----------------------------------|
+| `gcp.cost.amortized`                            | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
 | `gcp.cost.amortized.shared.resources.allocated` | All of your Google Cloud Platform amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][14].|
+| `gcp.cost.ondemand`                             | Total public, on-demand cost of resources before public and private discounts are applied over an interval. |
 
 ### Out-of-the-box tags
 Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.

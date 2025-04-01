@@ -3,6 +3,7 @@ title: Metrics without Limits™
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
+  - /metrics/faq/why-is-my-save-button-disabled/
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
@@ -48,6 +49,8 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
+
+**Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the `Edit` button for a metric in Metrics Summary.
 
 ### Configure multiple metrics at a time
 

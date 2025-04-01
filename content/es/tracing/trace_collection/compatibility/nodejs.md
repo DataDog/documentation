@@ -23,7 +23,7 @@ El control de versiones de la biblioteca de rastreo de Datadog Node.js sigue [co
 | Cambios incompatibles con versiones anteriores                  | Añadir cualquier cosa que sea compatible con versiones anteriores (no las interrumpe) | Correcciones de seguridad        |
 | Cambios en la API incompatibles con versiones anteriores                         | Incorporaciones a la API                   | Corrección de errores             |
 | Cambios de funcionalidad incompatibles con versiones anteriores | Funciones adicionales                                                 | |
-| Dejar de dar soporte técnico a, por ejemplo, versiones de Node.js, <txprotected>bibliotecas con soporte técnico</txprotected> u otras funciones     | Añadir soporte técnico probado para, por ejemplo, versiones de Node.js, <txprotected>bibliotecas con soporte técnico</txprotected> u otras funciones   |  |
+| Dejar de dar soporte técnico a, por ejemplo, versiones de Node.js, bibliotecas con soporte técnico u otras funciones     | Añadir soporte técnico probado para, por ejemplo, versiones de Node.js, bibliotecas con soporte técnico u otras funciones   |  |
 
 Cuando una versión tiene cambios que podrían estar en múltiples categorías de control de versiones semántico, se elige la más alta. Las [Notas de lanzamiento][2] se publican con cada versión de GitHub.
 
@@ -64,7 +64,7 @@ Los siguientes sistemas operativos tienen soporte técnico oficial de `dd-trace`
 
 ## Integraciones con soporte técnico
 
-APM proporciona Instrumentación predefinida para muchos marcos de trabajo populares y <txprotected>bibliotecas</txprotected> mediante un sistema de extensiones. Para solicitar soporte técnico para un módulo que no está en la lista, contacta con nuestro impresionante [equipo de soporte técnico][3].
+APM proporciona Instrumentación predefinida para muchos marcos de trabajo populares y bibliotecas mediante un sistema de extensiones. Para solicitar soporte técnico para un módulo que no está en la lista, contacta con nuestro impresionante [equipo de soporte técnico][3].
 
 Para obtener más información sobre cómo intercambiar y configurar las extensiones, restaura la [documentación de la API][5].
 
@@ -180,7 +180,7 @@ O bien, modifica el archivo `package.json` si sueles iniciar una aplicación con
 | [pino][57]       | `>=2`     | Totalmente compatible |
 | [winston][58]    | `>=1`     | Totalmente compatible |
 
-## <txprotected>Bibliotecas</txprotected> sin soporte técnico
+## Bibliotecas sin soporte técnico
 
 ### Fibers
 
@@ -190,7 +190,7 @@ Para más información o para debatir [deja un comentario en este tema de github
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://semver.org/
 [2]: https://github.com/DataDog/dd-trace-js/releases

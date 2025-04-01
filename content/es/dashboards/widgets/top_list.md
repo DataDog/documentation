@@ -12,7 +12,7 @@ further_reading:
   tag: Documentación
   text: Enlaces contextuales
 title: Widget de lista principal
-widget_type: lista principal
+widget_type: toplist
 ---
 
 La visualización de lista principal te permite mostrar una lista de los valores de etiqueta con más o menos cualquier valor de métrica o evento, como los mayores consumidores de CPU, hosts con menos espacio en disco o los productos en la nube con los costes más elevados.

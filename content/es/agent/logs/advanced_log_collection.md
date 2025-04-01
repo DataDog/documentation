@@ -40,7 +40,7 @@ Después de establecer la [recopilación de logs][1], puedes personalizar la con
 Para aplicar una regla de procesamiento a todos los logs que recopila el Datadog Agent, consulta la sección [Reglas de procesamiento generales](#global-processing-rules).
 
 **Notas**:
-- Si configuras varias reglas de procesamiento, se aplicarán secuencialmente, de forma que cada una se aplicará al resultado de la anterior.
+- Si configuras reglas de procesamiento multilínea, se aplicarán secuencialmente, de forma que cada una se aplicará al resultado de la anterior.
 - Los patrones de las reglas de procesamiento se deben ajustar a la [sintaxis de la expresión regular de Golang][2].
 - El parámetro `log_processing_rules` se utiliza en las configuraciones de la integración para personalizar la configuración de la recopilación de logs. Mientras que en la [configuración principal][5] del Agent, el parámetro `processing_rules` se utiliza para definir reglas de procesamiento generales.
 
@@ -98,7 +98,7 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en el **con
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Para aplicar una configuración específica a un contenedor determinado, Autodiscovery identifica los contenedores por nombre, NO por imagen, e intenta hacer coincidir `<CONTAINER_IDENTIFIER>` con `.spec.containers[0].name`, no con `.spec.containers[0].image.`. Para configurar el uso de Autodiscovery con el fin de recopilar los logs del contenedor en un `<CONTAINER_IDENTIFIER>` determinado dentro de tu pod, añade las siguientes anotaciones al parámetro `log_processing_rules` de tu pod:
+Para configurar Autodiscovery para la recopilación de logs de contenedor de un contenedor dado (con el nombre `CONTAINER_NAME`) dentro de tu pod, añade las siguientes anotaciones a las `log_processing_rules` de tu pod:
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +111,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -126,7 +126,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -231,7 +231,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -246,7 +246,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -258,6 +258,10 @@ spec:
 {{< /tabs >}}
 
 ## Limpia los datos confidenciales de tus logs
+
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+El uso de Sensitive Data Scanner con el Agent está en Vista previa. Para obtener más información, consulta la <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-Datadog-Agent/">entrada del blog</a> y la <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentación</a>. Para solicitar acceso, rellena este formulario.
+{{< /callout >}}
 
 Si tus logs contienen información confidencial que es necesario ocultar, configura el Datadog Agent para limpiar secuencias confidenciales y utiliza el parámetro `log_processing_rules` en tu archivo de configuración con el tipo `mask_sequences`.
 
@@ -322,7 +326,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -338,7 +342,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -424,7 +428,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -439,32 +443,32 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
-**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando realices una agregación de varias líneas con anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
+**Nota**: Utiliza secuencias de escape en los caracteres de expresión regular de tus patrones cuando realices una agregación multilínea con anotaciones de pod. Por ejemplo, `\d` pasaría a ser `\\d`, `\w` pasaría a ser `\\w`.
 
 **Nota**: El valor de la anotación debe seguir la sintaxis JSON, lo que significa que no debes incluir comas finales ni comentarios.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>¡Importante!</strong> Los patrones de expresión regular de los logs multilínea deben comenzar al <em>principio</em> de un log. No puede haber coincidencias de patrones a mitad de línea. <em>Un patrón que nunca obtiene coincidencias podría provocar la pérdida de líneas de logs.</em></div>
+<div class="alert alert-warning"><strong>Importante</strong> Los patrones de expresiones regulares para logs multilínea deben comenzar al <em>principio</em> de un log. Los patrones no pueden coincidir a mitad de una línea. <em>Un patrón que no coincida nunca puede provocar pérdidas de líneas de logs</em>. <br><br>La recopilación de logs funciona con una precisión de hasta milisegundos. Los logs con mayor precisión no se envían aunque coincidan con el patrón.</div>
 
 Más ejemplos:
 
 | **Cadena sin formato**           | **Patrón**                                       |
 |--------------------------|---------------------------------------------------|
 | 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| 10/11/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
 | Jueves, 16 de junio de 2016 08:29:03 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
 | 20180228                 | `\d{8}`                                           |
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Agregación multilínea automática
-A partir de la versión 7.37 o posterior del Agent, es posible habilitar `auto_multi_line_detection` para que el Agent pueda detectar [patrones de varias líneas habituales][3] de manera automática. 
+A partir de la versión 7.37 o posterior del Agent, es posible habilitar `auto_multi_line_detection` para que el Agent pueda detectar [patrones multilínea habituales][3] de manera automática. 
 
 Activa `auto_multi_line_detection` de forma general en el archivo `datadog.yaml`:
 
@@ -489,7 +493,7 @@ logs:
     auto_multi_line_detection: true
 ```
 
-La detección de varias líneas automática utiliza una lista de expresiones regulares habituales para intentar buscar coincidencias de logs. Si no es suficiente con la lista integrada, puedes añadir patrones personalizados en el archivo `datadog.yaml`:
+La detección multilínea automática utiliza una lista de expresiones regulares habituales para intentar buscar coincidencias de logs. Si no es suficiente con la lista integrada, puedes añadir patrones personalizados en el archivo `datadog.yaml`:
 
 ```yaml
 logs_config:
@@ -499,6 +503,18 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
+Si ningún patrón llega al umbral de coincidencia con la línea, añade el parámetro `auto_multi_line_default_match_threshold` con un valor inferior. Esto configura un valor de umbral que determina la frecuencia con la que los logs tienen que coincidir para que funcione la agregación multilínea automática. Para conocer el valor actual del umbral, ejecuta el [comando de `status` del Agent][1].
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
+  auto_multi_line_default_match_threshold: 0.1
+```
+
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/#agent-information
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -513,6 +529,11 @@ En un entorno de Docker, utiliza la etiqueta `com.datadoghq.ad.logs` en tu conte
         "auto_multi_line_detection": true
       }]
 ```
+La detección multilínea automática utiliza una lista de expresiones regulares comunes para intentar emparejar los logs. Si la lista incorporada no es suficiente, también puedes añadir patrones personalizados en el archivo `datadog.yaml` con la variable de entorno `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`.
+
+Si ningún patrón llega al umbral de coincidencia con la línea, añade la variable de entorno`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` con un valor inferior. Esto configura un valor de umbral que determina la frecuencia con la que los logs deben coincidir para que funcione la agregación multilínea automática. Para conocer el valor del umbral actual, ejecuta el [comando de `status`del Agent][1].
+
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/#agent-information
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -528,7 +549,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -539,18 +560,24 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: testApp:latest
 ```
 
-{{% /tab %}}
+La detección multilínea automática utiliza una lista de expresiones regulares comunes para intentar emparejar los logs. Si la lista incorporada no es suficiente, también puedes añadir patrones personalizados en el archivo `datadog.yaml` con la variable de entorno `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS`.
+
+Si ningún patrón llega al umbral de coincidencia con la línea, añade la variable de entorno`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` con un valor inferior. Esto configura un valor de umbral que determina la frecuencia con la que los logs deben coincidir para que funcione la agregación multilínea automática. Para conocer el valor del umbral actual, ejecuta el [comando de `status`del Agent][1].
+
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/#agent-information
+
+{{% /tab%}}
 {{< /tabs >}}
 
 Si se activa esta función y se abre un nuevo archivo de logs, el Agent intenta detectar un patrón. Durante este proceso, los logs se envían en forma de líneas únicas. Una vez alcanzado el umbral de detección, todos los futuros logs de ese origen se agregan con el patrón detectado, o bien como líneas únicas en caso de que no se encuentre ningún patrón. Como máximo, la detección tarda 30 segundos o lo que se tarde en detectar los primeros 500 logs (lo que ocurra antes).
 
 **Nota**: Si puedes controlar el patrón de nombres del log rotado, asegúrate de que el archivo rotado sustituya al archivo activo anteriormente con ese mismo nombre. El Agent reutiliza un patrón detectado anteriormente en el archivo recién rotado para evitar tener que volver a ejecutar la detección.
 
-La detección de varias líneas automática detecta los logs que empiezan y concuerdan con los siguientes formatos de fecha/hora: RFC3339, ANSIC, el formato de fecha Unix, el formato de fecha Ruby, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano y el formato de fecha SimpleFormatter para el registro de logs de Java predeterminado.
+La detección multilínea automática detecta los logs que empiezan y concuerdan con los siguientes formatos de fecha/hora: RFC3339, ANSIC, el formato de fecha Unix, el formato de fecha Ruby, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano y el formato de fecha SimpleFormatter para el registro de logs de Java predeterminado.
 
 ## Reglas de procesamiento de logs habitualmente utilizadas
 
@@ -665,14 +692,33 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 ```
 
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Utiliza el parámetro `env` en el gráfico de Helm para definir la variable de entorno `DD_LOGS_CONFIG_PROCESSING_RULES` y configurar las reglas de procesamiento generales. Por ejemplo:
+Utiliza el parámetro `spec.override.[key].env` en tu manifiesto del Datadog Operator para definir la variable de entorno `DD_LOGS_CONFIG_PROCESSING_RULES` y configurar reglas de procesamiento globales, donde `[key]` es `nodeAgent`, `clusterAgent` o `clusterChecksRunner`. Por ejemplo:
 
 ```yaml
-env:
-  - name: DD_LOGS_CONFIG_PROCESSING_RULES
-    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_PROCESSING_RULES
+          value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Utiliza el parámetro `datadog.env` en el Helm chart para definir la variable de entorno`DD_LOGS_CONFIG_PROCESSING_RULES` para configurar reglas de procesamiento globales Por ejemplo:
+
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_PROCESSING_RULES
+      value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}
@@ -681,7 +727,7 @@ Todos los logs recopilados por el Datadog Agent se ven afectados por las reglas 
 
 **Nota**: El Datadog Agent no inicia el Collector de logs si existe un problema de formato en las reglas de procesamiento generales. Ejecuta el [subcomando de estado][6] del Agent para solucionar los problemas que encuentres.
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

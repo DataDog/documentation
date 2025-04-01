@@ -1,10 +1,19 @@
 ---
 title: Graph historical SLO data on Dashboards
-disable_toc: false
+further_reading:
+- link: "/service_management/service_level_objectives/"
+  tag: "Documentation"
+  text: "Learn more about Service Level Objectives"
+- link: "/dashboards/widgets/slo"
+  tag: "Documentation"
+  text: "SLO Widget"
+- link: "/dashboards/widgets/slo_list"
+  tag: "Documentation"
+  text: "SLO List Widget"
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  The SLO data source is in public beta. This feature is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
+  The SLO data source is supported for <strong>Metric-based</strong> and <strong>Time Slice</strong> SLOs.
 {{< /callout >}}
 
 ## Overview
@@ -40,6 +49,9 @@ For SLOs that have [status corrections][2], you can enable or disable correction
 
 {{< img src="dashboards/guide/slo_data_type/slo-data-source-correction.mp4" alt="Graph editor configuration with the slo data type selected and the good events measure selected" video="true" style="width:100%;" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/sharing/scheduled_reports/
 [2]: /service_management/service_level_objectives/#slo-status-corrections

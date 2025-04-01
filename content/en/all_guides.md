@@ -28,11 +28,12 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< whatsnext desc="Infrastructure:">}}
 {{< nextlink href="/containers/guide" >}}<i class="icon-container" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Containers{{< /nextlink >}}
 {{< nextlink href="/serverless/guide" >}}<i class="icon-serverless" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Serverless{{< /nextlink >}}
-{{< nextlink href="/network_monitoring/performance/guide" >}}<i class="icon-network" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Performance Monitoring{{< /nextlink >}}
+{{< nextlink href="/network_monitoring/cloud_network_monitoring/guide" >}}<i class="icon-network" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Network Monitoring{{< /nextlink >}}
 {{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Application Performance:">}}{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
+{{< whatsnext desc="Application Performance:">}}
+{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
 {{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
 {{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}

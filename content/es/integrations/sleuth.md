@@ -26,7 +26,7 @@ categories:
 - seguimiento de problemas
 - orquestación
 - control de fuentes
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
 display_on_public_website: true

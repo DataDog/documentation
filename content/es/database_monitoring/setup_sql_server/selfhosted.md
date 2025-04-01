@@ -7,6 +7,9 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: Documentación
   text: Solucionar problemas comunes
+- link: /database_monitoring/guide/sql_deadlock/
+  tag: Documentación
+  text: Configurar la Monitorización Deadlock
 - link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
   tag: Blog
   text: Establecer estrategias de migración Azure para cargas de trabajo SQL con Datadog
@@ -21,8 +24,8 @@ Database Monitoring te proporciona una amplia visibilidad de tus bases de datos 
 
 Sigue los siguientes pasos para habilitar Database Monitoring con tu base de datos:
 
-1. [Conceder acceso al Agent](#grant-the-agent-access)
-1. [Instalar el Agent](#install-the-agent)
+1. [Concede acceso al Agent](#grant-the-agent-access).
+1. [Instala el Agent](#install-the-agent).
 
 ## Antes de empezar
 
@@ -31,11 +34,11 @@ Versiones de SQL Server compatibles
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de sólo lectura al servidor de la base de datos para recopilar estadísticas y consultas.
 
-Crea un inicio de sesión de sólo lectura para conectarte a tu servidor y concede los permisos necesarios:
+Crea un inicio de sesión de solo lectura para conectarte a tu servidor y concede los permisos necesarios:
 
 {{< tabs >}}
 {{% tab "SQL Server 2014 o posterior" %}}
@@ -46,10 +49,11 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Si no utilizas Log Shipping Monitoring (disponible en el Agent v7.50+) o
+-- SQL Server Agent Monitoring (disponible en el Agent v7.57+), comenta las siguiente tres líneas:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -59,10 +63,11 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
+-- Si no utilizas Log Shipping Monitoring (disponible en el Agent v7.50+) o
+-- SQL Server Agent Monitoring (disponible en el Agent v7.57+), comenta las siguientes tres líneas:
+USE msdb;
+CREATE USER datadog FOR LOGIN datadog;
+GRANT SELECT to datadog;
 ```
 
 Crea el usuario `datadog` en cada base de datos de aplicaciones adicional:
@@ -70,8 +75,11 @@ Crea el usuario `datadog` en cada base de datos de aplicaciones adicional:
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab%}}
+{{< /tabs>}}
+
+### Guarda tu contraseña de forma segura
+{{% dbm-secret %}}
 
 ## Instalar el Agent
 
@@ -96,7 +104,7 @@ Se recomienda instalar el Agent directamente en el host de SQL Server, ya que es
 {{% /tab %}}
 {{< /tabs >}}
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-sqlserver-agent-config-examples %}}
 
 ## Referencias adicionales

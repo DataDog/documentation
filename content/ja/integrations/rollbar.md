@@ -19,7 +19,7 @@ categories:
 - log collection
 - issue tracking
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -53,7 +53,7 @@ tile:
 
 ## 概要
 
-Rollbar helps developers build better software, faster. With Rollbar developers can view exceptions from all of their frameworks, platforms, and environments in one place.
+Rollbar は、開発者がより優れたソフトウェアを迅速に構築できるように支援します。Rollbar を使用すると、開発に関連するすべてのフレームワーク、プラットフォーム、環境から生成された例外を 1 つの場所に表示できます。
 
 Rollbar を Datadog に接続して、以下のことができます。
 

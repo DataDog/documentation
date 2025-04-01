@@ -31,7 +31,7 @@ categories:
 - contenedores
 - recopilación de logs
 - seguridad
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true

@@ -62,7 +62,7 @@ datadog-ci lambda uninstrument --functions-regex <valid-regex-pattern> -r us-eas
 datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r us-east-1 --dry-run
 ```
 
-See the configuration section for additional settings.
+コンフィギュレーションセクションでその設定を確認します。
 
 ## 構成
 
@@ -113,7 +113,7 @@ See the configuration section for additional settings.
 | `--no-source-code-integration` |           | Datadog ソースコードインテグレーションを無効にします。                                                                                                                                                                                                                                                                                                     |         |
 | `--upload-git-metadata`        | `-u`      | ソースコードインテグレーションの一部として、Git メタデータのアップロードを有効にするかどうか。Git メタデータのアップロードは、Datadog Github インテグレーションをインストールしていない場合のみ必要です。                                                                                                                                                           | `true`  |
 | `--no-upload-git-metadata`     |           | ソースコードインテグレーションの一部として、Git メタデータのアップロードを無効にします。Datadog Github インテグレーションをインストールしている場合、このフラグを使用すると、Git メタデータのアップロードが不要になります。                                                                                                                                                  |         |
-| `--apm-flush-deadline`         |           | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。Node.js と Python でサポートされています。デフォルトは `100` ミリ秒です。                              |         |
+| `--apm-flush-deadline`         |           | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。                              |         |
 <br />
 
 #### `uninstrument`

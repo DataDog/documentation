@@ -227,8 +227,8 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification
-{{% /pestaña %}}
-{{% pestaña "CloudFormation" %}}
+{{% /tab %}}
+{{% tab "CloudFormation" %}}
 
 Para los usuarios de CloudFormation, puedes Configurar disparadores usando CloudFormation [NotificationConfiguration][1] para tu bucket S3. Consulte el código de ejemplo a continuación.
 

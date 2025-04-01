@@ -608,6 +608,7 @@ h5 {
     
     ul,
     ol,
+    dl,
     p {
         &:lang(ja) {
             font-size: 14px;
@@ -913,6 +914,12 @@ table,
     }
 }
 
+.table-fixed {
+    @include media-breakpoint-up(xl) {
+        table-layout: fixed;
+    }
+}
+
 .break-word {
     table {
         td {
@@ -923,6 +930,7 @@ table,
 
 dl {
     border: 1px solid $ddgray;
+    font-size: 18px;
 
     a {
         border-bottom: 1px solid;

@@ -28,7 +28,7 @@ categories:
 - 構成 & デプロイ
 - ネットワーク
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md
 display_on_public_website: true
@@ -78,17 +78,17 @@ Vercel を Datadog と統合すると、以下のことができます。
 
 - [Datadog のログ管理機能][5]を使用してアプリケーションのログを表示・解析
 - Vercel 上で動作しているサーバーレスアプリケーションや API へのリクエスト数および 4xx/5xx  HTTPエラー数の確認
-- [Datadog Synthetics][6] によるフロントエンドのパフォーマンス監視
+- フロントエンドと [Vercel Functions][6] のパフォーマンスを [Datadog Synthetics][7] で監視する
 
 ## セットアップ
 
-- [Vercel インテグレーションの構成][7]
+- [Vercel インテグレーションの構成][8]
 
 ## 収集データ
 
 ### メトリクス
+{{< get-metrics-from-git "vercel" >}}
 
-Vercel インテグレーションには、メトリクスは含まれません。
 
 ### サービスチェック
 
@@ -98,9 +98,13 @@ Vercel インテグレーションには、サービスのチェック機能は�
 
 Vercel インテグレーションには、イベントは含まれません。
 
+### ログ
+
+Vercel インテグレーションは、Vercel の [Log Drains][10] 機能を使用して、ご利用の Vercel プロジェクトからログを収集します。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 ## その他の参考資料
 
@@ -111,6 +115,9 @@ Vercel インテグレーションには、イベントは含まれません。
 [3]: https://vercel.com/docs/edge-network/overview
 [4]: https://vercel.com/docs/serverless-functions/introduction
 [5]: /ja/logs/
-[6]: /ja/synthetics/
-[7]: https://app.datadoghq.com/setup/vercel
-[8]: /ja/help/
+[6]: https://vercel.com/docs/functions
+[7]: /ja/synthetics/
+[8]: https://app.datadoghq.com/setup/vercel
+[9]: https://github.com/DataDog/integrations-extras/blob/master/vercel/metadata.csv
+[10]: https://vercel.com/docs/observability/log-drains
+[11]: /ja/help/

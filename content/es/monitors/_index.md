@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - monitores
+  - alertas
 aliases:
 - /es/guides/monitors/
 - /es/guides/monitoring/
@@ -39,7 +43,7 @@ Los monitores de Datadog proporcionan una visibilidad vital de tu infraestructur
 Monitoriza cambios críticos comprobando las métricas, la disponibilidad de la integración y los endpoints de red a través de la plataforma de alerta. Con los monitores de Datadog puedes:
 - Simplificar la monitorización y los procesos de respuesta
 - Mejorar la eficacia operativa
-- Optimizar el rendimiento 
+- Optimizar el rendimiento
 
 ## Para empezar
 
@@ -61,27 +65,27 @@ Mide el estado de tus aplicaciones y el estado de tu infraestructura con Datadog
 
 ## Alertas sobre lo que importa
 
-Configura [notificaciones de monitor][2] para mantener a tu equipo informado de los problemas y proporcionar orientación para solucionar problemas. Dirige las notificaciones a las personas adecuadas, aprovecha variables de plantilla para incluir detalles y adjunta snapshots cuando envíes las alertas por correo electrónico o Slack. 
+Configura [notificaciones de monitor][2] para mantener a tu equipo informado de los problemas y ofrecer una guía para solucionar problemas. Dirige las notificaciones a las personas adecuadas, aprovecha las variables de plantilla para incluir detalles y adjunta snapshots cuando envíes las alertas por correo electrónico o Slack.
 
-Reduce la fatiga por alertas para que los equipos puedan centrarse en resolver las alertas cuando es importante. Crea [tiempos de inactividad][3] para silenciar las alertas durante el mantenimiento de las aplicaciones.
+Reduce la fatiga de las alertas para que los equipos puedan centrarse en resolver las alertas pertinentes. Crea [tiempos de inactividad][3] para silenciar las alertas durante el mantenimiento de las aplicaciones.
 
 ## Próximos pasos
 
 Los monitores y las alertas son herramientas esenciales para garantizar la fiabilidad, el rendimiento y la disponibilidad de los sistemas y aplicaciones de TI. Ayudan a mantener la eficiencia operativa, se mejora la experiencia del usuario y se mitigan los riesgos potenciales al permitir una rápida detección y respuesta a los problemas antes de que se agraven. Más información sobre las funciones del monitor: 
-1. [Programa tiempos de inactividad para silenciar monitores.][7]
-1. [Organiza y gestiona monitores.][8]
-1. [Resuelve los errores de configuración de monitores en la página de Calidad del monitor][9].
+1. [Programa tiempos de inactividad para silenciar monitores.][4].
+1. [Organiza y gestiona monitores.][5]
+1. [Investiga las alertas a través de la página de estado.][6].
+1. [Soluciona errores de configuración de monitores en la página Monitor Quality][7].
 
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/monitors/recommended
 [2]: /es/monitors/notify
 [3]: /es/monitors/downtimes
-[4]: /es/monitors/types/
-[5]: /es/monitors/configuration/?tab=thresholdalert
-[6]: /es/monitors/notify/
-[7]: /es/monitors/downtimes/?tab=bymonitorname
-[8]: /es/monitors/manage
-[9]: /es/monitors/quality/
+[4]: /es/monitors/downtimes/?tab=bymonitorname
+[5]: /es/monitors/manage
+[6]: /es/monitors/status/status_page
+[7]: /es/monitors/quality/

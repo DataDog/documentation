@@ -1,9 +1,5 @@
 name: Preview Synthetics
 on: 
-  pull_request:
-    types: [opened, synchronize]
-    branches:
-      - master
   workflow_dispatch: # allows manual trigger
 
 # Stop the current running job if a new push is made to the PR

@@ -1,7 +1,7 @@
 ---
 categories:
 - nube
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Integra tus servicios de Alibaba Cloud con Datadog.
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/

@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - asm
+  - 애플리케이션 보안
 aliases:
 - /ko/security_platform/application_security
 - /ko/security/application_security/enabling/single_step
@@ -13,7 +17,7 @@ further_reading:
 - link: /security/application_security/threats/
   tag: 설명서
   text: 위협 관리
-- link: /security/application_security/software_composition_analysis/
+- link: /security/code_security/software_composition_analysis/
   tag: 설명서
   text: 소프트웨어 구성 분석
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
@@ -78,13 +82,10 @@ ASM을 사용하여 위협을 탐지하고 보호하도록 환경을 구성하�
 
 [보안 신호 탐색기][6]에서 아무 보안 신호를 클릭하여 발생한 활동과 제안 단계를 확인하여 공격을 완화합니다. 동일한 패널에서 연계된 공격 흐름과 함께 트레이스를 확인하고 정보를 요청하여 추가 컨텍스트를 얻습니다.
 
-## 업스트림 오픈 소스 라이브러리와 종속성에서 발견된 위협 조사
+## ASM 비활성화
+ASM 또는 ASM 기능 비활성화와 관련한 자세한 정보는 다음을 참고하세요.
 
-[소프트웨어 구성 분석(SCA)][8]은 알려진 취약점이 있는 오픈 소스 라이브러리를 사용하거나 이에 종속되어 있어 서비스가 위험에 처해 있을 때를 알려줍니다. 취약점을 조사하고 해당 도움말을 따르거나 취약점의 원인을 조사하여 소프트웨어를 보호하세요.
-
-## 애플리케이션 코드의 취약점 감지
-
-[Code Security][9]는 서비스의 코드 수준 취약점을 식별하고 실행 가능한 인사이트와 수정 사항을 제공합니다. IAST(대화형 애플리케이션 보안 테스트) 접근 방식을 사용하여 애플리케이션 코드 내의 취약점을 찾습니다. IAST는 APM(애플리케이션 성능 모니터링)과 같이 코드에 내장된 계측을 사용하며 이를 통해 Datadog은 추가 구성이나 주기적인 스케줄링이 필요한 외부 테스트에 의존하는 대신 합법적인 애플리케이션 트래픽을 사용하여 취약점을 식별할 수 있습니다.
+- [위협 관리 및 보호 비활성화][10]
 
 ## 다음 단계
 
@@ -96,5 +97,8 @@ ASM을 사용하여 위협을 탐지하고 보호하도록 환경을 구성하�
 [4]: /ko/security/default_rules/?category=cat-application-security
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /ko/security/application_security/software_composition_analysis/
-[9]: /ko/security/application_security/code_security/
+[8]: /ko/security/code_security/software_composition_analysis/
+[9]: /ko/security/code_security/
+[10]: /ko/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[11]: /ko/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[12]: /ko/security/application_security/troubleshooting/#disabling-code-security

@@ -4,6 +4,9 @@ algolia:
   - 高度なログフィルター
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
+- link: /logs/guide/getting-started-lwl/
+  tag: ドキュメント
+  text: Logging without LimitsTM 入門
 - link: /logs/guide/how-to-set-up-only-logs/
   tag: ドキュメント
   text: ログ収集専用として Datadog Agent を使用する
@@ -19,9 +22,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-- link: /logs/logging_without_limits/
-  tag: ドキュメント
-  text: Logging without Limits*
 - link: /glossary/#tail
   tag: 用語集
   text: 用語集の "tail" の項目
@@ -98,7 +98,7 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
+オートディスカバリーを使用して、ポッド内の指定したコンテナ (名前は `CONTAINER_NAME`) のコンテナログを収集するように構成するには、ポッドの `log_processing_rules` に以下のアノテーションを追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -111,7 +111,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -126,7 +126,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -231,7 +231,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -246,7 +246,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -258,10 +258,6 @@ spec:
 {{< /tabs >}}
 
 ## ログの機密データのスクラビング
-
-{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
-  Agent を使用した Sensitive Data Scanner は非公開ベータ版です。詳細は<a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">ブログ記事</a>と<a href="https://docs.datadoghq.com/sensitive_data_scanner/">ドキュメント</a>をご覧ください。アクセスをリクエストするには、このフォームに記入してください。
-{{< /callout >}}
 
 編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。
 
@@ -326,7 +322,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -342,7 +338,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: cardpayment:latest
 ```
 
@@ -428,7 +424,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -443,7 +439,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: postgres:latest
 ```
 
@@ -454,7 +450,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em><br><br>ログ収集はミリ秒単位の精度で動作します。 パターンに一致するログでも、より高い精度のログは送信されません。</div>
 
 その他の例:
 
@@ -503,7 +499,7 @@ logs_config:
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
-If no pattern meets the line match threshold, add the `auto_multi_line_default_match_threshold` parameter with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンが行一致のしきい値を満たさない場合は、`auto_multi_line_default_match_threshold` パラメーターをより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 ```yaml
 logs_config:
@@ -529,9 +525,9 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
         "auto_multi_line_detection": true
       }]
 ```
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 
@@ -549,7 +545,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
+        ad.datadoghq.com/<CONTAINER_NAME>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -560,13 +556,13 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: '<CONTAINER_IDENTIFIER>'
+        - name: '<CONTAINER_NAME>'
           image: testApp:latest
 ```
 
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
+自動複数行検出は、一般的な正規表現リストを使用してログとのマッチングを試みます。組み込みリストで不足している場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` 環境変数を使用して `datadog.yaml` ファイルにカスタムパターンを追加することが可能です。
 
-If no pattern meets the line match threshold, add the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` environment variable with a lower value. This configures a threshold value that determines how frequently logs have to match in order for the auto multi-line aggregation to work. To find the current threshold value run the [agent `status` command][1].
+パターンが行一致のしきい値を満たさない場合は、`DD_LOGS_CONFIG_AUTO_MULTI_LINE_DEFAULT_MATCH_THRESHOLD` 環境変数をより低い値で追加します。これにより、自動複数行集計が機能するためにログが一致する頻度を決定するしきい値を構成します。現在のしきい値を確認するには、[エージェントの `status` コマンド] を実行します。
 
 [1]: https://docs.datadoghq.com/ja/agent/configuration/agent-commands/#agent-information
 

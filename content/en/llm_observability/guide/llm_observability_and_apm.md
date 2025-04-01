@@ -8,6 +8,9 @@ further_reading:
 - link: "/glossary/#span/" 
   tag: "Documentation" 
   text: "Learn about APM Spans"
+- link: "https://www.datadoghq.com/blog/troubleshooting-rag-llms/"
+  tag: "Blog"
+  text: "Troubleshooting RAG-based LLM applications"
 ---
 
 ## Overview

@@ -16,7 +16,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform" >}}
-Natural language querying is in private beta. Fill out this form to join the wait list.
+Natural language querying is in Preview. Fill out this form to join the wait list.
 {{< /beta-callout >}} 
 
 Bits AI enables natural language querying for service health and ownership of your services, and allows for retrieval of related Datadog resources. You can inquire about on-call personnel, dashboards, service status, and dependencies using natural language questions. In this guide, see example queries for:
@@ -44,7 +44,7 @@ Bits AI enables natural language querying for service health and ownership of yo
 
 ## Infrastructure data (DDSQL Editor)
 
-<div class="alert alert-info">Bits AI includes access to [DDSQL Editor][1], which is in private beta.</div>
+<div class="alert alert-info">Bits AI includes access to [DDSQL Editor][1], which is in Preview.</div>
 
 Most Common Instance Types:
 {{< img src="ddsql_editor/query-ui-overview.png" alt="Query result for most common instance types" style="width:90%;">}}

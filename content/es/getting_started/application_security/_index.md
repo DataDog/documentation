@@ -1,13 +1,12 @@
 ---
 title: Empezando con la gestión de la seguridad de las aplicaciones
 aliases:
-- /security/security_monitoring/getting_started/
+- /es/security/security_monitoring/getting_started/
 further_reading:
 - link: /security/application_security/terms
   tag: Documentación
   text: Términos y conceptos de seguridad de las aplicaciones
 - link: /security/application_security/how-appsec-works
- 
   tag: Documentación
   text: Cómo funciona la gestión de la seguridad de las aplicaciones
 - link: /security/application_security/enabling/
@@ -98,7 +97,7 @@ Una vez activado, ASM identifica inmediatamente las vulnerabilidades de las apli
 ## Informes y notificaciones
 
 1. Configura [reglas de notificación][23] para recibir alertas a través de Slack, Jira, correo electrónico, etc.
-3. Suscríbete a los informes semanales [compendio de amenazas][22] para iniciar la investigación y corrección de las amenazas a la seguridad más importantes descubiertas en los últimos siete días. 
+3. Suscríbete a los informes semanales [compendio de amenazas][22] para iniciar la investigación y corrección de las amenazas a la seguridad más importantes descubiertas en los últimos siete días.
 
 
 ¿Te interesan las prácticas recomendadas para ir más allá? Consulta la [Guía de inicio rápido del producto][19].

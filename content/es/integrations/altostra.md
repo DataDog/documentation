@@ -27,7 +27,7 @@ categories:
 - nube
 - configuración y despliegue
 - recopilación de logs
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md
 display_on_public_website: true

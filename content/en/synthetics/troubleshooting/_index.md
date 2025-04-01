@@ -141,6 +141,12 @@ Additionally, you might also have to ensure [Datadog Synthetic Monitoring IP ran
 
 Synthetic tests by default do not [renotify][12]. This means that if you add your notification handle such as your email address or Slack handle after a transition is generated (for example: a test going into alert or recovering from a previous alert), a notification is not sent for that transition. A notification is sent for the next transition.
 
+## Mobile tests
+
+### Unable to launch a device recording
+
+If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
+
 ## Private locations
 
 {{< tabs >}}
@@ -158,6 +164,28 @@ This could uncover a resource exhaustion issue on your private locations workers
 
 Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
+### Requirements for browser tests running on private location
+
+Browser tests require elevated privileges to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, then the private location emits error logs when the browser test is executed. The reported logs vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge report the following error:
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+Firefox reports the following error:
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+### Requirements for ICMP tests running on private location
+
+ICMP tests use the `ping` command to assess network routes and connectivity to a host. `ping` opens a raw socket to send ICMP packets through, so it requires the `NET_RAW` capability to allow for the creation of raw sockets. If your container is configured with a security context that drops or removes this capability, ICMP tests will not be able to function properly on the private location.
+
+Additionally, `ping` requires elevated privileges to create the raw socket. The private location cannot execute ICMP tests if the private location is configured with a security context that restricts elevated privileges.
+
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
 This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
@@ -172,6 +200,22 @@ This might mean your private location is unable to reach the endpoint your API t
 {{% /tab %}}
 {{% tab "Docker" %}}
 
+### Resolving IPv4 forwarding issues for private location containers
+
+Private locations require access to [Datadog's Synthetic Monitoring intake endpoints][103] to pull test configurations and push test results. If IPv4 forwarding is disabled on a Linux server, the private location may lose access to the public internet and consequently cannot connect to the intake. Docker typically attempts to enable IP forwarding when a container starts, but if it remains disabled, then the container cannot reach external services like the intake. 
+
+If this is the case, the private location will report logs like:
+
+```
+WARNING: IPv4 forwarding is disabled. Networking will not work.
+```
+and
+```
+Queue error - onFetchMessagesLongPolling - getaddrinfo EAI_AGAIN intake.synthetics.datadoghq.com
+```
+
+To resolve this issue, ensure that `net.ipv4.ip_forward` is enabled on the host. 
+
 ### My private location containers sometimes get killed `OOM`
 
 Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
@@ -182,6 +226,7 @@ This occurs when you attempt to mount a single file in a Windows-based container
 
 [101]: /synthetics/private_locations#private-location-total-hardware-requirements
 [102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[103]: https://docs.datadoghq.com/synthetics/platform/private_locations/?tab=docker#datadog-private-locations-endpoints
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -219,7 +264,7 @@ If you provided a configuration file when installing the application, a Windows 
 
 The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
 
-Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
+Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. You can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][13].
 
 ## Further reading
 

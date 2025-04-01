@@ -25,20 +25,20 @@ categories:
 - ia/ml
 - kubernetes
 - sistema operativo y sistema
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: nvml
 integration_id: nvml
-integration_title: Nvidia NVML
+integration_title: NVIDIA NVML
 integration_version: 1.0.9
 is_public: true
 manifest_version: 2.0.0
 name: nvml
-public_title: Nvidia NVML
-short_description: Admite métricas de GPU Nvidia en k8s
+public_title: NVIDIA NVML
+short_description: Admite métricas de GPU NVIDIA en k8s
 supported_os:
 - linux
 - windows
@@ -54,11 +54,11 @@ tile:
   - Supported OS::macOS
   - Offering::Integration
   configuration: README.md#Setup
-  description: Admite métricas de GPU Nvidia en k8s
+  description: Admite métricas de GPU NVIDIA en k8s
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Nvidia NVML
+  title: NVIDIA NVML
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->

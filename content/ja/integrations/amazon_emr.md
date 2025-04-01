@@ -5,7 +5,7 @@ categories:
 - aws
 - cloud
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon EMR のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
@@ -27,7 +27,7 @@ version: '1.0'
 ## 概要
 
 <div class="alert alert-info">
-<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> helps you observe, troubleshoot, and cost-optimize your Spark jobs on your EMR clusters.
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、EMR クラスター上の Spark ジョブの観測、トラブルシューティング、コスト最適化を支援します。
 </div>
 
 Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
@@ -94,7 +94,7 @@ Amazon EMR インテグレーションには、サービスのチェック機能
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-emr
 [6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_emr/amazon_emr_metadata.csv
 [10]: https://docs.datadoghq.com/ja/help/

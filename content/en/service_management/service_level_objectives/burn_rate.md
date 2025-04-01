@@ -14,7 +14,7 @@ further_reading:
 
 SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO's 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
-**Note:** Burn rate alerts are available for the following SLO types:
+Burn rate alerts are available for the following SLO types:
 
 - [Metric-based SLOs][1], 
 - [Monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors), and
@@ -102,6 +102,10 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
 5. Add [Notification information][4] into the **Configure notifications and automations** section.
 6. Click the **Save and Exit** button on the SLO configuration page.
 
+### Alerting for SLOs with groups
+
+For Time Slice SLOs containing groups, you can set burn rate alerts based on the SLO groups or the overall SLO. If you alert based on the groups, you can confiure the [alert aggregation][8] to use simple or multi alerts. For metric-based and monitor-based SLOs, you can only set burn rate alerts based on the overall SLO.
+
 ### Examples
 
 Below are tables of Datadog's recommended values for 7, 30, and 90-day targets. 
@@ -172,3 +176,5 @@ resource "datadog_monitor" "metric-based-slo" {
 [5]: /api/v1/monitors/#create-a-monitor
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/monitor
 [7]: /service_management/service_level_objectives/time_slice
+[8]: /monitors/configuration/#set-alert-aggregation
+

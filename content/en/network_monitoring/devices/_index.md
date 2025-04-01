@@ -32,7 +32,7 @@ algolia:
 
 <br/>
 
-Network Device Monitoring(NDM) gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up or down.
+Network Device Monitoring (NDM) gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up or down.
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="network_monitoring/devices/getting_started" >}}<u>Getting Started</u>: Getting started with Network Device Monitoring{{< /nextlink >}}

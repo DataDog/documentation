@@ -76,11 +76,12 @@ tile:
 ---
 
 <!--  EXTRAIDO DE https://github.com/DataDog/integrations-internal-core -->
-<div class="alert alert-info">La integración de Cisco Meraki está en versión beta pública.</div>
 
 ## Información general
 
-Esta integración proporciona visibilidad integral de tu entorno de Cisco Meraki mediante la recopilación de métricas para [Network Device Monitoring][1], Network Event Logs y Security Event Logs para [Cloud SIEM][2].
+<div class="alert alert-info">Network Device Monitoring para Cisco Meraki está actualmente en Vista previa.</div>
+
+Esta integración proporciona visibilidad integral de tu entorno de Cisco Meraki mediante la recopilación de métricas de [Network Device Monitoring][1], Network Event Logs y Security Event Logs para [Cloud SIEM][2].
 
 **Network Device Monitoring**
 
@@ -98,7 +99,7 @@ Esta integración extrae dinámicamente etiquetas (tags) de dispositivos y metad
 
 [Security Event Logs][3] alerta sobre eventos como detecciones de intrusiones, violaciones de reglas de firewall y detecciones de amenazas de malware para ayudar a identificar y responder a posibles amenazas de seguridad.
 
-Cree sus propias reglas o aproveche las [reglas de Cloud SIEM listas para usar][4] para la detección de amenazas y la respuesta a incidentes en tiempo real.
+Crea tus propias reglas o aproveche las [reglas de Cloud SIEM predefinidas][4] para la detección de amenazas y la respuesta a incidentes en tiempo real.
 
 **Network Event Logs**
 
@@ -114,67 +115,70 @@ Estos logs rastrean los siguientes temas:
 
 Además de los monitores recomendados incluidos con esta integración, se pueden configurar monitores adicionales para notificar a los administradores sobre eventos críticos, lo que permite una gestión proactiva de la red.
 
-Para recopilar métricas de tu Meraki Cloud Controller, configura la [integración de SNMP][6] con el Meraki Profile.
+Para recopilar métricas de tu Meraki Cloud Controller, configura la [integración de SNMP][6] con el perfil Meraki.
 
 
 ## Configuración
 
 ### Instalación
 
-1. En la aplicación, abre el [cuadro de integración de Meraki][7].
-1. Haz clic en **+ Add Account**.
+1. En la aplicación, abre el [cuadro de la integración de Meraki][7].
+1. Haz clic en **+ Add Account** (+ Añadir cuenta).
 1. Elige un nombre para tu cuenta de Meraki.
-1. Añade una clave de API de Meraki. Encontrarás instrucciones sobre cómo generar una clave de API de Meraki en [API Dashboard de Cisco Meraki][8].
+1. Añade una clave de API Meraki. Encontrarás instrucciones sobre cómo generar una clave de API Meraki en [API del dashboard de Cisco Meraki][8].
 
-### Generación de la clave de API de Meraki
+### Generar la clave de API Meraki
 
-1. Dirígete al dashboard de Meraki.
-2. Habilita el acceso a la API yendo a Organization > Settings > Dashboard API access.
-3. Ve a la página My Profile en el dashboard de Meraki para generar la clave.
+1. Ve al dashboard de Meraki.
+2. Habilita el acceso a la API en Organization > Settings > Dashboard API access (Organización > Parámetros > Acceso a la API del dashboard).
+3. Ve a la página Mi perfil en el dashboard de Meraki para generar la clave.
 
 ### Recopilación de métricas
 
-Para configurar la recopilación de métricas de NDM, se requiere una clave de API de Meraki.
+Para configurar la recopilación de métricas de NDM, se requiere una clave de API Meraki.
 
-#### Device Tag Filters
+#### Filtros de etiquetas de dispositivos
 
-Los Device Tag Filters te permiten especificar qué dispositivos se monitorizarán
-dentro de NDM. Puedes especificar varias etiquetas separándolas
-con una coma. Si no se especifica ninguna etiqueta, se monitorizarán
-todos los dispositivos.
+Los filtros de etiquetas de dispositivos te permiten especificar qué dispositivos monitorizar
+en NDM. Puedes especificar varias etiquetas (tags) separándolas
+con una coma. Si no se especifican etiquetas (tags), se
+monitorean todos los dispositivos.
 
 ### Recopilación de logs
 
-Para configurar la recopilación de logs de eventos de red y logs de eventos de seguridad, se requiere una clave de API de Meraki.
+Para configurar la recopilación de logs de eventos de red y logs de eventos de seguridad, se requiere una clave de API Meraki.
 
-Para obtener más información, consulta la [API Dashboard de Cisco Meraki][9].
+Para obtener más información, consulta la [API del dashboard de Cisco Meraki][9].
 
 ## Datos recopilados
 
 ### Métricas
 
-<div class="alert alert-info">Los datos de los dispositivos Meraki (MR, MS, MX) en Network Device Monitoring (incluidas las métricas y etiquetas a nivel de red, nivel de dispositivo, nivel de enlace ascendente y nivel de interfaz [puerto del conmutador]) están en versión beta.</div>
+<div class="alert alert-info">Los datos de los dispositivos Meraki (MR, MS, MX) en Network Device Monitoring, incluyendo métricas y etiquetas (tags) de nivel de red, nivel de dispositivo, nivel de enlace ascendente y nivel de interfaz (puerto de conmutación), se encuentran en fase beta.
 
-Configura la [integración de SNMP][6] con el Meraki Profile para recopilar métricas (con el prefijo `snmp.` en la siguiente tabla) de tus dispositivos Meraki. Como alternativa, crea un [perfil personalizado][10] para recopilar métricas adicionales. Tenga en cuenta que las métricas con el prefijo `meraki.` se recopilan a través de la integración de Meraki de Datadog, habilitada mediante las instrucciones anteriores.
+
+Las métricas de puerto a nivel de conmutador para el tráfico y el uso de puertos no están disponibles.</div>
+
+Configura la [integración de SNMP][6] con el perfil Meraki para recopilar métricas (con el prefijo `snmp.` en la siguiente tabla) de tus dispositivos Meraki. También puedes crear un [perfil personalizado][10] para recopilar datos adicionales de tus dispositivos Meraki. Ten en cuenta que las métricas con el prefijo `meraki.` se recopilan a través de la integración de Meraki y Datadog, habilitada utilizando las instrucciones anteriores.
 
 {{< get-metrics-from-git "meraki" >}}
 
 ### Eventos
 
-La integración de Meraki no incluye ningún evento.
+La integración de Meraki no incluye evento.
 
-### Checks de servicio
+### Checks de servicios
 
 La integración de Meraki no incluye checks de servicios.
 
 ## Solucionar problemas
 A veces, Datadog tiene problemas para acceder a Meraki desde sus servidores. Añade las direcciones IP de Datadog a tu lista de direcciones IP permitidas para garantizar que el rastreo funcione como se espera.
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 ## Referencias adicionales
 
-Más enlaces, artículos y documentación útiles:
+Documentación útil adicional, enlaces y artículos:
 
 - [Network Device Monitoring][12]
 - [Monitorización de Cisco Meraki con Datadog][13]

@@ -35,7 +35,7 @@ categories:
 - caching
 - data stores
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: cassandra
 integration_id: cassandra
 integration_title: Cassandra
-integration_version: 1.18.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: cassandra
@@ -240,7 +240,7 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 Cassandra_nodetool チェックには、イベントは含まれません。
 
 ### サービスチェック
-{{< get-service-checks-from-git "cassandra_nodetool" >}}
+{{< get-service-checks-from-git "cassandra_nodetool" >}} 
 
 
 ## トラブルシューティング

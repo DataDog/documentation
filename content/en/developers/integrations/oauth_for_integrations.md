@@ -126,13 +126,16 @@ In order to publish an OAuth client, you first need to open a pull request for y
 As a part of your pull request, complete the following steps:
 
 1. Update your README file with an `## Uninstallation` section under `## Setup` that includes the following instructions (along with any custom instructions you would like to add):
-       - Once this integration has been uninstalled, any previous authorizations are revoked. 
-       - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
+   
+   - Once this integration has been uninstalled, any previous authorizations are revoked. 
+   - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
+   
 2. Update your `manifest.json` file to reference this new `## Uninstallation` section. This reference should appear directly beneath the support field:
-       - ```
-           "support": "README.md#Support",
-           "uninstallation": "README.md#Uninstallation",
-         ```
+
+   ```
+   "support": "README.md#Support",
+   "uninstallation": "README.md#Uninstallation",
+   ```
 
 #### Initiate publishing process in Developer Platform
 
@@ -168,6 +171,8 @@ Error
 : `invalid_request - Invalid client_id parameter value`
 
 Until an OAuth client is published, you can only authorize the client from the account it was created in (the partner's sandbox account). This error occurs if you try to authorize the client outside of that account before the client is published.
+
+If you've already published your OAuth client, remember to use the client ID and the client secret you were given at submission. The client secret was displayed only once, so if you've lost it, contact [ecosystems@datadog.com][11] for assistance.
 
 ### Forbidden errors
 
@@ -222,6 +227,9 @@ This error is usually the result of configuration differences between your testi
 - Confirm you are using the correct redirect URI. For example, if your client is published, the redirect URI should match the one configured for production, and not the URI you used for testing.
 - Ensure you are using the correct client. Use your testing client until the integration is published to your sandbox account.
 
+### Applications with subdomains
+
+Datadog does not support multi-tenanted applications where customers authorize using individual subdomains; instead, authorization is supported only through a single domain.
 
 ### OAuth with PKCE
 

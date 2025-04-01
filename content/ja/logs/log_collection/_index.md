@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - grok
+  - grok パーサー
+  - ログのパース
+  - 属性の抽出
+  - 属性のリマッピング
+  - パース
 aliases:
 - /ja/logs/faq/how-to-send-logs-to-datadog-via-external-log-shippers
 - /ja/logs/languages
@@ -105,12 +113,23 @@ Datadog のインテグレーションとログ収集は連携しています。
 1. [インテグレーションページ][6]からインテグレーションを選択し、セットアップの指示に従います。
 2. インテグレーションが提供するログ収集の手順に従ってください。このセクションでは、そのインテグレーションの `conf.yaml` ファイルにある logs セクションのコメントを解除し、環境に合わせて構成する方法について説明します。
 
+## データ転送料金を削減
+
+Datadog の [Cloud Network Monitoring][7] を利用して、組織内で最もスループットの高いアプリケーションを特定しましょう。サポートされているプライベート接続を通じて Datadog に接続し、データをプライベートネットワークで送信することで、パブリックインターネットを避けてデータ転送料金を削減できます。プライベートリンクに切り替えた後は、Datadog の [Cloud Cost Management][8] ツールを使って効果を確認し、クラウドコストの削減状況を監視しましょう。
+
+詳細については、[データ転送料金を削減しながら Datadog にログを送信する方法][9]をご覧ください。
+
 [1]: /ja/logs/log_configuration/processors
 [2]: /ja/logs/log_configuration/parsing
 [3]: /ja/logs/explorer/facets/
 [4]: /ja/agent/kubernetes/log/#autodiscovery
 [5]: /ja/agent/docker/log/#log-integrations
 [6]: /ja/integrations/#cat-log-collection
+[7]: /ja/network_monitoring/cloud_network_monitoring/
+[8]: /ja/cloud_cost_management/
+[9]: /ja/logs/guide/reduce_data_transfer_fees/
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -195,7 +214,7 @@ Datadog では、SSL で暗号化された接続と暗号化されていない�
 | AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | HTTPS 経由で JSON またはプレーンテキスト形式のログを送信するためにカスタムフォワーダーが使用。[Logs HTTP API のドキュメント][1]参照。 |
 | AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | HTTPS 経由で未加工、Syslog、または JSON 形式のログを送信するために Lambda 関数が使用。                                         |
 | AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | HTTPS 経由で JSON 形式のログを送信するために Agent が使用。[ホスト Agent ログ収集のドキュメント][2]参照。          |
-| AP1  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
+| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Browser SDK が HTTPS で JSON 形式のログを送信するために使用します。                                                          |
 
 [1]: /ja/api/latest/logs/#send-logs
 [2]: /ja/agent/logs/#send-logs-over-https
@@ -253,6 +272,7 @@ openssl s_client -connect intake.logs.datadoghq.com:10516
 
 ```text
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
+```
 
 [1]: /ja/account_management/api-app-keys/#api-keys
 
@@ -260,7 +280,7 @@ openssl s_client -connect intake.logs.datadoghq.com:10516
 
 {{< site-region region="eu" >}}
 
-OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、手動で接続をテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。GnuTLS の場合は、以下のコマンドを実行します。
 
 ```shell
 gnutls-cli tcp-intake.logs.datadoghq.eu:443
@@ -315,6 +335,8 @@ TCP エンドポイントは、このサイトでは推奨していません。�
 * ログイベントは、過去 18 時間までの[タイムスタンプ][14]で送信可能です。
 
 上の制限に準拠しないログイベントは、システムによって変換されるか、切り詰められます。または、所定のタイムレンジ外の場合はインデックス化されません。ただし、Datadog はユーザーデータを可能な限り維持するよう全力を尽くします。
+
+インデックス化されたログにのみ適用されるフィールドの追加の切り捨てがあります。message フィールドの値は 75 KiB に、非 message フィールドは 25 KiB に切り捨てられます。Datadog は完全なテキストを引き続き保存し、Logs Explorer の通常のリストクエリで表示されます。ただし、グループ化されたクエリを実行する際、例えばその切り捨てられたフィールドでログをグループ化する場合や、特定のフィールドを表示する操作を行う場合、切り捨てられたバージョンが表示されます。
 
 ### 属性とタグ
 

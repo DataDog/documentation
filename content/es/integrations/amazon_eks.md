@@ -24,7 +24,7 @@ categories:
 - kubernetes
 - log collection
 - orchestration
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/amazon_eks/README.md
 display_on_public_website: true

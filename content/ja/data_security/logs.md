@@ -34,6 +34,10 @@ Datadog は、インデックス化されたログに対して対称暗号化保
 
 バージョン 6 の場合は、Agent から Datadog アプリケーションに送信されるログに含まれる特定のパターンを難読化するように Agent を設定できます。ログに含まれる機密要素をマスクするには、`type` に **mask_sequences** を指定して `log_processing_rules` [設定][4]を使用します。これで、1 つ以上の正規表現からなるリストを作成することで、ログ内の機密データを編集するように Agent に指示できます。
 
+あるいは、クラウドまたは Agent で [Sensitive Data Scanner][7] を使用して、機密データの識別、タグ付け、およびマスキングを行うことができます。Sensitive Data Scanner では、スキャン対象のデータを定義するスキャングループを設定し、次にデータ内で照合する機密情報を特定するためのスキャンルールを設定します。一致した場合にデータをマスキングするかどうかを選択することも可能です。Datadog は、クレジットカード番号、メールアドレス、IP アドレス、API キーなどの機密情報を検出するための事前定義済みルールライブラリを提供しています。また、正規表現に基づくスキャンルールを独自に定義して、特定の機密情報を検出することもできます。
+
+Sensitive Data Scanner は、[プロセッサー][8]として [Observability Pipelines][9] でも利用可能です。Observability Pipelines を使用すると、独自のインフラストラクチャー内でログを収集および処理し、それらを下流のインテグレーションへ転送することができます。
+
 ## HIPAA 対応ユーザー
 
 {{% hipaa-customers %}}
@@ -82,3 +86,6 @@ Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Da
 [4]: /ja/agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
 [5]: /ja/logs/explorer/#share-views
 [6]: https://www.datadoghq.com/legal/hipaa-eligible-services/
+[7]: /ja/sensitive_data_scanner/
+[8]: /ja/observability_pipelines/processors/sensitive_data_scanner
+[9]: /ja/observability_pipelines/

@@ -22,6 +22,8 @@ algolia:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
@@ -186,20 +188,21 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     from datadog_cdk_constructs import Datadog
 
     # For AWS CDK v2
-    from datadog_cdk_constructs_v2 import Datadog
+    from datadog_cdk_constructs_v2 import DatadogLambda
 
-    datadog = Datadog(self, "Datadog",
+    datadog_lambda = DatadogLambda(self, "DatadogLambda",
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
         api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
-    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    datadog_lambda.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<LAMBDA_FUNCTIONS>` with your Lambda functions.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
@@ -257,7 +260,7 @@ The [`lambda-datadog`][1] Terraform module wraps the [`aws_lambda_function`][2] 
 ```tf
 module "lambda-datadog" {
   source  = "DataDog/lambda-datadog/aws"
-  version = "1.5.0"
+  version = "2.0.0"
 
   environment_variables = {
     "DD_API_KEY_SECRET_ARN" : "<DATADOG_API_KEY_SECRET_ARN>"
@@ -267,8 +270,8 @@ module "lambda-datadog" {
     "DD_VERSION" : "<VERSION>"
   }
 
-  datadog_extension_layer_version = 65
-  datadog_python_layer_version = 99
+  datadog_extension_layer_version = 67
+  datadog_python_layer_version = 104
 
   # aws_lambda_function arguments
 }
@@ -293,8 +296,8 @@ module "lambda-datadog" {
 4. Select the versions of the Datadog Extension Lambda layer and Datadog Python Lambda layer to use. If left blank the latest layer versions will be used.
 
 ```
-  datadog_extension_layer_version = 65
-  datadog_python_layer_version = 99
+  datadog_extension_layer_version = 67
+  datadog_python_layer_version = 104
 ```
 
 [1]: https://registry.terraform.io/modules/DataDog/lambda-datadog/aws/latest
@@ -402,8 +405,16 @@ module "lambda-datadog" {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Minimize Cold Start Duration (Beta)
-Starting with version 63 of [the Datadog Extension][7], you can set the environment variable `DD_EXTENSION_VERSION` to `next` to use an optimized version of the Datadog Extension that reduces instrumentation overhead by up to 70%. To leave feedback or report a bug, please add an [issue on Github][8] and tag your issue with `version/next`.
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][7] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][8] and tagging your issue with `version/next`.
 
 ## What's next?
 

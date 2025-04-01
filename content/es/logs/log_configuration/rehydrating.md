@@ -93,7 +93,7 @@ Las vistas históricas permanecen en Datadog hasta que hayan superado el periodo
 
 La vista histórica se elimina definitivamente una hora después. Antes de que esto suceda, el equipo puede cancelar la eliminación.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt=Vídeo "Eliminación de vistas históricas"="true" width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Eliminación de vistas históricas" video="true" width="75%" >}}
 
 ### Visualización de vistas históricas eliminadas
 

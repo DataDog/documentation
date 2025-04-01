@@ -41,7 +41,7 @@ Para empezar, sigue las [instrucciones de instalación][1].
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/serverless/step_functions/installation
 [2]: /es/integrations/amazon_step_functions/

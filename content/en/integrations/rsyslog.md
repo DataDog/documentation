@@ -18,6 +18,10 @@ public_title: Datadog-Rsyslog Integration
 supported_os:
     - linux
 integration_id: "rsyslog"
+further_reading:
+- link: "https://www.datadoghq.com/architecture/using-rsyslog-to-send-logs-to-datadog/"
+  tag: "Architecture Center"
+  text: "Using Rsyslog to send logs to Datadog"
 ---
 
 ## Overview
@@ -448,5 +452,8 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 Need help? Contact [Datadog support][1].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/

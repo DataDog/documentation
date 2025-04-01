@@ -3,7 +3,7 @@ categories:
 - collaboration
 - developer tools
 - issue tracking
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Visualiza, realiza búsquedas y discute sobre actualizaciones de Redmine
   en tu flujo (stream) de eventos de Datadog.

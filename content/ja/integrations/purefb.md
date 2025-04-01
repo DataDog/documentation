@@ -83,10 +83,10 @@ tile:
 
 **このインテグレーションには以下が必要です**。
 
- - FlashBlade Purity 4.1.x+
+ - FlashBlade Purity 4.1.x 以降
  - Datadog Agent v7.26.x+、OpenMetricsBaseCheckV2 を利用するため
  - Python 3
- - The Pure Storage FlashBlade OpenMetrics exporter v1.0.11+ is installed and running in a containerized environment. Refer to the [Pure Storage GitHub repo][3] for installation instructions.
+ - Pure Storage FlashBlade OpenMetrics エクスポーター v1.0.11 以降は、コンテナ環境でインストールされ、実行されます。インストール方法は、[Pure Storage GitHub リポジトリ][3]を参照してください。
 
 ## セットアップ
 
@@ -100,7 +100,7 @@ tile:
 
 #### ホスト
 
-To configure this check for an Agent running on a host, run `datadog-agent integration install -t datadog-purefb==2.0.0`.
+ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==2.0.0` を実行します。
 
 
 ### 構成
