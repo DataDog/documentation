@@ -171,45 +171,43 @@ If you encounter any issues or need assistance:
 
 The process involves the following steps:
 
-#### Step 1: Install the GCP integration & ensure Resource Collection is enabled
+#### Step 1: Install the GCP integration and enable resource collection
 
-To ensure that Datadog can collect GCP Storage metrics from your GCP project, you need to install the GCP integration in Datadog. Make sure to enable Resource Collection for the project containing the buckets you want to monitor. Resource Collection allows Datadog to associate your buckets' labels with the metrics collected through storage monitoring.
+To collect GCP Storage metrics from your GCP project, install the GCP integration in Datadog. Enable Resource Collection for the project containing the buckets you want to monitor. Resource Collection allows Datadog to associate your buckets' labels with the metrics collected through storage monitoring.
 
-**Note**: While you have the option to disable specific metric namespaces, it is crucial that the Cloud Storage namespace (gcp.storage) remains enabled.
+**Note**: While you can disable specific metric namespaces, keep the Cloud Storage namespace (gcp.storage) enabled.
 
+#### Step 2: Enable the Storage Insights API
 
-#### Step 2: Add the `roles/storage.ObjectViewer` role to your Datadog service account
+Enable the [Storage Insights][2] API in your GCP project.
 
-This grants Datadog permission to access and extract the generated inventory reports from Google.
+#### Step 3: Grant service agent permissions
 
-#### Step 3: Enable the [Storage Insights][201] API in your GCP project
+After enabling the Storage Insights API, a project-level service agent is created automatically with the following format: `service-PROJECT_NUMBER@gcp-sa-storageinsights.iam.gserviceaccount.com`
 
-#### Step 4: Grant service agent permissions
+The service agent requires these IAM roles:
 
-After the Storage Insights API has been enabled, a project-level service agent is created automatically. The naming format for this service agent is: `service-PROJECT_NUMBER@gcp-sa-storageinsights.iam.gserviceaccount.com`
-The service agent requires the following IAM roles:
+1. `roles/storage.insightsCollectorService` on the source bucket (includes storage.buckets.getObjectInsights and storage.buckets.get permissions)
+2. `roles/storage.objectCreator` on the destination bucket (includes the storage.objects.create permission)
 
-1. `roles/storage.insightsCollectorService` on the source bucket (this includes storage.buckets.getObjectInsights and storage.buckets.get permissions).
-2. `roles/storage.objectCreator` on the destination bucket (this includes the storage.objects.create permission).
+#### Step 4: Create an inventory report configuration
 
-#### Step 5: Create an Inventory Report Configuration
+You can create an inventory report configuration in multiple ways. The quickest methods use the Google Cloud CLI or Terraform templates. Regardless of the method, ensure the configuration:
 
-There are multiple ways you can create an Inventory Report Configuration. The quickest way for customers to set up Storage Monitoring is through the Google Cloud CLI or Terraform templates. Regardless of the method you choose, the most important part is that the configuration:
-
-1. includes the following metadata fields: "bucket", "name", "project","size","updated","storageClass"
-2. generate CSV reports with '\n' as the delimiter & ',' as the separator
-3. The destination path follows the format: <Bucket>/{{date}}, where <Bucket> is the monitored bucket.
+1. Includes these metadata fields: `"bucket", "name", "project", "size", "updated", "storageClass"`
+2. Generates CSV reports with `'\n'` as the delimiter and `','` as the separator
+3. Uses this destination path format: `<Bucket>/{{date}}`, where `<Bucket>` is the monitored bucket-name
 
 {{< tabs >}}
 {{% tab "Google Cloud CLI" %}}
 
-Use the [Google Cloud CLI][301] to run the following:
+Use the [Google Cloud CLI][301] to run the following command:
 
 ```
 gcloud storage insights inventory-reports create <source_bucket_url> \
   --no-csv-header \
   --display-name=datadog-storage-monitoring \
-  --destination=<gs://my_example_destination_bucket/souce_bucket_name/{{date}}> \
+  --destination=<gs://my_example_destination_bucket/source_bucket_name/{{date}}> \
   --metadata-fields=project,bucket,name,size,updated,storageClass \
   --schedule-starts=<YYYY-MM-DD> \
   --schedule-repeats=<daily|weekly> \
@@ -221,25 +219,91 @@ gcloud storage insights inventory-reports create <source_bucket_url> \
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Download [this][401] terraform template inventory.tf & substitute the necessary arguments and apply the terraform in the GCP Project that has your bucket.
+Copy the following Terraform template, substitute the necessary arguments, and apply it in the GCP project that contains your bucket.
 
-[401]: https://drive.google.com/open?id=11KvwAdcU0jlbBg-hE_GNVvtob8yptCep
+<!-- vale off -->
+{{% collapse-content title="Terraform configuration for inventory reports" level="h4" expanded=true %}}
+
+```hcl
+locals {
+  source_bucket      = "" # The name of the bucket you want to monitor
+  destination_bucket = "" # The bucket where inventory reports are written
+  frequency          = "" # Possible values: Daily, Weekly (report generation frequency)
+  location           = "" # The location of your source and destination buckets
+}
+
+data "google_project" "project" {
+}
+
+resource "google_storage_insights_report_config" "config" {
+  display_name = "datadog-storage-monitoring"
+  location     = local.location
+  frequency_options {
+    frequency = local.frequency
+    start_date {
+      day   = "" # Fill in the day
+      month = "" # Fill in the month
+      year  = "" # Fill in the year
+    }
+    end_date {
+      day   = "" # Fill in the day
+      month = "" # Fill in the month
+      year  = "" # Fill in the year
+    }
+  }
+  csv_options {
+    record_separator = "\n"
+    delimiter        = ","
+    header_required  = false
+  }
+  object_metadata_report_options {
+    metadata_fields = ["bucket", "name", "project", "size", "updated", "storageClass"]
+    storage_filters {
+      bucket = local.source_bucket
+    }
+    storage_destination_options {
+      bucket           = google_storage_bucket.report_bucket.name
+      destination_path = "${local.source_bucket}/{{date}}"
+    }
+  }
+
+  depends_on = [
+    google_storage_bucket_iam_member.admin
+  ]
+}
+
+resource "google_storage_bucket" "report_bucket" {
+  name                        = local.destination_bucket
+  location                    = local.location
+  force_destroy               = true
+  uniform_bucket_level_access = true
+}
+
+resource "google_storage_bucket_iam_member" "admin" {
+  bucket = google_storage_bucket.report_bucket.name
+  role   = "roles/storage.admin"
+  member = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-storageinsights.iam.gserviceaccount.com"
+}
+```
+
+{{% /collapse-content %}}
+<!-- vale on -->
+
 {{% /tab %}}
 {{% tab "Allow Datadog to create the configuration on your behalf" %}}
 
-You can opt to allow Datadog to handle the inventory report configuration by providing the proper permissions to your service account.
-Navigate to IAM & Admin -> Service accounts, and find your Datadog service account & add the roles/storageinsights.Admin role.
+You can allow Datadog to handle the inventory report configuration by providing the proper permissions to your service account:
 
-Next, navigate to the source bucket you would like to monitor and grant that service account the following permissions:
-- roles/storage.insightsCollectorService
-- roles/storage.ObjectViewer
+1. Navigate to IAM & Admin -> Service accounts
+2. Find your Datadog service account and add the `roles/storageinsights.Admin` role
+3. Navigate to the source bucket you want to monitor and grant these permissions:
+   - `roles/storage.insightsCollectorService`
+   - `roles/storage.ObjectViewer`
+4. Navigate to the destination bucket and grant these permissions:
+   - `roles/storage.objectCreator`
+   - `roles/storage.insightsCollectorService`
 
-Finally, navigate to the destination bucket (where you set these inventory reports to be written to) & grant these permissions
-- roles/storage.objectCreator
-- roles/storage.insightsCollectorService
-
-
-Alternatively, if you'd like to create a custom role specifically for Datadog, here are the required permissions:
+Alternatively, you can create a custom role specifically for Datadog with these required permissions:
 
 ```
 storage.buckets.get
@@ -256,35 +320,45 @@ storageinsights.reportDetails.get
 storageinsights.reportDetails.list
 ```
 
-After the necessary permissions have been granted, Datadog can create the inventory report configuration with your setup details in the next step.
+After granting the necessary permissions, Datadog can create the inventory report configuration with your setup details.
+
+#### Step 5: Add the Storage Object Viewer role to your Datadog service account
+
+Grant Datadog permission to access and extract the generated inventory reports from Google. This permission should be on the destination bucket where the inventory reports are stored.
+
+1. Select the destination bucket for your inventory reports
+2. In the bucket details page, click the Permissions tab
+3. Under Permissions, click Grant Access to add a new principal
+4. Principal: Enter the Datadog Service Account email
+5. Role: Select Storage Object Viewer (`roles/storage.objectViewer`)
+
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Post-setup steps
 
 After completing the setup steps, fill out the [post-setup][3] form with the following required information:
-1. Name of the destination bucket holding the inventory files.
-2. The name of the service account with the granted permissions
-3. Prefix where the files are stored in the destination bucket (if any).
-4. Name of the source bucket you want to monitor (the bucket producing inventory files).
-5. GCP location of the destination bucket holding the inventory files.
-6. GCP ProjectID containing the buckets.
-7. Datadog org ID.
+1. Name of the destination bucket holding the inventory files
+2. Name of the service account with the granted permissions
+3. Prefix where the files are stored in the destination bucket (if any)
+4. Name of the source bucket you want to monitor (the bucket producing inventory files)
+5. GCP location of the destination bucket holding the inventory files
+6. GCP ProjectID containing the buckets
+7. Datadog org ID
 
 ### Validation
 
 To verify your setup:
-1. Wait for the first inventory report to generate (up to 24 hours/ 7 Days depending on the frequency)
+1. Wait for the first inventory report to generate (up to 24 hours for daily reports or 7 days for weekly reports)
 2. Check the destination bucket for inventory files
-3. Confirm the Datadog integration can access the files:
-4. Navigate to Infrastructure -> Storage Monitoring -> Installation Recommendations to see if the bucket you configured is showing in the list
-
+3. Confirm the Datadog integration can access the files
+4. Navigate to Infrastructure -> Storage Monitoring -> Installation Recommendations to see if your configured bucket appears in the list
 
 ### Troubleshooting
 If you encounter any issues or need assistance:
-- Make sure to use only one destination bucket for all inventory files per AWS account
+- Use only one destination bucket for all inventory files per GCP project
 - Verify all permissions are correctly configured
-- If you're still encountering issues, [reach out][1] with your bucket details, GCP Project ID, and Datadog org ID
+- If issues persist, [reach out][1] with your bucket details, GCP Project ID, and Datadog org ID
 
 [1]: mailto:storage-monitoring@datadoghq.com
 [2]: https://cloud.google.com/storage/docs/insights/using-inventory-reports#enable_the_api
