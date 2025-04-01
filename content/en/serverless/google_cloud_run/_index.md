@@ -233,12 +233,13 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-Add the same value from `DD_SERVICE` to a `service` label on your Cloud Run Service, inside the info panel of your service. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+Add the same value from `DD_SERVICE` to a `service` label on your Cloud Run Service, inside the info panel of your service.
 
 | Name      | Value                                                       |
 |-----------|-------------------------------------------------------------|
 | `service` | The name of your service matching the `DD_SERVICE` env var. |
 
+For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}

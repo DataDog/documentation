@@ -127,18 +127,19 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][9]. |
    | `DD_TAGS` | Your comma-separated custom tags. For example, `key1:value1,key2:value2`.  |
 
-8. **Add Service Label**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+8. **Add Service Label in the info panel**. Tag your GCP entity with the `service` label to correlate your traces with your service:
 
-   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
-
+   Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. 
    | Name      | Value                                                       |
    |-----------|-------------------------------------------------------------|
    | `service` | The name of your service matching the `DD_SERVICE` env var. |
+   
+   For more information on how to add labels, see Google Cloud's [Configure labels for services][12] documentation.
 
 ## Example Functions
 The following example contains a sample function with tracing and metrics set up.
 
-{{< programming-lang-wrapper langs="nodejs,python" >}}
+{{< programming-lang-wrapper langs="nodejs,python,java" >}}
 {{< programming-lang lang="nodejs" >}}
 ```js
 // Example of a simple Cloud Run Function with traces and custom metrics
@@ -202,6 +203,7 @@ public class Example implements HttpFunction {
   }
 }
 ```
+
 You can also install the tracer using the following Maven dependency:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -313,4 +315,4 @@ You can collect [debug logs][7] for troubleshooting. To configure debug logs, us
 [10]: https://cloud.google.com/functions/1stgendocs/deploy
 [11]: https://cloud.google.com/sdk/gcloud/reference/functions/deploy
 [12]: https://cloud.google.com/run/docs/configuring/services/labels
-[13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot
+[13]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/?tab=springboot
