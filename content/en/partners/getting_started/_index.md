@@ -1,5 +1,5 @@
 ---
-title: Partners
+title: Getting Started
 description: "Getting started with Datadog for Sales & Services Partners"
 ---
 
