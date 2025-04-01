@@ -72,7 +72,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `#`, and spaces require escaping with the `\` character. 
 - `/` is not considered a special character and doesn't need to be escaped.
-- `@` currently is not searchable in the logs explorer as it is reserved for [Attribute Search](#attributes-search).
+- `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 
 You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
 
