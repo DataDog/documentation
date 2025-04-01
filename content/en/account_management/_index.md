@@ -13,7 +13,7 @@ further_reading:
       text: "Best practices for managing Datadog organizations at scale"
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">TThe Datadog for Government platform exclusively supports SAML or basic username/email and password authentication. Before configuring SAML authentication, you must establish at least one username/email and password account to ensure continued access during the setup process.
+<div class="alert alert-warning">The Datadog for Government platform supports only SAML or basic authentication using a username/email and password. Before configuring SAML authentication, ensure that at least one username/email and password account is established to maintain access during the setup process. Datadog recommends enabling multi-factor authentication (MFA) for password-based accounts.
 
 If you need SAML enabled for a trial account, contact <a href="https://docs.datadoghq.com/getting_started/support/">Datadog Support</a>.</div>
 
