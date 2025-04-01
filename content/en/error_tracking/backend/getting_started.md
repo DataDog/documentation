@@ -16,15 +16,18 @@ further_reading:
 
 ## Overview
 
-[Error Tracking][1] processes errors collected by the Datadog Agent. Whenever an [error span][2] or span containing an error [span event][3] is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
+[Error Tracking][1] processes errors collected by the Datadog Agent. Whenever an error is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
 ## Getting started
 
 Follow the [in-app setup instructions][4] or choose an instrumentation approach to start collecting backend errors:
 
+- [Single step instrumentation](#using-single-step-instrumentation)
+- [Manual instrumentation](#using-datadog-tracing-libraries)
+
 ### Using Single Step Instrumentation
 
-If you install or update a Datadog Agent with the **Enable APM Instrumentation** and **Error Tracking Standalone** options selected, the Agent is installed and configured to enable Backend Error Tracking. This allows you to automatically instrument your application, without any additional installation or configuration steps.
+Install or update a Datadog Agent with the **Enable APM Instrumentation** and **Error Tracking Standalone** options to enable standalone Backend Error Tracking. This allows you to automatically instrument your application, without any additional installation or configuration steps.
 
 The following examples show how it works for each deployment type.
 
@@ -129,7 +132,7 @@ To enable Single Step Instrumentation with Helm:
 
 ### Using Datadog tracing libraries
 
-To automatically instrument your application with Datadog libraries:
+To instrument your application with Datadog libraries:
 
 1. [Install and configure the Agent](#install-and-configure-the-agent).
 2. [Add the Datadog tracing library to your code](#instrument-your-application).
@@ -211,6 +214,7 @@ datadog:
 #### Instrument your application
 
 Follow the relevant [documentation][14] to set up your application to send traces using one of the official Datadog tracing libraries.
+Follow the [OpenTelemetry API guide][3] for your application language to manually send errors through span events.
 
 ### Advanced options
 
@@ -431,7 +435,7 @@ Coming soon
 
 [1]: https://app.datadoghq.com/error-tracking
 [2]: /tracing/error_tracking/#use-span-attributes-to-track-error-spans
-[3]: /tracing/trace_collection/custom_instrumentation/?tab=opentelemetryapi
+[3]: /tracing/trace_collection/custom_instrumentation/?tab=opentelemetryapi#getting-started
 [4]: https://app.datadoghq.com/error-tracking/settings/setup/backend
 [11]: /agent
 [14]: /tracing/trace_collection/automatic_instrumentation/dd_libraries
