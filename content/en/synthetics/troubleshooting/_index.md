@@ -149,7 +149,9 @@ If there are security checks during application startup, such as verifying if US
 
 ### Ensure proper app functioning during test recording and execution
 
-If certain features of your iOS app are not functioning as expected during test recording or test execution, it could be a result of the app resigning process. This resigning process is required so that mobile devices can trust the provided application, and so the resigning process could remove iOS entitlements that might be essential and cause issues (e.g. access to Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, etc). To minimize the risk of entitlement-related issues, we recommend distributing your iOS app using Ad Hoc or Development provisioning profiles for improved compatibility. While using an Enterprise provisioning profile is an option, you might encounter challenges when using it.
+If certain features of your iOS app are not functioning as expected during test recording or test execution, it could be a result of the app resigning process. This resigning process is required so that mobile devices can trust the provided application. Issues with the resigning process may cause essential iOS entitlements to be removed (such as access to Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, and so on).
+
+To minimize the risk of entitlement-related issues, and for improved compatibility, Datadog recommends distributing your iOS app using Ad Hoc or Development provisioning profiles.
 
 ## Private locations
 
