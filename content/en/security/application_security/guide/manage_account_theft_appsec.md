@@ -5,24 +5,24 @@ disable_toc: false
 
 Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
 
-Datadog Application Security Management (ASM) provides [builtin][1] detection and protection capabilities to help you manage this threat. 
+Datadog Application Security Management (ASM) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
 
-This guide describes how to use ASM to prepare for and respond to account takeover campaigns. This guide is divided into three phases:
+This guide describes how to use ASM to prepare for and respond to account takeover (ATO) campaigns. This guide is divided into three phases:
 
-1. [Collecting login information](#collecting-login-information)
+1. [Collecting login information](#phase-1-collecting-login-information):
    - Enable and verify login activity collection in Datadog ASM using automatic or manual instrumentation methods.
    - Use remote configuration options if you cannot modify your service code.
    - Troubleshoot missing or incorrect data.
-2. [Preparing for account takeover campaigns](#preparing-for-account-takeover-campaigns)
+2. [Preparing for account takeover campaigns](#phase-2-preparing-for-ato-campaigns):
    - Prepare for ATO campaigns detected by ASM. 
    - Configure notifications for attack alerts.
    - Validate proper data propagation for accurate attacker identification.
    - Set up automatic IP blocking for immediate mitigation.
    - Learn about the importance of temporary blocking due to dynamic attacker IPs.
-3. [Reacting to account takeover campaigns](#reacting-to-account-takeover-campaigns)
+3. [Reacting to account takeover campaigns](#phase-3-reacting-to-ato-campaigns):
    - Learn how to react to ATO campaigns, including attacker strategies, triage, response, investigation, monitoring, and cleanup.
 
-## Collecting login information
+## Phase 1: Collecting login information
 
 To detect malicious patterns, ASM requires visibility into your users' login activity. This phase describes how to enable and validate this visibility. 
 
@@ -143,7 +143,7 @@ To use custom In-App WAF rules, do the following:
 
 For more details, see [Tracking business logic information without modifying the code][13].
 
-## Preparing for Account Takeover campaigns
+## Phase 2: Preparing for ATO campaigns
 
 After setting up instrumentation for your services, ASM monitord for attack campaigns. You can review the monitoring in the [Attacks overview][14] **Business logic** section. 
 
@@ -207,7 +207,7 @@ To configure automatic blocking, do the following:
 
 <!-- ![][image12] -->
 
-## Reacting to account takeover campaigns
+## Phase 3: Reacting to ATO campaigns
 
 This section describes common account takeover hacker behavior and how to triage, investigate, and monitor detections.
 
