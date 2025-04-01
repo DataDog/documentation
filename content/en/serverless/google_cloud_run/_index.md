@@ -229,6 +229,16 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 
+### On the Cloud Run Service
+**Add Service Label**. Tag your GCP entity with the `service` label to correlate your traces with your service:
+
+Add the same value from `DD_SERVICE` to a `service` label on your cloud function's inside the info panel of your function. More information on how to add labels can be found [here][1].
+
+| Name      | Value                                                 |
+|-----------|-------------------------------------------------------|
+| `service` | The name of your service matching `DD_SERVICE` env var |
+[1]: https://cloud.google.com/run/docs/configuring/services/labels
+
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
 To deploy your Cloud Run service with YAML service specification, use the following example configuration file.
@@ -520,6 +530,17 @@ Supply placeholder values:
 | `DD_TAGS`         | See [Unified Service Tagging][13]. |
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
+
+### **Add Service Label** in Google's Cloud Run Function Info Panel.
+
+Tag your GCP entity with the `service` label to correlate your traces with your service:
+
+Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+
+| Name      | Value                                                       |
+   |-----------|-------------------------------------------------------------|
+| `service` | The name of your service matching the `DD_SERVICE` env var. |
+
 
 ## Example application
 
@@ -851,3 +872,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
 [14]: /serverless/guide/gcr_serverless_init
+[15]: https://cloud.google.com/run/docs/configuring/services/labels

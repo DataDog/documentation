@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the datadog agent in a sidecar container.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run functions Gen 2 ([formerly Cloud Functions v2][1]) through the Datadog Agent in a sidecar container.
 
-This page is **only for 2nd Gen Cloud Run Functions**, for 1st Gen support, see [1st Gen Functions][2], and to collect additional metrics, install the [Google Cloud integration][3].
+This page is **only for 2nd Gen Cloud Run Functions**. For 1st Gen support, see [1st Gen Functions][2], and to collect additional metrics, install the [Google Cloud integration][3].
 
 [1]: https://cloud.google.com/blog/products/serverless/google-cloud-functions-is-now-cloud-run-functions
 [2]:/serverless/google_cloud_run/functions_gen1
@@ -352,6 +352,16 @@ If you are deploying a new Cloud Run function for the first time through the con
 
 Do not use the `DD_LOGS_ENABLED` environment variable. This variable is only used for the [serverless-init][14] install method.
 `FUNCTION_TARGET` can also be found on the source tab inside Google console: `Function entry point`.
+
+### **Add Service Label** in Google's Cloud Run Function Info Panel. 
+
+Tag your GCP entity with the `service` label to correlate your traces with your service:
+
+Add the same value from `DD_SERVICE` to a `service` label on your cloud function, inside the info panel of your function. For more information on how to add labels, see Google Cloud's [Configure labels for services][15] documentation.
+
+| Name      | Value                                                       |
+   |-----------|-------------------------------------------------------------|
+| `service` | The name of your service matching the `DD_SERVICE` env var. |
 
 ## Example application
 
@@ -868,3 +878,4 @@ public class Function : IHttpFunction
 [12]: /tracing/other_telemetry/connect_logs_and_traces/ruby
 [13]: /getting_started/tagging/unified_service_tagging/
 [14]: /serverless/guide/gcr_serverless_init
+[15]: https://cloud.google.com/run/docs/configuring/services/labels
