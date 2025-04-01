@@ -83,7 +83,7 @@ You can nest \`if\` tags to create more complex conditional content. For example
 Use "end" comments as shown to avoid confusion around which \`if\` tag is being closed.
 
 {% alert level="info" %}
-To make additional content display below this alert, choose \`${firstFilterOption.id}\` for the ${firstFilterTraitLabel} filter and \`${secondFilterOption.id}\` for the ${secondFilterTraitLabel} filter.
+To make additional content display below this alert, choose ${firstFilterOption.label} for the ${firstFilterTraitLabel} filter and ${secondFilterOption.label} for the ${secondFilterTraitLabel} filter.
 {% /alert %}
     
 <!-- ${firstFilterOption.label} -->
@@ -91,7 +91,7 @@ To make additional content display below this alert, choose \`${firstFilterOptio
     
 <!-- ${firstFilterOption.label} > ${secondFilterOption.label} -->
 {% if equals($${secondFilter.config.trait_id}, "${secondFilterOption.id}") %}
-This line of text only displays when the ${firstFilterTraitLabel} filter is set to \`${firstFilterOption.label}\` and the ${secondFilterTraitLabel} filter is set to \`${secondFilterOption.label}\`.
+This line of text only displays when the ${firstFilterTraitLabel} filter is set to ${firstFilterOption.label} and the ${secondFilterTraitLabel} filter is set to ${secondFilterOption.label}.
 {% /if %}
 <!-- end ${firstFilterOption.label} > ${secondFilterOption.label} -->
     
@@ -116,6 +116,45 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
     let table = '{% table %}\n';
     table += '* Trait\n';
     table += '* Valid values\n';
+    table += '* Equals function to use in `if` tag\n';
+
+    const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
+    filters.forEach((filter) => {
+      const options = Object.values(this.data.filtersManifest.optionGroupsById[filter.config.option_group_id]);
+
+      // Create a new row
+      table += '---\n';
+
+      // Add the trait id - this will take up multiple rows
+      table += `* \`${filter.config.trait_id}\` {% rowspan=${options.length} %}\n`;
+
+      // Add the first value to the first row
+      table += `* \`${options[0].id}\`\n`;
+
+      // Add the first equals function to the first row
+      table += `* \`equals($${filter.config.trait_id}, "${options[0].id}")\`\n`;
+
+      // Add the rest of the rows alongside the trait id cell
+      options.forEach((option, idx) => {
+        if (idx === 0) {
+          return;
+        }
+        // add another row with an additional value and equals function
+        table += '---\n';
+        table += `* \`${option.id}\`\n`;
+        table += `* \`equals($${filter.config.trait_id}, "${option.id}")\`\n`;
+      });
+    });
+
+    table += '{% /table %}\n';
+    return table;
+  }
+
+  /*
+  buildTraitsAndValuesTable() {
+    let table = '{% table %}\n';
+    table += '* Trait\n';
+    table += '* Valid values\n';
 
     const filters = Object.values(this.data.filtersManifest.filtersByTraitId);
     filters.forEach((filter) => {
@@ -136,4 +175,5 @@ This line of text only displays when the ${firstFilterTraitLabel} filter is set 
     table += '{% /table %}\n';
     return table;
   }
+  */
 }
