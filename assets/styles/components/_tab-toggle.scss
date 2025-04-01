@@ -1,7 +1,54 @@
 .nav-tabs.response-toggle {
-    margin-bottom: 20px;
-    display: flex;
+    display: flex !important;
     gap: 8px;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 5px;
+    width: max-content !important;
+    min-width: min-content !important;
+    flex: 0 0 auto !important;
+
+    /* Container reset */
+    float: none !important;
+    position: relative !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    /* For Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+    }
+
+    /* Parent container override */
+    & > * {
+        flex: 0 0 auto !important;
+    }
+
+    .nav-item {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+        margin: 0;
+        float: none !important;
+
+        &:before {
+            content: none !important;
+        }
+    }
 
     a {
         -moz-osx-font-smoothing: grayscale;
@@ -16,6 +63,8 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        white-space: nowrap !important;
+        flex: 0 0 auto !important;
 
         &::before {
             content: '';
@@ -52,8 +101,124 @@
             box-shadow: 0 2px 8px rgba(99, 44, 166, 0.15);
         }
     }
+}
 
-    .nav-item::before {
-        content: "";
+.code-tabs {
+    min-height: 200px;
+    position: relative;
+
+    .nav-tabs {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        gap: 8px;
+        flex-wrap: nowrap !important;
+        margin: 0;
+        position: relative;
+        z-index: 2;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+
+        /* For Firefox */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        li {
+            padding: 0;
+            position: relative;
+            flex: 0 0 auto;
+            white-space: nowrap;
+
+            &:before {
+                content: '' !important;
+                margin: 0 !important;
+                float: none !important;
+            }
+
+            &.active {
+                z-index: 3;
+
+                a {
+                    background: #FFFFFF;
+                    color: $ddpurple;
+                    box-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
+                    border: 1px solid rgba(99, 44, 166, 0.15);
+                    border-bottom: 1px solid #FFFFFF;
+                    margin-bottom: -1px;
+                    font-weight: 700;
+
+                    &:hover {
+                        color: $ddpurple;
+                    }
+
+                    &::before {
+                        opacity: 0;
+                    }
+                }
+            }
+
+            a {
+                background: transparent;
+                border: 1px solid transparent;
+                padding: 8px 16px;
+                font-weight: 600;
+                font-size: 16px;
+                border-radius: 8px 8px 0 0;
+                display: inline-block;
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+                color: rgba(0, 0, 0, 0.6);
+                white-space: nowrap;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                &:hover {
+                    color: $ddpurple;
+                    border-color: rgba(99, 44, 166, 0.15);
+                    border-bottom-color: transparent;
+                }
+
+                &:active {
+                    box-shadow: 0 -2px 8px rgba(99, 44, 166, 0.15);
+                }
+            }
+        }
+    }
+
+    .tab-content {
+        background: #FFFFFF;
+        border: 1px solid rgba(99, 44, 166, 0.15);
+        border-radius: 0 0 12px 12px;
+        padding: 24px;
+        margin: -1px 0 32px 0;
+        position: relative;
+        z-index: 1;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        transition: border-radius 0.2s ease;
     }
 }
