@@ -11,12 +11,8 @@ ${templater.buildFrontmatter()}
   
 This is a template for a customizable doc. It includes some example tags and resources.
   
-This paragraph is top-level content (content that is not inside an \`if\` tag). It will show on the page regardless of any filters.
-
 ## Conditional content examples
     
-You might want to leave this section at the bottom of your page for reference until you're finished writing content.
-
 {% alert level="info" %}
 Change any of the filters for this page to update the ${templater.filters.length} lines below.
 {% /alert %}
@@ -33,7 +29,7 @@ ${templater.buildTraitsAndValuesTable()}
   
 ## Guidelines and resources
   
-- When possible, keep headers at the top level, giving each section its own \`if\` tags.
+- When possible, keep headers at the top level (outside of any \`if\` tags), giving each section its own \`if\` tags.
 - If you can't keep headers at the top level, follow the [best practices for avoiding duplicate headers](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers) to make sure your page's right nav works properly.
 - Need to add an alert or other element? See the [Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference).
 - If you need to link to this page, follow the [best practices for linking to a customizable doc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL).
