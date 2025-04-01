@@ -78,10 +78,6 @@ Consider the following `<regex>|<rewriting-rule>` string:
 With this override, the URL `https://my-app.com/some/path` gets rewritten as `https://<deployment-prefix>.my-app.com/some/path`.
 Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
 
-<div class="alert alert-info">
-Only the pipe <code>|</code> syntax is supported for URL substitution regexes. Sed syntax and other delimiter characters are not supported.
-</div>
-
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
 
 ## Introducing a change in an existing environment
@@ -134,9 +130,7 @@ With this override, the URL `https://my-app.com/some/path` gets rewritten as `ht
 <div class="alert alert-info">
 The <code>resourceUrlSubstitutionRegexes</code> is also applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
 </div>
-<div class="alert alert-info">
-Only the pipe <code>|</code> syntax is supported for URL substitution regexes. Sed syntax and other delimiter characters are not supported.
-</div>
+
 
 ## Further reading
 
