@@ -8,12 +8,22 @@ body {
   line-height: 1.5;
 }
 
+pre {
+  padding: 15px !important;
+  padding-top: 10px !important;
+  border: 1px solid #e6d6f9;
+}
+
+code:not(pre code) {
+  color: #ff0099;
+}
+
 pre,
 code {
-  color: #ff0099;
   font-size: 1em;
-  font-family: 'Roboto Mono', sans-serif;
-  white-space: pre-wrap;
+  font-family: 'Roboto Mono', sans-serif !important;
+  line-height: 1.6 !important;
+  white-space: pre-wrap !important;
   word-break: break-word;
 }
 

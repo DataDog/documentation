@@ -8,13 +8,6 @@ body {
   line-height: 1.5;
 }
 
-pre,
-code {
-  color: #ff0099;
-  font-size: 1em;
-  font-family: 'Roboto Mono', sans-serif;
-}
-
 a {
   color: #0953bf;
 }

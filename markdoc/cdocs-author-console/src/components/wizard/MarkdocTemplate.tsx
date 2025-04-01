@@ -1,27 +1,72 @@
 import { WizardFilter } from './types';
-import { CustomizationConfig, Frontmatter, buildFiltersManifest, FiltersManifest } from 'cdocs-data';
+import { CustomizationConfig, buildFiltersManifest, Frontmatter } from 'cdocs-data';
+import Code from '../Code';
+import { MarkdocTemplateData } from './types';
+import { DocTemplater } from './DocTemplater';
 
-function buildMarkup({
+function buildMarkup(templateData: MarkdocTemplateData) {
+  const templater = new DocTemplater(templateData);
+
+  return `
+## Overview
+  
+This is a template for a customizable doc. It includes some example tags and resources.
+  
+This paragraph is top-level content (content that is not inside an \`if\` tag). It will show on the page regardless of any filters.
+  
+## Guidelines and resources
+  
+- When possible, keep headers at the top level, giving each section its own \`if\` tags.
+- If you can't keep headers at the top level, follow the [best practices for avoiding duplicate headers](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#Avoid-duplicate-headers) to make sure your page's right nav works properly.
+- Need to add an alert or other element? See the [Tags Reference for Markdoc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4106092805/Tags+Reference).
+- If you need to link to this page, follow the [best practices for linking to a customizable doc](https://datadoghq.atlassian.net/wiki/spaces/docs4docs/pages/4897343182/Markdoc+Best+Practices#When-you-link-to-a-top-level-header,-do-not-include-the-filter-params-in-the-URL).
+  
+### Displaying content conditionally
+  
+To only display content if a given trait has a particular value, wrap that content in an \`if\` tag:
+  
+\`\`\`
+{% if equals($<TRAIT_ID>, "<TRAIT_VALUE>") %}
+Your content goes here.
+{% /if %}
+\`\`\`
+  
+Lots of pre-configured \`if\` blocks are included in the next section, but just for your reference, here's a handy list of all the traits available on this page, and the valid values for each trait.
+  
+${templater.buildTraitsAndValuesTable()}
+  
+## Conditional content example
+  
+The \`if\` tags on this generated page are already set up for the filters you configured in the Page Wizard.
+  
+You might want to leave this section at the bottom of your page for reference until you're finished writing content.
+
+${templater.buildIfBlocks()}
+`;
+}
+
+function MarkdocTemplate({
   filters,
   wizardCustomizationConfig
 }: {
   filters: WizardFilter[];
   wizardCustomizationConfig: CustomizationConfig;
 }) {
-  let markup = '';
-  markup += buildFrontmatterMarkup({ filters });
-  markup += `
-## Some heading here
+  const templateData: MarkdocTemplateData = {
+    filters,
+    wizardCustomizationConfig,
+    filtersManifest: buildFiltersManifest({
+      frontmatter: buildFrontmatterData({ filters }),
+      customizationConfig: wizardCustomizationConfig
+    }),
+    frontmatter: buildFrontmatterData({ filters })
+  };
 
-This is top-level content (content that is not inside an \`if\` tag), so it will show on the page regardless of any filters.
-
-## Generated \`if\` block templates
-
-You might want to leave this section at the bottom of your page for reference until you're finished writing content.
-`;
-  markup += buildIfBlocks({ filters, wizardCustomizationConfig });
-  return markup;
+  const contents = buildMarkup(templateData);
+  return <Code contents={contents} language="markdoc" />;
 }
+
+export default MarkdocTemplate;
 
 function buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
   let frontmatter: Frontmatter = {
@@ -34,110 +79,3 @@ function buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
 
   return frontmatter;
 }
-
-function buildFrontmatterMarkup({ filters }: { filters: WizardFilter[] }) {
-  let frontmatter = `---
-title: Your Title Here`;
-
-  if (filters.length > 0) {
-    frontmatter += `
-content_filters:`;
-
-    filters.forEach((filter) => {
-      frontmatter += `
-  - trait_id: ${filter.trait_id}
-    option_group_id: ${filter.option_group_id}`;
-    });
-  }
-
-  frontmatter += `
----`;
-
-  return frontmatter;
-}
-
-function buildIfBlock({ filter, filtersManifest }: { filter: WizardFilter; filtersManifest: FiltersManifest }) {
-  const options = Object.values(filtersManifest.optionGroupsById[filter.option_group_id]);
-
-  let markup = '';
-
-  options.forEach((option) => {
-    markup += `
-<!-- ${option.label} -->
-{% if equals($${filter.trait_id}, "${option.id}") %}
-Your ${option.label}-specific content goes here.
-{% /if %}
-`;
-  });
-
-  return markup;
-}
-
-function buildNestedIfBlockExample({ filtersManifest }: { filtersManifest: FiltersManifest }) {
-  const filters = Object.values(filtersManifest.filtersByTraitId);
-  if (filters.length < 2) {
-    return '';
-  }
-
-  const firstFilter = filters[0];
-  const secondFilter = filters[1];
-  const firstFilterOption = Object.values(filtersManifest.optionGroupsById[firstFilter.config.option_group_id])[0];
-  const secondFilterOption = Object.values(filtersManifest.optionGroupsById[secondFilter.config.option_group_id])[0];
-
-  return `
-## Nested \`if\` tag example
-
-You can nest \`if\` tags to create more complex conditional content. For example, if you have two filters, you can create a nested \`if\` tag to show content based on the combination of the two filters, as shown below.
-
-Use "end" comments as shown to avoid confusion around which \`if\` tag is being closed.
-
-<!-- ${firstFilterOption.label} -->
-{% if equals($${firstFilter.config.trait_id}, "${firstFilterOption.id}") %}
-
-  <!-- ${firstFilterOption.label} > ${secondFilterOption.label} -->
-  {% if equals($${secondFilter.config.trait_id}, "${secondFilterOption.id}") %}
-    Your content goes here.
-  {% /if %}
-  <!-- end ${firstFilterOption.label} > ${secondFilterOption.label} -->
-
-{% /if %}
-<!-- end ${firstFilterOption.label} -->
-`;
-}
-
-function buildIfBlocks({
-  filters,
-  wizardCustomizationConfig
-}: {
-  filters: WizardFilter[];
-  wizardCustomizationConfig: CustomizationConfig;
-}) {
-  const frontmatter = buildFrontmatterData({ filters });
-  const filtersManifest = buildFiltersManifest({ frontmatter, customizationConfig: wizardCustomizationConfig });
-
-  let ifBlocks = '';
-
-  filters.forEach((filter) => {
-    ifBlocks += buildIfBlock({ filter, filtersManifest });
-  });
-
-  ifBlocks += buildNestedIfBlockExample({ filtersManifest });
-
-  return ifBlocks;
-}
-
-function MarkdocTemplate({
-  filters,
-  wizardCustomizationConfig
-}: {
-  filters: WizardFilter[];
-  wizardCustomizationConfig: CustomizationConfig;
-}) {
-  return (
-    <div>
-      <pre>{buildMarkup({ filters, wizardCustomizationConfig })}</pre>
-    </div>
-  );
-}
-
-export default MarkdocTemplate;

@@ -1,4 +1,4 @@
-import { CustomizationConfig } from 'cdocs-data';
+import { CustomizationConfig, Frontmatter, FiltersManifest } from 'cdocs-data';
 
 export interface NewOptionConfig {
   id: string;
@@ -30,4 +30,11 @@ export interface WizardFilter {
   trait_id: string;
   option_group_id: string;
   customizationConfig: CustomizationConfig;
+}
+
+export interface MarkdocTemplateData {
+  filters: WizardFilter[];
+  wizardCustomizationConfig: CustomizationConfig;
+  filtersManifest: FiltersManifest;
+  frontmatter: Frontmatter;
 }
