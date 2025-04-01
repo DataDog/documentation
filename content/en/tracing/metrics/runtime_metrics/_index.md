@@ -40,6 +40,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
   <li><strong>Generates runtime-id granularity</strong>: Yes</li>
   <li><strong>Runtimes</strong>: Java 8+</li>
 </ul>
+<div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
 </div>
 {{% /tab %}}
 
