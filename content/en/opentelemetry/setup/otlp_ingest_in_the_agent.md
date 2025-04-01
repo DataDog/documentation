@@ -108,7 +108,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 If you are using an affected version, you can use one of these workarounds:<br><br>
 1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>
 2. Remove <code>/proc/:/host/proc/:ro</code> from <code>volumes</code> in your Agent Docker container.<br>
-3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br>
+3. Set <code>pid</code> to <code>host</code> in your Agent Docker container.<br><br>
 These configurations can be applied through either the <code>docker</code> command or Docker compose file.</div>
 
 [1]: /agent/docker/
