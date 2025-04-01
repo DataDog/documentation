@@ -13,6 +13,7 @@ import ExpressionLanguageEvaluator from './components/expression-language-evalua
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
+const brokenImageError = new Error('Broken image found on page');
 
 // gTag
 gtag('js', new Date());
@@ -424,7 +425,10 @@ function checkForBrokenImages() {
         }
     }
     if (brokenImageCount > 0) {
-        console.error('Broken images found on page:', brokenImageCount);
+        console.error('Broken image found on page:');
+        window.DD_RUM && window.DD_RUM.addError(brokenImageError, {
+            test: 'test',
+        });
     }
 }
 
