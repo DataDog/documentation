@@ -1,12 +1,13 @@
 .nav-tabs.response-toggle {
     margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
+    display: flex;
+    gap: 8px;
 
     a {
         -moz-osx-font-smoothing: grayscale;
         font-size: 16px;
         background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
         border: 1px solid rgba(255, 255, 255, 0.2);
         padding: 8px 16px;
         font-weight: 600;
@@ -14,7 +15,7 @@
         display: inline-block;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
-        z-index: 1;
+        overflow: hidden;
 
         &::before {
             content: '';
@@ -26,8 +27,6 @@
             background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
             opacity: 0;
             transition: opacity 0.3s ease;
-            pointer-events: none;
-            z-index: -1;
         }
 
         &.active,
@@ -36,13 +35,22 @@
             color: white;
             box-shadow: 0 4px 20px rgba(99, 44, 166, 0.2);
             border: none;
-            z-index: 2;
 
             &::before {
                 opacity: 1;
             }
         }
 
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: rgba(99, 44, 166, 0.3);
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(99, 44, 166, 0.15);
+        }
     }
 
     .nav-item::before {
