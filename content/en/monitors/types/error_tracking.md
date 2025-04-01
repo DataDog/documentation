@@ -39,8 +39,8 @@ There are two types of alerting conditions you can configure your Error Tracking
 
 | Alerting&nbsp;condition     | Description    |
 | ---  | ----------- |
-|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
 |New Issue| Alert when an issue occurs for the first time or a regression occurs. For example, alert for your service whenever more than 2 users are impacted by a new error. |
+|High Impact| Alert on issues with a high number of impacted end users. For example, alert for your service whenever more than 500 users are impacted by this error. |
 
 ### Define alert conditions
 
