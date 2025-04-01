@@ -16,3 +16,4 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 [2]: https://docs.datadoghq.com/integrations/guide/azure-graph-api-permissions/
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: /security/cloud_security_management/guide/resource_evaluation_filters
+[5]: https://docs.datadoghq.com/security/cloud_security_management/identity_risks
