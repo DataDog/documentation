@@ -90,9 +90,7 @@ New services or connections appear within moments of being instrumented and age 
 
 ### Color
 
-If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor. If multiple monitors are defined, the status of the monitor in the most severe state is used.
-
-Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
+Service node borders are colored with red or yellow depending on their respective Service Health state. [Service Health][7] consolidates signals across Watchdog anomalies, paging monitors, and incidents into one single health state for each service. Use Service Health to identify services that need immediate attention at a glance. 
 
 ### Availability
 
@@ -107,3 +105,4 @@ The Service Map is rendered based on complete traces that include the root spans
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/glossary/#trace
 [6]: /tracing/troubleshooting/connection_errors
+[7]: /tracing/services/service_page/#service-health
