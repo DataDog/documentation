@@ -21,11 +21,23 @@ const initCodeTabs = () => {
 
             tabContainers.forEach(container => {
                 const tabsNav = container.querySelector('.nav-tabs');
-                const tabsWidth = Array.from(tabsNav.querySelectorAll('li'))
-                    .reduce((sum, tab) => sum + tab.offsetWidth, 0);
+                if (!tabsNav) return;
 
-                // Add some buffer for margins/padding
-                if (tabsWidth > tabsNav.offsetWidth - 20) {
+                // Get the total width of all tabs including gaps
+                const tabsList = Array.from(tabsNav.querySelectorAll('li'));
+                const totalTabsWidth = tabsList.reduce((sum, tab) => {
+                    const style = window.getComputedStyle(tab);
+                    const width = tab.offsetWidth;
+                    const marginLeft = parseFloat(style.marginLeft);
+                    const marginRight = parseFloat(style.marginRight);
+                    return sum + width + marginLeft + marginRight;
+                }, 0);
+
+                // Add a larger buffer (40px) to prevent edge case flickering
+                const containerWidth = tabsNav.offsetWidth;
+                const shouldWrap = totalTabsWidth > (containerWidth - 40);
+
+                if (shouldWrap) {
                     container.classList.add('tabs-wrap-layout');
                 } else {
                     container.classList.remove('tabs-wrap-layout');
@@ -33,11 +45,18 @@ const initCodeTabs = () => {
             });
         };
 
+        // Debounce the resize handler to improve performance
+        let resizeTimeout;
+        const debouncedDetectTabWrapping = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(detectTabWrapping, 100);
+        };
+
         // Initial detection
         detectTabWrapping();
 
-        // Recalculate on window resize
-        window.addEventListener('resize', detectTabWrapping);
+        // Recalculate on window resize with debouncing
+        window.addEventListener('resize', debouncedDetectTabWrapping);
     }
 
     /**
