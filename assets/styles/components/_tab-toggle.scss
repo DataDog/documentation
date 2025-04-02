@@ -35,6 +35,10 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     font-weight: 600;
     position: relative;
     z-index: 3;
+    margin-bottom: -1px;
+    padding-bottom: 9px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
   }
 
   // Common tab content styles
@@ -122,14 +126,10 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
       }
 
       &.active {
-        @extend %active-tab-base;
+        z-index: 3;
 
         a {
           @extend %active-tab-base;
-          margin-bottom: -1px;
-          padding-bottom: 9px;
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
 
           &:after {
             content: '';
@@ -197,30 +197,34 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
     }
   }
 
-  // Wrapped tabs layout
+  // Wrapped tabs layout - Updated to match filter pill style
   &.tabs-wrap-layout {
     .nav-tabs {
       display: flex;
       flex-wrap: wrap;
-      gap: 2px;
+      gap: 6px;
       border-bottom: none;
-      margin-bottom: 4px;
+      margin-bottom: 16px;
+      padding-top: 10px;
 
       li {
-        margin-bottom: 2px;
+        margin-bottom: 0;
 
         &.active a {
-          background: $tab-active-color;
           color: white;
+          background-color: $tab-active-color;
           border: 1px solid $tab-active-color;
-          box-shadow: 0 2px 8px rgba(99, 44, 166, 0.15);
+          box-shadow: none;
           border-radius: 4px;
-          padding: 4px 12px;
-          font-weight: 600;
+          padding: 0 10px;
+          font-weight: 400;
           font-size: 16px;
+          height: 31px;
+          display: inline-flex;
+          align-items: center;
 
           &::before {
-            opacity: 1;
+            display: none;
           }
 
           &:after {
@@ -228,40 +232,37 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
           }
 
           &:hover {
-            background: $tab-active-color;
+            background-color: $tab-active-color;
             color: white;
-            box-shadow: 0 2px 8px rgba(99, 44, 166, 0.15);
+            box-shadow: none;
           }
         }
 
         a {
-          -moz-osx-font-smoothing: grayscale;
-          font-size: 16px;
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(99, 44, 166, 0.1);
-          padding: 4px 12px;
-          font-weight: 600;
+          color: black;
+          background-color: white;
+          border: 1px solid rgb(199, 199, 199);
           border-radius: 4px;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
+          margin-right: 0;
+          cursor: pointer;
+          font-weight: 400;
+          font-size: 16px;
+          height: 31px;
+          padding: 0 10px;
           position: relative;
-          overflow: hidden;
+          overflow: visible;
 
           &::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            opacity: 0;
+            display: none;
           }
 
           &:hover {
+            color: $tab-active-color;
+            background-color: white;
+            border-color: rgb(199, 199, 199);
             box-shadow: none;
-            border-color: rgba(99, 44, 166, 0.3);
-            background: rgba(99, 44, 166, 0.05);
           }
 
           &:active {
@@ -277,6 +278,7 @@ $tab-active-shadow: 0 -4px 12px rgba(99, 44, 166, 0.08);
 
     .tab-content {
       margin-top: 0;
+      border-radius: 4px;
     }
   }
 }
