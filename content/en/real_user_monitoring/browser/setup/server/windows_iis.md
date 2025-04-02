@@ -41,7 +41,7 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 4. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].
 5. Copy and run the config command shown for each IIS site that you wish to inject RUM into.
 
-[1]: https://www.npmjs.com/package/@datadog/browser-rum
+[1]: https://rum-auto-instrumentation.s3.us-east-1.amazonaws.com/iis/latest/x64/injector_IIS.msi
 
 {{% /collapse-content %}}
 
