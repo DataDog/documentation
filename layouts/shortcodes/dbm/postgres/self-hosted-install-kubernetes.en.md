@@ -1,14 +1,14 @@
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][1] to enable Database Monitoring.
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled for your Datadog Cluster Agent.
+**Note**: Make sure [cluster checks][2] are enabled for your Datadog Cluster Agent before proceeding.
 
-Below are some examples of how you can configure the Postgres configuration for different Datadog Cluster Agent deployment methods:
+Below are step-by-step instructions for configuring the Postgres integration using different Datadog Cluster Agent deployment methods.
 
 ### Operator
 
-Using [Kubernetes and Integration | Operator][3] as a reference, below is how you would setup the Postgres Integration:
+Using the [Operator instructions in Kubernetes and Integrations][3] as a reference, follow the steps below to set up the Postgres integration:
 
-1. Use the example below to create or update the `datadog-agent.yaml`:
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
 
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
@@ -48,14 +48,14 @@ Using [Kubernetes and Integration | Operator][3] as a reference, below is how yo
                   dbm: true
     ```
 
-    **Note**: For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Apply the changes to the Datadog Operator with the following command:
+2. Apply the changes to the Datadog Operator using the following command:
 
     ```shell
     kubectl apply -f datadog-agent.yaml
@@ -63,9 +63,9 @@ Using [Kubernetes and Integration | Operator][3] as a reference, below is how yo
   
 ### Helm
 
-Using [Kubernetes and Integration | Helm][4] as a reference, below is how you would setup the Postgres Integration:
+Using the [Helm instructions in Kubernetes and Integrations][4] as a reference, follow the steps below to set up the Postgres integration:
 
-1. Update your YAML configuration file (`datadog-values.yaml` in the Cluster Agent installation instructions) to include the following:
+1. Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
 
     ```yaml
     datadog:
@@ -90,14 +90,14 @@ Using [Kubernetes and Integration | Helm][4] as a reference, below is how you wo
 
     ```
 
-    **Note**: For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+    **Note**: For Postgres 9.6, add the following lines to the instance config where host and port are specified:
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. Deploy the Agent with the above configuration file from the command line:
+2. Deploy the Agent with the above configuration file using the following command:
 
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
@@ -128,7 +128,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
 #### Autodiscovery Annotations v2
 
@@ -164,16 +164,16 @@ spec:
     name: postgres
 ```
 
-Visit [Autodiscovery Annotations][5] for more information.
+For more information, see [Autodiscovery Annotations][5].
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+If you're using Postgres 9.6, add the following to the instance configuration:
 
 ```json
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][6] and declare the password using the `ENC[]` syntax.
 
