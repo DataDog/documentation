@@ -23,7 +23,8 @@ further_reading:
 In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud storage provider and another specified destination.
 
 ## Set up a pipeline
-
+{{< tabs >}}
+{{% tab "Pipeline UI" %}}
 Set up your pipelines and its [sources][1], [processors][2], and [destinations][3] in the Observability Pipelines UI. The general setup steps are:
 
 1. Navigate to [Observability Pipelines][4].
@@ -42,6 +43,37 @@ For detailed setup instructions, select a template-specific documentation and th
   - [Sensitive data redaction][8]
   - [Log Enrichment][9]
   - [Generate Metrics][10]
+
+[1]: /observability_pipelines/sources/
+[2]: /observability_pipelines/processors/
+[3]: /observability_pipelines/destinations/
+[4]: /observability_pipelines/set_up_pipelines/log_volume_control/
+[5]: /observability_pipelines/set_up_pipelines/dual_ship_logs/
+[6]: /observability_pipelines/set_up_pipelines/split_logs/
+[7]: /observability_pipelines/set_up_pipelines/archive_logs/
+[8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/
+[9]: /observability_pipelines/set_up_pipelines/log_enrichment/
+[10]: /observability_pipelines/set_up_pipelines/generate_metrics/
+
+{{% /tab %}}
+
+{{% tab "API" %}}
+
+You can use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+
+[1]: /api/
+[2]: /observability_pipelines/install_the_worker/
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+
+[1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
+[2]: /observability_pipelines/install_the_worker/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
@@ -69,16 +101,6 @@ Make sure your Worker logs are [indexed][14] in Log Management for optimal funct
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/sources/
-[2]: /observability_pipelines/processors/
-[3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/set_up_pipelines/log_volume_control/
-[5]: /observability_pipelines/set_up_pipelines/dual_ship_logs/
-[6]: /observability_pipelines/set_up_pipelines/split_logs/
-[7]: /observability_pipelines/set_up_pipelines/archive_logs/
-[8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/
-[9]: /observability_pipelines/set_up_pipelines/log_enrichment/
-[10]: /observability_pipelines/set_up_pipelines/generate_metrics/
 [11]: /observability_pipelines/advanced_configurations/
 [12]: /observability_pipelines/update_existing_pipelines/
 [13]: /observability_pipelines/install_the_worker/

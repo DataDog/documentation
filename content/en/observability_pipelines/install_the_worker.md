@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps for setting up a pipeline in the UI:
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate, process, and route your logs. You install and configure the Worker as part of the pipeline setup process. These are the general steps if you are setting up a pipeline in the UI:
 
 1. Select a log [source][2].
 1. Select [destinations][3] to which you want to send your logs.
@@ -22,6 +22,13 @@ The Observability Pipelines Worker is software that runs in your environment to 
 ## Install the Worker
 
 After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page.
+
+If you had set up the pipeline components using the API or Terraform, to get to the Install page:
+
+1. Navigate to [Observability Pipelines][5].
+1. Select your pipeline.
+1. Click **Latest Deployment & Setup**.
+1. Click **Worker Installation Steps**.
 
 {{< img src="observability_pipelines/install_page.png" alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables" style="width:100%;" >}}
 
@@ -216,3 +223,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [2]: /observability_pipelines/sources/
 [3]: /observability_pipelines/destinations/
 [4]: /observability_pipelines/processors/
+[5]: https://app.datadoghq.com/observability-pipelines
