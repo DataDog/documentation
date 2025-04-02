@@ -28,8 +28,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
    * For the [Managed installation](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) option, ensure the user generating the token has <strong>Workspace Admin</strong> permissions.
    * For manual installation, ensure the user has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
 
-   As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11].
-
+   As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11]. The service principle must the [<strong>Workspace access</strong> entitlement][17] and the <strong>Workspace Admin</strong> or [CAN VIEW access][9] permissions as described, above.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
@@ -280,3 +279,4 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
+[17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview
