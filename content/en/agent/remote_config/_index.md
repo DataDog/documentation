@@ -93,6 +93,10 @@ The following products and features are supported with Remote Configuration:
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
+### RUM
+
+- **Remotely manage your RUM applications**: Remotely [configure][29] and [manage][30] your RUM applications directly from Datadog after having them auto-instrumented with the RUM SDK.
+
 ### Sensitive Data Scanner (SDS) through the Datadog Agent
 
 - **Redact sensitive information in your logs within your premises (Preview)**: Remotely configure and deploy OOTB Sensitive Data Scanning rules to the Datadog Agent in your environment. See [Sensitive Data Scanner][28] for more information.
@@ -319,3 +323,5 @@ datadog:
 [26]: https://app.datadoghq.com/organization-settings/remote-config/setup?page_id=org-enablement-step
 [27]: /agent/fleet_automation/#send-a-remote-flare
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
+[29]: /real_user_monitoring/browser/setup/server/#remote-configuration
+[30]: /real_user_monitoring/browser/setup/server/#remote-configuration-1
