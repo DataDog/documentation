@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-To get started with Datadog RUM Browser, you need to follow these key steps:
+To get started with Datadog RUM Browser, you need to:
 
 1. Create an application in Datadog.
 2. Instrument your application.
@@ -31,10 +31,10 @@ You can set RUM configs on your web servers and Datadog will automatically injec
 
 Download the RUM installer or use CLI to install the RUM Injector and automatically add RUM JS to your web app HTML.
 
-**SRE and engineering teams** without access to frontend code or **teams who need to manage** all observability needs centrally may find this useful for:
+**SRE and engineering teams** without access to frontend code, or **teams who need to manage** all observability needs centrally, may find this useful for:
 
 - Unlocking performance data across all applications upon setting up RUM
-- Start holistically monitoring application performance across the organization
+- Holistically monitoring application performance across the organization
 
 To learn more, see [Auto-Instrumentation][1].
 
@@ -44,8 +44,8 @@ Add the RUM SDK manually to your application code.
 
 **Frontend engineering, mobile engineering, or product teams** with access to frontend code may find this method useful for:
 
-- Daily engineering needs (live support, troubleshooting, downstream services health checks, and so on)
-- Product needs (user flow analysis, user segmentation, feature flag tracking, and so on)
+- Daily engineering needs (for example: live support, troubleshooting, and downstream services health checks)
+- Product needs (for example: user flow analysis, user segmentation, and feature flag tracking)
 - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation
 
 To learn more, see [Client-Side Instrumentation][2].

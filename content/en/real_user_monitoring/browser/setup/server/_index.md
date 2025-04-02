@@ -46,7 +46,7 @@ Configurations that can be remotely managed are as follows:
 
 <div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
-Follow the relevant documentation for automatic instrumentation approach to learn more:
+Follow the documentation for your web server type to learn more:
 
 {{< partial name="rum/rum-browser-setup.html" >}}
 
