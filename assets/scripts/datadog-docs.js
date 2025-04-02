@@ -14,6 +14,13 @@ import ExpressionLanguageEvaluator from './components/expression-language-evalua
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
+class BrokenImageError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'BrokenImageError';
+    }
+}
+
 // gTag
 gtag('js', new Date());
 gtag('config', gaTag);
@@ -424,7 +431,7 @@ window.addEventListener(
     }
 );
 
-const brokenImageError = new Error(`Broken image found at ${window.location.pathname}`);
+const brokenImageError = new BrokenImageError(`Broken image found at ${window.location.pathname}`);
 
 // Check for broken images and add an error to Datadog RUM
 function checkForBrokenImages() {
@@ -437,7 +444,7 @@ function checkForBrokenImages() {
     }
     if (brokenImageCount > 0) {
         window.DD_RUM && window.DD_RUM.addError(brokenImageError, {
-            test: 'test',
+            image: 'test',
         });
     }
 }
