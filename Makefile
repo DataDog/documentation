@@ -71,7 +71,6 @@ build-cdocs:
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
-	@make build-cdocs 
 	@make update_websites_sources_module
 	@make server
 
