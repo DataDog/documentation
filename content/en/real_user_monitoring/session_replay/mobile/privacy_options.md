@@ -448,7 +448,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 To override text and input privacy, use `setSessionReplayTextAndInputPrivacy` on a view instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
     // Set an text and input override on your view
     myView.setSessionReplayTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
     // Remove an image override from your view
@@ -476,7 +476,7 @@ To override text and input privacy, use `dd.sessionReplayOverrides.textAndInputP
 
 To override image privacy, use `setSessionReplayImagePrivacy` on a view instance and pass a value from the `ImagePrivacy` enum. Passing `null` removes the override.
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
     // Set an image override on your view
     myView.setSessionReplayImagePrivacy(ImagePrivacy.MASK_ALL)
     // Remove an image override from your view
@@ -504,7 +504,7 @@ To override image privacy, use `dd.sessionReplayOverrides.imagePrivacy` on a vie
 
 To override touch privacy, use `setSessionReplayTouchPrivacy` on a view instance and pass a value from the `TouchPrivacy` enum. Passing `null` removes the override.
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
     // Set a touch override on your view
     view.setSessionReplayTouchPrivacy(TouchPrivacy.HIDE)
     // Remove a touch override from your view
@@ -539,7 +539,7 @@ When an element is `hidden`, it is replaced by a placeholder labeled as "Hidden"
 
 Use `setSessionReplayHidden(hide = true)` to hide the element. Setting `hide` to `false` removes the override.
 
-{{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+{{< code-block lang="kotlin" filename="application.kt" disable_copy="false" collapsible="true" >}}
     // Mark a view as hidden
     myView.setSessionReplayHidden(hide = true)
     // Remove the override from the view

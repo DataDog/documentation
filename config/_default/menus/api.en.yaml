@@ -5767,6 +5767,23 @@ menu:
           - ListCostAWSCURConfigs
         unstable: []
         order: 1
+    - name: Cloud Network Monitoring
+      url: /api/latest/cloud-network-monitoring/
+      identifier: cloud-network-monitoring
+      generated: true
+    - name: Get aggregated connections
+      url: '#get-aggregated-connections'
+      identifier: cloud-network-monitoring-get-aggregated-connections
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedConnections
+        unstable:
+          - v2
+        order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
       identifier: cloudflare-integration

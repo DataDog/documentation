@@ -278,3 +278,6 @@ local/bin/py/submit_github_status_check.py
 # CDOCS
 layouts/partials/markdoc-assets.html
 static/cdocs
+
+# Cursor editor configuration
+.cursor/

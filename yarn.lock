@@ -5944,6 +5944,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.7.2":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: e901dc1730bdcd769839b3d93ae6d6457a53d79b19a0eb623ebfea333441259ab51e63ca118baa47a5156567401466ac739f31087b4ee5e6770ab2e227484538
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^3.2.1":
   version: 3.2.1
   resolution: "axobject-query@npm:3.2.1"
@@ -7632,7 +7643,7 @@ __metadata:
     traverse: 0.6.8
     typesense: ^1.8.2
     typesense-instantsearch-adapter: ^2.8.0
-    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.8.tgz"
+    typesense-sync: "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz"
     yaml-lint: ^1.7.0
   languageName: unknown
   linkType: soft
@@ -16797,17 +16808,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.8.tgz":
-  version: 1.0.8
-  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.0.8.tgz"
+"typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz":
+  version: 1.1.0
+  resolution: "typesense-sync@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v1.1.0.tgz"
   dependencies:
     "@babel/runtime": ^7.25.0
     crypto: ^1.0.1
     dotenv: ^16.4.5
-    typesense: ^1.8.2
+    typesense: ^2.0.3
     winston: ^3.14.2
     yargs: ^17.7.2
-  checksum: c59f99971359a80cf7add3d7a17e812898463d478e4a22c755026b07916784e0f1d7fb9acf87398e506400740ffa43d31a6dda2dab8138d5930ef8d22c292142
+  checksum: 4f4d2f90e1553e9948a9413d4a91b8c2dccbb119596d56cff6e3fa4155f61b28a3b4fccb2969d5959864cf370419ed5af5b5461be4e874682dae373d7f2f6ceb
   languageName: node
   linkType: hard
 
@@ -16820,6 +16831,19 @@ __metadata:
   peerDependencies:
     "@babel/runtime": ^7.23.2
   checksum: 29df11e5ba331fdb8c327c72a3f568d0a909db55db51f786c0b66c68750d17fe33a2f3a603e7a31c85eb1269b4d0b9c5f5fd419c5f9d23afabfa1f2500deeba8
+  languageName: node
+  linkType: hard
+
+"typesense@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "typesense@npm:2.0.3"
+  dependencies:
+    axios: ^1.7.2
+    loglevel: ^1.8.1
+    tslib: ^2.6.2
+  peerDependencies:
+    "@babel/runtime": ^7.23.2
+  checksum: 77b46aa5f81acc0a4fa9980d1ebe0554a47757f1e97b1bb0ecf541a893089444b1c5c068e279d16b5fe18e1cb7dafc0298be57394925e11a77672f69d0faa7f2
   languageName: node
   linkType: hard
 
