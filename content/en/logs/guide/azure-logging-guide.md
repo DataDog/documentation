@@ -278,72 +278,33 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
-<div class="alert alert-warning">
-  This is not supported for Datadog {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
+To get started click the button below and fill in the form on Azure portal. The Azure resources required to get Azure activity logs and Azure platform logs (including resource logs) into your Datadog account will be deployed for you.
 
-Datadog recommends using the Event Hub setup for Azure log collection. However, you can also follow the steps in this section to forward all of your Azure App Services logs from Azure Blob Storage:
+**Note**: Resources can only stream to storage accounts in the same Azure region.
 
-1. If you haven't already set up [Azure Blob Storage][301], use one of the following methods to get started: 
-   - [Azure portal][302]
-   - [Azure Storage Explorer][303]
-   - [Azure CLI][304]
-   - [PowerShell][305]
-2. Set up the Datadog-Azure Function to forward logs from Blob Storage using the instructions below.
-3. Configure your Azure App Services to [forward their logs to Blob Storage][306].
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json)
 
-##### Create a function app
+Once the deployment finishes, a storage account with [Azure Blob Storage][301] services will be deployed, along with a [Container App job][302] and [an environment][303], using the names and specifications chosen.
 
-If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
-1. In the Azure portal, navigate to the [Function App overview][309] and click **Create**.
-2. In the **Instance Details** section, configure the following settings:  
-  a. Select the **Code** radio button  
-  b. For **Runtime stack**, select `Node.js`  
-  c. For **Version**, select `18 LTS`.  
-  d. For **Operating System**, select `Windows`.  
-3. Configure other settings as desired.
-4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+##### Add diagnostic settings to send logs
+###### Resource logs
 
-##### Add a new function to your Function App using the Azure Blob Storage trigger template
+For each resource which you would like to [forward resource logs][304], when viewing the resource in the Azure portal, under **Monitoring**, select **Diagnostic settings**. Create a new diagnostic setting, select all the categories you would like to forward, and under **Destination details**, select **Archive to a storage account**, and enter the details of the storage account just created.
 
-1. Select your new or existing function app from the [Function App overview][309].
-2. Under the **Functions** tab, click **Create**. 
-3. For the **Development environment** field, select **Develop in portal**.
-4. Under **Select a template**, choose [Azure Blob storage trigger][313].
-5. Select your **Storage account connection**.
-   **Note**: See [Configure a connection string for an Azure storage account][311] for more information.
-6. Click **Create**.
+Alternatively, you can browse all resources with diagnostic setting capability in the [Monitor | Diagnostic settings][305] page of the portal.
 
-See [Getting started with Azure Functions][307] for more information.
+###### Activity logs
 
-##### Point your Blob Storage trigger to Datadog
+To forward [Azure Activity log data][306], under the [Monitor | Activity log][307] page of the portal, select **Export Activity Logs**, and create a diagnostic setting pointing to the storage account, the same way as you would for resource logs.
 
-1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
-2. Add the [Datadog-Azure Function code][308] to the function's `index.js` file.
-3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.  
-4. If you're not using the Datadog US1 site, set your [Datadog site][312] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
-5. **Save** the function.
-6. Click **Integration** under the **Developer** side menu.
-7. Click **Azure Blob Storage** under **Trigger and inputs**.
-8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
-9. Verify your setup is correct by checking the [Datadog Log Explorer][310] for logs from this resource.
-
-[301]: https://azure.microsoft.com/en-us/services/storage/blobs/
-[302]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal
-[303]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
-[304]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-cli
-[305]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-powershell
-[306]: https://learn.microsoft.com/en-us/training/modules/store-app-data-with-azure-blob-storage/
-[307]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-get-started
-[308]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
-[309]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
-[310]: https://app.datadoghq.com/logs
-[311]: https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
-[312]: https://docs.datadoghq.com/getting_started/site/
-[313]: https://learn.microsoft.com/en-us/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
+[301]: https://azure.microsoft.com/en-us/products/storage/blobs
+[302]: https://learn.microsoft.com/en-us/azure/container-apps/jobs
+[303]: https://learn.microsoft.com/en-us/azure/container-apps/environment
+[304]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings#resource-logs
+[305]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/diagnosticsLogs
+[306]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings#activity-log-settings
+[307]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
 
 {{% /tab %}}
 {{< /tabs >}}
