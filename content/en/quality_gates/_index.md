@@ -141,7 +141,7 @@ For more information, see the [Audit Trail documentation][4].
 [8]: /quality_gates/explorer/
 [9]: /tests/
 [10]: /continuous_integration/
-[11]: /code_analysis/static_analysis
-[12]: /code_analysis/software_composition_analysis
+[11]: /security/code_security/static_analysis
+[12]: /security/code_security/software_composition_analysis
 [13]: /integrations/github/
 [14]: https://app.datadoghq.com/ci/quality-gates/executions

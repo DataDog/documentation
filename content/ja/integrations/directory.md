@@ -21,7 +21,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - os & system
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/directory/README.md
 display_on_public_website: true
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: directory
 integration_id: システム
 integration_title: Directory
-integration_version: 2.1.1
+integration_version: 4.0.1
 is_public: true
 manifest_version: 2.0.0
 name: directory

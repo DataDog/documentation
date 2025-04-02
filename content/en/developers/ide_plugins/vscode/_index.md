@@ -19,6 +19,12 @@ further_reading:
   text: "Simplify production debugging with Datadog Exception Replay"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    The Datadog extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog to accelerate your development.
@@ -156,7 +162,7 @@ Datadog anonymously collects information about your usage of this IDE, including
 
 If you don't wish to send this data to [Datadog][1], you can opt out at any time in the VS Code extension settings: `Datadog > Telemetry > Setup > Enable Telemetry` and select `disabled`.
 
-<div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/getstarted/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> telemetry setting.</div>
+<div class="alert alert-info">The Datadog extension also honors the <a href="https://code.visualstudio.com/docs/configure/telemetry#_output-channel-for-telemetry-events">VS Code telemetry</a> setting.</div>
 
 ## Help and feedback
 
@@ -172,7 +178,7 @@ Check out the [issues][27] section to discover known issues.
 [2]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [3]: mailto:team-ide-integration@datadoghq.com
 [10]: /tracing/error_tracking/
-[11]: /security/application_security/vulnerability_management/
+[11]: /security/code_security/software_composition_analysis/
 [12]: /continuous_integration/guides/flaky_test_management/
 [14]: /continuous_integration/static_analysis/?tab=githubactions
 [15]: /continuous_integration/static_analysis/rules/

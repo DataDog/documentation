@@ -17,7 +17,7 @@ further_reading:
 - link: /synthetics/browser_tests/
   tag: Documentación
   text: Configurar un test de navegador
-- link: /mobile_app_testing/mobile_app_tests
+- link: /mobile_app_testing/
   tag: Documentación
   text: Configurar un test de móvil
 - link: /synthetics/private_locations/
@@ -47,7 +47,27 @@ En la [página Synthetic Monitoring & Continuous Testing Settings][1] (Parámetr
 
 ### Parámetros de etiquetas (tags) aplicados
 
+#### Aplicar etiquetas (tags) para la **atribución de uso** en todos los tests
+
 En la página Usage Attribution (Atribución de uso), puedes configurar hasta tres etiquetas con las que desglosar los atributos de coste y uso. Selecciona **Enforce tags for usage attribution on all tests** (Aplicar etiquetas para la atribución de uso en todos los tests) para requerir que los usuarios introduzcan todas las etiquetas de atribución de uso configuradas al crear o editar tests de Synthetic. Con esta opción habilitada, los usuarios no podrán guardar los tests sin introducir todas las etiquetas necesarias.
+
+#### Aplicar **políticas de etiqueta de monitor** obligatorias en todos los tests
+
+En la página de [configuración de Synthetic Monitoring y Testing][20], selecciona **Enforce required monitor tag policies on all tests** (Aplicar políticas de etiqueta de monitor obligatorias en todos los tests) para exigir que las políticas de etiqueta de monitor definidas por el usuario se apliquen en los tests de Synthetic. Con esta opción activada, los usuarios no podrán guardar los tests sin introducir todas las etiquetas obligatorias.
+
+  <br>
+
+  1. Configura las etiquetas de monitor en la página [**Monitors** > **Settings** > **Policies**][21] (Monitores > Configuración > Políticas):
+
+  <br>
+
+   {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Página de Configuración del monitor, que muestra las etiquetas de política de monitor configuradas" style="width:80%;">}}
+
+  2. Crea un test de navegador de Synthetic y añade las etiquetas de política necesarias:
+
+  <br>
+
+  {{< img src="synthetics/settings/monitor_tags.png" alt="Página Nuevo test de Synthetics, con la función Etiquetas de política resaltada" style="width:80%;">}}
 
 ### Localizaciones predeterminadas
 
@@ -71,7 +91,7 @@ Elige o añade las etiquetas predeterminadas para los detalles de tu [test de AP
 
 Cuando termines de seleccionar las etiquetas relacionadas, haz clic en **Save Default Tags** (Guardar etiquetas predeterminadas).
 
-### Tiempo de espera predeteriminado
+### Tiempo de espera predeterminado
 
 Añade los tiempos de espera predeterminados para los detalles de tu [test de API][4].
 
@@ -211,9 +231,9 @@ Los valores de la variable se actualizan cuando se ejecuta el test del que se ex
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 {{% /tab %}}
 
-{{% tab "Token MFA" %}}  
+{{% tab "Token MFA" %}}
 
-Para generar y utilizar un TOTP en tus tests, crea una variable global donde introduzcas una clave secreta o carga un código QR que te haya proporcionado tu proveedor de autenticación.
+Para generar y utilizar un TOTP en tus tests, crea una variable global donde introducir una clave secreta o subir un código QR de tu proveedor de autenticación. **Nota:** Actualmente, solo se admite el algoritmo hash SHA1 para TOTP.
 
 1. En **Choose variable type** (Elegir el tipo de variable), selecciona **MFA Token**.
 2. En **Define Variable** (Definir la variable), completa **Variable Name** (Nombre de variable). Recuerda que el nombre solo puede contener mayúsculas, números y guiones bajos.
@@ -258,11 +278,24 @@ Si utilizas la [función de rol personalizado][12], añade tu usuario a cualquie
 
 ### Restringir el acceso
 
-La restricción de acceso está disponible para usuarios con [roles personalizados][11] en sus cuentas. Si usas la [función de rol personalizado][12], añade tu usuario a cualquier rol personalizado que incluya los permisos `synthetics_global_variable_read` y  `synthetics_global_variable_write`.
+Utiliza el [control de acceso granular][22] para limitar quién tiene acceso a tu test en función de roles, equipos o usuarios individuales:
 
-Puedes restringir el acceso a una variable global basada en roles en tu organización. Cuando creas una variable global, elige qué roles (además de tu usuario) tienen permisos de lectura y escritura sobre tu variable global en **Permissions settings** (Parámetros de permisos).
+1. Abre la sección de permisos del formulario.
+2. Haz clic en **Edit Access** (Editar acceso).
+  {{< img src="synthetics/settings/grace_2.png" alt="Establecer permisos para tu test en el formulario de configuración de Localizaciones privadas" style="width:100%;" >}}
+3. Haz clic en **Restrict Access** (Restringir el acceso).
+4. Selecciona equipos, roles o usuarios.
+5. Haz clic en **Add** (Añadir).
+6. Selecciona el nivel de acceso que deseas asociar a cada uno de ellos.
+7. Haz clic en **Done** (Listo).
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Restringir el acceso a una variable global" style="width:100%;" >}}
+<div class="alert alert-info"><strong>Nota</strong>: Puedes ver los resultados de una localización privada incluso sin tener acceso a esa localización privada.</div>
+
+| Nivel de acceso | Ver valor de GV | Ver metadatos de GV | Utilizar GV en tests | Editar valor/metadatos de GV  |
+| ------------ | --------------| ---------------- | -------------- | ----------------------- |
+| Sin acceso    |               |                  |                |                         |
+| Visor       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
+| Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
 
 ## Parámetros de integración
 
@@ -306,6 +339,9 @@ Para obtener más información, consulta [Explorar RUM y Session Replay][14].
 [14]: /es/synthetics/guide/explore-rum-through-synthetics/
 [15]: /es/synthetics/apm/#prerequisites
 [16]: /es/synthetics/browser_tests/actions/#use-variables
-[17]: /es/mobile_app_testing/mobile_app_tests/
-[18]: /es/mobile_app_testing/settings/
-[19]: /es/mobile_app_testing/mobile_app_tests/#use-global-variables
+[17]: /es/synthetics/mobile_app_testing/
+[18]: /es/synthetics/mobile_app_testing/settings/
+[19]: /es/synthetics/mobile_app_testing/#use-global-variables
+[20]: https://app.datadoghq.com/synthetics/settings/default
+[21]: https://app.datadoghq.com/monitors/settings/policies
+[22]: /es/account_management/rbac/granular_access

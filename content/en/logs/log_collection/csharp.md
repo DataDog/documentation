@@ -479,7 +479,7 @@ Then, initialize the logger directly in your application. Ensure that you [add y
 
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint" code="true" >}}" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint_full" >}}" })
     .CreateLogger())
 {
     // Some code
@@ -555,7 +555,7 @@ New logs are now directly sent to Datadog.
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/advanced_log_collection
 [11]: /serverless/azure_app_services
-[12]: /sensitive_data_scanner/
+[12]: /security/sensitive_data_scanner/
 [13]: /tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys

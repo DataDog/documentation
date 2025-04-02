@@ -2,7 +2,9 @@
 title: Kotlin Multiplatform Advanced Configuration
 aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin-multiplatform
+    - /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/kotlin_multiplatform
     - /real_user_monitoring/kotlin-multiplatform
+    - /real_user_monitoring/kotlin_multiplatform
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-kotlin-multiplatform
   tag: "Source Code"
@@ -52,6 +54,33 @@ The action type should be one of the following: "custom", "click", "tap", "scrol
 ```kotlin
 fun onUserInteraction() { 
     GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
+}
+```
+
+### Enrich resources
+
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation like the following, and pass it in the `datadogKtorPlugin` initialization call.
+
+```kotlin
+class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
+    override fun onRequest(request: HttpRequestSnapshot) =
+        request.headers.names().associateWith { request.headers[it] }.mapKeys { "header.$it" }
+
+    override fun onResponse(response: HttpResponse) = emptyMap<String, Any?>()
+
+    override fun onError(request: HttpRequestSnapshot, throwable: Throwable) = emptyMap<String, Any?>()
+}
+
+val ktorClient = HttpClient {
+    install(
+        datadogKtorPlugin(
+            tracedHosts = mapOf(
+                "example.com" to setOf(TracingHeaderType.DATADOG),
+                "example.eu" to setOf(TracingHeaderType.DATADOG)
+            ),
+            rumResourceAttributesProvider = CustomRumResourceAttributesProvider()
+        )
+    )
 }
 ```
 
@@ -134,13 +163,11 @@ Adding user information to your RUM sessions helps you to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The following attributes are optional, but you should provide **at least one** of them:
-
-| Attribute  | Type | Description                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | String | Unique user identifier.                                                                                  |
-| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `setUserInfo` API, for example:
 
@@ -375,28 +402,28 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
      
-   | Event type    | Attribute key      | Description                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Event type    | Attribute key        | Description                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
    | ActionEvent   | `action.target.name` | Target name.                                     |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                               |
+   |               | `view.name`          | Name of the view.                                |
    | ErrorEvent    | `error.message`      | Error message.                                   |
    |               | `error.stack`        | Stacktrace of the error.                         |
    |               | `error.resource.url` | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
    | ResourceEvent | `resource.url`       | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | LongTaskEvent | `view.referrer`       | URL that linked to the initial view of the page. |
-   |               | `view.url`            | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
+   | LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`          | Name of the view.                                |
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
@@ -417,12 +444,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform
-[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/data_collected
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/data_collected
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/#sending-data-when-device-is-offline
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting

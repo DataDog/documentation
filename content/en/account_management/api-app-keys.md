@@ -56,6 +56,7 @@ To add a Datadog API key or client token:
 
 - Your org must have at least one API key and at most 50 API keys.
 - Key names must be unique across your organization.
+- Newly created API keys typically take a few seconds to become valid.
 
 ## Remove API keys or client tokens
 
@@ -70,6 +71,7 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 **Notes:**
 
 - Application key names cannot be blank.
+- Newly created Application keys typically take a few seconds to become valid.
 
 ## Remove application keys
 

@@ -9,7 +9,7 @@ further_reading:
   text: "SNMP Monitoring Overview"
 ---
 
-## Ping
+## Overview
 
 When configured, the SNMP check can also send ICMP pings to your devices. This can be configured for individual as well as Autodiscovered devices.
 

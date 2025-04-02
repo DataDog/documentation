@@ -1,7 +1,9 @@
 ---
 title: Google Cloud Run
 further_reading:
-
+- link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
+  tag: 'Blog'
+  text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
 - link: 'https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/'
   tag: 'Blog'
   text: 'Collect traces, logs, and custom metrics from Cloud Run services'
@@ -10,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. 
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1].
 
 <div class="alert alert-info">To instrument your Google Cloud Run applications with <code>serverless-init</code>, see <a href="/serverless/guide/gcr_serverless_init">Instrument Google Cloud Run with serverless-init</a>.</div>
 
@@ -26,6 +28,9 @@ In your main application, add the `dd-trace-js` library. See [Tracing Node.js ap
 
 Set `ENV NODE_OPTIONS="--require dd-trace/init"`. This specifies that the `dd-trace/init` module is required when the Node.js process starts.
 
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Node.js Profiler][5] to add the environment variables.
+
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
 
@@ -38,12 +43,16 @@ To set up logging in your application, see [Node.js Log Collection][3]. To set u
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
 [3]: /logs/log_collection/nodejs/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/nodejs
+[5]: https://docs.datadoghq.com/profiler/enabling/nodejs?tab=environmentvariables
 
 {{% /tab %}}
 {{% tab "Python" %}}
 #### Tracing
 
 In your main application, add the `dd-trace-py` library. See [Tracing Python Applications][1] for instructions. You can also use [Tutorial - Enabling Tracing for a Python Application and Datadog Agent in Containers][5].
+
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Python Profiler][7] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -59,6 +68,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /tracing/guide/tutorial-enable-python-containers/
 [6]: https://www.datadoghq.com/blog/python-logging-best-practices/
+[7]: https://docs.datadoghq.com/profiler/enabling/python
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -82,6 +92,8 @@ EXPOSE 8080
 # Start the Datadog tracer with the javaagent argument
 ENTRYPOINT [ "java", "-javaagent:dd-java-agent.jar", "-jar", "cloudrun-java-1.jar" ]
 ```
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Java Profiler][5] to add the environment variables.
 
 #### Metrics
 To collect custom metrics, [install the Java DogStatsD client][2].
@@ -95,12 +107,16 @@ To set up logging in your application, see [Java Log Collection][3]. To set up t
 [2]: /developers/dogstatsd/?tab=hostagent&code-lang=java#install-the-dogstatsd-client
 [3]: /logs/log_collection/java/?tab=winston30
 [4]: /tracing/other_telemetry/connect_logs_and_traces/java
+[5]: https://docs.datadoghq.com/profiler/enabling/java?tab=datadogprofiler
 
 {{% /tab %}}
 {{% tab "Go" %}}
 #### Tracing
 
 In your main application, add the `dd-trace-go` library. See [Tracing Go Applications][1] for instructions.
+
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the Go Profiler][5] to add the environment variables.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -114,6 +130,8 @@ To set up logging in your application, see [Go Log Collection][3]. To set up tra
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#code-examples
 [3]: /logs/log_collection/go
 [4]: /tracing/other_telemetry/connect_logs_and_traces/go
+[5]: https://docs.datadoghq.com/profiler/enabling/go
+
 {{% /tab %}}
 {{% tab ".NET" %}}
 #### Tracing
@@ -140,6 +158,9 @@ ENV DD_TRACE_DEBUG=true
 
 ENTRYPOINT ["dotnet", "dotnet.dll"]
 ```
+#### Profiling
+The profiler is shipped within Datadog tracing libraries. If you are already using APM to collect traces for your application, you can skip installing the library and go directly to enabling the profiler. See [Enabling the .NET Profiler][5] to add the environment variables.
+The previous Dockerfile example also has the environment variables for the profiler.
 
 #### Metrics
 The tracing library also collects custom metrics. See the [code examples][2].
@@ -153,6 +174,8 @@ To set up logging in your application, see [C# Log Collection][3]. To set up tra
 [2]: https://www.datadoghq.com/blog/statsd-for-net-dogstatsd/
 [3]: /log_collection/csharp/?tab=serilog
 [4]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/?tab=serilog
+[5]: https://docs.datadoghq.com/profiler/enabling/dotnet?tab=nuget
+
 {{% /tab %}}
 {{% tab "PHP" %}}
 In your main application, add the `dd-trace-php` library. See [Tracing PHP Applications][1] for instructions.
@@ -200,7 +223,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 1. Go to **Volume Mounts** and add the same shared volume as you did for the sidecar container.
    **Note**: Save your changes by selecting **Done**. Do not deploy changes until the final step.
-1. Go to **Variables & Secrets** and add the same [environment variables](#environment-variables) that you set for the sidecar container. Omit `DD_HEALTH_PORT`.
+1. Go to **Variables & Secrets** and add the same `DD_SERVICE` environment variable that you set for the sidecar container.
 1. Go to **Settings**. In the **Container start up order** drop-down menu, select your sidecar.
 1. Deploy your main application.
 
@@ -208,7 +231,7 @@ To set up logging in your application, see [PHP Log Collection][3]. To set up tr
 
 {{% /tab %}}
 {{% tab "YAML deploy" %}}
-To deploy your Cloud Run service with a YAML service specification:
+To deploy your Cloud Run service with YAML service specification, use the following example configuration file.
 
 1. Create a YAML file that contains the following:
 
@@ -229,22 +252,8 @@ To deploy your Cloud Run service with a YAML service specification:
        spec:
          containers:
            - env:
-               - name: DD_SERVERLESS_LOG_PATH
-                 value: shared-volume/logs/*.log
-               - name: DD_SITE
-                 value: '<DATADOG_SITE>'
-               - name: DD_ENV
-                 value: serverless
-               - name: DD_API_KEY
-                 value: '<API_KEY>'
                - name: DD_SERVICE
                  value: '<SERVICE_NAME>'
-               - name: DD_VERSION
-                 value: '<VERSION>'
-               - name: DD_LOG_LEVEL
-                 value: debug
-               - name: DD_LOGS_INJECTION
-                 value: 'true'
              image: '<CONTAINER_IMAGE>'
              name: run-sidecar-1
              ports:
@@ -267,7 +276,7 @@ To deploy your Cloud Run service with a YAML service specification:
                - name: DD_SERVERLESS_LOG_PATH
                  value: shared-volume/logs/*.log
                - name: DD_SITE
-                 value: datadoghq.com
+                 value: '<DATADOG_SITE>'
                - name: DD_ENV
                  value: serverless
                - name: DD_API_KEY
@@ -306,16 +315,15 @@ To deploy your Cloud Run service with a YAML service specification:
        - latestRevision: true
          percent: 100
    ```
-   In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service. 
+   In this example, the environment variables, startup health check, and volume mount are already added. If you don't want to enable logs, remove the shared volume. Ensure the container port for the main container is the same as the one exposed in your Dockerfile/service.
 1. Supply placeholder values:
    - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
    - `<LOCATION>`: The region you are deploying your service in. For example, `us-central`.
    - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.
-   - `<API_KEY>`: Your [Datadog API key][1]. 
+   - `<API_KEY>`: Your [Datadog API key][1].
    - `<VERSION>`: The version number of your deployment. See [Unified Service Tagging][2].
    - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run. For example, `us-docker.pkg.dev/cloudrun/container/hello`.
-   - `<SERVICE_ACCOUNT>`: The name of your Google Cloud service account.
-   
+
 1. Run:
    ```bash
    gcloud run services replace <FILENAME>.yaml
@@ -383,40 +391,8 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
 
         # Environment variables for the main container
         env {
-          name  = "DD_SITE"
-          value = "<DATADOG_SITE>"
-        }
-        env {
-          name  = "DD_SERVERLESS_LOG_PATH"
-          value = "shared-volume/logs/*.log"
-        }
-        env {
-          name  = "DD_ENV"
-          value = "serverless"
-        }
-        env {
-          name  = "DD_API_KEY"
-          value = "<API_KEY>"
-        }
-        env {
           name  = "DD_SERVICE"
           value = "<SERVICE_NAME>"
-        }
-        env {
-          name  = "DD_VERSION"
-          value = "<VERSION>"
-        }
-        env {
-          name  = "DD_LOG_LEVEL"
-          value = "debug"
-        }
-        env {
-          name  = "DD_LOGS_INJECTION"
-          value = "true"
-        }
-        env {
-          name  = "FUNCTION_TARGET"
-          value = "<FUNCTION_NAME>" # only needed for cloud run functions
         }
 
         # Resource limits for the main container
@@ -450,7 +426,7 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
           timeout_seconds       = 1
         }
 
-        # Environment variables for the main container
+        # Environment variables for the sidecar container
         env {
           name  = "DD_SITE"
           value = "<DATADOG_SITE>"
@@ -482,10 +458,6 @@ resource "google_cloud_run_service" "terraform_with_sidecar" {
         env {
           name  = "DD_LOGS_INJECTION"
           value = "true"
-        }
-        env {
-          name  = "FUNCTION_TARGET"
-          value = "<FUNCTION_NAME>" # only needed for cloud run functions
         }
         env {
           name  = "DD_HEALTH_PORT"
@@ -521,7 +493,7 @@ resource "google_cloud_run_service_iam_member" "invoker" {
 
 Supply placeholder values:
 - `<PROJECT_ID>`: Your Google Cloud project ID.
-- `<LOCATION>`: The region you are deploying your service in. For example, `us-central1`. 
+- `<LOCATION>`: The region you are deploying your service in. For example, `us-central1`.
 - `<SERVICE_NAME>`: A name for your service. For example, `gcr-sidecar-test`. See [Unified Service Tagging][2].
 - `<CONTAINER_IMAGE>`: The image of the code you are deploying to Cloud Run.
 - `<DATADOG_SITE>`: Your [Datadog site][3], {{< region-param key="dd_site" code="true" >}}.

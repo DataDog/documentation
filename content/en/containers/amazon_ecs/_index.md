@@ -330,7 +330,7 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.6",
+            "image": "datadog/fips-proxy:1.1.9",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -443,7 +443,7 @@ You also need to update the environment variables of the Datadog Agent's contain
    "family": "datadog-agent-task"
 }
 ```
-[1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
+[1]: https://docs.datadoghq.com/agent/configuration/fips-compliance/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
 ## Troubleshooting

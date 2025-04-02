@@ -19,7 +19,7 @@ title: Datadog Agent をログ収集のみに使用
 {{% tab "Host " %}}
 
 1. [datadog.yaml コンフィギュレーションファイル][1]を開きます。
-2. 以下の設定で `enable_payloads` 属性を追加します。
+2. 設定ファイル内の任意のトップレベル属性として、以下の設定で `enable_payloads` を追加してください:
 
     ```yaml
     enable_payloads:
@@ -78,6 +78,7 @@ datadog:
 [...]
   processAgent:
     enabled: false
+    containerCollection: false
 [...]
   env:
     - name: DD_ENABLE_PAYLOADS_EVENTS

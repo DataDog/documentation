@@ -23,7 +23,7 @@ further_reading:
 ## Overview
 The Datadog Admission Controller is a component of the Datadog Cluster Agent. The main benefit of the Admission Controller is to simplify your application Pod configuration. For that, it has two main functionalities:
 
-- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL`, `DD_ENTITY_ID` and `DD_EXTERNAL_ENV`) to configure DogStatsD and APM tracer libraries into the user's application containers.
 - Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
 Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide on admission controllers][1].

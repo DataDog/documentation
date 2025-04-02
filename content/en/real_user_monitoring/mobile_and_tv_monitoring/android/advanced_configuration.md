@@ -49,28 +49,6 @@ In addition to [tracking views automatically][4], you can also track specific di
 {{% /tab %}}
 {{< /tabs >}}
 
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-   ```kotlin
-      fun onHeroImageLoaded() {
-            GlobalRumMonitor.get().addTiming("hero_image")
-      } 
-   ```
-{{% /tab %}}
-{{% tab "Java" %}}
-   ```java
-       public void onHeroImageLoaded() {
-            GlobalRumMonitor.get().addTiming("hero_image");
-       }
-   ```
-{{% /tab %}}
-{{< /tabs >}}
-
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][10] before graphing it in RUM analytics or in dashboards. 
-
 ### Custom Actions
 
 In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
@@ -96,7 +74,7 @@ Note the action type should be one of the following: "custom", "click", "tap", "
 
 ### Enrich resources
 
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the constructor of the `DatadogInterceptor`.
+When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request. For example, if you want to track a network request's headers, create an implementation as follows, and pass it in the builder of the `DatadogInterceptor`.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -175,7 +153,7 @@ In addition to [tracking resources automatically][6], you can also track specifi
 
 ### Custom Errors
 
-To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][9].
+To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][7].
 
 ```kotlin
    GlobalRumMonitor.get().addError(message, source, throwable, attributes)
@@ -193,7 +171,7 @@ fun addUserProperties(extraInfo: Map<String, Any?>, sdkCore: SdkCore = getInstan
 
 ## Event and data management
 
-The Android SDK first stores events and only uploads events when the [intake specifications][11] conditions are met.
+The Android SDK first stores events and only uploads events when the [intake specifications][8] conditions are met.
 
 ### Clear all data
 
@@ -231,7 +209,7 @@ You can control the buildup of events on the SDK with the `setBackpressureStrate
    }
 ```
 
-See an [example of this API][12] being used.
+See an [example of this API][9] being used.
 
 ### Set remote log threshold
 
@@ -257,13 +235,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" >}}
 
-The following attributes are **optional**, you should provide **at least one** of them:
-
-| Attribute  | Type | Description                                                                                              |
-|------------|------|----------------------------------------------------------------------------------------------------|
-| usr.id    | String | Unique user identifier.                                                                                  |
-| usr.name  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| usr.email | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `setUserInfo` API, for example:
 
@@ -283,7 +259,7 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ## Track widgets
  
-Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][7].
+Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][10].
 
 
 ## Initialization parameters
@@ -367,6 +343,12 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `setErrorEventMapper`
 : Sets the EventMapper for the RUM ErrorEvent. you can use this interface implementation to modify the ErrorEvent attributes before serialization.
 
+`setInitialResourceIdentifier`
+: Sets a custom identifier for initial network resources used for [Time-to-Network-Settled][11] (TNS) view timing calculation.
+
+`setLastInteractionIdentifier`
+: Sets a custom identifier for the last interaction in the previous view used for [Interaction-to-Next-View][13] (INV) timing calculation.
+
 `setLongTaskEventMapper`
 : Sets the EventMapper for the RUM LongTaskEvent. You can use this interface implementation to modify the LongTaskEvent attributes before serialization.
 
@@ -378,6 +360,9 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 
 `useCustomEndpoint`
 : Use RUM to target a custom server.
+
+`trackAnonymousUser`
+: When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID will be attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
  
 ### Automatically track views
 
@@ -464,7 +449,7 @@ For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedVie
 
 ### Automatically track network requests
 
-To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `OkHttpClient` to add the [EventListener][8] factory:
+To get timing information in resources (such as third-party providers, network requests) such as time to first byte or DNS resolution, customize the `OkHttpClient` to add the [EventListener][12] factory:
 
 1. Add the Gradle dependency to the `dd-sdk-android-okhttp` library in the module-level `build.gradle` file:
 
@@ -474,21 +459,23 @@ To get timing information in resources (such as third-party providers, network r
     }
     ```
 
-2. Add add the [EventListener][8] factory:
+2. Add the [EventListener][12] factory:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
+       val tracedHosts = listOf("example.com")
        val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(DatadogInterceptor())
+        .addInterceptor(DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(DatadogEventListener.Factory())
         .build()
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
+       List<String> tracedHosts = Arrays.asList("example.com");
        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        .addInterceptor(new DatadogInterceptor())
+        .addInterceptor(new DatadogInterceptor.Builder(tracedHosts).build())
         .eventListenerFactory(new DatadogEventListener.Factory())
         .build();
    ```
@@ -540,7 +527,6 @@ For example, to replace the default `100 ms` duration, set a custom threshold in
 
 To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Android SDK:
 
-
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
@@ -571,32 +557,32 @@ To modify some attributes in your RUM events, or to drop some of the events enti
 
    When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
      
-   | Event type    | Attribute key      | Description                                     |
-   |---------------|--------------------|-------------------------------------------------|
+   | Event type    | Attribute key        | Description                                      |
+   | ------------- | -------------------- | ------------------------------------------------ |
    | ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | ActionEvent   |                    |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ActionEvent   |                      |                                                  |
    |               | `action.target.name` | Target name.                                     |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                               |
-   | ErrorEvent    |                      |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ErrorEvent    |                      |                                                  |
    |               | `error.message`      | Error message.                                   |
    |               | `error.stack`        | Stacktrace of the error.                         |
    |               | `error.resource.url` | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | ResourceEvent |                    |                                                 |
+   |               | `view.name`          | Name of the view.                                |
+   | ResourceEvent |                      |                                                  |
    |               | `resource.url`       | URL of the resource.                             |
    |               | `view.referrer`      | URL that linked to the initial view of the page. |
    |               | `view.url`           | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
-   | LongTaskEvent |                    |                                                 |
-   |               | `view.referrer`       | URL that linked to the initial view of the page. |
-   |               | `view.url`            | URL of the view.                                 |
-   |               | `view.name`           | Name of the view.                                |
+   |               | `view.name`          | Name of the view.                                |
+   | LongTaskEvent |                      |                                                  |
+   |               | `view.referrer`      | URL that linked to the initial view of the page. |
+   |               | `view.url`           | URL of the view.                                 |
+   |               | `view.name`          | Name of the view.                                |
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
@@ -622,9 +608,12 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [4]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-views
 [5]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#initialization-parameters
 [6]: /real_user_monitoring/mobile_and_tv_monitoring/android/advanced_configuration/#automatically-track-network-requests
-[7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[8]: https://square.github.io/okhttp/features/events/
-[9]: /real_user_monitoring/android/data_collected/#event-specific-attributes
-[10]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
-[11]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#sending-data-when-device-is-offline
-[12]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
+[7]: /real_user_monitoring/android/data_collected/#event-specific-attributes
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/android/setup/#sending-data-when-device-is-offline
+[9]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
+[10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#time-to-network-settled
+[12]: https://square.github.io/okhttp/features/events/
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/mobile_and_tv_monitoring/android/monitoring_app_performance/#interaction-to-next-view

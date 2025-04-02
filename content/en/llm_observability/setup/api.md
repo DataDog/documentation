@@ -11,7 +11,7 @@ aliases:
 
 ## Overview
 
-The LLM Observability API provides an interface for developers to send LLM-related traces and evaluations to Datadog. For Python and Node.js applications, use the official [LLM Observability SDK][1]. 
+The LLM Observability API provides an interface for developers to send LLM-related traces and spans to Datadog. If your application is written in Python or Node.js, you can use the [LLM Observability SDKs][1].
 
 ## Spans API
 

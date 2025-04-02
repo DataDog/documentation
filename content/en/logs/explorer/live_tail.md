@@ -28,8 +28,6 @@ In the [Log Explorer][3], choose the Live Tail option in the timerange to query 
 
 {{< img src="logs/explorer/live_tail/livetail.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 
-Contrary to queries on indexed logs happening in the [Log Explorer][3], queries in the Live Tail do *not* require that you [declare a facet][5] beforehand. 
-
 **Note**: For the sake of readability, the Live Tail output is sampled when too many logs matching the query are flowing in. The sampling applied is uniformly random, so that your Live Tail logs are statistically representative of your actual log throughput. Scope your query down with additional search filters if you need visibility on every single log flowing in.
 
 ## Further Reading

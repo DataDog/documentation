@@ -25,7 +25,7 @@ Ensure that the tags added to this section are assigned to the corresponding res
 
 You can also limit AWS metrics using the [API][4].
 
-**Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
+**Note**: Only EC2 (hosts), Lambda (active functions), CloudWatch Custom Metrics (custom metrics), and [containers][9] are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
 ### EC2
 
@@ -66,3 +66,4 @@ For billing questions, contact your [Customer Success][7] Manager.
 [6]: /help/
 [7]: mailto:success@datadoghq.com
 [8]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[9]: /account_management/billing/containers/

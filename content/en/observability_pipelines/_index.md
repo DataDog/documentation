@@ -8,7 +8,7 @@ further_reading:
 - link: "data_security/logs/"
   tag: "documentation"
   text: "Log Management data security"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "documentation"
   text: "Sensitive Data Scanner"
 - link: "/agent/configuration/dual-shipping/#yaml-configuration"
@@ -35,6 +35,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-stream-logs-in-ocsf-format/"
   tag: "blog"
   text: "Stream logs in the OCSF format to your preferred security vendors or data lakes with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-route-logs-microsoft-sentinel/"
+  tag: "blog"
+  text: "Simplify your SIEM migration to Microsoft Sentinel with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/sled-observability-pipelines/"
+  tag: "blog"
+  text: "How state, local, and education organizations can manage logs flexibly and efficiently using Datadog Observability Pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -49,7 +55,7 @@ Datadog recommends you update Observability Pipelines Worker (OPW) with every mi
 
 {{< img src="observability_pipelines/op_marketecture_11042024.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
-Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#start-building-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
+Observability Pipelines allows you to collect and process logs within your own infrastructure, before routing them to downstream integrations. Use out-of-the-box [templates](#build-pipelines-with-out-of-the-box-templates) to build and deploy pipelines based on your use case.
 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It centrally aggregates, processes, and routes your logs based on your use case. This means you can redact sensitive data, pre-process logs, and determine which destinations they should go to, all before the logs leave your environment.
 
@@ -71,7 +77,7 @@ To set up a pipeline:
 1. Select and set up your [source][9].
 1. Select and set up your [destinations][10].
 1. Set up your [processors][11].
-1. Install the Observability Pipelines Worker.
+1. [Install the Observability Pipelines Worker][14].
 1. Enable monitors for your pipeline.
 
 See [Set Up Pipelines][12] for more information.
@@ -84,7 +90,7 @@ See [Advanced Configurations][13] for bootstrapping options and for details on s
 
 {{< img src="observability_pipelines/templates_20241003.png" alt="The Observability Pipelines UI showing the six templates" style="width:100%;" >}}
 
-The [templates](#out-of-the-box-templates) are built for the following use cases:
+The templates are built for the following use cases:
 
 #### Log Volume Control
 
@@ -149,3 +155,4 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [11]: /observability_pipelines/processors/
 [12]: /observability_pipelines/set_up_pipelines/
 [13]: /observability_pipelines/advanced_configurations/
+[14]: /observability_pipelines/install_the_worker/

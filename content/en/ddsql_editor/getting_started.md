@@ -43,7 +43,7 @@ If you aren't sure which fields contain the data you want, you can use the schem
 1. Click the database icon in the left sidebar to open the schema explorer.
     {{< img src="ddsql_editor/schema-explorer-example.png" alt="The schema explorer's list of available tables" style="width:100%;" >}}
 1. The current query is for the `host` table, so click **All Tables > Hosts > host** to view the available fields. Decide which field to add to the query. This example uses `availability_zone`.
-    {{< img src="ddsql_editor/schema-explorer-table-example.png" alt="The the host table displayed in the schema explorer" style="width:50%;" >}}
+    {{< img src="ddsql_editor/schema-explorer-table-example.png" alt="The host table displayed in the schema explorer" style="width:50%;" >}}
 1. Edit the query SQL to add the `availability_zone` to the result:
 
 {{< code-block lang="sql" >}}

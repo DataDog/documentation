@@ -74,10 +74,9 @@ The following resources have been added:
 2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
-<div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
-If your Argo CD application source is not a defined commit SHA (for example, if you are using Helm repositories), adjust the body by removing that line and the comma in the previous line.
-</div>
+The `commit_metadata` field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
+- You are already syncing your repository information to Datadog (see [Synchronize repository metadata to Datadog][20]).
+- Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
@@ -101,7 +100,7 @@ From the above snippet:
 3. You can use the `dd_service` annotation to configure the service of the application. Replace `YOUR_SERVICE` above with the service
    that the Argo CD application is deploying (for example: `transaction-service`). When this annotation is used, the service
    name is added to all the deployment executions generated from the application. Moreover, if your service is
-   registered in [Service Catalog][13], the team name is also added to all the deployment executions. If your Argo CD
+   registered in [Software Catalog][13], the team name is also added to all the deployment executions. If your Argo CD
    application is configured to deploy more than one service, see [Tag an Argo CD application deploying multiple services](#tag-an-argo-cd-application-deploying-multiple-services).
 4. You can use the `dd_customtags` annotation to optionally add custom tags to the deployment executions generated for this Argo CD application.
    The value should be set to a comma-separated list of tags, structured as `key:value` pairs.
@@ -198,7 +197,7 @@ Automatic service discovery is not supported when <a href="https://argo-cd.readt
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
 - `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
-- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Service Catalog][13] based on the service label.
+- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Software Catalog][13] based on the service label.
 
 Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
@@ -220,7 +219,7 @@ metadata:
 
 ## Visualize deployments in Datadog
 
-The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Explore CD Visibility Deployments][10].
 
 ## Troubleshooting
 
@@ -243,10 +242,11 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
-[13]: /tracing/service_catalog
+[13]: /tracing/software_catalog
 [14]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
 [18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [19]: https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#resource-hooks
+[20]: /continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog

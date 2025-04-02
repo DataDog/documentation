@@ -162,9 +162,9 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+Each lane represents a **thread**. Threads with the same name are grouped together. You can expand a group to view details for each thread. Note that threads that are explicitely created by code are grouped under _Managed Threads_.
 
-Lanes on top are runtime activities that may impact performance.
+Lanes on top are runtime activities that may impact performance such as GC activity.
 
 The thread ID is shown as `<unique-id> [#OS-thread-id]`.
 

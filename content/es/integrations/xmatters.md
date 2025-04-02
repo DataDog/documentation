@@ -1,53 +1,53 @@
 ---
-"app_id": "xmatters"
-"app_uuid": "fff150f0-a26a-48eb-a16b-21e426e6835e"
-"assets":
-  "integration":
-    "auto_install": true
-    "events":
-      "creates_events": true
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "164"
-    "source_type_name": "xMatters"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "event management"
-- "collaboration"
-- "incidents"
-- "notifications"
-"custom_kind": "integración"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "xmatters"
-"integration_id": "xmatters"
-"integration_title": "xMatters"
-"integration_version": ""
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "xmatters"
-"public_title": "xMatters"
-"short_description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
-"supported_os": []
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Event Management"
-  - "Category::Collaboration"
-  - "Category::Incidents"
-  - "Category::Notifications"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog"
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "xMatters"
+app_id: xmatters
+app_uuid: fff150f0-a26a-48eb-a16b-21e426e6835e
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 164
+    source_type_name: xMatters
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- event management
+- collaboration
+- incidents
+- notifications
+custom_kind: integración
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: xmatters
+integration_id: xmatters
+integration_title: xMatters
+integration_version: 
+is_public: true
+manifest_version: 2.0.0
+name: xmatters
+public_title: xMatters
+short_description: Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Event Management
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Notifications
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Utiliza xMatters como canal de notificación en las alertas y eventos de Datadog
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: xMatters
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
