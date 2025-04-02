@@ -53,7 +53,7 @@ New issue monitors alert on issues that are **For Review** and that meet your al
 
 Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 
-<div class="alert alert-info"><strong>Note</strong>: New Issue monitors only look at issues that were created or regressed within the last 24 hours before the monitor was created or last edited.</div>
+<div class="alert alert-info"><strong>Note</strong>: New Issue monitors only consider issues that were created or regressed after the monitor was created or last edited, with a 24-hour lookback period.</div>
 
 #### Define alert threshold
 
@@ -77,7 +77,7 @@ Or **define your alert metric**:
 
 2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (e.g. have a notification for each issue matching the query, and on each environment).
 
-3. Query data over the last day (by default) or any other time window.
+3. Query data over the last day (by default) or any other time window at each evaluation.
 
 4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
 
@@ -117,7 +117,7 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 
 2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (e.g. have a notification for each issue matching the query, on each environment).
 
-3. Query data over the last day (by default) or any other time window.
+3. Query data over the last day (by default) or any other time window at each evaluation.
 
 4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
 
