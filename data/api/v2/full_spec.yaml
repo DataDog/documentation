@@ -28358,11 +28358,19 @@ components:
       enum:
       - logs
       - audit
+      - app_sec_spans
+      - spans
+      - security_runtime
+      - network
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - AUDIT
+      - APP_SEC_SPANS
+      - SPANS
+      - SECURITY_RUNTIME
+      - NETWORK
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
