@@ -106,7 +106,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
-1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
+1. Install the [Datadog Operator][36] with Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
@@ -123,6 +123,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
    metadata:
      name: datadog
    spec:
+     override:
+       agent:
+         image: 7.64.1
+       clusterAgent:
+         image: 7.64.1
      global:
        site: <DATADOG_SITE>
        tags:
