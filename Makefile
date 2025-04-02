@@ -13,7 +13,6 @@ PY3=$(shell if [ `which pyenv` ]; then \
 			else printf "false"; \
 			fi)
 IMAGE_VERSION="latest"
-PROJECT_ROOT := "$(shell git rev-parse --show-toplevel 2>/dev/null || echo $(CURDIR))"
 
 # config
 CONFIG_FILE := Makefile.config
