@@ -40,9 +40,13 @@ To begin profiling applications:
     ```shell
     go get github.com/DataDog/dd-trace-go/v2/profiler
     ```
-     **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
+     <div class="alert alert-info">
+      If you are using v1 of the Go tracer, 
+      see the <a href="/tracing/trace_collection/custom_instrumentation/go/migration">migration guide</a> 
+      to upgrade to v2 and for all future updates and features.
+    </div>
 
-3. Import the [profiler][21] ([or profiler v1][6]) at the start of your application:
+3. Import the [profiler][21] at the start of your application:
 
     ```go
     import "github.com/DataDog/dd-trace-go/v2/profiler"
