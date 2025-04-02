@@ -315,7 +315,7 @@ Refer to the following topics to configure your installation according to your m
 ### PCI compliance
 
 <div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a> using the Event Hub forwarder.
 </div>
 
 To set up PCI-compliant Log Management, you must meet the requirements outlined in [PCI DSS Compliance][6]. Send your logs to the dedicated PCI compliant endpoint:
