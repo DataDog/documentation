@@ -264,10 +264,16 @@ You may also add custom measures to your test by grabbing the current active spa
   })
 ```
 
+### Playwright - RUM integration
+
+If the browser application being tested is instrumented using [Browser Monitoring][3], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
+
 For more information about custom measures, see the [Add Custom Measures Guide][2].
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+[3]: /real_user_monitoring/browser/setup/
+[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -746,7 +752,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
