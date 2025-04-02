@@ -1,8 +1,7 @@
 .nav-tabs.response-toggle {
     display: flex !important;
     gap: 8px;
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
+    flex-wrap: wrap !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
     padding-bottom: 5px;
@@ -41,7 +40,6 @@
 
     .nav-item {
         flex: 0 0 auto !important;
-        white-space: nowrap !important;
         margin: 0;
         float: none !important;
 
@@ -63,7 +61,6 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
-        white-space: nowrap !important;
         flex: 0 0 auto !important;
 
         &::before {
@@ -112,7 +109,6 @@
         padding: 0;
         display: flex;
         gap: 0;
-        flex-wrap: nowrap !important;
         margin: 0;
         position: relative;
         z-index: 2;
@@ -142,7 +138,6 @@
             padding: 0;
             position: relative;
             flex: 0 0 auto;
-            white-space: nowrap;
 
             &:before {
                 content: '' !important;
@@ -211,7 +206,6 @@
                 transition: none;
                 position: relative;
                 color: rgba(0, 0, 0, 0.6);
-                white-space: nowrap;
 
                 &::before {
                     display: none;
