@@ -21,7 +21,7 @@ further_reading:
       text: "Connect to Datadog over AWS PrivateLink using AWS VPC peering"
     - link: "https://www.datadoghq.com/blog/datadog-aws-cross-region-privatelink/"
       tag: "Blog"
-      text: Reduce costs and enhance security with cross-region Datadog connectivity using AWS PrivateLink"
+      text: "Reduce costs and enhance security with cross-region Datadog connectivity using AWS PrivateLink"
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
