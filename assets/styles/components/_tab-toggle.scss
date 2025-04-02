@@ -104,8 +104,8 @@
 }
 
 .code-tabs {
-    min-height: 200px;
     position: relative;
+    overflow-y: hidden;
 
     .nav-tabs {
         list-style-type: none;
