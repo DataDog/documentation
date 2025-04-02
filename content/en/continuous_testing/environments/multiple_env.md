@@ -78,6 +78,11 @@ Consider the following `<regex>|<rewriting-rule>` string:
 With this override, the URL `https://my-app.com/some/path` gets rewritten as `https://<deployment-prefix>.my-app.com/some/path`.
 Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
 
+<div class="alert alert-info">
+Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax: <code>s/&lt;regex&gt;/&lt;rewriting rule&gt;/&lt;modifiers&gt;</code>.</br></br>
+But given this syntax uses a slash <code>/</code> separator, it may require escaping slashes from the URL which is error-prone. Unless you need regex modifiers, Datadog recommends using the pipe <code>|</code> syntax for better readability.
+</div>
+
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
 
 ## Introducing a change in an existing environment
@@ -122,7 +127,7 @@ As a result, the URL `https://prod.my-app.com/assets/js/chunk-123.js` is rewritt
 Consider the following `<regex>|<rewriting-rule>` string:
 
 ```
-`(https?://)([^/]*)|$1<deployment-prefix>.$2`
+(https?://)([^/]*)|$1<deployment-prefix>.$2
 ```
 
 With this override, the URL `https://my-app.com/some/path` gets rewritten as `https://<deployment-prefix>.my-app.com/some/path`. Notice that the URL path is not affected by the rewrite because it is not part of the substitution regex.
@@ -131,6 +136,10 @@ With this override, the URL `https://my-app.com/some/path` gets rewritten as `ht
 The <code>resourceUrlSubstitutionRegexes</code> is also applied to the first request, similarly to <code>startUrl</code> and <code>startUrlSubstitutionRegex</code>.
 </div>
 
+<div class="alert alert-info">
+Apart from the pipe <code>|</code> syntax presented above, <code>resourceUrlSubstitutionRegexes</code> also supports the sed syntax: <code>s/&lt;regex&gt;/&lt;rewriting rule&gt;/&lt;modifiers&gt;</code>.</br></br>
+But given this syntax uses a slash <code>/</code> separator, it may require escaping slashes from the URL which is error-prone. Unless you need regex modifiers, Datadog recommends using the pipe <code>|</code> syntax for better readability.
+</div>
 
 ## Further reading
 
