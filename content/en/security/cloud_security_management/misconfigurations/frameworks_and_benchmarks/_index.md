@@ -41,7 +41,7 @@ The summary at the top of the report shows the [posture score][3], the top five 
 
 Below the summary is a complete listing of all rules associated with the framework, organized by default by requirements and controls, along with the number of resources checked by the rule, the percentage of failures, and the change in resources passing the rule over the chosen time period.
 
-Search for a rule name to filter the list, or group by requirement, control, severity, resource type, or resource category, to organize the list. You can also click a table column header to sort by that column within the group.
+Search for a rule name to filter the list, or group by requirement, control, severity, resource type, or resource category to organize the list. You can also click a table column header to sort by that column within the group.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/cis_aws_compliance_report_3.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
 
