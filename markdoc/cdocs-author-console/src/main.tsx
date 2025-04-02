@@ -11,11 +11,26 @@ import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ru from 'javascript-time-ago/locale/ru';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#632ca6' // Datadog @purple-600
+    },
+    secondary: {
+      main: '#ff0099' // Datadog @pink-500
+    }
+  }
+});
+
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );

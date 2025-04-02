@@ -1,7 +1,7 @@
 import { CustomizationConfig } from 'cdocs-data';
 import TraitForm from './TraitForm';
 import OptionGroupForm from './OptionGroupForm';
-import { WizardFilter, TraitConfig } from './types';
+import { WizardFilter, TraitConfig } from '../../types';
 
 function FilterForm({
   filter,
