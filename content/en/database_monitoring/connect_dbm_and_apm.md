@@ -112,18 +112,15 @@ Datadog recommends setting the obfuscation mode to `obfuscate_and_normalize` for
 
 Update your app dependencies to include [dd-trace-go@v1.44.0][1] or greater. {{% tracing-go-v2 %}}
 ```shell
-go get gopkg.in/DataDog/dd-trace-go.v1@v1.44.0 # 1.x
-# go get github.com/DataDog/dd-trace-go/v2 # 2.x
+go get github.com/DataDog/dd-trace-go/v2 # 2.x
 ```
 
 Update your code to import the `contrib/database/sql` package:
 ```go
 import (
    "database/sql"
-   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+   "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 ```
 
@@ -150,10 +147,8 @@ Full example:
 ```go
 import (
 	"database/sql"
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-   sqltrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql" // 1.x
-   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
-   // sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2" // 2.x
+	"github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+   sqltrace "github.com/DataDog/dd-trace-go/contrib/database/sql/v2"
 )
 
 func main() {

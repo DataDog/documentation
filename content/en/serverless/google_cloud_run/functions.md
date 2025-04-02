@@ -648,7 +648,7 @@ package helloworld
 import (
   "fmt"
   "github.com/sirupsen/logrus"
-  dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus"
+  dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2"
   "html/template"
   "net/http"
   "os"
@@ -656,8 +656,8 @@ import (
 
   "github.com/DataDog/datadog-go/v5/statsd"
   "github.com/GoogleCloudPlatform/functions-framework-go/functions"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace"
+  "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 const logDir = "/shared-volume/logs"
@@ -760,7 +760,7 @@ require (
 	github.com/DataDog/datadog-go/v5 v5.5.0
 	github.com/GoogleCloudPlatform/functions-framework-go v1.9.0
 	github.com/sirupsen/logrus v1.9.3
-	gopkg.in/DataDog/dd-trace-go.v1 v1.68.0
+	github.com/DataDog/dd-trace-go/v2 v2.0.0
 )
 ```
 {{% /tab %}}

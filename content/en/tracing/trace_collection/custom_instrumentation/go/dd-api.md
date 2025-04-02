@@ -43,8 +43,7 @@ import (
     "log"
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" 
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -74,8 +73,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -95,8 +93,7 @@ Add [tags][1] to all [spans][2] by configuring the tracer with the `WithGlobalTa
 package main
 
 import (
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -165,8 +162,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -192,8 +188,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {

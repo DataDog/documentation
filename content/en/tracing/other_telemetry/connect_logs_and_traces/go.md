@@ -33,8 +33,7 @@ package main
 import (
     "net/http"
 
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -61,10 +60,8 @@ package main
 import (
     "github.com/sirupsen/logrus"
 
-    dd_logrus "gopkg.in/DataDog/dd-trace-go.v1/contrib/sirupsen/logrus" // 1.x
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer" // 1.x
-    // dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2" // 2.x
-    // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
+    dd_logrus "github.com/DataDog/dd-trace-go/contrib/sirupsen/logrus/v2"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
