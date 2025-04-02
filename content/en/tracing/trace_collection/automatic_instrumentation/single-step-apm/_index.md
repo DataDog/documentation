@@ -489,6 +489,8 @@ This configuration enables APM for all pods except those that have either of the
 
 {{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
 
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
+
 ### Enabling or disabling instrumentation for namespaces
 
 You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
