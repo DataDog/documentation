@@ -1,5 +1,5 @@
 ---
-title: Install Serverless Monitoring for Google Cloud Run Functions Gen 1
+title: Legacy Google Cloud Run Functions Gen 1
 ---
 
 ## Overview
