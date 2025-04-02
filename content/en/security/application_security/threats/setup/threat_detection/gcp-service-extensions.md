@@ -50,30 +50,35 @@ and [create a Service Extension as a traffic extension][5].
 
 To integrate a Service Extension with ASM using the Google Cloud Console, complete the following steps:
 
-  1. **Create a VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
+  1. **Create a VM Compute instance** using the Datadog ASM Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
 
-    See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
+  See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
 
-  2. **Add the VM to an unmanaged instance group**
+  <div class="alert alert-info">
+    <strong>Note:</strong> Be sure to update accordingly your Firewall rules to allow the Load Balancer to communicate with the Callout VM instance. The same also applies to the Datadog Agent.
+  </div>
+
+2. **Add the VM to an unmanaged instance group**
+  
     Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
-  3. **Create a backend service and add your instance group**
+3. **Create a backend service and add your instance group**
 
-      Create a callout backend service with the following settings:
-      - Protocol: `HTTP2`
-      - Port name: `grpc`
-      - Region: Select your region
-      - Health check port number: `80` (or your configured value)
+    Create a callout backend service with the following settings:
+    - Protocol: `HTTP2`
+    - Port name: `grpc`
+    - Region: Select your region
+    - Health check port number: `80` (or your configured value)
+    Add the instance group with the service extension VM as a backend to this backend service.
 
-      Add the instance group with the service extension VM as a backend to this backend service.
+4. **Configure the Traffic Service Extension callout**
 
-  4. **Configure the Traffic Service Extension callout**
+    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
+    2. Select your load balancer type
+    3. Select `Traffic extensions` as the type
+    4. Select your forwarding rules
+  <br><br>
 
-      1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
-      2. Select your load balancer type
-      3. Select `Traffic extensions` as the type
-      4. Select your forwarding rules
-    <br>
     
   5. **Create an Extension Chain**
 
@@ -107,7 +112,7 @@ You can use Terraform to automate the deployment of the ASM GCP Service Extensio
 You can import the following module to your project. It's installing a the service extension on a **Global External Load Balancer**:
 
 ```bash
-mkdir gcp-asm-service-extension
+mkdir gcp-asm-service-extension && cd gcp-asm-service-extension
 touch main.tf variables.tf
 ```
 
