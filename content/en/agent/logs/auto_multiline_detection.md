@@ -111,6 +111,8 @@ If datetime aggregation isn't sufficient, or your format is too short to be dete
 
 ### Custom Samples
 
+A custom sample is a sample of a log you want to aggregate on. For example: If you want to aggregate a stack trace, the first line of the stack trace would be good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
+
 Configure custom samples:
 
 {{< tabs >}}
@@ -146,13 +148,15 @@ java.lang.Exception: Something bad happened!
 
 #### How Custom Samples Work
 
-Custom samples tokenize the first 60 bytes of a log line and compare tokens linearly:
+Custom samples tokenize the first 60 bytes of a log line and the provided sample. The tokens are compared linearly:
 - Tokens include: words and their length, whitespace, numbers and their length, special characters, and datetime components.
 - 75% of tokens must match in order for the sample to match by default.
 - Works best with stable log formats (ex - most logs start with a similar prefix)
 - Use regex for complex matching needs
 
 ### Regex Patterns
+
+Regex patterns work similarly to a `multi_line` rule. If the pattern matches the log, it is used for aggregation. 
 
 Configure custom regex patterns:
 
@@ -226,6 +230,8 @@ Auto multi-line detection uses a labeled aggregation system to aggregate logs. T
    - Used for JSON logs
 
 ### Label Configuration
+
+You can provide custom labels to each regex or sample to change the aggregation behavior based on the label rules. This is useful if you want to explicitly include or exclude certain log formats in multi-line aggregation. 
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
