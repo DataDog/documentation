@@ -447,7 +447,7 @@ instances:
 
 Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
 
-#### Autodiscovery Annotations v2
+#### Autodiscovery annotations v2
 
 ```yaml
 apiVersion: v1
