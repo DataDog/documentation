@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 3
 ---
 
-<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page to set up the SDK injector.</div>
+<div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
 
 ## Overview
 

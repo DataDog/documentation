@@ -21,7 +21,7 @@ RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML re
 
 <div class="alert alert-info">RUM Auto-Instrumentation is in Preview. To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
-Follow the relevant documentation for automatic instrumentation approach to learn more:
+Follow the documentation for your web server type to learn more:
 
 {{< partial name="rum/rum-browser-setup.html" >}}
 
