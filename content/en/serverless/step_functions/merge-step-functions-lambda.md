@@ -197,7 +197,7 @@ On the Lambda Task, set the `Parameters` key as follows:
 }
 ```
 
-The `JsonMerge` [intrinsic function][14] merges the [Step Functions context object][15] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
+The `JsonMerge` [intrinsic function][15] merges the [Step Functions context object][16] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
 
 **Example**:
 
