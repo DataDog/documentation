@@ -280,7 +280,7 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 To get started click the button below and fill in the form on Azure portal. The Azure resources required to get Azure activity logs and Azure platform logs (including resource logs) into your Datadog account will be deployed for you.
 
-**Note**: Resources can only stream to storage accounts in the same Azure region.
+**Note**: Resources can only send logs to storage accounts in the same Azure region.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json)
 
