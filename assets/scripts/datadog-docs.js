@@ -443,9 +443,7 @@ function checkForBrokenImages() {
         }
     }
     if (brokenImageCount > 0) {
-        window.DD_RUM && window.DD_RUM.addError(brokenImageError, {
-            image: 'test',
-        });
+        window.DD_RUM && window.DD_RUM.addError(brokenImageError);
     }
 }
 
