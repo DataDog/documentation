@@ -263,8 +263,6 @@ Use the [Google Cloud Run integration][42] to get detailed information on your C
 
 Datadog's [Google Cloud Cost Management][45] provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify potential improvements.
 
-### Security
-
 ### Cloud SIEM
 
 Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
@@ -282,6 +280,10 @@ Check out the [Setting up Cloud Security Management guide][49] to get started.
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/resource_collection.png" alt="The resource collection tab in the Google Cloud integration tile" style="width:100%;" >}}
+
+### Expanded BigQuery monitoring
+
+You can get granular visibility into your BigQuery environments, to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][] in the main Google Cloud integration page for more information and setup instructions.
 
 ## Further reading
 
@@ -327,7 +329,7 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [38]: /security/cloud_siem/
 [39]: /watchdog/
 [40]: https://cloud.google.com/logging/docs/routing/overview#sinks
-[41]: /integrations/google_cloud_platform/?tab=project#setup
+[41]: /integrations/google_cloud_platform/#setup
 [42]: /integrations/google_cloud_run/
 [43]: /integrations/google_cloud_run/#log-collection
 [44]: /cloud_cost_management/
@@ -351,3 +353,4 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
 [64]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration
+[65]: /integrations/google_cloud_platform/#expanded-bigquery-monitoring
