@@ -283,7 +283,7 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 
 ### Expanded BigQuery monitoring
 
-You can get granular visibility into your BigQuery environments, to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][] in the main Google Cloud integration page for more information and setup instructions.
+You can get granular visibility into your BigQuery environments to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][65] in the main Google Cloud integration page for more information and setup instructions.
 
 ## Further reading
 
