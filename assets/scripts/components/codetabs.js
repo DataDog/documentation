@@ -14,6 +14,30 @@ const initCodeTabs = () => {
         activateTabsOnLoad()
         getContentTabHeight()
         addObserversToCodeTabs()
+
+        // Detect when tabs wrap and apply tabs-wrap-layout class
+        const detectTabWrapping = () => {
+            const tabContainers = document.querySelectorAll('.code-tabs');
+
+            tabContainers.forEach(container => {
+                const tabsNav = container.querySelector('.nav-tabs');
+                const tabsWidth = Array.from(tabsNav.querySelectorAll('li'))
+                    .reduce((sum, tab) => sum + tab.offsetWidth, 0);
+
+                // Add some buffer for margins/padding
+                if (tabsWidth > tabsNav.offsetWidth - 20) {
+                    container.classList.add('tabs-wrap-layout');
+                } else {
+                    container.classList.remove('tabs-wrap-layout');
+                }
+            });
+        };
+
+        // Initial detection
+        detectTabWrapping();
+
+        // Recalculate on window resize
+        window.addEventListener('resize', detectTabWrapping);
     }
 
     /**
