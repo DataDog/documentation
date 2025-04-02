@@ -84,6 +84,8 @@ For a Docker Linux container:
 
 {{% tab "Kubernetes" %}}
 
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
+
 You can enable APM by installing the Agent with either:
 
 - Datadog Operator
@@ -480,7 +482,7 @@ This configuration enables APM for all pods except those that have either of the
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent <=v7.63)" %}}
+{{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -724,6 +726,8 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 
 {{% tab "Kubernetes" %}}
 
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
+
 #### Using workload selection (recommended)
 
 With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
@@ -781,6 +785,8 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
