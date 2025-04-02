@@ -55,7 +55,7 @@ See [event batching][6] for more information.
 
 ## Duplicate Observability Pipelines logs
 
-If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you need to exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. Otherwise, you get duplicate Observability Pipelines logs because the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
+If you see duplicate Observability Pipelines logs in [Log Explorer][7] and your Agent is running in a Docker container, you must exclude Observability Pipelines logs using the `DD_CONTAINER_EXCLUDE_LOGS` environment variable. For Helm, use `datadog.containerExcludeLogs`. This prevents duplicate logs, as the Worker also sends its own logs directly to Datadog. See [Docker Log Collection][8] or [Setting environment variables for Helm][9] for more information.
 
 ## Getting an error when installing a new version of the Worker
 
