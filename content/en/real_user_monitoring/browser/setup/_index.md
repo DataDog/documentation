@@ -20,7 +20,7 @@ Instrumenting your application allows observability data from your application t
 
 ## Instrumentation types
 
-There are two main approaches to instrument your application: automatic or manual instrumentation.
+There are two ways to instrument your application: automatic or manual instrumentation.
 
 ### Auto-Instrumentation
 
