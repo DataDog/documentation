@@ -140,7 +140,8 @@
                   font-weight: 600;
                   position: relative;
                   padding-bottom: 9px;
-                  border-radius: 2px 2px 0 0;
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
 
                   &:after {
                       content: '';
@@ -150,7 +151,7 @@
                       width: calc(100% + 2px);
                       height: 3px;
                       background: linear-gradient(90deg, $ddpurple, lighten($ddpurple, 20%));
-                      border-radius: 2px 2px 0 0;
+                      border-radius: 3px 3px 0 0;
                   }
 
                   &::before {
@@ -164,7 +165,8 @@
                   color: $ddpurple;
                   background: rgba($ddpurple, 0.05);
                   border-color: transparent;
-                  border-radius: 2px 2px 0 0;
+                  border-top-left-radius: 4px;
+                  border-top-right-radius: 4px;
               }
           }
 
