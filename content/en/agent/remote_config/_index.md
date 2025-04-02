@@ -296,7 +296,7 @@ datadog:
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
-[6]: /security/application_security/
+[6]: /security/application_security/threats/setup/compatibility/
 [7]: /account_management/rbac/permissions#access-management
 [8]: https://app.datadoghq.com/organization-settings/remote-config
 [9]: /security/default_rules/#cat-workload-security

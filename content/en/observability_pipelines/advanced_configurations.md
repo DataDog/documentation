@@ -51,7 +51,7 @@ The following is a list of bootstrap options, their related pipeline environment
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
-: **Description**: Create a [Datadog API key][1] for this environment variable.
+: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key.
 
 `pipeline_id`
 : **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
@@ -104,3 +104,4 @@ The following is a list of bootstrap options, their related pipeline environment
 [3]: /getting_started/site/
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
 [5]: https://en.wikipedia.org/wiki/HTTP_tunnel
+[6]: /agent/remote_config/

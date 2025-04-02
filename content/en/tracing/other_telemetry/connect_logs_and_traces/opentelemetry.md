@@ -73,7 +73,55 @@ log = structlog.getLogger()
 log.info("Example log line with trace correlation info")
 ```
 
+#### Alternative approach
 
+You can also use unstructured logs with OpenTelemetry SDK logic to correlate logs and traces in your application.
+
+**Note**: This approach uses OpenTelemetry-native trace context fields (not `dd.trace_id` or `dd.span_id`), which can still be correlated in Datadog using remappers. See below for details.
+
+1. Set up OpenTelemetry logging instrumentation in your Python application:
+
+   ```python
+   import logging
+   from opentelemetry.instrumentation.logging import LoggingInstrumentor
+   
+   # Initialize the OpenTelemetry logging instrumentation
+   LoggingInstrumentor().instrument(set_logging_format=True)
+   
+   # Create a logger instance
+   logger = logging.getLogger(__name__)
+   
+   # Log a message with automatic trace context injection
+   logger.info("This is a log message")
+   ```
+
+2. Verify your log format contains the trace context information:
+
+   Your logs should now include trace context information and look similar to:
+   ```
+   2025-03-25 10:31:52,116 INFO [__main__] [test-logging.py:9] [trace_id=0 span_id=0 resource.service.name= trace_sampled=False] - This is    a log message
+   ```
+
+   Or in a real-world scenario:
+   ```
+   2025-03-20 12:45:10,123 INFO [jobs.scheduler.task_runner.execute] [task_runner.py:123] [trace_id=123abc456def789ghi012jkl345mno67    span_id=89ab01cd23ef45gh resource.service.name=job_scheduler trace_sampled=True] - STARTED JOB TASK. Success
+   ```
+
+3. Create a Log Pipeline in Datadog with this Grok Parser Rule:
+
+   ```
+   # Define prefix components
+   _timestamp %{date("yyyy-MM-dd HH:mm:ss','SSS"):timestamp}
+   _level %{word:level}
+   _module \[%{notSpace:module}\]
+   _file_location \[%{notSpace:file_location}\]
+   _trace_info \[trace_id=%{notSpace:trace_id} span_id=%{notSpace:span_id} resource\.service\.name=%{notSpace:service_name} trace_sampled=%   {notSpace:trace_sampled}\]
+   
+   # Complete rule
+   custom_format %{_timestamp} %{_level} %{_module} %{_file_location} %{_trace_info} - %{data:message}
+   ```
+
+After setting up the Grok Parser Rule, add the `Trace Id Remapper` and `Span Id Remapper` processors to your pipeline to extract the `trace_id` and `span_id` values, respectively. This configuration allows your logs to appear properly correlated with traces in Datadog.
 
 [1]: https://www.structlog.org/en/stable/standard-library.html
 [2]: /tracing/other_telemetry/connect_logs_and_traces/python/#manually-inject-trace-and-span-ids
