@@ -1,6 +1,19 @@
 ---
 title: Performance
 disable_toc: false
+further_reading:
+- link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
+  tag: "Documentation"
+  text: "Set up a pipeline"
+- link: "observability_pipelines/sources"
+  tag: "Documentation"
+  text: "Sources"
+- link: "observability_pipelines/processors"
+  tag: "Documentation"
+  text: "Processors"
+- link: "observability_pipelines/destinations"
+  tag: "Documentation"
+  text: "Destinations"
 ---
 
 ## Overview
@@ -22,3 +35,7 @@ All components in Observability Pipelines have a small in-memory buffer between 
 Buffering protects against temporary overloads or outages for a given workload. The buffering model prioritizes performance when handling an excess of events, an amount that is beyond what a destination can process, by using in-memory buffers on destinations. By default, a destination's default buffer size is increased from 100 events to 500 events. The buffer capacity is increased because destinations are typically the primary source of backpressure in any given Observability Pipelines topology. They communicate to services over the network, where latency may be introduced or outages may temporarily occur.
 
 Observability Pipelines destination's buffers are configured to block events, which means it waits indefinitely to write to a buffer that is full. This is to make sure observability data is reliably processed in the order it was given. Additionally, as mentioned earlier, blocking induces backpressure and signals upstream components to slow down event acceptance or consumption. As a result, although the system retains all data, it accumulates at the edge.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
