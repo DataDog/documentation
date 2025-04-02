@@ -38,7 +38,7 @@ Before you begin, ensure you have:
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
   ```
 
-## Enabling Threat Detection
+## Enabling threat detection
 
 To set up the ASM Service Extension in your GCP environment, follow the instructions by either using the Google Cloud Console or Terraform scripts.
 
@@ -48,7 +48,9 @@ and [create a Service Extension as a traffic extension][5].
 {{< tabs >}}
 {{% tab "Google Cloud Console" %}}
 
-1. **Create a new VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][6].
+To integrate a Service Extension with ASM using the Google Cloud Console, complete the following steps:
+
+1. **Create a new VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
 
    See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
 
@@ -57,33 +59,34 @@ and [create a Service Extension as a traffic extension][5].
 
 3. **Create a backend service and add your instance group**
 
-  Create a callout backend service with the following settings:
-  - Protocol: `HTTP2`
-  - Port name: `grpc`
-  - Region: Select your region
-  - Health check port number: `80` (or your configured value)
+    Create a callout backend service with the following settings:
+    - Protocol: `HTTP2`
+    - Port name: `grpc`
+    - Region: Select your region
+    - Health check port number: `80` (or your configured value)
 
-  Add the instance group with the service extension VM as a backend to this backend service.
+    Add the instance group with the service extension VM as a backend to this backend service.
 
 4. **Configure the Traffic Service Extension callout**
 
-  1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
-  2. Select your load balancer type
-  3. Select `Traffic extensions` as the type
-  4. Select your forwarding rules
-<br>
+    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
+    2. Select your load balancer type
+    3. Select `Traffic extensions` as the type
+    4. Select your forwarding rules
+  <br>
    
-5. **Create a new Extension Chain**
+5. **Create an Extension Chain**
 
-  1. To send all traffic to the extension, insert `true` in the **Match condition**
-  2. For **Programability type**, select `Callouts`
-  3. Select the backend service you created in the previous step
-  4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
+    1. To send all traffic to the extension, insert `true` in the **Match condition**
+    2. For **Programability type**, select `Callouts`
+    3. Select the backend service you created in the previous step
+    4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
 
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
+[1]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
 {{% /tab %}}
 
 {{% tab "Terraform" %}}
@@ -92,9 +95,9 @@ You can use Terraform to automate the deployment of the ASM GCP Service Extensio
 
 ### Prerequisites for Terraform deployment
 
-- [Terraform][10] installed on your local machine (version 1.0.0 or later)
+- [Terraform][1] installed on your local machine (version 1.0.0 or later)
 - GCP credentials with appropriate permissions
-- A Datadog API key (that will be used to configure the Datadog Agent)
+- A Datadog API key (used to configure the Datadog Agent)
 - An existing GCP Cloud Load Balancer for your application
 
 ### Deployment steps
@@ -370,7 +373,7 @@ terraform {
 ```
 
 ##### terraform.tfvars
-Create a `terraform.tfvars` file with your project specific values:
+Create a terraform variables file with your project specific values:
 
 ```hcl
 # terraform.tfvars
@@ -401,12 +404,13 @@ This deployment creates:
 - A backend service configured for HTTP/2 with health checks
 - A service extension connected to your existing load balancer
 
-The service extension will automatically inspect traffic passing through your load balancer for security threats.
+The service extension automatically inspects all traffic passing through your load balancer for security threats.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
+[1]: https://www.terraform.io/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -431,11 +435,11 @@ Configure the container to send traces to your Datadog Agent using the following
   <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
 </div>
 
-The GCP Service Extensions integration uses the [Datadog Go Tracer][7] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][8] and [ASM Library Configuration][9].
+The GCP Service Extensions integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][7] and [ASM Library Configuration][8].
 
 ## Limitations
 
-The GCP Service Extensions version `1.71.0` and all versions above currently have the following limitations:
+The GCP Service Extensions have the following limitations:
 
 * The request body is not inspected, regardless of its content type.
 
@@ -448,8 +452,6 @@ The GCP Service Extensions version `1.71.0` and all versions above currently hav
 [3]: https://cloud.google.com/service-extensions/docs/lb-extensions-overview#supported-lbs
 [4]: https://cloud.google.com/service-extensions/docs/configure-callout-backend-service
 [5]: https://cloud.google.com/service-extensions/docs/configure-traffic-extensions
-[6]: https://github.com/DataDog/dd-trace-go/pkgs/container/dd-trace-go%2Fservice-extensions-callout
-[7]: https://github.com/DataDog/dd-trace-go
-[8]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
-[9]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
-[10]: https://www.terraform.io/
+[6]: https://github.com/DataDog/dd-trace-go
+[7]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
+[8]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
