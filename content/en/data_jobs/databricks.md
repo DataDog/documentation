@@ -25,7 +25,8 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
    **Important:**
    * Make sure you <strong>increase</strong> the **Lifetime (days)** value so that the token doesn't expire and the integration doesn't break.
-   * For the [Managed installation] (?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) option, ensure the user generating the token has <strong>Workspace Admin</strong> permissions. For manual installation, ensure the user has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
+   * For the [Managed installation](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) option, ensure the user generating the token has <strong>Workspace Admin</strong> permissions.
+   * For manual installation, ensure the user has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
 
    As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11].
 
