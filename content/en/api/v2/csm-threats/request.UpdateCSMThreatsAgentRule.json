@@ -1,11 +1,13 @@
 {
   "data": {
     "attributes": {
-      "description": "Test Agent rule",
+      "description": "My Agent rule",
       "enabled": true,
-      "expression": "exec.file.name == \"sh\""
+      "expression": "exec.file.name == \"sh\"",
+      "policy_id": "6517fcc1-cec7-4394-a655-8d6e9d085255",
+      "product_tags": []
     },
-    "type": "agent_rule",
-    "id": "3dd-0uc-h1s"
+    "id": "3dd-0uc-h1s",
+    "type": "agent_rule"
   }
 }
