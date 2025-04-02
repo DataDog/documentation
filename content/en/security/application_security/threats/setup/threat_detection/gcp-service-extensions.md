@@ -50,37 +50,37 @@ and [create a Service Extension as a traffic extension][5].
 
 To integrate a Service Extension with ASM using the Google Cloud Console, complete the following steps:
 
-1. **Create a new VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
+  1. **Create a VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
 
-   See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
+    See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
 
-2. **Add the VM to an unmanaged instance group**
-  Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
+  2. **Add the VM to an unmanaged instance group**
+    Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
-3. **Create a backend service and add your instance group**
+  3. **Create a backend service and add your instance group**
 
-    Create a callout backend service with the following settings:
-    - Protocol: `HTTP2`
-    - Port name: `grpc`
-    - Region: Select your region
-    - Health check port number: `80` (or your configured value)
+      Create a callout backend service with the following settings:
+      - Protocol: `HTTP2`
+      - Port name: `grpc`
+      - Region: Select your region
+      - Health check port number: `80` (or your configured value)
 
-    Add the instance group with the service extension VM as a backend to this backend service.
+      Add the instance group with the service extension VM as a backend to this backend service.
 
-4. **Configure the Traffic Service Extension callout**
+  4. **Configure the Traffic Service Extension callout**
 
-    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
-    2. Select your load balancer type
-    3. Select `Traffic extensions` as the type
-    4. Select your forwarding rules
-  <br>
-   
-5. **Create an Extension Chain**
+      1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
+      2. Select your load balancer type
+      3. Select `Traffic extensions` as the type
+      4. Select your forwarding rules
+    <br>
+    
+  5. **Create an Extension Chain**
 
-    1. To send all traffic to the extension, insert `true` in the **Match condition**
-    2. For **Programability type**, select `Callouts`
-    3. Select the backend service you created in the previous step
-    4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
+      1. To send all traffic to the extension, insert `true` in the **Match condition**
+      2. For **Programability type**, select `Callouts`
+      3. Select the backend service you created in the previous step
+      4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -372,7 +372,7 @@ terraform {
 }
 ```
 
-##### terraform.tfvars
+##### Variables file
 Create a terraform variables file with your project specific values:
 
 ```hcl
