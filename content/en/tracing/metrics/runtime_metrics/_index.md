@@ -243,7 +243,7 @@ tracer.Start(
 )
 ```
 
-The `WithDogstatsdAddr` option allows you to specify a custom address for the DogStatsD server. Use the [`WithDogstatsdAddress`][100] (or [`WithDogstatsdAddress` v2][101]) option if your address differs from the default `localhost:8125`. (Available for 1.18.0+)
+The `WithDogstatsdAddr` option allows you to specify a custom address for the DogStatsD server. Use the [`WithDogstatsdAddress`][101] (or [`WithDogstatsdAddress` v1][100]) option if your address differs from the default `localhost:8125`. (Available for 1.18.0+)
 
 [100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress

@@ -7,7 +7,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Package page"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
@@ -62,7 +62,7 @@ func main() {
 ```
 
 The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3] (or [configuration documentation v2][20]).
+See all available options in the [configuration documentation][20] (or [configuration documentation v1][3]).
 
 ### Unified service tagging
 
@@ -189,7 +189,7 @@ Configures trace header injection and extraction style. See [Propagating Go Trac
 
 ## Configure APM environment name
 
-The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
+The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the tracer.
 
 ## Further reading
 
@@ -213,3 +213,4 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [19]: /opentelemetry/interoperability/environment_variable_support
 [20]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#StartOption
 [21]: /tracing/trace_collection/custom_instrumentation/go/migration
+[22]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/contrib

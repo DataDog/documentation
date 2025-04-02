@@ -59,7 +59,7 @@ Datadog.configure { |c| c.tracing.analytics.enabled = true }
 
 App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-* the [`WithAnalytics`][1] ([v2 documentation][2]) tracer start option, for example:
+* the [`WithAnalytics`][2] ([v1 documentation][1]) tracer start option, for example:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))

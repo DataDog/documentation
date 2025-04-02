@@ -42,7 +42,7 @@ To begin profiling applications:
     ```
      **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
 
-3. Import the [profiler][6] ([or profiler v2][21]) at the start of your application:
+3. Import the [profiler][21] ([or profiler v1][6]) at the start of your application:
 
     ```go
     import "github.com/DataDog/dd-trace-go/v2/profiler"
@@ -79,7 +79,7 @@ To begin profiling applications:
 
 6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
 
-**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12]. For relevant v2 documentation, view [profiler.WithProfileTypes][22] and [profile types][23].
+**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][22] and [profile types][23]. For legacy v1 documentation, view [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 
 If you automatically instrument your Go application with [Orchestrion][20], it adds the continuous profiler code to your application. To enable the profiler at run time, set the environment variable `DD_PROFILING_ENABLED=true`.
 

@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "Source Code"
   text: "Tracer library source code"
-- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
@@ -239,7 +239,7 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy
@@ -258,7 +258,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 ### Add the tracer library to your application
 
-First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] (or the [API documentation v2][6]) for configuration instructions and details about using the API.
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][6] (or the [API documentation v1][4]) for configuration instructions and details about using the API.
 
 ### Activate Go integrations to create spans
 
