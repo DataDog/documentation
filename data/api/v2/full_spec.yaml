@@ -19473,10 +19473,10 @@ components:
           type: string
       type: object
     LogsQueryOptions:
+      deprecated: true
       description: 'Global query options that are used during the query.
 
-        Note: you should supply either timezone or time offset, but not both. Otherwise,
-        the query will fail.'
+        Note: These fields are currently deprecated and do not affect the query results.'
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
@@ -30846,6 +30846,125 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    SingleAggregatedConnectionResponseArray:
+      description: The definition of `SingleAggregatedConnectionResponseArray` object.
+      example:
+        data:
+        - attributes:
+            bytes_sent_by_client: 100
+            bytes_sent_by_server: 200
+            group_bys:
+              client_team:
+              - networks
+              server_service:
+              - hucklebuck
+            packets_sent_by_client: 10
+            packets_sent_by_server: 20
+            rtt_micro_seconds: 800
+            tcp_closed_connections: 30
+            tcp_established_connections: 40
+            tcp_refusals: 7
+            tcp_resets: 5
+            tcp_retransmits: 30
+            tcp_timeouts: 6
+          id: client_team:networks, server_service:hucklebuck
+          type: aggregated_connection
+      properties:
+        data:
+          description: The `SingleAggregatedConnectionResponseArray` `data`.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedConnectionResponseData'
+          type: array
+      type: object
+    SingleAggregatedConnectionResponseData:
+      description: The definition of `SingleAggregatedConnectionResponseData` object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataAttributes'
+        id:
+          description: The `SingleAggregatedConnectionResponseData` `id`.
+          type: string
+        type:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataType'
+      type: object
+    SingleAggregatedConnectionResponseDataAttributes:
+      description: The definition of `SingleAggregatedConnectionResponseDataAttributes`
+        object.
+      properties:
+        bytes_sent_by_client:
+          description: The total number of bytes sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        bytes_sent_by_server:
+          description: The total number of bytes sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        group_bys:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: The `attributes` `group_bys`.
+          type: object
+        packets_sent_by_client:
+          description: The total number of packets sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        packets_sent_by_server:
+          description: The total number of packets sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        rtt_micro_seconds:
+          description: Measured as TCP smoothed round trip time in microseconds (the
+            time between a TCP frame being sent and acknowledged).
+          format: int64
+          type: integer
+        tcp_closed_connections:
+          description: The number of TCP connections in a closed state. Measured in
+            connections per second from the client.
+          format: int64
+          type: integer
+        tcp_established_connections:
+          description: The number of TCP connections in an established state. Measured
+            in connections per second from the client.
+          format: int64
+          type: integer
+        tcp_refusals:
+          description: The number of TCP connections that were refused by the server.
+            Typically this indicates an attempt to connect to an IP/port that is not
+            receiving connections, or a firewall/security misconfiguration.
+          format: int64
+          type: integer
+        tcp_resets:
+          description: The number of TCP connections that were reset by the server.
+          format: int64
+          type: integer
+        tcp_retransmits:
+          description: TCP Retransmits represent detected failures that are retransmitted
+            to ensure delivery. Measured in count of retransmits from the client.
+          format: int64
+          type: integer
+        tcp_timeouts:
+          description: The number of TCP connections that timed out from the perspective
+            of the operating system. This can indicate general connectivity and latency
+            issues.
+          format: int64
+          type: integer
+      type: object
+    SingleAggregatedConnectionResponseDataType:
+      default: aggregated_connection
+      description: 'Aggregated connection resource type. Allowed enum values: `aggregated_connection`.
+
+        default: `aggregated_connection`'
+      enum:
+      - aggregated_connection
+      type: string
+      x-enum-varnames:
+      - AGGREGATED_CONNECTION
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -46588,6 +46707,69 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+  /api/v2/network/connections/aggregate:
+    get:
+      description: Get aggregated connections
+      operationId: GetAggregatedConnections
+      parameters:
+      - description: Unix timestamp (number of seconds since epoch) of the start of
+          the query window. If not provided, the start of the query window is 15 minutes
+          before the "to" timestamp. If neither "from" nor "to" are provided, the
+          query window is [now - 15m, now].
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      - description: Unix timestamp (number of seconds since epoch) of the end of
+          the query window. If not provided, the end of the query window is the current
+          time. If neither "from" nor "to" are provided, the query window is [now
+          - 15m, now].
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of fields to group connections by.
+        in: query
+        name: group_by
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter connections by.
+        in: query
+        name: tags
+        schema:
+          type: string
+      - description: The number of connections to be returned. The maximum value is
+          5000.
+        in: query
+        name: limit
+        schema:
+          default: 100
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleAggregatedConnectionResponseArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get aggregated connections
+      tags:
+      - Cloud Network Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -57670,6 +57852,10 @@ tags:
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
+- description: The Cloud Network Monitoring API allows you to fetch aggregated connections
+    and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    for more information.
+  name: Cloud Network Monitoring
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.

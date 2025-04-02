@@ -112,8 +112,6 @@ Provide the following inputs:
 
 | Name           | Description                                                                                                                | Required | Default         |
 |----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
 | `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
 ```bash
