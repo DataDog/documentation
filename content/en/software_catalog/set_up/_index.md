@@ -13,8 +13,8 @@ Get started with Software Catalog with one of the following setup paths.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/software_catalog/set_up/new_to_datadog#build-your-first-software-catalog" >}}Build your first Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/set_up/new_to_datadog#import-entries-from-backstage" >}}Import Entries from Backstage{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/set_up/new_to_datadog#import-entries-from-servicenow" >}}Import Entries from ServiceNow{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/set_up/new_to_datadog#import-entries-from-backstage" >}}Import entries from Backstage{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/set_up/new_to_datadog#import-entries-from-servicenow" >}}Import entries from ServiceNow{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Existing Datadog user
