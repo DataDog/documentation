@@ -40,13 +40,12 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 
 ## Set up your RUM application
 
-### Remote configuration
+### Remotely Manage your RUM Applications in Datadog
 
-<div class="alert alert-info">Remote configuration for RUM is in Preview.</div>
+Remotely manage your RUM application configs directly from the Datadog console, after having them auto-instrumented with the RUM SDK.
+If you want to manage RUM configs in your web server files instead, see [Non-remote managed applications](#non-remote-managed-applications).
 
-Remote configuration allows you to manage configurations directly from the Datadog UI.
-
-You can configure the following settings without accessing any frontend or backend code:
+Configurations that can be remotely managed are as follows:
 
 - Session sampling rate
 - Session Replay sampling rate
@@ -54,8 +53,6 @@ You can configure the following settings without accessing any frontend or backe
 - Action name privacy setting
 - Environment (attribute)
 - Service name (attribute)
-
-If you want to manage RUM configurations in your web server, see [Non-remote configuration](#non-remote-configuration).
 
 1. Make sure you have [Remote Configuration][42] enabled in Datadog.
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
@@ -66,7 +63,7 @@ If you want to manage RUM configurations in your web server, see [Non-remote con
 1. Copy and run the command shown.
 1. Restart your web server.
 
-### Non-remote configuration
+### Non-remote managed applications
 
 <div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
@@ -254,11 +251,9 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 
 You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
 
-### Remote configuration
+### Remotely Manage your RUM Applications in Datadog
 
-<div class="alert alert-info">Remote Configuration is in Preview.</div>
-
-To perform [remote configuration](#remote-configuration), you use the Datadog UI to modify application configurations without having to instrument any code.
+To [remotely manage your RUM applications in Datadog](#remotely-manage-your-rum-applications-in-datadog), you use the Datadog UI to modify application configurations without having to instrument any code.
 
 To update configuration settings with remote configuration:
 
@@ -266,7 +261,7 @@ To update configuration settings with remote configuration:
 1. On the Instrument your application page, modify the desired configuration settings.
 1. Click **Save Changes**.
 
-### Non-remote configuration  
+### Non-remote managed applications
 
 {{< tabs >}}
 {{% tab "NGINX" %}}
