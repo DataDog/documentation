@@ -14,6 +14,7 @@ import ExpressionLanguageEvaluator from './components/expression-language-evalua
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
 
+// Custom error class makes it easier to find errors in RUM
 class BrokenImageError extends Error {
     constructor(message) {
         super(message);
@@ -433,18 +434,46 @@ window.addEventListener(
 
 const brokenImageError = new BrokenImageError(`Broken image found at ${window.location.pathname}`);
 
-// Check for broken images and add an error to Datadog RUM
-function checkForBrokenImages() {
+// Add a session check to avoid duplicate runs
+function checkBrokenImages() {
+    // Check if we've already run this check in this session
+    if (sessionStorage.getItem('imageCheckComplete')) {
+        return;
+    }
+
     const images = document.getElementsByTagName('img');
-    brokenImageCount = 0;
-    for(let img of images) {
-        if (!img.complete ) {
-            brokenImageCount += 1;
+    let checkedCount = 0;
+    const totalImages = images.length;
+
+    // Function to mark check as complete
+    const markCheckComplete = () => {
+        if (checkedCount === totalImages) {
+            sessionStorage.setItem('imageCheckComplete', 'true');
         }
-    }
-    if (brokenImageCount > 0) {
-        window.DD_RUM && window.DD_RUM.addError(brokenImageError);
-    }
+    };
+
+    Array.from(images).forEach(img => {
+        if (img.complete) {
+            checkedCount++;
+            if (!img.naturalWidth) {
+                console.error('Image failed to render');
+                window.DD_RUM && window.DD_RUM.addError(brokenImageError);
+            }
+            markCheckComplete();
+        } else {
+            img.addEventListener('load', () => {
+                checkedCount++;
+                markCheckComplete();
+            });
+            
+            img.addEventListener('error', () => {
+                checkedCount++;
+                console.error('Failed to load image:', img.src);
+                // Add your Datadog RUM error here
+                markCheckComplete();
+            });
+        }
+    });
 }
 
-checkForBrokenImages()
+document.addEventListener('DOMContentLoaded', checkBrokenImages);
