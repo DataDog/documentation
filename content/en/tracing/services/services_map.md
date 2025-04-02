@@ -90,7 +90,7 @@ New services or connections appear within moments of being instrumented and age 
 
 ### Color
 
-Service node borders are colored with red or yellow depending on their respective Service Health state. [Service Health][7] consolidates signals across Watchdog anomalies, paging monitors, and incidents into one single health state for each service. Use Service Health to identify services that need immediate attention at a glance. 
+Service node borders are colored with red or yellow depending on their respective Service Health state. [Service Health][7] consolidates signals across Watchdog anomalies, paging monitors, and incidents into one single health state for each service. Use Service Health to quickly identify services that require immediate attention.
 
 ### Availability
 
