@@ -50,46 +50,39 @@ and [create a Service Extension as a traffic extension][5].
 
 1. **Create a new VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][6].
 
-   The Docker image supports the following configuration settings:
-   | Environment variable                   | Default value   | Description                                                       |
-   |----------------------------------------|-----------------|-------------------------------------------------------------------|
-   | `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
-   | `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
-   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
-
-   Configure the container to send traces to your Datadog Agent using the following environment variables:
-   | Environment variable                   | Default value | Description                                                           |
-   |----------------------------------------|---------------|-----------------------------------------------------------------------|
-   | `DD_AGENT_HOST`                        | `localhost`   | Hostname where your Datadog Agent is running.                         |
-   | `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
+   See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
 
 2. **Add the VM to an unmanaged instance group**
-
-   Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
+  Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
 3. **Create a backend service and add your instance group**
 
-   Create a callout backend service with the following settings:
-   - Protocol: `HTTP2`
-   - Port name: `grpc`
-   - Region: Select your region
-   - Health check port number: `80` (or your configured value)
-  
-   Add the instance group with the extension server as a backend to this backend service.
+  Create a callout backend service with the following settings:
+  - Protocol: `HTTP2`
+  - Port name: `grpc`
+  - Region: Select your region
+  - Health check port number: `80` (or your configured value)
+
+  Add the instance group with the service extension VM as a backend to this backend service.
 
 4. **Configure the Traffic Service Extension callout**
-    
-   1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
-   2. Select your load balancer type
-   3. Select `Traffic extensions` as the type
-   4. Select your forwarding rules
+
+  1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
+  2. Select your load balancer type
+  3. Select `Traffic extensions` as the type
+  4. Select your forwarding rules
+<br>
    
 5. **Create a new Extension Chain**
 
-   1. To send all traffic to the extension, insert `true` in the **Match condition**
-   2. For **Programability type**, select `Callouts`
-   3. Select the backend service you created in the previous step
-   4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
+  1. To send all traffic to the extension, insert `true` in the **Match condition**
+  2. For **Programability type**, select `Callouts`
+  3. Select the backend service you created in the previous step
+  4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
+
+{{% appsec-getstarted-2-plusrisk %}}
+
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 {{% /tab %}}
 
@@ -99,7 +92,7 @@ You can use Terraform to automate the deployment of the ASM GCP Service Extensio
 
 ### Prerequisites for Terraform deployment
 
-- [Terraform][1] installed on your local machine (version 1.0.0 or later)
+- [Terraform][10] installed on your local machine (version 1.0.0 or later)
 - GCP credentials with appropriate permissions
 - A Datadog API key (that will be used to configure the Datadog Agent)
 - An existing GCP Cloud Load Balancer for your application
@@ -377,7 +370,7 @@ terraform {
 ```
 
 ##### terraform.tfvars
-Create a `terraform.tfvars` file with your specific values:
+Create a `terraform.tfvars` file with your project specific values:
 
 ```hcl
 # terraform.tfvars
@@ -410,28 +403,29 @@ This deployment creates:
 
 The service extension will automatically inspect traffic passing through your load balancer for security threats.
 
-#### 3. Cleaning up resources
-
-To remove all resources created by this Terraform configuration:
-
-```bash
-terraform destroy
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Verification and Monitoring
-
-After deployment, you can verify that your service extension is functioning correctly by checking the following:
-
 {{% appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Technical Details
+{{% /tab %}}
+{{< /tabs >}}
 
-### Datadog Go Tracer and GCP Service Extensions
+## Configuration
+
+The Datadog ASM Service Extension Docker image supports the following configuration settings:
+
+| Environment variable                   | Default value   | Description                                                       |
+|----------------------------------------|-----------------|-------------------------------------------------------------------|
+| `DD_SERVICE_EXTENSION_HOST`            | `0.0.0.0`       | gRPC server listening address.                                    |
+| `DD_SERVICE_EXTENSION_PORT`            | `443`           | gRPC server port.                                                 |
+| `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`| `80`            | HTTP server port for health checks.                               |
+
+Configure the container to send traces to your Datadog Agent using the following environment variables:
+
+| Environment variable                   | Default value | Description                                                           |
+|----------------------------------------|---------------|-----------------------------------------------------------------------|
+| `DD_AGENT_HOST`                        | `localhost`   | Hostname where your Datadog Agent is running.                         |
+| `DD_TRACE_AGENT_PORT`                  | `8126`        | Port of the Datadog Agent for trace collection.                       |
 
 <div class="alert alert-warning">
   <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
@@ -439,9 +433,9 @@ After deployment, you can verify that your service extension is functioning corr
 
 The GCP Service Extensions integration uses the [Datadog Go Tracer][7] and inherits all environment variables from the tracer. You can find more configuration options in [Configuring the Go Tracing Library][8] and [ASM Library Configuration][9].
 
-### Limitations
+## Limitations
 
-The GCP Service Extensions version `1.71.0` and all versions above currently have the following important limitations:
+The GCP Service Extensions version `1.71.0` and all versions above currently have the following limitations:
 
 * The request body is not inspected, regardless of its content type.
 
@@ -458,3 +452,4 @@ The GCP Service Extensions version `1.71.0` and all versions above currently hav
 [7]: https://github.com/DataDog/dd-trace-go
 [8]: https://docs.datadoghq.com/tracing/trace_collection/library_config/go/
 [9]: https://docs.datadoghq.com/security/application_security/threats/library_configuration/
+[10]: https://www.terraform.io/
