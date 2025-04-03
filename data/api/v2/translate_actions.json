@@ -1248,8 +1248,8 @@
     "request_schema_description": "List tags response."
   },
   "GetAggregatedConnections": {
-    "description": "Get aggregated connections",
-    "summary": "Get aggregated connections"
+    "description": "Get all aggregated connections.",
+    "summary": "Get all aggregated connections"
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
