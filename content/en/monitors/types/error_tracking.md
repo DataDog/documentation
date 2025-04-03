@@ -122,7 +122,7 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 
     You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
 
-2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (e.g. have a notification for each issue matching the query, on each environment).
+2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (For example, have a notification for each issue matching the query, on each environment).
 
 3. Query data over the last day (by default) or any other time window at each evaluation.
 
