@@ -1,5 +1,5 @@
 ---
-title: Azure Status and Count Metrics
+title: Azure Count Metrics
 
 aliases:
   - /integrations/faq/azure-vm-status-is-not-reporting
@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-Datadog generates two additional metrics for each resource monitored with the [Azure integration][1]: `azure.*.status` and `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.status` and `azure.vm.count`. These two metrics cover similar information.
+Datadog generates an additional metric for each resource monitored with the [Azure integration][1]: `azure.*.count`. For example, Azure Virtual Machines monitored by Datadog reports `azure.vm.count`.
 
 The `azure.*.count` metric is an improvement over `azure.*.status`, which is deprecated.
 
@@ -30,7 +30,7 @@ Use the `azure.*.count` metric to:
 - Create monitors to alert you about the status of different Azure resources.
 
 **Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This does not affect monitors or widgets scoped to a specific status.
-You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`. 
+You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`.
 
 For most resource types, the possible statuses are:
 
@@ -52,21 +52,9 @@ Virtual machines have more detailed statuses, including:
 
 If you see a status of `query_failed` you need to enable the [Resource Health provider](#troubleshooting) in Azure.
 
-## Status metric
-
-The `azure.*.status` metric is the previous solution for this same type of information. It reports the number of available resources for each Azure resource type.
-
-### Differences
-
-The key differences between the `.status` and `.count` metric:
-
-- `azure.*.count` includes all resources that exist in the Azure account while `azure.*.status` only reports the number of available resources.
-- `azure.*.count` includes a `status` tag, which reports the specific availability state for the resource while `azure.*.status` only includes the standard tags for the resource type.
-- `azure.*.count` includes improvements in the accuracy and reliability of the metric value.
-
 ## Troubleshooting
 
-If your Azure integration is reporting metrics but not `azure.*.status`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
+If your Azure integration is reporting metrics but not `azure.*.count`, or `azure.*.count` is returning `status:query_failed`, your Azure subscription needs to register the Azure Resource Health provider.
 
 Using the Azure Command Line Interface:
 ```bash
@@ -75,7 +63,7 @@ azure config mode arm
 azure provider register Microsoft.ResourceHealth
 ```
 
-The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
+The `azure.*.count` metric should show in Datadog within 5 - 10 minutes.
 
 [1]: /integrations/azure/
 [2]: /metrics/guide/interpolation-the-fill-modifier-explained/
