@@ -64,6 +64,9 @@ Choose one of the following options:
 
 Monitor triggers when any new issue is detected (the number of errors is greater than 0 over the past day).
 
+{{% /collapse-content %}}
+
+
 Or **define your alert metric**:
 
 1. Choose the metric you want to monitor. There are three suggested filter options to access the most frequently used facets:
