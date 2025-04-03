@@ -82,7 +82,9 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 You can enable APM by installing the Agent with either:
 
@@ -104,7 +106,7 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
-1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
+1. Install the [Datadog Operator][36] with Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
@@ -121,6 +123,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
    metadata:
      name: datadog
    spec:
+     override:
+       agent:
+         image: 7.64.1
+       clusterAgent:
+         image: 7.64.1
      global:
        site: <DATADOG_SITE>
        tags:
@@ -287,7 +294,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent v7.64+) (Preview)" %}}
+{{% tab "Kubernetes (Agent v7.64+)" %}}
 
 ### Configuring instrumentation for namespaces and pods
 
@@ -481,6 +488,8 @@ This configuration enables APM for all pods except those that have either of the
 {{% /tab %}}
 
 {{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -722,7 +731,9 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 2. Restart the service.
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 #### Using workload selection (recommended)
 
@@ -780,7 +791,9 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
