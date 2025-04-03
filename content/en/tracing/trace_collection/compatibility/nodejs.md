@@ -201,7 +201,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
-[8]: https://expressjs.com/en/resources/frameworks.html
+[8]: https://docsearch-expressjs.netlify.app/en/resources/frameworks
 [9]: https://www.fastify.io
 [10]: https://github.com/graphql/graphql-js
 [11]: https://grpc.io/
