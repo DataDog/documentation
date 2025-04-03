@@ -178,7 +178,7 @@ To pull test configurations and push test results, the private location worker n
 
 Only users with the **Synthetics Private Locations Write** role can create private locations. For more information, see [Permissions](#permissions).
 
-**Note**: An organization member who does not have the `synthetics_private_location_read` permission is unable to view, search, or add private locations to a synthetic test. However, updating a test with forbidden private locations can erase the private locations from the test.
+**Note**: Users without the `synthetics_private_location_read` permission cannot view, search for, or add private locations to a Synthetic Monitoring test. However, if a test includes restricted private locations, updating the test will remove those locations.
 
 ### Create your private location
 
