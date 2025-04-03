@@ -40,6 +40,31 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 
 ## Set up your RUM application
 
+### Remotely configure your RUM applications in Datadog
+
+Remotely manage your RUM application configurations directly from Datadog, after having them auto-instrumented with the RUM SDK.
+If you want to manage RUM configs in your web server files instead, see [Non-remote managed applications](#non-remote-managed-applications).
+
+Configurations that can be remotely managed are as follows:
+
+- Session sampling rate
+- Session Replay sampling rate
+- Session Replay privacy setting
+- Action name privacy setting
+- Environment (attribute)
+- Service name (attribute)
+
+1. Make sure you have [Remote Configuration][42] enabled in Datadog.
+1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
+1. Select **Auto-Instrumentation**.
+1. Configure all desired settings.
+1. Click **Save Changes**.
+1. Click the tab for your web server.
+1. Copy and run the command shown.
+1. Restart your web server.
+
+### Non-remote managed applications
+
 <div class="alert alert-warning">To request support for a web server that is not listed here, <a href="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/">fill out this form.</a></div>
 
 {{< tabs >}}
@@ -73,12 +98,12 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-### Download the appropriate `.tgz` file
+#### Download the appropriate `.tgz` file
 
 1. Use the `.tgz` file corresponding to your version of NGINX. You can find all the relevant `.tgz` files listed by NGINX version under [Reference](#reference).
 2. Extract the tarball to extract the `ngx_http_datadog_module.so` file. Move it to a location that NGINX has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
-### Update NGINX configuration
+#### Update NGINX configuration
 1. The `nginx.conf` file is usually located in NGINX's configuration directory. Add the following line to load the module:
 
    ```javascript
@@ -106,7 +131,7 @@ To automatically instrument your RUM application:
    }
    ```
 
-### Restart your server
+#### Restart your server
 
 1. Restart the NGINX server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
@@ -144,14 +169,14 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-### Download the module file
+#### Download the module file
 
 1. Download the [zipped module][1].
 2. Extract the zip to obtain the `mod_datadog.so` file. Move it to a location that Apache HTTP Server has access to (referenced as `<RUM_MODULE_PATH>` in the steps below).
 
 [1]: https://rum-auto-instrumentation.s3.amazonaws.com/httpd/latest/mod_datadog-amd64.zip
 
-### Update Apache HTTP server configuration
+#### Update Apache HTTP server configuration
 1. Locate the configuration file. You can use `apachectl -V` to find the default configuration path. Add the following line to load the module:
 
    ```javascript
@@ -179,7 +204,7 @@ To automatically instrument your RUM application:
    </DatadogRumSettings>
    ```
 
-### Restart your server
+#### Restart your server
 
 1. Restart the Apache HTTP Server to begin collecting data for your Datadog RUM application. By default, the RUM SDK is injected to all HTML documents. You may need to clear your browser cache.
 2. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the httpd error logs for relevant messages. The module logs important steps during the injection process. Ensure that Apache HTTP Server is configured with at least the `info` log level.
@@ -225,6 +250,18 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 ## Updating your RUM application
 
 You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
+
+### Remotely manage your RUM applications in Datadog
+
+To [remotely manage your RUM applications in Datadog](#remotely-manage-your-rum-applications-in-datadog), you use the Datadog UI to modify application configurations without having to instrument any code.
+
+To update configuration settings with remote configuration:
+
+1. Go to your RUM application from the [Application Management][1] list.
+1. On the Instrument your application page, modify the desired configuration settings.
+1. Click **Save Changes**.
+
+### Non-remote managed applications
 
 {{< tabs >}}
 {{% tab "NGINX" %}}
@@ -350,3 +387,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [39]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
 [40]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
 [41]: /real_user_monitoring/browser/setup/server/#limitations
+[42]: /agent/remote_config/

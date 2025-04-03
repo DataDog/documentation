@@ -13708,6 +13708,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13726,12 +13730,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true
@@ -20552,6 +20558,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -20871,6 +20882,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for all organizations (To be introduced
@@ -20883,6 +20899,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -20891,6 +20912,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -21422,6 +21448,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -21745,6 +21776,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for the given org (To be introduced
@@ -21757,6 +21793,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current date for the given org.
@@ -21765,6 +21806,11 @@ components:
         rum_mobile_replay_session_count_ios_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_sum:
@@ -22297,6 +22343,11 @@ components:
             Plus over all hours in the current month for all organizations.
           format: int64
           type: integer
+        error_tracking_apm_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_error_events_agg_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current month for all organizations.
@@ -22651,6 +22702,11 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current month for all organizations (To be introduced
@@ -22663,6 +22719,11 @@ components:
             on October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_unity_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_replay_session_count_android_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on Android
             over all hours within the current month for all organizations.
@@ -22671,6 +22732,11 @@ components:
         rum_mobile_replay_session_count_ios_agg_sum:
           description: Shows the sum of all mobile RUM replay sessions on iOS over
             all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_mobile_replay_session_count_reactnative_agg_sum:

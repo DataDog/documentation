@@ -167,11 +167,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     Add the following to your Gemfile:
 
     ```Gemfile
+    gem 'datadog'
     gem 'datadog-lambda'
-    gem 'ddtrace'
     ```
 
-    `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda.
+    `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda.
 
     Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 

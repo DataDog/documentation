@@ -230,7 +230,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 
 In Datadog:
 
-1. Navigate to [**Cloud Costs > Settings > Custom Costs**][3].
+1. Navigate to [**Cloud Cost > Settings > Custom Costs**][3].
 1. Click the **+ Upload Costs** button.
 
    {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
@@ -281,7 +281,7 @@ All costs submitted to Custom Costs appear in these metrics. For example, if a $
 
 ## Use Custom Costs data
 
-You can view custom costs data on the [**Cloud Costs Explorer** page][6], the [Cloud Costs Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
+You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cloud Cost Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
 
 ## Further reading
 

@@ -73,6 +73,17 @@ This behavior can be fine-tuned with the following environment variables:
 
 In addition to automatically retrying failed tests, Failed Test Replay allows you to see local variable data in the topmost frame of the test error's stack trace. Enable this feature with the **Failed Test Replay** toggle.
 
+#### Create a logs index
+
+Failed Test Replay creates logs that are sent to Datadog and appear alongside your regular application logs.
+
+If you use [Exclusion filters][4], ensure Failed Test Replay logs are not filtered:
+
+1. Create a logs index and [configure it][5] to the desired retention with **no sampling**.
+2. Set the filter to match on the `source:dd_debugger` tag. All Failed Test Replay logs have this source.
+3. Ensure that the new index takes precedence over any other index with filters that match that tag, because the first match wins.
+
+
 After you enable this feature, you can see local variable data in failed tests:
 
 {{< img src="continuous_integration/failed_test_replay_local_variables.png" alt="Failed Test Replay." style="width:100%" >}}
@@ -85,6 +96,9 @@ After you enable this feature, you can see local variable data in failed tests:
 [1]: https://app.datadoghq.com/ci/settings/test-optimization
 [2]: https://www.npmjs.com/package/jest-image-snapshot
 [3]: https://github.com/americanexpress/jest-image-snapshot?tab=readme-ov-file#jestretrytimes
+[4]: /logs/log_configuration/indexes/#exclusion-filters
+[5]: /logs/log_configuration/indexes/#add-indexes
+
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
@@ -158,11 +172,9 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{% tab "Python" %}}
 
-<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <code>DD_PYTEST_USE_NEW_PLUGIN_BETA</code> environment variable to <code>true</code> to enable it.</div>
-
 ### Compatibility
 
-`dd-trace-py >= 2.18.0` (`pytest >= 7.2.0`)
+`dd-trace-py >= 3.0.0` (`pytest >= 7.2.0`)
 
 ### Configuration
 
