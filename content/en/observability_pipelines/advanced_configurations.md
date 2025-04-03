@@ -88,7 +88,7 @@ The following is a list of bootstrap options, their related pipeline environment
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
 :
 : An example proxy configuration:
-: &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
+: &nbsp;&nbsp;&nbsp;&nbsp;`proxy`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`https`: `https://foo.bar:3128`
 : **Description**: The Observability Pipelines Worker can route external requests through forward proxies, such as Squid. Forward proxies forward client requests from the Observability Pipelines Worker to the internet. You might use them as a web firewall to forbid or allow certain domains, ports, or protocols. Forward proxies usually do not terminate SSL and therefore do not have access to the request content. They only pass packets back and forth between the client and the destination. [HTTP tunnels][5] are used to secure communication through a forward proxy.
 : **Notes**:
 : <li style="list-style-type: '- '">This option is available for Observability Pipelines Worker 2.1 and later.</li>
