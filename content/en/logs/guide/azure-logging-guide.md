@@ -278,25 +278,33 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-To get started, click the button below and fill in the form on Azure portal. The Azure resources required to get Azure activity logs and Azure platform logs (including resource logs) into your Datadog account will be deployed for you.
+To get started, click **Deploy to Azure** and complete the form in the Azure portal. The required Azure resources for sending Azure activity logs and platform logs (including resource logs) to your Datadog account are deployed automatically.
 
 **Note**: Resources can only send logs to storage accounts in the same Azure region.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json)
 
-After the deployment finishes, a storage account with [Azure Blob Storage][301] services will be deployed, along with a [Container App job][302] and [an environment][303], using the names and specifications chosen.
+After the deployment finishes, Azure creates a storage account with [Azure Blob Storage][301] and an [environment][303], and deploys a [Container App job][302], using the names and specifications you provided.
 
 
-##### Add diagnostic settings to send logs
-###### Resource logs
+### Add diagnostic settings to send logs
+#### Resource logs
 
-For each resource which you would like to [forward resource logs][304], when viewing the resource in the Azure portal, under **Monitoring**, select **Diagnostic settings**. Create a diagnostic setting, select all the categories you would like to forward, and under **Destination details**, select **Archive to a storage account**, and enter the details of the storage account created by the deployment.
+To [forward resource logs][304] for a resources in Azure:
+1. In the Azure portal, navigate to the resource.
+1. Under **Monitoring**, select **Diagnostic settings**.
+1. Create a diagnostic setting and select the categories you want to forward.
+1. Under **Destination details**, select **Archive to a storage account**.
+1. Enter the details of the storage account created by the deployment.
 
-Alternatively, you can browse all resources with diagnostic setting capability in the [Monitor | Diagnostic settings][305] page of the portal.
+Alternatively, you can view all resources that support diagnostic settings on the [**Monitor > Diagnostic settings**][305] page in the Azure portal.
 
-###### Activity logs
+#### Activity logs
 
-To forward [Azure Activity log data][306], under the [Monitor | Activity log][307] page of the portal, select **Export Activity Logs**, and create a diagnostic setting pointing to the storage account, the same way as you would for resource logs.
+To forward [Azure Activity log data][306]:
+1. In the Azure portal, go to the [**Monitor > Activity log**][307] page.
+1. Select **Export Activity Logs**.
+1. Create a diagnostic setting that points to the same storage account you used for resource logs.
 
 [301]: https://azure.microsoft.com/en-us/products/storage/blobs
 [302]: https://learn.microsoft.com/en-us/azure/container-apps/jobs
