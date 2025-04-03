@@ -251,7 +251,7 @@ Auto-Instrumentation leverages a Windows module that injects the RUM SDK into th
 
 You can adjust your Session Sampling and Session Replay Sampling rates from the Application Management page.
 
-### Remotely Manage your RUM Applications in Datadog
+### Remotely manage your RUM applications in Datadog
 
 To [remotely manage your RUM applications in Datadog](#remotely-manage-your-rum-applications-in-datadog), you use the Datadog UI to modify application configurations without having to instrument any code.
 
