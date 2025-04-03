@@ -24,7 +24,7 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 ## Retention filters
 
-After spans have been ingested, some are kept for 15 days according to the retention filters are set up on your account:
+After spans have been ingested, some are kept for 15 days according to the retention filters that are set up on your account:
 1. The **[Intelligent Retention Filter](#datadog-intelligent-retention-filter)** retains spans for every environment, service, operation, and resource for different latency distributions.
 2. Several **[Default Retention Filters](#default-retention-filters)** are created to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces. 
 3. You can create any number of additional **[Custom Retention Filters](#create-your-own-retention-filter)** for your services, to capture the traces that matters the most to your business, based on any span attribute or tag filter.
@@ -115,7 +115,7 @@ Create custom retention filters to retain specific trace data for 15 days. Use a
 
 For example, you can create filters to keep all traces for:
 
-- Credit card transactions over $100 with a `@transaction_amount:>100` filter
+- Credit card transactions over $100: `@transaction_amount:>100`
 - Checkout operation spans that have a duration longer than 2 seconds on the production environment: `resource_name:"GET /checkout" @duration:>2s env:prod`
 - Specific versions of an online delivery service application: `service:delivery-api @version:v2.0`
 
