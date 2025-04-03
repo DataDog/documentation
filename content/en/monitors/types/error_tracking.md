@@ -59,7 +59,8 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 
 Choose one of the following options:
 
-**Alert on all new issues**:
+{{% collapse-content title="Alert on all new issues" level="p" %}}
+
 
 Monitor triggers when any new issue is detected (the number of errors is greater than 0 over the past day).
 
