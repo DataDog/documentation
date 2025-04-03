@@ -87,7 +87,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 
    To run your app from an IDE, Maven, or Gradle application script, or `java -javaagent` command, add the `-javaagent` JVM argument and the following configuration options, as applicable:
    ```shell
-    java -javaagent:dd-java-agent.jar -jar java-function-invoker-1.3.2 \
+    java -javaagent:dd-java-agent.jar -jar java-function-invoker \
     --classpath 'FUNCTION_JAR' \
     --target 'FUNCTION_TARGET'
    ```
@@ -97,7 +97,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
 
    To deploy the Java function in your terminal, run the following [gcloud](https://cloud.google.com/run/docs/deploy-functions#deploy-functions) command from the top-level source directory:
    ```shell
-     gcloud beta run deploy FUNCTION_NAME \
+     gcloud run deploy FUNCTION_NAME \
      --source . \
      --function FUNCTION_TARGET \
      --base-image BASE_IMAGE \
