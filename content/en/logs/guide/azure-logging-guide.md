@@ -284,13 +284,13 @@ To get started, click the button below and fill in the form on Azure portal. The
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fddazurelfo.blob.core.windows.net%2Ftemplates%2Fforwarder.json)
 
-Once the deployment finishes, a storage account with [Azure Blob Storage][301] services will be deployed, along with a [Container App job][302] and [an environment][303], using the names and specifications chosen.
+After the deployment finishes, a storage account with [Azure Blob Storage][301] services will be deployed, along with a [Container App job][302] and [an environment][303], using the names and specifications chosen.
 
 
 ##### Add diagnostic settings to send logs
 ###### Resource logs
 
-For each resource which you would like to [forward resource logs][304], when viewing the resource in the Azure portal, under **Monitoring**, select **Diagnostic settings**. Create a new diagnostic setting, select all the categories you would like to forward, and under **Destination details**, select **Archive to a storage account**, and enter the details of the storage account just created.
+For each resource which you would like to [forward resource logs][304], when viewing the resource in the Azure portal, under **Monitoring**, select **Diagnostic settings**. Create a diagnostic setting, select all the categories you would like to forward, and under **Destination details**, select **Archive to a storage account**, and enter the details of the storage account created by the deployment.
 
 Alternatively, you can browse all resources with diagnostic setting capability in the [Monitor | Diagnostic settings][305] page of the portal.
 
