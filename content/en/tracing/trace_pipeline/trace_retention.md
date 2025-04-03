@@ -115,7 +115,7 @@ Create custom retention filters to retain specific trace data for 15 days. Use a
 
 For example, you can create filters to keep all traces for:
 
-- Credit card transactions over $100 with a `@transaction_amount:>100` filter
+- Credit card transactions over $100: `@transaction_amount:>100`
 - Checkout operation spans that have a duration longer than 2 seconds on the production environment: `resource_name:"GET /checkout" @duration:>2s env:prod`
 - Specific versions of an online delivery service application: `service:delivery-api @version:v2.0`
 
