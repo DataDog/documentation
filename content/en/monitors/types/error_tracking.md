@@ -79,7 +79,7 @@ Monitor triggers when any new issue is detected (the number of errors is greater
 
     You can also specify a custom measure you want to use to monitor. If you select a custom measure, the monitor alerts when the count of unique values of the facet is `above`.
 
-2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (e.g. have a notification for each issue matching the query, and on each environment).
+2. Have a notification for each issue that matches your query, and group the results by any other attribute you require (for example, have a notification for each issue matching the query, and on each environment).
 
 3. Query data over the last day (by default) or any other time window at each evaluation.
 
