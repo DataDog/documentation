@@ -440,6 +440,8 @@ Privacy overrides affect views and their descendants. This means that even if an
 
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
 
+<div class="alert alert-info"><p>Privacy overrides are not supported in SwiftUI.</p>
+
 
 ### Text and input override
 
