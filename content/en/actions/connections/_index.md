@@ -149,7 +149,7 @@ You can add identifier tags to connections. The tagging rules for connections ar
 
 <div class="alert alert-warning"><strong>Note</strong>: Connection groups are available in Workflow Automation. They are not available in App Builder.</div>
 
-You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
+You can create groups of connections so that your workflows and apps can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
 
 You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.
 
@@ -175,14 +175,14 @@ To create a connection group:
 
 To use a connection group:
 
-1. In your product (workflow or app builder), select an action that requires a connection.
+1. In your workflow or app, select an action that requires a connection.
 1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
 1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
-1. Fill in any other required step values, then click **Save** to save your workflow.
+1. Fill in any other required step values, then click **Save**.
 
-**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a product tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
+**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow or app tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
 - Configure the product so that it can't point to a connection you don't have Resolver permission for.
-- Remove the connection for which you don't have Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
+- Remove the connection for which you don't have Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows or multiple apps, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
 
