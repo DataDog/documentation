@@ -295,7 +295,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 #### Baggage
 
-Baggage is a hash that can be accessed through the API as shown below. Baggage is propagated by default. Manipulating [Baggage][7]:
+Baggage is a hash that can be accessed through the API and is propagated by default. See the following example to manipulate [Baggage][7]:
 
 ```ruby
 # set_baggage_item
