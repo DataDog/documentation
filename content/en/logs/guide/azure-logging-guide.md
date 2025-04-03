@@ -301,10 +301,12 @@ Alternatively, you can view all resources that support diagnostic settings on th
 
 #### Activity logs
 
-To forward [Azure Activity log data][306]:
+To [forward Activity logs][306]:
 1. In the Azure portal, go to the [**Monitor > Activity log**][307] page.
 1. Select **Export Activity Logs**.
-1. Create a diagnostic setting that points to the same storage account you used for resource logs.
+1. Create a diagnostic setting and select the categories you want to forward.
+1. Under **Destination details**, select **Archive to a storage account**.
+1. Enter the details of the storage account created by the deployment.
 
 [301]: https://azure.microsoft.com/en-us/products/storage/blobs
 [302]: https://learn.microsoft.com/en-us/azure/container-apps/jobs
