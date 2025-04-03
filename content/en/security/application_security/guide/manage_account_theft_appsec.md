@@ -131,13 +131,13 @@ To use custom In-App WAF rules, do the following:
 2. Name your rule and select the **Business Logic** category.   
 3. Set the rule type as `users.login.failure` for login failures and `users.login.success` for login successes.
    <!-- ![][image7] -->
-4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`) and the status code (403 for failures, 302 or 200 for success).  
+4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`), and the status code (403 for failures, 302 or 200 for success).  
 5. Collect the tags required by detection rules. The most important tag is `usr.login`. Assuming the login was provided in the request, you can add a condition and set `store value as tag` as the operator.
    <!-- ![][image8] -->
 6. Select a specific user parameter as an input, either in the body or the query.   
-7. Set the `Tag` field to the name of the tag where we want to save the value captured using `usr.login`.
+7. Set the `Tag` field to the name of the tag where you want to save the value captured using `usr.login`.
    <!-- ![][image9] -->
-8. Click **Save**. The rule is automatically sent to every instance of the service and will start capturing login failures. 
+8. Click **Save**. The rule is automatically sent to every instance of the service and begins capturing login failures. 
 
 **To validate that the instrumentation is correct**, see [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
 
@@ -200,7 +200,7 @@ To configure automatic blocking, do the following:
 1. Go to **ASM** > **Protection** > [Detection Rules][23].  
 2. In **Search**, enter `tag:"category:account_takeover"`.   
 3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for **High** or **Critical** severity.  
-4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**.  
+4. In the rule, navigate to **Set Conditions** > **Security Responses**, and enable **IP automated blocking**.  
    You can control the blocking behavior per condition. Each rule can have multiple conditions based on your confidence and the attack success. 
 
 **Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, ASM has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
@@ -224,16 +224,16 @@ Many strategies are available, but it's important to understand that the value c
 3. The actor buys access to a botnet, letting them leverage many different IPs to run their attack. There are extreme cases where large campaigns with 500k+ attempts were so distributed that Datadog saw an average of 1.01 requests per IP and a single attempt per account.
 4. When valid credentials are discovered, they might be sold downstream to another actor  to leverage them to some end such as financial theft, spam, abuse, etc.
 
-Whenever an attack starts against your systems, signals are generated mentioning **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**. These signal terms are based on the strategy used by the attacker. 
+When an attack begins against your systems, the system generates signals labeled **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**, depending on the attacker’s strategy.
 
 ### Step 3.1: Triage
 
-The first step is to confirm that the detection is correct. Certain behaviors, such as a security scan on a login endpoint or a lot of token rotation, might appear to the detection as an attack. The analysis depends on the signal, and the following examples provide general guidance that you'll need to adapt to your situation.
+The first step is to confirm that the detection is correct. Certain behaviors, such as a security scan on a login endpoint or frequent token rotation, might appear to the detection as an attack. The analysis depends on the signal, and the following examples provide general guidance that you'll need to adapt to your situation.
 
 {{< tabs >}}
 {{% tab "Bruteforce" %}}
 
-The signal is looking for an attempt to steal a user account by trying many different passwords for this account. Generally, a small number of accounts are targeted by those campaigns.
+The signal is looking for an attempt to steal a user account by trying many different passwords for this account. Generally, a small number of accounts are targeted by these campaigns.
 
 Review the accounts flagged as compromised. Click on a user to open a summary of recent activity.
 
@@ -245,7 +245,7 @@ Questions for triage:
 
 If the answer to those questions is yes, the signal is likely legitimate.
 
-You can adapt your response based on the sensitivity of the account (for example, a free account without much access/secrets vs admin account).
+You can adapt your response based on the sensitivity of the account, for example, a free account with limited access versus an admin account.
 
 {{% /tab %}}
 
@@ -286,7 +286,7 @@ If the list is truncated, click **View in App & API Protection Traces Explorer**
 
 If the conclusion of the triage is that the signal is a false positive, you can flag it as a false positive and close it. 
 
-If the false positive was caused by a unique setting in your service, you might introduce suppression filters to silence them out.
+If the false positive was caused by a unique setting in your service, you can add suppression filters to silence false positives.
 
 **If the signal is legitimate**, move to step [Step 3.2: Preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response).
 
@@ -296,10 +296,10 @@ If the attack is ongoing, you might want to disrupt the attacker as you investig
 
 **Note:** This is a common step, although you might want to skip this step in the following circumstances:
 
-* Accounts aren't immediately valuable: you can block compromised accounts after the fact with no negative consequences.  
-* You want to maintain the maximum visibility on the attack by avoiding preventing the attacker from learning that an investigation is ongoing and changing their strategy to something more difficult to track.
+* The accounts have little immediate value. You can block these post-compromise without causing harm.
+* You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
 
-Enforcing this preliminary response requires [Remote Configuration][11] is enabled for your services.
+Enforcing this preliminary response requires that [Remote Configuration][11] is enabled for your services.
 
 If you want to initiate a partial response, do the following:
 
@@ -308,7 +308,7 @@ If you want to initiate a partial response, do the following:
 
 The attackers are likely using a small number of IPs. To block them, open the signal and use Next Steps. You can set the duration of blocking. 
 
-We recommend **12h**, which will be enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. We do not recommend permanent blocking.  
+Datadog recommends a duration of **12h**, which is typically sufficient for the attack to stop and helps avoid blocking legitimate users if those IPs are later recycled. Permanent blocking is not recommended.
 You can also block compromised users, although a better approach would be to extract them and reset their credentials using your own systems.  
 Finally, you can introduce automated IP blocking while running your investigation.
 
@@ -316,13 +316,13 @@ Finally, you can introduce automated IP blocking while running your investigatio
 
 {{% tab "Distributed Credential Stuffing" %}}
 
-Those attacks often rely on a large number of disposable IPs. The latency from the Datadog platform makes it impractical to block login attempts by blocking the IP before the IP gets dropped from the attacker's pool.  
+These attacks often use a large number of disposable IPs. Due to Datadog’s latency, it’s impractical to block login attempts by blocking the IP before the attacker drops it from their pool.
 
 Instead, block traits of the request that are unique to the malicious attempt (a user agent, a specific header, a fingerprint, etc.).
 
 In a **Distributed Credential Stuffing campaign** signal, Datadog automatically identifies clear traits and presents them as **Attacker Attributes**. 
 
-Before blocking, we recommend that you review the activity from the cluster to confirm that the activity is indeed malicious.
+Before blocking, Datadog recommends that you review the activity from the cluster to confirm that the activity is indeed malicious.
 
 The questions you're trying to answer are:
 
@@ -359,7 +359,7 @@ To create the rule, do the following:
 4. Configure the conditions of the rule. In this example, the user agent is used. If you want to block a specific user agent, you can paste it with the operator `matches value in list`. If you want more flexibility, you can also use a regex.
 5. Use the **Preview matching traces** section as a final review of the impact of the rule. 
 
-If no unexpected traces are shown, select a blocking mode and proceed to save the rule. The response will be automatically pushed to tracers. You'll soon see blocked traces appear in the Trace Explorer.
+If no unexpected traces appear, select a blocking mode and save the rule. The system pushes the response to tracers automatically, and blocked traces will soon appear in the Trace Explorer.
 
 Multiple blocking actions are available, each more or less obvious. Depending on the sophistication of the attackers, you might want a more stealthy answer so that they don't immediately realize they were blocked.
 
@@ -372,8 +372,8 @@ Multiple blocking actions are available, each more or less obvious. Depending on
 When you have [disrupted the attacker as a preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response), you can identify the following:
 
 - Accounts compromised by the attackers so you can reset their credentials.  
-- Hints about the source of the targeted accounts you can use for proactive password reset or higher scrutiny.  
-- Data on the attacker infrastructure you can use to catch future attempts or other malicious activity (credit card stuffing, abuse, etc.).
+- Hints about the source of the targeted accounts, which you can use for proactive password resets or higher scrutiny.  
+- Data on the attacker infrastructure, which you can use to catch future attempts or other malicious activity (credit card stuffing, abuse, etc.).
 
 The first step is to isolate the attacker activity from the overall traffic of the application. 
 
@@ -404,7 +404,7 @@ Successful logins should be considered very suspicious.
 
 {{% tab "Credential Stuffing" %}}
 
-This signal flagged a lot of activity coming from a few IPs. This signal is closely related to its distributed variant. You might need to use the distributed credential stuffing method.
+This signal flagged a lot of activity coming from a few IPs and is closely related to its distributed variant. You might need to use the distributed credential stuffing method.
 
 Start by extracting a list of suspicious IPs from the signal side panel
 
@@ -429,11 +429,11 @@ In the diffuse attacks case, attacker attributes are available in the signal.
 1. Click **Investigate in full screen**.   
 2. In **Attacker Attributes**, select the cluster and click, then, in **Traces**, click **View in ASM Protection Trace Explorer**.
 
-This will get you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query but will likely want to expand it to also match login successes on top of the failures. Review the exhaustiveness/accuracy of the filter using the technique described above (in the paragraph before the table).
+This takes you to the Trace Explorer with filters set to the flagged attributes. You can start the investigation with the current query, but will likely want to expand it to also match login successes on top of the failures. Review the exhaustiveness/accuracy of the filter using the technique described above (in the paragraph before the table).
 
 <!-- sceenshot -->
 
-In the case those attributes are inaccurate/incomplete, you may try to identify further traits to isolate the attacker activity. The traits we historically found the most useful are:
+In the case where those attributes are inaccurate/incomplete, you may try to identify further traits to isolate the attacker activity. The traits that Datadog historically found the most useful are:
 
 1. User agent: `@http.user_agent`  
 2. ASN: `@http.client_ip_details.as.domain`  
@@ -487,7 +487,7 @@ You can either use Datadog's built-in blocking capabilities to deny any request 
 
 ### Datadog blocking
 
-Users that are part of traffic blocked by Datadog will see a **You're blocked** page, or they receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
+Users whose traffic is blocked by Datadog are shown a **You're blocked** page or receive a custom status code, such as a redirect. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
 
 <!-- ![][image31] -->
 
