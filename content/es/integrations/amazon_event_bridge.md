@@ -84,10 +84,6 @@ Configura nuevos canales de salida de notificaciones para monitores y snapshots 
 
 La lista completa de los recursos que puedes elegir como destino está disponible en el [sitio web AWS][10].
 
-A continuación encontrarás un ejemplo de cómo enviar un snapshot para activar este proceso. Una vez activado, puedes especificar la recepción de acciones en AWS.
-
-{{< wistia uezo3fh61j >}}
-
 ## Datos recopilados
 
 ### Métricas
