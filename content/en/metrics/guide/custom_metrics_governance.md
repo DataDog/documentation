@@ -151,13 +151,13 @@ You can also reduce costs, without unintended side effects, by using the [Relate
 
 #### Identify all unqueried and unused metrics
 
-Additionally, to reduce costs without accidentally breaking any assets, you need visbility into all metrics that are unused on your platform. Filtering for all unused metrics with the [Related Assets facet][16] gives you further insight into which metrics are used on your assets, such as dashboards, notebooks, monitors, and SLOs. This can help you make informed decisions about your metric configurations. 
+Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations. 
 
 Identify your organization's entire list of unqueried and unused metrics:
 
 1. On the [Metrics Summary page][6], find the **Query Activity** facet on the left side. Select the time frame of interest (30, 60, or 90 days).
 2. Find the **Related Assets** facet on the left side, and select **Does not have assets**.
-3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these three facets provides you a list of unqueried and unused custom metrics that haven't yet been configured that you can receive immediate cost savings from.
+3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
 
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 5. (Optional) To export this list, click **Export as CSV** above the metric table.
