@@ -9,9 +9,9 @@ further_reading:
   text: "Monitor Settings"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
+{{< beta-callout url="https://www.datadoghq.com/product-preview/monitor-notification-rules/" >}}
 Monitor Notification Rules are in Preview.
-{{< /callout >}}
+{{< /beta-callout >}} 
 
 
 ## Overview
