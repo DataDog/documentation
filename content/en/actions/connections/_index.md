@@ -175,13 +175,13 @@ To create a connection group:
 
 To use a connection group:
 
-1. In your workflow, select an action that requires a connection.
+1. In your product (workflow or app builder), select an action that requires a connection.
 1. In the **Connection** field, in the drop-down, select the desired connection group under **Groups**.
 1. Fill in the desired values for the connection group **Identifiers**. For example, if your connection group is defined using the `env` Identifier Tag, and you have two environments, `prod` and `staging`, you could use either of those values (or an expression that evaluates to one of those values).
 1. Fill in any other required step values, then click **Save** to save your workflow.
 
-**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a workflow tries to use a connection you don't have Resolver permission for, the workflow fails with a `403 Forbidden` error. To fix this issue, you can:
-- Configure your workflow so that it can't point to a connection you don't have Resolver permission for.
+**Note**: You can only use connections within a group if you have [Resolver permission][12] for those connections. If a product tries to use a connection you don't have Resolver permission for, it fails with a `403 Forbidden` error. To fix this issue, you can:
+- Configure the product so that it can't point to a connection you don't have Resolver permission for.
 - Remove the connection for which you don't have Resolver permission from the connection group. <div class="alert alert-danger"><strong>Note</strong>: If you are using a connection group for multiple workflows, removing a connection that another workflow relies on causes that workflow to fail.</div>
 
 ### Update a connection group
@@ -198,7 +198,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the **delete (trash can)** icon.
 1. Click **Delete**.
 
-<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows that are using that group.</div>
+<div class="alert alert-warning"><strong>Note</strong>: Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 
