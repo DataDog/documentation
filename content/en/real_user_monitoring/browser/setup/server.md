@@ -42,7 +42,7 @@ The automatic installation method requires that you have the [Datadog Agent][2] 
 
 ### Remotely configure your RUM applications in Datadog
 
-Remotely manage your RUM application configs directly from the Datadog console, after having them auto-instrumented with the RUM SDK.
+Remotely manage your RUM application configurations directly from Datadog, after having them auto-instrumented with the RUM SDK.
 If you want to manage RUM configs in your web server files instead, see [Non-remote managed applications](#non-remote-managed-applications).
 
 Configurations that can be remotely managed are as follows:
