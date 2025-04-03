@@ -53,7 +53,7 @@ New issue monitors alert on issues that are in the **For Review** state and meet
 
 Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 
-<div class="alert alert-info"><strong>Note</strong>: New Issue monitors only consider issues that were created or regressed after the monitor was created or last edited, with a 24-hour lookback period.</div>
+<div class="alert alert-info">New Issue monitors only consider issues that were created or regressed after the monitor was created or last edited. These monitors have a 24-hour lookback period.</div>
 
 #### Define alert threshold
 
