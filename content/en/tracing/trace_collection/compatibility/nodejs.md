@@ -227,7 +227,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/
