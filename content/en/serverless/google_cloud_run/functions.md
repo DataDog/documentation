@@ -95,7 +95,7 @@ To set up logging in your application, see [Python Log Collection][3]. [Python L
    - Replace `FUNCTION_TARGET`  with the function's entry point (for example, `gcfv2.HelloworldApplication`).
    - **NOTE:** You will also need to download the `java-function-invoker.jar` from the [Maven repository](https://search.maven.org/artifact/com.google.cloud.functions.invoker/java-function-invoker) to run your Java function locally in your terminal.
 
-   To deploy the Java function in your terminal, run the following [gcloud](https://cloud.google.com/run/docs/deploy-functions#deploy-functions) command from the top-level source directory:
+   To deploy the Java function in your terminal, run the following [gcloud command](https://cloud.google.com/run/docs/deploy-functions#deploy-functions) from the top-level source directory:
    ```shell
      gcloud run deploy FUNCTION_NAME \
      --source . \
