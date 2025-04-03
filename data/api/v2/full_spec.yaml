@@ -30870,7 +30870,7 @@ components:
           type: string
       type: object
     SingleAggregatedConnectionResponseArray:
-      description: The definition of `SingleAggregatedConnectionResponseArray` object.
+      description: List of aggregated connections.
       example:
         data:
         - attributes:
@@ -30894,25 +30894,25 @@ components:
           type: aggregated_connection
       properties:
         data:
-          description: The `SingleAggregatedConnectionResponseArray` `data`.
+          description: Array of aggregated connection objects.
           items:
             $ref: '#/components/schemas/SingleAggregatedConnectionResponseData'
           type: array
       type: object
     SingleAggregatedConnectionResponseData:
-      description: The definition of `SingleAggregatedConnectionResponseData` object.
+      description: Object describing an aggregated connection.
       properties:
         attributes:
           $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataAttributes'
         id:
-          description: The `SingleAggregatedConnectionResponseData` `id`.
+          description: A unique identifier for the aggregated connection based on
+            the group by values.
           type: string
         type:
           $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataType'
       type: object
     SingleAggregatedConnectionResponseDataAttributes:
-      description: The definition of `SingleAggregatedConnectionResponseDataAttributes`
-        object.
+      description: Attributes for an aggregated connection.
       properties:
         bytes_sent_by_client:
           description: The total number of bytes sent by the client over the given
@@ -30926,10 +30926,11 @@ components:
           type: integer
         group_bys:
           additionalProperties:
+            description: The values for each group by.
             items:
               type: string
             type: array
-          description: The `attributes` `group_bys`.
+          description: The key, value pairs for each group by.
           type: object
         packets_sent_by_client:
           description: The total number of packets sent by the client over the given
@@ -30980,9 +30981,7 @@ components:
       type: object
     SingleAggregatedConnectionResponseDataType:
       default: aggregated_connection
-      description: 'Aggregated connection resource type. Allowed enum values: `aggregated_connection`.
-
-        default: `aggregated_connection`'
+      description: Aggregated connection resource type.
       enum:
       - aggregated_connection
       type: string
@@ -46732,13 +46731,13 @@ paths:
         type: idempotent
   /api/v2/network/connections/aggregate:
     get:
-      description: Get aggregated connections
+      description: Get all aggregated connections.
       operationId: GetAggregatedConnections
       parameters:
       - description: Unix timestamp (number of seconds since epoch) of the start of
           the query window. If not provided, the start of the query window is 15 minutes
-          before the "to" timestamp. If neither "from" nor "to" are provided, the
-          query window is [now - 15m, now].
+          before the `to` timestamp. If neither `from` nor `to` are provided, the
+          query window is `[now - 15m, now]`.
         in: query
         name: from
         schema:
@@ -46746,8 +46745,8 @@ paths:
           type: integer
       - description: Unix timestamp (number of seconds since epoch) of the end of
           the query window. If not provided, the end of the query window is the current
-          time. If neither "from" nor "to" are provided, the query window is [now
-          - 15m, now].
+          time. If neither `from` nor `to` are provided, the query window is `[now
+          - 15m, now]`.
         in: query
         name: to
         schema:
@@ -46784,7 +46783,7 @@ paths:
           $ref: '#/components/responses/BadRequestResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Get aggregated connections
+      summary: Get all aggregated connections
       tags:
       - Cloud Network Monitoring
       x-menu-order: 1
