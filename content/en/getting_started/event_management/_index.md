@@ -1,21 +1,15 @@
 ---
 title: Getting Started with Event Management Inbox
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+- link: "/service_management/events/ingest//"
+  tag: "doc"
+  text: "Send events to Datadog"
+- link: "/service_management/events/correlation/"
+  tag: "doc"
+  text: "Learn more about event correlation"
+- link: "https://www.datadoghq.com/blog/datadog-event-management/"
   tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
-- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
-  tag: "Learning Center"
-  text: "Introduction to Observability"
-- link: "/monitors/types/metric/"
-  tag: "Documentation"
-  text: "Metric Monitors"
-- link: "/monitors/notify/"
-  tag: "Documentation"
-  text: "Monitor Notifications"
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session on creating effective monitors"
+  text: "Aggregate, correlate, and act on alerts faster with AIOps-powered Event Management"
 ---
 
 ## Overview
@@ -23,8 +17,6 @@ further_reading:
 Datadog Event Management Inbox helps correlate events from any source into actionable insights, enabling teams to contextualize investigations with events from Watchdog, Datadog Monitors, integrations, third-party tools, changes, and more - alongside related telemetry by the Datadog Agent. By consolidating these insights, teams can streamline incident response and improve operational efficiency.
 
 Event Management provides a centralized inbox that helps teams efficiently triage, investigate, and resolve incidents. Users can quickly preview related events, identify root causes, and take appropriate actions. Filtering and sorting options allow teams to focus on the most critical cases, while collaboration features like tagging and case merging ensure seamless teamwork. An AI-powered correlation engine groups related events into cases, reducing alert fatigue and helping teams work with a manageable number of high-value incidents. 
-
-By integrating with third-party tools such as ServiceNow, Jira, and PagerDuty, Datadog Event Management enhances collaboration and ensures that the right teams are involved in resolving issues on time. This structured workflow not only accelerates incident resolution but also improves operational efficiency, enabling teams to reduce time spent on event correlation and triage. With consolidated insights and automation-driven workflows, teams can streamline their incident response processes, reduce downtime, and improve overall system reliability.
 
 ## Key Features
 
