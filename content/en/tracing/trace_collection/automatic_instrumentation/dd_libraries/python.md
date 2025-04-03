@@ -108,6 +108,6 @@ If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [relea
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
-[5]: https://ddtrace.readthedocs.io/en/v1.0.0/
+[5]: https://ddtrace.readthedocs.io/en/v1.0.0/release_notes.html
 [11]: /tracing/trace_collection/library_injection_local/
 [13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
