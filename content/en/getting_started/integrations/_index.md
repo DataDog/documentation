@@ -31,7 +31,7 @@ The Datadog Agent package includes integrations officially supported by Datadog,
 
 ### Permissions
 
-The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
+The Integrations Manage permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
 
 ### API and application keys
 
@@ -133,6 +133,25 @@ Each integration has one of three status types:
 ## Security practices
 
 For information on how Datadog handles your data, and other security considerations, see the [Security documentation][30].
+
+## Granular Access Control
+By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level. Not all integrations support granular access controls yet. 
+
+1. While viewing an integration, locate the resource that should have granular access controls applied. 
+2. Click **Set Permissions**.
+3. By default, everyone in your org has full access. Click **Restrict Access**. 
+4. The dialog box updates to show that members of your organization now have **Viewer** access by default.
+5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor. Note: The [Integrations Manage][45] permission is also required to edit individual resources.  
+6. Click **Add**.
+7. The dialog box updates to show the updated permissions
+8. Click **Save**. The integration page will automatically refresh with updated permissions. 
+
+**Note:** To maintain your edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
+
+To restore general access to a integration resource with restricted access, follow the steps below:
+1. Click **Set Permissions**.
+2. Click **Restore Full Access**.
+3. Click **Save**. The integration page will automatically refresh with updated permissions. 
 
 ## What's next?
 
