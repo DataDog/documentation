@@ -1623,10 +1623,7 @@ components:
       - - 0.5
         - 1.0
       items:
-        description: List of distribution point.
-        oneOf:
-        - $ref: '#/components/schemas/DistributionPointTimestamp'
-        - $ref: '#/components/schemas/DistributionPointData'
+        $ref: '#/components/schemas/DistributionPointItems'
       maxItems: 2
       minItems: 2
       type: array
@@ -1637,6 +1634,11 @@ components:
         format: double
         type: number
       type: array
+    DistributionPointItems:
+      description: List of distribution point.
+      oneOf:
+      - $ref: '#/components/schemas/DistributionPointTimestamp'
+      - $ref: '#/components/schemas/DistributionPointData'
     DistributionPointTimestamp:
       description: Distribution point timestamp. It should be in seconds and current.
       format: double
