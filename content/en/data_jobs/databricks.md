@@ -25,10 +25,10 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
    **Important:**
    * Make sure you <strong>increase</strong> the **Lifetime (days)** value so that the token doesn't expire and the integration doesn't break.
-   * For the [Managed installation](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent) option, ensure the user generating the token has <strong>Workspace Admin</strong> permissions.
-   * For manual installation, ensure the user has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
+   * For the [Datadog managed init script install (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent), ensure the user or service principal linked to the token is a <strong>Workspace Admin</strong>.
+   * For manual init script installation, ensure the user or service principal linked to the token has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
 
-   As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11]. The service principal must have the [<strong>Workspace access</strong> entitlement][17] enabled and the <strong>Workspace Admin</strong> or [CAN VIEW access][9] permissions as described, above.
+   As an alternative, follow the [official Databricks documentation][10] to generate an access token for a [service principal][11]. The service principal must have the [<strong>Workspace access</strong> entitlement][17] enabled and the <strong>Workspace Admin</strong> or [CAN VIEW access][9] permissions as described above.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
