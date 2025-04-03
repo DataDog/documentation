@@ -472,7 +472,7 @@ If you didn't save all the configuration in the secret manager, you can still pa
             "command": [
                 "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
             ],
-            "secret": [
+            "secrets": [
               {
                 "name": "DATADOG_ACCESS_KEY",
                 "valueFrom": "..."
