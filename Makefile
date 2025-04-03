@@ -64,7 +64,7 @@ server:
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs: 
-	@echo "Compiling .mdoc files to HTML";
+	@echo "Compiling .mdoc.md files to HTML";
 	@node ./assets/scripts/cdocs-build.js;
 
 start:
