@@ -219,8 +219,6 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
 
 If the browser application being tested is instrumented using [Browser Monitoring][3], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
 
-For more information about custom measures, see the [Add Custom Measures Guide][2].
-
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
 [3]: /real_user_monitoring/browser/setup/
