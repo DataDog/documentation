@@ -18,11 +18,11 @@ Consider a scenario where you track distinct users visiting a website. Each day 
 
 This counterintuitive result is due to cardinality, which refers to how unique elements in a dataset are counted. The cardinality for each time bucket can be complex. When analyzing unique users, consider the question: "How many unique users were there each day this week?" If a user visits on two separate days, they count as unique for each day.
 
-However, when dealing with unique counts across buckets, the implications become more nuanced. If the approach is to get a list of all views within a given time bucket (such as 4 hours), the next step is to count the distinct sessions associated with those views. By this logic, any session that has at least one view in the time bucket will be counted. For instance, if a session records a view at 7:59:50 and another at 8:00:10, four-hour rollups would count that session in both the 4-8 bucket and the 8-12 bucket, resulting in the session being counted twice.
+However, when dealing with unique counts across buckets, the implications become more nuanced. If the approach is to get a list of all views within a given time bucket (such as four hours), the next step is to count the distinct sessions associated with those views. By this logic, any session that has at least one view in the time bucket will be counted. For instance, if a session records a view at 7:59:50 and another at 8:00:10, four-hour rollups would count that session in both the 4:00-7:59 bucket and the 8:00-12:00 bucket, resulting in the session being counted twice.
 
 ### Implications for visualizations
 
-Visualizations usually display the sum of values over different intervals, which can create confusion when comparing this total to a single value that represents the entire time period. For example, a graph might show a total of 125 for hourly increments, while a query to retrieve data might show a total of 121 for the same timeframe. This difference occurs because in the visualization, users or sessions can be counted multiple times in the hourly totals but only once in the overall daily total.
+Visualizations usually display the sum of values over different intervals, which can create confusion when comparing this total to a single value that represents the entire time period. For example, a graph might show a total of 125 users for 24 hourly increments, while a query to retrieve data over the same 24-hour period might show a total of 121. This difference occurs because in the visualization, users or sessions can be counted multiple times in the hourly totals, but only once in the overall daily total.
 
 ## Further reading
 

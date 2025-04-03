@@ -3,7 +3,7 @@ title: Rollup
 aliases:
     - /graphing/functions/rollup/
 further_reading:
-- link: "/dashboards/guide/rollup-cardinality-vizualizations"
+- link: "/dashboards/guide/rollup-cardinality-visualizations"
   tag: "Documentation"
   text: "Understanding rollup function and cardinality in visualizations"
 ---
