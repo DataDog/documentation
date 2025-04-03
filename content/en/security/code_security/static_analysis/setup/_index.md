@@ -4,6 +4,7 @@ description: Learn about Datadog Static Code Analysis to scan code for quality i
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
+- /security/code_security/static_analysis/circleci_orbs/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
@@ -32,7 +33,6 @@ First, configure your Datadog API and application keys. Add `DD_APP_KEY` and `DD
 Next, run Static Code Analysis by following instructions for your chosen CI provider below.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
-    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -328,7 +328,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "**"
+        ignore:
+          - "**"
 ```
 
 #### Ignore for a file or directory
@@ -339,7 +340,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
+        ignore:
+          - "ad-server/src/app.js"
 ```
 
 #### Ignore for a specific instance
