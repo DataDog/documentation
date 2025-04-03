@@ -19,9 +19,9 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    npm install dd-trace
    ```
 
-   To use [automatic instrumentation][1], you must use `dd-trace` v5.25+.
-
    Datadog recommends pinning the package versions and regularly upgrading to the latest versions of both `@datadog/serverless-compat` and `dd-trace` to ensure you have access to enhancements and bug fixes.
+   
+   For more information, see [Tracing Node.js Applications][1].
 
 
 2. **Start the Datadog serverless compatibility layer and initialize the Node.js tracer**. Add the following lines to your main application entry point file (for example, `app.js`):
@@ -37,7 +37,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
 
-[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs
 [2]: /tracing/metrics/runtime_metrics/?tab=nodejs
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
 {{< /programming-lang >}}
@@ -48,9 +48,9 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
    pip install ddtrace
    ```
 
-   To use [automatic instrumentation][1], you must use `dd-trace` v2.19+.
-
    Datadog recommends using the latest versions of both `datadog-serverless-compat` and `ddtrace` to ensure you have access to enhancements and bug fixes.
+
+   For more information, see [Tracing Python Applications][1].
 
 
 2. **Initialize the Datadog Python tracer and serverless compatibility layer**. Add the following lines to your main application entry point file:
@@ -67,7 +67,7 @@ This page is **only for legacy 1st Gen Cloud Run Functions**. For Gen 2 support,
 
 4. (Optional) **Enable custom metrics**. See [Metric Submission: DogStatsD][3].
 
-[1]: /tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentation
+[1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [2]: /tracing/metrics/runtime_metrics/?tab=python
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python
 {{< /programming-lang >}}
