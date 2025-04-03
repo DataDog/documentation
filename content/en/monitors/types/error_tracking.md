@@ -49,7 +49,7 @@ There are two types of alerting conditions you can configure your Error Tracking
 {{% tab "New Issue" %}}
 #### Issues to alert on
 
-New issue monitors alert on issues that are **For Review** and that meet your alerting conditions. Read more about [Issue States here][1]. As regressions are transitioned to **For Review** automatically, they are automatically monitored with New Issue monitors.
+New issue monitors alert on issues that are in the **For Review** state and meet your alerting conditions. Regressions are automatically transitioned to the For Review state, so they are monitored by default with New Issue monitors. For more information on states, see [Issue States][1].
 
 Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a search query using the same logic as the [Error Tracking Explorer search][2] for the issues' error occurrences.
 
