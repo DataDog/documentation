@@ -126,7 +126,7 @@ Select **All**, **Browser**, **Mobile**, or **Backend** issues and construct a s
 
 3. Query data over the last day (by default) or any other time window at each evaluation.
 
-4. Choose a threshold for the monitor to trigger (by default 0, i.e. at the first occurrence).
+4. Choose a threshold for the monitor to trigger (by default 0-triggers at the first occurrence).
 
 #### Programmatic management
 
