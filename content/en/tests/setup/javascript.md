@@ -272,6 +272,8 @@ You may also add custom measures to your test by grabbing the current active spa
   })
 ```
 
+For more information about custom measures, see the [Add Custom Measures Guide][2].
+
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 {{% /tab %}}
