@@ -12,7 +12,7 @@ This document describes how to configure cross-organization connections through 
 
 ## API endpoint
 
-Configure connections through the public API `/api/v2/org_connections` endpoint. The application key you use to authenticate to the endpoint must have the [`org_management`][2] permission.
+Configure connections through the public API `/api/v2/org_connections` endpoint. The application key you use to authenticate to the endpoint must have the [`org_connections_write`][2] and [`org_connections_read`][2] permissions.
 
 ## List connections
 
