@@ -91,7 +91,7 @@ Monitor triggers when any new issue is detected (the number of errors is greater
 #### Programmatic management
 
 If you are using Terraform or custom scripts using our public APIs to manage your monitors, you need to specify some clauses in the monitor query:
-* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. Note you can only use one at a time.
+* Add the source you want to target between **All**, **Browser**, **Mobile**, and **Backend** issue. Use the `.source()` clause with `"all"`, `"browser"`, `"mobile"` or `"backend"` right after your filter. **Note**: you can only use one at a time.
 * Make sure to use the `.new()` clause for new issue monitors.
 
 Example:
