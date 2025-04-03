@@ -292,21 +292,21 @@ After the deployment finishes, Azure creates a storage account with [Azure Blob 
 ### Add diagnostic settings to send logs
 #### Resource logs
 
-To [forward resource logs][304] for a resources in Azure:
+To [forward resource logs][304] for a resource in Azure:
 1. In the Azure portal, navigate to the resource.
 1. Under **Monitoring**, select **Diagnostic settings**.
-1. [Create a diagnostic setting][308] and select the categories you want to forward.
+1. [Create a diagnostic setting][308] and select the categories to forward.
 1. Under **Destination details**, select **Archive to a storage account**.
 1. Enter the details of the storage account created by the deployment.
 
-Alternatively, you can view all resources that support diagnostic settings on the [**Monitor > Diagnostic settings**][305] page in the Azure portal.
+Alternatively, view all resources that support diagnostic settings on the [**Monitor > Diagnostic settings**][305] page in the Azure portal.
 
 #### Activity logs
 
 To [forward Activity logs][306]:
 1. In the Azure portal, go to the [**Monitor > Activity log**][307] page.
 1. Select **Export Activity Logs**.
-1. [Create a diagnostic setting][308] and select the categories you want to forward.
+1. [Create a diagnostic setting][308] and select the categories to forward.
 1. Under **Destination details**, select **Archive to a storage account**.
 1. Enter the details of the storage account created by the deployment.
 
