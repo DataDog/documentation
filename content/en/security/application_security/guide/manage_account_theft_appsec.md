@@ -97,25 +97,24 @@ To validate that login metadata is collected, do the following:
 
 In the event of a **false** user (`usr.exists:false`), look for the following issues:
 
-- A single event: if the trace contains multiple login events, such as both successes and failures, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).  
-- If the event does not contain the mandatory metadata, it might appear as a user attribution section. The mandatory metadata is `usr.login` and `usr.exists` in the case of login failure, and `usr.id` in the case of login success. In this case, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
+- A single event: if the trace contains multiple login events, such as both successes and failures, this might be caused by incorrect auto-instrumentation. To change auto-instrumentation, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).  
+- Does the event contain the mandatory metadata? It might appear as a user attribution section in the case of a login success. The mandatory metadata is `usr.login` and `usr.exists` in the case of login failure, and `usr.login` and `usr.id` in the case of login success. If some metadata is missing, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
 
-**If the instrumentation is correct, go to [Phase 2: Preparing for Account Takeover campaigns](#phase-2:-preparing-for-account-takeover-campaigns).**
+**If the instrumentation is correct, go to [Phase 2: Preparing for Account Takeover campaigns](#phase-2-preparing-for-ato-campaigns).**
 
 ### Step 1.5: Manually instrumenting your services
 
 ASM collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
 
-**For an alternative to modifying the code of the service**, go to [Step 1.6: Remote instrumentation of your services](#step-1.6:-remote-instrumentation-of-your-services).
+<div class="alert alert-info">For an alternative to modifying the service's code, go to [Step 1.6: Remote instrumentation of your services](#step-16-remote-instrumentation-of-your-services).</div>
 
 To manually instrument your services, do the following:
 
 1. If auto-instrumentation is providing incorrect data (multiple events in a single trace), see [Disable auto-instrumentation][9].
-   For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. 
-2. Add the following metadata:
-   * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts.
-   * `usr.exists`: **Recommended for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
-   * `usr.id`: **Recommended for login success and failure (if available)**. This field contains a unique identifier for the account. User blocking is based on this value. This field also helps with investigation. If no identifier is available (because the account doesn't exist), you don't need to populate this field.
+2. For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. Make sure to add the following metadata:
+   * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts. Also, this field provides information on the location of the database used by the attacker. This value shouldn't be confused with `usr.id`.```
+   * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
+   * `usr.id`: **Mandatory for login success and recommended for login failures (if the user exists)**. This field contains a unique identifier for the account. User blocking is based on this value. This field also helps extract post-compromise activity. If no identifier is available (the account doesn't exist), you don't need to populate this field.
 
 **After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
 
@@ -123,7 +122,7 @@ To manually instrument your services, do the following:
 
 ASM can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
 
-This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running in [Remote Configuration][12].
+This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running for this service in [Remote Configuration][12].
 
 To use custom In-App WAF rules, do the following:
 
@@ -145,7 +144,7 @@ For more details, see [Tracking business logic information without modifying the
 
 ## Phase 2: Preparing for ATO campaigns
 
-After setting up instrumentation for your services, ASM monitord for attack campaigns. You can review the monitoring in the [Attacks overview][14] **Business logic** section. 
+After setting up instrumentation for your services, ASM monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] **Business logic** section.
 
 <!-- ![][image10] -->
 
@@ -153,27 +152,25 @@ ASM detects [multiple attacker strategies][15]. Upon detecting an attack with a 
 
 The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
 
-To fully leverage detections, take the following actions.
+The following actions will help you to fully leverage detections and to become aware them quicker.
 
 ### Step 2.1: Configuring notifications
 
-[Notifications][17] provide warnings when a signal is triggered. 
-
-To create a notification rule using the [Create a new rule][18] setting, do the following:
+[Notifications][17] provide a warning on your preferred channel when a signal is triggered. To create a notification rule, do the following:
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select **Signal** and remove all entries except **ASM**.
-4. Restrict the rule to `category:account_takeover.`  
+3. Select **Signal** and remove all entries except **Application Security**.
+4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.  
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
-6. Save the rule.
+6. Test, then save the rule.
    <!-- ![][image11] -->
    The notification is sent the next time a signal is generated.
 
 ### Step 2.2: Validate proper data propagation
 
-In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the attacker, such as IP, user agent, fingerprint, etc., and validate the data.
+In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the original attacker's request, such as IP, user agent, fingerprint, etc.
 
 [ASM Traces][20] can help to validate the data by exposing the source IPs and user agent traffic.
 
@@ -181,17 +178,20 @@ To validate the data, do the following:
 
 1. Review login traces in the [Traces][21] and check for the following:  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
-  * **Problem:** If login attempts are coming from a few IPs only, this might be  a proxy that you can't block without risking availability.  
+  * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability. To review the IPs, use the **Top List** feature and a **group by** filter such as `@http.client_ip_details.as.domain`.  
   * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.
+* Multiple headers are populated (in the trace's **See more details** menu of the **Request** block).
+  * **Problem:** Normal request headers (for example, `accept-encoding`) aren't forwarded to the instrumented service. This impairs the generation of fingerprints (`@appsec.fingerprint.*`) and degrades the signal's ability to isolate an attacker's activity.
+  * **Solution:** Forward those headers when calling a subsequent microservice.
 
 ### Step 2.3: Configure automatic blocking
 
-**Before you begin:** Verify that the IP addresses are properly configured, as described in [Step 2.2: Validate proper data propagation](#step-2.2:-validate-proper-data-propagation).
+<div class="alert alert-info">Before you begin: Verify that the IP addresses are properly configured, as described in [Step 2.2: Validate proper data propagation](#step-22-validate-proper-data-propagation).</div>
 
-ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours.
+ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
 
 You can configure automatic blocking to block IPs identified as part of an attack. This is only a partial remediation because attackers can change IPs; however, it can give you more time to implement comprehensive remediation.
 
