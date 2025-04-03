@@ -215,8 +215,16 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
+### Playwright - RUM integration
+
+If the browser application being tested is instrumented using [Browser Monitoring][3], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
+
+For more information about custom measures, see the [Add Custom Measures Guide][2].
+
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[3]: /real_user_monitoring/browser/setup/
+[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -264,16 +272,8 @@ You may also add custom measures to your test by grabbing the current active spa
   })
 ```
 
-### Playwright - RUM integration
-
-If the browser application being tested is instrumented using [Browser Monitoring][3], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
-
-For more information about custom measures, see the [Add Custom Measures Guide][2].
-
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
-[3]: /real_user_monitoring/browser/setup/
-[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
