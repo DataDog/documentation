@@ -287,6 +287,8 @@ To get started, click **Deploy to Azure** and complete the form in the Azure por
 After the deployment finishes, Azure creates a storage account with [Azure Blob Storage][301] and an [environment][303], and deploys a [Container App job][302], using the names and specifications you provided.
 
 
+**Note**: The Blob Storage forwarder automatically updates to ensure the latest features and bug fixes.
+
 ### Add diagnostic settings to send logs
 #### Resource logs
 
