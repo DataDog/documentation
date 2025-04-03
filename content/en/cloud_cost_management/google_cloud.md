@@ -125,7 +125,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
 2. Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your service account
 3. Assign it the `roles/iam.serviceAccountTokenCreator` role.
 
-### Configure Cloud Costs
+### Configure Cloud Cost
 Continue to follow the steps indicated in [Setup & Configuration][3].
 
 **Note**: Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
