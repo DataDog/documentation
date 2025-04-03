@@ -1122,7 +1122,7 @@ components:
       x-enum-varnames:
       - API_KEYS
     APITrigger:
-      description: Trigger a workflow VIA an API. The workflow must be published.
+      description: Trigger a workflow from an API request. The workflow must be published.
       properties:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
@@ -2340,7 +2340,7 @@ components:
       description: Schema for an App-based trigger.
       properties:
         appTrigger:
-          description: Trigger a workflow VIA an App.
+          description: Trigger a workflow from an App.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -6580,7 +6580,7 @@ components:
       - IN_PROGRESS
       - CLOSED
     CaseTrigger:
-      description: Trigger a workflow VIA a Case. For automatic triggering a handle
+      description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -6817,7 +6817,7 @@ components:
       description: Schema for a Change Event-based trigger.
       properties:
         changeEventTrigger:
-          description: Trigger a workflow VIA a Change Event.
+          description: Trigger a workflow from a Change Event.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10589,7 +10589,7 @@ components:
       description: Schema for a Dashboard-based trigger.
       properties:
         dashboardTrigger:
-          description: Trigger a workflow VIA a Dashboard.
+          description: Trigger a workflow from a Dashboard.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10677,6 +10677,17 @@ components:
       type: string
       x-enum-varnames:
       - DATATRANSFORM
+    DatabaseMonitoringTriggerWrapper:
+      description: Schema for a Database Monitoring-based trigger.
+      properties:
+        databaseMonitoringTrigger:
+          description: Trigger a workflow from Database Monitoring.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - databaseMonitoringTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -11809,9 +11820,15 @@ components:
           description: Incident ID.
           type: string
         type:
-          description: Incident description.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedIncidentType'
       type: object
+    EntityResponseIncludedIncidentType:
+      description: Incident description.
+      enum:
+      - incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
     EntityResponseIncludedOncall:
       description: Included oncall.
       properties:
@@ -11821,9 +11838,15 @@ components:
           description: Oncall ID.
           type: string
         type:
-          description: Oncall type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedOncallType'
       type: object
+    EntityResponseIncludedOncallType:
+      description: Oncall type.
+      enum:
+      - oncall
+      type: string
+      x-enum-varnames:
+      - ONCALL
     EntityResponseIncludedRawSchema:
       description: Included raw schema.
       properties:
@@ -11833,8 +11856,7 @@ components:
           description: Raw schema ID.
           type: string
         type:
-          description: Raw schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRawSchemaType'
       type: object
     EntityResponseIncludedRawSchemaAttributes:
       description: Included raw schema attributes.
@@ -11843,6 +11865,13 @@ components:
           description: Schema from user input in base64 encoding.
           type: string
       type: object
+    EntityResponseIncludedRawSchemaType:
+      description: Raw schema type.
+      enum:
+      - rawSchema
+      type: string
+      x-enum-varnames:
+      - RAW_SCHEMA
     EntityResponseIncludedRelatedEntity:
       description: Included related entity.
       properties:
@@ -11854,8 +11883,7 @@ components:
         meta:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityMeta'
         type:
-          description: Related entity.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityType'
       type: object
     EntityResponseIncludedRelatedEntityAttributes:
       description: Related entity attributes.
@@ -11891,6 +11919,13 @@ components:
           description: Entity relation source.
           type: string
       type: object
+    EntityResponseIncludedRelatedEntityType:
+      description: Related entity.
+      enum:
+      - relatedEntity
+      type: string
+      x-enum-varnames:
+      - RELATED_ENTITY
     EntityResponseIncludedRelatedIncidentAttributes:
       description: Incident attributes.
       properties:
@@ -11948,8 +11983,7 @@ components:
           description: Entity ID.
           type: string
         type:
-          description: Schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedSchemaType'
       type: object
     EntityResponseIncludedSchemaAttributes:
       description: Included schema.
@@ -11957,6 +11991,13 @@ components:
         schema:
           $ref: '#/components/schemas/EntityV3'
       type: object
+    EntityResponseIncludedSchemaType:
+      description: Schema type.
+      enum:
+      - schema
+      type: string
+      x-enum-varnames:
+      - SCHEMA
     EntityResponseMeta:
       description: Entity metadata.
       properties:
@@ -12266,6 +12307,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Datastore Spec object.
       properties:
+        componentOf:
+          description: A list of components the datastore is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the datastore.
           minLength: 1
@@ -12466,6 +12512,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Queue Spec object.
       properties:
+        componentOf:
+          description: A list of components the queue is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the queue.
           minLength: 1
@@ -12532,6 +12583,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Service Spec object.
       properties:
+        componentOf:
+          description: A list of components the service is a part of
+          items:
+            type: string
+          type: array
         dependsOn:
           description: A list of components the service depends on.
           items:
@@ -14481,9 +14537,9 @@ components:
       example: https://github.com/organization/example-repository
       type: string
     GithubWebhookTrigger:
-      description: Trigger a workflow VIA GitHub webhook. To trigger a workflow from
-        GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set
-        the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
+      description: Trigger a workflow from a GitHub webhook. To trigger a workflow
+        from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings,
+        set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
         select application/json for the content type, and be highly recommend enabling
         SSL verification for security. The workflow must be published.
       properties:
@@ -16798,7 +16854,7 @@ components:
       x-enum-varnames:
       - INCIDENT_TODOS
     IncidentTrigger:
-      description: Trigger a workflow VIA an Incident. For automatic triggering a
+      description: Trigger a workflow from an Incident. For automatic triggering a
         handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -19432,10 +19488,10 @@ components:
           type: string
       type: object
     LogsQueryOptions:
+      deprecated: true
       description: 'Global query options that are used during the query.
 
-        Note: you should supply either timezone or time offset, but not both. Otherwise,
-        the query will fail.'
+        Note: These fields are currently deprecated and do not affect the query results.'
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
@@ -21544,7 +21600,7 @@ components:
           $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
       type: object
     MonitorTrigger:
-      description: Trigger a workflow VIA a Monitor. For automatic triggering a handle
+      description: Trigger a workflow from a Monitor. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -21681,6 +21737,17 @@ components:
           type: array
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
+      type: object
+    NotebookTriggerWrapper:
+      description: Schema for a Notebook-based trigger.
+      properties:
+        notebookTrigger:
+          description: Trigger a workflow from a Notebook.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - notebookTrigger
       type: object
     NotificationRule:
       description: 'Notification rules allow full control over notifications generated
@@ -26765,7 +26832,7 @@ components:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
     ScheduleTrigger:
-      description: Trigger a workflow VIA a Schedule. The workflow must be published.
+      description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
         rruleExpression:
           description: Recurrence rule expression for scheduling.
@@ -28306,11 +28373,19 @@ components:
       enum:
       - logs
       - audit
+      - app_sec_spans
+      - spans
+      - security_runtime
+      - network
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - AUDIT
+      - APP_SEC_SPANS
+      - SPANS
+      - SECURITY_RUNTIME
+      - NETWORK
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -29062,7 +29137,7 @@ components:
           type: string
       type: object
     SecurityTrigger:
-      description: Trigger a workflow VIA a Security Signal or Finding. For automatic
+      description: Trigger a workflow from a Security Signal or Finding. For automatic
         triggering a handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -29100,6 +29175,17 @@ components:
           $ref: '#/components/schemas/TriggerSource'
       required:
       - trigger_source
+      type: object
+    SelfServiceTriggerWrapper:
+      description: Schema for a Self Service-based trigger.
+      properties:
+        selfServiceTrigger:
+          description: Trigger a workflow from Self Service.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - selfServiceTrigger
       type: object
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
@@ -30783,6 +30869,124 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    SingleAggregatedConnectionResponseArray:
+      description: List of aggregated connections.
+      example:
+        data:
+        - attributes:
+            bytes_sent_by_client: 100
+            bytes_sent_by_server: 200
+            group_bys:
+              client_team:
+              - networks
+              server_service:
+              - hucklebuck
+            packets_sent_by_client: 10
+            packets_sent_by_server: 20
+            rtt_micro_seconds: 800
+            tcp_closed_connections: 30
+            tcp_established_connections: 40
+            tcp_refusals: 7
+            tcp_resets: 5
+            tcp_retransmits: 30
+            tcp_timeouts: 6
+          id: client_team:networks, server_service:hucklebuck
+          type: aggregated_connection
+      properties:
+        data:
+          description: Array of aggregated connection objects.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedConnectionResponseData'
+          type: array
+      type: object
+    SingleAggregatedConnectionResponseData:
+      description: Object describing an aggregated connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataAttributes'
+        id:
+          description: A unique identifier for the aggregated connection based on
+            the group by values.
+          type: string
+        type:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataType'
+      type: object
+    SingleAggregatedConnectionResponseDataAttributes:
+      description: Attributes for an aggregated connection.
+      properties:
+        bytes_sent_by_client:
+          description: The total number of bytes sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        bytes_sent_by_server:
+          description: The total number of bytes sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        group_bys:
+          additionalProperties:
+            description: The values for each group by.
+            items:
+              type: string
+            type: array
+          description: The key, value pairs for each group by.
+          type: object
+        packets_sent_by_client:
+          description: The total number of packets sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        packets_sent_by_server:
+          description: The total number of packets sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        rtt_micro_seconds:
+          description: Measured as TCP smoothed round trip time in microseconds (the
+            time between a TCP frame being sent and acknowledged).
+          format: int64
+          type: integer
+        tcp_closed_connections:
+          description: The number of TCP connections in a closed state. Measured in
+            connections per second from the client.
+          format: int64
+          type: integer
+        tcp_established_connections:
+          description: The number of TCP connections in an established state. Measured
+            in connections per second from the client.
+          format: int64
+          type: integer
+        tcp_refusals:
+          description: The number of TCP connections that were refused by the server.
+            Typically this indicates an attempt to connect to an IP/port that is not
+            receiving connections, or a firewall/security misconfiguration.
+          format: int64
+          type: integer
+        tcp_resets:
+          description: The number of TCP connections that were reset by the server.
+          format: int64
+          type: integer
+        tcp_retransmits:
+          description: TCP Retransmits represent detected failures that are retransmitted
+            to ensure delivery. Measured in count of retransmits from the client.
+          format: int64
+          type: integer
+        tcp_timeouts:
+          description: The number of TCP connections that timed out from the perspective
+            of the operating system. This can indicate general connectivity and latency
+            issues.
+          format: int64
+          type: integer
+      type: object
+    SingleAggregatedConnectionResponseDataType:
+      default: aggregated_connection
+      description: Aggregated connection resource type.
+      enum:
+      - aggregated_connection
+      type: string
+      x-enum-varnames:
+      - AGGREGATED_CONNECTION
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -30823,7 +31027,7 @@ components:
       description: Schema for a Slack-based trigger.
       properties:
         slackTrigger:
-          description: Trigger a workflow VIA Slack. The workflow must be published.
+          description: Trigger a workflow from Slack. The workflow must be published.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -30876,6 +31080,17 @@ components:
           $ref: '#/components/schemas/SloReportCreateRequestAttributes'
       required:
       - attributes
+      type: object
+    SoftwareCatalogTriggerWrapper:
+      description: Schema for a Software Catalog-based trigger.
+      properties:
+        softwareCatalogTrigger:
+          description: Trigger a workflow from Software Catalog.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - softwareCatalogTrigger
       type: object
     SortDirection:
       default: desc
@@ -32742,13 +32957,17 @@ components:
       - $ref: '#/components/schemas/AppTriggerWrapper'
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
+      - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
+      - $ref: '#/components/schemas/NotebookTriggerWrapper'
       - $ref: '#/components/schemas/ScheduleTriggerWrapper'
       - $ref: '#/components/schemas/SecurityTriggerWrapper'
+      - $ref: '#/components/schemas/SelfServiceTriggerWrapper'
       - $ref: '#/components/schemas/SlackTriggerWrapper'
+      - $ref: '#/components/schemas/SoftwareCatalogTriggerWrapper'
       - $ref: '#/components/schemas/WorkflowTriggerWrapper'
     TriggerRateLimit:
       description: Defines a rate limit for a trigger.
@@ -34393,7 +34612,7 @@ components:
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
         workflowTrigger:
-          description: Trigger a workflow VIA the Datadog UI. Only required if no
+          description: Trigger a workflow from the Datadog UI. Only required if no
             other trigger exists.
           type: object
       required:
@@ -46510,6 +46729,69 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+  /api/v2/network/connections/aggregate:
+    get:
+      description: Get all aggregated connections.
+      operationId: GetAggregatedConnections
+      parameters:
+      - description: Unix timestamp (number of seconds since epoch) of the start of
+          the query window. If not provided, the start of the query window is 15 minutes
+          before the `to` timestamp. If neither `from` nor `to` are provided, the
+          query window is `[now - 15m, now]`.
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      - description: Unix timestamp (number of seconds since epoch) of the end of
+          the query window. If not provided, the end of the query window is the current
+          time. If neither `from` nor `to` are provided, the query window is `[now
+          - 15m, now]`.
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of fields to group connections by.
+        in: query
+        name: group_by
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter connections by.
+        in: query
+        name: tags
+        schema:
+          type: string
+      - description: The number of connections to be returned. The maximum value is
+          5000.
+        in: query
+        name: limit
+        schema:
+          default: 100
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleAggregatedConnectionResponseArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all aggregated connections
+      tags:
+      - Cloud Network Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -57592,6 +57874,10 @@ tags:
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
+- description: The Cloud Network Monitoring API allows you to fetch aggregated connections
+    and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    for more information.
+  name: Cloud Network Monitoring
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
