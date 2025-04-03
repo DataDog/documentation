@@ -8,7 +8,6 @@ function openAccordion() {
 	}
 }
 window.addEventListener('hashchange', openAccordion);
-window.addEventListener('load', openAccordion);
 openAccordion();
 
 export {openAccordion};
