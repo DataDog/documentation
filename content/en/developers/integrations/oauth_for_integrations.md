@@ -240,7 +240,7 @@ For issues with the PKCE OAuth flow, ensure the `content-type` header is correct
 
 ### Regenerating client secrets and secret rotation
 
-If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.com][11]. Only one secret can be active at a time. After you regenerate your secret, the existing secret is deleted. You do not need to re-authorize the integration.
+If your secret was leaked and needs to be rotated, contact [ecosystems@datadog.com][11]. Only one secret can be active at a time. After you regenerate your secret, the existing secret is deleted. Customers do not need to re-authorize the integration.
 
 ## Further reading
 
