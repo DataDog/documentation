@@ -90,7 +90,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `cast(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
 | `length(string s)`                               | integer                               | Returns the number of characters in the string.                             |
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
-| `replace(string s, from_string s1, to_string s2)`| string                                | Replaces occurrences of a substring within a string with another substring. |
+| `replace(string s, string from_string, string to_string)`| string                        | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, start_position_int i, length_int l)` | string                        | Extracts a substring from a string, starting at a given position and for a specified length. |
 | `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
