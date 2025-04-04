@@ -2,6 +2,22 @@ import CdocMarkupTemplate from './CdocMarkupTemplate';
 import { WizardFilter } from '../types';
 import { CustomizationConfig } from 'cdocs-data';
 
+function mergeCustomizationConfigs(config1: CustomizationConfig, config2: CustomizationConfig) {
+  const mergeObjects = (obj1: Record<string, any>, obj2: Record<string, any>, key: string) => {
+    const overlap = Object.keys(obj1).some((id) => id in obj2);
+    if (overlap) {
+      throw new Error(`Conflict detected in ${key}: overlapping keys found.`);
+    }
+    return { ...obj1, ...obj2 };
+  };
+
+  return {
+    traitsById: mergeObjects(config1.traitsById, config2.traitsById, 'traitsById'),
+    optionsById: mergeObjects(config1.optionsById, config2.optionsById, 'optionsById'),
+    optionGroupsById: mergeObjects(config1.optionGroupsById, config2.optionGroupsById, 'optionGroupsById')
+  };
+}
+
 function SetupInstructions({
   filters,
   newConfig,
@@ -38,7 +54,10 @@ function SetupInstructions({
           <li>Add the markup below to it.</li>
         </ol>
       </p>
-      <CdocMarkupTemplate filters={filters} customizationConfig={{ ...customizationConfig, ...newConfig }} />
+      <CdocMarkupTemplate
+        filters={filters}
+        customizationConfig={mergeCustomizationConfigs(customizationConfig, newConfig)}
+      />
     </div>
   );
 }

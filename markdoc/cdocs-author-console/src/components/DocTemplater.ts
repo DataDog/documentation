@@ -8,6 +8,7 @@ export class DocTemplater {
   filtersManifest: FiltersManifest;
 
   constructor({ filters, customizationConfig }: { filters: WizardFilter[]; customizationConfig: CustomizationConfig }) {
+    console.log('DocTemplater constructor', { filters, customizationConfig });
     const frontmatter = this.buildFrontmatterData({ filters });
     this.filters = filters;
     this.customizationConfig = customizationConfig;
