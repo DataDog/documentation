@@ -95,7 +95,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
 | `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
-| `date_trunc(field f, source [, time_zone])`     | timestamp [with time zone] / interval | Truncates a timestamp or interval to a specified precision.                 |
+| `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
 
 
@@ -249,6 +249,18 @@ FROM
 {{< /code-block >}}
 
 ### `DATE_TRUNC`
+
+Supported truncations: 
+- `milliseconds`
+- `seconds` / `second`
+- `minutes` / `minute`
+- `hours` / `hour`
+- `days` / `day`
+- `weeks` / `week `
+- `months` / `month`
+- `quarter` / `quarters`
+- `year` / `years` 
+
 {{< code-block lang="sql" >}}
 SELECT
   date_trunc('month', event_time) AS month_start
