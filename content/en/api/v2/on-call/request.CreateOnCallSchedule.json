@@ -1,0 +1,49 @@
+{
+  "data": {
+    "attributes": {
+      "layers": [
+        {
+          "effective_date": "2025-02-03T05:00:00Z",
+          "end_date": "2025-12-31T00:00:00Z",
+          "interval": {
+            "days": 1
+          },
+          "members": [
+            {
+              "user": {
+                "id": "string"
+              }
+            }
+          ],
+          "name": "Layer 1",
+          "restrictions": [
+            {
+              "end_day": "friday",
+              "end_time": "17:00:00",
+              "start_day": "monday",
+              "start_time": "09:00:00"
+            }
+          ],
+          "rotation_start": "2025-02-01T00:00:00Z"
+        }
+      ],
+      "name": "Example-On-Call",
+      "tags": [
+        "tag1",
+        "tag2"
+      ],
+      "time_zone": "America/New_York"
+    },
+    "relationships": {
+      "teams": {
+        "data": [
+          {
+            "id": "00000000-7ea3-0000-000a-000000000000",
+            "type": "teams"
+          }
+        ]
+      }
+    },
+    "type": "schedules"
+  }
+}
