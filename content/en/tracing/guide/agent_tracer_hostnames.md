@@ -49,4 +49,4 @@ APM uses host information when you create [retention filters][2], generate [metr
 [1]: /containers/kubernetes/apm/?tab=daemonset
 [2]: /tracing/trace_pipeline/trace_retention
 [3]: /tracing/trace_pipeline/generate_metrics
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
