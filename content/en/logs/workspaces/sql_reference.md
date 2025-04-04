@@ -92,7 +92,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
+| `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
@@ -232,6 +232,23 @@ FROM
 {{< /code-block >}}
 
 ### `EXTRACT`
+
+Supported extraction units: 
+| Literal           | Input Type               | Description                                  |
+| ------------------| ------------------------ | -------------------------------------------- |
+| `day`             | `timestamp` / `interval` | day of the month                             |
+| `dow`             | `timestamp`              | day of the week `1` (Monday) to `7` (Sunday) |
+| `doy`             | `timestamp`              | day of the year (`1` - `366`)                |
+| `hour`            | `timestamp` / `interval` | hour of the day (`0` - `23`)                 |
+| `minute`          | `timestamp` / `interval` | minute of the hour (`0` - `59`)              |
+| `second`          | `timestamp` / `interval` | second of the minute (`0` - `59`)            |
+| `week`            | `timestamp`              | week of the year (`1` - `53`)                |
+| `month`           | `timestamp`              | month of the year (`1` - `12`)               |
+| `quarter`         | `timestamp`              | quarter of the year (`1` - `4`)              |
+| `year`            | `timestamp`              | year                                         |
+| `timezone_hour`   | `timestamp`              | hour of the time-zone offfset                |
+| `timezone_minute` | `timestamp`              | minute of the time-zone offset               |
+
 {{< code-block lang="sql" >}}
 SELECT
   extract(year FROM purchase_date) AS purchase_year
