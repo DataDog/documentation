@@ -2,6 +2,9 @@
 title: Data Retention Periods
 disable_sidebar: true
 type: data_retention_periods
+aliases:
+  - /developers/faq/data-collection-resolution-retention/
+  - /developers/guide/data-collection-resolution-retention
 further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
@@ -46,8 +49,8 @@ attributes:
        - **Detections, notifications, suppressions**: Retained for the duration of the account
   - product: Cloud Workload Security
     data_type: | 
+       - **Events**: 90 days
        - **Security signals**: 15 months
-       - **Spans**: 90 days
   - product: Code Analysis
     data_type: | 
        - **Scans**: 15 months
