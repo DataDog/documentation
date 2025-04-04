@@ -50,24 +50,24 @@ This step describes how to set up your service to use ASM.
 
 To enable ASM on your login service, ensure you meet the following requirements:
 
-* Similarly to Datadog APM, ASM requires a library integration in your services and a running Datadog agent.  
+* Similarly to Datadog APM, ASM requires a library integration in your services and a running Datadog Agent.  
 * ASM generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
 * At a minimum, **Threat Detection** must be enabled. Ideally, **Automatic user activity event tracking** should be enabled as well.
 
 To enable ASM using a new deployment, use the `APPSEC_ENABLED` environment variable/library configuration or [Remote Configuration][11]. You can use either method, but Remote Configuration can be set up using the Datadog UI.
 
-To enable ASM using Remote Configuration, do the following:
+**To enable ASM using Remote Configuration**, and without having to restart your services, do the following:
 
-1. Go to [Remote Configuration][5].  
+1. Go to [ASM onboarding][5].  
 2. Click **Get Started with ASM**.   
-3. In **Threat Management**, click **Select Services.**   
+3. In **Activate on services already monitored by Datadog**, click **Select Services.**
 4. Select your service(s), and then click **Next** and proceed with the setup instructions.
 
 When you see traces from your service in [ASM Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
 For more detailed instructions on using a new deployment, see [Enabling ASM Threat Detection using Datadog Tracing Libraries][7].
 
-### Step 1.3: Validating login information is automatically collected {#step-1.3:-validating-login-information-is-automatically-collected}
+### Step 1.3: Validating login information is automatically collected
 
 After you have enabled ASM, you can validate that login information is collected by Datadog.
 
@@ -76,24 +76,28 @@ After you have enabled ASM, you can validate that login information is collected
 To validate login information is collected, do the following:
 
 1. Go to [Traces][8] in ASM.   
-2. Look for traces tagged with login activity from your login service. For example, in **Search for**, you might have `@appsec.security\_activity:business\_logic.users.login.\*`.  
+2. Look for traces tagged with login activity from your login service. For example, in **Search for**, you might have `@appsec.security\activity:business\logic.users.login.*`.  
 3. Check if all your login services are reporting login activity. You can see this in the **Service** facet.
 
 <!-- ![][image4] -->
 
-**If you don't see login activity from a service**, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
+**If you don't see login activity from a service**, go to [Step 1.5: Manually instrumenting your services](#step-15-manually-instrumenting-your-services).
 
-### Step 1.4: Validating login metadata is automatically collected {#step-1.4:-validating-login-metadata-is-automatically-collected}
+### Step 1.4: Validating login metadata is automatically collected
 
 To validate that login metadata is collected, do the following:
 
 1. Go to [Traces][8] in ASM.   
-2. Look for traces tagged with successful and failed login activity from your login service. For example, in **Search for**, you might have all.  
+2. Look for traces tagged with successful and failed login activity from your login service. You can update the search query in **Search for** to filter `business_logic.users.login.success` or `business_logic.users.login.failure`. 
 3. Open a trace.  
-4. In the trace details, is the **Security** tab, review **Business Logic Event**.  
+4. On the **Security** tab, review the **Business Logic Event**.
 5. Check if the event has a false user.
 
 <!-- ![][image5] -->
+
+Review a few traces, both login successes and login failures. For login failures, look for traces with `usr.exists` as `true` (failed login attempt by an existing user) and `false`.
+
+The checks must be done whether or not the user exists.
 
 In the event of a **false** user (`usr.exists:false`), look for the following issues:
 
@@ -112,8 +116,8 @@ To manually instrument your services, do the following:
 
 1. If auto-instrumentation is providing incorrect data (multiple events in a single trace), see [Disable auto-instrumentation][9].
 2. For detailed instrumentation instructions for each language, go to [Adding business logic information (login success, login failure, any business logic) to traces][10]. Make sure to add the following metadata:
-   * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts.
-   * `usr.exists`: **Recommended for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
+   * `usr.login`: **Mandatory for login success and failure**. This field contains the *name* used to log into the account. The name might be an email address, a phone number, a username, or something else. The purpose of this field is to identify targeted accounts even if they don't exist in your systems because a user might be able to change those accounts. Also, this field provides information on the location of the database used by the attacker. This value shouldn't be confused with `usr.id`.
+   * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
    * `usr.exists`: **Mandatory for login failures**. This field is required for some default detections. The field helps to lower the priority of attempts targeted at accounts that don't exist in your systems.  
 
 **After deploying the code, validate the instrumentation is correct by following the steps in** [Step 1.4: Validating login metadata is automatically collected](#step-1.4:-validating-login-metadata-is-automatically-collected).
@@ -122,7 +126,7 @@ To manually instrument your services, do the following:
 
 ASM can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
 
-This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running in [Remote Configuration][12].
+This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running for this service in [Remote Configuration][12].
 
 To use custom In-App WAF rules, do the following:
 
@@ -130,7 +134,7 @@ To use custom In-App WAF rules, do the following:
 2. Name your rule and select the **Business Logic** category.   
 3. Set the rule type as `users.login.failure` for login failures and `users.login.success` for login successes.
    <!-- ![][image7] -->
-4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`) and the status code (403 for failures, 302 or 200 for success).  
+4. Select your service and write the rule to match the login attempts. Typically, you match the method (`POST`), the URI with a regex (`^/login`), and the status code (403 for failures, 302 or 200 for success).  
 5. Collect the tags required by detection rules. The most important tag is `usr.login`. Assuming the login was provided in the request, you can add a condition and set `store value as tag` as the operator.
    <!-- ![][image8] -->
 6. Select a specific user parameter as an input, either in the body or the query.   
@@ -144,7 +148,7 @@ For more details, see [Tracking business logic information without modifying the
 
 ## Phase 2: Preparing for ATO campaigns
 
-After setting up instrumentation for your services, ASM monitord for attack campaigns. You can review the monitoring in the [Attacks overview][14] **Business logic** section. 
+After setting up instrumentation for your services, ASM monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] **Business logic** section. 
 
 <!-- ![][image10] -->
 
@@ -152,45 +156,43 @@ ASM detects [multiple attacker strategies][15]. Upon detecting an attack with a 
 
 The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
 
-To fully leverage detections, take the following actions.
+The actions covered in the next sections help you to identify and leverage detections faster.
 
 ### Step 2.1: Configuring notifications
 
-[Notifications][17] provide warnings when a signal is triggered. 
-
-To create a notification rule using the [Create a new rule][18] setting, do the following:
+[Notifications][17] provide a warning on your preferred channel when a signal is triggered. To create a notification rule, do the following:
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select **Signal** and remove all entries except **ASM**.
-4. Restrict the rule to `category:account_takeover.`  
+3. Select **Signal** and remove all entries except **Application Security**.
+4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
-6. Save the rule.
+6. Test, and then save the rule.
    <!-- ![][image11] -->
    The notification is sent the next time a signal is generated.
 
 ### Step 2.2: Validate proper data propagation
 
-In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the attacker, such as IP, user agent, fingerprint, etc., and validate the data.
+In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the original attacker's request, such as IP, user agent, fingerprint, etc.
 
-[ASM Traces][20] can help to validate the data by exposing the source IPs and user agent traffic.
-
-To validate the data, do the following:
-
-1. Review login traces in the [Traces][21] and check for the following:  
+[ASM Traces][20] can help you validate that the login event is properly tagged with the source IPs, user agent, etc. To validate, review login traces in [Traces][21] and check for the following:
+ 
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
   * **Solution:** Forward the client IP of the initial request through a HTTP header, such as `X-Forwarded-For`. You can use a custom header for [better security][22] and configure the tracer to read it using the `DD_TRACE_CLIENT_IP_HEADER` environment variable.  
 * The user agent (`@http.user_agent`) is consistent with the expected traffic (web browser, mobile app, etc.)  
   * **Problem:** The user agent could be replaced by the user agent in the calling microservice network library.  
   * **Solution:** Use the client user agent when calling subsequent services.
+* Multiple headers are populated. You can see this in a trace's **See more details** in the **Request** block.
+  * **Problem:** Normal request headers (for example, `accept-encoding`) aren't forwarded to the instrumented service. This impairs the generation of fingerprints (`@appsec.fingerprint.*`) and degrades the signal's ability to isolate an attacker's activity.
+  * **Solution:** Forward those headers when calling a subsequent microservice.
 
 ### Step 2.3: Configure automatic blocking
 
-**Before you begin:** Verify that the IP addresses are properly configured, as described in [Step 2.2: Validate proper data propagation](#step-2.2:-validate-proper-data-propagation).
+<div class="alert alert-info">Before you begin: Verify that the IP addresses are properly configured, as described in <a href="#step-22-validate-proper-data-propagation">Step 2.2: Validate proper data propagation</a>.</div>
 
-ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours.
+ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
 
 You can configure automatic blocking to block IPs identified as part of an attack. This is only a partial remediation because attackers can change IPs; however, it can give you more time to implement comprehensive remediation.
 
@@ -223,7 +225,7 @@ Many strategies are available, but it's important to understand that the value c
 3. The actor buys access to a botnet, letting them leverage many different IPs to run their attack. There are extreme cases where large campaigns with 500k+ attempts were so distributed that Datadog saw an average of 1.01 requests per IP and a single attempt per account.
 4. When valid credentials are discovered, they might be sold downstream to another actor to leverage them to some end such as financial theft, spam, abuse, etc.
 
-Whenever an attack starts against your systems, signals are generated mentioning **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**. These signal terms are based on the strategy used by the attacker. 
+When an attack begins against your systems, the system generates signals labeled **Credential Stuffing**, **Distributed Credential Stuffing**, or **Bruteforce**, depending on the attacker's strategy.
 
 ### Step 3.1: Triage
 
@@ -232,7 +234,7 @@ The first step is to confirm that the detection is correct. Certain behaviors, s
 {{< tabs >}}
 {{% tab "Bruteforce" %}}
 
-The signal is looking for an attempt to steal a user account by trying many different passwords for this account. Generally, a small number of accounts are targeted by those campaigns.
+The signal is looking for an attempt to steal a user account by trying many different passwords for this account. Generally, a small number of accounts are targeted by these campaigns.
 
 Review the accounts flagged as compromised. Click on a user to open a summary of recent activity.
 
@@ -244,7 +246,7 @@ Questions for triage:
 
 If the answer to those questions is yes, the signal is likely legitimate.
 
-You can adapt your response based on the sensitivity of the account (for example, a free account without much access/secrets vs admin account).
+You can adapt your response based on the sensitivity of the account. For example, a free account with limited access versus an admin account.
 
 {{% /tab %}}
 
@@ -285,7 +287,7 @@ If the list is truncated, click **View in App & API Protection Traces Explorer**
 
 If the conclusion of the triage is that the signal is a false positive, you can flag it as a false positive and close it. 
 
-If the false positive was caused by a unique setting in your service, you might introduce suppression filters to silence them out.
+If the false positive was caused by a unique setting in your service, you can add suppression filters to silence false positives.
 
 **If the signal is legitimate**, move to step [Step 3.2: Preliminary response](#step-32-disrupting-the-attacker-as-a-preliminary-response).
 
@@ -295,10 +297,10 @@ If the attack is ongoing, you might want to disrupt the attacker as you investig
 
 **Note:** This is a common step, although you might want to skip this step in the following circumstances:
 
-* Accounts aren't immediately valuable: you can block compromised accounts after the fact with no negative consequences.  
-* You want to maintain the maximum visibility on the attack by avoiding preventing the attacker from learning that an investigation is ongoing and changing their strategy to something more difficult to track.
+* The accounts have little immediate value. You can block these post-compromise without causing harm.  
+* You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
 
-Enforcing this preliminary response requires [Remote Configuration][11] is enabled for your services.
+Enforcing this preliminary response requires that [Remote Configuration][11] is enabled for your services.
 
 If you want to initiate a partial response, do the following:
 
@@ -316,7 +318,7 @@ Finally, you can introduce automated IP blocking while running your investigatio
 
 {{% tab "Distributed Credential Stuffing" %}}
 
-Those attacks often rely on a large number of disposable IPs. The latency from the Datadog platform makes it impractical to block login attempts by blocking the IP before the IP gets dropped from the attacker's pool.  
+These attacks often use a large number of disposable IPs. Due to Datadog's latency, it's impractical to block login attempts by blocking the IP before the attacker drops it from their pool.
 
 Instead, block traits of the request that are unique to the malicious attempt (a user agent, a specific header, a fingerprint, etc.).
 
@@ -353,7 +355,7 @@ After confirming that the traits match the attackers, you can push an In-App WAF
 
 To create the rule, do the following:
 
-1. Go to **ASM** > **In-App WAF** > [Custom Rules][24].
+1. Go to **ASM** > **In-App WAF** > [Custom Rules](https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules).
 2. Click **Create New Rule** and complete the configuration. 
 3. Select your login service (or a service where you want to block the requests). You can target blocking to the login route also.
 4. Configure the conditions of the rule. In this example, the user agent is used. If you want to block a specific user agent, you can paste it with the operator `matches value in list`. If you want more flexibility, you can also use a regex.
@@ -372,8 +374,8 @@ Multiple blocking actions are available. Depending on the sophistication of the 
 When you have [disrupted the attacker as a preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response), you can identify the following:
 
 - Accounts compromised by the attackers so you can reset their credentials.  
-- Hints about the source of the targeted accounts you can use for proactive password reset or higher scrutiny.  
-- Data on the attacker infrastructure you can use to catch future attempts or other malicious activity (credit card stuffing, abuse, etc.).
+- Hints about the source of the targeted accounts, which you can use for proactive password resets or higher scrutiny.
+- Data on the attacker infrastructure, which you can use to catch future attempts or other malicious activity (credit card stuffing, abuse, etc.).
 
 The first step is to isolate the attacker activity from the overall traffic of the application. 
 
@@ -406,7 +408,7 @@ Successful logins should be considered suspicious.
 
 {{% tab "Credential Stuffing" %}}
 
-This signal flagged a lot of activity coming from a few IPs. This signal is closely related to its distributed variant. You might need to use the distributed credential stuffing method.
+This signal flagged a lot of activity coming from a few IPs and is closely related to its distributed variant. You might need to use the distributed credential stuffing method.
 
 Start by extracting a list of suspicious IPs from the signal side panel
 
@@ -646,17 +648,17 @@ This is general guidance. Depending on your applications and environments, there
 [6]: https://app.datadoghq.com/security/appsec/traces?query=&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036043639&end=1735640843639&paused=false
 [7]: /security/application_security/threats/setup/threat_detection/
 [8]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735036164646&end=1735640964646&paused=false
-[9]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
+[9]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-user-activity-event-tracking
 [10]: /security/application_security/threats/add-user-info/?tab=set_user#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[11]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile
+[11]: /agent/remote_config/?tab=configurationyamlfile
 [12]: https://app.datadoghq.com/organization-settings/remote-config?resource_type=agents
-[13]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
+[13]: /security/application_security/threats/add-user-info/?tab=set_user#tracking-business-logic-information-without-modifying-the-code
 [14]: https://app.datadoghq.com/security/appsec/threat
-[15]: https://docs.datadoghq.com/security/account_takeover_protection/#attacker-strategies
+[15]: /security/account_takeover_protection/#attacker-strategies
 [16]: https://app.datadoghq.com/security/appsec/detection-rules?query=type%3Aapplication_security%20tag%3A%22category%3Aaccount_takeover%22&deprecated=hide&groupBy=none&sort=date&viz=rules
-[17]: https://docs.datadoghq.com/security/notifications/
+[17]: /security/notifications/
 [18]: https://app.datadoghq.com/security/configuration/notification-rules/new?notificationData=
-[19]: https://docs.datadoghq.com/security/notifications/#notification-channels
+[19]: /security/notifications/#notification-channels
 [20]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735222832468&end=1735827632468&paused=false
 [21]: https://app.datadoghq.com/security/appsec/traces?query=%40appsec.security_activity%3Abusiness_logic.users.login.%2A&agg_m=count&agg_m_source=base&agg_t=count&fromUser=false&track=appsecspan&start=1735222832468&end=1735827632468&paused=false
 [22]: https://securitylabs.datadoghq.com/articles/challenges-with-ip-spoofing-in-cloud-environments/#what-should-you-do
@@ -665,7 +667,7 @@ This is general guidance. Depending on your applications and environments, there
 [25]: https://app.datadoghq.com/security/appsec/traces
 [26]: https://app.datadoghq.com/security
 [27]: https://app.datadoghq.com/security/appsec/denylist
-[28]: https://ddstaging.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
-[30]: https://docs.datadoghq.com/security/application_security/threats/inapp_waf_rules/
+[28]: https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules
+[30]: /security/application_security/threats/inapp_waf_rules/
 [31]: /api/latest/spans/#aggregate-spans
 [32]: https://haveibeenpwned.com/
