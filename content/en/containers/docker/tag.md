@@ -22,7 +22,8 @@ If you are running the Agent as a binary on a host, configure your tag extractio
 
 ### Out-of-the-box tagging
 
-The Agent can Autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1].
+The Agent can autodiscover and attach tags to all data emitted by containers. The list of tags attached depends on the Agent [cardinality configuration][1]. [Tag Cardinality][5] can impact billing as different cardinality settings impact the number of emitted metrics.
+
 
 | Tag                 | Cardinality  | Requirement                                 |
 |----------------------|--------------|---------------------------------------------|
@@ -165,3 +166,4 @@ container_env_as_tags:
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: https://github.com/opencontainers/image-spec/blob/02efb9a75ee11e05937b535cc5f228f9343ab2f5/annotations.md#pre-defined-annotation-keys
 [4]: /agent/docker/?tab=standard#tagging
+[5]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
