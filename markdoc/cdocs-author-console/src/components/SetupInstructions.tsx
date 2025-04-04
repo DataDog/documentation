@@ -18,6 +18,18 @@ function mergeCustomizationConfigs(config1: CustomizationConfig, config2: Custom
   };
 }
 
+function getNewConfigStatus(newConfig: CustomizationConfig) {
+  const hasNewTraits = Object.keys(newConfig.traitsById).length > 0;
+  const hasNewOptions = Object.keys(newConfig.optionsById).length > 0;
+  const hasNewOptionGroups = Object.keys(newConfig.optionGroupsById).length > 0;
+  return {
+    hasNewTraits,
+    hasNewOptions,
+    hasNewOptionGroups,
+    hasNewConfig: hasNewTraits || hasNewOptions || hasNewOptionGroups
+  };
+}
+
 function SetupInstructions({
   filters,
   newConfig,
@@ -27,6 +39,8 @@ function SetupInstructions({
   newConfig: CustomizationConfig;
   customizationConfig: CustomizationConfig;
 }) {
+  const configStatus = getNewConfigStatus(newConfig);
+
   return (
     <div>
       <h1>New config debug:</h1>
@@ -45,6 +59,30 @@ function SetupInstructions({
           <p>This won't actually show unless there are new option groups to add.</p>
         </div>
       )}
+      {configStatus.hasNewConfig && (
+        <>
+          <h2>Create the configuration</h2>
+          {configStatus.hasNewTraits && (
+            <>
+              <h3>Add new traits</h3>
+              <p>Trait addition instructions will go here.</p>
+            </>
+          )}
+          {configStatus.hasNewOptions && (
+            <>
+              <h3>Add new options</h3>
+              <p>Option addition instructions will go here.</p>
+            </>
+          )}
+          {configStatus.hasNewOptionGroups && (
+            <>
+              <h3>Add new option groups</h3>
+              <p>Option group addition instructions will go here.</p>
+            </>
+          )}
+        </>
+      )}
+
       <h2>Create the page</h2>
       <p>
         <ol>
