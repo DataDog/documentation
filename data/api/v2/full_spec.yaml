@@ -34886,9 +34886,9 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"action_connection\",\n    \"attributes\":
-              {\n        \"name\": \"Cassette Connection DELETE\",\n        \"integration\":
-              {\n            \"type\": \"AWS\",\n            \"credentials\": {\n
-              \               \"type\": \"AWSAssumeRole\",\n                \"role\":
+              {\n        \"name\": \"Cassette Connection {{ unique_lower_alnum }}\",\n
+              \       \"integration\": {\n            \"type\": \"AWS\",\n            \"credentials\":
+              {\n                \"type\": \"AWSAssumeRole\",\n                \"role\":
               \"MyRole\",\n                \"account_id\": \"123456789123\"\n            }\n
               \       }\n    }\n  }\n}"
           step: there is a valid "action_connection" in the system
