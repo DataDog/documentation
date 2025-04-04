@@ -177,6 +177,13 @@ FROM users
 {{< /code-block >}} 
 
 ### `CAST`  
+
+Supported cast target types: 
+- `VARCHAR`
+- `BIGINT`
+- `DECIMAL`
+- `TIMESTAMP`
+
 {{< code-block lang="sql" >}}
 SELECT
   CAST(order_id AS VARCHAR) AS order_id_string,
