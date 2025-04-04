@@ -60,7 +60,7 @@ echo "Hello World"
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Configuration settings
+### Configuration settings
 
 These options are available for the `datadog-ci trace` command:
 
@@ -136,6 +136,81 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci trace ...
     ```
+
+## Trace multiple commands
+
+It is possible to trace multiple commands at once by manually specifying the start and end timestamps (or the duration).
+
+{{< code-block lang="shell" >}}
+datadog-ci span [--name <name>] [--start-time <timestamp-ms>] [--end-time <timestamp-ms>] # [--duration <duration-ms>] can be used instead of start / end time
+{{< /code-block >}}
+
+Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
+
+{{< site-region region="us,us3,eu,ap1" >}}
+<pre>
+<code>
+DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci span \
+--name "Build Step" \
+--duration 10000
+</code>
+</pre>
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+### Configuration settings
+
+These options are available for the `datadog-ci span` command:
+
+`--name`
+: Display name of the custom span.<br/>
+**Example**: `Build Step`
+
+`--start-time`
+: Timestamp in milliseconds representing the start time of the span.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
+
+`--end-time`
+: Timestamp in milliseconds representing the end time of the span.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
+
+`--duration`
+: Duration amount as a number of milliseconds. Using this, the end time is the current time when executing this command.<br/>
+**Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
+
+`--tags`
+: Key-value pairs in the form `key:value` to be attached to the custom span (the `--tags` parameter can be specified multiple times). When specifying tags using `DD_TAGS`, separate them using commas (for example, `team:backend,priority:high`).<br/>
+**Environment variable**: `DD_TAGS`<br/>
+**Default**: (none)<br/>
+**Example**: `team:backend`<br/>
+**Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
+
+`--measures`
+: Key-value pairs in the form `key:value` to be attached to the custom span as numerical values (the `--measures` parameter can be specified multiple times).<br/>
+_(Requires datadog-ci >=v2.35.0)_ <br/>
+**Default**: (none)<br/>
+**Example**: `size:1024`<br/>
+
+`--dry-run`
+: Prevents datadog-ci from sending the custom span to Datadog. All other checks are performed.<br/>
+**Default**: `false`
+
+The following environment variables are supported:
+
+`DATADOG_API_KEY` (Required)
+: [Datadog API key][2] used to authenticate the requests.<br/>
+**Default**: (none)
+
+{{< site-region region="us3,us5,eu,ap1" >}}
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
+
+`DATADOG_SITE`
+: The Datadog site to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
+{{< /site-region >}}
 
 ## Troubleshooting
 
