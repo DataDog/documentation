@@ -6,21 +6,15 @@ import SetupInstructions from './SetupInstructions';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
-  const [wizardCustomizationConfig, setWizardCustomizationConfig] = useState<CustomizationConfig>({
-    ...customizationConfig
+  const [newConfig, setNewConfig] = useState<CustomizationConfig>({
+    traitsById: {},
+    optionsById: {},
+    optionGroupsById: {}
   });
 
-  const onFilterListChange = ({
-    filters,
-    wizardCustomizationConfig
-  }: {
-    filters: WizardFilter[];
-    wizardCustomizationConfig: CustomizationConfig;
-  }) => {
-    setFilters([...filters]);
-    setWizardCustomizationConfig({
-      ...wizardCustomizationConfig
-    });
+  const onFilterListChange = (p: { filters: WizardFilter[]; newConfig: CustomizationConfig }) => {
+    setFilters([...p.filters]);
+    setNewConfig(p.newConfig);
   };
 
   return (
@@ -36,7 +30,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
       </div>
       {filters.length > 0 && (
         <div>
-          <SetupInstructions filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
+          <SetupInstructions filters={filters} newConfig={newConfig} customizationConfig={customizationConfig} />
         </div>
       )}
     </div>

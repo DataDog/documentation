@@ -16,19 +16,15 @@ function FilterList({
   onPublish
 }: {
   customizationConfig: CustomizationConfig;
-  onPublish: ({
-    filters,
-    wizardCustomizationConfig
-  }: {
-    filters: WizardFilter[];
-    wizardCustomizationConfig: CustomizationConfig;
-  }) => void;
+  onPublish: ({ filters, newConfig }: { filters: WizardFilter[]; newConfig: CustomizationConfig }) => void;
 }) {
   const [savedFiltersByUuid, setSavedFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [filtersByUuid, setFiltersByUuid] = useState<Record<string, WizardFilter>>({});
   const [currentFilterUuid, setCurrentFilterUuid] = useState<string | null>(null);
-  const [wizardCustomizationConfig, setWizardCustomizationConfig] = useState<CustomizationConfig>({
-    ...customizationConfig
+  const [newConfig, setNewConfig] = useState<CustomizationConfig>({
+    traitsById: {},
+    optionsById: {},
+    optionGroupsById: {}
   });
 
   const addFilter = () => {
@@ -59,7 +55,15 @@ function FilterList({
     const newFiltersByUuid = { ...filtersByUuid };
     delete newFiltersByUuid[filter.uuid];
     setFiltersByUuid(newFiltersByUuid);
-    onPublish({ filters: Object.values(newFiltersByUuid), wizardCustomizationConfig });
+    setSavedFiltersByUuid({ ...newFiltersByUuid });
+
+    const newConfig = getNetNewConfig({
+      filters: Object.values(newFiltersByUuid),
+      customizationConfig
+    });
+
+    setNewConfig(newConfig);
+    onPublish({ filters: Object.values(newFiltersByUuid), newConfig });
   };
 
   const handleFilterRowEdit = (filter: WizardFilter) => {
@@ -69,30 +73,14 @@ function FilterList({
   const handleSave = () => {
     setCurrentFilterUuid(null);
     setSavedFiltersByUuid({ ...filtersByUuid });
-    onPublish({ filters: Object.values(filtersByUuid), wizardCustomizationConfig });
 
-    // Reset the wizard's customization config to the original config
-    const newWizardCustomizationConfig = { ...customizationConfig };
-
-    // Update the wizard's customization config with the new filters
-    Object.values(filtersByUuid).forEach((filter) => {
-      newWizardCustomizationConfig.traitsById = {
-        ...customizationConfig.traitsById,
-        ...filter.customizationConfig.traitsById
-      };
-
-      newWizardCustomizationConfig.optionsById = {
-        ...customizationConfig.optionsById,
-        ...filter.customizationConfig.optionsById
-      };
-
-      newWizardCustomizationConfig.optionGroupsById = {
-        ...customizationConfig.optionGroupsById,
-        ...filter.customizationConfig.optionGroupsById
-      };
+    const newConfig = getNetNewConfig({
+      filters: Object.values(filtersByUuid),
+      customizationConfig
     });
 
-    setWizardCustomizationConfig(newWizardCustomizationConfig);
+    setNewConfig(newConfig);
+    onPublish({ filters: Object.values(filtersByUuid), newConfig });
   };
 
   const handleCancel = () => {
@@ -115,13 +103,13 @@ function FilterList({
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
             <FilterRow
               filter={filtersByUuid[uuid]}
-              customizationConfig={wizardCustomizationConfig}
+              customizationConfig={customizationConfig}
               onDelete={onDelete}
               onEdit={onEdit}
             />
             {currentFilterUuid === uuid && (
               <FilterForm
-                customizationConfig={wizardCustomizationConfig}
+                customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
                 onPublish={handleFilterFormChange}
               />
@@ -147,8 +135,6 @@ function FilterList({
     </div>
   );
 }
-
-export default FilterList;
 
 /**
  * A short text representation of a filter configuration.
@@ -190,3 +176,65 @@ function FilterRow({
     </div>
   );
 }
+
+/**
+ * Calculate the diff between the existing configuration config
+ * and the configuration config required by the user-inputted filters.
+ */
+function getNetNewConfig(p: {
+  filters: WizardFilter[];
+  customizationConfig: CustomizationConfig;
+}): CustomizationConfig {
+  const mergedFilterConfig: CustomizationConfig = {
+    traitsById: {},
+    optionsById: {},
+    optionGroupsById: {}
+  };
+
+  const configKeys = ['traitsById', 'optionsById', 'optionGroupsById'] as const;
+
+  p.filters.forEach((filter) => {
+    configKeys.forEach((key) => {
+      // @ts-ignore
+      mergedFilterConfig[key] = {
+        ...mergedFilterConfig[key],
+        ...filter.customizationConfig[key]
+      };
+    });
+  });
+
+  const knownTraitIds = Object.keys(p.customizationConfig.traitsById);
+  const knownOptionGroupIds = Object.keys(p.customizationConfig.optionGroupsById);
+  const knownOptionIds = Object.keys(p.customizationConfig.optionsById);
+
+  const newConfig: CustomizationConfig = {
+    traitsById: {},
+    optionsById: {},
+    optionGroupsById: {}
+  };
+
+  Object.keys(mergedFilterConfig.traitsById).forEach((traitId) => {
+    if (!knownTraitIds.includes(traitId)) {
+      const trait = mergedFilterConfig.traitsById[traitId];
+      newConfig.traitsById[traitId] = trait;
+    }
+  });
+
+  Object.keys(mergedFilterConfig.optionGroupsById).forEach((optionGroupId) => {
+    if (!knownOptionGroupIds.includes(optionGroupId)) {
+      const optionGroup = mergedFilterConfig.optionGroupsById[optionGroupId];
+      newConfig.optionGroupsById[optionGroupId] = optionGroup;
+    }
+  });
+
+  Object.keys(mergedFilterConfig.optionsById).forEach((optionId) => {
+    if (!knownOptionIds.includes(optionId)) {
+      const option = mergedFilterConfig.optionsById[optionId];
+      newConfig.optionsById[optionId] = option;
+    }
+  });
+
+  return newConfig;
+}
+
+export default FilterList;

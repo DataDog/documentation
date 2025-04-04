@@ -4,13 +4,17 @@ import { CustomizationConfig } from 'cdocs-data';
 
 function SetupInstructions({
   filters,
-  wizardCustomizationConfig
+  newConfig,
+  customizationConfig
 }: {
   filters: WizardFilter[];
-  wizardCustomizationConfig: CustomizationConfig;
+  newConfig: CustomizationConfig;
+  customizationConfig: CustomizationConfig;
 }) {
   return (
     <div>
+      <h1>New config debug:</h1>
+      <p>{JSON.stringify(newConfig, null, 2)}</p>
       <h1>Setup instructions</h1>
       <p>You can copy any markup by clicking it.</p>
       {false && (
@@ -34,7 +38,7 @@ function SetupInstructions({
           <li>Add the markup below to it.</li>
         </ol>
       </p>
-      <CdocMarkupTemplate filters={filters} wizardCustomizationConfig={wizardCustomizationConfig} />
+      <CdocMarkupTemplate filters={filters} customizationConfig={{ ...customizationConfig, ...newConfig }} />
     </div>
   );
 }

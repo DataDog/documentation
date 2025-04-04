@@ -36,17 +36,8 @@ ${templater.buildTraitsAndValuesTable()}
 `.trimStart();
 }
 
-function CdocMarkupTemplate({
-  filters,
-  wizardCustomizationConfig
-}: {
-  filters: WizardFilter[];
-  wizardCustomizationConfig: CustomizationConfig;
-}) {
-  const templater = new DocTemplater({
-    filters,
-    customizationConfig: wizardCustomizationConfig
-  });
+function CdocMarkupTemplate(props: { filters: WizardFilter[]; customizationConfig: CustomizationConfig }) {
+  const templater = new DocTemplater(props);
 
   const contents = buildMarkup(templater);
   return <Code contents={contents} language="text" />;
