@@ -11,6 +11,6 @@ The best practice for scoping applications is to maintain the minimal privileges
 
 You may use scopes with OAuth2 clients for your [Datadog Apps][1].
 
-{{< api-scopes >}}
+{{% permissions %}}
 
 [1]: https://docs.datadoghq.com/developers/datadog_apps/#oauth-api-access
