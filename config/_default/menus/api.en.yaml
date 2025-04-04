@@ -5771,9 +5771,9 @@ menu:
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
       generated: true
-    - name: Get aggregated connections
-      url: '#get-aggregated-connections'
-      identifier: cloud-network-monitoring-get-aggregated-connections
+    - name: Get all aggregated connections
+      url: '#get-all-aggregated-connections'
+      identifier: cloud-network-monitoring-get-all-aggregated-connections
       parent: cloud-network-monitoring
       generated: true
       params:

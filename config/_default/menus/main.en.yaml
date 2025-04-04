@@ -2090,30 +2090,30 @@ menu:
       identifier: using_scorecards
       weight: 703
     - name: Self-Service Actions
-      url: software_catalog/self-service_actions
+      url: software_catalog/self_service_actions
       parent: software_catalog
-      identifier: self-service_actions
+      identifier: self_service_actions
       weight: 8
     - name: Software Templates
       url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
-      weight: 9
+      weight: 801
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 10
+      weight: 9
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 11
+      weight: 10
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 12
+      weight: 11
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -3157,10 +3157,14 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
-    - name: Functions
-      url: serverless/google_cloud_run/functions
+    - name: 1st Gen Functions
+      url: serverless/google_cloud_run/functions_gen1
       parent: serverless_gcr
       weight: 701
+    - name: 2nd Gen Functions
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 702
     - name: Glossary
       url: serverless/glossary
       parent: serverless
