@@ -374,6 +374,15 @@ DdRum.addError(
   'my-custom-fingerprint'        
 );
 ```
+Or, you can use the `errorEventMapper`:
+
+```dart
+configuration.errorEventMapper = event => {
+  event.fingerprint = 'my-custom-fingerprint'
+  return event;
+};
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
