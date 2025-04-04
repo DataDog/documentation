@@ -60,6 +60,16 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
    The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Dataproc. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-dataproc-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][13].
 
+   Optionally, the script can be configured adding the following environment variables:
+
+| Variable                 | Description                                                                                                                                                      | Default |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|                                                                                                    
+| DD_TAGS                  | Add host tags to Dataproc clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| DD_EXTRA_TAGS            | Alternative to DD_TAGS for adding host tags to Dataproc clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
+
+[15]: /getting_started/tagging/
+
 1. On the **Customize cluster** page, locate the **Initialization Actions** section. Enter the path where you saved the script from the previous step.
 
     When your cluster is created, this initialization action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
