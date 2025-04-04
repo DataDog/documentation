@@ -130,29 +130,22 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 | Nginx version | amd64 | arm 64 |
 |---------------|-------|--------|
-| 1.22.0 | [ngx_http_datadog-amd64-1.22.0][7] | [ngx_http_datadog-arm64-1.22.0][8] |
-| 1.22.1 | [ngx_http_datadog-amd64-1.22.1][9] | [ngx_http_datadog-arm64-1.22.1][10] |
-| 1.23.0 | [ngx_http_datadog-amd64-1.23.0][11] | [ngx_http_datadog-arm64-1.23.0][12] |
-| 1.23.1 | [ngx_http_datadog-amd64-1.23.1][13] | [ngx_http_datadog-arm64-1.23.1][14] |
-| 1.23.2 | [ngx_http_datadog-amd64-1.23.2][15] | [ngx_http_datadog-arm64-1.23.2][16] |
-| 1.23.3 | [ngx_http_datadog-amd64-1.23.3][17] | [ngx_http_datadog-arm64-1.23.3][18] |
-| 1.23.4 | [ngx_http_datadog-amd64-1.23.4][19] | [ngx_http_datadog-arm64-1.23.4][20] |
-| 1.24.0 | [ngx_http_datadog-amd64-1.24.0][21] | [ngx_http_datadog-arm64-1.24.0][22] |
-| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][23] | [ngx_http_datadog-arm64-1.25.0][24] |
-| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][25] | [ngx_http_datadog-arm64-1.25.1][26] |
-| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][27] | [ngx_http_datadog-arm64-1.25.2][28] |
-| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][29] | [ngx_http_datadog-arm64-1.25.3][30] |
-| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][31] | [ngx_http_datadog-arm64-1.25.4][32] |
-| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][33] | [ngx_http_datadog-arm64-1.25.5][34] |
-| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][35] | [ngx_http_datadog-arm64-1.26.0][36] |
-| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][37] | [ngx_http_datadog-arm64-1.26.1][38] |
-| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][39] | [ngx_http_datadog-arm64-1.26.2][40] |
-| 1.26.3 | [ngx_http_datadog-amd64-1.26.3][41] | [ngx_http_datadog-arm64-1.26.2][42] |
-| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][43] | [ngx_http_datadog-arm64-1.27.0][44] |
-| 1.27.1 | [ngx_http_datadog-amd64-1.27.1][45] | [ngx_http_datadog-arm64-1.27.1][46] |
-| 1.27.2 | [ngx_http_datadog-amd64-1.27.2][47] | [ngx_http_datadog-arm64-1.27.2][48] |
-| 1.27.3 | [ngx_http_datadog-amd64-1.27.3][49] | [ngx_http_datadog-arm64-1.27.3][50] |
-| 1.27.4 | [ngx_http_datadog-amd64-1.27.4][51] | [ngx_http_datadog-arm64-1.27.4][52] |
+| 1.24.0 | [ngx_http_datadog-amd64-1.24.0][7] | [ngx_http_datadog-arm64-1.24.0][8] |
+| 1.25.0 | [ngx_http_datadog-amd64-1.25.0][9] | [ngx_http_datadog-arm64-1.25.0][10] |
+| 1.25.1 | [ngx_http_datadog-amd64-1.25.1][11] | [ngx_http_datadog-arm64-1.25.1][12] |
+| 1.25.2 | [ngx_http_datadog-amd64-1.25.2][13] | [ngx_http_datadog-arm64-1.25.2][14] |
+| 1.25.3 | [ngx_http_datadog-amd64-1.25.3][15] | [ngx_http_datadog-arm64-1.25.3][16] |
+| 1.25.4 | [ngx_http_datadog-amd64-1.25.4][17] | [ngx_http_datadog-arm64-1.25.4][18] |
+| 1.25.5 | [ngx_http_datadog-amd64-1.25.5][19] | [ngx_http_datadog-arm64-1.25.5][20] |
+| 1.26.0 | [ngx_http_datadog-amd64-1.26.0][21] | [ngx_http_datadog-arm64-1.26.0][22] |
+| 1.26.1 | [ngx_http_datadog-amd64-1.26.1][23] | [ngx_http_datadog-arm64-1.26.1][24] |
+| 1.26.2 | [ngx_http_datadog-amd64-1.26.2][25] | [ngx_http_datadog-arm64-1.26.2][26] |
+| 1.26.3 | [ngx_http_datadog-amd64-1.26.3][27] | [ngx_http_datadog-arm64-1.26.3][28] |
+| 1.27.0 | [ngx_http_datadog-amd64-1.27.0][29] | [ngx_http_datadog-arm64-1.27.0][30] |
+| 1.27.1 | [ngx_http_datadog-amd64-1.27.1][31] | [ngx_http_datadog-arm64-1.27.1][32] |
+| 1.27.2 | [ngx_http_datadog-amd64-1.27.2][33] | [ngx_http_datadog-arm64-1.27.2][34] |
+| 1.27.3 | [ngx_http_datadog-amd64-1.27.3][35] | [ngx_http_datadog-arm64-1.27.3][36] |
+| 1.27.4 | [ngx_http_datadog-amd64-1.27.4][37] | [ngx_http_datadog-arm64-1.27.4][38] |
 
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
@@ -161,49 +154,35 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/sampling-browser-plans/
 [6]: /help
-[7]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.22.0.so.tgz
-[8]:https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.22.0.so.tgz
-[9]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.22.1.so.tgz
-[10]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.22.1.so.tgz
-[11]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.0.so.tgz
-[12]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.0.so.tgz
-[13]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.1.so.tgz
-[14]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.1.so.tgz
-[15]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.2.so.tgz
-[16]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.2.so.tgz
-[17]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.3.so.tgz
-[18]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.3.so.tgz
-[19]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.23.4.so.tgz
-[20]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.23.4.so.tgz
-[21]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.24.0.so.tgz
-[22]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.24.0.so.tgz
-[23]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.0.so.tgz
-[24]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.0.so.tgz
-[25]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.1.so.tgz
-[26]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.1.so.tgz
-[27]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.2.so.tgz
-[28]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.2.so.tgz
-[29]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.3.so.tgz
-[30]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.3.so.tgz
-[31]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.4.so.tgz
-[32]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.4.so.tgz
-[33]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.25.5.so.tgz
-[34]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.25.5.so.tgz
-[35]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.26.0.so.tgz
-[36]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.0.so.tgz
-[37]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.26.1.so.tgz
-[38]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.1.so.tgz
-[39]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.26.2.so.tgz
-[40]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
-[41]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
-[42]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
-[43]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.26.3.so.tgz
-[44]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.26.3.so.tgz
-[45]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.1.so.tgz
-[46]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.1.so.tgz
-[47]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.2.so.tgz
-[48]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.2.so.tgz
-[49]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.3.so.tgz
-[50]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
-[51]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
-[52]: https://ddagent-windows-unstable.s3.amazonaws.com/inject-browser-sdk/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
+[7]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.24.0.so.tgz
+[8]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.24.0.so.tgz
+[9]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.0.so.tgz
+[10]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.0.so.tgz
+[11]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.1.so.tgz
+[12]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.1.so.tgz
+[13]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.2.so.tgz
+[14]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.2.so.tgz
+[15]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.3.so.tgz
+[16]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.3.so.tgz
+[17]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.4.so.tgz
+[18]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.4.so.tgz
+[19]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.25.5.so.tgz
+[20]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.25.5.so.tgz
+[21]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.0.so.tgz
+[22]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.0.so.tgz
+[23]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.1.so.tgz
+[24]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.1.so.tgz
+[25]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.2.so.tgz
+[26]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.2.so.tgz
+[27]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.26.3.so.tgz
+[28]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.26.3.so.tgz
+[29]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.0.so.tgz
+[30]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.0.so.tgz
+[31]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.1.so.tgz
+[32]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.1.so.tgz
+[33]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.2.so.tgz
+[34]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.2.so.tgz
+[35]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.3.so.tgz
+[36]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
+[37]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
+[38]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
