@@ -139,6 +139,6 @@ Apollo 통합에는 아직 서비스 점검이 포함되지 않습니다.
 [4]: https://www.apollographql.com/docs/studio/org/graphs/#viewing-graph-information
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-link.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png
-[7]: https://www.apollographql.com/docs/studio/datadog-integration/
+[7]: https://www.apollographql.com/docs/graphos/platform/insights/datadog-forwarding
 [8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
 [9]: https://docs.datadoghq.com/ko/help/
