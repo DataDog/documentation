@@ -97,8 +97,8 @@ To validate that login metadata is collected, do the following:
 
 In the event of a **false** user (`usr.exists:false`), look for the following issues:
 
-- A single event: if the trace contains multiple login events, such as both successes and failures, this might be caused by incorrect auto-instrumentation. To change auto-instrumentation, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).  
-- Does the event contain the mandatory metadata? It might appear as a user attribution section in the case of a login success. The mandatory metadata is `usr.login` and `usr.exists` in the case of login failure, and `usr.login` and `usr.id` in the case of login success. If some metadata is missing, go to [Step 1.5: Manually instrumenting your services](#step-1.5:-manually-instrumenting-your-services).
+- A single event: if the trace contains multiple login events, such as both successes and failures, this might be caused by incorrect auto-instrumentation. To change auto-instrumentation, go to [Step 1.5: Manually instrumenting your services](#step-15-manually-instrumenting-your-services).  
+- Does the event contain the mandatory metadata? It might appear as a user attribution section in the case of a login success. The mandatory metadata is `usr.login` and `usr.exists` in the case of login failure, and `usr.login` and `usr.id` in the case of login success. If some metadata is missing, go to [Step 1.5: Manually instrumenting your services](#step-15-manually-instrumenting-your-services).
 
 **If the instrumentation is correct, go to [Phase 2: Preparing for Account Takeover campaigns](#phase-2-preparing-for-ato-campaigns).**
 
@@ -199,7 +199,7 @@ To configure automatic blocking, do the following:
 1. Go to **ASM** > **Protection** > [Detection Rules][23].  
 2. In **Search**, enter `tag:"category:account_takeover"`.   
 3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for **High** or **Critical** severity.  
-4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**.  
+4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**. You may also enable **User automated blocking**.  
    You can control the blocking behavior per condition. Each rule can have multiple conditions based on your confidence and the attack success. 
 
 **Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, ASM has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
@@ -307,7 +307,7 @@ If you want to initiate a partial response, do the following:
 
 The attackers are likely using a small number of IPs. To block them, open the signal and use Next Steps. You can set the duration of blocking. 
 
-Datadog recommend **12h**, which is enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. Datadog does not recommend permanent blocking.  
+Datadog recommends **12h**, which is enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. Datadog does not recommend permanent blocking.  
 You can also block compromised users, although a better approach would be to extract them and reset their credentials using your own systems.
 
 Finally, you can introduce automated IP blocking while running your investigation.
