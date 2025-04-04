@@ -93,7 +93,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
 | `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
-| `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
+| `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
@@ -233,11 +233,28 @@ FROM
 {{< /code-block >}}
 
 ### `TO_TIMESTAMP`
+
+Supported patterns for date/time formatting: 
+| Pattern     | Description                          |
+| ----------- | ------------------------------------ |
+| `YYYY`      | year (4 digits)                      |
+| `YY`        | year (2 digits)                      |
+| `MM`        | month number (01 - 12)               |
+| `DD`        | day of month (01 - 31)               |
+| `HH24`      | hour of day (00 - 23)                |
+| `HH12`      | hour of day (01 - 12)                |
+| `HH`        | hour of day (01 - 12)                |
+| `MI`        | minute (00 - 59)                     |
+| `SS`        | second (00 - 59)                     |
+| `MS`        | millisecond (000 - 999)              |
+| `TZ`        | time-zone abbreviation               |
+| `OF`        | time-zone offset from UTC            |
+| `AM` / `am` | meridiem indicator (without periods) |
+| `PM` / `pm` | meridiem indicator (without periods) |
+
 {{< code-block lang="sql" >}}
 SELECT
-  to_timestamp(epoch_time) AS formatted_time
-FROM
-  event_logs
+  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
