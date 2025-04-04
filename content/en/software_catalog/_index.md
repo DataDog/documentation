@@ -67,8 +67,7 @@ Service
 
 System
 : In the Software Catalog, a system is a group of components that cooperate to perform a broader function. For example, you can group multiple instrumented APM services into a system because they are operated by the same team. You can also use `system` to represent a full microservice-based architecture, and include components like APIs, datastores, queues, and other common building blocks.
-
-**Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
+: **Note**: **System** in Datadog has the same meaning as in Backstage's [System Model][15]. 
 
 Component
 : In the Software Catalog, a component represents the smallest building block of modern microservice-based architecture. A component can be an instrumented APM service, an [inferred][16] or manually declared datastore, an API, or a queue. 
@@ -77,8 +76,10 @@ Component
 ## Getting started
 
 {{< whatsnext desc="Explore what Software Catalog has to offer:" >}}
-    {{< nextlink href="/software_catalog/navigating/" >}}Navigating the Software Catalog{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/customize/" >}}Customize Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/navigating/" >}}Navigate Software Catalog{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/use_cases/" >}}Learn about common use cases{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/manage/" >}}Manage a component in Software Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions

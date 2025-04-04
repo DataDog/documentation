@@ -152,6 +152,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | logs.dropped                                | Total number of logs dropped                                                                      |
 | logs.bytes_sent                             | Total number of bytes send before encoding, if any                                                |
 | logs.encoded_bytes_sent                     | Total number of sent bytes after encoding, if any                                                 |
+| logs.auto_multi_line_aggregator_flush       | Number of multiline logs aggregated by the Agent                                                  |
 | dogstatsd.udp_packets                       | DogStatsD UDP packets bytes                                                                       |
 | dogstatsd.uds_packets                       | DogStatsD UDS packets bytes                                                                       |
 | transactions.input_count                    | Incoming transaction count                                                                        |
@@ -201,7 +202,7 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [14]: mailto:security@datadoghq.com
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /agent/faq/windows-agent-ddagent-user/
-[17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[17]: /agent/configuration/secrets-management/
 [18]: /agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public

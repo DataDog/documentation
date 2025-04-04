@@ -147,8 +147,6 @@ You can add identifier tags to connections. The tagging rules for connections ar
 
 ## Connection groups
 
-<div class="alert alert-warning"><strong>Note</strong>: Connection groups are available in Workflow Automation. They are not available in App Builder.</div>
-
 You can create groups of connections so that your workflows can authenticate into the correct account or accounts based on the given inputs. Connections can be grouped together only if they share the same integration (for example, you cannot group GCP and AWS connections within the same group). 
 
 You define the members of a connection group using a connection's _Identifier Tags_. For example, you can create a connection group consisting of AWS accounts that have the `account_id` tag.

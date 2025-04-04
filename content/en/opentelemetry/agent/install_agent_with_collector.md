@@ -30,6 +30,7 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
+  - **Note**: EKS Fargate environments are not supported
 - [Helm (v3+)][54]
 - [Docker][50]
 - [kubectl][5]
@@ -179,6 +180,8 @@ To explicitly override the default ports, use `features.otelCollector.ports` par
       enabled: true
 {{< /code-block >}}
 
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
+
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Your `datadog-agent.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
@@ -321,6 +324,8 @@ datadog:
     enabled: true
     processCollection: true
 {{< /code-block >}}
+
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
 6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 

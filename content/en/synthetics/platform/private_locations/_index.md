@@ -178,6 +178,8 @@ To pull test configurations and push test results, the private location worker n
 
 Only users with the **Synthetics Private Locations Write** role can create private locations. For more information, see [Permissions](#permissions).
 
+**Note**: Users without the `synthetics_private_location_read` permission cannot view, search for, or add private locations to a Synthetic Monitoring test. However, if a test includes restricted private locations, updating the test removes those locations from the test.
+
 ### Create your private location
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
@@ -243,7 +245,7 @@ This command starts a Docker container and makes your private location ready to 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Docker Composer" level="h4" expanded=false %}}
+{{% collapse-content title="Docker Compose" level="h4" expanded=false %}}
 
 1. Create a `docker-compose.yml` file with:
 
@@ -472,7 +474,7 @@ If you didn't save all the configuration in the secret manager, you can still pa
             "command": [
                 "/home/dog/scripts/entrypoint.sh --locationID=$locationID --publicKey.fingerprint=$fingerprint"
             ],
-            "secret": [
+            "secrets": [
               {
                 "name": "DATADOG_ACCESS_KEY",
                 "valueFrom": "..."

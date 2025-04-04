@@ -1,5 +1,7 @@
 ---
 title: Data Streams Monitoring
+aliases:
+- /data_streams/troubleshooting
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -34,6 +36,8 @@ cascade:
 </div>
 {{% /site-region %}}
 
+{{< img src="data_streams/map_view2.png" alt="Data Streams Monitoring page in Datadog, showing the Map view. Highlights a service called 'authenticator'. A topology map visualization of left-to-right data flow, where the authenticator service is displayed in the center with its upstream and downstream services and queues." style="width:100%;" >}}
+
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
 * Measure pipeline health with end-to-end latencies for events traversing across your system.
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
@@ -41,25 +45,25 @@ Data Streams Monitoring provides a standardized method for teams to understand a
 
 ## Setup
 
-To get started, follow the installation instructions to configure services with Data Streams Monitoring:
+Data Streams Monitoring instruments Kafka _clients_ (consumers/producers). If you can instrument your client infrastructure, you can use Data Streams Monitoring.
+
+For installation instructions and lists of supported technologies, choose your language:
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
 <br/>
 
-| Runtime | Supported technologies |
-|---|----|
-| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS |
-| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon SNS, IBM MQ, Azure Service Bus |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS, Amazon Kinesis, Amazon SNS, Google Pub/Sub |
-| Go | All (with [manual instrumentation][1]) |
-
 ## Explore Data Streams Monitoring
+
+### Visualize the architecture of your streaming data pipelines
+
+{{< img src="data_streams/topology_map.png" alt="A DSM topology map visualization. " style="width:100%;" >}}
+
+Data Streams Monitoring provides an out-of-the-box [topology map][10], so that you can visualize data flow across your pipelines and identify producer/consumer services, queue dependencies, service ownership, and key health metrics.
 
 ### Measure end-to-end pipeline health with new metrics
 
-Once Data Streams Monitoring is configured, you can measure the time it usually takes for events to traverse between any two points in your asynchronous system:
+With Data Streams Monitoring, you can measure the time it usually takes for events to traverse between any two points in your asynchronous system:
 
 | Metric Name | Notable Tags | Description |
 |---|---|-----|
@@ -98,6 +102,11 @@ By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect 
 
 Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
 
+### Monitor connector throughput and status
+{{< img src="data_streams/connectors_topology.png" alt="A DSM topology map, showing a connector called 'analytics-sink'. The visualization indicates that the connector has a status of FAILED." style="width:100%;" >}}
+
+Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors—including throughput, status, and topic dependencies.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -109,3 +118,6 @@ Datadog automatically links the infrastructure powering your services and relate
 [5]: /integrations/amazon_sqs/
 [6]: /tracing/trace_collection/runtime_config/
 [7]: https://app.datadoghq.com/data-streams/measure
+[8]: https://www.confluent.io/confluent-cloud/
+[9]: /integrations/confluent_cloud/
+[10]: https://app.datadoghq.com/data-streams/map

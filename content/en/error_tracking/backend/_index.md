@@ -14,7 +14,7 @@ further_reading:
     text: 'Simplify production debugging with Datadog Exception Replay'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/backend-error-tracking/" btn_hidden="false" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/backend-standalone-error-tracking/" btn_hidden="false" header="false">}}
 Datadog's standalone backend Error Tracking is in Preview. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
