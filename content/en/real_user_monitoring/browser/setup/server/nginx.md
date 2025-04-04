@@ -41,7 +41,7 @@ To automatically instrument your RUM application:
 3. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][5].
 4. Copy and run the installer command to load the Datadog NGINX Module with the RUM SDK Injector onto NGINX.
 5. After the installer successfully installs the SDK Injector, restart NGINX to begin collecting RUM sessions.
-6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the [NGINX error logs][39] for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
+6. (Optional) To verify the module is successfully injecting the RUM Browser SDK into HTML pages, check the NGINX error logs for relevant messages. The module logs important steps during the injection process. Ensure that NGINX is configured with at least the `INFO` log level with the following:
 
    ```javascript
    error_log <file> info;
@@ -186,4 +186,3 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [36]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.3.so.tgz
 [37]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
 [38]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
-[39]: https://nginx.org/en/docs/ngx_core_module.html#error_log
