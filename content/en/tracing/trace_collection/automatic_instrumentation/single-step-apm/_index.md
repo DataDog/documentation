@@ -124,8 +124,6 @@ To enable Single Step Instrumentation with the Datadog Operator:
      name: datadog
    spec:
      override:
-       agent:
-         image: 7.64.1
        clusterAgent:
          image: 7.64.1
      global:
