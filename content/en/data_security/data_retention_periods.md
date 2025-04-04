@@ -27,7 +27,7 @@ attributes:
        - **Events**: 30 days
   - product: Case Management
     data_type: | 
-       - **Cases**: Deleted upon request on termination
+       - **Cases**: Retained for the duration of the account
   - product: CD Visibility
     data_type: | 
        - **Deployments**: 30 days
@@ -43,7 +43,7 @@ attributes:
   - product: Cloud SIEM
     data_type: | 
        - **Signals**: 15 months
-       - **Detections, notifications, suppressions**: Deleted upon request on termination
+       - **Detections, notifications, suppressions**: Retained for the duration of the account
   - product: Cloud Workload Security
     data_type: | 
        - **Security signals**: 15 months
@@ -79,7 +79,7 @@ attributes:
        - **Query samples**: 15 days
   - product: Datadog App
     data_type: | 
-       - **Dashboards, Notebooks, Monitors**: Deleted upon request on termination
+       - **Dashboards, Notebooks, Monitors**: Retained for the duration of the account
   - product: Error Tracking
     data_type: | 
        - **Errors**: 1 year after last access
@@ -88,7 +88,7 @@ attributes:
        - **Events**: 15 months
   - product: Incident Management
     data_type: | 
-       - **Incidents**: Deleted upon request on termination
+       - **Incidents**: Retained for the duration of the account
   - product: LLM Observability
     data_type: | 
        - **Traces and spans**: 15 days
@@ -102,7 +102,7 @@ attributes:
     data_type: | 
        - **Test results (not displayed in UI)**: 2 months
        - **Test results (displayed in UI)**: 15 months
-       - **Mobile application binaries**: Deleted upon request on termination
+       - **Mobile application binaries**: Retained for the duration of the account
   - product: Mobile RUM
     data_type: | 
        - **Events**: 30 days
@@ -122,10 +122,10 @@ attributes:
        - **Gate evaluations**: 30 days
   - product: Reference Tables
     data_type: | 
-       - **Tables**: Deleted upon request on termination
+       - **Tables**: Retained for the duration of the account
   - product: Service Catalog
     data_type: | 
-       - **Service metadata**: Deleted upon request on termination
+       - **Service metadata**: Retained for the duration of the account
   - product: Service Level Objectives
     data_type: | 
        - **Monitor-based results**: 3 months
