@@ -76,7 +76,7 @@ If you have followed all the troubleshooting steps above and want help from [Dat
     datadog-ci lambda flare -f <function_arn> -e <email> -c <case_id> --with-logs
     ```
 
-<div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md#troubleshooting-serverless-instrumentation">command documentation</a>.</div>
+<div class="alert alert-info">For more information about Serverless Flare, read the <a href="https://docs.datadoghq.com/serverless/libraries_integrations/cli/#troubleshooting-lambda-instrumentation">command documentation</a>.</div>
 {{% /tab %}}
 {{% tab "Manually" %}}
 
