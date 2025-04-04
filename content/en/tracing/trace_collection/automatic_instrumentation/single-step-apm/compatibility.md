@@ -32,7 +32,8 @@ The following container platforms are compatible:
 |-----------------|--------------------------------------------------------|---------|
 | Linux           | Not supported on hardened environments such as SELinux | GA      |
 | Docker on Linux |                                                        | GA      |
-| Kubernetes      | [Datadog Admission Controller][1] enabled              | Preview |
+| Kubernetes      | [Datadog Admission Controller][1] enabled. Requires Agent 7.64. Only available for Linux Nodepools   | GA |
+| Windows IIS     | Only available for .NET applications                   | Preview |
 
 ### Platform-specific requirements
 
