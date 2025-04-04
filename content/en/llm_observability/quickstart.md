@@ -19,7 +19,7 @@ This guide uses the LLM Observability SDKs for [Python][1] and [Node.js][2]. If 
 
 ### Jupyter notebooks
 
-To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time. 
+To better understand LLM Observability terms and concepts, you can explore the examples in the [LLM Observability Jupyter Notebooks repository][12]. These notebooks provide a hands-on experience, and allow you to apply these concepts in real time.
 
 ## Command line
 
@@ -67,7 +67,7 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
    DD_LLMOBS_AGENTLESS_ENABLED=1 ddtrace-run python quickstart.py
    ```
 
-   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2]. 
+   Replace `<YOUR_DATADOG_API_KEY>` with your Datadog API key, and replace `<YOUR_DD_SITE>` with your [Datadog site][2].
 
    For more information about required environment variables, see [the SDK documentation][1].
 
@@ -128,6 +128,91 @@ To generate an LLM Observability trace, you can run a Python or Node.js script.
 The trace you see is composed of a single LLM span. The `ddtrace-run` or `NODE_OPTIONS="--import dd-trace/initialize.mjs"` command automatically traces your LLM calls from [Datadog's list of supported integrations][10].
 
 If your application consists of more elaborate prompting or complex chains or workflows involving LLMs, you can trace it using the [Setup documentation][11] and the [SDK documentation][1].
+
+## Tracing distributed proxy or gateway services
+
+Like any traditionally application, LLM applications can be implemented across multiple different microservices. With LLM Observability, if one of these services is a LLM proxy or gateway service, you can trace the LLM calls made by individual LLM applications in a complete end-to-end trace.
+
+### Enabling LLM Observability for a proxy or gateway service
+
+To enable LLM Observability for a proxy or gateway service that might be called from several different ML applications, you can enable LLM Observability without specifying an ML application name.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace.llmobs import LLMObs
+LLMObs.enable()
+
+def proxy_handler(request):
+    # Use the LLMObs SDK for manual instrumentation, or rely on auto-instrumentation
+    return response
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+const tracer = require('dd-trace').init({
+  llmobs: true
+});
+const llmobs = tracer.llmobs;
+
+function proxyHandler(request) {
+  // Use the LLMObs SDK for manual instrumentation, or rely on auto-instrumentation
+  return response;
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+In your specific applications that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+```python
+from ddtrace.llmobs import LLMObs
+LLMObs.enable(ml_app_name="my-ml-app")
+```
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: 'my-ml-app'
+  }
+});
+const llmobs = tracer.llmobs;
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+When making requests to the proxy or gateway service, the LLM Observability SDKs automatically propagate the ML application name from the original LLM application.
+
+### Observing LLM gateway and proxy services
+
+To observe the LLM calls made by a variety of ML applications:
+
+1. In the LLM trace view, view `All Applications` from the top-left dropdown.
+2. Switch to the `All Spans` view in the top-right dropdown.
+3. Filter the list by the `service` tag.
+
+[PUT IMAGE HERE]
+
+### Observing end-to-end usage of LLM applications making calls to a proxy or gateway service
+
+To observe the complete end-to-end usage of an LLM application that makes calls to a proxy or gateway service, you can filter for traces with that ML application name:
+
+1. In the LLM trace view, select the ML application name of interest from the top-left dropdown.
+2. Switch to the `Traces` view in the top-right dropdown.
+
+[PUT IMAGE HERE]
 
 ## Further Reading
 
