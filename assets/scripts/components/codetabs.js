@@ -14,6 +14,49 @@ const initCodeTabs = () => {
         activateTabsOnLoad()
         getContentTabHeight()
         addObserversToCodeTabs()
+
+        // Detect when tabs wrap and apply tabs-wrap-layout class
+        const detectTabWrapping = () => {
+            const tabContainers = document.querySelectorAll('.code-tabs');
+
+            tabContainers.forEach(container => {
+                const tabsNav = container.querySelector('.nav-tabs');
+                if (!tabsNav) return;
+
+                // Get the total width of all tabs including gaps
+                const tabsList = Array.from(tabsNav.querySelectorAll('li'));
+                const totalTabsWidth = tabsList.reduce((sum, tab) => {
+                    const style = window.getComputedStyle(tab);
+                    const width = tab.offsetWidth;
+                    const marginLeft = parseFloat(style.marginLeft);
+                    const marginRight = parseFloat(style.marginRight);
+                    return sum + width + marginLeft + marginRight;
+                }, 0);
+
+                // Add a larger buffer (40px) to prevent edge case flickering
+                const containerWidth = tabsNav.offsetWidth;
+                const shouldWrap = totalTabsWidth > (containerWidth - 40);
+
+                if (shouldWrap) {
+                    container.classList.add('tabs-wrap-layout');
+                } else {
+                    container.classList.remove('tabs-wrap-layout');
+                }
+            });
+        };
+
+        // Debounce the resize handler to improve performance
+        let resizeTimeout;
+        const debouncedDetectTabWrapping = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(detectTabWrapping, 100);
+        };
+
+        // Initial detection
+        detectTabWrapping();
+
+        // Recalculate on window resize with debouncing
+        window.addEventListener('resize', debouncedDetectTabWrapping);
     }
 
     /**
@@ -82,7 +125,7 @@ const initCodeTabs = () => {
 
     const scrollToAnchor = (tab, anchorname) => {
         const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
-        
+
         if (anchor) {
             anchor.scrollIntoView();
         } else {
@@ -124,7 +167,7 @@ const initCodeTabs = () => {
 
                         activateCodeTab(link);
                         getContentTabHeight();
-                        
+
                         // ensures page doesnt jump when navigating tabs.
                         // takes into account page shifting that occurs due to navigating tabbed content w/ height changes.
                         // implementation of synced tabs from https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro

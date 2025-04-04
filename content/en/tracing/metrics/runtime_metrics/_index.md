@@ -20,7 +20,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-## Overview 
+## Overview
 
 Runtime metrics monitor your application's memory usage, garbage collection, and parallelization. Datadog tracing libraries automatically collect these metrics for supported environments and send them to the Datadog Agent.
 
@@ -28,81 +28,59 @@ These metrics help you identify bottlenecks, troubleshoot performance issues, an
 
 ## Compatibility
 
-Runtime metrics are available for several programming languages and runtimes, with varying levels of support and configuration options. 
+Runtime metrics are available for several programming languages and runtimes, with varying levels of support and configuration options.
 
 {{< tabs >}}
 {{% tab "Java" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: Yes</li>
-  <li><strong>Library Version</strong>: 0.29.0+</li>
-  <li><strong>Support Level</strong>: GA</li>
-  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
-  <li><strong>Runtimes</strong>: Java 8+</li>
-</ul>
+- **Enabled By Default**: Yes
+- **Library Version**: 0.29.0+
+- **Support Level**: GA
+- **Generates runtime-id granularity**: Yes
+- **Runtimes**: Java 8+
+
 <div class="alert alert-warning">JMX metrics collection is not supported in AWS Lambda environments.</div>
-</div>
 {{% /tab %}}
 
 {{% tab "Python" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: No</li>
-  <li><strong>Library Version</strong>: 0.30.0+</li>
-  <li><strong>Support Level</strong>: Preview</li>
-  <li><strong>Generates runtime-id granularity</strong>: No</li>
-  <li><strong>Runtimes</strong>: All supported Python versions</li>
-</ul>
-</div>
+- **Enabled By Default**: No
+- **Library Version**: 0.30.0+
+- **Support Level**: Preview
+- **Generates runtime-id granularity**: No
+- **Runtimes**: All supported Python versions
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: No</li>
-  <li><strong>Library Version</strong>: 0.44.0+</li>
-  <li><strong>Support Level</strong>: GA</li>
-  <li><strong>Generates runtime-id granularity</strong>: No</li>
-  <li><strong>Runtimes</strong>: All supported Ruby versions</li>
-</ul>
+- **Enabled By Default**: No
+- **Library Version**: 0.44.0+
+- **Support Level**: GA
+- **Generates runtime-id granularity**: No
+- **Runtimes**: All supported Ruby versions
 
 <div class="alert alert-info">You must add the <a href="https://rubygems.org/gems/dogstatsd-ruby">dogstatsd-ruby</a> gem to your application.</div>
-</div>
 {{% /tab %}}
 
 {{% tab "Go" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: No</li>
-  <li><strong>Library Version</strong>: 1.18.0+</li>
-  <li><strong>Support Level</strong>: GA</li>
-  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
-  <li><strong>Runtimes</strong>: All supported Go versions</li>
-</ul>
-</div>
+- **Enabled By Default**: No
+- **Library Version**: 1.18.0+
+- **Support Level**: GA
+- **Generates runtime-id granularity**: Yes
+- **Runtimes**: All supported Go versions
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: No</li>
-  <li><strong>Library Version</strong>: 3.0.0+</li>
-  <li><strong>Support Level</strong>: GA</li>
-  <li><strong>Generates runtime-id granularity</strong>: No</li>
-  <li><strong>Runtimes</strong>: All supported Node.js versions</li>
-</ul>
-</div>
+- **Enabled By Default**: No
+- **Library Version**: 3.0.0+
+- **Support Level**: GA
+- **Generates runtime-id granularity**: No
+- **Runtimes**: All supported Node.js versions
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-<div class="alert bg-light">
-<ul>
-  <li><strong>Enabled By Default</strong>: No</li>
-  <li><strong>Library Version</strong>: 1.23.0+</li>
-  <li><strong>Support Level</strong>: GA</li>
-  <li><strong>Generates runtime-id granularity</strong>: Yes</li>
-  <li><strong>Runtimes</strong>: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).</li>
-</ul> 
+- **Enabled By Default**: No
+- **Library Version**: 1.23.0+
+- **Support Level**: GA
+- **Generates runtime-id granularity**: Yes
+- **Runtimes**: .NET Framework 4.6.1+ and .NET Core 3.1+ (including .NET 5 and newer).
 
 <h4>Permissions for Internet Information Services (IIS)</h4>
 
@@ -115,17 +93,12 @@ Runtime metrics are available for several programming languages and runtimes, wi
 ```shell
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
-</div>
 {{% /tab %}}
 {{% tab "PHP" %}}
-<div class="alert bg-light">
 <div class="alert alert-warning">Runtime metrics for PHP is not supported.</div>
-</div>
 {{% /tab %}}
 {{% tab "C++" %}}
-<div class="alert bg-light">
 <div class="alert alert-warning">Runtime metrics for C++ is not supported.</div>
-</div>
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -182,19 +155,14 @@ In addition to environment variables, some languages support configuring runtime
 
 {{< tabs >}}
 {{% tab "Java" %}}
-<div class="alert bg-light">
-
 You can only enable runtime metrics with [environment variables](#environment-variables).
 
 However, you can extend the metrics collected by adding custom JMX metrics. For more information, see [JMX Integration][100] documentation.
 
 [100]: /integrations/java/
-</div>
 {{% /tab %}}
 
 {{% tab "Python" %}}
-<div class="alert bg-light">
-
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
 ```python
@@ -203,12 +171,9 @@ RuntimeMetrics.enable()
 ```
 
 <div class="alert alert-warning">This only applies if you are not using <code>ddtrace-run</code></div>
-</div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}
-<div class="alert bg-light">
-
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
 ```ruby
@@ -225,12 +190,9 @@ Datadog.configure do |c|
   c.runtime_metrics.statsd = Datadog::Statsd.new
 end
 ```
-</div>
 {{% /tab %}}
 
 {{% tab "Go" %}}
-<div class="alert bg-light">
-
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
 ```go
@@ -248,12 +210,9 @@ The `WithDogstatsdAddr` option allows you to specify a custom address for the Do
 
 [100]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithDogstatsdAddress
 [101]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace/tracer#WithDogstatsdAddress
-</div>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-<div class="alert bg-light">
-
 You can enable runtime metrics with [environment variables](#environment-variables) or in code:
 
 ```js
@@ -262,15 +221,10 @@ const tracer = require('dd-trace').init({
   runtimeMetrics: true
 })
 ```
-</div>
 {{% /tab %}}
 
 {{% tab ".NET" %}}
-<div class="alert bg-light">
-
 You can only enable runtime metrics with [environment variables](#environment-variables).
-
-</div>
 {{% /tab %}}
 {{< /tabs >}}
 
