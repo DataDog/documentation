@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="OpenTelemetry HAProxy metrics in an HAProxy dashboard" style="width:100%;" >}}
 
-The [HAProxy receiver][1] allows for collection of HAProxy metrics and access to the out of the box HAProxy Dashboard, [HAProxy Overview][4]. Please configure the receiver according to the specifications of the latest version of the `haproxyreceiver`.
+The [HAProxy receiver][1] allows for collection of HAProxy metrics and access to the out of the box HAProxy Dashboard, [HAProxy Overview][4]. Configure the receiver according to the specifications of the latest version of the `haproxyreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [HAProxy receiver][1].
 
@@ -21,7 +21,7 @@ To collect HAProxy metrics with OpenTelemetry for use with Datadog:
 1. Configure the [HAProxy receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
-Refer to the [HAProxy receiver documentation][1] for detailed configuration options and requirements.
+See the [HAProxy receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 

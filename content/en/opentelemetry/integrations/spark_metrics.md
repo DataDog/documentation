@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/spark_metrics.png" alt="OpenTelemetry Apache Spark metrics in a Spark dashboard" style="width:100%;" >}}
 
-The [Apache Spark receiver][1] allows for collection of Apache Spark metrics and access to the out-of-the-box Spark Dashboard, [Spark Overview][4]. Please configure the receiver according to the specifications of the latest version of the `apachesparkreceiver`.
+The [Apache Spark receiver][1] allows for collection of Apache Spark metrics and access to the out-of-the-box Spark Dashboard, [Spark Overview][4]. Configure the receiver according to the specifications of the latest version of the `apachesparkreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [Apache Spark receiver][1].
 
@@ -21,7 +21,7 @@ To collect Apache Spark metrics with OpenTelemetry for use with Datadog:
 1. Configure the [Apache Spark receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][3].
 
-Refer to the [Apache Spark receiver documentation][1] for detailed configuration options and requirements.
+See the [Apache Spark receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 

@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/iis_metrics.png" alt="OpenTelemetry IIS metrics in an IIS dashboard" style="width:100%;" >}}
 
-The [IIS receiver][1] allows for collection of IIS (Internet Information Services) metrics and access to the out of the box IIS Dashboard, [IIS Overview][4]. Please configure the receiver according to the specifications of the latest version of the `iisreceiver`.
+The [IIS receiver][1] allows for collection of IIS (Internet Information Services) metrics and access to the out of the box IIS Dashboard, [IIS Overview][4]. Configure the receiver according to the specifications of the latest version of the `iisreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [IIS receiver][1].
 
@@ -21,7 +21,7 @@ To collect IIS metrics with OpenTelemetry for use with Datadog:
 1. Configure the [IIS receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
-Refer to the [IIS receiver documentation][1] for detailed configuration options and requirements.
+See the [IIS receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 

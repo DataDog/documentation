@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/nginx_metrics.png" alt="OpenTelemetry NGINX metrics in a NGINX dashboard" style="width:100%;" >}}
 
-The [NGINX receiver][1] allows for collection of NGINX metrics and access to the out of the box NGINX Dashboard, [NGINX Overview][4]. Please configure the receiver according to the specifications of the latest version of the `nginxreceiver`.
+The [NGINX receiver][1] allows for collection of NGINX metrics and access to the out of the box NGINX Dashboard, [NGINX Overview][4]. Configure the receiver according to the specifications of the latest version of the `nginxreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [NGINX receiver][1].
 
@@ -21,7 +21,7 @@ To collect NGINX metrics with OpenTelemetry for use with Datadog:
 1. Configure the [NGINX receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
-Refer to the [NGINX receiver documentation][1] for detailed configuration options and requirements.
+See the [NGINX receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 

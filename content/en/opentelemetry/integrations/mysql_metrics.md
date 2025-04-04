@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/mysql_metrics.png" alt="OpenTelemetry MySQL metrics in a MySQL dashboard" style="width:100%;" >}}
 
-The [MySQL receiver][1] allows for collection of MySQL metrics and access to the out of the box MySQL Dashboard, [MySQL Overview][4]. Please configure the receiver according to the specifications of the latest version of the `mysqlreceiver`.
+The [MySQL receiver][1] allows for collection of MySQL metrics and access to the out of the box MySQL Dashboard, [MySQL Overview][4]. Configure the receiver according to the specifications of the latest version of the `mysqlreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [MySQL receiver][1].
 
@@ -21,7 +21,7 @@ To collect MySQL metrics with OpenTelemetry for use with Datadog:
 1. Configure the [MySQL receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][5].
 
-Refer to the [MySQL receiver documentation][1] for detailed configuration options and requirements.
+See the [MySQL receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 

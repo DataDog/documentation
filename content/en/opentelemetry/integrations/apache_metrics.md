@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/apache_metrics.png" alt="OpenTelemetry Apache metrics in an Apache dashboard" style="width:100%;" >}}
 
-The [Apache receiver][1] allows for collection of Apache Web Server metrics. Please configure the receiver according to the specifications of the latest version of the `apachereceiver`.
+The [Apache receiver][1] allows for collection of Apache Web Server metrics. Configure the receiver according to the specifications of the latest version of the `apachereceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [Apache receiver][1].
 
@@ -21,7 +21,7 @@ To collect Apache Web Server metrics with OpenTelemetry for use with Datadog:
 1. Configure the [Apache receiver][1] in your OpenTelemetry Collector configuration.
 2. Ensure the OpenTelemetry Collector is [configured to export to Datadog][4].
 
-Refer to the [Apache receiver documentation][1] for detailed configuration options and requirements.
+See the [Apache receiver documentation][1] for detailed configuration options and requirements.
 
 ## Data collected
 
