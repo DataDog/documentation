@@ -140,6 +140,20 @@ logger.error(
 );
 ```
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+To use custom grouping, you need the Datadog RUM SDK `2.4.2` or higher.
+```dart
+DdLogs.error(
+  'message',
+  'my-error-type',
+  'my-error-message',
+  'my-stack-trace',
+  { my: 'context' },
+  'my-custom-fingerprint'
+);
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 Or, you can add or adjust the fingerprint in the log mapper:
@@ -198,6 +212,18 @@ final configuration = DatadogConfiguration(
 );
 ```
 {{% /tab %}}
+
+{{% tab "React Native" %}}
+To use custom grouping, you need the Datadog RUM SDK `2.4.2` or higher.
+
+```dart
+configuration.errorEventMapper = event => {
+  event.fingerprint = 'my-custom-fingerprint'
+  return event;
+};
+```
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ### RUM
@@ -331,6 +357,21 @@ final rumConfiguration = DatadogRumConfiguration(
 final configuration = DatadogConfiguration(
     // ...
     rumConfiguration: rumConfiguration,
+);
+```
+{{% /tab %}}
+
+{{% tab "React Native" %}}
+To use custom grouping, you need the Datadog RUM SDK `2.4.2` or higher.
+
+```dart
+DdRum.addError(
+  'message',       
+  'my-source',       
+  'my-stack-trace',  
+  { my: 'context' },
+  Date.now(), 
+  'my-custom-fingerprint'        
 );
 ```
 {{% /tab %}}
