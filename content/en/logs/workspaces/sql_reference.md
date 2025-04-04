@@ -96,7 +96,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
 | `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
 | `date_trunc(field f, source [, time_zone])`     | timestamp [with time zone] / interval | Truncates a timestamp or interval to a specified precision.                 |
-| `regexp_like(string s, pattern p [flags])`       | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
+| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
 
 
 {{% collapse-content title="Examples" level="h3" %}}
