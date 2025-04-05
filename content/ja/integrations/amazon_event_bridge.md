@@ -3,7 +3,7 @@ categories:
 - AWS
 - クラウド
 - notifications
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS サービス、SaaS、アプリからのイベントをほぼリアルタイムに処理するサーバーレスイベントバス。
 doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/

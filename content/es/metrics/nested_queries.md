@@ -8,10 +8,6 @@ title: Consultas anidadas
 
 ## Información general
 
-{{< callout url="#" btn_hidden="true" header="Únete a la vista previa">}}
-  Esta función está en vista previa. Para activar esta función, ponte en contacto con el asesor de clientes. 
-{{< /callout >}}  
-
 Por defecto, toda consulta de métrica en Datadog consta de dos capas de agregación. Las consultas anidadas permiten reutilizar los resultados de una consulta anterior en otra posterior.
 
 {{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="Cómo configurar las consultas anidadas en la interfaz de usuario" video=true style="width:100%" >}}
