@@ -56,19 +56,21 @@ You can use the evaluations API provided by LLM Observability to send evaluation
 {
   "data": {
     "type": "evaluation_metric",
+    "id": "456f4567-e89b-12d3-a456-426655440000",
     "attributes": {
       "metrics": [
         {
-          "span_id": "61399242116139924211",
-          "trace_id": "13932955089405749200",
-          "timestamp": 1609459200,
-          "metric_type": "categorical",
-          "label": "Sentiment",
-          "categorical_value": "Positive"
-        },
-        {
+          "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "join_on": {
+            "tag": {
+              "key": "msg_id",
+              "value": "1123132"
+            }
+          },
           "span_id": "20245611112024561111",
           "trace_id": "13932955089405749200",
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1609479200,
           "metric_type": "score",
           "label": "Accuracy",
           "score_value": 3
