@@ -1,7 +1,8 @@
 ---
 title: Delivering value
 description: "Recommended steps after you have data flowing into Datadog."
-private: true
+aliases:
+  - /partners/delivering-value/
 ---
 
 After you've set up data ingestion, you can take several additional steps to maximize the value for your clients. Here are some key areas to focus on.
