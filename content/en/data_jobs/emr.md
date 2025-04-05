@@ -120,7 +120,6 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | DD_TAGS                  | Add host tags to EMR clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
-| DD_EXTRA_TAGS            | Alternative to DD_TAGS for adding host tags to EMR clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
 | DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
 
 [15]: /getting_started/tagging/
