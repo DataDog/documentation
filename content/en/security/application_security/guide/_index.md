@@ -10,4 +10,5 @@ disable_toc: true
 
 {{< whatsnext desc="Advanced Topics" >}}
     {{< nextlink href="/security/application_security/guide/standalone_application_security/" >}}Standalone Application Security{{< /nextlink >}}
+    {{< nextlink href="/security/application_security/guide/manage_account_theft_appsec/" >}}Managing account theft with ASM{{< /nextlink >}}
 {{< /whatsnext >}}
