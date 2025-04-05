@@ -61,14 +61,21 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
-# Download all dependencies and run the site
-start: setup-build-scripts ## Build and run docs including external content.
+# compile .mdoc.md files to HTML
+# so Hugo can include them in the site
+build-cdocs: 
+	@echo "Compiling .mdoc.md files to HTML";
+	@node ./assets/scripts/cdocs-build.js;
+
+start:
+	@make setup-build-scripts ## Build and run docs including external content.
 	@make dependencies
 	@make update_websites_sources_module
 	@make server
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make build-cdocs
 	@make server
 
 # Leave build scripts as is for local testing
@@ -100,7 +107,7 @@ source-dd-source:
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples update_pre_build node_modules placeholders
+	make hugpython all-examples update_pre_build node_modules placeholders build-cdocs
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)

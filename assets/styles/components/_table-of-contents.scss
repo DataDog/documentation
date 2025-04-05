@@ -7,7 +7,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
 
 .announcement {
     .mobile-toc-toggle {
-        top: 130px;
+        top: 115px;
     }
 }
 
@@ -88,7 +88,7 @@ body > header.scrolled ~ .container .mobile-toc-toggle {
         @media (min-width: 991px) {
             max-width: 220px !important;
             padding-right: 20px !important;
-        }    
+        }
         @media (min-width: 1440px) {
             margin-right: -40%;
         }
