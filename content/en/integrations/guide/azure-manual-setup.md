@@ -91,7 +91,7 @@ az account management-group entities list --query "[?inheritedPermissions!='noac
 - It joins the IDs together and creates the Service-Principal. You can run this one command to create a user and assign roles to every management-group/subscription
 
 [1]: https://app.datadoghq.com/integrations/azure
-[2]: https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest
+[2]: https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest
 {{% /tab %}}
 {{% tab "Azure CLI Classic" %}}
 
@@ -318,8 +318,8 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [5]: /logs/guide/azure-logging-guide
 [6]: /integrations/guide/azure-native-manual-setup/
-[7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
+[7]: https://learn.microsoft.com/azure/cloud-shell/get-started/
 [8]: https://app.datadoghq.com/monitors/recommended
 [9]: /monitors/notify/#configure-notifications-and-automations
-[12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
+[12]: https://learn.microsoft.com/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
