@@ -160,9 +160,9 @@ The active Profiling tab also affects the project tree view, which is annotated 
 {{< img src="/developers/ide_plugins/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
 ## CI Test Runs
-You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **View Test Runs** links following test method declarations in your source code:
+You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
 
-{{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a View Test Runs link." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a CI Test Run inlay." style="width:100%;" >}}
 
 Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
 
