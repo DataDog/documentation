@@ -2231,8 +2231,7 @@ menu:
           - v2
         operationids:
           - CancelHistoricalJob
-        unstable:
-          - v2
+        unstable: []
         order: 22
     - name: Get a job's details
       url: '#get-a-jobs-details'
@@ -2244,8 +2243,7 @@ menu:
           - v2
         operationids:
           - GetHistoricalJob
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Delete an existing job
       url: '#delete-an-existing-job'
@@ -2257,8 +2255,7 @@ menu:
           - v2
         operationids:
           - DeleteHistoricalJob
-        unstable:
-          - v2
+        unstable: []
         order: 23
     - name: Convert a job result to a signal
       url: '#convert-a-job-result-to-a-signal'
@@ -2270,8 +2267,7 @@ menu:
           - v2
         operationids:
           - ConvertJobResultToSignal
-        unstable:
-          - v2
+        unstable: []
         order: 24
     - name: Run a historical job
       url: '#run-a-historical-job'
@@ -2283,8 +2279,7 @@ menu:
           - v2
         operationids:
           - RunHistoricalJob
-        unstable:
-          - v2
+        unstable: []
         order: 19
     - name: List historical jobs
       url: '#list-historical-jobs'
@@ -2296,8 +2291,7 @@ menu:
           - v2
         operationids:
           - ListHistoricalJobs
-        unstable:
-          - v2
+        unstable: []
         order: 20
     - name: Change the related incidents of a security signal
       url: '#change-the-related-incidents-of-a-security-signal'
