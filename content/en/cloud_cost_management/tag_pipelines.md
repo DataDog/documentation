@@ -70,6 +70,9 @@ Certain tags such as `env` and `host` are [reserved tags][4], and are part of [U
 
 Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
 
+## Deleting tags
+If you want to delete a tag created via Tag Pipelines, simply delete the rule that created it. Within 24 hours, the tag will be automatically removed from the most recent three months of data. To remove the tag from older data, please request a backfill through support.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
