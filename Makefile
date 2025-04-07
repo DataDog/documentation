@@ -65,7 +65,7 @@ server:
 # so Hugo can include them in the site
 build-cdocs: 
 	@echo "Compiling .mdoc files to HTML";
-	@node local/bin/js/cdocs-build.js;
+	@node ./local/bin/js/cdocs-build.js;
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
