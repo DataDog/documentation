@@ -15,9 +15,11 @@ Datadog Cloud Cost Management (CCM) continuously monitors your environment to de
 
 ## How anomalies are defined
 
-Anomalies are irregular or unexpected changes that significantly deviate from established patterns. Datadog uses a machine learning-based anomaly detection algorithm that automatically filters out weekly seasonality and anomalies below $5 to reduce noise.
+Anomalies are significant, unexpected changes that stand out from typical patterns. Datadog automatically identifies anomalies using machine learning techniques that adapt to your specific usage patterns.
 
-Weekly seasonality further reduces noise by identifying expected weekly patterns. For example, many businesses spin down a part of their infrastructure over the weekend and spin back up on Mondays, which causes a cost increase that shouldn't be flagged as an anomaly.
+Our algorithm takes into account seasonality, distinguishing true anomalies from expected fluctuations. For example, if your infrastructure typically scales up every Monday, Datadog recognizes this pattern and won't flag it as a cost anomaly.
+
+To further reduce noise, anomalies with low cost impact are automatically filtered out, ensuring your attention stays focused on the largest anomalies.
 
 [1]: https://app.datadoghq.com/cost/analyze/anomalies
 
@@ -28,7 +30,7 @@ On the [Anomalies tab of the Cloud Cost page in Datadog][1], you can view the an
 - **Past**: If an anomaly lasts more than 7 days, or the algorithm detects that costs are no longer anomalous, the anomaly is moved to the **Past** tab. Past anomalies can be useful to report on, but are often less urgent and actionable.
 - **Resolved**: If you [resolve an anomaly](#resolve-anomalies), the anomaly can be found in the **Resolved** tab.
 
-Each anomaly explains how much more costs were than expected for the service name (ex:`rds`), usage type, and cloud accounts for the anomaly. The anomaly also shows what expected costs would have been in the time frame. The card also shows a graph with the cost trend over the past 1 month.
+Each anomaly explains how much more costs were than expected for the service name (ex:'rds'), usage type, and cloud accounts. Additionally, the anomaly also shows what expected costs would have been in the time frame. The anomaly card shows a graph with the cost trend over the past 1 month.
 
 Anomalies with the most unexpected costs are at the top, so that it is easier to take action on anomalies with the most impact first.
 
