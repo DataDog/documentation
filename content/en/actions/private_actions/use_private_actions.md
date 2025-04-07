@@ -19,10 +19,6 @@ further_reading:
   text: "Handling Private Action Credentials"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/private-actions/" btn_hidden="false" header="Join the Preview!">}}
-Private Actions are in Preview. Use this form to request access today.
-{{< /callout >}}
-
 ## Overview
 
 Private actions allow your Datadog workflows and apps to interact with services hosted on your private network without exposing your services to the public internet. To use private actions, you must use Docker to install a private action runner on a host in your network, then pair the runner with a Datadog Connection.

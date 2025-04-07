@@ -143,6 +143,7 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 |  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="Job failure analysis" >}}Analysis and categorization of job failures using LLM models based on relevant logs. <a href="https://docs.datadoghq.com/continuous_integration/guides/use_ci_jobs_failure_analysis/">More info</a>.{{< /ci-details >}} | | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | | | {{< X >}} | | | | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Filter CI Jobs on the critical path" >}}Identification of CI jobs that are on the critical path of the pipeline.{{< /ci-details >}} | | {{< X >}} | | | | | | | | |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
@@ -157,7 +158,6 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 | {{< ci-details title="Custom predefined tags" >}}Support for setting static pipeline tags in the CI provider that do not change between executions.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |  |  |  |
 | {{< ci-details title="Custom tags and measures at runtime" >}}Support for adding <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/">user-defined text and numerical tags</a> to pipelines and jobs in CI Visibility.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  {{< X >}} |
 | {{< ci-details title="Parameters" >}}Support for adding custom pipeline parameters that users set (for example, <code>DYNAMICS_IS_CHILD:true</code>). You can then search using these parameters in the <a href="https://docs.datadoghq.com/continuous_integration/explorer/?tab=pipelineexecutions">CI Visibility Explorer</a> to find all events with a specific parameter.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} |  |  |  {{< X >}} |
-| {{< ci-details title="Pipeline failure reason" >}}Identification of a specific reason behind a pipeline or job failure.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
 
 ## Use CI pipelines data
 
@@ -180,3 +180,4 @@ You can export your search query to a [CI Pipeline monitor][12] on the [**Execut
 [11]: /notebooks
 [12]: /monitors/types/ci
 [13]: https://app.datadoghq.com/ci/test-runs
+[14]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

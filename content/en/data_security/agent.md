@@ -199,7 +199,7 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [11]: https://www.datadoghq.com/security/?tab=contact
 [12]: https://www.datadoghq.com/support/
 [13]: /agent/faq/windows-agent-ddagent-user/
-[14]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[14]: /agent/configuration/secrets-management/
 [15]: /agent/configuration/secrets-management/
 [16]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [17]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
