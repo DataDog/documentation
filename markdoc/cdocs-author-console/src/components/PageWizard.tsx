@@ -21,8 +21,13 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
-      <h1>Option selector test</h1>
-      <OptionSelector customizationConfig={customizationConfig} onSelect={() => {}} />
+      <h1>Option group form</h1>
+      <OptionGroupForm
+        customizationConfig={customizationConfig}
+        onUpdate={(config) => {
+          console.log('option group form has broadcast', config);
+        }}
+      />
       <hr />
 
       {filters.length === 0 && (

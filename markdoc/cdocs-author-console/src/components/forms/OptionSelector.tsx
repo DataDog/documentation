@@ -100,12 +100,12 @@ export default function OptionSelector(props: {
       />
       {!newOptionInProgress && (
         <Button
-          variant="contained"
+          variant="outlined"
           onClick={() => {
             setNewOptionInProgress(true);
           }}
         >
-          Add new option
+          Create new option
         </Button>
       )}
       {newOptionInProgress && (
@@ -223,11 +223,9 @@ function NewOptionForm(props: {
       <Button
         onClick={handleSaveButtonClick}
         disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}
-        variant="contained"
-        color="primary"
-        sx={{ alignSelf: 'flex-start', backgroundColor: '#632ca6' }}
+        variant="outlined"
       >
-        Save
+        Save option
       </Button>
     </div>
   );

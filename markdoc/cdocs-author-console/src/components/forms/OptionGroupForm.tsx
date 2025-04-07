@@ -4,7 +4,9 @@ import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import { NewOptionConfig, NewOptionGroupConfig } from './types';
+import OptionSelector from './OptionSelector';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function a11yProps(index: number) {
   return {
@@ -35,6 +37,14 @@ function CustomTabPanel(props: TabPanelProps) {
   );
 }
 
+// TODO: Export all of these types from cdocs-data,
+// it doesn't make sense to have to redeclare them here
+type OptionGroup = {
+  label: string;
+  id: string;
+  default?: boolean | undefined;
+}[];
+
 /**
  * Allows the user to select an existing option group, or create a new one.
  */
@@ -43,26 +53,28 @@ function OptionGroupForm({
   onUpdate
 }: {
   customizationConfig: CustomizationConfig;
-  onUpdate: ({
-    optionGroupId,
-    newOptionConfigs,
-    newOptionGroupConfigs
-  }: {
-    optionGroupId: string;
-    newOptionConfigs?: NewOptionConfig[];
-    newOptionGroupConfigs?: NewOptionGroupConfig[];
-  }) => void;
+  onUpdate: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
+  const [optionGroupId, setOptionGroupId] = useState<string>('');
+  const [optionGroup, setOptionGroup] = useState<OptionGroup>([]);
 
-  const handleExistingOptionGroupSelect = (optionGroupId: string) => {
+  const handleExistingOptionGroupSelect = (selectedOptionGroupId: string) => {
+    const updatedOptionGroup = customizationConfig.optionGroupsById[selectedOptionGroupId];
     onUpdate({
-      optionGroupId
+      optionGroupId: selectedOptionGroupId,
+      optionGroup: updatedOptionGroup
     });
+    setOptionGroupId(selectedOptionGroupId);
+    setOptionGroup(updatedOptionGroup);
   };
 
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
     setCurrentTabIndex(currentTabIndex);
+    if (currentTabIndex === 0) {
+      setOptionGroupId('');
+      setOptionGroup([]);
+    }
   };
 
   return (
@@ -81,7 +93,28 @@ function OptionGroupForm({
         <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleExistingOptionGroupSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
-        Not yet supported.
+        <p>
+          Option group ID{' '}
+          <TextField
+            value={optionGroupId}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setOptionGroupId(e.target.value);
+            }}
+            variant="outlined"
+            placeholder="e.g., rum_sdk_platform_options"
+            fullWidth
+            required
+          />
+        </p>
+        <p>Options (you can select more than one)</p>
+        <OptionSelector
+          customizationConfig={customizationConfig}
+          onSelect={(selectedOptions) => {
+            console.log('selected options', JSON.stringify(selectedOptions, null, 2));
+            setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
+          }}
+        />
+        <Button variant="contained">Save option group</Button>
       </CustomTabPanel>
     </div>
   );
