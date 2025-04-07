@@ -268,7 +268,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-Note: The Databricks cost integration calculates costs using list prices and usage data. It does not reflect any negotiated or discounted rates.
+**Note**: The Databricks cost integration calculates costs using list prices and usage data. It does not reflect any negotiated or discounted rates.
 
 | Tag Name | Tag Description |
 |---|---
