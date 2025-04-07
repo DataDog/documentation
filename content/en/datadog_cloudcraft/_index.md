@@ -142,7 +142,7 @@ The Agent Overlay indicates whether the Agent is installed on your EC2 hosts usi
 {{< img src="datadog_cloudcraft/agent_overlay_2.png" alt="Screenshot of the Agent overlay in the Cloudcraft" width="100%" >}}
 
 [1]: /cloudcraft
-[2]: /security/cloud_security_management/setup/cloud_integrations?tab=aws
+[2]: /integrations/amazon_web_services/#resource-collection
 [3]: /security/cloud_security_management
 [5]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/SecurityAudit.html
 [6]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/ReadOnlyAccess.html
