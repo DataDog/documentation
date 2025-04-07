@@ -24,7 +24,7 @@ Standalone Application Security is currently supported for the following tracing
 | Node.js  | 5.40.0  |
 | PHP      | N/A     |
 | Python   | 3.2.0   |
-| Ruby     | N/A     |
+| Ruby     | 2.13.0  |
 
 ## Setup
 
