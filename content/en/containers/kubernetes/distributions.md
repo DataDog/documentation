@@ -94,6 +94,12 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
+    kubelet:
+      host:
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   override:
     clusterAgent:
       containers:
@@ -115,7 +121,13 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    
 providers:
   aks:
     enabled: true
