@@ -200,7 +200,6 @@ Only applicable metrics are emitted. For example, if DBM is not enabled, none of
 [12]: https://www.datadoghq.com/support/
 [13]: /agent/faq/windows-agent-ddagent-user/
 [14]: /agent/configuration/secrets-management/
-[15]: /agent/configuration/secrets-management/
 [16]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [17]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
 [18]: https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
