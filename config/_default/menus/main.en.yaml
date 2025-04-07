@@ -794,7 +794,7 @@ menu:
       identifier: otel_mysql_metrics
       parent: otel_integrations
       weight: 808
-    - name: Nginx Metrics
+    - name: NGINX Metrics
       url: opentelemetry/integrations/nginx_metrics/
       identifier: otel_nginx_metrics
       parent: otel_integrations

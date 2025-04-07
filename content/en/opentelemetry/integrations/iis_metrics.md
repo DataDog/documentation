@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/iis_metrics.png" alt="OpenTelemetry IIS metrics in an IIS dashboard" style="width:100%;" >}}
 
-The [IIS receiver][1] allows for collection of IIS (Internet Information Services) metrics and access to the out of the box IIS Dashboard, [IIS Overview][4]. Configure the receiver according to the specifications of the latest version of the `iisreceiver`.
+The [IIS receiver][1] allows for collection of IIS (Internet Information Services) metrics and access to the [IIS Overview][4] dashboard. Configure the receiver according to the specifications of the latest version of the `iisreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [IIS receiver][1].
 

@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/mysql_metrics.png" alt="OpenTelemetry MySQL metrics in a MySQL dashboard" style="width:100%;" >}}
 
-The [MySQL receiver][1] allows for collection of MySQL metrics and access to the out of the box MySQL Dashboard, [MySQL Overview][4]. Configure the receiver according to the specifications of the latest version of the `mysqlreceiver`.
+The [MySQL receiver][1] allows for collection of MySQL metrics and access to the [MySQL Overview][4] dashboard. Configure the receiver according to the specifications of the latest version of the `mysqlreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [MySQL receiver][1].
 

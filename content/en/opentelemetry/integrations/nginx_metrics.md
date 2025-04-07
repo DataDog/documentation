@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/nginx_metrics.png" alt="OpenTelemetry NGINX metrics in a NGINX dashboard" style="width:100%;" >}}
 
-The [NGINX receiver][1] allows for collection of NGINX metrics and access to the out of the box NGINX Dashboard, [NGINX Overview][4]. Configure the receiver according to the specifications of the latest version of the `nginxreceiver`.
+The [NGINX receiver][1] allows for collection of NGINX metrics and access to the [NGINX Overview][4] dashboard. Configure the receiver according to the specifications of the latest version of the `nginxreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [NGINX receiver][1].
 

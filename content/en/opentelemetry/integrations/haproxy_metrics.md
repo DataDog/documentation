@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/haproxy_metrics.png" alt="OpenTelemetry HAProxy metrics in an HAProxy dashboard" style="width:100%;" >}}
 
-The [HAProxy receiver][1] allows for collection of HAProxy metrics and access to the out of the box HAProxy Dashboard, [HAProxy Overview][4]. Configure the receiver according to the specifications of the latest version of the `haproxyreceiver`.
+The [HAProxy receiver][1] allows for collection of HAProxy metrics and access to the [HAProxy Overview][4] dashboard. Configure the receiver according to the specifications of the latest version of the `haproxyreceiver`.
 
 For more information, see the OpenTelemetry project documentation for the [HAProxy receiver][1].
 
