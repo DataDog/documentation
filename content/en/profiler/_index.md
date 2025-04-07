@@ -15,7 +15,7 @@ further_reading:
       text: 'Learn more about available profile types'
     - link: '/developers/guide/data-collection-resolution/'
       tag: 'Documentation'
-      text: 'Data collection, resolution, and retention'
+      text: 'Data collection and resolution'
     - link: 'https://www.datadoghq.com/blog/source-code-preview/'
       tag: 'Blog'
       text: 'Focus on code that matters with source code previews in Continuous Profiler'
