@@ -86,7 +86,7 @@ By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentus
 
 If you have a requirement to avoid storing secrets in plaintext in the Agent's configuration files, you can leverage the [secrets management][14] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. You can design your executable according to your preferred key management service, authentication method, and continuous integration workflow.
 
-For more information, see the [Secrets Management][15] documentation.
+For more information, see the [Secrets Management][14] documentation.
 
 ## Telemetry collection
 
