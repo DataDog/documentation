@@ -2454,12 +2454,18 @@ menu:
       parent: oncall
       identifier: oncall_guides
       weight: 8
+    - name: Status Pages
+      url: service_management/status_pages/
+      pre: statuspage
+      parent: service_management_heading
+      identifier: status_pages
+      weight: 40000
     - name: Event Management
       url: service_management/events/
       pre: events
       identifier: events
       parent: service_management_heading
-      weight: 40000
+      weight: 50000
     - name: Ingest Events
       url: service_management/events/ingest/
       identifier: event_ingest
@@ -2590,7 +2596,7 @@ menu:
       pre: case-management
       parent: service_management_heading
       identifier: case_management
-      weight: 50000
+      weight: 60000
     - name: Projects
       url: service_management/case_management/projects
       parent: case_management
