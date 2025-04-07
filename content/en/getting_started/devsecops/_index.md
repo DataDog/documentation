@@ -1,5 +1,5 @@
 ---
-title: Getting Started with the DevSecOps Bundles
+title: Getting Started with Infrastructure DevSecOps
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
