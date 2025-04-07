@@ -110,9 +110,9 @@ The Amazon Bedrock integration instruments the following methods:
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
 - [Chat messages][27]:
-  - `Converse`
+  - `Converse` (requires ddtrace>=3.4.0)
 - [Streamed chat messages][28]:
-  - `ConverseStream`
+  - `ConverseStream` (requires ddtrace>=3.5.0)
 
 **Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
