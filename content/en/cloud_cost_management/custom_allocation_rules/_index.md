@@ -37,6 +37,22 @@ With the even strategy, costs are allocated evenly towards your destination tags
 
 {{< img src="cloud_cost/custom_allocation_rules/even_ui.png" alt="The even split strategy as seen in Datadog" style="width:60%;" >}}
 
+## Specify what costs are included in the allocation
+| Step | Required | Examples |
+| ---- | ---- | ---- |
+| Select the cost provider | Yes | AWS, Google Cloud, Azure |
+| Define the costs to split (source) | Yes | `aws_product` contains `support`, `allocated_spend_type` is untagged |
+| Define the destination | Yes | `team` is `teamA`, `teamB`, `teamC` |
+| Filter by | Only applicable for Even and Proportional strategies, optional | `aws_product` is `ec2` |
+| Partition costs by | Only applicable for Even, Proportional, and Dynamic by Metric strategies, optional | `environment` is all values |
+| Name | Yes | allocate\_untagged\_support\_costs |
+
+### Partitioning
+
+For some of the allocation strategies, you can specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, with proportional allocation, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+
+{{< img src="cloud_cost/custom_allocation_rules/even_partition_diagram.png" alt="Diagram illustrating the even split strategy with partitioning" style="width:90%;" >}}
+
 {{% /tab %}}
 
 {{% tab "Custom Percentage Allocation" %}}
@@ -45,6 +61,16 @@ With the custom percentage strategy, you can define static custom percentages fo
 {{< img src="cloud_cost/custom_allocation_rules/custom_percentage_diagram.png" alt="Diagram illustrating the even split strategy" style="width:60%;" >}}
 
 {{< img src="cloud_cost/custom_allocation_rules/custom_percentage_ui.png" alt="The even split strategy as seen in Datadog" style="width:60%;" >}}
+
+## Specify what costs are included in the allocation
+| Step | Required | Examples |
+| ---- | ---- | ---- |
+| Select the cost provider | Yes | AWS, Google Cloud, Azure |
+| Define the costs to split (source) | Yes | `aws_product` contains `support`, `allocated_spend_type` is untagged |
+| Define the destination | Yes | `team` is `teamA`, `teamB`, `teamC` |
+| Filter by | Only applicable for Even and Proportional strategies, optional | `aws_product` is `ec2` |
+| Partition costs by | Only applicable for Even, Proportional, and Dynamic by Metric strategies, optional | `environment` is all values |
+| Name | Yes | allocate\_untagged\_support\_costs |
 
 {{% /tab %}}
 
@@ -55,6 +81,22 @@ Costs are allocated based on the proportional spend of destination values. Simil
 {{< img src="cloud_cost/custom_allocation_rules/proportional_diagram.png" alt="Diagram illustrating the proportional split strategy" style="width:60%;" >}}
 
 {{< img src="cloud_cost/custom_allocation_rules/proportional_ui.png" alt="The proportional split strategy as seen in Datadog" style="width:60%;" >}}
+
+## Specify what costs are included in the allocation
+| Step | Required | Examples |
+| ---- | ---- | ---- |
+| Select the cost provider | Yes | AWS, Google Cloud, Azure |
+| Define the costs to split (source) | Yes | `aws_product` contains `support`, `allocated_spend_type` is untagged |
+| Define the destination | Yes | `team` is `teamA`, `teamB`, `teamC` |
+| Filter by | Only applicable for Even and Proportional strategies, optional | `aws_product` is `ec2` |
+| Partition costs by | Only applicable for Even, Proportional, and Dynamic by Metric strategies, optional | `environment` is all values |
+| Name | Yes | allocate\_untagged\_support\_costs |
+
+### Partitioning
+
+For some of the allocation strategies, you can specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, with proportional allocation, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
+
+{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
 
 {{% /tab %}}
 
@@ -72,10 +114,6 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 
 [3]: /metrics/#querying-metrics
 
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ## Specify what costs are included in the allocation
 | Step | Required | Examples |
 | ---- | ---- | ---- |
@@ -90,7 +128,12 @@ For determining the proportion of costs to be allocate, metrics can be aggregate
 
 For some of the allocation strategies, you can specify how cost proportions should be partitioned to ensure segment-specific allocations. For example, with proportional allocation, if you partition your costs by `environment` using tags like `staging` and `production`, the proportions are calculated separately for each environment. This ensures allocations are based on the specific proportions within each partition.
 
-{{< img src="cloud_cost/custom_allocation_rules/proportional_partition_diagram.png" alt="Diagram illustrating the proportional split strategy with partitioning" style="width:90%;" >}}
+{{< img src="cloud_cost/custom_allocation_rules/dynamic_partition_diagram.png" alt="Diagram illustrating the dynamic split strategy with partitioning" style="width:90%;" >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ## Managing rules
 Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured. When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact support to request a backfill.
