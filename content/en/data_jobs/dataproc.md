@@ -64,7 +64,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
 | Variable                 | Description                                                                                                                                                      | Default |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|                                                                                                    
-| DD_TAGS                  | Add host tags to Dataproc clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| DD_TAGS                  | Add tags to Dataproc cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
 
 [15]: /getting_started/tagging/
 
