@@ -64,8 +64,8 @@ server:
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs: 
-	@echo "Compiling .mdoc.md files to HTML";
-	@node ./assets/scripts/cdocs-build.js;
+	@echo "Compiling .mdoc files to HTML";
+	@node local/bin/js/cdocs-build.js;
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
@@ -75,6 +75,7 @@ start:
 
 # Skip downloading any dependencies and run the site (hugo needs at the least node)
 start-no-pre-build: node_modules  ## Build and run docs excluding external content.
+	@make setup-build-scripts
 	@make build-cdocs
 	@make server
 
