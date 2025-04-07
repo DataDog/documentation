@@ -66,6 +66,10 @@ Find below a summary of Datadog data [collection][1] and [resolution][2]. See in
 | Test Optimization                     | Test span                                                                         | Datadog Agent + tracing library                                                                                                       | 60 seconds                                                                                     | 1 millisecond         |
 | USM                                 | RED metrics                                                                       | Datadog Agent                                                                                                                         | 30 seconds                                                                                     | 30 second             |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /glossary/#collection-interval
 [2]: /glossary/#minimum-resolution
 [3]: /tracing/trace_pipeline/trace_retention/
