@@ -72,19 +72,23 @@ The following configuration options behave consistently across the latest versio
 **Caveats**: Not supported in C++ or PHP<br>
 **Description**: Enables or disables the collection of [runtime metrics][5] (such as garbage collection stats, memory usage, and thread counts) for the application.
 
+### Traces
+
+`DD_TRACE_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Description**: Enables or disables sending traces from the application.
+
 `DD_LOGS_INJECTION`
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
 **Caveats**: Not supported in C++ or Go. The default value in Ruby is `true`.<br>
 **Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
 
-### Traces
-
-`DD_TRACE_<INTEGRATION>_ENABLED`
-: **Default**: `true` <br>
-**Supported Input**: Boolean <br>
-**Caveats**: Not supported in Go; [Some Java integrations are disabled by default][2].<br/>
-**Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
+`DD_TRACE_SAMPLING_RULES`
+: **Default**: `null` <br>
+**Supported Input**: A JSON string representing an array of sampling rules. Each rule must contain a `sample_rate` (float between 0 and 1) and can optionally include a `service` (string) and `name` (string) pattern to match. Example: `[{"sample_rate": 0.1, "service": "my-service", "name": "http.request"}]` <br>
+**Description**: Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used. For more information about how these configurations affect trace ingestion, see [Ingestion Mechanisms][4].
 
 `DD_TRACE_RATE_LIMIT`
 : **Default**: `100` <br>
@@ -97,10 +101,6 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: A comma-separated string representing a list of case-insensitive HTTP headers, with an optional mapping to a custom tag name. Example: `User-Agent:my-user-agent,Content-Type`. <br>
 **Description**: Automatically apply specified HTTP headers as span tags. If a custom tag name is not specified, the tag key defaults to `http.request.headers.<normalized-header-name>` for request headers and `http.response.headers.<normalized-header-name>` for response headers.
 
-`DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-**Supported Input**: Boolean <br>
-**Description**: Enables or disables sending traces from the application.
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **Default**: <br>
@@ -110,10 +110,6 @@ The following configuration options behave consistently across the latest versio
 : **Supported Input**: A regex string <br>
 : **Description**: Applies a regex to redact sensitive data from query strings on incoming HTTP requests. The default regex matches various sensitive data patterns, including passwords, tokens, API keys, private keys, and authorization terms. Matches are replaced with `<redacted>`. If an empty string is passed, no obfuscation occurs. The resulting value is reported in the `http.url` tag.
 
-`DD_TRACE_SAMPLING_RULES`
-: **Default**: `null` <br>
-**Supported Input**: A JSON string representing an array of sampling rules. Each rule must contain a `sample_rate` (float between 0 and 1) and can optionally include a `service` (string) and `name` (string) pattern to match. Example: `[{"sample_rate": 0.1, "service": "my-service", "name": "http.request"}]` <br>
-**Description**: Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used. For more information about how these configurations affect trace ingestion, see [Ingestion Mechanisms][4].
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Default**: `true` <br>
@@ -140,6 +136,12 @@ The following configuration options behave consistently across the latest versio
 **Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. Each feature must be explicitly listed to be enabled.
 
 ### Integrations
+
+`DD_TRACE_<INTEGRATION>_ENABLED`
+: **Default**: `true` <br>
+**Supported Input**: Boolean <br>
+**Caveats**: Not supported in Go; [Some Java integrations are disabled by default][2].<br/>
+**Description**: Enables or disables instrumentation for the specified `<INTEGRATION>`. The integration name must be in uppercase (for example, `DD_TRACE_KAFKA_ENABLED=true`)
 
 `DD_TRACE_HTTP_CLIENT_ERROR_STATUSES`
 : **Default**: `400-499` <br>
