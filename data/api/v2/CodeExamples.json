@@ -823,6 +823,20 @@
       "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
+  "CreatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Create a new pipeline returns \"OK\" response"
+    }
+  ],
+  "UpdatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Update a pipeline returns \"OK\" response"
+    }
+  ],
   "CreateOktaAccount": [
     {
       "group": "okta_integration",
