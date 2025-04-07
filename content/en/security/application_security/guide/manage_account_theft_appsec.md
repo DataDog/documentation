@@ -386,7 +386,7 @@ While isolating attacker activity, ensure that your current filters are exhausti
  
 
 1. Go to [Traces][25], and then *exclude* traces based on the filters you identify. The goal is to have the remaining traffic volume similar to your normal traffic volume. If you're still seeing a spike of logins during the attack, it means further filters are necessary to comprehensively isolate the attack.
-2. Look at the matching traffic over an expanded time frame (for example, if the attack lasted an hour, use one day). Any traffic before or after the attack is likely be a false positive.
+2. Look at the traffic matching your filters over an expanded time frame (for example, if the attack lasted an hour, use one day). Any traffic matched before or after the attack is likely be a false positive.
 
 Next, start by isolating the attack's activity.
 
@@ -397,13 +397,13 @@ Extract the list of targeted users by going to [Signals][1].
 
 <!-- screenshot -->
 
-To craft a query to review all the activity from targeted users, follow this template: 
+From this list of users, you can craft a [Traces][25] query to review all the activity from targeted users. Follow this template: 
 
 `@appsec.security_activity:business_logic.users.login.* @appsec.events_data.usr.login:(<users>)` 
 
 Successful logins should be considered suspicious.
 
-[1]: https://app.datadoghq.com/security
+[1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A"Application%20Security"%20category%3Aaccount_takeover&product=appsec
 
 {{% /tab %}}
 
@@ -492,7 +492,7 @@ You can either use Datadog's built-in blocking capabilities to deny any request 
 
 ### Datadog blocking
 
-Users that are part of traffic blocked by Datadog see a **You're blocked** page, or they receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
+Users that are part of the traffic blocked by Datadog see a **You're blocked** page, or receive a custom status code, such as a redirection. Blocking can be applied through two mechanisms, each with different performance characteristics: the Denylist and custom WAF rules. 
 
 <!-- ![][image31] -->
 
@@ -502,7 +502,7 @@ The [Denylist][27] is an efficient way to block a large number of entries, but i
 
 The Denylist can be managed and automated using the Datadog platform by clicking **Automate Attacker Blocking** in the signal. 
 
-Use the **Automate Attacker Blocking** or **Block All Attacking IPs** signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users.  
+Use the **Automate Attacker Blocking** or **Block All Attacking IPs** signal options to block all attacking IPs for a few hours, a week, or permanently. Similarly, you can block compromised users. As a reminder, Datadog doesn't recommend blocking IPs permanently due to risks of blocking legitimate traffic after IPs get recycled into public pools.  
 
 <!-- ![][image32] -->
 
@@ -510,7 +510,7 @@ The blocking can be rescinded or extended from the [Denylist][27].
 
 <!-- ![][image33] -->
 
-If the signal wasn't accurate, you can extract the list and add it to the Denylist manually.
+If the signal wasn't accurate, you can extract the list or users or IPs and add it to the Denylist manually.
 
 <!-- ![][image34] -->
 
@@ -527,11 +527,11 @@ To create a new rule, do the following:
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
    <!-- ![][image36] -->
-1. In **If incoming requests match these conditions**, configure the conditions of the rule. The following example uses the user agent.   
+1. In **If incoming requests match these conditions**, configure the conditions of the rule. <!-- The following example uses the user agent. -->   
    1. If you want to block a specific user agent, you can paste it in **Values**. In **Operator**, you can use **matches value in list**, or if you want more flexibility, you can also use a **Matches RegEx**.
    2. Use the **Preview matching traces** section as a final review of the rule's impact. If no unexpected traces are shown, select a blocking mode and save the rule. 
 
-   The response is pushed to the Traces explorer automatically and blocked traces appear.
+The response is pushed to tracers automatically and blocked traces appear in the [Traces explorer][25].
 
 <!-- ![][image38] -->
 
@@ -547,7 +547,7 @@ If a large-scale attack resumes, the Distributed Credential Stuffing signal shou
 
 * Persistent attackers often require multiple iterations of defensive measures before giving up.
 * The ideal defense is a robust blocking strategy that the attacker cannot circumvent.
-* Attackers frequently attempt to evade detection by altering IPs and user agents.
+* Attackers frequently attempt to evade detection by altering IPs and user agents. They're less likely to deeply modify the script they procured to send their login attempts so headers are a more resilient target.
 * Effective strategies include fingerprint-based or correlation methods that identify rare header combinations.
 * Monitor blocked traffic resulting from previous defensive responses.
 * Blocking attacker traffic may inadvertently block legitimate traffic. Implement mechanisms to unblock legitimate traffic, either adapt the Datadog response or ensure it is unblocked post attack.
