@@ -83,7 +83,7 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TAGS`
 : **Default**: `null` <br>
-**Supported Input**: A string representing key value pairs that are delimited by a colon and seperate by a comma and/or a space (for example, `<key1>:<value1>, <key2>:<value2>`>) <br>
+**Supported Input**: A string representing key value pairs that are delimited by a colon and separated by a comma and/or a space (for example, `<key1>:<value1>, <key2>:<value2>`>) <br>
 **Description**: Tags to apply to produced data. Must be a list of `<key>:<value>` separated by commas and/or spaces.
 
 `DD_TRACE_SAMPLING_RULES`
@@ -111,13 +111,13 @@ The following configuration options behave consistently across the latest versio
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Caveats**: Not supported in C++ and PHP<br>
+**Caveats**: Not supported in C++ or PHP<br>
 **Description**: Enables or disables the collection of runtime metrics (such as garbage collection stats, memory usage, and thread counts) for the application.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Caveats**: Not supported in C++ and Go. The default value in Ruby is `true`<br>
+**Caveats**: Not supported in C++ or Go. The default value in Ruby is `true`.<br>
 **Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
 
 `DD_DOGSTATSD_PORT`
@@ -134,8 +134,8 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TRACE_EXPERIMENTAL_FEATURES_ENABLED`
 : **Default**: `null` <br>
-**Supported Input**: A comma-separated list of configuration options that support experimental features.
-**Supported Values**: `all`, `DD_TAGS` (java, .NET)
+**Supported Input**: A comma-separated list of configuration options that support experimental features.<br>
+**Supported Values**: `all`, `DD_TAGS` (java, .NET), `DD_LOGS_INJECTION` (java) <br>
 **Caveats**: Only supported in Java and .NET <br>
 **Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. Each feature must be explicitly listed to be enabled.
 
