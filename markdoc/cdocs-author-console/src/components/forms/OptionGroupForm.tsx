@@ -93,20 +93,18 @@ function OptionGroupForm({
         <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleExistingOptionGroupSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
-        <p>
-          Option group ID{' '}
-          <TextField
-            value={optionGroupId}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setOptionGroupId(e.target.value);
-            }}
-            variant="outlined"
-            placeholder="e.g., rum_sdk_platform_options"
-            fullWidth
-            required
-          />
-        </p>
-        <p>Options (you can select more than one)</p>
+        <h3>Option group ID</h3>
+        <TextField
+          value={optionGroupId}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setOptionGroupId(e.target.value);
+          }}
+          variant="outlined"
+          placeholder="e.g., rum_sdk_platform_options"
+          fullWidth
+          required
+        />
+        <h3>Options</h3>
         <OptionSelector
           customizationConfig={customizationConfig}
           onSelect={(selectedOptions) => {
@@ -114,7 +112,9 @@ function OptionGroupForm({
             setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
           }}
         />
-        <Button variant="contained">Save option group</Button>
+        <Button sx={{ marginTop: '15px' }} variant="contained">
+          Save option group
+        </Button>
       </CustomTabPanel>
     </div>
   );

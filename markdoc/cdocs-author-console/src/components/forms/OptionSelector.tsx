@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 /**
  * Select multiple options from the customization config.
@@ -23,7 +29,6 @@ export default function OptionSelector(props: {
   const [newOptionIds, setNewOptionIds] = useState<string[]>([]);
   const [optionsById, setOptionsById] = useState<Record<string, OptionConfig>>(props.customizationConfig.optionsById);
   const [dropdownSelections, setDropdownSelections] = useState<{ label: string; value: string }[]>([]);
-  const [newOptionInProgress, setNewOptionInProgress] = useState<boolean>(false);
 
   const getOptionConfigs = (
     selections: { label: string; value: string }[],
@@ -33,7 +38,6 @@ export default function OptionSelector(props: {
       const option = optionsById[selection.value];
       if (!option) {
         throw new Error(`Option with ID ${selection.value} not found in optionsById.`);
-        console.log(optionsById);
       }
       return {
         id: selection.value,
@@ -79,11 +83,11 @@ export default function OptionSelector(props: {
 
     setOptionsById(newOptionsById);
     setDropdownSelections(newSelections);
-    setNewOptionInProgress(false);
   };
 
   return (
     <div>
+      <p>Use the searchable dropdown below to select options.</p>
       <Autocomplete
         disablePortal
         value={dropdownSelections}
@@ -98,19 +102,7 @@ export default function OptionSelector(props: {
         }}
         onChange={handleSelectionChange}
       />
-      {!newOptionInProgress && (
-        <Button
-          variant="outlined"
-          onClick={() => {
-            setNewOptionInProgress(true);
-          }}
-        >
-          Create new option
-        </Button>
-      )}
-      {newOptionInProgress && (
-        <NewOptionForm customizationConfig={props.customizationConfig} onSave={handleNewOptionSave} />
-      )}
+      <NewOptionForm customizationConfig={props.customizationConfig} onSave={handleNewOptionSave} />
     </div>
   );
 }
@@ -132,6 +124,7 @@ function NewOptionForm(props: {
   };
   const [newOptionConfig, setNewOptionConfig] = useState(blankOption);
   const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [newOptionInProgress, setNewOptionInProgress] = useState(false);
 
   const validate = () => {
     let errors: string[] = [];
@@ -157,76 +150,94 @@ function NewOptionForm(props: {
     if (isValid) {
       props.onSave(newOptionConfig);
       setNewOptionConfig(blankOption);
+      setNewOptionInProgress(false);
     }
   };
 
   return (
-    <div>
-      <p>
-        Option ID
-        <TextField
-          value={newOptionConfig.id}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewOptionConfig({
-              ...newOptionConfig,
-              id: e.target.value
-            });
-          }}
-          variant="outlined"
-          placeholder="e.g., amazon_ec2"
-          fullWidth
-          required
-        />
-      </p>
-      <p>
-        Option label
-        <TextField
-          value={newOptionConfig.label}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewOptionConfig({
-              ...newOptionConfig,
-              label: e.target.value
-            });
-          }}
-          variant="outlined"
-          placeholder="e.g., Amazon EC2"
-          fullWidth
-          required
-        />
-      </p>
-      <p>
-        Internal notes (optional)
-        <TextField
-          value={newOptionConfig.internal_notes}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setNewOptionConfig({
-              ...newOptionConfig,
-              internal_notes: e.target.value
-            });
-          }}
-          variant="outlined"
-          placeholder="e.g., Only use this if xyz option does not apply."
-          fullWidth
-          multiline
-          rows={4}
-        />
-      </p>
+    <Accordion
+      expanded={newOptionInProgress}
+      onChange={() => {
+        setNewOptionInProgress(!newOptionInProgress);
+      }}
+      aria-controls="new-option-form"
+      id="new-option-form-header-header"
+    >
+      <AccordionSummary expandIcon={<ArrowDropDownIcon />} aria-controls="panel3-content" id="panel3-header">
+        <Typography component="span">I can't find the option I want.</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <h4>Create a new option</h4>
+        <p>
+          Option ID
+          <TextField
+            value={newOptionConfig.id}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewOptionConfig({
+                ...newOptionConfig,
+                id: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., amazon_ec2"
+            fullWidth
+            required
+          />
+        </p>
+        <p>
+          Option label
+          <TextField
+            value={newOptionConfig.label}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewOptionConfig({
+                ...newOptionConfig,
+                label: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., Amazon EC2"
+            fullWidth
+            required
+          />
+        </p>
+        <p>
+          Internal notes (optional)
+          <TextField
+            value={newOptionConfig.internal_notes}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setNewOptionConfig({
+                ...newOptionConfig,
+                internal_notes: e.target.value
+              });
+            }}
+            variant="outlined"
+            placeholder="e.g., Only use this if xyz option does not apply."
+            fullWidth
+            multiline
+            rows={4}
+          />
+        </p>
 
-      {formErrors.length === 0 && (
-        <ul style={{ color: 'red' }}>
-          {formErrors.map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-      )}
-
-      <Button
-        onClick={handleSaveButtonClick}
-        disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}
-        variant="outlined"
-      >
-        Save option
-      </Button>
-    </div>
+        {formErrors.length === 0 && (
+          <ul style={{ color: 'red' }}>
+            {formErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        )}
+      </AccordionDetails>
+      <AccordionActions>
+        <Button onClick={handleSaveButtonClick} disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}>
+          Add option to selection
+        </Button>
+        <Button
+          onClick={() => {
+            setNewOptionInProgress(false);
+          }}
+        >
+          Cancel
+        </Button>
+      </AccordionActions>
+    </Accordion>
   );
 }
