@@ -137,6 +137,36 @@ func main() {
 }
 ```
 
+### API changes
+
+Improvements to the API have caused some functions to change. For example, child spans are started with `StartChild` rather than `ChildOf`:
+
+v1:
+```go
+import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+
+func main() {
+  tracer.Start()
+	defer tracer.Stop()
+
+	parent := tracer.StartSpan("op").Context()
+	child := tracer.StartSpan("op", tracer.ChildOf(parent))
+}
+```
+
+v2:
+```go
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+
+func main() {
+  tracer.Start()
+	defer tracer.Stop()
+
+	parent := tracer.StartSpan("op")
+	child := parent.StartChild("op")
+}
+```
+
 ### Configuration changes
 
 The `WithServiceName()` option has been replaced with `WithService()` for consistency:
