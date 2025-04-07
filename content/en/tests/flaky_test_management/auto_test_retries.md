@@ -172,11 +172,9 @@ Customize the Auto Test Retries with the following environment variables:
 
 {{% tab "Python" %}}
 
-<div class="alert alert-info">Auto Test Retries is available using the beta of the new pytest plugin. Set the <code>DD_PYTEST_USE_NEW_PLUGIN_BETA</code> environment variable to <code>true</code> to enable it.</div>
-
 ### Compatibility
 
-`dd-trace-py >= 2.18.0` (`pytest >= 7.2.0`)
+`dd-trace-py >= 3.0.0` (`pytest >= 7.2.0`)
 
 ### Configuration
 

@@ -54,6 +54,7 @@ The [Plan and Usage][1] provides you an out-of-the-box (OOTB) summary of your ac
    1. Scroll down to the *Top Custom Metrics for \<MONTH YEAR\>*, to see the top metric names with their contribution % to your custom metrics costs.
 
 Knowing which metrics are the largest contributor of your account's monthly usage and costs is the recommended starting point for using [Metrics without Limits™][4]. With this knowledge, you can find the source of these metric submissions whether by teams, service, organization, or other tag attribute.
+
 Additionally, review [Usage Attribution][3] information for a total breakdown of your account's billable usage by tag keys. From here, you can identify your largest cost drivers by tags such as team, service, or application. 
 
 **Note**: Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or Customer Success to request this feature.
@@ -114,7 +115,7 @@ Datadog's [Metrics without Limits™][4] is a first in industry cost management 
 
 Reduce your indexed custom metrics volumes on any metric name by setting a tag configuration that you'd like to preserve for querying. It reduces your cost and preserves the mathematical accuracy of your configured metrics (all within the platform without any code-level changes).
 
-{{< img src="metrics/volume/reduce_metric_vol_cost_tags_2025-02-21.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
+{{< img src="metrics/volume/reduce_metric_vol_cost_tags_03142025.png" alt="Example using Metrics Volume Management and Metrics without Limits™ to reduce volume by limiting the allowlist through tag configuration" style="width:80%;" >}}
 
 With Metrics without Limits™, Datadog automatically provides the following:
 - Up to date recommended tag configurations (based on our intelligent query insights) to help you maximize the ROI and value you get from your observability spend.
@@ -150,9 +151,14 @@ You can also reduce costs, without unintended side effects, by using the [Relate
 
 #### Identify all unqueried and unused metrics
 
+Use the [Related Assets facet][16] to gain visibility into the metrics that are unused in Datadog, which can help you reduce costs without accidentally breaking any assets. This facet lets you see which metrics are used on your dashboards, notebooks, monitors, and SLOs, allowing you to make informed decisions about your metric configurations. 
+
+Identify your organization's entire list of unqueried and unused metrics:
+
 1. On the [Metrics Summary page][6], find the **Query Activity** facet on the left side. Select the time frame of interest (30, 60, or 90 days).
 2. Find the **Related Assets** facet on the left side, and select **Does not have assets**.
-3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these three facets provides you a list of unqueried and unused custom metrics not yet configured, which you can use to immediately reduce costs.
+3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
+
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
 5. (Optional) To export this list, click **Export as CSV** above the metric table.
 
