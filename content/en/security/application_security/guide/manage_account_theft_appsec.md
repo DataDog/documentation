@@ -241,7 +241,7 @@ Review the accounts flagged as compromised. Click on a user to open a summary of
 Questions for triage:
 
 * Has there been a sharp increase of activity?   
-* Are the IPs attempting logins known?   
+* Is it the first time those IPs are attempting logins?   
 * Are they flagged by threat intelligence?
 
 If the answer to those questions is yes, the signal is likely legitimate.
@@ -256,14 +256,14 @@ This signal is looking for a large number of accounts with failed logins coming 
 
 Review the accounts flagged as targeted.
 
-If they share attributes, such as all coming from one institution, check whether the IP might be a proxy for this institution by reviewing its past activity.
+If they share attributes, such as all coming from one institution, check whether the IP might be a proxy for this institution by reviewing its past activity by hovering over it and opening the side panel.
 
 Questions for triage:
 
 * Has there been a sharp increase of activity?   
 * Are the accounts uncorrelated?   
 * Are IPs flagged by threat intelligence?   
-* Are there much more login failures than successes ?
+* Are there many more login failures than successes ?
 
 If the answer to those questions is yes, the signal is likely legitimate.  
 You can adapt your response based on the scale of the attack and whether accounts are being compromised.
@@ -279,7 +279,7 @@ Datadog tries to identify common attributes between the login failures in your s
 If accurate, the activity of the cluster should closely match the increase in login failures while also being low/nonexistent before.  
 If no cluster is available, click **Investigate in full screen** and review the targeted users/IPs for outliers. 
 
-If the list is truncated, click **View in App & API Protection Traces Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
+If the list is truncated, click **View in ASM Protection Trace Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -295,10 +295,11 @@ If the false positive was caused by a unique setting in your service, you can ad
 
 If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker slows down the attack and reduce the number of compromised accounts. 
 
-**Note:** This is a common step, although you might want to skip this step in the following circumstances:
+<div class="alert alert-info">**Note:** This is a common step, although you might want to skip this step in the following circumstances:
 
 * The accounts have little immediate value. You can block these post-compromise without causing harm.  
 * You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
+</div>
 
 Enforcing this preliminary response requires that [Remote Configuration][11] is enabled for your services.
 
@@ -312,7 +313,7 @@ The attackers are likely using a small number of IPs. To block them, open the si
 Datadog recommends **12h**, which is enough for the attack to stop and avoid blocking legitimate users when, after the attack, those IPs get recycled to legitimate users. Datadog does not recommend permanent blocking.  
 You can also block compromised users, although a better approach would be to extract them and reset their credentials using your own systems.
 
-Finally, you can introduce automated IP blocking while running your investigation.
+Finally, you can enable automated IP blocking from the Next Step section so that new IPs are automatically blocked while you're running your investigation.
 
 {{% /tab %}}
 
@@ -328,7 +329,7 @@ Before blocking, Datadog recommends that you review the activity from the cluste
 
 The questions you're trying to answer are:
 
-- Is the traffic malicious?  
+- Is the traffic malicious? Did this traffic exist before the beginning of th attack?  
 - Can a meaningful volume of legitimate traffic be caught?  
 - Can blocking based on this cluster be effective?
 
@@ -371,7 +372,7 @@ Multiple blocking actions are available. Depending on the sophistication of the 
 
 ### Step 3.3: Investigation
 
-When you have [disrupted the attacker as a preliminary response](#step-3.2:-disrupting-the-attacker-as-a-preliminary-response), you can identify the following:
+When you have [disrupted the attacker as a preliminary response](#step-32-disrupting-the-attacker-as-a-preliminary-response), you can identify the following:
 
 - Accounts compromised by the attackers so you can reset their credentials.  
 - Hints about the source of the targeted accounts, which you can use for proactive password resets or higher scrutiny.
@@ -381,7 +382,7 @@ The first step is to isolate the attacker activity from the overall traffic of t
 
 #### Isolate attacker activity
 
-To isolate attacker activity, ensure that your current filters are exhaustive:  
+While isolating attacker activity, ensure that your current filters are exhaustive through two tests:  
  
 
 1. Go to [Traces][25], and then *exclude* traces so that the remaining traffic closely tracks your normal traffic. If you're still seeing a spike during the attack, it means further filters are necessary to comprehensively neutralize the attack.
