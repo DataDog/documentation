@@ -15,3 +15,5 @@ This page provides insights on various applications of Log Workspaces, outlining
 {{< whatsnext desc="See examples of how to use Log Workspaces:" >}}
     {{< nextlink href="/logs/workspaces/use_cases/analyze_login_attempts" >}}Analyze Login Attempts for e-PHI{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Yuliya's PR
