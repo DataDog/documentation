@@ -70,7 +70,7 @@ The following configuration options behave consistently across the latest versio
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
 **Caveats**: Not supported in C++ or PHP<br>
-**Description**: Enables or disables the collection of runtime metrics (such as garbage collection stats, memory usage, and thread counts) for the application.
+**Description**: Enables or disables the collection of [runtime metrics][5] (such as garbage collection stats, memory usage, and thread counts) for the application.
 
 `DD_LOGS_INJECTION`
 : **Default**: `false` <br>
@@ -113,18 +113,18 @@ The following configuration options behave consistently across the latest versio
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `null` <br>
 **Supported Input**: A JSON string representing an array of sampling rules. Each rule must contain a `sample_rate` (float between 0 and 1) and can optionally include a `service` (string) and `name` (string) pattern to match. Example: `[{"sample_rate": 0.1, "service": "my-service", "name": "http.request"}]` <br>
-**Description**: Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used.
+**Description**: Configures custom sampling rules for traces. Rules are evaluated in order, and the first matching rule determines the sampling rate. If no rules match, the default sampling rate is used. For more information about how these configurations affect trace ingestion, see [Ingestion Mechanisms][4].
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Description**: Enables or disables the generation of 128-bit trace IDs. When enabled, trace IDs are generated as 32-character hexadecimal strings. When disabled, 64-bit trace IDs are used instead.
+**Description**: Controls whether new traces use 128-bit W3C trace IDs (32-character hexadecimal strings) or 64-bit Datadog trace IDs (16-character hexadecimal strings). The default is `true` to support W3C trace context propagation.
 
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **Default**: `true` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
 **Caveats**: Not supported in C++<br>
-**Description**: Controls whether 128-bit trace IDs are logged in their full format. When disabled, only the lower 64 bits are logged.
+**Description**: Controls whether 128-bit trace IDs are logged in their full 32-character format or truncated to 16 characters. Set to `false` for compatibility with systems that expect the shorter format.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **Default**: `true` <br>
@@ -178,3 +178,5 @@ The following configuration options behave consistently across the latest versio
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/
+[5]: /tracing/runtime_metrics/
