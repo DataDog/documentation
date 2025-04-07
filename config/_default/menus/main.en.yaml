@@ -762,39 +762,24 @@ menu:
       identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 8
-    - name: Trace Metrics
-      url: opentelemetry/integrations/trace_metrics/
-      identifier: otel_trace_metrics
+    - name: Apache Metrics
+      url: opentelemetry/integrations/apache_metrics/
+      identifier: otel_apache_metrics
       parent: otel_integrations
       weight: 801
-    - name: Runtime Metrics
-      url: opentelemetry/integrations/runtime_metrics/
-      identifier: otel_runtime_metrics
-      parent: otel_integrations
-      weight: 802
-    - name: Java
-      url: opentelemetry/integrations/runtime_metrics/java
-      identifier: otel_runtime_metrics_java
-      parent: otel_runtime_metrics
-      weight: 8021
-    - name: .NET
-      url: opentelemetry/integrations/runtime_metrics/dotnet
-      identifier: otel_runtime_metrics_dotnet
-      parent: otel_runtime_metrics
-      weight: 8022
-    - name: Go
-      url: opentelemetry/integrations/runtime_metrics/go
-      identifier: otel_runtime_metrics_go
-      parent: otel_runtime_metrics
-      weight: 8023
     - name: Collector Health Metrics
       url: opentelemetry/integrations/collector_health_metrics/
       identifier: otel_health_metrics
       parent: otel_integrations
-      weight: 803
+      weight: 802
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 803
+    - name: HAProxy Metrics
+      url: opentelemetry/integrations/haproxy_metrics/
+      identifier: otel_haproxy_metrics
       parent: otel_integrations
       weight: 804
     - name: Host Metrics
@@ -802,11 +787,51 @@ menu:
       identifier: otel_host_metrics
       parent: otel_integrations
       weight: 805
+    - name: IIS Metrics
+      url: opentelemetry/integrations/iis_metrics/
+      identifier: otel_iis_metrics
+      parent: otel_integrations
+      weight: 806
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
+    - name: MySQL Metrics
+      url: opentelemetry/integrations/mysql_metrics/
+      identifier: otel_mysql_metrics
+      parent: otel_integrations
+      weight: 808
+    - name: NGINX Metrics
+      url: opentelemetry/integrations/nginx_metrics/
+      identifier: otel_nginx_metrics
+      parent: otel_integrations
+      weight: 809
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 810
+    - name: Java
+      url: opentelemetry/integrations/runtime_metrics/java
+      identifier: otel_runtime_metrics_java
+      parent: otel_runtime_metrics
+      weight: 8101
+    - name: .NET
+      url: opentelemetry/integrations/runtime_metrics/dotnet
+      identifier: otel_runtime_metrics_dotnet
+      parent: otel_runtime_metrics
+      weight: 8102
+    - name: Go
+      url: opentelemetry/integrations/runtime_metrics/go
+      identifier: otel_runtime_metrics_go
+      parent: otel_runtime_metrics
+      weight: 8103
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 811
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -2960,21 +2985,46 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 7
+    - name: Advanced Install
+      url: containers/datadog_operator/advanced_install
+      identifier: containers_datadog_operator_installation
+      parent: containers_datadog_operator
+      weight: 701
+    - name: Custom Checks
+      url: containers/datadog_operator/custom_check
+      identifier: containers_datadog_operator_customchecks
+      parent: containers_datadog_operator
+      weight: 702
+    - name: Data Collected
+      url: containers/datadog_operator/data_collected
+      identifier: containers_datadog_operator_datacollected
+      parent: containers_datadog_operator
+      weight: 703
+    - name: kubectl Plugin
+      url: containers/datadog_operator/kubectl_plugin
+      identifier: containers_datadog_operator_kubectlplugin
+      parent: containers_datadog_operator
+      weight: 704
+    - name: Secret Management
+      url: containers/datadog_operator/secret_management
+      identifier: containers_datadog_operator_secretmanagement
+      parent: containers_datadog_operator
+      weight: 705  
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 701
+      weight: 708
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 702
+      weight: 709
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 703
+      weight: 710
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
