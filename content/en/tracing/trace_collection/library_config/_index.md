@@ -117,7 +117,7 @@ The following configuration options behave consistently across the latest versio
 `DD_LOGS_INJECTION`
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
-**Caveats**: Not supported in C++ and Go<br>
+**Caveats**: Not supported in C++ and Go. The default value in Ruby is `true`<br>
 **Description**: Enables or disables the automatic injection of trace context (trace ID, span ID) into application logs. This allows for correlation between traces and logs.
 
 `DD_DOGSTATSD_PORT`
