@@ -164,7 +164,7 @@ LLM Observability format and sends it to Datadog's LLM Observability product by 
 
 The following span types are supported:
 - `agent`
-- `generation` via our [openai](#openai) integration
+- `generation` using Datadog's [OpenAI](#openai) integration
 - `response`
 - `gaurdrail`
 - `handoff`
