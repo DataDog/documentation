@@ -62,9 +62,10 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 
    Optionally, the script can be configured adding the following environment variable:
 
-| Variable                 | Description                                                                                                                                                      | Default |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|                                                                                                    
-| DD_TAGS                  | Add tags to Dataproc cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |         |
+| Variable                 | Description                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                
+| DD_TAGS                  | Add tags to Dataproc cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |
+| DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.  
 
 [15]: /getting_started/tagging/
 
