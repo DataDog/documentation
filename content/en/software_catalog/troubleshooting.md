@@ -19,7 +19,7 @@ If you experience unexpected behavior with Datadog Software Catalog, this guide 
 
 ### APM-instrumented services not appearing
 
-If services that you know are instrumented for APM are not appearing in the Software Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Additional Primary Tags][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
+If services that you know are instrumented for APM are not appearing in the Software Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any primary tag values of your choosing) or [additional primary tags][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
 
 {{< img src="tracing/software_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
