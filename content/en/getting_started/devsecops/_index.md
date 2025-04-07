@@ -2,7 +2,7 @@
 title: Getting Started with Infrastructure DevSecOps
 ---
 
-This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.
+This guide introduces the Infrastructure Monitoring DevSecOps bundles, with links to setup instructions to help you install and configure them.
 
 ## Infrastructure DevSecOps
 
