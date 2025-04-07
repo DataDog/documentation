@@ -19,22 +19,21 @@ aliases:
     - /service_catalog/manage_entries/
     - /service_catalog/enrich_default_catalog/
     - /service_catalog/customize/
+    - /software_catalog/best-practices
+    - /software_catalog/guides/best-practices
+    - /service_catalog/guides/best-practices
+    - /service_catalog/use_cases/best_practices
+    - /software_catalog/use_cases/best_practices
 ---
 
-You can customize your engineering team's landing experience in Software Catalog. Developer Home is a new personalized dashboard experience in beta, designed to help developers access prioritized tasks, pull requests, alerts, and insights all in one place.
+Customize your engineering team's experience in Software Catalog with the following features.
 
-{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for Developer Homepage experience!" >}}
+## Create a customized landing page with Developer Homepage (in Preview)
+
+{{< callout url="https://forms.gle/nkAu2z4gc2dGWcGw5" d_target="#signupModal" btn_hidden="false" >}}
+Developer Homepage is a personalized dashboard experience that enables developers to access prioritized tasks, pull requests, alerts, and insights, all in one place. <strong>Request Access</strong> to opt in.
 {{< /callout >}}
 
-## Automatic discovery
-
-Datadog Software Catalog is pre-populated with entries detected through [APM][2], eBPF-based autodiscovery with [Universal Service Monitoring][1], and RUM applications.
-
-With APM, Datadog can automatically discover the dependencies for an instrumented service, such as a database, a queue, or a third-party dependency, even if that dependency hasn't been instrumented yet. These uninstrumented dependencies are categorized as separate *services*. Datadog changed service names of client spans (span.kind:client) to represent dependencies of your instrumented services. For example, a span representing a client call from a service auth-dotnet to a PostgreSQL database would be tagged with service:auth-dotnet-postgres. 
-
-If you are using APM and would like to remove the automatically named *services* from your Software Catalog and Service Map, you can opt in to new [inferred entities experience][7], which allows you to filter Software Catalog entries by entity type, such as database, queue, or third-party dependencies. You can optionally [remove][8] any [service overrides][9] like service:my-service-http-client from your catalog or map.
-
-For information about discovering endpoints, see [Discovering Endpoints from APM][11].
 
 ## Enrich auto-detected services with metadata 
 To specify on-call, source code, or documentation for your services, you can add metadata to any existing services using the UI, APIs, or [other automation][10]. v3 is the recommended version.
@@ -112,6 +111,23 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
+## Find Software Catalog actions
+To explore the complete set of actions specifically related to Software Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
+
+1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
+2. **Search Functionality**: Use the search bar to search for keywords like "Software Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
+
+### Available Software Catalog Actions
+
+Below is a comprehensive list of actions available for Software Catalog in Datadog Workflow Automation. Note that this list may evolve as new actions are added. 
+
+- **Retrieve Service Information**
+  - "Get service definition" for a single service
+  - "List service definitions" to get all definitions from Datadog Software Catalog
+  - "Get service dependencies" to get a service's immediate upstream and downstream services
+- **Incident Triage**
+  - "Get service PagerDuty on call"
+  - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
 
 ## Change the service color
 The service color is used in trace visualizations. Click the service type icon to change it.

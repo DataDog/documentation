@@ -52,8 +52,8 @@ The following table lists the destinations and fields that support template synt
 | Amazon Opensearch | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Amazon S3         | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Azure Blob        | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
-| Elasticsearch     | Source type                         | The Worker writes logs to the `datadog-op` index.                                                                          |
-| Google SecOps  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
+| Elasticsearch     | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Google SecOps     | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
