@@ -385,7 +385,7 @@ The first step is to isolate the attacker activity from the overall traffic of t
 While isolating attacker activity, ensure that your current filters are exhaustive through two tests:  
  
 
-1. Go to [Traces][25], and then *exclude* traces so that the remaining traffic closely tracks your normal traffic. If you're still seeing a spike during the attack, it means further filters are necessary to comprehensively neutralize the attack.
+1. Go to [Traces][25], and then *exclude* traces based on the filters you identify. The goal is to have the remaining traffic volume similar to your normal traffic volume. If you're still seeing a spike of logins during the attack, it means further filters are necessary to comprehensively isolate the attack.
 2. Look at the matching traffic over an expanded time frame (for example, if the attack lasted an hour, use one day). Any traffic before or after the attack is likely be a false positive.
 
 Next, start by isolating the attack's activity.
