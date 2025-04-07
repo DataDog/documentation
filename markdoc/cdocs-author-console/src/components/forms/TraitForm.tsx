@@ -146,6 +146,7 @@ function TraitForm({
               });
             }}
             variant="outlined"
+            placeholder="e.g., The customer's something or other. For example, This or That. Use some_other_trait instead if xyz."
             fullWidth
             multiline
             rows={4}

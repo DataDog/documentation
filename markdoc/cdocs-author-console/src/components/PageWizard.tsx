@@ -4,6 +4,7 @@ import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
 import OptionSelector from './forms/OptionSelector';
+import OptionGroupForm from './forms/OptionGroupForm';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -21,12 +22,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
   return (
     <div>
       <h1>Option selector test</h1>
-      <OptionSelector
-        customizationConfig={customizationConfig}
-        onSelect={(selection) => {
-          console.log(selection);
-        }}
-      />
+      <OptionSelector customizationConfig={customizationConfig} onSelect={() => {}} />
       <hr />
 
       {filters.length === 0 && (
