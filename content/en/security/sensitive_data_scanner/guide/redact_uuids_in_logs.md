@@ -9,12 +9,12 @@ further_reading:
 
 ## Overview
 
-This guide goes over how to create a custom scanning rule using a regular expression (regex) pattern that matches and redacts a Universally Unique Identified (UUID). For example, your organization has a UUID that is for internal identification only, and the UUID has additional information appended to it, such as the user's:
+This guide goes over how to create a custom scanning rule using a regular expression (regex) pattern to match and redact a Universally Unique Identified (UUID). For example, your organization might have a UUID for internal identification, with additional information appended, such as the user's:
 - User ID
 - Department code
 - Status code
 
-If you want internal users to have access to these logs but don't want to expose the UUID and user ID, you can create a custom scanning rule to redact the information.
+If you want internal users to access these logs without exposing the UUID and user ID, you can create a custom scanning rule to redact the information.
 
 ## Set up a custom rule to match a UUID
 
@@ -34,6 +34,14 @@ You can use the following basic regex to match the UUID and user ID that you wan
 ```
 [a-z0-9]{14}-\d{4}-[a-z0-9]{4}-[a-z0-9]{4}-\d{6}
 ```
+
+This regex pattern captures:
+- The 14-character alphanumeric start of the UUID
+- A sequence of structured segments (`-####-####-####`)
+- The 6-digit byte-format user ID
+
+It excludes the final 4-digit department and status code, allowing that information to remain visible.
+
 1. Navigate to the [Sensitive Data Scanner settings][1] page.
 1. Click **Add** and select **Add Scanning Rule**.
 1. Click **Custom Rule**.
@@ -68,3 +76,5 @@ Then the result is the `user.id` redacted and replaced with `[removed]`:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
