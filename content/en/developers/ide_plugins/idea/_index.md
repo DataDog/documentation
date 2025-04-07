@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data.  The plugin is for developers that use Datadog products including [Log Explorer][5], [Error Tracking][6], [Code Security][7], the [Continuous Profiler][10], [Test Optimization][18] and [CI Visibility][19] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
+The Datadog plugin for JetBrains IDEs helps improve software performance by providing code insights in the IDE based on real-time observability data. The plugin is for developers that use Datadog products including [Log Explorer][5], [Error Tracking][6], [Code Security][7], [Continuous Profiler][10], [Test Optimization][18] and [CI Visibility][19] to monitor their services. It is available for IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm.
 
 {{< img src="/developers/ide_plugins/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -83,7 +83,7 @@ Log patterns from Datadog are matched directly to lines of code in your editor f
 A popup shows runtime values from the log entries:
 {{< img src="/developers/ide_plugins/idea/log-patterns-popup.png" alt="A popup showing log patterns from Datadog" style="width:100%;" >}}
 
-Click the log icon to open the [Log Explorer][5] on the Datadog platform with a pre-filled query that matches the logger name, log level, and log message as closely as possible:
+Click the log icon to open the [Log Explorer][5] in Datadog with a pre-filled query that matches the logger name, log level, and log message as closely as possible:
 {{< img src="/developers/ide_plugins/idea/log-explorer-link.png" alt="A source file showing a View Logs icon and link." style="width:100%;" >}}
 
 ## Code Insights
@@ -160,7 +160,7 @@ The active Profiling tab also affects the project tree view, which is annotated 
 {{< img src="/developers/ide_plugins/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
 ## CI Test Runs
-You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
+You can view recent test runs in the [CI Visibility Explorer][12] by navigating directly from your source files. Look for the **CI Test Run** inlays above test method declarations in your source code:
 
 {{< img src="/developers/ide_plugins/idea/ci-navigation.png" alt="A source file showing a CI Test Run inlay." style="width:100%;" >}}
 
