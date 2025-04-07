@@ -90,19 +90,15 @@ Auto multi-line detection uses a fuzzy algorithm to detect *any* datetime format
 Your datetime format should include both a date and time component to be detected. 
 
 Examples of formats that are long enough to be detected:
-```
-2021-03-28 13:45:30
-2023-03-28T14:33:53.743350Z
-Jun 14 15:16:01
-2024/05/16 19:46:15
-```
+ - `2021-03-28 13:45:30`
+ - `2023-03-28T14:33:53.743350Z`
+ - `Jun 14 15:16:01`
+ - `2024/05/16 19:46:15`
 
 Examples of formats that do not have enough context to be detected: 
-```
-12:30:2017
-12:30:20
-2024/05/16
-```
+- `12:30:2017`
+- `12:30:20`
+- `2024/05/16`
 
 
 ## Custom Pattern Configuration
@@ -136,7 +132,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[{"sample": "SEVERE Mai
 {{% /tab %}}
 {{< /tabs >}}
 
-This will aggregate logs with similar formats. For example:
+This will aggregate logs where `"SEVERE Main main Exception occurred"` matches the first line. For example:
 
 ```text
 SEVERE Main main Exception occurred
@@ -273,7 +269,7 @@ logs_config:
 
 These settings add the following tags to your logs so you can search for them in the logs explorer:
 
-- `multiline` tag: Shows source (e.g., `auto_multiline`, `multiline_regex`)
+- `multiline` tag: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
 - `truncated` tag: Shows truncation source (e.g., `single_line`, `multi_line`)
 
 
