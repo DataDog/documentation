@@ -71,7 +71,6 @@ Then the result is the `user.id` redacted and replaced with `[removed]`:
 
 {{< img src="sensitive_data_scanner/guides/redacted_log.png" alt="The log event with the UUID and user ID redacted and replaced with removed" style="width:100%;" >}}
 
-[1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration
 
 ## Further reading
 
