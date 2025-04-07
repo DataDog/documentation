@@ -16,11 +16,11 @@ algolia:
 
 ## Overview
 
-Auto multi-line detection allows the agent to detect and aggregate common multi-line logs automatically. 
+Auto multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically. 
 
 ## Getting Started
 
-Enable the feature in your Agent configuration:
+To enable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection`  to `true` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable: 
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
