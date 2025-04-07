@@ -29,6 +29,8 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
+| [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
+
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -155,6 +157,20 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
+## OpenAI Agents
+
+The OpenAI Agents integration converts the [built in tracing][28] from the [OpenAI Agents SDK][29] into
+LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
+
+The following span types are supported:
+- `agent`
+- `generation` via our [openai](#openai) integration
+- `response`
+- `gaurdrail`
+- `handoff`
+- `function`
+
+
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
 [3]: https://platform.openai.com/docs/api-reference/chat
@@ -180,6 +196,9 @@ The Vertex AI integration instruments the following methods:
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
+[28]: https://openai.github.io/openai-agents-python/tracing/
+[29]: https://openai.github.io/openai-agents-python/
+
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
