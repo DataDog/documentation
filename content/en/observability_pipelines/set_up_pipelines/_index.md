@@ -59,7 +59,7 @@ For detailed setup instructions, select a template-specific documentation and th
 
 {{% tab "API" %}}
 
-You can use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+Use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
 [1]: /api/
 [2]: /observability_pipelines/install_the_worker/
@@ -67,7 +67,7 @@ You can use the API to [create a pipeline][1]. After the pipeline has been creat
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+Use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: /observability_pipelines/install_the_worker/
@@ -101,6 +101,9 @@ Make sure your Worker logs are [indexed][14] in Log Management for optimal funct
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /observability_pipelines/sources/
+[2]: /observability_pipelines/processors/
+[3]: /observability_pipelines/destinations/
 [11]: /observability_pipelines/advanced_configurations/
 [12]: /observability_pipelines/update_existing_pipelines/
 [13]: /observability_pipelines/install_the_worker/

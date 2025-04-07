@@ -1,4 +1,20 @@
-## Source environment variables
+---
+title: Environment Variables
+disable_toc: false
+further_reading:
+- link: "logs/processing/pipelines"
+  tag: "Documentation"
+  text: "Log processing pipelines"
+---
+
+## Overview
+
+TKTK
+
+## Component environment variables
+
+{{< tabs >}}
+{{% tab "Sources" %}}
 
 ### Amazon Data Firehose
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/amazon_data_firehose %}}
@@ -39,7 +55,12 @@
 ### Syslog
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
 
-## Destination environment variables
+{{% /tab %}}
+
+{{% tab "Processors" %}}
+
+{{% /tab %}}
+{{% tab "Destinations" %}}
 
 ### Amazon OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_opensearch %}}
@@ -81,3 +102,6 @@
 
 ### Syslog
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/syslog %}}
+
+{{% /tab %}}
+{{< /tabs >}}
