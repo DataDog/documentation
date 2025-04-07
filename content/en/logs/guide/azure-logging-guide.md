@@ -278,9 +278,9 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us5,gov,ap1" %}}
 <div class="alert alert-warning">
-  This is not supported for Datadog {{< region-param key="dd_site_name" >}} site.
+  Log forwarding from Azure Blob Storage is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
