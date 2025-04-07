@@ -67,7 +67,7 @@ If this example log, which contains the different components of the UUID, is sen
 2024-11-14 14:20:22 INFO [transaction-logger] 200 OK shoe:200.000, pen:42.95. iron, 221.55, tasty-sandwich:10.95, big-coffee:11.95, user.name:fred91, user.id:01e2402104ca99-8641-43ba-b499-642610-0012, user.email:fred.jones@scooby.com function:transaction-complete.js, payment.ccn:1111-1111-1111-1111, payment.ccexp:10/30}
 ```
 
-Then the result is the `user.id` redacted and replaced with `[removed]`:
+The result is the `user.id` is redacted and replaced with `[removed]`:
 
 {{< img src="sensitive_data_scanner/guides/redacted_log.png" alt="The log event with the UUID and user ID redacted and replaced with removed" style="width:100%;" >}}
 
