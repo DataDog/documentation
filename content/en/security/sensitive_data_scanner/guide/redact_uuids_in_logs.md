@@ -52,9 +52,9 @@ It excludes the final 4-digit department and status code, allowing that informat
 1. In the **Match conditions** section, enter `[a-z0-9]{14}-\d{4}-[a-z0-9]{4}-[a-z0-9]{4}-\d{6}` in the regex field.
     {{< img src="sensitive_data_scanner/guides/regex_text_matched.png" alt="The regex test section showing that the UUID and user ID are matched" style="width:100%;" >}}
 1. Use a keyword dictionary to refine detection accuracy to avoid false positives. For this example, you want to match within 10 characters of the word `user`:
-1. Enter `user` as a key word.
+    1. Enter `user` as a key word.
     1. Enter `10` for **Characters before match**.
-    1. In the **Action on Match** section and for this example:
+1. In the **Action on Match** section and for this example:
 1. Select **Entire Event** for how much of the event to scan. If you have the log parsed out using the Grok Parser, you can scan by specific attributes.
     1. Select **Redact** for the action on match.
     1. Enter `[removed]` for the replacement text.
