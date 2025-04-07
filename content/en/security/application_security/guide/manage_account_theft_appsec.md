@@ -415,7 +415,7 @@ Start by extracting a list of suspicious IPs from the signal side panel
 
 <!-- screenshot -->
 
-To craft a query to review all the activity from suspected IPs, follow this template: 
+From the list of IPs, you can craft a [Traces][25] query to review all the activity from suspected IPs. Follow this template:
 
 `@appsec.security_activity:business_logic.users.login.* @http.client_ip:(<IPs>)`
 
