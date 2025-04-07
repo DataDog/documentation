@@ -159,7 +159,7 @@ The Vertex AI integration instruments the following methods:
 
 ## OpenAI Agents
 
-The OpenAI Agents integration converts the [built in tracing][28] from the [OpenAI Agents SDK][29] into
+The OpenAI Agents integration converts the [built-in tracing][28] from the [OpenAI Agents SDK][29] into
 LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
 
 The following span types are supported:
