@@ -75,9 +75,9 @@ Datadog provides a migration tool that automatically handles most code updates w
 To upgrade, run the following command:
 
 ```shell
-go install github.com/DataDog/dd-trace-go/tools/v2check@latest
+go install github.com/DataDog/dd-trace-go/tools/v2fix@latest
 # In your repository's directory
-v2check .
+v2fix .
 ```
 
 The tool makes the following changes:
@@ -106,7 +106,7 @@ import "github.com/DataDog/dd-trace-go/v2/profiler"
 
 ### Package structure changes
 
-The package organization has changed in v2. Many functions previously in `ddtrace` have been moved to the `ddtrace/tracer` package. While the `v2check` migration tool handles these changes automatically, you may need to manually update some import paths.
+The package organization has changed in v2. Many functions previously in `ddtrace` have been moved to the `ddtrace/tracer` package. While the `v2fix` migration tool handles these changes automatically, you may need to manually update some import paths.
 
 v1:
 ```go
