@@ -54373,9 +54373,6 @@ paths:
       x-menu-order: 20
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
     post:
       description: Run a historical job.
       operationId: RunHistoricalJob
@@ -54437,9 +54434,6 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
   /api/v2/siem-historical-detections/jobs/signal_convert:
     post:
       description: Convert a job result to a signal.
@@ -54474,9 +54468,6 @@ paths:
         - security_monitoring_signals_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
   /api/v2/siem-historical-detections/jobs/{job_id}:
     delete:
       description: Delete an existing job.
@@ -54508,9 +54499,6 @@ paths:
       x-menu-order: 23
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
     get:
       description: Get a job's details.
       operationId: GetHistoricalJob
@@ -54546,9 +54534,6 @@ paths:
         - security_monitoring_rules_read
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
   /api/v2/siem-historical-detections/jobs/{job_id}/cancel:
     patch:
       description: Cancel a historical job.
@@ -54585,9 +54570,6 @@ paths:
         - security_monitoring_rules_write
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in beta and may be subject to changes.
-
-        Please check the documentation regularly for updates.'
   /api/v2/slo/report:
     post:
       description: 'Create a job to generate an SLO report. The report job is processed
