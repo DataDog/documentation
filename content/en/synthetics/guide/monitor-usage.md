@@ -30,7 +30,8 @@ To visualize or alert on your Synthetics usage, use the following queries:
 * [Single][2] and [Multistep API tests][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
 * [Browser tests][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
-**Note:** Test runs for Browser tests are based on the number of steps. See [Pricing documentation][7] for more information on how test runs are calculated.
+
+  **Note:** The pricing for browser test runs is based on the number of steps. See [Pricing documentation][7] for more information.
 
 For a higher level of refinement, scope or group these metrics by tags associated with your test, such as `team` or `application`. 
 
