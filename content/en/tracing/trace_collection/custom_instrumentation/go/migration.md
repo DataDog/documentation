@@ -22,7 +22,9 @@ When deciding which version of the Go tracer to use, consider the following guid
 
 ## Support policy
 
-While v1 remains available, v2 is Datadog's primary supported version:
+While v1 remains available, v2 is Datadog's primary supported version. All v1 releases starting from v1.74.0 will not contain new features and are instead considered a transitional release. These releases maintain the v1 API while using v2 under the hood. Using a transitional v1 version together with v2 allows you to migrate your services gradually. 
+
+The first transitional release is planned for May 2025. After the v2 release, support for v1 will be as follows:
 
 - Bug fixes for v1 will be provided until June 30, 2025
 - Security fixes for v1 will be provided until December 31, 2025
