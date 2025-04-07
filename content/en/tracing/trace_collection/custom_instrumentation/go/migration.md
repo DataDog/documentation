@@ -11,14 +11,14 @@ further_reading:
 
 ## Overview
 
-The Go tracer v2 is a significant update to Datadog's Go tracing library that introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go tracing library.
+The Go tracer v2 introduces API improvements, better performance, and enhanced compatibility with modern Go practices. It represents the latest stable version of Datadog's Go tracing library.
 
 ## Compatibility
 
 When deciding which version of the Go tracer to use, consider the following guidance:
 
 - **For new projects**: Datadog recommends using v2 for all new projects.
-- **For Existing Projects**: Datadog recommends migrating existing applications from v1 to take advantage of improvements and continued support.
+- **For Existing Projects**: Datadog recommends migrating existing applications to v2 to take advantage of improvements and continued support.
 
 ## Support policy
 
@@ -34,18 +34,6 @@ For more compatibility and support details, see [Go Library Compatibility][2].
 
 Different Datadog products have specific considerations when migrating from v1 to v2. Here is what you need to know for each.
 
-### Application Security Management (ASM)
-
-Supported packages have changed between v1 and v2 of the Go tracer.
-
-For more information, see [ASM language and framework compatibility][3].
-
-### Software Composition Analysis (SCA)
-
-Supported packages have changed between v1 and v2 of the Go tracer.
-
-For more information, see [SCA language and framework compatibility][2].
-
 ### Tracing
 
 The v2 tracing API offers significant improvements while maintaining a similar developer experience. The migration typically involves updating import paths and adapting to some API changes.
@@ -57,6 +45,16 @@ For more information, see [Go Library Compatibility][4].
 ### Profiling
 
 For the Profiler, only import paths need to be updated. The profiling API functionality remains the same between v1 and v2.
+
+### Application Security Management (ASM)
+
+Supported packages have changed between v1 and v2 of the Go tracer.
+
+For more information, see [ASM language and framework compatibility][3].
+
+### Software Composition Analysis (SCA)
+
+Only import paths need to be updated. The framework support for SCA is the same between v1 and v2.
 
 ## Version 2 improvements
 
@@ -106,25 +104,34 @@ import "github.com/DataDog/dd-trace-go/v2/profiler"
 
 ### Package structure changes
 
-The package organization has changed in v2. Many functions previously in `ddtrace/tracer` have been moved to the `ddtrace` package. While the `v2check` migration tool handles these changes automatically, you may need to manually update some import paths.
+The package organization has changed in v2. Many functions previously in `ddtrace` have been moved to the `ddtrace/tracer` package. While the `v2check` migration tool handles these changes automatically, you may need to manually update some import paths.
 
 v1:
 ```go
-import "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+import (
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+  "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+)
 
 func main() {
     tracer.Start()
-    span := tracer.StartSpan("operation")
+	  defer tracer.Stop()
+
+	  s := tracer.StartSpan("op")
+	  var ctx ddtrace.SpanContext = s.Context()
 }
 ```
 
 v2:
 ```go
-import "github.com/DataDog/dd-trace-go/v2/ddtrace"
+import "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 
 func main() {
-    ddtrace.Start()
-    span := ddtrace.StartSpan("operation")
+    tracer.Start()
+	  defer tracer.Stop()
+
+	  s := tracer.StartSpan("op")
+	  var ctx *tracer.SpanContext = s.Context()
 }
 ```
 
