@@ -19,7 +19,7 @@ If you experience unexpected behavior with Datadog Software Catalog, this guide 
 
 ### APM-instrumented services not appearing
 
-If services that you know are instrumented for APM are not appearing in the Software Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Secondary Primary Tag][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
+If services that you know are instrumented for APM are not appearing in the Software Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Additional Primary Tags][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
 
 {{< img src="tracing/software_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
@@ -71,7 +71,7 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[1]: /tracing/guide/setting_primary_tags_to_scope/#add-additional-primary-tags-in-datadog
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/guide/setting_primary_tags_to_scope
 [4]: /help/
