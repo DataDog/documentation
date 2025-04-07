@@ -56,6 +56,7 @@ patch(langchain=True)
 patch(anthropic=True)
 patch(gemini=True)
 patch(botocore=True)
+patch(openai_agents=True)
 ```
 
 **Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
