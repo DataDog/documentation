@@ -5,7 +5,7 @@ import { CustomizationConfig } from 'cdocs-data';
 
 export default function OptionSelector(props: {
   customizationConfig: CustomizationConfig;
-  onSelect: (optionId: string) => void;
+  onSelect: (optionIds: string[]) => void;
 }) {
   const optionsById = props.customizationConfig.optionsById;
 
@@ -15,21 +15,22 @@ export default function OptionSelector(props: {
     return { label, value: optionId };
   });
 
-  const [localOptionId, setLocalOptionId] = useState<string | null>(null);
+  const [selectedOptionIds, setSelectedOptionIds] = useState<string[]>([]);
 
-  const handleOptionIdChange = (_event: React.SyntheticEvent, selection: { label: string; value: string } | null) => {
-    const optionId = selection?.value || '';
-    if (optionId === localOptionId) {
-      return;
-    }
-    setLocalOptionId(optionId);
-    props.onSelect(optionId);
+  const handleOptionIdChange = (
+    _event: React.SyntheticEvent,
+    selections: { label: string; value: string }[] | null
+  ) => {
+    const optionIds = selections ? selections.map((selection) => selection.value) : [];
+    setSelectedOptionIds(optionIds);
+    props.onSelect(optionIds);
   };
 
   return (
     <div>
       <Autocomplete
         disablePortal
+        multiple={true}
         options={dropdownChoices}
         sx={{ width: '100%', marginBottom: '15px ' }}
         renderInput={(params) => {
@@ -40,6 +41,16 @@ export default function OptionSelector(props: {
         }}
         onChange={handleOptionIdChange}
       />
+      <NewOptionForm customizationConfig={props.customizationConfig} />
+    </div>
+  );
+}
+
+function NewOptionForm(props: { customizationConfig: CustomizationConfig }) {
+  return (
+    <div>
+      <h1>New option form</h1>
+      <p>This is not yet implemented.</p>
     </div>
   );
 }

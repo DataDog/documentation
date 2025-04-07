@@ -3,6 +3,7 @@ import FilterList from './FilterList';
 import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
+import OptionSelector from './forms/OptionSelector';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -19,6 +20,15 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
+      <h1>Option selector test</h1>
+      <OptionSelector
+        customizationConfig={customizationConfig}
+        onSelect={(selection) => {
+          console.log(selection);
+        }}
+      />
+      <hr />
+
       {filters.length === 0 && (
         <p>
           Click the button below to configure a filter and generate instructions for setting up a new customizable doc.
