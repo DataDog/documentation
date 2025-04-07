@@ -166,7 +166,7 @@ The following span types are supported:
 - `agent`
 - `generation` using Datadog's [OpenAI](#openai) integration
 - `response`
-- `gaurdrail`
+- `guardrail`
 - `handoff`
 - `function`
 
