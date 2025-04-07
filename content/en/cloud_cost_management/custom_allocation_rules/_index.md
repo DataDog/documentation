@@ -113,7 +113,9 @@ For some of the allocation strategies, you can specify how cost proportions shou
 {{< /tabs >}}
 
 ## Managing rules
-Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured. When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact support to request a backfill.
+Rules can be modified and deleted in the [Custom Allocation Rules section][2] of the Cloud Cost settings page. All fields except for the rule name can be reconfigured.
+
+When you delete a custom allocation rule, the associated allocation is automatically removed from the current month and prior month's data within 24 hours. To remove allocations from older data, contact [Datadog support][5] to request a backfill.
 
 Rules are applied in the same order as shown in the list.
 
@@ -127,3 +129,4 @@ Changes to custom allocation rules may take up to 24 hours to be applied. After 
 
 [1]: /cloud_cost_management/tag_pipelines
 [2]: https://app.datadoghq.com/cost/settings/custom-allocation-rules
+[5]: https://www.datadoghq.com/support/
