@@ -134,7 +134,8 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TRACE_EXPERIMENTAL_FEATURES_ENABLED`
 : **Default**: `null` <br>
-**Supported Input**: A comma-separated list of configuration options that support experimental features (for example, `DD_TAGS,DD_RUNTIME_METRICS_ENABLED`) <br>
+**Supported Input**: A comma-separated list of configuration options that support experimental features.
+**Supported Values**: `all`, `DD_TAGS` (java, .NET)
 **Caveats**: Only supported in Java and .NET <br>
 **Description**: Enables experimental features for specific configuration options. When enabled, these features may provide additional functionality but are not yet considered stable and may change or be removed in future releases. Each feature must be explicitly listed to be enabled.
 
