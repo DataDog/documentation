@@ -44,10 +44,10 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
 
 By default, the following features are enabled:
 
-- Automatic datetime aggregation: Logs beginning with a datetime format will be used to aggregate logs. 
-- JSON detection and rejection: JSON (structured) logs will never be aggregated. 
+- `enable_datetime_detection`: This configures automatic datetime aggregation. Logs beginning with a datetime format will be used to aggregate logs. 
+- `enable_json_detection`: This configures JSON detection and rejection. JSON-structured logs will never be aggregated. 
 
-You can disable these features with:
+You can disable these features by setting the following to `false` in your configuration file or in you environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -72,7 +72,7 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_DETECTION=false
 
 ### Enable multi-line aggregation per integration
 
-You can enable or disable the feature for specific log configurations:
+You can enable or disable multi-line aggregation for a specific integration's log collection:
 
 ```yaml
 logs:
@@ -87,7 +87,7 @@ logs:
 
 Auto multi-line detection uses a fuzzy algorithm to detect *any* datetime format that occurs in the first 60 bytes of a log line. In order to prevent false positives, the algorithm requires enough context to consider a datetime format a match. 
 
-Rule of thumb: Your datetime format should include both a date and time component to be detected. 
+Your datetime format should include both a date and time component to be detected. 
 
 Examples of formats that are long enough to be detected:
 ```
@@ -107,13 +107,15 @@ Examples of formats that do not have enough context to be detected:
 
 ## Custom Pattern Configuration
 
-If datetime aggregation isn't sufficient, or your format is too short to be detected automatically, you can customize the feature in two ways:
+If datetime aggregation is not sufficient, or if your format is too short to be detected automatically, you can customize the feature in two ways:
+- [Custom Samples](#custom-samples)
+- [Regex Patterns](#regex-patterns) 
 
 ### Custom Samples
 
-A custom sample is a sample of a log you want to aggregate on. For example: If you want to aggregate a stack trace, the first line of the stack trace would be good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
+A custom sample is a sample of a log on which you want to aggregate. For example, if you want to aggregate a stack trace, the first line of the stack trace would be good sample to provide. Custom samples are an easier way to aggregate logs than regex patterns. 
 
-Configure custom samples:
+To configure custom samples, you can use the `logs_config` in your `datadog.yaml` file or set an environment variable. In the following example, the multi-line detection is looking for the sample `"SEVERE Main main Exception occurred"`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -151,14 +153,14 @@ java.lang.Exception: Something bad happened!
 Custom samples tokenize the first 60 bytes of a log line and the provided sample. The tokens are compared linearly:
 - Tokens include: words and their length, whitespace, numbers and their length, special characters, and datetime components.
 - 75% of tokens must match in order for the sample to match by default.
-- Works best with stable log formats (ex - most logs start with a similar prefix)
+- Works best with stable log formats where most logs start with a similar prefix
 - Use regex for complex matching needs
 
 ### Regex Patterns
 
-Regex patterns work similarly to a `multi_line` rule. If the pattern matches the log, it is used for aggregation. 
+Regex patterns work similarly to a `multi_line` rule. If the regex pattern matches the log, it is used for aggregation. 
 
-Configure custom regex patterns:
+To configure custom regex patterns, you can use the `logs_config` in your `datadog.yaml`  file or set an environment variable. 
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
