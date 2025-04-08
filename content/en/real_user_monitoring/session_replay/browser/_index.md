@@ -81,7 +81,7 @@ To force Session Replay recording for the rest of the current session, call `sta
 
 When using the force option, the session is upgraded to a replayed session for the remainder of its duration, regardless of its initial sampling decision.
 
-<div class="alert alert-warning">The force option only upgrades an existing session to a replayed one if it is already being sampled. In other words, if sampling hasn't started yet, using the force option won't initiate one, and no replay will be recorded.</div>
+<div class="alert alert-warning">The force option only upgrades an existing session to a replayed one if it is already being sampled. In other words, if sampling hasn't started yet, using the force option does not initiate one, and no replay is recorded.</div>
 
 ## Disable Session Replay
 
