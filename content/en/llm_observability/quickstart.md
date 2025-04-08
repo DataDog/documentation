@@ -176,7 +176,7 @@ def guardrail(req):
       # scan for sensitive data
     response = client.chat.completions.create(
       model="gpt-3.5-turbo",
-      content=[
+      messages=[
         {"role": "system", "content": make_system_prompt(context)},
         {"role": "user", "content": prompt}
       ]
@@ -238,7 +238,7 @@ app.post('/chat', async (req, res) => {
   });
   const response = await client.chat.completions.create({
     model: 'gpt-3.5-turbo',
-    content: [
+    messages: [
       { role: 'system', content: makeSystemPrompt(context) },
       { role: 'user', content: prompt }
     ]
