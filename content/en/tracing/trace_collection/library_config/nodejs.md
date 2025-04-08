@@ -77,17 +77,6 @@ Accepts a comma-delimited list of case-insensitive HTTP headers optionally mappe
   - If the **Request/Response** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br>
   - If the **Request/Response** has a header `Request-ID`, its value is applied as tag `http.request.headers.Request-ID` for requests and `http.response.headers.Request-ID` for responses.
 
-`DD_TRACE_SAMPLE_RATE`
-: **Configuration**: `sampleRate`<br>
-**Default**: Defers the decision to the Agent.<br>
-Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and the backend.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
-`DD_TRACE_SAMPLING_RULES`
-: **Configuration**: `samplingRules`<br>
-**Default**: `[]`<br>
-Sampling rules to apply to priority sampling. A JSON array of objects. Each object must have a `sample_rate` value between 0.0 and 1.0 (inclusive). Each rule has optional `name` and `service` fields, which are regex strings to match against a trace's `service` and `name`. Rules are applied in configured order to determine the trace's sample rate. If omitted, the tracer defers to the Agent to dynamically adjust sample rate across all traces.
-
 `DD_SERVICE_MAPPING`
 : **Configuration**: `serviceMapping`<br>
 **Default**: N/A<br>

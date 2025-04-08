@@ -65,21 +65,6 @@ If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` t
 **Default**: `200` <br>
 Maximum number of traces allowed to be submitted per second.
 
-`DD_TRACE_SAMPLE_RATE`
-: **Since**: 0.1.0 <br>
-**Default**: The Datadog Agent default rate or `1.0`. <br>
-Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`. <br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.
-
-`DD_TRACE_SAMPLING_RULES`
-: **Since**: v0.1.0 <br>
-**Default**: `null` <br>
-**Examples:**<br>
-Set the sample rate to 20%: `[{"sample_rate": 0.2}]` <br>
-Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br><br>
-A JSON array of objects. Each object must have a `sample_rate`, and the `name` and `service` fields are optional. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. <br>
-For more information, see [Ingestion Mechanisms][2].<br>
-
 `DD_SPAN_SAMPLING_RULES`
 : **Version**: v0.1.0 <br>
 **Default**: `null`<br>

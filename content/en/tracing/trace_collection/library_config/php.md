@@ -274,12 +274,6 @@ Works for Linux. Set to `true` to retain capabilities on Datadog background thre
 **Default**: `true`<br>
 Enable route-based naming for HTTP server requests. Set to `true` to use the integration-specific root span's resource name format. When `false`, the HTTP method and path are used instead. Added in version `0.89.0`.
 
-`DD_TRACE_SAMPLE_RATE`
-: **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `-1`<br>
-The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.<br>
-**Note**: `DD_TRACE_SAMPLE_RATE` is deprecated in favor of `DD_TRACE_SAMPLING_RULES`.<br>
-
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
 **Default**: `0`<br>
@@ -331,16 +325,6 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
-
-`DD_TRACE_SAMPLING_RULES`
-: **INI**: `datadog.trace.sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
-
-`DD_TRACE_SAMPLING_RULES_FORMAT`
-: **INI**: `datadog.trace.sampling_rules_format`<br>
-**Default**: `glob`<br>
-Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRACE_SAMPLING_RULES`. Added in version `0.98.0` and deprecated as of `1.0.0`.
 
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
