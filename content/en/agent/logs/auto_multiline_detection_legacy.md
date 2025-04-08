@@ -28,10 +28,12 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning"><strong>Important!</strong> This document is for agents older than `7.65.0` or if you have explicitly enabled the V1 implementation of auto multi-line detection. For more recent agent versions, see [Auto Multi-line Detection and Aggregation][1] </div>
+<div class="alert alert-warning"><strong>Important!</strong> This document is for agents older than `7.65.0` or if you have explicitly enabled the V1 implementation of auto multi-line detection. For more recent agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a></div>
 
 ### Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up.
+With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][1] automatically for **all** log integrations it sets up.
+
+[1]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 
 
 {{< tabs >}}
@@ -268,7 +270,3 @@ After the detection threshold is met, all future logs for that source are aggreg
 
 Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
 
-
-[1]: /agent/logs/auto_multiline_detection
-[2]: /agent/logs/auto_multiline_detection_legacy
-[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
