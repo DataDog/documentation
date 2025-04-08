@@ -397,14 +397,14 @@ Extract the list of targeted users by going to [Signals][1].
 
 <!-- screenshot -->
 
-From this list of users, you can craft a [Traces][25] query to review all the activity from targeted users. Follow this template: 
+From this list of users, you can craft a [Traces][2] query to review all the activity from targeted users. Follow this template: 
 
 `@appsec.security_activity:business_logic.users.login.* @appsec.events_data.usr.login:(<users>)` 
 
 Successful logins should be considered suspicious.
 
 [1]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A"Application%20Security"%20category%3Aaccount_takeover&product=appsec
-
+[2]: https://app.datadoghq.com/security/appsec/traces
 {{% /tab %}}
 
 {{% tab "Credential Stuffing" %}}
@@ -415,11 +415,13 @@ Start by extracting a list of suspicious IPs from the signal side panel
 
 <!-- screenshot -->
 
-From the list of IPs, you can craft a [Traces][25] query to review all the activity from suspected IPs. Follow this template:
+From the list of IPs, you can craft a [Traces][2] query to review all the activity from suspected IPs. Follow this template:
 
 `@appsec.security_activity:business_logic.users.login.* @http.client_ip:(<IPs>)`
 
 Successful logins should be considered suspicious.
+
+[2]: https://app.datadoghq.com/security/appsec/traces
 
 {{% /tab %}}
 
