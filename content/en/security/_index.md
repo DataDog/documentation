@@ -72,6 +72,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/"
     tag: "Blog"
     text: "Cloud security research and guide roundup: DevSecOps, threat detection, and AI"
+  - link: "https://www.datadoghq.com/blog/key-security-metrics/"
+    tag: "Blog"
+    text: "Key metrics for measuring your organization's security posture"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+    tag: "Blog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
 cascade:
     algolia:
         rank: 70

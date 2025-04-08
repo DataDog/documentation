@@ -13708,6 +13708,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13726,12 +13730,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true
@@ -20552,6 +20558,11 @@ components:
             Plus over all hours in the current date for the given org.
           format: int64
           type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_error_events_sum:
           description: Shows the sum of all Error Tracking error events over all hours
             in the current date for the given org.
@@ -21435,6 +21446,11 @@ components:
         eph_infra_host_proplus_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         error_tracking_error_events_sum:
@@ -22325,6 +22341,11 @@ components:
         eph_infra_host_proplus_agg_sum:
           description: Shows the sum of all ephemeral infrastructure hosts for Pro
             Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current month for all organizations.
           format: int64
           type: integer
         error_tracking_error_events_agg_sum:

@@ -3,4 +3,4 @@ description: Personaliza cómo se agrupan los tramos (spans) con errores en inci
 title: Agrupación personalizada
 ---
 
-{{< include-markdown "error_tracking/custom_grouping" >}}
+{{< include-markdown "error_tracking/error_grouping" >}}

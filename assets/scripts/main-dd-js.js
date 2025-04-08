@@ -19,6 +19,7 @@ import './components/code-languages';
 import './components/bootstrap-dropdown-custom';
 import './components/navbar'; // should move this to websites-modules
 import './components/mobile-nav'; // should move this to websites-modules
+import './components/accordion-auto-open';
 
 // Event handlers
 document.querySelectorAll('.sign-up-trigger').forEach(item => {

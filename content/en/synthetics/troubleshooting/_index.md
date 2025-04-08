@@ -147,6 +147,12 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 If there are security checks during application startup, such as verifying if USB debugging is enabled, Datadog recommends uploading a version of the application that does not contain these checks. 
 
+### Ensure proper app functioning during test recording and execution
+
+If certain features of your iOS app are not functioning as expected during test recording or test execution, it could be a result of the app resigning process. This resigning process is required so that mobile devices can trust the provided application. Issues with the resigning process may cause essential iOS entitlements to be removed (such as access to Contacts, Camera, Keychain, Photos, Health Kit, Home Kit, and so on).
+
+To minimize the risk of entitlement-related issues, and for improved compatibility, Datadog recommends distributing your iOS app using Ad Hoc or Development provisioning profiles.
+
 ## Private locations
 
 {{< tabs >}}
@@ -163,6 +169,22 @@ This could uncover a resource exhaustion issue on your private locations workers
 ### My browser tests are taking too long to run
 
 Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
+
+### Requirements for browser tests running on private location
+
+Browser tests require elevated privileges to spawn (when the test execution starts) and kill (when the test execution ends) the browser process. If your private location is configured with a security context that restricts elevated privileges, then the private location emits error logs when the browser test is executed. The reported logs vary based on the browser that is selected for test execution. Tests executed on Chrome/Edge report the following error:
+```
+Critical error in startBrowser: Failed to launch the browser process!
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
+
+Firefox reports the following error:
+```
+Impossible to spawn Firefox: binary is not a Firefox executable
+sudo: The "no new privileges" flag is set, which prevents sudo from running as root.
+sudo: If sudo is running in a container, you may need to adjust the container configuration to disable the flag.
+```
 
 ### Requirements for ICMP tests running on private location
 
