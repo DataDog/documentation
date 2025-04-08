@@ -6975,7 +6975,7 @@ menu:
       identifier: rum_frustration_signals
       weight: 109
     - name: Error Tracking
-      url: real_user_monitoring/error_tracking/browser/
+      url: real_user_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
       weight: 110
