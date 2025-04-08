@@ -66,6 +66,8 @@ The following configuration options behave consistently across the latest versio
 **Caveats**: Not supported in Java, Node.js, Ruby, Python<br>
 **Description**: Specifies the directory where tracer log files should be routed. If the directory does not exist, the SDK falls back to its default diagnostic logging method.
 
+### Metrics
+
 `DD_RUNTIME_METRICS_ENABLED`
 : **Default**: `false` <br>
 **Supported Input**: Boolean (`true`/`false`) <br>
