@@ -141,8 +141,8 @@ The AKS Kubelet certificate requires changing the Kubelet host to the `spec.node
 ### Without TLS verification
 
 In some clusters, DNS resolution for `spec.nodeName` inside Pods does not work in AKS. This affects:
- - all AKS Windows nodes, as well as 
- - Linux nodes when the cluster is set up in a Virtual Network using custom DNS. 
+ - Windows nodes
+ - Linux nodes, when the cluster is set up in a virtual network using custom DNS
  
 In this case, use the AKS configuration provided below to set `tlsVerify: false` and remove any settings for the Kubelet host path (which defaults to `status.hostIP`). **Do not set the Kubelet host path and `tlsVerify: false` in the same configuration**.
 
