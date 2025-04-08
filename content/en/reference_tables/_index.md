@@ -206,15 +206,16 @@ To view Reference Tables, users require the `reference_tables_read` permission. 
 ### Granular access controls
 Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit it.
 
+{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports granular access permissions on a table" style="width:100%;">}}
+
 1. Click on a table to view its detail page.
 2. Click the cog icon in the upper right.
 3. Select **Permissions**.
 4. Click **Restrict Access**.
-5. The dialog box updates to show that members of your organization will have **Viewer** access by default. Members can also be set to have **No Access** by default.
-6. Use the drop-down to select one or more teams, roles, or users whose access you would like to update.
-7. Click **Add**.
-8. Select either **Editor** or **Viewer**.
-9. Click **Save**.
+5. Use the drop-down to select one or more teams, roles, or users whose access you would like to update.
+6. Click **Add**.
+7. Select either **Editor** or **Viewer**.
+8. Click **Save**.
 
 ## Further Reading
 
