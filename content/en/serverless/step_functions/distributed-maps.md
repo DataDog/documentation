@@ -13,9 +13,9 @@ Your State Machine definition must use [JSONata][4] as the query language. To en
 
 On the Distributed Map State, set `_datadog` in the `BatchInput` field as follows:
 
-{{< highlight json "hl_lines=3-3" >}}
+{{< highlight json "hl_lines=4-4" >}}
 "ItemBatcher": {
-  "MaxItemsPerBatch": n,
+  "MaxItemsPerBatch": 100,
   "BatchInput": {
     "_datadog": "{% ($execInput := $states.context.Execution.Input; $hasDatadogTraceId := $exists($execInput._datadog.`x-datadog-trace-id`); $hasDatadogRootExecutionId := $exists($execInput._datadog.RootExecutionId); $ddTraceContext := $hasDatadogTraceId ? {'x-datadog-trace-id': $execInput._datadog.`x-datadog-trace-id`, 'x-datadog-tags': $execInput._datadog.`x-datadog-tags`} : {'RootExecutionId': $hasDatadogRootExecutionId ?  $execInput._datadog.RootExecutionId : $states.context.Execution.Id}; $merge([$ddTraceContext, {'serverless-version': 'v1', 'timestamp': $millis()}])) %}"
   }
@@ -23,13 +23,13 @@ On the Distributed Map State, set `_datadog` in the `BatchInput` field as follow
 {{< /highlight >}}
 
 ## Limitations
-- Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
+Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
 
 ## Troubleshooting
-- If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [trace merging][3] guide. You can also use the `fan_out_children_trace_id` span attribute in the Distributed Map span to look for the child workflow traces.
+If trace merging is broken because there is another upstream service, ensure the upstream setup is correct according to the [trace merging guide][3].
 
 
 [1]: https://docs.aws.amazon.com/step-functions/latest/dg/state-map-distributed.html
 [2]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-itembatcher.html?icmpid=docs_console_unmapped
-[3]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-step-functions-traces-with-downstream-lambda-traces
+[3]: /serverless/step_functions/merge-step-functions-lambda
 [4]: https://docs.aws.amazon.com/step-functions/latest/dg/transforming-data.html
