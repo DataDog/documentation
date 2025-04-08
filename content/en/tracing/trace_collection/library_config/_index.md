@@ -40,6 +40,49 @@ The following configuration options behave consistently across the latest versio
 **Supported Input**: Boolean <br>
 **Description**: Enables or disables sending traces from the application.
 
+`DD_TRACE_SAMPLE_RATE`
+: **Default**: `-1`. If unset, the tracer defers to the Datadog Agent to control sample rate. <br>
+**Supported Input**: A float between 0.0 and 1.0, inclusive.  <br>
+**Caveats**: This variable is deprecated in favor of `DD_TRACE_SAMPLING_RULES`, which provides more flexible and granular sampling control.  <br>
+**Description**:  Controls the trace ingestion sample rate between the Datadog Agent and the backend. Must be a float between 0.0 and 1.0, where 1.0 means all traces are sent to the backend and 0.0 means none are sent. This setting applies globally to all traces and does not support per-service or per-operation targeting.
+
+`DD_TRACE_SAMPLE_RULES`
+: **Default**: `null`. If unset or no rules match, the tracer defers to the Datadog Agent to dynamically adjust sample rate across traces.  <br>
+**Supported Input**: A JSON array of objects. <br>
+**Caveats**: Matching by `resource` and `tags` is in Preview.  <br>
+**Description**: Enables fine-grained control over trace ingestion, allowing you to target specific services, operations, resources, or tagged traces. Defined by a JSON array of objects, where each object must include a `sample_rate` between 0.0 and 1.0 (inclusive), and can optionally include fields such as `service`, `name`, `resource`, `tags`, and `max_per_second`. Objects are evaluated in the order listed; the first matching object determines the trace's sample rate. For more information, see [Ingestion Mechanisms][4]. <br>
+**Examples**: <br>
+  - Sample 20% of all traces: <br>
+
+    ```
+    [{"sample_rate": 0.2}]
+    ```
+
+  - Sample 10% of traces where the service name starts with `a` and the operation name is `b`, and 20% of all others: <br>
+
+    ```
+    [{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]
+    ```
+
+  - Sample 40% of traces with the resource name `HTTP GET`:
+
+    ```
+    [{"resource": "HTTP GET", "sample_rate": 0.4}]
+    ```
+
+  - Sample 100% of traces with the tag `tier=premium`:
+
+    ```
+    [{"tags": {"tier": "premium"}, "sample_rate": 1}]
+    ```
+
+  - Sample up to 50 traces per second at a 50% rate for the service `my-service` and operation name `http.request`:
+
+    ```
+    [{"service": "my-service", "name": "http.request", "sample_rate": 0.5, "max_per_second": 50}]
+    ```
+
+
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **Default**: <br>
     ```
@@ -120,3 +163,4 @@ The following configuration options behave consistently across the latest versio
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
+[4]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
