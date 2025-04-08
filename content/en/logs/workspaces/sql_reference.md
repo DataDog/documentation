@@ -102,6 +102,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `cardinality(array a)`                           | integer                               | Returns the number of elements in the array, or 0 if the array is empty.    |
 | `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurence of the value found in the array.   |
 | `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `array_agg(expression e)`                        | array of input type                   | Create an array by concatenating the input values. Ordering is not deterministic |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -374,6 +375,22 @@ FROM
 {{< code-block lang="sql" >}}
 SELECT 
   STRING_TO_ARRAY('a,b,c,d,e,f', ',')
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT 
+  ARRAY_AGG(x) arr1, 
+  ARRAY_AGG(all x) arr2, 
+  ARRAY_AGG(distinct x) arr3, 
+  ARRAY_AGG(y) arr4
+FROM (
+    SELECT 1 x, 4.1 y
+    UNION ALL
+    SELECT 2 x, 5.1 y
+    UNION ALL
+    SELECT 2 x, 6.1 y
+);
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
