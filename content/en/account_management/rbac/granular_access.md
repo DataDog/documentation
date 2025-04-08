@@ -24,6 +24,7 @@ Use the different principals to control access patterns in your organization and
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 
 ### Elevate access to individual resources
@@ -41,3 +42,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [9]: /synthetics/browser_tests/#permissions
 [10]: /service_management/case_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
+[12]: /reference_tables/#permissions
