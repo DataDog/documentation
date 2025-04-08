@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-service-management/"
     tag: "Blog"
     text: "Ensure high service availability with Datadog Service Management"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+    tag: "Blog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
 ---
 
 

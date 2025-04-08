@@ -10,6 +10,9 @@ further_reading:
 - link: "/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/"
   tag: "Documentation"
   text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
+- link: "/continuous_integration/guides/use_ci_jobs_failure_analysis/"
+  tag: "Documentation"
+  text: "Use CI jobs failure analysis to identify root causes in failed jobs"
 ---
 
 {{< site-region region="gov" >}}
@@ -54,12 +57,6 @@ Get insights on the selected pipeline such as total and failed executions over t
 
 The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
-### View unified pipeline trace
-
-To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
-
-The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
-
 ### Highlight critical path
 
 To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
@@ -89,11 +86,11 @@ Job log collection is supported for the following providers:
 - [GitLab][4]
 - [Jenkins][5]
 
-#### AI-generated log summaries
+### CI jobs failure analysis based on relevant logs
 
-<div class="alert alert-info">AI-generated log summaries are in Preview. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
+CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
-Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
+Use [CI jobs failure analysis][12] to identify the most common root causes of failure for your CI jobs.
 
 ## Further reading
 
@@ -109,3 +106,4 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [9]: /continuous_integration/pipelines/azure/#enable-job-log-collection
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
+[12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

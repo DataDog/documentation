@@ -34,6 +34,8 @@ This page lists data collected by the Datadog Agent when deployed on a Kubernete
 
 {{< get-metrics-from-git "kubernetes" >}}
 
+**Note**: For more information about `kubernetes.cpu.*` metrics, see [Discrepancies in `kubernetes.cpu.*` and `container.cpu.*` metrics][8].
+
 ### Kubelet
 
 For more information, see the documentation for the [Kubelet][1] integration.
@@ -179,3 +181,4 @@ For more information, see the documentation for the [Kubernetes state metrics co
 [5]: /integrations/kube_scheduler
 [6]: /integrations/kubernetes_state_core/
 [7]: /agent/troubleshooting/windows_containers/#limited-metrics-for-windows-deployments
+[8]: /containers/faq/cpu-usage-metrics

@@ -652,8 +652,8 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
-        `app-builder-app`, `connection`, `connection-group`.'
+        `dashboard`, `integration-account`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -702,10 +702,24 @@ components:
       required: true
       schema:
         type: string
+    RumApplicationIDParameter:
+      description: RUM application ID.
+      in: path
+      name: app_id
+      required: true
+      schema:
+        type: string
     RumMetricIDParameter:
       description: The name of the rum-based metric.
       in: path
       name: metric_id
+      required: true
+      schema:
+        type: string
+    RumRetentionFilterIDParameter:
+      description: Retention filter ID.
+      in: path
+      name: rf_id
       required: true
       schema:
         type: string
@@ -1108,7 +1122,7 @@ components:
       x-enum-varnames:
       - API_KEYS
     APITrigger:
-      description: Trigger a workflow VIA an API. The workflow must be published.
+      description: Trigger a workflow from an API request. The workflow must be published.
       properties:
         rateLimit:
           $ref: '#/components/schemas/TriggerRateLimit'
@@ -2326,7 +2340,7 @@ components:
       description: Schema for an App-based trigger.
       properties:
         appTrigger:
-          description: Trigger a workflow VIA an App.
+          description: Trigger a workflow from an App.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -2887,13 +2901,13 @@ components:
       enum:
       - attack_attempt
       - business_logic
-      - security_responses
+      - security_response
       example: business_logic
       type: string
       x-enum-varnames:
       - ATTACK_ATTEMPT
       - BUSINESS_LOGIC
-      - SECURITY_RESPONSES
+      - SECURITY_RESPONSE
     ApplicationSecurityWafCustomRuleType:
       default: custom_rule
       description: The type of the resource. The value should always be `custom_rule`.
@@ -4173,6 +4187,8 @@ components:
             of EC2 instances, lambda functions, AMI, ECR, RDS and S3 buckets.
           example: arn:aws:ec2:us-east-1:727000456123:instance/i-0eabb50529b67a1ba
           type: string
+      required:
+      - arn
       type: object
     AwsOnDemandCreateData:
       description: Object for a single AWS on demand task.
@@ -4270,6 +4286,11 @@ components:
           description: Indicates if scanning for vulnerabilities in hosts is enabled.
           example: true
           type: boolean
+      required:
+      - lambda
+      - sensitive_data
+      - vuln_containers_os
+      - vuln_host_os
       type: object
     AwsScanOptionsCreateData:
       description: Object for the scan options of a single AWS account.
@@ -6559,7 +6580,7 @@ components:
       - IN_PROGRESS
       - CLOSED
     CaseTrigger:
-      description: Trigger a workflow VIA a Case. For automatic triggering a handle
+      description: Trigger a workflow from a Case. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -6796,7 +6817,7 @@ components:
       description: Schema for a Change Event-based trigger.
       properties:
         changeEventTrigger:
-          description: Trigger a workflow VIA a Change Event.
+          description: Trigger a workflow from a Change Event.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10568,7 +10589,7 @@ components:
       description: Schema for a Dashboard-based trigger.
       properties:
         dashboardTrigger:
-          description: Trigger a workflow VIA a Dashboard.
+          description: Trigger a workflow from a Dashboard.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -10656,6 +10677,17 @@ components:
       type: string
       x-enum-varnames:
       - DATATRANSFORM
+    DatabaseMonitoringTriggerWrapper:
+      description: Schema for a Database Monitoring-based trigger.
+      properties:
+        databaseMonitoringTrigger:
+          description: Trigger a workflow from Database Monitoring.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - databaseMonitoringTrigger
+      type: object
     Date:
       description: Date as Unix timestamp in milliseconds.
       example: 1722439510282
@@ -11788,9 +11820,15 @@ components:
           description: Incident ID.
           type: string
         type:
-          description: Incident description.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedIncidentType'
       type: object
+    EntityResponseIncludedIncidentType:
+      description: Incident description.
+      enum:
+      - incident
+      type: string
+      x-enum-varnames:
+      - INCIDENT
     EntityResponseIncludedOncall:
       description: Included oncall.
       properties:
@@ -11800,9 +11838,15 @@ components:
           description: Oncall ID.
           type: string
         type:
-          description: Oncall type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedOncallType'
       type: object
+    EntityResponseIncludedOncallType:
+      description: Oncall type.
+      enum:
+      - oncall
+      type: string
+      x-enum-varnames:
+      - ONCALL
     EntityResponseIncludedRawSchema:
       description: Included raw schema.
       properties:
@@ -11812,8 +11856,7 @@ components:
           description: Raw schema ID.
           type: string
         type:
-          description: Raw schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRawSchemaType'
       type: object
     EntityResponseIncludedRawSchemaAttributes:
       description: Included raw schema attributes.
@@ -11822,6 +11865,13 @@ components:
           description: Schema from user input in base64 encoding.
           type: string
       type: object
+    EntityResponseIncludedRawSchemaType:
+      description: Raw schema type.
+      enum:
+      - rawSchema
+      type: string
+      x-enum-varnames:
+      - RAW_SCHEMA
     EntityResponseIncludedRelatedEntity:
       description: Included related entity.
       properties:
@@ -11833,8 +11883,7 @@ components:
         meta:
           $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityMeta'
         type:
-          description: Related entity.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedRelatedEntityType'
       type: object
     EntityResponseIncludedRelatedEntityAttributes:
       description: Related entity attributes.
@@ -11870,6 +11919,13 @@ components:
           description: Entity relation source.
           type: string
       type: object
+    EntityResponseIncludedRelatedEntityType:
+      description: Related entity.
+      enum:
+      - relatedEntity
+      type: string
+      x-enum-varnames:
+      - RELATED_ENTITY
     EntityResponseIncludedRelatedIncidentAttributes:
       description: Incident attributes.
       properties:
@@ -11927,8 +11983,7 @@ components:
           description: Entity ID.
           type: string
         type:
-          description: Schema type.
-          type: string
+          $ref: '#/components/schemas/EntityResponseIncludedSchemaType'
       type: object
     EntityResponseIncludedSchemaAttributes:
       description: Included schema.
@@ -11936,6 +11991,13 @@ components:
         schema:
           $ref: '#/components/schemas/EntityV3'
       type: object
+    EntityResponseIncludedSchemaType:
+      description: Schema type.
+      enum:
+      - schema
+      type: string
+      x-enum-varnames:
+      - SCHEMA
     EntityResponseMeta:
       description: Entity metadata.
       properties:
@@ -12245,6 +12307,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Datastore Spec object.
       properties:
+        componentOf:
+          description: A list of components the datastore is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the datastore.
           minLength: 1
@@ -12445,6 +12512,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Queue Spec object.
       properties:
+        componentOf:
+          description: A list of components the queue is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the queue.
           minLength: 1
@@ -12511,6 +12583,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Service Spec object.
       properties:
+        componentOf:
+          description: A list of components the service is a part of
+          items:
+            type: string
+          type: array
         dependsOn:
           description: A list of components the service depends on.
           items:
@@ -14460,9 +14537,9 @@ components:
       example: https://github.com/organization/example-repository
       type: string
     GithubWebhookTrigger:
-      description: Trigger a workflow VIA GitHub webhook. To trigger a workflow from
-        GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings, set
-        the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
+      description: Trigger a workflow from a GitHub webhook. To trigger a workflow
+        from GitHub, you must set a `webhookSecret`. In your GitHub Webhook Settings,
+        set the Payload URL to "base_url"/api/v2/workflows/"workflow_id"/webhook?orgId="org_id",
         select application/json for the content type, and be highly recommend enabling
         SSL verification for security. The workflow must be published.
       properties:
@@ -14843,6 +14920,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -16775,7 +16854,7 @@ components:
       x-enum-varnames:
       - INCIDENT_TODOS
     IncidentTrigger:
-      description: Trigger a workflow VIA an Incident. For automatic triggering a
+      description: Trigger a workflow from an Incident. For automatic triggering a
         handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -18802,6 +18881,8 @@ components:
         path:
           description: The archive path.
           type: string
+        storage_class:
+          $ref: '#/components/schemas/LogsArchiveStorageClassS3Type'
         type:
           $ref: '#/components/schemas/LogsArchiveDestinationS3Type'
       required:
@@ -18945,6 +19026,23 @@ components:
       - WORKING
       - FAILING
       - WORKING_AUTH_LEGACY
+    LogsArchiveStorageClassS3Type:
+      default: STANDARD
+      description: The storage class where the archive will be stored.
+      enum:
+      - STANDARD
+      - STANDARD_IA
+      - ONEZONE_IA
+      - INTELLIGENT_TIERING
+      - GLACIER_IR
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - STANDARD
+      - STANDARD_IA
+      - ONEZONE_IA
+      - INTELLIGENT_TIERING
+      - GLACIER_IR
     LogsArchives:
       description: The available archives.
       properties:
@@ -19390,10 +19488,10 @@ components:
           type: string
       type: object
     LogsQueryOptions:
+      deprecated: true
       description: 'Global query options that are used during the query.
 
-        Note: you should supply either timezone or time offset, but not both. Otherwise,
-        the query will fail.'
+        Note: These fields are currently deprecated and do not affect the query results.'
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
@@ -21502,7 +21600,7 @@ components:
           $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
       type: object
     MonitorTrigger:
-      description: Trigger a workflow VIA a Monitor. For automatic triggering a handle
+      description: Trigger a workflow from a Monitor. For automatic triggering a handle
         must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -21640,6 +21738,17 @@ components:
         meta:
           $ref: '#/components/schemas/MonthlyCostAttributionMeta'
       type: object
+    NotebookTriggerWrapper:
+      description: Schema for a Notebook-based trigger.
+      properties:
+        notebookTrigger:
+          description: Trigger a workflow from a Notebook.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - notebookTrigger
+      type: object
     NotificationRule:
       description: 'Notification rules allow full control over notifications generated
         by the various Datadog security products.
@@ -21765,6 +21874,668 @@ components:
       required:
       - id
       - type
+      type: object
+    ObservabilityPipeline:
+      description: Top-level schema representing a pipeline.
+      properties:
+        data:
+          $ref: '#/components/schemas/ObservabilityPipelineData'
+      required:
+      - data
+      type: object
+    ObservabilityPipelineAddFieldsProcessor:
+      description: The `add_fields` processor adds static key-value fields to logs.
+      properties:
+        fields:
+          description: A list of static fields (key-value pairs) that is added to
+            each log event processed by this component.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineFieldValue'
+          type: array
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: add-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineAddFieldsProcessorType:
+      default: add_fields
+      description: The processor type. The value should always be `add_fields`.
+      enum:
+      - add_fields
+      example: add_fields
+      type: string
+      x-enum-varnames:
+      - ADD_FIELDS
+    ObservabilityPipelineConfig:
+      description: Specifies the pipeline's configuration, including its sources,
+        processors, and destinations.
+      properties:
+        destinations:
+          description: A list of destination components where processed logs are sent.
+          example:
+          - id: datadog-logs-destination
+            inputs:
+            - filter-processor
+            type: datadog_logs
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
+          type: array
+        processors:
+          description: A list of processors that transform or enrich log data.
+          example:
+          - id: filter-processor
+            include: service:my-service
+            inputs:
+            - datadog-agent-source
+            type: filter
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+          type: array
+        sources:
+          description: A list of configured data sources for the pipeline.
+          example:
+          - id: datadog-agent-source
+            type: datadog_agent
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigSourceItem'
+          type: array
+      required:
+      - sources
+      - processors
+      - destinations
+      type: object
+    ObservabilityPipelineConfigDestinationItem:
+      description: A destination for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+    ObservabilityPipelineConfigProcessorItem:
+      description: A processor for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+    ObservabilityPipelineConfigSourceItem:
+      description: A data source for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
+    ObservabilityPipelineCreateRequest:
+      description: Top-level schema representing a pipeline.
+      properties:
+        data:
+          $ref: '#/components/schemas/ObservabilityPipelineCreateRequestData'
+      required:
+      - data
+      type: object
+    ObservabilityPipelineCreateRequestData:
+      description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ObservabilityPipelineDataAttributes'
+        type:
+          default: pipelines
+          description: The resource type identifier. For pipeline resources, this
+            should always be set to `pipelines`.
+          example: pipelines
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    ObservabilityPipelineData:
+      description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ObservabilityPipelineDataAttributes'
+        id:
+          description: Unique identifier for the pipeline.
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          type: string
+        type:
+          default: pipelines
+          description: The resource type identifier. For pipeline resources, this
+            should always be set to `pipelines`.
+          example: pipelines
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ObservabilityPipelineDataAttributes:
+      description: "Defines the pipeline\u2019s name and its components (sources,
+        processors, and destinations)."
+      properties:
+        config:
+          $ref: '#/components/schemas/ObservabilityPipelineConfig'
+        name:
+          description: Name of the pipeline.
+          example: Main Observability Pipeline
+          type: string
+      required:
+      - name
+      - config
+      type: object
+    ObservabilityPipelineDatadogAgentSource:
+      description: The `datadog_agent` source collects logs from the Datadog Agent.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: datadog-agent-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineDatadogAgentSourceType:
+      default: datadog_agent
+      description: The source type. The value should always be `datadog_agent`.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
+    ObservabilityPipelineDatadogLogsDestination:
+      description: The `datadog_logs` destination forwards logs to Datadog Log Management.
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: datadog-logs-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineDatadogLogsDestinationType:
+      default: datadog_logs
+      description: The destination type. The value should always be `datadog_logs`.
+      enum:
+      - datadog_logs
+      example: datadog_logs
+      type: string
+      x-enum-varnames:
+      - DATADOG_LOGS
+    ObservabilityPipelineFieldValue:
+      description: Represents a static key-value pair used in various processors.
+      properties:
+        name:
+          description: The field name.
+          example: field_name
+          type: string
+        value:
+          description: The field value.
+          example: field_value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineFilterProcessor:
+      description: The `filter` processor allows conditional processing of logs based
+        on a Datadog search query. Logs that match the `include` query are passed
+        through; others are discarded.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: filter-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs should
+            pass through the filter. Logs that match this query continue to downstream
+            components; others are dropped.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineFilterProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      type: object
+    ObservabilityPipelineFilterProcessorType:
+      default: filter
+      description: The processor type. The value should always be `filter`.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineKafkaSource:
+      description: The `kafka` source ingests data from Apache Kafka topics.
+      properties:
+        group_id:
+          description: Consumer group ID used by the Kafka client.
+          example: consumer-group-0
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: kafka-source
+          type: string
+        librdkafka_options:
+          description: Optional list of advanced Kafka client configuration options,
+            defined as key-value pairs.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceLibrdkafkaOption'
+          type: array
+        sasl:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceSasl'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topics:
+          description: A list of Kafka topic names to subscribe to. The source ingests
+            messages from each topic specified.
+          example:
+          - topic1
+          - topic2
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceType'
+      required:
+      - id
+      - type
+      - group_id
+      - topics
+      type: object
+    ObservabilityPipelineKafkaSourceLibrdkafkaOption:
+      description: Represents a key-value pair used to configure low-level `librdkafka`
+        client options for Kafka sources, such as timeouts, buffer sizes, and security
+        settings.
+      properties:
+        name:
+          description: The name of the `librdkafka` configuration option to set.
+          example: fetch.message.max.bytes
+          type: string
+        value:
+          description: The value assigned to the specified `librdkafka` configuration
+            option.
+          example: '1048576'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineKafkaSourceSasl:
+      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/ObservabilityPipelinePipelineKafkaSourceSaslMechanism'
+      type: object
+    ObservabilityPipelineKafkaSourceType:
+      default: kafka
+      description: The source type. The value should always be `kafka`.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
+    ObservabilityPipelineParseJSONProcessor:
+      description: The `parse_json` processor extracts JSON from a specified field
+        and flattens it into the event. This is useful when logs contain embedded
+        JSON as a string.
+      properties:
+        field:
+          description: The name of the log field that contains a JSON string.
+          example: message
+          type: string
+        id:
+          description: A unique identifier for this component. Used to reference this
+            component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: parse-json-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - field
+      - inputs
+      type: object
+    ObservabilityPipelineParseJSONProcessorType:
+      default: parse_json
+      description: The processor type. The value should always be `parse_json`.
+      enum:
+      - parse_json
+      example: parse_json
+      type: string
+      x-enum-varnames:
+      - PARSE_JSON
+    ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
+      description: SASL mechanism used for Kafka authentication.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
+    ObservabilityPipelineQuotaProcessor:
+      description: The Quota Processor measures logging traffic for logs that match
+        a specified filter. When the configured daily quota is met, the processor
+        can drop or alert.
+      properties:
+        drop_events:
+          description: If set to `true`, logs that matched the quota filter and sent
+            after the quota has been met are dropped; only logs that did not match
+            the filter query continue through the pipeline.
+          example: false
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: quota-processor
+          type: string
+        ignore_when_missing_partitions:
+          description: If `true`, the processor skips quota checks when partition
+            fields are missing from the logs.
+          type: boolean
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        limit:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
+        name:
+          description: Name for identifying the processor.
+          example: MyPipelineQuotaProcessor
+          type: string
+        overrides:
+          description: A list of alternate quota rules that apply to specific sets
+            of events, identified by matching field values. Each override can define
+            a custom limit.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorOverride'
+          type: array
+        partition_fields:
+          description: A list of fields used to segment log traffic for quota enforcement.
+            Quotas are tracked independently by unique combinations of these field
+            values.
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - name
+      - drop_events
+      - limit
+      - inputs
+      type: object
+    ObservabilityPipelineQuotaProcessorLimit:
+      description: The maximum amount of data or number of events allowed before the
+        quota is enforced. Can be specified in bytes or events.
+      properties:
+        enforce:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimitEnforceType'
+        limit:
+          description: The limit for quota enforcement.
+          example: 1000
+          format: int64
+          type: integer
+      required:
+      - enforce
+      - limit
+      type: object
+    ObservabilityPipelineQuotaProcessorLimitEnforceType:
+      description: Unit for quota enforcement in bytes for data size or events for
+        count.
+      enum:
+      - bytes
+      - events
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+      - EVENTS
+    ObservabilityPipelineQuotaProcessorOverride:
+      description: Defines a custom quota limit that applies to specific log events
+        based on matching field values.
+      properties:
+        fields:
+          description: A list of field matchers used to apply a specific override.
+            If an event matches all listed key-value pairs, the corresponding override
+            limit is enforced.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineFieldValue'
+          type: array
+        limit:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
+      required:
+      - fields
+      - limit
+      type: object
+    ObservabilityPipelineQuotaProcessorType:
+      default: quota
+      description: The processor type. The value should always be `quota`.
+      enum:
+      - quota
+      example: quota
+      type: string
+      x-enum-varnames:
+      - QUOTA
+    ObservabilityPipelineRemoveFieldsProcessor:
+      description: The `remove_fields` processor deletes specified fields from logs.
+      properties:
+        fields:
+          description: A list of field names to be removed from each log event.
+          example:
+          - field1
+          - field2
+          items:
+            type: string
+          type: array
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: remove-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: The `PipelineRemoveFieldsProcessor` `inputs`.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineRemoveFieldsProcessorType:
+      default: remove_fields
+      description: The processor type. The value should always be `remove_fields`.
+      enum:
+      - remove_fields
+      example: remove_fields
+      type: string
+      x-enum-varnames:
+      - REMOVE_FIELDS
+    ObservabilityPipelineRenameFieldsProcessor:
+      description: The `rename_fields` processor changes field names.
+      properties:
+        fields:
+          description: A list of rename rules specifying which fields to rename in
+            the event, what to rename them to, and whether to preserve the original
+            fields.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorField'
+          type: array
+        id:
+          description: A unique identifier for this component. Used to reference this
+            component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: rename-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineRenameFieldsProcessorField:
+      description: Defines how to rename a field in log events.
+      properties:
+        destination:
+          description: The field name to assign the renamed value to.
+          example: destination_field
+          type: string
+        preserve_source:
+          description: Indicates whether the original field, that is received from
+            the source, should be kept (`true`) or removed (`false`) after renaming.
+          example: false
+          type: boolean
+        source:
+          description: The original field name in the log event that should be renamed.
+          example: source_field
+          type: string
+      required:
+      - source
+      - destination
+      - preserve_source
+      type: object
+    ObservabilityPipelineRenameFieldsProcessorType:
+      default: rename_fields
+      description: The processor type. The value should always be `rename_fields`.
+      enum:
+      - rename_fields
+      example: rename_fields
+      type: string
+      x-enum-varnames:
+      - RENAME_FIELDS
+    ObservabilityPipelineTls:
+      description: Configuration for enabling TLS encryption.
+      properties:
+        ca_file:
+          description: "Path to the Certificate Authority (CA) file used to validate
+            the server\u2019s TLS certificate."
+          type: string
+        crt_file:
+          description: Path to the TLS client certificate file used to authenticate
+            the pipeline component with upstream or downstream services.
+          example: /path/to/cert.crt
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS client
+            certificate. Used for mutual TLS authentication.
+          type: string
+      required:
+      - crt_file
       type: object
     OktaAccount:
       description: Schema for an Okta account.
@@ -26095,6 +26866,199 @@ components:
             $ref: '#/components/schemas/RumMetricResponseData'
           type: array
       type: object
+    RumRetentionFilterAttributes:
+      description: The object describing attributes of a RUM retention filter.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      type: object
+    RumRetentionFilterCreateAttributes:
+      description: The object describing attributes of a RUM retention filter to create.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      required:
+      - event_type
+      - name
+      - sample_rate
+      type: object
+    RumRetentionFilterCreateData:
+      description: The new RUM retention filter properties to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterCreateAttributes'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - type
+      - attributes
+      type: object
+    RumRetentionFilterCreateRequest:
+      description: The RUM retention filter body to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterCreateData'
+      required:
+      - data
+      type: object
+    RumRetentionFilterData:
+      description: The RUM retention filter.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterAttributes'
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      type: object
+    RumRetentionFilterEnabled:
+      description: Whether the retention filter is enabled.
+      example: true
+      type: boolean
+    RumRetentionFilterEventType:
+      description: The type of RUM events to filter on.
+      enum:
+      - session
+      - view
+      - action
+      - error
+      - resource
+      - long_task
+      - vital
+      example: session
+      type: string
+      x-enum-varnames:
+      - SESSION
+      - VIEW
+      - ACTION
+      - ERROR
+      - RESOURCE
+      - LONG_TASK
+      - VITAL
+    RumRetentionFilterID:
+      description: ID of retention filter in UUID.
+      example: 051601eb-54a0-abc0-03f9-cc02efa18892
+      type: string
+    RumRetentionFilterQuery:
+      description: The query string for a RUM retention filter.
+      example: '@session.has_replay:true'
+      type: string
+    RumRetentionFilterResponse:
+      description: The RUM retention filter object.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterData'
+      type: object
+    RumRetentionFilterSampleRate:
+      description: The sample rate for a RUM retention filter, between 0 and 100.
+      example: 25
+      format: int64
+      maximum: 100
+      minimum: 0
+      type: integer
+    RumRetentionFilterType:
+      default: retention_filters
+      description: The type of the resource. The value should always be retention_filters.
+      enum:
+      - retention_filters
+      example: retention_filters
+      type: string
+      x-enum-varnames:
+      - RETENTION_FILTERS
+    RumRetentionFilterUpdateAttributes:
+      description: The object describing attributes of a RUM retention filter to update.
+      properties:
+        enabled:
+          $ref: '#/components/schemas/RumRetentionFilterEnabled'
+        event_type:
+          $ref: '#/components/schemas/RumRetentionFilterEventType'
+        name:
+          $ref: '#/components/schemas/RunRetentionFilterName'
+        query:
+          $ref: '#/components/schemas/RumRetentionFilterQuery'
+        sample_rate:
+          $ref: '#/components/schemas/RumRetentionFilterSampleRate'
+      type: object
+    RumRetentionFilterUpdateData:
+      description: The new RUM retention filter properties to update.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RumRetentionFilterUpdateAttributes'
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    RumRetentionFilterUpdateRequest:
+      description: The RUM retention filter body to update.
+      properties:
+        data:
+          $ref: '#/components/schemas/RumRetentionFilterUpdateData'
+      required:
+      - data
+      type: object
+    RumRetentionFiltersOrderData:
+      description: The RUM retention filter data for ordering.
+      properties:
+        id:
+          $ref: '#/components/schemas/RumRetentionFilterID'
+        type:
+          $ref: '#/components/schemas/RumRetentionFilterType'
+      required:
+      - id
+      - type
+      type: object
+    RumRetentionFiltersOrderRequest:
+      description: 'The list of RUM retention filter IDs along with their corresponding
+        type to reorder.
+
+        All retention filter IDs should be included in the list created for a RUM
+        application.'
+      properties:
+        data:
+          description: A list of RUM retention filter IDs along with type.
+          items:
+            $ref: '#/components/schemas/RumRetentionFiltersOrderData'
+          type: array
+      type: object
+    RumRetentionFiltersOrderResponse:
+      description: The list of RUM retention filter IDs along with type.
+      properties:
+        data:
+          description: A list of RUM retention filter IDs along with type.
+          items:
+            $ref: '#/components/schemas/RumRetentionFiltersOrderData'
+          type: array
+      type: object
+    RumRetentionFiltersResponse:
+      description: All RUM retention filters for a RUM application.
+      properties:
+        data:
+          description: A list of RUM retention filters.
+          items:
+            $ref: '#/components/schemas/RumRetentionFilterData'
+          type: array
+      type: object
     RunHistoricalJobRequest:
       description: Run a historical job request.
       properties:
@@ -26127,6 +27091,10 @@ components:
       type: string
       x-enum-varnames:
       - HISTORICALDETECTIONSJOBCREATE
+    RunRetentionFilterName:
+      description: The name of a RUM retention filter.
+      example: Retention filter for session
+      type: string
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -26526,7 +27494,7 @@ components:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
     ScheduleTrigger:
-      description: Trigger a workflow VIA a Schedule. The workflow must be published.
+      description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
         rruleExpression:
           description: Recurrence rule expression for scheduling.
@@ -28061,6 +29029,25 @@ components:
       x-enum-varnames:
       - TIMESTAMP_ASCENDING
       - TIMESTAMP_DESCENDING
+    SecurityMonitoringStandardDataSource:
+      default: logs
+      description: Source of events, either logs or audit trail.
+      enum:
+      - logs
+      - audit
+      - app_sec_spans
+      - spans
+      - security_runtime
+      - network
+      example: logs
+      type: string
+      x-enum-varnames:
+      - LOGS
+      - AUDIT
+      - APP_SEC_SPANS
+      - SPANS
+      - SECURITY_RUNTIME
+      - NETWORK
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -28228,6 +29215,8 @@ components:
       properties:
         aggregation:
           $ref: '#/components/schemas/SecurityMonitoringRuleQueryAggregation'
+        dataSource:
+          $ref: '#/components/schemas/SecurityMonitoringStandardDataSource'
         distinctFields:
           description: Field for which the cardinality is measured. Sent as an array.
           items:
@@ -28810,7 +29799,7 @@ components:
           type: string
       type: object
     SecurityTrigger:
-      description: Trigger a workflow VIA a Security Signal or Finding. For automatic
+      description: Trigger a workflow from a Security Signal or Finding. For automatic
         triggering a handle must be configured and the workflow must be published.
       properties:
         rateLimit:
@@ -28848,6 +29837,17 @@ components:
           $ref: '#/components/schemas/TriggerSource'
       required:
       - trigger_source
+      type: object
+    SelfServiceTriggerWrapper:
+      description: Schema for a Self Service-based trigger.
+      properties:
+        selfServiceTrigger:
+          description: Trigger a workflow from Self Service.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - selfServiceTrigger
       type: object
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
@@ -30308,24 +31308,8 @@ components:
       x-ignore-duplicate-object: true
     ServiceDefinitionV2Dot2Type:
       description: The type of service.
-      enum:
-      - web
-      - db
-      - cache
-      - function
-      - browser
-      - mobile
-      - custom
       example: web
       type: string
-      x-enum-varnames:
-      - WEB
-      - DB
-      - CACHE
-      - FUNCTION
-      - BROSWER
-      - MOBILE
-      - CUSTOM
     ServiceDefinitionV2Dot2Version:
       default: v2.2
       description: Schema version being used.
@@ -30547,6 +31531,124 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    SingleAggregatedConnectionResponseArray:
+      description: List of aggregated connections.
+      example:
+        data:
+        - attributes:
+            bytes_sent_by_client: 100
+            bytes_sent_by_server: 200
+            group_bys:
+              client_team:
+              - networks
+              server_service:
+              - hucklebuck
+            packets_sent_by_client: 10
+            packets_sent_by_server: 20
+            rtt_micro_seconds: 800
+            tcp_closed_connections: 30
+            tcp_established_connections: 40
+            tcp_refusals: 7
+            tcp_resets: 5
+            tcp_retransmits: 30
+            tcp_timeouts: 6
+          id: client_team:networks, server_service:hucklebuck
+          type: aggregated_connection
+      properties:
+        data:
+          description: Array of aggregated connection objects.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedConnectionResponseData'
+          type: array
+      type: object
+    SingleAggregatedConnectionResponseData:
+      description: Object describing an aggregated connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataAttributes'
+        id:
+          description: A unique identifier for the aggregated connection based on
+            the group by values.
+          type: string
+        type:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataType'
+      type: object
+    SingleAggregatedConnectionResponseDataAttributes:
+      description: Attributes for an aggregated connection.
+      properties:
+        bytes_sent_by_client:
+          description: The total number of bytes sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        bytes_sent_by_server:
+          description: The total number of bytes sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        group_bys:
+          additionalProperties:
+            description: The values for each group by.
+            items:
+              type: string
+            type: array
+          description: The key, value pairs for each group by.
+          type: object
+        packets_sent_by_client:
+          description: The total number of packets sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        packets_sent_by_server:
+          description: The total number of packets sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        rtt_micro_seconds:
+          description: Measured as TCP smoothed round trip time in microseconds (the
+            time between a TCP frame being sent and acknowledged).
+          format: int64
+          type: integer
+        tcp_closed_connections:
+          description: The number of TCP connections in a closed state. Measured in
+            connections per second from the client.
+          format: int64
+          type: integer
+        tcp_established_connections:
+          description: The number of TCP connections in an established state. Measured
+            in connections per second from the client.
+          format: int64
+          type: integer
+        tcp_refusals:
+          description: The number of TCP connections that were refused by the server.
+            Typically this indicates an attempt to connect to an IP/port that is not
+            receiving connections, or a firewall/security misconfiguration.
+          format: int64
+          type: integer
+        tcp_resets:
+          description: The number of TCP connections that were reset by the server.
+          format: int64
+          type: integer
+        tcp_retransmits:
+          description: TCP Retransmits represent detected failures that are retransmitted
+            to ensure delivery. Measured in count of retransmits from the client.
+          format: int64
+          type: integer
+        tcp_timeouts:
+          description: The number of TCP connections that timed out from the perspective
+            of the operating system. This can indicate general connectivity and latency
+            issues.
+          format: int64
+          type: integer
+      type: object
+    SingleAggregatedConnectionResponseDataType:
+      default: aggregated_connection
+      description: Aggregated connection resource type.
+      enum:
+      - aggregated_connection
+      type: string
+      x-enum-varnames:
+      - AGGREGATED_CONNECTION
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -30587,7 +31689,7 @@ components:
       description: Schema for a Slack-based trigger.
       properties:
         slackTrigger:
-          description: Trigger a workflow VIA Slack. The workflow must be published.
+          description: Trigger a workflow from Slack. The workflow must be published.
           type: object
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
@@ -30640,6 +31742,17 @@ components:
           $ref: '#/components/schemas/SloReportCreateRequestAttributes'
       required:
       - attributes
+      type: object
+    SoftwareCatalogTriggerWrapper:
+      description: Schema for a Software Catalog-based trigger.
+      properties:
+        softwareCatalogTrigger:
+          description: Trigger a workflow from Software Catalog.
+          type: object
+        startStepNames:
+          $ref: '#/components/schemas/StartStepNames'
+      required:
+      - softwareCatalogTrigger
       type: object
     SortDirection:
       default: desc
@@ -32506,13 +33619,17 @@ components:
       - $ref: '#/components/schemas/AppTriggerWrapper'
       - $ref: '#/components/schemas/CaseTriggerWrapper'
       - $ref: '#/components/schemas/ChangeEventTriggerWrapper'
+      - $ref: '#/components/schemas/DatabaseMonitoringTriggerWrapper'
       - $ref: '#/components/schemas/DashboardTriggerWrapper'
       - $ref: '#/components/schemas/GithubWebhookTriggerWrapper'
       - $ref: '#/components/schemas/IncidentTriggerWrapper'
       - $ref: '#/components/schemas/MonitorTriggerWrapper'
+      - $ref: '#/components/schemas/NotebookTriggerWrapper'
       - $ref: '#/components/schemas/ScheduleTriggerWrapper'
       - $ref: '#/components/schemas/SecurityTriggerWrapper'
+      - $ref: '#/components/schemas/SelfServiceTriggerWrapper'
       - $ref: '#/components/schemas/SlackTriggerWrapper'
+      - $ref: '#/components/schemas/SoftwareCatalogTriggerWrapper'
       - $ref: '#/components/schemas/WorkflowTriggerWrapper'
     TriggerRateLimit:
       description: Defines a rate limit for a trigger.
@@ -34157,7 +35274,7 @@ components:
         startStepNames:
           $ref: '#/components/schemas/StartStepNames'
         workflowTrigger:
-          description: Trigger a workflow VIA the Datadog UI. Only required if no
+          description: Trigger a workflow from the Datadog UI. Only required if no
             other trigger exists.
           type: object
       required:
@@ -34431,9 +35548,9 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"action_connection\",\n    \"attributes\":
-              {\n        \"name\": \"Cassette Connection DELETE\",\n        \"integration\":
-              {\n            \"type\": \"AWS\",\n            \"credentials\": {\n
-              \               \"type\": \"AWSAssumeRole\",\n                \"role\":
+              {\n        \"name\": \"Cassette Connection {{ unique_lower_alnum }}\",\n
+              \       \"integration\": {\n            \"type\": \"AWS\",\n            \"credentials\":
+              {\n                \"type\": \"AWSAssumeRole\",\n                \"role\":
               \"MyRole\",\n                \"account_id\": \"123456789123\"\n            }\n
               \       }\n    }\n  }\n}"
           step: there is a valid "action_connection" in the system
@@ -34708,7 +35825,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Trigger the scan of an AWS resource with a high priority.
+      description: Trigger the scan of an AWS resource with a high priority. Agentless
+        scanning must be activated for the AWS account containing the resource to
+        scan.
       operationId: CreateAwsOnDemandTask
       requestBody:
         content:
@@ -34744,7 +35863,7 @@ paths:
   /api/v2/agentless_scanning/ondemand/aws/{task_id}:
     get:
       description: Fetch the data of a specific on demand task.
-      operationId: RetrieveAwsOnDemandTask
+      operationId: GetAwsOnDemandTask
       parameters:
       - $ref: '#/components/parameters/OnDemandTaskId'
       responses:
@@ -39598,7 +40717,12 @@ paths:
         type: unsafe
   /api/v2/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      description: 'Cancel a downtime.
+
+
+        **Note**: Downtimes canceled through the API are no longer active, but are
+        retained for approximately two days before being permanently removed. The
+        downtime may still appear in search results until it is permanently removed.'
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
@@ -46267,6 +47391,69 @@ paths:
       x-menu-order: 5
       x-undo:
         type: idempotent
+  /api/v2/network/connections/aggregate:
+    get:
+      description: Get all aggregated connections.
+      operationId: GetAggregatedConnections
+      parameters:
+      - description: Unix timestamp (number of seconds since epoch) of the start of
+          the query window. If not provided, the start of the query window is 15 minutes
+          before the `to` timestamp. If neither `from` nor `to` are provided, the
+          query window is `[now - 15m, now]`.
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      - description: Unix timestamp (number of seconds since epoch) of the end of
+          the query window. If not provided, the end of the query window is the current
+          time. If neither `from` nor `to` are provided, the query window is `[now
+          - 15m, now]`.
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of fields to group connections by.
+        in: query
+        name: group_by
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter connections by.
+        in: query
+        name: tags
+        schema:
+          type: string
+      - description: The number of connections to be returned. The maximum value is
+          5000.
+        in: query
+        name: limit
+        schema:
+          default: 100
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleAggregatedConnectionResponseArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all aggregated connections
+      tags:
+      - Cloud Network Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -47614,6 +48801,200 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/remote_config/products/obs_pipelines/pipelines:
+    post:
+      description: Create a new pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-given:
+        pipeline:
+          parameters:
+          - name: body
+            value: "{\n   \"data\":{\n      \"attributes\":{\n         \"config\":{\n
+              \           \"destinations\":[\n               {\n                  \"id\":\"datadog-logs-destination\",\n
+              \                 \"inputs\":[\n                     \"filter-processor\"\n
+              \                 ],\n                  \"type\":\"datadog_logs\"\n
+              \              }\n            ],\n            \"processors\":[\n               {\n
+              \                 \"id\":\"filter-processor\",\n                  \"include\":\"service:my-service\",\n
+              \                 \"inputs\":[\n                     \"datadog-agent-source\"\n
+              \                 ],\n                  \"type\":\"filter\"\n               }\n
+              \           ],\n            \"sources\":[\n               {\n                  \"id\":\"datadog-agent-source\",\n
+              \                 \"type\":\"datadog_agent\"\n               }\n            ]\n
+              \        },\n         \"name\":\"Main Observability Pipeline\"\n      },\n
+              \     \"type\":\"pipelines\"\n   }\n}"
+          step: there is a valid "pipeline" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeletePipeline
+        parameters:
+        - name: pipeline_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.'
+  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.'
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.'
+    put:
+      description: Update a pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -47683,6 +49064,10 @@ paths:
 
         - Dashboards: `dashboard`
 
+        - Integration Accounts: `integration-account`
+
+        - Integration Webhooks: `integration-webhook`
+
         - Notebooks: `notebook`
 
         - Powerpacks: `powerpack`
@@ -47717,6 +49102,10 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
+
+        Integration Accounts        | `viewer`, `editor`
+
+        Integration Webhooks        | `viewer`, `editor`
 
         Notebooks                   | `viewer`, `editor`
 
@@ -48554,6 +49943,185 @@ paths:
     x-merge-override:
       get: false
       post: false
+  /api/v2/rum/applications/{app_id}/relationships/retention_filters:
+    patch:
+      description: 'Order RUM retention filters for a RUM application.
+
+        Returns RUM retention filter objects without attributes from the request body
+        when the request is successful.'
+      operationId: OrderRetentionFilters
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFiltersOrderRequest'
+        description: New definition of the RUM retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFiltersOrderResponse'
+          description: Ordered
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Order RUM retention filters
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/rum/applications/{app_id}/retention_filters:
+    get:
+      description: Get the list of RUM retention filters for a RUM application.
+      operationId: ListRetentionFilters
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFiltersResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all RUM retention filters
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a RUM retention filter for a RUM application.
+
+        Returns RUM retention filter objects from the request body when the request
+        is successful.'
+      operationId: CreateRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFilterCreateRequest'
+        description: The definition of the new RUM retention filter.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/rum/applications/{app_id}/retention_filters/{rf_id}:
+    delete:
+      description: Delete a RUM retention filter for a RUM application.
+      operationId: DeleteRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a RUM retention filter for a RUM application.
+      operationId: GetRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a RUM retention filter for a RUM application.
+
+        Returns RUM retention filter objects from the request body when the request
+        is successful.'
+      operationId: UpdateRetentionFilter
+      parameters:
+      - $ref: '#/components/parameters/RumApplicationIDParameter'
+      - $ref: '#/components/parameters/RumRetentionFilterIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RumRetentionFilterUpdateRequest'
+        description: New definition of the RUM retention filter.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RumRetentionFilterResponse'
+          description: Updated
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a RUM retention filter
+      tags:
+      - Rum Retention Filters
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/rum/applications/{id}:
     delete:
       description: Delete an existing RUM application in your organization.
@@ -57096,8 +58664,9 @@ tags:
   name: Action Connection
 - description: "Datadog Agentless Scanning provides visibility into risks and vulnerabilities\nwithin
     your hosts, running containers, and serverless functions\u2014all without\nrequiring
-    teams to install Agents on every host or where Agents cannot be installed.\nGo
-    to https://www.datadoghq.com/blog/agentless-scanning/ to learn more."
+    teams to install Agents on every host or where Agents cannot be installed.\nAgentless
+    offers also Sensitive Data Scanning capabilities on your storage.\nGo to https://www.datadoghq.com/blog/agentless-scanning/
+    to learn more."
   name: Agentless Scanning
 - description: Datadog App Builder provides a low-code solution to rapidly develop
     and integrate secure, customized applications into your monitoring stack that
@@ -57169,6 +58738,10 @@ tags:
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
+- description: The Cloud Network Monitoring API allows you to fetch aggregated connections
+    and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    for more information.
+  name: Cloud Network Monitoring
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
@@ -57381,6 +58954,12 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Observability Pipelines allows you to collect and process logs within
+    your own infrastructure, and then route them to downstream integrations.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/observability_pipelines/
+  name: Observability Pipelines
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration
@@ -57454,6 +59033,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
   name: Rum Metrics
+- description: Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list)
+    of RUM for your organization.
+  name: Rum Retention Filters
 - description: 'Provision Datadog users and teams using SCIM APIs.
 
 

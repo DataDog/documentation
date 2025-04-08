@@ -61,7 +61,7 @@ Click the Settings icon on the right hand corner to hide columns from the list.
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention.
 
 The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment.
-The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][3] on APM [trace metrics][4]. This dropdown does not affect how many services you see in the list. RUM applications are not associated with specific environments (unlike APM or USM), and are only viewable when you select the `env*` option in the environment dropdown.
+The second dropdown allows you to rescope any APM data you have in the Performance view to the [additional primary tag][3] on APM [trace metrics][4]. This dropdown does not affect how many services you see in the list. RUM applications are not associated with specific environments (unlike APM or USM), and are only viewable when you select the `env*` option in the environment dropdown.
 
 You can change the default environment in **APM > Setup & Configuration > Settings**.
 
@@ -125,7 +125,7 @@ To access additional details describing your CI status and static analysis viola
 
 [1]: https://app.datadoghq.com/services
 [2]: /software_catalog/enrich_default_catalog/
-[3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[3]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-additional-primary-tags-in-datadog
 [4]: /tracing/metrics/metrics_namespace/
 [5]: /tracing/guide/configuring-primary-operation/
 [6]: /universal_service_monitoring/guide/using_usm_metrics/#usm-metrics-vs-apm-metrics

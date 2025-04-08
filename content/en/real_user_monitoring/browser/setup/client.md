@@ -58,7 +58,7 @@ Until Datadog starts receiving data, your application appears as `pending` on th
 [6]: /real_user_monitoring/session_replay/browser/privacy_options/
 [7]: /real_user_monitoring/platform/dashboards/
 [8]: https://app.datadoghq.com/rum/sessions
-[9]: /real_user_monitoring/platform/connect_rum_and_traces/
+[9]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [10]: /integrations/content_security_policy_logs/
 
 {{% /tab %}}
@@ -2412,7 +2412,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][13].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][13].
 
 `allowedTracingUrls`
 : Optional<br/>
@@ -2504,7 +2504,7 @@ Use `sessionPersistence` instead.
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#products
 [12]: /real_user_monitoring/session_replay/browser/#usage
 [13]: /real_user_monitoring/guide/proxy-rum-data/
-[14]: /real_user_monitoring/platform/connect_rum_and_traces/
+[14]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [15]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [16]: /integrations/content_security_policy_logs/?tab=firefox#use-csp-with-real-user-monitoring-and-session-replay
 [17]: /real_user_monitoring/browser/advanced_configuration/#contexts-life-cycle
@@ -2602,7 +2602,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][8].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][8].
 
 `excludedActivityUrls`
 : Optional<br/>
