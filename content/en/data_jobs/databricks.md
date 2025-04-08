@@ -135,7 +135,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_TAGS                  | Add host tags to Databricks clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.                                                                                          |         |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -190,7 +190,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_TAGS                  | Add host tags to Databricks clusters. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
 | DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.                                                                                          |         |
 
 
