@@ -71,7 +71,7 @@ Estimated usage metrics are generally available for the following usage types:
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
 ## Setting tags for your by_tag Estimated Usage Metrics
-To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes will take effect at the next 00:00 UTC.
+To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes take effect at the next 00:00 UTC.
 
 {{< img src="account_management/billing/setting-eum-tags-in-ua.png" alt="Setting by_tag EUM tags in Usage Attribution" >}}
 
