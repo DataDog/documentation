@@ -37,7 +37,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_es"
 "public_title": "Amazon OpenSearch Service"
-"short_description": "Amazon OpenSearch Service facilita el despliegue y el funcionamiento de OpenSearch".
+"short_description": "Amazon OpenSearch Service facilita el despliegue y el funcionamiento de OpenSearch."
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -46,7 +46,7 @@
   - "Category::Metrics"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "Amazon OpenSearch Service facilita el despliegue y el funcionamiento de OpenSearch".
+  "description": "Amazon OpenSearch Service facilita el despliegue y el funcionamiento de OpenSearch."
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
