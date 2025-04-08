@@ -295,7 +295,7 @@ If the false positive was caused by a unique setting in your service, you can ad
 
 If the attack is ongoing, you might want to disrupt the attacker as you investigate further. Disrupting the attacker slows down the attack and reduce the number of compromised accounts. 
 
-<div class="alert alert-info">**Note:** This is a common step, although you might want to skip this step in the following circumstances:
+<div class="alert alert-info"> <strong>Note</strong>: This is a common step, although you might want to skip this step in the following circumstances:
 
 * The accounts have little immediate value. You can block these post-compromise without causing harm.  
 * You want to maintain maximum visibility into the attack by avoiding any action that alerts the attacker to the investigation and causes them to change tactics.
@@ -344,7 +344,7 @@ Those are two important indicators:
 
 Click an indicator to see further information about the cluster traffic. 
 
-In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster.
+In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster. While comparing it to the ASM data, beware the scale, since APM data may be sampled while ASM's isn't.
 
 In the following example, a lot of traffic comes from before the attack. This means a legitimate activity matches this cluster in normal traffic and it would get blocked if you were to take action. You don't need to escalate or click **Block All Attacking IPs** in the signal.
 
@@ -425,26 +425,26 @@ Successful logins should be considered suspicious.
 
 {{% tab "Distributed Credential Stuffing" %}}
 
-This signal flagged a large increase in login failures in one service. If the attack is large enough, this signal might trigger both Bruteforce or Credential Stuffing signals. The signal is also able to detect diffuse attacks.
+This signal flagged a large increase in login failures in one service. If the attack is large enough, this signal might also trigger either the Bruteforce or Credential Stuffing signals. The signal is also able to detect diffuse attacks more comprehensively.
 
 In the diffuse attacks case, attacker attributes are available in the signal.
 
 <!-- screenshot -->
 
-1. Click **Investigate in full screen**.   
-2. In **Attacker Attributes**, select the cluster and click, then, in **Traces**, click **View in ASM Protection Trace Explorer**.
+1. After opening the signal in the side panel, click **Investigate in full screen**.   
+2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**, then, in **Traces**, click **View in ASM Protection Trace Explorer**.
 
-This gets you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query, but you should expand it to also match login successes on top of the failures. Review the exhaustiveness/accuracy of the filter using the technique described above (in the paragraph before the table).
+This gets you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query, but you should expand it to also match login successes on top of the failures. You can do that by replacing `@appsec.security_activity:business_logic.users.login.failure` with `@appsec.security_activity:business_logic.users.login.*`. Review the exhaustiveness and accuracy of the filter using [the technique described above](#isolate-attacker-activity).
 
 <!-- sceenshot -->
 
-In the case those attributes are inaccurate/incomplete, you may try to identify further traits to isolate the attacker activity. The most useful traits are:
+In the case those attributes are inaccurate or incomplete, you may try to identify further traits to isolate the attacker activity. The most useful traits are:
 
 1. User agent: `@http.user_agent`  
 2. ASN: `@http.client_ip_details.as.domain`  
 3. Threat intelligence: `@threat_intel.results.category`  
 4. URL: `@http.url`  
-5. Fingerprint, when available: `@appsec.fingerpring.*`
+5. Fingerprint, when available: `@appsec.fingerprint.*`
 
 <!-- sceenshot -->
 
@@ -461,13 +461,13 @@ Reviewing login successes and failures helps to identify the following:
 
 * What the attackers are after so that you can block them.  
 * What the attackers are doing so that you can catch them, even if they change their scripts.   
-* How successful the attackers are so that you can take back the accounts where they took control and see how much time you have to react.
+* How successful the attackers are so that you can take back the accounts they took control of and see how much time you have to react.
 
 When attacker activity is isolated, review login successes and consider the following questions: 
 
 * Have any accounts been compromised?   
 * Are attackers doing something with their compromised accounts or are they leaving them dormant?   
-* Are the accounts accessed by a different infrastructure?   
+* Are the accounts then accessed by a different infrastructure?   
 * Is there any past activity from this infrastructure?
 
 For the login failures, consider the following questions:
@@ -575,9 +575,9 @@ If you configured permanent blocking, unblock users and IPs from the Denylist by
 
 <!-- <insert up to date screenshot\> -->
 
-Disable or delete any custom In-App WAF rule(s). 
+#### Disable or delete any custom In-App WAF rule(s)
 
-To disable or delete In-App WAF rule(s), in [custom In-App WAF rules][28], disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
+To disable or delete In-App WAF rule(s), go to the [custom In-App WAF rules page][28] and disable the rules by clicking on **Monitoring** or **Blocking**, and selecting **Disable Rule**. 
 
 If the rule is no longer relevant, you can delete it by clicking more options (**...**) and selecting **Delete**.
 
@@ -602,6 +602,7 @@ Here are some common hardening examples:
 
 * **Rate limit login attempt per IP/user/network range/user agent:** This soft-blocking feature lets you aggressively curtail the scale of the attack in some circumstances with minimal impact on normal users, even if they happen to share traits with the attacker  
 * **Adding friction at login:** To break attackers' automation without significantly impacting users, use captchas or modifying the login flow during an attack (for example, require that a token is fetched from a new endpoint).
+* **Enforce multi-factor authentication (MFA):** Datadog found MFA extremely effective in stopping account compromise. You could require your most privileged users to use MFA, especially during attacks. 
 * **Limiting sensitive actions for users:** If your services allow users to perform sensitive actions (spending money, accessing sensitive information, changing contact information, etc.), you might want to prohibit high risk users with suspicious logins until they are reviewed manually or through multifactor authentication. Suspicious logins can be programmatically fed to your systems by Datadog through a webhook.  
 * **Ability to consume signal findings programmatically:** Create an endpoint to consume Datadog webhooks and automatically take action against suspected users/IPs/traits.
 
