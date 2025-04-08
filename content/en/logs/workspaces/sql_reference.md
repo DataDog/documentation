@@ -92,6 +92,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `strpos(string s, string substring)`             | integer                               | Returns the index position of the substring in a given string.              |
 | `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
@@ -230,6 +231,12 @@ SELECT
   substring(title, 1, 10) AS short_title
 FROM
   books
+{{< /code-block >}}
+
+### `STRPOS`
+{{< code-block lang="sql" >}}
+SELECT
+  STRPOS('high', 'ig')
 {{< /code-block >}}
 
 ### `EXTRACT`
