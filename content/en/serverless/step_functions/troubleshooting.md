@@ -75,6 +75,6 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 [3]: /logs/pipelines/indexes
 [4]: https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html
 [5]: /logs/log_configuration/indexes/
-[6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-upstream-traces-with-step-functions-and-downstream-lambda-traces
+[6]: /serverless/step_functions/merge-step-functions-lambda/?tab=serverlessframework#merge-step-functions-traces-with-downstream-lambda-traces
 [7]: /logs/log_configuration/indexes/#exclusion-filters
 [8]: /serverless/step_functions/distributed-maps

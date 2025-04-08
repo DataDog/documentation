@@ -22,7 +22,7 @@ This page describes how to merge your AWS Step Functions traces with related AWS
 | Python  | Datadog Lambda Library for Python layer v103+ |
 | Other | Datadog Extension v75+ |
 
-Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
+Your State Machine definition must use `JSONata` as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
 #### Setup
 
