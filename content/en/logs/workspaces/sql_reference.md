@@ -100,6 +100,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
 | `cardinality(array a)`                           | integer                               | Returns the number of elements in the array, or 0 if the array is empty.    |
 | `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurence of the value found in the array.   |
+| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -360,6 +361,12 @@ SELECT
   ARRAY_POSITION(recipients, 'hello@example.com')
 FROM
   emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT 
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
