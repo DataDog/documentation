@@ -97,7 +97,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
-
+| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array, or 0 if the array is empty.    |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -336,6 +336,14 @@ FROM
   emails
 WHERE
   regexp_like(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients)
+FROM
+  emails
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
