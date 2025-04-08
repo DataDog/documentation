@@ -163,4 +163,4 @@ The following configuration options behave consistently across the latest versio
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
-[4]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
+[4]: /tracing/trace_pipeline/ingestion_mechanisms
