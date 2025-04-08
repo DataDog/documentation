@@ -205,7 +205,7 @@ Follow these steps to collect the custom resources that these CRDs define:
    {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of the Kubernetes Explorer > Custom Resources > Resource Definitions page. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
 
    A modal appears:
-   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="Collecting and Indexing modal.">}}
+   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Agent Setup, with copyable snippets for updating an Agent configuration, and Indexing Configuration, with checkboxes for fields to index.">}}
 
 1. Follow the instructions in the modal's **Agent Setup** section to update your Datadog Agent configuration:
 
@@ -256,7 +256,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
 1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
 
-   {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Kubernetes Explorer > Custom Resources > Resource Definitions page. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+   {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
      
    Select **Enable Indexing** to save.
 
