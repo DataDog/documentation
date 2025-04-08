@@ -203,19 +203,21 @@ Reach out to [support][5] if you have a use case that exceeds these limits.
 ### Role based access
 To view Reference Tables, users require the `reference_tables_read` permission. To create or modify Reference Tables, users require the `reference_tables_write` permission.
 
+For more information on permissions, see the [RBAC documentation][6].
+
 ### Granular access controls
-Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit it.
+Restrict access to individual tables by specifying a list of teams, roles, or users that are allowed to view or edit them.
 
-{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports granular access permissions on a table" style="width:100%;">}}
+{{< img src="reference_tables/granular_access_permissions.png" alt="The Permissions cog option that supports setting granular access permissions on a table" style="width:100%;">}}
 
-1. Click on a table to view its detail page.
-2. Click the cog icon in the upper right.
-3. Select **Permissions**.
+1. Click on a table to open its detail page.
+2. Click the cog icon in the upper-right corner.
+3. Select **Permissions** from the menu.
 4. Click **Restrict Access**.
-5. Use the drop-down to select one or more teams, roles, or users whose access you would like to update.
+5. Use the dropdown to select one or more teams, roles, or users.
 6. Click **Add**.
 7. Select either **Editor** or **Viewer**.
-8. Click **Save**.
+8. Click **Save** to apply changes.
 
 ## Further Reading
 
@@ -226,3 +228,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [3]: /events/
 [4]: /monitors/types/event/
 [5]: /help/
+[6]: /account_management/rbac/permissions/#reference-tables
