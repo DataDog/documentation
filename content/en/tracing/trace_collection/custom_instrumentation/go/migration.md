@@ -72,12 +72,18 @@ The Go tracer v2 introduces several important improvements:
 
 Datadog provides a migration tool that automatically handles most code updates when upgrading from v1 to v2.
 
-To upgrade, run the following command:
+To check for updates, run the following command:
 
 ```shell
 go install github.com/DataDog/dd-trace-go/tools/v2fix@latest
 # In your repository's directory
 v2fix .
+```
+
+To apply all suggested fixes, run:
+
+```shell
+v2fix -fix .
 ```
 
 The tool makes the following changes:
