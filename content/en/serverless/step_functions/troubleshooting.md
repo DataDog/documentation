@@ -54,11 +54,11 @@ If your organization has an existing all-encompassing index with a low limit, pl
 **Note**: Indexing logs is not a requirement for getting traces and may incur additional cost. If you are troubleshooting a specific issue, you may wish to temporarily send logs to an index, debug, and delete the index afterwards. See [Indexes][5] for more information.
 
 ## Missing logs within an execution
-[Exclusion fiters][7] can be used to ensure all logs with the same execution_arn are either kept or excluded. Note that this has no impact on tracing.
+You can use [exclusion filters][7] to exclude a certain percentage of all logs with a particular `execution_arn`. Using exclusion filters does not impact tracing.
 
-Here is an example filter that excludes logs for 90% of the `@execution_arn`.
+In the following example, the filter excludes logs for 90% of the `@execution_arn`.
 
-{{< img src="serverless/step_functions/exclusion_filter.png" alt="New exclusion filter" style="width:80%;" >}}
+{{< img src="serverless/step_functions/exclusion_filter.png" alt="An exclusion filter named Step Functions. The 'Define exclusion query' box contains 'source:stepfunction'. Under 'Set exclusion percentage', the filter is set to exclude 90% of @execution_arn." style="width:80%;" >}}
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
