@@ -37,7 +37,7 @@ update your operating system to a newer version that might include an updated ve
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/tracer_debug_logs/?code-lang=nodejs#enable-debug-mode
 [2]: /help/
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling
 [4]: https://nodejs.org/
