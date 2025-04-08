@@ -39,7 +39,7 @@
 "manifest_version": "2.0.0"
 "name": "amazon_billing"
 "public_title": "AWS Billing and Cost Management"
-"short_description": "AWS Billing te permite hacer un seguimiento de tus predicciones y costes de facturación de AWS".
+"short_description": "AWS Billing te permite hacer un seguimiento de tus predicciones y costes de facturación de AWS."
 "supported_os": []
 "tile":
   "changelog": "CHANGELOG.md"
@@ -50,7 +50,7 @@
   - "Category::Cost Management"
   - "Offering::Integration"
   "configuration": "README.md#Setup"
-  "description": "AWS Billing te permite hacer un seguimiento de tus predicciones y costes de facturación de AWS".
+  "description": "AWS Billing te permite hacer un seguimiento de tus predicciones y costes de facturación de AWS."
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
