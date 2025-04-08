@@ -181,4 +181,4 @@ The following configuration options behave consistently across the latest versio
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms/
-[5]: /tracing/runtime_metrics/
+[5]: /tracing/metrics/runtime_metrics/
