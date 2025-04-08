@@ -51,9 +51,9 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
    - The Go build tag `datadog.no_waf` can be used to disable ASM at build time in any situation where the requirements above are a hinderance.
 
-4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+4. **Redeploy your Go service and enable ASM** by setting the environment variables:
    ```console
-   $ env DD_APPSEC_ENABLED=true ./my-program
+   $ env DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false ./my-program
    ```
 
    Or one of the following methods, depending on where your application runs:
@@ -61,25 +61,26 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Add the following environment variable value to your Docker command line:
+Add the following environment variable values to your Docker command line:
 
 ```console
-$ docker run -e DD_APPSEC_ENABLED=true [...]
+$ docker run -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your application container's Dockerfile:
+Add the following environment variable values to your application container's Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your application's deployment configuration file for APM and add the ASM environment variable:
+Update your application's deployment configuration file for APM and add the ASM environment variables:
 
 ```yaml
 spec:
@@ -91,12 +92,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your application's ECS task definition JSON file, by adding this in the environment section:
+Update your application's ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -104,6 +107,10 @@ Update your application's ECS task definition JSON file, by adding this in the e
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```

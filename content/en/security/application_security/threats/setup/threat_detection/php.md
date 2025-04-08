@@ -36,29 +36,30 @@ You can monitor application security for PHP apps running in host-based or conta
    ```
    To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
-2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
+2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variables:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command:
+Update your configuration container for APM by adding the following arguments in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
+docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable values to your container Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your configuration yaml file container and add the environment variables:
 
 ```yaml
 spec:
@@ -70,12 +71,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "AWS ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -83,6 +86,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```

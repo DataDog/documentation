@@ -54,8 +54,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    require 'datadog/appsec'
 
    Datadog.configure do |c|
-     # enable the APM tracer
+     # enable the APM tracer but disable trace processing - for security-only use
      c.tracing.instrument :rails
+     c.tracing.enabled = false
 
      # enable ASM
      c.appsec.enabled = true
@@ -69,7 +70,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'datadog', '~> 2.0', require: 'datadog/auto_instrument'
    ```
 
-   And also enable `appsec`:
+   And also enable `appsec` and disable tracing:
 
    ```ruby
    # config/initializers/datadog.rb
@@ -78,6 +79,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    Datadog.configure do |c|
      # the APM tracer is enabled by auto-instrumentation
+     c.tracing.enabled = false
 
      # enable ASM
      c.appsec.enabled = true
@@ -96,8 +98,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    require 'datadog/appsec'
 
    Datadog.configure do |c|
-     # enable the APM tracer
+     # enable the APM tracer but disable trace processing - for security-only use
      c.tracing.instrument :sinatra
+     c.tracing.enabled = false
 
      # enable ASM for Sinatra
      c.appsec.enabled = true
@@ -113,6 +116,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
    Datadog.configure do |c|
      # the APM tracer is enabled by auto-instrumentation
+     c.tracing.enabled = false
 
      # enable ASM for Sinatra
      c.appsec.enabled = true
@@ -129,8 +133,9 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    require 'datadog/appsec'
 
    Datadog.configure do |c|
-     # enable the APM tracer
+     # enable the APM tracer but disable trace processing - for security-only use
      c.tracing.instrument :rack
+     c.tracing.enabled = false
 
      # enable ASM for Rack
      c.appsec.enabled = true
@@ -149,25 +154,26 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command:
+Update your configuration container by adding the following arguments in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
+docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable values to your container Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your configuration yaml file container and add the environment variables:
 
 ```yaml
 spec:
@@ -179,12 +185,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -192,6 +200,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```
@@ -199,9 +211,9 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to true in your service invocation:
+Initialize ASM in your code or set the environment variables in your service invocation:
 ```shell
-env DD_APPSEC_ENABLED=true rails server
+env DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false rails server
 ```
 
 {{% /tab %}}
