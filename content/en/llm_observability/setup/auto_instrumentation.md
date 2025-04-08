@@ -163,13 +163,15 @@ The Vertex AI integration instruments the following methods:
 The OpenAI Agents integration converts the [built-in tracing][28] from the [OpenAI Agents SDK][29] into
 LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
 
-The following span types are supported:
-- `agent`
-- `generation` using Datadog's [OpenAI](#openai) integration
-- `response`
-- `guardrail`
-- `handoff`
-- `function`
+The following operations are supported:
+- [`traces`][30]
+- [`agent`][31]
+- [`generation`][32] using Datadog's [OpenAI](#openai) integration
+- [`response`][33]
+- [`guardrail`][34]
+- [`handoff`][35]
+- [`function`][36]
+- [`custom`][37]
 
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
@@ -199,6 +201,14 @@ The following span types are supported:
 [25]: https://python.langchain.com/docs/concepts/retrieval/
 [28]: https://openai.github.io/openai-agents-python/tracing/
 [29]: https://openai.github.io/openai-agents-python/
+[30]: https://openai.github.io/openai-agents-python/ref/tracing/traces/
+[31]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.agent_span
+[32]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.generation_span
+[33]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.response_span
+[34]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.guardrail_span
+[35]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
+[36]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
+[37]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
 
 
 {{% /tab %}}
