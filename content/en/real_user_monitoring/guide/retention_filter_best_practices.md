@@ -47,13 +47,13 @@ Below we describe the set of default filters, suggested filters, and their typic
 
 | Filter | Query Example | Description |
 |--------|---------------|-------------|
+| Sessions with replays | `@session.has_replay:true` | A default filter (enforced) to ensure the system does not discard any sessions with session replays available. |
 | Sessions with errors | `@type:error @error.is_crash:true` | A default filter that can be applied to retain all web sessions with errors and mobile sessions with crashes. |
 | Sessions | `@type:session` | A default filter, placed last in the list, to apply to all sessions and allows you to retain or discard a percentage of them. |
-| Versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. |
-| Versions (with 0% retention rate) | `@type:* version:v0.0.0-old` | For mobile applications, you can add a 0% retention rate to stop collecting sessions from outdated application versions. |
+| App versions | `@type:session version:v1.1.0-beta` | Filtering by app version (beta, alpha, or specific version) ensures all sessions from a particular build are saved for detailed analysis and troubleshooting. |
 | Environments | `@type:session environment:stage` | When collecting sessions from various build types or environments, ensure you capture at least 100% of sessions from staging environments, while collecting a smaller percentage from dev/test environments. |
 | Feature flags | `@type:session feature_flags.checkout_type:treatment_v1` | If you are already using feature flags, you can choose to keep 100% of sessions with specific feature flag treatments. | 
-| Custom attributes | `@type:session @context.cartValue:>=500` | Create filters using almost any query, including session custom attributes, to specify retention criteria. For example, in our demo app Shopist, we use the cart value as a custom session attribute. This allows retention of sessions with high cart values, facilitating quick troubleshooting of revenue-impacting issues. |
+| Custom attributes | `@type:session @context.cartValue:>=500` | Create filters using almost any query, including session custom attributes, to specify retention criteria. For example, in the Datadog demo app Shopist, the cart value is a custom session attribute. This allows retention of sessions with high cart values, facilitating quick troubleshooting of revenue-impacting issues. |
 | Session with user attributes | `@type:session user.tier:paid` | Use user information from a session to create a filter. For example, you can retain sessions for all your paid tier users. |
 | Sessions with a specific user | `@type:session user.idr:XXXXX` | This filter can target sessions from specific users, such as a production test account or an executive who regularly tests the application. |
 | Sessions with a specific action | `@type:action @action.name:XXXXX` | You can retain all sessions with a specific action that the SDK automatically tracks out-of-the-box or a custom action that you instrumented in your code.
