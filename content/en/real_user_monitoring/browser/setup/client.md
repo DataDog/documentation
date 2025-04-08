@@ -2412,7 +2412,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][13].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][13].
 
 `allowedTracingUrls`
 : Optional<br/>
@@ -2602,7 +2602,7 @@ Initialization fails silently if the RUM Browser SDK is already initialized on t
 `proxy`
 : Optional<br/>
 **Type**: String<br/>
-Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][8].
+Optional proxy URL, for example: `https://www.proxy.com/path`. For more information, see the full [proxy setup guide][8].
 
 `excludedActivityUrls`
 : Optional<br/>
