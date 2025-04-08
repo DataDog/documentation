@@ -137,57 +137,228 @@ Like any traditionally application, LLM applications can be implemented across m
 
 To enable LLM Observability for a proxy or gateway service that might be called from several different ML applications, you can enable LLM Observability without specifying an ML application name.
 
+As an example, create a proxy service that has a guardrail check, sensitive data scan, and finally makes an LLM call to OpenAI.
+
 {{< tabs >}}
 {{% tab "Python" %}}
 
-```python
-from ddtrace.llmobs import LLMObs
-LLMObs.enable()
+Install the necessary packages:
 
-def proxy_handler(request):
-    # Use the LLMObs SDK for manual instrumentation, or rely on auto-instrumentation
-    return response
+```shell
+pip install -U --quiet ddtrace openai flask
+```
+
+Add the following code to your proxy service:
+
+```python
+# proxy.py
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(service="chat-proxy")
+
+from flask import Flask
+import os
+import openai
+
+client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+app = Flask(__name__)
+
+def make_system_prompt(context):
+  return # use the context to make a system prompt
+
+@app.route('/chat')
+def guardrail(req):
+    prompt = req.prompt
+    context = req.context
+    with LLMObs.task(name="guardrail-check"):
+      # check for harmful content
+    with LLMObs.task(name="sensitive-data-scan"):
+      # scan for sensitive data
+    response = client.chat.completions.create(
+      model="gpt-3.5-turbo",
+      content=[
+        {"role": "system", "content": make_system_prompt(context)},
+        {"role": "user", "content": prompt}
+      ]
+    )
+    return {
+      "response": response.choices[0].message.content
+    }
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
+```
+
+Run the proxy service:
+
+```shell
+python proxy.py
 ```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
+Install the necessary packages:
+
+```shell
+npm install dd-trace openai express
+```
+
+Add the following code to your proxy service:
+
 ```javascript
+// proxy.js
 const tracer = require('dd-trace').init({
   llmobs: true
 });
 const llmobs = tracer.llmobs;
 
-function proxyHandler(request) {
-  // Use the LLMObs SDK for manual instrumentation, or rely on auto-instrumentation
-  return response;
+const express = require('express');
+const OpenAI = require('openai');
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+
+const app = express();
+app.use(express.json());
+
+function makeSystemPrompt(context) {
+  return // use the context to make a system prompt
 }
+
+app.post('/chat', async (req, res) => {
+  const { prompt, context } = req.body;
+  llmobs.trace({ name: 'guardrail-check', kind: 'task' }, async () => {
+    // check for harmful content
+  });
+  llmobs.trace({ name: 'sensitive-data-scan', kind: 'task' }, async () => {
+    // scan for sensitive data
+  });
+  const response = await client.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    content: [
+      { role: 'system', content: makeSystemPrompt(context) },
+      { role: 'user', content: prompt }
+    ]
+  });
+  res.json({ response: response.choices[0].message.content });
+});
+
+app.listen(8080, () => {
+  console.log('Server is running on port 3000');
+});
+```
+
+Run the proxy service:
+
+```shell
+node proxy.js
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-In your specific applications that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name:
+In your specific applications that orchestrate the ML applications that make calls to the proxy or gateway service, enable LLM Observability with the ML application name, and wrap the proxy call in a `task` span:
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
+Install the necessary packages:
+
+```shell
+pip install -U --quiet ddtrace requests
+```
+
+Add the following code to your proxy service:
+
 ```python
+# application.py
 from ddtrace.llmobs import LLMObs
 LLMObs.enable(ml_app_name="my-ml-app")
+
+import requests
+
+prompt = "What is the status of my order?"
+
+if __name__ == "__main__":
+    with LLMObs.workflow(name="run-chat"):
+      with LLMObs.retrieval(name="retrieve-context"):
+        with LLMObs.embedding(name="embed-prompt"):
+          embedding = # embed the prompt
+        with LLMObs.task(name="fetch-documents"):
+          documents = # fetch documents from embedding
+      with LLMObs.task(name="chat-proxy"):
+        response = requests.post("http://localhost:8080/chat", json={
+          "prompt": "Hello, world!",
+          "context": documents
+        })
+
+      LLMObs.annotate(
+        input_data=prompt,
+        output_data=response.json()
+      )
+```
+
+Run the application:
+
+```shell
+python application.py
 ```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
+Install the necessary packages:
+
+```shell
+npm install dd-trace axios
+```
+
 ```javascript
+// application.js
 const tracer = require('dd-trace').init({
   llmobs: {
     mlApp: 'my-ml-app'
   }
 });
 const llmobs = tracer.llmobs;
+
+const axios = require('axios');
+
+async function main () {
+  llmobs.trace({ name: 'run-chat', kind: 'workflow' }, async () => {
+    const documents = llmobs.trace({ name: 'retrieve-context', kind: 'retrieval' }, async () => {
+      const embedding = llmobs.trace({ name: 'embed-prompt', kind: 'embedding' }, async () => {
+        const embedding = // embed the prompt
+        return embedding;
+      });
+      const documents = // fetch documents from embedding
+      return documents;
+    });
+    const response = llmobs.trace({ name: 'chat-proxy', kind: 'task' }, async () => {
+      return await axios.post('http://localhost:8080/chat', {
+        prompt: 'Hello, world!',
+        context: documents
+      });
+    })
+
+    llmobs.annotate({
+      inputData: prompt,
+      outputData: response.data
+    })
+  })
+}
+
+main();
+```
+
+Run the application:
+
+```shell
+node application.js
 ```
 
 {{% /tab %}}
