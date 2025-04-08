@@ -35,7 +35,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ### From Monitor Settings
 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_form.png" alt="List of notification rules in Monitor Settings" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_table.png" alt="List of notification rules in Monitor Settings" style="width:100%;" >}}
 
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
