@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-[Ragas][1] is an evaluation framework for retrieval augmented generation (RAG) applications. Datadog's Ragas integration enables you to evaluate your production application with scores for faithfulness, answer relevancy, and context precision. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
+[Ragas][1] is an open source library for evaluating and improving LLM applications. Ragas also provides LLM and non-LLM-based metrics to help assess the performance of your LLM application offline and in production. Datadog's Ragas integration enables you to evaluate your production application with scores for faithfulness, answer relevancy, and context precision. You can use these scores to find traces that have a high likelihood of inaccurate answers and review them to improve your RAG pipeline.
 
 For a simplified setup guide, see [Ragas Quickstart][7].
 
@@ -186,10 +186,10 @@ Use the `LLMObs.flush()` command to guarantee all traces and evaluations are flu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/explodinggradients/ragas
-[2]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/faithfulness/
-[3]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/answer_relevance/
-[4]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/available_metrics/context_precision/
+[1]: https://docs.ragas.io/en/stable/
+[2]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/faithfulness.html
+[3]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/answer_relevance.html
+[4]: https://docs.ragas.io/en/v0.1.21/concepts/metrics/context_precision.html
 [5]: https://docs.ragas.io/en/v0.1.21/howtos/customisations/
 [6]: https://app.datadoghq.com/llm/traces
 [7]: /llm_observability/guide/ragas_quickstart
