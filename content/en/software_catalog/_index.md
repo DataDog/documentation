@@ -76,7 +76,7 @@ Endpoint
 : An endpoint refers to a specific route or path within a service that handles requests. For example, `/api/v2/messages/send`. Software Catalog contains HTTP endpoints that are automatically discovered by APM. The concept of endpoints correspond to [APM resources][19] for an APM web service. APM provides performance metrics such as request count, latency, and error rate. Users can also add other unmonitored endpoints to Software Catalog through metadata [Definitions][17]. 
 
 API
-: In the Software Catalog, an API refers to a collection of endpoints that belong together logically. APIs offer an alternative way to group endpoints beyond APM services (the mapping between endpoints and services are not modifiable). Users can define team and add additional endpoints  (regardless of whether they are monitored by APM)  by providing a `kind:API` metadata [Definition][18] in Software Catalog. 
+: In the Software Catalog, an API refers to a collection of endpoints that belong together logically. APIs offer an alternative way to group endpoints beyond APM services (the mapping between endpoints and services are not modifiable). Users can define team and add additional endpoints (regardless of whether they are monitored by APM) by providing a `kind:API` metadata [Definition][18] in Software Catalog. 
 
 ## Getting started
 
