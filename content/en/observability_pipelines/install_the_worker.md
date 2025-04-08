@@ -23,7 +23,7 @@ The Observability Pipelines Worker is software that runs in your environment to 
 
 After you set up your source, destinations, and processors on the Build page of the pipeline UI, follow the steps on the Install page.
 
-If you had set up the pipeline components using the API or Terraform, to get to the Install page:
+If you had set up the pipeline components using the [API][6] or Terraform, to get to the Install page:
 
 1. Navigate to [Observability Pipelines][5].
 1. Select your pipeline.
@@ -224,3 +224,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [3]: /observability_pipelines/destinations/
 [4]: /observability_pipelines/processors/
 [5]: https://app.datadoghq.com/observability-pipelines
+[6]: /api/latest/observability-pipelines/#create-a-new-pipeline

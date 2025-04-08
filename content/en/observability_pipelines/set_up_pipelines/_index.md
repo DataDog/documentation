@@ -61,7 +61,7 @@ For detailed setup instructions, select a template-specific documentation and th
 
 Use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
-[1]: /api/
+[1]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [2]: /observability_pipelines/install_the_worker/
 
 {{% /tab %}}
