@@ -26,9 +26,9 @@ Error: No native build was found for runtime=node abi=109 platform=linuxglibc ar
 
 If you are using a bundler such as esbuild or webpack, which is used by frameworks such as Next.js, see [Bundling with the Node.js tracer][3]. The Datadog tracer and profiler have special requirements when used with bundlers.
 
-Node versions available through package managers may sometimes incorrectly report their ABI (Application Binary Interface) version. For example, Ubuntu Linux 24.04.01 LTS includes a Node 18 package that incorrectly reports its ABI version as 109, instead of the correct version, 108, for Node 18. 
+Node versions available through package managers may sometimes incorrectly report their ABI (Application Binary Interface) version. For example, Ubuntu Linux 24.04.01 LTS includes a Node 18 package that incorrectly reports its ABI version as 109, instead of the correct version, 108, for Node 18.
 
-The profiler ships with prebuilt binaries for all supported combinations of platforms, CPU architectures, and Node ABI versions in `node_modules/@datadog/pprof/prebuilds/${platform}-${arch}/node-${abi}.node` files. If your Node version reports an incompatible ABI version, there won't be a prebuilt binary available, causing the profiler to fail to start. 
+The profiler ships with prebuilt binaries for all supported combinations of platforms, CPU architectures, and Node ABI versions in `node_modules/@datadog/pprof/prebuilds/${platform}-${arch}/node-${abi}.node` files. If your Node version reports an incompatible ABI version, there won't be a prebuilt binary available, causing the profiler to fail to start.
 
 To resolve this issue, download and install Node from the [Node.js website][4] instead of using your operating system's package manager, or
 update your operating system to a newer version that might include an updated version of Node.js without this issue.
