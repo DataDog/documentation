@@ -1,6 +1,29 @@
 ---
-title: Auto Multi-line Detection and Aggregation V1
+title: Automatic Multi-line Detection and Aggregation V1
 description: Use the Datadog Agent to detect and aggregate multi-line logs automatically 
+further_reading:
+- link: "/logs/guide/getting-started-lwl/"
+  tag: "Documentation"
+  text: "Getting started with Logging without Limits™"
+- link: "/logs/guide/how-to-set-up-only-logs/"
+  tag: "Documentation"
+  text: "Use the Datadog Agent for log collection only"
+- link: "/logs/log_configuration/processors"
+  tag: "Documentation"
+  text: "Discover how to process your logs"
+- link: "/logs/log_configuration/parsing"
+  tag: "Documentation"
+  text: "Learn more about parsing"
+- link: "/logs/live_tail/"
+  tag: "Documentation"
+  text: "Datadog live tail functionality"
+- link: "/logs/explorer/"
+  tag: "Documentation"
+  text: "See how to explore your logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
+---
 algolia:
   tags: ['advanced log filter']
 ---
@@ -8,7 +31,7 @@ algolia:
 <div class="alert alert-warning"><strong>Important!</strong> This document is for agents older than `7.65.0` or if you have explicitly enabled the V1 implementation of auto multi-line detection. For more recent agent versions, see [Auto Multi-line Detection and Aggregation][1] </div>
 
 ### Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up.
+With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][3] automatically for **all** log integrations it sets up.
 
 
 {{< tabs >}}
@@ -248,3 +271,4 @@ Automatic multi-line detection detects logs that begin and comply with the follo
 
 [1]: /agent/logs/auto_multiline_detection
 [2]: /agent/logs/auto_multiline_detection_legacy
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
