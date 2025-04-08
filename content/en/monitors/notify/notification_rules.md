@@ -11,7 +11,7 @@ further_reading:
 
 {{< beta-callout url="https://www.datadoghq.com/product-preview/monitor-notification-rules/" >}}
 Monitor Notification Rules are in Preview.
-{{< /beta-callout >}} 
+{{< /beta-callout >}}
 
 
 ## Overview
@@ -29,13 +29,13 @@ Monitor notification rules are predefined sets of conditions that automate the p
 1. Add a name for the rule.
 1. Click **Create Rule**.
 
-{{< img src="/monitors/notifications/notification_rules/notification_rules_config.png" alt="Configuration for a notification rule showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_form.png" alt="Configuration for a notification rule showing tag scopes, recipients, and matching monitors" style="width:100%;" >}}
 
 ## Managing notification rules
 
 ### From Monitor Settings
 
-{{< img src="/monitors/notifications/notification_rules/settings_notification_rules.png" alt="List of notification rules in Monitor Settings" style="width:100%;" >}}
+{{< img src="/monitors/notifications/notification_rules/notification_rules_form.png" alt="List of notification rules in Monitor Settings" style="width:100%;" >}}
 
 The [Monitor Notification Rules][1] page displays a table of all your notification rules with the following columns:
 
@@ -55,7 +55,7 @@ In your monitor configuration, you can view the notification recipients that are
 
 ## Routing logic
 
-Notification rules apply to recipients of all monitor notifications that match the scopes defined in the rule configuration. 
+Notification rules apply to recipients of all monitor notifications that match the scopes defined in the rule configuration.
 - Multiple tags apply an AND logic to the scope.
 - Multiple rules can match a single monitor notification, and all recipients are added to the monitor alert without duplication.
 
