@@ -65,7 +65,7 @@ Datadog breaks down change lead time into the following fields, which represent 
 
 | Metric                     | Description                |
 |----------------------------|----------------------------|
-| `Time to Pr Ready`          | Time from when the commit is created until the PR is ready for review. This metric is only available for commits made before the PR is marked as ready for review. |
+| `Time to PR Ready`          | Time from when the commit is created until the PR is ready for review. This metric is only available for commits made before the PR is marked as ready for review. |
 | `Review Time`          | Time from when the PR is marked ready for review until it receives the last approval. This metric is only available for commits made before the PR is approved. |
 | `Merge Time`          | Time from the last approval until the PR is merged. |
 | `Time to Deploy` | Time from PR merge to start of deployment. If a commit has no associated PR, this metric is calculated as the time from commit creation to start of deployment. |
