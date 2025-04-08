@@ -93,6 +93,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
 | `strpos(string s, string substring)`             | integer                               | Returns the index position of the substring in a given string.              |
+| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string as the given position counting from 1. |
 | `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
@@ -238,6 +239,12 @@ FROM
 {{< code-block lang="sql" >}}
 SELECT
   STRPOS('high', 'ig')
+{{< /code-block >}}
+
+### `SPLIT_PART`
+{{< code-block lang="sql" >}}
+SELECT
+  SPLIT_PART('aaa-bbb-ccc', '-', 2)
 {{< /code-block >}}
 
 ### `EXTRACT`
