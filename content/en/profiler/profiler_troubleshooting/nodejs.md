@@ -16,9 +16,9 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Node.js 18.19.01)
 
-## Profiler fails to load native component
+## Profiler fails to find the native component
 
-The profiler might fail to find and load its native component. In this situation, your application logs or console display an error message similar to:
+The profiler might fail to find its native component. In this situation, your application logs or console display an error message similar to:
 
 ```
 Error: No native build was found for runtime=node abi=109 platform=linuxglibc arch=x64
@@ -32,6 +32,19 @@ The profiler ships with prebuilt binaries for all supported combinations of plat
 
 To resolve this issue, download and install Node from the [Node.js website][4] instead of using your operating system's package manager, or
 update your operating system to a newer version that might include an updated version of Node.js without this issue.
+
+## Profiler fails to load the native component
+
+The profiler might fail to load the native component even if it finds it. This is indicated by an error message similar to:
+```
+Error: Error relocating /app/node_modules/@datadog/pprof/prebuilds/linuxmusl-x64/node-108.node: _ZSt28__throw_bad_array_new_lengthv: symbol not found
+```
+and further down below the stack trace:
+```
+code: 'ERR_DLOPEN_FAILED'
+```
+
+This can typically happens on Linux systems using the musl C standard library, such as Alpine Linux. This means that the version of musl your Linux distribution uses is older than the minimum version supported by the profiler library. First make sure you're using the latest version of dd-trace library. If that doesn't help, you can try to upgrade musl, upgrade your Linux distribution, or if you believe we should support your musl version then contact us.
 
 ## Further Reading
 
