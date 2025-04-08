@@ -12,7 +12,7 @@ To ensure that child workflows are correctly linked to their parents, enable the
 ## Limitations
 - Datadog does not support parenting for failed child workflows. You can find these failed child workflows as orphans in the same trace as the parent Distributed Map.
 - Datadog cannot propagate trace context if there is another Step Function or a Lambda upstream from the Distributed Map's Step Function. The link is broken, and the child workflow is in its own trace.
-- Currently, the executions from the child map run will be in the same invocation table as the parent Step Function. The child table in the Step Functions page will be empty as a result.
+- Executions from a child map run are in the same invocation table as the parent Step Function. As a result, the child table in the Step Functions page is empty.
 
 ## Troubleshooting
 - If trace merging is broken because there is another upstream service, you can use the `fan_out_children_trace_id` span attribute in the Distributed Map span to look for the child workflow traces.
