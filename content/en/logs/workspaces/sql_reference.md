@@ -103,6 +103,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurence of the value found in the array.   |
 | `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
 | `array_agg(expression e)`                        | array of input type                   | Create an array by concatenating the input values. Ordering is not deterministic |
+| `unnest(array a)`                                | type of array                         | Expands an array into a set of rows.                                        |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -391,6 +392,15 @@ FROM (
     UNION ALL
     SELECT 2 x, 6.1 y
 );
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT 
+  *, 
+  UNNEST(recipients)
+FROM 
+  emails;
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
