@@ -98,6 +98,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
 | `cardinality(array a)`                           | integer                               | Returns the number of elements in the array, or 0 if the array is empty.    |
+| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurence of the value found in the array.   |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -342,6 +343,14 @@ WHERE
 {{< code-block lang="sql" >}}
 SELECT
   CARDINALITY(recipients)
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com')
 FROM
   emails
 {{< /code-block >}}
