@@ -32,6 +32,8 @@ Mobile Application Testing allows you to test and monitor key business flows for
 Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 Mobile app tests can run on a schedule, on demand, or directly within your [CI/CD pipelines][1].
 
+Optionally, link Synthetics mobile test data with mobile RUM data if the [RUM SDK][15] is leveraged within the tested application. 
+
 You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
 {{< img src="mobile_app_testing/new_test_2.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
@@ -192,3 +194,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/
