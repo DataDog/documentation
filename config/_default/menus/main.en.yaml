@@ -3533,6 +3533,21 @@ menu:
       parent: automatic_instrumentation
       identifier: single_step_apm
       weight: 2011
+    - name: Single Step APM Instrumentation on Linux
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+      parent: single_step_apm
+      identifier: single_step_apm_linux
+      weight: 20111
+    - name: Single Step APM Instrumentation on Docker
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/docker
+      parent: single_step_apm
+      identifier: single_step_apm_docker
+      weight: 20112
+    - name: Single Step APM Instrumentation on Kubernetes
+      url: tracing/trace_collection/automatic_instrumentation/single-step-apm/kubernetes
+      parent: single_step_apm
+      identifier: single_step_apm_kubernetes
+      weight: 20113
     - name: Using Datadog Tracing Libraries
       url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
       parent: automatic_instrumentation

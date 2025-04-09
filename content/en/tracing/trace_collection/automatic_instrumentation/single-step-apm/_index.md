@@ -2,6 +2,7 @@
 title: Single Step APM Instrumentation
 aliases:
 - /tracing/trace_collection/single-step-apm
+type: multi-code-lang
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
@@ -20,6 +21,10 @@ To see requirements for compatible languages, operating systems, and architectur
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
 The following examples show how it works for each deployment type.
+
+{{< partial name="apm/apm-compatibility.html" >}}
+
+<br>
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
