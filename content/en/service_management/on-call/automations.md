@@ -9,11 +9,11 @@ further_reading:
   text: "Workflow Automation"
 ---
 
-## Overview 
+## Overview
 
 Automations allow you to trigger actions based on events in On-Call. There are two types:
-- **Handover automations** – Triggered automatically when an on-call shift changes.
-- **[Workflow automations][1]** – A low-code/no-code solution that lets you define actions based on various on-call activities.
+- **Handover automations**: Triggered automatically when an on-call shift changes.
+- **[Workflow automations][1]**: A low-code/no-code solution that lets you define actions based on various on-call activities.
 
 
 ## Handover automations
@@ -28,15 +28,15 @@ If you need a specific action that isn't listed, contact your account representa
 
 Handover Automations are maintained on a Team level. To get started, navigate to the [On-Call Team][4], open a specific team and scroll down to the **Handover Automation** section.
 
-### Send a Slack Message
+### Send a Slack message
 Post a message to Slack at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Slack app—make sure it's [added to your workspace][2].
 
-### Send a Microsoft Teams Message
+### Send a Microsoft Teams message
 Post a message to Microsoft Teams at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Teams app—make sure it's [added to your workspace][3].
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}} 
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/
 [2]: /integrations/slack/?tab=datadogforslack#install-the-datadog-app-in-your-slack-workspace
