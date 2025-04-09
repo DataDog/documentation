@@ -917,7 +917,7 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 {{< /tabs >}}
 
 {{% collapse-content title="Deployment diagram" level="p" %}}
-{{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/deployment-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 ## Send your telemetry to Datadog
