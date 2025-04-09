@@ -35,13 +35,6 @@ You can use the following basic regex to match the UUID and user ID that you wan
 [a-z0-9]{14}-\d{4}-[a-z0-9]{4}-[a-z0-9]{4}-\d{6}
 ```
 
-This regex pattern captures:
-- The 14-character alphanumeric start of the UUID
-- A sequence of structured segments (`-####-####-####`)
-- The 6-digit byte-format user ID
-
-It excludes the final 4-digit department and status code, allowing that information to remain visible.
-
 1. Navigate to the [Sensitive Data Scanner settings][1] page.
 1. Click **Add** and select **Add Scanning Rule**.
 1. Click **Custom Rule**.
