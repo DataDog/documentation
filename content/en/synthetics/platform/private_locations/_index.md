@@ -655,18 +655,130 @@ Additional parameters can be added:
 
 For more information about private locations parameters for admins, see [Configuration][32].
 
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. **Note**: If you combine all your `.pem` files into one file, then the order in which the certificates are placed matters. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
+
 #### Set up liveness and readiness probes
 
 Add a liveness or readiness probe so your orchestrator can ensure the workers are running correctly.
 
 For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Private Locations Configuration][5].
 
+{{< tabs >}}
 
-#### Root certificates
+{{% tab "Docker Compose" %}}
 
-You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+```yaml
+healthcheck:
+  retries: 3
+  test: [
+    "CMD", "wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ]
+  timeout: 2s
+  interval: 10s
+  start_period: 30s
+```
 
-When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime. **Note**: If you combine all your `.pem` files into one file, then the order in which the certificates are placed matters. It is required that the intermediate certificate precedes the root certificate to successfully establish a chain of trust.
+{{% /tab %}}
+
+{{% tab "Kubernetes Deployment" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+
+{{% tab "ECS" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "/usr/bin/wget", "-O", "/dev/null", "-q", "http://localhost:8080/liveness"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "Fargate" %}}
+
+```json
+"healthCheck": {
+  "retries": 3,
+  "command": [
+    "CMD-SHELL", "wget -O /dev/null -q http://localhost:8080/liveness || exit 1"
+  ],
+  "timeout": 2,
+  "interval": 10,
+  "startPeriod": 30
+}
+```
+
+{{% /tab %}}
+
+{{% tab "EKS" %}}
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 2
+  httpGet:
+    path: /readiness
+    port: 8080
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Additional health check configurations
 
