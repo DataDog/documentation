@@ -151,6 +151,28 @@ Finally, [restart the Agent][2].
 [1]: /logs/log_configuration/pipelines/#integration-pipelines
 [2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
+{{% tab "Windows Private Location" %}}
+To send Windows Private Location logs to Datadog, first enable agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
+
+Next, navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
+
+Inside this folder, create a file called `conf.yaml` with the following content:
+```yaml
+logs:
+  - type: file
+    path: "C:\\Program Files\\Datadog-Synthetics\\Synthetics\\private-location-service.out.log"
+    service: private-location #Defined per user preference
+    source: synthetics
+    tags: #Defined per user preference
+      - env:prod
+      - private_location:windows-pl
+```
+Since the Private Location installation folder is protected by admin access, the Datadog Agent needs permission to access the log file. To check the user running the Datadog Agent, press Windows key + R, search for `Run`, find the Datadog Agent, right-click it, and select `Properties`. In the `Log On` tab, verify the account (default is `ddagentuser`) and close the window.
+
+Next, go to `C:\Program Files`, find the `synthetics_worker.d` folder, right-click it, select `Properties`, and go to the `Security` tab. Click `Edit`, add `ddagentuser`, and grant the necessary permissions.
+
+Finally, restart the Datadog Agent either through the Services screen or command line to apply the changes and begin sending logs to Datadog.
+{{% /tab %}}
 {{< /tabs >}}
 
 List of all available parameters for log collection:
