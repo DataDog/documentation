@@ -7562,7 +7562,7 @@ menu:
       identifier: rum_error_tracking_suspect_commits
       weight: 908
     - name: Troubleshooting
-      url: error_tracking/troubleshooting
+      url: real_user_monitoring/error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
