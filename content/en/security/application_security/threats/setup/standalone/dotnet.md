@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for .NET
+title: Enabling Application & API Protection for .NET
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -26,17 +26,18 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
-## Enabling threat detection
+## Enabling Application & API Protection
 ### Get started
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Software Composition Analysis detection features) for your target operating system architecture.
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for Application & API Protection capabilities, see [Compatibility][2].
 
-2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+2. **Enable Application & API Protection** by setting the environment variables. For security-only use without APM tracing, set both `DD_APPSEC_ENABLED=true` and `DD_APM_TRACING_ENABLED=false`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
+   [System.Environment]::SetEnvironmentVariable("DD_APM_TRACING_ENABLED","false",$target)
    ```
 
    **Or** one of the following methods, depending on where your application runs:
@@ -51,6 +52,7 @@ rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 SET DD_APPSEC_ENABLED=true
+SET DD_APM_TRACING_ENABLED=false
 
 rem Start application
 dotnet.exe example.dll
@@ -63,6 +65,7 @@ Run the following PowerShell command as administrator to configure the necessary
 ```
 $target=[System.EnvironmentVariableTarget]::Machine
 [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
+[System.Environment]::SetEnvironmentVariable("DD_APM_TRACING_ENABLED","false",$target)
 net stop was /y
 net start w3svc
 ```
@@ -70,7 +73,7 @@ net start w3svc
 **Or**, for IIS services exclusively, on WAS and W3SVC with Powershell as an administrator, run:
 
 ```
-$appsecPart = "DD_APPSEC_ENABLED=true"
+$appsecPart = "DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false"
 [string[]] $defaultvariable = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}", $appsecPart)
 
 function Add-AppSec {
@@ -99,6 +102,7 @@ net start w3svc
 <configuration>
   <appSettings>
         <add key="DD_APPSEC_ENABLED" value="true"/>
+        <add key="DD_APM_TRACING_ENABLED" value="false"/>
   </appSettings>
 </configuration>
 ```
@@ -111,6 +115,7 @@ This can also be done at the IIS application pools level in the `applicationHost
         <add name="DefaultAppPool">
             <environmentVariables>
                 <add name="DD_APPSEC_ENABLED" value="true" />
+                <add name="DD_APM_TRACING_ENABLED" value="false" />
             </environmentVariables>
             (...)
 ```
@@ -121,29 +126,31 @@ This can also be done at the IIS application pools level in the `applicationHost
 Add the following to your application configuration:
 ```conf
 DD_APPSEC_ENABLED=true
+DD_APM_TRACING_ENABLED=false
 ```
 {{% /tab %}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command:
+Update your configuration container for APM by adding the following arguments in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
+docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable values to your container Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the Application & API Protection environment variables:
 
 ```yaml
 spec:
@@ -155,12 +162,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -168,6 +177,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```
@@ -175,9 +188,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Add the following line to your container Dockerfile:
+Add the following lines to your container Dockerfile:
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}

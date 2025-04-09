@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Python
+title: Enabling Application & API Protection for Python
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
@@ -26,7 +26,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{% appsec-getstarted %}}
 
-## Enabling threat detection
+## Enabling Application & API Protection
 ### Get started
 
 1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Software Composition Analysis detection features). Run the following:
@@ -34,37 +34,38 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    pip install --upgrade ddtrace
    ```
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for Application & API Protection capabilities, see [Compatibility][1].
 
-2. **Enable ASM when starting the Python application**.
+2. **Enable Application & API Protection when starting the Python application**.
 
    ```bash
-   DD_APPSEC_ENABLED=true ddtrace-run python app.py
+   DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false ddtrace-run python app.py
    ```
 
     You can also use one of the following methods, depending on where your application runs:
    {{< tabs >}}
    {{% tab "Docker CLI" %}}
 
-   Update your configuration container for APM by adding the following argument in your `docker run` command:
+   Update your configuration container for APM by adding the following arguments in your `docker run` command:
 
    ```shell
-   docker run [...] -e DD_APPSEC_ENABLED=true [...]
+   docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
    ```
 
    {{% /tab %}}
    {{% tab "Dockerfile" %}}
 
-   Add the following environment variable value to your container Dockerfile:
+   Add the following environment variable values to your container Dockerfile:
 
    ```Dockerfile
    ENV DD_APPSEC_ENABLED=true
+   ENV DD_APM_TRACING_ENABLED=false
    ```
 
    {{% /tab %}}
    {{% tab "Kubernetes" %}}
 
-   Update your configuration YAML file container for APM and add the `DD_APPSEC_ENABLED` environment variable:
+   Update your configuration YAML file container for APM and add the environment variables:
 
    ```yaml
    spec:
@@ -76,6 +77,8 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
              env:
                - name: DD_APPSEC_ENABLED
                  value: "true"
+               - name: DD_APM_TRACING_ENABLED
+                 value: "false"
    ```
 
    {{% /tab %}}
@@ -89,6 +92,10 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
      {
        "name": "DD_APPSEC_ENABLED",
        "value": "true"
+     },
+     {
+       "name": "DD_APM_TRACING_ENABLED",
+       "value": "false"
      }
    ]
    ```
@@ -96,9 +103,9 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    {{% /tab %}}
    {{% tab "AWS Fargate" %}}
 
-   Initialize ASM in your code or set the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+   Initialize Application & API Protection in your code or set the environment variables in your service invocation:
    ```shell
-   DD_APPSEC_ENABLED=true ddtrace-run python app.py
+   DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false ddtrace-run python app.py
    ```
 
    {{% /tab %}}

@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Go
+title: Enabling Application & API Protection for Go
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -27,7 +27,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 {{% appsec-getstarted %}}
 - Your service is [supported][2].
 
-## Enabling threat detection
+## Enabling Application & API Protection
 ### Get started
 
 1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
@@ -40,7 +40,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
    A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
 
-3. **Recompile your program** with ASM enabled:
+3. **Recompile your program** with Application & API Protection enabled:
    ```console
    $ go build -v -tags appsec my-program
    ```
@@ -49,11 +49,11 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    - The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
    - Datadog WAF needs the following shared libraries on Linux: `libc.so.6` and `libpthread.so.0`.
    - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
-   - The Go build tag `datadog.no_waf` can be used to disable ASM at build time in any situation where the requirements above are a hinderance.
+   - The Go build tag `datadog.no_waf` can be used to disable Application & API Protection at build time in any situation where the requirements above are a hinderance.
 
-4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+4. **Redeploy your Go service and enable Application & API Protection** by setting the environment variables:
    ```console
-   $ env DD_APPSEC_ENABLED=true ./my-program
+   $ env DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false ./my-program
    ```
 
    Or one of the following methods, depending on where your application runs:
@@ -61,25 +61,26 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Add the following environment variable value to your Docker command line:
+Add the following environment variable values to your Docker command line:
 
 ```console
-$ docker run -e DD_APPSEC_ENABLED=true [...]
+$ docker run -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your application container's Dockerfile:
+Add the following environment variable values to your application container's Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your application's deployment configuration file for APM and add the ASM environment variable:
+Update your application's deployment configuration file for APM and add the Application & API Protection environment variables:
 
 ```yaml
 spec:
@@ -91,12 +92,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your application's ECS task definition JSON file, by adding this in the environment section:
+Update your application's ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -104,6 +107,10 @@ Update your application's ECS task definition JSON file, by adding this in the e
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```

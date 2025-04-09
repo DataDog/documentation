@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Node.js
+title: Enabling Application & API Protection for Node.js
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -26,7 +26,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted %}}
 
-## Enabling threat detection
+## Enabling Application & API Protection
 ### Get started
 
 1. **Update your Datadog Node.js library package** to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for Node.js 14+), by running one of these commands:
@@ -39,14 +39,15 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
    Application Security Management is compatible with Express v4+ and Node.js v14+. For additional information, see [Compatibility][2].
 
-2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
+2. **Where you import and initialize the Node.js library for APM, also enable Application & API Protection.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 
 ```js
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init({
-  appsec: true
+  appsec: true,
+  tracing: false // To disable APM tracing and use security features only
 })
 ```
 
@@ -61,7 +62,8 @@ import './tracer'; // must come before importing any instrumented module.
 // tracer.ts
 import tracer from 'dd-trace';
 tracer.init({
-  appsec: true
+  appsec: true,
+  tracing: false // To disable APM tracing and use security features only
 }); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
@@ -77,33 +79,34 @@ import `dd-trace/init`;
    ```shell
    node --require dd-trace/init app.js
    ```
-   Then use environment variables to enable ASM:
+   Then use environment variables to enable Application & API Protection:
    ```shell
-   DD_APPSEC_ENABLED=true node app.js
+   DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false node app.js
    ```
    How you do this varies depending on where your service runs:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command:
+Update your configuration container for APM by adding the following arguments in your `docker run` command:
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
+docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable values to your container Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your configuration yaml file container for APM and add the AppSec env variable:
+Update your configuration yaml file container for APM and add the Application & API Protection env variables:
 
 ```yaml
 spec:
@@ -115,12 +118,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -128,6 +133,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```
@@ -135,9 +144,9 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+Initialize Application & API Protection in your code or set environment variables in your service invocation:
 ```shell
-DD_APPSEC_ENABLED=true node app.js
+DD_APPSEC_ENABLED=true DD_APM_TRACING_ENABLED=false node app.js
 ```
 
 {{% /tab %}}

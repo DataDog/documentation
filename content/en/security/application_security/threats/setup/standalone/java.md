@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Java
+title: Enabling Application & API Protection for Java
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -26,7 +26,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
-## Enabling threat detection
+## Enabling Application & API Protection
 ### Get started
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Software Composition Analysis detection features):
@@ -49,11 +49,11 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 {{% /tab %}}
 {{< /tabs >}}
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for Application & API Protection capabilities, see [Compatibility][2].
 
-2. **Run your Java application with ASM enabled.** From the command line:
+2. **Run your Java application with Application & API Protection enabled.** From the command line:
    ```shell
-   java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
+   java -javaagent:/path/to/dd-java-agent.jar -Ddd.appsec.enabled=true -Ddd.trace.enabled=false -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
    Or one of the following methods, depending on where your application runs:
@@ -63,26 +63,27 @@ You can monitor application security for Java apps running in Docker, Kubernetes
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 
-Update your configuration container for APM by adding the following argument in your `docker run` command:
+Update your configuration container for APM by adding the following arguments in your `docker run` command:
 
 
 ```shell
-docker run [...] -e DD_APPSEC_ENABLED=true [...]
+docker run [...] -e DD_APPSEC_ENABLED=true -e DD_APM_TRACING_ENABLED=false [...]
 ```
 
 {{% /tab %}}
 {{% tab "Dockerfile" %}}
 
-Add the following environment variable value to your container Dockerfile:
+Add the following environment variable values to your container Dockerfile:
 
 ```Dockerfile
 ENV DD_APPSEC_ENABLED=true
+ENV DD_APM_TRACING_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the Application & API Protection environment variables:
 
 ```yaml
 spec:
@@ -94,12 +95,14 @@ spec:
           env:
             - name: DD_APPSEC_ENABLED
               value: "true"
+            - name: DD_APM_TRACING_ENABLED
+              value: "false"
 ```
 
 {{% /tab %}}
 {{% tab "Amazon ECS" %}}
 
-Update your ECS task definition JSON file, by adding this in the environment section:
+Update your ECS task definition JSON file, by adding these in the environment section:
 
 ```json
 "environment": [
@@ -107,6 +110,10 @@ Update your ECS task definition JSON file, by adding this in the environment sec
   {
     "name": "DD_APPSEC_ENABLED",
     "value": "true"
+  },
+  {
+    "name": "DD_APM_TRACING_ENABLED",
+    "value": "false"
   }
 ]
 ```
@@ -114,11 +121,12 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Set the `-Ddd.appsec.enabled` flag or the `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+Set the appropriate flags or environment variables in your service invocation:
 
 ```shell
 java -javaagent:dd-java-agent.jar \
      -Ddd.appsec.enabled=true \
+     -Ddd.trace.enabled=false \
      -jar <YOUR_SERVICE>.jar \
      <YOUR_SERVICE_FLAGS>
 ```
