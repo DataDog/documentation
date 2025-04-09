@@ -55,7 +55,7 @@ OpenTelemetry (OTel) Go applications are [instrumented manually][3]. To enable r
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0][6]</div>
+<div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
 If you have instrumented your .NET applications with [OpenTelemetry automatic instrumentation][3], runtime metrics are automatically enabled. 
 
@@ -67,7 +67,6 @@ The default metric export interval for the .NET OTel SDK is different from the d
 [3]: https://opentelemetry.io/docs/instrumentation/net/automatic/
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
-[6]: https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
 
 {{% /tab %}}
