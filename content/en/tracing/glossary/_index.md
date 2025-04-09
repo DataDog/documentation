@@ -31,16 +31,16 @@ further_reading:
 
 The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, enabling you to find and resolve issues in distributed systems.
 
-For additional definitions and descriptions of important APM terms such as _spans_ and _indexed_, see the [main Glossary][22]. 
+For additional definitions and descriptions of important APM terms such as _spans_ and _indexed_, see the [main Glossary][22].
 
-| Concept                         | Description                                                                                                                                                                                                          |
-|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
-| [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
+| Concept                         | Description                                                                                                                                                                                                        |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                |
+| [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                            |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
-| [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
-| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
-| [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
+| [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                           |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling Datadog to stitch together individual spans into a complete distributed trace. |
+| [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                            |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
 | [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
@@ -71,7 +71,7 @@ Don't see the HTTP endpoints you were expecting on the Service page? In APM, end
 
 ## Resources
 
-Resources represent a particular domain of a customer application. They could typically be an instrumented web endpoint, database query, or background job. For a web service, these resources can be dynamic web endpoints that are grouped by a static span name -  `web.request`. In a database service, these would be database queries with the span name `db.query`. For example the `web-store` service has automatically instrumented resources - web endpoints - which handle checkouts, updating carts, adding items, and so on. A Resource name can be the HTTP method and the HTTP route, for example `GET /productpage` or `ShoppingCartController#checkout`. 
+Resources represent a particular domain of a customer application. They could typically be an instrumented web endpoint, database query, or background job. For a web service, these resources can be dynamic web endpoints that are grouped by a static span name -  `web.request`. In a database service, these would be database queries with the span name `db.query`. For example the `web-store` service has automatically instrumented resources - web endpoints - which handle checkouts, updating carts, adding items, and so on. A Resource name can be the HTTP method and the HTTP route, for example `GET /productpage` or `ShoppingCartController#checkout`.
 
 Each resource has its own [Resource page][7] with [trace metrics][15] scoped to the specific endpoint. Trace metrics can be used like any other Datadog metric - they are exportable to a dashboard or can be used to create monitors. The Resource page also shows the span summary widget with an aggregate view of [spans][21] for all [traces](#trace), latency distribution of requests, and traces which show requests made to this endpoint.
 
@@ -109,7 +109,7 @@ To learn more, read [Application Instrumentation][26].
 
 ## Baggage
 
-Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.  
+Baggage allows you to propagate key-value pairs (also known as baggage items) across service boundaries in a distributed system. Unlike trace context, which focuses on trace identifiers, baggage allows for the transmission of business data and other contextual information alongside traces.
 
 To learn more, read supported [propagation formats][28] for your application's language.
 
