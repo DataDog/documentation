@@ -44,7 +44,7 @@ Add the RUM SDK manually to your application code.
 
 **Frontend engineering, mobile engineering, or product teams** with access to frontend code may find this method useful for:
 
-- Daily engineering needs (for example: live support, troubleshooting, and downstream services health checks)
+- Daily engineering needs (for example: live support, troubleshooting, and health checks for downstream services)
 - Product needs (for example: user flow analysis, user segmentation, and feature flag tracking)
 - Capturing observability from in-house code or complex functions that aren't captured by automatic instrumentation
 

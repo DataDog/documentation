@@ -24,7 +24,7 @@ RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML re
 Remotely manage your RUM application configurations directly from Datadog, after having them auto-instrumented with the RUM SDK.
 If you want to manage RUM configs in your web server files instead, see [Non-remote managed applications](#non-remote-managed-applications).
 
-Configurations that can be remotely managed are as follows:
+The following configurations can be remotely managed:
 
 - Session sampling rate
 - Session Replay sampling rate
@@ -33,6 +33,7 @@ Configurations that can be remotely managed are as follows:
 - Environment (attribute)
 - Service name (attribute)
 
+To remotely configure your RUM application:
 1. Make sure you have [Remote Configuration][42] enabled in Datadog.
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
 1. Select **Auto-Instrumentation**.
