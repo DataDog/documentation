@@ -82,6 +82,8 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 
 <div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
+<div class="alert alert-warning">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
+
 ##### Installation
 
 1. On the [Intro to Cloud Security Management][4] page, click **Get Started with Cloud Security Management**.
@@ -89,8 +91,7 @@ For existing users who want to add a new AWS account or enable Agentless Scannin
 1. Click **Start Using Cloud Security Management** to continue.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-1. **Send AWS Logs to Datadog** and **Detect security issues** are automatically selected by default. Leave the selections as-is.
-1. The **Enable Vulnerability Management (Host, Container and Lambda)** switch is also enabled by default. Leave this selection as-is.
+1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
 ##### Exclude resources from scans
@@ -225,7 +226,6 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
 1. **Send AWS Logs to Datadog** and **Detect security issues** are automatically selected by default. Leave the selections as-is.
-1. The **Enable Vulnerability Management (Host, Container and Lambda)** switch is also enabled by default. Leave this selection as-is.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
