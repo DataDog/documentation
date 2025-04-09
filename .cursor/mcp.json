@@ -1,7 +1,0 @@
-{
-  "mcpServers": {
-    "Datadog Extension": {
-      "url": "http://localhost:5594/sse"
-    }
-  }
-}
