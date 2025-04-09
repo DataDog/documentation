@@ -136,6 +136,7 @@ For information on how Datadog handles your data, and other security considerati
 
 ## Granular access control
 By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level. Not all integrations support granular access controls yet. 
+{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:100%;" >}}
 
 1. While viewing an integration, locate the resource that should have granular access controls applied. 
 2. Click **Set Permissions**.
