@@ -38,9 +38,15 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                |
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                            |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
+<<<<<<< Updated upstream
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                           |
 | [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                            |
+=======
+| [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling Datadog to stitch together individual spans into a complete distributed trace. |
+| [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
+>>>>>>> Stashed changes
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
 | [Baggage](#baggage) | Baggage is contextual information that is passed between traces, metrics, and logs in the form of key-value pairs. |
