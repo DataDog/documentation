@@ -152,7 +152,7 @@ By default, access to integration resources (accounts, services, webhooks) is un
 To restore general access to a integration resource with restricted access, follow the steps below:
 1. Click **Set Permissions**.
 2. Click **Restore Full Access**.
-3. Click **Save**. The integration page will automatically refresh with updated permissions. 
+3. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
 ## What's next?
 
