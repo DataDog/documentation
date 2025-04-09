@@ -23,7 +23,6 @@ Bits AI enables natural language querying for service health and ownership of yo
 - [Logs](#logs)
 - [APM traces](#apm-traces)
 - [Infrastructure data (DDSQL Editor)](#infrastructure-data-ddsql-editor)
-- [Cloud cost](#cloud-cost)
 - [RUM](#rum)
 
 ## Logs
@@ -49,15 +48,7 @@ Bits AI enables natural language querying for service health and ownership of yo
 Most Common Instance Types:
 {{< img src="ddsql_editor/query-ui-overview.png" alt="Query result for most common instance types" style="width:90%;">}}
 
-To learn more about querying infrastructure resource data in DDSQL Editor, see this [page][2]. 
-
-## Cloud cost
-
-`Show me how much each team spends on the web-store service`:
-{{< img src="bits_ai/query_examples/web-store-spend-by-team.png" alt="Query result for service spend per team" style="width:90%;">}}
-
-`AWS products with >5% increase in costs`:
-{{< img src="bits_ai/query_examples/aws-product-cost-increase.png" alt="Query result for AWS products with an increase in costs" style="width:90%;">}}
+To learn more about querying infrastructure resource data in DDSQL Editor, see this [page][2].
 
 ## RUM
 
