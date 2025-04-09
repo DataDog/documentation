@@ -23,6 +23,10 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
+# Developers/ui_extensions (source removed in #27992)
+content/en/developers/ui_extensions.md
+content/en/developers/faq/ui_extensions.md
+
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
 content/en/agent/basic_agent_usage/chef.md
@@ -131,6 +135,14 @@ content/en/static_analysis/github_actions.md
 content/en/static_analysis/circleci_orbs.md
 content/en/static_analysis/rules/
 
+# containers - datadog-operator
+content/en/containers/datadog_operator/advanced_install.md
+content/en/containers/datadog_operator/configuration.md
+content/en/containers/datadog_operator/custom_check.md
+content/en/containers/datadog_operator/data_collected.md
+content/en/containers/datadog_operator/kubectl_plugin.md
+content/en/containers/datadog_operator/secret_management.md
+content/en/containers/guide/v2alpha1_migration.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
@@ -270,3 +282,6 @@ local/bin/py/submit_github_status_check.py
 !local/bin/py/build/configuration/pull_config_preview.yaml
 !local/bin/py/build/configuration/pull_config.yaml
 !local/bin/py/build/configuration/integration_merge.yaml
+
+# Cursor editor configuration
+.cursor/

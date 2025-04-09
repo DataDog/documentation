@@ -67,6 +67,10 @@
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. You can query your cost data by using the [Metrics endpoint](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products) and the `cloud_cost` data source. For more information, see the [Cloud Cost Management documentation](https://docs.datadoghq.com/cloud_cost_management/)."
   },
+  "cloud-network-monitoring": {
+    "name": "Cloud Network Monitoring",
+    "description": "The Cloud Network Monitoring API allows you to fetch aggregated connections and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) for more information."
+  },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
@@ -167,6 +171,10 @@
     "name": "Network Device Monitoring",
     "description": "The Network Device Monitoring API allows you to fetch devices and interfaces and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/) for more information."
   },
+  "observability-pipelines": {
+    "name": "Observability Pipelines",
+    "description": "Observability Pipelines allows you to collect and process logs within your own infrastructure, and then route them to downstream integrations."
+  },
   "okta-integration": {
     "name": "Okta Integration",
     "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
@@ -205,7 +213,7 @@
   },
   "rum-retention-filters": {
     "name": "Rum Retention Filters",
-    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) for your organization."
+    "description": "Manage retention filters through [Manage Applications](https://app.datadoghq.com/rum/list) of RUM for your organization."
   },
   "scim": {
     "name": "SCIM",

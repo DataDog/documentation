@@ -96,6 +96,10 @@ The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` 
 **Default**: `10`<br>
 Timeout in seconds for network interactions with the Datadog Agent.
 
+`dd.trace.client-ip.enabled`
+: **Default**: `false` <br>
+Enable client IP collection from relevant IP headers in HTTP request spans. Automatically enabled when `dd.appsec.enabled=true`.
+
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
 **Default**: `null`<br>
@@ -289,6 +293,14 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
+### ASM
+
+`dd.appsec.enabled`
+: **Environment Variable**: `DD_APPSEC_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
+For more information, see [Enabling ASM for Java][19].
+
 ### Errors
 
 `dd.http.client.tag.query-string`
@@ -372,7 +384,7 @@ Additional metrics configuration file for JMX metrics collection. The Java Agent
 
 `dd.jmxfetch.check-period`
 : **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
+**Default**: `15000`<br>
 How often to send JMX metrics (in ms).
 
 `dd.jmxfetch.refresh-beans-period`
@@ -591,3 +603,4 @@ Deprecated since version 1.9.0
 [16]: /tracing/trace_collection/custom_instrumentation/java/otel/
 [17]: /opentelemetry/interoperability/environment_variable_support
 [18]: /tracing/guide/aws_payload_tagging/?code-lang=java
+[19]: /security/application_security/threats/setup/threat_detection/java/
