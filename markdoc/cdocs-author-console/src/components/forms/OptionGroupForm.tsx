@@ -39,7 +39,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
 // TODO: Export all of these types from cdocs-data,
 // it doesn't make sense to have to redeclare them here
-type OptionGroup = {
+export type OptionGroup = {
   label: string;
   id: string;
   default?: boolean | undefined;
@@ -61,12 +61,21 @@ function OptionGroupForm({
 
   const handleExistingOptionGroupSelect = (selectedOptionGroupId: string) => {
     const updatedOptionGroup = customizationConfig.optionGroupsById[selectedOptionGroupId];
+    console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
     onUpdate({
       optionGroupId: selectedOptionGroupId,
       optionGroup: updatedOptionGroup
     });
     setOptionGroupId(selectedOptionGroupId);
     setOptionGroup(updatedOptionGroup);
+  };
+
+  const handleNewGroupSave = () => {
+    console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
+    onUpdate({
+      optionGroupId,
+      optionGroup
+    });
   };
 
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
@@ -108,11 +117,15 @@ function OptionGroupForm({
         <OptionSelector
           customizationConfig={customizationConfig}
           onSelect={(selectedOptions) => {
-            console.log('selected options', JSON.stringify(selectedOptions, null, 2));
             setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
           }}
         />
-        <Button sx={{ marginTop: '15px' }} variant="contained">
+        <Button
+          disabled={!optionGroupId || optionGroup.length < 2}
+          sx={{ marginTop: '15px' }}
+          variant="contained"
+          onClick={handleNewGroupSave}
+        >
           Save option group
         </Button>
       </CustomTabPanel>
