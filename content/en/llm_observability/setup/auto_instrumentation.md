@@ -154,7 +154,7 @@ The Vertex AI integration instruments the following methods:
 
 ## Crew AI
 
-The Crew AI integration automatically traces execution of crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
+The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
 
 ### Traced methods
 
