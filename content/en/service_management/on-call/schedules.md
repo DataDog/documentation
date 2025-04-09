@@ -72,14 +72,14 @@ The Export Shifts feature allows you to integrate your on-call schedule into you
 ##### 📆 Export *My* Shifts
 
 1. Go to the [**On-Call** > **Schedules**][1] section in your account.
-2. Select **Export My Shifts**. A personal `.webcal` link will be generated automatically.
+2. Select **Export My Shifts**. A personal `.webcal` link is generated automatically.
 3. Click **Copy Link**.
 4. Paste the link into your calendar app. For example:
-    - **Google Calendar**: [Use a link to add a public calendar.][3]
-    - **Outlook**: [Subscribe to internet calendars.][4]
-    - **Apple Calendar**: [Subscribe on Mac or iPhone.][5]
+    - **Google Calendar**: [Use a link to add a public calendar][3].
+    - **Outlook**: [Subscribe to internet calendars][4].
+    - **Apple Calendar**: [Subscribe on Mac or iPhone][5].
 
-Your calendar will update automatically if your on-call shifts change. To revoke access to a previously shared link, simply generate a new one—the old link will be disabled.
+Your calendar is automatically updated if your on-call shifts change. To revoke access to a previously shared link, generate a new one. This disables the previous link.
 
 ---
 
@@ -87,7 +87,7 @@ Your calendar will update automatically if your on-call shifts change. To revoke
 
 1. Go to the [**On-Call** > **Schedules**][1] section in your account.
 2. Open the schedule you want to export.
-3. Select **Export Schedule**. A `.webcal` link will be generated for the full schedule—including all participants and shifts.
+3. Select **Export Schedule**. A `.webcal` link is generated for the full schedule, including all participants and shifts.
 4. Click **Copy Link**.
 5. Paste the link into your calendar app:
     - **Google Calendar**: [Use a link to add a public calendar.][3]
@@ -98,7 +98,7 @@ Your calendar will update automatically if your on-call shifts change. To revoke
 
 ##### 🔔 Get Notified
 
-Most calendar apps allow you to enable reminders for upcoming shifts. You can also configure custom shift notifications via SMS, push, or email in your [Datadog On-Call profile settings][6].
+Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call profile settings][6].
 
 
 #### Troubleshooting schedule exports
