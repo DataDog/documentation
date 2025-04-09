@@ -153,7 +153,7 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 1. **Enable Resource Scanning** should already be toggled on. If it isn't, toggle **Enable Resource Scanning** to the on position.
 1. In the **How would you like to set up Agentless Scanning?** section, select **Terraform**.
 1. Follow the instructions for installing the [Datadog Agentless Scanner module][2].
-1. In the **Agentless Scanning** section, toggle **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. Select the **I confirm the Terraform module is installed** check box.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
