@@ -4,19 +4,19 @@ type: multi-code-lang
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against Threats with Datadog Application Security Management"
+  text: "Protect against Threats with Datadog Application & API Protection"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
-  text: "OOTB Application Security Management Rules"
+  text: "OOTB Application & API Protection Rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting Application Security Management"
+  text: "Troubleshooting Application & API Protection"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Management Works in Datadog"
+  text: "How Application & API Protection Works in Datadog"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
@@ -31,7 +31,7 @@ Before setting up Application & API Protection, ensure the following prerequisit
 
 ## Using ASM without APM tracing
 
-If you want to use Application Security Management without APM tracing functionality, you can deploy with tracing disabled:
+If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
 
 1. Configure your tracing library with the `DD_APM_TRACING_ENABLED=false` environment variable in addition to the `DD_APPSEC_ENABLED=true` environment variable.
 2. This configuration will reduce the amount of APM data sent to Datadog to the minimum required by Application Security products.

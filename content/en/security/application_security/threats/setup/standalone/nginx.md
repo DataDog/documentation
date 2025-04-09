@@ -13,10 +13,10 @@ further_reading:
       text: "nginx integration's source code"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App & API Protection"
 ---
 
 The Datadog nginx tracing module has experimental support for threat detection and blocking.

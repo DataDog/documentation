@@ -9,10 +9,10 @@ further_reading:
       text: "Envoy integration's source code"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App & API Protection"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Application & API Protection for Envoy is in Preview" >}}

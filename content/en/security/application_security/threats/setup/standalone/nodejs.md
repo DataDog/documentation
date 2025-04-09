@@ -16,15 +16,15 @@ further_reading:
       text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App & API Protection"
 ---
 
 You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{% appsec-getstarted-standalone %}}
 
 ## Enabling Application & API Protection
 ### Get started
@@ -37,7 +37,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library.
 
-   Application Security Management is compatible with Express v4+ and Node.js v14+. For additional information, see [Compatibility][2].
+   App & API Protection is compatible with Express v4+ and Node.js v14+. For additional information, see [Compatibility][2].
 
 2. **Where you import and initialize the Node.js library for APM, also enable Application & API Protection.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
