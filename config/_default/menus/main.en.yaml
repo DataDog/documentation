@@ -6656,7 +6656,7 @@ menu:
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
-      weight: 40000
+      weight: 30000
     - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
@@ -6882,7 +6882,7 @@ menu:
       pre: continuous-testing
       identifier: continuous_testing
       parent: digital_experience_heading
-      weight: 60000
+      weight: 40000
     - name: Local and Staging Environments
       url: /continuous_testing/environments
       parent: continuous_testing
@@ -6968,7 +6968,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 40000
+      weight: 20000
     - name: Browser Monitoring
       url: real_user_monitoring/browser/
       parent: rum
