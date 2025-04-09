@@ -154,7 +154,7 @@ agents:
 
 #### Insecure ports
 
-If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration. 
+If the insecure ports of your Controller Manager and Scheduler instances are enabled, the Datadog Agent discovers the integrations and starts collecting metrics without any additional configuration.
 
 #### Secure ports
 
@@ -317,7 +317,7 @@ scheduler:
 
 ## Kubernetes on Amazon EKS {#EKS}
 
-Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks. 
+Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane components using cluster checks.
 
 ### Prerequisites
 - An EKS Cluster running on Kubernetes version >= 1.28
@@ -326,40 +326,51 @@ Amazon Elastic Kubernetes Service (EKS) supports monitoring all control plane co
   - Datadog Operator >= `v1.13.0`
 - Enable the Datadog [Cluster Agent][6]
 
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-Add the following annotations. Operator installations are limited to API Server [metrics][1]. For support for `kube_controller_manager` and `kube_scheduler` metrics, use the Helm install.
-
-```yaml
-annotations:
-  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
-  ad.datadoghq.com/endpoints.init_configs: '[{}]'
-  ad.datadoghq.com/endpoints.instances:
-    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
-```
-
-[1]: https://aws.github.io/aws-eks-best-practices/reliability/docs/controlplane/#monitor-control-plane-metrics
-{{% /tab %}}
-{{% tab "Helm" %}}
-
 Add the following annotations to the `default/kubernetes` service:
 
 ```yaml
 annotations:
-  ad.datadoghq.com/endpoints.check_names: '["kube_apiserver_metrics"]'
-  ad.datadoghq.com/endpoints.init_configs: '[{}]'
-  ad.datadoghq.com/endpoints.instances:
-    '[{ "prometheus_url": "https://%%host%%:%%port%%/metrics", "bearer_token_auth": "true" }]'
-  ad.datadoghq.com/service.check_names: '["kube_controller_manager","kube_scheduler"]'
-  ad.datadoghq.com/service.init_configs: '[{},{}]'
-  ad.datadoghq.com/service.instances: '[{"prometheus_url":"https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics","extra_headers":{"accept":"*/*"},"tls_ignore_warning":"true","tls_verify":"false","bearer_token_auth":"true"},{"prometheus_url":"https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics","extra_headers":{"accept":"*/*"},"tls_ignore_warning":"true","tls_verify":"false","bearer_token_auth":"true"}]'
+  ad.datadoghq.com/endpoints.checks: |-
+    {
+      "kube_apiserver_metrics": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/metrics",
+            "bearer_token_auth": "true"
+          }
+        ]
+      }
+    }
+  ad.datadoghq.com/service.checks: |-
+    {
+      "kube_controller_manager": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/kcm/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      },
+      "kube_scheduler": {
+        "init_config": {},
+        "instances": [
+          {
+            "prometheus_url": "https://%%host%%:%%port%%/apis/metrics.eks.amazonaws.com/v1/ksh/container/metrics",
+            "extra_headers": {"accept":"*/*"},
+            "bearer_token_auth": "true",
+            "tls_ca_cert": "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+          }
+        ]
+      }
+    }
 ```
-{{% /tab %}}
-{{< /tabs >}}
 
 **Notes:**
-- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group. 
+- Amazon exposes `kube_controller_manager` and `kube_scheduler` metrics under the [`metrics.eks.amazonaws.com`][11] API Group.
 - The addition of `"extra_headers":{"accept":"*/*"}` prevents `HTTP 406` errors when querying the EKS metrics API.
 
 ## Kubernetes on OpenShift 4 {#OpenShift4}
@@ -470,7 +481,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 {{% collapse-content title="Etcd OpenShift 4.14 and higher" level="h4" %}}
@@ -531,7 +542,7 @@ clusterChecksRunner:
       readOnly: true
     - name: disable-etcd-autoconf
       mountPath: /etc/datadog-agent/conf.d/etcd.d
-      
+
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -550,7 +561,7 @@ oc annotate service etcd -n openshift-etcd 'ad.datadoghq.com/endpoints.resolve=i
 
 The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches them to Cluster Check Runners.
 
-{{% /collapse-content %}} 
+{{% /collapse-content %}}
 
 
 ### Controller Manager
@@ -1067,6 +1078,6 @@ On other managed services, such as Azure Kubernetes Service (AKS) and Google Kub
 [6]: https://docs.datadoghq.com/agent/cluster_agent/setup
 [7]: https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/
 [8]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/
-[9]: https://rancher.com/docs/rancher/v2.0-v2.4/en/cluster-admin/nodes
+[9]: https://ranchermanager.docs.rancher.com/how-to-guides/new-user-guides/manage-clusters/nodes-and-node-pools
 [10]: https://github.com/DataDog/helm-charts/blob/main/examples/datadog/agent_on_rancher_values.yaml
 [11]: https://docs.aws.amazon.com/eks/latest/userguide/view-raw-metrics.html

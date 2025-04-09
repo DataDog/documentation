@@ -538,7 +538,7 @@
     "request_schema_description": "Request for creating a downtime."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime.\n\n**Note**: Downtimes canceled through the API are no longer active, but are retained for approximately two days before being permanently removed. The downtime may still appear in search results until it is permanently removed.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
@@ -1247,6 +1247,10 @@
     "request_description": "",
     "request_schema_description": "List tags response."
   },
+  "GetAggregatedConnections": {
+    "description": "Get all aggregated connections.",
+    "summary": "Get all aggregated connections"
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -1395,6 +1399,26 @@
     "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest CSM Threats policy"
   },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
+  "DeletePipeline": {
+    "description": "Delete a pipeline.",
+    "summary": "Delete a pipeline"
+  },
+  "GetPipeline": {
+    "description": "Get a specific pipeline by its ID.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Update a pipeline.",
+    "summary": "Update a pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -1404,7 +1428,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."

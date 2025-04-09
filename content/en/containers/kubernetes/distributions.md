@@ -58,20 +58,10 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
@@ -96,14 +86,17 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
     site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
+    kubelet:
+      host:
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   override:
     clusterAgent:
       containers:
@@ -125,7 +118,13 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    
 providers:
   aks:
     enabled: true
@@ -136,6 +135,16 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{% /tab %}}
 
 {{< /tabs >}}
+
+The AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
+
+### Without TLS verification
+
+In some clusters, DNS resolution for `spec.nodeName` inside Pods does not work in AKS. This affects:
+ - Windows nodes
+ - Linux nodes, when the cluster is set up in a virtual network using custom DNS
+ 
+In this case, use the AKS configuration provided below to set `tlsVerify: false` and remove any settings for the Kubelet host path (which defaults to `status.hostIP`). **Do not set the Kubelet host path and `tlsVerify: false` in the same configuration**.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -148,18 +157,12 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
     kubelet:
-      host:
-        fieldRef:
-          fieldPath: spec.nodeName
-      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -178,13 +181,8 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Requires supported node image version
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    tlsVerify: false
 
 providers:
   aks:
@@ -193,8 +191,6 @@ providers:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Using `spec.nodeName` keeps TLS verification. In some clusters, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes, as well as Linux nodes when the cluster is set up in a Virtual Network using custom DNS. In this case, use the first AKS configuration provided: remove any settings for the Kubelet host path (which defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` in the same configuration.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 

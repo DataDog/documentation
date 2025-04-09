@@ -144,6 +144,6 @@ For all the details on how CoScreen enables secure collaboration, read the [CoSc
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
-[8]: /sensitive_data_scanner/
+[8]: /security/sensitive_data_scanner/
 [9]: /service_management/incident_management/
 [10]: https://app.datadoghq.com/incidents/settings#Integrations

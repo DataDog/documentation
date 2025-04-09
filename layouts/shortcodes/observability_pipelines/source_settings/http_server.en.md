@@ -1,7 +1,7 @@
 To configure your HTTP/S Server source, enter the following:
 
 1. Select your authorization strategy.
-1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format.
+1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 1. Optionally, toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
     - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
     - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) Root File in DER or PEM (X.509).

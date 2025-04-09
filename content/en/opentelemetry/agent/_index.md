@@ -171,7 +171,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /opentelemetry/agent/agent_with_custom_components
 [3]: /containers/
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
 [5]: /universal_service_monitoring/
 [7]: /network_monitoring/cloud_network_monitoring/
 [9]: /agent/fleet_automation/

@@ -184,6 +184,8 @@ To explicitly override the default ports, use `features.otelCollector.ports` par
       enabled: true
 {{< /code-block >}}
 
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
+
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Your `datadog-agent.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
@@ -326,6 +328,8 @@ datadog:
     enabled: true
     processCollection: true
 {{< /code-block >}}
+
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
 6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 

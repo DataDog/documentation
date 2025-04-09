@@ -4,6 +4,7 @@ description: Learn about Datadog Static Code Analysis to scan code for quality i
 aliases:
 - /continuous_integration/static_analysis
 - /static_analysis
+- /security/code_security/static_analysis/circleci_orbs/
 is_beta: false
 algolia:
   tags: ['static analysis', 'static analysis rules', 'static application security testing', 'SAST']
@@ -16,7 +17,7 @@ algolia:
 {{% /site-region %}}
 
 ## Overview
-To set up Datadog SCA in-app, navigate to [**Security** > **Code Security**][1].
+To set up Datadog SAST in-app, navigate to [**Security** > **Code Security**][1].
 
 ## Select where to run Static Code Analysis scans
 
@@ -32,7 +33,6 @@ First, configure your Datadog API and application keys. Add `DD_APP_KEY` and `DD
 Next, run Static Code Analysis by following instructions for your chosen CI provider below.
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
-    {{< nextlink href="security/code_security/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="security/code_security/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -85,7 +85,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 ```
 
 If these YAML files were merged in order, first file with the second, the merge of these YAML files with a overlay/patch method would be the following:
@@ -100,7 +100,7 @@ rulesets:
         bar:
             only: ["the_only_file.file"]
  - B
-   
+
 
 ```
 
@@ -108,13 +108,13 @@ As you can see, the `ignore: ["**"]` from the first file was overlayed with the 
 
 #### Org level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the org level apply to all repositories that are being analyzed and is a good place to define rules that must run or global paths/files to be ignored.
 
 #### Repository level configuration
 
-{{< img src="/security/code_security/org-wide-configuration.png" alt="Rule created" style="width:100%;" >}}
+{{< img src="/security/code_security/org-wide-configuration2.png" alt="Rule created" style="width:100%;" >}}
 
 Configurations at the repository level apply only to the repository selected. These configurations are merged with the org configuration, with the repository configuration taking precedence. Repository level configurations are a good place to define overrides for repository specific details, or add rules that are specific to only that repo for example.
 
@@ -328,7 +328,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "**"
+        ignore:
+          - "**"
 ```
 
 #### Ignore for a file or directory
@@ -339,7 +340,8 @@ rulesets:
   - javascript-express:
     rules:
       reduce-server-fingerprinting:
-        ignore: "ad-server/src/app.js"
+        ignore:
+          - "ad-server/src/app.js"
 ```
 
 #### Ignore for a specific instance

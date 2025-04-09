@@ -219,7 +219,7 @@ Forwarding logs from your Google Cloud environment enables near real-time monito
 
 Use the [Datadog Dataflow template][14] to batch and compresses your log events before forwarding them to Datadog through [Google Cloud Dataflow][15]. This is the most network-efficient way to forward your logs. To specify which logs are forwarded, configure the [Google Cloud Logging sink][40] with any inclusion or exclusion queries using Google Cloud's [Logging query language][56].
 
-Follow [the instructions listed here][16] to set up Log Collection. You can also use the [Stream logs from Google Cloud to Datadog][9] guide in the Google Cloud architecture center, for a more detailed explanation of the steps and architecture involved in log forwarding. For a deep dive into the benefits of the Pub/Sub to Datadog template, read [Stream your Google Cloud logs to Datadog with Dataflow][17] in the Datadog blog.
+You can use the [terraform-gcp-datadog-integration][64] module to manage this infrastructure through Terraform, or follow [the instructions listed here][16] to set up Log Collection. You can also use the [Stream logs from Google Cloud to Datadog][9] guide in the Google Cloud architecture center, for a more detailed explanation of the steps and architecture involved in log forwarding. For a deep dive into the benefits of the Pub/Sub to Datadog template, read [Stream your Google Cloud logs to Datadog with Dataflow][17] in the Datadog blog.
 
 <div class="alert alert-warning">The <b>Dataflow API</b> must be enabled to use Google Cloud Dataflow. See <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Enabling APIs</b></a> in the Google Cloud documentation for more information.</div>
 
@@ -263,8 +263,6 @@ Use the [Google Cloud Run integration][42] to get detailed information on your C
 
 Datadog's [Google Cloud Cost Management][45] provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify potential improvements.
 
-### Security
-
 ### Cloud SIEM
 
 Cloud SIEM provides real-time analysis of operational and security logs, while using out-of-the-box integrations and rules to detect and investigate threats.
@@ -282,6 +280,10 @@ Check out the [Setting up Cloud Security Management guide][49] to get started.
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/resource_collection.png" alt="The resource collection tab in the Google Cloud integration tile" style="width:100%;" >}}
+
+### Expanded BigQuery monitoring
+
+You can get granular visibility into your BigQuery environments to monitor the performance of your BigQuery jobs and the quality of your BigQuery data. See the [Expanded BigQuery monitoring section][65] in the main Google Cloud integration page for more information and setup instructions.
 
 ## Further reading
 
@@ -327,7 +329,7 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [38]: /security/cloud_siem/
 [39]: /watchdog/
 [40]: https://cloud.google.com/logging/docs/routing/overview#sinks
-[41]: /integrations/google_cloud_platform/?tab=project#setup
+[41]: /integrations/google_cloud_platform/#setup
 [42]: /integrations/google_cloud_run/
 [43]: /integrations/google_cloud_run/#log-collection
 [44]: /cloud_cost_management/
@@ -350,3 +352,5 @@ After setting up CSM, toggle the **Enable Resource Collection** option under the
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
+[64]: https://github.com/GoogleCloudPlatform/terraform-gcp-datadog-integration
+[65]: /integrations/google_cloud_platform/#expanded-bigquery-monitoring
