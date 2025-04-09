@@ -16,7 +16,7 @@ Accurate severity scores help security teams understand the risks that vulnerabi
 
 ## CSM severity scoring framework
 
-CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how a misconfiguration's severity score is computed based on its likelihood of abuse and impact.
+Workload Protection Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how a misconfiguration's severity score is computed based on its likelihood of abuse and impact.
 
 ### Likelihood
 
@@ -116,7 +116,7 @@ Using the CSM severity scoring framework, the rule would be scored as follows:
 
 ## CVSS 3.1
 
-CSM Vulnerabilities uses Common Vulnerability Scoring System version 3.1 ([CVSS 3.1][5]) to determine a base score for a vulnerability. It then modifies the base score to take into account the following:
+Workload Protection Vulnerabilities uses Common Vulnerability Scoring System version 3.1 ([CVSS 3.1][5]) to determine a base score for a vulnerability. It then modifies the base score to take into account the following:
 
 - Whether the underlying infrastructure is running and how wide-spread the impact is.
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.

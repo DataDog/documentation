@@ -34,7 +34,7 @@ Workload Protection Identity Risks (CSM Identity Risks) is a Cloud Infrastructur
 
 Review your organization's active identity risks on the [Identity Risks Explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
-CSM Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
+Workload Protection Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
 {{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers page" width="100%">}}
 

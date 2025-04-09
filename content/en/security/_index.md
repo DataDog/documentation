@@ -110,7 +110,7 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 [Workload Protection][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+Workload Protection includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Workload Protection overview shows a list of prioritized security issues" width="100%">}}
 

@@ -18,7 +18,7 @@ further_reading:
   text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
-CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+Workload Protection Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 | Framework                                       | Supported Versions     | Framework Tag                       | Rule Type                |
 |-------------------------------------------------|------------------------|-------------------------------------|--------------------------|

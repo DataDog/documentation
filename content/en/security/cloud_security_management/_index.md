@@ -67,7 +67,7 @@ Datadog Workload Protection delivers deep visibility, continuous configuration a
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-CSM leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
+Workload Protection leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.

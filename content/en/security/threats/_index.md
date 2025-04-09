@@ -15,7 +15,7 @@ Workload Protection Threats (CSM Threats) monitors file, network, and process ac
 
 Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Cloud Network Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
-CSM Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
+Workload Protection Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
 
 1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
@@ -32,7 +32,7 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 
 ## Manage out-of-the-box and custom detection rules
 
-CSM Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
+Workload Protection Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
 Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
