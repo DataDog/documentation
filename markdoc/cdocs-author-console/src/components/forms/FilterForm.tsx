@@ -1,6 +1,6 @@
 import { CustomizationConfig } from 'cdocs-data';
 import TraitForm from './TraitForm';
-import OptionGroupForm from './OptionGroupForm';
+import OptionGroupForm, { OptionGroup } from './OptionGroupForm';
 import { WizardFilter, TraitConfig } from '../../types';
 
 function FilterForm({
@@ -44,25 +44,23 @@ function FilterForm({
     onPublish(updatedFilter);
   };
 
-  const onOptionGroupEdit = ({ optionGroupId }: { optionGroupId: string }) => {
-    const options = customizationConfig.optionGroupsById[optionGroupId];
-
+  const onOptionGroupUpdate = (p: { optionGroupId: string; optionGroup: OptionGroup }) => {
     const newCustomizationConfig: CustomizationConfig = {
       ...filter.customizationConfig,
       optionGroupsById: {
-        [optionGroupId]: options
+        [p.optionGroupId]: p.optionGroup
       },
       optionsById: {}
     };
 
-    options.forEach((option) => {
+    p.optionGroup.forEach((option) => {
       const optionId = option.id;
       newCustomizationConfig.optionsById[optionId] = customizationConfig.optionsById[optionId];
     });
 
     onPublish({
       ...filter,
-      option_group_id: optionGroupId,
+      option_group_id: p.optionGroupId,
       customizationConfig: newCustomizationConfig
     });
   };
@@ -76,7 +74,7 @@ function FilterForm({
       <TraitForm customizationConfig={customizationConfig} onUpdate={onTraitEdit} />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
-      <OptionGroupForm customizationConfig={customizationConfig} onUpdate={onOptionGroupEdit} />
+      <OptionGroupForm customizationConfig={customizationConfig} onUpdate={onOptionGroupUpdate} />
     </div>
   );
 }

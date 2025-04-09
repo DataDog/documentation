@@ -101,12 +101,7 @@ function FilterList({
         }
         return (
           <div key={uuid} style={{ borderBottom: '1px solid #e0e0e0' }}>
-            <FilterRow
-              filter={filtersByUuid[uuid]}
-              customizationConfig={customizationConfig}
-              onDelete={onDelete}
-              onEdit={onEdit}
-            />
+            <FilterRow filter={filtersByUuid[uuid]} onDelete={onDelete} onEdit={onEdit} />
             {currentFilterUuid === uuid && (
               <FilterForm
                 customizationConfig={customizationConfig}
@@ -141,12 +136,10 @@ function FilterList({
  */
 function FilterRow({
   filter,
-  customizationConfig,
   onEdit,
   onDelete
 }: {
   filter: WizardFilter;
-  customizationConfig: CustomizationConfig;
   onEdit?: (filter: WizardFilter) => void;
   onDelete?: (filter: WizardFilter) => void;
 }) {
@@ -162,7 +155,9 @@ function FilterRow({
     if (!filter.trait_id || !filter.option_group_id) {
       return 'New filter';
     }
-    const optionLabels = customizationConfig.optionGroupsById[filter.option_group_id]?.map((option) => option.label);
+    const optionLabels = filter.customizationConfig.optionGroupsById[filter.option_group_id]?.map(
+      (option) => option.label
+    );
     return `${filter.label}: ${optionLabels.join(', ')}`;
   };
 

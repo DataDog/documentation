@@ -41,8 +41,7 @@ export default function OptionSelector(props: {
       }
       return {
         id: selection.value,
-        label: option.label,
-        internal_notes: option.internal_notes
+        label: option.label
       };
     });
     return selectedOptions;
@@ -110,7 +109,6 @@ export default function OptionSelector(props: {
 interface OptionConfig {
   id: string;
   label: string;
-  internal_notes?: string;
 }
 
 function NewOptionForm(props: {
@@ -119,8 +117,7 @@ function NewOptionForm(props: {
 }) {
   const blankOption: OptionConfig = {
     id: '',
-    label: '',
-    internal_notes: ''
+    label: ''
   };
   const [newOptionConfig, setNewOptionConfig] = useState(blankOption);
   const [formErrors, setFormErrors] = useState<string[]>([]);
@@ -198,23 +195,6 @@ function NewOptionForm(props: {
             placeholder="e.g., Amazon EC2"
             fullWidth
             required
-          />
-        </p>
-        <p>
-          Internal notes (optional)
-          <TextField
-            value={newOptionConfig.internal_notes}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNewOptionConfig({
-                ...newOptionConfig,
-                internal_notes: e.target.value
-              });
-            }}
-            variant="outlined"
-            placeholder="e.g., Only use this if xyz option does not apply."
-            fullWidth
-            multiline
-            rows={4}
           />
         </p>
 
