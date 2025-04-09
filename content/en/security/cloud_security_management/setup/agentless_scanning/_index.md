@@ -4,9 +4,6 @@ aliases:
   - /security/agentless_scanning
   - /security/cloud_security_management/agentless_scanning
 further_reading:
-  - link: "https://www.datadoghq.com/blog/agentless-scanning/"
-    tag: "Blog"
-    text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
   - link: "/security/vulnerabilities"
     tag: "Documentation"
     text: "Read more about CSM Vulnerabilities"
