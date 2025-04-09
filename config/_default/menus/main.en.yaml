@@ -6656,7 +6656,7 @@ menu:
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
-      weight: 50000
+      weight: 40000
     - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
@@ -7557,7 +7557,7 @@ menu:
       identifier: rum_correlate_with_other_telemetry_apm
       weight: 702
     - name: Correlate Synthetics with RUM
-      url: synthetics/guide/explore-rum-through-synthetics/
+      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703

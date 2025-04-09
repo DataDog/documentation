@@ -22,18 +22,18 @@ further_reading:
 Synthetic tests come with [estimated usage metrics][1] that allow you to keep track of your usage. These metrics notably enable you to:
 
 * Understand how your usage evolves over time.
-* Visualize which teams, applications, or services are contributing the most to your Synthetics usage.
+* Visualize which teams, applications, or services are contributing the most to your Synthetic Monitoring usage.
 * Alert on unexpected usage spikes that can impact your billing.
 
-To visualize or alert on your Synthetics usage, use the following queries:
+To visualize or alert on your Synthetic Monitoring usage, use the following queries:
 
 * [Single][2] and [Multistep API tests][3]: `sum:datadog.estimated_usage.synthetics.api_test_runs{*}.as_count()`
 
 * [Browser tests][4]: `sum:datadog.estimated_usage.synthetics.browser_test_runs{*}.as_count()`.
 
-  **Note:** The pricing for browser test runs is based on the number of steps. See [Pricing documentation][7] for more information.
+  **Note:** The pricing for browser {{< tooltip glossary="test run">}}s is based on the number of steps. See [Pricing documentation][7] for more information.
 
-For a higher level of refinement, scope or group these metrics by tags associated with your test, such as `team` or `application`. 
+For a higher level of refinement, scope, or group these metrics by tags associated with your test, such as `team` or `application`. 
 
 You can graph and monitor these metrics against static thresholds as well as use machine learning based algorithms like [anomaly detection][5] or [forecast][6] to ensure you do not get alerted for expected usage growth.
 
