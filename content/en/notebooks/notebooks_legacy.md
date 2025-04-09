@@ -3,7 +3,7 @@ title: Notebooks (Legacy)
 aliases:
   - /graphing/notebooks/
 further_reading:
-- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
+- link: "https://www.datadoghq.com/blog/incident-response-templates-notebooks-list/"
   tag: "Blog"
   text: "Create and navigate a documentation library"
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"

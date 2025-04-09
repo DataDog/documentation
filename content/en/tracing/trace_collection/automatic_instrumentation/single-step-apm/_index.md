@@ -24,8 +24,6 @@ The following examples show how it works for each deployment type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-<div class="alert alert-warning">If you've previously used Single Step Instrumentation with Linux hosts, <a href="/tracing/trace_collection/automatic_instrumentation/ssi-0-13-1">update to the latest version</a>.</div>
-
 For an Ubuntu host:
 
 1. Run the one-line installation command:
@@ -82,7 +80,9 @@ For a Docker Linux container:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 You can enable APM by installing the Agent with either:
 
@@ -98,13 +98,13 @@ You can enable APM by installing the Agent with either:
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 
 {{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
 **Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
 To enable Single Step Instrumentation with the Datadog Operator:
 
-1. Install the [Datadog Operator][36] v1.5.0+ with Helm:
+1. Install the [Datadog Operator][36] with Helm:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
@@ -121,6 +121,10 @@ To enable Single Step Instrumentation with the Datadog Operator:
    metadata:
      name: datadog
    spec:
+     override:
+       clusterAgent:
+         image:
+           tag: 7.64.1
      global:
        site: <DATADOG_SITE>
        tags:
@@ -153,7 +157,7 @@ To enable Single Step Instrumentation with the Datadog Operator:
 {{< /collapse-content >}}
 
 {{< collapse-content title="Installing with Helm" level="h4" >}}
-Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages. 
+Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
 **Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
 
@@ -287,7 +291,7 @@ Available versions are listed in source repositories for each language:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Agent v7.64+) (Preview)" %}}
+{{% tab "Kubernetes (Agent v7.64+)" %}}
 
 ### Configuring instrumentation for namespaces and pods
 
@@ -316,19 +320,19 @@ Review the following examples demonstrating how to select specific services:
 {{< collapse-content title="Example 1: Enable all namespaces except one" level="h4" >}}
 
 This configuration:
-- enables APM for all namespaces except the `jenkins` namespace. 
+- enables APM for all namespaces except the `jenkins` namespace.
 - instructs Datadog to instrument the Java applications with the default Java APM SDK and Python applications with `v.3.1.0` of the Python APM SDK.
 
 {{< highlight yaml "hl_lines=4-10" >}}
-   apm:  
-     instrumentation:  
-       enabled: true  
-       disabledNamespaces:  
-         - "jenkins"  
-       targets:  
-         - name: "all-remaining-services"  
-           ddTraceVersions:  
-             java: "default"  
+   apm:
+     instrumentation:
+       enabled: true
+       disabledNamespaces:
+         - "jenkins"
+       targets:
+         - name: "all-remaining-services"
+           ddTraceVersions:
+             java: "default"
              python: "3.1.0"
 {{< /highlight >}}
 
@@ -344,7 +348,7 @@ This configuration creates two targets blocks:
   - sets environment variables -- `DD_SERVICE`, `DD_ENV`, and `DD_PROFILING_ENABLED` -- for this target group.
 - The second block (named `billing-service_apps`)
   - enables APM for services in the namespace(s) with label `app:billing-service`.
-  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK. 
+  - instructs Datadog to instrument this set of services with `v3.1.0` of the Python APM SDK.
   - sets environment variables -- `DD_SERVICE` and `DD_ENV` -- for this target group.
 
 {{< highlight yaml "hl_lines=4-28" >}}
@@ -405,7 +409,7 @@ This configuration does the following:
                value: "db-user"
              - name: "DD_ENV"
                value: "prod"
-             - name: "DD_DSM_ENABLED"  
+             - name: "DD_DSM_ENABLED"
                value: "true"
          - name: "user-request-router"
            podSelector:
@@ -443,12 +447,12 @@ This configuration:
                app: "password-resolver"
            ddTraceVersions:
              java: "default"
-           ddTraceConfigs:   
+           ddTraceConfigs:
              - name: "DD_SERVICE"
                value: "password-resolver"
              - name: "DD_ENV"
                value: "prod"
-             - name: "DD_PROFILING_ENABLED"  
+             - name: "DD_PROFILING_ENABLED"
                value: "auto"
 {{< /highlight >}}
 
@@ -481,6 +485,8 @@ This configuration enables APM for all pods except those that have either of the
 {{% /tab %}}
 
 {{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 ### Enabling or disabling instrumentation for namespaces
 
@@ -722,7 +728,9 @@ To remove APM instrumentation and stop sending traces from a specific service, f
 2. Restart the service.
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 #### Using workload selection (recommended)
 
@@ -780,7 +788,9 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Preview)" %}}
+{{% tab "Kubernetes" %}}
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 

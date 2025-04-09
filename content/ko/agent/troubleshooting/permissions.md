@@ -5,20 +5,15 @@ aliases:
 - /ko/agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Agent 트러블슈팅
+  tag: 설명서
   text: Agent 디버그 모드
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent 트러블슈팅
+  tag: 설명서
   text: Agent Flare 보내기
 title: 권한 허용 문제
 ---
 
-Agent가 호스트에서 데이터를 수집하려면 특정 권한 세트가 필요합니다. 일반적으로 발생하는 권한 허용 문제와 해결법을 아래로 알려드리겠습니다.
-
-* [Agent 로깅 권한 문제](#agent-logging-permission-issues)
-* [Agent Socket 권한 문제](#agent-socket-permission-issues)
-* [Process Metrics 권한 문제](#process-metrics-permission-issue)
-* [더 알아보기](#further-reading)
+에이전트가 호스트에서 데이터를 수집하려면 특정 권한 세트가 필요합니다. 일반적으로 발생하는 권한 허용 문제와 해결법을 아래로 알려드리겠습니다.
 
 ## Agent 로깅 권한 문제
 
@@ -73,7 +68,7 @@ ls -al /opt/datadog-agent/run
 파일 소유자가 `dd-agent`가 **아닌** 경우, 다음 명령어를 실행해 수정하세요
 
 ```text
-chown dd-agent -R /opt/datadog-agent/run
+sudo chown -R dd-agent:dd-agent /opt/datadog-agent/run
 ```
 
 이렇게 변경한 후에는 [Agent 부팅 명령어][5]로 Agent를 시작할 수 있습니다. 위의 해결책을 시도했는데도 계속해서 문제가 발생하는 경우 [Datadog 지원팀][6]에 추가로 도움을 받으시기 바랍니다.
@@ -83,10 +78,7 @@ chown dd-agent -R /opt/datadog-agent/run
 리눅스 OS에서 실행 중인 Agent에서 [프로세스 점검][7]을 활성화한 경우 기본적으로 `system.processes.open_file_descriptors` 메트릭이 수집되거나 보고되지 않습니다.
 이 문제는 Agent 사용자 `dd-agent`가 아닌 다른 사용자가 실행한 프로세스 점검으로 프로세스를 모니터링할 때 발생합니다. 실제로 `dd-agent` 사용자는 Agent가 메트릭 데이터를 수집하기 위해 참조하는 `/proc` 전체 파일에 대한 접근 권한이 없습니다.
 
-{{< tabs >}}
-{{% tab "Agent v6.3+" %}}
-
-프로세스 점검 설정에서 `try_sudo` 옵션을 활성화하고 적절한 `sudoers` 규칙을 추가하세요.
+프로세스 점검 설정에서 `try_sudo` 옵션(에이전트 6.3 이상부터 사용 가능)을 활성화하고 적절한 `sudoers` 규칙을 추가하세요.
 
 ```text
 dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
@@ -96,48 +88,25 @@ dd-agent ALL=NOPASSWD: /bin/ls /proc/*/fd/
 
 Datadog `error.log` 파일에서 `sudo: sorry, you must have a tty to run sudo`이라는 라인을 발견하면 sudoers 파일에서 `visudo`를 사용해 `Default requiretty` 라인을 주석 처리해야 합니다.
 
-{{% /tab %}}
-{{% tab "Agent v6 & v7" %}}
+### 에이전트를 루트로 실행
 
-v6.3 이전의 Agent v6을 사용하는 경우 Agent를 업데이트하고 `try_sudo` 옵션을 사용하세요. 업데이트할 수 없다면 문제를 회피하기 위해 Agent를 `root`로 실행할 수 있습니다.
+`try_sudo`를 사용할 수 없는 경우, 대신 에이전트를 `root`로 실행할 수 있습니다.
 
-**참조**: Agent를 `root`로 실행하는 방법은 권장하지 않습니다. Datadog Agent에 특정한 문제가 있거나 안심할 수 없는 상황이 발생할까 우려한 조치는 아닙니다만, 데몬(daemon)을 `root`로 실행하는 것은 권장되지 않습니다. 이는 리눅스에서 실행하는 대부분의 프로세스에 적용되는 모범 사례입니다. 개인적으로 우려되는 사항이 있는 경우, Agent는 오픈 소스이므로 [깃허브 저장소][1]를 사용하여 사용자나 소속 팀이 감사할 수 있습니다.
+<div class="alert alert-info">Linux에서 프로세스 daemon을 <code>루트</code>로 실행하는 것을 권고하지 않습니다. 에이전트는 오픈 소스이고 <a href="https://github.com/DataDog/datadog-agent">GitHub 리포지토리</a>에서 감사될 수 있습니다.</div>
 
-1. [Agent를 중지합니다][2].
-
-2. `/etc/systemd/system/multi-user.target.wants/datadog-agent.service`를 열고 `[Service]`의 `user​` 속성을 변경하세요.
-
-3. [Agent를 시작합니다][3].
-
-[1]: https://github.com/DataDog/datadog-agent
-[2]: /ko/agent/configuration/agent-commands/#stop-the-agent
-[3]: /ko/agent/configuration/agent-commands/#start-the-agent
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하고 `try_sudo` 옵션을 사용하세요. 업데이트할 수 없다면 문제를 회피하기 위해 Agent를 `root`로 실행할 수 있습니다.
-
-**참조**: Agent를 `root`로 실행하는 방법은 권장하지 않습니다. Datadog Agent에 특정한 문제가 있거나 안심할 수 없는 상황이 발생할까 우려한 조치는 아닙니다만, 데몬(daemon)을 `root`로 실행하는 것은 권장되지 않습니다. 이는 리눅스에서 실행하는 대부분의 프로세스에 적용되는 모범 사례입니다. 개인적으로 우려되는 사항이 있는 경우, Agent는 오픈 소스이므로 [깃허브 저장소][2]를 사용하여 사용자나 소속 팀이 감사할 수 있습니다.
-
-1. [Agent를 중지합니다][3].
-
-2. `/etc/dd-agent/supervisor.conf`를 열고 [라인 20][4]과 [라인 30][5]의 `dd-agent`를 `root`로 치환합니다. Agent를 업그레이드하거나 재설치한 경우에는 이 작업을 다시 실행해주세요.
-
-3. [Agent를 시작합니다][6].
-
-[1]: /ko/agent/guide/upgrade-to-agent-v6/
-[2]: https://github.com/DataDog/dd-agent
-[3]: /ko/agent/configuration/agent-commands/?tab=agentv5#stop-the-agent
-[4]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L20
-[5]: https://github.com/DataDog/dd-agent/blob/master/packaging/supervisor.conf#L30
-[6]: /ko/agent/configuration/agent-commands/?tab=agentv5#start-the-agent
-{{% /tab %}}
-{{< /tabs >}}
+에이전트를 `root`로 실행:
+1. [에이전트를 중단][9]합니다.
+2. `/etc/systemd/system/multi-user.target.wants/datadog-agent.service`를 열고 `[Service]` 속성 아래 `user`를 변경합니다.
+3. [에이전트를 시작][10]합니다.
 
 자세한 정보와 리눅스 머신에서 이용 가능한 메트릭의 기타 수집 방법이 궁금하신 분은 아래의 깃허브 관련 문제를 참조해주세요.
 
 * https://github.com/DataDog/dd-agent/issues/853
 * https://github.com/DataDog/dd-agent/issues/2033
+
+## MacOS에서 에이전트를 시스템 daemon으로 실행할 때 권한 문제
+
+에이전트를 `DD_SYSTEMDAEMON_INSTALL`과 `DD_SYSTEMDAEMON_USER_GROUP` 옵션을 사용해 daemon으로 시스템 전체 실행할 경우, `DD_SYSTEMDAEMON_USER_GROUP`에 사용한 사용자와 그룹이 유효하고 올바른 권한을 갖고 있는지 확인하세요.
 
 ## 참고 자료
 
@@ -150,3 +119,5 @@ Agent v5를 사용하는 경우 [최신 버전의 Agent 6][1]로 업데이트하
 [5]: /ko/agent/configuration/agent-commands/#start-the-agent
 [6]: /ko/help/
 [7]: /ko/integrations/process/
+[9]: /ko/agent/configuration/agent-commands/#stop-the-agent
+[10]: /ko/agent/configuration/agent-commands/#start-the-agent
