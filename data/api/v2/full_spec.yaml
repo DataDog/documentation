@@ -17393,6 +17393,14 @@ components:
           example: 0
           format: int64
           type: integer
+        ip_addresses:
+          description: The interface IP addresses
+          example:
+          - 1.1.1.1
+          - 1.1.1.2
+          items:
+            type: string
+          type: array
         mac_address:
           description: The interface MAC address
           example: 00:00:00:00:00:00
