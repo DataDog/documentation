@@ -19,14 +19,14 @@ Automations allow you to trigger actions based on events in On-Call. There are t
 ## Handover automations
 Handover automations run automatically at the start or end of an on-call shift. They're designed to handle tasks that teams typically manage with custom scripts—such as notifying other systems about who's on-call, updating internal dashboards, or rotating credentials.
 
-By using built-in automation instead of maintaining cron jobs or custom tools, you can streamline operations, eliminate manual steps, and ensure the right actions always run when a shift changes.
+By using built-in automations instead of maintaining cron jobs or custom tools, you can streamline operations, eliminate manual steps, and ensure the right actions always run when a shift changes.
 
 
 <div class="alert alert-warning">
 If you need a specific action that isn't listed, contact your account representative or <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.
 </div>
 
-Handover Automations are maintained on a Team level. To get started, navigate to the [On-Call Team][4], open a specific team and scroll down to the **Handover Automation** section.
+Handover Automations are maintained on a Team level. To get started, navigate to [On-Call Team][4], open a specific team, and scroll down to the **Handover Automation** section.
 
 ### Send a Slack message
 Post a message to Slack at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Slack app—make sure it's [added to your workspace][2].
