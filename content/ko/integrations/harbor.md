@@ -34,7 +34,7 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 3.2.2
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: harbor
