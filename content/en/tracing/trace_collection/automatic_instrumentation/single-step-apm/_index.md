@@ -22,7 +22,7 @@ If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentat
 
 The following examples show how it works for each deployment type.
 
-{{< partial name="apm/apm-compatibility.html" >}}
+{{< partial name="apm/apm-single-step.html" >}}
 
 <br>
 
