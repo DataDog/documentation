@@ -1,5 +1,5 @@
 ---
-title: Browser Monitoring Auto-Instrumentation (Server-side)
+title: Browser Monitoring Auto-Instrumentation (Server-Side)
 beta: true
 code_lang: server
 type: multi-code-lang
@@ -33,8 +33,10 @@ Configurations that can be remotely managed are as follows:
 - Environment (attribute)
 - Service name (attribute)
 
-1. Make sure you have [Remote Configuration][42] enabled in Datadog.
-1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][1] and select the JavaScript (JS) application type.
+To remotely configure your RUM application:
+
+1. Make sure you have [Remote Configuration][1] enabled in Datadog.
+1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][2] and select the JavaScript (JS) application type.
 1. Select **Auto-Instrumentation**.
 1. Configure all desired settings.
 1. Click **Save Changes**.
@@ -55,3 +57,5 @@ Follow the documentation for your web server type to learn more:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /agent/remote_config/
+[2]: https://app.datadoghq.com/rum/list

@@ -27,7 +27,7 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
-The Auto-Instrumentation method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
+The auto-instrumentation method leverages the [NGINX Dynamic Modules capability][3] to implement a response body filter. The filter injects the RUM Browser SDK into the response body for responses
 identified as HTML.
 
 For more granular control over the instrumentation of the RUM application, you can also **manually** install and configure the module.

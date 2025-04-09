@@ -27,7 +27,7 @@ The [Datadog Agent][2] is installed and configured.
 
 ## Set up your RUM application
 
-Auto-Instrumentation leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
+The auto-instrumentation method leverages a Windows module that injects the RUM SDK into the response body for responses served by the IIS instance.
 
 1. In Datadog, navigate to the [**Digital Experience > Add an Application Page**][3] and select the JavaScript (JS) application type.
 2. Select **Auto-Instrumentation** and **Windows IIS**.
