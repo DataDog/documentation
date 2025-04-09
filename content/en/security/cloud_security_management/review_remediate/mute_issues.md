@@ -1,5 +1,5 @@
 ---
-title: Mute Issues in Cloud Security Management
+title: Mute Issues in Workload Protection
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"

@@ -29,10 +29,10 @@ Incidents created from a monitor will inherit [field values][10] from the monito
 
 ## From a Security Signal
 
-Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3] for Cloud Security Management.
+Declare an incident directly from a Cloud SIEM or Workload Protection Threats signal side panel, by clicking **Declare incident** or **Escalate Investigation**. For more information, see [Investigate Security Signals][3] for Workload Protection.
 
-Declare an incident from an Application Security Management signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
-For more information, see [Investigate Security Signals][4] for Application Security Management. 
+Declare an incident from an App & API Protection signal through the actions listed in the signal side panel. Click **Show all actions** and click **Declare Incident**.
+For more information, see [Investigate Security Signals][4] for App & API Protection. 
 
 {{< img src="/service_management/incidents/declare/declare_asm.png" alt="Your image description" style="width:90%;" >}}
 

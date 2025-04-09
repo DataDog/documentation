@@ -10,7 +10,7 @@ further_reading:
   text: "Notification Rules"
 ---
 
-This article outlines upcoming changes to how [notification rules][1] are configured. These changes mostly impact [Cloud Security Management (CSM)][4], and more specifically cloud configuration and infrastructure configuration signals. 
+This article outlines upcoming changes to how [notification rules][1] are configured. These changes mostly impact [Workload Protection][4], and more specifically cloud configuration and infrastructure configuration signals. 
 
 Note that for the time being, the changes will only affect how you get notified after manually upgrading a notification rule, or after the final deprecation date is reached (early 2025). 
 

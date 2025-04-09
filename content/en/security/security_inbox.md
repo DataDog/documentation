@@ -3,10 +3,10 @@ title: Security Inbox
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Learn more about Application Security Management"
+  text: "Learn more about App & API Protection"
 - link: "/security/cloud_security_management"
   tag: "Documentation"
-  text: "Learn more about Cloud Security Management"
+  text: "Learn more about Workload Protection"
 - link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
@@ -14,10 +14,10 @@ further_reading:
   tag: "Blog"
   text: "How Datadog Security Inbox prioritizes security risks"
 products:
-- name: Cloud Security Management
+- name: Workload Protection
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App & API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -30,7 +30,7 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security Management (CSM). By default, these include the following types of findings:
+The findings that appear in Security Inbox are generated from App & API Protection (AAP) and Workload Protection. By default, these include the following types of findings:
 
 - A curated set of [misconfigurations][1] for [CSM Misconfigurations][2], compiled by Datadog Security Research.
 - A curated set of [identity risks][1] for [CSM Identity Risks][3], compiled by Datadog Security Research.

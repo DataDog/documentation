@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management Threats
+title: Workload Protection Threats
 aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
@@ -9,7 +9,7 @@ aliases:
   - /security/threats/runtime_anomaly_detection
 ---
 
-Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+Workload Protection Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detect threats to your production workloads in real-time
 
@@ -22,7 +22,7 @@ CSM Threats uses the Datadog Agent to monitor your environment. If you don't alr
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Workload Protection overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Proactively block threats with Active Protection
 
@@ -62,7 +62,7 @@ Datadog is introducing a new feature called Active Protection to address the cry
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
   {{< nextlink href="/security/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Workload Protection{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/threats/setup/?tab=kuberneteshelm#prerequisites

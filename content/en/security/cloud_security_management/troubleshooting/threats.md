@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Cloud Security Management Threats
+title: Troubleshooting Workload Protection Threats
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/
@@ -9,7 +9,7 @@ further_reading:
   text: "Troubleshooting CSM Vulnerabilities"
 ---
 
-If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Workload Protection Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 
@@ -29,7 +29,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 ## Agent Self tests
 
-In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Cloud Security Management Threats (CSM Threats) is able to detect system events, you can manually trigger self tests by running the following command:
+In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Workload Protection Threats (CSM Threats) is able to detect system events, you can manually trigger self tests by running the following command:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |

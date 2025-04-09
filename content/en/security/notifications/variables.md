@@ -13,10 +13,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Cloud Security Management
+- name: Workload Protection
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App & API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -139,7 +139,7 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 
 {{% /tab %}}
 
-{{% tab "Application Security Management" %}}
+{{% tab "App & API Protection" %}}
 
 ```json
 {

@@ -9,10 +9,10 @@ further_reading:
       text: "How Application Security Works"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App & API Protection"
     - link: "/security/application_security/threats/"
       tag: "Documentation"
       text: "Application Threat Management"
@@ -1002,7 +1002,7 @@ Download the [`datadog_wrapper`][8] file from the releases and upload it to your
 
 ## Testing threat detection
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
+To see App & API Protection threat detection in action, send known attack patterns to your application. For example, send a request with the user agent header set to `dd-test-scanner-log` to trigger a [security scanner attack][5] attempt:
    ```sh
    curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```

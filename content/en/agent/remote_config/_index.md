@@ -30,7 +30,7 @@ algolia:
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, App & API Protection and Workload Protection Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 When Remote Configuration is enabled on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
@@ -68,7 +68,7 @@ The following products and features are supported with Remote Configuration:
 ### Fleet Automation
 **[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 
-### Application Security Management (ASM)
+### App & API Protection (AAP)
 
 - **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
 - **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.

@@ -61,7 +61,7 @@ Redeploy the function and invoke it. After a few minutes, it appears in [ASM vie
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+To see App & API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```

@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Application Security Management
+title: Getting Started with App & API Protection
 aliases:
 - /security/security_monitoring/getting_started/
 - /getting_started/application_security
@@ -9,7 +9,7 @@ further_reading:
   text: "Application Security terms and concepts"
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
-  text: "How Application Security Management works"
+  text: "How App & API Protection works"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) helps secure your web applications and APIs in production. 
+Datadog App & API Protection (AAP) helps secure your web applications and APIs in production. 
 - With threat detection, Datadog provides real-time protection against attacks and attackers targeting code-level vulnerabilities.
 - With [Code Security][28], Datadog detects code and library vulnerabilities in your repositories and your running services, providing end-to-end visibility from development to production.
 

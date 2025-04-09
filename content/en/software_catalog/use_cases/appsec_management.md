@@ -12,7 +12,7 @@ aliases:
 further_reading:
   - link: "/security/application_security/"
     tag: "Documentation"
-    text: "Datadog Application Security Management"
+    text: "Datadog App & API Protection"
 ---
 
 The Software Catalog enables organizations to seamlessly incorporate security into every development stage, ensuring a strong security posture across teams, applications, and systems.

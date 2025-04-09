@@ -4,15 +4,15 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App & API Protection"
 - link: "/security/application_security/how-appsec-works//"
   tag: "Documentation"
-  text: "How Application Security Management Works"
+  text: "How App & API Protection Works"
 ---
 
 ## Overview
 
-Application Security Management (ASM) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. ASM trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
+App & API Protection (AAP) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. ASM trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.
 
 Filter by the **Qualification** facet in the ASM [Traces Explorer][1] to view the possible qualification results:
 
@@ -20,7 +20,7 @@ Filter by the **Qualification** facet in the ASM [Traces Explorer][1] to view th
 
 ## Qualification outcomes
 
-ASM runs qualification rules (closed-source) on every trace. There are four possible qualification outcomes, as listed in the facet menu:
+AAP runs qualification rules (closed-source) on every trace. There are four possible qualification outcomes, as listed in the facet menu:
 
 | Qualification result | Description |
 |------|-------------|

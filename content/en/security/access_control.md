@@ -8,7 +8,7 @@ products:
 - name: CSM Threats
   url: /security/threats/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App & API Protection
   url: /security/application_security/
   icon: app-sec
 further_reading:

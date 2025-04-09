@@ -4,14 +4,14 @@ is_beta: true
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Application Security Management with Datadog"
+  text: "App & API Protection with Datadog"
 ---
 
 ## Overview
 
 If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
-Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+App & API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## Prerequisites 
 
@@ -52,7 +52,7 @@ You can use the _Passlist_ to permanently allow specific IP addresses access to 
 
 ## Blocking attack attempts with In-App WAF
 
-ASM In-App WAF (web application firewall) combines the detection techniques of perimeter-based WAFs with the rich context provided by Datadog, helping your teams protect their systems with confidence.
+AAP In-App WAF (web application firewall) combines the detection techniques of perimeter-based WAFs with the rich context provided by Datadog, helping your teams protect their systems with confidence.
 
 Because ASM is aware of an application's routes, protection can be applied granularly to specific services, and not necessarily across all applications and traffic. This contextual efficiency reduces your inspection effort, and it reduces the false positive rate compared to a perimeter WAF. There is no learning period, because most web frameworks provide a structured map of routes. ASM can help your team roll out protections against zero-day vulnerabilities automatically soon after the vulnerability is disclosed, while targeting vulnerable applications, limiting the risk of false positives.
 

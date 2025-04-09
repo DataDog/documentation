@@ -5,7 +5,7 @@ disable_toc: false
 
 Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
 
-Datadog Application Security Management (ASM) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
+Datadog App & API Protection (AAP) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
 
 This guide describes how to use ASM to prepare for and respond to account takeover (ATO) campaigns. This guide is divided into three phases:
 
@@ -108,7 +108,7 @@ In the event of a **false** user (`usr.exists:false`), look for the following is
 
 ### Step 1.5: Manually instrumenting your services
 
-ASM collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
+AAP collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
 
 <div class="alert alert-info">For an alternative to modifying the service's code, go to <a href="#step-16-remote-instrumentation-of-your-services">Step 1.6: Remote instrumentation of your services</a>.</div>
 
@@ -124,7 +124,7 @@ To manually instrument your services, do the following:
 
 ### Step 1.6: Remote instrumentation of your services
 
-ASM can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
+AAP can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
 
 This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running for this service in [Remote Configuration][12].
 
@@ -152,7 +152,7 @@ After setting up instrumentation for your services, ASM monitors for attack camp
 
 <!-- ![][image10] -->
 
-ASM detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
+AAP detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
 
 The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
 
@@ -192,7 +192,7 @@ In microservice environments, services are generally reached by internal hosts r
 
 <div class="alert alert-info">Before you begin: Verify that the IP addresses are properly configured, as described in <a href="#step-22-validate-proper-data-propagation">Step 2.2: Validate proper data propagation</a>.</div>
 
-ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
+AAP automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
 
 You can configure automatic blocking to block IPs identified as part of an attack. This is only a partial remediation because attackers can change IPs; however, it can give you more time to implement comprehensive remediation.
 

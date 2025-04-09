@@ -8,10 +8,10 @@ aliases:
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
-  text: "Cloud Security Management Misconfigurations"
+  text: "Workload Protection Misconfigurations"
 - link: "/security/threats/"
   tag: "Documentation"
-  text: "Cloud Security Management Threats"
+  text: "Workload Protection Threats"
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
@@ -54,13 +54,13 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as CNM (Cloud Network Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, extend resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Workload Protection][1] for each cloud account.
 
 {{< img src="/infrastructure/resource_catalog/resource-catalog-doc-img-2.png" alt="The Resource Catalog configuration page for extending resource collection" width="100%">}}
 
 **Note**: 
 - Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
-- Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
+- Enabling Workload Protection automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
 
 ## Browse the Resource Catalog
 

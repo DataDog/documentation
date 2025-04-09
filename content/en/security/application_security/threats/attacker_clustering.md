@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-Attacker Clustering improves distributed attack blocking. Datadog Application Security Management (ASM) identifies security signal traffic attacker patterns and to help you mitigate distributed attacks more efficiently.
+Attacker Clustering improves distributed attack blocking. Datadog App & API Protection (AAP) identifies security signal traffic attacker patterns and to help you mitigate distributed attacks more efficiently.
 
 Attacker clustering highlights a set of common attributes shared by a significant portion of traffic and suggests blocking based on those attributes.
 

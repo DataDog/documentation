@@ -16,10 +16,10 @@ further_reading:
       text: '.NET Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App & API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App & API Protection"
 ---
 
 You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.

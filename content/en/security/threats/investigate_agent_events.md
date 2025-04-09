@@ -13,7 +13,7 @@ further_reading:
     text: "Learn more about security notifications"
   - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
     tag: "Blog"
-    text: "Secure your Windows workloads with Datadog Cloud Security Management"
+    text: "Secure your Windows workloads with Datadog Workload Protection"
 ---
 
 

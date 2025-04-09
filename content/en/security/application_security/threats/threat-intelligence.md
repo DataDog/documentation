@@ -6,12 +6,12 @@ further_reading:
   text: "Threat Intelligence at Datadog"
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App & API Protection"
 ---
 
 ## Overview
 
-This topic describes [threat intelligence][1] for Application Security Management (ASM).
+This topic describes [threat intelligence][1] for App & API Protection (AAP).
 
 Datadog provides built-in threat intelligence [datasets][1] for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 
@@ -42,7 +42,7 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+AAP supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 

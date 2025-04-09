@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App & API Protection"
 - link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Other setup considerations and configuration options"

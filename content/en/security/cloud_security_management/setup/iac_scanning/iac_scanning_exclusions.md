@@ -6,7 +6,7 @@ further_reading:
       text: "IaC Scanning"
     - link: "/security/cloud_security_management/setup/iac_scanning"
       tag: "Documentation"
-      text: "Setting up IaC Scanning for Cloud Security Management"
+      text: "Setting up IaC Scanning for Workload Protection"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}

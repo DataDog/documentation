@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management
+title: Setting up Workload Protection
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -23,12 +23,12 @@ further_reading:
       text: "AWS Fargate Configuration Guide for Datadog Security"
     - link: "/security/cloud_security_management/guide/agent_variables/"
       tag: "Guide"
-      text: "Cloud Security Management Agent Variables"
+      text: "Workload Protection Agent Variables"
 ---
 
 ## Overview
 
-To get started with Cloud Security Management (CSM), review the following:
+To get started with Workload Protection, review the following:
 
 - [Overview](#overview)
 - [Enable Agentless Scanning](#enable-agentless-scanning)
@@ -43,13 +43,13 @@ To get started with Cloud Security Management (CSM), review the following:
 
 ## Enable Agentless Scanning
 
-The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+The simplest way to get started with Workload Protection is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
-To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
+To learn more about Agentless Scanning, see [Workload Protection Agentless Scanning][2].
 
 ## Deploy the Agent for additional coverage
 
-For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security Management on the Agent][3].
+For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Workload Protection on the Agent][3].
 
 <table>
   <thead>
@@ -120,19 +120,19 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### AWS CloudTrail Logs
 
-Maximize the benefits of [CSM Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
+Maximize the benefits of [CSM Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Workload Protection][4].
 
 ### IaC scanning
 
-Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Cloud Security Management][10].
+Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Workload Protection][10].
 
 ### IaC remediation
 
-Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
+Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Workload Protection][5].
 
 ### Deploy via cloud integrations
 
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security Management via Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Workload Protection via Cloud Integrations][7].
 
 ## Disable CSM
 

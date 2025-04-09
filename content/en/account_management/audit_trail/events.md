@@ -27,29 +27,46 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
-- [App Builder](#app-builder-events)
-- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
-- [Audit Trail](#audit-trail-events)
-- [CI Visibility](#ci-visibility-events)
-- [Quality Gates](#quality-gates-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
-- [Dynamic Instrumentation](#dynamic-instrumentation-events)
-- [Error Tracking](#error-tracking-events)
-- [Log Management](#log-management-events)
-- [Metrics](#metrics-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Security Notification events](#security-notification-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetic-monitoring-events)
-- [Reference Tables](#reference-table-events)
-- [Workflows](#workflow-events)
-- [App Datastore](#app-datastore)
-- [Event Management](#event-management)
-- [Private Action Runners](#private-action-runners)
-- [Observability Pipelines](#observability-pipelines)
-- [On-Call](#on-call)
+- [Overview](#overview)
+    - [Platform Events](#platform-events)
+    - [Product-Specific Events](#product-specific-events)
+- [Audit Events](#audit-events)
+  - [Access management events](#access-management-events)
+  - [Agent](#agent)
+  - [API request events](#api-request-events)
+  - [App Builder events](#app-builder-events)
+  - [Application Performance Monitoring (APM) events](#application-performance-monitoring-apm-events)
+  - [App & API Protection](#app-and-api-protection)
+  - [Audit Trail events](#audit-trail-events)
+  - [Authentication events](#authentication-events)
+  - [CI Visibility events](#ci-visibility-events)
+  - [Quality Gates events](#quality-gates-events)
+  - [Cloud Security Platform events](#cloud-security-platform-events)
+  - [Dashboard events](#dashboard-events)
+  - [Dynamic Instrumentation events](#dynamic-instrumentation-events)
+  - [Error Tracking events](#error-tracking-events)
+  - [Integration events](#integration-events)
+  - [Log Management events](#log-management-events)
+  - [Metrics events](#metrics-events)
+  - [Monitor events](#monitor-events)
+  - [Notebook events](#notebook-events)
+  - [OAuth events](#oauth-events)
+  - [Organization management events](#organization-management-events)
+  - [Real User Monitoring events](#real-user-monitoring-events)
+  - [Security Notification events](#security-notification-events)
+  - [Sensitive Data Scanner events](#sensitive-data-scanner-events)
+  - [Service Level Objectives (SLO) events](#service-level-objectives-slo-events)
+  - [Synthetic Monitoring events](#synthetic-monitoring-events)
+  - [Reference Table events](#reference-table-events)
+  - [Teams Management events](#teams-management-events)
+  - [Test Optimization events](#test-optimization-events)
+  - [Workflow events](#workflow-events)
+  - [App Datastore](#app-datastore)
+  - [Event Management](#event-management)
+  - [Private Action Runners](#private-action-runners)
+  - [Observability Pipelines](#observability-pipelines)
+  - [On-Call](#on-call)
+- [Further Reading](#further-reading)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -110,7 +127,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 | [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
-### Application Security Management
+### App & API Protection
 
 {{% audit-trail-asm %}}
 

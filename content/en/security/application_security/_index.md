@@ -1,5 +1,5 @@
 ---
-title: Application Security Management
+title: App & API Protection
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
   - /security_platform/application_security
@@ -10,7 +10,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How Application Security Management Works"
+  text: "How App & API Protection Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
@@ -19,7 +19,7 @@ further_reading:
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
   tag: "Product Page"
-  text: "Datadog Application Security Management"
+  text: "Datadog App & API Protection"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
   text: "Secure serverless applications with Datadog ASM"
@@ -28,10 +28,10 @@ further_reading:
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
 - link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
   tag: "Blog"
-  text: "Block attackers in your apps and APIs with Datadog Application Security Management"
+  text: "Block attackers in your apps and APIs with Datadog App & API Protection"
 - link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
   tag: "Blog"
-  text: "Threat modeling with Datadog Application Security Management"
+  text: "Threat modeling with Datadog App & API Protection"
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
   tag: "Blog"
   text: "Monitor AWS WAF activity with Datadog"
@@ -46,14 +46,14 @@ algolia:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">App & API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
+Datadog App & API Protection (AAP) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
 
-ASM leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
+AAP leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
 
 When a threat is detected, a security signal is generated in Datadog. For `HIGH` or `CRITICAL` severity security signals, notifications can be sent to Slack, email, or PagerDuty to notify your team and provide real-time context around threats.
 
@@ -65,7 +65,7 @@ Until you fully remediate the potential vulnerabilities in your application code
 
 ## Understanding how application security is implemented in Datadog
 
-If you're curious how Application Security Management is structured and how it uses tracing data to identify security problems, read [How Application Security Management Works][3].
+If you're curious how App & API Protection is structured and how it uses tracing data to identify security problems, read [How App & API Protection Works][3].
 
 ## Configure your environment
 
