@@ -202,7 +202,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    <div class="alert alert-info">If your CRD has multiple versions, you are prompted to select which version you want to configure indexing for.</div>
 
-   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of the Kubernetes Explorer > Custom Resources > Resource Definitions page. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
 
    A modal appears:
    {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Agent Setup, with copyable snippets for updating an Agent configuration, and Indexing Configuration, with checkboxes for fields to index.">}}
@@ -245,7 +245,7 @@ Follow these steps to collect the custom resources that these CRDs define:
 
    1. Apply your new configuration:
 
-      ```ash
+      ```
       kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
       ```
 
