@@ -18,6 +18,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to on-premises logging environments. To aggregate, process, and route cloud-based logs, see <a href="https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=source">Log Management Pipelines</a>.</div>
+
 In Observability Pipelines, a pipeline is a sequential path with three types of components: source, processors, and destinations. The Observability Pipeline [source][1] receives logs from your log source (for example, the Datadog Agent). The [processors][2] enrich and transform your data, and the [destination][3] is where your processed logs are sent. For some templates, your logs are sent to more than one destination. For example, if you use the Archive Logs template, your logs are sent to a cloud storage provider and another specified destination.
 
 ## Set up a pipeline
@@ -44,6 +46,10 @@ For detailed setup instructions, select a template-specific documentation and th
 See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
 
 After you have set up your pipeline, see [Update Existing Pipelines][12] if you want to make any changes to it.
+
+### Index your Worker logs
+
+Make sure your Worker logs are [indexed][14] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
 
 ## Clone a pipeline
 
@@ -76,3 +82,4 @@ After you have set up your pipeline, see [Update Existing Pipelines][12] if you 
 [11]: /observability_pipelines/advanced_configurations/
 [12]: /observability_pipelines/update_existing_pipelines/
 [13]: /observability_pipelines/install_the_worker/
+[14]: /logs/log_configuration/indexes/
