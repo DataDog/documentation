@@ -216,6 +216,8 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 
 <div class="alert alert-warning">Running Agentless scanners incurs additional costs. To optimize these costs while still ensuring reliable 12-hour scans, Datadog recommends setting up <a href="#terraform-setup">Agentless Scanning with Terraform</a> as the default template.</div>
 
+<div class="alert alert-warning">Sensitive Data Scanner for cloud storage is in Limited Availability. <a href="https://www.datadoghq.com/private-beta/data-security">Request Access</a> to enroll.</div>
+
 ##### Set up AWS CloudFormation
 
 {{< tabs >}}
