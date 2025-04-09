@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/roku
 type: multi-code-lang
 code_lang: roku
-code_lang_weight: 50
+code_lang_weight: 7
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'

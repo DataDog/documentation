@@ -6,7 +6,7 @@ aliases:
     - /real_user_monitoring/error_tracking/kotlin_multiplatform
 type: multi-code-lang
 code_lang: kotlin-multiplatform
-code_lang_weight: 10
+code_lang_weight: 5
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Documentation'

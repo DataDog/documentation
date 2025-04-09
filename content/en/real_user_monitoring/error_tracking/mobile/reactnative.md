@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/reactnative
 type: multi-code-lang
 code_lang: reactnative
-code_lang_weight: 40
+code_lang_weight: 6
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"

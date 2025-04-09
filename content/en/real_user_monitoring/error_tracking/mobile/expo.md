@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/expo
 type: multi-code-lang
 code_lang: expo
-code_lang_weight: 30
+code_lang_weight: 3
 further_reading:
 - link: https://www.datadoghq.com/blog/debug-android-crashes/
   tag: Blog
