@@ -140,7 +140,7 @@ By default, access to integration resources (accounts, services, webhooks) is un
 1. While viewing an integration, locate the resource that should have granular access controls applied. 
 2. Click **Set Permissions**.
 3. By default, everyone in your org has full access. Click **Restrict Access**. 
-4. The dialog box updates to show that members of your organization now have **Viewer** access by default.
+4. The dialog box updates to show that members of your organization have **Viewer** access by default.
 5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor. Note: The [Integrations Manage][45] permission is also required to edit individual resources.  
 6. Click **Add**.
 7. The dialog box updates to show the updated permissions
