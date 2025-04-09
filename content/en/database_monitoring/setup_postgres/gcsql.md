@@ -144,14 +144,12 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        port: 5432
        username: datadog
        password: 'ENC[datadog_user_database_password]'
-
-       ## Optional: Connect to a different database if needed for `custom_queries`
-       # dbname: '<DB_NAME>'
-
-       # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
         instance_id: '<INSTANCE_ID>'
+
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
    ```
 
 2. [Restart the Agent][2].
@@ -162,13 +160,15 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+To configure an integration for an Agent running in a Docker container such as in Google Cloud Run, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][1].
+
+The examples below show how to use [Docker Labels][2] and [Autodiscovery Templates][3] to configure the Postgres integration.
 
 **Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the Agent from your command line. Replace the values to match your account and environment:
+Run the following command from your [command line][4] to start the Agent. Replace the placeholder values with those for your account and environment.
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -204,7 +204,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-[1]: /agent/docker/integrations/?tab=docker
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][6] to provide the password as an environment variable.
+
+[1]: /containers/docker/integrations/?tab=labels#configuration
+[2]: https://docs.docker.com/engine/manage-resources/labels/
+[3]: /getting_started/containers/autodiscovery/
+[4]: /containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
+[5]: /agent/configuration/secrets-management
+[6]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -316,7 +323,6 @@ instances:
     port: 5432
     username: datadog
     password: 'ENC[datadog_user_database_password]'
-    # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
