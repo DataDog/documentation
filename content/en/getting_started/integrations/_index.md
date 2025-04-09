@@ -145,7 +145,7 @@ By default, access to integration resources (accounts, services, webhooks) is un
     **Note**: The [Integrations Manage][45] permission is also required to edit individual resources.  
 6. Click **Add**.
 7. The dialog box updates to show the updated permissions
-8. Click **Save**. The integration page will automatically refresh with updated permissions. 
+8. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
 **Note:** To maintain your edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
 
