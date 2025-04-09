@@ -3,7 +3,7 @@ categories:
 - AWS
 - nube
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Un bus de eventos serverless que procesa eventos de servicios AWS, SaaS
   y tus aplicaciones casi en tiempo real.
@@ -100,7 +100,7 @@ La integración Amazon EventBridge no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/es/api/latest/aws-integration/#create-an-amazon-eventbridge-source
