@@ -86,6 +86,8 @@ On mobile applications, many concurrent versions can live together. However, exi
 
 Datadog recommends creating the same retention filters for all application versions, independently of whether the SDK sampling rate is set to 100% or not. Ultimately, all valuable sessions will still end up being collected even if some sessions are not ingested for some older versions.
 
+See suggested retention filters and use cases in [Retention Filter Best Practices][5].
+
 ## Next steps
 
 Create and configure [retention filters][4].
@@ -98,3 +100,4 @@ Create and configure [retention filters][4].
 [2]: /real_user_monitoring/platform/connect_rum_and_traces/
 [3]: https://app.datadoghq.com/rum/list
 [4]: /real_user_monitoring/rum_without_limits/retention_filters
+[5]: /real_user_monitoring/guide/retention_filter_best_practices/
