@@ -6949,12 +6949,12 @@ menu:
       identifier: continuous_testing_settings
       weight: 3
     - name: Results Explorer
-      url: continuous_testing/explorer/
+      url: continuous_testing/results_explorer/
       parent: continuous_testing
       identifier: continuous_testing_results_explorer
       weight: 4
     - name: Metrics
-      url: synthetics/metrics/
+      url: continuous_testing/metrics/
       parent: continuous_testing
       identifier: continuous_testing_metrics
       weight: 5
