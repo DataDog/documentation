@@ -3201,11 +3201,13 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - monitor
       - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - MONITOR
       - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
@@ -13708,6 +13710,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13726,12 +13732,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true

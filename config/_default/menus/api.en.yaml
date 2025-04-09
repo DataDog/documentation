@@ -5767,6 +5767,23 @@ menu:
           - ListCostAWSCURConfigs
         unstable: []
         order: 1
+    - name: Cloud Network Monitoring
+      url: /api/latest/cloud-network-monitoring/
+      identifier: cloud-network-monitoring
+      generated: true
+    - name: Get all aggregated connections
+      url: '#get-all-aggregated-connections'
+      identifier: cloud-network-monitoring-get-all-aggregated-connections
+      parent: cloud-network-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAggregatedConnections
+        unstable:
+          - v2
+        order: 1
     - name: Cloudflare Integration
       url: /api/latest/cloudflare-integration/
       identifier: cloudflare-integration
@@ -7223,6 +7240,62 @@ menu:
         operationids:
           - ListDevices
         unstable: []
+        order: 1
+    - name: Observability Pipelines
+      url: /api/latest/observability-pipelines/
+      identifier: observability-pipelines
+      generated: true
+    - name: Update a pipeline
+      url: '#update-a-pipeline'
+      identifier: observability-pipelines-update-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePipeline
+        unstable:
+          - v2
+        order: 3
+    - name: Get a specific pipeline
+      url: '#get-a-specific-pipeline'
+      identifier: observability-pipelines-get-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPipeline
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a pipeline
+      url: '#delete-a-pipeline'
+      identifier: observability-pipelines-delete-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePipeline
+        unstable:
+          - v2
+        order: 4
+    - name: Create a new pipeline
+      url: '#create-a-new-pipeline'
+      identifier: observability-pipelines-create-a-new-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePipeline
+        unstable:
+          - v2
         order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
