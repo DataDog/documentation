@@ -39,6 +39,8 @@ Before you begin, review your configuration to see if your existing config is su
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
 1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
 
+<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
+
 ### Example configuration
 
 Here are two example Collector configuration files:
@@ -326,6 +328,15 @@ env:
     value: 'grpc'
 {{< /code-block >}}
 
+### Operation name mapping differences
+
+If you previously used `span_name_as_resource_name` or `span_name_remappings` configurations in your standalone Collector, you need to adapt your configuration.
+
+1. Remove these configurations from your Datadog Exporter and Connector settings.
+2. Enable the `enable_operation_and_resource_name_logic_v2` feature flag in your Agent configuration.
+
+For detailed instructions on migrating to the new operation name mappings, see [Migrate to New Operation Name Mappings][11].
+
 ## Correlate observability data
 
 [Unified service tagging][3] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
@@ -401,3 +412,4 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
 [10]: /getting_started/site/
+[11]: /opentelemetry/guide/migrate_operation_names/
