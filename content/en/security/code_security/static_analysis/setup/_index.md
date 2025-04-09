@@ -471,16 +471,16 @@ Datadog supports ingestion of third-party SARIF files that are compliant with [t
 schema is used differently by static analyzer tools. If you want to send third-party SARIF files to Datadog, please
 ensure they comply with the following details:
 
- - the violation location is specified through the `physicalLocation` object of a result.
-    - the `artifactLocation` and it's `uri` **must be relative** to the repository root.
-    - the `region` object is the part of the code highlighted in the Datadog UI.
- - the `partialFingerprints` is used to uniquely identify a finding across a repository.
- - `properties` and `tags` adds more information
-    - the tag `DATADOG_CATEGORY` specifies the category of the finding. Acceptable values are `SECURITY`, `PERFORMANCE`, `CODE_STYLE`, `BEST_PRACTICES`, `ERROR_PRONE`
-    - violations annotated with the category `SECURITY` are surfaced in the vulnerability explorer and the security tab of the repository view
- - the `tool` section must have a valid `driver` section with a `name` and `version` attributes.
+ - The violation location is specified through the `physicalLocation` object of a result.
+    - The `artifactLocation` and it's `uri` **must be relative** to the repository root.
+    - The `region` object is the part of the code highlighted in the Datadog UI.
+ - The `partialFingerprints` is used to uniquely identify a finding across a repository.
+ - `properties` and `tags` adds more information:
+    - The tag `DATADOG_CATEGORY` specifies the category of the finding. Acceptable values are `SECURITY`, `PERFORMANCE`, `CODE_STYLE`, `BEST_PRACTICES`, `ERROR_PRONE`.
+    - The violations annotated with the category `SECURITY` are surfaced in the Vulnerabilities explorer and the Security tab of the repository view.
+ - The `tool` section must have a valid `driver` section with a `name` and `version` attributes.
 
-For reference, there is an example of a SARIF file processed by Datadog.
+For example, here's an example of a SARIF file processed by Datadog:
 
 
 ```json
