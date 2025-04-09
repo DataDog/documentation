@@ -17393,6 +17393,14 @@ components:
           example: 0
           format: int64
           type: integer
+        ip_addresses:
+          description: The interface IP addresses
+          example:
+          - 1.1.1.1
+          - 1.1.1.2
+          items:
+            type: string
+          type: array
         mac_address:
           description: The interface MAC address
           example: 00:00:00:00:00:00
@@ -25886,6 +25894,14 @@ components:
           example: 1.0
           format: double
           type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
       type: object
     RetentionFilterAllType:
       default: spans-sampling-processor
@@ -25945,6 +25961,14 @@ components:
           example: 1.0
           format: double
           type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
       type: object
     RetentionFilterCreateAttributes:
       description: The object describing the configuration of the retention filter
@@ -25967,6 +25991,14 @@ components:
             filter,
 
             a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26038,6 +26070,14 @@ components:
             filter,
 
             a value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
