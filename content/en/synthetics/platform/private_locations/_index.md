@@ -946,7 +946,7 @@ Users with the [Datadog Admin and Datadog Standard roles][20] can view private l
 
 If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
-<div class="alert alert-danger"><strong>Note</strong>: If test includes restricted private locations, updating the test removes those locations from the test.</div>
+<div class="alert alert-danger"><strong>Note</strong>: If a test includes restricted private locations, updating the test removes those locations from the test.</div>
 
 ## Restrict access
 
