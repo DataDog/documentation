@@ -3734,7 +3734,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm/
+      url: /tracing/other_telemetry/rum
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
@@ -7539,8 +7539,6 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
       weight: 608
-
-# TODO: Correlate traces with opentelemetry page
     - name: Correlate RUM with Other Telemetry
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
