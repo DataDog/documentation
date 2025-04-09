@@ -51,7 +51,7 @@ It excludes the final 4-digit department and status code, allowing that informat
 1. Enter a description for the rule.
 1. In the **Match conditions** section, enter `[a-z0-9]{14}-\d{4}-[a-z0-9]{4}-[a-z0-9]{4}-\d{6}` in the regex field.
     {{< img src="sensitive_data_scanner/guides/regex_text_matched.png" alt="The regex test section showing that the UUID and user ID are matched" style="width:100%;" >}}
-1. Use a keyword dictionary to refine detection accuracy to avoid false positives. For this example, you want to match within 10 characters of the word `user`:
+1. Use a keyword dictionary to refine detection accuracy and avoid false positives. For this example, you want to match within 10 characters of the word `user`:
     1. Enter `user` as a key word.
     1. Enter `10` for **Characters before match**.
 1. In the **Action on Match** section and for this example:
