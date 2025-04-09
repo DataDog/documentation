@@ -85,6 +85,12 @@ start-preserve-build: dependencies
 	@make update_websites_sources_module
 	@make server
 
+# Leave build scripts in place, but skip dependencies and sources_module
+# Useful for testing local changes to the CDOCS build script
+start-cdocs-preserve-build:
+	@make build-cdocs
+	@make server
+
 start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
