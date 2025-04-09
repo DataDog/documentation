@@ -152,8 +152,8 @@ ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
    - **Name**: `datadog`
    - **Image source**: `Docker Hub` or another registry
    - **Image type**: Public
-   - **Registry server URL**: `sitecontainerssampleacr.azurecr.io`
-   - **Image and tag**: `datadog-dotnet:2.0`
+   - **Registry server URL**: `index.docker.io`
+   - **Image and tag**: `datadog/serverless-init:latest`
    - **Port**: `8126`
 1. Select **Apply**.
 
