@@ -28,7 +28,7 @@ For details about host and container metrics mapping, read [OpenTelemetry Metric
 Select your language to see instructions for configuring the OpenTelemetry SDK to send runtime metrics:
 
 {{< tabs >}}
-{{< tab "Java" >}}
+{{% tab "Java" %}}
 
 If you have instrumented your Java applications with [OpenTelemetry automatic instrumentation][3], runtime metrics are automatically enabled.
 
@@ -41,9 +41,9 @@ If you have instrumented your Java application with [OpenTelemetry manual instru
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Go" >}}
+{{% tab "Go" %}}
 
 OpenTelemetry (OTel) Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
 
@@ -51,9 +51,9 @@ OpenTelemetry (OTel) Go applications are [instrumented manually][3]. To enable r
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab ".NET" >}}
+{{% tab ".NET" %}}
 
 <div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is [1.5.0][6]</div>
 
@@ -70,7 +70,7 @@ The default metric export interval for the .NET OTel SDK is different from the d
 [6]: https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
 
-{{< /tab >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -93,7 +93,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 **Note**: OpenTelemetry runtime metrics are mapped to Datadog by metric name. Don't do mapping renaming of host metrics for OpenTelemetry runtime metrics or it will break.
 
 {{< tabs >}}
-{{< tab "Java" >}}
+{{% tab "Java" %}}
 
 | Datadog metric | Description |  OpenTelemetry counterpart |
 | --- | --- | --- |
@@ -127,9 +127,9 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 |	`jvm.gc.minor_collection_time` | The fraction of time spent in minor garbage collection. Set `new_gc_metrics: true` to receive this metric. | N/A |
 |	`jvm.os.open_file_descriptors` | | N/A |
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "Go" >}}
+{{% tab "Go" %}}
 
 | Datadog metric | Description |  OpenTelemetry counterpart |
 | --- | --- | --- |
@@ -169,9 +169,9 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.go.gc_stats.pause_quantiles.75p` | Distribution of GC pause times: 75th percentile. | N/A |
 | `runtime.go.gc_stats.pause_quantiles.max` | Distribution of GC pause times: maximum values. | N/A |
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab ".NET" >}}
+{{% tab ".NET" %}}
 
 | Datadog metric | Description |  OpenTelemetry counterpart |
 | --- | --- | --- |
@@ -201,7 +201,8 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.dotnet.aspnetcore.`<br/>`connections.current` | The current number of active HTTP connections to the server. (.NET Core only) | N/A |
 | `runtime.dotnet.aspnetcore.`<br/>`connections.queue_length` | The current length of the HTTP server connection queue. (.NET Core only) | N/A |
 
-{{< /tab >}}
+{{% /tab %}}
+
 {{< /tabs >}}
 
 [1]: /opentelemetry/guide/metrics_mapping/
