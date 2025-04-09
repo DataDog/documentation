@@ -24,7 +24,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP metrics intake endpoint is in Preview.
+  The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
@@ -255,7 +255,7 @@ service:
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.
-   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP metrics intake endpoint.
+   **Solution**: To request access, contact your account representative.
 
 - The `dd-otlp-source` header is missing or has an incorrect value.
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
