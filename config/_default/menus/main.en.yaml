@@ -2389,10 +2389,10 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -3009,7 +3009,7 @@ menu:
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705  
+      weight: 705
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
