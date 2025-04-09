@@ -227,7 +227,7 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 1. At the bottom of the AWS section, click **Add AWS accounts by following these steps**. The **Add New AWS Account(s)** dialog is displayed.
 1. Select the AWS region where you want to create the CloudFormation stack.
 1. Select an API key that is already configured for Remote Configuration. If the API key you select does not have Remote Configuration enabled, Remote Configuration is automatically enabled for that key upon selection.
-1.Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
+1. Choose whether to enable **Sensitive Data Scanner** for cloud storage. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Launch CloudFormation Template**. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the IAM permissions required to deploy and manage Agentless scanners.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
@@ -239,7 +239,8 @@ If you've already [set up Cloud Security Management][10] and want to add a new c
 1. On the [Cloud Security Management Setup][1] page, click **Cloud Integrations** > **AWS**.
 1. Click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) for the AWS account where you want to deploy the Agentless scanner.
 1. Verify that **Enable Resource Scanning** is toggled on. If it isn't, switch the **Enable Resource Scanning** toggle to the on position and complete Steps 3-7 in [New AWS Account][2].
-1. In the **Agentless Scanning** section, toggle **Host Vulnerability Scanning**, **Container Vulnerability Scanning**, **Lambda Vulnerability Scanning**, and **Data Security Scanning** to the on position.
+1. In the **Agentless Scanning** section, toggle **Enable Vulnerability Management (Host, Container and Lambda)** to the on position.
+1. Choose whether to **Enable Sensitive Data Scanner for Cloud Storage**. This automatically catalogs and classifies sensitive data in Amazon S3 resources.
 1. Click **Done**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
