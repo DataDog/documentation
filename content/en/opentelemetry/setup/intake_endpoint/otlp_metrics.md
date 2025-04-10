@@ -78,6 +78,7 @@ export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="{{< region-param key="otlp_metrics_e
 export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 ```
+<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
 
 #### Manual instrumentation
 
@@ -254,13 +255,13 @@ service:
 
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
 
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.
+- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.  
    **Solution**: To request access, contact your account representative.
 
-- The `dd-otlp-source` header is missing or has an incorrect value.
+- The `dd-otlp-source` header is missing or has an incorrect value.  
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 
-- The endpoint URL is incorrect for your organization.
+- The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
