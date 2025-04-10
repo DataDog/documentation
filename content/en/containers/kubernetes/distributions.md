@@ -59,6 +59,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -87,6 +88,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
@@ -116,6 +118,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -158,6 +161,7 @@ metadata:
   name: datadog
 spec:
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
@@ -179,6 +183,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
@@ -533,6 +538,7 @@ spec:
     kubeStateMetricsCore:
       enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -556,6 +562,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
