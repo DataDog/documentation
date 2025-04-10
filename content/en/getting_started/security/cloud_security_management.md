@@ -88,6 +88,6 @@ For information on disabling Cloud Security, see the following:
 [29]: https://app.datadoghq.com/security/identities
 [30]: https://app.datadoghq.com/security/infra-vulnerability
 [31]: https://app.datadoghq.com/security/configuration/reports
-[32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
-[33]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
+[33]: /security/cloud_security_management/troubleshooting/threats/#disable-cloud-security-threats
 [34]: /security/cloud_security_management/setup/cloud_integrations

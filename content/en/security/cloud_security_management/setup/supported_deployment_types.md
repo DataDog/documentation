@@ -35,6 +35,6 @@ The following table summarizes the scope of coverage available relative to each 
 
 **Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
-[1]: /security/cloud_security_management/setup/#csm-threats
-[2]: /security/cloud_security_management/setup/#csm-vulnerabilities
-[3]: /security/cloud_security_management/setup/#csm-identity-risks
+[1]: /security/cloud_security_management/setup/#cloud-security-threats
+[2]: /security/cloud_security_management/setup/#cloud-security-vulnerabilities
+[3]: /security/cloud_security_management/setup/#cloud-security-identity-risks

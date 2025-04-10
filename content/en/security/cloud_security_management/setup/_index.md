@@ -38,7 +38,7 @@ To get started with Cloud Security, review the following:
   - [IaC scanning](#iac-scanning)
   - [IaC remediation](#iac-remediation)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
-- [Disable Cloud Security](#disable-csm)
+- [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
 
 ## Enable Agentless Scanning
@@ -152,6 +152,6 @@ For information on disabling Cloud Security, see the following:
 [5]: /security/cloud_security_management/setup/iac_remediation
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
-[8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
-[9]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
+[8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
+[9]: /security/cloud_security_management/troubleshooting/threats/#disable-cloud-security-threats
 [10]: /security/cloud_security_management/setup/iac_scanning
