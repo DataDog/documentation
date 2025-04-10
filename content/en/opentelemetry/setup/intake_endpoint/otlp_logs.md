@@ -116,10 +116,10 @@ service:
 
 If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP logs intake endpoint, it indicates one of the following issues:
 
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP logs intake endpoint.
+- The API key belongs to an organization that is not allowed to access the Datadog OTLP logs intake endpoint.  
    **Solution**: To request access, contact your account representative.
 
-- The endpoint URL is incorrect for your organization.
+- The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_logs_endpoint" code="true" >}} endpoint.
 
 [3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
