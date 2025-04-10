@@ -89,7 +89,7 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 [3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
-[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [8]: https://docs.flutter.dev/deployment/flavors
-[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/flavor.html
-[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration/version.html
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
+[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html

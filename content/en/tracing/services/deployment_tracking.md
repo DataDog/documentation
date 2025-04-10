@@ -220,7 +220,7 @@ Time = 30
 : `{service: foo, env: staging, cluster-name: us-staging, version: Y}`
 
 Time = 45
-: `{service: foo, env: dev-shopist, cluster-name: us-staging, version: Y}`
+: `{service: foo, env: staging, cluster-name: dev-shopist, version: Y}`
 
 Max time between deployments:
 : `max:datadog.service.time_between_deployments{env: staging, cluster-name: *} = 25`

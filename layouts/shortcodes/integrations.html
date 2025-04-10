@@ -71,8 +71,7 @@
 
 <script type="text/javascript">
     var data_resources = [];
-    var integrations = {{ $json }};
-    window.integrations = JSON.parse(integrations);
+    window.integrations = JSON.parse('{{ $json }}');
 </script>
 
 <div class="d-block d-sm-none mt-40 mb-40 dropdown">
@@ -117,7 +116,7 @@
                       <a href="{{ $v.redirect | absLangURL }}" aria-label="{{ $v.public_title }} datadog integration docs link">
                         <picture class="mx-auto my-auto">
                           {{ $img := (replace $v.int_logo "_large" "_avatar") }}
-                          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{ $img }}" alt="{{ $v.public_title }} logo">
+                          <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{ $img }}" alt="{{ $v.public_title }} logo" loading="lazy">
                         </picture>
                         <div class="text-center picture-title">{{ $v.integration_title }}</div>
                         <div class="text-center title">{{ $v.integration_title }}</div>

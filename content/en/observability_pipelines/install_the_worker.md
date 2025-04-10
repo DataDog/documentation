@@ -160,11 +160,59 @@ See [Update Existing Pipelines][1] if you want to make changes to your pipeline'
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
-[2]: /observability_pipelines/sources/
-[3]: /observability_pipelines/destinations/
-[4]: /observability_pipelines/processors/
+## Upgrade the Worker
+
+To upgrade the Worker to the latest version, run the following command:
+
+{{< tabs >}}
+{{% tab "APT" %}}
+
+```
+sudo apt-get install --only-upgrade observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{% tab "RPM" %}}
+
+```
+sudo yum install --only-upgrade observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+## Uninstall the Worker
+
+If you want to uninstall the Worker, run the following commands:
+
+{{< tabs >}}
+{{% tab "APT" %}}
+
+```
+sudo apt-get remove --purge observability-pipelines-worker
+```
+
+{{% /tab %}}
+{{% tab "RPM" %}}
+
+1.
+    ```
+    yum remove observability-pipelines-worker
+    ```
+1.
+    ```
+    rpm -q --configfiles observability-pipelines-worker
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/advanced_configurations/#bootstrap-options
+[2]: /observability_pipelines/sources/
+[3]: /observability_pipelines/destinations/
+[4]: /observability_pipelines/processors/

@@ -39,7 +39,7 @@ For additional definitions and descriptions of important APM terms such as _span
 | [Resource](#resources)          | Resources represent a particular domain of a customer application - they are typically an instrumented web endpoint, database query, or background job.                                                              |
 | [Monitors][23]                   | APM metric monitors work like regular metric monitors, but with controls tailored specifically to APM. Use these monitors to receive alerts at the service level on hits, errors, and a variety of latency measures. |
 | [Trace](#trace)                 | A trace is used to track the time spent by an application processing a request and the status of this request. Each trace consists of one or more spans.                                                             |
-| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling a Datadog to stitch together individual spans into a complete distributed trace. |
+| [Trace Context Propagation](#trace-context-propagation)| The method of passing trace identifiers between services, enabling Datadog to stitch together individual spans into a complete distributed trace. |
 | [Retention Filters](#retention-filters) | Retention filters are tag-based controls set within the Datadog UI that determine what spans to index in Datadog for 15 days.                                                                                              |
 | [Ingestion Controls](#ingestion-controls) | Ingestion controls are used to send up to 100% of traces to Datadog for live search and analytics for 15 minutes.
 | [Instrumentation](#instrumentation) | Instrumentation is the process of adding code to your application to capture and report observability data. |
@@ -117,7 +117,7 @@ To learn more, read supported [propagation formats][28] for your application's l
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /developers/guide/data-collection-resolution-retention/
+[2]: /developers/guide/data-collection-resolution/
 [3]: /tracing/setup/
 [4]: /tracing/software_catalog/
 [5]: /tracing/services/services_map/

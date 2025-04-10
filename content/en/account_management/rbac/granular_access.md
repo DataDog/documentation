@@ -15,6 +15,8 @@ Use the different principals to control access patterns in your organization and
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -22,6 +24,7 @@ Use the different principals to control access patterns in your organization and
 | [Security suppressions][7]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][8]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][9]                             | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Reference tables][12]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 
 
 ### Elevate access to individual resources
@@ -38,3 +41,5 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [8]: /service_management/service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
 [10]: /service_management/case_management/settings#granular-access-control
+[11]: /getting_started/integrations/#granular-access-control
+[12]: /reference_tables/#permissions
