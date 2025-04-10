@@ -11,7 +11,7 @@ assets:
     metrics:
       check:
       - aws.privatelinkendpoints.active_connections
-      metadata_path: metadata.csv
+      metadata_path: assets/metrics/metric-spec.yaml
       prefix: aws.privatelink
     service_checks:
       metadata_path: assets/service_checks.json
@@ -111,6 +111,6 @@ Más enlaces, artículos y documentación útiles:
 [2]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-privatelink
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_privatelink/amazon_privatelink_metadata.csv
+[5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_privatelink/assets/metrics/metric-spec.yaml
 [6]: https://docs.datadoghq.com/es/help/
 [7]: https://www.datadoghq.com/architecture/connect-to-datadog-over-aws-privatelink/

@@ -5,6 +5,8 @@ disable_toc: false
 
 ## Overview
 
+<div class="alert alert-info">The solutions outlined in this documentation are specific to on-premises logging environments. To generate metrics from cloud-based logs, see the <a href="/observability_pipelines/set_up_pipelines/generate_metrics/">Observability Pipelines</a> documentation.</div>
+
 Some log sources, such as firewalls and network appliances, generate a large volume of log events that contain data that don't necessarily need to be stored. Often, you just want to see a summary of the logs and compare it to historical data. Use the Generate Metrics template to generate a count metric of logs that match a query or a distribution metric of a numeric value contained in the logs, such as a request duration. The template starts you off with the following processors:
 
 - **Filter**: Add a query to send only a subset of logs based on your conditions.

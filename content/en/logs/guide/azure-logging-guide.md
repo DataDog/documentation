@@ -12,6 +12,9 @@ further_reading:
   text: "Terraform Azure Datadog Log Forwarder"
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Automated Log Forwarding for Azure (in Preview)">}}
+Automatically set up log forwarding across your Azure environment—no manual configuration required! This feature automatically manages and scales log forwarding services.{{< /callout >}}
+
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
@@ -275,9 +278,9 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us5,gov,ap1" %}}
 <div class="alert alert-warning">
-  This is not supported for Datadog {{< region-param key="dd_site_name" >}} site.
+  Log forwarding from Azure Blob Storage is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 

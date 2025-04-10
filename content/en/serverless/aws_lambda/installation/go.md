@@ -23,7 +23,7 @@ aliases:
 
 ## Installation
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/go">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/product-management-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
@@ -102,7 +102,7 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 ### Configure the required environment variables
 
 - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+- Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys

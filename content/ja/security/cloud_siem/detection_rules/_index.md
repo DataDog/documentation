@@ -37,11 +37,11 @@ type: documentation
 
 ## 概要
 
-Datadog でログ検出ルールを作成するには、[検出ルールページ][1]に移動し、**New Rule** をクリックします。
+Datadog で検出ルールを作成するには、[Detection Rules ページ][1]に移動し、**New Rule** をクリックします。
 
-## ルールタイプ
+## 検出メカニズム
 
-Cloud SIEM (Security Information and Event Management) の場合、取り込んだログをリアルタイムに分析するために、**Log Detection** を選択します。
+**Real-Time Rule** または **Historical job** のどちらを使用してセキュリティシグナルを生成するか選択します。履歴ログや監査イベントを対象とした単発検索ジョブの詳細については、[Historical Jobs][5] を参照してください。
 
 ## 検出方法
 
@@ -72,9 +72,9 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 検索クエリ
 
-{{< img src="security/security_monitoring/detection_rules/threshold_20240904.png" alt="検索クエリを定義する" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="検索クエリを定義する" style="width:100%;" >}}
 
-[Log Explorer での検索][1]と同じロジックを使用して検索クエリを作成します。
+Cloud SIEM はログや Audit Trail イベントを分析できます。Audit Trail イベントを検索するには、**Logs** の横にある下向き矢印をクリックし、**Audit Trail** を選択します。[Log Explorer 検索構文][1]を使用して、ログまたは監査イベントの検索クエリを作成します。
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義された Group By は、値ごとに各 `group by` のシグナルを生成します。 通常、`group by` はエンティティ (ユーザーや IP など) です。Group By は、[クエリを結合する](#joining-queries)ためにも使用されます。
 
@@ -97,9 +97,12 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 検索クエリ
 
-{{< img src="security/security_monitoring/detection_rules/new_value.png" alt="検索クエリを定義する" style="width:100%;" >}}
+{{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="検索クエリを定義する" style="width:100%;" >}}
 
-同じロジックを使用して、[Log Explorer 検索][1]で検索クエリを構築します。各クエリには ASCII の小文字でラベルが付与されます。クエリ名を ASCII 文字から変更する場合は、鉛筆アイコンをクリックします。
+
+Cloud SIEM はログや Audit Trail イベントを分析できます。Audit Trail イベントを検索するには、**Logs** の横にある下向き矢印をクリックし、**Audit Trail** を選択します。[Log Explorer 検索構文][1]を使用して、ログまたは監査イベントの検索クエリを作成します。
+
+各クエリにはラベルがあり、これは小文字の ASCII 文字です。クエリ名は鉛筆アイコンをクリックすることで、ASCII 文字から別の名前に変更できます。
 
 **注**: このクエリは、すべての取り込みログに適用されます。
 
@@ -118,7 +121,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 検索クエリ
 
-Log Explorer での検索と同じロジックを使用して検索クエリを作成します。
+Cloud SIEM はログや Audit Trail イベントを分析できます。Audit Trail イベントを検索するには、**Logs** の横にある下向き矢印をクリックし、**Audit Trail** を選択します。[Log Explorer 検索構文][1]を使用して、ログまたは監査イベントの検索クエリを作成します。
 
 オプションで、一意のカウントとシグナルのグループ化を定義します。特定の時間枠で属性に対して観測された一意の値の数をカウントします。定義されたグループ化は、値ごとに各 `group by` のシグナルを生成します。 通常、`group by` はエンティティ (ユーザーや IP など) です。
 
@@ -126,13 +129,14 @@ Log Explorer での検索と同じロジックを使用して検索クエリを�
 
 **注**: このクエリは、すべての取り込みログに適用されます。
 
+[1]: /ja/logs/search_syntax/
 {{% /tab %}}
 
 {{% tab "不可能移動" %}}
 
 ### 検索クエリ
 
-[Log Explorer 検索][1]と同じロジックで検索クエリを構築します。このクエリに一致するすべてのログは、不可能な移動である可能性を分析します。現在のクエリに一致するログを確認するには、`preview` セクションを使用できます。
+Cloud SIEM はログや Audit Trail イベントを分析できます。Audit Trail イベントを検索するには、**Logs** の横にある下向き矢印をクリックし、**Audit Trail** を選択します。[Log Explorer 検索構文][1]を使用して、すべての一致するログが「Impossible Travel」の可能性を分析されます。現在のクエリにマッチするログを確認するには、`preview` セクションを利用できます。
 
 #### ユーザー属性
 
@@ -158,7 +162,7 @@ Log Explorer での検索と同じロジックを使用して検索クエリを�
 
 ### Root クエリ
 
-[Log Explorer 検索][1]と同じロジックを使用して検索クエリを構築します。各新規属性の定義されたトリガーは、24 時間のロールアップ期間にわたってその属性の新規値ごとにシグナルを生成します。
+Cloud SIEM はログや Audit Trail イベントを分析できます。Audit Trail イベントを検索するには、**Logs** の横にある下向き矢印をクリックし、**Audit Trail** を選択します。[Log Explorer 検索構文][1]を使用して、ログまたは監査イベントの検索クエリを作成します。定義された各新しい属性は、24 時間のロールアップ期間内でその属性の新しい値が検出されるたびにシグナルを生成します。
 
 クエリを追加するには、**Add Query** をクリックします。
 
@@ -333,6 +337,26 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 
 さらに、抑制ルールでは、ログを分析対象から除外するための除外クエリを追加できます。 これらのクエリは、**ログ属性**に基づきます。**注**: 抑制は、以前はログ除外クエリに基づいていましたが、今後は抑制ルールの **Add a suppression query** ステップに含まれるようになりました。
 
+## ルールのバージョン履歴
+
+{{< img src="/security/security_monitoring/detection_rules/rule_version_history_20250207.png" alt="GitHub OAuth アクセストークン侵害のバージョン履歴が表示されています" style="width:80%;" >}}
+
+Rule Version History を使用すると、以下のことが可能です:
+- 検出ルールの過去バージョンを確認し、時間の経過とともにどのように変更されたかを理解する
+- 誰がどのように変更したかを確認し、コラボレーションを強化する
+- Diff を使って変更点を比較し、修正内容やその影響を分析する
+
+ルールのバージョン履歴を確認するには:
+1. [Detection Rules][4] に移動します。
+1. 対象のルールをクリックします。
+1. ルールエディタで **Version History** をクリックし、過去の変更を確認します。
+1. 特定のバージョンをクリックして、どのような変更が行われたかを確認します。
+1. **Open Version Comparison** をクリックすると、バージョン間の変更点を確認できます。
+1. 比較したい 2 つのバージョンを選択します。
+    - 赤字でハイライトされている部分は、変更または削除されたデータを示します。
+    - 緑字でハイライトされている部分は、新しく追加されたデータを示します。
+1. **Unified** をクリックすると、同じパネル内で比較を表示できます。
+
 ## ルール非推奨
 
 すべてのすぐに使える検出ルールの定期的な監査を行い、忠実なシグナル品質を維持します。非推奨のルールは、改良されたルールに置き換えられます。
@@ -351,3 +375,5 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
 [2]: /ja/security/detection_rules/#clone-a-rule
 [3]: https://app.datadoghq.com/logs/
+[4]: https://app.datadoghq.com/security/rules
+[5]: /ja/security/cloud_siem/historical_jobs/
