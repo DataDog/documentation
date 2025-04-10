@@ -126,19 +126,16 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-While automatic uninstallation will be available soon, you can manually remove the RUM Auto-Instrumentation by following these steps:
+While automatic uninstallation will be available soon, you can manually remove the RUM Auto-Instrumentation by following these steps.
 
 1. Locate the NGINX configuration file by running `nginx -T`. Example: `/etc/nginx/nginx.conf`.
-2. Edit the file by removing the following line at the beginning: `load_module /opt/datadog-nginx/ngx_http_datadog_module.so;`
-3. Edit the file by removing all existing `datadog_*` sections from within the `http` directive. They will look similar to these, depending on your system configuration:
+2. Edit the file by removing the following line at the beginning `load_module /opt/datadog-nginx/ngx_http_datadog_module.so;`.
+3. Edit the file by removing all existing `datadog_*` sections from within the `http` directive. They will look similar to these, depending on your system configuration.
 
    ```
    datadog_agent_url http://datadog-agent:8126;
-
    datadog_tracing off;
-
    datadog_rum on;
-
    datadog_rum_config {
      # ... specific RUM configuration
    }
