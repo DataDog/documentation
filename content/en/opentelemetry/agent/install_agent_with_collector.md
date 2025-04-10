@@ -1132,6 +1132,7 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 
 - [datadogexporter][38]
 - [debugexporter][39]
+- [loadbalancingexporter][58]
 - [otlpexporter][40]
 - [otlphttpexporter][41]
 - [sapmexporter][42]
@@ -1216,3 +1217,4 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
