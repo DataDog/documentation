@@ -32,7 +32,7 @@ For details about host and container metrics mapping, see [OpenTelemetry Metrics
 ### 1. Prerequisites
 
 - You have successfully [configured OpenTelemetry metrics to send to Datadog][2].
-- You have installed the corresponding language integration.
+- You have installed the [corresponding language integration in Datadog][3].
 
 ### 2. Configure your application
 
@@ -244,5 +244,6 @@ The following tables list the Datadog runtime metrics that are supported through
 
 [1]: /opentelemetry/mapping/metrics_mapping/
 [2]: /opentelemetry/setup/
+[3]: https://app.datadoghq.com/integrations
 [5]: /tracing/metrics/runtime_metrics/
 [7]: https://app.datadoghq.com/dash/integration/256/jvm-metrics
