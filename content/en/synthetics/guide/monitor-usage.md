@@ -33,7 +33,7 @@ To visualize or alert on your Synthetic Monitoring usage, use the following quer
 
   **Note:** The pricing for browser {{< tooltip glossary="test run">}}s is based on the number of steps. See [Pricing documentation][7] for more information.
 
-For a higher level of refinement, scope, or group these metrics by tags associated with your test, such as `team` or `application`. 
+For a higher level of refinement, scope or group these metrics by tags associated with your test, such as `team` or `application`. 
 
 You can graph and monitor these metrics against static thresholds as well as use machine learning based algorithms like [anomaly detection][5] or [forecast][6] to ensure you do not get alerted for expected usage growth.
 
