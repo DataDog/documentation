@@ -96,7 +96,7 @@ The following SQL functions are supported. For Window function, see the separate
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
-| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
+| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
 
 
 {{% collapse-content title="Examples" level="h3" %}}
@@ -179,10 +179,10 @@ FROM users
 ### `CAST`  
 
 Supported cast target types: 
-- `VARCHAR`
 - `BIGINT`
 - `DECIMAL`
 - `TIMESTAMP`
+- `VARCHAR`
 
 {{< code-block lang="sql" >}}
 SELECT
@@ -246,8 +246,8 @@ Supported extraction units:
 | `month`           | `timestamp`              | month of the year (`1` - `12`)               |
 | `quarter`         | `timestamp`              | quarter of the year (`1` - `4`)              |
 | `year`            | `timestamp`              | year                                         |
-| `timezone_hour`   | `timestamp`              | hour of the time-zone offfset                |
-| `timezone_minute` | `timestamp`              | minute of the time-zone offset               |
+| `timezone_hour`   | `timestamp`              | hour of the time zone offset                 |
+| `timezone_minute` | `timestamp`              | minute of the time zone offset               |
 
 {{< code-block lang="sql" >}}
 SELECT
@@ -318,8 +318,8 @@ Supported truncations:
 - `days` / `day`
 - `weeks` / `week `
 - `months` / `month`
-- `quarter` / `quarters`
-- `year` / `years` 
+- `quarters` / `quarter`
+- `years` / `year` 
 
 {{< code-block lang="sql" >}}
 SELECT
