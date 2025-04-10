@@ -140,7 +140,7 @@ By default, access to integration resources (accounts, services, webhooks) is un
 **Note**: The restricted access option is only visible if the integration supports granular access control. To verify if granular access control is supported for an integration, review that [integration's documentation][46].
 {{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:100%;" >}}
 
-1. While viewing an integration, locate the resource that should have granular access controls applied. 
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
 2. Click **Set Permissions**.
 3. By default, everyone in your org has full access. Click **Restrict Access**. 
 4. The dialog box updates to show that members of your organization have **Viewer** access by default.
@@ -153,9 +153,11 @@ By default, access to integration resources (accounts, services, webhooks) is un
 **Note:** To maintain your edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a integration resource with restricted access, follow the steps below:
-1. Click **Set Permissions**.
-2. Click **Restore Full Access**.
-3. Click **Save**. The integration page automatically refreshes with updated permissions. 
+
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have general access restored.
+2. Click **Set Permissions**.
+3. Click **Restore Full Access**.
+4. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
 ## What's next?
 
