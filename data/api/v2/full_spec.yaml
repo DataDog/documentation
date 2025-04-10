@@ -27871,6 +27871,7 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionType'
       type: object
     SecurityMonitoringRuleCaseActionOptions:
+      additionalProperties: {}
       description: Options for the rule action
       properties:
         duration:
@@ -27879,16 +27880,24 @@ components:
           format: int64
           minimum: 0
           type: integer
+        userBehaviorName:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
+      description: Used with the case action of type 'user_behavior'. The value specified
+        in this field is applied as a risk tag to all users affected by the rule.
+      type: string
     SecurityMonitoringRuleCaseActionType:
       description: The action type.
       enum:
       - block_ip
       - block_user
+      - user_behavior
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
+      - USER_BEHAVIOR
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
