@@ -174,7 +174,7 @@ To enable Remote Configuration:
 6. Restart your Agent for the changes to take effect.
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- [Workload Protection default agent rules][9] update automatically as released.
+- [Workload Protection default Agent rules][9] update automatically as released.
 - [APM Agent-level sampling rates][10] are applied.
 - [Dynamic Instrumentation][11] is enabled.
 - [AAP 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.

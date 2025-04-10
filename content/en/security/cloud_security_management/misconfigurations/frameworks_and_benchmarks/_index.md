@@ -16,7 +16,7 @@ further_reading:
   text: "Search and explore misconfigurations"
 ---
 
-Workload Protection Misconfigurations comes with more than 1,300 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
+CSM Misconfigurations comes with more than 1,300 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
 
 ## View your compliance posture
 

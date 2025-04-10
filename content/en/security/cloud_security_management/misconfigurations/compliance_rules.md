@@ -22,7 +22,7 @@ Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-
 
 The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For CSM Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
-Workload Protection Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
+CSM Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
 - [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [CloudFront distribution should be encrypted][3] rule assesses whether an Amazon CloudFront distribution enforces HTTPS to secure communications.
 - [**Infrastructure configuration**][5]: These checks evaluate containers and Kubernetes clusters using rules from CIS compliance benchmarks for Docker and Kubernetes, as well as Linux workloads against CIS host benchmarks for Ubuntu, Red Hat, and Amazon Linux.

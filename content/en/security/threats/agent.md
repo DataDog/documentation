@@ -1,10 +1,10 @@
 ---
-description: Agent expression attributes and operators for Workload Protection Rules
+description: Agent expression attributes and operators for CSM Threat Rules
 disable_edit: true
 further_reading:
 - link: /security/cloud_workload_security/getting_started/
   tag: Documentation
-  text: Get started with Datadog Workload Protection
+  text: Get started with Datadog CSM Threats
 title: Creating Agent Rule Expressions
 ---
 <!--  SOURCED FROM https://github.com/DataDog/datadog-agent -->
@@ -17,7 +17,7 @@ The **Assisted rule creator** option helps you create the Agent and dependent de
 For details, see [Creating Custom Detection Rules][1].
 
 ## Agent expression syntax
-Workload Protection first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. This portion of a Workload Protection rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
+Cloud Security Management Threats (CSM Threats) first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. This portion of a CSM Threats rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
 {{< code-block lang="javascript" >}}
 <event-type>.<event-attribute> <operator> <value> [<operator> <event-type>.<event-attribute>] ...

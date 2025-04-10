@@ -12,7 +12,7 @@ This guide also describes some advantages of the ptrace solution.
 
 ## Summary of Agent options
 
-Workload Protection Threats includes two Agent options for threat detection and response:
+Workload Protection includes two Agent options for threat detection and response:
 
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).

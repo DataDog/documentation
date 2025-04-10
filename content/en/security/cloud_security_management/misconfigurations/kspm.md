@@ -46,7 +46,7 @@ Each finding contains the context you need to identify the issue's impact, such 
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 
-Workload Protection provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
+CSM provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
 
 For an in-depth explanation on how the security posture score works, see [Security posture score][3].
 

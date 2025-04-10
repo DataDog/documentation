@@ -31,14 +31,14 @@ This guide walks you through best practices for getting your team up and running
 
 **Identify services vulnerable or exposed to attacks** that would benefit from AAP. On the [**Software Catalog > Security page**,][1] view and select the services you wish to enable.
 
-{{< img src="getting_started/appsec/AAP_activation_service_selection_v2.png" alt="AAP Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="AAP Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. AAP identifies, prioritizes, and helps remediate all security risks on your services.
 
 **Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [Security Software Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
 
 
-{{< img src="getting_started/appsec/AAP_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Software Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
 
 
 ## Enable AAP

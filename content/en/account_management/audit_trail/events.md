@@ -29,7 +29,7 @@ further_reading:
 #### Product-Specific Events
 - [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [App and API Protection (AAP)](#application-security-management)
+- [App and API Protection (AAP)](#app-and-api-protection)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Quality Gates](#quality-gates-events)

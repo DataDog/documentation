@@ -14,7 +14,7 @@ list_section:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Workload Protection Misconfigurations is not available in the selected site.
+CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 

@@ -28,7 +28,7 @@ By default, all OOTB Agent crypto mining threat detection rules are enabled and 
 
 ## Workload Protection rules construction
 
-Workload Protection Threats rules consist of two different components: Agent rules and threat detection rules.
+Workload Protection rules consist of two different components: Agent rules and threat detection rules.
 
 - **Agent rules:** [Agent rules][9] are evaluated on the Agent host. Workload Protection first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. Agent expressions use Datadog's [Security Language (SECL)][2].<br><br>
 
@@ -58,7 +58,7 @@ Workload Protection Threats rules consist of two different components: Agent rul
 
 ### Workload Protection rules pipeline
 
-Workload Protection Threats uses the following pipeline when evaluating events:
+Workload Protection uses the following pipeline when evaluating events:
 
 1. The Agent rules evaluate system activity on the Agent host.
 2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog backend.
@@ -72,7 +72,7 @@ The following diagram illustrates this pipeline:
 
 ### Saving resources by design
 
-Workload Protection Threats detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
+Workload Protection detection rules are complex, correlating several datapoints, sometimes across different hosts, and including third party data. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
 
 Datadog solves this problem by keeping the Agent lightweight with only a few rules, and processes most rules using the threat detection rules on the Datadog backend.
 

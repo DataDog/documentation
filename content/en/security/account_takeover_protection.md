@@ -13,7 +13,7 @@ further_reading:
   text: "App and API Protection Guides"
 ---
 
-AAP provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
+App and API Protection (AAP) provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
 ATO protection has the following benefits:
 
