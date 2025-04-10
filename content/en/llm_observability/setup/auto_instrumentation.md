@@ -163,7 +163,7 @@ The Langgraph integration automatically traces `compiled graph` and `node` invoc
 
 ### Traced methods
 
-The LangGraph integration instruments the following methods:
+The Langgraph integration instruments the following methods:
 
 - [Compiled graphs][27]
 - [Nodes][28]
