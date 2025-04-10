@@ -17,7 +17,7 @@ Use the different principals to control access patterns in your organization and
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Integration Service][11]                        | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Powerpacks][5]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
