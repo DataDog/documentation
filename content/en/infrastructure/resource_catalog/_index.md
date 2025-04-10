@@ -60,7 +60,7 @@ By default, when you navigate to the Resource Catalog, you are able to see Datad
 
 **Note**: 
 - Extending resource collection does _not_ incur additional costs. The Resource Catalog is a free product for Infrastructure Monitoring customers.
-- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
+- Enabling Cloud Security automatically enables resource collection for the Resource Catalog Inventory tab. Enabling resource collection for the Resource Catalog does _not_ enable the Cloud Security product.
 
 ## Browse the Resource Catalog
 

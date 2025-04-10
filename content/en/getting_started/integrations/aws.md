@@ -210,7 +210,7 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 
 #### Cloud Security Misconfigurations
 
-Use the [Setting Up CSM Misconfigurations][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box [Cloud][55] and [Infrastructure][56] compliance rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Setting Up Cloud Security Misconfigurations][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box [Cloud][55] and [Infrastructure][56] compliance rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
 

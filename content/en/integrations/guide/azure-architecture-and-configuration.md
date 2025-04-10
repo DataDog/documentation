@@ -122,7 +122,7 @@ The implications of restricting access below the Monitoring Reader role are:
 
 The implications of restricting or omitting the Azure AD roles are:
 
-  - Partial or total loss of metadata for Azure AD resources in CSM Misconfigurations
+  - Partial or total loss of metadata for Azure AD resources in Cloud Security Misconfigurations
   - Partial or total loss of credential expiration monitoring for Azure AD resources
 
 [1]: /getting_started/site/

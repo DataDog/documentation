@@ -9,7 +9,7 @@ further_reading:
   text: "Start writing your own Rego rules"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/misconfigurations/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
@@ -59,7 +59,7 @@ To create a rule from scratch:
 
 ## Tagging misconfigurations
 
-When you create, clone, or modify CSM Misconfigurations compliance rules, you can specify tags to apply to misconfigurations so that you can group, filter, and search misconfigurations by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
+When you create, clone, or modify Cloud Security Misconfigurations compliance rules, you can specify tags to apply to misconfigurations so that you can group, filter, and search misconfigurations by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 

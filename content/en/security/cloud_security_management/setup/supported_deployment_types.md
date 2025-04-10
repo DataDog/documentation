@@ -4,9 +4,9 @@ title: Cloud Security Supported Deployment Types
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
-The following table summarizes the CSM features available relative to each deployment type.
+The following table summarizes the Cloud Security features available relative to each deployment type.
 
-| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities          | CSM Identity Risks | CSM Agentless Scanning |
+| Deployment type     | Agent Required (7.46+) | Cloud Security Misconfigurations | CSM Threats | Cloud Security Vulnerabilities          | Cloud Security Identity Risks | Cloud Security Agentless Scanning |
 |---------------------|------------------------|-----------------------|-------------|------------------------------|--------------------|------------------------|
 | AWS Account         |                        | {{< X >}}             |             | {{< X >}}                    | {{< X >}}          | {{< X >}}              |
 | Azure Account       |                        | {{< X >}}             |             | Agentless Scanning (Preview) | {{< X >}}          |                        |
@@ -19,8 +19,8 @@ The following table summarizes the CSM features available relative to each deplo
 | Windows             | {{< X >}}              |                       | {{< X >}}   | {{< X >}}                    |                    |                        |
 | AWS Fargate ECS/EKS | {{< X >}}              |                       | {{< X >}}   |                              |                    |                        |
 
-The following table summarizes the scope of coverage available relative to each CSM feature.
-| Resources monitored             | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
+The following table summarizes the scope of coverage available relative to each Cloud Security feature.
+| Resources monitored             | Cloud Security Misconfigurations | CSM Threats | Cloud Security Vulnerabilities | Cloud Security Identity Risks | Cloud Security Agentless scanning |
 |---------------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
 | Resources in AWS Account        | {{< X >}}             |             | {{< X >}}           |                    | {{< X >}}              |
 | Resources in Azure Subscription | {{< X >}}             |             |                     |                    |                        |
@@ -33,7 +33,7 @@ The following table summarizes the scope of coverage available relative to each 
 | Container Image                 |                       |             | {{< X >}}           |                    | {{< X >}}              |
 | IAM in AWS Account              |                       |             |                     | {{< X >}}          |                        |
 
-**Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
+**Note**: Cloud Security Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
 [1]: /security/cloud_security_management/setup/#csm-threats
 [2]: /security/cloud_security_management/setup/#csm-vulnerabilities

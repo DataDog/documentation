@@ -103,7 +103,7 @@ You can create custom rules using these methods:
 
 ## Create the custom Agent and detection rules together
 
-CSM custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
+Cloud Security custom Agent rules are grouped into policies. Policies group Agent rules to help you apply multiple rules more efficiently.
 
 
 ## Create the custom Agent and detection rules together

@@ -7,12 +7,12 @@ aliases:
 further_reading:
 - link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: "Blog"
-  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
+  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog Cloud Security"
 ---
 
 This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
+{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how Cloud Security, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -333,11 +333,11 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Verify that the Agent is sending events to CSM
+### Verify that the Agent is sending events to Cloud Security
 
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Cloud Security on AWS Fargate ECS or EKS, the Agent sends an agent event to Datadog to confirm that the default ruleset has been successfully deployed. To view the agent event, navigate to the [Agent Events][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-<div class="alert alert-info">You can also verify the Agent is sending events to CSM by manually triggering an AWS Fargate security signal.</div>
+<div class="alert alert-info">You can also verify the Agent is sending events to Cloud Security by manually triggering an AWS Fargate security signal.</div>
 
 In the task definition, replace the "workload" container with the following:
 

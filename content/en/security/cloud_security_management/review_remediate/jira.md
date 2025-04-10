@@ -10,31 +10,31 @@ further_reading:
 aliases:
   - /security/cloud_security_management/guide/jira
 products:
-  - name: CSM Misconfigurations
+  - name: Cloud Security Misconfigurations
     url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
-  - name: CSM Identity Risks
+  - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 ---
 
 {{< product-availability >}}
 
-Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security security issue. Jira for Cloud Security is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
+Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security security issue. Jira for Cloud Security is available for [Cloud Security Misconfigurations][3] and [Cloud Security Identity Risks][4].
 
 **Notes**:
-- To create Jira issues, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][2] for more information about Datadog's default roles and granular role-based access control permissions available for CSM.
+- To create Jira issues, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][2] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security.
 - At this time, you can create only one Jira issue per finding.
 
 ## Configure the Jira integration
 
-To create Jira issues for CSM security issues, you must configure the [Jira integration][5]. For detailed instructions, see the [Jira][1] integration docs.
+To create Jira issues for Cloud Security security issues, you must configure the [Jira integration][5]. For detailed instructions, see the [Jira][1] integration docs.
 
 ## Create a Jira issue for impacted resources
 
 {{< tabs >}}
 
-{{% tab "CSM Misconfigurations" %}}
+{{% tab "Cloud Security Misconfigurations" %}}
 
 To create a Jira issue for one or more resources impacted by a misconfiguration:
 
@@ -64,7 +64,7 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 
 {{% /tab %}}
 
-{{% tab "CSM Identity Risks" %}}
+{{% tab "Cloud Security Identity Risks" %}}
 
 To create a Jira issue for one or more resources impacted by an identity risk:
 

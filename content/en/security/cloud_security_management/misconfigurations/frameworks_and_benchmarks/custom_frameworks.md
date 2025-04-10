@@ -5,10 +5,10 @@ aliases:
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
-  text: "Getting started with CSM Misconfigurations"
+  text: "Getting started with Cloud Security Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
@@ -19,7 +19,7 @@ further_reading:
 
 With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
 
-1. On the [CSM Compliance page][6], click **Create Framework**.
+1. On the [Cloud Security Compliance page][6], click **Create Framework**.
 1. Enter the following details:
     - **Framework name**: The name of your framework. Can include characters, numbers, and spaces. Must be at least five characters long.
     - **Handle**: The tag name for the custom framework. Can include lowercase letters, numbers, dashes, underscores, and periods. This value is used to query the framework in the explorer or in dashboards.

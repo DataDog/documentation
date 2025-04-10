@@ -38,7 +38,7 @@ To get started with Cloud Security, review the following:
   - [IaC scanning](#iac-scanning)
   - [IaC remediation](#iac-remediation)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
-- [Disable CSM](#disable-csm)
+- [Disable Cloud Security](#disable-csm)
 - [Further reading](#further-reading)
 
 ## Enable Agentless Scanning
@@ -61,13 +61,13 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     </tr>
   </thead>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/identity_risks">Cloud Security Identity Risks</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td></td>
   </tr>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/misconfigurations">Cloud Security Misconfigurations</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -79,7 +79,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/vulnerabilities">Cloud Security Vulnerabilities</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -120,7 +120,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### AWS CloudTrail Logs
 
-Maximize the benefits of [CSM Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
+Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
 
 ### IaC scanning
 
@@ -134,11 +134,11 @@ Use IaC remediation with Terraform to create pull requests in GitHub, applying c
 
 Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security via Cloud Integrations][7].
 
-## Disable CSM
+## Disable Cloud Security
 
-For information on disabling CSM, see the following:
+For information on disabling Cloud Security, see the following:
 
-- [Disable CSM Vulnerabilities][8]
+- [Disable Cloud Security Vulnerabilities][8]
 - [Disable CSM Threats][9]
 
 ## Further reading

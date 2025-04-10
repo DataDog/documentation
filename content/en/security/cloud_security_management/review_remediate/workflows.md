@@ -13,10 +13,10 @@ products:
   - name: CSM Threats
     url: /security/threats/
     icon: cloud-security-management
-  - name: CSM Misconfigurations
+  - name: Cloud Security Misconfigurations
     url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
-  - name: CSM Identity Risks
+  - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 ---

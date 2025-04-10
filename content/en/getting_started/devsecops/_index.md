@@ -11,7 +11,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [Cloud Security Pro][3]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][4].
 
 ### Setup
 
@@ -21,7 +21,7 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 - [Serverless][2]
 - [Integrations][4]
 
-After you install the Agent, configure CSM Pro for your environment.
+After you install the Agent, configure Cloud Security Pro for your environment.
 
 - [Cloud Security Pro][6]
 
@@ -51,7 +51,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [Cloud Security Enterprise][4]. It also includes more than {{< translate key="integration_count" >}} [out-of-the-box integrations][5].
 
 ### Setup
 
@@ -62,7 +62,7 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 - [Live Processes][7]
 - [Integrations][5]
 
-After you install the Agent, configure CSM Enterprise for your environment.
+After you install the Agent, configure Cloud Security Enterprise for your environment.
 
 - [Cloud Security Enterprise][8]
 

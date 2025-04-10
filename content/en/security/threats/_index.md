@@ -48,7 +48,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+{{< img src="security/cws/signals_explorer.png" alt="Cloud Security Signals Explorer page" width="100%">}}
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
 

@@ -27,18 +27,18 @@ further_reading:
 
 [Datadog Cloud Security][1] delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
-With CSM, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with CSM.
+With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
 
 ## Phase 1: Deployment
 
-1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable CSM for your cloud resources and infrastructure][5]:
+1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable Cloud Security for your cloud resources and infrastructure][5]:
     - **[Threats][3]**: Kubernetes, Docker, and host-based installations.
     - **[Misconfigurations][2]**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
     - **[Identity Risks][28]**: Enable AWS resource collection and Cloudtrail logs forwarding.
     - **[Vulnerabilities][6]**: Container image scanning and host scanning instructions for AWS, Azure, Kubernetes, ECS EC2 instances, and host-based installations.
-1. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
+1. Check out the [Cloud Security homepage][13] to get an overview of your organization's risks and threats.
 1. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
-1. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
+1. Explore [security signals][15] and review [Cloud Security Misconfigurations findings][16].
 1. Review and remediate identity risks on the [Identity Risks][29] page.
 1. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
 1. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
@@ -46,7 +46,7 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 ## Phase 2: Customization
 
 1. Set up [CSM Threats suppression rules][18] to reduce noise.
-2. Create custom detection rules for [CSM Misconfigurations][19] and [CSM Threats][20].
+2. Create custom detection rules for [Cloud Security Misconfigurations][19] and [CSM Threats][20].
 
 ## Phase 3: Reports and dashboards
 
@@ -54,11 +54,11 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 2. Use out-of-the-box dashboards or [create your own][22] for faster investigations, reporting, and monitoring.
 3. Subscribe to the weekly [security digest][31] reports to begin investigation and remediation of the most important new security issues discovered in the last seven days. 
 
-## Disable CSM
+## Disable Cloud Security
 
-For information on disabling CSM, see the following:
+For information on disabling Cloud Security, see the following:
 
-- [Disable CSM Vulnerabilities][32]
+- [Disable Cloud Security Vulnerabilities][32]
 - [Disable CSM Threats][33]
 
 ## Further reading

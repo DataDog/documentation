@@ -6,17 +6,17 @@ further_reading:
       text: "Setting up Cloud Security"
     - link: "/security/cloud_security_management/misconfigurations"
       tag: "Documentation"
-      text: "CSM Misconfigurations"
+      text: "Cloud Security Misconfigurations"
     - link: "/security/cloud_security_management/identity_risks"
       tag: "Guide"
-      text: "CSM Identity Risks"
+      text: "Cloud Security Identity Risks"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/iac-security/" >}}
   Static Infrastructure as Code (IaC) scanning is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-Use the following instructions to enable Infrastructure as Code (IaC) scanning for Cloud Security. IaC scanning is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
+Use the following instructions to enable Infrastructure as Code (IaC) scanning for Cloud Security. IaC scanning is available for [Cloud Security Misconfigurations][1] and [Cloud Security Identity Risks][2].
 
 <div class="alert alert-info">Static IaC scanning supports GitHub for version control and Terraform for infrastructure as code.</div>
 
@@ -31,7 +31,7 @@ Follow [the instructions][3] for creating a GitHub app for your organization.
 
 After you set up the GitHub integration, enable IaC scanning for the repositories in your GitHub account.
 
-1. On the [CSM Setup page][4], expand the **Source Code Integrations** section.
+1. On the [Cloud Security Setup page][4], expand the **Source Code Integrations** section.
 2. Click **Configure** for the GitHub account you want to configure.
 3. To enable IaC:
     - All repositories: Toggle **Enable Infrastructure as Code (IaC) Scanning** to the on position.

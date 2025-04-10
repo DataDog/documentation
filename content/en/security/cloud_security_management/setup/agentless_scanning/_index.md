@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/security/vulnerabilities"
     tag: "Documentation"
-    text: "Read more about CSM Vulnerabilities"
+    text: "Read more about Cloud Security Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}
@@ -71,7 +71,7 @@ As a result, Agentless Scanning excludes resources from its scans that have the 
 
 The following diagram illustrates how Agentless scanning works with existing Agent installations:
 
-{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with CSM vulnerability management" width="90%" >}}
+{{< img src="/security/agentless_scanning/agentless_existing.png" alt="Diagram showing how Agentless scanning works when the Agent is already installed with Cloud Security vulnerability management" width="90%" >}}
 
 ## Cloud Storage scanning
 

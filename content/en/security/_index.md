@@ -23,7 +23,7 @@ further_reading:
     text: "Begin detecting threats with Cloud SIEM"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
-    text: "Start tracking misconfigurations with CSM Misconfigurations"
+    text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
@@ -110,7 +110,7 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 [Cloud Security][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+Cloud Security includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 

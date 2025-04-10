@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
@@ -17,7 +17,7 @@ further_reading:
 The Cloud Security Misconfigurations [Explorer][1] allows you to:
 
 - Review the detailed configuration of a resource.
-- Review the compliance rules applied to your resources by CSM Misconfigurations.
+- Review the compliance rules applied to your resources by Cloud Security Misconfigurations.
 - Review tags for more context about who owns the resource and where it resides in your environment.
 - Read descriptions and guidelines based on industry resources for remediating a misconfigured resource.
 - Use the time selector to explore your security configuration posture at any point in the past.
@@ -32,7 +32,7 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 Misconfigurations are displayed on the [Misconfigurations Explorer][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
 
-{{< img src="security/csm/explorers_page.png" alt="CSM Misconfigurations Explorer page" style="width:100%;">}}
+{{< img src="security/csm/explorers_page.png" alt="Cloud Security Misconfigurations Explorer page" style="width:100%;">}}
 
 Select a misconfiguration to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
 

@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration detection rules"
+  text: "Explore default Cloud Security Misconfigurations cloud configuration detection rules"
 - link: "/security/misconfigurations/custom_rules"
   tag: "Documentation"
   text: "Create Custom Rules"
@@ -17,8 +17,8 @@ Kubernetes Security Posture Management (KSPM) for Cloud Security helps you proac
 
 To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations. For detailed instructions, see the following articles:
 
-- CSM Enterprise ([Agent][14] and [cloud integrations][15])
-- CSM Pro ([Agent][12] and [cloud integrations][13])
+- Cloud Security Enterprise ([Agent][14] and [cloud integrations][15])
+- Cloud Security Pro ([Agent][12] and [cloud integrations][13])
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
@@ -38,7 +38,7 @@ This allows Datadog to detect risks in your Kubernetes deployments for each of t
 
 With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
 
-Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or by [executing a pre-defined workflow][8].
+Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within Cloud Security or by [executing a pre-defined workflow][8].
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
 
@@ -46,7 +46,7 @@ Each finding contains the context you need to identify the issue's impact, such 
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 
-CSM provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
+Cloud Security provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
 
 For an in-depth explanation on how the security posture score works, see [Security posture score][3].
 

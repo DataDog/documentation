@@ -8,7 +8,7 @@ further_reading:
     text: "See What's New in Datadog Security Compliance"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
-    text: "Start tracking misconfigurations with CSM Misconfigurations"
+    text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
@@ -57,7 +57,7 @@ Datadog Cloud Security delivers deep visibility, continuous configuration audits
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-CSM leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
+Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
@@ -70,11 +70,11 @@ CSM leverages both the Datadog Agent and Agentless. It includes a variety of fea
 
 ## Track your organization's health
 
-Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+Available for [Cloud Security Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
 Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
 
-{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
+{{< img src="security/csm/health_scores.png" alt="The posture score on the Cloud Security overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues
 
@@ -82,7 +82,7 @@ For an overview of your Cloud Security and Application Security findings, sorted
 
 To get more detail, use the [Explorers][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
+{{< img src="security/csm/explorers_page.png" alt="Cloud Security Explorers page" width="100%">}}
 
 ## Investigate resources
 
@@ -104,7 +104,7 @@ Use the [Security Research Feed][15] to stay current with the latest security de
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Cloud Security Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security][10].
+To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3] page in Datadog, which has detailed steps on how to set up and configure Cloud Security. For more information, see [Setting Up Cloud Security][10].
 
 ## Further reading
 

@@ -32,8 +32,8 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security. By default, these include the following types of findings:
 
-- A curated set of [misconfigurations][1] for [CSM Misconfigurations][2], compiled by Datadog Security Research.
-- A curated set of [identity risks][1] for [CSM Identity Risks][3], compiled by Datadog Security Research.
+- A curated set of [misconfigurations][1] for [Cloud Security Misconfigurations][2], compiled by Datadog Security Research.
+- A curated set of [identity risks][1] for [Cloud Security Identity Risks][3], compiled by Datadog Security Research.
 - Application library vulnerabilities for [Software Composition Analysis(SCA)][4]. All high and critical application library vulnerabilities on production services under attack appear in the inbox.
 - Application code vulnerabilities for [Code Security vulnerabilities][5]. All high and critical application code vulnerabilities appear in the inbox.
 - [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in Security Inbox by default.

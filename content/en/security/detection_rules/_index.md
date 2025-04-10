@@ -42,9 +42,9 @@ Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
 - Cloud Security:
-    - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
+    - [Cloud Security Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
-    - [CSM Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
+    - [Cloud Security Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
 - [Application Security Management][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Beta detection rules
@@ -73,7 +73,7 @@ For detailed instructions, see the following articles:
 
 - [Cloud SIEM][11]
 - [ASM][12]
-- [CSM Misconfigurations][13]
+- [Cloud Security Misconfigurations][13]
 - [CSM Threats][14]
 
 ## Manage detection rules
@@ -120,7 +120,7 @@ Use Rule Version History to:
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
     - For ASM: Click **Application Security** and then click **Detection Rules**.
-    - For CSM: Click **Cloud Security** and then click **Threat Detection Rules**.
+    - For Cloud Security: Click **Cloud Security** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
 1. Click on the rule you are interested in.
 1. In the rule editor, click **Version History** to see past changes.
@@ -151,7 +151,7 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
-    - Misconfigurations side panel (CSM Misconfigurations only)
+    - Misconfigurations side panel (Cloud Security Misconfigurations only)
     - [Rule editor][10] for that specific rule 
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.

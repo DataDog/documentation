@@ -23,7 +23,7 @@ You can use resource tags to create filters that include or exclude resources fr
 | Single character wildcard    | `?`          |
 | Multiple characters wildcard | `*`          |
 
-The allowlist enables you to specify tags that must be applied to a resource in order for CSM to evaluate it. Allowlist tags are evaluated as OR statements. In other words, at least one of the allowlist tags must be present in order for a resource to be evaluated. In contrast, blocklisted tags are evaluated as AND statements and take precedence over allowlist tags.
+The allowlist enables you to specify tags that must be applied to a resource in order for Cloud Security to evaluate it. Allowlist tags are evaluated as OR statements. In other words, at least one of the allowlist tags must be present in order for a resource to be evaluated. In contrast, blocklisted tags are evaluated as AND statements and take precedence over allowlist tags.
 
 **Examples**:
 

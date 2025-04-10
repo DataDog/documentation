@@ -43,7 +43,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ## Configuration
 
-### Enable CSM
+### Enable Cloud Security
 
 1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
     - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
@@ -57,16 +57,16 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
     runtime_security_config:
       enabled: true
     ```
-4. [Restart the Datadog Agent][6] to enable CSM.
+4. [Restart the Datadog Agent][6] to enable Cloud Security.
 
-### Verify that the Agent is sending events to CSM
+### Verify that the Agent is sending events to Cloud Security
 
-When you enable CSM on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable Cloud Security on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
+Another method to verify that the Agent is sending events to Cloud Security is to manually trigger a Windows security signal.
 
 1. In Windows, open a command prompt as Administrator and run the command `schtasks /create /?`.
-2. In Datadog, navigate to the [CSM Signals Explorer][8] to view the generated Windows signals.
+2. In Datadog, navigate to the [Cloud Security Signals Explorer][8] to view the generated Windows signals.
     - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
     - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.
 
@@ -86,7 +86,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
     runtime_security_config:
       fim_enabled: true
     ```
-1. [Restart the Datadog Agent][6] to enable CSM.
+1. [Restart the Datadog Agent][6] to enable Cloud Security.
 
 ### Enable Vulnerability scanning
 
@@ -101,7 +101,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
         enabled: true
     
     ```
-4. [Restart the Datadog Agent][6] to enable CSM Vulnerability Management.
+4. [Restart the Datadog Agent][6] to enable Cloud Security Vulnerability Management.
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
