@@ -137,18 +137,10 @@ Like any traditionally application, LLM applications can be implemented across m
 
 To enable LLM Observability for a proxy or gateway service that might be called from several different ML applications, you can enable LLM Observability without specifying an ML application name.
 
-As an example, create a proxy service that has a guardrail check, sensitive data scan, and finally makes an LLM call to OpenAI.
+In the proxy service, enable LLM Observability without specifying an ML application name. Optionally, you can specify a service name.
 
 {{< tabs >}}
 {{% tab "Python" %}}
-
-Install the necessary packages:
-
-```shell
-pip install -U --quiet ddtrace openai flask
-```
-
-Add the following code to your proxy service:
 
 ```python
 # proxy.py
@@ -156,55 +148,11 @@ from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(service="chat-proxy")
 
-from flask import Flask
-import os
-import openai
-
-client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-app = Flask(__name__)
-
-def make_system_prompt(context):
-  return # use the context to make a system prompt
-
-@app.route('/chat')
-def guardrail(req):
-    prompt = req.prompt
-    context = req.context
-    with LLMObs.task(name="guardrail-check"):
-      # check for harmful content
-    with LLMObs.task(name="sensitive-data-scan"):
-      # scan for sensitive data
-    response = client.chat.completions.create(
-      model="gpt-3.5-turbo",
-      messages=[
-        {"role": "system", "content": make_system_prompt(context)},
-        {"role": "user", "content": prompt}
-      ]
-    )
-    return {
-      "response": response.choices[0].message.content
-    }
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
-```
-
-Run the proxy service:
-
-```shell
-python proxy.py
+# proxy-specific logic, including guardrails, sensitive data scans, and the LLM call
 ```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
-Install the necessary packages:
-
-```shell
-npm install dd-trace openai express
-```
-
-Add the following code to your proxy service:
 
 ```javascript
 // proxy.js
@@ -213,48 +161,7 @@ const tracer = require('dd-trace').init({
 });
 const llmobs = tracer.llmobs;
 
-const express = require('express');
-const OpenAI = require('openai');
-
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
-
-const app = express();
-app.use(express.json());
-
-function makeSystemPrompt(context) {
-  return // use the context to make a system prompt
-}
-
-app.post('/chat', async (req, res) => {
-  const { prompt, context } = req.body;
-  llmobs.trace({ name: 'guardrail-check', kind: 'task' }, async () => {
-    // check for harmful content
-  });
-  llmobs.trace({ name: 'sensitive-data-scan', kind: 'task' }, async () => {
-    // scan for sensitive data
-  });
-  const response = await client.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    messages: [
-      { role: 'system', content: makeSystemPrompt(context) },
-      { role: 'user', content: prompt }
-    ]
-  });
-  res.json({ response: response.choices[0].message.content });
-});
-
-app.listen(8080, () => {
-  console.log('Server is running on port 3000');
-});
-```
-
-Run the proxy service:
-
-```shell
-node proxy.js
+// proxy-specific logic, including guardrails, sensitive data scans, and the LLM call
 ```
 
 {{% /tab %}}
@@ -266,14 +173,6 @@ In your specific applications that orchestrate the ML applications that make cal
 {{< tabs >}}
 {{% tab "Python" %}}
 
-Install the necessary packages:
-
-```shell
-pip install -U --quiet ddtrace requests
-```
-
-Add the following code to your proxy service:
-
 ```python
 # application.py
 from ddtrace.llmobs import LLMObs
@@ -281,41 +180,21 @@ LLMObs.enable(ml_app_name="my-ml-app")
 
 import requests
 
-prompt = "What is the status of my order?"
-
 if __name__ == "__main__":
     with LLMObs.workflow(name="run-chat"):
-      with LLMObs.retrieval(name="retrieve-context"):
-        with LLMObs.embedding(name="embed-prompt"):
-          embedding = # embed the prompt
-        with LLMObs.task(name="fetch-documents"):
-          documents = # fetch documents from embedding
-      with LLMObs.task(name="chat-proxy"):
+      # other application-specific logic - RAG steps, parsing, etc.
+
+      with LLMObs.task(name="chat-proxy"): # wrap the proxy call in a task span
         response = requests.post("http://localhost:8080/chat", json={
           "prompt": "Hello, world!",
           "context": documents
         })
 
-      LLMObs.annotate(
-        input_data=prompt,
-        output_data=response.json()
-      )
-```
-
-Run the application:
-
-```shell
-python application.py
+      # other application-specific logic handling the response
 ```
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
-
-Install the necessary packages:
-
-```shell
-npm install dd-trace axios
-```
 
 ```javascript
 // application.js
@@ -330,52 +209,41 @@ const axios = require('axios');
 
 async function main () {
   llmobs.trace({ name: 'run-chat', kind: 'workflow' }, async () => {
-    const documents = llmobs.trace({ name: 'retrieve-context', kind: 'retrieval' }, async () => {
-      const embedding = llmobs.trace({ name: 'embed-prompt', kind: 'embedding' }, async () => {
-        const embedding = // embed the prompt
-        return embedding;
-      });
-      const documents = // fetch documents from embedding
-      return documents;
-    });
+    // other application-specific logic - RAG steps, parsing, etc.
+
+    // wrap the proxy call in a task span
     const response = llmobs.trace({ name: 'chat-proxy', kind: 'task' }, async () => {
       return await axios.post('http://localhost:8080/chat', {
         prompt: 'Hello, world!',
         context: documents
       });
-    })
+    });
 
-    llmobs.annotate({
-      inputData: prompt,
-      outputData: response.data
-    })
-  })
+    // other application-specific logic handling the response
+  });
 }
 
 main();
 ```
 
-Run the application:
-
-```shell
-node application.js
-```
-
 {{% /tab %}}
 {{< /tabs >}}
 
-When making requests to the proxy or gateway service, the LLM Observability SDKs automatically propagate the ML application name from the original LLM application.
+When making requests to the proxy or gateway service, the LLM Observability SDKs automatically propagate the ML application name from the original LLM application. Additionally, the LLM Observability SDKs automatically tag the `task` span capturing the proxy or gateway service call with the tag `ml-proxy:custom`.
 
 ### Observing LLM gateway and proxy services
 
-To observe the LLM calls made by a variety of ML applications:
+To observe the tasks performed by a variety of ML applications in the proxy service:
 
 1. In the LLM trace view, view `All Applications` from the top-left dropdown.
 2. Switch to the `All Spans` view in the top-right dropdown.
-3. Filter the list by the `service` tag.
+3. Filter the list by the `ml-proxy:custom` tag.
 
 [PUT IMAGE HERE]
 
+The spans listed are the parent spans of the any operations executed by the ML applications. To see all spans, and not just the top-level task spans, from the proxy service, you can instead filter by the `service` tag:
+
+[PUT IMAGE HERE]
 ### Observing end-to-end usage of LLM applications making calls to a proxy or gateway service
 
 To observe the complete end-to-end usage of an LLM application that makes calls to a proxy or gateway service, you can filter for traces with that ML application name:
