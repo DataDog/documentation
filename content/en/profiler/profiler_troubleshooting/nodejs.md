@@ -35,7 +35,7 @@ update your operating system to a newer version that might include an updated ve
 
 ## Profiler fails to load the native component
 
-The profiler might fail to load the native component even if it finds it. This is indicated by an error message similar to:
+The profiler might find the native component but fail to load it. If this happens, you will see an error message like the following:
 ```
 Error: Error relocating /app/node_modules/@datadog/pprof/prebuilds/linuxmusl-x64/node-108.node: _ZSt28__throw_bad_array_new_lengthv: symbol not found
 ```
@@ -44,7 +44,12 @@ and further down below the stack trace:
 code: 'ERR_DLOPEN_FAILED'
 ```
 
-This can typically happens on Linux systems using the musl C standard library, such as Alpine Linux. This means that the version of musl your Linux distribution uses is older than the minimum version supported by the profiler library. First make sure you're using the latest version of dd-trace library. If that doesn't help, you can try to upgrade musl, upgrade your Linux distribution, or if you believe we should support your musl version then contact us.
+This issue typically occurs on Linux systems using an unsupported version of the musl C standard library, such as Alpine Linux. To resolve:
+
+1. Ensure that you are using the latest version of the dd-trace library. 
+2. If the issue persists, try upgrading musl or your Linux distribution. 
+
+If you believe your musl version should be supported, contact [Datadog support][5].
 
 ## Further Reading
 
@@ -54,3 +59,4 @@ This can typically happens on Linux systems using the musl C standard library, s
 [2]: /help/
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling
 [4]: https://nodejs.org/
+[5]: /help

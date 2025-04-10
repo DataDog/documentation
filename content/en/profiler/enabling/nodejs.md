@@ -76,7 +76,7 @@ const tracer = require('dd-trace/init')
 
 4. Optional: Set up [Source Code Integration][4].
 
-5. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][5]. Consult the [Troubleshooting][9] page if they do not.
+5. A minute or two after starting your Node.js application, your profiles will appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
 
 ## Not sure what to do next?
 
