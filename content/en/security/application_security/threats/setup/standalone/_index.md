@@ -19,7 +19,7 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 - link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
   tag: "Blog"
-  text: "Secure serverless applications with Datadog ASM"
+  text: "Secure serverless applications with Datadog AAP"
 ---
 
 ## Prerequisites 
@@ -29,7 +29,7 @@ Before setting up Application & API Protection, ensure the following prerequisit
 - **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
 - **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Application & API Protection capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][1] page.
 
-## Using ASM without APM tracing
+## Using AAP without APM tracing
 
 If you want to use Application & API Protection without APM tracing functionality, you can deploy with tracing disabled:
 

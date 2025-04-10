@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management Threats
+title: Workload Protection
 aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
@@ -9,13 +9,13 @@ aliases:
   - /security/threats/runtime_anomaly_detection
 ---
 
-Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detect threats to your production workloads in real-time
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine CSM Threats with [Cloud Network Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as Amazon EC2 instances, Docker containers, and Kubernetes clusters. Combine Workload Protection with [Cloud Network Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
 
-Workload Protection Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for CSM Threats:
+Workload Protection Threats uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for Workload Protection:
 
 1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
@@ -36,7 +36,7 @@ Workload Protection Threats comes with more than 50 out-of-the-box detection rul
 
 Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
-{{< img src="security/cws/threats_detection_rules.png" alt="CSM Threats detection rules in the Datadog app" width="100%">}}
+{{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}}
 
 ## Set up real-time notifications
 
@@ -59,9 +59,9 @@ Datadog is introducing a new feature called Active Protection to address the cry
 
 {{< whatsnext >}}
   {{< nextlink href="/security/threats/setup">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Threats{{< /nextlink >}}
-  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about CSM Threats detection rules{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box CSM Threats detection rules{{< /nextlink >}}
+  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for Workload Protection{{< /nextlink >}}
+  {{< nextlink href="/security/threats/workload_security_rules">}}Learn about Workload Protection detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-workload-security">}}Start using out-of-the-box Workload Protection detection rules{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 

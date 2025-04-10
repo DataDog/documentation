@@ -4,10 +4,10 @@ disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
-    text: "Explore CSM Threats detection rules"
+    text: "Explore Workload Protection detection rules"
   - link: "/security/threats/workload_security_rules"
     tag: "Documentation"
-    text: "Learn how to manage CSM Threats detection rules"
+    text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"

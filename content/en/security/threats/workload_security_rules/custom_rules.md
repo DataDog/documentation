@@ -3,19 +3,19 @@ title: Create Policies and Custom Rules
 further_reading:
 - link: "/security/threats/setup"
   tag: "Documentation"
-  text: "Setting Up CSM Threats"
+  text: "Setting Up Workload Protection"
 - link: "/security/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
 - link: "security/threats/backend"
   tag: "Documentation"
-  text: "CSM Threats Events"
+  text: "Workload Protection Events"
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
 ---
 
-This topic explains how to create custom Datadog Agent policies and detection rules for [CSM Threats][8].
+This topic explains how to create custom Datadog Agent policies and detection rules for [Workload Protection][8].
 
 In addition to the out of the box (OOTB) [default Agent and detection rules][7], you can write custom Agent and detection rules. Custom rules help to detect events Datadog is not detecting with its OOTB rules.
 
@@ -92,7 +92,7 @@ There are two use cases:
 - **Create a detection rule using an existing Agent rule:** To create a threat detection rule that uses an existing Agent rule, you only need to create a threat detection rule that references the Agent rule and adds any additional expression parameters you need.
 - **Create a threat detection rule using a new Agent rule:** To detect an event that the current Agent rules do not support, you need to create a custom Agent rule to detect that event, and then create a custom threat detection rule that uses the custom Agent rule.
 
-For more information, see [CSM Threats Detection Rules][7]. 
+For more information, see [Workload Protection Detection Rules][7]. 
 
 You can create custom rules using these methods:
 
@@ -229,7 +229,7 @@ After you upload the new default policy file to the Agent, navigate to the [**Th
    1. In **Detection rule types**, select **Workload Security**. 
    2. Select a detection method such as **Threshold** or **New Value**.
 3. **Define search queries:**
-   1. Configure a new CSM Threats rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
+   1. Configure a new Workload Protection rule. A rule can have multiple rule cases combined with Boolean logic, for example `(||, &&)`. You can also set the counter, group by, and roll-up window.
 
       {{< img src="security/cws/workload_security_rules/define_runtime_expression2.png" alt="Adding a rule to the search queries field" >}}  
     

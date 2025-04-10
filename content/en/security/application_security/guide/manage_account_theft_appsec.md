@@ -1,20 +1,20 @@
 ---
-title: Managing Account Theft with ASM
+title: Managing Account Theft with AAP
 disable_toc: false
 ---
 
 Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
 
-Datadog Application Security Management (ASM) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
+Datadog App and API Protection (AAP) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
 
-This guide describes how to use ASM to prepare for and respond to account takeover (ATO) campaigns. This guide is divided into three phases:
+This guide describes how to use AAP to prepare for and respond to account takeover (ATO) campaigns. This guide is divided into three phases:
 
 1. [Collecting login information](#phase-1-collecting-login-information):
-   - Enable and verify login activity collection in Datadog ASM using automatic or manual instrumentation methods.
+   - Enable and verify login activity collection in Datadog AAP using automatic or manual instrumentation methods.
    - Use remote configuration options if you cannot modify your service code.
    - Troubleshoot missing or incorrect data.
 2. [Preparing for account takeover campaigns](#phase-2-preparing-for-ato-campaigns):
-   - Prepare for ATO campaigns detected by ASM. 
+   - Prepare for ATO campaigns detected by AAP. 
    - Configure notifications for attack alerts.
    - Validate proper data propagation for accurate attacker identification.
    - Set up automatic IP blocking for immediate mitigation.
@@ -24,58 +24,58 @@ This guide describes how to use ASM to prepare for and respond to account takeov
 
 ## Phase 1: Collecting login information
 
-To detect malicious patterns, ASM requires visibility into your users' login activity. This phase describes how to enable and validate this visibility. 
+To detect malicious patterns, AAP requires visibility into your users' login activity. This phase describes how to enable and validate this visibility. 
 
-### Step 1.1: Ensure ASM is enabled on your identity service
+### Step 1.1: Ensure AAP is enabled on your identity service
 
-This step describes how to set up your service to use ASM.
+This step describes how to set up your service to use AAP.
 
-<div class="alert alert-info">If your service is already using ASM, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
+<div class="alert alert-info">If your service is already using AAP, you can go to <a href="#step-1.3:-validating-login-information-is-automatically-collected">Step 1.3: Validating whether login information is automatically collected</a>.</div>
 
 1. Go to [**Software Catalog**][2], click the **Security** lens, and search for your login service name. 
 
    <!-- ![][image1] -->
 
-2. Click on the service to open its details. If the **Threat management** pill is green, ASM is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+2. Click on the service to open its details. If the **Threat management** pill is green, AAP is enabled and you may move to [Step 1.3: Validating whether login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
    
    <!-- ![][image2] -->
 
-   If ASM isn't enabled, the panel displays the **Discover ASM** button.
+   If AAP isn't enabled, the panel displays the **Discover AAP** button.
 
    <!-- ![][image3] -->
 
-   To set up ASM, move to [Step 1.2: Enabling ASM on login service](#step-12-enabling-asm-on-your-login-service).
+   To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-asm-on-your-login-service).
 
-### Step 1.2: Enabling ASM on your login service
+### Step 1.2: Enabling AAP on your login service
 
-To enable ASM on your login service, ensure you meet the following requirements:
+To enable AAP on your login service, ensure you meet the following requirements:
 
-* Similarly to Datadog APM, ASM requires a library integration in your services and a running Datadog Agent.  
-* ASM generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
+* Similarly to Datadog APM, AAP requires a library integration in your services and a running Datadog Agent.  
+* AAP generally benefits from using the newest library possible; however, minimum supported versions are documented in [Compatibility Requirements][3].   
 * At a minimum, **Threat Detection** must be enabled. Ideally, **Automatic user activity event tracking** should be enabled as well.
 
-To enable ASM using a new deployment, use the `APPSEC_ENABLED` environment variable/library configuration or [Remote Configuration][11]. You can use either method, but Remote Configuration can be set up using the Datadog UI.
+To enable AAP using a new deployment, use the `APPSEC_ENABLED` environment variable/library configuration or [Remote Configuration][11]. You can use either method, but Remote Configuration can be set up using the Datadog UI.
 
-**To enable ASM using Remote Configuration**, and without having to restart your services, do the following:
+**To enable AAP using Remote Configuration**, and without having to restart your services, do the following:
 
-1. Go to [ASM onboarding][5].  
-2. Click **Get Started with ASM**.   
+1. Go to [AAP onboarding][5].  
+2. Click **Get Started with AAP**.   
 3. In **Activate on services already monitored by Datadog**, click **Select Services.**
 4. Select your service(s), and then click **Next** and proceed with the setup instructions.
 
-When you see traces from your service in [ASM Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
+When you see traces from your service in [AAP Traces][6], move to [Step 1.3: Validating login information is automatically collected](#step-1.3:-validating-login-information-is-automatically-collected).
 
-For more detailed instructions on using a new deployment, see [Enabling ASM Threat Detection using Datadog Tracing Libraries][7].
+For more detailed instructions on using a new deployment, see [Enabling AAP Threat Detection using Datadog Tracing Libraries][7].
 
 ### Step 1.3: Validating login information is automatically collected
 
-After you have enabled ASM, you can validate that login information is collected by Datadog.
+After you have enabled AAP, you can validate that login information is collected by Datadog.
 
-**Note:** After ASM is enabled on a service, wait a few minutes for users to log into the service or log into the service yourself.
+**Note:** After AAP is enabled on a service, wait a few minutes for users to log into the service or log into the service yourself.
 
 To validate login information is collected, do the following:
 
-1. Go to [Traces][8] in ASM.   
+1. Go to [Traces][8] in AAP.   
 2. Look for traces tagged with login activity from your login service. For example, in **Search for**, you might have `@appsec.security\activity:business\logic.users.login.*`.  
 3. Check if all your login services are reporting login activity. You can see this in the **Service** facet.
 
@@ -87,7 +87,7 @@ To validate login information is collected, do the following:
 
 To validate that login metadata is collected, do the following:
 
-1. Go to [Traces][8] in ASM.   
+1. Go to [Traces][8] in AAP.   
 2. Look for traces tagged with successful and failed login activity from your login service. You can update the search query in **Search for** to filter `business_logic.users.login.success` or `business_logic.users.login.failure`. 
 3. Open a trace.  
 4. On the **Security** tab, review the **Business Logic Event**.
@@ -108,7 +108,7 @@ In the event of a **false** user (`usr.exists:false`), look for the following is
 
 ### Step 1.5: Manually instrumenting your services
 
-ASM collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
+AAP collects login information and metadata using an SDK embedded in the Datadog libraries. Instrumentation is performed by calling the SDK when a user login is successful/fails and by providing the SDK with the metadata of the login. The SDK attaches the login and the metadata to the trace and sends it to Datadog where it is retained.
 
 <div class="alert alert-info">For an alternative to modifying the service's code, go to <a href="#step-16-remote-instrumentation-of-your-services">Step 1.6: Remote instrumentation of your services</a>.</div>
 
@@ -124,7 +124,7 @@ To manually instrument your services, do the following:
 
 ### Step 1.6: Remote instrumentation of your services
 
-ASM can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
+AAP can use custom In-App WAF rules to flag login attempts and extract the metadata from the request needed by detection rules.
 
 This approach requires that [Remote Configuration][11] is enabled and working. Verify Remote Configuration is running for this service in [Remote Configuration][12].
 
@@ -148,11 +148,11 @@ For more details, see [Tracking business logic information without modifying the
 
 ## Phase 2: Preparing for ATO campaigns
 
-After setting up instrumentation for your services, ASM monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] **Business logic** section. 
+After setting up instrumentation for your services, AAP monitors for attack campaigns. You can review the traffic in the [Attacks overview][14] **Business logic** section. 
 
 <!-- ![][image10] -->
 
-ASM detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
+AAP detects [multiple attacker strategies][15]. Upon detecting an attack with a high level of confidence, the [built-in detection rules][16] generate a signal. 
 
 The severity of the signal is set based on the urgency of the threat: from **Low** in case of unsuccessful attacks to **Critical** in case of successful account compromises.
 
@@ -176,7 +176,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 In microservice environments, services are generally reached by internal hosts running other services. This internal environment makes it challenging to identify the unique traits of the original attacker's request, such as IP, user agent, fingerprint, etc.
 
-[ASM Traces][20] can help you validate that the login event is properly tagged with the source IPs, user agent, etc. To validate, review login traces in [Traces][21] and check for the following:
+[AAP Traces][20] can help you validate that the login event is properly tagged with the source IPs, user agent, etc. To validate, review login traces in [Traces][21] and check for the following:
  
 * Source IPs (`@http.client_ip`) are varied and public IPs.  
   * **Problem:** If login attempts are coming from a few IPs only, this might be a proxy that you can't block without risking availability.  
@@ -192,19 +192,19 @@ In microservice environments, services are generally reached by internal hosts r
 
 <div class="alert alert-info">Before you begin: Verify that the IP addresses are properly configured, as described in <a href="#step-22-validate-proper-data-propagation">Step 2.2: Validate proper data propagation</a>.</div>
 
-ASM automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
+AAP automatic blocking can be used to block attacks at any time of the day. Automatic blocking can help block attacks before your team members are online, providing security during off hours. Within an ATO, automatic blocking can help mitigate the load issues caused by the increase in failed login attempts or prevent the attacker from using compromised accounts.
 
 You can configure automatic blocking to block IPs identified as part of an attack. This is only a partial remediation because attackers can change IPs; however, it can give you more time to implement comprehensive remediation.
 
 To configure automatic blocking, do the following:
 
-1. Go to **ASM** > **Protection** > [Detection Rules][23].  
+1. Go to **AAP** > **Protection** > [Detection Rules][23].  
 2. In **Search**, enter `tag:"category:account_takeover"`.   
 3. Open the rules where you want to turn on blocking. Datadog recommends turning IP blocking on for **High** or **Critical** severity.  
 4. In the rule, in **Define Conditions**, in **Security Responses**, enable **IP automated blocking**. You may also enable **User automated blocking**.  
    You can control the blocking behavior per condition. Each rule can have multiple conditions based on your confidence and the attack success. 
 
-**Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, ASM has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
+**Datadog does not recommend permanent blocking of IP addresses**. Attackers are unlikely to reuse IPs and permanent blocking could result in blocking users. Moreover, AAP has a limit of how many IPs it can block (`~10000`), and this could fill this list with unnecessary IPs.
 
 <!-- ![][image12] -->
 
@@ -279,7 +279,7 @@ Datadog tries to identify common attributes between the login failures in your s
 If accurate, the activity of the cluster should closely match the increase in login failures while also being low/nonexistent before.  
 If no cluster is available, click **Investigate in full screen** and review the targeted users/IPs for outliers. 
 
-If the list is truncated, click **View in ASM Protection Trace Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
+If the list is truncated, click **View in AAP Protection Trace Explorer** and run the investigation with the Traces explorer. For additional tools, see [Step 3.3: Investigation](#step-33-investigation).
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -344,7 +344,7 @@ Those are two important indicators:
 
 Click an indicator to see further information about the cluster traffic. 
 
-In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster. While comparing it to the ASM data, beware the scale, since APM data may be sampled while ASM's isn't.
+In **Cluster Activity**, there is a visualization of the volume of the overall APM traffic matching this cluster. While comparing it to the AAP data, beware the scale, since APM data may be sampled while AAP's isn't.
 
 In the following example, a lot of traffic comes from before the attack. This means a legitimate activity matches this cluster in normal traffic and it would get blocked if you were to take action. You don't need to escalate or click **Block All Attacking IPs** in the signal.
 
@@ -356,7 +356,7 @@ After confirming that the traits match the attackers, you can push an In-App WAF
 
 To create the rule, do the following:
 
-1. Go to **ASM** > **In-App WAF** > [Custom Rules](https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules).
+1. Go to **AAP** > **In-App WAF** > [Custom Rules](https://app.datadoghq.com/security/appsec/in-app-waf?column=services-count&config_by=custom-rules).
 2. Click **Create New Rule** and complete the configuration. 
 3. Select your login service (or a service where you want to block the requests). You can target blocking to the login route also.
 4. Configure the conditions of the rule. In this example, the user agent is used. If you want to block a specific user agent, you can paste it with the operator `matches value in list`. If you want more flexibility, you can also use a regex.
@@ -434,7 +434,7 @@ In the diffuse attacks case, attacker attributes are available in the signal.
 <!-- screenshot -->
 
 1. After opening the signal in the side panel, click **Investigate in full screen**.   
-2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**, then, in **Traces**, click **View in ASM Protection Trace Explorer**.
+2. In **Attacker Attributes**, select the cluster and click on **Filter this signal by selection**, then, in **Traces**, click **View in AAP Protection Trace Explorer**.
 
 This gets you to the trace explorer with filters set to the flagged attributes. You can start the investigation with the current query, but you should expand it to also match login successes on top of the failures. You can do that by replacing `@appsec.security_activity:business_logic.users.login.failure` with `@appsec.security_activity:business_logic.users.login.*`. Review the exhaustiveness and accuracy of the filter using [the technique described above](#isolate-attacker-activity).
 
@@ -518,13 +518,13 @@ If the signal wasn't accurate, you can extract the list or users or IPs and add 
 
 #### In-App WAF rules
 
-If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluates slower than the Denylist, but it is more flexible. To create the rule, go to **ASM** > **Protection** > **In-App WAF** > [Custom Rules][28].
+If the Denylist isn't sufficient, you can create a WAF rule. A WAF rule evaluates slower than the Denylist, but it is more flexible. To create the rule, go to **AAP** > **Protection** > **In-App WAF** > [Custom Rules][28].
 
 <!-- ![][image35] -->
 
 To create a new rule, do the following:
 
-1. Go to **ASM** > **Protection** > **In-App WAF** > [Custom Rules][28].  
+1. Go to **AAP** > **Protection** > **In-App WAF** > [Custom Rules][28].  
 2. Click **Create New Rule**.   
 3. Follow the steps in **Define your custom rule**.   
 4. In **Select the services you want this rule to apply to**, select your login service, or whichever services where you want to block requests. You can also target the blocking to the login route.
@@ -639,7 +639,7 @@ Account theft is a common threat but also much more complex than traditional inj
 
 In this guide, you did the following: 
 - Learned what account takeover campaigns can look like, how to triage them, and how to counter them.
-- Instrumented your login services to provide Datadog ASM with all the context it needs.
+- Instrumented your login services to provide Datadog AAP with all the context it needs.
 - Configured your login services to provide every capability at the time of the attack. 
 
 This is general guidance. Depending on your applications and environments, there might be a need for additional response strategies.

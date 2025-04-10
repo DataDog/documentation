@@ -1,7 +1,7 @@
 | Name                         | Description of audit event                                                                  | Query in audit explorer                                               |
 |------------------------------|---------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| [One-click Activation][1001]   | A user activated or de-activated ASM on a service.                                          | `@evt.name:"Application Security" @asset.type:compatible_services`    |
-| [Protection][1002]             | A user enabled or disabled the ASM protection.                                              | `@evt.name:"Application Security" @asset.type:blocking_configuration` |
+| [One-click Activation][1001]   | A user activated or de-activated AAP on a service.                                          | `@evt.name:"Application Security" @asset.type:compatible_services`    |
+| [Protection][1002]             | A user enabled or disabled the AAP protection.                                              | `@evt.name:"Application Security" @asset.type:blocking_configuration` |
 | [Denylist][1003]               | A user blocked, unblocked, or extended the blocking duration of an IP address or a user ID. | `@evt.name:"Application Security" @asset.type:ip_user_denylist`       |
 | [Passlist][1004]               | A user added, modified, or deleted an entry to the passlist.                                | `@evt.name:"Application Security" @asset.type:passlist_entry`         |
 | [In-App WAF Policy][1005]      | A user created, modified, or deleted an In-App WAF policy.                                  | `@evt.name:"Application Security" @asset.type:policy_entry`           |

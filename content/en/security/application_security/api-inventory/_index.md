@@ -30,7 +30,7 @@ Using the API Security Inventory you can:
 
 ## Configuration
 
-To use API Security on your services, **you must have ASM Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
+To use API Security on your services, **you must have AAP Threats Protection enabled**. The following library versions are compatible with API Security Inventory. [Remote Configuration][1] is required.
 
 |Technology|Minimum tracer version| Support for sensitive data scanning |
 |----------|----------|----------|
@@ -47,7 +47,7 @@ To use API Security on your services, **you must have ASM Threats Protection ena
 
 ## How it works
 
-API Inventory leverages the Datadog tracing library with ASM enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
+API Inventory leverages the Datadog tracing library with AAP enabled to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme. API information is evaluated per endpoint, every 30 seconds, which should ensure minimal performance impact.
 
 API Inventory Security uses [Remote Configuration][4] to manage and configure scanning rules that detect sensitive data and authentication.
 
@@ -59,7 +59,7 @@ See the number of [attacks][2] your API experienced within the last week.
 
 ### Processing sensitive data
 
-[ASM][2] matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
+[AAP][2] matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 

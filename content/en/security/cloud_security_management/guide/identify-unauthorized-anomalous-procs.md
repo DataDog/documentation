@@ -7,11 +7,11 @@ further_reading:
   text: "Creating Custom Detection Rules"
 ---
 
-You can use CSM Threats to identify if unauthorized or anomalous processes are running or executed on your IT systems.
+You can use Workload Protection to identify if unauthorized or anomalous processes are running or executed on your IT systems.
 
 For example, you can create a process allowlist and query for processes running on hosts and containers outside of the allowlist. 
 
-In CSM Threats, you can [define custom rules][1] to watch process executions for malicious activity on hosts or containers in real-time. You can define a list of process names and/or arguments that will generate a security signal that can be used to notify users.
+In Workload Protection, you can [define custom rules][1] to watch process executions for malicious activity on hosts or containers in real-time. You can define a list of process names and/or arguments that will generate a security signal that can be used to notify users.
 
 This guide shows you how to query for unauthorized and anomalous processes using static and dynamic allowlists as examples.
 

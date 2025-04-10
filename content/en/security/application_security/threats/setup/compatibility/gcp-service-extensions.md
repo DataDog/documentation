@@ -1,13 +1,13 @@
 ---
-title: ASM GCP Service Extensions Compatibility Requirements
+title: AAP GCP Service Extensions Compatibility Requirements
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 40
 ---
 
-The following table lists the support for application security capabilities in the ASM GCP Service Extensions according to the specified version:
+The following table lists the support for application security capabilities in the AAP GCP Service Extensions according to the specified version:
 
-| Application Security capability        | Minimum ASM Service Extensions image version  |
+| Application Security capability        | Minimum AAP Service Extensions image version  |
 |----------------------------------------|----------------------------------------------|
 | Threat Detection                       | 1.71.0                                       |
 | Threat Protection                      | 1.71.0                                       |
@@ -17,11 +17,11 @@ The following table lists the support for application security capabilities in t
 | Automatic user activity event tracking | not supported                                |
 | API Security                           | not supported                                |
 
-Please review ASM GCP Service Extensions integration version 1.71.0 [limitations][1].
+Please review AAP GCP Service Extensions integration version 1.71.0 [limitations][1].
 
-## ASM GCP Service Extensions support
+## AAP GCP Service Extensions support
 
-ASM GCP Service Extensions is in Preview.
+AAP GCP Service Extensions is in Preview.
 
 <div class="alert alert-info">If you would like to see support added for any of
 the unsupported capabilities, let us know! Fill out <a

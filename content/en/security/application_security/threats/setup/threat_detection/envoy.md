@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Envoy
+title: Enabling AAP for Envoy
 code_lang: envoy
 type: multi-code-lang
 code_lang_weight: 50
@@ -9,14 +9,14 @@ further_reading:
       text: "Envoy integration's source code"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="ASM for Envoy is in Preview" >}}
-To try the preview of ASM for Envoy, follow the setup instructions below.
+{{< callout url="#" btn_hidden="true" header="AAP for Envoy is in Preview" >}}
+To try the preview of AAP for Envoy, follow the setup instructions below.
 {{< /callout >}}
 
 You can enable application security for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
@@ -29,7 +29,7 @@ You can enable application security for the Envoy proxy. The Datadog Envoy integ
 ## Enabling threat detection
 ### Get started
 
-The ASM Envoy integration uses the Envoy external processing filter.
+The AAP Envoy integration uses the Envoy external processing filter.
 
 1. **Configure Envoy** to use the [external processing filter][3].
 For example:
@@ -93,10 +93,10 @@ For example:
 ## Datadog Go Tracer and Envoy integration
 
   <div class="alert alert-warning">
-    <strong>Note:</strong> The ASM Envoy integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
+    <strong>Note:</strong> The AAP Envoy integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
   </div>
 
-  The Envoy integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [ASM Library Configuration][8].
+  The Envoy integration uses the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][7] and [AAP Library Configuration][8].
 
 ## Limitations
 

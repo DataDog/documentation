@@ -11,7 +11,7 @@ This topic describes how to use **Attacker Explorer** to investigate and block F
 
 ## Overview
 
-Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
+Datadog App and API Protection (AAP) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions
@@ -26,10 +26,10 @@ Datadog Application Security Management (ASM) identifies attackers as suspicious
 
 To understand the difference between the different explorers, review these approaches:
 
-- **Protect:** Automated blocking using ASM Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
+- **Protect:** Automated blocking using AAP Protection configuration. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
 - **Reactive:** Blocking using Signals or Attackers explorer in response to observed threats.
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the ASM Attacker Explorer navigation"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_nav.png" alt="Screenshot of the AAP Attacker Explorer navigation"  >}}
 
 Each explorer focuses on a specific use case:
 
@@ -46,7 +46,7 @@ Each explorer focuses on a specific use case:
 
 To start reviewing attackers, go to [Attacker Explorer][1].
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="ASM Attacker Explorer"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attacker Explorer"  >}}
 
 There are two sections to the Attacker Explorer:
 
@@ -58,7 +58,7 @@ There are two sections to the Attacker Explorer:
 
 Click on any row to view the history and attributes of the IP.
 
-{{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with ASM Attacker Explorer"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/ip_drawer.png" alt="Investigate and IP address with AAP Attacker Explorer"  >}}
 
 IPs can be blocked or added to the Passlist from the IP drawer.
 
@@ -72,7 +72,7 @@ IPs can be blocked or added to the Passlist from the IP drawer.
 
 To block an individual IP temporarily or permanently, do the following:
 
-{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with ASM Attacker Explorer"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/block_ip_address.png" alt="Block an IP address with AAP Attacker Explorer"  >}}
 
 1. Click `Block` on the row.
 2. Choose a blocking duration.
@@ -90,7 +90,7 @@ To compare and block IPs in bulk, do the following:
     
     In the following example, the selected IPs are from the same location and appear to be related. The **Compare and Block** option opens the **Block selected attackers** view, showing metrics and attributes for the selected IP addresses.
 
-    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
+    {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attacker Explorer group blocking"  >}}
 
 4. To block attackers, click **Block**.
 
@@ -98,7 +98,7 @@ To compare and block IPs in bulk, do the following:
 
 When you select the **Compare and Block** option, the **Block selected attackers** view opens, showing metrics and attributes for the selected IP addresses.
 
-{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the ASM Attacker Explorer group blocking"  >}}
+{{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attacker Explorer group blocking"  >}}
 
 <div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the last 30 days.</a></div>
 
@@ -110,7 +110,7 @@ Contains the IPs selected from the explorer. Deselecting an IP removes it from t
 
 ### Similarity overview
 
-Each column exists to help block with confidence and safety. The provided attributes are also used by ASM's Attacker Similarity feature.
+Each column exists to help block with confidence and safety. The provided attributes are also used by AAP's Attacker Similarity feature.
 
 ASNs
 : Autonomous System Numbers. Attacks with large numbers of IP addresses might originate from the same ASN, especially when attacks originate from data centers and cloud IPs.
@@ -141,7 +141,7 @@ The traces associated with the IP addresses over the selected time.
 
 Benign traffic is sampled APM traffic which are traces without business logic or attack traffic detections.
 
-Attack traffic is all ASM traces, inclusive of business logic.
+Attack traffic is all AAP traces, inclusive of business logic.
 
 ### Block
 

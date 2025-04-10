@@ -26,7 +26,7 @@ further_reading:
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
@@ -91,7 +91,7 @@ Datadog Security includes [Application Security](#application-security), [Cloud 
 
 ## Application Security
 
-Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
 - [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code

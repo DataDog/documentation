@@ -3,7 +3,7 @@ title: Threat Detection for Linux Without eBPF Support
 disable_toc: false
 ---
 
-This guide describes how to set up the CSM Threats eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
+This guide describes how to set up the Workload Protection eBPF-less solution for eBPF disabled environments, such as AWS Fargate. The eBPF-less solution uses a ptrace-based Datadog Agent.
 
 This guide also describes some advantages of the ptrace solution.
 

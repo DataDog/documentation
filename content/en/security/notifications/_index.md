@@ -19,7 +19,7 @@ products:
 - name: Cloud Security Management
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---

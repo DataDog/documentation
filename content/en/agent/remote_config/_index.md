@@ -12,7 +12,7 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/threats/setup"
   tag: "Documentation"
-  text: "Setting Up CSM Threats"
+  text: "Setting Up Workload Protection"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
@@ -30,7 +30,7 @@ algolia:
 ## Overview
 Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
-For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+For Datadog security products, App and API Protection and Workload Protection, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
 ## How it works
 When Remote Configuration is enabled on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
@@ -68,11 +68,11 @@ The following products and features are supported with Remote Configuration:
 ### Fleet Automation
 **[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 
-### Application Security Management (ASM)
+### App and API Protection (AAP)
 
-- **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
+- **1-click AAP activation**: Enable AAP in 1-click from the Datadog UI.
 - **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
-- **Protect**: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals and Traces temporarily or permanently through the Datadog UI.
+- **Protect**: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 ### Application Performance Monitoring (APM)
 
@@ -84,9 +84,9 @@ The following products and features are supported with Remote Configuration:
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
-### CSM Threats
+### Workload Protection
 
-- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up CSM Threats][3] for more information.
+- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 - **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 ### Observability Pipelines
@@ -113,7 +113,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 ### Prerequisites
 
 - Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers.
-- For Datadog products that use tracing libraries, you also need to upgrade your tracing libraries to a Remote Configuration-compatible version. For ASM Protection capabilities and ASM 1-click activation, see [ASM compatibility requirements][6]. For Dynamic Instrumentation, see [Dynamic Instrumentation prerequisites][20].
+- For Datadog products that use tracing libraries, you also need to upgrade your tracing libraries to a Remote Configuration-compatible version. For AAP Protection capabilities and AAP 1-click activation, see [AAP compatibility requirements][6]. For Dynamic Instrumentation, see [Dynamic Instrumentation prerequisites][20].
 
 ### Setup
 
@@ -174,10 +174,10 @@ To enable Remote Configuration:
 6. Restart your Agent for the changes to take effect.
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- [CSM Threats default agent rules][9] update automatically as released.
+- [Workload Protection default agent rules][9] update automatically as released.
 - [APM Agent-level sampling rates][10] are applied.
 - [Dynamic Instrumentation][11] is enabled.
-- [ASM 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.
+- [AAP 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.
 
 ## Best practices
 

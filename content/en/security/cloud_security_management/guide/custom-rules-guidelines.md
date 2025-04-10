@@ -1,15 +1,15 @@
 ---
-title: Guidelines for Writing Custom CSM Threats Rules
+title: Guidelines for Writing Custom Workload Protection Rules
 further_reading:
 - link: "/security/threats/workload_security_rules"
   tag: "Documentation"
-  text: "Managing CSM Threats Rules"
+  text: "Managing Workload Protection Rules"
 - link: "/security/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expression Syntax"
 ---
 
-At some point, you may want to write your own [custom Cloud Security Management Threats (CSM Threats) Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
+At some point, you may want to write your own [custom Workload Protection Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
 
 ## Attributes
 

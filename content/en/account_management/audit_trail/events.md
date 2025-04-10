@@ -29,7 +29,7 @@ further_reading:
 #### Product-Specific Events
 - [App Builder](#app-builder-events)
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
+- [App and API Protection (AAP)](#application-security-management)
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Quality Gates](#quality-gates-events)
@@ -110,7 +110,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 | [Saved view][112] | A user created, modified, or deleted a saved view. | `@evt.name:APM @action:(created OR modified OR deleted) @asset.type:saved_view` |
 
-### Application Security Management
+### App and API Protection
 
 {{% audit-trail-asm %}}
 

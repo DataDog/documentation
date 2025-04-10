@@ -54,8 +54,8 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 
 ## Phase 2: Customization
 
-1. Set up [CSM Threats suppression rules][18] to reduce noise.
-2. Create custom detection rules for [CSM Misconfigurations][19] and [CSM Threats][20].
+1. Set up [Workload Protection suppression rules][18] to reduce noise.
+2. Create custom detection rules for [CSM Misconfigurations][19] and [Workload Protection][20].
 
 ## Phase 3: Reports and dashboards
 
@@ -68,7 +68,7 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 For information on disabling CSM, see the following:
 
 - [Disable CSM Vulnerabilities][32]
-- [Disable CSM Threats][33]
+- [Disable Workload Protection][33]
 
 ## Further reading
 

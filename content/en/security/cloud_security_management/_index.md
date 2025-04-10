@@ -11,7 +11,7 @@ further_reading:
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "/security/research_feed"
     tag: "Documentation"
     text: "Security Research Feed"
