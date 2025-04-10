@@ -52,7 +52,7 @@ When the updated **Task** displays a **RUNNING** status, use these pages to veri
 
 ### Troubleshooting
 
-If the Datadog Agent's _Health Status_ in the AWS console is _Unhealthy_, but your Datadog Agent status command displays `Agent health: PASS`, ensure you are using the correct shell options (`CMD-SHELL`, `timeout`, `startPeriod`, etc.) See [`datadog-agent-cws-ecs-fargate.json`][7].
+If the Datadog Agent's _Health Status_ in the AWS console is _Unhealthy_, but your Datadog Agent status command displays `Agent health: PASS`, ensure you are using the correct shell options (such as `CMD-SHELL`, `timeout`, and `startPeriod`). See [`datadog-agent-cws-ecs-fargate.json`][7].
 
 ## Examples
 
