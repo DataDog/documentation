@@ -215,8 +215,14 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
+### Playwright - RUM integration
+
+If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
+
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[3]: /real_user_monitoring/browser/setup/
+[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -746,7 +752,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
