@@ -425,6 +425,8 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "GitHub" %}}
 
+**Note**: The GitHub cost integration calculates costs with discounts.  A discounted item will have the same charge_description as the list price item, a negative cost, and a `discount` tag.
+
 | Tag Name | Tag Description |
 |---|---|
 | `enterprise_name` | Alphanumeric string identifying the GitHub enterprise account. |
@@ -432,6 +434,8 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `product` | The product of usage, for example "actions" or "storage". |
 | `organization_name` | The GitHub organization. |
 | `repository_name` | The GitHub repository. |
+| `billing_currency` | The billing currency, for example "USD". |
+| `discount` | If the cost item is a discount. |
 
 
 {{% /tab %}}
