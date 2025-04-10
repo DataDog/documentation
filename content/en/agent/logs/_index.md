@@ -176,7 +176,14 @@ Since the Private Location installation folder is restricted to admin access, th
 3. In the `Log On` tab, verify the account (the default is `ddagentuser`).
 4. Close the window.
 
-Next, go to `C:\Program Files`, find the `synthetics_worker.d` folder, right-click it, select `Properties`, and go to the `Security` tab. Click `Edit`, add `ddagentuser`, and grant the necessary permissions.
+Follow these steps to grant permission to  the user running the Datadog Agent
+
+1. Go to `C:\Program Files` and find the `synthetics_worker.d` folder.
+2. Right-click the `synthetics_worker.d` folder and select `Properties`.
+3. Go to the `Security` tab. 
+4. Click `Edit` and add `ddagentuser`.
+5. Grant the necessary permissions.
+6. Restart the Datadog Agent through the Services screen or command line to apply the changes and begin sending logs to Datadog.
 
 Finally, restart the Datadog Agent either through the Services screen or command line to apply the changes and begin sending logs to Datadog.
 {{% /tab %}}
