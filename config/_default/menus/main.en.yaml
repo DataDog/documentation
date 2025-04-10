@@ -762,39 +762,24 @@ menu:
       identifier: otel_integrations
       parent: opentelemetry_top_level
       weight: 8
-    - name: Trace Metrics
-      url: opentelemetry/integrations/trace_metrics/
-      identifier: otel_trace_metrics
+    - name: Apache Metrics
+      url: opentelemetry/integrations/apache_metrics/
+      identifier: otel_apache_metrics
       parent: otel_integrations
       weight: 801
-    - name: Runtime Metrics
-      url: opentelemetry/integrations/runtime_metrics/
-      identifier: otel_runtime_metrics
-      parent: otel_integrations
-      weight: 802
-    - name: Java
-      url: opentelemetry/integrations/runtime_metrics/java
-      identifier: otel_runtime_metrics_java
-      parent: otel_runtime_metrics
-      weight: 8021
-    - name: .NET
-      url: opentelemetry/integrations/runtime_metrics/dotnet
-      identifier: otel_runtime_metrics_dotnet
-      parent: otel_runtime_metrics
-      weight: 8022
-    - name: Go
-      url: opentelemetry/integrations/runtime_metrics/go
-      identifier: otel_runtime_metrics_go
-      parent: otel_runtime_metrics
-      weight: 8023
     - name: Collector Health Metrics
       url: opentelemetry/integrations/collector_health_metrics/
       identifier: otel_health_metrics
       parent: otel_integrations
-      weight: 803
+      weight: 802
     - name: Docker Metrics
       url: opentelemetry/integrations/docker_metrics/
       identifier: otel_docker_metrics
+      parent: otel_integrations
+      weight: 803
+    - name: HAProxy Metrics
+      url: opentelemetry/integrations/haproxy_metrics/
+      identifier: otel_haproxy_metrics
       parent: otel_integrations
       weight: 804
     - name: Host Metrics
@@ -802,11 +787,51 @@ menu:
       identifier: otel_host_metrics
       parent: otel_integrations
       weight: 805
+    - name: IIS Metrics
+      url: opentelemetry/integrations/iis_metrics/
+      identifier: otel_iis_metrics
+      parent: otel_integrations
+      weight: 806
     - name: Kafka Metrics
       url: opentelemetry/integrations/kafka_metrics/
       identifier: otel_kafka_metrics
       parent: otel_integrations
-      weight: 806
+      weight: 807
+    - name: MySQL Metrics
+      url: opentelemetry/integrations/mysql_metrics/
+      identifier: otel_mysql_metrics
+      parent: otel_integrations
+      weight: 808
+    - name: NGINX Metrics
+      url: opentelemetry/integrations/nginx_metrics/
+      identifier: otel_nginx_metrics
+      parent: otel_integrations
+      weight: 809
+    - name: Runtime Metrics
+      url: opentelemetry/integrations/runtime_metrics/
+      identifier: otel_runtime_metrics
+      parent: otel_integrations
+      weight: 810
+    - name: Java
+      url: opentelemetry/integrations/runtime_metrics/java
+      identifier: otel_runtime_metrics_java
+      parent: otel_runtime_metrics
+      weight: 8101
+    - name: .NET
+      url: opentelemetry/integrations/runtime_metrics/dotnet
+      identifier: otel_runtime_metrics_dotnet
+      parent: otel_runtime_metrics
+      weight: 8102
+    - name: Go
+      url: opentelemetry/integrations/runtime_metrics/go
+      identifier: otel_runtime_metrics_go
+      parent: otel_runtime_metrics
+      weight: 8103
+    - name: Trace Metrics
+      url: opentelemetry/integrations/trace_metrics/
+      identifier: otel_trace_metrics
+      parent: otel_integrations
+      weight: 811
     - name: Troubleshooting
       url: opentelemetry/troubleshooting/
       identifier: otel_troubleshooting
@@ -2090,30 +2115,30 @@ menu:
       identifier: using_scorecards
       weight: 703
     - name: Self-Service Actions
-      url: software_catalog/self-service_actions
+      url: software_catalog/self_service_actions
       parent: software_catalog
-      identifier: self-service_actions
+      identifier: self_service_actions
       weight: 8
     - name: Software Templates
       url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
-      weight: 9
+      weight: 801
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 10
+      weight: 9
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 11
+      weight: 10
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 12
+      weight: 11
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
@@ -2379,16 +2404,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Automations
+      url: service_management/on-call/automations
+      parent: oncall
+      identifier: oncall_automations
+      weight: 6
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 6
+      weight: 7
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 7
+      weight: 8
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -2960,21 +2990,46 @@ menu:
       identifier: containers_datadog_operator
       parent: containers
       weight: 7
+    - name: Advanced Install
+      url: containers/datadog_operator/advanced_install
+      identifier: containers_datadog_operator_installation
+      parent: containers_datadog_operator
+      weight: 701
+    - name: Custom Checks
+      url: containers/datadog_operator/custom_check
+      identifier: containers_datadog_operator_customchecks
+      parent: containers_datadog_operator
+      weight: 702
+    - name: Data Collected
+      url: containers/datadog_operator/data_collected
+      identifier: containers_datadog_operator_datacollected
+      parent: containers_datadog_operator
+      weight: 703
+    - name: kubectl Plugin
+      url: containers/datadog_operator/kubectl_plugin
+      identifier: containers_datadog_operator_kubectlplugin
+      parent: containers_datadog_operator
+      weight: 704
+    - name: Secret Management
+      url: containers/datadog_operator/secret_management
+      identifier: containers_datadog_operator_secretmanagement
+      parent: containers_datadog_operator
+      weight: 705  
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 701
+      weight: 708
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 702
+      weight: 709
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 703
+      weight: 710
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers
@@ -3157,10 +3212,14 @@ menu:
       parent: serverless
       identifier: serverless_gcr
       weight: 7
-    - name: Functions
-      url: serverless/google_cloud_run/functions
+    - name: 1st Gen Functions
+      url: serverless/google_cloud_run/functions_gen1
       parent: serverless_gcr
       weight: 701
+    - name: 2nd Gen Functions
+      url: serverless/google_cloud_run/functions
+      parent: serverless_gcr
+      weight: 702
     - name: Glossary
       url: serverless/glossary
       parent: serverless
@@ -3675,7 +3734,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm/
+      url: /tracing/other_telemetry/rum
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
@@ -4793,10 +4852,10 @@ menu:
       parent: dora_metrics_setup
       identifier: dora_metrics_setup_deployments
       weight: 101
-    - name: Incident Data Sources
+    - name: Failure Data Sources
       url: dora_metrics/setup/failures/
       parent: dora_metrics_setup
-      identifier: dora_metrics_setup_incidents
+      identifier: dora_metrics_setup_failures
       weight: 102
     - name: Data Collected
       url: dora_metrics/data_collected/
@@ -6971,7 +7030,7 @@ menu:
       identifier: rum_frustration_signals
       weight: 109
     - name: Error Tracking
-      url: real_user_monitoring/error_tracking/browser/
+      url: real_user_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
       weight: 110
@@ -7480,8 +7539,6 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
       weight: 608
-
-# TODO: Correlate traces with opentelemetry page
     - name: Correlate RUM with Other Telemetry
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
@@ -7558,7 +7615,7 @@ menu:
       identifier: rum_error_tracking_suspect_commits
       weight: 908
     - name: Troubleshooting
-      url: error_tracking/troubleshooting
+      url: real_user_monitoring/error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
@@ -7964,6 +8021,11 @@ menu:
       url: data_security/hipaa_compliance/
       parent: data_security
       weight: 8
+    - name: Data Retention Periods
+      identifier: data_retention_periods
+      url: data_security/data_retention_periods/
+      parent: data_security
+      weight: 9
     - name: Guides
       identifier: data_security_guide
       url: data_security/guide/
