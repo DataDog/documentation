@@ -138,7 +138,7 @@ For information on how Datadog handles your data, and other security considerati
 By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level.
 
 **Note**: The restricted access option is only visible if the integration supports granular access control. To verify if granular access control is supported for an integration, review that [integration's documentation][46].
-{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:100%;" >}}
+{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:70%;" >}}
 
 1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
 2. Click **Set Permissions**.
@@ -147,10 +147,10 @@ By default, access to integration resources (accounts, services, webhooks) is un
 5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
     **Note**: The [Integrations Manage][45] permission is also required to edit individual resources.  
 6. Click **Add**.
-7. The dialog box updates to show the updated permissions
+7. The dialog box updates to show the updated permissions.
 8. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
-**Note:** To maintain your edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
+**Note:** To maintain edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a integration resource with restricted access, follow the steps below:
 
