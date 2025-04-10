@@ -30,14 +30,14 @@ A mapping rule block has the following layout:
 
 ```yaml
 dogstatsd_mapper_profiles:
-    - name: '<PROFILE_NAME>'
-      prefix: '<PROFILE_PREFIX>'
+    - name: <PROFILE_NAME>
+      prefix: <PROFILE_PREFIX>
       mappings:
-          - match: '<METRIC_TO_MATCH>'
-            match_type: '<MATCH_TYPE>'
-            name: '<MAPPED_METRIC_NAME>'
+          - match: <METRIC_TO_MATCH>
+            match_type: <MATCH_TYPE>
+            name: <MAPPED_METRIC_NAME>
             tags:
-                '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+                <TAG_KEY>: <TAG_VALUE_TO_EXPAND>
 ```
 
 With the following placeholders:
@@ -66,12 +66,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value_2`.
@@ -90,12 +90,12 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric\.process\.([\w_]+)\.(.+)'
+          - match: custom_metric\.process\.([\w_]+)\.(.+)
             match_type: regex
             name: custom_metric.process
             tags:
-                tag_key_1: '$1'
-                tag_key_2: '$2'
+                tag_key_1: $1
+                tag_key_2: $2
 ```
 
 It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
@@ -109,11 +109,11 @@ dogstatsd_mapper_profiles:
     - name: my_custom_metric_profile
       prefix: custom_metric.
       mappings:
-          - match: 'custom_metric.process.*.*'
+          - match: custom_metric.process.*.*
             match_type: wildcard
-            name: 'custom_metric.process.prod.$1.live'
+            name: custom_metric.process.prod.$1.live
             tags:
-                tag_key_2: '$2'
+                tag_key_2: $2
 ```
 
 It would send the metric `custom_metric.process.prod.value_1.live` to Datadog with the tag `tag_key_2:value_2`.
