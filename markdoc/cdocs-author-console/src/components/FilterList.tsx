@@ -225,7 +225,9 @@ function getNetNewConfig(p: {
   Object.keys(mergedFilterConfig.optionsById).forEach((optionId) => {
     if (!knownOptionIds.includes(optionId)) {
       const option = mergedFilterConfig.optionsById[optionId];
-      newConfig.optionsById[optionId] = option;
+      if (!knownOptionIds.includes(optionId)) {
+        newConfig.optionsById[optionId] = option;
+      }
     }
   });
 

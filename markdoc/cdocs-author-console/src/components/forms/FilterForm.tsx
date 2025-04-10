@@ -55,7 +55,7 @@ function FilterForm({
 
     p.optionGroup.forEach((option) => {
       const optionId = option.id;
-      newCustomizationConfig.optionsById[optionId] = customizationConfig.optionsById[optionId];
+      newCustomizationConfig.optionsById[optionId] = customizationConfig.optionsById[optionId] || option;
     });
 
     onPublish({

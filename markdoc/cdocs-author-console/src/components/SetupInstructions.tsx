@@ -1,6 +1,8 @@
 import CdocMarkupTemplate from './CdocMarkupTemplate';
 import { WizardFilter } from '../types';
 import { CustomizationConfig } from 'cdocs-data';
+import Code from './Code';
+import Alert from '@mui/material/Alert';
 
 function mergeCustomizationConfigs(config1: CustomizationConfig, config2: CustomizationConfig) {
   const mergeObjects = (obj1: Record<string, any>, obj2: Record<string, any>, key: string) => {
@@ -30,6 +32,76 @@ function getNewConfigStatus(newConfig: CustomizationConfig) {
   };
 }
 
+function buildNewConfigYaml(newConfig: CustomizationConfig) {
+  const result = {
+    traits: '',
+    options: '',
+    optionGroups: ''
+  };
+
+  /**
+   * traits:
+   *   - id: db
+   *     label: Database
+   */
+  if (newConfig.traitsById) {
+    result.traits += 'traits:\n';
+    result.traits += Object.keys(newConfig.traitsById)
+      .map(
+        (traitId) => `  - id: ${traitId}
+    label: ${newConfig.traitsById[traitId].label}`
+      )
+      .join('\n');
+  }
+
+  /**
+   * options:
+   *   - id: python
+   *     label: Python
+   *   - id: go
+   *     label: Go
+   */
+  if (newConfig.optionsById) {
+    result.options += 'options:\n';
+    result.options += Object.keys(newConfig.optionsById)
+      .map(
+        (optionId) => `  - id: ${optionId}
+    label: ${newConfig.optionsById[optionId].label}`
+      )
+      .join('\n');
+  }
+
+  /**
+   * product_one_db_options:
+   *   - id: postgres
+   *     default: true
+   *   - id: mysql
+   *
+   * product_two_db_options:
+   *   - id: mongo
+   *     default: true
+   *   - id: mysql
+   *   - id: postgres
+   *   - id: sqlite3
+   */
+  if (newConfig.optionGroupsById) {
+    result.optionGroups = Object.keys(newConfig.optionGroupsById)
+      .map((optionGroupId) => {
+        const options = newConfig.optionGroupsById[optionGroupId];
+        return `${optionGroupId}:
+${options
+  .map(
+    (option) => `  - id: ${option.id}
+    ${option.default ? 'default: true' : ''}`
+  )
+  .join('\n')}`;
+      })
+      .join('\n');
+  }
+
+  return result;
+}
+
 function SetupInstructions({
   filters,
   newConfig,
@@ -39,45 +111,48 @@ function SetupInstructions({
   newConfig: CustomizationConfig;
   customizationConfig: CustomizationConfig;
 }) {
+  console.log('[SetupInstructions] received newConfig:', JSON.stringify(newConfig, null, 2));
   const configStatus = getNewConfigStatus(newConfig);
+  const newConfigYaml = buildNewConfigYaml(newConfig);
 
   return (
     <div>
-      <h1>New config debug:</h1>
-      <p>{JSON.stringify(newConfig, null, 2)}</p>
       <h1>Setup instructions</h1>
-      <p>You can copy any markup by clicking it.</p>
-      {false && (
-        <div>
-          <h2>Add the new sitewide config</h2>
-          <p>This won't actually show unless there's new sitewide config to be added.</p>
-          <h3>Add the trait</h3>
-          <p>This won't actually show unless there's a new trait to add.</p>
-          <h3>Add the options</h3>
-          <p>This won't actually show unless there are new options to add.</p>
-          <h3>Add the new option groups</h3>
-          <p>This won't actually show unless there are new option groups to add.</p>
-        </div>
-      )}
+      <Alert severity="info">You can copy any markup by clicking it.</Alert>
       {configStatus.hasNewConfig && (
         <>
-          <h2>Create the configuration</h2>
+          <h2>Add the required YAML configuration to the docs site</h2>
           {configStatus.hasNewTraits && (
             <>
               <h3>Add new traits</h3>
-              <p>Trait addition instructions will go here.</p>
+              <p>
+                Create a new <code>.yaml</code> file in the{' '}
+                <span style={{ color: 'yellow' }}>traits config directory</span>, or add to an existing traits list in
+                that directory.
+              </p>
+              <Code contents={newConfigYaml.traits} language="yaml" />
             </>
           )}
           {configStatus.hasNewOptions && (
             <>
               <h3>Add new options</h3>
-              <p>Option addition instructions will go here.</p>
+              <p>
+                Create a new <code>.yaml</code> file in the{' '}
+                <span style={{ color: 'yellow' }}>options config directory</span>, or add to an existing options list in
+                that directory.
+              </p>
+              <Code contents={newConfigYaml.options} language="yaml" />
             </>
           )}
           {configStatus.hasNewOptionGroups && (
             <>
               <h3>Add new option groups</h3>
-              <p>Option group addition instructions will go here.</p>
+              <p>
+                Create a new <code>.yaml</code> file in the{' '}
+                <span style={{ color: 'yellow' }}>option groups config directory</span>, or add to an existing option
+                groups collection in that directory.
+              </p>
+              <Code contents={newConfigYaml.optionGroups} language="yaml" />
             </>
           )}
         </>

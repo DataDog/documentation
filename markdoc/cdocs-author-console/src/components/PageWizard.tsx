@@ -13,6 +13,7 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
   });
 
   const onFilterListChange = (p: { filters: WizardFilter[]; newConfig: CustomizationConfig }) => {
+    console.log('[PageWizard] received data:', JSON.stringify(p, null, 2));
     setFilters([...p.filters]);
     setNewConfig(p.newConfig);
   };
