@@ -94,6 +94,6 @@ For more information, see [Automation Pipelines][11] and [Add to Security Inbox 
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
-[10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
+[10]: /security/cloud_security_management/severity_scoring/#cloud-security-severity-scoring-framework
 [11]: /security/automation_pipelines/
 [12]: /security/automation_pipelines/security_inbox
