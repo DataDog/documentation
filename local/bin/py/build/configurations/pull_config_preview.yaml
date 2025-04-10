@@ -91,7 +91,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: cswatt/temporal-ad
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
