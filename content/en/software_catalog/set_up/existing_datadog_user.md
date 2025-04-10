@@ -1,5 +1,5 @@
 ---
-title: Discover Existing Services in Software Catalog
+title: Discover Components in Software Catalog
 further_reading:
   - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"
@@ -19,14 +19,11 @@ Learn how Software Catalog discovers services from Datadog Application Performan
 
 Datadog Software Catalog is pre-populated with entries detected through [APM][5], eBPF-based autodiscovery with [Universal Service Monitoring][6], and RUM applications.
 
-### APM service detection and dependencies
+Any auto-discovered components will be listed in the Component Selector in the Software Catalog. 
 
-Datadog APM automatically discovers dependencies from instrumented services, even when the dependencies aren't instrumented. These include:
-- Databases
-- Message queues
-- Other third-party dependencies
+APM and USM products are responsible for discovery of component types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. APM SDKs automatically discover the dependencies for instrumented services, and classify these dependencies as databases, queues, or third-party APIs, even if these dependencies are not directly instrumented. Custom instrumentation choices may affect how the auto-discovery and audo-assigned `service` tag values. To learn more about how auto-discovery works, see [APM Inferred Services][12].
 
-These dependencies appear as *services*, and Datadog automatically applies their names to service tags on client spans (`span.kind:client`). For example, a client call from `auth-dotnet` to PostgreSQL would create a service tagged as `service:auth-dotnet-postgres`.
+RUM is responsible for discovery of component type: `frontend apps`.
 
 **Managing automatically-named services:**
 - You can opt-in to [inferred entities][7] to filter out entities by type (database, queue, third-party).
@@ -63,4 +60,5 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [9]: /tracing/guide/service_overrides/
 [10]: /software_catalog/endpoints/
 [11]: https://app.datadoghq.com/software/settings/get-started?currentTab=import
+[12]: /tracing/services/inferred_services
 
