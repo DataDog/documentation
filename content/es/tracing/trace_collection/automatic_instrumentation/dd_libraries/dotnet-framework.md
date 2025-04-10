@@ -53,7 +53,7 @@ type: lenguaje de código múltiple
 
 ### Tiempos de ejecución de .NET Framework compatibles
 
-El rastreador de .NET es compatible con la instrumentación en .NET Framework 4.6.1 o anteriores.
+El rastreador de .NET es compatible con la instrumentación en .NET Framework desde 4.6.1 en adelante.
 
 Para ver una lista completa de las compatibilidades de la arquitectura de la biblioteca y del procesador de Datadog .NET Framework (incluyendo las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 

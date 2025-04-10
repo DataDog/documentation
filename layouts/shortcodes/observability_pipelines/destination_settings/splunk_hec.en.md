@@ -1,3 +1,5 @@
+<div class="alert alert-warning">Observability Pipelines compresses logs with the gzip (level 6) algorithm.</div>
+
 The following fields are optional:
 1. Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][10051] if you want to route logs to different indexes based on specific fields in your logs.
 1.  Select whether the timestamp should be auto-extracted. If set to `true`, Splunk extracts the timestamp from the message with the expected format of `yyyy-mm-dd hh:mm:ss`.
