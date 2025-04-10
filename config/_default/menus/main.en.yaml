@@ -5553,6 +5553,11 @@ menu:
       parent: observability_pipelines_processors
       identifier: observability_pipelines_processors_split_array
       weight: 916
+    - name: Throttle
+      url: observability_pipelines/processors/throttle
+      parent: observability_pipelines_processors
+      identifier: observability_pipelines_processors_throttle
+      weight: 917
     - name: Destinations
       url: observability_pipelines/destinations/
       parent: observability_pipelines
