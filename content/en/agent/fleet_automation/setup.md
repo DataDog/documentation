@@ -3,9 +3,16 @@ title: Set up Fleet Automation
 disable_toc: false
 ---
 
+< **HH**: I've dumped a bunch of relevant information into this page, but I haven't organized it yet >
+
 ## Enable Remote Configuration
 
+### Prerequisites
 
+< **HH**: Some of this might be more relevant to tracing. I'll figure that out >
+
+- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers.
+- For Datadog products that use tracing libraries, you also need to upgrade your tracing libraries to a Remote Configuration-compatible version. For ASM Protection capabilities and ASM 1-click activation, see [ASM compatibility requirements][6]. For Dynamic Instrumentation, see [Dynamic Instrumentation prerequisites][20].
 
 ### Setup
 

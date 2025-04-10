@@ -98,8 +98,7 @@ Private action runner
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
 
 - Remote Configuration enabled Datadog components deployed in your infrastructure request configurations from Datadog.
-
-  **Note**: Some components like private action runners are always remote configuration enabled. Others, like Agents, can be enabled or disabled using in-disk configuration options.
+  <div class="alert alert-info">Some components like private action runners are always remote configuration enabled. Others, like Agents, can be enabled or disabled using in-disk configuration options.</div>
 - Datadog never sends configuration changes unless requested by Datadog components. If it does send configuration changes, Datadog only sends changes relevant to the requesting component.
 - The configuration requests are initiated from your infrastructure to Datadog over HTTPS (port 443). This is the same port that the Agent uses by default to send observability data.
 - The communication between your datadog components and Datadog is encrypted using HTTPS and is authenticated and authorized using your Datadog API key except in the case of private action runners where a JWT token is used instead.
@@ -108,12 +107,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 
 ## Enabling Remote Configuration
 
-### Prerequisites
-
-- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers.
-- For Datadog products that use tracing libraries, you also need to upgrade your tracing libraries to a Remote Configuration-compatible version. For ASM Protection capabilities and ASM 1-click activation, see [ASM compatibility requirements][6]. For Dynamic Instrumentation, see [Dynamic Instrumentation prerequisites][20].
-
-### Setup
+### Enable Remote Configuration in your organization
 
 <div class="alert alert-info">
 <p>Beginning April 8, 2024, Remote Configuration is enabled by default for:
@@ -123,8 +117,27 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 </ul></p></div>
 
 To enable Remote Configuration:
-1. Enable 
 
+< **HH**: insert happy path here >
+
+< **HH**: if needed, insert section to deal with older configurations >
+
+### Product-specific configuration
+
+After you've enabled Remote Configuration in your organization, consult the documentation listed below for instructions specific to the product you're configuring.
+
+| Product | Setup instructions |
+| ------- | --------------------- |
+| Fleet Automation | [Setup Fleet Automation][31] |
+| APM | [Configuration at runtime](/tracing/trace_collection/runtime_config/) |
+| Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
+| CSM Threats | [Cloud Security Management Threats](/security/threats/) |
+| Observability Pipelines | [Advanced Configurations](/observability_pipelines/advanced_configurations/#bootstrap-options) |
+| Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
+| Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
+
+
+< **HH**: BOOKMARK (I haven't worked on anything below this line yet) >
 
 ## Best practices
 
@@ -268,3 +281,4 @@ datadog:
 [28]: /security/sensitive_data_scanner/?tab=usingtheagent
 [29]: /agent/fleet_automation/remote_management#remotely-upgrade-your-agents
 [30]: /actions/private_actions/use_private_actions/
+[31]: /agent/fleet_automation/setup/
