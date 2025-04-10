@@ -21,7 +21,7 @@ Datadog Software Catalog is pre-populated with entries detected through [APM][5]
 
 All automatically detected components appear in the Component Selector within Software Catalog.
 
-APM and USM products are responsible for discovery of component types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. APM SDKs automatically discover the dependencies for instrumented services, and classify these dependencies as databases, queues, or third-party APIs, even if these dependencies are not directly instrumented. Custom instrumentation choices may affect how the auto-discovery and audo-assigned `service` tag values. To learn more about how auto-discovery works, see [APM Inferred Services][12].
+APM and USM automatically detect the following component types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. APM SDKs identify dependencies of instrumented services and classify them as databases, queues, or third-party APIs—even if those dependencies are not directly instrumented. Custom instrumentation may affect how components are auto-discovered and how the `service tag` is assigned. To learn more, see [APM Inferred Services][12].
 
 RUM is responsible for discovering `frontend apps` components.
 
