@@ -255,6 +255,11 @@ To set up the destination, follow the instructions for the cloud provider you ar
 {{% observability_pipelines/processors/split_array %}}
 
 {{% /tab %}}
+{{% tab "Throttle" %}}
+
+{{% observability_pipelines/processors/throttle %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Add another set of processors and destinations
