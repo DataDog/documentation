@@ -2404,16 +2404,21 @@ menu:
       parent: oncall
       identifier: oncall_schedules
       weight: 5
+    - name: Automations
+      url: service_management/on-call/automations
+      parent: oncall
+      identifier: oncall_automations
+      weight: 6
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 6
+      weight: 7
     - name: Guides
       url: service_management/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 7
+      weight: 8
     - name: Event Management
       url: service_management/events/
       pre: events
@@ -3729,7 +3734,7 @@ menu:
       identifier: tracing_connect_logs
       weight: 502
     - name: Correlate RUM and Traces
-      url: /real_user_monitoring/correlate_with_other_telemetry/apm/
+      url: /tracing/other_telemetry/rum
       parent: tracing_other_telemetry
       identifier: tracing_connect_rum
       weight: 503
@@ -7025,7 +7030,7 @@ menu:
       identifier: rum_frustration_signals
       weight: 109
     - name: Error Tracking
-      url: real_user_monitoring/error_tracking/browser/
+      url: real_user_monitoring/browser/error_tracking/
       parent: rum_browser
       identifier: rum_browser_error_tracking
       weight: 110
@@ -7534,8 +7539,6 @@ menu:
       parent: rum_explorer
       identifier: rum_explorer_watchdog_insights
       weight: 608
-
-# TODO: Correlate traces with opentelemetry page
     - name: Correlate RUM with Other Telemetry
       url: /real_user_monitoring/correlate_with_other_telemetry/
       parent: rum
@@ -7612,7 +7615,7 @@ menu:
       identifier: rum_error_tracking_suspect_commits
       weight: 908
     - name: Troubleshooting
-      url: error_tracking/troubleshooting
+      url: real_user_monitoring/error_tracking/troubleshooting
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 909
