@@ -2,6 +2,8 @@
 title: Single Step APM Instrumentation
 aliases:
 - /tracing/trace_collection/single-step-apm
+- /tracing/trace_collection/admission_controller/
+- /tracing/trace_collection/library_injection_local/
 further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
@@ -299,13 +301,13 @@ By default, Single Step Instrumentation instruments all services in all namespac
 
 Each target block has the following keys:
 
-| Key             | Description |
-|------------------|-------------|
-| `name`            | The name of the target block. This has no effect on monitoring state and is used only as metadata. |
-| `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3].|
-| `podSelector`     | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3]. |
-| `ddTraceVersions` | The [Datadog APM SDK][2] version to use for each language. |
-| `ddTraceConfigs`  | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1]. |
+| Key                 | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`              | The name of the target block. This has no effect on monitoring state and is used only as metadata.                                                                                                                                                                                                                                                                                                           |
+| `namespaceSelector` | The namespace(s) to instrument. Specify using one or more of:<br> - `matchNames`: A list of one or more namespace name(s). <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of namespace selector requirements. <br><br> Namespaces must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3]. |
+| `podSelector`       | The pod(s) to instrument. Specify using one or more of: <br> - `matchLabels`: A list of one or more label(s) defined in `{key,value}` pairs. <br> - `matchExpressions`: A list of pod selector requirements. <br><br> Pods must meet all criteria to match. For more details, see the [Kubernetes selector documentation][3].                                                                                |
+| `ddTraceVersions`   | The [Datadog APM SDK][2] version to use for each language.                                                                                                                                                                                                                                                                                                                                                   |
+| `ddTraceConfigs`    | APM SDK configs that allow setting Unified Service Tags, enabling Datadog products beyond tracing, and customizing other APM settings. [See full list of options][1].                                                                                                                                                                                                                                        |
 
 
 
@@ -566,14 +568,14 @@ Specify Datadog tracing libraries and their versions to automatically instrument
 
 To automatically instrument applications in specific pods, add the appropriate language annotation and library version for your application in your pod spec:
 
-| Language   | Pod annotation                                                        |
-|------------|-----------------------------------------------------------------------|
-| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
-| Node.js    | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
-| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
-| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
-| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
-| PHP        | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| Language | Pod annotation                                                        |
+| -------- | --------------------------------------------------------------------- |
+| Java     | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| Node.js  | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python   | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET     | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby     | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| PHP      | `admission.datadoghq.com/php-lib.version: "<CONTAINER IMAGE TAG>"`    |
 
 Replace `<CONTAINER IMAGE TAG>` with the desired library version. Available versions are listed in the [Datadog container registries](#container-registries) and tracer source repositories for each language:
 
@@ -649,14 +651,14 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and Amazon ECR:
 
-| Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
-|------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
-| Java       | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
-| Node.js    | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
-| Python     | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
-| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
-| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][27] | [hub.docker.com/r/datadog/dd-lib-ruby-init][28] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29] |
-| PHP        | [gcr.io/datadoghq/dd-lib-php-init][30] | [hub.docker.com/r/datadog/dd-lib-php-init][31] | [gallery.ecr.aws/datadog/dd-lib-php-init][32] |
+| Language | gcr.io                                    | hub.docker.com                                    | gallery.ecr.aws                                  |
+| -------- | ----------------------------------------- | ------------------------------------------------- | ------------------------------------------------ |
+| Java     | [gcr.io/datadoghq/dd-lib-java-init][15]   | [hub.docker.com/r/datadog/dd-lib-java-init][16]   | [gallery.ecr.aws/datadog/dd-lib-java-init][17]   |
+| Node.js  | [gcr.io/datadoghq/dd-lib-js-init][18]     | [hub.docker.com/r/datadog/dd-lib-js-init][19]     | [gallery.ecr.aws/datadog/dd-lib-js-init][20]     |
+| Python   | [gcr.io/datadoghq/dd-lib-python-init][21] | [hub.docker.com/r/datadog/dd-lib-python-init][22] | [gallery.ecr.aws/datadog/dd-lib-python-init][23] |
+| .NET     | [gcr.io/datadoghq/dd-lib-dotnet-init][24] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][25] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][26] |
+| Ruby     | [gcr.io/datadoghq/dd-lib-ruby-init][27]   | [hub.docker.com/r/datadog/dd-lib-ruby-init][28]   | [gallery.ecr.aws/datadog/dd-lib-ruby-init][29]   |
+| PHP      | [gcr.io/datadoghq/dd-lib-php-init][30]    | [hub.docker.com/r/datadog/dd-lib-php-init][31]    | [gallery.ecr.aws/datadog/dd-lib-php-init][32]    |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
