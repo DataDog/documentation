@@ -169,7 +169,12 @@ logs:
       - env:<YOUR_ENV>
       - private_location:<YOUR_PRIVATE_LOCATION>
 ```
-Since the Private Location installation folder is protected by admin access, the Datadog Agent needs permission to access the log file. To check the user running the Datadog Agent, press Windows key + R, search for `Run`, find the Datadog Agent, right-click it, and select `Properties`. In the `Log On` tab, verify the account (default is `ddagentuser`) and close the window.
+Since the Private Location installation folder is restricted to admin access, the Datadog Agent needs permission to access the log file. Follow these steps to verify the user running the Datadog Agent:
+
+1. Press Windows key + R, and search for `Run`.
+2. Find the Datadog Agent, right-click it, and select `Properties`. 
+3. In the `Log On` tab, verify the account (the default is `ddagentuser`).
+4. Close the window.
 
 Next, go to `C:\Program Files`, find the `synthetics_worker.d` folder, right-click it, select `Properties`, and go to the `Security` tab. Click `Edit`, add `ddagentuser`, and grant the necessary permissions.
 
