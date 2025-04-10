@@ -124,6 +124,29 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 - **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
 
+## Uninstall
+
+While automatic uninstallation will be available soon, you can manually remove the RUM Auto-Instrumentation by following these steps:
+
+1. Locate the NGINX configuration file by running `nginx -T`. Example: `/etc/nginx/nginx.conf`.
+2. Edit the file by removing the following line at the beginning: `load_module /opt/datadog-nginx/ngx_http_datadog_module.so;`
+3. Edit the file by removing all existing `datadog_*` sections from within the `http` directive. They will look similar to these, depending on your system configuration:
+
+   ```
+   datadog_agent_url http://datadog-agent:8126;
+
+   datadog_tracing off;
+
+   datadog_rum on;
+
+   datadog_rum_config {
+     # ... specific RUM configuration
+   }
+   ```
+
+4. Delete the directory `/opt/datadog-nginx/` and all its contents.
+5. Finally, restart or reload NGINX.
+
 ## Reference
 
 ### NGINX modules
