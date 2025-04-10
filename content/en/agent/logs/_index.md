@@ -163,7 +163,7 @@ Follow these steps to send Windows Private Location logs to Datadog:
 logs:
   - type: file
     path: "C:\\Program Files\\Datadog-Synthetics\\Synthetics\\private-location-service.out.log"
-    service: private-location #Defined per user preference
+    service: <YOUR_SERVICE>
     source: synthetics
     tags: #Defined per user preference
       - env:prod
