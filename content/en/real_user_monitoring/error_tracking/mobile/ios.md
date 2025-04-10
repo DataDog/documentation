@@ -5,7 +5,7 @@ aliases:
 - /real_user_monitoring/error_tracking/ios
 type: multi-code-lang
 code_lang: ios
-code_lang_weight: 2
+code_lang_weight: 20
 description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
