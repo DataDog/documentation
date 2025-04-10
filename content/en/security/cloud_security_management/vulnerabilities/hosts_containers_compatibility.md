@@ -4,7 +4,7 @@ title: CSM Vulnerabilities Hosts and Containers Compatibility
 
 ## Operating systems
 
-Workload Protection Vulnerabilities supports vulnerability scanning for hosts and containers running the following operating system versions:
+Cloud Security Management Vulnerabilities supports vulnerability scanning for hosts and containers running the following operating system versions:
 
 | Operating System         | Supported Versions                                  | Package Managers / Source | Agentless support | Agent support     |
 |--------------------------|-----------------------------------------------------|---------------------------|-------------------|-------------------|
@@ -33,7 +33,7 @@ Workload Protection Vulnerabilities supports vulnerability scanning for hosts an
 
 ## Application libraries
 
-Workload Protection Vulnerabilities supports vulnerability scanning for the following application languages and libraries on containers and Lambda instances:
+Cloud Security Management Vulnerabilities supports vulnerability scanning for the following application languages and libraries on containers and Lambda instances:
 
 | Language | Supported Package Manager | Supported Files                                                      | Agentless support | Agent support     |
 |----------|---------------------------|----------------------------------------------------------------------|-------------------|-------------------|

@@ -1,5 +1,5 @@
 ---
-title: Workload Protection Misconfigurations
+title: Cloud Security Management Misconfigurations
 aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary
@@ -9,7 +9,7 @@ algolia:
   tags: ['cspm']
 ---
 
-Workload Protection Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
+Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
 ## Detect misconfigurations across your cloud resources
 
@@ -19,7 +19,7 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 Workload Protection Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Workload Protection overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
@@ -57,7 +57,7 @@ You can also [create a Jira issue][15] and assign it to a team, use Terraform re
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_security_management/setup">}}Complete setup and configuration{{< /nextlink >}}
-  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Workload Protection{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for CSM Misconfigurations{{< /nextlink >}}

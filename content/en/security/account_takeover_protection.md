@@ -10,10 +10,10 @@ further_reading:
   text: "User Monitoring and Protection"
 - link: "security/application_security/guide/"
   tag: "Documentation"
-  text: "App & API Protection Guides"
+  text: "Application Security Management Guides"
 ---
 
-AAP provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
+ASM provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
 ATO protection has the following benefits:
 
@@ -54,7 +54,7 @@ Brute force
 
 ## Setting up ATO detection and prevention
 
-AAP provides managed detections of ATO attacks.
+ASM provides managed detections of ATO attacks.
 
 Effective ATO detection and prevention requires the following:
 
@@ -95,7 +95,7 @@ You are not limited to how Datadog defines these enrichments. Many platform prod
 
 ## Review your first detection
 
-AAP highlights the most relevant information and suggests actions to take based on the detection type. It also indicates what actions have been taken.
+ASM highlights the most relevant information and suggests actions to take based on the detection type. It also indicates what actions have been taken.
 
 {{<img src="security/ato/review_first_detection2.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 

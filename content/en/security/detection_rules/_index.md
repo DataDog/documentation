@@ -22,10 +22,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Workload Protection
+- name: Cloud Security Management
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: App & API Protection
+- name: Application Security Management
   url: /security/application_security/
   icon: app-sec
 ---
@@ -36,16 +36,16 @@ Detection rules define conditional logic that is applied to all ingested logs an
 
 ## Out-of-the-box detection rules
 
-Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your App & API Protection library, and the Agent, depending on your configuration.
+Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
 Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
-- Workload Protection:
+- Cloud Security Management (CSM):
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [CSM Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [App & API Protection][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
+- [Application Security Management][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Beta detection rules
 
@@ -59,7 +59,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (Application Security, Workload Protection, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][10] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -120,7 +120,7 @@ Use Rule Version History to:
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
     - For ASM: Click **Application Security** and then click **Detection Rules**.
-    - For CSM: Click **Workload Protection** and then click **Threat Detection Rules**.
+    - For CSM: Click **Cloud Security Management** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
 1. Click on the rule you are interested in.
 1. In the rule editor, click **Version History** to see past changes.

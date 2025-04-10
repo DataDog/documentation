@@ -1,5 +1,5 @@
 ---
-title: Workload Protection Vulnerabilities
+title: Cloud Security Management Vulnerabilities
 aliases:
     - /security/infrastructure_vulnerabilities/
     - /security/vulnerabilities/
@@ -18,21 +18,21 @@ further_reading:
   text: "Troubleshooting CSM Vulnerabilities"
 - link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
   tag: "Blog"
-  text: "Mitigate infrastructure vulnerabilities with Datadog Workload Protection"
+  text: "Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management"
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Workload Protection Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
 </div>
 {{< /site-region >}}
 
 ## Overview
 
-Workload Protection Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
 With CSM Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 

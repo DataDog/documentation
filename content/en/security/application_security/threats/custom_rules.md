@@ -6,13 +6,13 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog App & API Protection"
+  text: "Protect against threats with Datadog Application Security Management"
 - link: "/security/application_security/event_rules/"
   tag: "Documentation"
   text: "Creating event rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshoot common Datadog App & API Protection issues"
+  text: "Troubleshoot common Datadog Application Security Management issues"
 - link: "/security/notifications/variables/"
   tag: "Documentation"
   text: "Learn more about Security notification variables"
@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-App & API Protection (AAP) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
+Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
 
 However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
@@ -33,7 +33,7 @@ In these situations, a custom detection rule can be created to exclude such even
 
 ## Business logic abuse detection rule
 
-AAP offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
+ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
 Recent Datadog Tracing Libraries attempt to detect and send user login and signup events automatically without needing to modify the code. If needed, you can [opt out of the automatic user activity event tracking][8].
 

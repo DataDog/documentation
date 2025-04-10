@@ -16,10 +16,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">App & API Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Datadog's App & API Protection (AAP) Threat Management protects web applications and APIs from a wide range of security threats, including: 
+Datadog's Application Security Management (ASM) Threat Management protects web applications and APIs from a wide range of security threats, including: 
 
 - Exploit attempts
 - Application abuse and fraud
@@ -27,7 +27,7 @@ Datadog's App & API Protection (AAP) Threat Management protects web applications
 
 Integrated into the Datadog platform, ASM Threat Management leverages Datadog’s extensive observability data (logs and traces) to provide full-stack visibility and security in a unified platform. 
 
-AAP Threat Management enables teams to identify and remediate threats quickly. Its key differentiator is bridging the gap between security and DevOps, promoting collaboration between development, security, and operations teams.
+ASM Threat Management enables teams to identify and remediate threats quickly. Its key differentiator is bridging the gap between security and DevOps, promoting collaboration between development, security, and operations teams.
 
 ## Use cases
 

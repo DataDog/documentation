@@ -155,12 +155,12 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 17
-    - name: App & API Protection
+    - name: Application Security Management
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
       weight: 1701
-    - name: Workload Protection
+    - name: Cloud Security Management
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
@@ -2034,7 +2034,7 @@ menu:
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
       weight: 402
-    - name: App & API Protection
+    - name: Application Security Management
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
@@ -6132,7 +6132,7 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 10
-    - name: Workload Protection
+    - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
       pre: cloud-security-management
@@ -6358,7 +6358,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
-    - name: App & API Protection
+    - name: Application Security Management
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec

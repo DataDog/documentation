@@ -4,10 +4,10 @@ type: multi-code-lang
 further_reading:
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting App & API Protection"
+  text: "Troubleshooting Application Security Management"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How App & API Protection Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 The following ASM capabilities are supported relative to each language's tracing library:

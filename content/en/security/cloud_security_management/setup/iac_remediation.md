@@ -1,11 +1,11 @@
 ---
-title: Setting up IaC Remediation for Workload Protection
+title: Setting up IaC Remediation for Cloud Security Management
 aliases:
   - /security/cloud_security_management/setup/source_code_integrations
 further_reading:
     - link: "/security/cloud_security_management/setup"
       tag: "Documentation"
-      text: "Setting up Workload Protection"
+      text: "Setting up Cloud Security Management"
     - link: "/security/cloud_security_management/misconfigurations"
       tag: "Documentation"
       text: "CSM Misconfigurations"
@@ -14,7 +14,7 @@ further_reading:
       text: "CSM Identity Risks"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) remediation for Workload Protection. IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
+Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security Management (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
 <div class="alert alert-info">Static IaC remediation supports GitHub for version control and Terraform for infrastructure as code.</div>
 

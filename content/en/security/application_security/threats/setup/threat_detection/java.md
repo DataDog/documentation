@@ -15,10 +15,10 @@ further_reading:
   text: 'Java Datadog library source code'
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
-  text: "OOTB App & API Protection Rules"
+  text: "OOTB Application Security Management Rules"
 - link: "/security/application_security/troubleshooting"
   tag: "Documentation"
-  text: "Troubleshooting App & API Protection"
+  text: "Troubleshooting Application Security Management"
 
 ---
 

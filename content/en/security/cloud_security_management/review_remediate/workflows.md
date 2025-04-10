@@ -3,7 +3,7 @@ title: Automate Security Workflows with Workflow Automation
 further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"
-    text: Workload Protection
+    text: Cloud Security Management
   - link: "/service_management/workflows/"
     tag: "Documentation"
     text: Workflow Automation
@@ -29,7 +29,7 @@ products:
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-Use Workflow Automation with [Workload Protection][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
 ## Understanding how triggers and sources work
 

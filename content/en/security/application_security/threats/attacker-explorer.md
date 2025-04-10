@@ -11,7 +11,7 @@ This topic describes how to use **Attacker Explorer** to investigate and block F
 
 ## Overview
 
-Datadog App & API Protection (AAP) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
+Datadog Application Security Management (ASM) identifies attackers as suspicious and flagged. With [Attacker Explorer][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions

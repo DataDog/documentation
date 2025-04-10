@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Workload Protection Vulnerabilities
+title: Troubleshooting Cloud Security Management Vulnerabilities
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-If you experience issues with Workload Protection Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Error messages
 

@@ -1,9 +1,9 @@
 ---
-title: Create Jira Issues for Workload Protection Issues
+title: Create Jira Issues for Cloud Security Management Issues
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"
-    text: Workload Protection Guides
+    text: Cloud Security Management Guides
   - link: "/integrations/jira/"
     tag: "Documentation"
     text: Datadog Jira Integration
@@ -20,7 +20,7 @@ products:
 
 {{< product-availability >}}
 
-Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Workload Protection security issue. Jira for Workload Protection is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
+Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security Management (CSM) security issue. Jira for Cloud Security Management is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
 
 **Notes**:
 - To create Jira issues, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][2] for more information about Datadog's default roles and granular role-based access control permissions available for CSM.

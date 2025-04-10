@@ -17,7 +17,7 @@ The **Assisted rule creator** option helps you create the Agent and dependent de
 For details, see [Creating Custom Detection Rules][1].
 
 ## Agent expression syntax
-Workload Protection Threats (CSM Threats) first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. This portion of a CSM Threats rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
+Cloud Security Management Threats (CSM Threats) first evaluates activity within the Datadog Agent against Agent expressions to decide what activity to collect. This portion of a CSM Threats rule is called the Agent expression. Agent expressions use Datadog's Security Language (SECL). The standard format of a SECL expression is as follows:
 
 {{< code-block lang="javascript" >}}
 <event-type>.<event-attribute> <operator> <value> [<operator> <event-type>.<event-attribute>] ...

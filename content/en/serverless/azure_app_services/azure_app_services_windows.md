@@ -267,7 +267,7 @@ Datadog's Azure App Service Node.js extension supports Azure App Service Web App
    - `DD_ENV`: Your environment name
    - `DD_SERVICE`: Your service name (defaults to your Web App name)
    - `DD_RUNTIME_METRICS_ENABLED`: `true` to enable runtime metrics
-   - `DD_APPSEC_ENABLED`: `true` to enable [App & API Protection][11]
+   - `DD_APPSEC_ENABLED`: `true` to enable [Application Security Management][11]
 
    See the full list of [optional configuration settings][5].
 6. Select **Save**. This restarts your application.

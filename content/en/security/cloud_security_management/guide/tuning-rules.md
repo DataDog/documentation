@@ -7,7 +7,7 @@ aliases:
 
 ## Overview	
 
-Workload Protection Threats (CSM Threats) monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+Cloud Security Management Threats (CSM Threats) monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
 
 This guide provides considerations for best practices and steps for fine-tuning signal suppression.
 

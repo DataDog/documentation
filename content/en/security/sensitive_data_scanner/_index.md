@@ -93,7 +93,7 @@ Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners
 
 Sensitive Data Scanner leverages its [entire rules library][10] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. **Note**: Data stores and their files are only read in your environment—no sensitive data that was scanned is sent back to Datadog.
 
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Workload Protection][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Workload Protection.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][11] affecting the sensitive data stores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 See [Set up Sensitive Data Scanner for Cloud Storage][12] for setup details.
 

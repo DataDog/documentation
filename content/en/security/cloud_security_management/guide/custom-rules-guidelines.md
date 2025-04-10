@@ -9,7 +9,7 @@ further_reading:
   text: "Agent Expression Syntax"
 ---
 
-At some point, you may want to write your own [custom Workload Protection Threats (CSM Threats) Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
+At some point, you may want to write your own [custom Cloud Security Management Threats (CSM Threats) Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
 
 ## Attributes
 

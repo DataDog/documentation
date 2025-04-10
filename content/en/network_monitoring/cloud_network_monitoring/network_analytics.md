@@ -380,7 +380,7 @@ The top of the sidepanel displays common client and server tags shared by the in
 
 ### Security
 
-The **Security** tab highlights potential network threats and findings detected by [Workload Protection Threats][6] and [Workload Protection Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+The **Security** tab highlights potential network threats and findings detected by [Cloud Security Management Threats][6] and [Cloud Security Management Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
 ## Further Reading
 

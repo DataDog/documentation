@@ -1,5 +1,5 @@
 ---
-title: Setting up Workload Protection on Kubernetes
+title: Setting up Cloud Security Management on Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight.

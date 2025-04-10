@@ -16,10 +16,10 @@ further_reading:
       text: 'Go Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB App & API Protection Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting App & API Protection"
+      text: "Troubleshooting Application Security Management"
 ---
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.

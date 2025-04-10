@@ -11,7 +11,7 @@ further_reading:
   text: "Create Custom Rules"
 ---
 
-Kubernetes Security Posture Management (KSPM) for Workload Protection helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
+Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-detection-rules).
 
 ## Setting up KSPM
 

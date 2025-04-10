@@ -1,19 +1,19 @@
 ---
-title: Workload Protection Agentless Scanning
+title: Cloud Security Management Agentless Scanning
 aliases:
   - /security/agentless_scanning
   - /security/cloud_security_management/agentless_scanning
 further_reading:
   - link: "https://www.datadoghq.com/blog/agentless-scanning/"
     tag: "Blog"
-    text: "Detect vulnerabilities in minutes with Agentless Scanning for Workload Protection"
+    text: "Detect vulnerabilities in minutes with Agentless Scanning for Cloud Security Management"
   - link: "/security/vulnerabilities"
     tag: "Documentation"
     text: "Read more about CSM Vulnerabilities"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Agentless Scanning for Workload Protection is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Agentless Scanning for Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -30,7 +30,7 @@ The following diagram illustrates how Agentless Scanning works:
 
 1. Datadog schedules a scan and sends which resources to scan through Remote Configuration.
 
-    **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Workload Protection enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
+    **Note**: Scheduled scans ignore hosts that already have the [Datadog Agent installed with Cloud Security Management enabled](#agentless-scanning-with-existing-agent-installations). Datadog schedules a continuous re-scanning of resources every 12 hours to provide up-to-date insights into potential vulnerabilities and weaknesses.
 
 2. For Lambda functions, the scanners fetch the function's code.
 3. The scanner creates snapshots of volumes used in running VM instances. These snapshots serve as the basis for conducting scans. Using the snapshots, or the code, the scanner generates a list of packages.
@@ -70,7 +70,7 @@ To further mitigate this risk, Datadog implements the following security measure
 
 When installed, the Datadog Agent offers real-time, deep visibility into risks and vulnerabilities that exist in your cloud workloads. It is recommended to fully install the Datadog Agent.
 
-As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Workload Protection offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
+As a result, Agentless Scanning excludes resources from its scans that have the Datadog Agent installed and configured for [Vulnerability Management][5]. In this way, Cloud Security Management offers complete visibility of your risk landscape without overriding the benefits received from installing the Datadog Agent with Vulnerability Management.
 
 The following diagram illustrates how Agentless scanning works with existing Agent installations:
 
@@ -86,7 +86,7 @@ If you have [Sensitive Data Scanner][8] enabled, you can catalog and classify se
 
 Sensitive Data Scanner scans for sensitive data by deploying [Agentless scanners][1] in your cloud environments. These scanning instances retrieve a list of all S3 buckets and RDS instances through [Remote Configuration][10], and have set instructions to scan text files—such as CSVs and JSONs—and tables in every datastore over time. Sensitive Data Scanner leverages its [entire rules library][11] to find matches. When a match is found, the location of the match is sent to Datadog by the scanning instance. Data stores and their files are only read in your environment—no sensitive data is sent back to Datadog.
 
-Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Workload Protection][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Workload Protection.
+Along with displaying sensitive data matches, Sensitive Data Scanner surfaces any security issues detected by [Cloud Security Management][9] affecting the sensitive datastores. You can click any issue to continue triage and remediation within Cloud Security Management.
 
 ## Cloud service provider cost
 

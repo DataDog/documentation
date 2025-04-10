@@ -1,24 +1,24 @@
 ---
-title: Troubleshooting App & API Protection
+title: Troubleshooting Application Security Management
 aliases:
   - /security_platform/application_security/troubleshooting
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Monitoring Threats with Datadog App & API Protection"
+  text: "Monitoring Threats with Datadog Application Security Management"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How App & API Protection Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 
 ## Overview
 
-If you experience unexpected behavior with Datadog App & API Protection (AAP), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
+If you experience unexpected behavior with Datadog Application Security Management (ASM), there are common issues you can investigate, as mentioned below. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## ASM rate limits
 
-AAP traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
+ASM traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
 
 ## No security traces detected by ASM
 
@@ -34,7 +34,7 @@ You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Send a test attack to your application
 
@@ -147,7 +147,7 @@ A few minutes after you enable your application and exercise it, and if it's suc
 
 ### Check if required tracer integrations are deactivated
 
-AAP relies on certain tracer integrations. If they are deactivated, ASM won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
+ASM relies on certain tracer integrations. If they are deactivated, ASM won't work. To see if there are deactivated integrations, look for `disabled_integrations` in your [startup logs][8].
 
 The required integrations vary by language.
 
@@ -250,7 +250,7 @@ framework you're using, such as the Django or Flask integration.
 
 ### Check if spans are successfully transmitted to Datadog
 
-AAP data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
+ASM data is sent over [spans][9]. To confirm that spans are successfully transmitted to Datadog, check that your tracer logs contain logs that look similar to this:
 
 ```
 2021-11-29 21:19:58 CET | TRACE | INFO | (pkg/trace/info/stats.go:111 in LogStats) | [lang:.NET lang_version:5.0.10 interpreter:.NET tracer_version:1.30.1.0 endpoint_version:v0.4] -> traces received: 2, traces filtered: 0, traces amount: 1230 bytes, events extracted: 0, events sampled: 0
@@ -447,7 +447,7 @@ Debug logs are verbose but useful. If you open up a ticket with [Datadog support
 
 #### Is ASM correctly enabled?
 
-AAP has been correctly enabled if you see logs such as:
+ASM has been correctly enabled if you see logs such as:
 
 ```
 D, [2021-12-14T11:03:32.167125 #73127] DEBUG -- ddtrace: [ddtrace] (libddwaf/lib/datadog/appsec/waf.rb:296:in `block in logger=') {:level=>:ddwaf_log_info, :func=> "ddwaf_set_log_cb", :file=>"PowerWAFInterface.cpp", :message=>"Sending log messages to binding, min level trace"}
@@ -498,7 +498,7 @@ D, [2021-12-14T22:39:53.268820 #106051] DEBUG -- ddtrace: [ddtrace] (ddtrace/lib
 If you don't see those logs, check that another upstream security system is not filtering out the requests or altering them based on the test header value.
 
 #### Is the tracer sending traces with security data?
-AAP data is sent with APM traces. To confirm that ASM correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
+ASM data is sent with APM traces. To confirm that ASM correctly detects and inserts security data into traces, trigger a [test attack](#send-a-test-attack-to-your-application), and look for these tracer logs:
 
 ```
 Tags: [
@@ -549,7 +549,7 @@ You can use the metric `datadog.apm.appsec_host` to check if ASM is running.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
-AAP data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
+ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM setup][5] and check for [connection errors][6].
 
 ### Confirm tracer versions are updated
 

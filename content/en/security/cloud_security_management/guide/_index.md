@@ -1,5 +1,5 @@
 ---
-title: Workload Protection Guides
+title: Cloud Security Management Guides
 disable_toc: true
 aliases:
   - /security_platform/cloud_workload_security/guide/
@@ -7,9 +7,9 @@ aliases:
 ---
 
 
-{{< whatsnext desc="Workload Protection Guides" >}}
-    {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Workload Protection{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Workload Protection Agent Variables{{< /nextlink >}}
+{{< whatsnext desc="Cloud Security Management (CSM) Guides" >}}
+    {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Management Agent Variables{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}

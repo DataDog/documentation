@@ -12,17 +12,17 @@ further_reading:
       text: "Google Cloud Service Extensions overview"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB App & API Protection Rules"
+      text: "OOTB Application Security Management Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting App & API Protection"
+      text: "Troubleshooting Application Security Management"
 ---
 
 {{< callout url="#" btn_hidden="true" header="ASM Service Extensions is in Preview" >}}
 To try the preview of ASM Service Extensions for GCP, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable application security with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App & API Protection (AAP) Service Extensions integration has support for threat detection and blocking.
+You can enable application security with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog Application Security Management (ASM) Service Extensions integration has support for threat detection and blocking.
 
 ## Prerequisites
 

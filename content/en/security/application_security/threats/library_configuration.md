@@ -7,10 +7,10 @@ aliases:
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against Threats with Datadog App & API Protection"
+  text: "Protect against Threats with Datadog Application Security Management"
 - link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
-  text: "Out-of-the-Box App & API Protection Rules"
+  text: "Out-of-the-Box Application Security Management Rules"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"
@@ -19,13 +19,13 @@ further_reading:
   text: "Troubleshooting ASM"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
-  text: "How App & API Protection Works in Datadog"
+  text: "How Application Security Management Works in Datadog"
 ---
 
 
 ## Configuring a client IP header
 
-AAP automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable. If this variable is set, the library only checks the specified header for the client IP.
+ASM automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable. If this variable is set, the library only checks the specified header for the client IP.
 
 ## Track authenticated bad actors
 

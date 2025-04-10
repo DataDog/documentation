@@ -21,7 +21,7 @@ Please review ASM GCP Service Extensions integration version 1.71.0 [limitations
 
 ## ASM GCP Service Extensions support
 
-AAP GCP Service Extensions is in Preview.
+ASM GCP Service Extensions is in Preview.
 
 <div class="alert alert-info">If you would like to see support added for any of
 the unsupported capabilities, let us know! Fill out <a

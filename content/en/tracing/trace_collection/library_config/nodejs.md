@@ -218,7 +218,7 @@ Remote configuration polling interval in seconds.
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
 **Default**: `false`<br>
-Enable App & API Protection features.
+Enable Application Security Management features.
 
 `DD_APPSEC_RULES`
 : **Configuration**: `appsec.rules`<br>

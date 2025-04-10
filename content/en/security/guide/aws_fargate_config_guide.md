@@ -10,7 +10,7 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Workload Protection][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
@@ -55,24 +55,24 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
     <tr>
         <td>AWS IAM roles and policies</td>
         <td>Log Management</td>
-        <td>Workload Protection</td>
+        <td>Cloud Security Management</td>
         <td>Cloud SIEM</td>
     </tr>
     <tr>
         <td>AWS databases</td>
         <td>Log Management</td>
-        <td>Workload Protection</td>
+        <td>Cloud Security Management</td>
         <td>Cloud SIEM</td>
     </tr>
     <tr>
         <td>AWS S3 buckets</td>
         <td>Log Management</td>
-        <td>Workload Protection</td>
+        <td>Cloud Security Management</td>
         <td>Cloud SIEM</td>
     </tr>
 </table>
 
-## Workload Protection
+## Cloud Security Management
 
 ### Prerequisites
 
@@ -80,7 +80,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Workload Protection.</div>
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security Management.</div>
 
 ### Images
 
@@ -362,7 +362,7 @@ In the task definition, replace the "workload" container with the following:
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
 - Datadog APM is configured for your application or service
 
-<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with App & API Protection.</div>
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
 
 ### Installation
 

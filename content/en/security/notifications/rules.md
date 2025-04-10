@@ -15,10 +15,10 @@ products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
   icon: siem
-- name: Workload Protection
+- name: Cloud Security Management
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: App & API Protection
+- name: Application Security Management
   url: /security/application_security/
   icon: app-sec
 ---

@@ -18,7 +18,7 @@ further_reading:
   text: "Learn more about Security notification variables"
 ---
 
-This topic explains how Workload Protection Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
+This topic explains how Cloud Security Management Threats (CSM Threats) actively monitors system activity and evaluates it against a set of out-of-the-box (OOTB) rules to detect suspicious behavior.
 
 ## Proactively block threats with Active Protection
 
