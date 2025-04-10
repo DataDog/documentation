@@ -156,7 +156,7 @@ Follow these steps to send Windows Private Location logs to Datadog:
 
  1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
 
-Next, navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
+2. Navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
 
 Inside this folder, create a file called `conf.yaml` with the following content:
 ```yaml
