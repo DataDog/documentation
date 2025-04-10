@@ -29,7 +29,7 @@ The logical flow of retention filters is the following:
 
 - All RUM events are evaluated against each filter in sequence, starting with the first.
 - If an event matches a filter, a decision is made to retain or discard the session containing the event, and subsequent filters are not executed.
-- Retained sessions are saved and accessible in the Session Explorer and other RUM views. New events coming from this session are automatically kept to ensure complete visibility.
+- Retained sessions are saved and accessible in the Session Explorer and other RUM pages. New events coming from this session are automatically kept to ensure complete visibility.
 - If a session is discarded, future events from the same session will still flow in the list and the session may eventually be retained.
 
 **Note**: Be cautious when defining filters on event attributes that update over time. For example, a filter retaining sessions with fewer than two errors might mistakenly retain sessions, as error counts update in real-time. Use "greater than or equal to" (≥) conditions for fields that update, such as `@session.error.count >= 2`.
@@ -43,7 +43,7 @@ Sessions ingested with replays are always kept. However, you maintain control of
 To create a retention filter:
 
 1. Navigate to [Digital Experience > Manage Applications][1].
-1. Create a new RUM application or click an existing application.
+1. Create a RUM application or click an existing application.
 1. Under Product Settings, go to the **Retention Filters** page.
 1. Click the **+ Add Retention Filter** button.
 1. Give the retention filter a descriptive name.
