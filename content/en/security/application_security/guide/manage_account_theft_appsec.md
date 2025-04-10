@@ -44,7 +44,7 @@ This step describes how to set up your service to use AAP.
 
    <!-- ![][image3] -->
 
-   To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-asm-on-your-login-service).
+   To set up AAP, move to [Step 1.2: Enabling AAP on login service](#step-12-enabling-aap-on-your-login-service).
 
 ### Step 1.2: Enabling AAP on your login service
 
