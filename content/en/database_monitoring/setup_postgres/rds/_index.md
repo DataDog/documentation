@@ -503,7 +503,7 @@ instances:
 
 ### Configure with Kubernetes service annotations
 
-Instead of mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service in the same namespace as the Datadog Cluster Agent:
 
 #### Autodiscovery annotations v2
 
