@@ -166,8 +166,8 @@ logs:
     service: <YOUR_SERVICE>
     source: synthetics
     tags: #Defined per user preference
-      - env:prod
-      - private_location:windows-pl
+      - env:<YOUR_ENV>
+      - private_location:<YOUR_PRIVATE_LOCATION>
 ```
 Since the Private Location installation folder is protected by admin access, the Datadog Agent needs permission to access the log file. To check the user running the Datadog Agent, press Windows key + R, search for `Run`, find the Datadog Agent, right-click it, and select `Properties`. In the `Log On` tab, verify the account (default is `ddagentuser`) and close the window.
 
