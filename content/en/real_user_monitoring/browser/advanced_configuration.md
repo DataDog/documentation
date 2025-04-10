@@ -1317,7 +1317,7 @@ Some events cannot be attributed to an origin, therefore they do not have an ass
 [9]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [10]: https://developer.mozilla.org/en-US/docs/Web/API/Request
 [11]: https://developer.mozilla.org/en-US/docs/Web/API/Response
-[12]: https://developer.mozilla.org/en-US/docs/Web//Reference/Global_Objects/Error
+[12]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceLongTaskTiming
 [14]: /real_user_monitoring/feature_flag_tracking/using_feature_flags/#feature-flag-naming
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
