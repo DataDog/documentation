@@ -158,7 +158,7 @@ Follow these steps to send Windows Private Location logs to Datadog:
 
 2. Navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
 
-Inside this folder, create a file called `conf.yaml` with the following content:
+3. Inside the `synthetics_worker.d` folder, create a file named `conf.yaml` using the following example as a template:
 ```yaml
 logs:
   - type: file
