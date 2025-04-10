@@ -98,7 +98,7 @@ const exporter = new OTLPMetricExporter({
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-metric-config': '{resource_attributes_as_tags: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
+    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
   },
 });
 ```
@@ -120,7 +120,7 @@ OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
 			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-metric-config", "{resource_attributes_as_tags: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .build();
 ```
 
@@ -144,7 +144,7 @@ metricExporter, err := otlpmetrichttp.New(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -166,7 +166,7 @@ exporter = OTLPMetricExporter(
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
+        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -237,7 +237,7 @@ exporters:
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: "{resource_attributes_as_tags: true}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
+      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
 ...
 
 service:

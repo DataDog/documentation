@@ -73,7 +73,7 @@ const exporter = new OTLPTraceExporter({
     'dd-protocol': 'otlp',
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
+    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
   },
 });
 ```
@@ -93,7 +93,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .build();
 ```
 
@@ -116,7 +116,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-protocol": "otlp",
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -137,7 +137,7 @@ exporter = OTLPSpanExporter(
         "dd-protocol": "otlp",
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
+        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -184,7 +184,7 @@ exporters:
       dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
+      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
 ...
 
 service:
