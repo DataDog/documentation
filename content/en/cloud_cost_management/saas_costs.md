@@ -429,7 +429,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 |---|---|
 | `enterprise_name` | Alphanumeric string identifying the GitHub enterprise account. |
 | `charge_description` | The description of the charge. |
-| `product` | The product of usage, e.g. "actions" or "storage". |
+| `product` | The product of usage, for example "actions" or "storage". |
 | `organization_name` | The GitHub organization. |
 | `repository_name` | The GitHub repository. |
 
