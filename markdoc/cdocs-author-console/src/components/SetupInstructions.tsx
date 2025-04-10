@@ -90,10 +90,14 @@ function buildNewConfigYaml(newConfig: CustomizationConfig) {
         const options = newConfig.optionGroupsById[optionGroupId];
         return `${optionGroupId}:
 ${options
-  .map(
-    (option) => `  - id: ${option.id}
-    ${option.default ? 'default: true' : ''}`
-  )
+  .map((option) => {
+    const yaml = `  - id: ${option.id}`;
+    if (option.default) {
+      return `${yaml}
+    default: true`;
+    }
+    return yaml;
+  })
   .join('\n')}`;
       })
       .join('\n');
@@ -127,8 +131,8 @@ function SetupInstructions({
               <h3>Add new traits</h3>
               <p>
                 Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ color: 'yellow' }}>traits config directory</span>, or add to an existing traits list in
-                that directory.
+                <span style={{ backgroundColor: 'yellow' }}>traits config directory</span>, or add to an existing traits
+                list in that directory.
               </p>
               <Code contents={newConfigYaml.traits} language="yaml" />
             </>
@@ -138,8 +142,8 @@ function SetupInstructions({
               <h3>Add new options</h3>
               <p>
                 Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ color: 'yellow' }}>options config directory</span>, or add to an existing options list in
-                that directory.
+                <span style={{ backgroundColor: 'yellow' }}>options config directory</span>, or add to an existing
+                options list in that directory.
               </p>
               <Code contents={newConfigYaml.options} language="yaml" />
             </>
@@ -149,8 +153,8 @@ function SetupInstructions({
               <h3>Add new option groups</h3>
               <p>
                 Create a new <code>.yaml</code> file in the{' '}
-                <span style={{ color: 'yellow' }}>option groups config directory</span>, or add to an existing option
-                groups collection in that directory.
+                <span style={{ backgroundColor: 'yellow' }}>option groups config directory</span>, or add to an existing
+                option groups collection in that directory.
               </p>
               <Code contents={newConfigYaml.optionGroups} language="yaml" />
             </>
