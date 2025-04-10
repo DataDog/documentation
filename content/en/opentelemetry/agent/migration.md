@@ -412,4 +412,4 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
 [10]: /getting_started/site/
-[11]: /opentelemetry/guide/migrate_operation_names/
+[11]: /opentelemetry/guide/migrate/migrate_operation_names/
