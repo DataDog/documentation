@@ -2,7 +2,9 @@
 title: OpenTelemetry Runtime Metrics
 aliases:
 - /opentelemetry/runtime_metrics/
-type: multi-code-lang
+- /opentelemetry/integrations/runtime_metrics/go/
+- /opentelemetry/integrations/runtime_metrics/dotnet/
+- /opentelemetry/integrations/runtime_metrics/java/
 ---
 
 ## Overview
