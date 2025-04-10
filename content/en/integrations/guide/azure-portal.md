@@ -300,7 +300,7 @@ The Azure Datadog integration allows you to install the Datadog Agent on a VM or
 
 ### Cloud Security Misconfigurations
 
-Select `Cloud Security Posture Management` in the left sidebar to configure [Cloud Security Misconfigurations (CSM Misconfigurations)][8].
+Select `Cloud Security Posture Management` in the left sidebar to configure [Cloud Security Misconfigurations][8].
 
 By default, CSM Misconfigurations is not enabled. To enable CSM Misconfigurations, select `Enable Datadog Cloud Security Posture Management` and click **Save**. This enables Datadog CSM Misconfigurations for any subscriptions associated with the Datadog resource.
 

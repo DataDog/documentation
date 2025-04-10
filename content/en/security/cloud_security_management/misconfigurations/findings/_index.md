@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-The Cloud Security Misconfigurations (CSM Misconfigurations) [Explorer][1] allows you to:
+The Cloud Security Misconfigurations [Explorer][1] allows you to:
 
 - Review the detailed configuration of a resource.
 - Review the compliance rules applied to your resources by CSM Misconfigurations.
