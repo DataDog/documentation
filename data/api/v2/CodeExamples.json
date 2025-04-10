@@ -4,6 +4,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Create a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3853850379",
+      "description": "Create a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "ReorderApmRetentionFilters": [
@@ -18,6 +23,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Update a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3916044058",
+      "description": "Update a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "CreateAWSAccount": [
@@ -821,6 +831,20 @@
       "group": "network_device_monitoring",
       "suffix": "",
       "description": "Update the tags for a device returns \"OK\" response"
+    }
+  ],
+  "CreatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Create a new pipeline returns \"OK\" response"
+    }
+  ],
+  "UpdatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Update a pipeline returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [
