@@ -6,7 +6,7 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 ### Enable CSM for your Azure subscriptions
 
-1. On the [**Cloud Security Management Setup**][3] page, click **Cloud Integrations**.
+1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 2. Expand the **Azure** section.
 3. To enable resource scanning for a subscription, switch the **Resource Scanning** toggle to the on position.
 4. To create a filter that excludes certain resources from being evaluated by CSM, click the **Plus** (+) icon under **Resource Evaluation Filters (Optional)**. For more information, see [Use Filters to Exclude Resources from Evaluation][4].

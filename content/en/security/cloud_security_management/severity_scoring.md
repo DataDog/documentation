@@ -12,7 +12,7 @@ further_reading:
   text: "Learn more about CSM Vulnerabilities"
 ---
 
-Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how Cloud Security Management (CSM) uses different measures of severity to calculate the scores.
+Accurate severity scores help security teams understand the risks that vulnerabilities pose to their environment. This guide explains how Cloud Security (CSM) uses different measures of severity to calculate the scores.
 
 ## CSM severity scoring framework
 

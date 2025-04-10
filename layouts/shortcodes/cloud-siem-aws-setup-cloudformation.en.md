@@ -5,7 +5,7 @@
 1. Select the AWS Region where the CloudFormation stack will be launched.
 1. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
 1. To configure the Datadog Lambda Forwarder, select **Yes** for **Send Logs to Datadog**. This enables AWS CloudTrail logs to be sent to Datadog.
-1. To enable Cloud Security Management, select **Yes** for **Detect security issues**.
+1. To enable Cloud Security, select **Yes** for **Detect security issues**.
 1. If you select **Yes** for **Detect security issues**, the **Enable Sensitive Data Scanner for Cloud Storage** option appears. Turn this on to automatically identify and classify sensitive data stored in Amazon S3.
 1. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the Datadog form. 
 1. Check the required boxes from AWS and click **Create stack**.

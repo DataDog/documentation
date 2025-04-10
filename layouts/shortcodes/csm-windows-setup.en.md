@@ -1,7 +1,7 @@
 
 Use the following instructions to enable Threat Detection and Vulnerability scanning on Windows.
 
-Datadog Cloud Security Management on Windows includes host vulnerability detection as well as built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
+Datadog Cloud Security on Windows includes host vulnerability detection as well as built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
 - Certutil used to transmit or decode a file
 - Process memory was dumped using the minidump functions of comsvcs.dll

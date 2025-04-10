@@ -4,7 +4,7 @@ If you haven't already, set up the [Amazon Web Services integration][1]. You mus
 
 ### Enable CSM for your AWS accounts
 
-1. On the [**Cloud Security Management Setup**][3] page, click **Cloud Integrations**.
+1. On the [**Cloud Security Setup**][3] page, click **Cloud Integrations**.
 1. Expand the **AWS** section.
 1. To enable resource scanning for an account, click the **Plus** button, then switch the **Enable Resource Scanning** toggle to the on position.
 1. Click **Done**.

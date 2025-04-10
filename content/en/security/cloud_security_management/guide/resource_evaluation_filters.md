@@ -3,13 +3,13 @@ title: Use Filters to Exclude Resources from Evaluation
 further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"
-    text: Cloud Security Management Guides
+    text: Cloud Security Guides
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
-    text: Setting Up Cloud Security Management
+    text: Setting Up Cloud Security
 ---
 
-You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
+You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
 
 **Notes**:
 
@@ -37,7 +37,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
 2. Expand the **AWS** section.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon for the account you want to add the filter to.
 4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
@@ -48,7 +48,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
 2. Expand the **Azure** section.
 3. Expand a subscription.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
@@ -60,7 +60,7 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
+1. On the [**Cloud Security Setup** page][1], click **Cloud accounts**.
 2. Expand the **GCP** section.
 3. Expand a project.
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.

@@ -2,9 +2,9 @@
 
 Complete the following steps to enable Agentless Scanning for your Azure subscriptions:
 
-#### Cloud Security Management Setup page
+#### Cloud Security Setup page
 
-1. On the [Cloud Security Management Setup][1010] page, click **Cloud Integrations** > **Azure**.
+1. On the [Cloud Security Setup][1010] page, click **Cloud Integrations** > **Azure**.
 1. Locate the tenant ID of your subscription.
 1. **(Optional)** To enable detection of misconfigurations, toggle **Resource Scanning** to the on position.
 1. Expand the list of Azure subscriptions and locate the subscription where you want to deploy the Agentless scanner.

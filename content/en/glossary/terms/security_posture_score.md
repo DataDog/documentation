@@ -10,7 +10,7 @@ core_product:
 
 {{< jqmath-vanilla >}}
 
-Available for [Cloud Security Management Misconfigurations][3], the security posture score represents the percentage of your environment that satisfies all of your active Datadog out-of-the-box [Cloud][1] and [Infrastructure][2] compliance rules.
+Available for [Cloud Security Misconfigurations][3], the security posture score represents the percentage of your environment that satisfies all of your active Datadog out-of-the-box [Cloud][1] and [Infrastructure][2] compliance rules.
 
 **Formula**:
 

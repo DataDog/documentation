@@ -15,7 +15,7 @@ further_reading:
 
 [Cloud Security Management Threats][9] (CSM Threats) security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][4], or configure [Notification Rules][1] to send signals to third-party tools.
 
-To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
+To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security.
 
 {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
 

@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management Vulnerabilities
+title: Cloud Security Vulnerabilities
 aliases:
     - /security/infrastructure_vulnerabilities/
     - /security/vulnerabilities/
@@ -22,14 +22,14 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+<div class="alert alert-warning">Cloud Security Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
 </div>
 {{< /site-region >}}
 
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
+Cloud Security Vulnerabilities (CSM Vulnerabilities) helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
 With CSM Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 

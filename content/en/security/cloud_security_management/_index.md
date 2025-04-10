@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management
+title: Cloud Security
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
@@ -46,14 +46,14 @@ algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
-        subcategory: Cloud Security Management
+        subcategory: Cloud Security
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security Management (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
+Datadog Cloud Security (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
@@ -64,7 +64,7 @@ CSM leverages both the Datadog Agent and Agentless. It includes a variety of fea
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security in Datadog" width="100%">}}
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -96,7 +96,7 @@ Use the [Resource Catalog][12] to view specific misconfigurations and threats th
 
 ## Subscribe to weekly digest reports
 
-Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+Receive a weekly summary of Cloud Security activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
 ## Learn about emerging threats and vulnerabilities
 
@@ -104,7 +104,7 @@ Use the [Security Research Feed][15] to stay current with the latest security de
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
+To get started with CSM, navigate to the [**Cloud Security Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security][10].
 
 ## Further reading
 

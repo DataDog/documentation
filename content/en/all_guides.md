@@ -44,7 +44,7 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 
 {{< whatsnext desc="Security:">}}
 {{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
-{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security{{< /nextlink >}}
 {{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 

@@ -1,11 +1,11 @@
 ---
-title: Getting Started with Cloud Security Management
+title: Getting Started with Cloud Security
 aliases:
 - /getting_started/cloud_security_management
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
-  text: "Cloud Security Management"
+  text: "Cloud Security"
 - link: "/infrastructure/resource_catalog/schema/"
   tag: "Documentation"
   text: "Cloud Resources Schema Reference"
@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-[Datadog Cloud Security Management][1] (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
+[Datadog Cloud Security][1] (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 With CSM, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with CSM.
 

@@ -6,7 +6,7 @@ This guide introduces the Infrastructure Monitoring DevSecOps bundles, with link
 
 ## Infrastructure DevSecOps
 
-The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security Management (CSM)][3].
+The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security (CSM)][3].
 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
@@ -23,7 +23,7 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 
 After you install the Agent, configure CSM Pro for your environment.
 
-- [Cloud Security Management Pro][6]
+- [Cloud Security Pro][6]
 
 ### Next steps
 
@@ -34,7 +34,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 - [Host and Container Maps][9]: Visualize your hosts and containers
 - [Live Containers][10]: Gain real-time visibility into all containers across your environment
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless applications
-- [Cloud Security Management][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [Cloud Security][11]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/
@@ -64,7 +64,7 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 
 After you install the Agent, configure CSM Enterprise for your environment.
 
-- [Cloud Security Management Enterprise][8]
+- [Cloud Security Enterprise][8]
 
 ### Next steps
 
@@ -78,7 +78,7 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 - [Live Processes][14]: Gain real-time visibility into the process running on your infrastructure
 - [Serverless][2]: Gain full visibility into all of the managed services that power your serverless 
 - [Watchdog][15]: Automatically detect potential application and infrastructure issues
-- [Cloud Security Management][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
+- [Cloud Security][16]: Real-time threat detection and continuous configuration audits across your entire cloud infrastructure
 
 [1]: /containers/
 [2]: /serverless/

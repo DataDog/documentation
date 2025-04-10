@@ -160,7 +160,7 @@ menu:
       url: getting_started/security/application_security
       parent: getting_started_security
       weight: 1701
-    - name: Cloud Security Management
+    - name: Cloud Security
       identifier: getting_started_cloud_security_management
       url: getting_started/security/cloud_security_management/
       parent: getting_started_security
@@ -6132,7 +6132,7 @@ menu:
       parent: cloud_siem
       identifier: siem_guides
       weight: 10
-    - name: Cloud Security Management
+    - name: Cloud Security
       url: security/cloud_security_management
       parent: security_platform_heading
       pre: cloud-security-management
