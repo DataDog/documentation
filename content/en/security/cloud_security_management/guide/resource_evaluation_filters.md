@@ -9,7 +9,7 @@ further_reading:
     text: Setting Up Cloud Security
 ---
 
-You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
+You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security. The filters must be specified as a comma-separated list of `key:value` pairs.
 
 **Notes**:
 

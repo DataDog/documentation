@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-To get started with Cloud Security (CSM), review the following:
+To get started with Cloud Security, review the following:
 
 - [Overview](#overview)
 - [Enable Agentless Scanning](#enable-agentless-scanning)

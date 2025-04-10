@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-[Datadog Cloud Security][1] (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
+[Datadog Cloud Security][1] delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 With CSM, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with CSM.
 

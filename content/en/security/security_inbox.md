@@ -30,7 +30,7 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security (CSM). By default, these include the following types of findings:
+The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security. By default, these include the following types of findings:
 
 - A curated set of [misconfigurations][1] for [CSM Misconfigurations][2], compiled by Datadog Security Research.
 - A curated set of [identity risks][1] for [CSM Identity Risks][3], compiled by Datadog Security Research.

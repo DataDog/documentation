@@ -7,7 +7,7 @@ aliases:
 ---
 
 
-{{< whatsnext desc="Cloud Security (CSM) Guides" >}}
+{{< whatsnext desc="Cloud Security Guides" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Agent Variables{{< /nextlink >}}
 {{< /whatsnext >}}

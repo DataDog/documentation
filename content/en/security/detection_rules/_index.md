@@ -41,7 +41,7 @@ Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques
 Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
-- Cloud Security (CSM):
+- Cloud Security:
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [CSM Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.

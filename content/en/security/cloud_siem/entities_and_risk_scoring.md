@@ -20,7 +20,7 @@ With Risk Insights, you can:
 ## Prerequisites
 
 - For Risk Insights coverage, either [GCP][5] or [AWS must be configured for Cloud SIEM][1].
-- (Optional) To view associated Cloud Security (CSM) insights in the entity panel, [CSM must be configured][2].
+- (Optional) To view associated Cloud Security insights in the entity panel, [CSM must be configured][2].
 
 
 ## Explore risk insights

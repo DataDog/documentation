@@ -14,7 +14,7 @@ further_reading:
       text: "CSM Identity Risks"
 ---
 
-Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
+Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security. IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
 <div class="alert alert-info">Static IaC remediation supports GitHub for version control and Terraform for infrastructure as code.</div>
 

@@ -20,7 +20,7 @@ products:
 
 {{< product-availability >}}
 
-Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security (CSM) security issue. Jira for Cloud Security is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
+Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security security issue. Jira for Cloud Security is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
 
 **Notes**:
 - To create Jira issues, you must have the `security_monitoring_findings_write` permission. See [Role Based Access Control][2] for more information about Datadog's default roles and granular role-based access control permissions available for CSM.

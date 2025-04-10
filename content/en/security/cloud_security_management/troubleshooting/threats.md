@@ -9,7 +9,7 @@ further_reading:
   text: "Troubleshooting CSM Vulnerabilities"
 ---
 
-If you experience issues with Cloud Security (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Cloud Security Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 

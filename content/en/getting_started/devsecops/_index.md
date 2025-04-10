@@ -6,7 +6,7 @@ This guide introduces the Infrastructure Monitoring DevSecOps bundles, with link
 
 ## Infrastructure DevSecOps
 
-The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security (CSM)][3].
+The Infrastructure DevSecOps bundles combine infrastructure monitoring with the security capabilities of [Cloud Security][3].
 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}

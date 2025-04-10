@@ -274,7 +274,7 @@ To view security findings from [Google Cloud Security Command Center][47] in Clo
 
 ### Cloud Security
 
-Datadog Cloud Security (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
+Datadog Cloud Security delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
 Check out the [Setting up Cloud Security guide][49] to get started.
 
 After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.

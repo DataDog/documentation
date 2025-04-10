@@ -16,7 +16,7 @@ further_reading:
   Static Infrastructure as Code (IaC) scanning is in Preview. To request access, complete the form.
 {{< /callout >}}
 
-Use the following instructions to enable Infrastructure as Code (IaC) scanning for Cloud Security (CSM). IaC scanning is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
+Use the following instructions to enable Infrastructure as Code (IaC) scanning for Cloud Security. IaC scanning is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
 <div class="alert alert-info">Static IaC scanning supports GitHub for version control and Terraform for infrastructure as code.</div>
 

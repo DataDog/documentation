@@ -10,7 +10,7 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Cloud Security (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
 {{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 

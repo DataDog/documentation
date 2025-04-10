@@ -108,7 +108,7 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 ## Cloud Security
 
-[Cloud Security (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+[Cloud Security][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
 CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 

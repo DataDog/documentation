@@ -2,7 +2,7 @@
 title: Setting Up CSM without Infrastructure Monitoring
 ---
 
-In addition to setting up Cloud Security (CSM) with or without an Agent, you can also set it up without Infrastructure Monitoring.
+In addition to setting up Cloud Security with or without an Agent, you can also set it up without Infrastructure Monitoring.
 
 ## Set up CSM on your AWS account
 

@@ -17,7 +17,7 @@ further_reading:
   text: "Securing Datadog's cloud infrastructure: Our playbook and methodology"
 ---
 
-With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security (CSM) [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
+With custom frameworks, you can define and measure compliance against your own cloud security baseline. Custom frameworks are listed on the Cloud Security [Compliance][6] page, have their own real-time report and [security posture score][7], and are queryable within explorers and dashboards.
 
 1. On the [CSM Compliance page][6], click **Create Framework**.
 1. Enter the following details:

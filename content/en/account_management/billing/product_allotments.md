@@ -139,7 +139,7 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps, Serverless Invocations, Serverless Functions  | Average | Average |
 | Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
 | Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
-| CSM Enterprise Containers    | Cloud Security (CSM)       |      N/A     | Sum    |
+| CSM Enterprise Containers    | Cloud Security       |      N/A     | Sum    |
 | CWS Containers      | Cloud Workload Security (CWS)              |       N/A     | Sum      |
 | Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |   N/A   | Sum  |
 | Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
