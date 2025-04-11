@@ -365,7 +365,7 @@ When you open a [support ticket][1], the Datadog support team may ask for the fo
 [20]: https://app.datadoghq.com/apm/traces
 [21]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [22]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[23]: /developers/guide/data-collection-resolution-retention/
+[23]: /data_security/data_retention_periods/
 [24]: /tracing/metrics/metrics_namespace/
 [25]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [26]: /tracing/trace_pipeline/generate_metrics/
