@@ -65,7 +65,7 @@ To install and configure the Datadog Serverless Framework plugin:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
        enableDDTracing: true
-       enableAAP: true
+       enableASM: true
    ```
    See also the complete list of [plugin parameters][4] to further configure your lambda settings.
 
