@@ -29,7 +29,6 @@ Issue are also tagged as:
 - `Regression` if the issue was **RESOLVED** and occurred again in a newer version (see [Regression Detection][6])
 - `Crash` if the application crashed
 - Having a [Suspected Cause][3]
-[TODO]: <> (- Having a `Fix Available` (see AI Assistant).)
 
 ### Time range
 
@@ -70,14 +69,12 @@ For more granular filtering, you can narrow down issues by specific log sources 
 #### Fix available
 
 Display only issues that have an AI generated fix available to quickly remediate problems.
-[TODO]: <> ((see AI Assistant).)
 
 #### Teams filters
 
 Issue Team Ownership helps you quickly identify issues and focus on relevant errors by using Git `CODEOWNERS`. Datadog will automatically filter your issues so your team can cut through noise and prioritize what matters.
 
 Issue ownership is derived from the `CODEOWNERS` files of your repositories. To use this feature, you need to link your Datadog teams to their GitHub counterparts. All errors coming from RUM and APM are eligible for Team Ownership.
-[TODO]: <> ((see AAA doc).)
 
 #### Assigned to
 

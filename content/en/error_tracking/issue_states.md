@@ -44,7 +44,7 @@ See [Regression Detection][4].
 
 The issue status appears anywhere the issue can be viewed, such as in the issues list or on the details panel for a given issue. To manually update the status of an issue, click the status and choose a different one in the dropdown menu.
 
-{{< img src="error_tracking/updating-issue-status.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:100%;" >}}
+{{< img src="error_tracking/updating-issue-status-2.png" alt="The Activity Timeline in the Error Tracking Issue" style="width:100%;" >}}
 
 ## Issue history
 View a history of your issue activity with the **Activity Timeline**. On the details panel of any Error Tracking issue, view the Activity Timeline by clicking the **Activity** tab.
