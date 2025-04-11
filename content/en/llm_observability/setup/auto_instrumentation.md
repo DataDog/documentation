@@ -165,8 +165,8 @@ The Langgraph integration automatically traces `compiled graph` and `node` invoc
 
 The Langgraph integration instruments the following methods:
 
-- [Compiled graphs][27]
-- [Nodes][28]
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][27]
+- [RunnableSeq.invoke()][28]
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
