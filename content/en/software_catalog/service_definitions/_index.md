@@ -32,7 +32,7 @@ further_reading:
 
 Software Catalog uses definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Software Catalog side panel for any selected services. 
 
-{{< callout url="https://www.datadoghq.com/product-preview/internal-developer-portal/" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for the latest version of Software Catalog!" >}}
+{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opt in to the preview for the latest version of Software Catalog!" >}}
 {{< /callout >}}
 
 ## Supported versions
