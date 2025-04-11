@@ -4,10 +4,6 @@ aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
   - /security/guide/how-appsec-works/
-further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-application-security/"
-  tag: "Blog"
-  text: "Introducing Datadog Application Security"
 ---
 
 {{< site-region region="gov" >}}
@@ -123,10 +119,6 @@ Datadog Application Security provides visibility into threats targeting your API
 ## How Datadog Application Security protects against Log4Shell
 
 Datadog Application Security identifies Log4j Log4Shell attack payloads and provides visibility into vulnerable apps that attempt to remotely load malicious code. When used in tandem with the rest of [Datadog's Cloud SIEM][16], you can investigate to identify common post-exploitation activity, and proactively remediate potentially vulnerable Java web services acting as an attack vector.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/threats/
 [2]: /tracing/software_catalog/#security-view

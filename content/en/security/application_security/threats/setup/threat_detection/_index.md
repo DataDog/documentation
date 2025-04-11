@@ -20,9 +20,6 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
-- link: "https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/"
-  tag: "Blog"
-  text: "Secure serverless applications with Datadog AAP"
 ---
 
 ## Prerequisites 
