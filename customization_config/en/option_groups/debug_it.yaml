@@ -1,0 +1,13 @@
+debug_it_database_options:
+  - id: postgres
+    default: true
+  - id: mysql
+  - id: oracle
+  - id: sql_server
+
+debug_it_prog_lang_options:
+  - id: python
+    default: true
+  - id: ruby
+  - id: go
+  - id: javascript
