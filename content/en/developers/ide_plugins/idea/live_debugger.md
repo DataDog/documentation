@@ -9,6 +9,8 @@ type: documentation
 ## Overview
 The Live Debugger helps you to solve problems faster by adding temporary log statements to your runtime code to collect information for debugging. The log statements are added dynamically, with no need to redeploy your code.
 
+## User Interface
+
 ### Live Debugger Tab
 A tab in the Datadog Tool Window shows the log probes defined in the IDE by the current user and the log output from these probes:
 
@@ -26,9 +28,11 @@ Clicking on this icon will open the Datadog Tool Window and select the log probe
 ## Managing Log Probes
 
 ### Add a Log Probe
-To add a log probe, right-click on a line of code in the source editor and select `Add a Log to a Live Service…` A dialog appears where you can enter the service name, the environment and the log message you would like to have emitted at runtime.  The log message will be generated using the runtime state immediately PRIOR to the line being executed:
+To add a log probe, right-click on a line of code in the source editor and select `Add a Log to a Live Service`. A dialog appears where you can enter the service name, the environment and the log message you would like to have emitted at runtime:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-log-probe.png" alt="Add a new log probe" style="width:100%;" >}}
+
+The log message will be generated using the runtime state immediately PRIOR to the line being executed.  
 
 Log probes automatically expire after 60 minutes.
 
@@ -44,7 +48,7 @@ Notice that the remote code may be a different version compared to the source co
 The Live Debugger tab in the Datadog Tool Window displays output for the log probes that have been added.  Select a log probe on the left side, and the most recently generated logs are displayed on the right side, limited to the past 24 hours.
 
 ### Edit a Log Probe
-The log message for a probe can be modified, simply right click on the log probe and select the `Edit…` menu item:
+The log message for a probe can be modified, simply right click on the log probe and select the `Edit` menu item:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/edit-log-probe.png" alt="Edit a log probe" style="width:100%;" >}}
 
