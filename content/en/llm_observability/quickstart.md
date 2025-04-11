@@ -186,8 +186,7 @@ if __name__ == "__main__":
 
       with LLMObs.task(name="chat-proxy"): # wrap the proxy call in a task span
         response = requests.post("http://localhost:8080/chat", json={
-          "prompt": "Hello, world!",
-          "context": documents
+          # data to pass to the proxy service
         })
 
       # other application-specific logic handling the response
@@ -214,8 +213,7 @@ async function main () {
     // wrap the proxy call in a task span
     const response = llmobs.trace({ name: 'chat-proxy', kind: 'task' }, async () => {
       return await axios.post('http://localhost:8080/chat', {
-        prompt: 'Hello, world!',
-        context: documents
+        // data to pass to the proxy service
       });
     });
 
@@ -239,19 +237,18 @@ To observe the tasks performed by a variety of ML applications in the proxy serv
 2. Switch to the `All Spans` view in the top-right dropdown.
 3. Filter the list by the `ml-proxy:custom` tag.
 
-[PUT IMAGE HERE]
+{{< img src="llm_observability/all-spans-with-ml-proxy-tag.png" alt="View all spans from all ML applications with the ml-proxy tag set to custom" style="width:100%;" >}}
 
 The spans listed are the parent spans of the any operations executed by the ML applications. To see all spans, and not just the top-level task spans, from the proxy service, you can instead filter by the `service` tag:
 
-[PUT IMAGE HERE]
+{{< img src="llm_observability/all-spans-with-service-tag.png" alt="View all spans from all ML applications with the service tag" style="width:100%;" >}}
+
 ### Observing end-to-end usage of LLM applications making calls to a proxy or gateway service
 
 To observe the complete end-to-end usage of an LLM application that makes calls to a proxy or gateway service, you can filter for traces with that ML application name:
 
 1. In the LLM trace view, select the ML application name of interest from the top-left dropdown.
 2. Switch to the `Traces` view in the top-right dropdown.
-
-[PUT IMAGE HERE]
 
 ## Further Reading
 
