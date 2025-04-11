@@ -42352,11 +42352,11 @@ paths:
         incident_type:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"Security
-              Incident\",\n      \"description\": \"Any incidents that harm (or have
-              the potential to) the confidentiality, integrity, or availability of
-              our data.\",\n      \"is_default\": false\n    },\n    \"type\": \"incident_types\"\n
-              \ }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"name\": \"{{
+              unique_hash }}\",\n      \"description\": \"Any incidents that harm
+              (or have the potential to) the confidentiality, integrity, or availability
+              of our data.\",\n      \"is_default\": false\n    },\n    \"type\":
+              \"incident_types\"\n  }\n}"
           step: there is a valid "incident_type" in the system
       x-menu-order: 19
       x-permission:
