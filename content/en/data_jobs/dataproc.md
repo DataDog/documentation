@@ -65,7 +65,7 @@ When you create a new **Dataproc Cluster on Compute Engine** in the [Google Clou
 | Variable                 | Description                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                
 | DD_TAGS                  | Add tags to Dataproc cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][15]. Example: `env:staging,team:data_engineering` |
-| DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.  
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.  
 
 [15]: /getting_started/tagging/
 

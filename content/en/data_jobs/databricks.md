@@ -79,7 +79,7 @@ Optionally, you can add tags to your Databricks cluster and Spark performance me
 | Variable                 | Description                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. Example: `env:staging,team:data_engineering` |
-| DD_ENV                   | Scoping of application specific data across metrics, traces, and logs. |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster. |
 
 [1]: /getting_started/tagging/
 [2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
@@ -136,7 +136,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
-| DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.                                                                                          |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
@@ -191,7 +191,7 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
 | DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
-| DD_ENV                   | Scoping of application specific data across metrics, traces, and logs.                                                                                          |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
