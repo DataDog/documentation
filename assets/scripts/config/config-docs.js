@@ -14,7 +14,7 @@ module.exports = {
             public_key: 'bDUaL3uKrCG0033PDb6Vbi8n46mKGaMG',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_v1'
         },
         imgUrl: 'https://datadog-docs.imgix.net/',
         gaTag: 'UA-21102638-5'
@@ -34,7 +34,7 @@ module.exports = {
             public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_v1'
         },
         imgUrl: 'https://datadog-docs-staging.imgix.net/',
         gaTag: 'UA-21102638-9'
@@ -53,7 +53,7 @@ module.exports = {
             public_key: 'O2QyrgpWb3eKxVCmGVNrORNcSo3pOZJu',
             docsIndex: 'docs_alias',
             apiIndex: 'docs_api_alias',
-            partnersIndex: 'docs_partners_alias'
+            partnersIndex: 'docs_partners_v1'
         },
         imgUrl: 'http://localhost:1313/',
         gaTag: 'UA-21102638-9'
