@@ -9,16 +9,16 @@ type: documentation
 ## Overview
 The Live Debugger helps you to solve problems faster by adding temporary log statements to your runtime code to collect information for debugging. The log statements are added dynamically, with no need to redeploy your code.
 
-## User Interface
-
-### Live Debugger Tab
+## Live Debugger Tab
 A tab in the Datadog Tool Window shows the log probes defined in the IDE by the current user and the log output from these probes:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
-From a probe in the tree on the left side, you can navigate to the source code - simply right-click and select `Jump to Source`.  At the top-right of the panel, the `View logs in Datadog` link will open the [Log Explorer][2] in Datadog to show log events for the selected probe.
+From a probe in the tree on the left side, you can navigate to the source code - simply right-click and select `Jump to Source`. 
 
-### Source Editor
+At the top-right of the panel, the `View logs in Datadog` link will open the [Log Explorer][2] in Datadog to show log events for the selected probe.
+
+## Source Editor
 In the source editor, an icon is shown in the gutter for any line that has a log probe defined:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
