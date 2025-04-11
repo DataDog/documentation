@@ -29,6 +29,8 @@ The **Logs** integration shows observed logs in the source code editor, and prov
 
 The **Code Insights** feature helps you find and fix runtime errors from [Error Tracking][6], library and runtime code vulnerabilities from [Code Security][7], flaky tests detected by [Test Optimization][18], and more.
 
+The [**Live Debugger**][5] enables you to capture vital debugging information by adding temporary logs to your runtime code and without having to stop and restart your service or application.
+
 The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code that uses the most CPU time, allocates the most memory, triggers the most exceptions, or consumes high amounts of other resources.
 
 The **CI Test Runs** feature opens the [CI Visibility Explorer][9] to show recent runs for any test.
@@ -230,3 +232,4 @@ If you don't wish to send this data to Datadog, you can opt out at any time in t
 [17]: https://www.datadoghq.com/legal/eula/
 [18]: /tests/
 [19]: /continuous_integration/
+[20]: /developers/ide_plugins/idea/live_debugger/
