@@ -63,6 +63,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 2. Click on any trace to view its details.
 3. In the span details panel, look for the "Code Origin" section.
 4. Optionally, click on variables referenced the source code to add them as attributes on future spans using [Dynamic Instrumentation][5].
+5. (Coming Soon) Click on "Start Debug Session" to open Live Debugger and begin capturing logs at this code location in real-time.
 
 {{< img src="tracing/guide/code_origins/code_origin_traces_explorer.png" alt="Code Origin in Traces Explorer" style="width:100%;">}}
 
@@ -90,7 +91,7 @@ Code Origins captures two types of spans:
 
 **Performance Impact**: Code Origins has negligible performance overhead that is virtually unnoticeable in production environments.
 
-**Pricing Impact**: Code Origins will have no additional impact on billing.
+**Pricing Impact**: While in Preview, Code Origins will have no additional impact on billing.
 
 ## Troubleshooting
 
