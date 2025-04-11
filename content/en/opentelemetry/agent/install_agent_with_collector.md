@@ -6,6 +6,14 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
+{{< /callout >}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
@@ -175,6 +183,8 @@ To explicitly override the default ports, use `features.otelCollector.ports` par
       enabled: true
 {{< /code-block >}}
 
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
+
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Your `datadog-agent.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
@@ -317,6 +327,8 @@ datadog:
     enabled: true
     processCollection: true
 {{< /code-block >}}
+
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
 
 6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 
@@ -819,7 +831,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{< img src="/opentelemetry/embedded_collector/components.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 
 ##### Datadog connector
 
@@ -908,7 +920,7 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 {{< /tabs >}}
 
 {{% collapse-content title="Deployment diagram" level="p" %}}
-{{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/deployment-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 ## Send your telemetry to Datadog

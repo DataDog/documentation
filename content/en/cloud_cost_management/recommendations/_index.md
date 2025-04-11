@@ -185,7 +185,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Azure Container Registry
       recommendation_type: Terminate Azure Container Registry
-      recommendation_description: A container registry that has never received successful pulls  
+      recommendation_description: A container registry that has never received successful pulls
       recommendation_prerequisites: ""
     - category: Unused resource
       cloud_provider: Azure
@@ -222,6 +222,7 @@ multifiltersearch:
       resource_type: Azure VM Instance
       recommendation_type: Terminate VM Instance
       recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
     - category: Previous generation resource
       cloud_provider: AWS
       resource_type: EC2
@@ -420,10 +421,34 @@ multifiltersearch:
       recommendation_type: NAT Gateway cross-zone transfer charges
       recommendation_description: Resources that need a NAT gateway should use one that is in the same availability zone, or they can incur unnecessary cross-zone transfer charges.
       recommendation_prerequisites: ""
+    - category: Unused resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Terminate CloudSQL Instance
+      recommendation_description: CloudSQL instances with minimal usage that can be terminated.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Over-provisioned resource
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Downsize CloudSQL Database
+      recommendation_description: CloudSQL instances that are over-provisioned and can be downsized.
+      recommendation_prerequisites: "[Datadog Agent](/agent/)"
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: CloudSQL Instance
+      recommendation_type: Purchase CUD for Cloud SQL
+      recommendation_description: CloudSQL instances that would benefit from committed use discounts.
+      recommendation_prerequisites: ""
+    - category: Rate optimization
+      cloud_provider: GCP
+      resource_type: Cloud Run Job
+      recommendation_type: Purchase Flexible CUD for Cloud Run Job
+      recommendation_description: Cloud Run Jobs that would benefit from flexible committed use discounts.
+      recommendation_prerequisites: ""
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Cloud Cost Recommendations is in Preview with support for AWS, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
+Cloud Cost Recommendations is in Preview with support for AWS, Azure, and Google Cloud, and is automatically enabled if you have set up <a href="/cloud_cost_management/">Cloud Cost Management</a>
 {{< /callout >}}
 
 ## Overview
@@ -456,14 +481,15 @@ Below are the available cloud cost recommendation categories and their descripti
 The following are requirements necessary to receive Cloud Cost recommendations:
 
 - Cloud provider accounts (for all Cloud Cost recommendations)
-- [AWS integration and resource collections][3] (for AWS recommendations)
+- [AWS integration and resource collection][3] (for AWS recommendations)
+- [Azure integration and resource collection][8] (for Azure recommendations)
 
 ## Setup
 
 For each cloud account that you would like to receive recommendations for:
 
 1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
-1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4].
+1. Enable [resource collection][3] in the **Resource Collection** tab on the [AWS integration tile][4] or [Azure integration tile][8].
 1. Install the [Datadog Agent][5] (required for over-provisioned resource recommendations).
 
 ## Recommendation and resource descriptions
@@ -481,3 +507,5 @@ For each cloud account that you would like to receive recommendations for:
 [5]: /agent/
 [6]: /cloud_cost_management/container_cost_allocation/?tab=aws#cost-metrics
 [7]: /integrations/amazon_s3_storage_lens/
+[8]: https://app.datadoghq.com/integrations/azure
+[9]: /integrations/azure/#resource-collection

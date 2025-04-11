@@ -3,7 +3,7 @@ title: Use Session Replay In Your Technical Support Workflow
 
 description: Learn how to adopt RUM & Session Replay in your Solutions or Support organization. 
 further_reading:
-- link: '/real_user_monitoring/platform/connect_rum_and_traces/'
+- link: '/real_user_monitoring/correlate_with_other_telemetry/apm/'
   tag: 'Documentation'
   text: 'Learn how to connect RUM with APM traces'
 - link: '/real_user_monitoring/session_replay/browser/'

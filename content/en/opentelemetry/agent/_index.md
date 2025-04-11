@@ -6,6 +6,14 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the Datadog distribution of OpenTelemetry (DDOT) Collector in the Agent"
 ---
 
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
+{{< /callout >}} 
+
+{{< site-region region="gov" >}}
+<div class="alert alert-danger"><strong>The Datadog Agent with embedded OpenTelemetry Collector is not FedRAMP or FIPS compliant.</strong><br> FedRAMP customers should not use the embedded OpenTelemetry Collector and should continue using standard Agent deployments.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The Datadog distribution of OpenTelemetry (DDOT) Collector is an open source solution that combines the flexibility of OpenTelemetry (OTel) with the comprehensive observability capabilities of Datadog. This integrated solution includes:
@@ -38,6 +46,16 @@ The DDOT Collector offers:
 - Access Datadog's global support team for assistance with onboarding and troubleshooting
 
 ## Included components
+
+### Support Levels
+
+Datadog provides different levels of support depending on the type of component:
+
+- **Datadog Supported Components**: Datadog-owned components such as the [Datadog Connector][44], [Datadog Exporter][38], and [Infra Attribute Processor][50]. These components are maintained by Datadog, receive regular updates, and are prioritized for bug fixes and feature enhancements within OpenTelemetry community guidelines.
+
+- **Community Supported Components**: [OpenTelemetry components](#opentelemetry-collector-components) included with the Agent by default. Datadog ensures these components are secure, stable, and compatible with the Agent. Datadog provides assistance with configuration and usage, but feature development and enhancements for these components are managed through the OpenTelemetry community.
+
+- **Custom Components**: OpenTelemetry components that are not included with the Agent by default and are added through the [custom components process][2]. Datadog provides guidance on the integration process but does not provide direct support for these components' functionality. For issues with custom components, Datadog recommends engaging with the OpenTelemetry community or the component maintainers.
 
 ### OpenTelemetry Collector components
 
@@ -152,7 +170,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /opentelemetry/agent/agent_with_custom_components
 [3]: /containers/
-[4]: /sensitive_data_scanner/
+[4]: /security/sensitive_data_scanner/
 [5]: /universal_service_monitoring/
 [7]: /network_monitoring/cloud_network_monitoring/
 [9]: /agent/fleet_automation/

@@ -29,7 +29,7 @@ aliases:
 
 ## Installation
 
-<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/nodejs">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
+<div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-sample-app/tree/main/src/loyalty-point-service">available on GitHub</a> with instructions on how to deploy with multiple runtimes and infrastructure as code tools.</div>
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
@@ -195,20 +195,21 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     import { Datadog } from "datadog-cdk-constructs";
 
     // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
+    import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
         nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
         extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
     });
-    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
+    datadogLambda.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
     ```
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<LAMBDA_FUNCTIONS>` with your Lambda functions.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
@@ -229,7 +230,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    
     You cannot install the Datadog Lambda Library as a layer if you are deploying your Lambda function as a container image.
 
-3. Install the Datadog Lambda Extension
+2. Install the Datadog Lambda Extension
 
     Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
@@ -239,7 +240,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
 
-4. Redirect the handler function
+3. Redirect the handler function
 
     - Set your image's `CMD` value to `node_modules/datadog-lambda-js/dist/handler.handler`. You can set this in AWS or directly in your Dockerfile. Note that the value set in AWS overrides the value in the Dockerfile if you set both.
     - Set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -251,7 +252,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     **Note**: If your Lambda function runs on `arm64`, you must either build your container image in an arm64-based Amazon Linux environment or [apply the Datadog wrapper in your function code][2] instead. You may also need to do that if you are using a third-party security or monitoring tool that is incompatible with the Datadog handler redirection.
 
-5. Configure the Datadog site and API key
+4. Configure the Datadog site and API key
 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
