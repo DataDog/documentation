@@ -1,6 +1,6 @@
 ---
 title: Code Origins for Spans
-description: "Learn how to use Code Origins to understand where your spans originate from in your codebase"
+description: "Learn how to use Code Origins to understand where your spans originate in your codebase"
 further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
@@ -51,9 +51,8 @@ Code Origins captures the exact location in your codebase where APM spans are cr
 
 Run your service with the below environment variable:
 
-```bash
-# Enable/disable Code Origins
-DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
+```shell
+export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
 ## Using Code Origins
