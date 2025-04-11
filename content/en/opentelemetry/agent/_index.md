@@ -47,7 +47,11 @@ The DDOT Collector offers:
 
 ## Included components
 
-### Support Levels
+<div class="alert alert-info">
+  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see the following  <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
+</div>
+
+### Support levels
 
 Datadog provides different levels of support depending on the type of component:
 
@@ -145,7 +149,7 @@ The default Datadog Agent package includes a DDOT Collector with a [curated set 
 - Setting up monitoring from scratch without needing OpenTelemetry components outside the [included components](#included-components)
 - Using the Datadog Agent and want to test OpenTelemetry functionality with included components
 - Transitioning from OpenTelemetry Collector to Datadog Agent without requiring components beyond those included by default
-- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to bring-your-Otel-Components to extend the Datadog Agent's capabilities.
+- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/agent/install_agent_with_collector" >}}Quick start with the default Agent package{{< /nextlink >}}
@@ -157,7 +161,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 
 - Transitioning from OpenTelemetry Collector while preserving your existing setup
 - Migrating your existing OpenTelemetry configurations to maintain continuity
-- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to bring-your-Otel-Components to extend the Datadog Agent's capabilities
+- (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/agent/migration" >}}Migrate from OpenTelemetry Collector to Datadog Agent{{< /nextlink >}}
