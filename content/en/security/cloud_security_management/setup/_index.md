@@ -153,5 +153,5 @@ For information on disabling Cloud Security, see the following:
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[9]: /security/cloud_security_management/troubleshooting/threats/#disable-cloud-security-threats
+[9]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
 [10]: /security/cloud_security_management/setup/iac_scanning

@@ -9,7 +9,7 @@ further_reading:
   text: "Troubleshooting Cloud Security Vulnerabilities"
 ---
 
-If you experience issues with Cloud Security Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 
@@ -113,7 +113,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENABLED=false
 
 Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime config:
 
-1. Disable Cloud Security in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+1. Disable CSM in `/etc/datadog-agent/system-probe.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
     {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################
@@ -126,7 +126,7 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
 
     runtime_security_config:
     ## @param enabled - boolean - optional - default: false
-    ## Set to true to enable full Cloud Security.
+    ## Set to true to enable full CSM.
     #
     enabled: false
 
@@ -139,7 +139,7 @@ Modify the `system-probe.yaml` and `security-agent.yaml` to disable the runtime 
     #
     # socket: /opt/datadog-agent/run/runtime-security.sock
     {{< /code-block >}}
-2. Disable Cloud Security in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
+2. Disable CSM in `/etc/datadog-agent/security-agent.yaml`. Ensure that `runtime_security_config` is set to `enabled: false`:
     {{< code-block lang="yaml" filename="security-agent.yaml" disable_copy="false" collapsible="true" >}}
 
     ##########################################

@@ -97,7 +97,7 @@ Focus on exploitable vulnerabilities first, using the Datadog Severity Score, co
 
 For vulnerabilities with available fixes, the explorer provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The Cloud Security Vulnerabilities Eeplorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The Cloud Security Vulnerabilities Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 ## Automation and Jira integration
 Make Cloud Security Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:
