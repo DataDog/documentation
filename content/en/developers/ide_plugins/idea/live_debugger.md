@@ -64,10 +64,10 @@ Log probes can be enabled or disabled by right-clicking and selecting the approp
 
 | Icon         | Description       |
 |--------------|-------------------|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" >}}      | Active – the log probe is active and log events will be generated when the line of code is about to be executed.|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.svg..png" alt="Inactive icon" >}} | Disabled – the user disabled the log probe manually or it reached the expiry time. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" >}}        | Error – the log probe has an error and is not generating output. |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" >}}    | Warning – the log probe has a warning and may not be generating output. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" >}}      | Active: the log probe is active and log events will be generated when the line of code is about to be executed.|
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.svg.png" alt="Inactive icon" >}}  | Disabled: the user disabled the log probe manually or it reached the expiry time. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" >}}        | Error: the log probe has an error and is not generating output. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" >}}    | Warning: the log probe has a warning and may not be generating output. |
 
 Disabling then re-enabling a log probe will extend the expiry time of the probe to 60 minutes.
 
