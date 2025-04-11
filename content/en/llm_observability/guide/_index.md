@@ -12,7 +12,7 @@ cascade:
 {{< whatsnext desc="LLM Observability Guides:" >}}
     {{< nextlink href="/llm_observability/quickstart" >}}Trace an LLM Application{{< /nextlink >}}
     {{< nextlink href="/llm_observability/submit_evaluations" >}}Submit Evaluations{{< /nextlink >}}
-    {{< nextlink href="/llm_observability/quickstart#custom-evaluations-from-nvidia-nemo" >}}Submit NVIDIA NeMo Custom Evaluations{{< /nextlink >}}
+    {{< nextlink href="/llm_observability/submit_nemo_evaluations" >}}Submit NVIDIA NeMo Custom Evaluations{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/ragas_quickstart" >}}Ragas Quickstart{{< /nextlink >}}
     {{< nextlink href="/llm_observability/guide/llm_observability_and_apm" >}}Using LLM Observability and APM{{< /nextlink >}}
 {{< /whatsnext >}}
