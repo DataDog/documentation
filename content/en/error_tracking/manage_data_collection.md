@@ -67,7 +67,7 @@ To add a rule (inclusion filter):
 6. Click **Save Changes**
 7. Optionally, reorder the rules to change their [evaluation order](#evaluation-order). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
-{{< img src="error-tracking/reorder_filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
+{{< img src="error-tracking/reorder-filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
 
 
 ## Rate limits
@@ -84,7 +84,7 @@ To set a rate limit:
 1. Edit the **errors/month** field.
 1. Click **Save Rate Limit**.
 
-{{< img src="error-tracking/rate_limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
+{{< img src="error-tracking/rate-limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
 
 A `Rate limit applied` event is generated when you reach the rate limit. See the [Event Management documentation][4] for details on viewing and using events.
 
