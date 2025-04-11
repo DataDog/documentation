@@ -5,4 +5,4 @@ collector_version: "0.115.0"
 
 # Tags
 agent_tag: "7.62.2-ot-beta"
-agent_tag_jmx: "7.62.2-ot-beta-jmx"
+agent_tag_jmx: "7.65.0-full"

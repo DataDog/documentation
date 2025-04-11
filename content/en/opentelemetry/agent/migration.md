@@ -13,7 +13,9 @@ If you are already using a standalone OpenTelemetry (OTel) Collector for your OT
 
 To migrate to the DDOT Collector, you need to install the Datadog Agent and configure your applications to report the telemetry data.
 
-<div class="alert alert-danger">This guide covers migrating the OpenTelemetry Collector deployed as an <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent</a>. The <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">Gateway deployment pattern</a> is not supported.</div>
+<div class="alert alert-warning">
+  The DDOT Collector only supports deployment as a DaemonSet (following the <a href="https://opentelemetry.io/docs/collector/deployment/agent/">agent deployment pattern</a>), not as a <a href="https://opentelemetry.io/docs/collector/deployment/gateway/">gateway</a>. If you have an existing gateway architecture, you can use the DDOT Collector with the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/loadbalancingexporter">loadbalancingexporter</a> to connect to your existing gateway layer.
+</div>
 
 ## Prerequisites
 
@@ -33,6 +35,7 @@ Before you begin, review your configuration to see if your existing config is su
 1. Examine your existing OpenTelemetry Collector configuration file (`otel-config.yaml`).
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
 1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+1. If your configuration uses `span_name_as_resource_name` or `span_name_remappings`, review the [New Operation Name Mappings guide][11]. The DDOT Collector enables these new mappings by default.
 
 <div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
 
@@ -184,7 +187,7 @@ datadog:
   logLevel: info
    {{< /code-block >}}
    Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-   <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
+   
 1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
