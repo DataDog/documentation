@@ -199,7 +199,7 @@ Crea un archivo de configuración de ejemplo y ejecuta tu Agent personalizado pa
 
 Ahora puedes utilizar esta nueva imagen para instalar el Agent. Esto activa las capacidades de monitorización de Datadog junto con los componentes adicionales de OpenTelemetry que añadiste.
 
-For detailed instructions on installing and configuring the Agent with added OpenTelemetry components, see the [Install the Datadog Distribution of OpenTelemetry (DDOT) Collector][9] guide.
+Para obtener instrucciones detalladas sobre la instalación y configuración del Agent con componentes de OpenTelemetry añadidos, consulta la guía [Instalar el Datadog Agent con el OpenTelemetry Collector integrado][9].
 
 ## Resolución de problemas
 
