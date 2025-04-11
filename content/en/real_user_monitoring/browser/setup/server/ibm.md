@@ -121,7 +121,7 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-To manually remove the RUM Auto-Instrumentation:
+To manually remove RUM from your auto-instrumented web server:
 
 1. Locate your IBM HTTP Server binary, it may be one of `httpd`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example.
 2. Locate the IBM HTTP Server configuration file by running `httpd -V`. For example: `/usr/local/apache2/conf/httpd.conf`.
