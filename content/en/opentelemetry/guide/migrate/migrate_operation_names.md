@@ -14,6 +14,10 @@ When using OpenTelemetry with Datadog, you might see unclear or lengthy operatio
 
 Datadog now provides new operation name mappings that improve trace visibility in the service page. This feature requires opt-in configuration now but will become the default in the near future.
 
+For example, your old operation names might look like: `go.opentelemetry.io_contrib_instrumentation_net_http_otelhttp.server`
+
+With the new logic, the same span would have the name: `http.server.request`
+
 <div class="alert alert-warning">
 Datadog strongly recommends migrating to the new mappings as soon as possible before they become the default.<br>If you have monitors or dashboards observing operation names, they will be affected by the change. Please update them to observe the new conventions.
 </div>
