@@ -1147,7 +1147,7 @@ menu:
       pre: cloudcraft
       identifier: cloudcraft
       parent: essentials_heading
-      weight: 270000
+      weight: 130000
     - name: Getting Started
       url: cloudcraft/getting-started/
       identifier: cloudcraft_getting_started
@@ -1318,6 +1318,12 @@ menu:
       identifier: cloudcraft_api_users_info
       parent: cloudcraft_api_users
       weight: 1
+    - name: DDSQL
+      url: ddsql/
+      pre: ddsql
+      identifier: ddsql
+      parent: essentials_heading
+      weight: 140000
     - name: Watchdog
       url: watchdog/
       identifier: watchdog_top_level
