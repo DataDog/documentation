@@ -62,12 +62,12 @@ Log probes can be deleted by right-clicking on the icon in the gutter of the sou
 ### Enabling & Disabling Probes
 Log probes can be enabled or disabled by right-clicking and selecting the appropriate context menu item.  The icon changes to indicate the current state:
 
-| Icon         | Description                                                             |
-|--------------|-------------------------------------------------------------------------|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/active-icon.png" alt="Active icon" >}}           | Active – the log probe is active and log events will be generated when the line of code is about to be executed.|
-| {{< img src="/developers/ide_plugins/idea/live_debugger/inactive-icon.png" alt="Inactive icon" >}}            | Disabled – either the user disabled the log probe or it reached the expiry time.                                                           |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/error-icon.png" alt="Error icon" >}}            | Error – the log probe has an error.                                                           |
-| {{< img src="/developers/ide_plugins/idea/live_debugger/warning-icon.png" alt="Warning icon" >}}            | Warning – the log probe has a warning.                                             |
+| Icon         | Description       |
+|--------------|-------------------|
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeActive.svg.png" alt="Active icon" >}}      | Active – the log probe is active and log events will be generated when the line of code is about to be executed.|
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeDisabled.svg..png" alt="Inactive icon" >}} | Disabled – the user disabled the log probe manually or it reached the expiry time. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeError.svg.png" alt="Error icon" >}}        | Error – the log probe has an error and is not generating output. |
+| {{< img src="/developers/ide_plugins/idea/live_debugger/probeWarning.svg.png" alt="Warning icon" >}}    | Warning – the log probe has a warning and may not be generating output. |
 
 Disabling then re-enabling a log probe will extend the expiry time of the probe to 60 minutes.
 
