@@ -19,7 +19,7 @@ The flare asks for confirmation before upload, so you may review the content bef
 
 In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
 
-If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
+If you don't have a case ID, enter your email address used to login in Datadog to create a new support case.
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
