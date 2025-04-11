@@ -65,6 +65,8 @@ Remote Agent Management simplifies the process of upgrading your Agent fleet by 
 
 After you enable Remote Configuration on an Agent, you can send a flare from Datadog. For instructions on sending a flare, see [Send a flare from the Datadog site][7].
 
+When contacting Datadog Support with Remote Configuration enabled for an Agent, our Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to our support team to help you resolve your issue.
+
 
 ## Control access to Fleet Automation
 
