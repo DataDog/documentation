@@ -36,6 +36,7 @@ further_reading:
 - [Cloud Security Platform](#cloud-security-platform-events)
 - [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
+- [Infrastructure Monitoring](#infrastructure-monitoring)
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
@@ -357,6 +358,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Modify a schedule override][149]  | A user modified a schedule override.  | `@evt.name:"On-Call" @asset.type:override @action:modified`          |
 | [Delete a schedule override][150]  | A user deleted a schedule override.   | `@evt.name:"On-Call" @asset.type:override @action:deleted`           |
 
+### Infrastructure Monitoring
+| Name                                  | Description of audit event              | Query in audit explorer                                                                               |
+|---------------------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [Enable Container Image Trends][151]  | A user enabled Container Image Trends.  | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:enabled`  |
+| [Disable Container Image Trends][152] | A user disabled Container Image Trends. | `@evt.name:"Infrastructure Monitoring" @asset.type:configure_container_image_trends @action:disabled` |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -511,3 +518,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [148]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Acreated%20%40asset.type%3Aoverride
 [149]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Amodified%20%40asset.type%3Aoverride
 [150]:https://app.datadoghq.com/audit-trail?query=%40evt.name%3AOn-Call%20%40action%3Adeleted%20%40asset.type%3Aoverride
+[151]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Aenabled
+[152]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Infrastructure%20Monitoring%22%20%40asset.type%3Aconfigure_container_image_trends%20%40action%3Adisabled

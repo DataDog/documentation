@@ -90,14 +90,20 @@ The following SQL functions are supported. For Window function, see the separate
 | `cast(value AS type)`                            | type                                  | Converts the given value to the specified data type.                        |
 | `length(string s)`                               | integer                               | Returns the number of characters in the string.                             |
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
-| `replace(string s, from_string s1, to_string s2)`| string                                | Replaces occurrences of a substring within a string with another substring. |
-| `substring(string s, start_position_int i, length_int l)` | string                        | Extracts a substring from a string, starting at a given position and for a specified length. |
-| `extract(field from timestamp/interval)`         | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
-| `to_timestamp(numeric n)`                        | timestamp with time zone              | Converts a numeric value to a timestamp with time zone.                     |
-| `to_char(timestamp t / interval i / numeric n, format f)` | string                      | Converts a timestamp, interval, or numeric value to a string using a format.|
-| `date_trunc(field f, source [, time_zone])`     | timestamp [with time zone] / interval | Truncates a timestamp or interval to a specified precision.                 |
-| `regexp_like(string s, pattern p [flags])`       | boolean                               | Evaluates if a string matches a regular expression pattern.                 |
-
+| `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
+| `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `strpos(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
+| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
+| `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
+| `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
+| `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
+| `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
+| `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
+| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array.                                |
+| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
+| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `array_agg(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
+| `unnest(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -177,6 +183,13 @@ FROM users
 {{< /code-block >}} 
 
 ### `CAST`  
+
+Supported cast target types: 
+- `BIGINT`
+- `DECIMAL`
+- `TIMESTAMP`
+- `VARCHAR`
+
 {{< code-block lang="sql" >}}
 SELECT
   CAST(order_id AS VARCHAR) AS order_id_string,
@@ -224,7 +237,36 @@ FROM
   books
 {{< /code-block >}}
 
+### `STRPOS`
+{{< code-block lang="sql" >}}
+SELECT
+  STRPOS('foobar', 'bar')
+{{< /code-block >}}
+
+### `SPLIT_PART`
+{{< code-block lang="sql" >}}
+SELECT
+  SPLIT_PART('aaa-bbb-ccc', '-', 2)
+{{< /code-block >}}
+
 ### `EXTRACT`
+
+Supported extraction units: 
+| Literal           | Input Type               | Description                                  |
+| ------------------| ------------------------ | -------------------------------------------- |
+| `day`             | `timestamp` / `interval` | day of the month                             |
+| `dow`             | `timestamp`              | day of the week `1` (Monday) to `7` (Sunday) |
+| `doy`             | `timestamp`              | day of the year (`1` - `366`)                |
+| `hour`            | `timestamp` / `interval` | hour of the day (`0` - `23`)                 |
+| `minute`          | `timestamp` / `interval` | minute of the hour (`0` - `59`)              |
+| `second`          | `timestamp` / `interval` | second of the minute (`0` - `59`)            |
+| `week`            | `timestamp`              | week of the year (`1` - `53`)                |
+| `month`           | `timestamp`              | month of the year (`1` - `12`)               |
+| `quarter`         | `timestamp`              | quarter of the year (`1` - `4`)              |
+| `year`            | `timestamp`              | year                                         |
+| `timezone_hour`   | `timestamp`              | hour of the time zone offset                 |
+| `timezone_minute` | `timestamp`              | minute of the time zone offset               |
+
 {{< code-block lang="sql" >}}
 SELECT
   extract(year FROM purchase_date) AS purchase_year
@@ -233,14 +275,50 @@ FROM
 {{< /code-block >}}
 
 ### `TO_TIMESTAMP`
+
+Supported patterns for date/time formatting: 
+| Pattern     | Description                          |
+| ----------- | ------------------------------------ |
+| `YYYY`      | year (4 digits)                      |
+| `YY`        | year (2 digits)                      |
+| `MM`        | month number (01 - 12)               |
+| `DD`        | day of month (01 - 31)               |
+| `HH24`      | hour of day (00 - 23)                |
+| `HH12`      | hour of day (01 - 12)                |
+| `HH`        | hour of day (01 - 12)                |
+| `MI`        | minute (00 - 59)                     |
+| `SS`        | second (00 - 59)                     |
+| `MS`        | millisecond (000 - 999)              |
+| `TZ`        | time-zone abbreviation               |
+| `OF`        | time-zone offset from UTC            |
+| `AM` / `am` | meridiem indicator (without periods) |
+| `PM` / `pm` | meridiem indicator (without periods) |
+
 {{< code-block lang="sql" >}}
 SELECT
-  to_timestamp(epoch_time) AS formatted_time
-FROM
-  event_logs
+  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
+
+Supported patterns for date/time formatting: 
+| Pattern     | Description                          |
+| ----------- | ------------------------------------ |
+| `YYYY`      | year (4 digits)                      |
+| `YY`        | year (2 digits)                      |
+| `MM`        | month number (01 - 12)               |
+| `DD`        | day of month (01 - 31)               |
+| `HH24`      | hour of day (00 - 23)                |
+| `HH12`      | hour of day (01 - 12)                |
+| `HH`        | hour of day (01 - 12)                |
+| `MI`        | minute (00 - 59)                     |
+| `SS`        | second (00 - 59)                     |
+| `MS`        | millisecond (000 - 999)              |
+| `TZ`        | time-zone abbreviation               |
+| `OF`        | time-zone offset from UTC            |
+| `AM` / `am` | meridiem indicator (without periods) |
+| `PM` / `pm` | meridiem indicator (without periods) |
+
 {{< code-block lang="sql" >}}
 SELECT
   to_char(order_date, 'MM-DD-YYYY') AS formatted_date
@@ -249,6 +327,18 @@ FROM
 {{< /code-block >}}
 
 ### `DATE_TRUNC`
+
+Supported truncations: 
+- `milliseconds`
+- `seconds` / `second`
+- `minutes` / `minute`
+- `hours` / `hour`
+- `days` / `day`
+- `weeks` / `week `
+- `months` / `month`
+- `quarters` / `quarter`
+- `years` / `year` 
+
 {{< code-block lang="sql" >}}
 SELECT
   date_trunc('month', event_time) AS month_start
@@ -264,6 +354,51 @@ FROM
   emails
 WHERE
   regexp_like(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients)
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com')
+FROM
+  emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT 
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  ARRAY_AGG(subject) subjects, 
+  ARRAY_AGG(ALL subject) all_subjects, 
+  ARRAY_AGG(DISTINCT subject) distinct_subjects
+FROM 
+  emails
+GROUP BY 
+  sender
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  recipient 
+FROM 
+  emails,
+  UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
