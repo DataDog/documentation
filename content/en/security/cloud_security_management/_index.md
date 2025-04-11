@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Management
+title: Cloud Security
 aliases:
   - /security_platform/cloud_security_management/
 further_reading:
@@ -8,7 +8,7 @@ further_reading:
     text: "See What's New in Datadog Security Compliance"
   - link: "/security/cloud_security_management/misconfigurations/"
     tag: "Documentation"
-    text: "Start tracking misconfigurations with CSM Misconfigurations"
+    text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
@@ -24,30 +24,18 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/workload-security-evaluator/"
     tag: "Blog"
     text: "Run Atomic Red Team detection tests in container environments with Datadog's Workload Security Evaluator"
-  - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
-    tag: "Blog"
-    text: "Add security context to observability data with Datadog Cloud Security Management"
   - link: "https://www.datadoghq.com/blog/security-labs-ruleset-launch/"
     tag: "Blog"
     text: "Fix common cloud security risks with the Datadog Security Labs Ruleset"
   - link: "https://www.datadoghq.com/blog/securing-cloud-native-applications/"
     tag: "Blog"
     text: "Best practices for application security in cloud-native environments"
-  - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
-    tag: "Blog"
-    text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
   - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings-2024/"
     tag: "Blog"
     text: "Key learnings from the 2024 State of Cloud Security study"
-  - link: "https://www.datadoghq.com/blog/cloud-security-malware-detection/"
-    tag: "Blog"
-    text: "Detect malware in your containers with Datadog Cloud Security Management"
-  - link: "https://www.datadoghq.com/blog/security-posture-csm/"
-    tag: "Blog"
-    text: "Report on changes to your security posture with Cloud Security Management"
   - link: "https://www.datadoghq.com/blog/security-inbox-prioritization/"
     tag: "Blog"
     text: "How Datadog Security Inbox prioritizes security risks"
@@ -58,43 +46,43 @@ algolia:
   tags: ['csm', 'cloud security management', 'inbox']
 cascade:
     algolia:
-        subcategory: Cloud Security Management
+        subcategory: Cloud Security
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
-  Learn how Datadog Cloud SIEM and Cloud Security Management elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
+  Learn how Datadog Cloud SIEM and Cloud Security elevate your organization's threat detection and investigation for dynamic, cloud-scale environments. 
 {{< /learning-center-callout >}}
 
-Datadog Cloud Security Management (CSM) delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
+Datadog Cloud Security delivers deep visibility, continuous configuration audits, identity risk assessments, vulnerability detection, and real-time threat detection across your entire cloud infrastructure—all in a unified platform for seamless collaboration and faster remediation.
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-CSM leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
+Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [**Workload Protection**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
-{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security in Datadog" width="100%">}}
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
 ## Track your organization's health
 
-Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+Available for [Cloud Security Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
 Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
 
-{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
+{{< img src="security/csm/health_scores.png" alt="The posture score on the Cloud Security overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues
 
 For an overview of your Cloud Security and Application Security findings, sorted by importance, use the [Security Inbox][14].
 
-To get more detail, use the [Explorers][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
+{{< img src="security/csm/explorers_page.png" alt="Cloud Security Findings page" width="100%">}}
 
 ## Investigate resources
 
@@ -108,7 +96,7 @@ Use the [Resource Catalog][12] to view specific misconfigurations and threats th
 
 ## Subscribe to weekly digest reports
 
-Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+Receive a weekly summary of Cloud Security activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
 ## Learn about emerging threats and vulnerabilities
 
@@ -116,7 +104,7 @@ Use the [Security Research Feed][15] to stay current with the latest security de
 
 ## Next steps
 
-To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
+To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3] page in Datadog, which has detailed steps on how to set up and configure Cloud Security. For more information, see [Setting Up Cloud Security][10].
 
 ## Further reading
 

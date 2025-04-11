@@ -1,14 +1,14 @@
 ---
-title: Cloud Security Management Identity Risks
+title: Cloud Security Identity Risks
 aliases:
   - /security/identity_risks/
 further_reading:
 - link: "/security/cloud_security_management/"
   tag: "Documentation"
-  text: "Learn more about Cloud Security Management"
+  text: "Learn more about Cloud Security"
 - link: "/security/cloud_security_management/setup"
   tag: "Documentation"
-  text: "Setting Up Cloud Security Management"
+  text: "Setting Up Cloud Security"
 - link: "https://www.datadoghq.com/blog/datadog-ciem/"
   tag: "Blog"
   text: "Find and remediate identity risks with Datadog CIEM"
@@ -26,17 +26,17 @@ further_reading:
   text: "Detect cross-account access risks in AWS with Datadog"
 ---
 
-Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
+Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (CIEM) product that helps you mitigate entitlement risks across your clouds. It continually scans your cloud infrastructure and finds issues such as lingering administrative privileges, privilege escalations, permission gaps, large blast radii, and cross-account access. It also enables you to proactively resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks. For quick remediation, it suggests [downsized policies][4], [Datadog Workflows][3] based remediations, and deep links to cloud consoles.
 
-<div class="alert alert-info">CSM Identity Risks is available for AWS, Azure, and GCP.</div>
+<div class="alert alert-info">Cloud Security Identity Risks is available for AWS, Azure, and GCP.</div>
 
 ## Review identity risks
 
-Review your organization's active identity risks on the [Identity Risks Explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
+Review your organization's active identity risks in the [Identity Risks explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
-CSM Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
+Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
-{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="Cloud Security Identity Risks explorers page" width="100%">}}
 
 ## Remediate identity risks
 
@@ -48,7 +48,7 @@ Click **View Suggested Policy** to view a suggested downsized policy based on th
 
 {{< img src="security/identity_risks/downsized_policy.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
 
-To remediate the identity risk, click **Fix in AWS** to update the resource in AWS IAM console. To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Management Issues][2] for more information.
+To remediate the identity risk, click **Fix in AWS** to update the resource in AWS IAM console. To create a Jira issue and assign it to a team, click **Add Jira issue**. See [Create Jira Issues for Cloud Security Issues][2] for more information.
 
 {{< img src="security/identity_risks/side_panel_action_buttons_2.png" alt="Remediate identity risks using the action buttons on the side panel" width="100%">}}
 
@@ -76,9 +76,9 @@ Datadog CIEM is integrated with [AWS IAM Access Analyzer][5] to further improve 
 
 ## Video walkthrough
 
-The following video provides an overview of how to enable and use CSM Identity Risks:
+The following video provides an overview of how to enable and use Cloud Security Identity Risks:
 
-{{< img src="security/csm/how-to-use-csm-identity-risks.mp4" alt="Video that provides an overview of how to install and use CSM Identity Risks" video=true >}}
+{{< img src="security/csm/how-to-use-csm-identity-risks.mp4" alt="Video that provides an overview of how to install and use Cloud Security Identity Risks" video=true >}}
 
 ## Further Reading
 

@@ -6,7 +6,7 @@
 
     **Note**: The `dd-test-scanner-log` value is supported in the most recent releases.
 
-    A few minutes after you enable your application and send known attack patterns to it, threat information appears in the [Application Signals Explorer][201] and vulnerability information appears in the [Vulnerability Explorer][204].
+    A few minutes after you enable your application and send known attack patterns to it, threat information appears in the [Application Signals Explorer][201] and vulnerability information appears in the [Vulnerabilities explorer][204].
 
 [201]: https://app.datadoghq.com/security/appsec
 [202]: /security/default_rules/#cat-application-security

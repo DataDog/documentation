@@ -361,7 +361,7 @@ DD_NETWORK_PATH_FORWARDER_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Ho
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Management Misconfigurations
+## Cloud Security Misconfigurations
 
 ### YAML configuration
 

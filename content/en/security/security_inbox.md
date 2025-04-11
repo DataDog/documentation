@@ -6,7 +6,7 @@ further_reading:
   text: "Learn more about App and API Protection"
 - link: "/security/cloud_security_management"
   tag: "Documentation"
-  text: "Learn more about Cloud Security Management"
+  text: "Learn more about Cloud Security"
 - link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
@@ -14,7 +14,7 @@ further_reading:
   tag: "Blog"
   text: "How Datadog Security Inbox prioritizes security risks"
 products:
-- name: Cloud Security Management
+- name: Cloud Security
   url: /security/cloud_security_management/
   icon: cloud-security-management
 - name: App and API Protection
@@ -30,10 +30,10 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from App and API Protection (AAP) and Cloud Security Management (CSM). By default, these include the following types of findings:
+The findings that appear in Security Inbox are generated from App and API Protection (AAP) and Cloud Security. By default, these include the following types of findings:
 
-- A curated set of [misconfigurations][1] for [CSM Misconfigurations][2], compiled by Datadog Security Research.
-- A curated set of [identity risks][1] for [CSM Identity Risks][3], compiled by Datadog Security Research.
+- A curated set of [misconfigurations][1] for [Cloud Security Misconfigurations][2], compiled by Datadog Security Research.
+- A curated set of [identity risks][1] for [Cloud Security Identity Risks][3], compiled by Datadog Security Research.
 - Application library vulnerabilities for [Software Composition Analysis(SCA)][4]. All high and critical application library vulnerabilities on production services under attack appear in the inbox.
 - Application code vulnerabilities for [Code Security vulnerabilities][5]. All high and critical application code vulnerabilities appear in the inbox.
 - [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in Security Inbox by default.
@@ -94,6 +94,6 @@ For more information, see [Automation Pipelines][11] and [Add to Security Inbox 
 [7]: https://www.cisa.gov/
 [8]: https://www.exploit-db.com/
 [9]: https://nvd.nist.gov/
-[10]: /security/cloud_security_management/severity_scoring/#csm-severity-scoring-framework
+[10]: /security/cloud_security_management/severity_scoring/#cloud-security-severity-scoring-framework
 [11]: /security/automation_pipelines/
 [12]: /security/automation_pipelines/security_inbox

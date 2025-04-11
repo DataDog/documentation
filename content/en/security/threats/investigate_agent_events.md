@@ -11,9 +11,6 @@ further_reading:
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"
-  - link: "https://www.datadoghq.com/blog/datadog-csm-windows/"
-    tag: "Blog"
-    text: "Secure your Windows workloads with Datadog Cloud Security Management"
 ---
 
 

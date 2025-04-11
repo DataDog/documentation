@@ -1,13 +1,13 @@
 Datadog Agent `7.46` or later installed on your hosts or containers.  
 
-### CSM Vulnerabilities
+### Cloud Security Vulnerabilities
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
 | [Helm Chart][102]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][103]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-**Note**: CSM Vulnerabilities is **not** available for the following environments:
+**Note**: Cloud Security Vulnerabilities is **not** available for the following environments:
 
   - Windows
   - AWS Fargate 

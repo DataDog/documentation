@@ -79,7 +79,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to CSM [Agent Configuration][2] rules.
+1. Go to Cloud Security [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}
