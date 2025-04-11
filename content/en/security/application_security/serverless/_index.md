@@ -56,7 +56,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    custom:
      datadog:
-       enableAAP: true
+       enableASM: true
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
