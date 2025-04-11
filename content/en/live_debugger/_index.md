@@ -18,6 +18,12 @@ further_reading:
   text: "Execution Replay"
 ---
 
+{{< beta-callout-private url="https://www.datadoghq.com/product-preview/live-debugger/" >}}
+    Live Debugger is in limited preview, and is not available to all customers.
+    Request access to join the waiting list.
+    Note that <a href="#limitations">some limitations</a> apply to the preview.
+{{< /beta-callout-private >}}
+
 ## Overview
 
 Live Debugger helps you debug running applications without redeploying code or interrupting service. It uses Datadog's [Dynamic Instrumentation][1] to inspect and troubleshoot code behavior in real-time. Create a Debug Session with auto-expiring logpoints anywhere in your application code - and watch the real-time data roll in!
@@ -66,7 +72,7 @@ Enable and disable Live Debugger on a service using one of these methods:
 - Restart the service before using Live Debugger.
 
 
-## Relationship between Live Debugger & Dynamic Instrumentation
+## Relationship between Live Debugger and Dynamic Instrumentation
 Due to shared underlying technology, Live Debugger and Dynamic Instrumentation are always enabled or disabled together on the same service and environment. 
 
 Dynamic Instrumentation also allows users to create logpoints, as well as other custom instrumentation (spans, span tags, and metrics). The key difference is that Live Debugger logpoints expire automatically after a set time period, while Dynamic Instrumentations remain active until manually deactivated.
@@ -124,8 +130,10 @@ Live Debugger data might contain sensitive information, especially when using th
 ## Limitations
 
 - Live Debugger supports the [same runtime languages][17] as Dynamic Instrumentation.
-- Logpoints with "Capture Variables" enabled are rate-limited to 1 hit per second.
-- Regular logpoints (without variable capture) are rate-limited to 5000 executions per second per service instance.
+- Live Debugger and Dynamic Instrumentation are enabled and disabled for the <a href="#relationship-between-live-debugger-and-dynamic-instrumentation">same service and environment</a>.
+- Logpoints with variable enabled are rate-limited to 1 hit per second.
+- Logpoints without variable capture are rate-limited to 5000 executions per second per service instance.
+- Debug Sessions expire after 60 minutes (this is not customizable for now).
 
 ## Further Reading
 
