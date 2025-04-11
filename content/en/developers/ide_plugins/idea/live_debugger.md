@@ -6,25 +6,24 @@ further_reading:
 title: Live Debugger
 type: documentation
 ---
-## Live Debugger
-### Overview
+## Overview
 The Live Debugger helps you to solve problems faster by adding temporary log statements to your runtime code to collect information for debugging. The log statements are added dynamically, with no need to redeploy the code.
 
-### Tool Window
+## Tool Window
 A tab in the Datadog Tool Window shows the log probes defined in the IDE by the current user and the log output from these probes:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 From a probe in the tree on the left side, you can navigate to the source code – simply right-click and select `Jump to Source`.  The `View logs in Datadog` link, at the top-right of the panel, will open the [Log Explorer][2] in Datadog to show log events for the selected probe.
 
-### Source Editor
+## Source Editor
 In the source editor, an icon is shown in the gutter for any line that has a log probe defined:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
 Clicking on this icon will open the Datadog Tool Window and select the log probe.  Right-clicking the icon provides items to enable, disable, edit and delete the log probe.
 
-### Add a Log Probe
+## Add a Log Probe
 To add a log probe, right-click on a line of code in the source editor and select `Add a Log to a Live Service…` A dialog appears where you can enter the service name, the environment and the log message you would like to have emitted at runtime.  The log message will be generated using the runtime state immediately PRIOR to the line being executed:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-log-probe.png" alt="Add a new log probe" style="width:100%;" >}}
@@ -37,10 +36,10 @@ Notice that the remote code may be a different version compared to the source co
 
 <div class="alert alert-info">Tip: checking out this revision locally will show you the same code in your IDE that is running remotely, which simplifies the live debugging experience.  However this is not required as the Datadog plugin will map local line numbers for Log probes to remote line numbers based on Git commit information.</div>
 
-### Live Debugger Output
+## Live Debugger Output
 The Live Debugger tab in the Datadog Tool Window displays output for the log probes that have been added.  Select a log probe on the left side, and the most recently generated logs are displayed on the right side, limited to the past 24 hours.
 
-### Edit a Log Probe
+## Edit a Log Probe
 The log message for a probe can be modified, simply right click on the log probe and select the “Edit…” menu item:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/edit-log-probe.png" alt="Edit a log probe" style="width:100%;" >}}
@@ -49,10 +48,10 @@ The service and environment cannot be changed by editing the log probe, only the
 
 Note that applying changes to the log probe also extends the expiration time to 60 minutes.
 
-### Delete a Log Probe
+## Delete a Log Probe
 Log probes can be deleted by right-clicking on the icon in the gutter of the source editor, or the entry in the Tool Window, and selecting `Delete` from the context menu.
 
-### Enabling & Disabling Probes
+## Enabling & Disabling Probes
 Log probes can be enabled or disabled by right-clicking and selecting the appropriate context menu item.  The icon changes to indicate the current state:
 
 | Icon         | Description                                                             |
@@ -62,8 +61,7 @@ Log probes can be enabled or disabled by right-clicking and selecting the approp
 | {{< img src="/developers/ide_plugins/idea/live_debugger/error-icon.png" alt="Error icon" >}}            | Error – the log probe has an error.                                                           |
 | {{< img src="/developers/ide_plugins/idea/live_debugger/warning-icon.png" alt="Warning icon" >}}            | Warning – the log probe has a warning.                                             |
 
-
-### Prerequisites
+## Prerequisites
 The Live Debugger feature supports Java and Python  and is subject to the same setup requirements as [Dynamic Instrumentation][1].
 
 [1]: /dynamic_instrumentation/
