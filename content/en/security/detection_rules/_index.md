@@ -45,7 +45,7 @@ Out-of-the box rules are available for the following security products:
     - [Cloud Security Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [Workload Protection][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [Cloud Security Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [App and API Protection][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
+- [App and API Protection][7] (AAP) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Beta detection rules
 
