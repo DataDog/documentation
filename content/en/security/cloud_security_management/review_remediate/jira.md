@@ -38,7 +38,7 @@ To create Jira issues for Cloud Security security issues, you must configure the
 
 To create a Jira issue for one or more resources impacted by a misconfiguration:
 
-1. On the [Misconfigurations Explorer][1], select a misconfiguration.
+1. On the [Misconfigurations explorer][1], select a misconfiguration.
 2. Under **Resources Impacted**, select one or more findings.
 3. On the **Actions** dropdown menu that appears on top, select **Create Jira Issue**.
 4. Choose whether to create a single issue or multiple issues (one issue for each resource).
@@ -49,7 +49,7 @@ To create a Jira issue for one or more resources impacted by a misconfiguration:
 
 You can also create a Jira issue from the standalone issue side panel.
 
-1. On the [Misconfigurations Explorer][1], set the Group By filter to **Resources**.
+1. On the [Misconfigurations explorer][1], set the Group By filter to **Resources**.
 2. Select a resource.
 3. On the **Misconfigurations** tab, select a misconfiguration.
 4. Click **Create Jira Issue**.
@@ -68,7 +68,7 @@ After you create the issue, a link to the Jira issue is displayed on the side pa
 
 To create a Jira issue for one or more resources impacted by an identity risk:
 
-1. On the [Identity Risks Explorer][1], select an identity risk.
+1. On the [Identity Risks explorer][1], select an identity risk.
 2. Under **Resources Impacted**, select one or more findings.
 3. On the **Actions** dropdown menu that appears on top, select **Create Jira Issue**.
 4. Choose whether to create a single issue or multiple issues (one issue for each resource).
@@ -79,7 +79,7 @@ To create a Jira issue for one or more resources impacted by an identity risk:
 
 You can also create a Jira issue from the standalone issue side panel.
 
-1. On the [Identity Risks Explorer][1], set the Group By filter to **Resources**.
+1. On the [Identity Risks explorer][1], set the Group By filter to **Resources**.
 2. Select a resource.
 3. On the **Misconfigurations** tab, select an identity risk.
 4. Click **Create Jira Issue**.

@@ -24,7 +24,7 @@ source:cloudtrail @recipientAccountId:172597598159 @awsRegion:us-east-1 @readOnl
 
 ## View related logs
 
-1. In the [Misconfigurations Explorer][2], open a misconfiguration for a supported resource type.
+1. On the **Findings** page, in the [Misconfigurations explorer][2], open a misconfiguration for a supported resource type.
 1. Click the **Related Logs** tab. Datadog queries your CloudTrail logs for events related to the cloud resource.
 
 ## Search through a larger timeframe

@@ -32,11 +32,11 @@ Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (
 
 ## Review identity risks
 
-Review your organization's active identity risks on the [Identity Risks Explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
+Review your organization's active identity risks in the [Identity Risks explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
 Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
-{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="Cloud Security Identity Risks Explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="Cloud Security Identity Risks explorers page" width="100%">}}
 
 ## Remediate identity risks
 

@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about frameworks and industry benchmarks"
 ---
 
-The Cloud Security Misconfigurations [Explorer][1] allows you to:
+The Cloud Security Misconfigurations [explorer][1] allows you to:
 
 - Review the detailed configuration of a resource.
 - Review the compliance rules applied to your resources by Cloud Security Misconfigurations.
@@ -30,15 +30,15 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 ## Explore your cloud misconfigurations
 
-Misconfigurations are displayed on the [Misconfigurations Explorer][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
+Misconfigurations are displayed on the [Misconfigurations explorer][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
 
-{{< img src="security/csm/explorers_page.png" alt="Cloud Security Misconfigurations Explorer page" style="width:100%;">}}
+{{< img src="security/csm/explorers_page.png" alt="Cloud Security Misconfigurations explorer page" style="width:100%;">}}
 
 Select a misconfiguration to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
 
 {{< img src="security/cspm/findings/finding-side-panel3.png" alt="A list of impacted resources in the side panel" style="width:65%;">}}
 
-Group by **Resources** on the Security Findings Explorer and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
+Group findings by **Resources** and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
 
