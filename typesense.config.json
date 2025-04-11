@@ -89,7 +89,7 @@
             ]
         },
         {
-            "name": "docs_partners_v1",
+            "name": "docs_partners_alias",
             "file_path": "./public/partners.json",
             "presets": [
                 {

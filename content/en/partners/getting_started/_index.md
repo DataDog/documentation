@@ -1,6 +1,9 @@
 ---
 title: Getting Started
 description: "Getting started with Datadog for Sales & Services Partners"
+cascade:
+    algolia:
+        subcategory: Partners
 ---
 
 Datadog provides insights into your clients' hybrid cloud infrastructures and applications. The intuitive UI and powerful API allows you to onboard, provision, and manage your clients' diverse environments, while establishing data security in each account.
