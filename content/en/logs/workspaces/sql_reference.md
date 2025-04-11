@@ -92,12 +92,18 @@ The following SQL functions are supported. For Window function, see the separate
 | `trim(string s)`                                 | string                                | Removes leading and trailing whitespace from the string.                    |
 | `replace(string s, string from, string to)`      | string                                | Replaces occurrences of a substring within a string with another substring. |
 | `substring(string s, int start, int length)`     | string                                | Extracts a substring from a string, starting at a given position and for a specified length. |
+| `strpos(string s, string substring)`             | integer                               | Returns the first index position of the substring in a given string, or 0 if there is no match. |
+| `split_part(string s, string delimiter, integer index)` | string                         | Splits the string on the given delimiter and returns the string at the given position counting from one. |
 | `extract(unit from timestamp/interval)`          | numeric                               | Extracts a part of a date or time field (such as year or month) from a timestamp or interval. |
 | `to_timestamp(string timestamp, string format)`  | timestamp                             | Converts a string to a timestamp according to the given format.             |
 | `to_char(timestamp t, string format)`            | string                                | Converts a timestamp to a string according to the given format.             |
 | `date_trunc(string unit, timestamp t)`           | timestamp                             | Truncates a timestamp to a specified precision based on the provided unit.  |
 | `regexp_like(string s, pattern p)`               | boolean                               | Evaluates whether a string matches a regular expression pattern.                 |
-
+| `cardinality(array a)`                           | integer                               | Returns the number of elements in the array.                                |
+| `array_position(array a, typeof_array value)`    | integer                               | Returns the index of the first occurrence of the value found in the array, or null if value is not found. |
+| `string_to_array(string s, string delimiter)`    | array of strings                      | Splits the given string into an array of strings using the given delimiter. |
+| `array_agg(expression e)`                        | array of input type                   | Creates an array by collecting all the input values.                        |
+| `unnest(array a [, array b...])`                 | rows of a [, b...]                    | Expands arrays into a set of rows. This form is only allowed in a FROM clause. |
 
 {{% collapse-content title="Examples" level="h3" %}}
 
@@ -231,6 +237,18 @@ FROM
   books
 {{< /code-block >}}
 
+### `STRPOS`
+{{< code-block lang="sql" >}}
+SELECT
+  STRPOS('foobar', 'bar')
+{{< /code-block >}}
+
+### `SPLIT_PART`
+{{< code-block lang="sql" >}}
+SELECT
+  SPLIT_PART('aaa-bbb-ccc', '-', 2)
+{{< /code-block >}}
+
 ### `EXTRACT`
 
 Supported extraction units: 
@@ -336,6 +354,51 @@ FROM
   emails
 WHERE
   regexp_like(email_address, '@example\.com$')
+{{< /code-block >}}
+
+### `CARDINALITY`
+{{< code-block lang="sql" >}}
+SELECT
+  CARDINALITY(recipients)
+FROM
+  emails
+{{< /code-block >}}
+
+### `ARRAY_POSITION`
+{{< code-block lang="sql" >}}
+SELECT
+  ARRAY_POSITION(recipients, 'hello@example.com')
+FROM
+  emails
+{{< /code-block >}}
+
+### `STRING_TO_ARRAY`
+{{< code-block lang="sql" >}}
+SELECT 
+  STRING_TO_ARRAY('a,b,c,d,e,f', ',')
+{{< /code-block >}}
+
+### `ARRAY_AGG`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  ARRAY_AGG(subject) subjects, 
+  ARRAY_AGG(ALL subject) all_subjects, 
+  ARRAY_AGG(DISTINCT subject) distinct_subjects
+FROM 
+  emails
+GROUP BY 
+  sender
+{{< /code-block >}}
+
+### `UNNEST`
+{{< code-block lang="sql" >}}
+SELECT 
+  sender,
+  recipient 
+FROM 
+  emails,
+  UNNEST(recipients) AS recipient
 {{< /code-block >}}
 
 {{% /collapse-content %}} 
