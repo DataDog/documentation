@@ -117,10 +117,10 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-While automatic uninstallation will be available soon, you can manually remove the RUM Auto-Instrumentation by following these steps.
+To manually remove RUM from your auto-instrumented web server:
 
-1. Locate your Apache httpd binary, it may be one of `httpd`, `apachectl`, `apache2` or `apache2ctl`. `httpd` will be used for illustration purposes.
-2. Locate the Apache httpd configuration file by running `httpd -V`. Example: `/usr/local/apache2/conf/httpd.conf`.
-3. Edit the file by removing the following line at the end `Include /opt/datadog-httpd/datadog.conf`.
-4. Delete the directory `/opt/datadog-httpd/` and all its contents.
-5. Finally, restart or reload Apache httpd.
+1. Locate your Apache httpd binary file. It may be one of `httpd`, `apachectl`, `apache2` or `apache2ctl`. The following steps use `httpd` as an example.
+2. Locate the Apache httpd configuration file by running `httpd -V`. For example: `/usr/local/apache2/conf/httpd.conf`.
+3. At the end of the httpd configuration file, remove the line: `Include /opt/datadog-httpd/datadog.conf`.
+4. Delete the directory `/opt/datadog-httpd/` and all of its contents.
+5. Restart or reload Apache httpd.

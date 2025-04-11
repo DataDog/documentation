@@ -82,4 +82,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 
 ## Uninstall
 
-Completely uninstall RUM Auto-Instrumentation by uninstalling Datadog RUM from Windows' Apps & features.
+To completely remove RUM Auto-Instrumentation, uninstall Datadog RUM using Windows' Apps & Features tool.
