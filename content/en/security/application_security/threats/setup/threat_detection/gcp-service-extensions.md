@@ -28,11 +28,11 @@ You can enable application security with GCP Service Extensions within GCP Cloud
 
 Before you begin, ensure you have:
 
-- The [Datadog Agent][1] installed and configured for your application's operating system or container, cloud, or virtual environment.
-- [Configured the Agent with Remote Configuration][2] to enable blocking attackers using the Datadog UI.
+- Installed and configured the [Datadog Agent][1] for your application's operating system or container, cloud, or virtual environment.
+- [Configured Remote Configuration on the Agent][2] to enable blocking attackers through the Datadog UI.
 - In your GCP project, either the project `owner` or `editor` role, or the relevant Compute Engine IAM roles: `compute.instanceAdmin.v1` (to create instances) and `compute.networkAdmin` (to set up load balancing).
-- A GCP project with a Cloud Load Balancer configured for your services. Your Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
-- The Compute Engine API and Network Services API enabled:
+- A GCP project with a Cloud Load Balancer configured for your services. The Cloud Load Balancer must be one of the [Application Load Balancers that supports Traffic Callouts][3].
+- Enabled the Compute Engine API and Network Services API:
   
   ```bash
   gcloud services enable compute.googleapis.com networkservices.googleapis.com
@@ -40,52 +40,46 @@ Before you begin, ensure you have:
 
 ## Enabling threat detection
 
-To set up the ASM Service Extension in your GCP environment, follow the instructions by either using the Google Cloud Console or Terraform scripts.
+To set up the ASM Service Extension in your GCP environment, use the Google Cloud Console or Terraform scripts and complete the following steps.
 
-**Note**: Google Cloud provides guides to create [a callout backend service][4] 
-and [create a Service Extension as a traffic extension][5].
+**Note**: Google Cloud provides guides to create [a callout backend service][4] and [create a Service Extension as a traffic extension][5].
 
 {{< tabs >}}
 {{% tab "Google Cloud Console" %}}
 
-To integrate a Service Extension with ASM using the Google Cloud Console, complete the following steps:
+1. Create a VM Compute instance using the [Datadog ASM Service Extensions Docker image][1].
 
-  1. **Create a VM Compute instance** using the Datadog ASM Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][1].
-
-  See the [Configuration](#configuration) section below for available environment variables when setting up your VM instance.
+    See [Configuration](#configuration) for available environment variables when setting up your VM instance.
 
   <div class="alert alert-info">
-    <strong>Note:</strong> Be sure to update accordingly your Firewall rules to allow the Load Balancer to communicate with the Callout VM instance. The same also applies to the Datadog Agent.
+    <strong>Note:</strong> Be sure to update your Firewall rules to allow the Load Balancer and Datadog agent to communicate with the Callout VM instance.
   </div>
 
-2. **Add the VM to an unmanaged instance group**
+2. Add the VM to an unmanaged instance group.
   
     Specify `http:80` and `grpc:443` (or your configured values) for the port mappings of the instance group.
 
-3. **Create a backend service and add your instance group**
-
-    Create a callout backend service with the following settings:
+3. Create a backend service with the following settings:
     - Protocol: `HTTP2`
     - Port name: `grpc`
     - Region: Select your region
     - Health check port number: `80` (or your configured value)
-    Add the instance group with the service extension VM as a backend to this backend service.
 
-4. **Configure the Traffic Service Extension callout**
+4. Add the instance group with the service extension VM as a backend to this backend service.
 
-    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension
-    2. Select your load balancer type
-    3. Select `Traffic extensions` as the type
-    4. Select your forwarding rules
+5. Configure the Traffic Service Extension callout:
+    1. In the Google Cloud console, go to **Service Extensions** and create a new Service Extension.
+    2. Select your load balancer type.
+    3. Select `Traffic extensions` as the type.
+    4. Select your forwarding rules.
   <br><br>
 
-    
-  5. **Create an Extension Chain**
+6. Create an Extension Chain
 
-      1. To send all traffic to the extension, insert `true` in the **Match condition**
-      2. For **Programability type**, select `Callouts`
-      3. Select the backend service you created in the previous step
-      4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**)
+    1. To send all traffic to the extension, insert `true` in the **Match condition**.
+	  2. For **Programability type**, select `Callouts`.
+	  3. Select the backend service you created in the previous step.
+	  4. Select all **Events** from the list where you want ASM to run detection (Request Headers and Response Headers are **required**).
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -105,16 +99,30 @@ You can use Terraform to automate the deployment of the ASM GCP Service Extensio
 - A Datadog API key (used to configure the Datadog Agent)
 - An existing GCP Cloud Load Balancer for your application
 
-### Deployment steps
+### Infrastructure Overview
+
+The Terraform deployment will create the following components:
+- A Datadog Agent VM for collecting traces with security events
+- A VM running the Datadog Service Extension Callout in a container
+- A firewall rule allowing communication between the extension and the Agent
+- An unmanaged instance group containing the Service Extension VM
+- A backend service configured for HTTP/2 with health checks
+- A service extension connected to your existing load balancer
+
+### Deployment Steps
 
 #### 1. Create Terraform configuration files
 
-You can import the following module to your project. It's installing a the service extension on a **Global External Load Balancer**:
+The ASM Service Extension deployment requires several components that work together. We'll create a Terraform module that encapsulates all these components, making the deployment process repeatable and easier to maintain.
+
+First, create a new directory and the necessary Terraform files:
 
 ```bash
 mkdir gcp-asm-service-extension && cd gcp-asm-service-extension
 touch main.tf variables.tf
 ```
+
+Next, add the following code to your `main.tf` file. This file defines all the infrastructure components needed for the ASM Service Extension, including network rules, VM instances, and load balancer configuration:
 
 ```hcl
 # main.tf
@@ -332,6 +340,8 @@ resource "google_network_services_lb_traffic_extension" "default" {
 }
 ```
 
+Now add the following content to the `variables.tf` file. This file defines all the required input variables for your Terraform configuration:
+
 ```hcl
 # variables.tf
 
@@ -402,7 +412,7 @@ variable "load_balancer_forwarding_rule" {
 ```
 
 ##### Module configuration
-Insert into your terraform project the module created in the previous step.
+Finally, include the module in your main Terraform project. This example shows how to reference the module you created above:
 
 ```hcl
 # main.tf
@@ -420,19 +430,15 @@ module "service_extension" {
 
 #### 2. Initialize and apply the Terraform configuration
 
+Once you've created all the necessary files, deploy the infrastructure by running these commands in the directory where your Terraform files are located:
+
 ```bash
 terraform init
 terraform plan
 terraform apply
 ```
 
-This deployment creates:
-- A Datadog Agent VM for collecting traces with security events
-- A VM running the Datadog Service Extension Callout in a container
-- A firewall rule allowing communication between the extension and the Agent
-- An unmanaged instance group containing the Service Extension VM
-- A backend service configured for HTTP/2 with health checks
-- A service extension connected to your existing load balancer
+### Post-deployment validation
 
 The service extension automatically inspects all traffic passing through your load balancer for security threats.
 
