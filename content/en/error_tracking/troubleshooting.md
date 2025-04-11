@@ -22,7 +22,9 @@ To be processed by Error Tracking, a span must have these attributes:
 - `error.message`
 - `error.stack`
 
-**Note**: The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages).
+<div class="alert alert-info">
+<strong>Note:</strong> The stack must have at least two lines and one *meaningful* frame (a frame with a function name and a filename in most languages).
+</div>
 
 This [example query][5] searches for spans meeting the criteria for inclusion in Error Tracking.
 

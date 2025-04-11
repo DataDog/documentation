@@ -19,11 +19,11 @@ You can define what data is included in Error Tracking in two ways:
 - [Rules](#rules-inclusion)
 - [Rate limits](#rate-limits)
 
-You can configure both rules and rate limits on the [**Error Tracking** > **Settings**][1] page. 
+You can configure both rules and rate limits on the [**Error Tracking** > **Settings**][1] page.
 
 ## Rules
 
-Rules allow you to select which errors are ingested into Error Tracking. They apply to both billable and non-billable errors. 
+Rules allow you to select which errors are ingested into Error Tracking. They apply to both billable and non-billable errors.
 
 Each rule consists of:
 - A scope: an inclusion filter, which contains a search query, such as `service:my-web-store`.
@@ -34,6 +34,20 @@ A given rule can be toggled on or off. An error event is included if it matches 
 Each error event is checked against the rules in order. The event is processed only by the first active rule it matches, and all subsequent rules are ignored. If the matched rule has an exclusion filter, the event is excluded; otherwise, the event is included.
 
 **Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
+
+{{% collapse-content title="Example" %}}
+Given a list of rules:
+- rule 1: env:prod
+    - exclusion filter 1-1: service:api
+    - exclusion filter 1-2: status:warn
+- rule 2: service:web
+- rule 3 (this rule is disabled): team:security
+- rule 4: service:foo
+
+The processing flow is as follows:
+{{< img src="error_tracking/error-tracking-filters-diagram.png" alt="Error Tracking Filters" style="width:75%;" >}}
+{{% /collapse-content %}}
+
 
 ### Evaluation order
 
@@ -54,7 +68,7 @@ To add a rule (inclusion filter):
 6. Click **Save Changes**
 7. Optionally, reorder the rules to change their [evaluation order](#evaluation-order). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
-{{< img src="logs/error_tracking/reorder_filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
+{{< img src="error-tracking/error_tracking/reorder_filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
 
 
 ## Rate limits
@@ -71,7 +85,7 @@ To set a rate limit:
 1. Edit the **errors/month** field.
 1. Click **Save Rate Limit**.
 
-{{< img src="logs/error_tracking/rate_limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
+{{< img src="error-tracking/error_tracking/rate_limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
 
 A `Rate limit applied` event is generated when you reach the rate limit. See the [Event Management documentation][4] for details on viewing and using events.
 
@@ -79,9 +93,41 @@ A `Rate limit applied` event is generated when you reach the rate limit. See the
 
 ## Monitoring usage
 
-You can monitor your Error Tracking on Logs usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs. 
+You can monitor your Error Tracking on Logs usage by setting up monitors and alerts for the `datadog.estimated_usage.error_tracking.logs.events` metric, which tracks the number of ingested error logs.
 
 This metric is available by default at no additional cost, and its data is retained for 15 months.
+
+## Dynamic Sampling
+
+Because Error Tracking billing is based on the number of errors, large increases in the errors for a single issue can quickly consume your Error Tracking budget. Dynamic Sampling protects you by establishing a threshold for the error rate per issue based on your daily rate limit and historical error volumes, sampling errors when that threshold is reached. Dynamic Sampling automatically deactivates when the error rate of your issue decreases below the given threshold.
+
+### Setup
+
+Dynamic Sampling is automatically enabled with Error Tracking with a default intake threshold based on your daily rate limit and historical volume.
+
+For best results, set up a daily rate limit on the [Error Tracking Rate Limits page][5]: Click **Edit Rate Limit** and enter a new value.
+
+{{< img src="error_tracking/dynamic-sampling-rate-limit.png" alt="Error Tracking Rate Limit" style="width:90%" >}}
+
+### Disable Dynamic Sampling
+
+Dynamic Sampling can be disabled on the [Error Tracking Settings page][4].
+
+{{< img src="error_tracking/dynamic-sampling-settings.png" alt="Error Tracking Dynamic Sampling Settings" style="width:90%" >}}
+
+### Monitor Dynamic Sampling
+
+A `Dynamic Sampling activated` event is generated when Dynamic Sampling is applied to an issue. See the [Event Management documentation][4] for details on viewing and using events.
+
+{{< img src="error_tracking/dynamic-sampling-event.png" alt="Error Tracking Rate Limit" style="width:90%" >}}
+
+#### Investigation and mitigation steps
+
+When Dynamic Sampling is applied, the following steps are recommended:
+
+- Check which issue is consuming your quota. The issue to which Dynamic Sampling is applied is linked in the event generated in Event Management.
+- If you'd like collect additional samples for this issue, raise your daily quota on the [Error Tracking Rate Limits page][5].
+- If you'd like to avoid collecting samples for this issue in the future, consider creating an exclusion filter to prevent additional events from being ingested into Error Tracking.
 
 ## Further Reading
 
@@ -90,3 +136,4 @@ This metric is available by default at no additional cost, and its data is retai
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /error_tracking/troubleshooting/?tab=java#errors-are-not-found-in-error-tracking
 [4]: /service_management/events/
+[5]: https://app.datadoghq.com/error-tracking/settings/rate-limits

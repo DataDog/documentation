@@ -24,6 +24,13 @@ Each item listed in the Error Tracking Explorer is an issue that contains high-l
     -   Graph of occurrences over time
     -   Number of occurrences in the selected time period
 
+Issue are also tagged as:
+- `New` if the issue was first seen less than two days ago and is in state **FOR REVIEW** (see [Issue States][5])
+- `Regression` if the issue was **RESOLVED** and occurred again in a newer version (see [Regression Detection][6])
+- `Crash` if the application crashed
+- Having a [Suspected Cause][3]
+[TODO]: <> (- Having a `Fix Available` (see AI Assistant).)
+
 ### Time range
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range" style="width:80%;" >}}
@@ -48,6 +55,38 @@ Click the Edit icon to see the list of available facets that you can show or hid
 
 {{< img src="/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
 
+### Issue level filters
+
+In addition to error events, Error Tracking offers issue level filters to refine the list of displayed issues.
+
+{{< img src="error_tracking/issue-level-filters.png" alt="Issue level filters in Error Tracking" style="width:100%;" >}}
+
+#### Sources
+
+Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display **All**, **Browser**, **Mobile**, or **Backend** issues in the explorer.
+
+For more granular filtering, you can narrow down issues by specific log sources or SDK, per programming language.
+
+#### Fix available
+
+Display only issues that have an AI generated fix available to quickly remediate problems.
+[TODO]: <> ((see AI Assistant).)
+
+#### Teams filters
+
+Issue Team Ownership helps you quickly identify issues and focus on relevant errors by using Git `CODEOWNERS`. Datadog will automatically filter your issues so your team can cut through noise and prioritize what matters.
+
+Issue ownership is derived from the `CODEOWNERS` files of your repositories. To use this feature, you need to link your Datadog teams to their GitHub counterparts. All errors coming from RUM and APM are eligible for Team Ownership.
+[TODO]: <> ((see AAA doc).)
+
+#### Assigned to
+
+Track and assign issues to yourself or the most knowledgeable team members, and easily refine the issue list by assignee.
+
+#### Suspected Cause
+
+[Suspected Cause][3] enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
+
 ## Inspect an issue
 
 Click on any issue to open the issue panel and see more information about it.
@@ -64,21 +103,19 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 ## Get alerted on new errors
 
-Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking generates a [Datadog event][1] whenever an issue is first seen in a given service and environment and, as a result, gives you the ability to be alerted in such cases by configuring [Event Monitors][2].
+Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][2])
 
-Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
+You can directly export your search query from the explorer to create an Error Tracking Monitor on the related scope:
 
 {{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
-
-## Suspected Cause
-
-[Suspected Cause][3] enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
-[2]: /monitors/types/event/
+[2]: /monitors/types/error-tracking/
 [3]: /error_tracking/suspected_causes
 [4]: /real_user_monitoring/explorer/search/#event-types
+[5]: /error_tracking/issue_states
+[6]: /error_tracking/regression_detection
