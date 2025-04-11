@@ -38,41 +38,21 @@ For each function, the following metrics are tracked:
 
 ## Bringing in your data source and building your queries
 
-Create a workspace and add a data source. In this example, credit cards and bill payments each have three data source cells filtering to the logs that are relevant to the analysis. For instructions on how to create a workspace and bring in your data source, see [Log Workspaces][1].
+Create a workspace and add a data source. In this example, credit cards and bill payments each have three data source cells, each filtering to the logs that are relevant to the analysis. For instructions on how to create a workspace and bring in your data source, see [Log Workspaces][1].
 
-{{< img src="/logs/workspace/use_cases/finance/credit_card_data_source.png" alt="Data source configuration for credit card transaction logs showing filters and query parameters" style="width:100%;" >}}
+{{< img src="/logs/workspace/use_cases/finance/finance_credit_card_data_source.png" alt="Data source configuration for credit card transaction logs showing filters and query parameters" caption="Data source cells for credit card transaction monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
 
-Here's a table showing the Credit Card data sources and their filter queries:
-
-| Data Source Name | Filter Query |
-|------------------|--------------|
-| **creditcards_totalrequest** | `@service:creditcards` `@endpoint:/ms/crdcd/v2/creditcardaccountdetails` `RequestStatus` |
-| **creditcards_technicalunsuccessful** | `@service:creditcards` `@endpoint:/ms/crdcd/v2/creditcardaccountdetails` `@logger.name:com.td.mobile.core.logging.hystrix.HystrixRequestLogFilter` `(TIMEOUT)` |
-| **creditcards_businessunsuccessful** | `@service:creditcards` `@endpoint:/ms/crdcd/v2/creditcardaccountdetails` `-(@level:INFO OR @level:WARN)` `-(@logger.name:com.td.mobile.core.logging.hystrix.HystrixRequestLogFilter (TIMEOUT))` |
-
-{{< img src="/logs/workspace/use_cases/finance/bill_payment_data_source.png" alt="Data source configuration for bill payment logs with relevant filters and query settings" style="width:100%;" >}}
-
-Here's a table showing the Bill Payment data sources and their filter queries:
-
-| Data Source Name | Filter Query |
-|------------------|--------------|
-| **bill_totalrequest** | `@service:billpay` (`@endpoint:/ms/bilpy/v*/sendpayment` OR `@endpoint:/ms/bilpy/v1/payments`) `@httpMethod:POST` `RequestStatus` |
-| **bill_successfulrequest** | `@service:billpay` (`@endpoint:/ms/bilpy/v*/sendpayment` OR `@endpoint:/ms/bilpy/v1/payments`) `billpay.ims.addPayment` |
-| **bill_businessunsuccessfulrequest** | `@service:billpay` (`@endpoint:/ms/bilpy/v*/sendpayment` OR `@endpoint:/ms/bilpy/v1/payments`) `@httpMethod:POST` (`@httpStatusCode:401` OR `*NumberFormatException*` OR `*payeeIsNotActive=true*` OR `field=*error*`) |
+{{< img src="/logs/workspace/use_cases/finance/finance_billpay_datasource.png" alt="Data source configuration for bill payment logs with relevant filters and query settings" caption="Data source cells for bill payment monitoring, showing query filters and parameters to isolate relevant financial log data."style="width:100%;" >}}
 
 With the data from your credit card and bill payment data sources, you can create an Analysis cell using SQL to calculate and compare key metrics for both processes. This analysis helps you track success rates, identify failure patterns, and monitor performance trends.
 
-{{< img src="/logs/workspace/use_cases/finance/sql_query_analysis_0.png" alt="SQL query Analysis cell showing metrics for credit card and bill payment transactions including success rates and failure percentages" style="width:100%;" >}}
+{{< img src="/logs/workspace/use_cases/finance/sql_query_analysis_0.png" alt="SQL query Analysis cell showing metrics for credit card and bill payment transactions including success rates and failure percentages" caption="SQL query Analysis cell displaying key metrics for credit card and bill payment transactions, highlighting success rates and failure percentages for financial monitoring"  style="width:100%;" >}}
 
 ## SQL query analysis
 
 ### Query purpose and structure
 
-This query calculates key metrics for two financial processes (Credit Card Details and Bill Payment), combining the results into a single comparative view.
-
-The query consists of two main parts connected by a UNION:
-1. Credit Card Details calculations
-2. Bill Payment calculations
+This query uses a UNION to combine key metrics for two financial processes (Credit Card Details and Bill Payment) into a single comparative view, making it easier to analyze performance across both functions.
 
 {{< code-block lang="sql" filename="Complete SQL query" collapsible="true" >}}
 
@@ -112,16 +92,8 @@ UNION
 ORDER BY Total DESC
 {{< /code-block >}}
 
-### Sample output
+{{% collapse-content title="Query breakdown" level="h4" expanded=false %}}
 
-This table allows for easy comparison of the performance of each function. By analyzing the data, you can identify areas for improvement, such as reducing technical failures or resolving business process issues. The following is a sample of what you might see from running the SQL analysis:
-
-| Function | Success | Business Failed | Technical Failed | Total | TechFail % |
-|----------|---------|-----------------|------------------|-------|------------|
-| Bill Payment | 1 | 0 | 0 | 2 | 0 |
-| CreditCard Details | 0 | 1 | 1 | 2 | 50 |
-
-### Query breakdown
 
 {{< code-block lang="sql" filename="Part 1: Credit Card Details" collapsible="true" >}}
 SELECT 'CreditCard Details' AS "Function",
@@ -141,11 +113,11 @@ FROM (
 {{< /code-block >}}
 
 The SQL for Credit Card Details calculates metrics for credit card processing by:
-- Counting total requests from the `creditcards_totalrequest` data source
-- Counting technical failures from the `creditcards_technicalunsuccessful` data source
-- Counting business failures from the `creditcards_businessunsuccessful` data source
-- Calculating successful requests by subtracting failures from total
-- Computing the percentage of technical failures
+* Counting total requests from the `creditcards_totalrequest` data source
+* Counting technical failures from the `creditcards_technicalunsuccessful` data source
+* Counting business failures from the `creditcards_businessunsuccessful` data source
+* Calculating successful requests by subtracting failures from total
+* Computing the percentage of technical failures
 
 {{< code-block lang="sql" filename="Part 2: Bill Payment" collapsible="true" >}}
 SELECT 'Bill Payment' AS "Function",
@@ -170,6 +142,21 @@ The SQL for Bill Payment calculates metrics for bill payment processing by:
 * Counting business failures from the `bill_businessunsuccessfulrequest` data source
 * Calculating technical failures by subtracting successful and business failures from total
 * Computing the percentage of technical failures
+
+
+{{% /collapse-content %}}
+
+### Query output
+
+The query from the Analysis cell populates a table, allowing for easy comparison of each function's performance. By analyzing this data, you can identify areas for improvement, such as reducing technical failures or resolving business process issues. 
+
+The following is a sample of what you might see from running the SQL analysis:
+
+| Function | Success | Business Failed | Technical Failed | Total | TechFail % |
+|----------|---------|-----------------|------------------|-------|------------|
+| Bill Payment | 1 | 0 | 0 | 2 | 0 |
+| CreditCard Details | 0 | 1 | 1 | 2 | 50 |
+
 
 ## Visualizing the data
 
