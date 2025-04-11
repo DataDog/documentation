@@ -4,6 +4,10 @@ beta: true
 code_lang: windows_iis
 type: multi-code-lang
 code_lang_weight: 6
+further_reading:
+- link: '/real_user_monitoring/browser/setup/server/'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
@@ -11,15 +15,6 @@ code_lang_weight: 6
 ## Overview
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
-
-## Limitations
-
-Keep in mind the following limitations when using this setup:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
 
 ## Prerequisites
 
@@ -72,10 +67,16 @@ To update your RUM Application:
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
 
+### Limitations
+See other [Limitations][5].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
+[5]: /real_user_monitoring/browser/setup/server/#limitations

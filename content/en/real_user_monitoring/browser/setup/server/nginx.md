@@ -4,6 +4,10 @@ beta: true
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 5
+further_reading:
+- link: '/real_user_monitoring/browser/setup/server/'
+  tag: 'Documentation'
+  text: 'Browser Monitoring Auto-Instrumentation (Server-Side)'
 ---
 
 <div class="alert alert-info">To try the preview for RUM Auto-Instrumentation, follow the instructions on this page.</div>
@@ -122,7 +126,9 @@ Since the module is in Preview, it's possible NGINX may stop serving requests, p
 If you notice that RUM is not being injected into HTML pages, consider the following potential causes:
 
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
-- **Upstream server has end-to-end encryption or content compression**: See [Limitations](#limitations).
+
+### Limitations
+See other [Limitations][40].
 
 ## Reference
 
@@ -147,6 +153,9 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 | 1.27.3 | [ngx_http_datadog-amd64-1.27.3][35] | [ngx_http_datadog-arm64-1.27.3][36] |
 | 1.27.4 | [ngx_http_datadog-amd64-1.27.4][37] | [ngx_http_datadog-arm64-1.27.4][38] |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/advanced_configuration/
 [2]: /agent/
@@ -187,3 +196,4 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 [37]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
 [38]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
 [39]: https://nginx.org/en/docs/ngx_core_module.html#error_log
+[40]: /real_user_monitoring/browser/setup/server/#limitations
