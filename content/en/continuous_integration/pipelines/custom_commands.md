@@ -169,15 +169,15 @@ These options are available for the `datadog-ci span` command:
 **Example**: `Build Step`
 
 `--start-time`
-: Timestamp in milliseconds representing the start time of the span.<br/>
+: Timestamp in milliseconds since the unix epoch representing the start time of the span.<br/>
 **Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
 
 `--end-time`
-: Timestamp in milliseconds representing the end time of the span.<br/>
+: Timestamp in milliseconds since the unix epoch representing the end time of the span.<br/>
 **Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
 
 `--duration`
-: Duration amount as a number of milliseconds. Using this, the end time is the current time when executing this command.<br/>
+: Duration amount in milliseconds. Using this, the end time is the current time when executing this command.<br/>
 **Note**: There are two ways to specify start and end time, by using `--start-time` and `--end-time` or using `--duration`.
 
 `--tags`
