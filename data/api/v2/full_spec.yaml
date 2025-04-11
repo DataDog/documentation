@@ -42503,8 +42503,8 @@ paths:
       description: Search for incidents matching a certain query.
       operationId: SearchIncidents
       parameters:
-      - $ref: '#/components/parameters/IncidentSearchIncludeQueryParameter'
       - $ref: '#/components/parameters/IncidentSearchQueryQueryParameter'
+      - $ref: '#/components/parameters/IncidentSearchIncludeQueryParameter'
       - $ref: '#/components/parameters/IncidentSearchSortQueryParameter'
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageOffset'
