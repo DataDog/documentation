@@ -31,9 +31,45 @@ Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2
 
 The setup below uses the [Webhook notification service][5] of Argo CD to send notifications to Datadog.
 
-First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
+First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`. For sending notifications, the setup is different depending on wether or not you installed Argo CD using Helm or the regular setup.
 
 {{< tabs >}}
+{{% tab "Helm" %}}
+If you used Helm to install Argo CD, add the following configuration to your `values.yaml`:
+
+```yaml
+notifications:
+  notifiers:
+    service.webhook.cd-visibility-webhook: |
+      url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+      headers:
+        - name: "DD-CD-PROVIDER-ARGOCD"
+          value: "true"
+        - name: "Content-Type"
+          value: "application/json"
+        - name: "DD-API-KEY"
+          value: $dd-api-key
+  templates:
+    template.cd-visibility-template: |
+      webhook:
+        cd-visibility-webhook:
+          method: POST
+          body: |
+            {
+              "app": {{toJson .app}},
+              "context": {{toJson .context}},
+              "service_type": {{toJson .serviceType}},
+              "recipient": {{toJson .recipient}},
+              "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
+            }
+  triggers:
+    trigger.cd-visibility-trigger: |
+      - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'OutOfSync'] and app.status.health.status in ['Healthy', 'Degraded']
+        send: [cd-visibility-template]
+      - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
+        send: [cd-visibility-template]
+```
+{{% /tab %}}
 {{% tab "Direct ConfigMap" %}}
 Modify the `argocd-notifications-cm` ConfigMap to create the notification service, template, and trigger to send notifications to Datadog:
 
@@ -69,42 +105,6 @@ data:
       send: [cd-visibility-template]
     - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
       send: [cd-visibility-template]
-```
-{{% /tab %}}
-{{% tab "Helm Values" %}}
-If you used Helm to install Argo CD, add the following configuration to your `values.yaml`:
-
-```yaml
-notifications:
-  notifiers:
-    service.webhook.cd-visibility-webhook: |
-      url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
-      headers:
-        - name: "DD-CD-PROVIDER-ARGOCD"
-          value: "true"
-        - name: "Content-Type"
-          value: "application/json"
-        - name: "DD-API-KEY"
-          value: $dd-api-key
-  templates:
-    template.cd-visibility-template: |
-      webhook:
-        cd-visibility-webhook:
-          method: POST
-          body: |
-            {
-              "app": {{toJson .app}},
-              "context": {{toJson .context}},
-              "service_type": {{toJson .serviceType}},
-              "recipient": {{toJson .recipient}},
-              "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
-            }
-  triggers:
-    trigger.cd-visibility-trigger: |
-      - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'OutOfSync'] and app.status.health.status in ['Healthy', 'Degraded']
-        send: [cd-visibility-template]
-      - when: app.status.operationState.phase == 'Running' and app.status.health.status in ['Healthy', 'Degraded']
-        send: [cd-visibility-template]
 ```
 {{% /tab %}}
 {{< /tabs >}}
