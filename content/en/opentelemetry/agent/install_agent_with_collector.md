@@ -18,7 +18,9 @@ further_reading:
 
 Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector using Helm.
 
-<div class="alert alert-info">If you need OpenTelemetry components beyond what's provided in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to bring-your-Otel-Components to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="#included-components">Included components</a>.</div>
+<div class="alert alert-info">
+  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see <a href="/opentelemetry/agent/#opentelemetry-collector-components">OpenTelemetry Collector components</a>.
+</div>
 
 ## Requirements
 
@@ -697,25 +699,6 @@ env:
       deployment.environment=$(OTEL_K8S_NAMESPACE)
    {{< /code-block >}}
 
-### Run the application
-
-To start generating and forwarding observability data to Datadog, you need to deploy the Calendar application with the OpenTelemetry SDK using Helm.
-
-1. Run the following `helm` command from the `calendar/` folder:
-```shell
-helm upgrade -i <CALENDAR_RELEASE_NAME> ./deploys/calendar/
-```
-1. This Helm chart deploys the sample Calendar application as a ReplicaSet.
-1. To test that the Calendar application is running correctly, execute the following command from another terminal window:
-   ```shell
-   curl localhost:9090/calendar
-   ```
-1. Verify that you receive a response like:
-   ```text
-   {"date":"2024-12-30"}
-   ```
-Each call to the Calendar application results in metrics, traces, and logs being forwarded to the Datadog backend.
-
 ## Explore observability data in Datadog
 
 Use Datadog to explore the observability data for the sample Calendar app.
@@ -761,69 +744,6 @@ Monitor your runtime (JVM) metrics for your applications.
 View metrics from the DDOT Collector to monitor the Collector health.
 
 {{< img src="/opentelemetry/embedded_collector/dashboard.png" alt="View Collector health metrics from the OTel dashboard." style="width:100%;" >}}
-
-## Included components
-
-By default, the Datadog Agent with DDOT Collector ships with the following Collector components. You can also see the list in [YAML format][11].
-
-{{% collapse-content title="Receivers" level="p" %}}
-
-- [filelogreceiver][16]
-- [fluentforwardreceiver][17]
-- [hostmetricsreceiver][18]
-- [jaegerreceiver][19]
-- [otlpreceiver][20]
-- [prometheusreceiver][21]
-- [receivercreator][22]
-- [zipkinreceiver][23]
-- [nopreceiver][24]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Processors" level="p" %}}
-
-- [attributesprocessor][25]
-- [batchprocessor][26]
-- [cumulativetodeltaprocessor][27]
-- [filterprocessor][28]
-- [groupbyattributeprocessor][29]
-- [k8sattributesprocessor][30]
-- [memorylimiterprocessor][31]
-- [probabilisticsamplerprocessor][32]
-- [resourcedetectionprocessor][33]
-- [resourceprocessor][34]
-- [routingprocessor][35]
-- [tailsamplingprocessor][36]
-- [transformprocessor][37]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Exporters" level="p" %}}
-
-- [datadogexporter][38]
-- [debugexporter][39]
-- [otlpexporter][40]
-- [otlphttpexporter][41]
-- [sapmexporter][42]
-- [nopexporter][43]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Connectors" level="p" %}}
-
-- [datadogconnector][44]
-- [spanmetricsconnector][45]
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="Extensions" level="p" %}}
-
-- [healthcheckextension][46]
-- [observer][47]
-- [pprofextension][48]
-- [zpagesextension][49]
-
-{{% /collapse-content %}}
 
 ## Further reading
 
