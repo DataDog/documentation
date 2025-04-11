@@ -659,49 +659,11 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In this example, the Calendar application is already configured with unified service tagging [as defined in Helm chart][15]:
-
-1. Go to the Calendar application's Deployment manifest file:
-   ```shell
-   ./deploys/calendar/templates/deployment.yaml
-   ```
-1. The following environment variables configure the OTLP endpoint:
-   {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
-env:
-  ...
-  - name: OTEL_SERVICE_NAME
-    value: {{ include "calendar.fullname" . }}
-  - name: OTEL_K8S_NAMESPACE
-    valueFrom:
-      fieldRef:
-        apiVersion: v1
-        fieldPath: metadata.namespace
-  - name: OTEL_K8S_NODE_NAME
-    valueFrom:
-      fieldRef:
-        apiVersion: v1
-        fieldPath: spec.nodeName
-  - name: OTEL_K8S_POD_NAME
-    valueFrom:
-      fieldRef:
-        apiVersion: v1
-        fieldPath: metadata.name
-  - name: OTEL_EXPORTER_OTLP_PROTOCOL
-    value: 'grpc'
-  - name: OTEL_RESOURCE_ATTRIBUTES
-    value: >-
-      service.name=$(OTEL_SERVICE_NAME),
-      k8s.namespace.name=$(OTEL_K8S_NAMESPACE),
-      k8s.node.name=$(OTEL_K8S_NODE_NAME),
-      k8s.pod.name=$(OTEL_K8S_POD_NAME),
-      k8s.container.name={{ .Chart.Name }},
-      host.name=$(OTEL_K8S_NODE_NAME),
-      deployment.environment=$(OTEL_K8S_NAMESPACE)
-   {{< /code-block >}}
+<!-- TODO: Placeholder for pod-service label enablement -->
 
 ## Explore observability data in Datadog
 
-Use Datadog to explore the observability data for the sample Calendar app.
+Use Datadog to explore the observability data for your application.
 
 ### Fleet automation
 
