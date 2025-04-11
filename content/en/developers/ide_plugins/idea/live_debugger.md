@@ -64,6 +64,10 @@ Log probes can be enabled or disabled by right-clicking and selecting the approp
 ## Prerequisites
 The Live Debugger feature supports Java and Python  and is subject to the same setup requirements as [Dynamic Instrumentation][1].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /dynamic_instrumentation/
 [2]: /logs/explorer/
 [3]: /dynamic_instrumentation/expression-language/
