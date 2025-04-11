@@ -96,5 +96,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
-[6]: https://docs.datadoghq.com/account_management/billing/usage_attribution/
+[6]: /account_management/billing/usage_attribution/
 
