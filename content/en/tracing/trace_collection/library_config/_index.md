@@ -42,9 +42,9 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TRACE_SAMPLE_RATE`
 : **Default**: `-1`. If unset, the tracer defers to the Datadog Agent to control sample rate. <br>
-**Supported Input**: A float between 0.0 and 1.0, inclusive.  <br>
+**Supported Input**: A number between 0.0 and 1.0, inclusive. <br>
 **Caveats**: This variable is deprecated in favor of `DD_TRACE_SAMPLING_RULES`, which provides more flexible and granular sampling control.  <br>
-**Description**: Controls the trace ingestion sample rate between the Datadog Agent and the backend. Must be a float between 0.0 and 1.0, where 1.0 means all traces are sent to the backend and 0.0 means none are sent. This setting applies globally to all traces and does not support per-service or per-operation targeting.
+**Description**: Controls the trace ingestion sample rate between the Datadog Agent and the backend. Must be a number between 0.0 and 1.0, where 1.0 means all traces are sent to the backend and 0.0 means none are sent. This is precise up to 6 digits, applies globally to all traces, and does not support per-service or per-operation targeting. 
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `null`. If unset or no rules match, the tracer defers to the Datadog Agent to dynamically adjust sample rate across traces.  <br>
