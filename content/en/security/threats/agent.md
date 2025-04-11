@@ -1,5 +1,5 @@
 ---
-description: Agent expression attributes and operators for CSM Threat Rules
+description: Agent expression attributes and operators for CSM Threats Rules
 disable_edit: true
 further_reading:
 - link: /security/cloud_workload_security/getting_started/
