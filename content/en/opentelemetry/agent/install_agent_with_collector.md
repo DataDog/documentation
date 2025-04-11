@@ -126,8 +126,6 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
         pullPolicy: Always
 {{< /code-block >}}
 
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
-
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
 
 3. Enable the OpenTelemetry Collector:
@@ -275,8 +273,6 @@ agents:
     doNotCheckTag: true
 ...
 {{< /code-block >}}
-
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
 
