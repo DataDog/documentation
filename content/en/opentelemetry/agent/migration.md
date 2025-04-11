@@ -248,48 +248,6 @@ datadog:
     release: helm_release
 {{< /code-block >}}
 
-{{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
-Your `datadog-values.yaml` file should look something like this:
-{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
-agents:
-  image:
-    repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
-    doNotCheckTag: true
-
-datadog:
-  site: datadoghq.com
-  apiKeyExistingSecret: datadog-secret
-  appKeyExistingSecret: datadog-secret
-  logLevel: info
-
-  otelCollector:
-    enabled: true
-    ports:
-      - containerPort: "4317"
-        hostPort: "4317"
-        name: otel-grpc
-      - containerPort: "4318"
-        hostPort: "4318"
-        name: otel-http
-  apm:
-    portEnabled: true
-    peer_tags_aggregation: true
-    compute_stats_by_span_kind: true
-    peer_service_aggregation: true
-  orchestratorExplorer:
-    enabled: true
-  processAgent:
-    enabled: true
-    processCollection: true
-
-  podLabelsAsTags:
-    app: kube_app
-    release: helm_release
-   {{< /code-block >}}
-
-{{% /collapse-content %}}
-
 ## Deploy the Agent with OpenTelemetry Collector
 
 1. Install or upgrade the Datadog Agent with OpenTelemetry Collector to your Kubernetes environment:
