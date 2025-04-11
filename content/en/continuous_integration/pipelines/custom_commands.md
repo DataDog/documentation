@@ -20,7 +20,7 @@ Custom commands provide a way to trace individual commands in your CI pipelines,
 
 Custom commands work with the following CI providers:
 
-- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions, see [Trace a command](#trace-a-command-in-github-actions).
+- GitHub.com (SaaS) with datadog-ci CLI >= 2.40. For sending custom commands in GitHub Actions, see [Known issue with Github Actions](#known-issue-with-github-actions).
 - GitLab (SaaS or self-hosted >= 14.1) with datadog-ci CLI >= 2.40.
 - Jenkins with the Datadog plugin >= v3.2.0
 - CircleCI
@@ -36,9 +36,9 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-## Trace a command
+## Trace a command line
 
-To trace a command, run:
+To trace a command line, run:
 
 {{< code-block lang="shell" >}}
 datadog-ci trace [--name <name>] -- <command>
@@ -108,7 +108,30 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 {{< /site-region >}}
 
-## Trace a command in GitHub Actions
+## Trace a command block
+
+It is possible to trace multiple command lines at once by manually specifying the start and end timestamps (or the duration).
+
+{{< code-block lang="shell" >}}
+datadog-ci trace span [--name <name>] [--start-time <timestamp-ms>] [--end-time <timestamp-ms>] # [--duration <duration-ms>] can be used instead of start / end time
+{{< /code-block >}}
+
+Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
+
+{{< site-region region="us,us3,eu,ap1" >}}
+<pre>
+<code>
+DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace span \
+--name "Build Step" \
+--duration 10000
+</code>
+</pre>
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+### Known issue with Github Actions
 
 If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][3]),
 the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
@@ -136,29 +159,6 @@ the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to t
         steps:
         - run: datadog-ci trace ...
     ```
-
-## Trace multiple commands
-
-It is possible to trace multiple commands at once by manually specifying the start and end timestamps (or the duration).
-
-{{< code-block lang="shell" >}}
-datadog-ci trace span [--name <name>] [--start-time <timestamp-ms>] [--end-time <timestamp-ms>] # [--duration <duration-ms>] can be used instead of start / end time
-{{< /code-block >}}
-
-Specify a valid [Datadog API key][2] in the `DATADOG_API_KEY` environment variable. For example:
-
-{{< site-region region="us,us3,eu,ap1" >}}
-<pre>
-<code>
-DATADOG_API_KEY=&lt;key&gt; DATADOG_SITE={{< region-param key="dd_site" >}} datadog-ci trace span \
---name "Build Step" \
---duration 10000
-</code>
-</pre>
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ### Configuration settings
 
