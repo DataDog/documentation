@@ -31,7 +31,7 @@ Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2
 
 The setup below uses the [Webhook notification service][5] of Argo CD to send notifications to Datadog.
 
-First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`. For sending notifications, the setup is different depending on wether or not you installed Argo CD using Helm or the regular setup.
+First, add your [Datadog API Key][11] in the `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`. For sending notifications, the setup is different depending on whether you installed Argo CD using Helm or the regular setup (ConfigMap).
 
 {{< tabs >}}
 {{% tab "Helm" %}}
