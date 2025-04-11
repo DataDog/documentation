@@ -3852,6 +3852,11 @@ menu:
       identifier: dyninst_explang
       parent: dyninst
       weight: 902
+    - name: Live Debugger
+      url: live_debugger/
+      identifier: live_debugger
+      parent: tracing
+      weight: 9
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing
