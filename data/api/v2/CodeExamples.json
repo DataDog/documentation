@@ -861,6 +861,20 @@
       "description": "Update Okta account returns \"OK\" response"
     }
   ],
+  "CreateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create on-call schedule returns \"Created\" response"
+    }
+  ],
+  "UpdateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update on-call schedule returns \"OK\" response"
+    }
+  ],
   "CreateOpsgenieService": [
     {
       "group": "opsgenie_integration",

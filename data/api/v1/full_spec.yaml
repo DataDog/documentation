@@ -16900,6 +16900,7 @@ components:
       - assertFromJavascript
       - assertPageContains
       - assertPageLacks
+      - assertRequests
       - click
       - extractFromJavascript
       - extractVariable
@@ -16928,6 +16929,7 @@ components:
       - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
+      - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
