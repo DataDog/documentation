@@ -67,7 +67,9 @@ Enable and disable Live Debugger on a service using one of these methods:
 
 
 ## Relationship between Live Debugger & Dynamic Instrumentation
-Live Debugger and Dynamic Instrumentation are enabled or disabled together on the same service and environment, because Live Debugger relies on Dynamic Instrumentation's underlying functionality. In addition to logs, Dynamic Instrumentation allows users to capture other custom telemetry (spans, span tags, and metrics) from the Datadog platform. The key difference is that Live Debugger logpoints expire automatically after a set time period, while Dynamic Instrumentations will remain active until manually deactivated.
+Due to shared underlying technology, Live Debugger and Dynamic Instrumentation are always enabled or disabled together on the same service and environment. 
+
+Dynamic Instrumentation also allows users to create logpoints, as well as other custom instrumentation (spans, span tags, and metrics). The key difference is that Live Debugger logpoints expire automatically after a set time period, while Dynamic Instrumentations remain active until manually deactivated.
 
 When you enable or disable Live Debugger:
 - The same action applies to Dynamic Instrumentation for that service and environment
@@ -78,9 +80,9 @@ When you enable or disable Live Debugger:
 
 Enabling Live Debugger and Dynamic Instrumentation on a service does not trigger any data capture or performance impact by itself. Data capture only begins and continues while there are active Debug Sessions or dynamic instrumentations on that service.
 
-**Performance Impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance. Sampling logic, rate limits, and built-in budgets prevent runaway data capture. The system samples logs with variable capture at 1 per second, while simple logs (without variable capture) have a higher sampling rate.
+**Performance Impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance. Sampling logic, rate limits, and built-in budgets prevent runaway data capture. The system limits logs with variable capture to 1 per second, while logs without variable capture are allowed a higher sampling rate (due to less overhead).
 
-**Pricing Impact**: Capturing logs with Live Debugger has the same billing implications as capturing logger lines from your source code, based on data ingestion and indexing. Debug Sessions automatically expire after the set time period, which limits unnecessary data accumulation and costs. Monitor your Datadog Plan & Usage page for any unexpected increases after utilizing a new feature.
+**Pricing Impact**: Logs captured by Datadog are all billed the same way, whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your Datadog Plan & Usage page for any unexpected increases after utilizing a new feature.
 
 ## Using Live Debugger
 
@@ -107,7 +109,7 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 2. Click **Create Debug Session**.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [Dynamic Instrumentation expression language][2].
-5. Optionally enable "Capture Variables" to collect all execution context (this feature is rate-limited to one hit per second).
+5. Optionally enable "Capture Variables" to collect all execution context (this feature is rate-limited to 1 hit per second).
 6. Optionally, define a condition for when the logs should be emitted.
 
 Note: Some feature limitations may apply depending on the service's runtime language. See the specific Dynamic Instrumentation [runtime language page][17] for more details.
@@ -122,7 +124,7 @@ Live Debugger data might contain sensitive information, especially when using th
 ## Limitations
 
 - Live Debugger supports the [same runtime languages][17] as Dynamic Instrumentation.
-- Logpoints with "Capture Variables" enabled are rate-limited to one hit per second.
+- Logpoints with "Capture Variables" enabled are rate-limited to 1 hit per second.
 - Regular logpoints (without variable capture) are rate-limited to 5000 executions per second per service instance.
 
 ## Further Reading
