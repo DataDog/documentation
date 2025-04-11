@@ -46,11 +46,16 @@ Attacker clustering is computed using the following request attributes:
 * OS name
 * OS version
 * User agent header
+* HTTP request headers (for example, `accept-encoding`, `content-type`)
 * [Datadog attacker fingerprinting][2]
 
 When the attacker attributes are identified, they are displayed on the signal side panel and **Signals** page. Attacker attributes can be a combination of the attributes listed above.
 
 {{< img src="security/application_security/threats/attacker-attributes.png" alt="Screenshot of an ASM signals with attacker attributes identified"  >}}
+
+### Custom HTTP request headers
+
+If you want to use custom HTTP request headers for attacker clustering, they need to be added under the path `@http.request.headers` in your traces. You can add custom headers to your traces by configuring the tracer with the `DD_TRACE_REQUEST_HEADER_TAGS` environment variable. For more information about this configuration, see [Configure the Datadog Tracing Library][5].
 
 ## Attacker clustering mechanism
 
@@ -70,3 +75,4 @@ The attacker clustering attributes selected are then shown as regular expression
 [2]: /security/application_security/threats/attacker_fingerprint
 [3]: /security/application_security/threats/event_rules
 [4]: /security/application_security/threats/security_signals/
+[5]: /tracing/trace_collection/library_config/
