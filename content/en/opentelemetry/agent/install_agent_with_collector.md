@@ -140,25 +140,6 @@ By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/dat
 
 The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
 
-To explicitly override the default ports, use `features.otelCollector.ports` parameter:
-
-{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
-  ...
-  # Enable Features
-  features:
-    otelCollector:
-      enabled: true
-      ports:
-        - containerPort: 4317
-          hostPort: 4317
-          name: otel-grpc
-        - containerPort: 4318
-          hostPort: 4318
-          name: otel-http
-{{< /code-block >}}
-
-<div class="alert alert-warning">When configuring ports <code>4317</code> and <code>4318</code>, you must use the default names <code>otel-grpc</code> and <code>otel-http</code> respectively to avoid port conflicts.</div>
-
 4. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-danger">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your CSM before proceeding.</div>
