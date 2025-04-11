@@ -74,10 +74,9 @@ The following resources have been added:
 2. The `cd-visibility-template` defines what to send in the request for the `cd-visibility-webhook` service.
 3. The `cd-visibility-trigger` defines when to send the notification, and it references the `cd-visibility-template`.
 
-<div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
-If your Argo CD application source is not a defined commit SHA (for example, if you are using Helm repositories), adjust the body by removing that line and the comma in the previous line.
-</div>
+The `commit_metadata` field is optional and can be used to enrich the deployment with Git information. It should be removed (together with the comma in the previous line) in the following cases:
+- You are already syncing your repository information to Datadog (see [Synchronize repository metadata to Datadog][20]).
+- Your Argo CD application source does not have a defined commit SHA (for example, if you are using Helm repositories).
 
 After the notification service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
@@ -220,7 +219,7 @@ metadata:
 
 ## Visualize deployments in Datadog
 
-The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
+The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment has finished. For more information, see [Explore CD Visibility Deployments][10].
 
 ## Troubleshooting
 
@@ -250,3 +249,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [17]: https://argo-cd.readthedocs.io/en/stable/user-guide/best_practices/#separating-config-vs-source-code-repositories
 [18]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [19]: https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#resource-hooks
+[20]: /continuous_delivery/features/code_changes_detection#synchronize-repository-metadata-to-datadog

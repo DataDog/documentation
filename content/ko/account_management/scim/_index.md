@@ -30,8 +30,6 @@ SCIM(System for Cross-domain Identity Management)은 사용자 프로비저닝 �
 - Datadog에 대한 Single sign-on (권장)
 - Managed Teams: ID 공급자 그룹에서 Datadog Teams를 만들고 Datadog Teams의 멤버십을 ID 공급자의 그룹 멤버십과 동기화된 상태로 유지
 
-**참고:** Managed Teams를 사용하려면 Okta IdP를 사용해야 하며 [지원팀][8]에 해당 기능에 대한 액세스를 요청해야 합니다.
-
 Datadog은 Microsoft Entra ID 및 Okta ID 공급자와 함께 SCIM 사용을 지원합니다. SCIM을 구성하려면 IdP 문서를 참조하세요.
 - [Microsoft Entra ID][2]
 - [Okta][3]

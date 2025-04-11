@@ -163,6 +163,7 @@ instances:
 
 The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
+[2]: /database_monitoring/guide/managed_authentication/?tab=aurora#configure-iam-authentication
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
@@ -211,7 +212,6 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /containers/docker/integrations/?tab=dockeradv2
