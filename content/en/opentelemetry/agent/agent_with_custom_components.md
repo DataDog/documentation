@@ -11,6 +11,10 @@ further_reading:
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+{{< /site-region >}}
+
 This guide explains how to build a Datadog Agent image with additional OpenTelemetry components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
 
 ## Prerequisites
@@ -37,12 +41,12 @@ Download the Dockerfile template:
    ```
 2. Download the Dockerfile
    ```shell
-   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/7.62.2/Dockerfiles/agent-ot/Dockerfile.agent-otel
+   curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
    ```
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:7.62.2-ot-beta-jmx`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Datadog Agent source code.
 - Creates a virtual environment and installs required Python packages.
@@ -56,7 +60,7 @@ Create and customize an OpenTelemetry Collector Builder (OCB) manifest file, whi
 
 1. Download the Datadog default manifest:
    ```shell
-   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/7.62.2/comp/otelcol/collector-contrib/impl/manifest.yaml
+   curl -o manifest.yaml https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/comp/otelcol/collector-contrib/impl/manifest.yaml
    ```
 2. Open the `manifest.yaml` file and add the additional OpenTelemetry components to the corresponding sections (extensions, exporters, processors, receivers, or connectors).
    The highlighted line in this example adds a [metrics transform processor][7]:
@@ -65,9 +69,9 @@ dist:
   module: github.com/DataDog/comp/otelcol/collector-contrib
   name: otelcol-contrib
   description: Datadog OpenTelemetry Collector
-  version: 0.115.0
+  version: {{< version key="collector_version" >}}
   output_path: ./comp/otelcol/collector-contrib/impl
-  otelcol_version: 0.115.0
+  otelcol_version: {{< version key="collector_version" >}}
 
 extensions:
 # You will see a list of extensions already included by Datadog
@@ -79,18 +83,18 @@ exporters:
 
 processors:
 # adding metrics transform processor to modify metrics
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.115.0
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v{{< version key="collector_version" >}}
 
 receivers:
-  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v0.115.0
-  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v0.115.0
-  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v0.115.0
+  - gomod: go.opentelemetry.io/collector/receiver/nopreceiver v{{< version key="collector_version" >}}
+  - gomod: go.opentelemetry.io/collector/receiver/otlpreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/filelogreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/fluentforwardreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/hostmetricsreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/jaegerreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/receivercreator v{{< version key="collector_version" >}}
+  - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/receiver/zipkinreceiver v{{< version key="collector_version" >}}
 
 connectors:
 # You will see a list of connectors already included by Datadog
@@ -100,13 +104,15 @@ connectors:
 
 ## Build and push the Agent image
 
+The custom Agent image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
+
 Build your custom Datadog Agent image and push it to a container registry.
 
 1. Build the image with Docker:
    ```shell
    docker build . -t agent-otel --no-cache \
-     --build-arg AGENT_VERSION="7.62.2-ot-beta-jmx" \
-     --build-arg AGENT_BRANCH="7.62.x"
+     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
+     --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
 2. Tag and push the image:
    ```shell

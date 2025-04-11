@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/threats/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with CSM Threats"
+  - link: "/security/research_feed"
+    tag: "Documentation"
+    text: "Security Research Feed"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -66,11 +69,11 @@ Datadog Cloud Security Management (CSM) delivers deep visibility, continuous con
 
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
-CSM leverages both the Datadog Agent and Agentless, and includes:
+CSM leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
 - [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
-- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
+- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
 {{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
@@ -87,7 +90,9 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-Use the [Explorers][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+For an overview of your Cloud Security and Application Security findings, sorted by importance, use the [Security Inbox][14].
+
+To get more detail, use the [Explorers][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
 
@@ -97,15 +102,17 @@ Use the [Explorers][7] to review and remediate your organization's security dete
 <div class="alert alert-warning">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Resource Catalog is in Preview.</div>
-
-Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
+Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
 
 {{< img src="infrastructure/resource_catalog/resource_catalog_infra.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 
 Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+
+## Learn about emerging threats and vulnerabilities
+
+Use the [Security Research Feed][15] to stay current with the latest security developments, with content managed by Datadog's Security Research and Detection Engineering teams. For more information, see the [Security Research Feed][16] documentation.
 
 ## Next steps
 
@@ -128,3 +135,6 @@ To get started with CSM, navigate to the [**Cloud Security Management Setup**][3
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog
 [13]: /infrastructure/resource_catalog
+[14]: /security/security_inbox
+[15]: https://app.datadoghq.com/security/feed
+[16]: /security/research_feed

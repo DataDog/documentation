@@ -4,6 +4,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Create a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3853850379",
+      "description": "Create a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "ReorderApmRetentionFilters": [
@@ -18,6 +23,11 @@
       "group": "apm_retention_filters",
       "suffix": "",
       "description": "Update a retention filter returns \"OK\" response"
+    },
+    {
+      "group": "apm_retention_filters",
+      "suffix": "_3916044058",
+      "description": "Update a retention filter with trace rate returns \"OK\" response"
     }
   ],
   "CreateAWSAccount": [
@@ -53,6 +63,20 @@
       "description": "Update an existing Action Connection returns \"Successfully updated Action Connection\" response"
     }
   ],
+  "UpdateAwsScanOptions": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Patch AWS Scan Options returns \"No Content\" response"
+    }
+  ],
+  "CreateAwsOnDemandTask": [
+    {
+      "group": "agentless_scanning",
+      "suffix": "",
+      "description": "Post an AWS on demand task returns \"AWS on demand task created successfully.\" response"
+    }
+  ],
   "CreateApp": [
     {
       "group": "app_builder",
@@ -72,6 +96,27 @@
       "group": "app_builder",
       "suffix": "",
       "description": "Update App returns \"OK\" response"
+    }
+  ],
+  "CreateApplicationSecurityWafExclusionFilter": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Create a WAF exclusion filter returns \"OK\" response"
+    }
+  ],
+  "UpdateApplicationSecurityWafCustomRule": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Update a WAF Custom Rule returns \"OK\" response"
+    }
+  ],
+  "UpdateApplicationSecurityWafExclusionFilter": [
+    {
+      "group": "application_security",
+      "suffix": "",
+      "description": "Update a WAF exclusion filter returns \"OK\" response"
     }
   ],
   "SearchAuditLogs": [
@@ -788,6 +833,20 @@
       "description": "Update the tags for a device returns \"OK\" response"
     }
   ],
+  "CreatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Create a new pipeline returns \"OK\" response"
+    }
+  ],
+  "UpdatePipeline": [
+    {
+      "group": "observability_pipelines",
+      "suffix": "",
+      "description": "Update a pipeline returns \"OK\" response"
+    }
+  ],
   "CreateOktaAccount": [
     {
       "group": "okta_integration",
@@ -800,6 +859,20 @@
       "group": "okta_integration",
       "suffix": "",
       "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
+  "CreateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Create on-call schedule returns \"Created\" response"
+    }
+  ],
+  "UpdateOnCallSchedule": [
+    {
+      "group": "on-call",
+      "suffix": "",
+      "description": "Update on-call schedule returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -931,6 +1004,27 @@
       "group": "rum_metrics",
       "suffix": "",
       "description": "Update a rum-based metric returns \"OK\" response"
+    }
+  ],
+  "CreateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Create a RUM retention filter returns \"Created\" response"
+    }
+  ],
+  "OrderRetentionFilters": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Order RUM retention filters returns \"Ordered\" response"
+    }
+  ],
+  "UpdateRetentionFilter": [
+    {
+      "group": "rum_retention_filters",
+      "suffix": "",
+      "description": "Update a RUM retention filter returns \"Updated\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [

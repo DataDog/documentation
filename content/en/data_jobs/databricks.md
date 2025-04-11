@@ -24,17 +24,17 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 1. Click **Generate new token**, enter "Datadog Integration" in the **Comment** field, remove the default value in **Lifetime (days)**, and click **Generate**. Take note of your token.
 
    **Important:**
-   * Make sure you delete the default value in **Lifetime (days)** so that the token doesn't expire and the integration doesn't break.
-   * Ensure the account generating the token has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
+   * For the [Datadog managed init script install (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent), ensure the user or service principal linked to the token is a <strong>Workspace Admin</strong>.
+   * For manual init script installation, ensure the user or service principal linked to the token has [CAN VIEW access][9] for the Databricks jobs and clusters you want to monitor.
+   * Make sure you set the **Lifetime (days)** value to the maximum allowed (730 days) so that the token doesn't expire and the integration doesn't break.
 
-   As an alternative, follow the [official Databricks documentation][10] to generate access token for a [service principal][11].
-
+   As an alternative, follow the [official Databricks documentation][10] to generate an access token for a [service principal][11]. The service principal must have the [<strong>Workspace access</strong> entitlement][17] enabled and the <strong>Workspace Admin</strong> or [CAN VIEW access][9] permissions as described above.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add Databricks Workspace**.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
-1. In the **Datadog Agent Setup** section, chooose either
+1. In the **Datadog Agent Setup** section, choose either
   - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
   - [Manually](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent): Follow the [instructions below](?tab=manuallyinstallaglobalinitscript#install-the-datadog-agent) to install and manage the init script for installing the Agent globally or on specific Databricks clusters.
 
@@ -47,12 +47,19 @@ The Datadog Agent must be installed on Databricks clusters to monitor Databricks
 
 Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
 
+<div class="alert alert-warning">
+<ul>
+<li>This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the instructions to <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> for installation on those specific clusters.</li>
+<li>This install option, in which Datadog installs and manages your Datadog global init script, requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
+</ul>
+</div>
+
 #### When integrating a workspace with Datadog
 
 1. In the **Select products to set up integration** section, make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
 1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
-1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs. 
+1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs.
 1. Click **Save Databricks Workspace**.
    {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-new-2.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup when adding a Databricks workspace. Datadog can install and manage a global init script." style="width:100%;" >}}
 
@@ -63,13 +70,27 @@ Datadog can install and manage a global init script in the Databricks workspace.
 1. Make sure the Data Jobs Monitoring product is **Enabled**.
 1. In the **Datadog Agent Setup** section, select the **Managed by Datadog** toggle button.
 1. Click **Select API Key** to either select an existing Datadog API key or create a new Datadog API key.
-1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs. 
+1. (Optional) Disable **Enable Log Collection** if you do not want to collect driver and worker logs for correlating with jobs.
 1. Click **Save Databricks Workspace** at the bottom of the browser window.
    {{< img src="data_jobs/databricks/configure-data-jobs-monitoring-existing.png" alt="In the Datadog-Databricks integration tile, Datadog Agent Setup for a Databricks workspace already added to the integration. Datadog can install and manage a global init script." style="width:100%;" >}}
+
+Optionally, you can add tags to your Databricks cluster and Spark performance metrics by configuring the following environment variable in the Advanced Configuration section of your cluster in the Databricks UI or as [Spark env vars][2] with the Databricks API:
+
+| Variable                 | Description                                                                                                                                                      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][1]. Example: `env:staging,team:data_engineering` |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster. |
+
+[1]: /getting_started/tagging/
+[2]: https://docs.databricks.com/api/workspace/clusters/edit#spark_env_vars
 
 {{% /tab %}}
 
 {{% tab "Manually install a global init script" %}}
+
+<div class="alert alert-warning">
+This setup does not work on Databricks clusters in <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> (formerly <strong>Shared</strong>) access mode, you must follow the instructions to <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a> for installation on those specific clusters.
+</div>
 
 1. In Databricks, click your display name (email address) in the upper right corner of the page.
 1. Select **Settings** and click the **Compute** tab.
@@ -85,10 +106,11 @@ Datadog can install and manage a global init script in the Databricks workspace.
    export DATABRICKS_WORKSPACE="<YOUR WORKSPACE NAME>"
 
    # Download and run the latest init script
-   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+   bash djm-install-script || true
    ```
 
-   The script above sets the required parameters, downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.7.1.sh` to use the last stable version.
+   The script above sets the required parameters, and downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
@@ -113,10 +135,13 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
+[4]: /getting_started/tagging/
 
 {{% /tab %}}
 
@@ -127,10 +152,11 @@ Optionally, you can also set other init script parameters and Datadog environmen
    #!/bin/bash
 
    # Download and run the latest init script
-   bash -c "$(curl -L https://dd-data-jobs-monitoring-setup.s3.amazonaws.com/scripts/databricks/databricks_init_latest.sh)" || true
+   curl -L https://install.datadoghq.com/scripts/install-databricks.sh > djm-install-script
+   bash djm-install-script || true
    ```
 
-   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the file name in the URL with `databricks_init_1.3.1.sh` to use the last stable version.
+   The script above downloads and runs the latest init script for Data Jobs Monitoring in Databricks. If you want to pin your script to a specific version, you can replace the filename in the URL with `install-databricks-0.12.9.sh` to use version `0.12.9`, for example. The source code used to generate this script, and the changes between script versions, can be found on the [Datadog Agent repository][3].
 
 1. On the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
@@ -164,11 +190,14 @@ Optionally, you can also set other init script parameters and Datadog environmen
 | DATABRICKS_WORKSPACE     | Name of your Databricks Workspace. It should match the name provided in the [Datadog-Databricks integration step](#configure-the-datadog-databricks-integration). Enclose the name in double quotes if it contains whitespace. |         |
 | DRIVER_LOGS_ENABLED      | Collect spark driver logs in Datadog.                                                                                                                          | false   |
 | WORKER_LOGS_ENABLED      | Collect spark workers logs in Datadog.                                                                                                                         | false   |
-| DD_DJM_ADD_LOGS_TO_FAILURE_REPORT      | Include init script logs for debugging when reporting a failure back to Datadog. | false |
+| DD_TAGS                  | Add tags to Databricks cluster and Spark performance metrics. Comma or space separated key:value pairs. Follow [Datadog tag conventions][4]. Example: `env:staging,team:data_engineering` |         |
+| DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.                                                                                          |         |
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/fleet/installer/setup/djm/databricks.go
+[4]: /getting_started/tagging/
 
 3. Click **Confirm**.
 
@@ -264,3 +293,4 @@ If you are using [Databricks Private Connectivity][14], reach out to the Datadog
 [14]: https://www.databricks.com/trust/security-features/secure-your-data-with-private-networking
 [15]: https://www.datadoghq.com/support/
 [16]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
+[17]: https://docs.databricks.com/aws/en/security/auth/entitlements#entitlements-overview

@@ -1,4 +1,24 @@
 ---
+app_id: google-cloud-filestore
+app_uuid: 3bc2c185-ddc3-4ba7-be31-22e926a6834c
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.file.nfs.server.free_bytes
+      metadata_path: metadata.csv
+      prefix: gcp.file.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 267
+    source_type_name: Google Cloud Filestore
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - 데이터 스토어
@@ -7,6 +27,7 @@ categories:
 custom_kind: 통합
 dependencies: []
 description: 주요 Google Cloud Filestore 메트릭을 추적합니다.
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_filestore/
 draft: false
 git_integration_title: google_cloud_filestore
@@ -15,14 +36,29 @@ integration_id: google-cloud-filestore
 integration_title: Google Cloud Filestore
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_filestore
-public_title: Datadog-Google Cloud Filestore 통합
-short_description: 주요 Google Cloud Filestore 메트릭을 추적합니다.
+public_title: Google Cloud Filestore
+short_description: 파일 시스템 인터페이스가 필요한 애플리케이션에 공유 파일 시스템을 제공하는 관리 서비스
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Data Stores
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: 파일 시스템 인터페이스가 필요한 애플리케이션에 공유 파일 시스템을 제공하는 관리 서비스
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Google Cloud Filestore
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 개요
 
 Google Cloud Filestore는 파일 시스템 인터페이스 및 데이터용 공유 파일 시스템이 필요한 애플리케이션을 위한 관리형 파일 스토리지 서비스입니다.

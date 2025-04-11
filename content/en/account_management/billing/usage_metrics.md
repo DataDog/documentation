@@ -65,8 +65,15 @@ Estimated usage metrics are generally available for the following usage types:
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
 | Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
 | Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
+| Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
+
+## Setting tags for your by_tag Estimated Usage Metrics
+To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes take effect at the next 00:00 UTC.
+
+{{< img src="account_management/billing/setting-eum-tags-in-ua.png" alt="Setting by_tag EUM tags in Usage Attribution" >}}
 
 ## Dashboards
 
@@ -89,3 +96,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
+[6]: /account_management/billing/usage_attribution/
+

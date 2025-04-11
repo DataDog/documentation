@@ -1,8 +1,8 @@
 ---
 aliases:
-- /tracing/setup_overview/open_standards/dotnet
-- /tracing/trace_collection/open_standards/dotnet
-- /tracing/trace_collection/opentracing/dotnet/
+- /ko/tracing/setup_overview/open_standards/dotnet
+- /ko/tracing/trace_collection/open_standards/dotnet
+- /ko/tracing/trace_collection/opentracing/dotnet/
 code_lang: dotnet
 code_lang_weight: 70
 description: .NET용 OpenTracing 계측

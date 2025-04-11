@@ -63,7 +63,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 - Medium (M)
 - Large (L)
 
-Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the CPU, number of concurrent queries, and the maximum limit on how many logs can be scanned per query
+Each compute tier is approximately 2X the query performance and capacity of the previous tier. The compute size is constrained by the number of concurrent queries and the maximum limit on how many logs can be scanned per query
 
 ### Determine the compute size that you need
 

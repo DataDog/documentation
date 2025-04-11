@@ -72,8 +72,6 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Server-Side (Auto-Instrumentation)
     android: Android
     ios: iOS
     expo: Expo
@@ -101,7 +99,6 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
@@ -129,6 +126,9 @@ code_language_ids:
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
+    windows_iis: "Windows IIS" 
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
 branch: ""
 

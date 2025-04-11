@@ -22,28 +22,28 @@ further_reading:
 
 ## Overview
 
-Microsoft [Azure App Service][1] is a group of serverless resources that enable you to build and host web apps, mobile backends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
+[Azure App Service][1] hosts web applications, REST APIs, and mobile backends.
 
-Datadog provides monitoring capabilities for all Azure App Service resource types:
+Datadog provides the following monitoring capabilities for all Azure App Service resource types:
 
-- Azure Monitor [metrics][2] for Apps and Functions using the [Azure Integration][3].
-- Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
+- Azure Monitor [metrics][2] for web apps, using the [Azure integration][3].
+- The [Azure App Service View][4] in Datadog, where you can quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
 - Submit custom metrics through the API.
 - Submit [resource logs][5] through [Event Hub][6].
 
 Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
-| OS | Runtime |App Type|Status|Documentation| 
-|----|---------|-----|----|--------------|
-|Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
-|Windows|Java|Web App|GA|[Windows Java setup][8]|
-|Windows|Node|Web App|GA|[Windows Node setup][13]|
-|Linux|.NET|Web App|GA|[Linux .NET setup][9]|
-|Linux|Node|Web App|GA|[Linux Node setup][9]|
-|Linux|PHP|Web App|GA|[Linux PHP setup][9]|
-|Linux|Java|Web App|GA|[Linux Java setup][10]|
-|Linux|Python|Web App|GA|[Linux Python setup][9]|
-|Linux|Container|Web App|GA|[Linux Container setup][12]|
+| OS | Runtime |Documentation| 
+|----|---------|-----|
+|Windows|.NET|[Windows .NET setup][7]|
+|Windows|Java|[Windows Java setup][8]|
+|Windows|Node|[Windows Node setup][13]|
+|Linux|.NET|[Linux .NET setup][9]|
+|Linux|Node|[Linux Node setup][9]|
+|Linux|PHP|[Linux PHP setup][9]|
+|Linux|Java|[Linux Java setup][10]|
+|Linux|Python|[Linux Python setup][9]|
+|Linux|Container|[Linux Container setup][12]|
 
 
 Capabilities:

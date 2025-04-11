@@ -23,6 +23,36 @@
     "description": "Fetches the scan options configured for AWS accounts.",
     "summary": "Get AWS Scan Options"
   },
+  "CreateAwsScanOptions": {
+    "description": "Activate Agentless scan options for an AWS account.",
+    "summary": "Post AWS Scan Options",
+    "request_description": "The definition of the new scan options.",
+    "request_schema_description": "Request object that includes the scan options to create."
+  },
+  "DeleteAwsScanOptions": {
+    "description": "Delete Agentless scan options for an AWS account.",
+    "summary": "Delete AWS Scan Options"
+  },
+  "UpdateAwsScanOptions": {
+    "description": "Update the Agentless scan options for an activated account.",
+    "summary": "Patch AWS Scan Options",
+    "request_description": "New definition of the scan options.",
+    "request_schema_description": "Request object that includes the scan options to update."
+  },
+  "ListAwsOnDemandTasks": {
+    "description": "Fetches the most recent 1000 AWS on demand tasks.",
+    "summary": "Get AWS On Demand tasks"
+  },
+  "CreateAwsOnDemandTask": {
+    "description": "Trigger the scan of an AWS resource with a high priority. Agentless scanning must be activated for the AWS account containing the resource to scan.",
+    "summary": "Post an AWS on demand task",
+    "request_description": "The definition of the on demand task.",
+    "request_schema_description": "Request object that includes the on demand task to submit."
+  },
+  "GetAwsOnDemandTask": {
+    "description": "Fetch the data of a specific on demand task.",
+    "summary": "Get AWS On Demand task by id"
+  },
   "ListAPIKeys": {
     "description": "List all API keys available for your account.",
     "summary": "Get all API keys"
@@ -508,7 +538,7 @@
     "request_schema_description": "Request for creating a downtime."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime.\n\n**Note**: Downtimes canceled through the API are no longer active, but are retained for approximately two days before being permanently removed. The downtime may still appear in search results until it is permanently removed.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
@@ -1217,6 +1247,30 @@
     "request_description": "",
     "request_schema_description": "List tags response."
   },
+  "GetAggregatedConnections": {
+    "description": "Get all aggregated connections.",
+    "summary": "Get all aggregated connections"
+  },
+  "CreateOnCallSchedule": {
+    "description": "Create a new on-call schedule",
+    "summary": "Create on-call schedule",
+    "request_description": "",
+    "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
+  },
+  "DeleteOnCallSchedule": {
+    "description": "Delete an on-call schedule",
+    "summary": "Delete on-call schedule"
+  },
+  "GetOnCallSchedule": {
+    "description": "Get an on-call schedule",
+    "summary": "Get on-call schedule"
+  },
+  "UpdateOnCallSchedule": {
+    "description": "Update a new on-call schedule",
+    "summary": "Update on-call schedule",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"
@@ -1289,6 +1343,54 @@
     "request_description": "",
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
+  "ListApplicationSecurityWAFCustomRules": {
+    "description": "Retrieve a list of WAF custom rule.",
+    "summary": "List all WAF custom rules"
+  },
+  "CreateApplicationSecurityWafCustomRule": {
+    "description": "Create a new WAF custom rule with the given parameters.",
+    "summary": "Create a WAF custom rule",
+    "request_description": "The definition of the new WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the custom rule to create."
+  },
+  "DeleteApplicationSecurityWafCustomRule": {
+    "description": "Delete a specific WAF custom rule.",
+    "summary": "Delete a WAF Custom Rule"
+  },
+  "GetApplicationSecurityWafCustomRule": {
+    "description": "Retrieve a WAF custom rule by ID.",
+    "summary": "Get a WAF custom rule"
+  },
+  "UpdateApplicationSecurityWafCustomRule": {
+    "description": "Update a specific WAF custom Rule.\nReturns the Custom Rule object when the request is successful.",
+    "summary": "Update a WAF Custom Rule",
+    "request_description": "New definition of the WAF Custom Rule.",
+    "request_schema_description": "Request object that includes the Custom Rule to update."
+  },
+  "ListApplicationSecurityWafExclusionFilters": {
+    "description": "Retrieve a list of WAF exclusion filters.",
+    "summary": "List all WAF exclusion filters"
+  },
+  "CreateApplicationSecurityWafExclusionFilter": {
+    "description": "Create a new WAF exclusion filter with the given parameters.\n\nA request matched by an exclusion filter will be ignored by the Application Security WAF product.\nGo to https://app.datadoghq.com/security/appsec/passlist to review existing exclusion filters (also called passlist entries).",
+    "summary": "Create a WAF exclusion filter",
+    "request_description": "The definition of the new WAF exclusion filter.",
+    "request_schema_description": "Request object for creating a single WAF exclusion filter."
+  },
+  "DeleteApplicationSecurityWafExclusionFilter": {
+    "description": "Delete a specific WAF exclusion filter using its identifier.",
+    "summary": "Delete a WAF exclusion filter"
+  },
+  "GetApplicationSecurityWafExclusionFilter": {
+    "description": "Retrieve a specific WAF exclusion filter using its identifier.",
+    "summary": "Get a WAF exclusion filter"
+  },
+  "UpdateApplicationSecurityWafExclusionFilter": {
+    "description": "Update a specific WAF exclusion filter using its identifier.\nReturns the exclusion filter object when the request is successful.",
+    "summary": "Update a WAF exclusion filter",
+    "request_description": "The exclusion filter to update.",
+    "request_schema_description": "Request object for updating a single WAF exclusion filter."
+  },
   "ListCSMThreatsAgentRules": {
     "description": "Get the list of Cloud Security Management Threats Agent rules.",
     "summary": "Get all CSM Threats Agent rules"
@@ -1317,6 +1419,26 @@
     "description": "The download endpoint generates a CSM Threats policy file from your currently active\nCSM Threats rules, and downloads them as a `.policy` file. This file can then be deployed to\nyour Agents to update the policy running in your environment.",
     "summary": "Get the latest CSM Threats policy"
   },
+  "CreatePipeline": {
+    "description": "Create a new pipeline.",
+    "summary": "Create a new pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
+  "DeletePipeline": {
+    "description": "Delete a pipeline.",
+    "summary": "Delete a pipeline"
+  },
+  "GetPipeline": {
+    "description": "Get a specific pipeline by its ID.",
+    "summary": "Get a specific pipeline"
+  },
+  "UpdatePipeline": {
+    "description": "Update a pipeline.",
+    "summary": "Update a pipeline",
+    "request_description": "",
+    "request_schema_description": "Top-level schema representing a pipeline."
+  },
   "DeleteRestrictionPolicy": {
     "description": "Deletes the restriction policy associated with a specified resource.",
     "summary": "Delete a restriction policy"
@@ -1326,7 +1448,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -1408,6 +1530,36 @@
     "summary": "Create a new RUM application",
     "request_description": "",
     "request_schema_description": "RUM application creation request attributes."
+  },
+  "OrderRetentionFilters": {
+    "description": "Order RUM retention filters for a RUM application.\nReturns RUM retention filter objects without attributes from the request body when the request is successful.",
+    "summary": "Order RUM retention filters",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The list of RUM retention filter IDs along with their corresponding type to reorder.\nAll retention filter IDs should be included in the list created for a RUM application."
+  },
+  "ListRetentionFilters": {
+    "description": "Get the list of RUM retention filters for a RUM application.",
+    "summary": "Get all RUM retention filters"
+  },
+  "CreateRetentionFilter": {
+    "description": "Create a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Create a RUM retention filter",
+    "request_description": "The definition of the new RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to create."
+  },
+  "DeleteRetentionFilter": {
+    "description": "Delete a RUM retention filter for a RUM application.",
+    "summary": "Delete a RUM retention filter"
+  },
+  "GetRetentionFilter": {
+    "description": "Get a RUM retention filter for a RUM application.",
+    "summary": "Get a RUM retention filter"
+  },
+  "UpdateRetentionFilter": {
+    "description": "Update a RUM retention filter for a RUM application.\nReturns RUM retention filter objects from the request body when the request is successful.",
+    "summary": "Update a RUM retention filter",
+    "request_description": "New definition of the RUM retention filter.",
+    "request_schema_description": "The RUM retention filter body to update."
   },
   "DeleteRUMApplication": {
     "description": "Delete an existing RUM application in your organization.",

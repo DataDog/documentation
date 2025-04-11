@@ -421,21 +421,47 @@ Datadog::Tracing.before_flush(
 
 {{< programming-lang lang="python" >}}
 
-The Python tracer has a `FilterRequestsOnUrl` filter you can configure to remove traces from certain endpoints. Alternatively, you can write a custom filter. See [Trace Filtering][1] for more information.
+The Python tracer provides options to filter unwanted traces:
 
-Suppose the root span's `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
+### Using sampling rules (Recommended)
 
-```
-from ddtrace import tracer
-from ddtrace.filters import FilterRequestsOnUrl
-tracer.configure(settings={
-    'FILTERS': [
-        FilterRequestsOnUrl(r'http://.*/healthcheck$'),
-    ],
-})
+The recommended approach is to use sampling rules, which allow you to filter spans based on resource names, service names, tags, and operation names:
+
+```shell
+DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
 ```
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
+Or to filter based on HTTP URL tags:
+
+```shell
+DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
+```
+
+<div class="alert alert-info"><strong>Note</strong>: Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+
+### Using custom filters
+
+For advanced use cases, you can create custom filters:
+
+```py
+from ddtrace.trace import tracer
+from ddtrace.trace import TraceFilter
+import re
+
+class CustomFilter(TraceFilter):
+    def __init__(self, pattern):
+        self.pattern = re.compile(pattern)
+
+    def process_trace(self, trace):
+        for span in trace:
+            if span.get_tag('http.url') and self.pattern.match(span.get_tag('http.url')):
+                return None  # Drop the trace
+        return trace  # Keep the trace
+
+# Configure the tracer with your custom filter
+tracer.configure(trace_processors=[CustomFilter(r'http://.*/healthcheck$')])
+```
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodeJS" >}}

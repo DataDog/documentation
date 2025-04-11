@@ -29,6 +29,12 @@ further_reading:
   text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+ Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}), as it requires <a href="/agent/remote_config/">Remote Configuration</a> to be enabled.
+</div>
+{{% /site-region %}}
+
 ## Overview
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
@@ -46,8 +52,9 @@ Dynamic Instrumentation requires the following:
 - For Java applications, tracing library [`dd-trace-java`][3] 1.34.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
 - For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.54.0 or higher.
-- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.37.1 or higher.
+- (Limited Preview) For Node.js applications, tracing library [`dd-trace-js`][18] 5.39.0 or higher.
 - (Limited Preview) For Ruby applications, tracing library [`dd-trace-rb`][19] 2.9.0 or higher.
+- (Limited Preview) For PHP applications, tracing library [`dd-trace-php`][20] 1.5.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended, [autocomplete and search (in Preview)][17] is enabled.
 - Recommended, [Source Code Integration][7] is set up for your service.
@@ -80,7 +87,7 @@ For more detailed instructions, select your runtime below:
 
 - Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
 - Full support is available only for applications built with Python, Java, .NET.
-- Limited previews are ongoing for applications built with Node.js and Ruby.
+- Limited previews are ongoing for applications built with Node.js, Ruby, and PHP.
 
 ## Explore Dynamic Instrumentation
 
@@ -228,3 +235,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [17]: /dynamic_instrumentation/symdb/
 [18]: https://github.com/DataDog/dd-trace-js
 [19]: https://github.com/DataDog/dd-trace-rb
+[20]: https://github.com/DataDog/dd-trace-php

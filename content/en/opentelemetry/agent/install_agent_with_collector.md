@@ -11,6 +11,10 @@ further_reading:
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Follow this guide to install the Datadog Agent with the OpenTelemetry Collector using Helm.
@@ -30,6 +34,7 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
+  - **Note**: EKS Fargate environments are not supported
 - [Helm (v3+)][54]
 - [Docker][50]
 - [kubectl][5]
@@ -118,11 +123,11 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 {{< /code-block >}}
 
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][2].
 
@@ -179,6 +184,8 @@ To explicitly override the default ports, use `features.otelCollector.ports` par
       enabled: true
 {{< /code-block >}}
 
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
+
 {{% collapse-content title="Completed datadog-agent.yaml file" level="p" %}}
 Your `datadog-agent.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
@@ -202,7 +209,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
@@ -265,12 +272,12 @@ Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datad
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.62.2-ot-beta-jmx
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 ...
 {{< /code-block >}}
 
-<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use <code>7.62.2-ot-beta</code> instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
+<div class="alert alert-info">This guide uses a Java application example. The <code>-jmx</code> suffix in the image tag enables JMX utilities. For non-Java applications, use {{< version key="agent_tag" code="true" >}} instead.<br> For more details, see <a href="/containers/guide/autodiscovery-with-jmx/?tab=helm">Autodiscovery and JMX integration guide</a>.</div>
 
 By default, the Agent image is pulled from Google Artifact Registry (`gcr.io/datadoghq`). If Artifact Registry is not accessible in your deployment region, [use another registry][3].
 
@@ -322,6 +329,8 @@ datadog:
     processCollection: true
 {{< /code-block >}}
 
+When enabling additional Datadog features, always use the Datadog or OpenTelemetry Collector configuration files instead of relying on Datadog environment variables.
+
 6. (Optional) Collect pod labels and use them as tags to attach to metrics, traces, and logs:
 
 <div class="alert alert-danger">Custom metrics may impact billing. See the <a href="https://docs.datadoghq.com/account_management/billing/custom_metrics">custom metrics billing page</a> for more information.</div>
@@ -340,7 +349,7 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: 7.62.2-ot-beta-jmx
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 
 datadog:
@@ -484,7 +493,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
@@ -672,7 +681,7 @@ spec:
     # Node Agent configuration
     nodeAgent:
       image:
-        name: "gcr.io/datadoghq/agent:7.62.2-ot-beta"
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
         pullPolicy: Always
 
   # Enable Features
@@ -823,7 +832,7 @@ service:
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
 
-{{< img src="/opentelemetry/embedded_collector/components.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/components-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 
 ##### Datadog connector
 
@@ -912,7 +921,7 @@ This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a Daem
 {{< /tabs >}}
 
 {{% collapse-content title="Deployment diagram" level="p" %}}
-{{< img src="/opentelemetry/embedded_collector/deployment.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
+{{< img src="/opentelemetry/embedded_collector/deployment-2.png" alt="Diagram depicting the Agent deployment pattern" style="width:100%;" >}}
 {{% /collapse-content %}}
 
 ## Send your telemetry to Datadog
