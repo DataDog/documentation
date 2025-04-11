@@ -430,7 +430,7 @@ module "service_extension" {
 
 #### 2. Initialize and apply the Terraform configuration
 
-Once you've created all the necessary files, deploy the infrastructure by running these commands in the directory where your Terraform files are located:
+After you've created the necessary files, deploy the infrastructure by running these commands in the directory where your Terraform files are located:
 
 ```bash
 terraform init
