@@ -23,7 +23,7 @@ short_description: Rastrea las métricas clave de Azure File Storage.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure File Storage ofrece recursos compartidos de archivos totalmente gestionados en la nube a los que se puede acceder mediante el protocolo estándar de la industria: Server Message Block (SMB).
@@ -34,7 +34,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure F
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -46,13 +46,13 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure File Storage no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure File Storage no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_file_storage/azure_file_storage_metadata.csv
