@@ -1,10 +1,10 @@
 ---
 categories:
-- AWS
+- aws
 - クラウド
 - ログの収集
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: AWS VPN のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpn/
@@ -40,7 +40,7 @@ AWS VPN を使用すると、ユーザーネットワークまたはデバイス
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `VPN` が有効になっていることを確認します。
 2. [Datadog - AWS VPN インテグレーション][3]をインストールします。
 
-### 収集データ
+### ログ収集
 
 #### ログの有効化
 
@@ -72,13 +72,13 @@ AWS VPN インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-vpn
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_vpn/amazon_vpn_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/
