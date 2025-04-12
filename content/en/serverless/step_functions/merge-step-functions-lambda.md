@@ -22,7 +22,7 @@ This page describes how to merge your AWS Step Functions traces with related AWS
 | Python  | Datadog Lambda Library for Python layer v103+ |
 | Other | Datadog Extension v75+ |
 
-Your State Machine definition must use [JSONata][1] as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
+Your State Machine definition must use `JSONata` as the query language. To enable this, set your definition's top-level `QueryLanguage` field to `JSONata`.
 
 #### Setup
 
@@ -197,7 +197,7 @@ On the Lambda Task, set the `Parameters` key as follows:
 }
 ```
 
-The `JsonMerge` [intrinsic function][14] merges the [Step Functions context object][15] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
+The `JsonMerge` [intrinsic function][15] merges the [Step Functions context object][16] (`$$`) with the original Lambda's input payload (`$`). Fields of the original payload overwrite the Step Functions context object if their keys are the same.
 
 **Example**:
 
