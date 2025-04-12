@@ -1,9 +1,9 @@
 ---
 further_reading:
-- link: https://micrometer.io/docs/registry/otlp
+- link: https://docs.micrometer.io/micrometer/reference/implementations/otlp.html
   tag: 마이크로미터
   text: 마이크로미터 OTLP
-- link: https://micrometer.io/docs/registry/prometheus
+- link: https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html
   tag: 마이크로미터
   text: 마이크로미터 프로메테우스(Prometheus)
 title: 마이크로미터(Micrometer)를 사용한 메트릭 전송

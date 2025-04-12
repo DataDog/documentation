@@ -197,7 +197,7 @@ https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=githu
 {{% tab "GitHub" %}}
 
 <div class="alert alert-warning">
-GitHub workflows running on <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
+GitHub workflows running on <a href="https://docs.github.com/es/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#pull_request"> <code>pull_request</code> trigger </a> are not currently supported by the GitHub integration.
 If you are using the <code>pull_request</code> trigger, use the alternative method.
 </div>
 

@@ -107,7 +107,7 @@ Avi Vantage には、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-[1]: https://avinetworks.com/why-avi/multi-cloud-load-balancing/
+[1]: https://www.vmware.com/products/cloud-infrastructure/avi-load-balancer
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/avi_vantage/datadog_checks/avi_vantage/data/conf.yaml.example
