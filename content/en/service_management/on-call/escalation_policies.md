@@ -22,7 +22,7 @@ Datadog creates a default escalation policy when you [onboard a Team to On-Call]
 1. Enter a **Name** for your escalation policy. For example, _Payment's Escalation Policy_.
 1. Select the **Teams** that own this escalation policy.
 1. Now start building the policy out. Decide who or what should receive a Page when this escalation policy is invoked. For each escalation step after, select who to notify. Each step can notify individual users, entire teams, and/or whoever is on-call in a schedule.
-   For example: After this Page is triggered, it is sent to whoever is currently on-call for the Primary schedule, in this cae John Doe.
+   For example: After this Page is triggered, it is sent to whoever is currently on-call for the Primary schedule, in this case John Doe.
    {{< img src="service_management/oncall/escalation_policy_2_steps.png" alt="An escalation policy, showing two steps after 'Page is triggered'. Each step has a 'Notify' input box and 'If the page is not acknowledged after N minutes, escalate.' The first step is configured to notify a schedule named Primary, and escalates if the page is not acknowledged after 5 minutes. The second step is configured to notify a user named Jane Doe." style="width:100%;" >}}
 1. Configure how many minutes to wait for one of the recipients to acknowledge the Page. If no one acknowledges the Page within the time frame, the Page is escalated. In the example, if the Primary on-call person, John Doe, does not acknowledges the Page within five minutes, the Page is then sent to Jane Doe.
 1. Configure how many times these steps should be repeated if no one acknowledges the Page.
