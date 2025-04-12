@@ -38,7 +38,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 <strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
+You can [add custom tags to your root span][3], or use the instrumentation functions described below.
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -46,11 +46,42 @@ You can [add custom tags to your root span][3], or use the instrumentation funct
 
 Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
 
-User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
-
 **Note**: Check that you have added [necessary dependencies to your application][1].
 
-The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
+Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
+
+{{< tabs >}}
+
+{{% tab "setUser" %}}
+
+Starting with `dd-java-agent` 1.48.0, the `datadog.appsec.api.user.User.setUser` method is available. This is the recommended API for adding user information to traces:
+
+```java
+import static datadog.appsec.api.user.User.setUser;
+
+final Map<String, String> metadata = new HashMap<>();
+metadata.put("name", "Jean Example");
+metadata.put("email", "jean.example@example.com");
+metadata.put("session_id", "987654321");
+metadata.put("role", "admin");
+metadata.put("scope", "read:message, write:files");
+
+setUser("d131dd02c56eec4", metadata);
+```
+
+{{% /tab %}}
+
+{{% tab "setTag" %}}
+
+If `datadog.appsec.api.user.User.setUser` does not meet your needs, you can use `setTag` instead.
+
+User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
+
+The example below shows how to obtain the active trace and add relevant user monitoring tags:
+
+**Notes**:
+- Tag values must be strings.
+- The `usr.id` tag is mandatory.
 
 ```java
 import io.opentracing.Span;
@@ -76,6 +107,10 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/opentracing/java#setup
 {{< /programming-lang >}}
@@ -130,7 +165,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
     // The user must be blocked by aborting the request handler asap.
     // The blocking response is automatically handled and sent by the appsec middleware.
-    return 
+    return
   }
 }
 ```
@@ -311,7 +346,7 @@ If no usr.login is provided, usr.id will be used instead.</a>
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events. 
+Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -407,7 +442,7 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events. 
+Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -473,7 +508,7 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
+Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -511,7 +546,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   exists := /* whether the given user id exists or not */
   metadata := make(map[string]string) /* optional extra event metadata */
   metadata["usr.login"] = "user-email"
-  
+
   // Replace `my-uid` by a unique identifier of the user (numeric, username, email...)
   appsec.TrackUserLoginFailureEvent(r.Context(), "my-uid", exists, metadata)
 }
@@ -576,7 +611,7 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...) 
+# Replace `my_user_id` by a unique identifier of the user (numeric, username, email...)
 
 # Leveraging custom business logic tracking to track user signups
 Datadog::Kit::AppSec::Events.track('users.signup', trace, nil, { 'usr.id': 'my_user_id'})
@@ -689,8 +724,8 @@ The following examples show how to track login events or custom events (using si
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
 metadata = {"usr.login": "user@email.com"}
-# name, email, scope, role, session_id and propagate are optional arguments which 
-# default to None except propagate that defaults to True. They'll be 
+# name, email, scope, role, session_id and propagate are optional arguments which
+# default to None except propagate that defaults to True. They'll be
 # passed to the set_user() function
 track_user_login_success_event(tracer, "userid", metadata)
 ```
@@ -756,7 +791,7 @@ The events that can be automatically detected are:
 
 Automatic user activity tracking offers the following modes:
 
-- `identification` mode (short name: `ident`): 
+- `identification` mode (short name: `ident`):
   - This mode is the default and always collects the user ID or best effort.
   - The user ID is collected on login success and login failure. With failure, the user ID is collected regardless of whether the user exists or not.
   - When the instrumented framework doesn’t clearly provide a user ID, but rather a structured user object, the user ID is determined on a best effort basis based on the object field names. This list of field names are considered, ordered by priority:
@@ -769,7 +804,7 @@ Automatic user activity tracking offers the following modes:
 - `anonymization` mode (short name: `anon`):
   - This mode is the same as `identification`, but anonymizes the user ID by hashing (SHA256) it and cropping the resulting hash.
 - `disabled` mode:
-  - ASM libraries do *not* collect any user ID from their automated instrumentations. 
+  - ASM libraries do *not* collect any user ID from their automated instrumentations.
   - User login events are not emitted.
 
 <div class="alert alert-info">All modes only affect automated instrumentation. The modes don't apply to manual collection. Manual collection is configured using an SDK, and those settings are not overridden by automated instrumentation.</div>
@@ -793,9 +828,9 @@ The following modes are deprecated:
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
-## Disabling user activity event tracking 
+## Disabling user activity event tracking
 
-To disable automated user activity detection through your [ASM Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled. 
+To disable automated user activity detection through your [ASM Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
 
 For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
 
