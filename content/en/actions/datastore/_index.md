@@ -73,7 +73,7 @@ To use values from a datastore in a workflow or app:
 
 1. On the [Datastore page][1], locate your datastore in the list.
 1. In the header of your datastore, click the **Copy Datastore UUID** button.
-1. Use this UUID to reference your datastore in a workflow or app. Use the [Delete item][2], [Get item][3], [List items][4], or [Put item][5] actions and provide the UUID as your **Datastore ID**.
+1. Use this UUID to reference your datastore in a workflow or app. Use the [Delete item][2], [Get item][3], [List items][4], [Update item][7], [Put item][5], or [Put items][8] actions and provide the UUID as your **Datastore ID**.
 
 
 ## Delete a datastore
@@ -91,3 +91,5 @@ To delete a datastore, click the **Trash (Delete Datastore)** icon in the header
 [4]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.listDatastoreItems
 [5]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.putDatastoreItem
 [6]: /account_management/rbac/permissions/?tab=ui#app-builder--workflow-automation
+[7]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.bulkPutDatastoreItem
+[8]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.apps_datastore/com.datadoghq.dd.apps_datastore.updateDatastoreItem
