@@ -15,7 +15,7 @@ further_reading:
 - link: "/service_management/workflows/"
   tag: "Documentation"
   text: "Learn about Workflows"
-- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/
+- link: "https://www.datadoghq.com/blog/software-catalog-self-service-actions/"
   tag: "Blog"
   text: "Empower your engineering teams with Self-Service Actions in Datadog Software Catalog"
 ---
