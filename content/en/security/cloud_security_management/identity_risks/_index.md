@@ -58,7 +58,7 @@ You can also use Terraform remediation to generate a pull request in GitHub with
 
 In Misconfigurations, Identity Risks, and the Security Inbox, you can click the **Access Insights** tab to see:
 - Which entities the resource can access across your accounts
-- Which principals that can directly or indirectly access the resource
+- Which principals can directly or indirectly access the resource
 
 In this example, it shows all the principals that can access this EC2 instance:
 
