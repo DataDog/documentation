@@ -166,21 +166,17 @@ Create a sample configuration file and run your custom Agent to ensure everythin
 
    service:
      pipelines:
-       metrics:
-         receivers: [otlp, datadog/connector]
-         processors: [metricstransform, batch]
-         exporters: [datadog]
        traces:
          receivers: [otlp]
-         processors: [batch]
-         exporters: [datadog/connector]
-       traces/2:
-         receivers: [datadog/connector]
-         processors: [batch]
+         processors: [infraattributes, batch]
+         exporters: [datadog, datadog/connector]
+       metrics:
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [metricstransform, infraattributes, batch]
          exporters: [datadog]
        logs:
          receivers: [otlp]
-         processors: [batch]
+         processors: [infraattributes, batch]
          exporters: [datadog]
    ```
 2. Run the Agent using the following Docker command.
