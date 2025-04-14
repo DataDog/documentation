@@ -150,8 +150,8 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< programming-lang lang="nodejs" >}}
 `DD_TRACE_SAMPLING_RULES`
 : A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
-Ex.
-```
+
+**Example**: ```
 [{"resource":"127.0.0.1", "sample_rate": 0}]
 ```
 {{< /programming-lang >}}
@@ -159,8 +159,8 @@ Ex.
 {{< programming-lang lang="python" >}}
 `DD_TRACE_SAMPLING_RULES`
 : A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
-Ex.
-```
+
+**Example**: ```
 [{"resource":"example_resource", "sample_rate": 0}]
 ```
 {{< /programming-lang >}}
@@ -168,8 +168,8 @@ Ex.
 {{< programming-lang lang="java" >}}
 `DD_TRACE_SAMPLING_RULES`
 : A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
-Ex.
-```
+
+**Example**: ```
 [{"resource":"POST /QuickPulseService.svc/ping", "sample_rate": 0},{"resource":"POST /QuickPulseService.svc/post", "sample_rate": 0},{"resource":"POST /?/track", "sample_rate": 0},{"resource":"GET /api/profileragent/v4/settings", "sample_rate": 0},{"resource":"ldconfig", "sample_rate": 0},{"resource":"uname", "sample_rate": 0}]
 ```
 {{< /programming-lang >}}
