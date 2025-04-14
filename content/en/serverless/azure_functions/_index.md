@@ -70,7 +70,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
    ```
-   See Datadog’s [Maven Repository][4] for any specific version of the Datadog Serverless Compatibility Layer.
+   See Datadog's [Maven Repository][4] for any specific version of the Datadog Serverless Compatibility Layer.
 
    To use [automatic instrumentation][1], you must use `dd-java-agent` v1.48.0+.
 
@@ -82,7 +82,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
    ```
 
-   Note that the environment variable to set JVM options depends on the hosting plan (ex. Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][5] for more details on the appropriate environment variable for your hosting plan.
+   **Note**: the environment variable to set JVM options depends on the hosting plan (ex. Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][5] for more details on the appropriate environment variable for your hosting plan.
 
 3. (Optional) **Enable runtime metrics**. See [Java Runtime Metrics][2].
 
@@ -144,12 +144,12 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Configure Trace Sampling
+### Configure trace sampling
 
 {{< programming-lang-wrapper langs="nodejs,python,java" >}}
 {{< programming-lang lang="nodejs" >}}
 `DD_TRACE_SAMPLING_RULES`
-: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace’s sample rate. Defaults to `[]`.
+: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
 Ex.
 ```
 [{"resource":"127.0.0.1", "sample_rate": 0}]
@@ -158,7 +158,7 @@ Ex.
 
 {{< programming-lang lang="python" >}}
 `DD_TRACE_SAMPLING_RULES`
-: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace’s sample rate. Defaults to `[]`.
+: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
 Ex.
 ```
 [{"resource":"example_resource", "sample_rate": 0}]
@@ -167,7 +167,7 @@ Ex.
 
 {{< programming-lang lang="java" >}}
 `DD_TRACE_SAMPLING_RULES`
-: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace’s sample rate. Defaults to `[]`.
+: A JSON array of objects. Each object must have a "sample_rate". The "name" and "service" fields are optional. The "sample_rate" value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate. Defaults to `[]`.
 Ex.
 ```
 [{"resource":"POST /QuickPulseService.svc/ping", "sample_rate": 0},{"resource":"POST /QuickPulseService.svc/post", "sample_rate": 0},{"resource":"POST /?/track", "sample_rate": 0},{"resource":"GET /api/profileragent/v4/settings", "sample_rate": 0},{"resource":"ldconfig", "sample_rate": 0},{"resource":"uname", "sample_rate": 0}]
