@@ -12,6 +12,7 @@
         {{ $object_id := md5 $rel_path }}
         {{ $title := $page.Title }}
         {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
+        {{ $category := $page.Params.algolia.category | default "Partners" }}
 
         {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
         {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
@@ -25,6 +26,7 @@
             "distinct_base_url" $page.RelPermalink
             "full_url" $page.Permalink
             "language" $page.Language.Lang
+            "category" $category
         ) -}}
 
         {{- $.Scratch.Add "partners_collection" $record -}}
