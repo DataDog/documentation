@@ -40,24 +40,24 @@ You can create mobile app tests in Datadog by navigating to [**Digital Experienc
 
 You may create a test using one of the following options:
 
-- **Create a test from a template**:
+### Create a test from a template
 
-    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
-    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-    3. Click **Save & Quit** in the upper right hand corner to submit your Mobile Application Test.<br /><br>
+  1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
+  2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  3. Click **Save & Quit** in the upper right hand corner to submit your Mobile Application Test.<br /><br>
        {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
 
-- **Build a test from scratch**:
+### Build a test from scratch
 
-    1. Click the **+** template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
-    1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
-    1. Add a **name** for your test.
-    1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-    1. Select the **devices** to run your test on.
-    1. Set retry conditions for your test.
-    1. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
-    1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
-    1. Click **Save & Edit Recording** to submit your Mobile Application Test.
+  1. Click the **+** template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
+  1. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
+  1. Add a **name** for your test.
+  1. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+  1. Select the [**devices**](#devices) to run your test on.
+  1. Set [retry conditions](#test-retries) for your test.
+  1. Set the [**test frequency**](#scheduling-and-alerts) by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
+  1. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
+  1. Click **Save & Edit Recording** to submit your Mobile Application Test.
 
 ### Snippets
 
@@ -80,23 +80,19 @@ When configuring a new Mobile Application test, use snippets to automatically po
 <br/>
   {{< img src="mobile_app_testing/mobile_app_snippets_2.png" alt="Screenshot of the left hand side of a mobile app test creation, showing the snippets examples" width="70%" >}}
 
-## Variables
+## Devices
 
-{{% synthetics-variables %}}
+In the device selection screen, you can select mobile devices in either the EU, or US locations. If a device is available in both locations, it will automatically operate in each region.
 
-### Use global variables
-
-You can use the [global variables defined in **Settings**][4] in the **Starting URL** and **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
-
-Define the variables you want to incorporate into the user journey before you start recording.
-
-You can inject the variables available to you while recording. For more information about using variables in your mobile test recording, see [Mobile App Test Steps][11].
+{{< img src="mobile_app_testing/mobile_device_locations.mp4" alt="Selecting one or more mobile devices in both the US and EU regions" video=true >}}
 
 ## Test retries
 
 You can specify how much time a test needs to fail before triggering a notification alert.
 
 * Retry `X` times after `Y` ms in case of failure.
+
+{{< img src="mobile_app_testing/retry_condition.png" alt="Retry condition step, showing retrying the test 0 times after 300ms in case of failure" width="70%" >}}
 
 ## Scheduling and alerts
 
