@@ -2,9 +2,9 @@
 title: Threat Intelligence
 disable_toc: false
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "security/cloud_siem/detection_rules"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Create custom detection rules"
 ---
 
 ## Overview
@@ -87,6 +87,18 @@ Other useful cloud import details to remember:
 - How to know when the updates are applied: The changes are visible in the reference table or in the logs. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
 - The update replaces the entire table with the new data.
 In case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
+
+## Threat intelligence in the user interface
+
+To enable Cloud SIEM threat intelligence data for reference tables:
+1. Navigate to [Threat Intelligence][3].
+1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
+
+After applying a Reference Table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threat_intelligence/#threat-intelligence-sources
 [2]: https://app.datadoghq.com/reference-tables/create
