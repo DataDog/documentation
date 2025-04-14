@@ -846,18 +846,9 @@ To send your telemetry data to Datadog:
 
 Instrument your application [using the OpenTelemetry API][12].
 
-As an example, you can use the [Calendar sample application][9] that's already instrumented for you.
-
-1. Clone the `opentelemetry-examples` repository to your device:
-   ```shell
-   git clone https://github.com/DataDog/opentelemetry-examples.git
-   ```
-1. Navigate to the `/calendar` directory:
-   ```shell
-   cd opentelemetry-examples/apps/rest-services/java/calendar
-   ```
-1. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
-   {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="true" >}}
+{{% collapse-content title="Example application instrumented with the OpenTelemetry API" level="p" %}}
+As an example, you can use the [Calendar sample application][9] that's already instrumented for you. The following code instruments the [CalendarService.getDate()][10] method using the OpenTelemetry annotations and API:
+   {{< code-block lang="java" filename="CalendarService.java" disable_copy="true" collapsible="false" >}}
 @WithSpan(kind = SpanKind.CLIENT)
 public String getDate() {
     Span span = Span.current();
@@ -865,18 +856,13 @@ public String getDate() {
     ...
 }
 {{< /code-block >}}
+{{% /collapse-content %}}
 
 ### Configure the application
 
-To configure your application container, ensure that the correct OTLP endpoint hostname is used. The Datadog Agent with OpenTelemetry Collector is deployed as a DaemonSet, so the current host needs to be targeted.
+Your application container must send data to the DDOT Collector on the same host. Since the Collector runs as a DaemonSet, you need to specify the local host as the OTLP endpoint.
 
-The Calendar application container is already configure with correct `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable [as defined in Helm chart][13]:
-
-1. Go to the Calendar application's Deployment manifest file:
-   ```shell
-   ./deploys/calendar/templates/deployment.yaml
-   ```
-1. The following environment variables configure the OTLP endpoint:
+If the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable is not already set, add it to your application’s Deployment manifest file:
    {{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
 env:
   ...
