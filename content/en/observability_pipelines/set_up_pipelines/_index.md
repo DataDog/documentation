@@ -32,7 +32,7 @@ Set up your pipelines and its [sources][1], [processors][2], and [destinations][
 1. Select and set up your source.
 1. Select and set up your destinations.
 1. Set up your processors.
-1. [Install the Observability Pipelines Worker][13].
+1. [Install the Observability Pipelines Worker][12].
 1. Enable monitors for your pipeline.
 
 For detailed setup instructions, select a template-specific documentation and then select your source from that page:
@@ -57,6 +57,7 @@ After you have set up your pipeline, see [Update Existing Pipelines][11] if you 
 [9]: /observability_pipelines/set_up_pipelines/log_enrichment/
 [10]: /observability_pipelines/set_up_pipelines/generate_metrics/
 [11]: /observability_pipelines/update_existing_pipelines/
+[12]: /observability_pipelines/install_the_worker/
 
 {{% /tab %}}
 
@@ -73,7 +74,7 @@ See the [update a pipeline][3] endpoint if you want to make any changes to an ex
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline. 
+You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
 
 See [Terraform update module][3] if you want to make any changes to an existing pipeline.
 
@@ -112,5 +113,4 @@ Make sure your Worker logs are [indexed][14] in Log Management for optimal funct
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
 [11]: /observability_pipelines/advanced_configurations/
-[13]: /observability_pipelines/install_the_worker/
 [14]: /logs/log_configuration/indexes/
