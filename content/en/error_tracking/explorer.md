@@ -115,4 +115,4 @@ You can directly export your search query from the explorer to create an Error T
 [4]: /real_user_monitoring/explorer/search/#event-types
 [5]: /error_tracking/issue_states
 [6]: /error_tracking/regression_detection
-[7]: /monitors/types/error-tracking
+[7]: /monitors/types/error_tracking
