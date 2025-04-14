@@ -1,10 +1,42 @@
 # Translation guidance
 
+## Overview
+
+The docs site is made up of the following file types:
+
+- JSON (`.json`)
+- YAML (`.yaml`)
+- Markdown (`.md`)
+- Markdoc (`.mdoc.md`)
+
+Guidance for each file type is listed below.
+
+## JSON files
+
+### Overview
+
+JSON files end in `.json`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a number, a list, or a more complex data structure.
+
+### Translation guidance
+
+#### Do not translate
+
+Do not translate any keys. Most values are not translated, with exceptions listed in the next section.
+
+#### Do translate
+
+- The value of any `other` key found in the `i18n` directory.
+- The value of the following keys in the `translate_actions.json` file:
+  - `description`
+  - `summary`
+  - `request_description`
+  - `request_schema_description`
+
 ## YAML configuration files
 
 ### Overview
 
-YAML files end in `.yaml`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a list, or a more complex data structure.
+YAML files end in `.yaml`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a number, a list, or a more complex data structure.
 
 ```yaml
 title: "Some title"
@@ -27,7 +59,6 @@ Do translate these _values_ (but not their corresponding keys):
 
 - The value of any `label` key found in the `customization_config` directory (or any nested directories).
 - The value of any `name` key found in the `config/_default/menus` directory.
-- The value of any `other` key found in the `i18n` directory.
 
 ## Markdown files
 
