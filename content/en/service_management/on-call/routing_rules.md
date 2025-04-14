@@ -12,7 +12,7 @@ aliases:
 <div class="alert alert-warning">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-### Overview
+## Overview
 
 With routing rules, you can define granular logic to control how alerts reach your team. Instead of sending alerts through a single escalation policy, you can create flexible, condition-based rules to route them based on priority, time of day, tags, and more.
 
@@ -26,17 +26,13 @@ With routing rules, you can define granular logic to control how alerts reach yo
   - During business hours, route alerts to an escalation policy.
   - After hours, route critical alerts to paging, and non-critical alerts to chat.
 
-- Use Dynamic Urgency to automatically detect urgency from the monitor alert: 
+- Use Dynamic Urgency to automatically detect urgency from the monitor alert:
   - `warn` status ➝ low urgency
   - `alert` status ➝ high urgency
-  
+
   The urgency of a page determines how end users are notified, based on their preferences.
 
 - Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
-
-<placeholder_screenshot>
-_A screenshot of the Routing Rules configuration UI showing multiple conditions (priority, time window, etc.) and destination options (Escalation Policy, Slack, Teams)_
-
 
 ## Routing rule syntax
 
@@ -52,11 +48,6 @@ Routing rules use [Datadog query syntax][3] and support multiple `if/else` condi
 | `groups`       | Monitor group names                                                         | `groups:"service:checkout-service"`     |
 | `priority`     | Monitor priority (1–5)                                                      | `priority:(1 OR 2)`                     |
 | `alert_status` | Monitor status (`error`, `warn`, `success`)                                 | `alert_status:(error OR warn)`          |
-
-<placeholder_screenshot>
-_A screenshot showing an example routing rule with syntax input, including `priority:(1)` and `alert_status:error` in the query builder UI_
-
----
 
 ## Best practices
 
