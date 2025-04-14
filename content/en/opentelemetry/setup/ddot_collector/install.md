@@ -114,7 +114,7 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
   - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
 
-2. Switch the Datadog Agent image to use builds with DDOT Collector:
+2. Use the Datadog Agent image tag with embedded DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="true" >}}
   ...
@@ -189,7 +189,7 @@ datadog:
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-3. Switch the Datadog Agent image tag to use builds with the DDOT OpenTelemetry Collector:
+3. Use the Datadog Agent image tag with embedded DDOT Collector:
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:

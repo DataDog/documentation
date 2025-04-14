@@ -185,7 +185,7 @@ datadog:
    {{< /code-block >}}
    Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
-1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
+1. Use the Datadog Agent image tag with embedded DDOT Collector::
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
