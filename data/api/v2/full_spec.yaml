@@ -48371,6 +48371,13 @@ paths:
         required: true
         schema:
           type: string
+      - description: Whether to get the IP addresses of the interfaces.
+        example: true
+        in: query
+        name: get_ip_addresses
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
