@@ -17679,6 +17679,164 @@ components:
       - index
       - caseIndex
       type: object
+    Layer:
+      description: Encapsulates a layer resource, holding attributes like rotation
+        details, plus relationships to the members covering that layer.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LayerAttributes'
+        id:
+          description: A unique identifier for this layer.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/LayerRelationships'
+        type:
+          $ref: '#/components/schemas/LayerType'
+      type: object
+    LayerAttributes:
+      description: Describes key properties of a Layer, including rotation details,
+        name, start/end times, and any restrictions.
+      properties:
+        effective_date:
+          description: When the layer becomes active (ISO 8601).
+          format: date-time
+          type: string
+        end_date:
+          description: When the layer ceases to be active (ISO 8601).
+          format: date-time
+          type: string
+        interval:
+          $ref: '#/components/schemas/LayerAttributesInterval'
+        name:
+          description: The name of this layer.
+          example: Weekend Layer
+          type: string
+        restrictions:
+          description: An optional list of time restrictions for when this layer is
+            in effect.
+          items:
+            $ref: '#/components/schemas/LayerAttributesRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time when the rotation starts (ISO 8601).
+          format: date-time
+          type: string
+      type: object
+    LayerAttributesInterval:
+      description: Defines how often the rotation repeats, using a combination of
+        days and optional seconds.
+      properties:
+        days:
+          description: The number of days in each rotation cycle.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Any additional seconds for the rotation cycle (up to 30 days).
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    LayerAttributesRestrictionsItems:
+      description: 'Represents a time restriction within a layer, specifying the days
+        and times
+
+        when this layer is active or inactive.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsEndDay'
+        end_time:
+          description: The time of day the restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsStartDay'
+        start_time:
+          description: The time of day the restriction begins (hh:mm:ss).
+          type: string
+      type: object
+    LayerAttributesRestrictionsItemsEndDay:
+      description: Defines the end day of the restriction within a Layer.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    LayerAttributesRestrictionsItemsStartDay:
+      description: Defines the start day of the restriction within a Layer.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    LayerRelationships:
+      description: Holds references to objects related to the Layer entity, such as
+        its members.
+      properties:
+        members:
+          $ref: '#/components/schemas/LayerRelationshipsMembers'
+      type: object
+    LayerRelationshipsMembers:
+      description: Holds an array of references to the members of a Layer, each containing
+        member IDs.
+      properties:
+        data:
+          description: The list of members who belong to this layer.
+          items:
+            $ref: '#/components/schemas/LayerRelationshipsMembersDataItems'
+          type: array
+      type: object
+    LayerRelationshipsMembersDataItems:
+      description: 'Represents a single member object in a layer''s `members` array,
+        referencing
+
+        a unique Datadog user ID.'
+      properties:
+        id:
+          description: The unique user ID of the layer member.
+          type: string
+        type:
+          $ref: '#/components/schemas/LayerRelationshipsMembersDataItemsType'
+      type: object
+    LayerRelationshipsMembersDataItemsType:
+      default: members
+      description: Members resource type.
+      enum:
+      - members
+      type: string
+      x-enum-varnames:
+      - MEMBERS
+    LayerType:
+      default: layers
+      description: Layers resource type.
+      enum:
+      - layers
+      type: string
+      x-enum-varnames:
+      - LAYERS
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -25888,9 +26046,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -25955,9 +26113,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -25988,9 +26146,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26067,9 +26225,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -27533,6 +27691,500 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
+    Schedule:
+      description: Top-level container for a schedule object, including both the `data`
+        payload and any related `included` resources (such as teams, layers, or members).
+      example:
+        data:
+          attributes:
+            name: On-Call Schedule
+            tags:
+            - tag1
+            - tag2
+            time_zone: America/New_York
+          id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          relationships:
+            layers:
+              data:
+              - id: 00000000-0000-0000-0000-000000000001
+                type: layers
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+        included:
+        - attributes:
+            avatar: ''
+            description: Team 1 description
+            handle: team1
+            name: Team 1
+          id: 00000000-da3a-0000-0000-000000000000
+          type: teams
+        - attributes:
+            effective_date: '2025-02-03T05:00:00Z'
+            end_date: '2025-12-31T00:00:00Z'
+            interval:
+              days: 1
+            name: Layer 1
+            restrictions:
+            - end_day: friday
+              end_time: '17:00:00'
+              start_day: monday
+              start_time: 09:00:00
+            rotation_start: '2025-02-01T00:00:00Z'
+          id: 00000000-0000-0000-0000-000000000001
+          relationships:
+            members:
+              data:
+              - id: 00000000-0000-0000-0000-000000000002
+                type: members
+          type: layers
+        - id: 00000000-0000-0000-0000-000000000002
+          relationships:
+            user:
+              data:
+                id: 00000000-aba1-0000-0000-000000000000
+                type: users
+          type: members
+        - attributes:
+            email: foo@bar.com
+            name: User 1
+          id: 00000000-aba1-0000-0000-000000000000
+          type: users
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleData'
+        included:
+          description: Any additional resources related to this schedule, such as
+            teams and layers.
+          items:
+            $ref: '#/components/schemas/ScheduleDataIncludedItem'
+          type: array
+      type: object
+    ScheduleCreateRequest:
+      description: The top-level request body for schedule creation, wrapping a `data`
+        object.
+      example:
+        data:
+          attributes:
+            layers:
+            - effective_date: '2025-02-03T05:00:00Z'
+              end_date: '2025-12-31T00:00:00Z'
+              interval:
+                days: 1
+              members:
+              - user:
+                  id: 00000000-aba1-0000-0000-000000000000
+              name: Layer 1
+              restrictions:
+              - end_day: friday
+                end_time: '17:00:00'
+                start_day: monday
+                start_time: 09:00:00
+              rotation_start: '2025-02-01T00:00:00Z'
+            name: On-Call Schedule
+            tags:
+            - tag1
+            - tag2
+            time_zone: America/New_York
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleCreateRequestData'
+      required:
+      - data
+      type: object
+    ScheduleCreateRequestData:
+      description: The core data wrapper for creating a schedule, encompassing attributes,
+        relationships, and the resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataType'
+      required:
+      - attributes
+      - type
+      type: object
+    ScheduleCreateRequestDataAttributes:
+      description: Describes the main attributes for creating a new schedule, including
+        name, layers, time zone, and tags.
+      properties:
+        layers:
+          description: The layers of on-call coverage that define rotation intervals
+            and restrictions.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems'
+          type: array
+        name:
+          description: A human-readable name for the new schedule.
+          example: Team A On-Call
+          type: string
+        tags:
+          description: A list of tags for categorizing or filtering the schedule.
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone in which the schedule is defined.
+          example: America/New_York
+          type: string
+      required:
+      - name
+      - time_zone
+      - layers
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItems:
+      description: Describes a schedule layer, including rotation intervals, members,
+        restrictions, and timeline settings.
+      properties:
+        effective_date:
+          description: The date/time when this layer becomes active (in ISO 8601).
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        end_date:
+          description: The date/time after which this layer no longer applies (in
+            ISO 8601).
+          format: date-time
+          type: string
+        interval:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsInterval'
+        members:
+          description: A list of members who participate in this layer's rotation.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItems'
+          type: array
+        name:
+          description: The name of this layer.
+          example: Primary On-Call Layer
+          type: string
+        restrictions:
+          description: Zero or more time-based restrictions (for example, only weekdays,
+            during business hours).
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time when the rotation for this layer starts (in ISO
+            8601).
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - name
+      - interval
+      - rotation_start
+      - effective_date
+      - members
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsInterval:
+      description: Defines how frequently the rotation repeats, using days and/or
+        seconds (up to certain limits).
+      properties:
+        days:
+          description: The number of full days in each rotation period.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Extra seconds that may be added to extend the rotation beyond
+            whole days.
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsMembersItems:
+      description: Defines a single member within a schedule layer, including the
+        reference to the underlying user.
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser'
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser:
+      description: Identifies the user participating in this layer as a single object
+        with an `id`.
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems:
+      description: 'Defines a time restriction for a schedule layer, including which
+        day of the week
+
+        it starts and ends, along with start/end times.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
+        end_time:
+          description: The time of day when the restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
+        start_time:
+          description: The time of day when the restriction begins (hh:mm:ss).
+          type: string
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
+      description: The weekday when the restriction period ends (Monday through Sunday).
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
+      description: The weekday when the restriction period starts (Monday through
+        Sunday).
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleCreateRequestDataRelationships:
+      description: Gathers relationship objects for the schedule creation request,
+        including the teams to associate.
+      properties:
+        teams:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeams'
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeams:
+      description: Associates the new schedule with one or more teams.
+      properties:
+        data:
+          description: An array of team references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeamsDataItems:
+      description: 'Holds the relationship data linking this schedule to a particular
+        team,
+
+        identified by `id` and `type`.'
+      properties:
+        id:
+          description: A unique identifier for the team.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleCreateRequestDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleData:
+      description: Represents the primary data object for a schedule, linking attributes
+        and relationships.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleDataAttributes'
+        id:
+          description: The schedule's unique identifier.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleDataType'
+      type: object
+    ScheduleDataAttributes:
+      description: Provides core properties of a schedule object, such as its name,
+        time zone, and tags.
+      properties:
+        name:
+          description: A short name for the schedule.
+          example: Primary On-Call
+          type: string
+        tags:
+          description: A list of tags associated with this schedule.
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone in which this schedule operates.
+          example: America/New_York
+          type: string
+      type: object
+    ScheduleDataIncludedItem:
+      description: Any additional resources related to this schedule, such as teams
+        and layers.
+      oneOf:
+      - $ref: '#/components/schemas/TeamReference'
+      - $ref: '#/components/schemas/Layer'
+      - $ref: '#/components/schemas/ScheduleMember'
+      - $ref: '#/components/schemas/ScheduleUser'
+    ScheduleDataRelationships:
+      description: Groups the relationships for a schedule object, referencing layers
+        and teams.
+      properties:
+        layers:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsLayers'
+        teams:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsTeams'
+      type: object
+    ScheduleDataRelationshipsLayers:
+      description: Associates layers with this schedule in a data structure.
+      properties:
+        data:
+          description: An array of layer references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItems'
+          type: array
+      type: object
+    ScheduleDataRelationshipsLayersDataItems:
+      description: Relates a layer to this schedule, identified by `id` and `type`
+        (must be `layers`).
+      properties:
+        id:
+          description: The unique identifier of the layer in this relationship.
+          example: 67963b57-d67c-dfa7-b180-62ee9301d2f5
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItemsType'
+      type: object
+    ScheduleDataRelationshipsLayersDataItemsType:
+      default: layers
+      description: Layers resource type.
+      enum:
+      - layers
+      example: layers
+      type: string
+      x-enum-varnames:
+      - LAYERS
+    ScheduleDataRelationshipsTeams:
+      description: Associates teams with this schedule in a data structure.
+      properties:
+        data:
+          description: An array of team references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleDataRelationshipsTeamsDataItems:
+      description: Relates a team to this schedule, identified by `id` and `type`
+        (must be `teams`).
+      properties:
+        id:
+          description: The unique identifier of the team in this relationship.
+          example: 00000000-da3a-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleMember:
+      description: Represents a single member entry in a schedule, referencing a specific
+        user.
+      properties:
+        id:
+          description: The unique identifier for this schedule member.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleMemberRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleMemberType'
+      type: object
+    ScheduleMemberRelationships:
+      description: Defines relationships for a schedule member, primarily referencing
+        a single user.
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUser'
+      type: object
+    ScheduleMemberRelationshipsUser:
+      description: Wraps the user data reference for a schedule member.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUserData'
+      type: object
+    ScheduleMemberRelationshipsUserData:
+      description: Points to the user data associated with this schedule member, including
+        an ID and type.
+      properties:
+        id:
+          description: The user's unique identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUserDataType'
+      type: object
+    ScheduleMemberRelationshipsUserDataType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ScheduleMemberType:
+      default: members
+      description: Schedule Members resource type.
+      enum:
+      - members
+      type: string
+      x-enum-varnames:
+      - MEMBERS
     ScheduleTrigger:
       description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
@@ -27553,6 +28205,296 @@ components:
       required:
       - scheduleTrigger
       type: object
+    ScheduleUpdateRequest:
+      description: A top-level wrapper for a schedule update request, referring to
+        the `data` object with the new details.
+      example:
+        data:
+          attributes:
+            layers:
+            - effective_date: '2025-02-03T05:00:00Z'
+              end_date: '2025-12-31T00:00:00Z'
+              interval:
+                seconds: 300
+              members:
+              - user:
+                  id: 00000000-aba1-0000-0000-000000000000
+              name: Layer 1
+              restrictions:
+              - end_day: friday
+                end_time: '17:00:00'
+                start_day: monday
+                start_time: 09:00:00
+              rotation_start: '2025-02-01T00:00:00Z'
+            name: On-Call Schedule Updated
+            tags:
+            - tag1
+            - tag2
+            - tag3
+            time_zone: America/New_York
+          id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleUpdateRequestData'
+      required:
+      - data
+      type: object
+    ScheduleUpdateRequestData:
+      description: Contains all data needed to update an existing schedule, including
+        its attributes (such as name, layers, or tags) and any relationships to teams.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributes'
+        id:
+          description: The ID of the schedule to be updated.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ScheduleUpdateRequestDataAttributes:
+      description: Defines the updatable attributes for a schedule, such as name,
+        time zone, tags, and layers.
+      properties:
+        layers:
+          description: The updated list of layers (rotations) for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItems'
+          type: array
+        name:
+          description: A short name for the schedule.
+          example: Primary On-Call
+          type: string
+        tags:
+          description: A list of tags that you can associate with this schedule.
+          example:
+          - front-end
+          - team-a
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone used when interpreting rotation times.
+          example: America/New_York
+          type: string
+      required:
+      - name
+      - time_zone
+      - layers
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItems:
+      description: 'Represents a layer within a schedule update, including rotation
+        details, members,
+
+        and optional restrictions.'
+      properties:
+        effective_date:
+          description: When this updated layer takes effect (ISO 8601 format).
+          format: date-time
+          type: string
+        end_date:
+          description: When this updated layer should stop being active (ISO 8601
+            format).
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier for the layer being updated.
+          type: string
+        interval:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsInterval'
+        members:
+          description: The members assigned to this layer.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItems'
+          type: array
+        name:
+          description: "The name for this layer (for example, \u201CSecondary Coverage\u201D)."
+          type: string
+        restrictions:
+          description: Any time restrictions that define when this layer is active.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time at which the rotation begins (ISO 8601 format).
+          format: date-time
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsInterval:
+      description: 'Specifies how the rotation repeats: number of days, plus optional
+        seconds, up to the given maximums.'
+      properties:
+        days:
+          description: How many days each rotation cycle should span.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Additional seconds to add to the rotation cycle (for example,
+            partial days).
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsMembersItems:
+      description: 'Defines a single member within a layer during an update request,
+        referring
+
+        to a specific user.'
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser'
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser:
+      description: Identifies the user who is assigned to this member object. Only
+        `id` is required.
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems:
+      description: 'Defines a time restriction object for a layer within a schedule
+        update, including
+
+        start and end days, as well as times.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
+        end_time:
+          description: The time at which this restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
+        start_time:
+          description: The time at which this restriction starts (hh:mm:ss).
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
+      description: Defines the day of the week on which the time restriction ends.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
+      description: Defines the day of the week on which the time restriction starts.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleUpdateRequestDataRelationships:
+      description: Houses relationships for the schedule update, typically referencing
+        teams.
+      properties:
+        teams:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeams'
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeams:
+      description: Defines the teams that this schedule update is associated with.
+      properties:
+        data:
+          description: An array of team references.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeamsDataItems:
+      description: Links the schedule to a team within an update request, identified
+        by `id` and `type`.
+      properties:
+        id:
+          description: The unique team identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleUpdateRequestDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleUser:
+      description: Represents a user object in the context of a schedule, including
+        their `id`, type, and basic attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleUserAttributes'
+        id:
+          description: The unique user identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleUserType'
+      type: object
+    ScheduleUserAttributes:
+      description: Provides basic user information for a schedule, including a name
+        and email address.
+      properties:
+        email:
+          description: The user's email address.
+          type: string
+        name:
+          description: The user's name.
+          example: Jane Doe
+          type: string
+      type: object
+    ScheduleUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -33237,6 +34179,79 @@ components:
             $ref: '#/components/schemas/TeamPermissionSetting'
           type: array
       type: object
+    TeamReference:
+      description: Provides a reference to a team, including ID, type, and basic attributes/relationships.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamReferenceAttributes'
+        id:
+          description: The team's unique identifier.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamReferenceRelationships'
+        type:
+          $ref: '#/components/schemas/TeamReferenceType'
+      type: object
+    TeamReferenceAttributes:
+      description: Encapsulates the basic attributes of a Team reference, such as
+        name, handle, and an optional avatar or description.
+      properties:
+        avatar:
+          description: URL or reference for the team's avatar (if available).
+          type: string
+        description:
+          description: A short text describing the team.
+          type: string
+        handle:
+          description: A unique handle/slug for the team.
+          type: string
+        name:
+          description: The full, human-readable name of the team.
+          type: string
+      type: object
+    TeamReferenceRelationships:
+      description: Collects the key relationship fields for a team reference, specifically
+        on-call users.
+      properties:
+        oncall_users:
+          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsers'
+      type: object
+    TeamReferenceRelationshipsOncallUsers:
+      description: Defines which users are on-call within a team, stored as an array
+        of references.
+      properties:
+        data:
+          description: The list of user references who are on-call for this team.
+          items:
+            $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItems'
+          type: array
+      type: object
+    TeamReferenceRelationshipsOncallUsersDataItems:
+      description: References a user who is on-call within this team, identified by
+        `id` and `type`.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
+      type: object
+    TeamReferenceRelationshipsOncallUsersDataItemsType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    TeamReferenceType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
     TeamRelationships:
       description: Resources related to a team
       properties:
@@ -47503,6 +48518,198 @@ paths:
       x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
 
         contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/on-call/schedules:
+    post:
+      description: Create a new on-call schedule
+      operationId: CreateOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create on-call schedule
+      tags:
+      - On-Call
+      x-given:
+        schedule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"layers\": [\n
+              \       {\n          \"effective_date\": \"{{ timeISO('now - 10d') }}\",\n
+              \         \"end_date\": \"{{ timeISO('now + 10d') }}\",\n          \"interval\":
+              {\n            \"days\": 1\n          },\n          \"members\": [\n
+              \           {\n              \"user\": {\n                \"id\": \"890f29d4-0b7a-11f0-aeb2-760fcae4f596\"\n
+              \             }\n            }\n          ],\n          \"name\": \"Layer
+              1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
+              \"friday\",\n              \"end_time\": \"17:00:00\",\n              \"start_day\":
+              \"monday\",\n              \"start_time\": \"09:00:00\"\n            }\n
+              \         ],\n          \"rotation_start\": \"{{ timeISO('now - 5d')
+              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"tags\":
+              [\n        \"tag1\",\n        \"tag2\"\n      ],\n      \"time_zone\":
+              \"America/New_York\"\n    },\n    \"relationships\": {\n      \"teams\":
+              {\n        \"data\": [\n          {\n            \"id\": \"65aea9d0-941c-4607-bf8a-14fc0dac2820\",\n
+              \           \"type\": \"teams\"\n          }\n        ]\n      }\n    },\n
+              \   \"type\": \"schedules\"\n  }\n}"
+          step: there is a valid "schedule" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteOnCallSchedule
+        parameters:
+        - name: schedule_id
+          source: data.id
+        type: unsafe
+  /api/v2/on-call/schedules/{schedule_id}:
+    delete:
+      description: Delete an on-call schedule
+      operationId: DeleteOnCallSchedule
+      parameters:
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an on-call schedule
+      operationId: GetOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    put:
+      description: Update a new on-call schedule
+      operationId: UpdateOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -59012,6 +60219,12 @@ tags:
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration
+- description: 'Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)
+
+    directly through the Datadog API.'
+  externalDocs:
+    url: https://docs.datadoghq.com/service_management/on-call/
+  name: On-Call
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
