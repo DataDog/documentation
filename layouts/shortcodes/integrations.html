@@ -1,5 +1,16 @@
 {{ $dot := . }}
 
+<!-- manual mappings of integration to pmm categories - WEB-6040 -->
+{{ $s : = newScratch }}
+{{ $s.SetInMap "manualfilters" "CCM" $ccm_integration_ids }}
+{{ $s.SetInMap "manualfilters" "DSM" $dsm_integration_ids }}
+{{ $s.SetInMap "manualfilters" "DJM" $djm_integration_ids }}
+{{ $s.SetInMap "manualfilters" "LLM" $llm_integration_ids }}
+{{ $s.SetInMap "manualfilters" "Product Analytics" $pa_integration_ids }}
+{{ $s.SetInMap "manualfilters" "NDM" $ndm_integration_ids }}
+{{ $s.SetInMap "manualfilters" "DBM" $dbm_integration_ids }}
+
+
 <!-- From data file -->
 {{ $integration_list := site.Pages }}
 {{ $integration_list := $integration_list | intersect (where $integration_list ".Section" "=" "integrations") }}
@@ -12,6 +23,9 @@
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
+
+<!-- Manual filters -->
+{{ $.Scratch.Set "filters" (union ($.Scratch.Get "filters") (slice "CCM" "DSM" "DJM" "LLM" "Product Analytics" "NDM" "DBM")) }}
 
 <!-- build tiles -->
 {{- $s := newScratch -}}
