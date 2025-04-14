@@ -1,5 +1,7 @@
 ---
 title: Install the Datadog Distribution of OTel Collector
+aliases:
+- "/opentelemetry/agent/install_agent_with_collector"
 further_reading:
 - link: "/opentelemetry/agent/agent_with_custom_components"
   tag: "Documentation"

@@ -695,7 +695,7 @@ menu:
       parent: otel_collect
       weight: 402
     - name: DDOT Collector
-      url: /opentelemetry/agent
+      url: /opentelemetry/setup/ddot_collector
       identifier: otel-setup-ddot-collector
       parent: otel-setup-agent
       weight: 4021

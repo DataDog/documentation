@@ -1,5 +1,7 @@
 ---
 title: Datadog Distribution of OpenTelemetry Collector
+aliases:
+- "/opentelemetry/agent/"
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-agent-with-otel-collector/"
   tag: "Blog"
