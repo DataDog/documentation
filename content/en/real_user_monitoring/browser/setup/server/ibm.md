@@ -47,7 +47,7 @@ To automatically instrument your RUM application:
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
 
-If you want to manually load the module onto your web server instead of running the installation script, you can follow the below instructions.
+To manually load the module onto your web server instead of running the installation script, follow the instructions below.
 
 To manually instrument your RUM application:
 
