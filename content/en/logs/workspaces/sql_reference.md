@@ -66,7 +66,7 @@ WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
 FROM employees {{< /code-block >}}                |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
 
 ## Functions
@@ -141,7 +141,7 @@ GROUP BY service_name
 {{< /code-block >}} 
 
 ### `CEIL`
-{{< code-block lang="sql" >}} 
+{{< code-block lang="sql" >}}
 SELECT CEIL(price) AS rounded_price 
 FROM products 
 {{< /code-block >}}
@@ -210,13 +210,14 @@ FROM
 ### `INTERVAL`  
 {{< code-block lang="sql" >}}
 SELECT
-  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date
+  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date,
+  INTERVAL '1 MILLISECOND 2 SECONDS 3 MINUTES 4 HOURS 5 DAYS'
 {{< /code-block >}} 
 
 ### `TRIM`
 {{< code-block lang="sql" >}}
 SELECT
-  trim(name) AS trimmed_name
+  TRIM(name) AS trimmed_name
 FROM
   users
 {{< /code-block >}}
@@ -224,7 +225,7 @@ FROM
 ###  `REPLACE`
 {{< code-block lang="sql" >}}
 SELECT
-  replace(description, 'old', 'new') AS updated_description
+  REPLACE(description, 'old', 'new') AS updated_description
 FROM
   products
 {{< /code-block >}}
@@ -232,7 +233,7 @@ FROM
 ### `SUBSTRING`
 {{< code-block lang="sql" >}}
 SELECT
-  substring(title, 1, 10) AS short_title
+  SUBSTRING(title, 1, 10) AS short_title
 FROM
   books
 {{< /code-block >}}
@@ -269,7 +270,7 @@ Supported extraction units:
 
 {{< code-block lang="sql" >}}
 SELECT
-  extract(year FROM purchase_date) AS purchase_year
+  EXTRACT(year FROM purchase_date) AS purchase_year
 FROM
   sales
 {{< /code-block >}}
@@ -296,7 +297,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+  TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -321,7 +322,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  to_char(order_date, 'MM-DD-YYYY') AS formatted_date
+  TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
 {{< /code-block >}}
@@ -341,7 +342,7 @@ Supported truncations:
 
 {{< code-block lang="sql" >}}
 SELECT
-  date_trunc('month', event_time) AS month_start
+  DATE_TRUNC('month', event_time) AS month_start
 FROM
   events
 {{< /code-block >}}
@@ -353,7 +354,7 @@ SELECT
 FROM
   emails
 WHERE
-  regexp_like(email_address, '@example\.com$')
+  REGEXP_LIKE(email_address, '@example\.com$')
 {{< /code-block >}}
 
 ### `CARDINALITY`
@@ -407,17 +408,17 @@ FROM
 
 This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
 
-| Function                | Return Type       | Description                                                            |
-|-------------------------|-------------------|------------------------------------------------------------------------|
-| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
-| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
-| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
-| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
-| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
-| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
-| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
-| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
-| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
+| Function                      | Return Type       | Description                                                            |
+|-------------------------------|-------------------|------------------------------------------------------------------------|
+| `over`                        | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `partition by`                | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `rank()`                      | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `row_number()`                | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `lead(column n)`              | typeof column     | Returns the value from the next row in the partition.                  |
+| `lag(column n)`               | typeof column     | Returns the value from the previous row in the partition.              |
+| `first_value(column n)`       | typeof column     | Returns the first value in an ordered set of values.                   |
+| `last_value(column n)`        | typeof column     | Returns the last value in an ordered set of values.                    |
+| `nth_value(column n, offset)` | typeof column     | Returns the value at the specified offset in an ordered set of values. |
 
 
 ## Further reading

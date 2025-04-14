@@ -3,7 +3,7 @@ aliases: []
 categories:
 - クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: 主要な Azure Arc メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_arc/

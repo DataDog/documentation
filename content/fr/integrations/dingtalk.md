@@ -1,10 +1,11 @@
 ---
 categories:
-  - collaboration
-  - notification
-ddtype: crawler
+- collaboration
+- notifications
+custom_kind: integration
 dependencies: []
-description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk de votre équipe.
+description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk de votre
+  équipe.
 doc_link: https://docs.datadoghq.com/integrations/dingtalk/
 draft: false
 git_integration_title: dingtalk
@@ -13,14 +14,16 @@ integration_id: dingtalk
 integration_title: DingTalk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: dingtalk
 public_title: Intégration Datadog/DingTalk
-short_description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk de votre équipe.
+short_description: Envoyez des alertes et des graphiques Datadog au groupe DingTalk
+  de votre équipe.
 version: '1.0'
 ---
-## Présentation
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Section Overview
 
 Intégrez DingTalk à Datadog pour :
 
@@ -63,6 +66,6 @@ L'intégration DingTalk n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/dingtalk
+[1]: https://app.datadoghq.com/integrations/dingtalk
 [2]: https://docs.datadoghq.com/fr/monitors/notifications/#notification
 [3]: https://docs.datadoghq.com/fr/help/

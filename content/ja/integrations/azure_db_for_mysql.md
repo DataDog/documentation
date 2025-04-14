@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - data stores
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/

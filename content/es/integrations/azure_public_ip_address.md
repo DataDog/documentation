@@ -22,7 +22,7 @@ short_description: Rastrea las métricas principales de Azure Public IP Address.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Cuando se asigna una dirección IP pública de Azure a un recurso, habilita la comunicación entrante y la conectividad saliente desde Internet.
@@ -45,13 +45,13 @@ Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No
 
 La integración Azure Public IP Address no incluye ningún evento.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Public IP Address no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_public_ip_address/azure_public_ip_address_metadata.csv
