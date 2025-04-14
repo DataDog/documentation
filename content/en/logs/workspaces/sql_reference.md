@@ -64,14 +64,9 @@ FROM orders
 WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
 | `AS`        | Renames a column or table with an alias.                                                        | {{< code-block lang="sql" >}}SELECT first_name AS name 
 FROM employees {{< /code-block >}}                |
-| Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
+| Arithmetic Operations |forms basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units: 
-- `milliseconds` / `millisecond`
-- `seconds` / `second`
-- `minutes` / `minute`
-- `hours` / `hour`
-- `days` / `day` |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
 
 ## Functions
