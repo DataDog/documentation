@@ -1618,9 +1618,9 @@ menu:
           - ListTagsByMetricName
         unstable: []
         order: 6
-    - name: List active tags and aggregations
-      url: '#list-active-tags-and-aggregations'
-      identifier: metrics-list-active-tags-and-aggregations
+    - name: List active tags
+      url: '#list-active-tags'
+      identifier: metrics-list-active-tags
       parent: metrics
       generated: true
       params:
