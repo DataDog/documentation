@@ -148,7 +148,9 @@ java.lang.Exception: Something bad happened!
 
 Custom samples tokenize the first 60 bytes of a log line and the provided sample. In order to determine if sample matching is right for you, it's helpful to know how logs are tokenized. 
 
-Tokens include words and their length, whitespace, numbers and their length, special characters, and datetime components. Each token in the log is compared with each token in the sample (from left to right). if 75% of tokens must match, the log is marked for aggregation. You should use sample based matching if your logs have a stable format. If you need more flexible matching you can use a regex. 
+Tokens include words and their length, whitespace, numbers and their length, special characters, and datetime components. Each token in the log is compared with each token in the sample (from left to right). If 75% of the log's tokens match the sample's tokens, the log is marked for aggregation. 
+	
+Datadog recommends using sample based matching if your logs have a stable format. If you need more flexible matching you can use a regex. 
 
 ### Regex Patterns
 
@@ -267,8 +269,8 @@ logs_config:
 
 These settings add the following tags to your logs so you can search for them in the logs explorer:
 
-- `multiline` tag: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
-- `truncated` tag: Shows truncation source (e.g., `single_line`, `multi_line`)
+- `multiline`: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
+- `truncated`: Shows truncation source (e.g., `single_line`, `multi_line`)
 **Note:** Truncation can occur if the log is too long for the agent to process. If a line is too long before multiline aggregation, it will get the `single_line` tag. If an incorrect pattern caused a log to aggregate and overflow the aggregation buffer, the `multi_line` tag will be used. 
 
 
