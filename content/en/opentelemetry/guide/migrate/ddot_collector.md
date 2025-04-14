@@ -179,12 +179,12 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
-  site: datadoghq.com
+  site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
   logLevel: info
    {{< /code-block >}}
-   Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+   Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
 
 1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
