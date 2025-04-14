@@ -12,7 +12,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-**Note**: This feature is available for Agent version `7.65.0` and above. For older Agent versions or to explicitly enable the V1 implementation, see [Auto Multi-line Detection and Aggregation V1][2].
+<div class="alert alert-warning">This feature is available for Agent version `7.65.0` and above. For older Agent versions or to explicitly enable the V1 implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation V1</a> </div>
 
 ## Overview
 
@@ -269,7 +269,7 @@ These settings add the following tags to your logs so you can search for them in
 
 - `multiline` tag: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
 - `truncated` tag: Shows truncation source (e.g., `single_line`, `multi_line`)
-  - Truncation can occur if the log is too long for the agent to process. If a line is too long before multiline aggregation, it will get the `single_line` tag. If an incorrect pattern caused a log to aggregate and overflow the aggregation buffer, the `multi_line` tag will be used. 
+**Note:** Truncation can occur if the log is too long for the agent to process. If a line is too long before multiline aggregation, it will get the `single_line` tag. If an incorrect pattern caused a log to aggregate and overflow the aggregation buffer, the `multi_line` tag will be used. 
 
 
 ## Configuration Reference
