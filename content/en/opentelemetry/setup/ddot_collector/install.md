@@ -264,6 +264,48 @@ datadog:
     release: helm_release
 {{< /code-block >}}
 
+{{% collapse-content title="Completed datadog-values.yaml file" level="p" %}}
+Your `datadog-values.yaml` file should look something like this:
+{{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
+agents:
+  image:
+    repository: gcr.io/datadoghq/agent
+    tag: {{< version key="agent_tag_jmx" >}}
+    doNotCheckTag: true
+
+datadog:
+  site: datadoghq.com
+  apiKeyExistingSecret: datadog-secret
+  appKeyExistingSecret: datadog-secret
+  logLevel: info
+
+  otelCollector:
+    enabled: true
+    ports:
+      - containerPort: "4317"
+        hostPort: "4317"
+        name: otel-grpc
+      - containerPort: "4318"
+        hostPort: "4318"
+        name: otel-http
+  apm:
+    portEnabled: true
+    peer_tags_aggregation: true
+    compute_stats_by_span_kind: true
+    peer_service_aggregation: true
+  orchestratorExplorer:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+
+  podLabelsAsTags:
+    app: kube_app
+    release: helm_release
+   {{< /code-block >}}
+
+{{% /collapse-content %}}
+
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: /getting_started/site/
 [3]: /containers/guide/changing_container_registry/
@@ -345,6 +387,107 @@ In the snippet below, the Collector configuration is placed directly under the `
 {{< /code-block >}}
 
 When you apply the `datadog-agent.yaml` file containing this `DatadogAgent` resource, the Operator automatically mounts the Collector configuration into the Agent DaemonSet.
+
+{{% collapse-content title="Completed datadog-agent.yaml file with inlined Collector config" level="p" %}}
+Completed `datadog-agent.yaml` with inline Collector configuration should look something like this:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
+        pullPolicy: Always
+
+  # Enable Features
+  features:
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configData: |-
+          receivers:
+            prometheus:
+              config:
+                scrape_configs:
+                  - job_name: "datadog-agent"
+                    scrape_interval: 10s
+                    static_configs:
+                      - targets:
+                          - 0.0.0.0:8888
+            otlp:
+              protocols:
+                grpc:
+                  endpoint: 0.0.0.0:4317
+                http:
+                  endpoint: 0.0.0.0:4318
+          exporters:
+            debug:
+              verbosity: detailed
+            datadog:
+              api:
+                key: ${env:DD_API_KEY}
+                site: ${env:DD_SITE}
+          processors:
+            infraattributes:
+              cardinality: 2
+            batch:
+              timeout: 10s
+          connectors:
+            datadog/connector:
+              traces:
+                compute_top_level_by_span_kind: true
+                peer_tags_aggregation: true
+                compute_stats_by_span_kind: true
+          service:
+            pipelines:
+              traces:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog, datadog/connector]
+              metrics:
+                receivers: [otlp, datadog/connector, prometheus]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+              logs:
+                receivers: [otlp]
+                processors: [infraattributes, batch]
+                exporters: [debug, datadog]
+{{< /code-block >}}
+{{% /collapse-content %}}
 
 #### ConfigMap-based Collector Configuration
 
@@ -429,6 +572,117 @@ data:
 {{< /code-block >}}
 
 The Operator automatically mounts `otel-config.yaml` from the ConfigMap into the Agent's OpenTelemetry Collector DaemonSet.
+
+{{% collapse-content title="Completed datadog-agent.yaml file with Collector config in the ConfigMap" level="p" %}}
+Completed `datadog-agent.yaml` with Collector configuration defined as ConfigMap should look something like this:
+{{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: <CLUSTER_NAME>
+    site: <DATADOG_SITE>
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+
+  override:
+    # Node Agent configuration
+    nodeAgent:
+      image:
+        name: "gcr.io/datadoghq/agent:{{< version key="agent_tag" >}}"
+        pullPolicy: Always
+
+  # Enable Features
+  features:
+    apm:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+    processDiscovery:
+      enabled: true
+    liveProcessCollection:
+      enabled: true
+    usm:
+      enabled: true
+    clusterChecks:
+      enabled: true
+    otelCollector:
+      enabled: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: otel-grpc
+        - containerPort: 4318
+          hostPort: 4318
+          name: otel-http
+      conf:
+        configMap:
+          name: otel-agent-config-map
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-agent-config-map
+  namespace: system
+data:
+  # must be named otel-config.yaml
+  otel-config.yaml: |-
+    receivers:
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: "datadog-agent"
+              scrape_interval: 10s
+              static_configs:
+                - targets:
+                    - 0.0.0.0:8888
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+    exporters:
+      debug:
+        verbosity: detailed
+      datadog:
+        api:
+          key: ${env:DD_API_KEY}
+          site: ${env:DD_SITE}
+    processors:
+      infraattributes:
+        cardinality: 2
+      batch:
+        timeout: 10s
+    connectors:
+      datadog/connector:
+        traces:
+          compute_top_level_by_span_kind: true
+          peer_tags_aggregation: true
+          compute_stats_by_span_kind: true
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog, datadog/connector]
+        metrics:
+          receivers: [otlp, datadog/connector, prometheus]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+        logs:
+          receivers: [otlp]
+          processors: [infraattributes, batch]
+          exporters: [debug, datadog]
+{{< /code-block >}}
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "Helm" %}}
