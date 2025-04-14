@@ -16,14 +16,7 @@ further_reading:
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
 
-## Limitations
-
-Keep in mind the following limitations when using this setup:
-
-- This instrumentation method **does not support [advanced RUM configurations][1]**, except for `allowedTracingUrls` and `excludedActivityUrls`.
-- If your web server is acting as a proxy and the upstream server uses **end-to-end encryption (TLS)** or **content compression** (gzip, zstd, Brotli), the RUM Browser SDK may **not be injected**. To ensure proper instrumentation:
-  - **Disable content compression** on the upstream server.
-  - **Enable TLS origination** on the web server.
+To understand important limitations and compatibility requirements, see [Limitations][1].
 
 ## Prerequisites
 
@@ -54,6 +47,8 @@ To automatically instrument your RUM application:
 {{% /collapse-content %}}
 
 {{% collapse-content title="Manual configuration" level="h5" %}}
+
+If you want to manually load the module onto your web server instead of running the installation script, you can follow the below instructions.
 
 To manually instrument your RUM application:
 
@@ -128,7 +123,7 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 
 ### Limitations
-See other [Limitations][40].
+See other [Limitations][1].
 
 ## Reference
 
@@ -157,7 +152,7 @@ See other [Limitations][40].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://docs.nginx.com/nginx/admin-guide/dynamic-modules/dynamic-modules/
 [4]: https://app.datadoghq.com/rum/list
@@ -196,4 +191,3 @@ See other [Limitations][40].
 [37]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-amd64-1.27.4.so.tgz
 [38]: https://rum-auto-instrumentation.s3.amazonaws.com/nginx/latest/ngx_http_datadog_module-arm64-1.27.4.so.tgz
 [39]: https://nginx.org/en/docs/ngx_core_module.html#error_log
-[40]: /real_user_monitoring/browser/setup/server/#limitations

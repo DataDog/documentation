@@ -16,6 +16,8 @@ further_reading:
 
 RUM Auto-Instrumentation works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy.
 
+To understand important limitations and compatibility requirements, see [Limitations][1].
+
 ## Prerequisites
 
 The [Datadog Agent][2] is installed and configured.
@@ -69,14 +71,13 @@ If you notice that RUM is not being injected into HTML pages, consider the follo
 - **Content-Type mismatch**: RUM is injected only into HTML pages. If the `Content-Type` header does not correctly indicate `text/html`, the injection is skipped.
 
 ### Limitations
-See other [Limitations][5].
+See other [Limitations][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/
+[1]: /real_user_monitoring/browser/setup/server/#limitations
 [2]: /agent/
 [3]: https://app.datadoghq.com/rum/list/create/
 [4]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
-[5]: /real_user_monitoring/browser/setup/server/#limitations
