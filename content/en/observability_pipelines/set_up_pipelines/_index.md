@@ -44,6 +44,8 @@ For detailed setup instructions, select a template-specific documentation and th
   - [Log Enrichment][9]
   - [Generate Metrics][10]
 
+After you have set up your pipeline, see [Update Existing Pipelines][11] if you want to make any changes to it.
+
 [1]: /observability_pipelines/sources/
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
@@ -54,30 +56,35 @@ For detailed setup instructions, select a template-specific documentation and th
 [8]: /observability_pipelines/set_up_pipelines/sensitive_data_redaction/
 [9]: /observability_pipelines/set_up_pipelines/log_enrichment/
 [10]: /observability_pipelines/set_up_pipelines/generate_metrics/
+[11]: /observability_pipelines/update_existing_pipelines/
 
 {{% /tab %}}
 
 {{% tab "API" %}}
 
-Use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+You can use the API to [create a pipeline][1]. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+
+See the [update a pipeline][3] endpoint if you want to make any changes to an existing pipeline.
 
 [1]: /api/latest/observability-pipelines/#create-a-new-pipeline
 [2]: /observability_pipelines/install_the_worker/
+[3]: /api/latest/observability-pipelines/#update-a-pipeline
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline.
+You can use the [Terraform module][1] to create a pipeline. After the pipeline has been created, [install the Worker][2] to start sending logs through the pipeline. 
+
+See [Terraform update module][3] if you want to make any changes to an existing pipeline.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 [2]: /observability_pipelines/install_the_worker/
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Advanced Configurations][11] for bootstrapping options and for details on setting up the Worker with Kubernetes.
-
-After you have set up your pipeline, see [Update Existing Pipelines][12] if you want to make any changes to it.
+See [Advanced Configurations][11] for bootstrapping options.
 
 ### Index your Worker logs
 
@@ -105,6 +112,5 @@ Make sure your Worker logs are [indexed][14] in Log Management for optimal funct
 [2]: /observability_pipelines/processors/
 [3]: /observability_pipelines/destinations/
 [11]: /observability_pipelines/advanced_configurations/
-[12]: /observability_pipelines/update_existing_pipelines/
 [13]: /observability_pipelines/install_the_worker/
 [14]: /logs/log_configuration/indexes/
