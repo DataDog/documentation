@@ -141,7 +141,7 @@ GROUP BY service_name
 {{< /code-block >}} 
 
 ### `CEIL`
-{{< code-block lang="sql" >}} 
+{{< code-block lang="sql" >}}
 SELECT CEIL(price) AS rounded_price 
 FROM products 
 {{< /code-block >}}
