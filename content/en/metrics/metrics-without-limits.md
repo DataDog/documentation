@@ -90,7 +90,7 @@ Existing tag configurations are retained, and you define new tags to be added to
 
 #### Use the API
 
-You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API call.
+You can [configure][13] and [delete][14] tags for multiple metrics through the API.
 
 **Note**: Use the `include_actively_queried_tags_window` attribute to include only tags actively queried within a given time frame.
 
