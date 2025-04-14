@@ -30,7 +30,7 @@ With routing rules, you can define granular logic to control how alerts reach yo
   - `warn` status ➝ low urgency
   - `alert` status ➝ high urgency
 
-  The urgency of a page determines how end users are notified, based on their preferences. <br>
+  The urgency of a page determines how end users are notified, based on their preferences. <br> <br>
 
 - Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
 
