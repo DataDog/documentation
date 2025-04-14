@@ -2114,31 +2114,46 @@ menu:
       parent: software_catalog_scorecards
       identifier: using_scorecards
       weight: 703
+    - name: Engineering Reports
+      url: software_catalog/eng_reports
+      parent: software_catalog
+      identifier: software_catalog_eng_reports
+      weight: 8
+    - name: Reliability Overview
+      url: software_catalog/eng_reports/reliability_overview
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_reliability_overview
+      weight: 801
+    - name: Scorecards Performance
+      url: software_catalog/eng_reports/scorecards_performance
+      parent: software_catalog_eng_reports
+      identifier: eng_reports_scorecards_perf
+      weight: 802
     - name: Self-Service Actions
       url: software_catalog/self_service_actions
       parent: software_catalog
       identifier: self_service_actions
-      weight: 8
+      weight: 9
     - name: Software Templates
       url: software_catalog/self_service_actions/software_templates
       parent: self_service_actions
       identifier: software_templates
-      weight: 801
+      weight: 901
     - name: Definition APIs
       url: software_catalog/apis
       parent: software_catalog
       identifier: software_catalog_apis
-      weight: 9
+      weight: 10
     - name: Integrations
       url: software_catalog/integrations
       parent: software_catalog
       identifier: software_catalog_integrations
-      weight: 10
+      weight: 11
     - name: Troubleshooting
       url: software_catalog/troubleshooting
       parent: software_catalog
       identifier: software_catalog_troubleshooting
-      weight: 11
+      weight: 12
     - name: Error Tracking
       url: error_tracking/
       pre: error-tracking
