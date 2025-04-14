@@ -9,7 +9,7 @@ aliases:
 
 Datadog Software Catalog provides a centralized registry to track and manage your software components, such as services, datastores, queues, frontend applications, APIs, and more. Component attributes like teams, on-call, runbooks, and source code links are managed through the [Entity Definitions][1], which are k8s-style YAML configuration files. 
 
-The [automatic discovery][2] feature in the Software Catalog means that if you are an existing Datadog user of Datadog’s APM, USM, or RUM products, the Software Catalog comes pre-populated with monitored components. You can extend the auto-populated Software Catalog by adding other components by creating Entity Definitions to represent any unmonitored components. 
+The [automatic discovery][2] feature in the Software Catalog means that if you are an existing Datadog user of Datadog's APM, USM, or RUM products, the Software Catalog comes pre-populated with monitored components. You can extend the auto-populated Software Catalog by adding other components by creating Entity Definitions to represent any unmonitored components. 
 
 Depending on whether you are an existing APM, USM, or RUM user, you can follow one of the following setup paths.
 
