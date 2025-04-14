@@ -185,12 +185,9 @@ datadog:
   site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  logLevel: info
 {{< /code-block >}}
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-
-<div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
 
 3. Switch the Datadog Agent image tag to use builds with the DDOT OpenTelemetry Collector:
 
