@@ -1251,6 +1251,26 @@
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
   },
+  "CreateOnCallSchedule": {
+    "description": "Create a new on-call schedule",
+    "summary": "Create on-call schedule",
+    "request_description": "",
+    "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
+  },
+  "DeleteOnCallSchedule": {
+    "description": "Delete an on-call schedule",
+    "summary": "Delete on-call schedule"
+  },
+  "GetOnCallSchedule": {
+    "description": "Get an on-call schedule",
+    "summary": "Get on-call schedule"
+  },
+  "UpdateOnCallSchedule": {
+    "description": "Update a new on-call schedule",
+    "summary": "Update on-call schedule",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
+  },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
     "summary": "List Org Configs"

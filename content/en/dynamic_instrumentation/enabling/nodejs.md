@@ -70,8 +70,6 @@ The following limitations apply to the limited preview:
 
 - Dynamic Metrics, Spans, and Span Tags
 - Dynamic Logs attached to a function/method
-- Custom template for Dynamic Logs
-- Dynamic Log conditions
 - PII redaction based on specific classes or types
 
 ## Further reading
