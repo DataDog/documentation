@@ -75,7 +75,7 @@ To set up the AWS integration manually, create an IAM policy and IAM role in you
 ### AWS IAM role for Datadog
 Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 
-5. Create a new role in the AWS [IAM Console][4].
+5. Create a role in the AWS [IAM Console][4].
 6. Select **AWS account** for the trusted entity type, and **Another AWS account**.
 {{< site-region region="us,us3,us5,eu" >}}
 7. Enter `464622532012` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
@@ -95,28 +95,26 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 14. Give the role a name such as `DatadogIntegrationRole`, as well as an apt description.
 15. Click **Create Role**.
 
-### AWS IAM policy for Datadog
+### AWS IAM Policy for Datadog
 Create an inline IAM policy with the [necessary permissions](#aws-integration-iam-policy) and link it to Datadog's integration role in your AWS account to take advantage of every AWS integration offered by Datadog. As other components are added to an integration, these permissions may change.
 
-16. Create a new inline policy in the AWS [IAM Console][3].
-17. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox.<br>
+16. Navigate back to the created role in the AWS [IAM Console][3].
+17. Click **Add permissions**.
+18. Select **Create inline policy**.
+19. Select the **JSON** tab. Paste the [permission policies](#aws-integration-iam-policy) in the textbox.<br>
   **Note**: Optionally, you can add [Condition][7] elements to the IAM policy. For example, conditions can be used to [restrict monitoring to certain regions][8].
-18. Name the policy `DatadogIntegrationPolicy` or one of your own choosing, and provide an apt description.
-19. Click **Create policy**.
-20. Navigate to the created policy.
-21. Select **Entities Attached** tab, in the **Attached as a permissions policy** section.
-22. Click **Attach**.
-23. Lookup and select Datadog integration role created in the previous section.
-24. Click **Attach policy**.
+20. Name the policy `DatadogIntegrationPolicy` or one of your own choosing, and provide an apt description.
+21. Click **Create policy**.
+
 
 ### Complete the setup in Datadog
 
-25. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
-26. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
-27. Enter the name of the role created in the previous section, and click **Save**.
+22. Return to the AWS integration configuration page for manually adding an account in Datadog that you had open in another tab. Click the checkbox to confirm the Datadog IAM role was added to the AWS account.
+23. Enter the account ID **without dashes**, for example: `123456789012`. Your Account ID can be found in the ARN of the role created for Datadog.
+24. Enter the name of the role created in the previous section, and click **Save**.
   **Note**: The role name you enter in the integration tile is case sensitive and must exactly match the role name in AWS.
-28. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][6].
-29. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
+25. If there is a [Datadog is not authorized to perform sts:AssumeRole][6] error, follow the troubleshooting steps recommended in the UI, or read the [troubleshooting guide][6].
+26. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
 *\* All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][10] section on our website.*
 
