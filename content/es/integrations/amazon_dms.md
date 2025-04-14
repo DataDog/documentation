@@ -22,7 +22,7 @@ short_description: Rastrea métricas clave de AWS Database Migration Service (DM
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 AWS Database Migration Service (DMS) es un servicio en la nube que facilita la migración de bases de datos relacionales, almacenes de datos, bases de datos NoSQL y otros tipos de almacenes de datos.
@@ -40,7 +40,7 @@ Si aún no lo has hecho, configura primero la [integración de Amazon Web Servic
 1. En la [página de la integración de AWS][2], asegúrate de que `Database Migration Service` está habilitado en la pestaña `Metric Collection`.
 2. Instala la [integración de Datadog y AWS Database Migration Service (DMS)][3].
 
-### APM
+### Recopilación de logs
 
 #### Activar logging
 
@@ -70,7 +70,7 @@ La integración de AWS Database Migration Service (DMS) no incluye ningún event
 
 La integración de AWS Database Migration Service (DMS) no incluye ningún check de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][8].
 

@@ -2,6 +2,7 @@
 categories:
 - cloud
 - collaboration
+custom_kind: integration
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog à Moxtra.
 doc_link: https://docs.datadoghq.com/integrations/moxtra/
@@ -12,7 +13,6 @@ integration_id: moxtra
 integration_title: Moxtra
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: moxtra
 public_title: Intégration Datadog/Moxtra
@@ -21,7 +21,7 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Moxtra fournit un service de collaboration dans le cloud multicouches et intégrable qui permet à ses utilisateurs de travailler à leurs bureaux ou pendant leurs déplacements.
 
@@ -30,9 +30,9 @@ Intégrez Moxtra pour :
 - Recevoir une notification lorsqu'une alerte de métrique se déclenche
 - Partager vos graphiques avec votre équipe
 
-## Formule et utilisation
+## Configuration
 
-### Liste des infrastructures
+### Installation
 
 Pour activer cette intégration…
 
@@ -41,21 +41,21 @@ Pour activer cette intégration…
 3. Ajoutez l'URL de votre webhook aux services compatibles avec des webhooks de Datadog dans le [carré Datadog/Webhook][1].
 4. Cliquez sur le bouton **Install Integration** sur le [carré d'intégration Moxtra][2].
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 
 L'intégration Moxtra n'inclut aucune métrique.
 
-### Aide
+### Événements
 
 L'intégration Moxtra n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration Moxtra n'inclut aucun check de service.
 
-## Aide
+## Dépannage
 
 Besoin d'aide ? Contactez [l'assistance Datadog][3].
 

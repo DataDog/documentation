@@ -40,7 +40,7 @@ The following table presents the list of collected features and the minimal Agen
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0 |
 | Data Transfer Cost Allocation    | 7.58.0 | 7.58.0 |
 
-1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the AWS Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. For Kubernetes support, install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. For AWS ECS support, set up [**Datadog Container Monitoring**][104] in ECS tasks.
 1. Optionally, enable [AWS Split Cost Allocation][105] for usage-based ECS allocation.
@@ -69,7 +69,7 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Azure Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 
@@ -90,7 +90,7 @@ The following table presents the list of collected features and the minimal Agen
 | Container Cost Allocation | 7.27.0 | 1.11.0 |
 | GPU Container Cost Allocation | 7.54.0 | 7.54.0 |
 
-1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
+1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
 1. To enable GPU container cost allocation, install the [Datadog DCGM integration][104].
 

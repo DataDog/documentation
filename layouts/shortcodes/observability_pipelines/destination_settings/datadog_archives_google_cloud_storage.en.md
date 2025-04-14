@@ -1,3 +1,5 @@
+<div class="alert alert-warning">The Google Cloud Storage destination only supports <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a>.</div>
+
 1. Enter the name of the Google Cloud storage bucket you created earlier.
 1. Enter the path to the credentials JSON file you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket).
 1. Select the storage class for the created objects.
