@@ -30,7 +30,7 @@ algolia:
 <div class="alert alert-warning">This document is for agents older than `7.65.0` or if you have explicitly enabled the V1 implementation of auto multi-line detection. For more recent agent versions, see <a href="/agent/logs/auto_multiline_detection">Auto Multi-line Detection and Aggregation</a></div>
 
 ### Global automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][1] automatically for **all** log integrations it sets up. In Agent versions 7.65+ you can opt into the legacy behavior by setting `logs_config.force_auto_multi_line_detection_v1: true`.
+With Agent 7.37+, `auto_multi_line_detection` can be enabled and allows the Agent to detect [common multi-line patterns][1] automatically for **all** log integrations it sets up. In Agent versions 7.65+ you can opt into the legacy behavior by setting `logs_config.force_auto_multi_line_detection_v1: true` in `datadog.yaml` or `LOGS_CONFIG_FORCE_AUTO_MULTI_LINE_DETECTION_V1=true` as an environment variable.
 
 [1]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 
