@@ -13,11 +13,11 @@ Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This art
 
 ## Bring your own threat intelligence
 
-Cloud SIEM supports enriching and searching logs with threat intelligence indicators of compromise stored in Datadog reference tables. Reference Tables allow you to combine metadata with information already in Datadog.
+Cloud SIEM supports enriching and searching logs with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, hash, and so on) and requires the columns: field, data, description, required, and example.
+Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, hash, and so on) and requires the following columns:
 
 #### CSV Structure for IP Address
 
@@ -25,18 +25,18 @@ Threat intelligence is supported in the CSV format, and requires a table for eac
 |-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
 | ip_address        | text  | The primary key for the reference table in the IPv4 dot notation format.                       | true     | 192.0.2.1                       |
 | additional_data   | json  | Additional data to enrich the logs.                                                            | false    | `{"ref":"hxxp://example.org"}`    |
-| category          | text  | The threat intel category. This is used by some out of the box detection rules.                | true     | Malware                          |
-| intention         | text  | The threat intel intent. This is used by some out of the box detection rules.                  | true     | malicious                        |
+| category          | text  | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                | true     | Malware                          |
+| intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
 | source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 #### CSV Structure for Domain
 
 | Field            | Data  | Description                                                                                     | Required | Example                          |
 |-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
-| domain            | text  | The primary key for the reference table                                                        | true     | mal-domain.com                  |
+| domain            | text  | The primary key for the reference table.                                                        | true     | mal-domain.com                  |
 | additional_data   | json  | Additional data to enrich the trace.                                                           | false    | `{"ref":"hxxp://example.org"}`    |
-| category          | text  | The threat intel category. This is used by some out of the box detection rules.                | true     | Phishing                         |
-| intention         | text  | The threat intel intent. This is used by some out of the box detection rules.                  | true     | malicious                        |
+| category          | text  | The threat intel [category][8]. This is used by some out-of-the-box detection rules.                | true     | Phishing                         |
+| intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
 | source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
 <div class="alert alert-info">JSON in a CSV requires double quoting. The following is an example CSV.</div>
@@ -79,9 +79,8 @@ See the related reference table documentation for:
 If the reference tables are not refreshing, select the **View Change Events** link from the settings on the reference table detail page.
 
 **View Change Events** opens a page in **Event Management** showing potential error events for the ingestion. You can also filter in **Event Management** using the reference table name.
-In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intellegence.
 
-Other useful cloud import details to remember:
+In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intellegence. Other useful cloud import details to remember:
 
 - The expected latency before updated enrichments are available when a source is uploaded or updated is 10 to 30 minutes.
 - How to know when the updates are applied: The changes are visible in the reference table or in the logs. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
@@ -106,3 +105,6 @@ After applying a Reference Table to Cloud SIEM, all incoming logs are evaluated 
 [4]: /reference_tables/?tab=amazons3#create-a-reference-table
 [5]: /reference_tables/?tab=azurestorage#create-a-reference-table
 [6]: /reference_tables/?tab=googlecloudstorage#create-a-reference-table
+[7]: /reference_tables/
+[8]: /security/threat_intelligence/#threat-intelligence-categories
+[9]: /security/threat_intelligence/#threat-intelligence-intents
