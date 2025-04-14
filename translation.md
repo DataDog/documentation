@@ -78,6 +78,8 @@ Do translate these _values_ (but not their corresponding keys):
 
 Markdown files end in `.md` (not `.mdoc.md` -- that's a Markdoc file, covered in a later section). They contain a mix of YAML, Markdown, HTML, and [Hugo shortcode](https://gohugo.io/content-management/shortcodes/) syntax.
 
+Each type of syntax has its own translation guidelines.
+
 ### Frontmatter
 
 The frontmatter of a file includes metadata such as the page's title:
@@ -94,7 +96,7 @@ aliases:
 
 Frontmatter appears at the top of the file, beginning and ending with `---` appearing on its own line. Its contents are in YAML ([overview section of YAML spec](https://yaml.org/spec/1.2.2#chapter-2-language-overview)). It contains key-value pairs that differ from page to page.
 
-#### Translation guidance
+#### Frontmatter translation guidance
 
 ##### Do not translate
 
@@ -123,7 +125,7 @@ Translate only the _values_ listed below:
 
 Markdown files can contain standard HTML tags, such as `<div class="alert alert-info">Text containing an <a href="https://google.com">HTML link.</a></div>`.
 
-#### Translation guidance
+#### HTML translation guidance
 
 ##### Do not translate
 
@@ -168,7 +170,7 @@ Some contents written in Markdown. A nested tag might appear here.
 {{< tag-name >}}
 ```
 
-### Translation guidance
+### Shortcode translation guidance
 
 #### Do not translate
 
@@ -210,7 +212,7 @@ This content will only show if the page's `$color` variable is set to "red".
 {% /if %}
 ```
 
-### Translation guidance
+### Markdoc translation guidance
 
 #### Do translate
 
