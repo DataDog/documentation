@@ -35,6 +35,7 @@ Download the Dockerfile template:
    ```shell
    mkdir -p agent-with-otel
    cd agent-with-otel
+   ```
 2. Download the Dockerfile
    ```shell
    curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel
