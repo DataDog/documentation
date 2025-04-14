@@ -1,7 +1,7 @@
 ---
 title: Use Custom OpenTelemetry Components with Datadog Agent
 aliases:
-- "/opentelemetry/setup/ddot_collector/custom_components/"
+- "/opentelemetry/agent/agent_with_custom_components"
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
@@ -35,7 +35,6 @@ Download the Dockerfile template:
    ```shell
    mkdir -p agent-with-otel
    cd agent-with-otel
-   ```F
 2. Download the Dockerfile
    ```shell
    curl -o Dockerfile https://raw.githubusercontent.com/DataDog/datadog-agent/refs/tags/{{< version key="agent_version" >}}/Dockerfiles/agent-ot/Dockerfile.agent-otel

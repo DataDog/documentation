@@ -360,12 +360,12 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/setup/ddot_collector/install/#included-components
+[1]: /opentelemetry/setup/ddot_collector/#included-components
 [2]: /opentelemetry/setup/ddot_collector/install/#install-the-datadog-agent-with-opentelemetry-collector
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /opentelemetry/setup/ddot_collector/custom_components
-[5]: /opentelemetry/setup/ddot_collector/install/#add-the-datadog-helm-repository
-[6]: /opentelemetry/setup/ddot_collector/install/#set-up-the-api-and-application-keys
+[5]: /opentelemetry/setup/ddot_collector/install/?tab=helm#add-the-datadog-helm-repository
+[6]: /opentelemetry/setup/ddot_collector/install/#set-up-datadog-api-and-application-keys
 [7]: /opentelemetry/setup/ddot_collector/install/#configure-the-datadog-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys

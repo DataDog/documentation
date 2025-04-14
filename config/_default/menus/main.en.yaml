@@ -880,11 +880,11 @@ menu:
     - name: New Operation Name Mappings
       url: /opentelemetry/guide/migrate/migrate_operation_names/
       parent: otel_guides_migration
-      weight: 10042
+      weight: 10043
     - name: Agent with DDOT Collector
       url: /opentelemetry/guide/migrate/ddot_collector/
       parent: otel_guides_migration
-      weight: 10043
+      weight: 10044
     - name: Reference
       url: /opentelemetry/reference
       identifier: otel_reference
