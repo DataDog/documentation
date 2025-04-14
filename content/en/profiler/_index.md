@@ -37,6 +37,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/continuous-profiler-context-attributes/'
       tag: 'Blog'
       text: 'How our Cloud SIEM team uses context attributes with Continuous Profiler to get crucial performance insights'
+    - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
+      tag: 'Blog'
+      text: 'Making profiling visualizations accessible to engineers at all levels'
 cascade:
     algolia:
         rank: 70
