@@ -1,5 +1,5 @@
 ---
-title: Automatic Multi-line Detection and Aggregation V1
+title: Automatic Multi-line Detection and Aggregation (Legacy)
 description: Use the Datadog Agent to detect and aggregate multi-line logs automatically 
 further_reading:
 - link: "/logs/guide/getting-started-lwl/"

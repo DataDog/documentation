@@ -7,12 +7,12 @@ further_reading:
   text: "Advanced Log Collection"
 - link: "/agent/logs/auto_multiline_detection_legacy"
   tag: "Documentation"
-  text: "Auto Multi-line Detection and Aggregation V1"
+  text: "Auto Multi-line Detection and Aggregation (Legacy)"
 algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-warning">This feature is available for Agent version `7.65.0` and above. For older Agent versions or to explicitly enable the V1 implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation V1</a> </div>
+<div class="alert alert-warning">This feature is available for Agent version `7.65.0` and above. For older Agent versions or to explicitly enable the V1 implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a> </div>
 
 ## Overview
 
@@ -146,11 +146,17 @@ java.lang.Exception: Something bad happened!
 
 #### How Custom Samples Work
 
-Custom samples tokenize the first 60 bytes of a log line and the provided sample. In order to determine if sample matching is right for you, it's helpful to know how logs are tokenized. 
+Custom samples tokenize the first 60 bytes of a log line and also tokenize the provided sample. 
+Tokens include 
+- words and their length
+- whitespace
+- numbers and their length
+- special characters
+- datetime components. 
 
-Tokens include words and their length, whitespace, numbers and their length, special characters, and datetime components. Each token in the log is compared with each token in the sample (from left to right). If 75% of the log's tokens match the sample's tokens, the log is marked for aggregation. 
+Each Log token is compared with each Sample token. If 75% of the log's tokens match the sample's tokens, the log is marked for aggregation. 
 	
-Datadog recommends using sample based matching if your logs have a stable format. If you need more flexible matching you can use a regex. 
+Datadog recommends using sample based matching if your logs have a stable format. If you need more flexible matching you can use regex. 
 
 ### Regex Patterns
 
