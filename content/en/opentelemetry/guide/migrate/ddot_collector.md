@@ -1,10 +1,12 @@
 ---
 title: Migrate to the Datadog Distribution of OTel Collector
+aliases:
+- "/opentelemetry/guide/migrate/ddot_collector"
 further_reading:
-- link: "/opentelemetry/agent/agent_with_custom_components"
+- link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
-- link: "/opentelemetry/agent/install_agent_with_collector"
+- link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Install the Datadog Distribution of OTel Collector"
 ---
@@ -94,7 +96,7 @@ service:
 
 In this case, you need to follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
 
-[4]: /opentelemetry/agent/agent_with_custom_components
+[4]: /opentelemetry/setup/ddot_collector/custom_components
 {{% /tab %}}
 
 {{% tab "Default Agent components" %}}
@@ -358,13 +360,13 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /opentelemetry/agent/install_agent_with_collector#included-components
-[2]: /opentelemetry/agent/install_agent_with_collector#install-the-datadog-agent-with-opentelemetry-collector
+[1]: /opentelemetry/setup/ddot_collector/install/#included-components
+[2]: /opentelemetry/setup/ddot_collector/install/#install-the-datadog-agent-with-opentelemetry-collector
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /opentelemetry/agent/agent_with_custom_components
-[5]: /opentelemetry/agent/install_agent_with_collector#add-the-datadog-helm-repository
-[6]: /opentelemetry/agent/install_agent_with_collector#set-up-the-api-and-application-keys
-[7]: /opentelemetry/agent/install_agent_with_collector#configure-the-datadog-agent
+[4]: /opentelemetry/setup/ddot_collector/custom_components
+[5]: /opentelemetry/setup/ddot_collector/install/#add-the-datadog-helm-repository
+[6]: /opentelemetry/setup/ddot_collector/install/#set-up-the-api-and-application-keys
+[7]: /opentelemetry/setup/ddot_collector/install/#configure-the-datadog-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
 [10]: /getting_started/site/

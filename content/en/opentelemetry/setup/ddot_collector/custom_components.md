@@ -1,7 +1,9 @@
 ---
 title: Use Custom OpenTelemetry Components with Datadog Agent
+aliases:
+- "/opentelemetry/setup/ddot_collector/custom_components"
 further_reading:
-- link: "/opentelemetry/agent/install_agent_with_collector"
+- link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
@@ -259,4 +261,4 @@ docker system prune -a
 [6]: https://docs.docker.com/build/building/multi-stage/
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/jmxreceiver/README.md
-[9]: /opentelemetry/agent/install_agent_with_collector
+[9]: /opentelemetry/setup/ddot_collector/install/

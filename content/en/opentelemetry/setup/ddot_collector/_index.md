@@ -46,7 +46,7 @@ The DDOT Collector offers:
 ## Included components
 
 <div class="alert alert-info">
-  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/agent/agent_with_custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see the following  <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
+  <strong>Need additional OpenTelemetry components?</strong> If you need components beyond those included in the default package, follow <a href="/opentelemetry/setup/ddot_collector/custom_components">Use Custom OpenTelemetry Components</a> to extend the Datadog Agent's capabilities. For a list of components included by default, see the following  <a href="#opentelemetry-collector-components">OpenTelemetry Collector components</a> section.
 </div>
 
 ### Support levels
@@ -150,7 +150,7 @@ The default Datadog Agent package includes a DDOT Collector with a [curated set 
 - (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/agent/install_agent_with_collector" >}}Quick start with the default Agent package{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/ddot_collector/install/" >}}Quick start with the default Agent package{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Migrate from OpenTelemetry Collector to Datadog Agent
@@ -162,7 +162,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 - (Optional) If you need OpenTelemetry components beyond what's provided in the default package, follow [Use Custom OpenTelemetry Components][2] to extend the Datadog Agent's capabilities
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/agent/migration" >}}Migrate from OpenTelemetry Collector to Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/migrate/ddot_collector" >}}Migrate from OpenTelemetry Collector to Datadog Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
@@ -170,7 +170,7 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/tagging/unified_service_tagging/
-[2]: /opentelemetry/agent/agent_with_custom_components
+[2]: /opentelemetry/setup/ddot_collector/custom_components
 [3]: /containers/
 [4]: /security/sensitive_data_scanner/
 [5]: /universal_service_monitoring/
