@@ -31,9 +31,9 @@ RUM is responsible for discovering `frontend apps` components.
 
 For information about discovering endpoints, see [Discovering Endpoints from APM][10].
 
-## Discover Infrastructure and Logs services
+## Import components from Infrastructure and Logs 
 
-To discover services through Datadog infrastructure metrics or logs, navigate to the Software Catalog [**Import Entries** tab][11]. You can import services from Datadog telemetry containing the `DD_SERVICE` [tag][2].
+You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][2] to populate your Software Catalog. To discover `kind:service` components through Datadog infrastructure metrics or logs, navigate to the Software Catalog [**Import Entries** tab][11]. 
 
 {{< img src="tracing/software_catalog/import_entries.png" alt="Import Entries tab in the Software Catalog setup and configuration section" style="width:90%;" >}}
 
