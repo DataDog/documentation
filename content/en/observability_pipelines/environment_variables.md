@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-TKTK
+Some Observability Pipelines components require setting up environment variables. This document lists the environments variables for the different sources, processors, and destinations.
 
 ## Component environment variables
 
