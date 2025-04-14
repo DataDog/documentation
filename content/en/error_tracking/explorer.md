@@ -100,7 +100,7 @@ The lower part of the issue panel gives you the ability to navigate error sample
 
 ## Get alerted on new errors
 
-Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][2])
+Seeing a new issue as soon as it happens gives you the chance to proactively identify and fix it before it becomes critical. Error Tracking monitors allow you to track any new issue or issues that have a high impact in your systems or on your users (see [Error Tracking Monitors][7])
 
 You can directly export your search query from the explorer to create an Error Tracking Monitor on the related scope:
 
@@ -111,8 +111,8 @@ You can directly export your search query from the explorer to create an Error T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
-[2]: /monitors/types/error-tracking
 [3]: /error_tracking/suspected_causes
 [4]: /real_user_monitoring/explorer/search/#event-types
 [5]: /error_tracking/issue_states
 [6]: /error_tracking/regression_detection
+[7]: /monitors/types/error-tracking
