@@ -145,7 +145,7 @@ If you already have data or services registered in Backstage, you can import the
 To import Backstage definitions:
 
 - **API or Terraform**: Replace the YAMLs in your requests with Backstage YAMLs. 
-- **GitHub integration**: Save your Backstage YAMLs in a repository with Datadog read permissions. Datadog scans for files named [`catalog-info.yaml`][1] located at the root folder of the repository.
+- **GitHub integration**: Save your Backstage YAMLs in a repository with Datadog read permissions. Datadog scans for files named [`catalog-info.yaml`][1] in your repositories.
 
 During import, Datadog maps Backstage data to Datadog data:
 | Backstage Field | Datadog Mapping |
