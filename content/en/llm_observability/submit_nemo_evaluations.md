@@ -6,7 +6,7 @@ title: NeMo Evaluations
 {{< /site-region >}}
 
 ## Overview
-NVIDIA NeMo Evaluator is a cloud-native microservice that streamlines the evaluation of large language models (LLMs) by automating benchmarking against academic standards, custom datasets, and metrics like Accuracy, ROUGE, BLEU, and LLM-as-a-judge scoring. It provides structured feedback on model performance, enabling users to assess foundation and custom models efficiently and continuously optimize them for specific applications
+NVIDIA NeMo Evaluator is a cloud-native microservice that streamlines the evaluation of large language models (LLMs) by automating benchmarking against academic standards, custom datasets, and metrics like Accuracy, ROUGE, BLEU, and LLM-as-a-judge scoring. It provides structured feedback on model performance, enabling users to assess foundation and custom models efficiently and continuously optimize them for specific applications.
 
 
 ## Using NVIDIA NeMo and LLM Observability
