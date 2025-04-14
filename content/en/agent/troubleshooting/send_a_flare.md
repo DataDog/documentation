@@ -28,7 +28,7 @@ A flare gathers all of the Agent's configuration files and logs into an archive 
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
-When contacting Datadog Support with Remote Configuration enabled for an Agent, our Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to our support team to help you resolve your issue. 
+When contacting Datadog Support with Remote Configuration enabled for an Agent, the Support team may initiate a flare from your environment in order to better assist you in a timely manner. Flares provide troubleshooting information to Datadog Support to help you resolve your issue. 
 
 ## Send a flare from the Datadog site
 
