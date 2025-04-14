@@ -146,7 +146,21 @@ Translate any plaintext content inside of the tag:
 
 ### Shortcodes
 
-Shortcodes in Hugo follow the formats below.
+Hugo shortcodes are similar to HTML tags. They're used for components like images, tabs, and so on:
+
+```
+{{< tabs >}}
+{{% tab "Tab one" %}}
+The contents of tab one would go here.
+{{% /tab %}}
+
+{{% tab "Tab two" %}}
+The contents of tab two would go here.
+{{% /tab %}}
+{{< /tabs >}}
+```
+
+Shortcodes follow the formats below.
 
 #### Shortcode with opening and closing
 
