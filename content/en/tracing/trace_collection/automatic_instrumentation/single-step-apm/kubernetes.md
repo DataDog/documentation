@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-On a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration steps required. 
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration required. 
 
 ## Requirements
 
@@ -154,7 +154,7 @@ When you run the one-line installation command, there are a few options to custo
 
 {{% tab "Kubernetes (Agent v7.64+)" %}}
 
-### Configuring instrumentation for namespaces and pods
+### Configure instrumentation for namespaces and pods
 
 By default, Single Step Instrumentation instruments all services in all namespaces in your cluster. Alternatively, you can create targeting blocks with the `targets` label to specify which workloads to instrument and what configurations to apply.
 
@@ -343,7 +343,7 @@ This configuration enables APM for all pods except those that have either of the
 
 **Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
-### Enabling or disabling instrumentation for namespaces
+### Enable or disable instrumentation for namespaces
 
 You can choose to enable or disable instrumentation for applications in specific namespaces. You can only set enabledNamespaces or disabledNamespaces, not both.
 
@@ -406,7 +406,7 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 {{< /collapse-content >}}
 
 
-### Specifying tracing library versions
+### Specify tracing library versions
 
 <div class="alert alert-info">Starting with Datadog Cluster Agent v7.52.0+, you can automatically instrument a subset of your applications, based on the tracing libraries you specify.</div>
 
@@ -417,7 +417,7 @@ Specify Datadog tracing libraries and their versions to automatically instrument
 
 **Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, applications written in supported languages are automatically instrumented using the latest tracing library versions.
 
-#### Specifying at the service level
+#### Specify at the service level
 
 To automatically instrument applications in specific pods, add the appropriate language annotation and library version for your application in your pod spec:
 
@@ -459,7 +459,7 @@ spec:
         - # ...
 {{< /highlight >}}
 
-#### Specifying at the cluster level
+#### Specify at the cluster level
 
 If you don't enable automatic instrumentation for specific pods using annotations, you can specify which languages to instrument across the entire cluster using the Single Step Instrumentation configuration. When `apm.instrumentation.libVersions` is set, only applications written in the specified languages will be instrumented, using the specified library versions.
 
@@ -522,19 +522,19 @@ For instructions on changing your container registry, see [Changing Your Contain
 {{% /tab %}}
 {{< /tabs >}}
 
-## Removing Single Step APM instrumentation from your Agent
+## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
 
-### Removing instrumentation for specific services
+### Remove instrumentation for specific services
 
-To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
+To remove APM instrumentation and stop sending traces from a specific service, you can do one of the following:
 
-#### Using workload selection (recommended)
+#### Use workload selection (recommended)
 
 With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
 
-#### Using the Datadog Admission Controller
+#### Use the Datadog Admission Controller
 
 As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
 
@@ -554,7 +554,7 @@ As an alternative, or for a version of the agent that does not support workload 
    ```
 3. Restart the services you want to remove instrumentation for.
 
-### Removing APM for all services on the infrastructure
+### Remove APM for all services on the infrastructure
 
 To stop producing traces, uninstall APM and restart the infrastructure:
 

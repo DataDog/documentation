@@ -11,11 +11,11 @@ further_reading:
 
 ## Overview
 
-On a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration steps required. 
+In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration required. 
 
 ## Enable APM on your applications
 
-To enable APM on a Docker Linux container:
+To enable APM in a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
@@ -44,9 +44,9 @@ After you complete these steps, you may want to enable [runtime metrics][3] or v
 
 ## Advanced Options
 
-When you run the one-line installation command, there are a few options to customize your experience:
+When you run the one-line installation command, there are options to customize your experience:
 
-### Customizing APM libraries
+### Customize APM libraries
 
 By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
 
@@ -67,11 +67,11 @@ Available versions are listed in source repositories for each language:
 - [PHP][13] (`php`)
 
 
-## Removing Single Step APM instrumentation from your Agent
+## Remove Single Step APM instrumentation from your Agent
 
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
 
-### Removing instrumentation for specific services
+### Remove instrumentation for specific services
 
 To remove APM instrumentation and stop sending traces from a specific service:
 
@@ -81,7 +81,7 @@ To remove APM instrumentation and stop sending traces from a specific service:
    ```
 2. Restart the service.
 
-### Removing APM for all services on the infrastructure
+### Remove APM for all services on the infrastructure
 
 To stop producing traces, uninstall APM and restart the infrastructure:
 

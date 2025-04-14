@@ -20,7 +20,7 @@ To see requirements for compatible languages, operating systems, and architectur
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
-The following examples show how it works for each deployment type.
+Follow the relevant documentation to learn more about Single Step Instrumentation for your deployment type:
 
 {{< partial name="apm/apm-single-step.html" >}} 
 
