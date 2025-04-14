@@ -1,7 +1,7 @@
 ---
 title: Use Custom OpenTelemetry Components with Datadog Agent
 aliases:
-- "/opentelemetry/setup/ddot_collector/custom_components"
+- "/opentelemetry/setup/ddot_collector/custom_components/"
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
