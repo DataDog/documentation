@@ -56,15 +56,15 @@ Si aún no lo has hecho, configura primero la [integración de Microsoft Azure][
 
 La integración Azure Arc no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Arc no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
