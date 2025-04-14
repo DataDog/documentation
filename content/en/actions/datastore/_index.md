@@ -89,6 +89,8 @@ Datastore has the following limitations:
 - Each row can be up to 100 KB in size.
 - The primary key value is immutable, it cannot be changed after the row is created.
 
+Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
