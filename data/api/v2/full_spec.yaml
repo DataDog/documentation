@@ -26046,9 +26046,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26113,9 +26113,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26146,9 +26146,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26225,9 +26225,9 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
           example: 1.0
           format: double
           type: number
