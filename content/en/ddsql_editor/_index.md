@@ -10,6 +10,9 @@ further_reading:
 - link: "/ddsql_editor/guide/ddsql_use_cases"
   tag: "Guide"
   text: "Common queries and use cases"
+- link: "/ddsql/ddsql_editor_syntax"
+  tag: "Documentation"
+  text: "DDSQL Editor Syntax (Preview)"
 ---
 
 
@@ -33,20 +36,16 @@ Type your question into the search box, and Datadog builds the SQL query for you
 
 DDSQL is a query language for Datadog data. It implements several standard SQL operations, such as `SELECT`, and allows queries against unstructured data, such as [tags][2]. Get exactly the data you want by writing your own `SELECT` statement. Query tags as if they are standard table columns. 
 
+<div class="alert alert-warning">
+  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
+</div>
+
 {{< code-block lang="sql" >}}
 SELECT instance_type, count(instance_type)
 FROM aws_ec2_instance
 WHERE env = 'staging' -- env is a tag, not a column
 GROUP BY instance_type
 {{< /code-block >}}
-
-{{< whatsnext desc="For more information on DDSQL queries, see the DDSQL References:" >}}
-    {{< nextlink href="ddsql_editor/reference/functions" >}}Functions{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/data_types" >}}Data Types{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/expressions_and_operators" >}}Expressions and Operators{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/statements" >}}Statements{{< /nextlink >}}
-    {{< nextlink href="ddsql_editor/reference/tags" >}}Tags{{< /nextlink >}}
-{{< /whatsnext >}}
 
 ### Explore your infrastructure data
 

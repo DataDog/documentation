@@ -1543,36 +1543,16 @@ menu:
       parent: ddsql_editor
       identifier: ddsql_editor_getting_started
       weight: 1
-    - name: Statements
-      url: ddsql_editor/reference/statements
-      parent: ddsql_editor
-      identifier: ddsql_editor_statements
-      weight: 2
-    - name: Expressions and Operators
-      url: ddsql_editor/reference/expressions_and_operators
-      parent: ddsql_editor
-      identifier: ddsql_editor_expressions_and_operators
-      weight: 3
-    - name: Data Types
-      url: ddsql_editor/reference/data_types
-      parent: ddsql_editor
-      identifier: ddsql_editor_data_types
-      weight: 4
-    - name: Functions
-      url: ddsql_editor/reference/functions
-      parent: ddsql_editor
-      identifier: ddsql_editor_functions
-      weight: 5
     - name: Querying Tags
       url: ddsql_editor/reference/tags
       parent: ddsql_editor
       identifier: ddsql_editor_tags
-      weight: 6
+      weight: 2
     - name: Querying Reference Tables
       url: ddsql_editor/reference_tables
       parent: ddsql_editor
       identifier: ddsql_editor_reference_tables
-      weight: 7
+      weight: 3
     - name: Guides
       url: ddsql_editor/guide
       parent: ddsql_editor

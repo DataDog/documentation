@@ -2,11 +2,20 @@
 title: Querying Tags in DDSQL
 aliases:
 - /dashboards/ddsql_editor/reference/tags/
+- /ddsql_editor/reference/tags/
+further_reading:
+- link: "/ddsql/ddsql_editor_syntax"
+  tag: "Documentation"
+  text: "DDSQL Editor Syntax (Preview)"
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
 DDSQL is in Preview.
 {{< /callout >}}
+
+<div class="alert alert-warning">
+  The DDSQL Editor supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
+</div>
 
 Tags are a widespread mechanism to encode metadata about a particular record across several products at Datadog. Tags are key-value pairs for which a key may contain multiple values.
 
@@ -66,3 +75,7 @@ SELECT #service FROM resources.host
 The tag's name in the projection is `#service`, which should be used throughout the query, as `service` refers to the schema column.
 
 For tag references that require quoting, the `#` should appear outside of quotes (for example, `#"availability-zone"`). This is necessary to differentiate between explicit tag references and columns that start with a `#` character.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -1,14 +1,27 @@
 ---
-title: SQL Reference
+title: DDSQL
+aliases:
+- /logs/workspaces/sql_reference
+code_lang: ddsql_default
+type: multi-code-lang
+code_lang_weight: 1
+products: 
+- name: Log Workspaces
+  url: /logs/workspaces/
+  icon: logs
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
   text: "Learn more about Log Workspaces"
 ---
 
+{{< product-availability >}}
+
+<div class="alert alert-warning">  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. The DDSQL syntax in this documentation may not be applicable to the DDSQL Editor.</div>
+
 ## Overview
 
-SQL in [Analysis cells][1] allows you to analyze and manipulate data within Log Workspaces. This documentation covers the SQL support available in Log Workspaces and includes:
+SQL in [Analysis cells][1] allows you to analyze and manipulate data. This documentation covers the SQL support available and includes:
 - [Syntax compatible with PostgreSQL](#syntax)
 - [SQL functions](#functions)
 - [Window functions](#window-functions)
@@ -141,7 +154,7 @@ GROUP BY service_name
 {{< /code-block >}} 
 
 ### `CEIL`
-{{< code-block lang="sql" >}}
+{{< code-block lang="sql" >}} 
 SELECT CEIL(price) AS rounded_price 
 FROM products 
 {{< /code-block >}}
@@ -217,7 +230,7 @@ SELECT
 ### `TRIM`
 {{< code-block lang="sql" >}}
 SELECT
-  TRIM(name) AS trimmed_name
+  trim(name) AS trimmed_name
 FROM
   users
 {{< /code-block >}}
@@ -225,7 +238,7 @@ FROM
 ###  `REPLACE`
 {{< code-block lang="sql" >}}
 SELECT
-  REPLACE(description, 'old', 'new') AS updated_description
+  replace(description, 'old', 'new') AS updated_description
 FROM
   products
 {{< /code-block >}}
@@ -233,7 +246,7 @@ FROM
 ### `SUBSTRING`
 {{< code-block lang="sql" >}}
 SELECT
-  SUBSTRING(title, 1, 10) AS short_title
+  substring(title, 1, 10) AS short_title
 FROM
   books
 {{< /code-block >}}
@@ -270,7 +283,7 @@ Supported extraction units:
 
 {{< code-block lang="sql" >}}
 SELECT
-  EXTRACT(year FROM purchase_date) AS purchase_year
+  extract(year FROM purchase_date) AS purchase_year
 FROM
   sales
 {{< /code-block >}}
@@ -297,7 +310,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  TO_TIMESTAMP('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
+  to_timestamp('25/12/2025 04:23 pm', 'DD/MM/YYYY HH:MI am') AS ts
 {{< /code-block >}}
 
 ### `TO_CHAR`
@@ -322,7 +335,7 @@ Supported patterns for date/time formatting:
 
 {{< code-block lang="sql" >}}
 SELECT
-  TO_CHAR(order_date, 'MM-DD-YYYY') AS formatted_date
+  to_char(order_date, 'MM-DD-YYYY') AS formatted_date
 FROM
   orders
 {{< /code-block >}}
@@ -342,7 +355,7 @@ Supported truncations:
 
 {{< code-block lang="sql" >}}
 SELECT
-  DATE_TRUNC('month', event_time) AS month_start
+  date_trunc('month', event_time) AS month_start
 FROM
   events
 {{< /code-block >}}
@@ -354,7 +367,7 @@ SELECT
 FROM
   emails
 WHERE
-  REGEXP_LIKE(email_address, '@example\.com$')
+  regexp_like(email_address, '@example\.com$')
 {{< /code-block >}}
 
 ### `CARDINALITY`
@@ -408,17 +421,17 @@ FROM
 
 This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
 
-| Function                      | Return Type       | Description                                                            |
-|-------------------------------|-------------------|------------------------------------------------------------------------|
-| `over`                        | N/A               | Defines a window for a set of rows for other window functions to operate on. |
-| `partition by`                | N/A               | Divides the result set into partitions, specifically for applying window functions. |
-| `rank()`                      | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
-| `row_number()`                | integer           | Assigns a unique sequential number to each row within a partition.     |
-| `lead(column n)`              | typeof column     | Returns the value from the next row in the partition.                  |
-| `lag(column n)`               | typeof column     | Returns the value from the previous row in the partition.              |
-| `first_value(column n)`       | typeof column     | Returns the first value in an ordered set of values.                   |
-| `last_value(column n)`        | typeof column     | Returns the last value in an ordered set of values.                    |
-| `nth_value(column n, offset)` | typeof column     | Returns the value at the specified offset in an ordered set of values. |
+| Function                | Return Type       | Description                                                            |
+|-------------------------|-------------------|------------------------------------------------------------------------|
+| `OVER`                  | N/A               | Defines a window for a set of rows for other window functions to operate on. |
+| `PARTITION BY`          | N/A               | Divides the result set into partitions, specifically for applying window functions. |
+| `RANK()`                | integer           | Assigns a rank to each row within a partition, with gaps for ties.     |
+| `ROW_NUMBER()`          | integer           | Assigns a unique sequential number to each row within a partition.     |
+| `LEAD(column n)`        | typeof column     | Returns the value from the next row in the partition.                  |
+| `LAG(column n)`         | typeof column     | Returns the value from the previous row in the partition.              |
+| `FIRST_VALUE(column n)` | typeof column     | Returns the first value in an ordered set of values.                   |
+| `LAST_VALUE(column n)`  | typeof column     | Returns the last value in an ordered set of values.                    |
+| `NTH_VALUE(column n, offset)`| typeof column | Returns the value at the specified offset in an ordered set of values. |
 
 
 ## Further reading

@@ -4,7 +4,18 @@ further_reading:
 - link: "/integrations/guide/reference-tables/"
   tag: "Documentation"
   text: "Add Custom Metadata with Reference Tables"
+- link: "/ddsql/ddsql_editor_syntax"
+  tag: "Documentation"
+  text: "DDSQL Editor Syntax (Preview)"
 ---
+
+{{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
+DDSQL is in Preview.
+{{< /callout >}}
+
+<div class="alert alert-warning">
+  The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.
+</div>
 
 # Overview
 
