@@ -111,7 +111,7 @@ You can directly export your search query from the explorer to create an Error T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
-[2]: /monitors/types/error-tracking/
+[2]: /monitors/types/error-tracking
 [3]: /error_tracking/suspected_causes
 [4]: /real_user_monitoring/explorer/search/#event-types
 [5]: /error_tracking/issue_states
