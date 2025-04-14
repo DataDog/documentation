@@ -14,38 +14,35 @@ aliases:
 
 ### Overview
 
-Routing rules let you define **granular logic** for how alerts are routed within your team. Instead of sending all alerts to a single escalation policy, you can build flexible, condition-based rules that determine exactly how and where each alert should be delivered—based on priority, time of day, tags, and more.
+With routing rules, you can define granular logic to control how alerts reach your team. Instead of sending alerts through a single escalation policy, you can create flexible, condition-based rules to route them based on priority, time of day, tags, and more.
 
-### What You Can Do with Routing Rules
+## Routing rules examples
 
-- **Route alerts by priority**
-  For example:
-  - Send **priority 1** alerts to your **primary escalation policy**.
-  - Send **priority 2–4** alerts to **Slack** or **Microsoft Teams** for visibility without noise.
+- Route alerts by priority:
+  - Send **priority 1** alerts to your primary escalation policy.
+  - Send **priority 2–4** alerts to Slack or Microsoft Teams.
 
-- **Route alerts by time of day**
-  - During **business hours**, route all alerts to an escalation policy.
-  - After hours, route only critical alerts to paging, and others to chat.
+- Route alerts by time of day:
+  - During business hours, route alerts to an escalation policy.
+  - After hours, route critical alerts to paging, and non-critical alerts to chat.
 
-- **Set urgency dynamically**
+- Use Dynamic Urgency to automatically detect urgency from the monitor alert: 
+  - `warn` status ➝ low urgency
+  - `alert` status ➝ high urgency
+  
   The urgency of a page determines how end users are notified, based on their preferences.
-  With **Dynamic Urgency**, urgency is automatically inferred from the monitor alert:
-  - `warn` status ➝ **low urgency**
-  - `alert` status ➝ **high urgency**
 
-- **Trigger workflows (coming soon)**
-  In future updates, you’ll be able to use routing rules to trigger automated workflows in response to matching alerts.
+- Trigger workflows (coming soon): Use routing rules to trigger automated workflows in response to matching alerts.
 
 <placeholder_screenshot>
 _A screenshot of the Routing Rules configuration UI showing multiple conditions (priority, time window, etc.) and destination options (Escalation Policy, Slack, Teams)_
 
----
 
-### Routing Rule Syntax
+## Routing rule syntax
 
-Routing rules use the **Datadog query syntax**. You can define multiple rules with `if/else` logic. The engine evaluates rules top-down, and the **last rule must always be a default** fallback that points to an escalation policy.
+Routing rules use [Datadog query syntax][3] and support multiple `if/else` conditions. Rules are evaluated from top to bottom, and the final rule must act as a fallback that routes all unmatched alerts to an escalation policy.
 
-**⚠️ Note:** Routing rule syntax is **case sensitive**. For example, `tags.env:Prod` will not match `tags.env:prod`.
+<div class="alert alert-warning">Routing rule syntax is case-sensitive. For example, `tags.env:Prod` will not match `tags.env:prod`.</div>
 
 **Supported attributes:**
 
@@ -61,11 +58,11 @@ _A screenshot showing an example routing rule with syntax input, including `prio
 
 ---
 
-### Best Practices
+## Best practices
 
-- Think in terms of **urgency vs visibility**:
-  - Use paging + escalation for urgent, high-impact alerts.
-  - Use Slack, or Teams for lower-severity, non-paging notifications.
+- Balance visibility with urgency:
+  - Use paging and escalation policies for critical alerts that require immediate action.
+  - Use Slack or Teams for lower-severity issues that need awareness but don’t warrant an on-call response.
 
 ## Further reading
 
@@ -73,3 +70,4 @@ _A screenshot showing an example routing rule with syntax input, including `prio
 
 [1]: /service_management/on-call/teams
 [2]: https://app.datadoghq.com/on-call/teams
+[3]: /tracing/trace_explorer/query_syntax/
