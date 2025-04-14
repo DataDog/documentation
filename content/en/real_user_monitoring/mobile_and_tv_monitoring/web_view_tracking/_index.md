@@ -290,7 +290,9 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
 
 1. Add `react-native-webview` to your application following the [official installation documentation][1].
 
-2. Import `WebView` from `@datadog/mobile-react-native-webview` instead of `react-native-webview`:
+2. Add `@datadog/mobile-react-native-webview` to your application.
+
+3. Import `WebView` from `@datadog/mobile-react-native-webview` instead of `react-native-webview`:
 
    ```javascript
    import { WebView } from '@datadog/mobile-react-native-webview';
@@ -298,9 +300,9 @@ The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the give
    import WebView from '@datadog/mobile-react-native-webview';
    ```
 
-3. You can use all existing functionalities from `react-native-webview` as the `WebView` component from `@datadog/mobile-react-native-webview` wraps the `react-native-webview` component.
+4. You can use all existing functionalities from `react-native-webview` as the `WebView` component from `@datadog/mobile-react-native-webview` wraps the `react-native-webview` component.
 
-4. Provide the list of hosts to be tracked by Datadog inside the web view by using the `allowedHosts` prop of your `WebView` component:
+5. Provide the list of hosts to be tracked by Datadog inside the web view by using the `allowedHosts` prop of your `WebView` component:
 
    ```javascript
    <WebView
