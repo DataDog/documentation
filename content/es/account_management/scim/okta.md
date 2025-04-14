@@ -15,6 +15,10 @@ further_reading:
 title: Configurar SCIM con Okta
 ---
 
+<div class="alert alert-info">
+SCIM está disponible con los planes Infrastructure Pro e Infrastructure Enterprise.
+</div>
+
 Consulta las siguientes instrucciones para sincronizar tus usuarios de Datadog con Okta mediante SCIM.
 
 Para conocer las capacidades y limitaciones de esta característica, consulta [SCIM][1].
@@ -60,10 +64,6 @@ Al utilizar SAML y SCIM conjuntamente, Datadog recomienda encarecidamente deshab
 
 ## Configurar el suministro automático de equipos
 
-{{< callout url="/help/" header="false" >}}
-La característica Managed Teams (Equipos gestionados) está desactivada de forma predeterminada. Ponte en contacto con el servicio de asistencia para solicitar acceso.
-{{< /callout >}}
-
 Con [Managed Teams][6] (Equipos gestionados), tú controlas el suministro principal de un equipo de Datadog (su nombre, identificador y miembros) a través del proveedor de identidad. El proceso de configuración difiere en función de si el equipo ya existe en Datadog.
 
 **Nota:** Los usuarios deben existir en Datadog antes de poder añadirlos a un equipo. Por lo tanto, debes asignar usuarios a la aplicación de Datadog en Okta para asegurarte de que se creen en Datadog a través de SCIM. Asigna la aplicación de Datadog a tu grupo de Okta para asegurarte de que todos los miembros del equipo se creen en Datadog automáticamente.
@@ -105,7 +105,7 @@ Este procedimiento te permite gestionar la pertenencia de un equipo en Datadog e
 
 1. En tu aplicación de Datadog en Okta, navega hasta la pestaña **Push Groups** (Enviar grupos).
 1. Haz clic en el botón **Push Groups** (Enviar grupos). Se abre la interfaz de grupos enviados.
-1. Selecciona el grupo de Okta que deseas desvincular de su equipo de Datadog.
+1. Selecciona el grupo de Okta que deseas desvincular de tu equipo de Datadog.
 1. En la columna **Match result & push action** (Resultado de coincidencia y acción de envío), selecciona la acción **Unlink Pushed Group** (Desvincular grupo enviado). Aparece un cuadro de diálogo.
 1. Selecciona **Leave the group in the target app** (Dejar el grupo en la aplicación de destino).
 1. Haz clic en **Unlink** (Desvincular).

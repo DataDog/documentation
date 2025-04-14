@@ -1,5 +1,5 @@
 ---
-title: Discover Existing Services in Software Catalog
+title: Discover Components in Software Catalog
 further_reading:
   - link: "/tracing/software_catalog/setup/"
     tag: "Documentation"
@@ -19,14 +19,11 @@ Learn how Software Catalog discovers services from Datadog Application Performan
 
 Datadog Software Catalog is pre-populated with entries detected through [APM][5], eBPF-based autodiscovery with [Universal Service Monitoring][6], and RUM applications.
 
-### APM service detection and dependencies
+All automatically detected components appear in the Component Selector within Software Catalog.
 
-Datadog APM automatically discovers dependencies from instrumented services, even when the dependencies aren't instrumented. These include:
-- Databases
-- Message queues
-- Other third-party dependencies
+APM and USM automatically detect the following component types: `service`,`datastore`, `queue`, `external providers`, `inferred services`, and `endpoints`. APM SDKs identify dependencies of instrumented services and classify them as databases, queues, or third-party APIs—even if those dependencies are not directly instrumented. Custom instrumentation may affect how components are auto-discovered and how the `service tag` is assigned. To learn more, see [APM Inferred Services][12].
 
-These dependencies appear as *services*, and Datadog automatically applies their names to service tags on client spans (`span.kind:client`). For example, a client call from `auth-dotnet` to PostgreSQL would create a service tagged as `service:auth-dotnet-postgres`.
+RUM is responsible for discovering `frontend apps` components.
 
 **Managing automatically-named services:**
 - You can opt-in to [inferred entities][7] to filter out entities by type (database, queue, third-party).
@@ -34,9 +31,9 @@ These dependencies appear as *services*, and Datadog automatically applies their
 
 For information about discovering endpoints, see [Discovering Endpoints from APM][10].
 
-## Discover Infrastructure and Logs services
+## Import components from Infrastructure and Logs 
 
-To discover services through Datadog infrastructure metrics or logs, navigate to the Software Catalog [**Import Entries** tab][11]. You can import services from Datadog telemetry containing the `DD_SERVICE` [tag][2].
+You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][2] to populate the Software Catalog. To discover `kind:service` components through Datadog infrastructure metrics or logs, navigate to the Software Catalog [**Import Entries** tab][11]. 
 
 {{< img src="tracing/software_catalog/import_entries.png" alt="Import Entries tab in the Software Catalog setup and configuration section" style="width:90%;" >}}
 
@@ -63,4 +60,5 @@ To remove imported services from the default **Explore** view, click **Clear Pre
 [9]: /tracing/guide/service_overrides/
 [10]: /software_catalog/endpoints/
 [11]: https://app.datadoghq.com/software/settings/get-started?currentTab=import
+[12]: /tracing/services/inferred_services
 

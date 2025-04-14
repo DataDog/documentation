@@ -7241,6 +7241,62 @@ menu:
           - ListDevices
         unstable: []
         order: 1
+    - name: Observability Pipelines
+      url: /api/latest/observability-pipelines/
+      identifier: observability-pipelines
+      generated: true
+    - name: Update a pipeline
+      url: '#update-a-pipeline'
+      identifier: observability-pipelines-update-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdatePipeline
+        unstable:
+          - v2
+        order: 3
+    - name: Get a specific pipeline
+      url: '#get-a-specific-pipeline'
+      identifier: observability-pipelines-get-a-specific-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPipeline
+        unstable:
+          - v2
+        order: 2
+    - name: Delete a pipeline
+      url: '#delete-a-pipeline'
+      identifier: observability-pipelines-delete-a-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePipeline
+        unstable:
+          - v2
+        order: 4
+    - name: Create a new pipeline
+      url: '#create-a-new-pipeline'
+      identifier: observability-pipelines-create-a-new-pipeline
+      parent: observability-pipelines
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePipeline
+        unstable:
+          - v2
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
@@ -7303,6 +7359,58 @@ menu:
           - v2
         operationids:
           - ListOktaAccounts
+        unstable: []
+        order: 1
+    - name: On-Call
+      url: /api/latest/on-call/
+      identifier: on-call
+      generated: true
+    - name: Update on-call schedule
+      url: '#update-on-call-schedule'
+      identifier: on-call-update-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallSchedule
+        unstable: []
+        order: 4
+    - name: Get on-call schedule
+      url: '#get-on-call-schedule'
+      identifier: on-call-get-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallSchedule
+        unstable: []
+        order: 2
+    - name: Delete on-call schedule
+      url: '#delete-on-call-schedule'
+      identifier: on-call-delete-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallSchedule
+        unstable: []
+        order: 3
+    - name: Create on-call schedule
+      url: '#create-on-call-schedule'
+      identifier: on-call-create-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallSchedule
         unstable: []
         order: 1
     - name: Opsgenie Integration
