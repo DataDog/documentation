@@ -623,7 +623,8 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events.
+
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events. In dd-trace-js v5.48.0, new methods were introduced while maintaining backward compatibility with the existing ones. Note that `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -634,13 +635,15 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-  id: 'user-id', // id is mandatory, if no numeric ID is available, any unique identifier will do (username, email...)
+  id: 'user-id', // id is mandatory, if no ID is available, any unique identifier will do (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const user = 'user-id' // user could be just the ID
+const login = 'user@email.com'
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
 // Log a successful user authentication event
-tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
+tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata) // user and metadata are optional
 ```
 {{% /tab %}}
 
@@ -649,12 +652,12 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 const tracer = require('dd-trace')
 
 // in a controller:
-const userId = 'user-id' // if no numeric ID is available, any unique identifier will do (username, email...)
+const login = 'user-id' // the string used by the user to log in
 const userExists = true // if the user login exists in database for example
-const metadata = { 'usr.login': 'user@email.com' } // usr.login is required, but you can also add arbitrary fields
+const metadata = { 'key': 'value' } // you can add arbitrary fields
 
 // metadata is optional
-tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
+tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata) // userExists and metadata are optional and userExists is defaulted to false
 ```
 {{% /tab %}}
 
@@ -671,6 +674,9 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Migrating to the new login success and failure methods 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 {{< /programming-lang >}}
