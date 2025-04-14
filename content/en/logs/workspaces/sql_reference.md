@@ -66,7 +66,7 @@ WHERE order_status IN ('Shipped', 'Pending') {{< /code-block >}} |
 FROM employees {{< /code-block >}}                |
 | Arithmetic Operations | Performs basic calculations using operators like `+`, `-`, `*`, `/`.                 | {{< code-block lang="sql" >}}SELECT price, tax, (price * tax) AS total_cost 
 FROM products {{< /code-block >}} |
-| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit.                     |
+| `INTERVAL value unit`  | interval                      | Represents a time duration specified in a given unit. Supported units:<br>- `milliseconds` / `millisecond`<br>- `seconds` / `second`<br>- `minutes` / `minute`<br>- `hours` / `hour`<br>- `days` / `day` |
 
 
 ## Functions
@@ -210,7 +210,8 @@ FROM
 ### `INTERVAL`  
 {{< code-block lang="sql" >}}
 SELECT
-  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date
+  TIMESTAMP '2023-10-01 10:00:00' + INTERVAL '30 days' AS future_date,
+  INTERVAL '1 MILLISECOND 2 SECONDS 3 MINUTES 4 HOURS 5 DAYS'
 {{< /code-block >}} 
 
 ### `TRIM`
