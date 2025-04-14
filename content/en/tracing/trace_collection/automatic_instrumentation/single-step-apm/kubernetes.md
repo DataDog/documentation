@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration required. 
+In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][10] your applications in one step, with no additional configuration required. 
 
 ## Requirements
 
@@ -93,6 +93,10 @@ To enable Single Step Instrumentation with the Datadog Operator:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
+[5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /getting_started/site
+
 {{% /tab %}}
 
 {{% tab "Installing with Helm" %}}
@@ -108,7 +112,7 @@ To enable Single Step Instrumentation with Helm:
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
-2. Create a Kubernetes secret to store your Datadog [API key][10]:
+2. Create a Kubernetes secret to store your [Datadog API key][10]:
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
@@ -140,6 +144,9 @@ To enable Single Step Instrumentation with Helm:
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
+
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[12]: /getting_started/site
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -337,11 +344,13 @@ This configuration enables APM for all pods except those that have either of the
 
 {{< /collapse-content >}}
 
+[8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
+[10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
+
 {{% /tab %}}
 
 {{% tab "Kubernetes (Agent <=v7.63) (Preview)" %}}
-
-**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 ### Enable or disable instrumentation for namespaces
 
@@ -412,8 +421,8 @@ To disable instrumentation for specific namespaces, add `disabledNamespaces` con
 
 Specify Datadog tracing libraries and their versions to automatically instrument applications written in those languages. You can configure this in two ways, which are applied in the following order of precedence:
 
-1. [Specify at the service level](#specifying-at-the-service-level), or
-2. [Specify at the cluster level](#specifying-at-the-cluster-level).
+1. [Specify at the service level](#specify-at-the-service-level), or
+2. [Specify at the cluster level](#specify-at-the-cluster-level).
 
 **Default**: If you don't specify any library versions and `apm.instrumentation.enabled=true`, applications written in supported languages are automatically instrumented using the latest tracing library versions.
 
@@ -519,6 +528,33 @@ You can pull the tracing library from a different registry by changing it to `do
 
 For instructions on changing your container registry, see [Changing Your Container Registry][33].
 
+[15]: http://gcr.io/datadoghq/dd-lib-java-init
+[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[18]: http://gcr.io/datadoghq/dd-lib-js-init
+[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[21]: http://gcr.io/datadoghq/dd-lib-python-init
+[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
+[30]: http://gcr.io/datadoghq/dd-lib-php-init
+[31]: http://hub.docker.com/r/datadog/dd-lib-php-init
+[32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
+[33]: /containers/guide/changing_container_registry/
+[34]: https://github.com/DataDog/dd-trace-java/releases
+[35]: https://github.com/DataDog/dd-trace-js/releases
+[36]: https://github.com/DataDog/dd-trace-py/releases
+[37]: https://github.com/DataDog/dd-trace-dotnet/releases
+[38]: https://github.com/DataDog/dd-trace-rb/releases
+[39]: https://github.com/DataDog/dd-trace-php/releases
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -532,7 +568,7 @@ To remove APM instrumentation and stop sending traces from a specific service, y
 
 #### Use workload selection (recommended)
 
-With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+With workload selection (available for Agent v7.64+), you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options). 
 
 #### Use the Datadog Admission Controller
 
@@ -602,37 +638,9 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/metrics/runtime_metrics/
 [4]: /tracing/software_catalog/
-[5]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site
 [8]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
 [9]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/#tracer-libraries
-[10]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
-[15]: http://gcr.io/datadoghq/dd-lib-java-init
-[16]: http://hub.docker.com/r/datadog/dd-lib-java-init
-[17]: http://gallery.ecr.aws/datadog/dd-lib-java-init
-[18]: http://gcr.io/datadoghq/dd-lib-js-init
-[19]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[20]: http://gallery.ecr.aws/datadog/dd-lib-js-init
-[21]: http://gcr.io/datadoghq/dd-lib-python-init
-[22]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[23]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[24]: http://gcr.io/datadoghq/dd-lib-dotnet-init
-[25]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
-[26]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
-[27]: http://gcr.io/datadoghq/dd-lib-ruby-init
-[28]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
-[29]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
-[30]: http://gcr.io/datadoghq/dd-lib-php-init
-[31]: http://hub.docker.com/r/datadog/dd-lib-php-init
-[32]: http://gallery.ecr.aws/datadog/dd-lib-php-init
-[33]: /containers/guide/changing_container_registry/
-[34]: https://github.com/DataDog/dd-trace-java/releases
-[35]: https://github.com/DataDog/dd-trace-js/releases
-[36]: https://github.com/DataDog/dd-trace-py/releases
-[37]: https://github.com/DataDog/dd-trace-dotnet/releases
-[38]: https://github.com/DataDog/dd-trace-rb/releases
-[39]: https://github.com/DataDog/dd-trace-php/releases
+[10]: /tracing/glossary/#instrumentation
 
 
 

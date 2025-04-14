@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration required. 
+In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][14] your applications in one step, with no additional configuration required. 
 
 ## Enable APM on your applications
 
@@ -109,5 +109,6 @@ To stop producing traces, uninstall APM and restart the infrastructure:
 [11]: https://github.com/DataDog/dd-trace-dotnet/releases
 [12]: https://github.com/DataDog/dd-trace-rb/releases
 [13]: https://github.com/DataDog/dd-trace-php/releases
+[14]: /tracing/glossary/#instrumentation
 
 
