@@ -5,6 +5,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'AWS App Runner.
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: AWS App Runner
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_app_runner
 public_title: Intégration Datadog/AWS App Runner
@@ -24,13 +24,13 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 AWS App Runner vous permet de déployer une application depuis votre code source ou depuis une image de conteneur vers AWS.
 
 Activez cette intégration pour visualiser dans Datadog toutes vos métriques d'App Runner.
 
-## Formule et utilisation
+## Configuration
 
 ### Installation
 
@@ -41,7 +41,7 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
 1. Sur la [page de l'intégration AWS][2], vérifiez que `AppRunner` est activé dans l'onglet `Metric Collection`.
 2. Installez l'[intégration Datadog/AWS App Runner][3].
 
-### APM
+### Collecte de logs
 Vous pouvez transmettre deux types de logs à Datadog depuis vos applications gérées par AWS App Runner. Ces logs sont envoyés à CloudWatch dans deux groupes différents. Le premier rassemble les logs de service. Il enregistre tous les logs de l'activité du cycle de vie de votre service App Runner, comme les builds et les déploiements de votre application. Le deuxième groupe regroupe les logs d'application qui contiennent les sorties du code de l'application en cours d'exécution. 
 
 #### Envoi de logs à Datadog
@@ -61,17 +61,17 @@ AWS App Runner envoie des événements de changement de statut des services et
 2. Créez une règle EventBridge à appliquer aux événements AWS App Runner (voir la section [Gestion des événements App Runner dans EventBridge][8]). Choisissez comme cible la destination de l'API.
 3. Commencez à visualiser les nouveaux événements de changement de statut dans le flux d'événements Datadog.
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "amazon_app_runner" >}}
 
 
-### Aide
+### Événements
 
 L'intégration AWS App Runner prend en charge les événements de changement de statut des services et des opérations envoyés par EventBridge.
 
-### Aide
+### Checks de service
 
 L'intégration AWS App Runner n'inclut aucun check de service.
 

@@ -4,9 +4,9 @@ aliases:
 categories:
 - azure
 - クラウド
-- コンテナ
+- incident-teams
 - プロビジョニング
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Container Instances のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
