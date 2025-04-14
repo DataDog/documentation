@@ -63,12 +63,12 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
-  - Category::메시지 큐
+  - Category::Message Queues
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
   - Offering::Integration
-  - Product::데이터 스트림 모니터링
+  - Product::Data Streams Monitoring
   configuration: README.md#Setup
   description: 대기열 크기, 소비자 수, 확인되지 않은 메시지 등을 추적하세요.
   media: []
@@ -97,21 +97,23 @@ tile:
 - 노드 기반 통계를 추적합니다: 대기 프로세스, 사용된 소켓, 사용된 파일 설명자 등.
 - 가상 호스트의 활성 여부와 연결 수를 모니터링합니다.
 
+[데이터 스트림 모니터링][3]을 사용하여 RabbitMQ 통합을 개선하는 것을 고려해 보세요. 본 솔루션은 파이프라인 시각화 및 지연(lag) 추적을 지원하여 병목 현상을 식별 및 해결하도록 도와드립니다.
+
 ## 설정
 
 ### 설치
 
-RabbitMQ 점검은 [Datadog Agent][3] 패키지에 포함되어 있으므로 서버에 추가로 설치할 필요가 없습니다.
+RabbitMQ 점검은 [Datadog 에이전트][4] 패키지에 포함되어 있으므로 서버에 추가로 설치할 필요가 없습니다.
 
 ### 설정
 
-RabbitMQ는 [RabbitMQ Management Plugin][4] 및 [RabbitMQ Prometheus Plugin][5] 두 가지 방법으로 메트릭을 노출합니다. Datadog 통합은 두 버전을 모두 지원합니다. 사용하려는 버전에 해당하는 파일의 구성 지침을 따르세요. Datadog 통합에는 대시보드와 모니터 제목으로 레이블이 지정된 각 버전에 대한 기본 대시보드와 모니터도 함께 제공됩니다.
+RabbitMQ는 [RabbitMQ Management Plugin][5] 및 [RabbitMQ Prometheus Plugin][6] 두 가지 방법으로 메트릭을 노출합니다. Datadog 통합은 두 버전을 모두 지원합니다. 사용하려는 버전에 해당하는 파일의 설정 지침을 따르세요. Datadog 통합에는 대시보드와 모니터링 제목으로 레이블이 지정된 각 버전에 대한 기본 대시보드와 모니터링도 함께 제공됩니다.
 
 #### RabbitMQ 준비
 
-##### [RabbitMQ Prometheus Plugin][5].
+##### [RabbitMQ Prometheus Plugin][6].
 
-*RabbitMQ v3.8부터 [RabbitMQ Prometheus Plugin][5]이 기본적으로 활성화됩니다.*
+*RabbitMQ v3.8부터 [RabbitMQ Prometheus Plugin][6]이 기본적으로 활성화됩니다.*
 
 *RabbitMQ의 Prometheus Plugin 버전은 Datadog Agent의 Python 3 지원이 필요하므로 Agent v6 이상에서만 사용할 수 있습니다. 통합의 Prometheus Plugin 버전을 구성하기 전에 Agent가 업데이트되었는지 확인하세요.*
 
@@ -123,7 +125,7 @@ RabbitMQ는 [RabbitMQ Management Plugin][4] 및 [RabbitMQ Prometheus Plugin][5] 
        url: http://<HOST>:15692
  ```
 
- 이를 통해 하나의 RabbitMQ 노드에서 [`/metrics` 엔드포인트][6] 스크래핑이 가능해집니다. Datadog은 [`/metrics/detailed` 엔드포인트][7]에서도 데이터를 수집할 수 있습니다.
+ 이를 통해 하나의 RabbitMQ 노드에서 [`/metrics` 엔드포인트][7] 스크래핑이 가능해집니다. Datadog은 [`/metrics/detailed` 엔드포인트][8]에서도 데이터를 수집할 수 있습니다.
 
  ```yaml
  instances:
@@ -131,9 +133,9 @@ RabbitMQ는 [RabbitMQ Management Plugin][4] 및 [RabbitMQ Prometheus Plugin][5] 
        url: http://<HOST>:15692
        unaggregated_endpoint: detailed?family=queue_coarse_metrics
  ```
- 이를 통해 [`/metrics/detailed` 엔드포인트][7] 스크래핑으로 queue coarse metrics를 수집할 수 있습니다.
+ 이를 통해 [`/metrics/detailed` 엔드포인트][8] 스크래핑으로 queue coarse 메트릭을 수집할 수 있습니다.
 
-##### [RabbitMQ Management Plugin][4].
+##### [RabbitMQ Management Plugin][5].
 
 플러그인을 활성화합니다. 그러면 Agent 사용자는 최소한 `monitoring` 태그와 다음 필수 권한이 ​​필요합니다.
 
@@ -151,10 +153,10 @@ rabbitmqctl set_permissions  -p / datadog "^aliveness-test$" "^amq\.default$" ".
 rabbitmqctl set_user_tags datadog monitoring
 ```
 
-여기에서 `/`는 기본 호스트를 나타냅니다. 이를 지정된 가상 호스트 이름으로 설정하세요. 자세한 내용은 [RabbitMQ 설명서][8]를 참조하세요.
+여기에서 `/`는 기본 호스트를 나타냅니다. 이를 지정된 가상 호스트 이름으로 설정하세요. 자세한 내용은 [RabbitMQ 설명서][9]를 참조하세요.
 
 {{< tabs >}}
-{{% tab "호스트" %}}
+{{% tab "Host" %}}
 
 #### 호스트
 
@@ -205,7 +207,7 @@ _에이전트 버전 > 6.0에서 사용 가능_
 [2]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "컨테이너화된 환경" %}}
+{{% tab "Containerized" %}}
 
 #### 컨테이너화된 환경
 
@@ -239,7 +241,7 @@ Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 �
 
 ### 검증
 
-[Agent의 상태 하위 명령을 실행][9]하고 Checks 섹션에서 `rabbitmq`를 찾습니다.
+[에이전트 상태 하위 명령을 실행][10]하고 점검 섹션에서 `rabbitmq`를 찾습니다.
 
 ## 수집한 데이터
 
@@ -260,44 +262,45 @@ Datadog 에이전트에서 기본적으로 로그 수집이 비활성화되어 �
 Prometheus 플러그인은 Management Plugin과는 다른 메트릭 세트를 노출합니다.
 Management에서 Prometheus Plugin으로 마이그레이션할 때 주의해야 할 사항은 다음과 같습니다.
 
-- [이 표][10]에서 메트릭을 찾아보세요. 메트릭 설명에 `[OpenMetricsV2]` 태그가 포함되어 있으면 Prometheus Plugin에서 사용할 수 있습니다. Management Plugin에서만 사용할 수 있는 메트릭에는 설명에 태그가 없습니다.
+- [이 표][11]에서 메트릭을 찾아보세요. 메트릭 설명에 `[OpenMetricsV2]` 태그가 포함되어 있으면 Prometheus Plugin에서 사용할 수 있습니다. Management Plugin에서만 사용할 수 있는 메트릭에는 설명에 태그가 없습니다.
 - Management Plugin 메트릭을 사용하는 대시보드와 모니터는 작동하지 않습니다. *OpenMetrics Version*으로 표시된 대시보드와 모니터로 전환하세요.
 - 기본 구성은 집계된 메트릭을 수집합니다. 즉, 예를 들어 대기열로 태그된 메트릭이 없습니다. `prometheus_plugin.unaggregated_endpoint` 옵션을 구성하여 집계 없이 메트릭을 가져오세요.
 - `rabbitmq.status` 서비스 점검은 `rabbitmq.openmetrics.health`로 교체되었습니다. Prometheus Plugin에는 `rabbitmq.aliveness` 서비스 점검과 동일한 기능이 없습니다.
 
 Prometheus Plugin은 일부 태그를 변경합니다. 아래 표는 보다 일반적인 태그에 대한 변경 사항을 설명합니다.
 
-| 관리          | 프로메테우스(Prometheus)                               |
+| 관리          | Prometheus                               |
 |:--------------------|:-----------------------------------------|
 | `queue_name`        | `queue`                                  |
 | `rabbitmq_vhost`    | `vhost`, `exchange_vhost`, `queue_vhost` |
 | `rabbitmq_exchange` | `exchange`                               |
 
-자세한 내용은 [태그 패밀리별 RabbitMQ 대기열 태그 지정][11]을 참조하세요.
+자세한 내용은 [태그군별 RabbitMQ 대기열 태그 지정][12]을 참조하세요.
 
-도움이 필요하신가요? [Datadog 고객 지원팀][12]에 문의하세요.
+도움이 필요하세요? [Datadog 지원팀][13]에 문의하세요.
 
 ## 참고 자료
 
 기타 유용한 문서, 링크 및 기사:
 
-- [RabbitMQ 모니터링을 위한 주요 메트릭][13]
-- [RabbitMQ 모니터링 도구를 사용한 메트릭 수집][14]
-- [Datadog으로 RabbitMQ 성능 모니터링][15]
+- [RabbitMQ 모니터링을 위한 주요 메트릭][14]
+- [RabbitMQ 모니터링 도구를 사용한 메트릭 수집][15]
+- [Datadog으로 RabbitMQ 성능 모니터링][16]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/rabbitmq/images/rabbitmq_dashboard.png
 [2]: https://www.rabbitmq.com
-[3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://www.rabbitmq.com/management.html
-[5]: https://www.rabbitmq.com/prometheus.html
-[6]: https://www.rabbitmq.com/prometheus.html#default-endpoint
-[7]: https://www.rabbitmq.com/prometheus.html#detailed-endpoint
-[8]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
-[9]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://docs.datadoghq.com/ko/integrations/rabbitmq/?tab=host#metrics
-[11]: https://docs.datadoghq.com/ko/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
-[12]: https://docs.datadoghq.com/ko/help/
-[13]: https://www.datadoghq.com/blog/rabbitmq-monitoring
-[14]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
-[15]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
+[3]: https://docs.datadoghq.com/ko/data_streams/
+[4]: https://app.datadoghq.com/account/settings/agent/latest
+[5]: https://www.rabbitmq.com/management.html
+[6]: https://www.rabbitmq.com/prometheus.html
+[7]: https://www.rabbitmq.com/prometheus.html#default-endpoint
+[8]: https://www.rabbitmq.com/prometheus.html#detailed-endpoint
+[9]: https://www.rabbitmq.com/rabbitmqctl.8.html#set_permissions
+[10]: https://docs.datadoghq.com/ko/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/ko/integrations/rabbitmq/?tab=host#metrics
+[12]: https://docs.datadoghq.com/ko/integrations/faq/tagging-rabbitmq-queues-by-tag-family/
+[13]: https://docs.datadoghq.com/ko/help/
+[14]: https://www.datadoghq.com/blog/rabbitmq-monitoring
+[15]: https://www.datadoghq.com/blog/rabbitmq-monitoring-tools
+[16]: https://www.datadoghq.com/blog/monitoring-rabbitmq-performance-with-datadog
