@@ -24,7 +24,7 @@ further_reading:
 ---
 
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP metrics intake endpoint is in Preview.
+  The Datadog OTLP metrics intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
@@ -78,6 +78,7 @@ export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT="{{< region-param key="otlp_metrics_e
 export OTEL_EXPORTER_OTLP_METRICS_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 export OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE="delta"
 ```
+<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
 
 #### Manual instrumentation
 
@@ -97,7 +98,7 @@ const exporter = new OTLPMetricExporter({
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-metric-config': '{resource_attributes_as_tags: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
+    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
   },
 });
 ```
@@ -119,7 +120,7 @@ OtlpHttpMetricExporter exporter = OtlpHttpMetricExporter.builder()
 			AggregationTemporalitySelector.deltaPreferred()) // Ensure delta temporality
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-metric-config", "{resource_attributes_as_tags: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .build();
 ```
 
@@ -143,7 +144,7 @@ metricExporter, err := otlpmetrichttp.New(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -165,7 +166,7 @@ exporter = OTLPMetricExporter(
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-metric-config": "{resource_attributes_as_tags: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
+        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -236,7 +237,7 @@ exporters:
     headers:
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-metric-config: "{resource_attributes_as_tags: true}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
+      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
 ...
 
 service:
@@ -254,13 +255,13 @@ service:
 
 If you receive a `403 Forbidden` error when sending metrics to the Datadog OTLP metrics intake endpoint, it indicates one of the following issues:
 
-- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.
-   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP metrics intake endpoint.
+- The API key belongs to an organization that is not allowed to access the Datadog OTLP metrics intake endpoint.  
+   **Solution**: To request access, contact your account representative.
 
-- The `dd-otlp-source` header is missing or has an incorrect value.
+- The `dd-otlp-source` header is missing or has an incorrect value.  
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 
-- The endpoint URL is incorrect for your organization.
+- The endpoint URL is incorrect for your organization.  
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_metrics_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
