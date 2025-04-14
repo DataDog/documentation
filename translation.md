@@ -17,6 +17,18 @@ Guidance for each file type is listed below.
 
 JSON files end in `.json`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a number, a list, or a more complex data structure.
 
+```json
+{ 
+  title: "Some title",
+  path: "path/to/file",
+  anExampleList: [
+    "item one",
+    "item two",
+    "item three"
+  ]
+}
+```
+
 ### Translation guidance
 
 #### Do not translate
