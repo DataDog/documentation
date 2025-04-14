@@ -33,7 +33,7 @@ If you had set up the pipeline components using the [API][6] or Terraform, to ge
 {{< img src="observability_pipelines/install_page.png" alt="The install page in the UI with a dropdown menu to choose your installation platform and fields to enter environment variables" style="width:100%;" >}}
 
 1. Select the platform on which you want to install the Worker.
-1. Enter the environment variables for your sources and destinations, if applicable.
+1. Enter the [environment variables][7] for your sources and destinations, if applicable.
 1. Follow the instructions on installing the Worker for your platform. The command provided in the UI to install the Worker has the relevant environment variables populated.
 
 {{< tabs >}}
@@ -225,3 +225,4 @@ sudo apt-get remove --purge observability-pipelines-worker
 [4]: /observability_pipelines/processors/
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/#create-a-new-pipeline
+[7]: /observability_pipelines/environment_variables/
