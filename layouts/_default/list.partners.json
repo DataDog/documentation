@@ -16,7 +16,7 @@
 
         {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
         {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
-
+        {{- /* update each search result in Partners with this info  */-}}
         {{- $record := (
             dict "id" $object_id
             "title" $title
