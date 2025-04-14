@@ -6,10 +6,6 @@ further_reading:
   text: "Unify OpenTelemetry and Datadog with the Datadog distribution of OpenTelemetry (DDOT) Collector in the Agent"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
-{{< /callout >}} 
-
 {{< site-region region="gov" >}}
 <div class="alert alert-danger"><strong>The Datadog Agent with embedded OpenTelemetry Collector is not FedRAMP or FIPS compliant.</strong><br> FedRAMP customers should not use the embedded OpenTelemetry Collector and should continue using standard Agent deployments.</div>
 {{< /site-region >}}

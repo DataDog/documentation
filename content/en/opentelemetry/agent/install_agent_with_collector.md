@@ -6,10 +6,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
-{{< /callout >}}
-
 {{< site-region region="gov" >}}
 <div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
 {{< /site-region >}}
