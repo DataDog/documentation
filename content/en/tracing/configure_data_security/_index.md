@@ -375,7 +375,7 @@ apm_config:
 ```
 
 * `remove_query_string` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_QUERY_STRING`: If true, obfuscates query strings in URLs (`http.url`).
-* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing only digits are replaced by "?".
+* `remove_paths_with_digits` or environment variable `DD_APM_OBFUSCATION_HTTP_REMOVE_PATHS_WITH_DIGITS`: If true, path segments in URLs (`http.url`) containing one or more digits are replaced by "?".
 
 [1]: /tracing/glossary/#spans
 {{% /tab %}}
@@ -607,6 +607,14 @@ Some tracing libraries provide an interface for processing spans to manually mod
 
 ## Telemetry collection
 
+{{< site-region region="gov" >}}
+
+<div class="alert alert-warning">
+Instrumentation telemetry is not available for the {{< region-param key="dd_site_name" >}} site, but is enabled by default. To avoid errors, {{< region-param key="dd_site_name" >}} users should disable this capability by setting <code>DD_INSTRUMENTATION_TELEMETRY_ENABLED=false</code> on their application and <code>DD_APM_TELEMETRY_ENABLED=false</code> on their Agent.
+</div>
+
+{{< /site-region >}}
+
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
 
 You can disable this telemetry collection using either of these settings:
@@ -668,5 +676,5 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [9]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
-[12]: /sensitive_data_scanner/
+[12]: /security/sensitive_data_scanner/
 [13]: /security/application_security/how-appsec-works/#data-privacy

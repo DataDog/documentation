@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/sql-server-and-azure-managed-services-database-monitoring/
   tag: ブログ
   text: Datadog DBM で SQL Server や Azure のマネージドデータベースを監視する
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: ブログ
+  text: MongoDB のパフォーマンスを追跡してトラブルシューティング
 - link: /database_monitoring/data_collected/
   tag: ドキュメント
   text: 収集データ
@@ -22,7 +25,10 @@ further_reading:
   text: トラブルシューティング
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
+  text: 対話型セッションに参加して Database Monitoring を強化しましょう
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: ブログ
+  text: Datadog Database Monitoring を使用して MongoDB のパフォーマンスを追跡およびトラブルシューティング
 title: データベース モニタリング
 ---
 
@@ -35,7 +41,7 @@ Datadog Database Monitoring は、すべてのホストにわたるデータベ�
 
 ## はじめに
 
-Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL Server**、**MongoDB** のセルフホストおよびマネージドクラウドバージョンをサポートします。Datadog Database Monitoring の使用を開始するには、データベースを構成し、Datadog Agent をインストールします。セットアップ手順については、データベーステクノロジーを選択してください。
+Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL Server**、**MongoDB**、および **Amazon DocumentDB** のセルフホスト型およびクラウド管理型バージョンに対応しています。Datadog Database Monitoring を開始するには、まずデータベースを構成し、Datadog Agent をインストールしてください。セットアップ手順については、ご利用のデータベース技術を選択してください。
 
 ### Postgres
 
@@ -59,8 +65,12 @@ Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL 
 
 ### MongoDB
 
-<div class="alert alert-info">MongoDB 用 Database Monitoring は公開ベータ版です。ご興味のある方は、Datadog カスタマーサクセスマネージャーまでお問い合わせください。</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
+<p></p>
+
+### Amazon DocumentDB
+
+{{< partial name="dbm/dbm-setup-documentdb" >}}
 <p></p>
 
 ## Datadog Database Monitoring の調査
@@ -109,6 +119,13 @@ Datadog の [Database Monitoring][1] に移動します。
 
 {{< img src="database_monitoring/databases-list.png" alt="Datadog の Databases ページ" style="width:90%;" >}}
 
+### 最適化に関する推奨事項を表示
+
+[Recommendations ページ][6]は、問題点や最適化の機会を明確化し、重要度に応じた優先順位付けによって時間の節約に役立ちます。推奨事項を選択すると、問題の概要や対応に必要な次のステップなどの詳細を確認できます。
+
+{{< img src="database_monitoring/recommendations-page.png" alt="Datadog の Recommendations ページ" style="width:90%;" >}}
+
+
 ## その他の参考資料
 
 {{< learning-center-callout header="ラーニングセンターで Datadog DBM による Postgres データベースの監視をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
@@ -122,3 +139,4 @@ Datadog の [Database Monitoring][1] に移動します。
 [3]: /ja/database_monitoring/query_samples/
 [4]: /ja/database_monitoring/query_metrics/#explain-plans
 [5]: /ja/database_monitoring/database_hosts/
+[6]: /ja/database_monitoring/recommendations/

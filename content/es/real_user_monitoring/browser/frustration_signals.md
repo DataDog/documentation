@@ -97,7 +97,7 @@ Haz clic en una sesión con un valor en la columna **Número de frustraciones** 
 
 Haz clic en una vista para identificar si un usuario se frustró en una página específica con la etiqueta (tag) `frustration detected`.
 
-{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Menú desplegable de acciones de señales de frustración en los <txprotected>eventos</txprotected> en el gráfico de cascada de rendimiento" style="width:90%;" >}}
+{{< img src="real_user_monitoring/frustration_signals/frustration_signals_in_performance_tab.png" alt="Acciones de señales de frustración en el menú desplegable de eventos en el gráfico de cascada del rendimiento" style="width:90%;" >}}
 
 La cascada de rendimiento muestra las acciones que contienen señales de frustración.
 

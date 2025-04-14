@@ -1,5 +1,5 @@
 import { getQueryParameterByName } from '../helpers/browser';
-import { getCookieByName, chromeHashFix } from '../helpers/helpers';
+import { getCookieByName } from '../helpers/helpers';
 import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
@@ -82,8 +82,7 @@ const initCodeTabs = () => {
 
     const scrollToAnchor = (tab, anchorname) => {
         const anchor = document.querySelectorAll(`[data-lang='${tab}'] ${anchorname}`)[0];
-        console.log('tab: ', tab);
-        console.log('scrolling to anchor: ', anchor);
+        
         if (anchor) {
             anchor.scrollIntoView();
         } else {
@@ -105,13 +104,11 @@ const initCodeTabs = () => {
                 }
             }else{
                 activateCodeTab(firstTab)
-                chromeHashFix();
             }
         } else {
             if (codeTabsList.length > 0) {
                 activateCodeTab(firstTab)
             }
-            chromeHashFix();
         }
     }
 
@@ -122,23 +119,20 @@ const initCodeTabs = () => {
                 allTabLinksNodeList.forEach(link => {
                     link.addEventListener('click', e => {
                         e.preventDefault();
-                        const region = getCookieByName('site');
-                        const regionalCodeTabs = codeTabParameters[region];
-                        const targetTop = e.target.getBoundingClientRect().top + window.scrollY;
-                        let offsetY = 0;
+
+                        const previousTabPosition = e.target.getBoundingClientRect().top
+
                         activateCodeTab(link);
                         getContentTabHeight();
-                        for(const [idx, codeTab] of Object.entries(regionalCodeTabs)) {
-                            if (codeTab.elementTop < targetTop && codeTab.elementCurrentHeight > 0) {
-                                offsetY += codeTab.elementHeightDifference;
-                            }
-                        }
+                        
+                        // ensures page doesnt jump when navigating tabs.
+                        // takes into account page shifting that occurs due to navigating tabbed content w/ height changes.
+                        // implementation of synced tabs from https://github.com/withastro/starlight/blob/main/packages/starlight/user-components/Tabs.astro
                         window.scrollTo({
-                            top: window.scrollY + offsetY,
+                            top: (window.scrollY + e.target.getBoundingClientRect().top) - previousTabPosition,
                             behavior: "instant"
                         });
                         getContentTabHeight();
-                        offsetY = 0;
                     })
                 });
             });

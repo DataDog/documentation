@@ -157,8 +157,6 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 LLM Observability offers quality checks and out-of-the-box metrics to evaluate the quality and effectiveness of your LLM conversations, including assessments of sentiment, topic relevancy, and user satisfaction. With evaluations, you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
-{{< img src="llm_observability/evaluations/evaluations.png" alt="A quality evaluation in LLM Observability" style="width:100%;" >}}
-
 In addition to evaluating conversations, LLM Observability integrates with [Sensitive Data Scanner][5], which helps prevent data leakage by identifying and flagging any sensitive information (such as personal data, financial details, or proprietary information) that may be present in conversations. 
 
 By proactively scanning for sensitive data, LLM Observability ensures that conversations remain secure and compliant with data protection regulations. This additional layer of security reinforces Datadog's commitment to maintaining the confidentiality and integration of user interactions with LLMs.
@@ -170,8 +168,6 @@ LLM Observability associates evaluations with individual spans so you can view t
 #### Topic Relevancy
 
 This check identifies and flags user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
-
-{{< img src="llm_observability/evaluations/topic_relevancy_1.png" alt="A Topic Relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
   
 | Evaluation Stage | Evaluation Method | Evaluation Definition | 
 |---|---|---|
@@ -247,7 +243,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
 [3]: /llm_observability/setup/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
-[5]: /sensitive_data_scanner/
+[5]: /security/sensitive_data_scanner/
 [6]: /llm_observability/submit_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb

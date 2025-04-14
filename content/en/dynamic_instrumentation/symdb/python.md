@@ -7,7 +7,7 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 {{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in public beta.
+Autocomplete and search are in Preview.
 {{< /beta-callout >}}
 
 ## Requirements

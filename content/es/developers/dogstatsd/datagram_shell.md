@@ -18,7 +18,7 @@ Esta sección especifica el formato de datagramas sin procesar para métricas, e
 ## Protocolo de DogStatsD 
 
 {{< tabs >}}
-{{% tab "Metrics" (Métricas) %}}
+{{% tab "Métricas" %}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -93,7 +93,7 @@ El valor es una marca de tiempo Unix (UTC) y debe llevar el prefijo `T`, por eje
 [104]: /es/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [105]: /es/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
-{{% tab "Events" (Eventos) %}}
+{{% tab "Eventos" %}}
 
 `_e{<TITLE_UTF8_LENGTH>,<TEXT_UTF8_LENGTH>}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
@@ -123,7 +123,7 @@ Se ha producido una excepción. No se puede analizar la solicitud:\\n{"foo: "bar
 ```
 
 {{% /tab %}}
-{{% tab "Service Checks" (Checks de servicios) %}}
+{{% tab "Checks de servicios" %}}
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
@@ -154,7 +154,7 @@ Para Linux y otros sistemas operativos tipo Unix, utiliza Bash. Para Windows, ut
 DogStatsD crea un mensaje que contiene información sobre tu métrica, evento o check de servicio y los envía a un Agent instalado localmente como recopilador. La dirección IP de destino es `127.0.0.1` y el puerto del recopilador en UDP es `8125`. Para ver más detalles sobre la configuración del Agent, consulta [DogStatsD][3].
 
 {{< tabs >}}
-{{% tab "Metrics" (Métricas) %}}
+{{% tab "Métricas" %}}
 
 El formato para enviar métricas es:
 
@@ -203,7 +203,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}
-{{% tab "Events" (Eventos) %}}
+{{% tab "Eventos" %}}
 
 El formato para enviar eventos es:
 
@@ -232,7 +232,7 @@ PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#she
 ```
 
 {{% /tab %}}
-{{% tab "Service Checks" (Checks de servicios) %}}
+{{% tab "Checks de servicios" %}}
 
 El formato para enviar checks de servicios es:
 

@@ -34,7 +34,7 @@ title: macOS 用 Agent の基本的な使用方法
 
 ## サポートされている macOS バージョン
 
-| macOS バージョン       | Supported Agent versions                                            |
+| macOS バージョン       | サポートされている Agent バージョン                                            |
 |---------------------|---------------------------------------------------------------------|
 | macOS 10.10 & 10.11 | Agent v5                                                            |
 | macOS 10.12         | Agent v5、Agent v6 (v6.34.0 まで)、Agent v7 (v7.34.0 まで)            |
@@ -49,7 +49,7 @@ Agent v6 および v7 では、オペレーティングシステムから提供�
 |------------------------------------|------------------------------------------------------|
 | Agent をサービスとして起動           | `launchctl start com.datadoghq.agent` または systray アプリ |
 | サービスとして実行中の Agent の停止    | `launchctl stop com.datadoghq.agent` または systray アプリ  |
-| サービスとして実行中の Agent の再起動 | Stop and then start the Agent with:<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>Or use the systray app |
+| サービスとして実行中の Agent の再起動 | 以下で Agent を停止し、起動します。<br>`launchctl stop com.datadoghq.agent`<br>`launchctl start com.datadoghq.agent`<br>または systray アプリを使用します |
 | Agent サービスのステータス            | `launchctl list com.datadoghq.agent` または systray アプリ  |
 | 実行中の Agent のステータスページ       | `datadog-agent status` または Web GUI                    |
 | フレアの送信                         | `datadog-agent flare` または Web GUI                     |
@@ -70,7 +70,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 Agent をアンインストールするには、次のコマンドを実行します。
 
-**Single user installation**
+**シングルユーザーインストール**
 
 Agent とすべての Agent 構成ファイルを削除するには
 1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
@@ -95,6 +95,7 @@ Agent とすべての Agent 構成ファイルを削除するには
     sudo rm -rf /usr/local/bin/datadog-agent
     sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
     sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
+    sudo launchctl unload /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm -rf /var/log/datadog
     ```

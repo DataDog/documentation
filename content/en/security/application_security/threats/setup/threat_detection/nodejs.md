@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for NodeJs
+title: Enabling ASM for Node.js
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -29,7 +29,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 ## Enabling threat detection
 ### Get started
 
-1. **Update your Datadog Node.js library package** to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
+1. **Update your Datadog Node.js library package** to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for Node.js 14+), by running one of these commands:
    ```shell
    npm install dd-trace@^5
    npm install dd-trace@^4
@@ -37,7 +37,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library.
 
-   Application Security Management is compatible with Express v4+ and NodeJS v14+. For additional information, see [Compatibility][2].
+   Application Security Management is compatible with Express v4+ and Node.js v14+. For additional information, see [Compatibility][2].
 
 2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}

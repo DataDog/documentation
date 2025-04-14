@@ -91,15 +91,13 @@ Obtén más información sobre la [Facturación de métricas personalizadas][8].
 
    A medida que tus equipos continúen limpiando métricas ruidosas que nunca se consultan en la plataforma de Datadog, puedes minimizar de manera instantánea los costes de estas métricas sin consultar al configurarlas con una lista de etiquetas permitidas vacía. 
 
-   Pídele a tu asesor de clientes un informe de métricas sin consultar.
-
 3. Revisa tu uso y facturación. Tras configurar las métricas, el impacto de tus cambios se puede validar de tres maneras:
 
    - Antes de guardar tu configuración, el estimador de cardinalidad de la configuración de etiquetas devuelve el número resultante estimado de métricas personalizadas indexadas, que debe ser menor que los volúmenes de métricas personalizadas ingeridas.
    - Después de guardar tu configuración, el panel lateral de detalles del Resumen de métricas debería mostrar que tus métricas personalizadas indexadas son inferiores al volumen de métricas personalizadas ingeridas.
    - 24 horas después de haber guardado la configuración, también puedes ver el impacto en la tabla de **Top Custom Metrics** (Métricas personalizadas principales) en la página de Plan y uso. Debería haber una reducción en el volumen de métricas personalizadas entre la pestaña **Month-to-Date** (Mes hasta la fecha) y la pestaña **Most Recent Day** (Día más reciente) de esta tabla.
 
-## Buenas prácticas
+## Prácticas recomendadas
 
 - Puedes configurar alertas en tu métrica de [uso estimado de métricas personalizadas][10] en tiempo real para poder correlacionar picos en las métricas personalizadas con las configuraciones.
 
@@ -109,7 +107,7 @@ Obtén más información sobre la [Facturación de métricas personalizadas][8].
 
 \*Metrics without Limits es una marca registrada de Datadog, Inc.
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

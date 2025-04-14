@@ -1,9 +1,9 @@
 ---
-title: .NET Custom Instrumentation using OpenTelemetry API
+title: .NET Custom Instrumentation using the OpenTelemetry API
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
-description: 'Instrument your .NET application with OpenTelemetry API, to send traces to Datadog.'
+description: 'Instrument your .NET application with the OpenTelemetry API, to send traces to Datadog.'
 aliases:
 - /tracing/trace_collection/otel_instrumentation/dotnet/
 - /tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet
@@ -24,7 +24,7 @@ To configure OpenTelemetry to use the Datadog trace provider:
 
 1. Add your desired manual OpenTelemetry instrumentation to your .NET code following the [OpenTelemetry .NET Manual Instrumentation documentation][5]. **Note**: Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
-2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11]. **Beta**: You can optionally do this with [Single Step APM Instrumentation][13].
+2. Install the Datadog .NET tracing library and enable the tracer for your [.NET Framework service][10] or your [.NET Core (and .NET 5+) service][11]. **Preview**: You can optionally do this with [Single Step APM Instrumentation][13].
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
@@ -117,12 +117,12 @@ catch(Exception e)
 
 ## Adding span events
 
-_Minimum SDK version: 2.53.0._
+<div class="alert alert-info">Adding span events requires SDK version 2.53.0 or higher.</div>
 
 You can add span events using the `AddEvent` API. This method requires an `ActivityEvent`constructed with the `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span. 
 
 - **Name** [_required_]: A string representing the event's name.
-- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time, expects a `DateTimeOffset` object.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `DateTimeOffset` object.
 - **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
   - The key must be a non-empty string.
   - The value can be either:

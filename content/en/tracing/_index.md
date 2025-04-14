@@ -5,6 +5,9 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
+  - link: "https://www.datadoghq.com/blog/monitor-rust-otel/"
+    tag: "Blog"
+    text: "How to monitor your Rust applications with OpenTelemetry"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
@@ -17,6 +20,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
     tag: "Blog"
     text: "Manage API performance, security, and ownership with Datadog API Catalog"
+  - link: "https://www.datadoghq.com/blog/software-catalog/"
+    tag: "Blog"
+    text: "Improve developer experience and collaboration with Software Catalog"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to boost your APM understanding"
@@ -29,7 +35,7 @@ aliases:
   - /tracing/api
   - /tracing/faq/distributed-tracing/
 algolia:
-  tags: ['apm', 'application performance monitoring', 'distributed tracing']
+  tags: ['apm', 'application performance monitoring', 'distributed tracing', 'trace', 'tracing']
 cascade:
     algolia:
         rank: 70
@@ -41,7 +47,7 @@ cascade:
 
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
-  Join an introductory or intermediate enablement session to learn more about how Datadog Application Performance Monitoring (APM) provides AI-powered, code-level distributed tracing from browser and mobile applications to backend services and databases. 
+  Join an introductory or intermediate enablement session to learn more about how Datadog Application Performance Monitoring (APM) provides AI-powered, code-level distributed tracing from browser and mobile applications to backend services and databases.
 {{< /learning-center-callout >}}
 
 ## Overview
@@ -116,7 +122,7 @@ For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/
 [9]: /tracing/other_telemetry/connect_logs_and_traces/
-[10]: /real_user_monitoring/platform/connect_rum_and_traces
+[10]: /real_user_monitoring/correlate_with_other_telemetry/apm
 [11]: /synthetics/apm/
 [12]: /tracing/trace_explorer/#live-search-for-15-minutes
 [13]: /tracing/services/services_map/

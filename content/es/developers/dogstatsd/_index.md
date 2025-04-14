@@ -5,28 +5,28 @@ aliases:
 - /es/developers/faq/how-to-remove-the-host-tag-when-submitting-metrics-via-dogstatsd/
 - /es/integrations/faq/dogstatsd-and-docker
 - /es/agent/kubernetes/dogstatsd
-description: Descripción general de las características de DogStatsD, incluidos los
-  tipos de datos y etiquetado.
+description: Información general de las características de DogStatsD, incluidos los
+  tipos de datos y el etiquetado.
 further_reading:
 - link: integrations/node
   tag: Documentación
-  text: Habilitar DogStatsD para NodeJS a través de la integración de NodeJS
+  text: Habilitar DogStatsD para Node.js a través de la integración Node.js
 - link: developers/dogstatsd
   tag: Documentación
   text: Introducción a DogStatsD
 - link: developers/libraries
   tag: Documentación
   text: API oficial y creada por la comunidad y bibliotecas de cliente de DogStatsD
-- link: https://www.datadoghq.com/blog/monitor-azure-app-servicio-linux/
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
-  text: Monitoriza tus aplicaciones web de Linux en Azure App Service con Datadog
+  text: Monitoriza las aplicaciones web Linux en Azure App Service con Datadog
 title: DogStatsD
 ---
 
 La forma más sencilla de introducir tus métricas de aplicación personalizadas en Datadog es enviarlas a DogStatsD, un servicio de agregación de métricas incluido con el Datadog Agent. DogStatsD implementa el protocolo [StatsD][1] y añade algunas extensiones específicas de Datadog:
 
 - Tipo de métrica de histograma
-- Checks de servicios
+- Checks de servicio
 - Eventos
 - Etiquetado
 
@@ -40,7 +40,7 @@ DogStatsD está disponible en Docker Hub y GCR:
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
-<div class="alert alert-warning">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración de Datadog Agent y Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambiar tu registro de contenedor</a>.</div>
+<div class="alert alert-warning">Docker Hub está sujeto a límites en la tasa de extracción de imágenes. Si no eres cliente de Docker Hub, Datadog recomienda que actualices tu configuración del Datadog Agent y del Cluster Agent para extraer desde GCR o ECR. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambio de tu registro de contenedores</a>.</div>
 
 ## Cómo funciona
 
@@ -54,23 +54,20 @@ A medida que recibe datos, DogStatsD agrega múltiples puntos de datos para cada
 
 ## Configuración
 
-DogStatsD está habilitado por defecto en el puerto UDP `8125` para el Agent v6+. Si no necesitas cambiar este puerto, consulta directamente cómo [configurar DogStatsD en tu código](#code).
+DogStatsD consta de un servidor que se incluye en el paquete del Datadog Agent y una biblioteca cliente, disponible en varios idiomas. El servidor DogStatsD está habilitado por defecto en el puerto UDP `8125` para el Agent v6 o posterior. Puedes configurar un puerto personalizado para el servidor, si es necesario. Configura tu cliente para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
 
-### Agent
+### Servidor DogStatsD del Datadog Agent
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
 
-Por defecto, DogStatsD escucha en el puerto UDP **8125**. Si necesitas cambiar esto, configura la opción `dogstatsd_port` en el [archivo principal de configuración del Agent][1], y reinicia el Agent. También puedes configurar DogStatsD para utilizar un [socket de dominio de Unix][2]. Para habilitar un puerto UDP de servidor DogStatsD personalizado para el Agent:
+Si necesitas cambiar el puerto, configura la opción `dogstatsd_port` en el [archivo de configuración del Agent][1] principal y reinicia el Agent. También puedes configurar DogStatsD para utilizar un [socket de dominio UNIX][2].
 
-1. Edita tu archivo `datadog.yaml` para eliminar los comentarios de los parámetros `use_dogstatsd` y `dogstatsd_port`:
+Para habilitar un puerto UDP personalizado del servidor DogStatsD en el Agent:
+
+1. Configura el parámetro `dogstatsd_port`:
 
     ```yaml
-    ## @param use_dogstatsd - boolean - optional - default: true
-    ## Set this option to false to disable the Agent DogStatsD server.
-    #
-    use_dogstatsd: true
-
     ## @param dogstatsd_port - integer - optional - default: 8125
     ## Override the Agent DogStatsD port.
     ## Note: Make sure your client is sending to the same UDP port.
@@ -79,7 +76,6 @@ Por defecto, DogStatsD escucha en el puerto UDP **8125**. Si necesitas cambiar e
     ```
 
 2. [Reinicia tu Agent][3].
-
 
 [1]: /es/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /es/developers/dogstatsd/unix_socket/
@@ -96,16 +92,16 @@ docker run -d --cgroupns host \
               -v /proc/:/host/proc/:ro \
               -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
               -e DD_API_KEY=<DATADOG_API_KEY> \
-              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
+              -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC="true" \
               -p 8125:8125/udp \
               gcr.io/datadoghq/agent:latest
 ```
 
-Si necesitas cambiar el puerto utilizado para recopilar métricas de StatsD, utiliza la variable de entorno `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>`. También puedes configurar DogStatsD para usar un [socket de dominio de Unix][1].
+Si necesitas cambiar el puerto utilizado para recopilar métricas de StatsD, utiliza la variable de entorno `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>`. También puedes configurar DogStatsD para utilizar un [socket de dominio UNIX][1].
 
 #### Detección de origen a través de UDP
 
-La detección de origen es compatible con el Agent v6.10.0+, y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y automáticamente etiquetar las métricas. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas de pod como métricas de Autodiscovery.
+La detección de origen es compatible con el Agent v6.10.0+, y permite a DogStatsD detectar de dónde proceden las métricas de contenedor y automáticamente etiquetar las métricas. Cuando este modo está activado, todas las métricas recibidas a través de UDP son etiquetadas por las mismas etiquetas (tags) de pod como métricas de Autodiscovery.
 
 La detección del origen en entornos distintos a Kubernetes se basa en una extensión del protocolo DogStatsD en [Datagram Format and Shell Usage][2]. Para habilitar la función en el Agent, establece la variable de entorno `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` en `true`.
 
@@ -116,7 +112,7 @@ La detección del origen en entornos distintos a Kubernetes se basa en una exten
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-La recopilación de métricas de StatsD está habilitada por defecto en [socket de dominio de Unix][1]. Para empezar a recopilar tus métricas de StatsD mediante UDP, necesitas activar la característica de DogStatsD en la configuración del Operator.
+La recopilación de métricas de StatsD está habilitada por defecto en el [socket de dominio UNIX][1]. Para comenzar a recopilar tus métricas de StatsD sobre UDP, necesitas activar la función DogStatsD en la configuración del Operator.
 
 1. Añade `features.dogstatsd.hostPortConfig.enabled` a tu manifiesto `datadog-agent.yaml`:
 
@@ -184,7 +180,7 @@ La detección de origen es compatible con Agent 6.10.0+ y permite a DogStatsD de
     ```
 
 **Notas**: 
-* Una alternativa a UDP es [socket de dominio de Unix][5].
+* Una alternativa a UDP son los [sockets de dominio UNIX][5].
 * La detección de origen con UDP puede utilizar el ID del pod como ID de entidad.
 
 Para utilizar el ID del pod como ID de entidad, añade las siguientes líneas al manifiesto de tu aplicación:
@@ -248,10 +244,11 @@ Reunir métricas personalizadas con [DogStatsD][1] con helm:
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 [3]: https://github.com/containernetworking/cni
 [4]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-{{% /tab %}}
-{{< /tabs >}}
+{{% /tab %}}{{< /tabs >}}
 
-### Código
+### Cliente DogStatsD
+
+Instala la biblioteca cliente DogStatsD con tu lenguaje preferido y configúrala para que coincida con la dirección y el puerto del servidor DogStatsD del Datadog Agent.
 
 #### Instalar el cliente de DogStatsD
 
@@ -294,8 +291,6 @@ El cliente Java Datadog StatsD se distribuye con maven central, y puede ser [des
 </dependency>
 ```
 
-
-
 [1]: https://search.maven.org/search?q=g:com.datadoghq%20a:java-dogstatsd-client
 {{< /programming-lang >}}
 
@@ -304,7 +299,7 @@ El cliente Java Datadog StatsD se distribuye con maven central, y puede ser [des
 Añade lo siguiente a tu `composer.json`:
 
 ```text
-"datadog/php-datadogstatsd": "1.4.*"
+"datadog/php-datadogstatsd": "1.6.*"
 ```
 
 **Nota**: La primera versión de Composer es _0.0.3_.
@@ -349,7 +344,7 @@ initialize(**options)
 ```
 
 <div class="alert alert-warning">
-  Por defecto, las instancias de cliente de Python DogStatsD (incluyendo la instancia global <code>statsd</code> ) no pueden compartirse a través de procesos, pero son seguras para los subprocesos. Debido a esto, el proceso principal y cada subproceso deben crear sus propias instancias del cliente o el buffering debe ser explícitamente deshabilitado, estableciendo <code>disable_buffering</code> en <code>True</code>. Consulta la documentación sobre <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> para más detalles.
+Por defecto, las instancias del cliente Python de DogStatsD (incluyendo la instancia global <code>statsd</code>) no pueden ser compartidas entre procesos, pero son thread-safe. Debido a esto, el proceso principal y cada proceso secundario deben crear sus propias instancias de cliente o el almacenamiento en buffer debe ser explícitamente deshabilitado configurando <code>disable_buffering</code> como <code>True</code>. Para ver más detalles, consulta la documentación sobre <a href="https://datadogpy.readthedocs.io/en/latest/#Datadog-DogStatsD">datadog.dogstatsd</a>.
 </div>
 
 {{< /programming-lang >}}
@@ -365,7 +360,7 @@ statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
 <div class="alert alert-info">
-  Si utilizas DogStatsD con el Agent de contenedor o en Kubernetes, debes instanciar el host al que se reenvían las métricas de StatsD con la variable de entorno <code>$DD_DOGSTATSD_SOCKET</code> si utilizas un socket de dominio de Unix, o con la variable de entorno <code>$DD_AGENT_HOST</code> si utilizas el método de enlace de puertos host.
+Si utilizas DogStatsD con el Agent de contenedor o en Kubernetes, debes instanciar el host al que se reenvían métricas de StatsD con la variable de entorno <code>$DD_DOGSTATSD_SOCKET</code>, si utilizas un socket de dominio UNIX, o con la variable de entorno <code>$DD_AGENT_HOST</code>, si utilizas el método de enlace de puertos del host.
 </div>
 
 {{< /programming-lang >}}
@@ -467,19 +462,19 @@ using (var dogStatsdService = new DogStatsdService())
 
 ### Parámetros de instanciación del cliente
 
-**Nota**: Como práctica recomendada, Datadog recomienda utilizar el etiquetado de servicio unificado al asignar etiquetas. Éste une la telemetría de Datadog mediante el uso de tres etiquetas estándares: `env`, `service` y `version`. Para saber cómo unificar tu entorno, consulta [etiquetado de servicio unificado][4].
+**Nota**: Como práctica recomendada, Datadog recomienda utilizar el etiquetado de servicio unificado al asignar etiquetas. Éste une la telemetría de Datadog mediante el uso de tres etiquetas estándares: `env`, `service` y `version`. Para saber cómo unificar tu entorno, consulta [etiquetado de servicio unificado][8].
 
 Además de la configuración obligatoria de DogStatsD (`url` y `port`), tu cliente de DogStatsD dispone de los siguientes parámetros opcionales:
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,PHP,.NET" >}}
 {{< programming-lang lang="python" >}}
-| Parámetro              | Tipo            | Por defecto     | Descripción                                                                                                    |
+| Parámetro          | Tipo            | Predeterminado       | Descripción                                                                                                    |
 | ---------------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
-| `statsd_host`          | Cadena          | `localhost` | El host de tu servidor de DogStatsD.                                                                             |
-| `statsd_port`          | Entero         | `8125`      | El puerto de tu servidor de DogStatsD.                                                                             |
-| `statsd_socket_path`   | Cadena          | `null`      | La ruta al socket de dominio de DogStatsD Unix (anula `host` y `port`, solo compatibles con el Agent v6+). |
+| `statsd_host`          | Cadena          | `localhost` | Host de tu servidor DogStatsD.                                                                             |
+| `statsd_port`          | Entero         | `8125`      | Puerto de tu servidor DogStatsD.                                                                             |
+| `statsd_socket_path`   | Cadena           | `null`      | Ruta al socket de dominio UNIX de DogStatsD (anula `host` y `port`, sólo es compatible con el Agent v6 o posterior). |
 | `statsd_constant_tags` | Lista de cadenas | `null`      | Etiquetas para aplicar a todas las métricas, eventos y checks de servicio.                                                      |
-| `statsd_namespace`     | Cadena          | `null`      | Espacio de nombres para preestablecer todas las métricas, eventos checks de servicio.                                                   |
+| `statsd_namespace`     | Cadena           | `null`      | Espacio de nombre que debe ser el prefijo de todas las métricas, eventos y checks de servicio.                                                   |
 
 Para conocer la lista completa de todos los parámetros opcionales disponibles para `datadog.initialize()`, así como los parámetros que solo están disponibles cuando se instancian explícitamente instancias de `datadog.dogstatsd.DogStatsd`, consulta la [biblioteca de Datadog Python][1].
 
@@ -488,11 +483,11 @@ Para conocer la lista completa de todos los parámetros opcionales disponibles p
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-| Parámetro       | Tipo            | Predeterminada     | Descripción                                                                                                    |
+| Parámetro       | Tipo            | Valor predeterminado     | Descripción                                                                                                    |
 | --------------- | --------------- | ----------- | -------------------------------------------------------------------------------------------------------------- |
 | `host`          | Cadena          | `localhost` | El host de tu servidor de DogStatsD.                                                                             |
 | `port`          | Entero         | `8125`      | El puerto de tu servidor de DogStatsD.                                                                             |
-| `socket_path`   | Cadena          | `null`      | La ruta al socket de dominio de Unix DogStatsD (anula `host` y `port`, solo compatibles con Agent v6+). |
+| `socket_path`   | Cadena          | `null`      | Ruta al socket de dominio UNIX de DogStatsD (anula `host` y `port`, sólo es compatible con el Agent v6 o posterior). |
 | `tags`          | Lista de cadenas | `null`      | Etiquetas para aplicarse a todas las métricas, eventos y checks de servicio.                                                      |
 | `namespace`     | Cadena          | `null`      | Espacio de nombres para preestablecer a todas las métricas, eventos y checks de servicio.                                                |
 | `single_thread` | Booleano         | `false`     | Hace que el cliente envíe las métricas en el subproceso principal cuando está activado en lugar de en un subproceso compañero.           |
@@ -521,15 +516,15 @@ Para conocer todas las opciones disponibles, consulta [GoDoc de Datadog][1].
 A partir de la versión 2.10.0, la forma recomendada de instanciar el cliente es con el NonBlockingStatsDClientBuilder. Puedes
 usar los siguientes métodos de compilación para definir los parámetros del cliente.
 
-| Método de compilación                               | Tipo           | Predeterminada   | Descripción                                                                         |
+| Método de compilación                               | Tipo           | Valor predeterminado   | Descripción                                                                         |
 | -------------------------------------------- | -------------- | --------- | ----------------------------------------------------------------------------------- |
 | `prefix(String val)`                         | Cadena         | nulo      | El prefijo que se aplicará a todas las métricas, eventos y checks de servicio.                     |
 | `hostname(String val)`                       | Cadena         | localhost | El nombre de host del servidor StatsD de destino.                                        |
 | `port(int val)`                              | Entero        | 8125      | El puerto del servidor StatsD de destino.                                             |
 | `constantTags(String... val)`                | Cadena varargs | nulo      | Etiquetas globales que se aplicarán a cada métrica, evento y check de servicio.                |
-| `blocking(boolean val)`                      | Booleano        | false     | El tipo de cliente a instanciar: bloqueante o no bloqueante.                        |
-| `socketbufferSize(int val)`                  | Entero        | -1        | El tamaño del buffer del socket subyacente.                                           |
-| `enableTelemetry(boolean val)`               | Booleano        | false     | Informes de telemetría de clientes.                                                         |
+| `blocking(boolean val)`                      | Booleano        | falso     | El tipo de cliente a instanciar: bloqueante o no bloqueante.                        |
+| `socketBufferSize(int val)`                  | Entero        | -1        | El tamaño del buffer del socket subyacente.                                           |
+| `enableTelemetry(boolean val)`               | Booleano        | falso     | Informes de telemetría de clientes.                                                         |
 | `entityID(String val)`                       | Cadena         | nulo      | ID de la entidad para la detección del origen.                                                   |
 | `errorHandler(StatsDClientErrorHandler val)` | Entero        | nulo      | Gestor de errores en caso de error interno del cliente.                                  |
 | `maxPacketSizeBytes(int val)`                | Entero        | 8192/1432 | El tamaño máximo del paquete; 8192 para UDS, 1432 para UDP.                               |
@@ -546,18 +541,17 @@ Para obtener más información, busca el [paquete][1] de Java DogStatsD para la 
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-| Parámetro     | Tipo            | Por defecto     | Descripción                                                                                                                                                                                          
-          |
+| Parámetro     | Tipo            | Valor predeterminado     | Descripción                                                                                                                                                                                            |
 | ------------- | --------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `host`        | Cadena          | `localhost` | El host de tu servidor de DogStatsD. Si no está establecido, el Agent usa la variable de entorno `DD_AGENT_HOST` o `DD_DOGSTATSD_URL`.                                                               |
-| `port`        | Entero         | `8125`      | El puerto de tu servidor de DogStatsD. Si no está establecido, el Agent usa la variable de entorno `DD_DOGSTATSD_PORT` o `DD_DOGSTATSD_URL`.                                                          |
-| `socket_path` | Cadena          | `null`      | La ruta al socket de dominio de DogStatsD Unix (anula `host` y `port`). Solo es compatible con Agent v6+. Si no está establecido, el Agent usa la variable de entorno `DD_DOGSTATSD_URL`. |
-| `global_tags` | Lista de cadenas | `null`      | Etiquetas para aplicar a todas las métricas, eventos y checks de servicio. La etiqueta `@dd.internal.entity_id` se adjunta a etiquetas globales de la variable de entorno `DD_ENTITY_ID`.                                    |
+| `host`        | Cadena          | `localhost` | Host de tu servidor DogStatsD. Si no se define, el Agent busca la variable de entorno `DD_AGENT_HOST` o `DD_DOGSTATSD_URL`.                                                               |
+| `port`        | Entero         | `8125`      | Puerto de tu servidor DogStatsD. Si no se define, el Agent busca la variable de entorno `DD_DOGSTATSD_PORT` o `DD_DOGSTATSD_URL`.                                                          |
+| `socket_path` | Cadena          | `null`      | Ruta al socket de dominio UNIX de DogStatsD (anula `host` y `port`). Sólo es compatible con el Agent v6 o posterior. Si no se define, el Agent busca la variable de entorno `DD_DOGSTATSD_URL`. |
+| `global_tags` | Lista de cadenas | `null`      | Etiquetas para aplicar a todas las métricas, eventos y checks de servicio. La etiqueta `@dd.internal.entity_id` se añade a global_tags desde la variable de entorno `DD_ENTITY_ID`.                                    |
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-| Parámetro          | Tipo            | Predeterminada     | Descripción                                                          |
+| Parámetro          | Tipo            | Valor predeterminado     | Descripción                                                          |
 | ------------------ | --------------- | ----------- | -------------------------------------------------------------------- |
 | `StatsdServerName` | Cadena          | `localhost` | El nombre de host del servidor StatsD de destino.                         |
 | `StatsdPort`       | Entero         | `8125`      | El puerto del servidor StatsD de destino.                              |
@@ -579,7 +573,7 @@ DogStatsD y StatsD son en general similares, sin embargo, DogStatsD contiene car
 
 Si estás interesado en aprender más sobre el formato de datagram utilizado por DogStatsD, o quieres desarrollar tu propia biblioteca de Datadog, consulta la sección [datagram y shell usage][9], que también explica cómo enviar métricas y eventos directamente desde la línea de comandos.
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

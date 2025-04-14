@@ -1,6 +1,9 @@
 ---
 title: How to send logs to Datadog while reducing data transfer fees
 further_reading:
+- link: "https://www.datadoghq.com/architecture/using-cross-region-aws-privatelink-to-send-telemetry-to-datadog/"
+  tag: "Architecture Center"
+  text: "Using Cross-Region AWS PrivateLink to Send Telemetry to Datadog"
 - link: "https://aws.amazon.com/solutions/case-studies/textnow-privatelink-case-study/"
   tag: "AWS Case Study"
   text: "TextNow Saves 93% on Data Transfer Fees Using AWS PrivateLink"
@@ -22,7 +25,8 @@ Send data over a private network to avoid the public internet and reduce your da
 <div class="alert alert-warning">Make sure the selected Datadog site {{< region-param key="dd_site_name" code="true" >}} is correct. Cloud specific private links are not available for all Datadog sites.</div>
 
 {{< whatsnext desc="Connect to Datadog over:" >}}
-    {{< nextlink href="/agent/guide/private-link/" >}}US1 - AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=us" >}}US1 - AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=ap1" >}}AP1 - AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="/agent/guide/azure-private-link/" >}}US3 - Azure Private Link{{< /nextlink >}}
     {{< nextlink href="/agent/guide/gcp-private-service-connect/" >}}US5 - Google Cloud Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -30,14 +34,14 @@ Send data over a private network to avoid the public internet and reduce your da
 ## Additional tools 
 
 After you switch to private links, you can use the following to monitor your usage and have more control over your data costs:
-- Datadog's [Network Performance Monitoring][1] identifies your organization’s highest throughput applications.
+- Datadog's [Cloud Network Monitoring][1] identifies your organization's highest throughput applications.
 - [Cloud Cost Management][2] tools can verify and monitor the reduction in your cloud costs.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /network_monitoring/performance/
+[1]: /network_monitoring/cloud_network_monitoring/
 [2]: /cloud_cost_management/
 [3]: /agent/guide/private-link/
 [4]: /agent/guide/azure-private-link/

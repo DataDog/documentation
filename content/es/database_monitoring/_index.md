@@ -15,6 +15,9 @@ further_reading:
   tag: Blog
   text: Monitorizar bases de datos gestionadas por SQL Server y Azure con Datadog
     DBM
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: Blog
+  text: Seguimiento y resolución de problemas de rendimiento de MongoDB
 - link: /database_monitoring/data_collected/
   tag: Documentación
   text: Datos recopilados
@@ -22,9 +25,13 @@ further_reading:
   tag: Documentación
   text: Solucionar problemas
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
+  tag: Habilitación de los fundamentos
   text: Participar en una sesión interactiva para mejorar tu monitorización de base
     de datos
+- link: https://www.datadoghq.com/blog/mongodb-database-monitoring/
+  tag: Blog
+  text: Seguimiento y resolución de problemas de rendimiento de MongoDB con la Monitorización
+    de bases de datos de Datadog
 title: Database Monitoring
 ---
 
@@ -35,9 +42,9 @@ title: Database Monitoring
 
 La monitorización de la base de datos de Datadog ofrece una gran visibilidad de las bases de datos en todos tus hosts. Consulta las métricas de rendimiento de consultas históricas, planes de explicación y métricas a nivel de host todo en un solo lugar, para comprender el estado y el rendimiento de tus bases de datos y solucionar los problemas a medida que surgen.
 
-## Empezando
+## Para empezar
 
-La monitorización de base de datos de Datadog es compatible con versiones autoalojadas y gestionadas en la nube de **Postgres**, **MySQL**, **Oracle**, **SQL Server** y **MongoDB**. Para empezar a utilizar monitorización de base de datos de Datadog, configura tu base de datos e instala el Datadog Agent. Para obtener instrucciones de configuración, selecciona tu tecnología de base de datos:
+La Monitorización de bases de datos de Datadog es compatible con versiones autoalojadas y gestionadas en la nube de **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB** y **Amazon DocumentDB**. Para empezar a utilizar la Monitorización de bases de datos de Datadog, configura tu base de datos e instala el Datadog Agent. Para obtener instrucciones de configuración, selecciona tu tecnología de base de datos:
 
 ### Postgres
 
@@ -61,8 +68,12 @@ La monitorización de base de datos de Datadog es compatible con versiones autoa
 
 ### MongoDB
 
-<div class="alert alert-info">La monitorización de base de datos para MongoDB está en fase beta pública. Si estás interesado en participar, ponte en contacto con tu asesor de clientes de Datadog.</div>
 {{< partial name="dbm/dbm-setup-mongodb" >}}
+<p></p>
+
+### Amazon DocumentDB
+
+{{< partial name="dbm/dbm-setup-documentdb" >}}
 <p></p>
 
 ## Explorar la monitorización de base de datos de Datadog
@@ -111,16 +122,24 @@ En la [página Bases de datos][1], puedes evaluar el estado y la actividad de tu
 
 {{< img src="database_monitoring/databases-list.png" alt="La página de base de datos en Datadog" style="width:90%;" >}}
 
-## Referencias adicionales
+### Ver recomendaciones de optimización
+
+La página [Recomendaciones][6] destaca los problemas y las oportunidades de optimización para ayudarte a ahorrar tiempo priorizando lo más importante. Selecciona una recomendación para ver los detalles, incluyendo un resumen del problema, así como los posibles pasos siguientes para solucionarlo.
+
+{{< img src="database_monitoring/recommendations-page.png" alt="Página Recomendaciones en Datadog" style="width:90%;" >}}
+
+
+## Para leer más
 
 {{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
   El Centro de aprendizaje de Datadog está lleno de cursos prácticos para ayudarte a aprender sobre este tema. Inscríbete sin coste para identificar ineficiencias y optimizar tu base de datos de Postgres.
 {{< /learning-center-callout >}}
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/databases
 [2]: /es/database_monitoring/query_metrics/
 [3]: /es/database_monitoring/query_samples/
 [4]: /es/database_monitoring/query_metrics/#explain-plans
 [5]: /es/database_monitoring/database_hosts/
+[6]: /es/database_monitoring/recommendations/

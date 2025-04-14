@@ -16,6 +16,8 @@ further_reading:
 
 Use the following instructions to enable Infrastructure as Code (IaC) remediation for Cloud Security Management (CSM). IaC remediation is available for [CSM Misconfigurations][1] and [CSM Identity Risks][2].
 
+<div class="alert alert-info">Static IaC remediation supports GitHub for version control and Terraform for infrastructure as code.</div>
+
 ## Set up the GitHub integration
 
 Follow [the instructions][3] for creating a GitHub app for your organization.
@@ -30,8 +32,8 @@ After you set up the GitHub integration, enable IaC remediation for the reposito
 1. On the [CSM Setup page][4], expand the **Source Code Integrations** section.
 2. Click **Configure** for the GitHub account you want to configure.
 3. To enable IaC:
-    - For all repositories, switch on the IAC toggle under Enable Infrastructure as Code (IaC).
-    - For a single repository, switch on the IAC toggle for that repository.
+    - All repositories: Toggle **Enable Infrastructure as Code (IaC) Remediation** to the on position.
+    - Single repository: Toggle the **IAC Remediation** option for the specific repository to the on position.
 
 ## Further reading
 

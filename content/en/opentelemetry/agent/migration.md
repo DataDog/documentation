@@ -10,8 +10,8 @@ further_reading:
   text: "Install the Datadog Agent with Embedded OpenTelemetry Collector"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Beta!">}}
-  The Datadog Agent with embedded OpenTelemetry Collector is in private beta. To request access, fill out this form.
+{{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
+  The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
 If you are already using a standalone OpenTelemetry (OTel) Collector for your OTel-instrumented applications, you can migrate to the Datadog Agent with embedded OpenTelemetry Collector. The embedded OTel Collector allows you to leverage Datadog's enhanced capabilities, including optimized configurations, seamless integrations, and additional features tailored for the Datadog ecosystem.
@@ -28,6 +28,7 @@ Before starting the migration process, ensure you have:
 - An OpenTelemetry-instrumented application ready to send telemetry data
 - Access to your current OpenTelemetry Collector configurations
 - Administrative access to your Kubernetes cluster (Kubernetes v1.29+ is required)
+  - **Note**: EKS Fargate environments are not supported
 - Helm v3+
 
 ## Review existing configuration
@@ -37,6 +38,8 @@ Before you begin, review your configuration to see if your existing config is su
 1. Examine your existing OpenTelemetry Collector configuration file (`otel-config.yaml`).
 1. Compare it to the [list of components][1] included in the Datadog Agent by default.
 1. If your setup uses components not included in the Agent by default, follow [Use Custom OpenTelemetry Components with Datadog Agent][4].
+
+<div class="alert alert-info">The default configuration settings in Datadog's embedded collector may differ from the standard OpenTelemetry Collector configuration defaults. This can affect behavior of components like the <code>filelogreceiver</code>. Review the configuration closely when migrating from a standalone collector.</div>
 
 ### Example configuration
 
@@ -180,15 +183,19 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
    {{< /code-block >}}
-1. Switch the Datadog Agent Docker repository to use development builds:
+   Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+   <div class="alert alert-warning">The log level <code>datadog.logLevel</code> parameter value should be set in lower case. Valid log levels are: <code>trace</code>, <code>debug</code>, <code>info</code>, <code>warn</code>, <code>error</code>, <code>critical</code>, <code>off</code>.</div>
+1. Switch the Datadog Agent image tag to use builds with embedded OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
-    repository: datadog/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 ...
    {{< /code-block >}}
@@ -251,13 +258,15 @@ Your `datadog-values.yaml` file should look something like this:
 {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="false" >}}
 agents:
   image:
-    repository: datadog/agent
-    tag: 7.57.0-v1.0-ot-beta-jmx
+    repository: gcr.io/datadoghq/agent
+    tag: {{< version key="agent_tag_jmx" >}}
     doNotCheckTag: true
 
 datadog:
+  site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
+  logLevel: info
 
   otelCollector:
     enabled: true
@@ -318,6 +327,15 @@ env:
   - name: OTEL_EXPORTER_OTLP_PROTOCOL
     value: 'grpc'
 {{< /code-block >}}
+
+### Operation name mapping differences
+
+If you previously used `span_name_as_resource_name` or `span_name_remappings` configurations in your standalone Collector, you need to adapt your configuration.
+
+1. Remove these configurations from your Datadog Exporter and Connector settings.
+2. Enable the `enable_operation_and_resource_name_logic_v2` feature flag in your Agent configuration.
+
+For detailed instructions on migrating to the new operation name mappings, see [Migrate to New Operation Name Mappings][11].
 
 ## Correlate observability data
 
@@ -393,3 +411,5 @@ After you've confirmed that all data is being collected correctly in Datadog, yo
 [7]: /opentelemetry/agent/install_agent_with_collector#configure-the-datadog-agent
 [8]: https://app.datadoghq.com/organization-settings/api-keys/
 [9]: https://app.datadoghq.com/organization-settings/application-keys
+[10]: /getting_started/site/
+[11]: /opentelemetry/guide/migrate/migrate_operation_names/

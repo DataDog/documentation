@@ -4,7 +4,7 @@ aliases:
 categories:
 - cloud
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Key Vault のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
@@ -49,12 +49,12 @@ Datadog Azure インテグレーションを使用して、Azure Key Vault か�
 
 Datadog は*資格情報期限切れイベント*を送信し、Azure アプリ登録、Key Vault キー、Key Vault シークレット、Key Vault 証明書の資格情報の期限切れを視覚化します。Key Vault キー、Key Vault シークレット、Key Vault 証明書のイベントを受信するには、*Azure Key Vault* インテグレーションをインストールする必要があります。
 
-- **期限切れイベント**は、資格情報有効期限の 60 日、30 日、15 日、1 日前に送信され、期限切れ後に 1 回送信されます。
+- **期限切れイベント**は、資格情報有効期限の 60 日、30 日、14 日、7 日、1 日前に送信され、期限切れ後に 1 回送信されます。
 - **権限欠落イベント**は 15 日ごとに送信されます。権限欠落イベントは、Datadog に権限が与えられていない Key Vault をリストアップします。前の 15 日間のサイクルで Key Vault 権限に関して変更が行われていない場合、イベント通知は再度送信されません。
 
 これらのイベントは[イベントエクスプローラー][3]で表示できます。
 
-**注**:
+**注**: 
 
 - Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][4]。
 - 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。

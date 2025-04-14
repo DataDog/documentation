@@ -53,7 +53,7 @@ type: lenguaje de código múltiple
 
 ### Tiempos de ejecución de .NET Framework compatibles
 
-El rastreador de .NET es compatible con la instrumentación en .NET Framework 4.6.1 o anteriores.
+El rastreador de .NET es compatible con la instrumentación en .NET Framework desde 4.6.1 en adelante.
 
 Para ver una lista completa de las compatibilidades de la arquitectura de la biblioteca y del procesador de Datadog .NET Framework (incluyendo las versiones heredadas y de mantenimiento), consulta los [requisitos de compatibilidad][1].
 
@@ -225,7 +225,7 @@ Para adjuntar la instrumentación automática a tu servicio, debes configurar la
 
 {{< tabs >}}
 
-{{% tab "Registry Editor" (Editor de registro) %}}
+{{% tab "Editor de registro" %}}
 
 En el Editor de registro, crea un valor de cadena múltiple llamado `Environment` en la clave `HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` y configura los datos de valor como:
 

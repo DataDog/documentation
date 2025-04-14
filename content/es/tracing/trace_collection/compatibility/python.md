@@ -37,7 +37,7 @@ Y la biblioteca soporta los siguientes tiempos de ejecución:
 
 ## Integraciones
 
-Para solicitar soporte técnico para <txprotected>bibliotecas</txprotected> adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][2].
+Para solicitar soporte técnico para bibliotecas adicionales, ponte en contacto con nuestro magnífico [equipo de asistencia][2].
 
 ### Compatibilidad con marcos web
 
@@ -99,7 +99,7 @@ La biblioteca de `ddtrace` incluye soporte para los siguientes almacenes de dato
 
 ### Compatibilidad de la biblioteca
 
-La biblioteca de `ddtrace` incluye soporte técnico para las siguientes <txprotected>bibliotecas</txprotected>:
+La biblioteca de `ddtrace` incluye soporte técnico para las siguientes bibliotecas:
 
 | Biblioteca           | Versión compatible |  Automática       | Documentación de la biblioteca                                                    |
 | ----------------- | ----------------- | ---------------- | ------------------------------------------------------------------------ |
@@ -126,7 +126,7 @@ La biblioteca de `ddtrace` incluye soporte técnico para las siguientes <txprote
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/versioning.html

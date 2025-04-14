@@ -34,7 +34,7 @@ To add members to your organization:
 **Note**: Users with the Invite User permission can invite a user to any role they have themselves. Users with both the Invite User and Access Management permissions can invite a user to any role.
 5. Click **Send Invites**.
 
-The new user receives an email with a link to log in. The user is marked with the status `Invite Pending` until they log in. To cancel their invite before they log in, click the **Delete Invite** button on the right of the user line in list view, or on the user box in grid view. 
+The new user receives an email with a link to log in. This link is valid for 48 hours. The user is marked with the status `Invite Pending` until they log in. To cancel their invite before they log in, click the **Delete Invite** button on the right of the user line in list view, or on the user box in grid view. 
 
 To resend an invite in list view, click the user to open the user side panel and click **Resend Invite**. Or in grid view, hover over the user box and click **Resend Invite**.
 

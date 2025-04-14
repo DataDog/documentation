@@ -30,7 +30,7 @@
 
     {{ $valid_langs := $pad.Get "languages" }}
     <div 
-    class="static-analysis-main w-100 min-vh-100 d-flex flex-column"
+    class="multifilter-search-component w-100 min-vh-100 d-flex flex-column"
     x-data="{
         filterTypes: {
             languages: [],
@@ -209,6 +209,7 @@
         }
     }"
     x-init="updateWithURLParams('{{$valid_langs}}')">
+        {{/*  DATA TABLE  */}}
         <div class="col-12 order-1">
             <div class="ps-0">
                 {{ range $list.GroupByParam "group_id" }}
@@ -312,9 +313,9 @@
             </div>
         </div>
         {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
-        <nav id="static-analysis-nav" class="container px-0">
+        <nav id="multifilter-search-nav" class="container px-0">
             {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
-            <div class="filters-static-analysis row">
+            <div class="filters__multifilter row">
                 {{ range $filter_types }}
                 {{ $filter_type := . | lower}}
                 <div class='filter-type flex-column col-12 col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
@@ -400,8 +401,8 @@
                 {{ end }}
             </div>
             {{/*  SEARCH FORM */}}
-            <form class="search-static-analysis" @submit.prevent="">
-                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
+            <form class="search__multifilter" @submit.prevent="">
+                <input type="search" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
             </form>
           </nav>
     </div>

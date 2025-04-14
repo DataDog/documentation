@@ -3,7 +3,6 @@ further_reading:
 - link: https://aws.amazon.com/blogs/compute/using-api-destinations-with-amazon-eventbridge/#sending-aws-events-to-datadog
   tag: Blog
   text: Blog de AWS con ejemplos de uso de destinos de API
-kind: guía
 title: Envío de eventos y logs a Datadog con destinos de API de Amazon EventBridge
 ---
 

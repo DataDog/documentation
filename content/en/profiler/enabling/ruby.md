@@ -26,23 +26,20 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
+The Datadog Profiler requires Ruby 2.5+ (Ruby 3.1+ or later is recommended). JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
+You also need either the [`pkg-config`][16] or the [`pkgconf`][17] system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
-- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
-- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
+- The `pkg-config` package is available for [Homebrew][18], and [Debian][19]- and [Ubuntu][20]-based Linux
+- The `pkgconf` package is available for [Arch][21]- and [Alpine][22]-based Linux
+- The `pkgconf-pkg-config` package is available for [Fedora][23]- and [Red-Hat][24]-based Linux
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
-
-[Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
-Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
 
 ## Installation
 
@@ -53,7 +50,7 @@ To begin profiling applications:
 2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'datadog', '~> 2.3'
+    gem 'datadog', '~> 2.7'
     ```
 3. Install the gems with `bundle install`.
 
@@ -125,6 +122,7 @@ You can configure the profiler using the following environment variables:
 | `DD_PROFILING_EXPERIMENTAL_HEAP_ENABLED`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `DD_PROFILING_EXPERIMENTAL_HEAP_SIZE_ENABLED` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
 | `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
+| `DD_PROFILING_PREVIEW_OTEL_CONTEXT_ENABLED`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `DD_ENV`                                      | String  | The [environment][10] name, for example: `production`.                                                                                  |
 | `DD_SERVICE`                                  | String  | The [service][10] name, for example, `web-backend`.                                                                                     |
 | `DD_VERSION`                                  | String  | The [version][10] of your service.                                                                                                      |
@@ -139,6 +137,7 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.profiling.advanced.experimental_heap_enabled`      | Boolean | Set to `true` to enable heap live objects profiling. It requires that allocation profiling is enabled as well. Defaults to `false`.     |
 | `c.profiling.advanced.experimental_heap_size_enabled` | Boolean | Set to `true` to enable heap live size profiling. It requires that heap live objects profiling is enabled as well. Defaults to `false`. |
 | `c.profiling.advanced.no_signals_workaround_enabled`  | Boolean | Automatically enabled when needed, can be used to force enable or disable this feature. See [Profiler Troubleshooting][15] for details. |
+| `c.profiling.advanced.preview_otel_context_enabled`   | String  | Set to `only` when using profiling directly with `opentelemetry-sdk`, or `true` for auto-detection of the correct context to read from. Defaults to `false`. |
 | `c.env`                                               | String  | The [environment][10] name, for example: `production`.                                                                                  |
 | `c.service`                                           | String  | The [service][10] name, for example, `web-backend`.                                                                                     |
 | `c.version`                                           | String  | The [version][10] of your service.                                                                                                      |
@@ -163,3 +162,12 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
 [15]: /profiler/profiler_troubleshooting/ruby/#unexpected-failures-or-errors-from-ruby-gems-that-use-native-extensions
+[16]: https://www.freedesktop.org/wiki/Software/pkg-config/
+[17]: https://github.com/pkgconf/pkgconf
+[18]: https://formulae.brew.sh/formula/pkgconf
+[19]: https://packages.debian.org/search?keywords=pkg-config
+[20]: https://packages.ubuntu.com/search?keywords=pkg-config
+[21]: https://archlinux.org/packages/?q=pkgconf
+[22]: https://pkgs.alpinelinux.org/packages?name=pkgconf
+[23]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config
+[24]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config

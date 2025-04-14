@@ -15,7 +15,7 @@ categories:
 - マーケットプレイス
 - notifications
 - ai/ml
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -110,4 +110,4 @@ Superwise のインテグレーションにより、Datadog ユーザーは既�
 [4]: https://www.datadoghq.com/blog/superwise-datadog-marketplace/
 [5]: https://docs.superwise.ai
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/superwise-license" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

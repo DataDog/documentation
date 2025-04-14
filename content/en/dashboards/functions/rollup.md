@@ -2,6 +2,10 @@
 title: Rollup
 aliases:
     - /graphing/functions/rollup/
+further_reading:
+- link: "/dashboards/guide/rollup-cardinality-visualizations"
+  tag: "Documentation"
+  text: "Understanding rollup function and cardinality in visualizations"
 ---
 
 Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
@@ -61,13 +65,13 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
 
-## Rollup with calendar aligned queries 
+## Rollup with calendar-aligned queries 
 
 {{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
 
-You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar-aligned queries. This feature allows you the flexibility to define:
 
-* Calendar aligned monthly queries with adjustable start date and timezones. For example, you can compare your monthly client errors for February and December of last year.
+* Calendar-aligned monthly queries with adjustable start date and timezones. For example, you can compare your monthly client errors for February and December of last year.
 * Weekly rollups with adjustable start date and timezones. For example, see how many weekly transactions are open (if your week starts on Mondays).
 * Daily rollups with adjustable start time and timezones. For example, see how many events of interest occurred on the current day (if your day begins at midnight Pacific Time).
 
@@ -75,20 +79,7 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 Rollups should usually be avoided in [monitor][5] queries, because of the possibility of misalignment between the rollup interval and the evaluation window of the monitor. The start and end of rollup intervals are aligned to UNIX time, not to the start and end of monitor queries. Therefore, a monitor may evaluate (and trigger on) an incomplete rollup interval containing only a small sample of data. To avoid this issue, delay the evaluation of your monitor by (at least) the length of the setup rollup interval.
 
-## Other functions
-
-{{< whatsnext desc="Consult the other available functions:" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmic: Implement Anomaly or Outlier detection on your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmetic: Perform Arithmetic operation on your metric.  {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Count: Count non zero or non null value of your metric. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion: Exclude certain values of your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation: Fill or set default values for your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Rank: Select only a subset of metrics. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}Rate: Calculate custom derivative over your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Regression: Apply some machine learning function to your metric.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
-{{< /whatsnext >}}
+If your monitors are unexpectedly evaluating in a "No Data" status, consider reviewing your settings for rollups and evaluation windows. For instance, if a monitor has a 4-minute rollup and a 20-minute evaluation window, it produces one data point every 4 minutes, leading to a maximum of 5 data points within the window. If the "Require Full Window" option is enabled, the evaluation may result in "No Data" because the window is not fully populated.
 
 [1]: /dashboards/functions/#add-a-function
 [2]: /metrics/faq/rollup-for-distributions-with-percentiles/

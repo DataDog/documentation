@@ -46,6 +46,7 @@ title: ダイナミックインスツルメンテーション
 - Java アプリケーションの場合、トレーシングライブラリ [`dd-trace-java`][3] 1.34.0 以降。
 - Python アプリケーションの場合、トレーシングライブラリ [`dd-trace-py`][4] 2.2.0 以降。
 - .NET アプリケーションの場合、トレーシングライブラリ [`dd-trace-dotnet`][5] 2.54.0 以降。
+- PHP アプリケーションの場合、トレーシングライブラリ [`dd-trace-php`][18] 1.4.0 以降。
 - [統合サービスタグ付け][6]のタグ `service`、`env`、`version` がデプロイメントに適用されていること。
 - [オートコンプリートと検索 (オープンベータ)][17] が有効になっていること (推奨事項)。
 - サービスに[ソースコードインテグレーション][7]が設定されていること (推奨事項)。
@@ -77,7 +78,7 @@ title: ダイナミックインスツルメンテーション
 ### 制限
 
 - ダイナミックインスツルメンテーションは、Azure App Services やサーバーレス環境にはまだ対応していません。
-- サポートは Python、Java、.NET で構築されたアプリケーションに限定されます。
+- サポートは Python、Java、.NET、PHP で構築されたアプリケーションに限定されます。
 
 ## ダイナミックインスツルメンテーションを見る
 
@@ -142,8 +143,8 @@ title: ダイナミックインスツルメンテーション
 
 この設定を有効にしたプローブは、1 秒間に 1 回のヒットにレート制限されます。
 
-<div class="alert alert-warning"><p><strong>警告: キャプチャされたデータには、個人情報、パスワード、シークレット (例: AWS キー) などの機密情報が含まれている可能性があります。</strong></p><p>この情報が適切に削除されるようにするには<ul>
-<li>Datadog ダイナミックインスツルメンテーションは、機密情報を削除するために、いくつかのテクニックを採用しています。デフォルトのメカニズムや、ニーズに合わせて拡張する方法の詳細については、<a href="/dynamic_instrumentation/sensitive-data-scrubbing/">機密データスクラビング</a>を参照してください。</li>
+<div class="alert alert-info"><p><strong>警告: キャプチャされたデータには、個人情報、パスワード、シークレット (例: AWS キー) などの機密情報が含まれている可能性があります。</strong></p><p>この情報が適切にマスキングされるようにするには<ul>
+<li>Datadog ダイナミックインスツルメンテーションは、機密情報をマスキングするために、いくつかのテクニックを採用しています。デフォルトのメカニズムや、ニーズに合わせて拡張する方法の詳細については、<a href="/dynamic_instrumentation/sensitive-data-scrubbing/">機密データスクラビング</a>を参照してください。</li>
 <li><strong>Capture method parameters and local variables</strong> オプションをオフにし、ログメッセージテンプレートに含める変数を明示的に選択します。こうすることで、ログプローブには、明確に指定した変数に関連するデータのみが含まれるようになり、意図しない機密データ漏えいのリスクを低減できます。</li>
 <li>Datadog アカウントの管理者で、他のユーザーが <strong>Capture method parameters and local variables</strong> オプションを使用できないようにしたい場合は、Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) 権限を取り消すことができます。</li></ul></p><p>また、このデータをログに記録する必要があるが、Datadog 製品でアクセスできることに関連するリスクを軽減したい場合は、<code>source:dd_debugger</code> に <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction クエリ</a>を設定することで、組織内のどのユーザーがキャプチャデータを表示できるかを制限できます。</p></div>
 
@@ -223,3 +224,4 @@ title: ダイナミックインスツルメンテーション
 [15]: /ja/dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /ja/dynamic_instrumentation/symdb/
+[18]: https://github.com/DataDog/dd-trace-php

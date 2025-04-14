@@ -73,10 +73,6 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 - In **Week 0**, 94% of those 144 users completed the return event.
 - In **Week 1**, 92% of the 144 users completed the return event.
 
-## Data retention
-
-Data retention for this feature is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a [support ticket][5] to increase retention to 90 days at no additional cost.
-
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 

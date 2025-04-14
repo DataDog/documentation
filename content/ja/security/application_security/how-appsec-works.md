@@ -34,7 +34,7 @@ Datadog Application Security [Threat Management][1] は、APM がすでに収集
 
 アプリケーション攻撃にさらされているサービスは、APM に組み込まれたセキュリティビュー ([サービスカタログ][2]、[サービス詳細画面][3]、[トレース][4]) で直接ハイライトされます。
 
-Datadog Threat Monitoring and Detection は、すべてのリクエストにおけるクライアント IP アドレスや手動で追加されたユーザータグを収集し、悪意のあるユーザーを特定します。
+Datadog Threat Monitoring and Detection は、すべてのリクエストにおけるクライアント IP アドレス、ログインアカウント情報 (ユーザーアカウント/ID など)、および手動で追加されたユーザータグを収集し、悪意のあるユーザーを特定します。
 
 <div class="alert alert-info"><strong>1-Click 有効化</strong><br>
 サービスが <a href="/agent/remote_config/#enabling-remote-configuration"> Remote Configuration が有効な Agent と、それをサポートするバージョンのトレーシングライブラリ</a>で実行されている場合、Agent または トレーシングライブラリの追加構成なしで Datadog UI から <a href="https://app.datadoghq.com/security/configuration/asm/setup">Application Security を有効にする</a>ことができます。</div>
@@ -133,7 +133,7 @@ Datadog Application Security には、アプリケーションコードおよび
 
 ## API セキュリティ
 
-<div class="alert alert-info">API セキュリティは非公開ベータ版です。</div>
+<div class="alert alert-info">API セキュリティはプレビュー版です。</div>
 
 Datadog Application Security は、API を標的とした脅威を視覚化します。[API カタログ][27]を使用して API の健全性とパフォーマンスのメトリクスを監視します。ここでは、API を標的とした攻撃を表示することができます。このビューには、攻撃者の IP と認証情報のほか、攻撃がどのように形成されたかの詳細を示すリクエストヘッダーが含まれます。Application Security と API 管理の両方を使用することで、API 攻撃対象の包括的なビューを維持し、そして脅威を緩和する対応を行うことができます。
 

@@ -39,17 +39,17 @@ For more information, see [Default Standard Attributes][6].
 
 Span tags and span attributes are similar but distinct concepts:
 
-- [Span tags](#span-tags) are the context around the span.
-- [Span attributes](#span-attributes) are the content of the span.
+- [Span tags](#span-tags) provides context related to the span. For instance, host or container tags on the infrastructure the service is running on.
+- [Span attributes](#span-attributes) are the content of the span, collected with automatic or manual instrumentation in the application.
 
 ### Span tags
 
-Span tags are the context around the span. Some examples include:
+Span tags provide context related to the span. For instance, host or container tags on the infrastructure the service is running on. More examples include:
 
 - **Host tags**: `hostname`, `availability-zone`, `cluster-name`
 - **Container tags**: `container_name`, `kube_deployment`, `pod_name`
 
-Tags are usually enriched from other data sources like tags sourced from host, container, or service catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
+Tags are usually enriched from other data sources like tags sourced from host, container, or Software Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
 To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 
@@ -57,13 +57,13 @@ To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side
 
 ### Span attributes
 
-Span attributes are the content of the span. Some example include:
+Span attributes are the content of the span, collected with automatic or manual instrumentation in the application. Some examples include:
 
 - `http.url`
 - `http.status_code`
 - `error.message`
 
-To query span attributes, use the the `@` character followed by the attribute name in the search box. For example, `@http.url`.
+To query span attributes, use the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
 To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
 

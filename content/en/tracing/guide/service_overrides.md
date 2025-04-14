@@ -1,24 +1,19 @@
 ---
 title: Service Overrides
 disable_toc: false
-private: true
 further_reading:
-- link: "/tracing/guide/inferred-service-opt-in"
+- link: "/tracing/services/inferred_services"
   tag: "Documentation"
-  text: "Opting-in to the new service representation"
+  text: "Inferred services"
 ---
-
-{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="false" header="Request access to the Preview!" >}}
-Inferred service dependencies are in Preview. To request access, complete the form. For opt-in instructions, see the <a href="/tracing/guide/inferred-service-opt-in/">Inferred Service dependencies guide</a>.
-{{< /callout >}}
 
 ## Overview
 
-Inferred services improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
+[Inferred services][1] improve how Datadog represents service dependencies. This document explains the changes and how to adapt your configuration.
 
 ### Before inferred services
 
-Datadog changed service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. 
+Datadog used to change service names of client spans (`span.kind:client`) to represent databases, queues, and third-party dependencies. For example, a client call from service `A` to a PostgreSQL database would be tagged as `service:postgres` or `service:A-postgres`. Changing the service name of spans is referred to as a [**service override**](#service-override) in the rest of this guide. The initial service name is referred to as the [**base service**](#base-service).
 
 In this approach, a span representing a client call from a service `auth-dotnet` to a PostgreSQL database would be tagged with `service:auth-dotnet-postgres`. In service maps, these dependencies were represented as separate services, as shown below:
 
@@ -98,11 +93,11 @@ For example:
 - .NET tags gRPC calls as `service:<DD_SERVICE>-grpc-client`
 - Python tags gRPC calls as `service:grpc-client`
 
-With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This provides a *global default service name*.
+With the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` option set to `true`, all supported tracing libraries tag client spans capturing the call to the downstream service with the calling service's name, `service:<DD_SERVICE>`. This ensures all spans are always tagged with the *default service name* emitting the span; [`peer.*`][6] attributes are used to describe the called dependency (for example, database or queue).
 
 | Scenario | Service Name | Additional `peer.*` Attributes |
 |----------|--------------|--------------------------------|
-| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` tags set |
+| *Without* inferred services and *with* service overrides | `service:my-service-grpc-client` or `service:grpc-client` | No `peer.*` attributes set |
 | *With* inferred services and *without* service overrides | `service:myservice` | `@peer.service:otherservice` (where `otherservice` is the name of the remote service being called with gRPC) |
 
 Similarly, for a span representing a call to a mySQL database:
@@ -133,12 +128,21 @@ Similarly, for a span representing a call to a mySQL database:
 
 **Note**: The configuration above only removes [integration service overrides](#integration-service-overrides). Custom service overrides must be removed directly in the code.
 
+## Glossary
+
+##### Service override
+A service name set for a span which differs from the default `DD_SERVICE` name. It can be set [automatically](#integration-service-overrides) by some Datadog integrations, or [manually](#custom-service-overrides) by users.
+
+##### Base service
+The default `DD_SERVICE` name.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/inferred-service-opt-in
+[1]: /tracing/services/inferred_services
 [2]: /tracing/trace_pipeline/generate_metrics
 [3]: /monitors/types/apm/?tab=traceanalytics
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [5]: /tracing/metrics/metrics_namespace/
+[6]: /tracing/services/inferred_services/#peer-tags

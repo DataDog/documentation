@@ -1,74 +1,36 @@
 ---
 title: Enable Autocomplete and Search for Java
-is_beta: true
+is_beta: false
 private: false
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
 ---
-{{< beta-callout url="#" btn_hidden="true" >}}
-Autocomplete and search are in public beta.
-{{< /beta-callout >}}
 
 ## Requirements
 
 - [Dynamic Instrumentation][1] is enabled for your service.
-- Tracing library [`dd-trace-java`][6] 1.39.1 or higher is installed.
+- Tracing library [`dd-trace-java`][6] 1.42.0 or higher is installed.
 
 ## Installation
 
-Run your service with Dynamic Instrumentation enabled, and additionally enable autocomplete and search:
-
-1. Set the `-Ddd.symbol.database.upload.enabled=true` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true` environment variable.
-2. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
-
-{{< tabs >}}
-{{% tab "Command arguments" %}}
-
-Example service startup command:
-
-```shell
-java \
-    -javaagent:dd-java-agent.jar \
-    -Ddd.service=<YOUR_SERVICE> \
-    -Ddd.env=<YOUR_ENVIRONMENT> \
-    -Ddd.version=<YOUR_VERSION> \
-    -Ddd.dynamic.instrumentation.enabled=true \
-    -Ddd.symbol.database.upload.enabled=true \
-    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
-
-{{% /tab %}}
-
-{{% tab "Environment variables" %}}
-
-```shell
-export DD_SERVICE=<YOUR_SERVICE>
-export DD_ENV=<YOUR_ENV>
-export DD_VERSION=<YOUR_VERSION>
-export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=true
-java \
-    -javaagent:dd-java-agent.jar \
-    -jar <YOUR_SERVICE>.jar <YOUR_SERVICE_FLAGS>
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][3]:
-
-   ```
-   # Correct:
-   $ java -javaagent:dd-java-agent.jar ... -jar my-service.jar -more-flags
-
-   # Incorrect:
-   $ java -jar my-service.jar -javaagent:dd-java-agent.jar ...
-   ```
-
-3. After starting your service with Dynamic Instrumentation and autocomplete and search enabled, you can use Dynamic Instrumentation's IDE-like features on the [**APM** > **Dynamic Instrumentation**][4] page.
+Run your service with Dynamic Instrumentation enabled, autocomplete and search are automatically enabled.
 
 ## Additional configuration
+
+### Disabling autocomplete and search
+
+To disable autocomplete and search for your service, use the following option:
+
+```
+export DD_SYMBOL_DATABASE_UPLOAD_ENABLED=false
+```
+
+or:
+
+```
+  -Ddd.symbol.database.upload.enabled=false
+```
 
 ### Third party detection
 
@@ -95,8 +57,4 @@ export DD_THIRD_PARTY_EXCLUDES=com.mycompany,io.mycompany
 ```
 
 [1]: /dynamic_instrumentation
-[3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[4]: https://app.datadoghq.com/dynamic-instrumentation
-[5]: /getting_started/tagging/unified_service_tagging
 [6]: https://github.com/DataDog/dd-trace-java
-

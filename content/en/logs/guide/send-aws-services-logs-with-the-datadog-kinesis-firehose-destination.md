@@ -34,19 +34,18 @@ Datadog recommends using a Kinesis Data Stream as input when using the Datadog d
 1. Optionally, use the [Create a Data Stream][1] section of the Amazon Kinesis Data Streams developer guide in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
 2. Go to [Amazon Data Firehose][2].  
 3. Click **Create Firehose stream**.
-   a. Set the source: 
+   1. Set the source: 
       - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis Data Stream
       - `Direct PUT` if your logs are coming directly from a CloudWatch log group
-
-   b. Set the destination as `Datadog`.  
-   c. Provide a name for the delivery stream.  
-   d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
-   e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
-   f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
+   1. Set the destination as `Datadog`.  
+   1. Provide a name for the delivery stream.  
+   1. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   1. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3]. If you prefer to use 1ecrets Manager authentication, add in your Datadog API key in the full JSON format in the value field as follows: `{"api_key":"<YOUR_API_KEY>"}`.
+   1. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
    **Note**: Datadog recommends setting the **Buffer size** to `2 MiB` if the logs are single line messages.  
-   g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
+   1. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
      **Note**: To ensure any logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
-   h. Click **Create Firehose stream**.
+   1. Click **Create Firehose stream**.
 
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/
@@ -152,7 +151,7 @@ To populate all logs by ARN:
 1. Go to the [Log Explorer][5] in Datadog.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press **Enter** to see all of your subscribed logs.
 
-**Note**: A single Kinesis payload must not be be more than 65,000 log messages. Log messages after that limit are dropped.
+**Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
 
 ## Further Reading
 

@@ -9,11 +9,8 @@ El contexto es un mecanismo de autorización que permite limitar y definir el ac
 
 La práctica recomendada para definir el alcance de las aplicaciones es mantener los privilegios mínimos y los contextos más restrictivos necesarios para que una aplicación función según lo previsto. Esto proporciona a los usuarios un control de acceso detallado de las aplicaciones y transparencia sobre cómo una aplicación está utilizando sus datos. Por ejemplo, una aplicación de terceros que sólo lee datos de dashboard no necesita permisos para eliminar o gestionar usuarios en una organización.
 
-Puedes utilizar contextos de dos formas con Datadog:
-- Limita el contexto de clientes OAuth2 para tus [aplicaciones de Datadog][1]
-- Limita el contexto de tus [claves de aplicación][2] 
+Puedes utilizar contextos con clientes OAuth2 para tus [aplicaciones Datadog][1].
 
 {{< api-scopes >}}
 
 [1]: https://docs.datadoghq.com/es/developers/datadog_apps/#oauth-api-access
-[2]: https://docs.datadoghq.com/es/account_management/api-app-keys/

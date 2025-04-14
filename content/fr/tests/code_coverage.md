@@ -114,7 +114,7 @@ La couverture de code intégrée au traceur Datadog prend en charge les options 
 | ExcludeByFile            | Exclut de la couverture du code des fichiers source spécifiques.                                                                                                                |
 | Exclude                  | Exclue des éléments de l'analyse de la couverture du code à l'aide d'expressions de filtre.                                                                                                  |
 
-##### NodeJS
+##### Node.js
 
 Vous pouvez exclure une méthode, une classe entière ou un assemblage de la couverture du code en créant et en appliquant l'attribut `ExcludeFromCodeCoverage` au sein de l'espace de nommage `System.Diagnostics.CodeAnalysis`.
 

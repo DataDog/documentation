@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
   tag: Documentación
   text: Recopilar varios logs con paginación
-kind: guía
 title: Crea informes personalizados utilizando la API de Análisis de log
 ---
 

@@ -55,7 +55,7 @@ Configure your OpenMetrics or Prometheus check using Autodiscovery, by applying 
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
+    ad.datadoghq.com/<CONTAINER_NAME>.checks: |
       {
         "openmetrics": {
           "init_config": {},
@@ -71,7 +71,7 @@ metadata:
 
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 ```
 
 {{% /tab %}}
@@ -82,11 +82,11 @@ spec:
 metadata:
   #(...)
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check_names: |
+    ad.datadoghq.com/<CONTAINER_NAME>.check_names: |
       ["openmetrics"]
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: |
+    ad.datadoghq.com/<CONTAINER_NAME>.init_configs: |
       [{}]
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: |
+    ad.datadoghq.com/<CONTAINER_NAME>.instances: |
       [
         {
           "openmetrics_endpoint": "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT> ",
@@ -96,7 +96,7 @@ metadata:
       ]
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<CONTAINER_NAME>'
 ```
 
 {{% /tab %}}
@@ -106,7 +106,7 @@ With the following configuration placeholder values:
 
 | Placeholder                              | Description                                                                                        |
 |------------------------------------------|----------------------------------------------------------------------------------------------------|
-| `<CONTAINER_IDENTIFIER>`                 | The identifier used in the `annotations` must match the container `name` exposing the metrics. |
+| `<CONTAINER_NAME>`                 | Matches the name of the container that exposes the metrics. |
 | `<PROMETHEUS_ENDPOINT>`                  | URL path for the metrics served by the container, in Prometheus format.                            |
 | `<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>` | Set namespace to be prefixed to every metric when viewed in Datadog.                               |
 | `<METRIC_TO_FETCH>`                      | Prometheus metrics key to be fetched from the Prometheus endpoint.                                 |

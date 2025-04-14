@@ -440,6 +440,7 @@ components:
       - custom
       - network_elb
       - lambda
+      - step_functions
       type: string
       x-enum-varnames:
       - ELB
@@ -449,6 +450,7 @@ components:
       - CUSTOM
       - NETWORK_ELB
       - LAMBDA
+      - STEP_FUNCTIONS
     AWSTagFilter:
       description: A tag filter.
       properties:
@@ -842,8 +844,15 @@ components:
             Only hosts that match one of the defined tags are imported into Datadog.'
           example: key:value,filter:example
           type: string
-        metrics_config:
-          $ref: '#/components/schemas/AzureAccountMetricsConfig'
+        metrics_enabled:
+          description: Enable Azure metrics for your organization.
+          example: true
+          type: boolean
+        metrics_enabled_default:
+          description: Enable Azure metrics for your organization for resource providers
+            where no resource provider config is specified.
+          example: true
+          type: boolean
         new_client_id:
           description: Your New Azure web application ID.
           example: new1c7f6-1234-5678-9101-3fcbf464test
@@ -858,37 +867,26 @@ components:
             monitored by this app registration.
           example: true
           type: boolean
+        resource_provider_configs:
+          description: Configuration settings applied to resources from the specified
+            Azure resource providers.
+          items:
+            $ref: '#/components/schemas/ResourceProviderConfig'
+          type: array
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
           type: string
+        usage_metrics_enabled:
+          description: Enable azure.usage metrics for your organization.
+          example: true
+          type: boolean
       type: object
     AzureAccountListResponse:
       description: Accounts configured for your organization.
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
-    AzureAccountMetricsConfig:
-      description: 'Dictionary containing the key `excluded_resource_providers` which
-        has to be a list of Microsoft Azure Resource Provider names.
-
-        This feature is currently being beta tested.
-
-        In order to enable all resource providers for metric collection, pass:
-
-        `metrics_config: {"excluded_resource_providers": []}` (i.e., an empty list
-        for `excluded_resource_providers`).'
-      properties:
-        excluded_resource_providers:
-          description: List of Microsoft Azure Resource Providers to exclude from
-            metric collection.
-          example:
-          - Microsoft.Sql
-          - Microsoft.Cdn
-          items:
-            type: string
-          type: array
-      type: object
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -1036,7 +1034,7 @@ components:
       example: {}
       properties:
         ok:
-          description: An array of of Monitor IDs that can be safely deleted.
+          description: An array of Monitor IDs that can be safely deleted.
           items:
             description: ID of a monitor that can be safely deleted.
             format: int64
@@ -1059,7 +1057,7 @@ components:
       description: An array of service level objective objects.
       properties:
         ok:
-          description: An array of of SLO IDs that can be safely deleted.
+          description: An array of SLO IDs that can be safely deleted.
           items:
             description: An SLO ID.
             type: string
@@ -1211,13 +1209,8 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          deprecated: true
-          description: 'A list of role identifiers. Only the author and users associated
+          description: A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
-
-
-            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
-            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -1458,11 +1451,13 @@ components:
       enum:
       - open
       - invite
+      - embed
       nullable: true
       type: string
       x-enum-varnames:
       - OPEN
       - INVITE
+      - EMBED
     DashboardSummary:
       description: Dashboard summary response.
       properties:
@@ -3147,6 +3142,8 @@ components:
       enum:
       - good_events
       - bad_events
+      - good_minutes
+      - bad_minutes
       - slo_status
       - error_budget_remaining
       - burn_rate
@@ -3156,6 +3153,8 @@ components:
       x-enum-varnames:
       - GOOD_EVENTS
       - BAD_EVENTS
+      - GOOD_MINUTES
+      - BAD_MINUTES
       - SLO_STATUS
       - ERROR_BUDGET_REMAINING
       - BURN_RATE
@@ -3202,11 +3201,13 @@ components:
       description: Name of the query for use in formulas.
       enum:
       - metric
+      - monitor
       - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
+      - MONITOR
       - TIME_SLICE
     FormulaType:
       description: Set the sort type to formula.
@@ -3419,6 +3420,12 @@ components:
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
+          example: true
+          type: boolean
+        is_resource_change_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resource change data in
+            your Google Cloud environment.
           example: true
           type: boolean
         is_security_command_center_enabled:
@@ -4280,6 +4287,7 @@ components:
       - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
       - cloud_siem_usage
+      - code_security_host_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
@@ -4288,17 +4296,16 @@ components:
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
+      - cws_fargate_task_usage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
+      - data_stream_monitoring_usage
       - dbm_hosts_usage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
       - estimated_indexed_spans_usage
-      - estimated_ingested_logs_usage
       - estimated_ingested_spans_usage
-      - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
       - incident_management_monthly_active_users_usage
@@ -4354,6 +4361,7 @@ components:
       - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
       - CLOUD_SIEM_USAGE
+      - CODE_SECURITY_HOST_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
@@ -4362,17 +4370,16 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_USAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
       - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
@@ -4830,6 +4837,11 @@ components:
     ListStreamQuery:
       description: Updated list stream widget.
       properties:
+        clustering_pattern_field_path:
+          description: Specifies the field for logs pattern clustering. Usable only
+            with logs_pattern_stream.
+          example: message
+          type: string
         compute:
           description: Compute configuration for the List Stream Widget. Compute can
             be used only with the logs_transaction_stream (from 1 to 5 items) list
@@ -4895,6 +4907,7 @@ components:
       - logs_transaction_stream
       - event_stream
       - rum_stream
+      - llm_observability_stream
       example: apm_issue_stream
       type: string
       x-enum-varnames:
@@ -4910,6 +4923,7 @@ components:
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
       - RUM_STREAM
+      - LLM_OBSERVABILITY_STREAM
     ListStreamWidgetDefinition:
       description: 'The list stream visualization displays a table of recent events
         in your application that
@@ -6023,6 +6037,9 @@ components:
 
         Make sure to use an application key created by an admin.'
       properties:
+        description:
+          description: A description of the pipeline.
+          type: string
         filter:
           $ref: '#/components/schemas/LogsFilter'
         id:
@@ -6045,6 +6062,12 @@ components:
           items:
             $ref: '#/components/schemas/LogsProcessor'
           type: array
+        tags:
+          description: A list of tags associated with the pipeline.
+          items:
+            description: A single tag using the format `key:value`.
+            type: string
+          type: array
         type:
           description: Type of pipeline.
           example: pipeline
@@ -6054,7 +6077,7 @@ components:
       - name
       type: object
     LogsPipelineList:
-      description: Array of pipeline ID strings.
+      description: Array of all log pipeline objects configured for the organization.
       items:
         $ref: '#/components/schemas/LogsPipeline'
       type: array
@@ -6137,6 +6160,7 @@ components:
       - $ref: '#/components/schemas/LogsLookupProcessor'
       - $ref: '#/components/schemas/ReferenceTableLogsLookupProcessor'
       - $ref: '#/components/schemas/LogsTraceRemapper'
+      - $ref: '#/components/schemas/LogsSpanRemapper'
     LogsQueryCompute:
       description: Define computation for a log query.
       properties:
@@ -6248,6 +6272,43 @@ components:
       x-enum-varnames:
       - TIME_ASCENDING
       - TIME_DESCENDING
+    LogsSpanRemapper:
+      description: "There are two ways to define correlation between application spans
+        and logs:\n\n  1. Follow the documentation on [how to inject a span ID in
+        the application logs](https://docs.datadoghq.com/tracing/connect_logs_and_traces).\n
+        \ Log integrations automatically handle all remaining setup steps by default.\n\n
+        \ 2. Use the span remapper processor to define a log attribute as its associated
+        span ID."
+      properties:
+        is_enabled:
+          default: false
+          description: Whether or not the processor is enabled.
+          type: boolean
+        name:
+          description: Name of the processor.
+          type: string
+        sources:
+          default:
+          - dd.span_id
+          description: Array of source attributes.
+          items:
+            description: Attribute to extract the span ID from.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/LogsSpanRemapperType'
+      required:
+      - type
+      type: object
+    LogsSpanRemapperType:
+      default: span-id-remapper
+      description: Type of logs span remapper.
+      enum:
+      - span-id-remapper
+      example: span-id-remapper
+      type: string
+      x-enum-varnames:
+      - SPAN_ID_REMAPPER
     LogsStatusRemapper:
       description: "Use this Processor if you want to assign some attributes as the
         official status.\n\nEach incoming status value is mapped as follows.\n\n  -
@@ -6363,7 +6424,7 @@ components:
           - dd.trace_id
           description: Array of source attributes.
           items:
-            description: Attribute to extract the Trace ID from.
+            description: Attribute to extract the trace ID from.
             type: string
           type: array
         type:
@@ -6881,6 +6942,62 @@ components:
       - FIREFOX_LAPTOP_LARGE
       - FIREFOX_TABLET
       - FIREFOX_MOBILE_SMALL
+    MonitorFormulaAndFunctionCostAggregator:
+      description: Aggregation methods for metric queries.
+      enum:
+      - avg
+      - sum
+      - max
+      - min
+      - last
+      - area
+      - l2norm
+      - percentile
+      - stddev
+      example: avg
+      type: string
+      x-enum-varnames:
+      - AVG
+      - SUM
+      - MAX
+      - MIN
+      - LAST
+      - AREA
+      - L2NORM
+      - PERCENTILE
+      - STDDEV
+    MonitorFormulaAndFunctionCostDataSource:
+      description: Data source for cost queries.
+      enum:
+      - metrics
+      - cloud_cost
+      - datadog_usage
+      example: cloud_cost
+      type: string
+      x-enum-varnames:
+      - METRICS
+      - CLOUD_COST
+      - DATADOG_USAGE
+    MonitorFormulaAndFunctionCostQueryDefinition:
+      description: A formula and functions cost query.
+      properties:
+        aggregator:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostAggregator'
+        data_source:
+          $ref: '#/components/schemas/MonitorFormulaAndFunctionCostDataSource'
+        name:
+          description: Name of the query for use in formulas.
+          example: query1
+          type: string
+        query:
+          description: The monitor query.
+          example: sum:all.cost{*}.rollup(sum, 86400)
+          type: string
+      required:
+      - name
+      - data_source
+      - query
+      type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.
       enum:
@@ -7031,6 +7148,7 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+      - $ref: '#/components/schemas/MonitorFormulaAndFunctionCostQueryDefinition'
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -7430,7 +7548,7 @@ components:
       properties:
         day_starts:
           description: The time of the day at which a one day cumulative evaluation
-            window starts. Must be defined in UTC time in `HH:mm` format.
+            window starts.
           example: 04:00
           type: string
         hour_starts:
@@ -7449,6 +7567,11 @@ components:
           maximum: 1
           minimum: 1
           type: integer
+        timezone:
+          description: The timezone of the time of the day of the cumulative evaluation
+            window start.
+          example: Europe/Paris
+          type: string
       type: object
     MonitorOverallStates:
       description: The different states your monitor can be in.
@@ -7537,6 +7660,9 @@ components:
           - handle: jane@datadoghq.com
             name: Jane Doe
           org_id: 1234
+          quality_issues:
+          - broken_at_handle
+          - noisy_monitor
           scopes:
           - '!availability-zone:us-east-1c'
           - name:cassandra
@@ -7636,6 +7762,14 @@ components:
           format: int64
           readOnly: true
           type: integer
+        quality_issues:
+          description: Quality issues detected with the monitor.
+          items:
+            description: A quality issue detected with the monitor.
+            readOnly: true
+            type: string
+          readOnly: true
+          type: array
         query:
           description: The monitor query.
           example: avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100
@@ -7852,6 +7986,7 @@ components:
       - error-tracking alert
       - database-monitoring alert
       - network-performance alert
+      - cost alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7873,6 +8008,7 @@ components:
       - ERROR_TRACKING_ALERT
       - DATABASE_MONITORING_ALERT
       - NETWORK_PERFORMANCE_ALERT
+      - COST_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7927,9 +8063,10 @@ components:
             be pulled from the [Roles API](https://docs.datadoghq.com/api/latest/roles/#list-roles)
             and are located in the `data.id` field. Editing a monitor includes any
             updates to the monitor configuration, monitor deletion, and muting of
-            the monitor for any amount of time. `restricted_roles` is the successor
-            of `locked`. For more information about `locked` and `restricted_roles`,
-            see the [monitor options docs](https://docs.datadoghq.com/monitors/guide/monitor_api_options/#permissions-options).
+            the monitor for any amount of time. You can use the [Restriction Policies
+            API](https://docs.datadoghq.com/api/latest/restriction-policies/) to manage
+            write authorization for individual monitors by teams and users, in addition
+            to roles.
           items:
             description: A role UUID.
             type: string
@@ -8028,6 +8165,8 @@ components:
       - ci_visibility_itr_percentage
       - cloud_siem_usage
       - cloud_siem_percentage
+      - code_security_host_usage
+      - code_security_host_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -8042,20 +8181,20 @@ components:
       - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
+      - cws_fargate_task_percentage
+      - cws_fargate_task_usage
       - cws_hosts_percentage
       - cws_hosts_usage
       - data_jobs_monitoring_usage
       - data_jobs_monitoring_percentage
+      - data_stream_monitoring_usage
+      - data_stream_monitoring_percentage
       - dbm_hosts_percentage
       - dbm_hosts_usage
       - dbm_queries_percentage
       - dbm_queries_usage
       - error_tracking_usage
       - error_tracking_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
       - estimated_indexed_spans_usage
       - estimated_indexed_spans_percentage
       - estimated_ingested_spans_usage
@@ -8094,8 +8233,6 @@ components:
       - serverless_apps_percentage
       - snmp_usage
       - snmp_percentage
-      - estimated_rum_sessions_usage
-      - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
       - vuln_management_hosts_usage
@@ -8171,6 +8308,8 @@ components:
       - CI_VISIBILITY_ITR_PERCENTAGE
       - CLOUD_SIEM_USAGE
       - CLOUD_SIEM_PERCENTAGE
+      - CODE_SECURITY_HOST_USAGE
+      - CODE_SECURITY_HOST_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -8185,20 +8324,20 @@ components:
       - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
+      - CWS_FARGATE_TASK_PERCENTAGE
+      - CWS_FARGATE_TASK_USAGE
       - CWS_HOSTS_PERCENTAGE
       - CWS_HOSTS_USAGE
       - DATA_JOBS_MONITORING_USAGE
       - DATA_JOBS_MONITORING_PERCENTAGE
+      - DATA_STREAM_MONITORING_USAGE
+      - DATA_STREAM_MONITORING_PERCENTAGE
       - DBM_HOSTS_PERCENTAGE
       - DBM_HOSTS_USAGE
       - DBM_QUERIES_PERCENTAGE
       - DBM_QUERIES_USAGE
       - ERROR_TRACKING_USAGE
       - ERROR_TRACKING_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
       - ESTIMATED_INDEXED_SPANS_USAGE
       - ESTIMATED_INDEXED_SPANS_PERCENTAGE
       - ESTIMATED_INGESTED_SPANS_USAGE
@@ -8237,8 +8376,6 @@ components:
       - SERVERLESS_APPS_PERCENTAGE
       - SNMP_USAGE
       - SNMP_PERCENTAGE
-      - ESTIMATED_RUM_SESSIONS_USAGE
-      - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -8400,6 +8537,14 @@ components:
             tag(s).
           format: double
           type: number
+        code_security_host_percentage:
+          description: The percentage of Code Security host usage by tags.
+          format: double
+          type: number
+        code_security_host_usage:
+          description: The Code Security host usage by tags.
+          format: double
+          type: number
         container_excl_agent_percentage:
           description: The percentage of container usage without the Datadog Agent
             by tag(s).
@@ -8468,6 +8613,15 @@ components:
           description: The Cloud Workload Security container usage by tag(s).
           format: double
           type: number
+        cws_fargate_task_percentage:
+          description: The percentage of Cloud Workload Security Fargate task usage
+            by tag(s).
+          format: double
+          type: number
+        cws_fargate_task_usage:
+          description: The Cloud Workload Security Fargate task usage by tag(s).
+          format: double
+          type: number
         cws_hosts_percentage:
           description: The percentage of Cloud Workload Security host usage by tag(s).
           format: double
@@ -8478,6 +8632,10 @@ components:
           type: number
         data_jobs_monitoring_usage:
           description: The Data Jobs Monitoring usage by tag(s).
+          format: double
+          type: number
+        data_stream_monitoring_usage:
+          description: The Data Stream Monitoring usage by tag(s).
           format: double
           type: number
         dbm_hosts_percentage:
@@ -8504,14 +8662,6 @@ components:
           description: The error tracking events usage by tag(s).
           format: double
           type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
         estimated_indexed_spans_percentage:
           description: The percentage of estimated indexed spans usage by tag(s).
           format: double
@@ -8520,28 +8670,12 @@ components:
           description: The estimated indexed spans usage by tag(s).
           format: double
           type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
         estimated_ingested_spans_percentage:
           description: The percentage of estimated ingested spans usage by tag(s).
           format: double
           type: number
         estimated_ingested_spans_usage:
           description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
           format: double
           type: number
         fargate_percentage:
@@ -9758,6 +9892,62 @@ components:
       items:
         $ref: '#/components/schemas/NotifyEndType'
       type: array
+    NumberFormatUnit:
+      description: Number format unit.
+      oneOf:
+      - $ref: '#/components/schemas/NumberFormatUnitCanonical'
+      - $ref: '#/components/schemas/NumberFormatUnitCustom'
+    NumberFormatUnitCanonical:
+      description: Canonical unit.
+      properties:
+        per_unit_name:
+          description: The name of the unit per item.
+          example: bytes
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitCustom:
+      description: Custom unit.
+      properties:
+        label:
+          description: The label for the custom unit.
+          maxLength: 12
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitCustomType'
+      type: object
+    NumberFormatUnitCustomType:
+      description: The type of custom unit.
+      enum:
+      - custom_unit_label
+      type: string
+      x-enum-varnames:
+      - CUSTOM_UNIT_LABEL
+    NumberFormatUnitScale:
+      description: The definition of `NumberFormatUnitScale` object.
+      nullable: true
+      properties:
+        type:
+          $ref: '#/components/schemas/NumberFormatUnitScaleType'
+        unit_name:
+          description: The name of the unit.
+          example: bytes
+          type: string
+      type: object
+    NumberFormatUnitScaleType:
+      description: The type of unit scale.
+      enum:
+      - canonical_unit
+      example: canonical_unit
+      type: string
+      x-enum-varnames:
+      - CANONICAL_UNIT
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -10300,6 +10490,19 @@ components:
       - lookup_enrichment_table
       - type
       type: object
+    ResourceProviderConfig:
+      description: Configuration settings applied to resources from the specified
+        Azure resource provider.
+      properties:
+        metrics_enabled:
+          description: Collect metrics for resources from this provider.
+          example: true
+          type: boolean
+        namespace:
+          description: The provider namespace to apply this configuration to.
+          example: Microsoft.Compute
+          type: string
+      type: object
     ResponseMetaAttributes:
       description: Object describing meta attributes of response.
       properties:
@@ -10534,7 +10737,7 @@ components:
       description: A list of  SLO correction objects.
       properties:
         data:
-          description: The list of of SLO corrections objects.
+          description: The list of SLO corrections objects.
           items:
             $ref: '#/components/schemas/SLOCorrection'
           type: array
@@ -10944,7 +11147,7 @@ components:
             Periods of no data are counted either as uptime or downtime depending
             on monitor settings.
 
-            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+            See [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
 
             for detailed information.'
           example:
@@ -13002,7 +13205,7 @@ components:
       properties:
         author:
           $ref: '#/components/schemas/SharedDashboardAuthor'
-        created_at:
+        created:
           description: Date the dashboard was shared.
           format: date-time
           readOnly: true
@@ -13013,6 +13216,20 @@ components:
           type: string
         dashboard_type:
           $ref: '#/components/schemas/DashboardType'
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/DashboardGlobalTime'
         global_time_selectable_enabled:
@@ -13020,6 +13237,23 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
+        last_accessed:
+          description: The last time the shared dashboard was accessed. Null if never
+            accessed.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
         public_url:
           description: URL of the shared dashboard.
           readOnly: true
@@ -13039,6 +13273,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can receive an invitation to access
             to the shared dashboard.
           example:
@@ -13052,10 +13287,17 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
         token:
           description: A unique token assigned to the shared dashboard.
           readOnly: true
           type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       required:
       - dashboard_id
       - dashboard_type
@@ -13074,6 +13316,27 @@ components:
           readOnly: true
           type: string
       readOnly: true
+      type: object
+    SharedDashboardInviteesItems:
+      description: The allowlisted invitees for an INVITE-only shared dashboard.
+      properties:
+        access_expiration:
+          description: Time of the invitee expiration. Null means the invite will
+            not expire.
+          format: date-time
+          nullable: true
+          type: string
+        created_at:
+          description: Time that the invitee was created.
+          format: date-time
+          readOnly: true
+          type: string
+        email:
+          description: Email of the invitee.
+          example: test@datadoghq.com
+          type: string
+      required:
+      - email
       type: object
     SharedDashboardInvites:
       description: Invitations data and metadata that exists for a shared dashboard
@@ -13191,6 +13454,17 @@ components:
           format: int64
           type: integer
       type: object
+    SharedDashboardStatus:
+      description: Active means the dashboard is publicly available. Paused means
+        the dashboard is not publicly available.
+      enum:
+      - active
+      - paused
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - PAUSED
     SharedDashboardUpdateRequest:
       description: Update a shared dashboard's settings.
       example:
@@ -13201,6 +13475,20 @@ components:
         - test2@datadoghq.com
         share_type: invite
       properties:
+        embeddable_domains:
+          description: The `SharedDashboard` `embeddable_domains`.
+          example:
+          - https://domain.atlassian.net/
+          - http://myserver.com/
+          items:
+            description: The allowlisted referrers for an EMBED shared dashboard.
+            type: string
+          type: array
+        expiration:
+          description: The time when an OPEN shared dashboard becomes publicly unavailable.
+          format: date-time
+          nullable: true
+          type: string
         global_time:
           $ref: '#/components/schemas/SharedDashboardUpdateRequestGlobalTime'
         global_time_selectable_enabled:
@@ -13208,6 +13496,16 @@ components:
             setting for the shared dashboard.
           nullable: true
           type: boolean
+        invitees:
+          description: The `SharedDashboard` `invitees`.
+          example:
+          - access_expiration: '2030-01-01T12:00:00.00Z'
+            email: test@datadoghq.com
+          - access_expiration: null
+            email: test2@datadoghq.com
+          items:
+            $ref: '#/components/schemas/SharedDashboardInviteesItems'
+          type: array
         selectable_template_vars:
           description: List of objects representing template variables on the shared
             dashboard which can have selectable values.
@@ -13223,6 +13521,7 @@ components:
           nullable: true
           type: array
         share_list:
+          deprecated: true
           description: List of email addresses that can be given access to the shared
             dashboard.
           example:
@@ -13236,8 +13535,13 @@ components:
           type: array
         share_type:
           $ref: '#/components/schemas/DashboardShareType'
-      required:
-      - global_time
+        status:
+          $ref: '#/components/schemas/SharedDashboardStatus'
+        title:
+          description: Title of the shared dashboard.
+          type: string
+        viewing_preferences:
+          $ref: '#/components/schemas/ViewingPreferences'
       type: object
     SharedDashboardUpdateRequestGlobalTime:
       description: Timeframe setting for the shared dashboard.
@@ -13255,6 +13559,8 @@ components:
       - false_positive
       - testing_or_maintenance
       - investigated_case_opened
+      - true_positive_benign
+      - true_positive_malicious
       - other
       type: string
       x-enum-varnames:
@@ -13262,6 +13568,8 @@ components:
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
       - INVESTIGATED_CASE_OPENED
+      - TRUE_POSITIVE_BENIGN
+      - TRUE_POSITIVE_MALICIOUS
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -13402,6 +13710,10 @@ components:
           default: true
           description: Show the main body of the alert event.
           type: boolean
+        mute_buttons:
+          default: false
+          description: Show interactive buttons to mute the alerting monitor.
+          type: boolean
         notified:
           default: true
           description: Show the list of @-handles in the alert event.
@@ -13420,12 +13732,14 @@ components:
       example:
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: true
           tags: true
         name: '#channel_name_main_account'
       - display:
           message: true
+          mute_buttons: true
           notified: true
           snapshot: false
           tags: true
@@ -13966,11 +14280,17 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAssertion'
           type: array
+        exitIfSucceed:
+          description: Determines whether or not to exit the test if the step succeeds.
+          type: boolean
         extractedValues:
           description: Array of values to parse and save as variables from the response.
           items:
             $ref: '#/components/schemas/SyntheticsParsingOptions'
           type: array
+        extractedValuesFromScript:
+          description: Generate variables using JavaScript.
+          type: string
         isCritical:
           description: 'Determines whether or not to consider the entire test as failed
             if this step fails.
@@ -14678,7 +14998,7 @@ components:
             $ref: '#/components/schemas/SyntheticsBatchResult'
           type: array
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
       type: object
     SyntheticsBatchResult:
       description: Object with the results of a Synthetic batch.
@@ -14702,7 +15022,7 @@ components:
           format: double
           type: number
         status:
-          $ref: '#/components/schemas/SyntheticsStatus'
+          $ref: '#/components/schemas/SyntheticsBatchStatus'
         test_name:
           description: Name of the test.
           type: string
@@ -14712,6 +15032,17 @@ components:
         test_type:
           $ref: '#/components/schemas/SyntheticsTestDetailsType'
       type: object
+    SyntheticsBatchStatus:
+      description: Determines whether the batch has passed, failed, or is in progress.
+      enum:
+      - passed
+      - skipped
+      - failed
+      type: string
+      x-enum-varnames:
+      - PASSED
+      - SKIPPED
+      - FAILED
     SyntheticsBrowserError:
       description: Error response object for a browser test.
       properties:
@@ -15118,7 +15449,6 @@ components:
       - element
       - email
       - global
-      - javascript
       - text
       example: text
       type: string
@@ -15126,7 +15456,6 @@ components:
       - ELEMENT
       - EMAIL
       - GLOBAL
-      - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
       description: Metadata for the Synthetic tests run.
@@ -15228,7 +15557,7 @@ components:
       description: Object describing the synthetics tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: List of Synthetic tests with overrides.
           items:
             $ref: '#/components/schemas/SyntheticsCITest'
           type: array
@@ -15403,34 +15732,8 @@ components:
       type: object
     SyntheticsDeviceID:
       description: The device ID.
-      enum:
-      - laptop_large
-      - tablet
-      - mobile_small
-      - chrome.laptop_large
-      - chrome.tablet
-      - chrome.mobile_small
-      - firefox.laptop_large
-      - firefox.tablet
-      - firefox.mobile_small
-      - edge.laptop_large
-      - edge.tablet
-      - edge.mobile_small
       example: chrome.laptop_large
       type: string
-      x-enum-varnames:
-      - LAPTOP_LARGE
-      - TABLET
-      - MOBILE_SMALL
-      - CHROME_LAPTOP_LARGE
-      - CHROME_TABLET
-      - CHROME_MOBILE_SMALL
-      - FIREFOX_LAPTOP_LARGE
-      - FIREFOX_TABLET
-      - FIREFOX_MOBILE_SMALL
-      - EDGE_LAPTOP_LARGE
-      - EDGE_TABLET
-      - EDGE_MOBILE_SMALL
     SyntheticsFetchUptimesPayload:
       description: Object containing IDs of Synthetic tests and a timeframe.
       properties:
@@ -15440,7 +15743,7 @@ components:
           format: int64
           type: integer
         public_ids:
-          description: An array of Synthetic test IDs you want to delete.
+          description: An array of Synthetic test IDs you want uptimes for.
           example: []
           items:
             description: A Synthetic test ID.
@@ -15733,464 +16036,6 @@ components:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
       type: object
-    SyntheticsMobileDeviceID:
-      description: The device ID.
-      enum:
-      - apple ipad (2022),16.4
-      - apple ipad (2022),17.3.1
-      - apple ipad 7th gen (2019),13.3
-      - apple ipad 9th gen (2021),15.0.2
-      - apple ipad 9th gen (2021),16.1
-      - apple ipad air (2022),15.4.1
-      - apple ipad mini (5th gen),14.6
-      - apple ipad mini (6th gen),15.1
-      - apple ipad pro 11 (2022),16.3
-      - apple ipad pro 12.9 (2020),14.8
-      - apple ipad pro 12.9 (2021),15.6.1
-      - apple ipad pro 12.9 (2022),16.5
-      - apple iphone 11 pro max,13.1.3
-      - apple iphone 11 pro,13.6
-      - apple iphone 11 pro,15.5
-      - apple iphone 11,13.3.1
-      - apple iphone 11,14.0
-      - apple iphone 11,16.3
-      - apple iphone 12 mini,14.2
-      - apple iphone 12 mini,16.5
-      - apple iphone 12 pro max,14.5.1
-      - apple iphone 12 pro,14.5.1
-      - apple iphone 12 pro,14.8
-      - apple iphone 12 pro,15.0.2
-      - apple iphone 12 pro,16.2
-      - apple iphone 12,14.2
-      - apple iphone 12,14.6
-      - apple iphone 12,14.8
-      - apple iphone 12,15.6.1
-      - apple iphone 12,16.6.1
-      - apple iphone 13 mini,15.0.2
-      - apple iphone 13 mini,16.6
-      - apple iphone 13 pro max,15.1
-      - apple iphone 13 pro max,17.3
-      - apple iphone 13 pro,15.0.2
-      - apple iphone 13 pro,15.2
-      - apple iphone 14 plus,16.1
-      - apple iphone 14 pro max,16.2
-      - apple iphone 14 pro,16.1
-      - apple iphone 14 pro,17.3.1
-      - apple iphone 14,16.1
-      - apple iphone 15 pro max,17.3.1
-      - apple iphone 15 pro,17.3.1
-      - apple iphone 15,17.2.1
-      - apple iphone se (2022),15.4.1
-      - galaxy a40,9
-      - galaxy a5,8.0.0
-      - galaxy note 10,9
-      - galaxy note5 (at&t),7.0
-      - galaxy s10,9
-      - galaxy s6 edge sm-g925f,7.0
-      - galaxy s8 (t-mobile),8.0.0
-      - galaxy s8 unlocked,8.0.0
-      - galaxy s9 (unlocked),9
-      - galaxy s9+ (unlocked),8.0.0
-      - galaxy s9+ (unlocked),9
-      - google pixel 2,8.0.0
-      - google pixel 2,9
-      - google pixel 3 xl,10
-      - google pixel 3 xl,9
-      - google pixel 3,10
-      - google pixel 3,9
-      - google pixel 3a xl,11
-      - google pixel 3a xl,12
-      - google pixel 3a,10
-      - google pixel 4 (unlocked),10
-      - google pixel 4 (unlocked),11
-      - google pixel 4 xl (unlocked),10
-      - google pixel 4a,11
-      - google pixel 4a,12
-      - google pixel 5a 5g,12
-      - google pixel 6 pro,12
-      - google pixel 6,12
-      - google pixel 6a,13
-      - google pixel 7 pro,13
-      - google pixel 7,13
-      - google pixel 7,14
-      - google pixel 8 pro,14
-      - google pixel 8,14
-      - ipad 8th gen (2020),14.8
-      - ipad air 2,13.6
-      - ipad air 4th gen (2020),14.8
-      - iphone 13,15.0.2
-      - iphone 13,16.0.2
-      - iphone 6,12.5.4
-      - iphone 6s,14.4.2
-      - iphone 7,14.8
-      - iphone 8,13.5.1
-      - iphone 8,14.4.2
-      - iphone se (2020),13.6
-      - iphone se (2020),14.6
-      - iphone se (2020),15.0.2
-      - iphone x,14.6
-      - iphone xr,12.0
-      - iphone xr,14.0
-      - iphone xs max,12.1
-      - iphone xs,13.6
-      - lg stylo 5,9
-      - lg stylo 6,10
-      - moto g 4,7.0
-      - moto g7 play,9
-      - nexus 7 - 2nd gen (wifi),6.0
-      - oneplus 8t,11
-      - pixel 2 xl,8.1.0
-      - pixel 2 xl,9
-      - pixel 5,11
-      - pixel 5,12
-      - pixel xl,8.0.0
-      - pixel,7.1.2
-      - samsung a51,10
-      - samsung galaxy a10s,10
-      - samsung galaxy a13 5g,11
-      - samsung galaxy a53 5g,12
-      - samsung galaxy a7,8.0.0
-      - samsung galaxy a71,11
-      - samsung galaxy a73 5g,12
-      - samsung galaxy j7 (2018),8.0.0
-      - samsung galaxy note20,11
-      - samsung galaxy s20 (unlocked),10
-      - samsung galaxy s20+ (unlocked),10
-      - samsung galaxy s21 ultra,11
-      - samsung galaxy s21 ultra,12
-      - samsung galaxy s21+,11
-      - samsung galaxy s21,11
-      - samsung galaxy s21,12
-      - samsung galaxy s22 5g,12
-      - samsung galaxy s22 5g,13
-      - samsung galaxy s22 ultra 5g,12
-      - samsung galaxy s22+ 5g,12
-      - samsung galaxy s23 ultra,13
-      - samsung galaxy s23+,13
-      - samsung galaxy s23,13
-      - samsung galaxy s23,14
-      - samsung galaxy tab a 10.1,10
-      - samsung galaxy tab a 10.1,7.0
-      - samsung galaxy tab a8 (2021),11
-      - samsung galaxy tab s4,8.1.0
-      - samsung galaxy tab s6,9
-      - samsung galaxy tab s7,11
-      - samsung galaxy tab s8,12
-      - samsung s20 ultra,10
-      - sony xperia xz3,9
-      - xiaomi redmi note 10 5g,11
-      - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
-      - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_17
-      - synthetics:mobile:device:apple_ipad_9th_gen_2021_ios_15
-      - synthetics:mobile:device:apple_ipad_air_2022_ios_15
-      - synthetics:mobile:device:apple_ipad_mini_5th_gen_ios_14
-      - synthetics:mobile:device:apple_ipad_mini_6th_gen_ios_15
-      - synthetics:mobile:device:apple_ipad_pro_11_2022_ios_16
-      - synthetics:mobile:device:apple_ipad_pro_12_9_2020_ios_14
-      - synthetics:mobile:device:apple_ipad_pro_12_9_2021_ios_15
-      - synthetics:mobile:device:apple_ipad_pro_12_9_2022_ios_16
-      - synthetics:mobile:device:apple_iphone_11_ios_14
-      - synthetics:mobile:device:apple_iphone_11_ios_16
-      - synthetics:mobile:device:apple_iphone_11_pro_ios_15
-      - synthetics:mobile:device:apple_iphone_12_ios_14
-      - synthetics:mobile:device:apple_iphone_12_ios_15
-      - synthetics:mobile:device:apple_iphone_12_ios_16
-      - synthetics:mobile:device:apple_iphone_12_mini_ios_14
-      - synthetics:mobile:device:apple_iphone_12_mini_ios_16
-      - synthetics:mobile:device:apple_iphone_12_pro_ios_14
-      - synthetics:mobile:device:apple_iphone_12_pro_max_ios_14
-      - synthetics:mobile:device:apple_iphone_13_mini_ios_15
-      - synthetics:mobile:device:apple_iphone_13_mini_ios_16
-      - synthetics:mobile:device:apple_iphone_13_pro_ios_15
-      - synthetics:mobile:device:apple_iphone_13_pro_max_ios_15
-      - synthetics:mobile:device:apple_iphone_13_pro_max_ios_17
-      - synthetics:mobile:device:apple_iphone_14_ios_16
-      - synthetics:mobile:device:apple_iphone_14_plus_ios_16
-      - synthetics:mobile:device:apple_iphone_14_pro_ios_16
-      - synthetics:mobile:device:apple_iphone_14_pro_ios_17
-      - synthetics:mobile:device:apple_iphone_14_pro_max_ios_16
-      - synthetics:mobile:device:apple_iphone_6_ios_12
-      - synthetics:mobile:device:apple_iphone_8_ios_13
-      - synthetics:mobile:device:apple_iphone_8_ios_14
-      - synthetics:mobile:device:apple_iphone_se_2022_ios_15
-      - synthetics:mobile:device:apple_iphone_se_2022_ios_16
-      - synthetics:mobile:device:galaxy_a5_android_8
-      - synthetics:mobile:device:galaxy_note5_android_7
-      - synthetics:mobile:device:google_pixel_3a_xl_android_11
-      - synthetics:mobile:device:google_pixel_4_unlocked_android_11
-      - synthetics:mobile:device:google_pixel_4_xl_unlocked_android_10
-      - synthetics:mobile:device:google_pixel_4a_android_11
-      - synthetics:mobile:device:google_pixel_6_android_12
-      - synthetics:mobile:device:google_pixel_6_pro_android_12
-      - synthetics:mobile:device:google_pixel_6a_android_13
-      - synthetics:mobile:device:google_pixel_7_android_13
-      - synthetics:mobile:device:google_pixel_7_android_14
-      - synthetics:mobile:device:google_pixel_7_pro_android_13
-      - synthetics:mobile:device:google_pixel_8_android_14
-      - synthetics:mobile:device:google_pixel_8_pro_android_14
-      - synthetics:mobile:device:ipad_air_2_ios_13
-      - synthetics:mobile:device:ipad_air_4th_gen_2020_ios_14
-      - synthetics:mobile:device:iphone_13_ios_15
-      - synthetics:mobile:device:iphone_13_ios_16
-      - synthetics:mobile:device:iphone_15_ios_17
-      - synthetics:mobile:device:iphone_15_pro_ios_17
-      - synthetics:mobile:device:iphone_15_pro_max_ios_17
-      - synthetics:mobile:device:iphone_se_2020_ios_13
-      - synthetics:mobile:device:iphone_se_2020_ios_14
-      - synthetics:mobile:device:iphone_x_ios_14
-      - synthetics:mobile:device:iphone_xr_ios_14
-      - synthetics:mobile:device:iphone_xs_ios_13
-      - synthetics:mobile:device:lg_stylo_6_android_10
-      - synthetics:mobile:device:pixel_5_android_12
-      - synthetics:mobile:device:samsung_a51_android_10
-      - synthetics:mobile:device:samsung_galaxy_a71_android_11
-      - synthetics:mobile:device:samsung_galaxy_note20_android_11
-      - synthetics:mobile:device:samsung_galaxy_s21_android_11
-      - synthetics:mobile:device:samsung_galaxy_s21_android_12
-      - synthetics:mobile:device:samsung_galaxy_s21_plus_android_11
-      - synthetics:mobile:device:samsung_galaxy_s21_ultra_android_11
-      - synthetics:mobile:device:samsung_galaxy_s22_5g_android_12
-      - synthetics:mobile:device:samsung_galaxy_s22_5g_android_13
-      - synthetics:mobile:device:samsung_galaxy_s22_plus_5g_android_12
-      - synthetics:mobile:device:samsung_galaxy_s22_ultra_5g_android_12
-      - synthetics:mobile:device:samsung_galaxy_s23_android_13
-      - synthetics:mobile:device:samsung_galaxy_s23_android_14
-      - synthetics:mobile:device:samsung_galaxy_s23_plus_android_13
-      - synthetics:mobile:device:samsung_galaxy_s23_plus_android_14
-      - synthetics:mobile:device:samsung_galaxy_s23_ultra_android_13
-      - synthetics:mobile:device:samsung_galaxy_tab_a_10_1_android_7
-      - synthetics:mobile:device:samsung_galaxy_tab_s7_android_11
-      - synthetics:mobile:device:samsung_galaxy_tab_s8_android_12
-      - synthetics:mobile:device:xiaomi_redmi_note_10_5g_android_11
-      example: apple ipad (2022),16.4
-      type: string
-      x-enum-varnames:
-      - APPLE_IPAD__2022__16_4
-      - APPLE_IPAD__2022__17_3_1
-      - APPLE_IPAD_7TH_GEN__2019__13_3
-      - APPLE_IPAD_9TH_GEN__2021__15_0_2
-      - APPLE_IPAD_9TH_GEN__2021__16_1
-      - APPLE_IPAD_AIR__2022__15_4_1
-      - APPLE_IPAD_MINI__5TH_GEN__14_6
-      - APPLE_IPAD_MINI__6TH_GEN__15_1
-      - APPLE_IPAD_PRO_11__2022__16_3
-      - APPLE_IPAD_PRO_12_9__2020__14_8
-      - APPLE_IPAD_PRO_12_9__2021__15_6_1
-      - APPLE_IPAD_PRO_12_9__2022__16_5
-      - APPLE_IPHONE_11_PRO_MAX_13_1_3
-      - APPLE_IPHONE_11_PRO_13_6
-      - APPLE_IPHONE_11_PRO_15_5
-      - APPLE_IPHONE_11_13_3_1
-      - APPLE_IPHONE_11_14_0
-      - APPLE_IPHONE_11_16_3
-      - APPLE_IPHONE_12_MINI_14_2
-      - APPLE_IPHONE_12_MINI_16_5
-      - APPLE_IPHONE_12_PRO_MAX_14_5_1
-      - APPLE_IPHONE_12_PRO_14_5_1
-      - APPLE_IPHONE_12_PRO_14_8
-      - APPLE_IPHONE_12_PRO_15_0_2
-      - APPLE_IPHONE_12_PRO_16_2
-      - APPLE_IPHONE_12_14_2
-      - APPLE_IPHONE_12_14_6
-      - APPLE_IPHONE_12_14_8
-      - APPLE_IPHONE_12_15_6_1
-      - APPLE_IPHONE_12_16_6_1
-      - APPLE_IPHONE_13_MINI_15_0_2
-      - APPLE_IPHONE_13_MINI_16_6
-      - APPLE_IPHONE_13_PRO_MAX_15_1
-      - APPLE_IPHONE_13_PRO_MAX_17_3
-      - APPLE_IPHONE_13_PRO_15_0_2
-      - APPLE_IPHONE_13_PRO_15_2
-      - APPLE_IPHONE_14_PLUS_16_1
-      - APPLE_IPHONE_14_PRO_MAX_16_2
-      - APPLE_IPHONE_14_PRO_16_1
-      - APPLE_IPHONE_14_PRO_17_3_1
-      - APPLE_IPHONE_14_16_1
-      - APPLE_IPHONE_15_PRO_MAX_17_3_1
-      - APPLE_IPHONE_15_PRO_17_3_1
-      - APPLE_IPHONE_15_17_2_1
-      - APPLE_IPHONE_SE__2022__15_4_1
-      - GALAXY_A40_9
-      - GALAXY_A5_8_0_0
-      - GALAXY_NOTE_10_9
-      - GALAXY_NOTE5__AT_T__7_0
-      - GALAXY_S10_9
-      - GALAXY_S6_EDGE_SMNOT_G925F_7_0
-      - GALAXY_S8__TNOT_MOBILE__8_0_0
-      - GALAXY_S8_UNLOCKED_8_0_0
-      - GALAXY_S9__UNLOCKED__9
-      - GALAXY_S9___UNLOCKED__8_0_0
-      - GALAXY_S9___UNLOCKED__9
-      - GOOGLE_PIXEL_2_8_0_0
-      - GOOGLE_PIXEL_2_9
-      - GOOGLE_PIXEL_3_XL_10
-      - GOOGLE_PIXEL_3_XL_9
-      - GOOGLE_PIXEL_3_10
-      - GOOGLE_PIXEL_3_9
-      - GOOGLE_PIXEL_3A_XL_11
-      - GOOGLE_PIXEL_3A_XL_12
-      - GOOGLE_PIXEL_3A_10
-      - GOOGLE_PIXEL_4__UNLOCKED__10
-      - GOOGLE_PIXEL_4__UNLOCKED__11
-      - GOOGLE_PIXEL_4_XL__UNLOCKED__10
-      - GOOGLE_PIXEL_4A_11
-      - GOOGLE_PIXEL_4A_12
-      - GOOGLE_PIXEL_5A_5G_12
-      - GOOGLE_PIXEL_6_PRO_12
-      - GOOGLE_PIXEL_6_12
-      - GOOGLE_PIXEL_6A_13
-      - GOOGLE_PIXEL_7_PRO_13
-      - GOOGLE_PIXEL_7_13
-      - GOOGLE_PIXEL_7_14
-      - GOOGLE_PIXEL_8_PRO_14
-      - GOOGLE_PIXEL_8_14
-      - IPAD_8TH_GEN__2020__14_8
-      - IPAD_AIR_2_13_6
-      - IPAD_AIR_4TH_GEN__2020__14_8
-      - IPHONE_13_15_0_2
-      - IPHONE_13_16_0_2
-      - IPHONE_6_12_5_4
-      - IPHONE_6S_14_4_2
-      - IPHONE_7_14_8
-      - IPHONE_8_13_5_1
-      - IPHONE_8_14_4_2
-      - IPHONE_SE__2020__13_6
-      - IPHONE_SE__2020__14_6
-      - IPHONE_SE__2020__15_0_2
-      - IPHONE_X_14_6
-      - IPHONE_XR_12_0
-      - IPHONE_XR_14_0
-      - IPHONE_XS_MAX_12_1
-      - IPHONE_XS_13_6
-      - LG_STYLO_5_9
-      - LG_STYLO_6_10
-      - MOTO_G_4_7_0
-      - MOTO_G7_PLAY_9
-      - NEXUS_7_NOT__2ND_GEN__WIFI__6_0
-      - ONEPLUS_8T_11
-      - PIXEL_2_XL_8_1_0
-      - PIXEL_2_XL_9
-      - PIXEL_5_11
-      - PIXEL_5_12
-      - PIXEL_XL_8_0_0
-      - PIXEL_7_1_2
-      - SAMSUNG_A51_10
-      - SAMSUNG_GALAXY_A10S_10
-      - SAMSUNG_GALAXY_A13_5G_11
-      - SAMSUNG_GALAXY_A53_5G_12
-      - SAMSUNG_GALAXY_A7_8_0_0
-      - SAMSUNG_GALAXY_A71_11
-      - SAMSUNG_GALAXY_A73_5G_12
-      - SAMSUNG_GALAXY_J7__2018__8_0_0
-      - SAMSUNG_GALAXY_NOTE20_11
-      - SAMSUNG_GALAXY_S20__UNLOCKED__10
-      - SAMSUNG_GALAXY_S20___UNLOCKED__10
-      - SAMSUNG_GALAXY_S21_ULTRA_11
-      - SAMSUNG_GALAXY_S21_ULTRA_12
-      - SAMSUNG_GALAXY_S21__11
-      - SAMSUNG_GALAXY_S21_11
-      - SAMSUNG_GALAXY_S21_12
-      - SAMSUNG_GALAXY_S22_5G_12
-      - SAMSUNG_GALAXY_S22_5G_13
-      - SAMSUNG_GALAXY_S22_ULTRA_5G_12
-      - SAMSUNG_GALAXY_S22__5G_12
-      - SAMSUNG_GALAXY_S23_ULTRA_13
-      - SAMSUNG_GALAXY_S23__13
-      - SAMSUNG_GALAXY_S23_13
-      - SAMSUNG_GALAXY_S23_14
-      - SAMSUNG_GALAXY_TAB_A_10_1_10
-      - SAMSUNG_GALAXY_TAB_A_10_1_7_0
-      - SAMSUNG_GALAXY_TAB_A8__2021__11
-      - SAMSUNG_GALAXY_TAB_S4_8_1_0
-      - SAMSUNG_GALAXY_TAB_S6_9
-      - SAMSUNG_GALAXY_TAB_S7_11
-      - SAMSUNG_GALAXY_TAB_S8_12
-      - SAMSUNG_S20_ULTRA_10
-      - SONY_XPERIA_XZ3_9
-      - XIAOMI_REDMI_NOTE_10_5G_11
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_10TH_GEN_2022_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_10TH_GEN_2022_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_9TH_GEN_2021_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_AIR_2022_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_MINI_5TH_GEN_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_MINI_6TH_GEN_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_11_2022_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2020_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2021_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPAD_PRO_12_9_2022_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_11_PRO_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_MINI_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_MINI_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_PRO_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_12_PRO_MAX_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_MINI_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_MINI_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_MAX_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_13_PRO_MAX_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PLUS_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_14_PRO_MAX_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_6_IOS_12
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_8_IOS_13
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_8_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_SE_2022_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_APPLE_IPHONE_SE_2022_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_GALAXY_A5_ANDROID_8
-      - SYNTHETICS_MOBILE_DEVICE_GALAXY_NOTE5_ANDROID_7
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_3A_XL_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4_UNLOCKED_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4_XL_UNLOCKED_ANDROID_10
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_4A_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6_PRO_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_6A_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_ANDROID_14
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_7_PRO_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_8_ANDROID_14
-      - SYNTHETICS_MOBILE_DEVICE_GOOGLE_PIXEL_8_PRO_ANDROID_14
-      - SYNTHETICS_MOBILE_DEVICE_IPAD_AIR_2_IOS_13
-      - SYNTHETICS_MOBILE_DEVICE_IPAD_AIR_4TH_GEN_2020_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_13_IOS_15
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_13_IOS_16
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_PRO_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_15_PRO_MAX_IOS_17
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_SE_2020_IOS_13
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_SE_2020_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_X_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_XR_IOS_14
-      - SYNTHETICS_MOBILE_DEVICE_IPHONE_XS_IOS_13
-      - SYNTHETICS_MOBILE_DEVICE_LG_STYLO_6_ANDROID_10
-      - SYNTHETICS_MOBILE_DEVICE_PIXEL_5_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_A51_ANDROID_10
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_A71_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_NOTE20_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_PLUS_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S21_ULTRA_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_5G_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_5G_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_PLUS_5G_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S22_ULTRA_5G_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ANDROID_14
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_PLUS_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_PLUS_ANDROID_14
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_S23_ULTRA_ANDROID_13
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_A_10_1_ANDROID_7
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_S7_ANDROID_11
-      - SYNTHETICS_MOBILE_DEVICE_SAMSUNG_GALAXY_TAB_S8_ANDROID_12
-      - SYNTHETICS_MOBILE_DEVICE_XIAOMI_REDMI_NOTE_10_5G_ANDROID_11
     SyntheticsMobileStep:
       description: The steps used in a Synthetic mobile test.
       properties:
@@ -16206,14 +16051,14 @@ components:
           type: boolean
         name:
           description: The name of the step.
+          example: ''
           maxLength: 1500
           type: string
         noScreenshot:
           description: A boolean set to not take a screenshot for the step.
           type: boolean
         params:
-          description: The parameters of the mobile step.
-          type: object
+          $ref: '#/components/schemas/SyntheticsMobileStepParams'
         publicId:
           description: The public ID of the step.
           example: pub-lic-id0
@@ -16224,6 +16069,198 @@ components:
           type: integer
         type:
           $ref: '#/components/schemas/SyntheticsMobileStepType'
+      required:
+      - name
+      - params
+      - type
+      type: object
+    SyntheticsMobileStepParams:
+      description: The parameters of a mobile step.
+      properties:
+        check:
+          $ref: '#/components/schemas/SyntheticsCheckType'
+        delay:
+          description: Number of milliseconds to wait between inputs in a `typeText`
+            step type.
+          format: int64
+          maximum: 5000
+          minimum: 0
+          type: integer
+        direction:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsDirection'
+        element:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElement'
+        enabled:
+          description: Boolean to change the state of the wifi for a `toggleWiFi`
+            step type.
+          type: boolean
+        maxScrolls:
+          description: Maximum number of scrolls to do for a `scrollToElement` step
+            type.
+          format: int64
+          type: integer
+        positions:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsPositions'
+        subtestPublicId:
+          description: Public ID of the test to be played as part of a `playSubTest`
+            step type.
+          type: string
+        value:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsValue'
+        variable:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsVariable'
+        withEnter:
+          description: Boolean to indicate if `Enter` should be pressed at the end
+            of the `typeText` step type.
+          type: boolean
+        x:
+          description: Amount to scroll by on the `x` axis for a `scroll` step type.
+          format: double
+          type: number
+        y:
+          description: Amount to scroll by on the `y` axis for a `scroll` step type.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsDirection:
+      description: The direction of the scroll for a `scrollToElement` step type.
+      enum:
+      - up
+      - down
+      - left
+      - right
+      type: string
+      x-enum-varnames:
+      - UP
+      - DOWN
+      - LEFT
+      - RIGHT
+    SyntheticsMobileStepParamsElement:
+      description: Information about the element used for a step.
+      properties:
+        context:
+          description: Context of the element.
+          type: string
+        contextType:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementContextType'
+        elementDescription:
+          description: Description of the element.
+          type: string
+        multiLocator:
+          description: Multi-locator to find the element.
+          type: object
+        relativePosition:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementRelativePosition'
+        textContent:
+          description: Text content of the element.
+          type: string
+        userLocator:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocator'
+        viewName:
+          description: Name of the view of the element.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementContextType:
+      description: Type of the context that the element is in.
+      enum:
+      - native
+      - web
+      type: string
+      x-enum-varnames:
+      - NATIVE
+      - WEB
+    SyntheticsMobileStepParamsElementRelativePosition:
+      description: Position of the action relative to the element.
+      properties:
+        x:
+          description: The `relativePosition` on the `x` axis for the element.
+          format: double
+          type: number
+        y:
+          description: The `relativePosition` on the `y` axis for the element.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsElementUserLocator:
+      description: User locator to find the element.
+      properties:
+        failTestOnCannotLocate:
+          description: Whether if the test should fail if the element cannot be found.
+          type: boolean
+        values:
+          description: Values of the user locator.
+          items:
+            $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItems'
+          type: array
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItems:
+      description: A single user locator object.
+      properties:
+        type:
+          $ref: '#/components/schemas/SyntheticsMobileStepParamsElementUserLocatorValuesItemsType'
+        value:
+          description: Value of a user locator.
+          type: string
+      type: object
+    SyntheticsMobileStepParamsElementUserLocatorValuesItemsType:
+      description: Type of a user locator.
+      enum:
+      - accessibility-id
+      - id
+      - ios-predicate-string
+      - ios-class-chain
+      - xpath
+      type: string
+      x-enum-varnames:
+      - ACCESSIBILITY_ID
+      - ID
+      - IOS_PREDICATE_STRING
+      - IOS_CLASS_CHAIN
+      - XPATH
+    SyntheticsMobileStepParamsPositions:
+      description: List of positions for the `flick` step type. The maximum is 10
+        flicks per step
+      items:
+        $ref: '#/components/schemas/SyntheticsMobileStepParamsPositionsItems'
+      type: array
+    SyntheticsMobileStepParamsPositionsItems:
+      description: A description of a single position for a `flick` step type.
+      properties:
+        x:
+          description: The `x` position for the flick.
+          format: double
+          type: number
+        y:
+          description: The `y` position for the flick.
+          format: double
+          type: number
+      type: object
+    SyntheticsMobileStepParamsValue:
+      description: Values used in the step for in multiple step types.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueString'
+      - $ref: '#/components/schemas/SyntheticsMobileStepParamsValueNumber'
+    SyntheticsMobileStepParamsValueNumber:
+      description: Value used in the step for in multiple step types.
+      format: int64
+      type: integer
+    SyntheticsMobileStepParamsValueString:
+      description: Value used in the step for in multiple step types.
+      type: string
+    SyntheticsMobileStepParamsVariable:
+      description: Variable object for `extractVariable` step type.
+      properties:
+        example:
+          description: An example for the variable.
+          example: ''
+          type: string
+        name:
+          description: The variable name.
+          example: VAR_NAME
+          type: string
+      required:
+      - name
+      - example
       type: object
     SyntheticsMobileStepType:
       description: Step type used in your mobile Synthetic test.
@@ -16271,9 +16308,9 @@ components:
         config:
           $ref: '#/components/schemas/SyntheticsMobileTestConfig'
         device_ids:
-          description: The `SyntheticsMobileTest` `device_ids`.
+          description: Array with the different device IDs used to run the test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         message:
           description: Notification message associated with the test.
@@ -16319,44 +16356,6 @@ components:
       - options
       - type
       type: object
-    SyntheticsMobileTestBinding:
-      description: Objects describing the binding used for a mobile test.
-      properties:
-        items:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItems'
-      type: object
-    SyntheticsMobileTestBindingItems:
-      description: Object describing the binding used for a mobile test.
-      properties:
-        principals:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingPrincipals'
-        role:
-          $ref: '#/components/schemas/SyntheticsMobileTestBindingItemsRole'
-      type: object
-    SyntheticsMobileTestBindingItemsRole:
-      description: The definition of `SyntheticsMobileTestBindingItemsRole` object.
-      enum:
-      - editor
-      - viewer
-      type: string
-      x-enum-varnames:
-      - EDITOR
-      - VIEWER
-    SyntheticsMobileTestBindingPrincipals:
-      description: List of principals for a mobile test binding.
-      items:
-        description: A principal for a mobile test binding.
-        maxLength: 1500
-        type: string
-      type: array
-    SyntheticsMobileTestCiOptions:
-      description: CI/CD options for a Synthetic test.
-      properties:
-        executionRule:
-          $ref: '#/components/schemas/SyntheticsTestExecutionRule'
-      required:
-      - executionRule
-      type: object
     SyntheticsMobileTestConfig:
       description: Configuration object for a Synthetic mobile test.
       properties:
@@ -16369,34 +16368,27 @@ components:
           type: array
       type: object
     SyntheticsMobileTestInitialApplicationArguments:
+      additionalProperties:
+        description: A single application argument.
+        type: string
       description: Initial application arguments for a mobile test.
-      properties:
-        propertyNames:
-          $ref: '#/components/schemas/SyntheticsMobileTestInitialApplicationArgumentsPropertyNames'
-      type: object
-    SyntheticsMobileTestInitialApplicationArgumentsPropertyNames:
-      description: Name of the property.
-      properties:
-        pattern:
-          description: The `propertyNames` `pattern`.
-          example: ^(?!_dd).*$
-          type: string
       type: object
     SyntheticsMobileTestOptions:
       description: Object describing the extra options for a Synthetic test.
       properties:
         allowApplicationCrash:
-          description: The `SyntheticsMobileTestOptions` `allowApplicationCrash`.
+          description: A boolean to set if an application crash would mark the test
+            as failed.
           type: boolean
         bindings:
           description: Array of bindings used for the mobile test.
           items:
-            $ref: '#/components/schemas/SyntheticsMobileTestBinding'
+            $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBinding'
           type: array
         ci:
-          $ref: '#/components/schemas/SyntheticsMobileTestCiOptions'
+          $ref: '#/components/schemas/SyntheticsTestCiOptions'
         defaultStepTimeout:
-          description: The `SyntheticsMobileTestOptions` `defaultStepTimeout`.
+          description: The default timeout for steps in the test (in seconds).
           format: int32
           maximum: 300
           minimum: 1
@@ -16404,11 +16396,13 @@ components:
         device_ids:
           description: For mobile test, array with the different device IDs used to
             run the test.
+          example:
+          - synthetics:mobile:device:apple_ipad_10th_gen_2022_ios_16
           items:
-            $ref: '#/components/schemas/SyntheticsMobileDeviceID'
+            $ref: '#/components/schemas/SyntheticsDeviceID'
           type: array
         disableAutoAcceptAlert:
-          description: The `SyntheticsMobileTestOptions` `disableAutoAcceptAlert`.
+          description: A boolean to disable auto accepting alerts.
           type: boolean
         min_failure_duration:
           description: Minimum amount of time in failure required to trigger an alert.
@@ -16423,7 +16417,7 @@ components:
             all monitor dashboard widgets and SLOs.
           type: string
         monitor_options:
-          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptions'
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptions'
         monitor_priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int32
@@ -16431,7 +16425,7 @@ components:
           minimum: 1
           type: integer
         noScreenshot:
-          description: The `SyntheticsMobileTestOptions` `noScreenshot`.
+          description: A boolean set to not take a screenshot for the step.
           type: boolean
         restricted_roles:
           $ref: '#/components/schemas/SyntheticsRestrictedRoles'
@@ -16441,54 +16435,23 @@ components:
           $ref: '#/components/schemas/SyntheticsTestOptionsScheduling'
         tick_every:
           description: The frequency at which to run the Synthetic test (in seconds).
+          example: 300
           format: int64
           maximum: 604800
           minimum: 300
           type: integer
         verbosity:
-          description: The `SyntheticsMobileTestOptions` `verbosity`.
+          description: The level of verbosity for the mobile test. This field can
+            not be set by a user.
           format: int32
           maximum: 5
           minimum: 0
           type: integer
+      required:
+      - device_ids
+      - tick_every
+      - mobileApplication
       type: object
-    SyntheticsMobileTestOptionsMonitorOptions:
-      description: 'Object containing the options for a mobile Synthetic test as a
-        monitor
-
-        (for example, renotification).'
-      properties:
-        escalation_message:
-          description: Message to include in the escalation notification.
-          type: string
-        notification_preset_name:
-          $ref: '#/components/schemas/SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName'
-        renotify_interval:
-          description: 'Time interval before renotifying if the test is still failing
-
-            (in minutes).'
-          format: int64
-          minimum: 0
-          type: integer
-        renotify_occurrences:
-          description: The `SyntheticsMobileTestOptionsMonitorOptions` `renotify_occurrences`.
-          format: int64
-          type: integer
-      type: object
-    SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName:
-      description: The definition of `SyntheticsMobileTestOptionsMonitorOptionsNotificationPresetName`
-        object.
-      enum:
-      - show_all
-      - hide_all
-      - hide_query
-      - hide_handles
-      type: string
-      x-enum-varnames:
-      - SHOW_ALL
-      - HIDE_ALL
-      - HIDE_QUERY
-      - HIDE_HANDLES
     SyntheticsMobileTestType:
       default: mobile
       description: Type of the Synthetic test, `mobile`.
@@ -16503,14 +16466,20 @@ components:
       properties:
         applicationId:
           description: Application ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaaa
           maxLength: 1500
           type: string
         referenceId:
           description: Reference ID of the mobile application.
+          example: 00000000-0000-0000-0000-aaaaaaaaaaab
           maxLength: 1500
           type: string
         referenceType:
           $ref: '#/components/schemas/SyntheticsMobileTestsMobileApplicationReferenceType'
+      required:
+      - applicationId
+      - referenceId
+      - referenceType
       type: object
     SyntheticsMobileTestsMobileApplicationReferenceType:
       description: Reference type for the mobile application for a mobile synthetics
@@ -16518,6 +16487,7 @@ components:
       enum:
       - latest
       - version
+      example: latest
       type: string
       x-enum-varnames:
       - LATEST
@@ -16800,23 +16770,18 @@ components:
           description: Subject Alternative Name associated with the certificate.
           type: string
       type: object
-    SyntheticsStatus:
-      description: Determines whether or not the batch has passed, failed, or is in
-        progress.
-      enum:
-      - passed
-      - skipped
-      - failed
-      type: string
-      x-enum-varnames:
-      - PASSED
-      - skipped
-      - failed
     SyntheticsStep:
       description: The steps used in a Synthetic browser test.
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
+          type: boolean
+        alwaysExecute:
+          description: A boolean set to always execute this step even if the previous
+            step failed or was skipped.
+          type: boolean
+        exitIfSucceed:
+          description: A boolean set to exit the test if the step succeeds.
           type: boolean
         isCritical:
           description: A boolean to use in addition to `allowFailure` to determine
@@ -16826,11 +16791,14 @@ components:
           description: The name of the step.
           type: string
         noScreenshot:
-          description: A boolean set to not take a screenshot for the step.
+          description: A boolean set to skip taking a screenshot for the step.
           type: boolean
         params:
           description: The parameters of the step.
           type: object
+        public_id:
+          description: The public ID of the step.
+          type: string
         timeout:
           description: The time before declaring a step failed.
           format: int64
@@ -16841,6 +16809,9 @@ components:
     SyntheticsStepDetail:
       description: Object describing a step for a Synthetic test.
       properties:
+        allowFailure:
+          description: Whether or not the step was allowed to fail.
+          type: boolean
         browserErrors:
           description: Array of errors collected for a browser test.
           items:
@@ -16858,6 +16829,8 @@ components:
         error:
           description: Error returned by the test.
           type: string
+        failure:
+          $ref: '#/components/schemas/SyntheticsBrowserTestResultFailure'
         playingTab:
           $ref: '#/components/schemas/SyntheticsPlayingTab'
         screenshotBucketKey:
@@ -16927,6 +16900,7 @@ components:
       - assertFromJavascript
       - assertPageContains
       - assertPageLacks
+      - assertRequests
       - click
       - extractFromJavascript
       - extractVariable
@@ -16955,6 +16929,7 @@ components:
       - ASSERT_FROM_JAVASCRIPT
       - ASSERT_PAGE_CONTAINS
       - ASSERT_PAGE_LACKS
+      - ASSERT_REQUESTS
       - CLICK
       - EXTRACT_FROM_JAVASCRIPT
       - EXTRACT_VARIABLE
@@ -16986,6 +16961,8 @@ components:
       properties:
         executionRule:
           $ref: '#/components/schemas/SyntheticsTestExecutionRule'
+      required:
+      - executionRule
       type: object
     SyntheticsTestConfig:
       description: Configuration object for a Synthetic test.
@@ -17092,10 +17069,12 @@ components:
       enum:
       - api
       - browser
+      - mobile
       type: string
       x-enum-varnames:
       - API
       - BROWSER
+      - MOBILE
     SyntheticsTestExecutionRule:
       description: Execution rule for a Synthetic test.
       enum:
@@ -17245,6 +17224,11 @@ components:
 
         (for example, renotification).'
       properties:
+        escalation_message:
+          description: Message to include in the escalation notification.
+          type: string
+        notification_preset_name:
+          $ref: '#/components/schemas/SyntheticsTestOptionsMonitorOptionsNotificationPresetName'
         renotify_interval:
           description: 'Time interval before renotifying if the test is still failing
 
@@ -17252,7 +17236,24 @@ components:
           format: int64
           minimum: 0
           type: integer
+        renotify_occurrences:
+          description: The number of times to renotify if the test is still failing.
+          format: int64
+          type: integer
       type: object
+    SyntheticsTestOptionsMonitorOptionsNotificationPresetName:
+      description: The name of the preset for the notification for the monitor.
+      enum:
+      - show_all
+      - hide_all
+      - hide_query
+      - hide_handles
+      type: string
+      x-enum-varnames:
+      - SHOW_ALL
+      - HIDE_ALL
+      - HIDE_QUERY
+      - HIDE_HANDLES
     SyntheticsTestOptionsRetry:
       description: Object describing the retry strategy to apply to a Synthetic test.
       properties:
@@ -17291,6 +17292,9 @@ components:
           description: Timezone in which the timeframe is based.
           example: America/New_York
           type: string
+      required:
+      - timeframes
+      - timezone
       type: object
     SyntheticsTestOptionsSchedulingTimeframe:
       description: Object describing a timeframe.
@@ -17310,6 +17314,10 @@ components:
           description: The hour of the day on which scheduling ends.
           example: '16:00'
           type: string
+      required:
+      - day
+      - from
+      - to
       type: object
     SyntheticsTestPauseStatus:
       description: 'Define whether you want to start (`live`) or pause (`paused`)
@@ -17546,6 +17554,30 @@ components:
       description: String Port number to use when performing the test. Supports templated
         variables.
       type: string
+    SyntheticsTestRestrictionPolicyBinding:
+      description: Objects describing the binding used for a mobile test.
+      properties:
+        principals:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingPrincipals'
+        relation:
+          $ref: '#/components/schemas/SyntheticsTestRestrictionPolicyBindingRelation'
+      type: object
+    SyntheticsTestRestrictionPolicyBindingPrincipals:
+      description: List of principals for a mobile test binding.
+      items:
+        description: A principal for a mobile test binding.
+        maxLength: 1500
+        type: string
+      type: array
+    SyntheticsTestRestrictionPolicyBindingRelation:
+      description: The type of relation for the binding.
+      enum:
+      - editor
+      - viewer
+      type: string
+      x-enum-varnames:
+      - EDITOR
+      - VIEWER
     SyntheticsTestUptime:
       description: Object containing the uptime for a Synthetic test ID.
       properties:
@@ -17611,7 +17643,7 @@ components:
       description: Object describing the Synthetic tests to trigger.
       properties:
         tests:
-          description: Individual Synthetic test.
+          description: List of Synthetic tests.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerTest'
           type: array
@@ -17771,11 +17803,13 @@ components:
       enum:
       - number
       - bar
+      - trend
       example: number
       type: string
       x-enum-varnames:
       - NUMBER
       - BAR
+      - TREND
     TableWidgetDefinition:
       description: The table visualization is available on timeboards and screenboards.
         It displays columns of metrics grouped by tag key.
@@ -20201,7 +20235,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current date for all organizations.
           format: int64
           type: integer
         aws_host_top99p:
@@ -20296,6 +20331,21 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -20416,6 +20466,11 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for all organizations.
@@ -20440,9 +20495,101 @@ components:
             over all hours in the current date for all organizations.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -20609,8 +20756,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -20657,7 +20805,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for all organizations.
+            within the current date for all organizations.
           format: int64
           type: integer
         rum_browser_and_mobile_session_count:
@@ -20738,6 +20886,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for all organizations (To be introduced
@@ -20746,8 +20899,33 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current date for all organizations (To be introduced
+            all hours within the current date for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -20941,7 +21119,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
-          description: The average profiled task count for Fargate Profiling.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for the given org.
           format: int64
           type: integer
         aws_host_top99p:
@@ -21036,6 +21215,21 @@ components:
         cloud_siem_events_sum:
           description: Shows the sum of all Cloud Security Information and Event Management
             events over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sa_committers_hwm:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        code_security_host_top99p:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         container_avg:
@@ -21166,6 +21360,11 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cws_fargate_task_avg:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current date for the given org.
+          format: int64
+          type: integer
         cws_host_top99p:
           description: Shows the 99th percentile of all Cloud Workload Security hosts
             over all hours in the current date for the given org.
@@ -21186,9 +21385,101 @@ components:
             queries over all hours in the current month for the given org.
           format: int64
           type: integer
+        eph_infra_host_agent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_aws_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_azure_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_ent_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_pro_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_error_events_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current date for the given org.
+          format: int64
+          type: integer
         error_tracking_events_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current date for the given org.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for the given org.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for the given org.
           format: int64
           type: integer
         fargate_tasks_count_avg:
@@ -21358,8 +21649,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current date for the given org.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            date for the given org.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_sum:
@@ -21401,7 +21693,7 @@ components:
           type: integer
         profiling_host_top99p:
           description: Shows the 99th percentile of all profiled hosts over all hours
-            in the current date for the given org.
+            within the current date for the given org.
           format: int64
           type: integer
         public_id:
@@ -21488,6 +21780,11 @@ components:
             1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current date for the given org (To be introduced
@@ -21498,6 +21795,31 @@ components:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
             all hours in the current date for the given org (To be introduced on October
             1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_unity_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current date for the given org.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current date for the given org.
           format: int64
           type: integer
         rum_replay_session_count_sum:
@@ -21685,8 +22007,8 @@ components:
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
-          description: Shows the average of all profiled Fargate tasks over all hours
-            in the current month for all organizations.
+          description: The average total count for Fargate Container Profiler over
+            all hours in the current month for all organizations.
           format: int64
           type: integer
         aws_host_top99p_sum:
@@ -21789,6 +22111,21 @@ components:
             events over all hours in the current month for all organizations.
           format: int64
           type: integer
+        code_analysis_sa_committers_hwm_sum:
+          description: Shows the high-water mark of all Static Analysis committers
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_analysis_sca_committers_hwm_sum:
+          description: Shows the high-water mark of all static Software Composition
+            Analysis committers over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        code_security_host_top99p_sum:
+          description: Shows the 99th percentile of all Code Security hosts over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current month for all organizations.
@@ -21880,9 +22217,8 @@ components:
           format: int64
           type: integer
         cspm_container_hwm_sum:
-          description: Shows the sum of the the high-water marks of Cloud Security
-            Management Pro containers over all hours in the current month for all
-            organizations.
+          description: Shows the sum of the high-water marks of Cloud Security Management
+            Pro containers over all hours in the current month for all organizations.
           format: int64
           type: integer
         cspm_gcp_host_top99p_sum:
@@ -21910,9 +22246,14 @@ components:
             hours in the current month for all organizations.
           format: int64
           type: integer
-        cws_containers_avg_sum:
+        cws_container_avg_sum:
           description: Shows the average of all distinct Cloud Workload Security containers
             over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        cws_fargate_task_avg_sum:
+          description: Shows the average of all distinct Cloud Workload Security Fargate
+            tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         cws_host_top99p_sum:
@@ -21939,9 +22280,101 @@ components:
           description: Shows the last date of usage in the current month for all organizations.
           format: date-time
           type: string
+        eph_infra_host_agent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with the
+            Datadog Agent over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_alibaba_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Alibaba
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_aws_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on AWS
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_azure_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Azure
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_ent_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Enterprise
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_gcp_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on GCP
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_heroku_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts on Heroku
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_aas_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            Azure App Services over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_only_vsphere_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts with only
+            vSphere over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_agg_sum:
+          description: Shows the sum of all ephemeral hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_opentelemetry_apm_agg_sum:
+          description: Shows the sum of all ephemeral APM hosts reported by the Datadog
+            exporter for the OpenTelemetry Collector over all hours in the current
+            month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_pro_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        eph_infra_host_proplus_agg_sum:
+          description: Shows the sum of all ephemeral infrastructure hosts for Pro
+            Plus over all hours in the current month for all organizations.
+          format: int64
+          type: integer
+        error_tracking_apm_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking APM error events over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        error_tracking_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking error events over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
         error_tracking_events_agg_sum:
           description: Shows the sum of all Error Tracking events over all hours in
             the current months for all organizations.
+          format: int64
+          type: integer
+        error_tracking_rum_error_events_agg_sum:
+          description: Shows the sum of all Error Tracking RUM error events over all
+            hours in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_avg_sum:
+          description: The average number of Profiling Fargate tasks over all hours
+            in the current month for all organizations.
+          format: int64
+          type: integer
+        fargate_container_profiler_profiling_fargate_eks_avg_sum:
+          description: The average number of Profiling Fargate Elastic Kubernetes
+            Service tasks over all hours in the current month for all organizations.
           format: int64
           type: integer
         fargate_tasks_count_avg_sum:
@@ -22011,8 +22444,8 @@ components:
           format: int64
           type: integer
         incident_management_monthly_active_users_hwm_sum:
-          description: Shows sum of the the high-water marks of incident management
-            monthly active users in the current month for all organizations.
+          description: Shows sum of the high-water marks of incident management monthly
+            active users in the current month for all organizations.
           format: int64
           type: integer
         indexed_events_count_agg_sum:
@@ -22043,8 +22476,8 @@ components:
           format: int64
           type: integer
         last_updated:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
+          description: Shows the most recent hour in the current month for all organizations
+            for which all usages were calculated.
           format: date-time
           type: string
         live_indexed_events_agg_sum:
@@ -22130,8 +22563,9 @@ components:
           format: int64
           type: integer
         npm_host_top99p_sum:
-          description: Shows the 99th percentile of all distinct Networks hosts over
-            all hours in the current month for all organizations.
+          description: Shows the 99th percentile of all distinct Cloud Network Monitoring
+            hosts (formerly known as Network hosts) over all hours in the current
+            month for all organizations.
           format: int64
           type: integer
         observability_pipelines_bytes_processed_agg_sum:
@@ -22272,6 +22706,11 @@ components:
             October 1st, 2024).
           format: int64
           type: integer
+        rum_mobile_lite_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
         rum_mobile_lite_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on React Native
             over all hours in the current month for all organizations (To be introduced
@@ -22280,8 +22719,33 @@ components:
           type: integer
         rum_mobile_lite_session_count_roku_agg_sum:
           description: Shows the sum of all mobile RUM lite sessions on Roku over
-            all hours in the current month for all organizations (To be introduced
+            all hours within the current month for all organizations (To be introduced
             on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_unity_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Unity over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Android
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on iOS over
+            all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_kotlinmultiplatform_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on Kotlin Multiplatform
+            over all hours within the current month for all organizations.
+          format: int64
+          type: integer
+        rum_mobile_replay_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM replay sessions on React Native
+            over all hours within the current month for all organizations.
           format: int64
           type: integer
         rum_replay_session_count_agg_sum:
@@ -22672,8 +23136,31 @@ components:
     Version:
       description: Version of the updated signal. If server side version is higher,
         update will be rejected.
+      example: 0
       format: int64
       type: integer
+    ViewingPreferences:
+      description: The viewing preferences for a shared dashboard.
+      properties:
+        high_density:
+          description: Whether the widgets on the shared dashboard should be displayed
+            with high density.
+          type: boolean
+        theme:
+          $ref: '#/components/schemas/ViewingPreferencesTheme'
+      type: object
+    ViewingPreferencesTheme:
+      description: The theme of the shared dashboard view. "system" follows your system's
+        default viewing theme.
+      enum:
+      - system
+      - light
+      - dark
+      type: string
+      x-enum-varnames:
+      - SYSTEM
+      - LIGHT
+      - DARK
     WebhooksIntegration:
       description: Datadog-Webhooks integration.
       properties:
@@ -23093,6 +23580,8 @@ components:
           type: string
         cell_display_mode:
           $ref: '#/components/schemas/TableWidgetCellDisplayMode'
+        cell_display_mode_options:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptions'
         conditional_formats:
           description: List of conditional formats.
           items:
@@ -23104,11 +23593,44 @@ components:
           type: string
         limit:
           $ref: '#/components/schemas/WidgetFormulaLimit'
+        number_format:
+          $ref: '#/components/schemas/WidgetNumberFormat'
         style:
           $ref: '#/components/schemas/WidgetFormulaStyle'
       required:
       - formula
       type: object
+    WidgetFormulaCellDisplayModeOptions:
+      description: Cell display mode options for the widget formula. (only if `cell_display_mode`
+        is set to `trend`).
+      properties:
+        trend_type:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsTrendType'
+        y_scale:
+          $ref: '#/components/schemas/WidgetFormulaCellDisplayModeOptionsYScale'
+      type: object
+    WidgetFormulaCellDisplayModeOptionsTrendType:
+      description: Trend type for the cell display mode options.
+      enum:
+      - area
+      - line
+      - bars
+      example: area
+      type: string
+      x-enum-varnames:
+      - AREA
+      - LINE
+      - BARS
+    WidgetFormulaCellDisplayModeOptionsYScale:
+      description: Y scale for the cell display mode options.
+      enum:
+      - shared
+      - independent
+      example: shared
+      type: string
+      x-enum-varnames:
+      - SHARED
+      - INDEPENDENT
     WidgetFormulaLimit:
       description: Options for limiting results returned.
       properties:
@@ -23523,6 +24045,14 @@ components:
       x-enum-varnames:
       - HOST
       - CONTAINER
+    WidgetNumberFormat:
+      description: Number format options for the widget.
+      properties:
+        unit:
+          $ref: '#/components/schemas/NumberFormatUnit'
+        unit_scale:
+          $ref: '#/components/schemas/NumberFormatUnitScale'
+      type: object
     WidgetOrderBy:
       description: What to order by.
       enum:
@@ -23769,12 +24299,18 @@ components:
             continuous_profiler_pgo_read: Read and query Continuous Profiler data
               for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
+            dashboards_embed_share: Create, modify, and delete shared dashboards with
+              share type 'embed'.
+            dashboards_invite_share: Create, modify, and delete shared dashboards
+              with share type 'invite'.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
             data_scanner_read: View Data Scanner configurations.
             data_scanner_write: Edit Data Scanner configurations.
+            embeddable_graphs_share: Generate public links to share embeddable graphs
+              externally.
             events_read: Read Events data.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
@@ -23793,9 +24329,15 @@ components:
               configuring allowed login methods, creating child orgs, subscribing
               & unsubscribing from apps in the marketplace, and enabling & disabling
               Remote Configuration for the entire organization.
+            security_comments_read: Read comments of vulnerabilities.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
-            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_read: View a list of findings that include
+              both misconfigurations and identity risks.
+            security_monitoring_notification_profiles_read: View Rule Security Notification
+              rules.
+            security_monitoring_notification_profiles_write: Create, edit, and delete
+              Security Notification rules.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
@@ -23823,6 +24365,7 @@ components:
               Access Manage permission.
             teams_read: Read Teams data. A User with this permission can view Team
               names, metadata, and which Users are on each Team.
+            test_optimization_read: View Test Optimization.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -23860,6 +24403,10 @@ components:
       type: apiKey
       x-auth-id-alias: appKeyAuth
       x-env-name: DD_APP_KEY
+    bearerAuth:
+      scheme: bearer
+      type: http
+      x-env-name: DD_BEARER_TOKEN
 info:
   contact:
     email: support@datadoghq.com
@@ -26349,7 +26896,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         operationId: TODO
         parameters: []
@@ -26434,7 +26981,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/embed/{embed_id}/revoke:
@@ -26476,7 +27023,7 @@ paths:
       x-permission:
         operator: OR
         permissions:
-        - dashboards_public_share
+        - embeddable_graphs_share
       x-undo:
         type: safe
   /api/v1/graph/snapshot:
@@ -27882,10 +28429,13 @@ paths:
               \"TestingRh2nx664kUy5dIApvM54T4AtO\",\n  \"container_app_filters\":
               \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
               true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"metrics_enabled\": true,\n  \"metrics_enabled_default\": true,\n
               \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
-              }}\",\n  \"resource_collection_enabled\": true,\n  \"metrics_config\":
-              {\n    \"excluded_resource_providers\": [\"Microsoft.Sql\", \"Microsoft.Cdn\"]\n
-              \ },\n  \"tenant_name\": \"{{ uuid }}\"\n}"
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"resource_provider_configs\":
+              [\n    {\n      \"namespace\": \"Microsoft.Compute\",\n      \"metrics_enabled\":
+              false\n    },\n    {\n      \"namespace\": \"Microsoft.Web\",\n      \"metrics_enabled\":
+              false\n    }\n  ],\n  \"tenant_name\": \"{{ uuid }}\",\n  \"usage_metrics_enabled\":
+              true\n}"
           step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-permission:
@@ -28125,8 +28675,8 @@ paths:
               \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
               }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
               \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
-              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
-              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"is_resource_change_collection_enabled\":
+              true,\n  \"private_key\": \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
               \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
               true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
               \ \"type\": \"service_account\"\n}"
@@ -29219,8 +29769,9 @@ paths:
       - Logs Indexes
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29298,8 +29849,9 @@ paths:
       - Logs Indexes
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29348,6 +29900,46 @@ paths:
         parameters: []
         type: unsafe
   /api/v1/logs/config/indexes/{name}:
+    delete:
+      description: 'Delete an existing index from your organization. Index deletions
+        are permanent and cannot be reverted.
+
+        You cannot recreate an index with the same name as deleted ones.'
+      operationId: DeleteLogsIndex
+      parameters:
+      - description: Name of the log index.
+        in: path
+        name: name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogsAPIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an index
+      tags:
+      - Logs Indexes
+      x-menu-order: 5
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_modify_indexes
+      x-undo:
+        type: idempotent
     get:
       description: Get one log index from your organization. This endpoint takes no
         JSON arguments.
@@ -29384,6 +29976,10 @@ paths:
       tags:
       - Logs Indexes
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29464,8 +30060,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 1
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29552,8 +30149,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 3
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     post:
@@ -29680,8 +30278,9 @@ paths:
       - Logs Pipelines
       x-menu-order: 5
       x-permission:
-        operator: OPEN
-        permissions: []
+        operator: OR
+        permissions:
+        - logs_read_config
       x-undo:
         type: safe
     put:
@@ -29908,7 +30507,7 @@ paths:
         type: idempotent
   /api/v1/monitor:
     get:
-      description: Get details about the specified monitor from your organization.
+      description: Get all monitors from your organization.
       operationId: ListMonitors
       parameters:
       - description: 'When specified, shows additional information about the group
@@ -29991,6 +30590,7 @@ paths:
           content:
             application/json:
               schema:
+                description: An array of monitor objects.
                 items:
                   $ref: '#/components/schemas/Monitor'
                 type: array
@@ -30014,7 +30614,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all monitor details
+      summary: Get all monitors
       tags:
       - Monitors
       x-menu-order: 2
@@ -30028,393 +30628,150 @@ paths:
       x-undo:
         type: safe
     post:
-      description: 'Create a monitor using the specified options.
-
-
-        #### Monitor Types
-
-
-        The type of monitor chosen from:
-
-
-        - anomaly: `query alert`
-
-        - APM: `query alert` or `trace-analytics alert`
-
-        - composite: `composite`
-
-        - custom: `service check`
-
-        - forecast: `query alert`
-
-        - host: `service check`
-
-        - integration: `query alert` or `service check`
-
-        - live process: `process alert`
-
-        - logs: `log alert`
-
-        - metric: `query alert`
-
-        - network: `service check`
-
-        - outlier: `query alert`
-
-        - process: `service check`
-
-        - rum: `rum alert`
-
-        - SLO: `slo alert`
-
-        - watchdog: `event-v2 alert`
-
-        - event-v2: `event-v2 alert`
-
-        - audit: `audit alert`
-
-        - error-tracking: `error-tracking alert`
-
-        - database-monitoring: `database-monitoring alert`
-
-        - network-performance: `network-performance alert`
-
-        - cloud cost: `cost alert`
-
-
-        **Notes**:
-
-        - Synthetic monitors are created through the Synthetics API. See the [Synthetics
-        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
-        more information.
-
-        - Log monitors require an unscoped App Key.
-
-
-        #### Query Types
-
-
-        ##### Metric Alert Query
-
-
-        Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator
-        #`
-
-
-        - `time_aggr`: avg, sum, max, min, change, or pct_change
-
-        - `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the
-        monitor type) or `last_#h`(with `#` between 1 and 168 depending on the monitor
-        type) or `last_1d`, or `last_1w`
-
-        - `space_aggr`: avg, sum, min, or max
-
-        - `tags`: one or more tags (comma-separated), or *
-
-        - `key`: a ''key'' in key:value tag syntax; defines a separate alert for each
-        tag in the group (multi-alert)
-
-        - `operator`: <, <=, >, >=, ==, or !=
-
-        - `#`: an integer or decimal number used to set the threshold
-
-
-        If you are using the `_change_` or `_pct_change_` time aggregator, instead
-        use `change_aggr(time_aggr(time_window),
-
-        timeshift):space_aggr:metric{tags} [by {key}] operator #` with:
-
-
-        - `change_aggr` change, pct_change
-
-        - `time_aggr` avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)
-
-        - `time_window` last\_#m (between 1 and 2880 depending on the monitor type),
-        last\_#h (between 1 and 48 depending on the monitor type), or last_#d (1 or
-        2)
-
-        - `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago
-
-
-        Use this to create an outlier monitor using the following query:
-
-        `avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data} by {host},
-        ''dbscan'', 7) > 0`
-
-
-        ##### Service Check Query
-
-
-        Example: `"check".over(tags).last(count).by(group).count_by_status()`
-
-
-        - `check` name of the check, for example `datadog.agent.up`
-
-        - `tags` one or more quoted tags (comma-separated), or "*". for example: `.over("env:prod",
-        "role:db")`; `over` cannot be blank.
-
-        - `count` must be at greater than or equal to your max threshold (defined
-        in the `options`). It is limited to 100.
-
-        For example, if you''ve specified to notify on 1 critical, 3 ok, and 2 warn
-        statuses, `count` should be at least 3.
-
-        - `group` must be specified for check monitors. Per-check grouping is already
-        explicitly known for some service checks.
-
-        For example, Postgres integration monitors are tagged by `db`, `host`, and
-        `port`, and Network monitors by `host`, `instance`, and `url`. See [Service
-        Checks](https://docs.datadoghq.com/api/latest/service-checks/) documentation
-        for more information.
-
-
-        ##### Event Alert Query
-
-
-        **Note:** The Event Alert Query has been replaced by the Event V2 Alert Query.
-        For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
-
-
-        ##### Event V2 Alert Query
-
-
-        Example: `events(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Process Alert Query
-
-
-        Example: `processes(search).over(tags).rollup(''count'').last(timeframe) operator
-        #`
-
-
-        - `search` free text search string for querying processes.
-
-        Matching processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
-        page.
-
-        - `tags` one or more tags (comma-separated)
-
-        - `timeframe` the timeframe to roll up the counts. Examples: 10m, 4h. Supported
-        timeframes: s, m, h and d
-
-        - `operator` <, <=, >, >=, ==, or !=
-
-        - `#` an integer or decimal number used to set the threshold
-
-
-        ##### Logs Alert Query
-
-
-        Example: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `index_name` For multi-index organizations, the log index in which the request
-        is performed.
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Composite Query
-
-
-        Example: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite
-        monitors
-
-
-        * `name` [*required*, *default* = **dynamic, based on query**]: The name of
-        the alert.
-
-        * `message` [*required*, *default* = **dynamic, based on query**]: A message
-        to include with notifications for this monitor.
-
-        Email notifications can be sent to specific users by using the same ''@username''
-        notation as events.
-
-        * `tags` [*optional*, *default* = **empty list**]: A list of tags to associate
-        with your monitor.
-
-        When getting all monitor details via the API, use the `monitor_tags` argument
-        to filter results by these tags.
-
-        It is only available via the API and isn''t visible or editable in the Datadog
-        UI.
-
-
-        ##### SLO Alert Query
-
-
-        Example: `error_budget("slo_id").over("time_window") operator #`
-
-
-        - `slo_id`: The alphanumeric SLO ID of the SLO you are configuring the alert
-        for.
-
-        - `time_window`: The time window of the SLO target you wish to alert on. Valid
-        options: `7d`, `30d`, `90d`.
-
-        - `operator`: `>=` or `>`
-
-
-        ##### Audit Alert Query
-
-
-        Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### CI Pipelines Alert Query
-
-
-        Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### CI Tests Alert Query
-
-
-        Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        ##### Error Tracking Alert Query
-
-
-        Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-        Example(APM Traces): `error-tracking-traces(query).rollup(rollup_method[,
-        measure]).last(time_window) operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **Database Monitoring Alert Query**
-
-
-        Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **Network Performance Alert Query**
-
-
-        Example: `network-performance(query).rollup(rollup_method[, measure]).last(time_window)
-        operator #`
-
-
-        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
-
-        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
-        `cardinality`.
-
-        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
-        or the facet name you want to use.
-
-        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
-
-        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
-
-        - `#` an integer or decimal number used to set the threshold.'
+      description: "Create a monitor using the specified options.\n\n#### Monitor
+        Types\n\nThe type of monitor chosen from:\n\n- anomaly: `query alert`\n- APM:
+        `query alert` or `trace-analytics alert`\n- composite: `composite`\n- custom:
+        `service check`\n- forecast: `query alert`\n- host: `service check`\n- integration:
+        `query alert` or `service check`\n- live process: `process alert`\n- logs:
+        `log alert`\n- metric: `query alert`\n- network: `service check`\n- outlier:
+        `query alert`\n- process: `service check`\n- rum: `rum alert`\n- SLO: `slo
+        alert`\n- watchdog: `event-v2 alert`\n- event-v2: `event-v2 alert`\n- audit:
+        `audit alert`\n- error-tracking: `error-tracking alert`\n- database-monitoring:
+        `database-monitoring alert`\n- network-performance: `network-performance alert`\n-
+        cloud cost: `cost alert`\n\n**Notes**:\n- Synthetic monitors are created through
+        the Synthetics API. See the [Synthetics API](https://docs.datadoghq.com/api/latest/synthetics/)
+        documentation for more information.\n- Log monitors require an unscoped App
+        Key.\n\n#### Query Types\n\n##### Metric Alert Query\n\nExample: `time_aggr(time_window):space_aggr:metric{tags}
+        [by {key}] operator #`\n\n- `time_aggr`: avg, sum, max, min, change, or pct_change\n-
+        `time_window`: `last_#m` (with `#` between 1 and 10080 depending on the monitor
+        type) or `last_#h`(with `#` between 1 and 168 depending on the monitor type)
+        or `last_1d`, or `last_1w`\n- `space_aggr`: avg, sum, min, or max\n- `tags`:
+        one or more tags (comma-separated), or *\n- `key`: a 'key' in key:value tag
+        syntax; defines a separate alert for each tag in the group (multi-alert)\n-
+        `operator`: <, <=, >, >=, ==, or !=\n- `#`: an integer or decimal number used
+        to set the threshold\n\nIf you are using the `_change_` or `_pct_change_`
+        time aggregator, instead use `change_aggr(time_aggr(time_window),\ntimeshift):space_aggr:metric{tags}
+        [by {key}] operator #` with:\n\n- `change_aggr` change, pct_change\n- `time_aggr`
+        avg, sum, max, min [Learn more](https://docs.datadoghq.com/monitors/create/types/#define-the-conditions)\n-
+        `time_window` last\\_#m (between 1 and 2880 depending on the monitor type),
+        last\\_#h (between 1 and 48 depending on the monitor type), or last_#d (1
+        or 2)\n- `timeshift` #m_ago (5, 10, 15, or 30), #h_ago (1, 2, or 4), or 1d_ago\n\nUse
+        this to create an outlier monitor using the following query:\n`avg(last_30m):outliers(avg:system.cpu.user{role:es-events-data}
+        by {host}, 'dbscan', 7) > 0`\n\n##### Service Check Query\n\nExample: `\"check\".over(tags).last(count).by(group).count_by_status()`\n\n-
+        `check` name of the check, for example `datadog.agent.up`\n- `tags` one or
+        more quoted tags (comma-separated), or \"*\". for example: `.over(\"env:prod\",
+        \"role:db\")`; `over` cannot be blank.\n- `count` must be at greater than
+        or equal to your max threshold (defined in the `options`). It is limited to
+        100.\nFor example, if you've specified to notify on 1 critical, 3 ok, and
+        2 warn statuses, `count` should be at least 3.\n- `group` must be specified
+        for check monitors. Per-check grouping is already explicitly known for some
+        service checks.\nFor example, Postgres integration monitors are tagged by
+        `db`, `host`, and `port`, and Network monitors by `host`, `instance`, and
+        `url`. See [Service Checks](https://docs.datadoghq.com/api/latest/service-checks/)
+        documentation for more information.\n\n##### Event Alert Query\n\n**Note:**
+        The Event Alert Query has been replaced by the Event V2 Alert Query. For more
+        information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).\n\n#####
+        Event V2 Alert Query\n\nExample: `events(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### Process
+        Alert Query\n\nExample: `processes(search).over(tags).rollup('count').last(timeframe)
+        operator #`\n\n- `search` free text search string for querying processes.\nMatching
+        processes match results on the [Live Processes](https://docs.datadoghq.com/infrastructure/process/?tab=linuxwindows)
+        page.\n- `tags` one or more tags (comma-separated)\n- `timeframe` the timeframe
+        to roll up the counts. Examples: 10m, 4h. Supported timeframes: s, m, h and
+        d\n- `operator` <, <=, >, >=, ==, or !=\n- `#` an integer or decimal number
+        used to set the threshold\n\n##### Logs Alert Query\n\nExample: `logs(query).index(index_name).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `index_name` For multi-index organizations, the log index in which the request
+        is performed.\n- `rollup_method` The stats roll-up method - supports `count`,
+        `avg` and `cardinality`.\n- `measure` For `avg` and cardinality `rollup_method`
+        - specify the measure or the facet name you want to use.\n- `time_window`
+        #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`,
+        `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n#####
+        Composite Query\n\nExample: `12345 && 67890`, where `12345` and `67890` are
+        the IDs of non-composite monitors\n\n* `name` [*required*, *default* = **dynamic,
+        based on query**]: The name of the alert.\n* `message` [*required*, *default*
+        = **dynamic, based on query**]: A message to include with notifications for
+        this monitor.\nEmail notifications can be sent to specific users by using
+        the same '@username' notation as events.\n* `tags` [*optional*, *default*
+        = **empty list**]: A list of tags to associate with your monitor.\nWhen getting
+        all monitor details via the API, use the `monitor_tags` argument to filter
+        results by these tags.\nIt is only available via the API and isn't visible
+        or editable in the Datadog UI.\n\n##### SLO Alert Query\n\nExample: `error_budget(\"slo_id\").over(\"time_window\")
+        operator #`\n\n- `slo_id`: The alphanumeric SLO ID of the SLO you are configuring
+        the alert for.\n- `time_window`: The time window of the SLO target you wish
+        to alert on. Valid options: `7d`, `30d`, `90d`.\n- `operator`: `>=` or `>`\n\n#####
+        Audit Alert Query\n\nExample: `audits(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg` and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### CI Pipelines
+        Alert Query\n\nExample: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### CI Tests
+        Alert Query\n\nExample: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n##### Error
+        Tracking Alert Query\n\n\"New issue\" example: `error-tracking(query).source(issue_source).new().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`\n\"High impact issue\"
+        example: `error-tracking(query).source(issue_source).impact().rollup(rollup_method[,
+        measure]).by(group_by).last(time_window) operator #`\n\n- `query` The search
+        query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `issue_source` The issue source - supports `all`, `browser`, `mobile` and
+        `backend` and defaults to `all` if omitted.\n- `rollup_method` The stats roll-up
+        method - supports `count`, `avg`, and `cardinality` and defaults to `count`
+        if omitted.\n- `measure` For `avg` and cardinality `rollup_method` - specify
+        the measure or the facet name you want to use.\n- `group by` Comma-separated
+        list of attributes to group by - should contain at least `issue.id`.\n- `time_window`
+        #m (between 1 and 2880), #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`,
+        `>=`, `==`, or `!=`.\n- `#` an integer or decimal number used to set the threshold.\n\n**Database
+        Monitoring Alert Query**\n\nExample: `database-monitoring(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n**Network Performance
+        Alert Query**\n\nExample: `network-performance(query).rollup(rollup_method[,
+        measure]).last(time_window) operator #`\n\n- `query` The search query - following
+        the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `rollup_method` The stats roll-up method - supports `count`, `avg`, and `cardinality`.\n-
+        `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.\n- `time_window` #m (between 1 and 2880),
+        #h (between 1 and 48).\n- `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.\n-
+        `#` an integer or decimal number used to set the threshold.\n\n**Cost Alert
+        Query**\n\nExample: `formula(query).timeframe_type(time_window).function(parameter)
+        operator #`\n\n- `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).\n-
+        `timeframe_type` The timeframe type to evaluate the cost\n        - for `forecast`
+        supports `current`\n        - for `change`, `anomaly`, `threshold` supports
+        `last`\n- `time_window` - supports daily roll-up e.g. `7d`\n- `function` -
+        [optional, defaults to `threshold` monitor if omitted] supports `change`,
+        `anomaly`, `forecast`\n- `parameter` Specify the parameter of the type\n    -
+        for `change`:\n        - supports `relative`, `absolute`\n        - [optional]
+        supports `#`, where `#` is an integer or decimal number used to set the threshold\n
+        \   - for `anomaly`:\n        - supports `direction=both`, `direction=above`,
+        `direction=below`\n        - [optional] supports `threshold=#`, where `#`
+        is an integer or decimal number used to set the threshold\n- `operator`\n
+        \   - for `threshold` supports `<`, `<=`, `>`, `>=`, `==`, or `!=`\n    -
+        for `change` supports `>`, `<`\n    - for `anomaly` supports `>=`\n    - for
+        `forecast` supports `>`\n- `#` an integer or decimal number used to set the
+        threshold."
       operationId: CreateMonitor
       requestBody:
         content:
@@ -34590,6 +34947,10 @@ paths:
             name: body
           step: there is a valid "synthetics_mobile_test" in the system
       x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         operationId: DeleteTests
         parameters:
@@ -34641,6 +35002,10 @@ paths:
       tags:
       - Synthetics
       x-menu-order: 9
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: safe
     put:
@@ -34703,6 +35068,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_write
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -34840,6 +35209,10 @@ paths:
       - Synthetics
       x-codegen-request-body-name: body
       x-menu-order: 30
+      x-permission:
+        operator: OR
+        permissions:
+        - synthetics_read
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -38581,7 +38954,7 @@ servers:
   variables:
     site:
       default: datadoghq.com
-      description: The regional site for a Datadog customer.
+      description: The regional site for Datadog customers.
       enum:
       - datadoghq.com
       - us3.datadoghq.com
@@ -38656,17 +39029,27 @@ tags:
 
     scopes from alerting. Downtime settings, which can be scheduled with start and
 
-    end times, prevent all alerting related to specified Datadog tags.'
+    end times, prevent all alerting related to specified Datadog tags.
+
+
+    **Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).'
   name: Downtimes
 - description: Manage embeddable graphs through the API. See [Embeddable Graphs with
     Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/)
     for more information.
   name: Embeddable Graphs
 - description: 'The Event Management API allows you to programmatically post events
-    to the Events Explorer
+    to the Events Explorer and fetch events from the Events Explorer. See the [Event
+    Management page](https://docs.datadoghq.com/service_management/events/) for more
+    information.
 
-    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
-    for more information.'
+
+    **Update to Datadog monitor events `aggregation_key` starting March 1, 2025:**
+    The Datadog monitor events `aggregation_key` is unique to each Monitor ID. Starting
+    March 1st, this key will also include Monitor Group, making it unique per *Monitor
+    ID and Monitor Group*. If you''re using monitor events `aggregation_key` in dashboard
+    queries or the Event API, you must migrate to use `@monitor.id`. Reach out to
+    [support](https://www.datadoghq.com/support/) if you have any question.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -38695,9 +39078,7 @@ tags:
 - description: Search your logs and send them to your Datadog platform over HTTP.
     See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
-- description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
-
-    You need an API and application key with Admin rights to interact with this endpoint.'
+- description: Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/indexes/
@@ -38707,13 +39088,12 @@ tags:
     page](https://app.datadoghq.com/logs/pipelines)\n  for a list of the pipelines
     and processors currently configured in web UI.\n\n- Additional API-related information
     about processors can be found in the\n  [processors documentation](https://docs.datadoghq.com/logs/log_configuration/processors/?tab=api#lookup-processor).\n\n-
-    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\nThese
-    endpoints are only available for admin users.\nMake sure to use an application
-    key created by an admin.\n\n**Grok parsing rules may effect JSON output and require\nreturned
-    data to be configured before using in a request.**\nFor example, if you are using
-    the data returned from a\nrequest for another request body, and have a parsing
-    rule\nthat uses a regex pattern like `\\s` for spaces, you will\nneed to configure
-    all escaped spaces as `%{space}` to use\nin the body data."
+    For more information about Pipelines, see the\n  [pipeline documentation](https://docs.datadoghq.com/logs/log_configuration/pipelines).\n\n**Notes:**\n\n**Grok
+    parsing rules may effect JSON output and require\nreturned data to be configured
+    before using in a request.**\nFor example, if you are using the data returned
+    from a\nrequest for another request body, and have a parsing rule\nthat uses a
+    regex pattern like `\\s` for spaces, you will\nneed to configure all escaped spaces
+    as `%{space}` to use\nin the body data."
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/log_configuration
@@ -38733,7 +39113,10 @@ tags:
     notifies your team when a defined threshold has exceeded.
 
 
-    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).'
+    For more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/).
+
+
+    **Note:** `curl` commands require [url encoding](https://curl.se/docs/url-syntax.html).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/

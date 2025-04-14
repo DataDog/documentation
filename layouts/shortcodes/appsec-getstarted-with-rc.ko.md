@@ -1,0 +1,2 @@
+<div class="alert alert-info"><strong>1-클릭 활성화</strong><br>
+서비스가 <a href="/agent/guide/how_rc_works/#enabling-remote-configuration">활성화된 Remote Configuration 및 이를 지원하는 트레이싱 라이브러리 버전으로 Agent를</a>실행중이면, ASM Status 열의 <strong>Not Enabled</strong>위에 마우스 커서를 올려놓은 후 <strong>Enable ASM</strong>을 클릭합니다. <code>DD_APPSEC_ENABLED=true</code> 또는 <code>--enable-appsec</code> 플래그로 서비스를 다시 시작할 필요가 없습니다.</div><br>

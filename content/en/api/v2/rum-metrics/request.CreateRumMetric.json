@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "compute": {
+        "aggregation_type": "distribution",
+        "include_percentiles": true,
+        "path": "@duration"
+      },
+      "event_type": "session",
+      "filter": {
+        "query": "@service:web-ui"
+      },
+      "group_by": [
+        {
+          "path": "@browser.name",
+          "tag_name": "browser_name"
+        }
+      ],
+      "uniqueness": {
+        "when": "match"
+      }
+    },
+    "id": "rum.sessions.webui.count",
+    "type": "rum_metrics"
+  }
+}

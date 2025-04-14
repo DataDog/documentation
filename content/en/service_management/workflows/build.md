@@ -9,7 +9,7 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/actions/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 - link: "/security/cloud_security_management/workflows"
@@ -71,7 +71,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
 1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
 1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
@@ -166,6 +166,10 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 - **Format JSON**: Beautify your JSON.
 - **Export JSON**: Download the workflow.
 
+## Interact with workflows using the API
+
+To perform tasks using the API, see the [Workflow Automation API documentation][13].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -177,10 +181,12 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
-[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[6]: /service_management/workflows/actions/#testing-expressions-and-functions
 [7]: /getting_started/tagging/
 [8]: /glossary/#service
 [9]: /account_management/teams/
 [10]: https://datadoghq.slack.com/
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
+[13]: /api/latest/workflow-automation/
+[14]: /service_management/workflows/variables/#context-variables

@@ -31,7 +31,7 @@ The Datadog Agent package includes integrations officially supported by Datadog,
 
 ### Permissions
 
-The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
+The Integrations Manage permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
 
 ### API and application keys
 
@@ -128,10 +128,36 @@ Each integration has one of three status types:
 - **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
 - **Installed**: This integration is installed and configured on a host.
 - **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
+- **No Data Received**: Integration metric has not been detected in the last 24 hours. 
 
 ## Security practices
 
 For information on how Datadog handles your data, and other security considerations, see the [Security documentation][30].
+
+## Granular access control
+By default, access to integration resources (accounts, services, webhooks) is unrestricted. Granular access controls can be used to restrict the behavior of users, teams, roles, or your full organization at the integration resource level.
+
+**Note**: The restricted access option is only visible if the integration supports granular access control. To verify if granular access control is supported for an integration, review that [integration's documentation][46].
+{{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:70%;" >}}
+
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
+2. Click **Set Permissions**.
+3. By default, everyone in your org has full access. Click **Restrict Access**. 
+4. The dialog box updates to show that members of your organization have **Viewer** access by default.
+5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
+    **Note**: The [Integrations Manage][45] permission is also required to edit individual resources.  
+6. Click **Add**.
+7. The dialog box updates to show the updated permissions.
+8. Click **Save**. The integration page automatically refreshes with updated permissions. 
+
+**Note:** To maintain edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
+
+To restore general access to a integration resource with restricted access, follow the steps below:
+
+1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have general access restored.
+2. Click **Set Permissions**.
+3. Click **Restore Full Access**.
+4. Click **Save**. The integration page automatically refreshes with updated permissions. 
 
 ## What's next?
 
@@ -231,3 +257,4 @@ tagging
 [43]: /metrics/custom_metrics/
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /account_management/rbac/permissions/#integrations
+[46]: /integrations/

@@ -131,7 +131,7 @@ Sigue las siguientes instrucciones para instalar la última versión del Datadog
 1. Descarga el [instalador del Datadog Agent][1] para instalar la última versión del Agent.
 2. Ejecuta el instalador abriendo `datadog-agent-7-latest.amd64.msi`. Cuando se te solicite, introduce tus credenciales de administrador.
 3. Sigue las indicaciones, acepta el acuerdo de licencia e introduce tu [clave de API de Datadog][2].
-4. Cuando se te solicite la "Cuenta de usuario de Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo, `<YOUR_DOMAIN_NAME>\DatadogGMSA. Cuando se te solicite la "Cuenta de usuariode Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo,  y **sin contraseña**.
+4. Cuando se te solicite la "Cuenta de usuario de Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo, `<YOUR_DOMAIN_NAME>\DatadogGMSA. Cuando se te solicite la "Cuenta de usuario de Datadog Agent", introduce el nombre de usuario de la gMSA. Por ejemplo,  y **sin contraseña**.
 Cuando termines la instalación, tendrás la opción de iniciar el Datadog Agent Manager.
 
 #### Instalar con la línea de comandos
@@ -141,7 +141,7 @@ Cuando termines la instalación, tendrás la opción de iniciar el Datadog Agent
 
 **Nota:** Sustituye `DatadogGMSA$` por el nombre de usuario de tu gMSA. El nombre de usuario **debe terminar con el símbolo $.**.
   ```powershell
-  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$'
+  Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>" DDAGENTUSER_NAME="<YOUR_DOMAIN_NAME>\DatadogGMSA$"'
   ```
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -196,7 +196,7 @@ Cada una de las siguientes opciones de configuración se puede añadir como prop
 | `PROXY_USER`                                | Cadena  | (Si utilizas un proxy) establece tu usuario de proxy. [Más información sobre el uso de proxy con el Datadog Agent][4].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | Cadena  | (Si utilizas un proxy) establece tu contraseña de proxy. Para Agent de proceso/contenedor, esta variable se requiere para pasar una contraseña de autenticación y no puede ser renombrada. [Más información sobre el uso de proxy con Datadog Agent][4]. |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Booleano | Utiliza el ID de instancia EC2 para los hosts de Windows en EC2. _(v7.28.0 y posteriores)_                                                                                                                                                                      |
-| (OBSOLETO) `ADDLOCAL` | Cadena | Habilita el componente de Agent adicional. Si se selecciona `"MainApplication,NPM"`, se instalará el componente del controlador para [Network Performance Monitoring][5]. _(Versión 7.44.0 y anteriores)_ |
+| [OBSOLETO] `ADDLOCAL` | Cadena | Habilita el componente de Agent adicional. Si se selecciona `"MainApplication,NPM"`, se instalará el componente del controlador para [Network Performance Monitoring][5]. _(Versión 7.44.0 y anteriores)_ |
 
 **Nota**:
 Agent 7 sólo es compatible con Python 3. Antes de actualizar, confirma que tus checks personalizados son compatibles con Python 3. Consulta la guía de [Migración de check personalizado de Python 3][13] para más información. Si no estás utilizando checks personalizados o ya has confirmado su compatibilidad, actualiza normalmente.

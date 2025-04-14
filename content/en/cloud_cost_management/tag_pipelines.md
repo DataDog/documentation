@@ -18,6 +18,8 @@ To effectively monitor cloud costs, you need a comprehensive understanding of ho
 
 With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking.
 
+Tag pipelines are applied to Cloud Cost metrics from all providers. Tag pipelines are not applied to Cloud Cost Recommendations.
+
 ## Create a ruleset
 
 <div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
@@ -67,6 +69,9 @@ Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each 
 Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines.
 
 Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
+
+## Delete tags
+To delete a tag created using Tag Pipelines, delete the rule that created it. Within 24 hours, the tag will be automatically removed from the most recent three months of data. To remove the tag from older data, request a backfill through [Datadog support][5].
 
 ## Further reading
 

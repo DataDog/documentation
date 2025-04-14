@@ -99,7 +99,6 @@ code_language_ids:
     dotnet-core: ".NET Core"
     dotnet-framework: ".NET Framework"
     curl: Curl
-    nginx: Nginx
     native: Native
     other: Other
     linux: Linux
@@ -118,6 +117,19 @@ code_language_ids:
     rust: "Rust"
     dd-api: "Datadog API"
     otel: "OpenTelemetry API"
+    status_legacy: "Status Page (Legacy)"
+    status_page: "Status Page"
+    notebooks_legacy: "Notebooks (Legacy)"
+    notebooks_new: "Notebooks (New)"
+    envoy: "Envoy"
+    httpd: "Apache HTTP Server"
+    istio: "Istio"
+    kong: "Kong"
+    nginx: "NGINX"
+    windows_iis: "Windows IIS" 
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
+    gcp-service-extensions: "GCP Service Extensions"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -208,10 +220,10 @@ core_product:
     - name: log management
     - name: metrics
     - name: network device monitoring
-    - name: network performance monitoring
+    - name: cloud network monitoring
     - name: observability pipelines
     - name: security
     - name: serverless monitoring
-    - name: service catalog
+    - name: software catalog
     - name: slos
     - name: watchdog

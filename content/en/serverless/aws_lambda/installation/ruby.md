@@ -22,6 +22,8 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/configuration/proxy/">using a proxy</a> for all other sites.</div>
 
+<div class="alert alert-info">Version 67+ of the Datadog Lambda Extension uses an optimized version of the extension. <a href="#minimize-cold-start-duration">Read more</a>.</div>
+
 ## Installation
 
 Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
@@ -165,11 +167,11 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     Add the following to your Gemfile:
 
     ```Gemfile
+    gem 'datadog'
     gem 'datadog-lambda'
-    gem 'ddtrace'
     ```
 
-    `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda.
+    `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda.
 
     Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
@@ -250,14 +252,14 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
       Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Ruby2-7`, and `Ruby3-2`.
 
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `ddtrace` by adding them to your Gemfile as an alternative:
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `datadog` by adding them to your Gemfile as an alternative:
 
       ```Gemfile
+      gem 'datadog'
       gem 'datadog-lambda'
-      gem 'ddtrace'
       ```
 
-      `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
+      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
       Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
@@ -328,6 +330,17 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Minimize cold start duration
+Version 67+ of [the Datadog Extension][10] is optimized to significantly reduce cold start duration.
+
+To use the optimized extension, disable Application Security Management (ASM), Continuous Profiler for Lambda, and OpenTelemetry based tracing. Set the following environment variables to `false`:
+
+- `DD_TRACE_OTEL_ENABLED`
+- `DD_PROFILING_ENABLED`
+- `DD_SERVERLESS_APPSEC_ENABLED`
+
+Enabling any of these features cause the extension to default back to the fully compatible older version of the extension. You can also force your extension to use the older version by setting `DD_EXTENSION_VERSION` to `compatibility`. Datadog encourages you to report any feedback or bugs by adding an [issue on GitHub][11] and tagging your issue with `version/next`.
+
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][4].
@@ -346,7 +359,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][7] and the APM guide for [custom instrumentation][8].
 
 ```ruby
-require 'ddtrace'
+require 'datadog'
 require 'datadog/lambda'
 
 Datadog::Lambda.configure_apm do |c|
@@ -402,3 +415,5 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
 [9]: /security/application_security/serverless/
+[10]: https://github.com/DataDog/datadog-lambda-extension
+[11]: https://github.com/DataDog/datadog-lambda-extension/issues

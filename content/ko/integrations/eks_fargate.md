@@ -31,7 +31,7 @@ draft: false
 git_integration_title: eks_fargate
 integration_id: eks-fargate
 integration_title: AWS Fargate에서의 Amazon EKS
-integration_version: 4.2.1
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: eks_fargate
@@ -50,10 +50,18 @@ tile:
   - Category::Cloud
   - Category::AWS
   - Category::Log Collection
+  - 제공::통합
   configuration: README.md#Setup
   description: Amazon EKS 메트릭, 트레이스, 로그를 수집하세요.
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/aws-fargate-metrics/
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+  - resource_type: 블로그
+    url: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
   support: README.md#Support
   title: AWS Fargate에서의 Amazon EKS
 ---
@@ -68,7 +76,7 @@ tile:
 
 AWS Fargate의 Amazon EKS는 표준 쿠버네티스(Kubernetes) 환경의 배포 및 유지 관리의 특정 측면을 자동화하는 관리형 쿠버네티스(Kubernetes) 서비스입니다. 쿠버네티스(Kubernetes) 노드는 AWS Fargate로 관리하며 사용자로부터 추상화됩니다.
 
-**참고**: EKS Fargate는 네트워크 성능 모니터링(NPM)을 지원하지 않습니다.
+**참고**: 클라우드 네트워크 모니터링(CNM)은 EKS Fargate에서 지원되지 않습니다.
 
 ## 설정
 
@@ -102,7 +110,7 @@ EKS로 실행하는 기타 AWS 서비스에 대한 통합도 설치하세요(예
 
 에이전트가 사이드카로 실행되는 경우, 동일한 파드의 컨테이너와만 통신할 수 있습니다. 모니터링하려는 모든 파드에 대해 에이전트를 실행합니다.
 
-### 설정
+### 구성
 
 Fargate 노드로 AWS EKS Fargate에서 실행 중인 애플리케이션의 데이터를 수집하려면 다음 설정 단계를 따릅니다.
 
@@ -170,10 +178,10 @@ metadata:
 수동 설정의 경우 에이전트 사이드카를 추가하거나 변경할 때는 모든 워크로드 매니페스트를 수정해야 합니다. Datadog은 어드미션 컨트롤러를 사용할 것을 권장합니다.
 
 {{< tabs >}}
-{{% tab "Admission Controller" %}}
-##### 어드미션 컨트롤러
+{{% tab "Datadog Operator" %}}
+##### Datadog Operator를 사용하는 승인 컨트롤러
 
-<div class="alert alert-warning">이 기능을 사용하려면 클러스터 에이전트 v7.52.0 이상 및 <a href="http://docs.datadoghq.com/통합/ecs_fargate">ECS Fargate 통합</a>이 필요합니다.
+<div class="alert alert-warning">이 기능을 사용하려면 Cluster Agent v7.52.0+, Datadog Operator v1.7.0+ 및 <a href="https://docs.datadoghq.com/integrations/eks_fargate">EKS Fargate 통합</a>이 필요합니다.
 </div>
 
 하단의 설정으로 에이전트 사이드카와 통신하도록 클러스터 에이전트를 설정하여 [이벤트 컬렉션][1], [쿠버네티스(Kubernetes) 리소스 보기][2], [클러스터 점검][3] 등의 기능에 접근할 수 있게 합니다.
@@ -181,11 +189,12 @@ metadata:
 **전제 조건**
 
 * 애플리케이션 네임스페이스에서 RBAC를 설정합니다. 본 페이지의 [AWS EKS Fargate RBAC](#AWS-eks-fargate-rbac) 섹션을 참조하세요.
+* 서비스 계정 이름을 설정하여 RBAC 위를 애플리케이션 파드에 바인딩합니다.
 * Datadog 설치 및 애플리케이션 네임스페이스에서 Datadog API 키와 클러스터 에이전트 토큰이 포함된 쿠버네티스(Kubernetes) 시크릿을 생성합니다.
 
    ```shell
    kubectl create secret generic datadog-secret -n datadog-agent \
-           --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_ TOKEN>
+           --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
    kubectl create secret generic datadog-secret -n fargate \
            --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
    ```
@@ -193,20 +202,206 @@ metadata:
 
 ###### 설정
 
-1. 활성화된 클러스터 에이전트 및 어드미션 컨트롤러로 Datadog 에이전트를 설치합니다.
+1. 승인 컨트롤러가 활성화된 상태로 `datadog-agent.yaml`에서 `DatadogAgent` 커스텀 리소스를 생성합니다.
+
+   ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterAgentTokenSecret:
+          secretName: datadog-secret
+          keyName: token
+        credentials:
+          apiSecret:
+            secretName: datadog-secret
+            keyName: api-key
+      features:
+        admissionController:
+          agentSidecarInjection:
+            enabled: true
+            provider: fargate
+   ```
+   그런 다음 새로운 설정을 적용합니다:
+
+   ```shell
+   kubectl apply -n datadog-agent -f datadog-agent.yaml
+   ```
+
+2. 클러스터 에이전트를 실행한 후 어드미션 컨트롤러를 변경하는 웹훅(webhook)을 등록하면 에이전트 사이드카가 `agent.datadoghq.com/sidecar:fargate` 레이블로 생성된 모든 파드에 자동 삽입됩니다.
+   **어드미션 컨트롤러는 이미 생성된 파드를 변경하지 않습니다**.
+
+**결과 예시**
+
+다음은 승인 컨트롤러가 Agent 사이드카를 삽입한 Redis 배포의 `spec.containers` 스니펫입니다. 사이드카는 EKS Fargate 환경에서 실행하기 위한 추가 설정과 함께 내부 기본값을 사용하여 자동으로 설정됩니다. 사이드카는 `datadog-agent.yaml`에 설정된 이미지 리포지토리와 태그를 사용합니다. Cluster Agent와 사이드카 간의 통신은 기본적으로 활성화됩니다.
+
+   {{< highlight yaml "hl_lines=7-29" >}}
+     containers:
+     - args:
+       - redis-server
+       image: redis:latest
+     # ...
+     - env:
+       - name: DD_API_KEY
+         valueFrom:
+           secretKeyRef:
+             key: api-key
+             name: datadog-secret
+       - name: DD_CLUSTER_AGENT_AUTH_TOKEN
+         valueFrom:
+           secretKeyRef:
+             key: token
+             name: datadog-secret
+       - name: DD_EKS_FARGATE
+         value: "true"
+       # ...
+       image: gcr.io/datadoghq/agent:7.51.0
+       imagePullPolicy: IfNotPresent
+       name: datadog-agent-injected
+       resources:
+         limits:
+           cpu: 200m
+           memory: 256Mi
+         requests:
+           cpu: 200m
+           memory: 256Mi
+   {{< /highlight >}}
+
+###### 사이드카 프로필 및 커스텀 선택기
+
+Agent 또는 해당 컨테이너 리소스를 추가로 구성하려면 `DatadogAgent` 리소스의 속성을 사용합니다. 환경 변수 정의 및 리소스 설정을 추가하려면 `spec.features.admissionController.agentSidecarInjection.profiles`를 사용합니다. `agent.datadoghq.com/sidecar:fargate` 레이블을 추가하기 위해 워크로드를 업데이트하는 대신 `spec.features.admissionController.agentSidecarInjection.selectors` 속성을 사용하여 워크로드 파드를 대상으로 지정하도록 커스텀 선택기를 설정합니다.
+
+  1. 사이드카 프로필과 커스텀 파드 선택기를 구성하는 `datadog-values.yaml` 파일에 `DatadogAgent` 커스텀 리소스를 생성합니다.
+
+     **예시**
+
+     다음 예제에서 선택기는 레이블이 `"app": redis`인 모든 파드를 타겟으로 합니다. 사이드카 프로파일은 `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` 환경 변수와 리소스 설정을 구성합니다. 
+
+     ```yaml
+        spec:
+          features:
+            admissionController:
+              agentSidecarInjection:
+                enabled: true
+                provider: fargate
+                selectors:
+                - objectSelector:
+                    matchLabels:
+                      "app": redis
+                profiles:
+                - env:
+                  - name: DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED
+                    value: "true"
+                  resources:
+                    requests:
+                      cpu: "400m"
+                      memory: "256Mi"
+                    limits:
+                      cpu: "800m"
+                      memory: "512Mi"
+     ```
+
+     그런 다음 새로운 설정을 적용합니다:
+
+     ```shell
+     kubectl apply -n datadog-agent -f datadog-agent.yaml
+     ```
+
+  2. Cluster Agent가 실행 상태에 도달하고 승인 컨트롤러를 변경하는 웹훅을 등록하면, Agent 사이드카가 레이블 `app:redis`로 생성된 모든 파드에 자동으로 주입됩니다.
+   **어드미션 컨트롤러는 이미 생성된 파드를 변경하지 않습니다**.
+
+ **결과 예시**
+
+ 다음은 승인 컨트롤러가 Agent 사이드카를 삽입한 Redis 배포의 `spec.containers` 스니펫입니다. `datadog-agent.yaml`의 환경 변수 및 리소스 설정이 자동으로 적용됩니다.
+
+   {{< highlight yaml "hl_lines=12-30" >}}
+   레이블:
+     app: redis
+     eks.amazonaws.com/fargate-profile: fp-fargate
+     pod-template-hash: 7b86c456c4
+   # ...
+   containers:
+   - args:
+     - redis-server
+     image: redis:latest
+   # ...
+   - env:
+     - name: DD_API_KEY
+       valueFrom:
+         secretKeyRef:
+           key: api-key
+           name: datadog-secret
+     # ...
+     - name: DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED
+       value: "true"
+     # ...
+     image: gcr.io/datadoghq/agent:7.51.0
+     imagePullPolicy: IfNotPresent
+     name: datadog-agent-injected
+     resources:
+       limits:
+         cpu: 800m
+         memory: 512Mi
+       requests:
+         cpu: 400m
+         memory: 256Mi
+   {{< /highlight >}}
+
+[1]: https://docs.datadoghq.com/ko/agent/kubernetes/?tab=helm#event-collection
+[2]: https://docs.datadoghq.com/ko/infrastructure/livecontainers/#kubernetes-resources-view
+[3]: https://docs.datadoghq.com/ko/agent/cluster_agent/clusterchecks/#overview
+[4]: http://docs.datadoghq.com/agent/cluster_agent
+{{% /tab %}}
+{{% tab "Helm" %}}
+##### Helm을 사용한 승인 컨트롤러
+
+<div class="alert alert-warning">이 기능을 사용하려면 Cluster Agent v7.52.0 이상이 필요합니다.
+</div>
+
+하단의 설정으로 에이전트 사이드카와 통신하도록 클러스터 에이전트를 설정하여 [이벤트 컬렉션][1], [쿠버네티스(Kubernetes) 리소스 보기][2], [클러스터 점검][3] 등의 기능에 접근할 수 있게 합니다.
+
+**전제 조건**
+
+* 애플리케이션 네임스페이스에서 RBAC를 설정합니다. 본 페이지의 [AWS EKS Fargate RBAC](#AWS-eks-fargate-rbac) 섹션을 참조하세요.
+* 서비스 계정 이름을 설정하여 RBAC 위를 애플리케이션 파드에 바인딩합니다.
+* Datadog 설치 및 애플리케이션 네임스페이스에서 Datadog API 키와 클러스터 에이전트 토큰이 포함된 쿠버네티스(Kubernetes) 시크릿을 생성합니다.
+
+   ```shell
+   kubectl create secret generic datadog-secret -n datadog-agent \
+           --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
+   kubectl create secret generic datadog-secret -n fargate \
+           --from-literal api-key=<YOUR_DATADOG_API_KEY> --from-literal token=<CLUSTER_AGENT_TOKEN>
+   ```
+   해당 시크릿이 어떻게 사용되는지 자세히 알아보려면 [클러스터 에이전트 설정][4]을 참조하세요.
+
+###### 설정
+
+1. 다음을 포함하는 `datadog-values.yaml` 파일을 만듭니다.
 
    ```sh
-   helm install datadog datadog/datadog -n datadog-agent \
-       --set datadog.clusterName=cluster-name \
-       --set agents.enabled=false \
-       --set datadog.apiKeyExistingSecret=datadog-secret \
-       --set clusterAgent.tokenExistingSecret=datadog-secret \
-       --set clusterAgent.admissionController.agentSidecarInjection.enabled=true \
-       --set clusterAgent.admissionController.agentSidecarInjection.provider=fargate
+   datadog:
+     clusterName: <CLUSTER_NAME>
+     apiKeyExistingSecret: datadog-secret
+   agents:
+     enabled: false
+   clusterAgent:
+     tokenExistingSecret: datadog-secret
+     admissionController:
+       agentSidecarInjection:
+         enabled: true
+         provider: fargate
    ```
    **참고**: Fargate 전용 클러스터에는 `agents.enabled=false`을 사용하고, 혼합 클러스터의 경우 `agents.enabled=true`을 설정하여 EC2 인스턴스의 워크로드 모니터링 DaemonSet을 생성합니다.
 
-2. 클러스터 에이전트를 실행한 후 어드미션 컨트롤러를 변경하는 웹훅(webhook)을 등록하면 에이전트 사이드카가 `agent.datadoghq.com/sidecar:fargate` 레이블로 생성된 모든 파드에 자동 삽입됩니다.
+2. 차트를 배포합니다.
+
+   ```bash
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog
+   ```
+
+3. 클러스터 에이전트를 실행한 후 어드미션 컨트롤러를 변경하는 웹훅(webhook)을 등록하면 에이전트 사이드카가 `agent.datadoghq.com/sidecar:fargate` 레이블로 생성된 모든 파드에 자동 삽입됩니다.
    **어드미션 컨트롤러는 이미 생성된 파드를 변경하지 않습니다**.
 
 **결과 예시**
@@ -336,7 +531,7 @@ containers:
 [3]: https://docs.datadoghq.com/ko/agent/cluster_agent/clusterchecks/#overview
 [4]: http://docs.datadoghq.com/agent/cluster_agent
 {{% /tab %}}
-{{% tab "Manual" %}}
+{{% tab "수동" %}}
 ##### 수동
 
 Fargate 타입 파드에서 데이터 수집을 시작하려면 애플리케이션의 사이드카로 Datadog 에이전트 v7.17+를 배포하세요. 이는 포드에서 실행 중인 애플리케이션에서 메트릭을 수집하는 데 필요한 최소 설정입니다. Datadog 에이전트 사이드카를 배포하려면 매니페스트에 `DD_EKS_FARGATE=true`가 추가되어 있는지 확인하세요.
@@ -482,21 +677,21 @@ spec:
      name: "<POD_NAME>"
      annotations:
       ad.datadoghq.com/<CONTAINER_NAME>.check_names: '[<CHECK_NAME>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.init_configs: '[<INIT_CONFIG>]'
-      ad.datadoghq.com/<CONTAINER_IDENTIFIER>.instances: '[<INSTANCE_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.init_configs: '[<INIT_CONFIG>]'
+      ad.datadoghq.com/<CONTAINER_NAME>.instances: '[<INSTANCE_CONFIG>]'
    spec:
      serviceAccountName: datadog-agent
      containers:
      - name: "<APPLICATION_NAME>"
        image: "<APPLICATION_IMAGE>"
-     ## 에이전트를 사이드카로 실행
+     ## Agent를 사이드카로 실행
      - image: datadog/agent
        name: datadog-agent
        env:
        - name: DD_API_KEY
          value: "<YOUR_DATADOG_API_KEY>"
-         ## Set DD_SITE를 "datadoghq.eu"로 설정하여
-         ## Datadog EU 사이트에 에이전트 데이터 전송
+         ## Agent 데이터를 Datadog EU 사이트로 보내려면
+         ## DD_SITE를 "datadoghq.eu"로 설정하세요.
        - name: DD_SITE
          value: "datadoghq.com"
        - name: DD_EKS_FARGATE

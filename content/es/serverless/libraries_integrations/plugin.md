@@ -1,6 +1,6 @@
 ---
 aliases:
-- /serverless/serverless_integrations/plugin
+- /es/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md
 title: Complemento de Datadog Serverless Framework
@@ -76,7 +76,7 @@ Para configurar más tu complemento, utiliza los siguientes parámetros personal
 Para utilizar cualquiera de estos parámetros, añade una sección `custom` > `datadog` a tu `serverless.yml` similar a este ejemplo:
 
 ```yaml
-personalizado:
+custom:
   datadog:
     apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}"
     enableXrayTracing: false
@@ -84,7 +84,7 @@ personalizado:
     enableDDLogs: true
     subscribeToAccessLogs: true
     forwarderArn: arn:aws:lambda:us-east-1:000000000000:function:datadog-forwarder
-    excluir:
+    exclude:
       - dd-excluded-function
 ```
 
@@ -99,7 +99,7 @@ Es posible que encuentres el error de que faltan definiciones de tipo. Para reso
 Si estás utilizando serverless-typescript, asegúrate de que `serverless-datadog` esté por encima de la entrada `serverless-typescript` en tu `serverless.yml`. El complemento detectará automáticamente los archivos `.ts`.
 
 ```yaml
-complementos:
+plugins:
   - serverless-plugin-datadog
   - serverless-typescript
 ```
@@ -109,18 +109,18 @@ complementos:
 Si deseas desconectar el complemento en función del entorno (pasado a través de `--stage`), puedes utilizar algo similar al ejemplo siguiente.
 
 ```yaml
-proveedor:
-  fase: ${self:opt.stage, 'dev'}
+provider:
+  stage: ${self:opt.stage, 'dev'}
 
-personalizado:
-  preconfigurado: ${self:custom.stageVars.${self:provider.stage}, {}}
+custom:
+  staged: ${self:custom.stageVars.${self:provider.stage}, {}}
 
   stageVars:
     dev:
       dd_enabled: false
 
   datadog:
-    activado: ${self:custom.staged.dd_enabled, true}
+    enabled: ${self:custom.staged.dd_enabled, true}
 ```
 
 ### Serverless Monitors
@@ -150,7 +150,7 @@ La creación de un Monitor se produce después del despliegue de la función. En
 Define el ID apropiado del serverless monitor sin especificar ningún valor de parámetro.
 
 ```yaml
-personalizado:
+custom:
   datadog:
     addLayers: true
     monitors:
@@ -224,7 +224,7 @@ Esta biblioteca es compatible en el mayor esfuerzo con [serverless-plugin-warmup
 
 Para que tu aplicación funcione correctamente en paquete, este complemento *debe* aparecer _después_ de `serverless-plugin-warmup` en tu archivo `serverless.yml`:
 ```yaml
-complementos:
+plugins:
   - serverless-plugin-warmup
   - serverless-plugin-datadog
 ```

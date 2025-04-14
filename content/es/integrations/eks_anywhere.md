@@ -24,7 +24,7 @@ categories:
 - recopilación de logs
 - orquestación
 - suministración
-custom_kind: integración
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true

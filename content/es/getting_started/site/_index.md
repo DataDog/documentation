@@ -69,7 +69,7 @@ El objetivo del sitio Datadog for Government (US1-FED) es permitir a las agencia
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /es/agent/configuration/dual-shipping/
 [3]: /es/real_user_monitoring/#supported-endpoints-for-sdk-domains

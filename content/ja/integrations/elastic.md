@@ -22,12 +22,12 @@ assets:
     source_type_id: 37
     source_type_name: Elasticsearch
   monitors:
-    '[ElasticSearch] Average query latency is high': assets/monitors/elastic_average_search_latency.json
-    '[ElasticSearch] Current indexing load is high': assets/monitors/elastic_indexing_load.json
-    '[ElasticSearch] Number of pending tasks is high': assets/monitors/elastic_pending_tasks_high.json
-    '[ElasticSearch] Query load is high': assets/monitors/elastic_query_load_high.json
-    '[ElasticSearch] Time spent on queries is high': assets/monitors/elastic_query_latency_high.json
-    '[ElasticSearch] Unsuccessful requests rate is high': assets/monitors/elastic_requests.json
+    Average Search Query Latency is High: assets/monitors/elastic_average_search_latency.json
+    Current Indexing Load is High: assets/monitors/elastic_indexing_load.json
+    Latency is high: assets/monitors/elastic_query_latency_high.json
+    Number of pending tasks is high: assets/monitors/elastic_pending_tasks_high.json
+    Query load is high: assets/monitors/elastic_query_load_high.json
+    Unsuccessful requests rate is high: assets/monitors/elastic_requests.json
   saved_views:
     elasticsearch_processes: assets/saved_views/elasticsearch_processes.json
 author:
@@ -39,19 +39,19 @@ categories:
 - data stores
 - log collection
 - tracing
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
-integration_title: ElasticSearch
-integration_version: 6.3.1
+integration_title: Elasticsearch
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: elastic
-public_title: ElasticSearch
+public_title: Elasticsearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
 - linux
@@ -79,13 +79,13 @@ tile:
   - resource_type: blog
     url: https://www.datadoghq.com/blog/monitor-elasticsearch-performance-metrics
   support: README.md#Support
-  title: ElasticSearch
+  title: Elasticsearch
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Elastic search ダッシュボード][1]
+![Elasticsearch dashboard][1]
 
 ## 概要
 
@@ -108,7 +108,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
 1. Elasticsearch の[メトリクス](#metrics)を収集するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `elastic.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル elastic.d/conf.yaml][2] を参照してください。
 
@@ -145,7 +145,7 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
       - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
       - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。
-      - Elastic Search のセキュリティ機能を有効にしている場合、API を使用して Elastic Search のインデックスを呼び出す際に、`monitor` または `manage` 権限を使用することができます。
+      - If you have enabled security features in Elasticsearch, you can use `monitor` or `manage` privilege while using the API to make the calls to the Elasticsearch indices.
       - 作成したロールに以下のプロパティを含めます。
         ```json
         name = "datadog"
@@ -166,9 +166,9 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
 
 ###### カスタムクエリ
 
-ElasticSearch とのインテグレーションでは、`custom_queries` 構成オプションを使用することで、カスタムクエリによるカスタムメトリクスの収集が可能です。
+The Elasticsearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option. 
 
-**注:** カスタムクエリを実行する際は、ElasticSearch のインスタンスが変更されないよう、読み取り専用アカウントを使用してください。
+**Note:** When running custom queries, use a read only account to ensure that the Elasticsearch instance does not change.
 
 ```yaml
 custom_queries:
@@ -209,7 +209,7 @@ custom_queries:
 Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
 1. [Datadog でトレースの収集を有効にします][9]。
-2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
+2. [Instrument your application that makes requests to Elasticsearch][10].
 
 ##### ログ収集
 

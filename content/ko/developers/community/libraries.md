@@ -85,7 +85,7 @@ Enclave는 메트릭을 Datadog 계정으로 전달합니다. [자세히 알아�
 
 헤로쿠(Heroku)는 로그를 통해 다이노 메트릭을 방출합니다. 이러한 로그를 메트릭으로 변환하여 Datadog으로 전송하려면 다음 로그 드레인 중 하나를 사용합니다.. Datadog으로 헤로쿠(Heroku) 로그를 보내려면, [헤로쿠(Heroku) 로그 수집][34]을 참조하세요.
 
-* [Oz][36]가 NodeJS로 작성한 [헤로쿠(Heroku) Datadog 로그 드레인] [35]
+* [Oz][36]가 Node.js로 작성한 [헤로쿠(Heroku) Datadog 로그 드레인] [35]
 * [Apiary][38]가 Go로 작성한 [헤로쿠(Heroku) Datadog 로그 드레인] [37].
 
 헤로쿠(Heroku)에서 PHP 트레이서 또는 프로파일러를 사용하려면 다음 빌드팩을 사용하세요.

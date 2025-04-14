@@ -34,13 +34,16 @@ You can add more property fields to your settings by selecting one of your exist
 
 ### Field types
 
-In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are four kinds of custom fields you can create:
+In addition to the five default fields and the fields based on metric tags, you can also create custom property fields and mark them as required at the creation of an incident. There are five kinds of custom fields you can create:
 
 **Single-Select**
-: A dropdown field that can only have one value assigned at a time per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
+: A dropdown field that can only have one value assigned at a time per incident. You set the available values when defining the field.
 
 **Multi-Select**
-: A dropdown field that can have multiple values assigned per incident. Values can be predefined in-line from the UI or by uploading values through a CSV file.
+: A dropdown field that can have multiple values assigned per incident. You set the available values when defining the field.
+
+**Text Array**
+: A free-form field that can have multiple values assigned per incident. Incident responders define arbitrary values when updating the field on an incident.
 
 **Text Area**
 : A free-form text box. Values are entered by a responder on a per-incident basis.
@@ -50,7 +53,7 @@ In addition to the five default fields and the fields based on metric tags, you 
 
 Single-Select, Multi-Select, and Number custom fields are searchable facets in the [Incident Homepage][2] and [Incident Management Analytics][3] for easy filtering of incidents. Number fields are measures in Incident Management Analytics that can be graphed and visualized in [Dashboards][7] and [Notebooks][8].
 
-[1]: /service_management/incident_management/incident_details/#overview-section
+[1]: /service_management/incident_management/investigate#overview-tab
 [2]: https://app.datadoghq.com/incidents
 [3]: /service_management/incident_management/analytics
 [4]: /tracing/

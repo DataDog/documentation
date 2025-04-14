@@ -9,6 +9,9 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: ガイド
+  text: データ転送料金を削減しながら Datadog にログを送信する方法
 title: Datadog の Lambda 関数で AWS サービスのログを送信する
 ---
 
@@ -45,9 +48,9 @@ S3 バケットまたは CloudWatch ロググループにログを生成する A
 | [RedShift][34]                     | [Amazon Redshift ログを有効にする][35]                                                                              | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。                                                 |
 | [Verified Access][37]              | [Verified Access ログを有効にする][38]                                                                              | [手動][39]ログコレクション。                                                                                                 |
 | [VPC][40]                          | [Amazon VPC ログを有効にする][41]                                                                                   | [手動][42]ログコレクション。                                                                                                 |
-| [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
-| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] and [automatic](#automatically-set-up-triggers) log collection.                                                                                               |
-| [MWAA][55]                         | [Enable Amazon MWAA logs][56]                                                                                  | [Manual][56] log collection.                                                                                                 |
+| [Step Functions][52]               | [Amazon Step Functions ログを有効にする][53]                                                                        | [手動][54]ログ収集。                                                                                                 |
+| [Web Application Firewall][49]     | [Amazon WAF ログを有効にする][50]                                                                                   | [手動][51]および[自動][#automatically-set-up-triggers]ログ収集。                                                                                               |
+| [MWAA][55]                         | [Amazon MWAA ログを有効にする][56]                                                                                  | [手動][56]ログ収集。                                                                                                 |
 
 
 ## トリガーの設定
@@ -72,7 +75,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 | Redshift ログ               | S3             |
 | S3 アクセスログ              | S3             |
 | Step Functions              | CloudWatch     |
-| Web Application Firewall    | S3, CloudWatch |
+| Web Application Firewall    | S3、CloudWatch |
 
 **注**: [サブスクリプション フィルター][48]は、DatadogForwarder によって自動的に作成されません。ロググループで直接作成してください。
 
@@ -107,7 +110,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `cloudfront:ListDistributions`                              | すべての CloudFront ディストリビューションを一覧表示します。|
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | すべてのロードバランサーを一覧表示します。|
    [ロググループインデックスページ][1] の `Subscriptions` をチェックして、新しい Kinesis ストリームがロググループをサブスクライブしているかを確認します。
-    | `lambda:List*`                                              | List all Lambda functions.                                                   |
+    | `lambda:List*`                                              | すべての Lambda 関数を一覧表示します。                                                   |
     | `lambda:GetPolicy`                                          | トリガーが解除された際に Lambda ポリシーを取得します。|
     | `redshift:DescribeClusters`                                 | すべての Redshift クラスターを一覧表示します。|
     | `redshift:DescribeLoggingStatus`                            | Redshift ログを含む S3 バケットの名前を取得します。|
@@ -116,9 +119,9 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `s3:GetBucketNotification`                                  | 既存の Lambda トリガーコンフィギュレーションを取得します。    |
    {{< partial name="whats-next/whats-next.html" >}}
     | `s3:PutBucketNotification`                                  | S3 バケットのイベントに基づいて Lambda トリガーを追加または削除します。|
-    | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
-    | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
-    | `wafv2:ListLoggingConfigurations`                           | Lists all logging configurations of the Web Application Firewall.            |
+    | `states:ListStateMachines`                                  | すべての Step Function を一覧表示します。                                                     |
+    | `states:DescribeStateMachine`                               | Step Function に関するログの詳細を取得します。                                   |
+    | `wafv2:ListLoggingConfigurations`                           | Web Application Firewall のすべてのログ構成を一覧表示します。            |
     | `logs:PutSubscriptionFilter`                                | CloudWatch ログのイベントに基づいて Lambda トリガーを追加します。|
     | `logs:DeleteSubscriptionFilter`                             | CloudWatch ログのイベントに基づいて Lambda トリガーを削除します。|
     | `logs:DescribeSubscriptionFilters`                          | 特定のロググループのサブスクリプションフィルターを一覧表示します。|
@@ -250,11 +253,14 @@ Resources:
 {{< /tabs >}}
 
 
-
 ## スクラビングとフィルター
 
 Lambda 関数から送信されるログからメールや IP アドレスをスクラブしたり、カスタムスクラブルールを [Lambda パラメーターで][46]定義することができます。
 また、[フィルターオプション][47]を使用して、特定のパターンに一致するログのみを除外または送信することができます。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/serverless/forwarder/
 [2]: /ja/serverless/forwarder#aws-privatelink-support

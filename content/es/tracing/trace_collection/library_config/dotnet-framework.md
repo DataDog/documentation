@@ -47,7 +47,7 @@ Puedes establecer parámetros de configuración en .NET Tracer utilizando cualqu
 
 {{< tabs >}}
 
-{{% tab "Environment variables" (Variables de entorno) %}}
+{{% tab "Variables de entorno" %}}
 
 Para configurar el rastreador utilizando variables de entorno, configura las variables antes de iniciar la aplicación instrumentada. Para saber cómo configurar las variables de entorno en diferentes entornos, consulta [Configuración de las variables de entorno de procesos][1].
 
@@ -55,7 +55,7 @@ Para configurar el rastreador utilizando variables de entorno, configura las var
 
 {{% /tab %}}
 
-{{% tab "Code" (Código) %}}
+{{% tab "Código" %}}
 
 Para configurar el rastreador en el código de la aplicación, crea una instancia `TracerSettings` a partir de las fuentes de configuración predeterminadas. Define las propiedades de esta instancia `TracerSettings` antes de llamar a `Tracer.Configure()`. Por ejemplo:
 
@@ -99,7 +99,7 @@ Para configurar el rastreador utilizando un archivo `app.config` o `web.config`,
 
 {{% /tab %}}
 
-{{% tab "JSON file" (Archivo JSON) %}}
+{{% tab "Archivo JSON" %}}
 
 Para configurar el rastreador utilizando un archivo JSON, crea `datadog.json` en el directorio de la aplicación instrumentada. El objeto JSON raíz debe ser un objeto con un par clave-valor para cada parámetro. Por ejemplo:
 

@@ -11,26 +11,26 @@ title: Micrometer を使用したメトリクスの送信
 
 ## 概要
 
-[Micrometer][1] is a vendor-neutral interface that allows access to metrics with the ability to analyze them across their dimensions. Often used with a Java Spring Boot application as an abstraction layer to submit metrics.
+[Micrometer][1] は、メトリクスにアクセスし、それらのディメンションを横断して分析することを可能にするベンダーニュートラルなインターフェイスです。多くの場合、Java Spring Boot アプリケーションで、メトリクスを送信する抽象化レイヤーとして使用されます。
 
-Micrometer offers multiple ways to integrate with Datadog. This guide outlines Datadog's recommended options to use with the Agent to send metrics to Datadog.
+Micrometer は、Datadog と統合する複数の方法を提供します。このガイドでは、Agent と一緒に使用して Datadog にメトリクスを送信するための Datadog の推奨オプションを概説します。
 
 ## OpenTelemetry
 
-OpenTelemetry Protocol (OTLP) Ingestion by the Datadog Agent allows you to take advantage of observability feature in the Datadog Agent.
+Datadog Agent による OpenTelemetry Protocol (OTLP) の取り込みを使用すると、Datadog Agent の可観測性機能を活用できます。
 
-{{< whatsnext desc="See the configuration outlined in the following documentation:" >}}
-    {{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}OTLP Ingestion by the Datadog Agent{{< /nextlink >}}
+{{< whatsnext desc="以下のドキュメントに記載された構成を参照してください。" >}}
+{{< nextlink href="/opentelemetry/otlp_ingest_in_the_agent/" >}}Datadog Agent による OTLP の取り込み{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Prometheus and OpenMetrics
+## Prometheus と OpenMetrics
 
-Use the Prometheus or OpenMetrics integrations to send your application metrics to Datadog. 
+Prometheus または OpenMetrics のインテグレーションを使用して、アプリケーションのメトリクスを Datadog に送信します。
 
-{{< whatsnext desc="See the configuration outlined in the following documentation:" >}}
-    {{< nextlink href="/integrations/guide/prometheus-host-collection/#overview" >}}Prometheus and OpenMetrics metrics collection from a host{{< /nextlink >}}
-    {{< nextlink href="/containers/kubernetes/prometheus/?tab=kubernetesadv2" >}}Kubernetes Prometheus and OpenMetrics metrics collection{{< /nextlink >}}
-    {{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Docker Prometheus and OpenMetrics metrics collection{{< /nextlink >}}
+{{< whatsnext desc="以下のドキュメントに記載された構成を参照してください。" >}}
+{{< nextlink href="/integrations/guide/prometheus-host-collection/#overview" >}}ホストからの Prometheus と OpenMetrics のメトリクス収集{{< /nextlink >}}
+{{< nextlink href="/containers/kubernetes/prometheus/?tab=kubernetesadv2" >}}Kubernetes の Prometheus と OpenMetrics のメトリクス収集{{< /nextlink >}}
+{{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Docker の Prometheus と OpenMetrics のメトリクス収集{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 参考資料

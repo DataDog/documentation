@@ -70,16 +70,12 @@ Datadog Incident Management は、メトリクス、トレース、またはロ�
 | タイトル                    | インシデントのタイトルは、チームで使用している命名規則に従って設定します。これは実際のインシデントではないため、テストインシデントであることが明確になるよう `TEST` という言葉を含めます。タイトルの例: `[TEST] My incident test`                                                                      |
 | 重大度           | お客様に影響があるかどうか、また関連するサービスにどのような影響があるかが不明であるため、**Unknown**に設定します。各重大度の意味については、アプリ内の説明を参照し、チームのガイドラインに従ってください。                                                                                |
 | インシデントコマンダー       | 今回のテストではあなたに割り当てられたままにしてください。実際のインシデントが発生した場合はインシデント調査のリーダーに割り当てられます。インシデントの進行状況に合わせてインシデントコマンダーを更新することができます。                                                                                 |
-| 通知            | 今回のテストでは、他のメンバーや他のサービスに警告を出さないよう空白にしておきます。実際のインシデントでは、調査や修復のために通知すべき人やサービスを追加します。これらの通知は Slack や PagerDuty にも送信できます。 |
-|  メモ & リンク                  | インシデントを宣言する理由についての補足情報を追加します。グラフやログ、その他のキービジュアルなどがこれに該当します。選択したグラフとモニターはすでに含まれていますが、その他のシグナルを追加することができます。例えば、このガイドの URL をコピーして貼り付けます。                      |
 9. **Declare Incident** をクリックしてインシデントを作成します。
    また、[グラフ][4]、[モニター][5]、または[インシデント API][6] からインシデントを宣言することもできます。APM ユーザーの場合は、APM グラフ上の任意のインシデントアイコンをクリックしてインシデントを宣言できます。
  Slack インテグレーションの一環として、`/datadog incident` ショートカットを使ってインシデントを宣言し、タイトル、重大度、顧客への影響を設定することもできます。
 10. インシデントページの左上にある **Slack Channel** をクリックすると、インシデントの Slack チャンネルに移動します。
 
 新しいインシデントが発生すると、そのインシデント専用の新しい Slack チャンネルが自動的に作成され、チームとのコミュニケーションをそこに集約してトラブルシューティングを開始することができます。所属するオーガニゼーションの Slack インテグレーションがグローバルなインシデントチャンネルを更新するよう設定されている場合は、そのチャンネルが新しいインシデントで更新されます。
-
-In this example, you are the only one added to the new incident channel. When you add people or services in _Notifications_ for an actual incident, all recipients are automatically added to the incident channel.
 
 Slack インテグレーションが有効になっていない場合は、**Add Chat** をクリックして、インシデントに関するやり取りに使用しているチャットサービスへのリンクを追加します。
 
@@ -91,7 +87,7 @@ Slack インテグレーションが有効になっていない場合は、**Add
 
 #### 概要
 
-**Scenario:** After some investigation, you discover that the root cause is a host running out of memory. You've also been informed that a small subset of customers are being affected and seeing slow loading of pages. The first customer report came in 15 minutes ago. It is a SEV-3 incident.
+**シナリオ:** いくつか調査を行った結果、根本的な原因はホストのメモリ不足であることがわかりました。また、一部のお客様が影響を受けており、ページの読み込みが遅くなっているとの情報も得ました。15 分前に最初のお客様からの報告があり、インシデントのレベルは SEV-3 です。
 
 _Overview_ セクションで、調査が進むにつれてインシデントのフィールドや顧客の影響を更新することができます。
 
@@ -135,7 +131,7 @@ _Timeline_ には、インシデントのフィールドや情報の追加・変
  _Remediation_ セクションでは、問題の調査やインシデント発生後の修復タスクについてのドキュメントやタスクを記録することができます。
 
 1. **Remediation** タブをクリックします。
-2. Click the plus icon `+` in the _Documents_ box and add a link to a [Datadog notebook][7]. All updates to the _Documents_ section are added to the timeline as an _Incident Update_ type.
+2. _Documents_ ボックスのプラスアイコン `+` をクリックして、[Datadog ノートブック][7]へのリンクを追加します。_Documents_ セクションの更新内容はすべて、_Incident Update_ タイプとしてタイムラインに追加されます。
 3. _Incident Tasks_ ボックスにタスクの説明を追加して、タスクを追加することができます。例: `Run the steps in the notebook.`
 4. **Create Task** をクリックします。
 5. **Assign To** をクリックして自分自身をタスクに割り当てます。

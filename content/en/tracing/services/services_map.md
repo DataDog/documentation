@@ -82,17 +82,15 @@ Additionally, monitors can be tagged by service in the **Say what's happening** 
 
 ### Nodes and edges
 
-Nodes represent services exactly as instrumented in APM and match those in your [Service Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
+Nodes represent services exactly as instrumented in APM and match those in your [Software Catalog][4]. Edges represent aggregate calls from one service to another. These interactions are shown on the flame graph for each individual [trace][5].
 
-New services or connections appear within moments of being instrumented and age out if there are no corresponding traces seen for 30 days. This takes into account services that do work infrequently, but are an important part of a functioning system.
+New services or connections appear within moments of being instrumented and automatically age out if no corresponding traces are seen for 30 days. You can query any service map to view nodes that have data within the last 30 days. Nodes only appear in the graph if they have data within the selected time frame.
 
 {{< img src="tracing/visualization/services_map/servicenodes.mp4" alt="Service Map nodes" video="true" width="90%">}}
 
 ### Color
 
-If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor. If multiple monitors are defined, the status of the monitor in the most severe state is used.
-
-Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
+Service node borders are colored with red or yellow depending on their respective Service Health state. [Service Health][7] consolidates signals across Watchdog anomalies, paging monitors, and incidents into one single health state for each service. Use Service Health to quickly identify services that require immediate attention.
 
 ### Availability
 
@@ -107,3 +105,4 @@ The Service Map is rendered based on complete traces that include the root spans
 [4]: https://app.datadoghq.com/services
 [5]: /tracing/glossary/#trace
 [6]: /tracing/troubleshooting/connection_errors
+[7]: /tracing/services/service_page/#service-health

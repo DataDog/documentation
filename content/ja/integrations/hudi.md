@@ -39,7 +39,7 @@ draft: false
 git_integration_title: hudi
 integration_id: hudi
 integration_title: Hudi
-integration_version: 2.3.0
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: hudi

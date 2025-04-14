@@ -29,6 +29,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">The pipelines and processors outlined in this documentation are specific to cloud-based logging environments. To aggregate, process, and route on-premises logs, see <a href="https://docs.datadoghq.com/observability_pipelines/set_up_pipelines/">Observability Pipelines</a>.</div>
+
 Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
 With pipelines, logs are parsed and enriched by chaining them sequentially through [processors][3]. This extracts meaningful information or attributes from semi-structured text to reuse as [facets][4]. Each log that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
@@ -156,6 +158,19 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
 [2]: /logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
+
+{{% tab "Span ID" %}}
+
+#### Span ID attribute
+
+By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+
+* `dd.span_id`
+* `contextMap.dd.span_id`
+
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Create a pipeline
@@ -167,7 +182,7 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
-5. (Optional) Grant editing access to processors in the pipeline.
+5. (Optional) Grant editing access to processors in the pipeline. If you assign a role to a pipeline, the role receives `logs_write_processor` [permissions][12] specifically scoped to that pipeline. Roles with `logs_write_processor` permissions assigned globally (by editing role), cannot be selected, as they have access to all pipelines.
 6. (Optional) Add tags and a description to the pipeline. The description and tags can be used to state the pipeline's purpose and which team owns it.
 7. Press **Create**.
 
@@ -190,6 +205,8 @@ To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an
 See the ELB logs example below:
 
 {{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" style="width:70%;">}}
+
+**Note**: Integration pipelines cannot be deleted, only disabled.
 
 ### Integration pipeline library
 
@@ -263,3 +280,4 @@ Estimated usage metrics are displayed per pipeline - specifically, the volume an
 [9]: /integrations/#cat-log-collection
 [10]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
 [11]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[12]: /account_management/rbac/permissions/?tab=ui#log-management

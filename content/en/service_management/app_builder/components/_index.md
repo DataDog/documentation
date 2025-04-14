@@ -219,6 +219,36 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 
 
 
+{{% collapse-content title="Custom chart" level="h3" %}}
+Custom chart components have the following properties.
+
+### General
+
+Vega Specification
+: A string representing a valid Vega-Lite or Vega JSON specification.
+
+### Appearance
+
+Is Loading
+: Shows a loading indicator.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+### Example
+
+For an example showing how to use this component, see [Custom charts][10].
+
+{{% /collapse-content %}}
+
+
+
 {{% collapse-content title="Date range picker" level="h3" %}}
 Date range picker components have the following properties.
 
@@ -284,6 +314,88 @@ Reaction
 State Function
 : fetch<br>
 **Example**: See [events][9].
+
+For more information on events, see [Events][1].
+
+### Inspect data
+
+Displays property and value pairs in JSON format.
+
+{{% /collapse-content %}}
+
+
+{{% collapse-content title="Form" level="h3" %}}
+Form components have the following properties.
+
+### General
+
+Title
+: The title of the form.<br>
+**Value**: string or expression
+
+Default value
+: The default value that the app populates in the form. To populate a specific field, you can use JSON notation, such as `{"org":"frontend"}` to populate the `org` field with the value `frontend`.<br>
+**Value**: string or expression
+
+### Fields
+
+Each item represents a field in the form. Fields each have one of the following types: `textInput`, `select`, `textArea`, or `text`.
+
+Fields have some or all of the following properties depending on their field type:
+
+Field name
+: The unique identifier for a field. You can use this identifier to reference the field in an expression.<br>
+**Value**: string or expression
+
+Label
+: The label that displays above the field.<br>
+**Value**: string or expression
+
+Content
+: The content that displays in a `text` field.<br>
+**Value**: string or expression
+
+Options
+: The options available in a `select` field. Options must be an array of objects, with a `const` key for the option value and an optional `title` key for the option label.<br>**Value**: Each object's `label` and `value` can be a string or expression.<br>
+You can populate each object using the GUI (default), or toggle **Raw** to use raw JSON input to provide the entire array of objects.
+
+Placeholder text
+: The text that displays in a `textInput` or `textArea` field when no value is entered.<br>
+**Value**: string or expression
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+Is Visible
+: Determines whether the field is visible in the form.<br>
+**Provided values**: on, off
+
+Is Required
+: Determines whether the field is required in order to submit the form.<br>
+**Provided values**: on, off
+
+### Appearance
+
+Is Visible
+: Determines whether the component is visible to the end-user. In edit mode, all components remain visible.<br>
+**Provided values**: on, off
+
+Is Disabled
+: Applies disabled styling and removes interactions.<br>
+**Provided values**: on, off
+
+### Events
+
+Event
+: **Value**: submit, change, validate
+
+Reaction
+: **Values**: custom, set component state, trigger query, open modal, close modal, download file, set state variable value
+
+State Function
+: setValue<br>
+**Example**: `form0.setValue({name: 'node-group-1'})` sets the value of the `form0` component to `{name: 'node-group-1'}`.
 
 For more information on events, see [Events][1].
 
@@ -977,3 +1089,4 @@ To view this component in context, see the [Metrics Explorer & Monitors Builder]
 [7]: /service_management/app_builder/expressions
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /service_management/app_builder/events/#state-functions
+[10]: /service_management/app_builder/components/custom_charts/

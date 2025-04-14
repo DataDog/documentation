@@ -262,7 +262,49 @@ Amazon Linux 1 (AL1、旧 Amazon Linux AMI) 使用している場合は、[datad
    "family": "datadog-agent-task"
  }
  ```
+#### ネットワークパス
 
+<div class="alert alert-info">Datadog Network Performance Monitoring の Network Path はプレビュー中です。登録をご希望の場合は、Datadog の担当者にお問い合わせください。</div>
+
+1. ECS クラスターで [Network Path][31] を有効にするには、`datadog-agent-sysprobe-ecs.json` ファイルに以下の環境変数を追加して、`system-probe` の traceroute モジュールを有効にします。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_TRACEROUTE_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+2. 個別のパスを監視するには、[追加の Agent 機能を設定](#set-up-additional-agent-features)するための手順に従ってください：
+
+   これらのファイルは、ECS クラスター内のコンテナに関するコアメトリクスを収集するための基本構成を持つ Agent コンテナをデプロイします。Agent は、コンテナ上で発見された Docker ラベルに基づいて Agent インテグレーションを実行することも可能です。
+
+3. エンドポイントを手動で指定することなく、ネットワークトラフィックパスを監視し、Agent が実際のネットワークトラフィックに基づいてネットワークパスを自動的に発見および監視できるようにするには、`datadog-agent-sysprobe-ecs.json` に以下の追加の環境変数を追加します。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED",
+          "value": "true"
+        }
+      ],
+   ```
+
+4. オプションとして、ワーカーの数 (デフォルトは 4) を構成するには、`datadog-agent-sysprobe-ecs.json` ファイル内の以下の環境変数を調整します。
+
+   ```json
+      "environment": [
+        (...)
+        {
+          "name": "DD_NETWORK_PATH_COLLECTOR_WORKERS",
+          "value": "10"
+        }
+      ],
+   ```
 ## AWSVPC モード
 
 Agent バージョン 6.10 以降は、ホストインスタンスのセキュリティグループが関連するポート上の適用可能なコンテナに到達できるよう、セキュリティグループが設定されている場合には、適用可能なコンテナに `awsvpc` モードが対応しています。
@@ -278,13 +320,15 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 
 行政機関のサイトで Datadog にデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナ ポートを開いて、[サポートされている機能][1]が適切に通信を行えるようにします。
 
+**注**: サイドカーコンテナが適切なネットワーク設定と IAM 権限で構成されていることも確認する必要があります。
+
 ```json
  {
    "containerDefinitions": [
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.4",
+            "image": "datadog/fips-proxy:1.1.5",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -433,3 +477,4 @@ Agent を `awsvpc` モードで実行することは可能ですが、Datadog �
 [28]: #run-the-agent-as-a-daemon-service
 [29]: #set-up-additional-agent-features
 [30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html
+[31]: /ja/network_monitoring/network_path

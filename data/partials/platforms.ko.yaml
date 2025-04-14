@@ -114,7 +114,7 @@ platforms:
   link: agent/kubernetes/
   name: 쿠버네티스(Kubernetes)
 - category: macOS
-  image: platform_macosx.png
+  image: platform_macos.png
   link: agent/basic_agent_usage/osx/
   name: osx
 - category: Linux

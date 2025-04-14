@@ -13,87 +13,51 @@ title: AWS Lambda サーバーレスモニタリングの概要
 
 サーバーレスとは、開発者が自分でインフラストラクチャーを管理するのではなく、クラウドプロバイダーを使ってアプリケーションやサービスを構築し、実行するモデルです。Datadog [サーバーレスモニタリング][1]は、サーバーレスインフラクチャーからメトリクス、ログ、トレースを収集し、アプリケーションの健全性とパフォーマンスを監視することを可能にします。
 
-このガイドでは、ワンクリックで起動できるサーバーレスの[サンプルアプリ][2]を利用します。このアプリには、サーバーレスモニタリングがあらかじめ構成されています。このガイドに従って、サンプルアプリの問題をどのようにトラブルシューティングするか、また、サーバーレスモニタリングがどのような可視性を提供できるかを確認します。
+このガイドでは、サーバーレスの[サンプルアプリ][2]を使用します。このサンプルアプリは、使い慣れたプログラミング言語と IaC (Infrastructure as Code) ツールを使って起動できます。アプリにはあらかじめ Serverless Monitoring が設定されているため、このガイドに沿ってサンプルアプリの問題をトラブルシューティングする方法や、Serverless Monitoring が提供する可視性の種類を確認してください。
 
-### サンプルアプリをインストールする
+### サンプルアプリをデプロイする
 
-1. [CloudFormation Stack を起動します][3]。このリンクから **Create stack** ページが表示されます。
-2. [Datadog API キー][4] と [Datadog サイト][5]を入力します ({{< region-param key="dd_site" code="true" >}})。
+1. [サンプルアプリ][3]のリポジトリをローカルマシンに複製します。
+2. 任意のランタイムおよび IaC ツールを選択し、該当するデプロイ手順のリンクを参照します。
+3. [Datadog API キー][4]と [Datadog サイト][5] ({{< region-param key="dd_site" code="true" >}}) を確認し、次の手順で使用します。
+4. 選択したランタイムと IaC の手順に従い、サンプルアプリケーションをデプロイします。
+5. デプロイが完了したら、リポジトリのルートにある Postman コレクションを使用するか、[負荷テスト][6]を実行します。
 
-  {{< img src="getting_started/serverless/aws_create_stack.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+[Serverless View でサンプルアプリの関数を確認できます][7]。
 
-   次に、IAM 機能を確認し、**Create Stack** をクリックします。
-
-3. スタック作成後、Outputs タブを開きます。
-
-  {{< img src="getting_started/serverless/aws_outputs.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
-
-  `ApiGatewayInvokeURL` にアクセスして、サンプルアプリを数回起動します。すると、"Sent message to SNS" という成功メッセージが返ってきます。
-
-各呼び出しは以下のように実行されます。
-
-```python
-import boto3, os
-
-def handler(event, context):
-    sns = boto3.client('sns')
-
-    sns.publish(
-        TopicArn=os.environ.get("SNS_TOPIC_ARN"),
-        Message='Message sent to SNS'
-        )
-
-    return {
-        "body": "Sent message to SNS",
-        "statusCode": 200
-    }
-```
-
-[サーバーレスビューでサンプルアプリの関数を見る][6]ことができます。
-
-{{< img src="getting_started/serverless/serverless_view_2024.png" alt="サーバーレスモニタリング: エクスプローラーページ「サーバーレスビュー」" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024_2.png" alt="サーバーレスモニタリング: サーバーレスビュー (エクスプローラーページ) " style="width:80%;">}}
 
 ## サーバーレスビュー
 
 サーバーレスビューは、AWS 環境内のすべてのサーバーレスリソースからのテレメトリーを表示します。このページは、アプリケーションの監視、デバッグ、最適化のための出発点として使用できます。
 
-サンプルアプリを一度でも起動したことがあれば、`datadog-sample-entry-function` と `datadog-sample-sqs-consumer-function` が表示されるはずです。
+サーバーレスビューでは、リソースは `SERVICE_NAME` ごとにグループ化されます。関数を少なくとも一度呼び出していれば、それぞれのバックエンドサービスが別々のサービスグループとして表示されます。
 
-{{< img src="getting_started/serverless/functions_view.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+{{< img src="getting_started/serverless/functions_view_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
 ### サーバーレスインサイト
-サーバーレスビューでは、一番右の列に ** Insights** というタイトルがあります。Datadog は、サーバーレスアプリケーションの[高エラー][7]や[高継続時間][8]などの潜在的な問題を自動的にハイライトし、これらの問題は Insights 列に表示されます。
+サーバーレスビューの最も右側の列は **Insights** と呼ばれ、[高いエラー率][8]や[高い処理時間][9]など、サーバーレスアプリケーションの潜在的な問題を Datadog が自動的にハイライトして表示します。
 
-サーバーレスサンプルアプリケーションについて、Datadog は[コールドスタート][9]を検出した可能性が高いです。コールドスタートは、サーバーレスアプリケーションがトラフィックの急激な増加を受け取ったときに発生します。これは、関数が以前は比較的一定の数のリクエストを受け取っていたのに、突然、より多くのリクエストを受け取るようになった場合や、このケースのように、関数が以前は非アクティブで、初めて呼び出された場合に発生する可能性があります。
+サーバーレスのサンプルアプリケーションでは、[コールドスタート][10]が検出されている可能性があります。コールドスタートは、サーバーレスアプリケーションが突然の大量トラフィックを受け取った場合などに発生します。これは、以前はリクエスト数が比較的一定だった関数が急に多くのリクエストを受け取った場合や、このように関数が非アクティブの状態から初めて呼び出された場合などに起こります。
 
-## 調査するためのエラーを作成する
+## エラーを調査する
 
-サンプルアプリのスタックにある `datadog-sample-entry-function` を編集することで、意図的にエラーを発生させることができます。
+サンプルアプリケーションは定期的にエラーを発生させ、応答が遅くなるように設計されています。その結果、product pricing service (製品価格サービス) で Lambda タイムアウトが発生します。
 
-```python
-  # エントリー Lambda 関数コード
-  def handler(event, context):
+{{< img src="getting_started/serverless/dd_serverless_view_error_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
-    raise Exception('Throw an error.')
-```
+`product-pricing-service` 下の 2 つのサービスでエラーが起こっていることに注目してください。サーバーレスビュー上部の Issues & Insights セクションでも、タイムアウトが発生しているサービスがあることが示されています。
 
-{{< img src="getting_started/serverless/aws_error.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
-
-
-この変更をデプロイして、サンプルアプリを再度起動し、Datadog でこのエラーを調査する方法を確認します。
-
-{{< img src="getting_started/serverless/dd_serverless_view_error.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
-
-`datadog-sample-entry-function` には 5 つのエラーがあることに注意してください。
+{{< img src="getting_started/serverless/insights_and_issues.png" alt="サーバーレスビューでのインサイトと問題の表示" style="width:80%;">}}
 
 ## 関数の詳細
 関数をクリックすると、呼び出しや最近のデプロイメントに関する詳細が表示されます。
 
-{{< img src="getting_started/serverless/details_error.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+{{< img src="getting_started/serverless/details_error_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
-上図のように、詳細ビューには3つのグラフが表示されます。これらは、利用可能な任意のメトリクスを表示するように設定できます。デフォルトでは、3 つの[拡張 Lambda メトリクス ][10]: 呼び出し、エラー、継続時間が表示されます。
+詳細ビューには 3 つのグラフが含まれ、利用可能な任意のメトリクスを設定できます。デフォルトでは 3 つの[拡張 Lambda メトリクス][11] (invocations、errors、duration) が表示されます。
 
-Datadog は、低レイテンシー、数秒単位の粒度、コールドスタートやカスタムタグの詳細なメタデータを備えた拡張 Lambda メトリクスをすぐに生成します。また、デフォルトの[拡張 Lambda メトリクスダッシュボード][11]を表示することができます。
+Datadog は、拡張 Lambda メトリクスを低レイテンシーかつ数秒単位の粒度で収集し、コールドスタートやカスタムタグに関する詳細なメタデータを付与した状態で提供します。デフォルトの[拡張 Lambda メトリクスダッシュボード][12]もあわせてご確認ください。
 
 
 ### Invocations
@@ -101,45 +65,46 @@ Datadog は、低レイテンシー、数秒単位の粒度、コールドスタ
 
 各呼び出しは、トレースと関連付けられています。**Open Trace** をクリックすると、各呼び出しのトレースが表示されます。
 
-{{< img src="getting_started/serverless/dd_flame_graph.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_flame_graph_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
-**Flame Graph** タブには、実行時間全体の中で最も高い割合を占めたサービスを含め、この呼び出しの間に何が起こったかを正確に表示します。フレームグラフは、リクエストが APIGateway から `datadog-sample-entry-function` を経て、SNS、SQS、そして最後に `datadog-sample-sqs-function` を通過したときの様子を表示します。
+**Flame Graph** タブでは、呼び出しの期間中にどのサービスが全体の実行時間のうち最大の割合を占めていたかなどが正確に分かります。Flame Graph では、API Gateway を経由して `create-product-function` に至るリクエストの流れを可視化します。
 
-{{< img src="getting_started/serverless/trace_map.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+ズームアウトすると、下流のすべてのサービスを含むエンドツーエンドのトレース全体を確認できます。
+
+{{< img src="getting_started/serverless/trace_map_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
 **Trace Map** タブでは、サービスの流れや相互の接続を視覚化することができます。
 
-詳細トレースビューの下半分には、スタックトレースが表示され、エラーをスローしたコードの行が明らかにされます。
+エラーを含むトレースを表示している場合、詳細ビューの下部にエラーの内容が表示されます。
 
 ```
-Traceback (most recent call last):
-  File /opt/python/lib/python3.9/site-packages/datadog_lambda/wrapper.py, line 142, in __call__
-    self.response = self.func(event, context, **kwargs)
-File /var/task/index.py, line 17, in handler
-    raise Exception('Throw an error.')
-Exception: Throw an error.
+Error: Failure generating prices
+  at PricingService.calculate (/var/task/index.js:94382:13)
+  at ProductUpdatedEventHandler.handle (/var/task/index.js:95826:51)
+  at handler (/var/task/index.js:95854:34)
 ```
 
 その下で、Lambda のリクエストとレスポンスのペイロードを調べることもできます。Datadog は、Lambda の起動ごとにイベントペイロードを収集します。
 
-### ログ管理
+### ログ
 
 サーバーレスのサンプルアプリは、デフォルトでログが有効になっています。各関数のログは、その **Logs** タブで見ることができます。
 
-{{< img src="getting_started/serverless/dd_logs_view.png" alt="2 つの関数のクローズアップ" style="width:80%;">}}
+{{< img src="getting_started/serverless/dd_logs_view_2.png" alt="2 つの関数をクローズアップした画像" style="width:80%;">}}
 
-これらのログをフィルタリングしてエラーだけを表示したり、[ログエクスプローラー][12]で表示したりすることができます。
+これらのログは、エラーのみを表示するようにフィルタリングしたり、[Log Explorer][13] で閲覧したりできます。
 
 
 [1]: /ja/serverless
 [2]: https://github.com/DataDog/serverless-sample-app
-[3]: https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-serverless-sample-app&templateURL=https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-sample-app/latest.yaml
+[3]: https://github.com/DataDog/serverless-sample-app?tab=readme-ov-file#implementations
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://docs.datadoghq.com/ja/getting_started/site
-[6]: https://app.datadoghq.com/functions?cloud=aws&text_search=datadog-serverless-sample-app
-[7]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-errors
-[8]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-duration
-[9]: https://docs.datadoghq.com/ja/serverless/guide/insights/#cold-starts
-[10]: https://docs.datadoghq.com/ja/serverless/enhanced_lambda_metrics
-[11]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
-[12]: https://docs.datadoghq.com/ja/logs/explorer/
+[6]: https://github.com/DataDog/serverless-sample-app/tree/main?tab=readme-ov-file#load-tests
+[7]: https://app.datadoghq.com/functions?cloud=aws&text_search=product
+[8]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-errors
+[9]: https://docs.datadoghq.com/ja/serverless/guide/insights/#high-duration
+[10]: https://docs.datadoghq.com/ja/serverless/guide/insights/#cold-starts
+[11]: https://docs.datadoghq.com/ja/serverless/enhanced_lambda_metrics
+[12]: https://app.datadoghq.com/screen/integration/30306?_gl=1*19700i3*_ga*OTk0Mjg4Njg4LjE2NDIwOTM2OTY.*_ga_KN80RDFSQK*MTY0OTI3NzAyMC4xNTAuMS4xNjQ5MjgzMjI1LjA.
+[13]: https://docs.datadoghq.com/ja/logs/explorer/

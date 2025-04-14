@@ -247,7 +247,7 @@ Esta guía solo ha tratado la generación de perfiles de forma superficial, pero
 
 ## Leer más
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://docs.docker.com/compose/install/

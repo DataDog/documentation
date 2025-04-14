@@ -32,7 +32,7 @@ categories:
 - caching
 - log collection
 - network
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
 display_on_public_website: true
@@ -40,7 +40,7 @@ draft: false
 git_integration_title: powerdns_recursor
 integration_id: powerdns
 integration_title: Power DNS Recursor
-integration_version: 2.5.1
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: powerdns_recursor
@@ -77,7 +77,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 - クエリ回答時間: 1 ミリ秒、10 ミリ秒、100 ミリ秒、1 秒未満、および 1 秒以上の時間がかかった応答の数を確認します。
 - クエリのタイムアウト
-- Cache hits and misses.
+- キャッシュヒット数およびミス数
 - タイプごとの回答率: SRVFAIL、NXDOMAIN、NOERROR
 - 無視および削除されたパケット数
 

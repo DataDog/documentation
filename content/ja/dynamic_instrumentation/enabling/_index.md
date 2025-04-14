@@ -5,7 +5,6 @@ further_reading:
 - link: /agent/
   tag: ドキュメント
   text: Datadog Agent の概要
-is_beta: false
 private: false
 title: ダイナミックインスツルメンテーションを有効にする
 type: multi-code-lang
@@ -17,7 +16,7 @@ type: multi-code-lang
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

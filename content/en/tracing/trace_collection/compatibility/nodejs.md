@@ -73,7 +73,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module                  | Versions | Support Type    | Notes                                      |
 | ----------------------- | -------- | --------------- | ------------------------------------------ |
 | [connect][6]           | `>=2`    | Fully supported |                                             |
-| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and [more][8]     |
+| [express][7]           | `>=4`    | Fully supported | Supports Sails, Loopback, and other frameworks built on top of Express     |
 | [fastify][9]           | `>=1`    | Fully supported |                                             |
 | [graphql][10]           | `>=0.10` | Fully supported | Supports Apollo Server and express-graphql |
 | [graphql-yoga][65]      | `>=3.6.0`| Fully supported | Supports graphql-yoga v3 executor          |
@@ -107,8 +107,8 @@ Or, modify the `package.json` file if you typically start an application with np
     "start": "next start",
 
     // suggested command
-    "start": "node --require dd-trace/init ./node_modules/next start",
-    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/next start",
+    "start": "node --require dd-trace/init ./node_modules/.bin/next start",
+    "start": "NODE_OPTIONS='--require dd-trace/init' ./node_modules/.bin/next start",
 ```
 
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
@@ -160,7 +160,8 @@ Or, modify the `package.json` file if you typically start an application with np
 | Module             | Versions   | Support Type    | Notes                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
 | [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
-| [openai][64]       | `3.x`      | Fully supported |                                                        |
+| [openai][64]       | `>=3.0.0`  | Fully supported |                                                        |
+| [langchain][66]      | `>=0.1.0`  | Partially supported | The following workflow invocations are supported: <br /><br /><ul><li>`chain.invoke` and `chain.batch`</li><li>`chat_model.invoke`</li><li>`llm.invoke`</li><li>`openaiEmbeddings.embedQuery` and `openaiEmbeddings.embedDocuments`</li></ul> |
 
 ### Promise library compatibility
 
@@ -200,7 +201,6 @@ For additional information or to discuss [leave a comment on this github issue][
 [5]: https://datadog.github.io/dd-trace-js/#integrations
 [6]: https://github.com/senchalabs/connect
 [7]: https://expressjs.com
-[8]: https://expressjs.com/en/resources/frameworks.html
 [9]: https://www.fastify.io
 [10]: https://github.com/graphql/graphql-js
 [11]: https://grpc.io/
@@ -226,7 +226,7 @@ For additional information or to discuss [leave a comment on this github issue][
 [31]: https://github.com/luin/ioredis
 [32]: https://knexjs.org
 [33]: https://github.com/3rd-Eden/memcached
-[34]: http://mongodb.github.io/node-mongodb-native/core
+[34]: https://www.mongodb.com/docs/drivers/node/current/
 [35]: https://github.com/mysqljs/mysql
 [36]: https://github.com/sidorares/node-mysql2
 [37]: https://oracle.github.io/node-oracledb/
@@ -257,3 +257,4 @@ For additional information or to discuss [leave a comment on this github issue][
 [63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [64]: https://github.com/openai/openai-node
 [65]: https://github.com/dotansimha/graphql-yoga
+[66]: https://js.langchain.com/

@@ -75,6 +75,14 @@ Subject: Env:Test - System at 50% CPU - #test
 Body: This is a test message showing that env:test is at 50% CPU - #test
 ```
 
+### Email body processing {#email-body-2}
+The email body goes through several cleanup steps to enhance readability and security. The expected changes include:
+
+- **HTML to Markdown**: HTML content is converted to its markdown equivalent.
+- **HTML sanitization**: For security, email bodies are sanitized, allowing only specific HTML tags: `a`, `br`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `iframe`, `img`,
+`li`, `ol`, `p`, `pre`, `span`, `strong`, `ul`. Any other HTML tag, including strings enclosed in `<>`, are removed.
+- **Strip reply/forward content**: Only the most recent email in a thread is retained, with older replies and forwards removed.
+
 ### Datadog event {#datadog-event-2}
 
 The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body. Example event sent with plain text:
@@ -107,6 +115,9 @@ http://example.com/session_id:123456
 # Encoded
 http://example.com/session_id%3A123456
 ```
+
+### Email size
+The maximum allowed email size, including content and attachments, is 20MB. Emails exceeding this limit are ignored.
 
 [1]: /integrations/
 [2]: /agent/agent_checks/

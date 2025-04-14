@@ -22,6 +22,11 @@ Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your a
 
 If there are no debug symbols for your application, [upload them][2].
 
+<div class="alert alert-warning">
+Ensure that the size of each debug symbol does not exceed the limit of **500 MB**, otherwise the upload is rejected.
+For iOS dSYMs, individual files up to **2 GB** are supported. 
+</div>
+
 ### Debug symbol tags do not match
 
 Datadog relies on different tags to match debug symbols with stack traces. These tags vary for each type of application:
@@ -29,7 +34,7 @@ Datadog relies on different tags to match debug symbols with stack traces. These
 | Application type | Tag combination used for matching |
 | ---- | ---- |
 | JavaScript | `service`, `version`, `path`|
-| Android | v1.13.0: `build_id`<br/> Older versions: `service`, `version`, `variant`|
+| Android | v1.13.0+: `build_id`<br/> Older versions: `service`, `version`, `variant`|
 | iOS | `uuid` |
 | React Native | `service`, `version`, `bundle_name`, `platform`; if multiple source maps match on these fields, the one with the highest `build_number` is selected |
 | Flutter | `service`, `version`, `variant`, `architecture` |

@@ -13,7 +13,6 @@
     "escalation_message": "the situation has escalated",
     "evaluation_delay": 700,
     "group_retention_duration": "2d",
-    "groupby_simple_monitor": false,
     "include_tags": true,
     "locked": false,
     "new_host_delay": 600,

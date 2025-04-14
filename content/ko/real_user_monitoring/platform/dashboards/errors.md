@@ -45,4 +45,4 @@ RUM 모바일 앱 충돌과 오류 대시보드는 모바일 애플리케이션 
 [3]: /ko/real_user_monitoring/ios/data_collected/
 [4]: /ko/real_user_monitoring/android/data_collected/
 [5]: /ko/real_user_monitoring/reactnative/data_collected/
-[6]: /ko/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[6]: /ko/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/

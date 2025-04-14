@@ -3,6 +3,7 @@ title: Metrics without Limits™
 aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
+  - /metrics/faq/why-is-my-save-button-disabled/
 further_reading:
   - link: "https://www.datadoghq.com/blog/metrics-without-limits"
     tag: "Blog"
@@ -32,7 +33,7 @@ By default, the tag configuration modal pre-populates with a Datadog recommended
 4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 5. Click **Save**.
 
-{{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
+{{< img src="metrics/mwl_example_include_tags-compressed_03182025.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
 You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
 
@@ -43,11 +44,13 @@ You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of you
 5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
 6. Click **Save**.
 
-{{< img src="metrics/mwl-example-tag-exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
+{{< img src="metrics/mwl-example-tag-exclusion-compressed_04032025.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
 
 Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
+
+**Note:** For tags to be managed on a metric, the metric must have a type declared. This is typically done when a metric is submitted, but may also be done manually using the `Edit` button for a metric in Metrics Summary.
 
 ### Configure multiple metrics at a time
 
@@ -55,20 +58,9 @@ Optimize your custom metrics volumes by using the [bulk metric tag configuration
 
 You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API.
 
-### Refine and optimize your aggregations
-
-You can further adjust your custom metrics filters by opting in to more [metrics aggregations][6] on your count, gauge, or rate metrics. To preserve the mathematical accuracy of your queries, Datadog only stores the most frequently queried time/space aggregation combination for a given metric type: 
-
-- Configured counts and rates are queryable in time/space with SUM
-- Configured gauges are queryable in time/space with AVG
-
-You can add or remove aggregations at any time with no required Agent or code-level changes. 
-
-The tag configuration modal pre-populates with an allowlist of aggregations that have been actively queried on dashboards, notebooks, monitors and through API in the past 30 days (colored in blue with an icon). You can also include your own additional aggregations.
-
 ## Metrics without Limits™ billing
 
-Configuring your tags and aggregations gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Configuring your tags gives you control over which custom metrics can be queried -- ultimately reducing your billable count of custom metrics. Metrics without Limits™ decouples ingestion costs from indexing costs. You can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. If the volume of data Datadog is ingesting for your configured metrics differs from the smaller, remaining volume you index, you can see two distinct volumes on your Usage page as well as the Metrics Summary page. 
 
 - **Ingested Custom Metrics**: The original volume of custom metrics based on all ingested tags.
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -87,8 +79,6 @@ Learn more about [Custom Metrics Billing][8].
 2. Configure your unqueried metrics with empty tag configurations.
 
    As your teams continue cleaning up noisy metrics that are never queried in the Datadog platform, you can instantly minimize the costs of these unqueried metrics by configuring them with an empty allowlist of tags. 
-
-   Ask your Customer Success Manager for an unqueried metrics report.
 
 3. Review your usage and billing. After configuring your metrics, the impact of your changes can be validated in three ways: 
 
