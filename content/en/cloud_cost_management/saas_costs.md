@@ -259,16 +259,18 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "GitHub" %}}
 
-1. Navigate to the Datadog [Github Costs tile][108].
-2. Click the **Add New** button.
-3. Enter an account name, your personal access token, and your enterprise name (in `enterprse-name` format), as well as any appropriate tags
-4. Click the checkmark button to save this account
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][101] page in GitHub.
+2. Navigate to the Datadog [GitHub Costs tile][108].
+3. Click the **Add New** button.
+4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags
+5. Click the checkmark button to save this account
 
 Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
 {{< img src="cloud_cost/saas_costs/github_setup.png" alt="Integrate with GitHub to collect cost data." style="width:100%" >}}
 
 [108]: https://app.datadoghq.com/integrations/github-costs
+[109]: https://github.com/settings/tokens
 
 {{% /tab %}}
 {{< /tabs >}}
