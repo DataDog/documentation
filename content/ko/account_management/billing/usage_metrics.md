@@ -52,7 +52,6 @@ Datadog에서는 거의 실시간으로 현재 예상 사용량을 계산합니�
 | 데이터베이스 호스트                | `datadog.estimated_usage.dbm.hosts` | 지난 시간 발견된 고유한 DBM 호스트입니다. |
 | ASM 호스트                     | `datadog.estimated_usage.asm.hosts` | 지난 시간 발견된 고유한 ASM 호스트입니다. |
 | ASM 작업                     | `datadog.estimated_usage.asm.tasks` | 지난 5분 동안 발견된 ASM 고유한 Fargate 작업입니다. |
-| 인시던트 관리(활성 사용자)   | `datadog.estimated_usage.incident_management.active_users` | 이번 달부터 현재(달력 기준)까지 발견된 활성 IM 사용자입니다. |
 | CI Visibility 파이프라인 커미터 | `datadog.estimated_usage.ci_visibility.pipeline.committers` | 이번 달부터 현재까지(달력 기준) 발견된 파이프라인 커미터입니다. |
 | CI Visibility 테스트 커미터 | `datadog.estimated_usage.ci_visibility.test.committers` | 이번 달부터 현재까지(달력 기준) 발견된 테스트 커미터입니다. |
 | IOT 장치                   | `datadog.estimated_usage.iot.devices` | 지난 시간 발견된 고유한 IoT 장치입니다. |

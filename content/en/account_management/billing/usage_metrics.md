@@ -56,7 +56,6 @@ Estimated usage metrics are generally available for the following usage types:
 | Database Hosts                | `datadog.estimated_usage.dbm.hosts` | Unique DBM hosts seen in the last hour. |
 | ASM Hosts                     | `datadog.estimated_usage.asm.hosts` | Unique ASM hosts seen in the last hour. |
 | ASM Tasks                     | `datadog.estimated_usage.asm.tasks` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
-| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` | Active IM users seen from (calendar) month-to-date. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
