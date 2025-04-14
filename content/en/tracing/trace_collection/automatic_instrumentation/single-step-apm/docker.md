@@ -11,13 +11,11 @@ further_reading:
 
 ## Overview
 
-## Requirements
-
-TODO: Determine if we want to remove platform-specific requirements from Compatibility page and instead include them here 
+On a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration steps required. 
 
 ## Enable APM on your applications
 
-For a Docker Linux container:
+To enable APM on a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
@@ -48,7 +46,7 @@ After you complete these steps, you may want to enable [runtime metrics][3] or v
 
 When you run the one-line installation command, there are a few options to customize your experience:
 
-### `DD_APM_INSTRUMENTATION_LIBRARIES` - customizing APM libraries
+### Customizing APM libraries
 
 By default, Java, Python, Ruby, Node.js and .NET Core Datadog APM libraries are installed when `DD_APM_INSTRUMENTATION_ENABLED` is set. `DD_APM_INSTRUMENTATION_LIBRARIES` is used to override which libraries are installed. The value is a comma-separated string of colon-separated library name and version pairs.
 
@@ -75,7 +73,7 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 
 ### Removing instrumentation for specific services
 
-To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
+To remove APM instrumentation and stop sending traces from a specific service:
 
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell

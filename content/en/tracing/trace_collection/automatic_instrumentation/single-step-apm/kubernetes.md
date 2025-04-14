@@ -11,13 +11,17 @@ further_reading:
 
 ## Overview
 
+On a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][4] your applications in one step, with no additional configuration steps required. 
+
 ## Requirements
 
-TODO: Determine if we want to remove platform-specific requirements from Compatibility page and instead include them here 
+- Kubernetes v1.20+
+- [`Helm`][1] for deploying the Datadog Operator.
+- [`Kubectl` CLI][2] for installing the Datadog Agent.
+
+<div class="alert alert-warning">Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.</div>
 
 ## Enable APM on your applications
-
-*Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 You can enable APM by installing the Agent with either:
 
@@ -26,13 +30,9 @@ You can enable APM by installing the Agent with either:
 
 <div class="alert alert-info">Single Step Instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.</div>
 
-### Requirements
+{{< tabs >}}
+{{% tab "Installing with Datadog Operator" %}}
 
-- Kubernetes v1.20+
-- [`Helm`][1] for deploying the Datadog Operator.
-- [`Kubectl` CLI][2] for installing the Datadog Agent.
-
-{{< collapse-content title="Installing with Datadog Operator" level="h4" >}}
 Follow these steps to enable Single Step Instrumentation across your entire cluster with the Datadog Operator. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
 **Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
@@ -40,12 +40,15 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 To enable Single Step Instrumentation with the Datadog Operator:
 
 1. Install the [Datadog Operator][5] with Helm:
+
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    helm install my-datadog-operator datadog/datadog-operator
    ```
+
 2. Create a Kubernetes secret to store your Datadog [API key][6]:
+
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
@@ -89,9 +92,11 @@ To enable Single Step Instrumentation with the Datadog Operator:
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
-{{< /collapse-content >}}
 
-{{< collapse-content title="Installing with Helm" level="h4" >}}
+{{% /tab %}}
+
+{{% tab "Installing with Helm" %}}
+
 Follow these steps to enable Single Step Instrumentation across your entire cluster with Helm. This automatically sends traces for all applications in the cluster that are written in supported languages.
 
 **Note**: To configure Single Step Instrumentation for specific namespace or pods, see [Advanced options](#advanced-options).
@@ -136,13 +141,16 @@ To enable Single Step Instrumentation with Helm:
    ```
 5. After waiting a few minutes for the Datadog Cluster Agent changes to apply, restart your applications.
 
-{{< /collapse-content >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 After you complete these steps, you may want to enable [runtime metrics][3] or view observability data from your application in the [Software Catalog][4].
 
-## Advanced Options
+## Advanced options
 
 When you run the one-line installation command, there are a few options to customize your experience:
+
+{{< tabs >}}
 
 {{% tab "Kubernetes (Agent v7.64+)" %}}
 
@@ -512,6 +520,7 @@ You can pull the tracing library from a different registry by changing it to `do
 For instructions on changing your container registry, see [Changing Your Container Registry][33].
 
 {{% /tab %}}
+{{< /tabs >}}
 
 ## Removing Single Step APM instrumentation from your Agent
 
@@ -520,8 +529,6 @@ If you don't want to collect trace data for a particular service, host, VM, or c
 ### Removing instrumentation for specific services
 
 To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
-
-**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
 
 #### Using workload selection (recommended)
 
@@ -551,11 +558,10 @@ As an alternative, or for a version of the agent that does not support workload 
 
 To stop producing traces, uninstall APM and restart the infrastructure:
 
-**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
-
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< collapse-content title="Datadog Operator" level="h4" >}}
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
 
 1. Set `instrumentation.enabled=false` in `datadog-agent.yaml`:
    ```yaml
@@ -569,9 +575,9 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
-{{< /collapse-content >}}
+{{% /tab %}}
 
-{{< collapse-content title="Helm" level="h4" >}}
+{{% tab "Helm" %}}
 
 1. Set `instrumentation.enabled=false` in `datadog-values.yaml`:
    ```yaml
@@ -585,7 +591,8 @@ The file you need to configure depends on if you enabled Single Step Instrumenta
    ```shell
    helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
-{{< /collapse-content >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
