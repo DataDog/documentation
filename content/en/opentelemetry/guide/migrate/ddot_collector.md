@@ -62,6 +62,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: ${env:DD_SITE}
 processors:
   infraattributes:
     cardinality: 2
@@ -112,6 +113,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: ${env:DD_SITE}
 processors:
   infraattributes:
     cardinality: 2
