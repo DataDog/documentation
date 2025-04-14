@@ -6102,36 +6102,41 @@ menu:
       parent: cloud_siem
       identifier: cloud_siem_default_rules
       weight: 4
+    - name: Threat Intelligence
+      url: /security/cloud_siem/threat_intelligence
+      parent: cloud_siem
+      identifier: cloud_siem_threat_intelligence
+      weight: 5
     - name: Investigate Security Signals
       url: /security/cloud_siem/investigate_security_signals
       parent: cloud_siem
       identifier: cloud_siem_investigate_security_signals
-      weight: 5
+      weight: 6
     - name: Investigator
       url: security/cloud_siem/investigator
       parent: cloud_siem
       identifier: cloud_siem_investigator
-      weight: 6
+      weight: 7
     - name: Historical Jobs
       url: security/cloud_siem/historical_jobs
       parent: cloud_siem
       identifier: cloud_siem_log_historical_jobs
-      weight: 7
+      weight: 8
     - name: Risk Insights
       url: security/cloud_siem/entities_and_risk_scoring
       parent: cloud_siem
       identifier: cloud_siem_entities_and_risk_scoring
-      weight: 8
+      weight: 9
     - name: Security Operational Metrics
       url: security/cloud_siem/security_operational_metrics/
       parent: cloud_siem
       identifier: siem_security_operational_metrics
-      weight: 9
+      weight: 10
     - name: Guides
       url: security/cloud_siem/guide/
       parent: cloud_siem
       identifier: siem_guides
-      weight: 10
+      weight: 11
     - name: Cloud Security Management
       url: security/cloud_security_management
       parent: security_platform_heading
