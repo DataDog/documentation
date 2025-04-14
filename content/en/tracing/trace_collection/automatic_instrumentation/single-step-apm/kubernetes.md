@@ -40,15 +40,12 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 To enable Single Step Instrumentation with the Datadog Operator:
 
 1. Install the [Datadog Operator][5] with Helm:
-
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm repo update
    helm install my-datadog-operator datadog/datadog-operator
    ```
-
 2. Create a Kubernetes secret to store your Datadog [API key][6]:
-
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```

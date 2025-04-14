@@ -153,7 +153,7 @@ In this example, the test `aaa-aaa-aaa` runs with the override application versi
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }

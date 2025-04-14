@@ -35,7 +35,7 @@ To enable APM in a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][2].
@@ -55,7 +55,6 @@ Example values for `DD_APM_INSTRUMENTATION_LIBRARIES`:
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1"` - install only the Java Datadog APM library pinned to the major version 1 release line.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2"` - install only the Java and Python Datadog APM libraries pinned to the major versions 1 and 2 respectively.
 - `DD_APM_INSTRUMENTATION_LIBRARIES="java:1.38.0,python:2.10.5"` - install only the Java and Python Datadog APM libraries pinned to the specific versions 1.38.0 and 2.10.5 respectively.
-
 
 Available versions are listed in source repositories for each language:
 
