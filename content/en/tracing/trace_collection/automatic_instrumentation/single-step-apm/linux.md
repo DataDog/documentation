@@ -15,7 +15,7 @@ Linux host or VM
 
 ## Requirements
 
-TODO: Determine if we want to remove platform-specific requirements from Compatibility page and instead include them here 
+TODO: Determine if we want to remove platform-specific requirements from Compatibility page and instead include them here  
 
 ## Enable APM on your applications
 
@@ -62,9 +62,28 @@ Available versions are listed in source repositories for each language:
 
 ## Removing Single Step APM instrumentation from your Agent
 
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
+
 ### Removing instrumentation for specific services
 
+To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
+
+   ```shell
+   DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
+   ```
+2. Restart the service.
+
 ### Removing APM for all services on the infrastructure
+
+To stop producing traces, uninstall APM and restart the infrastructure:
+
+1. Run:
+   ```shell
+   dd-host-install --uninstall
+   ```
+2. Restart the services on the host or VM.
 
 ## Further reading
 

@@ -515,9 +515,77 @@ For instructions on changing your container registry, see [Changing Your Contain
 
 ## Removing Single Step APM instrumentation from your Agent
 
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
+
 ### Removing instrumentation for specific services
 
+To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
+
+#### Using workload selection (recommended)
+
+With workload selection, you can enable and disable tracing for specific applications. [See configuration details here](#advanced-options).
+
+#### Using the Datadog Admission Controller
+
+As an alternative, or for a version of the agent that does not support workload selection, you can also disable pod mutation by adding a label to your pod.
+
+<div class="alert alert-warning">In addition to disabling SSI, the following steps disable other mutating webhooks. Use with caution.</div>
+
+1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
+   ```yaml
+   spec:
+     template:
+       metadata:
+         labels:
+           admission.datadoghq.com/enabled: "false"
+   ```
+2. Apply the configuration:
+   ```shell
+   kubectl apply -f /path/to/your/deployment.yaml
+   ```
+3. Restart the services you want to remove instrumentation for.
+
 ### Removing APM for all services on the infrastructure
+
+To stop producing traces, uninstall APM and restart the infrastructure:
+
+**Note**: Single Step Instrumentation for Kubernetes is GA for Agent versions 7.64+, and in Preview for Agent versions <=7.63.
+
+The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
+
+{{< collapse-content title="Datadog Operator" level="h4" >}}
+
+1. Set `instrumentation.enabled=false` in `datadog-agent.yaml`:
+   ```yaml
+   features:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
+2. Deploy the Datadog Agent with the updated configuration file:
+   ```shell
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
+{{< /collapse-content >}}
+
+{{< collapse-content title="Helm" level="h4" >}}
+
+1. Set `instrumentation.enabled=false` in `datadog-values.yaml`:
+   ```yaml
+   datadog:
+     apm:
+       instrumentation:
+         enabled: false
+   ```
+
+2. Run the following command:
+   ```shell
+   helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
+   ```
+{{< /collapse-content >}}
 
 ## Further reading
 

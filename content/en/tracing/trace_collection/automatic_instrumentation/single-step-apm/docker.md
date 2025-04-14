@@ -71,9 +71,31 @@ Available versions are listed in source repositories for each language:
 
 ## Removing Single Step APM instrumentation from your Agent
 
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the following steps:
+
 ### Removing instrumentation for specific services
 
+To remove APM instrumentation and stop sending traces from a specific service, follow these steps:
+
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
+   ```shell
+   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
+   ```
+2. Restart the service.
+
 ### Removing APM for all services on the infrastructure
+
+To stop producing traces, uninstall APM and restart the infrastructure:
+
+1. Run:
+   ```shell
+   dd-container-install --uninstall
+   ```
+2. Restart Docker:
+   ```shell
+   systemctl restart docker
+   ```
+   Or use the equivalent for your environment.
 
 ## Further reading
 
