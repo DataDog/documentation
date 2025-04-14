@@ -27,6 +27,7 @@ Do translate these _values_ (but not their corresponding keys):
 
 - The value of any `label` key found in the `customization_config` directory (or any nested directories).
 - The value of any `name` key found in the `config/_default/menus` directory.
+- The value of any `other` key found in the `i18n` directory.
 
 ## Markdown files
 
