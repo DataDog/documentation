@@ -156,7 +156,7 @@ Use the [Related Assets facet][16] to gain visibility into the metrics that are 
 Identify your organization's entire list of unqueried and unused metrics:
 
 1. On the [Metrics Summary page][6], find the **Query Activity** facet on the left side. Select the time frame of interest (30, 60, or 90 days).
-2. Find the **Related Assets** facet on the left side, and select **Does not have assets**.
+2. Find the **Related Assets** facet on the left side, and select **Not used in any asset**.
 3. Find the **Configuration** facet on the left side, and select **All Tags**. The combination of these three facets provides you a list of any metrics that aren't queried or used on your assets, and which don't already have a custom tag configuration.
 
 4. Review the resulting table of metrics names. Are there any patterns or are they submitted from a specific service? Find tags associated with these unqueried metrics.
@@ -170,8 +170,7 @@ Identify your organization's entire list of unqueried and unused metrics:
 7. Select **Manage tags** to open the [Metrics without Limits™ Tag configuration modal][13] to configure multiple metrics in bulk.
 8. Specify the metric namespace prefix of the metrics you'd like to configure.
 9. Leave **Include tags** selected. This includes all tags that have been actively queried on your assets (dashboards, notebooks, monitors, and SLOs), in the Metrics Explorer, or through the API.
-10. Uncheck the option to include tags actively queried on dashboards and monitors.
-11. Click **Save**.
+10. Click **Save**.
 
 Based on Datadog's intelligent query insights across thousands of custom metrics customers, we found that using **Metrics without Limits™ on unqueried metrics can reduce the average customer's custom metrics usage by up to 70%**.
 
