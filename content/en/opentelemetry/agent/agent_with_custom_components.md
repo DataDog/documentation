@@ -11,6 +11,10 @@ further_reading:
   The Datadog Agent with embedded OpenTelemetry Collector is in Preview. To request access, fill out this form.
 {{< /callout >}}
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">FedRAMP customers should not enable or use the embedded OpenTelemetry Collector.</div>
+{{< /site-region >}}
+
 This guide explains how to build a Datadog Agent image with additional OpenTelemetry components not included in the default Datadog Agent. To see a list of components already included in the Agent by default, see [Included components][1].
 
 ## Prerequisites
@@ -99,6 +103,8 @@ connectors:
 1. Save your changes to the manifest file.
 
 ## Build and push the Agent image
+
+The custom Agent image you build needs to be stored in your organization's private container registry for your clusters to access it. Additionally, this build process must be repeated each time you update the Agent version to maintain compatibility with new Agent releases.
 
 Build your custom Datadog Agent image and push it to a container registry.
 

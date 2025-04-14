@@ -2,6 +2,7 @@
 categories:
 - cloud
 - aws
+custom_kind: integration
 dependencies: []
 description: Surveillez des métriques clés d'Amazon ECR.
 doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/
@@ -12,7 +13,6 @@ integration_id: ''
 integration_title: Amazon ECR
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_ecr
 public_title: Intégration Datadog/Amazon ECR
@@ -21,13 +21,13 @@ version: '1.0'
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Présentation
+## Section Overview
 
 Amazon Elastic Container Registry (Amazon ECR) est un registre de conteneurs Docker entièrement géré qui permet aux développeurs de stocker, gérer et déployer des images de conteneurs Docker en toute facilité.
 
 Activez cette intégration pour visualiser toutes vos métriques ECR dans Datadog.
 
-## Formule et utilisation
+## Configuration
 
 ### Installation
 
@@ -39,17 +39,17 @@ Si vous ne l'avez pas déjà fait, configurez d'abord [l'intégration Amazon We
    dans la section concernant la collecte de métriques.
 2. Installez l'[intégration Datadog/ECR][3].
 
-## Real User Monitoring
+## Données collectées
 
-### Analyse d'entonnoirs
+### Métriques
 {{< get-metrics-from-git "amazon_ecr" >}}
 
 
-### Aide
+### Événements
 
 L'intégration ECR n'inclut aucun événement.
 
-### Aide
+### Checks de service
 
 L'intégration ECR n'inclut aucun check de service.
 

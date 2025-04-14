@@ -19,21 +19,21 @@ Datastore is in Preview. Use this form to request access today.
 
 ## Overview
 
-The Apps Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
+The Actions Datastore offers a scalable, structured data storage solution within Datadog's App Builder and Workflow Automation products. It supports CRUD (Create, Read, Update, and Delete) operations and integrates seamlessly with Datadog's ecosystem to optimize persistent data storage without the need for external databases.
 
 You can interact with a datastore using an app or a workflow, or you can use the UI in the Datadog App.
 
 
 ## Prerequisites
 
-To interact with the Apps Datastore, your Datadog account must have the following [permissions][6], which are included in the Datadog Standard Role:
+To interact with the Actions Datastore, your Datadog account must have the following [permissions][6], which are included in the Datadog Standard Role:
 
-* `apps_datastore_read` - Allows read access to the data within the Apps Datastore.
-* `apps_datastore_write` - Allows modification of data within the Apps Datastore, including adding, editing, and deleting records.
+* `actions_datastore_read` - Allows read access to the data within the Actions Datastore.
+* `actions_datastore_write` - Allows modification of data within the Actions Datastore, including adding, editing, and deleting records.
 
-To use the [Apps Datastore UI][1], you also need the following permission, which is also included in the Datadog Standard Role:
+To use the [Actions Datastore UI][1], you also need the following permission, which is also included in the Datadog Standard Role:
 
-* `apps_datastore_manage` - Allows management of the Apps Datastore, including creating, updating, and deleting the datastore itself.
+* `actions_datastore_manage` - Allows management of the Actions Datastore, including creating, updating, and deleting the datastore itself.
 
 
 ## Create a datastore
@@ -80,6 +80,16 @@ To use values from a datastore in a workflow or app:
 
 To delete a datastore, click the **Trash (Delete Datastore)** icon in the header of the datastore you want to delete, then click **Confirm** to verify.
 
+## Limitations
+
+Datastore has the following limitations:
+
+- A datastore can contain up to 5,000 rows.
+- A primary key column of type `string` is required and must uniquely identify each row.
+- Each row can be up to 100 KB in size.
+- The primary key value is immutable, it cannot be changed after the row is created.
+
+Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
 
 ## Further reading
 

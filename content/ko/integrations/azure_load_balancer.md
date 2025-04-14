@@ -2,8 +2,9 @@
 aliases:
 - /ko/integrations/azure_loadbalancer
 categories:
-- cloud
+- 클라우드
 - azure
+custom_kind: 통합
 dependencies: []
 description: Azure Load Balancer의 핵심 메트릭 추적하기.
 doc_link: https://docs.datadoghq.com/integrations/azure_load_balancer/
@@ -14,7 +15,6 @@ integration_id: azure-load-balancer
 integration_title: Microsoft Azure Load Balancer
 integration_version: ''
 is_public: true
-custom_kind: 통합
 manifest_version: '1.0'
 name: azure_load_balancer
 public_title: Datadog-Microsoft Azure Load Balancer 통합
@@ -35,7 +35,7 @@ Datadog Azure 통합을 사용해 Azure Load Balancer 메트릭을 수집할 수
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_load_balancer" >}}
@@ -45,7 +45,7 @@ Datadog Azure 통합을 사용해 Azure Load Balancer 메트릭을 수집할 수
 
 Azure Load Balancer 통합에는 이벤트가 포함되어 있지 않습니다.
 
-### 서비스 검사
+### 서비스 점검
 
 Azure Load Balancer 통합에는 서비스 점검이 포함되어 있지 않습니다.
 

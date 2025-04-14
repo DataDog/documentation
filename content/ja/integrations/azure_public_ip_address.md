@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/azure_publicipaddress
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure パブリック IP アドレスのキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_public_ip_address/

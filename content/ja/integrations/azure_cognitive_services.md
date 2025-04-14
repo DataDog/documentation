@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/azure_cognitiveservices
 categories:
-- cloud
+- クラウド
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Cognitive Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cognitive_services/
