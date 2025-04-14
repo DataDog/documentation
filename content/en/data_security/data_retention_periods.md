@@ -18,7 +18,7 @@ attributes:
        - **Indexed spans**: 15 or 30 days, determined by customer plan
        - **Services/resources statistics**: 30 days
        - **Viewed traces**: 15 months
-  - product: Application Security Management
+  - product: App and API Protection
     data_type: |
        - **Security signals**: 15 months
        - **Spans**: 90 days
@@ -40,14 +40,14 @@ attributes:
   - product: Cloud Cost Management
     data_type: | 
        - **Recommendations**: 90 days
-  - product: Cloud Security Management
+  - product: Cloud Security
     data_type: | 
        - **Findings and resolved vulnerabilities**: 15 months
   - product: Cloud SIEM
     data_type: | 
        - **Signals**: 15 months
        - **Detections, notifications, suppressions**: Retained for the duration of the account
-  - product: Cloud Workload Security
+  - product: Workload Protection
     data_type: | 
        - **Events**: 90 days
        - **Security signals**: 15 months

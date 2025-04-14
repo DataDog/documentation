@@ -1,5 +1,5 @@
 ---
-title: Manage CSM Misconfigurations Compliance Rules
+title: Manage Cloud Security Misconfigurations Compliance Rules
 aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
@@ -9,7 +9,7 @@ aliases:
 further_reading:
   - link: "/security/cloud_security_management/misconfigurations"
     tag: "Documentation"
-    text: Getting Started with CSM Misconfigurations
+    text: Getting Started with Cloud Security Misconfigurations
   - link: "/security/cloud_security_management/misconfigurations/custom_rules/"
     tag: "Documentation"
     text: Custom Rules
@@ -18,11 +18,11 @@ further_reading:
     text: Misconfigurations Reports
 ---
 
-Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
+Cloud Security Misconfigurations [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
-The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For CSM Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
+The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For Cloud Security Misconfigurations, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
-CSM Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
+Cloud Security Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
 - [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [CloudFront distribution should be encrypted][3] rule assesses whether an Amazon CloudFront distribution enforces HTTPS to secure communications.
 - [**Infrastructure configuration**][5]: These checks evaluate containers and Kubernetes clusters using rules from CIS compliance benchmarks for Docker and Kubernetes, as well as Linux workloads against CIS host benchmarks for Ubuntu, Red Hat, and Amazon Linux.

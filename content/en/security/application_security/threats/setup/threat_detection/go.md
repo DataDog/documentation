@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Go
+title: Enabling AAP for Go
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -16,10 +16,10 @@ further_reading:
       text: 'Go Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
@@ -40,7 +40,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 2. Datadog has a series of pluggable packages which provide out-of-the-box support for instrumenting a series of Go libraries and frameworks.
    A list of these packages can be found in the [compatibility requirements][1] page. Import these packages into your application and follow the configuration instructions listed alongside each integration.
 
-3. **Recompile your program** with ASM enabled:
+3. **Recompile your program** with AAP enabled:
    ```console
    $ go build -v -tags appsec my-program
    ```
@@ -49,9 +49,9 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    - The Go build tag `appsec` is not necessary if CGO is enabled with `CGO_ENABLED=1`.
    - Datadog WAF needs the following shared libraries on Linux: `libc.so.6` and `libpthread.so.0`.
    - When using the build tag `appsec` and CGO is disabled, the produced binary is still linked dynamically to these libraries.
-   - The Go build tag `datadog.no_waf` can be used to disable ASM at build time in any situation where the requirements above are a hinderance.
+   - The Go build tag `datadog.no_waf` can be used to disable AAP at build time in any situation where the requirements above are a hinderance.
 
-4. **Redeploy your Go service and enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
+4. **Redeploy your Go service and enable AAP** by setting the `DD_APPSEC_ENABLED` environment variable to `true`:
    ```console
    $ env DD_APPSEC_ENABLED=true ./my-program
    ```
@@ -79,7 +79,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your application's deployment configuration file for APM and add the ASM environment variable:
+Update your application's deployment configuration file for APM and add the AAP environment variable:
 
 ```yaml
 spec:

@@ -1,5 +1,5 @@
 ---
-title: Mute Issues in Cloud Security Management
+title: Mute Issues in Cloud Security
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
@@ -7,10 +7,10 @@ further_reading:
 aliases:
   - /security/cloud_security_management/mute_issues
 products:
-  - name: CSM Misconfigurations
+  - name: Cloud Security Misconfigurations
     url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
-  - name: CSM Identity Risks
+  - name: Cloud Security Identity Risks
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 ---
@@ -19,7 +19,7 @@ products:
 
 There may be times when a misconfiguration, issue, or identity risk doesn't match the use case for your business, or you choose to accept it as a known risk. To ignore them, you can mute the underlying misconfiguration, issue, or identity risk for the impacted resources.
 
-For example, the CSM Misconfigurations rule ['Block Public Access' feature is enabled for S3 bucket][1] evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the misconfiguration for the S3 bucket.
+For example, the Cloud Security Misconfigurations rule ['Block Public Access' feature is enabled for S3 bucket][1] evaluates whether an S3 bucket is publicly accessible. If you have an S3 bucket with static assets that are meant to be publicly shared, you can mute the misconfiguration for the S3 bucket.
 
 **Note**: Muting a misconfiguration removes it from the calculation of your posture score.
 

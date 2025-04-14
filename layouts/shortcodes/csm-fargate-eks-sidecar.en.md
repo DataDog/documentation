@@ -1,4 +1,4 @@
-The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
+The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with Workload Protection enabled:
 
 ```yaml
 apiVersion: apps/v1

@@ -3,7 +3,7 @@ title: How Datadog Determines if Resources are Publicly Accessible
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
-  text: "Start tracking misconfigurations with CSM Misconfigurations"
+  text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
 - link: "/security/default_rules/#cat-cloud-security-management"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
@@ -13,7 +13,7 @@ Datadog uses a graph processing framework to map relationships between cloud res
 
 ## Resource dependency graph
 
-The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations resource relationships graph.
+The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Misconfigurations resource relationships graph.
 
 
 **Note**: Not all resources with the Publicly Accessible attribute are shown in these diagrams.

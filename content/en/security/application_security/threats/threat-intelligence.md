@@ -6,16 +6,16 @@ further_reading:
   text: "Threat Intelligence at Datadog"
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Protect against threats with Datadog Application Security Management"
+  text: "Protect against threats with Datadog App and API Protection"
 ---
 
 ## Overview
 
-This topic describes [threat intelligence][1] for Application Security Management (ASM).
+This topic describes [threat intelligence][1] for App and API Protection (AAP).
 
-Datadog provides built-in threat intelligence [datasets][1] for ASM. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
+Datadog provides built-in threat intelligence [datasets][1] for AAP. This provides additional evidence when acting on security activity and reduces detection thresholds for some business logic detections. 
 
-Additionally, ASM supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
+Additionally, AAP supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
 
 ## Best practices
 
@@ -28,7 +28,7 @@ Datadog recommends _against_ the following:
 1. Blocking threat intelligence traces without corresponding security activity. IP addresses might have many hosts behind them. Detection of a residential proxy means that the associated activity has been observed by a host behind that IP. It does not guarantee that the host running the malware or proxy is the same host communicating with your services.
 2. Blocking on all threat intelligence categories, as this is inclusive of benign traffic from corporate VPNs and blocks unmalicious traffic.
 
-## Filtering on threat intelligence in ASM
+## Filtering on threat intelligence in AAP
 
 Users can filter threat intelligence on the Signals and Traces explorers using facets and the search bar.
 
@@ -42,7 +42,7 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
-ASM supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
+AAP supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 
@@ -76,12 +76,12 @@ ip_address,additional_data,category,intention,source
 Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from [Amazon S3, Azure storage, or Google Cloud storage][10].
 
 Notes:
-- It can take 10 to 30 minutes to start enriching ASM traces after creating a table.
+- It can take 10 to 30 minutes to start enriching AAP traces after creating a table.
 - If a primary key is duplicated, it is skipped and an error message about the key is displayed.
 
 On a new [references table][4] page:
 
-1. Name the table. The table name is referenced in ASM's **Threat Intel** config.
+1. Name the table. The table name is referenced in AAP's **Threat Intel** config.
 2. Upload a local CSV or import a CSV from a cloud storage bucket. The file is normalized and validated.
 3. Preview the table schema and choose the IP address as the Primary Key.
    
@@ -117,7 +117,7 @@ Other useful cloud import details to remember:
 
 ### Filter traces by joining the list with a Reference Table
 
-You can filter ASM traces in Datadog by joining a trace table with a Reference Table. 
+You can filter AAP traces in Datadog by joining a trace table with a Reference Table. 
 
 To join a Reference Table with a trace query, you combine rows from the Datadog trace table and a Reference Table based on a related column between them. The traces query returns only those traces where there is a match in both tables.
 
@@ -143,13 +143,13 @@ To join a trace with a Reference Table:
 
 ### Enriching traces for detection rules
 
-Enriching traces includes the threat intelligence attributes in ASM traces when the indicator of compromise matches the value of the `http.client_ip` key in the ASM trace. This enables searching for traces with threat intelligence matches using existing facets and using threat intelligence with detection rules.
+Enriching traces includes the threat intelligence attributes in AAP traces when the indicator of compromise matches the value of the `http.client_ip` key in the AAP trace. This enables searching for traces with threat intelligence matches using existing facets and using threat intelligence with detection rules.
 
 
 
 ## Threat intelligence in the user interface
 
-When viewing the traces in the ASM Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
+When viewing the traces in the AAP Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
 
 {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
 

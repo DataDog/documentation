@@ -3,14 +3,14 @@ title: Proactively block crypto mining threats with Active Protection
 further_reading:
 - link: "security/threats/workload_security_rules"
   tag: "Documentation"
-  text: "CSM Threats Detection Rules"
+  text: "Workload Protection Detection Rules"
 ---
 
 <div class="alert alert-warning">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
 
-<div class="alert alert-info">CSM Threats Active Protection is in Preview.</div>
+<div class="alert alert-info">Workload Protection Active Protection is in Preview.</div>
 
-This topic explains how to use the CSM Threats **Active Protection** feature to block crypto mining threats automatically. 
+This topic explains how to use the Workload Protection **Active Protection** feature to block crypto mining threats automatically. 
 
 By default, all OOTB Agent [threat detection rules][4] are enabled and actively monitoring for crypto threats. 
 
@@ -79,7 +79,7 @@ Consequently, you do not need to worry that enabling Active Protection immediate
 
 To enable Active Protection:
 
-1. Go to CSM [Agent Configuration][2] rules.
+1. Go to Cloud Security [Agent Configuration][2] rules.
 2. Select **Enable Active Protection**.
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Enable Active Protection button" style="width:100%;" >}}

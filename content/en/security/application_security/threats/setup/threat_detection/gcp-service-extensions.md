@@ -1,28 +1,28 @@
 ---
-title: Enabling ASM for GCP Service Extensions
+title: Enabling AAP for GCP Service Extensions
 code_lang: gcp-service-extensions
 type: multi-code-lang
 code_lang_weight: 50
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
-      text: "ASM Service Extension's source code"
+      text: "AAP Service Extension's source code"
     - link: 'https://cloud.google.com/service-extensions/docs/overview'
       tag: "Documentation"
       text: "Google Cloud Service Extensions overview"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="ASM Service Extensions is in Preview" >}}
-To try the preview of ASM Service Extensions for GCP, follow the setup instructions below.
+{{< callout url="#" btn_hidden="true" header="AAP Service Extensions is in Preview" >}}
+To try the preview of AAP Service Extensions for GCP, follow the setup instructions below.
 {{< /callout >}}
 
-You can enable application security with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog Application Security Management (ASM) Service Extensions integration has support for threat detection and blocking.
+You can enable application security with GCP Service Extensions within GCP Cloud Load Balancing. The Datadog App and API Protection (AAP) Service Extensions integration has support for threat detection and blocking.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ You can enable application security with GCP Service Extensions within GCP Cloud
 
 On your GCP project, multiple steps are needed to fully create a Service Extension. Google Cloud provides guides to create [a callout backend service][4] and [create a Service Extension as a traffic extension][5].
 
-To integrate a Service Extension with ASM, do the following:
+To integrate a Service Extension with AAP, do the following:
 
 1. **Create a new VM Compute instance** using the Datadog Service Extensions Docker image. The image is available on the [Datadog Go tracer GitHub Registry][6].
 
@@ -84,7 +84,7 @@ To integrate a Service Extension with ASM, do the following:
       1. To send all traffic to the extension, insert `true` in the **Match condition**.
       2. For **Programability type**, select `Callouts`.
       3. Select the backend service you created in the previous step.
-      4. Select all **Events** from the list where you want ASM to run detection.</br>
+      4. Select all **Events** from the list where you want AAP to run detection.</br>
 </br>
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -96,7 +96,7 @@ To integrate a Service Extension with ASM, do the following:
     <strong>Note:</strong> The GCP Service Extensions integration is built on top of the Datadog Go Tracer. It follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version.
   </div>
 
-  The GCP Service Extensions integration uses the [Datadog Go Tracer][7] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][8] and [ASM Library Configuration][9].
+  The GCP Service Extensions integration uses the [Datadog Go Tracer][7] and inherits all environment variables from the tracer. You can find more information in [Configuring the Go Tracing Library][8] and [AAP Library Configuration][9].
 
 ## Limitations
 

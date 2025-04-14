@@ -56,8 +56,8 @@ Estimated usage metrics are generally available for the following usage types:
 | CWS Hosts                     | `datadog.estimated_usage.cws.hosts`, `datadog.estimated_usage.cws.hosts.by_tag` | Unique CWS hosts seen in the last hour. |
 | CWS Containers                | `datadog.estimated_usage.cws.containers`, `datadog.estimated_usage.cws.containers.by_tag` | Unique CWS containers seen in the last 5 minutes. |
 | Database Hosts                | `datadog.estimated_usage.dbm.hosts`, `datadog.estimated_usage.dbm.hosts.by_tag` | Unique DBM hosts seen in the last hour. |
-| ASM Hosts                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Unique ASM hosts seen in the last hour. |
-| ASM Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
+| AAP Hosts                     | `datadog.estimated_usage.asm.hosts`, `datadog.estimated_usage.asm.hosts.by_tag` | Unique AAP hosts seen in the last hour. |
+| AAP Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique AAP Fargate Tasks seen in the last 5 minutes. |
 | Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` | Active IM users seen from (calendar) month-to-date. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |

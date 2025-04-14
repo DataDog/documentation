@@ -114,7 +114,7 @@ Before getting started, ensure you have the following prerequisites:
     a. Select the AWS regions to integrate with.  
     b. Add your Datadog [API key][9].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
-    d. Optionally, enable [Cloud Security Management Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
+    d. Optionally, enable [Cloud Security Misconfigurations][54] to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
 5. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack. All the parameters are filled in based on your selections in the prior Datadog form, so you do not need to edit those unless desired.  
 **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account.
@@ -208,9 +208,9 @@ Additionally, you can use [Watchdog][49], an algorithmic feature for APM perform
 
 Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the out-of-the-box [Log Detection Rules][51]. These rules are customizable, and when threats are detected, they generate security signals which can be accessed on the [Security Signals Explorer][52]. To ensure that the correct team is notified, use [Notification Rules][53] to configure notification preferences across multiple rules.
 
-#### Cloud Security Management Misconfigurations
+#### Cloud Security Misconfigurations
 
-Use the [Setting Up CSM Misconfigurations][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box [Cloud][55] and [Infrastructure][56] compliance rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
+Use the [Setting Up Cloud Security Misconfigurations][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box [Cloud][55] and [Infrastructure][56] compliance rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
 

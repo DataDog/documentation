@@ -272,12 +272,12 @@ To view security findings from [Google Cloud Security Command Center][47] in Clo
 
 {{< img src="integrations/google_cloud_platform/security_findings.png" alt="The security findings tab in the Google Cloud integration tile" style="width:90%;" >}}
 
-### Cloud Security Management
+### Cloud Security
 
-Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
-Check out the [Setting up Cloud Security Management guide][49] to get started.
+Datadog Cloud Security delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure.
+Check out the [Setting up Cloud Security guide][49] to get started.
 
-After setting up CSM, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and CSM. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
+After setting up Cloud Security, toggle the **Enable Resource Collection** option under the **Resource Collection** tab to start collecting configuration data for the [Resource Catalog][50] and Cloud Security. Then, follow these instructions to enable [Misconfigurations and Identity Risks (CIEM)][51] on Google Cloud.
 
 {{< img src="integrations/google_cloud_platform/resource_collection.png" alt="The resource collection tab in the Google Cloud integration tile" style="width:100%;" >}}
 

@@ -213,12 +213,12 @@ The port of the DogStatsD Agent that metrics are submitted to. If the [Agent con
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
-### ASM
+### AAP
 
 `DD_APPSEC_ENABLED`
 : **Configuration**: `appsec.enabled`<br>
 **Default**: `false`<br>
-Enable Application Security Management features.
+Enable App and API Protection features.
 
 `DD_APPSEC_RULES`
 : **Configuration**: `appsec.rules`<br>

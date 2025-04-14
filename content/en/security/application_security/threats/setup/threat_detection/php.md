@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for PHP
+title: Enabling AAP for PHP
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -16,10 +16,10 @@ further_reading:
       text: 'PHP Datadog Tracer Library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor application security for PHP apps running in host-based or container-based environments such as Docker, Kubernetes, AWS ECS, and AWS EKS.
@@ -34,9 +34,9 @@ You can monitor application security for PHP apps running in host-based or conta
    wget https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php -O datadog-setup.php
    php datadog-setup.php --php-bin all --enable-appsec
    ```
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][1].
 
-2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling ASM, you can optionally enable it after by setting the following environment variable:
+2. **Enable the library in your code** by restarting PHP-FPM or Apache. In a containerized environment, if you previously installed the library without enabling AAP, you can optionally enable it after by setting the following environment variable:
    {{< tabs >}}
 {{% tab "Docker CLI" %}}
 

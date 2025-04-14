@@ -37,7 +37,7 @@ Follow these steps to enable Code Security in your service:
    ```shell
    node --require dd-trace/init app.js
    ```
-   Then use environment variables to enable ASM:
+   Then use environment variables to enable AAP:
    ```shell
    DD_IAST_ENABLED=true node app.js
    ```

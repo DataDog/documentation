@@ -3,18 +3,18 @@ title: Investigate Security Signals
 further_reading:
   - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"
-    text: "Explore ASM threat detection OOTB rules"
+    text: "Explore AAP threat detection OOTB rules"
   - link: "/security/application_security/threats/custom_rules/"
     tag: "Documentation"
-    text: "Configure custom ASM threat detection rules"
+    text: "Configure custom AAP threat detection rules"
   - link: "/security/application_security/threats/threat-intelligence/"
     tag: "Documentation"
-    text: "ASM threat intelligence"
+    text: "AAP threat intelligence"
 ---
 
 ## Overview
 
-ASM security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
+AAP security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
 
 {{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Overview of investigating threats in signals explorer with details side panel">}}
 
@@ -55,7 +55,7 @@ You can triage a signal by assigning it to a user for further investigation. The
     - **Under Review**: The signal is actively being investigated. From the **Under Review** state, you can move the signal to **Archived** or **Open** as needed.
     - **Archived**: The detection that caused the signal has been resolved. From the **Archived** state, you can move the signal back to **Open** if it's within 30 days of when the signal was originally detected.
 
-**Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for Application Security Management.
+**Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for App and API Protection.
 
 ## Declare an incident 
 
@@ -92,7 +92,7 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 2. In the signal details, view each of the sections, such as **What Happened**, **Activity Summary**, and **Detection Rule**.
 3. Review the **Next Steps** and take action:
     -  Click **Block all Attacking IPs** (by specific duration or permanently).
-    -  Click **Automated Attacker Blocking** (based on [detection][10] rules). This setting requires the Application Security Management **Protect Write** permission.
+    -  Click **Automated Attacker Blocking** (based on [detection][10] rules). This setting requires the App and API Protection **Protect Write** permission.
     -  Click **[Block with Edge WAF][11]**.
 
 ## Bulk actions

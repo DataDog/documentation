@@ -5,7 +5,7 @@ aliases:
 further_reading:
   - link: "/security/cloud_security_management/agentless_scanning"
     tag: "Documentation"
-    text: "Cloud Security Management Agentless Scanning"
+    text: "Cloud Security Agentless Scanning"
 ---
 
 There are two recommended ways to deploy Agentless scanners in your environment, either using cross-account scanning, or same account scanning.

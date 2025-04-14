@@ -4,9 +4,9 @@ aliases:
   - /security/application_security/threats/threat-overview
 ---
 
-{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the ASM Attack Summary page"  >}}
+{{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}}
 
-The ASM **Attack Summary** provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
+The AAP **Attack Summary** provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
 Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
 

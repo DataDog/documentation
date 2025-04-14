@@ -1,11 +1,11 @@
 ---
-title: Troubleshooting Cloud Security Management Vulnerabilities
+title: Troubleshooting Cloud Security Vulnerabilities
 aliases:
   - /security/vulnerabilities/troubleshooting/
 further_reading:
 - link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
-  text: "Enable SBOM collection in CSM Vulnerabilities"
+  text: "Enable SBOM collection in Cloud Security Vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
+If you experience issues with Cloud Security Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Error messages
 
@@ -61,7 +61,7 @@ unable to mount containerd image, err: unable to scan image named: {image-name},
 
 The workaround for this issue is to disable image streaming in GKE. For more information, see the [Disable Image streaming][5] section of the GKE docs.
 
-## Disable CSM Vulnerabilities
+## Disable Cloud Security Vulnerabilities
 
 In the `datadog-values.yaml` file for the Agent, set the following configuration settings to `false`:
 
