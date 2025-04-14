@@ -198,7 +198,7 @@ Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datad
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 ...
 {{< /code-block >}}
