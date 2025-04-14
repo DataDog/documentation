@@ -59,6 +59,12 @@ TKTK
 
 {{% tab "Processors" %}}
 
+### Add environment variables
+
+- Allowlist
+  - The allowlist is a comma-separated list of environment variables you want to pull values from and use with this processor.
+  - Stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
+
 {{% /tab %}}
 {{% tab "Destinations" %}}
 
