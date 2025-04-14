@@ -7,23 +7,23 @@ title: Live Debugger
 type: documentation
 ---
 ## Overview
-The Live Debugger enables you to add temporary log statements to your runtime code to collect information for debugging. The log statements (also referred to as "log probes") are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running (production or test) system. The log probes can be edited or deleted at any time, and automatically expire after 60 minutes.
+The Live Debugger enables you to add temporary log statements to your runtime code to collect information for debugging. The log statements (also referred to as "log probes") are added dynamically, so there is no need to redeploy your code, allowing you to quickly resolve issues in a running system. The log probes can be edited or deleted at any time, and automatically expire after 60 minutes.
 
 ## Live Debugger Tab
-A tab in the Datadog Tool Window shows the log probes defined in the IDE by the current user and the log output from these probes:
+A tab in the Datadog Tool Window shows the defined log probes and the log output from these probes:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/tool-window-tab.png" alt="The Live Debugger tab" style="width:100%;" >}}
 
 The tree on the left-side shows all log probes created by the current user.  When a log probe is selected, the details for that probe, including log messages emitted during the past 24 hours, will be displayed on the right-side of the tab. At the top-right of the panel, the `View logs in Datadog` link will open the [Log Explorer][2] in Datadog to show log events for the selected probe.
 
-You can navigate to the source code location for a probe - simply right-click and select `Jump to Source`. 
+You can navigate to the source code location for a probe, simply right-click and select `Jump to Source`. 
 
 ## Source Editor
 In the source editor, an icon is shown in the gutter for any line that has a log probe defined:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/gutter-icon.png" alt="Gutter icon in the source editor" style="width:100%;" >}}
 
-Clicking on this icon will open the Datadog Tool Window and select the log probe.  Right-clicking the icon provides items to enable, disable, edit and delete the log probe (these actions are described in later sections).
+Clicking on this icon will open the Datadog Tool Window and select the log probe.  Right-clicking the icon provides items to enable, disable, edit and delete the log probe. These actions are described in later sections.
 
 ## Managing Log Probes
 
@@ -42,7 +42,7 @@ Notice that the remote code may be a different version compared to the source co
 <div class="alert alert-info">Tip: checking out this revision locally will show you the same code in your IDE that is running remotely, which simplifies the live debugging experience.  However this is not required as the Datadog plugin will map local line numbers for Log probes to remote line numbers based on Git commit information.</div>
 
 ### Edit a Log Probe
-The log message for a probe can be modified, simply right click on the log probe and select the `Edit` menu item:
+The log message for a probe can be modified, simply right-click on the log probe and select the `Edit` menu item:
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/edit-log-probe.png" alt="Edit a log probe" style="width:100%;" >}}
 
