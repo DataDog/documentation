@@ -60,18 +60,18 @@ In Misconfigurations, Identity Risks, and the Security Inbox, you can click the 
 - Which entities the resource can access across your accounts
 - Which principals can directly or indirectly access the resource
 
-In this example, it shows all the principals that can access this EC2 instance:
+This example shows all the principals that can access this EC2 instance:
 
 {{< img src="security/csm/access_insights.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
 
-Under **What can this resource access?**, you can:
+In the **What can this resource access?** section, you can:
 - See the account associated with each entity, and details about the access type
 - Search for entities, or filter them by entity type or account
 - View a list of excluded policies
 - Use the **All**, **Direct Access**, and **Indirect Access** tabs to filter which entities display in the table
 - Click the **Actions** dropdown beside an entity to see it in Resource Catalog, or update its configuration in AWS IAM console
 
-Under **Who can access this resource?**, you can:
+In the **Who can access this resource?** section, you can:
 - See the risks associated with each principal in the **Risks** column, as well as the type of **Path** the principal can take (direct or indirect) to access the resource
 - Filter principals by name, type, public accessibility, or administrative access
 - Use the **All**, **Direct Access**, and **Indirect Access** tabs to filter which principals display in the table
