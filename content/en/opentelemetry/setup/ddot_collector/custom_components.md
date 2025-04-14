@@ -161,11 +161,8 @@ Create a sample configuration file and run your custom Agent to ensure everythin
          key: ${env:DD_API_KEY}
 
    connectors:
-       datadog/connector:
-           traces:
-             compute_top_level_by_span_kind: true
-             peer_tags_aggregation: true
-             compute_stats_by_span_kind: true
+     datadog/connector:
+       traces:
 
    service:
      pipelines:

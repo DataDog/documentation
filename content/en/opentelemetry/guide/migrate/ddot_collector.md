@@ -75,9 +75,6 @@ processors:
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -123,9 +120,6 @@ processors:
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -189,7 +183,7 @@ datadog:
   logLevel: info
    {{< /code-block >}}
    Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-   
+
 1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
@@ -199,7 +193,7 @@ agents:
     doNotCheckTag: true
 ...
    {{< /code-block >}}
-   
+
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:

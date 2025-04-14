@@ -331,9 +331,6 @@ In the snippet below, the Collector configuration is placed directly under the `
           connectors:
             datadog/connector:
               traces:
-                compute_top_level_by_span_kind: true
-                peer_tags_aggregation: true
-                compute_stats_by_span_kind: true
           service:
             pipelines:
               traces:
@@ -397,9 +394,6 @@ data:
     connectors:
       datadog/connector:
         traces:
-          compute_top_level_by_span_kind: true
-          peer_tags_aggregation: true
-          compute_stats_by_span_kind: true
     service:
       pipelines:
         traces:
@@ -475,9 +469,6 @@ processors:
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -512,9 +503,6 @@ The [Datadog connector][6] computes Datadog APM trace metrics.
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 {{< /code-block >}}
 
 ##### Datadog exporter
