@@ -680,38 +680,31 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 #### Migrating to the new login success and failure methods 
 
-The main difference between the deprecated and new login events is that the login is now mandatory in success and failure methods, and the user object or id is optional in success and not needed on failures.
+The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
+
+1. The login identifier (email, username) is now the first parameter and mandatory
+2. The user object/ID is now optional in success events and removed from failure events
+3. Metadata is simplified and no longer requires the `usr.login` field
 
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```javascript
 const tracer = require('dd-trace')
 
-// in a controller with the deprecated method:
+// in a controller:
 const user = {
   id: 'user-id',
   email: 'user@email.com'
-}
+} // same as before, but now it is optional
+
+const login = 'user@email.com' // new mandatory argument
 
 const metadata = { 
-  'usr.login': 'user@email.com',
+//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main parameter
   'key': 'value'
 }
 
-// Log a successful user authentication event using deprecated method
-tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
-
-// in a controller with the new method:
-const login = 'user@email.com'
-
-const user = {
-  id: 'user-id',
-  email: 'user@email.com'
-}
-
-const metadata = { 'key': 'value' } // if there is no data in the metadata object, it can be omitted
-
-// Log a successful user authentication event using new method
+// tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // deprecated
 tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /tab %}}
@@ -720,27 +713,17 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 const tracer = require('dd-trace')
 
 // in a controller with the deprecated method:
-const userId = 'user-id'
+// const userId = 'user-id' // not necessary anymore
+const login = 'user@email.com'
 const userExists = true
 const metadata = { 
-  'usr.login': 'user@email.com',
+//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main parameter
   'key': 'value'
 }
 
 
-// Log a failed user authentication event using deprecated method
-tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
-
-// in a controller with the new method:
-const login = 'user@email.com'
-const userExists = true
-const metadata = { 'key': 'value' } // // if there is no data in the metadata object, it can be omitted
-
-// Log a failed user authentication event using new method
-// user-id is not necessary anymore
+// tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata) // deprecated
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
-
-
 ```
 {{% /tab %}}
 
