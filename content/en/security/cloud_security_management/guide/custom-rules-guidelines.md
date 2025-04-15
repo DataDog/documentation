@@ -1,15 +1,15 @@
 ---
-title: Guidelines for Writing Custom CSM Threats Rules
+title: Guidelines for Writing Custom Workload Protection Rules
 further_reading:
 - link: "/security/threats/workload_security_rules"
   tag: "Documentation"
-  text: "Managing CSM Threats Rules"
+  text: "Managing Workload Protection Rules"
 - link: "/security/threats/agent_expressions"
   tag: "Documentation"
   text: "Agent Expression Syntax"
 ---
 
-At some point, you may want to write your own [custom Cloud Security Management Threats (CSM Threats) Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
+At some point, you may want to write your own [custom Workload Protection Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
 
 ## Attributes
 
@@ -31,7 +31,7 @@ Use wildcards (`*`) carefully. For example, never use `open.file.path =~ "*/myfi
 
 ## Approvers and discarders
 
-CSM Threats uses the concept of approvers and discarders to filter out events that should not trigger any rules in a policy. Approvers and discarders allow or deny events at the policy level only. They do not act on individual rules.
+Workload Protection uses the concept of approvers and discarders to filter out events that should not trigger any rules in a policy. Approvers and discarders allow or deny events at the policy level only. They do not act on individual rules.
 
 Approvers act as an allow-list at the kernel level in the Datadog Agent. For example, the opening of a specific file could be an approver on the event `open`, whereas `open` events on files without approvers would be filtered out. Similarly, discarders act as a deny-list in the Agent. Discarders intentionally filter out events that can never match a rule. The Agent learns which events to filter out with discarders during runtime.
 
