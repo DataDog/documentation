@@ -1,0 +1,7 @@
+options:
+  - id: circle
+    label: Circle
+  - id: rectangle
+    label: Rectangle
+  - id: triangle
+    label: Triangle

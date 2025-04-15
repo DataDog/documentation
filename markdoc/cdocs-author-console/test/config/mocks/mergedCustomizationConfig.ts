@@ -1,7 +1,12 @@
 import { CustomizationConfig, CustomizationConfigSchema } from 'cdocs-data';
 
-export const mockExistingCustomizationConfig: CustomizationConfig = {
+export const mockMergedCustomizationConfig: CustomizationConfig = {
   traitsById: {
+    shape: {
+      id: 'shape',
+      label: 'Shape',
+      internal_notes: ''
+    },
     color: {
       id: 'color',
       label: 'Color',
@@ -9,6 +14,18 @@ export const mockExistingCustomizationConfig: CustomizationConfig = {
     }
   },
   optionsById: {
+    circle: {
+      id: 'circle',
+      label: 'Circle'
+    },
+    rectangle: {
+      id: 'rectangle',
+      label: 'Rectangle'
+    },
+    triangle: {
+      id: 'triangle',
+      label: 'Triangle'
+    },
     red: {
       id: 'red',
       label: 'Red'
@@ -27,6 +44,21 @@ export const mockExistingCustomizationConfig: CustomizationConfig = {
     }
   },
   optionGroupsById: {
+    block_shape_options: [
+      {
+        id: 'circle',
+        label: 'Circle',
+        default: true
+      },
+      {
+        id: 'rectangle',
+        label: 'Rectangle'
+      },
+      {
+        id: 'triangle',
+        label: 'Triangle'
+      }
+    ],
     traffic_light_color_options: [
       {
         id: 'red',
@@ -45,4 +77,4 @@ export const mockExistingCustomizationConfig: CustomizationConfig = {
   }
 } as const;
 
-CustomizationConfigSchema.parse(mockExistingCustomizationConfig);
+CustomizationConfigSchema.parse(mockMergedCustomizationConfig);

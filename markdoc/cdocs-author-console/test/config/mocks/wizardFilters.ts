@@ -6,7 +6,6 @@ import { WizardFilter } from '../../../src/types';
 export const mockWizardFilters: WizardFilter[] = [
   {
     uuid: 'cdb8178d-ea3a-44ed-b8ec-3ceb12818479',
-    label: 'Color',
     trait_id: 'color',
     option_group_id: 'traffic_light_color_options',
     customizationConfig: {
@@ -52,7 +51,6 @@ export const mockWizardFilters: WizardFilter[] = [
   },
   {
     uuid: '2f7c96ed-5487-4aab-ab97-97d49c308dfe',
-    label: 'Shape',
     trait_id: 'shape',
     option_group_id: 'block_shape_options',
     customizationConfig: {
@@ -96,4 +94,4 @@ export const mockWizardFilters: WizardFilter[] = [
       }
     }
   }
-];
+] as const;

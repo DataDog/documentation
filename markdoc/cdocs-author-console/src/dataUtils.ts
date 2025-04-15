@@ -1,4 +1,4 @@
-import { CustomizationConfig, Frontmatter } from 'cdocs-data';
+import { CustomizationConfig, Frontmatter, CustomizationConfigSchema } from 'cdocs-data';
 import { WizardFilter } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,8 +28,6 @@ export function getNetNewConfig(p: {
     });
   });
 
-  console.log('mergedFilterConfig:', JSON.stringify(mergedFilterConfig, null, 2));
-
   const knownTraitIds = Object.keys(p.customizationConfig.traitsById);
   const knownOptionGroupIds = Object.keys(p.customizationConfig.optionGroupsById);
   const knownOptionIds = Object.keys(p.customizationConfig.optionsById);
@@ -49,10 +47,8 @@ export function getNetNewConfig(p: {
 
   Object.keys(mergedFilterConfig.optionGroupsById).forEach((optionGroupId) => {
     if (!knownOptionGroupIds.includes(optionGroupId)) {
-      console.log('adding optionGroupId to merged config:', optionGroupId);
       const optionGroup = mergedFilterConfig.optionGroupsById[optionGroupId];
       newConfig.optionGroupsById[optionGroupId] = optionGroup;
-      console.log('newConfig is now', JSON.stringify(newConfig.optionGroupsById, null, 2));
     }
   });
 
@@ -65,7 +61,7 @@ export function getNetNewConfig(p: {
     }
   });
 
-  return newConfig;
+  return CustomizationConfigSchema.parse(newConfig);
 }
 
 export function buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
@@ -154,7 +150,7 @@ export function buildConfigYaml(newConfig: CustomizationConfig) {
     result.traits += Object.keys(newConfig.traitsById)
       .map(
         (traitId) => `  - id: ${traitId}
-      label: ${newConfig.traitsById[traitId].label}`
+    label: ${newConfig.traitsById[traitId].label}`
       )
       .join('\n');
   }
@@ -171,7 +167,7 @@ export function buildConfigYaml(newConfig: CustomizationConfig) {
     result.options += Object.keys(newConfig.optionsById)
       .map(
         (optionId) => `  - id: ${optionId}
-      label: ${newConfig.optionsById[optionId].label}`
+    label: ${newConfig.optionsById[optionId].label}`
       )
       .join('\n');
   }
@@ -194,16 +190,16 @@ export function buildConfigYaml(newConfig: CustomizationConfig) {
       .map((optionGroupId) => {
         const options = newConfig.optionGroupsById[optionGroupId];
         return `${optionGroupId}:
-  ${options
-    .map((option) => {
-      const yaml = `  - id: ${option.id}`;
-      if (option.default) {
-        return `${yaml}
-      default: true`;
-      }
-      return yaml;
-    })
-    .join('\n')}`;
+${options
+  .map((option) => {
+    const yaml = `  - id: ${option.id}`;
+    if (option.default) {
+      return `${yaml}
+    default: true`;
+    }
+    return yaml;
+  })
+  .join('\n')}`;
       })
       .join('\n');
   }

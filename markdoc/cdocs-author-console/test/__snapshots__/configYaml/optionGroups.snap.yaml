@@ -1,0 +1,5 @@
+block_shape_options:
+  - id: circle
+    default: true
+  - id: rectangle
+  - id: triangle

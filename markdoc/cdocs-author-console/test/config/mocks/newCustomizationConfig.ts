@@ -1,4 +1,4 @@
-import { CustomizationConfig } from 'cdocs-data';
+import { CustomizationConfig, CustomizationConfigSchema } from 'cdocs-data';
 
 export const mockNewCustomizationConfig: CustomizationConfig = {
   traitsById: {
@@ -39,4 +39,6 @@ export const mockNewCustomizationConfig: CustomizationConfig = {
       }
     ]
   }
-};
+} as const;
+
+CustomizationConfigSchema.parse(mockNewCustomizationConfig);
