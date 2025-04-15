@@ -5,7 +5,7 @@ categories:
 - azure
 - クラウド
 - ネットワーク
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
