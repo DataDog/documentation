@@ -4,7 +4,7 @@ title: Connect an Amazon EKS Cluster with Cloudcraft
 
 By scanning your Amazon EKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.
 
-Cloudcraft uses [access entries][1] to grant [Cloudcraft's existing read-only IAM entity role][2] access to the Kubernetes API. That means Cloudcraft requires no special software or agent to be installed on your cluster.
+Cloudcraft uses [access entries][1] to grant [Cloudcraft's existing read-only IAM entity role][2] access to the Kubernetes API. Cloudcraft does not require any special software or agent to be installed on your cluster.
 
 <div class="alert alert-info">The ability to scan Amazon EKS clusters and AWS accounts is only available to Cloudcraft Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">our pricing page</a> for more information.</div>
 
