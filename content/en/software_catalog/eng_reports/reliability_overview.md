@@ -11,19 +11,19 @@ Eng Reports are in Preview/LA (link to preview signup form if needed, link to fo
 
 ## Overview
 
-The Reliability Overview Dashboard supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this dashboard, you can:
-- Customize your SLO or Incident groupings to be based on service, team, or other tags/properties that have been added to your SLOs/Incidents.
+The Reliability Overview report supports aggregated views of SLOs and Incidents to help executive leadership understand your organization's reliability at a glance. With this report, you can:
+- Customize your SLO or Incident groupings to be based on service, team, or other tags or properties that have been added to your SLOs or Incidents.
 - Use a summary Score, based on the remaining error budget of the underlying SLOs, to understand SLO performance across different groups and identify areas of improvement.
-- Explore daily, weekly, and monthly historical reliability trends (for the last 12 months) to understand performance over time.
+- Explore daily, weekly, and monthly historical reliability trends over the last 12 months to understand performance over time.
 
-Access the Reliability Overview Dashboard by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the lefthand menu. 
+Access the Reliability Overview report by clicking on the "Overview" tab in IDP and selecting "Reliability Overview" in the lefthand menu. 
 
-**Note:** If you have not opted into our Datadog IDP Preview, you can access the Reliability Overview Dashboard by clicking on the "Reports" tab at the top of the Software Catalog page.
+**Note:** If you have not opted into the Datadog IDP Preview, you can access the Reliability Overview report by clicking on the "Reports" tab at the top of the Software Catalog page.
 
 
-## Interact with your Reliability Overview Dashboard
+## Interact with your Reliability Overview report
 
-By default, the Reliability Overview Dashboard offers a view aggregated by service or team (based on the service or team tag added to your SLOs, and the services or teams properties added to your Incidents). This allows you to view your organization's SLO performance by service/team groupings to understand which services/teams are performing best and worst.
+By default, the Reliability Overview report aggregates data by service or team, using the `service` or `team` tags from your SLOs and properties from your Incidents. This allows you assess SLO performance across service or team groupings to identify top- and bottom-performing areas.
 
 ### Summary score
 Copy content here: https://docs.datadoghq.com/service_management/service_level_objectives/ootb_dashboard/#summary-score
