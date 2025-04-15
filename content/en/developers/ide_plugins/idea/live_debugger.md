@@ -3,6 +3,9 @@ further_reading:
 - link: /dynamic_instrumentation/
   tag: Documentation
   text: Learn more about Dynamic Instrumentation
+- link: "/integrations/guide/source-code-integration/"
+  tag: "Documentation"
+  text: "Learn about Source Code Integration."
 title: Live Debugger
 type: documentation
 ---
@@ -32,12 +35,12 @@ To add a log probe, right-click on a line of code in the source editor and selec
 
 {{< img src="/developers/ide_plugins/idea/live_debugger/new-log-probe.png" alt="Add a new log probe" style="width:100%;" >}}
 
-The log message field accepts a log template that contains descriptive text and variable references—refer to the [Dynamic Instrumentation expression language][3] documentation for details. The log message will be generated using the runtime state immediately PRIOR to the line of code being executed.  
+The log message field accepts a log template that contains descriptive text and variable references—refer to the [Dynamic Instrumentation expression language][3] documentation for details. The log message will be generated using the runtime state immediately *prior* to the line of code being executed.  
 
 Log probes expire automatically after 60 minutes.
 
 #### Local and Remote Versions
-Notice that the remote code may be a different version compared to the source code in the IDE.  In the New Log Probe dialog, the plugin will display the version of the code that is deployed remotely, if possible, so that you can see exactly where the log probe will be placed.
+Notice that the remote code may be a different version compared to the source code in the IDE.  In the New Log Probe dialog, the plugin will display the version of the code that is deployed remotely, if possible, so that you can see exactly where the log probe will be placed. This requires that your application or service is [tagged with Git information][4].
 
 <div class="alert alert-info">Tip: checking out this revision locally will show you the same code in your IDE that is running remotely, which simplifies the live debugging experience.  However this is not required as the Datadog plugin will map local line numbers for Log probes to remote line numbers based on Git commit information.</div>
 
@@ -75,3 +78,4 @@ The Live Debugger feature supports Java and Python  and is subject to the same s
 [1]: /dynamic_instrumentation/
 [2]: /logs/explorer/
 [3]: /dynamic_instrumentation/expression-language/
+[4]: /integrations/guide/source-code-integration/?tab=java#tag-your-telemetry-with-git-information
