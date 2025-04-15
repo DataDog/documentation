@@ -94,7 +94,7 @@ You can specify how much time a test needs to fail before triggering a notificat
 
 * Retry `X` times after `Y` ms in case of failure.
 
-{{< img src="mobile_app_testing/retry_condition.png" alt="Retry condition step, showing retrying the test 0 times after 300ms in case of failure" width="70%" >}}
+{{< img src="mobile_app_testing/retry_condition.png" alt="Retry condition step, showing retrying the test 0 times after 300ms in case of failure" width="90%" >}}
 
 ## Scheduling and alerts
 
