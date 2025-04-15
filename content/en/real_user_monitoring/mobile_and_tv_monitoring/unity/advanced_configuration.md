@@ -110,7 +110,7 @@ The `string` used for `resourceKey` in both calls must be unique for the resourc
 
 ### Track custom errors
 
-To track specific errors, notify `DdRum` when an error occurs the exception, the source, and any additional attributes.
+To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
 
 ```cs
 try
