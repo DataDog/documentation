@@ -3,22 +3,7 @@ import { WizardFilter } from '../types';
 import { CustomizationConfig } from 'cdocs-data';
 import Code from './Code';
 import Alert from '@mui/material/Alert';
-
-function mergeCustomizationConfigs(config1: CustomizationConfig, config2: CustomizationConfig) {
-  const mergeObjects = (obj1: Record<string, any>, obj2: Record<string, any>, key: string) => {
-    const overlap = Object.keys(obj1).some((id) => id in obj2);
-    if (overlap) {
-      throw new Error(`Conflict detected in ${key}: overlapping keys found.`);
-    }
-    return { ...obj1, ...obj2 };
-  };
-
-  return {
-    traitsById: mergeObjects(config1.traitsById, config2.traitsById, 'traitsById'),
-    optionsById: mergeObjects(config1.optionsById, config2.optionsById, 'optionsById'),
-    optionGroupsById: mergeObjects(config1.optionGroupsById, config2.optionGroupsById, 'optionGroupsById')
-  };
-}
+import { mergeCustomizationConfigs, buildConfigYaml } from '../dataUtils';
 
 function getNewConfigStatus(newConfig: CustomizationConfig) {
   const hasNewTraits = Object.keys(newConfig.traitsById).length > 0;
@@ -32,80 +17,6 @@ function getNewConfigStatus(newConfig: CustomizationConfig) {
   };
 }
 
-function buildNewConfigYaml(newConfig: CustomizationConfig) {
-  const result = {
-    traits: '',
-    options: '',
-    optionGroups: ''
-  };
-
-  /**
-   * traits:
-   *   - id: db
-   *     label: Database
-   */
-  if (newConfig.traitsById) {
-    result.traits += 'traits:\n';
-    result.traits += Object.keys(newConfig.traitsById)
-      .map(
-        (traitId) => `  - id: ${traitId}
-    label: ${newConfig.traitsById[traitId].label}`
-      )
-      .join('\n');
-  }
-
-  /**
-   * options:
-   *   - id: python
-   *     label: Python
-   *   - id: go
-   *     label: Go
-   */
-  if (newConfig.optionsById) {
-    result.options += 'options:\n';
-    result.options += Object.keys(newConfig.optionsById)
-      .map(
-        (optionId) => `  - id: ${optionId}
-    label: ${newConfig.optionsById[optionId].label}`
-      )
-      .join('\n');
-  }
-
-  /**
-   * product_one_db_options:
-   *   - id: postgres
-   *     default: true
-   *   - id: mysql
-   *
-   * product_two_db_options:
-   *   - id: mongo
-   *     default: true
-   *   - id: mysql
-   *   - id: postgres
-   *   - id: sqlite3
-   */
-  if (newConfig.optionGroupsById) {
-    result.optionGroups = Object.keys(newConfig.optionGroupsById)
-      .map((optionGroupId) => {
-        const options = newConfig.optionGroupsById[optionGroupId];
-        return `${optionGroupId}:
-${options
-  .map((option) => {
-    const yaml = `  - id: ${option.id}`;
-    if (option.default) {
-      return `${yaml}
-    default: true`;
-    }
-    return yaml;
-  })
-  .join('\n')}`;
-      })
-      .join('\n');
-  }
-
-  return result;
-}
-
 function SetupInstructions({
   filters,
   newConfig,
@@ -117,7 +28,7 @@ function SetupInstructions({
 }) {
   console.log('[SetupInstructions] received newConfig:', JSON.stringify(newConfig, null, 2));
   const configStatus = getNewConfigStatus(newConfig);
-  const newConfigYaml = buildNewConfigYaml(newConfig);
+  const newConfigYaml = buildConfigYaml(newConfig);
 
   return (
     <div>

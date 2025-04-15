@@ -7,6 +7,7 @@ import FilterForm from './forms/FilterForm';
 import { WizardFilter } from '../types';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { getNetNewConfig } from '../dataUtils';
 
 /**
  * A list of filters that can be added, edited, and deleted.
@@ -170,68 +171,6 @@ function FilterRow({
       </div>
     </div>
   );
-}
-
-/**
- * Calculate the diff between the existing configuration config
- * and the configuration config required by the user-inputted filters.
- */
-function getNetNewConfig(p: {
-  filters: WizardFilter[];
-  customizationConfig: CustomizationConfig;
-}): CustomizationConfig {
-  const mergedFilterConfig: CustomizationConfig = {
-    traitsById: {},
-    optionsById: {},
-    optionGroupsById: {}
-  };
-
-  const configKeys = ['traitsById', 'optionsById', 'optionGroupsById'] as const;
-
-  p.filters.forEach((filter) => {
-    configKeys.forEach((key) => {
-      // @ts-ignore
-      mergedFilterConfig[key] = {
-        ...mergedFilterConfig[key],
-        ...filter.customizationConfig[key]
-      };
-    });
-  });
-
-  const knownTraitIds = Object.keys(p.customizationConfig.traitsById);
-  const knownOptionGroupIds = Object.keys(p.customizationConfig.optionGroupsById);
-  const knownOptionIds = Object.keys(p.customizationConfig.optionsById);
-
-  const newConfig: CustomizationConfig = {
-    traitsById: {},
-    optionsById: {},
-    optionGroupsById: {}
-  };
-
-  Object.keys(mergedFilterConfig.traitsById).forEach((traitId) => {
-    if (!knownTraitIds.includes(traitId)) {
-      const trait = mergedFilterConfig.traitsById[traitId];
-      newConfig.traitsById[traitId] = trait;
-    }
-  });
-
-  Object.keys(mergedFilterConfig.optionGroupsById).forEach((optionGroupId) => {
-    if (!knownOptionGroupIds.includes(optionGroupId)) {
-      const optionGroup = mergedFilterConfig.optionGroupsById[optionGroupId];
-      newConfig.optionGroupsById[optionGroupId] = optionGroup;
-    }
-  });
-
-  Object.keys(mergedFilterConfig.optionsById).forEach((optionId) => {
-    if (!knownOptionIds.includes(optionId)) {
-      const option = mergedFilterConfig.optionsById[optionId];
-      if (!knownOptionIds.includes(optionId)) {
-        newConfig.optionsById[optionId] = option;
-      }
-    }
-  });
-
-  return newConfig;
 }
 
 export default FilterList;

@@ -1,5 +1,6 @@
 import { CustomizationConfig, buildFiltersManifest, Frontmatter, FiltersManifest } from 'cdocs-data';
 import { WizardFilter } from '../types';
+import { buildFrontmatterData } from '../dataUtils';
 
 export class DocTemplater {
   filters: WizardFilter[];
@@ -8,30 +9,17 @@ export class DocTemplater {
   filtersManifest: FiltersManifest;
 
   constructor({ filters, customizationConfig }: { filters: WizardFilter[]; customizationConfig: CustomizationConfig }) {
-    console.log('DocTemplater constructor', { filters, customizationConfig });
-    const frontmatter = this.buildFrontmatterData({ filters });
+    const frontmatter = buildFrontmatterData({ filters });
     this.filters = filters;
     this.customizationConfig = customizationConfig;
-    this.frontmatter = this.buildFrontmatterData({ filters });
+    this.frontmatter = buildFrontmatterData({ filters });
     this.filtersManifest = buildFiltersManifest({
       frontmatter,
       customizationConfig: customizationConfig
     });
   }
 
-  buildFrontmatterData({ filters }: { filters: WizardFilter[] }) {
-    let frontmatter: Frontmatter = {
-      title: 'Your Title Here',
-      content_filters: filters.map((filter) => ({
-        trait_id: filter.trait_id,
-        option_group_id: filter.option_group_id
-      }))
-    };
-
-    return frontmatter;
-  }
-
-  buildFrontmatter() {
+  buildFrontmatterMarkup() {
     let frontmatter = `---
 title: Your Title Here`;
 

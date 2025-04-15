@@ -3,9 +3,8 @@ import { CustomizationConfig } from 'cdocs-data';
 import TraitSelector from './forms/TraitSelector';
 import OptionGroupSelector from './forms/OptionGroupSelector';
 import Code from './Code';
-import { WizardFilter } from '../types';
-import { v4 as uuidv4 } from 'uuid';
 import { DocTemplater } from './DocTemplater';
+import { buildWizardFilter } from '../dataUtils';
 
 function buildFrontmatterMarkup({
   traitId,
@@ -17,47 +16,6 @@ function buildFrontmatterMarkup({
   return `  - trait_id: ${traitId || '<CHOOSE_A_TRAIT_ABOVE>'}
     option_group_id: ${optionGroupId || '<CHOOSE_AN_OPTION_GROUP_ABOVE>'}
 `;
-}
-
-function buildWizardFilter({
-  traitId,
-  optionGroupId,
-  customizationConfig
-}: {
-  traitId: string;
-  optionGroupId: string;
-  customizationConfig: CustomizationConfig;
-}): WizardFilter {
-  const optionGroup = [...customizationConfig.optionGroupsById[optionGroupId]];
-  const optionIds = optionGroup.map((option) => option.id);
-  const optionsById = optionIds.reduce(
-    (acc, optionId) => {
-      acc[optionId] = { ...customizationConfig.optionsById[optionId] };
-      return acc;
-    },
-    {} as Record<
-      string,
-      {
-        id: string;
-        label: string;
-      }
-    >
-  );
-
-  return {
-    trait_id: traitId,
-    option_group_id: optionGroupId,
-    uuid: uuidv4(),
-    customizationConfig: {
-      traitsById: {
-        [traitId]: { ...customizationConfig.traitsById[traitId] }
-      },
-      optionGroupsById: {
-        [optionGroupId]: optionGroup
-      },
-      optionsById
-    }
-  };
 }
 
 export default function QuickFilterBuilder(props: { customizationConfig: CustomizationConfig }) {

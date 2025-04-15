@@ -5,7 +5,7 @@ import { DocTemplater } from './DocTemplater';
 
 function buildMarkup(templater: DocTemplater) {
   return `
-${templater.buildFrontmatter()}
+${templater.buildFrontmatterMarkup()}
 
 ## Overview
   
