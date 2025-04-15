@@ -22,10 +22,6 @@ further_reading:
   text: "Empower engineers to take ownership of Google Cloud costs with Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/cost-anomaly-detection/" btn_hidden="false" header="In Preview">}}
-The Cost Anomalies dedicated page is in Preview. To request access, complete the form.
-{{< /callout >}}
-
 ## Overview
 Cloud Cost Monitors help you proactively identify cost changes, and understand if you're projected to go over budget, so you can investigate the cause. 
 

@@ -252,14 +252,14 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
       Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Ruby2-7`, and `Ruby3-2`.
 
-    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `ddtrace` by adding them to your Gemfile as an alternative:
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the gems `datadog-lambda` and `datadog` by adding them to your Gemfile as an alternative:
 
       ```Gemfile
+      gem 'datadog'
       gem 'datadog-lambda'
-      gem 'ddtrace'
       ```
 
-      `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
+      `datadog` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
       Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
@@ -359,7 +359,7 @@ Enabling any of these features cause the extension to default back to the fully 
 To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][7] and the APM guide for [custom instrumentation][8].
 
 ```ruby
-require 'ddtrace'
+require 'datadog'
 require 'datadog/lambda'
 
 Datadog::Lambda.configure_apm do |c|

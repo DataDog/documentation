@@ -1,5 +1,5 @@
 ---
-title: Default Grouping
+title: Error Grouping
 description: Understand how errors are grouped into issues.
 ---
 
