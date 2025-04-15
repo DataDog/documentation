@@ -19,7 +19,7 @@ Cloud SIEM supports enriching and searching logs with threat intelligence indica
 
 Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, hash, and so on) and requires the following columns:
 
-#### CSV Structure for IP Address
+#### CSV structure for IP address
 
 | Field            | Data  | Description                                                                                     | Required | Example                          |
 |-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
@@ -29,7 +29,7 @@ Threat intelligence is supported in the CSV format, and requires a table for eac
 | intention         | text  | The threat intel [intent][9]. This is used by some out-of-the-box detection rules.                  | true     | malicious                        |
 | source            | text  | The name of the source and the link to its site, such as your team and your team's wiki.       | true     | `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` |
 
-#### CSV Structure for Domain
+#### CSV structure for domain
 
 | Field            | Data  | Description                                                                                     | Required | Example                          |
 |-------------------|-------|-------------------------------------------------------------------------------------------------|----------|----------------------------------|
