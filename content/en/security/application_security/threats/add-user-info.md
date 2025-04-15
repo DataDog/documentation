@@ -725,7 +725,6 @@ const metadata = {
   'key': 'value'
 }
 
-
 // tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata) // deprecated
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
