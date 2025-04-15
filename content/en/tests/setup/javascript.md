@@ -33,7 +33,7 @@ Supported test frameworks:
 | Test Framework | Version | Notes |
 |---|---|---|
 | Jest | >= 24.8.0 | Only `jsdom` (in the `jest-environment-jsdom` package) and `node` (in the `jest-environment-node` package) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.<br><br>Only [`jest-circus`][1] is supported as [`testRunner`][2].<br><br>[`test.concurrent`](#jests-testconcurrent) is not supported. |
-| Mocha | >= 5.2.0 | Mocha >= 9.0.0 has [partial support](#known-limitations). |
+| Mocha | >= 5.2.0 |
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
@@ -79,10 +79,10 @@ For more information, see the [JavaScript Tracer installation documentation][4].
 
 {{< tabs >}}
 {{% tab "Jest/Mocha" %}}
-Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
 ```bash
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=unit-tests yarn test
 ```
 
 **Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
@@ -137,10 +137,10 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
-Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
 ```bash
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
 ```
 
 **Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
@@ -215,15 +215,20 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
+### Playwright - RUM integration
+
+If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
+
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[3]: /real_user_monitoring/browser/setup/
+[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
-Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
-
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 ```bash
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=integration-tests yarn test:integration
 ```
 
 **Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
@@ -311,7 +316,7 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       // your previous code is before this line
-      require('dd-trace/ci/cypress/plugin')(on, config)
+      return require('dd-trace/ci/cypress/plugin')(on, config)
     }
   }
 })
@@ -375,7 +380,7 @@ If you already defined a `pluginsFile`, initialize the instrumentation with:
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // your previous code is before this line
-  require('dd-trace/ci/cypress/plugin')(on, config)
+  return require('dd-trace/ci/cypress/plugin')(on, config)
 }
 {{< /code-block >}}
 
@@ -420,10 +425,10 @@ module.exports = (on, config) => {
 {{< /code-block >}}
 
 
-Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
+Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
 {{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-ui-app npm test
+DD_TEST_SESSION_NAME=ui-tests yarn test:ui
 {{< /code-block >}}
 
 
@@ -493,10 +498,10 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 `vitest` and `dd-trace` require Node.js>=18.19 or Node.js>=20.6 to work.
 
-Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
 
 ```bash
-NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=smoke-tests yarn test:smoke
 ```
 
 **Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `--import dd-trace/register.js -r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
@@ -533,6 +538,7 @@ jobs:
   my-job:
     name: Run tests
     runs-on: ubuntu-latest
+    # Invalid NODE_OPTIONS
     env:
       NODE_OPTIONS: -r dd-trace/ci/init
     steps:
@@ -598,6 +604,12 @@ For more information, see [Code Coverage][6].
 ## Configuration settings
 
 The following is a list of the most important configuration settings that can be used with the tracer.
+
+`test_session.name`
+: Use it to identify a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>
+**Environment variable**: `DD_TEST_SESSION_NAME`<br/>
+**Default**: (CI job name + test command)<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 `service`
 : Name of the service or library under test.<br/>
@@ -730,7 +742,7 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my-test-framework
 ```
 
 
@@ -740,7 +752,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-custom-framework-test
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
@@ -794,6 +806,33 @@ forEach([
 {{< /code-block >}}
 
 When you use this approach, both the testing framework and Test Optimization can tell your tests apart.
+
+### Test session name `DD_TEST_SESSION_NAME`
+
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
+
+- `unit-tests`
+- `integration-tests`
+- `smoke-tests`
+- `flaky-tests`
+- `ui-tests`
+- `backend-tests`
+
+If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of:
+
+- CI job name
+- Command used to run the tests (such as `yarn test`)
+
+The test session name should be unique within a repository to help you distinguish different groups of tests.
+
+#### When to use `DD_TEST_SESSION_NAME`
+
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
+
+- `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+- `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
+
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 

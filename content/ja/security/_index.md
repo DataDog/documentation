@@ -83,6 +83,14 @@ Datadog [Application Security][1] は、SSRF (Server-Side-Request-Forgery) や S
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローとフレームグラフが表示された Datadog のセキュリティシグナルパネル" width="75%">}}
 
+### ASM を無効化する
+
+ASM またはその機能を無効化する方法については、以下を参照してください。
+
+- [脅威管理と保護の無効化][17]
+- [Software Composition Analysis の無効化][18]
+- [コードセキュリティの無効化][19]
+
 ## Cloud SIEM
 
 [Cloud SIEM][4] (Security Information and Event Management) は、標的型攻撃、脅威情報リストに一致する IP 通信、安全でない構成など、アプリケーションやインフラストラクチャーに対する脅威をリアルタイムに検出します。Cloud SIEM は、[Datadog ログ管理][5]を利用しています。これらを組み合わせることで、[Datadog Cloud SIEM で検出した脅威の対処を自動化][6]し、脅威対応のワークフローを加速させることができます。詳しくは専用の[ガイドツアー](https://www.datadoghq.com/guided-tour/security/cloud-siem/)をご確認ください。
@@ -117,3 +125,6 @@ Datadog Security を使い始めるには、Datadog の [**Security** > **Setup*
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /ja/security/cloud_security_management/identity_risks/
 [16]: /ja/security/cloud_security_management/vulnerabilities/
+[17]: /ja/security/application_security/troubleshooting/#disabling-threat-management-and-protection
+[18]: /ja/security/application_security/troubleshooting/#disabling-software-composition-analysis
+[19]: /ja/security/application_security/troubleshooting/#disabling-code-security

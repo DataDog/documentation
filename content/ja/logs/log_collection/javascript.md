@@ -24,7 +24,7 @@ title: ブラウザログ収集
 
 **Datadog ブラウザログ SDK**: [NPM](#npm) を使用して SDK を構成するか、head タグで [CDN 非同期](#cdn-async) または [CDN 同期](#cdn-sync) コードスニペットを使用します。
 
-**対応ブラウザ**: ブラウザログ SDK は、IE11 を含む最新のデスクトップブラウザとモバイルブラウザをすべてサポートします。下記の[ブラウザサポート][4]表をご参照ください。
+**サポートされているブラウザ**: ブラウザログ SDK は、すべての最新のデスクトップおよびモバイルブラウザをサポートしています。[Browser Support][4] テーブルを参照してください。
 
 ### 適切なインストール方法の選択
 
@@ -370,14 +370,17 @@ window.DD_LOGS.init({
 
 `RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
 
-| パラメーター                              | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                              |
-|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `trackSessionAcrossSubdomains`         | Boolean | いいえ       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                                |
-| `useSecureSessionCookie`               | Boolean | いいえ       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                                |
-| `usePartitionedCrossSiteSessionCookie` | Boolean | いいえ       | `false` | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイト (iframe) から読み込まれたときにも、logs SDK が実行されます。`useSecureSessionCookie` を意味します。 |
-| `useCrossSiteSessionCookie`            | Boolean | いいえ       | `false` | **非推奨**: `usePartitionedCrossSiteSessionCookie` を参照してください。                                                                                                              |
 
-## 使用方法
+| パラメーター                              | タイプ                            | 必須 | デフォルト    | 説明                                                                                                                                                                                                                                                              |
+| -------------------------------------- | ------------------------------- | -------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `sessionPersistence`                    | `"cookie"` または `"local-storage"`  | いいえ       | `"cookie"`  | セッションを保持するために使用するストレージ戦略を指定します。`cookie` または `local-storage` のいずれかを指定できます。                                                                                                                                                                        |
+| `trackAnonymousUser`                    | Boolean                         | いいえ       | `true`     | セッションをまたいだ匿名ユーザー ID の収集を有効にします。                                                                                                                                                                        |
+| `trackSessionAcrossSubdomains`         | Boolean                         | いいえ       | `false`    | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                                                                                                                                |
+| `useSecureSessionCookie`               | Boolean                         | いいえ       | `false`    | 安全なセッション Cookie を使用します。これにより、安全でない (HTTPS 以外の) 接続で送信されるログが無効になります。                                                                                                                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean                         | いいえ       | `false`    | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイト (iframe) から読み込まれたときにも、logs SDK が実行されます。`useSecureSessionCookie` を意味します。                                                                                                 |
+| `usePciIntake`                          | Boolean                         | いいえ       | `false`    | ログを [PCI 準拠のインテーク][16]に転送するには、`true` に設定します。PCI 準拠のインテークは US1 サイトの Datadog 組織でのみ利用可能です。`usePciIntake` を `true` に設定していて、サイトが US1 (datadoghq.com) 以外の場合は、ログはデフォルトのインテークに送信されます。 |
+
+## 使用状況
 
 ### カスタムログ
 
@@ -1261,3 +1264,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [14]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [15]: #user-tracking-consent
+[16]: https://docs.datadoghq.com/ja/data_security/logs/#pci-dss-compliance-for-log-management

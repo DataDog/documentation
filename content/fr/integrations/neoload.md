@@ -26,6 +26,7 @@ author:
 categories:
 - notifications
 - testing
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: neoload
 integration_title: NeoLoad
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: neoload
 public_title: NeoLoad
@@ -67,7 +67,7 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Présentation
+## Section Overview
 
 [La plateforme NeoLoad de Tricentis][1] simplifie et met à l’échelle les tests de performance, aussi bien pour les API et les microservices que pour les tests d’applications de bout en bout, grâce à des fonctionnalités innovantes basées sur le protocole et le navigateur.
 
@@ -102,7 +102,7 @@ Définissez l'option correspondante dans la configuration **Push Counters** du c
 Besoin d'aide ? Contactez l'[assistance Datadog][6] ou l'[assistance Tricentis NeoLoad][7].
 
 [1]: https://www.tricentis.com/products/performance-testing-neoload
-[2]: /fr/metrics/explorer
+[2]: https://docs.datadoghq.com/fr/metrics/explorer
 [3]: https://documentation.tricentis.com/neoload/latest/en/content/reference_guide/datadog.htm
 [4]: https://github.com/DataDog/integrations-extras/blob/master/neoload/metadata.csv
 [5]: https://docs.datadoghq.com/fr/events/

@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-[Error Tracking][4] processes errors collected from the browser by the Browser SDK. Whenever a [source][1], [custom][2], or [report][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors. 
+[Error Tracking][4] processes errors collected from the browser by the Browser SDK. Whenever a [source][1], [custom][2], [report][3], or [console][3] error containing a stack trace is collected, Error Tracking processes and groups it under an issue, or group of similar errors.
 
 ## Setup
 
@@ -29,9 +29,9 @@ If you have not set up the Browser SDK yet, follow the [in-app setup instruction
 
 ## Link errors with your source code
 
-In addition to sending source maps, the [Datadog CLI][10] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository. 
+In addition to sending source maps, the [Datadog CLI][10] reports Git information such as the commit hash, repository URL, and a list of tracked file paths in the code repository.
 
-Error Tracking can use this information to correlate errors with your source code, allowing you to pivot from any stack trace frame to the related line of code in [GitHub][11], [GitLab][12] and [Bitbucket][13]. 
+Error Tracking can use this information to correlate errors with your source code, allowing you to pivot from any stack trace frame to the related line of code in [GitHub][11], [GitLab][12] and [Bitbucket][13].
 
 <div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> version and later.</div>
 
@@ -43,12 +43,7 @@ See the [Debug Symbols][15] page to view all uploaded symbols.
 
 ### Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps are limited to **500** MB each.
-{{< /site-region >}}
+Source maps are limited in size to **500 MB** each.
 
 ## Collect errors
 

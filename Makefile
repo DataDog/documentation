@@ -27,12 +27,7 @@ EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript datadog-api-client-rust
 
 # Set defaults when no makefile.config or missing entries
-# Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
 GITHUB_TOKEN ?= ""
-DD_API_KEY ?= false
-DD_APP_KEY ?= false
-DATADOG_API_KEY ?= $(DD_API_KEY)
-DATADOG_APP_KEY ?= $(DD_APP_KEY)
 FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
@@ -105,12 +100,7 @@ source-dd-source:
 
 # All the requirements for a full build
 dependencies: clean source-dd-source
-	make hugpython all-examples data/permissions.json update_pre_build node_modules placeholders
-
-# builds permissions json from rbac
-# Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
-data/permissions.json: hugpython
-	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
+	make hugpython all-examples update_pre_build node_modules placeholders
 
 integrations_data/extracted/vector:
 	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
@@ -128,7 +118,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.43732323-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.59352473-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

@@ -473,15 +473,10 @@ menu:
       url: agent/fleet_automation
       parent: agent
       weight: 8
-    - name: Upgrade the Agent
-      url: agent/upgrade
-      parent: agent
-      identifier: agent_upgrade
-      weight: 9
     - name: 트러블슈팅
       url: agent/troubleshooting/
       parent: agent
-      weight: 10
+      weight: 9
       identifier: agent_troubleshooting
     - name: 컨테이너 호스트 이름 탐지
       identifier: agent_troubleshooting_hostname_containers
@@ -2095,21 +2090,31 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
+      parent: oncall
+      identifier: oncall_routing_rules
+      weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
       parent: oncall
       identifier: oncall_escalation_policies
-      weight: 3
+      weight: 4
     - name: Schedules
       url: service_management/on-call/schedules/
       parent: oncall
       identifier: oncall_schedules
-      weight: 4
+      weight: 5
     - name: Profile Settings
       url: service_management/on-call/profile_settings/
       parent: oncall
       identifier: oncall_profile_settings
-      weight: 5
+      weight: 6
+    - name: Guides
+      url: service_management/on-call/guides/
+      parent: oncall
+      identifier: oncall_guides
+      weight: 7
     - name: 가이드 및 리소스
       url: service_management/events/
       pre: events
@@ -5152,12 +5157,12 @@ menu:
       identifier: cloud_siem_content_packs
       weight: 1
     - name: 로그 탐지 규칙
-      url: security/cloud_siem/log_detection_rules
+      url: security/cloud_siem/detection_rules
       parent: cloud_siem
       identifier: cloud_siem_log_detection_rules
       weight: 2
     - name: 신호 상관관계 규칙
-      url: security/cloud_siem/signal_correlation_rules
+      url: security/cloud_siem/detection_rules/signal_correlation_rules
       parent: cloud_siem
       identifier: cloud_siem_signal_correlation_rules
       weight: 3

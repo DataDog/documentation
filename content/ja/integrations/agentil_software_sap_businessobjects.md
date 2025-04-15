@@ -5,8 +5,8 @@ app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
   dashboards:
-    SAP BusinessObjects overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
-    SAP BusinessObjects system dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects dashboard: assets/dashboards/agentil_software_sap_businessobjects_system.json
+    SAP BusinessObjects global overview: assets/dashboards/agentil_software_sap_businessobjects_global_overview.json
   integration:
     auto_install: false
     configuration: {}

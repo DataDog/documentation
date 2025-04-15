@@ -1,78 +1,78 @@
 ---
-"app_id": "gitlab"
-"app_uuid": "3d165411-7734-4f72-b39a-f222add296b2"
-"assets":
-  "dashboards":
-    "Gitlab Overview": "assets/dashboards/overview.json"
-  "integration":
-    "auto_install": true
-    "configuration":
-      "spec": "assets/configuration/spec.yaml"
-    "events":
-      "creates_events": false
-    "metrics":
-      "check":
-      - "gitlab.process_max_fds"
-      - "gitlab.ruby.process_start_time_seconds"
-      "metadata_path": "metadata.csv"
-      "prefix": "gitlab."
-    "process_signatures":
-    - "gitlab-kas"
-    - "gitlab-workhorse"
-    - "gitlab-ctl"
-    "service_checks":
-      "metadata_path": "assets/service_checks.json"
-    "source_type_id": !!int "10026"
-    "source_type_name": "Gitlab"
-"author":
-  "homepage": "https://www.datadoghq.com"
-  "name": "Datadog"
-  "sales_email": "info@datadoghq.com"
-  "support_email": "help@datadoghq.com"
-"categories":
-- "collaboration"
-- "developer tools"
-- "issue tracking"
-- "log collection"
-- "source control"
-"custom_kind": "integration"
-"dependencies":
-- "https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md"
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "gitlab"
-"integration_id": "gitlab"
-"integration_title": "GitLab"
-"integration_version": "9.0.0"
-"is_public": true
-"manifest_version": "2.0.0"
-"name": "gitlab"
-"public_title": "GitLab"
-"short_description": "Track all your GitLab metrics with Datadog."
-"supported_os":
-- "linux"
-- "windows"
-- "macos"
-"tile":
-  "changelog": "CHANGELOG.md"
-  "classifier_tags":
-  - "Category::Collaboration"
-  - "Category::Developer Tools"
-  - "Category::Issue Tracking"
-  - "Category::Log Collection"
-  - "Category::Source Control"
-  - "Supported OS::Linux"
-  - "Supported OS::Windows"
-  - "Supported OS::macOS"
-  - "Submitted Data Type::Metrics"
-  - "Submitted Data Type::Logs"
-  - "Offering::Integration"
-  "configuration": "README.md#Setup"
-  "description": "Track all your GitLab metrics with Datadog."
-  "media": []
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": "GitLab"
+app_id: gitlab
+app_uuid: 3d165411-7734-4f72-b39a-f222add296b2
+assets:
+  dashboards:
+    Gitlab Overview: assets/dashboards/overview.json
+  integration:
+    auto_install: true
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - gitlab.process_max_fds
+      - gitlab.ruby.process_start_time_seconds
+      metadata_path: metadata.csv
+      prefix: gitlab.
+    process_signatures:
+    - gitlab-kas
+    - gitlab-workhorse
+    - gitlab-ctl
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: !!int 10026
+    source_type_name: Gitlab
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
+categories:
+- collaboration
+- developer tools
+- issue tracking
+- log collection
+- source control
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: gitlab
+integration_id: gitlab
+integration_title: GitLab
+integration_version: 9.0.0
+is_public: true
+manifest_version: 2.0.0
+name: gitlab
+public_title: GitLab
+short_description: Track all your GitLab metrics with Datadog.
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Collaboration
+  - Category::Developer Tools
+  - Category::Issue Tracking
+  - Category::Log Collection
+  - Category::Source Control
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Track all your GitLab metrics with Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: GitLab
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->

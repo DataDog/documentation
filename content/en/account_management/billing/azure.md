@@ -26,7 +26,7 @@ Use the Datadog-Azure integration tile to filter your Azure App Service Plans mo
 
 ## App Insights custom metrics
 
-If you [enable the collecton of custom metrics][5], Datadog collects all custom metrics written to any Azure App Insights instances with the scope of the integration. These metrics are considered custom metrics in Datadog and may impact your costs. See the [custom metrics billing guide][4].
+If you [enable the collection of custom metrics][5], Datadog collects all custom metrics written to any Azure App Insights instances with the scope of the integration. These metrics are considered custom metrics in Datadog and may impact your costs. See the [custom metrics billing guide][4].
 
 ## Troubleshooting
 
@@ -38,5 +38,5 @@ For billing questions, contact your [Customer Success][3] Manager.
 [2]: /getting_started/tagging/using_tags/#integrations
 [3]: /infrastructure/
 [4]: /account_management/billing/custom_metrics/?tab=countrate
-[5]: /integrations/azure#configuration
+[5]: /integrations/azure#data-collected
 [6]: https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/metrics-supported 

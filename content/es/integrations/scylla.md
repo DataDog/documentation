@@ -37,7 +37,7 @@ draft: false
 git_integration_title: scylla
 integration_id: scylla
 integration_title: Scylla
-integration_version: 4.0.0
+integration_version: 4.1.0
 is_public: true
 manifest_version: 2.0.0
 name: scylla
@@ -121,7 +121,7 @@ Para habilitar logs para entornos Kubernetes, consulta [Recopilación de logs de
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent][8] y busca`scylla``nvml` en la sección **Checks**.
+[Ejecuta el subcomando de estado del Agent][8] y busca`scylla` en la sección **Checks**.
 
 ## Datos recopilados
 

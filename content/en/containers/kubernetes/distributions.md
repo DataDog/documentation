@@ -58,40 +58,15 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: false
-    externalMetricsServer:
-      enabled: false
-      useDatadogMetrics: false
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    criSocketPath: /run/dockershim.sock
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 [1]:/containers/kubernetes/installation/?tab=datadogoperator
 [2]: /agent/guide/operator-eks-addon
-
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Custom `datadog-values.yaml`:
-
-```yaml
-datadog:
-  apiKey: <DATADOG_API_KEY>
-  appKey: <DATADOG_APP_KEY>
-  criSocketPath: /run/dockershim.sock
-  env:
-    - name: DD_AUTOCONFIG_INCLUDE_FEATURES
-      value: "containerd"
-```
 
 {{% /tab %}}
 
@@ -112,16 +87,18 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     site: <DATADOG_SITE>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
     kubelet:
-      tlsVerify: false
+      host:
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   override:
     clusterAgent:
       containers:
@@ -141,12 +118,16 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
   kubelet:
-    tlsVerify: false
-
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    
 providers:
   aks:
     enabled: true
@@ -158,13 +139,15 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 
 {{< /tabs >}}
 
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
+The AKS Kubelet certificate requires changing the Kubelet host to the `spec.nodeName` and the `hostCAPath` location of the certificate, as seen in the previous snippets. This enables TLS verification. Without these changes, the Agent cannot connect to the Kubelet.
 
-### AKS Kubelet certificate
+### Without TLS verification
 
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
-
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
+In some clusters, DNS resolution for `spec.nodeName` inside Pods does not work in AKS. This affects:
+ - Windows nodes
+ - Linux nodes, when the cluster is set up in a virtual network using custom DNS
+ 
+In this case, use the AKS configuration provided below to set `tlsVerify: false` and remove any settings for the Kubelet host path (which defaults to `status.hostIP`). **Do not set the Kubelet host path and `tlsVerify: false` in the same configuration**.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -177,18 +160,13 @@ apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  features:
-    admissionController:
-      enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
     kubelet:
-      host:
-        fieldRef:
-          fieldPath: spec.nodeName
-      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+      tlsVerify: false
   override:
     clusterAgent:
       containers:
@@ -205,15 +183,11 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Requires supported node image version
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    tlsVerify: false
 
 providers:
   aks:
@@ -222,8 +196,6 @@ providers:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Using `spec.nodeName` keeps TLS verification. In some clusters, DNS resolution for `spec.nodeName` inside Pods may not work in AKS. This has been reported on all AKS Windows nodes, as well as Linux nodes when the cluster is set up in a Virtual Network using custom DNS. In this case, use the first AKS configuration provided: remove any settings for the Kubelet host path (which defaults to `status.hostIP`) and use `tlsVerify: false`. This setting is **required**. Do NOT set the Kubelet host path and `tlsVerify: false` in the same configuration.
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -247,7 +219,7 @@ GKE Autopilot requires some configuration, shown below.
 
 Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
-**Note**: Cloud Network Monitoring is not supported for GKE Autopilot.
+**Note**: Cloud Network Monitoring is supported from version 3.100.0 of the Helm chart and with GKE version 1.32.1-gke.1729000 or later
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -287,6 +259,13 @@ agents:
         requests:
           cpu: 100m
           memory: 200Mi
+
+    systemProbe:
+      # resources for the System Probe container
+      resources:
+        requests:
+          cpu: 100m
+          memory: 400Mi
 
   priorityClassCreate: true
 
@@ -559,6 +538,7 @@ spec:
     kubeStateMetricsCore:
       enabled: true
   global:
+    clusterName: <CLUSTER_NAME>
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -582,6 +562,7 @@ Custom `datadog-values.yaml`:
 
 ```yaml
 datadog:
+  clusterName: <CLUSTER_NAME>
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:

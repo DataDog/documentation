@@ -49,29 +49,29 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 #### Enforce tags for **usage attribution** on all tests
 
-On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
 
 #### Enforce required **monitor tag policies** on all tests
 
-On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags. 
+On the [Synthetic Monitoring and Testing settings][20] page, select **Enforce required monitor tag policies on all tests** to require that user-defined monitor tag policies are enforced on Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
 
   <br>
 
   1. Configure monitor tags on the [**Monitors** > **Settings** > **Policies** page][21]:
-  
+
   <br>
 
    {{< img src="synthetics/settings/monitor_tag_policy.png" alt="Monitor Settings page, showing monitor policy tags that are configured" style="width:80%;">}}
 
   2. Create a Synthetic browser test, and add the required policy tags:
-  
+
   <br>
 
   {{< img src="synthetics/settings/monitor_tags.png" alt="New Synthetics test page, highlighting Policy tags feature" style="width:80%;">}}
 
 ### Default locations
 
-Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details. 
+Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details.
 
 Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
 
@@ -117,9 +117,9 @@ When you are done entering the default mobile devices, click **Save Default Devi
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11].
 
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions.
 
 ## Integration settings
 
@@ -127,11 +127,11 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### APM integration for browser tests
 
-Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+Datadog's APM integration headers allow Datadog to link browser tests with APM.
 
 Define which endpoints you want to send the APM headers to by adding a URL to the **Value** list. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**.
 
 For more information, see [Connect Synthetics and APM Traces][15].
 
@@ -149,7 +149,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 ## Global variables
 
-Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite. 
+Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite.
 
 To create a global variable, navigate to the **Global Variables** tab on the [**Synthetic Monitoring & Continuous Testing** > **Settings** page][7] and click **+ New Global Variable**.
 
@@ -159,9 +159,9 @@ Choose the type of variable you want to create:
 {{% tab "Specify Value" %}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores. This name should be unique across your global variables.
-2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+2. Optionally, enter a **Description** and select **Tags** to associate with your variable.
 3. Enter the **Value** you want to assign to your variable.
-4. Optionally, use built-ins to assign values to your variable. For example, click on the `{{ alphabetic(n) }}` built-in to populate the **Value** field with an example of an alphabetic value. 
+4. Optionally, use built-ins to assign values to your variable. For example, click on the `{{ alphabetic(n) }}` built-in to populate the **Value** field with an example of an alphabetic value.
 5. Optionally, enable obfuscation of your variable to hide its value on test results.
 
 {{< img src="synthetics/settings/variable_value_3.png" alt="Global Variable Specify Value" style="width:100%;">}}
@@ -201,14 +201,14 @@ You can create variables from your existing [HTTP tests][1] by parsing their ass
 {{< img src="synthetics/settings/global_variable.png" alt="Available variables that you can extract from a multistep API test" style="width:100%;" >}}
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-2. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+2. Optionally, enter a **Description** and select **Tags** to associate with your variable.
 3. Enable obfuscation of your variable to hide its value on test results (optional).
 4. Select the **test** you want to extract a variable from.
 5. If you are using a multistep API test, extract your local variable from the test. If you are using an HTTP test, choose to extract your variable from the response header or the response body.
 
     * Extract the value from **Response Header**: Use the full response header for your variable or parse it with a [`regex`][3].
     * Extract the value from **Response Body**: Parse the response body of the request with a [`regex`][3], a [`jsonpath`][4], an [`xpath`][5], or use the full response body.
-    * Extract the value from the **Response Status Code**. 
+    * Extract the value from the **Response Status Code**.
 
 In addition to extracting a value with a regex, you can also use a [regex][3] to parse the following:
 
@@ -231,13 +231,13 @@ Variable values are updated whenever the test they are extracted from runs.
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 {{% /tab %}}
 
-{{% tab "MFA Token" %}}  
- 
+{{% tab "MFA Token" %}}
+
 To generate and use a TOTP in your tests, create a global variable where you enter a secret key or upload a QR code from your authentication provider. **Note:** Currently, only the SHA1 hashing algorithm is supported for TOTP.
 
 1. In **Choose variable type**, select **MFA Token**.
 2. In **Define Variable**, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-3. Optionally, enter a **Description** and select **Tags** to associate with your variable. 
+3. Optionally, enter a **Description** and select **Tags** to associate with your variable.
 4. Enter the **Secret Key** to your variable or upload a QR code image.
 5. Click **+ Generate** to create an OTP. You can copy the generated OTP with the **Copy** icon.
 
@@ -265,7 +265,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 {{% /tab %}}
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable. 
+Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click **+ Variables**, type `{{` in a field you want to add the variable, and select your global variable.
 
 
 For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test][10], [Mobile app test][19], and [Browser Test Steps documentation][16].
@@ -278,11 +278,24 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][11] on their accounts. If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_global_variable_read` and `synthetics_global_variable_write` permissions. 
+Use [granular access control][22] to limit who has access to your test based on roles, teams, or individual users:
 
-You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. Restricting a variable prevents other users from adding it to a test and using it, but they are still able to see the variable name if it was added to a test by an authorized user. 
+1. Open the permissions section of the form.
+2. Click **Edit Access**.
+  {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
+3. Click **Restrict Access**.
+4. Select teams, roles, or users.
+5. Click **Add**.
+6. Select the level of access you want to associate with each of them.
+7. Click **Done**.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+<div class="alert alert-info"><strong>Note</strong>: You can view results from a Private Location even without Viewer access to that Private Location.</div>
+
+| Access level | View GV value | View GV metadata | Use GV in test | Edit GV value/metadata  |
+| ------------ | --------------| ---------------- | -------------- | ----------------------- |
+| No access    |               |                  |                |                         |
+| Viewer       | {{< X >}}     | {{< X >}}        | {{< X >}}      |                         |
+| Editor       | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}}               |
 
 ## Integration settings
 
@@ -290,11 +303,11 @@ You can restrict access to a global variable based on the roles in your organiza
 
 ### APM integration for browser tests
 
-Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM.
 
 Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**.
 
 For more information, see [Connect Synthetics and APM Traces][15].
 
@@ -331,3 +344,4 @@ For more information, see [Explore RUM & Session Replay][14].
 [19]: /synthetics/mobile_app_testing/#use-global-variables
 [20]: https://app.datadoghq.com/synthetics/settings/default
 [21]: https://app.datadoghq.com/monitors/settings/policies
+[22]: /account_management/rbac/granular_access

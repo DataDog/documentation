@@ -1,4 +1,8 @@
 {
+  "ListAwsScanOptions": {
+    "description": "AWS アカウントに設定されているスキャンオプションを取得します。",
+    "summary": "AWS スキャンオプションを取得します"
+  },
   "ListAPIKeys": {
     "description": "アカウントで利用できるすべての API キーを一覧表示します。",
     "summary": "すべての API キーを取得"
@@ -344,15 +348,27 @@
     "summary": "コスト属性のアクティブな請求ディメンションの取得"
   },
   "GetMonthlyCostAttribution": {
-    "description": "Get monthly cost attribution by tag across multi-org and single root-org accounts.\nCost Attribution data for a given month becomes available no later than the 19th of the following month.\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```\n\nThis endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/). This endpoint is not available in the Government (US1-FED) site.",
+    "description": "複数組織および単一ルート組織のアカウントで、タグ別に月次コスト属性を取得します。\n指定された月のコスト属性データは、翌月の 19 日までに利用可能になります。\nこの API エンドポイントはページ分割されます。すべてのレコードを確実に受け取るには、レスポンスに `next_record_id` の値が設定されているか確認してください。設定されている場合は、別のリクエストを作成し、`next_record_id` をパラメーターとして渡します。\n擬似コードの例:\n```\nresponse := GetMonthlyCostAttribution(start_month, end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\nsleep(5 seconds) # レート制限にかからないようにします\nresponse := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\ncursor := response.metadata.pagination.next_record_id\nEND\n```\n\nこのエンドポイントは、[親レベルの組織](https://docs.datadoghq.com/account_management/multi_organization/)でのみアクセス可能です。このエンドポイントは、Government (US1-FED) サイトでは利用できません。",
     "summary": "月次コスト属性の取得"
   },
   "ListAllCSMAgents": {
-    "description": "Get the list of all CSM Agents running on your hosts and containers.",
+    "description": "ホストおよびコンテナで実行中のすべての CSM エージェントの一覧を取得します。",
     "summary": "すべての CSM エージェントを取得する"
   },
+  "GetCSMCloudAccountsCoverageAnalysis": {
+    "description": "Cloud アカウントの CSM カバレッジ分析を取得します。\nこれは、セキュリティ上の問題に対してスキャンされている Cloud アカウントの数に基づいて計算されます。",
+    "summary": "CSM Cloud アカウントのカバレッジ分析を取得します"
+  },
+  "GetCSMHostsAndContainersCoverageAnalysis": {
+    "description": "ホストおよびコンテナの CSM カバレッジ分析を取得します。\nこれは、CSM 機能が有効なエージェントが稼働しているホストおよびコンテナの数に基づいて計算されます。",
+    "summary": "CSM ホストおよびコンテナのカバレッジ分析を取得します"
+  },
+  "GetCSMServerlessCoverageAnalysis": {
+    "description": "サーバーレスリソースの CSM カバレッジ分析を取得します。\nこれは、CSM 機能が有効なエージェントが稼働しているサーバーレスリソースの数に基づいて計算されます。",
+    "summary": "CSM サーバーレスのカバレッジ分析を取得します"
+  },
   "ListAllCSMServerlessAgents": {
-    "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
+    "description": "ホストおよびコンテナで実行中のすべての CSM Serverless エージェントの一覧を取得します。",
     "summary": "すべての CSM サーバーレスエージェントを取得する"
   },
   "ListCurrentUserApplicationKeys": {
@@ -452,7 +468,7 @@
     "summary": "イベントのリストを取得する"
   },
   "CreateEvent": {
-    "description": "This endpoint allows you to post events.\n\n✅ **Only events with the `change` category** are in General Availability. See [Change Tracking](https://docs.datadoghq.com/change_tracking) for more details.\n\n❌ For use cases involving other event categories, please use the V1 endpoint.",
+    "description": "このエンドポイントを使用すると、イベントを送信できます。\n\n✅ **`change` カテゴリのイベントのみ**が一般提供 (GA) です。詳細は[変更追跡](https://docs.datadoghq.com/change_tracking)を参照してください。\n\n❌ 他のイベントカテゴリを扱うユースケースについては、V1 エンドポイントを使用してください。",
     "summary": "イベントを投稿",
     "request_description": "イベントリクエストオブジェクト",
     "request_schema_description": "イベント作成用ペイロード。"
@@ -581,21 +597,21 @@
     "description": "新たな AWS アカウントインテグレーション構成を作成します。",
     "summary": "AWS インテグレーションを作成",
     "request_description": "",
-    "request_schema_description": "AWS Account Create Request body."
+    "request_schema_description": "AWS アカウント作成リクエストボディ。"
   },
   "DeleteAWSAccount": {
-    "description": "Delete an AWS Account Integration Config by config ID.",
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を削除します。",
     "summary": "AWS インテグレーションを削除"
   },
   "GetAWSAccount": {
-    "description": "Get an AWS Account Integration Config by config ID.",
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を取得します。",
     "summary": "設定 ID を用いて AWS インテグレーションを取得 "
   },
   "UpdateAWSAccount": {
-    "description": "Update an AWS Account Integration Config by config ID.",
+    "description": "config ID を指定して AWS アカウントインテグレーションの設定を更新します。",
     "summary": "AWS インテグレーションを更新",
     "request_description": "",
-    "request_schema_description": "AWS Account Update Request body."
+    "request_schema_description": "AWS アカウント更新リクエストボディ。"
   },
   "ListAWSNamespaces": {
     "description": "Datadog にメトリクスを送信できる利用可能な AWS CloudWatch ネームスペースの一覧を取得します。",
@@ -1004,17 +1020,17 @@
     "request_schema_description": "ロールとの関係。"
   },
   "ListLogsGet": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n最新のログを見るにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "ログのリストの取得"
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nログを検索およびフィルタリングするにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログを検索 (GET)"
   },
   "ListLogs": {
-    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\n複雑なログフィルタリングおよび検索を構築するにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
-    "summary": "Search logs",
+    "description": "リストエンドポイントは、ログ検索クエリと一致するログを返します。\n[結果はページ区切りされます][1]。\n\nログを検索およびフィルタリングするにはこのエンドポイントを使用してください。\n\n**オーガニゼーションのためのログのアーカイブを目的とする場合は、\nログリスト API の代わりに Datadog のアーカイブ機能の使用を検討してください。\n[Datadog のログのアーカイブに関するドキュメント][2]を参照してください。**\n\n[1]: /logs/guide/collect-multiple-logs-with-pagination\n[2]: https://docs.datadoghq.com/logs/archives",
+    "summary": "ログを検索 (POST)",
     "request_description": "",
     "request_schema_description": "ログリストのリクエスト。"
   },
   "ListTagConfigurations": {
-    "description": "Returns all metrics that can be configured in the Metrics Summary page or with Metrics without Limits™ (matching additional filters if specified).\nOptionally, paginate by using the `page[cursor]` and/or `page[size]` query parameters.\nTo fetch the first page, pass in a query parameter with either a valid `page[size]` or an empty cursor like `page[cursor]=`. To fetch the next page, pass in the `next_cursor` value from the response as the new `page[cursor]` value.\nOnce the `meta.pagination.next_cursor` value is null, all pages have been retrieved.",
+    "description": "Metrics Summary ページまたは Metrics without Limits™ で構成可能なすべてのメトリクスを返します (追加のフィルターが指定されている場合はそれにも一致します)。\nオプションとして、`page[cursor]` および/または `page[size]` クエリパラメーターを使用してページネーションすることができます。\n最初のページを取得するには、有効な `page[size]` を指定するか、`page[cursor]` に空の値 (例: `page[cursor]=`) を渡してください。次のページを取得するには、レスポンスから返される `next_cursor` の値を新しい `page[cursor]` の値として渡します。\n`meta.pagination.next_cursor` が null の場合、すべてのページを取得し終えたことを示します。",
     "summary": "メトリクスのリストを取得する"
   },
   "DeleteBulkTagsMetricsConfiguration": {
@@ -1030,7 +1046,7 @@
     "request_schema_description": "1 回の一括タグコンフィギュレーションリクエストのラッパーオブジェクト。"
   },
   "ListActiveMetricConfigurations": {
-    "description": "指定されたメトリクス名について、ダッシュボード、ノートブック、モニター、Metrics Explorer でアクティブにクエリされているタグと集計を一覧表示します。",
+    "description": "指定したメトリクス名に対し、ダッシュボード、ノートブック、モニター、Metrics Explorer、および API でアクティブにクエリされているタグと集計を一覧表示します。",
     "summary": "アクティブなタグと集計をリストアップする"
   },
   "ListTagsByMetricName": {
@@ -1228,7 +1244,7 @@
     "summary": "制限ポリシーを取得する"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`",
+    "description": "リソースに関連付けられている制限ポリシーを更新します。\n\n#### サポートされているリソース\n制限ポリシーは、次のリソースに適用できます。\n- ダッシュボード: `dashboard`\n- ノートブック: `notebook`\n- パワーパック: `powerpack`\n- リファレンステーブル: `reference-table`\n- セキュリティルール: `security-rule`\n- サービスレベル目標: `slo`\n- Synthetic グローバル変数: `synthetics-global-variable`\n- Synthetic テスト: `synthetics-test`\n- Synthetic プライベートロケーション: `synthetics-private-location`\n- モニター: `monitor`\n\n#### リソースのサポートされている関係\nリソースタイプ               | サポートされている関係\n----------------------------|--------------------------\nダッシュボード                  | `viewer`, `editor`\nノートブック                   | `viewer`, `editor`\nパワーパック                  | `viewer`, `editor`\nセキュリティルール              | `viewer`, `editor`\nサービスレベル目標    | `viewer`, `editor`\nSynthetic グローバル変数  | `viewer`, `editor`\nSynthetic テスト             | `viewer`, `editor`\nSynthetic プライベートロケーション | `viewer`, `editor`\nモニター                    | `viewer`, `editor`\nリファレンステーブル          | `viewer`, `editor`",
     "summary": "制限ポリシーを更新する",
     "request_description": "制限ポリシーペイロード",
     "request_schema_description": "制限ポリシーのリクエストを更新します。"
@@ -1366,64 +1382,64 @@
     "request_schema_description": "IdP メタデータをアップロードするために送信されたフォームデータ"
   },
   "ListSCIMGroups": {
-    "description": "List groups in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "description": "オーガニゼーション内のグループを一覧表示します。\n結果は `startIndex` と `count` パラメーターでページネーションされます。\n`filter` パラメーターを使用して結果を絞り込むことができます。",
     "summary": "グループ一覧を取得する"
   },
   "CreateSCIMGroup": {
-    "description": "Create a new group.\nThe group may contain members.",
+    "description": "新しいグループを作成します。\nグループにはメンバーを含めることができます。",
     "summary": "グループを作成する",
     "request_description": "",
-    "request_schema_description": "Definition of a group."
+    "request_schema_description": "グループの定義。"
   },
   "DeleteSCIMGroup": {
-    "description": "Delete the group with the given `group_id`.",
+    "description": "指定した `group_id` を持つグループを削除します。",
     "summary": "グループを削除する"
   },
   "GetSCIMGroup": {
-    "description": "Get a single group using the `group_id`.",
+    "description": "`group_id` を使用して 1 つのグループを取得します。",
     "summary": "グループを取得する"
   },
   "PatchSCIMGroup": {
-    "description": "Patch the group with the given `group_id`.",
+    "description": "指定した `group_id` を持つグループをパッチ更新します。",
     "summary": "グループを修正する",
     "request_description": "",
-    "request_schema_description": "Request object for patching a group."
+    "request_schema_description": "グループのパッチ更新用リクエストオブジェクト。"
   },
   "UpdateSCIMGroup": {
-    "description": "Update the group with the given `group_id`.",
+    "description": "指定した `group_id` を持つグループを更新します。",
     "summary": "グループを更新する",
     "request_description": "",
-    "request_schema_description": "Definition of a group."
+    "request_schema_description": "グループの定義。"
   },
   "ListSCIMUsers": {
-    "description": "List users in the organization.\nResults are paginated by `startIndex` and `count` parameters.\nResults can be narrowed down by the `filter` parameter.",
+    "description": "オーガニゼーション内のユーザーを一覧表示します。\n結果は `startIndex` と `count` パラメーターでページネーションされます。\n`filter` パラメーターを使用して結果を絞り込むことができます。",
     "summary": "ユーザー一覧を取得する"
   },
   "CreateSCIMUser": {
-    "description": "Create a new user.",
+    "description": "新しいユーザーを作成します。",
     "summary": "ユーザーの作成",
     "request_description": "",
-    "request_schema_description": "Definition of a user."
+    "request_schema_description": "ユーザーの定義。"
   },
   "DeleteSCIMUser": {
-    "description": "Delete the group with the given `user_uuid`.",
+    "description": "指定した `user_uuid` を持つグループを削除します。",
     "summary": "ユーザーを削除する"
   },
   "GetSCIMUser": {
-    "description": "Get a single user using the `user_uuid`.",
+    "description": "`user_uuid` を使用して 1 人のユーザーを取得します。",
     "summary": "ユーザーの取得"
   },
   "PatchSCIMUser": {
-    "description": "Patch the user with the given `user_uuid`.",
+    "description": "指定した `user_uuid` を持つユーザーをパッチ更新します。",
     "summary": "ユーザーを修正する",
     "request_description": "",
-    "request_schema_description": "Request object for patching a user."
+    "request_schema_description": "ユーザーのパッチ更新用リクエストオブジェクト。"
   },
   "UpdateSCIMUser": {
-    "description": "Update the user with the given `user_uuid`.",
+    "description": "指定した `user_uuid` を持つユーザーを更新します。",
     "summary": "ユーザーの更新",
     "request_description": "",
-    "request_schema_description": "Definition of a user."
+    "request_schema_description": "ユーザーの定義。"
   },
   "ListScorecardOutcomes": {
     "description": "すべてのルール成果を取得します。",
@@ -1455,9 +1471,17 @@
     "request_description": "ルール属性。",
     "request_schema_description": "スコアカードルールの更新リクエスト。"
   },
+  "ListVulnerableAssets": {
+    "description": "脆弱性があるアセットの一覧を取得します。\n\n### ページネーション\n\n[「List Vulnerabilities」エンドポイントのページネーションのセクション](#pagination)を参照してください。\n\n### フィルタリング\n\n[「List Vulnerabilities」エンドポイントのフィルタリングのセクション](#filtering)を参照してください。\n\n### メタデータ\n\n[「List Vulnerabilities」エンドポイントのメタデータのセクション](#metadata)を参照してください。",
+    "summary": "脆弱性があるアセットの一覧"
+  },
   "DownloadCloudWorkloadPolicyFile": {
     "description": "ダウンロードエンドポイントは、現在有効なクラウドワークロードセキュリティルールからクラウドワークロードセキュリティポリシーファイルを生成し、.policy ファイルとしてダウンロードします。それからこのファイルは Agent にデプロイされ、環境で実行中のポリシーを更新します。",
     "summary": "最新のクラウドワークロードセキュリティポリシーを取得"
+  },
+  "ListVulnerabilities": {
+    "description": "脆弱性の一覧を取得します。\n\n### ページネーション\n\n`vulnerabilities` と `assets` の両方で、デフォルトでページネーションが有効になっています。ページサイズはエンドポイントによって異なり、変更できません。次のページのリクエストを自動化する場合は、レスポンスの links セクションを使用することができます。\n\nこのエンドポイントはページ分割されたレスポンスを返します。ページ情報はレスポンスの links セクションに格納されます:\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {...},\n\"links\": {\n\"self\": \"https://.../api/v2/security/vulnerabilities\",\n\"first\": \"https://.../api/v2/security/vulnerabilities?page[number]=1&page[token]=abc\",\n\"last\": \"https://.../api/v2/security/vulnerabilities?page[number]=43&page[token]=abc\",\n\"next\": \"https://.../api/v2/security/vulnerabilities?page[number]=2&page[token]=abc\"\n}\n}\n```\n\n- 1 ページ目が要求された場合、`links.previous` は空です。\n- 最終ページが要求された場合、`links.next` は空です。\n\n#### トークン\n\n脆弱性はいつでも作成、更新、または削除できます。\n\n最初のリクエスト時に、後続のページ分割されたリクエスト全体で一貫性を保つためのトークンが作成されます。\n\nトークンは 24 時間のみ有効です。\n\n#### 最初のリクエスト\n\n`page[token]` パラメーターがない場合、そのリクエストは最初のリクエストとみなされます。\n\n最初のリクエストのレスポンスには、`links` セクションに新しく作成されたトークンが含まれます。\n\nこのトークンは、以降のページ分割リクエストで使用できます。\n\n#### 後続のリクエスト\n\n有効な `page[token]` と `page[number]` を含むリクエストは、後続のリクエストとみなされます。\n\nトークンが無効な場合、`404` レスポンスが返されます。\n\nページ番号が無効な場合、`400` レスポンスが返されます。\n\n### フィルタリング\n\nレスポンスからデータをフィルタリングするために、リクエストにフィルターパラメーターを含めることができます。フィルターパラメーターの形式は [JSON:API の形式](https://jsonapi.org/format/#fetching-filtering)に従います: `filter[$prop_name]` (ここで `prop_name` はエンティティのプロパティ名です)。\n\nすべてのフィルターは複数の値を指定できます。データは OR 句でフィルタリングされます。例: `filter[title]=Title1,Title2` は、タイトルが `Title1` または `Title2` に等しい脆弱性をすべて抽出します。\n\n文字列によるフィルターは大文字小文字を区別します。\n\nブール値によるフィルターでは `true` または `false` を使用します。\n\n数値によるフィルターは、2 つ目のフィルター入力として演算子を含める必要があります (例: `filter[cvss.base.score][lte]=8`)。\n\n使用可能な演算子は、`eq` (==), `lt` (<), `lte` (<=), `gt` (>) および `gte` (>=) です。\n\n### メタデータ\n\n[JSON:API 形式](https://jsonapi.org/format/#document-meta)に従い、標準外のメタ情報を含むオブジェクトです。\n\nこのエンドポイントのレスポンスには meta メンバーが含まれます。このセクションに含まれる各プロパティの詳細については、エンドポイントのレスポンステーブルを確認してください。\n\n```JSON\n{\n\"data\": [...],\n\"meta\": {\n\"total\": 1500,\n\"count\": 18732,\n\"token\": \"some_token\"\n},\n\"links\": {...}\n}\n```",
+    "summary": "脆弱性の一覧"
   },
   "ListCloudWorkloadSecurityAgentRules": {
     "description": "Agent ルールのリストを取得します。",

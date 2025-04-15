@@ -46,7 +46,7 @@ To disable the Admission Controllers with your Cluster Agent managed by the Data
           enabled: false
 ```
 
-**Note**: The the `features.admissionController.enabled` parameter is set to `true` to allow the Cluster Agent to manage the Kubernetes Admission Controllers.
+**Note**: The `features.admissionController.enabled` parameter is set to `true` to allow the Cluster Agent to manage the Kubernetes Admission Controllers.
 
 After redeploying the Cluster Agent with the updated configuration, the Admission Controllers are removed.
 {{% /tab %}}

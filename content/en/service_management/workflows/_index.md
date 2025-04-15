@@ -66,7 +66,7 @@ Below are a few examples of workflows you can build:
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
 
-[1]: /service_management/workflows/actions_catalog/
+[1]: /actions/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
 [3]: https://app.datadoghq.com/dashboard/lists
 [4]: https://datadoghq.slack.com/

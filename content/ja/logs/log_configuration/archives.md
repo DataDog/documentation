@@ -44,10 +44,6 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning"><em>ロール委任を使用した S3 アーカイブの設定は現在限定的に利用可能です。Datadog for Government アカウントでこの機能をリクエストするには、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にお問い合わせください</em>。</div>
-{{< /site-region >}}
-
 まだ構成されていない場合は、S3 バケットを保持する AWS アカウントの [AWS インテグレーション][1]をセットアップします。
    * 一般的なケースでは、これには、Datadog が AWS S3 との統合に使用できるロールの作成が含まれます。
    * 特に AWS China アカウントの場合は、ロール委任の代わりにアクセスキーを使用します。

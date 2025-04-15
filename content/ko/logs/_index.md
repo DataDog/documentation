@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /ko/guides/logs/
 - /ko/en/logs
@@ -42,6 +45,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/
   tag: 블로그
   text: 네트워크 및 보안 분석을 위해 DNS 로그 모니터링
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: 아키텍처 센터
+  text: Datadog를 통한 로그 관리 인덱싱 전략 가이드
 title: 로그 관리
 ---
 
@@ -85,6 +91,8 @@ Datadog 로그 관리로 호스트, 컨테이너, 클라우드 공급자 및 기
 ## 탐색
 
 [로그 탐색기][1]로 수집한 로그 탐색을 시작합니다.
+
+**팁**: Datadog 글로벌 검색에서 로그 탐색기를 열려면 <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 누르고 `logs`를 검색하세요.
 
 {{< img src="/logs/explore.png" alt="수집한 로그 탐색" style="width:80%;">}}
 

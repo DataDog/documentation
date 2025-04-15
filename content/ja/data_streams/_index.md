@@ -21,6 +21,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring-sqs/
   tag: ブログ
   text: Data Streams Monitoring による SQS の監視
+- link: https://www.datadoghq.com/blog/confluent-connector-dsm-autodiscovery/
+  tag: ブログ
+  text: Confluent Cloud のコネクタを自動的に検出し、Data Streams Monitoring でパフォーマンスを簡単に監視できます
 title: データストリーム モニタリング
 ---
 

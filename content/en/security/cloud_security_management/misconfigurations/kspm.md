@@ -22,18 +22,21 @@ To take full advantage of KSPM, you must install both the Datadog Agent and clou
 
 This allows Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
-| Resource Type            | Install Method    | Framework        |
-|--------------------------|-------------------|------------------|
-| `aws_eks_cluster`        | cloud integration | `cis-eks`        |
-| `aws_eks_worker_node`    | Agent             | `cis-eks`        |
-| `azure_aks_cluster`      | cloud integration | `cis-aks`        |
-| `azure_aks_worker_node`  | Agent             | `cis-aks`        |
-| `kubernetes_master_node` | Agent             | `cis-kubernetes` |
-| `kubernetes_worker_node` | Agent             | `cis-kubernetes` |
+| Resource Type                     | Install Method    | Framework        |
+|-----------------------------------|-------------------|------------------|
+| `aws_eks_cluster`                 | Cloud integration | `cis-eks`        |
+| `aws_eks_worker_node`             | Agent             | `cis-eks`        |
+| `azure_aks_cluster`               | Cloud integration | `cis-aks`        |
+| `azure_aks_worker_node`           | Agent             | `cis-aks`        |
+| `gcp_kubernetes_engine_cluster`   | Cloud integration | `cis-gke`        |
+| `gcp_kubernetes_engine_node_pool` | Cloud integration | `cis-gke`        |
+| `gcp_gke_worker_node`             | Agent             | `cis-gke`        |
+| `kubernetes_master_node`          | Agent             | `cis-kubernetes` |
+| `kubernetes_worker_node`          | Agent             | `cis-kubernetes` |
 
 ## Monitor risk across Kubernetes deployments
 
-With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
+With KSPM, Datadog scans your environment for risks defined by more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations explorer][11].
 
 Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. After you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or by [executing a pre-defined workflow][8].
 

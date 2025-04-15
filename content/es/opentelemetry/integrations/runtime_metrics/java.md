@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/runtime_metrics/java/
+- /es/opentelemetry/runtime_metrics/java/
 code_lang: java
 code_lang_weight: 10
 title: Métricas de tiempo de ejecución de OpenTelemetry Java

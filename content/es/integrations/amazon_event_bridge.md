@@ -3,7 +3,7 @@ categories:
 - AWS
 - nube
 - notificaciones
-custom_kind: integration
+custom_kind: integración
 dependencies: []
 description: Un bus de eventos serverless que procesa eventos de servicios AWS, SaaS
   y tus aplicaciones casi en tiempo real.
@@ -84,10 +84,6 @@ Configura nuevos canales de salida de notificaciones para monitores y snapshots 
 
 La lista completa de los recursos que puedes elegir como destino está disponible en el [sitio web AWS][10].
 
-A continuación encontrarás un ejemplo de cómo enviar un snapshot para activar este proceso. Una vez activado, puedes especificar la recepción de acciones en AWS.
-
-{{< wistia uezo3fh61j >}}
-
 ## Datos recopilados
 
 ### Métricas
@@ -104,7 +100,7 @@ La integración Amazon EventBridge no incluye checks de servicios.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Contacta con el [equipo de asistencia de Datadog][11].
+¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][11].
 
 [1]: https://docs.datadoghq.com/es/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/es/api/latest/aws-integration/#create-an-amazon-eventbridge-source

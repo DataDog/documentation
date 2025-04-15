@@ -22,8 +22,8 @@ If you want to encapsulate logic within your app, you can use state variables.
 
 To add a state variable to your app, perform the following steps:
 
-1. In your app, click **{𝑥}** to open the **Variables** tab.
-1. Click **Create Variable**.
+1. In your app, click the Data (**{&nbsp;}**) icon to open the Data tab.
+1. Click the plus (**+**), then select **Variable**.
 1. Optionally, click the variable name and rename it.
 1. Define the initial value for your state variable.
 
@@ -35,10 +35,10 @@ To create an app that uses a button to change a callout value component's style 
 
 ### Create the variables
 
-1. In your app, click **{𝑥}** to open the **Variables** tab.
-1. Click **Create Variable**.
+1. In your app, click the Data (**{&nbsp;}**) icon to open the Data tab.
+1. Click the plus (**+**), then select **Variable**.
 1. Name the variable `callout_value` and set its **Initial Value** to `Pass`.
-1. Click the **+ (plus)** to create another variable.
+1. Click the plus (**+**) to create another variable.
 1. Name this variable `callout_color` and set its **Initial Value** to `green`.
 
 ### Create the components

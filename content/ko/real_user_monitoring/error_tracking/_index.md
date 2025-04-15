@@ -37,15 +37,15 @@ RUM 오류 이슈에는 스택 트레이스, 사용자 세션 타임라인, 메�
 
 ## 설정
 
-{{< whatsnext desc="RUM용 Datadog 오류 추적을 사용하려면, 해당 설명서를 참조하세요." >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}브라우저{{< /nextlink >}}
+{{< whatsnext desc="RUM에 대한 Datadog 오류 추적을 시작하려면 해당 설명서를 참조하세요." >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

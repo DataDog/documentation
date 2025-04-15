@@ -16,10 +16,6 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Test optimization for Go is in Preview.
-{{< /callout >}}
-
 ## Compatibility
 
 Test Impact Analysis is only supported on `orchestrion >= 0.9.4 + dd-trace-go >= 1.70.0`.

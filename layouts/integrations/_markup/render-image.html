@@ -1,0 +1,28 @@
+{{-
+/*
+   Inline Images on Integrations Pages
+   This loads images that start with integrations/ from docs
+   Anything else attempts to load from dd-app-listings bucket
+*/
+-}}
+{{- $app_id := .Page.Params.integration_id | default .Page.Params.name -}}
+{{- $img := replaceRE `(./)?images/` "" .Destination -}}
+{{- $url := split $img "/" -}}
+{{- $app_listings_bucket := cond (eq hugo.Environment "live") "dd-app-listings" "dd-app-listings-staging" -}}
+
+{{- if or (strings.Contains .Destination "https://raw.githubusercontent.com") (strings.Contains .Destination "https://s3.amazonaws.com/") -}}
+<img src="{{ (.Destination | safeURL) }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+{{- else if eq (index $url 0) "integrations" -}}
+<img src="{{ (print site.Params.img_url "images/" (.Destination | safeURL)) }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+{{- else -}}
+<img src="https://s3.amazonaws.com/{{ $app_listings_bucket }}/{{ $app_id }}/media/{{ $img }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+>
+{{- end -}}

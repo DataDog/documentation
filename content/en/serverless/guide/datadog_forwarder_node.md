@@ -157,10 +157,10 @@ Run the following Yarn or NPM command in your CDK project to install the Datadog
 
 ```sh
 #Yarn
-yarn add --dev datadog-cdk-constructs
+yarn add --dev datadog-cdk-constructs-v2
 
 #NPM
-npm install datadog-cdk-constructs --save-dev
+npm install datadog-cdk-constructs-v2 --save-dev
 ```
 
 ### Instrument
@@ -169,12 +169,12 @@ To instrument the function, import the `datadog-cdk-construct` module in your AW
 
 ```typescript
 import * as cdk from "@aws-cdk/core";
-import { Datadog } from "datadog-cdk-constructs";
+import { DatadogLambda } from "datadog-cdk-constructs-v2";
 
 class CdkStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    const datadog = new Datadog(this, "Datadog", {
+    const datadogLambda = new DatadogLambda(this, "DatadogLambda", {
       nodeLayerVersion: {{< latest-lambda-layer-version layer="node" >}},
       forwarderArn: "<FORWARDER_ARN>",
       service: "<SERVICE>",  // Optional
@@ -195,7 +195,7 @@ If your Lambda function is configured to use code signing, you must add Datadog'
 More information and additional parameters can be found in the [Datadog CDK NPM page][1].
 
 
-[1]: https://www.npmjs.com/package/datadog-cdk-constructs
+[1]: https://www.npmjs.com/package/datadog-cdk-constructs-v2
 [2]: https://docs.datadoghq.com/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 {{% /tab %}}

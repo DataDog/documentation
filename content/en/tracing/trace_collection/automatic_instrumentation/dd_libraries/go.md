@@ -18,6 +18,9 @@ further_reading:
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "External Site"
   text: "Tracer library API documentation"
+- link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace"
+  tag: "External Site"
+  text: "Tracer library API documentation for v2"
 - link: https://github.com/DataDog/orchestrion
   tag: "Source Code"
   text: "Orchestrion source code"
@@ -25,6 +28,11 @@ further_reading:
   tag: "Documentation"
   text: "Explore your services, resources and traces"
 ---
+
+<div class="alert alert-info">
+The Go Tracer v2 is in Preview! See <a href="/tracing/trace_collection/custom_instrumentation/go/migration">the migration guide</a> to upgrade.
+</div>
+
 
 ## Compatibility requirements
 
@@ -58,7 +66,7 @@ Refer to the instructions in the section corresponding to your preference below:
 - Comprehensive tracing coverage:
    - Instruments your code and all dependencies, including the Go standard library
    - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
-- Exclusive [Application Security Management][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
+- Exclusive [App and API Protection][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
 
 ### Requirements
 
@@ -253,7 +261,7 @@ To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compi
 
 ### Add the tracer library to your application
 
-First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] for configuration instructions and details about using the API.
+First, import and start the tracer in your code following the [Library Configuration][3] documentation. Refer to the [API documentation][4] (or the [API documentation v2][6]) for configuration instructions and details about using the API.
 
 ### Activate Go integrations to create spans
 
@@ -262,6 +270,7 @@ Activate [Go integrations][1] to generate spans. Datadog has a series of pluggab
 [1]: /tracing/compatibility_requirements/go
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[6]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 
 {{% /tab %}}
 

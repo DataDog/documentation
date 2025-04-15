@@ -1,5 +1,5 @@
 ---
-title: Set up Tracing on GitHub Actions Workflows
+title: Set up CI Visibility on GitHub Actions Workflows
 aliases:
   - /continuous_integration/setup_pipelines/github
 further_reading:
@@ -25,13 +25,14 @@ further_reading:
 
 [GitHub Actions][1] is an automation tool that allows you to build, test, and deploy your code in GitHub. Create workflows that automate every step of your development process, streamlining software updates and enhancing code quality with CI/CD features integrated into your repositories.
 
-Set up tracing in GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
+Set up CI Visibility in GitHub Actions to track the execution of your workflows, identify performance bottlenecks, troubleshoot operational issues, and optimize your deployment processes.
 
 ### Compatibility
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [CI jobs failure analysis][23] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
@@ -61,7 +62,7 @@ The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect w
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
 
-### Configure tracing for GitHub Actions
+### Configure CI Visibility for GitHub Actions
 
 After the GitHub App is created and installed, enable CI Visibility on the accounts and/or repositories you want visibility into.
 
@@ -72,14 +73,13 @@ After the GitHub App is created and installed, enable CI Visibility on the accou
 
 Pipelines appear immediately after enabling CI Visibility for any account or repository.
 
-### Disable GitHub Actions tracing
+### Disable CI Visiblity for GitHub Actions
 
-To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
-workflow job and workflow run events. To remove the events:
+To disable the CI Visibility GitHub Actions integration:
 
-1. Go to the [GitHub Apps][14] page.
-2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you have to repeat the process for each).
-3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
+1. Go to the [CI GitHub Settings][14] page.
+2. Choose the GitHub account that you want to disable CI Visibility for, and click **Account Enabled**.
+3. Untoggle **Enable CI Visibility**, or choose which repository you want to disable it for individually.
 
 ### Collect job logs
 
@@ -98,9 +98,19 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitHub runners, you can correlate jobs with the hosts running them by ensuring that the GitHub runner name matches the hostname of the machine. CI Visibility uses this information to link to infrastructure metrics.
+The GitHub Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
+
+- For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][22] and change `min_collection_interval` to be less than 15 seconds.
+
+- For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
 To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
+
+### CI jobs failure analysis
+
+If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitHub Actions.
+
+For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 ## Visualize pipeline data in Datadog
 
@@ -125,9 +135,13 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [11]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [12]: https://app.datadoghq.com/integrations/github/
 [13]: https://app.datadoghq.com/ci/setup/pipeline?provider=github
-[14]: https://github.com/settings/apps
+[14]: https://app.datadoghq.com/ci/settings/provider
 [15]: /logs/
 [16]: /logs/guide/best-practices-for-log-management/
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/ci/pipeline-executions
 [19]: /continuous_integration/search/#search-for-pipelines
+[20]: /agent
+[21]: https://github.com/actions/actions-runner-controller
+[22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

@@ -49,6 +49,18 @@ The workaround for this issue is to set the configuration option:
 - For Helm: set `datadog.sbom.containerImage.uncompressedLayersSupport: true` in your `values.yaml` file.
 - For Datadog Operator: set `features.sbom.containerImage.uncompressedLayersSupport` to `true` in your DatadogAgent CRD.
 
+### GKE image streaming
+
+Datadog doesn't support image streaming with Google Kubernetes Engine (GKE). If you have that option enabled in GKE, your Agent can't generate container SBOMs.
+
+The resulting error appears as:
+
+```sh
+unable to mount containerd image, err: unable to scan image named: {image-name}, image is not unpacked
+```
+
+The workaround for this issue is to disable image streaming in GKE. For more information, see the [Disable Image streaming][5] section of the GKE docs.
+
 ## Disable CSM Vulnerabilities
 
 In the `datadog-values.yaml` file for the Agent, set the following configuration settings to `false`:
@@ -81,3 +93,4 @@ datadog:
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
+[5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

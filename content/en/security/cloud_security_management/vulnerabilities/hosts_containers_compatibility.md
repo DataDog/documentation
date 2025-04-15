@@ -48,4 +48,4 @@ Cloud Security Management Vulnerabilities supports vulnerability scanning for th
 **Note**: For Agent-based vulnerability management in application libraries, see [Software Composition Analysis][1].
 
 
-[1]: /security/application_security/software_composition_analysis/
+[1]: /security/code_security/software_composition_analysis/

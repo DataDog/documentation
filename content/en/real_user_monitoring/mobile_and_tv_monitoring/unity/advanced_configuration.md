@@ -66,7 +66,7 @@ When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be
 
 ### Track resources
 
-Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and and HTTP calls from your RUM views.
+Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
 
 You can use it the same way as you would any other `UnityWebRequest`:
 
@@ -139,13 +139,11 @@ Adding user information to your RUM sessions makes it easy to:
 
 {{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" >}}
 
-The following attributes are **optional**, provide **at least** one of them:
-
-| Attribute | Type   | Description                                                                                              |
-|-----------|--------|----------------------------------------------------------------------------------------------------------|
-| `usr.id`    | String | Unique user identifier.                                                                                  |
-| `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use `DatadogSdk.SetUserInfo`.
 
@@ -164,9 +162,10 @@ To remove an existing attribute, set it to `null`.
 For example:
 
 ```cs
-DatadogSdk.Instance.AddUserExtraInfo({
- 'attribute_1': 'foo',
- 'attribute_2': null,
+DatadogSdk.Instance.AddUserExtraInfo(new ()
+{
+ { "attribute_1", "foo" },
+ { "attribute_2", null },
 });
 ```
 

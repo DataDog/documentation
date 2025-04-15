@@ -169,5 +169,5 @@ Override templates let you specify profiling properties to override. However, th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/

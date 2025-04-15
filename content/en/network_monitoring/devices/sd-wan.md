@@ -8,6 +8,9 @@ further_reading:
     - link: 'network_monitoring/devices/data/'
       tag: 'Doc'
       text: 'NDM Data Collected'
+    - link: "https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/"
+      tag: "Architecture Center"
+      text: "Network Observability: SD-WAN Reference Architecture"
 ---
 
 ## SD-WAN monitoring
@@ -24,6 +27,7 @@ Datadog supports the following vendors for SD-WAN network monitoring:
 
   - [Meraki SD-WAN][2] 
   - [Cisco SD-WAN][3] 
+  - [VmWare VeloCloud][4] (In Preview)
 
 ## Further Reading
 
@@ -32,3 +36,4 @@ Datadog supports the following vendors for SD-WAN network monitoring:
 [1]: https://www.datadoghq.com/architecture/network-observability-sd-wan-reference-architecture/
 [2]: https://docs.datadoghq.com/integrations/meraki/
 [3]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[4]: https://docs.datadoghq.com/integrations/velocloud_sd_wan/

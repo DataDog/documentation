@@ -33,7 +33,7 @@ draft: false
 git_integration_title: mapreduce
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 6.0.0
+integration_version: 6.1.0
 is_public: true
 manifest_version: 2.0.0
 name: mapreduce

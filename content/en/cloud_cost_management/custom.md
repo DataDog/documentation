@@ -230,7 +230,7 @@ After your data is formatted to the requirements above, upload your CSV and JSON
 
 In Datadog:
 
-1. Navigate to [**Infrastructure > Cloud Costs > Settings > Custom Costs**][3].
+1. Navigate to [**Cloud Cost > Settings > Custom Costs**][3].
 1. Click the **+ Upload Costs** button.
 
    {{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
@@ -281,7 +281,7 @@ All costs submitted to Custom Costs appear in these metrics. For example, if a $
 
 ## Use Custom Costs data
 
-You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [Cloud Costs Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
+You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cloud Cost Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
 
 ## Further reading
 
@@ -292,7 +292,7 @@ You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [
 [3]: https://app.datadoghq.com/cost/settings/cost-files
 [4]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 [5]: https://en.wiktionary.org/wiki/Pascal_case
-[6]: https://app.datadoghq.com/cost/analytics
+[6]: https://app.datadoghq.com/cost/explorer
 [7]: https://app.datadoghq.com/cost/tags?cloud=custom
 [8]: /dashboards
 [9]: /notebooks

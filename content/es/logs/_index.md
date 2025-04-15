@@ -70,7 +70,7 @@ Logging without Limits\* permite agilizar la experiencia de solucionar problemas
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
-Accede a dashboards preconfigurados
+</br>
 
 ## Recopilar
 
@@ -110,7 +110,7 @@ Comienza a explorar tus logs ingeridos en el [Log Explorer][1].
   Aprende sin coste alguno sobre la capacidad real de computación en la nube y una cuenta de prueba de Datadog. Inscríbete hoy mismo para obtener más información sobre la recopilación, consulta, análisis, métricas, monitorización, procesamiento, almacenamiento y control de acceso de logs.
 {{< /learning-center-callout >}}
 
-## Configurar tests de API y tests de API multupaso
+## Para leer más
 
 {{< partial name="whats-next/whats-next.html" >}}
 <br>

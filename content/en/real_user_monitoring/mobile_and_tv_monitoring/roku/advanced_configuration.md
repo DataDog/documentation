@@ -109,13 +109,11 @@ Adding user information to your RUM sessions makes it easy to:
 * Know which users are the most impacted by errors.
 * Monitor performance for your most important users.
 
-The following attributes are **optional**, but you should provide **at least one** of them:
-
-| Attribute | Type   | Description                                                                                              |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| id        | String | Unique user identifier.                                                                                  |
-| name      | String | User friendly name, displayed by default in the RUM UI.                                                  |
-| email     | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+| Attribute   | Type   | Description                                                                     |
+| ----------- | ------ | ------------------------------------------------------------------------------- |
+| `usr.id`    | String | (Required) Unique user identifier.                                              |
+| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
+| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
 
 To identify user sessions, use the `datadogUserInfo` global field, after initializing the SDK, for example:
 
@@ -131,10 +129,11 @@ In addition to the default attributes captured by the SDK automatically, you can
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/mobile_and_tv_monitoring/roku/setup
 
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}

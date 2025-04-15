@@ -30,6 +30,14 @@ Each item listed in the Error Tracking Explorer is an issue that contains high-l
 
 The time range appears on the top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Change the time range by selecting a preset range from the dropdown.
 
+### Sorting
+
+Order issues in the list using one of these options:
+-   **Relevance** combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
+-   **Count** sorts issues based on the total count of occurrences over the selected time range.
+-   **Newest** orders issues by when they were first seen.
+-   **Impacted Sessions** sorts issues by the number of impacted [RUM sessions][4].
+
 ### Facets
 
 {{< img src="/error_tracking/facets-panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
@@ -62,9 +70,15 @@ Each event generated is tagged with the version, the service, and the environmen
 
 {{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
 
+## Suspected Cause
+
+[Suspected Cause][3] enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /events
 [2]: /monitors/types/event/
+[3]: /error_tracking/suspected_causes
+[4]: /real_user_monitoring/explorer/search/#event-types

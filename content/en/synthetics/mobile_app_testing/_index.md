@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
 - link: "/synthetics/mobile_app_testing/settings"
@@ -28,9 +28,11 @@ cascade:
 
 ## Overview
 
-Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices.
 Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 Mobile app tests can run on a schedule, on demand, or directly within your [CI/CD pipelines][1].
+
+Optionally, link Synthetic mobile test data with RUM mobile data if the [RUM SDK][15] is used within the tested application. 
 
 You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
@@ -71,7 +73,7 @@ When configuring a new Mobile Application test, use snippets to automatically po
   - **Standard Screen (iOS only)**
   - **Small Screen (iOS only)**
 
-* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.  
+* **OS Version**: Automatically test your iOS or Android apps on multiple versions. This selection toggles to either iOS or Android depending on the choice of your Mobile Application.
 
 * **Device Manufacturer (Android only)**: Automatically test your Android apps across multiple device manufacturers.
 
@@ -96,7 +98,7 @@ You can inject the variables available to you while recording. For more informat
 
 You can specify how much time a test needs to fail before triggering a notification alert.
 
-* Retry `X` times after `Y` ms in case of failure. 
+* Retry `X` times after `Y` ms in case of failure.
 
 ## Scheduling and alerts
 
@@ -106,7 +108,7 @@ By default, mobile app tests are set up for on-demand testing, meaning these tes
 
 You can customize alert conditions to define how often you want to send an alert and the circumstances under which you want a test to send a notification alert.
 
-* An alert is triggered if any assertion fails for `X` minutes. 
+* An alert is triggered if any assertion fails for `X` minutes.
 
 ### Configure the test monitor
 
@@ -153,7 +155,7 @@ In this example, the test `aaa-aaa-aaa` runs with the override application versi
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }
@@ -173,11 +175,7 @@ If you are using the [custom role feature][9], add your user to any custom role 
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][10] on their accounts.
-
-You can restrict access to a mobile app test based on the roles in your organization. When creating a mobile app test, choose which roles (in addition to your user) can read and write your test. 
-
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{% synthetics_grace_permissions %}}
 
 ## Further reading
 
@@ -192,8 +190,8 @@ You can restrict access to a mobile app test based on the roles in your organiza
 [7]: /synthetics/guide/synthetic-test-monitors/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[10]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [11]: /mobile_app_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/
