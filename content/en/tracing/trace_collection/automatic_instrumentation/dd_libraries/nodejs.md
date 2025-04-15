@@ -163,9 +163,6 @@ esbuild.build({
     '@datadog/native-iast-taint-tracking',
     '@datadog/native-iast-rewriter',
 
-    // required for Live Debugging / Dynamic Instrumentation
-    'dd-trace/packages/dd-trace/src/debugger/devtools_client',
-
     // required if you encounter graphql errors during the build step
     'graphql/language/visitor',
     'graphql/language/printer',
@@ -204,9 +201,6 @@ const nextConfig = {
       '@datadog/native-iast-taint-tracking',
       '@datadog/native-iast-rewriter',
 
-      // required for Live Debugging / Dynamic Instrumentation
-      'dd-trace/packages/dd-trace/src/debugger/devtools_client',
-
       // required if you encounter graphql errors during the build step
       'graphql/language/visitor',
       'graphql/language/printer',
@@ -219,6 +213,12 @@ const nextConfig = {
 
 export default nextConfig;
 ```
+
+#### Unsupported Datadog fetures
+
+The following features are turned off by default in the Node.js tracer. They do not support bundling and can therefore not be used if your application is bundled.
+
+- APM: Dynamic Instrumentation
 
 #### General bundling remarks
 
