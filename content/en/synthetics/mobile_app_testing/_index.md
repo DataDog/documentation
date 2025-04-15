@@ -84,7 +84,7 @@ When configuring a new Mobile Application test, use snippets to automatically po
 
 ## Devices
 
-In the device selection screen, you can select mobile devices in either the EU, or US locations. If a device is available in both locations, it will automatically operate in each region.
+In the device selection screen, you can select mobile devices in either the EU or US locations. If a device is available in both locations, it automatically operates in each region.
 
 {{< img src="mobile_app_testing/mobile_device_locations.mp4" alt="Selecting one or more mobile devices in both the US and EU regions" video=true >}}
 

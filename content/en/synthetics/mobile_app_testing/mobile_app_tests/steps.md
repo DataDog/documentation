@@ -313,16 +313,16 @@ After adding the subtest to your mobile test, click the subtest to view another 
 
 {{% synthetics-variables %}}
 
-**Note**: If your subtest contains variables, they are inherited by the test you import them into. 
+**Note**: When you import a subtest into another test, any variables defined in the subtest are inherited by the main test.
 To override these variables, create a variable in your parent test with the name as the variables within your subtest. 
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][4] in the **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
+You can use the [global variables defined in **Settings**][4] in the **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To view a list of available variables, type `{{` in the desired field.
 
-Define the variables you want to incorporate into the user journey before you start recording.
+Make sure to define the variables you want to use in the user journey before you start recording.
 
-You can inject the variables available to you while recording. 
+You can inject available variables directly into the test steps while recording.
 
 ## Manage step order
 
