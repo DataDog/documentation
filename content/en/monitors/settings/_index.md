@@ -7,6 +7,9 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "/monitors/notify/notification_rules/"
+  tag: "Documentation"
+  text: "Monitor Notification Rules"
 - link: "https://www.datadoghq.com/blog/tagging-best-practices-monitors/"
   tag: "Blog"
   text: "Best practices for tagging your monitors"
@@ -17,6 +20,7 @@ further_reading:
 On the [Monitor Settings page][1], you can access and control the following topics:
 
 * [Tag Policies](#tag-policies)
+* [Notification Rules](#notification-rules)
 * [Deleted Monitors](#deleted-monitors)
 
 
@@ -64,6 +68,12 @@ To configure monitor tag policies, you must be assigned a role with the `MONITOR
 
 For more information, see [Role Based Access Control][2] and [Role Permissions][3].
 
+## Notification rules
+
+Notification rules provide a method for routing monitor notifications more effectively. With Monitor Notification Rules, you can create rules to route alerts based on the tags associated with the monitor to reduce repetitive tasks in managing alert communications.
+
+To create and manage monitor notification rules, see [Monitor notification rules][4].
+
 
 ## Deleted monitors
 Monitors are retained for 7 days before being permanently deleted. To restore recently deleted Datadog monitors:
@@ -81,3 +91,4 @@ Monitors are retained for 7 days before being permanently deleted. To restore re
 [1]: https://app.datadoghq.com/monitors/settings
 [2]: /account_management/rbac/
 [3]: /account_management/rbac/permissions/
+[4]: /monitors/notify/notification_rules/

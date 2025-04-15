@@ -242,7 +242,7 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
 aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-ecs-fargate.json
 {{< /code-block >}}
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 
@@ -328,7 +328,7 @@ spec:
      shareProcessNamespace: true
 ```
 
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -415,7 +415,7 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 [3]: /security/cloud_security_management/
 [4]: /security/application_security/
 [5]: /security/cloud_siem/
-[6]: /integrations/eks_fargate/?tab=manual#aws-eks-fargate-rbac
+[6]: /integrations/eks_fargate/#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events

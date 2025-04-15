@@ -29,6 +29,8 @@ You can also use private locations to:
 
 Private locations are Docker containers or Windows services that you can install anywhere inside your private network. Retrieve the docker image on [Google Container Registry][2] or download the [Windows installer][13].**\*** 
 
+**Note**: Private locations on Docker containers are supported only on the amd64 architecture. If you have any questions about arm64 support, contact [Datadog support][15].
+
 **\*** **Use and operation of this software is governed by the End User License Agreement available [here][14].**
 
 Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. 
@@ -114,3 +116,4 @@ Use your new private location just like a managed location in your Synthetic tes
 [12]: /synthetics/private_locations?tab=windows#install-your-private-location
 [13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/
+[15]: https://www.datadoghq.com/support/

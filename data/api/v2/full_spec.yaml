@@ -652,8 +652,8 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`,
-        `app-builder-app`, `connection`, `connection-group`.'
+        `dashboard`, `integration-account`, `integration-webhook`, `notebook`, `reference-table`,
+        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -2901,13 +2901,13 @@ components:
       enum:
       - attack_attempt
       - business_logic
-      - security_responses
+      - security_response
       example: business_logic
       type: string
       x-enum-varnames:
       - ATTACK_ATTEMPT
       - BUSINESS_LOGIC
-      - SECURITY_RESPONSES
+      - SECURITY_RESPONSE
     ApplicationSecurityWafCustomRuleType:
       default: custom_rule
       description: The type of the resource. The value should always be `custom_rule`.
@@ -12307,6 +12307,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Datastore Spec object.
       properties:
+        componentOf:
+          description: A list of components the datastore is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the datastore.
           minLength: 1
@@ -12507,6 +12512,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Queue Spec object.
       properties:
+        componentOf:
+          description: A list of components the queue is a part of
+          items:
+            type: string
+          type: array
         lifecycle:
           description: The lifecycle state of the queue.
           minLength: 1
@@ -12573,6 +12583,11 @@ components:
       additionalProperties: false
       description: The definition of Entity V3 Service Spec object.
       properties:
+        componentOf:
+          description: A list of components the service is a part of
+          items:
+            type: string
+          type: array
         dependsOn:
           description: A list of components the service depends on.
           items:
@@ -17378,6 +17393,14 @@ components:
           example: 0
           format: int64
           type: integer
+        ip_addresses:
+          description: The interface IP addresses
+          example:
+          - 1.1.1.1
+          - 1.1.1.2
+          items:
+            type: string
+          type: array
         mac_address:
           description: The interface MAC address
           example: 00:00:00:00:00:00
@@ -17656,6 +17679,164 @@ components:
       - index
       - caseIndex
       type: object
+    Layer:
+      description: Encapsulates a layer resource, holding attributes like rotation
+        details, plus relationships to the members covering that layer.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/LayerAttributes'
+        id:
+          description: A unique identifier for this layer.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/LayerRelationships'
+        type:
+          $ref: '#/components/schemas/LayerType'
+      type: object
+    LayerAttributes:
+      description: Describes key properties of a Layer, including rotation details,
+        name, start/end times, and any restrictions.
+      properties:
+        effective_date:
+          description: When the layer becomes active (ISO 8601).
+          format: date-time
+          type: string
+        end_date:
+          description: When the layer ceases to be active (ISO 8601).
+          format: date-time
+          type: string
+        interval:
+          $ref: '#/components/schemas/LayerAttributesInterval'
+        name:
+          description: The name of this layer.
+          example: Weekend Layer
+          type: string
+        restrictions:
+          description: An optional list of time restrictions for when this layer is
+            in effect.
+          items:
+            $ref: '#/components/schemas/LayerAttributesRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time when the rotation starts (ISO 8601).
+          format: date-time
+          type: string
+      type: object
+    LayerAttributesInterval:
+      description: Defines how often the rotation repeats, using a combination of
+        days and optional seconds.
+      properties:
+        days:
+          description: The number of days in each rotation cycle.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Any additional seconds for the rotation cycle (up to 30 days).
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    LayerAttributesRestrictionsItems:
+      description: 'Represents a time restriction within a layer, specifying the days
+        and times
+
+        when this layer is active or inactive.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsEndDay'
+        end_time:
+          description: The time of day the restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/LayerAttributesRestrictionsItemsStartDay'
+        start_time:
+          description: The time of day the restriction begins (hh:mm:ss).
+          type: string
+      type: object
+    LayerAttributesRestrictionsItemsEndDay:
+      description: Defines the end day of the restriction within a Layer.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    LayerAttributesRestrictionsItemsStartDay:
+      description: Defines the start day of the restriction within a Layer.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    LayerRelationships:
+      description: Holds references to objects related to the Layer entity, such as
+        its members.
+      properties:
+        members:
+          $ref: '#/components/schemas/LayerRelationshipsMembers'
+      type: object
+    LayerRelationshipsMembers:
+      description: Holds an array of references to the members of a Layer, each containing
+        member IDs.
+      properties:
+        data:
+          description: The list of members who belong to this layer.
+          items:
+            $ref: '#/components/schemas/LayerRelationshipsMembersDataItems'
+          type: array
+      type: object
+    LayerRelationshipsMembersDataItems:
+      description: 'Represents a single member object in a layer''s `members` array,
+        referencing
+
+        a unique Datadog user ID.'
+      properties:
+        id:
+          description: The unique user ID of the layer member.
+          type: string
+        type:
+          $ref: '#/components/schemas/LayerRelationshipsMembersDataItemsType'
+      type: object
+    LayerRelationshipsMembersDataItemsType:
+      default: members
+      description: Members resource type.
+      enum:
+      - members
+      type: string
+      x-enum-varnames:
+      - MEMBERS
+    LayerType:
+      default: layers
+      description: Layers resource type.
+      enum:
+      - layers
+      type: string
+      x-enum-varnames:
+      - LAYERS
     LeakedKey:
       description: The definition of LeakedKey object.
       properties:
@@ -19473,10 +19654,10 @@ components:
           type: string
       type: object
     LogsQueryOptions:
+      deprecated: true
       description: 'Global query options that are used during the query.
 
-        Note: you should supply either timezone or time offset, but not both. Otherwise,
-        the query will fail.'
+        Note: These fields are currently deprecated and do not affect the query results.'
       properties:
         timeOffset:
           description: The time offset (in seconds) to apply to the query.
@@ -21859,6 +22040,668 @@ components:
       required:
       - id
       - type
+      type: object
+    ObservabilityPipeline:
+      description: Top-level schema representing a pipeline.
+      properties:
+        data:
+          $ref: '#/components/schemas/ObservabilityPipelineData'
+      required:
+      - data
+      type: object
+    ObservabilityPipelineAddFieldsProcessor:
+      description: The `add_fields` processor adds static key-value fields to logs.
+      properties:
+        fields:
+          description: A list of static fields (key-value pairs) that is added to
+            each log event processed by this component.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineFieldValue'
+          type: array
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: add-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineAddFieldsProcessorType:
+      default: add_fields
+      description: The processor type. The value should always be `add_fields`.
+      enum:
+      - add_fields
+      example: add_fields
+      type: string
+      x-enum-varnames:
+      - ADD_FIELDS
+    ObservabilityPipelineConfig:
+      description: Specifies the pipeline's configuration, including its sources,
+        processors, and destinations.
+      properties:
+        destinations:
+          description: A list of destination components where processed logs are sent.
+          example:
+          - id: datadog-logs-destination
+            inputs:
+            - filter-processor
+            type: datadog_logs
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigDestinationItem'
+          type: array
+        processors:
+          description: A list of processors that transform or enrich log data.
+          example:
+          - id: filter-processor
+            include: service:my-service
+            inputs:
+            - datadog-agent-source
+            type: filter
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigProcessorItem'
+          type: array
+        sources:
+          description: A list of configured data sources for the pipeline.
+          example:
+          - id: datadog-agent-source
+            type: datadog_agent
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineConfigSourceItem'
+          type: array
+      required:
+      - sources
+      - processors
+      - destinations
+      type: object
+    ObservabilityPipelineConfigDestinationItem:
+      description: A destination for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestination'
+    ObservabilityPipelineConfigProcessorItem:
+      description: A processor for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineFilterProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineAddFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessor'
+      - $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessor'
+    ObservabilityPipelineConfigSourceItem:
+      description: A data source for the pipeline.
+      oneOf:
+      - $ref: '#/components/schemas/ObservabilityPipelineKafkaSource'
+      - $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSource'
+    ObservabilityPipelineCreateRequest:
+      description: Top-level schema representing a pipeline.
+      properties:
+        data:
+          $ref: '#/components/schemas/ObservabilityPipelineCreateRequestData'
+      required:
+      - data
+      type: object
+    ObservabilityPipelineCreateRequestData:
+      description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ObservabilityPipelineDataAttributes'
+        type:
+          default: pipelines
+          description: The resource type identifier. For pipeline resources, this
+            should always be set to `pipelines`.
+          example: pipelines
+          type: string
+      required:
+      - type
+      - attributes
+      type: object
+    ObservabilityPipelineData:
+      description: "Contains the pipeline\u2019s ID, type, and configuration attributes."
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ObservabilityPipelineDataAttributes'
+        id:
+          description: Unique identifier for the pipeline.
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+          type: string
+        type:
+          default: pipelines
+          description: The resource type identifier. For pipeline resources, this
+            should always be set to `pipelines`.
+          example: pipelines
+          type: string
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ObservabilityPipelineDataAttributes:
+      description: "Defines the pipeline\u2019s name and its components (sources,
+        processors, and destinations)."
+      properties:
+        config:
+          $ref: '#/components/schemas/ObservabilityPipelineConfig'
+        name:
+          description: Name of the pipeline.
+          example: Main Observability Pipeline
+          type: string
+      required:
+      - name
+      - config
+      type: object
+    ObservabilityPipelineDatadogAgentSource:
+      description: The `datadog_agent` source collects logs from the Datadog Agent.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: datadog-agent-source
+          type: string
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogAgentSourceType'
+      required:
+      - id
+      - type
+      type: object
+    ObservabilityPipelineDatadogAgentSourceType:
+      default: datadog_agent
+      description: The source type. The value should always be `datadog_agent`.
+      enum:
+      - datadog_agent
+      example: datadog_agent
+      type: string
+      x-enum-varnames:
+      - DATADOG_AGENT
+    ObservabilityPipelineDatadogLogsDestination:
+      description: The `datadog_logs` destination forwards logs to Datadog Log Management.
+      properties:
+        id:
+          description: The unique identifier for this component.
+          example: datadog-logs-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - filter-processor
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineDatadogLogsDestinationType'
+      required:
+      - id
+      - type
+      - inputs
+      type: object
+    ObservabilityPipelineDatadogLogsDestinationType:
+      default: datadog_logs
+      description: The destination type. The value should always be `datadog_logs`.
+      enum:
+      - datadog_logs
+      example: datadog_logs
+      type: string
+      x-enum-varnames:
+      - DATADOG_LOGS
+    ObservabilityPipelineFieldValue:
+      description: Represents a static key-value pair used in various processors.
+      properties:
+        name:
+          description: The field name.
+          example: field_name
+          type: string
+        value:
+          description: The field value.
+          example: field_value
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineFilterProcessor:
+      description: The `filter` processor allows conditional processing of logs based
+        on a Datadog search query. Logs that match the `include` query are passed
+        through; others are discarded.
+      properties:
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: filter-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs should
+            pass through the filter. Logs that match this query continue to downstream
+            components; others are dropped.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineFilterProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - inputs
+      type: object
+    ObservabilityPipelineFilterProcessorType:
+      default: filter
+      description: The processor type. The value should always be `filter`.
+      enum:
+      - filter
+      example: filter
+      type: string
+      x-enum-varnames:
+      - FILTER
+    ObservabilityPipelineKafkaSource:
+      description: The `kafka` source ingests data from Apache Kafka topics.
+      properties:
+        group_id:
+          description: Consumer group ID used by the Kafka client.
+          example: consumer-group-0
+          type: string
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: kafka-source
+          type: string
+        librdkafka_options:
+          description: Optional list of advanced Kafka client configuration options,
+            defined as key-value pairs.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceLibrdkafkaOption'
+          type: array
+        sasl:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceSasl'
+        tls:
+          $ref: '#/components/schemas/ObservabilityPipelineTls'
+        topics:
+          description: A list of Kafka topic names to subscribe to. The source ingests
+            messages from each topic specified.
+          example:
+          - topic1
+          - topic2
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineKafkaSourceType'
+      required:
+      - id
+      - type
+      - group_id
+      - topics
+      type: object
+    ObservabilityPipelineKafkaSourceLibrdkafkaOption:
+      description: Represents a key-value pair used to configure low-level `librdkafka`
+        client options for Kafka sources, such as timeouts, buffer sizes, and security
+        settings.
+      properties:
+        name:
+          description: The name of the `librdkafka` configuration option to set.
+          example: fetch.message.max.bytes
+          type: string
+        value:
+          description: The value assigned to the specified `librdkafka` configuration
+            option.
+          example: '1048576'
+          type: string
+      required:
+      - name
+      - value
+      type: object
+    ObservabilityPipelineKafkaSourceSasl:
+      description: Specifies the SASL mechanism for authenticating with a Kafka cluster.
+      properties:
+        mechanism:
+          $ref: '#/components/schemas/ObservabilityPipelinePipelineKafkaSourceSaslMechanism'
+      type: object
+    ObservabilityPipelineKafkaSourceType:
+      default: kafka
+      description: The source type. The value should always be `kafka`.
+      enum:
+      - kafka
+      example: kafka
+      type: string
+      x-enum-varnames:
+      - KAFKA
+    ObservabilityPipelineParseJSONProcessor:
+      description: The `parse_json` processor extracts JSON from a specified field
+        and flattens it into the event. This is useful when logs contain embedded
+        JSON as a string.
+      properties:
+        field:
+          description: The name of the log field that contains a JSON string.
+          example: message
+          type: string
+        id:
+          description: A unique identifier for this component. Used to reference this
+            component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: parse-json-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineParseJSONProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - field
+      - inputs
+      type: object
+    ObservabilityPipelineParseJSONProcessorType:
+      default: parse_json
+      description: The processor type. The value should always be `parse_json`.
+      enum:
+      - parse_json
+      example: parse_json
+      type: string
+      x-enum-varnames:
+      - PARSE_JSON
+    ObservabilityPipelinePipelineKafkaSourceSaslMechanism:
+      description: SASL mechanism used for Kafka authentication.
+      enum:
+      - PLAIN
+      - SCRAM-SHA-256
+      - SCRAM-SHA-512
+      type: string
+      x-enum-varnames:
+      - PLAIN
+      - SCRAMNOT_SHANOT_256
+      - SCRAMNOT_SHANOT_512
+    ObservabilityPipelineQuotaProcessor:
+      description: The Quota Processor measures logging traffic for logs that match
+        a specified filter. When the configured daily quota is met, the processor
+        can drop or alert.
+      properties:
+        drop_events:
+          description: If set to `true`, logs that matched the quota filter and sent
+            after the quota has been met are dropped; only logs that did not match
+            the filter query continue through the pipeline.
+          example: false
+          type: boolean
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (for example, as the `input`
+            to downstream components).
+          example: quota-processor
+          type: string
+        ignore_when_missing_partitions:
+          description: If `true`, the processor skips quota checks when partition
+            fields are missing from the logs.
+          type: boolean
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        limit:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
+        name:
+          description: Name for identifying the processor.
+          example: MyPipelineQuotaProcessor
+          type: string
+        overrides:
+          description: A list of alternate quota rules that apply to specific sets
+            of events, identified by matching field values. Each override can define
+            a custom limit.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorOverride'
+          type: array
+        partition_fields:
+          description: A list of fields used to segment log traffic for quota enforcement.
+            Quotas are tracked independently by unique combinations of these field
+            values.
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - name
+      - drop_events
+      - limit
+      - inputs
+      type: object
+    ObservabilityPipelineQuotaProcessorLimit:
+      description: The maximum amount of data or number of events allowed before the
+        quota is enforced. Can be specified in bytes or events.
+      properties:
+        enforce:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimitEnforceType'
+        limit:
+          description: The limit for quota enforcement.
+          example: 1000
+          format: int64
+          type: integer
+      required:
+      - enforce
+      - limit
+      type: object
+    ObservabilityPipelineQuotaProcessorLimitEnforceType:
+      description: Unit for quota enforcement in bytes for data size or events for
+        count.
+      enum:
+      - bytes
+      - events
+      example: bytes
+      type: string
+      x-enum-varnames:
+      - BYTES
+      - EVENTS
+    ObservabilityPipelineQuotaProcessorOverride:
+      description: Defines a custom quota limit that applies to specific log events
+        based on matching field values.
+      properties:
+        fields:
+          description: A list of field matchers used to apply a specific override.
+            If an event matches all listed key-value pairs, the corresponding override
+            limit is enforced.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineFieldValue'
+          type: array
+        limit:
+          $ref: '#/components/schemas/ObservabilityPipelineQuotaProcessorLimit'
+      required:
+      - fields
+      - limit
+      type: object
+    ObservabilityPipelineQuotaProcessorType:
+      default: quota
+      description: The processor type. The value should always be `quota`.
+      enum:
+      - quota
+      example: quota
+      type: string
+      x-enum-varnames:
+      - QUOTA
+    ObservabilityPipelineRemoveFieldsProcessor:
+      description: The `remove_fields` processor deletes specified fields from logs.
+      properties:
+        fields:
+          description: A list of field names to be removed from each log event.
+          example:
+          - field1
+          - field2
+          items:
+            type: string
+          type: array
+        id:
+          description: The unique identifier for this component. Used to reference
+            this component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: remove-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: The `PipelineRemoveFieldsProcessor` `inputs`.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRemoveFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineRemoveFieldsProcessorType:
+      default: remove_fields
+      description: The processor type. The value should always be `remove_fields`.
+      enum:
+      - remove_fields
+      example: remove_fields
+      type: string
+      x-enum-varnames:
+      - REMOVE_FIELDS
+    ObservabilityPipelineRenameFieldsProcessor:
+      description: The `rename_fields` processor changes field names.
+      properties:
+        fields:
+          description: A list of rename rules specifying which fields to rename in
+            the event, what to rename them to, and whether to preserve the original
+            fields.
+          items:
+            $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorField'
+          type: array
+        id:
+          description: A unique identifier for this component. Used to reference this
+            component in other parts of the pipeline (e.g., as input to downstream
+            components).
+          example: rename-fields-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which logs this processor
+            targets.
+          example: service:my-service
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input`
+            for this component.
+          example:
+          - datadog-agent-source
+          items:
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/ObservabilityPipelineRenameFieldsProcessorType'
+      required:
+      - id
+      - type
+      - include
+      - fields
+      - inputs
+      type: object
+    ObservabilityPipelineRenameFieldsProcessorField:
+      description: Defines how to rename a field in log events.
+      properties:
+        destination:
+          description: The field name to assign the renamed value to.
+          example: destination_field
+          type: string
+        preserve_source:
+          description: Indicates whether the original field, that is received from
+            the source, should be kept (`true`) or removed (`false`) after renaming.
+          example: false
+          type: boolean
+        source:
+          description: The original field name in the log event that should be renamed.
+          example: source_field
+          type: string
+      required:
+      - source
+      - destination
+      - preserve_source
+      type: object
+    ObservabilityPipelineRenameFieldsProcessorType:
+      default: rename_fields
+      description: The processor type. The value should always be `rename_fields`.
+      enum:
+      - rename_fields
+      example: rename_fields
+      type: string
+      x-enum-varnames:
+      - RENAME_FIELDS
+    ObservabilityPipelineTls:
+      description: Configuration for enabling TLS encryption.
+      properties:
+        ca_file:
+          description: "Path to the Certificate Authority (CA) file used to validate
+            the server\u2019s TLS certificate."
+          type: string
+        crt_file:
+          description: Path to the TLS client certificate file used to authenticate
+            the pipeline component with upstream or downstream services.
+          example: /path/to/cert.crt
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS client
+            certificate. Used for mutual TLS authentication.
+          type: string
+      required:
+      - crt_file
       type: object
     OktaAccount:
       description: Schema for an Okta account.
@@ -25203,9 +26046,17 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -25262,9 +26113,17 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -25287,9 +26146,17 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -25358,9 +26225,17 @@ components:
           type: string
         rate:
           description: 'Sample rate to apply to spans going through this retention
-            filter,
+            filter.
 
-            a value of 1.0 keeps all spans matching the query.'
+            A value of 1.0 keeps all spans matching the query.'
+          example: 1.0
+          format: double
+          type: number
+        trace_rate:
+          description: 'Sample rate to apply to traces containing spans going through
+            this retention filter.
+
+            A value of 1.0 keeps all traces with spans matching the query.'
           example: 1.0
           format: double
           type: number
@@ -26816,6 +27691,500 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
+    Schedule:
+      description: Top-level container for a schedule object, including both the `data`
+        payload and any related `included` resources (such as teams, layers, or members).
+      example:
+        data:
+          attributes:
+            name: On-Call Schedule
+            tags:
+            - tag1
+            - tag2
+            time_zone: America/New_York
+          id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          relationships:
+            layers:
+              data:
+              - id: 00000000-0000-0000-0000-000000000001
+                type: layers
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+        included:
+        - attributes:
+            avatar: ''
+            description: Team 1 description
+            handle: team1
+            name: Team 1
+          id: 00000000-da3a-0000-0000-000000000000
+          type: teams
+        - attributes:
+            effective_date: '2025-02-03T05:00:00Z'
+            end_date: '2025-12-31T00:00:00Z'
+            interval:
+              days: 1
+            name: Layer 1
+            restrictions:
+            - end_day: friday
+              end_time: '17:00:00'
+              start_day: monday
+              start_time: 09:00:00
+            rotation_start: '2025-02-01T00:00:00Z'
+          id: 00000000-0000-0000-0000-000000000001
+          relationships:
+            members:
+              data:
+              - id: 00000000-0000-0000-0000-000000000002
+                type: members
+          type: layers
+        - id: 00000000-0000-0000-0000-000000000002
+          relationships:
+            user:
+              data:
+                id: 00000000-aba1-0000-0000-000000000000
+                type: users
+          type: members
+        - attributes:
+            email: foo@bar.com
+            name: User 1
+          id: 00000000-aba1-0000-0000-000000000000
+          type: users
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleData'
+        included:
+          description: Any additional resources related to this schedule, such as
+            teams and layers.
+          items:
+            $ref: '#/components/schemas/ScheduleDataIncludedItem'
+          type: array
+      type: object
+    ScheduleCreateRequest:
+      description: The top-level request body for schedule creation, wrapping a `data`
+        object.
+      example:
+        data:
+          attributes:
+            layers:
+            - effective_date: '2025-02-03T05:00:00Z'
+              end_date: '2025-12-31T00:00:00Z'
+              interval:
+                days: 1
+              members:
+              - user:
+                  id: 00000000-aba1-0000-0000-000000000000
+              name: Layer 1
+              restrictions:
+              - end_day: friday
+                end_time: '17:00:00'
+                start_day: monday
+                start_time: 09:00:00
+              rotation_start: '2025-02-01T00:00:00Z'
+            name: On-Call Schedule
+            tags:
+            - tag1
+            - tag2
+            time_zone: America/New_York
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleCreateRequestData'
+      required:
+      - data
+      type: object
+    ScheduleCreateRequestData:
+      description: The core data wrapper for creating a schedule, encompassing attributes,
+        relationships, and the resource type.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributes'
+        relationships:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataType'
+      required:
+      - attributes
+      - type
+      type: object
+    ScheduleCreateRequestDataAttributes:
+      description: Describes the main attributes for creating a new schedule, including
+        name, layers, time zone, and tags.
+      properties:
+        layers:
+          description: The layers of on-call coverage that define rotation intervals
+            and restrictions.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItems'
+          type: array
+        name:
+          description: A human-readable name for the new schedule.
+          example: Team A On-Call
+          type: string
+        tags:
+          description: A list of tags for categorizing or filtering the schedule.
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone in which the schedule is defined.
+          example: America/New_York
+          type: string
+      required:
+      - name
+      - time_zone
+      - layers
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItems:
+      description: Describes a schedule layer, including rotation intervals, members,
+        restrictions, and timeline settings.
+      properties:
+        effective_date:
+          description: The date/time when this layer becomes active (in ISO 8601).
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+        end_date:
+          description: The date/time after which this layer no longer applies (in
+            ISO 8601).
+          format: date-time
+          type: string
+        interval:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsInterval'
+        members:
+          description: A list of members who participate in this layer's rotation.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItems'
+          type: array
+        name:
+          description: The name of this layer.
+          example: Primary On-Call Layer
+          type: string
+        restrictions:
+          description: Zero or more time-based restrictions (for example, only weekdays,
+            during business hours).
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time when the rotation for this layer starts (in ISO
+            8601).
+          example: '2025-01-01T00:00:00Z'
+          format: date-time
+          type: string
+      required:
+      - name
+      - interval
+      - rotation_start
+      - effective_date
+      - members
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsInterval:
+      description: Defines how frequently the rotation repeats, using days and/or
+        seconds (up to certain limits).
+      properties:
+        days:
+          description: The number of full days in each rotation period.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Extra seconds that may be added to extend the rotation beyond
+            whole days.
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsMembersItems:
+      description: Defines a single member within a schedule layer, including the
+        reference to the underlying user.
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser'
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsMembersItemsUser:
+      description: Identifies the user participating in this layer as a single object
+        with an `id`.
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItems:
+      description: 'Defines a time restriction for a schedule layer, including which
+        day of the week
+
+        it starts and ends, along with start/end times.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
+        end_time:
+          description: The time of day when the restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
+        start_time:
+          description: The time of day when the restriction begins (hh:mm:ss).
+          type: string
+      type: object
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
+      description: The weekday when the restriction period ends (Monday through Sunday).
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleCreateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
+      description: The weekday when the restriction period starts (Monday through
+        Sunday).
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleCreateRequestDataRelationships:
+      description: Gathers relationship objects for the schedule creation request,
+        including the teams to associate.
+      properties:
+        teams:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeams'
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeams:
+      description: Associates the new schedule with one or more teams.
+      properties:
+        data:
+          description: An array of team references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeamsDataItems:
+      description: 'Holds the relationship data linking this schedule to a particular
+        team,
+
+        identified by `id` and `type`.'
+      properties:
+        id:
+          description: A unique identifier for the team.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleCreateRequestDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleCreateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleCreateRequestDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleData:
+      description: Represents the primary data object for a schedule, linking attributes
+        and relationships.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleDataAttributes'
+        id:
+          description: The schedule's unique identifier.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleDataType'
+      type: object
+    ScheduleDataAttributes:
+      description: Provides core properties of a schedule object, such as its name,
+        time zone, and tags.
+      properties:
+        name:
+          description: A short name for the schedule.
+          example: Primary On-Call
+          type: string
+        tags:
+          description: A list of tags associated with this schedule.
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone in which this schedule operates.
+          example: America/New_York
+          type: string
+      type: object
+    ScheduleDataIncludedItem:
+      description: Any additional resources related to this schedule, such as teams
+        and layers.
+      oneOf:
+      - $ref: '#/components/schemas/TeamReference'
+      - $ref: '#/components/schemas/Layer'
+      - $ref: '#/components/schemas/ScheduleMember'
+      - $ref: '#/components/schemas/ScheduleUser'
+    ScheduleDataRelationships:
+      description: Groups the relationships for a schedule object, referencing layers
+        and teams.
+      properties:
+        layers:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsLayers'
+        teams:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsTeams'
+      type: object
+    ScheduleDataRelationshipsLayers:
+      description: Associates layers with this schedule in a data structure.
+      properties:
+        data:
+          description: An array of layer references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItems'
+          type: array
+      type: object
+    ScheduleDataRelationshipsLayersDataItems:
+      description: Relates a layer to this schedule, identified by `id` and `type`
+        (must be `layers`).
+      properties:
+        id:
+          description: The unique identifier of the layer in this relationship.
+          example: 67963b57-d67c-dfa7-b180-62ee9301d2f5
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsLayersDataItemsType'
+      type: object
+    ScheduleDataRelationshipsLayersDataItemsType:
+      default: layers
+      description: Layers resource type.
+      enum:
+      - layers
+      example: layers
+      type: string
+      x-enum-varnames:
+      - LAYERS
+    ScheduleDataRelationshipsTeams:
+      description: Associates teams with this schedule in a data structure.
+      properties:
+        data:
+          description: An array of team references for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleDataRelationshipsTeamsDataItems:
+      description: Relates a team to this schedule, identified by `id` and `type`
+        (must be `teams`).
+      properties:
+        id:
+          description: The unique identifier of the team in this relationship.
+          example: 00000000-da3a-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      example: teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleMember:
+      description: Represents a single member entry in a schedule, referencing a specific
+        user.
+      properties:
+        id:
+          description: The unique identifier for this schedule member.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleMemberRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleMemberType'
+      type: object
+    ScheduleMemberRelationships:
+      description: Defines relationships for a schedule member, primarily referencing
+        a single user.
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUser'
+      type: object
+    ScheduleMemberRelationshipsUser:
+      description: Wraps the user data reference for a schedule member.
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUserData'
+      type: object
+    ScheduleMemberRelationshipsUserData:
+      description: Points to the user data associated with this schedule member, including
+        an ID and type.
+      properties:
+        id:
+          description: The user's unique identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleMemberRelationshipsUserDataType'
+      type: object
+    ScheduleMemberRelationshipsUserDataType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    ScheduleMemberType:
+      default: members
+      description: Schedule Members resource type.
+      enum:
+      - members
+      type: string
+      x-enum-varnames:
+      - MEMBERS
     ScheduleTrigger:
       description: Trigger a workflow from a Schedule. The workflow must be published.
       properties:
@@ -26836,6 +28205,296 @@ components:
       required:
       - scheduleTrigger
       type: object
+    ScheduleUpdateRequest:
+      description: A top-level wrapper for a schedule update request, referring to
+        the `data` object with the new details.
+      example:
+        data:
+          attributes:
+            layers:
+            - effective_date: '2025-02-03T05:00:00Z'
+              end_date: '2025-12-31T00:00:00Z'
+              interval:
+                seconds: 300
+              members:
+              - user:
+                  id: 00000000-aba1-0000-0000-000000000000
+              name: Layer 1
+              restrictions:
+              - end_day: friday
+                end_time: '17:00:00'
+                start_day: monday
+                start_time: 09:00:00
+              rotation_start: '2025-02-01T00:00:00Z'
+            name: On-Call Schedule Updated
+            tags:
+            - tag1
+            - tag2
+            - tag3
+            time_zone: America/New_York
+          id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          relationships:
+            teams:
+              data:
+              - id: 00000000-da3a-0000-0000-000000000000
+                type: teams
+          type: schedules
+      properties:
+        data:
+          $ref: '#/components/schemas/ScheduleUpdateRequestData'
+      required:
+      - data
+      type: object
+    ScheduleUpdateRequestData:
+      description: Contains all data needed to update an existing schedule, including
+        its attributes (such as name, layers, or tags) and any relationships to teams.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributes'
+        id:
+          description: The ID of the schedule to be updated.
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationships'
+        type:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataType'
+      required:
+      - attributes
+      - type
+      - id
+      type: object
+    ScheduleUpdateRequestDataAttributes:
+      description: Defines the updatable attributes for a schedule, such as name,
+        time zone, tags, and layers.
+      properties:
+        layers:
+          description: The updated list of layers (rotations) for this schedule.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItems'
+          type: array
+        name:
+          description: A short name for the schedule.
+          example: Primary On-Call
+          type: string
+        tags:
+          description: A list of tags that you can associate with this schedule.
+          example:
+          - front-end
+          - team-a
+          items:
+            type: string
+          type: array
+        time_zone:
+          description: The time zone used when interpreting rotation times.
+          example: America/New_York
+          type: string
+      required:
+      - name
+      - time_zone
+      - layers
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItems:
+      description: 'Represents a layer within a schedule update, including rotation
+        details, members,
+
+        and optional restrictions.'
+      properties:
+        effective_date:
+          description: When this updated layer takes effect (ISO 8601 format).
+          format: date-time
+          type: string
+        end_date:
+          description: When this updated layer should stop being active (ISO 8601
+            format).
+          format: date-time
+          type: string
+        id:
+          description: A unique identifier for the layer being updated.
+          type: string
+        interval:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsInterval'
+        members:
+          description: The members assigned to this layer.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItems'
+          type: array
+        name:
+          description: "The name for this layer (for example, \u201CSecondary Coverage\u201D)."
+          type: string
+        restrictions:
+          description: Any time restrictions that define when this layer is active.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems'
+          type: array
+        rotation_start:
+          description: The date/time at which the rotation begins (ISO 8601 format).
+          format: date-time
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsInterval:
+      description: 'Specifies how the rotation repeats: number of days, plus optional
+        seconds, up to the given maximums.'
+      properties:
+        days:
+          description: How many days each rotation cycle should span.
+          format: int32
+          maximum: 400
+          type: integer
+        seconds:
+          description: Additional seconds to add to the rotation cycle (for example,
+            partial days).
+          format: int64
+          maximum: 2592000
+          type: integer
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsMembersItems:
+      description: 'Defines a single member within a layer during an update request,
+        referring
+
+        to a specific user.'
+      properties:
+        user:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser'
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsMembersItemsUser:
+      description: Identifies the user who is assigned to this member object. Only
+        `id` is required.
+      properties:
+        id:
+          description: The user's ID.
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItems:
+      description: 'Defines a time restriction object for a layer within a schedule
+        update, including
+
+        start and end days, as well as times.'
+      properties:
+        end_day:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay'
+        end_time:
+          description: The time at which this restriction ends (hh:mm:ss).
+          type: string
+        start_day:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay'
+        start_time:
+          description: The time at which this restriction starts (hh:mm:ss).
+          type: string
+      type: object
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsEndDay:
+      description: Defines the day of the week on which the time restriction ends.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleUpdateRequestDataAttributesLayersItemsRestrictionsItemsStartDay:
+      description: Defines the day of the week on which the time restriction starts.
+      enum:
+      - monday
+      - tuesday
+      - wednesday
+      - thursday
+      - friday
+      - saturday
+      - sunday
+      type: string
+      x-enum-varnames:
+      - MONDAY
+      - TUESDAY
+      - WEDNESDAY
+      - THURSDAY
+      - FRIDAY
+      - SATURDAY
+      - SUNDAY
+    ScheduleUpdateRequestDataRelationships:
+      description: Houses relationships for the schedule update, typically referencing
+        teams.
+      properties:
+        teams:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeams'
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeams:
+      description: Defines the teams that this schedule update is associated with.
+      properties:
+        data:
+          description: An array of team references.
+          items:
+            $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItems'
+          type: array
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeamsDataItems:
+      description: Links the schedule to a team within an update request, identified
+        by `id` and `type`.
+      properties:
+        id:
+          description: The unique team identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType'
+      type: object
+    ScheduleUpdateRequestDataRelationshipsTeamsDataItemsType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
+    ScheduleUpdateRequestDataType:
+      default: schedules
+      description: Schedules resource type.
+      enum:
+      - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+      - SCHEDULES
+    ScheduleUser:
+      description: Represents a user object in the context of a schedule, including
+        their `id`, type, and basic attributes.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ScheduleUserAttributes'
+        id:
+          description: The unique user identifier.
+          type: string
+        type:
+          $ref: '#/components/schemas/ScheduleUserType'
+      type: object
+    ScheduleUserAttributes:
+      description: Provides basic user information for a schedule, including a name
+        and email address.
+      properties:
+        email:
+          description: The user's email address.
+          type: string
+        name:
+          description: The user's name.
+          example: Jane Doe
+          type: string
+      type: object
+    ScheduleUserType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
     ScorecardType:
       default: scorecard
       description: The JSON:API type for scorecard.
@@ -27154,6 +28813,7 @@ components:
           $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionType'
       type: object
     SecurityMonitoringRuleCaseActionOptions:
+      additionalProperties: {}
       description: Options for the rule action
       properties:
         duration:
@@ -27162,16 +28822,24 @@ components:
           format: int64
           minimum: 0
           type: integer
+        userBehaviorName:
+          $ref: '#/components/schemas/SecurityMonitoringRuleCaseActionOptionsUserBehaviorName'
       type: object
+    SecurityMonitoringRuleCaseActionOptionsUserBehaviorName:
+      description: Used with the case action of type 'user_behavior'. The value specified
+        in this field is applied as a risk tag to all users affected by the rule.
+      type: string
     SecurityMonitoringRuleCaseActionType:
       description: The action type.
       enum:
       - block_ip
       - block_user
+      - user_behavior
       type: string
       x-enum-varnames:
       - BLOCK_IP
       - BLOCK_USER
+      - USER_BEHAVIOR
     SecurityMonitoringRuleCaseCreate:
       description: Case when signal is generated.
       properties:
@@ -28358,11 +30026,19 @@ components:
       enum:
       - logs
       - audit
+      - app_sec_spans
+      - spans
+      - security_runtime
+      - network
       example: logs
       type: string
       x-enum-varnames:
       - LOGS
       - AUDIT
+      - APP_SEC_SPANS
+      - SPANS
+      - SECURITY_RUNTIME
+      - NETWORK
     SecurityMonitoringStandardRuleCreatePayload:
       description: Create a new rule.
       properties:
@@ -30846,6 +32522,124 @@ components:
           description: Link to the Incident created on ServiceNow
           type: string
       type: object
+    SingleAggregatedConnectionResponseArray:
+      description: List of aggregated connections.
+      example:
+        data:
+        - attributes:
+            bytes_sent_by_client: 100
+            bytes_sent_by_server: 200
+            group_bys:
+              client_team:
+              - networks
+              server_service:
+              - hucklebuck
+            packets_sent_by_client: 10
+            packets_sent_by_server: 20
+            rtt_micro_seconds: 800
+            tcp_closed_connections: 30
+            tcp_established_connections: 40
+            tcp_refusals: 7
+            tcp_resets: 5
+            tcp_retransmits: 30
+            tcp_timeouts: 6
+          id: client_team:networks, server_service:hucklebuck
+          type: aggregated_connection
+      properties:
+        data:
+          description: Array of aggregated connection objects.
+          items:
+            $ref: '#/components/schemas/SingleAggregatedConnectionResponseData'
+          type: array
+      type: object
+    SingleAggregatedConnectionResponseData:
+      description: Object describing an aggregated connection.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataAttributes'
+        id:
+          description: A unique identifier for the aggregated connection based on
+            the group by values.
+          type: string
+        type:
+          $ref: '#/components/schemas/SingleAggregatedConnectionResponseDataType'
+      type: object
+    SingleAggregatedConnectionResponseDataAttributes:
+      description: Attributes for an aggregated connection.
+      properties:
+        bytes_sent_by_client:
+          description: The total number of bytes sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        bytes_sent_by_server:
+          description: The total number of bytes sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        group_bys:
+          additionalProperties:
+            description: The values for each group by.
+            items:
+              type: string
+            type: array
+          description: The key, value pairs for each group by.
+          type: object
+        packets_sent_by_client:
+          description: The total number of packets sent by the client over the given
+            period.
+          format: int64
+          type: integer
+        packets_sent_by_server:
+          description: The total number of packets sent by the server over the given
+            period.
+          format: int64
+          type: integer
+        rtt_micro_seconds:
+          description: Measured as TCP smoothed round trip time in microseconds (the
+            time between a TCP frame being sent and acknowledged).
+          format: int64
+          type: integer
+        tcp_closed_connections:
+          description: The number of TCP connections in a closed state. Measured in
+            connections per second from the client.
+          format: int64
+          type: integer
+        tcp_established_connections:
+          description: The number of TCP connections in an established state. Measured
+            in connections per second from the client.
+          format: int64
+          type: integer
+        tcp_refusals:
+          description: The number of TCP connections that were refused by the server.
+            Typically this indicates an attempt to connect to an IP/port that is not
+            receiving connections, or a firewall/security misconfiguration.
+          format: int64
+          type: integer
+        tcp_resets:
+          description: The number of TCP connections that were reset by the server.
+          format: int64
+          type: integer
+        tcp_retransmits:
+          description: TCP Retransmits represent detected failures that are retransmitted
+            to ensure delivery. Measured in count of retransmits from the client.
+          format: int64
+          type: integer
+        tcp_timeouts:
+          description: The number of TCP connections that timed out from the perspective
+            of the operating system. This can indicate general connectivity and latency
+            issues.
+          format: int64
+          type: integer
+      type: object
+    SingleAggregatedConnectionResponseDataType:
+      default: aggregated_connection
+      description: Aggregated connection resource type.
+      enum:
+      - aggregated_connection
+      type: string
+      x-enum-varnames:
+      - AGGREGATED_CONNECTION
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -32385,6 +34179,79 @@ components:
             $ref: '#/components/schemas/TeamPermissionSetting'
           type: array
       type: object
+    TeamReference:
+      description: Provides a reference to a team, including ID, type, and basic attributes/relationships.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamReferenceAttributes'
+        id:
+          description: The team's unique identifier.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamReferenceRelationships'
+        type:
+          $ref: '#/components/schemas/TeamReferenceType'
+      type: object
+    TeamReferenceAttributes:
+      description: Encapsulates the basic attributes of a Team reference, such as
+        name, handle, and an optional avatar or description.
+      properties:
+        avatar:
+          description: URL or reference for the team's avatar (if available).
+          type: string
+        description:
+          description: A short text describing the team.
+          type: string
+        handle:
+          description: A unique handle/slug for the team.
+          type: string
+        name:
+          description: The full, human-readable name of the team.
+          type: string
+      type: object
+    TeamReferenceRelationships:
+      description: Collects the key relationship fields for a team reference, specifically
+        on-call users.
+      properties:
+        oncall_users:
+          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsers'
+      type: object
+    TeamReferenceRelationshipsOncallUsers:
+      description: Defines which users are on-call within a team, stored as an array
+        of references.
+      properties:
+        data:
+          description: The list of user references who are on-call for this team.
+          items:
+            $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItems'
+          type: array
+      type: object
+    TeamReferenceRelationshipsOncallUsersDataItems:
+      description: References a user who is on-call within this team, identified by
+        `id` and `type`.
+      properties:
+        id:
+          description: The unique identifier of the user.
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamReferenceRelationshipsOncallUsersDataItemsType'
+      type: object
+    TeamReferenceRelationshipsOncallUsersDataItemsType:
+      default: users
+      description: Users resource type.
+      enum:
+      - users
+      type: string
+      x-enum-varnames:
+      - USERS
+    TeamReferenceType:
+      default: teams
+      description: Teams resource type.
+      enum:
+      - teams
+      type: string
+      x-enum-varnames:
+      - TEAMS
     TeamRelationships:
       description: Resources related to a team
       properties:
@@ -34745,9 +36612,9 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"action_connection\",\n    \"attributes\":
-              {\n        \"name\": \"Cassette Connection DELETE\",\n        \"integration\":
-              {\n            \"type\": \"AWS\",\n            \"credentials\": {\n
-              \               \"type\": \"AWSAssumeRole\",\n                \"role\":
+              {\n        \"name\": \"Cassette Connection {{ unique_lower_alnum }}\",\n
+              \       \"integration\": {\n            \"type\": \"AWS\",\n            \"credentials\":
+              {\n                \"type\": \"AWSAssumeRole\",\n                \"role\":
               \"MyRole\",\n                \"account_id\": \"123456789123\"\n            }\n
               \       }\n    }\n  }\n}"
           step: there is a valid "action_connection" in the system
@@ -46504,6 +48371,13 @@ paths:
         required: true
         schema:
           type: string
+      - description: Whether to get the IP addresses of the interfaces.
+        example: true
+        in: query
+        name: get_ip_addresses
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -46586,6 +48460,261 @@ paths:
       tags:
       - Network Device Monitoring
       x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/network/connections/aggregate:
+    get:
+      description: Get all aggregated connections.
+      operationId: GetAggregatedConnections
+      parameters:
+      - description: Unix timestamp (number of seconds since epoch) of the start of
+          the query window. If not provided, the start of the query window is 15 minutes
+          before the `to` timestamp. If neither `from` nor `to` are provided, the
+          query window is `[now - 15m, now]`.
+        in: query
+        name: from
+        schema:
+          format: int64
+          type: integer
+      - description: Unix timestamp (number of seconds since epoch) of the end of
+          the query window. If not provided, the end of the query window is the current
+          time. If neither `from` nor `to` are provided, the query window is `[now
+          - 15m, now]`.
+        in: query
+        name: to
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of fields to group connections by.
+        in: query
+        name: group_by
+        schema:
+          type: string
+      - description: Comma-separated list of tags to filter connections by.
+        in: query
+        name: tags
+        schema:
+          type: string
+      - description: The number of connections to be returned. The maximum value is
+          5000.
+        in: query
+        name: limit
+        schema:
+          default: 100
+          format: int32
+          maximum: 5000
+          minimum: 1
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleAggregatedConnectionResponseArray'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get all aggregated connections
+      tags:
+      - Cloud Network Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview. If you have any feedback,
+
+        contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/on-call/schedules:
+    post:
+      description: Create a new on-call schedule
+      operationId: CreateOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Create on-call schedule
+      tags:
+      - On-Call
+      x-given:
+        schedule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"layers\": [\n
+              \       {\n          \"effective_date\": \"{{ timeISO('now - 10d') }}\",\n
+              \         \"end_date\": \"{{ timeISO('now + 10d') }}\",\n          \"interval\":
+              {\n            \"days\": 1\n          },\n          \"members\": [\n
+              \           {\n              \"user\": {\n                \"id\": \"890f29d4-0b7a-11f0-aeb2-760fcae4f596\"\n
+              \             }\n            }\n          ],\n          \"name\": \"Layer
+              1\",\n          \"restrictions\": [\n            {\n              \"end_day\":
+              \"friday\",\n              \"end_time\": \"17:00:00\",\n              \"start_day\":
+              \"monday\",\n              \"start_time\": \"09:00:00\"\n            }\n
+              \         ],\n          \"rotation_start\": \"{{ timeISO('now - 5d')
+              }}\"\n        }\n      ],\n      \"name\": \"{{ unique }}\",\n      \"tags\":
+              [\n        \"tag1\",\n        \"tag2\"\n      ],\n      \"time_zone\":
+              \"America/New_York\"\n    },\n    \"relationships\": {\n      \"teams\":
+              {\n        \"data\": [\n          {\n            \"id\": \"65aea9d0-941c-4607-bf8a-14fc0dac2820\",\n
+              \           \"type\": \"teams\"\n          }\n        ]\n      }\n    },\n
+              \   \"type\": \"schedules\"\n  }\n}"
+          step: there is a valid "schedule" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteOnCallSchedule
+        parameters:
+        - name: schedule_id
+          source: data.id
+        type: unsafe
+  /api/v2/on-call/schedules/{schedule_id}:
+    delete:
+      description: Delete an on-call schedule
+      operationId: DeleteOnCallSchedule
+      parameters:
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Delete on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an on-call schedule
+      operationId: GetOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: OK
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    put:
+      description: Update a new on-call schedule
+      operationId: UpdateOnCallSchedule
+      parameters:
+      - description: 'Comma-separated list of included relationships to be returned.
+          Allowed values: `teams`, `layers`, `layers.members`, `layers.members.user`.'
+        in: query
+        name: include
+        schema:
+          type: string
+      - description: The ID of the schedule
+        in: path
+        name: schedule_id
+        required: true
+        schema:
+          example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Update on-call schedule
+      tags:
+      - On-Call
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/org_configs:
@@ -47935,6 +50064,200 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/remote_config/products/obs_pipelines/pipelines:
+    post:
+      description: Create a new pipeline.
+      operationId: CreatePipeline
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipelineCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new pipeline
+      tags:
+      - Observability Pipelines
+      x-given:
+        pipeline:
+          parameters:
+          - name: body
+            value: "{\n   \"data\":{\n      \"attributes\":{\n         \"config\":{\n
+              \           \"destinations\":[\n               {\n                  \"id\":\"datadog-logs-destination\",\n
+              \                 \"inputs\":[\n                     \"filter-processor\"\n
+              \                 ],\n                  \"type\":\"datadog_logs\"\n
+              \              }\n            ],\n            \"processors\":[\n               {\n
+              \                 \"id\":\"filter-processor\",\n                  \"include\":\"service:my-service\",\n
+              \                 \"inputs\":[\n                     \"datadog-agent-source\"\n
+              \                 ],\n                  \"type\":\"filter\"\n               }\n
+              \           ],\n            \"sources\":[\n               {\n                  \"id\":\"datadog-agent-source\",\n
+              \                 \"type\":\"datadog_agent\"\n               }\n            ]\n
+              \        },\n         \"name\":\"Main Observability Pipeline\"\n      },\n
+              \     \"type\":\"pipelines\"\n   }\n}"
+          step: there is a valid "pipeline" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeletePipeline
+        parameters:
+        - name: pipeline_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in Preview.'
+  /api/v2/remote_config/products/obs_pipelines/pipelines/{pipeline_id}:
+    delete:
+      description: Delete a pipeline.
+      operationId: DeletePipeline
+      parameters:
+      - description: The ID of the pipeline to delete.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.'
+    get:
+      description: Get a specific pipeline by its ID.
+      operationId: GetPipeline
+      parameters:
+      - description: The ID of the pipeline to retrieve.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get a specific pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in Preview.'
+    put:
+      description: Update a pipeline.
+      operationId: UpdatePipeline
+      parameters:
+      - description: The ID of the pipeline to update.
+        in: path
+        name: pipeline_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObservabilityPipeline'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservabilityPipeline'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a pipeline
+      tags:
+      - Observability Pipelines
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in Preview.'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
@@ -48004,6 +50327,10 @@ paths:
 
         - Dashboards: `dashboard`
 
+        - Integration Accounts: `integration-account`
+
+        - Integration Webhooks: `integration-webhook`
+
         - Notebooks: `notebook`
 
         - Powerpacks: `powerpack`
@@ -48038,6 +50365,10 @@ paths:
         ----------------------------|--------------------------
 
         Dashboards                  | `viewer`, `editor`
+
+        Integration Accounts        | `viewer`, `editor`
+
+        Integration Webhooks        | `viewer`, `editor`
 
         Notebooks                   | `viewer`, `editor`
 
@@ -57670,6 +60001,10 @@ tags:
     and the `cloud_cost` data source. For more information, see the [Cloud Cost Management
     documentation](https://docs.datadoghq.com/cloud_cost_management/).
   name: Cloud Cost Management
+- description: The Cloud Network Monitoring API allows you to fetch aggregated connections
+    and their attributes. See the [Cloud Network Monitoring page](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/)
+    for more information.
+  name: Cloud Network Monitoring
 - description: Manage your Datadog Cloudflare integration directly through the Datadog
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
@@ -57882,9 +60217,21 @@ tags:
     and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
     for more information.
   name: Network Device Monitoring
+- description: Observability Pipelines allows you to collect and process logs within
+    your own infrastructure, and then route them to downstream integrations.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/observability_pipelines/
+  name: Observability Pipelines
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration
+- description: 'Configure your [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)
+
+    directly through the Datadog API.'
+  externalDocs:
+    url: https://docs.datadoghq.com/service_management/on-call/
+  name: On-Call
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
