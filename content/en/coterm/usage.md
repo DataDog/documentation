@@ -104,7 +104,7 @@ process_config:
           actions: ["record", "logs", "process_info", "approval"]
    {{< /code-block >}}
 
-With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes. You can also [configure automation rules][8] to trigger workflows based on approval requests.
+With this configuration, when you run a `kubectl scale --context prod` command, CoTerm creates an approval request in [Case Management][3]. If you opt to associate the approval request with an active [incident][5], other incident responders are automatically added as approvers. After this request is approved, your command executes. You can also configure [case automation rules][8] to trigger workflows based on approval requests.
 
 #### Manually require approval
 
