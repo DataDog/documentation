@@ -79,7 +79,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: docs10556/aws-resource-collection-mappings
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
@@ -526,6 +526,47 @@
             base_path: ""
             dest_path: "/data/"
             file_name: "workflow_bundles.json"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_cc.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloud-craft.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_ccm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloud-cost-management.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_csm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-cloud-security-monitoring.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_npm.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-network-performance-monitoring.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/product_resource_types_permissions_rc.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-resource-catalog.md"
+
 
       - repo_name: web-ui
         contents:
