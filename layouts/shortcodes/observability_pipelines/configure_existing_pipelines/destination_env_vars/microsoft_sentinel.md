@@ -2,8 +2,5 @@
 	- After you have created the Data Collection Rule (DCR), the DCE endpoint URL is on the overview page, shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint**. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com/dataCollectionRules/<DCR-Immutable-ID>/streams/<Stream-Name>?api-version=2023-01-01`.
 	- Stored as the environment variable `DD_OP_DESTINATION_MICROSOFT_SENTINEL_DCE_URI`
 - Client secret
-	- This is the Azure AD app's client secret, such as `550e8400-e29b-41d4-a716-446655440000`. 
-	- See [Register an application in Microsoft Entra ID][10151] for information on creating a new application.
+	- This is the Azure AD app's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
 	- Stored as the environment variable `DD_OP_DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`
-
-[10151]: https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app?tabs=certificate%2Cexpose-a-web-api
