@@ -85,17 +85,16 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
-a. You can configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you can select the edit icon to configure the evaluation for an individual LLM application.
-a. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
-1. If you select **Configure Evaluation**, select the LLM application(s) you would like to configure your evaluation for.
+   - Configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you select the edit icon to configure the evaluation for an individual LLM application.
+   - Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. If you select **Configure Evaluation**, select the LLM application(s) you want to configure your evaluation for.
 1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider.
 1. Select the account you want to run the evaluation on.
-1. Select whether you would like your evaluation to run on **Traces** (i.e. the root span of each trace) or on **Spans** (which includes LLM, Workflow, and Agent spans).
-a. Note if you select to run the evaluation on **Spans**, you must select at least one **Span Name** to save your configured evaluation.
-1. Select the Span Names you would like your evaluation to run on. *This is optional if **Traces** is selected.
-1. Select the Tags you would like this evaluation to run on and whether you would like to run this evaluation for spans that have any of the tags selected (i.e. **Any of**) or spans that have all the tags selected (i.e. **All of**). 
-a. *Note: This step is optional.
-1. Select what percentage of spans you would like this evaluation to run on by configuring the **Sampling Percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a Sampling Percentage of 50% means that the evaluation runs on 50% of valid spans.
+1. Choose whether you want the evaluation to run on traces (the root span of each trace) or spans (which include LLM, Workflow, and Agent spans).
+   - If you select to run the evaluation on spans, you must select at least one span name to save your configured evaluation.
+1. Select the span names you would like your evaluation to run on. (Optional if traces is selected).
+1. Optionally, specify the tags you want this evaluation to run on and choose whether to apply the evaluation to spans that match any of the selected tags (Any of), or all of the selected tags (All of).
+1. Select what percentage of spans you would like this evaluation to run on by configuring the **sampling percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a sampling percentage of 50% means that the evaluation runs on 50% of valid spans.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
