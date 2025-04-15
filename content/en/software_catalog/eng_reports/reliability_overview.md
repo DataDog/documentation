@@ -35,11 +35,13 @@ By default, the Reliability Overview report aggregates data by service or team, 
 
 ### Schedule reports
 
-You can set up scheduled reports for your stakeholders that will be delivered via Email or Slack on a recurring basis. Refer to the Scheduled Reports documentation for more information.
+You can set up scheduled reports for your stakeholders that will be delivered via Email or Slack on a recurring basis. Refer to the [Scheduled Reports documentation][1] for more information.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/dashboards/sharing/scheduled_reports/
 
 
 
