@@ -53,19 +53,8 @@ Use the following environment variables to enable and configure Agentless log su
 | `DD_AGENTLESS_LOG_SUBMISSION_ENABLED` (required) | Enables/disables log submission | `false`
 | `DD_AGENTLESS_LOG_SUBMISSION_URL` (optional) | Sets custom URL for submitting logs | -
 
-{{% /tab %}}
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
-
-1. [Set up log collection][1] through the Datadog Agent.
-2. Follow the steps described in [Correlate Logs and Traces][2].
-
-
-[1]: /logs/log_collection/
-[2]: /tracing/other_telemetry/connect_logs_and_traces/
-{{% /tab %}}
-{{< /tabs >}}
-
 ### .NET
+
 Agentless log submission is supported for the following languages and frameworks:
 
 - `dd-trace-dotnet >= 2.50.0` and XUnit TestOutputHelper.
@@ -84,6 +73,19 @@ Use the following environment variables to enable and configure log submission:
 |---|---|---|
 | `DD_ENABLE_STDOUT_INSTRUMENTATION` | Enables/disables stdout log submission | `false`
 | `DD_ENABLE_STDERR_INSTRUMENTATION` | Enables/disables stderr log submission | `false`
+
+{{% /tab %}}
+{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+
+1. [Set up log collection][1] through the Datadog Agent.
+2. Follow the steps described in [Correlate Logs and Traces][2].
+
+
+[1]: /logs/log_collection/
+[2]: /tracing/other_telemetry/connect_logs_and_traces/
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Further Reading
 
