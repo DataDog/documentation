@@ -240,6 +240,13 @@ Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 
 {{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
+### Memory Leaks
+If you have set up [Continuous Profiler][15], and the service is running in a containerized environment you will see the [Memory Leaks][24] tab.
+
+This will guide you through a workflow for identifying potential memory leaks and showing the most actionable data.
+
+{{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
 
@@ -281,3 +288,4 @@ Visualize the cost associate with your service's infrastructure used in the Cost
 [21]: /database_monitoring/connect_dbm_and_apm/
 [22]: /cloud_cost_management/
 [23]: https://app.datadoghq.com/services
+[24]: /profiler/guide/solve-memory-leaks/
