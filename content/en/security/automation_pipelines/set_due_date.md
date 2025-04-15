@@ -6,10 +6,6 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for due date rules, click <strong>Request Access</strong>.
-{{< /callout >}} 
-
 Configure due date rules to ensure vulnerabilities are addressed within your specified SLO time frames. By setting these due dates, you can automate accountability, meet compliance requirements, and prioritize the prompt remediation of security issues, thereby preventing potential exploitation.
 
 ## Create a due date rule

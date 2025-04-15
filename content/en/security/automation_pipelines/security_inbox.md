@@ -11,10 +11,6 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
-{{< /callout >}} 
-
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
 
 ## Create an inbox rule

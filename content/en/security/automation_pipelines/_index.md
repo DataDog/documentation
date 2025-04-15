@@ -14,12 +14,6 @@ further_reading:
     text: "Set Due Date Rules"
 ---
 
-{{< callout btn_hidden="true">}}
-  Automation Pipelines is in Preview. To enroll and access the automated rules, you must register for each set of rules separately:
-  <ul><li><a href="https://www.datadoghq.com/product-preview/security-automation-pipelines/">Mute and Assign Due Date</a></li>
-  <li><a href="https://www.datadoghq.com/product-preview/customize-your-security-inbox/">Add to Security Inbox</a></li></ul>
-{{< /callout >}} 
-
 Automation Pipelines allows you to set up automated rules for newly discovered vulnerabilities, thus accelerating triage and remediation efforts at scale.
 
 {{< img src="security/automation_pipelines/vulnerabilities_settings.png" alt="Automation Vulnerabilities Settings page" width="100%">}}

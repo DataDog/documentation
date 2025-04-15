@@ -8,10 +8,6 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for mute rules, click <strong>Request Access</strong>.
-{{< /callout >}}
-
 Configure mute rules to streamline security alerts by automatically filtering out non-urgent findings. This approach helps reduce noise from known false positives and accepted risks, allowing you to focus on addressing the most critical threats.
 
 ## Create a mute rule
