@@ -37,7 +37,7 @@ Live Debugger provides:
 * **Real-time inspection**: Examine variable states, method arguments, and execution paths in running code.
 * **Non-invasive debugging**: Collect debugging information without stopping applications or degrading performance.
 * **Code instrumentation**: Add logpoints to any location in your code, including third-party libraries.
-* **Auto-expiring logs**: Logpoints created in Debug Sessions expire automatically after a set time (default 60 minutes).
+* **Auto-expiring logs**: Logpoints created in Debug Sessions expire automatically after a set time (default 48 hours).
 * **Conditional execution**: Configure logpoints to execute only when specific conditions are met.
 * **Sensitive data protection**: Built-in [sensitive data scrubbing][3] prevents exposure of personal information, passwords, and secrets.
 
@@ -101,7 +101,7 @@ Debug Sessions let you inspect your code at runtime with auto-expiring logpoints
 3. Add, remove, and modify logpoints within the session.
 4. Add logpoints within the same session across multiple services.
 
-Debug Sessions automatically expire after 60 minutes. You can manually disable and re-enable both sessions and individual logpoints at any time.
+Debug Sessions automatically expire after 48 hours. You can manually disable and re-enable both sessions and individual logpoints at any time.
 
 Start Debug Sessions from:
 - Live Debugger page
@@ -133,7 +133,7 @@ Live Debugger data might contain sensitive information, especially when using th
 - Live Debugger and Dynamic Instrumentation are enabled and disabled for the <a href="#relationship-between-live-debugger-and-dynamic-instrumentation">same service and environment</a>.
 - Logpoints with variable enabled are rate-limited to 1 hit per second.
 - Logpoints without variable capture are rate-limited to 5000 executions per second per service instance.
-- Debug Sessions expire after 60 minutes (this is not customizable for now).
+- Debug Sessions expire after 48 hours (this is not customizable for now).
 
 ## Further Reading
 
