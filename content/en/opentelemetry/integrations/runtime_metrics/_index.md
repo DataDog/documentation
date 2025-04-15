@@ -41,7 +41,7 @@ Select your language to see instructions for configuring the OpenTelemetry SDK t
 {{< tabs >}}
 {{% tab "Java" %}}
 
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 #### Automatic instrumentation
 
@@ -64,7 +64,7 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 
 {{% tab "Go" %}}
 
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
 
@@ -77,7 +77,7 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 
 {{% tab ".NET" %}}
 
-<div class="alert alert-light language-specific-content border border-secondary rounded">
+<div class="alert bg-light">
 
 <div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
