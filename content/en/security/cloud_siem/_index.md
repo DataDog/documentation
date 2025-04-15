@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/microsoft-365-detections/"
   tag: "Blog"
   text: "How attackers take advantage of Microsoft 365 services"
+- link: "https://www.datadoghq.com/blog/monitor-security-metrics/"
+  tag: "Blog"
+  text: "Monitor your organization's security posture with Datadog"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}

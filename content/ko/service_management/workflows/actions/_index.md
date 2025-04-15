@@ -5,8 +5,8 @@ algolia:
   - 워크플로우
   - 워크플로우 자동화
 aliases:
-- /workflows/generic_actions
-- /service_management/workflows/actions_catalog/generic_actions/
+- /ko/workflows/generic_actions
+- /ko/service_management/workflows/actions_catalog/generic_actions/
 disable_sidebar: false
 disable_toc: false
 further_reading:

@@ -53,7 +53,7 @@ Costs in Cloud Cost Management may not match the estimated month-to-date (MTD) c
 
 Datadog cost data is available at the parent or sub-organization level. For sub-organizations, [Cost Summary (sub-organization)][5] also needs to be enabled.
 
-Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Costs** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
+Datadog cost data is available for the past 15 months and can be used in dashboards and notebooks under the **Cloud Cost** data source. Create dashboards to monitor daily costs, identify trends, and optimize resource usage.
 
 {{< img src="cloud_cost/datadog_costs/dashboard.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:100%;" >}}
 
@@ -65,7 +65,7 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 | dimension_name / dimension | `dimension_name` is the name of the individual product being billed (for example, `Indexed Logs (15 Day Retention)`). </br></br> `dimension` is the snake case version of the product name which is optimized for programmatic use and easier search (for example, `logs_indexed_15day`). |
 | product_name / datadog_product | `product_name` is the high-level grouping name for Datadog products (for example, `Logs`). </br></br> `datadog_product` is the snake case version of the product grouping name which is optimized for programmatic use and easier search (for example, `logs`). |
 | `<Usage Attribution tags>` | You can add up to three tag keys, configured in [Usage Attribution][8], with their associated values (for example, `team` or `service`). |
-| cost_type | The type of charge covered by this item (for example, `usage` or `adjustment`). |
+| cost_type | The type of charge covered by this item (for example, `usage` or `adjustment`). Adjustments are attributed to the parent organization. |
 | pricing_category | The specific type of charge covered by this item (for example, `committed` or `on-demand`). |
 
 ## Further reading

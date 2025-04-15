@@ -26,7 +26,7 @@ further_reading:
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
@@ -72,6 +72,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-security-roundup-devsecops-threat-detection-ai/"
     tag: "Blog"
     text: "Cloud security research and guide roundup: DevSecOps, threat detection, and AI"
+  - link: "https://www.datadoghq.com/blog/key-security-metrics/"
+    tag: "Blog"
+    text: "Key metrics for measuring your organization's security posture"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+    tag: "Blog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
 cascade:
     algolia:
         rank: 70
@@ -83,9 +89,9 @@ Bring speed and scale to your production security operations. Datadog Security d
 
 Datadog Security includes [Application Security](#application-security), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
 
-## Application Security
+##  App and API Protection
 
-Datadog [Application Security][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 In addition to threat detection, Datadog provides end-to-end code and library vulnerability detection from development to production with [Code Security][20], which includes the following capabilities:
 - [Static Code Analysis (SAST)][21] for identifying security and quality issues in your first-party code
@@ -104,11 +110,19 @@ In addition to threat detection, Datadog provides end-to-end code and library vu
 
 [Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+CSM includes [Workload Protection][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
 
 {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
 
 To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+
+## Sensitive Data Scanner
+
+[Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
+
+After you [set up Sensitive Data Scanner][25], use the Summary page to see details of sensitive data issues that have been identified, so that you can triage, investigate, and remediate the issues.
+
+{{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive issues broken down by priority" style="width:100%;" >}}
 
 ## Further Reading
 
@@ -135,3 +149,5 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [21]: /security/code_security/static_analysis/
 [22]: /security/code_security/software_composition_analysis/
 [23]: /security/code_security/iast/
+[24]: /sensitive_data_scanner/
+[25]: /sensitive_data_scanner/setup/

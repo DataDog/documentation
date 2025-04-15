@@ -5,7 +5,7 @@ algolia:
   - 워크플로우
   - 워크플로우 자동화
 aliases:
-- /workflows
+- /ko/workflows
 disable_toc: false
 further_reading:
 - link: /getting_started/workflow_automation/

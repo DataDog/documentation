@@ -1,6 +1,6 @@
 ---
 aliases:
-- /opentelemetry/runtime_metrics/dotnet/
+- /es/opentelemetry/runtime_metrics/dotnet/
 code_lang: dotnet
 code_lang_weight: 20
 title: Métricas de tiempo de ejecución de OpenTelemetry .NET

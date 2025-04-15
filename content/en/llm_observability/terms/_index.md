@@ -243,7 +243,7 @@ This check ensures that sensitive information is handled appropriately and secur
 [2]: /llm_observability/setup/sdk/?tab=model#tracing-spans
 [3]: /llm_observability/setup/auto_instrumentation/
 [4]: /llm_observability/setup/?tab=decorators#instrument-your-llm-application
-[5]: /sensitive_data_scanner/
+[5]: /security/sensitive_data_scanner/
 [6]: /llm_observability/submit_evaluations
 [7]: https://github.com/DataDog/llm-observability/blob/main/1-llm-span.ipynb
 [8]: https://github.com/DataDog/llm-observability/blob/main/2-workflow-span.ipynb

@@ -29,6 +29,12 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to enhance your synthetic testing capabilities"
+- link: "https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/"
+  tag: "Blog"
+  text: "How to secure HTTP headers with synthetic tests"
+- link: "https://www.datadoghq.com/blog/synthetic-monitoring-updates/"
+  tag: "Blog"
+  text: "Gain key insights into user experiences faster with Datadog Synthetic Monitoring"
 algolia:
   tags: ['synthetics']
 cascade:

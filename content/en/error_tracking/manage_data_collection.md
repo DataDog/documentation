@@ -31,6 +31,8 @@ Each rule consists of:
 
 A given rule can be toggled on or off. An error event is included if it matches a query in one of the active inclusion filters _and_ it does not match any active nested exclusion queries.
 
+Each error event is checked against the rules in order. The event is processed only by the first active rule it matches, and all subsequent rules are ignored. If the matched rule has an exclusion filter, the event is excluded; otherwise, the event is included.
+
 **Note:** Error events that get accepted by a rule might still be excluded from Error Tracking if they lack the [required attributes][2].
 
 ### Evaluation order

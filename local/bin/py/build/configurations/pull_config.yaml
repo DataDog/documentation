@@ -493,20 +493,6 @@
             front_matters:
               disable_edit: true
 
-      - repo_name: apps
-        contents:
-        - action: pull-and-push-file
-          branch: master
-          globs:
-            - "docs/en/getting-started.md"
-          options:
-            dest_path: "/developers/faq/"
-            file_name: "ui_extensions.md"
-            front_matters:
-              dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
-              aliases: ["/developers/datadog_apps/", "/developers/ui_extensions"]
-              private: true
-
       - repo_name: datadog-agent
         contents:
         - action: pull-and-push-file
@@ -517,7 +503,7 @@
             file_name: 'agent_config.yaml'
             output_content: false
         - action: pull-and-push-folder
-          branch: 7.63.x
+          branch: 7.64.x
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend_linux.md'
@@ -550,6 +536,69 @@
               dest_path: "/layouts/shortcodes/"
               file_name: "semantic-color.md"
 
+      - repo_name: datadog-operator
+        contents:
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/custom_check.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'custom_check.md'
+              front_matters:
+                title: Custom Checks
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/custom_check.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/data_collected.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'data_collected.md'
+              front_matters:
+                title: Data Collected from the Datadog Operator
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/data_collected.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/installation.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'advanced_install.md'
+              front_matters:
+                title: Installing the Datadog Operator
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/kubectl-plugin.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'kubectl_plugin.md'
+              front_matters:
+                title: Datadog Operator Plugin for kubectl
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/kubectl-plugin.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/secret_management.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'secret_management.md'
+              front_matters:
+                title: Secret Management
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/secret_management.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/v2alpha1_migration.md'
+            options:
+              dest_path: '/containers/guide/'
+              file_name: 'v2alpha1_migration.md'
+              front_matters:
+                title: Migrate DatadogAgent CRDs to v2alpha1
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
+                
       - repo_name: dd-trace-rb
         contents:
           - action: pull-and-push-file

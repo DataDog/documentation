@@ -111,7 +111,7 @@ The protected settings include:
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogWindowsAgent"
-  type_handler_version = "2.0"
+  type_handler_version = "7.0"
    settings = <<SETTINGS
   {
     "site":"<DATADOG_SITE>"
@@ -133,7 +133,7 @@ The protected settings include:
   virtual_machine_id   = azurerm_virtual_machine.example.id
   publisher            = "Datadog.Agent"
   type                 = "DatadogLinuxAgent"
-  type_handler_version = "2.0"
+  type_handler_version = "7.0"
    settings = <<SETTINGS
   {
     "site":"<DATADOG_SITE>"
