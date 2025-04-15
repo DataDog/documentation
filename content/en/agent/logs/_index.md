@@ -156,10 +156,8 @@ Follow the steps in these sections to send Windows Private Location logs to Data
 
 ### Configure the Agent 
 
- 1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
-
+1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
 2. Navigate to `C:\ProgramData\Datadog\conf.d` and create a folder named `synthetics_worker.d`. 
-
 3. Inside the `synthetics_worker.d` folder, create a file named `conf.yaml` using the following example as a template:
 ```yaml
 logs:
