@@ -93,7 +93,7 @@ To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
 1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
-After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response. The threat intelligence reference table can used by more than one security product.
+After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response. The threat intelligence reference table can be used by more than one security product.
 
 ## Further reading
 
