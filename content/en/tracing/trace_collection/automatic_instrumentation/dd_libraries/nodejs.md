@@ -214,9 +214,9 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-#### Unsupported Datadog fetures
+#### Unsupported Datadog features
 
-The following features are turned off by default in the Node.js tracer. They do not support bundling and can therefore not be used if your application is bundled.
+The following features are turned off by default in the Node.js tracer. They do not support bundling and cannot be used if your application is bundled.
 
 - APM: Dynamic Instrumentation
 
