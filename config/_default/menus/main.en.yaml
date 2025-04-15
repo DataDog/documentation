@@ -6137,7 +6137,7 @@ menu:
       parent: security_platform_heading
       pre: cloud-security-management
       identifier: csm
-      weight: 30000
+      weight: 40000
     - name: Setup
       url: security/cloud_security_management/setup
       parent: csm
@@ -6204,38 +6204,39 @@ menu:
       identifier: csm_setup_cloud_integrations
       weight: 107
     - name: Workload Protection
-      url: security/threats/
-      parent: csm
-      identifier: cloud_workload_security
-      weight: 3
+      url: security/workload_protection/
+      # pre: SecurityWorkloadSecurity
+      parent: security_platform_heading
+      identifier: workload_protection
+      weight: 60000
     - name: Supported Linux Distributions
-      url: security/threats/supported_linux_distributions
-      parent: cloud_workload_security
+      url: security/workload_protection/supported_linux_distributions
+      parent: workload_protection
       identifier: cws_workload_security_linux_distributions
       weight: 200
     - name: Detection Rules
-      url: security/threats/workload_security_rules
-      parent: cloud_workload_security
+      url: security/workload_protection/workload_security_rules
+      parent: workload_protection
       identifier: cws_workload_security_rules
       weight: 201
     - name: Create Policies and Custom Rules
-      url: security/threats/workload_security_rules/custom_rules
+      url: security/workload_protection/workload_security_rules/custom_rules
       parent: cws_workload_security_rules
       identifier: cws_custom_rules
       weight: 101
     - name: Investigate Security Signals
-      url: security/threats/security_signals
-      parent: cloud_workload_security
+      url: security/workload_protection/security_signals
+      parent: workload_protection
       identifier: cws_security_signals
       weight: 202
     - name: Investigate Agent Events
-      url: security/threats/investigate_agent_events
-      parent: cloud_workload_security
+      url: security/workload_protection/investigate_agent_events
+      parent: workload_protection
       identifier: cws_agent_events
       weight: 203
     - name: Creating Agent Rule Expressions
-      url: security/threats/agent_expressions
-      parent: cloud_workload_security
+      url: security/workload_protection/agent_expressions
+      parent: workload_protection
       identifier: cws_agent_expressions
       weight: 204
     - name: Misconfigurations
@@ -6363,7 +6364,7 @@ menu:
       parent: security_platform_heading
       pre: app-sec
       identifier: application_security
-      weight: 40000
+      weight: 50000
     - name: Terms and Concepts
       url: security/application_security/terms/
       parent: application_security
@@ -6494,7 +6495,7 @@ menu:
       pre: sensitive-data-scanner
       identifier: sensitive_data_scanner
       parent: security_platform_heading
-      weight: 50000
+      weight: 70000
     - name: Setup
       url: /security/sensitive_data_scanner/setup/
       identifier: sds_setup
@@ -6535,7 +6536,7 @@ menu:
       url: /security/code_security/
       parent: security_platform_heading
       pre: security-code-security
-      weight: 60000
+      weight: 30000
     - name: Static Code Analysis (SAST)
       identifier: sec_static_analysis
       url: /security/code_security/static_analysis/
