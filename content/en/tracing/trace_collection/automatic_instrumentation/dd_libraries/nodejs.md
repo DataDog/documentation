@@ -134,7 +134,7 @@ Datadog recommends you have custom-built bundler plugins. These plugins are able
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Bundling with Esbuild
+#### Bundling with esbuild
 
 This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
@@ -162,6 +162,9 @@ esbuild.build({
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
     '@datadog/native-iast-rewriter',
+
+    // required for Live Debugging / Dynamic Instrumentation
+    'dd-trace/packages/dd-trace/src/debugger/devtools_client',
 
     // required if you encounter graphql errors during the build step
     'graphql/language/visitor',
@@ -200,6 +203,9 @@ const nextConfig = {
       '@datadog/native-appsec',
       '@datadog/native-iast-taint-tracking',
       '@datadog/native-iast-rewriter',
+
+      // required for Live Debugging / Dynamic Instrumentation
+      'dd-trace/packages/dd-trace/src/debugger/devtools_client',
 
       // required if you encounter graphql errors during the build step
       'graphql/language/visitor',
