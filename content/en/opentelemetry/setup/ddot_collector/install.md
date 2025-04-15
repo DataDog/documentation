@@ -270,14 +270,13 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 
 datadog:
   site: datadoghq.com
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  logLevel: info
 
   otelCollector:
     enabled: true
@@ -469,9 +468,6 @@ spec:
           connectors:
             datadog/connector:
               traces:
-                compute_top_level_by_span_kind: true
-                peer_tags_aggregation: true
-                compute_stats_by_span_kind: true
           service:
             pipelines:
               traces:
@@ -664,9 +660,6 @@ data:
     connectors:
       datadog/connector:
         traces:
-          compute_top_level_by_span_kind: true
-          peer_tags_aggregation: true
-          compute_stats_by_span_kind: true
     service:
       pipelines:
         traces:
