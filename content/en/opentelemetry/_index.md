@@ -124,7 +124,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 <div class="alert alert-info">For a complete list of Agent-based features, see <strong>OTel to Datadog Agent (OTLP)</strong> in <a href="/opentelemetry/compatibility/">Feature Compatibility</a>.</div>
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/setup/agent" >}}Learn more about using the Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/setup/agent" >}}Learn more about using the Datadog Agent with DDOT Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Additional setup options
