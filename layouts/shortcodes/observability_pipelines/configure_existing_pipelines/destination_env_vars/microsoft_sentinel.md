@@ -1,5 +1,5 @@
 - Data collection endpoint (DCE)
-	- After you have created the Data Collection Rule (DCR), the DCE endpoint URL is on the overview page, shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint**. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com/dataCollectionRules/<DCR-Immutable-ID>/streams/<Stream-Name>?api-version=2023-01-01`.
+	- After you create the Data Collection Rule (DCR), the DCE endpoint URL is shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint** on the DCR overview page. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com/dataCollectionRules/<DCR-Immutable-ID>/streams/<Stream-Name>?api-version=2023-01-01`.
 	- Stored as the environment variable `DD_OP_DESTINATION_MICROSOFT_SENTINEL_DCE_URI`
 - Client secret
 	- This is the Azure AD app's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
