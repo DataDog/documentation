@@ -1,3 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-describe('DocTemplater', () => {});
+describe('DocTemplater', () => {
+  test('test', () => {
+    expect(true).toBe(true);
+  });
+});

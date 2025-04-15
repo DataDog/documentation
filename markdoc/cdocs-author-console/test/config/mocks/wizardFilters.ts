@@ -1,9 +1,9 @@
-import { WizardFilter } from '../../src/types';
+import { WizardFilter } from '../../../src/types';
 
 /**
  * A list of filters with a combination of new config and old config.
  */
-export const mockFilters: WizardFilter[] = [
+export const mockWizardFilters: WizardFilter[] = [
   {
     uuid: 'cdb8178d-ea3a-44ed-b8ec-3ceb12818479',
     label: 'Color',
@@ -81,7 +81,8 @@ export const mockFilters: WizardFilter[] = [
         block_shape_options: [
           {
             id: 'circle',
-            label: 'Circle'
+            label: 'Circle',
+            default: true
           },
           {
             id: 'rectangle',

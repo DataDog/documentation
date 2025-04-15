@@ -28,6 +28,8 @@ export function getNetNewConfig(p: {
     });
   });
 
+  console.log('mergedFilterConfig:', JSON.stringify(mergedFilterConfig, null, 2));
+
   const knownTraitIds = Object.keys(p.customizationConfig.traitsById);
   const knownOptionGroupIds = Object.keys(p.customizationConfig.optionGroupsById);
   const knownOptionIds = Object.keys(p.customizationConfig.optionsById);
@@ -47,8 +49,10 @@ export function getNetNewConfig(p: {
 
   Object.keys(mergedFilterConfig.optionGroupsById).forEach((optionGroupId) => {
     if (!knownOptionGroupIds.includes(optionGroupId)) {
+      console.log('adding optionGroupId to merged config:', optionGroupId);
       const optionGroup = mergedFilterConfig.optionGroupsById[optionGroupId];
       newConfig.optionGroupsById[optionGroupId] = optionGroup;
+      console.log('newConfig is now', JSON.stringify(newConfig.optionGroupsById, null, 2));
     }
   });
 

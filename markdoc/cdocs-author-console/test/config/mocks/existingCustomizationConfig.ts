@@ -1,6 +1,6 @@
 import { CustomizationConfig } from 'cdocs-data';
 
-export const existingCustomizationConfig: CustomizationConfig = {
+export const mockExistingCustomizationConfig: CustomizationConfig = {
   traitsById: {
     color: {
       id: 'color',

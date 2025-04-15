@@ -1,6 +1,6 @@
 import { CustomizationConfig } from 'cdocs-data';
 
-export const newCustomizationConfig: CustomizationConfig = {
+export const mockNewCustomizationConfig: CustomizationConfig = {
   traitsById: {
     shape: {
       id: 'shape',
@@ -31,13 +31,11 @@ export const newCustomizationConfig: CustomizationConfig = {
       },
       {
         id: 'rectangle',
-        label: 'Rectangle',
-        default: false
+        label: 'Rectangle'
       },
       {
         id: 'triangle',
-        label: 'Triangle',
-        default: false
+        label: 'Triangle'
       }
     ]
   }
