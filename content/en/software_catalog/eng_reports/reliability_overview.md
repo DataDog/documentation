@@ -26,7 +26,8 @@ Access the Reliability Overview report by clicking on the "Overview" tab in IDP 
 By default, the Reliability Overview report aggregates data by service or team, using the `service` or `team` tags from your SLOs and properties from your Incidents. This allows you assess SLO performance across service or team groupings to identify top- and bottom-performing areas.
 
 ### Summary score
-Copy content here: https://docs.datadoghq.com/service_management/service_level_objectives/ootb_dashboard/#summary-score
+
+{{% dashboards/summary_score %}}
 
 ### Customize your dashboard
 Copy content here: https://docs.datadoghq.com/service_management/service_level_objectives/ootb_dashboard/#customize-your-slo-performance-summary-dashboard 
