@@ -20,6 +20,10 @@ further_reading:
 
 ---
 
+{{< beta-callout url="#" btn_hidden="true" >}}
+Code Origins is currently in Preview. To participate in the preview, simply follow the set up instructions below. To submit questions, feedback, or requests related to Code Origins, <a href="https://docs.google.com/forms/d/e/1FAIpQLScyeRsF2GJjYdf9bUyeDjt8_9id-gvqiBU1SHR3ioDGe5eF3g/viewform?usp=header">fill out this form</a> with as much detail as possible. For urgent issues, please contact <a href="https://www.datadoghq.com/support/">Datadog support</a>.
+{{< /beta-callout >}}
+
 ## Overview
 
 Code Origins captures the exact location in your codebase where APM spans are created. When enabled, it automatically adds file path, line number, and function name to each span, making it easier to:
@@ -43,9 +47,11 @@ Code Origins captures the exact location in your codebase where APM spans are cr
 
 | Runtime Language | Tracing Library Version | Frameworks |
 |---|---|---|
-| Java | `1.47.0` or later | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers (entry spans only)|
-| Python | `2.15.0` or later | Django, Flask, Starlette and derivatives (entry spans only)|
-| Node.js | `4.49.0` or later | Fastify (supports both entry & exit spans), All other [APM-supported integrations][8] (support exit spans only)|
+| Java | `1.47.0` or later | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers|
+| Python | `2.15.0` or later | Django, Flask, Starlette and derivatives|
+| Node.js | `4.49.0` or later | Fastify (Express is coming soon!) |
+
+**Note**: Only Python currently supports exit spans. All other runtime languages and frameworks listed above support entry spans only at this time.
 
 ### Enable Code Origins
 
@@ -83,7 +89,7 @@ Code Origins captures two types of spans:
 
 **Entry spans**: Shows the first method in your application code that handles an incoming request. The APM integration identifies the source code location where requests enter your system.
 
-**Exit spans**: Shows the exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code.
+**Exit spans**: Shows the exact line of code that makes an outgoing request to a downstream service. The tracer examines the call stack to identify the line where an exit span starts, skipping third-party code. Most tracing libraries do not support exit spans at this time.
 
 <div class="alert alert-info">Note: Some tracing libraries may have slightly different implementations to optimize for performance.</div>
 
@@ -99,9 +105,10 @@ If Code Origin information is missing:
 
 1. Verify Code Origins is enabled in your tracing library configuration
 2. Check that your service meets all [Compatibility Requirements](#compatibility-requirements)
-3. Most services only show Code Origin information on entry spans
-4. Code Origins does not capture third-party code
-5. Enable [Source Code Integration][7] to see code previews in the APM Trace details
+3. Filter spans with Code Origins in the Traces explorer using the search query: `@_dd.code_origin.type:*`
+4. Code Origin information will be available only for entry spans on most services
+5. Code Origins does not capture third-party code
+6. Enable [Source Code Integration][7] to see code previews in the APM Trace details
 
 ## Further Reading
 
