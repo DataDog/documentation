@@ -30,16 +30,16 @@ To apply ping settings to all _manually_ configured devices, add the ping config
 init_config:
   loader: core
   use_device_id_as_hostname: true
+  ping:
+    enabled: true            # (default false) enable the ping check
+    linux:                   # (optional) Linux specific configuration
+    use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 instances:
   - ip_address: '1.2.3.4'
     community_string: 'sample-string'
     tags:
     - 'key1:val1'
     - 'key2:val2'
-  ping:
-    enabled: true            # (default false) enable the ping check
-    linux:                   # (optional) Linux specific configuration
-    use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 ```
 
 {{% /tab %}}
