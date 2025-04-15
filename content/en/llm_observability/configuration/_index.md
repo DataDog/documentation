@@ -85,9 +85,17 @@ Connect your Amazon Bedrock account to LLM Observability with your AWS Account. 
 
 1. Navigate to [**LLM Observability > Settings > Evaluations**][2].
 1. Click on the evaluation you want to enable.
+2. You can configure an evaluation for all of your LLM applications by selecting **Configure Evaluation**, or you can select the edit icon to configure the evaluation for an individual LLM application.
+2. Evaluations can be disabled by selecting the disable icon for an individual LLM application.
+1. If you select **Configure Evaluation**, select the LLM application(s) you would like to configure your evaluation for.
 1. Select **OpenAI**, **Azure OpenAI**, **Anthropic**, or **Amazon Bedrock** as your LLM provider.
 1. Select the account you want to run the evaluation on.
-1. Assign the LLM application you want to run the evaluation on.
+1. Select whether you would like your evaluation to run on **Traces** (i.e. the root span of each trace) or on **Spans** (which includes LLM, Workflow, and Agent spans).
+2. Note if you select to run the evaluation on **Spans**, you must select at least one **Span Name** to save your configured evaluation.
+1. Select the Span Names you would like your evaluation to run on. *This is optional if **Traces** is selected.
+1. Select the Tags you would like this evaluation to run on and whether you would like to run this evaluation for spans that have any of the tags selected (i.e. **Any of**) or spans that have all the tags selected (i.e. **All of**). 
+2. *Note: This step is optional.
+1. Select what percentage of spans you would like this evaluation to run on by configuring the **Sampling Percentage**. This number must be greater than 0 and less than or equal to 100. A Sampling Percentage of 100% means that the evaluation runs on all valid spans, whereas a Sampling Percentage of 50% means that the evaluation runs on 50% of valid spans.
 
 After you click **Save**, LLM Observability uses the LLM account you connected to power the evaluation you enabled.
 
