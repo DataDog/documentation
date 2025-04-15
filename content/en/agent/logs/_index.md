@@ -171,7 +171,7 @@ logs:
 ```
 Since the Private Location installation folder is restricted to admin access, the Datadog Agent needs permission to access the log file. Follow these steps to verify the user running the Datadog Agent:
 
-1. Press Windows key + R, and search for `Run`.
+1. Press the Windows key and `R`, and search for `Run`.
 2. Find the Datadog Agent, right-click it, and select `Properties`. 
 3. In the `Log On` tab, verify the account (the default is `ddagentuser`).
 4. Close the window.
