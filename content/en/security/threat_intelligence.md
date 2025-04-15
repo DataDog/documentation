@@ -7,6 +7,9 @@ further_reading:
   - link: "/security/application_security/threats/threat-intelligence/"
     tag: "documentation"
     text: "ASM Threat Intelligence"
+  - link: "/security/cloud_siem/threat_intelligence/"
+    tag: "documentation"
+    text: "Cloud SIEM Threat Intelligence"
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
