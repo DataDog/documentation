@@ -62,6 +62,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: ${env:DD_SITE}
 processors:
   infraattributes:
     cardinality: 2
@@ -75,9 +76,6 @@ processors:
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -115,6 +113,7 @@ exporters:
   datadog:
     api:
       key: ${env:DD_API_KEY}
+      site: ${env:DD_SITE}
 processors:
   infraattributes:
     cardinality: 2
@@ -123,9 +122,6 @@ processors:
 connectors:
   datadog/connector:
     traces:
-      compute_top_level_by_span_kind: true
-      peer_tags_aggregation: true
-      compute_stats_by_span_kind: true
 service:
   pipelines:
     traces:
@@ -183,23 +179,22 @@ Use a YAML file to specify the Helm chart parameters for the [Datadog Agent char
 1. Configure the Datadog API and application key secrets:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:
-  site: datadoghq.com
+  site: <DATADOG_SITE>
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  logLevel: info
    {{< /code-block >}}
-   Set `datadog.site` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
-   
-1. Switch the Datadog Agent image tag to use builds with DDOT OpenTelemetry collector:
+   Set `<DATADOG_SITE>` to your [Datadog site][10]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+
+1. Use the Datadog Agent image tag with embedded DDOT Collector::
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 ...
    {{< /code-block >}}
-   
+
 1. Enable the OpenTelemetry Collector and configure the essential ports:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 datadog:

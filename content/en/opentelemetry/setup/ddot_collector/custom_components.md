@@ -43,7 +43,7 @@ Download the Dockerfile template:
 
 The Dockerfile:
 
-- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
+- Creates a [multi-stage build][6] with Ubuntu 24.04 and `datadog/agent:{{% version key="agent_tag" %}}`.
 - Installs Go, Python, and necessary dependencies.
 - Downloads and unpacks the Datadog Agent source code.
 - Creates a virtual environment and installs required Python packages.
@@ -108,7 +108,7 @@ Build your custom Datadog Agent image and push it to a container registry.
 1. Build the image with Docker:
    ```shell
    docker build . -t agent-otel --no-cache \
-     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
+     --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
      --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
 2. Tag and push the image:
@@ -161,29 +161,22 @@ Create a sample configuration file and run your custom Agent to ensure everythin
          key: ${env:DD_API_KEY}
 
    connectors:
-       datadog/connector:
-           traces:
-             compute_top_level_by_span_kind: true
-             peer_tags_aggregation: true
-             compute_stats_by_span_kind: true
+     datadog/connector:
+       traces:
 
    service:
      pipelines:
-       metrics:
-         receivers: [otlp, datadog/connector]
-         processors: [metricstransform, batch]
-         exporters: [datadog]
        traces:
          receivers: [otlp]
-         processors: [batch]
-         exporters: [datadog/connector]
-       traces/2:
-         receivers: [datadog/connector]
-         processors: [batch]
+         processors: [infraattributes, batch]
+         exporters: [datadog, datadog/connector]
+       metrics:
+         receivers: [otlp, datadog/connector, prometheus]
+         processors: [metricstransform, infraattributes, batch]
          exporters: [datadog]
        logs:
          receivers: [otlp]
-         processors: [batch]
+         processors: [infraattributes, batch]
          exporters: [datadog]
    ```
 2. Run the Agent using the following Docker command.
