@@ -4,6 +4,7 @@ description: Learn how to send failure events for DORA Metrics.
 aliases:
 - /continuous_integration/dora_metrics/setup/incidents
 - /dora_metrics/setup/incidents
+- /dora_metrics/failures/datadog_incidents
 - /dora_metrics/failures/incident_api
 - /dora_metrics/failures/pagerduty
 - /dora_metrics/failures/
@@ -39,12 +40,32 @@ Failed deployment events, currently interpreted through failure events, are used
 ## Selecting and configuring a failure data source
 
 {{< tabs >}}
+{{% tab "Datadog Incidents" %}}
+DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. Once incidents are declared, DORA uses them to measure change failure rate and time to restore.
+
+### Requirement
+
+- **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
+
+For incidents to appear in filtered DORA Metrics views, Incidents must be tagged with the following attributes:
+  - `Teams`
+  - `Services`
+  - `Env`: The `Env` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
+
+Incidents can optionnally be tagged with `Severity Level`. 
+
+[201]: /service_management/incident_management/
+[202]: https://app.datadoghq.com/ci/settings/dora
+[203]: https://app.datadoghq.com/incidents/settings?section=property-fields
+
+
+{{% /tab %}}
 {{% tab "PagerDuty" %}}
 [PagerDuty][104] is an incident management platform that equips IT teams with immediate incident visibility, enabling proactive and effective responses to maintain operational stability and resilience.
 
 To integrate your PagerDuty account with DORA Metrics: 
 
-1. Enable PagerDuty as a failure data source in [DORA settings][111]. 
+1. Enable **PagerDuty** as a **Failures** event data source in [DORA settings][111]. 
 
 1. Navigate to **Integrations > Developer Tools** in PagerDuty and click **Generic Webhooks (v3)**. 
 
@@ -132,7 +153,7 @@ Include the `finished_at` attribute in a failure event to mark that the failure 
 
 ### Requirements
 
-- datadog-ci CLI / API is enabled as a failure events data source in [DORA settings][15].
+- **datadog-ci CLI / API** is enabled as a **Failures** events data source in [DORA settings][15].
 - The following attributes are required:
   - `services` or `team` (at least one must be present)
   - `started_at`
