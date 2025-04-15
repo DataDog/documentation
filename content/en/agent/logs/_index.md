@@ -165,7 +165,7 @@ logs:
     path: "C:\\Program Files\\Datadog-Synthetics\\Synthetics\\private-location-service.out.log"
     service: <YOUR_SERVICE>
     source: synthetics
-    tags: #Defined per user preference
+    tags: # Defined per user preference
       - env:<YOUR_ENV>
       - private_location:<YOUR_PRIVATE_LOCATION>
 ```
