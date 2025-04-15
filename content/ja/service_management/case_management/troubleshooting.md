@@ -1,6 +1,12 @@
 ---
-title: ヘルプ
+title: トラブルシューティング
 ---
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+Case Management is not available in the {{< region-param key=dd_datacenter code="true" >}} site.
+</div>
+{{% /site-region %}}
 
 ## 概要
 
@@ -10,7 +16,7 @@ title: ヘルプ
 
 カスタムフィールドを持つ Jira 課題タイプ、プライベート Jira プロジェクト、およびオンプレミス Jira インスタンスはサポートされていません。同期による Jira チケットの自動作成に問題がある場合は、次のセクションを参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Jira プロジェクトが Jira インテグレーション構成画面のドロップダウンに反映されない場合は、`manage_integrations` 権限があるか確認してください。
 

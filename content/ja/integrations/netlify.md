@@ -3,6 +3,7 @@ categories:
 - コラボレーション
 - ログの収集
 - プロビジョニング
+custom_kind: integration
 dependencies: []
 description: Netlify ログを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/netlify/
@@ -17,7 +18,6 @@ integration_id: netlify
 integration_title: Netlify
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: netlify
 public_title: Datadog-Netlify インテグレーション
@@ -39,26 +39,26 @@ Netlify を Datadog と統合すると、以下のことができます。
 * 関数の実行時間を視覚化し、各リクエストの対応するログを確認
 * [Datadog Synthetics Monitoring][3] によるフロントエンドのパフォーマンス監視
 
-## 計画と使用
+## セットアップ
 
 1. [Datadog API キー][4]を生成します。
 2. [Netlify ログドレイン][5]を構成してログを Datadog へ送信します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Netlify インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Netlify インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Netlify インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

@@ -26,6 +26,7 @@ author:
 categories:
 - data stores
 - OS & システム
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
 display_on_public_website: true
@@ -33,9 +34,8 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.4
+integration_version: 2.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: purefb
 public_title: Pure Storage FlashBlade
@@ -83,27 +83,27 @@ tile:
 
 **このインテグレーションには以下が必要です**。
 
- - FlashBlade Purity 3.2.x+
+ - FlashBlade Purity 4.1.x 以降
  - Datadog Agent v7.26.x+、OpenMetricsBaseCheckV2 を利用するため
  - Python 3
- - Pure Storage FlashBlade OpenMetrics エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[Pure Storage GitHub リポジトリ][3]を参照してください。
+ - Pure Storage FlashBlade OpenMetrics エクスポーター v1.0.11 以降は、コンテナ環境でインストールされ、実行されます。インストール方法は、[Pure Storage GitHub リポジトリ][3]を参照してください。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Pure FlashBlade インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][5]を参照してください。
 
 
-#### メトリクスベース SLO
+#### ホスト
 
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.4` を実行します。
+ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==2.0.0` を実行します。
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. FlashBlade に Read-Only ロールのユーザーを作成し、このユーザー用の API トークンを生成します。
 
@@ -152,7 +152,7 @@ instances:
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションの `purefb` を探します。
 
-### ヘルプ
+### トラブルシューティング
 
 #### ダッシュボードにアレイが表示されない
 
@@ -180,17 +180,17 @@ min_collection_interval: 600
 ```
 
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "purefb" >}}
 
 
-### ヘルプ
+### イベント
 
 PureFB インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][10] を参照してください。
 

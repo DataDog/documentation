@@ -17,8 +17,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10164
     source_type_name: JMeter
-  logs:
-    source: jmeter
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -27,6 +25,7 @@ author:
 categories:
 - ログの収集
 - テスト
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
 display_on_public_website: true
@@ -36,7 +35,6 @@ integration_id: jmeter
 integration_title: JMeter
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: jmeter
 public_title: JMeter
@@ -53,10 +51,14 @@ tile:
   - Supported OS::Windows
   - Category::Log Collection
   - Category::Testing
+  - Offering::Integration
   configuration: README.md#Setup
   description: Apache JMeter 用 Datadog プラグイン
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-jmeter-test-results-datadog/
   support: README.md#Support
   title: JMeter
 ---
@@ -68,9 +70,9 @@ tile:
 
 Datadog Backend Listener for Apache JMeter は、テスト結果を Datadog プラットフォームに送信するために使用される、オープンソースの JMeter プラグインです。これにより、レイテンシー、送受信されるバイト数などのテストメトリクスをリアルタイムで報告できます。また、完全なテスト結果をログエントリとして Datadog へ送信することも可能です。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Backend Listener プラグインは手動でインストールする必要があります。[GitHub リポジトリ][1]の最新リリースと最新のインストール手順を参照してください。
 
@@ -90,7 +92,7 @@ Datadog Backend Listener プラグインは手動でインストールする必�
 6. Datadog Backend Listener プラグインの横のチェックボックスをクリックします。
 7. "Apply Changes and Restart JMeter" をクリックします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Datadog にメトリクスの報告を開始するには
 
@@ -115,21 +117,21 @@ Datadog にメトリクスの報告を開始するには
 |samplersRegex|false|.*|監視するサンプラーをフィルターするための任意の正規表現。|
 |customTags|false|`""`|すべてのメトリクスに追加するタグのカンマ区切りリスト
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "jmeter" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 JMeter には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 JMeter には、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

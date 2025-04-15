@@ -23,6 +23,7 @@ author:
   support_email: ervansetiawan@gmail.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
 display_on_public_website: true
@@ -30,9 +31,8 @@ draft: false
 git_integration_title: logstash
 integration_id: logstash
 integration_title: Logstash
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: logstash
 public_title: Logstash
@@ -48,6 +48,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ログの収集
+  - Offering::Integration
   configuration: README.md#Setup
   description: Logstash インスタンスからランタイムメトリクスを収集して監視
   media: []
@@ -66,16 +67,16 @@ Logstash からメトリクスをリアルタイムに取得して、以下の�
 - Logstash の状態を視覚化および監視できます。
 - Logstash のイベントに関する通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Logstash チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Logstash チェックをホストにインストールします。それ以前のバージョンの Agent については、[コミュニティインテグレーションの使用][1]を参照してください。
 
@@ -109,14 +110,14 @@ Kubernetes を使用している場合は、Datadog Operator または Helm チ�
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの収集
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-##### メトリクスベース SLO
+##### ホスト
 
 1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `logstash.d/conf.yaml` ファイルを編集します。
 
@@ -160,7 +161,7 @@ Kubernetes を使用している場合は、Datadog Operator または Helm チ�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 収集データ
+#### ログ収集
 
 Datadog には、Datadog プラットフォームへのログの送信を処理する、Logstash 用の[出力プラグイン][2]があります。
 
@@ -246,9 +247,9 @@ filter {
 
 Logstash チェックは、Logstash バージョン 5.x、6.x および 7.x と互換性があります。また、Logstash 6.0 で導入された新しいマルチパイプラインメトリクスにも対応します。Logstash バージョン 5.6.15、6.3.0 および 7.0.0 でテスト済みです。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "logstash" >}}
 
 
@@ -256,7 +257,7 @@ Logstash チェックは、Logstash バージョン 5.x、6.x および 7.x と�
 
 Logstash チェックには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "logstash" >}}
 
 

@@ -33,7 +33,7 @@ Datadog は、インストールした各 AWS サブインテグレーション�
 
 ### CloudWatch のメトリクスを Datadog に受信する際の遅延を減らすにはどうしたらよいですか？
 
-デフォルトでは、Datadog は 10 分ごとに AWS メトリクスを収集します。詳細は、[Cloud Metric Delay][4] を参照してください。レイテンシーを小さくする必要がある場合は、[Datadog サポート][5]にお問い合わせください。CloudWatch のメトリクスを 2-3 分のレイテンシーでより速く Datadog に取り込むには、[Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose][6] を使用することをお勧めします。
+デフォルトでは、Datadog は 10 分ごとに AWS メトリクスを収集します。詳細は、[Cloud Metric Delay][4] を参照してください。レイテンシーを小さくする必要がある場合は、[Datadog サポート][5]にお問い合わせください。CloudWatch のメトリクスを 2-3 分のレイテンシーでより速く Datadog に取り込むには、[Amazon CloudWatch Metric Streams と Amazon Data Firehose][6] を使用することをお勧めします。
 
 
 ### なぜカスタム AWS/Cloudwatch メトリクスの平均値しか表示されないのでしょうか？

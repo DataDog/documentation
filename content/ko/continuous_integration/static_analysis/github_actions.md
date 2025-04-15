@@ -53,8 +53,6 @@ jobs:
         with:
           dd_app_key: ${{ secrets.DD_APP_KEY }}
           dd_api_key: ${{ secrets.DD_API_KEY }}
-          dd_service: "my-service"
-          dd_env: "ci"
 ```
 
 GitHub 리포지토리에서 Datadog API와 애플리케이션 키를 **반드시** 비밀로 설정해야 합니다. 자세한 정보는 [API 및 애플리케이션 키][1]를 참고하세요.

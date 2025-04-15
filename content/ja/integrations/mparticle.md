@@ -1,7 +1,7 @@
 ---
 categories:
 - mobile
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。
 doc_link: https://docs.datadoghq.com/integrations/mparticle/

@@ -58,9 +58,9 @@ La métrica que elijas se puede filtrar por host o etiqueta (tag) mediante el me
 {{< img src="dashboards/querying/filter-3.png" alt="Filtra la gráfica con el campo «desde», mediante variables de plantilla y lógica booleana" style="width:100%;" >}}
 
 - Utiliza el [filtrado avanzado][7] en el menú desplegable `from` para evaluar las consultas filtradas con booleanos o comodines.
-- Filtra las consultas de manera dinámica mediante variables de plantilla. Añade `$` con la clave de etiqueta y la gráfica aplicará de manera automática la etiqueta que elijas en el menú desplegable de variables de plantilla. Para obtener más información, consulta la [documentación sobre las variables de plantilla][16].
+- Filtra las consultas dinámicamente, utilizando Variables de plantilla. Añade `$` con la clave de etiqueta. El gráfico aplica automáticamente la etiqueta que elijas en el desplegable de variables de plantilla. Para obtener más información, consulta la [documentación sobre variables de plantilla][8].
 
-Para obtener más información sobre las etiquetas, consulta la [documentación sobre el etiquetado][8].
+Para obtener más información sobre etiquetas, consulta la [documentación sobre etiquetado][9].
 
 ### Agregado y rollup
 
@@ -72,9 +72,9 @@ El método de agregación se encuentra junto al menú desplegable del filtro. Po
 
 Independientemente de las opciones elegidas anteriormente, siempre habrá agregación de datos debido a las limitaciones físicas de tamaño del período que contiene la gráfica. Si una métrica se actualiza cada segundo y se dispone de 4 horas de datos, se necesitan 14 400 puntos para mostrar todo. En cada gráfica se muestran unos 300 puntos en un momento dado. Por lo tanto, cada punto mostrado en la pantalla representa 48 puntos de datos.
 
-En la práctica, el Agent recopila métricas cada 15-20 segundos. Por tanto, un día de datos equivale a 4320 puntos de datos. Si presentas los datos de un día en una sola gráfica, Datadog acumula de manera automática los datos. Para obtener más detalles sobre la agregación temporal, consulta la sección de [Introducción a las métricas][9]. Consulta la documentación de [Rollup][10] para obtener más información sobre los intervalos de rollup y sobre cómo Datadog acumula de manera automática los puntos de datos.
+En la práctica, el Agent recopila métricas cada 15-20 segundos. Por tanto, un día de datos equivale a 4.320 puntos de datos. Si muestras los datos de un día en un solo gráfico, Datadog agrupa automáticamente los datos. Para obtener más detalles sobre la agregación temporal, consulta [Introducción a las métricas][10]. Para obtener más información sobre los intervalos de rollup y sobre cómo Datadog amplía automáticamente los puntos de datos, consulta la documentación [rollup][11].
 
-Para acumular los datos de forma manual, utiliza la [función de rollup][11]. Haz clic en el icono sigma para añadir una función y selecciona `rollup` en el menú desplegable. Luego, elige cómo quieres agregar los datos y el intervalo en segundos. 
+Para agrupar manualmente los datos, utiliza la [función rollup][12]. Haz clic en el icono sigma para añadir una función y selecciona `rollup` en el menú desplegable. A continuación, elige cómo quieres agregar los datos y el intervalo en segundos.
 
 Esta consulta crea una sola línea que representa el espacio total disponible en disco, en promedio, en todas las máquinas acumuladas en ciclos de un minuto:
 
@@ -133,15 +133,22 @@ Junto al menú desplegable de método de agregación, elige lo que constituye un
 
 Además, puedes hacer clic en las etiquetas en el menú desplegable de métrica utilizado para [definir la métrica](#define-the-metric) a fin de agrupar y agregar tus datos. 
 
+### Consultas anidadas
+
+La función de consultas anidadas de Datadog te permite añadir capas adicionales de agregación temporal o espacial a los resultados de las consultas existentes. Esta función de consulta avanzada también te permite calcular percentiles y desviaciones estándar en los resultados de consultas agregadas de métricas de tipo count/rate/gauge y acceder a consultas de mayor resolución en periodos históricos.
+
+Para obtener más información, consulta la documentación [Consultas anidadas][13].
+
+
 ### Gráficas avanzadas
 
-En función de tus necesidades de análisis, puedes optar por aplicar otras funciones matemáticas a la consulta. Los ejemplos incluyen funciones de tasas y derivadas, de suavizado y otras. Consulta la [lista de funciones disponibles][12].
+En función de tus necesidades de análisis, puedes optar por aplicar otras funciones matemáticas a la consulta. Algunos ejemplos son frecuencias y derivados, suavizado y otros. Consulta la [lista de funciones disponibles][14].
 
 Datadog también admite la capacidad de graficar tus métricas, logs, trazas y otras fuentes de datos con varias operaciones aritméticas. Utiliza: `+`, `-`, `/`, `*`, `min` y `max` para modificar los valores que se muestran en tus gráficas. Esta sintaxis permite tanto valores enteros como aritméticos mediante varias métricas.
 
 Para graficar métricas por separado, utiliza la coma (`,`). Por ejemplo, `a, b, c`.
 
-**Nota**: Las consultas que utilizan comas solo se admiten en visualizaciones, no funcionan en monitores. Utiliza [operadores booleanos][13] u operaciones aritméticas para combinar varias métricas en un monitor.
+**Nota**: Las consultas que utilizan comas sólo se admiten en visualizaciones, pero no funcionan en monitores. Utiliza [operadores booleanos][15] u operaciones aritméticas para combinar varias métricas en un monitor.
 
 #### Operación aritmética de una métrica con un número entero
 
@@ -208,9 +215,9 @@ Haz clic en **Done** (Listo) para guardar tu trabajo y salir del editor. Siempre
 
 ### Superposiciones de eventos
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widgets de serie temporal que muestran tasas de error de RUM con eventos de despliegue superpuestos" style="width:100%;" >}}
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widgets de serie temporal que muestra tasas de error de RUM con eventos de despliegue superpuestos" style="width:100%;" >}}
 
-Visualiza las correlaciones de eventos mediante la sección de **Superposiciones de eventos** del editor de gráficas para la visualización de [serie temporal][15]. En el campo de búsqueda, ingresa cualquier texto o consulta de búsqueda estructurada. La búsqueda de eventos utiliza la [sintaxis de búsqueda de logs][14].
+Visualiza las correlaciones entre eventos utilizando la sección **Superposición de eventos** del editor de gráficos para la visualización de [series temporales][16]. En el campo de búsqueda, introduce cualquier texto o consulta de búsqueda estructurada. La búsqueda de eventos utiliza la [sintaxis para la búsqueda de logs][17].
 
 La superposición de eventos admite todas las fuentes de datos. Esto permite una correlación más sencilla entre los eventos empresariales y los datos de cualquier servicio de Datadog. 
 
@@ -231,7 +238,7 @@ Con las gráficas divididas, puedes consultar las visualizaciones de métricas d
 1. Puedes cambiar la métrica *sort by* (ordenar por) para ver la relación entre los datos que estás graficando y otras métricas. 
 1. Limita la cantidad de gráficas que se muestran al cambiar el valor *limit to* (limitar a).
 
-## Lectura adicional
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -242,12 +249,13 @@ Con las gráficas divididas, puedes consultar las visualizaciones de métricas d
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
 [7]: /es/metrics/advanced-filtering/
-[8]: /es/getting_started/tagging/
-[9]: /es/metrics/#time-aggregation
-[10]: /es/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /es/dashboards/functions/rollup/
-[12]: /es/dashboards/functions/#function-types
-[13]: /es/metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /es/logs/explorer/search_syntax/
-[15]: /es/dashboards/widgets/timeseries/#event-overlay
-[16]: /es/dashboards/template_variables/
+[8]: /es/dashboards/template_variables/
+[9]: /es/getting_started/tagging/
+[10]: /es/metrics/#time-aggregation
+[11]: /es/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[12]: /es/dashboards/functions/rollup/
+[13]: /es/metrics/nested_queries/
+[14]: /es/dashboards/functions/#function-types
+[15]: /es/metrics/advanced-filtering/#boolean-filtered-queries
+[16]: /es/dashboards/widgets/timeseries/#event-overlay
+[17]: /es/logs/explorer/search_syntax/

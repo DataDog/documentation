@@ -4,7 +4,7 @@ categories:
 - compliance
 - cost management
 - security
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: CloudHealth が Datadog からインスタンスごとのメトリクスを取得できるように支援。
 doc_link: https://docs.datadoghq.com/integrations/cloudhealth/

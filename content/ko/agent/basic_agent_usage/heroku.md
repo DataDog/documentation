@@ -52,7 +52,7 @@ title: Datadog 헤로쿠 빌드팩
    git push heroku main
    ```
 
-완료되면 각 dyno가 시작될 때 Datadog 에이전트가 자동으로 시작됩니다.
+완료되면 각 dyno가 시작될 때 Datadog 에이전트가 자동으로 시작됩니다.
 
 Datadog 에이전트는 statsd/dogstatsd 메트릭 및 이벤트에 대한 포트에 대한 수신 포트 `8125`를 제공합니다. 트레이스는 `8126` 포트에서 수집됩니다.
 
@@ -218,6 +218,52 @@ heroku config:set DD_ENABLE_DBM=true
 
 데이터베이스 모니터링를 사용하려면 Datadog 에이전트에 대한 데이터베이스 자격 증명을 생성해야 하므로 Heroku Postgres Essential Tier 요금제에서는 DBM을 사용할 수 없습니다.
 
+### DogStatsD 매퍼 프로필 활성화(Sidekiq)
+
+[Sidekiq](https://docs.datadoghq.com/integrations/sidekiq/)와 같은 일부 통합은 [DogStatsD Mapper](https://docs.datadoghq.com/developers/dogstatsd/dogstatsd_mapper/) 프로파일이 필요합니다.
+
+새 DogStatsD Mapper 프로필을 추가하려면 [prerun.sh 스크립트](#prerun-script)에 다음 스니펫을 추가하세요.
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: '<PROFILE_NAME>'
+    prefix: '<PROFILE_PREFIX>'
+    mappings:
+      - match: '<METRIC_TO_MATCH>'
+        match_type: '<MATCH_TYPE>'
+        name: '<MAPPED_METRIC_NAME>'
+        tags:
+          '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
+EOF
+```
+
+예를 들어, Sidekiq 통합을 활성화하려면 다음 스니펫을 추가합니다.
+
+```
+cat << 'EOF' >> "$DATADOG_CONF"
+
+dogstatsd_mapper_profiles:
+  - name: sidekiq
+    prefix: "sidekiq."
+    mappings:
+      - match: 'sidekiq\.sidekiq\.(.*)'
+        match_type: "regex"
+        name: "sidekiq.$1"
+      - match: 'sidekiq\.jobs\.(.*)\.perform'
+        name: "sidekiq.jobs.perform"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+      - match: 'sidekiq\.jobs\.(.*)\.(count|success|failure)'
+        name: "sidekiq.jobs.worker.$2"
+        match_type: "regex"
+        tags:
+          worker: "$1"
+EOF
+```
+
 ### 추가 통합 활성화
 
 [Datadog-<INTEGRATION_NAME> 통합 ][19] 활성화:
@@ -241,6 +287,40 @@ instances:
 ```
 
 **참고**: 사용 가능한 모든 설정 옵션은 샘플 [mcache.d/conf.yaml][22]을 참조하세요.
+
+#### prerun.sh 스크립트를 사용하여 통합 설정을 동적 변경
+
+환경 변수에 저장된 설정 세부 정보(예: 데이터베이스 설정 또는 시크릿)가 있는 경우, [prerun.sh 스크립트](#prerun-script)를 사용하여 에이전트 시작 전에 Datadog 에이전트 설정에 동적 추가할 수 있습니다.
+
+예를 들어, Postgres 통합을 활성화하려면 애플리케이션 루트에서 `datadog/conf.d/postgres.d/conf.yaml` 파일을 플레이스홀더와 같이 추가할 수 있습니다(또는 본 [설정 옵션](#configuration)을 변경한 경우 `/$DD_HEROKU_CONF_FOLDER/conf.d/postgres.d/conf.yaml`).
+
+```yaml
+init_config:
+
+instances:
+  - host: <YOUR HOSTNAME>
+    port: <YOUR PORT>
+    username: <YOUR USERNAME>
+    password: <YOUR PASSWORD>
+    dbname: <YOUR DBNAME>
+    ssl: True
+```
+
+그런 다음 `prerun.sh` 스크립트를 사용하여 해당 플레이스홀더를 다음과 같이 환경 변수의 실제 값으로 바꿉니다.
+
+```bash
+# Update the Postgres configuration from above using the Heroku application environment variable
+if [ -n "$DATABASE_URL" ]; then
+  POSTGREGEX='^postgres://([^:]+):([^@]+)@([^:]+):([^/]+)/(.*)$'
+  if [[ $DATABASE_URL =~ $POSTGREGEX ]]; then
+    sed -i "s/<YOUR HOSTNAME>/${BASH_REMATCH[3]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR USERNAME>/${BASH_REMATCH[1]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PASSWORD>/${BASH_REMATCH[2]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR PORT>/${BASH_REMATCH[4]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+    sed -i "s/<YOUR DBNAME>/${BASH_REMATCH[5]}/" "$DD_CONF_DIR/conf.d/postgres.d/conf.yaml"
+  fi
+fi
+```
 
 ### 커뮤니티 통합
 
@@ -292,26 +372,26 @@ fi
 
 아래 예는 `prerun.sh` 스크립트에서 수행할 수 있는 몇 가지 작업을 보여줍니다.
 
-```셸
+```shell
 #!/usr/bin/env bash
 
-# 다이노 타입에 따라 Datadog 에이전트 을 비활성화합니다.
+# Disable the Datadog Agent based on dyno type
 if [ "$DYNOTYPE" == "run" ]; then
   DISABLE_DATADOG_AGENT="true"
 fi
 
-# 다이노 유형에 따라 통합 비활성화
+# Disable integrations based on dyno type
 if [ "$DYNOTYPE" != "web" ]; then
   rm -f "$DD_CONF_DIR/conf.d/gunicorn.d/conf.yaml"
 fi
 
-# HEROKU_SLUG_COMMIT에 따라 앱 버전을 설정합니다.
+# Set app version based on HEROKU_SLUG_COMMIT
 if [ -n "$HEROKU_SLUG_COMMIT" ]; then
-  dd_version=$heroku_slug_commit
+  DD_VERSION=$HEROKU_SLUG_COMMIT
 fi
 
-# "ping" 설치 커뮤니티 통합
-에이전트-wrapper 통합 install -t Datadog-ping==1.0.0
+# Install the "ping" community integration
+agent-wrapper integration install -t datadog-ping==1.0.0
 ```
 
 ## Datadog 콘솔 출력 제한
@@ -412,7 +492,7 @@ datadog-agent run &
 
 도커 이미지의 고급 옵션은 [Datadog 에이전트 도커 파일][28]을 참조하세요.
 
-## 기여
+## 기여하기
 
 [기여 가이드라인][29]을 참조하여 이슈 또는 PR을 [Heroku-buildpack-datadog repository][30]에 여는 방법을 알아보세요.
 

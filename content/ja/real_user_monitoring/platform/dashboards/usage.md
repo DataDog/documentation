@@ -1,9 +1,9 @@
 ---
 aliases:
-- /real_user_monitoring/dashboards/frustration_signals_dashboard
-- /real_user_monitoring/dashboards/user_sessions_dashboard
-- /real_user_monitoring/platform/dashboards/frustration_signals_dashboard
-- /real_user_monitoring/platform/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/dashboards/user_sessions_dashboard
+- /ja/real_user_monitoring/platform/dashboards/frustration_signals_dashboard
+- /ja/real_user_monitoring/platform/dashboards/user_sessions_dashboard
 further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
@@ -81,9 +81,9 @@ RUM フラストレーションシグナルダッシュボードは、ユーザ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/data_collected/
-[2]: /ja/real_user_monitoring/ios/data_collected/
-[3]: /ja/real_user_monitoring/android/data_collected/
-[4]: /ja/real_user_monitoring/reactnative/data_collected/
-[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
+[1]: /ja/real_user_monitoring/browser/data_collected/
+[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/ios/data_collected/
+[3]: /ja/real_user_monitoring/mobile_and_tv_monitoring/android/data_collected/
+[4]: /ja/real_user_monitoring/mobile_and_tv_monitoring/react_native/data_collected/
+[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/flutter/data_collected/
 [6]: /ja/data_security/real_user_monitoring/

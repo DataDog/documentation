@@ -10,78 +10,89 @@ cascade:
     tags:
     - CI テスト
     - CI テスト
+    - test optimization
+    - test visibility
+    - 失敗したテスト
+    - 不安定なテスト
+    - サポートされる機能
 further_reading:
-- link: /monitors/types/ci/
-  tag: ドキュメント
-  text: CI Test モニターの作成
-- link: /continuous_integration/guides/find_flaky_tests/
-  tag: ドキュメント
-  text: 不安定なテストを見つける
-- link: /continuous_integration/guides/rum_integration/
-  tag: ドキュメント
-  text: CI Visibility と RUM の連動
-- link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: CI Visibility のトラブルシューティング
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: リリースノート
+  text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
+- link: https://www.datadoghq.com/blog/datadog-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で CI パイプラインとテストを監視する
 - link: https://www.datadoghq.com/blog/ci-test-visibility-with-rum/
   tag: ブログ
   text: CI Visibility と RUM を使ったエンドツーエンドのテストのトラブルシューティング
-title: Datadog における Test Visibility
+- link: /monitors/types/ci/
+  tag: ドキュメント
+  text: CI Test Monitors について
+- link: /tests/flaky_test_management/
+  tag: ドキュメント
+  text: 不安定なテストの管理について
+- link: /tests/browser_tests/
+  tag: ドキュメント
+  text: RUM を使ったブラウザテストのインスツルメント方法
+- link: /tests/troubleshooting/
+  tag: ドキュメント
+  text: Test Optimization のトラブルシューティング方法
+title: Datadog の Test Optimization
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Optimization は利用できません。</div>
 {{< /site-region >}}
 
 ## 概要
 
-[Test Visibility][1] は、テストからの重要なメトリクスと結果を表示することで、CI 状態のテストファーストビューを提供します。パイプラインを保守しているのではなく、関連するコードを保守しているため、最も気になるパフォーマンス問題やテストの失敗を調査するのに役立ちます。
+[Test Optimization][1] は、テストから見た視点で CI のヘルス状態を把握できる機能です。重要なメトリクスやテスト結果を表示することで、パイプライン全体ではなく、担当しているコードに関連するパフォーマンス問題やテスト失敗を調査できます。
 
-## 送信 - Agent チェック
+## セットアップ
 
-{{< whatsnext desc="Datadog で Test Visibility をセットアップするための言語を選択します。" >}}
-    {{< nextlink href="tests/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="tests/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="tests/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="tests/setup/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="tests/setup/junit_xml" >}}JUnit のテストレポートファイルを Datadog にアップロードする{{< /nextlink >}}
-    {{< nextlink href="tests/containers" >}}コンテナで実行されるテスト{{< /nextlink >}}
-{{< /whatsnext >}}
+Datadog で Test Optimization を構成するためにオプションを選択してください。
 
-テストに加えて、Test Visibility はプロジェクトのテストフェーズ全体を視覚化します (Ruby を除く)。
+{{< partial name="continuous_integration/ci-tests-setup.html" >}}
+
+</br>
+
+Test Optimization はテストだけでなく、プロジェクトのテスト工程全体を可視化します。
 
 ### サポートされる機能
 
-|                                                                                                                                                                                                                  |   ダッシュボード      |   モニタリング    |       Javascript       |  設定   |   エクスプローラー    |   Exadata   |       JUnit Xml        |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------:|:---------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
-| {{< ci-details title="正確な時刻/継続時間結果" >}}テスト開始時刻と継続時間におけるマイクロ秒単位の分解能{{< /ci-details >}}                                                                            | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="インテグレーションテストの分散型トレース" >}}Datadog でインスツルメンテーションされた外部サービスを呼び出すテストは、テストの詳細で完全な分散型トレースを表示します。{{< /ci-details >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Agent ベースのレポート" >}}Datadog Agent を通じてテスト情報を報告する能力。{{< /ci-details >}}                                                                                 | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="エージェントレスレポート" >}}Datadog Agent を使用せずにテスト情報を報告する能力。{{< /ci-details >}}                                                                                   | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="テストスイートレベルの可視性" >}}セッション、モジュール、スイート、テストを含むテストプロセス全体の可視性。{{< /ci-details >}}                                                | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="手動 API" >}}Datadog の自動インスツルメンテーションでサポートされていないテストフレームワーク用の CI Visibility イベントをプログラム的に作成する能力。{{< /ci-details >}}               | {{< X >}} | {{< X >}} |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="テストごとのコード所有者" >}}CODEOWNERS ファイルに基づくテストファイルの所有者の自動検出。{{< /ci-details >}}                                                                     | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (部分的)  |
-| {{< ci-details title="ソースコードの開始/終了" >}}テストの開始行と終了行の自動レポート。{{< /ci-details >}}                                                                                        | {{< X >}} | {{< X >}} | {{< X >}} (開始のみ) | {{< X >}} | {{< X >}} (開始のみ) | {{< X >}} | {{< X >}} (開始のみ) |
-| {{< ci-details title="CI と git 情報" >}}CI プロバイダー、git コミット SHA、パイプライン URL などの git や CI 環境のメタデータの自動収集。{{< /ci-details >}}                                       | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Git メタデータのアップロード" >}}Intelligent Test Runner で使用される git ツリー情報の自動アップロード。{{< /ci-details >}}                                                                      | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} |           | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Intelligent Test Runner" >}}コードカバレッジと git メタデータに基づいてインテリジェントにテストをスキップする Intelligent Test Runner を有効にする能力。{{< /ci-details >}}                      | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} |           | {{< X >}} |                        |
-| {{< ci-details title="コードカバレッジサポート" >}}全体のコードカバレッジのメトリクスを報告する能力。{{< /ci-details >}}                                                                                                | {{< X >}} | {{< X >}} |       {{< X >}}        |           |           | {{< X >}} |   {{< X >}} (手動)   |
-| {{< ci-details title="ベンチマークテストサポート" >}}ベンチマークテストのパフォーマンス統計の自動検出。{{< /ci-details >}}                                                                          | {{< X >}} |           |                        | {{< X >}} |           | {{< X >}} |                        |
-| {{< ci-details title="パラメタライズドテスト" >}}パラメタライズドテストの自動検出。{{< /ci-details >}}                                                                                                     | {{< X >}} | {{< X >}} |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+|                                                                                                                                                                                                                                   |   .NET    | Java/JVM ベース |       Javascript       |  Python   |         Ruby          |   Swift   |     Go    |       JUnit Xml        |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------:|:--------------------:|:----------------------:|:---------:|:---------------------:|:---------:|:---------:|:----------------------:|
+| {{< ci-details title="正確な時刻/継続時間結果" >}}テスト開始時刻と継続時間におけるマイクロ秒単位の分解能{{< /ci-details >}}                                                                                             | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="インテグレーションテストの分散型トレース" >}}Datadog でインスツルメンテーションされた外部サービスを呼び出すテストは、テストの詳細で完全な分散型トレースを表示します。{{< /ci-details >}}                  | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Agent ベースのレポート" >}}Datadog Agent を通じてテスト情報を報告する能力。{{< /ci-details >}}                                                                                                  | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="エージェントレスレポート" >}}Datadog Agent を使用せずにテスト情報を報告する能力。{{< /ci-details >}}                                                                                                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Test suite level visibility" >}}セッション、モジュール、スイート、テストなど、テスト工程全体を可視化します。{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="手動 API" >}}Datadog の自動インスツルメンテーションでサポートされていないテストフレームワーク用の CI Visibility イベントをプログラム的に作成する能力。{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
+| {{< ci-details title="Codeowner by test" >}}CODEOWNERS ファイルに基づき、テストファイルのオーナーを自動的に検出します。{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (部分的)  |
+| {{< ci-details title="ソースコードの開始/終了" >}}テストの開始行と終了行の自動レポート。{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (開始のみ) | {{< X >}} | {{< X >}} (開始のみ)| {{< X >}} | {{< X >}} | {{< X >}} (開始のみ) |
+| {{< ci-details title="CI と git 情報" >}}CI プロバイダー、git コミット SHA、パイプライン URL などの git や CI 環境のメタデータの自動収集。{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Git metadata upload" >}}<a href="/tests/test_impact_analysis">Test Impact Analysis</a> に使用する Git ツリー情報を自動でアップロードします。{{< /ci-details >}}                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Test Impact Analysis *" >}}<a href="/tests/test_impact_analysis">Test Impact Analysis</a> を有効にし、コードカバレッジと Git メタデータに基づいてテストをインテリジェントにスキップできます。{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Code coverage support" >}}<a href="/tests/code_coverage">総合的なコードカバレッジ</a>のメトリクスをレポートできます。{{< /ci-details >}}                                                                              | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |   {{< X >}} (手動)   |
+| {{< ci-details title="ベンチマークテストサポート" >}}ベンチマークテストのパフォーマンス統計の自動検出。{{< /ci-details >}}                                                                                           | {{< X >}} |                      |                        | {{< X >}} |                       | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="パラメタライズドテスト" >}}パラメタライズドテストの自動検出。{{< /ci-details >}}                                                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} |           |                        |
+| {{< ci-details title="Early flake detection *" >}}<a href="/tests/flaky_test_management/early_flake_detection">新規テストを再試行</a>して不安定性を検出します (自動)。{{< /ci-details >}}                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Auto test retries *" >}}<a href="/tests/flaky_test_management/auto_test_retries">失敗したテストを自動的に最大 N 回再試行</a>し、不安定性によるビルド失敗を回避します。{{< /ci-details >}}    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Selenium RUM integration" >}}RUM が組み込まれたアプリケーションをテストする際、<a href="/tests/browser_tests">ブラウザセッションをテストケースに自動的にリンク</a>します。{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
+
+\* この機能はオプトイン (任意有効化) であり、[**Test Optimization Settings** ページ][2]で有効化が必要です。
 
 ## デフォルト構成
 
 テストは、与えられた条件のセットに対するコードの振る舞いを評価します。これらの条件の中には、OS やランタイムなど、テストが実行される環境に関連するものもあります。そのため、開発者は通常、異なる条件下でテストを実行するように構成し、 すべての条件下で期待通りの挙動が得られるかどうかを検証します。この特定の条件のセットを*構成*と呼びます。
 
-Test Visibility では、複数の構成を持つテストは、各構成ごとに別々のテストとして扱われます。いくつかの構成のうち一つが失敗し、他が成功した場合、その特定のテストと構成の組み合わせのみが失敗とマークされます。
+Test Optimization では、複数の構成を持つテストは、それぞれの構成ごとに別個のテストとして扱われます。構成の 1 つが失敗し、他が成功した場合は、その特定のテストおよび構成の組み合わせだけが失敗としてマークされます。
 
-例えば、1 つのコミットをテストする際に、3 つの異なる Python バージョンに対して実行する Python テストがあると仮定します。そのうちのひとつのバージョンのテストが失敗すると、その特定のテストは失敗とマークされ、他のバージョンは合格とマークされます。同じコミットに対してテストを再試行し、3 つすべてのバージョンの Python のテストがパスした場合、以前失敗したバージョンのテストは合格と不安定の両方としてマークされ、他の 2 つのバージョンは合格のままで不安定が検出されません。
+たとえば、1 つのコミットに対してテストを実行し、Python のテストを 3 つの異なる Python バージョンで動かすとします。もしそのうち 1 つのバージョンでテストが失敗した場合、その特定のテストは失敗としてマークされ、他のバージョンは成功としてマークされます。次に、同じコミットに対してテストを再実行し、3 つの Python バージョンすべてでテストが成功した場合、以前失敗したバージョンのテストは「成功」であると同時に「flaky (不安定)」としてマークされ、他の 2 つのバージョンは引き続き成功としてマークされ、不安定性は検出されません。
 
 ### テスト構成属性
 
-Test Visibility でテストを実行する際、ライブラリはテスト実行環境に関する情報を検出し、それをテストタグとして報告します。例えば、`Windows` や `Linux` などの OS 名や、`arm64` や `x86_64` などのプラットフォームのアーキテクチャが、各テストのタグとして追加されます。これらの値は、特定の構成でテストが失敗または不安定であるが他の構成ではない場合、コミットやブランチの概要ページで表示されます。
+Test Optimization を使ってテストを実行すると、ライブラリはテストの実行環境に関する情報を検出し、テストのタグとしてレポートします。たとえば、Windows や Linux といったオペレーティングシステムの名前、arm64 や x86_64 といったプラットフォームのアーキテクチャなどが各テストにタグとして追加されます。これらの値は、特定の構成だけ失敗または不安定になった場合に、コミットおよびブランチ概要ページで表示されます。
 
 以下のタグは、テスト構成を特定するために自動的に収集され、特定のプラットフォームにのみ適用されるものもあります。
 
@@ -101,13 +112,28 @@ Test Visibility でテストを実行する際、ライブラリはテスト実�
 | `ui.orientation`       | UI が実行されるオリエンテーション。                                   |
 | `ui.localization`      | アプリケーションの言語。                                    |
 
+### パラメータ化されたテストの構成
+
+パラメータ化されたテストを実行すると、ライブラリは使用されたパラメータ情報を検出してレポートします。パラメータはテスト構成の一部であるため、同じテストケースでも異なるパラメータで実行された場合、Test Optimization では 2 つの異なるテストとして扱われます。
+
+もしテストパラメータが非決定的 (ノンデターミニスティック) であり、テストを実行するたびに異なる値になる場合、Test Optimization では各テスト実行が新規テストとして扱われます。その結果、実行履歴、不安定検出、Test Impact Analysis などの一部の機能が正しく動作しない場合があります。
+
+非決定的なテストパラメータの例としては、以下のようなものがあります。
+
+- 現在の日付
+- ランダム値
+- テスト実行環境に依存する値 (絶対パスや現在のユーザー名など) 
+- 決定的な文字列表現を持たない値 (`toString()` メソッドがオーバーライドされていない Java クラスのインスタンスなど) 
+
+非決定的なテストパラメータの使用は避けてください。どうしても避けられない場合は、一部のテストフレームワークが、非決定的パラメータに対して決定的な文字列表現 (パラメータ表示名をオーバーライドするなど) を指定する方法を提供しています。
+
 ## カスタム構成
 
-環境変数やテスト実行時の引数など、開発者が使用するアプローチに依存する場合があるため、直接識別して自動的に報告することができない構成もあります。そのような場合は、Test Visibility が適切に識別できるように、ライブラリに構成の詳細を提供する必要があります。
+環境変数やテスト実行時の引数、開発者が独自に使用する手法などに依存しているため、自動的に特定・レポートできない構成もあります。そうした場合には、テストを正しく識別できるよう、ライブラリに対して構成の詳細を明示する必要があります。
 
-これらのタグを `test.configuration` プレフィックスを使用して、`DD_TAGS` 環境変数の一部として定義します。
+これを行うには、`DD_TAGS` 環境変数で `test.configuration` のプレフィックスを使ってタグを定義します。
 
-例えば、以下のテスト構成タグはディスクの応答時間が遅く、利用可能なメモリが少ないテスト構成を識別します。
+たとえば、以下のテスト構成タグは、ディスクの応答時間が遅くメモリが少ないというテスト構成を示します。
 
 {{< code-block lang="bash" >}}
 DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
@@ -117,37 +143,37 @@ DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
 
 注: `test.configuration.cpu.memory` のようにネストされた `test.configuration` タグはサポートされていません。
 
-これらの構成タグを使ってフィルターをかけるには、[これらのタグ用のファセットを作成する必要があります][2]。
+こうした構成タグを使ってフィルタリングするには、[これらのタグのファセットを作成する必要があります][3]。
+
+## 開発者ワークフローを強化する
+
+{{< whatsnext desc="コードカバレッジデータをレポートするツールと Test Optimization を統合し、RUM を使ってブラウザテストを強化し、開発サイクルにおける問題の特定と解決の効率化を通じてプラットフォームを横断したインサイトを得ましょう。" >}}
+{{< nextlink href="/tests/developer_workflows/" >}}Datadog を活用した開発者ワークフローの強化{{< /nextlink >}}
+{{< nextlink href="/tests/code_coverage" >}}コードカバレッジについて{{< /nextlink >}}
+{{< nextlink href="/tests/browser_tests" >}}Browser RUM を使用して Cypress ブラウザテストをインスツルメントする{{< /nextlink >}}
+{{< nextlink href="/tests/swift_tests" >}}RUM で Swift テストをインスツルメントする{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## CI テストデータの使用
 
 {{% ci-information-collected %}}
 
-### ヘルプ
-
-{{< whatsnext desc="Test Visibility との以下のインテグレーションについてご覧ください。" >}}
-{{< nextlink href="/tests/developer_workflows/" >}}Datadog による開発者ワークフローの強化{{< /nextlink >}}
-{{< nextlink href="/tests/code_coverage" >}}コードカバレッジ{{< /nextlink >}}
-{{< nextlink href="/tests/browser_tests" >}}ブラウザ RUM で Cypress ブラウザテストをインスツルメンテーションする{{< /nextlink >}}
-{{< nextlink href="/tests/swift_tests" >}}ブラウザ RUM で Swift テストをインスツルメンテーションする{{< /nextlink >}}
-{{< /whatsnext >}}
-
-[Intelligent Test Runner][12] が .NET、Java、JavaScript、Swift で有効になっている場合、各テストの対象となるファイル名と行番号を含むテストごとのコードカバレッジ情報がプロジェクトから収集されます。
-
-[ダッシュボード][8]または[ノートブック][9]を作成する際、検索クエリでテスト実行データを使用すると、視覚化ウィジェットのオプションが更新されます。
+[ダッシュボード][4]や[ノートブック][5]を作成するとき、検索クエリに CI テストデータを使用することで、ビジュアライゼーションウィジェットのオプションが更新されます。詳細については、[ダッシュボード][6]および[ノートブックのドキュメント][7]を参照してください。
 
 ## テストデータに対するアラート
 
-[**Test Runs** ページ][10]で、失敗したテストや不安定なテスト、CI テストのパフォーマンスを評価する場合、**Create Monitor** をクリックして、[CI Test モニター][11]を作成します。
+失敗または不安定になったテスト、あるいは CI テストのパフォーマンスを評価するとき、[Test Optimization Explorer][8] での検索クエリを [CI Test モニター][9]にエクスポートできます。**Export** ボタンをクリックするとエクスポートが実行されます。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-services
-[2]: /ja/continuous_integration/explorer/facets/
-[8]: https://app.datadoghq.com/dashboard/lists
-[9]: https://app.datadoghq.com/notebook/list
-[10]: https://app.datadoghq.com/ci/test-runs
-[11]: /ja/monitors/types/ci/
-[12]: /ja/tests/code_coverage/
+[1]: https://app.datadoghq.com/ci/test-repositories
+[2]: https://app.datadoghq.com/ci/settings/test-optimization
+[3]: /ja/continuous_integration/explorer/facets/
+[4]: https://app.datadoghq.com/dashboard/lists
+[5]: https://app.datadoghq.com/notebook/list
+[6]: /ja/dashboards
+[7]: /ja/notebooks
+[8]: https://app.datadoghq.com/ci/test-runs
+[9]: /ja/monitors/types/ci/

@@ -1,0 +1,59 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with list_stream widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "list_stream",
+        "requests": [
+          {
+            "response_format": "event_list",
+            "query": {
+              "data_source": "llm_observability_stream",
+              "query_string": "@event_type:span @parent_id:undefined",
+              "indexes": []
+            },
+            "columns": [
+              {
+                "field": "@status",
+                "width": "compact"
+              },
+              {
+                "field": "@content.prompt",
+                "width": "auto"
+              },
+              {
+                "field": "@content.response.content",
+                "width": "auto"
+              },
+              {
+                "field": "timestamp",
+                "width": "auto"
+              },
+              {
+                "field": "@ml_app",
+                "width": "auto"
+              },
+              {
+                "field": "service",
+                "width": "auto"
+              },
+              {
+                "field": "@meta.evaluations.quality",
+                "width": "auto"
+              },
+              {
+                "field": "@meta.evaluations.security",
+                "width": "auto"
+              },
+              {
+                "field": "@duration",
+                "width": "auto"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

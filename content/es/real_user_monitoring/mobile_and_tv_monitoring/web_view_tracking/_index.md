@@ -33,14 +33,14 @@ También puedes grabar todo el recorrido del usuario en vistas web y nativas en 
 
 ### Requisitos previos
 
-Configura el SDK de RUM Browser en la página web que desees que se represente en tu aplicación móvil. Para obtener más información, consulta [<txprotected>Monitorización</txprotected> de RUM Browser][2].
+Configura el SDK de RUM Browser en la página web que desees que se represente en tu aplicación móvil. Para obtener más información, consulta [Monitorización de RUM Browser][2].
 
 ### Declarar `DatadogWebViewTracking` como dependencia (solo iOS)
 
 Para activar el informe de bloqueos, asegúrate de activar también [RUM][3] o [Logs][4]. A continuación, añade el paquete según tu administrador de dependencias y actualiza tu fragmento de inicialización.
 
-{{< pestañas >}}
-{{% pestaña "CocoaPods" %}}
+{{< tabs >}}
+{{% tab "CocoaPods" %}}
 
 Puedes utilizar [CocoaPods][1] para instalar `dd-sdk-ios`:
 ```
@@ -49,8 +49,8 @@ pod 'DatadogWebViewTracking'
 
 [1]: https://cocoapods.org/
 
-{{% /pestaña %}}
-{{% pestaña "Swift Package Manager (SPM)" %}}
+{{% /tab %}}
+{{% tab "Swift Package Manager (SPM)" %}}
 
 Para integrar con Swift Package Manager de Apple, añade lo siguiente como una dependencia a tu `Package.swift`:
 ```swift
@@ -63,8 +63,8 @@ DatadogCore
 DatadogWebViewTracking
 ```
 
-{{% /pestaña %}}
-{{% pestaña "Carthage" %}}
+{{% /tab %}}
+{{% tab "Carthage" %}}
 
 Puedes utilizar [Carthage][1] para instalar `dd-sdk-ios`:
 ```
@@ -78,13 +78,13 @@ DatadogWebViewTracking.xcframework
 
 [1]: https://github.com/Carthage/Carthage
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Instrumentar tus vistas web
 
-{{< <txprotected>pestañas</txprotected> >}}
-{{% pestaña "Android" %}}
+{{< tabs >}}
+{{% tab "Android" %}}
 
 1. Si deseas reenviar eventos de RUM desde páginas web, descarga la [última versión][1] del SDK de RUM Android y configura la función RUM siguiendo la [guía dedicada][2].
 2. Si deseas reenviar eventos de logs desde páginas web, descarga la [última versión][3] de SDK de logs Android y configura la función logs siguiendo la [guía dedicada][4].
@@ -109,8 +109,8 @@ DatadogWebViewTracking.xcframework
 [3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
 [4]: /es/logs/log_collection/android/?tab=kotlin#setup
 
-{{% /pestaña %}}
-{{% pestaña "iOS" %}}
+{{% /tab %}}
+{{% tab "iOS" %}}
 
 El SDK de RUM iOS proporciona API para controlar el rastreo de vistas web. Para activar el rastreo de vistas web, proporciona la instancia `WKWebView`.
 
@@ -129,8 +129,8 @@ WebViewTracking.disable(webView: webView)
 
 `allowedHosts` coincide con los hosts determinados y su subdominio. No se permite ninguna expresión regular.
 
-{{% /pestaña %}}
-{{% pestaña "Flutter" %}}
+{{% /tab %}}
+{{% tab "Flutter" %}}
 
 El SDK de RUM Flutter proporciona API para que puedas controlar el rastreo de vistas web cuando se utiliza el paquete [`webview_flutter`][1]. Para añadir el rastreo de vistas web, llama al método de extensión `trackDatadogEvents` en `WebViewController`, proporcionando el lista de hosts permitidos.
 
@@ -161,8 +161,8 @@ Ten en cuenta que `JavaScriptMode.unrestricted` es necesario para que el rastreo
 [1]: https://pub.dev/packages/webview_flutter
 [2]: https://pub.dev/packages/datadog_webview_tracking
 
-{{% /pestaña %}}
-{{% pestaña "React Native" %}}
+{{% /tab %}}
+{{% tab "React Native" %}}
 
 1. Añade `react-native-webview` a tu aplicación siguiendo la [documentación oficial de instalación][1].
 
@@ -189,8 +189,8 @@ Ten en cuenta que `JavaScriptMode.unrestricted` es necesario para que el rastreo
 
 [1]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md
 
-{{% /pestaña %}}
-{{< /pestañas >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Accede a tus vistas web
 
@@ -208,7 +208,7 @@ Consulta [Facturación de RUM & Session Replay][6] para más detalles sobre cóm
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /es/real_user_monitoring/session_replay/mobile/setup_and_configuration

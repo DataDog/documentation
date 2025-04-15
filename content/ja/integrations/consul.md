@@ -22,8 +22,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 122
     source_type_name: Consul
-  logs:
-    source: consul
   monitors:
     consul: assets/monitors/consul_status.json
   saved_views:
@@ -42,6 +40,7 @@ categories:
 - network
 - notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_on_public_website: true
@@ -49,9 +48,8 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.6.0
+integration_version: 2.6.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: consul
 public_title: Consul
@@ -65,17 +63,31 @@ tile:
   classifier_tags:
   - Category::構成 & デプロイ
   - Category::コンテナ
-  - Category::ログの収集
+  - Category::Log Collection
   - Category::ネットワーク
   - Category::Notifications
   - Category::オーケストレーション
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: ドキュメント
+    url: https://docs.datadoghq.com/integrations/guide/hcp-consul
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-consul-health-and-performance-with-datadog
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/engineering/consul-at-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/consul-metrics/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/consul-monitoring-tools/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/consul-datadog/
   support: README.md#Support
   title: Consul
 ---
@@ -104,18 +116,18 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 メトリクスに加えて、Datadog Agent は Consul の健全性チェックごとにサービスチェックを送信し、新しいリーダー選出ごとにイベントを送信します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -164,7 +176,7 @@ Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに�
 
 3. [Agent を再起動します][3]。
 
-##### ヘルプ
+##### DogStatsD
 
 Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を介して同じ追加メトリクスのセットを Agent に送信するように Consul を構成できます。
 
@@ -213,7 +225,7 @@ Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を
 
 3. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -259,7 +271,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | `<INIT_CONFIG>`      | 空白または `{}`                      |
 | `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:8500"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -300,9 +312,9 @@ $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 23176/consul
 ```
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "consul" >}}
 
 
@@ -310,16 +322,16 @@ Consul Agent が DogStatsD に送信するメトリクスの詳細について�
 
 ネットワークレイテンシーメトリクスの計算方法については、[Consul のネットワーク座標系に関するドキュメント][5]を参照してください。
 
-### ヘルプ
+### イベント
 
 **consul.new_leader**:<br>
 Datadog Agent は、Consul クラスターが新しいリーダーを選出すると、`prev_consul_leader`、`curr_consul_leader`、および `consul_datacenter` のタグを付けてイベントを送信します。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "consul" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

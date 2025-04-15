@@ -11,7 +11,7 @@ further_reading:
 - link: /synthetics/guide/popup/#moving-popups
   tag: Documentación
   text: Gestionar las ventanas emergentes que aparecen de manera inesperada
-title: Usar aserciones JavaScript personalizadas en tests de navegador
+title: Utiliza aserciones personalizadas de JavaScript en los tests de navegador
 ---
 
 ## Información general
@@ -20,7 +20,7 @@ En este artículo te explicamos cómo probar una interfaz de usuario (IU) usando
 
 Para crear una aserción con JavaScript personalizado, sigue estos pasos:
 
-1. Haz clic en **Assertion** (Aserción) y selecciona **Test your UI with custom JavaScript** (Prueba tu IU con JavaScript personalizado).
+1. Haz clic en **Assertion** (Aserción) y selecciona **Test de aserción personalizada de JavaScript**.
 2. Escribe el cuerpo de la aserción.
 3. Si quieres, puedes seleccionar un elemento objetivo de la IU.
 4. Haz clic en **Apply** (Aplicar).
@@ -47,7 +47,7 @@ Los resultados de los tests de navegador contienen logs `console.error`.
 
 ## Declarar que un botón de opción está marcado
 
-Para verificar que se ha marcado un botón de selección, introduce `return document.querySelector("<SELECTORS>").checked = true;` en la aserción del cuerpo.
+Para comprobar que un botón de opción esté marcado, utiliza `return document.querySelector("<SELECTORS>").checked === true;` en la aserción del cuerpo.
 
 ## Establecer el valor de un elemento del almacenamiento local concreto
 

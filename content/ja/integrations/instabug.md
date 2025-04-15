@@ -1,7 +1,8 @@
 ---
 app_id: instabug
 app_uuid: 37d9bc39-888f-4bec-b8c5-3c137cf88f84
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://www.instabug.com/
   name: Instabug
@@ -9,8 +10,8 @@ author:
   support_email: support@instabug.com
 categories:
 - アラート設定
-- モニタリング
 - 問題追跡
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/instabug/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: instabug
 integration_title: Instabug
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: instabug
 public_title: Instabug
@@ -37,7 +37,6 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   - Category::Alerting
-  - Category::Monitoring
   - Category::Issue Tracking
   configuration: README.md#Setup
   description: モバイルアプリの健全性とパフォーマンスを監視・追跡します。
@@ -61,10 +60,14 @@ tile:
     image_url: images/instabug-crash-details.png
     media_type: image
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/instabug-mobile-usability/
   support: README.md#Support
   title: Instabug
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 ## 概要
 
@@ -90,14 +93,21 @@ Datadog の Instabug ダッシュボードウィジェットを使用すると�
 ## 収集データ
 Instabug インテグレーションには、メトリクスは含まれません。
 
-## サービスのチェック
+## サービスチェック
 Instabug インテグレーションには、サービスのチェック機能は含まれません。
 
 ## サポート
 ご不明な点は、[Instabug のサポートチーム][5]までお問い合わせください。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Leverage user context to debug mobile performance issues with the Instabug Datadog Marketplace offering][6]
 
 [1]: http://instabug.com
 [2]: https://dashboard.instabug.com/signup
 [3]: https://docs.instabug.com/docs/introduction
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: mailto:support@instabug.com
+[6]: https://www.datadoghq.com/blog/instabug-mobile-usability/

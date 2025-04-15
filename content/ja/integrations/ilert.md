@@ -26,6 +26,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: ilert
 integration_title: ilert
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: ilert
 public_title: ilert
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog アラートの通知を受け取り ilert でアクションを実行する
   media:
@@ -78,7 +79,7 @@ ilert と統合すると、以下のことができます。
 - インシデントに取り組み、エスカレーションの発生時にポリシーを設定する
 - 誰がオンコールかのデイリーリマインダーを設定
 
-## 計画と使用
+## セットアップ
 
 ### ilert
 
@@ -102,7 +103,7 @@ ilert と統合すると、以下のことができます。
 
    ![ilert Alert Source View][5]
 
-### Ruby
+### Datadog
 
 #### アラートチャネルとして ilert Webhook を追加します
 
@@ -135,21 +136,21 @@ ilert と統合すると、以下のことができます。
 
 4. Save をクリックします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 ilert インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 ilert のトリガーおよび解決されたイベントは、ilert プラットフォーム ダッシュボードに表示されます。
 
-### ヘルプ
+### サービスチェック
 
 ilert インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

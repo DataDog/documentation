@@ -19,71 +19,53 @@ title: 使用属性
 Usage Attribution は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 </div>
 
-管理者は Datadog の Plan & Usage セクションから Usage Attribution タブにアクセスできます。Usage Attribution ページでは、以下の情報と機能が確認できます。
+管理者または Usage Read 権限を持つユーザーは、Datadog の Plan &amp; Usage セクションから Usage Attribution タブにアクセスできます。 Usage Attribution ページでは、以下の情報と機能を提供します。
 
 - 使用方法が分類されている既存のタグキーを一覧表示し、新しいタグキー（最大 3 つ）を変更および追加する機能を提供します。
-- ほとんどの使用量タイプに対応したタブ区切り値 (TSV) ファイルを毎日生成します。
-- 毎月月末に使用方法を要約します。
-- UI および TSV ダウンロードとしてデータを表示します。
+- 各月末の使用量を要約し、タグ別に時間経過とともに使用量を視覚化します。
+- 月次および時間ごとの CSV ファイルを生成します。
 
-このツールでは、以下のような多くの使用タイプがサポートされていません。
-
-- Analyzed Logs (Security)
-- インシデント管理
-- Network Flows
-- CI Spans
-
-Datadog は、以下の製品の Estimated Usage Attribution 値を提供しています。
-
-- インデックス化されたログイベント
-- 収集されたログ
-- Indexed Span
-- Ingested Span
-- リアルユーザーモニタリングの総セッション数
+この機能は、インスツルメンテーション中にタグ付けできない製品の使用量には対応していません。 例えば、Incident Management ユーザー、CI Pipeline and Test ユーザー、並列テストスロット、監査証跡などです。
 
 ## はじめに
 
-日次データを受け取るには、管理者がユーザーインターフェイスで新しいレポートを作成する必要があります。
+日次データの受信を開始するには、管理者はレポートのタグを選択する必要があります。
 
 {{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Datadog で使用量属性を始める" style="width:100%;" >}}
 
-**Applied Tags** セクションでは、
+**Edit Tags** ポップオーバーでは、以下のことが可能です。
 
 - ドロップダウンから最大 3 つのタグキーを入力できます。ドロップダウンには、ルートアカウントとアカウントの子オーガニゼーションの両方の既存のタグが事前に入力されています。
 - 既存のタグの削除と編集ができます。
 
-{{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Datadog で適用されたタグ" style="width:80%;" >}}
+{{< img src="account_management/billing/usage_attribution/Edit-Tags-Popover.png" alt="使用量属性のタグを編集する" style="width:80%;" >}}
 
-- タグを構成してから最初のレポートが生成されるまでに 24 時間かかります。
+- タグが構成されると、最初のレポートが生成されるまで 24 時間かかります。
 - レポートは継続的に生成されます。
 - タグを変更すると、新しいレポートには新しいタグが反映されますが、以前のレポートはそのまま古いタグを維持します。
-- 月次レポートは、最新のタグセットが反映されます。月の途中でタグを変えた場合、使用率が一致しない場合があります。
+- 月次レポートには、最新のタグのセットが反映されます。 月の途中でタグが変更された場合、各レポート期間に対して部分月レポートが作成されます。
 
 ## 合計使用量
 
 ### 月次使用属性
 
-レポートの生成が始まると、レポートは日々更新され、この表で毎月集計されます。
+月次レポートは毎日更新され、月初から現在の日付までの使用量データを集計します。
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Datadog で適用されたタグ" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Datadog で適用されたタグ" style="width:100%;" >}}
 
-- アプリ別、サービス別など、選択したすべてのタグキーでデータを表示します。
-- 左側のドロップダウンから、特定の組織やタグのキーでデータを表示することができます。
-- テーブルの表示には、Value と Percentage のオプションが用意されています。
+- ファセットセレクタを使用して、特定の製品、タグ、組織のデータを選択できます。
+- 選択したタグキーでデータをグループ化したり、グループ化解除したりすることができます。
+- Value and Percentage options are available for table display. 
 - テーブルのデータは、一部の製品を含むように編集することができます。
-
-{{< img src="account_management/billing/usage_attribution/usage-attribution-options.png" alt="使用量属性オプションドロップダウンメニュー" style="width:100%;" >}}
-
 - マルチオーガニゼーションを有効にすると、使用方法は親アカウントの全 Datadog オーガニゼーションが要約されます。
 - 前の月のレポートには、タイムセレクターからアクセスできます。
-- 月次レポートはその月が終わるまで生成されません。月次レポートは、翌月の 2 日には閲覧できます。
-- レポートは TSV フォーマットでダウンロードできます。この TSV レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックをシンプルに行うことができます。率は組織単位で計算されます。
+- レポートは CSV 形式でダウンロードできます。 これらの CSV レポートには、使用数とパーセンテージの両方が含まれており、割り当てやチャージバックの簡素化が可能です。 パーセンテージは組織ごとに計算されます。
 
-月次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][1]を参照してください。
+API を使用して月次データを取得することもできます。 詳細については、[API エンドポイントのドキュメント][1]を参照してください。
 
 ### 1 時間ごとの使用量属性
 
-時間単位のデータはツールのパブリック API を使いプルすることができます。詳細は、[API エンドポイントドキュメント][2]を参照してください。
+時間単位のデータは API を使用して引き出すことができます。 詳細については、[API エンドポイントのドキュメント][2]を参照してください。
 
 ### データの解釈
 
@@ -106,20 +88,21 @@ Datadog は、以下の製品の Estimated Usage Attribution 値を提供して�
 
 ## 使用量の追跡
 
-- **Usage Attribution Trends** の下の検索クエリを編集することで、特定の製品、組織、タグキーでデータを表示することができます。
-- データは日次、週次、月次の各レベルで表示することができます。
+使用量属性データの時系列は、"Track Usage" をクリックすることで確認できます。
+- ファセットセレクタを使用して、特定の製品、組織、タグキーのデータを選択できます。
+- グラフの上にある時間セレクタを使用することで、1 日、1 週間、1 か月のデータをグラフ化することができます。
 
-{{< img src="account_management/billing/usage_attribution/graph-by-tags.png" alt="タグ別のインフラホストのグラフ" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="タグで区切られたインフラホストグラフ" style="width:100%;" >}}
 
-### データの解釈
 
-製品ごとに、タグ別にグラフが表示されます。
+## コスト属性
 
-{{< img src="account_management/billing/usage_attribution/multiple-graphs-by-tags.png" alt="タグ別のインフラホストグラフとカスタムメトリクスグラフ" style="width:100%;" >}}
+直接請求のお客様の場合、毎月のチャージバックとコスト割り当て処理を可能にするために、請求サイクルの終わりに月末コスト属性レポートが作成されます。
+- 前月のコストデータは、当月の 19 日までに入手できます。
+- コスト属性データは現在、GovCloud データセンターでは利用できません。
+- 月次コスト属性データは [API で利用可能][4]です。
 
-各色ブロックは、各タグに固有のタグ値を表します。
-
-{{< img src="account_management/billing/usage_attribution/histogram-graph-tag.png" alt="インフラホストグラフのピラーの内訳" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="コスト属性レポート" style="width:100%;" >}}
 
 ## その他の参考資料
 
@@ -127,4 +110,5 @@ Datadog は、以下の製品の Estimated Usage Attribution 値を提供して�
 
 [1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-monthly-usage-attribution
 [2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
+[3]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags
+[4]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-monthly-cost-attribution

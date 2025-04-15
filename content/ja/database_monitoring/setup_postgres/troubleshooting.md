@@ -105,10 +105,10 @@ psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, p
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-もし、`pg_stat_statements` スキーマが `datadog` ユーザーの `search_path` にない場合は、`datadog` ユーザーに追加する必要があります。例:
+`datadog` ユーザーの `search_path` に `pg_stat_statements` スキーマが含まれていない場合は、`datadog` ユーザーに追加する必要があります。例えば、(`pg_stat_statements` が存在するスキーマを `<schema_with_pg_stat_statements>` に置き換えてください)。
 
 ```sql
-ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+ALTER ROLE datadog SET search_path = "$user",public,<schema_with_pg_stat_statements>;
 ```
 
 ### 特定のクエリが見つからない
@@ -119,7 +119,7 @@ ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statemen
 | Postgres 9.6 の場合、Datadog ユーザーが実行したクエリのみが表示される場合は、インスタンス構成にいくつかの設定が欠けている可能性があります。| Postgres 9.6 でインスタンスを監視する場合、Datadog Agent のインスタンス構成は、初期セットアップガイドで作成した関数に基づいて、`pg_stat_statements_view: datadog.pg_stat_statements()` と `pg_stat_activity_view: datadog.pg_stat_activity()` 設定を使用しなければなりません。これらの関数は、すべてのデータベースで作成する必要があります。 |
 |Datadog ユーザーは、他のユーザーによるクエリを表示するための十分なアクセス権を持っていません。|`pg_stat_activity` などのテーブルにアクセスするには、Datadog ユーザーが [`pg_monitor` ロール][25]を持っている必要があります。Datadog ユーザーがこのロールを持っていることを確認してください: `GRANT pg_monitor TO datadog`|
 | このクエリは「上位クエリ」ではなく、選択した時間枠のどの時点でも、総実行時間の合計が正規化された上位 200 クエリに含まれていないことを意味します。| このクエリは、"Other Queries" の行にグループ化されている可能性があります。どのクエリを追跡するかについては、[収集されたデータ][5]を参照してください。追跡される上位クエリの数は、Datadog サポートに連絡することで増やすことができます。 |
-| SELECT、INSERT、UPDATE、または DELETE クエリではありません。| 非ユーティリティ関数は、デフォルトでは追跡されません。それらを収集するには、Postgres のパラメーター `pg_stat_statements.track_utility` を `on` に設定します。詳細は [Postgres のドキュメント][6]を参照してください。 |
+| SELECT、INSERT、UPDATE、または DELETE クエリではありません。| 非ユーティリティ関数は、デフォルトでは追跡されません。それらを収集するには、Postgres のパラメーター `pg_stat_statements.track_utility` を `all` に設定します。詳細は [Postgres のドキュメント][6]を参照してください。 |
 | クエリが関数またはストアドプロシージャ内で実行されています。| 関数やプロシージャで実行されたクエリを追跡するには、構成パラメーター `pg_stat_statements.track` を `on` に設定します。詳しくは、[Postgres のドキュメント][6]を参照してください。 |
 | Postgres の構成パラメーター `pg_stat_statements.max` がワークロードに対して低すぎる可能性があります。| 短時間に大量の正規化クエリを実行した場合 (10 秒間に数千の一意の正規化クエリ)、`pg_stat_statements` のバッファはすべての正規化クエリを保持できない可能性があります。この値を増やすと、追跡された正規化クエリのカバレッジが向上し、生成された SQL の高破棄率による影響を軽減することができます。**注**: 列名が順不同のクエリや可変長の ARRAY を使用したクエリは、正規化クエリの破棄率を大幅に増加させる可能性があります。例えば、`SELECT ARRAY[1,2]` と `SELECT ARRAY[1,2,3]` は `pg_stat_statements` では別のクエリとして追跡されます。この設定のチューニングについては、[高度な構成][7]を参照してください。 |
 | Agent が最後に再起動してから、クエリが一度だけ実行されました。| Agent が再起動して以来、10 秒間隔で 2 回以上実行された後にのみ、クエリメトリクスが発行されます。 |
@@ -188,14 +188,14 @@ Agent のバージョンが 7.36.1 以上であることを確認してくださ
 
 クライアントが Postgres [拡張クエリプロトコル][9]またはプリペアドステートメントを使用している場合、パースされたクエリと生のバインドパラメーターが分離されているため、Datadog Agent は説明プランを収集することができません。以下は、この問題に対処するためのいくつかの選択肢です。
 
-Postgres バージョン 12 以降の場合、[Postgres インテグレーション構成][19]で以下のベータ機能を有効にします。
+Postgres バージョン 12 以降では、[Postgres インテグレーション構成][19]で以下のパラメーターがデフォルトで有効になっており、Agent が実行計画を収集できるようになっています。
 ```
 query_samples:
   explain_parameterized_queries: true
   ...
 ```
 
-Postgres 12 より前のバージョンでは、この機能はサポートされていません。ただし、クライアントがシンプルクエリプロトコルを強制的に使用するオプションを提供している場合、Datadog Agent は実行プランを収集することが可能です。
+Postgres 12 より前のバージョンでは、このパラメーターはサポートされていません。ただし、クライアントがシンプルクエリプロトコルを強制的に使用するオプションを提供している場合、Datadog Agent は実行プランを収集することが可能です。
 
 | 言語 | クライアント | シンプルクエリプロトコルの構成|
 |----------|--------|----------------------------------------|

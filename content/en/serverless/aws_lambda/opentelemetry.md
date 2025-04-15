@@ -15,7 +15,7 @@ This page discusses using OpenTelemetry with Datadog Serverless Monitoring for A
 There are multiple ways to instrument AWS Lambda functions with OpenTelemetry and send the data to Datadog:
 
 - [OpenTelemetry API support in the Datadog tracers](#opentelemetry-api-support-within-datadog-tracers) (recommended)
-- [Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension](#sdk) (beta)
+- [Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension](#sdk) (Preview)
 
 ### OpenTelemetry API support within Datadog tracers
 
@@ -28,9 +28,9 @@ To instrument AWS Lambda with the OpenTelemetry API, set the environment variabl
 
 ### Send OpenTelemetry traces from any OpenTelemetry SDK through the Datadog Lambda Extension {#sdk}
 
-<div class="alert alert-warning">This feature is in beta.</div>
-
 This approach is analogous to [OLTP Ingest in the Datadog Agent][4]. It is recommended in situations where tracing support may not be available for your runtime (for example, Rust or PHP). 
+
+**Note**: Sending custom metrics from the OTLP endpoint in the extension is not supported.
 
 1. Tell OpenTelemetry to export spans to the Datadog Lambda Extension. Then, add OpenTelemetry's instrumentation for AWS Lambda.
 

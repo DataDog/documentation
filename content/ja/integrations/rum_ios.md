@@ -11,6 +11,7 @@ categories:
 - メトリクス
 - モバイル
 - トレーシング
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md
 display_on_public_website: true
@@ -20,7 +21,6 @@ integration_id: rum-ios
 integration_title: iOS
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: rum_ios
 public_title: iOS
@@ -34,6 +34,7 @@ tile:
   - Category::Mobile
   - Category::Tracing
   - Supported OS::iOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog RUM を使用した iOS アプリケーションの監視とメトリクス生成
   media: []
@@ -65,7 +66,7 @@ iOS アプリケーションのエンドツーエンドの健全性を監視し�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## 計画と使用
+## セットアップ
 
 ### RUM イベントの収集
 
@@ -79,9 +80,9 @@ iOS アプリケーションのトレースを Datadog に送信し始めるに�
 
 iOS アプリケーションのログを Datadog に転送し始めるには、[iOS ログ収集][5]をご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 iOS インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
@@ -93,11 +94,11 @@ iOS インテグレーションには、メトリクスは含まれていませ�
 
 iOS インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
-## その他の参考資料 
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 

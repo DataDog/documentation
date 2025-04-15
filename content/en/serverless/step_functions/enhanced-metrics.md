@@ -30,9 +30,6 @@ The following enhanced Step Functions metrics are available.
 `aws.states.enhanced.task.execution.task_duration`
 : Distribution of the durations of individual tasks.
 
-`aws.states.enhanced.task.execution.tasks_timed_out`
-: Counts the total number of tasks that timed out.
-
 `aws.states.enhanced.state.run_duration`
 : Gauge for durations of a state's runs.
 

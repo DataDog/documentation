@@ -22,6 +22,7 @@ author:
   sales_email: antonin.bruneau@gmail.com
   support_email: antonin.bruneau@gmail.com
 categories: []
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: unifi-console
 integration_title: Unifi Console
 integration_version: 1.2.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: unifi_console
 public_title: Unifi Console
@@ -46,6 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: このチェックは、Unifi Controller からメトリクスを収集します
   media: []
@@ -61,11 +62,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Unifi Console][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Unifi チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -77,7 +78,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Unifi Console のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `unifi_console.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[unifi_console.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -87,22 +88,22 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `unifi_console` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "unifi_console" >}}
 
 
-### ヘルプ
+### イベント
 
 Unifi Console インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "unifi_console" >}}
 
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

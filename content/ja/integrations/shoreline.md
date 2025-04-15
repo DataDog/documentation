@@ -20,7 +20,6 @@ integration_id: shoreline-integration
 integration_title: Shoreline.io
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: shoreline
 public_title: Shoreline.io
@@ -68,9 +67,9 @@ Shoreline アプリは、モニターがトリガーされると自動的に自�
 Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮できるよう支援します。Shoreline は、オンコールチームにデバッグツールと承認された修復アクションを提供し、エスカレーションを減らしてインシデントを迅速に修正し、ミスを減らして初回で正しくインシデントを修正できるよう支援します。
 
 まずは、[Shoreline][1] でトライアルアカウントを設定してください。
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 以下の手順でインテグレーション構成を行います。
 

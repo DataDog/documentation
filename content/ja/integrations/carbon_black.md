@@ -1,22 +1,22 @@
 ---
 categories:
-  - ログの収集
-  - セキュリティ
-ddtype: crawler
+- ログの収集
+- セキュリティ
+custom_kind: integration
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
 description: Carbon Black Defense ログを収集する
 doc_link: https://docs.datadoghq.com/integrations/carbon_black/
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/carbon_black.md
 has_logo: true
+integration_id: carbonblack
 integration_title: Carbon Black
 is_public: true
-custom_kind: integration
 name: carbon_black
 public_title: Datadog-Carbon Black インテグレーション
 short_description: Carbon Black Defense ログを収集する
 version: '1.0'
-integration_id: carbonblack
 ---
+
 ## 概要
 
 Datadog-Carbon Black インテグレーションを使用して、Carbon Black EDR のイベントとアラートを Datadog ログとして転送します。
@@ -30,7 +30,7 @@ Datadog は、Carbon Black のイベントフォワーダーと Datadog の Lamb
 
 Carbon Black は、Carbon Black イベントフォワーダーの作成に使用する API の [Postman コレクション][1]を提供します。
 
-#### コンフィギュレーション
+#### 構成
 
 1. [Datadog Forwarder][2] をインストールします。
 2. [AWS Management Console にバケットを作成][3]して、イベントを転送します。
@@ -48,7 +48,7 @@ Carbon Black は、Carbon Black イベントフォワーダーの作成に使用
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://documenter.getpostman.com/view/7740922/SWE9YGSs?version=latest
-[2]: /ja/serverless/libraries_integrations/forwarder/
+[2]: /ja/logs/guide/forwarder/
 [3]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-a-bucket
 [4]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#configure-bucket-to-write-events
 [5]: https://community.carbonblack.com/t5/Developer-Relations/Carbon-Black-Cloud-Data-Forwarder-Quick-Setup-amp-S3-Bucket/td-p/89194#create-access-level

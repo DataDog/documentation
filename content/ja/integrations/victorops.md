@@ -2,7 +2,7 @@
 categories:
 - alerting
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/victorops/

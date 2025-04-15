@@ -15,18 +15,22 @@ type: multi-code-lang
 
 ダイナミックインスツルメンテーションは、Datadog のトレーシングライブラリをサポートする機能です。すでに [APM を使用してアプリケーションのトレースを収集][1]している場合は、Agent とトレーシングライブラリが必要なバージョンであることを確認し、ステップ 4 のダイナミックインスツルメンテーションの有効化に直接進みます。
 
+## 前提条件
+
+For a better experience, Datadog recommends enabling [autocomplete and search (open beta)][8].
+
 ## インストール
 
-1. Agent のバージョン[7.44.0][2] 以上をインストールするか、アップグレードします。
+1. Install or upgrade your Agent to version [7.45.0][7] or higher.
 2. まだ APM を有効にしていない場合は、Agent の構成で `DD_APM_ENABLED` 環境変数を `true` に設定し、ポート `8126/TCP` をリッスンします。
-3. [.NET Framework][2] または [.NET Core][3] の関連する指示に従って、.NET トレーシングライブラリをバージョン 2.42 にインストールまたはアップグレードしてください。
+3. Install or upgrade the .NET tracing libraries to version 2.54.0, by following the relevant instructions for [.NET Framework][2] or [.NET Core][3].
 
-   **注**: ダイナミックインスツルメンテーションは、バージョン 2.42.0 以降の `dd-trace-dotnet` ライブラリで利用可能です。
+   **Note**: Dynamic Instrumentation is available in the `dd-trace-dotnet` library in versions 2.54.0 and later.
 
 4. `DD_DYNAMIC_INSTRUMENTATION_ENABLED` 環境変数を `true` に設定し、ダイナミックインスツルメンテーションを有効にしてサービスを稼働させます。`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の統合サービスタグを指定すると、プローブをフィルターしたりグループ化したり、アクティブなクライアントをこれらの次元でターゲットにすることができるようになります。
 5. ダイナミックインスツルメンテーションを有効にした状態でサービスを起動すると、[APM > ダイナミックインスツルメンテーションページ][4]でダイナミックインスツルメンテーションの利用を開始することができます。
 
-## コンフィギュレーション
+## 構成
 
 以下の環境変数を使用してダイナミックインスツルメンテーションを構成します。
 
@@ -52,3 +56,5 @@ type: multi-code-lang
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /ja/getting_started/tagging/unified_service_tagging
 [6]: /ja/dynamic_instrumentation/
+[7]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[8]: /ja/dynamic_instrumentation/symdb/

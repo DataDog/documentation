@@ -20,72 +20,63 @@ El Agent recopila telemetría directamente de la base de datos iniciando sesión
 Versiones de MySQL compatibles
 : 5.6, 5.7, o 8.0+
 
-Versiones compatibles del Agent 
-: 7.36.1+
+Versiones de MariaDB compatibles
+: 10.5, 10.6, 10.11 o 11.1 <br/><br/>
+Database Monitoring para MariaDB es compatible con [limitaciones conocidas][13].
 
-Impacto del rendimiento
-: el valor predeterminado de configuración del Agent para la Monitorización de base de datos es conservador, pero puedes ajustar parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas para que se adapten mejor a tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de consultas en la base de datos y menos del uno por ciento de la CPU. <br/><br/>
-La Monitorización de base de datos se ejecuta como integración sobre el Agent base ([ver valores de referencia][1]).
+Versiones del Agent compatibles
+: 7.36.1 o posteriores
 
-Proxies, equilibradores de carga y agrupadores de conexiones
-: el Datadog Agent debe conectarse directamente al host que está siendo monitorizado. Para las bases de datos autoalojadas, `127.0.0.1` o el socket es la preferencia. El Agent no debe conectarse a la base de datos a través de un proxy, equilibrador de carga o agrupador de conexiones. Si el Agent se conecta a diferentes hosts mientras se está ejecutando (como en el caso de la conmutación por error, equilibrio de carga, etc.), el Agent calcula la diferencia en las estadísticas entre dos hosts, produciendo métricas inexactas.
+Impacto en el rendimiento
+: La configuración del Agent predeterminada para Database Monitoring es conservadora, pero puedes ajustar algunos parámetros como el intervalo de recopilación y la frecuencia de muestreo de consultas según tus necesidades. Para la mayoría de las cargas de trabajo, el Agent representa menos del uno por ciento del tiempo de ejecución de la consulta en la base de datos y menos del uno por ciento del uso de CPU. <br/><br/>
+Database Monitoring se ejecuta como una integración sobre el Agent base ([consulta las referencias][1]).
+
+Proxies, balanceadores de carga y agrupadores de conexiones
+: El Datadog Agent debe conectarse directamente al host que se está monitorizando. Para las bases de datos autoalojadas, se prefiere `127.0.0.1` o el socket. El Agent no debe conectarse a la base de datos a través de un proxy, balanceador de carga o agrupador de conexiones. Si el Agent se conecta a diferentes hosts mientras se ejecuta (como en el caso de la conmutación por error o el balanceo de carga, entre otros), este calcula la diferencia en las estadísticas entre dos hosts, lo que produce inexactitudes en las métricas.
 
 Consideraciones sobre la seguridad de los datos
-: para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
+: Para saber qué datos recopila el Agent de tus bases de datos y cómo garantizar su seguridad, consulta [Información confidencial][2].
 
-## Configuración de parámetros de MySQL
+## Configurar los parámetros de MySQL
 
-Para recopilar métricas de consultas, muestras y planes de explicación, activa el [Esquema de rendimiento de MySQL][3] y configura las siguientes [Opciones de esquema de rendimiento][4], ya sea en la línea de comandos o en los archivos de configuración (por ejemplo, `mysql.conf`):
+Para recopilar métricas de consultas, muestras y planes de explicación, habilita el [Esquema de rendimiento de MySQL][3] y configura las siguientes [Opciones de esquema de rendimiento][4], ya sea en la línea de comandos o en los archivos de configuración (por ejemplo, `mysql.conf`):
 
 {{< tabs >}}
+{{% tab "MySQL ≥ 5.7" %}}
+| Parámetro | Valor | Descripción |
+| --- | --- | --- |
+| `performance_schema` | `ON` | Obligatorio. Habilita el esquema de rendimiento. |
+| `max_digest_length` | `4096` | Es obligatorio para la recopilación de consultas más extensas. Si se deja el valor predeterminado, no se recopilarán consultas con más de `1024` caracteres. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Obligatorio. Habilita la monitorización de las consultas en ejecución actualmente. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Obligatorio. Habilita la recopilación de eventos de espera. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recomendado. Permite el seguimiento de una mayor cantidad de consultas recientes en todos los subprocesos. Si se habilita, aumenta la probabilidad de capturar detalles de la ejecución de consultas poco frecuentes. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Opcional. Permite el seguimiento del historial de consultas recientes por subproceso. Si se habilita, aumenta la probabilidad de capturar detalles de la ejecución de consultas poco frecuentes. |
+{{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 | Parámetro | Valor | Descripción |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Obligatorio. Activa el esquema de rendimiento. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Si se deja el valor por defecto, las consultas más largas que `1024` caracteres no se recopilarán. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coinicdir con `max_digest_length`. |
-| `performance-schema-consumer-events-statements-current` | `ON` | Obligatorio. Activa la monitorización de las consultas actualmente en ejecución. |
-| `performance-schema-consumer-events-waits-current` | `ON` | Obligatorio. Activa la recopilación de eventos de espera. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Recomendado. Activa el seguimiento de un número más grande de consultas recientes en todos los subprocesos. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Opcional. Activa el seguimiento del historial de consultas recientes por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
-{{% /tab %}}
-
-{{% tab "MySQL ≥ 5.7" %}
-| Parámetro | Valor | Descripción |
-| --- | --- | --- |
-| `performance_schema` | `ON` | Obligatorio. Activa el esquema de rendimiento. |
-| `max_digest_length` | `4096` | Obligatorio para la recopilación de consultas más grandes. Si se deja el valor por defecto, las consultas más largas que `1024` caracteres no se recopilarán. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coinicdir con `max_digest_length`. |
- |<code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | Debe coincidir con `max_digest_length`. |
-`performance-schema-consumer-events-statements-current` | `ON` | Obligatorio. Activa la monitorización de las consultas actualmente en ejecución. |
-| `performance-schema-consumer-events-waits-current` | `ON` | Obligatorio. Activa la recopilación de eventos de espera. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Recomendado. Activa el seguimiento de un número más grande de consultas recientes en todos los subprocesos. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Opcional. Activa el seguimiento del historial de consultas recientes por subproceso. Si se activa, aumenta la probabilidad de capturar detalles de ejecución de consultas poco frecuentes. |
+| `performance_schema` | `ON` | Obligatorio. Habilita el esquema de rendimiento. |
+| `max_digest_length` | `4096` | Es obligatorio para la recopilación de consultas más extensas. Si se deja el valor predeterminado, no se recopilarán consultas con más de `1024` caracteres. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Debe coincidir con `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Obligatorio. Habilita la monitorización de las consultas en ejecución actualmente. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Obligatorio. Habilita la recopilación de eventos de espera. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recomendado. Permite el seguimiento de una mayor cantidad de consultas recientes en todos los subprocesos. Si se habilita, aumenta la probabilidad de capturar detalles de la ejecución de consultas poco frecuentes. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Opcional. Permite el seguimiento del historial de consultas recientes por subproceso. Si se habilita, aumenta la probabilidad de capturar detalles de la ejecución de consultas poco frecuentes. |
 {{% /tab %}}
 {{< /tabs >}}
 
 
 **Nota**: Una práctica recomendada es permitir que el Agent habilite la configuración de `performance-schema-consumer-*` dinámicamente en el tiempo de ejecución, como parte de la concesión de acceso al Agent. Consulta [Consumidores de configuración de tiempo de ejecución](#runtime-setup-consumers).
 
-## Conceder acceso al Agent 
+## Conceder acceso al Agent
 
 El Datadog Agent requiere acceso de solo lectura a la base de datos para poder recopilar estadísticas y realizar consultas.
 
 Las siguientes instrucciones conceden permiso al Agent para iniciar sesión desde cualquier host con `datadog@'%'`. Puedes restringir al usuario `datadog` para que solo pueda iniciar sesión desde el host local usando `datadog@'localhost'`. Consulta la [documentación de MySQL][5] para obtener más información.
 
 {{< tabs >}}
-{{% tab "MySQL 5.6" %}}
-
-Crea el usuario `datadog` y concédele permisos básicos:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
 Crea el usuario `datadog` y concédele permisos básicos:
@@ -94,6 +85,18 @@ Crea el usuario `datadog` y concédele permisos básicos:
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL 5.6" %}}
+
+Crea el usuario `datadog` y concédele permisos básicos:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -124,7 +127,7 @@ END $$
 DELIMITER ;
 ```
 
-Además, crea este procedimiento **en cada esquema** del que desees recopilar planes de explicación. Sustituye `<YOUR_SCHEMA>` por el esquema de tu base de datos:
+Además, crea este procedimiento **en cada esquema** del que quieras recopilar planes de explicación. Sustituye `<YOUR_SCHEMA>` por el esquema de tu base de datos:
 
 ```sql
 DELIMITER $$
@@ -155,13 +158,16 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-## Instalación del Agent
+### Guardar tu contraseña de forma segura
+{{% dbm-secret %}}
 
-Al instalar el Datadog Agent también se instala el check de MySQL, necesario para la Monitorización de base de datos en MySQL. Si aún no has instalado el Agent para el host de tu base de datos MySQL, consulta las [instrucciones de instalación del Agent][6].
+## Instalar el Agent
 
-Para configurar este check para un Agent que se ejecuta en un host:
+Al instalar el Datadog Agent también se instala el check de MySQL, necesario para Database Monitoring en MySQL. Si aún no has instalado el Agent para el host de tu base de datos de MySQL, consulta las [Instrucciones de instalación del Agent][6].
 
-Edita el archivo `mysql.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][7] para empezar a recopilar métricas(#metric-collection) t [logs](#log-collection-optional) de MySQL. Ve el [ejemplo mysql.d/conf.yaml][8] para todas las opciones disponibles de configuración, incluidas las de métricas personalizadas.
+A fin de configurar este check para un Agent que se ejecuta en un host:
+
+Edita el archivo `mysql.d/conf.yaml`, en la carpeta `conf.d/` en la raíz del [directorio de configuración de tu Agent][7] para empezar a recopilar [métricas](#metric-collection) y [logs](#log-collection-optional) de MySQL. Consulta el [archivo mysql.d/conf.yaml de ejemplo][8] para conocer todas las opciones de configuración disponibles, incluidas las de métricas personalizadas.
 
 ### Recopilación de métricas
 
@@ -175,10 +181,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    password: 'ENC[datadog_user_database_password]' # del paso CREAR USUARIO anterior
 ```
-
-**Nota**: Escribe tu contraseña entre comillas simples en caso de que haya un carácter especial.
 
 Ten en cuenta que el usuario `datadog` debe establecerse en la configuración de la integración de MySQL como `host: 127.0.0.1` en lugar de `localhost`. Como alternativa, también puedes utilizar `sock`.
 
@@ -188,7 +192,7 @@ Ten en cuenta que el usuario `datadog` debe establecerse en la configuración de
 
 Además de la telemetría recopilada de la base de datos por el Agent, también puedes optar por enviar tus logs de base de datos directamente a Datadog.
 
-1. Por defecto, MySQL loguea todo en `/var/log/syslog` que requiere acceso raíz para la lectura. Para que los logs sean más accesibles, sigue estos pasos:
+1. De manera predeterminada, MySQL registra todo en `/var/log/syslog` que requiere acceso raíz para la lectura. Para que los logs sean más accesibles, sigue estos pasos:
 
    1. Edita `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` y comenta todas las líneas.
    2. Edita `/etc/mysql/my.cnf` para habilitar la configuración de registro deseada. Por ejemplo, para activar los logs de consultas generales, de error y lentas, utiliza la siguiente configuración:
@@ -207,7 +211,7 @@ Además de la telemetría recopilada de la base de datos por el Agent, también 
      ```
 
    3. Guarda el archivo y reinicia MySQL.
-   4. Asegúrate de que el Agent tiene acceso de lectura al directorio `/var/log/mysql` y a todos los archivos que contiene. Comprueba tu configuración `logrotate` para asegurarte de que estos archivos se tienen en cuenta y que los permisos están correctamente configurados.
+   4. Asegúrate de que el Agent tenga acceso de lectura al directorio `/var/log/mysql` y a todos los archivos que contiene. Vuelve a comprobar tu configuración de `logrotate` para asegurarte de que estos archivos se tengan en cuenta y que los permisos se hayan configurado correctamente.
       En `/etc/logrotate.d/mysql-server` debería haber algo parecido a:
 
      ```text
@@ -220,13 +224,13 @@ Además de la telemetría recopilada de la base de datos por el Agent, también 
        }
      ```
 
-2. La recopilación de logs está deshabilitada por defecto en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
+2. La recopilación de logs se encuentra deshabilitada de manera predeterminada en el Datadog Agent. Habilítala en tu archivo `datadog.yaml`:
 
    ```yaml
    logs_enabled: true
    ```
 
-3. Añade este bloque de configuración en tu archivo `mysql.d/conf.yaml` para empezar a recopilar tus logs de MySQL:
+3. Añade este bloque de configuración a tu archivo `mysql.d/conf.yaml` para empezar a recopilar logs de MySQL:
 
    ```yaml
    logs:
@@ -273,9 +277,9 @@ Además de la telemetría recopilada de la base de datos por el Agent, también 
 
 ## Validar
 
-[Ejecuta el subcomando de estado del Agent][10] y busca `mysql` en la sección Checks. Si no, visita la página [Bases de datos][11] para empezar.
+[Ejecuta el subcomando de estado del Agent][10] y busca `mysql` en la sección Checks. Si no, consulta la página [Bases de datos][11] para empezar.
 
-## Ejemplo de configuraciones del Agent
+## Configuraciones del Agent de ejemplo
 {{% dbm-mysql-agent-config-examples %}}
 
 ## Solucionar problemas
@@ -298,3 +302,4 @@ Si has instalado y configurado las integraciones y el Agent como se describe, pe
 [10]: /es/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /es/database_monitoring/troubleshooting/?tab=mysql
+[13]: /es/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations

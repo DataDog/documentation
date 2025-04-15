@@ -4,6 +4,7 @@ categories:
 - クラウド
 - data stores
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Elemental MediaStore のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediastore/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: AWS Elemental MediaStore
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mediastore
 public_title: Datadog-AWS Elemental MediaStore インテグレーション
@@ -29,9 +29,9 @@ AWS Elemental MediaStore は、メディア向けに最適化された AWS の�
 
 このインテグレーションを有効にすると、Datadog にすべての AWS Elemental MediaStore メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -41,21 +41,21 @@ AWS Elemental MediaStore は、メディア向けに最適化された AWS の�
    確認します。
 2. [Datadog - AWS Elemental MediaStore インテグレーション][3]をインストールします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_mediastore" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS Elemental MediaStore インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS Elemental MediaStore インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

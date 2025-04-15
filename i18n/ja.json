@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "750"
+    "other": "850"
   },
   "beta_sentence": {
     "other": "　ベータ - 問題についてのお問い合わせまたは報告は"
@@ -126,6 +126,9 @@
   "api": {
     "other": "API"
   },
+  "docs": {
+    "other": "Docs"
+  },
   "home": {
     "other": "Home"
   },
@@ -146,6 +149,10 @@
   },
   "agent": {
     "other": "Agent"
+  },
+  "integrations": {
+    "one": "integration",
+    "other": "integrations"
   },
   "graphing": {
     "other": "グラフ"

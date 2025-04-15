@@ -24,8 +24,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 33
     source_type_name: Cassandra
-  logs:
-    source: cassandra
   saved_views:
     cassandra_processes: assets/saved_views/cassandra_processes.json
 author:
@@ -37,6 +35,7 @@ categories:
 - caching
 - data stores
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md
 display_on_public_website: true
@@ -44,9 +43,8 @@ draft: false
 git_integration_title: cassandra
 integration_id: cassandra
 integration_title: Cassandra
-integration_version: 1.18.0
+integration_version: 3.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cassandra
 public_title: Cassandra
@@ -64,10 +62,18 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
   support: README.md#Support
   title: Cassandra
 ---
@@ -84,15 +90,15 @@ Cassandra からメトリクスをリアルタイムに取得すると、以下�
 - Cassandra の状態を視覚化および監視できます。
 - Cassandra のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Cassandra チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。このインテグレーションには、Oracle の JDK を使用することをお勧めします。
 
 **注**: このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][3]に表示されます。以下で説明する構成を編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX のドキュメント][4]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 ##### メトリクスの収集
 
@@ -100,7 +106,7 @@ Cassandra チェックは [Datadog Agent][2] パッケージに含まれてい�
 
 2. [Agent を再起動します][7]。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -137,21 +143,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `cassandra` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cassandra" >}}
 
 
-### ヘルプ
+### イベント
 
 Cassandra チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cassandra" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
@@ -186,7 +192,7 @@ Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含ま�
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### メトリクスベース SLO
+#### ホスト
 
 1. [Agent のコンフィギュレーションディレクトリ][16]のルートにある `conf.d/` フォルダーの `cassandra_nodetool.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cassandra_nodetool.d/conf.yaml][17] を参照してください。
 
@@ -205,7 +211,7 @@ Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含ま�
 
 2. [Agent を再起動します][7]。
 
-#### 収集データ
+#### ログ収集
 
 Cassandra Nodetool ログは Cassandra インテグレーションにより収集されます。[Cassandra のログ収集の手順][18]をご確認ください。
 
@@ -223,21 +229,21 @@ Cassandra Nodetool ログは Cassandra インテグレーションにより収�
 
 [Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cassandra_nodetool` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cassandra_nodetool" >}}
 
 
-### ヘルプ
+### イベント
 
 Cassandra_nodetool チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cassandra_nodetool" >}} 
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
@@ -248,7 +254,7 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 - [Datadog を使用した Cassandra の監視][13]
 
 
-[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard.png
+[1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard_2.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/integrations/java/
@@ -261,7 +267,7 @@ Cassandra_nodetool チェックには、イベントは含まれません。
 [11]: https://www.datadoghq.com/blog/how-to-monitor-cassandra-performance-metrics
 [12]: https://www.datadoghq.com/blog/how-to-collect-cassandra-metrics
 [13]: https://www.datadoghq.com/blog/monitoring-cassandra-with-datadog
-[14]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard.png
+[14]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra_nodetool/images/cassandra_dashboard_2.png
 [15]: https://github.com/DataDog/integrations-core/tree/master/cassandra
 [16]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [17]: https://github.com/DataDog/integrations-core/blob/master/cassandra_nodetool/datadog_checks/cassandra_nodetool/data/conf.yaml.example

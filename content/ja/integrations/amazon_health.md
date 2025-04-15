@@ -4,7 +4,7 @@ categories:
 - cloud
 - log collection
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: AWS のサービス健全性イベントをほぼリアルタイムに監視。
 doc_link: https://docs.datadoghq.com/integrations/amazon_health

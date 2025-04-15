@@ -14,7 +14,7 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 
 - オートディスカバリーが Agent のコアプロセスとなり、`init_config` で `loader:core` を使用してメインの SNMP インテグレーションチェックでロードし、Datadog Agent `datadog.yaml` で構成される必要があります。
 
-- 可読名のみによる MIB への直接参照はサポートされません。すべての OID 参照は、数字によるアドレスで作成され、可読名である必要があります。Datadog がサポートするすべてのプロファイルは更新されていますが、カスタムプロファイルはアップデートする必要があります。移行例を以下に示します。
+- Direct reference to MIBs by their human readable names only are no longer supported. Instead, all OID references should be made by their numerical address, and human readable name. All Datadog shipped profiles have been updated, but custom profiles will need to be updated. Examples for migration are provided below.
 
 - Core チェックは、手動でコンパイルする MIB のプロファイルとしての使用をサポートしないため、以下のパラメーターはサポートされません。
   - `mibs_folder`
@@ -26,7 +26,7 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 
 1. 対応する Agent プラットフォーム用に Datadog Agent バージョンを 7.27 以降にアップグレードします。
 
-2. `snmp.d/conf.yaml` で新しいコアチェックを参照するよう SNMP チェックで `init_config` を更新します。
+2. Update the `init_config` in the SNMP check to reference the new core check in `snmp.d/conf.yaml`.
 
 ``` yaml
   init_config:
@@ -38,67 +38,67 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 {{% tab "SNMPv2" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # デバイスの検出に同時に使用されるワーカー数
-  discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
-  loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
-  use_device_id_as_hostname: true  # 推奨
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR サブネット
-      snmp_version: 2
-      port: 161
-      community_string: '***'  # 一重引用符で囲みます
-      tags:
-      - "key1:val1"
-      - "key2:val2"
-    - network_address: 10.20.0.0/24
-      snmp_version: 2
-      port: 161
-      community_string: '***'
-      tags:
-      - "key1:val1"
-      - "key2:val2"
+network_devices:
+  autodiscovery:
+    workers: 100  # デバイスの発見に同時に使用されるワーカー数
+    discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+    loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+    use_device_id_as_hostname: true  # 推奨
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR サブネット
+        snmp_version: 2
+        port: 161
+        community_string: '***'  # 一重引用符で囲みます
+        tags:
+        - "key1:val1"
+        - "key2:val2"
+      - network_address: 10.20.0.0/24
+        snmp_version: 2
+        port: 161
+        community_string: '***'
+        tags:
+        - "key1:val1"
+        - "key2:val2"
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "SNMPv3" %}}
 
 ```yaml
-listeners:
-  - name: snmp
-snmp_listener:
-  workers: 100  # デバイスの検出に同時に使用されるワーカー数
-  discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
-  loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
-  use_device_id_as_hostname: true  # 推奨
-  configs:
-    - network_address: 10.10.0.0/24  # CIDR サブネット
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'  # 選択肢: MD5、SHA、SHA224、SHA256、SHA384、SHA512
-      authKey: 'fakeKey'  # 一重引用符で囲みます
-      privProtocol: 'AES256'  # 選択肢: DES、AES (128 bits)、AES192、AES192C、AES256、AES256C
-      privKey: 'fakePrivKey'  # 一重引用符で囲みます
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
-    - network_address: 10.20.0.0/24
-      snmp_version: 3
-      user: 'user'
-      authProtocol: 'SHA256'
-      authKey: 'fakeKey'
-      privProtocol: 'AES256'
-      privKey: 'fakePrivKey'
-      tags:
-        - 'key1:val1'
-        - 'key2:val2'
+network_devices:
+  autodiscovery:
+    workers: 100  # デバイスの発見に同時に使用されるワーカー数
+    discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+    loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+    use_device_id_as_hostname: true  # 推奨
+    configs:
+      - network_address: 10.10.0.0/24  # CIDR サブネット
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'  # 選択肢: MD5, SHA, SHA224, SHA256, SHA384, SHA512
+        authKey: 'fakeKey'  # 一重引用符で囲みます
+        privProtocol: 'AES256'  # 選択肢: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+        privKey: 'fakePrivKey'  # 一重引用符で囲みます
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
+      - network_address: 10.20.0.0/24
+        snmp_version: 3
+        user: 'user'
+        authProtocol: 'SHA256'
+        authKey: 'fakeKey'
+        privProtocol: 'AES256'
+        privKey: 'fakePrivKey'
+        tags:
+          - 'key1:val1'
+          - 'key2:val2'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+**注**: この構文を使用するには、Agent 7.53 以降を使用していることを確認してください。以前のバージョンについては、[以前の config_template.yaml][1] を参照してください。
 
 ### カスタムプロファイルの移行（デプロイ以外）
 
@@ -182,3 +182,5 @@ metrics_tags:
     symbol: sysName
     tag: snmp_host
 {{< /code-block >}}
+
+[1]: https://github.com/DataDog/datadog-agent/blob/51dd4482466cc052d301666628b7c8f97a07662b/pkg/config/config_template.yaml#L855

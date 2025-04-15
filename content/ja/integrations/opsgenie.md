@@ -2,7 +2,7 @@
 categories:
 - collaboration
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: OpsGenie を Datadog のアラートとイベントで通知チャンネルとして使用。
 doc_link: https://docs.datadoghq.com/integrations/opsgenie/

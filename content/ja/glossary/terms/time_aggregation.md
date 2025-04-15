@@ -1,4 +1,6 @@
 ---
+core_product:
+- モニター
 synonyms:
 - rollup
 title: 時間集計

@@ -28,7 +28,14 @@ Synthetic モニタリングのパスキーは、Virtual Authenticator グロー
 ## Synthetic ブラウザテストでパスキーを使用する
 <div class="alert alert-warning">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
 
-[ブラウザテストを作成][3]する際は、グローバル変数に保存されているパスキーを使用して、アプリケーションのパスキーの登録を完了し、認証フローを完成させます。
+### Add passkeys to a browser test
+
+1. Click [Digital Experience > New Test > Browser Test][3].
+2. **Save & Edit Recording** をクリックします。
+3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
+4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
+
+{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
 
 ### 登録フローのフロー
 

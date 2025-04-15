@@ -7,9 +7,9 @@ further_reading:
 - link: getting_started/profiler
   tag: ドキュメント
   text: プロファイラーの概要
-- link: profiler/search_profiles
+- link: profiler/profile_visualizations
   tag: ドキュメント
-  text: 使用可能なプロファイルタイプの詳細
+  text: 使用可能なプロファイルの視覚化の詳細
 - link: profiler/profiler_troubleshooting/go
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
@@ -21,9 +21,11 @@ type: multi-code-lang
 
 ## 要件
 
-Datadog Profiler には Go 1.12 以降が必要です。
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][18].
 
-[Code Hotspots][12] と [Endpoint Profiling][13] については、Go バージョン 1.18+ と `dd-trace-go` バージョン 1.37.0+ を使用してください。
+Datadog Profiler には Go 1.19 以降が必要です。
+
+[Code Hotspots][2] と [Endpoint Profiling][3] については、`dd-trace-go` バージョン 1.37.0 以降を使用してください。
 
 Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
@@ -31,7 +33,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
 アプリケーションのプロファイリングを開始するには
 
-1. すでに Datadog を使用している場合は、Agent をバージョン [7.20.2][2] 以降または [6.20.2][3] 以降にアップグレードしてください。
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][19].
 
 2. 以下のコマンドを使用して、`dd-trace-go` を取得します。
 
@@ -41,7 +43,7 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
      **注**: プロファイラは、バージョン 1.23.0 以降の `dd-trace-go` ライブラリで利用できます。
 
-3. アプリケーションの開始時に、[プロファイラ][4]をインポートします。
+3. アプリケーションの開始時に、[プロファイラ][6]をインポートします。
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
@@ -72,18 +74,22 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
     defer profiler.Stop()
     ```
 
-4. 1〜2 分後、[Datadog APM > Profiler ページ][5]でプロファイルを視覚化します。
+4. オプション: [タイムライン機能][7] (ベータ版) を有効にします。[前提条件][8]を参照してください。
 
-**注**: デフォルトでは、CPU とヒーププロファイルのみが有効になっています。その他の[プロファイルタイプ][7]を有効にするには、[profiler.WithProfileTypes][6] を使用します。
+5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
-## コンフィギュレーション
+6. After a minute or two, visualize your profiles in the [Datadog APM > Profiler page][10].
+
+**Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
+
+## 構成
 
 以下の関数で、コードにプロファイラーパラメーターを設定できます。
 
 | 関数 | タイプ          | 説明                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | 文字列        | Datadog [サービス][8]名 (例: `my-web-app`)。             |
-|  WithEnv         | 文字列        | Datadog [環境][9]名 (例: `production`)。         |
+|  WithService     | 文字列        | The Datadog [service][13] name, for example, `my-web-app`.             |
+|  WithEnv         | 文字列        | The Datadog [environment][14] name, for example, `production`.         |
 |  WithVersion     | 文字列        | アプリケーションのバージョン                                                                             |
 |  WithTags        | 文字列のリスト        | アップロードされたプロファイルに適用されるタグのリスト。タグは `<KEY>:<VALUE>` という形式で指定する必要があります。 |
 
@@ -91,16 +97,16 @@ Continuous Profiler は、AWS Lambda などのサーバーレスプラットフ�
 
 | 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                                         | 文字列        | [環境][8]名 (例: `production`)。 |
-| `DD_SERVICE`                                     | 文字列        | [サービス][8]名 (例: `web-backend`)。 |
-| `DD_VERSION`                                     | 文字列        | サービスの[バージョン][8]。 |
+| `DD_ENV`                                         | 文字列        | The [environment][13] name, for example, `production`. |
+| `DD_SERVICE`                                     | 文字列        | The [service][13] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | 文字列        | The [version][13] of your service. |
 | `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。   |
 
 ### CPU プロファイルで C 関数呼び出しを表示する
 
 デフォルトでは、Go の CPU プロファイラーには、Go コードの詳細情報のみが表示されます。プログラムが C コードを呼び出した場合、C コードの実行時間はプロファイルに反映されますが、コールスタックには Go 関数の呼び出しだけが表示されます。
 
-CPU プロファイルに C 関数の詳細な呼び出し情報を追加するには、[ianlancetaylor/cgosymbolizer][10] のようなライブラリを使用するとよいでしょう。このライブラリを使うには
+To add detailed C function call information to CPU profiles, you may opt to use library such as [ianlancetaylor/cgosymbolizer][14]. To use this library:
 
 1. パッケージをダウンロードします。
 
@@ -116,23 +122,36 @@ CPU プロファイルに C 関数の詳細な呼び出し情報を追加する�
 
 **注**: このライブラリは実験的なものと見なされています。C++ の例外を使用するプログラムや、`tcmalloc` のようなコールスタックを収集するライブラリを使用するプログラムでは、デッドロックの原因となる可能性があります (頻度は低いですが)。
 
+## Save up to 14% CPU in production with PGO
+
+Starting [Go 1.21][15], the Go compiler supports Profile-Guided Optimization (PGO). PGO enables additional optimizations on code identified as hot by CPU profiles of production workloads. This is compatible with Datadog Go Continuous Profiler and can be used for production builds.
+
+Follow [this guide][16] to set it up.
+
 ## 次のステップ
 
-[プロファイラーの概要][9]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
+The [Getting Started with Profiler][17] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
-[5]: https://app.datadoghq.com/profiling
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
-[8]: /ja/getting_started/tagging/unified_service_tagging
-[9]: /ja/getting_started/profiler/
-[10]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
-[12]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[2]: /ja/profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /ja/profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
+[7]: /ja/profiler/connect_traces_and_profiles/#span-execution-timeline-view
+[8]: /ja/profiler/connect_traces_and_profiles/#prerequisites
+[9]: /ja/integrations/guide/source-code-integration/?tab=go
+[10]: https://app.datadoghq.com/profiling
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#ProfileType
+[13]: /ja/getting_started/tagging/unified_service_tagging
+[14]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
+[15]: https://tip.golang.org/doc/go1.21
+[16]: /ja/profiler/guide/save-cpu-in-production-with-go-pgo
+[17]: /ja/getting_started/profiler/
+[18]: /ja/profiler/enabling/supported_versions/
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview

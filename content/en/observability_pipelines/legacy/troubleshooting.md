@@ -1,8 +1,6 @@
 ---
 title: (LEGACY) Troubleshooting
 disable_toc: false
-aliases:
-  - /observability_pipelines/troubleshooting/
 further_reading:
   - link: "/observability_pipelines/legacy/monitoring/"
     tag: "Documentation"

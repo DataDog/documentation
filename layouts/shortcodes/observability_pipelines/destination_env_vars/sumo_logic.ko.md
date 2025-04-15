@@ -1,0 +1,1 @@
+Sumo Logic HTTP 컬렉터(Collector) URL을 입력합니다. 자세한 내용은 [전제 조건](#prerequisites)을 참조하세요.

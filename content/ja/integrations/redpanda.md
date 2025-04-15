@@ -28,6 +28,7 @@ author:
 categories:
 - ログの収集
 - メッセージキュー
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -37,7 +38,6 @@ integration_id: redpanda
 integration_title: Redpanda
 integration_version: 2.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: redpanda
 public_title: Redpanda
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
   media: []
@@ -70,9 +71,9 @@ Redpanda は、ミッションクリティカルなワークロードのため�
 
 Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示したり、特定のユーザーニーズに基づいて追加のメトリクスグループを追加することができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。
@@ -80,7 +81,7 @@ Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示した
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>` を実行します。
 
@@ -124,12 +125,12 @@ helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ##### メトリクスの収集
 
@@ -139,7 +140,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 2. [Agent を再起動します][3]。
 
-##### 収集データ
+##### ログ収集
 
 デフォルトでは、Datadog Agent でログを収集することは無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
 
@@ -176,7 +177,7 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 メトリクスは、Datadog のサーバーに自動的に収集されます。詳細は、[オートディスカバリーインテグレーションテンプレート][1]を参照してください。
 
-##### 収集データ
+##### ログ収集
 
 デフォルトでは、Datadog Agent でログ収集は無効になっています。ログ収集は、Agent v6.0+ で利用可能です。
 
@@ -195,21 +196,21 @@ Redpanda のパフォーマンスデータの収集を開始するには
 
 [Agent のステータスサブコマンドを実行][4]し、Checks セクションで `redpanda` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "redpanda" >}}
 
 
-### ヘルプ
+### イベント
 
 Redpanda インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "redpanda" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

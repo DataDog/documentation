@@ -6,7 +6,7 @@ categories:
 - data stores
 - aws
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/

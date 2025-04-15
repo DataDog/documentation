@@ -29,7 +29,7 @@ En primer lugar, [despliega el Cluster Agent][3].
 A continuación, despliega el Cluster Check Runner utilizando [Datadog Operator][4] o [Helm][5]:
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
 Con el Operador, puedes lanzar y gestionar todos estos recursos con un único manifiesto. Por ejemplo:
 

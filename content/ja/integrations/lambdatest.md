@@ -31,6 +31,7 @@ categories:
 - インシデント
 - 問題追跡
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: lambdatest
 integration_title: LambdaTest
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: lambdatest
 public_title: LambdaTest
@@ -60,6 +60,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 最も強力な自動テストプラットフォーム
   media: []
@@ -89,11 +90,11 @@ LambdaTest でできることは以下の通りです。
 - 24 時間 365 日のチャットサポートで、いつでもヘルプを受けることができます。
 - プラットフォームへの生涯無料アクセス、自動化テスト 100 分無料。
 
-## 計画と使用
+## セットアップ
 
 構成はすべて LambdaTest ダッシュボード上で行われます。[LambdaTest-Datadog インテグレーション][1]セットアップドキュメントを参照してください。
 
-### ブラウザトラブルシューティング
+### 構成
 
 LambdaTest を使用して Datadog でインシデントを追跡する方法を紹介します。
 
@@ -109,7 +110,7 @@ LambdaTest を使用して Datadog でインシデントを追跡する方法を
 
 さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][2]でインテグレーション名を検索して確認してください。
 
-## Agent
+## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 

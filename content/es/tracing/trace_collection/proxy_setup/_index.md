@@ -665,7 +665,7 @@ Puedes encontrar más opciones de configuración en la documentación del comple
 
 {{% /tab %}}
 
-{{% tab "Apache HTTP Server" (Servidor HTTP Apache) %}}
+{{% tab "Servidor HTTP Apache" %}}
 
 Datadog proporciona un [módulo][1] HTTPd para mejorar las capacidades del [servidor HTTP Apache][2] y del [servidor HTTP IHS][3] con el rastreo APM.
 

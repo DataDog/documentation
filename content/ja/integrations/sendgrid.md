@@ -25,6 +25,7 @@ author:
 categories:
 - モニター
 - ログの収集
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,7 +34,6 @@ integration_id: sendgrid
 integration_title: SendGrid
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sendgrid
 public_title: SendGrid
@@ -50,6 +50,7 @@ tile:
   - Supported OS::macOS
   - Category::Metrics
   - Category::Log Collection
+  - Offering::Integration
   configuration: README.md#Setup
   description: Sendgrid のメトリクスを収集します。
   media: []
@@ -65,7 +66,7 @@ tile:
 
 Twilio SendGrid は、企業がトランザクションメールやマーケティングメールの送信に使用するメールプラットフォームです。このインテグレーションを使用して、SendGrid のメール配信とエンゲージメントのメトリクスとログを収集します。
 
-## 計画と使用
+## セットアップ
 
 ### SendGrid の API キーを生成する
 
@@ -76,7 +77,7 @@ Twilio SendGrid は、企業がトランザクションメールやマーケテ�
 5. _API Key Name_ を記入します。**Full Access**、またはアクセス制限のある場合は、**Stats** - **Read Access** および **User Account** - **Read Access** を選択します。
 6. API キーを安全な場所にコピーします。API キーは、Datadog のユーザーインターフェイスで SendGrid インテグレーションを設定する際に必要になります。
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### メトリクスの送信
 
@@ -98,25 +99,25 @@ Twilio SendGrid は、企業がトランザクションメールやマーケテ�
 9. **Event Webhook Status** を有効にします。
 10. **Save** をクリックします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "sendgrid" >}}
 
 
-### ワークフローの自動化
+### Logs
 
 Sendgrid の配信とエンゲージメントイベントは、ソース `sendgrid` の下にログとして表示されます。
 
-### ヘルプ
+### イベント
 
 SendGrid インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 SendGrid インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

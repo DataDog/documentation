@@ -4,7 +4,7 @@ categories:
 - containers
 - google cloud
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: GCE コンテナのリソースの使用状況を監視。
 doc_link: https://docs.datadoghq.com/integrations/google_container_engine/

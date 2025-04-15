@@ -29,6 +29,7 @@ author:
   support_email: yaara@tyk.io
 categories:
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
 display_on_public_website: true
@@ -38,7 +39,6 @@ integration_id: tyk
 integration_title: Tyk
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: tyk
 public_title: Tyk
@@ -54,6 +54,7 @@ tile:
   - Supported OS::Windows
   - Category::Metrics
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
   media: []
@@ -73,7 +74,7 @@ Tyk には、[Tyk API ゲートウェイ][2]からメトリクスを収集する
 
 Tyk API ゲートウェイでは、処理されるすべてのトラフィックが記録され、その情報を Datadog に送信してその関連ダッシュボードを構築します。
 
-### UDS の仕組み
+### 仕組み
 
 [Tyk pump][3] は、アプリケーションのカスタムメトリクスを書き込み、Datadog Agent にバンドルされたメトリクス集計サービスである [DogStatsD][4] へ送信することで Datadog に送信します。DogStatsD は、`Tyk-gateway` で使用されるヒストグラムメトリクスタイプを含む Datadog 固有の拡張機能を追加する StatsD プロトコルを実装します。
 
@@ -83,13 +84,13 @@ Datadog Agent の実行中、DogstatsD は `Tyk-pump` から `request_time` メ�
 
 カスタムメトリクス Tyk は、タイプ [DD_HISTOGRAM_AGGREGATES][5] を使用しています。
 
-## 計画と使用
+## セットアップ
 
 Tyk インテグレーションは `tyk-pump` パッケージに含まれており、`pump.conf`age でコンフィギュレーションを設定するだけです（Tyk プラットフォームから何もインストールする必要はありません）。
 
 ### インストール
 
-#### インフラストラクチャーリスト
+#### インストール
 
 このインテグレーションに必要なのは、実行中の Tyk インストールのみです。[Tyk セルフマネージド][6] または [Tyk OSS][7] をインストールできます。両オプションに、`tyk-pump` が含まれています。
 
@@ -102,7 +103,7 @@ Datadog [Agent][9] は、K8s クラスター、Docker コンテナ、Mac など�
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][10]のガイドをご参照ください。変更の適用を検証するには、[Agent の status サブコマンドを実行][11]します。
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 #### Tyk-pump
 Datadog pump を設定するには、pump README の [DogstatsD セクション][12]に記載された手順に従います。
@@ -169,13 +170,13 @@ Tyk インテグレーションでは、Datadog Agent にバンドルされた�
 
 上の例では、`tyk` です。入力を始めると、利用可能なすべてのメトリクスが表示されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "tyk" >}}
 
 
-### ライブラリ
+### ダッシュボード
 
 Datadog では、API サービスおよびその消費に関する統計データを表示するダッシュボードを作成できます。
 
@@ -185,15 +186,15 @@ Datadog では、API サービスおよびその消費に関する統計デー�
 
 **注: 上記のダッシュボードを[インポート][19]して、自身のダッシュボードの例またはベースラインとして使用できます。**
 
-### ヘルプ
+### イベント
 
 Tyk インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Tyk インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 

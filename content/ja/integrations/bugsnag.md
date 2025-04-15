@@ -1,7 +1,7 @@
 ---
 categories:
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 複数のアプリケーションのエラー率を一元的に追跡。
 doc_link: https://docs.datadoghq.com/integrations/bugsnag/

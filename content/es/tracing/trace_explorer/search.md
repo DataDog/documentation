@@ -25,7 +25,6 @@ Selecciona una vista de lista de principales, y agrupa la consulta por `resource
 {{< img src="tracing/trace_explorer/search/trace_explorer_top_list_search.png" alt="Búsqueda de lista de Trace Explorer. La opción Visualizar como está establecida en Lista de principales." style="width:100%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
-**Nota**: Las consultas `key:value` **no** requieren que se [declare una faceta][1] de antemano.
 
 [1]: /es/tracing/trace_explorer/query_syntax/#facets
 {{< /site-region >}}

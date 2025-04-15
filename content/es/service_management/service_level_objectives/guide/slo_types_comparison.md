@@ -12,7 +12,6 @@ further_reading:
 - link: /service_management/service_level_objectives/time_slice/
   tag: Documentación
   text: SLOs de fracción de tiempo
-kind: Guía
 title: Comparación de tipos de SLO
 ---
 
@@ -43,7 +42,7 @@ Al crear SLOs, puedes elegir entre los siguientes tipos:
 
 ## Referencias adicionales
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/es/service_management/service_level_objectives/error_budget/
 [2]: https://docs.datadoghq.com/es/service_management/service_level_objectives/burn_rate/

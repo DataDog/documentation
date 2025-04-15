@@ -78,6 +78,9 @@ instances:
 
 `service`와 `env` 태그를 사용하여 일반적인 태깅 체계를 통해 데이터베이스 텔레메트리를 다른 텔레메트리와 연결합니다. Datadog에서 이 같은 태그를 사용하는 방법을 알아보려면 [통합 서비스 태깅][5]을 참고하세요.
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ### 지원되는 드라이버
 
 #### Microsoft ADO
@@ -133,13 +136,13 @@ instances:
   - dbm: true
     host: '<HOSTNAME>,<SQL_PORT>'
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # 프로젝트와 인스턴스를 추가한 후에는 CPU, 메모리 등과 같은 추가 클라우드 데이터를 풀하도록 Datadog Google Cloud(GCP) 통합을 설정합니다.
+    # 프로젝트 및 인스턴스를 추가한 후, GCP(Datadog Google Cloud) 통합을 설정하여 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져옵니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -229,7 +232,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     ```yaml
     clusterAgent:
       confd:
-        sqlserver.yaml: -|
+        sqlserver.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -237,7 +240,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
             host: <HOSTNAME>
             port: 1433
             username: datadog
-            password: '<PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             connector: 'odbc'
             driver: 'ODBC Driver 18 for SQL Server'
             tags:  # Optional
@@ -276,13 +279,13 @@ instances:
     host: '<HOSTNAME>'
     port: <SQL_PORT>
     username: datadog
-    password: '<PASSWORD>'
+    password: 'ENC[datadog_user_database_password]'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # 프로젝트 및 인스턴스를 추가한 후, GCP(Datadog Google Cloud) 통합을 설정하여 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져옵니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -308,7 +311,7 @@ metadata:
           "host": "<HOSTNAME>",
           "port": <SQL_PORT>,
           "username": "datadog",
-          "password": "<PASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional

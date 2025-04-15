@@ -5,6 +5,7 @@ categories:
 - cloud
 - aws
 - log collection
+custom_kind: integration
 dependencies: []
 description: AWS Direct Connect のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
@@ -15,7 +16,6 @@ integration_id: ''
 integration_title: AWS Direct Connect
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_directconnect
 public_title: Datadog-AWS Direct Connect インテグレーション
@@ -28,9 +28,9 @@ version: '1.0'
 
 このインテグレーションは、AWS Direct Connect から接続状態、送受信ビットレート、送受信パケットレートなどのメトリクスを収集します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -62,23 +62,23 @@ AWS Direct Connect を構成して、ログを S3 バケットか CloudWatch の
     - [S3 バケットに手動トリガーを追加][7]
     - [CloudWatch ロググループに手動トリガーを追加][8]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_directconnect" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### ヘルプ
+### イベント
 
 AWS Direct Connect インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS Direct Connect インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

@@ -8,8 +8,7 @@ further_reading:
   text: Real User Monitoring (RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: Blog
-  text: Monitor de métricas de Core Web Vitals con Datadog RUM y <txprotected>Monitorización</txprotected>
-    Sintético
+  text: Monitor de métricas de Core Web Vitals con Datadog RUM y Monitorización Sintético
 - link: /real_user_monitoring/explorer/
   tag: Documentación
   text: Explorar tus vistas en Datadog
@@ -39,21 +38,20 @@ Puedes acceder a las métricas del rendimiento de tus vistas en:
 Las métricas de Core Web Vitals de Datadog están disponibles en el paquete de <a href="https://github.com/Datadog/browser-sdk">@Datadog</a>/browser-rum v2.2.0+.
 </div>
 
-Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métricas diseñados para monitorizar la experiencia de usuario de un sitio. Estas métricas se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada métrica viene acompañada de orientaciones sobre el rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda la <txprotected>monitorización</txprotected> del percentil 75 para estas métricas.
+Las métricas de [Core Web Vitals de Google][5] son un conjunto de tres métricas diseñados para monitorizar la experiencia de usuario de un sitio. Estas métricas se centran en ofrecer una visión del rendimiento de carga, la interactividad y la estabilidad visual. Cada métrica viene acompañada de orientaciones sobre el rango de valores que se traducen en una buena experiencia de usuario. Datadog recomienda la monitorización del percentil 75 para estas métricas.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Visualización del resumen de las métricas de Core Web Vitals" >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals-1.png" alt="Visualización del resumen de métricas de Core Web Vitals" >}}
 
-- El primer retardo de entrada y la mayor pintura de contenido no se recopilan para las páginas abiertas en segundo plano (por ejemplo, en una nueva pestaña o en una ventana sin foco).
-- Las métricas recopiladas de las páginas vistas de tus usuarios reales pueden diferir de las calculadas para páginas cargadas en un entorno fijo y controlado, como un [test de navegador Sintético][6]. La monitorización Sintético muestra la pintura de mayor contenido y el desplazamiento de diseño acumulativo como métricas de laboratorio, no como métricas reales.
+- La interacción con la siguiente pintura y la pintura de mayor contenido no se recopilan para las páginas abiertas en segundo plano (por ejemplo, en una nueva pestaña o en una ventana sin foco).
+- Las métricas recopiladas de las páginas de vistas de tus usuarios reales pueden diferir de las calculadas para páginas cargadas en un entorno fijo y controlado, como un [test de navegador Sintético][6]. La monitorización Sintético muestra la pintura de mayor contenido y el desplazamiento de diseño acumulativo como métricas de laboratorio, no como métricas reales.
 
 | Métrica                   | Foco            | Descripción                                                                                           | Valor objetivo |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Pintura de mayor contenido][7] | Rendimiento de la carga | Momento en la línea de tiempo de carga de la página en el que se representa el objeto DOM más grande de la ventana gráfica (es decir, visible en pantalla).         | <2,5 s       |
-| [Primer Retardo de Entrada][8]        | Interactividad    | Tiempo transcurrido entre la primera interacción de un usuario con la página y la respuesta del navegador.             | <100 ms      |
-| [Desplazamiento de diseño acumulativo][9]  | Estabilidad visual | Cuantifica los desplazamientos inesperados de la página debido a contenidos cargados dinámicamente (por ejemplo, anuncios de terceros), donde 0 significa que no se producen desplazamientos. | <0,1        |
 | [Interacción con la siguiente pintura][19]| Interactividad    | Duración más prolongada entre la interacción de un usuario con la página y la siguiente pintura. Requiere SDK de RUM v5.1.0. | <200 ms        |
+| [Desplazamiento de diseño acumulativo][9]  | Estabilidad visual | Cuantifica los desplazamientos inesperados de la página debido a contenidos cargados dinámicamente (por ejemplo, anuncios de terceros), donde 0 significa que no se producen desplazamientos. | <0,1        |
 
-### Elementos objetivo de core web vitals
+### Elementos objetivo de Core Web Vitals
 
 Identificar qué elemento desencadenó una instancia alta de la métrica de Core Web Vitals es el primer paso para comprender la causa raíz y poder mejorar el rendimiento.
 RUM informa del elemento asociado a cada instancia de Core Web Vitals:
@@ -103,11 +101,11 @@ Para tener en cuenta las aplicaciones web modernas, el tiempo de carga vigila la
   - La diferencia entre `navigationStart` y `loadEventEnd` o
   - La diferencia entre `navigationStart` y la primera vez que la página no tiene actividad. Lee [Cómo se calcula la actividad de la página](#how-page-activity-is-calculated) para más detalles.
 
-- **Cambio de ruta SPA**: El tiempo de carga es igual a la diferencia entre el cambio de URL y la primera vez que la página no tiene actividad. Lee [Cómo se calcula la actividad de la página](#how-page-activity-is-calculated) para más detalles.
+- **Cambio de ruta SPA**: el tiempo de carga es igual a la diferencia entre el cambio de URL y la primera vez que la página no tiene actividad. Lee [Cómo se calcula la actividad de la página](#how-page-activity-is-calculated) para más detalles.
 
 ### Cómo se calcula la actividad de la página
 
-El SDK del  RUM Browser realiza un rastreo de la actividad de la página para estimar el tiempo que transcurrirá hasta que la interfaz vuelva a ser estable. Se considera que la página tiene actividad cuando:
+El SDK del RUM Browser realiza un rastreo de la actividad de la página para estimar el tiempo que transcurrirá hasta que la interfaz vuelva a ser estable. Se considera que la página tiene actividad cuando:
 
 - `xhr` o `fetch` solicitudes están en curso.
 - El navegador emite entradas de tiempo de recursos de rendimiento (fin de carga de JS, CSS, etc.).
@@ -119,12 +117,12 @@ Se considera que la actividad de la página ha terminado cuando no ha tenido nin
 
 **Caveats:**
 
-El criterio de 100 ms desde la última solicitud o mutación DOM podría no ser una determinación precisa de la actividad en los siguientes escenarios:
+El criterio de 100 ms desde la última solicitud o mutación del DOM podría no ser una determinación precisa de la actividad en los siguientes escenarios:
 
 - La aplicación recopila datos analíticos enviando solicitudes a una API periódicamente o después de cada clic.
 - La aplicación utiliza técnicas "[cometa][17]" (es decir, streaming o sondeo largo) y la solicitud permanece en espera durante un tiempo indefinido.
 
-Para mejorar la precisión de la determinación de la actividad en estos casos, especifica `excludedActivityUrls`, un lista de recursos para que el SDK del RUM Browser los excluya al calcular la actividad de la página:
+Para mejorar la precisión de la determinación de la actividad en estos casos, especifica `excludedActivityUrls`, una lista de recursos para que el SDK del RUM Browser los excluya al calcular la actividad de la página:
 
 ```JavaScript
 window.DD_RUM.init({
@@ -142,11 +140,54 @@ window.DD_RUM.init({
 })
 ```
 
-### Navegación en Hash SPA navegación
+### Navegación en Hash SPA
 
-El SDK de RUM monitoriza automáticamente los marcos que dependen de la navegación hash (`#`). El SDK busca `HashChangeEvent` y emite una nueva vista. Los eventos procedentes de una etiqueta (tag) de ancla HTML que no afectan al contexto de la vista actual se ignoran.
+El SDK del RUM monitoriza automáticamente los marcos que dependen de la navegación hash (`#`). El SDK busca `HashChangeEvent` y emite una nueva vista. Los eventos procedentes de una etiqueta (tag) de ancla HTML que no afectan al contexto de la vista actual se ignoran.
 
-## Añadir tus propios tiempos de rendimiento
+## Crear métricas de rendimiento personalizadas
+
+### Medir el rendimiento de los componentes con indicadores vitales personalizados
+
+Utiliza la API `customVital` para medir el rendimiento de tu aplicación a nivel de componente. Por ejemplo, puedes medir cuánto tarda una parte de la página en renderizarse o cuánto tarda un componente en responder a una interacción del usuario. **Nota**: Los nombres de los indicadores vitales personalizados no pueden contener espacios ni caracteres especiales.
+
+#### Mediciones de la duración de inicio y parada
+
+Inicia una medición de duración llamando a `startDurationVital` y detén una medición con `stopDurationVital`:
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering")
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+Una vez que se llama al método `stopDurationVital`, la duración del indicador vital personalizado se envía a Datadog y puede consultarse mediante `@vital.name:dropdownRendering`. También se puede filtrar por duración, por ejemplo con `@vital.duration:>10`.
+
+#### Utilizar referencias y descripciones
+
+Utiliza la referencia devuelta por `startDurationVital` y especifica una cadena `description` para diferenciar entre instancias del mismo indicador vital personalizado en varias páginas. Por ejemplo, para realizar un seguimiento de la duración de `dropdownRendering` en la página `login`:
+
+```javascript
+const reference = window.DD_RUM.startDurationVital("dropdownRendering", { description: "login" })
+window.DD_RUM.stopDurationVital(reference)
+```
+
+Este código agrupa por `@vital.description` para que puedas realizar un seguimiento del comportamiento de renderización del mismo componente en diferentes páginas.
+
+También puedes añadir contexto a tu indicador vital personalizado con la propiedad `context`:
+
+```javascript
+window.DD_RUM.startDurationVital("dropdownRendering", {context: { clientId: "xxx" }})
+window.DD_RUM.stopDurationVital("dropdownRendering")
+```
+
+#### Informar un indicador vital personalizado con `addDurationVital`
+
+En lugar de establecer variables de indicadores vitales personalizados individualmente, puedes informar de un indicador vital personalizado en una sola operación mediante `addDurationVital`:
+
+```javascript
+window.DD_RUM.addDurationVital("dropdownRendering", {startTime: 1707755888000, duration: 10000})
+```
+
+### Rastreo de los tiempos de rendimiento adicionales
 
 Además del tiempo de rendimiento por defecto de RUM, puedes medir dónde pasa el tiempo tu aplicación con mayor flexibilidad. La API `addTiming` te proporciona una forma sencilla de añadir un tiempo de rendimiento adicional.
 
@@ -162,29 +203,29 @@ Por ejemplo, puedes añadir un tiempo cuando tu imagen principal haya aparecido:
 
 O cuando los usuarios se desplazan por primera vez:
 
-```JavaScript
-document.addEventListener("scroll", controlador de función() {
+```javascript
+document.addEventListener("scroll", function handler() {
     //Eliminar el evento de escucha para que solo se active una vez
-    document.removeEventListener("scroll", controlador);
+    document.removeEventListener("scroll", handler);
     window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
 Una vez enviado el tiempo, este es accesible en nanosegundos como `@view.custom_timings.<timing_name>`, por ejemplo: `@view.custom_timings.first_scroll`. Debes [crear una medida][18] antes de crear una visualización en el RUM Explorer o en tus dashboards.
 
-Para aplicaciones de página única, la API `addTiming` emite un tiempo relativo al inicio de la vista de RUM actual. Por ejemplo, si un usuario aterriza en tu aplicación (carga inicial), luego pasa a una página diferente después de 5 segundos (cambio de ruta) y finalmente activa `addTiming` después de 8 segundos, el tiempo es igual a `8-5 = 3` segundos.
+Para aplicaciones de página única, la API `addTiming` emite un tiempo relativo al inicio de la vista de RUM actual. Por ejemplo, si un usuario llega a tu aplicación (carga inicial), luego pasa a una página diferente después de 5 segundos (cambio de ruta) y finalmente activa `addTiming` después de 8 segundos, el tiempo es igual a `8-5 = 3` segundos.
 
 Si estás utilizando una configuración asíncrona, puedes proporcionar tu propio tiempo (como una marca de tiempo de época UNIX) como segundo parámetro.
 
 Por ejemplo:
 
-```JavaScript
-document.addEventListener("scroll", controlador de función() {
+```javascript
+document.addEventListener("scroll", function handler() {
     //Eliminar el evento de escucha para que solo se active una vez
-    document.removeEventListener("scroll", controlador);
+    document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
-    window.DD_RUM.onReady(función() {
+    window.DD_RUM.onReady(function() {
       window.DD_RUM.addTiming('first_scroll', timing);
     });
 });

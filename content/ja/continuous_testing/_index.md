@@ -29,6 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: ブログ
   text: Datadog を使った継続的テストのベストプラクティス
+- link: https://www.datadoghq.com/blog/progressive-web-application-monitoring/
+  tag: ブログ
+  text: Best practices for monitoring progressive web applications
 title: Continuous Testing
 ---
 
@@ -84,7 +87,7 @@ Synthetic テストの実行や、CI/CD パイプラインで実行されてい�
   Datadog ラーニングセンターには、このトピックについて学ぶのに役立つ実践的なコースが満載です。無料で登録して、CI/CD パイプラインで Datadog Synthetic テストを実行する方法を学びましょう。
 {{< /learning-center-callout >}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

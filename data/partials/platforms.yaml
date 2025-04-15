@@ -45,7 +45,7 @@ platforms:
     category: "cloud_and_container"
   - name: osx
     link: "agent/basic_agent_usage/osx/"
-    image: "platform_macosx.png"
+    image: "platform_macos.png"
     category: "macOS"
   - name: Oracle
     link: "agent/basic_agent_usage/oracle/"

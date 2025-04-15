@@ -27,6 +27,9 @@ further_reading:
 - link: "/glossary/#tail"
   tag: Glossary
   text: 'Glossary entry for "tail"'
+- link: "https://github.com/DataDog/serilog-sinks-datadog-logs/"
+  tag: Github package
+  text: 'Serilog.Sinks.Datadog.Logs Package'
 ---
 
 To send your C# logs to Datadog, use one of the following approaches:
@@ -460,9 +463,12 @@ If you are using the `Microsoft.Extensions.Logging` integration, you can filter 
 
 ## Agentless logging with Serilog sink
 
+<div class="alert alert-info">Since <code>0.2.0</code>, you can configure the Datadog sink by using an <code>appsettings.json</code> file with the <a href="https://github.com/serilog/serilog-settings-configuration"><code>Serilog.Setting.Configuration</code></a> package.
+For more information, see the <a href="https://github.com/DataDog/serilog-sinks-datadog-logs/tree/master?tab=readme-ov-file#serilogsinksdatadoglogs">`Serilog.Sinks.Datadog.Logs`</a> package.</div>
+
 If it is not possible to use file-tail logging or APM Agentless logging, and you are using the `Serilog` framework, then you can use the Datadog [Serilog sink][19] to send logs directly to Datadog.
 
-Install the Datadog [Serilog sink][19] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
+Install the [Datadog Serilog sink][19] into your application, which sends events and logs to Datadog. By default the sink forwards logs through HTTPS on port 443.
 Run the following command in the Package Manager Console:
 
 ```text
@@ -471,83 +477,14 @@ PM> Install-Package Serilog.Sinks.Datadog.Logs
 
 Then, initialize the logger directly in your application. Ensure that you [add your `<API_KEY>`][15].
 
-{{< site-region region="us" >}}
-
 ```csharp
 using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.com" })
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "{{< region-param key="http_endpoint_full" >}}" })
     .CreateLogger())
 {
     // Some code
 }
 ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us5.datadoghq.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.datadoghq.eu" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```csharp
-using (var log = new LoggerConfiguration()
-    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ddog-gov.com" })
-    .CreateLogger())
-{
-    // Some code
-}
-```
-
-{{< /site-region >}}
 
 {{< site-region region="us" >}}
 
@@ -603,33 +540,6 @@ using (var log = new LoggerConfiguration()
 
 New logs are now directly sent to Datadog.
 
-Alternately, since `0.2.0`, you can configure the Datadog sink by using an `appsettings.json` file with the `Serilog.Setting.Configuration` package.
-
-In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is shown below:
-
-```json
-"Serilog": {
-  "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.Datadog.Logs" ],
-  "MinimumLevel": "Debug",
-  "WriteTo": [
-    { "Name": "Console" },
-    {
-      "Name": "DatadogLogs",
-      "Args": {
-        "apiKey": "<API_KEY>",
-        "source": "<SOURCE_NAME>",
-        "host": "<HOST_NAME>",
-        "tags": ["<TAG_1>:<VALUE_1>", "<TAG_2>:<VALUE_2>"],
-      }
-    }
-  ],
-  "Enrich": [ "FromLogContext", "WithMachineName", "WithThreadId" ],
-  "Properties": {
-    "Application": "Sample"
-  }
-}
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -645,7 +555,7 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/advanced_log_collection
 [11]: /serverless/azure_app_services
-[12]: /sensitive_data_scanner/
+[12]: /security/sensitive_data_scanner/
 [13]: /tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys

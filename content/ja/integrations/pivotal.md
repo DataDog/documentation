@@ -2,6 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
+custom_kind: integration
 dependencies: []
 description: Datadog イベントストリームでストーリーを参照してコメントを入力。
 doc_link: https://docs.datadoghq.com/integrations/pivotal/
@@ -12,7 +13,6 @@ integration_id: pivotal
 integration_title: Pivotal Tracker
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: pivotal
 public_title: Datadog-Pivotal Tracker インテグレーション
@@ -30,29 +30,29 @@ version: '1.0'
 - ストーリーの完成度をシステム内の他のイベントやメトリクスと相関付け、グラフ化することができます。
 - ストーリーの更新通知を受け取ることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog Events Explorer で Pivotal イベントを取得するには、Pivotal [プロファイルページ][2]で生成される API トークンを入力します。
 
 {{< img src="integrations/pivotal/pivotal_token.png" alt="Pivotal のトークン" popup="true">}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Pivotal Tracker インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 Pivotal Tracker インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Pivotal Tracker インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

@@ -11,6 +11,9 @@ further_reading:
 - link: "/service_management/service_level_objectives/"
   tag: "Documentation"
   text: "SLO overview, configuration, and calculation"
+- link: "https://www.datadoghq.com/blog/define-and-manage-slos/"
+  tag: "Blog"
+  text: "Best practices for managing your SLOs with Datadog"
 ---
 
 ## Overview

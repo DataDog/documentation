@@ -1,6 +1,6 @@
 ---
 aliases:
-- /tracing/connect_logs_and_traces/go
+- /ja/tracing/connect_logs_and_traces/go
 code_lang: go
 code_lang_weight: 30
 description: Go ログとトレースを接続して Datadog で関連付けます。
@@ -68,7 +68,7 @@ func main() {
     logrus.SetFormatter(&logrus.JSONFormatter{})
 
     // Datadog コンテキストログフックを追加
-    logrus.AddHook(&dd_logrus.DDContextLogHook{}) 
+    logrus.AddHook(&dd_logrus.DDContextLogHook{})
 
     // ...
 }

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Argo CD Overview: assets/dashboards/argo_cd_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,20 +14,23 @@ assets:
       check:
       - argocd.api_server.go.goroutines
       - argocd.app_controller.go.goroutines
+      - argocd.appset_controller.go.goroutines
       - argocd.repo_server.go.goroutines
+      - argocd.notifications_controller.go.goroutines
       metadata_path: metadata.csv
       prefix: argocd.
     process_signatures:
     - argocd-application-controller
+    - argocd-applicationset-controller
     - argocd-repo-server
     - argocd-server
+    - argocd-notifications-controller
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10314
     source_type_name: ArgoCD
-  logs:
-    source: argocd
   monitors:
-    Sync Status: assets/recommended_monitors/application_sync_status.json
+    Sync Status: assets/monitors/application_sync_status.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -35,6 +39,9 @@ author:
 categories:
 - developer tools
 - ログの収集
+- kubernetes
+- 構成とデプロイ
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/argocd/README.md
 display_on_public_website: true
@@ -42,13 +49,12 @@ draft: false
 git_integration_title: argocd
 integration_id: argocd
 integration_title: Argo CD
-integration_version: 1.1.0
+integration_version: 2.4.3
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: argocd
 public_title: Argo CD
-short_description: Argo CD
+short_description: Monitor the health and performance of Argo CD
 supported_os:
 - linux
 - windows
@@ -61,14 +67,20 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Category::Kubernetes
+  - Category::Configuration & Deployment
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
+  - Offering::Integration
   configuration: README.md#Setup
-  description: Argo CD
+  description: Monitor the health and performance of Argo CD
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: Argo CD
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -99,6 +111,8 @@ Datadog Agent は、このインテグレーションを使用して、公開さ
 ##### メトリクスの収集
 
 Prometheus 形式のメトリクスが Argo CD クラスターで公開されていることを確認します。Argo CD の[デフォルトマニフェスト][4]を使用している場合、これはデフォルトで有効になっています。Agent がすべてのメトリクスを収集するためには、前述の 3 つのコンポーネントのそれぞれにアノテーションを付ける必要があります。アノテーションの詳細については、[オートディスカバリーインテグレーションテンプレート][5]を参照してください。その他の構成オプションは、[サンプル argocd.d/conf.yaml][6] を確認することで利用可能です。
+
+There are use cases where Argo CD Applications contain labels that need to be exposed as Prometheus metrics. These labels are available using the `argocd_app_labels` metric, which is disabled on the Application Controller by default. Refer to the [ArgoCD Documentation][7] for instructions on how to enable it.
 
 構成例:
 
@@ -180,22 +194,57 @@ spec:
 # (...)
 ```
 
+**Note**: For the full list of supported endpoints, see the [conf.yaml example file][8].
 
-##### ログの収集
+##### Troubleshooting
+
+**Clashing Tag Names**:
+The Argo CD integration attaches a name tag derived from the application name OpenMetrics label when available. This could sometimes lead to querying issues if a name tag is already attached to a host, as seen in the example `name: host_a, app_a`. To prevent any unwanted behavior when querying, it is advisable to [remap the name label][9] to something more unique, such as `argocd_app_name` if the host happens to already have a name tag. Below is an example configuration:
+
+**アプリケーションコントローラー**:
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/argocd-application-controller.checks: |
+      {
+        "argocd": {
+          "init_config": {},
+          "instances": [
+            {
+              "app_controller_endpoint": "http://%%host%%:8082/metrics",
+              "rename_labels": {
+                "name": "argocd_app_name"
+              }
+            }
+          ]
+        }
+      }
+    # (...)
+spec:
+  containers:
+    - name: 'argocd-application-controller'
+# (...)
+```
+
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
-Argo CD のログは、Kubernetes を通じて、異なる Argo CD ポッドから収集することができます。Datadog Agent では、ログの収集はデフォルトで無効になっています。有効にするには、[Kubernetes ログ収集][7]を参照してください。
+Argo CD logs can be collected from the different Argo CD pods through Kubernetes. Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][10].
 
-[オートディスカバリーのインテグレーションテンプレート][8]のガイドを参照して、次のパラメーターを適用してください。
+See the [Autodiscovery Integration Templates][11] for guidance on applying the parameters below.
 
 | パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "argocd", "service": "<SERVICE_NAME>"}`   |
+| `<LOG_CONFIG>` | `{"source": "argocd", "service": "<SERVICE_NAME>"}`  |
 
 ### 検証
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `argocd` を探します。
+[Run the Agent's status subcommand][12] and look for `argocd` under the Checks section.
 
 ## 収集データ
 
@@ -207,25 +256,35 @@ Argo CD のログは、Kubernetes を通じて、異なる Argo CD ポッドか�
 
 Argo CD インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 {{< get-service-checks-from-git "argocd" >}}
 
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Monitoring the health and performance of your container-native CI/CD pipelines][16]
 
 
 
 [1]: https://argo-cd.readthedocs.io/en/stable/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/integrations/openmetrics/
 [4]: https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/
 [5]: https://docs.datadoghq.com/ja/containers/kubernetes/integrations/?tab=kubernetesadv2
 [6]: https://github.com/DataDog/integrations-core/blob/master/argocd/datadog_checks/argocd/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-core/blob/master/argocd/metadata.csv
-[11]: https://github.com/DataDog/integrations-core/blob/master/argocd/assets/service_checks.json
-[12]: https://docs.datadoghq.com/ja/help/
+[7]: https://argo-cd.readthedocs.io/en/stable/operator-manual/metrics/#exposing-application-labels-as-prometheus-metrics
+[8]: https://github.com/DataDog/integrations-core/blob/master/argocd/datadog_checks/argocd/data/conf.yaml.example#L45-L72
+[9]: https://github.com/DataDog/integrations-core/blob/7.45.x/argocd/datadog_checks/argocd/data/conf.yaml.example#L164-L166
+[10]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[11]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://github.com/DataDog/integrations-core/blob/master/argocd/metadata.csv
+[14]: https://github.com/DataDog/integrations-core/blob/master/argocd/assets/service_checks.json
+[15]: https://docs.datadoghq.com/ja/help/
+[16]: https://www.datadoghq.com/blog/container-native-ci-cd-integrations/

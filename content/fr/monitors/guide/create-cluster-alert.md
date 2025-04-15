@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentation
   text: Configurer les notifications de vos monitors
-
 title: Créer des alertes de cluster pour être informé lorsqu'un pourcentage de groupes
   possèdent un état critique
 ---
@@ -31,6 +30,6 @@ Pour cet exemple, imaginons que vous souhaitez recevoir une notification lorsque
 
 Ce monitor surveille le pourcentage de hosts qui ont utilisé plus de 50 % du CPU au cours des 10 dernières minutes. Il génère une notification lorsque plus de 40 % de ces hosts répondent à la condition définie.
 
-{{< img src="monitors/faq/cluster-status.png" alt="statut-alerte-cluster" >}}
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}

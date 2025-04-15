@@ -2,7 +2,7 @@
 categories:
 - collaboration
 - notifications
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Datadog のアラートとグラフをチームのフローに送信。
 doc_link: https://docs.datadoghq.com/integrations/flowdock/

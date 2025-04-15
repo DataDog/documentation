@@ -2,7 +2,7 @@
 categories:
 - Collaboration
 - issue tracking
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
 doc_link: https://docs.datadoghq.com/integrations/desk/

@@ -5,6 +5,7 @@ aliases:
 categories:
 - クラウド
 - AWS
+custom_kind: integration
 dependencies: []
 description: ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_compute_optimizer/
@@ -15,7 +16,6 @@ integration_id: amazon-compute-optimizer
 integration_title: AWS Compute Optimizer
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_compute_optimizer
 public_title: Datadog-AWS Compute Optimizer
@@ -23,6 +23,7 @@ short_description: ユーザーのワークロードを適正化するための�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Compute Optimizer は、ユーザーのワークロードを適正化するためのリソース構成に関する推奨を提供する Web サービスです。
@@ -60,19 +61,19 @@ EC2 インスタンスのリファレンステーブルで、Datadog が `Extern
 
 ### メトリクス
 
-Amazon Compute Optimizer インテグレーションには、メトリクスは含まれません。
+AWS Compute Optimizer インテグレーションには、メトリクスは含まれません。
 
 ### イベント
 
-Amazon Compute Optimizer インテグレーションには、イベントは含まれません。
+AWS Compute Optimizer インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### サービスチェック
 
-Amazon Compute Optimizer インテグレーションには、サービスのチェック機能は含まれません。
+AWS Compute Optimizer インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/

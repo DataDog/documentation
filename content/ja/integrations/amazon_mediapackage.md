@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: AWS Elemental MediaPackage のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_mediapackage/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: AWS Elemental MediaPackage
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mediapackage
 public_title: Datadog-AWS Elemental MediaPackage インテグレーション
@@ -28,9 +28,9 @@ AWS Elemental MediaPackage は、さまざまな再生デバイスに安全性�
 
 このインテグレーションを有効にすると、Datadog にすべての Elemental MediaPackage メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -55,21 +55,21 @@ AWS Elemental MediaPackage から S3 バケットまたは CloudWatch のいず�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_mediapackage" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS Elemental MediaPackage インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS Elemental MediaPackage インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

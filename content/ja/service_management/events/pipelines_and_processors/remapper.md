@@ -19,4 +19,4 @@ title: リマッパー
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="属性リマッパープロセッサー" style="width:80%;" >}}
 
-[1]: https://app.datadoghq.com/logs/pipelines
+[1]: https://app.datadoghq.com/event/settings/pipelines

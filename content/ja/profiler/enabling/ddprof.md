@@ -24,6 +24,8 @@ type: multi-code-lang
 
 ## 要件
 
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][7]をお読みください。
+
 対応 OS
 : Linux (glibc または musl)
 
@@ -45,17 +47,19 @@ OS 設定
 
 ### スタンドアロン
 
-1. 最新の [`ddprof` リリース][2]をダウンロードします。例えば、`amd64` (別名 `x86_64`) プラットフォーム用の `v0.10.1` リリースを取得する一つの方法は以下の通りです。
+1. 最新の [`ddprof` リリース][2]をダウンロードします。例えば、`amd64` (別名 `x86_64`) プラットフォーム用の最新リリースを取得する一つの方法は以下の通りです。
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
    ここで、`INSTALLATION_TARGET` は `ddprof` のバイナリを保存する場所を指定します。この後の例では、`INSTALLATION_TARGET` は `./ddprof` に設定されていると仮定しています。
 
-2. プロファイラーを含むようにサービス呼び出しを修正します。いつものコマンドは `ddprof` 実行ファイルへの最後の引数として渡されます。
+   `aarch64` プラットフォームでは `amd64` の代わりに `arm64` を使用してください。
+
+3. プロファイラーを含むようにサービス呼び出しを修正します。いつものコマンドは `ddprof` 実行ファイルへの最後の引数として渡されます。
    {{< tabs >}}
 {{% tab "環境変数" %}}
 
@@ -112,8 +116,8 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 1. [ddprof][2] のライブラリサポート付きリリース (v0.8.0 以降) をダウンロードし、tarball を抽出します。例:
 
    ```bash
-   curl -L -o ddprof-amd64-linux.tar.xz https://github.com/DataDog/ddprof/releases/download/v0.10.1/ddprof-0.10.1-amd64-linux.tar.xz
-   tar xvf ddprof-amd64-linux.tar.xz --directory /tmp
+   curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
+   tar xvf ddprof-linux.tar.xz --directory /tmp
    ```
 
 2. コード内で、リリースで提供される `_dd_profiling.h_` ヘッダーで定義される `ddprof_start_profiling()` インターフェイスを使用して、プロファイラーを開始します。プログラムが終了すると、プロファイラーは自動的に停止します。プロファイラーを手動で停止させるには、 `ddprof_stop_profiling(ms)` を使用します。`ms` パラメーターは、関数の最大ブロック時間をミリ秒で表します。以下は、C 言語のスタンドアロン例 (`profiler_demo.c`) です。
@@ -175,31 +179,9 @@ ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
 ```
 
-## コンフィギュレーション
-
-プロファイラーの構成は、コマンドラインパラメーター、環境変数、またはその両方の組み合わせによって行うことができます。ある設定に対して両方が提供されている場合、コマンドラインパラメーターが使用されます。
-
-| 環境変数            | ロングネーム       | ショートネーム | デフォルト   | 説明                                                                                                                          |
-| ------------------------------- | --------------- | ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| DD_ENV                          | 環境     | E          |           | [環境][4]名 (例: `production`)。                                                                                |
-| DD_SERVICE                      | サービス         | S          | myservice | [サービス][4]名 (例: `web-backend`)。                                                                                   |
-| DD_VERSION                      | service_version | V          |           | サービスの[バージョン][4]。                                                                                                    |
-| DD_AGENT_HOST                   | ホスト            | H          | localhost | Datadog Agent のホスト名。                                                                                                  |
-| DD_TRACE_AGENT_PORT             | port            | P          | 8126      | Datadog Agent のリスニングポート。                                                                                                    |
-| DD_TRACE_AGENT_URL              | url             | U          |           | `https://<hostname>:<port>` は、他の Agent のホスト/ポート設定をオーバーライドします。                                                                |
-| DD_TAGS                         | タグ            | T          |           | アップロードされたプロファイルに適用するタグ。`<key>:<value>` ペアのように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。 |
-| DD_PROFILING_NATIVE_NICE        | nice            | i          |           | インスツルメントされたプロセスに影響を与えずに、プロファイラーの nice レベルを設定します。                                                    |
-| DD_PROFILING_NATIVE_SHOW_CONFIG | show_config     | c          | いいえ        | プロファイラーの構成パラメーターをログに記録するかどうか。                                                                                    |
-| DD_PROFILING_NATIVE_LOG_MODE    | log_mode        | o          | stdout    | プロファイラーのログを出す方法。詳しくはログのセクションをご覧ください。                                                                   |
-| DD_PROFILING_NATIVE_LOG_LEVEL   | log_level       | l          | warn      | ログの冗長性を決定します。                                                                                                            |
-| DD_PROFILING_NATIVE_TARGET_PID  | pid             | p          |           | pidmode を起動します。詳しくは pidmode のセクションを参照してください。                                                                             |
-| DD_PROFILING_NATIVE_GLOBAL      | global          | g          | いいえ        | globalmode を起動します。詳しくは globalmode のセクションを参照してください。--pid をオーバーライドします。                                                      |
-
-コマンドライン引数を渡す場合、ロングネームの前には 2 本のダッシュを、ショートネームの前には 1 本のダッシュを付けます。例: `--service myservice` と `-S myservice`
+## 構成
 
 `environment`、`service`、`service_version` の設定は、プロファイリング UI で使用されるため、推奨されます。
-
-**注**: パラメーターには必ず値を設定する必要があります。例えば、プロファイラーの構成をログに記録するには、`--show_config` だけではなく、 `DD_PROFILING_NATIVE_SHOW_CONFIG=yes` を設定するか、`--show_config yes` を渡さなければなりません。このような引数の場合、設定を有効にするには `yes`、`true`、`enable` を、無効にするには `no`、`false`、`disable` を同じように使用することができます。
 
 [パラメーターの全リスト][5]を参照するか、コマンドラインを使用してください。
 
@@ -216,27 +198,16 @@ ddprof --help
 - `disable` はログを完全に無効にします。
 - それ以外の値はファイルパスとして扱われ、先頭の `/` は絶対パスを意味します。
 
-### Pidmode
+### グローバル
 
-ターゲット PID が指定された場合、その PID をインスツルメントします。このモードでは、通常のプロファイラーの引数処理以降のパラメーターは無視されます。ターゲット PID とプロファイラーの所有する UID が異なる場合は、以下のいずれかを行います。
-- 代わりにルートプロセスとしてプロファイラーを実行します。
-- プロファイラーに `CAP_PERFMON` を付与します (Linux v5.8 以降)。
-- プロファイラーに `CAP_SYS_ADMIN` を付与します。
-- `perf_event_paranoid` を `-1` に減らします (詳細はお使いのディストリビューションのドキュメントを参照するかシステム管理者にお尋ねください)。
-
-このように PID を指定すると、インスツルメンテーション後に生成された子プロセス (フォークとスレッドの両方) のみが生成されることになります。
-
-### Globalmode
-
-グローバルモードはデバッグのためのものです。`global` を `yes` に設定すると、プロファイラーは表示されているすべてのプロセスのプロファイリングを試みます。
-このためには、昇格した権限 (例えば、root で実行するか、`CAP_PERFMON` や `CAP_SYSADMIN` を付与する) や、 `perf_event_paranoid` を `-1` に設定する必要があります。
+実行中のすべてのプロセスをインスツルメンテーションしたい場合は、`--global` オプションを試してみてください。
+グローバルモードはデバッグ用です。このモードでは権限の昇格が必要です。セットアップによっては、root で実行し、`CAP_PERFMON` や `CAP_SYSADMIN` を許可するか、`perf_event_paranoid` を `-1` に設定する必要があります。
 
 ```bash
-./ddprof --environment staging --global yes --service_version full-host-profile
+./ddprof --environment staging --global --service_version full-host-profile
 ```
 
-プロファイラーをルートユーザーで実行すると、表示されているすべてのプロセスがインスツルメントされます。
-ほとんどの構成では、プロファイラの PID ネームスペースで表示されるすべてのプロセスが対象となります。
+ほとんどの構成では、これはプロファイラーの PID ネームスペースで見えるすべてのプロセスで構成されます。
 
 ## 次のステップ
 
@@ -250,5 +221,6 @@ ddprof --help
 [2]: https://github.com/DataDog/ddprof/releases
 [3]: https://app.datadoghq.com/profiling
 [4]: /ja/getting_started/tagging/unified_service_tagging
-[5]: https://github.com/DataDog/ddprof/blob/v0.10.1/docs/Commands.md
+[5]: https://github.com/DataDog/ddprof/blob/main/docs/Commands.md
 [6]: /ja/getting_started/profiler/
+[7]: /ja/profiler/enabling/supported_versions/

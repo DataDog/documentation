@@ -28,10 +28,10 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 | パラメーター        | タイプ            | 必須 | 説明                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | 文字列          | 〇      | 送信するメトリクスの名前。                                                                                                                                                                  |
-| `<METRIC_VALUE>` | Double          | 〇      | メトリクスに関連付けられている値                                                                                                                                                             |
-| `<SAMPLE_RATE>`  | Double          | ✕       | メトリクスに適用するサンプリングレート。`0`（全てがサンプリングされ何も送信されない）〜`1` （サンプル無し）の値を利用。詳細は、[サンプリングレートセクション](#sample-rates)をご覧ください。 |
-| `<タグ>`         | 文字列のリスト | ✕       | メトリクスに適用するタグのリスト。詳細は、[メトリクスのタグ付け](#metric-tagging)セクションをご覧ください。                                                                                       |
+| `<METRIC_NAME>`  | 文字列          | はい      | 送信するメトリクスの名前。                                                                                                                                                                  |
+| `<METRIC_VALUE>` | Double          | はい      | メトリクスに関連付けられている値                                                                                                                                                             |
+| `<SAMPLE_RATE>`  | Double          | いいえ       | メトリクスに適用するサンプリングレート。`0`（全てがサンプリングされ何も送信されない）〜`1` （サンプル無し）の値を利用。詳細は、[サンプリングレートセクション](#sample-rates)をご覧ください。 |
+| `<タグ>`         | 文字列のリスト | いいえ       | メトリクスに適用するタグのリスト。詳細は、[メトリクスのタグ付け](#metric-tagging)セクションをご覧ください。                                                                                       |
 
 ### COUNT
 
@@ -53,7 +53,7 @@ StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は
 
 次のコードを実行して、DogStatsD の `COUNT` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -109,7 +109,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    for {
+    for true {
 
         statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
         statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -135,7 +135,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
             Statsd.count("example_metric.count", 2, new String[]{"environment:dev"});
@@ -167,7 +167,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
                 dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
@@ -202,6 +202,16 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
@@ -225,7 +235,7 @@ while (TRUE) {
 
 **注:** メトリクス送信の呼び出しは非同期です。メトリクスを確実に送信したい場合は、プログラムが終了する前に `flush` を呼び出してください。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -281,7 +291,7 @@ func main() {
         log.Fatal(err)
     }
     var i float64
-    for {
+    for true {
         i += 1
         statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
         time.Sleep(10 * time.Second)
@@ -305,7 +315,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
@@ -335,7 +345,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(100000);
@@ -368,6 +378,20 @@ while (TRUE) {
 }
 ```
 {{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+let i = 0;
+while(true) {
+  i++;
+  tracer.dogstatsd.gauge('example_metric.gauge', i, { environment: 'dev' });
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
@@ -441,7 +465,7 @@ func main() {
         log.Fatal(err)
     }
     var i float64
-    for {
+    for true {
         i += 1
         statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
         time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
@@ -465,7 +489,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordSetValue("example_metric.set", i, new String[]{"environment:dev"});
             Thread.sleep(random.NextInt(10000));
         }
@@ -495,7 +519,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
@@ -540,7 +564,7 @@ while (TRUE) {
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
 : 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
 
-#### コンフィギュレーション
+#### 構成
 
 * Datadog に送信する集計を、[datadog.yaml 構成ファイル][7]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計だけが送信されます。
 * Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルだけが送信されます。
@@ -604,7 +628,7 @@ func main() {
         log.Fatal(err)
     }
 
-    for {
+    for true {
         statsd.Histogram("example_metric.histogram", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
@@ -627,7 +651,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -657,7 +681,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -712,7 +736,7 @@ DogStatsD の `TIMER` メトリクスタイプは `HISTOGRAM` メトリクスタ
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
 : 複数のメトリクスが送信されるので、保存されるメトリクスタイプ (`GAUGE`, `RATE`) はメトリクスに依存します。詳細については、[ヒストグラムメトリクスタイプ][6]に関するドキュメントを参照してください。
 
-##### コンフィギュレーション
+##### 構成
 
 `TIMER` には、`HISTOGRAM` [コンフィギュレーション](#configuration)ルールが適用されます。
 
@@ -821,7 +845,7 @@ DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。使
 
 次のコードを実行して、DogStatsD の `DISTRIBUTION` メトリクスを Datadog に送信します。必要がなくなったら、クライアントを「フラッシュ」/「閉じる」ことを忘れないでください。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -873,7 +897,7 @@ func main() {
         log.Fatal(err)
     }
 
-    for {
+    for true {
         statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
         time.Sleep(2 * time.Second)
     }
@@ -896,7 +920,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -926,7 +950,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -958,6 +982,18 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+while(true) {
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, { environment: 'dev' });
+  await new Promise(r => setTimeout(r, 2000));
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 上のインスツルメンテーションは、`合計`、`カウント`、`平均`、`最小`、`最大`、`50 パーセンタイル` (中央値)、`75 パーセンタイル`、`90 パーセンタイル`、`95 パーセンタイル`、`99 パーセンタイル`の各データを計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、「あらゆる」種類の値の分布の測定に使用できます。
@@ -972,12 +1008,13 @@ while (TRUE) {
 
 DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` を使用し、メトリクスタイプに応じてメトリクス値を補正します（サンプリングなしで値を推定するため）。
 
-| メトリクスタイプ | サンプリングレート補正                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | 受け取った値は (`1/<SAMPLE_RATE>`) で乗算されます。受信したデータポイントに対し、`1/<SAMPLE_RATE>` は同じ値で実際にサンプリングされたと考えることは理にかなっています。 |
-| `GAUGE`     | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
-| `SET`       | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
-| `HISTOGRAM` | `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                      |
+| メトリクスタイプ    | サンプリングレート補正                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | 受け取った値は (`1/<SAMPLE_RATE>`) で乗算されます。受信したデータポイントに対し、`1/<SAMPLE_RATE>` は同じ値で実際にサンプリングされたと考えることは理にかなっています。 |
+| `GAUGE`        | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
+| `SET`          | 補正なし。受信した値はそのまま残ります。                                                                                                                               |
+| `HISTOGRAM`    | `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                      |
+| `DISTRIBUTION` | 受け取った値は (`1/<SAMPLE_RATE>`) 倍として計上されます。受信したデータポイント 1 つに対し、`1/<SAMPLE_RATE>` 個が同じ値で実際にサンプリングされたと考えるのは理にかなっています。 |
 
 #### コード例
 
@@ -1032,7 +1069,7 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 以下のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1078,13 +1115,19 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 #### ホストタグ
 
 ホストタグは、メトリクスを集計する際に Datadog Agent によって自動的に割り当てられます。Agent ホスト名と一致しないホストタグ付きで送信されたメトリクスは、本来のホストを参照できなくなります。送信されたホストタグは、Agent によって収集されたホスト名や Agent で構成されたホスト名を上書きします。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -1094,6 +1137,6 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 [4]: /ja/dashboards/functions/arithmetic/#integral
 [5]: /ja/metrics/types/?tab=gauge#definition
 [6]: /ja/metrics/types/?tab=histogram#definition
-[7]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/types/?tab=distribution#definition

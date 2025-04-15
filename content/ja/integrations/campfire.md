@@ -1,7 +1,7 @@
 ---
 categories:
 - Collaboration
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。
 doc_link: https://docs.datadoghq.com/integrations/campfire/

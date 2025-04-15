@@ -24,6 +24,7 @@ categories:
 - AWS
 - cloud
 - notifications
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: appkeeper
 integration_title: AppKeeper
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: appkeeper
 public_title: AppKeeper
@@ -49,6 +49,7 @@ tile:
   - Category::Notifications
   - Supported OS::Linux
   - Supported OS::Windows
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog からのアラートに基づき Appkeeper でサービスを再起動
   media: []
@@ -64,7 +65,7 @@ tile:
 
 SIOS AppKeeper は、Datadog から通知を受信すると、失敗した Amazon EC2 サービスを自動的に再起動し、費用のかかる手動介入の必要性を排除します。Datadog がアラートをトリガーすると、AppKeeper Recovery API を使って EC2 サービスを再起動します。
 
-## 計画と使用
+## セットアップ
 
 ### SIOS AppKeeper API キーを取得する
 
@@ -101,17 +102,15 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 
 ![スナップショット][6]
 
-詳細については、[AppKeeper のインテグレーションドキュメント][7]を参照してください。
+## 収集データ
 
-## リアルユーザーモニタリング
+### メトリクス
 
-### データセキュリティ
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][7] を参照してください。
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][8] を参照してください。
+## トラブルシューティング
 
-## ヘルプ
-
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/get_token.jpg
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
@@ -119,6 +118,5 @@ AppKeeper によるリカバリ結果は、AppKeeper の GUI にリストアッ�
 [4]: https://app.datadoghq.com/synthetics/list
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/synthetic_test_params.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/appkeeper/images/history.jpg
-[7]: https://sioscoati.zendesk.com/hc/en-us/articles/900000978443-Integration
-[8]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[7]: https://github.com/DataDog/integrations-extras/blob/master/appkeeper/metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

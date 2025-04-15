@@ -3,6 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 description: Google Cloud Dataproc のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataproc/
@@ -13,7 +14,6 @@ integration_id: google-cloud-dataproc
 integration_title: Google Cloud Dataproc
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: google_cloud_dataproc
 public_title: Datadog-Google Cloud Dataproc インテグレーション
@@ -24,17 +24,21 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
+<div class="alert alert-info">
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Dataproc クラスター上の Spark ジョブの観測、トラブルシューティング、コスト最適化を支援します。
+</div>
+
 Google Cloud Dataproc は、Apache Spark と Apache Hadoop のクラスターを簡単かつコスト効率よく実行するための高速で使いやすいフルマネージド型のクラウドサービスです。
 
 Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Dataproc からメトリクスを収集できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### 収集データ
+### ログ収集
 
 Google Cloud Dataproc のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 
@@ -45,21 +49,21 @@ Google Cloud Dataproc のログは Google Cloud Logging で収集され、Cloud 
 3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "google_cloud_dataproc" >}}
 
 
-### ヘルプ
+### イベント
 
 Google Cloud Dataproc インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Google Cloud Dataproc インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

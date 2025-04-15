@@ -16,7 +16,7 @@ title: Permisos de configuración del control de acceso basado en roles (RBAC) p
 Una vez que hayas creado [funciones de configuración del control de acceso basado en roles [RBAC] para logs][1], asigna o elimina [permisos][2] al rol.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Asigna o elimina permisos a un rol directamente [actualizando el rol en el sitio Datadog][1].
 
@@ -66,7 +66,7 @@ Este permiso puede asignarse globalmente o restringirse a un subconjunto de índ
 **Subconjunto de índices**:
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 1. Elimina el permiso global para el rol.
 2. Concede este permiso al rol en [la página de índices del sitio Datadog][1], editando un índice y añadiendo un rol al campo "Grant editing Exclusion Filters of this index to" (Conceder filtros de exclusión de edición de este índice a" (captura de pantalla a continuación).
@@ -100,7 +100,7 @@ Concede a un rol la capacidad de crear, editar o eliminar procesadores y pipelin
 Este permiso puede asignarse globalmente o restringirse a un subconjunto de pipelines.
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Asigna la función o las funciones en el modal `Edit` de un pipeline específico.
 
@@ -154,7 +154,7 @@ En el siguiente ejemplo, suponiendo que todos los roles excepto `Guest` tienen e
 {{< img src="account_management/rbac/logs_archives_list.png" alt="Crear un rol personalizado" style="width:90%;">}}
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Procede a crear el archivo o actualízalo en cualquier momento mientras lo editas.
 
@@ -226,7 +226,7 @@ Los roles son aditivos. Si un usuario pertenece a varios roles, los datos a los 
 
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Para restringir a los usuarios y que sólo vean los logs que coinciden con una consulta de restricción, utiliza la [página de acceso a datos][1]:
 
@@ -301,7 +301,7 @@ Concede a un rol acceso de lectura a un número determinado de índices de logs.
 Para acotar este permiso a un subconjunto de índices, primero elimina los permisos `logs_read_index_data` y `logs_modify_indexes` del rol. A continuación:
 
 {{< tabs >}}
-{{% tab "UI" (IU) %}}
+{{% tab "IU" %}}
 
 Concede a este rol acceso al índice en la [página de configuración][1].
 

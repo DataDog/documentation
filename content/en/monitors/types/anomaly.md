@@ -12,7 +12,7 @@ further_reading:
 - link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
-- link: "/monitors/manage/status/"
+- link: "/monitors/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
 - link: "dashboards/functions/algorithms/#anomalies"
@@ -46,7 +46,7 @@ After defining the metric, the anomaly detection monitor provides two preview gr
 
 ### Set alert conditions
 
-Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 24 hours.
+Trigger an alert if the values have been `above or below`, `above`, or `below` the bounds for the last `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 2 weeks. Recover if the values are within the bounds for at least `15 minutes`, `1 hour`, etc. or `custom` to set a value between 15 minutes and 2 weeks.
 
 Anomaly detection
 : With the default option (`above or below`) a metric is considered to be anomalous if it is outside of the gray anomaly band. Optionally, you can specify whether being only `above` or `below` the bands is considered anomalous.
@@ -216,7 +216,7 @@ avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direct
 Most of the properties under `options` in the request body are the same as for other query alerts, except for `thresholds` and `threshold_windows`.
 
 `thresholds`
-: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, an `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
+: Anomaly monitors support `critical`, `critical_recovery`, `warning`, and `warning_recovery` thresholds. Thresholds are expressed as numbers from 0 to 1, and are interpreted as the fraction of the associated window that is anomalous. For example, a `critical` threshold value of `0.9` means that a critical alert triggers when at least 90% of the points in the `trigger_window` (described below) are anomalous. Or, a `warning_recovery` value of 0 means that the monitor recovers from the warning state only when 0% of the points in the `recovery_window` are anomalous.
 : The `critical` `threshold` should match the `threshold` used in the `query`.
 
 `threshold_windows`
@@ -248,7 +248,7 @@ A standard configuration of thresholds and threshold window looks like:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors#create/anomaly
+[1]: https://app.datadoghq.com/monitors/create/anomaly
 [2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
@@ -259,7 +259,7 @@ A standard configuration of thresholds and threshold window looks like:
 [9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
-[12]: /monitors/manage/status/#settings
+[12]: /monitors/status/#settings
 [13]: mailto:billing@datadoghq.com
 [14]: /api/v1/monitors/
 [15]: /monitors/guide/anomaly-monitor/

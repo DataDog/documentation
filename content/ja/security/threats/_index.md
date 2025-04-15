@@ -4,12 +4,10 @@ aliases:
 - /ja/security/cloud_workload_security/
 - /ja/security/cloud_workload_security/agent_expressions
 - /ja/security/cloud_workload_security/backend/
+- /ja/security/threats/security_profiles
+- /ja/security/threats/runtime_anomaly_detection
 title: Cloud Security Management Threats
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management はサポートされていません。</div>
-{{< /site-region >}}
 
 Cloud Security Management Threats (CSM Threats) は、環境全体のファイル、ネットワーク、プロセスアクティビティを監視し、インフラストラクチャーに対する脅威をリアルタイムで検出します。Datadog プラットフォームの一部として、CSM Threats のリアルタイム脅威検出をメトリクス、ログ、トレース、その他のテレメトリーと組み合わせることで、ワークロードに対する潜在的な攻撃を取り巻く完全なコンテキストを確認することができます。
 
@@ -24,11 +22,17 @@ CSM Threats では、Datadog Agent を使用して環境を監視しています
 3. **DNS アクティビティ監視**により、ホストやコンテナ上の悪意あるアクティビティをネットワークトラフィックでリアルタイムに監視します。
 4. **カーネルアクティビティ監視**により、プロセスのハイジャックやコンテナのブレイクアウトなど、カーネル層への攻撃をリアルタイムに監視します。
 
-{{< img src="security/csm/csm_overview.png" alt="Cloud Security Management 概要の Security Inbox には、優先的に修復すべきセキュリティ問題のリストが表示されます" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management 概要の Security Inbox には、優先的に修復すべきセキュリティ問題のリストが表示されます" width="100%">}}
+
+## Active Protection で脅威を積極的にブロック
+
+デフォルトでは、Agent のすぐに使える暗号マイニングの脅威検出ルールがすべて有効になっており、脅威を積極的に監視しています。
+
+[Active Protection][10] を使用すると、Datadog Agent の脅威検出ルールによって特定された暗号マイニングの脅威を積極的にブロックし、終了させることができます。
 
 ## すぐに使える検出ルールとカスタム検出ルールの管理
 
-CSM Threats には、セキュリティ専門家チームによってメンテナンスされている、すぐに使える 50 以上の検出ルールが用意されています。このルールは、最も重要なリスクを顕在化させるので、すぐに修正するための措置を取ることができます。Agent 式ルールは分析のために収集されるワークロードのアクティビティを定義し、一方でバックエンド検出ルールはアクティビティを分析し、攻撃者の技術やその他のリスクのある行動パターンを特定します。
+CSM Threats には、セキュリティ専門家チームによって維持されている、すぐに使える 50 以上の検出ルールが用意されています。このルールは、最も重要なリスクを顕在化させるので、すぐに修正するための措置を取ることができます。Agent 表現ルールは、分析のために収集するワークロードのアクティビティを定義し、バックエンド検出ルールはアクティビティを分析し、攻撃者のテクニックやその他の危険な行動パターンを特定します。
 
 [リモート構成][7]を使用して、新規および更新されたルールを Agent に自動的にデプロイします。各ルールがプロセス、ネットワーク、ファイルのアクティビティをどのように監視するかを定義することで[ルールをカスタマイズ][5]し、[カスタムルールを作成][6]し、新しいシグナルに対する[リアルタイム通知を設定](#set-up-realtime-notifications)することができます。
 
@@ -42,11 +46,16 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 
 ## セキュリティシグナルの調査と修復
 
-[Threats Explorer][8] で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
+[シグナルエクスプローラー][8]で、セキュリティシグナルを調査し、トリアージします。影響を受けたファイルやプロセス、関連するシグナルやログ、改善手順に関する詳細情報を表示します。
 
-{{< img src="security/cws/threats_page.png" alt="CSM Threats ページ" width="100%">}}
+{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer ページ" width="100%">}}
 
-## はじめに
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
+
+Datadog は、お客様の環境で検出された暗号の脅威に自動的に対処する Active Protection という新機能を導入します。Active Protection は非公開ベータ版です。フォームに記入してアクセスをリクエストしてください。
+{{< /callout >}}
+
+## 詳細はこちら
 
 {{< whatsnext >}}
   {{< nextlink href="/security/threats/setup">}}セットアップとコンフィギュレーションを完了する{{< /nextlink >}}
@@ -65,3 +74,4 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 [7]: /ja/security/threats/setup
 [8]: /ja/security/threats/security_signals
 [9]: /ja/network_monitoring/performance/
+[10]: /ja/security/cloud_security_management/guide/active-protection

@@ -40,6 +40,8 @@ title: AWS の概要
 
 このプロセスは必要な数の AWS アカウントに対して繰り返すことができますし、[API][3]、[AWS CLI][4]、[Terraform][5] を使って一度に複数のアカウントを設定することも可能です。詳しくは、[Datadog-Amazon CloudFormation ガイド][6]をご参照ください。
 
+**注**: Datadog の CloudFormation テンプレートは、定義済みのリソースの作成と削除のみをサポートしています。スタックへの更新の適用方法については、[スタックテンプレートの更新][59]を参照してください。
+
 ## 前提条件
 
 はじめに、以下の前提条件を確認してください。
@@ -68,6 +70,7 @@ title: AWS の概要
     * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
+    * iam:TagRole
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
@@ -96,13 +99,14 @@ title: AWS の概要
     * s3:PutBucketPolicy
     * s3:PutBucketPublicAccessBlock
     * s3:PutEncryptionConfiguration
+    * s3:PutLifecycleConfiguration
     * secretsmanager:CreateSecret
     * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
     * serverlessrepo:CreateCloudFormationTemplate
 
-## 設定
+## セットアップ
 
 2. Datadog の [AWS インテグレーション構成ページ][8]に移動し、**Add AWS Account** をクリックします。
 
@@ -126,7 +130,7 @@ title: AWS の概要
 
 利用可能なサブインテグレーションの全リストは、[Integrations ページ][13]をご覧ください。これらのインテグレーションの多くは、Datadog が AWS アカウントから入ってくるデータを認識する際に、デフォルトでインストールされます。
 
-## インデックスを更新する
+## ログを送信
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
@@ -137,8 +141,8 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 ### 検証
 
-ログを有効にしたら、[ログエクスプローラー][15] でファセット・パネルから `source` または `service` ファセットを使用して、ログを見つけます (S3 からの以下の例のように)。
-{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog アカウントのログエクスプローラーページ。左側には、ソースとサービスのファセットが表示され、両方とも 's3' でチェックされています。右側には、いくつかのログエントリーがリスト形式で表示されています。">}}
+ログを有効にしたら、[Log Explorer][15] でファセットパネルの `source` または `service` ファセットを使用してログを見つけてください。以下は、S3 の例です。
+{{< img src="getting_started/integrations/logs-explorer.png" alt="Datadog アカウントの Log Explorer ページ。左側には、Source と Service ファセットが表示され、両方とも 's3' にチェックされています。右側には、いくつかのログエントリーがリスト形式で表示されています。">}}
 
 ## Datadog のプラットフォームをさらに活用する
 
@@ -166,6 +170,10 @@ Agent がインストールされると、[インフラストラクチャーリ�
 
 [Amazon ECS on AWS Fargate のドキュメント][28]を使用して、アプリケーションと同じタスク定義でコンテナとして Agent を実行します。**注**: Fargate インテグレーションをフルに活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
 
+#### Fargate オーケストレーションタイプによる AWS Batch
+
+[Amazon ECS on AWS Fargate for AWS Batch のドキュメント][58]を使用して、アプリケーションと同じ AWS Batch ジョブ定義でコンテナとして Agent を実行します。**注**: Fargate インテグレーションをフルに活用するには、Datadog Agent バージョン 6.1.1 以降が必要です。
+
 #### EKS
 
 [Kubernetes Distributions のドキュメント][29]にあるように、Amazon Elastic Kubernetes Service (EKS) の場合は特に構成は必要ありません。EKS クラスターに Agent をデプロイするには、[Kubernetes 専用ドキュメント][30]を使用します。
@@ -185,18 +193,18 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 ## 関連製品を見る
 
-### ページのパフォーマンスの監視
+### サーバーレス
 
 サーバーレスアプリケーションを実行する AWS Lambda 関数のメトリクス、トレース、ログを Datadog で一元管理することができます。アプリケーションのインスツルメンテーション、[サーバーレスライブラリとインテグレーション][43] のインストール、[サーバーレスアプリケーションによる分散型トレーシング][44]の実装 、または[サーバーレストラブルシューティング][45]についての説明は[サーバーレス][42]を確認してください。
 
-### .NET
+### APM
 さらに深く掘り下げ、アプリケーションと AWS サービスからより多くのデータを収集するには、[AWS X-Ray][46] インテグレーション、または [APM][47] を使用して Datadog Agent を持つホストから分散トレースを収集できるようにしてください。その後、[APM のドキュメント][48]を読んで、このデータを使用してアプリケーションのパフォーマンスに対する洞察を得る方法について理解を深めてください。
 
 さらに、APM パフォーマンスとインフラストラクチャーメトリクスのアルゴリズム機能である [Watchdog][49] を使用すると、アプリケーションの潜在的な問題を自動的に検出し、通知されるようにすることができます。
 
 ### セキュリティ
 
-#### UDP
+#### Cloud SIEM
 
 [Cloud SIEM の概要][50]を参照して、すぐに使える[ログ検出ルール][51]に照らし合わせてログを評価します。これらのルールはカスタマイズ可能で、脅威が検出されると[セキュリティシグナルエクスプローラー][52]でアクセス可能なセキュリティシグナルが生成されます。適切なチームに通知するために、[通知ルール][53]を使用して複数のルールにまたがる通知設定を構成することができます。
 
@@ -204,7 +212,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 
 [CSM Misconfigurations の設定][54]ガイドを使用して、クラウド環境における誤構成の検出と評価について学びます。リソース構成データは、すぐに利用可能な[クラウド][55]および[インフラストラクチャー][56]のコンプライアンスルールに対して評価され、攻撃者のテクニックと潜在的な誤構成にフラグを立て、迅速な対応と修復を可能にします。
 
-### ヘルプ
+### トラブルシューティング
 
 `Datadog is not authorized to perform sts:AssumeRole` というエラーが発生した場合は、専用の[トラブルシューティングページ][2]を参照してください。その他の問題については、[AWS インテグレーショントラブルシューティングガイド][57]を参照してください。
 
@@ -269,3 +277,5 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [55]: /ja/security/default_rules/#cat-posture-management-cloud
 [56]: /ja/security/default_rules/#cat-posture-management-infra
 [57]: /ja/integrations/guide/aws-integration-troubleshooting/
+[58]: /ja/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
+[59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html

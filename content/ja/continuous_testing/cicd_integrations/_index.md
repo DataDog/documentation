@@ -1,8 +1,8 @@
 ---
 aliases:
-- /synthetics/ci
-- /synthetics/cicd_testing
-- /synthetics/cicd_integrations
+- /ja/synthetics/ci
+- /ja/synthetics/cicd_testing
+- /ja/synthetics/cicd_integrations
 description: CI/CD パイプラインで、オンデマンドまたは事前定義された間隔で Continuous Testing テストを実行します。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/

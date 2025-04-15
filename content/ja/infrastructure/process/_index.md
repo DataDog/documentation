@@ -10,7 +10,7 @@ further_reading:
   tag: Documentation
   text: メトリクスでプロセスデータの保持期間を高めます
 - link: /infrastructure/livecontainers
-  tag: グラフ
+  tag: ドキュメント
   text: 環境内のすべてのコンテナのリアルタイム表示
 - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
   tag: ブログ
@@ -18,8 +18,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/process-level-data/
   tag: ブログ
   text: プロセスレベルのアプリとネットワークデータを使用して、より迅速にトラブルシューティングを行います
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: ブログ
+  text: ライブプロセス用 Watchdog Insights によるワークロードのパフォーマンス異常に対するトラブルシューティング
 title: ライブプロセス
 ---
+
+
+"<div class="alert alert-warning">
+Live Processes および Live Process Monitoring は Enterprise プランに含まれています。他のプランをご利用の場合、この機能をリクエストするにはアカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> へご連絡ください。
+</div>"
 
 ## はじめに
 
@@ -40,12 +48,12 @@ Agent 5 の場合は、[こちらのバージョン固有のインストール�
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Datadog Agent をインストールしたら、[Agent のメイン構成ファイル][1]を編集し、次のパラメーターを `"true"` に設定して、ライブプロセスの収集を有効にします。
+Datadog Agent をインストールしたら、[Agent のメイン構成ファイル][1]を編集し、次のパラメーターを `true` に設定して、ライブプロセスの収集を有効にします。
 
 ```yaml
 process_config:
   process_collection:
-    enabled: "true"
+    enabled: true
 ```
 
 さらに、いくつかの構成オプションを環境変数として設定できます。
@@ -55,8 +63,8 @@ process_config:
 設定が完了したら、[Agent を再起動][2]します。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/
-[2]: /ja/agent/guide/agent-commands/#restart-the-agent
+[1]: /ja/agent/configuration/agent-configuration-files/
+[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -64,7 +72,7 @@ process_config:
 
 ```text
 -v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
+-e DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
 ```
 
 **注**:
@@ -75,13 +83,59 @@ process_config:
 
 [1]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
-Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内に、以下の環境変数、ボリュームマウント、およびボリュームを追加します。
+次のプロセスコレクション構成で [datadog-values.yaml][1] ファイルを更新します。
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+```
+
+次に、Helm チャートをアップグレードします。
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+
+**注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+`datadog-agent.yaml` で `features.liveProcessCollection.enabled` を `true` に設定します。
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    liveProcessCollection:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+**注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
+
+{{% /tab %}}
+{{% tab "Kubernetes (手動)" %}}
+
+DaemonSet の作成に使用された `datadog-agent.yaml` マニフェスト内に、以下の環境変数、ボリュームマウント、およびボリュームを追加します。
 
 ```yaml
  env:
-    - name: DD_PROCESS_AGENT_ENABLED
+    - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
       value: "true"
   volumeMounts:
     - name: passwd
@@ -93,38 +147,69 @@ Daemonset の作成に使用された [dd-agent.yaml][1] マニフェスト内�
       name: passwd
 ```
 
-詳細については、標準の [Daemonset インストール][2]のページおよび [Docker Agent][3] の情報ページを参照してください。
+詳細については、標準の [DaemonSet インストール][1]のページおよび [Docker Agent][2] の情報ページを参照してください。
 
 **注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: /ja/agent/kubernetes/
-[3]: /ja/agent/docker/#run-the-docker-agent
+[1]: /ja/containers/guide/kubernetes_daemonset
+[2]: /ja/agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "AWS ECS Fargate" %}}
 
-次のプロセス収集コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
+<div class="alert alert-warning">Datadog で ECS Fargate プロセスを表示できます。ECS Fargate コンテナとの関係を確認するには、Datadog Agent v7.50.0 以降を使用します。</div>
 
-```yaml
-datadog:
-    # (...)
-    processAgent:
-        enabled: true
-        processCollection: true
+プロセスを収集するには、Datadog Agent がタスク内でコンテナとして実行されている必要があります。
+
+ECS Fargate でプロセスモニタリングを有効にするには、タスク定義内の Datadog Agent コンテナ定義で `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` 環境変数を `true` に設定します。
+
+例:
+
+```json
+{
+    "taskDefinitionArn": "...",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            ...
+            "environment": [
+                {
+                    "name": "DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED",
+                    "value": "true"
+                }
+                ...
+             ]
+         ...
+         }
+    ]
+  ...
+}
 ```
 
+ECS Fargate でプロセス情報の収集を開始するには、タスク定義に [`PidMode` パラメータ][3]を追加し、以下のように `task` に設定します。
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+```text
+"pidMode": "task"
+```
+
+一度有効化すると、[Live Processes ページ][1]で `AWS Fargate` Containers ファセットを使用して ECS ごとにプロセスをフィルタリングするか、検索クエリに `fargate:ecs` を入力して結果を絞り込めます。
+
+{{< img src="infrastructure/process/fargate_ecs.png" alt="AWS Fargate 上のプロセス" >}}
+
+AWS ECS Fargate で Datadog Agent をインストールする方法の詳細については、[ECS Fargate インテグレーションのドキュメント][2]を参照してください。
+
+[1]: https://app.datadoghq.com/process
+[2]: /ja/integrations/ecs_fargate/#installation
+[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
+
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ### I/O 統計
 
 I/O とオープンファイルの統計情報は、昇格した権限で実行される Datadog system-probe によって収集することができます。system-probe の process モジュールを有効にするには、次の構成を使用します。
 
-1. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
+1. 下記のシステムプローブの構成の例をコピーします。
 
    ```shell
    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
@@ -145,6 +230,48 @@ I/O とオープンファイルの統計情報は、昇格した権限で実行�
    ```
 
    **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
+
+
+### プロセス収集のフットプリント最適化
+デフォルトでは、Datadog Agent はコンテナとプロセスの収集用に別の Process Agent を使用します。Linux 環境で実行している場合は、コンテナとプロセスの収集をコア Agent に統合できます。
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+`datadog-values.yaml` ファイルに `runInCoreAgent` 構成を追加します。
+```
+datadog:
+  processAgent:
+    runInCoreAgent: true
+```
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+`datadog-agent.yaml` ファイルに `DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED` 構成を追加します。
+
+```
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_PROCESS_CONFIG_RUN_IN_CORE_AGENT_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{% tab "Linux ホスト" %}}
+コンテナ外で Agent を Linux 上で実行している場合は、`datadog.yaml` ファイルで `run_in_core_agent` フラグを追加します。
+
+```
+process_config:
+  run_in_core_agent:
+    enabled: true
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 ### プロセス引数のスクラビング
@@ -218,12 +345,12 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
-    agents:
-        containers:
-            processAgent:
-                env:
-                - name: DD_STRIP_PROCESS_ARGS
-                  value: "true"
+agents:
+    containers:
+        processAgent:
+            env:
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -355,8 +482,6 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 ## プラットフォームにおけるプロセス
 
-{{< img src="infrastructure/process/process_platform.mp4" alt="プラットフォームにおけるプロセス" video=true >}}
-
 ### ライブコンテナ
 
 ライブプロセスは、それぞれのコンテナで実行中のプロセスを監視することで、コンテナデプロイの可視化をさらに強化しています。[ライブコンテナ][9]ページでコンテナをクリックすると、実行中のコマンドやリソース消費量を含むプロセスツリーが表示されます。コンテナメトリクスと共にこのデータを使用し、コンテナやデプロイの不具合の根本的な原因を探ります。
@@ -365,13 +490,13 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 [APM トレース][10]でサービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、ライブプロセス ページが開きます。関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
 
-### ネットワークパフォーマンスモニタリング
+### Cloud Network Monitoring
 
 [Network Analytics][11] ページで依存関係を調べる際、相互に通信するエンドポイント (サービスなど) の基底のインフラストラクチャーで実行される処理を確認できます。プロセスメタデータを使用して、ネットワークの接続の悪さ (TCP の再送信数が多いことから) やネットワークの呼び出し遅延の高さ (TCP ラウンドトリップタイムが長いことから) の原因が、エンドポイントのリソースを消費する重いワークロードであり、結果、通信の健全性や効率性に影響を与えているかを判断できます。
 
 ## リアルタイムの監視
 
-ライブプロセスをアクティブに使用している間、メトリクスは 2 秒の解像度で収集されます。これは、CPU などの揮発性のメトリクスでは重要です。バックグラウンドでは、履歴を目的として 10 秒の解像度でメトリクスが収集されます。
+通常、プロセスは 10 秒間隔で収集されます。Live Processes ページをアクティブに操作している間は、CPU などの変動が大きいメトリクスをリアルタイムで確認できるよう、2 秒間隔で収集され、リアルタイムで表示されます。ただし、履歴としての文脈では、デフォルトの 10 秒間隔でメトリクスが取り込まれます。
 
 ## 追加情報
 
@@ -388,9 +513,9 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /ja/monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /ja/dashboards/widgets/timeseries/#pagetitle
 [9]: /ja/infrastructure/livecontainers/
 [10]: /ja/tracing/
-[11]: /ja/network_monitoring/performance/network_analytics
-[12]: /ja/agent/guide/agent-commands/#restart-the-agent
+[11]: /ja/network_monitoring/cloud_network_monitoring/network_analytics
+[12]: /ja/agent/configuration/agent-commands/#restart-the-agent

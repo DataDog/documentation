@@ -12,7 +12,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-## コンフィギュレーション
+## 構成
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -21,7 +21,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
 CI/CD パイプラインにコマンドを追加してすべてのサーバーレスアプリケーションにインスツルメンテーションを有効化することも可能です。Datadog CLI コマンドによる変更が上書きされないよう、通常のサーバーレスアプリケーションのデプロイ*後*にコマンドを実行します。
 
-### Install
+### インストール
 
 NPM または Yarn を使用して Datadog CLI をインストールします。
 

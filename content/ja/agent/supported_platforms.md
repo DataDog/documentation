@@ -222,7 +222,7 @@ Datadog Agent は、広く使われているオペレーティングシステム
     <th>注</th>
   </thead>
   <tr>
-    <th rowspan=5><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
+    <th rowspan=4><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
     <td>2008 R2</td>
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
@@ -244,14 +244,7 @@ Datadog Agent は、広く使われているオペレーティングシステム
     <td></td>
   </tr>
   <tr>
-    <td>2016</td>
-    <td></td>
-    <td><i class='icon-check-bold'></td>
-    <td><i class='icon-check-bold'></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>2022</td>
+    <td>>= 2016</td>
     <td></td>
     <td><i class='icon-check-bold'></td>
     <td><i class='icon-check-bold'></td>
@@ -348,6 +341,7 @@ Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートし�
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
 - 7.2 TL3 SP0
+- 7.3 TL3 SP0
 
 
 [1]: /ja/agent/basic_agent_usage/aix/

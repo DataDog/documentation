@@ -22,8 +22,8 @@ assets:
     source_type_id: 10245
     source_type_name: WebLogic
   monitors:
-    active_threads: assets/monitors/active_threads.json
-    stuck_threads: assets/monitors/stuck_threads.json
+    Number of active thread is high: assets/monitors/active_threads.json
+    Number of stuck thread is high: assets/monitors/stuck_threads.json
   saved_views:
     weblogic_error_logs: assets/saved_views/error_logs.json
     weblogic_overview: assets/saved_views/weblogic_overview.json
@@ -44,7 +44,7 @@ draft: false
 git_integration_title: weblogic
 integration_id: weblogic
 integration_title: WebLogic
-integration_version: 1.3.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: weblogic

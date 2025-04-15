@@ -25,13 +25,27 @@ title: Login Methods の構成
 
 **注**: 組織ですべてのログイン方法を無効にすることはできません。組織のデフォルトでは、少なくとも 1 つのログイン方法が有効になっている必要があります。
 
+## 多要素認証 (MFA) を必須にする
+
+セキュリティを強化するために、組織管理者は、メールアドレスとパスワードでログインするすべてのユーザーに対して [Multi-factor Authentication (MFA)][4] を必須化することができます。
+
+1. [Login Methods][3] に移動します。
+2. 組織の好みまたはポリシーの要件に従って、**Require Multi-Factor Authentication** 設定を `On` または `Off` に設定します。
+3. 選択内容を確認します。
+
+**Require Multi-Factor Authentication** を `On` に設定すると、次の 2 つの効果があります。
+- メールアドレスとパスワードでログインするユーザーは、組織にアクセスする前に 2 つ目の認証要素を登録する必要があります。
+- Login Methods には [**View users without MFA**][5] というリンクが表示されます。このリンクをクリックすると、MFA を設定していないユーザーのみが表示されるフィルター付きのユーザーリストが確認できます。
+
+多要素認証を必須にする設定は、デフォルトのログイン方法の設定とは独立しています。デフォルトでどのログイン方法を有効にしていても、MFA を強制した場合、メールアドレスとパスワードでログインするユーザーには 2 つ目の認証要素が必要になります。
+
 ## ユーザーオーバーライドの見直し
 
 オーバーライドを使用すると、個々のユーザーに対して利用可能なログイン方法を変更することができます。次の例では、組織のデフォルトでは **Sign in with Google** (Google でサインインする) が Off になっていますが、オーバーライドを設定することで、あるユーザーがこれを有効にしています。
 
-{{< img src="account_management/login_methods_disabled_overrides_set.png" alt="ログイン方法は無効、ユーザーオーバーライドは有効" style="width:80%;">}}
+{{< img src="account_management/login_methods_enabled_off.png" alt="ログイン方法は無効、ユーザーオーバーライドは有効" style="width:80%;">}}
 
-[ユーザー管理][4]では、設定されているオーバーライド方法でユーザーを絞り込んだり、デフォルトのログイン方法を有効にしているユーザーを表示することができます。
+[ユーザー管理][6]では、設定されているオーバーライド方法でユーザーを絞り込んだり、デフォルトのログイン方法を有効にしているユーザーを表示することができます。
 
 {{< img src="account_management/users/user_page_login_methods_override_view.png" alt="ユーザー管理ビューは、設定されたログイン方法によってユーザーを表示するようにフィルターがかけられています。" style="width:80%;">}}
 
@@ -40,4 +54,6 @@ title: Login Methods の構成
 [1]: /ja/account_management/users/#edit-a-users-login-methods
 [2]: /ja/account_management/saml/
 [3]: https://app.datadoghq.com/organization-settings/login-methods
-[4]: https://app.datadoghq.com/organization-settings/users
+[4]: /ja/account_management/multi-factor_authentication/
+[5]: https://app.datadoghq.com/organization-settings/users?filter%5Ballowed_login_methods%5D=standard&filter%5Bmfa_enabled%5D=false&filter%5Bstatus%5D=Active
+[6]: https://app.datadoghq.com/organization-settings/users

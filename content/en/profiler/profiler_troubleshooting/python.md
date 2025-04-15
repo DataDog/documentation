@@ -23,6 +23,6 @@ Refer to the python APM client [troubleshooting documentation][3] for additional
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/troubleshooting/#tracer-debug-logs
+[1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: https://ddtrace.readthedocs.io/en/stable/troubleshooting.html

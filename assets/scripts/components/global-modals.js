@@ -16,8 +16,8 @@ const doOnLoad = () => {
             lang = ddc.lang;
         }
 
-        if (lang === 'fr' || lang === 'ja' || lang === 'ko') {
-            langParam = `?lang=${lang}`;
+        if (lang === 'fr' || lang === 'ja' || lang === 'ko' || lang === 'es') {
+            langParam = `lang=${lang}`;
         } else {
             langParam = '';
         }
@@ -71,6 +71,20 @@ const doOnLoad = () => {
                     completeUrl += `${operator}${key}=${encodeURIComponent(value)}`;
                     operator = '&';
                 }
+            }
+        }
+
+        // Try to append RUM device ID and session ID
+        if(window.DD_RUM) {
+            const rumDeviceId = window.DD_RUM.getUser() ? window.DD_RUM.getUser().device_id : null;
+            if(rumDeviceId) {
+                completeUrl += `${operator}dd-device-id=${rumDeviceId}`;
+                operator = '&';
+            }
+            const rumSessionId = window.DD_RUM.getInternalContext() ? window.DD_RUM.getInternalContext().session_id : null;
+            if(rumSessionId) {
+                completeUrl += `${operator}dd-session-id=${rumSessionId}`;
+                operator = '&';
             }
         }
 

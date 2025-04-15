@@ -1,6 +1,6 @@
 ---
-title: Go Custom Instrumentation using OpenTelemetry API
-description: 'Instrument your Go application with OpenTelemetry API to send traces to Datadog'
+title: Go Custom Instrumentation using the OpenTelemetry API
+description: 'Instrument your Go application with the OpenTelemetry API to send traces to Datadog'
 code_lang: otel
 type: multi-code-lang
 code_lang_weight: 2
@@ -28,9 +28,12 @@ import (
 	"log"
 	"os"
 
-	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext"
-	ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
-	ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/ext" // 1.x
+   ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry" // 1.x
+   ddtracer "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"  // 1.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/ext" // 2.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
+   // "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer" // 2.x
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
@@ -49,18 +52,25 @@ To configure OpenTelemetry to use the Datadog trace provider:
    go get go.opentelemetry.io/otel
    ```
 
-3. Install the Datadog OpenTelemetry wrapper package `gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry` using the command:
+3. Install the Datadog OpenTelemetry wrapper package using the command:
 
    ```shell
    go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
+   ```
+
+   If you are using v2, do:
+
+   ```shell
+   go get github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry
    ```
 
 4. Import packages in the code:
 
    ```go
    import (
-     "go.opentelemetry.io/otel"
-     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+      "go.opentelemetry.io/otel"
+      ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"  // 1.x
+      // "github.com/DataDog/dd-trace-go/v2/ddtrace/opentelemetry" // 2.x
    )
    ```
 
@@ -132,23 +142,6 @@ sp.End()
 
 ```
 
-## Adding span events
-
-Add span events using the `AddEvent` API. Event name is a required first field, along with optional input for event timestamp and event attributes.
-In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package, and `time` references the Go Standard Library time package. These packages must be imported in order to use this example.
-
-```go
-// Start a span.
-ctx, span := t.Start(context.Background(), "span_name")
-// Add an event.
-span.AddEvent("event1")
-// Add an event with a timestamp.
-span.AddEvent("event2", oteltrace.WithTimestamp(time.Now()))
-// Add an event with span attributes.
-span.AddEvent("event3", oteltrace.WithAttributes(attribute.String("key1", "value"), attribute.Int("key2", 1234)))
-s.End()
-```
-
 ## Adding spans
 
 Unlike other Datadog tracing libraries, when tracing Go applications, Datadog recommends that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the [Go context library documentation][16] or documentation for any third-party libraries integrated with your application.
@@ -163,6 +156,32 @@ ctx, span := t.Start(
 
 span.End()
 ```
+
+## Adding span events
+
+<div class="alert alert-info">Adding span events requires SDK version 1.67.0 or higher.</div>
+
+You can add span events using the `AddEvent` API. This method requires a `name` parameter and optionally accepts `attributes` and `timestamp` parameters. The method creates a new span event with the specified properties and associates it with the corresponding span.
+
+- **Name** [_required_]: A string representing the event's name.
+- **Attributes** [_optional_]: Zero or more key-value pairs with the following properties:
+  - The key must be a non-empty string.
+  - The value can be either:
+    - A primitive type: string, Boolean, or number.
+    - A homogeneous array of primitive type values (for example, an array of strings).
+  - Nested arrays and arrays containing elements of different data types are not allowed.
+- **Timestamp** [_optional_]: A UNIX timestamp representing the event's occurrence time. Expects a `Time` object.
+  
+In the following example, `oteltrace` is an alias for the go.opentelemetry.io/otel/trace package and `attribute` refers to the go.opentelemetry.io/otel/attribute package. These packages must be imported in order to use this example.
+
+```go
+// Start a span.
+ctx, span := tracer.StartSpan(context.Background(), "span_name")
+span.AddEvent("Event With No Attributes")
+span.AddEvent("Event With Some Attributes", oteltrace.WithAttributes(attribute.Int("int_val", 1), attribute.String("string_val", "two"), attribute.Int64Slice("int_array", []int64{3, 4}), attribute.StringSlice("string_array", []string{"5", "6"}), attribute.BoolSlice("bool_array", []bool{false, true})))
+span.Finish()
+```
+Read the [OpenTelemetry][17] specification for more information.
 
 ## Trace client and Agent configuration
 
@@ -192,3 +211,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [14]: /tracing/security
 [15]: /tracing/glossary/#trace
 [16]: https://pkg.go.dev/context
+[17]: https://opentelemetry.io/docs/specs/otel/trace/api/#add-events

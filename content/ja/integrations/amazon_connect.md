@@ -3,6 +3,7 @@ categories:
 - cloud
 - aws
 - ログの収集
+custom_kind: integration
 dependencies: []
 description: Amazon Connect のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_connect/
@@ -13,7 +14,6 @@ integration_id: ''
 integration_title: Amazon Connect
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_connect
 public_title: Datadog-Amazon Connect インテグレーション
@@ -28,9 +28,9 @@ Amazon Connect は、セルフサービスの構成を提供し、動的でパ�
 
 このインテグレーションを有効にすると、Datadog にすべての Connect メトリクスを表示できます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -55,21 +55,21 @@ Amazon Connect から S3 バケットまたは CloudWatch のいずれかにロ�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_connect" >}}
 
 
-### ヘルプ
+### イベント
 
 Amazon Connect インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amazon Connect インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

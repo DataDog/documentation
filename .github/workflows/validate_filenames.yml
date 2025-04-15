@@ -7,14 +7,20 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   run_static_asset_validation:
+    if: github.ref != 'refs/heads/guacbot/translation-pipeline'
     runs-on: ubuntu-latest
     steps:
 
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github/
 

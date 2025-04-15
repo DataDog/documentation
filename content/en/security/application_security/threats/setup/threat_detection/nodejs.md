@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for NodeJs
+title: Enabling AAP for Node.js
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -16,10 +16,10 @@ further_reading:
       text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -29,7 +29,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 ## Enabling threat detection
 ### Get started
 
-1. **Update your Datadog Node.js library package** to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
+1. **Update your Datadog Node.js library package** to at least version 5.0.0 (for Node 18+) or 4.0.0 (for Node 16+) or 3.10.0 (for Node.js 14+), by running one of these commands:
    ```shell
    npm install dd-trace@^5
    npm install dd-trace@^4
@@ -37,9 +37,9 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
    ```
    Use this [migration guide][1] to assess any breaking changes if you upgraded your library.
 
-   Application Security Management is compatible with Express v4+ and NodeJS v14+. For additional information, see [Compatibility][2].
+   App and API Protection is compatible with Express v4+ and Node.js v14+. For additional information, see [Compatibility][2].
 
-2. **Where you import and initialize the Node.js library for APM, also enable ASM.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
+2. **Where you import and initialize the Node.js library for APM, also enable AAP.** This might be either in your code or with environment variables. If you initialized APM in code, add `{appsec: true}` to your init statement:
       {{< tabs >}}
 {{% tab "In JavaScript code" %}}
 
@@ -77,7 +77,7 @@ import `dd-trace/init`;
    ```shell
    node --require dd-trace/init app.js
    ```
-   Then use environment variables to enable ASM:
+   Then use environment variables to enable AAP:
    ```shell
    DD_APPSEC_ENABLED=true node app.js
    ```
@@ -135,7 +135,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{% /tab %}}
 {{% tab "AWS Fargate" %}}
 
-Initialize ASM in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
+Initialize AAP in your code or set `DD_APPSEC_ENABLED` environment variable to `true` in your service invocation:
 ```shell
 DD_APPSEC_ENABLED=true node app.js
 ```

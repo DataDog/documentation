@@ -10,17 +10,17 @@ further_reading:
   text: Más información sobre distribuciones
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: Documentación
-  text: Más información sobre las métricas de traza
+  text: Más información sobre las métricas de trazas (traces)
 title: Métricas basadas en DDSketch en APM
 ---
 
-Las métricas de traza (trace) se recopilan automáticamente para tus servicios y recursos, y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener una métrica diferente para cada percentil y métricas separadas para los servicios, recursos o segunda etiqueta primaria, Datadog ofrece una métrica simple:
+Las métricas de trazas se recopilan automáticamente para tus servicios y recursos, y se conservan durante 15 meses. Los percentiles de latencia existen como series temporales individuales. Estos percentiles también están disponibles como una [métrica de distribución de Datadog][1]. En lugar de tener una métrica diferente para cada percentil y métricas separadas para los servicios, recursos o segundas etiquetas primarias, Datadog ofrece una métrica simple:
 
 - `trace.<SPAN_NAME>`:
   - *Requisito previo:* esta métrica existe para cualquier servicio de APM.
   - *Descripción:* representa las distribuciones de latencia para todos los servicios, recursos y versiones a través de diferentes entornos y segundas etiquetas primarias.
   - *Tipo de métrica:* [DISTRIBUTION][2]
-  - *Etiquetas:* `env`, `service`, `version`, `resource` y [la segunda etiqueta primaria][3].
+  - *Etiquetas (tags):* `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, `synthetics` y [la segunda etiqueta primaria][3].
 
 Las páginas Servicio de APM y Recursos utilizan este tipo de métricas automáticamente. Puedes usar las métricas para alimentar tus dashboards y monitores.
 

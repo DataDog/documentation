@@ -72,11 +72,11 @@ title: クロスプロダクト相関で容易にトラブルシューティン�
 
 ##### ログのトレース ID の挿入
 
-トレース ID は、`opentracing_context_x_datadog_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+トレース ID は、`opentelemetry_trace_id` という変数に保存されます。NGINX コンフィギュレーションファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログフォーマットを更新します。
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 
@@ -235,7 +235,7 @@ APM と Synthetic Monitoring のインテグレーションにより、テスト
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /ja/logs/log_collection/javascript/
 [12]: /ja/account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /ja/real_user_monitoring/browser/#initialization-parameters
+[13]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
 [16]: /ja/real_user_monitoring/platform/connect_rum_and_traces

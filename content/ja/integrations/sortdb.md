@@ -22,6 +22,7 @@ author:
   support_email: namrata.deshpande4@gmail.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: sortdb
 integration_title: Sortdb
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: sortdb
 public_title: Sortdb
@@ -47,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: sortdb の監視を Datadog がサポート
   media: []
@@ -66,11 +67,11 @@ tile:
 - Sortdb フェイルオーバーに関する通知を受けることができます。
 - 複数インスタンスの健全性をチェックし、統計を取得します。
 
-## 計画と使用
+## セットアップ
 
 Sortdb チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sortdb チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -82,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sortdb チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Sortdb の[メトリクス](#メトリクスの収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][5]のルートにある `conf.d/` フォルダーの `sortdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sortdb.d/conf.yaml][6] を参照してください。
 
@@ -96,17 +97,17 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Sortdb チェ�
 
 SortDB チェックは、すべての主要プラットフォームと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][9] を参照してください。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "sortdb" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 SortDB チェックには、イベントは含まれません。
 

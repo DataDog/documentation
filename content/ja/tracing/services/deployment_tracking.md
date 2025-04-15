@@ -1,7 +1,7 @@
 ---
 aliases:
-- /tracing/version_tracking
-- /tracing/deployment_tracking/
+- /ja/tracing/version_tracking
+- /ja/tracing/deployment_tracking/
 description: Datadog を使用して、バージョンタグによりデプロイメントを追跡
 further_reading:
 - link: getting_started/tagging/unified_service_tagging/

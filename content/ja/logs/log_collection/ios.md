@@ -2,7 +2,7 @@
 description: iOS アプリケーションからログを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: ソースコード
   text: dd-sdk-ios ソースコード
 - link: logs/explorer
   tag: ドキュメント
@@ -22,20 +22,9 @@ title: iOS ログ収集
 
 ## セットアップ
 
-1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。
+1. パッケージマネージャーに応じてライブラリを依存関係として宣言します。Swift Package Manager が推奨されます。
 
 {{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-[CocoaPods][6] を使用して、 `dd-sdk-ios`をインストールできます。
-```
-pod 'DatadogCore'
-pod 'DatadogLogs'
-```
-
-[6]: https://cocoapods.org/
-
-{{% /tab %}}
 {{% tab "Swift Package Manager (SPM)" %}}
 
 Apple の Swift Package Manager を使用して統合するには、`Package.swift` に以下を依存関係として追加します。
@@ -48,6 +37,17 @@ Apple の Swift Package Manager を使用して統合するには、`Package.swi
 DatadogCore
 DatadogLogs
 ```
+
+{{% /tab %}}
+{{% tab "CocoaPods" %}}
+
+[CocoaPods][6] を使用して、 `dd-sdk-ios`をインストールできます。
+```
+pod 'DatadogCore'
+pod 'DatadogLogs'
+```
+
+[6]: https://cocoapods.org/
 
 {{% /tab %}}
 {{% tab "Carthage" %}}

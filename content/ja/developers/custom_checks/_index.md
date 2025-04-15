@@ -1,7 +1,8 @@
 ---
-title: カスタムチェック
 description: Datadog を使用したカスタムチェックの設定
+title: カスタムチェック
 ---
+
 ## 概要 
 
 カスタム Agent チェックとも呼ばれるカスタムチェックを使用すると、カスタムシステムまたはアプリケーションからメトリクスやその他のデータを収集して Datadog に送信できます。`conf.d` ディレクトリに新しいチェックファイルを作成して設定することで、アプリケーションから送信されたデータを収集するように Datadog Agent を設定できます。カスタムチェックは、Datadog インテグレーションを作成する場合と比較して労力が少なく済むと思われます。カスタムチェックを通じて発行されたメトリクスはカスタムメトリクスと見なされ、サブスクリプションプランに応じてコストが関連付けられるため、請求に影響します。
@@ -20,5 +21,5 @@ description: Datadog を使用したカスタムチェックの設定
 {{< /whatsnext >}}
 
 [1]: /ja/developers/service_checks/
-[2]: /ja/developers/integrations/new_check_howto/
+[2]: /ja/developers/integrations/agent_integration/
 [3]: /ja/developers/

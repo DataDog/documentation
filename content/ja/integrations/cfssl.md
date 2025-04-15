@@ -23,6 +23,7 @@ author:
   support_email: JeanFred1@gmail.com
 categories:
 - ネットワーク
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cfssl/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: cfssl
 integration_title: cfssl
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cfssl
 public_title: cfssl
@@ -48,6 +48,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Network
+  - Offering::Integration
   configuration: README.md#Setup
   description: cfssl インスタンスを監視する
   media: []
@@ -63,11 +64,11 @@ tile:
 
 このチェックは、Datadog Agent を通じて [cfssl][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い cfssl チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -79,7 +80,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い cfssl チェ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. cfssl のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cfssl.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル exim.d/conf.yaml][5] を参照してください。
 
@@ -89,21 +90,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い cfssl チェ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `cfssl` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 cfssl インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 cfssl インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "cfssl" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

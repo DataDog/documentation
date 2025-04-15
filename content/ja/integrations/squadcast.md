@@ -26,6 +26,7 @@ categories:
 - インシデント
 - 問題追跡
 - notifications
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: Squadcast
 integration_title: Squadcast
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: Squadcast
 public_title: Squadcast
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
   media: []
@@ -73,7 +74,7 @@ Squadcast を Datadog に接続すると、以下のことができます。
 - アラートまたはインシデントに取り組み、エスカレーションの発生時にポリシーを設定
 - オンコールスケジュールを定義し、オンコールの担当者に関するカスタマイズ可能なリマインダーを設定
 
-## 計画と使用
+## セットアップ
 
 **注**: チームレベルの適切な権限を持つ Squadcast ユーザーのみが、Squadcast でサービスを構成できます。サービスを追加するには、Escalation Policy を最低1つ設定する必要があります。
 
@@ -91,7 +92,7 @@ Squadcast で以下の手順に従います。
 
 5. 表示された **Datadog Webhook URL** をコピーし、**Done** をクリックします。
 
-### Ruby
+### Datadog
 
 Datadog で以下の手順に従います。
 
@@ -153,20 +154,20 @@ Datadog で以下の手順に従います。
 
 **注**: Squadcast 用に Webhook を構成したら、Datadog モニターのコンフィギュレーションの **Notify your team** で Webhook をチャンネルとして選択します。
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## 収集データ
+### メトリクス
 
 Squadcast インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### イベント
 
 トリガーおよび解決された Squadcast イベントが Squadcast プラットフォームダッシュボードに表示されます。
 
-### ヘルプ
+### サービスチェック
 
 Squadcast インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 

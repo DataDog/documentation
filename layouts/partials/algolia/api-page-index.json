@@ -43,6 +43,7 @@
 {{
     $hugo_context.Scratch.Add "algoliaindex" (
         dict "objectID" (md5 $full_url)
+        "id" (md5 $full_url)
         "title" $title
         "section_header" $section_header
         "content" $section_content
@@ -51,8 +52,10 @@
         "distinct_base_url" $page.RelPermalink
         "full_url" $full_url
         "language" $lang
-        "rank" $rank
         "category" "API"
         "subcategory" $title
+        "rank" $rank
+        "order" -1
+        "tags" (slice)
     )
 }}

@@ -4,7 +4,7 @@ categories:
 - google cloud
 - log collection
 - ai/ml
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Google Cloud Machine Learning の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_ml/

@@ -54,7 +54,7 @@ Python 2 から Python 3 に変更するには、Agent のデプロイに使用�
 {{% tab "Helm" %}}
 デフォルトでは、[Datadog Helm チャート][1]は、Python 3 ランタイムを埋め込んだ Agent 7 イメージを使用します。
 
-Datadog Agent を更新し続けるには、`values.yaml` を編集して `agent.image` と `clusterChecksRunner.image` セクション以下の情報を削除してください。
+Datadog Agent を更新し続けるには、`datadog-values.yaml` を編集して `agent.image` と `clusterChecksRunner.image` セクション以下の情報を削除してください。
 
 特定のコンテナレジストリを使用する場合は、`agent.image.repository` と `clusterChecksRunner.image.repository` で設定します。`agents.image.tag` と `clusterChecksRunner.image.tag` が未定義であることを確認してください。
 
@@ -191,7 +191,7 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "手動 (DaemonSet)" %}}
 
 DaemonSet マニフェストで、各コンテナ定義のイメージタグを更新します。
 
@@ -277,5 +277,5 @@ datadog_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/agent/versions/upgrade_to_agent_v7/?tab=linux
-[2]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[2]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent

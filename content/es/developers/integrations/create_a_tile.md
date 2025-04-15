@@ -30,7 +30,7 @@ Este cuadro sirve como punto de entrada donde los clientes pueden conocer tu ofe
 
 {{< tabs >}}
 
-{{% tab "Build a tile on the Integrations page" (Crear un cuadro en la página Integraciones) %}}
+{{% tab "Crear un cuadro en la página Integraciones" %}}
 
 {{< img src="developers/integrations/integration_tile.png" alt="Cuadro que representa un ejemplo de oferta en la página Integraciones" style="width:25%" >}}
 
@@ -96,7 +96,7 @@ Para las integraciones de la API de Datadog que estarán disponibles de forma in
 
 {{% /tab %}}
 
-{{% tab "Build a tile on the Marketplace" (Crear un cuadro en el Mercado) %}}
+{{% tab "Crear un cuadro en el Mercado" %}}
 
 {{< img src="developers/integrations/marketplace_tile.png" alt="Cuadro que representa un ejemplo de oferta en la página Marketplace" style="width:25%" >}}
 

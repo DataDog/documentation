@@ -26,6 +26,7 @@ author:
 categories:
 - クラウド
 - メトリクス
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md
 display_on_public_website: true
@@ -35,7 +36,6 @@ integration_id: cloudsmith
 integration_title: Cloudsmith
 integration_version: 0.0.2
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: cloudsmith
 public_title: Cloudsmith
@@ -52,6 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Cloudsmith メトリクスを監視する
   media: []
@@ -69,11 +70,11 @@ tile:
 - Cloudsmith アカウントのストレージ、帯域幅、トークンの使用状況を監視します。
 
 
-## 計画と使用
+## セットアップ
 
 Cloudsmith チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -85,7 +86,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloudsmith.d/conf.yaml` ファイルを編集し、Cloudsmith のパフォーマンスデータを収集します。使用可能なすべてのコンフィギュレーションオプションについては、[cloudsmith.d/conf.yaml のサンプル][5]を参照してください。
 
@@ -95,13 +96,13 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `cloudsmith` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "cloudsmith" >}}
 
 
-### ヘルプ
+### イベント
 
 収集された Cloudsmith 関連のイベントはすべて、Datadog イベントストリーム内で `source:cloudsmith` プロパティを指定して表示されます。Cloudsmith API に送信されるリクエスト数を減らすために、5 分ごとに収集されます。
 
@@ -112,7 +113,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 
 これらは集計キー `@aggregation_key:audit_log` と `@aggregation_key:vulnerabilities` でアクセス可能です。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Cloudsmith サポート][10]までお問い合わせください。
 

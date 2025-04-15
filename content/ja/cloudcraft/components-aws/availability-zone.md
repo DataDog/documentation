@@ -15,7 +15,7 @@ Availability Zone コンポーネントを使用して、Amazon Web Services ア
 - **Raise**: Availability Zone コンポーネントを他のアベイラビリティゾーンより高くします。
 - **Lower**: Availability Zone コンポーネントを他のアベイラビリティゾーンより低くします。
 
-## ヘルプ
+## API
 
 [Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 

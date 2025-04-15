@@ -4,7 +4,7 @@ categories:
 - cloud
 - configuration & deployment
 - log collection
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: 受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_vm_scale_set/

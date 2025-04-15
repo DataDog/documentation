@@ -1,6 +1,7 @@
 ---
 categories:
 - 言語
+custom_kind: integration
 dependencies: []
 description: Datadog のクライアントライブラリを使用して .NET アプリケーションからランタイムメトリクスを送信。
 doc_link: https://docs.datadoghq.com/integrations/dotnet/
@@ -12,7 +13,6 @@ integration_id: dotnet
 integration_title: .NET
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: dotnet
 public_title: Datadog-.NET インテグレーション
@@ -25,7 +25,7 @@ version: '1.0'
 
 NET インテグレーションを利用して、.NET アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
 
-## 計画と使用
+## セットアップ
 
 ### メトリクスの収集
 
@@ -45,21 +45,21 @@ _Agent v6.0 以上で使用可能_
 
 [.NET プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "dotnet" >}}
 
 
-### ヘルプ
+### イベント
 
 .NET インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 .NET インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

@@ -17,75 +17,99 @@ further_reading:
 - link: /agent/docker/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-title: Docker インテグレーションオートディスカバリー
+title: Docker and Integrations
 ---
 
+This page covers how to install and configure integrations for your Docker infrastructure by using a Datadog feature known as _Autodiscovery_. Autodiscovery enables you to use [variables][1] like `%%host%%` to dynamically populate your configuration settings. 
+
+For a detailed explanation of how Autodiscovery works, see [Getting Started with Containers: Autodiscovery][2]. For advanced Autodiscovery options, such as excluding certain containers from Autodiscovery or tolerating unready pods, see [Container Discovery Management][3].
+
+If you are using Kubernetes, see [Kubernetes and Integrations][4].
+
 <div class="alert alert-info">
-この機能の背後にある概念については、<a href="/getting_started/agent/autodiscovery">オートディスカバリーの概要ドキュメント</a>を参照してください。
+The following Datadog integrations don't work with Autodiscovery because they require either process tree data or filesystem access: <a href="/integrations/ceph">Ceph</a>, <a href="/integrations/varnish">Varnish</a>, <a href="/integrations/postfix">Postfix</a>, <a href="/integrations/cassandra/#agent-check-cassandra-nodetool">Cassandra Nodetool</a>, and <a href="/integrations/gunicorn">Gunicorn</a>.<br/><br/>
+To monitor integrations that are not compatible with Autodiscovery, you can use a Prometheus exporter in the pod to expose an HTTP endpoint, and then use the <a href="/integrations/openmetrics/">OpenMetrics integration</a> (which supports Autodiscovery) to find the pod and query the endpoint. 
 </div>
 
-このページでは、インテグレーションオートディスカバリーと Docker を構成する方法について説明します。Kubernetes を使用する場合は、[Kubernetes インテグレーションオートディスカバリーのドキュメント][1]を参照してください。
+## Set up your integration
 
-オートディスカバリーの目的は、特定のコンテナに対して Agent チェックを実行するときに、Datadog インテグレーション構成を適用することです。このロジックのより詳細な内容については、ホストで Agent を実行している場合の [Agent インテグレーションの構成方法][2]のドキュメントを参照してください。
+Some integrations require setup steps, such as creating an access token or granting read permission to the Datadog Agent. Follow the instructions in the **Setup** section of your integration's documentation.
 
-オートディスカバリーを使用してインテグレーションを構成するには、以下のパラメーターを使用します。
+### コミュニティのインテグレーション
+To use an integration that is not packaged with the Datadog Agent, you must build a custom image that contains your desired integration. See [Use Community Integrations][5] for instructions.
 
-| パラメーター            | 必須 | 説明                                                                                       |
-|----------------------|----------|---------------------------------------------------------------------------------------------------|
-| `<インテグレーション名>` | 〇      | Datadog インテグレーションの名前                                                                   |
-| `<初期コンフィギュレーション>`      | 〇      | `特定の Datadog-`<INTEGRATION_NAME>` の init_config:` セクションの構成           |
-| `<インスタンスコンフィギュレーション>`  | 〇      | `特定の Datadog-`<INTEGRATION_NAME>` の instances:` セクションの構成             |
+## 構成
 
-**注**: Datadog Agent 7.36 で導入されたオートディスカバリー v2 では、`<INIT_CONFIG>` は必要ありません。
+Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][6] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
 
-[**オートディスカバリー対応の Agent インテグレーションの完全なリストとそれらのパラメーターの例をご覧ください**][3]
+Otherwise:
 
-以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
-
-* [Docker ラベル](?tab=docker#configuration)
-* [Agent 内にマウントされたコンフィギュレーションファイル](?tab=file#configuration)
-* [Key-Value ストア](?tab=keyvaluestore#configuration)
-
-**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、コンテナで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してコンテナを見つけ、エンドポイントをクエリします。
-
-## コンフィギュレーション
+1. Choose a configuration method (Docker labels, a local file, or a key-value store) that suits your use case.
+2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_IDENTIFIER>`.
+3. [Supply values](#placeholder-values) for these placeholders.
 
 {{< tabs >}}
-{{% tab "Docker (AD v2)" %}}
+{{% tab "Labels" %}}
 
-**注**: AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+#### Dockerfile
 
-Docker コンテナに対してオートディスカバリーを自動的に有効にするには、`/var/run/docker.sock` をコンテナ化 Agent にマウントします。Windows では、`\\.\pipe\docker_engine` をマウントします。
-
-インテグレーションテンプレートは、Docker ラベルとして格納できます。オートディスカバリーを使用して、Agent は自身が Docker 上で実行されているかどうかを検出し、すべてのラベルでインテグレーションテンプレートを自動的に探します。オートディスカバリーは、以下の例のようなラベルを前提としています。
-
-**Dockerfile**:
+Datadog Agent v7.36+ の場合:
 
 ```yaml
-LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>], "logs": [<LOGS_CONFIG>]}}'
 ```
 
-**docker-compose.yaml**:
+古いバージョンの Agent の場合:
+
+```yaml
+LABEL "com.datadoghq.ad.check_names"='[<インテグレーション名>]'
+LABEL "com.datadoghq.ad.init_configs"='[<初期構成>]'
+LABEL "com.datadoghq.ad.instances"='[<インスタンス構成>]'
+LABEL "com.datadoghq.ad.logs"='[<ログ構成>]'
+```
+
+#### docker-compose.yaml
+
+Datadog Agent v7.36+ の場合:
 
 ```yaml
 labels:
-  com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+  com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>], "logs": [<LOGS_CONFIG>]}}'
 ```
 
-**`docker run`、`nerdctl run`、または `podman run` コマンドを使用**:
+古いバージョンの Agent の場合:
+
+```yaml
+labels:
+  com.datadoghq.ad.check_names: '[<インテグレーション名>]'
+  com.datadoghq.ad.init_configs: '[<初期構成>]'
+  com.datadoghq.ad.instances: '[<インスタンス構成>]'
+  com.datadoghq.ad.logs: '[<ログ構成>]'
+```
+
+#### Using docker run, nerdctl run, or podman run
+
+Datadog Agent v7.36+ の場合:
 
 ```shell
--l com.datadoghq.ad.checks="{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+docker run -l com.datadoghq.ad.checks="{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>], \"logs\": [<LOGS_CONFIG>]}}"
+```
+
+古いバージョンの Agent の場合:
+
+```shell
+docker run -l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
 **注**: これらのラベルを構成する際に、JSON をエスケープすることができます。例:
 ```shell
-docker run --label "com.datadoghq.ad.checks="{\"apache\": {\"instances\": [{\"apache_status_url\":\"http://%%host%%/server-status?auto2\"}]}}"
+docker run -l "com.datadoghq.ad.checks="{\"apache\": {\"instances\": [{\"apache_status_url\":\"http://%%host%%/server-status?auto2\"}]}}"
 ```
 
-**Docker Swarm**:
+#### Docker Swarm
+When using Swarm mode for Docker Cloud, labels must be applied to the image.
 
-Docker Cloud の Swarm モードを使用する場合は、以下のようにラベルをイメージに適用する必要があります。
+Datadog Agent v7.36+ の場合:
 
 ```yaml
 version: "1.0"
@@ -94,52 +118,11 @@ services:
   project:
     image: '<IMAGE_NAME>'
     labels:
-      com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+      com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>], "logs": [<LOGS_CONFIG>]}}'
 
 ```
 
-**注**: Datadog はオートディスカバリーを構成する際に、コンテナ化環境で Docker を使用してテレメトリを統一することをお勧めします。詳細は、[統合サービスタグ付け][1]のドキュメントを参照してください。
-
-
-[1]: /ja/getting_started/tagging/unified_service_tagging/?tab=docker
-{{% /tab %}}
-{{% tab "Docker (AD v1)" %}}
-
-Docker コンテナに対してオートディスカバリーを自動的に有効にするには、`/var/run/docker.sock` をコンテナ化 Agent にマウントします。Windows では、`\\.\pipe\docker_engine` をマウントします。
-
-インテグレーションテンプレートは、Docker ラベルとして格納できます。オートディスカバリーを使用して、Agent は自身が Docker 上で実行されているかどうかを検出し、すべてのラベルでインテグレーションテンプレートを自動的に探します。オートディスカバリーは、以下の例のようなラベルを前提としています。
-
-**Dockerfile**:
-
-```yaml
-LABEL "com.datadoghq.ad.check_names"='[<インテグレーション名>]'
-LABEL "com.datadoghq.ad.init_configs"='[<初期コンフィギュレーション>]'
-LABEL "com.datadoghq.ad.instances"='[<インスタンスコンフィギュレーション>]'
-```
-
-**docker-compose.yaml**:
-
-```yaml
-labels:
-  com.datadoghq.ad.check_names: '[<インテグレーション名>]'
-  com.datadoghq.ad.init_configs: '[<初期コンフィギュレーション>]'
-  com.datadoghq.ad.instances: '[<インスタンスコンフィギュレーション>]'
-```
-
-**`docker run`、`nerdctl run`、または `podman run` コマンドを使用**:
-
-```shell
--l com.datadoghq.ad.check_names='[<インテグレーション名>]' -l com.datadoghq.ad.init_configs='[<初期コンフィギュレーション>]' -l com.datadoghq.ad.instances='[<インスタンスコンフィギュレーション>]'
-```
-
-**注**: これらのラベルを構成する際に、JSON をエスケープすることができます。例:
-```shell
-docker run --label "com.datadoghq.ad.check_names=[\"redisdb\"]" --label "com.datadoghq.ad.init_configs=[{}]" --label "com.datadoghq.ad.instances=[{\"host\":\"%%host%%\",\"port\":6379}]" --label "com.datadoghq.ad.logs=[{\"source\":\"redis\"}]" --name redis redis
-```
-
-**Docker Swarm**:
-
-Docker Cloud の Swarm モードを使用する場合は、以下のようにラベルをイメージに適用する必要があります。
+古いバージョンの Agent の場合:
 
 ```yaml
 version: "1.0"
@@ -149,53 +132,41 @@ services:
     image: '<イメージ名>'
     labels:
       com.datadoghq.ad.check_names: '[<インテグレーション名>]'
-      com.datadoghq.ad.init_configs: '[<初期コンフィギュレーション>]'
-      com.datadoghq.ad.instances: '[<インスタンスコンフィギュレーション>]'
+      com.datadoghq.ad.init_configs: '[<初期構成>]'
+      com.datadoghq.ad.instances: '[<インスタンス構成>]'
+      com.datadoghq.ad.logs: '[<ログ構成>]'
 
 ```
 
-**注**: Datadog はオートディスカバリーを構成する際に、コンテナ化環境で Docker を使用してテレメトリを統一することをお勧めします。詳細は、[統合サービスタグ付け][1]のドキュメントを参照してください。
-
-
-[1]: /ja/getting_started/tagging/unified_service_tagging/?tab=docker
 {{% /tab %}}
-{{% tab "File" %}}
+{{% tab "ローカルファイル" %}}
 
-テンプレートをローカルファイルとして保存し、それをコンテナ化 Agent 内にマウントする場合は、外部サービスや特定のオーケストレーションプラットフォームを必要としません。この方法の欠点は、テンプレートを変更、追加、または削除するたびに、Agent コンテナを再起動する必要がある点です。Agent は、マウントされた `/conf.d` ディレクトリでオートディスカバリーテンプレートを探します。
+You can store Autodiscovery templates as local files inside the mounted `/conf.d` directory. You must restart your Agent containers each time you change, add, or remove templates.
 
-Agent v6.2.0 (および v5.24.0) 以降、デフォルトテンプレートはポートを自動検出するのではなく、監視対象ソフトウェアのデフォルトポートを使用します。別のポートを使用する必要がある場合は、[Docker コンテナラベル](?tab=docker-labels)で、カスタムオートディスカバリーテンプレートを指定します。
+1. Create a `conf.d/<INTEGRATION_NAME>.d/conf.yaml` file on your host:
+   ```yaml
+   ad_identifiers:
+     - <CONTAINER_IDENTIFIER>
 
-デフォルトのインテグレーションテンプレートは、基本的なケース向けです。追加オプションを有効にするためにカスタム Datadog インテグレーション構成が必要な場合は、別のコンテナ識別子を使用します。あるいは、テンプレート変数インデックスを使用して、独自のオートディスカバリー構成ファイルを作成します。
+   init_config:
+     <INIT_CONFIG>
 
-1. ホストに `conf.d/<INTEGRATION_NAME>.d/conf.yaml` ファイルを作成し、カスタムオートディスカバリー構成を追加します。
+   instances:
+     <INSTANCES_CONFIG>
+
+   logs:
+     <LOGS_CONFIG>
+   ```
+
 2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
-**オートディスカバリー構成ファイル例**:
-
-```text
-ad_identifiers:
-  <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
-
-init_config:
-  <INIT_CONFIG>
-
-instances:
-  <INSTANCES_CONFIG>
-```
-
-`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` の詳細については、[オートディスカバリーコンテナ識別子][1]のドキュメントを参照してください。
-
-**注**: Agent はファイル名から直接 `<INTEGRATIONS_NAME>` を推測するため、この名前を設定する必要はありません。
-
-[1]: /ja/agent/guide/ad_identifiers/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
-
-オートディスカバリーでは、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートソースとして使用できます。key-value ストアを使用するには、Agent の `datadog.yaml` 構成ファイルでストアを構成し、このファイルをコンテナ化 Agent 内にマウントします。あるいは、key-value ストアを環境変数としてコンテナ化 Agent に渡します。
+You can source Autodiscovery templates from [Consul][1], [etcd][2], or [ZooKeeper][3]. You can configure your key-value store in the `datadog.yaml` configuration file (and subsequently mount this file inside the Agent container), or as environment variables in the Agent container.
 
 **datadog.yaml での構成**
 
-`datadog.yaml` ファイルで、key-value ストアの `<KEY_VALUE_STORE_IP>` アドレスと `<KEY_VALUE_STORE_PORT>` を以下のように設定します。
+In `datadog.yaml`, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
 
   ```yaml
   config_providers:
@@ -226,7 +197,7 @@ instances:
       password:
   ```
 
-次に、[Agent を再起動][2]して、構成の変更を適用します。
+[Restart the Datadog Agent][4] to apply your changes.
 
 **環境変数での構成**
 
@@ -235,79 +206,93 @@ key-value ストアがテンプレートソースとして有効になってい�
 ```yaml
 /datadog/
   check_configs/
-    <コンテナ識別子>/
-      - check_names: ["<インテグレーション名>"]
-      - init_configs: ["<初期コンフィギュレーション>"]
-      - instances: ["<インスタンスコンフィギュレーション>"]
+    <CONTAINER_IDENTIFIER>/
+      - check_names: ["<INTEGRATION_NAME>"]
+      - init_configs: ["<INIT_CONFIG>"]
+      - instances: ["<INSTANCES_CONFIG>"]
+      - logs: ["<LOGS_CONFIG>"]
     ...
 ```
 
-**注**: key-value ストアを使用している場合、オートディスカバリーは特定の構成を特定のコンテナに適用するために、`<CONTAINER_IDENTIFIER>` と `.spec.containers[0].image` の一致を試みることで、コンテナを**イメージ**で識別します。
-
 [1]: /ja/integrations/consul/
-[2]: /ja/agent/guide/agent-commands/
+[2]: /ja/integrations/etcd/
+[3]: /ja/integrations/zk/
+[4]: /ja/agent/configuration/agent-commands/
+
 {{% /tab %}}
 {{< /tabs >}}
 
+### Placeholder values
+
+Supply placeholder values as follows:
+
+`<INTEGRATION_NAME>`
+: The name of your Datadog integration, such as `etcd` or `redisdb`.
+
+`<CONTAINER_IDENTIFIER>`
+: An identifier to match against the names (`spec.containers[0].name`, **not** `spec.containers[0].image`) of the containers that correspond to your integration. The `ad_identifiers` parameter takes a list, so you can supply multiple container identifiers.<br/><br/>
+For example: if you supply `redis` as a container identifier, your Autodiscovery template is applied to all containers with names that match `redis`. If you have one container running `foo/redis:latest` and `bar/redis:v2`, your Autodiscovery template is applied to both containers.<br/><br/>
+You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
+
+`<INIT_CONFIG>`
+: The configuration parameters listed under `init_config` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file. The `init_config` section is usually empty.
+
+`<INSTANCES_CONFIG>`
+: The configuration parameters listed under `instances` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
+
+`<LOGS_CONFIG>`
+: The configuration parameters listed under `logs` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
+
 ## 例
 
-### Datadog Redis インテグレーション
+### Redis integration
+
+Redis is one the technologies for which [Autodiscovery auto-configuration][6] is available. The following examples demonstrate overriding this basic configuration with a custom configuration that supplies a `password` parameter.
+
+Store your password as an environment variable named `REDIS_PASSWORD`; then:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-以下の `docker-compose.yml` ファイルは、カスタム `password` パラメーターを使用して適切な Redis インテグレーションテンプレートを適用します。
+Datadog Agent v7.36+ の場合:
+
+```yaml
+labels:
+  com.datadoghq.ad.checks: '{"redisdb": {"instances": [{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}], "logs": [{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]}}'
+```
+
+古いバージョンの Agent の場合:
 
 ```yaml
 labels:
   com.datadoghq.ad.check_names: '["redisdb"]'
   com.datadoghq.ad.init_configs: '[{}]'
   com.datadoghq.ad.instances: '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
+  com.datadoghq.ad.logs: '[{"type": "file", "path": "/var/log/redis_6379.log", "source": "redis", "service": "redis_service"}]'
 ```
 
 {{% /tab %}}
 {{% tab "File" %}}
+1. ホストに `conf.d/redisdb.d/conf.yaml` ファイルを作成します。
 
-Redis は、Agent にパッケージ化されているデフォルトのオートディスカバリーテンプレートの 1 つです。そのため、このファイルをマウントする必要はありません。以下の Redis テンプレートは Agent にパッケージ化されています。
+   ```yaml
+   ad_identifiers:
+     - redis
+   init config:
+   instances:
+     - host: "%%host%%"
+       port: "6379"
+       username: "datadog"
+       password: "%%env_REDIS_PASSWORD%%"
+   logs:
+     - type: "file"
+       path: "/var/log/redis.log"
+       source: "redis"
+       service: "redis_service"
+   ```
 
-```yaml
-ad_identifiers:
-  - redis
+2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
-init_config:
-
-instances:
-
-  - host: "%%host%%"
-    port: "6379"
-```
-
-これは、最小の [Redis インテグレーション構成][1]とほぼ同じですが、`ad_identifiers` オプションがあることがわかります。この必須オプションを使用して、コンテナ識別子を指定できます。オートディスカバリーは、同じホスト上で `redis` イメージを実行するすべてのコンテナにこのテンプレートを適用します。詳細は、[オートディスカバリーの識別子に関するドキュメント][2]を参照してください。
-
-Redis で、統計エンドポイントにアクセスする際に追加の `password` が必要な場合、以下のようにします。
-
-1. ホストに `conf.d/` フォルダーと `conf.d/redisdb.d` フォルダーを作成します。
-2. ホストの `conf.d/redisdb.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
-3. ホストの `conf.d/` フォルダーをコンテナ化 Agent の `conf.d/` フォルダーにマウントします。
-
-```yaml
-ad_identifiers:
-  - redis
-
-init_config:
-
-instances:
-
-  - host: "%%host%%"
-    port: "6379"
-    password: "%%env_REDIS_PASSWORD%%"
-```
-
-**注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][3]を参照してください。
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[2]: /ja/agent/guide/ad_identifiers/
-[3]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
@@ -320,98 +305,21 @@ etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
 etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
 ```
 
-3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
-
-**注**: パスワードがプレーンテキストで保存されることを避けるために、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数を Agent に渡す必要があります。[オートディスカバリーテンプレート変数のドキュメント][1]を参照してください。
-
-auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
-
-[1]: /ja/agent/faq/template_variables/
+Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Datadog Apache および HTTP チェックインテグレーション
+All of these examples use [Autodiscovery template variables][1]:
+- `%%host%%` には、コンテナの IP が動的に設定されます。
+- `%%env_REDIS_PASSWORD%%` は Agent プロセスから見た `REDIS_PASSWORD` という名前の環境変数を参照します。 
 
-以下の構成は、`<コンテナ識別子>`: `httpd` を持つ Apache コンテナイメージに適用されます。オートディスカバリーテンプレートは、Apache コンテナからメトリクスを収集し、2 つのエンドポイントをテストするためのインスタンスで Datadog-HTTP チェックをセットアップするように構成されます。
+For more examples, including how to configure multiple checks for multiple sets of containers, see [Autodiscovery: Scenarios & Examples][8].
 
-チェック名は、`apache`、`http_check`、これらの `<初期コンフィギュレーション>`、および `<インスタンスコンフィギュレーション>` です。完全な構成は、それぞれのドキュメントの [Datadog-Apache インテグレーション][9]と [Datadog-HTTP チェックインテグレーション][10]のページにあります。
-
-{{< tabs >}}
-{{% tab "Docker" %}}
-
-```yaml
-labels:
-  com.datadoghq.ad.check_names: '["apache", "http_check"]'
-  com.datadoghq.ad.init_configs: '[{},{}]'
-  com.datadoghq.ad.instances: '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name":"<ウェブサイト_1>","url":"http://%%host%%/website_1","timeout":1},{"name":"<ウェブサイト_2>","url":"http://%%host%%/website_2","timeout":1}]]'
-```
-
-{{% /tab %}}
-{{% tab "File" %}}
-
-* ホストに `conf.d/` フォルダーと `conf.d/apache.d` フォルダーを作成します。
-* ホストの `conf.d/apache.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
-
-```yaml
-ad_identifiers:
-  - httpd
-
-init_config:
-
-instances:
-  - apache_status_url: http://%%host%%/server-status?auto
-```
-
-**注**: これは、最小の [Apache チェック構成][1]とほぼ同じですが、`ad_identifiers` オプションがあることがわかります。この必須オプションを使用して、コンテナ識別子を指定できます。オートディスカバリーは、同じホスト上で `httpd` イメージを実行するすべてのコンテナにこのテンプレートを適用します。詳細は、[オートディスカバリーの識別子に関するドキュメント][2]を参照してください。
-
-* 次に、ホストに `conf.d/http_check.d` フォルダーを作成します。
-* ホストの `conf.d/http_check.d/conf.yaml` の下にカスタムオートディスカバリー構成を追加します。
-
-```yaml
-ad_identifiers:
-  - httpd
-
-init_config:
-
-instances:
-  - name: "<ウェブサイト_1>"
-    url: "http://%%host%%/website_1"
-    timeout: 1
-
-  - name: "<ウェブサイト_2>"
-    url: "http://%%host%%/website_2"
-    timeout: 1
-```
-
-* 最後に、ホストの `conf.d/` フォルダーをコンテナ化 Agent の `conf.d/` フォルダーにマウントします。
-
-[1]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[2]: /ja/agent/guide/ad_identifiers/
-{{% /tab %}}
-{{% tab "Key-value store" %}}
-
-```conf
-etcdctl set /datadog/check_configs/httpd/check_names '["apache", "http_check"]'
-etcdctl set /datadog/check_configs/httpd/init_configs '[{}, {}]'
-etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "http://%%host%%/server-status?auto"}],[{"name": "<ウェブサイト_1>", "url": "http://%%host%%/website_1", timeout: 1},{"name": "<ウェブサイト_2>", "url": "http://%%host%%/website_2", timeout: 1}]]'
-```
-
-**注**: 各リストの順番が重要です。Agent は、構成の各部分が 3 つのリストの同じインデックスにある場合にのみ、HTTP チェック構成を正しく生成します。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /ja/agent/kubernetes/integrations/
-[2]: /ja/getting_started/integrations/#configuring-agent-integrations
-[3]: /ja/integrations/#cat-autodiscovery
-[4]: /ja/integrations/ceph/
-[5]: /ja/integrations/varnish/#autodiscovery
-[6]: /ja/integrations/postfix/
-[7]: /ja/integrations/cassandra/#agent-check-cassandra-nodetool
-[8]: /ja/integrations/gunicorn/
-[9]: /ja/integrations/apache/#setup
-[10]: /ja/integrations/http_check/#setup
+[1]: /ja/containers/guide/template_variables/
+[2]: /ja/getting_started/containers/autodiscovery
+[3]: /ja/containers/guide/autodiscovery-management
+[4]: /ja/containers/kubernetes/integrations/
+[5]: /ja/agent/guide/use-community-integrations/
+[6]: /ja/containers/guide/auto_conf
+[7]: /ja/containers/guide/ad_identifiers
+[8]: /ja/containers/guide/autodiscovery-examples

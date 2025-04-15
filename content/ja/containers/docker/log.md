@@ -48,7 +48,7 @@ Datadog Agent 6 以降は、コンテナからログを収集します。2 通�
 Datadog Agent を埋め込みホストを監視する [Docker コンテナ][1] を実行するには、それぞれの OS で次のコマンドを使用します。
 
 ### Linux
-以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 {{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
@@ -69,7 +69,7 @@ docker run -d --name datadog-agent \
 {{< /site-region >}}
 
 ### Windows
-以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 {{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
@@ -79,7 +79,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
@@ -89,7 +89,7 @@ docker run -d --name datadog-agent \
 ### macOS
 Docker Desktop -> Settings -> Resources -> File sharing に `/opt/datadog-agent/run` というパスを追加します。
 
-以下の構成では、`<DD_SITE>` を {{< region-param key="dd_site" >}} に置き換えてください。
+For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
 {{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
@@ -100,7 +100,7 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
+           -e DD_SITE=<DD_SITE> \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
@@ -130,6 +130,12 @@ docker run -d --name datadog-agent \
 `-v /var/lib/docker/containers:/var/lib/docker/containers:ro` 
 : ファイルからコンテナログを収集します。Datadog Agent 6.27.0/7.27.0 以降で利用可能です。
 
+**注**: Docker Compose を使用する場合、`DD_CONTAINER_EXCLUDE` の値は引用符で囲んではいけません。以下の例のように、docker-compose.yaml ファイルに環境変数を構成してください。
+
+```yaml
+environment:
+    - DD_CONTAINER_EXCLUDE=image:datadog/agent:*
+```
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/agent
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
@@ -154,7 +160,7 @@ docker run -d --name datadog-agent \
 
 [1]: /ja/agent/basic_agent_usage/
 [2]: https://docs.microsoft.com/en-us/visualstudio/containers/troubleshooting-docker-errors?view=vs-2019#docker-users-group
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "カスタムログを使用するホスト Agent" %}}
 
@@ -177,8 +183,8 @@ docker run -d --name datadog-agent \
 
 [1]: /ja/agent/basic_agent_usage/
 [2]: /ja/agent/logs/#custom-log-collection
-[3]: /ja/agent/guide/agent-configuration-files/
-[4]: /ja/agent/guide/agent-commands/#restart-the-agent
+[3]: /ja/agent/configuration/agent-configuration-files/
+[4]: /ja/agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -211,7 +217,7 @@ LABEL "com.datadoghq.ad.logs"='[<ログコンフィギュレーション>]'
 ```
 
 {{% /tab %}}
-{{% tab "Docker-Compose" %}}
+{{% tab "Docker Compose" %}}
 
 `docker-compose.yaml` ファイルに以下のラベルを追加します：
 

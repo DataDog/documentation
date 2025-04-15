@@ -6,9 +6,9 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: CI パイプラインの監視方法
-- link: /continuous_integration/intelligent_test_runner
+- link: /tests/test_impact_analysis
   tag: Documentation
-  text: Intelligent Test Runner について
+  text: Test Impact Analyzer について
 title: CI Visibility のトラブルシューティング
 ---
 
@@ -38,6 +38,10 @@ title: CI Visibility のトラブルシューティング
 
 _Pipeline Details_ ページでステージやジョブが見つからないのは、構成が間違っている可能性があります。ステージまたはジョブの実行に保存されているパイプライン名が、親パイプラインの**同じ**名前と一致していることを確認してください。カスタムパイプラインを使用している場合は、[公開 API エンドポイント仕様][15]を参照してください。
 
+## Gitlab パイプラインで変数が不足している
+
+[Gitlab のユーザー定義変数][16]は、CI Visibility で `@ci.parameters` フィールドにレポートされる必要があります。しかし、この情報は下流パイプラインなど一部のケースでのみ提供され、Gitlab が[常にこの情報をDatadog に送信するわけではない][17]ため、それ以外の場合は欠落する可能性があります。
+
 ### 実行中のパイプラインに関する制限
 
 #### Webhook イベントの配信は、CI プロバイダーによって保証されていません。
@@ -61,9 +65,11 @@ _Pipeline Details_ ページでステージやジョブが見つからないの�
 [7]: /ja/continuous_integration/tests/containers/
 [8]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [9]: https://app.datadoghq.com/ci/settings/repository
-[10]: /ja/continuous_integration/intelligent_test_runner/
+[10]: /ja/tests/test_impact_analysis
 [11]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [13]: /ja/api/latest/ci-visibility-pipelines/#send-pipeline-event
 [14]: /ja/continuous_integration/tests/#supported-features
 [15]: /ja/continuous_integration/pipelines/#supported-features
+[16]: https://docs.gitlab.com/ee/ci/variables/#define-a-cicd-variable-in-the-gitlab-ciyml-file
+[17]: https://gitlab.com/gitlab-org/gitlab/-/issues/29539

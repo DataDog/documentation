@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/apm/
   tag: Documentación
   text: Conectar tests Synthetic y trazas
-kind: guía
 title: Facilitar la resolución de problemas a través de la correlación entre productos
 ---
 
@@ -73,11 +72,11 @@ Consulta la [integración de rastreo NGINX][5].
 
 ##### Inyectar un ID de rastreo en logs
 
-El ID de rastreo se almacena como variable `opentracing_context_x_datadog_trace_id`. Actualiza el formato de log NGINX añadiendo el siguiente bloque de configuración en la sección HTTP de tu archivo de configuración NGINX `/etc/nginx/nginx.conf`:
+El ID de rastreo se almacena como variable `opentelemetry_trace_id`. Actualiza el formato de log NGINX añadiendo el siguiente bloque de configuración en la sección HTTP de tu archivo de configuración NGINX `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
-  log_format main '$remote_addr - $opentracing_context_x_datadog_trace_id $http_x_forwarded_user [$time_local] "$request" '
+  log_format main '$remote_addr - $opentelemetry_trace_id $http_x_forwarded_user [$time_local] "$request" '
           '$status $body_bytes_sent "$http_referer" '
           '"$http_user_agent" "$http_x_forwarded_for" ';
 

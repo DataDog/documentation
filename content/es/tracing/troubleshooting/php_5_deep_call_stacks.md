@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Stacks de llamada en profundidad en PHP 5
 ---
 PHP admite un stack de llamadas casi infinita. Sin embargo, el hook de llamada de la función proporcionado por el motor Zend, `zend_execute_ex` (llamado `zend_execute` en PHP 5.4), llama a los métodos PHP y funciones usando el stack nativo C. Esto a su vez puede causar un desbordamiento del stack cuando el stack de llamadas en PHP se vuelve más y más grande.

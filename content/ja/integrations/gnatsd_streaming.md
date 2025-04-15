@@ -23,6 +23,7 @@ author:
   support_email: dev@goldstar.com
 categories:
 - network
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: gnatsd-streaming
 integration_title: Gnatsd Streaming
 integration_version: 1.0.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gnatsd_streaming
 public_title: Gnatsd Streaming
@@ -48,6 +48,7 @@ tile:
   - Supported OS::Windows
   - Category::ネットワーク
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: NATS サーバーストリーミング
   media: []
@@ -66,11 +67,11 @@ gnatsd_streaming サービスからメトリクスをリアルタイムに取得
 - gnatsd_streaming の状態を視覚化および監視できます。
 - gnatsd_streaming のフェイルオーバーとイベントの通知を受けることができます。
 
-## 計画と使用
+## セットアップ
 
 gnatsd_streaming チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streaming チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 
@@ -82,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streami
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. GnatsD のストリーミング[メトリクス](#metric)の収集を開始するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `gnatsd_streaming.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル gnatsd_streaming.d/conf.yaml][5] を参照してください。
@@ -97,23 +98,23 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い gnatsd_streami
 
 gnatsd_streaming チェックは、すべての主要プラットフォームと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "gnatsd_streaming" >}}
 
 
 Nats ストリーミングサーバーのメトリクスは、"nss-cluster_id" のような名前でタグ付けされます。
 
-### ヘルプ
+### イベント
 
 Nats ストリーミングサーバーをフォールトトレラントグループ内で実行している場合、サーバーのステータスが `FT_STANDBY` と `FT_ACTIVE` の間で切り替わると、Nats ストリーミングフェイルオーバーイベントが発行されます。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "gnatsd_streaming" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

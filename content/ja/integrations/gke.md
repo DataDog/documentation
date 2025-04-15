@@ -18,6 +18,7 @@ author:
 categories:
 - containers
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gke/README.md
 display_on_public_website: true
@@ -27,7 +28,6 @@ integration_id: gke
 integration_title: Google Kubernetes Engine, Agent
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gke
 public_title: Google Kubernetes Engine, Agent インテグレーション
@@ -44,10 +44,20 @@ tile:
   - Supported OS::Windows
   - Category::Containers
   - Category::Orchestration
+  - Offering::Integration
   configuration: README.md#Setup
   description: GKE は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのプラットフォームです。
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/gke-autopilot-monitoring/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-google-kubernetes-engine/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-tau-t2a-gke-workloads-with-datadog-arm-support/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/
   support: README.md#Support
   title: Google Kubernetes Engine, Agent インテグレーション
 ---
@@ -59,7 +69,7 @@ tile:
 
 Google Cloud Platform (GCP) のサービスである Google Kubernetes Engine (GKE) は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのホスト型プラットフォームです。Amazon の Elastic Container Service (ECS) と同様に、GKE はマシンのクラスターにデプロイされた Docker コンテナを管理します。ただし、ECS とは異なり、GKE は Kubernetes を使用します。
 
-## 計画と使用
+## セットアップ
 
 ### 前提条件
 
@@ -104,44 +114,9 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 
 #### Autopilot
 
-1. Helm をインストールします。
+Kubernetes ディストリビューションページの GKE [Autopilot セクション][1]の指示に従ってください。
 
-2. Datadog リポジトリを Helm リポジトリに追加します。
-
-  ```bash
-  helm repo add datadog https://helm.datadoghq.com
-  helm repo update
-  ```
-
-3. 次のコマンドを使用して、Autopilot に Datadog Agent と Cluster Agent をデプロイします。
-
-  ```bash
-  helm install <RELEASE_NAME> \
-      --set datadog.apiKey=<DATADOG_API_KEY> \
-      --set datadog.appKey=<DATADOG_APP_KEY> \
-      --set clusterAgent.enabled=true \
-      --set clusterAgent.metricsProvider.enabled=true \
-      --set providers.gke.autopilot=true \
-      datadog/datadog
-  ```
-
-  **注**: ログやトレースも有効にしたい場合は、このコマンドに `datadog.logs.enabled` (ログ用) と `datadog.apm.portEnabled` (トレース用) を true に設定する行を追加してください。例:
-
-  ```bash
-  helm install --name <RELEASE_NAME> \
-      --set datadog.apiKey=<DATADOG_API_KEY> \
-      --set datadog.appKey=<DATADOG_APP_KEY> \
-      --set clusterAgent.enabled=true \
-      --set clusterAgent.metricsProvider.enabled=true \
-      --set providers.gke.autopilot=true \
-      --set datadog.logs.enabled=true \
-      --set datadog.apm.portEnabled=true \
-      datadog/datadog
-  ```
-
-  構成可能な値の一覧は、[Datadog `helm-charts` リポジトリ][1]を参照してください。
-
-#### ダッシュボード  
+#### アドミッションコントローラー
 
 [Admission Controller][2] を Autopilot で使用するには、Admission Controller の [`configMode`][3] を `service` または `hostip` に設定します。
 
@@ -149,7 +124,7 @@ Autopilot では `socket` モードが許可されていないため、Datadog �
 
 
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values
+[1]: https://docs.datadoghq.com/ja/containers/kubernetes/distributions/?tab=helm#autopilot
 [2]: https://docs.datadoghq.com/ja/containers/cluster_agent/admission_controller/?tab=operator
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1046
 {{% /tab %}}

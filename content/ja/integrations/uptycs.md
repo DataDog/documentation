@@ -21,9 +21,10 @@ author:
 categories:
 - クラウド
 - コラボレーション
-- slos
+- alerting
 - コンプライアンス
 - セキュリティ
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md
 display_on_public_website: true
@@ -33,7 +34,6 @@ integration_id: uptycs
 integration_title: Uptycs
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: uptycs
 public_title: Uptycs
@@ -106,12 +106,12 @@ Uptycs インテグレーションにより、Uptycs のアラートや検出を
    7. Asset details: アセット ID とホスト名。
    8. Uptycs プラットフォームに移動するための Uptycs URL。
 
-## 計画と使用
+## セットアップ
 
 このインテグレーションをセットアップするには、Uptycs のアカウントが必要です。Uptycs をご利用でない場合は、[お問い合わせ][2]から Uptycs アカウントを取得してください。
 また、Datadog API キーも必要です。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. [Datadog API キー][3]を作成します。
 2. Datadog API キーを使用して、Uptycs プラットフォーム上に Datadog インテグレーションの宛先を作成します。
@@ -142,7 +142,7 @@ Uptycs インテグレーションにより、Uptycs のアラートや検出を
    5. **Save** をクリックします。
 6. Uptycs がアラートや検出を生成すると、Datadog イベントとして配信されます。
 
-## ヘルプ
+## トラブルシューティング
 
 ヘルプが必要な場合は、[サポート][7]までお問い合わせください。
 

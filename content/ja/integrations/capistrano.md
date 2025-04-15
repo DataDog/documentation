@@ -5,7 +5,7 @@ categories:
 - developer tools
 - orchestration
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。
 doc_link: https://docs.datadoghq.com/integrations/capistrano/

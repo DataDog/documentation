@@ -27,6 +27,7 @@ categories:
 - kubernetes
 - orchestration
 - テスト
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedscale/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: speedscale
 integration_title: Speedscale
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: speedscale
 public_title: Speedscale
@@ -55,6 +55,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
   media: []
@@ -68,9 +69,9 @@ tile:
 
 このインテグレーションは、[Speedscale][1] のトラフィックリプレイ結果を Datadog に公開します。これにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。Speedscale と Datadog のインテグレーションにより、潜在的なパフォーマンスの問題が本番環境に現れる前に発見し、トラブルシューティングすることができます。
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. このインテグレーションを使用するには、Datadog にイベントを送信できるように、Datadog の [API キー][2]が必要です。
 
@@ -96,21 +97,21 @@ tile:
 
 Datadog の[イベントストリーム][2]を表示すると、エクスポートしたレポートが表示されます。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Speedscale には、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Speedscale には、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Speedscale インテグレーションは、トラフィックリプレイが完了すると [Datadog イベントストリーム][3]にイベントを送信し、これがメトリクスに与える影響を理解するのに役立ちます。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

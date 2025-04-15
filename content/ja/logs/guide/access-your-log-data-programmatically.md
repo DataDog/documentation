@@ -552,4 +552,4 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 [2]: /ja/account_management/api-app-keys/#api-keys
 [3]: /ja/account_management/api-app-keys/#application-keys
 [4]: https://curl.haxx.se/download.html
-[5]: /ja/account_management/rbac/permissions/?tab=ui#log-data-access
+[5]: /ja/logs/explorer/search_syntax/

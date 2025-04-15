@@ -18,7 +18,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
+- windows
 custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
@@ -38,7 +38,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::OS とシステム
+  - Category::Windows
   - Supported OS::Windows
   - Offering::Integration
   configuration: README.md#Setup

@@ -1,6 +1,6 @@
 ---
 aliases:
-- /synthetics/security/
+- /ja/synthetics/security/
 further_reading:
 - link: /data_security/
   tag: ドキュメント

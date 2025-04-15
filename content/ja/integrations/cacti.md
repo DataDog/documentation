@@ -32,7 +32,7 @@ draft: false
 git_integration_title: cacti
 integration_id: cacti
 integration_title: Cacti
-integration_version: 2.1.1
+integration_version: 4.0.0
 is_public: true
 manifest_version: 2.0.0
 name: cacti

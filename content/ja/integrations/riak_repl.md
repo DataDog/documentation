@@ -22,6 +22,7 @@ author:
   support_email: britt.treece@gmail.com
 categories:
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: riak-repl
 integration_title: Riak MDC Replication
 integration_version: 1.0.1
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: riak_repl
 public_title: Riak MDC Replication
@@ -47,6 +47,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Stores
+  - Offering::Integration
   configuration: README.md#Setup
   description: レプリケーションのパフォーマンス、容量、健全性を追跡
   media: []
@@ -62,11 +63,11 @@ tile:
 
 このチェックは Riak レプリケーション [riak-repl][1] を監視します。
 
-## 計画と使用
+## セットアップ
 
 Riak-Repl チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -78,7 +79,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チ�
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. riak_repl のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `riak_repl.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル riak_repl.d/conf.yaml][5] を参照してください。
 
@@ -88,21 +89,21 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Riak-Repl チ�
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `riak_repl` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "riak_repl" >}}
 
 
-### ヘルプ
+### サービスチェック
 
 Riak-Repl インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Riak-Repl インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 

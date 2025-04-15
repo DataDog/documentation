@@ -25,6 +25,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -33,7 +34,6 @@ integration_id: rapdev-hpux-agent
 integration_title: HP-UX Agent
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -46,7 +46,7 @@ pricing:
   short_description: ホスト 1 個あたりの単価
   tag: ホスト
   unit_label: HP-UX Agent
-  unit_price: 40
+  unit_price: 100.0
 public_title: HP-UX Agent
 short_description: hppa および itanium の HP-UX 11.31 メトリクスを提供するシステム Agent
 supported_os: []
@@ -98,4 +98,4 @@ HP-UX Agent は、ネイティブ Agent と同じ URL とポートを使用し�
 *お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-hpux-agent" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

@@ -15,7 +15,6 @@ integration_id: akamai-mpulse
 integration_title: Akamai mPulse
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: akamai_mpulse
 public_title: Datadog-Akamai mPulse
@@ -36,13 +35,13 @@ Datadog のすぐに使えるダッシュボードとモニターを使用する
 
 [Akamai DataStream 2][1]、[NGINX][2]、[MYSQL][3]、その他 600 を超えるテクノロジーからのリアルタイムデータとメトリクスを相関付け、Web スタックをフロントエンドからバックエンドまで表示します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Datadog の [Akamai mPulse インテグレーションタイル][4]を使用して、インテグレーションをインストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Akamai mPulse インテグレーションを構成するには、`apiKey` と `apiToken` が必要です。
 
@@ -66,21 +65,21 @@ Akamai mPulse インテグレーションを構成するには、`apiKey` と `a
 2. 左端のパネルで My Settings に移動します。
 3. API トークン領域で Generate をクリックします。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "akamai_mpulse" >}}
 
 
-### ヘルプ
+### イベント
 
 Akamai mPulse インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Akamai mPulse インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

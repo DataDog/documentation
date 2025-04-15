@@ -2,6 +2,7 @@
 categories:
 - cloud
 - configuration & deployment
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
 description: CloudCheckr で Datadog のメトリクスを表示するために、インテグレーションを有効にします。
@@ -14,7 +15,6 @@ has_logo: true
 integration_id: cloudcheckr
 integration_title: CloudCheckr
 is_public: true
-custom_kind: integration
 name: cloudcheckr
 public_title: Datadog-CloudCheckr インテグレーション
 short_description: CloudCheckr に Datadog メトリクスを追加して、AWS の利用状況を監視し、最適化します。
@@ -28,7 +28,7 @@ short_description: CloudCheckr に Datadog メトリクスを追加して、AWS 
 
 Datadog と CloudCheckr のインテグレーションにより、現在および過去のリソース消費に基づいてデータ駆動型の意思決定を行い、俊敏でコスト効率の高いインフラストラクチャーを維持することができます。
 
-## 計画と使用
+## セットアップ
 
 Datadog アカウントを CloudCheckr アカウントに接続するには
 

@@ -4,46 +4,95 @@ further_reading:
 - link: /integrations/oracle/
   tag: Documentation
   text: Basic Oracle インテグレーション
-is_beta: true
-private: true
 title: Oracle Exadata のデータベースモニタリングの設定
 ---
 
-{{< site-region region="gov" >}}
-データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+{{% dbm-oracle-definition %}}
 
-<div class="alert alert-info">
-このページで説明されている機能は非公開ベータ版です。
-</div>
+読み取り専用ユーザーとしてログインし、Agent でデータベースから直接テレメトリーを収集します。
 
-データベースモニタリングは、クエリサンプルを公開することで、Oracle データベースを深く可視化し、さまざまなワークロードをプロファイリングして問題を診断します。
+## はじめに
+
+{{% dbm-supported-oracle-versions %}}
+
+{{% dbm-supported-oracle-agent-version %}}
+
+パフォーマンスへの影響
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][6]してください)。
+
+プロキシ、ロードバランサー、コネクションプーラー
+: Agent は、監視対象のホストに直接接続する必要があります。Agent をプロキシ、ロードバランサー、コネクションプーラーを経由してデータベースに接続しないようご注意ください。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+
+Data security considerations
+: See [Sensitive information][7] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## セットアップ
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+Oracle データベースでデータベースモニタリングを有効にするには、以下を実行します。
 
-### マルチノード Exadata
+1. [Datadog ユーザーの作成](#create-the-datadog-user)
+1. [Agent をインストールする](#install-the-agent)
+1. [Agent の構成](#configure-the-agent)
+1. [Oracle インテグレーションをインストールまたは検証する](#install-or-verify-the-oracle-integration)
+1. [セットアップの検証](#validate-the-setup)
 
-[Oracle RAC][8] の手順に従って、各ノードの Agent を構成します。
+### Datadog ユーザーの作成
 
-### シングルノード Exadata
+{{% dbm-create-oracle-user %}}
 
-[セルフホスト Oracle データベース][7]の手順に従って Agent を構成します。
+### Securely store your password
+{{% dbm-secret %}}
 
-### 検証
+### Agent のインストール
 
-[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `oracle-dbm` を探します。Datadog の[データベース][6]のページへ移動して開始します。
+See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[3]: /ja/getting_started/tagging/unified_service_tagging
-[4]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://app.datadoghq.com/databases
-[7]: /ja/database_monitoring/setup_oracle/selfhosted
-[8]: /ja/database_monitoring/setup_oracle/rac
+For installation steps, see the [Agent installation instructions][9].
 
-## その他の参考資料
+### Agent の構成
+
+#### マルチノード Exadata
+
+Configure the Agent for each node by following the instructions for [Oracle RAC][4].
+
+#### シングルノード Exadata
+
+Configure the Agent by following the instructions for [self-hosted Oracle databases][3].
+
+### Oracle インテグレーションをインストールまたは検証する
+
+#### 初めてインストールする場合
+
+On the Integrations page in Datadog, install the [Oracle integration][10] for your organization. This installs an [Oracle dashboard][11] in your account that can be used to monitor the performance of your Oracle databases.
+
+#### すでにインストール済みの場合
+
+{{% dbm-existing-oracle-integration-setup %}}
+
+### セットアップの検証
+
+[Run the Agent's status subcommand][1] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
+
+## カスタムクエリ
+
+Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][5] to learn more about the configuration options available.
+
+<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
+
+[1]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[2]: https://app.datadoghq.com/databases
+[3]: /ja/database_monitoring/setup_oracle/selfhosted
+[4]: /ja/database_monitoring/setup_oracle/rac
+[5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
+[6]: /ja/database_monitoring/agent_integration_overhead/?tab=oracle
+[7]: /ja/database_monitoring/data_collected/#sensitive-information
+[8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[9]: https://app.datadoghq.com/account/settings/agent/latest
+[10]: https://app.datadoghq.com/integrations/oracle
+[11]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[12]: /ja/database_monitoring/architecture/
+
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

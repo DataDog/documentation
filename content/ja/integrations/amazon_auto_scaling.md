@@ -9,7 +9,7 @@ categories:
 - configuration & deployment
 - log collection
 - provisioning
-custom_kind: インテグレーション
+custom_kind: integration
 dependencies: []
 description: Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/

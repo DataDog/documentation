@@ -4,42 +4,43 @@ aliases:
 - /ja/tracing/setup_overview/compatibility_requirements/dotnet-core
 code_lang: dotnet-core
 code_lang_weight: 70
-description: .NET トレーサーの互換性要件です。
+description: Compatibility Requirements for the .NET Tracer
 further_reading:
 - link: tracing/trace_collection/dd_libraries/dotnet-core
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
-  tag: GitHub
+  tag: ソースコード
   text: カスタムインスツルメンテーションの例
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
   tag: GitHub
   text: コンテナ化された ASP.NET コアアプリケーションを監視する
-title: .NET Core 互換性要件
+title: .NET and .NET Core Compatibility Requirements
 type: multi-code-lang
 ---
 
 
-.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。[トリミングアプリのベータ版サポート][12]があります。
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
 .NET トレーサーはオープンソースです。詳細については、[.NET トレーサーリポジトリ][1]を参照してください。
 
-## サポートされている .NET Core のランタイム
+## Supported .NET and .NET Core runtimes
 
-.NET トレーサーは、以下の .NET Core バージョンでの自動インスツルメンテーションに対応しています。また、[.NET Framework][2] にも対応しています。
+The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
-| バージョン              | マイクロソフトサポート終了 | サポートレベル        | パッケージバージョン      |
+| .NET Version         | マイクロソフトサポート終了 | サポートレベル        | パッケージバージョン      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
-| .NET 7               |                       | [GA](#support-ga)    | 最新版 (>= 2.20.0)   |
+| .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
+| .NET 7               | 05/14/2024            | [GA](#support-ga)    | 最新版 (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | 最新版 (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | 最新版 (>= 2.0.0)    |
-| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | 最新               |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | 最新版 (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | 最新               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | 最新               |
 | .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | 非推奨       |
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | 非推奨       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | 非推奨       |
 
-その他の情報は、[マイクロソフトの .NET コアライフサイクルポリシー][3]、[APM .NET Core バージョン終了のお知らせ](#end-of-life-net-core-versions)および [.NET Core APM のランタイムサポートポリシー](#runtime-support-policy-for-net-core-apm)に記載されています。
+Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
 ## 対応プロセッサアーキテクチャー
 
@@ -63,9 +64,11 @@ type: multi-code-lang
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ および 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
-| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
-| CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                            | `AwsDynamoDb`        |
+| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| CosmosDb                        | `Microsoft.Azure.Cosmos` 3.6.0+                                                               | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                                     | `GraphQL`            |
@@ -73,6 +76,7 @@ type: multi-code-lang
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                               | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
@@ -84,19 +88,22 @@ type: multi-code-lang
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | WebClient / WebRequest          |
-| WCF (サーバー)                    | 組み込み                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
-希望するフレームワークが見つかりませんか？Datadog では継続的にサポートを追加しています。サポートが必要な場合は、[Datadog チーム][5]にお問い合わせください。
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (see [Using OpenTelemetry Instrumentation Libraries][13] for more details). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
-## .NET Core バージョン終了のお知らせ
+## End of life .NET runtime versions
 
-.NET トレーサーは .NET コア 2.0、2.1、2.2、3.0 で動作しますが、これらのバージョンはサポートが終了しており、Microsoft ではサポートされていません。詳細については、[Microsoft のサポートポリシー][3]を参照してください。Datadog では、.NET Core 3.1、.NET 5、.NET 6、または .NET 7 の最新のパッチバージョンを使用することをお勧めします。古いバージョンの .NET Core では、自動インスツルメンテーションを有効にすると、次のようなランタイム問題が発生することがあります。
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-| 問題                                         | 影響を受ける .NET Core バージョン               | ソリューション                                                               | 詳細                        |
+| 問題                                         | Affected .NET Versions                    | ソリューション                                                               | 詳細                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | Linux/x64 での JIT コンパイラのバグ                 | 2.0.x、</br>2.1.0-2.1.11、</br>2.2.0-2.2.5  | .NET Core を最新のパッチバージョンにアップグレードするか、リンク先の問題の手順に従います | [DataDog/dd-trace-dotnet/issues/302][6] |
 | `en-US` 以外のロケールでのリソース参照に関するバグ | 2.0.0                                     | .NET Core を 2.0.3 以上にアップグレードします                                    | [dotnet/runtime/issues/23938][7]        |
+| JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
+| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET to 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
+| JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]   |
+| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10            | Upgrade .NET 6.0.11 or above, or disable runtime metrics    | [dotnet/runtime/pull/76431][18]   |
 
 ## サポートされている Datadog Agent バージョン
 
@@ -106,9 +113,9 @@ type: multi-code-lang
 | [6.x][8]                    | 最新              |
 | [5.x][9]                    | 最新              |
 
-## .NET Core APM のランタイムサポートポリシー
+## .NET runtime support policy
 
-Datadog APM for .NET Core は、ホスト OS、.NET Core ランタイム、特定の .NET Core ライブラリ、Datadog Agent/API に依存しています。これらのサードパーティソフトウェアシステムは、.NET Core の特定のバージョンをサポートしています。外部ソフトウェアが .NET Core のバージョンをサポートしなくなった場合、Datadog APM for .NET Core もそのバージョンのサポートを制限します。
+The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET Tracer also limits its support for that version.
 
 ### サポートレベル
 
@@ -122,14 +129,14 @@ Datadog APM for .NET Core は、ホスト OS、.NET Core ランタイム、特�
 
 ### パッケージのバージョニング
 
-Datadog APM for .NET Core は、[セマンティックバージョニング][11]を実践しています。
-バージョンの更新は、ランタイムサポートの以下の変更を意味します。
+The .NET Tracer practices [semantic versioning][11].
+Version updates imply the following changes to runtime support:
 
   - **メジャーバージョンアップ** (例えば `1.0.0` から `2.0.0`) により、ランタイムのサポートが[ベータ版](#support-beta)/[GA](#support-ga)から[メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
   - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
   - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -145,3 +152,8 @@ Datadog APM for .NET Core は、[セマンティックバージョニング][11]
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
+[13]: /ja/opentelemetry/interoperability/instrumentation_libraries/?tab=dotnet
+[15]: https://github.com/dotnet/runtime/pull/73760
+[16]: https://github.com/dotnet/runtime/issues/11885
+[17]: https://github.com/dotnet/runtime/issues/85777
+[18]: https://github.com/dotnet/runtime/pull/76431

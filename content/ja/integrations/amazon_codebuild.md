@@ -6,6 +6,7 @@ categories:
 - クラウド
 - 構成 & デプロイ
 - ログの収集
+custom_kind: インテグレーション
 dependencies: []
 description: 行われているデプロイを表示し、その所要時間を追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_codebuild/
@@ -16,7 +17,6 @@ integration_id: ''
 integration_title: AWS CodeBuild
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_codebuild
 public_title: Datadog-AWS CodeBuild インテグレーション
@@ -35,17 +35,17 @@ Datadog AWS CodeBuild インテグレーションをインストールすると�
 - ビルドに関するメトリクスを収集できます。
 - 他の Datadog メトリクスとビルドを関連付けることができます。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudBuild` が有効になっていることを確認します。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CodeBuild` が有効になっていることを確認します。
 
-2. [Datadog - AWS Codebuild インテグレーション][3]をインストールします。
+2. [Datadog - AWS CodeBuild インテグレーション][3]をインストールします。
 
 ### 収集データ
 
@@ -63,21 +63,21 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "amazon_codebuild" >}}
 
 
-### ヘルプ
+### イベント
 
 AWS CodeBuild インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 AWS CodeBuild インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -85,7 +85,7 @@ AWS CodeBuild インテグレーションには、サービスのチェック機
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-codebuild
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codebuild/amazon_codebuild_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

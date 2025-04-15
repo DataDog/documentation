@@ -22,6 +22,7 @@ author:
   support_email: support@gremlin.com
 categories:
 - 問題追跡
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
 display_on_public_website: true
@@ -31,7 +32,6 @@ integration_id: gremlin
 integration_title: Gremlin
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: gremlin
 public_title: Gremlin
@@ -47,10 +47,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Gremlin で発生したイベントを Datadog に送信
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/gremlin-datadog/
   support: README.md#Support
   title: Gremlin
 ---
@@ -69,9 +73,9 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 ![スナップショット][3]
 
-## 計画と使用
+## セットアップ
 
-### ブラウザトラブルシューティング
+### 構成
 
 このインテグレーションを有効にするには、Gremlin に Datadog API キーを渡す必要があります。それには、[インテグレーションページ][4]で、**Datadog** の行にある **Add** ボタンをクリックします。**Datadog API キー**の入力を求められます。キーを入力すると、インテグレーションが初期化されます。
 
@@ -79,21 +83,21 @@ Gremlin を Datadog の[イベント][1]と組み合わせると、Datadog の�
 
 これで、このインテグレーションからのイベントが[イベントストリーム][2]に表示されるようになります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Gremlin インテグレーションは、メトリクスを提供しません。
 
-### ヘルプ
+### イベント
 
 Gremlin で攻撃が開始または停止されると、Gremlin インテグレーションがイベントを [Datadog のイベントストリーム][4]に送信します。
 
-### ヘルプ
+### サービスチェック
 
 Gremlin インテグレーションには、サービスのチェック機能は含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

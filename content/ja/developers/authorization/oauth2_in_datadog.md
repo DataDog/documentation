@@ -7,19 +7,19 @@ further_reading:
 title: Datadog の OAuth2
 ---
 
-{{< callout btn_hidden="true" >}}
-  Datadog Developer Platform はベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /callout >}} 
-
 ## 概要
 
 このページでは、**機密**クライアントを作成した後、アプリケーションに OAuth プロトコルをエンドツーエンドで実装する方法を順を追って説明しています。
 
-### OAuth プロトコルの実装
+{{< img src="developers/authorization/oauth_process.png" alt="ユーザーがインテグレーションタイルの Connect Account ボタンをクリック後、OAuth の認証プロセスがどのように動作するかを説明している図" style="width:100%;">}}
 
-1. [Developer Platform][16] で OAuth クライアントを作成し、構成します。
+## OAuth プロトコルの実装
+
+1. Datadog Partner Sandbox アカウント内の [Developer Platform][16] で OAuth クライアントを作成し、設定します。
 
 2. ユーザーがインテグレーションをインストールした後、インテグレーションタイルの **Configure** タブにある **Connect Accounts** ボタンをクリックしてアカウントを接続することができます。
+
+   {{< img src="developers/authorization/connect-accounts.png" alt="Connect Accounts ボタンをクリック" style="width:100%;" >}}
 
    ユーザーがこのボタンをクリックすると、OAuth クライアント作成プロセスの一部として提供した `onboarding_url` に誘導されます。このページは、プラットフォームのサインインページであるべきです。
 
@@ -27,39 +27,41 @@ title: Datadog の OAuth2
 
    `code_challenge` パラメーターの導出方法については、 [PKCE](#authorization-code-grant-flow-with-pkce) のセクションを参照してください。アプリケーションは、ステップ 5 のトークンリクエストのために `code_verifier` を保存する必要があります。
 
-   - この POST リクエストの URL を作成するために、`onboarding_url` へのリダイレクトで提供される `site` クエリパラメーターを使用します。
+   - この GET リクエストのURLを作成するには、`onboarding_url` へのリダイレクトで提供される`site` クエリパラメーターを使用します。 
    - このパラメーターは、ユーザーが Datadog インテグレーションタイルから認可を開始する場合にのみ提供されます。ユーザーが外部から認可を開始することを選択した場合のオプションについては、 [サードパーティロケーションからの認可の開始](#Initiate-authorization-from-a-third-party-location)セクションを参照してください。
-   - 例えば、`site` は `https://app.datadoghq.com`、`https://app.datadoghq.eu`、`https://us5.datadoghq.com` の場合もあれば、`https://<custom_subdomain>.datadoghq.com` のように、説明しなければならないカスタムサブドメインを持っている場合もあります。
-   - 複数の Datadog サイトを動的に扱うには、この構築した URL に Datadog の `authorize` パスを付加します。
+   - `site` クエリパラメータは、認証ユーザーがいる [Datadog サイト][17] と、そのユーザーが使用しているであろうサブドメインを提供し、Authorize エンドポイントへの GET リクエストの URL を構築するために必要です。`<site>/oauth2/v1/authorize?...` 。
 
 4. ユーザーが **Authorize** をクリックすると、Datadog は認可エンドポイントに POST リクエストを作成します。ユーザーは、OAuth クライアントを設定する際に、クエリコンポーネントの認可パラメータ ー `code` で指定した `redirect_uri` にリダイレクトされます。
 
 5. `redirect_uri` から、[Datadog トークンエンドポイント][10]に POST リクエストを行い、ステップ 4 の認可コード、ステップ 3 の `code_verifier` 、OAuth クライアント ID、クライアントシークレットを含むようにします。
 
-   - この POST リクエストの URL を作成するために、`redirect_uri` へのリダイレクトで提供される `site` クエリパラメーターを使用します。
-   - 例えば、`site` は `https://app.datadoghq.com`、`https://app.datadoghq.eu`、`https://us5.datadoghq.com` の場合もあれば、`https://<custom_subdomain>.datadoghq.com` のように、説明しなければならないカスタムサブドメインを持っている場合もあります。
-   - 複数の Datadog サイトを動的に扱うには、この構築した URL に Datadog の `token` パスを付加します。
+   - この POST リクエストの URL を作成するには、`redirect_uri` へのリダイレクトで提供される`domain` クエリパラメーターを使用します。 
+   - これは、トークンのエンドポイントへの POST リクエストの URL を作成するために必要です。`https://api.<domain>/oauth2/v1/token` 
 
 6. 成功すると、レスポンス本文で `access_token` と `refresh_token` を受け取ります。アプリケーションには、`You may now close this tab` というメッセージを含む確認ページが表示されるはずです。
 
 7. Datadog API エンドポイントを呼び出すには、リクエストの認可ヘッダーの一部として `access_token` を使用します: ```headers = {"Authorization": "Bearer {}".format(access_token)}```
-    - API エンドポイントへのコールを行う際、ユーザーの Datadog サイトを考慮していることを確認してください。例えば、ユーザーが EU 地域にいる場合、イベントのエンドポイントは `https://api.datadoghq.eu/api/v1/events` で、US1 にいるユーザーの場合、イベントのエンドポイントは `https://api.datadoghq.com/api/v1/events` になります。エンドポイントによっては、API キーが必要な場合もあり、以下のステップ 8 で作成します。
+    - **注***: API エンドポイントは、Datadog サイトごとに異なります。例えば、ユーザーが EU リージョンにいる場合、Events エンドポイントは `https://api.datadoghq.eu/api/v1/events` ですが、US1 のユーザーの場合、Events エンドポイントは `https://api.datadoghq.com/api/v1/events` です。
+    - これらの API コールでは `domain` クエリパラメーターを直接使用して、正しいエンドポイントにアクセスできるようにしてください。例えば、Events エンドポイントを呼び出すには、リクエスト URL を `https://api.<domain>/api/v1/events` とします。
+    - エンドポイントによっては API キーが必要な場合があります。これはステップ 8 で作成されます。
 
 8. [API Key Creation エンドポイント][7]を呼び出し、Datadog ユーザーの代わりにデータを送信するための API キーを生成します。
 
-   `API_KEYS_WRITE` スコープがクライアントに追加されていない場合、このステップは失敗します。このエンドポイントでは、一度だけ表示される API キーを生成します。**この値は安全なデータベースまたは場所に保存してください**。
+   `API_KEYS_WRITE` スコープがクライアントに追加されていない場合、このステップは失敗します。このエンドポイントでは、一度だけ表示される API キーを生成し、ユーザーが Datadog アカウント内で削除しない限り、再生成することはできません。**この値は安全なデータベースまたは場所に保存してください**。
 
-クライアントの作成と公開については、[Datadog インテグレーションのための OAuth][5] を参照してください。
+OAuth クライアントの作成、テスト、公開については、[Datadog インテグレーションのための OAuth][5] を参照してください。
 
 ### サードパーティロケーションからの認可の開始
 
-Datadog の認可プロセスは、インテグレーションタイルの **Connect Accounts** をクリックするか、インテグレーションの外部 Web サイトから開始することができます。例えば、Datadog のユーザーが使用する必要があるインテグレーション構成ページが Web サイトにある場合、そこから認可プロセスを開始するオプションをユーザーに提供することができます。
+ユーザーは、インテグレーションタイルの **Connect Accounts** をクリックすることで、Datadog の認証プロセスを開始することができます。ユーザーが Datadog の Connect Accounts をクリックすると、ユーザーの [Datadog サイト][17] に関する情報がリダイレクトで `onboarding_url` と `redirect_uri` に送信されます。ユーザーの Datadog サイトは、ユーザーの代理で API コールを行い、認証コードを受け取るために必要です。ユーザーが _インテグレーションの外部ウェブサイト_ から認証を開始する場合、ユーザーのサイト情報は提供されません。
 
-サードパーティーロケーション (Datadog インテグレーションタイルの外) から認可を開始する場合、認可フローでユーザーをルーティングし、`authorization` と `token` エンドポイント用の URL を構築する際に [Datadog サイト][17] (EU、US1、US3、US5 など) を考慮しなければなりません。
+さらに、ユーザーが Datadog インテグレーションタイルから認可を開始する場合、要求されたすべてのスコープに対応する権限を持っていることが必要です。インテグレーションタイル以外の場所から認可を開始した場合、必要なすべての権限を持たないユーザーが認可を完了することがあります (ただし、インテグレーションタイルに戻ったときに適切な権限で再認可するよう促されます)。
 
-ユーザーが正しいサイトで認可していることを確認するために、常に US1 Datadog サイト (`app.datadoghq.com`) に誘導し、そこから地域を選択するようにします。認可フローが完了したら、後続の API コールでは、クエリパラメーターとして `redirect_uri` が返される正しいサイトを使用するようにします ([OAuth プロトコルの実装](#implement-the-oauth-protocol)のステップ 5 を参照)。
+Datadog は、パートナーが自社のプラットフォームからではなく、Datadog から認可を開始するようユーザーに促すことを推奨しています。
 
-ユーザーが Datadog インテグレーションタイルから認可を開始する場合、要求されたすべてのスコープに対応する権限を持っていることが必要です。インテグレーションタイル以外の場所から認可を開始した場合、必要なすべての権限を持たないユーザーが認可を完了することがあります (ただし、インテグレーションタイルに戻ったときに適切な権限で再認可するよう促されます)。これを避けるには、サードパーティのプラットフォームから Datadog インテグレーションタイルにユーザーを誘導し、認可を開始する必要があります。
+Datadog は、Datadog インテグレーションタイル以外のサードパーティロケーションからの認可をサポートすることを推奨していませんが、この方法を選択する場合は、すべての Datadog サイトでユーザーをサポートできることを確認し、新しい Datadog サイトが作成されるたびにサポートを継続する意思があることを確認する必要があります。これには通常、認可時にユーザーが自分のサイトをプラットフォームに手動で入力する方法を実装することが含まれます。
+
+組織はサブドメインも持っている可能性があることに留意してください。 (例えば、 https://subdomain.datadoghq.com) サブドメインを API コールに含めないようにしてください。そのため、API コールの URL を作成する際、`redirect_uri` へのリダイレクト時に返される `domain` のクエリパラメータを使用することをお勧めします。ユーザーが正しいサイトで認証されていることを確認するには、常に US1 の Datadog サイト (`app.datadoghq.com`) に誘導し、そこから利用する地域を選んでもらうようにします。
 
 ## PKCE による認可コード付与フロー
 

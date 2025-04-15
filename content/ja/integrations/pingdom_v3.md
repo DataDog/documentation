@@ -23,6 +23,7 @@ author:
 categories:
 - メトリクス
 - notifications
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +32,6 @@ integration_id: pingdom-v3
 integration_title: Pingdom
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: pingdom_v3
 public_title: Pingdom
@@ -48,6 +48,7 @@ tile:
   - Supported OS::macOS
   - Category::Metrics
   - Category::Notifications
+  - Offering::Integration
   configuration: README.md#Setup
   description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
   media: []
@@ -79,7 +80,7 @@ Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーシ
 2. 名前と API トークンを対応するフィールドに入力します。Pingdom で構成したメトリクスやチェックは、Datadog に収集されます。
 3. Pingdom のチェックのタグを管理します。Pingdom のチェックに追加されたタグは、Datadog のチェックにも自動的に追加されます。`datadog-exclude` タグを追加して、チェックを除外します。
 
-## データ収集
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "pingdom_v3" >}}

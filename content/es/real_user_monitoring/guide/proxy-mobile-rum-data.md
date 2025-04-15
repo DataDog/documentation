@@ -133,7 +133,7 @@ Para obtener más información, consulta la documentación de [OkHttpClient Prox
 
 [2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html
 
-{{< tabs >}}
+{{% /tab %}}
 {{% tab "iOS" %}}
 Al inicializar el SDK de iOS, especifica la siguiente configuración de proxy:
 

@@ -35,7 +35,7 @@ Set Start And End Conditions
 
 For example, an e-commerce website groups logs across various user actions, such as catalog search, add to cart, and checkout, to build a **Transactions** view using a common attribute such as `requestId` or `orderId`.
 
-{{< img src="logs/explorer/aggregations_transactions.jpg" alt="The logs explorer showing logs grouped by transactions" style="width:100%;" >}}
+{{< img src="logs/explorer/aggregations_transactions.jpg" alt="The Log Explorer showing logs grouped by transactions" style="width:100%;" >}}
 
 Transactions support the [List Aggregates][1] visualization. Clicking a transaction in the list opens the transaction side panel from which you can:
 

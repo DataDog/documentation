@@ -14,6 +14,7 @@ categories:
 - クラウド
 - kubernetes
 - マーケットプレイス
+custom_kind: integration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -22,7 +23,6 @@ integration_id: cloudnatix-cloudnatix
 integration_title: CloudNatix
 integration_version: ''
 is_public: true
-custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -90,7 +90,7 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CloudNatix にお問い合わせください。
 
-- メール: [CloudNatix サポート][4] 
+- メール: [CloudNatix サポート][4]
 - Slack: [CloudNatix コミュニティ][3]
 
 [1]: https://cloudnatix.com/

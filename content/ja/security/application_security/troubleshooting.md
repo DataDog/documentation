@@ -1,16 +1,10 @@
 ---
 aliases:
-- /security_platform/application_security/troubleshooting
+- /ja/security_platform/application_security/troubleshooting
 further_reading:
 - link: /security/application_security/
   tag: ドキュメント
   text: Datadog Application Security Management による脅威の監視
-- link: /security/application_security/enabling/
-  tag: ドキュメント
-  text: Application Security Management を有効にして脅威の検出を開始する
-- link: /security/application_security/enabling/compatibility/
-  tag: ドキュメント
-  text: プログラミング言語とフレームワークの互換性
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog における Application Security Management の仕組み
@@ -160,7 +154,7 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< programming-lang-wrapper langs="java,.NET,go,ruby,PHP,Node.js,python" >}}
 {{< programming-lang lang="java" >}}
 
-[Java][1] の場合、以下のいずれかの技術を使用している場合は、それぞれのインテグレーションが必要です。
+Java の場合、以下のいずれかの技術を使用している場合は、それぞれのインテグレーションが必要です。
 
 - grizzly
 - grizzly-filterchain
@@ -176,26 +170,26 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 - spring-web
 - tomcat
 
-[1]: /ja/security/application_security/enabling/compatibility/java
+
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-[.NET][1] の場合、ASP.NET とのインテグレーションが必要です。
+.NET の場合、ASP.NET とのインテグレーションが必要です。
 
 **注:** ASP.NET Core が無効になっている場合でも、ASM はこのフレームワークで動作するはずです。
 
-[1]: /ja/security/application_security/enabling/compatibility/dotnet
+
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
-[PHP][1] については、必須のインテグレーションはありません。
+PHP については、必須のインテグレーションはありません。
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/php
+
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-以下の [Go][1] フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメントする必要があります。
+以下の Go フレームワークは、すぐに使える APM インテグレーションを使用してインスツルメントする必要があります。
 
 - [gRPC][2]
 - [net/http][3]
@@ -205,7 +199,6 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 お使いのフレームワークがサポートされていない場合は、Go リポジトリで [新しい問題を作成][7] してください。
 
-[1]: /ja/security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -215,18 +208,17 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 {{< /programming-lang >}}
 {{< programming-lang lang="Node.js" >}}
 
-[Node.js][1] の場合、HTTP とのインテグレーションが必要です。
+Node.js の場合、HTTP とのインテグレーションが必要です。
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/nodejs
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-[Ruby][1] の場合、[Rack][2] とのインテグレーションが必要です。また、Ruby トレーサーのバージョン `1.0.0` 以降が必要です。[0.x から 1.x への移行][3]の情報を参照してください。
+Ruby の場合、[Rack][2] とのインテグレーションが必要です。また、Ruby トレーサーのバージョン `1.0.0` 以降が必要です。[0.x から 1.x への移行][3]の情報を参照してください。
 
 **注:** Rack は手動で追加するか、[Rails][4] または [Sinatra][5] とのインテグレーションで自動的に追加することができます。手動で追加した場合、Rack スタックにおいて、トレーサーミドルウェアはセキュリティミドルウェアの前に表示される必要があります。
 
-[1]: /ja/security/application_security/enabling/compatibility/ruby
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /ja/tracing/trace_collection/dd_libraries/ruby/#rails
@@ -235,10 +227,9 @@ ASM は、特定のトレーサーのインテグレーションに依存して�
 
 {{< programming-lang lang="python" >}}
 
-[Python][1] の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
+Python の場合、WSGI インテグレーションと、Django や Flask のような使用中のフレームワークのインテグレーションが必要です。
 <p></p>
 
-[1]: /ja/security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -389,7 +380,7 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 
 3. アプリケーションのディレクトリで、`npm explore @datadog/native-appsec -- npm run install` というコマンドを実行し、アプリを再起動します。
 
-    a. `@datadog/native-appsec` が見つからない場合は、インストールが正しく行われていない可能性があります。[インストール方法][4]を参照してください。
+    a. `@datadog/native-appsec` が見つからない場合は、インストールが正しく行われていません。
 
     b. アプリケーションの起動時に `@datadog/native-appsec` が見つかった場合は、ランタイム起動スクリプトにコマンドを追加してください。
 
@@ -405,7 +396,6 @@ Node.js アプリケーションの[トレースとシグナルエクスプロ�
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: https://app.datadoghq.com/security/appsec/
 [3]: /ja/tracing/troubleshooting/tracer_startup_logs/
-[4]: /ja/security/application_security/enabling/nodejs/?tab=dockercli
 [5]: /ja/tracing/troubleshooting/
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -556,11 +546,11 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 
 ### トレーサーのバージョンが更新されていることを確認する
 
-トレーサーの正しいバージョンを使用していることを確認するために、Application Security [設定ドキュメント][11]を参照してください。ライブラリ情報を含むテレメトリーデータの送信を開始するには、これらの最小バージョンが必要です。
+トレーサーの正しいバージョンを使用していることを確認するために、Application Security 製品設定ドキュメントを参照してください。ライブラリ情報を含むテレメトリーデータの送信を開始するには、これらの最小バージョンが必要です。
 
 ### テレメトリーデータの通信を確保する
 
-環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (NodeJS の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
+環境変数 `DD_INSTRUMENTATION_TELEMETRY_ENABLED` (Node.js の場合は `DD_TRACE_TELEMETRY_ENABLED`) が `true` に設定されているか、または使用する言語の対応システムプロパティが有効になっていることを確認します。例えば、Java の場合: `-Ddd.instrumentation.telemetry.enabled=true`
 
 ## 脅威管理と保護を無効にする
 
@@ -585,25 +575,26 @@ ASM のデータは、APM トレースと一緒に送信されます。[APM の�
 
 ## Software Composition Analysis を無効にする
 
-[Software Composition Analysis][14] を無効にするには:
+SCA は、UI または 環境変数を使用した手動の 2 つの方法で有効化できます。SCA を無効化する際は、有効化したときと**同じ方法**で行う必要があります。たとえば、SCA を手動で有効化した場合、UI からは無効化できず、手動で無効化しなければなりません。
 
-* [Services][15] に移動して **Software Composition Analysis (SCA)** を選択し、サービスをクリックして **Deactivate** をクリックします。
+一般的には、SCA は UI を使用してサービス単位で有効化・無効化されます。
+
+SCA ([Software Composition Analysis][14]) を UI で無効化する方法:
+
+* [Services][15] に移動し、**Software Composition Analysis (SCA)** を選択して対象のサービスをクリックし、詳細を開きます。次に、**Vulnerability Detection** で **Deactivate** をクリックします。
 * 複数のサービスで Software Composition Analysis を一括で無効にするには、リストヘッダーのチェックボックスをクリックし、**Bulk Actions** で **Deactivate Software Composition Analysis (SCA) on (number of) services** を選択します。
+
+SCA を手動で無効化する方法:
+
 * 環境変数 `DD_APPSEC_SCA_ENABLED` を使用して Software Composition Analysis を無効にするには、アプリケーションの構成から環境変数 `DD_APPSEC_SCA_ENABLED=true` を削除し、サービスを再起動します。これは PHP アプリには適用されません。
 
 ## コードセキュリティの無効化
 
-[Code Security][13] の脆弱性検出を無効にするには、アプリケーション構成から `DD_IAST_ENABLED=true` 環境変数を削除して、サービスを再起動します。これは PHP アプリには適用されません。
+[Code Security][13] を無効化するには、アプリケーションの構成から `DD_IAST_ENABLED=true` という環境変数を削除するか、`DD_IAST_ENABLED=false` と設定してサービスを再起動します。
 
-サービスで `DD_IAST_ENABLED=true` 環境変数が設定されていない場合は、以下を行います。
-  1. [Services][15] に移動します。
-  2. **Code Security** を選択します。
-  3. サービスをクリックします。
-  4. サービスの詳細で、**Vulnerability Detection** の **Deactivate** をクリックします。
+## すべてまたは一部のコードレベルの脆弱性が検出されない
 
-## IAST/カスタムコードの脆弱性が一部またはすべて検出されない
-
-### IAST が有効であることを確認する
+### Code Security が有効化されていることを確認してください
 
 `DD_IAST_ENABLED` 環境変数が `true` に設定されているか、使用言語に対応するシステムプロパティが有効になっていることを確認します。
 
@@ -632,7 +623,6 @@ ASM で問題が解決しない場合は、以下の情報を添えて [Datadog 
 [8]: /ja/tracing/troubleshooting/tracer_startup_logs/
 [9]: /ja/tracing/glossary/#spans
 [10]: /ja/tracing/troubleshooting/#tracer-debug-logs
-[11]: /ja/security/application_security/enabling/
 [12]: https://app.datadoghq.com/security/appsec/vm
 [13]: /ja/security/application_security/code_security/
 [14]: /ja/security/application_security/software_composition_analysis

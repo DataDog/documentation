@@ -35,11 +35,7 @@ To control which information is sent to Datadog, you can [mask action names with
 
 ## Track user interactions
 
-The RUM Browser SDK automatically tracks clicks. A click action is created if **all of the following** conditions are met:
-
-* Activity following the click is detected. See [How page activity is calculated][2] for details.
-* The click does not lead to a new page being loaded, in which case, the Datadog Browser SDK generates another RUM View event.
-* A name can be computed for the action. See [Declaring a name for click actions](#declare-a-name-for-click-actions) for details.
+The RUM Browser SDK automatically tracks clicks to generate click actions. A one-click action generally represents one user click, except when the same element is clicked multiple times in a row, which is considered a single action (see [Frustration Signals "rage clicks"][7]).
 
 ## Action timing metrics
 
@@ -123,4 +119,5 @@ For more information, see [Send Custom Actions][5].
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
-[6]: /real_user_monitoring/session_replay/privacy_options#mask-action-names
+[6]: /data_security/real_user_monitoring/#mask-action-names
+[7]: /real_user_monitoring/browser/frustration_signals/

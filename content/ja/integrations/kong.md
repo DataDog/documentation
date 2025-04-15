@@ -13,7 +13,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: kong.total_requests
+      check:
+      - kong.total_requests
+      - kong.nginx.requests.total
       metadata_path: metadata.csv
       prefix: kong.
     process_signatures:
@@ -22,8 +24,6 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 141
     source_type_name: Kong
-  logs:
-    source: kong
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -37,6 +37,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
 display_on_public_website: true
@@ -44,9 +45,8 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 3.2.0
+integration_version: 5.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: kong
 public_title: Kong
@@ -62,10 +62,14 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitor-kong-datadog
   support: README.md#Support
   title: Kong
 ---
@@ -79,18 +83,18 @@ Agent の Kong チェックは、合計リクエスト数、応答コード数�
 
 また、Kong の [Datadog プラグイン][1]を使用すると、[DogStatsD][2] を使用して Datadog Agent を通じて Datadog に API、接続、データベースメトリクスを送信することができます。詳しくは、[Datadog インテグレーションによる Kong の監視][3]のブログ投稿をお読みください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Kong チェックは [Datadog Agent][4] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 
-#### メトリクスベース SLO
+#### ホスト
 
 ホストで実行中の Agent に対してこのチェックを構成するには
 
@@ -114,7 +118,7 @@ Kong チェックは [Datadog Agent][4] パッケージに含まれています�
 
 **注**: 現在のバージョンのチェック (1.17.0+) は、メトリクスの収集に [OpenMetrics][5] を使用しており、これは Python 3 を必要とします。Python 3 を使用できないホスト、またはこのチェックのレガシーバージョンを使用する場合は、次の[構成][6]を参照してください。
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -167,7 +171,7 @@ Kong アクセスログは NGINX によって生成されます。したがっ�
 | `<INIT_CONFIG>`      | 空白または `{}`                                         |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:8001/metrics"}` |
 
-##### 収集データ
+##### ログ収集
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -187,21 +191,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `kong` を探します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "kong" >}}
 
 
-### ヘルプ
+### イベント
 
 Kong チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "kong" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

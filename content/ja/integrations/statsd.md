@@ -31,7 +31,7 @@ draft: false
 git_integration_title: statsd
 integration_id: statsd
 integration_title: StatsD
-integration_version: 1.12.0
+integration_version: 3.0.0
 is_public: true
 manifest_version: 2.0.0
 name: statsd

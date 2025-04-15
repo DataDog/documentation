@@ -36,7 +36,7 @@ type: documentation
 
 [**Integrations** ページ][103]にタイルを構築するには
 
-<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。 
+<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。
 </div>
 
 1. `dd` ディレクトリを作成します。
@@ -102,7 +102,7 @@ ddev config set repo extras
 
 [**Marketplace** ページ][104]にタイルを構築するには
 
-<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築している場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルの完成</a>に直接スキップすることができます。
+<div class="alert alert-warning">すでに Agent インテグレーションを作成するステップを経てスキャフォールディングを構築済みである場合、<a href="#complete-the-necessary-integration-asset-files">必要なインテグレーションアセットファイルを完成させる</a>に直接スキップすることができます。
 </div>
 
 1. [Marketplace リポジトリ][101]へのアクセスリクエストは、[Marketplace 製品の構築][102]を参照してください。
@@ -191,6 +191,9 @@ Datadog Development Toolkit を使用して、タイルのみの出品でスキ�
 | 収集データ  | メトリクス、イベント、サービスチェック、ログなど、インテグレーションによって収集されるデータのデータタイプを指定します (該当する場合)。`metadata.csv` ファイルに追加されたメトリクスは、自動的にこのタブに表示されます。 <br><br> 製品がこのようなデータを提供しない場合は、Data Collected セクションを追加する必要はありません。 |
 | サポート | サポートチームへのメール、自社のドキュメントやブログ記事へのリンク、その他のヘルプ情報などを含む連絡先情報を箇条書きで掲載します。 |
 
+`README.md` ファイルにリンクを追加する際は、[リファレンススタイルリンク][30]を使用して形式を整えてください。たとえば、テキストに直接 URL を埋め込むのではなく、`see the [official Datadog documentation][1]` のように記述し、ファイルの末尾に `[1]: https://docs.datadoghq.com/` のようにリンク参照を定義します。
+
+文法やスタイルに関する追加のアドバイスについては、[Datadog ドキュメント寄稿者ガイドライン][31]も参照してください。
 ### メディアカルーセル
 
 各タイルには、イメージとビデオのメディアカルーセルが表示され、ユーザーは視覚的な説明によって、製品の機能や価値をよりよく理解することができます。タイルにビデオを追加するには、ビデオのコピーまたはダウンロードリンクを <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a> に送信してください。Marketplace チームがビデオをアップロードし、`manifest.json` ファイルに追加すべき `vimeo_link` を提供します。
@@ -268,7 +271,7 @@ ddev validate all <INTEGRATION_NAME>
 
 ## エラーの解決
 
-`integrations-extras` リポジトリにあるすぐに使えるインテグレーションは、フォークされたリポジトリがオリジンから外れている場合、検証エラーになることがあります。
+`integrations-extras` リポジトリにあるすぐに使えるインテグレーションは、フォークされたリポジトリがオリジンの最新状態と同期されていない場合、検証エラーになることがあります。
 
 検証エラーを解決するには、GitHub Web アプリでフォークされたリポジトリを更新します。
 
@@ -293,7 +296,7 @@ ddev validate all <INTEGRATION_NAME>
 
 Datadog では、Marketplace の出品にのみ GTM サポートを提供しています。Datadog Marketplace の詳細については、[Marketplace 製品の作成][28]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -326,3 +329,5 @@ Datadog では、Marketplace の出品にのみ GTM サポートを提供して�
 [27]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/
 [28]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/
 [29]: https://github.com/
+[30]: https://www.markdownguide.org/basic-syntax/#reference-style-links
+[31]: https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md

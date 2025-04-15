@@ -152,6 +152,18 @@ The query may not have been sampled for selection because it does not represent 
 
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
+### Index metrics are missing
+
+If the Agent displays this error:
+```
+Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
+```
+Resolve the error by granting the `datadog` user the SELECT privilege to collect index metrics:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
 #### `performance_schema` is not enabled {#performance-schema-not-enabled}
 The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
@@ -213,6 +225,38 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][9] on an already existing connection.
 
 If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
+
+## MariaDB known limitations
+
+### Incompatible InnoDB metrics
+
+The following InnoDB metrics are not available for certain MariaDB versions:
+
+| Metric Name                             | MariaDB Versions        |
+| --------------------------------------- | ----------------------- |
+| `mysql.innodb.hash_index_cells_total`   | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.hash_index_cells_used`    | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.os_log_fsyncs`            | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_fsyncs`    | 10.11, 11.1             |
+| `mysql.innodb.os_log_pending_writes`    | 10.11, 11.1             |
+| `mysql.innodb.pending_log_flushes`      | 10.11, 11.1             |
+| `mysql.innodb.pending_log_writes`       | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_reads` | 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.pending_normal_aio_writes`| 10.5, 10.6, 10.11, 11.1 |
+| `mysql.innodb.rows_deleted`             | 10.11, 11.1             |
+| `mysql.innodb.rows_inserted`            | 10.11, 11.1             |
+| `mysql.innodb.rows_updated`             | 10.11, 11.1             |
+| `mysql.innodb.rows_read`                | 10.11, 11.1             |
+| `mysql.innodb.s_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.s_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_os_waits`          | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_rounds`       | 10.6, 10.11, 11.1       |
+| `mysql.innodb.x_lock_spin_waits`        | 10.6, 10.11, 11.1       |
+
+### MariaDB explain plan
+
+MariaDB does not produce the same JSON format as MySQL for explain plans. Certain explain plan fields may be missing from MariaDB explain plans, including `cost_info`, `rows_examined_per_scan`, `rows_produced_per_join`, and `used_columns`.
 
 [1]: /database_monitoring/setup_mysql/
 [2]: /agent/troubleshooting/

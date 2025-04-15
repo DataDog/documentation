@@ -23,6 +23,7 @@ author:
 categories:
 - kubernetes
 - data stores
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
 display_on_public_website: true
@@ -32,7 +33,6 @@ integration_id: portworx
 integration_title: Portworx
 integration_version: 1.1.0
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: portworx
 public_title: Portworx
@@ -45,10 +45,14 @@ tile:
   - Category::Kubernetes
   - Category::Data Stores
   - Supported OS::Linux
+  - Offering::Integration
   configuration: README.md#Setup
   description: Portworx インスタンスからランタイムメトリクスを収集
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/portworx-integration/
   support: README.md#Support
   title: Portworx
 ---
@@ -63,11 +67,11 @@ Portworx サービスからメトリクスをリアルタイムに取得して�
 - Portworx クラスターの健全性とパフォーマンスを監視できます。
 - Portworx ボリュームのディスク使用状況、レイテンシー、スループットを追跡できます。
 
-## 計画と使用
+## セットアップ
 
 Portworx チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インフラストラクチャーリスト
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -79,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チ�
 
 2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. Portworx の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル portworx.d/conf.yaml][5] を参照してください。
 
@@ -101,17 +105,17 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チ�
 
 Portworx チェック機能は、Portworx 1.4.0 以前のバージョンと互換性があります。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "portworx" >}}
 
 
-### ヘルプ
+### イベント
 
 Portworx チェックには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ### Agent が接続できない
 

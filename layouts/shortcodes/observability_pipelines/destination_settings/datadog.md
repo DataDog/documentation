@@ -1,1 +1,0 @@
-There are no configuration steps for your Datadog destination.

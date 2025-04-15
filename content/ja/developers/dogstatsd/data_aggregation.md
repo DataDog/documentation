@@ -1,16 +1,17 @@
 ---
-title: DogStatsD のデータ集計
-description: DogStatsD サーバーがデータを集計してから Datadog に送信することについて説明します
 aliases:
-  - /ja/developers/faq/data-aggregation-with-dogstatsd-threadstats
+- /ja/developers/faq/data-aggregation-with-dogstatsd-threadstats
+description: DogStatsD サーバーがデータを集計してから Datadog に送信することについて説明します
 further_reading:
-  - link: developers/dogstatsd
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: developers/dogstatsd
+  tag: ドキュメント
+  text: DogStatsD 入門
+- link: developers/libraries
+  tag: ドキュメント
+  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+title: DogStatsD のデータ集計
 ---
+
 Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機能を追加して実装します。DogStatsD を使用すると、アプリケーションコードのメトリクス送信や監視を、コードをブロックせずに行うことができます。データはアプリケーションから UDP を通じてローカルの（Datadog Agent に組み込まれた） [DogStatsD サーバー][2]に送信され、そこで集計されてから、Datadog の API エンドポイントに送られます。[DogStatsD のセットアップについてはこちらを参照してください][2]。
 
 この記事では、データを集計する理由と、その方法について説明します。
@@ -44,7 +45,7 @@ Datadog の DogStatsD は、StatsD プロトコルを、いくつか固有の機
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/developers/dogstatsd/
-[2]: /ja/metrics/dogstatsd_metrics_submission/
+[2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: /ja/metrics/types/?tab=count#metric-types
 [4]: /ja/metrics/types/
 [5]: /ja/metrics/types/?tab=gauge#metric-types

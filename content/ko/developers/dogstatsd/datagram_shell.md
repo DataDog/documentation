@@ -23,13 +23,13 @@ title: 데이터그램 형식 및 쉘 사용
 
 | 파라미터                           | 필수 | 설명                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | 예      | ASCII 영숫자, 밑줄 및 마침표만 포함하는 문자열입니다. [메트릭 네이밍 정책][1]을 참조하세요.                                                  |
-| `<VALUE>`                           | 예      | 정수 또는 부동 소수.                                                                                                                                           |
-| `<TYPE>`                            | 예      | `c`는 카운트, `g`는 게이지, `ms`는 타이머, `h`는 히스토그램, `s`는 세트, `d`는 분포를 위한 것입니다. 자세한 내용은 [메트릭 유형][2]를 참조하세요.                    |
+| `<METRIC_NAME>`                     | Yes      | ASCII 영숫자, 밑줄 및 마침표만 포함하는 문자열입니다. [메트릭 네이밍 정책][101]을 참조하세요.                                                  |
+| `<VALUE>`                           | Yes      | 정수 또는 부동 소수.                                                                                                                                           |
+| `<TYPE>`                            | Yes      | `c`는 카운트, `g`는 게이지, `ms`는 타이머, `h`는 히스토그램, `s`는 세트, `d`는 분포를 뜻합니다. 자세한 내용을 확인하려면 [메트릭 유형][102]를 참조하세요.                    |
 | `<SAMPLE_RATE>`                     | 아니요       | `0`와 `1` 사이의 부동 소소수점은 카운트, 히스토그램, 분포 및 타이머 메트릭에만 사용할 수 있습니다. 시간의 100%를 샘플링하는 기본값은 `1`입니다.  |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | 아니요       | 쉼표로 구분된 문자열 목록입니다. 키/값 태그(`env:prod`)에 콜론을 사용합니다. 태그 정의에 대한 지침은 [태그 시작하기][3]를 참조하세요.              |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | 아니요       | 쉼표로 구분된 문자열 목록입니다. 키/값 태그(`env:prod`)에 콜론을 사용합니다. 태그 정의에 대한 지침은 [태그 시작하기][103]를 참조하세요.              |
 
-다음은 데이터그램의 예입니다:
+다음은 데이터그램의 예시입니다:
 
 - `page.views:1|c`: `page.views`카운트 메트릭을 증가시켜 줍니다.
 - `fuel.level:0.5|g`: 연료통의 반이 비었음을 기록합니다. 
@@ -66,17 +66,17 @@ Datadog 에이전트는 컨테이너 ID 값을 사용하여 추가 컨테이너 
 
 - `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: Datadog 에이전트는 `image_name`및 `image_tag`같은 컨테이너 태그를 `page.views`메트릭에 추가합니다.
 
-컨테이너 태그에 대한 자세한 내용은 [쿠버네티스][4] 및 [도커][5] 태깅 설명서를 참조하세요.
+컨테이너 태그에 대한 자세한 내용은 [Kubernetes][104] 및 [/Docker][105] 태깅 설명서를 참조하세요.
 
 ### DogStatsD 프로토콜 v1.3
 
-에이전트 v6.40.0+ 및 v7.40.0+는 부수적인 유닉스 타임스탬프 필드를 지원합니다.
+에이전트 `v6.40.0+` 및 `v7.40.0+`는 부수적인 Unix 타임스탬프 필드를 지원합니다.
 
 이 필드가 제공되면, Datadog 에이전트는 태그로 메트릭을 보강하는 것 외에는 메트릭에 대해 어떠한 처리도 하지 않습니다(애그리게이션 없음). 이 필드는 애플리케이션에서 이미 메트릭을 집계하고 있으며, 추가 처리 없이 해당 메트릭을 Datadog으로 보내려는 경우에 유용할 수 있습니다.
 
 유닉스 타임스탬프는 과거의 유효한 양수여야 합니다. 게이지 및 카운트 메트릭만 지원됩니다.
 
-값은 유닉스 타임스탬프 (UTC)이며 다음과 같이 `T`가 접두사로 붙어야 합니다:
+값은 유닉스 타임스탬프 (UTC)이며 다음과 같이 `T`가 접두사로 붙어야 합니다:
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
 
@@ -84,11 +84,68 @@ Datadog 에이전트는 컨테이너 ID 값을 사용하여 추가 컨테이너 
 
 - `page.views:15|c|#env:dev|T1656581400`: 2022년 6월 30일 오전 9시 30분 UTC에 15페이지가 조회되었음을 나타내는 카운트
 
-[1]: /ko/metrics/#naming-metrics
-[2]: /ko/metrics/types/
-[3]: /ko/getting_started/tagging/
-[4]: /ko/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[5]: /ko/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+### DogStatsD 프로토콜 v1.4
+
+에이전트 `>=v7.51.0`부터 컨테이너 ID 필드에 새 Inode 값이 지원됩니다.
+이제 컨테이너 ID 필드에 값 2개를 포함할 수 있어, DogStatsD 메트릭을 추가 컨테이너 태그로 보강할 수 있습니다.
+- 컨테이너 ID(사용 가능할 경우)
+- 컨테이너 ID를 사용할 수 없을 경우 cgroup node inode
+
+컨테이너 ID의 접두사는 여전히 `c:`이고, 값은 다음 중 하나입니다.
+
+- `c:ci-<CONTAINER_ID>`
+- `c:in-<CGROUP_INODE>`
+
+다음은 이제 사용하지 않는 형식이지만, 하위 버전 호환성을 유지하기 위해 계속해서 지원하는 형식입니다.
+- `c:<CONTAINER_ID>`
+
+### DogStatsD 프로토콜 v1.5
+
+에이전트 `>=v7.57.0` 버전부터 새 External Data 필드가 지원됩니다.
+Datadog 에이전트는 컨테이너 ID를 사용할 수 없을 경우 External Data 값을 사용해 추가 컨테이너 태그로 DogStatsD 메트릭을 보강합니다.
+
+컨테이너 ID에는 다음과 같이 `e:` 접두사가 붙습니다.
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|e:<EXTERNAL_DATA>`
+
+[Datadog 에이전트 승인 컨트롤러][106]가 이 데이터를 제공하고, 이 데이터에는 다음이 포함됩니다.
+- 컨테이너가 init 컨테이너인지 여부를 표현하는 부울
+- 컨테이너 이름
+- 파드 UID
+
+형식은 다음과 같습니다.
+
+`it-INIT_CONTAINER,cn-CONTAINER_NAME,pu-POD_UID`
+
+다음과 같이 표시됩니다.
+
+`it-false,cn-nginx-webserver,pu-75a2b6d5-3949-4afb-ad0d-92ff0674e759`
+
+### DogStatsD 프로토콜 v1.6
+
+에이전트 버전 `>=v7.64.0`부터 새 카디널리티 필드가 지원됩니다.
+Datadog 에이전트는 카디널리티를 사용해 해당 카디널리티와 대응하는 추가 컨테이너 태그로 DogStatsD 메트릭을 보강합니다.
+
+카디널리티 필드는 `card:` 접두사가 붙습니다. 다음 예를 참고하세요.
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|card:<CARDINALITY>`
+
+카디널리티는 다음 태그 보강에 영향을 미칩니다.
+- [Docker 태그][105]
+- [Kubernetes 태그][104]
+
+카디널리티에서 사용할 수 있는 값은 다음과 같습니다.
+- `none`
+- `low`
+- `orchestrator`
+- `high`
+
+[101]: /ko/metrics/#metric-name
+[102]: /ko/metrics/types/
+[103]: /ko/getting_started/tagging/
+[104]: /ko/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /ko/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+[106]: /ko/containers/cluster_agent/admission_controller
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -96,18 +153,18 @@ Datadog 에이전트는 컨테이너 ID 값을 사용하여 추가 컨테이너 
 
 | 파라미터                            | 필수 | 설명                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `_e`                                 | 예      | 데이터그램은 `_e`로 시작해야 합니다.                                                                                     |
-| `<TITLE>`                            | 예      | 이벤트 타이틀입니다.                                                                                                       |
-| `<TEXT>`                             | 예      | 이벤트 텍스트입니다. `\\n`로 줄 바꿈을 삽입합니다.                                                                        |
-| `<TITLE_UTF8_LENGTH>`                | 예      | UTF-8로 인코딩된 `<TITLE>`의 길이(바이트)                                                                              |
-| `<TEXT_UTF8_LENGTH>`                 | 예      | UTF-8로 인코딩된`<TEXT>`의 길이(바이트)                                                                               |
-| `d:<TIMESTAMP>`                      | 아니요       | 이벤트에 타임스탬프를 추가합니다. 기본값은 현재 Unix epoch 타임스탬프입니다.                                         |
-| `h:<HOSTNAME>`                       | 아니요       | 이벤트에 호스트 이름을 추가합니다. 기본값은 없습니다.                                                                               |
-| `k:<AGGREGATION_KEY>`                | 아니요       | 애그리게이션 키를 추가하여 동일한 키를 가진 다른 이벤트와 이벤트를 그룹화합니다. 기본값 없습니다.                              |
-| `p:<PRIORITY>`                       | 아니요       | `normal` 또는 `low`로 설정합니다. 기본값은 `normal`입니다.                                                                            |
-| `s:<SOURCE_TYPE_NAME>`               | 아니요       | 소스 유형을 이벤트에 추가합니다. 기본값은 없습니다.                                                                            |
-| `t:<ALERT_TYPE>`                     | 아니요       | `error`,`warning`,`info` 또는 `success`로 설정합니다. 기본값 `info`입니다.                                                        |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | 아니요       | 태그의 콜론은 태그 목록 문자열의 일부이며 다른 파라미터와 같은 파싱 목적이 없습니다. 기본값은 없습니다. |
+| `_e`                                 | Yes      | 데이터그램은 `_e`로 시작해야 합니다.                                                                                     |
+| `<TITLE>`                            | Yes      | 이벤트 타이틀입니다.                                                                                                       |
+| `<TEXT>`                             | Yes      | 이벤트 텍스트입니다. `\\n`로 줄 바꿈을 삽입합니다.                                                                        |
+| `<TITLE_UTF8_LENGTH>`                | Yes      | UTF-8로 인코딩된 `<TITLE>`의 길이(바이트)                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | Yes      | UTF-8로 인코딩된`<TEXT>`의 길이(바이트)                                                                               |
+| `d:<TIMESTAMP>`                      | No       | 이벤트에 타임스탬프를 추가합니다. 기본값은 현재 Unix epoch 타임스탬프입니다.                                         |
+| `h:<HOSTNAME>`                       | No       | 이벤트에 호스트 이름을 추가합니다. 기본값은 Datadog 에이전트 인스턴스입니다.                                                                               |
+| `k:<AGGREGATION_KEY>`                | No       | 애그리게이션 키를 추가하여 동일한 키를 가진 다른 이벤트와 이벤트를 그룹화합니다. 기본값 없습니다.                              |
+| `p:<PRIORITY>`                       | No       | `normal` 또는 `low`로 설정합니다. 기본값은 `normal`입니다.                                                                            |
+| `s:<SOURCE_TYPE_NAME>`               | No       | 소스 유형을 이벤트에 추가합니다. 기본값은 없습니다.                                                                            |
+| `t:<ALERT_TYPE>`                     | No       | `error`, `warning`, `info` 또는 `success`로 설정합니다. 기본값은 `info`입니다.                                                        |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | 태그의 콜론은 태그 목록 문자열의 일부이며 다른 파라미터와 같은 파싱 목적이 없습니다. 기본값은 없습니다. |
 
 다음은 데이터그램의 예시입니다:
 
@@ -126,13 +183,13 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 | 파라미터                            | 필수 | 설명                                                                                                                             |
 | ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `_sc`                                | 예      | 데이터그램은 반드시 `_sc`로 시작해야 합니다.                                                                                                     |
-| `<NAME>`                             | 예      | 서비스 검사 이름입니다.                                                                                                                 |
-| `<STATUS>`                           | 예      | 검사 상태(OK = `0`, WARNING = `1` , Critical = `2`, UNKNOWN = `3` )에 해당하는 정수입니다.                                  |
-| `d:<TIMESTAMP>`                      | 아니요       | 검사에 타임스탬프를 추가합니다. 기본값은 현재 Unix epoch 타임스탬프입니다.                                                          |
-| `h:<HOSTNAME>`                       | 아니요       | 이벤트에 호스트 이름을 추가합니다(기본값 없음).                                                                                               |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | 아니요       | 이벤트의 태그를 설정합니다. 쉼표로 구분된 문자열 목록입니다(기본값 없음).                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | 아니요       | 서비스 검사의 현재 상태를 설명하는 메시지입니다. 이 항목은 메타데이터 항목 중 마지막에 위치해야 합니다(기본값 없음). |
+| `_sc`                                | Yes      | 데이터그램은 반드시 `_sc`로 시작해야 합니다.                                                                                                     |
+| `<NAME>`                             | Yes      | 서비스 검사 이름입니다.                                                                                                                 |
+| `<STATUS>`                           | Yes      | 검사 상태(OK = `0`, WARNING = `1` , Critical = `2`, UNKNOWN = `3` )에 해당하는 정수입니다.                                  |
+| `d:<TIMESTAMP>`                      | No       | 검사에 타임스탬프를 추가합니다. 기본값은 현재 Unix epoch 타임스탬프입니다.                                                          |
+| `h:<HOSTNAME>`                       | No       | 이벤트에 호스트 이름을 추가합니다(기본값 없음).                                                                                               |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | 이벤트의 태그를 설정합니다. 쉼표로 구분된 문자열 목록입니다(기본값 없음).                                                           |
+| `m:<SERVICE_CHECK_MESSAGE>`          | No       | 서비스 점검의 현재 상태를 설명하는 메시지입니다. 이 항목은 메타데이터 항목 중 마지막에 위치해야 합니다(기본값 없음). |
 
 데이터그램 예시입니다:
 
@@ -191,12 +248,12 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
 sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
-### 파이썬 3
+### Python 3
 
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}
@@ -220,7 +277,7 @@ $ text="Bash에서 보냈습니다!"
 $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
 
-윈도우즈(Windows)의 경우:
+Windows의 경우:
 
 ```powershell
 PS C:> $title = "셸의 이벤트"
@@ -243,7 +300,7 @@ Linux의 경우:
 echo -n "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s" >/dev/udp/localhost/8125
 ```
 
-윈도우즈(Windows)의 경우:
+Windows의 경우:
 
 ```powershell
 PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s"
@@ -252,7 +309,7 @@ PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection ti
 {{% /tab %}}
 {{< /tabs >}}
 
-컨테이너화된 환경에서 메트릭, 이벤트 또는 서비스 검사를 전송하려면, 설치 유형에 따라 [쿠버네티스에서 APM 설정하기][4] 및 [쿠버네티스의 DogStatsD][3]를 참조하세요. [도커 APM][5] 설명서도 도움이 될 수 있습니다.
+컨테이너화된 환경에서 메트릭, 이벤트 또는 서비스 검사를 전송하려면, 설치 유형에 따라 [Kubernetes에서 APM 설정하기][4] 및 [Kubernetes의 DogStatsD][3]를 참조하세요. [Docker APM][5] 설명서도 도움이 될 수 있습니다.
 
 ## 참고 자료
 

@@ -102,6 +102,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### 비밀번호를 안전하게 저장하기
+{{% dbm-secret %}}
+
 ### 확인
 
 권한이 정확한지 확인하려면 다음 명령을 실행해 에이전트 사용자가 데이터베이스에 연결하고 코어 테이블을 읽을 수 있는지 확인합니다.
@@ -140,7 +143,7 @@ Cloud SQL 호스트를 모니터링하려면 인프라스트럭처에 Datadog �
        host: '<INSTANCE_ADDRESS>'
        port: 5432
        username: datadog
-       password: '<PASSWORD>'
+       password: 'ENC[datadog_user_database_password]'
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
@@ -162,7 +165,7 @@ Cloud SQL 호스트를 모니터링하려면 인프라스트럭처에 Datadog �
 
 Google Cloud Run과 같은 Docker 컨테이너에서 실행하는 데이터베이스 모니터링 에이전트를 구성하려면 에이전트 컨테이너에서 [자동탐지 통합 템플릿][1]을 Docker 레이블로 설정합니다.
 
-**참고**: 에이전트에 Docker 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다.
+**참고**: 에이전트에 Docker 자동탐지 레이블을 읽을 수 있는 권한이 있어야 작동합니다. 
 
 ### 명령줄
 
@@ -199,18 +202,13 @@ FROM gcr.io/datadoghq/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
 `project_id`와 `instance_id` 필드 설정에 관한 추가 정보는 [Postgres 통합 스펙][2]을 참고하세요.
 
-`datadog` 사용자 암호가 일반 텍스트로 노출되는 것을 예방하려면 에이전트의 [비밀 관리 패키지][3]를 이용해 `ENC[]` 구문을 사용하여 암호를 선언하거나 [자동탐지 템플릿 변수 설명서][4]에서 환경 변수로 암호를 전달하는 방법을 살펴보세요.
-
-
 [1]: /ko/agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[3]: /ko/agent/configuration/secrets-management
-[4]: /ko/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "쿠버네티스" %}}
 
@@ -227,7 +225,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
     ```yaml
     clusterAgent:
       confd:
-        postgres.yaml: -|
+        postgres.yaml: |-
           cluster_check: true
           init_config:
           instances:
@@ -235,7 +233,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
             host: <INSTANCE_ADDRESS>
             port: 5432
             username: datadog
-            password: '<UNIQUE_PASSWORD>'
+            password: 'ENC[datadog_user_database_password]'
             gcp:
               project_id: '<PROJECT_ID>'
               instance_id: '<INSTANCE_ID>'
@@ -244,7 +242,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
       enabled: true
     ```
 
-   Postgres 9.6의 경우 호스트와 포트가 지정된 인스턴스 설정에 다음 설정을 추가하세요.
+    Postgres 9.6의 경우 호스트와 포트가 지정된 인스턴스 설정에 다음 설정을 추가하세요.
 
     ```yaml
     pg_stat_statements_view: datadog.pg_stat_statements()
@@ -257,7 +255,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>",
     ```
 
 <div class="alert alert-info">
-For Windows, append <code>--set targetSystem=windows</code> to the <code>helm install</code> command.
+Windows의 경우 <code>--set targetSystem=windows</code>를 <code>helm 설치</code>명령에 추가하세요.
 </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
@@ -276,8 +274,8 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 5432
     username: datadog
-    password: '<PASSWORD>'
-    # 프로젝트와 인스턴스를 추가한 후 CPU, 메모리 등과 같은 추가 클라우드 데이터를 가져오도록 Datadog GCP 통합을 설정합니다.
+    password: 'ENC[datadog_user_database_password]'
+    # 프로젝트 및 인스턴스를 추가한 후 Datadog GCP 통합을 설정하여 CPU, 메모리 등 추가 클라우드 데이터를 가져옵니다.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -305,7 +303,7 @@ metadata:
           "host": "<INSTANCE_ADDRESS>",
           "port": 5432,
           "username": "datadog",
-          "password": "<UNIQUEPASSWORD>",
+          "password": "ENC[datadog_user_database_password]",
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -324,13 +322,11 @@ spec:
 
 클러스터 에이전트가 자동으로 설정을 등록하고 Postgres 점검을 실행합니다.
 
-`datadog` 사용자 암호가 일반 텍스트로 노출되는 것을 예방하려면 에이전트의 [비밀 관리 패키지][5]를 이용해`ENC[]` 구문을 사용하여 암호를 선언하세요.
 
 [1]: /ko/agent/cluster_agent
 [2]: /ko/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
-[5]: /ko/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

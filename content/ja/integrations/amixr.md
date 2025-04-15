@@ -27,6 +27,7 @@ categories:
 - インシデント
 - notifications
 - orchestration
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
 display_on_public_website: true
@@ -36,7 +37,6 @@ integration_id: amixr
 integration_title: Amixr
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: amixr
 public_title: Amixr
@@ -57,6 +57,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Offering::Integration
   configuration: README.md#Setup
   description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
   media: []
@@ -80,13 +81,13 @@ Slack インテグレーションを活用して Amixr でアラートを管理�
 
 ![Amixr_Interface][1]
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 サーバーに追加でインストールする必要はありません。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Amixr で構成する場合:
 
@@ -113,21 +114,21 @@ Amixr で構成する場合:
 
 1. サイドバーから **Incidents** を開いて、アラートを受信したかを確認します。
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 Amixr インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 Amixr インテグレーションには、サービスのチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 Amixr インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Amixr のサポートチーム][2]までお問合せください。
 

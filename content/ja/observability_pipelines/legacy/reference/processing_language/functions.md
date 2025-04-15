@@ -1,6 +1,6 @@
 ---
 aliases:
-- /observability_pipelines/reference/processing_language/functions/
+- /ja/observability_pipelines/reference/processing_language/functions/
 title: (レガシー) 関数
 ---
 

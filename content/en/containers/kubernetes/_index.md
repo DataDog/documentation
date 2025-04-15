@@ -24,6 +24,9 @@ further_reading:
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session for insights on Kubernetes monitoring'
+    - link: 'https://www.datadoghq.com/blog/watermark-pod-autoscaler/'
+      tag: 'Blog'
+      text: 'A guide on scaling out your Kubernetes pods with the Watermark Pod Autoscaler'
 ---
 
 

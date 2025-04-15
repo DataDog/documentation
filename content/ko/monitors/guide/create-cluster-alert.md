@@ -30,6 +30,6 @@ title: 클러스터 경고를 생성하여 일정 비율의 그룹이 위험 상
 
 모니터링은 지난 10분 동안 CPU 사용량이 50%를 초과한 호스트의 비율을 추적하고, 그 중 지정된 조건을 충족하는 호스트가 40% 이상인 경우 알림을 생성합니다.
 
-{{< img src="monitors/faq/cluster-status.png" alt="클러스터-경고-상태" >}}
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}

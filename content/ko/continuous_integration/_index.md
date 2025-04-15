@@ -20,9 +20,12 @@ further_reading:
 - link: /continuous_integration/pipelines/
   tag: 설명서
   text: 파이프라인 데이터를 탐색하여 빌드 문제를 해결하세요
-- link: /continuous_integration/tests/
+- link: /account_management/billing/ci_visibility
   tag: 설명서
-  text: \u0008테스트 데이터를 탐색하여 문제가 발생한 테스트를 찾고 해결하세요
+  text: CI Visibility의 요금에 관해 알아야 할 사항
+- link: /continuous_integration/tests/
+  tag: 문서
+  text: 테스트 데이터를 탐색하여 문제가 발생한 테스트를 찾고 해결하세요
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: 블로그
   text: 정적 웹 애플리케이션 모니터링을 위한 모범 사례를 확인하세요
@@ -35,6 +38,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: 블로그
   text: Datadog CI 파이프라인 가시성을 통한 CI/CD 현대화 모니터링
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: 블로그
+  text: Datadog를 사용해 코드로 감지하기
 title: 지속적 통합 가시성
 ---
 
@@ -43,6 +49,11 @@ title: 지속적 통합 가시성
 {{< /site-region >}}
 
 이 페이지에서는 연속적인 통합(CI) 메트릭과 데이터를 Datadog 대시보드로 가져오는 방법에 대해 설명합니다. CI 파이프라인에서 Continuous Testing 테스트를 실행하려면 <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing 및 CI/CD</a> 섹션을 참조하세요.
+
+{{< learning-center-callout header="활성화 웨비나 세션에 참가하세요" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  CI Visibility 소개 세션에 참가해 Datadog CI Visibility를 사용해 CI 파이프라인의 효율성을 향상하고 Testing Visibility와 Pipeline Visibility 제품을 구성하는 방법을 배우세요.
+{{< /learning-center-callout >}}
+
 
 ## 개요
 
