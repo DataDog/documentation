@@ -10,9 +10,9 @@ further_reading:
   text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
-This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
+This guide walks you through configuring [Cloud Security Management (CSM)][3], [Software Composition Analysis (SCA)][22], [Threat Detection and Protection (AAP)][4], and [Cloud SIEM][5] on AWS Fargate.
 
-{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, ASM, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
+{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="Flow chart showing how CSM, AAP, and Cloud SIEM are configured on AWS Fargate" width="90%">}}
 
 ## Full stack coverage for AWS Fargate
 
@@ -33,13 +33,13 @@ Datadog Security provides multiple layers of visibility for AWS Fargate. Use the
         <td>Fargate Application</td>
         <td>Application Performance Monitoring</td>
         <td>Software Composition Analysis (SCA) and Code Security</td>
-        <td>ASM - Threat Detection and Protection</td>
+        <td>AAP - Threat Detection and Protection</td>
     </tr>
     <tr>
         <td>Fargate Infrastructure</td>
         <td>Infrastructure Monitoring</td>
         <td>Not yet supported</td>
-        <td>CSM Threats</td>
+        <td>Workload Protection</td>
     </tr>
 </table>
 
@@ -260,7 +260,7 @@ Use the following [Agent RBAC deployment instruction][6] before deploying the Ag
 
 #### Deploy the Agent as a sidecar
 
-The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
+The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with Workload Protection enabled:
 
 ```yaml
 apiVersion: apps/v1
@@ -362,7 +362,7 @@ In the task definition, replace the "workload" container with the following:
 - The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment
 - Datadog APM is configured for your application or service
 
-<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with Application Security Management.</div>
+<div class="alert alert-info"> For additional performance and reliability insights, Datadog recommends enabling Application Performance Monitoring with App and API Protection.</div>
 
 ### Installation
 
