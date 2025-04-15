@@ -27,7 +27,7 @@ Rules allow you to select which errors are ingested into Error Tracking. They ap
 
 Each rule consists of:
 - A scope: an inclusion filter, which contains a search query, such as `service:my-web-store`.
-- Optionally, one or more nested exclusion filters to further refine the rule. For example, an exclusion filter might use the `env:staging` query to exclude staging errors.
+- Optionally, one or more nested exclusion filters to further refine the rule and ignore some of the matching events. For example, an exclusion filter might use the `env:staging` query to exclude staging errors.
 
 A given rule can be toggled on or off. An error event is included if it matches a query in one of the active inclusion filters _and_ it does not match any active nested exclusion queries.
 
@@ -41,15 +41,18 @@ Rules are evaluated in order, with the evaluation stopping at the first matching
 
 {{% collapse-content title="Example" level="p" %}}
 Given a list of rules:
-- rule 1: env:prod
-    - exclusion filter 1-1: service:api
-    - exclusion filter 1-2: status:warn
-- rule 2: service:web
-- rule 3 (this rule is disabled): team:security
-- rule 4: service:foo
+- Rule 1: `env:prod`
+    - Exclusion filter 1-1: `service:api`
+    - Exclusion filter 1-2: `status:warn`
+- Rule 2: `service:web`
+- Rule 3 (this rule is disabled): `team:security`
+- Rule 4: `service:foo`
+
+{{< img src="error_tracking/error-tracking-filters-example.png" alt="Error Tracking Filters example of setup" style="width:75%;" >}}
 
 The processing flow is as follows:
 {{< img src="error_tracking/error-tracking-filters-diagram.png" alt="Error Tracking Filters" style="width:75%;" >}}
+
 {{% /collapse-content %}}
 
 ### Default rules
