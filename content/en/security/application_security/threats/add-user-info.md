@@ -658,7 +658,7 @@ const userExists = true // if the user login exists in database for example
 const metadata = { 'key': 'value' } // you can add arbitrary fields
 
 // Log a failure user authentication event
-// userExists is optional and defaulted it is defaulted to false
+// userExists is optional and it is defaulted to false
 // metadata is optional
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
@@ -709,7 +709,7 @@ const user = {
   email: 'user@email.com'
 }
 
-const metadata = { 'key': 'value' } // if is no data in metada object, can be omitted
+const metadata = { 'key': 'value' } // if there is no data in the metadata object, it can be omitted
 
 // Log a successful user authentication event using new method
 tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
@@ -734,7 +734,7 @@ tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
 // in a controller with the new method:
 const login = 'user@email.com'
 const userExists = true
-const metadata = { 'key': 'value' } // if is no data in metada object, can be omitted
+const metadata = { 'key': 'value' } // // if there is no data in the metadata object, it can be omitted
 
 // Log a failed user authentication event using new method
 // user-id is not necessary anymore
