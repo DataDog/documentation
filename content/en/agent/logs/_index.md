@@ -179,7 +179,7 @@ Since the Private Location installation folder is restricted to admin access, th
 3. In the `Log On` tab, verify the account (the default is `ddagentuser`).
 4. Close the window.
 
-Follow these steps to grant permission to  the user running the Datadog Agent
+### Grant permission to the user running the Agent
 
 1. Go to `C:\Program Files` and find the `synthetics_worker.d` folder.
 2. Right-click the `synthetics_worker.d` folder and select `Properties`.
