@@ -10,7 +10,7 @@ further_reading:
 aliases:
   - /security/cloud_security_management/workflows
 products:
-  - name: CSM Threats
+  - name: Workload Protection
     url: /security/threats/
     icon: cloud-security-management
   - name: CSM Misconfigurations
