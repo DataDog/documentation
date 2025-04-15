@@ -198,6 +198,13 @@ components:
       required: true
       schema:
         type: string
+    BudgetID:
+      description: Budget id.
+      in: path
+      name: budget_id
+      required: true
+      schema:
+        type: string
     CaseIDPathParameter:
       description: Case's UUID or key
       example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
@@ -4725,6 +4732,183 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/BillingDimensionsMappingBody'
+      type: object
+    Budget:
+      description: A Budget.
+      properties:
+        created_at:
+          description: The timestamp when the budget was created.
+          format: int64
+          type: integer
+        created_by:
+          description: The id of the user that created the budget.
+          type: string
+        end_month:
+          description: The month when the budget ends.
+          format: int64
+          type: integer
+        id:
+          description: The id of the budget.
+          type: string
+        metrics_query:
+          description: The cost query for to track against the budget.
+          type: string
+        name:
+          description: The name of the budget.
+          type: string
+        org_id:
+          description: The Id of the Org the budget belongs to.
+          format: int64
+          type: integer
+        start_month:
+          description: The month when the budget starts.
+          format: int64
+          type: integer
+        tags:
+          description: The tags for which the budget is created.
+          items:
+            type: string
+          type: array
+        total_amount:
+          description: The sum of all budget entries amounts.
+          format: double
+          type: number
+        updated_at:
+          description: The timestamp when the budget was last updated.
+          format: int64
+          type: integer
+        updated_by:
+          description: The id of the user that created the budget.
+          type: string
+      type: object
+    BudgetArray:
+      description: An array of budgets.
+      example:
+        data:
+        - attributes:
+            created_at: 1741011342772
+            created_by: user1
+            end_month: 202502
+            metrics_query: aws.cost.amortized{service:ec2} by {service}
+            name: my budget
+            org_id: 123
+            start_month: 202501
+            tags: null
+            total_amount: 1000
+            updated_at: 1741011342772
+            updated_by: user2
+          id: 00000000-0a0a-0a0a-aaa0-00000000000a
+          type: budget
+      properties:
+        data:
+          description: The `BudgetArray` `data`.
+          items:
+            $ref: '#/components/schemas/Budget'
+          type: array
+      type: object
+    BudgetEntry:
+      description: The entry of a budget.
+      properties:
+        amount:
+          description: The `amount` of the budget entry.
+          format: double
+          type: number
+        month:
+          description: The `month` of the budget entry.
+          format: int64
+          type: integer
+        tag_filters:
+          description: The `tag_filters` of the budget entry.
+          items:
+            type: string
+          type: array
+      type: object
+    BudgetWithEntries:
+      description: The definition of `BudgetWithEntries` object.
+      example:
+        data:
+          attributes:
+            created_at: 1738258683590
+            created_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+            end_month: 202502
+            entries:
+            - amount: 500
+              month: 202501
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            - amount: 500
+              month: 202502
+              tag_filters:
+              - tag_key: service
+                tag_value: ec2
+            metrics_query: aws.cost.amortized{service:ec2} by {service}
+            name: my budget
+            org_id: 123
+            start_month: 202501
+            tags:
+            - service
+            total_amount: 1000
+            updated_at: 1738258683590
+            updated_by: 00000000-0a0a-0a0a-aaa0-00000000000a
+          id: '1'
+          type: budget
+      properties:
+        data:
+          $ref: '#/components/schemas/BudgetWithEntriesData'
+      type: object
+    BudgetWithEntriesData:
+      description: A budget and all it's entries.
+      properties:
+        created_at:
+          description: The timestamp when the budget was created.
+          format: int64
+          type: integer
+        created_by:
+          description: The id of the user that created the budget.
+          type: string
+        end_month:
+          description: The month when the budget ends.
+          format: int64
+          type: integer
+        entries:
+          description: The entries of the budget.
+          items:
+            $ref: '#/components/schemas/BudgetEntry'
+          type: array
+        id:
+          description: The `BudgetWithEntriesData` `id`.
+          type: string
+        metrics_query:
+          description: The cost query for to track against the budget.
+          type: string
+        name:
+          description: The name of the budget.
+          type: string
+        org_id:
+          description: The Id of the Org the budget belongs to.
+          format: int64
+          type: integer
+        start_month:
+          description: The month when the budget starts.
+          format: int64
+          type: integer
+        tags:
+          description: The tags for which the budget is created.
+          items:
+            type: string
+          type: array
+        total_amount:
+          description: The sum of all budget entries amounts.
+          format: double
+          type: number
+        updated_at:
+          description: The timestamp when the budget was last updated.
+          format: int64
+          type: integer
+        updated_by:
+          description: The id of the user that created the budget.
+          type: string
       type: object
     BulkMuteFindingsRequest:
       description: The new bulk mute finding request.
@@ -40556,6 +40740,157 @@ paths:
         type: idempotent
     x-merge-override:
       delete: true
+  /api/v2/cost/budget:
+    put:
+      description: Create a new budget or update an existing one.
+      operationId: UpsertBudget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetWithEntries'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetWithEntries'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/BadRequestResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/TooManyRequestsResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Update if exists, or create a new budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 14
+      x-undo:
+        type: idempotent
+  /api/v2/cost/budget/{budget_id}:
+    delete:
+      description: Delete a budget.
+      operationId: DeleteBudget
+      parameters:
+      - $ref: '#/components/parameters/BudgetID'
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundResponse'
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/BadRequestResponse'
+          description: Bad Request
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/TooManyRequestsResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_write
+      summary: Delete a budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 15
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a budget.
+      operationId: GetBudget
+      parameters:
+      - $ref: '#/components/parameters/BudgetID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetWithEntries'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/BadRequestResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/NotFoundResponse'
+          description: Not Found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/TooManyRequestsResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: Get a budget
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 16
+      x-undo:
+        type: safe
+  /api/v2/cost/budgets:
+    get:
+      description: List budgets.
+      operationId: ListBudgets
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetArray'
+          description: OK
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/TooManyRequestsResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cloud_cost_management_read
+      summary: List budgets
+      tags:
+      - Cloud Cost Management
+      x-menu-order: 17
+      x-undo:
+        type: safe
   /api/v2/cost/custom_costs:
     get:
       description: List the Custom Costs files.
