@@ -17,3 +17,4 @@ Note that an average remaining error budget of 0% corresponds to a Score value o
 - Red: 0 ≤ Score < 66.667
 - Yellow: 66.667 ≤ Score < 80
 - Green: 80 ≤ Score ≤ 100
+

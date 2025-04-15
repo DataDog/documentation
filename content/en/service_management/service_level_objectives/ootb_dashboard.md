@@ -36,7 +36,6 @@ To customize your SLO Performance Summary Dashboard, click **Configure** in the 
 - Update the configuration for every widget in the default dashboard to use your desired tag, instead of `service`
 - Add a [template variable][4] based on your desired tag (or replace the existing `service` template variable)
 
-
 For instance, if you have added a `journey` tag to your SLOs, you can clone the SLO Performance Summary Dashboard and customize it to be based on the `journey` tag:
 
 {{< img src="service_management/service_level_objectives/ootb_dashboard/slo-dashboard-flow.mp4" alt="OOTB SLO Dashboard by Journey Tag" video=true style="width:80%;" >}}

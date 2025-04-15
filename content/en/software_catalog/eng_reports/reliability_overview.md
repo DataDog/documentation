@@ -6,7 +6,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Eng Reports are in Preview/LA (link to preview signup form if needed, link to form to gather feedback on other report types customers want)
+Engineering Reports are in Preview. TODO: link to sign-up form.
 {{< /callout >}}
 
 ## Overview
@@ -31,10 +31,7 @@ By default, the Reliability Overview report aggregates data by service or team, 
 
 ### Customize your report
 
-To customize your report, click **Configure** and select **Clone dashboard**. The default report is configured based on the `service` tag that's been added to SLOs. You can update the report to be based on any [SLO tag][1] by taking the following steps:
-
-- Update the configuration for every widget in the default report to use your desired tag, instead of `service`
-- Add a [template variable][2] based on your desired tag (or replace the existing `service` template variable)
+{{% customize_reports %}}
 
 ### Schedule reports
 
@@ -44,7 +41,5 @@ You can set up scheduled reports for your stakeholders that will be delivered vi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/#slo-tags
-[2]: /dashboards/template_variables/#add-a-template-variable
 
 

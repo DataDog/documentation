@@ -15,7 +15,7 @@ With Engineering Reports, you get access to out-of-the-box reports on product re
 
 {{< whatsnext desc="Explore the following reports:" >}}
     {{< nextlink href="/software_catalog/eng_reports/reliability_overview/" >}}Reliability Overview: Summary of your organization's reliability based on SLO performance and Incident trends.{{< /nextlink >}}
-    {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules{{< /nextlink >}}
+    {{< nextlink href="/software_catalog/eng_reports/scorecards_performance" >}}Scorecards Performance: Organization-wide view of Scorecard performance broken down by teams and rules.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
