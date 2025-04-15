@@ -36,7 +36,7 @@ This [example query][6] shows RUM errors that meet the criteria for inclusion in
 
 ### Inclusion/Exclusion filters
 
-Make sure the errors you are looking for match at least an inclusion filter and no exclusion filters! Check your filters setup (more information in [Manage Data Collection][8]).
+Make sure the errors you are looking for match at least one inclusion filter and no exclusion filters. Check your filters setup (more information in [Manage Data Collection][8]).
 
 ## No error samples found for an issue
 
