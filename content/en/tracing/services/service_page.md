@@ -33,7 +33,7 @@ Selecting a service on the Software Catalog leads you to the detailed service pa
 
 Consult on this page:
 
-* [Service health](#service-health) 
+* [Service health](#service-health)
 * [Service monitor states](#service-monitor)
 * [Watchdog Insights](#watchdog-insights)
 * [Summary cards](#summary-cards)
@@ -57,7 +57,7 @@ Service health is available in several places in Datadog:
 
 1. [Software Catalog][23]
 2. Service pages
-3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies. 
+3. Service dependendency maps, if Watchdog detects that an issue spans multiple service dependencies.
 4. Service pills
 
 Service health displays the status of your service as *Critical* or *Warning* if at least one of the following conditions is met:
@@ -113,7 +113,7 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 ## Resources
 
-See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). 
+See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries).
 
 Below, there's a list of [resources][11] associated with your service. Note: If the resource represents an external interface of an HTTP service, the list displays endpoints instead.
 
@@ -241,11 +241,11 @@ Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 {{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
 ### Memory Leaks
-If you have set up [Continuous Profiler][15], and the service is running in a containerized environment you will see the [Memory Leaks][24] tab.
+If you have set up [Continuous Profiler][15], and the service is running in a containerized environment you'll see the [Memory Leaks][24] tab.
 
-This will guide you through a workflow for identifying potential memory leaks and showing the most actionable data.
+It'll guide you through a workflow for identifying potential memory leaks and showing the most actionable data.
 
-{{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
+{{< img src="profiler/apm_service_page_memory_leaks.png" alt="Memory Leaks" style="width:90%;">}}
 
 ### Traces
 View the list of traces associated with the service in the traces tab, which is already filtered on your service, environment, and operation name. Drill down to problematic spans using core [facets][16] such as status, resource, and error type. For more information, click a span to view a flame graph of its trace and more details.
