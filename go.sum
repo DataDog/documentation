@@ -1,4 +1,4 @@
-github.com/DataDog/websites-modules v1.5.1-0.20250415201213-401dff8c22a6 h1:xCoUZCU99OvQ+5Nn8QDy/hGAPDkE/nFQvfa4oUbF3Ws=
-github.com/DataDog/websites-modules v1.5.1-0.20250415201213-401dff8c22a6/go.mod h1:CcQxAmCXoiFr3hNw6Q+1si65C3uOP1gB+7aX4S3h+CQ=
+github.com/DataDog/websites-modules v1.5.1-0.20250415202055-2f700997af5b h1:j+wQiWQX+EfyzVR/MfCaWOEi1NLWt6oRmehvmBkQYgQ=
+github.com/DataDog/websites-modules v1.5.1-0.20250415202055-2f700997af5b/go.mod h1:CcQxAmCXoiFr3hNw6Q+1si65C3uOP1gB+7aX4S3h+CQ=
 github.com/DataDog/websites-sources v0.0.0-20250317101227-0f2085d04053 h1:mwYlrH1C240tEgoETjtC1wv+OWTM4MwGZ3KZAPLqj2U=
 github.com/DataDog/websites-sources v0.0.0-20250317101227-0f2085d04053/go.mod h1:RvGhXV0uQC6Ocs+n84QyL97kows6vg6VG5ZLQMHw4Fs=
