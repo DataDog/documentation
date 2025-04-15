@@ -218,6 +218,12 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION_CUSTOM_SAMPLES='[
 Auto multi-line detection uses a labeled aggregation system to aggregate logs. The detection step will assign a label to logs, and the aggregation step will aggregate the logs based on the labels that were assigned. 
 
 ### Label Types
+| Label | Usage | Description |
+|---------|------|-------------|
+
+|`start_group`| Defines **beginning of a multi-line log** | - Flushes any buffered multi-line log if present \b - Starts new multi-line log \b - Only one multi-line log can be buffered at a time|
+|`aggregate`| Is **added to existing multi-line log** | - If no multi-line log exists, flushes immediately \b - Default label when nothing else matches|
+|`no_aggregate`| Declares logs that are **never part of aggregation**|  - Flushes buffered multi-line log if present \b - Flushes sample immediately \b - Used for JSON logs|
 
 1. **start_group**: Beginning of a multi-line log
    - Flushes any buffered multi-line log if present
@@ -277,6 +283,7 @@ These settings add the following tags to your logs so you can search for them in
 
 - `multiline`: Shows the aggregation source (e.g., `auto_multiline`, `multiline_regex`)
 - `truncated`: Shows truncation source (e.g., `single_line`, `multi_line`)
+
 **Note:** Truncation can occur if the log is too long for the agent to process. If a line is too long before multiline aggregation, it will get the `single_line` tag. If an incorrect pattern caused a log to aggregate and overflow the aggregation buffer, the `multi_line` tag will be used. 
 
 
