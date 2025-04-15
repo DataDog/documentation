@@ -1085,6 +1085,13 @@
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     }
   ],
+  "CreateCustomFramework": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a custom framework returns \"OK\" response"
+    }
+  ],
   "CreateSignalNotificationRule": [
     {
       "group": "security_monitoring",
