@@ -135,4 +135,4 @@ COTERM_BREAK_GLASS=true kubectl delete foo
 [5]: /service_management/incident_management/
 [6]: /coterm/install
 [7]: https://app.datadoghq.com/terminal-streams
-[8]: https://docs.datadoghq.com/service_management/case_management/automation_rules/
+[8]: /service_management/case_management/automation_rules/
