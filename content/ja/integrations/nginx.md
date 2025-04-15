@@ -25,9 +25,9 @@ assets:
     source_type_id: 31
     source_type_name: Nginx
   monitors:
-    '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
-    '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
-    '[NGINX] Upstream peers fails': assets/monitors/upstream_peer_fails.json
+    Upstream 4xx errors are high: assets/monitors/4xx.json
+    Upstream 5xx errors are high: assets/monitors/5xx.json
+    Upstream peers are failing: assets/monitors/upstream_peer_fails.json
   saved_views:
     4xx_errors: assets/saved_views/4xx_errors.json
     5xx_errors: assets/saved_views/5xx_errors.json
@@ -42,7 +42,7 @@ author:
 categories:
 - configuration & deployment
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
 display_on_public_website: true
@@ -50,7 +50,7 @@ draft: false
 git_integration_title: nginx
 integration_id: nginx
 integration_title: Nginx
-integration_version: 6.3.1
+integration_version: 8.1.0
 is_public: true
 manifest_version: 2.0.0
 name: nginx
@@ -355,7 +355,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 
 ##### メトリクスの収集
 
-To collect metrics, set the following parameters and values in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your NGINX pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+メトリクスを収集するには、[オートディスカバリーテンプレート][1]に以下のパラメーターと値を設定します。これは、NGINX ポッドの Kubernetes アノテーション (下記参照) または[ローカルファイル、ConfigMap、キーバリューストア、Datadog Operator マニファスト、または Helm チャート][2]を使用して行うことができます。
 
 | パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
@@ -413,7 +413,7 @@ metadata:
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set the following parameter in an [Autodiscovery template][1]. You can do this with Kubernetes Annotations (shown below) on your Redis pod(s), or with a [local file, ConfigMap, key-value store, Datadog Operator manifest, or Helm chart][2].
+次に、[オートディスカバリーテンプレート][1]に以下のパラメーターを設定します。これは、Redis ポッドの Kubernetes アノテーション (下記参照) または[ローカルファイル、ConfigMap、キーバリューストア、Datadog Operator マニファスト、または Helm チャート][2]を使用して行うことができます。
 
 | パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |

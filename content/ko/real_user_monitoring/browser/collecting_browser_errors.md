@@ -1,38 +1,34 @@
 ---
+aliases:
+- /ko/error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
-- link: /real_user_monitoring/error_tracking/
-  tag: 설명서
-  text: 오류 추적
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: 블로그
-  text: 실제 사용자 모니터링(RUM)
-- link: /real_user_monitoring/explorer/
-  tag: 설명서
-  text: Datadog에서 보기 탐색
-- link: /real_user_monitoring/explorer/visualize/
-  tag: 설명서
-  text: 이벤트에 시각화 적용
-- link: /real_user_monitoring/platform/dashboards/
-  tag: 설명서
-  text: RUM 대시보드
-title: 브라우저 오류 수집
+- link: /error_tracking/explorer/
+  tag: Documentation
+  text: Explore your Errors within Datadog
+- link: /error_tracking/monitors/
+  tag: Documentation
+  text: Proactively alert on impactful issues
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Measure performance and user impact
+title: Collecting Browser Errors
 ---
 ## 개요
 
-프론트 엔드 오류는 실제 사용자 모니터링(RUM)을 사용하여 수집됩니다. 오류 메시지와 스택 트레이스는 사용 가능한 경우 포함됩니다.
+프론트엔드 오류는 브라우저 SDK을 사용하여 수집됩니다. 사용 가능한 경우 오류 메시지와 스택 트레이스가 포함됩니다.
 
 ## 오류 소스
 프런트엔드 오류는 다음과 같은 여러 원인으로 인해 발생합니다.
 
 - **에이전트**: SDK 실행 시
 - **콘솔**: `console.error()` API 호출 시
-- **커스텀**: [RUM `addError` API]와 함께 전송 시(#collect-errors-manually)
+- **커스텀**: [`addError` API]와 함께 전송 시(#collect-errors-manually)
 - **보고**: `ReportingObserver` API에서
 - **소스**: 소스 코드에서 처리되지 않은 예외 또는 처리되지 않은 약속 거부 발생 시
 
 ## 오류 속성
 
-모든 RUM 이벤트 유형의 기본 속성에 대한 내용은 [수집된 데이터][1]를 참조하세요. 샘플링 또는 글로벌 컨텍스트 구성에 대한 내용은 [RUM 데이터 및 콘텍스트 수정하기][2]를 참조하세요.
+모든 이벤트 유형의 기본 속성에 대한 내용은 [수집된 데이터][1]를 참조하세요. 샘플링 또는 글로벌 컨텍스트 설정에 대한 내용은 [데이터 및 콘텍스트 수정하기][2]를 참조하세요.
 
 | 속성       | 유형   | 설명                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -40,6 +36,7 @@ title: 브라우저 오류 수집
 | `error.type`    | 문자열 | 오류 유형(또는 경우에 따라 오류 코드).                     |
 | `error.message` | 문자열 | 이벤트를 설명하는 간결하고 사람이 읽을 수 있는 한 줄 메시지. |
 | `error.stack`   | 문자열 | 스택 트레이스 또는 오류에 대한 보완 정보.     |
+| `error.causes` | [어레이][12] | 추가 컨텍스트를 제공하는 선택 사항 목록입니다. 이 속성은 별도로 오류를 표시하기 위해 사용되고 서식을 향상합니다. 자세한 정보는 [MDN 설명서][13]를 참고하세요. |
 
 ### 소스 오류
 
@@ -51,7 +48,7 @@ title: 브라우저 오류 수집
 
 ## 수동으로 오류 수집
 
-처리된 예외, 처리된 약속 거부 및 RUM Browser SDK에서 자동으로 추적되지 않는 기타 오류를 `addError()`API를 통해 모니터링하세요:
+처리된 예외, 처리된 프라미스 거부 및 Browser SDK에서 자동으로 추적되지 않는 기타 오류를 `addError()` API로 모니터링하세요.
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -60,7 +57,7 @@ addError(
 );
 {{< /code-block >}}
 
-**참고**: [오류 추적][4] 기능은 `custom`, `source` 또는 `report`로 설정된 소스를 전송하는 오류 및 스택 트레이스가 포함된 오류를 처리합니다. 다른 소스(예: `console`) 또는 브라우저 확장 프로그램으로 전송된 오류는 처리하지 않습니다.
+**참고**: [오류 추적][4]은 `custom`, `source` 또는 `report`, 또는 `console`로 설정된 소스를 전송하는 오류 및 스택 트레이스가 포함된 오류를 처리합니다. 오류 추적은 다른 소스(예: `network`) 또는 브라우저 확장 프로그램으로 전송된 오류는 처리하지 않습니다.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -259,3 +256,5 @@ class ErrorBoundary extends React.Component {
 [9]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [10]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
 [11]: /ko/real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
+[12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
+[13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause

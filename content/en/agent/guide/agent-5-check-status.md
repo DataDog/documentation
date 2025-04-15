@@ -1,6 +1,7 @@
 ---
 title: Troubleshoot an Agent Check on Agent 5
 disable_toc: false
+private: true
 ---
 
 This page covers troubleshooting an Agent Check on Agent 5. For information on the latest version of the Agent, see [Troubleshoot an Agent Check][4].

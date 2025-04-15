@@ -15,7 +15,7 @@ Hay varias formas de enviar métricas personalizadas a Datadog desde una funció
 
 ### Comprender las métricas de distribución
 
-Cuando Datadog recibe varios puntos de métricas count o gauge que comparten la misma marca de tiempo y el mismo conjunto de etiquetas (tags), solo cuenta el punto más reciente. Esto funciona para las aplicaciones basadas en hosts porque el Datadog Agent agrega los puntos de métricas y les aplica una etiqueta `host` única.
+Cuando Datadog recibe varios puntos de métricas count o gauge que comparten la misma marca de tiempo y el mismo conjunto de etiquetas, solo cuenta el punto más reciente. Esto funciona para las aplicaciones basadas en hosts porque el Datadog Agent agrega los puntos de métricas y les aplica una etiqueta `host` única.
 
 Una función de Lambda puede iniciar muchos entornos de ejecución de forma simultánea cuando hay un aumento de tráfico. La función puede llegar a enviar puntos de métricas count o gauge que se sobrescriben entre sí y generan resultados mal contabilizados. Para evitar este problema, las métricas personalizadas generadas a partir de funciones de Lambda se envían como [distribuciones][2], ya que los puntos de las métricas de distribución se agregan en el backend de Datadog y todos ellos se cuentan.
 
@@ -123,24 +123,40 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayV2ProxyResponseEvent;
 
-// importa el compilador del cliente statsd
+// importar el compilador del cliente statsd
 import com.timgroup.statsd.NonBlockingStatsDClientBuilder;
 import com.timgroup.statsd.StatsDClient;
 
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
 
-    // crea la instancia del cliente statsd
+    // instanciar el cliente statsd
     private static final StatsDClient Statsd = new NonBlockingStatsDClientBuilder().hostname("localhost").build();
 
     @Override
     public APIGatewayV2ProxyResponseEvent handleRequest(APIGatewayV2ProxyRequestEvent request, Context context) {
 
-        // envía una métrica de distribución
+        // enviar una métrica de distribución
         Statsd.recordDistributionValue("my.custom.java.metric", 1, new String[]{"tag:value"});
 
         APIGatewayV2ProxyResponseEvent response = new APIGatewayV2ProxyResponseEvent();
         response.setStatusCode(200);
         return response;
+    }
+
+    static {
+        // asegurarse de que todas las métricas se descargan antes del cierre
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                System.out.println("[runtime] shutdownHook triggered");
+                try {
+                    Thread.sleep(300);
+                } catch (InterruptedException e) {
+                    System.out.println("[runtime] sleep interrupted");
+                }
+                System.out.println("[runtime] exiting");
+            }
+        });
     }
 }
 ```
@@ -385,7 +401,7 @@ Donde:
 - `<METRIC_NAME>` identifica tu métrica de forma exclusiva y sigue la [política de nomenclatura de métricas][11].
 - `<TAG_LIST>` es opcional, se separa por comas y debe ir precedido de `#`. La etiqueta `function_name:<name_of_the_function>` se aplica automáticamente a las métricas personalizadas.
 
-**Nota**: La suma de cada marca de tiempo se utiliza para counts y el último valor de una marca de tiempo dada se utiliza para gauges. No se recomienda imprimir una instrucción de log cada vez que se incrementa un métrica, ya que esto aumenta el tiempo que se tarda en analizar los logs. Actualiza continuamente el valor de la métrica en tu código e imprime una instrucción de log para esa métrica antes de que la función termine.
+**Nota**: La suma de cada marca de tiempo se utiliza para counts y el último valor de una marca de tiempo dada se utiliza para gauges. No se recomienda imprimir una sentencia de log cada vez que aumenta una métrica, ya que esto hace que el análisis de logs tarde más. Actualiza continuamente el valor de la métrica en tu código e imprime una sentencia de log para esa métrica antes de que la función termine de ejecutarse.
 
 [1]: /es/serverless/libraries_integrations/extension/
 [2]: /es/metrics/distributions/

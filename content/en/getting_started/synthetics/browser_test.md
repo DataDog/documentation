@@ -24,30 +24,37 @@ further_reading:
 
 ## Overview
 
-[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. 
-
-{{< img src="getting_started/synthetics/browser-test-overview.png" alt="Overview of a Synthetics Browser Test" style="width:100%;" >}}
-
-These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
+[Browser tests][1] are scenarios that Datadog executes on your web applications. You can configure periodic intervals to run tests from multiple locations, devices, and browsers as well as execute them from your CI/CD pipelines. These tests verify that your users can perform **key business transactions** on your applications and that they are not negatively impacted by recent code changes.
 
 ## Create a browser test
 
 The example below demonstrates the creation of a browser test that maps a user's journey from adding an item to a cart to successfully checking out. 
 
-{{< img src="getting_started/synthetics/browser-test-1.png" alt="Browser test mapping out a user journey" style="width:100%;" >}}
 ### Configure your test details
 
 1. In the Datadog site, hover over **Digital Experience** in the left hand menu and select **[Tests][2]** (under **Synthetic Monitoring & Testing**).
 2. In the top right corner, click **New Test** > **[Browser Test][3]**.
-3. Define your browser test:
 
-    - Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
-    - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
-      In this example, no specific advanced option is needed.
-    - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
-    - Choose the browsers and devices you want to test with. 
+You may create a test using one of the following options:
 
-### Select locations
+- **Create a test from a template**:
+
+    1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Alert Conditions, Steps, and optionally Variables.
+    2. Click **+Create Test** to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+    3. Click **Save & Quit** in the upper right hand corner to submit your Browser Test.<br /><br>
+
+       {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
+
+- **Build a test from scratch**:
+
+    1. Click the **+** template to start a new Browser Test from scratch.
+    1. Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
+    2. Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
+    3. Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+    4. Choose the browsers and devices you want to test with. 
+    5. Click **Save & Edit Recording** to submit your Browser Test.
+
+### Select locations 
 
 Select one or more **Managed Locations** or **Private Locations** to run your test from.
 
@@ -55,13 +62,13 @@ Managed locations allow you to test public-facing websites and endpoints. To tes
 
 The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
 
-### Specify test frequency
+### Specify test frequency 
 
 Select the frequency at which you want your test to execute. You can leave the default frequency of 1 hour.
 
 In addition to running your Synthetic test on a schedule, you can trigger them manually or directly from your [CI/CD pipelines][5].
 
-### Define alert conditions
+### Define alert conditions 
 
 You can define alert conditions to ensure your test does not trigger for things like a sporadic network blip, so that you only get alerted in case of real issues with your application.
 
@@ -77,7 +84,7 @@ You can also configure your test to only trigger a notification when your applic
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### Configure the test monitor
+### Configure the test monitor 
 
 Design your alert message and add an email address you want your test to send alerts to.
 
@@ -91,7 +98,7 @@ For more information, see [Using Synthetic Test Monitors][8].
 
 ## Create recording
 
-Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. 
+Once your test configuration is saved, Datadog prompts you to download and install the [Datadog test recorder][9] Chrome extension. (This Chrome extension can also be installed on a Microsoft Edge browser)
 
 Once you have installed the extension, click **Start Recording** to begin recording your test steps.
 

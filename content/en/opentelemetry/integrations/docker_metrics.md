@@ -96,8 +96,24 @@ receivers:
 
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][2] for information about collected container metrics.
+The Docker Stats receiver generates container metrics for the OpenTelemetry Collector. The Datadog Exporter translates container metrics to their Datadog counterparts for use in the following views:
 
+- [Containers Overview default dashboard][6]
+- [APM Trace view][7] with container metrics
+
+**Note**: To correlate trace and container metrics, configure [Universal Service Monitoring attributes][4] for each service, and set the following resource attributes for each service: 
+  - `k8s.container.name` 
+  - `k8s.pod.name` 
+  - `container.name` 
+  - `container.id`
+
+Learn more about [mapping between OpenTelemetry and Datadog semantic conventions for resource attributes][5].
+
+The following table shows what Datadog container metric names are associated with corresponding OpenTelemetry container metric names
+
+{{< mapping-table resource="dockerstats.csv">}}
+
+See [OpenTelemetry Metrics Mapping][2] for more information.
 
 ## Full example configuration
 
@@ -130,5 +146,9 @@ Value: 0.170933
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
-[2]: /opentelemetry/guide/metrics_mapping/#container-metrics
+[2]: /opentelemetry/guide/metrics_mapping/
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/docker-stats.yaml
+[4]: /universal_service_monitoring/setup/
+[5]: /opentelemetry/guide/semantic_mapping/
+[6]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
+[7]: /tracing/trace_explorer/trace_view/

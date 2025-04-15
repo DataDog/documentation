@@ -14,7 +14,7 @@ Alert graphs are timeseries graphs showing the current status of most monitors d
 
 {{< img src="dashboards/widgets/alert_graph/alert_graph.png" alt="Alert Graph" >}}
 
-This widget is supported in default scheduled query alert monitors such as metric, anomaly, outlier, forecast, APM, and integration.
+This widget is supported in default scheduled query alert monitors such as metric, anomaly, outlier, forecast, APM metrics, and integration.
 
 ## Setup
 

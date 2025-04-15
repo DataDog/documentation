@@ -1,0 +1,47 @@
+datadog:
+  ## The site parameter is based on the Datadog site you are using.
+  ## For example, the site URL for US1 is "datadoghq.com". See Datadog Site
+  ## for more information: https://docs.datadoghq.com/getting_started/site/
+  site: "datadoghq.com"
+
+## Autoscaling
+##
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+## HorizontalPodAutoscaler (HPA) requires resource requests to function,
+## so this example configures several default values. Datadog recommends
+## that you change the values to match the actual size of the instances that
+## you are using.
+resources:
+  requests:
+    cpu: 1000m
+    memory: 512Mi
+
+
+## To prevent a single datacenter from causing a complete system failure,
+## the topologySpreadConstraints in this example controls how OP Worker pods
+## are spread across your cluster among availability zones.
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+            - observability-pipelines-worker
+
+
+## Load Balancing
+##
+service:
+  enabled: true
+  type: "ClusterIP"

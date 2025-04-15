@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - network
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Rastrear tasas de error, recuentos de solicitudes y bytes descargados
   y cargados.

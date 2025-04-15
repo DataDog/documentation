@@ -6,8 +6,8 @@ further_reading:
   text: "Functions and Operators"
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/datadog-sheets/" btn_hidden="false" header="Join the Beta!">}}
-Sheets is available in <strong>private beta</strong>. To qualify for this product beta, you should have existing use cases where you currently use spreadsheets (such as Excel or Google Sheets) with Datadog’s metrics, logs, or RUM data. If you're interested in this feature, complete the form to request access.
+{{< callout url="https://www.datadoghq.com/private-beta/datadog-sheets/" btn_hidden="false" header="Join the Preview!">}}
+Sheets is available in <strong>Preview</strong>. To qualify for this preview, you should have existing use cases where you currently use spreadsheets (such as Excel or Google Sheets) with Datadog’s metrics, logs, or RUM data. If you're interested in this feature, complete the form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -57,8 +57,12 @@ For example, you have a table of RUM data with user emails, and you want to know
 
 After you add a table of data to a spreadsheet, analyze and add context to your raw data with a Pivot table. Use pivot tables to summarize and organize large amounts of data into customized tables. It helps you analyze data to find patterns and trends, and see comparisons. For example, you can have a table of error logs with a hundred rows, but with a pivot table you can break down that data into a summary table that counts your error logs by method or region. To create a pivot table:
 1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
-1. In the **Rows** section, select the dimensions you want to analyze, such as the status of logs.
+1. In the **Rows** and **Columns** section, select the dimensions you want to analyze, such as the status of logs.
 1. In the **Calculations** section, select the dimensions you want to use in calculations, including sum, average, count, min, and max.
+
+### Visualizations
+
+After you have your pivot table, you can click **Show Graphs** and add up to six widgets to graph your data. Supported widget types include **Top List**, **Treemap**, and **Pie Chart** widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
 
 ## Supported data sources
 

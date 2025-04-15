@@ -20,7 +20,7 @@ algolia:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
@@ -34,9 +34,9 @@ Optionally, to see code snippets in your stack traces, set up the [GitHub integr
 
 To get started with configuring your repository, see the [Source Code Integration documentation][6].
 
-## Use span tags to track error spans
+## Use span attributes to track error spans
 
-The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **if the error is located in a service entry span** (the uppermost service span). This span must also contain the `error.stack`, `error.message`, and `error.type` [span tags][1] to be tracked.
+The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error Tracking processes error spans within a trace if they occur at the service level, regardless of whether they are located in service entry spans. This span must also contain the `error.stack`, `error.message`, and `error.type` [span attributes][1] to be tracked.
 
 {{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
@@ -46,7 +46,7 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
 
-Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
+Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span attributes, host tags, container tags, and metrics.
 
 ## Further Reading
 

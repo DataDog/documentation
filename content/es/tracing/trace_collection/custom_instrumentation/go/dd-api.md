@@ -213,7 +213,7 @@ Las trazas se pueden excluir en función de su nombre de recurso, para eliminar 
 
 ## Lectura adicional
 
-{{< nombre parcial="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/glossary/#span-tags
 [2]: /es/tracing/glossary/#spans

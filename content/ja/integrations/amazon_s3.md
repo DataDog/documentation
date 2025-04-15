@@ -79,6 +79,39 @@ Amazon S3 は、可用性と拡張性に優れたクラウドストレージサ�
 1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `S3` が有効になっていることを確認します。
 2. [Datadog - Amazon S3 インテグレーション][4]をインストールします。
 
+### ログ収集
+
+#### S3 アクセスログの有効化
+
+1. S3 バケットに移動します。
+2. **Properties** をクリックします。
+3. Services Access Logging セクションに移動し、**Edit** をクリックします。
+4. **Enable** を選択します。
+5. ログの送信先となる S3 バケットを選択します。
+
+ 詳しくは、[Amazon S3 サーバーのアクセスロギングを有効にする][5]を参照してください。
+
+#### ログを Datadog に送信する方法
+
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、S3 アクセスログを収集する方法を以下の 2 つから選択します。
+
+    - 自動: Datadog に権限を設定してアクセスを許可した場合、S3 のログは自動的に管理されます。Datadog Forwarder Lambda 関数での自動ログ収集の構成については、[トリガーを自動的にセットアップする][7]を参照してください。
+    - 手動: AWS コンソールで、S3 のアクセスログが格納されている S3 バケットにトリガーを追加します。[手動インストール手順](#manual-installation-steps)を参照してください。
+
+#### 手動インストールの手順
+
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
+2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
+3. Trigger Configuration で **S3** トリガーを選択します。
+4. S3 のログが格納されている S3 バケットを選択します。
+5. イベントの種類は `All object create events` のままにしておきます。
+6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+
+[ログエクスプローラー][8]に移動して、ログを確認します。
+
+AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][9]を参照してください。
+
 ## 収集データ
 
 ### メトリクス
@@ -95,11 +128,16 @@ Amazon S3 インテグレーションには、サービスのチェック機能�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/cloudwatch-monitoring.html
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-s3
-[5]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_s3/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.aws.amazon.com/AmazonS3/latest/user-guide/server-access-logging.html
+[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#automatically-set-up-triggers
+[8]: https://app.datadoghq.com/logs
+[9]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[10]: https://github.com/DataDog/integrations-internal-core/blob/main/amazon_s3/metadata.csv
+[11]: https://docs.datadoghq.com/ja/help/

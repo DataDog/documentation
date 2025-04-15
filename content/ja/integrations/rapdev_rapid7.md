@@ -33,7 +33,7 @@ categories:
 - ログの収集
 - マーケットプレイス
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -94,7 +94,7 @@ tile:
 
 チェックのログ部分 (有効な場合) は、Rapid7 REST API を使用して IDR ログストリームをクエリします。このインテグレーションは、Rapid7 プラットフォームレベルのログとみなされないすべてのログを返します。これらのログは Datadog に送信されます。**注:** これらのログの提出には、[Datadog ログ管理の価格体系](https://www.datadoghq.com/pricing/?product=log-management#log-management)に記載されているように、Datadog の価格プランに基づく追加料金が発生する場合があります。これらのログは、通常、Rapid7 エンドポイントエージェントのサマリーおよび特定の時間におけるプロセスのステータスで構成されています。
 
-### Dashboards
+### ダッシュボード
 1. このインテグレーションには、Rapid 7 Investigations を要約したすぐに使えるダッシュボードが含まれています。
 2. このインテグレーションには、ログに基づくダッシュボードの例も含まれています。このダッシュボードはインテグレーションのインストール時に利用可能ですが、データの流れを確認するために、R7 ログソースのファセットを作成する必要があります。
 
@@ -128,4 +128,4 @@ tile:
 [5]: https://docs.rapid7.com/insightidr/log-search/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-rapid7" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

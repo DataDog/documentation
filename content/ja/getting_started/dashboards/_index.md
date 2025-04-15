@@ -24,8 +24,8 @@ further_reading:
 title: ダッシュボードの概要
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
-  Explore and register for Foundation Enablement sessions. Learn to customize your dashboards using our library of visualizations and the drag-and-drop Dashboard builder. Enable your team's success by sharing data with stakeholders via reports, public URLs, and notebooks.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Dashboarding">}}
+  Foundation Enablement セッションを調べて登録しましょう。当社の可視化のライブラリとドラッグアンドドロップのダッシュボードビルダーを使用してダッシュボードをカスタマイズする方法を学びましょう。レポート、公開 URL、ノートブックを通じてデータを関係者と共有することで、チームを成功に導くことができます。
 {{< /learning-center-callout >}}
 
 ## 概要
@@ -67,7 +67,7 @@ Datadog では、さまざまな機能やインテグレーションにすぐに
 3. ウィジェットの設定メニューで **Delete** を選択し、必要のないウィジェットを削除します。
 4. ニーズに合わせて表示場所などを調整します。ウィジェットは、個別にまたはまとめてドラッグ&ドロップして、ダッシュボードの希望する位置に移動できます。
 5. 他のダッシュボードのウィジェットを利用する場合は、ウィジェットにカーソルを合わせて `Command + C` (Windows の場合は `Ctrl + C`) を押してコピーします。ご自分のダッシュボードを開いて `Command + V` (Windows の場合は `Ctrl + V`) を押し、貼り付けます。
-5. 表示中のデータをエクスポートするには、Datadog のほとんどのビューで提供されている **Export to Dashboard** オプションを使用します。Logs Explorer および Log Analytics ビューには、ログリストやメトリクスをダッシュボードにエクスポートする共有オプションがあります。
+5. 表示中のデータをエクスポートするには、Datadog の多くのビューで提供されている **Export to Dashboard** オプションを使用します。例えば、Log Explorer や Log Analytics ビューには、ログリストやメトリクスをダッシュボードにエクスポートする共有オプションがあります。
 
 ## メトリクスの詳細
 

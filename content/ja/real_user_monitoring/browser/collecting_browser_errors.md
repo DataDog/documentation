@@ -1,38 +1,34 @@
 ---
+aliases:
+- /ja/error_tracking/standalone_frontend/collecting_browser_errors
 further_reading:
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: エラー追跡
-- link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
-  tag: ブログ
-  text: リアルユーザーの監視
-- link: /real_user_monitoring/explorer/
-  tag: Documentation
-  text: Datadog でビューを検索する
-- link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
-  text: イベントへの視覚化の適用
-- link: /real_user_monitoring/platform/dashboards/
-  tag: Documentation
-  text: RUM ダッシュボード
+- link: /error_tracking/explorer/
+  text: Datadog 内でエラーを探索する
+  タグ: ドキュメント
+- link: /error_tracking/monitors/
+  text: 影響の大きい問題について積極的にアラートを発信する
+  タグ: ドキュメント
+- link: /real_user_monitoring
+  text: パフォーマンスとユーザーへの影響を測定する
+  タグ: ドキュメント
 title: ブラウザエラーの収集
 ---
 ## 概要
 
-Front-end errors are collected with with Browser SDK. The error message and stack trace are included when available.
+フロントエンドのエラーは Browser SDK で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
 
 ## エラーソース
 フロントエンドのエラーは、いくつかの異なるソースから発生します。
 
 - **agent**: SDK の実行から
 - **console**: `console.error()` API コールから
-- **custom**: Sent with the [`addError` API](#collect-errors-manually)
+- **custom**: [`addError` API](#collect-errors-manually) を使用して送信される
 - **report**: `ReportingObserver` API から
 - **source**: ソースコードの未処理の例外または未処理の約束拒否から
 
 ## エラー属性
 
-For information about the default attributes for all event types, see [Data Collected][1]. For information about configuring for sampling or global context see [Modifying Data and Context][2].
+すべてのイベントタイプのデフォルト属性に関する詳細は、[収集されるデータ][1]をご覧ください。サンプリングまたはグローバルコンテキストの構成に関する情報は、[データとコンテキストの変更][2]をご覧ください。
 
 | 属性       | タイプ   | 説明                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
@@ -51,7 +47,7 @@ For information about the default attributes for all event types, see [Data Coll
 
 ## エラーを手動で収集する
 
-Monitor handled exceptions, handled promise rejections, and other errors not tracked automatically by the Browser SDK with the `addError()` API:
+処理済みの例外、処理済みのプロミス拒否、および Browser SDK で自動的に追跡されないその他のエラーを、`addError()` API を使用して監視します。
 
 {{< code-block lang="javascript" >}}
 addError(
@@ -60,7 +56,7 @@ addError(
 );
 {{< /code-block >}}
 
-**Note**: [Error Tracking][4] processes errors that are sent with the source set to `custom`, `source` or `report`, and contain a stack trace. Errors sent with any other source (such as `console`) or sent from browser extensions are not processed by Error Tracking.
+**注**: [Error Tracking][4] は、ソースを `custom`、`source` または `report` に設定し、スタックトレースを含むエラーを処理します。その他のソース (`console` など) で送られたか、ブラウザ拡張機能で送られたエラーは、エラー追跡では処理されません。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -142,7 +138,7 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### React error boundaries instrumentation
+### React エラー境界のインスツルメンテーション
 
 React [エラー境界][5]をインスツルメンテーションして、RUM ブラウザ SDK の `addError()` API を使用して React のレンダリングエラーを監視できます。
 

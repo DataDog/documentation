@@ -17,7 +17,7 @@ OTel Kafka Metrics Remapping is in public alpha. It is available in versions >= 
 
 The [Kafka metrics receiver][1], [JMX Receiver][2]/ [JMX Metrics Gatherer][3] allow collecting Kafka metrics and access to the out of the box [Kafka Dashboard][7], "Kafka, Zookeeper and Kafka Consumer Overview". 
 
-Please note that the [JMX Receiver][2] and [JMX Metrics Gatherer][3] should be considered as replacements. They collect the same set of metrics ([JMX Receiver][2] launches the [JMX Metrics Gatherer][3]).
+**Note**: the [JMX Receiver][2] and [JMX Metrics Gatherer][3] should be considered as replacements. They collect the same set of metrics ([JMX Receiver][2] launches the [JMX Metrics Gatherer][3]).
 
 
 ## Kafka metrics receiver
@@ -103,7 +103,7 @@ The JMX Receiver has the following requirements:
 - JRE is available on the host in which you are running the collector.
 - The JMX Metric Gatherer JAR is available on the host in which you are running the collector. You can download the most recent release of the JMX Metric Gatherer JAR [here][1].
 
-Because the OTel collector default image does not meet the requirements above, a custom image needs to be built. Please refer to the Dockerfile below for an example image that contains the collector binary, JRE, and JMX Metrics Gatherer Jar.
+Because the OTel collector default image does not meet the requirements above, a custom image needs to be built. See the Dockerfile below for an example image that contains the collector binary, JRE, and JMX Metrics Gatherer Jar.
 
 Dockerfile:
 ```Dockerfile
@@ -255,9 +255,11 @@ In order to ensure this attribute only gets added to your Kafka logs, use [inclu
 
 ## Data collected
 
-See [OpenTelemetry Metrics Mapping][9] for information about collected Kafka metrics.
+{{< mapping-table resource="kafka.csv">}}
 
+**Note:** In Datadog `-` gets translated to `_`. For the metrics prepended by `otel.`, this means that the OTel metric name and the Datadog metric name are the same (for example, `kafka.producer.request-rate` and `kafka.producer.request_rate`). In order to avoid double counting for these metrics, the OTel metric is then prepended with `otel.`.
 
+See [OpenTelemetry Metrics Mapping][9] for more information.
 
 ## Full example configuration
 

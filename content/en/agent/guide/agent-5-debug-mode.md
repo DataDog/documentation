@@ -1,5 +1,6 @@
 ---
 title: Agent 5 Debug Mode
+private: true
 ---
 
 ## Overview

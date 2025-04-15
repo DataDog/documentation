@@ -26,7 +26,7 @@ categories:
 - コンテナ
 - ログの収集
 - セキュリティ
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
 display_on_public_website: true
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: aqua
 integration_id: aqua
 integration_title: Aqua
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 manifest_version: 2.0.0
 name: aqua

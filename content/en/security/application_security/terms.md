@@ -8,7 +8,7 @@ further_reading:
 - link: "/security/application_security/threats/"
   tag: "Documentation"
   text: "Threat Management"
-- link: "/security/application_security/software_composition_analysis/"
+- link: "/security/code_security/software_composition_analysis/"
   tag: "Documentation"
   text: "Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/datadog-threat-intelligence/"
@@ -93,6 +93,14 @@ flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
 : See [Attacker Explorer][17]
 
+attacker fingerprint
+: Identifiers computed from request characteristics to track an attacker across multiple requests.
+: See [Attacker Fingerprint][18]
+
+attacker cluster
+: A set of attributes identifying an attacker across a distributed attack.
+: See [Attacker Clustering][19]
+
 ## Attacks and known vulnerabilities terms
 
 Open Web Application Security Project (OWASP)
@@ -147,3 +155,5 @@ Object-Graph Navigation Language Injection (OGNLi)
 [15]: /security/application_security/threats/trace_qualification/
 [16]: /security/application_security/threats/threat-intelligence/
 [17]: /security/application_security/threats/attacker-explorer/
+[18]: /security/application_security/threats/attacker_fingerprint/
+[19]: /security/application_security/threats/attacker_clustering/

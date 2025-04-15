@@ -26,11 +26,11 @@ further_reading:
 
 ## Overview
 
-This document goes over [bootstrapping the Observability Pipelines Worker](#bootstrap-options) and [referencing files in Kubernetes](#referencing-files-in-kubernetes).
+This document explains bootstrapping for the Observability Pipelines Worker.
 
 ## Bootstrap Options
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>.
+<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>/DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
@@ -39,6 +39,8 @@ Bootstrap the Observability Pipelines Worker within your infrastructure before y
 - Default data directory: `var/lib/observability-pipelines-worker`
 - Bootstrap file: `/etc/observability-pipelines-worker/bootstrap.yaml`
 - Environment variables file: `/etc/default/observability-pipelines-worker`
+
+**Note**: `DD_OP_DATA_DIR` can only be owned by a single Observability Pipelines Worker. If you have multiple Workers, you must use unique data directories.
 
 To set bootstrap options, do one of the following:
 - Use environmental variables.
@@ -49,36 +51,35 @@ The following is a list of bootstrap options, their related pipeline environment
 `api_key`
 : **Pipeline environment variable**: `DD_API_KEY`
 : **Priority**: `DD_API_KEY`
-: Create a [Datadog API key][1] for this environment variable.
+: **Description**: Create a [Datadog API key][1] for this environment variable. [Remote Configuration][6] must be enabled for the API key.
 
 `pipeline_id`
 : **Pipeline environment variable**: `DD_OP_PIPELINE_ID`
 : **Priority**: `DD_OP_PIPELINE_ID`
-: Create an [Observability Pipelines pipeline ID][2] for this environment variable.
+: **Description**: Create an [Observability Pipelines pipeline ID][2] for this environment variable.
 
 `site`
 : **Pipeline environment variable**: `DD_SITE`
 : **Priority**: `DD_SITE`
-: Your Datadog site (optional, default: `datadoghq.com`).
+: **Description**: Your Datadog site (optional, default: `datadoghq.com`).
 : See [Getting Started with Sites][3] for more information.
 
 `data_dir`
 : **Pipeline environment variable**: `DD_OP_DATA_DIR`
 : **Priority**: `DD_OP_DATA_DIR`
-: The data directory (optional, default: `/var/lib/observability-pipelines-worker`). This is the file system directory that the Observability Pipelines Worker uses for local state.
+: **Description**: The data directory (optional, default: `/var/lib/observability-pipelines-worker`). This is the file system directory that the Observability Pipelines Worker uses for local state.
 
 `tags: []`
 : **Pipeline environment variable**: `DD_OP_TAGS`
 : **Priority**: `DD_OP_TAGS`
-: The tags reported with internal metrics and can be used to filter Observability Pipelines instances for Remote Configuration deployments.
+: **Description**: The tags reported with internal metrics and can be used to filter Observability Pipelines instances for Remote Configuration deployments.
 
 `threads`
 : **Pipeline environment variable**: `DD_OP_THREADS`
 : **Priority**: `DD_OP_THREADS`
-: The number of threads to use for processing (optional, default: the number of available cores).
+: **Description**: The number of threads to use for processing (optional, default: the number of available cores).
 
 `proxy`
-: This option is available for Observability Pipelines Worker 2.1 and later.
 : **Pipeline environment variables**: `DD_PROXY_HTTP`, `DD_PROXY_HTTPS`, `DD_PROXY_NO_PROXY`
 : Set proxy servers for the Observability Pipelines Worker. The proxy configuration for the Worker works in the same way as it does for the [Datadog Agent][4].
 : **Priority**: The settings are applied to the entire Worker process. The HTTP proxy and HTTPS values are resolved in this order:
@@ -87,46 +88,12 @@ The following is a list of bootstrap options, their related pipeline environment
 <br>&nbsp;&nbsp;&nbsp;3. `proxy`
 :
 : An example proxy configuration:
-: &nbsp;&nbsp;&nbsp;&nbsp;proxy:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https: https://foo.bar:3128
-: <b>Note</b>: The `DD_PROXY_HTTP(S)` and `HTTP(S)_PROXY` environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.
-
-## Referencing files in Kubernetes
-
-If you are referencing files in Kubernetes for Google Cloud Storage authentication, TLS certificates for certain sources, or an enrichment table processor, you need to use `volumeMounts[*].subPath` to mount files from a `configMap` or `secret`.
-
-For example, if you have a `secret` defined as:
-
-```
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-secret
-type: Opaque
-data:
-  credentials1.json: bXktc2VjcmV0LTE=
-  credentials2.json: bXktc2VjcmV0LTI=
-```
-
-Then you need to override `extraVolumes` and `extraVolumeMounts` in the `values.yaml` file to mount the secret files to Observability Pipelines Worker pods using `subPath`:
-
-```
-# extraVolumes -- Specify additional Volumes to use.
-extraVolumes:
-  - name: my-secret-volume
-    secret:
-      secretName: my-secret
-
-# extraVolumeMounts -- Specify Additional VolumeMounts to use.
-extraVolumeMounts:
-  - name: my-secret-volume
-    mountPath: /var/lib/observability-pipelines-worker/config/credentials1.json
-    subPath: credentials1.json
-  - name: my-secret-volume
-    mountPath: /var/lib/observability-pipelines-worker/config/credentials2.json
-    subPath: credentials2.json
-```
-
-**Note**: If you override the`datadog.dataDir` parameter, you need to override the `mountPath` as well.
+: &nbsp;&nbsp;&nbsp;&nbsp;`proxy`:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`enabled`: `true`<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`https`: `https://foo.bar:3128`
+: **Description**: The Observability Pipelines Worker can route external requests through forward proxies, such as Squid. Forward proxies forward client requests from the Observability Pipelines Worker to the internet. You might use them as a web firewall to forbid or allow certain domains, ports, or protocols. Forward proxies usually do not terminate SSL and therefore do not have access to the request content. They only pass packets back and forth between the client and the destination. [HTTP tunnels][5] are used to secure communication through a forward proxy.
+: **Notes**:
+: <li style="list-style-type: '- '">This option is available for Observability Pipelines Worker 2.1 and later.</li>
+: <li style="list-style-type: '- '">The Observability Pipelines Worker cannot route external requests through reverse proxies, such as HAProxy and NGINX.</li>
+: <li style="list-style-type: '- '">The <code>DD_PROXY_HTTP(S)</code> and <code>HTTP(S)_PROXY</code> environment variables need to be already exported in your environment for the Worker to resolve them. They cannot be prepended to the Worker installation script.</li>
 
 ## Further reading
 
@@ -136,3 +103,5 @@ extraVolumeMounts:
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: /getting_started/site/
 [4]: /agent/configuration/proxy/?tab=linux#environment-variables
+[5]: https://en.wikipedia.org/wiki/HTTP_tunnel
+[6]: /agent/remote_config/

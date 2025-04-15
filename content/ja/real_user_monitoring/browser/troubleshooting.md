@@ -130,6 +130,10 @@ Chromium ベースのブラウザで、RUM ブラウザ SDK が Datadog イン�
 
 インテークが空でない JSON オブジェクトを返すため、警告が表示されます。この動作は、報告されている [Chromium の問題][8]です。RUM ブラウザ SDK に影響を与えるものではないので、無視しても問題ありません。
 
+## “Deobfuscation failed” の警告
+
+スタックトレースの難読化解除に失敗した場合、この警告が表示されます。スタックトレースが最初から難読化されていない場合は、この警告は無視しても問題ありません。それ以外の場合は、[RUM Debug Symbols ページ][14]を使用してアップロード済みのすべてのソースマップを確認してください。詳しくは、[RUM Debug Symbols を用いた難読化スタックトレースの調査][15]をご覧ください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -147,3 +151,5 @@ Chromium ベースのブラウザで、RUM ブラウザ SDK が Datadog イン�
 [11]: /ja/real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [12]: /ja/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
 [13]: /ja/real_user_monitoring/browser/setup/#initialization-parameters
+[14]: https://app.datadoghq.com/source-code/setup/rum
+[15]: /ja/real_user_monitoring/guide/debug-symbols

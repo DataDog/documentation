@@ -2,17 +2,20 @@
 title: Configurar Data Streams Monitoring para .NET
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Monitorización de Secuencias de Datos no es compatible con la región AP1.</a></div>
-{{< /site-region >}}
-
 ### Requisitos previos
 
-Para empezar a trabajar con la Monitorización de Secuencias de Datos, necesitas versiones recientes de las bibliotecas del Datadog Agent y .NET:
 * [Datadog Agent v7.34.0 o más reciente][1]
-* Rastreador de .NET ([.NET Core][2], [.NET Framework][3])
-  * Kafka y RabbitMQ: versión 2.28.0 o posterior
-  * Amazon SQS: versión 2.48.0
+
+### Bibliotecas compatibles
+
+| Tecnología        | Biblioteca                         | Versión mínima del rastreador | Versión recomendada del rastreador |
+|-------------------|---------------------------------|------------------------|----------------------------|
+| Kafka             | [Confluent.Kafka][3]            | 2.28.0                 | 2.41.0 o posterior            |
+| RabbitMQ          | [RabbitMQ.Client][4]            | 2.28.0                 | 2.37.0 o posterior            |
+| Amazon SQS        | [SDK de Amazon SQS][5]             | 2.48.0                 | 2.48.0 o posterior            |
+| Amazon SNS        | [SDK de Amazon SNS][6]             | 3.6.0                  | 3.6.0 o posterior             |
+| IBM MQ            | [IBMMQDotnetClient][7]          | 2.49.0                 | 2.49.0 o posterior            |
+| Bus de servicio de Azure | [Azure.Messaging.ServiceBus][8] | 2.38.0                 | 2.38.0 o posterior            |
 
 ### Instalación
 
@@ -23,15 +26,20 @@ Por ejemplo:
 environment:
   - DD_DATA_STREAMS_ENABLED: "true"
 ```
-### Bibliotecas compatibles
-Data Streams Monitoring es compatible con la [biblioteca confluent-kafka][4].
 
 ### Monitorización de pipelines de SQS
-Data Streams Monitoring usa un [atributo de mensaje][5] para rastrear la ruta de un mensaje a través de una cola de SQS. Como Amazon SQS tiene un límite máximo de 10 atributos de mensaje permitidos por mensaje, todos los mensajes transmitidos a través de los pipelines de datos deben tener 9 o menos atributos de mensaje configurados, lo que permite el atributo restante para Data Streams Monitoring.
+Data Streams Monitoring utiliza un [atributo de mensaje][2] para rastrear la ruta de un mensaje a través de una cola SQS. Como Amazon SQS tiene un límite máximo de 10 atributos de mensaje permitidos por mensaje, todos los mensajes transmitidos a través de los pipelines de datos deben tener 9 o menos atributos de mensaje establecidos, lo que deja el atributo restante para Data Streams Monitoring.
+
+### Monitorización de pipelines SNS a SQS
+Para monitorizar un pipeline de datos en el que Amazon SNS habla directamente con Amazon SQS, debes habilitar [la entrega de mensajes sin formato de Amazon SNS][9].
 
 
 [1]: /es/agent
-[2]: /es/tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /es/tracing/trace_collection/dd_libraries/dotnet-framework
-[4]: https://pypi.org/project/confluent-kafka/
-[5]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[2]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[3]: https://www.nuget.org/packages/Confluent.Kafka
+[4]: https://www.nuget.org/packages/RabbitMQ.Client
+[5]: https://www.nuget.org/packages/AWSSDK.SQS
+[6]: https://www.nuget.org/packages/AWSSDK.SimpleNotificationService
+[7]: https://www.nuget.org/packages/IBMMQDotnetClient
+[8]: https://www.nuget.org/packages/Azure.Messaging.ServiceBus
+[9]: https://docs.aws.amazon.com/sns/latest/dg/sns-large-payload-raw-message-delivery.html

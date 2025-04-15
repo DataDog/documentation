@@ -145,7 +145,7 @@ Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Sp
 | Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
 | Profiled Hosts        | APM Enterprise       | HWMP   | Sum     |
 | CI Indexed Spans    | CI Visibility         | Sum     | Sum   |      
-| Test Indexed Spans    | Test Visibility         | Sum   | Sum   |               
+| Test Indexed Spans    | Test Optimization         | Sum   | Sum   |               
 | APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, </br> Legacy - Serverless Invocations, </br> Legacy - Serverless Functions, Fargate Task (APM Pro), </br> Fargate Task (APM Enterprise) | Sum | Sum |
 | APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
 | DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |

@@ -4,6 +4,7 @@ app_uuid: b613759e-89ca-4d98-a2c1-4d465c42e413
 assets:
   dashboards:
     CoreDNS: assets/dashboards/coredns.json
+    CoreDNS [V2]: assets/dashboards/coredns_v2.json
   integration:
     auto_install: true
     configuration:
@@ -42,7 +43,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 3.2.3
+integration_version: 5.1.0
 is_public: true
 manifest_version: 2.0.0
 name: coredns
@@ -334,7 +335,7 @@ CoreDNS チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

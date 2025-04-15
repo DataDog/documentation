@@ -136,17 +136,17 @@ En este ejemplo, `basic` identifica con éxito los picos de anomalías fuera del
 #### Comparación de la detección de anomalías para la temporalidad semanal
 En este ejemplo, la métrica muestra un cambio de nivel repentino. `Agile` se ajusta más rápidamente al cambio de nivel que `robust`. Además, la amplitud de los límites de `robust` aumenta para reflejar una mayor incertidumbre tras el cambio de nivel; la amplitud de los límites de `agile` permanece invariable. `Basic` no se ajusta bien a este escenario, en el que la métrica muestra un fuerte patrón temporal semanal.
 
-{{< img src="monitors/monitor_types/Anomalía/alg_comparison_2.png" alt="comparación del algoritmo de detección de anomalías con la temporalidad semanal" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_2.png" alt="comparación del algoritmo de detección de anomalías con la temporalidad semanal" style="width:90%;">}}
 
 #### Comparación de las reacciones de los algoritmos al cambio
 Este ejemplo muestra cómo reaccionan los algoritmos ante una anomalía de una hora de duración. `Robust` no ajusta los límites de la anomalía en este escenario, ya que reacciona más lentamente ante los cambios bruscos. Los demás algoritmos empiezan a comportarse como si la anomalía fuera la nueva normalidad. `Agile` identifica incluso el regreso de la métrica a su nivel original como una anomalía.
 
-{{< img src="monitors/monitor_types/Anomalía/alg_comparison_3.png" alt="comparación del algoritmo de detección de anomalías con la temporalidad horaria" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_3.png" alt="comparación del algoritmo de detección de anomalías con la temporalidad horaria" style="width:90%;">}}
 
 #### Comparación de las reacciones de los algoritmos a las escalas
 Los algoritmos tratan a las escalas de forma diferente. `Basic` y `robust` son insensibles a las escalas, mientras que `agile` no lo es. Los gráficos abajo a la izquierda muestran que `agile` y `robust` señalan el cambio de nivel como anómalo. A la derecha, se añade 1000 a la misma métrica y `agile` deja de señalar el cambio de nivel como anómalo, mientras que `robust` sigue haciéndolo.
 
-{{< img src="monitors/monitor_types/Anomalía/alg_comparison_scale.png" alt="comparación del algoritmo con las escalas" style="width:90%;">}}
+{{< img src="monitors/monitor_types/anomaly/alg_comparison_scale.png" alt="comparación del algoritmo con las escalas" style="width:90%;">}}
 
 #### Comparación de la detección de anomalías para nuevas métricas
 Este ejemplo muestra cómo cada algoritmo trata una métrica nueva. `Robust` y `agile` no muestran ningún límite durante las primeras temporalidades (semanales). `Basic` empieza a mostrar límites poco después de que aparece la métrica por primera vez.

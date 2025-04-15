@@ -26,7 +26,7 @@ author:
 categories:
 - 構成 & デプロイ
 - マーケットプレイス
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -118,7 +118,7 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
 
-- メール: [support@statsig.com][4]
+- メール: [support@statsig.com][4] 
 - サポート: [Statsig][5]
 
 ### その他の参考資料
@@ -135,4 +135,4 @@ Statsig インテグレーションにより、Statsig でのコンフィギュ�
 [6]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。利用するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">Marketplace でこのアプリケーションを購入してください</a>。

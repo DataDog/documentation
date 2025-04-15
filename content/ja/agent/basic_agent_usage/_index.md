@@ -37,13 +37,13 @@ Datadog Agent Manager GUI を使用して、次のことを行います。
 - Agent チェックの追加と編集
 - フレアの送信
 
-The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5002`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
+Datadog Agent Manager GUI は Windows と macOS でデフォルトで有効になっており、ポート `5002` で実行します。デフォルトの Web ブラウザで GUI を開くには、`datadog-agent launch-gui` コマンドを使用します。
 
 GUI のデフォルトポートは `datadog.yaml` コンフィギュレーションファイルで変更できます。GUI を無効にするには、ポートの値を `-1` に設定します。Linux では、GUI はデフォルトで無効になっています。
 
 GUI の要件:
 - cookie をブラウザで有効にする必要があります。GUI は、GUI サーバーとのすべての通信を認証するために使用されるトークンを生成し、ブラウザに保存します。
-- To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
+- GUI を起動するには、必要なアクセス許可を持っている必要があります。`datadog.yaml` を開くことができる場合は、GUI を使用できます。
 - セキュリティ上の理由から、GUI はローカルネットワークインターフェイス (`localhost`/`127.0.0.1`) から**のみ**アクセスできます。そのため、Agent が実行しているホストにいる必要があります。Agent を VM やコンテナーで実行してホストマシンからアクセスすることはできません。
 
 ### コマンドラインインターフェイス

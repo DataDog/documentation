@@ -1,0 +1,38 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "Example Cloud Cost Query",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "cloud_cost",
+                "name": "query1",
+                "query": "sum:aws.cost.amortized{*} by {aws_product}.rollup(sum, monthly)"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "bars"
+          }
+        ],
+        "time": {}
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

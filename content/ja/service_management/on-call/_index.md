@@ -6,12 +6,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-on-call/
   tag: ブログ
   text: Datadog On-Call を使用して、オンコール体験をより豊かなものにする
+- link: https://www.datadoghq.com/blog/on-call-paging/
+  tag: ブログ
+  text: 効果的なページング戦略を策定する方法
 title: オンコール
 ---
 
-{{< callout url="https://www.datadoghq.com/private-beta/on-call/" >}}
-On-Call は現在、非公開ベータ版です。アクセスをリクエストするには、フォームにご記入ください。
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では On-Call はサポートされていません。</div>
+{{< /site-region >}}
 
 Datadog On-Call は、モニタリング、ページング、インシデント対応を 1 つのプラットフォームに統合しています。
 

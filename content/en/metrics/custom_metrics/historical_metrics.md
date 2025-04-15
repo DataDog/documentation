@@ -10,11 +10,18 @@ further_reading:
 - link: "/developers/community/libraries/"
   tag: "Documentation"
   text: "Official and Community created API and DogStatsD client libraries"
+- link: "https://www.datadoghq.com/blog/historical-metrics/"
+  tag: "Blog"
+  text: "Monitor system performance across longer time frames with historical metrics"
 ---
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{% /site-region %}}
 
 ## Overview
 
-Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+Enabling Historical Metrics Ingestion allows you to collect **custom metric** values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
 
 Having Historical Metrics Ingestion enabled on your metrics can be helpful for a variety of use cases such as recovering from an outage, correcting erroneous values, and managing IoT delays.
 
@@ -44,13 +51,14 @@ To enable the ingestion of historical metrics for a specific metric:
 
 ### Bulk configuration for multiple metrics
 
-You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
+You can enable or disable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1.  Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
+1. Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
 1. Select **Enable historical metrics**.
-1. Specify a metric namespace prefix to enable Historical Metrics Ingestion on all metrics that match that namespace.
+1. Specify a metric namespace prefix to select all metrics that match that namespace.
+1. (Optional) To disable Historical Metrics Ingestion for all metrics in the namespace, click the **Historical metrics** toggle.
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Walkthrough of bulk enabling historic metric ingestion" video=true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/historical_metrics_ingestion_toggle.png" alt="Historical metrics ingestion toggle" >}}
 
 ## Historical metrics submission
 
@@ -452,7 +460,7 @@ Track your indexed historical metrics through the Usage Summary section of the [
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /metrics/summary/
+[1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage

@@ -53,12 +53,14 @@ Para añadir una entrada a la lista de aprobados, realiza una de las siguientes 
 
 Los datos que recopilas con Datadog pueden contener información confidencial que desees filtrar, enmascarar, depurar, filtrar, modificar o simplemente no recopilar. Además, los datos pueden contener tráfico sintético que puede hacer que la detección de amenazas sea inexacta o que Datadog no indique con precisión la seguridad de tus servicios.
 
-Por defecto, ASM recopila información de trazas de seguridad para ayudarte a entender por qué la solicitud fue marcada como sospechosa. Antes de enviar los datos, ASM los analiza en busca de patrones y palabras clave que indiquen que los datos son confidenciales. Si los datos se consideran confidenciales, se sustituyen por un indicador `<redacted>`. Esto permite observar que, aunque la solicitud era sospechosa, los datos de la solicitud no se recopilaron por motivos de seguridad de los datos.
+Por defecto, ASM recopila información de trazas de seguridad para ayudarte a entender por qué la solicitud fue marcada como sospechosa. Antes de enviar los datos, ASM los analiza en busca de patrones y palabras clave que indiquen que los datos son confidenciales. Si los datos se consideran confidenciales, se sustituyen por un indicador `<redacted>`. Esto permite observar que, aunque la solicitud era sospechosa, los datos de la solicitud no se recopilaron por motivos de seguridad de los datos. Los datos relacionados con el usuario, como los identificadores de usuario de solicitudes autenticadas, no forman parte de los datos que se están ocultando.
 
-Para proteger los datos de los usuarios, el escaneo de datos confidenciales está activado por defecto en ASM. Puedes personalizar la configuración utilizando las siguientes variables de entorno. El escaneo se basa en la [sintaxis RE2][2]. Para personalizar el escaneo, establece el valor de estas variables de entorno en un patrón RE2 válido:
+Para proteger los datos de los usuarios, **el escaneo de datos confidenciales está activado por defecto en ASM**. Puedes personalizar la configuración utilizando las siguientes variables de entorno. El escaneo se basa en la [sintaxis RE2][2]. Para personalizar el escaneo, establece el valor de estas variables de entorno en un patrón [RE2][9] válido:
 
 * `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP`: patrón para analizar claves cuyos valores contengan habitualmente datos confidenciales. Si se encuentran, los valores y cualquier nodo secundario asociado a la clave se redactan.
 * `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP`: patrón para analizar valores que puedan indicar datos confidenciales. Si se encuentra, el valor y todos sus nodos secundarios se redactan.
+
+
 
 <div class="alert alert-info"><strong>Solo para Ruby, comienza en <code>ddtrace</code> versión 1.1.0</strong>
 
@@ -92,6 +94,9 @@ Los siguientes son ejemplos de datos que se marcan como confidenciales por defec
 
 Consulta [Seguridad de datos de APM][3] para obtener información sobre otros mecanismos de Datadog Agent y bibliotecas que también pueden utilizarse para eliminar datos confidenciales.
 
+Consulta [Modos de rastreo automático de los eventos de actividad del usuario][10] para obtener información sobre los modos de rastreo automático de la actividad del usuario y cómo configurarlos. Descubre cómo las bibliotecas de Datadog permiten configurar la instrumentación automática usando la variable de entorno `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` con el nombre abreviado para el modo: `ident|anon|disabled`.
+
+
 ## Configuración de una página de bloqueo personalizada o una carga útil
 
 {{% asm-protection-page-configuration %}}
@@ -110,3 +115,5 @@ Consulta [Seguridad de datos de APM][3] para obtener información sobre otros me
 [6]: /es/help/
 [7]: /es/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
 [8]: https://app.datadoghq.com/security/configuration/asm/services-config
+[9]: https://github.com/google/re2/wiki/Syntax
+[10]: /es/security/application_security/threats/add-user-info/?tab=set_user#automatic-user-activity-event-tracking-modes

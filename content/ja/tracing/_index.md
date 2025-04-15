@@ -4,6 +4,8 @@ algolia:
   - apm
   - application performance monitoring
   - distributed tracing
+  - trace
+  - tracing
 aliases:
 - /ja/tracing/faq/terminology
 - /ja/tracing/guide/terminology
@@ -103,7 +105,7 @@ Datadog APM は、トレースデータの量と保持を管理するための�
 
 ## トラブルシューティング
 
-For troubleshooting assistance, read the [APM Troubleshooting][29] guide.
+トラブルシューティングのサポートについては、[APM トラブルシューティング][29]ガイドをご覧ください。
 
 ## 参考資料
 

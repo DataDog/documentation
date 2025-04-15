@@ -25,7 +25,7 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 
 The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
 
-Continuous Profiler is in beta support for some serverless platforms, such as [AWS Lambda][8].
+Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][8].
 
 ## Installation
 
@@ -76,7 +76,7 @@ const tracer = require('dd-trace/init')
 
 4. Optional: Set up [Source Code Integration][4].
 
-5. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][5].
+5. A minute or two after starting your Node.js application, your profiles will appear on the [APM > Profiler page][5]. If they do not, refer to the [Troubleshooting][9] guide.
 
 ## Not sure what to do next?
 
@@ -98,3 +98,4 @@ Node.js 16 or higher is recommended. On earlier versions, some applications see 
 [6]: /getting_started/profiler/
 [7]: /profiler/enabling/supported_versions/
 [8]: /serverless/aws_lambda/profiling/
+[9]: /profiler/profiler_troubleshooting/nodejs/

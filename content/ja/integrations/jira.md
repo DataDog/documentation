@@ -32,6 +32,7 @@ Jira は、ソフトウェアチーム向けの課題およびプロジェクト
 
 ### Jira でアプリケーションリンクを作成する
 
+#### Jira Cloud 手順
 1. Jira に移動します。
 1. 右端の歯車アイコンをクリックし、** Products** を選択します。
 1. 左メニューの **Integrations** の下にある **Application links** をクリックし、**Create link** をクリックします。
@@ -51,7 +52,7 @@ Jira は、ソフトウェアチーム向けの課題およびプロジェクト
     | Authorize URL         | `{leave blank}`                |
     | Create incoming link  | ボックスをチェック                  |
 
-7. 次のフォームに以下のように入力し、**Continue** をクリックします。[Datadog Jira インテグレーションタイル][1]で公開鍵を見つけるには、**Add Account** をクリックします。
+1. 次のフォームに以下のように入力し、**Continue** をクリックします。[Datadog Jira インテグレーションタイル][1]で公開鍵を見つけるには、**Add Account** をクリックします。
 
     | フィールド         | 入力                                                      |
     |---------------|------------------------------------------------------------|
@@ -59,12 +60,24 @@ Jira は、ソフトウェアチーム向けの課題およびプロジェクト
     | Consumer Name | Datadog                                                    |
     | Public Key    | `{Datadog Jira インテグレーションタイルから公開鍵を入力}`|
 
+#### Jira Data Center 手順
+1. Jira に移動します。
+1. 画面右上隅にある歯車アイコンをクリックし、**Applications** を選択します。
+1. 左メニューの **Integrations** の下にある **Application links** をクリックし、**Create link** をクリックします。
+1. **Create link** ダイアログで **Atlassian product** を選択し、Application URL に `https://{{< region-param key="dd_full_site" code="true" >}}` を入力したら、**Continue** をクリックします。
+1. "No response was received from the URL you entered” (入力した URL から応答がありません) という警告を無視して、**Continue** をクリックします。
+1. Jira Cloud 手順に示されたのと同じパラメータを使用してフォームに入力してください。
+
 ### Datadog を Jira インスタンスに接続する
+
+<div class="alert alert-info">
+Datadog は、このインテグレーションによってより最適かつ一貫した結果を得るため、専用の (個人用でない) Jira サービスアカウントをご用意いただくことを強く推奨します。
+</div>
 
 1. [Datadog Jira インテグレーションタイル][1]に移動し、**Add Account** をクリックします。
 2. Jira インスタンスの URL と、以前に作成したアプリケーションリンクのコンシューマーキーを入力します。
-3. **Connect** をクリックし、Jira 認可ページの指示に従います。Datadog では、最適かつ一貫した結果を得るために、このインテグレーション専用の (個人用ではない) Jira サービスアカウントを持つことを推奨しています。**Connect** をクリックする前に、このアカウントにログインしていることを確認してください。
-**注**: Datadog Jira インテグレーションは、On-Prem/Jira Server および Jira Data Center インスタンスに接続できます。ただし、これらのインスタンスの多くは IP 範囲をブラックリストに登録します。インテグレーションを動作させるには、以下の IP フィルタリングのドキュメントに従ってください。
+3. **Connect** をクリックし、表示される Jira 認可ページの指示に従ってください。**Connect** をクリックする前に、該当アカウントでログインしていることを確認してください。
+**注**: Datadog Jira インテグレーションはオンプレミス環境や Jira Data Center インスタンスにも接続可能です。ただし、こうしたインスタンスの多くは特定の IP 範囲をブラックリスト登録しています。インテグレーションを有効にするには、以下の IP フィルタリングに関するドキュメントに従ってください。
 
 ### IP フィルタリング
 

@@ -90,14 +90,13 @@ Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different re
 
 When the SDK is initialized with a version suffix, you must manually override the release version in order for the source map and build versions to match.
 
+### List uploaded source maps
+
+See the [RUM Debug Symbols][16] page to view all uploaded symbols.
+
 ## Limitations
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Source maps, mapping files, and dSYM files are limited to **500** MB each.
-{{< /site-region >}}
+Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 
 To compute the size of your source maps and bundle, run the following command:
 
@@ -269,7 +268,7 @@ export SOURCEMAP_FILE=./build/main.jsbundle.map # <- add this line to output sou
 
 Moving forward, you can find the source maps for your bundle on every iOS build.
 
-To find the path to your bundle file from XCode, display the Report Navigator on Xcode and filter by `BUNDLE_FILE` for its location.
+To find the path to your bundle file from Xcode, display the Report Navigator on Xcode and filter by `BUNDLE_FILE` for its location.
 
 The usual location is `~/Library/Developer/Xcode/DerivedData/YourAppName-verylonghash/Build/Intermediates.noindex/ArchiveIntermediates/YourAppName/BuildProductsPath/Release-iphoneos/main.jsbundle`, where `YourAppName` is the name of your app, and `verylonghash` is a 28 letter hash.
 
@@ -278,8 +277,8 @@ To upload the source maps, run this from your React Native project:
 ```bash
 export DATADOG_API_KEY= # fill with your API key
 export SERVICE=com.myapp # replace by your service name
-export VERSION=1.0.0 # replace by the version of your app in XCode
-export BUILD=100 # replace by the build of your app in XCode
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
 export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
@@ -321,8 +320,8 @@ To upload the source map, run this from your React Native project root:
 ```bash
 export DATADOG_API_KEY= # fill with your API key
 export SERVICE=com.myapp # replace by your service name
-export VERSION=1.0.0 # replace by the version of your app in XCode
-export BUILD=100 # replace by the build of your app in XCode
+export VERSION=1.0.0 # replace by the version of your app in Xcode
+export BUILD=100 # replace by the build of your app in Xcode
 export BUNDLE_PATH= # fill with your bundle path
 
 yarn datadog-ci react-native upload --platform ios --service $SERVICE --bundle $BUNDLE_PATH --sourcemap ./build/main.jsbundle.map --release-version $VERSION --build-version $BUILD
@@ -482,3 +481,4 @@ Inside the loop, add the following snippet:
 [13]: https://github.com/DataDog/datadog-react-native-wizard
 [14]: https://github.com/DataDog/react-native-performance-limiter
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
+[16]: https://app.datadoghq.com/source-code/setup/rum

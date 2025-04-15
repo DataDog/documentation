@@ -156,7 +156,7 @@ Si despliegas funciones de Lambda de Node.js con la construcción `NodeJsFunctio
             return []
           }
         },
-        externalModules: ['@aws-sdk/client-dynamodb'] // The AWS SDK is included as part of the NodeJS Lambda runtime
+        externalModules: ['@aws-sdk/client-dynamodb'] // The AWS SDK is included as part of the Node.js Lambda runtime
       }
     });
     ```

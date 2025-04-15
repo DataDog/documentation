@@ -190,11 +190,86 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 {{% /tab %}}
 {{< /tabs >}}
 
+### Collect custom resources
+
+The [Kubernetes Explorer][3] automatically collects CustomResourceDefinitions (CRDs) by default. 
+
+Follow these steps to collect the custom resources that these CRDs define:
+
+1. In Datadog, open [Kubernetes Explorer][3]. On the left panel, under **Select Resources**, select [**Kubernetes > Custom Resources > Resource Definitions**][4].
+
+1. Locate the CRD that defines the custom resource you want to visualize in the explorer. Under the **Indexing** column, click **ENABLED** or **DISABLED**.
+
+   <div class="alert alert-info">If your CRD has multiple versions, you are prompted to select which version you want to configure indexing for.</div>
+
+   {{< img src="infrastructure/containers_view/CRD_indexing_1.mp4" alt="A video of Kubernetes Explorer with the Custom Resources dropdown expanded and Resource Definitions selected. The cursor moves down to one of the rows of the table and, under the 'Indexing' column, clicks on 'ENABLED'. Because this CRD has two versions, a tooltip appears. The cursor selects 'v1alpha1'. A modal appears." video="true">}}
+
+   A modal appears:
+   {{< img src="infrastructure/containers_view/indexing_modal.png" alt="The Collecting and Indexing modal. Contains two sections: Agent Setup, with copyable snippets for updating an Agent configuration, and Indexing Configuration, with checkboxes for fields to index.">}}
+
+1. Follow the instructions in the modal's **Agent Setup** section to update your Datadog Agent configuration:
+
+   {{< tabs >}}
+   {{% tab "Helm Chart" %}}
+
+   1. Add the following configuration to `datadog-values.yaml`:
+
+      ```
+      orchestratorExplorer:
+          customResources:
+              - <CUSTOM_RESOURCE_NAME>
+      ```
+
+   1. Upgrade your Helm chart:
+
+      ```
+      helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+      ```
+   {{% /tab %}}
+   {{% tab "Datadog Operator" %}}
+
+   1. Install the Datadog Operator with an option that grants the Datadog Agent permission to collect custom resources:
+
+      ```
+      helm install datadog-operator datadog/datadog-operator --set clusterRole.allowReadAllResources=true
+      ```
+
+   1. Add the following configuration to your `DatadogAgent` manifest, `datadog-agent.yaml`:
+
+      ```
+      features:
+        orchestratorExplorer:
+          customResources:
+            - <CUSTOM_RESOURCE_NAME>
+      ```
+
+   1. Apply your new configuration:
+
+      ```
+      kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+      ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+
+   Each `<CUSTOM_RESOURCE_NAME>` must use the format `group/version/kind`.
+
+1. On the modal, under **Indexing Configuration**, select the fields you want to index from the custom resource.
+
+   {{< img src="infrastructure/containers_view/CRD_indexing_2.mp4" alt="A video of the Collecting and Indexing modal. The cursor selects three fields and clicks Enable Indexing. A success message displays." video="true">}}
+     
+   Select **Enable Indexing** to save.
+
+   <div class="alert alert-info">You can select a maximum of 50 fields for each resource.</div>
+
+After the fields are indexed, you can add them as columns in the explorer or as part of Saved Views. 
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
-
+[3]: https://app.datadoghq.com/orchestration/explorer/pod
+[4]: https://app.datadoghq.com/orchestration/explorer/crd
 

@@ -20,9 +20,17 @@ further_reading:
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
   - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
-    tag: "blog"
+    tag: "Blog"
     text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+  - link: "https://www.datadoghq.com/blog/datadog-service-management/"
+    tag: "Blog"
+    text: "Ensure high service availability with Datadog Service Management"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-sre-security/"
+    tag: "Blog"
+    text: "Security and SRE: How Datadog's combined approach aims to tackle security and reliability challenges"
 ---
+
+
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Incident Management enables DevOps teams and SREs to more effectively manage their incident response workflows from start to finish, saving time and reducing frustration when it matters most.
@@ -75,6 +83,7 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 
 - [PagerDuty][12] and [OpsGenie][13] to send incident notifications to your on-call engineers.
 - [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 - [Statuspage][18] to create and update Statuspage incidents.
@@ -105,3 +114,4 @@ In addition to integrating with [Slack][11], Incident Management also integrates
 [18]: /integrations/statuspage/
 [19]: /integrations/servicenow/
 [20]: /service_management/incident_management/describe
+[21]: /coterm

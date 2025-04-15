@@ -26,7 +26,7 @@ To create a monitor-based SLO, you need an existing Datadog monitor. To set up a
 Datadog monitor-based SLOs support the following monitor types:
 - Metric Monitor Types (Metric, Integration, APM Metric, Anomaly, Forecast, Outlier)
 - Synthetic
-- Service Checks (open beta)
+- Service Checks
 
 ## Setup
 
@@ -90,6 +90,8 @@ Consider the following example for a monitor-based SLO containing 3 monitors. Th
 
 In this example, the overall status is lower than the average of the individual statuses.
 
+Muting a monitor does not affect the SLO calculation. To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
+
 ### Exceptions for synthetic tests
 In certain cases, there is an exception to the status calculation for monitor-based SLOs that are comprised of one grouped Synthetic test. Synthetic tests have optional special alerting conditions that change the behavior of when the test enters the ALERT state and consequently impact the overall uptime:
 
@@ -101,31 +103,22 @@ If you change any of these conditions to something other than their defaults, th
 
 For more information on Synthetic test alerting conditions, see [Synthetic Monitoring][4].
 
-### Impact of manual and automatic monitor updates
-
-When a monitor is resolved manually or as a result of the **_After x hours automatically resolve this monitor from a triggered state_** setting, SLO calculations do not change. If these are important tools for your workflow, consider cloning your monitor, removing auto-resolve settings and `@-notification` settings, and using the clone for your SLO.
-
-Datadog recommends against using monitors with `Alert Recovery Threshold` and `Warning Recovery Threshold` to underlie an SLO. These settings make it difficult to cleanly differentiate between an SLI's good behavior and bad behavior.
-
-Muting a monitor does not affect the SLO calculation.
-
-To exclude time periods from an SLO calculation, use the [SLO status corrections][5] feature.
-
 ### Missing data
-When you create a metric monitor or service check, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
+#### Metric monitors
+When you create a metric monitor, you choose [how the monitor will handle missing data][6]. This configuration affects how a monitor-based SLO calculation interprets missing data:
+
+| Monitor configuration     | SLO calculation of missing data |
+|---------------------------|---------------------------------|
+| `Evaluate as zero`        | Depends on the monitor alert threshold <br> For instance, a threshold of `> 10` would result in Uptime (since the Monitor status would be `OK`), while a threshold of `< 10` would result in Downtime.                             |
+| `Show last known status`  | Keep last state of SLO          |
+| `Show NO DATA`            | Uptime                          |
+| `Show NO DATA and notify` | Downtime                        |
+| `Show OK`                 | Uptime                          |
+
+#### Other monitor types
+When you create a service check monitor, you choose whether it sends an alert when data is missing. This configuration affects how a monitor-based SLO calculation interprets missing data. For monitors configured to ignore missing data, time periods with missing data are treated as OK (uptime) by the SLO. For monitors configured to alert on missing data, time periods with missing data are treated as ALERT (downtime) by the SLO.
 
 If you pause a Synthetic test, the SLO removes the time period with missing data from its calculation. In the UI, these time periods are marked light gray on the SLO status bar.
-
-
-## Underlying monitor and SLO histories
-
-<div class="alert alert-warning">Support for SLO Replay will be deprecated in the near future. Impacted customers will be notified about the change ahead of time with details about how they will be impacted.</div>
-
-SLOs based on the metric monitor types have a feature called SLO Replay that backfills SLO statuses with historical data pulled from the underlying monitors' metrics and query configurations. When you create a new Metric Monitor and set an SLO on that new monitor, you do not have to wait a full 7, 30, or 90 days to view the SLO status. Instead, SLO Replay triggers when you create the new SLO and looks at the history of the monitor's underlying metric and query to fill in the status.
-
-SLO Replay also triggers when you change the underlying metric monitor's query to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
-
-**Note:** SLOs based on Synthetic tests or Service Checks do not support SLO Replay.
 
 ## Further Reading
 
@@ -136,3 +129,4 @@ SLO Replay also triggers when you change the underlying metric monitor's query t
 [3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
 [5]: /service_management/service_level_objectives/#slo-status-corrections
+[6]: /monitors/configuration/#no-data

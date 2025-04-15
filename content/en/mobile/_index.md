@@ -19,7 +19,7 @@ further_reading:
   text: "Getting started with the Datadog mobile app"
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert through On-Call, Slack, or email, you can investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
 
@@ -31,13 +31,13 @@ You can log in using standard authentication, Google authentication, or [SAML][3
 
 #### Enabling SAML
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
+SAML login requires you to set up and authenticate your SAML provider with Datadog using your default iOS/Android browser. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
 
 1. In the mobile app, select your data center region (for example, US1) in the upper right corner.
 2. Press the log-in button.
 3. Click the "Using Single Sign-On (SAML)?" link.
 4. Enter your company email and send the email.
-5. While on your mobile device, open the email and click on the indicated link.
+5. While on your mobile device, open the email and click on the indicated link through your default browser.
 6. Enter your org's SAML credentials to be rerouted to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
@@ -78,6 +78,28 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 **Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
 
+## Traces
+
+{{< img src="service_management/mobile/traces_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Traces page">}}
+
+On the Traces page, you can view and search all of the traces that you have access to in your Datadog org. You can narrow the list through saved views or build specific search queries based on your tagging strategy. For more information about search, see [Trace Explorer Query Syntax][23].
+
+For example, to filter on traces with the tag `#env:prod` or the tag `#test`, use the query `"env:prod" OR test`. Click into individual services to expand associated spans, and select spans to view info, errors, and related logs. You can also open traces from services and logs.
+
+## Logs
+
+{{< img src="service_management/mobile/logs_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Logs page">}}
+
+On the Logs page, you can view and search all of the logs that you have access to in your Datadog org. You can narrow the list through saved views or query filters. For more information about search, see [Log Search Syntax][29].
+
+You are also able to group by log patterns and select different log attributes for clustering or grouping results. For more information about log patterns, see [Grouping Logs Into Patterns][28].
+
+## Services
+
+{{< img src="service_management/mobile/services_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Services page">}}
+
+On the Services page, you can view, search and filter all services that you have access to in your Datadog account from the Datadog Mobile App to ensure the health of your service from anywhere. You can also view recent deployments, resources, SLOs and monitors associated with that service. For more infromation about investigative tools for your services, see [manage Software Catalog][30].
+
 ## Incidents
 
 {{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
@@ -90,17 +112,6 @@ On the Incidents page, you can view, search and filter all incidents that you ha
 2. Click the "+" button in the top right corner.
 3. Give your incident a title, severity, and commander.
 
-### Receive push notifications for incidents
-
-1. Navigate to **Account**.
-2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
-5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
-6. Select your mobile device and click **Save**.
-
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
-
 ## Widgets
 
 ### Open Incidents widget
@@ -109,7 +120,7 @@ For more information on configuring Incident Notification Rules, see the [Incide
 
 View your [open incidents][12] from your mobile home screen with Datadog widgets.
 
-To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app. 
+To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app.
 
 Also, you can customize your Open Incidents widgets by filtering on:
 
@@ -174,7 +185,7 @@ Also, you can customize your Open Incidents widgets by filtering on:
 
 #### Display Open Incidents from multiple organizations
 
-You can display open incidents from multiple organizations on your mobile home screen. 
+You can display open incidents from multiple organizations on your mobile home screen.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -189,7 +200,7 @@ You can display open incidents from multiple organizations on your mobile home s
 2. From the configuration screen, tap **Organization**.
 3. Select a new organization (you may need to sign in).
 4. Size the widget to fit your preference.
-5. Tap **Save** or **Apply**. 
+5. Tap **Save** or **Apply**.
 
 
 {{% /tab %}}
@@ -263,8 +274,8 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press on the widget to configure.
 - Tap "Edit Widget."
 - Tap "Choose" next to the SLO label to choose an SLO to track.
-- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe. 
-- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped. 
+- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe.
+- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped.
 - Tap out of the widget to validate your selection and exit the configuration screen.
 
 
@@ -284,7 +295,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 
 #### Display SLOs from multiple organizations
 
-You can display SLOs from multiple organizations on your mobile home screen. 
+You can display SLOs from multiple organizations on your mobile home screen.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -299,7 +310,7 @@ All organizations you've logged into are displayed in the configuration screen. 
 - From the configuration screen, tap "Organization".
 - Select a new organization (You might need to sign in).
 - Size the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- Tap "Save" or "Apply".
 
 
 {{% /tab %}}
@@ -382,7 +393,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 
 #### Display Monitors from multiple organizations
 
-You can display Monitors from multiple organizations within the same widget. 
+You can display Monitors from multiple organizations within the same widget.
 
 {{< tabs >}}
 {{% tab "iOS" %}}
@@ -397,7 +408,7 @@ All organizations you've logged-in are displayed in the configuration screen. If
 - From the configuration screen, tap "Organization".
 - Select a new organization (you might need to sign in).
 - Edit the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- Tap "Save" or "Apply".
 
 
 {{% /tab %}}
@@ -419,6 +430,28 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Notifications
+
+The mobile app is able to send out regular as well as critical notifications. Critical notifications can circumvent your Do Not Disturb (DnD) mode, but you must **explicitly** grant Datadog permission to do so on your device. Critical notifications are only supported in the context of [Datadog On-Call][24].
+
+### Push Notifications for On-Call
+To set up your mobile device for On-Call, follow [this guide][25]. After you've set up your mobile device, navigate to your [On-Call profile][26] and select the device in your notification preferences.
+
+### Push Notifications for incidents
+To stay up to date on new and ongoing incidents, Incident Management allows you to receive push notifications using [Incident Notification Rules][13]. To receive push notifications:
+
+1. In the Datadog mobile app, navigate to **Account**.
+2. Click **Notifications**.
+3. Select the toggle for **Enable Notifications**.
+4. In Datadog, navigate to [Incident Notification Rules][13].
+5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
+6. Select your mobile device and click **Save**.
+
+For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
+
+### Push notifications from Workflow Automation
+It is also possible to trigger push notifications directly from Workflows using the [Send mobile push notification message action][27]. Provide the target user and the body of the push notification. Before the user can receive push notifications, they must log into the Datadog Mobile application and allow the Datadog mobile application to receive push notifications.
 
 ## Quick actions
 
@@ -465,6 +498,18 @@ For more information about Handoff, read the [Apple Handoff documentation][19].
 
 Switch organizations or log out from the Account page.
 
+## Frequently Asked Question
+### How do I remain logged into the mobile app?
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+
+### Will I still receive notifications if I am automatically signed out?
+If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+
+**Note**: If you manually log out from the app, you will stop receiving notifications.
+
+### Why am I not receiving notifications?
+Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
 ## Troubleshooting
 
 For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
@@ -495,3 +540,11 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [20]: /help/
 [21]: https://chat.datadoghq.com/
 [22]: https://datadoghq.slack.com/archives/C0114D5EHNG
+[23]: /tracing/trace_explorer/query_syntax/
+[24]: /service_management/on-call
+[25]: /service_management/on-call/guides/configure-mobile-device-for-on-call/?tab=ios
+[26]: https://app.datadoghq.com/on-call/profile
+[27]: https://app.datadoghq.com/workflow/action-catalog#/com.datadoghq.dd.push_notification/com.datadoghq.dd.push_notification.sendPushNotification
+[28]: https://docs.datadoghq.com/logs/explorer/analytics/patterns/
+[29]: https://docs.datadoghq.com/logs/explorer/search_syntax/
+[30]: https://docs.datadoghq.com/software_catalog/manage/

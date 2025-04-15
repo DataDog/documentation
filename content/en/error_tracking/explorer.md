@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview-2.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 The Error Tracking Explorer allows you to view, filter, and investigate issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
@@ -30,11 +30,23 @@ Each item listed in the Error Tracking Explorer is an issue that contains high-l
 
 The time range appears on the top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Change the time range by selecting a preset range from the dropdown.
 
+### Sorting
+
+Order issues in the list using one of these options:
+-   **Relevance** combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
+-   **Count** sorts issues based on the total count of occurrences over the selected time range.
+-   **Newest** orders issues by when they were first seen.
+-   **Impacted Sessions** sorts issues by the number of impacted [RUM sessions][4].
+
 ### Facets
 
-{{< img src="real_user_monitoring/error_tracking/facets_panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
+{{< img src="/error_tracking/facets-panel.png" alt="Error Tracking Facets" style="width:100%;" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
+
+Click the Edit icon to see the list of available facets that you can show or hide from view.
+
+{{< img src="/error_tracking/error-tracking-facets.png" alt="Click the pencil icon to hide or show available Error Tracking facets from view." style="width:100%;" >}}
 
 ## Inspect an issue
 
@@ -56,7 +68,11 @@ Seeing a new issue as soon as it happens gives you the chance to proactively ide
 
 Each event generated is tagged with the version, the service, and the environment so that you have a fine-grained control over issues you want to be alerted for. You can directly export your search query from the explorer to create an event monitor on the related scope:
 
-{{< img src="real_user_monitoring/error_tracking/export_to_monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
+{{< img src="/error_tracking/create-monitor.mp4" alt="Export your search query to an Error Tracking monitor" video=true >}}
+
+## Suspected Cause
+
+[Suspected Cause][3] enables quicker filtering and prioritization of errors, empowering teams to address potential root causes more effectively.
 
 ## Further Reading
 
@@ -64,3 +80,5 @@ Each event generated is tagged with the version, the service, and the environmen
 
 [1]: /events
 [2]: /monitors/types/event/
+[3]: /error_tracking/suspected_causes
+[4]: /real_user_monitoring/explorer/search/#event-types

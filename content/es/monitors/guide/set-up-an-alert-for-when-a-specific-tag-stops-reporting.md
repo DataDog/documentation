@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: Documentación
   text: Configurar las notificaciones de tu monitor
-kind: Guía
 title: Configurar una alerta para cuando una etiqueta (tag) específica deja de informar
 ---
 

@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
+  - link: "https://www.datadoghq.com/blog/unit-economics-ccm/"
+    tag: "Blog"
+    text: "Monitor unit economics with Datadog Cloud Cost Management"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -43,9 +46,9 @@ cascade:
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.
 
-{{< img src="cloud_cost/overview_2.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Overview page in Datadog" style="width:100%;" >}}
+{{< img src="cloud_cost/summary.png" alt="Gain insights into all of your cloud provider's cost and usage on the Cloud Costs Summary page in Datadog" style="width:100%;" >}}
 
-Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
+Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Explorer** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 
 ## Setup
 
@@ -100,7 +103,7 @@ Use [Container Cost Allocation metrics][4] to discover costs associated with clu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cost/analytics
+[1]: https://app.datadoghq.com/cost/explorer
 [2]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [3]: /monitors/types/cloud_cost/
 [4]: /cloud_cost_management/container_cost_allocation

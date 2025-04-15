@@ -33,7 +33,7 @@ Set up tracing on AWS CodePipeline to collect data about pipeline executions, an
 |---|---|---|
 | [Partial retries][14] | Partial pipelines | View partially retried pipeline executions. |
 | *[Running pipelines][15] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
-| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#enable-log-correlation). |
+| **Logs correlation | Logs correlation	| Correlate pipeline and job spans to logs and enable [job log correlation](#collect-job-logs). |
 | [Approval wait time][17] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
 | [Custom spans][18] | Custom spans | Configure custom spans for your pipelines. |
 
@@ -112,7 +112,7 @@ The event pattern sets up the integration only for the `first-pipeline` and `sec
 
 ### Correlate pipelines with tests
 
-If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
+If you are using [Test Optimization][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests with the related pipeline inside Datadog Pipeline Visibility. For instructions, refer to [Add the pipeline execution ID](#add-the-pipeline-execution-id-as-an-environment-variable).
 
 ### Collect job logs
 

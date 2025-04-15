@@ -15,6 +15,9 @@ further_reading:
 - link: /logs/guide/
   tag: ガイド
   text: Datadog を使用したロギングに関する追加ガイド
+- link: https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/
+  tag: Architecture Center
+  text: Datadog を使用したログ管理のインデックス戦略ガイド
 title: ログコンフィギュレーション
 ---
 

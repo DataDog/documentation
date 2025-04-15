@@ -8,7 +8,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in private beta.
+DDSQL is in Preview.
 {{< /callout >}}
 
 ## Aggregation functions
@@ -129,7 +129,7 @@ These functions return one value per row.
 | json_extract_path_text(text json, text path…) | text | Extracts the JSON sub-object in JSON as text, defined by the path. Its behavior is equivalent to the [postgres function with the same name][2]. For example, `json_extract_path_text(col, ‘forest')` returns the value of the key `forest` for each JSON object in `col`. See the example below for a JSON array syntax.|
 | json_extract_path(text json, text path…) | json | Same functionality as `json_extract_path_text`, but returns a column of JSON type instead of text type.|
 | json_build_object(key1 text, value1 json/text/int/float, key2 text, value2 json/text/int/float, … ) | json | Builds a JSON object based on the parameters passed in. The parameters to the function are the keys/values of the JSON object being built, alternating between key and value mapped to each key.|
-| row_to_json(table) | json | Returns a JSON representation of each row in a table as a JSON value. The JSON keys are the column names, and the values are the values under each row at each column. <br><br> <strong>Note</strong>: row_to_json takes in a table name, NOT a column. |
+| row_to_json(table) | json | Returns a JSON representation of each row in a table as a JSON value. The JSON keys are the column names, and the values are the values under each row at each column. <br><br> <strong>Note</strong>: row_to_json takes in a table name, NOT a column, for example, `SELECT row_to_json(<table>) FROM <table>`. |
 
 #### JSON array
   Return the value of the key `forest` in the 0th element in a JSON array for each JSON object or row in `col`.

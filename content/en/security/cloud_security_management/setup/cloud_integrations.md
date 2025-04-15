@@ -37,23 +37,15 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 ## Disable resource scanning
 
-To disable resource scanning for your cloud accounts, navigate to either the [**CSM Setup**][1] page or the cloud account integration page. Disabling resource scanning does not affect your ability to access historical findings. You can still review data from the past 15 months.
+<div class="alert alert-info">You can access historical findings from the past 15 months even if resource scanning is disabled.</div>
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-### CSM Setup page
-
 1. On the [**Cloud Security Management Setup**][1] page, click **Cloud Integrations**.
 1. Expand the **AWS** section.
-1. To stop resource collection for an account, click the Edit button and switch the **Enable Resource Scanning** toggle to the off position.
+1. To stop resource collection for an account, click the **Edit** button ({{< img src="security/csm/setup/edit-button.png" inline="true" style="width:24px;">}}) and switch the **Enable Resource Scanning** toggle to the off position.
 1. Click **Done**.
-
-### Amazon Web Services integration page
-
-1. On the [**Amazon Web Services Integration**][2] page, select an AWS account.
-1. On the **Resource Collection** tab, clear the **Enable Cloud Security Management** checkbox.
-1. Click Save.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
@@ -61,18 +53,10 @@ To disable resource scanning for your cloud accounts, navigate to either the [**
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-### CSM Setup page
-
 1. On the [**Cloud Security Management Setup**][1] page, click **Cloud Integrations**.
 1. Expand the **Azure** section.
 1. To stop resource collection for a subscription, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
-
-### Azure integration page
-
-1. On the [**Azure Integration**][2] page, select an app registration.
-1. On the **Resource Collection** tab, clear the **Enable Cloud Security Management** checkbox.
-1. Click Save.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/azure
@@ -80,18 +64,10 @@ To disable resource scanning for your cloud accounts, navigate to either the [**
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-### CSM Setup page
-
 1. On the [**Cloud Security Management Setup**][1] page, click **Cloud Integrations**.
 1. Expand the **GCP** section.
 1. To stop resource collection for a project, switch the **Resource Scanning** toggle to the off position.
 1. Click **Done**.
-
-### Google Cloud Platform integration page
-
-1. On the [**Google Cloud Platform Integration**][2] page, select a Google Cloud account.
-1. On the **Resource Collection** tab, clear the **Enable Cloud Security Management** checkbox.
-1. Click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 [2]: https://app.datadoghq.com/integrations/google-cloud-platform

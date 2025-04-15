@@ -4,14 +4,14 @@ aliases:
 title: 컨테이너 레지스트리 변경하기
 ---
 
-Datadog은 Google의 gcr.io, AWS의 ECR 및 Docker Hub에 컨테이너 이미지를 게시합니다.
+Datadog은 Google의 gcr.io, Azure의 ACR, AWS의 ECR 및 Docker Hub에 컨테이너 이미지를 게시합니다.
 
-| dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            |
-|--------------------------------------------|-----------------------------------------------------|-----------------------------------------------------------|
-| datadog/agent                              | gcr.io/datadoghq/agent                              | public.ecr.aws/datadog/agent                              |
-| datadog/cluster-agent                      | gcr.io/datadoghq/cluster-agent                      | public.ecr.aws/datadog/cluster-agent                      |
-| datadog/dogstatsd                          | gcr.io/datadoghq/dogstatsd                          | public.ecr.aws/datadog/dogstatsd                          |
-| datadog/synthetics-private-location-worker | gcr.io/datadoghq/synthetics-private-location-worker | public.ecr.aws/datadog/synthetics-private-location-worker |
+| dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            | datadoghq.azurecr.io                                    |
+| ------------------------------------------ | --------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------- |
+| datadog/agent                              | gcr.io/datadoghq/agent                              | public.ecr.aws/datadog/agent                              | datadoghq.azurecr.io/agent                              |
+| datadog/cluster-agent                      | gcr.io/datadoghq/cluster-agent                      | public.ecr.aws/datadog/cluster-agent                      | datadoghq.azurecr.io/cluster-agent                      |
+| datadog/dogstatsd                          | gcr.io/datadoghq/dogstatsd                          | public.ecr.aws/datadog/dogstatsd                          | datadoghq.azurecr.io/dogstatsd                          |
+| datadog/synthetics-private-location-worker | gcr.io/datadoghq/synthetics-private-location-worker | public.ecr.aws/datadog/synthetics-private-location-worker | datadoghq.azurecr.io/synthetics-private-location-worker |
 
 
 GCR 또는 ECR 레지스트리에서 가져오는 것은 Docker Hub에서 가져오는 것과 동일하게 작동합니다(Notary 제외). 동일한 명령(다른 파라미터 포함)을 사용하여 동일한 이미지를 얻을 수 있습니다.

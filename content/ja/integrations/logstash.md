@@ -23,7 +23,7 @@ author:
   support_email: ervansetiawan@gmail.com
 categories:
 - log collection
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md
 display_on_public_website: true
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: logstash
 integration_id: logstash
 integration_title: Logstash
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 manifest_version: 2.0.0
 name: logstash

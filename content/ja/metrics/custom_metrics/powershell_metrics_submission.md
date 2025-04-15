@@ -4,6 +4,10 @@ aliases:
 - /ja/developers/faq/submitting-metrics-via-powershell
 - /ja/developers/metrics/powershell_metrics_submission/
 - /ja/metrics/powershell_metrics_submission
+further_reading:
+- link: /api/latest/metrics/
+  tag: API
+  text: メトリクス API エンドポイント
 title: 'メトリクス送信: PowerShell'
 ---
 
@@ -40,7 +44,7 @@ function postMetric($metric,$tags) {
 $app_key = "<DATADOG_アプリケーションキー>" #有効なアプリキーを指定します
 $api_key = "<DATADOG_API_キー>" #有効な API キーを指定します
 $url_base = "https://app.datadoghq.com/"
-$url_signature = "api/v1/series"
+$url_signature = "api/v2/series"
 $url = $url_base + $url_signature + "?api_key=$api_key" + "&" + "application_key=$app_key"
 $tags = "[env:test]" #オプションのパラメーター
 
@@ -131,7 +135,7 @@ $http_request.responseText
     ```powershell
     $http_method = "POST"
 
-    $url_signature = "api/v1/series"
+    $url_signature = "api/v2/series"
 
     $currenttime = (Get-Date -date ((get-date).ToUniversalTime()) -UFormat %s) -Replace("[,\.]\d*", "")
 
@@ -149,9 +153,13 @@ $http_request.responseText
 
 [その他のコード例については、ncracker/dd_metric GitHub リポジトリを参照してください][6]。
 
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[4]: /ja/api/v1/hosts/
-[5]: /ja/api/v1/metrics/
+[4]: /ja/api/latest/hosts/
+[5]: /ja/api/latest/metrics/
 [6]: https://github.com/ncracker/dd_metric

@@ -7,7 +7,7 @@ categories:
 - cloud
 - log collection
 - security
-custom_kind: integración
+custom_kind: integration
 dependencies: []
 description: Alerta sobre actividad sospechosa en una cuenta AWS.
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudtrail/

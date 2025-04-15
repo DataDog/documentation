@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logs
 aliases:
 - /ja/guides/logs/
 - /ja/en/logs
@@ -45,8 +48,8 @@ further_reading:
 title: ログ管理
 ---
 
-{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
-  Join an introductory or intermediate enablement session to learn how Datadog Log Management unifies logs, metrics, and traces in a single view, giving you rich context for analyzing log data.
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Logs">}}
+  入門編または中級編のイネーブルメントセッションに参加して、Datadog Log Management がどのようにしてログ、メトリクス、トレースを単一のビューに統合し、ログデータの分析に役立つ豊富なコンテキストを提供するかを学びましょう。
 {{< /learning-center-callout >}}
 
 ## 概要

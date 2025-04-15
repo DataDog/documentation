@@ -1,0 +1,4 @@
+Vous pouvez aussi cliquer sur le bouton pour activer TLS. Si vous activez TLS, les fichiers de certificats et de clés suivants sont requis :
+- `Server Certificate Path` : le chemin d'accès au fichier du certificat qui a été signé par votre fichier racine Certificate Authority (CA) en DER ou PEM (X.509).
+- `CA Certificate Path` : le chemin d'accès au fichier du certificat qui est votre fichier racine Certificate Authority (CA) en DER ou PEM (X.509).
+- `Private Key Path` : le chemin d'accès au fichier de clé privée `.key` qui appartient au chemin d'accès du certificat de votre serveur au format DER ou PEM (PKCS#8).

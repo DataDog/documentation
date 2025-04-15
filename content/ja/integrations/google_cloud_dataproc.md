@@ -3,7 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Google Cloud Dataproc のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_dataproc/
@@ -24,6 +24,10 @@ version: '1.0'
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
+<div class="alert alert-info">
+<a href="https://docs.datadoghq.com/data_jobs/">Data Jobs Monitoring</a> は、Dataproc クラスター上の Spark ジョブの観測、トラブルシューティング、コスト最適化を支援します。
+</div>
+
 Google Cloud Dataproc は、Apache Spark と Apache Hadoop のクラスターを簡単かつコスト効率よく実行するための高速で使いやすいフルマネージド型のクラウドサービスです。
 
 Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Dataproc からメトリクスを収集できます。
@@ -34,7 +38,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-### 収集データ
+### ログ収集
 
 Google Cloud Dataproc のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
 

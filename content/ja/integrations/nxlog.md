@@ -28,6 +28,10 @@ NXLog を構成して、ホスト、コンテナ、サービスからログを�
 
 ### ログの収集
 
+{{< site-region region="gov,us5,ap1" >}}
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、TCP エンドポイントはサポートされていません。</div>
+{{< /site-region >}}
+
 {{< tabs >}}
 {{% tab "Datadog US site" %}}
 

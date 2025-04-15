@@ -55,3 +55,10 @@ hugo defaults to environment development with hugo server
     {{ end }}
 
 {{ end }}
+
+{{- $tooltipOpts := dict "targetPath" "static/tooltip.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
+{{- $tooltipJs := resources.Get "scripts/components/tooltip.js" | js.Build $tooltipOpts -}}
+{{- if $isProd -}}
+  {{- $tooltipJs = $tooltipJs | fingerprint "sha512" -}}
+{{- end -}}
+<script type="text/javascript" src="{{ $tooltipJs.Permalink }}" {{ if $isProd }} integrity="{{ $tooltipJs.Data.Integrity }}" {{ end }}></script>

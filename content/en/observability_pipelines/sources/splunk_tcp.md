@@ -1,9 +1,9 @@
 ---
-title: Splunk Heavy and Universal Forwarders (TCP) Source
+title: Splunk Heavy or Universal Forwarders (TCP) Source
 disable_toc: false
 ---
 
-Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to you your Splunk forwarders. Select and set up this source when you [set up a pipeline][1].
+Use Observability Pipelines' Splunk Heavy and Universal Forwards (TCP) source to receive logs sent to your Splunk forwarders. Select and set up this source when you [set up a pipeline][1].
 
 ## Prerequisites
 
