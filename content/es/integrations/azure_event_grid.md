@@ -22,7 +22,7 @@ short_description: Rastrea las métricas principales de Azure Event Grid.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Event Grid es un servicio de enrutamiento de eventos inteligente y totalmente gestionado que permite un consumo uniforme de eventos utilizando un modelo de publicación y suscripción.
@@ -33,7 +33,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure E
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -45,13 +45,13 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Event Grid no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Event Grid no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_grid/azure_event_grid_metadata.csv
