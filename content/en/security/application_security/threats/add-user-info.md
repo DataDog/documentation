@@ -659,7 +659,7 @@ const login = 'user-id' // the string used by the user to log in
 const userExists = true // if the user login exists in database for example
 const metadata = { 'key': 'value' } // you can add arbitrary fields
 
-// Log a failure user authentication event
+// Log a failed user authentication event
 // userExists is optional and it is defaulted to false
 // metadata is optional
 tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
@@ -688,7 +688,7 @@ The new methods in `eventTrackingV2` introduce a more intuitive parameter order 
 2. The user object/ID is now optional in success events and has been removed from failure events.
 3. Metadata has been simplified and no longer requires the `usr.login` field.
 
-In the examples above, the comented code no longer necessary.
+In the examples above, the commented code is no longer necessary.
 
 {{< tabs >}}
 {{% tab "Login success" %}}
