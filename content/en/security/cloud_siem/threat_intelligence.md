@@ -17,7 +17,7 @@ Cloud SIEM supports enriching and searching logs with threat intelligence indica
 
 ### Storing indicators of compromise in reference tables
 
-Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, hash, and so on) and requires the following columns:
+Threat intelligence is supported in the CSV format, and requires a table for each Indicator type (for example, IP address, domain, and so on) and requires the following columns:
 
 #### CSV structure for IP address
 
@@ -48,7 +48,7 @@ ip_address,additional_data,category,intention,source
 192.0.2.3,"{""ref"":""hxxp://example.org""}",scanner,suspicious,"{""name"":""internal_security_team"", ""url"":""https://teamwiki.example.org""}"
 ```
 
-### Uploading and enabling your own threat intel
+### Uploading and enabling your own threat intelligence
 
 Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from Amazon S3, Azure storage, or Google Cloud storage.
 
@@ -58,7 +58,7 @@ Datadog supports creating reference tables through a manual upload, or by period
 
 On a new [reference table][2] page:
 
-1. Name the table. The table name is referenced in the Threat Intel setting.
+1. Name the table. The table name is referenced in the Threat Intelligence setting.
 1. Upload a local CSV or import a CSV from a cloud storage bucket. The file is normalized and validated.
 1. Preview the table schema and choose the IOC column as the Primary Key.
 1. Save the table.
@@ -93,7 +93,7 @@ To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
 1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
-After applying a Reference Table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response.
+After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response. The threat intelligence reference table can used by more than one security product.
 
 ## Further reading
 
