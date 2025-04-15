@@ -41,6 +41,8 @@ Select your language to see instructions for configuring the OpenTelemetry SDK t
 {{< tabs >}}
 {{% tab "Java" %}}
 
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+
 #### Automatic instrumentation
 
 If you use [OpenTelemetry automatic instrumentation][3] for Java applications, runtime metrics are enabled by default.
@@ -56,11 +58,17 @@ If you use [OpenTelemetry manual instrumentation][4], follow the guides for your
 [5]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java8/library
 [6]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-telemetry/runtime-telemetry-java17/library
 
+</div>
+
 {{% /tab %}}
 
 {{% tab "Go" %}}
 
+<div class="alert alert-light language-specific-content border border-secondary rounded">
+
 OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime metrics, see the documentation for the [runtime package][4].
+
+</div>
 
 [3]: https://opentelemetry.io/docs/instrumentation/go/manual/
 [4]: https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime
@@ -68,6 +76,8 @@ OpenTelemetry Go applications are [instrumented manually][3]. To enable runtime 
 {{% /tab %}}
 
 {{% tab ".NET" %}}
+
+<div class="alert alert-light language-specific-content border border-secondary rounded">
 
 <div class="alert alert-warning">The minimum supported version of the .NET OpenTelemetry SDK is <a href="https://github.com/open-telemetry/opentelemetry-dotnet/releases/tag/core-1.5.0">1.5.0</a></div>
 
@@ -91,6 +101,8 @@ OTEL_METRIC_EXPORT_INTERVAL=10000
 [4]: https://opentelemetry.io/docs/instrumentation/net/manual/
 [5]: https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime
 [7]: https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/#periodic-exporting-metricreader
+
+</div>
 
 {{% /tab %}}
 
