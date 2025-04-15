@@ -1,8 +1,8 @@
 ---
 categories:
 - azure
-- cloud
-- 데이터 스토어
+- 클라우드
+- 데이터 저장소
 custom_kind: 통합
 dependencies: []
 description: Azure Blob Storage의 핵심 메트릭 추적하기
@@ -35,7 +35,7 @@ Azure Blob Storage는 클라우드용 Microsoft 개체 스토리지 솔루션입
 
 아직 설정하지 않았다면, 먼저 [Microsoft Azure 통합][1]을 설정하세요. 그 외 다른 설치 단계는 없습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "azure_blob_storage" >}}
