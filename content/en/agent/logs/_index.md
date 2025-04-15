@@ -169,6 +169,9 @@ logs:
       - env:<YOUR_ENV>
       - private_location:<YOUR_PRIVATE_LOCATION>
 ```
+
+### Verify the user running the Agent
+
 Since the Private Location installation folder is restricted to admin access, the Datadog Agent needs permission to access the log file. Follow these steps to verify the user running the Datadog Agent:
 
 1. Press the Windows key and `R`, and search for `Run`.
