@@ -32,11 +32,11 @@ Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrast
 
 ## Review identity risks
 
-Review your organization's active identity risks on the [Identity Risks Explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
+Review your organization's active identity risks in the [Identity Risks explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
 CSM Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
-{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Findings page" width="100%">}}
 
 ## Remediate identity risks
 
