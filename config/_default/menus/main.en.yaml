@@ -155,7 +155,7 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 17
-    - name: Application Security Management
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
@@ -2034,7 +2034,7 @@ menu:
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
       weight: 402
-    - name: Application Security Management
+    - name: App and API Protection
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
@@ -6208,7 +6208,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
-    - name: Threats
+    - name: Workload Protection
       url: security/threats/
       parent: csm
       identifier: cloud_workload_security
@@ -6363,7 +6363,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
-    - name: Application Security Management
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec
@@ -6661,7 +6661,7 @@ menu:
       pre: synthetics
       identifier: synthetics
       parent: digital_experience_heading
-      weight: 50000
+      weight: 30000
     - name: API Testing
       url: synthetics/api_tests/
       parent: synthetics
@@ -6887,7 +6887,7 @@ menu:
       pre: continuous-testing
       identifier: continuous_testing
       parent: digital_experience_heading
-      weight: 60000
+      weight: 40000
     - name: Local and Staging Environments
       url: /continuous_testing/environments
       parent: continuous_testing
@@ -6954,12 +6954,12 @@ menu:
       identifier: continuous_testing_settings
       weight: 3
     - name: Results Explorer
-      url: continuous_testing/explorer/
+      url: continuous_testing/results_explorer/
       parent: continuous_testing
       identifier: continuous_testing_results_explorer
       weight: 4
     - name: Metrics
-      url: synthetics/metrics/
+      url: continuous_testing/metrics/
       parent: continuous_testing
       identifier: continuous_testing_metrics
       weight: 5
@@ -6973,7 +6973,7 @@ menu:
       pre: rum
       identifier: rum
       parent: digital_experience_heading
-      weight: 40000
+      weight: 20000
     - name: Browser Monitoring
       url: real_user_monitoring/browser/
       parent: rum
@@ -7560,7 +7560,7 @@ menu:
       identifier: rum_correlate_with_other_telemetry_apm
       weight: 702
     - name: Correlate Synthetics with RUM
-      url: synthetics/guide/explore-rum-through-synthetics/
+      url: real_user_monitoring/correlate_with_other_telemetry/synthetics/
       parent: rum_correlate_with_other_telemetry
       identifier: rum_correlate_with_other_telemetry_synthetics
       weight: 703
