@@ -130,7 +130,7 @@ The OpenTelemetry runtime metrics have the following prefixes based on their sou
 | [OTel Collector Datadog Exporter][100] | `otel.process.runtime.*` |
 | [Datadog Agent OTLP Ingest][101] | `process.runtime.*` |
 
-The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry counterpart.
+The following tables list the Datadog runtime metrics that are supported through OpenTelemetry mapping. "N/A" indicates that there is no OpenTelemetry equivalent metric available.
 
 <div class="alert alert-warning"> OpenTelemetry runtime metrics are mapped to Datadog by metric name. Do not rename host metrics for OpenTelemetry runtime metrics as this breaks the mapping.</div>
 
@@ -140,7 +140,7 @@ The following tables list the Datadog runtime metrics that are supported through
 {{< tabs >}}
 {{% tab "Java" %}}
 
-| Datadog metric | Description |  OpenTelemetry counterpart |
+| Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
 | `jvm.heap_memory` | The total Java heap memory used. | `process.runtime.jvm.memory.usage` <br> `jvm.memory.used` |
 | `jvm.heap_memory_committed` | The total Java heap memory committed to be used. | `process.runtime.jvm.memory.committed` <br> `jvm.memory.committed` |
@@ -176,7 +176,7 @@ The following tables list the Datadog runtime metrics that are supported through
 
 {{% tab "Go" %}}
 
-| Datadog metric | Description |  OpenTelemetry counterpart |
+| Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
 | `runtime.go.num_goroutine` | Number of goroutines spawned. | `process.runtime.go.goroutines` |
 | `runtime.go.num_cgo_call` | Number of CGO calls made. |`process.runtime.go.cgo.calls` |
@@ -218,7 +218,7 @@ The following tables list the Datadog runtime metrics that are supported through
 
 {{% tab ".NET" %}}
 
-| Datadog metric | Description |  OpenTelemetry counterpart |
+| Datadog metric | Description |  OpenTelemetry metric |
 | --- | --- | --- |
 | `runtime.dotnet.threads.contention_count` | The number of times a thread stopped to wait on a lock. | `process.runtime.dotnet.`<br>`monitor.lock_contention.count` |
 | `runtime.dotnet.exceptions.count` | The number of first-chance exceptions. | `process.runtime.dotnet.`<br>`exceptions.count` |
