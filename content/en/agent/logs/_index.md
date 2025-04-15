@@ -187,8 +187,6 @@ Follow these steps to grant permission to  the user running the Datadog Agent
 4. Click `Edit` and add `ddagentuser`.
 5. Grant the necessary permissions.
 6. Restart the Datadog Agent through the Services screen or command line to apply the changes and begin sending logs to Datadog.
-
-Finally, restart the Datadog Agent either through the Services screen or command line to apply the changes and begin sending logs to Datadog.
 {{% /tab %}}
 {{< /tabs >}}
 
