@@ -624,7 +624,9 @@ The following examples show how to track login events or custom events (using si
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events. In dd-trace-js v5.48.0, new methods were introduced in the `eventTrackingV2` namespace while maintaining the existing ones. Note that the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure` respectively.
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. In dd-trace-js v5.48.0, new methods were introduced under the `eventTrackingV2` namespace, while the existing ones were retained for compatibility.
+
+Note that the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are now deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -682,9 +684,11 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
 
-1. The login identifier (email, username) is now the first parameter and mandatory
-2. The user object/ID is now optional in success events and removed from failure events
-3. Metadata is simplified and no longer requires the `usr.login` field
+1. The login identifier (email, username) is now the first parameter and is mandatory.
+2. The user object/ID is now optional in success events and has been removed from failure events.
+3. Metadata has been simplified and no longer requires the `usr.login` field.
+
+In the examples above, the comented code no longer necessary.
 
 {{< tabs >}}
 {{% tab "Login success" %}}
@@ -695,12 +699,12 @@ const tracer = require('dd-trace')
 const user = {
   id: 'user-id',
   email: 'user@email.com'
-} // same as before, but now user is optional
+} // same as before, but now the object is optional
 
 const login = 'user@email.com' // new mandatory argument
 
 const metadata = { 
-//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main parameter
+//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main argument
   'key': 'value'
 }
 
@@ -714,10 +718,10 @@ const tracer = require('dd-trace')
 
 // in a controller with the deprecated method:
 // const userId = 'user-id' // not necessary anymore
-const login = 'user@email.com'
+const login = 'user@email.com' // new mandatory argument
 const userExists = true
 const metadata = { 
-//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the main parameter
+//  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the first argument
   'key': 'value'
 }
 
