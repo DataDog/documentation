@@ -1197,6 +1197,30 @@
     "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "GetMonitorNotificationRules": {
+    "description": "Returns a list of all monitor notification rules.",
+    "summary": "Get all monitor notification rules"
+  },
+  "CreateMonitorNotificationRule": {
+    "description": "Creates a monitor notification rule.",
+    "summary": "Create a monitor notification rule",
+    "request_description": "Request body to create a monitor notification rule.",
+    "request_schema_description": "Request for creating a monitor notification rule."
+  },
+  "DeleteMonitorNotificationRule": {
+    "description": "Deletes a monitor notification rule by `rule_id`.",
+    "summary": "Delete a monitor notification rule"
+  },
+  "GetMonitorNotificationRule": {
+    "description": "Returns a monitor notification rule by `rule_id`.",
+    "summary": "Get a monitor notification rule"
+  },
+  "UpdateMonitorNotificationRule": {
+    "description": "Updates a monitor notification rule by `rule_id`.",
+    "summary": "Update a monitor notification rule",
+    "request_description": "Request body to update the monitor notification rule.",
+    "request_schema_description": "Request for updating a monitor notification rule."
+  },
   "ListMonitorConfigPolicies": {
     "description": "Get all monitor configuration policies.",
     "summary": "Get all monitor configuration policies"
