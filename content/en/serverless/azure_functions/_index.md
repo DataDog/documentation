@@ -66,7 +66,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 1. **Install dependencies**. Download the Datadog JARs and deploy them with your function:
-   ```shell
+   ```bash
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    wget -O dd-serverless-compat-java-agent.jar 'https://dtdg.co/latest-serverless-compat-java-agent'
    ```
@@ -78,7 +78,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
 2. **Start the Datadog serverless compatibility layer and initialize the Java tracer**. Add the following `-javaagent` arguments to the JVM options.:
 
-   ```shell
+   ```bash
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
    ```
 
