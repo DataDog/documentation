@@ -30,7 +30,8 @@ By default, the Reliability Overview report aggregates data by service or team, 
 {{% dashboards/summary_score %}}
 
 ### Customize your dashboard
-Copy content here: https://docs.datadoghq.com/service_management/service_level_objectives/ootb_dashboard/#customize-your-slo-performance-summary-dashboard 
+
+{{% dashboards/customize_slo_perf_summary_db %}}
 
 ### Schedule reports
 You can set up scheduled reports for your stakeholders that will be delivered via Email or Slack on a recurring basis. Refer to the Scheduled Reports documentation for more information.
