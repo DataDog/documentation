@@ -7361,6 +7361,58 @@ menu:
           - ListOktaAccounts
         unstable: []
         order: 1
+    - name: On-Call
+      url: /api/latest/on-call/
+      identifier: on-call
+      generated: true
+    - name: Update on-call schedule
+      url: '#update-on-call-schedule'
+      identifier: on-call-update-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallSchedule
+        unstable: []
+        order: 4
+    - name: Get on-call schedule
+      url: '#get-on-call-schedule'
+      identifier: on-call-get-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallSchedule
+        unstable: []
+        order: 2
+    - name: Delete on-call schedule
+      url: '#delete-on-call-schedule'
+      identifier: on-call-delete-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallSchedule
+        unstable: []
+        order: 3
+    - name: Create on-call schedule
+      url: '#create-on-call-schedule'
+      identifier: on-call-create-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallSchedule
+        unstable: []
+        order: 1
     - name: Opsgenie Integration
       url: /api/latest/opsgenie-integration/
       identifier: opsgenie-integration
