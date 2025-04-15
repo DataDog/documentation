@@ -624,7 +624,7 @@ The following examples show how to track login events or custom events (using si
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events. In dd-trace-js v5.48.0, new methods were introduced while maintaining backward compatibility with the existing ones. Note that `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods.
+Starting in dd-trace-js v3.13.1, you can use the Node.js tracer's API to track user events. In dd-trace-js v5.48.0, new methods were introduced in the `eventTrackingV2` namespace while maintaining the existing ones. Note that the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure` respectively.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -695,7 +695,7 @@ const tracer = require('dd-trace')
 const user = {
   id: 'user-id',
   email: 'user@email.com'
-} // same as before, but now it is optional
+} // same as before, but now user is optional
 
 const login = 'user@email.com' // new mandatory argument
 
