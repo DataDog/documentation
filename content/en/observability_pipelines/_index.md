@@ -63,6 +63,8 @@ The Observability Pipelines UI provides a control plane to manage your Observabi
 
 ## Get started
 
+You must enable [Remote Configuration][15] to use Observability Pipelines.
+
 To set up a pipeline:
 
 1. Navigate to [Observability Pipelines][1].
@@ -156,3 +158,4 @@ After you create your pipeline, enable out-of-the box monitors to get alerted wh
 [12]: /observability_pipelines/set_up_pipelines/
 [13]: /observability_pipelines/advanced_configurations/
 [14]: /observability_pipelines/install_the_worker/
+[15]: /agent/remote_config/
