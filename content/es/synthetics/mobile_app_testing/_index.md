@@ -156,7 +156,7 @@ En este ejemplo, el test `aaa-aaa-aaa` se ejecuta con la versión de la aplicaci
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }

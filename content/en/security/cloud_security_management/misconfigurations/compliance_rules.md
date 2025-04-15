@@ -24,7 +24,7 @@ The compliance rules follow the same [conditional logic][2] as all Datadog Secur
 
 CSM Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
-- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an Amazon CloudFront distribution's configuration for encrypted status.
+- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [CloudFront distribution should be encrypted][3] rule assesses whether an Amazon CloudFront distribution enforces HTTPS to secure communications.
 - [**Infrastructure configuration**][5]: These checks evaluate containers and Kubernetes clusters using rules from CIS compliance benchmarks for Docker and Kubernetes, as well as Linux workloads against CIS host benchmarks for Ubuntu, Red Hat, and Amazon Linux.
 
 ## Explore default compliance rules
@@ -94,7 +94,7 @@ The rule deprecation process is as follows:
 
 [1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
-[3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
+[3]: https://docs.datadoghq.com/security/default_rules/aws-cloudfront-distribution-cloudfront-distribution-should-be-encrypted/
 [4]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [5]: /security/default_rules/#cat-posture-management-infra
 [7]: /security/notifications/

@@ -384,7 +384,7 @@ Additional metrics configuration file for JMX metrics collection. The Java Agent
 
 `dd.jmxfetch.check-period`
 : **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
+**Default**: `15000`<br>
 How often to send JMX metrics (in ms).
 
 `dd.jmxfetch.refresh-beans-period`

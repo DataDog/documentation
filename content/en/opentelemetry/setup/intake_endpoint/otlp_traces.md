@@ -15,7 +15,7 @@ further_reading:
     text: "OpenTelemetry Protocol Exporter"
 ---
 {{< callout header="false" btn_hidden="true">}}
-  The Datadog OTLP traces intake endpoint is in Preview.
+  The Datadog OTLP traces intake endpoint is in Preview. To request access, contact your account representative.
 {{< /callout >}}
 
 {{< site-region region="ap1,gov" >}}
@@ -51,6 +51,8 @@ export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endp
 export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-protocol=otlp,dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE}"
 ```
 
+<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
+
 #### Manual instrumentation
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
@@ -71,7 +73,7 @@ const exporter = new OTLPTraceExporter({
     'dd-protocol': 'otlp',
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
+    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
   },
 });
 ```
@@ -91,7 +93,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
+    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .build();
 ```
 
@@ -114,7 +116,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-protocol": "otlp",
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 		}),
 )
 ```
@@ -135,7 +137,7 @@ exporter = OTLPSpanExporter(
         "dd-protocol": "otlp",
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-        "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
+        "dd-otlp-source": "${YOUR_SITE}" # Replace with the specific value provided by Datadog for your organization
     },
 )
 ```
@@ -182,7 +184,7 @@ exporters:
       dd-protocol: "otlp"
       dd-api-key: ${env:DD_API_KEY}
       dd-otel-span-mapping: "{span_name_as_resource_name: false}"
-      dd-otlp-source: "${YOUR_SITE}", # Replace this with the correct site
+      dd-otlp-source: "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
 ...
 
 service:
@@ -200,7 +202,7 @@ service:
 If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates one of the following issues:
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP traces intake endpoint.
-   **Solution**: Verify that you are using an API key from an organization that is allowed to access the Datadog OTLP traces intake endpoint.
+   **Solution**: To request access, contact your account representative.
 - The `dd-otlp-source` header is missing or has an incorrect value.
    **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 - The endpoint URL is incorrect for your organization.

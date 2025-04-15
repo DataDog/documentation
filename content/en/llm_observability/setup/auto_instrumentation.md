@@ -193,6 +193,8 @@ Datadog's [LLM Observability Node.js SDK][4] provides integrations that automati
 |-----------------------------------------|--------------------|---------------------------------------------|
 | [OpenAI](#openai)                       | >= 3.0.0           | >= 4.49.0, >= 5.25.0 (CJS), >= 5.38.0 (ESM) |
 | [LangChain](#langchain)                 | >= 0.1.0           | >= 5.32.0 (CJS), >=5.38.0 (ESM)             |
+| [Amazon Bedrock](#amazon-bedrock)       | >= 3.422.0         | >= 5.35.0 (CJS), >=5.35.0 (ESM)             |
+| [VertexAI](#vertex-ai)                  | >= 1.0.0           | >= 5.44.0 (CJS), >=5.44.0 (ESM)             |
 
 In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -253,6 +255,10 @@ The OpenAI integration instruments the following methods, including streamed cal
 
 The LangChain integration provides automatic tracing for the [LangChain Node.js SDK's][9] LLM, chat model, chain, and OpenAI embeddings calls.
 
+### Traced methods
+
+The LangChain integration instruments the following methods:
+
 - [LLMs][10]:
   - `llm.invoke()`
 - [Chat models][11]
@@ -260,9 +266,35 @@ The LangChain integration provides automatic tracing for the [LangChain Node.js 
 - [Chains][12]
   - `chain.invoke()`
   - `chain.batch()`
-- [OpenAI embeddings][13]
+- [Embeddings][13]
   - `embeddings.embedQuery()`
   - `embeddings.embedDocuments()`
+
+## Amazon Bedrock
+
+The Amazon Bedrock integration provides automatic tracing for the Amazon Bedrock Runtime Node.js SDK's chat model calls (using [BedrockRuntimeClient][20]).
+
+### Traced methods
+
+The Amazon Bedrock integration instruments the following methods:
+
+- [Chat messages][16]:
+  - `InvokeModel`
+
+## Vertex AI
+
+The Vertex AI integration automatically traces content generation and chat message calls made through [Google's Vertex AI Node.js SDK][17].
+
+### Traced methods
+
+The Vertex AI integration instruments the following methods:
+
+- [Generating content][18]:
+  - `model.generateContent()`
+  - `model.generateContentStream()`
+- [Chat Messages][19]:
+  - `chat.sendMessage()`
+  - `chat.sendMessageStream()`
 
 ### ESM support
 
@@ -353,8 +385,14 @@ module.exports = {
 [10]: https://js.langchain.com/docs/integrations/llms/
 [11]: https://js.langchain.com/docs/concepts/chat_models
 [12]: https://js.langchain.com/docs/how_to/sequence/
-[13]: https://js.langchain.com/docs/integrations/text_embedding/openai/
+[13]: https://js.langchain.com/docs/integrations/text_embedding/
 [14]: /llm_observability/setup/sdk/nodejs/#command-line-setup
+[15]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
+[16]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
+[17]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest
+[18]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-text-prompt-requests
+[19]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/nodejs/latest#send-multiturn-chat-requests
+[20]: https://www.npmjs.com/package/@aws-sdk/client-bedrock-runtime
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -498,6 +498,18 @@ For more information about Handoff, read the [Apple Handoff documentation][19].
 
 Switch organizations or log out from the Account page.
 
+## Frequently Asked Question
+### How do I remain logged into the mobile app?
+Upon successful authentication to the mobile app, you will remain logged in for 90 days. Provided you are active during that 90 day period, the token will be refreshed.
+
+### Will I still receive notifications if I am automatically signed out?
+If you are automatically logged out due to inactivity during the 90 day token period, you will still be able to receive notifications and will be prompted to log in again.
+
+**Note**: If you manually log out from the app, you will stop receiving notifications.
+
+### Why am I not receiving notifications?
+Check that you have notifications enabled for the Datadog app in your device app settings. If you would like to ensure that notifications bypass Do Not Disturb, check that Critical Alerts is toggled on.
+
 ## Troubleshooting
 
 For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
