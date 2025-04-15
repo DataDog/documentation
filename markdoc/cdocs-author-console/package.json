@@ -7,7 +7,7 @@
     "dev": "yarn copy-mock-data && concurrently \"vite build --watch --emptyOutDir false\" \"yarn serve\"",
     "test": "vitest run",
     "serve": "live-server dist --port=8000",
-    "build": "tsc -b; vite build;",
+    "build": "tsc -b; vite build; yarn copy-mock-data",
     "prod": "yarn build && open dist/index.html",
     "lint": "eslint .",
     "preview": "vite preview",
