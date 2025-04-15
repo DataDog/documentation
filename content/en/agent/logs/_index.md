@@ -152,7 +152,9 @@ Finally, [restart the Agent][2].
 [2]: /agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Windows Private Location" %}}
-Follow these steps to send Windows Private Location logs to Datadog:
+Follow the steps in these sections to send Windows Private Location logs to Datadog:
+
+### Configure the Agent 
 
  1. Enable Agent log collection by setting `logs_enabled: true` in the Agent configuration file. 
 
