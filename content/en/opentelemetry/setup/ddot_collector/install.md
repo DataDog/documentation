@@ -882,7 +882,42 @@ env:
 
 [Unified service tagging][14] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-<!-- TODO: Placeholder for pod-service label enablement -->
+Unified service tagging ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
+
+In containerized environments, `env`, `service`, and `version` are set through the OpenTelemetry Resource Attributes environment variables or Kubernetes labels on your deployments and pods. The DDOT detects this tagging configuration and applies it to the data it collects from containers.
+
+To get the full range of unified service tagging, add **both** the environment variables and the deployment/pod labels:
+
+{{< code-block lang="yaml" filename="deployment.yaml" disable_copy="true" collapsible="true" >}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    tags.datadoghq.com/env: "<ENV>"
+    tags.datadoghq.com/service: "<SERVICE>"
+    tags.datadoghq.com/version: "<VERSION>"
+...
+template:
+  metadata:
+    labels:
+      tags.datadoghq.com/env: "<ENV>"
+      tags.datadoghq.com/service: "<SERVICE>"
+      tags.datadoghq.com/version: "<VERSION>"
+  containers:
+  -  ...
+     env:
+      - name: OTEL_SERVICE_NAME
+        value: "<SERVICE>"
+      - name: OTEL_RESOURCE_ATTRIBUTES
+        value: >-
+          service.name=$(OTEL_SERVICE_NAME),
+          service.version=<VERSION>,
+          deployment.environment.name=<ENV>
+{{< /code-block >}}
+
+### Run the application
+
+Redeploy your application to apply the changes made in the deployment manifest. Once the updated configuration is active, Unified Service Tagging will be fully enabled for your metrics, traces, and logs.
 
 ## Explore observability data in Datadog
 
