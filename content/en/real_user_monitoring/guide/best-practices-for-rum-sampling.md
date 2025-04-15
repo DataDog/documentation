@@ -38,7 +38,7 @@ In terms of setting an ideal sampling rate, it depends on the amount of traffic 
 Configuring sampling based on specific attributes, such as sampling 100% of sessions with errors and 5% otherwise, or only sampling sessions that go through the checkout flow, is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
 
 ### Changing the sampling rate in the Datadog RUM UI
-Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, create a ticket with [Datadog Support][8].
+Changing the sampling rate in the Datadog RUM UI is not supported. If this feature is critical for your business needs, contact [Datadog Support][8] to create a feature request.
 
 ### Adjusting sampling during live outages
 
