@@ -116,7 +116,7 @@ Build your custom Datadog Agent image and push it to a container registry.
    docker tag agent-otel datadog/agent:<IMAGE-TAG>
    docker push datadog/agent:<IMAGE-TAG>
    ```
-   Replace `<IMAGE-TAG>` with your desired tag. Please ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
+   Ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
    ```shell
    docker push <REPOSITORY-NAME>/datadog/agent:<IMAGE-TAG>
    ```
