@@ -304,7 +304,7 @@ The following security control definition affects every `sql-sanitizer` package 
 {{% collapse-content title=".NET" level="h4" %}}
 
 ## General syntax
-`KIND:VULNERABILITIES:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
+`TYPE:SECURE_MARKS:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
 
 <div class="alert alert-info">
 Parameter types must be fully qualified with their namespace. Example: `System.String`
