@@ -1,5 +1,5 @@
 ---
-title: Using Log Workspaces in the Finance Industry
+title: Analyze Financial Operations Using Payments and Transactions Data
 further_reading:
 - link: "/logs/workspaces/"
   tag: "Documentation"
