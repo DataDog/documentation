@@ -12,7 +12,7 @@ To use the Microsoft Sentinel destination, you need the following information:
 To get those values:
 
 1. Create or identify a Data Collection Rule (DCR).
-    1. In Microsoft Sentinel, go to **Data Connectors** or **Data Collection Rules (DCR)** under **Azure Monitor**.
+    1. In the Azure Portal, navigate to **Azure Monitor** → **Data Collection Rules**.
     1. Create a DCR or use an existing one for custom logs. See [Data collection rules (DCRs) in Azure Monitor][10162] to learn more about creating or viewing DCRs.
     1. Take note of the DCR Immutable ID and, if you are using private links, the DCR's Data Collection Endpoint (DCE). You need this information when you set up the Microsoft Sentinel destination.
     1. Define a custom table (for example, `Custom-MyLogs_CL`) in the DCR, which is where Observability Pipelines sends logs to.
@@ -20,8 +20,8 @@ To get those values:
     1. In the DCR, locate the **Logs Ingestion API endpoint**. The endpoint has the format: `https://<DCE-ID>.ingest.monitor.azure.com/dataCollectionRules/<DCR-Immutable-ID>/streams/<Stream-Name>?api-version=2023-01-01`, where the `<Stream-Name>` typically matches your custom table (for example, `Custom-MyLogs_CL`).
     1. The ingestion URL is needed when you set up you Microsoft Sentinel destination's environment variable.
 1. To authenticate the Observability Pipelines Worker with Microsoft Sentinel:
-    1. In Microsoft Sentinel, navigate to **Azure AD** > **App Registrations** and register an Azure Active Directory (AD) application. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.
-    1. Generate a **Client Secret** or certificate.
+    1. In the Azure Portal, navigate to **Azure AD** > **App Registrations** and register an Azure Active Directory (AD) application. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.
+    1. Generate a **Client Secret**.
     1. Assign it the **Monitoring Metrics Publisher** role on the Log Analytics workspace
     1. Take note of the **Tenant ID**, **Client ID**, and **Client Secret**. You need this information when you set up the Microsoft Sentinel destination.
 
