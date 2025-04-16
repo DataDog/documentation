@@ -66,7 +66,7 @@ If your agent is deployed in Kubernetes, you need to update its configuration in
 {{< collapse-content title="Helm" level="h5" >}}
 For a Datadog agent installed with Helm:
 
-1. Update your datadog-values.yaml file
+1. Update your `datadog-values.yaml` file, replacing the `site` and `env` values appropriately:
 
    ```diff
      agents:
@@ -98,15 +98,12 @@ For a Datadog agent installed with Helm:
            php: "1"
    ```
 
-2. After making your changes, upgrade your Datadog Helm chart
+2. After making your changes, upgrade your Datadog Helm chart:
    ```shell
    helm upgrade -f datadog-values.yaml datadog-agent datadog/datadog
    ```
 {{< /collapse-content >}}
 
-{{< collapse-content title="Datadog Operator" level="h5" >}}
-Coming soon
-{{< /collapse-content >}}
 
 {{% /tab %}}
 {{< /tabs >}}

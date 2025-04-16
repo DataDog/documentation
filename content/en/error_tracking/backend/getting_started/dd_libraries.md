@@ -1,5 +1,5 @@
 ---
-title: Install Backend Error Tracking using Datadog tracing libraries
+title: Install Backend Error Tracking Using Datadog Tracing Libraries
 aliases:
 - /error_tracking/standalone_backend/getting_started/dd_libraries
 further_reading:

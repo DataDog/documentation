@@ -22,7 +22,7 @@ further_reading:
 
 Follow the [in-app setup instructions][2] or choose between single step and manual instrumentation to start collecting backend errors.
 
-{{< whatsnext desc="">}}
+{{< whatsnext desc="Choose from the following instrumentation methods:">}}
     {{< nextlink href="/error_tracking/backend/getting_started/single_step_instrumentation" >}}Single step instrumentation{{< /nextlink >}}
     {{< nextlink href="/error_tracking/backend/getting_started/dd_libraries" >}}Manual instrumentation{{< /nextlink >}}
 {{< /whatsnext >}}
