@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article describes additional functionality that enriches logs with threat intelligence feeds that you provide.
+Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.
 
 ## Bring your own threat intelligence
 
