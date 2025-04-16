@@ -154,7 +154,7 @@ agent diagnose show-metadata agent-telemetry
 | **Logs and metrics**                        |                                                                                                                        |
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
 | dogstatsd.uds_packets_bytes                 | DogStatsD UDS packets bytes                                                                                            |
-| logs.auto_multi_line_aggregator_flush       | Number of multiline logs aggregated by the Agent                                                                       |
+| logs.auto_multi_line_aggregator_flush       | Number of multi-line logs aggregated by the Agent                                                                       |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, for example, after log rotation                 |
 | logs.bytes_sent                             | Total number of bytes sent before encoding, if applicable                                                              |
 | logs.decoded                                | Total number of decoded logs                                                                                           |
@@ -185,7 +185,7 @@ agent diagnose show-metadata agent-telemetry
 | **API**                                     |                                                                                                                        |
 | api_server.request_duration_seconds         | CLI commands execution performance (if executed)                                                                       |
 | **Events**                                  |                                                                                                                        |
-| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Network Performance Monitoring is enabled) |
+| agent_bsod                                  | Agent-related BSOD information (occurs only in rare conditions when Datadog Cloud Network Monitoring is enabled) |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
