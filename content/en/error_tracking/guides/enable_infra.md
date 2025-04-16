@@ -9,7 +9,7 @@ further_reading:
   text: "Enable APM"
 ---
 
-This guide explains how to update the Datadog Agent configuration to enable [Infrastructure monitoring][1].
+[Infrastructure monitoring][1] includes core Datadog features that visualize, monitor, and measure the performance of your hosts, containers, and processes. This guide explains how to update the Datadog Agent configuration to enable infrastructure monitoring and leverage its features on top of standalone backend error tracking.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}

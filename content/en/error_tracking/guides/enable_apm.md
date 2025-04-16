@@ -9,7 +9,7 @@ further_reading:
   text: "Enable Infrastructure Monitoring"
 ---
 
-This guide explains how to update the Datadog Agent configuration to enable [APM][1].
+[Datadog Application Performance Monitoring (APM)][1] provides deep visibility into your applications, enabling you to identify performance bottlenecks, troubleshoot issues, and optimize your services. This guide explains how to update the Datadog Agent configuration to enable APM and leverage its features on top of standalone backend error tracking.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
