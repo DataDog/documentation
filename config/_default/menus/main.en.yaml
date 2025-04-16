@@ -5861,21 +5861,16 @@ menu:
       parent: log_management
       identifier: logs_workspaces
       weight: 6
-    - name: SQL Reference
-      url: logs/workspaces/sql_reference/
-      parent: logs_workspaces
-      identifier: logs_workspaces_sql_reference
-      weight: 601
     - name: Use Cases
       url: logs/workspaces/use_cases/
       parent: logs_workspaces
       identifier: logs_workspaces_use_cases
-      weight: 602
+      weight: 601
     - name: Time Selection
       url: logs/workspaces/time_selection/
       parent: logs_workspaces
       identifier: logs_workspaces_time_selection
-      weight: 603
+      weight: 602
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
