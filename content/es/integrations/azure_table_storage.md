@@ -21,7 +21,7 @@ short_description: Rastrea las métricas clave de Azure Table Storage.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Table Storage es un almacén de clave-valor NoSQL para un desarrollo rápido mediante conjuntos de datos semiestructurados masivos.
@@ -47,13 +47,13 @@ Si aún no lo has hecho, configura la [integración Microsoft Azure][1]. No es n
 
 La integración Azure Table Storage no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Table Storage no incluye checks de servicio.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_table_storage/azure_table_storage_metadata.csv
