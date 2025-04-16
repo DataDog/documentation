@@ -13,7 +13,7 @@ Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This art
 
 ## Bring your own threat intelligence
 
-Cloud SIEM supports enriching and searching logs with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
+Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
 ### Storing indicators of compromise in reference tables
 
@@ -50,7 +50,7 @@ ip_address,additional_data,category,intention,source
 
 ### Uploading and enabling your own threat intelligence
 
-Datadog supports creating reference tables through a manual upload, or by periodically retrieving the data from Amazon S3, Azure storage, or Google Cloud storage.
+Datadog supports creating reference tables either by a manual upload or by periodically retrieving the data from Amazon S3, Azure storage, or Google Cloud storage.
 
 **Notes**:
 - It can take 10 to 30 minutes to start enriching Logs after creating a table.
@@ -62,7 +62,7 @@ On a new [reference table][2] page:
 1. Upload a local CSV or import a CSV from a cloud storage bucket. The file is normalized and validated.
 1. Preview the table schema and choose the IOC column as the Primary Key.
 1. Save the table.
-1. In [Threat Intel][3], locate the new table, and then select the toggle to enable it.
+1. In [Threat Intel][3], locate the new table and toggle it on to enable it.
 
 #### Using cloud storage
 
@@ -76,11 +76,11 @@ See the related reference table documentation for:
 
 #### Troubleshooting cloud imports
 
-If the reference tables are not refreshing, select the **View Change Events** link from the settings on the reference table detail page.
+If a reference table is not refreshing, open the reference table's settings menu and select **View Change Events**.
 
 **View Change Events** opens a page in **Event Management** showing potential error events for the ingestion. You can also filter in **Event Management** using the reference table name.
 
-In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intellegence. Other useful cloud import details to remember:
+In Datadog Event Management, it may appear that data has been fetched from the cloud, but it can take a few additional minutes for those changes to propagate to Threat Intelligence. Other useful cloud import details to remember:
 
 - The expected latency before updated enrichments are available when a source is uploaded or updated is 10 to 30 minutes.
 - How to know when the updates are applied: The changes are visible in the reference table or in the logs. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
@@ -93,7 +93,9 @@ To enable Cloud SIEM threat intelligence data for reference tables:
 1. Navigate to [Threat Intelligence][3].
 1. For the table you want to see Cloud SIEM threat intelligence data, click the dropdown menu in the **Enabled** column and select Cloud SIEM.
 
-After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the reference table based on a specific Indicator of Compromise (IoC) key (for example, IP or domain). If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, allowing for enhanced detection, investigation, and response. The threat intelligence reference table can be used by more than one security product.
+After applying a reference table to Cloud SIEM, all incoming logs are evaluated against the table using a specific Indicator of Compromise (IoC) key, such as an IP address or domain. If a match is found, the log is enriched with relevant Threat Intelligence (TI) attributes from the table, which enhances detection, investigation, and response.
+
+A threat intelligence reference table can be shared across multiple security products.
 
 ## Further reading
 
