@@ -68,7 +68,7 @@ The injection-related vulnerabilities are:
 This feature is available starting from the following versions of each language's tracing library:
 
 * **Java**: 1.45.0+
-* **.NET**: Not supported
+* **.NET**: 3.10.0+
 * **Node.js**: 5.37.0+
 * **Python**: Not supported
 
@@ -298,6 +298,62 @@ The following security control definition affects every `sql-sanitizer` package 
 #### Config
 `SANITIZER:SQL_INJECTION:node_modules/sql-sanitizer/index.js:sanitize`
 
+
+{{% /collapse-content %}}
+
+{{% collapse-content title=".NET" level="h4" %}}
+
+## General syntax
+`KIND:VULNERABILITIES:Assembly:Class:Method(ParameterTypes)[:ParameterIndexes]`
+
+<div class="alert alert-info">
+Parameter types must be fully qualified with their namespace. Example: `System.String`
+Parameter indexes will be comma separated. If no parameter index is provided, default value will be 0 (first parameter)
+</div>
+
+### Input validator
+
+#### Method that validates all input parameters to avoid command injection vulnerabilities
+
+##### Method
+`[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string input2)`
+
+##### Config
+`INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String):0,1`
+
+#### Method that validates one input parameter to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string inputToValidate)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String):1`
+
+#### Method that validates two input parameters to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input1, string firstInputToValidate, string secondInputToValidate, object anotherInput)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String,System.String,System.String,System.Object):1,2`
+
+#### Method that validates the input parameter to avoid command injection and code injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::ValidateMethod(string input)`
+
+##### Config
+ `INPUT_VALIDATOR:COMMAND_INJECTION,CODE_INJECTION:FooAssembly:CustomInputValidatorClass:ValidateMethod(System.String)`
+
+### Sanitizer
+
+#### Sanitizer to avoid command injection vulnerabilities
+
+##### Method
+ `[FooAssembly]CustomInputValidatorClass::SanitizerMethod(string input)`
+
+##### Config
+ `SANITIZER:COMMAND_INJECTION:FooAssembly:CustomInputValidatorClass:SanitizerMethod(System.String)`
 
 {{% /collapse-content %}}
 
