@@ -47,7 +47,7 @@ DORA Metrics can automatically identify and track failures through [Datadog Inci
 
 - **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
 
-For incidents to appear in filtered DORA Metrics views, Incidents must be tagged with the following attributes:
+For incidents to appear in filtered DORA metrics views, Incidents must be tagged with the following attributes:
   - `Teams`
   - `Services`
   - `Env`: The `Env` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
