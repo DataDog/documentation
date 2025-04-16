@@ -33,15 +33,15 @@ This change has the following impact on how notifications are generated for CSM 
 1. You will now be able to specify misconfiguration as a source type when creating notification rules.
 2. You will now be able to choose whether you want to get notified for every new issue matching your query, or if you want to receive periodic notifications that summarize the new findings.
 3. Signals are no longer generated for CSM Misconfigurations. This also means that notifications can no longer be enabled and configured at the detection rule level.
-4. Support for CSM Misconfigurations signals will be deprecated in early 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
+4. Support for CSM Misconfigurations signals will be deprecated in the second half of 2025. Legacy signals will be retained for 15 months from their trigger date (free of charge).
 
 <div class="alert alert-warning">While there will be no immediate change in behavior, depending on how you configure your new notification rules, you may notice an increase in the number of notifications generated. If the conditions set in a notification rule results in a high number of notifications, a warning message is displayed in the <strong>Preview of Matching Results</strong> panel. To help control noise, you can refine your query and use the new time aggregation mechanism. At this time, this feature is only available for vulnerabilities.</div>
 
 ## Notification rules source types selector
 
-When you create a notification rule, you are now required to choose between two different source types: Vulnerability or Threat (Signal).
+When you create a notification rule, you are now required to choose between two different source types: Finding or Threat (Signal).
 
-- A vulnerability represents a potential security flaw in your infrastructure.
+- A finding represents a potential security flaw in your infrastructure.
 - A threat (signal) represents suspicious activity that poses an active threat against your infrastructure.
 
 {{< img src="security/csm/notification_rules_new_selectors_2.png" alt="New source types for notification rules" width="75%">}}
@@ -50,7 +50,7 @@ When you create a notification rule, you are now required to choose between two 
 
 - Notification rules can now be configured for identity risks and attack paths, as well as container image vulnerabilities.
 - CSM Misconfigurations notifications now contain the full finding metadata. Previously, the notification contained only limited signal metadata.
-- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (early 2025). Terraform support for Notification Rules will be available in late 2024. 
+- Terraformed custom detection rules using the legacy notifications attribute will no longer be supported after the final deprecation date (second half of 2025). Terraform support for Notification Rules will be available in late 2024. 
 
 ## How to migrate existing notifications
 
