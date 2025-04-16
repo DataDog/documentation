@@ -64,7 +64,7 @@ In addition to error events, Error Tracking offers issue level filters to refine
 
 Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display **All**, **Browser**, **Mobile**, or **Backend** issues in the explorer.
 
-For more granular filtering, you can narrow down issues by specific log sources or SDK, per programming language.
+For more granular filtering, you can narrow down issues by specific log sources or by SDK and scope to a programming language.
 
 #### Fix available
 
