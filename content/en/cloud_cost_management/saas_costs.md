@@ -259,11 +259,11 @@ Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "GitHub" %}}
 
-1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][101] page in GitHub.
+1. Create a personal authorization token (classic), with the `manage_billing:enterprise` and `repo` scopes on the [Personal Access Tokens][109] page in GitHub.
 2. Navigate to the Datadog [GitHub Costs tile][108].
 3. Click **Add New**.
-4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags
-5. Click the checkmark button to save this account
+4. Enter an account name, your personal access token, and your enterprise name (in `enterprise-name` format), as well as any appropriate tags.
+5. Click the checkmark button to save this account.
 
 Your GitHub cost data for the past 15 months can be accessed in Cloud Cost Management within 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
 
@@ -427,7 +427,7 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 
 {{% tab "GitHub" %}}
 
-**Note**: The GitHub cost integration calculates costs with discounts.  A discounted item will have the same charge_description as the list price item, a negative cost, and a `discount` tag.
+**Note**: The GitHub cost integration calculates costs with discounts. A discounted item contains the same `charge_description` as the list price item, a negative cost, and a `discount` tag.
 
 | Tag Name | Tag Description |
 |---|---|
