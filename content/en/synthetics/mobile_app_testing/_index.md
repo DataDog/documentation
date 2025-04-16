@@ -8,7 +8,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/synthetics/mobile_app_testing/mobile_app_tests"
+- link: "/synthetics/mobile_app_testing/"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
 - link: "/synthetics/mobile_app_testing/settings"
@@ -31,6 +31,8 @@ cascade:
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices.
 Datadog runs these tests on real devices to provide a realistic, step-by-step representation of key application workflows, screenshots of each step, and detailed pass or fail results so your team can quickly visualize what went wrong.
 Mobile app tests can run on a schedule, on demand, or directly within your [CI/CD pipelines][1].
+
+Optionally, link Synthetic mobile test data with RUM mobile data if the [RUM SDK][15] is used within the tested application. 
 
 You can create mobile app tests in Datadog by navigating to [**Digital Experience** > **New Test**][12] and selecting **Mobile Application Test**.
 
@@ -153,7 +155,7 @@ In this example, the test `aaa-aaa-aaa` runs with the override application versi
   "tests": [
     {
       "id": "aaa-aaa-aaa",
-      "config": {
+      "testOverrides": {
         "mobileApplicationVersionFilePath": "application/path"
       }
     }
@@ -192,3 +194,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
+[15]: /real_user_monitoring/mobile_and_tv_monitoring/

@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
   tag: "Blog"
   text: "Announcing PCI-Compliant Log Management and APM from Datadog"
+- link: "coterm"
+  tag: "Documentation"
+  text: "CoTerm: Monitor terminal sessions and sensitive activities on local and remote systems"
 ---
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}

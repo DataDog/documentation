@@ -6,8 +6,8 @@ aliases:
 further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
-  text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/service_catalog/"
+  text: "Learn how to set up APM tracing with your application"
+- link: "/tracing/software_catalog/"
   tag: "Documentation"
   text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
@@ -23,7 +23,7 @@ further_reading:
 
 ## APM services
 
-APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service Catalog, and the Service Map.
+APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Software Catalog, and the Service Map.
 
 **Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
 

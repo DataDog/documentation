@@ -4,6 +4,7 @@ categories:
 - cloud
 - 설정 및 배포
 - 로그 수집
+custom_kind: integration
 dependencies: []
 description: 핵심 Amazon Gamelift 메트릭을 추적하세요.
 doc_link: https://docs.datadoghq.com/integrations/amazon_gamelift/
@@ -14,7 +15,6 @@ integration_id: ''
 integration_title: Amazon Gamelift
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: '1.0'
 name: amazon_gamelift
 public_title: Datadog-Amazon Gamelift 통합
@@ -38,7 +38,7 @@ Datadog에서 모든 Gamelift 메트릭을 참조하려면 이 통합을 활성�
 ### 메트릭 수집
 
 1. [AWS 통합 페이지][2]에서 `Game Lift`가 `Metric Collection` 탭에 활성화되어 있는지 확인하세요.
-2. [Datadog - Amazon Gamelift 통합][3]을 설치하세요.
+2. [Datadog - Amazon GameLift 통합][3]을 설치합니다.
 
 ### 로그 수집
 
@@ -68,7 +68,7 @@ Amazon GameLift 통합에는 이벤트가 포함되어 있지 않습니다.
 
 ### 서비스 점검
 
-Amazon Gamelift 통합에는 서비스 점검이 포함되어 있지 않습니다.
+Amazon GameLift 통합에는 서비스 점검이 포함되어 있지 않습니다.
 
 ## 트러블슈팅
 
@@ -78,7 +78,7 @@ Amazon Gamelift 통합에는 서비스 점검이 포함되어 있지 않습니�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-gamelift
 [4]: https://docs.datadoghq.com/ko/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ko/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_gamelift/amazon_gamelift_metadata.csv
 [8]: https://docs.datadoghq.com/ko/help/

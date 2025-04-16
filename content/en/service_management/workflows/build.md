@@ -71,7 +71,7 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
 1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
+1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables][14].
 1. After you've configured the step, click either the AI icon <i class="icon-bits-ai"></i> or the plus icon (**+**) to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
@@ -189,3 +189,4 @@ To perform tasks using the API, see the [Workflow Automation API documentation][
 [11]: /service_management/workflows/test_and_debug/#test-a-step
 [12]: /service_management/workflows/variables/
 [13]: /api/latest/workflow-automation/
+[14]: /service_management/workflows/variables/#context-variables

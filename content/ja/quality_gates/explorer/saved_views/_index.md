@@ -6,54 +6,54 @@ further_reading:
 title: 保存ビュー
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
+{{< callout url="#" btn_hidden="true" header="プレビューに参加してください！" >}}
+Quality Gates はプレビュー版です。
 {{< /callout >}}
 
-## Overview
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現在 Quality Gates は利用できません。</div>
+{{< /site-region >}}
 
-Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
+## 概要
 
-Saved views can keep track of your:
+保存ビューを使用すると、[**Quality Gate Executions** ページ][1]上の [Quality Gates Explorer][2] の状態を保存でき、特定の条件に絞ったクエリや関連するファセット、可視化オプション、時間範囲などへのアクセスを通じて、効果的なトラブルシューティングが可能になります。
 
-- Quality Gate executions and rule executions
-- Search queries 
-- Column sort order
-- Live time range (such as the past hour or the past week)
-- Visualizations (such as a timeseries, top list, table, or funnel graph)
-- Subset of facets
+保存ビューでは、以下の情報を追跡できます:
 
-You can also use saved views to share common queries and configurations with your teammates.
+- Quality Gate の実行およびルールの実行 
+- 検索クエリ 
+- 列のソート順 
+- ライブの時間範囲 (直近 1 時間や直近 1 週間など) 
+- 可視化 (時系列、トップリスト、テーブル、ファネルグラフなど) 
+- ファセットのサブセット 
 
-## Saved views
+また、保存ビューを使うことで、共通のクエリや設定をチームメンバーと共有することもできます。
 
-To access your saved views, expand **> Views** to the left in the [Quality Gates Explorer][1].
+## 保存ビュー
 
-All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the view's creator. Click **Save** to create a saved view from the current content in your Explorer.
+[Quality Gates Explorer][1] の左側にある **> Views** を展開すると、保存ビューにアクセスできます。
 
-{{< img src="quality_gates/explorer/expand_view_1.png" text="Create a saved view in the Quality Gates Explorer" style="width:100%" >}}
+[デフォルトビュー](#default-views)を除くすべての保存ビューは、ユーザーが作成したカスタムビューを含め、組織全体で共有されます。これらのビューは組織内の誰でも編集でき、ビューの作成者のアバターが表示されます。**Save** をクリックすると、現在の Explorer の内容から保存ビューを作成できます。
 
-You can:
+{{< img src="quality_gates/explorer/expand_view_1.png" text="Quality Gates Explorer で保存ビューを作成" style="width:100%" >}}
 
-- Load or reload a saved view
-- Update a saved view with the current view's configuration
-- Rename or delete a saved view
-- Share a saved view through a short link
-- Favorite a saved view to add it to your Saved Views list accessible in the navigation menu
+利用可能な操作:
 
-<div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
+- 保存ビューを読み込む、または再読み込みする
+- 現在のビューの構成で保存ビューを更新する
+- 保存ビューの名前を変更または削除する
+- 短縮リンクを使って保存ビューを共有する
+- 保存ビューをお気に入りに登録し、ナビゲーションメニューからアクセスできる Saved Views リストに追加する
+
+<div class="alert alert-info">読み取り専用ユーザーに対しては、ビューの更新、名前変更、削除操作は無効化されています。</div>
 
 ## デフォルトビュー
 
-You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization. 
+[Quality Gates Explorer][2] では、保存ビューをデフォルトのランディングページに設定することができます。デフォルトビューはユーザーごとに設定され、組織には影響がありません。
 
-{{< img src="quality_gates/explorer/default_view_1.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/default_view_1.png" text="Quality Gates Explorer でデフォルトビューを設定" style="width:100%" >}}
 
-From your current default saved view, take actions to update the view to a different layout that you want as your default. In the **Views** panel, save the current view as your default saved view.
+現在のデフォルトである保存ビューから、デフォルトとして使用したい新しいレイアウトへビューを更新します。**Views** パネルで、現在のビューをデフォルトの保存ビューとして保存してください。
 
 
 ## 参考資料

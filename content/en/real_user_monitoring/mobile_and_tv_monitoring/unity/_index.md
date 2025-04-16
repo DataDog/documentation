@@ -13,6 +13,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: "https://www.datadoghq.com/blog/datadog-rum-unity-sdk/"
+  tag: "Blog"
+  text: "Improve gaming app performance with Unity support in Datadog RUM"
 ---
 ## Overview
 

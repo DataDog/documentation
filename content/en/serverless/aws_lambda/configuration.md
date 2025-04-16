@@ -57,13 +57,13 @@ To enable threat monitoring, add the following environment variables to your dep
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
-Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+Redeploy the function and invoke it. After a few minutes, it appears in [AAP views][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+To see App and API Protection threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   curl -H 'My-AAP-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
 A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
@@ -278,8 +278,6 @@ DD_APM_REPLACE_TAGS=[
 
 ## Collect traces from non-Lambda resources
 
-<div class="alert alert-info">This feature is currently supported for Python, Node.js, Java, and .NET.</div>
-
 Datadog can infer APM spans based on the incoming Lambda events for the AWS managed resources that trigger the Lambda function. This can be help visualize the relationship between AWS managed resources and identify performance issues in your serverless applications. See [additional product details][12].
 
 The following resources are currently supported:
@@ -352,9 +350,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLING_RULES` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
-
-Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
+**Notes**: 
+   - The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
+   - Overall traffic metrics such as `trace.<OPERATION_NAME>.hits` are calculated based on sampled invocations *only* in Lambda.   
 
 For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
@@ -511,7 +509,7 @@ For instructions on setting up the source code integration on your serverless ap
 
 ## Collect profiling data
 
-Datadog's [Continuous Profiler][42] is available in Preview for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+Datadog's [Continuous Profiler][42] is available in Preview for Python tracer version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
 
 The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 

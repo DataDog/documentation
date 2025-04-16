@@ -57,52 +57,62 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
       <th>Feature</th>
       <th>Agentless</th>
       <th>Agentless &#43; Agent-based deployment</th>
+      <th>Agent-based deployment</th>
     </tr>
   </thead>
   <tr>
     <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td></td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td style="padding-left: 20px;">Host benchmarks</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td style="padding-left: 20px;"><a href="/security/default_rules/?search=host+benchmarks">Host benchmarks</a></td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
-    <td>Yes</td>
-    <td>Yes</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability prioritization</td>
-    <td>Yes</td>
-    <td>Yes, with runtime context</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With runtime context</td>
+    <td>{{< X >}}<br />With runtime context</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Vulnerability update frequency</td>
     <td>12 hours</td>
     <td>Real time</td>
+    <td>Real time</td>
   </tr>
   <tr>
-    <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
-    <td>No</td>
-    <td>Yes</td>
+    <td><strong><a href="/security/threats">Workload Protection</a></strong></td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td style="padding-left: 20px;">Threat detection</td>
-    <td>No</td>
-    <td>Yes</td>
+    <td></td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}</td>
   </tr>
   <tr>
     <td><strong><a href="/security/security_inbox">Security Inbox</a></strong></td>
-    <td>Yes</td>
-    <td>Yes, with more accurate insights</td>
+    <td>{{< X >}}</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
+    <td>{{< X >}}<br />With more accurate insights</td>
   </tr>
 </table>
 
@@ -129,13 +139,13 @@ Monitor your compliance security coverage and secure your cloud infrastructure a
 For information on disabling CSM, see the following:
 
 - [Disable CSM Vulnerabilities][8]
-- [Disable CSM Threats][9]
+- [Disable Workload Protection][9]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_scanning/enable
 [2]: /security/cloud_security_management/agentless_scanning
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs

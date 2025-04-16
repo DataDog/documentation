@@ -26,10 +26,6 @@ further_reading:
 <div class="alert alert-warning">Test Optimization is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}
-Test optimization for Go is in Preview.
-{{< /callout >}}
-
 ## Compatibility
 
 Supported test frameworks:

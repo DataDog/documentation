@@ -101,7 +101,6 @@ Create the following schema:
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Create the `explain_statement` procedure to enable the Agent to collect explain plans:
@@ -134,6 +133,14 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
+
+To collect index metrics, grant the `datadog` user an additional privilege:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][12] section below for more info on how to grant the Agent permissions for this collection.
 
 ### Runtime setup consumers
 Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
@@ -407,3 +414,4 @@ If you have installed and configured the integrations and Agent as described and
 [9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [10]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [11]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[12]: /database_monitoring/setup_mysql/gcsql?tab=mysql57#collecting-schemas

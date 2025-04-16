@@ -78,3 +78,4 @@ Segments are users grouped by specific characteristics or behaviors. [Segmentati
 [6]: /product_analytics/segmentation/
 [7]: /product_analytics/heatmaps
 [8]: https://app.datadoghq.com/rum/
+[9]: https://app.datadoghq.com/rum/list

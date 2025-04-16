@@ -8,10 +8,6 @@ further_reading:
 
 ## Overview
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-  This feature is in Preview. To enable this feature, reach out to Customer Success. 
-{{< /callout >}}  
-
 By default, every metric query in Datadog consists of two layers of aggregation. Nested queries allows you to reuse the results of a previous query in a subsequent one.
 
 {{< img src="metrics/nested_queries/nested-queries-example-video.mp4" alt="How to configure nested queries in the UI" video=true style="width:100%" >}}
@@ -189,7 +185,7 @@ Datadog provides a `moving_rollup` function that enables aggregation of datapoin
 
 {{< img src="/metrics/nested_queries/moving-rollup-diagram.png" alt="example of old vs. new moving_rollup function" style="width:100%;" >}}
 
-The existing version of the `moving-rollup` function only supports the following aggregators:
+The existing version of the `moving_rollup` function only supports the following aggregators:
 - `avg`
 - `sum`
 - `min`
@@ -249,7 +245,7 @@ In the UI or JSON tab, it would look as follows:
 {{% /collapse-content %}} 
 
 {{% collapse-content title="is_less() example query" level="h5" %}}
-`is_less()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
+`is_less()` returns 1.0 for each point where the query is less than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
 {{< img src="/metrics/nested_queries/is_less_ui.png" alt="example of is_less mapping function in UI" style="width:100%;" >}}

@@ -1,20 +1,20 @@
 ---
-title: Enabling ASM threat detection and protection using single step instrumentation
+title: Enabling AAP threat detection and protection using single step instrumentation
 external_redirect: /security/application_security/threats/threat_detection/
 ---
 
-<div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in Preview.</div>
+<div class="alert alert-info">Enabling AAP threat detection and protection using single step instrumentation is in Preview.</div>
 
 ## Requirements
 
 - **Minimum Agent version 7.53.0**
 - **Minimum Helm version 3.62.0** (For Kubernetes deployments)
-- **Languages and architectures**: Single step ASM instrumentation only supports tracing Java, Python, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step AAP instrumentation only supports tracing Java, Python, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 - **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable Threat Protection (new)** option selected, the Agent is installed and configured to enable ASM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable Threat Protection (new)** option selected, the Agent is installed and configured to enable AAP. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 
 {{< img src="/security/application_security/single_step/asm_single_step_threat_detection_2.png" alt="Account settings Ubuntu setup page highlighting the toggle for Enabling APM instrumentation and Threat Protection." style="width:100%;" >}}
@@ -24,14 +24,14 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-With one command, you can install, configure, and start the Agent, while also instrumenting your services with ASM.
+With one command, you can install, configure, and start the Agent, while also instrumenting your services with AAP.
 
 For an Ubuntu host:
 
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
    a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4].
@@ -49,7 +49,7 @@ For an Ubuntu host:
 4. Restart the services on the host or VM.
 5. [Explore the performance observability of your services in Datadog][5].
 
-**Note:** To configure single-step for both ASM Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
+**Note:** To configure single-step for both AAP Threat Protection and Code Security, add the environment variables `DD_APPSEC_ENABLED=true` _and_ `DD_IAST_ENABLED=true` to your one-line installation command.
 
 ### Specifying tracing library versions {#lib-linux}
 
@@ -67,6 +67,7 @@ Supported languages include:
 - Python (`python`)
 - Java (`java`)
 - Node.js (`js`)
+- PHP (`php`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
@@ -77,13 +78,13 @@ Set `DD_ENV` in your one-line installation command for Linux to automatically ta
 For example:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_APPSEC_ENABLED=true DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [2]: /agent/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /service_catalog/
+[5]: /software_catalog/
 [6]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 {{% /tab %}}
@@ -94,7 +95,7 @@ For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
-   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   DD_APM_INSTRUMENTATION_ENABLED=docker DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:2,js:5,dotnet:3,php:1" DD_NO_AGENT_INSTALL=true DD_APPSEC_ENABLED=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
@@ -140,6 +141,7 @@ Supported languages include:
 - Java (`java`)
 - Node.js (`js`)
 - Ruby (`ruby`)
+- PHP (`php`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
@@ -165,7 +167,7 @@ docker run -d --name dd-agent \
 {{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: /service_catalog/
+[6]: /software_catalog/
 [7]: https://github.com/DataDog/dd-trace-js?tab=readme-ov-file#version-release-lines-and-maintenance
 
 
@@ -208,7 +210,7 @@ To enable single step instrumentation with Helm:
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/?tab=kubernetes#removing-instrumentation-for-specific-services
 {{% /tab %}}
 {{< /tabs >}}
-## Removing Single Step APM and ASM instrumentation from your Agent
+## Removing Single Step APM and AAP instrumentation from your Agent
 If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
 ### Removing instrumentation for specific services
 Run the following commands and restart the service to stop injecting the library into the service and stop producing traces from that service.
@@ -219,7 +221,7 @@ Run the following commands and restart the service to stop injecting the library
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
-3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+3. To disable AAP, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 {{% /tab %}}
 {{% tab "Docker" %}}
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
@@ -227,7 +229,7 @@ Run the following commands and restart the service to stop injecting the library
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
-3. To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
+3. To disable AAP, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:

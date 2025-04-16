@@ -31,6 +31,7 @@ author:
 categories:
 - cloud
 - 메트릭
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
 display_on_public_website: true
@@ -40,7 +41,6 @@ integration_id: apache-apisix
 integration_title: Apache APISIX
 integration_version: ''
 is_public: true
-custom_kind: integration
 manifest_version: 2.0.0
 name: apache-apisix
 public_title: Apache APISIX
@@ -57,10 +57,14 @@ tile:
   - 지원되는 OS::Linux
   - 지원되는 OS::Windows
   - 지원되는 OS::macOS
+  - 제공::통합
   configuration: README.md#Setup
   description: Datadog-APISIX 통합
   media: []
   overview: README.md#Overview
+  resources:
+  - resource_type: 블로그
+    url: https://apisix.apache.org/blog/2021/11/12/apisix-datadog
   support: README.md#Support
   title: Apache APISIX
 ---
@@ -80,7 +84,7 @@ Apache APISIX는 실시간 고성능 동적 API 게이트웨이로, 로드밸런
 
 아래의 설정 지침을 따릅니다.
 
-### 설정
+### 구성
 
 1. 이미 Datadog 을 사용 중이고 Datadog 에이전트가 설치되어 있는 경우 방화벽에 포트 8125/UDP가 허용되는지 확인하세요. 예를 들어 Apache APISIX 에이전트 는 Datadog 에이전트 포트 8125에 연결할 수 있습니다. 이미 설정한 경우 3단계로 건너뛸 수 있습니다.
 
@@ -150,7 +154,7 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 
 [에이전트 상태 하위 명령을 실행][5]하고 점검 섹션에서 `apisix`를 찾습니다.
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "apache-apisix" >}}

@@ -32,6 +32,7 @@ Set up CI Visibility in GitHub Actions to track the execution of your workflows,
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
+| [CI jobs failure analysis][23] | CI jobs failure analysis | Analysis of the root causes of failed CI jobs based on relevant logs using LLM models. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection](#collect-job-logs). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
@@ -97,9 +98,19 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 ### Correlate infrastructure metrics to jobs
 
-If you are using self-hosted GitHub runners, you can correlate jobs with the hosts running them by ensuring that the GitHub runner name matches the hostname of the machine. CI Visibility uses this information to link to infrastructure metrics.
+The GitHub Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
+
+- For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][22] and change `min_collection_interval` to be less than 15 seconds.
+
+- For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
 To see the metrics, click on a job span in the trace view. A window opens with an **Infrastructure** tab displaying the host metrics.
+
+### CI jobs failure analysis
+
+If job logs collection is enabled, CI Visibility computes analysis using LLM models for failed CI jobs based on relevant logs coming from GitHub Actions.
+
+For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
 ## Visualize pipeline data in Datadog
 
@@ -130,3 +141,7 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [17]: https://app.datadoghq.com/ci/pipelines
 [18]: https://app.datadoghq.com/ci/pipeline-executions
 [19]: /continuous_integration/search/#search-for-pipelines
+[20]: /agent
+[21]: https://github.com/actions/actions-runner-controller
+[22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/

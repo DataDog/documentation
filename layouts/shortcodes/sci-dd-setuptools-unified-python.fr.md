@@ -1,6 +1,6 @@
 Si le package de votre application est généré avec setuptools :
 
-1. Installez le [package `dd-trace`](https://github.com/DataDog/dd-trace-go).
+1. Installez le [package `dd-trace`](https://github.com/DataDog/dd-trace-py).
 1. Ajoutez `import ddtrace.sourcecode.setuptools_auto` en tant que première importation dans le fichier `setup.py`.
 1. Définissez la variable d'environnement `DD_MAIN_PACKAGE` sur le nom du principal package Python.
 

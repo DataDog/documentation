@@ -118,11 +118,10 @@ If you need to change the value of a custom variable after setting it, you must 
 Here is an example of a workflow that demonstrates the **Set variable** step:
 
 1. In your workflow, start with a **Set variable** step to declare a variable called `intList` and give it the value `[1,2,3,4]`.
-1. Add a data transformation **expression** step with the expression `$.Variables.intList.filter(number => number % 2 === 0)` to filter out the odd numbers.
-1. Use another **Set variable** step to assign the result from the expression (`[2,4]`) to a new variable named `evenList`.
-1. Add an **Echo** step to echo the value of `evenList`.
+1. Add a second **Set variable** step and declare a variable named `evenList` with the value `${Variables.intList.filter(number => number % 2 === 0)}`. This is an [inline JavaScript expression][8] that filters out odd numbers.
+1. Add an **Echo** step to echo the value of `evenList` (`2,4`).
 
-{{< img src="service_management/workflows/set-variable.png" alt="This workflow sets a variable, performs an Expression step on it, and then sets a new variable with the result of the expression. Finally, it echoes the result of the final variable." style="width:100%;" >}}
+{{< img src="service_management/workflows/set-variable-updated.png" alt="This workflow sets a variable to hold a list of numbers, declares a second variable which filters out the odd numbers in the list using an inline expression, and echoes the value of the second variable." style="width:100%;" >}}
 
 ### Access a custom variable
 

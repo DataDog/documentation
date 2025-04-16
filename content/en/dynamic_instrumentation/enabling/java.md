@@ -12,7 +12,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version, and go directly to enabling Dynamic Instrumentation in step 4.
+Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your Agent and tracing library are on the required version. Then, go directly to enabling Dynamic Instrumentation in step 4.
 
 ## Requirements
 
@@ -45,7 +45,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 
    **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.34.0 and later.
 
-3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
+3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
    {{< tabs >}}
 {{% tab "Command arguments" %}}
 
@@ -99,7 +99,7 @@ Configure Dynamic Instrumentation using the following environment variables:
 
 ## What to do next
 
-See [Dynamic Instrumentation][6] for information about setting snapshot and metric probes and browsing and indexing the data.
+See [Dynamic Instrumentation][6] for information about adding instrumentations and browsing and indexing the data.
 
 ## Further reading
 

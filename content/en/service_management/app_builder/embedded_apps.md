@@ -93,6 +93,19 @@ To add a button that sets the value of a date range picker component to the dash
     - **Value**: `${global?.dashboard?.timeframe}`
 1. Save and publish your app.
 
+## Add apps to Software Catalog
+
+Add a published app to the [Self-Service Actions][2] dashboard in [Software Catalog][3] to provide developers with a central place to provision infrastructure, scaffold services, remediate issues, and more.
+
+To add to Self-Service Actions, first ensure your app is published and permissions are defined. Next, you can click **Add to Self-Service Actions**.
+
+{{< img src="tracing/software_catalog/self-service-ui.png" alt="Self-Service Actions" style="width:100%;" >}}
+
+Once added, you can view and use your app in Software Catalog.
+
+{{< img src="tracing/software_catalog/self-service-publish.png" alt="Publish to Self-Service Actions" style="width:100%;" >}}
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -100,3 +113,5 @@ To add a button that sets the value of a date range picker component to the dash
 <br>Do you have questions or feedback? Join the **#app-builder** channel on the [Datadog Community Slack][1].
 
 [1]: https://datadoghq.slack.com/
+[2]: https://app.datadoghq.com/software/self-service
+[3]: https://app.datadoghq.com/software

@@ -1,5 +1,5 @@
 ---
-title: Dev tool integrations
+title: Developer Tool Integrations
 disable_toc: false
 
 ---

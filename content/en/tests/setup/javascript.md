@@ -215,8 +215,14 @@ The format of the annotations is the following, where `$TAG_NAME` is a *string* 
   <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
+### Playwright - RUM integration
+
+If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
+
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
 [2]: https://playwright.dev/docs/api/class-testinfo#test-info-annotations
+[3]: /real_user_monitoring/browser/setup/
+[4]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -746,7 +752,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_TEST_SESSION_NAME=custom-tests yarn run-my
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, `playwright`, and `vitest` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
+If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress or Playwright, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][10].
 
 ### Cypress interactive mode
 
@@ -803,7 +809,7 @@ When you use this approach, both the testing framework and Test Optimization can
 
 ### Test session name `DD_TEST_SESSION_NAME`
 
-Use `DD_TEST_SESSION_NAME` to define the test session name for your tests (`test_session.name` tag). Use this to identify a group of tests. Examples of values for this tag would be:
+Use `DD_TEST_SESSION_NAME` to define the name of the test session and the related group of tests. Examples of values for this tag would be:
 
 - `unit-tests`
 - `integration-tests`
@@ -821,12 +827,12 @@ The test session name should be unique within a repository to help you distingui
 
 #### When to use `DD_TEST_SESSION_NAME`
 
-If your tests are run with commands that include a dynamic string, such as:
+There's a set of parameters that Datadog checks to establish correspondence between test sessions. The test command used to execute the tests is one of them. If the test command contains a string that changes for every execution, such as a temporary folder, Datadog considers the sessions to be unrelated to each other. For example:
 
 - `yarn test --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 - `pnpm vitest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-The default value for the test session name will be unstable. It is recommended to use `DD_TEST_SESSION_NAME` in this case.
+Datadog recommends using `DD_TEST_SESSION_NAME` if your test commands vary between executions.
 
 ## Further reading
 

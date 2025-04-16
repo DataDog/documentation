@@ -12,6 +12,9 @@ further_reading:
   text: "Terraform Azure Datadog Log Forwarder"
 ---
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeZkmqTwBQ43zR9SZoyf_oUDCFDsth00lb4jRKjfn-vKNW4dA/viewform" header="Automated Log Forwarding for Azure (in Preview)">}}
+Automatically set up log forwarding across your Azure environment—no manual configuration required! This feature automatically manages and scales log forwarding services.{{< /callout >}}
+
 ## Overview
 
 Use this guide to set up logging from your Azure subscriptions to Datadog.
@@ -21,6 +24,11 @@ Datadog recommends using the Agent or DaemonSet to send logs from Azure. If dire
 Follow these steps to send Azure logs to any Datadog site.
 
 **US3**: Organizations on the Datadog US3 site can simplify Azure log forwarding using the Azure Native integration. This method is recommended and is configured through the [Datadog resource in Azure][5], replacing the Azure Event Hub process. See the [Azure Native Logging Guide][4] for more details.
+
+<div class="alert alert-info">
+Starting April 30, 2025, Azure no longer supports Node.js 18. To ensure compatibility, first update your forwarder code, then upgrade to the latest Azure LTS version of Node.js (20).
+If you previously deployed with an ARM template, you can update using the template with the same parameters.
+</div>
 
 ## Setup
 
@@ -270,9 +278,9 @@ See [Diagnostic settings in Azure monitor][213] for more information.
 
 {{% tab "Blob Storage" %}}
 
-{{% site-region region="us3,us5,gov,ap1" %}}
+{{% site-region region="us5,gov,ap1" %}}
 <div class="alert alert-warning">
-  This is not supported for Datadog {{< region-param key="dd_site_name" >}} site.
+  Log forwarding from Azure Blob Storage is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
 </div>
 {{% /site-region %}}
 
@@ -360,9 +368,9 @@ const DD_HTTP_URL = process.env.DD_URL || 'http-intake-pci.logs.' + DD_SITE;
 
 ## Log Archiving
 
-Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
+Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the [automatic][7] or [manual][8] setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
 
-Once you have an App Registration configured, you can [create a log archive][3] that writes to Azure Blob Storage. 
+After configuring an App Registration, you can [create a log archive][3] that writes to Azure Blob Storage. 
 
 **Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
 
@@ -372,7 +380,10 @@ Once you have an App Registration configured, you can [create a log archive][3] 
 
 [1]: /getting_started/site/
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-[3]: /logs/log_configuration/archives/
+[3]: /logs/log_configuration/archives/?tab=azurestorage#configure-an-archive
 [4]: /logs/guide/azure-native-logging-guide/
 [5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [6]: /data_security/pci_compliance/?tab=logmanagement
+[7]: /integrations/guide/azure-programmatic-management/#datadog-azure-integration
+[8]: /integrations/guide/azure-manual-setup/#setup
+

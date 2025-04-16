@@ -68,9 +68,8 @@ To create an application to observe in Datadog:
 
 ## Set up Datadog APM
 
-To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation:
+To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation, or alternatively, you can set up APM using [Datadog tracing][8] libraries.
 
-<div class="alert alert-info"><strong>Note</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> is in beta. Alternatively, you can set up APM using <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Datadog tracing libraries</a>.</div>
 
 1. Run the installation command:
 
@@ -141,7 +140,7 @@ Each time you run the `curl` command, a new trace is sent to Datadog.
 
 1. In Datadog, go to [**APM** > **Services**][3]. You should see a Python service named `hello`:
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Service Catalog shows the new Python service." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/software-catalog.png" alt="Software Catalog shows the new Python service." style="width:100%;" >}}
 
 1. Select the service to view its performance metrics, such as latency, throughput, and error rates.
 1. Go to [**APM** > **Traces**][4]. You should see a trace for the `hello` service:
@@ -220,3 +219,4 @@ To add custom instrumentation:
 [5]: /tracing/glossary/#instrumentation
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/

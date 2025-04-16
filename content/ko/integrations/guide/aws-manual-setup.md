@@ -114,7 +114,6 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 
 *\* 중국 본토 (또는 중국 본토 내 환경과 연결된) Datadog 서비스의 모든 사용에는 웹 사이트 [제한된 서비스 위치][10]에 게시된 법적 고지 사항의 적용을 받습니다.
 
-
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
@@ -145,6 +144,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 7. **Save**을 클릭합니다.
 8. 데이터 수집이 시작될 때까지 최대 10분 정도 기다린 후 사용 가능한 <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 개요 대시보드</a>를 통해 AWS 서비스 및 인프라스트럭처에서 전송된 메트릭을 확인합니다.
 
+*\* 중국 본토에서(또는 중국 본토 내 환경과 관련된) 사용하는 모든 Datadog 서비스는 웹사이트의 [제한된 서비스 위치][2]에 게시된 법적 고지 사항의 적용을 받습니다.
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: https://www.datadoghq.com/legal/restricted-service-locations/

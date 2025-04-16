@@ -25,7 +25,9 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Vulnerabilities is in Preview for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+Request access by <a href="https://www.datadoghq.com/product-preview/csm-vulnerability-management-govcloud/">filling this form</a>.
+</div>
 {{< /site-region >}}
 
 ## Overview
@@ -49,7 +51,7 @@ Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM.
 
 Detect vulnerabilities continuously
-: Scan recent updates and newly published CVEs, across running container images, hosts, host images, and serverless, and identify vulnerable container image layers.
+: Scan recent updates and newly published CVEs, across running container images from hosts and registries, host, host images, and serverless, and identify vulnerable container image layers.
 
 Prioritize exploitable vulnerabilities, using runtime observability
 : Leverage Datadog's security scoring, which is based on CVSS, by incorporating intel from CISA KEV, EPSS, and public exploit availability. With runtime observability, you can monitor production, exposure to attacks, sensitive data processing, and privileged access.
@@ -71,7 +73,7 @@ Get started with CSM Vulnerabilities and cover your infrastructure in minutes, u
 
 You can also use both deployment methods to use the unified Datadog Agent where you already have it deployed, and Agentless elsewhere.
 
-After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [CSM Vulnerability Explorer][1] within an hour. 
+After you've enabled it, Datadog starts scanning your resources continuously, and starts reporting prioritized vulnerabilities in your [CSM Vulnerabilities explorer][1] within an hour. 
 
 Use these tables to decide which solution to start with: 
 | Feature                                   | Agentless                                     | Unified Datadog Agent          |
@@ -87,18 +89,18 @@ Use these tables to decide which solution to start with:
 | Cloud provider                            | AWS, [Azure (Preview)][15]                    | AWS, Azure, GCP, on-prem, etc. |
 | Operating system                          | Linux                                         | Linux, Windows                 |
 | Serverless                                | AWS Lambda                                    | Not applicable                 |
-| Container registries                      | [Amazon ECR (Preview)][16]                    | Not applicable                 |
+| Container registries                      | Amazon ECR                                    | Not applicable                 |
 
 For more information on compatibility, see [CSM Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
 ## Continuously detect, prioritize, and remediate exploitable vulnerabilities
-The [CSM Vulnerabilities Explorer][1] helps you investigate vulnerabilities detected across  your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
+The [CSM Vulnerabilities explorer][1] helps you investigate vulnerabilities detected across your container images, host images, running hosts, and serverless functions using filtering and grouping capabilities.
 
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
-For vulnerabilities with available fixes, the Explorer provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
+For vulnerabilities with available fixes, the explorer provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerability Explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability.png" alt="The CSM Vulnerabilities explorer displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
 ## Automation and Jira integration
 Make CSM Vulnerabilities part of your daily workflow by setting up [security notification rules][17] and [automation pipelines (in Preview)][20]:

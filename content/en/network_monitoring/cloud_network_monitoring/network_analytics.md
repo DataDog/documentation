@@ -77,9 +77,9 @@ You can use the facet panels to browse through all of the tags available on your
 
 #### Custom facets
 
-Aggregate and filter your traffic data by any tags in Datadog network page. An include list of tags is provided by default, which you can find in the search bar dropdown menu:
+Aggregate and filter your traffic data by any tags on the network analytics page. A list of included tags is located on the left side of the screen under the **Client** and **Server** tags, and in the **View clients as** and **View servers as** dropdown menus.
 
-{{< img src="network_performance_monitoring/network_analytics/drop_down_npm.png" alt="Dropdown menu" style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_analytics/drop_down_cnm.png" alt="Dropdown menu from network analytics page showing the facet list" style="width:90%;">}}
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
@@ -87,7 +87,7 @@ Include listed tags are `service`, `availability zone`, `env`, `environment`, `p
 2. Enter the relevant tag you want to create a custom facet upon.
 3. Click **Add**.
 
-Once the custom facet is created, use this tag to filter and aggregate traffic in the network page and map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
+Once the custom facet is created, use this tag to filter and aggregate traffic on the network analytics page and network map. All custom facets can be viewed in the bottom `Custom` section of the facet panels.
 
 ### Wildcard search
 To perform a multi-character wildcard search, use the `*` symbol as follows:
@@ -342,11 +342,14 @@ External traffic (to public IPs) and Datadog Agent traffic is shown by default. 
 
 ### Unresolved traffic
 
-Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because:
+Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because it lacks identifiable metadata, such as source or destination information. This can occur when Datadog cannot resolve the traffic to known entities like load balancers, cloud services, or specific IP addresses within the monitored infrastructure. Typically, unresolved traffic may arise due to:
 
 * The host or container client or server IPs are not tagged with the client or server tags used for traffic aggregation.
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
+* The destination has not been tagged with a service, or an IP has not been mapped to any service. 
+
+Monitoring unresolved traffic is essential for identifying blind spots in network visibility and ensuring all relevant traffic is accounted for in performance and security analysis.
 
 Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
@@ -377,7 +380,7 @@ The top of the sidepanel displays common client and server tags shared by the in
 
 ### Security
 
-The **Security** tab highlights potential network threats and findings detected by [Cloud Security Management Threats][6] and [Cloud Security Management Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+The **Security** tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Management Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
 ## Further Reading
 

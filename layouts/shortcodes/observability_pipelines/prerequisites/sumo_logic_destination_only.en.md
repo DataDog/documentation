@@ -1,4 +1,4 @@
-To use Observability Pipelines's Sumo Logic destination, you have a Hosted Sumo Logic Collector with a HTTP Logs source, and the following information available:
+To use Observability Pipelines' Sumo Logic destination, you have a Hosted Sumo Logic Collector with a HTTP Logs source, and the following information available:
 - The bind address that your Observability Pipelines Worker will listen on to receive logs. For example, `0.0.0.0:80`.
 - The URL of the Sumo Logic HTTP Logs Source that the Worker will send processed logs to. This URL is provided by Sumo Logic once you configure your hosted collector and set up an HTTP Logs and Metrics source.
 

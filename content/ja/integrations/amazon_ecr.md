@@ -1,8 +1,8 @@
 ---
 categories:
 - クラウド
-- AWS
-custom_kind: integration
+- aws
+custom_kind: インテグレーション
 dependencies: []
 description: Amazon ECR のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_ecr/

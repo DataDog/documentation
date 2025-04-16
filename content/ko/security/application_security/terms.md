@@ -7,7 +7,7 @@ further_reading:
 - link: /security/application_security/threats/
   tag: 설명서
   text: 위협 관리
-- link: /security/application_security/software_composition_analysis/
+- link: /security/code_security/software_composition_analysis/
   tag: 설명서
   text: 소프트웨어 구성 분석
 - link: https://www.datadoghq.com/blog/datadog-threat-intelligence/
@@ -92,6 +92,14 @@ In-App WAF 규칙 (구 이벤트 규칙)
 : 대량의 공격 트래픽을 보내는 IP. Flagged IP를 검토하고 차단하는 것이 좋습니다. 임계값은 사용자가 구성할 수 없습니다.
 : [공격자 탐색기][17] 참조
 
+공격자 지문
+: 여러 요청에 걸쳐 공격자를 추적하기 위해 요청 특성에서 계산된 식별자입니다.
+: [공격자 지문] 참조[18]
+
+공격자 클러스터
+: 분산 공격 전반에 걸쳐 공격자를 식별하는 속성 집합입니다.
+: [공격자 클러스터링][19] 참조
+
 ## 공격 및 알려진 취약점 관련 용어
 
 Open Web Application Security Project (OWASP)
@@ -146,3 +154,5 @@ Object-Graph Navigation Language Injection (OGNLi)
 [15]: /ko/security/application_security/threats/trace_qualification/
 [16]: /ko/security/application_security/threats/threat-intelligence/
 [17]: /ko/security/application_security/threats/attacker-explorer/
+[18]: /ko/security/application_security/threats/attacker_fingerprint/
+[19]: /ko/security/application_security/threats/attacker_clustering/

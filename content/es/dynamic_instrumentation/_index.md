@@ -5,10 +5,10 @@ aliases:
 further_reading:
 - link: /dynamic_instrumentation/expression-language/
   tag: Documentación
-  text: Más información sobre el lenguaje de expresión de instrumentación dinámica
+  text: Más información sobre el lenguaje de expresión de Dynamic Instrumentation
 - link: dynamic_instrumentation/sensitive-data-scrubbing/
   tag: Documentación
-  text: Eliminación de información confidencial de los datos de instrumentación dinámica
+  text: Eliminación de información confidencial de los datos de Dynamic Instrumentation
 - link: /tracing/trace_collection/dd_libraries
   tag: Documentación
   text: Más información sobre cómo instrumentar tu aplicación
@@ -23,8 +23,8 @@ further_reading:
   text: Más información sobre métricas
 - link: https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/
   tag: Blog
-  text: Utilizar la instrumentación dinámica de Datadog para añadir logs de aplicación
-    sin volver a desplegarlos
+  text: Utilizar Datadog Dynamic Instrumentation para añadir logs de aplicación sin
+    volver a desplegarlos
 is_beta: false
 private: false
 title: Instrumentación Dinámica
@@ -32,24 +32,25 @@ title: Instrumentación Dinámica
 
 ## Información general
 
-La instrumentación dinámica te permite añadir instrumentación en tus sistemas de producción en ejecución sin necesidad de reiniciar y en cualquier localización del código de tu aplicación, incluyendo bibliotecas de terceros. Puedes añadir o modificar telemetría para logs, métricas, tramos (spans), y el etiquetado correspondiente, desde la interfaz de usuario de Datadog. La instrumentación dinámica tiene poca sobrecarga y no tiene efectos secundarios en tu sistema.
+Dynamic Instrumentation te permite añadir instrumentación en tus sistemas de producción en ejecución sin necesidad de reiniciar y en cualquier localización del código de tu aplicación, incluyendo bibliotecas de terceros. Puedes añadir o modificar telemetría para logs, métricas, tramos (spans), y el etiquetado correspondiente, desde la interfaz de usuario de Datadog. Dynamic Instrumentation tiene poca sobrecarga y no tiene efectos secundarios en tu sistema.
 
-Si estás interesado en probar las últimas mejoras de la experiencia de usuario de la instrumentación dinámica, considera la posibilidad de participar en la fase beta pública de [autocompletar y buscar][17].
+Si estás interesado en probar las últimas mejoras de la experiencia de usuario para la Instrumentación dinámica, considera participar en la [Vista previa de autocompletar y buscar][17].
 
 ## Empezando
 
 ### Requisitos previos
 
-La instrumentación dinámica requiere lo siguiente:
+Dynamic Instrumentation requiere lo siguiente:
 
 - [Datadog Agent][1] 7.45.0 o posterior está instalado junto a tu servicio.
 - [Configuración remota][2] está activada en ese Agent.
 - Para las aplicaciones Java, la biblioteca de rastreo [`dd-trace-java`][3] es 1.34.0 o posterior.
 - Para las aplicaciones Python, la biblioteca de rastreo [`dd-trace-py`][4] es 2.2.0 o posterior.
 - Para aplicaciones .NET, la biblioteca de rastreo [`dd-trace-dotnet`][5] es 2.54.0 o posterior.
-- Para las aplicaciones de PHP, la biblioteca de rastreo [`dd-trace-php`][18] 1.4.0 o posterior.
+- (Vista previa limitada) Para aplicaciones Node.js, biblioteca de rastreo [`dd-trace-js`][18] 5.35.0 o posterior.
+- (Vista previa limitada) Para aplicaciones Ruby, biblioteca de rastreo [`dd-trace-rb`][19] 2.9.0 o posterior.
 - Las etiquetas (tags) del [etiquetado de servicios unificado][6] `service`, `env` y `version` se aplican a tu despliegue.
-- Recomendado, se encuentra habilitado [autocompletar y buscar (fase beta abierta)][17].
+- Recomendado, [autocompletar y buscar (en Vista previa)][17] está activado.
 - Recomendado, la [integración de código fuente][7] está configurada para tu servicio.
 - Se requiere el permiso **Configuración de lectura de Dynamic Instrumentation** (`debugger_read`) para acceder a la página de Dynamic Instrumentation.
 - Se requiere el permiso **Configuración de escritura de Dynamic Instrumentation** (`debugger_write`) para crear o modificar instrumentaciones.
@@ -79,7 +80,8 @@ Para obtener instrucciones más detalladas, selecciona tu tiempo de ejecución a
 ### Limitaciones
 
 - Dynamic Instrumentation aún no es compatible con servicios de Azure App o entornos serverless.
-- La compatibilidad se limita a las aplicaciones creadas con Python, Java, .NET y PHP.
+- La compatibilidad total sólo está disponible para las aplicaciones creadas con Python, Java, .NET.
+- Las aplicaciones creadas con Node.js y Ruby ya disponen de versiones preliminares limitadas.
 
 ## Explorar Dynamic Instrumentation
 
@@ -100,7 +102,7 @@ Todos los tipos de sondeos requieren la misma configuración inicial:
 1. Ve a la [página de Dynamic Instrumentation][12].
 1. Haz clic en **Create probe** (Crear sondeo) en la parte superior derecha, o haz clic en el menú de tres puntos de un servicio y selecciona **Add a probe for this service** (Añadir un sondeo para este servicio).
 1. Si no se han rellenado previamente, elige un servicio, tiempo de ejecución, entorno y versión.
-1. En el código fuente, especifica dónde establecer el sondeo al seleccionar una clase y un método o un archivo fuente y una línea. Si has optado por la [fase beta pública de autocompletar y buscar][17], autocompletar mostrará sugerencias para seleccionar una clase o método.
+1. En el código fuente, especifica dónde establecer la sonda al seleccionar una clase y un método o un archivo fuente y una línea. Si has optado por la [vista previa de autocompletar y buscar][17], autocompletar muestra sugerencias para seleccionar una clase o un método.
 
 Consulta los tipos de sondeos individuales a continuación a fin de conocer los pasos de creación específicos para cada tipo de sondeo.
 
@@ -225,4 +227,5 @@ Puedes usar un *sondeo de etiqueta de tramo* como alternativa a [usar la instrum
 [15]: /es/dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [17]: /es/dynamic_instrumentation/symdb/
-[18]: https://github.com/DataDog/dd-trace-php
+[18]: https://github.com/DataDog/dd-trace-js
+[19]: https://github.com/DataDog/dd-trace-rb

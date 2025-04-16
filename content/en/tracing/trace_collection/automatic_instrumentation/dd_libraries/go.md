@@ -66,7 +66,7 @@ Refer to the instructions in the section corresponding to your preference below:
 - Comprehensive tracing coverage:
    - Instruments your code and all dependencies, including the Go standard library
    - Instruments your code during compilation, preventing gaps in tracing coverage due to overlooked manual instrumentation
-- Exclusive [Application Security Management][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
+- Exclusive [App and API Protection][7] **Exploit Prevention** feature. [Exploit Prevention][15] is a Runtime Application Self-Protection (RASP) implementation and includes RASP methods such as Local File Inclusion (LFI).
 
 ### Requirements
 
@@ -231,7 +231,7 @@ Some of the instrumentation performed by `orchestrion` is done callee-side (or l
 
 #### Use the tracing library
 
-You can use the [tracing library][4] ([or the v2 tracing library][5]) in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
+You can use the [tracing library][4] in your Orchestrion-built application. This is useful for instrumenting frameworks not yet supported by Orchestrion. However, be aware that this may result in duplicated trace spans in the future as Orchestrion support expands. Review the [release notes][11] when updating your `orchestrion` dependency to stay informed about new features and adjust your manual instrumentation as necessary.
 
 #### Use the continuous profiler
 
@@ -243,7 +243,6 @@ To enable the profiler, set the environment variable `DD_PROFILING_ENABLED=true`
 To troubleshoot builds that `orchestrion` manages, see [Troubleshooting Go Compile-Time Instrumentation][13].
 
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/ddtrace
 [6]: https://github.com/DataDog/orchestrion
 [7]: /security/application_security/threats/exploit-prevention
 [8]: https://go.dev/doc/devel/release#policy

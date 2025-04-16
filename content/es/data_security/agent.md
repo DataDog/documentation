@@ -95,7 +95,7 @@ Para obtener más información, consulta la documentación sobre la [gestión de
 El Agent en sitios no gubernamentales recopila información del entorno, del rendimiento y del uso de funciones del Datadog Agent. Cuando el Agent detecta un sitio gubernamental o se utiliza el [proxy FIPS del Datadog Agent][1], el Agent desactiva automáticamente la recopilación de telemetría. Cuando la detección es imposible (por ejemplo, si se está utilizando un proxy), se emite la telemetría del Agent, pero se abandona inmediatamente en el consumo de Datadog. Para evitar que se emitan estos datos en primer lugar, Datadog recomienda desactivar explícitamente la telemetría del Agent, actualizando el parámetro `agent_telemetry` en el archivo de configuración del Agent, como se muestra en el ejemplo siguiente.
 
 {{< tabs >}}
-{{% tab "Datadog.yaml" %}}
+{{% tab "datadog.yaml" %}}
 
 ```yaml
 agent_telemetry:
@@ -147,10 +147,8 @@ DD_AGENT_TELEMETRY_ENABLED=false
 | pymem.alloc                                 | Número total de bytes asignados por el intérprete de Python desde el inicio del Agent            |
 | api_server.request_duration_seconds         | Rendimiento de la ejecución de comandos CLI (si se ejecutan)                                                  |
 | logs.decoded                                | Número total de logs decodificados                                                                      |
-| logs.processed                              | Número total de logs procesados                                                                    |
 | logs.sender_latency                         | Latencia del remitente HTTP en milisegundos                                                               |
 | logs.bytes_missed                           | Número total de bytes perdidos antes de poder ser consumidos por el Agent, como por ejemplo tras la rotación de logs |
-| logs.sent                                   | Número total de logs enviados                                                                         |
 | logs.dropped                                | Número total de logs abandonados                                                                      |
 | logs.bytes_sent                             | Número total de bytes enviados antes de la codificación, si los hay                                                |
 | logs.encoded_bytes_sent                     | Número total de bytes enviados tras la codificación, si los hay                                                 |
@@ -186,7 +184,6 @@ Sólo se emiten los métricas aplicables. Por ejemplo, si DBM no está activado,
 ### Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: /es/agent/
 [2]: /es/api/
