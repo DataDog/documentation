@@ -62,18 +62,23 @@ function FilterForm(props: {
   // Only one child form needs to be pending
   // for this entire form to be pending.
   const handleTraitPending = () => {
+    console.log('handleTraitPending');
     setTraitIsPending(true);
+    setTraitIsClean(false);
     props.onPending();
   };
 
   // Only one child form needs to be pending
   // for this entire form to be pending.
   const handleOptionGroupPending = () => {
+    console.log('handleOptionGroupPending');
     setOptionGroupIsPending(true);
+    setOptionGroupIsClean(false);
     props.onPending();
   };
 
   const handleTraitSave = ({ traitConfig }: { traitConfig: TraitConfig }) => {
+    console.log('handleTraitSave', traitConfig);
     const updatedFilter = {
       ...localFilter,
       trait_id: traitConfig.id,
@@ -86,8 +91,10 @@ function FilterForm(props: {
       }
     };
     setLocalFilter(updatedFilter);
+    setTraitIsClean(true);
 
     if (optionGroupIsClean || optionGroupIsPending) {
+      setTraitIsPending(true);
       props.onPending();
     } else {
       props.onSave(updatedFilter);
@@ -97,6 +104,7 @@ function FilterForm(props: {
   };
 
   const handleOptionGroupSave = (p: { optionGroupId: string; optionGroup: OptionGroup }) => {
+    console.log('handleOptionGroupSave', p);
     const newCustomizationConfig: CustomizationConfig = {
       ...props.filter.customizationConfig,
       optionGroupsById: {

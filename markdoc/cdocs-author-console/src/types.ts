@@ -36,3 +36,5 @@ export interface OptionConfig {
   id: string;
   label: string;
 }
+
+export type FormStatus = 'unmodified' | 'pending' | 'saved';

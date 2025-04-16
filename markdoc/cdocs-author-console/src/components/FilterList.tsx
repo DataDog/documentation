@@ -45,7 +45,8 @@ function FilterList({
     setCurrentFilterUuid(newFilter.uuid);
   };
 
-  const handleFilterFormChange = (filter: WizardFilter) => {
+  const handleFilterFormSave = (filter: WizardFilter) => {
+    console.log('handleFilterFormChange', filter);
     if (!currentFilterUuid) {
       throw new Error('No current filter to edit');
     }
@@ -109,7 +110,7 @@ function FilterList({
               <FilterForm
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
-                onSave={handleFilterFormChange}
+                onSave={handleFilterFormSave}
                 onPending={() => {
                   setSaveButtonIsDisabled(true);
                 }}
