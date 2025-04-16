@@ -60,7 +60,7 @@ Datadog provides [Quality Gates][6] as a platform capability to help you maintai
 
 Code Security offers **vulnerability-centric views** of all library and code vulnerabilities detected from both static repository scanning and runtime service detection.
 
-### Explore vulnerabilities 
+### Explore vulnerabilities
 
 For library vulnerabilities, each row in the table represents a specific vulnerability affecting a library version. Based on if you have static or runtime detection enabled, the **Detected In** column displays the specific repositories and/or services affected by this vulnerability.
 
@@ -72,7 +72,7 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
  Severities are scored by the following:
 | CVSS Score    | Qualitative Rating
-| --------------| -------------------|  
+| --------------| -------------------|
 |   `0.0`         | None                |
 |   `0.1 - 3.9`   | Low                 |
 |   `4.0 - 6.9`   | Medium              |
@@ -83,7 +83,7 @@ In the side panel for a single library vulnerability in SCA, in addition to deta
 
 Code Security also offers **repository-centric views** of static scan results, supporting granular filtering across all branches and commits for scanned repositories.
 
-Click on a repository on the **Repositories** page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest). 
+Click on a repository on the **Repositories** page to access a more detailed view where you can customize the search query by branch (with the default branch appearing first) and by commit (starting with the latest).
 
 {{< tabs >}}
 {{% tab "Static Code Analysis (SAST)" %}}
@@ -127,7 +127,7 @@ You can access vulnerability reports and locate the source files where the vulne
 {{% /tab %}}
 {{< /tabs >}}
 
-## Notify, remediate, and report 
+## Notify, remediate, and report
 
 Code Security helps you set up workflows to track and manage remediation of findings:
 
@@ -135,6 +135,7 @@ Code Security helps you set up workflows to track and manage remediation of find
 - Track vulnerabilities by service and team in the **Code Security Summary** page.
 
 ## Link results to Datadog services and teams
+
 ### Link results to services
 Datadog associates code and library scan results with relevant services by using the following mechanisms:
 
@@ -189,7 +190,7 @@ Datadog automatically associates the team attached to a service when a violation
 is associated with `myservice`, then the team `myservice` will be associated to any violation
 detected in this file.
 
-If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider. 
+If no services or teams are found, Datadog uses the `CODEOWNERS` file in your repository. The `CODEOWNERS` file determines which team owns a file in your Git provider.
 
 **Note**: You must accurately map your Git provider teams to your [Datadog teams][10] for this feature to function properly.
 

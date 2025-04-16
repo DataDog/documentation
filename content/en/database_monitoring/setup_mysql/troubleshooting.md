@@ -152,6 +152,18 @@ The query may not have been sampled for selection because it does not represent 
 
 Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
+### Index metrics are missing
+
+If the Agent displays this error:
+```
+Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
+```
+Resolve the error by granting the `datadog` user the SELECT privilege to collect index metrics:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
 #### `performance_schema` is not enabled {#performance-schema-not-enabled}
 The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 

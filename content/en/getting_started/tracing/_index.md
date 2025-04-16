@@ -68,9 +68,8 @@ To create an application to observe in Datadog:
 
 ## Set up Datadog APM
 
-To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation:
+To set up Datadog APM without needing to modify your application's code or the deployment process, use Single Step APM Instrumentation, or alternatively, you can set up APM using [Datadog tracing][8] libraries.
 
-<div class="alert alert-info"><strong>Note</strong>: <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/">Single Step APM Instrumentation</a> is in beta. Alternatively, you can set up APM using <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/dd_libraries/">Datadog tracing libraries</a>.</div>
 
 1. Run the installation command:
 
@@ -220,3 +219,4 @@ To add custom instrumentation:
 [5]: /tracing/glossary/#instrumentation
 [6]: /tracing/trace_collection/custom_instrumentation/
 [7]: /getting_started/site/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/

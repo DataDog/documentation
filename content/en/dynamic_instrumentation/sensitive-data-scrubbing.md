@@ -4,7 +4,7 @@ further_reading:
 - link: "/dynamic_instrumentation/enabling/"
   tag: "Documentation"
   text: "Setting Up Dynamic Instrumentation"
-- link: "/sensitive_data_scanner/"
+- link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
 ---
@@ -58,5 +58,5 @@ You can disable the default rules or create other rules through the [Sensitive D
 
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-debugger/debugger-bootstrap/src/main/java/datadog/trace/bootstrap/debugger/util/Redaction.java
 [2]: https://app.datadoghq.com/dynamic-instrumentation/setup
-[3]: /sensitive_data_scanner/
+[3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner

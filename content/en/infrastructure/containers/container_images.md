@@ -205,7 +205,7 @@ sbom:
 
 #### Amazon Elastic Container Registry (Amazon ECR)
 
-Set up the [AWS integration][4] to begin crawling Container Image metadata from Amazon ECR.
+Set up the [AWS integration][4] and enable [Resource Collection][12] to begin crawling Container Image metadata from Amazon ECR.
 
 ## Configure container images trends
 
@@ -226,10 +226,11 @@ Tag and enrich your container images with arbitrary tags by using [extract label
 [1]: https://app.datadoghq.com/container-images
 [2]: /security/cloud_security_management
 [3]: /infrastructure/containers/?tab=docker#setup
-[4]: /integrations/amazon_web_services/
+[4]: /integrations/amazon_web_services/#setup
 [5]: https://www.cisa.gov/sbom
 [6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/cloud_security_management/vulnerabilities
 [9]: https://app.datadoghq.com/container-images/image-trends
 [10]: https://www.datadoghq.com/pricing/?product=cloud-security-management#products
 [11]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
+[12]: /integrations/amazon_web_services/#resource-collection

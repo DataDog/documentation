@@ -36,7 +36,6 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
-@import "pages/standard-attributes";
 @import "pages/reference";
 
 // Components
@@ -66,6 +65,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/try-rule-cta-and-banner';
 @import 'components/try-rule-modal';
 @import 'components/learning-center-callout';
+@import 'components/expression-language';
 
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
@@ -76,6 +76,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 
 @import 'components/tooltip'; // Tooltip shortcode styles
 @import "components/multifilter-search";
+@import "components/filter-search";
 
 
 // for now just include ie fixes

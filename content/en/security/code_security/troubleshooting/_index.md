@@ -108,6 +108,8 @@ If diff-aware is not working with the Static Analyzer, ensure that:
 
 You can also run datadog-static-analyzer with the `--debug` option to get more information.
 
+**Note**: Diff-aware works only on feature branches. For more information, learn about the [implementation details of diff-aware][13].
+
 ## Software Composition Analysis
 
 For issues with Datadog Software Composition Analysis (SCA), include the following information in a bug report to Datadog Support.
@@ -153,6 +155,10 @@ this file, you can update your project definition to generate it. Follow these [
 
 The generated lock file is used by [`osv-scanner`][7] to extract dependencies and generate an SBOM.
 
+### No results from Datadog-hosted scans for a repository using `git-lfs`
+
+Datadog-hosted scanning for Software Composition Analysis (SCA) does not support repositories that use [Git Large File Storage][18] (`git-lfs`). If your repository uses `git-lfs`, [set up the analysis in a CI pipeline][19] and upload the results to Datadog instead.
+
 ## No vulnerabilities detected by Software Composition Analysis
 
 There are a series of steps that must run successfully for vulnerability information to appear either in the [Software Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
@@ -162,8 +168,8 @@ There are a series of steps that must run successfully for vulnerability informa
 If you have enabled runtime vulnerability detection on your services, you can use the metric `datadog.apm.appsec_host` to check if SCA is running.
 
 1. Go to **Metrics > Summary** in Datadog.
-2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running ASM. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running ASM.
+2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
+3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
@@ -228,6 +234,9 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [8]: https://github.com/aquasecurity/trivy
 [9]: https://learn.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#enabling-the-lock-file
 [12]: https://app.datadoghq.com/security/appsec/vm/library
+[13]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/diff-aware.md
 [15]: https://app.datadoghq.com/security/code-security/inventory/services
 [16]: https://app.datadoghq.com/services?&lens=Security
 [17]: https://app.datadoghq.com/security/configuration/code-security/setup
+[18]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
+[19]: https://docs.datadoghq.com/security/code_security/software_composition_analysis/setup_static/#scan-in-ci-pipelines

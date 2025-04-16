@@ -97,7 +97,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td>Real time</td>
   </tr>
   <tr>
-    <td><strong><a href="/security/threats">CSM Threats</a></strong></td>
+    <td><strong><a href="/security/threats">Workload Protection</a></strong></td>
     <td></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -139,13 +139,13 @@ Monitor your compliance security coverage and secure your cloud infrastructure a
 For information on disabling CSM, see the following:
 
 - [Disable CSM Vulnerabilities][8]
-- [Disable CSM Threats][9]
+- [Disable Workload Protection][9]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless_scanning/enable
 [2]: /security/cloud_security_management/agentless_scanning
 [3]: /security/cloud_security_management/setup/agent
 [4]: /security/cloud_security_management/setup/cloudtrail_logs

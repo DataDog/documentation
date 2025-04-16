@@ -69,7 +69,9 @@ Enter the following information based on your selected logs destinations.
 
 {{% observability_pipelines/destination_settings/datadog_archives_note %}}
 
-Follow the instructions for the cloud provider you are using to archive your logs.
+{{% observability_pipelines/destination_settings/datadog_archives_prerequisites %}}
+
+To set up the destination, follow the instructions for the cloud provider you are using to archive your logs.
 
 {{% collapse-content title="Amazon S3" level="h5" %}}
 

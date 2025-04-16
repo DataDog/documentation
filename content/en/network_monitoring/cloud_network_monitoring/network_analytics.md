@@ -342,11 +342,14 @@ External traffic (to public IPs) and Datadog Agent traffic is shown by default. 
 
 ### Unresolved traffic
 
-Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because:
+Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because it lacks identifiable metadata, such as source or destination information. This can occur when Datadog cannot resolve the traffic to known entities like load balancers, cloud services, or specific IP addresses within the monitored infrastructure. Typically, unresolved traffic may arise due to:
 
 * The host or container client or server IPs are not tagged with the client or server tags used for traffic aggregation.
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
+* The destination has not been tagged with a service, or an IP has not been mapped to any service. 
+
+Monitoring unresolved traffic is essential for identifying blind spots in network visibility and ensuring all relevant traffic is accounted for in performance and security analysis.
 
 Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
@@ -377,7 +380,7 @@ The top of the sidepanel displays common client and server tags shared by the in
 
 ### Security
 
-The **Security** tab highlights potential network threats and findings detected by [Cloud Security Management Threats][6] and [Cloud Security Management Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+The **Security** tab highlights potential network threats and findings detected by [Workload Protection][6] and [Cloud Security Management Misconfigurations][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
 ## Further Reading
 
