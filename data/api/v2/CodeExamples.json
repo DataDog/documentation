@@ -819,11 +819,25 @@
       "description": "Create a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "CreateMonitorNotificationRule": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Create a monitor notification rule returns \"OK\" response"
+    }
+  ],
   "UpdateMonitorConfigPolicy": [
     {
       "group": "monitors",
       "suffix": "",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "UpdateMonitorNotificationRule": [
+    {
+      "group": "monitors",
+      "suffix": "",
+      "description": "Update a monitor notification rule returns \"OK\" response"
     }
   ],
   "UpdateDeviceUserTags": [
