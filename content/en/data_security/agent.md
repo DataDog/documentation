@@ -161,6 +161,7 @@ agent diagnose show-metadata agent-telemetry
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
+| logs_destination.destination_workers        | Number of workers assigned in the logs sender via the RTT fairness algorithm                                           |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
