@@ -11,7 +11,7 @@ further_reading:
   text: "Cloud Security Management Misconfigurations"
 - link: "/security/threats/"
   tag: "Documentation"
-  text: "Cloud Security Management Threats"
+  text: "Workload Protection"
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"

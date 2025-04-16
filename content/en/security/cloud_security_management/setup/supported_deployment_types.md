@@ -6,7 +6,7 @@ title: Cloud Security Supported Deployment Types
 
 The following table summarizes the CSM features available relative to each deployment type.
 
-| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities          | CSM Identity Risks | CSM Agentless Scanning |
+| Deployment type     | Agent Required (7.46+) | CSM Misconfigurations | Workload Protection | CSM Vulnerabilities          | CSM Identity Risks | CSM Agentless Scanning |
 |---------------------|------------------------|-----------------------|-------------|------------------------------|--------------------|------------------------|
 | AWS Account         |                        | {{< X >}}             |             | {{< X >}}                    | {{< X >}}          | {{< X >}}              |
 | Azure Account       |                        | {{< X >}}             |             | Agentless Scanning (Preview) | {{< X >}}          |                        |
@@ -20,7 +20,7 @@ The following table summarizes the CSM features available relative to each deplo
 | AWS Fargate ECS/EKS | {{< X >}}              |                       | {{< X >}}   |                              |                    |                        |
 
 The following table summarizes the scope of coverage available relative to each CSM feature.
-| Resources monitored             | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
+| Resources monitored             | CSM Misconfigurations | Workload Protection | CSM Vulnerabilities | CSM Identity Risks | CSM Agentless scanning |
 |---------------------------------|-----------------------|-------------|---------------------|--------------------|------------------------|
 | Resources in AWS Account        | {{< X >}}             |             | {{< X >}}           |                    | {{< X >}}              |
 | Resources in Azure Subscription | {{< X >}}             |             |                     |                    |                        |

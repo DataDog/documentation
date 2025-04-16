@@ -25,7 +25,7 @@ products:
 - name: Cloud Security Management
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -36,16 +36,16 @@ Detection rules define conditional logic that is applied to all ingested logs an
 
 ## Out-of-the-box detection rules
 
-Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
+Datadog provides [out-of-the-box detection rules][2] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your App and API Protection library, and the Agent, depending on your configuration.
 
 Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][3] uses log detection to analyze ingested logs in real-time.
 - Cloud Security Management (CSM):
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
-    - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
+    - [Workload Protection][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [CSM Identity Risks][6] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [Application Security Management][7] (ASM) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
+- [App and API Protection][7] (AAP) leverages Datadog [APM][8], the [Datadog Agent][9], and detection rules to detect threats in your application environment.
 
 ## Beta detection rules
 
@@ -53,7 +53,7 @@ Datadog's Security Research team continually adds new OOTB security detection ru
 
 ## Custom detection rules
 
-There may be situations where you need to customize a rule based on your environment or workload. For example, if you're using ASM, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
+There may be situations where you need to customize a rule based on your environment or workload. For example, if you're using AAP, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
 To [create custom rules](#create-detection-rules), you can clone the default rules and edit the copies, or create your own rules from scratch.
 
@@ -72,9 +72,9 @@ To create a custom detection rule, click the **New Rule** button in the upper-ri
 For detailed instructions, see the following articles:
 
 - [Cloud SIEM][11]
-- [ASM][12]
+- [AAP][12]
 - [CSM Misconfigurations][13]
-- [CSM Threats][14]
+- [Workload Protection][14]
 
 ## Manage detection rules
 
@@ -119,7 +119,7 @@ Use Rule Version History to:
 
 To see the version history of a rule:
 1. Navigate to the [Security Settings][15] page. In the left navigation panel:
-    - For ASM: Click **Application Security** and then click **Detection Rules**.
+    - For AAP: Click **Application Security** and then click **Detection Rules**.
     - For CSM: Click **Cloud Security Management** and then click **Threat Detection Rules**.
     - For Cloud SIEM: Click **Cloud SIEM** and then click **Detection Rules**.
 1. Click on the rule you are interested in.
