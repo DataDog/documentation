@@ -17,8 +17,8 @@ To add a custom parsing rule:
 1. If you want to clone a library rule, select **Clone library rule** and then the library source from the dropdown menu.
 1. If you want to create a custom rule, select **Custom** and then enter the `source`. The parsing rules are applied to logs with that `source`.
 1. Enter log samples to test the parsing rules.
-1. Enter the rules for parsing the logs. See [Parsing][10031] for more information on writing parsing rules with Datadog Grok patterns.<br>**Notes**:
-    - The Datadog Grok patterns are different from the standard Grok patterns. For example, for the `hostname` you must use the Datadog Grok pattern `%{hostname:host}` instead of the standard Grok pattern `%{HOSTNAME:host}`.
+1. Enter the rules for parsing the logs.<br>**Notes**:
+    - The Datadog Grok patterns are different from the standard Grok patterns. For example, for the `hostname` you must use the Datadog Grok pattern `%{hostname:host}` instead of the standard Grok pattern `%{HOSTNAME:host}`. See [Parsing][10031] for more information on writing parsing rules with Datadog Grok patterns.
     - The `url`, `useragent`, and `csv` filters are not available.
 1. Click **Advanced Settings** if you want to add helper rules. See [Using helper rules to factorize multiple parsing rules][10032] for more information.
 1. Click **Add Rule**.
