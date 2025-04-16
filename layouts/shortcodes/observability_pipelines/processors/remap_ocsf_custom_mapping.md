@@ -5,7 +5,7 @@ To set up a custom mapping:
 1. Optionally, add a name for the mapping. The default name is `Custom Authentication`.
 1. Define a [filter query](#filter-query-syntax). Only logs that match the specified filter query are remapped. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Select the OCSF event category from the dropdown menu.
-1. Select the OCSF event class from the dropdown menu
+1. Select the OCSF event class from the dropdown menu.
 1. Enter a log sample so that you can reference it when you add fields.
 1. Click **Continue**.
 1. Select any OCSF profiles that you want to add. See [OCSF Schema Browser](https://schema.ocsf.io/) for more information.
@@ -20,5 +20,5 @@ To set up a custom mapping:
     | `INFO`           | `Informational` |
     | `WARN`           | `Medium`        |
     | `ERROR`          | `High`          |
-1. All values that are required to be mapped to an OCSF value are listed. Click **+ Add Row** if you want to map add additional values.
+1. All values that are required to be mapped to an OCSF value are listed. Click **+ Add Row** if you want to map additional values.
 1. Click **Save Mapping**.
