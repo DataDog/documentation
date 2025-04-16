@@ -42,6 +42,8 @@ Failed deployment events, currently interpreted through failure events, are used
 {{% tab "Datadog Incidents" %}}
 DORA Metrics can automatically identify and track failures through [Datadog Incidents][201]. Once incidents are declared, DORA uses them to measure change failure rate and time to restore.
 
+**Note**: Only incidents that are in a ‘stable’ or ‘resolved’ state are used to calculate Time to Restore.
+
 ### Requirements
 
 - **Incidents** is enabled as a **Failures** event data source in [DORA settings][202].
@@ -49,9 +51,9 @@ DORA Metrics can automatically identify and track failures through [Datadog Inci
 For incidents to appear in filtered DORA metrics views, Incidents must be tagged with the following attributes:
   - `Teams`
   - `Services`
-  - `Env`: The `Env` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
+  - `Envs`: The `Envs` attribute can be added in the [Incident Settings][203] if it doesn’t already exist.
 
-Incidents can optionnally be tagged with `Severity Level`. 
+If provided with Incidents, the `Severity` tag will be added to failure events.
 
 [201]: /service_management/incident_management/
 [202]: https://app.datadoghq.com/ci/settings/dora
