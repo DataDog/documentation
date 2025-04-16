@@ -86,7 +86,7 @@ The Datadog tracing libraries are used to instrument your applications, services
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
-- Application Security Management
+- App and API Protection
 
 For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
 

@@ -1197,6 +1197,30 @@
     "description": "View distinct metrics volumes for the given metric name.\n\nCustom metrics generated in-app from other products will return `null` for ingested volumes.",
     "summary": "List distinct metric volumes by metric name"
   },
+  "GetMonitorNotificationRules": {
+    "description": "Returns a list of all monitor notification rules.",
+    "summary": "Get all monitor notification rules"
+  },
+  "CreateMonitorNotificationRule": {
+    "description": "Creates a monitor notification rule.",
+    "summary": "Create a monitor notification rule",
+    "request_description": "Request body to create a monitor notification rule.",
+    "request_schema_description": "Request for creating a monitor notification rule."
+  },
+  "DeleteMonitorNotificationRule": {
+    "description": "Deletes a monitor notification rule by `rule_id`.",
+    "summary": "Delete a monitor notification rule"
+  },
+  "GetMonitorNotificationRule": {
+    "description": "Returns a monitor notification rule by `rule_id`.",
+    "summary": "Get a monitor notification rule"
+  },
+  "UpdateMonitorNotificationRule": {
+    "description": "Updates a monitor notification rule by `rule_id`.",
+    "summary": "Update a monitor notification rule",
+    "request_description": "Request body to update the monitor notification rule.",
+    "request_schema_description": "Request for updating a monitor notification rule."
+  },
   "ListMonitorConfigPolicies": {
     "description": "Get all monitor configuration policies.",
     "summary": "Get all monitor configuration policies"
@@ -1250,6 +1274,26 @@
   "GetAggregatedConnections": {
     "description": "Get all aggregated connections.",
     "summary": "Get all aggregated connections"
+  },
+  "CreateOnCallSchedule": {
+    "description": "Create a new on-call schedule",
+    "summary": "Create on-call schedule",
+    "request_description": "",
+    "request_schema_description": "The top-level request body for schedule creation, wrapping a `data` object."
+  },
+  "DeleteOnCallSchedule": {
+    "description": "Delete an on-call schedule",
+    "summary": "Delete on-call schedule"
+  },
+  "GetOnCallSchedule": {
+    "description": "Get an on-call schedule",
+    "summary": "Get on-call schedule"
+  },
+  "UpdateOnCallSchedule": {
+    "description": "Update a new on-call schedule",
+    "summary": "Update on-call schedule",
+    "request_description": "",
+    "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
   "ListOrgConfigs": {
     "description": "Returns all Org Configs (name, description, and value).",
@@ -1428,7 +1472,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Accounts: `integration-account`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Accounts        | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."

@@ -11,7 +11,7 @@ further_reading:
     text: "Start tracking misconfigurations with CSM Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "/security/research_feed"
     tag: "Documentation"
     text: "Security Research Feed"
@@ -71,7 +71,7 @@ Security and DevOps teams can act on the shared context of observability and sec
 
 CSM leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
-- [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
+- [**Workload Protection**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
@@ -92,9 +92,9 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 For an overview of your Cloud Security and Application Security findings, sorted by importance, use the [Security Inbox][14].
 
-To get more detail, use the [Explorers][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+To get more detail, use [Findings][7] to review and remediate your organization's security findings concerning misconfigurations, vulnerabilities, and identity risks. View detailed information about a finding, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
+{{< img src="security/csm/explorers_page.png" alt="CSM Findings page" width="100%">}}
 
 ## Investigate resources
 

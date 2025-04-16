@@ -32,11 +32,11 @@ Cloud Security Management Identity Risks (CSM Identity Risks) is a Cloud Infrast
 
 ## Review identity risks
 
-Review your organization's active identity risks on the [Identity Risks Explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
+Review your organization's active identity risks in the [Identity Risks explorer][1]. Use the **Group by** options to filter by **Identity Risks**, **Resources**, or **None** (individual identity risks). View additional details on the side panel.
 
 CSM Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
-{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Findings page" width="100%">}}
 
 ## Remediate identity risks
 
@@ -54,17 +54,29 @@ To remediate the identity risk, click **Fix in AWS** to update the resource in A
 
 You can also use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying identity risk, or leverage [Workflow Automation][3] to create automated workflows for identity risks (with or without human involvement).
 
-## Gain visibility into who can access at-risk resources
+## Gain visibility into at-risk resource access
 
-To see all the principals that can directly or indirectly access a given misconfigured resource, click the **Access Insights** tab in Misconfigurations, Identity Risks, and the Security Inbox. In this example, it shows all the principals that can access this EC2 instance:
+In Misconfigurations, Identity Risks, and the Security Inbox, you can click the **Access Insights** tab to see:
+- Which entities the resource can access across your accounts
+- Which principals can directly or indirectly access the resource
+
+This example shows all the principals that can access this EC2 instance:
 
 {{< img src="security/csm/access_insights.png" alt="The Access Insights panel, showing a list of publicly accessible EC2 instances with highly privileged IAM roles" width="100%">}}
 
-You can see the risks associated with each principal in the **Risks** column, as well as the type of **Path** the principal can take (direct or indirect) to access the resource.
+In the **What can this resource access?** section, you can:
+- See the account associated with each entity, and details about the access type
+- Search for entities, or filter them by entity type or account
+- View a list of excluded policies
+- Use the **All**, **Direct Access**, and **Indirect Access** tabs to filter which entities display in the table
+- Click the **Actions** dropdown beside an entity to see it in Resource Catalog, or update its configuration in AWS IAM console
 
-You can search for a subset of principals by name, type, public accessibility, or administrative access. Additionally, you can filter for direct or indirect access.
+In the **Who can access this resource?** section, you can:
+- See the risks associated with each principal in the **Risks** column, as well as the type of **Path** the principal can take (direct or indirect) to access the resource
+- Filter principals by name, type, public accessibility, or administrative access
+- Use the **All**, **Direct Access**, and **Indirect Access** tabs to filter which principals display in the table
+- Click the **Actions** dropdown beside a principal to see it in Resource Catalog, or update its configuration in AWS IAM console
 
-Click the **Actions** dropdown beside a principal to see it in Resource Catalog, or update its configuration in AWS IAM console.
 
 ## AWS IAM Access Analyzer integration
 

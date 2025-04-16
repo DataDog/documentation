@@ -50,6 +50,10 @@ When the updated **Task** displays a **RUNNING** status, use these pages to veri
 - [Live Containers][5] to view the container.
 - [Metrics Explorer][6] to view integration metrics.
 
+### Troubleshooting
+
+If the Datadog Agent's _Health Status_ in the AWS console is _Unhealthy_, but your Datadog Agent status command displays `Agent health: PASS`, ensure you are using the correct shell options (such as `CMD-SHELL`, `timeout`, and `startPeriod`). See [`datadog-agent-cws-ecs-fargate.json`][7].
+
 ## Examples
 
 {{< tabs >}}
@@ -94,3 +98,4 @@ Use the following JSON under `containerDefinitions` to create a Redis container 
 [4]: https://aws.amazon.com/console
 [5]: https://app.datadoghq.com/containers
 [6]: https://app.datadoghq.com/metric/explorer
+[7]: /resources/json/datadog-agent-cws-ecs-fargate.json

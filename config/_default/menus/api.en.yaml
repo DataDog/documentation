@@ -1815,6 +1815,71 @@ menu:
           - ListMonitorConfigPolicies
         unstable: []
         order: 10
+    - name: Update a monitor notification rule
+      url: '#update-a-monitor-notification-rule'
+      identifier: monitors-update-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 17
+    - name: Get a monitor notification rule
+      url: '#get-a-monitor-notification-rule'
+      identifier: monitors-get-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRule
+        unstable:
+          - v2
+        order: 14
+    - name: Delete a monitor notification rule
+      url: '#delete-a-monitor-notification-rule'
+      identifier: monitors-delete-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMonitorNotificationRule
+        unstable:
+          - v2
+        order: 18
+    - name: Create a monitor notification rule
+      url: '#create-a-monitor-notification-rule'
+      identifier: monitors-create-a-monitor-notification-rule
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMonitorNotificationRule
+        unstable:
+          - v2
+        order: 16
+    - name: Get all monitor notification rules
+      url: '#get-all-monitor-notification-rules'
+      identifier: monitors-get-all-monitor-notification-rules
+      parent: monitors
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMonitorNotificationRules
+        unstable:
+          - v2
+        order: 15
     - name: Unmute all monitors
       url: '#unmute-all-monitors'
       identifier: monitors-unmute-all-monitors
@@ -7359,6 +7424,58 @@ menu:
           - v2
         operationids:
           - ListOktaAccounts
+        unstable: []
+        order: 1
+    - name: On-Call
+      url: /api/latest/on-call/
+      identifier: on-call
+      generated: true
+    - name: Update on-call schedule
+      url: '#update-on-call-schedule'
+      identifier: on-call-update-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOnCallSchedule
+        unstable: []
+        order: 4
+    - name: Get on-call schedule
+      url: '#get-on-call-schedule'
+      identifier: on-call-get-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOnCallSchedule
+        unstable: []
+        order: 2
+    - name: Delete on-call schedule
+      url: '#delete-on-call-schedule'
+      identifier: on-call-delete-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOnCallSchedule
+        unstable: []
+        order: 3
+    - name: Create on-call schedule
+      url: '#create-on-call-schedule'
+      identifier: on-call-create-on-call-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallSchedule
         unstable: []
         order: 1
     - name: Opsgenie Integration
