@@ -241,7 +241,7 @@ Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 {{< img src="profiler/apm_service_page_pivot_to_contention_comparison_1.mp4" alt="Pivoting from APM service page to Profiling comparison page to find the line of code causing latency" video=true >}}
 
 ### Memory Leaks
-If you have set up [Continuous Profiler][15], and the service is running in a containerized environment you'll see the [Memory Leaks][24] tab.
+If you set up the [Continuous Profiler][15] and the service is running in a containerized environment, the [Memory Leaks][24] tab becomes available.
 
 It'll guide you through a workflow for identifying potential memory leaks and showing the most actionable data.
 
