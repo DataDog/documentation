@@ -30,6 +30,9 @@ Topics
 
 Connect your OpenAI account to LLM Observability with your OpenAI API key. LLM Observability uses the `GPT-4o mini` model for Evaluations.
 
+<div class="alert alert-danger">If you are a HIPAA organization and have a Business Associate Agreement (BAA) with Datadog, OpenAI API keys you integrate must be from your OpenAI account with a BAA and have zero data retention.</div>
+{{< /site-region >}}
+
 1. In Datadog, navigate to [**LLM Observability > Settings > Integrations**][1].
 1. Select **Connect** on the OpenAI tile.
 1. Follow the instructions on the tile.
