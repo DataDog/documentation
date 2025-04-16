@@ -113,10 +113,14 @@ Build your custom Datadog Agent image and push it to a container registry.
    ```
 2. Tag and push the image:
    ```shell
-   docker tag agent-otel <IMAGE-NAME>/<IMAGE-TAG>
-   docker push <IMAGE-NAME>/<IMAGE-TAG>
+   docker tag agent-otel datadog/agent:<IMAGE-TAG>
+   docker push datadog/agent:<IMAGE-TAG>
    ```
-   Replace `<IMAGE-NAME>` and `<IMAGE-TAG>` with your image name and desired tag. If the target repository is not Docker Hub, you need to include the repository name.
+   Ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
+   ```shell
+   docker push <REPOSITORY-NAME>/datadog/agent:<IMAGE-TAG>
+   ```
+
 3. For a Helm chart installation, set the image tag in your values file:
    {{< code-block lang="yaml" filename="datadog-values.yaml" collapsible="true" >}}
 agents:
