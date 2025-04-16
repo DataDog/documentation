@@ -77,11 +77,10 @@ Use the following environment variables to enable and configure log submission:
 
 ### Ruby
 
-Agentless logs submission with Test Optimization is supported for Rails applications.
-You need to [instrument your app with Datadog tracing][1] before enabling this feature.
+Agentless logs submission with Test Optimization is supported for Rails applications. Before enabling, ensure
+that your application is [instrumented with Datadog tracing][1].
 
-Agentless log submission requires `datadog-ci` version `0.16` or newer.
-It supports the following logging libraries:
+To use agentless log submission, you need `datadog-ci` version `0.16` or later. The following logging libraries are supported:
 
 -   `activesupport >= 5.0` (only when using `ActiveSupport::TaggedLogging`)
 -   `lograge >= 0.14`
