@@ -5,7 +5,7 @@ import { CustomizationConfig } from 'cdocs-data';
 
 export default function TraitSelector(props: {
   customizationConfig: CustomizationConfig;
-  onSelect: (traitId: string) => void;
+  onSave: (traitId: string) => void;
 }) {
   const traitsById = props.customizationConfig.traitsById;
 
@@ -23,7 +23,7 @@ export default function TraitSelector(props: {
       return;
     }
     setLocalTraitId(traitId);
-    props.onSelect(traitId);
+    props.onSave(traitId);
   };
 
   return (

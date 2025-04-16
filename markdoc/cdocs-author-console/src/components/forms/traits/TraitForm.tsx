@@ -101,7 +101,7 @@ function TraitForm({
         <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
       </Tabs>
       <CustomTabPanel value={currentTabIndex} index={0}>
-        <TraitSelector customizationConfig={customizationConfig} onSelect={handleExistingTraitSelect} />
+        <TraitSelector customizationConfig={customizationConfig} onSave={handleExistingTraitSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
         <p>

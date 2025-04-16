@@ -28,46 +28,72 @@ function FilterForm(props: {
     }
   }
 
+  // TODO: Use one variable for state, which could be
+  // blank, pending, or saved (clean), and
+  // there could be a callback that is just onStateChange
+
+  // The local copy of the filter, to hold any pending changes
+  const [localFilter, setLocalFilter] = useState<WizardFilter>(props.filter);
+
+  const [traitIsClean, setTraitIsClean] = useState(true);
   const [traitIsPending, setTraitIsPending] = useState(false);
+
+  const [optionGroupIsClean, setOptionGroupIsClean] = useState(true);
   const [optionGroupIsPending, setOptionGroupIsPending] = useState(false);
 
+  // Both child forms need to be clean
+  // for this entire form to be clean.
+  const handleTraitClean = () => {
+    setTraitIsClean(true);
+    if (optionGroupIsClean) {
+      props.onClean();
+    }
+  };
+
+  // Both child forms need to be clean
+  // for this entire form to be clean.
+  const handleOptionGroupClean = () => {
+    setOptionGroupIsClean(true);
+    if (traitIsClean) {
+      props.onClean();
+    }
+  };
+
+  // Only one child form needs to be pending
+  // for this entire form to be pending.
   const handleTraitPending = () => {
     setTraitIsPending(true);
     props.onPending();
   };
 
+  // Only one child form needs to be pending
+  // for this entire form to be pending.
   const handleOptionGroupPending = () => {
     setOptionGroupIsPending(true);
     props.onPending();
   };
 
-  const handleTraitCancel = () => {
-    setTraitIsPending(false);
-    if (!optionGroupIsPending) {
-      props.onClean();
-    }
-  };
-
-  const handleOptionGroupCancel = () => {
-    setOptionGroupIsPending(false);
-    if (!traitIsPending) {
-      props.onClean();
-    }
-  };
-
   const handleTraitSave = ({ traitConfig }: { traitConfig: TraitConfig }) => {
     const updatedFilter = {
-      ...props.filter,
+      ...localFilter,
       trait_id: traitConfig.id,
       label: traitConfig.label,
       customizationConfig: {
-        ...props.filter.customizationConfig,
+        ...localFilter.customizationConfig,
         traitsById: {
           [traitConfig.id]: traitConfig
         }
       }
     };
-    props.onSave(updatedFilter);
+    setLocalFilter(updatedFilter);
+
+    if (optionGroupIsClean || optionGroupIsPending) {
+      props.onPending();
+    } else {
+      props.onSave(updatedFilter);
+      setTraitIsPending(false);
+      setOptionGroupIsPending(false);
+    }
   };
 
   const handleOptionGroupSave = (p: { optionGroupId: string; optionGroup: OptionGroup }) => {
@@ -84,11 +110,21 @@ function FilterForm(props: {
       newCustomizationConfig.optionsById[optionId] = props.customizationConfig.optionsById[optionId] || option;
     });
 
-    props.onSave({
-      ...props.filter,
+    const updatedFilter = {
+      ...localFilter,
       option_group_id: p.optionGroupId,
       customizationConfig: newCustomizationConfig
-    });
+    };
+
+    setLocalFilter(updatedFilter);
+
+    if (traitIsClean || traitIsPending) {
+      props.onPending();
+    } else {
+      props.onSave(updatedFilter);
+      setOptionGroupIsPending(false);
+      setTraitIsPending(false);
+    }
   };
 
   return (
@@ -101,7 +137,7 @@ function FilterForm(props: {
         customizationConfig={props.customizationConfig}
         onSave={handleTraitSave}
         onPending={handleTraitPending}
-        onClean={handleTraitCancel}
+        onClean={handleTraitClean}
       />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
@@ -109,7 +145,7 @@ function FilterForm(props: {
         customizationConfig={props.customizationConfig}
         onSave={handleOptionGroupSave}
         onPending={handleOptionGroupPending}
-        onClean={handleOptionGroupCancel}
+        onClean={handleOptionGroupClean}
       />
     </div>
   );

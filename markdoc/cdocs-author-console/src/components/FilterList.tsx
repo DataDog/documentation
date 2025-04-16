@@ -27,6 +27,7 @@ function FilterList({
     optionsById: {},
     optionGroupsById: {}
   });
+  const [saveButtonIsDisabled, setSaveButtonIsDisabled] = useState(true);
 
   const addFilter = () => {
     const newFilter: WizardFilter = {
@@ -49,6 +50,7 @@ function FilterList({
       throw new Error('No current filter to edit');
     }
     setFiltersByUuid({ ...filtersByUuid, [currentFilterUuid]: filter });
+    setSaveButtonIsDisabled(false);
   };
 
   const handleFilterRowDelete = (filter: WizardFilter) => {
@@ -108,8 +110,12 @@ function FilterList({
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
                 onSave={handleFilterFormChange}
-                onPending={() => {}}
-                onClean={() => {}}
+                onPending={() => {
+                  setSaveButtonIsDisabled(true);
+                }}
+                onClean={() => {
+                  setSaveButtonIsDisabled(true);
+                }}
               />
             )}
           </div>
@@ -122,7 +128,7 @@ function FilterList({
       )}
       {currentFilterUuid && (
         <>
-          <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleSave}>
+          <Button disabled={saveButtonIsDisabled} sx={{ marginTop: '1rem' }} variant="contained" onClick={handleSave}>
             Save
           </Button>{' '}
           <Button sx={{ marginTop: '1rem' }} variant="contained" onClick={handleCancel}>
