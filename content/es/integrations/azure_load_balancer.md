@@ -22,7 +22,7 @@ short_description: Rastrea las métricas clave de Azure Load Balancer.
 version: '1.0'
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  FUENTE https://github.com/DataDog/dogweb -->
 ## Información general
 
 Azure Load Balancer admite escenarios entrantes y salientes, proporciona baja latencia y alto rendimiento, y escala hasta millones de flujos para todas las aplicaciones TCP y UDP.
@@ -33,7 +33,7 @@ Utiliza la integración de Azure con Datadog para recopilar métricas de Azure L
 
 ### Instalación
 
-Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1]. No es necesario realizar ningún otro paso de instalación.
+Si aún no lo has hecho, configura primero [Microsoft Azure integración][1]. No hay otros pasos de instalación.
 
 ## Datos recopilados
 
@@ -45,13 +45,13 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 La integración Azure Load Balancer no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Load Balancer no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][3].
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][3].
 
 [1]: https://docs.datadoghq.com/es/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_load_balancer/azure_load_balancer_metadata.csv
