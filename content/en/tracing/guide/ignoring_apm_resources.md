@@ -35,8 +35,6 @@ There are two ways to specify that such an endpoint should be untraced and exclu
 - [Trace Agent configuration](#trace-agent-configuration-options) (in Datadog Agent), or
 - [Tracer configuration](#tracer-configuration-options).
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
-
 ### Trace Agent configuration options
 
 The Trace Agent component within the Datadog Agent has two methods to prevent certain traces from coming through: ignoring span tags or ignoring resources. If traces are dropped due to these settings, the trace metrics exclude these requests.
@@ -421,7 +419,7 @@ If you use Amazon ECS (such as on EC2), in your Datadog Agent container definiti
 
 Some of the language-specific tracers have an option to modify spans before they are sent to the Datadog Agent. Use this option if you have application-specific requirements and are using a language listed below.
 
-<div class="alert alert-danger"><strong>Important</strong>: If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules.</div>
+<div class="alert alert-warning"><strong>Notes</strong>: 1. If the request is associated with a distributed trace, the resulting trace can have sampling inaccuracy if you drop portions of it due to these filtering rules. 2. Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
@@ -530,7 +528,6 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 [1]: /help/
 [2]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
