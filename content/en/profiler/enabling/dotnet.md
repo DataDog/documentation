@@ -66,8 +66,7 @@ The following profiling features are available in the following minimum versions
 | Live heap profiling beta   | 2.22.0+                            | .NET 7+                                                                                  |
 | [Trace to Profiling integration][12]         | 2.30.0+                            | All supported runtime versions.                                                          |
 | [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
-| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
-|                           | 3.10.0+ for outgoing HTTP requests longer than 50 ms in beta |                                                                                          |
+| Timeline                  | 2.30.0+ (and 3.10.0+ for outgoing HTTP requests longer than 50 ms in beta)     | All supported runtime versions (except .NET 5+ required for garbage collection details and .NET 7+ required for outgoing HTTP requests). |
 
 - Allocations and Live Heap profiling are in beta until .NET 10 ships with the required changes for better statistical allocations sampling.
 - Continuous Profiler is not supported for AWS Lambda.
