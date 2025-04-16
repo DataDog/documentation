@@ -13,7 +13,7 @@ import { OptionConfig } from '../../../../types';
 function NewOptionForm(props: {
   customizationConfig: CustomizationConfig;
   onPending: () => void;
-  onCancel: () => void;
+  onClean: () => void;
   onSave: (newOptionConfig: OptionConfig) => void;
 }) {
   const blankOption: OptionConfig = {
@@ -32,7 +32,7 @@ function NewOptionForm(props: {
 
   const handleFormCancel = () => {
     setNewOptionConfig(blankOption);
-    props.onCancel();
+    props.onClean();
   };
 
   const [newOptionConfig, setNewOptionConfig] = useState(blankOption);

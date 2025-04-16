@@ -52,7 +52,7 @@ function OptionGroupForm(props: {
   customizationConfig: CustomizationConfig;
   onSave: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
   onPending: () => void;
-  onCancel: () => void;
+  onClean: () => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [optionGroupId, setOptionGroupId] = useState<string>('');
@@ -122,7 +122,7 @@ function OptionGroupForm(props: {
             setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
           }}
           onPending={() => {}}
-          onCancel={() => {}}
+          onClean={() => {}}
         />
         <Button
           disabled={!optionGroupId || optionGroup.length < 2}

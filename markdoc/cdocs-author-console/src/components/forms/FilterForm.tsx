@@ -9,7 +9,7 @@ function FilterForm(props: {
   customizationConfig: CustomizationConfig;
   onSave: (filter: WizardFilter) => void;
   onPending: () => void;
-  onCancel: () => void;
+  onClean: () => void;
 }) {
   const formHeaderStyles: React.CSSProperties = {
     backgroundColor: '#eff1f5',
@@ -44,14 +44,14 @@ function FilterForm(props: {
   const handleTraitCancel = () => {
     setTraitIsPending(false);
     if (!optionGroupIsPending) {
-      props.onCancel();
+      props.onClean();
     }
   };
 
   const handleOptionGroupCancel = () => {
     setOptionGroupIsPending(false);
     if (!traitIsPending) {
-      props.onCancel();
+      props.onClean();
     }
   };
 
@@ -101,7 +101,7 @@ function FilterForm(props: {
         customizationConfig={props.customizationConfig}
         onSave={handleTraitSave}
         onPending={handleTraitPending}
-        onCancel={handleTraitCancel}
+        onClean={handleTraitCancel}
       />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
@@ -109,7 +109,7 @@ function FilterForm(props: {
         customizationConfig={props.customizationConfig}
         onSave={handleOptionGroupSave}
         onPending={handleOptionGroupPending}
-        onCancel={handleOptionGroupCancel}
+        onClean={handleOptionGroupCancel}
       />
     </div>
   );

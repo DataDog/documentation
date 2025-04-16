@@ -13,7 +13,7 @@ export default function OptionSelector(props: {
   customizationConfig: CustomizationConfig;
   onPending: () => void;
   onSave: (options: OptionConfig[]) => void;
-  onCancel: () => void;
+  onClean: () => void;
 }) {
   const getDropdownChoices = (optionsById: Record<string, OptionConfig>) => {
     const newDropdownChoices = Object.keys(optionsById).map((optionId) => {
@@ -102,7 +102,7 @@ export default function OptionSelector(props: {
         customizationConfig={props.customizationConfig}
         onSave={handleNewOptionSave}
         onPending={props.onPending}
-        onCancel={props.onCancel}
+        onClean={props.onClean}
       />
     </div>
   );

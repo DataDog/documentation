@@ -107,7 +107,9 @@ function FilterList({
               <FilterForm
                 customizationConfig={customizationConfig}
                 filter={filtersByUuid[currentFilterUuid]}
-                onPublish={handleFilterFormChange}
+                onSave={handleFilterFormChange}
+                onPending={() => {}}
+                onClean={() => {}}
               />
             )}
           </div>

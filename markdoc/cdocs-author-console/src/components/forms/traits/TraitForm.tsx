@@ -45,12 +45,12 @@ function TraitForm({
   customizationConfig,
   onSave,
   onPending,
-  onCancel
+  onClean
 }: {
   customizationConfig: CustomizationConfig;
   onSave: ({ traitConfig }: { traitConfig: TraitConfig }) => void;
   onPending: () => void;
-  onCancel: () => void;
+  onClean: () => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
