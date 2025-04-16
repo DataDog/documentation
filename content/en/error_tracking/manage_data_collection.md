@@ -48,10 +48,15 @@ Given a list of rules:
 - Rule 3 (this rule is disabled): `team:security`
 - Rule 4: `service:foo`
 
+
 {{< img src="error_tracking/error-tracking-filters-example.png" alt="Error Tracking Filters example of setup" style="width:75%;" >}}
 
 The processing flow is as follows:
 {{< img src="error_tracking/error-tracking-filters-diagram.png" alt="Error Tracking Filters" style="width:75%;" >}}
+
+With incoming events:
+- An event with `env:prod service:my-service status:warn` will match rule 1 and go to its exclusion filters. It won't match exclusion 1-1 so will go to exclusion 1-2. Here, there will be a match, so the event will be discarded.
+- An event with `env:staging service:web` will not match rule 1, so go to rule 2. At rule 2, there will be a match, so the event will be kept.
 
 {{% /collapse-content %}}
 
