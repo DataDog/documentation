@@ -18,7 +18,7 @@ The recommended approach is to use sampling rules, which allow you to filter spa
 DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
 ```
 
-Or to filter based on HTTP URL tags:
+Or to sample based on HTTP URL tags:
 
 ```shell
 DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
