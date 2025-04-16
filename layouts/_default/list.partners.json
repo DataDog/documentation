@@ -13,6 +13,7 @@
         {{ $title := $page.Title }}
         {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
         {{ $category := $page.Params.algolia.category | default "Partners" }}
+        {{ $subcategory := $page.Params.algolia.subcategory }}
 
         {{- /* remove "is not supported" alert content which appears at the beginning of some markdown files */ -}}
         {{- $content = replaceRE `(\w|\s)*\s(is not supported for your selected Datadog site \(\))(.|\s)` "" $content 1 -}}
@@ -27,6 +28,7 @@
             "full_url" $page.Permalink
             "language" $page.Language.Lang
             "category" $category
+            "subcategory" $subcategory
         ) -}}
 
         {{- $.Scratch.Add "partners_collection" $record -}}
