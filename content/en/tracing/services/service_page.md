@@ -243,7 +243,7 @@ Thread.sleep(DELAY_BY.minus(elapsed).toMillis());
 ### Memory Leaks
 If you set up the [Continuous Profiler][15] and the service is running in a containerized environment, the [Memory Leaks][24] tab becomes available.
 
-It'll guide you through a workflow for identifying potential memory leaks and showing the most actionable data.
+It guides you through a workflow for identifying potential memory leaks and shows the most actionable data.
 
 {{< img src="profiler/apm_service_page_memory_leaks.png" alt="Memory Leaks" style="width:90%;">}}
 
