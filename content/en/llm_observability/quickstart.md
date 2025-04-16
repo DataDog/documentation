@@ -149,18 +149,18 @@ This generates an LLM Observability trace in an AWS Lambda environment and creat
     export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
     ```
     4. Instrument your Lambda function with LLM Observability (this requires at least version 77 of the Datadog Extension layer).
-    {{ < tabs > }}
-    {{% tab "Python" %}}
-    ```shell
-    datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
-    ```
-    {{% /tab %}}
-    {{% tab "Node.js" %}}
-    ```shell
-    datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
-    ```
-    {{% /tab %}}
-    {{< /tabs >}}
+{{< tabs >}}
+{{% tab "Python" %}}
+```shell
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+```
+{{% /tab %}}
+{{% tab "Node.js" %}}
+```shell
+datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {{< latest-lambda-layer-version layer="node" >}} -e {{< latest-lambda-layer-version layer="extension" >}} --llmobs <YOUR_LLMOBS_ML_APP>
+```
+{{% /tab %}}
+{{< /tabs >}}
 3. Verify that your function was instrumented.
     1. In the Datadog UI, navigate to `Infrastructure > Serverless`
     2. Search for the name of your function.
