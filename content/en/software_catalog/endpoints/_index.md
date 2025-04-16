@@ -12,7 +12,7 @@ further_reading:
   text: "Synthetic API Tests"
 - link: "/security/application_security/how-appsec-works/#api-security"
   tag: "Documentation"
-  text: "ASM API Security"
+  text: "AAP API Security"
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary risks to API security"

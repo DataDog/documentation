@@ -652,8 +652,9 @@ components:
         type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
-        `dashboard`, `integration-account`, `integration-webhook`, `notebook`, `reference-table`,
-        `security-rule`, `slo`, `workflow`, `app-builder-app`, `connection`, `connection-group`.'
+        `dashboard`, `integration-account`, `integration-service`, `integration-webhook`,
+        `notebook`, `reference-table`, `security-rule`, `slo`, `workflow`, `app-builder-app`,
+        `connection`, `connection-group`.'
       example: dashboard:abc-def-ghi
       in: path
       name: resource_id
@@ -50329,6 +50330,8 @@ paths:
 
         - Integration Accounts: `integration-account`
 
+        - Integration Services: `integration-service`
+
         - Integration Webhooks: `integration-webhook`
 
         - Notebooks: `notebook`
@@ -50367,6 +50370,8 @@ paths:
         Dashboards                  | `viewer`, `editor`
 
         Integration Accounts        | `viewer`, `editor`
+
+        Integration Services        | `viewer`, `editor`
 
         Integration Webhooks        | `viewer`, `editor`
 
