@@ -181,19 +181,6 @@ You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to
 
 Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
-### Optimize your metric with aggregations in Advanced Mode
-
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
-
-- Configured counts/rates are queryable with time/space aggregations of `SUM`
-- Configured gauges are queryable in time/space aggregations of `AVG`
-
-{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges" style="width:80%;">}}
-
-More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
-
-**Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
-
 ### Metric origin definitions
 
 This table shows the mapping between the metric origin as seen in the facet and where it was submitted from:
