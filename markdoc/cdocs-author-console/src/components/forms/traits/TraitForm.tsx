@@ -43,10 +43,14 @@ function a11yProps(index: number) {
  */
 function TraitForm({
   customizationConfig,
-  onUpdate
+  onSave,
+  onPending,
+  onCancel
 }: {
   customizationConfig: CustomizationConfig;
-  onUpdate: ({ traitConfig }: { traitConfig: TraitConfig }) => void;
+  onSave: ({ traitConfig }: { traitConfig: TraitConfig }) => void;
+  onPending: () => void;
+  onCancel: () => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
@@ -62,7 +66,7 @@ function TraitForm({
   };
 
   const handleExistingTraitSelect = (traitId: string) => {
-    onUpdate({ traitConfig: customizationConfig.traitsById[traitId] });
+    onSave({ traitConfig: customizationConfig.traitsById[traitId] });
   };
 
   const handleNewTraitSave = () => {
@@ -73,7 +77,7 @@ function TraitForm({
     } else if (customizationConfig.traitsById[newTraitConfig.id]) {
       error = 'Trait ID is already taken. Did you mean to select an existing trait?';
     } else {
-      onUpdate({
+      onSave({
         traitConfig: newTraitConfig
       });
       setNewTraitHasChanges(false);

@@ -48,21 +48,20 @@ export type OptionGroup = {
 /**
  * Allows the user to select an existing option group, or create a new one.
  */
-function NewOptionGroupForm({
-  customizationConfig,
-  onSave
-}: {
+function OptionGroupForm(props: {
   customizationConfig: CustomizationConfig;
   onSave: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
+  onPending: () => void;
+  onCancel: () => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [optionGroupId, setOptionGroupId] = useState<string>('');
   const [optionGroup, setOptionGroup] = useState<OptionGroup>([]);
 
   const handleExistingOptionGroupSelect = (selectedOptionGroupId: string) => {
-    const updatedOptionGroup = customizationConfig.optionGroupsById[selectedOptionGroupId];
+    const updatedOptionGroup = props.customizationConfig.optionGroupsById[selectedOptionGroupId];
     console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
-    onSave({
+    props.onSave({
       optionGroupId: selectedOptionGroupId,
       optionGroup: updatedOptionGroup
     });
@@ -72,7 +71,7 @@ function NewOptionGroupForm({
 
   const handleNewGroupSave = () => {
     console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
-    onSave({
+    props.onSave({
       optionGroupId,
       optionGroup
     });
@@ -99,7 +98,10 @@ function NewOptionGroupForm({
         <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
       </Tabs>
       <CustomTabPanel value={currentTabIndex} index={0}>
-        <OptionGroupSelector customizationConfig={customizationConfig} onSelect={handleExistingOptionGroupSelect} />
+        <OptionGroupSelector
+          customizationConfig={props.customizationConfig}
+          onSelect={handleExistingOptionGroupSelect}
+        />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
         <h3>Option group ID</h3>
@@ -115,7 +117,7 @@ function NewOptionGroupForm({
         />
         <h3>Options</h3>
         <OptionSelector
-          customizationConfig={customizationConfig}
+          customizationConfig={props.customizationConfig}
           onSave={(selectedOptions) => {
             setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
           }}
@@ -135,4 +137,4 @@ function NewOptionGroupForm({
   );
 }
 
-export default NewOptionGroupForm;
+export default OptionGroupForm;
