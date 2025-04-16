@@ -12,7 +12,7 @@ If you want the span included in the trace metrics but don't want it ingested, u
 
 ## Using sampling rules
 
-The recommended approach is to use sampling rules, which allow you to filter spans based on resource names, service names, tags, and operation names:
+The recommended approach is to use sampling rules, which allow you to sample traces based on resource names, service names, tags, and operation names:
 
 ```shell
 DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
