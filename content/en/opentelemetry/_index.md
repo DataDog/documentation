@@ -107,7 +107,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}Learn more about using the OTel Collector{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Option 2: Use the Datadog Agent
+### Option 2: Use the Datadog Agent with DDOT Collector
 
 {{< img src="/opentelemetry/setup/ddot-collector.png" alt="Architecture overview for DDOT Collector, which is embedded in the Datadog Agent." style="width:100%;" >}}
 
