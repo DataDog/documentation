@@ -50,7 +50,7 @@ To get started with feature flags, set up feature flag tracking for the browser 
 
 [1]: /real_user_monitoring/setup/
 [2]: /real_user_monitoring/browser#setup
-[3]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management
+[3]: /real_user_monitoring/feature_flag_tracking/setup/?tab=browser#custom-feature-flag-management
 [4]: https://app.datadoghq.com/rum/feature-flags
 [5]: /real_user_monitoring/session_replay/browser/
 [6]: /real_user_monitoring/error_tracking/explorer/#explore-your-issues

@@ -70,6 +70,11 @@ Estimated usage metrics are generally available for the following usage types:
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
+## Setting tags for your by_tag Estimated Usage Metrics
+To set tag breakdowns in your by_tag Estimated Usage Metrics, configure your desired tags—such as team or env—on the [Usage Attribution][6] page (If you're on a PRO plan, you can request access to this feature through your [Customer Success Manager][2]). Changes take effect at the next 00:00 UTC.
+
+{{< img src="account_management/billing/setting-eum-tags-in-ua.png" alt="Setting by_tag EUM tags in Usage Attribution" >}}
+
 ## Dashboards
 
 Out-of-the-box estimated usage dashboards are available, offering useful queries with these metrics. You can clone these dashboards to help you get started with usage metrics. To find these dashboards, navigate to [Dashboards preset lists][5] and search for "Estimated Usage."
@@ -91,3 +96,5 @@ For billing questions, contact your [Customer Success][2] Manager.
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
+[6]: /account_management/billing/usage_attribution/
+
