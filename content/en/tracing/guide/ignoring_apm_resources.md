@@ -2,7 +2,33 @@
 title: Ignoring Unwanted Resources in APM
 ---
 
-A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
+A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: Sampling and Filtering.
+
+If you need assistance deciding which option is the most relevant for your use case, contact [Datadog support][1].
+
+# Sampling
+
+If you want the span included in the trace metrics but don't want it ingested, use sampling rules.
+
+## Using sampling rules
+
+The recommended approach is to use sampling rules, which allow you to filter spans based on resource names, service names, tags, and operation names:
+
+```shell
+DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
+```
+
+Or to filter based on HTTP URL tags:
+
+```shell
+DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
+```
+
+<div class="alert alert-info"><strong>Note</strong>: Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+
+# Filtering
+
+If you don't want the span ingested and don't want to see it reflected in trace metrics, use filtering.
 
 There are two ways to specify that such an endpoint should be untraced and excluded from trace metrics:
 
@@ -10,9 +36,6 @@ There are two ways to specify that such an endpoint should be untraced and exclu
 - [Tracer configuration](#tracer-configuration-options).
 
 <div class="alert alert-warning"><strong>Note</strong>: Filtering traces using any of the following options removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
-
-If you need assistance, contact [Datadog support][1].
-
 
 ## Trace Agent configuration options
 
@@ -421,23 +444,7 @@ Datadog::Tracing.before_flush(
 
 {{< programming-lang lang="python" >}}
 
-The Python tracer provides options to filter unwanted traces:
-
-### Using sampling rules (Recommended)
-
-The recommended approach is to use sampling rules, which allow you to filter spans based on resource names, service names, tags, and operation names:
-
-```shell
-DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
-```
-
-Or to filter based on HTTP URL tags:
-
-```shell
-DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
-```
-
-<div class="alert alert-info"><strong>Note</strong>: Sampling decisions are determined using the first span in a trace. If the span containing the tag you want to filter on is not a {{< tooltip glossary="trace root span" case="sentence" >}}, this rule is not applied.</div>
+The Python tracer provides an option to filter unwanted traces:
 
 ### Using custom filters
 
