@@ -38,7 +38,7 @@ The generated RUM dashboards automatically contain a set of default template var
 
 To explore individual events, click on a graph and click **View RUM events**. This redirects you to the RUM Explorer with pre-selected search filters.
 
-{{< img src="real_user_monitoring/dashboards/rum-view-events-1.mp4" alt="View RUM events" video=true style="width:80%;" >}}
+{{< img src="real_user_monitoring/dashboards/rum-view-events-2.mp4" alt="View RUM events" video=true style="width:80%;" >}}
 
 ### Customize dashboards
 
