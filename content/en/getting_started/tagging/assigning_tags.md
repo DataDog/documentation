@@ -239,7 +239,7 @@ Either define the variables in your custom `datadog.yaml`, or set them as JSON m
 
 ##### Tags cardinality
 
-There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in host-level tags.
+There are two environment variables that set tag cardinality: `DD_CHECKS_TAG_CARDINALITY` and `DD_DOGSTATSD_TAG_CARDINALITY`. Because DogStatsD is priced differently, the DogStatsD tag cardinality setting is separated to provide the opportunity for finer configuration. Otherwise, these variables function the same way: they can have values `low`, `orchestrator`, or `high`. They both default to `low`, which pulls in Kubernetes cluster-level tags.
 
 The different cardinality settings target:
 * `low`: Kubernetes cluster-level tags, such as `kube_namespace`.
