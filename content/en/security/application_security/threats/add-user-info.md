@@ -717,11 +717,12 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 const tracer = require('dd-trace')
 
 // in a controller with the deprecated method:
-// const userId = 'user-id' // not necessary anymore
+const userId = 'user-id' // not mandatory anymore, but still helpful when available
 const login = 'user@email.com' // new mandatory argument
 const userExists = true
 const metadata = { 
 //  'usr.login': 'user@email.com', this is not necessary anymore in metadata, must be the first argument
+  'usr.id': userId, // Helps with correlating login failures with the rest of the user activity
   'key': 'value'
 }
 
