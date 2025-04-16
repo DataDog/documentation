@@ -566,6 +566,14 @@
             base_path: ""
             dest_path: "/layouts/shortcodes/"
             file_name: "aws-resource-collection-resource-catalog.md"
+        - action: pull-and-push-file
+          branch: main
+          globs:
+            - "domains/cloud_platform/aws/libs/mappings/content/aws_future_permissions.md"
+          options:
+            base_path: ""
+            dest_path: "/layouts/shortcodes/"
+            file_name: "aws-resource-collection-upcoming-permissions"
 
 
       - repo_name: web-ui
