@@ -13,8 +13,6 @@ Guidance for each file type is listed below.
 
 ## JSON files
 
-### Overview
-
 JSON files end in `.json`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a number, a list, or a more complex data structure.
 
 ```json
@@ -29,13 +27,11 @@ JSON files end in `.json`, and contain pairs of keys and values (`<KEY>: <VALUE>
 }
 ```
 
-### Translation guidance
-
-#### Do not translate
+### Do not translate
 
 Do not translate any keys. Most values are not translated, with exceptions listed in the next section.
 
-#### Do translate
+### Do translate
 
 - The value of any `other` key found in the `i18n` directory.
 - The value of the following keys in the `translate_actions.json` file:
@@ -45,8 +41,6 @@ Do not translate any keys. Most values are not translated, with exceptions liste
   - `request_schema_description`
 
 ## YAML configuration files
-
-### Overview
 
 YAML files end in `.yaml`, and contain pairs of keys and values (`<KEY>: <VALUE>`). The value of a given key can be some text, a number, a list, or a more complex data structure.
 
@@ -59,13 +53,11 @@ an_example_list:
   - item three
 ```
 
-### Translation guidance
-
-#### Do not translate
+### Do not translate
 
 Without exception, no YAML keys should be translated. Values are usually not translated, but a few exceptions are listed in the next section.
 
-#### Do translate
+### Do translate
 
 Do translate these _values_ (but not their corresponding keys):
 
@@ -73,8 +65,6 @@ Do translate these _values_ (but not their corresponding keys):
 - The value of any `name` key found in the `config/_default/menus` directory.
 
 ## Markdown files
-
-### Overview
 
 Markdown files end in `.md` (not `.mdoc.md` -- that's a Markdoc file, covered in a later section). They contain a mix of YAML, Markdown, HTML, and [Hugo shortcode](https://gohugo.io/content-management/shortcodes/) syntax.
 
@@ -96,13 +86,11 @@ aliases:
 
 Frontmatter appears at the top of the file, beginning and ending with `---` appearing on its own line. Its contents are in YAML ([overview section of YAML spec](https://yaml.org/spec/1.2.2#chapter-2-language-overview)). It contains key-value pairs that differ from page to page.
 
-#### Frontmatter translation guidance
-
-##### Do not translate
+#### Do not translate
 
 Do not translate any keys.
 
-##### Do translate
+#### Do translate
 
 Translate only the _values_ listed below:
 - The value of the `title` key.
@@ -125,20 +113,18 @@ Translate only the _values_ listed below:
 
 Markdown files can contain standard HTML tags, such as `<div class="alert alert-info">Text containing an <a href="https://google.com">HTML link.</a></div>`.
 
-#### HTML translation guidance
-
-##### Do not translate
+#### Do not translate
 
 Most markup between `<` and its corresponding `>` should not be translated. Exceptions are listed in the next section.
 
-##### Do translate
+#### Do translate
 
 Translate only these attribute values (but not the name of the attribute):
 
 - The value of the `alt` attribute on `img` tags
 - The value of the `title` attribute on `a` tags
 
-Translate any plaintext content inside of the tag:
+Translate any plaintext content between start and end tags:
 
 ```html
 <div>Translate me <a href="some/url">and translate me too</a>.</div>
@@ -160,9 +146,9 @@ The contents of tab two would go here.
 {{< /tabs >}}
 ```
 
-Shortcodes follow the formats below.
+Shortcodes can have the following structures:
 
-#### Shortcode with opening and closing
+**Shortcode with opening and closing**
 
 ```
 {{< tag-name some-attribute="some-value" another-attribute="another-value" >}}
@@ -170,7 +156,7 @@ Some contents written in Markdown. A nested tag might appear here.
 {{< /tag-name >}}
 ```
 
-#### Shortcode with opening and closing (alternative syntax)
+**Shortcode with opening and closing (alternative syntax)**
 
 ```
 {{% tag-name "Text attribute" %}}
@@ -178,13 +164,11 @@ Some contents written in Markdown. A nested tag might appear here.
 {{% /tag-name %}}
 ```
 
-#### Self-closing shortcode
+**Self-closing shortcode**
 
 ```
 {{< tag-name >}}
 ```
-
-### Shortcode translation guidance
 
 #### Do not translate
 
@@ -192,7 +176,7 @@ Most markup between `{{<` and `>}}` (or `{{%` and `%}}`) should not be translate
 
 #### Do translate
 
-Translate any Markdown contents inside the tag:
+Translate any Markdown contents between start and end tags:
 
 {{% tag-name some-attribute="some value" %}}
 Translate me!
@@ -205,8 +189,6 @@ Translate only the _values_ of these attributes (not the attribute name itself):
   - For example, in the tag `{{< img src="path/to/your/image-name-here.png" alt="A basket of strawberries" style="width:100%;" >}}`, the text "A basket of strawberries" should be translated.
 
 ## Markdoc files (`.mdoc.md` files)
-
-### Overview
 
 Markdoc files are similar to the Markdown files described above, except they contain Markdoc tags instead of shortcodes and HTML tags. For example:
 
@@ -226,11 +208,17 @@ This content will only show if the page's `$color` variable is set to "red".
 {% /if %}
 ```
 
-### Markdoc translation guidance
+### Do not translate
 
-#### Do translate
+In the YAML frontmatter of Markdoc files, do not translate any part of `trait_id` and `option_id` lines, neither keys nor values.
 
-Translate frontmatter according to the guidelines for Markdown. Additionally, translate the value of any `label` keys:
+Do not translate any part of Markdoc tags (anything appearing between `{%` and `%}`), except for the exceptions listed in the following **Do translate** section. 
+
+For example, do not translate text that appears as an argument to a function inside a tag, such as "red" in the tag `{% if equals($color, "red") %}`.
+
+### Do translate
+
+Translate frontmatter according to the guidelines for Markdown.  Additionally, translate the value of any `label` keys:
 
 ```
 title: "Some Document"
@@ -240,7 +228,7 @@ content_filters:
     label: Translate me
 ```
 
-Translate any text contents in between the tag's opening and closing, such as the sentence "Do not feed the bears":
+Translate any text contents in between the opening and closing tags, such as the sentence "Do not feed the bears":
 
 ```
 {% alert level="warning" %}
@@ -253,8 +241,3 @@ Translate these attribute _values_ (not the attribute names):
 - The value of any `label` attribute. For example, `{% tab label="Translate me" %}`.
 - The `alt` attribute on any `img` tag.
 
-#### Do not translate
-
-Unless an exception is listed above, do not translate any other part of the tag (anything appearing between `{%` and `%}`). 
-
-For example, do not translate text that appears as an argument to a function inside a tag, such as "red" in the tag `{% if equals($color, "red") %}`.
