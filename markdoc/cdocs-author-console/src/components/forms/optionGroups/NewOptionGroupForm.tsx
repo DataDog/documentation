@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import OptionGroupSelector from '../forms/OptionGroupSelector';
+import OptionGroupSelector from './OptionGroupSelector';
 import { CustomizationConfig } from 'cdocs-data';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import OptionSelector from './OptionSelector';
+import OptionSelector from './options/OptionSelector';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -48,12 +48,12 @@ export type OptionGroup = {
 /**
  * Allows the user to select an existing option group, or create a new one.
  */
-function OptionGroupForm({
+function NewOptionGroupForm({
   customizationConfig,
-  onUpdate
+  onSave
 }: {
   customizationConfig: CustomizationConfig;
-  onUpdate: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
+  onSave: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [optionGroupId, setOptionGroupId] = useState<string>('');
@@ -62,7 +62,7 @@ function OptionGroupForm({
   const handleExistingOptionGroupSelect = (selectedOptionGroupId: string) => {
     const updatedOptionGroup = customizationConfig.optionGroupsById[selectedOptionGroupId];
     console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
-    onUpdate({
+    onSave({
       optionGroupId: selectedOptionGroupId,
       optionGroup: updatedOptionGroup
     });
@@ -72,7 +72,7 @@ function OptionGroupForm({
 
   const handleNewGroupSave = () => {
     console.log('[OptionGroupForm] Emitting', JSON.stringify({ optionGroupId, optionGroup }, null, 2));
-    onUpdate({
+    onSave({
       optionGroupId,
       optionGroup
     });
@@ -116,9 +116,11 @@ function OptionGroupForm({
         <h3>Options</h3>
         <OptionSelector
           customizationConfig={customizationConfig}
-          onSelect={(selectedOptions) => {
+          onSave={(selectedOptions) => {
             setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
           }}
+          onPending={() => {}}
+          onCancel={() => {}}
         />
         <Button
           disabled={!optionGroupId || optionGroup.length < 2}
@@ -133,4 +135,4 @@ function OptionGroupForm({
   );
 }
 
-export default OptionGroupForm;
+export default NewOptionGroupForm;

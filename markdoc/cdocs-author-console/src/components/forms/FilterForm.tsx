@@ -1,6 +1,6 @@
 import { CustomizationConfig } from 'cdocs-data';
-import TraitForm from './TraitForm';
-import OptionGroupForm, { OptionGroup } from './OptionGroupForm';
+import TraitForm from './traits/TraitForm';
+import NewOptionGroupForm, { OptionGroup } from './optionGroups/NewOptionGroupForm';
 import { WizardFilter, TraitConfig } from '../../types';
 
 function FilterForm({
@@ -74,7 +74,7 @@ function FilterForm({
       <TraitForm customizationConfig={customizationConfig} onUpdate={onTraitEdit} />
       <h2 style={formHeaderStyles}>Options</h2>
       <p style={{ fontSize: '0.9em' }}>The list of options the user can select for this filter.</p>
-      <OptionGroupForm customizationConfig={customizationConfig} onUpdate={onOptionGroupUpdate} />
+      <NewOptionGroupForm customizationConfig={customizationConfig} onSave={onOptionGroupUpdate} />
     </div>
   );
 }

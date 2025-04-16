@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import TraitSelector from './forms/TraitSelector';
-import OptionGroupSelector from './forms/OptionGroupSelector';
+import TraitSelector from './forms/traits/TraitSelector';
+import OptionGroupSelector from './forms/optionGroups/OptionGroupSelector';
 import Code from './Code';
 import { DocTemplater } from './DocTemplater';
 import { buildWizardFilter } from '../dataUtils';

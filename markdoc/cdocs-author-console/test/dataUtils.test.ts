@@ -14,8 +14,6 @@ import {
 import { SNAPSHOTS_DIR } from './config/constants';
 
 describe('dataUtils', () => {
-  test.todo('buildWizardFilter', () => {});
-
   test('getNetNewConfig', () => {
     const newConfig = getNetNewConfig({
       filters: mockWizardFilters,

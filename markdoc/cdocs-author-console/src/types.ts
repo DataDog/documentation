@@ -31,3 +31,8 @@ export interface WizardFilter {
   option_group_id: string;
   customizationConfig: CustomizationConfig;
 }
+
+export interface OptionConfig {
+  id: string;
+  label: string;
+}

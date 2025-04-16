@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import TraitSelector from '../forms/TraitSelector';
+import TraitSelector from './TraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { TraitConfig } from '../../types';
+import { TraitConfig } from '../../../types';
 
 // TODO: DRY up tabs across the console
 interface TabPanelProps {
