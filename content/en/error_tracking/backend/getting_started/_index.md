@@ -20,7 +20,7 @@ further_reading:
 
 ## Getting started with Backend Error Tracking
 
-Follow the [in-app setup instructions][2] or choose an instrumentation approach to start collecting backend errors:
+Follow the [in-app setup instructions][2] or choose between single step and manual instrumentation to start collecting backend errors.
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/error_tracking/backend/getting_started/single_step_instrumentation" >}}Single step instrumentation{{< /nextlink >}}
