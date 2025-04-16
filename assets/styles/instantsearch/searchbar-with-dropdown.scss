@@ -86,6 +86,7 @@
         background: white;
         z-index: -1;
         border-radius: 3px 3px 0 0;
+        border-top: 1px solid #e6e6e6;
         filter: drop-shadow(0px 1px 1px rgba(30, 5, 36, 0.16)) drop-shadow(0px 1px 4px rgba(30, 5, 36, 0.24));
     }
 
@@ -93,11 +94,10 @@
     #hits-partners {
         width: 100%;
         background-color: #ffffff;
-        border-top: 1px solid #e6e6e6;
         border-radius: 0 0 3px 3px;
         font-size: 14px;
         line-height: 22px;
-
+        
         &.no-hits {
             display: none;
         }
