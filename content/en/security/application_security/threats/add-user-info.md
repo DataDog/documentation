@@ -626,7 +626,6 @@ The following examples show how to track login events or custom events (using si
 
 Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track user events. In dd-trace-js v5.48.0, new methods were introduced under the `eventTrackingV2` namespace, while the existing ones were retained for compatibility.
 
-Note that the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are now deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
 
 The following examples show how to track login events or custom events (using signup as an example).
 
@@ -684,9 +683,11 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 The new methods in `eventTrackingV2` introduce a more intuitive parameter order and clearer separation of concerns. Here are the key changes:
 
-1. The login identifier (email, username) is now the first parameter and is mandatory.
-2. The user object/ID is now optional in success events and has been removed from failure events.
+1. The login identifier (email, username) is the first parameter and is mandatory.
+2. The user object/ID is optional in success events and has been removed from failure events.
 3. Metadata has been simplified and no longer requires the `usr.login` field.
+
+**Note**: the legacy methods `trackUserLoginSuccessEvent` and `trackUserLoginFailureEvent` are deprecated in favor of the new methods `eventTrackingV2.trackUserLoginSuccess` and `eventTrackingV2.trackUserLoginFailure`, respectively.
 
 In the examples above, the commented code is no longer necessary.
 
@@ -699,7 +700,7 @@ const tracer = require('dd-trace')
 const user = {
   id: 'user-id',
   email: 'user@email.com'
-} // same as before, but now the object is optional
+} // same as before, but now the object is optional. Providing a user id will nonetheless help with post-compromised activity correlation
 
 const login = 'user@email.com' // new mandatory argument
 
