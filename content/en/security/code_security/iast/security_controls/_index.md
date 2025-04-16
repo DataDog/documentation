@@ -308,7 +308,7 @@ The following security control definition affects every `sql-sanitizer` package 
 
 <div class="alert alert-info">
 Parameter types must be fully qualified with their namespace. Example: `System.String`
-Parameter indexes are comma separated. If no parameter index is provided, default value is defaulted to 0 (first parameter)
+Parameter indexes are comma separated. If no parameter index is provided, value is defaulted to 0 (first parameter)
 </div>
 
 ### Input validator
