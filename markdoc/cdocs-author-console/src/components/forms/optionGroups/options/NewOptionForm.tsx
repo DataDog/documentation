@@ -97,7 +97,7 @@ function NewOptionForm(props: {
       aria-controls="new-option-form"
       id="new-option-form-header-header"
     >
-      <AccordionSummary expandIcon={<ArrowDropDownIcon />} aria-controls="panel3-content" id="panel3-header">
+      <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
         <Typography component="span">An option I need is missing from the list.</Typography>
       </AccordionSummary>
       <AccordionDetails>
