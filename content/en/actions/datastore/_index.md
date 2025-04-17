@@ -80,6 +80,16 @@ To use values from a datastore in a workflow or app:
 
 To delete a datastore, click the **Trash (Delete Datastore)** icon in the header of the datastore you want to delete, then click **Confirm** to verify.
 
+## Limitations
+
+Datastore has the following limitations:
+
+- A datastore can contain up to 5,000 rows.
+- A primary key column of type `string` is required and must uniquely identify each row.
+- Each row can be up to 100 KB in size.
+- The primary key value is immutable, it cannot be changed after the row is created.
+
+Reach out to [support](https://docs.datadoghq.com/help/) if you have a use case that exceeds these limits.
 
 ## Further reading
 

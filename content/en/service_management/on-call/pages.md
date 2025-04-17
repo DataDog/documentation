@@ -21,7 +21,7 @@ You can send Pages to On-Call Teams wherever @-handles are supported, including 
 
 #### Monitors and dynamic urgencies
 
-If you send a Page through a monitor alert, and your Team's processing rule uses dynamic urgencies:
+If you send a Page through a monitor alert, and your Team's routing rule uses dynamic urgencies:
 - If the WARN threshold is crossed, the Page urgency is set to `low`.
 - If the ALERT threshold is crossed, the Page urgency is set to `high`.
 

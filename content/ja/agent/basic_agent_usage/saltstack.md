@@ -167,7 +167,7 @@ datadog:
       third_party: true
 ```
 
-##### Logs
+##### ログ
 
 ログ収集を有効にするには、メインのコンフィギュレーションで `logs_enabled` を `true` に設定します。
 ```text

@@ -272,8 +272,6 @@ With [Databricks Networking Restrictions][12], Datadog may not have access to yo
 
 If you are controlling Databricks API access with [IP access lists][13], allow-listing Datadog's specific {{< region-param key="ip_ranges_url_webhooks" link="true" text="webhook IP addresses" >}} allows Datadog to connect to the Databricks APIs in your workspace. See Databricks's documentation for [configuring IP access lists for workspaces][16] to give Datadog API access.
 
-To add workspaces using the Datadog UI, you must also allow-list Datadog's {{< region-param key="ip_ranges_url_api" link="true" text="API IP addresses" >}}.
-
 If you are using [Databricks Private Connectivity][14], reach out to the Datadog [support team][15] to discuss potential options.
 
 ## Further Reading

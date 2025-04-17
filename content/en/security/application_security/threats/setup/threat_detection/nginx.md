@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for Nginx
+title: Enabling AAP for Nginx
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 50
@@ -13,10 +13,10 @@ further_reading:
       text: "nginx integration's source code"
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 The Datadog nginx tracing module has experimental support for threat detection and blocking.
@@ -37,7 +37,7 @@ The Datadog nginx tracing module has experimental support for threat detection a
    pattern "ngx_http_datadog_module-appsec-&lt;amd64/arm64&gt;-&lt;nginx
    version&gt;.so.tgz". Note that this artifact includes "appsec" in the name.
 
-3. **Enable ASM in the nginx configuration**.
+3. **Enable AAP in the nginx configuration**.
    You need to:
    * define one or more thread pools with the [`thread_pool`][4] directive,
    * explicitly enable AppSec with [`datadog_appsec_enabled`][5], and
