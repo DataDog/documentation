@@ -22,8 +22,7 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-warning"> Mobile Application Testing is not supported on this <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -84,9 +83,23 @@ When configuring a new Mobile Application test, use snippets to automatically po
 
 ## Devices
 
-In the device selection screen, you can select mobile devices in either the EU or US locations. If a device is available in both locations, it automatically operates in each region.
+On the device selection screen, you can choose to test mobile devices that are located in either Europe (EU) or the United States (US). 
+To configure a mobile test to use either EU or US hosted devices:
 
-{{< img src="mobile_app_testing/mobile_device_locations.mp4" alt="Selecting one or more mobile devices in both the US and EU regions" video=true >}}
+1. Open the edit test page for an existing mobile test or create a new one.
+2. Expand the Devices section and choose the device location(s) for your test:
+   - **All locations**: Runs tests in both the EU and US.
+   - **EU**: Runs tests only in the EU.
+   - **US**: Runs tests only in the US.
+3. Use the Select Device(s) dropdown to select the devices you want to test on.
+4. Click **Save & Edit Recording** to save your test configuration.
+
+**Notes**: 
+- Tests executed on US-hosted devices are run from AWS US West (Oregon). Similarly, tests on EU-hosted devices are run from AWS Germany (Frankfurt).
+- Device locations cannot be combined. You must select either EU-hosted devices, US-hosted devices, or both, but they cannot be mixed within the same test configuration.
+- Not all devices are available in both the EU and US. Refer to the list of [supported devices][16] for more details.
+
+{{< img src="mobile_app_testing/mobile_app_devices_EU.mp4" alt="Selecting one or more mobile devices in US and EU regions" video=true >}}
 
 ## Test retries
 
@@ -191,3 +204,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [15]: /real_user_monitoring/mobile_and_tv_monitoring/
+[16]: /synthetics/mobile_app_testing/devices
