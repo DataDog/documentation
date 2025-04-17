@@ -31,6 +31,8 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
 | [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
+| [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
+
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -51,7 +53,7 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, langgraph=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True)
 ```
 
 ## OpenAI
@@ -155,17 +157,6 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
-## LangGraph
-
-The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
-
-### Traced methods
-
-The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
-
-- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
-- [RunnableSeq.invoke()][35]
-
 ## Crew AI
 
 The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
@@ -189,6 +180,33 @@ The Crew AI integration instruments the following methods:
 
 - [Tool Invocation][30]:
   - `tool.invoke()`
+
+## OpenAI Agents
+
+The OpenAI Agents integration converts the [built-in tracing][33] from the [OpenAI Agents SDK][34] into
+LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
+
+The following operations are supported:
+- [`traces`][35]
+- [`agent`][36]
+- [`generation`][37] using Datadog's [OpenAI](#openai) integration
+- [`response`][38]
+- [`guardrail`][39]
+- [`handoff`][40]
+- [`function`][41]
+- [`custom`][42]
+
+## LangGraph
+
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
+
+### Traced methods
+
+The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
+
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
+- [RunnableSeq.invoke()][35]
+
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -222,9 +240,19 @@ The Crew AI integration instruments the following methods:
 [30]: https://docs.crewai.com/concepts/tools
 [31]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 [32]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
-[33]: https://langchain-ai.github.io/langgraph/concepts/sdk/
-[34]: https://blog.langchain.dev/langgraph/#compile
-[35]: https://blog.langchain.dev/langgraph/#nodes
+[33]: https://openai.github.io/openai-agents-python/tracing/
+[34]: https://openai.github.io/openai-agents-python/
+[35]: https://openai.github.io/openai-agents-python/ref/tracing/traces/
+[36]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.agent_span
+[37]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.generation_span
+[38]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.response_span
+[39]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.guardrail_span
+[40]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
+[41]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
+[42]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
+[43]: https://langchain-ai.github.io/langgraph/concepts/sdk/
+[44]: https://blog.langchain.dev/langgraph/#compile
+[45]: https://blog.langchain.dev/langgraph/#nodes
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
