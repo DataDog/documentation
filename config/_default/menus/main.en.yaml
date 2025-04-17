@@ -7486,7 +7486,7 @@ menu:
       identifier: rum_session_replay_browser
       weight: 502
     - name: Privacy Options
-      url: real_user_monitoring/session_replay/privacy_options
+      url: real_user_monitoring/session_replay/browser/privacy_options
       parent: rum_session_replay_browser
       identifier: rum_session_replay_privacy_options
       weight: 102
