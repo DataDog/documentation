@@ -6,4 +6,5 @@ disable_toc: true
 
 {{< whatsnext desc="General guides:">}}
     {{< nextlink href="/service_management/on-call/guides/configure-mobile-device-for-on-call" >}}Set up your mobile device for Datadog On-Call{{< /nextlink >}}
+    {{< nextlink href="/service_management/on-call/guides/migrating-from-your-current-providers" >}}Step-by-step guide on how to migrate from your current On-Call provider{{< /nextlink >}}
 {{< /whatsnext >}}
