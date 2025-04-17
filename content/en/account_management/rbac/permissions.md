@@ -30,6 +30,17 @@ Some Datadog permissions provide access to more privileged functionality that is
 
 Sensitive permissions are flagged in the Roles and Permissions interfaces to identify that they may need increased scrutiny. As a best practice, administrators configuring roles should pay special attention to these permissions, and confirm which of these permissions are assigned to their roles and users.
 
+### Preview Mode permissions
+
+Some permissions appear in "Preview Mode" before becoming fully enforced. During this period:
+
+- Preview permissions are marked in the app with a "Preview" badge
+- They do not restrict access until the preview period ends
+- The preview typically lasts 2-4 weeks before enforcement begins
+- Administrators should configure roles appropriately during this period
+
+Release notes will indicate when a specific preview mode permission is created and when it will be enforced. While these permissions don't restrict access during preview, it's recommended to update role configurations before they become enforced to prevent disruption.
+
 ### Managed roles
 
 By default, existing users are associated with one of the three managed roles:
