@@ -127,7 +127,7 @@ enabled by default, you can turn it off by setting
 
 ### Stack V2
 
-Stack V2 is the new stack sampler implementation for CPython 3.8+ on Linux.
+Stack V2 is the new stack sampler implementation for 64-bit CPython 3.8+ on Linux.
 It enhances the performance, accuracy, and reliability of Python CPU profiling.
 The feature is enabled by default from `ddtrace` versions 2.20+ and we highly recommend
 using the most recent release of the library to benefit from latest improvements
