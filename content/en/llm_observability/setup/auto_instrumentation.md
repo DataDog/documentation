@@ -29,6 +29,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
+| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
 
@@ -52,7 +53,7 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True, langgraph=True)
 ```
 
 ## OpenAI
@@ -195,6 +196,17 @@ The following operations are supported:
 - [`function`][41]
 - [`custom`][42]
 
+## LangGraph
+
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
+
+### Traced methods
+
+The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
+
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
+- [RunnableSeq.invoke()][35]
+
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -238,7 +250,9 @@ The following operations are supported:
 [40]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
 [41]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
 [42]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
-
+[43]: https://langchain-ai.github.io/langgraph/concepts/sdk/
+[44]: https://blog.langchain.dev/langgraph/#compile
+[45]: https://blog.langchain.dev/langgraph/#nodes
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
