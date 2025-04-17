@@ -19,6 +19,9 @@ further_reading:
 - link: "/logs/guide/reduce_data_transfer_fees"
   tag: "Documentation"
   text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://www.datadoghq.com/blog/optimize-high-volume-logs/"
+  tag: "blog"
+  text: "How to optimize high-volume log data without compromising visibility"
 ---
 
 ## Overview
