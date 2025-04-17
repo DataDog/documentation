@@ -27,6 +27,9 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 |-------------|-------------|------------|----------|
 | `rum.measure.app.startup_time` | App startup time | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.error` | Count of errors | Default, Is Crash, View Name | Mobile & Browser |
+| `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
+| `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
+| `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
 | `rum.measure.session.action` | Count of actions | Default, Action Type, View Name | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
@@ -48,8 +51,10 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.view.interaction_to_next_view` | Time between the last user interaction in the previous view and the start of the current view | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.largest_contentful_paint` | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.memory` | Amount of system memory used | Default, Percentiles breakdown | Mobile only |
+| `rum.measure.view.network_settled` | Network settled | Default, Percentiles breakdown | Mobile only |
 | `rum.measure.view.refresh_rate` | Average of user's refresh rate (FPS) | Default, Percentiles breakdown | Mobile only |
-| `rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
+| `rum.measure.view.slow_rendered` | Count of slow rendered views | Default | Mobile only |
+| `rum.measure.rum.measure.view.time_spent` | Time spent on the current view | Default | Mobile & Browser |
 
 ## Further reading
 
