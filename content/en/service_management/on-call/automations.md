@@ -31,6 +31,9 @@ Handover Automations are maintained on a Team level. To get started, navigate to
 ### Send a Slack message
 Post a message to Slack at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Slack app—make sure it's [added to your workspace][2].
 
+#### Troubleshooting
+If you're not receiving @-mentions in Slack, it's likely your Slack and Datadog profiles aren't linked. To connect them, run any Datadog Slack command, for example `/dd page`.
+
 ### Send a Microsoft Teams message
 Post a message to Microsoft Teams at the start or end of a shift using a handover automation. The message shows the previous and next on-call users (if any). **Note**: This requires the Datadog Teams app—make sure it's [added to your workspace][3].
 
