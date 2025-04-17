@@ -9,7 +9,7 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
+DDSQL for the DDSQL Editor is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">

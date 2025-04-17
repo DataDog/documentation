@@ -154,7 +154,7 @@ GROUP BY service_name
 {{< /code-block >}} 
 
 ### `CEIL`
-{{< code-block lang="sql" >}} 
+{{< code-block lang="sql" >}}
 SELECT CEIL(price) AS rounded_price 
 FROM products 
 {{< /code-block >}}
@@ -419,7 +419,7 @@ FROM
 
 ## Window functions
 
-This table provides an overview of the supprted window functions. For comprehensive details and examples, see to the [PostgreSQL documentation][2].
+This table provides an overview of the supprted window functions. For comprehensive details and examples, see the [PostgreSQL documentation][2].
 
 | Function                | Return Type       | Description                                                            |
 |-------------------------|-------------------|------------------------------------------------------------------------|

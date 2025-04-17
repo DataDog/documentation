@@ -1544,7 +1544,7 @@ menu:
       identifier: ddsql_editor_getting_started
       weight: 1
     - name: Querying Tags
-      url: ddsql_editor/reference/tags
+      url: ddsql_editor/tags
       parent: ddsql_editor
       identifier: ddsql_editor_tags
       weight: 2

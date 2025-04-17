@@ -7,10 +7,11 @@ aliases:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
+DDSQL for the DDSQL Editor is in Preview.
 {{< /callout >}}
 
-<div class="alert alert-warning">This page documents the only DDSQL syntax supported by the DDSQL Editor. Other DDSQL syntax not listed here is not supported and will not work in this context.</div>
+<div class="alert alert-warning">The <strong>DDSQL Editor</strong> supports only the syntax documented in the <a href="/ddsql/ddsql_editor_syntax">DDSQL Editor syntax documentation</a>. Other DDSQL syntax references apply to a different version of DDSQL and are not supported in this context.</div>
+
 ## Overview
 
 A window function applies an aggregation to some subset of the rows selected by a query. The selected rows are preserved in the query output, rather than being grouped into a single output row as they would be in a non-window aggregation.

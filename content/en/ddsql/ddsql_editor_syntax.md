@@ -20,7 +20,7 @@ DDSQL Editor is in Preview.
     {{< nextlink href="ddsql/ddsql_editor_syntax/data_types" >}}Data Types{{< /nextlink >}}
     {{< nextlink href="ddsql/ddsql_editor_syntax/expressions_and_operators" >}}Expressions and Operators{{< /nextlink >}}
     {{< nextlink href="ddsql/ddsql_editor_syntax/statements" >}}Statements{{< /nextlink >}}
-    {{< nextlink href="ddsql/ddsql_editor_syntax/tags" >}}Tags{{< /nextlink >}}
+    {{< nextlink href="ddsql/ddsql_editor/tags" >}}Tags{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

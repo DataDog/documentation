@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/ddsql-editor">}}
-DDSQL is in Preview.
+The DDSQL Editor is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">
