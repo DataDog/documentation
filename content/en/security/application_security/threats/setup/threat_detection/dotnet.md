@@ -1,5 +1,5 @@
 ---
-title: Enabling ASM for .NET
+title: Enabling AAP for .NET
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -16,10 +16,10 @@ further_reading:
       text: '.NET Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
-      text: "OOTB Application Security Management Rules"
+      text: "OOTB App and API Protection Rules"
     - link: "/security/application_security/troubleshooting"
       tag: "Documentation"
-      text: "Troubleshooting Application Security Management"
+      text: "Troubleshooting App and API Protection"
 ---
 
 You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
@@ -31,9 +31,9 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Software Composition Analysis detection features) for your target operating system architecture.
 
-   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for AAP capabilities, see [Compatibility][2].
 
-2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
+2. **Enable AAP** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -143,7 +143,7 @@ ENV DD_APPSEC_ENABLED=true
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Update your deployment configuration file for APM and add the ASM environment variable:
+Update your deployment configuration file for APM and add the AAP environment variable:
 
 ```yaml
 spec:

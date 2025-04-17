@@ -29,6 +29,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
+| [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 | [OpenAI Agents](#openai-agents)            | >= 0.0.2           | >= 3.5.0          |
 
 
@@ -51,15 +52,8 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True)
-patch(langchain=True)
-patch(anthropic=True)
-patch(gemini=True)
-patch(botocore=True)
-patch(openai_agents=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, openai_agents=True)
 ```
-
-**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -114,8 +108,12 @@ The Amazon Bedrock integration instruments the following methods:
   - `InvokeModel`
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
+- [Chat messages][31]:
+  - `Converse` (requires ddtrace>=3.4.0)
+- [Streamed chat messages][32]:
+  - `ConverseStream` (requires ddtrace>=3.5.0)
 
-**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
 ## Anthropic
 
@@ -158,20 +156,44 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
+## Crew AI
+
+The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
+
+### Traced methods
+
+The Crew AI integration instruments the following methods:
+
+- [Crew Kickoff][27]:
+  - `crew.kickoff()`
+  - `crew.kickoff_async()`
+  - `crew.kickoff_for_each()`
+  - `crew.kickoff_for_each_async()`
+
+- [Task Execution][28]:
+  - `task.execute_sync()`
+  - `task.execute_async()`
+
+- [Agent Execution][29]:
+  - `agent.execute_task()`
+
+- [Tool Invocation][30]:
+  - `tool.invoke()`
+
 ## OpenAI Agents
 
-The OpenAI Agents integration converts the [built-in tracing][28] from the [OpenAI Agents SDK][29] into
+The OpenAI Agents integration converts the [built-in tracing][33] from the [OpenAI Agents SDK][34] into
 LLM Observability format and sends it to Datadog's LLM Observability product by adding a Datadog trace processor.
 
 The following operations are supported:
-- [`traces`][30]
-- [`agent`][31]
-- [`generation`][32] using Datadog's [OpenAI](#openai) integration
-- [`response`][33]
-- [`guardrail`][34]
-- [`handoff`][35]
-- [`function`][36]
-- [`custom`][37]
+- [`traces`][35]
+- [`agent`][36]
+- [`generation`][37] using Datadog's [OpenAI](#openai) integration
+- [`response`][38]
+- [`guardrail`][39]
+- [`handoff`][40]
+- [`function`][41]
+- [`custom`][42]
 
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
@@ -199,16 +221,23 @@ The following operations are supported:
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
-[28]: https://openai.github.io/openai-agents-python/tracing/
-[29]: https://openai.github.io/openai-agents-python/
-[30]: https://openai.github.io/openai-agents-python/ref/tracing/traces/
-[31]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.agent_span
-[32]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.generation_span
-[33]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.response_span
-[34]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.guardrail_span
-[35]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
-[36]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
-[37]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
+[26]: https://docs.crewai.com/introduction
+[27]: https://docs.crewai.com/concepts/crews#kicking-off-a-crew 
+[28]: https://docs.crewai.com/concepts/tasks
+[29]: https://docs.crewai.com/concepts/agents
+[30]: https://docs.crewai.com/concepts/tools
+[31]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[32]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+[33]: https://openai.github.io/openai-agents-python/tracing/
+[34]: https://openai.github.io/openai-agents-python/
+[35]: https://openai.github.io/openai-agents-python/ref/tracing/traces/
+[36]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.agent_span
+[37]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.generation_span
+[38]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.response_span
+[39]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.guardrail_span
+[40]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.handoff_span
+[41]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.function_span
+[42]: https://openai.github.io/openai-agents-python/ref/tracing/#agents.tracing.custom_span
 
 
 {{% /tab %}}
