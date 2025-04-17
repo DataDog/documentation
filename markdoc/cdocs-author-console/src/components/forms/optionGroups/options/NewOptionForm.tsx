@@ -144,10 +144,16 @@ function NewOptionForm(props: {
         )}
       </AccordionDetails>
       <AccordionActions>
-        <Button onClick={handleSave} disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}>
+        <Button
+          variant="contained"
+          onClick={handleSave}
+          disabled={newOptionConfig.id === '' || newOptionConfig.label === ''}
+        >
           Add option to selection
         </Button>
-        <Button onClick={handleFormCancel}>Cancel</Button>
+        <Button variant="contained" onClick={handleFormCancel}>
+          Cancel
+        </Button>
       </AccordionActions>
     </Accordion>
   );

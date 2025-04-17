@@ -21,15 +21,6 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
 
   return (
     <div>
-      <h1>Testing sandbox</h1>
-      <h2>Option group form</h2>
-      <OptionGroupForm
-        customizationConfig={customizationConfig}
-        onSave={() => {}}
-        onClean={() => {}}
-        onPending={() => {}}
-      />
-      <hr />
       {filters.length === 0 && (
         <p>
           Click the button below to configure a filter and generate instructions for setting up a new customizable doc.

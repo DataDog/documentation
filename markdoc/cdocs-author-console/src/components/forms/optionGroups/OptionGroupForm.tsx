@@ -52,8 +52,6 @@ export type OptionGroup = {
 function OptionGroupForm(props: {
   customizationConfig: CustomizationConfig;
   onSave: (p: { optionGroupId: string; optionGroup: OptionGroup }) => void;
-  onPending: () => void;
-  onClean: () => void;
 }) {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [optionGroupId, setOptionGroupId] = useState<string>('');
