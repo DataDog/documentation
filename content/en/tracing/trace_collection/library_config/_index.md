@@ -48,8 +48,7 @@ The following configuration options behave consistently across the latest versio
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `null`. If unset or no rules match, the tracer defers to the Datadog Agent to dynamically adjust sample rate across traces.  <br>
-**Supported Input**: A JSON array of [user-defined rules](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules). <br>
-**Caveats**: Matching by `resource` and `tags` is in Preview.  <br>
+**Supported Input**: A JSON array of [user-defined rules][5]. <br>
 **Description**: Enables fine-grained control over trace ingestion, allowing you to target specific services, operations, resources, or tagged traces. Defined by a JSON array of objects, where each object must include a `sample_rate` between 0.0 and 1.0 (inclusive), and can optionally include fields such as `service`, `name`, `resource`, `tags`, and `max_per_second`. Objects are evaluated in the order listed; the first matching object determines the trace's sample rate. For more information, see [Ingestion Mechanisms][4]. <br>
 **Examples**: <br>
   - Sample 20% of all traces: <br>
@@ -164,3 +163,4 @@ The following configuration options behave consistently across the latest versio
 [2]: /tracing/trace_collection/compatibility/java/#framework-integrations-disabled-by-default
 [3]: /tracing/services/inferred_services/
 [4]: /tracing/trace_pipeline/ingestion_mechanisms
+[5]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java#in-tracing-libraries-user-defined-rules
