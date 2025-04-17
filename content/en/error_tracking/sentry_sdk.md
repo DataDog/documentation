@@ -1,6 +1,6 @@
 ---
 title: Sentry SDK
-description: Use the Sentry SDK to send errors to Error Tracking.
+description: Start using Datadog Error Tracking today without changing your existing setup with the Sentry SDK
 further_reading:
 - link: "/error_tracking/manage_data_collection"
   tag: "Documentation"
