@@ -48,9 +48,9 @@ The following table shows Datadog feature compatibility across different setups:
 | [Universal Service Monitoring][17] (USM)            |                                    |{{< X >}}                           | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
 | [App and API Protection][11] (AAP)         |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
 | [Continuous Profiler][12]                           |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
-| [Data Jobs Monitoring][13] (DJM)                    |                                    |                                    | {{< X >}}                           | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
-| [Data Streams Monitoring][15] (DSM)                 | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}}|   | {{< X >}}               | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
-| [Database Monitoring][14] (DBM)                     | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}}|   | {{< X >}}               | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Data Jobs Monitoring][13] (DJM)                    |                                    |                                    | {{< X >}}                           | {{< X >}}                                            | {{< X >}}    |
+| [Data Streams Monitoring][15] (DSM)                 | {{< tooltip text="N/A" tooltip="OTel does not offer DSM functionality" >}}|   | {{< X >}}<br>(Datadog SDK only)               | {{< X >}}<br>(Datadog SDK only)                      | {{< X >}}    |
+| [Database Monitoring][14] (DBM)                     | {{< tooltip text="N/A" tooltip="OTel does not offer DBM functionality" >}}|   | {{< X >}}               | {{< X >}}                                            | {{< X >}}    |
 
 ### Supported OpenTelemetry features
 
