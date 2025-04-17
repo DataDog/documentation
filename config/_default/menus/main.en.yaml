@@ -1052,7 +1052,7 @@ menu:
       parent: ide_plugins
       identifier: ide_plugins_idea
       weight: 701
-    - name: VS Code
+    - name: VS Code & Cursor
       url: developers/ide_plugins/vscode/
       parent: ide_plugins
       identifier: ide_plugins_vscode
