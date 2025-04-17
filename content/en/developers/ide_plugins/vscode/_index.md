@@ -1,6 +1,6 @@
 ---
 title: Datadog Extension for VS Code, Cursor, and Related Forks
-description: Learn how to run Synthetic tests on local environments directly in VS Code.
+description: Integrate Datadog telemetry and insights into your source code in VS Code and other IDEs.
 is_beta: true
 aliases:
 - '/developers/ide_integrations/vscode/'
@@ -19,6 +19,8 @@ further_reading:
   text: "Simplify production debugging with Datadog Exception Replay"
 ---
 
+<!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
+
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
     The Datadog extension for Visual Studio Code is not supported for the {{< region-param key="dd_site_name" >}} site.
@@ -32,7 +34,7 @@ The Datadog extension for Visual Studio Code (VS Code) integrates with Datadog t
 - [Visual Studio Marketplace][2]: Install the extension for VS Code.
 - [Open VSX Registry](https://open-vsx.org/extension/datadog/datadog-vscode): Download the VSIX file to install for Cursor and other forks of VS Code.
 
-{{< img src="/developers/ide_plugins/vscode/datadog-vscode-2.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/datadog-vscode-3.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 The extension includes these features:
 
@@ -40,11 +42,13 @@ The extension includes these features:
 
 - [**Code Insights**](#code-insights): Stay informed about runtime errors, vulnerabilities, and flaky tests without leaving the code.
 
-- [**View in VS Code**](#view-in-ide) or [**View in Cursor**](#view-in-ide): Jump directly from code references in Datadog to your source files.
+- [**View in IDE**](#view-in-ide): Jump directly from code references in Datadog to your source files.
 
 - [**Static Code Analysis**](#static-code-analysis): Detect and fix problems before you commit changes.
 
 - [**Exception Replay**](#exception-replay): Debug your production code.
+
+<div class="alert alert-info">Unless stated otherwise, all extension features are available for both VS Code and any other IDEs based on VS Code forks, such as Cursor.</div>
 
 ## Requirements
 
@@ -80,7 +84,7 @@ The **Code Insights** view in the Datadog sidebar lists all the issues found in 
 
 You can group code insights by kind, file, priority, or service. You can also ignore individual code insights and set filters to view the ones you're most interested in.
 
-{{< img src="/developers/ide_plugins/vscode/code-insights.png" alt="The Code Insights view." style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/code-insights-2.png" alt="The Code Insights view." style="width:100%;" >}}
 
 For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [Static Code Analysis](#static-code-analysis) within the file.
 
@@ -90,7 +94,7 @@ For specific insights about the file currently open in the active editor, check 
 
 The **View in VS Code** or **View in Cursor** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][10]):
 
-{{< img src="/developers/ide_plugins/vscode/view-in-vscode.png" alt="A stack trace in Datadog showing the View in VS Code button" style="width:100%;" >}}
+{{< img src="/developers/ide_plugins/vscode/view-in-vscode-2.png" alt="A stack trace in Datadog showing the View in VS Code button" style="width:100%;" >}}
 
 You can also use this feature to open your source files from an insight (such as an error from Error Tracking):
 
