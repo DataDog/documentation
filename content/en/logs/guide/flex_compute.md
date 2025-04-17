@@ -1,5 +1,5 @@
 ---
-title: Monitor Flex Logs Compute Usage
+title: Monitor Flex Compute Usage
 description: Learn how to monitor and optimize your Flex Logs compute usage through query performance metrics and visualizations
 further_reading:
 - link: "/logs/log_configuration/flex_logs/"
@@ -12,13 +12,13 @@ further_reading:
 
 ## Overview
 
-Monitor the usage of Flex Logs compute through various graphs on the Flex Logs Controls page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
+Monitor the usage of Flex compute through various graphs on the Flex Controls page. Make informed decisions using data on cost-performance tradeoffs and balance operational success with financial efficiency.
 
 <!-- {{< img src="path/to/your/image-name-here.png" alt="TBD Dashboard showing both the query performance and compute size" style="width:100%;" >}} -->
 
 ## Monitoring query performance
 
-Flex Logs compute is limited by two factors:
+Flex compute is limited by two factors:
 - The number of concurrent queries
 - The maximum number of logs that can be scanned per query
 
@@ -40,10 +40,15 @@ Use this information to optimize your usage.
    - Discuss their querying needs
    - Understand if there are logs they query frequently that should be stored in Standard Indexing instead
 1. **Improve dashboards experiencing slowdowns by:**
+<<<<<<< HEAD:content/en/logs/guide/flex_logs_compute.md
    - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex Logs compute usage
    - Breaking them down into smaller dashboards to spread the load
+=======
+   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage
+   - Breaking down into smaller dashboards to spread the load
+>>>>>>> c4e442dcd5 (Change Flex Logs Compute to Flex Compute):content/en/logs/guide/flex_compute.md
    - Reducing the number of concurrent queries
-1. **Consider upgrading your Flex Logs compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
+1. **Consider upgrading your Flex compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
 
 To learn more about compute sizes, see the [Flex Logs][1] documentation.
 
