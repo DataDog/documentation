@@ -24,7 +24,7 @@ To track or monitor your volume of ingested and indexed data, see the [Usage Met
 
 ## Retention filters
 
-After spans have been ingested, some are kept for 15 days according to the retention filters are set up on your account:
+After spans have been ingested, some are kept for 15 days according to the retention filters that are set up on your account:
 1. The **[Intelligent Retention Filter](#datadog-intelligent-retention-filter)** retains spans for every environment, service, operation, and resource for different latency distributions.
 2. Several **[Default Retention Filters](#default-retention-filters)** are created to ensure that you keep visibility over all of your services and endpoints, as well as errors and high-latency traces. 
 3. You can create any number of additional **[Custom Retention Filters](#create-your-own-retention-filter)** for your services, to capture the traces that matters the most to your business, based on any span attribute or tag filter.
@@ -77,7 +77,7 @@ There are two types of retention filters:
 
 The following retention filters are enabled by default: 
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
-- The `Application Security Monitoring Default` retention filter is enabled if you are using [Application Security Management][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
+- The `Application Security Monitoring Default` retention filter is enabled if you are using [App and API Protection][16]. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
 - The `Synthetics Default` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 - The `Dynamic Instrumentation Default` retention filter is enabled if you are using [Dynamic Instrumentation][17]. It ensures spans created dynamically with Dynamic instrumentation remain available in the long term by default.
 
@@ -115,7 +115,7 @@ Create custom retention filters to retain specific trace data for 15 days. Use a
 
 For example, you can create filters to keep all traces for:
 
-- Credit card transactions over $100 with a `@transaction_amount:>100` filter
+- Credit card transactions over $100: `@transaction_amount:>100`
 - Checkout operation spans that have a duration longer than 2 seconds on the production environment: `resource_name:"GET /checkout" @duration:>2s env:prod`
 - Specific versions of an online delivery service application: `service:delivery-api @version:v2.0`
 
