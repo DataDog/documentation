@@ -73,7 +73,16 @@ export default function OptionSelector(props: {
   // Handle any status changes from the nested new option form
   const handleNewOptionStatusChange = (p: { status: FormStatus; data?: OptionConfig }) => {
     // The user has opened the form or is otherwise editing it
-    if (p.status === 'pending') {
+    if (p.status === 'waiting') {
+      const newFormStatus = 'waiting';
+      if (formStatus !== newFormStatus) {
+        setFormStatus(newFormStatus);
+        // Notify the parent component of any status change
+        props.onStatusChange({ status: newFormStatus });
+      }
+    }
+    // The form has unsaved changes
+    else if (p.status === 'pending') {
       const newFormStatus = 'pending';
       setFormStatus(newFormStatus);
       // Notify the parent component of any status change
@@ -82,7 +91,7 @@ export default function OptionSelector(props: {
       }
     }
     // The user has canceled the form
-    if (p.status === 'done' && p.data === undefined) {
+    else if (p.status === 'done' && p.data === undefined) {
       let newFormStatus: FormStatus;
       if (dropdownSelections.length === 0) {
         newFormStatus = 'waiting';

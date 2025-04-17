@@ -82,7 +82,7 @@ function OptionGroupForm(props: {
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
     setCurrentTabIndex(currentTabIndex);
     // Handle a switch to "Add new" tab
-    if (currentTabIndex === 0) {
+    if (currentTabIndex === 1) {
       setOptionGroupId('');
       setOptionGroup([]);
       setOptionSelectionFormStatus('waiting');

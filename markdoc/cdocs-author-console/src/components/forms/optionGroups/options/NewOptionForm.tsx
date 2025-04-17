@@ -39,11 +39,21 @@ function NewOptionForm(props: {
     }
   };
 
-  // The accordion can only be toggled open,
-  // it must be saved or canceled to close
+  const clearForm = () => {
+    setNewOptionConfig(blankOption);
+    setFormErrors([]);
+  };
+
   const handleAccordionToggle = () => {
-    setFormStatus('waiting');
-    props.onStatusChange({ status: 'waiting' });
+    // Open accordion
+    if (formStatus === 'done') {
+      setFormStatus('waiting');
+      props.onStatusChange({ status: 'waiting' });
+    } else {
+      setFormStatus('done');
+      clearForm();
+      props.onStatusChange({ status: 'done' });
+    }
   };
 
   const handleFormCancel = () => {
@@ -75,14 +85,13 @@ function NewOptionForm(props: {
     const isValid = validateFormData();
     if (isValid) {
       props.onStatusChange({ status: 'done', data: newOptionConfig });
-      setNewOptionConfig(blankOption);
       setFormStatus('done');
+      clearForm();
     }
   };
 
   return (
     <Accordion
-      disabled={formStatus !== 'done'}
       expanded={formStatus !== 'done'}
       onChange={handleAccordionToggle}
       aria-controls="new-option-form"
