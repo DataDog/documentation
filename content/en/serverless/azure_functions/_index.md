@@ -82,7 +82,7 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
    -javaagent:/path/to/dd-serverless-compat-java-agent.jar -javaagent:/path/to/dd-java-agent.jar
    ```
 
-   **Note**: the environment variable to set JVM options depends on the hosting plan (ex. Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][5] for more details on the appropriate environment variable for your hosting plan.
+   **Note**: the environment variable to set JVM options depends on the hosting plan (example, Consumption, Elastic Premium, Dedicated). See [Azure Functions Java developer guide][5] for more details on the appropriate environment variable for your hosting plan.
 
 3. (Optional) **Enable runtime metrics**. See [Java Runtime Metrics][2].
 
