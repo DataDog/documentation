@@ -14,7 +14,10 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 /**
  * A form that allows the user to choose an existing trait ID, or configure a new trait.
  */
-function NewTraitForm(props: { customizationConfig: CustomizationConfig }) {
+function NewTraitForm(props: {
+  customizationConfig: CustomizationConfig;
+  onStatusChange: (p: { status: FormStatus; data?: TraitConfig }) => void;
+}) {
   const blankTraitConfig: TraitConfig = {
     id: '',
     label: '',
@@ -30,26 +33,29 @@ function NewTraitForm(props: { customizationConfig: CustomizationConfig }) {
     setFormErrors([]);
   };
 
+  const cancelForm = () => {
+    if (formStatus !== 'done') {
+      setFormStatus('done');
+      props.onStatusChange({ status: 'done' });
+    }
+    clearForm();
+  };
+
   const handleAccordionToggle = () => {
     // Open the accordion
     if (formStatus === 'done') {
       setFormStatus('waiting');
-      // Close the accordion
+      props.onStatusChange({ status: 'waiting' });
+      // Close the accordion (acts as a cancel button)
     } else {
-      setFormStatus('done');
-      clearForm();
+      cancelForm();
     }
   };
 
   const validateForm = () => {
     let errors: string[] = [];
 
-    if (!newTraitConfig.id) {
-      errors.push('Trait ID is required.');
-    }
-    if (!newTraitConfig.label) {
-      errors.push('Trait label is required.');
-    }
+    // TODO: Use Zod to validate the ID pattern
 
     if (props.customizationConfig.traitsById[newTraitConfig.id]) {
       errors.push('Trait ID is already taken. Did you mean to select an existing trait?');
@@ -63,13 +69,18 @@ function NewTraitForm(props: { customizationConfig: CustomizationConfig }) {
     const isValid = validateForm();
 
     if (isValid) {
-      setFormStatus('done');
-    }
-  };
+      const newFormStatus = 'done';
+      if (formStatus !== newFormStatus) {
+        setFormStatus(newFormStatus);
+        // Notify the parent component of any status change
+        props.onStatusChange({ status: newFormStatus, data: newTraitConfig });
+      }
 
-  const handleFormCancel = () => {
-    clearForm();
-    setFormStatus('done');
+      // Close the accordion
+      setFormStatus('done');
+
+      clearForm();
+    }
   };
 
   const handleFormChange = (updatedTraitConfig: TraitConfig) => {
@@ -78,13 +89,17 @@ function NewTraitForm(props: { customizationConfig: CustomizationConfig }) {
     // Update the form status
     const newFormStatus = 'pending';
     setFormStatus(newFormStatus);
+    // Notify the parent component of any status change
+    if (formStatus !== newFormStatus) {
+      props.onStatusChange({ status: newFormStatus });
+    }
   };
 
   return (
     <div>
       <Accordion expanded={formStatus !== 'done'} onChange={handleAccordionToggle}>
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-          <Typography component="span">An option I need is missing from the list.</Typography>
+          <Typography component="span">I couldn't find the trait I need.</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <p>
@@ -156,7 +171,7 @@ function NewTraitForm(props: { customizationConfig: CustomizationConfig }) {
           >
             Save
           </Button>
-          <Button variant="contained" onClick={handleFormCancel}>
+          <Button variant="contained" onClick={cancelForm}>
             Cancel
           </Button>
         </AccordionActions>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CustomizationConfig } from 'cdocs-data';
-import ExistingTraitSelector from './ExistingTraitSelector';
+import StrictTraitSelector from './StrictTraitSelector';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
@@ -101,7 +101,7 @@ function TraitForm({
         <Tab disableRipple label="Add new" {...a11yProps(1)} sx={{ color: '#632ca6' }} />
       </Tabs>
       <CustomTabPanel value={currentTabIndex} index={0}>
-        <ExistingTraitSelector customizationConfig={customizationConfig} onSave={handleExistingTraitSelect} />
+        <StrictTraitSelector customizationConfig={customizationConfig} onSave={handleExistingTraitSelect} />
       </CustomTabPanel>
       <CustomTabPanel value={currentTabIndex} index={1}>
         <p>

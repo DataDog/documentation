@@ -4,6 +4,7 @@ import { CustomizationConfig } from 'cdocs-data';
 import { WizardFilter } from '../types';
 import SetupInstructions from './SetupInstructions';
 import NewTraitForm from './forms/traits/NewTraitForm';
+import FlexibleTraitSelector from './forms/traits/FlexibleTraitSelector';
 
 function PageWizard({ customizationConfig }: { customizationConfig: CustomizationConfig }) {
   const [filters, setFilters] = useState<WizardFilter[]>([]);
@@ -22,8 +23,13 @@ function PageWizard({ customizationConfig }: { customizationConfig: Customizatio
   return (
     <div>
       <h1>Debug</h1>
-      <h2>NewTraitForm:</h2>
-      <NewTraitForm customizationConfig={customizationConfig} />
+      <h2>FlexibleTraitSelector:</h2>
+      <FlexibleTraitSelector
+        customizationConfig={customizationConfig}
+        onStatusChange={(p) => {
+          console.log('FlexibleTraitSelector status change:', p);
+        }}
+      />
       <hr />
       {filters.length === 0 && (
         <p>
