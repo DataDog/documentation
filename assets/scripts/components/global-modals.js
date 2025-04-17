@@ -31,7 +31,7 @@ const doOnLoad = () => {
     };
 
     const loadSignupIframe = (iframeElement, url) => {
-        if (iframeElement && iframeElement.src === "") {
+        if (iframeElement) {
           iframeElement.src = url;
       
           // handle a loading issue
