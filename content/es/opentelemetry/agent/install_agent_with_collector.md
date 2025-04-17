@@ -8,7 +8,7 @@ title: Instalar el Datadog Agent con el OpenTelemetry Collector integrado
 ---
 
 {{< callout url="https://www.datadoghq.com/private-beta/agent-with-embedded-opentelemetry-collector/" btn_hidden="false" header="Join the Preview!">}}
-  El Datadog Agent con el OpenTelemetry Collector integrado está en fase previa. Para solicitar acceso, rellena este formulario. 
+  El Datadog Agent con el OpenTelemetry Collector integrado está en fase previa. Para solicitar acceso, rellena este formulario.
 {{< /callout >}}
 
 ## Información general
@@ -266,7 +266,7 @@ Configura `<DATADOG_SITE>` como tu [sitio Datadog][2]. De lo contrario, por defe
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 ...
 {{< /code-block >}}
@@ -341,7 +341,7 @@ Your `datadog-values.yaml` file should look something like this:
 agents:
   image:
     repository: gcr.io/datadoghq/agent
-    tag: {{< version key="agent_tag_jmx" >}}
+    tag: {{< version key="agent_tag" >}}
     doNotCheckTag: true
 
 datadog:

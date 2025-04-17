@@ -245,6 +245,34 @@ To verify the configuration:
 
 <div class="alert alert-info">When working with semantic conventions, ensure you're following the latest OpenTelemetry specification for metric naming and attributes.</div>
 
+## Port binding errors and connection failures
+
+**Symptom**: You experience port conflicts or binding issues when deploying the DDOT Collector, or applications cannot connect to the DDOT Collector.
+
+**Cause**: This typically occurs due to port naming conflicts, incorrect port configurations, or when multiple services attempt to use the same ports.
+
+**Resolution**:
+
+The Datadog Operator automatically binds the OpenTelemetry Collector to ports `4317` (named `otel-grpc`) and `4318` (named `otel-http`) by default.
+
+To explicitly override the default ports, use the `features.otelCollector.ports` parameter:
+
+```yaml
+# Enable Features
+features:
+  otelCollector:
+    enabled: true
+    ports:
+      - containerPort: 4317
+        hostPort: 4317
+        name: otel-grpc
+      - containerPort: 4318
+        hostPort: 4318
+        name: otel-http
+```
+
+<div class="alert alert-warning">When configuring ports <code>4317</code> and <code>4318</code>, you must use the default names <code>otel-grpc</code> and <code>otel-http</code> respectively to avoid port conflicts.</div>
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

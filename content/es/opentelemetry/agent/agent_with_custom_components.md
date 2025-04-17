@@ -42,7 +42,7 @@ Descargue la plantilla del archivo Docker:
 
 El archivo Docker:
 
-- Crea una [compilación multietapa][6] con Ubuntu 24.04 y `datadog/agent:{{% version key="agent_tag_jmx" %}}`.
+- Crea una [compilación multietapa][6] con Ubuntu 24.04 y `datadog/agent:{{% version key="agent_tag" %}}`.
 - Instala Go, Python y las dependencias necesarias.
 - Descarga y descomprime el código fuente del Datadog Agent.
 - Crea un entorno virtual e instala los paquetes Python necesarios.
@@ -98,14 +98,14 @@ conectores:
 {{< /highlight >}}
 1. Guarda los cambios en el archivo del manifiesto.
 
-## Crear y enviar la imagen del Agent 
+## Crear y enviar la imagen del Agent
 
 Crea tu imagen personalizada del Datadog Agent y envíala a un registro de contenedor.
 
 1. Crea la imagen con Docker:
    ```shell
    docker build . -t agent-otel --no-cache \
-     --build-arg AGENT_VERSION="{{< version key="agent_tag_jmx" >}}" \
+     --build-arg AGENT_VERSION="{{< version key="agent_tag" >}}" \
      --build-arg AGENT_BRANCH="{{< version key="agent_branch" >}}"
    ```
 2. Etiquetar y enviar la imagen:
