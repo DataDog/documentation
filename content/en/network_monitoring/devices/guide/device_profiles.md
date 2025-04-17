@@ -33,7 +33,10 @@ For more information on advanced profile details, review the [Profile Format Ref
 
 ## Prerequisites 
 
-The minimum Agent version required is `7.65` or higher.
+- The minimum Agent version required is `7.65` or higher.
+- Permissions required:
+  - [`ndm_device_profiles_view`][20]: Provides read-only access to the profile page. (Included in the Datadog Standard Role).
+  - [`ndm_device_profiles_edit`][20]: Allows editing of device profiles. (Included in the Datadog Admin Role).
 
 ## Setup
 
@@ -332,3 +335,4 @@ Datadog strongly recommends enabling Remote Configuration to ensure a seamless, 
 [17]: /network_monitoring/devices/profiles/#metadata-definition-by-profile
 [18]: /agent/remote_config/?tab=configurationyamlfile&site=us#setup
 [19]: /network_monitoring/devices/guide/device_profiles/?tab=manual#apply-a-profile-to-created-devices
+[20]: https://docs.datadoghq.com/account_management/rbac/permissions/#network-device-monitoring
