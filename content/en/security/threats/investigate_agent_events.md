@@ -5,7 +5,7 @@ further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
     tag: "Documentation"
     text: "Explore Workload Protection detection rules"
-  - link: "/security/threats/workload_security_rules"
+  - link: "/security/workload_protection/workload_security_rules"
     tag: "Documentation"
     text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
@@ -66,7 +66,7 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: /security/threats/security_signals
+[11]: /security/workload_protection/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
 [14]: /service_management/events/explorer/

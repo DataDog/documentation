@@ -48,5 +48,5 @@ Group findings by **Resources** and select a resource to see the full list of co
 
 [1]: https://app.datadoghq.com/security/compliance?time=now
 [2]: /security/cloud_siem/
-[3]: /security/threats/
+[3]: /security/workload_protection/
 [4]: /security/default_rules/cis-aws-1.5.0-2.1.5/

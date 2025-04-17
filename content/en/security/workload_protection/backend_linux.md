@@ -4142,5 +4142,5 @@ Workload Protection Threats event for Linux systems have the following JSON sche
 
 
 
-[1]: /security/threats/
+[1]: /security/workload_protection/
 [2]: /security/threats/agent

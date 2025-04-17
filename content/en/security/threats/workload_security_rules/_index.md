@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/threats/setup"
   tag: "Documentation"
   text: "Setting Up Workload Protection"
-- link: "/security/threats/agent_expressions"
+- link: "/security/workload_protection/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
 - link: "security/threats/backend"
@@ -130,14 +130,14 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/#cat-workload-security
-[2]: /security/threats/agent_expressions
+[2]: /security/workload_protection/agent_expressions
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
-[8]: /security/threats/security_signals
+[8]: /security/workload_protection/security_signals
 [9]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [10]: https://app.datadoghq.com/security/configuration/notification-rules
-[11]: /security/threats/workload_security_rules/custom_rules
+[11]: /security/workload_protection/workload_security_rules/custom_rules
 [12]: /security/cloud_security_management/guide/active-protection

@@ -41,21 +41,19 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 ## Phase 1: Deployment
 
 1. Using [Agentless][34] and/or the [Datadog Agent (version 7.46 or above)][4], [enable CSM for your cloud resources and infrastructure][5]:
-    - **[Threats][3]**: Kubernetes, Docker, and host-based installations.
     - **[Misconfigurations][2]**: AWS, Azure, GCP, Kubernetes, and Docker instructions.
     - **[Identity Risks][28]**: Enable AWS resource collection and Cloudtrail logs forwarding.
     - **[Vulnerabilities][6]**: Container image scanning and host scanning instructions for AWS, Azure, Kubernetes, ECS EC2 instances, and host-based installations.
-1. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
-1. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
-1. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
-1. Review and remediate identity risks on the [Identity Risks][29] page.
-1. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
-1. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
+2. Check out the [CSM homepage][13] to get an overview of your organization's risks.
+3. Review [500+ out-of-the-box Misconfigurations detection rules][14].
+4. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
+5. Review and remediate identity risks on the [Identity Risks][29] page.
+6. Review container vulnerabilities on the [Container Images][25] page, and a consolidated list of vulnerabilities on the [Infrastructure Vulnerability][30] page.
+7. Set up [notification rules][17] and receive alerts using Slack, Jira, email, and more.
 
 ## Phase 2: Customization
 
-1. Set up [Workload Protection suppression rules][18] to reduce noise.
-2. Create custom detection rules for [CSM Misconfigurations][19] and [Workload Protection][20].
+1. Create custom detection rules for [CSM Misconfigurations][19].
 
 ## Phase 3: Reports and dashboards
 
@@ -68,7 +66,6 @@ With CSM, Security and DevOps teams can act on the shared context of observabili
 For information on disabling CSM, see the following:
 
 - [Disable CSM Vulnerabilities][32]
-- [Disable Workload Protection][33]
 
 ## Further reading
 
@@ -87,7 +84,7 @@ For information on disabling CSM, see the following:
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
 [19]: /security/cloud_security_management/misconfigurations/custom_rules
-[20]: /security/threats/agent_expressions
+[20]: /security/workload_protection/agent_expressions
 [21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
 [25]: https://app.datadoghq.com/containers/images

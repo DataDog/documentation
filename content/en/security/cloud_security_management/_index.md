@@ -122,7 +122,7 @@ To get started with CSM, navigate to the [**Cloud Security Management Setup**][3
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/threats/
+[1]: /security/workload_protection/
 [2]: /security/cloud_security_management/misconfigurations/
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/security/csm

@@ -995,5 +995,5 @@ Workload Protection Threats event for Windows have the following JSON schema:
 
 
 
-[1]: /security/threats/
+[1]: /security/workload_protection/
 [2]: /security/threats/agent

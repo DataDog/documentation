@@ -65,7 +65,7 @@ To triage an event:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: /security/threats/security_signals
+[11]: /security/workload_protection/security_signals
 [12]: /security/default_rules/#cat-cloud-security-management
 [13]: https://app.datadoghq.com/security/agent-events
 [14]: /service_management/events/explorer/
