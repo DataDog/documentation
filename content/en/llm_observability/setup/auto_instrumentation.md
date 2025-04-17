@@ -29,6 +29,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Anthropic](#anthropic)                    | >= 0.28.0          | >= 2.10.0         |
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
+| [LangGraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
 | [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
@@ -50,7 +51,7 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, langgraph=True)
 ```
 
 ## OpenAI
@@ -154,6 +155,17 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
+## LangGraph
+
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
+
+### Traced methods
+
+The LangGraph integration instruments synchronous and asynchronous versions of the following methods:
+
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
+- [RunnableSeq.invoke()][35]
+
 ## Crew AI
 
 The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
@@ -210,6 +222,9 @@ The Crew AI integration instruments the following methods:
 [30]: https://docs.crewai.com/concepts/tools
 [31]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
 [32]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+[33]: https://langchain-ai.github.io/langgraph/concepts/sdk/
+[34]: https://blog.langchain.dev/langgraph/#compile
+[35]: https://blog.langchain.dev/langgraph/#nodes
 
 {{% /tab %}}
 {{% tab "Node.js" %}}
