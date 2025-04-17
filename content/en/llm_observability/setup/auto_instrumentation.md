@@ -155,7 +155,7 @@ The Vertex AI integration instruments the following methods:
   - `chat.send_message()`
   - `chat.send_message_async()`
 
-## Langgraph
+## LangGraph
 
 The Langgraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [Langgraph Python SDK][33].
 
