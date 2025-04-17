@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
   tag: "Documentation"
-  text: "Troubleshooting CSM Vulnerabilities"
+  text: "Troubleshooting Cloud Security Vulnerabilities"
 ---
 
 If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
