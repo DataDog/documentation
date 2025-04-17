@@ -2,7 +2,8 @@
 title: Fine-tuning Workload Protection Security Signals
 aliases:
   - /security_platform/cloud_workload_security/guide/tuning-rules/
-  - /security_platform/cloud_security_management/guide/tuning-rules/
+  - /security_platform/cloud_security_management/guide/
+  - /security/cloud_security_management/guide/tuning-rules
 ---
 
 ## Overview	

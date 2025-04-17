@@ -1,5 +1,7 @@
 ---
 title: Threat Detection for Linux Without eBPF Support
+aliases:
+  - /security/cloud_security_management/guide/ebpf-free-agent
 disable_toc: false
 ---
 

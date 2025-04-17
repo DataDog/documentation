@@ -23,7 +23,7 @@ Workload Protection Threats uses the Datadog Agent to monitor your environment. 
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+<!-- {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}} -->
 
 ## Proactively block threats with Active Protection
 
@@ -37,7 +37,7 @@ Workload Protection Threats comes with more than 50 out-of-the-box detection rul
 
 Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
-{{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}}
+<!-- {{< img src="security/cws/threats_detection_rules.png" alt="Workload Protection detection rules in the Datadog app" width="100%">}} -->
 
 ## Set up real-time notifications
 
@@ -49,7 +49,7 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
+<!-- {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}} -->
 
 {{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
 
@@ -75,4 +75,4 @@ Datadog is introducing a new feature called Active Protection to address the cry
 [7]: /security/threats/setup
 [8]: /security/workload_protection/security_signals
 [9]: /network_monitoring/performance/
-[10]: /security/cloud_security_management/guide/active-protection
+[10]: /security/workload_protection/guide/active-protection
