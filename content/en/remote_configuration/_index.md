@@ -64,10 +64,10 @@ Fleet Automation
 : - [Send flares][27] directly from the Datadog site. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 : - [Upgrade your Agents][29] (Preview).
 
-Application Security Management (ASM)
-: - 1-click ASM activation: Enable ASM in 1-click from the Datadog UI.
+App and API Protection (AAP)
+: - 1-click AAP activation: Enable AAP in 1-click from the Datadog UI.
 : - In-App attack patterns updates: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
-: - Protect: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals and Traces temporarily or permanently through the Datadog UI.
+: - Protect: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in AAP Security Signals and Traces temporarily or permanently through the Datadog UI.
 
 Application Performance Monitoring (APM)
 : - Configuration at runtime (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Software Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
@@ -76,8 +76,8 @@ Application Performance Monitoring (APM)
 Dynamic Instrumentation
 : - Send critical metrics, traces, and logs from your live applications with no code changes.
 
-CSM Threats
-: - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up CSM Threats][3] for more information.
+Workload Protection
+: - Automatic default Agent rule updates: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Workload Protection][3] for more information.
 : - Automatic deployment of custom Agent rules: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
 
 Observability Pipelines
@@ -116,7 +116,7 @@ To enable Remote Configuration:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
 1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 
-< **HH**: insert happy path here >
+
 
 < **HH**: if needed, insert section to deal with older configurations >
 
@@ -129,7 +129,7 @@ After you've enabled Remote Configuration in your organization, consult the docu
 | Fleet Automation | [Setup Fleet Automation][31] |
 | APM | [Configuration at runtime](/tracing/trace_collection/runtime_config/) |
 | Dynamic Instrumentation | [Getting started with Dynamic Instrumentation](/dynamic_instrumentation/#getting-started) |
-| CSM Threats | [Cloud Security Management Threats](/security/threats/) |
+| Workload Protection | [Workload Protection](/security/threats/) |
 | Observability Pipelines | [Advanced Configurations](/observability_pipelines/advanced_configurations/#bootstrap-options) |
 | Sensitive Data Scanner | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount) |
 | Private Action Runner | [Private Actions Overview](/actions/private_actions/) |
