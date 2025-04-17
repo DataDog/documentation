@@ -30,7 +30,7 @@ const doOnLoad = () => {
         return langParam;
     };
 
-    const loadSignupFormInFrame = (iframeElement, url) => {
+    const loadSignupIframe = (iframeElement, url) => {
         if (iframeElement && iframeElement.src === "") {
           iframeElement.src = url;
       
@@ -125,13 +125,8 @@ const doOnLoad = () => {
             const baseUrl = `https://${getAppBaseUrl(loc.appRegion)}/signup_corp`;
             const completeUrl = appendUrlQueryParams(baseUrl);
             const signupIframe = document.querySelector('#signUpIframe');
-            //signupIframe.setAttribute('src', completeUrl);
-            loadSignupFormInFrame(signupIframe, completeUrl);
+            loadSignupIframe(signupIframe, completeUrl);
         });
-    });
-
-    signupModal.addEventListener('hide.bs.modal', () => {
-        document.querySelector('#signUpIframe').setAttribute('src', '');
     });
 
     const imageModal = document.getElementById('popupImageModal');
