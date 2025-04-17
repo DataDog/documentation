@@ -57,6 +57,3 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `b`    | Events | 50    |
 
 [5001]: /monitors/types/metric/?tab=threshold
-[5002]: /observability_pipelines/destinations/amazon_s3/
-[5003]: /observability_pipelines/destinations/amazon_s3/?tab=docker#configure-log-archives
-[5004]: /observability_pipelines/destinations/amazon_s3/?tab=docker#set-up-the-destination-for-your-pipeline
