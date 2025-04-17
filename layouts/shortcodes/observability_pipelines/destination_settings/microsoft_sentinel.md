@@ -1,6 +1,22 @@
 #### Prerequisites
 
-To use the Microsoft Sentinel destination, you need to do the following:
+To set up the Microsoft Sentinel destination, you need the following information:
+
+| Name                              | Description                                                                                                                                                                                                                     | Example                                |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| Application (client) ID            | The Azure Active Directory (AD) application's client ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.                                                                                                                              | `550e8400-e29b-41d4-a716-446655440000`  |
+| Directory (tenant) ID              | The Azure AD tenant ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.                                                                                                                                                       | `72f988bf-86f1-41af-91ab-2d7cd011db47`  |
+| Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).                                                                                                                     | `Custom-MyLogs_CL `                         |
+| Data Collection Rule (DCR) immutable ID | This is the immutable ID of the DCR where logging routes are defined. It is the **Immutable ID** shown on the DCR Overview page.<br>**Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings.<br>See [Data collection rules (DCRs) in Azure Monitor][10162] to learn more about creating or viewing DCRs. | `dcr-000a00a000a00000a000000aa000a0aa`   |
+
+| Name                              | Description                                                                                                                                                                                                                     |
+|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Application (client) ID            | The Azure Active Directory (AD) application's client ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.<br>**Example**: `550e8400-e29b-41d4-a716-446655440000`                                                                                      |
+| Directory (tenant) ID              | The Azure AD tenant ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.<br>**Example**: `72f988bf-86f1-41af-91ab-2d7cd011db47`                                                                                      |
+| Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).<br>**Example**: `Custom-MyLogs_CL`                                                                                                          |
+| Data Collection Rule (DCR) immutable ID | This is the immutable ID of the DCR where logging routes are defined. It is the **Immutable ID** shown on the DCR Overview page.<br>**Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings.<br>**Example**: `dcr-000a00a000a00000a000000aa000a0aa`<br>See [Data collection rules (DCRs) in Azure Monitor][10162] to learn more about creating or viewing DCRs. |
+
+Do the following to get that information:
 
 1. Create or identify a Data Collection Rule (DCR).
     1. In the Azure Portal, navigate to **Azure Monitor** → **Data Collection Rules**.
@@ -17,15 +33,6 @@ To use the Microsoft Sentinel destination, you need to do the following:
     1. Take note of the **Tenant ID**, **Client ID**, and **Client Secret**. You need this information when you set up the Microsoft Sentinel destination.
 
 #### Set up destination in Observability Pipelines
-
-###### Fields required for setup
-| Name                              | Description                                                                                                                                                                                                                     | Example                                |
-|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------|
-| Application (client) ID            | The Azure Active Directory (AD) app's client ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.                                                                                                                              | `550e8400-e29b-41d4-a716-446655440000`  |
-| Directory (tenant) ID              | The Azure AD tenant ID. See [Register an application in Microsoft Entra ID][10161] for information on creating a new application.                                                                                                                                                       | `72f988bf-86f1-41af-91ab-2d7cd011db47`  |
-| Table (Stream) Name                | The name of the stream which matches the table chosen when configuring the Data Collection Rule (DCR).                                                                                                                     | `Custom-MyLogs_CL `                         |
-| Data Collection Rule (DCR) immutable ID | This is the immutable ID of the DCR where logging routes are defined. It is the **Immutable ID** shown on the DCR Overview page.<br>**Note**: Ensure the Monitoring Metrics Publisher role is assigned in the DCR IAM settings.<br>See [Data collection rules (DCRs) in Azure Monitor][10162] to learn more about creating or viewing DCRs. | `dcr-000a00a000a00000a000000aa000a0aa`   |
-
 
 To set up the Microsoft Sentinel destination in Observability Pipelines:
 
