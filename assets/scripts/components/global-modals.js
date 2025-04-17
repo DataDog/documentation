@@ -2,9 +2,14 @@ import { DOMReady } from '../helpers/documentReady';
 import { isMobile } from '../utils/isMobile';
 import { getGeoloc, getAppBaseUrl } from 'geo-locate';
 import { UTMCookies } from '../utms';
+import { initializeAnePopupBanner } from '../helpers/ane-popup-banner.js';
+import { getSignupFailover } from 'signup-failover';
+import Modal from 'bootstrap/js/dist/modal';
 
 const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
+
+    initializeAnePopupBanner();
 
     const getLanguageParam = () => {
         let langParam = '';
@@ -23,6 +28,29 @@ const doOnLoad = () => {
         }
 
         return langParam;
+    };
+
+    const loadSignupFormInFrame = (iframeElement, url) => {
+        if (iframeElement && iframeElement.src === "") {
+          iframeElement.src = url;
+      
+          // handle a loading issue
+          let iframeLoadIssueHandler = () => {
+            let newUrl = url.replace("_corp", "");
+            window.open(newUrl);
+      
+            const modalBody = document.querySelector(
+              "#signupModal > div > .modal-content"
+            );
+            modalBody.innerHTML = `<div class="text-center small w-100 my-3 p-5">Signup Form loading error. <a href="${newUrl}" class="text-underline text-purple-600" target=_blank>Click here</a> to open in a new window</div>`;
+          };
+      
+          // if adblock detected & we are trying to load eu signup iframe then show error and open in a new tab
+          // until datadoghq.eu is removed from 3rd party blocking lists
+          if (url.indexOf(".eu") !== -1 && !document.getElementById("TxFnCdowUQWB")) {
+            iframeLoadIssueHandler();
+          }
+        }
     };
 
     const appendUrlQueryParams = (url) => {
@@ -95,7 +123,10 @@ const doOnLoad = () => {
 
         getGeoloc().then((loc) => {
             const baseUrl = `https://${getAppBaseUrl(loc.appRegion)}/signup_corp`;
-            document.querySelector('#signUpIframe').setAttribute('src', appendUrlQueryParams(baseUrl));;
+            const completeUrl = appendUrlQueryParams(baseUrl);
+            const signupIframe = document.querySelector('#signUpIframe');
+            //signupIframe.setAttribute('src', completeUrl);
+            loadSignupFormInFrame(signupIframe, completeUrl);
         });
     });
 
@@ -201,6 +232,25 @@ const doOnLoad = () => {
             }
         }
     }
+
+    document.querySelectorAll('.sign-up-trigger').forEach(item => {
+        item.addEventListener('click', (event) => {
+            event.preventDefault();
+    
+            getSignupFailover().then((failoverEnabled) => {
+                if (failoverEnabled) {
+                    const demoModal = document.querySelector('#signupDemo');
+                    const signupDemoModal = demoModal ? new Modal(demoModal) : null;
+                    if(signupDemoModal) {
+                      signupDemoModal.show(item);
+                    }
+                } else {
+                    const signupModal = new Modal(document.getElementById('signupModal'))
+                    signupModal.show(item)
+                }
+            });
+        })
+    })
 };
 
 DOMReady(doOnLoad);
