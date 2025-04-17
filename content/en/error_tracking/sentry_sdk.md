@@ -11,7 +11,7 @@ Using the Sentry SDK with Error Tracking is in Preview.
 {{< /callout >}}
 
 <div class="alert alert-warning">
-Using the Sentry SDK with Error Tracking helps you migrate to Datadog. However, to get the most out of Error Tracking, it is recommended to use the regular setup. See <a href="/error_tracking/frontend">Frontend Error Tracking</a> and <a href="/error_tracking/backend">Backend Error Tracking</a>.
+Using the Sentry SDK with Error Tracking helps you migrate to Datadog. However, to get the most out of Error Tracking, it is recommended to use the Datadog SDKs. See <a href="/error_tracking/frontend">Frontend Error Tracking</a> and <a href="/error_tracking/backend">Backend Error Tracking</a>.
 </div>
 
 ## Overview
