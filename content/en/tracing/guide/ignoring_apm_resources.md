@@ -2,7 +2,7 @@
 title: Ignoring Unwanted Resources in APM
 ---
 
-A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: Sampling and Filtering.
+A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application. This documentation covers two main options: sampling and filtering.
 
 If you need assistance deciding which option is the most relevant for your use case, contact [Datadog support][1].
 
