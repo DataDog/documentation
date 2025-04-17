@@ -26,7 +26,7 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 ## Use cases
 
 With the Fleet Automation platform, you can:
-- View latest Agent configurations to help confirm deployment changes and historical configuration changes to ensure consistency.
+- View the latest Agent configurations and historical changes to help confirm deployment updates and ensure configuration consistency.
 - Send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
