@@ -413,5 +413,5 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [24]: /network_monitoring/cloud_network_monitoring/
 [25]: /universal_service_monitoring/
 [26]: /metrics/
-[27]: /service_checks/
+[27]: /developers/service_checks/
 [28]: /events/
