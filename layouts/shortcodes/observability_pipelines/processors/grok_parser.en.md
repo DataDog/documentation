@@ -4,7 +4,7 @@ If the `source` field of a log matches one of the grok parsing rule sets, the lo
 
 If there isn't a `source` field on the log, or no rule matches the log `message`, then no changes are made to the log and it is sent to the next step in the pipeline.
 
-Datadog's Grok patterns differs from the standard Grok pattern, where Datadog's Grok implementation provides:
+Datadog's Grok patterns differ from the standard Grok pattern, where Datadog's Grok implementation provides:
 - Matchers that include options for how you define parsing rules
 - Filters for post-processing of extracted data
 - A set of built-in patterns tailored to common log formats
