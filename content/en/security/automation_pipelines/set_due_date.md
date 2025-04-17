@@ -6,11 +6,7 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/security-automation-pipelines/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for due date rules, click <strong>Request Access</strong>.
-{{< /callout >}} 
-
-Configure due date rules to ensure vulnerabilities are addressed within your specified SLO time frames. By setting these due dates, you can automate accountability, meet compliance requirements, and prioritize the prompt remediation of security issues, thereby preventing potential exploitation.
+Configure due date rules to ensure findings are addressed within your specified SLO time frames. By setting these due dates, you can automate accountability, meet compliance requirements, and prioritize the prompt remediation of security issues, thereby preventing potential exploitation.
 
 ## Create a due date rule
 
@@ -25,8 +21,9 @@ Configure due date rules to ensure vulnerabilities are addressed within your spe
       - **Attack Path**
       - **Identity Risk**
       - **API Security Finding**
+      - **Host Vulnerability**
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
-1. Set a due date for each severity level that requires one, effective from the discovery of a matching severity vulnerability.
+1. Set a due date for each severity level that needs one. The due date starts from when the matching finding was discovered, not when the rule was created.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Where due dates appear
@@ -41,16 +38,16 @@ When a finding has a due date, you can see it in these locations:
 
 ## Rule matching order
 
-When Datadog identifies a vulnerability, it evaluates the vulnerability against your sequence of due date rules. Starting with the first rule, if there's a match, Datadog sets a due date on the vulnerability for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
+When Datadog identifies a finding, it evaluates the finding against your sequence of due date rules. Starting with the first rule, if there's a match, Datadog sets a due date on the finding for the specified duration and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
 
 ## Removing due dates
 
-When managing vulnerabilities, due dates can be removed under various conditions, such as:
+When managing findings, due dates can be removed under various conditions, such as:
 
-- The detection rule that triggered the vulnerability passes successfully.
-- The vulnerability is muted, either manually or automatically through a mute rule.
-- The due date rule associated with the vulnerability is disabled or deleted.
-- The associated due date rule is modified so that its criteria no longer match the vulnerability.
+- The detection rule that triggered the finding passes successfully.
+- The finding is muted, either manually or automatically through a mute rule.
+- The due date rule associated with the finding is disabled or deleted.
+- The associated due date rule is modified so that its criteria no longer match the finding.
 
 ## Further reading
 

@@ -12,6 +12,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/"
     tag: "Blog"
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"
+  - link: "https://www.datadoghq.com/blog/rum-optimization/"
+    tag: "Blog"
+    text: "From data to action: Optimize Core Web Vitals and more with Datadog RUM"
 ---
 
 ## Overview

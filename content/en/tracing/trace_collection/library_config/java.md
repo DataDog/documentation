@@ -293,13 +293,13 @@ When set to `true` db spans get assigned the instance name as the service name
 **Default**: `false`<br>
 When set to `true` db spans get assigned the remote database hostname as the service name
 
-### ASM
+### AAP
 
 `dd.appsec.enabled`
 : **Environment Variable**: `DD_APPSEC_ENABLED`<br>
 **Default**: `false`<br>
 When `true`, enables Datadog Application Security Monitoring. Additionally, this automatically enables client IP collection (`dd.trace.client-ip.enabled`).<br>
-For more information, see [Enabling ASM for Java][19].
+For more information, see [Enabling AAP for Java][19].
 
 ### Errors
 
@@ -384,7 +384,7 @@ Additional metrics configuration file for JMX metrics collection. The Java Agent
 
 `dd.jmxfetch.check-period`
 : **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
+**Default**: `15000`<br>
 How often to send JMX metrics (in ms).
 
 `dd.jmxfetch.refresh-beans-period`
