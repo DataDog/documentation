@@ -157,7 +157,7 @@ The Vertex AI integration instruments the following methods:
 
 ## LangGraph
 
-The Langgraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [Langgraph Python SDK][33].
+The LangGraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [LangGraph Python SDK][33].
 
 ### Traced methods
 
