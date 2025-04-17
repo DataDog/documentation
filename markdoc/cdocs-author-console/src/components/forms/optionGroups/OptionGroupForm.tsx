@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import OptionSelector from './options/OptionSelector';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { FormStatus } from '../../../types';
 
 function a11yProps(index: number) {
   return {
@@ -57,6 +58,7 @@ function OptionGroupForm(props: {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
   const [optionGroupId, setOptionGroupId] = useState<string>('');
   const [optionGroup, setOptionGroup] = useState<OptionGroup>([]);
+  const [optionSelectionFormStatus, setOptionSelectionFormStatus] = useState<FormStatus>('done');
 
   const handleExistingOptionGroupSelect = (selectedOptionGroupId: string) => {
     const updatedOptionGroup = props.customizationConfig.optionGroupsById[selectedOptionGroupId];
@@ -79,9 +81,13 @@ function OptionGroupForm(props: {
 
   const handleTabChange = (_event: React.SyntheticEvent, currentTabIndex: number) => {
     setCurrentTabIndex(currentTabIndex);
+    // Handle a switch to "Add new" tab
     if (currentTabIndex === 0) {
       setOptionGroupId('');
       setOptionGroup([]);
+      setOptionSelectionFormStatus('waiting');
+    } else {
+      setOptionSelectionFormStatus('done');
     }
   };
 
@@ -118,14 +124,15 @@ function OptionGroupForm(props: {
         <h3>Options</h3>
         <OptionSelector
           customizationConfig={props.customizationConfig}
-          onSave={(selectedOptions) => {
-            setOptionGroup(selectedOptions.map((option, idx) => ({ ...option, default: idx === 0 })));
+          onStatusChange={(p) => {
+            if (p.status === 'done' && p.data) {
+              setOptionGroup(p.data.map((option, idx) => ({ ...option, default: idx === 0 })));
+            }
+            setOptionSelectionFormStatus(p.status);
           }}
-          onPending={() => {}}
-          onClean={() => {}}
         />
         <Button
-          disabled={!optionGroupId || optionGroup.length < 2}
+          disabled={!optionGroupId || optionGroup.length < 2 || optionSelectionFormStatus !== 'done'}
           sx={{ marginTop: '15px' }}
           variant="contained"
           onClick={handleNewGroupSave}

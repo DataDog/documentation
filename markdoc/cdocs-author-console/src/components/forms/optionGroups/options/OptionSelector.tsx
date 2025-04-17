@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { CustomizationConfig } from 'cdocs-data';
 import NewOptionForm from './NewOptionForm';
-import { OptionConfig } from '../../../../types';
+import { OptionConfig, FormStatus } from '../../../../types';
 
 /**
  * Select multiple options from the customization config.
@@ -11,9 +11,7 @@ import { OptionConfig } from '../../../../types';
  */
 export default function OptionSelector(props: {
   customizationConfig: CustomizationConfig;
-  onPending: () => void;
-  onSave: (options: OptionConfig[]) => void;
-  onClean: () => void;
+  onStatusChange: (p: { status: FormStatus; data?: OptionConfig[] }) => void;
 }) {
   const getDropdownChoices = (optionsById: Record<string, OptionConfig>) => {
     const newDropdownChoices = Object.keys(optionsById).map((optionId) => {
@@ -26,6 +24,7 @@ export default function OptionSelector(props: {
   const [newOptionIds, setNewOptionIds] = useState<string[]>([]);
   const [optionsById, setOptionsById] = useState<Record<string, OptionConfig>>(props.customizationConfig.optionsById);
   const [dropdownSelections, setDropdownSelections] = useState<{ label: string; value: string }[]>([]);
+  const [formStatus, setFormStatus] = useState<FormStatus>('waiting');
 
   const getOptionConfigs = (
     selections: { label: string; value: string }[],
@@ -65,20 +64,54 @@ export default function OptionSelector(props: {
     setNewOptionIds(updatedNewOptionIds);
     setOptionsById(updatedOptionsById);
     setDropdownSelections(newSelections);
-    props.onSave(getOptionConfigs(newSelections, updatedOptionsById));
+
+    // Save the current selections
+    setFormStatus('done');
+    props.onStatusChange({ status: 'done', data: getOptionConfigs(newSelections, updatedOptionsById) });
   };
 
-  const handleNewOptionSave = (newOptionConfig: OptionConfig) => {
-    setNewOptionIds((prevNewOptionIds) => [...prevNewOptionIds, newOptionConfig.id]);
-    // Add the new option to the known options
-    const newOptionsById = { ...optionsById, [newOptionConfig.id]: newOptionConfig };
-    // Add the new option to the list of selected options
-    const newSelections = [...dropdownSelections, { label: newOptionConfig.label, value: newOptionConfig.id }];
+  // Handle any status changes from the nested new option form
+  const handleNewOptionStatusChange = (p: { status: FormStatus; data?: OptionConfig }) => {
+    // The user has opened the form or is otherwise editing it
+    if (p.status === 'pending') {
+      const newFormStatus = 'pending';
+      setFormStatus(newFormStatus);
+      // Notify the parent component of any status change
+      if (formStatus !== newFormStatus) {
+        props.onStatusChange({ status: newFormStatus });
+      }
+    }
+    // The user has canceled the form
+    if (p.status === 'done' && p.data === undefined) {
+      let newFormStatus: FormStatus;
+      if (dropdownSelections.length === 0) {
+        newFormStatus = 'waiting';
+      } else {
+        newFormStatus = 'done';
+      }
+      setFormStatus(newFormStatus);
+      // Notify the parent component of any status change --
+      // no need to send data, as any existing selections were sent on selection change
+      if (formStatus !== newFormStatus) {
+        props.onStatusChange({ status: newFormStatus });
+      }
+    }
+    // The user has saved changes
+    if (p.status === 'done' && p.data) {
+      setNewOptionIds((prevNewOptionIds) => [...prevNewOptionIds, p.data!.id]);
+      // Add the new option to the known options
+      const newOptionsById = { ...optionsById, [p.data.id]: p.data };
+      // Add the new option to the list of selected options
+      const newSelections = [...dropdownSelections, { label: p.data.label, value: p.data.id }];
 
-    props.onSave(getOptionConfigs(newSelections, newOptionsById));
+      setFormStatus('done');
+      // Save the current selections
+      props.onStatusChange({ status: 'done', data: getOptionConfigs(newSelections, newOptionsById) });
 
-    setOptionsById(newOptionsById);
-    setDropdownSelections(newSelections);
+      // Update the state with the new options and selections
+      setOptionsById(newOptionsById);
+      setDropdownSelections(newSelections);
+    }
   };
 
   return (
@@ -98,12 +131,7 @@ export default function OptionSelector(props: {
         }}
         onChange={handleSelectionChange}
       />
-      <NewOptionForm
-        customizationConfig={props.customizationConfig}
-        onSave={handleNewOptionSave}
-        onPending={props.onPending}
-        onClean={props.onClean}
-      />
+      <NewOptionForm customizationConfig={props.customizationConfig} onStatusChange={handleNewOptionStatusChange} />
     </div>
   );
 }
