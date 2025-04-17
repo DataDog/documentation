@@ -1,11 +1,11 @@
 ---
-title: Cloud Security Management Troubleshooting
+title: Cloud Security Troubleshooting
 disable_toc: true
 ---
 
 {{< whatsnext desc="Troubleshooting Guides" >}}
     {{< nextlink href="/security/cloud_security_management/troubleshooting/threats" >}}Workload Protection{{< /nextlink >}}
 
-    {{< nextlink href="/security/cloud_security_management/troubleshooting/vulnerabilities" >}}Cloud Security Management Vulnerabilities{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/troubleshooting/vulnerabilities" >}}Cloud Security Vulnerabilities{{< /nextlink >}}
 
 {{< /whatsnext >}}

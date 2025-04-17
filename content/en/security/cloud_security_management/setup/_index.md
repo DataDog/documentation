@@ -1,5 +1,5 @@
 ---
-title: Setting up Cloud Security Management
+title: Setting up Cloud Security
 aliases:
   - /security_platform/cloud_workload_security/getting_started
   - /security/cloud_workload_security/getting_started
@@ -23,12 +23,12 @@ further_reading:
       text: "AWS Fargate Configuration Guide for Datadog Security"
     - link: "/security/cloud_security_management/guide/agent_variables/"
       tag: "Guide"
-      text: "Cloud Security Management Agent Variables"
+      text: "Cloud Security Agent Variables"
 ---
 
 ## Overview
 
-To get started with Cloud Security Management (CSM), review the following:
+To get started with Cloud Security, review the following:
 
 - [Overview](#overview)
 - [Enable Agentless Scanning](#enable-agentless-scanning)
@@ -38,18 +38,18 @@ To get started with Cloud Security Management (CSM), review the following:
   - [IaC scanning](#iac-scanning)
   - [IaC remediation](#iac-remediation)
   - [Deploy via cloud integrations](#deploy-via-cloud-integrations)
-- [Disable CSM](#disable-csm)
+- [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
 
 ## Enable Agentless Scanning
 
-The simplest way to get started with Cloud Security Management is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
+The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides visibility into vulnerabilities that exist within your AWS hosts, running containers, Lambda functions, and running Amazon Machine Images (AMIs) without requiring you to install the Datadog Agent.
 
-To learn more about Agentless Scanning, see [Cloud Security Management Agentless Scanning][2].
+To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
 ## Deploy the Agent for additional coverage
 
-For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security Management on the Agent][3].
+For broader coverage and additional functionalities, deploy the Datadog Agent to your hosts. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security on the Agent][3].
 
 <table>
   <thead>
@@ -61,13 +61,13 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     </tr>
   </thead>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/identity_risks">CSM Identity Risks</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/identity_risks">Cloud Security Identity Risks</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td></td>
   </tr>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/misconfigurations">CSM Misconfigurations</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/misconfigurations">Cloud Security Misconfigurations</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -79,7 +79,7 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
     <td>{{< X >}}</td>
   </tr>
   <tr>
-    <td><strong><a href="/security/cloud_security_management/vulnerabilities">CSM Vulnerabilities</a></strong></td>
+    <td><strong><a href="/security/cloud_security_management/vulnerabilities">Cloud Security Vulnerabilities</a></strong></td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
     <td>{{< X >}}</td>
@@ -120,25 +120,25 @@ For broader coverage and additional functionalities, deploy the Datadog Agent to
 
 ### AWS CloudTrail Logs
 
-Maximize the benefits of [CSM Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security Management][4].
+Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
 
 ### IaC scanning
 
-Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Cloud Security Management][10].
+Integrate Infrastructure as Code (IaC) scanning with GitHub to detect misconfigurations in Terraform-defined cloud resources. For more information, see [Setting up IaC Scanning for Cloud Security][10].
 
 ### IaC remediation
 
-Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Cloud Security Management][5].
+Use IaC remediation with Terraform to create pull requests in GitHub, applying code changes that fix misconfigurations and mitigate identity risks. For more information, see [Setting up IaC Remediation for Cloud Security][5].
 
 ### Deploy via cloud integrations
 
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security Management via Cloud Integrations][7].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, and GCP resources. For more information, see [Deploying Cloud Security via Cloud Integrations][7].
 
-## Disable CSM
+## Disable Cloud Security
 
-For information on disabling CSM, see the following:
+For information on disabling Cloud Security, see the following:
 
-- [Disable CSM Vulnerabilities][8]
+- [Disable Cloud Security Vulnerabilities][8]
 - [Disable Workload Protection][9]
 
 ## Further reading
@@ -152,6 +152,6 @@ For information on disabling CSM, see the following:
 [5]: /security/cloud_security_management/setup/iac_remediation
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
-[8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-csm-vulnerabilities
+[8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /security/cloud_security_management/troubleshooting/threats/#disable-csm-threats
 [10]: /security/cloud_security_management/setup/iac_scanning
