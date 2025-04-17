@@ -98,6 +98,7 @@ By default, the Datadog Agent with embedded Collector ships with the following C
 
 - [datadogexporter][38]
 - [debugexporter][39]
+- [loadbalancingexporter][55]
 - [otlpexporter][40]
 - [otlphttpexporter][41]
 - [sapmexporter][42]
@@ -215,3 +216,4 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [52]: https://github.com/DataDog/datadog-agent/tree/main/comp/otelcol/ddflareextension#readme
 [53]: /containers/kubernetes/tag/?tab=datadogoperator#out-of-the-box-tags
 [54]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
