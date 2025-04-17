@@ -2,10 +2,10 @@
 aliases:
 - /ja/integrations/azure_containerservice
 categories:
-- cloud
-- コンテナ
+- クラウド
+- incident-teams
 - azure
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: Azure Kubernetes Services のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_container_service/

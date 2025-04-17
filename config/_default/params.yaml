@@ -72,8 +72,6 @@ code_languages:
     example_file: src/main.rs
 
 code_language_ids:
-    client: Client-Side
-    server: Auto-Instrumentation (Server-Side)
     android: Android
     ios: iOS
     expo: Expo
@@ -128,6 +126,9 @@ code_language_ids:
     istio: "Istio"
     kong: "Kong"
     nginx: "NGINX"
+    windows_iis: "Windows IIS" 
+    apache: "Apache HTTP Server"
+    ibm: "IBM HTTP Server"
     gcp-service-extensions: "GCP Service Extensions"
 branch: ""
 

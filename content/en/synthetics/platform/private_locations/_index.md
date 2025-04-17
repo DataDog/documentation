@@ -178,8 +178,6 @@ To pull test configurations and push test results, the private location worker n
 
 Only users with the **Synthetics Private Locations Write** role can create private locations. For more information, see [Permissions](#permissions).
 
-**Note**: Users without the `synthetics_private_location_read` permission cannot view, search for, or add private locations to a Synthetic Monitoring test. However, if a test includes restricted private locations, updating the test removes those locations from the test.
-
 ### Create your private location
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
@@ -947,6 +945,8 @@ By default, only users with the Datadog Admin Role can create private locations,
 Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19].
 
 If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
+
+<div class="alert alert-danger"><strong>Note</strong>: If a test includes restricted private locations, updating the test removes those locations from the test.</div>
 
 ## Restrict access
 

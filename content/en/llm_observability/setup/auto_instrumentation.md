@@ -30,6 +30,7 @@ Datadog's [LLM Observability Python SDK][16] provides integrations that automati
 | [Google Gemini](#google-gemini)            | >= 0.7.2           | >= 2.14.0         |
 | [Vertex AI](#vertex-ai)                    | >= 1.71.1          | >= 2.18.0         |
 | [Langgraph](#langgraph)                    | >= 0.2.23          | >= 3.5.0          |
+| [Crew AI](#crew-ai)                        | >= 0.105.0         | >= 3.5.0          |
 
 You can programmatically enable automatic tracing of LLM calls to a supported LLM model like OpenAI or a framework like LangChain by setting `integrations_enabled` to `true` in the `LLMOBs.enable()` function. In addition to capturing latency and errors, the integrations capture the input parameters, input and output messages, and token usage (when available) of each traced call.
 
@@ -50,15 +51,8 @@ from ddtrace import patch
 from ddtrace.llmobs import LLMObs
 
 LLMObs.enable(integrations_enabled=False, ...)
-patch(openai=True)
-patch(langchain=True)
-patch(anthropic=True)
-patch(gemini=True)
-patch(botocore=True)
-patch(langgraph=True)
+patch(openai=True, langchain=True, botocore=["bedrock-runtime"], anthropic=True, gemini=True, vertexai=True, crewai=True, langgraph=True)
 ```
-
-**Note**: Use `botocore` as the name of the [Amazon Bedrock](#amazon-bedrock) integration when manually enabling.
 
 ## OpenAI
 
@@ -113,8 +107,12 @@ The Amazon Bedrock integration instruments the following methods:
   - `InvokeModel`
 - [Streamed chat messages][8]:
   -  `InvokeModelWithResponseStream`
+- [Chat messages][31]:
+  - `Converse` (requires ddtrace>=3.4.0)
+- [Streamed chat messages][32]:
+  - `ConverseStream` (requires ddtrace>=3.5.0)
 
-**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls.
+**Note:** The Amazon Bedrock integration does not yet support tracing embedding calls
 
 ## Anthropic
 
@@ -159,14 +157,38 @@ The Vertex AI integration instruments the following methods:
 
 ## Langgraph
 
-The Langgraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [Langgraph Python SDK][26].
+The Langgraph integration automatically traces `Pregel/CompiledGraph` and `RunnableSeq (node)` invocations made through the [Langgraph Python SDK][33].
 
 ### Traced methods
 
 The Langgraph integration instruments synchronous and asynchronous versions of the following methods:
 
-- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][27]
-- [RunnableSeq.invoke()][28]
+- [CompiledGraph.invoke(), Pregel.invoke(), CompiledGraph.stream(), Pregel.stream()][34]
+- [RunnableSeq.invoke()][35]
+
+## Crew AI
+
+The Crew AI integration automatically traces execution of Crew kickoffs, including task/agent/tool invocations, made through [CrewAI's Python SDK][26].
+
+### Traced methods
+
+The Crew AI integration instruments the following methods:
+
+- [Crew Kickoff][27]:
+  - `crew.kickoff()`
+  - `crew.kickoff_async()`
+  - `crew.kickoff_for_each()`
+  - `crew.kickoff_for_each_async()`
+
+- [Task Execution][28]:
+  - `task.execute_sync()`
+  - `task.execute_async()`
+
+- [Agent Execution][29]:
+  - `agent.execute_task()`
+
+- [Tool Invocation][30]:
+  - `tool.invoke()`
 
 [1]: https://platform.openai.com/docs/api-reference/introduction
 [2]: https://platform.openai.com/docs/api-reference/completions
@@ -193,9 +215,16 @@ The Langgraph integration instruments synchronous and asynchronous versions of t
 [23]: https://cloud.google.com/vertex-ai/generative-ai/docs/reference/python/latest/summary_method#vertexai_generative_models_ChatSession_send_message_summary
 [24]: https://python.langchain.com/docs/concepts/tools/
 [25]: https://python.langchain.com/docs/concepts/retrieval/
-[26]: https://langchain-ai.github.io/langgraph/concepts/sdk/
-[27]: https://blog.langchain.dev/langgraph/#compile
-[28]: https://blog.langchain.dev/langgraph/#nodes
+[26]: https://docs.crewai.com/introduction
+[27]: https://docs.crewai.com/concepts/crews#kicking-off-a-crew 
+[28]: https://docs.crewai.com/concepts/tasks
+[29]: https://docs.crewai.com/concepts/agents
+[30]: https://docs.crewai.com/concepts/tools
+[31]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+[32]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+[33]: https://langchain-ai.github.io/langgraph/concepts/sdk/
+[34]: https://blog.langchain.dev/langgraph/#compile
+[35]: https://blog.langchain.dev/langgraph/#nodes
 
 {{% /tab %}}
 {{% tab "Node.js" %}}

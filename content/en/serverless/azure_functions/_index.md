@@ -51,10 +51,9 @@ This page explains how to collect traces, trace metrics, runtime metrics, and cu
 
    ```python
    from datadog_serverless_compat import start
-   from ddtrace import tracer, patch_all
+   import ddtrace.auto
 
    start()
-   patch_all()
    ```
 
 3. (Optional) **Enable runtime metrics**. See [Python Runtime Metrics][2].
