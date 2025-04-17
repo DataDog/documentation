@@ -11,10 +11,6 @@ further_reading:
     text: "Automation Pipelines"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
-{{< /callout >}} 
-
 Configure inbox rules to manage your Security Inbox effectively, ensuring only the most relevant security issues are highlighted. By customizing conditions, you can focus on critical concerns, prioritize key risks, support compliance, and bring attention to issues that might otherwise be overlooked.
 
 ## Create an inbox rule
@@ -27,13 +23,18 @@ Configure inbox rules to manage your Security Inbox effectively, ensuring only t
       - **Attack Path**
       - **Identity Risk**
       - **API Security Finding**
+      - **Application Code Vulnerability**
+      - **Application Library Vulnerability**
+      - **Container Image Vulnerability**
+      - **API Security Finding**
+      - **Host Vulnerability**
     - **Any of these tags or attributes**: The resource tags or attributes that must match for the rule to apply.
 1. To add severity criteria to the rule, click **Add Severity**.
 1. Click **Save**. The rule applies to new findings immediately and starts checking existing findings within the next hour.
 
 ## Rule matching order
 
-When Datadog identifies a vulnerability, it evaluates the vulnerability against your sequence of inbox rules. Starting with the first rule, if there's a match, Datadog adds the vulnerability to the Security Inbox and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
+When Datadog identifies a finding, it evaluates the finding against your sequence of inbox rules. Starting with the first rule, if there's a match, Datadog adds the finding to the Security Inbox and stops evaluating further. If no match occurs, Datadog moves to the next rule. This process continues until a match is found or all rules are checked without a match.
 
 ## Further reading
 
