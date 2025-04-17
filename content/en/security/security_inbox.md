@@ -69,10 +69,6 @@ Key features include:
 
 ## Customize Security Inbox to highlight crucial issues
 
-{{< callout url="https://www.datadoghq.com/product-preview/customize-your-security-inbox/" >}}
-  Automation Pipelines is in Preview. To enroll in the Preview for Add to Security Inbox rules, click <strong>Request Access</strong>.
-{{< /callout >}}
-
 Automation Pipelines enables you to configure rules that customize your Security Inbox, allowing you to highlight issues that are critical to your organization. By setting up these automated rules, you can streamline the management of newly discovered vulnerabilities, enhancing triage and remediation efforts at scale. Leveraging both the Automation Pipelines and Add to Security Inbox rules, you can optimize your security operations in the following ways:
 
 - **Resurface issues not captured by default**: Highlight issues that might be missed by default or custom detection rules, ensuring no critical issue is overlooked.
