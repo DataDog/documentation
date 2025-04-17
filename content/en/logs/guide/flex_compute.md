@@ -40,13 +40,8 @@ Use this information to optimize your usage.
    - Discuss their querying needs
    - Understand if there are logs they query frequently that should be stored in Standard Indexing instead
 1. **Improve dashboards experiencing slowdowns by:**
-<<<<<<< HEAD:content/en/logs/guide/flex_logs_compute.md
-   - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex Logs compute usage
-   - Breaking them down into smaller dashboards to spread the load
-=======
    - Evaluating if logs used to power widgets can be converted into metrics to reduce the heavy Flex compute usage
-   - Breaking down into smaller dashboards to spread the load
->>>>>>> c4e442dcd5 (Change Flex Logs Compute to Flex Compute):content/en/logs/guide/flex_compute.md
+   - Breaking them down into smaller dashboards to spread the load
    - Reducing the number of concurrent queries
 1. **Consider upgrading your Flex compute size** to increase the concurrent query limit if you notice sustained query slowdowns.
 
