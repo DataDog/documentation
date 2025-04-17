@@ -11,7 +11,7 @@ further_reading:
     text: "Start tracking misconfigurations with Cloud Security Misconfigurations"
   - link: "/security/threats/setup"
     tag: "Documentation"
-    text: "Uncover kernel-level threats with CSM Threats"
+    text: "Uncover kernel-level threats with Workload Protection"
   - link: "/security/research_feed"
     tag: "Documentation"
     text: "Security Research Feed"
@@ -59,7 +59,7 @@ Security and DevOps teams can act on the shared context of observability and sec
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
-- [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
+- [**Workload Protection**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
 - [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.

@@ -155,7 +155,7 @@ menu:
       url: getting_started/security/
       parent: getting_started
       weight: 17
-    - name: Application Security Management
+    - name: App and API Protection
       identifier: getting_started_application_security
       url: getting_started/security/application_security
       parent: getting_started_security
@@ -812,21 +812,6 @@ menu:
       identifier: otel_runtime_metrics
       parent: otel_integrations
       weight: 810
-    - name: Java
-      url: opentelemetry/integrations/runtime_metrics/java
-      identifier: otel_runtime_metrics_java
-      parent: otel_runtime_metrics
-      weight: 8101
-    - name: .NET
-      url: opentelemetry/integrations/runtime_metrics/dotnet
-      identifier: otel_runtime_metrics_dotnet
-      parent: otel_runtime_metrics
-      weight: 8102
-    - name: Go
-      url: opentelemetry/integrations/runtime_metrics/go
-      identifier: otel_runtime_metrics_go
-      parent: otel_runtime_metrics
-      weight: 8103
     - name: Trace Metrics
       url: opentelemetry/integrations/trace_metrics/
       identifier: otel_trace_metrics
@@ -2034,7 +2019,7 @@ menu:
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_cloud_cost_management
       weight: 402
-    - name: Application Security Management
+    - name: App and API Protection
       url: software_catalog/use_cases/appsec_management
       parent: software_catalog_use_cases
       identifier: software_catalog_use_cases_appsec_management
@@ -2220,6 +2205,21 @@ menu:
       parent: error_tracking
       identifier: error_tracking_backend
       weight: 10
+    - name: Getting Started
+      url: error_tracking/backend/getting_started
+      parent: error_tracking_backend
+      identifier: error_tracking_backend_setup
+      weight: 100
+    - name: Using Single Step Instrumentation
+      url: error_tracking/backend/getting_started/single_step_instrumentation
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_ssi
+      weight: 1000
+    - name: Using Datadog Tracing Libraries
+      url: error_tracking/backend/getting_started/dd_libraries
+      parent: error_tracking_backend_setup
+      identifier: error_tracking_backend_setup_libs
+      weight: 1001
     - name: Exception Replay
       url: error_tracking/backend/exception_replay
       parent: error_tracking_backend
@@ -2245,6 +2245,11 @@ menu:
       parent: error_tracking
       identifier: error_tracking_troubleshooting
       weight: 12
+    - name: Guides
+      url: error_tracking/guides
+      parent: error_tracking
+      identifier: error_tracking_guides
+      weight: 13
     - name: Change Tracking
       url: change_tracking/
       pre: graph-3
@@ -2389,10 +2394,10 @@ menu:
       parent: oncall
       identifier: oncall_pages
       weight: 2
-    - name: Processing Rules
-      url: service_management/on-call/processing_rules/
+    - name: Routing Rules
+      url: service_management/on-call/routing_rules/
       parent: oncall
-      identifier: oncall_processing_rules
+      identifier: oncall_routing_rules
       weight: 3
     - name: Escalation Policies
       url: service_management/on-call/escalation_policies/
@@ -3014,7 +3019,7 @@ menu:
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 705  
+      weight: 705
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
@@ -6203,7 +6208,7 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloud_integrations
       weight: 107
-    - name: Threats
+    - name: Workload Protection
       url: security/threats/
       parent: csm
       identifier: cloud_workload_security
@@ -6358,7 +6363,7 @@ menu:
       parent: csm_troubleshooting
       identifier: csm_troubleshooting_vulnerabilities
       weight: 1202
-    - name: Application Security Management
+    - name: App and API Protection
       url: security/application_security/
       parent: security_platform_heading
       pre: app-sec

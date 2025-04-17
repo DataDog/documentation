@@ -386,7 +386,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\",
 
 {{% agent-dual-shipping %}}
 
-## Cloud Security Management Threats
+## Workload Protection
 
 ### YAML configuration
 In `datadog.yaml`:

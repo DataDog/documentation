@@ -6,7 +6,7 @@ title: Cloud Security Supported Deployment Types
 
 The following table summarizes the Cloud Security features available relative to each deployment type.
 
-| Deployment type     | Agent Required (7.46+) | Misconfigurations | CSM Threats | Vulnerabilities              | Identity Risks | Agentless Scanning |
+| Deployment type     | Agent Required (7.46+) | Misconfigurations | Workload Protection | Vulnerabilities              | Identity Risks | Agentless Scanning |
 |---------------------|------------------------|-------------------|-------------|------------------------------|----------------|--------------------|
 | AWS Account         |                        | {{< X >}}         |             | {{< X >}}                    | {{< X >}}      | {{< X >}}          |
 | Azure Account       |                        | {{< X >}}         |             | Agentless Scanning (Preview) | {{< X >}}      |                    |
@@ -20,7 +20,7 @@ The following table summarizes the Cloud Security features available relative to
 | AWS Fargate ECS/EKS | {{< X >}}              |                   | {{< X >}}   |                              |                |                    |
 
 The following table summarizes the scope of coverage available relative to each Cloud Security feature.
-| Resources monitored             | Misconfigurations | CSM Threats | Vulnerabilities | Identity Risks | Agentless scanning |
+| Resources monitored             | Misconfigurations | Workload Protection | Vulnerabilities | Identity Risks | Agentless scanning |
 |---------------------------------|-------------------|-------------|-----------------|----------------|--------------------|
 | Resources in AWS Account        | {{< X >}}         |             | {{< X >}}       |                | {{< X >}}          |
 | Resources in Azure Subscription | {{< X >}}         |             |                 |                |                    |

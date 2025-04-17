@@ -1,7 +1,7 @@
 
-### CSM Threats
+### Workload Protection
 
-CSM Threats supports the following Linux distributions:
+Workload Protection supports the following Linux distributions:
 
 | Linux Distributions        | Supported Versions                    |
 | ---------------------------| --------------------------------------|

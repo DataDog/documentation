@@ -3,7 +3,7 @@ title: Security Inbox
 further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
-  text: "Learn more about Application Security Management"
+  text: "Learn more about App and API Protection"
 - link: "/security/cloud_security_management"
   tag: "Documentation"
   text: "Learn more about Cloud Security"
@@ -17,7 +17,7 @@ products:
 - name: Cloud Security
   url: /security/cloud_security_management/
   icon: cloud-security-management
-- name: Application Security Management
+- name: App and API Protection
   url: /security/application_security/
   icon: app-sec
 ---
@@ -30,7 +30,7 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security. By default, these include the following types of findings:
+The findings that appear in Security Inbox are generated from App and API Protection (AAP) and Cloud Security. By default, these include the following types of findings:
 
 - A curated set of [misconfigurations][1] for [Cloud Security Misconfigurations][2], compiled by Datadog Security Research.
 - A curated set of [identity risks][1] for [Cloud Security Identity Risks][3], compiled by Datadog Security Research.

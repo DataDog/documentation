@@ -47,13 +47,13 @@ A metric is considered **used** as long as it exists on an asset, regardless if 
 
 ## Configuration of multiple metrics 
 
-Clicking on **Configure Metrics** gives you multiple options that you can use to configure more than one metric at a time: 
+Clicking **Configure Metrics** gives you multiple options to configure more than one metric at a time: 
 
 {{< img src="metrics/summary/configurationbuttons10-11-2024.png" alt="Bulk configuration buttons" style="width:100%;">}}
 
 * **Manage tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™.
 
-{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+{{< img src="metrics/summary/tags-bulk-config.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
 
 * **Enable or disable percentiles**: Manage percentile aggregations across multiple distribution metrics. See the [Distributions page][31] for more information.
 
@@ -166,7 +166,7 @@ Metrics without Limits™ provides you control over the size of your custom metr
 
 **Note:** Metrics without Limits™ is only available for custom metrics.
 
-You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
+You can [configure tags in bulk](#configuration-of-multiple-metrics) by going to **Configure Metrics -> Manage tags** in the [Metrics page][34], or by clicking the **Manage Tags** button in a metric's details side panel. 
 
 {{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
 
@@ -262,3 +262,4 @@ This table shows the mapping between the metric origin as seen in the facet and 
 [31]: /metrics/distributions/#bulk-configuration-for-multiple-metrics
 [32]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [33]: /metrics/custom_metrics/agent_metrics_submission/
+[34]: https://app.datadoghq.com/metric/overview
